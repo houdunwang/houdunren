@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UploadEvent;
+use App\Exceptions\InvalidException;
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,12 +16,12 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        dd(User::find(1)->listTableColumns());
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \App\Exceptions\InvalidException
      */
     public function index()
     {

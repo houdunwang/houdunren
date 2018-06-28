@@ -9891,7 +9891,8 @@ namespace Illuminate\Support\Facades {
          * @return string 
          * @static 
          */ 
-        public static function getColumnType($table, $column)
+        public static function
+        getColumnType($table, $column)
         {
             //Method inherited from \Illuminate\Database\Schema\Builder            
             return \Illuminate\Database\Schema\MySqlBuilder::getColumnType($table, $column);

@@ -2,13 +2,14 @@
 
 namespace App;
 
+use App\Models\traits\Doctrine;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Doctrine;
 
     /**
      * The attributes that are mass assignable.
@@ -33,6 +34,6 @@ class User extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-         $this->notify(new ResetPasswordNotification($token));
+        $this->notify(new ResetPasswordNotification($token));
     }
 }

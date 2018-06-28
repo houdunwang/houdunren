@@ -17,3 +17,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function(){
    Route::get('/','AdminController@index')->name('home');
 });
+
+Route::prefix('handle')->name('handle.')->group(function(){
+   Route::any('upload','Handle\UploadController@make')->name('upload');
+});

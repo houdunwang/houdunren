@@ -89,34 +89,10 @@
       };return t.d(n, "a", n), n;
     }, t.o = function (e, t) {
       return Object.prototype.hasOwnProperty.call(e, t);
-    }, t.p = "/dist/", t(t.s = 1);
+    }, t.p = "/dist/", t(t.s = 6);
   }([function (e, t, n) {
     "use strict";
     t.a = { name: "HdImage" };
-  }, function (e, t, n) {
-    "use strict";
-    Object.defineProperty(t, "__esModule", { value: !0 });var r = n(2),
-        o = [r.a],
-        i = { install: function install(e, t) {
-        i.installed || (o.map(function (t) {
-          return e.component(t.name, t);
-        }), e.mixin({ mounted: function mounted() {
-            console.log("Mounted!");
-          } }));
-      } };"undefined" != typeof window && window.Vue && i(window.Vue), t.default = i;
-  }, function (e, t, n) {
-    "use strict";
-    function r(e) {
-      n(3);
-    }var o = n(0),
-        i = n(9),
-        s = n(8),
-        a = r,
-        u = s(o.a, i.a, !1, a, "data-v-60553840", null);t.a = u.exports;
-  }, function (e, t, n) {
-    var r = n(4);"string" == typeof r && (r = [[e.i, r, ""]]), r.locals && (e.exports = r.locals);n(6)("0e928544", r, !0, {});
-  }, function (e, t, n) {
-    t = e.exports = n(5)(!1), t.push([e.i, "", ""]);
   }, function (e, t) {
     function n(e, t) {
       var n = e[1] || "",
@@ -173,7 +149,7 @@
         } else n();
       };
     }function s(e, t, n, r) {
-      var o = n ? "" : r.css;if (e.styleSheet) e.styleSheet.cssText = _(t, o);else {
+      var o = n ? "" : r.css;if (e.styleSheet) e.styleSheet.cssText = b(t, o);else {
         var i = document.createTextNode(o),
             s = e.childNodes;s[t] && e.removeChild(s[t]), s.length ? e.insertBefore(i, s[t]) : e.appendChild(i);
       }
@@ -185,7 +161,7 @@
           e.removeChild(e.firstChild);
         }e.appendChild(document.createTextNode(n));
       }
-    }var u = "undefined" != typeof document;if ("undefined" != typeof DEBUG && DEBUG && !u) throw new Error("vue-style-loader cannot be used in a non-browser environment. Use { target: 'node' } in your Webpack config to indicate a server-rendering environment.");var c = n(7),
+    }var u = "undefined" != typeof document;if ("undefined" != typeof DEBUG && DEBUG && !u) throw new Error("vue-style-loader cannot be used in a non-browser environment. Use { target: 'node' } in your Webpack config to indicate a server-rendering environment.");var c = n(5),
         f = {},
         d = u && (document.head || document.getElementsByTagName("head")[0]),
         p = null,
@@ -207,22 +183,11 @@
           }
         }
       };
-    };var _ = function () {
+    };var b = function () {
       var e = [];return function (t, n) {
         return e[t] = n, e.filter(Boolean).join("\n");
       };
     }();
-  }, function (e, t) {
-    e.exports = function (e, t) {
-      for (var n = [], r = {}, o = 0; o < t.length; o++) {
-        var i = t[o],
-            s = i[0],
-            a = i[1],
-            u = i[2],
-            c = i[3],
-            f = { id: e + ":" + o, css: a, media: u, sourceMap: c };r[s] ? r[s].parts.push(f) : n.push(r[s] = { id: s, parts: [f] });
-      }return n;
-    };
   }, function (e, t) {
     e.exports = function (e, t, n, r, o, i) {
       var s,
@@ -236,6 +201,39 @@
         }) : c.beforeCreate = p ? [].concat(p, f) : [f];
       }return { esModule: s, exports: a, options: c };
     };
+  },, function (e, t) {
+    e.exports = function (e, t) {
+      for (var n = [], r = {}, o = 0; o < t.length; o++) {
+        var i = t[o],
+            s = i[0],
+            a = i[1],
+            u = i[2],
+            c = i[3],
+            f = { id: e + ":" + o, css: a, media: u, sourceMap: c };r[s] ? r[s].parts.push(f) : n.push(r[s] = { id: s, parts: [f] });
+      }return n;
+    };
+  }, function (e, t, n) {
+    "use strict";
+    Object.defineProperty(t, "__esModule", { value: !0 });var r = n(7),
+        o = [r.a],
+        i = { install: function install(e, t) {
+        i.installed || (o.map(function (t) {
+          return e.component(t.name, t);
+        }), e.mixin({ mounted: function mounted() {}, methods: {} }));
+      } };"undefined" != typeof window && window.Vue && i(window.Vue), t.default = i;
+  }, function (e, t, n) {
+    "use strict";
+    function r(e) {
+      n(8);
+    }var o = n(0),
+        i = n(10),
+        s = n(3),
+        a = r,
+        u = s(o.a, i.a, !1, a, "data-v-57092b34", null);t.a = u.exports;
+  }, function (e, t, n) {
+    var r = n(9);"string" == typeof r && (r = [[e.i, r, ""]]), r.locals && (e.exports = r.locals);n(2)("f50d19f6", r, !0, {});
+  }, function (e, t, n) {
+    t = e.exports = n(1)(!1), t.push([e.i, "", ""]);
   }, function (e, t, n) {
     "use strict";
     var r = function r() {
@@ -245,7 +243,7 @@
         o = [function () {
       var e = this,
           t = e.$createElement,
-          n = e._self._c || t;return n("div", [n("h1", [e._v("image...")])]);
+          n = e._self._c || t;return n("div", [n("h1", [e._v("image......")])]);
     }],
         i = { render: r, staticRenderFns: o };t.a = i;
   }]);
