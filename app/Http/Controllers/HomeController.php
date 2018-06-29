@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\UploadEvent;
-use App\Exceptions\InvalidException;
-use App\User;
-use Illuminate\Http\Request;
+use App\ArticleCategory;
+use App\Models\Config;
+use App\Tables\ArticleCategory\Handle;
 
 class HomeController extends Controller
 {
@@ -16,15 +15,18 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        dump(debug_backtrace());
+
     }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \App\Exceptions\InvalidException
      */
-    public function index()
+    public function index(ArticleCategory $articleCategory)
     {
-        return view('home');
+        $handle = new Handle(ArticleCategory::find(1));
+        $html   = $handle->render();
+
+        return view('home', compact('html'));
     }
 }

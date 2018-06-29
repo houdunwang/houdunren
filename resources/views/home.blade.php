@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <form action="">
+        {!! $html !!}
+    </form>
     <div class="container" id="app">
         <hd-image></hd-image>
         <div class="row justify-content-center">
