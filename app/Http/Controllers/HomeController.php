@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        dd(User::find(1)->listTableColumns());
+        dump(debug_backtrace());
     }
 
     /**
