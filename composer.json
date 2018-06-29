@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "houdunwang/hdcms",
+    "description": "The Laravel Cms.",
+    "keywords": ["hdcms", "laravel"],
     "license": "MIT",
     "type": "project",
     "require": {
