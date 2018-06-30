@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ArticleCategory;
-use App\Models\Config;
+use App\Tables\ArticleCategory\ArticleCategoryHandle;
 use App\Tables\ArticleCategory\Handle;
 
 class HomeController extends Controller
@@ -19,12 +19,14 @@ class HomeController extends Controller
     }
 
     /**
+     * @param \App\ArticleCategory $articleCategory
+     * @param \Request             $request
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \App\Exceptions\InvalidException
      */
-    public function index(ArticleCategory $articleCategory)
+    public function index(ArticleCategory $articleCategory, \Request $request)
     {
-        $handle = new Handle(ArticleCategory::find(1));
+        $handle = new ArticleCategoryHandle(ArticleCategory::find(1));
         $html   = $handle->render();
 
         return view('home', compact('html'));

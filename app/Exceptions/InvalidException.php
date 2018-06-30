@@ -2,13 +2,9 @@
 
 namespace App\Exceptions;
 
-use App\Traits\Message;
 use Exception;
-use Throwable;
-
 class InvalidException extends Exception
 {
-    use Message;
     protected $code;
 
     public function __construct(string $message = "", int $code = 400, \Throwable $previous = null)
@@ -20,7 +16,7 @@ class InvalidException extends Exception
     public function render($request)
     {
         if (request()->expectsJson()) {
-            return $this->error($this->getMessage(), [], $this->code);
+            return ['code'=>$this->code,'message'=>$this->message];
         }
 
         return view('errors.invalid', ['message' => $this->getMessage()]);

@@ -18,6 +18,5 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function(){
    Route::get('/','AdminController@index')->name('home');
 });
 
-Route::prefix('handle')->name('handle.')->group(function(){
-   Route::any('upload','Handle\UploadController@make')->name('upload');
-});
+#vue-form测试
+Route::any('vue-form-upload','VueFormController@upload');

@@ -1,16 +1,16 @@
 <?php return array (
+  'title' => 
+  array (
+    'title' => '栏目名称',
+    'name' => 'title',
+    'type' => 'input',
+    'value' => '',
+  ),
   'pid' => 
   array (
     'title' => '父级栏目',
     'name' => 'pid',
     'type' => 'select',
-    'value' => '',
-  ),
-  'name' => 
-  array (
-    'title' => '栏目名称',
-    'name' => 'name',
-    'type' => 'input',
     'value' => '',
   ),
   'description' => 

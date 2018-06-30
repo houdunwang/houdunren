@@ -114,7 +114,7 @@ return [
             'repository' => ['path' => 'Repositories', 'generate' => true],
             'event' => ['path' => 'Events', 'generate' => true],
             'listener' => ['path' => 'Listeners', 'generate' => true],
-            'policies' => ['path' => 'Policies', 'generate' => false],
+            'policies' => ['path' => 'Policies', 'generate' => true],
             'rules' => ['path' => 'Rules', 'generate' => false],
             'jobs' => ['path' => 'Jobs', 'generate' => false],
             'emails' => ['path' => 'Emails', 'generate' => false],

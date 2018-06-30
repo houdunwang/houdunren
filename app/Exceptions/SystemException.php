@@ -2,12 +2,10 @@
 
 namespace App\Exceptions;
 
-use App\Traits\Message;
 use Exception;
 
 class SystemException extends Exception
 {
-    use Message;
     protected $code;
     protected $message;
 
@@ -21,7 +19,7 @@ class SystemException extends Exception
     public function render($request)
     {
         if (request()->expectsJson()) {
-            return $this->error($this->message, [], $this->code);
+            return ['code'=>$this->code,'message'=>$this->message];
         }
 
         return view('errors.system', ['message' => $this->message,'code'=>$this->code]);

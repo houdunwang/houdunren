@@ -18,7 +18,6 @@ class CreateConfigsTable extends Migration
             $table->string('key', 50)->comment('配置名');
             $table->string('value')->comment('配置值');
             $table->string('title', 50)->comment('配置描述');
-            $table->string('form_type')->comment('表单类型');
             $table->string('group')->comment('配置组');
             $table->timestamps();
         });

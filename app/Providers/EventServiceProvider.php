@@ -2,8 +2,7 @@
 
 namespace App\Providers;
 
-use App\Events\UploadEvent;
-use App\Listeners\Upload\UploadSubscriber;
+use Houdunwang\LaravelUpload\Listeners\UploadSubscriber;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -15,13 +14,14 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Event'       => [
+        'App\Events\Event' => [
             'App\Listeners\EventListener',
-        ]
+        ],
     ];
-    protected $subscribe=[
-        UploadSubscriber::class
+    protected $subscribe = [
+        UploadSubscriber::class,
     ];
+
     /**
      * Register any events for your application.
      *
