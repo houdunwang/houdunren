@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+
 class InvalidException extends Exception
 {
     protected $code;
@@ -16,9 +17,10 @@ class InvalidException extends Exception
     public function render($request)
     {
         if (request()->expectsJson()) {
-            return ['code'=>$this->code,'message'=>$this->message];
+            return ['code' => $this->code, 'message' => $this->message];
         }
-
-        return view('errors.invalid', ['message' => $this->getMessage()]);
+        session()->flash('danger', $this->getMessage());
+        return redirect()->intended('/');
+        //return view('errors.invalid', ['message' => $this->message,'code'=>$this->code]);
     }
 }

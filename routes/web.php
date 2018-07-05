@@ -14,9 +14,6 @@
 Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::middleware('auth')->prefix('admin')->name('admin.')->group(function(){
-   Route::get('/','AdminController@index')->name('home');
-});
 
 #vue-form测试
 Route::any('vue-form-upload','VueFormController@upload');

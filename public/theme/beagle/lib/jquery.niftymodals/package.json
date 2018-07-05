@@ -1,0 +1,63 @@
+{
+  "_from": "jquery.niftymodals@git+https://github.com/foxythemes/jquery-niftymodals.git#84825a3d58c527d502a9912a83e8a12b49a5ea47",
+  "_id": "jquery.niftymodals@1.3.1",
+  "_inBundle": false,
+  "_location": "/jquery.niftymodals",
+  "_phantomChildren": {
+    "chalk": "1.1.3",
+    "maxmin": "1.1.0",
+    "object.assign": "4.0.4",
+    "uglify-js": "2.8.29",
+    "uri-path": "1.0.0"
+  },
+  "_requested": {
+    "type": "git",
+    "raw": "jquery.niftymodals@git+https://github.com/foxythemes/jquery-niftymodals.git#84825a3d58c527d502a9912a83e8a12b49a5ea47",
+    "name": "jquery.niftymodals",
+    "escapedName": "jquery.niftymodals",
+    "rawSpec": "git+https://github.com/foxythemes/jquery-niftymodals.git#84825a3d58c527d502a9912a83e8a12b49a5ea47",
+    "saveSpec": "git+https://github.com/foxythemes/jquery-niftymodals.git#84825a3d58c527d502a9912a83e8a12b49a5ea47",
+    "fetchSpec": "https://github.com/foxythemes/jquery-niftymodals.git",
+    "gitCommittish": "84825a3d58c527d502a9912a83e8a12b49a5ea47"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git+https://github.com/foxythemes/jquery-niftymodals.git#84825a3d58c527d502a9912a83e8a12b49a5ea47",
+  "_spec": "jquery.niftymodals@git+https://github.com/foxythemes/jquery-niftymodals.git#84825a3d58c527d502a9912a83e8a12b49a5ea47",
+  "_where": "/home/miguel/projects/beagle",
+  "author": {
+    "name": "Foxy Themes",
+    "url": "http://foxythemes.net/"
+  },
+  "bugs": {
+    "url": "https://github.com/foxythemes/jquery-niftymodals/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "grunt": "^1.0.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-less": "1.3.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-notify": "^0.4.5",
+    "load-grunt-tasks": "^3.5.0"
+  },
+  "deprecated": false,
+  "description": "A jQuery plugin for Codrops modal effects https://github.com/codrops/ModalWindowEffects",
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "homepage": "https://github.com/foxythemes/jquery-niftymodals",
+  "license": "SEE LICENSE IN <LICENSE>",
+  "main": "dist/jquery.niftymodals.js",
+  "name": "jquery.niftymodals",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/foxythemes/jquery-niftymodals.git"
+  },
+  "version": "1.3.1"
+}

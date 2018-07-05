@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\ArticleCategory;
 use App\Tables\ArticleCategory\ArticleCategoryHandle;
 use App\Tables\ArticleCategory\Handle;
+use Spatie\Permission\Models\Permission;
+
 
 class HomeController extends Controller
 {
@@ -15,7 +17,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-
     }
 
     /**

@@ -6,11 +6,12 @@ use App\Models\traits\Doctrine;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
+
 
 class User extends Authenticatable
 {
-    use Notifiable, Doctrine;
-
+    use Notifiable, Doctrine, HasRoles;
     /**
      * The attributes that are mass assignable.
      *
