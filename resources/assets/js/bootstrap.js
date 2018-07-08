@@ -14,10 +14,10 @@ try {
     require('bootstrap');
 } catch (e) {}
 
-
-require('jquery-pjax')
+//pjax设置
+require('jquery-pjax');
 $(document).pjax('a','#pjax-container');
-$.pjax.defaults.timeout = 1200
+$.pjax.defaults.timeout = 1200;
 $(document).on('pjax:click', function() {
     $("#loading").show();
 });

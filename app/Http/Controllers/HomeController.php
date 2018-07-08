@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ArticleCategory;
-use App\Tables\ArticleCategory\ArticleCategoryHandle;
-use App\Tables\ArticleCategory\Handle;
-use Spatie\Permission\Models\Permission;
-
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -17,19 +13,18 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('auth');
     }
 
     /**
-     * @param \App\ArticleCategory $articleCategory
-     * @param \Request             $request
+     * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
-    public function index(ArticleCategory $articleCategory, \Request $request)
+    public function index()
     {
-        $handle = new ArticleCategoryHandle(ArticleCategory::find(1));
-        $html   = $handle->render();
-
-        return view('home', compact('html'));
+        dd(auth()->user()->toArray());
+        dd(session()->all());
+        return view('home');
     }
 }

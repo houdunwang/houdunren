@@ -1,23 +1,29 @@
 @extends('admin::layouts.master')
 @section('content')
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/admin">首页</a></li>
-            <li class="breadcrumb-item"><a href="/admin/role">角色管理</a></li>
-            <li class="breadcrumb-item active" aria-current="page">权限设置</li>
-        </ol>
-    </nav>
-    <div class="card">
-        <div class="card-header"><strong>{{$role->title}}</strong> 角色权限</div>
-        <div class="card-body">
+    @component('components.tabs' ,['title'=>$role['title'].' 权限设置'])
+        @slot('nav')
+            <li class="nav-item"><a href="/admin/role" class="nav-link ">角色组</a></li>
+            <li class="nav-item"><a href="/admin/user" class="nav-link">管理员管理</a></li>
+            <li class="nav-item"><a href="/admin/permission" class="nav-link ">权限列表</a></li>
+            <li class="nav-item"><a href="/admin/permission" class="nav-link active">角色权限</a></li>
+        @endslot
+
+        @slot('header')
+            <button data-toggle="modal" data-target="#add-role" type="button" class="btn btn-space btn-secondary">添加权限</button>
+            <div class="tools dropdown dropleft">
+                <a href="javascript:location.reload(true);" class="icon mdi mdi-refresh-sync"></a>
+            </div>
+        @endslot
+
+        @slot('body')
             <form action="/admin/role/permission/{{$role->id}}" method="post">
                 @csrf
                 @foreach(\HDModule::getPermissionByGuard('admin') as $group)
-                    <div class="card card-contrast card-border-color card-border-color-primary mb-1">
-                        <div class="card-header card-header-contrast">
+                    <div class="card card-border-color card-border-color-danger mb-0">
+                        <div class="card-header card-header-divider">
                             {{$group['config']['name']}}
                         </div>
-                        <div class="card-body">
+                        <div class="card-body card-body-contrast">
                             @foreach($group['rules'] as $rule)
                                 <div class="card-header p-sm-0 pb-sm-3">
                                     <div class="tools"><span class="icon s7-upload"></span><span class="icon s7-edit"></span><span class="icon s7-close"></span></div>
@@ -36,8 +42,8 @@
                         </div>
                     </div>
                 @endforeach
-                <button class="btn btn-primary">保存权限</button>
+                <button class="btn btn-primary m-3">保存权限</button>
             </form>
-        </div>
-    </div>
+        @endslot
+    @endcomponent
 @endsection

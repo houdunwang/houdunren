@@ -4,20 +4,22 @@
             @foreach(\HDModule::getMenus() as $title=> $groups)
                 <li class="divider">{{$title}}</li>
                 @foreach($groups as $group)
-                    <li class="parent">
-                        <a href="#">
-                            <i class="{{$group['icon']}}"></i> <span>{{$group['title']}}</span>
-                        </a>
-                        <ul class="sub-menu">
-                            @foreach($group['menus'] as $menu)
-                                @can($menu['permission'])
-                                    <li>
-                                        <a href="{{$menu['url']}}">{{$menu['title']}}</a>
-                                    </li>
-                                @endcan
-                            @endforeach
-                        </ul>
-                    </li>
+                    @if(\HDModule::hadPermission($group['permission'],'admin'))
+                        <li class="parent">
+                            <a href="#">
+                                <i class="{{$group['icon']}}"></i> <span>{{$group['title']}}</span>
+                            </a>
+                            <ul class="sub-menu">
+                                @foreach($group['menus'] as $menu)
+                                    @if(HDModule::hadPermission($menu['permission'],'admin'))
+                                        <li>
+                                            <a href="{{$menu['url']}}">{{$menu['title']}}</a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endif
                 @endforeach
             @endforeach
 

@@ -15,11 +15,11 @@ return [
     [
         "title"      => "系统管理",
         "icon"       => "fa fa-cubes",
-        "permission" => "",
-        "menus"      => [
-            ["title" => "网站配置", "permission" => "Admin::site config", "url" => "链接地址"],
-            ["title" => "微信设置", "permission" => "Admin::wechat setting", "url" => "链接地址"],
-            ["title" => "权限管理", "permission" => "Admin::permission manage", "url" => "/admin/role"],
+        "permission" => [
+            'Modules\Admin\Http\Controllers\RoleController@index'
         ],
-    ]
+        "menus"      => [
+            ["title" => "角色管理", "permission" => 'Modules\Admin\Http\Controllers\RoleController@index', "url" => "/admin/role"],
+        ],
+    ],
 ];

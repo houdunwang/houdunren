@@ -3,9 +3,8 @@
 namespace Modules\Admin\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Illuminate\Validation\Rule;
+use Modules\Admin\Http\Requests\PermissionRequest;
 use Modules\Admin\Http\Requests\RoleRequest;
 use Spatie\Permission\Models\Role;
 
@@ -24,7 +23,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::get();
+        $roles = Role::where('name','<>',config('hd_module.webmaster'))->get();
 
         return view('admin::role.index', compact('roles'));
     }
@@ -91,9 +90,10 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function permissionStore(Request $request, Role $role)
+    public function permissionStore(PermissionRequest $request, Role $role)
     {
-        $role->syncPermissions($request->input('name'));
+        $rules = array_unique($request->input('name'));
+        $role->syncPermissions($rules);
         session()->flash("success", "权限设置成功");
 
         return back();

@@ -18,6 +18,8 @@ class AdminSeeder extends Seeder
         $user->nickname = '向军大叔';
         $user->save();
         \Spatie\Permission\Models\Role::create(['name'=>'webmaster','title'=>'站长','guard_name'=>'admin']);
+        \Spatie\Permission\Models\Role::create(['name'=>'admin','title'=>'管理员
+        ','guard_name'=>'admin']);
         $user->syncRoles(['webmaster']);
     }
 }

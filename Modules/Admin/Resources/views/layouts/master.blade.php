@@ -11,7 +11,7 @@
     <meta name="author" content="向军大叔"/>
     <meta name="description" content="@yield('description')"/>
     <meta name="keywords" content="@yield('keywords')"/>
-    <link rel="stylesheet" href="{{mix('css/app.css')}}">
+
     <link rel="stylesheet" type="text/css"
           href="{{asset('theme/beagle/lib/perfect-scrollbar/css/perfect-scrollbar.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('theme/beagle/css/app.css')}}" type="text/css"/>
@@ -22,7 +22,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
     @yield('head')
 </head>
 <body>
@@ -182,8 +181,9 @@
             </div>
         </div>
     </div>
-    <div class="be-content" id="app">
-        <div class="main-content container-fluid" id="pjax-container" >
+    <div class="be-content">
+        <div class="main-content container-fluid" id="pjax-container">
+            <!--pjax加载动画-->
             <div id="loading">
                 <div class="spinner">
                     <div class="rect1"></div>
@@ -193,9 +193,12 @@
                     <div class="rect5"></div>
                 </div>
             </div>
+            <!--pjax加载动画 结束-->
             @include('layouts._message')
             @include('layouts._validate')
-            @yield('content')
+            <div id="app">
+                @yield('content')
+            </div>
         </div>
     </div>
     <nav class="be-right-sidebar">
@@ -235,7 +238,6 @@
                                 </div>
                             </div>
                             <div class="bottom-input">
-                                {{--<input type="text" placeholder="Search..." name="q"><span class="mdi mdi-search"></span>--}}
                             </div>
                         </div>
                         <div class="chat-window">
@@ -352,15 +354,15 @@
         </div>
     </nav>
 </div>
-@if (config('app.debug'))
-    @include('sudosu::user-selector')
-@endif
-<script src="{{mix('js/app.js')}}"></script>
+<link rel="stylesheet" href="{{ asset('css/article.css') }}">
+<script src="{{ asset('js/article.js') }}"></script>
 <script src="{{asset('theme/beagle/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('theme/beagle/lib/bootstrap/dist/js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('theme/beagle/js/app.js')}}" type="text/javascript"></script>
-
 <script src="{{asset('theme/beagle/lib/jquery.niftymodals/dist/jquery.niftymodals.js')}}" type="text/javascript"></script>
+<script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+<script src="{{asset('plugin/pjax/pjax.js')}}"></script>
+<link rel="stylesheet" href="{{asset('plugin/pjax/pjax.css')}}">
 <script type="text/javascript">
     $.fn.niftyModal('setDefaults', {
         overlaySelector: '.modal-overlay',
@@ -372,5 +374,6 @@
         App.init();
     });
 </script>
+@yield('scripts')
 </body>
 </html>

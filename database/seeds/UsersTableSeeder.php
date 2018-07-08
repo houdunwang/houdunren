@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
         $user           = $users[0];
         $user->name     = 'admin';
         $user->email    = '2300071698@qq.com';
-        $user->nickname = '向军大叔';
+        $user->nickname = '向军大叔-前台';
         $user->save();
     }
 }

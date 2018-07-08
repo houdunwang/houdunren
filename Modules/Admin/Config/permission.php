@@ -10,11 +10,19 @@
  */
 return [
     [
-        'group' => '系统管理',
+        'group'       => '系统管理',
         'permissions' => [
-            ['title' => '网站配置', 'name' => 'Admin::site config', 'guard' => 'admin'],
-            ['title' => '微信设置', 'name' => 'Admin::wechat setting', 'guard' => 'admin'],
-            ['title' => '权限管理', 'name' => 'Admin::permission manage', 'guard' => 'admin'],
+            ['title' => '角色管理', 'name' => 'Modules\Admin\Http\Controllers\RoleController@index', 'guard' => 'admin'],
+        ],
+    ],
+    [
+        'group'       => '管理员管理',
+        'permissions' => [
+            ['title' => '角色管理', 'name' => 'Modules\Admin\Http\Controllers\RoleController@index', 'guard' => 'admin'],
+            ['title' => '添加角色', 'name' => 'Modules\Admin\Http\Controllers\RoleController@create', 'guard' => 'admin'],
+            ['title' => '编辑角员', 'name' => 'Modules\Admin\Http\Controllers\RoleController@edit', 'guard' => 'admin'],
+            ['title' => '删除角员', 'name' => 'Modules\Admin\Http\Controllers\RoleController@destory', 'guard' => 'admin'],
+            ['title' => '设置角色权限', 'name' => 'Modules\Admin\Http\Controllers\RoleController@permission', 'guard' => 'admin'],
         ],
     ],
 ];

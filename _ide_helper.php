@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.6.26 on 2018-07-05 02:19:04.
+ * Generated for Laravel 5.6.26 on 2018-07-08 08:49:05.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -15159,13 +15159,39 @@ namespace Houdunwang\Module {
         }
         
         /**
-         * 
+         * 验证权限
          *
+         * @param $permissions
+         * @param string $guard
+         * @return bool 
          * @static 
          */ 
-        public static function getPermissionLists()
+        public static function hadPermission($permissions, $guard)
         {
-            return \Houdunwang\Module\Provider::getPermissionLists();
+            return \Houdunwang\Module\Provider::hadPermission($permissions, $guard);
+        }
+        
+        /**
+         * 站长检测
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isWebMaster($guard = 'admin')
+        {
+            return \Houdunwang\Module\Provider::isWebMaster($guard);
+        }
+        
+        /**
+         * 
+         *
+         * @param $guard
+         * @return array 
+         * @static 
+         */ 
+        public static function getPermissionByGuard($guard)
+        {
+            return \Houdunwang\Module\Provider::getPermissionByGuard($guard);
         }
         
         /**
