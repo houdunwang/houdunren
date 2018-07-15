@@ -12,10 +12,17 @@
 */
 
 Auth::routes();
-Route::get('/', 'HomeController@index');
+//Route::get('/', 'HomeController@index');
+Route::get('/', function () {
+    return app()->build(\Modules\Article\Http\Controllers\HomeController::class)->index();
+});
 Route::get('/home', 'HomeController@index')->name('home');
 #vue-form测试
 Route::any('vue-form-upload', 'VueFormController@upload');
 
 Route::any('upload', 'UploadController@make');
 Route::any('upload-simditor', 'UploadController@uploadSimditor');
+
+
+//user-route
+Route::resource('user', 'UserController');

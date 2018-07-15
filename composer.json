@@ -15,6 +15,8 @@
         "doctrine/dbal": "^2.7",
         "fideloper/proxy": "^4.0",
         "hisorange/browser-detect": "^3.1",
+        "houdunwang/arr": "^1.0",
+        "houdunwang/laravel-autocreate": "^1.0",
         "houdunwang/laravel-module": "^1.0",
         "houdunwang/laravel-upload": "^1.0",
         "houdunwang/laravel-view": "^1.0",
@@ -44,7 +46,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Modules\\":"Modules"
+            "Modules\\": "Modules"
         }
     },
     "autoload-dev": {

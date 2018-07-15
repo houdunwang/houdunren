@@ -14,16 +14,6 @@ try {
     require('bootstrap');
 } catch (e) {}
 
-//pjax设置
-require('jquery-pjax');
-$(document).pjax('a','#pjax-container');
-$.pjax.defaults.timeout = 1200;
-$(document).on('pjax:click', function() {
-    $("#loading").show();
-});
-$(document).on('pjax:end', function() {
-    $("#loading").hide();
-});
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

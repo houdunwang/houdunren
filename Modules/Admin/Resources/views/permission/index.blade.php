@@ -21,7 +21,10 @@
                     <div class="card-body card-body-contrast">
                         @foreach($group['rules'] as $rule)
                             <div class="card-header p-sm-0 pb-sm-3">
-                                <div class="tools"><span class="icon s7-upload"></span><span class="icon s7-edit"></span><span class="icon s7-close"></span></div>
+                                <div class="tools">
+                                    <span class="icon s7-upload"></span>
+                                    <span class="icon s7-edit"></span><span class="icon s7-close"></span>
+                                </div>
                                 <span class="title">{{$rule['group']}}</span>
                             </div>
                             <div class="card-body p-0">

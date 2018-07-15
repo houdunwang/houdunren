@@ -46,6 +46,17 @@
       'Browser' => 'hisorange\\BrowserDetect\\Facade',
     ),
   ),
+  'houdunwang/laravel-autocreate' => 
+  array (
+    'providers' => 
+    array (
+      0 => '\\Houdunwang\\AutoCreate\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'HDModule' => '\\Houdunwang\\AutoCreate\\Factory',
+    ),
+  ),
   'houdunwang/laravel-module' => 
   array (
     'providers' => 

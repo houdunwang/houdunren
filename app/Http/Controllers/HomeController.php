@@ -23,8 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        dd(auth()->user()->toArray());
-        dd(session()->all());
         return view('home');
     }
 }

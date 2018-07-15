@@ -11,7 +11,6 @@
     <meta name="author" content="向军大叔"/>
     <meta name="description" content="@yield('description')"/>
     <meta name="keywords" content="@yield('keywords')"/>
-
     <link rel="stylesheet" type="text/css"
           href="{{asset('theme/beagle/lib/perfect-scrollbar/css/perfect-scrollbar.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('theme/beagle/css/app.css')}}" type="text/css"/>
@@ -29,8 +28,7 @@
     <nav class="navbar navbar-expand fixed-top be-top-header">
         <div class="container-fluid">
             <div class="be-navbar-header">
-                <a href="#" class="navbar-brand">
-                </a>
+                <a href="#" class="navbar-brand"></a>
             </div>
             <div class="be-right-navbar" style="width: auto;order:2;">
                 <ul class="nav navbar-nav float-right be-user-nav">
@@ -49,9 +47,6 @@
                             <a href="pages-profile.html" class="dropdown-item">
                                 <span class="icon mdi mdi-face"></span> 修改密码
                             </a>
-                            <a href="#" class="dropdown-item">
-                                <span class="icon mdi mdi-settings"></span> 帐号设置
-                            </a>
                             <a href="javascript:void(0);" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout').submit()">
                                 <span class="icon mdi mdi-power"></span> 退出
                             </a>
@@ -62,12 +57,15 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav float-right be-icons-nav">
-                    <li class="nav-item dropdown"><a href="#" role="button" aria-expanded="false"
-                                                     class="nav-link be-toggle-right-sidebar"><span
-                                class="icon mdi mdi-settings"></span></a></li>
-                    <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
-                                                     class="nav-link dropdown-toggle"><span
-                                class="icon mdi mdi-notifications"></span><span class="indicator"></span></a>
+                    <li class="nav-item dropdown" hidden>
+                        <a href="#" role="button" aria-expanded="false" class="nav-link be-toggle-right-sidebar">
+                            <span class="icon mdi mdi-settings"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown" hidden>
+                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                            <span class="icon mdi mdi-notifications"></span><span class="indicator"></span>
+                        </a>
                         <ul class="dropdown-menu be-notifications">
                             <li>
                                 <div class="title">通知<span class="badge badge-pill">3</span></div>
@@ -111,17 +109,20 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
-                                                     class="nav-link dropdown-toggle"><span
-                                class="icon mdi mdi-apps"></span></a>
+                    <li class="nav-item dropdown" hidden>
+                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                            <span class="icon mdi mdi-apps"></span>
+                        </a>
                         <ul class="dropdown-menu be-connections">
                             <li>
                                 <div class="list">
                                     <div class="content">
                                         <div class="row">
-                                            <div class="col"><a href="#" class="connection-item"><img
-                                                        src="{{asset('theme/beagle/img/github.png')}}"
-                                                        alt="Github"><span>GitHub</span></a></div>
+                                            <div class="col">
+                                                <a href="#" class="connection-item"><img src="{{asset('theme/beagle/img/github.png')}}"
+                                                        alt="Github"><span>GitHub</span>
+                                                </a>
+                                            </div>
                                             <div class="col"><a href="#" class="connection-item"><img
                                                         src="{{asset('theme/beagle/img/bitbucket.png')}}"
                                                         alt="Bitbucket"><span>Bitbucket</span></a></div>
@@ -151,19 +152,7 @@
             <a href="#" id="sub-navigation" data-toggle="collapse" aria-expanded="false"
                data-target="#be-navbar-collapse" class="be-toggle-top-header-menu collapsed">No Sidebar Left</a>
             <div id="be-navbar-collapse" class="navbar-collapse collapse">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a href="index.html" class="nav-link">系统模块</a></li>
-                    <li class="nav-item dropdown">
-                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
-                           class="nav-link dropdown-toggle">
-                            扩展插件 <span class="mdi mdi-caret-down"></span>
-                        </a>
-                        <div role="menu" class="dropdown-menu">
-                            <a href="form-elements.html" class="dropdown-item">Elements</a>
-                            <a href="form-validation.html" class="dropdown-item">Validation</a>
-                        </div>
-                    </li>
-                </ul>
+                @include('admin::layouts._menu_header')
             </div>
         </div>
     </nav>
@@ -344,8 +333,8 @@
                                 </div>
                             </div>
                             <div class="bottom-input">
-                                <input type="text" placeholder="Create new task..." name="q"><span
-                                    class="mdi mdi-plus"></span>
+                                <input type="text" placeholder="Create new task..." name="q">
+                                <span class="mdi mdi-plus"></span>
                             </div>
                         </div>
                     </div>
@@ -354,8 +343,9 @@
         </div>
     </nav>
 </div>
-<link rel="stylesheet" href="{{ asset('css/article.css') }}">
-<script src="{{ asset('js/article.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{asset('plugin/menu.js')}}" type="text/javascript"></script>
 <script src="{{asset('theme/beagle/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('theme/beagle/lib/bootstrap/dist/js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('theme/beagle/js/app.js')}}" type="text/javascript"></script>

@@ -72,7 +72,7 @@
         </div>
     </div>
 </div>
-<script src="{{mix('js/app.js')}}"></script>
+{{--<script src="{{mix('js/app.js')}}"></script>--}}
 <script src="{{asset('theme/beagle/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('theme/beagle/js/app.js')}}" type="text/javascript"></script>
 <script type="text/javascript">

@@ -4,7 +4,7 @@
         <select id="{{$field['name']}}" name="{{$field['name']}}" class="form-control form-control-xs">
             @if(isset($field['options']))
                 @foreach($field['options'] as $option)
-                    <option value="{{$option['value']}}" {{$option['selected']?'selected':''}} {{$option['disabled']?'disabled':''}}>{{$option['title']}}</option>
+                    <option value="{{$option['value']}}" {{$option['selected']?'selected':''}} {{$option['disabled']?'disabled':''}}>{!! $option['title']  !!}</option>
                 @endforeach
             @endif;
         </select>

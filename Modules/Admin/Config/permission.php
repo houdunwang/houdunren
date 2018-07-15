@@ -10,13 +10,7 @@
  */
 return [
     [
-        'group'       => '系统管理',
-        'permissions' => [
-            ['title' => '角色管理', 'name' => 'Modules\Admin\Http\Controllers\RoleController@index', 'guard' => 'admin'],
-        ],
-    ],
-    [
-        'group'       => '管理员管理',
+        'group'       => '角色管理',
         'permissions' => [
             ['title' => '角色管理', 'name' => 'Modules\Admin\Http\Controllers\RoleController@index', 'guard' => 'admin'],
             ['title' => '添加角色', 'name' => 'Modules\Admin\Http\Controllers\RoleController@create', 'guard' => 'admin'],
