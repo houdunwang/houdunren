@@ -11,12 +11,12 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $paths = [public_path('templates/default')];
+        $paths = [public_path('templates/'.\HDModule::config('article.config.template'))];
         \View::setFinder(new \Illuminate\View\FileViewFinder(\App::make('files'), $paths));
     }
 
     public function index()
     {
-        return view('a');
+        return view('index');
     }
 }

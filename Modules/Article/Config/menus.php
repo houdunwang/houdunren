@@ -16,6 +16,11 @@
                         'permission' => '',
                         'url'        => '/article/content',
                     ],
+                    [
+                        'title'      => '模板风格',
+                        'permission' => '',
+                        'url'        => '/article/template',
+                    ],
                 ],
         ],
 ];
