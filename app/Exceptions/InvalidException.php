@@ -20,7 +20,8 @@ class InvalidException extends Exception
             return ['code' => $this->code, 'message' => $this->message];
         }
         session()->flash('danger', $this->getMessage());
-        return redirect()->intended('/');
+
+        return back();
         //return view('errors.invalid', ['message' => $this->message,'code'=>$this->code]);
     }
 }

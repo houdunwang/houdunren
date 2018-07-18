@@ -4,8 +4,6 @@
         @slot('nav')
             <li class="nav-item"><a href="/admin/role" class="nav-link ">角色组</a></li>
             <li class="nav-item"><a href="/admin/user" class="nav-link">管理员管理</a></li>
-            <li class="nav-item"><a href="/admin/permission" class="nav-link ">权限列表</a></li>
-            <li class="nav-item"><a href="/admin/permission" class="nav-link">角色权限</a></li>
         @endslot
         @slot('body')
             <form action="/admin/role/permission/{{$role->id}}" method="post">

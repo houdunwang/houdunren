@@ -21,6 +21,9 @@ class ContentController extends Controller
     public function create(Content $content, Category $category)
     {
         $categories = $category->getAll();
+        if (count($categories) == 0) {
+            return redirect('/article/category')->with('danger', '添加栏目后才可以发布文章');
+        }
 
         return view('article::content.create', compact('content', 'categories'));
     }
@@ -41,10 +44,11 @@ class ContentController extends Controller
     }
 
     //编辑视图
-    public function edit(Content $content,Category $category)
+    public function edit(Content $content, Category $category)
     {
         $categories = $category->getAll();
-        return view('article::content.edit', compact('content','categories'));
+
+        return view('article::content.edit', compact('content', 'categories'));
     }
 
     //更新数据

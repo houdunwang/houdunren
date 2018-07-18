@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         #vue-form组件测试
-        'http://hdcms-laravel.hd/vue-form-upload',
+        'http://hdcms.hd/vue-form-upload',
+        'http://hdcms.hd/upload',
     ];
 }

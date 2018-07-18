@@ -2,6 +2,7 @@
 
 namespace Modules\Article\Http\Controllers;
 
+use App\Services\ConfigService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -14,8 +15,9 @@ class CategoryController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
-    public function index(Category $category)
+    public function index(Category $category,ConfigService $configService)
     {
+        $configService->save(['a'=>33,'b'=>333]);
         $categories = $category->getAll();
         return view('article::category.index', compact('categories'));
     }

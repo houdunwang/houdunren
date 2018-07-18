@@ -2,9 +2,8 @@
 @section('content')
     @component('components.tabs',['title'=>'权限管理'])
         @slot('nav')
-            <li class="nav-item"><a href="/admin/role" class="nav-link active">角色组</a></li>
-            <li class="nav-item"><a href="/admin/user" class="nav-link">管理员管理</a></li>
-            <li class="nav-item"><a href="/admin/permission" class="nav-link">权限列表</a></li>
+            <li class="nav-item"><a href="/admin/role" pjax class="nav-link active">角色组</a></li>
+            <li class="nav-item"><a href="/admin/user" pjax class="nav-link">管理员管理</a></li>
         @endslot
         @slot('header')
             <button data-toggle="modal" data-target="#add-role" type="button" class="btn btn-space btn-primary">添加角色</button>

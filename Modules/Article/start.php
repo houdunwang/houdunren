@@ -10,7 +10,6 @@
 | it to load anything else from the module, such as a class or view.
 |
 */
-
 if (!app()->routesAreCached()) {
     require __DIR__ . '/Http/routes.php';
 }

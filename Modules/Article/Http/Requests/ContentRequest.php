@@ -9,15 +9,21 @@ class ContentRequest extends FormRequest
     //验证规则
     public function rules()
     {
-        return array (
-);
+        return [
+            'title'  => 'required',
+            'click'  => 'required',
+            'author' => 'required',
+        ];
     }
 
     //错误信息处理
     public function messages()
     {
-        return array (
-);
+        return [
+            'title.required'  => '标题不能为空',
+            'click.required'  => '点击数不能为空',
+            'author.required' => '作者不能为空',
+        ];
     }
 
     //权限验证

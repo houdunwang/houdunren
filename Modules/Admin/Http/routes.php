@@ -16,14 +16,20 @@ Route::group([
     Route::get('role/permission/{role}', 'RoleController@permission')->middleware("permission:admin");
     Route::post('role/permission/{role}', 'RoleController@permissionStore')->middleware("permission:admin");
 
-    Route::resource('permission','PermissionController');
+    Route::resource('permission', 'PermissionController');
     //后台管理员
     Route::resource('user', 'UserController');
 });
 
 
 //module-route
-Route::group(['middleware' => ['web', 'auth:admin'],'prefix'=>'admin','namespace'=>"Modules\Admin\Http\Controllers"],
-function () {
-    Route::resource('module', 'ModuleController')->middleware("permission:admin,resource");
-});
+Route::group([
+    'middleware' => ['web', 'auth:admin'],
+    'prefix'     => 'admin',
+    'namespace'  => "Modules\Admin\Http\Controllers",
+],
+    function () {
+        Route::get('module_update_cache', 'ModuleController@updateCache');
+        Route::get('module_set_default/{module}', 'ModuleController@setDefault');
+        Route::resource('module', 'ModuleController')->middleware("permission:admin,resource");
+    });

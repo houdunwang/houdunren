@@ -4,8 +4,8 @@
         <div class="card-header">文章管理</div>
         <div class="tab-container">
             <ul role="tablist" class="nav nav-tabs">
-                <li class="nav-item"><a href="//user" class="nav-link active">文章列表</a></li>
-                <li class="nav-item"><a href="//user/create" class="nav-link">添加文章</a></li>
+                <li class="nav-item"><a href="//user" pjax class="nav-link active">文章列表</a></li>
+                <li class="nav-item"><a href="//user/create" pjax class="nav-link">添加文章</a></li>
             </ul>
             <div class="card card-contrast card-border-color-success">
                 <div class="card-body">
@@ -13,7 +13,7 @@
                         <thead>
                         <tr>
                             <th style="width: 10%;">编号</th>
-                            
+
                             <th>创建时间</th>
                             <th>修改时间</th>
                             <th>&nbsp;</th>
@@ -23,7 +23,7 @@
                         @foreach($data as $d)
                             <tr>
                                 <td>{!! $d['id'] !!}</td>
-                                
+
                                 <td>{!! $d['created_at'] !!}</td>
                                 <td>{!! $d['updated_at'] !!}</td>
                                 <td class="text-right">

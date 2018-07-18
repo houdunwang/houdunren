@@ -10,7 +10,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import VueForm from '../../../houdunwang/vue-form/dist/houdunren-vue-form'
 Vue.use(ElementUI);
-Vue.use(VueForm, {url: 'http://hdcms-laravel.hd/vue-form-upload'});
+Vue.use(VueForm, {url: '/upload'});
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 const app = new Vue({
     el: '#app'

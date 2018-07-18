@@ -15,7 +15,7 @@ class CreateModulesTable extends Migration
             $table->text('title')->comment('模块名称|input');
             $table->string('name')->comment('模块标识|input');
             $table->string('is_default')->nullable()->comment('默认模块|radio|1:是,0:否');
-            $table->string('enabled')->comment('开启|radio|1:是,0:否');
+            $table->string('front_access')->comment('开启|radio|1:是,0:否');
         });
     }
 

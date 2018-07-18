@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\Admin;
+use Modules\Admin\Http\Requests\AdminRequest;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -17,8 +18,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $admins = Admin::get();
-        $roles  = Role::get();
+        $admins = Admin::where('id','>',1)->get();
+        $roles  = Role::where('name','<>',config('hd_module.webmaster'))->get();
 
         return view('admin::user.index', compact('admins', 'roles'));
     }
@@ -30,8 +31,14 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function store(Request $request)
+    public function store(AdminRequest $request, Admin $admin)
     {
+        $admin->fill($request->all());
+        $admin->password = bcrypt($request->password);
+        $admin->save();
+        $admin->syncRoles($request->input('role'));
+
+        return redirect('/admin/user')->with('success', '添加成功');
     }
 
     /**
@@ -49,7 +56,7 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function edit()
+    public function edit(Admin $user)
     {
         return view('admin::edit');
     }
@@ -61,16 +68,30 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function update(Request $request)
+    public function update(AdminRequest $request, Admin $user)
     {
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+        }
+        $user->name = $request->name;
+        $user->save();
+        $user->syncRoles($request->input('role'));
+
+        return redirect('/admin/user')->with('success', '管理员更新成功');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 删除管理员
      *
-     * @return Response
+     * @param \Modules\Admin\Entities\Admin $user
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy()
+    public function destroy(Admin $user)
     {
+        $user->delete();
+
+        return redirect('/admin/user')->with('success', '删除成功');
     }
 }
