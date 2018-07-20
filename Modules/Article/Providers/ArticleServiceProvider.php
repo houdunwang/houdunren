@@ -4,6 +4,7 @@ namespace Modules\Article\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Article\Services\TagService;
 
 class ArticleServiceProvider extends ServiceProvider
 {
@@ -21,7 +22,7 @@ class ArticleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        app()->bind('tag',TagService::class);
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();

@@ -1,0 +1,15 @@
+* {
+  border-radius: 0 !important;
+}
+.recommend button {
+  border-radius: 0;
+}
+.list-group-item {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+}
+.hot .list-group-item {
+  border-radius: 0;
+}
+/*# sourceMappingURL=index.css.map */

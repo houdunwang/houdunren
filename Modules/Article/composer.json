@@ -10,10 +10,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Modules\\Article\\Providers\\ArticleServiceProvider"
+                "Modules\\Article\\Providers\\ArticleServiceProvider",
+                "Modules\\Article\\Providers\\TagServiceProvider"
             ],
             "aliases": {
-                
             }
         }
     },

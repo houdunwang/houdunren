@@ -28,7 +28,7 @@
     <nav class="navbar navbar-expand fixed-top be-top-header">
         <div class="container-fluid">
             <div class="be-navbar-header">
-                <a href="#" class="navbar-brand"></a>
+                <a href="/" class="navbar-brand" target="_blank"></a>
             </div>
             <div class="be-right-navbar" style="width: auto;order:2;">
                 <ul class="nav navbar-nav float-right be-user-nav">
@@ -343,7 +343,7 @@
         </div>
     </nav>
 </div>
-<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+{{--<link rel="stylesheet" href="{{ asset('css/app.css') }}">--}}
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{asset('plugin/menu.js')}}" type="text/javascript"></script>
 <script src="{{asset('theme/beagle/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js')}}" type="text/javascript"></script>
