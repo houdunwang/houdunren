@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        header('Access-Control-Allow-Origin:*');
+        //
     }
 
     /**
@@ -23,12 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->app->environment() !== 'production') {
-            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
-        }
-
-        if (config('app.debug')) {
-            $this->app->register('VIACreative\SudoSu\ServiceProvider');
-        }
+        //
     }
 }

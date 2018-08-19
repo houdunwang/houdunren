@@ -23,29 +23,13 @@
     19 => 'Illuminate\\Translation\\TranslationServiceProvider',
     20 => 'Illuminate\\Validation\\ValidationServiceProvider',
     21 => 'Illuminate\\View\\ViewServiceProvider',
-    22 => 'Barryvdh\\Debugbar\\ServiceProvider',
-    23 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
-    24 => 'Dingo\\Api\\Provider\\LaravelServiceProvider',
-    25 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-    26 => 'hisorange\\BrowserDetect\\ServiceProvider',
-    27 => '\\Houdunwang\\AutoCreate\\ServiceProvider',
-    28 => '\\Houdunwang\\Module\\LaravelServiceProvider',
-    29 => 'Houdunwang\\LaravelUpload\\ServiceProvider',
-    30 => 'Houdunwang\\LaravelView\\ServiceProvider',
-    31 => 'Jenssegers\\Agent\\AgentServiceProvider',
-    32 => 'Laravel\\Horizon\\HorizonServiceProvider',
-    33 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    34 => 'Collective\\Html\\HtmlServiceProvider',
-    35 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    36 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
-    37 => 'Spatie\\Permission\\PermissionServiceProvider',
-    38 => 'Jenssegers\\Agent\\AgentServiceProvider',
-    39 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
-    40 => 'Collective\\Html\\HtmlServiceProvider',
-    41 => 'App\\Providers\\AppServiceProvider',
-    42 => 'App\\Providers\\AuthServiceProvider',
-    43 => 'App\\Providers\\EventServiceProvider',
-    44 => 'App\\Providers\\RouteServiceProvider',
+    22 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+    23 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    24 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    25 => 'App\\Providers\\AppServiceProvider',
+    26 => 'App\\Providers\\AuthServiceProvider',
+    27 => 'App\\Providers\\EventServiceProvider',
+    28 => 'App\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -59,22 +43,11 @@
     7 => 'Illuminate\\Pagination\\PaginationServiceProvider',
     8 => 'Illuminate\\Session\\SessionServiceProvider',
     9 => 'Illuminate\\View\\ViewServiceProvider',
-    10 => 'Barryvdh\\Debugbar\\ServiceProvider',
-    11 => 'Dingo\\Api\\Provider\\LaravelServiceProvider',
-    12 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-    13 => '\\Houdunwang\\AutoCreate\\ServiceProvider',
-    14 => '\\Houdunwang\\Module\\LaravelServiceProvider',
-    15 => 'Houdunwang\\LaravelUpload\\ServiceProvider',
-    16 => 'Houdunwang\\LaravelView\\ServiceProvider',
-    17 => 'Jenssegers\\Agent\\AgentServiceProvider',
-    18 => 'Laravel\\Horizon\\HorizonServiceProvider',
-    19 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
-    20 => 'Spatie\\Permission\\PermissionServiceProvider',
-    21 => 'Jenssegers\\Agent\\AgentServiceProvider',
-    22 => 'App\\Providers\\AppServiceProvider',
-    23 => 'App\\Providers\\AuthServiceProvider',
-    24 => 'App\\Providers\\EventServiceProvider',
-    25 => 'App\\Providers\\RouteServiceProvider',
+    10 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+    11 => 'App\\Providers\\AppServiceProvider',
+    12 => 'App\\Providers\\AuthServiceProvider',
+    13 => 'App\\Providers\\EventServiceProvider',
+    14 => 'App\\Providers\\RouteServiceProvider',
   ),
   'deferred' => 
   array (
@@ -177,14 +150,7 @@
     'translation.loader' => 'Illuminate\\Translation\\TranslationServiceProvider',
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
-    'command.ide-helper.generate' => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
-    'command.ide-helper.models' => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
-    'browser-detect' => 'hisorange\\BrowserDetect\\ServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
-    'html' => 'Collective\\Html\\HtmlServiceProvider',
-    'form' => 'Collective\\Html\\HtmlServiceProvider',
-    'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
-    'Collective\\Html\\FormBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'NunoMaduro\\Collision\\Contracts\\Provider' => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
   ),
   'when' => 
@@ -225,16 +191,7 @@
     'Illuminate\\Validation\\ValidationServiceProvider' => 
     array (
     ),
-    'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider' => 
-    array (
-    ),
-    'hisorange\\BrowserDetect\\ServiceProvider' => 
-    array (
-    ),
     'Laravel\\Tinker\\TinkerServiceProvider' => 
-    array (
-    ),
-    'Collective\\Html\\HtmlServiceProvider' => 
     array (
     ),
     'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => 
