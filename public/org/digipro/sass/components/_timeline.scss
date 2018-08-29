@@ -1,0 +1,125 @@
+// this file contains the style for the timline component
+/*****************************
+	-- TIMELINE
+*****************************/
+@import "../common/theme";
+@import "../common/general";
+.timeline{
+  &:before{
+    top: 0;
+  }
+  &:before, &:after{
+    position: absolute;
+    content: '';
+    height: 18px;
+    width: 18px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    border-radius: 50%;
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    background: $scolor;
+    border: 4px solid #fff;
+  }
+  &:after{
+    background: $pcolor;
+    bottom: 0;
+  }
+
+  .happening{
+    &:before, &:after{
+      content: '';
+      display: table;
+      transition: $transition;
+      clear: both;
+    }
+    .happening--period{
+      width: 50%;
+      padding: 60px 54px 0 0;
+      float: left;
+      vertical-align: top;
+      text-align: right;
+      position: relative;
+      p{
+        color: #898f96;
+        font-size: 18px;
+        font-weight: 500;
+        transition: $transition;
+        margin-bottom: 0;
+      }
+      &:before{
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        background: #fff;
+        border-radius: 50%;
+        border: 3px solid #c4cdd8;
+        right: 0;
+        transition: $transition;
+        transform: translateX(50%);
+      }
+    }
+    .happening--detail{
+      width: 50%;
+      float: right;
+      padding: 60px  0 0 50px;
+      position: relative;
+      h4{
+        font-size: 24px;
+        color: #000;
+        margin-bottom: 20px;
+      }
+      p{
+        font-size: 16px;
+        line-height:30px;
+      }
+      &:before{
+        position: absolute;
+        content: '';
+        left: 0;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        background: #ebecf1;
+        z-index: -1;
+        transform: translateX(-50%)
+      }
+    }
+
+    &:nth-child(2n+2){
+      .happening--period{
+        float: right;
+        text-align: left;
+        padding-right: 0;
+        padding-left: 54px;
+        &:before{
+          left:0;
+          transform: translateX(-50%);
+        }
+      }
+
+      .happening--detail{
+        text-align: right;
+        padding:40px 50px 0 0;
+        &:before{
+          left: 100%;
+        }
+      }
+    }
+
+    &:hover{
+      .happening--period{
+        &:before{
+          background: $pcolor;
+          border-color: #fff;
+        }
+        p{
+          color: $pcolor;
+        }
+      }
+    }
+  }
+}

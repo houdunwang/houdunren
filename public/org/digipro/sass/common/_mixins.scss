@@ -1,0 +1,56 @@
+@import "theme";
+/*****************************
+	-- MIXINS
+*****************************/
+/* container sizes for various devices */
+$container-size: 1170px;
+
+@mixin vertically_middle{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: -3px;
+}
+@mixin cardShadow{
+  -webkit-box-shadow: 0 2px 4px transparentize(#6c6f73, .9);
+  -moz-box-shadow: 0 2px 4px transparentize(#6c6f73, .9);
+  box-shadow: 0 2px 4px transparentize(#6c6f73, .9);
+}
+
+@mixin cardify{
+  background: #fff;
+  border-radius: 4px;
+  //@include cardShadow;
+}
+
+@mixin rounded{
+  border-radius: 200px;
+}
+
+@mixin gradient{
+  background: linear-gradient(to left, $scolor, $pcolor);
+}
+// @param $parent is the parent of the element that will get focus on click
+@mixin focusOnClick($focusColor){
+  &:active{
+    background: darken($focusColor, 3%);
+  }
+}
+
+
+/* Custom scrollbar */
+  @mixin customScrollbar($bla){
+    .#{$bla}::-webkit-scrollbar-track{
+      background-color: transparent;
+    }
+    .#{$bla}::-webkit-scrollbar{
+      width: 6px;
+      background-color: transparent;
+    }
+    .#{$bla}::-webkit-scrollbar-thumb{
+      background-color: #e9eef2;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+    }
+  }
+

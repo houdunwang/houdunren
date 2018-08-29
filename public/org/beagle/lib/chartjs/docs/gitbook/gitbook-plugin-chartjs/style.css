@@ -1,0 +1,13 @@
+/*!
+ * Beagle v1.5.1
+ * https://foxythemes.net
+ *
+ * Copyright (c) 2018 Foxy Themes
+ */
+
+.chartjs-wrapper canvas {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

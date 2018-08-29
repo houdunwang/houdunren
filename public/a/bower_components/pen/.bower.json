@@ -1,0 +1,36 @@
+{
+  "name": "pen",
+  "homepage": "https://github.com/sofish/pen",
+  "description": "enjoy live editing(+markdown)",
+  "main": [
+    "src/pen.js",
+    "src/pen.css"
+  ],
+  "keywords": [
+    "editor",
+    "wysiwyg",
+    "markdown"
+  ],
+  "authors": [
+    "sofish"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "0.2.3",
+  "_release": "0.2.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.2.3",
+    "commit": "ce229431b7990f28cc8bb0ba89ff065afe9890da"
+  },
+  "_source": "https://github.com/sofish/pen.git",
+  "_target": "^0.2.3",
+  "_originalSource": "pen",
+  "_direct": true
+}

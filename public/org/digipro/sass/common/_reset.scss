@@ -1,0 +1,156 @@
+@import "theme";
+/* RESET CSS */
+/*****************************
+	-- RESET
+*****************************/
+body{
+  font-family: 'Rubik', sans-serif;
+  position: relative;
+  font-weight: 400;
+  font-size: 15px;
+}
+ul{
+  padding: 0;
+  margin: 0;
+}
+li{
+  list-style: none;
+}
+a:hover,a:focus{
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+a:focus{
+  outline: 0;
+}
+img{
+  max-width: 100%;
+}
+input[type=date],
+input[type=datetime-local],
+input[type=email],
+input[type=number],
+input[type=password],
+input[type=search-md],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=time],
+input[type=url],
+textarea,
+select{
+  box-sizing: border-box;
+  box-shadow: none;
+  outline: none;
+  width: 100%;
+  padding: 0 20px;
+}
+select.text_field{
+  height: 50px;
+}
+select.text_field{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+input{
+  line-height: 45px;
+  height: 45px;
+  border: 1px solid $borderColor;
+  border-radius: 2px;
+  color: #747b86;
+  font-size: 16px;
+  transition: 0.3s ease;
+  &:focus, &:active{
+      border:1px solid $pcolor;
+  }
+}
+label{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+  color: #000;
+  span{
+    font-weight: 400;
+    font-size: 15px;
+    color: #555;
+  }
+  sup{
+    color: $mcolor4;
+  }
+}
+select[multiple]{
+  height: 80px;
+}
+select:focus{
+  outline: 0;
+  border-color: $pcolor;
+}
+.select--field{
+  height: 55px;
+  border: 1px solid #dcdcdc;
+}
+.text_field {
+  line-height: 50px;
+  border: 1px solid $borderColor;
+  color: $text-color2;
+  font-weight: 300;
+}
+textarea.text_field{
+  line-height: 25px;
+  padding-top: 15px;
+  border: 1px solid $borderColor;
+  min-height: 200px;
+  resize: none;
+  color: $text-color2;
+}
+button{
+  margin: 0;
+  padding: 0;
+}
+button:focus{
+  outline: 0;
+}
+
+/* TYPOGRAPHY */
+p{
+  font-size: 16px;
+  line-height: 30px;
+  color: $text-color2;
+  font-weight: 300;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+  font-family: 'Rubik', sans-serif;;
+  margin: 0;
+  font-weight: 400;
+  padding: 0;
+  color: $title-color;
+}
+a{
+  color: $pcolor;
+}
+.form-group{
+  margin-bottom: 20px;
+  p{
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    color: #898f96;
+    span{
+      font-weight: 400;
+      color: #000;
+    }
+  }
+  p.label{
+    @extend label;
+    margin-top: 0;
+    clear: right;
+    padding: 0;
+  }
+}

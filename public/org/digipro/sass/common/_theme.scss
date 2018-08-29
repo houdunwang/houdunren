@@ -1,0 +1,63 @@
+//theme contains the css for colors that is spacific for this theme
+//any change on this file will cause chang of theme color
+/*****************************
+	-- THEME
+*****************************/
+//primary color
+$pcolor: #5867dd;
+
+//secondary color
+$scolor: #34bfa3;
+
+// multicolors for different multi color section and color diversity
+$mcolor1: #34bfa2;
+$mcolor2: #ffb822;
+$mcolor3: #36a3f7;
+$mcolor4: #f4516c;
+
+// text colors
+$title-color: #363940;
+$text-color: #555555;
+$text-color2: #898b96;
+
+// section background
+$section-bg: #eff1f5;
+
+// gradient
+//$gradient: linear-gradient(to left, $scolor 0%,  $pcolor 100%);
+@mixin gradient{
+  background-image: linear-gradient(to left, $scolor 0%,  $pcolor 100%);
+  /* Fallback (could use .jpg/.png alternatively) */
+  background-color: $scolor;
+
+  /* SVG fallback for IE 9 (could be data URI, or could use filter) */
+  background: $pcolor;
+
+  /* Safari 4, Chrome 1-9, iOS 3.2-4.3, Android 2.1-3.0 */
+  background-image:
+          -webkit-gradient(linear, left top, right top, from($scolor), to($pcolor));
+
+  /* Safari 5.1, iOS 5.0-6.1, Chrome 10-25, Android 4.0-4.3 */
+  background-image:
+          -webkit-linear-gradient(left, $scolor, $pcolor);
+
+  /* Firefox 3.6 - 15 */
+  background-image:
+          -moz-linear-gradient(left, $scolor, $pcolor);
+
+  /* Opera 11.1 - 12 */
+  background-image:
+          -o-linear-gradient(left, $scolor, $pcolor);
+
+  /* Opera 15+, Chrome 25+, IE 10+, Firefox 16+, Safari 6.1+, iOS 7+, Android 4.4+ */
+  background-image:
+          linear-gradient(to right, $scolor, $pcolor);
+}
+// border color
+$borderColor: #ebedf2;
+
+// sectionbg
+$bgcolor: #f1f2f7;
+$bgcolor2: #f6f7fb;
+$bgcolor3: #f0f1f5;
+$dark-bg: #2c333e;

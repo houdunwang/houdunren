@@ -1,0 +1,81 @@
+@import "../common/theme";
+@import "../common/general";
+/*****************************
+	START FEATURE AREA CSS
+*****************************/
+.feature_title{
+  border-bottom: 1px solid $borderColor;
+  padding-bottom: 20px;
+  margin-bottom: 65px;
+}
+/*--- feature 1 ---*/
+.feature{
+  text-align: center;
+  padding: 40px 30px;
+  .feature__title{
+    padding-top: 30px;
+    padding-bottom: 24px;
+  }
+  &:hover{
+    box-shadow: 0 2px 50px rgba(0,0,0,0.08);
+    transition: $transition;
+  }
+}
+
+/*--- feature 2 ---*/
+.feature2{
+  box-shadow: 0 2px 50px  transparentize(#000,.92);
+  position: relative;
+  margin-bottom: 30px;
+  background: #fff;
+  height: 360px;
+  display: table;
+  .feature2__count{
+    font-size: 48px;
+    position: absolute;
+    color: transparentize(#5c87f8, .8);
+    left: 18px;
+    top: 4px;
+  }
+  .feature2__content{
+    text-align: center;
+    padding: 50px 30px 48px;
+    span.lnr{
+      font-size: 60px;
+    }
+    h3{
+      padding: 38px 0 25px;
+    }
+    p{
+      margin: 0;
+    }
+  }
+}
+
+/*--- feature 2 ---*/
+.single_feature{
+  margin-bottom: 50px;
+  .feature__icon{
+    display: inline-block;
+    vertical-align: 60px;
+    span{
+      font-size: 48px;
+      color: $pcolor;
+    }
+  }
+  .feature__content{
+    display: inline-block;
+    width: calc(100% - 70px);
+    padding-left: 33px;
+    h3 {
+      font-size: 24px;
+      line-height: 40px;
+    }
+    p{
+      line-height: 30px;
+    }
+  }
+}
+/*****************************
+	END FEATURE AREA CSS
+*****************************/

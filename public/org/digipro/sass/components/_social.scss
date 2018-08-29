@@ -1,0 +1,66 @@
+// this file contains style for different social sharing option and icon style
+/*****************************
+	-- SOCIAL
+*****************************/
+.social{
+  display: inline-block;
+  ul li{
+    display: inline-block;
+    margin-bottom: 10px;
+    a {
+      display: inline-block;
+      span{
+        line-height: 40px;
+        width: 40px;
+        text-align: center;
+      }
+    }
+  }
+  ul li + li{
+    margin-left: 8px;
+  }
+}
+.social--color--filled{
+  ul li a{
+    color: #fff;
+  }
+  span{
+    border-radius: 50%;
+  }
+  span.fa-facebook{
+    background: #395799;
+  }
+  span.fa-twitter{
+    background: #19b2f5;
+  }
+  span.fa-google-plus{
+    background: #f05b44;
+  }
+  span.fa-pinterest{
+    background: #9c0c1c;
+  }
+  span.fa-linkedin{
+    background: #007bb5;
+  }
+  span.fa-dribbble{
+    background: #ea4c89;
+  }
+  span.fa-instagram{
+    background: #bc2a8d;
+  }
+  span.fa-vine{
+    background: #1ab7ea;
+  }
+  span.fa-flickr{
+    background: #ff0084;
+  }
+  span.fa-skype{
+    background: #1ab7ea;
+  }
+  span.fa-tumblr{
+    background: #2c4762;
+  }
+  span.fa-youtube{
+    background: #dc0101;
+  }
+}

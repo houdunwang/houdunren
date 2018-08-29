@@ -1,0 +1,49 @@
+// this files contains the styel for the alerts elements
+@import "../common/theme";
+.alert{
+    padding: 18px 30px;
+   border-radius: 3px;
+  font-size: 16px;
+  margin-bottom: 30px;
+  strong{
+      font-weight: 500;
+  }
+  .alert_icon{
+    margin-right: 15px;
+    font-size: 16px;
+  }
+    &.alert-default{
+      color: $pcolor;
+      background: transparentize($pcolor,.9);
+      .close{
+        color: $pcolor;
+      }
+    }
+  &.alert-success{
+    color: $mcolor1;
+    background: transparentize($mcolor1, .9);
+    border-color: transparentize($mcolor1, .9);
+  }
+  &.alert-info{
+    color: $mcolor3;
+    background: transparentize($mcolor3, .9);
+    border-color: transparentize($mcolor3, .9);
+  }
+  &.alert-warning{
+    color: $mcolor2;
+    background: transparentize($mcolor2, .9);
+    border-color: transparentize($mcolor2, .9);
+  }
+  &.alert-danger{
+    color: $mcolor4;
+    background: transparentize($mcolor4, .9);
+    border-color: transparentize($mcolor4, .9);
+  }
+  .close{
+    font-size: 16px;
+    opacity: .3;
+    &:hover{
+      opacity: .5;
+    }
+  }
+}

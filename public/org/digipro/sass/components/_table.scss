@@ -1,0 +1,114 @@
+// this file contains the style for table component
+/*****************************
+	-- TABLE
+*****************************/
+@import "../common/theme";
+.table{
+  thead{
+    >tr {
+      >th {
+        color: $title-color;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 25px 0 25px 28px;
+        border: 0;
+        &:last-child{
+            padding-right: 28px !important;
+        }
+      }
+    }
+  }
+
+  tbody{
+    >tr{
+      border-bottom: 1px solid $borderColor;
+      &:last-child{
+          border-bottom: 0;
+      }
+      >td{
+        padding: 20px 0 20px 28px;
+        font-size: 15px;
+        vertical-align: middle;
+        font-weight: 300;
+        color: #333;
+        &.author{
+          color: $title-color;
+          font-weight: 400;
+        }
+        &.detail a{
+          color: $pcolor;
+          font-weight: 400;
+        }
+        &.type span{
+          line-height: 24px;
+          border-radius: 3px;
+          display: inline-block;
+          padding: 0 15px;
+          color: #fff;
+          font-weight: 400;
+          font-size: 12px;
+          &.sale{
+            background: $mcolor1;
+          }
+          &.purchase{
+            background: $mcolor2;
+          }
+          &.credited{
+            background: $mcolor3;
+          }
+          &.withdrawal{
+            background: $mcolor4;
+          }
+        }
+        &.price{
+            font-weight: 400;
+        }
+        &.earning{
+          color: $pcolor;
+          &.subtract{
+            color: $scolor;
+          }
+          font-weight: 400;
+        }
+        &.action {
+          padding: 0;
+          text-align: center;
+          a {
+            line-height: 34px;
+            padding: 0 15px;
+            display: inline-block;
+            margin-left: -4px;
+            text-transform: capitalize;
+            font-size: 15px;
+            font-weight: 400;
+            border: 1px solid $pcolor;
+            border-radius: 3px;
+            &:hover {
+              background: $pcolor;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.withdraw__table{
+    .pending > span, .paid > span{
+      font-size: 15px;
+      line-height: 32px;
+      padding: 0 20px;
+      font-weight: 400;
+      display: inline-block;
+      border-radius: 3px;
+    }
+    .pending > span{
+      background: $pcolor;
+      color: #fff;
+    }
+    .paid > span{
+      background: $scolor;
+      color: #fff;
+    }
+  }
+}

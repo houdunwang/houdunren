@@ -1,0 +1,65 @@
+{
+  "_args": [
+    [
+      "@foxythemes/morris.js@0.5.1",
+      "/home/miguel/projects/beagle"
+    ]
+  ],
+  "_from": "@foxythemes/morris.js@0.5.1",
+  "_id": "@foxythemes/morris.js@0.5.1",
+  "_inBundle": false,
+  "_integrity": "sha512-pPoZz11YHzv7y94gpXpVAUpzwJ4CaP2z6y15OB1AoaQVlfdbfD6pSaSwoDJUSjFZZSGK4wieLU1/3TGdU0FdtA==",
+  "_location": "/@foxythemes/morris.js",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@foxythemes/morris.js@0.5.1",
+    "name": "@foxythemes/morris.js",
+    "escapedName": "@foxythemes%2fmorris.js",
+    "scope": "@foxythemes",
+    "rawSpec": "0.5.1",
+    "saveSpec": null,
+    "fetchSpec": "0.5.1"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@foxythemes/morris.js/-/morris.js-0.5.1.tgz",
+  "_spec": "0.5.1",
+  "_where": "/home/miguel/projects/beagle",
+  "author": {
+    "name": "Olly Smith",
+    "email": "olly@oesmith.co.uk"
+  },
+  "bugs": {
+    "url": "https://github.com/morrisjs/morris.js/issues"
+  },
+  "description": "Easy, pretty charts",
+  "devDependencies": {
+    "bower": "1.3.8",
+    "grunt": "~0.4.1",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-less": "~0.7.0",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-mocha": "~0.4.10",
+    "grunt-shell": "~0.5.0",
+    "matchdep": "~0.1.2"
+  },
+  "engines": {
+    "node": ">=0.8 <0.11"
+  },
+  "homepage": "http://morrisjs.github.com/morris.js",
+  "license": "BSD-2-Clause",
+  "name": "@foxythemes/morris.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/morrisjs/morris.js.git"
+  },
+  "scripts": {
+    "test": "grunt concat coffee mocha"
+  },
+  "version": "0.5.1"
+}

@@ -1,0 +1,80 @@
+// this file contains the style for datepicker component
+@import "../common/theme";
+
+/*****************************
+	--- DATE PICKER
+*****************************/
+div#ui-datepicker-div{
+  background: #fff;
+  box-shadow: 0 5px 40px transparentize(#52555a, .8);
+  .ui-datepicker-title{
+    font-size: 18px;
+    color: #fff;
+    font-weight: 500;
+  }
+  .ui-datepicker-header{
+    background: $pcolor;
+    color: #fff;
+    padding:6px 0;
+  }
+  .ui-datepicker-prev{
+    left: 10px;
+    &:before{
+      content: '\e875';
+    }
+  }
+  .ui-datepicker-next{
+    text-align: right;
+    right: 10px;
+    &:before{
+      content: "\e876";
+    }
+  }
+  .ui-datepicker-prev,
+  .ui-datepicker-next{
+    cursor: pointer;
+    top: 46%;
+    transform: translateY(-50%);
+    &.ui-datepicker-prev-hover, &.ui-datepicker-next-hover{
+      top: 46%;
+      transform: translateY(-50%);
+    }
+    &:before{
+      font-family: 'Linearicons-Free', sans-serif;
+      color: #fff;
+      line-height: 30px;
+    }
+  }
+
+  table{
+    margin: 0;
+  }
+  thead{
+    tr{
+      th{
+        span{
+          color: $text-color;
+        }
+      }
+    }
+  }
+  tbody{
+    tr{
+      border-top: 1px solid $borderColor;
+      td+td{
+        border-left: 1px solid $borderColor;
+      }
+      td{
+        a{
+          color: #54667a;
+          margin: 0;
+          text-align: center;
+          &:hover{
+            background: transparentize($mcolor3, .8);
+            color: $pcolor;
+          }
+        }
+      }
+    }
+  }
+}

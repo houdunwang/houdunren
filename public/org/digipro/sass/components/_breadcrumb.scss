@@ -1,0 +1,112 @@
+// Breadcrumb-area
+
+/*****************************
+	--- BREADCRUMB
+*****************************/
+.breadcrumb-area{
+  padding-top: 52px!important;
+  padding-bottom: 50px;
+  &:before{
+      position: absolute;
+      background: rgba(18,21,25,0.9);
+      content: "";
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+    .breadcrumb ul{
+        display: block;
+        width: 100%;
+    }
+  .breadcrumb ul li a{
+    line-height: initial;
+  }
+  .page-title{
+    color: #fff;
+    font-weight: 400;
+    font-size: 30px;
+  }
+  .breadcrumb{
+    padding-bottom: 17px;
+  }
+  &.breadcrumb--center{
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 27px;
+    .page_title{
+      padding-top: 30px;
+      padding-bottom: 47px;
+      h3{
+        color: #fff;
+        font-weight: 400;
+        font-size: 30px;
+        line-height: 50px;
+      }
+      p{
+        color: #f3f3f8;
+        font-size: 30px;
+        line-height: 50px;
+        font-weight: 300;
+      }
+      p.subtitle{
+        font-size: 20px;
+      }
+    }
+    .breadcrumb{
+      padding-bottom: 0;
+
+    }
+  }
+}
+.breadcrumb{
+  padding: 0;
+  background: none;
+  margin-bottom: 0;
+  ul li{
+    display: inline-block;
+    &:after{
+      content: '/';
+      color: #fff;
+      padding: 0 7px;
+    }
+    a{
+      font-size: 15px;
+      line-height: 70px;
+      color: #fff;
+    }
+    &:last-child{
+      &:after{
+        display: none;
+      }
+    }
+    &.active a{
+      color: #bfcad7;
+    }
+  }
+}
+
+.breadcrumb-area2{
+    form{
+        margin-top: 15px;
+        .form-group{
+            margin: 0;
+            position: relative;
+            input{
+                border-radius: 3px;
+            }
+            button{
+                position: absolute;
+                right: 0;
+                top: 0;
+                border-radius: 0 3px 3px 0;
+                height: 100%;
+                padding: 0 25px;
+                background: $pcolor;
+                color: #fff;
+                border: 0 none;
+                cursor: pointer;
+            }
+        }
+    }
+}

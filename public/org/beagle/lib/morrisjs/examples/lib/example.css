@@ -1,0 +1,20 @@
+/*!
+ * Beagle v1.5.1
+ * https://foxythemes.net
+ *
+ * Copyright (c) 2018 Foxy Themes
+ */
+
+body {
+  width: 800px;
+  margin: 0 auto;
+}
+#graph {
+  width: 800px;
+  height: 250px;
+  margin: 20px auto 0 auto;
+}
+pre {
+  height: 250px;
+  overflow: auto;
+}

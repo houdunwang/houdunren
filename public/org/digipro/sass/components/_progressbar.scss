@@ -1,0 +1,13 @@
+// this file contains the styles for the progressbar components
+/*****************************
+	-- PROGRESSBAR
+*****************************/
+.progress{
+  height: 10px;
+  background: #eff1f5;
+  box-shadow: none;
+  .progress-bar{
+    border-radius: 200px;
+    @include gradient;
+  }
+}

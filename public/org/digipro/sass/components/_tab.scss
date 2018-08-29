@@ -1,0 +1,147 @@
+// this file contains the necessary style fr tha tab element
+ul.nav-tabs {
+	border: 0;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	li {
+		flex: 1;
+		position: relative;
+		border-bottom: 1px solid $borderColor;
+		a {
+			color: $text-color2;
+			font-size: 16px;
+			text-transform: capitalize;
+			display: block;
+			margin-right: 0;
+			line-height: 70px;
+			border: none;
+			transition: 0.3s;
+			position: relative;
+			text-align: center;
+			font-weight: 300;
+			&:before {
+				content: "";
+				position: absolute;
+				height: 3px;
+				width: 90%;
+				background: $pcolor;
+				opacity: 0;
+				left: 5%;
+				transition: $transition;
+				visibility: hidden;
+				bottom: 0;
+			}
+			&.active {
+				color: $pcolor;
+				&:before {
+					opacity: 1;
+					visibility: visible;
+				}
+				border-bottom:0;
+			}
+			a,
+			a:focus,
+			a:active,
+			a:hover {
+				border: 0;
+				background: none;
+				color: $pcolor;
+			}
+			span {
+				&.icon {
+					display: inline-block;
+					padding-right: 10px;
+				}
+			}
+		}
+	}
+	&.nav--tabs2 {
+        display: flex;
+        justify-content: center;
+		margin-bottom: -4px;
+		li {
+            flex: none;
+			&::before {
+				bottom: 0;
+			}
+            border:none;
+            a{
+                padding: 0 30px;
+                font-weight: 400;
+                &:before{
+                    width: 100%;
+                    left: 0;
+                    bottom: 3px;
+                }
+            }
+
+		}
+	}
+}
+.tab {
+	.tab-content {
+		margin-top: 30px;
+	}
+}
+.tab2 {
+	padding: 0 30px 30px;
+	.item-navigation {
+		text-align: center;
+		border-bottom: 1px solid $borderColor;
+	}
+}
+.tab3 {
+	@extend .tab2;
+	.item-navigation {
+		text-align: left;
+	}
+	ul.nav-tabs li a {
+        padding: 0 50px;
+        span{
+            padding-right: 7px;
+        }
+	}
+}
+.tab4 {
+	padding: 30px;
+	overflow: hidden;
+	.item-navigation {
+		float: left;
+		width: 20%;
+		border-bottom: 0;
+	}
+	.tab-content {
+		width: 80%;
+		float: left;
+	}
+	ul.nav-tabs {
+        justify-content: flex-start;
+		li {
+			&:before {
+				height: 100%;
+				width: 3px;
+            }
+            a:before{
+                width: calc(100% - 60px);
+                left: 30px;
+            }
+            a span{
+                padding-right: 7px;
+            }
+		}
+	}
+}
+.items-tab {
+	padding: 0 30px;
+}
+.tab-content {
+    margin-bottom: 0;
+    .tab-pane {
+        padding: 0 0 30px 0;
+        .about_author.border-none{
+            padding: 0 30px;
+            margin-bottom: 20px;
+        }
+    }
+}

@@ -17,6 +17,9 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\EventListener',
         ],
     ];
+    protected $subscribe = [
+        \Houdunwang\LaravelUpload\Listeners\UploadSubscriber::class,
+    ];
 
     /**
      * Register any events for your application.

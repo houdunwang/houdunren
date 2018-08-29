@@ -1,0 +1,65 @@
+.content-block-page [class^="content_block"]{
+  margin-bottom: 50px!important;
+}
+/***************************************
+   START ABOUT AND MISSION AREA
+****************************************/
+  .content_block1{
+    display: table;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+    padding: 100px 0;
+    .content_area{
+      .content_area--title{
+        font-size: 36px;
+        line-height: 46px;
+        margin-bottom: 65px;
+        color: #000;
+        .highlight{
+          color: $pcolor;
+        }
+      }
+    }
+    .content_image{
+      position: absolute;
+      right: 0;
+      height: 100%;
+      width: 50%;
+      top: 0;
+    }
+  }
+
+  .content_block2{
+    background: $bgcolor2;
+    padding: 100px 0;
+    margin-bottom: 65px;
+    @extend .content_block1;
+    .content_area2{
+      @extend .content_area;
+      .content_area2--title{
+        @extend .content_area--title;
+      }
+    }
+    .content_image2{
+      @extend .content_image;
+      left:0;
+    }
+  }
+  .content_block3{
+    margin-bottom: 65px;
+    padding: 100px 0;
+    h2{
+      font-size: 30px;
+      line-height: 46px;
+      color: #000000;
+      padding-bottom: 30px;
+    }
+    p{
+      margin-bottom: 20px;
+    }
+  }
+
+/***************************************
+   END ABOUT AND MISSION AREA
+****************************************/

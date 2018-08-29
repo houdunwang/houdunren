@@ -1,0 +1,45 @@
+//this scss file contains the necessary style for menu style 1, changing this file will result on change of menu containing modifier class .menu--stye1
+
+/*****************************
+	--- MENU
+*****************************/
+.menu--style1{
+  .top-menu-area{
+    background: #fff;
+  }
+  .mainmenu,.mainmenu__menu{
+    background: $pcolor;
+  }
+  .mainmenu__menu ul li {
+     &:hover{
+      a{
+        color: #333;
+      }
+    }
+    a{
+      color: #fff;
+    }
+  }
+  .searc-wrap input{
+    background: transparentize(#fff,.8);
+    border: 0;
+    color: #ffffff;
+    font-weight: 400;
+  }
+  .searc-wrap input::-webkit-input-placeholder {
+    color: #fff;
+  }
+  .searc-wrap input::-moz-placeholder{
+    color: #fff;
+  }
+  .searc-wrap input:-ms-input-placeholder{
+    color: #fff;
+  }
+  .searc-wrap .search-wrap__btn{
+    background: #fff;
+    color: $pcolor;
+  }
+}
+.shortcode_wrapper+.shortcode_wrapper{
+    margin-top: 100px;
+}

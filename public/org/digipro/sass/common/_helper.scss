@@ -1,0 +1,87 @@
+/* HELPER CLASSES: this file contains classes for quick uses */
+/*****************************
+	-- HELPER
+*****************************/
+.no-padding{
+  padding: 0 !important;
+}
+.no-margin{
+  margin: 0;
+}
+.padding-left0{
+  padding-left: 0;
+}
+.r-padding{
+    padding-right: 100px;
+}
+.l-padding{
+    padding-left: 100px;
+}
+.ltr{
+  text-align: right;
+}
+.rtl{
+  text-align: left;
+}
+.br_0{
+  border-right: none!important;
+}
+.bt1{
+  border-top: 1px solid #e4e4e4;
+}
+.btop{
+    border-top: 1px solid $borderColor !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+}
+.bbottom{
+    border-top: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid $borderColor !important;
+    border-left: 0 !important;
+}
+.v_middle{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: -3px;
+  float: none;
+}
+.inline{
+  display: inline-block;
+}
+.text--white{
+  color: #fff;
+}
+.rounded{
+  border-radius: 200px;
+}
+
+// border
+.border-right1{
+  border-right: 1px solid $borderColor;
+}
+
+.border-default{
+    border: 1px solid $borderColor;
+}
+
+.border-none{
+    border: 0 none !important;
+}
+
+.big-border{
+    border: 3px solid $borderColor;
+}
+
+.bold{
+  font-weight: 500;
+}
+
+
+
+/* verticaly middle */
+.ver_mid{
+  display: table-cell;
+  vertical-align: middle;
+}
