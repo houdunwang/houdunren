@@ -22,20 +22,26 @@
             <p class="text-muted text-center mb-5">
                 登录帐号社区参与交流与学习
             </p>
-            <form action="{{route('user.login')}}" method="post">
+            <form action="{{route('login')}}" method="post">
                 @csrf
                 <div class="form-group">
                     <label>帐号</label>
-                    <input type="text" name="email" class="form-control" placeholder="请输入邮箱或手机号">
+                    <input type="text" name="account" value="{{old('account')}}" class="form-control" placeholder="请输入邮箱或手机号">
                 </div>
                 <div class="form-group">
                     <label>密码</label>
                     <input type="password" name="password" class="form-control" placeholder="输入登录密码">
                 </div>
-                <button class="btn btn-lg btn-block btn-primary mb-3">登录</button>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" name="remember" id="remember" value="1">
+                    <label class="form-check-label" for="remember">记住我</label>
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-lg btn-block btn-primary mb-3">登录</button>
+                </div>
                 <div class="text-center">
                     <small class="text-muted text-center">
-                        没有帐号? <a href="{{route('user.register')}}">注册</a>. <a href="">记住密码</a>
+                        没有帐号? <a href="{{route('user.create')}}">注册</a>. <a href="">忘记密码</a>
                         . <a href="/">返回首页</a>
                     </small>
                 </div>
@@ -59,5 +65,6 @@
 <script src="{{asset('org/Dashkit-1.1.2')}}/libs/select2/dist/js/select2.min.js"></script>
 <script src="{{asset('org/Dashkit-1.1.2')}}/js/theme.min.js"></script>
 @include('layouts._hdjs')
+@include('layouts._message')
 </body>
 </html>

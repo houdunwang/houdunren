@@ -1,23 +1,27 @@
 <?php
+//预览邮件
+Route::get('/mailable', function () {
+    return new App\Mail\RegisterMail('2920');
+});
+
 //网站首页
 Route::get('/', 'Video\HomeController@index')->name('home');
 Route::get('/home', 'Video\HomeController@index')->name('home');
 
-//用户登录注册
-Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
-    Route::get('login', 'UserController@login')->name('login');
-    Route::post('login', 'UserController@store')->name('login');
-    Route::get('register', 'UserController@register')->name('register');
-    Route::post('register', 'UserController@create')->name('register');
-    Route::get('logout', 'UserController@logout')->name('logout');
-});
+//登录退出
+Route::get('login', 'LoginController@login')->name('login');
+Route::post('login', 'LoginController@store')->name('login');
+Route::get('logout', 'LoginController@logout')->name('logout');
+
+//用户管理
+Route::resource('user', 'UserController');
 
 //工具控制器
 Route::group(['prefix' => 'util', 'as' => 'util.', 'namespace' => 'Util'], function () {
     Route::post('upload/upload', 'UploadController@upload')->name('upload.upload');
     Route::any('upload/lists', 'UploadController@lists')->name('upload.lists');
     //发送验证码
-    Route::post('send', 'CodeController@send')->name('code.send');
+    Route::any('code/send', 'CodeController@send')->name('code.send');
 });
 
 //文章系统

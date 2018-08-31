@@ -54,11 +54,11 @@
                                     </div>
                                     <div class="col ml--2">
                                         <h4 class="card-title mb-1 name">
-                                            <a href="https://laravel-china.org/users/87">
+                                            <a href="https://#/users/87">
                                                 向军大叔
                                             </a>
                                             赞了话题
-                                            <a href="https://laravel-china.org/topics/15680/laravel-55-a-laravel-package-laravelfyvalidator-enhancement-that-saves-your-code" title="[< Laravel 5.5] 一个帮你省代码的 Laravel 包 `laravelfy/validator-enhancement`">
+                                            <a href="https://#/topics/15680/laravel-55-a-laravel-package-laravelfyvalidator-enhancement-that-saves-your-code" title="[< Laravel 5.5] 一个帮你省代码的 Laravel 包 `laravelfy/validator-enhancement`">
                                                 一个帮你省代码的 Laravel 包 laravelfy/validator-enhancement
                                             </a>
                                         </h4>
@@ -81,11 +81,11 @@
                                     </div>
                                     <div class="col ml--2">
                                         <h4 class="card-title mb-1 name">
-                                            <a href="https://laravel-china.org/users/87">
+                                            <a href="https://#/users/87">
                                                 向军大叔
                                             </a>
                                             赞了话题
-                                            <a href="https://laravel-china.org/topics/15680/laravel-55-a-laravel-package-laravelfyvalidator-enhancement-that-saves-your-code" title="[< Laravel 5.5] 一个帮你省代码的 Laravel 包 `laravelfy/validator-enhancement`">
+                                            <a href="https://#/topics/15680/laravel-55-a-laravel-package-laravelfyvalidator-enhancement-that-saves-your-code" title="[< Laravel 5.5] 一个帮你省代码的 Laravel 包 `laravelfy/validator-enhancement`">
                                                 一个帮你省代码的 Laravel 包 laravelfy/validator-enhancement
                                             </a>
                                         </h4>

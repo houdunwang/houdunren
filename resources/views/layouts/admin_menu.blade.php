@@ -25,6 +25,9 @@
             <div class="collapse {{routePrefixCheck('admin')?'show':''}}" id="sidebarPages" style="">
                 <ul class="nav nav-sm flex-column">
                     <li class="nav-item ">
+                        <a href="{{route('admin.config.edit',['name'=>'base'])}}" class="nav-link">
+                            基本配置
+                        </a>
                         <a href="{{route('admin.config.edit',['name'=>'site'])}}" class="nav-link">
                             网站信息
                         </a>
@@ -132,7 +135,7 @@
             <div class="dropdown-menu" aria-labelledby="sidebarIconCopy">
                 <a href="profile-posts.html" class="dropdown-item">帐号设置</a>
                 <hr class="dropdown-divider">
-                <a href="{{route('user.logout')}}" class="dropdown-item">退出登录</a>
+                <a href="{{route('logout')}}" class="dropdown-item">退出登录</a>
             </div>
         </div>
         <a href="#sidebarModalSearch" class="text-muted" data-toggle="modal">

@@ -21,37 +21,37 @@
             </h1>
             <!-- Subheading -->
             <p class="text-muted text-center mb-5">
-                注册帐号社区参与交流与学习
+                注册帐号社区参与交流与学习 @csrf
             </p>
-            <form action="{{route('user.register')}}" method="post">
+            <form action="{{route('user.store')}}" method="post">
                 @csrf
                 <div class="form-group">
                     <label>昵称</label>
-                    <input type="text" class="form-control" placeholder="个性昵称">
+                    <input type="text" name="name" class="form-control" placeholder="个性昵称" value="{{old('name')}}">
                 </div>
                 <div class="form-group">
                     <label>帐号</label>
-                    <input type="text" name="account" class="form-control" placeholder="请输入邮箱或手机号">
+                    <input type="text" name="account" class="form-control" placeholder="请输入邮箱或手机号" value="2300071698@qq.com"  value="{{old('account')}}">
                 </div>
                 <div class="form-group">
                     <label>密码</label>
-                    <input type="password" name="password" class="form-control" placeholder="输入登录密码">
+                    <input type="password" name="password" class="form-control" placeholder="输入登录密码"  value="{{old('password')}}">
                 </div>
                 <div class="form-group">
                     <label>确认密码</label>
-                    <input type="password" name="password_confirmation" class="form-control" placeholder="输入登录密码">
+                    <input type="password" name="password_confirmation" class="form-control" placeholder="输入登录密码" value="{{old('password_confirmation')}}">
                 </div>
 
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="输入验证码" name="code">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="bt">发送验证码</button>
+                        <button class="btn btn-outline-secondary" type="button" value="{{old('code')}}" id="bt" value="{{old('code')}}">发送验证码</button>
                     </div>
                 </div>
                 <button class="btn btn-lg btn-block btn-primary mb-3">注册</button>
                 <div class="text-center">
                     <small class="text-muted text-center">
-                        已有帐号? <a href="{{route('user.login')}}">登录</a>. <a href="">记住密码</a>
+                        已有帐号? <a href="{{route('login')}}">登录</a>. <a href="">忘记密码</a>
                         . <a href="/">返回首页</a>
                     </small>
                 </div>
@@ -85,8 +85,10 @@
             url: '{{route('util.code.send')}}',
             //验证码等待发送时间
             timeout: 10,
+            //POST表单数据
+            data: {"_token": "{{ csrf_token() }}"},
             //表单，手机号或邮箱的INPUT表单
-            input: '[name="code"]'
+            input: '[name="account"]'
         };
         hdjs.validCode(option);
     })

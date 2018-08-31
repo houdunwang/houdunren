@@ -109,15 +109,15 @@
                             <a href="{{route('admin.index')}}" class="dropdown-item">后台管理</a>
                         @endif
                         <hr class="dropdown-divider">
-                        <a href="{{route('user.logout')}}" class="dropdown-item">退出</a>
+                        <a href="{{route('logout')}}" class="dropdown-item">退出</a>
                     </div>
                 </div>
             @endauth
             @guest
-                <a href="{{route('user.login')}}" class="btn btn-white btn-sm mr-3">
+                <a href="{{route('login')}}" class="btn btn-white btn-sm mr-3">
                     <span class="fe fe-log-in mr-1"></span> 登录
                 </a>
-                <a href="{{route('user.register')}}" class="btn btn-white btn-sm">
+                <a href="{{route('user.create')}}" class="btn btn-white btn-sm">
                     <span class="fe fe-user-plus mr-1"></span> 注册
                 </a>
             @endguest

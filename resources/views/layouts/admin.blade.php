@@ -21,26 +21,19 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
-
                             <!-- Title -->
                             <h4 class="card-header-title" id="exampleModalCenterTitle">
                                 Add a member
                             </h4>
-
                         </div>
                         <div class="col-auto">
-
-                            <!-- Close -->
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-
                         </div>
-                    </div> <!-- / .row -->
+                    </div>
                 </div>
                 <div class="card-header">
-
-                    <!-- Form -->
                     <form>
                         <div class="input-group input-group-flush input-group-merge">
                             <input type="search" class="form-control form-control-prepended search" placeholder="搜索...">
@@ -51,160 +44,105 @@
                             </div>
                         </div>
                     </form>
-
                 </div>
                 <div class="card-body">
-
-                    <!-- List group -->
                     <ul class="list-group list-group-flush list my--3">
                         <li class="list-group-item px-0">
-
                             <div class="row align-items-center">
                                 <div class="col-auto">
-
-                                    <!-- Avatar -->
                                     <a href="profile-posts.html" class="avatar">
                                         <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-5.jpg" alt="..." class="avatar-img rounded-circle">
                                     </a>
-
                                 </div>
                                 <div class="col ml--2">
-
-                                    <!-- Title -->
                                     <h4 class="mb-1 name">
                                         <a href="profile-posts.html">Miyah Myles</a>
                                     </h4>
-
-                                    <!-- Time -->
                                     <p class="small mb-0">
                                         <span class="text-success">●</span> Online
                                     </p>
-
                                 </div>
                                 <div class="col-auto">
-
-                                    <!-- Button -->
                                     <a href="#!" class="btn btn-sm btn-white">
                                         Add
                                     </a>
-
                                 </div>
-                            </div> <!-- / .row -->
-
+                            </div>
                         </li>
                         <li class="list-group-item px-0">
-
                             <div class="row align-items-center">
                                 <div class="col-auto">
-
-                                    <!-- Avatar -->
                                     <a href="profile-posts.html" class="avatar">
                                         <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-6.jpg" alt="..." class="avatar-img rounded-circle">
                                     </a>
-
                                 </div>
                                 <div class="col ml--2">
-
-                                    <!-- Title -->
                                     <h4 class="mb-1 name">
                                         <a href="profile-posts.html">Ryu Duke</a>
                                     </h4>
-
-                                    <!-- Time -->
                                     <p class="small mb-0">
                                         <span class="text-success">●</span> Online
                                     </p>
-
                                 </div>
                                 <div class="col-auto">
-
-                                    <!-- Button -->
                                     <a href="#!" class="btn btn-sm btn-white">
                                         Add
                                     </a>
-
                                 </div>
-                            </div> <!-- / .row -->
-
+                            </div>
                         </li>
                         <li class="list-group-item px-0">
-
                             <div class="row align-items-center">
                                 <div class="col-auto">
-
-                                    <!-- Avatar -->
                                     <a href="profile-posts.html" class="avatar">
                                         <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-7.jpg" alt="..." class="avatar-img rounded-circle">
                                     </a>
-
                                 </div>
                                 <div class="col ml--2">
-
-                                    <!-- Title -->
                                     <h4 class="mb-1 name">
                                         <a href="profile-posts.html">Glen Rouse</a>
                                     </h4>
-
                                     <!-- Time -->
                                     <p class="small mb-0">
                                         <span class="text-warning">●</span> Busy
                                     </p>
-
                                 </div>
                                 <div class="col-auto">
-
                                     <!-- Button -->
                                     <a href="#!" class="btn btn-sm btn-white">
                                         Add
                                     </a>
-
                                 </div>
-                            </div> <!-- / .row -->
-
+                            </div>
                         </li>
                         <li class="list-group-item px-0">
-
                             <div class="row align-items-center">
                                 <div class="col-auto">
-
-                                    <!-- Avatar -->
                                     <a href="profile-posts.html" class="avatar">
                                         <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-8.jpg" alt="..." class="avatar-img rounded-circle">
                                     </a>
-
                                 </div>
                                 <div class="col ml--2">
-
-                                    <!-- Title -->
                                     <h4 class="mb-1 name">
                                         <a href="profile-posts.html">Grace Gross</a>
                                     </h4>
-
-                                    <!-- Time -->
                                     <p class="small mb-0">
                                         <span class="text-danger">●</span> Offline
                                     </p>
-
                                 </div>
                                 <div class="col-auto">
-
-                                    <!-- Button -->
                                     <a href="#!" class="btn btn-sm btn-white">
                                         Add
                                     </a>
-
                                 </div>
-                            </div> <!-- / .row -->
-
+                            </div>
                         </li>
                     </ul>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <!-- Modal: Search -->
 <div class="modal fade" id="sidebarModalSearch" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical" role="document">
@@ -229,36 +167,29 @@
                         <a href="profile-posts.html" class="list-group-item px-0">
                             <div class="row align-items-center">
                                 <div class="col-auto">
-
                                     <!-- Avatar -->
                                     <div class="avatar">
                                         <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-2.jpg" alt="..." class="avatar-img rounded-circle">
                                     </div>
                                 </div>
                                 <div class="col ml--2">
-
                                     <!-- Title -->
                                     <h4 class="text-body mb-1 name">
                                         Ab Hadley
                                     </h4>
-
                                     <!-- Status -->
                                     <p class="text-body small mb-0">
                                         <span class="text-danger">●</span> Offline
                                     </p>
-
                                 </div>
-                            </div> <!-- / .row -->
-
+                            </div>
                         </a>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-
 <!-- Modal: Activity -->
 <div class="modal fade" id="sidebarModalActivity" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-vertical" role="document">
@@ -382,8 +313,8 @@
 <script>
     require(['jquery', 'bootstrap'], function ($) {
         require([
-            "{{asset('org/Dashkit-1.1.2')}}/libs/list.js/dist/list.min.js",
-            "{{asset('org/Dashkit-1.1.2')}}/js/theme.min.js"
+{{--            "{{asset('org/Dashkit-1.1.2')}}/libs/list.js/dist/list.min.js",--}}
+            {{--"{{asset('org/Dashkit-1.1.2')}}/js/theme.min.js"--}}
         ]);
     })
 </script>

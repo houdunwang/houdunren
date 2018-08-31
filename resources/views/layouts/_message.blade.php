@@ -26,7 +26,7 @@
     <script>
         require(['hdjs'], function (hdjs) {
             hdjs.swal({
-                text: "@foreach($errors->all() as $k=>$error) {{$k+1}}. {{$error}} \n @endforeach",
+                text: "@foreach($errors->all() as $k=>$error)  {{$error}} \n @endforeach",
                 button:false,
                 icon:'warning'
             });

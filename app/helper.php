@@ -22,3 +22,17 @@ function hd_config($path)
     $config = \App\Models\Config::where('name', $name)->value('data');
     return array_get($config, implode('.', $info));
 }
+
+/**
+ * 生成随机数值
+ * @param $num
+ * @return string
+ */
+function hd_random($num)
+{
+    $str = '';
+    for ($i = 0; $i < $num; $i++) {
+        $str .= substr(mt_rand(1, 999), 0, 1);
+    }
+    return $str;
+}
