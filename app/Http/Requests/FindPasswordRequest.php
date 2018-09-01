@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class FindPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +24,8 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'     => 'sometimes|required|unique:users',
             'password' => 'required|min:5|confirmed',
             'code'     => [
-                'sometimes',
                 'required',
                 function ($attribute, $value, $fail) {
                     if ($value != session('validate_code.code')) {
@@ -40,15 +37,9 @@ class UserRequest extends FormRequest
                 'required',
                 function ($attribute, $value, $fail) {
                     if (filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                        if (User::where('email', $value)->first()) {
-                            return $fail('邮箱已经存在');
-                        }
                         return true;
                     }
                     if (preg_match('/^\d+$/', $value)) {
-                        if (User::where('mobile', $value)->first()) {
-                            return $fail('手机号已经存在');
-                        }
                         return true;
                     }
                     return $fail('帐号必须是邮箱或手机号');
@@ -66,5 +57,4 @@ class UserRequest extends FormRequest
             'account.required'  => '帐号 不能为空',
         ];
     }
-
 }

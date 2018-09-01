@@ -7,7 +7,7 @@
         </button>
 
         <!-- Brand -->
-        <a class="navbar-brand mr-auto" href="index.html">
+        <a class="navbar-brand mr-auto" href="/">
             <img src="/images/logo.png" alt="..." class="navbar-brand-img">
         </a>
 
@@ -132,11 +132,7 @@
 
             <!-- Navigation -->
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item mr-4">
-                    <a class="nav-link" href="index.html">
-                        首页
-                    </a>
-                </li>
+
                 <li class="nav-item dropdown  mr-3">
                     <a class="nav-link dropdown-toggle" href="#!" id="topnavPages" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         社区
@@ -172,7 +168,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="topnavLayouts">
                         <li>
-                            <a class="dropdown-item" href="index.html">
+                            <a class="dropdown-item" href="/">
                                 系统学习
                             </a>
                         </li>

@@ -21,8 +21,8 @@
                         <textarea class="form-control" rows="3" name="description">{{$config['data']['description']??'后盾人专注PHP与WEB开发实战'}}</textarea>
                     </div>
                     <div class="form-group">
-                        <label class="mb-1">备案号</label>
-                        <input type="text" class="form-control" name="icp" value="{{$config['data']['icp']??'京ICP备'}}">
+                        <label class="mb-1">底部版权信息</label>
+                        <input type="text" class="form-control" name="copyright" value="{{$config['data']['copyright']??'Copyright © 2010-2017 houdunren.com All Rights Reserved 京ICP备12048441号-322'}}">
                     </div>
                     <div class="form-group">
                         <label class="mb-1">联系电话</label>

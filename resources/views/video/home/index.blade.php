@@ -1,6 +1,5 @@
 @extends('video.layouts.master')
 @section('content')
-
     <div class="container pt-3">
         <div class="row">
             <div class="col-12 col-xl-8">
@@ -8,21 +7,15 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <!-- Title -->
                                 <h4 class="card-header-title">
                                     动态
                                 </h4>
                             </div>
                             <div class="col-auto">
-
-                                <!-- Dropdown -->
                                 <div class="dropdown">
-
-                                    <!-- Toggle -->
                                     <a href="#!" class="small text-muted dropdown-toggle" data-toggle="dropdown">
                                         筛选
                                     </a>
-                                    <!-- Menu -->
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item sort" data-sort="name" href="#!">
                                             全部
@@ -34,16 +27,13 @@
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <!-- Button -->
                                 <a href="#!" class="btn btn-sm btn-primary">
                                     发表
                                 </a>
-
                             </div>
-                        </div> <!-- / .row -->
+                        </div>
                     </div>
                     <div class="card-body">
-                        <!-- List -->
                         <ul class="list-group list-group-lg list-group-flush list my--4">
                             <li class="list-group-item px-0">
                                 <div class="row">
@@ -68,9 +58,8 @@
                                         <p class="card-text small text-muted mb-1">
                                             dingo的实现是通过对version进行判断然后走不同的代码么？
                                         </p>
-
                                     </div>
-                                </div> <!-- / .row -->
+                                </div>
                             </li>
                             <li class="list-group-item px-0">
                                 <div class="row ">
@@ -105,15 +94,12 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-                                </div> <!-- / .row -->
+                                </div>
                             </li>
                         </ul>
                     </div>
-
                 </div>
-
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         <li class="page-item"><a class="page-link" href="#!">上一页</a></li>
@@ -147,7 +133,6 @@
                         <hr>
                         <div class="row align-items-center">
                             <div class="col">
-                                <!-- Title -->
                                 <h5 class="mb-0">
                                     <a href="">新手帮助</a>
                                 </h5>
@@ -157,7 +142,7 @@
                                     10/24/18
                                 </time>
                             </div>
-                        </div> <!-- / .row -->
+                        </div>
                     </div>
                 </div>
             </div>

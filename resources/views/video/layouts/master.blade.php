@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/flatpickr/dist/flatpickr.min.css">
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/css/theme.min.css">
-    <title>Dashkit</title>
+    <title>{{hd_config('site.webname')}}</title>
 </head>
 <body>
 @include('video.layouts._header')

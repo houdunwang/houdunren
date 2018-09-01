@@ -12,6 +12,11 @@ use App\Models\Config;
 
 class ConfigServer
 {
+    public function init()
+    {
+        
+    }
+
     public function get($name)
     {
         return Config::firstOrNew(['name' => $name]);

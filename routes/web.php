@@ -12,6 +12,8 @@ Route::get('/home', 'Video\HomeController@index')->name('home');
 Route::get('login', 'LoginController@login')->name('login');
 Route::post('login', 'LoginController@store')->name('login');
 Route::get('logout', 'LoginController@logout')->name('logout');
+Route::get('findPassword', 'LoginController@findPassword')->name('findPassword');
+Route::post('changePassword', 'LoginController@changePassword')->name('changePassword');
 
 //用户管理
 Route::resource('user', 'UserController');
@@ -30,7 +32,7 @@ Route::group(['namespace' => 'Article', 'prefix' => 'article', 'middleware' => '
 });
 
 //后台管理
-Route::group(['middleware' => [], 'as' => 'admin.', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['auth.admin'], 'as' => 'admin.', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::get('/', 'HomeController@index')->name('index');
     //配置管理
     Route::get('config/{name}/edit', 'ConfigController@edit')->name('config.edit');
