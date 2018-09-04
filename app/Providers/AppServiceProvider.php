@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
 
     protected function loadConfig()
     {
+        //阿里云
         Aliyun::config([
             'regionId'  => hd_config('aliyun.regionId'),
             'accessId'  => hd_config('aliyun.accessId'),

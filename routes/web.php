@@ -1,9 +1,4 @@
 <?php
-//预览邮件
-Route::get('/mailable', function () {
-    return new App\Mail\RegisterMail('2920');
-});
-
 //网站首页
 Route::get('/', 'Video\HomeController@index')->name('home');
 Route::get('/home', 'Video\HomeController@index')->name('home');

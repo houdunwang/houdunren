@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FindPasswordRequest;
-use App\Http\Requests\UserRequest;
 use App\User;
 use Illuminate\Http\Request;
 

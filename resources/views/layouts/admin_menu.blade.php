@@ -62,6 +62,23 @@
             </div>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="#edu" data-toggle="collapse" role="button" aria-controls="sidebarPages">
+                <i class="fe fe-book-open"></i> 在线教育
+            </a>
+            <div class="collapse " id="edu" style="">
+                <ul class="nav nav-sm flex-column">
+                    <li class="nav-item">
+                        <a href="feed.html" class="nav-link ">
+                            栏目管理
+                        </a>
+                        <a href="feed.html" class="nav-link ">
+                            文章列表
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#users" data-toggle="collapse" role="button" aria-controls="sidebarPages">
                 <i class="fe fe fe-user"></i> 会员粉丝
             </a>

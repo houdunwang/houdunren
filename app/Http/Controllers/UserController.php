@@ -50,8 +50,10 @@ class UserController extends Controller
         $data = $request->all();
         if (filter_var($request['account'], FILTER_VALIDATE_EMAIL)) {
             $data['email'] = $request['account'];
+            $data['email_valid'] = true;
         } else {
             $data['mobile'] = $request['account'];
+            $data['mobile_valid'] = true;
         }
         $data['password'] = bcrypt($request['password']);
         if (User::create($data)) {
