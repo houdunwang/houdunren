@@ -7,7 +7,7 @@
  */
 function routePrefixCheck($name)
 {
-    return \Route::current()->getPrefix() == '/admin';
+    return \Route::current()->getPrefix() == '/'.$name;
 }
 
 /**

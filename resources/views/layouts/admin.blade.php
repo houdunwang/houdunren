@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/css/theme.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{hd_config('site.webname')}}</title>
+    @include('layouts._hdjs')
 </head>
 <body>
 <div class="modal fade" id="modalMembers" tabindex="-1" role="dialog" aria-hidden="true">
@@ -308,7 +309,7 @@
 {{--<script src="{{asset('org/Dashkit-1.1.2')}}/libs/select2/dist/js/select2.min.js"></script>--}}
 <!-- Theme JS -->
 {{--<script src="{{asset('org/Dashkit-1.1.2')}}/js/theme.min.js"></script>--}}
-@include('layouts._hdjs')
+
 @include('layouts._message')
 <script>
     require(['jquery', 'bootstrap'], function ($) {

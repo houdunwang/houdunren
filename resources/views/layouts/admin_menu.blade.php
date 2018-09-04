@@ -13,16 +13,16 @@
     </form>
     <!-- Navigation -->
     <ul class="navbar-nav">
-        <li class="nav-item">
+        <li class="nav-item top">
             <a class="nav-link active" href="/" target="_blank">
                 <i class="fe fe-home"></i> 网站首页
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#sidebarPages" data-toggle="collapse" role="button" aria-controls="sidebarPages">
+        <li class="nav-item top">
+            <a class="nav-link" href="#admin" data-toggle="collapse" role="button" aria-controls="sidebarPages">
                 <i class="fe fe-grid"></i> 系统管理
             </a>
-            <div class="collapse {{routePrefixCheck('admin')?'show':''}}" id="sidebarPages" style="">
+            <div class="collapse {{\Cookie::get('admin_menu_id')=='admin'?'show':''}}" id="admin" style="">
                 <ul class="nav nav-sm flex-column">
                     <li class="nav-item ">
                         <a href="{{route('admin.config.edit',['name'=>'base'])}}" class="nav-link">
@@ -44,24 +44,24 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item top">
             <a class="nav-link" href="#article" data-toggle="collapse" role="button" aria-controls="sidebarPages">
-                <i class="fe fe-file"></i> 文章系统
+                <i class="fe fe-file"></i> 文章系统 {{\Cookie::get('admin_menu_id')}}
             </a>
-            <div class="collapse " id="article" style="">
+            <div class="collapse {{\Cookie::get('admin_menu_id')=='article'?'show':''}}" id="article">
                 <ul class="nav nav-sm flex-column">
                     <li class="nav-item">
-                        <a href="feed.html" class="nav-link ">
+                        <a href="{{route('category.index')}}" class="nav-link">
                             栏目管理
                         </a>
-                        <a href="feed.html" class="nav-link ">
+                        <a href="feed.html" class="nav-link">
                             文章列表
                         </a>
                     </li>
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item top">
             <a class="nav-link" href="#edu" data-toggle="collapse" role="button" aria-controls="sidebarPages">
                 <i class="fe fe-book-open"></i> 在线教育
             </a>
@@ -78,7 +78,7 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item top">
             <a class="nav-link" href="#users" data-toggle="collapse" role="button" aria-controls="sidebarPages">
                 <i class="fe fe fe-user"></i> 会员粉丝
             </a>
@@ -92,7 +92,7 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item top">
             <a class="nav-link" href="#module" data-toggle="collapse" role="button" aria-controls="sidebarPages">
                 <i class="fe fe-box"></i> 模块管理
             </a>
@@ -162,3 +162,4 @@
         </a>
     </div>
 </div>
+<script src="{{asset('js/admin_menu.js')}}"></script>

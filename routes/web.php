@@ -24,6 +24,8 @@ Route::group(['prefix' => 'util', 'as' => 'util.', 'namespace' => 'Util'], funct
 //文章系统
 Route::group(['namespace' => 'Article', 'prefix' => 'article', 'middleware' => 'user.token'], function () {
     Route::get('home', 'HomeController@index');
+    Route::resource('category', 'CategoryController');
+    Route::resource('content', 'ContentController');
 });
 
 //后台管理
