@@ -1,5 +1,5 @@
-# HDCMS
-基于Laravel 框架的PC、WAP、微信公众号、微信小程序多应用平台。
+# HDCMS 5.0
+基于Laravel 框架重构的PC、WAP、微信公众号、微信小程序多应用平台。
 
 ## 产品特点
 
