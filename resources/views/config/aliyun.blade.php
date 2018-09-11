@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="row justify-content-center mt-4">
+    <div class="row justify-content-center">
         <form action="{{route('admin.config.update',['name'=>'aliyun'])}}" method="post" class="col-sm-9">
             @csrf @method('PUT')
             <div class="card">
@@ -10,15 +10,15 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label>regionId</label>
-                        <input type="text" class="form-control" name="regionId" value="{{$config['data']['regionId']??'cn-hangzhou'}}">
+                        <input type="text" class="form-control" name="HD_ALIYUN_REGIONID" value="{{$config['data']['HD_ALIYUN_REGIONID']??'cn-hangzhou'}}">
                     </div>
                     <div class="form-group">
                         <label class="mb-1">accessId</label>
-                        <input type="password" class="form-control" name="accessId" value="{{$config['data']['accessId']}}" placeholder="登录阿里云后台查看">
+                        <input type="password" class="form-control" name="HD_ALIYUN_ACCESSID" value="{{$config['data']['HD_ALIYUN_ACCESSID']}}" placeholder="登录阿里云后台查看">
                     </div>
                     <div class="form-group">
                         <label class="mb-1">accessKey</label>
-                        <input type="password" class="form-control" name="accessKey" value="{{$config['data']['accessKey']}}" placeholder="登录阿里云后台查看">
+                        <input type="password" class="form-control" name="HD_ALIYUN_ACCESSKEY" value="{{$config['data']['HD_ALIYUN_ACCESSKEY']}}" placeholder="登录阿里云后台查看">
                     </div>
                     <button class="btn btn-block btn-primary">
                         保存

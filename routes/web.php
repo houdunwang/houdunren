@@ -1,17 +1,28 @@
 <?php
 //网站首页
-Route::get('/', 'Video\HomeController@index')->name('home');
-Route::get('/home', 'Video\HomeController@index')->name('home');
+Route::get('/', 'Edu\HomeController@index')->name('home');
+Route::get('/home', 'Edu\HomeController@index')->name('home');
 
-//登录退出
-Route::get('login', 'LoginController@login')->name('login');
-Route::post('login', 'LoginController@store')->name('login');
-Route::get('logout', 'LoginController@logout')->name('logout');
-Route::get('findPassword', 'LoginController@findPassword')->name('findPassword');
-Route::post('changePassword', 'LoginController@changePassword')->name('changePassword');
+//公共控制器
+Route::group(['prefix' => 'common', 'as' => 'common.', 'namespace' => 'Common'], function () {
+    Route::get('zan/{key}/{id}', 'ZanController@make')->name('zan.make');
+});
 
-//用户管理
-Route::resource('user', 'UserController');
+//会员中心
+Route::group(['namespace' => 'User', 'prefix' => 'member', 'as' => 'member.'], function () {
+    Route::get('/', 'UserController@index')->name('index');
+    Route::resource('user', 'UserController');
+    Route::get('follow/{user}', 'UserController@follow')->name('follow');
+});
+
+//登录/注册/退出
+Route::get('register', 'User\RegisterController@create')->name('register');
+Route::post('register', 'User\RegisterController@store')->name('register');
+Route::get('login', 'User\LoginController@login')->name('login');
+Route::post('login', 'User\LoginController@store')->name('login');
+Route::get('logout', 'User\LoginController@logout')->name('logout');
+Route::get('findPassword', 'User\LoginController@findPassword')->name('findPassword');
+Route::post('changePassword', 'User\LoginController@changePassword')->name('changePassword');
 
 //工具控制器
 Route::group(['prefix' => 'util', 'as' => 'util.', 'namespace' => 'Util'], function () {
@@ -22,7 +33,7 @@ Route::group(['prefix' => 'util', 'as' => 'util.', 'namespace' => 'Util'], funct
 });
 
 //文章系统
-Route::group(['namespace' => 'Article', 'prefix' => 'article', 'middleware' => 'user.token'], function () {
+Route::group(['namespace' => 'Article', 'prefix' => 'article', 'middleware' => []], function () {
     Route::get('home', 'HomeController@index');
     Route::resource('category', 'CategoryController');
     Route::resource('content', 'ContentController');
@@ -34,5 +45,14 @@ Route::group(['middleware' => ['auth.admin'], 'as' => 'admin.', 'namespace' => '
     //配置管理
     Route::get('config/{name}/edit', 'ConfigController@edit')->name('config.edit');
     Route::put('config/{name}', 'ConfigController@update')->name('config.update');
+});
+
+//在线教育
+Route::group(['middleware' => [], 'prefix' => 'edu', 'namespace' => 'Edu', 'as' => 'edu.'], function () {
+    Route::resource('lesson', 'LessonController');
+    Route::resource('category', 'CategoryController');
+    Route::resource('topic', 'TopicController');
+    Route::resource('article', 'ArticleController');
+    Route::get('article/zan/{article}', 'ArticleController@zan')->name('article.zan');
 });
 

@@ -22,7 +22,6 @@ class CodeController extends Controller
             $user->notify(new RegisterNotification($user, $code));
             $this->saveToSession($code, 'email', $request->username);
         } else {
-            $type = 'mobile';
             //手机短信
             $data = [
                 //短信签名

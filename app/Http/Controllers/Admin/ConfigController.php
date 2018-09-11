@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Servers\ConfigServer;
-use Houdunwang\Aliyun\Aliyun;
+use App\Models\Config;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ConfigController extends Controller
 {
-    public function edit(ConfigServer $configServer, $name)
+    public function edit($name)
     {
-        $config = $configServer->get($name);
+        $config = Config::firstOrNew(['name' => $name]);
         return view('config.' . $name, compact('config'));
     }
 
-    public function update(ConfigServer $configServer, Request $request,$name)
+    public function update(Request $request, $name)
     {
-        $configServer->save($name, $request->all());
+        Config::updateOrCreate(['name' => $name], ['name' => $name, 'data' => $request->all()]);
+        hd_edit_env($request->all());
         return back()->with('success', '保存成功');
     }
 }

@@ -289,7 +289,7 @@
 <!-- MAIN CONTENT
 ================================================== -->
 <div class="main-content">
-    <div class="container-fluid">
+    <div class="container-fluid pt-5">
         @yield('content')
     </div>
 </div>
@@ -309,15 +309,9 @@
 {{--<script src="{{asset('org/Dashkit-1.1.2')}}/libs/select2/dist/js/select2.min.js"></script>--}}
 <!-- Theme JS -->
 {{--<script src="{{asset('org/Dashkit-1.1.2')}}/js/theme.min.js"></script>--}}
-
 @include('layouts._message')
 <script>
-    require(['jquery', 'bootstrap'], function ($) {
-        require([
-{{--            "{{asset('org/Dashkit-1.1.2')}}/libs/list.js/dist/list.min.js",--}}
-            {{--"{{asset('org/Dashkit-1.1.2')}}/js/theme.min.js"--}}
-        ]);
-    })
+    require(['jquery', 'bootstrap'], function ($) {})
 </script>
 @stack('js')
 </body>

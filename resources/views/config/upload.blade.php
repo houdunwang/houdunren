@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="row justify-content-center mt-4">
+    <div class="row justify-content-center">
         <form action="{{route('admin.config.update',['name'=>'upload'])}}" method="post" class="col-sm-9">
             @csrf @method('PUT')
             <div class="card">

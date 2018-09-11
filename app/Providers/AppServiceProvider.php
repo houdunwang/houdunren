@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
+        \Carbon\Carbon::setLocale('zh');
         $this->loadConfig();
     }
 
@@ -25,9 +26,9 @@ class AppServiceProvider extends ServiceProvider
     {
         //阿里云
         Aliyun::config([
-            'regionId'  => hd_config('aliyun.regionId'),
-            'accessId'  => hd_config('aliyun.accessId'),
-            'accessKey' => hd_config('aliyun.accessKey'),
+            'regionId'  => config('aliyun.regionId'),
+            'accessId'  => config('aliyun.accessId'),
+            'accessKey' => config('aliyun.accessKey'),
         ]);
     }
 

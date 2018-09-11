@@ -1,4 +1,5 @@
 <?php
+
 use Faker\Generator as Faker;
 
 /*
@@ -16,6 +17,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'name'           => $faker->name,
         'email'          => $faker->unique()->safeEmail,
         'password'       => bcrypt('admin888'),
+        'icon'           => $faker->imageUrl(100, 100),
         'remember_token' => str_random(10),
     ];
 });

@@ -3,7 +3,8 @@
 namespace App;
 
 use App\Models\Attachment;
-use App\Observers\UserServer;
+use App\Models\Follower;
+use App\Observers\UserObserver;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -11,16 +12,12 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
         'mobile',
+        'icon',
     ];
 
     /**
@@ -36,11 +33,45 @@ class User extends Authenticatable
     protected static function boot()
     {
         parent::boot();
-        User::observe(UserServer::class);
+        User::observe(UserObserver::class);
     }
 
     public function attachment()
     {
         return $this->hasMany(Attachment::class);
+    }
+
+    public function getIconAttribute($value)
+    {
+        return $value ?? asset('images/user.jpg');
+    }
+
+    //我的粉丝
+    public function fans()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
+    }
+
+    //我关注册的人
+    public function follower()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
+    }
+
+    //指定用户是否为我的粉丝
+    public function hasFans(User $user)
+    {
+        return $this->fans->contains($user);
+    }
+
+    //我是否关注指定用户
+    public function following(User $user)
+    {
+        return $this->follower->contains($user);
+    }
+
+    public function zan()
+    {
+        return $this->belongsToMany(User::class, 'zans', 'id', 'user_id');
     }
 }

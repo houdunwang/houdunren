@@ -22,7 +22,7 @@
             <a class="nav-link" href="#admin" data-toggle="collapse" role="button" aria-controls="sidebarPages">
                 <i class="fe fe-grid"></i> 系统管理
             </a>
-            <div class="collapse {{\Cookie::get('admin_menu_id')=='admin'?'show':''}}" id="admin" style="">
+            <div class="collapse {{hd_menu_class('admin')}}" id="admin">
                 <ul class="nav nav-sm flex-column">
                     <li class="nav-item ">
                         <a href="{{route('admin.config.edit',['name'=>'base'])}}" class="nav-link">
@@ -46,9 +46,9 @@
         </li>
         <li class="nav-item top">
             <a class="nav-link" href="#article" data-toggle="collapse" role="button" aria-controls="sidebarPages">
-                <i class="fe fe-file"></i> 文章系统 {{\Cookie::get('admin_menu_id')}}
+                <i class="fe fe-file"></i> 文章系统
             </a>
-            <div class="collapse {{\Cookie::get('admin_menu_id')=='article'?'show':''}}" id="article">
+            <div class="collapse {{hd_menu_class('article')}}" id="article">
                 <ul class="nav nav-sm flex-column">
                     <li class="nav-item">
                         <a href="{{route('category.index')}}" class="nav-link">
@@ -65,14 +65,14 @@
             <a class="nav-link" href="#edu" data-toggle="collapse" role="button" aria-controls="sidebarPages">
                 <i class="fe fe-book-open"></i> 在线教育
             </a>
-            <div class="collapse " id="edu" style="">
+            <div class="collapse {{hd_menu_class('edu')}}" id="edu">
                 <ul class="nav nav-sm flex-column">
                     <li class="nav-item">
-                        <a href="feed.html" class="nav-link ">
-                            栏目管理
+                        <a href="{{route('edu.category.index')}}" class="nav-link">
+                            帖子分类
                         </a>
                         <a href="feed.html" class="nav-link ">
-                            文章列表
+                            帖子列表
                         </a>
                     </li>
                 </ul>
@@ -82,7 +82,7 @@
             <a class="nav-link" href="#users" data-toggle="collapse" role="button" aria-controls="sidebarPages">
                 <i class="fe fe fe-user"></i> 会员粉丝
             </a>
-            <div class="collapse " id="users" style="">
+            <div class="collapse {{hd_menu_class('users')}}" id="users">
                 <ul class="nav nav-sm flex-column">
                     <li class="nav-item">
                         <a href="feed.html" class="nav-link ">
@@ -96,7 +96,7 @@
             <a class="nav-link" href="#module" data-toggle="collapse" role="button" aria-controls="sidebarPages">
                 <i class="fe fe-box"></i> 模块管理
             </a>
-            <div class="collapse " id="module" style="">
+            <div class="collapse {{hd_menu_class('module')}}" id="module">
                 <ul class="nav nav-sm flex-column">
                     <li class="nav-item">
                         <a href="feed.html" class="nav-link ">
@@ -128,6 +128,216 @@
                             Utilities
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="components.html#utilities" class="nav-link">
+                            Utilities
+                        </a>
+                    </li>
                 </ul>
             </div>
         </li>
@@ -137,6 +347,7 @@
             </a>
         </li>
     </ul>
+
     <div class="navbar-user mt-auto d-none d-md-flex">
         <a href="#sidebarModalActivity" class="text-muted" data-toggle="modal">
               <span class="icon">
@@ -146,11 +357,13 @@
         <div class="dropup">
             <a href="#!" id="sidebarIconCopy" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="avatar avatar-sm avatar-online">
-                    <img src="http://dev.hdcms.com/org/Dashkit-1.1.2/img/avatars/profiles/avatar-1.jpg" class="avatar-img rounded-circle" alt="...">
+                    <img src="{{auth()->user()->icon}}" class="avatar-img rounded-circle" alt="...">
                 </div>
             </a>
             <div class="dropdown-menu" aria-labelledby="sidebarIconCopy">
-                <a href="profile-posts.html" class="dropdown-item">帐号设置</a>
+                <a href="{{route('member.index')}}" class="dropdown-item">会员中心</a>
+                <a href="{{route('member.user.edit',[auth()->user(),'type'=>'password'])}}" class="dropdown-item">密码修改</a>
+                <a href="{{route('member.user.edit',[auth()->user(),'type'=>'icon'])}}" class="dropdown-item">修改头像</a>
                 <hr class="dropdown-divider">
                 <a href="{{route('logout')}}" class="dropdown-item">退出登录</a>
             </div>
@@ -162,4 +375,6 @@
         </a>
     </div>
 </div>
-<script src="{{asset('js/admin_menu.js')}}"></script>
+@push('js')
+    <script src="{{asset('js/admin_menu.js')}}"></script>
+@endpush

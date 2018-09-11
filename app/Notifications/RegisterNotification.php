@@ -45,6 +45,7 @@ class RegisterNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
+            ->subject('会员注册')
             ->line('您的注册验证码是' . $this->code);
     }
 

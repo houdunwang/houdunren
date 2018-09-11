@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\ConfigObserver;
 use Illuminate\Database\Eloquent\Model;
 
 class Config extends Model
@@ -13,5 +14,11 @@ class Config extends Model
     public function scopeName($query, $name)
     {
         return $query->where('name', $name);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        Config::observe(ConfigObserver::class);
     }
 }

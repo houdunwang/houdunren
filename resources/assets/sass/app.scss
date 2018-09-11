@@ -1,14 +1,28 @@
+@import "edu.scss";
 
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+.dropdown-menu-card {
+    border: 1px solid #e3ebf6 !important;
+}
 
-// Variables
-@import 'variables';
+body {
+    background: #F2F5F9;
+}
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+//评论框
+.edu-comment {
+    .card {
+        border-radius: 0 !important;
+        //border-bottom: 1px solid #edf2f9 !important;
+        //margin-bottom: 0 !important;;
+    }
+}
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+//编辑器
+.editormd {
+    border: solid 1px #e3e3e3 !important;
+    ul.editormd-menu {
+        a {
+            color: #95aac9 !important;
+        }
+    }
 }

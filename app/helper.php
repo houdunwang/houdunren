@@ -7,7 +7,7 @@
  */
 function routePrefixCheck($name)
 {
-    return \Route::current()->getPrefix() == '/'.$name;
+    return \Route::current()->getPrefix() == '/' . $name;
 }
 
 /**
@@ -19,8 +19,10 @@ function hd_config($path)
 {
     $info = explode('.', $path);
     $name = array_shift($info);
-    $config = \App\Models\Config::where('name', $name)->value('data');
-    return array_get($config, implode('.', $info));
+    $cache = Cache::get('hd_config', function () {
+        return \App\Models\Config::pluck('data', 'name');
+    });
+    return $cache[$name][$info[0]] ?? null;
 }
 
 /**
@@ -35,4 +37,14 @@ function hd_random($num)
         $str .= substr(mt_rand(1, 999), 0, 1);
     }
     return $str;
+}
+
+function hd_menu_class($id, $class = 'show')
+{
+    return \Cookie::get('admin_menu_id') == $id ? $class : '';
+}
+
+function hd_route_class()
+{
+    return str_replace('.', '-', Route::currentRouteName());
 }
