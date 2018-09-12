@@ -8,6 +8,10 @@ body {
     background: #F2F5F9;
 }
 
+[v-cloak] {
+    display: none;
+}
+
 //评论框
 .edu-comment {
     .card {

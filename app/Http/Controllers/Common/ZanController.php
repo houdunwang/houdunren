@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
-use App\Models\Zan;
 use Illuminate\Http\Request;
 
 class ZanController extends Controller
@@ -13,9 +12,14 @@ class ZanController extends Controller
         $this->middleware('auth');
     }
 
-    public function make($model, $id)
+    public function make(Request $request)
     {
-        hd_model($model, $id)->zan()->toggle(auth()->id());
-        return back();
+        $model = hd_model($request->query('model'), $request->query('id'));
+        $model->zan()->toggle(auth()->user());
+        if ($request->ajax()) {
+            return ['count' => $model->zan->count(), 'code' => 0];
+        } else {
+            return back();
+        }
     }
 }

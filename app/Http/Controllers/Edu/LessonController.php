@@ -3,22 +3,26 @@
 namespace App\Http\Controllers\Edu;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LessonRequest;
 use App\Models\Lesson;
-use App\Models\Video;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => 'show']);
+        $this->middleware('auth', ['except' => ['show', 'lists']]);
     }
 
     public function index()
     {
         $lessons = Lesson::paginate(20);
         return view('edu.lesson_index', compact('lessons'));
+    }
+
+    public function lists()
+    {
+        $lessons = Lesson::with('user')->paginate(10);
+        return view('edu.lesson_lists',compact('lessons'));
     }
 
     protected function validation($data)

@@ -3,6 +3,7 @@
     <div class="row {{hd_route_class()}} mt-3">
         <div class="col-12 col-xl-9">
             <div class="card card-body p-5">
+                @auth
                 <div class="row">
                     <div class="col text-right">
                         @if($article->isFavorite(auth()->user()))
@@ -14,6 +15,7 @@
                         @endif
                     </div>
                 </div>
+                @endauth
                 <div class="row">
                     <div class="col text-center">
                         {{--<img src="{{$article->user->icon}}" alt="..." class="img-fluid mb-4" style="max-width: 2.5rem;">--}}
@@ -35,11 +37,11 @@
                         <div class="mt-5 text-center">
                             @auth
                                 @if($article->zan->contains(auth()->user()))
-                                    <a href="{{route('common.zan.make',['article',$article])}}" class="btn btn-white mb-4">
-                                        <span class="fe fe-thumbs-up"></span> 点个赞呗
+                                    <a href="{{route('common.zan.make',['model'=>'article','id'=>$article])}}" class="btn btn-info mb-4">
+                                        <span class="fe fe-thumbs-up"></span> 感谢点赞
                                     </a>
                                 @else
-                                    <a href="{{route('common.zan.make',['article',$article])}}" class="btn btn-info mb-4">
+                                    <a href="{{route('common.zan.make',['model'=>'article','id'=>$article])}}" class="btn btn-white mb-4">
                                         <span class="fe fe-thumbs-up"></span> 点个赞呗
                                     </a>
                                 @endif
@@ -56,7 +58,7 @@
 
                 </div>
             </div>
-            @include('edu.layouts._comment')
+            @include('common.comment',['model'=>$article])
         </div>
         <div class="col-12 col-xl-3">
             <div class="card">

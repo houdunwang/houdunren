@@ -17,6 +17,10 @@ body {
   background: #F2F5F9;
 }
 
+[v-cloak] {
+  display: none;
+}
+
 .edu-comment .card {
   border-radius: 0 !important;
 }

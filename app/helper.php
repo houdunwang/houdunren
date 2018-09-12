@@ -51,6 +51,10 @@ function hd_route_class()
 
 function hd_model($name, $id = null)
 {
-    $class = '\App\Models\\' . ucfirst($name);
+    if (strpos($name, '-')) {
+        $class = '\\' . str_replace('-', '\\', $name);
+    } else {
+        $class = '\App\Models\\' . ucfirst($name);
+    }
     return $id ? $class::find($id) : $class;
 }

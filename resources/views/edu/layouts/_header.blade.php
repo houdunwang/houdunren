@@ -156,7 +156,7 @@
                     </ul>
                 </li>
                 <li class="nav-item mr-4">
-                    <a class="nav-link" href="{{route('edu.lesson.index')}}">
+                    <a class="nav-link" href="{{route('edu.lesson.lists')}}">
                         视频
                     </a>
                 </li>

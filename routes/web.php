@@ -5,8 +5,9 @@ Route::get('/home', 'Edu\HomeController@index')->name('home');
 
 //公共控制器
 Route::group(['prefix' => 'common', 'as' => 'common.', 'namespace' => 'Common'], function () {
-    Route::get('zan/{model}/{id}', 'ZanController@make')->name('zan.make');
-    Route::get('favorite/{model}/{id}','FavoriteController@make')->name('favorite.make');
+    Route::get('zan', 'ZanController@make')->name('zan.make');
+    Route::get('favorite/{model}/{id}', 'FavoriteController@make')->name('favorite.make');
+    Route::resource('comment', 'CommentController');
 });
 
 //会员中心
@@ -49,12 +50,13 @@ Route::group(['middleware' => ['auth.admin'], 'as' => 'admin.', 'namespace' => '
 });
 
 //在线教育
-Route::group(['middleware' => [], 'prefix' => 'edu', 'namespace' => 'Edu', 'as' => 'edu.'], function () {
+Route::group(['prefix' => 'edu', 'namespace' => 'Edu', 'as' => 'edu.'], function () {
+    Route::get('lesson/lists', 'LessonController@lists')->name('lesson.lists');
     Route::resource('lesson', 'LessonController');
     Route::resource('category', 'CategoryController');
     Route::resource('topic', 'TopicController');
     Route::resource('article', 'ArticleController');
     Route::get('article/zan/{article}', 'ArticleController@zan')->name('article.zan');
-    Route::get('article/favorite/{article}','ArticleController@favorite')->name('article.favorite');
+    Route::get('article/favorite/{article}', 'ArticleController@favorite')->name('article.favorite');
 });
 

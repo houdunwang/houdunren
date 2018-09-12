@@ -46,7 +46,7 @@
         {{--评论--}}
         <div class="row">
             <div class="col-sm-9">
-                @include('edu.layouts._comment',['module'=>'edu','relation_id'=>$lesson['id']])
+                @include('common.comment',['model'=>$lesson])
             </div>
             <div class="col-12 col-xl-3">
                 <div class="card">
