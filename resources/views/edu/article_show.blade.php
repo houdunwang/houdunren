@@ -5,7 +5,13 @@
             <div class="card card-body p-5">
                 <div class="row">
                     <div class="col text-right">
-                        <button class="btn btn-white btn-sm">收藏</button>
+                        @if($article->isFavorite(auth()->user()))
+                            <a href="{{route('common.favorite.make',['article',$article])}}" class="btn btn-info btn-sm">
+                                <span class="fe fe-heart mr-0"></span> 已经收藏</a>
+                        @else
+                            <a href="{{route('common.favorite.make',['article',$article])}}" class="btn btn-white btn-sm">
+                                <span class="fe fe-bookmark mr-0"></span> 收藏</a>
+                        @endif
                     </div>
                 </div>
                 <div class="row">
@@ -28,7 +34,15 @@
                         </p>
                         <div class="mt-5 text-center">
                             @auth
-                                <a href="{{route('edu.article.zan',$article)}}" class="btn btn-info mb-4"><span class="fe fe-thumbs-up"></span> 点个赞呗</a>
+                                @if($article->zan->contains(auth()->user()))
+                                    <a href="{{route('common.zan.make',['article',$article])}}" class="btn btn-white mb-4">
+                                        <span class="fe fe-thumbs-up"></span> 点个赞呗
+                                    </a>
+                                @else
+                                    <a href="{{route('common.zan.make',['article',$article])}}" class="btn btn-info mb-4">
+                                        <span class="fe fe-thumbs-up"></span> 点个赞呗
+                                    </a>
+                                @endif
                             @endauth
                             <div>
                                 @foreach($zans as $user)

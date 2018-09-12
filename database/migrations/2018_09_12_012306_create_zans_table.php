@@ -17,7 +17,7 @@ class CreateZansTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id')->index();
             $table->unsignedInteger('zan_id')->index();
-            $table->char('zan_type', '20')->index();
+            $table->string('zan_type')->index();
             $table->timestamps();
         });
     }

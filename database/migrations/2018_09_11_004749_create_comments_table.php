@@ -15,13 +15,10 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('module', 10)->index()->comment('模块');
-            $table->unsignedInteger('relation_id')->index()->comment('模块文章编号');
-            $table->unsignedInteger('user_id')->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedInteger('reply_user_id')->nullable()->index();
-            $table->foreign('reply_user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('content');
+            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('comment_id')->index()->comment('文章或视频编号');
+            $table->string('comment_type')->index();
             $table->timestamps();
         });
     }

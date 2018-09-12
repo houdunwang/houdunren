@@ -48,3 +48,9 @@ function hd_route_class()
 {
     return str_replace('.', '-', Route::currentRouteName());
 }
+
+function hd_model($name, $id = null)
+{
+    $class = '\App\Models\\' . ucfirst($name);
+    return $id ? $class::find($id) : $class;
+}

@@ -10,19 +10,13 @@ class ArticleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => 'index', 'show']);
+        $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
     public function index()
     {
         $articles = Article::with(['user'])->paginate(20);
         return view('edu.article_index', compact('articles'));
-    }
-
-    public function zan(Article $article)
-    {
-        $article->zan()->toggle(auth()->id());
-        return back()->with('success', '操作成功');
     }
 
     public function create()
@@ -38,9 +32,9 @@ class ArticleController extends Controller
 
     public function show(Article $article)
     {
-       $zans = $article->zan()->get();
+        $zans = $article->zan()->get();
 
-        return view('edu.article_show', compact('article','zans'));
+        return view('edu.article_show', compact('article', 'zans'));
     }
 
     public function edit(Article $article)
