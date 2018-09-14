@@ -72,35 +72,30 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @foreach (auth()->user()->notifications as $notification)
-                            {{dump($notification)}}
-                        3333
-                            <div class="list-group list-group-flush my--3">
-                                <a class="list-group-item px-0" href="#">
-                                    <div class="row">
-                                        <div class="col-auto">
-                                            <div class="avatar avatar-sm">
-                                                <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-8.jpg" alt="..." class="avatar-img rounded-circle">
-                                            </div>
-                                        </div>
-                                        <div class="col ml--2">
-                                            <div class="small text-muted">
-                                                <strong class="text-body">Grace Gross</strong> subscribed to you.
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <small class="text-muted">
-                                                2m
-                                            </small>
+                        <div class="list-group list-group-flush my--3">
+                            <a class="list-group-item px-0" href="#">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <div class="avatar avatar-sm">
+                                            <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-8.jpg" alt="..." class="avatar-img rounded-circle">
                                         </div>
                                     </div>
-                                </a>
-                            </div>
-                        @endforeach
+                                    <div class="col ml--2">
+                                        <div class="small text-muted">
+                                            <strong class="text-body">Grace Gross</strong> subscribed to you.
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <small class="text-muted">
+                                            2m
+                                        </small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-
             @auth
                 <div class="dropdown">
                     <a href="#" class="avatar avatar-sm avatar-online dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

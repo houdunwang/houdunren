@@ -24,6 +24,6 @@ class Comment extends Model
     //点赞关联
     public function zan()
     {
-        return $this->morphToMany(User::class, 'zan');
+        return $this->morphMany(Zan::class, 'zan');
     }
 }

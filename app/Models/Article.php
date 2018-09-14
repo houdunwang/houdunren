@@ -18,13 +18,13 @@ class Article extends Model
     //点赞关联
     public function zan()
     {
-        return $this->morphToMany(User::class, 'zan');
+        return $this->morphMany(Zan::class, 'zan');
     }
 
     //收藏表关联
     public function favorite()
     {
-        return $this->morphToMany(User::class, 'favorite');
+        return $this->morphMany(Favorite::class, 'favorite');
     }
 
     //用户是否收藏文章

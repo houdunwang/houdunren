@@ -36,7 +36,7 @@
                         </p>
                         <div class="mt-5 text-center">
                             @auth
-                                @if($article->zan->contains(auth()->user()))
+                                @if($article->zan->contains('user_id',auth()->id()))
                                     <a href="{{route('common.zan.make',['model'=>'article','id'=>$article])}}" class="btn btn-info mb-4">
                                         <span class="fe fe-thumbs-up"></span> 感谢点赞
                                     </a>
@@ -47,9 +47,9 @@
                                 @endif
                             @endauth
                             <div>
-                                @foreach($zans as $user)
+                                @foreach($article->zan as $zan)
                                     <div class="avatar">
-                                        <img src="{{$user->icon}}" alt="..." class="avatar-img rounded-circle">
+                                        <img src="{{$zan->user->icon}}" alt="..." class="avatar-img rounded-circle">
                                     </div>
                                 @endforeach
                             </div>

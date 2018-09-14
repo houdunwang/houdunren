@@ -5,7 +5,8 @@ Route::get('/home', 'Edu\HomeController@index')->name('home');
 
 //公共控制器
 Route::group(['prefix' => 'common', 'as' => 'common.', 'namespace' => 'Common'], function () {
-    Route::get('zan', 'ZanController@make')->name('zan.make');
+    Route::get('zan/make', 'ZanController@make')->name('zan.make');
+    Route::get('zan/count', 'ZanController@count')->name('zan.count');
     Route::get('favorite/{model}/{id}', 'FavoriteController@make')->name('favorite.make');
     Route::resource('comment', 'CommentController');
 });
@@ -57,7 +58,5 @@ Route::group(['prefix' => 'edu', 'namespace' => 'Edu', 'as' => 'edu.'], function
     Route::resource('topic', 'TopicController');
     Route::post('article/comment-notify', 'ArticleController@commentNotify')->name('article.comment-notify');
     Route::resource('article', 'ArticleController');
-    Route::get('article/zan/{article}', 'ArticleController@zan')->name('article.zan');
-    Route::get('article/favorite/{article}', 'ArticleController@favorite')->name('article.favorite');
 });
 

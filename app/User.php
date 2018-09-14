@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Attachment;
 use App\Models\Follower;
+use App\Models\Zan;
 use App\Observers\UserObserver;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -70,8 +71,9 @@ class User extends Authenticatable
         return $this->follower->contains($user);
     }
 
+    //用户点赞
     public function zan()
     {
-        return $this->belongsToMany(User::class, 'zans', 'id', 'user_id');
+        return $this->morphMany(Zan::class, 'zan');
     }
 }

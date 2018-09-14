@@ -14,12 +14,24 @@ class ZanController extends Controller
 
     public function make(Request $request)
     {
-        $model = hd_model($request->query('model'), $request->query('id'));
-        $model->zan()->toggle(auth()->user());
-        if ($request->ajax()) {
-            return ['count' => $model->zan->count(), 'code' => 0];
+        $this->update($request);
+        return back();
+    }
+
+    public function count(Request $request)
+    {
+        return ['count' => $this->update($request)->count(), 'code' => 0];
+    }
+
+    protected function update($request)
+    {
+        $model = hd_model($request->query('model'), $request->query('id'))->zan();
+        $zan = $model->where('user_id', auth()->id())->first();
+        if ($zan) {
+            $zan->delete();
         } else {
-            return back();
+            $model->create(['user_id' => auth()->id()]);
         }
+        return $model;
     }
 }

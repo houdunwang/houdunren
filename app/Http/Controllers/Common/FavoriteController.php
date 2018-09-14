@@ -14,7 +14,13 @@ class FavoriteController extends Controller
 
     public function make($model, $id)
     {
-        hd_model($model,$id)->favorite()->toggle(auth()->id());
+        $model = hd_model($model, $id)->favorite();
+        $favorite = $model->where('user_id', auth()->id())->first();
+        if ($favorite) {
+            $favorite->delete();
+        } else {
+            $model->create(['user_id' => auth()->id()]);
+        }
         return back();
     }
 }

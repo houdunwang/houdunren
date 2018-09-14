@@ -99,7 +99,7 @@
             methods: {
                 //点赞评论
                 zan(comment) {
-                    url = "/common/zan?model=comment&id=" + comment.id;
+                    url = "/common/zan/count?model=comment&id=" + comment.id;
                     axios.get(url).then((response) => {
                         comment.zan_count = response.data.count;
                     });
@@ -116,14 +116,13 @@
                         }
                         url = "/common/comment" + "?model=" + this.model + "&id={{$model['id']}}";
                         axios.post(url, this.field).then((response) => {
-                            this.comments.push(response.data.comment);
+                            let comment = response.data.comment;
+                            comment.zan_count = comment.zan_count ? comment.zan_count : 0;
+                            this.comments.push(comment);
                             //替换评论内容
                             this.field.content = '';
                             commentEditor.setSelection({line: 0, ch: 0}, {line: 9999, ch: 9999});
                             commentEditor.replaceSelection("");
-                            if ($.isFunction(window.comment_callback)) {
-                                window.comment_callback(response.data.comment);
-                            }
                         })
                     }
                 },
