@@ -25,7 +25,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $model = hd_model($request->input('model'), $request->input('id'));
-        $data = $request->only('content');
+        $data = $request->only(['content','url']);
         $data['user_id'] = auth()->id();
         $comment = $model->comment()->create($data);
 

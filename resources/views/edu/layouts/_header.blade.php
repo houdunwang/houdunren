@@ -43,9 +43,9 @@
                         <i class="fa fa-edit mr-2 w-15" aria-hidden="true"></i> 发表文章
                     </a>
                     @foreach(\App\Models\Category::get() as $category)
-                    <a href="{{route('edu.topic.create',['id'=>$category['id']])}}" class="dropdown-item">
-                       <i class="{{$category['icon']}} mr-2 w-15" aria-hidden="true"></i> {{$category['title']}}
-                    </a>
+                        <a href="{{route('edu.topic.create',['id'=>$category['id']])}}" class="dropdown-item">
+                            <i class="{{$category['icon']}} mr-2 w-15" aria-hidden="true"></i> {{$category['title']}}
+                        </a>
                     @endforeach
                 </div>
             </div>
@@ -72,27 +72,31 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="list-group list-group-flush my--3">
-                            <a class="list-group-item px-0" href="#">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <div class="avatar avatar-sm">
-                                            <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-8.jpg" alt="..." class="avatar-img rounded-circle">
+                        @foreach (auth()->user()->notifications as $notification)
+                            {{dump($notification)}}
+                        3333
+                            <div class="list-group list-group-flush my--3">
+                                <a class="list-group-item px-0" href="#">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <div class="avatar avatar-sm">
+                                                <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-8.jpg" alt="..." class="avatar-img rounded-circle">
+                                            </div>
+                                        </div>
+                                        <div class="col ml--2">
+                                            <div class="small text-muted">
+                                                <strong class="text-body">Grace Gross</strong> subscribed to you.
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <small class="text-muted">
+                                                2m
+                                            </small>
                                         </div>
                                     </div>
-                                    <div class="col ml--2">
-                                        <div class="small text-muted">
-                                            <strong class="text-body">Grace Gross</strong> subscribed to you.
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <small class="text-muted">
-                                            2m
-                                        </small>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

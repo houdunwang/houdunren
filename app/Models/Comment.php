@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 //评论
 class Comment extends Model
 {
-    protected $fillable = ['content', 'user_id'];
+    protected $fillable = ['content', 'user_id', 'url'];
 
     //获得拥有此评论的模型
     public function commentable()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Edu;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -11,6 +12,16 @@ class ArticleController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
+    //发送评论通知
+    public function commentNotify(Request $request)
+    {
+        $comment = $request->all();
+        $url = "{$comment['url']}#comment{$comment['id']}";
+        $user = auth()->user();
+        $user->notify(new UserNotification(['user_id' => $user['id'], 'message' => '你收到了新的文章评论', 'url' => $url]));
+        return ['code' => 0, 'message' => '操作成功'];
     }
 
     public function index()

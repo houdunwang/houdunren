@@ -4,17 +4,17 @@
         <div class="col-12 col-xl-9">
             <div class="card card-body p-5">
                 @auth
-                <div class="row">
-                    <div class="col text-right">
-                        @if($article->isFavorite(auth()->user()))
-                            <a href="{{route('common.favorite.make',['article',$article])}}" class="btn btn-info btn-sm">
-                                <span class="fe fe-heart mr-0"></span> 已经收藏</a>
-                        @else
-                            <a href="{{route('common.favorite.make',['article',$article])}}" class="btn btn-white btn-sm">
-                                <span class="fe fe-bookmark mr-0"></span> 收藏</a>
-                        @endif
+                    <div class="row">
+                        <div class="col text-right">
+                            @if($article->isFavorite(auth()->user()))
+                                <a href="{{route('common.favorite.make',['article',$article])}}" class="btn btn-info btn-sm">
+                                    <span class="fe fe-heart mr-0"></span> 已经收藏</a>
+                            @else
+                                <a href="{{route('common.favorite.make',['article',$article])}}" class="btn btn-white btn-sm">
+                                    <span class="fe fe-bookmark mr-0"></span> 收藏</a>
+                            @endif
+                        </div>
                     </div>
-                </div>
                 @endauth
                 <div class="row">
                     <div class="col text-center">
@@ -88,5 +88,12 @@
     </div>
 @endsection
 @push('js')
-
+    <script>
+        function comment_callback(comment) {
+            require(['axios'], function (axios) {
+                axios.post('{{route('edu.article.comment-notify')}}', comment)
+                {{--$.post('{{route('edu.article.comment-notify')}}}', comment);--}}
+            })
+        }
+    </script>
 @endpush

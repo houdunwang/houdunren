@@ -72,7 +72,7 @@
     require(['hdjs', 'jquery', 'vue', 'axios', 'moment'], function (hdjs, $, Vue, axios, moment) {
         vm = new Vue({
             el: "#comment",
-            data: {model: '', comments: [], field: {content: ''}},
+            data: {model: '', comments: [], field: {content: '', url: "{{$_SERVER['REQUEST_URI']}}"}},
             mounted() {
                 this.model = "{{str_replace('\\','-',get_class($model))}}";
                 axios.get("/common/comment?model=" + this.model + "&id={{$model['id']}}").then((response) => {
@@ -116,11 +116,14 @@
                         }
                         url = "/common/comment" + "?model=" + this.model + "&id={{$model['id']}}";
                         axios.post(url, this.field).then((response) => {
-                            this.comments.push(response.data.comment)
+                            this.comments.push(response.data.comment);
                             //替换评论内容
                             this.field.content = '';
                             commentEditor.setSelection({line: 0, ch: 0}, {line: 9999, ch: 9999});
                             commentEditor.replaceSelection("");
+                            if ($.isFunction(window.comment_callback)) {
+                                window.comment_callback(response.data.comment);
+                            }
                         })
                     }
                 },
