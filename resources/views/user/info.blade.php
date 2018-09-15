@@ -1,6 +1,6 @@
 @extends('user.layouts.master')
 @section('content')
-    <div class="row justify-content-center mt-4 __web-inspector-hide-shortcut__">
+    <div class="row justify-content-center __web-inspector-hide-shortcut__">
         <form action="{{route('member.user.update',auth()->user())}}" method="post" class="col-sm-8">
             @csrf
             @method('PUT')

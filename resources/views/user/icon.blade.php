@@ -1,6 +1,6 @@
 @extends('user.layouts.master')
 @section('content')
-    <div class="row justify-content-center mt-4 __web-inspector-hide-shortcut__">
+    <div class="row justify-content-center  __web-inspector-hide-shortcut__">
         <form action="{{route('member.user.update',auth()->user())}}" method="post" class="col-sm-5">
             @csrf
             @method('PUT')
@@ -16,11 +16,6 @@
                     <br>
                     <span class="help-block text-muted small">请上传 200X200 像素并小于200KB的JPG图片</span>
                 </div>
-                {{--<div class="card-footer">--}}
-                    {{--<button class="btn btn-secondary btn-xs btn-block">--}}
-                        {{--保存头像--}}
-                    {{--</button>--}}
-                {{--</div>--}}
             </div>
         </form>
     </div>

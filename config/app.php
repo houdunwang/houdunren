@@ -120,6 +120,7 @@ return [
     */
 
     'providers' => [
+        HieuLe\Active\ActiveServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         /*
          * Laravel Framework Service Providers...
@@ -174,7 +175,8 @@ return [
     */
 
     'aliases' => [
-
+        'Active' => HieuLe\Active\Facades\Active::class,
+        //
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
