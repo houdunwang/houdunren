@@ -51,11 +51,17 @@
             </div>
 
             <div class="dropdown mr-4 d-none d-lg-flex">
-                <a href="#" class="text-muted" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <span class="icon active">
-                        <i class="fe fe-bell"></i>
-                      </span>
-                </a>
+                {{--<a href="#" class="text-muted" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                {{--<span class="icon active">--}}
+                {{--<i class="fe fe-bell"></i>--}}
+
+                {{--</span>--}}
+                {{--</a>--}}
+                @if($notificationCount = auth()->user()->notifications->count())
+                    <a href="#" class="text-muted small" title="站内消息" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="badge badge-light">{{$notificationCount}}</span>
+                    </a>
+                @endif
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-card">
                     <div class="card-header">
                         <div class="row align-items-center">
@@ -102,13 +108,13 @@
                         <img src="{{auth()->user()->icon}}" alt="..." class="avatar-img rounded-circle">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="{{route('member.index')}}" class="dropdown-item">修改资料</a>
+                        <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}" class="dropdown-item">个人信息</a>
                         <a href="settings.html" class="dropdown-item">学习记录</a>
                         <a href="settings.html" class="dropdown-item">我的收藏</a>
                         @if(Auth::user()->is_admin)
                             <a href="{{route('admin.index')}}" class="dropdown-item">后台管理</a>
                         @endif
-                        <a href="{{route('edu.lesson.index')}}" class="dropdown-item">发布课程</a>
+                        <a href="{{route('edu.lesson.index')}}" class="dropdown-item">课程管理</a>
                         <hr class="dropdown-divider">
                         <a href="{{route('logout')}}" class="dropdown-item">退出</a>
                     </div>

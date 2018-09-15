@@ -26,7 +26,7 @@ class Zan extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function relationModel()
+    public function belongModel()
     {
         return $this->morphTo('zan');
     }

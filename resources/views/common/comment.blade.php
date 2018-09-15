@@ -130,9 +130,9 @@
                 check() {
                     //原时间
                     let old = parseInt(localStorage.getItem('comment_send_time'));
-                    if (old && old + 10 > moment().unix()) {
+                    if (old && old + 1 > moment().unix()) {
                         hdjs.swal({
-                            text: '请' + (old + 10 - moment().unix()) + '秒后发表评论',
+                            text: '请' + (old + 1 - moment().unix()) + '秒后发表评论',
                             buttons: false, timer: 3000, icon: 'info'
                         });
                         return false;

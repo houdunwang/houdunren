@@ -99,9 +99,7 @@
                         <img src="{{auth()->user()->icon}}" alt="..." class="avatar-img rounded-circle">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="{{route('member.index')}}" class="dropdown-item">修改资料</a>
-                        <a href="settings.html" class="dropdown-item">学习记录</a>
-                        <a href="settings.html" class="dropdown-item">我的收藏</a>
+                        <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}" class="dropdown-item">个人信息</a>
                         @if(Auth::user()->is_admin)
                             <a href="{{route('admin.index')}}" class="dropdown-item">后台管理</a>
                         @endif

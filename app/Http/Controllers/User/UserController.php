@@ -77,6 +77,6 @@ class UserController extends Controller
     {
         $this->authorize('follow', $user);
         auth()->user()->follower()->toggle([$user->id]);
-        return back()->with('success', '操作成功');
+        return back();
     }
 }

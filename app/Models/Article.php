@@ -38,4 +38,14 @@ class Article extends Model
     {
         return $this->morphMany(Comment::class, 'comment');
     }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function link()
+    {
+        return route('edu.article.show', $this);
+    }
 }

@@ -16,7 +16,7 @@ class Favorite extends Model
         parent::boot();
     }
 
-    public function relationModel()
+    public function belongModel()
     {
         return $this->morphTo('favorite');
     }

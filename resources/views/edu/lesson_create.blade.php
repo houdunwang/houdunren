@@ -1,4 +1,4 @@
-@extends('user.layouts.master')
+@extends('edu.layouts.member')
 @section('content')
     <form action="{{route('edu.lesson.store')}}" method="post" id="app">
         @csrf

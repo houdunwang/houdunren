@@ -1,10 +1,8 @@
-@extends('user.layouts.master')
+@extends('edu.layouts.member')
 @section('content')
     <div class="card">
-        <div class="card-header">
-            课程列表
-        </div>
         <div class="card-body">
+            @include('edu.layouts._lesson_menu')
             <div class="table-responsive">
                 <table class="table">
                     <thead>

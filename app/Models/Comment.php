@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\CommentObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,8 +11,14 @@ class Comment extends Model
 {
     protected $fillable = ['content', 'user_id', 'url'];
 
+    protected static function boot()
+    {
+        self::observe(CommentObserver::class);
+        parent::boot();
+    }
+
     //获得拥有此评论的模型
-    public function relationModel()
+    public function belongModel()
     {
         return $this->morphTo('comment');
     }

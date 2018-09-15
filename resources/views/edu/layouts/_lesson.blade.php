@@ -1,9 +1,7 @@
 <div class="row">
     <div class="card col-sm-12">
-        <div class="card-header">
-            基本信息
-        </div>
         <div class="card-body">
+            @include('edu.layouts._lesson_menu')
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">课程标题</label>
                 <div class="col-sm-10">
