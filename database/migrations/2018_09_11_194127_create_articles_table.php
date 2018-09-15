@@ -18,6 +18,8 @@ class CreateArticlesTable extends Migration
             $table->timestamps();
             $table->string('title');
             $table->text('content');
+            $table->unsignedInteger('zan_num')->default(0);
+            $table->unsignedInteger('favorite_num')->default(0);
             $table->unsignedInteger('user_id')->comment('用户编号');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

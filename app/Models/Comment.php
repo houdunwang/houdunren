@@ -11,9 +11,9 @@ class Comment extends Model
     protected $fillable = ['content', 'user_id', 'url'];
 
     //获得拥有此评论的模型
-    public function commentable()
+    public function relationModel()
     {
-        return $this->morphTo();
+        return $this->morphTo('comment');
     }
 
     public function user()

@@ -7,10 +7,10 @@
                     <div class="row">
                         <div class="col text-right">
                             @if($article->isFavorite(auth()->user()))
-                                <a href="{{route('common.favorite.make',['article',$article])}}" class="btn btn-info btn-sm">
+                                <a href="{{route('common.favorite.make',['model'=>'Article','id'=>$article])}}" class="btn btn-info btn-sm">
                                     <span class="fe fe-heart mr-0"></span> 已经收藏</a>
                             @else
-                                <a href="{{route('common.favorite.make',['article',$article])}}" class="btn btn-white btn-sm">
+                                <a href="{{route('common.favorite.make',['model'=>'Article','id'=>$article])}}" class="btn btn-white btn-sm">
                                     <span class="fe fe-bookmark mr-0"></span> 收藏</a>
                             @endif
                         </div>
@@ -37,11 +37,11 @@
                         <div class="mt-5 text-center">
                             @auth
                                 @if($article->zan->contains('user_id',auth()->id()))
-                                    <a href="{{route('common.zan.make',['model'=>'article','id'=>$article])}}" class="btn btn-info mb-4">
+                                    <a href="{{route('common.zan.make',['model'=>'App-Models-Article','id'=>$article])}}" class="btn btn-info mb-4">
                                         <span class="fe fe-thumbs-up"></span> 感谢点赞
                                     </a>
                                 @else
-                                    <a href="{{route('common.zan.make',['model'=>'article','id'=>$article])}}" class="btn btn-white mb-4">
+                                    <a href="{{route('common.zan.make',['model'=>'App-Models-Article','id'=>$article])}}" class="btn btn-white mb-4">
                                         <span class="fe fe-thumbs-up"></span> 点个赞呗
                                     </a>
                                 @endif

@@ -37,7 +37,7 @@
         <div class="card-footer">
             <span class="small text-muted">#@{{ key+1 }}</span>
             <a href="" @click.prevent="zan(comment)" class="badge text-muted">
-                <span class="fe fe-thumbs-up"></span> <span class="zan-count">@{{ comment.zan_count }}</span> 个点赞
+                <span class="fe fe-thumbs-up"></span> <span class="zan-count">@{{ comment.zan_num }}</span> 个点赞
             </a>
             {{--<a href="" class="badge text-muted"><span class="fe fe-message-square"></span> 8个回复</a>--}}
         </div>
@@ -99,9 +99,9 @@
             methods: {
                 //点赞评论
                 zan(comment) {
-                    url = "/common/zan/count?model=comment&id=" + comment.id;
+                    url = "/common/zan/make?model=App-Models-Comment&id=" + comment.id;
                     axios.get(url).then((response) => {
-                        comment.zan_count = response.data.count;
+                        comment.zan_num = response.data.count;
                     });
                 },
                 //发表评论

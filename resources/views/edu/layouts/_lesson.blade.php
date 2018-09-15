@@ -1,5 +1,5 @@
-<div class="row justify-content-center">
-    <div class="card col-sm-10">
+<div class="row">
+    <div class="card col-sm-12">
         <div class="card-header">
             基本信息
         </div>
@@ -123,7 +123,7 @@
             </div>
         </div>
     </div>
-    <div class="card col-sm-10">
+    <div class="card col-sm-12">
         <div class="card-header">课程属性</div>
         <div class="card-body">
             <div class="form-group row">
@@ -154,7 +154,7 @@
             </div>
         </div>
     </div>
-    <div class="card col-sm-10">
+    <div class="card col-sm-12">
         <div class="card-header mb-2">课程视频</div>
         <div class="card-body">
             <div class="row">
@@ -188,6 +188,6 @@
         </div>
     </div>
     <div class=" col-sm-10 mb-5">
-        <button class="btn btn-secondary btn-block">保存发布</button>
+        <button class="btn btn-primary">保存发布</button>
     </div>
 </div>

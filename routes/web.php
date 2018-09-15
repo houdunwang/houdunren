@@ -6,8 +6,7 @@ Route::get('/home', 'Edu\HomeController@index')->name('home');
 //公共控制器
 Route::group(['prefix' => 'common', 'as' => 'common.', 'namespace' => 'Common'], function () {
     Route::get('zan/make', 'ZanController@make')->name('zan.make');
-    Route::get('zan/count', 'ZanController@count')->name('zan.count');
-    Route::get('favorite/{model}/{id}', 'FavoriteController@make')->name('favorite.make');
+    Route::get('favorite', 'FavoriteController@make')->name('favorite.make');
     Route::resource('comment', 'CommentController');
 });
 

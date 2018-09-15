@@ -17,6 +17,8 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
             $table->text('content');
             $table->string('url');
+            $table->unsignedInteger('zan_num')->default(0);
+            $table->unsignedInteger('favorite_num')->default(0);
             $table->unsignedInteger('user_id')->index();
             $table->unsignedInteger('comment_id')->index()->comment('文章或视频编号');
             $table->string('comment_type')->index();

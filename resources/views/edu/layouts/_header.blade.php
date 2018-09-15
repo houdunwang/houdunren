@@ -108,6 +108,7 @@
                         @if(Auth::user()->is_admin)
                             <a href="{{route('admin.index')}}" class="dropdown-item">后台管理</a>
                         @endif
+                        <a href="{{route('edu.lesson.index')}}" class="dropdown-item">发布课程</a>
                         <hr class="dropdown-divider">
                         <a href="{{route('logout')}}" class="dropdown-item">退出</a>
                     </div>

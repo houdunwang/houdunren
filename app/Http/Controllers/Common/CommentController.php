@@ -17,38 +17,13 @@ class CommentController extends Controller
         return ['comments' => $comments, 'code' => 0];
     }
 
-    public function create()
-    {
-        //
-    }
-
     public function store(Request $request)
     {
-        $model = hd_model($request->input('model'), $request->input('id'));
+        $model = hd_model();
         $data = $request->only(['content','url']);
         $data['user_id'] = auth()->id();
         $comment = $model->comment()->create($data);
 
         return ['comment' => $comment->with('user', 'zan')->find($comment['id']), 'code' => 0];
-    }
-
-    public function show(Comment $comment)
-    {
-        //
-    }
-
-    public function edit(Comment $comment)
-    {
-        //
-    }
-
-    public function update(Request $request, Comment $comment)
-    {
-        //
-    }
-
-    public function destroy(Comment $comment)
-    {
-        //
     }
 }

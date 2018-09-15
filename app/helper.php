@@ -49,12 +49,13 @@ function hd_route_class()
     return str_replace('.', '-', Route::currentRouteName());
 }
 
-function hd_model($name, $id = null)
+function hd_model()
 {
-    if (strpos($name, '-')) {
-        $class = '\\' . str_replace('-', '\\', $name);
-    } else {
-        $class = '\App\Models\\' . ucfirst($name);
+    $name = Request::query('model');
+    if (!strpos($name, '-')) {
+        $name = 'App-Models-' . $name;
     }
-    return $id ? $class::find($id) : $class;
+    $id = Request::query('id');
+    $class = '\\' . str_replace('-', '\\', $name);
+    return $class::find($id);
 }

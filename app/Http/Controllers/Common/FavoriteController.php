@@ -12,9 +12,9 @@ class FavoriteController extends Controller
         $this->middleware('auth');
     }
 
-    public function make($model, $id)
+    public function make()
     {
-        $model = hd_model($model, $id)->favorite();
+        $model = hd_model()->favorite();
         $favorite = $model->where('user_id', auth()->id())->first();
         if ($favorite) {
             $favorite->delete();
