@@ -1,7 +1,7 @@
 @extends('user.layouts.master')
 @section('content')
-    <div class="row justify-content-center __web-inspector-hide-shortcut__">
-        <form action="{{route('member.user.update',auth()->user())}}" method="post" class="col-sm-8">
+    <div class="row justify-content-center">
+        <form action="{{route('member.user.update',auth()->user())}}" method="post" class="col-sm-12">
             @csrf
             @method('PUT')
             <div class="card">
@@ -9,15 +9,13 @@
                     <h4>个人信息</h4>
                 </div>
                 <div class="card-body">
-                    <div class="form-group">
+                    <div class="form-group col-sm-6">
                         <label>昵称</label>
                         <input type="text" class="form-control" name="name" value="{{auth()->user()->name}}">
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-block btn-primary">
-                        保存
-                    </button>
+                    <button class="btn btn-primary btn-sm">确定</button>
                 </div>
             </div>
         </form>

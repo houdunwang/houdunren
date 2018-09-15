@@ -1,7 +1,7 @@
 @extends('user.layouts.master')
 @section('content')
     <div class="row justify-content-center  __web-inspector-hide-shortcut__">
-        <form action="{{route('member.user.update',auth()->user())}}" method="post" class="col-sm-5">
+        <form action="{{route('member.user.update',auth()->user())}}" method="post" class="col-sm-8" id="form-icon">
             @csrf
             @method('PUT')
             <div class="card">
@@ -35,7 +35,7 @@
                 hdjs.image(function (images) {
                     $("[name='icon']").val(images[0]);
                     $(".avatar img").attr('src', images[0]);
-                    $("form").submit();
+                    $("#form-icon").submit();
                 }, {width: 700, extensions: 'jpg,jpeg', fileSingleSizeLimit: 200 * 1024, multiple: true})
             });
         }

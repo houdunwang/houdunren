@@ -125,12 +125,10 @@
             </form>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="/">
                         <img src="/images/logo.png" alt="..." class="navbar-brand-img">
                     </a>
                 </li>
-
-
             </ul>
         </div>
     </div>
