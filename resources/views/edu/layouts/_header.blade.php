@@ -27,81 +27,14 @@
                                 </div>
                             </a>
                         </div>
-
                     </div>
                 </div>
             </div>
         </form>
         <div class="navbar-user">
             {{--发表内容--}}
-            <div class="dropdown mr-4 d-none d-lg-flex">
-                <a href="#" class="text-muted" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="fe fe-edit"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a href="{{route('edu.article.create')}}" class="dropdown-item">
-                        <i class="fa fa-edit mr-2 w-15" aria-hidden="true"></i> 发表文章
-                    </a>
-                    @foreach(\App\Models\Category::get() as $category)
-                        <a href="{{route('edu.topic.create',['id'=>$category['id']])}}" class="dropdown-item">
-                            <i class="{{$category['icon']}} mr-2 w-15" aria-hidden="true"></i> {{$category['title']}}
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-
-            <div class="dropdown mr-4 d-none d-lg-flex">
-                {{--<a href="#" class="text-muted" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-                {{--<span class="icon active">--}}
-                {{--<i class="fe fe-bell"></i>--}}
-
-                {{--</span>--}}
-                {{--</a>--}}
-                @if($notificationCount = auth()->user()->notifications->count())
-                    <a href="#" class="text-muted small" title="站内消息" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="badge badge-light">{{$notificationCount}}</span>
-                    </a>
-                @endif
-                <div class="dropdown-menu dropdown-menu-right dropdown-menu-card">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h5 class="card-header-title">
-                                    消息
-                                </h5>
-                            </div>
-                            <div class="col-auto">
-                                <a href="#!" class="small text-muted">
-                                    查看全部
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="list-group list-group-flush my--3">
-                            <a class="list-group-item px-0" href="#">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <div class="avatar avatar-sm">
-                                            <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-8.jpg" alt="..." class="avatar-img rounded-circle">
-                                        </div>
-                                    </div>
-                                    <div class="col ml--2">
-                                        <div class="small text-muted">
-                                            <strong class="text-body">Grace Gross</strong> subscribed to you.
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <small class="text-muted">
-                                            2m
-                                        </small>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('edu.layouts._write')
+            @include('layouts._notification')
             @auth
                 <div class="dropdown">
                     <a href="#" class="avatar avatar-sm avatar-online dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -110,7 +43,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}" class="dropdown-item">个人信息</a>
                         <a href="settings.html" class="dropdown-item">学习记录</a>
-                        <a href="settings.html" class="dropdown-item">我的收藏</a>
+                        <a href="{{route('common.favorite.index')}}" class="dropdown-item">我的收藏</a>
                         @if(Auth::user()->is_admin)
                             <a href="{{route('admin.index')}}" class="dropdown-item">后台管理</a>
                         @endif
@@ -139,26 +72,13 @@
                         话题
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="topnavPages">
-                        <li>
-                            <a class="dropdown-item" href="orders.html">
-                                技术分享
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="feed.html">
-                                问答求助
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="settings.html">
-                                码农生活
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="invoice.html">
-                                桌面文化
-                            </a>
-                        </li>
+                        @foreach(\App\Models\Category::get() as $category)
+                            <li>
+                                <a href="{{route('edu.topic.index',['id'=>$category['id']])}}" class="dropdown-item">
+                                    <i class="{{$category['icon']}} mr-2 w-15" aria-hidden="true"></i> {{$category['title']}}
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </li>
                 <li class="nav-item mr-4">

@@ -18,10 +18,10 @@ class CreateTopicsTable extends Migration
             $table->timestamps();
             $table->string('title');
             $table->text('content');
+            $table->unsignedInteger('zan_num')->default(0);
+            $table->unsignedInteger('favorite_num')->default(0);
             $table->unsignedInteger('user_id')->comment('用户编号');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('category_id')->comment('栏目');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

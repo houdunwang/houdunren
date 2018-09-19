@@ -2,7 +2,7 @@
 @section('content')
     <div class="row">
         <div class="col-12 col-xl-9">
-            <div class="card" data-toggle="lists">
+            <div class="card" data-toggle="lists" data-lists-values="[&quot;name&quot;]">
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
@@ -19,23 +19,23 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-lg list-group-flush list my--4">
-                        @foreach($articles as $article)
+                        @foreach($topics as $topic)
                             <li class="list-group-item px-0">
                                 <div class="row">
                                     <div class="col-auto">
-                                        <a href="{{route('member.user.show',$article->user)}}" class="avatar ">
-                                            <img src="{{$article->user->icon}}" alt="{{$article['title']}}" class="avatar-img rounded">
+                                        <a href="#" class="avatar ">
+                                            <img src="{{$topic->user->icon}}" alt="{{$topic['title']}}" class="avatar-img rounded">
                                         </a>
                                     </div>
                                     <div class="col ml--2">
                                         <h4 class="card-title mb-3 name">
-                                            <a href="{{route('edu.article.show',$article)}}" title="{{$article['title']}}">
-                                                {{$article['title']}}
+                                            <a href="{{route('edu.topic.show',$topic)}}" title="{{$topic['title']}}">
+                                                {{$topic['title']}}
                                             </a>
                                         </h4>
                                         <p class="card-text small text-muted">
-                                            <span class="fe fe-user"></span> {{$article->user->name}} .
-                                            <i class="fe fe-clock"></i> {{$article->created_at->diffForHumans()}}
+                                            <span class="fe fe-user"></span> {{$topic->user->name}} .
+                                            <i class="fe fe-clock"></i> {{$topic->created_at->diffForHumans()}}
                                         </p>
                                     </div>
                                 </div>
@@ -44,7 +44,7 @@
                     </ul>
                 </div>
             </div>
-            {{$articles->links()}}
+            {{$topics->appends(['id'=>Request::query('id')])->links()}}
         </div>
         <div class="col-12 col-xl-3">
             <div class="card">

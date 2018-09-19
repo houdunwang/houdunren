@@ -38,10 +38,39 @@
 </head>
 <body>
 @include('user.layouts._header')
-<div class="container mt-5">
+<div class="container mt-5 space">
     <div class="row">
         <div class="col-sm-3">
-            @yield('menu')
+            <div class="card">
+                <div class="card-block text-center pt-5 mb-3">
+                    <div class="avatar avatar-xl">
+                        <img src="{{$user->icon}}" alt="..." class="avatar-img rounded-circle">
+                    </div>
+                    <div class="text-center mt-4">
+                        <h3 class="text-secondary">{{$user->name}}</h3>
+                    </div>
+                </div>
+                <ul class="list-group menu">
+                    <li class="list-group-item">
+                        <a href="{{route('member.follower',$user)}}" class="text-secondary">
+                            <span class="fe fe-user-check mr-0"></span> 他的关注
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{route('member.fans',$user)}}" class="text-secondary">
+                            <span class="fe fe-users mr-0"></span> 他的粉丝
+                        </a>
+                    </li>
+                </ul>
+                <style>
+                    .space .menu .list-group-item {
+                        border: none;
+                        border-top: 1px solid #e3ebf6;
+                        border-radius: 0;
+                        text-align: center;
+                    }
+                </style>
+            </div>
         </div>
         <div class="col-sm-9">
             @yield('content')

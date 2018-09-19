@@ -2,15 +2,22 @@
 
 namespace App\Models;
 
-use App\User;
+use App\Models\Traits\Common;
 use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Model
 {
-    protected $fillable = ['title', 'content','category_id','user_id'];
+    use Common;
 
-    public function user()
+    protected $fillable = ['title', 'content', 'category_id', 'user_id'];
+
+    public function getTitle()
     {
-        return $this->belongsTo(User::class);
+        return $this->title;
+    }
+
+    public function link($param)
+    {
+        return route('edu.article.show', $this) . $param;
     }
 }

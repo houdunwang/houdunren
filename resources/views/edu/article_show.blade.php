@@ -87,13 +87,3 @@
         </div>
     </div>
 @endsection
-@push('js')
-    <script>
-        function comment_callback(comment) {
-            require(['axios'], function (axios) {
-                axios.post('{{route('edu.article.comment-notify')}}', comment)
-                {{--$.post('{{route('edu.article.comment-notify')}}}', comment);--}}
-            })
-        }
-    </script>
-@endpush

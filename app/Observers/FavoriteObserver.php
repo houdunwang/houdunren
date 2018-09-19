@@ -8,13 +8,13 @@ class FavoriteObserver
 {
     public function created(Favorite $favorite)
     {
-        $favorite->belongModel->increment('favorite_num');
+        $favorite->belongModel()->increment('favorite_num');
     }
 
 
     public function deleted(Favorite $favorite)
     {
-        $favorite->belongModel->decrement('favorite_num');
+        $favorite->belongModel()->decrement('favorite_num');
     }
 
     /**

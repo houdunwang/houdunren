@@ -20,29 +20,31 @@ class UserController extends Controller
         return view('user.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
+    public function follower(User $user)
+    {
+        $follows = $user->follower()->paginate(1);
+        return view('user.follower', compact('user', 'follows'));
+    }
+
+    public function fans(User $user)
+    {
+        $fans = $user->fans()->paginate(1);
+        return view('user.fans', compact('user', 'fans'));
+    }
+
     public function show(User $user)
     {
+        return view('user.show', compact('user'));
     }
 
     public function edit(User $user, Request $request)

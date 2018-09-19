@@ -9,7 +9,7 @@ class CommentObserver
 {
     public function created(Comment $comment)
     {
-        $comment->user->notify(new CommentNotification($comment));
+        $comment->belongModel->user->notify(new CommentNotification($comment));
     }
 
     /**

@@ -28,7 +28,7 @@ class UploadController extends Controller
     protected function isImage($file)
     {
         $ext = $file->getClientOriginalExtension();
-        return in_array($ext, ['jpg', 'jpeg', 'png', 'gif']);
+        return in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'gif']);
 
     }
 

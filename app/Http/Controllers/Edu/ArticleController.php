@@ -14,16 +14,6 @@ class ArticleController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-    //发送评论通知
-    public function commentNotify(Request $request)
-    {
-        $comment = $request->all();
-        $url = "{$comment['url']}#comment{$comment['id']}";
-        $user = auth()->user();
-        $user->notify(new UserNotification(['user_id' => $user['id'], 'message' => '你收到了新的文章评论', 'url' => $url]));
-        return ['code' => 0, 'message' => '操作成功'];
-    }
-
     public function index()
     {
         $articles = Article::with(['user'])->paginate(20);

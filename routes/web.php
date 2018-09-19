@@ -7,14 +7,18 @@ Route::get('/home', 'Edu\HomeController@index')->name('home');
 Route::group(['prefix' => 'common', 'as' => 'common.', 'namespace' => 'Common'], function () {
     Route::get('zan/make', 'ZanController@make')->name('zan.make');
     Route::get('favorite', 'FavoriteController@make')->name('favorite.make');
+    Route::get('favorite/index', 'FavoriteController@index')->name('favorite.index');
     Route::resource('comment', 'CommentController');
+    Route::resource('notification', 'NotificationController');
 });
 
 //会员中心
 Route::group(['namespace' => 'User', 'prefix' => 'member', 'as' => 'member.'], function () {
     Route::get('/', 'UserController@index')->name('index');
     Route::resource('user', 'UserController');
+    Route::get('fans/{user}', 'UserController@fans')->name('fans');
     Route::get('follow/{user}', 'UserController@follow')->name('follow');
+    Route::get('follower/{user}', 'UserController@follower')->name('follower');
 });
 
 //登录/注册/退出
@@ -55,7 +59,6 @@ Route::group(['prefix' => 'edu', 'namespace' => 'Edu', 'as' => 'edu.'], function
     Route::resource('lesson', 'LessonController');
     Route::resource('category', 'CategoryController');
     Route::resource('topic', 'TopicController');
-    Route::post('article/comment-notify', 'ArticleController@commentNotify')->name('article.comment-notify');
     Route::resource('article', 'ArticleController');
 });
 

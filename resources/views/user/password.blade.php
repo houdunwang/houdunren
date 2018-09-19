@@ -1,4 +1,7 @@
 @extends('user.layouts.master')
+@section('menu')
+    @include('user.layouts._info')
+@endsection
 @section('content')
     <div class="row justify-content-center">
         <form action="{{route('member.user.update',auth()->user())}}" method="post" class="col-sm-12">

@@ -15,9 +15,10 @@ class TopicController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $topics = Topic::where('category_id', $request->query('id'))->paginate(20);
+        return view('edu.topic_index', compact('topics'));
     }
 
     public function create(Request $request)

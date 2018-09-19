@@ -1,189 +1,89 @@
 @extends('edu.layouts.master')
 @section('content')
-    <div class="col-12 col-lg-10 col-xl-8">
-
-        <!-- Header -->
-        <div class="header mt-md-5">
-            <div class="header-body">
-                <div class="row align-items-center">
-                    <div class="col">
-
-                        <!-- Pretitle -->
-                        <h6 class="header-pretitle">
-                            Payments
-                        </h6>
-
-                        <!-- Title -->
-                        <h1 class="header-title">
-                            Invoice #SDF9823KD
-                        </h1>
-
+    <div class="row {{hd_route_class()}} mt-3">
+        <div class="col-12 col-xl-9">
+            <div class="card card-body p-5">
+                @auth
+                    <div class="row">
+                        <div class="col text-right">
+                            @if($topic->isFavorite(auth()->user()))
+                                <a href="{{route('common.favorite.make',['model'=>'Topic','id'=>$topic])}}" class="btn btn-info btn-sm">
+                                    <span class="fe fe-heart mr-0"></span> 已经收藏</a>
+                            @else
+                                <a href="{{route('common.favorite.make',['model'=>'Topic','id'=>$topic])}}" class="btn btn-white btn-sm">
+                                    <span class="fe fe-bookmark mr-0"></span> 收藏</a>
+                            @endif
+                        </div>
                     </div>
-                    <div class="col-auto">
-
-                        <!-- Buttons -->
-                        <a href="#!" class="btn btn-white">
-                            Download
-                        </a>
-                        <a href="#!" class="btn btn-primary ml-2">
-                            Pay
-                        </a>
-
+                @endauth
+                <div class="row">
+                    <div class="col text-center">
+                        {{--<img src="{{$topic->user->icon}}" alt="..." class="img-fluid mb-4" style="max-width: 2.5rem;">--}}
+                        <h2 class="mb-4">
+                            {{$topic['title']}}
+                        </h2>
+                        <p class="text-muted mb-1 text-muted small">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i> {{$topic->updated_at->diffForHumans()}}
+                            <i class="fa fa-comment-o ml-2" aria-hidden="true"></i> 30
+                        </p>
                     </div>
-                </div> <!-- / .row -->
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="my-5">
+                        <p class="text-dark mb-0 content">
+                            {{$topic['content']}}
+                        </p>
+                        <div class="mt-5 text-center">
+                            @auth
+                                @if($topic->zan->contains('user_id',auth()->id()))
+                                    <a href="{{route('common.zan.make',['model'=>'App-Models-Topic','id'=>$topic])}}" class="btn btn-info mb-4">
+                                        <span class="fe fe-thumbs-up"></span> 感谢点赞
+                                    </a>
+                                @else
+                                    <a href="{{route('common.zan.make',['model'=>'App-Models-Topic','id'=>$topic])}}" class="btn btn-white mb-4">
+                                        <span class="fe fe-thumbs-up"></span> 点个赞呗
+                                    </a>
+                                @endif
+                            @endauth
+                            <div>
+                                @foreach($topic->zan as $zan)
+                                    <div class="avatar">
+                                        <img src="{{$zan->user->icon}}" alt="..." class="avatar-img rounded-circle">
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            @include('common.comment',['model'=>$topic])
+        </div>
+        <div class="col-12 col-xl-3">
+            <div class="card">
+                <div class="card-header">
+                    {{$topic->user->name}}
+                </div>
+                <div class="card-block text-center p-5">
+                    <div class="avatar avatar-xl">
+                        <img src="{{$topic->user->icon}}" alt="..." class="avatar-img rounded-circle">
+                    </div>
+                </div>
+                @can('follow',$topic->user)
+                    <div class="card-footer text-muted">
+                        @if(auth()->user()->following($topic->user))
+                            <a class="btn btn-info btn-block btn-xs" href="{{route('member.follow',$topic->user->id)}}">
+                                已经关注
+                            </a>
+                        @else
+                            <a class="btn btn-white btn-block btn-xs" href="{{route('member.follow',$topic->user->id)}}">
+                                <i class="fa fa-plus" aria-hidden="true"></i> 关注 TA
+                            </a>
+                        @endif
+                    </div>
+                @endcan
             </div>
         </div>
-
-        <!-- Content -->
-        <div class="card card-body p-5">
-            <div class="row">
-                <div class="col text-right">
-
-                    <!-- Badge -->
-                    <div class="badge badge-danger">
-                        Overdue
-                    </div>
-
-                </div>
-            </div> <!-- / .row -->
-            <div class="row">
-                <div class="col text-center">
-
-                    <!-- Logo -->
-                    <img src="assets/img/logo.svg" alt="..." class="img-fluid mb-4" style="max-width: 2.5rem;">
-
-                    <!-- Title -->
-                    <h2 class="mb-2">
-                        Invoice from Dashkit
-                    </h2>
-
-                    <!-- Text -->
-                    <p class="text-muted mb-6">
-                        Invoice #SDF9823KD
-                    </p>
-
-                </div>
-            </div> <!-- / .row -->
-            <div class="row">
-                <div class="col-12 col-md-6">
-
-                    <h6 class="text-uppercase text-muted">
-                        Invoiced from
-                    </h6>
-
-                    <p class="text-muted mb-4">
-                        <strong class="text-body">Kenny Blankenship</strong> <br>
-                        CEO of Good Themes <br>
-                        123 Happy Walk Way <br>
-                        San Francisco, CA
-                    </p>
-
-                    <h6 class="text-uppercase text-muted">
-                        Invoiced ID
-                    </h6>
-
-                    <p class="mb-4">
-                        #SDF9823KD
-                    </p>
-
-                </div>
-                <div class="col-12 col-md-6 text-md-right">
-
-                    <h6 class="text-uppercase text-muted">
-                        Invoiced to
-                    </h6>
-
-                    <p class="text-muted mb-4">
-                        <strong class="text-body">Jimmy LeBuyer</strong> <br>
-                        Acquisitions at Themers <br>
-                        236 Main St., #201 <br>
-                        Los Angeles, CA
-                    </p>
-
-                    <h6 class="text-uppercase text-muted">
-                        Due date
-                    </h6>
-
-                    <p class="mb-4">
-                        <time datetime="2018-04-23">Apr 23, 2018</time>
-                    </p>
-
-                </div>
-            </div> <!-- / .row -->
-            <div class="row">
-                <div class="col-12">
-
-                    <!-- Table -->
-                    <div class="table-responsive">
-                        <table class="table my-4">
-                            <thead>
-                            <tr>
-                                <th class="px-0 bg-transparent border-top-0">
-                                    <span class="h6">Description</span>
-                                </th>
-                                <th class="px-0 bg-transparent border-top-0">
-                                    <span class="h6">Hours</span>
-                                </th>
-                                <th class="px-0 bg-transparent border-top-0 text-right">
-                                    <span class="h6">Cost</span>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="px-0">
-                                    Custom theme development
-                                </td>
-                                <td class="px-0">
-                                    125
-                                </td>
-                                <td class="px-0 text-right">
-                                    $6,250
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-0">
-                                    Logo design
-                                </td>
-                                <td class="px-0">
-                                    15
-                                </td>
-                                <td class="px-0 text-right">
-                                    $750
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-0 border-top border-top-2">
-                                    <strong>Total amount due</strong>
-                                </td>
-                                <td colspan="2" class="px-0 text-right border-top border-top-2">
-                            <span class="h3">
-                              $7,000
-                            </span>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <hr class="my-5">
-
-                    <!-- Title -->
-                    <h6 class="text-uppercase">
-                        Notes
-                    </h6>
-
-                    <!-- Text -->
-                    <p class="text-muted mb-0">
-                        We really appreciate your business and if there’s anything else we can do, please let us know! Also, should you need us to add VAT or anything else to this order, it’s super easy since this is a template, so just ask!
-                    </p>
-
-                </div>
-            </div> <!-- / .row -->
-        </div>
-
     </div>
 @endsection
-@push('js')
-
-@endpush

@@ -62,8 +62,8 @@ class CommentNotification extends Notification
             'user_icon'       => $this->comment->user->icon,
             'comment_id'      => $this->comment->id,
             'comment_content' => $this->comment->content,
-            'article_title'   => $this->comment->belongModel->getTitle(),
-            'article_url'     => $this->comment->belongModel->link('#' . $this->comment->id),
+            'title'           => $this->comment->belongModel->getTitle(),
+            'link'            => $this->comment->belongModel->link('#comment-' . $this->comment->id),
         ];
     }
 }

@@ -7,7 +7,7 @@
             </div>
         </div>
     </div>
-    <div class="card col-sm-12" v-for="(comment,key) in comments ">
+    <div class="card col-sm-12" v-for="(comment,key) in comments" :id="'comment-'+comment.id">
         <div class="card-body pb-0">
             <div class="comment mb-5">
                 <div class="row">
@@ -77,7 +77,8 @@
                 this.model = "{{str_replace('\\','-',get_class($model))}}";
                 axios.get("/common/comment?model=" + this.model + "&id={{$model['id']}}").then((response) => {
                     this.comments = response.data.comments;
-                })
+                });
+                //
                 hdjs.editormd("commentEditor", {
                     width: '100%',
                     height: 300,
@@ -95,6 +96,9 @@
                         vm.$set(vm.field, 'content', this.getValue())
                     }
                 });
+            },
+            updated(){
+                hdjs.scrollTo('body',location.hash ,2000, {queue:true});
             },
             methods: {
                 //点赞评论
