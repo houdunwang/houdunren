@@ -20,4 +20,10 @@ class Article extends Model
     {
         return route('edu.article.show', $this) . $param;
     }
+
+    public function getMarkdownAttribute()
+    {
+        $Parsedown = new \Parsedown();
+        return $Parsedown->text($this['content']);
+    }
 }

@@ -9,6 +9,9 @@
             </div>
         </div>
         <div class="card-body">
+            @if($fans->count()==0)
+                <p class="text-center text-muted p-5">暂无数据</p>
+            @endif
             <ul class="list-group list-group-lg list-group-flush list my--4">
                 @foreach($fans as $fan)
                     <li class="list-group-item px-0">

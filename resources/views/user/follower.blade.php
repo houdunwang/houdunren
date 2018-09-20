@@ -9,6 +9,9 @@
             </div>
         </div>
         <div class="card-body">
+            @if($follows->count()==0)
+                <p class="text-center text-muted p-5">暂无数据</p>
+            @endif
             <ul class="list-group list-group-lg list-group-flush list my--4">
                 @foreach($follows as $follow)
                     <li class="list-group-item px-0">
@@ -23,7 +26,6 @@
                                     <a href="{{route('member.user.show',$follow)}}">
                                         {{$follow->name}}
                                     </a>
-                                    <a href="{{route('member.follow',$follow->id)}}" class="btn btn-white btn-sm float-right">取消关注</a>
                                 </h4>
                                 <p class="card-text small text-muted">
                                     <span class="fe fe-clock"></span> 注册时间 {{$follow->created_at}}

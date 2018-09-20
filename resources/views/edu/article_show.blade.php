@@ -31,8 +31,11 @@
                 <div class="row">
                     <div class="col-12">
                         <hr class="my-5">
-                        <p class="text-dark mb-0 content">
-                            {{$article['content']}}
+                        <div id="markdown" hidden>
+                            {!!  $article['Markdown'] !!}
+                        </div>
+                        <p class="text-dark mb-0 content" id="articleContent">
+                            <textarea style="display:none;">{{$article['content']}}</textarea>
                         </p>
                         <div class="mt-5 text-center">
                             @auth
@@ -87,3 +90,12 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        require(['hdjs', 'marked', 'highlight'], function (hdjs, marked) {
+            marked.setOptions({renderer: new marked.Renderer()});
+            hljs.initHighlightingOnLoad();
+            $('#markdown').removeAttr('hidden');
+        })
+    </script>
+@endpush

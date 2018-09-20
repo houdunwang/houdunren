@@ -68,8 +68,13 @@
         </div>
     @endauth
 </div>
+<style>
+    .comment-body{
+        /*background: none;*/
+    }
+</style>
 <script>
-    require(['hdjs', 'jquery', 'vue', 'axios', 'moment'], function (hdjs, $, Vue, axios, moment) {
+    require(['hdjs', 'jquery', 'vue', 'axios', 'moment', 'MarkdownIt'], function (hdjs, $, Vue, axios, moment, MarkdownIt) {
         vm = new Vue({
             el: "#comment",
             data: {model: '', comments: [], field: {content: '', url: "{{$_SERVER['REQUEST_URI']}}"}},
@@ -77,6 +82,10 @@
                 this.model = "{{str_replace('\\','-',get_class($model))}}";
                 axios.get("/common/comment?model=" + this.model + "&id={{$model['id']}}").then((response) => {
                     this.comments = response.data.comments;
+                    this.comments.forEach(function (item) {
+                        let md = new MarkdownIt();
+                        item.content = md.render(item.content);
+                    })
                 });
                 //
                 hdjs.editormd("commentEditor", {
@@ -97,8 +106,8 @@
                     }
                 });
             },
-            updated(){
-                hdjs.scrollTo('body',location.hash ,2000, {queue:true});
+            updated() {
+                hdjs.scrollTo('body', location.hash, 2000, {queue: true});
             },
             methods: {
                 //点赞评论
@@ -122,11 +131,15 @@
                         axios.post(url, this.field).then((response) => {
                             let comment = response.data.comment;
                             comment.zan_count = comment.zan_count ? comment.zan_count : 0;
+                            let md = new MarkdownIt();
+                            comment.content = md.render(comment.content);
                             this.comments.push(comment);
                             //替换评论内容
                             this.field.content = '';
                             commentEditor.setSelection({line: 0, ch: 0}, {line: 9999, ch: 9999});
                             commentEditor.replaceSelection("");
+
+
                         })
                     }
                 },

@@ -41,13 +41,12 @@
                         <img src="{{auth()->user()->icon}}" alt="..." class="avatar-img rounded-circle">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}" class="dropdown-item">个人信息</a>
+                        <a href="{{route('member.user.show',[auth()->user()])}}" class="dropdown-item">个人空间</a>
+                        <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}" class="dropdown-item">修改资料</a>
                         <a href="settings.html" class="dropdown-item">学习记录</a>
-                        <a href="{{route('common.favorite.index')}}" class="dropdown-item">我的收藏</a>
                         @if(Auth::user()->is_admin)
                             <a href="{{route('admin.index')}}" class="dropdown-item">后台管理</a>
                         @endif
-                        <a href="{{route('edu.lesson.index')}}" class="dropdown-item">课程管理</a>
                         <hr class="dropdown-divider">
                         <a href="{{route('logout')}}" class="dropdown-item">退出</a>
                     </div>

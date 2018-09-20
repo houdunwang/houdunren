@@ -33,10 +33,11 @@
             @auth
                 <div class="dropdown">
                     <a href="#" class="avatar avatar-sm avatar-online dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{{auth()->user()->icon}}" alt="..." class="avatar-img rounded-circle">
+                        <img src="{{auth()->user()->icon}}" class="avatar-img rounded-circle">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}" class="dropdown-item">个人信息</a>
+                        <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}" class="dropdown-item">修改资料</a>
+                        <a href="{{route('member.user.show',auth()->id())}}" class="dropdown-item">个人空间</a>
                         @if(Auth::user()->is_admin)
                             <a href="{{route('admin.index')}}" class="dropdown-item">后台管理</a>
                         @endif
