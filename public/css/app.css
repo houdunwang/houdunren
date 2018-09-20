@@ -21,6 +21,14 @@ body {
   display: none;
 }
 
+.hljs {
+  line-height: 2em;
+}
+
+code {
+  color: #717e90;
+}
+
 .edu-comment .card {
   border-radius: 0 !important;
 }

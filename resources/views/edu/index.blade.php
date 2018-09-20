@@ -16,61 +16,33 @@
                                     筛选
                                 </a>
                                 <div class="dropdown-menu ">
-                                    <a class="dropdown-item sort small" data-sort="name" href="#!">
+                                    <a class="dropdown-item sort small" data-sort="name" href="{{route('edu.home')}}">
                                         全部
                                     </a>
-                                    <a class="dropdown-item sort small" data-sort="name" href="#!">
+                                    <a class="dropdown-item sort small" data-sort="name" href="{{route('edu.home',['t'=>'follow'])}}">
                                         关注
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-auto">
-                            <a href="#!" class="btn btn-sm btn-primary">
-                                发表
-                            </a>
-                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-lg list-group-flush list my--4">
-                        <li class="list-group-item px-0">
-                            <div class="row">
-                                <div class="col-auto">
-
-                                    <a class="avatar">
-                                        <img src="http://www.aoxiangjun.com/images/xjyan.jpg" alt="..." class="avatar-img rounded-circle">
-                                    </a>
-                                </div>
-                                <div class="col ml--2">
-                                    <h4 class="card-title mb-2 name">
-                                        <a href="https://#/users/87">
-                                            向军大叔
-                                        </a>
-                                        赞了话题
-                                        <a href="https://#/topics/15680/laravel-55-a-laravel-package-laravelfyvalidator-enhancement-that-saves-your-code" title="[< Laravel 5.5] 一个帮你省代码的 Laravel 包 `laravelfy/validator-enhancement`">
-                                            一个帮你省代码的 Laravel 包 laravelfy/validator-enhancement
-                                        </a>
-                                    </h4>
-                                    <p class="card-text small text-muted">
-                                        <i class="fe fe-clock"></i> 3 小时前
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-
+                        @foreach($activitys as $activity)
+                            @switch($activity->log_name)
+                                @case('comment')
+                                    @include('edu.activity._comment')
+                                @break
+                                @case('article')
+                                    @include('edu.activity._article')
+                                @break
+                            @endswitch
+                        @endforeach
                     </ul>
                 </div>
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#!">上一页</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">下一页</a></li>
-                </ul>
-            </nav>
+            {{$activitys->appends(['t'=>Request::query('t')])->links()}}
         </div>
         <div class="col-12 col-xl-3">
             <div class="card">

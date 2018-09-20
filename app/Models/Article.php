@@ -5,11 +5,15 @@ namespace App\Models;
 use App\Models\Traits\Common;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Article extends Model
 {
-    use Common;
+    use Common, LogsActivity;
     protected $fillable = ['title', 'content'];
+    protected static $logFillable = true;
+    protected static $recordEvents = ['created', 'updated'];
+    protected static $logName = 'article';
 
     public function getTitle()
     {

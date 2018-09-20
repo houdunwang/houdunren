@@ -15,9 +15,7 @@ class Comment extends Model
     protected $fillable = ['content', 'user_id', 'url'];
 
     protected static $logFillable = true;
-
     protected static $recordEvents = ['created', 'updated'];
-
     protected static $logName = 'comment';
 
     protected static function boot()

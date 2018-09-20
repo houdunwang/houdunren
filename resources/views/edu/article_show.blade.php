@@ -93,9 +93,11 @@
 @push('js')
     <script>
         require(['hdjs', 'marked', 'highlight'], function (hdjs, marked) {
-            marked.setOptions({renderer: new marked.Renderer()});
-            hljs.initHighlightingOnLoad();
-            $('#markdown').removeAttr('hidden');
+            $(document).ready(function() {
+                $('pre code').each(function(i, block) {
+                    hljs.highlightBlock(block);
+                });
+            });
         })
     </script>
 @endpush
