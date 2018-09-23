@@ -13,6 +13,10 @@
   border: 1px solid #e3ebf6 !important;
 }
 
+.card {
+  border-radius: .2rem;
+}
+
 body {
   background: #F2F5F9;
 }
@@ -30,7 +34,7 @@ code {
 }
 
 .edu-comment .card {
-  border-radius: 0 !important;
+  margin-bottom: .5rem;
 }
 
 .editormd {
@@ -39,5 +43,43 @@ code {
 
 .editormd ul.editormd-menu a {
   color: #95aac9 !important;
+}
+
+.edu-video-show .video-box {
+  overflow: hidden;
+  height: 628px;
+}
+
+@media screen and (max-width: 768px) {
+  .edu-video-show .video-box {
+    height: 200px;
+  }
+}
+
+.edu-video-show .video-box #video {
+  width: 100%;
+  background: #333;
+}
+
+@media screen and (max-width: 768px) {
+  .edu-video-show .video-box #video {
+    height: 200px;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .edu-video-show #videoCata {
+    display: none;
+  }
+}
+
+.edu-video-show #videoCata .video-lists {
+  max-height: 628px;
+  overflow: auto;
+}
+
+.edu-lesson-lists .listAlias img.card-img-top {
+  border-radius: 0;
+  height: 250px;
 }
 

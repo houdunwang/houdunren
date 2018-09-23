@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Common;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Lesson extends Model
 {
+    use Common;
     protected $fillable = [
         'title',
         'description',
@@ -35,5 +37,15 @@ class Lesson extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function link($param)
+    {
+        return route('edu.lesson.show', $this) . $param;
     }
 }

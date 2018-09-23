@@ -71,8 +71,10 @@
                         <a href="{{route('edu.category.index')}}" class="nav-link">
                             帖子分类
                         </a>
-                        <a href="feed.html" class="nav-link ">
-                            帖子列表
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('edu.lesson.index')}}" class="nav-link ">
+                            课程管理
                         </a>
                     </li>
                 </ul>

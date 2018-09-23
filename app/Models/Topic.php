@@ -4,10 +4,11 @@ namespace App\Models;
 
 use App\Models\Traits\Common;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Topic extends Model
 {
-    use Common;
+    use Common, Searchable;
 
     protected $fillable = ['title', 'content', 'category_id', 'user_id'];
 
@@ -19,5 +20,10 @@ class Topic extends Model
     public function link($param)
     {
         return route('edu.article.show', $this) . $param;
+    }
+
+    public function searchableAs()
+    {
+        return 'content';
     }
 }

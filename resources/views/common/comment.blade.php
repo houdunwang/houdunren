@@ -1,10 +1,17 @@
 <div class="edu-comment" id="comment" v-cloak="">
     <div class="card col-sm-12">
         <div class="card-body">
-            <div class="mb-3">
-                <button class="btn btn-white mr-3"><span class="fe fe-edit"></span> 发表评论</button>
-                <div class="small float-right text-muted pt-3">共有@{{comments.length}}条评论</div>
-            </div>
+            @auth
+                <div class="mb-3">
+                    <button class="btn btn-white mr-3" type="button" @click="toSendEditor"><span class="fe fe-edit"></span> 发表评论</button>
+                    <div class="small float-right text-muted pt-3">共有@{{comments.length}}条评论</div>
+                </div>
+            @else
+                <div class="mb-3">
+                    <a href="{{route('login')}}" class="btn btn-white mr-3"><span class="fe fe-user"></span> 登录后参与评论</a>
+                    <div class="small float-right text-muted pt-3">共有@{{comments.length}}条评论</div>
+                </div>
+            @endauth
         </div>
     </div>
     <div class="card col-sm-12" v-for="(comment,key) in comments" :id="'comment-'+comment.id">
@@ -43,21 +50,23 @@
         </div>
     </div>
     @auth
-        <div class="card col-sm-12">
-            <div class="card-body">
-                <div class="row align-items-start">
-                    <div class="col-12">
-                        <form @submit.prevent="send">
-                            <label class="sr-only">请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。</label>
-                            <div id="commentEditor">
-                                <textarea style="display:none;"></textarea>
-                            </div>
-                            <div class="mt-1">
-                                <button class="btn btn-white mb-2 btn-xs">发表评论</button>
-                            </div>
-                        </form>
+        <div class="card col-sm-12 p-0">
+            <div class="card-body p-2">
+                <div class="card card-inactive">
+                    <div class="card-body p-3">
+                        <p class="card-text text-muted">
+                            请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。
+                        </p>
                     </div>
                 </div>
+                <form @submit.prevent="send">
+                    <div class="form-group">
+                        <div id="commentEditor">
+                            <textarea style="display:none;"></textarea>
+                        </div>
+                    </div>
+                        <button class="btn btn-primary mb-2 btn-sm">发表评论</button>
+                </form>
             </div>
         </div>
     @else
@@ -69,7 +78,7 @@
     @endauth
 </div>
 <style>
-    .comment-body{
+    .comment-body {
         /*background: none;*/
     }
 </style>
@@ -93,21 +102,19 @@
                     height: 300,
                     toolbarIcons: function () {
                         return [
-                            "bold", "del", "italic", "quote", "|",
-                            "list-ul", "list-ol", "hr", "|",
-                            "link", "hdimage", "code-block", "|",
-                            "watch", "preview", "fullscreen"
+                            "link", "hdimage", "watch", "fullscreen"
                         ]
                     },
+                    watch:true,
                     //editor.md库位置
                     path: "{{asset('org/hdjs')}}/package/editor.md/lib/",
                     onchange: function () {
-                        vm.$set(vm.field, 'content', this.getValue())
+                        vm.$set(vm.field, 'content', this.getValue());
                     }
                 });
             },
             updated() {
-                hdjs.scrollTo('body', location.hash, 2000, {queue: true});
+                hdjs.scrollTo('body', location.hash, 0, {queue: true});
             },
             methods: {
                 //点赞评论
@@ -116,6 +123,9 @@
                     axios.get(url).then((response) => {
                         comment.zan_num = response.data.count;
                     });
+                },
+                toSendEditor() {
+                    hdjs.scrollTo('body', '#commentEditor', 1500, {queue: true});
                 },
                 //发表评论
                 send() {

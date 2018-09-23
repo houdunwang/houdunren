@@ -48,12 +48,8 @@
                 <div class="card-body">
                     <div class="nav flex-column nav-pills small">
                         <a href="{{route('edu.lesson.index')}}"
-                           class="nav-link {{active_class(if_route('edu.lesson.index'),'active','text-muted')}}">
-                            在线课程
-                        </a>
-                        <a href="{{route('edu.lesson.create')}}"
-                           class="nav-link {{active_class(if_route('edu.lesson.create'),'active','text-muted')}}">
-                            发布课程
+                           class="nav-link {{active_class(if_controller('App\Http\Controllers\Edu\LessonController'),'active','text-muted')}}">
+                            课程管理
                         </a>
                     </div>
                 </div>

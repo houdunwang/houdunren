@@ -10,19 +10,19 @@ class LessonController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['show', 'lists']]);
+        $this->middleware('auth', ['except' => ['lists']]);
     }
 
     public function index()
     {
-        $lessons = Lesson::paginate(20);
+        $lessons = Lesson::where('user_id',auth()->id())->paginate(20);
         return view('edu.lesson_index', compact('lessons'));
     }
 
     public function lists()
     {
         $lessons = Lesson::with('user')->paginate(10);
-        return view('edu.lesson_lists',compact('lessons'));
+        return view('edu.lesson_lists', compact('lessons'));
     }
 
     protected function validation($data)
@@ -118,6 +118,7 @@ class LessonController extends Controller
     public function destroy(Lesson $lesson)
     {
         $this->authorize('delete', $lesson);
+        $lesson->video()->withTrashed()->forceDelete();
         $lesson->delete();
         return redirect(route('edu.lesson.index'))->with('success', '课程删除成功');
     }

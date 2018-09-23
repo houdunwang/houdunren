@@ -55,11 +55,13 @@ Route::group(['middleware' => ['auth.admin'], 'as' => 'admin.', 'namespace' => '
 
 //在线教育
 Route::group(['prefix' => 'edu', 'namespace' => 'Edu', 'as' => 'edu.'], function () {
-    Route::get('/','HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
     Route::get('lesson/lists', 'LessonController@lists')->name('lesson.lists');
     Route::resource('lesson', 'LessonController');
     Route::resource('category', 'CategoryController');
     Route::resource('topic', 'TopicController');
     Route::resource('article', 'ArticleController');
+    Route::resource('video', 'VideoController');
+    Route::get('search', 'SearchController@lists')->name('search');
 });
 

@@ -19,9 +19,9 @@ class CreateVideosTable extends Migration
             $table->timestamps();
             $table->string('title');
             $table->string('path')->comment('视频文件');
+            $table->unsignedInteger('user_id')->index();
             $table->smallInteger('duration')->default(0)->comment('时长');
             $table->unsignedInteger('lesson_id');
-            $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
         });
     }
 

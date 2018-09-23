@@ -4,6 +4,10 @@
     border: 1px solid #e3ebf6 !important;
 }
 
+.card {
+    border-radius: .2rem;
+}
+
 body {
     background: #F2F5F9;
 }
@@ -23,9 +27,7 @@ code {
 //评论框
 .edu-comment {
     .card {
-        border-radius: 0 !important;
-        //border-bottom: 1px solid #edf2f9 !important;
-        //margin-bottom: 0 !important;;
+        margin-bottom: .5rem;
     }
 }
 
@@ -35,6 +37,42 @@ code {
     ul.editormd-menu {
         a {
             color: #95aac9 !important;
+        }
+    }
+}
+
+.edu-video-show {
+    .video-box {
+        overflow: hidden;
+        height: 628px;
+        @media screen and (max-width: 768px) {
+            height: 200px;
+        }
+        #video {
+            width: 100%;
+            background: #333;
+            @media screen and (max-width: 768px) {
+                height: 200px;
+            }
+        }
+    }
+    #videoCata {
+        @media screen and (min-width: 960px) {
+            display: none;
+        }
+        .video-lists {
+            max-height: 628px;
+            overflow: auto;
+        }
+    }
+}
+
+//课程列表
+.edu-lesson-lists {
+    .listAlias {
+        img.card-img-top {
+            border-radius: 0;
+            height: 250px;
         }
     }
 }

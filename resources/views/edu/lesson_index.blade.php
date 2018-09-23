@@ -1,8 +1,19 @@
-@extends('edu.layouts.member')
+@extends('edu.layouts.content')
 @section('content')
     <div class="card">
         <div class="card-body">
-            @include('edu.layouts._lesson_menu')
+            <ul class="nav nav-tabs nav-overflow mb-4">
+                <li class="nav-item">
+                    <a href="{{route('edu.lesson.index')}}" class="nav-link {{active_class(if_route('edu.lesson.index'))}}">
+                        课程列表
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('edu.lesson.create')}}" class="nav-link {{active_class(if_route('edu.lesson.create'))}}">
+                        设置课程
+                    </a>
+                </li>
+            </ul>
             <div class="table-responsive">
                 <table class="table">
                     <thead>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Edu;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Topic;
 use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,9 @@ class ArticleController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-    public function index()
+    public function index(Article $article)
     {
+//        dd(Article::search('向军叔大')->get()->toArray());
         $articles = Article::with(['user'])->paginate(20);
         return view('edu.article_index', compact('articles'));
     }

@@ -14,7 +14,7 @@ class HomeController extends Controller
         if ($request->query('t') == 'follow') {
             $db->whereIn('causer_id', auth()->user()->follower->pluck('id'));
         }
-        $activitys = $db->paginate(1);
+        $activitys = $db->paginate(15);
         return view('edu.index', compact('activitys'));
     }
 }

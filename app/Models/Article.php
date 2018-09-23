@@ -6,10 +6,11 @@ use App\Models\Traits\Common;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Laravel\Scout\Searchable;
 
 class Article extends Model
 {
-    use Common, LogsActivity;
+    use Common, LogsActivity, Searchable;
     protected $fillable = ['title', 'content'];
     protected static $logFillable = true;
     protected static $recordEvents = ['created', 'updated'];
@@ -29,5 +30,10 @@ class Article extends Model
     {
         $Parsedown = new \Parsedown();
         return $Parsedown->text($this['content']);
+    }
+
+    public function searchableAs()
+    {
+        return 'content';
     }
 }
