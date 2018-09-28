@@ -1,11 +1,14 @@
 @extends('layouts.admin')
+@section('menu')
+    @include('admin.layouts.menu')
+@endsection
 @section('content')
     <form action="{{route('admin.role.update',$role)}}" method="post">
         @csrf @method('PUT')
         <div class="row">
             <div class="card col-12">
                 <div class="card-body">
-                    <ul class="nav nav-tabs nav-tabs-sm mb-3">
+                    <ul class="nav nav-tabs nav-tabs-sm">
                         <li class="nav-item">
                             <a href="{{route('admin.role.index')}}" class="nav-link mr-3">
                                 角色列表
@@ -20,8 +23,12 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="">角色</label>
-                        <input type="text" name="name" value="{{$role['name']}}" class="form-control" placeholder="" aria-describedby="helpId">
+                        <label>中文描述</label>
+                        <input type="text" name="title" value="{{old('title',$role['title'])}}" class="form-control" placeholder="" aria-describedby="helpId">
+                    </div>
+                    <div class="form-group">
+                        <label>角色标识</label>
+                        <input type="text" name="name" value="{{old('name',$role['name'])}}" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
                 </div>
                 <div class="card-footer">

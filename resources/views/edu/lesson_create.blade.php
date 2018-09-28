@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('menu')
+    @include('edu.layouts.menu')
+@endsection
 @section('content')
     <form action="{{route('edu.lesson.store')}}" method="post" id="app">
         @csrf

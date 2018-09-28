@@ -1,37 +1,38 @@
-<?php
-
-namespace App\Http\Requests;
+<?php namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 class RoleRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return auth()->check();
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
-        return [
-            'name' => 'required',
-        ];
+        if (\Route::getCurrentRequest()->method == 'PUT') {
+            $id = \Route::getCurrentRoute()->parameters()['role']->id;
+            return [
+                'title' => 'required|unique:roles,title,' . $id,
+                'name'  => 'required|regex:/^[a-z]+$/|unique:roles,name,' . $id,
+            ];
+        } else {
+            return [
+                'title' => 'required|unique:roles,title',
+                'name'  => 'required|regex:/^[a-z]+$/',
+            ];
+        }
     }
 
     public function messages()
     {
         return [
-            'name.required' => '角色名称不能为空',
+            'title.required' => '角色中文描述不能为空',
+            'title.unique'   => '角色中文描述已经存在',
+            'name.regex'     => '角色标识只能为英文字母',
+            'name.required'  => '角色标识不能为空',
+            'name.unique'    => '角色标识已经存在',
         ];
     }
 

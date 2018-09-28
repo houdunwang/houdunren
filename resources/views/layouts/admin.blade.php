@@ -209,7 +209,52 @@
     </div>
 </div>
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light">
-    @include('layouts.menus.admin_system')
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+            <img src="/images/logo.png" class="navbar-brand-img mx-auto">
+        </a>
+        <div class="navbar-user d-md-none">
+            <div class="dropdown">
+                <a href="#!" id="sidebarIcon" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="avatar avatar-sm avatar-online">
+                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-1.jpg" class="avatar-img rounded-circle" alt="...">
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="sidebarIcon">
+                    <a href="{{route('member.user.show',auth()->user())}}" class="dropdown-item">个人空间</a>
+                    <a href="{{route('changePassword',auth()->user())}}" class="dropdown-item">修改密码</a>
+                    <hr class="dropdown-divider">
+                    <a href="{{route('logout')}}" class="dropdown-item">退出</a>
+                </div>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="sidebarCollapse">
+            @yield('menu')
+            <hr class="my-3">
+            <ul class="navbar-nav mb-md-3">
+                <li class="nav-item">
+                    <a class="nav-link " href="http://hdcms.com">
+                        <i class="fe fe-git-branch"></i> hdcms <span class="badge badge-primary ml-auto">v5.0</span>
+                    </a>
+                </li>
+            </ul>
+            <hr class="my-3">
+            <ul class="navbar-nav mb-md-3">
+                <li class="nav-item">
+                    <div class="nav-link text-muted">
+                        <i class="fe fe-sun"></i> 风格
+                        <div class="custom-control custom-checkbox-toggle ml-auto">
+                            <input type="checkbox" class="custom-control-input" id="themeModeToggle">
+                            <label class="custom-control-label" for="themeModeToggle"></label>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
 <div class="main-content">
     <nav class="navbar navbar-expand-md navbar-light d-none d-md-flex">
@@ -226,8 +271,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mr-4" href="http://dev.hdcms.com/edu/article">
-                        文章系统
+                    <a class="nav-link mr-4" href="{{route('edu.lesson.index')}}">
+                        在线教育
                     </a>
                 </li>
                 <li class="nav-item">
@@ -275,6 +320,7 @@
             , "{{asset('org/Dashkit-1.1.2')}}/js/theme.min.js"])
     })
 </script>
+<script src="{{asset('js/admin_menu.js')}}"></script>
 @stack('js')
 </body>
 </html>

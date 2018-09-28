@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('menu')
+    @include('edu.layouts.menu')
+@endsection
 @section('content')
     <div class="card">
         <div class="card-body">

@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('menu')
+    @include('admin.layouts.menu')
+@endsection
 @section('content')
     <form action="{{route('admin.role.store')}}" method="post">
         @csrf
@@ -20,8 +23,12 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="">角色</label>
-                        <input type="text" name="name" class="form-control" placeholder="" aria-describedby="helpId">
+                        <label for="">中文描述</label>
+                        <input type="text" name="title" value="{{old('title')}}" class="form-control" placeholder="" aria-describedby="helpId">
+                    </div>
+                    <div class="form-group">
+                        <label for="">角色标识</label>
+                        <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="" aria-describedby="helpId">
                     </div>
                 </div>
                 <div class="card-footer">

@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('menu')
+    @include('admin.layouts.menu')
+@endsection
 @section('content')
     <div class="row">
         <div class="card col-12">
@@ -18,11 +21,13 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-nowrap table-sm">
                         <thead>
                         <tr>
                             <th scope="col" width="80">编号</th>
                             <th scope="col">名称</th>
+                            <th scope="col">标识</th>
+                            <th scope="col">系统角色</th>
                             <th scope="col">更新时间</th>
                             <th scope="col" width="80"></th>
                         </tr>
@@ -31,12 +36,23 @@
                         @foreach($roles as $role)
                             <tr>
                                 <td>{{$role['id']}}</td>
+                                <td>{{$role['title']}}</td>
                                 <td>{{$role['name']}}</td>
-                                <td>{{$role['updated_at']}}</td>
+                                <td>
+                                    @if($role['system'])
+                                        <i class="fa fa-check-circle text-info" aria-hidden="true"></i>
+                                    @endif
+                                </td>
+                                <td>{{$role['updated_at']->diffForHumans()}}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                         <a href="{{route('admin.role.edit',$role)}}" class="btn btn-white">编辑</a>
-                                        <button type="button" class="btn btn-white">删除</button>
+                                        @can('delete',$role)
+                                            <button type="button" class="btn btn-white" onclick="del(this)">删除</button>
+                                        @endcan
+                                        <form action="{{route('admin.role.destroy',$role)}}" method="post">
+                                            @method('DELETE') @csrf
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
@@ -48,3 +64,14 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        function del(elem) {
+            require(['hdjs'], function (hdjs) {
+                hdjs.confirm('确定删除吗?', function () {
+                    $(elem).next('form').submit();
+                })
+            })
+        }
+    </script>
+@endpush

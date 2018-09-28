@@ -26,7 +26,7 @@ class RoleController extends Controller
 
     public function store(RoleRequest $request)
     {
-        Role::create($request->only(['name']));
+        Role::create($request->only(['name', 'title']));
         return redirect(route('admin.role.index'))->with('success', '角色添加成功');
     }
 
@@ -48,6 +48,8 @@ class RoleController extends Controller
 
     public function destroy(Role $role)
     {
-        //
+        $this->authorize('delete', $role);
+        $role->delete();
+        return redirect(route('admin.role.index'))->with('success', '删除成功');
     }
 }

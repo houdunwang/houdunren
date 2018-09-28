@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('menu')
+    @include('edu.layouts.menu')
+@endsection
 @section('content')
     <form action="{{route('edu.lesson.update',$lesson)}}" method="post" id="app">
         @csrf @method('PUT')

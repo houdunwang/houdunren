@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('menu')
+    @include('admin.layouts.menu')
+@endsection
 @section('content')
     <div class="row">
         <form action="{{route('admin.config.update',['name'=>'base'])}}" method="post" class="col-sm-12">
