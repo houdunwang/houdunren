@@ -13,7 +13,7 @@ class VideoObserver
 
     public function created(Video $video)
     {
-        //
+
     }
 
     /**

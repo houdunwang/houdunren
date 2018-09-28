@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Edu;
 
 use App\Models\Article;
+use App\Models\Lesson;
 use App\Models\Topic;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -20,6 +22,7 @@ class SearchController extends Controller
                 $data = Topic::search($w)->paginate(10);
                 break;
             case 'video':
+                $data = Video::search($w)->paginate(10);
                 break;
             default:
                 return back()->with('error', '类型错误');

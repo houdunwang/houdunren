@@ -22,7 +22,8 @@
         "laravel/framework": "5.6.*",
         "laravel/scout": "^5.0",
         "laravel/tinker": "^1.0",
-        "spatie/laravel-activitylog": "^2.8"
+        "spatie/laravel-activitylog": "^2.8",
+        "spatie/laravel-permission": "^2.20"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

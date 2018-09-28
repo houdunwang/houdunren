@@ -1,13 +1,11 @@
 @extends('layouts.admin')
 @section('content')
     <div class="row justify-content-center">
-        <form action="{{route('admin.config.update',['name'=>'email'])}}" method="post" class="col-sm-9">
+        <form action="{{route('admin.config.update',['name'=>'email'])}}" method="post" class="col-sm-12">
             @csrf @method('PUT')
             <div class="card">
-                <div class="card-header">
-                    <h4>邮箱配置</h4>
-                </div>
                 <div class="card-body">
+                    @include('admin.layouts._config_menu')
                     <div class="form-group">
                         <label>邮箱类型</label>
                         <input type="text" class="form-control" name="MAIL_DRIVER" value="{{$config['data']['MAIL_DRIVER']??'smtp'}}">
@@ -40,7 +38,7 @@
                         <label class="mb-1">加密方式</label>
                         <input type="text" class="form-control" name="MAIL_ENCRYPTION" value="{{$config['data']['MAIL_ENCRYPTION']??'tls'}}">
                     </div>
-                    <button class="btn btn-block btn-primary">
+                    <button class="btn btn-sm btn-primary">
                         保存
                     </button>
                 </div>

@@ -1,4 +1,4 @@
-@extends('edu.layouts.content')
+@extends('layouts.admin')
 @section('content')
     <div class="card">
         <div class="card-body">
@@ -10,7 +10,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('edu.lesson.create')}}" class="nav-link {{active_class(if_route('edu.lesson.create'))}}">
-                        设置课程
+                        新增课程
                     </a>
                 </li>
             </ul>

@@ -1,16 +1,12 @@
 require(['hdjs', 'jquery'], function (hdjs, $) {
-    $("#sidebarCollapse .top").click(function (event) {
-        // event.stopPropagation();
-        //记住点击的菜单ID
-        let id = $(this).find('.collapse').attr('id');
-        //移除原有菜单
-        $("#sidebarCollapse .top .collapse").removeClass('show');
+    $("ul.flex-column li.nav-item a.nav-link").click(function () {
+        let menu = $(this).parent().parent().parent().parent();
         hdjs.cookie(function (Cookie) {
-            Cookie.set('admin_menu_id', id);
+            Cookie.set('admin_menu_id', menu.attr('menu'));
         })
-    })
-    //防止点击菜单链接时页面抖动
-    $("#sidebarCollapse .top .collapse li").click(function (event) {
-        event.stopPropagation();
-    })
-})
+        setTimeout(() => {
+            location.href = $(this).attr('href');
+        }, 500);
+        return false;
+    });
+});

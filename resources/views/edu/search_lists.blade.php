@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @include('edu.search._article')
+                    @include('edu.search._'.$_GET['t'])
                 </div>
             </div>
 

@@ -6,11 +6,12 @@ use App\Models\Traits\Common;
 use App\Observers\VideoObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 use phpDocumentor\Reflection\Types\Self_;
 
 class Video extends Model
 {
-    use SoftDeletes, Common;
+    use SoftDeletes, Common,Searchable;
     /**
      * 需要转换成日期的属性
      *

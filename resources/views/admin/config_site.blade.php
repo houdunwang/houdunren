@@ -1,13 +1,11 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="row justify-content-center">
-        <form action="{{route('admin.config.update',['name'=>'site'])}}" method="post" class="col-sm-9">
+    <div class="row">
+        <form action="{{route('admin.config.update',['name'=>'site'])}}" method="post" class="col-sm-12">
             @csrf @method('PUT')
             <div class="card">
-                <div class="card-header">
-                    <h4>网站配置</h4>
-                </div>
                 <div class="card-body">
+                    @include('admin.layouts._config_menu')
                     <div class="form-group">
                         <label>网站名称</label>
                         <input type="text" class="form-control" name="webname" value="{{$config['data']['webname']??'后盾人'}}">
@@ -32,7 +30,7 @@
                         <label class="mb-1">联系邮箱</label>
                         <input type="text" class="form-control" name="email" value="{{$config['data']['email']}}">
                     </div>
-                    <button class="btn btn-block btn-primary">
+                    <button class="btn btn-sm btn-primary">
                         保存
                     </button>
                 </div>

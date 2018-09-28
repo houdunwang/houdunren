@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth.admin'], 'as' => 'admin.', 'namespace' => '
     //配置管理
     Route::get('config/{name}/edit', 'ConfigController@edit')->name('config.edit');
     Route::put('config/{name}', 'ConfigController@update')->name('config.update');
+    Route::resource('role', 'RoleController');
 });
 
 //在线教育

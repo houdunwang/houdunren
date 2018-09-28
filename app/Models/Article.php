@@ -31,9 +31,4 @@ class Article extends Model
         $Parsedown = new \Parsedown();
         return $Parsedown->text($this['content']);
     }
-
-    public function searchableAs()
-    {
-        return 'content';
-    }
 }

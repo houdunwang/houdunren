@@ -9,14 +9,14 @@
         <form id="searchForm" class="form-inline mr-5 d-none d-lg-flex" method="get" action="{{route('edu.search')}}">
             <div class="input-group input-group-sm">
                 <input type="text" class="form-control" name="w">
-                <input type="text" name="t" hidden>
+                <input type="text" name="t" hidden value="topic">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">搜索</button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#" onclick="searched('article');">文章</a>
-                        <a class="dropdown-item" href="#" onclick="searched('article');">话题</a>
+                        <a class="dropdown-item" href="#" onclick="searched('topic');">话题</a>
                         <div role="separator" class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" onclick="searched('article');">视频</a>
+                        <a class="dropdown-item" href="#" onclick="searched('video');">视频</a>
                     </div>
                 </div>
             </div>
@@ -24,42 +24,12 @@
         <script>
             function searched(t) {
                 require(['jquery'], function ($) {
-                    let w = $("[name='w']").val();
                     $("[name='t']").val(t);
-                    if ($.trim(w) == '') {
-                        return;
-                    }
                     $("#searchForm").submit();
                     return false;
                 })
             }
         </script>
-        {{--<form class="form-inline mr-4 d-none d-lg-flex">--}}
-        {{--<div class="input-group input-group-rounded input-group-merge" data-toggle="lists" data-lists-values='["name"]'>--}}
-        {{--<input type="search" class="form-control form-control-prepended  dropdown-toggle search"--}}
-        {{--data-toggle="dropdown" placeholder="搜索" aria-label="Search">--}}
-        {{--<div class="input-group-prepend">--}}
-        {{--<div class="input-group-text">--}}
-        {{--<i class="fe fe-search"></i>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--<div class="dropdown-menu dropdown-menu-card">--}}
-        {{--<div class="card-body">--}}
-        {{--<div class="list-group list-group-flush list my--3">--}}
-        {{--<a href="profile-posts.html" class="list-group-item px-0">--}}
-        {{--<div class="row align-items-center">--}}
-        {{--<div class="col ml--2">--}}
-        {{--<h4 class="text-body mb-1 name">--}}
-        {{--Laravel--}}
-        {{--</h4>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</a>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</form>--}}
         <div class="navbar-user">
             {{--发表内容--}}
             @include('edu.layouts._write')
@@ -116,7 +86,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mr-4" href="{{route('edu.article.index')}}">
+                    <a class="nav-link mr-4" href="{{route('edu.topic.index',['id'=>1]}}">
                         文章
                     </a>
                 </li>

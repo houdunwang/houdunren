@@ -21,9 +21,4 @@ class Topic extends Model
     {
         return route('edu.article.show', $this) . $param;
     }
-
-    public function searchableAs()
-    {
-        return 'content';
-    }
 }
