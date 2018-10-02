@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Models\Attachment;
-use App\Models\Follower;
 use App\Models\Zan;
 use App\Observers\UserObserver;
 use Illuminate\Notifications\Notifiable;

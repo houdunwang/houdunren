@@ -4,7 +4,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand mr-auto" href="/">
-            <img src="/images/logo.png" alt="..." class="navbar-brand-img">
+            <img src="/images/logo.png" class="navbar-brand-img">
         </a>
         <form id="searchForm" class="form-inline mr-5 d-none d-lg-flex" method="get" action="{{route('edu.search')}}">
             <div class="input-group input-group-sm">
@@ -44,7 +44,7 @@
                         <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}" class="dropdown-item">修改资料</a>
                         <a href="{{route('edu.lesson.index')}}" class="dropdown-item">课程管理</a>
                         <a href="settings.html" class="dropdown-item">学习记录</a>
-                        @if(Auth::user()->is_admin)
+                        @if(Auth::user()->admin)
                             <a href="{{route('admin.index')}}" class="dropdown-item">后台管理</a>
                         @endif
                         <hr class="dropdown-divider">
@@ -86,7 +86,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mr-4" href="{{route('edu.topic.index',['id'=>1]}}">
+                    <a class="nav-link mr-4" href="{{route('edu.topic.index',['id'=>1])}}">
                         文章
                     </a>
                 </li>

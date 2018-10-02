@@ -59,3 +59,19 @@ function hd_model()
     $class = '\\' . str_replace('-', '\\', $name);
     return $class::find($id);
 }
+
+/**
+ * 验证权限
+ * @param $permission
+ * @param null $user
+ * @return bool
+ * @throws \App\Exceptions\PermissionException
+ */
+function check($permission, $user = null)
+{
+    $user = $user ?? auth()->user();
+    if (!$user->can($permission)) {
+        throw new \App\Exceptions\PermissionException('没有访问权限');
+    }
+    return true;
+}

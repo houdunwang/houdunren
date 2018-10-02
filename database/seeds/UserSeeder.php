@@ -15,13 +15,13 @@ class UserSeeder extends Seeder
         $user = \App\User::find(1);
         $user['name'] = '向军大叔';
         $user['email'] = '2300071698@qq.com';
-        $user['is_admin'] = true;
         $user['password'] = bcrypt('admin888');
         $user->save();
+
+
         $user = \App\User::find(2);
         $user['name'] = '李四';
         $user['email'] = '931241005@qq.com';
-        $user['is_admin'] = true;
         $user['password'] = bcrypt('admin888');
         $user->save();
     }

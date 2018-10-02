@@ -3,7 +3,7 @@
     @include('admin.layouts.menu')
 @endsection
 @section('content')
-    <form action="{{route('admin.role.store')}}" method="post">
+    <form action="{{route('admin.role.store')}}" method="post" class="small">
         @csrf
         <div class="row">
             <div class="card col-12">

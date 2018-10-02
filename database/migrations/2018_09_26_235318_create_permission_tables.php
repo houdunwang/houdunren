@@ -20,6 +20,7 @@ class CreatePermissionTables extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('title');
+            $table->string('module')->default('');
             $table->string('guard_name');
             $table->timestamps();
         });

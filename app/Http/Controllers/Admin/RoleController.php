@@ -15,7 +15,8 @@ class RoleController extends Controller
 
     public function index()
     {
-        $roles = Role::get();
+        check('admin-index');
+        $roles = Role::where('id', '>', 1)->get();
         return view('admin.role_index', compact('roles'));
     }
 
@@ -24,9 +25,9 @@ class RoleController extends Controller
         return view('admin.role_create');
     }
 
-    public function store(RoleRequest $request)
+    public function store(RoleRequest $request, Role $role)
     {
-        Role::create($request->only(['name', 'title']));
+        $role->create($request->only(['name', 'title']));
         return redirect(route('admin.role.index'))->with('success', '角色添加成功');
     }
 

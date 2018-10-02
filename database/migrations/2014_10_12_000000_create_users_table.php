@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->string('token')->comment('邮箱或手机验证码');
             $table->tinyInteger('email_valid')->default(0)->comment('邮箱验证状态');
             $table->tinyInteger('mobile_valid')->default(0)->comment('手机号验证状态');
-            $table->tinyInteger('is_admin')->default(0)->comment('管理员');
             $table->rememberToken();
             $table->timestamps();
         });

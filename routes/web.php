@@ -46,12 +46,16 @@ Route::group(['namespace' => 'Article', 'prefix' => 'article', 'middleware' => [
 });
 
 //后台管理
-Route::group(['middleware' => ['auth.admin'], 'as' => 'admin.', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+Route::group(['middleware' => [], 'as' => 'admin.', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::get('/', 'HomeController@index')->name('index');
     //配置管理
     Route::get('config/{name}/edit', 'ConfigController@edit')->name('config.edit');
     Route::put('config/{name}', 'ConfigController@update')->name('config.update');
     Route::resource('role', 'RoleController');
+    Route::resource('user', 'UserController');
+    Route::get('permission/{role}', 'PermissionController@edit')->name('permission.role');
+    Route::post('permission/{role}', 'PermissionController@update')->name('permission.role');
+    Route::resource('module', 'ModuleController');
 });
 
 //在线教育
