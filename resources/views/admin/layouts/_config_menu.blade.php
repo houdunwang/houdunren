@@ -24,6 +24,12 @@
         </a>
     </li>
     <li class="nav-item">
+        <a href="{{route('admin.config.edit',['name'=>'wechat'])}}"
+           class="nav-link mr-3 {{active_class(if_route_param('name','wechat'))}}">
+            微信公众号
+        </a>
+    </li>
+    <li class="nav-item">
         <a href="{{route('admin.config.edit',['name'=>'aliyun'])}}"
            class="nav-link mr-3 {{active_class(if_route_param('name','aliyun'))}}">
             阿里云

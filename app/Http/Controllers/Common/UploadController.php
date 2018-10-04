@@ -22,9 +22,9 @@ class UploadController extends Controller
     {
         //普通上传
         if ($file = $request->file('file')) {
-            $file = $uploadServer->upload($file, $this->isImage($file) ? 'image' : 'file');
-            \Auth::user()->attachment()->create(['filename' => 33, 'path' => url($file)]);
-            return ['file' => url($file), 'code' => 0];
+            $path = $uploadServer->upload($file, $this->isImage($file) ? 'image' : 'file');
+            \Auth::user()->attachment()->create(['filename' => $file->getClientOriginalName(), 'path' => url($path)]);
+            return ['file' => url($path), 'code' => 0];
         } elseif ($content = $request->input('file')) {
             $file = $uploadServer->uploadBase64Image($content);
             return ['file' => url($file), 'code' => 0];

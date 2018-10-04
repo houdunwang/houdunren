@@ -38,11 +38,9 @@
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                         <a href="{{route('admin.role.edit',$module)}}" class="btn btn-white">
-                                            设置权限
+                                            暂时禁用模块
                                         </a>
-                                        @can('delete',$module)
-                                            <button type="button" class="btn btn-white" onclick="del(this)">删除</button>
-                                        @endcan
+                                        <button type="button" class="btn btn-danger" onclick="del(this)">彻底删除模块</button>
                                         <form action="{{route('admin.module.destroy',$module)}}" method="post">
                                             @method('DELETE') @csrf
                                         </form>
