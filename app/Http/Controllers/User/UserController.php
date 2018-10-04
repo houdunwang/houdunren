@@ -1,9 +1,16 @@
 <?php
+/** .-------------------------------------------------------------------
+ * |  Software: [hdcms framework]
+ * |      Site: www.hdcms.com
+ * |-------------------------------------------------------------------
+ * |    Author: 向军 <www.aoxiangjun.com>
+ * |    WeChat: houdunren2018
+ * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
+ * '-------------------------------------------------------------------*/
 
 namespace App\Http\Controllers\User;
 
 use App\Http\Requests\UserRequest;
-use App\Notifications\FollowerNotification;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

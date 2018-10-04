@@ -1,7 +1,11 @@
 <?php
 return [
     ['title' => '访问后台', 'name' => 'index'],
-    ['title' => '配置管理', 'name' => 'config'],
+    ['title' => '系统配置', 'name' => 'config'],
     ['title' => '角色管理', 'name' => 'role'],
-    ['title' => '用户权限设置', 'name' => 'permission'],
+    ['title' => '权限列表', 'name' => 'permission'],
+    ['title' => '设置角色权限', 'name' => 'role-permission'],
+    ['title' => '模块管理', 'name' => 'module'],
+    ['title' => '设计模块', 'name' => 'module-design'],
+    ['title' => '会员列表', 'name' => 'user'],
 ];

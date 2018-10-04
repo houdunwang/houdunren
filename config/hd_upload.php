@@ -1,12 +1,15 @@
 <?php
 /** .-------------------------------------------------------------------
- * |      Site: www.hdcms.com  www.houdunren.com
- * |      Date: 2018/6/30 上午1:54
- * |    Author: 向军大叔 <2300071698@qq.com>
+ * |  Software: [hdcms framework]
+ * |      Site: www.hdcms.com
+ * |-------------------------------------------------------------------
+ * |    Author: 向军 <www.aoxiangjun.com>
+ * |    WeChat: houdunren2018
+ * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 return [
     //上传事件监听器
-    'listener'     => function () {
+    'listener' => function () {
         return \Houdunwang\LaravelUpload\Listeners\FileListener::class;
-    }
+    },
 ];

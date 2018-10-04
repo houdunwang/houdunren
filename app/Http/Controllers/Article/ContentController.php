@@ -1,4 +1,12 @@
 <?php
+/** .-------------------------------------------------------------------
+ * |  Software: [hdcms framework]
+ * |      Site: www.hdcms.com
+ * |-------------------------------------------------------------------
+ * |    Author: 向军 <www.aoxiangjun.com>
+ * |    WeChat: houdunren2018
+ * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
+ * '-------------------------------------------------------------------*/
 
 namespace App\Http\Controllers\Article;
 
@@ -30,7 +38,7 @@ class ContentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +49,7 @@ class ContentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -52,7 +60,7 @@ class ContentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -63,8 +71,8 @@ class ContentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -75,7 +83,7 @@ class ContentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

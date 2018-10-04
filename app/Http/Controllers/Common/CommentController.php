@@ -1,8 +1,15 @@
 <?php
+/** .-------------------------------------------------------------------
+ * |  Software: [hdcms framework]
+ * |      Site: www.hdcms.com
+ * |-------------------------------------------------------------------
+ * |    Author: 向军 <www.aoxiangjun.com>
+ * |    WeChat: houdunren2018
+ * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
+ * '-------------------------------------------------------------------*/
 
 namespace App\Http\Controllers\Common;
 
-use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -20,7 +27,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $model = hd_model();
-        $data = $request->only(['content','url']);
+        $data = $request->only(['content', 'url']);
         $data['user_id'] = auth()->id();
         $comment = $model->comment()->create($data);
 

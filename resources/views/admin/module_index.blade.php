@@ -12,11 +12,6 @@
                             模块列表
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{route('admin.module.create')}}" class="nav-link mr-3">
-                            更新缓存
-                        </a>
-                    </li>
                 </ul>
             </div>
             <div class="card-body">

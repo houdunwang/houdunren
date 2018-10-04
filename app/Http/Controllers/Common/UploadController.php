@@ -1,10 +1,17 @@
 <?php
+/** .-------------------------------------------------------------------
+ * |  Software: [hdcms framework]
+ * |      Site: www.hdcms.com
+ * |-------------------------------------------------------------------
+ * |    Author: 向军 <www.aoxiangjun.com>
+ * |    WeChat: houdunren2018
+ * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
+ * '-------------------------------------------------------------------*/
 
-namespace App\Http\Controllers\Util;
+namespace App\Http\Controllers\Common;
 
 use App\Models\Attachment;
 use App\Servers\UploadServer;
-use Houdunwang\LaravelUpload\Events\UploadEvent;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -39,6 +46,6 @@ class UploadController extends Controller
         foreach ($attachments['data'] as $k => $v) {
             $attachments['data'][$k]['url'] = url($v['path']);
         }
-        return ['data' => $attachments['data'], 'page' => $db->links().'', 'code' => 0];
+        return ['data' => $attachments['data'], 'page' => $db->links() . '', 'code' => 0];
     }
 }

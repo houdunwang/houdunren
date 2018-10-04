@@ -30,6 +30,9 @@ class HdModule extends Command
         //设置站长权限
         $this->WebMaseterSyncPermission();
 
+        //删除权限缓存
+        app()['cache']->forget('spatie.permission.cache');
+
         $this->info('模块数据创建成功');
     }
 
@@ -59,15 +62,20 @@ class HdModule extends Command
         $permissions = include $dir . '/permission.php';
 
         //生成模块数据
-        Module::firstOrNew(['name' => $module], ['system' => $system, 'title' => $config['app'], 'permission' => $permissions])->save();
+        Module::firstOrNew(['name' => $module])->fill(
+            ['system' => $system, 'title' => $config['app'], 'permission' => $permissions]
+        )->save();
 
-        //生成模块权限数据
+        //生成模块权限数据,首先删除权限缓存
         foreach ($permissions as $permission) {
             $name = $module . '-' . $permission['name'];
-            Permission::firstOrNew(['name' => $name], ['title' => $permission['title'], 'module' => $module])->save();
+            Permission::firstOrNew(['name' => $name])->fill(
+                ['title' => $permission['title'], 'module' => $module]
+            )->save();
         }
+
         //生成模块配置项
-        Config::firstOrNew(['name' => "_{$module}"], ['data' => $config])->save();
+        Config::firstOrNew(['name' => "_{$module}"])->fill(['data' => $config])->save();
     }
 
     protected function WebMaseterSyncPermission()

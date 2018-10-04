@@ -261,8 +261,8 @@
         <div class="container-fluid">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item mr-4">
-                    <a class="nav-link" href="{{route('admin.config.edit','base')}}">
-                        系统设置
+                    <a class="nav-link" href="{{route('admin.index')}}">
+                        系统管理
                     </a>
                 </li>
                 <li class="nav-item">

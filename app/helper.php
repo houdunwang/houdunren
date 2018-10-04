@@ -1,4 +1,12 @@
 <?php
+/** .-------------------------------------------------------------------
+ * |  Software: [hdcms framework]
+ * |      Site: www.hdcms.com
+ * |-------------------------------------------------------------------
+ * |    Author: 向军 <www.aoxiangjun.com>
+ * |    WeChat: houdunren2018
+ * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
+ * '-------------------------------------------------------------------*/
 /**
  * 当前访问是否为指定路由前缀
  * 用于后台菜单列表展示
@@ -67,10 +75,11 @@ function hd_model()
  * @return bool
  * @throws \App\Exceptions\PermissionException
  */
-function check($permission, $user = null)
+function access($permission, $user = null)
 {
+    $permission = is_array($permission) ? $permission : [$permission];
     $user = $user ?? auth()->user();
-    if (!$user->can($permission)) {
+    if (!$user->hasAllPermissions($permission)) {
         throw new \App\Exceptions\PermissionException('没有访问权限');
     }
     return true;
