@@ -26,6 +26,11 @@ Route::group(['namespace' => 'Common', 'prefix' => 'common', 'as' => 'common.'],
     Route::any('code/send', 'CodeController@send')->name('code.send');
 });
 
+//微信模块
+Route::group(['namespace' => 'Chat', 'prefix' => 'chat', 'as' => 'chat.'], function () {
+    Route::resource('base', 'BaseController');
+});
+
 //会员中心
 Route::group(['namespace' => 'User', 'prefix' => 'member', 'as' => 'member.'], function () {
     Route::get('/', 'UserController@index')->name('index');

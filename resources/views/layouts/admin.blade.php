@@ -263,7 +263,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mr-4" href="http://dev.hdcms.com/edu/article">
+                    <a class="nav-link mr-4" href="{{route('chat.base.index')}}">
                         微信功能
                     </a>
                 </li>
