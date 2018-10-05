@@ -15,8 +15,8 @@ class CreateChatRulesTable extends Migration
     {
         Schema::create('chat_rules', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique()->comment('唯一标识');
-            $table->string('module')->index()->comment('模块标识');
+            $table->string('module')->index()->comment('模块');
+            $table->string('action')->comment('执行动作');
             $table->timestamps();
         });
     }

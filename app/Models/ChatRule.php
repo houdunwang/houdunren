@@ -16,5 +16,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ChatRule extends Model
 {
-    protected $fillable = ['name', 'module'];
+    protected $fillable = ['module','action'];
+
+    public function ChatKeyword()
+    {
+        return $this->hasMany(ChatKeyword::class);
+    }
+
+    public function systemModule(){
+        return $this->belongsTo(Module::class,'module','name');
+    }
 }

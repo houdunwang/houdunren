@@ -35,13 +35,18 @@
                         @foreach($bases as $base)
                             <tr>
                                 <td>{{$base['id']}}</td>
-                                <td>{{$base['content']}}</td>
-                                <td>{{$base['content']}}</td>
-                                <td>{{$module['created_at']->diffForHumans()}}</td>
+                                <td>{{$base['title']}}</td>
+                                <td>
+                                    @foreach($base->chatRule->ChatKeyword as $c)
+                                        <span class="badge badge-light">{{$c['content']}}</span>
+                                    @endforeach
+                                </td>
+                                <td>{{$base['created_at']->format('Y-m-d')}}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                        <a class="btn btn-light" href="{{route('chat.base.edit',$base)}}">编辑</a>
                                         <button type="button" class="btn btn-danger" onclick="del(this)">删除记录</button>
-                                        <form action="{{route('admin.module.destroy',$module)}}" method="post">
+                                        <form action="{{route('chat.base.destroy',$base)}}" method="post">
                                             @method('DELETE') @csrf
                                         </form>
                                     </div>

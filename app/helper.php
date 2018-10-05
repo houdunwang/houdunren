@@ -30,7 +30,7 @@ function hd_config($path)
     $cache = Cache::get('hd_config', function () {
         return \App\Models\Config::pluck('data', 'name');
     });
-    return $cache[$name][$info[0]] ?? null;
+    return count($info) == 0 ? $cache[$name] : $cache[$name][$info[0]] ?? null;
 }
 
 /**

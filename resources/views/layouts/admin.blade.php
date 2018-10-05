@@ -230,14 +230,14 @@
         </div>
         <div class="collapse navbar-collapse" id="sidebarCollapse">
             @yield('menu')
-            <hr class="my-3">
-            <ul class="navbar-nav mb-md-3">
-                <li class="nav-item">
-                    <a class="nav-link " href="http://hdcms.com">
-                        <i class="fe fe-git-branch"></i> hdcms <span class="badge badge-primary ml-auto">v5.0</span>
-                    </a>
-                </li>
-            </ul>
+            {{--<hr class="my-3">--}}
+            {{--<ul class="navbar-nav mb-md-3">--}}
+                {{--<li class="nav-item">--}}
+                    {{--<a class="nav-link " href="http://hdcms.com">--}}
+                        {{--<i class="fe fe-git-branch"></i> hdcms <span class="badge badge-primary ml-auto">v5.0</span>--}}
+                    {{--</a>--}}
+                {{--</li>--}}
+            {{--</ul>--}}
             <hr class="my-3">
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
@@ -274,7 +274,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mr-4" href="http://dev.hdcms.com/edu/article">
-                        插件扩展
+                        文章系统
                     </a>
                 </li>
             </ul>

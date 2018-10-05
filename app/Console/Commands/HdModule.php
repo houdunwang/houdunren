@@ -57,7 +57,7 @@ class HdModule extends Command
      */
     protected function make(String $dir, $system)
     {
-        $module = strtolower(basename(dirname($dir)));
+        $module = basename(dirname($dir));
         $config = include $dir . '/config.php';
         $permissions = include $dir . '/permission.php';
 

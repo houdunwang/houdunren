@@ -3,6 +3,9 @@
         设置关键词
     </div>
     <div class="card-body">
+        <div class="alert alert-light text-muted small" role="alert">
+            <i class="fa fa-bell-o" aria-hidden="true"></i> 添加已经存在的关键词，该关键词将会被忽略
+        </div>
         <div class="input-group mb-3" v-for="(v,i) in keywords">
             <input type="text" class="form-control" v-model="v.content" required>
             <div class="input-group-append">
@@ -11,7 +14,7 @@
         </div>
     </div>
     <div class="card-footer text-muted">
-        <button class="btn btn-white btn-sm" @click.prevent="add()">添加关键词</button>
+        <button class="btn btn-secondary btn-sm" @click.prevent="add()">添加关键词</button>
     </div>
     <textarea name="keywords" cols="30" rows="10" hidden>@{{ keywords }}</textarea>
 </div>
@@ -20,7 +23,7 @@
         new Vue({
             el: "#chatKeyword",
             data: {
-                keywords: []
+                keywords: {!! isset($base)?json_encode($base->chatRule->chatKeyword):"[{content: ''}]" !!}
             },
             methods: {
                 add() {

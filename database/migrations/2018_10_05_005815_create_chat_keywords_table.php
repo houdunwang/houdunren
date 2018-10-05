@@ -6,17 +6,13 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateChatKeywordsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('chat_keywords', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('chat_rules_id')->index();
-            $table->string('content')->index();
+            $table->unsignedInteger('chat_rule_id')->index();
+            $table->foreign('chat_rule_id')->references('id')->on('chat_rules')->onDelete('cascade');
+            $table->string('content')->unique();
             $table->timestamps();
         });
     }

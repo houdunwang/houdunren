@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Houdunwang\Aliyun\Aliyun;
+use Houdunwang\WeChat\WeChat;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,6 +31,8 @@ class AppServiceProvider extends ServiceProvider
             'accessId'  => config('aliyun.accessId'),
             'accessKey' => config('aliyun.accessKey'),
         ]);
+        //微信公众号
+        WeChat::config(config('wechat'));
     }
 
     /**

@@ -15,8 +15,9 @@ class CreateChatBasesTable extends Migration
     {
         Schema::create('chat_bases', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title');
             $table->text('content');
-            $table->unsignedInteger('chat_rules_id')->index();
+            $table->unsignedInteger('chat_rule_id')->index();
             $table->timestamps();
         });
     }
