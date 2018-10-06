@@ -17,6 +17,10 @@
             <div class="card-body">
                 <div class="form-group">
                     <textarea class="form-control" rows="3" v-model="v.content" required></textarea>
+                    <p class="text-dark pt-2">
+                        您还可以使用表情和链接。
+                        <a href="javascript:;" class="text-dark emotionLink" :index="i"><i class="fa fa-github-alt"></i> 表情</a>
+                    </p>
                 </div>
             </div>
             <div class="card-footer">
@@ -38,7 +42,27 @@
                 data: {
                     contents:{!! isset($base)?json_encode($base['content']):"[{content: ''}]" !!}
                 },
+                mounted: function () {
+                    this.emotion();
+                },
+                updated:function(){
+                    this.emotion();
+                },
                 methods: {
+                    emotion: function () {
+                        let This = this;
+                        //表情选择动作设置
+                        $('.emotionLink').each(function () {
+                            hdjs.emotion({
+                                btn: this,
+                                input: $(this).parents('div').eq(0).find('textarea')[0],
+                                callback: function (con, btn, input) {
+                                    let index = $(btn).attr('index');
+                                    This.contents[index].content = $(input).val();
+                                }
+                            });
+                        });
+                    },
                     add() {
                         this.contents.push({content: ''})
                     },

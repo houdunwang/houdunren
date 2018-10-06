@@ -22,14 +22,14 @@
                     @endcan
                     @can('Admin-permission')
                         <li class="nav-item">
-                            <a href="{{route('admin.permission')}}" class="nav-link">
+                            <a href="{{route('chat.button.index')}}" class="nav-link">
                                 微信菜单
                             </a>
                         </li>
                     @endcan
                     @can('Admin-permission')
                         <li class="nav-item">
-                            <a href="{{route('admin.permission')}}" class="nav-link">
+                            <a href="{{route('chat.default.create')}}" class="nav-link">
                                 默认消息
                             </a>
                         </li>

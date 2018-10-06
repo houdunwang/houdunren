@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateChatButtonsTable extends Migration
+class CreateChatDefaultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateChatButtonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('chat_buttons', function (Blueprint $table) {
+        Schema::create('chat_defaults', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->text('content')->comment('菜单内容');
+            $table->string('welcome')->nullable()->comment('欢迎消息');
+            $table->string('default_message')->nullable()->comment('默认回复消息');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateChatButtonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chat_buttons');
+        Schema::dropIfExists('chat_defaults');
     }
 }

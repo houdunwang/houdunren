@@ -80,6 +80,93 @@
   padding: 5px 0;
 }
 
+.chat-button-create,
+.chat-button-edit {
+  border: solid 1px #ddd;
+  height: 500px;
+  width: 320px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  background: url("/images/mobile-header.jpeg") no-repeat;
+  background-size: contain;
+}
+
+.chat-button-create .menu-container,
+.chat-button-edit .menu-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.chat-button-create .menu-container .menu,
+.chat-button-edit .menu-container .menu {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+}
+
+.chat-button-create .menu-container .menu h5,
+.chat-button-edit .menu-container .menu h5 {
+  border: solid 1px #ddd;
+  text-align: center;
+  padding: 10px;
+  margin: 0;
+  font-weight: bold;
+  font-size: 12px;
+  color: #555;
+  cursor: pointer;
+  border-bottom: none;
+  border-left: none;
+}
+
+.chat-button-create .menu-container .menu h5:last-child,
+.chat-button-edit .menu-container .menu h5:last-child {
+  border-right: none;
+}
+
+.chat-button-create .menu-container .menu dl,
+.chat-button-edit .menu-container .menu dl {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  margin-bottom: 0;
+}
+
+.chat-button-create .menu-container .menu dl dd,
+.chat-button-edit .menu-container .menu dl dd {
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  color: #555;
+  margin-bottom: 0;
+  background: #f3f3f3;
+  border-top: solid 1px #ddd;
+}
+
+.chat-button-create .menu-container .menu:nth-child(3) h5,
+.chat-button-edit .menu-container .menu:nth-child(3) h5 {
+  border-right: none;
+}
+
 .dropdown-menu-card {
   border: 1px solid #e3ebf6 !important;
 }

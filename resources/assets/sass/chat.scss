@@ -53,3 +53,65 @@
         padding: 5px 0;
     }
 }
+
+.chat-button-create, .chat-button-edit {
+    border: solid 1px #ddd;
+    height: 500px;
+    width: 320px;
+    display: flex;
+    align-items: flex-end;
+    background: url("/images/mobile-header.jpeg") no-repeat;
+    background-size: contain;
+    .menu-container {
+        display: flex;
+        flex: 1;
+        .menu {
+            flex: 1;
+            display: flex;
+            flex-direction: column-reverse;
+            h5 {
+                border: solid 1px #ddd;
+                text-align: center;
+                padding: 10px;
+                margin: 0;
+                font-weight: bold;
+                font-size: 12px;
+                color: #555;
+                cursor: pointer;
+                border-bottom: none;
+                border-left: none;
+                &:last-child {
+                    border-right: none;
+                }
+            }
+            dl {
+                display: flex;
+                flex-direction: column-reverse;
+                margin-bottom: 0;
+                dd {
+                    padding: 5px 10px;
+                    text-align: center;
+                    font-size: 14px;
+                    cursor: pointer;
+                    color: #555;
+                    margin-bottom: 0;
+                    //border: solid 1px #ddd;
+                    //border-bottom: none;
+                    background: #f3f3f3;
+                    border-top: solid 1px #ddd;
+                }
+            }
+            &:nth-child(3) {
+                h5 {
+                    border-right: none;
+                }
+                dl {
+                    dd {
+                        //border-left: solid 1px #ddd;
+                        //border-right: none;
+                    }
+                }
+            }
+        }
+    }
+}

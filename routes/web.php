@@ -31,6 +31,9 @@ Route::group(['namespace' => 'Chat', 'prefix' => 'chat', 'as' => 'chat.'], funct
     Route::any('/', 'HandleController@handle');
     Route::resource('base', 'ChatBaseController');
     Route::resource('news', 'ChatNewsController');
+    Route::resource('button', 'ChatButtonController');
+    Route::get('button/{button}/push', 'ChatButtonController@push')->name('button.push');
+    Route::resource('default', 'ChatDefaultController');
 });
 
 //会员中心
