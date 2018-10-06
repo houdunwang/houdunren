@@ -18,7 +18,7 @@ class ChatRule extends Model
 {
     protected $fillable = ['module','action'];
 
-    public function ChatKeyword()
+    public function chatKeyword()
     {
         return $this->hasMany(ChatKeyword::class);
     }

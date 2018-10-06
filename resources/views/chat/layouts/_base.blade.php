@@ -6,7 +6,8 @@
         </div>
     </div>
 </div>
-@include('chat.layouts._keywords')
+{{--@include('chat.layouts._keywords')--}}
+{!! $ruleView !!}
 <div class="card" id="base">
     <div class="card-header">
         回复内容
@@ -19,12 +20,12 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button class="btn btn-white btn-sm" @click.prevent="del(i)">删除</button>
+                <button type="button" class="btn btn-white btn-sm" @click.prevent="del(i)">删除</button>
             </div>
         </div>
     </div>
     <div class="card-footer text-muted">
-        <button type="button" class="btn btn-secondary btn-sm" @click.prevent="add()">添加菜单</button>
+        <button type="button" class="btn btn-secondary btn-sm" @click.prevent="add()">添加回复内容</button>
     </div>
     <textarea name="contents" cols="30" rows="10" hidden>@{{ contents }}</textarea>
 </div>

@@ -22,7 +22,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        access('admin-index');
+        access('Admin-index');
         return view('admin.index');
     }
 

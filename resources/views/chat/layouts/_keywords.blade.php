@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="card-footer text-muted">
-        <button class="btn btn-secondary btn-sm" @click.prevent="add()">添加关键词</button>
+        <button type="button" class="btn btn-secondary btn-sm" @click.prevent="add()">添加关键词</button>
     </div>
     <textarea name="keywords" cols="30" rows="10" hidden>@{{ keywords }}</textarea>
 </div>
@@ -23,7 +23,7 @@
         new Vue({
             el: "#chatKeyword",
             data: {
-                keywords: {!! isset($base)?json_encode($base->chatRule->chatKeyword):"[{content: ''}]" !!}
+                keywords: {!! isset($chatRule)?json_encode($chatRule->chatKeyword):"[{content: ''}]" !!}
             },
             methods: {
                 add() {

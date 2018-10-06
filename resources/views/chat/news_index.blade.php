@@ -8,13 +8,13 @@
             <div class="card-body">
                 <ul class="nav nav-tabs nav-tabs-sm">
                     <li class="nav-item">
-                        <a href="{{route('chat.base.index')}}" class="nav-link mr-3 active">
-                            普通文本消息
+                        <a href="{{route('chat.news.index')}}" class="nav-link mr-3 active">
+                            图文消息列表
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('chat.base.create')}}" class="nav-link mr-3">
-                            添加文本消息
+                        <a href="{{route('chat.news.create')}}" class="nav-link mr-3">
+                            添加图文消息
                         </a>
                     </li>
                 </ul>
@@ -32,21 +32,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($bases as $base)
+                        @foreach($news as $new)
                             <tr>
-                                <td>{{$base['id']}}</td>
-                                <td>{{$base['title']}}</td>
+                                <td>{{$new['id']}}</td>
+                                <td>{{$new['title']}}</td>
                                 <td>
-                                    @foreach($base->chatRule->ChatKeyword as $c)
+                                    @foreach($new->chatRule->ChatKeyword as $c)
                                         <span class="badge badge-light">{{$c['content']}}</span>
                                     @endforeach
                                 </td>
-                                <td>{{$base['created_at']->format('Y-m-d')}}</td>
+                                <td>{{$new['created_at']->format('Y-m-d')}}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                        <a class="btn btn-light" href="{{route('chat.base.edit',$base)}}">编辑</a>
+                                        <a class="btn btn-light" href="{{route('chat.news.edit',$new)}}">编辑</a>
                                         <button type="button" class="btn btn-danger" onclick="del(this)">删除记录</button>
-                                        <form action="{{route('chat.base.destroy',$base)}}" method="post">
+                                        <form action="{{route('chat.news.destroy',$new)}}" method="post">
                                             @method('DELETE') @csrf
                                         </form>
                                     </div>
@@ -62,10 +62,10 @@
 @endsection
 @push('js')
     <script>
-        function del(base) {
+        function del(news) {
             require(['hdjs'], function (hdjs) {
                 hdjs.confirm('确定删除吗?', function () {
-                    $(base).next('form').submit();
+                    $(news).next('form').submit();
                 })
             })
         }

@@ -44,7 +44,7 @@
                         <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}" class="dropdown-item">修改资料</a>
                         <a href="{{route('edu.lesson.index')}}" class="dropdown-item">课程管理</a>
                         <a href="settings.html" class="dropdown-item">学习记录</a>
-                        @if(Auth::user()->can('admin-index'))
+                        @if(Auth::user()->can('Admin-index'))
                             <a href="{{route('admin.index')}}" class="dropdown-item">后台管理</a>
                         @endif
                         <hr class="dropdown-divider">

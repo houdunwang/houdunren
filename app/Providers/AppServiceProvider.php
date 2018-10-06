@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             'accessKey' => config('aliyun.accessKey'),
         ]);
         //微信公众号
-        WeChat::config(config('wechat'));
+        WeChat::config(config('hd_wechat'));
     }
 
     /**

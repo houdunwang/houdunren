@@ -11,8 +11,9 @@
 namespace App\Http\Controllers\Chat\System;
 
 use App\Models\ChatBase;
+use App\Models\ChatNews;
 use App\Models\ChatRule;
-use Houdunwang\WeChat\WeChat;
+use Houdunwang\WeChat\Build\Message\Message;
 
 /**
  * .-------------------------------------------------------------------
@@ -29,7 +30,12 @@ class Processor
     public function base(ChatRule $chatRule = null)
     {
         $content = ChatBase::where('chat_rule_id', $chatRule['id'])->value('content');
+        return (new Message())->text(array_random($content)['content']);
+    }
 
-        return WeChat::instance('message')->text(array_random($content)['content']);
+    public function news(ChatRule $chatRule = null)
+    {
+        $content = ChatNews::where('chat_rule_id', $chatRule['id'])->value('content');
+        return (new Message())->news($content);
     }
 }

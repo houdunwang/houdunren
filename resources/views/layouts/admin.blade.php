@@ -15,7 +15,7 @@
 
     <link href="{{asset('org/Dashkit-1.1.2')}}/css/theme-dark.min.css" rel="" data-toggle="theme" data-theme-mode="dark">
     <link href="{{asset('org/Dashkit-1.1.2')}}/css/theme.min.css" rel="" data-toggle="theme" data-theme-mode="light">
-
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <style>
         body {
             display: none;

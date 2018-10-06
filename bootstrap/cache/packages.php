@@ -49,7 +49,11 @@
   array (
     'providers' => 
     array (
-      0 => '\\Houdunwang\\WeChat\\WeChatProvider',
+      0 => 'Houdunwang\\WeChat\\WeChatProvider',
+    ),
+    'aliases' => 
+    array (
+      'WeChat' => 'Houdunwang\\WeChat\\WeChatFacade',
     ),
   ),
   'laravel/scout' => 

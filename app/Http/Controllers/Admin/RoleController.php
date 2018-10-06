@@ -23,7 +23,7 @@ class RoleController extends Controller
 
     public function index()
     {
-        access('admin-role');
+        access('Admin-role');
         $roles = Role::where('id', '>', 1)->get();
         return view('admin.role_index', compact('roles'));
     }

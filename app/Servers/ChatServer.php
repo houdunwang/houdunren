@@ -15,14 +15,9 @@ use App\Models\ChatRule;
  */
 class ChatServer
 {
-    protected function ruleName(int $id, string $module): string
+    public function saveRule(string $module, string $action, ChatRule $chatRule = null): ChatRule
     {
-        return $module . '-' . $id;
-    }
-
-    public function saveRule(string $module, string $action, int $rule_id = 0): ChatRule
-    {
-        $chatRule = ChatRule::firstOrCreate(['id' => $rule_id, 'module' => $module, 'action' => $action]);
+        $chatRule = $chatRule ?? ChatRule::create(['module' => $module, 'action' => $action]);
         $keywords = json_decode(\Request::get('keywords'), true);
 
         //删除原关键词后添加，不允许重复添加关键词
@@ -41,5 +36,10 @@ class ChatServer
             ['content', $keyword['content']],
             ['id', '<>', $keyword['id'] ?? null],
         ])->first();
+    }
+
+    public function view($chatRule = null)
+    {
+        return view('chat.layouts._keywords', compact('chatRule'));
     }
 }

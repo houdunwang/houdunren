@@ -18,6 +18,7 @@ class CreateChatBasesTable extends Migration
             $table->string('title');
             $table->text('content');
             $table->unsignedInteger('chat_rule_id')->index();
+            $table->foreign('chat_rule_id')->references('id')->on('chat_rules')->onDelete('cascade');
             $table->timestamps();
         });
     }

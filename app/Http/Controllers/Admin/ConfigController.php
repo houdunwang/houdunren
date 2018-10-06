@@ -17,14 +17,14 @@ class ConfigController extends Controller
 {
     public function edit($name)
     {
-        access('admin-config');
+        access('Admin-config');
         $config = Config::firstOrNew(['name' => $name]);
         return view('admin.config_' . $name, compact('config'));
     }
 
     public function update(Request $request, $name)
     {
-        access('admin-config');
+        access('Admin-config');
         Config::updateOrCreate(['name' => $name], ['name' => $name, 'data' => $request->all()]);
         hd_edit_env($request->all());
         return back()->with('success', '保存成功');

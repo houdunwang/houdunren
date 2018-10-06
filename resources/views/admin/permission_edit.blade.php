@@ -26,12 +26,12 @@
                                     @foreach($module['permission'] as $permission)
                                         <div class="col-2">
                                             <div class="form-check">
-                                                <label class="form-check-label">
+                                                <label class="form-check-label pb-3 text-secondary">
                                                     <input type="checkbox" class="form-check-input" name="permission[]"
                                                            value="{{$module['name']}}-{{$permission['name']}}"
                                                         {{$role->hasPermissionTo($module['name'].'-'.$permission['name'])?'checked':''}}>
                                                     <span data-toggle="tooltip" data-placement="top" title="{{$module['name']}}-{{$permission['name']}}">
-                                                    {{$permission['title']}}
+                                                        {{$permission['title']}}
                                                     </span>
                                                 </label>
                                             </div>

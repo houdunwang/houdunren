@@ -70,7 +70,7 @@ class HdModule extends Command
         foreach ($permissions as $permission) {
             $name = $module . '-' . $permission['name'];
             Permission::firstOrNew(['name' => $name])->fill(
-                ['title' => $permission['title'], 'module' => $module]
+                ['title' => $permission['title'], 'module' => strtolower($module)]
             )->save();
         }
 

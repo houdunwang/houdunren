@@ -29,7 +29,8 @@ Route::group(['namespace' => 'Common', 'prefix' => 'common', 'as' => 'common.'],
 //微信模块
 Route::group(['namespace' => 'Chat', 'prefix' => 'chat', 'as' => 'chat.'], function () {
     Route::any('/', 'HandleController@handle');
-    Route::resource('base', 'BaseController');
+    Route::resource('base', 'ChatBaseController');
+    Route::resource('news', 'ChatNewsController');
 });
 
 //会员中心

@@ -24,28 +24,28 @@ class PermissionController extends Controller
 
     public function index()
     {
-        access('admin-role-permission');
+        access('Admin-role-permission');
         $modules = Module::get();
         return view('admin.permission_index', compact('modules'));
     }
 
     public function edit(Role $role)
     {
-        access('admin-role-permission');
+        access('Admin-role-permission');
         $modules = Module::get();
         return view('admin.permission_edit', compact('modules', 'role'));
     }
 
     public function update(Request $request, Role $role)
     {
-        access('admin-role-permission');
+        access('Admin-role-permission');
         $role->syncPermissions($request->get('permission', []));
         return back()->with('success', '权限设置成功');
     }
 
     public function updateCache()
     {
-        access('admin-role-permission');
+        access('Admin-role-permission');
         app()['cache']->forget('spatie.permission.cache');
         return back()->with('success', '缓存更新成功');
     }

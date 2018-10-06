@@ -16,13 +16,9 @@ use Houdunwang\WeChat\WeChat;
 
 class HandleController extends Controller
 {
-    public function __construct()
-    {
-        WeChat::valid();
-    }
-
     public function handle()
     {
+        WeChat::valid();
         $instance = WeChat::instance('message');
         if ($instance->isTextMsg()) {
             //关键词对象

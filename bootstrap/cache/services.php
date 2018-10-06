@@ -28,7 +28,7 @@
     24 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     25 => 'HieuLe\\Active\\ActiveServiceProvider',
     26 => 'Houdunwang\\LaravelUpload\\ServiceProvider',
-    27 => '\\Houdunwang\\WeChat\\WeChatProvider',
+    27 => 'Houdunwang\\WeChat\\WeChatProvider',
     28 => 'Laravel\\Scout\\ScoutServiceProvider',
     29 => 'Laravel\\Tinker\\TinkerServiceProvider',
     30 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
@@ -57,14 +57,15 @@
     11 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     12 => 'HieuLe\\Active\\ActiveServiceProvider',
     13 => 'Houdunwang\\LaravelUpload\\ServiceProvider',
-    14 => 'Laravel\\Scout\\ScoutServiceProvider',
-    15 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
-    16 => 'Spatie\\Permission\\PermissionServiceProvider',
-    17 => 'HieuLe\\Active\\ActiveServiceProvider',
-    18 => 'App\\Providers\\AppServiceProvider',
-    19 => 'App\\Providers\\AuthServiceProvider',
-    20 => 'App\\Providers\\EventServiceProvider',
-    21 => 'App\\Providers\\RouteServiceProvider',
+    14 => 'Houdunwang\\WeChat\\WeChatProvider',
+    15 => 'Laravel\\Scout\\ScoutServiceProvider',
+    16 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
+    17 => 'Spatie\\Permission\\PermissionServiceProvider',
+    18 => 'HieuLe\\Active\\ActiveServiceProvider',
+    19 => 'App\\Providers\\AppServiceProvider',
+    20 => 'App\\Providers\\AuthServiceProvider',
+    21 => 'App\\Providers\\EventServiceProvider',
+    22 => 'App\\Providers\\RouteServiceProvider',
   ),
   'deferred' => 
   array (
@@ -211,9 +212,6 @@
     array (
     ),
     'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider' => 
-    array (
-    ),
-    '\\Houdunwang\\WeChat\\WeChatProvider' => 
     array (
     ),
     'Laravel\\Tinker\\TinkerServiceProvider' => 

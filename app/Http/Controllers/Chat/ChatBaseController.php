@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Chat;
 use App\Http\Controllers\Chat\System\Processor;
 use App\Http\Controllers\Controller;
 use App\Models\ChatBase;
-use App\Models\ChatRule;
 use App\Servers\ChatServer;
 use Illuminate\Http\Request;
 
-class BaseController extends Controller
+class ChatBaseController extends Controller
 {
     public function __construct()
     {
@@ -22,9 +21,10 @@ class BaseController extends Controller
         return view('chat.base_index', compact('bases'));
     }
 
-    public function create()
+    public function create(ChatServer $chatServer)
     {
-        return view('chat.base_create');
+        $ruleView = $chatServer->view();
+        return view('chat.base_create', compact('ruleView'));
     }
 
     public function store(Request $request, ChatServer $chatServer)
@@ -40,20 +40,22 @@ class BaseController extends Controller
         //
     }
 
-    public function edit(ChatBase $base)
+    public function edit(ChatBase $base, ChatServer $chatServer)
     {
-        return view('chat.base_edit', compact('base'));
+        $ruleView = $chatServer->view($base->chatRule);
+        return view('chat.base_edit', compact('base', 'ruleView'));
     }
 
     public function update(Request $request, ChatBase $base, ChatServer $chatServer)
     {
-        $rule = $chatServer->saveRule('Chat', $base->chat_rule_id);
+        $chatServer->saveRule('Chat', Processor::class . '@base', $base->chatRule);
         $base->fill(['title' => $request->title, 'content' => json_decode($request->contents, true)])->save();
         return redirect(route('chat.base.index'))->with('success', '更新成功');
     }
 
-    public function destroy(ChatBase $chatBase)
+    public function destroy(ChatBase $base)
     {
-        //
+        $base->chatRule->delete();
+        return redirect(route('chat.base.index'))->with('success', '删除成功');
     }
 }
