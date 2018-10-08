@@ -1,13 +1,18 @@
 <ul class="navbar-nav">
     <li class="nav-item" menu="edu">
-        <a class="nav-link" href="#edu" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarPages">
-            <i class="fe fe-file"></i> 在线教育
+        <a class="nav-link" href="#edu" role="button" aria-expanded="false" aria-controls="sidebarPages">
+            <i class="fe fe-video"></i> <strong>在线教育</strong>
         </a>
-        <div class="collapse {{active_class(Cookie::get('admin_menu_id')=='edu','show','')}}" id="edu">
+        <div class="collapse show" id="edu">
             <ul class="nav nav-sm flex-column">
                 <li class="nav-item">
                     <a href="{{route('edu.category.index')}}" class="nav-link">
-                        帖子分类
+                        帖子文章列表
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('edu.category.index')}}" class="nav-link">
+                        帖子分类管理
                     </a>
                 </li>
                 <li class="nav-item">
@@ -19,19 +24,19 @@
         </div>
     </li>
     <li class="nav-item" menu="edu">
-        <a class="nav-link" href="#edu" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarPages">
-            <i class="fe fe-file"></i> 在线教育
+        <a class="nav-link" href="#edu" role="button" aria-expanded="false" aria-controls="sidebarPages">
+            <i class="fe fe-shopping-bag"></i> <strong>会员订单管理</strong>
         </a>
-        <div class="collapse {{active_class(Cookie::get('admin_menu_id')=='edu','show','')}}" id="edu">
+        <div class="collapse show" id="edu">
             <ul class="nav nav-sm flex-column">
                 <li class="nav-item">
-                    <a href="{{route('edu.category.index')}}" class="nav-link">
-                        帖子分类
+                    <a href="{{route('edu.lesson.index')}}" class="nav-link ">
+                        订阅会员
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('edu.lesson.index')}}" class="nav-link ">
-                        课程管理
+                        会员订单列表
                     </a>
                 </li>
             </ul>

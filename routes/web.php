@@ -54,7 +54,13 @@ Route::get('logout', 'User\LoginController@logout')->name('logout');
 Route::get('findPassword', 'User\LoginController@findPassword')->name('findPassword');
 Route::post('changePassword', 'User\LoginController@changePassword')->name('changePassword');
 
-//文章系统
+Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.'], function () {
+    Route::resource('model', 'ModelController');
+    Route::resource('category', 'CategoryController');
+    Route::resource('article', 'ArticleController');
+});
+
+//在线文章系统-todo
 Route::group(['namespace' => 'Article', 'prefix' => 'article', 'middleware' => []], function () {
     Route::get('home', 'HomeController@index');
     Route::resource('category', 'CategoryController');

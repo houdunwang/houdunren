@@ -9,7 +9,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>分类名称</label>
-                    <input type="text" name="title" class="form-control" value="{{old('title')}}" placeholder="输入帖子分类名称" aria-describedby="helpId">
+                    <input type="text" name="title" class="form-control" value="{{old('title')}}"  placeholder="输入帖子分类名称" aria-describedby="helpId">
                 </div>
                 <div class="form-group">
                     <label>分类描述</label>

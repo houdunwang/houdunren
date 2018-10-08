@@ -36,7 +36,6 @@
                         </a>
                     </small>
                 </div>
-
             </div>
             <div class="card-footer">
                 <button class="btn btn-primary btn-sm">保存提交</button>

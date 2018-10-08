@@ -210,7 +210,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="{{route('admin.index')}}">
             <img src="/images/logo.png" class="navbar-brand-img mx-auto">
         </a>
         <div class="navbar-user d-md-none">
@@ -258,7 +258,7 @@
         <div class="container-fluid">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item mr-4">
-                    <a class="nav-link" href="{{route('admin.index')}}">
+                    <a class="nav-link" href="{{route('admin.permission')}}">
                         系统管理
                     </a>
                 </li>
@@ -273,7 +273,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mr-4" href="http://dev.hdcms.com/edu/article">
+                    <a class="nav-link mr-4" href="{{route('content.article.index')}}">
                         文章系统
                     </a>
                 </li>
