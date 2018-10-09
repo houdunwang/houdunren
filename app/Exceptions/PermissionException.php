@@ -14,8 +14,11 @@ class PermissionException extends Exception
 
     public function render($request)
     {
-        return $request->expectsJson() ?
-            response()->json(['message' => $this->getMessage(), 'code' => 403], $this->code) :
-            back()->with('error', $this->getMessage());
+        if ($request->expectsJson()) {
+            return response()->json(['message' => $this->getMessage(), 'code' => 403], $this->code);
+        } elseif (!auth()->check()) {
+            return redirect(route('login'))->with('error', '请登录后操作');
+        }
+        return back()->with('error', $this->getMessage());
     }
 }

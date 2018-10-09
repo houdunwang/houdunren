@@ -15,17 +15,14 @@ use Closure;
 class AuthAdminMiddleware
 {
     /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
-     * @return mixed
+     * @param $request
+     * @param Closure $next
+     * @return \Illuminate\Http\RedirectResponse|mixed
+     * @throws \App\Exceptions\PermissionException
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->admin != 1) {
-            return redirect('/');
-        }
+        access('Admin-index');
         return $next($request);
     }
 }

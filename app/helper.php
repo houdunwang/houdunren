@@ -79,7 +79,7 @@ function access($permission, $user = null)
 {
     $permission = is_array($permission) ? $permission : [$permission];
     $user = $user ?? auth()->user();
-    if (!$user->hasAllPermissions($permission)) {
+    if (!$user || !$user->hasAllPermissions($permission)) {
         throw new \App\Exceptions\PermissionException('没有访问权限');
     }
     return true;

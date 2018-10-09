@@ -45,8 +45,8 @@
                     <div class="form-group">
                         <label>封面栏目</label>
                         <div class="custom-control custom-checkbox-toggle">
-                            <input type="checkbox" class="custom-control-input" name="is_home" id="is_home">
-                            <label class="custom-control-label" for="is_home"></label>
+                            <input type="checkbox" class="custom-control-input" name="is_homepage" value="1" id="is_homepage">
+                            <label class="custom-control-label" for="is_homepage"></label>
                         </div>
                     </div>
                     <div class="form-group">
