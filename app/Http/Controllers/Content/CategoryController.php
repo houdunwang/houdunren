@@ -2,54 +2,84 @@
 
 namespace App\Http\Controllers\Content;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ContentCategoryRequest;
 use App\Models\ContentCategory;
-use App\Models\ContentModel;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth.admin');
-    }
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $categorys = ContentCategory::get();
-        return view('content.category_index', compact('categorys'));
+        //
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        $models = ContentModel::get();
-        $categories = ContentCategory::getAllCategory();
-        return view('content.category_create', compact('models','categories'));
+        //
     }
 
-    public function store(ContentCategoryRequest $request)
-    {
-        ContentCategory::create($request->all());
-        return redirect(route('content.category.index'))->with('success', '栏目添加成功');
-    }
-
-    public function show(ContentModel $contentModel)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         //
     }
 
-    public function edit(ContentModel $contentModel)
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\ContentCategory  $contentCategory
+     * @return \Illuminate\Http\Response
+     */
+    public function show(ContentCategory $contentCategory)
     {
         //
     }
 
-    public function update(Request $request, ContentModel $contentModel)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\ContentCategory  $contentCategory
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(ContentCategory $contentCategory)
     {
         //
     }
 
-    public function destroy(ContentModel $contentModel)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\ContentCategory  $contentCategory
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, ContentCategory $contentCategory)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\ContentCategory  $contentCategory
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(ContentCategory $contentCategory)
     {
         //
     }
