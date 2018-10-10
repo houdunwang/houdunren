@@ -24,12 +24,12 @@ class ContentCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'            => 'required',
+            'title' => 'required',
             'content_model_id' => 'numeric',
-            'parent_id'        => 'numeric',
-            'redirect_url'     => 'nullable|url',
-            'index_template'   => 'required',
-            'list_template'    => 'required',
+            'parent_id' => 'numeric',
+            'redirect_url' => 'nullable|url',
+            'index_template' => 'required',
+            'list_template' => 'required',
             'article_template' => 'required',
         ];
     }
@@ -37,12 +37,13 @@ class ContentCategoryRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required'            => '栏目名称不能为空',
+            'title.required' => '栏目名称不能为空',
             'content_model_id.required' => '请选择模型',
-            'parent_id.required'        => '请选择顶级栏目',
-            'redirect_url.required'     => '跳转链接必须为合法URL',
-            'index_template.required'   => '请选择栏目封面模板',
-            'list_template.required'    => '请选择栏目列表页模板',
+            'parent_id.required' => '请选择顶级栏目',
+            'redirect_url.required' => '跳转链接不能为空',
+            'redirect_url.url' => '跳转链接不合法',
+            'index_template.required' => '请选择栏目封面模板',
+            'list_template.required' => '请选择栏目列表页模板',
             'article_template.required' => '请选择栏目内容页模板',
         ];
     }

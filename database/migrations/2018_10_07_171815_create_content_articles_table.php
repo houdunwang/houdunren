@@ -16,8 +16,8 @@ class CreateContentArticlesTable extends Migration
         Schema::create('content_articles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->unsignedInteger('content_category_id')->index();
-            $table->foreign('content_category_id')->references('id')->on('content_categories')->onDelete('cascade');
+            $table->unsignedInteger('category_id')->index();
+            $table->foreign('category_id')->references('id')->on('content_categories')->onDelete('cascade');
             $table->string('source')->nullable()->comment('来源');
             $table->string('author')->nullable()->comment('作者');
             $table->string('thumb')->nullable()->comment('缩略图');
@@ -25,7 +25,9 @@ class CreateContentArticlesTable extends Migration
             $table->text('content');
             $table->string('redirect_url')->nullable()->comment('跳转链接');
             $table->string('click')->default(0)->comment('查看次数');
-            $table->string('template')->comment('自定义模板');
+            $table->string('template')->nullable()->comment('自定义模板');
+            $table->unsignedInteger('user_id')->index();
+            $table->text('fields')->nullable()->comment('扩展字段');
             $table->timestamps();
         });
     }

@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class ModelController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function index()
     {
         $models = ContentModel::get();

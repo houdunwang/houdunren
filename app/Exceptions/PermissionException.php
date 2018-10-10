@@ -19,6 +19,6 @@ class PermissionException extends Exception
         } elseif (!auth()->check()) {
             return redirect(route('login'))->with('error', '请登录后操作');
         }
-        return back()->with('error', $this->getMessage());
+        return redirect('/')->with('error', $this->getMessage());
     }
 }

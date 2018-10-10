@@ -27,19 +27,27 @@
                             <th scope="col" width="80">编号</th>
                             <th scope="col">栏目名称</th>
                             <th scope="col">模型名称</th>
-                            <th>文章数</th>
+                            <th>封面栏目</th>
                             <th scope="col">创建时间</th>
                             <th scope="col" width="80"></th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($categorys as $category)
+                        @foreach($categories as $category)
                             <tr>
                                 <td>{{$category['id']}}</td>
-                                <td>{{$category['title']}}</td>
+                                <td>
+                                    {{$category['_title']}}
+                                </td>
                                 <td>{{$category->model->title}}</td>
-                                <td>{{$category->article->count()}} 篇</td>
-                                <td>{{$category['created_at']->format('Y-m-d')}}</td>
+                                <td>
+                                    @if($category['is_homepage'])
+                                        <span class="fe fe-check-circle text-info"></span>
+                                    @else
+                                        <span class="fe fe-x-circle text-secondary"></span>
+                                    @endif
+                                </td>
+                                <td>{{$category['created_at']->format('Y/m/d')}}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                         <a class="btn btn-light" href="{{route('content.category.edit',$category)}}">编辑栏目</a>

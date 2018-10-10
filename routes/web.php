@@ -58,6 +58,7 @@ Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.
     Route::resource('model', 'ModelController');
     Route::resource('category', 'CategoryController');
     Route::resource('article', 'ArticleController');
+    Route::get('select_category','ArticleController@selectCategory')->name('select_category');
 });
 
 //在线文章系统-todo

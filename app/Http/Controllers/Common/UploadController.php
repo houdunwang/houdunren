@@ -18,7 +18,7 @@ use App\Http\Controllers\Controller;
 class UploadController extends Controller
 {
     //只处理图片上传
-    public function upload(Request $request, UploadServer $uploadServer, Attachment $attachment)
+    public function upload(Request $request, UploadServer $uploadServer)
     {
         //普通上传
         if ($file = $request->file('file')) {

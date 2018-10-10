@@ -13,7 +13,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('content.article.create')}}" class="nav-link mr-3">
+                        <a href="{{route('content.select_category')}}" class="nav-link mr-3">
                             发表文章
                         </a>
                     </li>
