@@ -27,7 +27,7 @@ class CreateContentArticlesTable extends Migration
             $table->string('click')->default(0)->comment('查看次数');
             $table->string('template')->nullable()->comment('自定义模板');
             $table->unsignedInteger('user_id')->index();
-            $table->text('fields')->nullable()->comment('扩展字段');
+            $table->mediumText('fields')->nullable()->comment('扩展字段');
             $table->timestamps();
         });
     }

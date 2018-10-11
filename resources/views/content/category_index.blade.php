@@ -70,7 +70,7 @@
     <script>
         function del(button) {
             require(['hdjs'], function (hdjs) {
-                hdjs.confirm('删除模型将删除模型的栏目与所有文章，你确定删除吗?', function () {
+                hdjs.confirm('将同时删除栏目下的所有文章<br/>你确定执行删除吗?', function () {
                     $(button).next('form').submit();
                 })
             })

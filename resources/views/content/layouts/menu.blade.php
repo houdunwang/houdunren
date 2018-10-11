@@ -13,7 +13,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{route('content.category.index')}}" class="nav-link">
-                            内容分类管理
+                            栏目分类
                         </a>
                     </li>
                     <li class="nav-item">
@@ -26,7 +26,7 @@
         </li>
         <li class="nav-item" menu="admin">
             <a class="nav-link" href="#admin" role="button" aria-expanded="false" aria-controls="sidebarPages">
-                <i class="fe fe-file-text"></i> <strong>扩展功能</strong>
+                <i class="fe fe-layers"></i> <strong>扩展功能</strong>
             </a>
             <div class="collapse show" id="admin">
                 <ul class="nav nav-sm flex-column">

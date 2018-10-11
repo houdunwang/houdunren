@@ -167,6 +167,10 @@
   border-right: none;
 }
 
+.navbar-vertical.navbar-expand-md .navbar-nav .nav .nav-link {
+  font-size: 14px;
+}
+
 .dropdown-menu-card {
   border: 1px solid #e3ebf6 !important;
 }

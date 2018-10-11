@@ -7,6 +7,7 @@
  * |    WeChat: houdunren2018
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Models;
 
 use App\Models\Traits\Common;

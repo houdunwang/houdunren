@@ -14,9 +14,10 @@ use App\Models\Comment;
 use App\Models\Favorite;
 use App\User;
 use App\Models\Zan;
+
 trait Common
 {
-//用户关联
+    //用户关联
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContentArticleRequest;
+use App\Models\Article;
 use App\Models\ContentArticle;
 use App\Models\ContentCategory;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class ArticleController extends Controller
 
     public function index()
     {
-        return view('content.article_index');
+        $articles = ContentArticle::latest()->paginate(15);
+        return view('content.article_index', compact('articles'));
     }
 
     //选择栏目
@@ -27,10 +29,11 @@ class ArticleController extends Controller
         return view('content.article_select_category', compact('categories'));
     }
 
-    public function create(ContentArticle $article,Request $request)
+    public function create(ContentArticle $article, Request $request)
     {
         $category = ContentCategory::find($request->query('category_id'));
-        return view('content.article_create', compact('article','category'));
+        $extendField = $article->extendField($category);
+        return view('content.article_create', compact('article', 'category', 'extendField'));
     }
 
     public function store(ContentArticleRequest $request, ContentArticle $article)
@@ -41,21 +44,24 @@ class ArticleController extends Controller
 
     public function show(ContentArticle $contentArticle)
     {
-        //
     }
 
-    public function edit(ContentArticle $contentArticle)
+    public function edit(ContentArticle $article, Request $request)
     {
-        //
+        $category = $article->category;
+        $extendField = $article->extendField($category);
+        return view('content.article_edit', compact('article', 'category', 'extendField'));
     }
 
-    public function update(Request $request, ContentArticle $contentArticle)
+    public function update(ContentArticleRequest $request, ContentArticle $article)
     {
-        //
+        $article->update($request->all());
+        return redirect(route('content.article.index'))->with('success', '文章修改成功');
     }
 
-    public function destroy(ContentArticle $contentArticle)
+    public function destroy(ContentArticle $article)
     {
-        //
+        $article->delete();
+        return redirect(route('content.article.index'))->with('success', '文章删除成功');
     }
 }

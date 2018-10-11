@@ -9,4 +9,9 @@ class ContentModel extends Model
     protected $fillable = ['title', 'fields'];
 
     protected $casts = ['fields' => 'array'];
+
+    public function fields()
+    {
+
+    }
 }

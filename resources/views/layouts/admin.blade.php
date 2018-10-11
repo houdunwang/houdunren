@@ -230,26 +230,31 @@
         </div>
         <div class="collapse navbar-collapse" id="sidebarCollapse">
             @yield('menu')
-            {{--<hr class="my-3">--}}
-            {{--<ul class="navbar-nav mb-md-3">--}}
-                {{--<li class="nav-item">--}}
-                    {{--<a class="nav-link " href="http://hdcms.com">--}}
-                        {{--<i class="fe fe-git-branch"></i> hdcms <span class="badge badge-primary ml-auto">v5.0</span>--}}
-                    {{--</a>--}}
-                {{--</li>--}}
-            {{--</ul>--}}
             <hr class="my-3">
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
-                    <div class="nav-link text-muted">
-                        <i class="fe fe-sun"></i> 风格
-                        <div class="custom-control custom-checkbox-toggle ml-auto">
-                            <input type="checkbox" class="custom-control-input" id="themeModeToggle">
-                            <label class="custom-control-label" for="themeModeToggle"></label>
-                        </div>
-                    </div>
+                    <a class="nav-link" href="http://www.hdcms.com" target="_blank">
+                        <i class="fe fe-git-branch"></i> hdcms <span class="badge badge-primary ml-auto">v5.0</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link small text-secondary" href="http://www.houdunren.com" target="_blank">
+                        <i class="fe fe-film"></i> 后盾人视频教程
+                    </a>
                 </li>
             </ul>
+            {{--<hr class="my-3">--}}
+            {{--<ul class="navbar-nav mb-md-3">--}}
+                {{--<li class="nav-item">--}}
+                    {{--<div class="nav-link text-muted">--}}
+                        {{--<i class="fe fe-sun"></i> 风格--}}
+                        {{--<div class="custom-control custom-checkbox-toggle ml-auto">--}}
+                            {{--<input type="checkbox" class="custom-control-input" id="themeModeToggle">--}}
+                            {{--<label class="custom-control-label" for="themeModeToggle"></label>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</li>--}}
+            {{--</ul>--}}
         </div>
     </div>
 </nav>

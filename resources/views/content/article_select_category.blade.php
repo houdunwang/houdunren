@@ -21,14 +21,29 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    <label>父级栏目</label>
-                    <select name="category_id" class="form-control" required multiple size="15" onchange="select()">
+                    <label>选择文章栏目</label>
+                    <select name="category_id" class="form-control rounded-0" required multiple size="17" onchange="select()">
                         @foreach($categories as $cat)
-                            <option value="{{$cat['id']}}" {{$cat['_selected']}} {{$cat['_disabled']}}>
-                                {!! $cat['_title'] !!}
+                            <option value="{{$cat['id']}}"
+                                    {{$cat['is_homepage']?'disabled':''}}
+                                    class="{{$cat['is_homepage']?'text-secondary':'test-dark'}}"
+                            >
+                                {!! $cat['_title'] !!} ({{mb_substr($cat->model->title,0,1)}})
                             </option>
                         @endforeach
                     </select>
+                    @push('css')
+                        <style>
+                            option{
+                                font-weight: bold;
+                                line-height: 2em;
+                                margin-bottom: 10px;
+                                border-bottom: solid 1px #f3f3f3;
+                                padding-bottom: 5px;
+
+                            }
+                        </style>
+                    @endpush
                 </div>
             </div>
         </div>

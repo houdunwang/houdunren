@@ -1,79 +1,80 @@
 @import "edu.scss";
 @import "chat.scss";
+@import "admin.scss";
 
 .dropdown-menu-card {
-    border: 1px solid #e3ebf6 !important;
+  border: 1px solid #e3ebf6 !important;
 }
 
 .card {
-    border-radius: .2rem;
+  border-radius: .2rem;
 }
 
 body {
-    background: #F2F5F9;
+  background: #F2F5F9;
 }
 
 [v-cloak] {
-    display: none;
+  display: none;
 }
 
 .hljs {
-    line-height: 2em;
+  line-height: 2em;
 }
 
 code {
-    color: #717e90;
+  color: #717e90;
 }
 
 //评论框
 .edu-comment {
-    .card {
-        margin-bottom: .5rem;
-    }
+  .card {
+    margin-bottom: .5rem;
+  }
 }
 
 //编辑器
 .editormd {
-    border: solid 1px #e3e3e3 !important;
-    ul.editormd-menu {
-        a {
-            color: #95aac9 !important;
-        }
+  border: solid 1px #e3e3e3 !important;
+  ul.editormd-menu {
+    a {
+      color: #95aac9 !important;
     }
+  }
 }
 
 .edu-video-show {
-    .video-box {
-        overflow: hidden;
-        height: 628px;
-        @media screen and (max-width: 768px) {
-            height: 200px;
-        }
-        #video {
-            width: 100%;
-            background: #333;
-            @media screen and (max-width: 768px) {
-                height: 200px;
-            }
-        }
+  .video-box {
+    overflow: hidden;
+    height: 628px;
+    @media screen and (max-width: 768px) {
+      height: 200px;
     }
-    #videoCata {
-        @media screen and (min-width: 960px) {
-            display: none;
-        }
-        .video-lists {
-            max-height: 628px;
-            overflow: auto;
-        }
+    #video {
+      width: 100%;
+      background: #333;
+      @media screen and (max-width: 768px) {
+        height: 200px;
+      }
     }
+  }
+  #videoCata {
+    @media screen and (min-width: 960px) {
+      display: none;
+    }
+    .video-lists {
+      max-height: 628px;
+      overflow: auto;
+    }
+  }
 }
 
 //课程列表
 .edu-lesson-lists {
-    .listAlias {
-        img.card-img-top {
-            border-radius: 0;
-            height: 250px;
-        }
+  .listAlias {
+    img.card-img-top {
+      border-radius: 0;
+      height: 250px;
     }
+  }
 }

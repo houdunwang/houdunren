@@ -35,7 +35,7 @@
                 el: "#app",
                 data: {
                     fields:{!! isset($model)?json_encode($model['fields']):"[{title: '', name: '', type: 'text'}]" !!},
-                    types: {text: '单行文本框', textarea: '多行文本域', image: '图片'}
+                    types: {input: '单行文本框', textarea: '多行文本域', image: '图片','ueditor':'百度编辑器'}
                 },
                 methods: {
                     addField() {
