@@ -24,7 +24,7 @@
         <div class="col-12 col-md-5 col-xl-4 order-md-1 my-5">
             <h1 class="display-4 text-center mb-3">找回密码</h1>
             <p class="text-muted text-center mb-5">
-                感谢你使用 {{hd_config('site.webname')}} 网站服务
+                感谢你使用 {{system_config('site.webname')}} 网站服务
             </p>
             <form action="{{route('changePassword')}}" method="post">
                 @csrf
@@ -67,7 +67,7 @@
             //后台链接
             url: '{{route('common.code.send')}}',
             //验证码等待发送时间
-            timeout: '{{hd_config('base.code_expire')}}',
+            timeout: '{{system_config('base.code_expire')}}',
             //POST表单数据
             data: {"_token": "{{ csrf_token() }}"},
             //表单，手机号或邮箱的INPUT表单

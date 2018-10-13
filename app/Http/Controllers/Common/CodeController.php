@@ -21,7 +21,7 @@ class CodeController extends Controller
 {
     public function send(Request $request)
     {
-        $code = hd_random(4);
+        $code = random_number(4);
         $this->expireCheck();
         if (filter_var($request->username, FILTER_VALIDATE_EMAIL)) {
             //邮箱
@@ -32,13 +32,13 @@ class CodeController extends Controller
             //手机短信
             $data = [
                 //短信签名
-                'sign'     => '后盾人',
+                'sign' => '后盾人',
                 //短信模板
                 'template' => 'SMS_15440200',
                 //手机号
-                'mobile'   => $request->username,
+                'mobile' => $request->username,
                 //模板变量
-                'vars'     => ["code" => $code, "product" => "后盾人"],
+                'vars' => ["code" => $code, "product" => "后盾人"],
             ];
             Aliyun::instance('Sms')->send($data);
             $this->saveToSession($code, 'mobile', $request->username);
@@ -51,10 +51,10 @@ class CodeController extends Controller
     protected function saveToSession($code, $type, $username)
     {
         session()->put('validate_code', [
-            'code'     => $code,
-            'type'     => $type,
+            'code' => $code,
+            'type' => $type,
             'username' => $username,
-            'expire'   => time() + hd_config('base.code_expire'),
+            'expire' => time() + system_config('base.code_expire'),
         ]);
     }
 

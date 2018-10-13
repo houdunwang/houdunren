@@ -22,7 +22,7 @@ class CreateContentCategoriesTable extends Migration
             $table->unsignedTinyInteger('is_homepage')->default(0)->comment('封面栏目');
             $table->string('description')->nullable()->comment('栏目描述');
             $table->string('redirect_url')->nullable()-> comment('跳转链接');
-            $table->string('index_template')->default('home.blade.php')->comment('封面模板');
+            $table->string('index_template')->default('index.blade.php')->comment('封面模板');
             $table->string('list_template')->default('list.blade.php')->comment('栏目模板');
             $table->string('article_template')->default('article.blade.php')->comment('内容页模板');
             $table->timestamps();

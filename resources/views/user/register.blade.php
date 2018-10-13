@@ -72,7 +72,7 @@
             //后台链接
             url: '{{route('common.code.send')}}',
             //验证码等待发送时间
-            timeout: '{{hd_config('base.code_expire')}}',
+            timeout: '{{system_config('base.code_expire')}}',
             //POST表单数据
             data: {"_token": "{{ csrf_token() }}"},
             //表单，手机号或邮箱的INPUT表单

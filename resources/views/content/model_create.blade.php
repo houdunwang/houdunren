@@ -6,7 +6,7 @@
     <form action="{{route('content.model.store')}}" method="post" id="app">
         @csrf
         <div class="row">
-            <div class="card col-12">
+            <div class="card col-12 pb-0 mb-0 border-0 rounded-0">
                 <div class="card-body">
                     <ul class="nav nav-tabs nav-tabs-sm">
                         <li class="nav-item">
@@ -20,12 +20,6 @@
                             </a>
                         </li>
                     </ul>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label>模型中文描述</label>
-                        <input type="text" name="title" value="{{old('title')}}" class="form-control" placeholder="请输入模型中文描述">
-                    </div>
                 </div>
             </div>
             @include('content.layouts._model')

@@ -1,7 +1,7 @@
 <div class="card-body" id="app" v-cloak>
     <div class="row">
         <div class="col-sm-4">
-            <div class="{{hd_route_class()}}">
+            <div class="{{route_class()}}">
                 <div class="menu-container">
                     <div class="menu" v-for="(v,i) in menus">
                         <h5>

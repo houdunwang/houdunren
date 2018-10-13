@@ -34,7 +34,7 @@
             document.body.style.display = 'block';
         });
     </script>
-    <title>{{hd_config('site.webname')}}</title>
+    <title>{{system_config('site.webname')}}</title>
     @include('layouts._hdjs')
     @include('layouts._message')
     @stack('css')

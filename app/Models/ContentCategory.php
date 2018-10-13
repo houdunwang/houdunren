@@ -27,7 +27,7 @@ class ContentCategory extends Model
 
     public function article()
     {
-        return $this->hasMany(ContentArticle::class);
+        return $this->hasMany(ContentArticle::class,'category_id');
     }
 
     public function tree(Collection $categories = null)

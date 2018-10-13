@@ -1,6 +1,6 @@
 @extends('edu.layouts.master')
 @section('content')
-    <div class="{{hd_route_class()}}">
+    <div class="{{route_class()}}">
         <div class="row">
             <div class="col-12 mt-5">
                 <div class="alert alert-white p-4 text-muted" role="alert">

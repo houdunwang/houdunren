@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <form action="{{route('edu.category.store')}}" method="post" class="{{hd_route_class()}}">
+    <form action="{{route('edu.category.store')}}" method="post" class="{{route_class()}}">
         @csrf
         <div class="card">
             <div class="card-header">

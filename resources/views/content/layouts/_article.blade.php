@@ -1,4 +1,4 @@
-<div class="card col-12 border-0 rounded-0">
+<div class="card col-12 border-0 rounded-0 mb-0 pb-0">
     <input type="hidden" name="category_id" value="{{$category['id']}}">
     <div class="card-body">
         <div class="form-group">
@@ -99,13 +99,17 @@
         </div>
     </div>
 </div>
-<div class="card col-12">
-    <div class="card-header">
-        扩展字段
+@if(!empty($extendField))
+    <div class="card col-12 mt-3 mb-0 pb-0 border-0">
+        <div class="card-header">
+            扩展字段
+        </div>
+        <div class="card-body">
+            {!! $extendField !!}
+        </div>
     </div>
-    <div class="card-body">
-        {!! $extendField !!}
-    </div>
+@endif
+<div class="card col-12 pt-0 mt-0 border-0">
     <div class="card-footer text-muted">
         <button class="btn btn-primary btn-sm">保存提交</button>
     </div>

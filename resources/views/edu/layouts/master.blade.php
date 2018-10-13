@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/css/theme.min.css">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <title>{{hd_config('site.webname')}}</title>
+    <title>{{system_config('site.webname')}}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('layouts._hdjs')
     @include('layouts._message')

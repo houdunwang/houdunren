@@ -9,8 +9,12 @@
  * '-------------------------------------------------------------------*/
 
 //网站首页
-Route::get('/', 'Edu\HomeController@index')->name('home');
-Route::get('/home', 'Edu\HomeController@index')->name('home');
+Route::get('/', function () {
+    $class = \App\Http\Controllers\Content\HomeController::class;
+    return App::call($class . '@index');
+//    Route::get('/home', 'Edu\HomeController@index')->name('home');
+})->name('home');
+
 
 //公共控制器
 Route::group(['namespace' => 'Common', 'prefix' => 'common', 'as' => 'common.'], function () {
@@ -58,14 +62,22 @@ Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.
     Route::resource('model', 'ModelController');
     Route::resource('category', 'CategoryController');
     Route::resource('article', 'ArticleController');
-    Route::get('select_category','ArticleController@selectCategory')->name('select_category');
+    Route::get('select_category', 'ArticleController@selectCategory')->name('select_category');
+    Route::get('config/edit', 'ConfigController@edit')->name('config.edit');
+    Route::put('config/update', 'ConfigController@update')->name('config.update');
+    Route::resource('template', 'TemplateController');
+    Route::get('template/{template}', 'TemplateController@update')->name('template.update');
+    Route::get('template_cache', 'TemplateController@cache')->name('template.cache');
+
+    Route::get('c{category}.html', 'HomeController@lists')->name('list');
+    Route::get('{article}.html', 'HomeController@article')->name('article');
 });
 
 //在线文章系统-todo
 Route::group(['namespace' => 'Article', 'prefix' => 'article', 'middleware' => []], function () {
-    Route::get('home', 'HomeController@index');
-    Route::resource('category', 'CategoryController');
-    Route::resource('content', 'ContentController');
+//    Route::get('home', 'HomeController@index');
+//    Route::resource('category', 'CategoryController');
+//    Route::resource('content', 'ContentController');
 });
 
 //后台管理
@@ -81,6 +93,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => [], 'as' => 'admin.', 'pre
     Route::get('permission/{role}', 'PermissionController@edit')->name('permission.role');
     Route::post('permission/{role}', 'PermissionController@update')->name('permission.role');
     Route::resource('module', 'ModuleController');
+    //模块配置项
+//    Route::put('module_config/{module}', 'ModuleConfigController@update')->name('module_config.update');
 });
 
 //在线教育

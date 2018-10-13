@@ -7,7 +7,7 @@
     <div class="card-header">图文消息管理</div>
     <div class="card-body">
         <div class="row">
-            <div class="col-sm-4 {{hd_route_class()}}">
+            <div class="col-sm-4 {{route_class()}}">
                 <div class="news">
                     <div class="first" v-for="(v,i) in news" v-if="i==0">
                         <img :src="v.picurl" alt="">

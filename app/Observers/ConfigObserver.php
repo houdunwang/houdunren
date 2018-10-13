@@ -31,6 +31,6 @@ class ConfigObserver
 
     protected function cache()
     {
-        \Cache::forever('hd_config', Config::pluck('data', 'name'));
+        \Cache::forever('system_config', Config::pluck('data', 'name'));
     }
 }

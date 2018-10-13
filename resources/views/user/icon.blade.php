@@ -39,7 +39,7 @@
                     $("[name='icon']").val(images[0]);
                     $(".avatar img").attr('src', images[0]);
                     $("#form-icon").submit();
-                }, {width: 700, extensions: 'jpg,jpeg', fileSingleSizeLimit: 200 * 1024, multiple: true})
+                }, {width: 700, extensions: 'jpg,jpeg,png,gif,JPG', fileSingleSizeLimit: 200 * 1024, multiple: true})
             });
         }
     </script>

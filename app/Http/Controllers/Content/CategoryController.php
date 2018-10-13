@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Content;
 
 use App\Http\Requests\ContentCategoryRequest;
+use App\Models\Config;
 use App\Models\ContentCategory;
 use App\Models\ContentModel;
 use Illuminate\Http\Request;
@@ -55,6 +56,7 @@ class CategoryController extends Controller
 
     public function destroy(ContentCategory $category)
     {
-        //
+        $category->delete();
+        return redirect(route('content.category.index'))->with('success', '栏目删除成功');
     }
 }

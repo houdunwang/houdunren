@@ -46,12 +46,14 @@
                                 <td>{{$article['created_at']->format('Y/m/d')}}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                        <a class="btn btn-white" href="{{route('content.article.edit',$article)}}">编辑文章</a>
+                                        <a class="btn btn-white"
+                                           href="{{route('content.article.edit',$article)}}">编辑文章</a>
                                         <button type="button" class="btn btn-light" onclick="del(this)">删除文章</button>
                                         <form action="{{route('content.article.destroy',$article)}}" method="post">
                                             @method('DELETE') @csrf
                                         </form>
-                                        <a class="btn btn-white" href="{{route('content.article.edit',$article)}}">预览文章</a>
+                                        <a class="btn btn-white"
+                                           href="{{route('content.article.edit',$article)}}">预览文章</a>
                                     </div>
                                 </td>
                             </tr>

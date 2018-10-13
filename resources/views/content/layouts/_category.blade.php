@@ -52,19 +52,19 @@
         <div class="form-group">
             <label>封面模板</label>
             <input type="text" name="index_template" required
-                   value="{{old('index_template',$model['index_template']??'index_template.blade.php')}}"
+                   value="{{old('index_template',$model['index_template']??'index.blade.php')}}"
                    class="form-control">
         </div>
         <div class="form-group">
             <label>列表页模板</label>
             <input type="text" name="list_template" required
-                   value="{{old('list_template',$model['list_template']??'list_template.blade.php')}}"
+                   value="{{old('list_template',$model['list_template']??'list.blade.php')}}"
                    class="form-control">
         </div>
         <div class="form-group">
             <label>内容页模板</label>
             <input type="text" name="article_template" required
-                   value="{{old('article_template',$model['article_template']??'article_template.blade.php')}}"
+                   value="{{old('article_template',$model['article_template']??'article.blade.php')}}"
                    class="form-control">
         </div>
     </div>

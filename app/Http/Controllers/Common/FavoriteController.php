@@ -29,7 +29,7 @@ class FavoriteController extends Controller
 
     public function make()
     {
-        $model = hd_model()->favorite();
+        $model = model_instance()->favorite();
         $favorite = $model->where('user_id', auth()->id())->first();
         if ($favorite) {
             $favorite->delete();

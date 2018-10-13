@@ -7,12 +7,18 @@
  * |    WeChat: houdunren2018
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Config;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * 系统配置项
+ * Class ConfigController
+ * @package App\Http\Controllers\Admin
+ */
 class ConfigController extends Controller
 {
     public function edit($name)

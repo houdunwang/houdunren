@@ -13,22 +13,37 @@
  * @param $name
  * @return bool
  */
-function routePrefixCheck($name)
-{
-    return \Route::current()->getPrefix() == '/' . $name;
-}
+//function routePrefixCheck($name)
+//{
+//    return \Route::current()->getPrefix() == '/' . $name;
+//}
 
 /**
  * 获取配置项
  * @param $path
  * @return mixed
  */
-function hd_config($path)
+function system_config($path)
 {
     $info = explode('.', $path);
     $name = array_shift($info);
-    $cache = Cache::get('hd_config', function () {
+    $cache = Cache::get('system_config', function () {
         return \App\Models\Config::pluck('data', 'name');
+    });
+    return count($info) == 0 ? $cache[$name] : $cache[$name][$info[0]] ?? null;
+}
+
+/**
+ * 获取模块配置项
+ * @param $path
+ * @return null
+ */
+function module_config($path)
+{
+    $info = explode('.', $path);
+    $name = array_shift($info);
+    $cache = Cache::get('module_config', function () {
+        return \App\Models\ModuleConfig::pluck('data', 'name');
     });
     return count($info) == 0 ? $cache[$name] : $cache[$name][$info[0]] ?? null;
 }
@@ -38,7 +53,7 @@ function hd_config($path)
  * @param $num
  * @return string
  */
-function hd_random($num)
+function random_number($num)
 {
     $str = '';
     for ($i = 0; $i < $num; $i++) {
@@ -47,17 +62,25 @@ function hd_random($num)
     return $str;
 }
 
-function hd_menu_class($id, $class = 'show')
-{
-    return \Cookie::get('admin_menu_id') == $id ? $class : '';
-}
+//function hd_menu_class($id, $class = 'show')
+//{
+//    return \Cookie::get('admin_menu_id') == $id ? $class : '';
+//}
 
-function hd_route_class()
+/**
+ * 根据路由生成样式类名
+ * @return mixed
+ */
+function route_class()
 {
     return str_replace('.', '-', Route::currentRouteName());
 }
 
-function hd_model()
+/**
+ * 生成模型实例
+ * @return mixed
+ */
+function model_instance()
 {
     $name = Request::query('model');
     if (!strpos($name, '-')) {

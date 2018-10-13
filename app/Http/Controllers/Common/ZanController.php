@@ -22,7 +22,7 @@ class ZanController extends Controller
 
     public function make(Request $request)
     {
-        $model = hd_model()->zan();
+        $model = model_instance()->zan();
         $zan = $model->where('user_id', auth()->id())->first();
         if ($zan) {
             $zan->delete();
@@ -31,7 +31,7 @@ class ZanController extends Controller
         }
 
         if ($request->ajax()) {
-            return ['count' => hd_model()->zan_num, 'code' => 0];
+            return ['count' => model_instance()->zan_num, 'code' => 0];
         }
         return back();
     }

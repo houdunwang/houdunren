@@ -1,3 +1,12 @@
+<div class="card col-12 pt-0 mt-0 border-0">
+    <div class="card-body">
+        <div class="form-group">
+            <label>模型中文描述</label>
+            <input type="text" name="title" value="{{old('title',$model['title']??'')}}" class="form-control" placeholder="请输入模型中文描述">
+        </div>
+    </div>
+</div>
+
 <div class="card col-12">
     <div class="card-header">
         字段设置
@@ -34,12 +43,12 @@
             new vue({
                 el: "#app",
                 data: {
-                    fields:{!! isset($model)?json_encode($model['fields']):"[{title: '', name: '', type: 'text'}]" !!},
+                    fields:{!! isset($model)?json_encode($model['fields']):"[]" !!},
                     types: {input: '单行文本框', textarea: '多行文本域', image: '图片','ueditor':'百度编辑器'}
                 },
                 methods: {
                     addField() {
-                        this.fields.push({title: '', name: '', type: 'text'})
+                        this.fields.push({title: '', name: '', type: 'input'})
                     },
                     removeField(key) {
                         this.fields.splice(key, 1);

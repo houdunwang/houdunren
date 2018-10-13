@@ -7,12 +7,12 @@
                         传播互联网前沿技术，帮助更多的人实现梦想
                     </h4>
                     <p class="text-muted">
-                        {{hd_config('site.copyright')}}
+                        {{system_config('site.copyright')}}
                     </p>
                     <p class="small text-muted mb-0 ">
-                        <span class="fe fe-phone-call mr-1"></span> <a href="tel:{{hd_config('site.tel')}}">{{hd_config('site.tel')}}</a>
+                        <span class="fe fe-phone-call mr-1"></span> <a href="tel:{{system_config('site.tel')}}">{{system_config('site.tel')}}</a>
                         <br>
-                        <span class="fe fe-send mr-1"></span> <a href="mailto:{{hd_config('site.email')}}">{{hd_config('site.email')}}</a>
+                        <span class="fe fe-send mr-1"></span> <a href="mailto:{{system_config('site.email')}}">{{system_config('site.email')}}</a>
                     </p>
                 </div>
                 <div class="col-sm-4">
