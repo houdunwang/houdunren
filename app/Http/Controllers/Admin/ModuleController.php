@@ -11,6 +11,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ContentModuleRequest;
 use App\Models\Module;
 use Illuminate\Http\Request;
 
@@ -44,12 +45,13 @@ class ModuleController extends Controller
 
     public function edit(Module $module)
     {
-        //
+        return view('admin.module_edit', compact('module'));
     }
 
-    public function update(Request $request, Module $module)
+    public function update(ContentModuleRequest $request, Module $module)
     {
-        //
+        $module->update($request->all());
+        return redirect(route('admin.module.index'))->with('success', '模块修改成功');
     }
 
     public function destroy(Module $module)

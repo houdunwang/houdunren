@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ContentModelSeeder::class);
         $this->call(ContentCategorySeeder::class);
         $this->call(ConfigSeeder::class);
+        $this->call(ArticleSeeder::class);
+        $this->call(ContentSlideSeeder::class);
     }
 }

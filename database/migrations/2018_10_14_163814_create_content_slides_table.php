@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateModulesTable extends Migration
+class CreateContentSlidesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateModulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('modules', function (Blueprint $table) {
+        Schema::create('content_slides', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('title');
-            $table->text('permission');
-            $table->unsignedTinyInteger('system')->default(0);
-            $table->string('domain')->nullable()->comment('模块独立域名');
+            $table->string('url');
+            $table->string('title')->nullable();
+            $table->string('image');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateModulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modules');
+        Schema::dropIfExists('content_slides');
     }
 }

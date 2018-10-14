@@ -30,7 +30,7 @@ class ContentTemplate extends Model
 
     protected function getDirAttribute()
     {
-        $theme = self::where('using',true)->first();
-        return 'theme/' . $theme['name'];
+        $theme = self::where('using', true)->first();
+        return 'theme/' . ($theme['name'] ?? 'default');
     }
 }

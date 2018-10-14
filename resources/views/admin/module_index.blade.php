@@ -23,6 +23,7 @@
                             <th scope="col">模块名称</th>
                             <th scope="col">模块标识</th>
                             <th scope="col">系统模块</th>
+                            <th scope="col">模块域名</th>
                             <th scope="col">创建时间</th>
                             <th scope="col" width="80"></th>
                         </tr>
@@ -34,13 +35,16 @@
                                 <td>{{$module['title']}}</td>
                                 <td>{{$module['name']}}</td>
                                 <td>{{$module['system']}}</td>
+                                <td>
+                                    <a href="{{$module['domain']}}" target="_blank">{{$module['domain']}}</a>
+                                </td>
                                 <td>{{$module['created_at']->diffForHumans()}}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                        <a href="{{route('admin.role.edit',$module)}}" class="btn btn-white">
-                                            暂时禁用模块
+                                        <a href="{{route('admin.module.edit',$module)}}" class="btn btn-white">
+                                            编辑模块
                                         </a>
-                                        <button type="button" class="btn btn-danger" onclick="del(this)">彻底删除模块</button>
+                                        <button type="button" class="btn btn-danger" onclick="del(this)">编辑模块</button>
                                         <form action="{{route('admin.module.destroy',$module)}}" method="post">
                                             @method('DELETE') @csrf
                                         </form>

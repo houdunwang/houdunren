@@ -13,6 +13,5 @@
 <a href="{{$hdcms['url']}}">{{$hdcms['title']}}</a>
 <hr>
 @endlist
-
 </body>
 </html>

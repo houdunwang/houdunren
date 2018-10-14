@@ -41,7 +41,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('content.article.index')}}" class="nav-link">
+                        <a href="{{route('content.slide.index')}}" class="nav-link">
                             幻灯片管理
                         </a>
                     </li>

@@ -9,9 +9,9 @@
  * '-------------------------------------------------------------------*/
 
 //网站首页
-Route::get('/', function () {
-    $class = \App\Http\Controllers\Content\HomeController::class;
-    return App::call($class . '@index');
+Route::get('/', function (\App\Models\Module $module) {
+//    dd($_SERVER);
+    return App::call($module->getEntranceByDomain());
 //    Route::get('/home', 'Edu\HomeController@index')->name('home');
 })->name('home');
 
@@ -71,6 +71,7 @@ Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.
 
     Route::get('c{category}.html', 'HomeController@lists')->name('list');
     Route::get('{article}.html', 'HomeController@article')->name('article');
+    Route::resource('slide', 'SlideController');
 });
 
 //在线文章系统-todo

@@ -20,6 +20,7 @@ class Tag
         }, $this->directives);
     }
 
+    //文章列表
     protected function lists()
     {
         Blade::directive('list', function ($expression) {
@@ -32,7 +33,7 @@ if(isset(\$params['cid'])){
     \$db->where('category_id',\$params['cid']);
 }
 foreach(\$db->get() as \$hdcms):
-\$hdcms['url'] = route('content.list',\$hdcms);
+\$hdcms['url'] = route('content.article',\$hdcms);
 ?>
 str;
             return $php;
