@@ -11,7 +11,7 @@
 namespace App\Http\Controllers\Edu;
 
 use App\Http\Controllers\Controller;
-use App\Models\Article;
+use App\Models\EduArticle;
 use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 
@@ -19,13 +19,12 @@ class ArticleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('admin:', ['except' => ['index', 'show']]);
     }
 
-    public function index(Article $article)
+    public function index(EduArticle $article)
     {
-//        dd(Article::search('向军叔大')->get()->toArray());
-        $articles = Article::with(['user'])->paginate(20);
+        $articles = EduArticle::with(['user'])->paginate(20);
         return view('edu.article_index', compact('articles'));
     }
 
@@ -34,31 +33,28 @@ class ArticleController extends Controller
         return view('edu.article_create');
     }
 
-    public function store(Request $request, Article $article)
+    public function store(Request $request, EduArticle $article)
     {
         $article->user()->associate(auth()->user())->fill($request->all())->save();
         return redirect(route('edu.article.show', $article))->with('success', '发表成功');
     }
 
-    public function show(Article $article)
+    public function show(EduArticle $article)
     {
         $zans = $article->zan()->get();
 
         return view('edu.article_show', compact('article', 'zans'));
     }
 
-    public function edit(Article $article)
+    public function edit(EduArticle $article)
     {
-        //
     }
 
-    public function update(Request $request, Article $article)
+    public function update(Request $request, EduArticle $article)
     {
-        //
     }
 
-    public function destroy(Article $article)
+    public function destroy(EduArticle $article)
     {
-        //
     }
 }

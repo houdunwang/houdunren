@@ -12,9 +12,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+/**
+ * 文章分类
+ * Class EduCategory
+ * @package App\Models
+ */
+class EduCategory extends Model
 {
-    protected $fillable = ['name'];
-
-    protected $casts = [];
+    protected $fillable = ['title', 'description', 'icon'];
 }

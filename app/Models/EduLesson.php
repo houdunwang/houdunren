@@ -14,7 +14,12 @@ use App\Models\Traits\Common;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class Lesson extends Model
+/**
+ * 课程管理
+ * Class EduLesson
+ * @package App\Models
+ */
+class EduLesson extends Model
 {
     use Common;
     protected $fillable = [
@@ -39,7 +44,7 @@ class Lesson extends Model
 
     public function video()
     {
-        return $this->hasMany(Video::class);
+        return $this->hasMany(EduVideo::class);
     }
 
     public function user()

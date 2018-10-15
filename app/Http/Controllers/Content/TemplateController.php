@@ -10,7 +10,7 @@ class TemplateController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('admin:Content-template');
     }
 
     public function index()

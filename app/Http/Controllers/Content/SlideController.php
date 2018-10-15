@@ -10,7 +10,7 @@ class SlideController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('admin:Content-slide');
     }
 
     public function index()

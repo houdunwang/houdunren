@@ -10,16 +10,16 @@
 
 namespace App\Observers;
 
-use App\Models\Video;
+use App\Models\EduVideo;
 
 class VideoObserver
 {
-    public function creating(Video $video)
+    public function creating(EduVideo $video)
     {
         $video['user_id'] = auth()->id();
     }
 
-    public function created(Video $video)
+    public function created(EduVideo $video)
     {
 
     }
@@ -30,7 +30,7 @@ class VideoObserver
      * @param  \App\Models\Video $video
      * @return void
      */
-    public function updated(Video $video)
+    public function updated(EduVideo $video)
     {
         //
     }
@@ -41,7 +41,7 @@ class VideoObserver
      * @param  \App\Models\Video $video
      * @return void
      */
-    public function deleted(Video $video)
+    public function deleted(EduVideo $video)
     {
         //
     }
@@ -52,7 +52,7 @@ class VideoObserver
      * @param  \App\Models\Video $video
      * @return void
      */
-    public function restored(Video $video)
+    public function restored(EduVideo $video)
     {
         //
     }
@@ -63,7 +63,7 @@ class VideoObserver
      * @param  \App\Models\Video $video
      * @return void
      */
-    public function forceDeleted(Video $video)
+    public function forceDeleted(EduVideo $video)
     {
         //
     }

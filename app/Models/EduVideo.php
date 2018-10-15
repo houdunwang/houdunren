@@ -15,9 +15,12 @@ use App\Observers\VideoObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
-use phpDocumentor\Reflection\Types\Self_;
-
-class Video extends Model
+/**
+ * 课程视频
+ * Class EduVideo
+ * @package App\Models
+ */
+class EduVideo extends Model
 {
     use SoftDeletes, Common, Searchable;
     /**

@@ -13,7 +13,7 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('admin:Content-category');
     }
 
     public function index(ContentCategory $category)

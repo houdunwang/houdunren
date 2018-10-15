@@ -25,4 +25,11 @@ class HomeController extends Controller
         $activitys = $db->paginate(15);
         return view('edu.index', compact('activitys'));
     }
+
+    public function lists()
+    {
+        $lessons = EduLesson::with('user')->paginate(10);
+        return view('edu.lesson_lists', compact('lessons'));
+    }
+
 }

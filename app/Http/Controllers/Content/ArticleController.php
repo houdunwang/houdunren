@@ -13,12 +13,12 @@ class ArticleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('admin:Content-article');
     }
 
     public function index()
     {
-        $articles = ContentArticle::latest()->paginate(15);
+        $articles = ContentArticle::latest()->paginate(module_config('content.list_row'));
         return view('content.article_index', compact('articles'));
     }
 

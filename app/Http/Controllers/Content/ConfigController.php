@@ -10,7 +10,7 @@ class ConfigController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('admin:Content-config');
     }
 
     public function edit()

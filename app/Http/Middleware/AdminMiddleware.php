@@ -12,7 +12,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class AuthAdminMiddleware
+class AdminMiddleware
 {
     /**
      * @param $request
@@ -20,9 +20,9 @@ class AuthAdminMiddleware
      * @return \Illuminate\Http\RedirectResponse|mixed
      * @throws \App\Exceptions\PermissionException
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next,$premission='Admin-index')
     {
-        access('Admin-index');
+        access($premission);
         return $next($request);
     }
 }

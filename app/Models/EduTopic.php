@@ -11,18 +11,22 @@
 namespace App\Models;
 
 use App\Models\Traits\Common;
-
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Laravel\Scout\Searchable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
-class Article extends Model
+/**
+ * 帖子
+ * Class EduTopic
+ * @package App\Models
+ */
+class EduTopic extends Model
 {
     use Common, LogsActivity, Searchable;
-    protected $fillable = ['title', 'content'];
-    protected static $logFillable = true;
-    protected static $recordEvents = ['created', 'updated'];
-    protected static $logName = 'article';
+
+    protected $fillable = ['title', 'content', 'category_id', 'user_id'];
+
+    protected static $logName = 'edu';
 
     public function getTitle()
     {
@@ -32,11 +36,5 @@ class Article extends Model
     public function link($param)
     {
         return route('edu.article.show', $this) . $param;
-    }
-
-    public function getMarkdownAttribute()
-    {
-        $Parsedown = new \Parsedown();
-        return $Parsedown->text($this['content']);
     }
 }

@@ -1,7 +1,4 @@
-@extends('layouts.admin')
-@section('menu')
-    @include('content.layouts.menu')
-@endsection
+@extends('content.layouts.admin')
 @section('content')
     <div class="row">
         <div class="card col-12">

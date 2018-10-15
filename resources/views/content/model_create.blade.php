@@ -1,7 +1,4 @@
-@extends('layouts.admin')
-@section('menu')
-    @include('content.layouts.menu')
-@endsection
+@extends('content.layouts.admin')
 @section('content')
     <form action="{{route('content.model.store')}}" method="post" id="app">
         @csrf

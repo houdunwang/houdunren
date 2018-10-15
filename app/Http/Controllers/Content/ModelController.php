@@ -11,7 +11,7 @@ class ModelController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('admin:Content-model');
     }
 
     public function index()

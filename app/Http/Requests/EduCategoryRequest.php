@@ -12,16 +12,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class EduCategoryRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
-        return auth()->check();
+        return true;
     }
 
     /**
@@ -40,7 +35,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'title.required' => '分类名称不能为空',
-            'title.max'      => '分类名称不能超过20个字符',
+            'title.max' => '分类名称不能超过20个字符',
         ];
     }
 

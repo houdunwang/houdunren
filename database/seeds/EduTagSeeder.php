@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class TagSeeder extends Seeder
+class EduTagSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,7 +17,7 @@ class TagSeeder extends Seeder
             ['name' => 'HDCMS'],
         ];
         foreach ($data as $d) {
-            \App\Models\Tag::firstOrCreate(['name' => $d['name']], $d);
+            \App\Models\EduTag::create(['name' => $d['name']], $d);
         }
     }
 }

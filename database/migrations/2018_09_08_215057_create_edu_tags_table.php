@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVideosTable extends Migration
+class CreateEduTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -21,15 +21,10 @@ class CreateVideosTable extends Migration
      */
     public function up()
     {
-        Schema::create('videos', function (Blueprint $table) {
+        Schema::create('edu_tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->softDeletes();
             $table->timestamps();
-            $table->string('title');
-            $table->string('path')->comment('视频文件');
-            $table->unsignedInteger('user_id')->index();
-            $table->smallInteger('duration')->default(0)->comment('时长');
-            $table->unsignedInteger('lesson_id');
+            $table->char('name')->index();
         });
     }
 
@@ -40,6 +35,6 @@ class CreateVideosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('videos');
+        Schema::dropIfExists('edu_tags');
     }
 }

@@ -1,7 +1,4 @@
-@extends('layouts.admin')
-@section('menu')
-    @include('content.layouts.menu')
-@endsection
+@extends('content.layouts.admin')
 @section('content')
     <div class="row">
         <form action="{{route('content.slide.update',$slide)}}" method="post" class="col-12">

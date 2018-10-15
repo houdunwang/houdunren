@@ -10,20 +10,20 @@
 
 namespace App\Http\Controllers\Edu;
 
-use App\Http\Requests\CategoryRequest;
-use App\Models\Category;
+use App\Http\Requests\EduCategoryRequest;
+use App\Models\EduCategory;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin:Edu-category');
     }
 
     public function index()
     {
-        $categories = Category::get();
+        $categories = EduCategory::get();
         return view('edu.category_index', compact('categories'));
     }
 
@@ -32,29 +32,29 @@ class CategoryController extends Controller
         return view('edu.category_create');
     }
 
-    public function store(CategoryRequest $request)
+    public function store(EduCategoryRequest $request)
     {
-        Category::create($request->all());
+        EduCategory::create($request->all());
         return redirect(route('edu.category.index'))->with('success', '添加成功');
     }
 
-    public function show(Category $category)
+    public function show(EduCategory $category)
     {
         //
     }
 
-    public function edit(Category $category)
+    public function edit(EduCategory $category)
     {
         return view('edu.category_edit', compact('category'));
     }
 
-    public function update(CategoryRequest $request, Category $category)
+    public function update(EduCategoryRequest $request, EduCategory $category)
     {
         $category->update($request->all());
         return redirect(route('edu.category.index'))->with('success', '修改成功');
     }
 
-    public function destroy(Category $category)
+    public function destroy(EduCategory $category)
     {
         $category->delete();
         return redirect(route('edu.category.index'))->with('success', '删除成功');
