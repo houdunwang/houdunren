@@ -13,6 +13,7 @@ namespace App\Http\Controllers\Common;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+//点赞
 class ZanController extends Controller
 {
     public function __construct()
@@ -20,6 +21,11 @@ class ZanController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * 点赞
+     * @param Request $request
+     * @return array|\Illuminate\Http\RedirectResponse
+     */
     public function make(Request $request)
     {
         $model = model_instance()->zan();

@@ -3,13 +3,13 @@
         <li class="list-group-item px-0">
             <div class="row">
                 <div class="col-auto">
-                    <a href="{{route('member.user.show',$topic->user)}}" class="avatar ">
+                    <a href="{{route('member.user.show',$topic->user)}}" class="avatar">
                         <img src="{{$topic->user->icon}}" class="avatar-img rounded">
                     </a>
                 </div>
                 <div class="col ml--2">
                     <h4 class="card-title mb-3 name">
-                        <a href="{{route('edu.article.show',$topic)}}">
+                        <a href="{{route('edu.topic.show',$topic)}}">
                             {{$topic->title}}
                         </a>
                     </h4>

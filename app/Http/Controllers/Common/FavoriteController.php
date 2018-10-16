@@ -21,12 +21,20 @@ class FavoriteController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * 收藏列表
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $favorites = Favorite::where('user_id', auth()->id())->paginate(1);
         return view('common.favorite_index', compact('favorites'));
     }
 
+    /**
+     * 记录或取消收藏
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function make()
     {
         $model = model_instance()->favorite();

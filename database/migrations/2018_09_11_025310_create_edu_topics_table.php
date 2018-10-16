@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+//话题贴子
 class CreateEduTopicsTable extends Migration
 {
     /**
@@ -17,7 +18,7 @@ class CreateEduTopicsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('title');
-            $table->text('content');
+            $table->mediumText('content');
             $table->unsignedInteger('zan_num')->default(0);
             $table->unsignedInteger('favorite_num')->default(0);
             $table->unsignedInteger('user_id')->comment('用户编号');

@@ -30,7 +30,7 @@ class Module extends Model
         $domain =$_SERVER['REQUEST_SCHEME'].'://'. $_SERVER['SERVER_NAME'];
         $module = self::where('domain', $domain)->first();
         if ($module) {
-            $class = ($module['system'] ? 'App\Http\Controllers' : 'Addons');
+            $class = ($module['system'] ? 'App\Http\Controllers' : 'Addons').'\\'.$module['name'].'\\HomeController';
             if (class_exists($class) && method_exists($class, 'index')) {
                 return $class . '@index';
             }

@@ -15,6 +15,7 @@ use App\Observers\VideoObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
+
 /**
  * 课程视频
  * Class EduVideo
@@ -40,7 +41,7 @@ class EduVideo extends Model
 
     public function lesson()
     {
-        return $this->belongsTo(Lesson::class);
+        return $this->belongsTo(EduLesson::class);
     }
 
     public function getTitle()

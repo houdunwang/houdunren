@@ -13,6 +13,7 @@ namespace App\Http\Controllers\Common;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+//评论管理
 class CommentController extends Controller
 {
     public function index(Request $request)

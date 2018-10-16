@@ -1,47 +1,53 @@
-<div class="edu-comment" id="comment" v-cloak="">
+<div class="comment" id="comment" v-cloak>
     <div class="card col-sm-12">
         <div class="card-body">
             @auth
                 <div class="mb-3">
-                    <button class="btn btn-white mr-3" type="button" @click="toSendEditor"><span class="fe fe-edit"></span> 发表评论</button>
-                    <div class="small float-right text-muted pt-3">共有@{{comments.length}}条评论</div>
+                    <button class="btn btn-white mr-3 btn-sm" type="button" @click="toSendEditor">
+                        <span class="fe fe-edit"></span> 发表评论
+                    </button>
+                    <div class="small float-right text-muted pt-0">共有@{{comments.length}}条评论</div>
                 </div>
             @else
                 <div class="mb-3">
                     <a href="{{route('login')}}" class="btn btn-white mr-3"><span class="fe fe-user"></span> 登录后参与评论</a>
-                    <div class="small float-right text-muted pt-3">共有@{{comments.length}}条评论</div>
+                    <div class="small float-right text-muted pt-0">共有@{{comments.length}}条评论</div>
                 </div>
             @endauth
         </div>
     </div>
     <div class="card col-sm-12" v-for="(comment,key) in comments" :id="'comment-'+comment.id">
-        <div class="card-body pb-0">
-            <div class="comment mb-5">
+        <div class="card-body pb-0 pl-0">
+            <div class="comment mb-0">
                 <div class="row">
                     <div class="col-auto">
-                        <a class="avatar" href="profile-posts.html">
+                        <a class="avatar" :href="'/member/user/'+comment.user.id">
                             <img :src="comment.user.icon" alt="..." class="avatar-img rounded-circle">
                         </a>
                     </div>
-                    <div class="col ml--2">
-                        <div class="comment-body col-12">
+                    <div class="col ml-0 pl-0">
+                        <div class="col-12">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="comment-title" v-html="comment.user.name"></h5>
-                                </div>
-                                <div class="col-auto">
+                                    <h6 class="comment-title" v-html="comment.user.name"></h6>
                                     <time class="comment-time">
-                                        @{{ comment.updated_at }}
+                                        <span class="fe fe-clock"></span> @{{ comment.updated_at }}
                                     </time>
                                 </div>
                             </div>
-                            <p class="comment-text" v-html="comment.content"></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card-footer">
+        <div class="card-body pl-3 pr-3 pt-0">
+            <div class="row" style="border-top:1px solid #edf2f9;">
+                <div class="col-12">
+                    <div class="comment-text pb-3 pt-3" v-html="comment.content"></div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer pl-3 pr-3">
             <span class="small text-muted">#@{{ key+1 }}</span>
             <a href="" @click.prevent="zan(comment)" class="badge text-muted">
                 <span class="fe fe-thumbs-up"></span> <span class="zan-count">@{{ comment.zan_num }}</span> 个点赞
@@ -65,7 +71,7 @@
                             <textarea style="display:none;"></textarea>
                         </div>
                     </div>
-                        <button class="btn btn-primary mb-2 btn-sm">发表评论</button>
+                    <button class="btn btn-primary mb-2 btn-sm">发表评论</button>
                 </form>
             </div>
         </div>
@@ -77,11 +83,6 @@
         </div>
     @endauth
 </div>
-<style>
-    .comment-body {
-        /*background: none;*/
-    }
-</style>
 <script>
     require(['hdjs', 'jquery', 'vue', 'axios', 'moment', 'MarkdownIt'], function (hdjs, $, Vue, axios, moment, MarkdownIt) {
         vm = new Vue({
@@ -91,12 +92,14 @@
                 this.model = "{{str_replace('\\','-',get_class($model))}}";
                 axios.get("/common/comment?model=" + this.model + "&id={{$model['id']}}").then((response) => {
                     this.comments = response.data.comments;
+                    //解析markdown语法
                     this.comments.forEach(function (item) {
                         let md = new MarkdownIt();
                         item.content = md.render(item.content);
                     })
                 });
-                //
+
+                //创建编辑器
                 hdjs.editormd("commentEditor", {
                     width: '100%',
                     height: 300,
@@ -105,7 +108,7 @@
                             "link", "hdimage", "watch", "fullscreen"
                         ]
                     },
-                    watch:true,
+                    watch: true,
                     //editor.md库位置
                     path: "{{asset('org/hdjs')}}/package/editor.md/lib/",
                     onchange: function () {
@@ -115,6 +118,7 @@
             },
             updated() {
                 hdjs.scrollTo('body', location.hash, 0, {queue: true});
+                this.parseMarkdown();
             },
             methods: {
                 //点赞评论
@@ -124,6 +128,7 @@
                         comment.zan_num = response.data.count;
                     });
                 },
+                //跳转到评论表单
                 toSendEditor() {
                     hdjs.scrollTo('body', '#commentEditor', 1500, {queue: true});
                 },
@@ -141,17 +146,25 @@
                         axios.post(url, this.field).then((response) => {
                             let comment = response.data.comment;
                             comment.zan_count = comment.zan_count ? comment.zan_count : 0;
+                            //解析markdown
                             let md = new MarkdownIt();
                             comment.content = md.render(comment.content);
                             this.comments.push(comment);
-                            //替换评论内容
+                            //设置评论内容与评论框为空
                             this.field.content = '';
                             commentEditor.setSelection({line: 0, ch: 0}, {line: 9999, ch: 9999});
                             commentEditor.replaceSelection("");
-
-
                         })
                     }
+                },
+                parseMarkdown() {
+                    require(['hdjs', 'marked', 'highlight'], function (hdjs, marked) {
+                        $(document).ready(function () {
+                            $('pre code').each(function (i, block) {
+                                hljs.highlightBlock(block);
+                            });
+                        });
+                    })
                 },
                 //发表时间检测
                 check() {

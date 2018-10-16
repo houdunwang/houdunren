@@ -18,18 +18,21 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $db = Activity::orderBy('id', 'DESC');
+        return $this->dynamic($request);
+    }
+
+    /**
+     * 动态
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function dynamic(Request $request)
+    {
+        $db = Activity::latest();
         if ($request->query('t') == 'follow') {
             $db->whereIn('causer_id', auth()->user()->follower->pluck('id'));
         }
-        $activitys = $db->paginate(15);
-        return view('edu.index', compact('activitys'));
+        $activitys = $db->paginate(10);
+        return view('edu.home_dynamic', compact('activitys'));
     }
-
-    public function lists()
-    {
-        $lessons = EduLesson::with('user')->paginate(10);
-        return view('edu.lesson_lists', compact('lessons'));
-    }
-
 }

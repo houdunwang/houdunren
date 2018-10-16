@@ -19,10 +19,12 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h4 class="card-title mb-2 name">
-                                        <a href="{{route('edu.lesson.show',$lesson)}}">{{$lesson['title']}}</a>
+                                    <h4 class="card-title mb-3 name">
+                                        <a href="{{route('edu.lesson.show',$lesson)}}" class="text-secondary">
+                                            {{$lesson['title']}}
+                                        </a>
                                     </h4>
-                                    <p class="card-text small text-mutd">
+                                    <p class="card-text small text-muted">
                                         <span class="fe fe-clock"></span> {{$lesson['updated_at']->diffForHumans()}}
                                         <span class="fe fe-film ml-3"></span> {{$lesson->video()->count()}} 课时
                                     </p>

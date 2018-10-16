@@ -12,13 +12,17 @@ namespace App\Observers;
 
 use App\Models\Favorite;
 
+/**
+ * 收藏事件
+ * Class FavoriteObserver
+ * @package App\Observers
+ */
 class FavoriteObserver
 {
     public function created(Favorite $favorite)
     {
         $favorite->belongModel()->increment('favorite_num');
     }
-
 
     public function deleted(Favorite $favorite)
     {

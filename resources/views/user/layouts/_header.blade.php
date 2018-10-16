@@ -29,7 +29,7 @@
             </div>
         </form>
         <div class="navbar-user">
-            @include('layouts._notification')
+            @include('edu.layouts._notification')
             @auth
                 <div class="dropdown">
                     <a href="#" class="avatar avatar-sm avatar-online dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -16,7 +16,6 @@
                     @include('edu.search._'.$_GET['t'])
                 </div>
             </div>
-
             {{$data->appends(['t'=>$_GET['t'],'w'=>$_GET['w']])->links()}}
         </div>
         <div class="col-12 col-xl-3">

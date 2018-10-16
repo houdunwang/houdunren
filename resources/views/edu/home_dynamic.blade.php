@@ -16,10 +16,10 @@
                                     筛选
                                 </a>
                                 <div class="dropdown-menu ">
-                                    <a class="dropdown-item sort small" data-sort="name" href="{{route('edu.home')}}">
+                                    <a class="dropdown-item sort small" data-sort="name" href="{{route('edu.home.index')}}">
                                         全部
                                     </a>
-                                    <a class="dropdown-item sort small" data-sort="name" href="{{route('edu.home',['t'=>'follow'])}}">
+                                    <a class="dropdown-item sort small" data-sort="name" href="{{route('edu.home.index',['t'=>'follow'])}}">
                                         关注
                                     </a>
                                 </div>
@@ -32,10 +32,13 @@
                         @foreach($activitys as $activity)
                             @switch($activity->log_name)
                                 @case('comment')
-                                    @include('edu.activity._comment')
+                                    @include('edu.dynamic._comment')
                                 @break
-                                @case('article')
-                                    @include('edu.activity._article')
+                                @case('topic')
+                                    @include('edu.dynamic._topic')
+                                @break
+                                @case('edu_lesson')
+                                    @include('edu.dynamic._lesson')
                                 @break
                             @endswitch
                         @endforeach

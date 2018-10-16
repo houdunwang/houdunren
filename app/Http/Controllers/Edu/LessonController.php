@@ -31,7 +31,7 @@ class LessonController extends Controller
     {
         \Validator::make($data, [
             'title' => 'required|max:60',
-            'description' => 'required|max:100',
+            'description' => 'nullable|max:100',
             'thumb' => ['required', 'regex:/(jpeg|jpg|png|gif)$/i'],
             'type' => 'required|in:system,video',
             'free' => 'required|in:1,0',
@@ -88,6 +88,14 @@ class LessonController extends Controller
         return redirect(route('edu.lesson.index'))->with('success', '课程添加成功');
     }
 
+    //课程列表
+    public function lists()
+    {
+        $lessons = EduLesson::with('user')->paginate(10);
+        return view('edu.lesson_lists', compact('lessons'));
+    }
+
+    //显示课程
     public function show(EduLesson $lesson)
     {
         $lesson = $lesson->with(['user', 'video'])->first();

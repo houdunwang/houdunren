@@ -11,7 +11,7 @@
 namespace App\Http\Controllers\Edu;
 
 use App\Http\Controllers\Controller;
-use App\Models\Video;
+use App\Models\EduVideo;
 use Illuminate\Http\Request;
 
 class VideoController extends Controller
@@ -37,23 +37,23 @@ class VideoController extends Controller
         //
     }
 
-    public function show(Video $video)
+    public function show(EduVideo $video)
     {
         $lesson = $video->lesson;
         return view('edu.video_show', compact('video', 'lesson'));
     }
 
-    public function edit(Video $video)
+    public function edit(EduVideo $video)
     {
         //
     }
 
-    public function update(Request $request, Video $video)
+    public function update(Request $request, EduVideo $video)
     {
         //
     }
 
-    public function destroy(Video $video)
+    public function destroy(EduVideo $video)
     {
         //
     }

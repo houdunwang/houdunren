@@ -1,3 +1,4 @@
+{{--后台发表课程--}}
 <div class="row small" id="app">
     <div class="card col-sm-12">
         <div class="card-body border-bottom-0">
@@ -39,7 +40,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">课程介绍</label>
                 <div class="col-sm-10">
-                    <textarea v-model="field.lesson.description" class="form-control" rows="3" required></textarea>
+                    <textarea v-model="field.lesson.description" class="form-control" rows="3"></textarea>
                 </div>
             </div>
             <div class="form-group row">

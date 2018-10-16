@@ -1,4 +1,4 @@
-@extends('user.layouts.space')
+@extends('edu.layouts.master')
 @section('content')
 
 @endsection

@@ -1,3 +1,4 @@
+{{--前台会员顶部--}}
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container">
         <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,7 +14,6 @@
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">搜索</button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#" onclick="searched('article');">文章</a>
                         <a class="dropdown-item" href="#" onclick="searched('topic');">话题</a>
                         <div role="separator" class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#" onclick="searched('video');">视频</a>
@@ -33,7 +33,7 @@
         <div class="navbar-user">
             {{--发表内容--}}
             @include('edu.layouts._write')
-            @include('layouts._notification')
+            @include('edu.layouts._notification')
             @auth
                 <div class="dropdown">
                     <a href="#" class="avatar avatar-sm avatar-online dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -42,7 +42,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="{{route('member.user.show',[auth()->user()])}}" class="dropdown-item">个人空间</a>
                         <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}" class="dropdown-item">修改资料</a>
-                        <a href="{{route('edu.lesson.index')}}" class="dropdown-item">课程管理</a>
+                        <a href="{{route('edu.lesson.lists')}}" class="dropdown-item">课程管理</a>
                         <a href="settings.html" class="dropdown-item">学习记录</a>
                         @if(Auth::user()->can('Admin-index'))
                             <a href="{{route('admin.index')}}" class="dropdown-item">后台管理</a>
@@ -71,7 +71,7 @@
                         话题
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="topnavPages">
-                        @foreach(\App\Models\Category::get() as $category)
+                        @foreach(\App\Models\EduCategory::get() as $category)
                             <li>
                                 <a href="{{route('edu.topic.index',['id'=>$category['id']])}}" class="dropdown-item">
                                     <i class="{{$category['icon']}} mr-2 w-15" aria-hidden="true"></i> {{$category['title']}}
@@ -82,13 +82,32 @@
                 </li>
                 <li class="nav-item mr-4">
                     <a class="nav-link" href="{{route('edu.lesson.lists')}}">
-                        视频
+                        课程
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mr-4" href="{{route('edu.topic.index',['id'=>1])}}">
                         文章
                     </a>
+                </li>
+                <li class="nav-item mr-4">
+                    <a class="nav-link" href="{{route('edu.home.dynamic')}}">
+                        动态
+                    </a>
+                </li>
+                <li class="nav-item dropdown mr-4">
+                    <a class="nav-link dropdown-toggle" href="#!" id="topnavPages" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        手册
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="topnavPages">
+                        @foreach(\App\Models\EduCategory::get() as $category)
+                            <li>
+                                <a href="{{route('edu.topic.index',['id'=>$category['id']])}}" class="dropdown-item">
+                                    <i class="{{$category['icon']}} mr-2 w-15" aria-hidden="true"></i> {{$category['title']}}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
                 </li>
             </ul>
         </div>

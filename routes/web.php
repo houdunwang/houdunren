@@ -10,15 +10,14 @@
 
 //网站首页
 Route::get('/', function (\App\Models\Module $module) {
-//    dd($_SERVER);
     return App::call($module->getEntranceByDomain());
-//    Route::get('/home', 'Edu\HomeController@index')->name('home');
 })->name('home');
-
 
 //公共控制器
 Route::group(['namespace' => 'Common', 'prefix' => 'common', 'as' => 'common.'], function () {
+    //点赞
     Route::get('zan/make', 'ZanController@make')->name('zan.make');
+    //收藏
     Route::get('favorite', 'FavoriteController@make')->name('favorite.make');
     Route::get('favorite/index', 'FavoriteController@index')->name('favorite.index');
     Route::resource('comment', 'CommentController');
@@ -100,13 +99,13 @@ Route::group(['namespace' => 'Admin', 'middleware' => [], 'as' => 'admin.', 'pre
 
 //在线教育
 Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function () {
-    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('lesson/lists', 'LessonController@lists')->name('lesson.lists');
     Route::resource('lesson', 'LessonController');
     Route::resource('category', 'CategoryController');
     Route::resource('topic', 'TopicController');
-    Route::resource('article', 'ArticleController');
     Route::resource('video', 'VideoController');
     Route::get('search', 'SearchController@lists')->name('search');
+    Route::get('dynamic','HomeController@dynamic')->name('home.dynamic');
 });
 

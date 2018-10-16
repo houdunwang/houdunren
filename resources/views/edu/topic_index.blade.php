@@ -7,14 +7,14 @@
                     <div class="row align-items-center">
                         <div class="col">
                             <h4 class="card-header-title">
-                                文章
+                                帖子
                             </h4>
                         </div>
-                        <div class="col-auto">
-                            <a href="#!" class="btn btn-sm btn-white">
-                           <i class="fa fa-plus" aria-hidden="true"></i>  发表
-                            </a>
-                        </div>
+                        {{--<div class="col-auto">--}}
+                            {{--<a href="#!" class="btn btn-sm btn-white">--}}
+                                {{--<i class="fa fa-plus" aria-hidden="true"></i> 发表--}}
+                            {{--</a>--}}
+                        {{--</div>--}}
                     </div>
                 </div>
                 <div class="card-body">
@@ -24,12 +24,13 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <a href="#" class="avatar ">
-                                            <img src="{{$topic->user->icon}}" alt="{{$topic['title']}}" class="avatar-img rounded">
+                                            <img src="{{$topic->user->icon}}" alt="{{$topic['title']}}"
+                                                 class="avatar-img rounded">
                                         </a>
                                     </div>
                                     <div class="col ml--2">
                                         <h4 class="card-title mb-3 name">
-                                            <a href="{{route('edu.topic.show',$topic)}}" title="{{$topic['title']}}">
+                                            <a href="{{route('edu.topic.show',$topic)}}" title="{{$topic['title']}}" class="text-secondary">
                                                 {{$topic['title']}}
                                             </a>
                                         </h4>

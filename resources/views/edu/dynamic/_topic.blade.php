@@ -6,15 +6,15 @@
             </a>
         </div>
         <div class="col ml--2">
-            <h4 class="card-title mb-2 name">
-                <a href="{{route('member.user.show',$activity->causer)}}">
+            <div class="card-title mb-2 name">
+                <a href="{{route('member.user.show',$activity->causer)}}"  class="text-secondary">
                     {{$activity->causer->name}}
                 </a>
                 发表了
-                <a href="{{route('edu.article.show',$activity->subject)}}">
+                <a href="{{route('edu.article.show',$activity->subject)}}"  class="text-dark">
                     {{$activity->subject->title}}
                 </a>
-            </h4>
+            </div>
             <p class="card-text small text-muted">
                 <i class="fe fe-clock"></i> {{$activity->created_at->diffForHumans()}}
             </p>

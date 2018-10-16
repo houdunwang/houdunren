@@ -18,7 +18,6 @@ class CommentObserver
     public function created(Comment $comment)
     {
         $comment->belongModel->user->notify(new CommentNotification($comment));
-//        activity()->performedOn($comment)->log('Look mum, I logged something');
     }
 
     /**

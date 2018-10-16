@@ -28,7 +28,7 @@
                     <div class="card-header border-bottom-0">
                         课程目录
                     </div>
-                    <div class="card-block">
+                    <div class="card-body">
                         <div class="card card-inactive">
                             <ul class="list-group list-group-flush">
                                 @foreach($lesson->video as $video)

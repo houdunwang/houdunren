@@ -12,6 +12,11 @@ namespace App\Observers;
 
 use App\Models\Zan;
 
+/**
+ * 点赞事件
+ * Class ZanObserver
+ * @package App\Observers
+ */
 class ZanObserver
 {
     public function created(Zan $zan)

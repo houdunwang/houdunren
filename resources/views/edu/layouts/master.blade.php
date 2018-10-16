@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,6 +18,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('layouts._hdjs')
     @include('layouts._message')
+    @stack('css')
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
 </head>
 <body>
 @include('edu.layouts._header')

@@ -171,6 +171,81 @@
   font-size: 14px;
 }
 
+.editormd-html {
+  color: #636b6f;
+  font-size: 15px;
+}
+
+.editormd-html table {
+  width: 100%;
+}
+
+.editormd-html table td,
+.editormd-html table th {
+  border: solid 1px #ddd;
+  padding: 6px 8px;
+  color: #666;
+  font-size: 15px;
+}
+
+.editormd-html h1,
+.editormd-html h2,
+.editormd-html h3,
+.editormd-html h4,
+.editormd-html h5,
+.editormd-html h6 {
+  font-size: 15px;
+  margin-top: 35px;
+  font-weight: bold;
+}
+
+.editormd-html h1 {
+  font-size: 18px !important;
+}
+
+.comment .comment-title {
+  margin-top: 6px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.comment .comment-text {
+  background: none;
+  color: #636b6f;
+  font-size: 15px;
+}
+
+.comment .comment-text p {
+  line-height: 2em;
+}
+
+.comment .comment-text table {
+  width: 100%;
+}
+
+.comment .comment-text table td,
+.comment .comment-text table th {
+  border: solid 1px #ddd;
+  padding: 6px 8px;
+  color: #666;
+  font-size: 15px;
+}
+
+.comment .comment-text h1,
+.comment .comment-text h2,
+.comment .comment-text h3,
+.comment .comment-text h4,
+.comment .comment-text h5,
+.comment .comment-text h6 {
+  font-size: 15px;
+  margin-top: 35px;
+  font-weight: bold;
+}
+
+.comment .comment-text h1 {
+  font-size: 18px !important;
+}
+
 .dropdown-menu-card {
   border: 1px solid #e3ebf6 !important;
 }

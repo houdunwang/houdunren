@@ -26,15 +26,31 @@ class EduTopic extends Model
 
     protected $fillable = ['title', 'content', 'category_id', 'user_id'];
 
-    protected static $logName = 'edu';
+    protected static $logName = 'edu_topic';
+
+    protected static $logAttributes = ['title', 'created_at', 'updated_at'];
 
     public function getTitle()
     {
         return $this->title;
     }
 
+    public function comment()
+    {
+        return $this->morphMany(Comment::class, 'comment');
+    }
+
     public function link($param)
     {
-        return route('edu.article.show', $this) . $param;
+        return route('edu.topic.show', $this) . $param;
+    }
+
+    //配置algolia可搜索属性
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this['title'],
+            'content' => $this['content'],
+        ];
     }
 }

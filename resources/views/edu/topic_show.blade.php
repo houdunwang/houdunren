@@ -7,10 +7,12 @@
                     <div class="row">
                         <div class="col text-right">
                             @if($topic->isFavorite(auth()->user()))
-                                <a href="{{route('common.favorite.make',['model'=>'Topic','id'=>$topic])}}" class="btn btn-info btn-sm">
+                                <a href="{{route('common.favorite.make',['model'=>'EduTopic','id'=>$topic])}}"
+                                   class="btn btn-info btn-sm">
                                     <span class="fe fe-heart mr-0"></span> 已经收藏</a>
                             @else
-                                <a href="{{route('common.favorite.make',['model'=>'Topic','id'=>$topic])}}" class="btn btn-white btn-sm">
+                                <a href="{{route('common.favorite.make',['model'=>'EduTopic','id'=>$topic])}}"
+                                   class="btn btn-white btn-sm">
                                     <span class="fe fe-bookmark mr-0"></span> 收藏</a>
                             @endif
                         </div>
@@ -24,24 +26,26 @@
                         </h2>
                         <p class="text-muted mb-1 text-muted small">
                             <i class="fa fa-clock-o" aria-hidden="true"></i> {{$topic->updated_at->diffForHumans()}}
-                            <i class="fa fa-comment-o ml-2" aria-hidden="true"></i> 30
+                            <i class="fa fa-comment-o ml-2" aria-hidden="true"></i>  {{$topic->comment->count()}}
                         </p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 editormd-html">
+                        <div class="markdown" id="content">
+                            <textarea hidden>{!! $topic['content'] !!}</textarea>
+                        </div>
                         <hr class="my-5">
-                        <p class="text-dark mb-0 content">
-                            {{$topic['content']}}
-                        </p>
                         <div class="mt-5 text-center">
                             @auth
                                 @if($topic->zan->contains('user_id',auth()->id()))
-                                    <a href="{{route('common.zan.make',['model'=>'App-Models-Topic','id'=>$topic])}}" class="btn btn-info mb-4">
+                                    <a href="{{route('common.zan.make',['model'=>'EduTopic','id'=>$topic])}}"
+                                       class="btn btn-info mb-4">
                                         <span class="fe fe-thumbs-up"></span> 感谢点赞
                                     </a>
                                 @else
-                                    <a href="{{route('common.zan.make',['model'=>'App-Models-Topic','id'=>$topic])}}" class="btn btn-white mb-4">
+                                    <a href="{{route('common.zan.make',['model'=>'EduTopic','id'=>$topic])}}"
+                                       class="btn btn-white mb-4">
                                         <span class="fe fe-thumbs-up"></span> 点个赞呗
                                     </a>
                                 @endif
@@ -49,7 +53,7 @@
                             <div>
                                 @foreach($topic->zan as $zan)
                                     <div class="avatar">
-                                        <img src="{{$zan->user->icon}}" alt="..." class="avatar-img rounded-circle">
+                                        <img src="{{$zan->user->icon}}" class="avatar-img rounded-circle">
                                     </div>
                                 @endforeach
                             </div>
@@ -77,7 +81,8 @@
                                 已经关注
                             </a>
                         @else
-                            <a class="btn btn-white btn-block btn-xs" href="{{route('member.follow',$topic->user->id)}}">
+                            <a class="btn btn-white btn-block btn-xs"
+                               href="{{route('member.follow',$topic->user->id)}}">
                                 <i class="fa fa-plus" aria-hidden="true"></i> 关注 TA
                             </a>
                         @endif
@@ -87,3 +92,14 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        require(['hdjs', 'marked', 'MarkdownIt', 'highlight'], function (hdjs, marked, MarkdownIt) {
+            let md = new MarkdownIt();
+            $("#content").html(md.render($("#content textarea").val()));
+            $('pre code').each(function (i, block) {
+                hljs.highlightBlock(block);
+            });
+        })
+    </script>
+@endpush

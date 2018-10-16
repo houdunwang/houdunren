@@ -46,5 +46,4 @@ trait Common
     {
         return $this->morphMany(Comment::class, 'comment');
     }
-
 }

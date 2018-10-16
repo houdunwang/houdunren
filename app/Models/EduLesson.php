@@ -13,6 +13,8 @@ namespace App\Models;
 use App\Models\Traits\Common;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * 课程管理
@@ -21,7 +23,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EduLesson extends Model
 {
-    use Common;
+    use Common, LogsActivity, Searchable;
+    protected static $logName = 'edu_lesson';
     protected $fillable = [
         'title',
         'description',
@@ -42,9 +45,18 @@ class EduLesson extends Model
 
     protected $casts = [];
 
+    //配置algolia可搜索属性
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this['title'],
+            'description' => $this['description'],
+        ];
+    }
+
     public function video()
     {
-        return $this->hasMany(EduVideo::class);
+        return $this->hasMany(EduVideo::class, 'lesson_id');
     }
 
     public function user()
