@@ -1,7 +1,4 @@
-@extends('layouts.admin')
-@section('menu')
-    @include('chat.layouts.menu')
-@endsection
+@extends('chat.layouts.admin')
 @section('content')
     <div class="card">
         <div class="card-body">

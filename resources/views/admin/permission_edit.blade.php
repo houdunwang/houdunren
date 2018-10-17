@@ -1,7 +1,4 @@
-@extends('layouts.admin')
-@section('menu')
-    @include('admin.layouts.menu')
-@endsection
+@extends('admin.layouts.admin')
 @section('content')
     <form action="{{route('admin.permission.role',$role)}}" method="post">
         @csrf

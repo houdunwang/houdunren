@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/flatpickr/dist/flatpickr.min.css">
 
-    <link href="{{asset('org/Dashkit-1.1.2')}}/css/theme-dark.min.css" rel="" data-toggle="theme" data-theme-mode="dark">
+    <link href="{{asset('org/Dashkit-1.1.2')}}/css/theme-dark.min.css" rel="" data-toggle="theme"
+          data-theme-mode="dark">
     <link href="{{asset('org/Dashkit-1.1.2')}}/css/theme.min.css" rel="" data-toggle="theme" data-theme-mode="light">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <style>
@@ -61,7 +62,8 @@
                 <div class="card-header">
                     <form>
                         <div class="input-group input-group-flush input-group-merge">
-                            <input type="search" class="form-control form-control-prepended search" placeholder="Search122">
+                            <input type="search" class="form-control form-control-prepended search"
+                                   placeholder="Search122">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <span class="fe fe-search"></span>
@@ -76,7 +78,8 @@
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <a href="profile-posts.html" class="avatar">
-                                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-5.jpg" alt="..." class="avatar-img rounded-circle">
+                                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-5.jpg"
+                                             alt="..." class="avatar-img rounded-circle">
                                     </a>
                                 </div>
                                 <div class="col ml--2">
@@ -98,7 +101,8 @@
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <a href="profile-posts.html" class="avatar">
-                                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-6.jpg" alt="..." class="avatar-img rounded-circle">
+                                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-6.jpg"
+                                             alt="..." class="avatar-img rounded-circle">
                                     </a>
                                 </div>
                                 <div class="col ml--2">
@@ -120,7 +124,8 @@
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <a href="profile-posts.html" class="avatar">
-                                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-7.jpg" alt="..." class="avatar-img rounded-circle">
+                                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-7.jpg"
+                                             alt="..." class="avatar-img rounded-circle">
                                     </a>
                                 </div>
                                 <div class="col ml--2">
@@ -142,7 +147,8 @@
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <a href="profile-posts.html" class="avatar">
-                                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-8.jpg" alt="..." class="avatar-img rounded-circle">
+                                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-8.jpg"
+                                             alt="..." class="avatar-img rounded-circle">
                                     </a>
                                 </div>
                                 <div class="col ml--2">
@@ -185,7 +191,8 @@
                         <div class="row">
                             <div class="col-auto">
                                 <div class="avatar avatar-sm">
-                                    <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-8.jpg" alt="..." class="avatar-img rounded-circle">
+                                    <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-8.jpg"
+                                         alt="..." class="avatar-img rounded-circle">
                                 </div>
                             </div>
                             <div class="col ml--2">
@@ -207,7 +214,8 @@
 </div>
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light">
     <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarCollapse"
+                aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="{{route('admin.index')}}">
@@ -215,9 +223,11 @@
         </a>
         <div class="navbar-user d-md-none">
             <div class="dropdown">
-                <a href="#!" id="sidebarIcon" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a href="#!" id="sidebarIcon" class="dropdown-toggle" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
                     <div class="avatar avatar-sm avatar-online">
-                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-1.jpg" class="avatar-img rounded-circle" alt="...">
+                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-1.jpg"
+                             class="avatar-img rounded-circle" alt="...">
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="sidebarIcon">
@@ -245,15 +255,15 @@
             </ul>
             {{--<hr class="my-3">--}}
             {{--<ul class="navbar-nav mb-md-3">--}}
-                {{--<li class="nav-item">--}}
-                    {{--<div class="nav-link text-muted">--}}
-                        {{--<i class="fe fe-sun"></i> 风格--}}
-                        {{--<div class="custom-control custom-checkbox-toggle ml-auto">--}}
-                            {{--<input type="checkbox" class="custom-control-input" id="themeModeToggle">--}}
-                            {{--<label class="custom-control-label" for="themeModeToggle"></label>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</li>--}}
+            {{--<li class="nav-item">--}}
+            {{--<div class="nav-link text-muted">--}}
+            {{--<i class="fe fe-sun"></i> 风格--}}
+            {{--<div class="custom-control custom-checkbox-toggle ml-auto">--}}
+            {{--<input type="checkbox" class="custom-control-input" id="themeModeToggle">--}}
+            {{--<label class="custom-control-label" for="themeModeToggle"></label>--}}
+            {{--</div>--}}
+            {{--</div>--}}
+            {{--</li>--}}
             {{--</ul>--}}
         </div>
     </div>
@@ -262,30 +272,37 @@
     <nav class="navbar navbar-expand-md navbar-light d-none d-md-flex">
         <div class="container-fluid">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item mr-4">
-                    <a class="nav-link" href="{{route('admin.permission')}}">
-                        系统管理
-                    </a>
-                </li>
+                @if(auth()->user()->hasAnyPermission(['Admin-config','Admin-role','Admin-permission','Admin-user','Admin-module','Admin-module-design']))
+                    <li class="nav-item mr-4">
+                        <a class="nav-link" href="{{route('admin.admin.index')}}">
+                            系统管理
+                        </a>
+                    </li>
+                @endif
+                @if(auth()->user()->hasAnyPermission(['Chat-text','Chat-news','Chat-button','Chat-system_message']))
+                    <li class="nav-item">
+                        <a class="nav-link mr-4" href="{{route('chat.admin')}}">
+                            微信公众号
+                        </a>
+                    </li>
+                @endif
                 <li class="nav-item">
-                    <a class="nav-link mr-4" href="{{route('chat.base.index')}}">
-                        微信功能
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link mr-4" href="{{route('edu.lesson.index')}}">
+                    <a class="nav-link mr-4" href="{{route('edu.admin')}}">
                         在线教育
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link mr-4" href="{{route('content.article.index')}}">
-                        文章系统
-                    </a>
-                </li>
+                @if(auth()->user()->hasAnyPermission(['Edu-category','Edu-lesson','Edu-order']))
+                    <li class="nav-item">
+                        <a class="nav-link mr-4" href="{{route('content.admin')}}">
+                            文章系统
+                        </a>
+                    </li>
+                @endif
             </ul>
             <div class="navbar-user">
                 <div class="dropdown">
-                    <a href="#" class="avatar avatar-sm avatar-online dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a href="#" class="avatar avatar-sm avatar-online dropdown-toggle" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="{{auth()->user()->icon}}" alt="..." class="avatar-img rounded-circle">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">

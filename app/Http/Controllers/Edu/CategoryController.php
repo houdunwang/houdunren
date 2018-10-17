@@ -14,6 +14,11 @@ use App\Http\Requests\EduCategoryRequest;
 use App\Models\EduCategory;
 use App\Http\Controllers\Controller;
 
+/**
+ * 分类管理
+ * Class CategoryController
+ * @package App\Http\Controllers\Edu
+ */
 class CategoryController extends Controller
 {
     public function __construct()

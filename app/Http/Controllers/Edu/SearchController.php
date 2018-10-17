@@ -10,10 +10,8 @@
 
 namespace App\Http\Controllers\Edu;
 
-use App\Models\Article;
 use App\Models\EduTopic;
 use App\Models\EduVideo;
-use App\Models\Video;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

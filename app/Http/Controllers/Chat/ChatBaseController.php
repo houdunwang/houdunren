@@ -12,7 +12,7 @@ class ChatBaseController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin:Chat-text');
     }
 
     public function index()

@@ -31,6 +31,7 @@ Route::group(['namespace' => 'Common', 'prefix' => 'common', 'as' => 'common.'],
 
 //微信模块
 Route::group(['namespace' => 'Chat', 'prefix' => 'chat', 'as' => 'chat.'], function () {
+    Route::get('admin', 'AdminController@index')->name('admin');
     Route::any('/', 'HandleController@handle');
     Route::resource('base', 'ChatBaseController');
     Route::resource('news', 'ChatNewsController');
@@ -58,6 +59,7 @@ Route::get('findPassword', 'User\LoginController@findPassword')->name('findPassw
 Route::post('changePassword', 'User\LoginController@changePassword')->name('changePassword');
 
 Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.'], function () {
+    Route::get('admin','AdminController@index')->name('admin');
     Route::resource('model', 'ModelController');
     Route::resource('category', 'CategoryController');
     Route::resource('article', 'ArticleController');
@@ -73,15 +75,9 @@ Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.
     Route::resource('slide', 'SlideController');
 });
 
-//在线文章系统-todo
-Route::group(['namespace' => 'Article', 'prefix' => 'article', 'middleware' => []], function () {
-//    Route::get('home', 'HomeController@index');
-//    Route::resource('category', 'CategoryController');
-//    Route::resource('content', 'ContentController');
-});
-
 //后台管理
 Route::group(['namespace' => 'Admin', 'middleware' => [], 'as' => 'admin.', 'prefix' => 'admin'], function () {
+    Route::get('system', 'AdminController@index')->name('admin.index');
     Route::get('/', 'HomeController@index')->name('index');
     //配置管理
     Route::get('config/{name}/edit', 'ConfigController@edit')->name('config.edit');
@@ -99,6 +95,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => [], 'as' => 'admin.', 'pre
 
 //在线教育
 Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function () {
+    Route::get('admin','AdminController@index')->name('admin');
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('lesson/lists', 'LessonController@lists')->name('lesson.lists');
     Route::resource('lesson', 'LessonController');
@@ -106,6 +103,6 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::resource('topic', 'TopicController');
     Route::resource('video', 'VideoController');
     Route::get('search', 'SearchController@lists')->name('search');
-    Route::get('dynamic','HomeController@dynamic')->name('home.dynamic');
+    Route::get('dynamic', 'HomeController@dynamic')->name('home.dynamic');
 });
 

@@ -6,14 +6,13 @@ use App\Http\Controllers\Chat\System\Processor;
 use App\Http\Controllers\Controller;
 use App\Models\ChatNews;
 use App\Servers\ChatServer;
-use Houdunwang\WeChat\WeChat;
 use Illuminate\Http\Request;
 
 class ChatNewsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin:Chat-news');
     }
 
     public function index()

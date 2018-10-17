@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class ChatDefaultController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin:Chat-system_message');
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -14,6 +14,11 @@ use App\Http\Controllers\Controller;
 use App\Models\EduLesson;
 use Illuminate\Http\Request;
 
+/**
+ * 课程管理
+ * Class LessonController
+ * @package App\Http\Controllers\Edu
+ */
 class LessonController extends Controller
 {
     public function __construct()

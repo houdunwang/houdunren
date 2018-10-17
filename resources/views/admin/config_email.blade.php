@@ -1,7 +1,4 @@
-@extends('layouts.admin')
-@section('menu')
-    @include('admin.layouts.menu')
-@endsection
+@extends('admin.layouts.admin')
 @section('content')
     <div class="row justify-content-center">
         <form action="{{route('admin.config.update',['name'=>'email'])}}" method="post" class="col-sm-12">
