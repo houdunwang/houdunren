@@ -27,14 +27,40 @@ class Module extends Model
      */
     public function getEntranceByDomain()
     {
-        $domain =$_SERVER['REQUEST_SCHEME'].'://'. $_SERVER['SERVER_NAME'];
+        $domain = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'];
         $module = self::where('domain', $domain)->first();
         if ($module) {
-            $class = ($module['system'] ? 'App\Http\Controllers' : 'Addons').'\\'.$module['name'].'\\HomeController';
+            $class = ($module['system'] ? 'App\Http\Controllers' : 'Addons') . '\\' . $module['name'] . '\\HomeController';
             if (class_exists($class) && method_exists($class, 'index')) {
                 return $class . '@index';
             }
         }
         return HomeController::class . '@index';
+    }
+
+    public function menus()
+    {
+        $menus = [];
+        foreach (self::get() as $module) {
+            $menus[] = [
+                'title' => $module['title'],
+                'url' => route(strtolower($module['name'] . '.admin')),
+                'permissions' => $module->getModulePermission(),
+            ];
+        }
+        return $menus;
+    }
+
+    /**
+     * 获取模块权限
+     * @return array
+     */
+    public function getModulePermission()
+    {
+        $data = [];
+        foreach ($this['permission'] as $permission) {
+            $data[] = $this['name'] . '-' . $permission['name'];
+        }
+        return $data;
     }
 }

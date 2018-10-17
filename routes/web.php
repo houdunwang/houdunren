@@ -41,7 +41,7 @@ Route::group(['namespace' => 'Chat', 'prefix' => 'chat', 'as' => 'chat.'], funct
 });
 
 //会员中心
-Route::group(['namespace' => 'User', 'prefix' => 'member', 'as' => 'member.'], function () {
+Route::group(['namespace' => 'Member', 'prefix' => 'member', 'as' => 'member.'], function () {
     Route::get('/', 'UserController@index')->name('index');
     Route::resource('user', 'UserController');
     Route::get('fans/{user}', 'UserController@fans')->name('fans');
@@ -59,7 +59,7 @@ Route::get('findPassword', 'User\LoginController@findPassword')->name('findPassw
 Route::post('changePassword', 'User\LoginController@changePassword')->name('changePassword');
 
 Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.'], function () {
-    Route::get('admin','AdminController@index')->name('admin');
+    Route::get('admin', 'AdminController@index')->name('admin');
     Route::resource('model', 'ModelController');
     Route::resource('category', 'CategoryController');
     Route::resource('article', 'ArticleController');
@@ -69,16 +69,18 @@ Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.
     Route::resource('template', 'TemplateController');
     Route::get('template/{template}', 'TemplateController@update')->name('template.update');
     Route::get('template_cache', 'TemplateController@cache')->name('template.cache');
-
+    Route::resource('slide', 'SlideController');
+    //前台展示
     Route::get('c{category}.html', 'HomeController@lists')->name('list');
     Route::get('{article}.html', 'HomeController@article')->name('article');
-    Route::resource('slide', 'SlideController');
 });
 
 //后台管理
 Route::group(['namespace' => 'Admin', 'middleware' => [], 'as' => 'admin.', 'prefix' => 'admin'], function () {
-    Route::get('system', 'AdminController@index')->name('admin.index');
-    Route::get('/', 'HomeController@index')->name('index');
+    //系统管理页面
+    Route::get('system', 'AdminController@index')->name('admin');
+    //后台登录主页
+    Route::get('/', 'AdminController@home')->name('home');
     //配置管理
     Route::get('config/{name}/edit', 'ConfigController@edit')->name('config.edit');
     Route::put('config/{name}', 'ConfigController@update')->name('config.update');
@@ -95,7 +97,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => [], 'as' => 'admin.', 'pre
 
 //在线教育
 Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function () {
-    Route::get('admin','AdminController@index')->name('admin');
+    Route::get('admin', 'AdminController@index')->name('admin');
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('lesson/lists', 'LessonController@lists')->name('lesson.lists');
     Route::resource('lesson', 'LessonController');

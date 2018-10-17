@@ -45,7 +45,7 @@
                         <a href="{{route('edu.lesson.lists')}}" class="dropdown-item">课程管理</a>
                         <a href="settings.html" class="dropdown-item">学习记录</a>
                         @if(Auth::user()->can('Admin-index'))
-                            <a href="{{route('admin.index')}}" class="dropdown-item">后台管理</a>
+                            <a href="{{route('admin.home')}}" class="dropdown-item">后台管理</a>
                         @endif
                         <hr class="dropdown-divider">
                         <a href="{{route('logout')}}" class="dropdown-item">退出</a>

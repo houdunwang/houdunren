@@ -17,7 +17,7 @@
                     <li class="list-group-item px-0">
                         <div class="row">
                             <div class="col-auto">
-                                <a href="http://dev.hdcms.com/member/user/1" class="avatar ">
+                                <a href="{{route('member.user.show',$fan)}}" class="avatar ">
                                     <img src="{{$fan->icon}}" alt="sdf" class="avatar-img rounded">
                                 </a>
                             </div>

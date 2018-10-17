@@ -218,7 +218,7 @@
                 aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="{{route('admin.index')}}">
+        <a class="navbar-brand" href="{{route('admin.home')}}">
             <img src="/images/logo.png" class="navbar-brand-img mx-auto">
         </a>
         <div class="navbar-user d-md-none">
@@ -272,32 +272,15 @@
     <nav class="navbar navbar-expand-md navbar-light d-none d-md-flex">
         <div class="container-fluid">
             <ul class="navbar-nav mr-auto">
-                @if(auth()->user()->hasAnyPermission(['Admin-config','Admin-role','Admin-permission','Admin-user','Admin-module','Admin-module-design']))
-                    <li class="nav-item mr-4">
-                        <a class="nav-link" href="{{route('admin.admin.index')}}">
-                            系统管理
-                        </a>
-                    </li>
-                @endif
-                @if(auth()->user()->hasAnyPermission(['Chat-text','Chat-news','Chat-button','Chat-system_message']))
-                    <li class="nav-item">
-                        <a class="nav-link mr-4" href="{{route('chat.admin')}}">
-                            微信公众号
-                        </a>
-                    </li>
-                @endif
-                <li class="nav-item">
-                    <a class="nav-link mr-4" href="{{route('edu.admin')}}">
-                        在线教育
-                    </a>
-                </li>
-                @if(auth()->user()->hasAnyPermission(['Edu-category','Edu-lesson','Edu-order']))
-                    <li class="nav-item">
-                        <a class="nav-link mr-4" href="{{route('content.admin')}}">
-                            文章系统
-                        </a>
-                    </li>
-                @endif
+                @foreach(app(\App\Models\Module::class)->get() as $module)
+                    @if(auth()->user()->hasAnyPermission($module->getModulePermission()))
+                        <li class="nav-item mr-4">
+                            <a class="nav-link" href="{{route(strtolower($module['name']).'.admin')}}">
+                                {{$module['title']}}
+                            </a>
+                        </li>
+                    @endif
+                @endforeach
             </ul>
             <div class="navbar-user">
                 <div class="dropdown">
