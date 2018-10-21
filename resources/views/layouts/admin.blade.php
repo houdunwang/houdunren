@@ -7,11 +7,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Libs CSS -->
-    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/fonts/feather/feather.min.css">
-    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/highlight/styles/vs2015.min.css">
-    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/quill/dist/quill.core.css">
-    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/select2/dist/css/select2.min.css">
-    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/flatpickr/dist/flatpickr.min.css">
+    {{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/fonts/feather/feather.min.css">--}}
+    {{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/highlight/styles/vs2015.min.css">--}}
+    {{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/quill/dist/quill.core.css">--}}
+    {{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/select2/dist/css/select2.min.css">--}}
+    {{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/flatpickr/dist/flatpickr.min.css">--}}
 
     <link href="{{asset('org/Dashkit-1.1.2')}}/css/theme-dark.min.css" rel="" data-toggle="theme"
           data-theme-mode="dark">
@@ -26,11 +26,11 @@
     <script>
         var themeMode = (localStorage.getItem('dashkitThemeMode')) ? localStorage.getItem('dashkitThemeMode') : 'light';
         var themeFile = document.querySelector('[data-toggle="theme"][data-theme-mode="' + themeMode + '"]');
-
-        // Enable stylesheet
+        //
+        // // Enable stylesheet
         themeFile.rel = 'stylesheet';
-
-        // Enable body content
+        //
+        // // Enable body content
         themeFile.addEventListener('load', function () {
             document.body.style.display = 'block';
         });
@@ -317,12 +317,12 @@
 {{--<script src="{{asset('org/Dashkit-1.1.2')}}/js/theme.min.js"></script>--}}
 <script>
     require(['bootstrap', 'jquery'], function () {
-        require([
-            "{{asset('org/Dashkit-1.1.2')}}/libs/list.js/dist/list.min.js"
-            , "{{asset('org/Dashkit-1.1.2')}}/js/theme.min.js"])
+        {{--require([--}}
+            {{--"{{asset('org/Dashkit-1.1.2')}}/libs/list.js/dist/list.min.js"--}}
+            {{--, "{{asset('org/Dashkit-1.1.2')}}/js/theme.min.js"])--}}
     })
 </script>
-<script src="{{asset('js/admin_menu.js')}}"></script>
+{{--<script src="{{asset('js/admin_menu.js')}}"></script>--}}
 @stack('js')
 </body>
 </html>

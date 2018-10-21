@@ -3,33 +3,8 @@
         <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <form class="form-inline mr-4 d-none d-lg-flex">
-            <div class="input-group input-group-rounded input-group-merge" data-toggle="lists" data-lists-values='["name"]'>
-                <input type="search" class="form-control form-control-prepended  dropdown-toggle search" data-toggle="dropdown" placeholder="搜索" aria-label="Search">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fe fe-search"></i>
-                    </div>
-                </div>
-                <div class="dropdown-menu dropdown-menu-card">
-                    <div class="card-body">
-                        <div class="list-group list-group-flush list my--3">
-                            <a href="profile-posts.html" class="list-group-item px-0">
-                                <div class="row align-items-center">
-                                    <div class="col ml--2">
-                                        <h4 class="text-body mb-1 name">
-                                            Laravel
-                                        </h4>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
         <div class="navbar-user">
-            @include('edu.layouts._notification')
+            @include('user.layouts._notification')
             @auth
                 <div class="dropdown">
                     <a href="#" class="avatar avatar-sm avatar-online dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -1,36 +1,39 @@
+<div class="text-center mt-5 mb-5">
+    <span class="u-divider u-divider--xs u-divider--text">评论列表</span>
+</div>
 <div class="comment" id="comment" v-cloak>
     <div class="card col-sm-12">
         <div class="card-body">
             @auth
-                <div class="mb-3">
-                    <button class="btn btn-white mr-3 btn-sm" type="button" @click="toSendEditor">
+                <div class="">
+                    <button class="btn btn-light mb-1 btn-xs" type="button" @click="toSendEditor">
                         <span class="fe fe-edit"></span> 发表评论
                     </button>
                     <div class="small float-right text-muted pt-0">共有@{{comments.length}}条评论</div>
                 </div>
             @else
-                <div class="mb-3">
+                <div class="">
                     <a href="{{route('login')}}" class="btn btn-white mr-3"><span class="fe fe-user"></span> 登录后参与评论</a>
                     <div class="small float-right text-muted pt-0">共有@{{comments.length}}条评论</div>
                 </div>
             @endauth
         </div>
     </div>
-    <div class="card col-sm-12" v-for="(comment,key) in comments" :id="'comment-'+comment.id">
+    <div class="card col-sm-12 mt-5" v-for="(comment,key) in comments" :id="'comment-'+comment.id">
         <div class="card-body pb-0 pl-0">
             <div class="comment mb-0">
-                <div class="row">
+                <div class="row mb-2">
                     <div class="col-auto">
                         <a class="avatar" :href="'/member/user/'+comment.user.id">
-                            <img :src="comment.user.icon" alt="..." class="avatar-img rounded-circle">
+                            <img :src="comment.user.icon" alt="..." class="u-avatar avatar-img rounded-pseudo">
                         </a>
                     </div>
                     <div class="col ml-0 pl-0">
                         <div class="col-12">
                             <div class="row">
                                 <div class="col">
-                                    <h6 class="comment-title" v-html="comment.user.name"></h6>
-                                    <time class="comment-time">
+                                    <h6 class="comment-title text-muted mb-0" v-html="comment.user.name"></h6>
+                                    <time class="comment-time small text-secondary">
                                         <span class="fe fe-clock"></span> @{{ comment.updated_at }}
                                     </time>
                                 </div>
@@ -56,14 +59,10 @@
         </div>
     </div>
     @auth
-        <div class="card col-sm-12 p-0">
+        <div class="card col-sm-12 p-0 mt-5 rounded-0">
             <div class="card-body p-2">
-                <div class="card card-inactive">
-                    <div class="card-body p-3">
-                        <p class="card-text text-muted">
-                            请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。
-                        </p>
-                    </div>
+                <div class="alert alert-light small rounded-0" role="alert">
+                <i class="fa fa-warning" aria-hidden="true"></i>    请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。
                 </div>
                 <form @submit.prevent="send">
                     <div class="form-group">

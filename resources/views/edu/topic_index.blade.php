@@ -6,12 +6,12 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h4 class="card-header-title">
-                                帖子
+                            <h4 class="card-header-title text-muted">
+                             文章列表
                             </h4>
                         </div>
                         {{--<div class="col-auto">--}}
-                            {{--<a href="#!" class="btn btn-sm btn-white">--}}
+                            {{--<a href="{{route('edu.topic.create',['id'=>$category])}}" class="btn btn-sm btn-white">--}}
                                 {{--<i class="fa fa-plus" aria-hidden="true"></i> 发表--}}
                             {{--</a>--}}
                         {{--</div>--}}
@@ -23,7 +23,7 @@
                             <li class="list-group-item px-0">
                                 <div class="row">
                                     <div class="col-auto">
-                                        <a href="#" class="avatar ">
+                                        <a href="{{route('member.user.show',$topic->user)}}" class="avatar">
                                             <img src="{{$topic->user->icon}}" alt="{{$topic['title']}}"
                                                  class="avatar-img rounded">
                                         </a>
@@ -35,8 +35,11 @@
                                             </a>
                                         </h4>
                                         <p class="card-text small text-muted">
-                                            <span class="fe fe-user"></span> {{$topic->user->name}} .
-                                            <i class="fe fe-clock"></i> {{$topic->created_at->diffForHumans()}}
+                                            <span class="fe fe-user"></span>
+                                            <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">{{$topic->user->name}}</a>
+                                            <i class="fe fe-clock ml-2"></i> {{$topic->created_at->diffForHumans()}}
+                                            <span class="fe fe-folder ml-2"></span>
+                                            <a href="{{route('edu.topic_list',$topic->category)}}" class="text-secondary">{{$topic->category->title}}</a> .
                                         </p>
                                     </div>
                                 </div>

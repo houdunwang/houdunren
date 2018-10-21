@@ -30,6 +30,9 @@ class EduTopic extends Model
 
     protected static $logAttributes = ['title', 'created_at', 'updated_at'];
 
+    public function category(){
+        return $this->belongsTo(EduCategory::class);
+    }
     public function getTitle()
     {
         return $this->title;

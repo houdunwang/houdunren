@@ -96,7 +96,7 @@ class LessonController extends Controller
     //课程列表
     public function lists()
     {
-        $lessons = EduLesson::with('user')->paginate(10);
+        $lessons = EduLesson::with('user')->paginate(9);
         return view('edu.lesson_lists', compact('lessons'));
     }
 

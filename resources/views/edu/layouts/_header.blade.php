@@ -73,7 +73,7 @@
                     <ul class="dropdown-menu" aria-labelledby="topnavPages">
                         @foreach(\App\Models\EduCategory::get() as $category)
                             <li>
-                                <a href="{{route('edu.topic.index',['id'=>$category['id']])}}" class="dropdown-item">
+                                <a href="{{route('edu.topic_list',$category['id'])}}" class="dropdown-item">
                                     <i class="{{$category['icon']}} mr-2 w-15" aria-hidden="true"></i> {{$category['title']}}
                                 </a>
                             </li>
@@ -82,11 +82,11 @@
                 </li>
                 <li class="nav-item mr-4">
                     <a class="nav-link" href="{{route('edu.lesson.lists')}}">
-                        课程
+                        教程
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mr-4" href="{{route('edu.topic.index',['id'=>1])}}">
+                    <a class="nav-link mr-4" href="{{route('edu.topic.index')}}">
                         文章
                     </a>
                 </li>

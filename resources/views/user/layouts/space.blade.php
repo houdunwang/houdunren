@@ -44,7 +44,7 @@
             <div class="card">
                 <div class="card-block text-center pt-5 mb-3">
                     <div class="avatar avatar-xxl">
-                        <img src="{{$user->icon}}" alt="..." class="avatar-img rounded-circle">
+                        <img src="{{$user->icon}}" class="avatar-img rounded-circle">
                     </div>
                     <div class="text-center mt-4">
                         <h3 class="text-secondary">{{$user->name}}</h3>

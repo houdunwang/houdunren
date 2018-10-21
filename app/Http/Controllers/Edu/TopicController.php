@@ -25,8 +25,14 @@ class TopicController extends Controller
 
     public function index(Request $request)
     {
-        $topics = EduTopic::latest()->where('category_id', $request->query('id'))->paginate(10);
+        $topics = EduTopic::with('category')->paginate(10);
         return view('edu.topic_index', compact('topics'));
+    }
+
+    public function lists(EduCategory $category)
+    {
+        $topics = $category->topic()->paginate(10);
+        return view('edu.topic_lists', compact('topics','category'));
     }
 
     public function create(Request $request)

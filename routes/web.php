@@ -50,13 +50,13 @@ Route::group(['namespace' => 'Member', 'prefix' => 'member', 'as' => 'member.'],
 });
 
 //登录/注册/退出
-Route::get('register', 'User\RegisterController@create')->name('register');
-Route::post('register', 'User\RegisterController@store')->name('register');
-Route::get('login', 'User\LoginController@login')->name('login');
-Route::post('login', 'User\LoginController@store')->name('login');
-Route::get('logout', 'User\LoginController@logout')->name('logout');
-Route::get('findPassword', 'User\LoginController@findPassword')->name('findPassword');
-Route::post('changePassword', 'User\LoginController@changePassword')->name('changePassword');
+Route::get('register', 'Member\RegisterController@create')->name('register');
+Route::post('register', 'Member\RegisterController@store')->name('register');
+Route::get('login', 'Member\LoginController@login')->name('login');
+Route::post('login', 'Member\LoginController@store')->name('login');
+Route::get('logout', 'Member\LoginController@logout')->name('logout');
+Route::get('findPassword', 'Member\LoginController@findPassword')->name('findPassword');
+Route::post('changePassword', 'Member\LoginController@changePassword')->name('changePassword');
 
 Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.'], function () {
     Route::get('admin', 'AdminController@index')->name('admin');
@@ -76,11 +76,11 @@ Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.
 });
 
 //后台管理
+Route::get('/hdcms', 'Admin\AdminController@home')->name('admin.home');
 Route::group(['namespace' => 'Admin', 'middleware' => [], 'as' => 'admin.', 'prefix' => 'admin'], function () {
     //系统管理页面
     Route::get('system', 'AdminController@index')->name('admin');
-    //后台登录主页
-    Route::get('/', 'AdminController@home')->name('home');
+
     //配置管理
     Route::get('config/{name}/edit', 'ConfigController@edit')->name('config.edit');
     Route::put('config/{name}', 'ConfigController@update')->name('config.update');
@@ -102,7 +102,9 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::get('lesson/lists', 'LessonController@lists')->name('lesson.lists');
     Route::resource('lesson', 'LessonController');
     Route::resource('category', 'CategoryController');
+    //贴子
     Route::resource('topic', 'TopicController');
+    Route::get('topics_{category}.html', 'TopicController@lists')->name('topic_list');
     Route::resource('video', 'VideoController');
     Route::get('search', 'SearchController@lists')->name('search');
     Route::get('dynamic', 'HomeController@dynamic')->name('home.dynamic');
