@@ -8,7 +8,7 @@
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="/css/bootstrap.css">
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/org/front/vendor/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="/css/animate.min.css">
     <link rel="stylesheet" href="/css/hs.megamenu.css">
     <link rel="stylesheet" href="/css/jquery.fancybox.css">

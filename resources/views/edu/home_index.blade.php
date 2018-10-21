@@ -16,7 +16,7 @@
     <main id="content" role="main">
         <!-- Hero Section -->
         <div class="d-lg-flex align-items-lg-center position-relative min-height-100vh--lg u-bg-img-hero u-space-3 u-space-5-top--md u-space-0--lg"
-             style="background-image: url({{asset('org/front')}}/img/1920x1080/img32.jpg);min-height: 70vh">
+             style="background-image: url(/images/img32.jpg);min-height: 70vh">
             <div class="container mt-lg-5">
                 <div class="w-lg-35 mb-5">
                     <h1 class="display-4 text-white">使用 <strong class="font-weight-bold">实战教程</strong> 带你学会编程</h1>
@@ -1108,7 +1108,7 @@
                                     <a class="media align-items-center text-white" href="#">
                                         <div class="d-flex mr-2">
                                             <img class="img-fluid u-sm-avatar rounded-circle"
-                                                 src="{{asset('org/front')}}/img/100x100/img2.jpg" alt="Image Description">
+                                                 src="/images/100x100/img2.jpg" alt="Image Description">
                                         </div>
                                         <div class="media-body">
                                             <span>Casy Williams</span>
@@ -1275,7 +1275,7 @@
                         <g style="clip-path:url(#laptopFrameID3);">
                             <!-- Apply your (1618px width to 1010px height) image here -->
                             <image style="overflow:visible;" width="1618" height="1010"
-                                   xlink:href="{{asset('org/front')}}/img/1618x1010/img2.jpg"
+                                   xlink:href="/images/img2.jpg"
                                    transform="matrix(0.4651 0 0 0.4651 121.7472 37.9679)"></image>
                         </g>
                         <use xlink:href="#laptopFrameID2"
@@ -1299,7 +1299,7 @@
                         <g style="clip-path:url(#phoneFrameID2);">
                             <!-- Apply your (282px width to 500px height) image here -->
                             <image style="overflow:visible;" width="282" height="500"
-                                   xlink:href="{{asset('org/front')}}/img/282x500/img8.jpg"
+                                   xlink:href="/images/img8.jpg"
                                    transform="matrix(0.722 0 0 0.722 782.1237 155.3553)"></image>
                         </g>
                         <use xlink:href="#phoneFrameID1"
