@@ -21,4 +21,20 @@
 ## 官方网站
 [http://www.hdcms.com](http://www.hdcms.com)
 
+## 感谢
+
+下面是依赖的第三方库，鸣谢不分先后顺序。
+* https://haubek.github.io/chosen/
+* https://github.com/zenorocha/clipboard.js.git
+* https://martinemmert.github.io/clockpicker-umd/
+* https://fontawesome.com/icons
+* https://github.com/xdan/datetimepicker
+* http://momentjs.com/
+* https://github.com/soldair/node-qrcode
+* https://select2.org/getting-started/basic-usage
+* https://farbelous.io/bootstrap-colorpicker/tutorial-Basics.html
+* https://github.com/chriso/validator.js
+* https://github.com/zeroclipboard/zeroclipboard
+* http://fex.baidu.com/webuploader/
+
 > 100% 免费使用于任何项目
