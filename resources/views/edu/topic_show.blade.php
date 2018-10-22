@@ -70,7 +70,7 @@
                 </div>
                 {{--评论--}}
                 <div class="mt-5">
-                    @include('common.comment',['model'=>$topic])
+                    @include('common.comment',['model'=>$topic,'user_link'=>route('edu.user.index')])
                 </div>
             </div>
             <div class="col-12 col-xl-3">
@@ -80,7 +80,9 @@
                     </div>
                     <div class="card-block text-center p-5">
                         <div class="avatar avatar-xl">
-                            <img src="{{$topic->user->icon}}" alt="..." class="u-xl-avatar rounded-circle">
+                            <a href="{{route('edu.user.index',['id'=>$topic->user->id])}}">
+                                <img src="{{$topic->user->icon}}" class="u-xl-avatar rounded-circle">
+                            </a>
                         </div>
                     </div>
                     @can('follow',$topic->user)

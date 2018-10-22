@@ -31,6 +31,8 @@ class CreateEduVideosTable extends Migration
             $table->smallInteger('duration')->default(0)->comment('时长');
             $table->unsignedInteger('lesson_id');
             $table->foreign('lesson_id')->references('id')->on('edu_lessons')->onDelete('cascade');
+            $table->unsignedInteger('zan_num')->default(0);
+            $table->unsignedInteger('favorite_num')->default(0);
         });
     }
 

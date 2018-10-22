@@ -20,10 +20,10 @@ class TopicController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show','lists']]);
     }
 
-    public function index(Request $request)
+    public function index()
     {
         $topics = EduTopic::with('category')->paginate(10);
         return view('edu.topic_index', compact('topics'));

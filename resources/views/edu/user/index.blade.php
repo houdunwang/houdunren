@@ -1,0 +1,1 @@
+@extends('edu.user.master')

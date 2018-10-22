@@ -112,5 +112,8 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     //模块配置
     Route::get('config/edit', 'ConfigController@edit')->name('config.edit');
     Route::put('config/update', 'ConfigController@update')->name('config.update');
+    //会员中心
+    Route::get('user','UserController@index')->name('user.index');
+    Route::get('{user}/topic','UserController@topic')->name('user.topic');
 });
 

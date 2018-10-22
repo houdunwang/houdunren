@@ -39,6 +39,8 @@ class CreateEduLessonsTable extends Migration
             $table->tinyInteger('status')->default(1)->comment('状态');
             $table->string('download_address')->nullable()->comment('下载地址');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('zan_num')->default(0);
+            $table->unsignedInteger('favorite_num')->default(0);
         });
     }
 

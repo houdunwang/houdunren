@@ -23,7 +23,7 @@ class VideoController extends Controller
     public function show(EduVideo $video)
     {
         //保存观看记录
-        $video->user()->sync([auth()->id()]);
+        $video->userVideo()->sync([auth()->id()]);
         return view('edu.video_show', compact('video'));
     }
 }

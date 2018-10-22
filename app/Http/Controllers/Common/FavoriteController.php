@@ -41,9 +41,10 @@ class FavoriteController extends Controller
         $favorite = $model->where('user_id', auth()->id())->first();
         if ($favorite) {
             $favorite->delete();
+            return back()->with('success', '取消成功');
         } else {
             $model->create(['user_id' => auth()->id()]);
+            return back()->with('success', '收藏成功');
         }
-        return back();
     }
 }

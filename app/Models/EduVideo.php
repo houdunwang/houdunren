@@ -45,7 +45,8 @@ class EduVideo extends Model
         return $this->belongsTo(EduLesson::class);
     }
 
-    public function user()
+    //用户视频关联
+    public function userVideo()
     {
         return $this->belongsToMany(User::class, 'edu_user_videos', 'video_id', 'user_id');
     }
@@ -56,7 +57,7 @@ class EduVideo extends Model
         static $cache = [];
         $name = 'log' . $this['id'] . $user_id['id'];
         if (!isset($cache[$name])) {
-            $cache[$name] = $this->user()->where('user_id', $user_id)->pluck('video_id')->toArray();
+            $cache[$name] = $this->userVideo()->where('user_id', $user_id)->pluck('video_id')->toArray();
         }
         return in_array($this['id'], $cache[$name]);
     }

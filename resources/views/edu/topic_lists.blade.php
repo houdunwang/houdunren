@@ -16,8 +16,10 @@
                         <div class="list-group-item list-group-item-action u-info-v1 p-3 rounded-0 justify-content-sm-between align-items-sm-center">
                             <div class="row">
                                 <div class="col-sm-10 mb-2 mb-sm-0" style="font-size: 14px;">
+                                    <a href="{{route('edu.user.index',['id'=>$topic->user])}}">
                                     <img class="u-avatar rounded-circle mr-3" src="{{$topic->user->icon}}">
-                                    <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">
+                                    </a>
+                                    <a href="{{route('edu.user.index',['id'=>$topic->user])}}" class="text-secondary">
                                         {{$topic->user->name}}
                                     </a>
                                     <a href="{{route('edu.topic.show',$topic)}}" class="text-dark">

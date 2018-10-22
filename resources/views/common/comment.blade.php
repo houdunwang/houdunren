@@ -24,7 +24,7 @@
             <div class="comment mb-0">
                 <div class="row mb-2">
                     <div class="col-auto">
-                        <a class="avatar" :href="'/member/user/'+comment.user.id">
+                        <a class="avatar" :href="'{{$user_link}}?id='+comment.user.id">
                             <img :src="comment.user.icon" alt="..." class="u-avatar avatar-img rounded-pseudo">
                         </a>
                     </div>
@@ -153,6 +153,10 @@
                             this.field.content = '';
                             commentEditor.setSelection({line: 0, ch: 0}, {line: 9999, ch: 9999});
                             commentEditor.replaceSelection("");
+                            hdjs.swal({
+                                text: '评论发表成功',
+                                buttons: false, timer: 3000, icon: 'success',
+                            });
                         })
                     }
                 },
@@ -169,10 +173,10 @@
                 check() {
                     //原时间
                     let old = parseInt(localStorage.getItem('comment_send_time'));
-                    if (old && old + 1 > moment().unix()) {
+                    if (old && old + 20 > moment().unix()) {
                         hdjs.swal({
-                            text: '请' + (old + 1 - moment().unix()) + '秒后发表评论',
-                            buttons: false, timer: 3000, icon: 'info'
+                            text: '请' + (old + 20 - moment().unix()) + '秒后操作',
+                            buttons: false, timer: 3000, icon: 'warning'
                         });
                         return false;
                     }

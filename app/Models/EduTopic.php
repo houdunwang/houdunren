@@ -11,6 +11,7 @@
 namespace App\Models;
 
 use App\Models\Traits\Common;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -30,9 +31,11 @@ class EduTopic extends Model
 
     protected static $logAttributes = ['title', 'created_at', 'updated_at'];
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(EduCategory::class);
     }
+
     public function getTitle()
     {
         return $this->title;
@@ -53,7 +56,7 @@ class EduTopic extends Model
     {
         return [
             'title' => $this['title'],
-            'content' => mb_substr($this['content'],0,300,'utf8'),
+            'content' => mb_substr($this['content'], 0, 300, 'utf8'),
         ];
     }
 }
