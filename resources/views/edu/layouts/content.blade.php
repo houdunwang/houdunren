@@ -37,7 +37,7 @@
     @stack('css')
 </head>
 <body>
-@include('user.layouts._header')
+@include('member.layouts._header')
 <div class="container mt-5">
     <div class="row">
         <div class="col-sm-3">

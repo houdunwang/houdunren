@@ -20,32 +20,34 @@
 
 /**
  * 获取配置项
- * @param $path
- * @return mixed
+ * @param $path 配置项支持点语法
+ * @param null $default 默认值
+ * @return null
  */
-function system_config($path)
+function system_config($path, $default = null)
 {
     $info = explode('.', $path);
     $name = array_shift($info);
     $cache = Cache::get('system_config', function () {
         return \App\Models\Config::pluck('data', 'name');
     });
-    return count($info) == 0 ? $cache[$name] : $cache[$name][$info[0]] ?? null;
+    return count($info) == 0 ? $cache[$name] : $cache[$name][$info[0]] ?? $default;
 }
 
 /**
  * 获取模块配置项
  * @param $path
+ * @param null $default
  * @return null
  */
-function module_config($path)
+function module_config($path, $default = null)
 {
     $info = explode('.', $path);
     $name = array_shift($info);
     $cache = Cache::get('module_config', function () {
         return \App\Models\ModuleConfig::pluck('data', 'name');
     });
-    return count($info) == 0 ? $cache[$name] : $cache[$name][$info[0]] ?? null;
+    return count($info) == 0 ? $cache[$name] : $cache[$name][$info[0]] ?? $default;
 }
 
 /**

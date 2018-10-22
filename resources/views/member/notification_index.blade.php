@@ -1,7 +1,4 @@
-@extends('user.layouts.master')
-@section('menu')
-    @include('common.yields._notification_menu')
-@endsection
+@extends('member.layouts.master')
 @section('content')
     <div class="card" data-toggle="lists">
         <div class="card-header">
@@ -29,7 +26,7 @@
                                         {{$notification['data']['user_name']}}
                                     </a>
                                     <span class="text-muted">回复了</span>
-                                    <a href="{{route('common.notification.show',$notification)}}"  class="text-secondary">
+                                    <a href="{{route('member.notification.show',$notification)}}"  class="text-secondary">
                                         {{$notification['data']['title']}}
                                     </a>
                                 </div>

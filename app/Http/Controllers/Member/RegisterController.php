@@ -23,7 +23,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        return view('user.register');
+        return view('member.register');
     }
 
     public function store(RegisterRequest $request)

@@ -22,7 +22,8 @@ class UserPolicy
         return $user['id'] != $model['id'];
     }
 
-    public function view(User $user, User $model)
+    //资料修改
+    public function show(User $user, User $model)
     {
         return $user['id'] == $model['id'];
     }

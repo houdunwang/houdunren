@@ -1,7 +1,4 @@
-@extends('user.layouts.master')
-@section('menu')
-    @include('user.layouts._info')
-@endsection
+@extends('member.layouts.master')
 @section('content')
     <div class="row justify-content-center">
         <form action="{{route('member.user.update',auth()->user())}}" method="post" class="col-sm-12">
@@ -14,11 +11,11 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label>新密码</label>
-                        <input type="password" class="form-control col-6" name="password">
+                        <input type="password" class="form-control col-6" name="password" required>
                     </div>
                     <div class="form-group">
                         <label>确认密码</label>
-                        <input type="password" class="form-control col-6" name="password_confirmation">
+                        <input type="password" class="form-control col-6" name="password_confirmation" required>
                     </div>
                 </div>
                 <div class="card-footer">

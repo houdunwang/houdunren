@@ -21,7 +21,6 @@ Route::group(['namespace' => 'Common', 'prefix' => 'common', 'as' => 'common.'],
     Route::get('favorite', 'FavoriteController@make')->name('favorite.make');
     Route::get('favorite/index', 'FavoriteController@index')->name('favorite.index');
     Route::resource('comment', 'CommentController');
-    Route::resource('notification', 'NotificationController');
     //上传处理
     Route::post('upload/upload', 'UploadController@upload')->name('upload.upload');
     Route::any('upload/lists', 'UploadController@lists')->name('upload.lists');
@@ -47,6 +46,8 @@ Route::group(['namespace' => 'Member', 'prefix' => 'member', 'as' => 'member.'],
     Route::get('fans/{user}', 'UserController@fans')->name('fans');
     Route::get('follow/{user}', 'UserController@follow')->name('follow');
     Route::get('follower/{user}', 'UserController@follower')->name('follower');
+    //消息中心
+    Route::resource('notification', 'NotificationController');
 });
 
 //登录/注册/退出
@@ -77,10 +78,10 @@ Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.
 
 //后台管理
 Route::get('/hdcms', 'Admin\AdminController@home')->name('admin.home');
+
 Route::group(['namespace' => 'Admin', 'middleware' => [], 'as' => 'admin.', 'prefix' => 'admin'], function () {
     //系统管理页面
     Route::get('system', 'AdminController@index')->name('admin');
-
     //配置管理
     Route::get('config/{name}/edit', 'ConfigController@edit')->name('config.edit');
     Route::put('config/{name}', 'ConfigController@update')->name('config.update');
@@ -108,5 +109,8 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::resource('video', 'VideoController');
     Route::get('search', 'SearchController@lists')->name('search');
     Route::get('dynamic', 'HomeController@dynamic')->name('home.dynamic');
+    //模块配置
+    Route::get('config/edit', 'ConfigController@edit')->name('config.edit');
+    Route::put('config/update', 'ConfigController@update')->name('config.update');
 });
 

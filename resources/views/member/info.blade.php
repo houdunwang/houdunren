@@ -1,7 +1,4 @@
-@extends('user.layouts.master')
-@section('menu')
-    @include('user.layouts._info')
-@endsection
+@extends('member.layouts.master')
 @section('content')
     <div class="row justify-content-center">
         <form action="{{route('member.user.update',auth()->user())}}" method="post" class="col-sm-12">
@@ -14,7 +11,7 @@
                 <div class="card-body">
                     <div class="form-group col-sm-6">
                         <label>昵称</label>
-                        <input type="text" class="form-control" name="name" value="{{auth()->user()->name}}">
+                        <input type="text" class="form-control" name="name" value="{{auth()->user()->name}}" required>
                     </div>
                 </div>
                 <div class="card-footer">

@@ -25,7 +25,7 @@ class LoginController extends Controller
 
     public function login()
     {
-        return view('user.login');
+        return view('member.login');
     }
 
     //登录帐号
@@ -56,7 +56,7 @@ class LoginController extends Controller
     //找回密码
     public function findPassword()
     {
-        return view('user.findpassword');
+        return view('member.findpassword');
     }
 
     /**

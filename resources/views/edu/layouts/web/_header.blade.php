@@ -42,7 +42,7 @@
                 <!-- Logo -->
                 <a class="navbar-brand u-header__navbar-brand u-header__navbar-brand-top-space"
                    href="/" aria-label="Front">
-                    <img src="{{asset('images/front-logo.png')}}" alt="Logo" style="width: 12rem;margin-top: 20px;">
+                    <img src="{{module_config('edu.logo',asset('images/front-logo.png'))}}" alt="Logo" style="width: 12rem;margin-top: 5px;">
                 </a>
                 <!-- Responsive Toggle Button -->
                 <button type="button" class="navbar-toggler btn u-hamburger"
@@ -297,15 +297,17 @@
                                                         <!-- Holder Info -->
                                                         <header class="d-flex align-items-center u-sidebar--account__holder mt-3">
                                                             <div class="position-relative">
+                                                                <a href="{{route('member.user.edit',[auth()->user(),'type'=>'icon'])}}">
                                                                 <img class="u-sidebar--account__holder-img"
                                                                      src="{{auth()->user()->icon}}"
                                                                      alt="Image Description">
                                                                 <span class="u-badge u-badge--xs u-badge-border-success u-badge-pos rounded-circle"></span>
+                                                                </a>
                                                             </div>
                                                             <div class="ml-3">
-                                                                <strong>
+                                                                <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}" class="text-dark">
                                                                     {{auth()->user()->name}} <span class="badge u-badge-success ml-1">普通会员</span>
-                                                                </strong>
+                                                                </a>
                                                                 <span class="u-sidebar--account__holder-text">
                                                                 uid: {{auth()->id()}}
                                                             </span>
@@ -333,7 +335,8 @@
                                                                 <div id="sidebar-account-settings"
                                                                      class="u-unfold right-0 mt-4"
                                                                      aria-labelledby="sidebar-account-settings-invoker">
-                                                                    <a class="u-list__link" href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}">资料修改</a>
+                                                                    <a class="u-list__link" href="{{route('member.user.edit',[auth()->user(),'type'=>'icon'])}}">设置头像</a>
+                                                                    <a class="u-list__link" href="{{route('member.user.edit',[auth()->user(),'type'=>'password'])}}">修改密码</a>
                                                                     <a class="u-list__link" href="{{route('member.user.show',[auth()->user()])}}">我的空间</a>
                                                                     <div class="dropdown-divider"></div>
                                                                     <a class="u-list__link"
@@ -357,16 +360,16 @@
                                                                 @endif
                                                                 <li class="u-sidebar--account__list-item">
                                                                     <a class="u-sidebar--account__list-link"
-                                                                       href="{{route('member.user.show',[auth()->user()])}}">
+                                                                       href="{{route('member.user.edit',[auth()->user(),'type'=>'icon'])}}">
                                                                         <span class="fa fa-user-circle u-sidebar--account__list-icon mr-2"></span>
-                                                                        个人空间
+                                                                        修改头像
                                                                     </a>
                                                                 </li>
                                                                 <li class="u-sidebar--account__list-item">
                                                                     <a class="u-sidebar--account__list-link"
                                                                        href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}">
                                                                         <span class="fa fa-address-book u-sidebar--account__list-icon mr-2"></span>
-                                                                        密码修改
+                                                                        我的资料
                                                                     </a>
                                                                 </li>
                                                                 {{--<li class="u-sidebar--account__list-item">--}}
@@ -379,7 +382,7 @@
                                                                 {{--</li>--}}
                                                                 <li class="u-sidebar--account__list-item">
                                                                     <a class="u-sidebar--account__list-link"
-                                                                       href="{{route('common.notification.index')}}">
+                                                                       href="{{route('member.notification.index')}}">
                                                                         <span class="fa fa-comments u-sidebar--account__list-icon mr-2"></span>
                                                                         消息中心
                                                                         <span class="badge badge-success">{{auth()->user()->unreadNotifications->count()}}</span>

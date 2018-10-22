@@ -1,4 +1,4 @@
-{{--用户通知--}}
+{{--顶部菜单用户通知--}}
 @auth
     <div class="dropdown mr-4 d-none d-lg-flex">
         <a href="#" class="text-muted small" title="站内消息" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -14,7 +14,7 @@
                         </h5>
                     </div>
                     <div class="col-auto">
-                        <a href="{{route('common.notification.index')}}" class="small text-muted">
+                        <a href="{{route('member.notification.index')}}" class="small text-muted">
                             查看全部
                         </a>
                     </div>
@@ -23,7 +23,7 @@
             <div class="card-body">
                 <div class="list-group list-group-flush my--3">
                     @foreach(auth()->user()->unreadNotifications()->limit(5)->get() as $notification)
-                        <a class="list-group-item px-0" href="{{route('common.notification.show',$notification)}}">
+                        <a class="list-group-item px-0" href="{{route('member.notification.show',$notification)}}">
                             <div class="row">
                                 <div class="col-auto">
                                     <div class="avatar avatar-sm">

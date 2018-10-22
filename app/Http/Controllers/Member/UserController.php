@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function index()
     {
-        return view('user.index');
+        return view('member.index');
     }
 
     public function create()
@@ -40,24 +40,19 @@ class UserController extends Controller
     public function follower(User $user)
     {
         $follows = $user->follower()->paginate(1);
-        return view('user.follower', compact('user', 'follows'));
+        return view('member.follower', compact('user', 'follows'));
     }
 
     public function fans(User $user)
     {
         $fans = $user->fans()->paginate(1);
-        return view('user.fans', compact('user', 'fans'));
-    }
-
-    public function show(User $user)
-    {
-        return view('user.show', compact('user'));
+        return view('member.fans', compact('user', 'fans'));
     }
 
     public function edit(User $user, Request $request)
     {
         $this->authorize('update', $user);
-        return view('user.' . $request->query('type'));
+        return view('member.' . $request->query('type'));
     }
 
     public function update(UserRequest $request, User $user)
@@ -69,6 +64,12 @@ class UserController extends Controller
         }
         $user->update($data);
         return back()->with('success', '资料修改成功');
+    }
+
+    public function notification()
+    {
+        $notifications = auth()->user()->unreadNotifications;
+        return view('member.notification_index', compact('notifications'));
     }
 
     /**

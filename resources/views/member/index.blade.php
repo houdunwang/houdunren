@@ -1,0 +1,1 @@
+@extends('member.layouts.master')

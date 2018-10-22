@@ -8,6 +8,13 @@
                 </a>
                 <div class="collapse show" id="edu">
                     <ul class="nav nav-sm flex-column">
+                        @can('Edu-lesson')
+                            <li class="nav-item">
+                                <a href="{{route('edu.config.edit')}}" class="nav-link">
+                                    模块配置
+                                </a>
+                            </li>
+                        @endcan
                         @can('Edu-category')
                             <li class="nav-item">
                                 <a href="{{route('edu.category.index')}}" class="nav-link">

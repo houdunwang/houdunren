@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Libs CSS -->
-    {{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/fonts/feather/feather.min.css">--}}
+    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/fonts/feather/feather.min.css">
     {{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/highlight/styles/vs2015.min.css">--}}
     {{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/quill/dist/quill.core.css">--}}
     {{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/select2/dist/css/select2.min.css">--}}
@@ -218,8 +218,8 @@
                 aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="{{route('admin.home')}}">
-            <img src="/images/logo.png" class="navbar-brand-img mx-auto">
+        <a class="navbar-brand" href="/" target="_blank">
+            <img src="{{system_config('site.logo',asset('images/logo.png'))}}" class="navbar-brand-img mx-auto">
         </a>
         <div class="navbar-user d-md-none">
             <div class="dropdown">

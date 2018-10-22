@@ -1174,7 +1174,7 @@
                                     <a class="media align-items-center text-white" href="#">
                                         <div class="d-flex mr-2">
                                             <img class="img-fluid u-sm-avatar rounded-circle"
-                                                 src="{{asset('org/front')}}/img/100x100/img4.jpg" alt="Image Description">
+                                                 src="{{asset('images/xj-s.jpg')}}" alt="Image Description">
                                         </div>
                                         <div class="media-body">
                                             <span>Elon Fisher</span>
@@ -1381,7 +1381,7 @@
                             <div class="media">
                                 <div class="d-flex mr-3">
                                     <img class="img-fluid u-avatar rounded-circle"
-                                         src="{{asset('org/front')}}/img/100x100/img1.jpg" alt="Image Description">
+                                         src="{{asset('images/xj-s.jpg')}}" alt="Image Description">
                                 </div>
                                 <div class="media-body">
                                     <h4 class="h6 mb-1">Maria Muszynska</h4>
@@ -1423,7 +1423,7 @@
                             <div class="media">
                                 <div class="d-flex mr-3">
                                     <img class="img-fluid u-avatar rounded-circle"
-                                         src="{{asset('org/front')}}/img/100x100/img2.jpg" alt="Image Description">
+                                         src="{{asset('images/xj-s.jpg')}}" alt="Image Description">
                                 </div>
                                 <div class="media-body">
                                     <h4 class="h6 mb-1">细****</h4>
@@ -1462,7 +1462,7 @@
                             <div class="media">
                                 <div class="d-flex mr-3">
                                     <img class="img-fluid u-avatar rounded-circle"
-                                         src="{{asset('org/front')}}/img/100x100/img3.jpg" alt="Image Description">
+                                         src="{{asset('images/xj-s.jpg')}}" alt="Image Description">
                                 </div>
                                 <div class="media-body">
                                     <h4 class="h6 mb-1">Mark McManus</h4>

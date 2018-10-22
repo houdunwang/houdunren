@@ -1,1 +1,0 @@
-@extends('user.layouts.master')

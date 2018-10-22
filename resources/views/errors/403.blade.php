@@ -4,21 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
-
     <!-- Libs CSS -->
     <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/fonts/feather/feather.min.css">
-    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/highlight/styles/vs2015.min.css">
-    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/quill/dist/quill.core.css">
-    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/select2/dist/css/select2.min.css">
-    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/flatpickr/dist/flatpickr.min.css">
-
+    {{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/highlight/styles/vs2015.min.css">--}}
+    {{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/quill/dist/quill.core.css">--}}
+    {{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/select2/dist/css/select2.min.css">--}}
+    {{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/flatpickr/dist/flatpickr.min.css">--}}
     <!-- Theme CSS -->
     <!-- Values are "toggle", "light", and "dark". See "Getting Started" for more information -->
     <!-- Toggle Mode: For demo only, but allows a user to seamlessly toggle between light/dark modes -->
-
     <link href="{{asset('org/Dashkit-1.1.2')}}/css/theme-dark.min.css" rel="" data-toggle="theme" data-theme-mode="dark">
     <link href="{{asset('org/Dashkit-1.1.2')}}/css/theme.min.css" rel="" data-toggle="theme" data-theme-mode="light">
-
     <style>
         body {
             display: none;
@@ -48,7 +44,7 @@
 
             <!-- Image -->
             <div class="text-center">
-                <img src="{{asset('org/Dashkit-1.1.2')}}/img/illustrations/lost.svg" alt="..." class="img-fluid">
+                <img src="{{asset('images/lost.svg')}}" alt="..." class="img-fluid">
             </div>
 
         </div>
@@ -69,16 +65,12 @@
                 <p class="text-muted mb-4">
                     如有问题请联系我们 Email: {{system_config('site.email')}}
                 </p>
-
-                <a href="javascript:history.back()" class="btn btn-sm btn-primary">
-                    返回
+                <a href="/" class="btn btn-sm btn-primary">
+                    返回首页
                 </a>
-
             </div>
-
         </div>
-    </div> <!-- / .row -->
-</div> <!-- / .container -->
-
+    </div>
+</div>
 </body>
 </html>

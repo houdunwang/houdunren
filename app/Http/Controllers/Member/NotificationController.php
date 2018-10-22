@@ -8,7 +8,7 @@
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
-namespace App\Http\Controllers\Common;
+namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class NotificationController extends Controller
     public function index()
     {
         $notifications = auth()->user()->unreadNotifications;
-        return view('common.notification_index', compact('notifications'));
+        return view('member.notification_index', compact('notifications'));
     }
 
     public function create()

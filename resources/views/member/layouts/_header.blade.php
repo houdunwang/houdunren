@@ -4,14 +4,14 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-user">
-            @include('user.layouts._notification')
+            @include('member.layouts._notification')
             @auth
                 <div class="dropdown">
                     <a href="#" class="avatar avatar-sm avatar-online dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="{{auth()->user()->icon}}" class="avatar-img rounded-circle">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}" class="dropdown-item">修改资料</a>
+                        <a href="/" class="dropdown-item">返回首页</a>
                         <a href="{{route('member.user.show',auth()->id())}}" class="dropdown-item">个人空间</a>
                         @if(Auth::user()->is_admin)
                             <a href="{{route('admin.index')}}" class="dropdown-item">后台管理</a>
@@ -37,7 +37,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/">
-                        <img src="/images/logo.png" alt="..." class="navbar-brand-img">
+                        <img src="{{system_config('site.logo',asset('images/front-logo.png'))}}" class="navbar-brand-img">
                     </a>
                 </li>
             </ul>
