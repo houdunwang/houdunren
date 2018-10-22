@@ -9,17 +9,19 @@
                 <hr>
                 <ul class="list-unstyled mb-0">
                     @foreach($activitys as $activity)
-                        @switch($activity->log_name)
-                            @case('comment')
-                            {{--@include('edu.dynamic._comment')--}}
-                            @break
-                            @case('edu_topic')
-                            @include('edu.dynamic._topic')
-                            @break
-                            @case('edu_lesson')
-                            {{--@include('edu.dynamic._lesson')--}}
-                            @break
-                        @endswitch
+                        @if($activity->subject && $activity->causer)
+                            @switch($activity->log_name)
+                                @case('comment')
+                                @include('edu.dynamic._comment')
+                                @break
+                                @case('edu_topic')
+                                @include('edu.dynamic._topic')
+                                @break
+                                @case('edu_lesson')
+                                @include('edu.dynamic._lesson')
+                                @break
+                            @endswitch
+                        @endif
                     @endforeach
                 </ul>
                 <div class="mt-5">

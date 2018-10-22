@@ -12,7 +12,6 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="/" class="dropdown-item">返回首页</a>
-                        <a href="{{route('member.user.show',auth()->id())}}" class="dropdown-item">个人空间</a>
                         @if(Auth::user()->is_admin)
                             <a href="{{route('admin.index')}}" class="dropdown-item">后台管理</a>
                         @endif
@@ -31,13 +30,10 @@
             @endguest
         </div>
         <div class="collapse navbar-collapse mr-auto order-lg-first" id="navbar">
-            <form class="mt-4 mb-3 d-md-none">
-                <input type="search" class="form-control form-control-rounded" placeholder="Search" aria-label="Search">
-            </form>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/">
-                        <img src="{{system_config('site.logo',asset('images/front-logo.png'))}}" class="navbar-brand-img">
+                        <img src="{{system_config('site.logo',asset('images/logo.png'))}}" class="navbar-brand-img">
                     </a>
                 </li>
             </ul>

@@ -22,29 +22,24 @@ class UserController extends Controller
         $this->middleware(['auth']);
     }
 
+    //会员中心
     public function index()
     {
-        return view('member.index');
+        return redirect(route('member.user.edit', [auth()->user(), 'type' => 'icon']));
     }
 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
+    //关注列表
     public function follower(User $user)
     {
+        $this->authorize('fans', $user);
         $follows = $user->follower()->paginate(1);
         return view('member.follower', compact('user', 'follows'));
     }
 
+    //粉丝列表
     public function fans(User $user)
     {
+        $this->authorize('fans', $user);
         $fans = $user->fans()->paginate(1);
         return view('member.fans', compact('user', 'fans'));
     }
@@ -66,23 +61,14 @@ class UserController extends Controller
         return back()->with('success', '资料修改成功');
     }
 
+    //消息列表
     public function notification()
     {
         $notifications = auth()->user()->unreadNotifications;
         return view('member.notification_index', compact('notifications'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
-    }
-
+    //前台关注
     public function follow(User $user)
     {
         $this->authorize('follow', $user);

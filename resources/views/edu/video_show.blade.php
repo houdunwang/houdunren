@@ -27,16 +27,16 @@
                                     </div>
                                     <div class="card-body p-3">
                                         <div class="video-lists">
-                                            <ul class="list-group list-group-flush">
-                                                @foreach($lesson->video as $v)
+                                            <ul class="list-group list-group-flush small">
+                                                @foreach($video->lesson->video as $v)
                                                     @if($video->id == $v['id'])
-                                                        <a href="{{route('edu.video.show',$v)}}" class="text-secondary list-group-item d-flex align-items-center justify-content-between px-0">
-                                                            <small> {{$v->title}}</small>
-                                                            <i class="fe fe-check-circle text-success"></i>
+                                                        <a href="{{route('edu.video.show',$v)}}" class="text-primary list-group-item  px-0">
+                                                           {{$v->title}}
+                                                             <i class="fa fa-check" aria-hidden="true"></i>
                                                         </a>
                                                     @else
                                                         <a href="{{route('edu.video.show',$v)}}" class="text-muted list-group-item d-flex align-items-center justify-content-between px-0">
-                                                            <small> {{$v->title}}</small>
+                                                            &nbsp;{{$v->title}}
                                                         </a>
                                                     @endif
                                                 @endforeach
@@ -50,15 +50,17 @@
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <a href="profile-posts.html" class="avatar avatar-lg">
-                                        <img src="{{$lesson->user->icon}}" class="u-avatar avatar-img rounded-circle">
+                                        <img src="{{$video->lesson->user->icon}}" class="u-avatar avatar-img rounded-circle">
                                     </a>
                                 </div>
                                 <div class="col ml--2">
                                     <h4 class="card-title mb-1">
-                                        <a href="profile-posts.html">{{$lesson->title}}</a>
+                                        <a href="#">{{$video->title}}</a>
                                     </h4>
                                     <p class="card-text small text-muted">
-                                        <span class="fe fe-clock"></span> {{$lesson['updated_at']->format('Y-m-d')}}
+                                        <a href="{{route('edu.lesson.show',$video->lesson)}}" class="text-secondary">{{$video->lesson->title}}</a>
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        {{$video->lesson['updated_at']->format('Y-m-d')}}
                                     </p>
                                 </div>
                                 <div class="col-auto">

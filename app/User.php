@@ -11,6 +11,8 @@
 namespace App;
 
 use App\Models\Attachment;
+use App\Models\EduUserVideo;
+use App\Models\EduVideo;
 use App\Models\Zan;
 use App\Observers\UserObserver;
 use Illuminate\Notifications\Notifiable;

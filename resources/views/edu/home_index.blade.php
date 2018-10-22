@@ -21,13 +21,11 @@
                 <div class="w-lg-35 mb-5">
                     <h1 class="display-4 text-white">使用 <strong class="font-weight-bold">实战教程</strong> 带你学会编程</h1>
                     <a class="btn btn-sm btn-primary u-btn-primary transition-3d-hover mt-3"
-                       href="https://themes.getbootstrap.com/product/front-multipurpose-responsive-template/"
-                       target="_blank">
+                       href="{{route('edu.lesson.lists')}}">
                         开始学习
                     </a>
                     <a class="btn btn-sm btn-light u-btn-primary transition-3d-hover mt-3"
-                       href="https://themes.getbootstrap.com/product/front-multipurpose-responsive-template/"
-                       target="_blank">
+                       href="{{route('edu.home.dynamic')}}">
                         社区交流
                     </a>
                 </div>

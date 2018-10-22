@@ -37,8 +37,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 editormd-html mt-5">
-                            <div class="markdown" id="content">
+                        <div class="col-12 mt-5">
+                            <div class="markdown editormd-html" id="content">
                                 <textarea hidden>{!! $topic['content'] !!}</textarea>
                             </div>
                             <hr class="my-5">

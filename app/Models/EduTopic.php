@@ -53,7 +53,7 @@ class EduTopic extends Model
     {
         return [
             'title' => $this['title'],
-            'content' => $this['content'],
+            'content' => mb_substr($this['content'],0,300,'utf8'),
         ];
     }
 }

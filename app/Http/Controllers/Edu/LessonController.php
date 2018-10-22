@@ -23,12 +23,12 @@ class LessonController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin:Edu-lesson');
+        $this->middleware('admin:Edu-lesson',['except'=>['lists']]);
     }
 
     public function index()
     {
-        $lessons = EduLesson::where('user_id', auth()->id())->paginate(20);
+        $lessons = EduLesson::where('user_id', auth()->id())->latest()->paginate(20);
         return view('edu.lesson_index', compact('lessons'));
     }
 
@@ -93,17 +93,16 @@ class LessonController extends Controller
         return redirect(route('edu.lesson.index'))->with('success', '课程添加成功');
     }
 
-    //课程列表
+    //前台碎片课程列表
     public function lists()
     {
-        $lessons = EduLesson::with('user')->paginate(9);
+        $lessons = EduLesson::with('user')->latest()->paginate(9);
         return view('edu.lesson_lists', compact('lessons'));
     }
 
     //显示课程
     public function show(EduLesson $lesson)
     {
-        $lesson = $lesson->with(['user', 'video'])->first();
         return view('edu.lesson_show', compact('lesson'));
     }
 

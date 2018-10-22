@@ -12,6 +12,7 @@ namespace App\Models;
 
 use App\Models\Traits\Common;
 use App\Observers\VideoObserver;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
@@ -42,6 +43,22 @@ class EduVideo extends Model
     public function lesson()
     {
         return $this->belongsTo(EduLesson::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsToMany(User::class, 'edu_user_videos', 'video_id', 'user_id');
+    }
+
+    //用户观看视频检测
+    public function isLive(int $user_id): bool
+    {
+        static $cache = [];
+        $name = 'log' . $this['id'] . $user_id['id'];
+        if (!isset($cache[$name])) {
+            $cache[$name] = $this->user()->where('user_id', $user_id)->pluck('video_id')->toArray();
+        }
+        return in_array($this['id'], $cache[$name]);
     }
 
     public function getTitle()

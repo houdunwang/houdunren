@@ -26,7 +26,7 @@
                                aria-describedby="basic-addon2"/>
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button">文章</button>
-                            <button class="btn btn-outline-secondary" type="button">视频</button>
+                            <button class="btn btn-outline-secondary" type="button">课程</button>
                         </div>
                     </div>
                 </form>
@@ -42,7 +42,8 @@
                 <!-- Logo -->
                 <a class="navbar-brand u-header__navbar-brand u-header__navbar-brand-top-space"
                    href="/" aria-label="Front">
-                    <img src="{{module_config('edu.logo',asset('images/front-logo.png'))}}" alt="Logo" style="width: 12rem;margin-top: 5px;">
+                    <img src="{{module_config('edu.logo',asset('images/front-logo.png'))}}" alt="Logo"
+                         style="width: 12rem;margin-top: 5px;">
                 </a>
                 <!-- Responsive Toggle Button -->
                 <button type="button" class="navbar-toggler btn u-hamburger"
@@ -59,7 +60,7 @@
                 <div id="navBar" class="collapse navbar-collapse py-0">
                     <ul class="navbar-nav u-header__navbar-nav ml-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link u-header__nav-link mr-2" href="{{route('edu.lesson.lists')}}">
+                            <a class="nav-link u-header__nav-link" href="{{route('edu.lesson.lists')}}">
                                 碎片
                             </a>
                         </li>
@@ -67,7 +68,7 @@
                             data-event="hover"
                             data-animation-in="slideInUp"
                             data-animation-out="fadeOut">
-                            <a id="blogMegaMenu" class="nav-link u-header__nav-link mr-3" href="javascript:;"
+                            <a id="blogMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"
                                aria-haspopup="true"
                                aria-expanded="false"
                                aria-labelledby="blogSubMenu">
@@ -141,6 +142,7 @@
                                                                     <i class="{{$category['icon']}} w-15 pr-0"
                                                                        aria-hidden="true"></i>{{$category['title']}}
                                                                 </a>
+                                                            </div>
                                                         </li>
                                                     @endforeach
                                                 </ul>
@@ -193,7 +195,7 @@
                         <!-- Starter - Link -->
                         <li class="nav-item">
                             <a class="nav-link u-header__nav-link text-primary" href="{{route('edu.home.dynamic')}}">
-                                社区
+                                <strong>社区</strong>
                             </a>
                         </li>
                         <li class="nav-item hs-has-sub-menu u-header__nav-item"
@@ -220,7 +222,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="ml-2 mr-2" href="javascript:;"
+                            <a class="mr-2" href="javascript:;"
                                role="button"
                                aria-haspopup="true"
                                aria-expanded="false"
@@ -231,7 +233,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <ul class="list-inline ml-2 mb-0">
+                            <ul class="list-inline mb-0">
                                 <!-- Account Login -->
                                 <li class="list-inline-item">
                                     @auth
@@ -252,7 +254,7 @@
                                               <img class="u-sidebar--account__toggle-img" src="{{auth()->user()->icon}}"
                                                    alt="Image Description">
                                                 @if(auth()->user()->unreadNotifications->count())
-                                                      <span class="u-badge u-badge-success u-badge-pos rounded-circle">
+                                                    <span class="u-badge u-badge-success u-badge-pos rounded-circle">
                                                           {{auth()->user()->unreadNotifications->count()}}
                                                       </span>
                                                 @endif
@@ -267,7 +269,8 @@
                                 </li>
                                 <!-- Account Sidebar Navigation -->
                                 @auth
-                                    <aside id="sidebarContent" class="u-sidebar u-unfold--css-animation u-unfold--hidden"
+                                    <aside id="sidebarContent"
+                                           class="u-sidebar u-unfold--css-animation u-unfold--hidden"
                                            aria-labelledby="sidebarNavToggler">
                                         <div class="u-sidebar__scroller">
                                             <div class="u-sidebar__container">
@@ -298,15 +301,17 @@
                                                         <header class="d-flex align-items-center u-sidebar--account__holder mt-3">
                                                             <div class="position-relative">
                                                                 <a href="{{route('member.user.edit',[auth()->user(),'type'=>'icon'])}}">
-                                                                <img class="u-sidebar--account__holder-img"
-                                                                     src="{{auth()->user()->icon}}"
-                                                                     alt="Image Description">
-                                                                <span class="u-badge u-badge--xs u-badge-border-success u-badge-pos rounded-circle"></span>
+                                                                    <img class="u-sidebar--account__holder-img"
+                                                                         src="{{auth()->user()->icon}}"
+                                                                         alt="Image Description">
+                                                                    <span class="u-badge u-badge--xs u-badge-border-success u-badge-pos rounded-circle"></span>
                                                                 </a>
                                                             </div>
                                                             <div class="ml-3">
-                                                                <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}" class="text-dark">
-                                                                    {{auth()->user()->name}} <span class="badge u-badge-success ml-1">普通会员</span>
+                                                                <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}"
+                                                                   class="text-dark">
+                                                                    {{auth()->user()->name}} <span
+                                                                            class="badge u-badge-success ml-1">普通会员</span>
                                                                 </a>
                                                                 <span class="u-sidebar--account__holder-text">
                                                                 uid: {{auth()->id()}}
@@ -335,9 +340,12 @@
                                                                 <div id="sidebar-account-settings"
                                                                      class="u-unfold right-0 mt-4"
                                                                      aria-labelledby="sidebar-account-settings-invoker">
-                                                                    <a class="u-list__link" href="{{route('member.user.edit',[auth()->user(),'type'=>'icon'])}}">设置头像</a>
-                                                                    <a class="u-list__link" href="{{route('member.user.edit',[auth()->user(),'type'=>'password'])}}">修改密码</a>
-                                                                    <a class="u-list__link" href="{{route('member.user.show',[auth()->user()])}}">我的空间</a>
+                                                                    <a class="u-list__link"
+                                                                       href="{{route('member.user.edit',[auth()->user(),'type'=>'icon'])}}">设置头像</a>
+                                                                    <a class="u-list__link"
+                                                                       href="{{route('member.user.edit',[auth()->user(),'type'=>'password'])}}">修改密码</a>
+                                                                    <a class="u-list__link"
+                                                                       href="{{route('member.user.show',[auth()->user()])}}">我的空间</a>
                                                                     <div class="dropdown-divider"></div>
                                                                     <a class="u-list__link"
                                                                        href="{{route('logout')}}">退出</a>
@@ -456,8 +464,8 @@
                                             </div>
                                         </div>
                                     </aside>
-                                    @endauth
-                                <!-- End Account Sidebar Navigation -->
+                            @endauth
+                            <!-- End Account Sidebar Navigation -->
                             </ul>
                         </li>
                         <!-- End Button -->

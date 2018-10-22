@@ -13,7 +13,10 @@
                 京ICP备12048441号-3
             </small>
             <p class="small text-secondary">
-                Tel: 010-86467608 Email:2300071698@qq.com
+                <i class="fa fa-phone-square" aria-hidden="true"></i> : 010-86467608
+                <i class="fa fa-telegram" aria-hidden="true"></i> : <a href="mailto:2300071698@qq.com" class="text-secondary">2300071698@qq.com</a>
+                <br>
+                编码: <a href="http://www.aoxiangjun.com">向军大叔</a> By: <a href="http://www.hdcms.com">HDCMS</a>
             </p>
         </div>
         <!-- End Copyright -->
@@ -35,8 +38,8 @@
 
 <script>
     require([
-        'jquery-migrate','bootstrap', 'popper', 'hs.megamenu', 'jquery.validate', 'jquery.fancybox', 'slick',
-        'hs.core', 'hs.header', 'hs.focus-state', 'hs.validation', 'hs.unfold','hs.show-animation',
+        'jquery-migrate', 'bootstrap', 'popper', 'hs.megamenu', 'jquery.validate', 'jquery.fancybox', 'slick',
+        'hs.core', 'hs.header', 'hs.focus-state', 'hs.validation', 'hs.unfold', 'hs.show-animation',
         'hs.fancybox', 'hs.slick-carousel', 'hs.go-to'
     ], function () {
         $(document).ready(function () {

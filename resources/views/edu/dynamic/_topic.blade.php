@@ -7,8 +7,8 @@
                     {{$activity->causer->name}}
                 </a>
                 @if($activity->description =='created')
-                <span class="badge badge-light text-secondary small">发表了</span>
-                    @else
+                    <span class="badge badge-light text-secondary small">发表了</span>
+                @else
                     <span class="badge badge-light text-secondary small">更新了</span>
                 @endif
                 <a href="{{route('edu.topic.show',$activity->subject)}}" class="text-dark">

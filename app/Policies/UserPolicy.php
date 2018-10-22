@@ -17,35 +17,21 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
+    //关注
     public function follow(User $user, User $model)
     {
         return $user['id'] != $model['id'];
     }
 
-    //资料修改
-    public function show(User $user, User $model)
+    //粉丝列表
+    public function fans(User $user, User $model)
     {
         return $user['id'] == $model['id'];
     }
 
-    public function create(User $user)
-    {
-    }
-
+    //修改资料
     public function update(User $user, User $model)
     {
         return $user['id'] == $model['id'];
-    }
-
-    public function delete(User $user, User $model)
-    {
-    }
-
-    public function restore(User $user, User $model)
-    {
-    }
-
-    public function forceDelete(User $user, User $model)
-    {
     }
 }

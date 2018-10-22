@@ -1,71 +1,46 @@
 @extends('edu.layouts.master')
 @section('content')
-    <div class="{{route_class()}}">
-        <div class="row">
-            <div class="col-sm-8">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center justify-content-center">
-                            <div class="col-auto p-5">
-                                <h2 class="text-secondary">{{$lesson->title}}</h2>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            @if($lesson->description)
-                                <div class="card card-inactive">
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            {!! $lesson->description !!}
-                                        </p>
-                                    </div>
-                                </div>
-                            @endif
-                        </div>
-                        {{--<button class="btn btn-white">收藏课程</button>--}}
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header border-bottom-0">
-                        课程目录
-                    </div>
-                    <div class="card-body">
-                        <div class="card card-inactive">
-                            <ul class="list-group list-group-flush">
-                                @foreach($lesson->video as $video)
-                                    <a href="{{route('edu.video.show',$video)}}" class="text-secondary p-3 pl-4 list-group-item d-flex align-items-center justify-content-between px-0">
-                                        {{$video->title}}
-                                        {{--<i class="fe fe-check-circle text-success"></i>--}}
-                                    </a>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                {{$lesson['title']}}
             </div>
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-header-title">
-                            公告
-                        </h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h5 class="mb-0">
-                                    <a href="" class="text-secondary"> 晚八点直播</a>
-                                </h5>
+            <div class="card-body">
+                <div class="pr-md-4">
+                    @foreach($lesson->video as $index=>$video)
+                        @if(!$video->isLive(auth()->id()))
+                            <div class="media mb-3 {{active_class($index+1!= $lesson->video->count(),'u-indicator-ver-dashed')}}">
+                                <div class="d-flex mt-1 mr-3">
+                                    <span class="u-icon u-icon-brd-secondary u-icon--xs rounded-circle" style="background: #fff;">
+
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <h3 class="h5 text-light" style="font-weight: normal">
+                                        <a href="{{route('edu.video.show',$video)}}" class="text-secondary">{{$video->title}}</a>
+                                    </h3>
+                                </div>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h5 class="mb-0">
-                                    <a href="" class="text-secondary">新手帮助</a>
-                                </h5>
+                            @else
+                            <div class="media mb-3 {{active_class($index+1!= $lesson->video->count(),'u-indicator-ver-dashed')}}">
+                                <div class="d-flex mt-1 mr-3">
+                                    <span class="u-icon u-icon-primary u-icon--xs rounded-circle">
+                                      <span class="fa fa-check u-icon__inner"></span>
+                                    </span>
+                                </div>
+                                <div class="media-body">
+                                    <h3 class="h5 text-primary" style="font-weight: normal">
+                                        <a href="{{route('edu.video.show',$video)}}" class="text-primary">{{$video->title}}</a>
+                                    </h3>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        @endif
+                    @endforeach
+                    <!-- End Info -->
+                    <!-- Info -->
+
+                    <!-- End Info -->
+
                 </div>
             </div>
         </div>

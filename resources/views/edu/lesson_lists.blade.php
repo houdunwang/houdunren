@@ -2,19 +2,19 @@
 @section('content')
     <div class="container">
         <div class="{{route_class()}}">
-            <div class="container u-space-3 pb-5" style="padding-top: 5rem;">
-                <div class="u-cubeportfolio">
-                    <div id="filterControls" class="list-inline cbp-l-filters-alignRight text-center">
-                        <a class="list-inline-item  u-cubeportfolio__item cbp-filter-item-active"
-                            href="http://baidu.com">全部
-                        </a>
-                        <a class="list-inline-item cbp-filter-item u-cubeportfolio__item" href="#">
-                            Branding
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="row listAlias">
+            {{--<div class="container u-space-3 pb-5" style="padding-top: 5rem;">--}}
+                {{--<div class="u-cubeportfolio">--}}
+                    {{--<div id="filterControls" class="list-inline cbp-l-filters-alignRight text-center">--}}
+                        {{--<a class="list-inline-item  u-cubeportfolio__item cbp-filter-item-active"--}}
+                            {{--href="http://baidu.com">全部--}}
+                        {{--</a>--}}
+                        {{--<a class="list-inline-item cbp-filter-item u-cubeportfolio__item" href="#">--}}
+                            {{--Branding--}}
+                        {{--</a>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            <div class="row listAlias mt-5">
                 @foreach($lessons as $lesson)
                     <div class="col-4">
                         <article class="bg-white shadow-sm mb-3">
@@ -31,7 +31,7 @@
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                         {{$lesson['updated_at']->diffForHumans()}}
                                         <i class="fa fa-film ml-3" aria-hidden="true"></i>
-                                        {{$lesson->video()->count()}} 视频
+                                        {{$lesson->video()->count()}} 节课
                                     </div>
                                 </div>
                             </a>

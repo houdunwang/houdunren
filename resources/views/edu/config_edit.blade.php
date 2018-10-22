@@ -1,4 +1,4 @@
-@extends('content.layouts.admin')
+@extends('edu.layouts.admin')
 @section('content')
     <div class="row">
         <form action="{{route('edu.config.update')}}" method="post" class="col-12">
