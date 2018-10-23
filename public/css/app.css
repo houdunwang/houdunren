@@ -247,6 +247,14 @@
   font-size: 18px !important;
 }
 
+.edu-lesson-show .lesson-list .video-title {
+  font-weight: normal;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .dropdown-menu-card {
   border: 1px solid #e3ebf6 !important;
 }

@@ -21,9 +21,6 @@ class SearchController extends Controller
     {
         $w = $request->query('w');
         switch ($request->query('t')) {
-            case 'article':
-                $data = Article::search($w)->paginate(10);
-                break;
             case 'topic':
                 $data = EduTopic::search($w)->paginate(10);
                 break;
@@ -31,7 +28,7 @@ class SearchController extends Controller
                 $data = EduVideo::search($w)->paginate(10);
                 break;
             default:
-                return back()->with('error', '类型错误');
+                return back()->with('error', '参数错误');
         }
         return view('edu.search_lists', compact('data'));
     }

@@ -22,13 +22,23 @@
                 <!-- Input -->
                 <form class="js-focus-state input-group u-form">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="输入搜索关键字" aria-label="Recipient's username"
+                        <input type="text" class="form-control" placeholder="输入搜索关键字" name="w" aria-label="Recipient's username"
                                aria-describedby="basic-addon2"/>
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">文章</button>
-                            <button class="btn btn-outline-secondary" type="button">课程</button>
+                            <button class="btn btn-outline-secondary" type="button" onclick="search('topic')">文章
+                            </button>
+                            <button class="btn btn-outline-secondary" type="button" onclick="search('video')">课程
+                            </button>
                         </div>
                     </div>
+                    @push('js')
+                        <script>
+                            function search(t){
+                                w = $("[name='w']").val();
+                                location.href="{{route('edu.search')}}?w="+w+"&t="+t;
+                            }
+                        </script>
+                    @endpush
                 </form>
                 <!-- End Input -->
             </div>

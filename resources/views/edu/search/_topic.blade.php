@@ -1,24 +1,18 @@
-<ul class="list-group list-group-lg list-group-flush list my--4">
-    @foreach($data as $topic)
-        <li class="list-group-item px-0">
-            <div class="row">
-                <div class="col-auto">
-                    <a href="{{route('member.user.show',$topic->user)}}" class="avatar">
-                        <img src="{{$topic->user->icon}}" class="avatar-img rounded">
-                    </a>
-                </div>
-                <div class="col ml--2">
-                    <h4 class="card-title mb-3 name">
-                        <a href="{{route('edu.topic.show',$topic)}}">
-                            {{$topic->title}}
-                        </a>
-                    </h4>
-                    <p class="card-text small text-muted">
-                        <span class="fe fe-user"></span> {{$topic->user->name}} .
-                        <i class="fe fe-clock"></i> {{$topic->created_at}}
-                    </p>
-                </div>
+<li class="my-2">
+    <div class="u-info-v1 p-3">
+        <div class="row justify-content-sm-between align-items-sm-center">
+            <div class="col-sm-10 mb-2 mb-sm-0" style="font-size: 14px;">
+                <a href="{{route('member.user.show',$field->user)}}">
+                    <img class="u-avatar rounded-circle mr-3" src="{{$field->user->icon}}">
+                </a>
+                <a href="{{route('edu.topic.show',$field)}}" class="text-dark">
+                    {{$field->title}}
+                </a>
             </div>
-        </li>
-    @endforeach
-</ul>
+            <span class="col-sm-2 text-text text-sm-right small text-secondary">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                {{$field->created_at->diffForHumans()}}
+                </span>
+        </div>
+    </div>
+</li>

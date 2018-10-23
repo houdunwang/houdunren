@@ -59,12 +59,14 @@
                                     </a>
                                 </div>
                                 <div class="col ml--2">
-                                    <h4 class="card-title mb-1">
-                                        <a href="#">{{$video->title}}</a>
-                                    </h4>
+                                    <h5 class="card-title mb-1 text-secondary">
+                                        {{$video->title}}
+                                    </h5>
                                     <p class="card-text small text-muted">
                                         <a href="{{route('edu.lesson.show',$video->lesson)}}"
-                                           class="text-secondary">{{$video->lesson->title}}</a>
+                                           class="text-secondary">
+                                            <i class="fa fa-folder-o" aria-hidden="true"></i> {{$video->lesson->title}}
+                                        </a>
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                         {{$video->lesson['updated_at']->format('Y-m-d')}}
                                     </p>
@@ -83,7 +85,7 @@
             {{--评论--}}
             <div class="row">
                 <div class="col-12 col-lg-12">
-                   @include('common.comment',['model'=>$video,'user_link'=>route('edu.user.index')])
+                   @include('common.comment',['model'=>$video])
                 </div>
             </div>
         </div>

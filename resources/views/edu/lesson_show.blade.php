@@ -1,11 +1,10 @@
 @extends('edu.layouts.master')
 @section('content')
-    <div class="container mt-5">
+    <div class="container mt-5 {{route_class()}}">
         <div class="card">
             <div class="card-header">
                 <div class="justify-content-between">
                     {{$lesson['title']}}
-
                     @if($lesson->isFavorite(auth()->user()))
                         <a href="{{route('common.favorite.make',['model'=>'EduLesson','id'=>$lesson['id']])}}"
                            class="btn u-btn-primary--air transition-3d-hover btn-xs float-right">
@@ -30,7 +29,7 @@
                     @endpush
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body lesson-list">
                 <div class="pr-md-4">
                     @foreach($lesson->video as $index=>$video)
                         @if(!$video->isLive(auth()->id()))
@@ -38,13 +37,14 @@
                                 <div class="d-flex mt-1 mr-3">
                                     <span class="u-icon u-icon-brd-secondary u-icon--xs rounded-circle"
                                           style="background: #fff;">
-
                                     </span>
                                 </div>
                                 <div class="media-body">
-                                    <h3 class="h5 text-light" style="font-weight: normal">
+                                    <h3 class="h5 text-light">
                                         <a href="{{route('edu.video.show',$video)}}"
-                                           class="text-secondary">{{$video->title}}</a>
+                                           class="text-secondary video-title">
+                                            {{$video->title}}
+                                        </a>
                                     </h3>
                                 </div>
                             </div>
@@ -57,9 +57,11 @@
                                     </span>
                                 </div>
                                 <div class="media-body">
-                                    <h3 class="h5 text-primary" style="font-weight: normal">
+                                    <h3 class="h5 text-primary">
                                         <a href="{{route('edu.video.show',$video)}}"
-                                           class="text-primary">{{$video->title}}</a>
+                                           class="text-primary video-title">
+                                            <strong>{{$video->title}}</strong>
+                                        </a>
                                     </h3>
                                 </div>
                             </div>
