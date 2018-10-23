@@ -1,4 +1,4 @@
-@extends('admin.layouts.admin')
+@extends('layouts.admin')
 @section('content')
     <form action="{{route('admin.role.store')}}" method="post" class="small">
         @csrf

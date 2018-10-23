@@ -1,4 +1,4 @@
-@extends('chat.layouts.admin')
+@extends('layouts.admin')
 @section('content')
     <form action="{{route('chat.base.store')}}" method="post">
         @csrf

@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Config extends Model
 {
-    protected $fillable = ['name', 'data'];
+    protected $fillable = ['name', 'data', 'module'];
 
     protected $casts = ['data' => 'array'];
 

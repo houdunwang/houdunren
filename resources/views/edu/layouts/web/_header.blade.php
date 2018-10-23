@@ -261,7 +261,7 @@
                                             </span>
                                         </a>
                                     @else
-                                        <a class="btn btn-xs u-btn--icon u-btn-text-secondary"
+                                        <a class="btn btn-sm u-btn--icon u-btn-text-secondary"
                                            href="{{route('login')}}">
                                             <span class="fa fa-user-circle u-btn--icon__inner font-size-14"></span>
                                         </a>

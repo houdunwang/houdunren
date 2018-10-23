@@ -60,10 +60,19 @@ class HdModule extends Command
         $module = basename(dirname($dir));
         $config = include $dir . '/config.php';
         $permissions = include $dir . '/permission.php';
-
+        $admin_menu = is_file($dir . '/Menus/admin.php') ? include $dir . '/Menus/admin.php' : [];
+        $center_menu = is_file($dir . '/Menus/center.php') ? include $dir . '/Menus/center.php' : [];
+        $space_menu = is_file($dir . '/Menus/space.php') ? include $dir . '/Menus/space.php' : [];
         //生成模块数据
         Module::firstOrNew(['name' => $module])->fill(
-            ['system' => $system, 'title' => $config['app'], 'permission' => $permissions]
+            [
+                'system' => $system,
+                'title' => $config['app'],
+                'permission' => $permissions,
+                'admin_menu' => $admin_menu,
+                'center_menu' => $center_menu,
+                'space_menu' => $space_menu,
+            ]
         )->save();
 
         //生成模块权限数据,首先删除权限缓存
@@ -75,7 +84,7 @@ class HdModule extends Command
         }
 
         //生成模块配置项
-        Config::firstOrNew(['name' => "_{$module}"])->fill(['data' => $config])->save();
+        Config::firstOrNew(['name' => "_{$module}"])->fill(['data' => $config, 'module' => $module])->save();
     }
 
     protected function WebMaseterSyncPermission()

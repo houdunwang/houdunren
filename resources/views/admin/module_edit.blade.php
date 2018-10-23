@@ -1,4 +1,4 @@
-@extends('admin.layouts.admin')
+@extends('layouts.admin')
 @section('content')
     <form action="{{route('admin.module.update',$module)}}" method="post">
         @csrf @method('PUT')

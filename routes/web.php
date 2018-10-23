@@ -77,11 +77,9 @@ Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.
 });
 
 //后台管理
-Route::get('/hdcms', 'Admin\AdminController@home')->name('admin.home');
-
 Route::group(['namespace' => 'Admin', 'middleware' => [], 'as' => 'admin.', 'prefix' => 'admin'], function () {
     //系统管理页面
-    Route::get('system', 'AdminController@index')->name('admin');
+    Route::get('/', 'AdminController@index')->name('admin');
     //配置管理
     Route::get('config/{name}/edit', 'ConfigController@edit')->name('config.edit');
     Route::put('config/{name}', 'ConfigController@update')->name('config.update');
@@ -113,7 +111,7 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::get('config/edit', 'ConfigController@edit')->name('config.edit');
     Route::put('config/update', 'ConfigController@update')->name('config.update');
     //会员中心
-    Route::get('user','UserController@index')->name('user.index');
-    Route::get('{user}/topic','UserController@topic')->name('user.topic');
+    Route::get('user/{user}', 'UserController@index')->name('user.index');
+    Route::get('{user}/topic', 'UserController@topic')->name('user.topic');
 });
 

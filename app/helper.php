@@ -109,3 +109,13 @@ function access($permission, $user = null)
     }
     return true;
 }
+
+/**
+ * 获取后台菜单列表
+ * @return mixed
+ */
+function module_admin_menus()
+{
+    $name = explode('/',Route::getCurrentRoute()->uri);
+    return \App\Models\Module::where(['name' => $name[0]])->first()->adminMenus();
+}

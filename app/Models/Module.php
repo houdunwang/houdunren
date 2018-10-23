@@ -15,10 +15,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
 {
-    protected $fillable = ['name', 'system', 'title', 'permission', 'domain'];
+    protected $fillable = [
+        'name',
+        'system',
+        'title',
+        'permission',
+        'domain',
+        'center_menu',
+        'center_menu_setting',
+        'space_menu',
+        'space_menu_setting',
+        'admin_menu',
+    ];
 
     protected $casts = [
         'permission' => 'array',
+        'center_menu' => 'array',
+        'space_menu' => 'array',
+        'admin_menu' => 'array',
     ];
 
     /**
@@ -38,17 +52,18 @@ class Module extends Model
         return HomeController::class . '@index';
     }
 
-    public function menus()
+    /**
+     * 获取后台菜单
+     * @return \Illuminate\Support\Collection
+     */
+    public function adminMenus()
     {
-        $menus = [];
-        foreach (self::get() as $module) {
-            $menus[] = [
-                'title' => $module['title'],
-                'url' => route(strtolower($module['name'] . '.admin')),
-                'permissions' => $module->getModulePermission(),
-            ];
-        }
-        return $menus;
+        return collect($this['admin_menu'])->map(function ($menu) {
+            $menu['permission'] = array_map(function ($menu) {
+                return $menu['permission'];
+            }, $menu['menus']);
+            return $menu;
+        });
     }
 
     /**

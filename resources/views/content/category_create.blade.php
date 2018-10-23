@@ -1,4 +1,4 @@
-@extends('content.layouts.admin')
+@extends('layouts.admin')
 @section('content')
     <div class="row">
         <form action="{{route('content.category.store')}}" method="post" class="col-12">

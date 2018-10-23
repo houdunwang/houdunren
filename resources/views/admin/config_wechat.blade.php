@@ -1,4 +1,4 @@
-@extends('admin.layouts.admin')
+@extends('layouts.admin')
 @section('content')
     <div class="row">
         <form action="{{route('admin.config.update',['name'=>'wechat'])}}" method="post" class="col-sm-12">

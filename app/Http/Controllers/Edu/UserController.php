@@ -15,11 +15,9 @@ class UserController extends Controller
 //        $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index(User $user)
     {
-        $user = User::find($request->query('id'));
         return redirect(route('edu.user.topic', $user));
-//        return view('edu.user.index', compact('user'));
     }
 
     public function topic(User $user)

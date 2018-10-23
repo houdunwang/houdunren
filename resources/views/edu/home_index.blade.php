@@ -1,5 +1,4 @@
 @extends('edu.layouts.master')
-
 @section('content')
     <!-- Skippy -->
     <a id="skippy" class="sr-only sr-only-focusable u-skippy" href="#content">

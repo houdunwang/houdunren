@@ -239,7 +239,9 @@
             </div>
         </div>
         <div class="collapse navbar-collapse" id="sidebarCollapse">
-            @yield('menu')
+            {{--菜单列表--}}
+            @include('layouts._admin_menu')
+            {{--菜单列表END--}}
             <hr class="my-3">
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
@@ -301,28 +303,9 @@
         @yield('content')
     </div>
 </div>
-<!-- Libs JS -->
-{{--<script src="{{asset('org/Dashkit-1.1.2')}}/libs/jquery/dist/jquery.min.js"></script>--}}
-{{--<script src="{{asset('org/Dashkit-1.1.2')}}/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>--}}
-{{--<script src="{{asset('org/Dashkit-1.1.2')}}/libs/chart.js/dist/Chart.min.js"></script>--}}
-{{--<script src="{{asset('org/Dashkit-1.1.2')}}/libs/chart.js/Chart.extension.min.js"></script>--}}
-{{--<script src="{{asset('org/Dashkit-1.1.2')}}/libs/highlight/highlight.pack.min.js"></script>--}}
-{{--<script src="{{asset('org/Dashkit-1.1.2')}}/libs/flatpickr/dist/flatpickr.min.js"></script>--}}
-{{--<script src="{{asset('org/Dashkit-1.1.2')}}/libs/jquery-mask-plugin/dist/jquery.mask.min.js"></script>--}}
-{{--<script src="{{asset('org/Dashkit-1.1.2')}}/libs/list.js/dist/list.min.js"></script>--}}
-{{--<script src="{{asset('org/Dashkit-1.1.2')}}/libs/quill/dist/quill.min.js"></script>--}}
-{{--<script src="{{asset('org/Dashkit-1.1.2')}}/libs/dropzone/dist/min/dropzone.min.js"></script>--}}
-{{--<script src="{{asset('org/Dashkit-1.1.2')}}/libs/select2/dist/js/select2.min.js"></script>--}}
-{{--<!-- Theme JS -->--}}
-{{--<script src="{{asset('org/Dashkit-1.1.2')}}/js/theme.min.js"></script>--}}
 <script>
-    require(['bootstrap', 'jquery'], function () {
-        {{--require([--}}
-            {{--"{{asset('org/Dashkit-1.1.2')}}/libs/list.js/dist/list.min.js"--}}
-            {{--, "{{asset('org/Dashkit-1.1.2')}}/js/theme.min.js"])--}}
-    })
+    require(['bootstrap', 'jquery'])
 </script>
-{{--<script src="{{asset('js/admin_menu.js')}}"></script>--}}
 @stack('js')
 </body>
 </html>

@@ -1,6 +1,6 @@
 @extends('edu.layouts.master')
 @section('content')
-    <div class="container mt-5">
+    <div class="container mt-0">
         <div class="{{route_class()}}">
             <div class="row mb-3">
                 <div class="col-12">

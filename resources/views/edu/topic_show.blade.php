@@ -26,9 +26,9 @@
                                 {{$topic['title']}}
                             </h2>
                             <p class="text-muted mb-1 text-muted small">
-                                <span class="fe fe-user"></span>
-                                <a href="{{route('member.user.show',$topic->user)}}"
-                                   class="text-secondary">{{$topic->user->name}}</a>
+                                <a href="{{route('edu.user.index',$topic->user)}}" class="text-secondary">
+                                    <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{$topic->user->name}}
+                                </a>
                                 <i class="fa fa-clock-o ml-2" aria-hidden="true"></i>
                                 {{$topic->updated_at->diffForHumans()}}
 
@@ -70,7 +70,7 @@
                 </div>
                 {{--评论--}}
                 <div class="mt-5">
-                    @include('common.comment',['model'=>$topic,'user_link'=>route('edu.user.index')])
+                    @include('common.comment',['model'=>$topic,'user_link'=>'/edu/user'])
                 </div>
             </div>
             <div class="col-12 col-xl-3">
