@@ -24,8 +24,8 @@
             <div class="comment mb-0">
                 <div class="row mb-2">
                     <div class="col-auto">
-                        <a class="avatar" :href="'{{$user_link}}/'+comment.user.id">
-                            <img :src="comment.user.icon" alt="..." class="u-avatar avatar-img rounded-pseudo">
+                        <a class="avatar" :href="'/member/user/'+comment.user.id">
+                            <img :src="comment.user.icon" class="u-avatar avatar-img rounded-pseudo">
                         </a>
                     </div>
                     <div class="col ml-0 pl-0">

@@ -15,11 +15,6 @@ class UserController extends Controller
 //        $this->middleware('auth');
     }
 
-    public function index(User $user)
-    {
-        return redirect(route('edu.user.topic', $user));
-    }
-
     public function topic(User $user)
     {
         $topics = EduTopic::where('user_id', $user['id'])->paginate(10);

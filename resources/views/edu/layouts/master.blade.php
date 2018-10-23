@@ -26,10 +26,9 @@
 </head>
 <body>
 @include('edu.layouts.web._header')
-    <div class="alert alert-light text-center m-0 small" role="alert">
-        感谢大家一如既往对后盾人的支持，当前网站版本为公测版使用中发现问题请及时向我们 <a href="mailto:2300071698@qq.com">发送邮件</a> 进行反馈。
-
-    </div>
+<div class="alert alert-light text-center m-0 small" role="alert">
+    感谢大家一如既往对后盾人的支持，当前网站版本为公测版使用中发现问题请及时向我们 <a href="mailto:2300071698@qq.com">发送邮件</a> 进行反馈。
+</div>
 @yield('content')
 @include('edu.layouts.web._footer')
 @stack('js')

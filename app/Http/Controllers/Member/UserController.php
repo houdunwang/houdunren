@@ -23,9 +23,10 @@ class UserController extends Controller
     }
 
     //会员中心
-    public function index()
+    public function show(User $user)
     {
-        return redirect(route('member.user.edit', [auth()->user(), 'type' => 'icon']));
+
+        return view('member.user_show', compact('user'));
     }
 
     //关注列表

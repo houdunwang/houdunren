@@ -360,7 +360,7 @@
                                                                 @if(Auth::user()->can('Admin-index'))
                                                                     <li class="u-sidebar--account__list-item">
                                                                         <a class="u-sidebar--account__list-link"
-                                                                           href="{{route('admin.home')}}">
+                                                                           href="{{route('admin.admin')}}">
                                                                             <span class="fa fa-cogs u-sidebar--account__list-icon mr-2"></span>
                                                                             后台管理
                                                                         </a>

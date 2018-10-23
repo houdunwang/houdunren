@@ -394,7 +394,7 @@
                             <p class="mb-4">
                                 Laravel是广受PHP开发团队喜欢的开源框架，开发敏捷、功能丰富、社区完善。
                             </p>
-                            <a class="btn u-btn-danger--air transition-3d-hover" href="#">
+                            <a class="btn u-btn-danger--air transition-3d-hover" href="{{route('edu.lesson.lists')}}">
                                 进入学习
                                 <span class="fa fa-angle-right ml-2"></span>
                             </a>
@@ -910,13 +910,11 @@
                                     </g>
                 </svg>
                             </figure>
-                            <!-- End SVG Icon -->
-
                             <h3 class="h4 mb-3">PHP编程零基础入门</h3>
                             <p class="mb-4">
                                 从软件安装到编程语法，同时结合实战案例，让你轻松掌握PHP这门广泛使用的编程语言。
                             </p>
-                            <a class="btn u-btn-primary--air transition-3d-hover" href="#">
+                            <a class="btn u-btn-primary--air transition-3d-hover" href="{{route('edu.lesson.lists')}}">
                                 马上学习
                                 <span class="fa fa-angle-right ml-2"></span>
                             </a>
@@ -1040,7 +1038,7 @@
                         <p>
                             提供在线讨论、QQ交流群、每日直播课等方式，无数小伙伴与你同学习进步！
                         </p>
-                        <a class="btn btn-sm u-btn-primary--air transition-3d-hover" href="#">
+                        <a class="btn btn-sm u-btn-primary--air transition-3d-hover" href="{{route('edu.home.dynamic')}}">
                             进入社区
                             <span class="fa fa-angle-right ml-2"></span>
                         </a>
@@ -1057,7 +1055,7 @@
             </span>
                         <h3 class="h5">全程实战</h3>
                         <p>课程面向企业级实际应用，课程以实战贯穿始终。深入浅出，细致入微。</p>
-                        <a class="btn btn-sm u-btn-primary--air transition-3d-hover" href="#">
+                        <a class="btn btn-sm u-btn-primary--air transition-3d-hover" href="{{route('edu.lesson.lists')}}">
                             查看课程
                             <span class="fa fa-angle-right ml-2"></span>
                         </a>
@@ -1230,7 +1228,7 @@
                 <!-- End Slick Carousel -->
 
                 <div class="text-center">
-                    <a class="btn u-btn-primary--air u-btn-wide transition-3d-hover" href="#">查看全部</a>
+                    <a class="btn u-btn-primary--air u-btn-wide transition-3d-hover" href="{{route('edu.lesson.lists')}}">查看全部</a>
                 </div>
             </div>
         </div>
@@ -1496,12 +1494,14 @@
         <div class="container text-center u-space-3">
             <!-- Title -->
             <div class="w-md-60 text-center mx-auto mb-6">
-                <h2 class="font-weight-medium">已经有 <strong class="text-primary">35,000</strong> 开发工程师及编程爱好者与你在后盾人相遇</h2>
+                <h2 class="font-weight-medium">已经有 <strong class="text-primary">{{\App\User::count()}}</strong>
+                    编程爱好者与你此相遇
+                </h2>
             </div>
             <!-- End Title -->
 
             <div class="mb-6">
-                <a class="btn btn-primary u-btn-primary u-btn-wide transition-3d-hover" href="#">进入社区、结交志同道合的朋友</a>
+                <a class="btn btn-primary u-btn-primary u-btn-wide transition-3d-hover" href="{{route('edu.home.dynamic')}}">进入社区、结交志同道合的朋友</a>
             </div>
 
             <!-- 视频介绍 -->

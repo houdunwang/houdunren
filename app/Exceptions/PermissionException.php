@@ -17,7 +17,7 @@ class PermissionException extends Exception
         if ($request->expectsJson()) {
             return response()->json(['message' => $this->getMessage(), 'code' => 403], $this->code);
         } elseif (!auth()->check()) {
-            return redirect(route('login'))->with('error', '请登录后操作');
+            return redirect()->guest(route('login'))->with('error', '请登录后操作');
         }
         return redirect('/')->with('error', $this->getMessage());
     }

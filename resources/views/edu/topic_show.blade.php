@@ -26,12 +26,11 @@
                                 {{$topic['title']}}
                             </h2>
                             <p class="text-muted mb-1 text-muted small">
-                                <a href="{{route('edu.user.index',$topic->user)}}" class="text-secondary">
+                                <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">
                                     <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{$topic->user->name}}
                                 </a>
                                 <i class="fa fa-clock-o ml-2" aria-hidden="true"></i>
                                 {{$topic->updated_at->diffForHumans()}}
-
                                 <i class="fa fa-comment-o ml-2" aria-hidden="true"></i> {{$topic->comment->count()}}
                             </p>
                         </div>
@@ -70,7 +69,7 @@
                 </div>
                 {{--评论--}}
                 <div class="mt-5">
-                    @include('common.comment',['model'=>$topic,'user_link'=>'/edu/user'])
+                    @include('common.comment',['model'=>$topic])
                 </div>
             </div>
             <div class="col-12 col-xl-3">
@@ -80,7 +79,7 @@
                     </div>
                     <div class="card-block text-center p-5">
                         <div class="avatar avatar-xl">
-                            <a href="{{route('edu.user.index',['id'=>$topic->user->id])}}">
+                            <a href="{{route('member.user.show',$topic->user)}}">
                                 <img src="{{$topic->user->icon}}" class="u-xl-avatar rounded-circle">
                             </a>
                         </div>
@@ -95,7 +94,6 @@
                             @else
                                 <a class="btn btn-white btn-block btn-xs"
                                    href="{{route('member.follow',$topic->user->id)}}">
-
                                     <i class="fa fa-plus" aria-hidden="true"></i> 关注 TA
                                 </a>
                             @endif

@@ -13,6 +13,7 @@ namespace App\Http\Controllers\Member;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FindPasswordRequest;
 use App\User;
+use Url;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -23,7 +24,7 @@ class LoginController extends Controller
         $this->middleware('guest', ['only' => ['login', 'store']]);
     }
 
-    public function login()
+    public function login(Request $request)
     {
         return view('member.login');
     }
@@ -32,7 +33,7 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'account'  => 'required',
+            'account' => 'required',
             'password' => 'required',
         ], ['account.required' => '登录帐号不能为空', 'password.required' => '密码不能为空']);
         if (filter_var($request['account'], FILTER_VALIDATE_EMAIL)) {
@@ -41,10 +42,10 @@ class LoginController extends Controller
             $data['mobile'] = $request['account'];
         }
         $data['password'] = $request['password'];
-        if (\Auth::attempt($data, $request['remember'])) {
-            return redirect('/')->with('success', '帐号登录成功');
+        if (\Auth::attempt($data, (bool)$request['remember'])) {
+            return redirect()->intended('/');
         }
-        return back()->with('error', '登录失败，请检查帐号或密码');
+        return redirect(session('redirect_url'), '/')->with('error', '登录失败，请检查帐号或密码');
     }
 
     public function logout()

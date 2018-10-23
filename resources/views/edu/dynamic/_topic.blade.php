@@ -2,7 +2,9 @@
     <div class="u-info-v1 p-3">
         <div class="row justify-content-sm-between align-items-sm-center">
             <div class="col-sm-10 mb-2 mb-sm-0" style="font-size: 14px;">
-                <img class="u-avatar rounded-circle mr-3" src="{{asset('org/front/img/100x100/img9.jpg')}}">
+                <a href="{{route('member.user.show',$activity->causer)}}">
+                <img class="u-avatar rounded-circle mr-3" src="{{$activity->causer->icon}}">
+                </a>
                 <a href="{{route('member.user.show',$activity->causer)}}" class="text-secondary">
                     {{$activity->causer->name}}
                 </a>
