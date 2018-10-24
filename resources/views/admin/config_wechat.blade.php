@@ -13,7 +13,8 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>token</label>
-                                <input type="text" name="wechat_token" value="{{$config['data']['wechat_token']??''}}" class="form-control">
+                                <input type="text" name="token"
+                                       value="{{config_get('admin.wechat.token')}}" class="form-control">
                                 <small id="helpId" class="text-muted">
                                     微信绑定验证时使用的token, 需要与微信公众号后台保持一致
                                     | http://mp.weixin.qq.com/wiki/8/f9a0b8382e0b77d87b3bcc1ce6fbc104.html
@@ -21,7 +22,8 @@
                             </div>
                             <div class="form-group">
                                 <label>encodingaeskey</label>
-                                <input type="text" name="wechat_encodingaeskey" value="{{$config['data']['wechat_encodingaeskey']??''}}" class="form-control">
+                                <input type="text" name="encodingaeskey"
+                                       value="{{config_get('admin.wechat.encodingaeskey')}}" class="form-control">
                                 <small id="helpId" class="text-muted">
                                     需要与微信公众号后台保持一致
                                     | http://mp.weixin.qq.com/wiki/8/f9a0b8382e0b77d87b3bcc1ce6fbc104.html
@@ -29,14 +31,16 @@
                             </div>
                             <div class="form-group">
                                 <label>appid</label>
-                                <input type="text" name="wechat_appid" value="{{$config['data']['wechat_appid']??''}}" class="form-control">
+                                <input type="text" name="appid"
+                                       value="{{config_get('admin.wechat.appid')}}" class="form-control">
                                 <small id="helpId" class="text-muted">
                                     填写公众号认证后腾讯官网发来的邮件中的appid
                                 </small>
                             </div>
                             <div class="form-group">
                                 <label>appsecret</label>
-                                <input type="text" name="wechat_appsecret" value="{{$config['data']['wechat_appsecret']??''}}" class="form-control">
+                                <input type="text" name="appsecret"
+                                       value="{{config_get('admin.wechat.appsecret')}}" class="form-control">
                                 <small id="helpId" class="text-muted">
                                     公众平台API的权限获取所需密钥Key
                                     | 需要与微信公众号后台保持一致
@@ -51,7 +55,8 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>mch_id</label>
-                                <input type="text" name="wechat_mch_id" value="{{$config['data']['wechat_mch_id']??''}}" class="form-control">
+                                <input type="text" name="mch_id"
+                                       value="{{config_get('admin.wechat.mch_id')}}" class="form-control">
                                 <small id="helpId" class="text-muted">
                                     支付商户号
                                     | 微信发来的邮件中的微信支付商户号
@@ -59,7 +64,8 @@
                             </div>
                             <div class="form-group">
                                 <label>key</label>
-                                <input type="text" name="wechat_key" value="{{$config['data']['wechat_key']??''}}" class="form-control">
+                                <input type="text" name="key"
+                                       value="{{config_get('admin.wechat.key')}}" class="form-control">
                                 <small id="helpId" class="text-muted">
                                     商户支付密钥
                                     | 用于生成支付签名等使用
@@ -70,7 +76,8 @@
                             <div class="form-group">
                                 <label>apiclient_cert</label>
                                 <div class="input-group mb-1">
-                                    <input class="form-control" name="wechat_apiclient_cert" value="{{$config['data']['wechat_apiclient_cert']??''}}" readonly="">
+                                    <input class="form-control" name="apiclient_cert"
+                                           value="{{config_get('admin.wechat.apiclient_cert')}}" readonly="">
                                     <div class="input-group-append">
                                         <button onclick="upFile('apiclient_cert')" class="btn btn-secondary" type="button">选择</button>
                                     </div>
@@ -79,7 +86,8 @@
                             <div class="form-group">
                                 <label>apiclient_key</label>
                                 <div class="input-group mb-1">
-                                    <input class="form-control" name="wechat_apiclient_key" value="{{$config['data']['wechat_apiclient_key']??''}}" readonly="">
+                                    <input class="form-control" name="apiclient_key"
+                                           value="{{config_get('admin.wechat.apiclient_key')}}" readonly="">
                                     <div class="input-group-append">
                                         <button onclick="upFile('apiclient_key')" class="btn btn-secondary" type="button">选择</button>
                                     </div>
@@ -88,7 +96,8 @@
                             <div class="form-group">
                                 <label>rootca</label>
                                 <div class="input-group mb-1">
-                                    <input class="form-control" name="wechat_rootca" value="{{$config['data']['wechat_rootca']??''}}" readonly="">
+                                    <input class="form-control" name="rootca"
+                                           value="{{config_get('admin.wechat.rootca')}}" readonly="">
                                     <div class="input-group-append">
                                         <button onclick="upFile('rootca')" class="btn btn-secondary" type="button">选择</button>
                                     </div>

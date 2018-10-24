@@ -106,7 +106,8 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::get('topics_{category}.html', 'TopicController@lists')->name('topic_list');
     Route::resource('video', 'VideoController');
     Route::get('search', 'SearchController@lists')->name('search');
-    Route::get('dynamic', 'HomeController@dynamic')->name('home.dynamic');
+    //动态管理
+    Route::resource('dynamic', 'DynamicController');
     //模块配置
     Route::get('config/edit', 'ConfigController@edit')->name('config.edit');
     Route::put('config/update', 'ConfigController@update')->name('config.update');

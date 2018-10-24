@@ -52,7 +52,7 @@
                 <!-- Logo -->
                 <a class="navbar-brand u-header__navbar-brand u-header__navbar-brand-top-space"
                    href="/" aria-label="Front">
-                    <img src="{{module_config('edu.logo',asset('images/front-logo.png'))}}" alt="Logo"
+                    <img src="{{config_get('edu.logo',asset('images/front-logo.png'))}}" alt="Logo"
                          style="width: 12rem;margin-top: 5px;">
                 </a>
                 <!-- Responsive Toggle Button -->
@@ -204,7 +204,7 @@
 
                         <!-- Starter - Link -->
                         <li class="nav-item">
-                            <a class="nav-link u-header__nav-link text-primary" href="{{route('edu.home.dynamic')}}">
+                            <a class="nav-link u-header__nav-link text-primary" href="{{route('edu.dynamic.index')}}">
                                 <strong>社区</strong>
                             </a>
                         </li>

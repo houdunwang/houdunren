@@ -19,19 +19,14 @@
 //}
 
 /**
- * 获取配置项
- * @param $path 配置项支持点语法
- * @param null $default 默认值
- * @return null
+ * 保存模块配置项
+ * @param array $data
+ * @return bool
  */
-function system_config($path, $default = null)
+function config_save(array $data)
 {
-    $info = explode('.', $path);
-    $name = array_shift($info);
-    $cache = Cache::get('system_config', function () {
-        return \App\Models\Config::pluck('data', 'name');
-    });
-    return count($info) == 0 ? $cache[$name] : $cache[$name][$info[0]] ?? $default;
+    return \App\Models\Config::updateOrCreate(['module' => module_name()],
+        ['module' => module_name(), 'data' => $data,])->save();
 }
 
 /**
@@ -40,14 +35,13 @@ function system_config($path, $default = null)
  * @param null $default
  * @return null
  */
-function module_config($path, $default = null)
+function config_get($path, $default = null)
 {
     $info = explode('.', $path);
-    $name = array_shift($info);
-    $cache = Cache::get('module_config', function () {
-        return \App\Models\ModuleConfig::pluck('data', 'name');
+    $cache = Cache::get('config', function () {
+        return \App\Models\ModuleConfig::pluck('data', 'module');
     });
-    return count($info) == 0 ? $cache[$name] : $cache[$name][$info[0]] ?? $default;
+    return array_get($cache, implode('.', $info)) ?? $default;
 }
 
 /**
@@ -63,11 +57,6 @@ function random_number($num)
     }
     return $str;
 }
-
-//function hd_menu_class($id, $class = 'show')
-//{
-//    return \Cookie::get('admin_menu_id') == $id ? $class : '';
-//}
 
 /**
  * 根据路由生成样式类名
@@ -111,11 +100,21 @@ function access($permission, $user = null)
 }
 
 /**
+ * 根据路由获取模块标识
+ * @return array
+ */
+function module_name()
+{
+    $info = explode('/', Route::getCurrentRoute()->uri);
+    return $info[0] ?? 0;
+}
+
+/**
  * 获取后台菜单列表
  * @return mixed
  */
 function module_admin_menus()
 {
-    $name = explode('/',Route::getCurrentRoute()->uri);
+    $name = explode('/', Route::getCurrentRoute()->uri);
     return \App\Models\Module::where(['name' => $name[0]])->first()->adminMenus();
 }

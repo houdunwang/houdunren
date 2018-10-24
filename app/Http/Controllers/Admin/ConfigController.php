@@ -21,18 +21,21 @@ use App\Http\Controllers\Controller;
  */
 class ConfigController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin:Admin-config');
+    }
+
     public function edit($name)
     {
-        access('Admin-config');
-        $config = Config::firstOrNew(['name' => $name]);
-        return view('admin.config_' . $name, compact('config'));
+        return view('admin.config_' . $name);
     }
 
     public function update(Request $request, $name)
     {
-        access('Admin-config');
-        Config::updateOrCreate(['name' => $name], ['name' => $name, 'data' => $request->all()]);
-        hd_edit_env($request->all());
+        $config = config_get('admin', []);
+        $config[$name] = $request->except(['_token', '_method']);
+        config_save($config);
         return back()->with('success', '保存成功');
     }
 }

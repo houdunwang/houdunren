@@ -10,6 +10,7 @@
 
 namespace App\Http\Controllers\Common;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -33,5 +34,12 @@ class CommentController extends Controller
         $comment = $model->comment()->create($data);
 
         return ['comment' => $comment->with('user', 'zan')->find($comment['id']), 'code' => 0];
+    }
+
+    public function destroy(Comment $comment)
+    {
+        $this->authorize('delete', $comment);
+        $comment->delete();
+        return back()->with('success', '删除成功');
     }
 }

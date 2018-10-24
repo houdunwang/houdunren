@@ -16,6 +16,13 @@
                                        class="btn btn-xs">
                                         <i class="fa fa-heart-o" aria-hidden="true"></i> 收藏</a>
                                 @endif
+                                @can('delete',$topic)
+                                    <a href="javascript:;" onclick="confirm('确定删除吗')?$(this).next().submit():null;"
+                                       class="badge badge-primary">删除</a>
+                                    <form action="{{route('edu.topic.destroy',$topic)}}" method="post">
+                                        @csrf @method('DELETE')
+                                    </form>
+                                @endcan
                             </div>
                         </div>
                     @endauth

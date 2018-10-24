@@ -39,10 +39,10 @@ class UploadServer
     protected function check($file, $type)
     {
         $ext = strtolower($file->getClientOriginalExtension());
-        if (!in_array($ext, explode(',', system_config('upload.' . $type . '_type')))) {
+        if (!in_array($ext, explode(',', config_get('admin.upload.' . $type . '_type')))) {
             throw new UploadException('文件类型错误');
         }
-        if ($file->getSize() > system_config('upload.' . $type . '_size')) {
+        if ($file->getSize() > config_get('admin.upload.' . $type . '_size')) {
             throw new UploadException('文件过大不允许上传');
         }
     }
@@ -57,7 +57,7 @@ class UploadServer
     {
         //粘贴上传BASE64图片，如editor.md编辑器中的使用
         $imgdata = substr($content, strpos($content, ",") + 1);
-        $allowSize = system_config('upload.image_size');
+        $allowSize = config_get('admin.upload.image_size');
         //上传大小检测
         if (strlen($content) > $allowSize) {
             throw new UploadException('上传失败，文件过大', 200);

@@ -26,7 +26,7 @@ class Config extends Model
 
     protected static function boot()
     {
-        parent::boot();
         Config::observe(ConfigObserver::class);
+        parent::boot();
     }
 }

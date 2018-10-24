@@ -21,7 +21,7 @@ class ConfigController extends Controller
 
     public function update(Request $request)
     {
-        ModuleConfig::updateOrCreate(['module' => 'content'], ['data' => $request->except('_token','_method')])->save();
+        config_save($request->except('_token', '_method'));
         return redirect(route('content.config.edit'))->with('success', '配置项修改成功');
     }
 }

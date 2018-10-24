@@ -5,8 +5,8 @@
         filesLists: '{{route('common.upload.lists')}}?',
         requireJs: {
             paths: {
-                'jquery-migrate': 'https://cdn.bootcss.com/jquery-migrate/3.0.1/jquery-migrate.min',
-                'popper': 'https://cdn.bootcss.com/popper.js/1.14.4/umd/popper.min',
+                'jquery-migrate': '/js/jquery-migrate.min',
+                'popper': '/js/popper.min',
                 'hs.megamenu': '/js/hs.megamenu',
                 'jquery.validate': '/js/jquery.validate.min',
                 'jquery.fancybox': '/js/jquery.fancybox.min',

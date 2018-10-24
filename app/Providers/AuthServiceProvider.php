@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Comment;
+use App\Models\EduTopic;
 use App\Models\Lesson;
+use App\Policies\CommentPolicy;
+use App\Policies\EduTopicPolicy;
 use App\Policies\LessonPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
@@ -18,10 +22,12 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model'   => 'App\Policies\ModelPolicy',
-        'App\User'    => UserPolicy::class,
+        'App\Model' => 'App\Policies\ModelPolicy',
+        'App\User' => UserPolicy::class,
         Lesson::class => LessonPolicy::class,
-        Role::class   => RolePolicy::class,
+        Role::class => RolePolicy::class,
+        Comment::class => CommentPolicy::class,
+        EduTopic::class => EduTopicPolicy::class,
     ];
 
     /**

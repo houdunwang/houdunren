@@ -8,4 +8,5 @@ return [
     ['title' => '模块管理', 'name' => 'module'],
     ['title' => '设计模块', 'name' => 'module-design'],
     ['title' => '会员列表', 'name' => 'user'],
+    ['title' => '评论删除', 'name' => 'comment-destroy'],
 ];

@@ -24,7 +24,7 @@
                         开始学习
                     </a>
                     <a class="btn btn-sm btn-light u-btn-primary transition-3d-hover mt-3"
-                       href="{{route('edu.home.dynamic')}}">
+                       href="{{route('edu.dynamic.index')}}">
                         社区交流
                     </a>
                 </div>
@@ -1038,7 +1038,7 @@
                         <p>
                             提供在线讨论、QQ交流群、每日直播课等方式，无数小伙伴与你同学习进步！
                         </p>
-                        <a class="btn btn-sm u-btn-primary--air transition-3d-hover" href="{{route('edu.home.dynamic')}}">
+                        <a class="btn btn-sm u-btn-primary--air transition-3d-hover" href="{{route('edu.dynamic.index')}}">
                             进入社区
                             <span class="fa fa-angle-right ml-2"></span>
                         </a>
@@ -1501,7 +1501,7 @@
             <!-- End Title -->
 
             <div class="mb-6">
-                <a class="btn btn-primary u-btn-primary u-btn-wide transition-3d-hover" href="{{route('edu.home.dynamic')}}">进入社区、结交志同道合的朋友</a>
+                <a class="btn btn-primary u-btn-primary u-btn-wide transition-3d-hover" href="{{route('edu.dynamic.index')}}">进入社区、结交志同道合的朋友</a>
             </div>
 
             <!-- 视频介绍 -->

@@ -52,9 +52,15 @@
         </div>
         <div class="card-footer pl-3 pr-3">
             <span class="small text-muted">#@{{ key+1 }}</span>
-            <a href="" @click.prevent="zan(comment)" class="badge text-muted">
+            <a href="#" @click.prevent="zan(comment)" class="badge text-muted">
                 <span class="fe fe-thumbs-up"></span> <span class="zan-count">@{{ comment.zan_num }}</span> 个点赞
             </a>
+            {{--删除评论--}}
+            <a v-if="comment.user_id=='{{auth()->id()}}' || {{auth()->check() && auth()->user()->can('Admin-comment-destroy')?1:0}}"
+               href="javascript:;" onclick="confirm('确定删除吗')?$(this).next().submit():null;" class="badge badge-primary">删除</a>
+            <form :action="'/common/comment/'+comment.id" method="post">
+                @csrf @method('DELETE')
+            </form>
             {{--<a href="" class="badge text-muted"><span class="fe fe-message-square"></span> 8个回复</a>--}}
         </div>
     </div>
@@ -62,7 +68,7 @@
         <div class="card col-sm-12 p-0 mt-5 rounded-0">
             <div class="card-body p-2">
                 <div class="alert alert-light small rounded-0" role="alert">
-                <i class="fa fa-warning" aria-hidden="true"></i>    请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。
+                    <i class="fa fa-warning" aria-hidden="true"></i> 请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。
                 </div>
                 <form @submit.prevent="send">
                     <div class="form-group">

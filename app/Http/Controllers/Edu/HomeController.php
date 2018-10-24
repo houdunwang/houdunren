@@ -20,19 +20,4 @@ class HomeController extends Controller
     {
         return view('edu.home_index');
     }
-
-    /**
-     * 动态
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function dynamic(Request $request)
-    {
-        $db = Activity::latest();
-        if ($request->query('t') == 'follow') {
-            $db->whereIn('causer_id', auth()->user()->follower->pluck('id'));
-        }
-        $activitys = $db->paginate(10);
-        return view('edu.home_dynamic', compact('activitys'));
-    }
 }

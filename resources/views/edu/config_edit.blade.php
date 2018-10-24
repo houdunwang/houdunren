@@ -12,13 +12,13 @@
                         <label>网站标志</label>
                         <div class="input-group mb-1">
                             <input class="form-control" name="logo" readonly=""
-                                   value="{{$config['data']['logo']??''}}">
+                                   value="{{config_get('edu.logo')}}">
                             <div class="input-group-append">
                                 <button onclick="upImagePc(this)" class="btn btn-secondary" type="button">单图上传</button>
                             </div>
                         </div>
                         <div style="display: inline-block;position: relative;">
-                            <img src="{{asset($config['data']['logo']??'images/nopic.jpg')}}"
+                            <img src="{{config_get('edu.logo',asset('images/nopic.jpg'))}}"
                                  class="img-responsive img-thumbnail" width="150">
                         </div>
                     </div>

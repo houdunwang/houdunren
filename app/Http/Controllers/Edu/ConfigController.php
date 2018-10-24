@@ -20,13 +20,12 @@ class ConfigController extends Controller
 
     public function edit()
     {
-        $config = ModuleConfig::firstOrNew(['module' => 'content']);
-        return view('edu.config_edit', compact('config'));
+        return view('edu.config_edit');
     }
 
     public function update(Request $request)
     {
-        ModuleConfig::updateOrCreate(['module' => 'edu'], ['data' => $request->except('_token','_method')])->save();
+        config_save($request->except('_token', '_method'));
         return redirect(route('edu.config.edit'))->with('success', '配置项修改成功');
     }
 }

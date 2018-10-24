@@ -8,35 +8,35 @@
                     @include('admin.layouts._config_menu')
                     <div class="form-group">
                         <label>邮箱类型</label>
-                        <input type="text" class="form-control" name="MAIL_DRIVER" value="{{$config['data']['MAIL_DRIVER']??'smtp'}}">
+                        <input type="text" class="form-control" name="driver" value="{{config_get('admin.email.driver','smtp')}}">
                     </div>
                     <div class="form-group">
                         <label class="mb-1">主机</label>
-                        <input type="text" class="form-control" name="MAIL_HOST" value="{{$config['data']['MAIL_HOST']??'smtp.qq.com'}}">
+                        <input type="text" class="form-control" name="host" value="{{config_get('admin.email.host','smtp.qq.com')}}">
                     </div>
                     <div class="form-group">
                         <label class="mb-1">端口</label>
-                        <input type="text" class="form-control" name="MAIL_PORT" value="{{$config['data']['MAIL_PORT']??25}}">
+                        <input type="text" class="form-control" name="port" value="{{config_get('admin.email.port','25')}}">
                     </div>
                     <div class="form-group">
                         <label class="mb-1">发件人名称</label>
-                        <input type="text" class="form-control" name="MAIL_FROM_NAME" value="{{$config['data']['MAIL_FROM_NAME']??''}}" placeholder="发件人的中文名称">
+                        <input type="text" class="form-control" name="from[name]" value="{{config_get('admin.email.from.name')}}" placeholder="发件人的中文名称">
                     </div>
                     <div class="form-group">
                         <label class="mb-1">回复邮箱</label>
-                        <input type="text" class="form-control" name="MAIL_FROM_ADDRESS" value="{{$config['data']['MAIL_FROM_ADDRESS']??''}}" placeholder="收件方回复使用的邮箱">
+                        <input type="text" class="form-control" name="from[address]" value="{{config_get('admin.email.from.address')}}" placeholder="收件方回复使用的邮箱">
                     </div>
                     <div class="form-group">
                         <label class="mb-1">邮箱帐号</label>
-                        <input type="text" class="form-control" name="MAIL_USERNAME" value="{{$config['data']['MAIL_USERNAME']??''}}" placeholder="发送邮箱登录帐号">
+                        <input type="text" class="form-control" name="username" value="{{config_get('admin.email.username')}}" placeholder="发送邮箱登录帐号">
                     </div>
                     <div class="form-group">
                         <label class="mb-1">邮箱密码</label>
-                        <input type="password" class="form-control" name="MAIL_PASSWORD" value="{{$config['data']['MAIL_PASSWORD']??''}}">
+                        <input type="password" class="form-control" name="password" value="{{config_get('admin.email.password')}}">
                     </div>
                     <div class="form-group">
                         <label class="mb-1">加密方式</label>
-                        <input type="text" class="form-control" name="MAIL_ENCRYPTION" value="{{$config['data']['MAIL_ENCRYPTION']??'tls'}}">
+                        <input type="text" class="form-control" name="encryption" value="{{config_get('admin.email.encryption','tls')}}">
                     </div>
                     <button class="btn btn-sm btn-primary">
                         保存

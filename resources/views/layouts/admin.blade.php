@@ -35,183 +35,12 @@
             document.body.style.display = 'block';
         });
     </script>
-    <title>{{system_config('site.webname')}}</title>
+    <title>{{config_get('admin.site.webname')}}</title>
     @include('layouts._hdjs')
     @include('layouts._message')
     @stack('css')
 </head>
 <body>
-<div class="modal fade" id="modalMembers" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-card card" data-toggle="lists" data-lists-values='["name"]'>
-                <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h4 class="card-header-title" id="exampleModalCenterTitle">
-                                Add a member
-                            </h4>
-                        </div>
-                        <div class="col-auto">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-header">
-                    <form>
-                        <div class="input-group input-group-flush input-group-merge">
-                            <input type="search" class="form-control form-control-prepended search"
-                                   placeholder="Search122">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <span class="fe fe-search"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="card-body">
-                    <ul class="list-group list-group-flush list my--3">
-                        <li class="list-group-item px-0">
-                            <div class="row align-items-center">
-                                <div class="col-auto">
-                                    <a href="profile-posts.html" class="avatar">
-                                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-5.jpg"
-                                             alt="..." class="avatar-img rounded-circle">
-                                    </a>
-                                </div>
-                                <div class="col ml--2">
-                                    <h4 class="mb-1 name">
-                                        <a href="profile-posts.html">Miyah Myles</a>
-                                    </h4>
-                                    <p class="small mb-0">
-                                        <span class="text-success">●</span> Online
-                                    </p>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#!" class="btn btn-sm btn-white">
-                                        Add
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item px-0">
-                            <div class="row align-items-center">
-                                <div class="col-auto">
-                                    <a href="profile-posts.html" class="avatar">
-                                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-6.jpg"
-                                             alt="..." class="avatar-img rounded-circle">
-                                    </a>
-                                </div>
-                                <div class="col ml--2">
-                                    <h4 class="mb-1 name">
-                                        <a href="profile-posts.html">Ryu Duke</a>
-                                    </h4>
-                                    <p class="small mb-0">
-                                        <span class="text-success">●</span> Online
-                                    </p>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#!" class="btn btn-sm btn-white">
-                                        Add
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item px-0">
-                            <div class="row align-items-center">
-                                <div class="col-auto">
-                                    <a href="profile-posts.html" class="avatar">
-                                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-7.jpg"
-                                             alt="..." class="avatar-img rounded-circle">
-                                    </a>
-                                </div>
-                                <div class="col ml--2">
-                                    <h4 class="mb-1 name">
-                                        <a href="profile-posts.html">Glen Rouse</a>
-                                    </h4>
-                                    <p class="small mb-0">
-                                        <span class="text-warning">●</span> Busy
-                                    </p>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#!" class="btn btn-sm btn-white">
-                                        Add
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item px-0">
-                            <div class="row align-items-center">
-                                <div class="col-auto">
-                                    <a href="profile-posts.html" class="avatar">
-                                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-8.jpg"
-                                             alt="..." class="avatar-img rounded-circle">
-                                    </a>
-                                </div>
-                                <div class="col ml--2">
-                                    <h4 class="mb-1 name">
-                                        <a href="profile-posts.html">Grace Gross</a>
-                                    </h4>
-                                    <p class="small mb-0">
-                                        <span class="text-danger">●</span> Offline
-                                    </p>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="#!" class="btn btn-sm btn-white">
-                                        Add
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="sidebarModalActivity" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-vertical" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">
-                    通知
-                </h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">
-                        &times;
-                      </span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="list-group list-group-flush my--3">
-                    <a class="list-group-item px-0" href="#!">
-                        <div class="row">
-                            <div class="col-auto">
-                                <div class="avatar avatar-sm">
-                                    <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-8.jpg"
-                                         alt="..." class="avatar-img rounded-circle">
-                                </div>
-                            </div>
-                            <div class="col ml--2">
-                                <div class="small text-muted">
-                                    <strong class="text-body">Grace Gross</strong> subscribed to you.
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <small class="text-muted">
-                                    2m
-                                </small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarCollapse"
@@ -219,14 +48,14 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="/" target="_blank">
-            <img src="{{system_config('site.logo',asset('images/logo.png'))}}" class="navbar-brand-img mx-auto">
+            <img src="{{config_get('admin.site.logo',asset('images/logo.png'))}}" class="navbar-brand-img mx-auto">
         </a>
         <div class="navbar-user d-md-none">
             <div class="dropdown">
                 <a href="#!" id="sidebarIcon" class="dropdown-toggle" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <div class="avatar avatar-sm avatar-online">
-                        <img src="{{asset('org/Dashkit-1.1.2')}}/img/avatars/profiles/avatar-1.jpg"
+                        <img src="{{auth()->user()->icon}}"
                              class="avatar-img rounded-circle" alt="...">
                     </div>
                 </a>

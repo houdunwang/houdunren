@@ -9,7 +9,8 @@
                     <div class="form-group">
                         <label>验证码</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="code_expire" value="{{$config['data']['code_expire']??'60'}}">
+                            <input type="text" class="form-control" name="code_expire"
+                                   value="{{config_get('admin.base.code_expire',60)}}">
                             <div class="input-group-append">
                                 <span class="input-group-text">秒</span>
                             </div>

@@ -16,7 +16,7 @@
                             <div class="row">
                                 <div class="col-sm-10 mb-2 mb-sm-0" style="font-size: 14px;">
                                     <a href="{{route('member.user.show',$topic->user)}}">
-                                    <img class="u-avatar rounded-circle mr-3" src="{{$topic->user->icon}}">
+                                        <img class="u-avatar rounded-circle mr-3" src="{{$topic->user->icon}}">
                                     </a>
                                     <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">
                                         {{$topic->user->name}}
