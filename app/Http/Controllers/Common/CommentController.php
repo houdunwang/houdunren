@@ -17,6 +17,11 @@ use App\Http\Controllers\Controller;
 //评论管理
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['store', 'destroy']]);
+    }
+
     public function index(Request $request)
     {
         //获取模型

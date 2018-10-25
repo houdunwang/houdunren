@@ -30,8 +30,8 @@
                     <thead>
                     <tr>
                         <th scope="col">编号</th>
-                        <th scope="col">邮箱</th>
                         <th scope="col">昵称</th>
+                        <th scope="col">邮箱</th>
                         <th scope="col">手机号</th>
                         <th>注册时间</th>
                         <th scope="col">角色</th>
@@ -42,9 +42,9 @@
                     @foreach($users as $user)
                         <tr>
                             <td>{{$user['id']}}</td>
+                            <td>{{$user['name']}}</td>
                             <td>{{$user['email']}}</td>
                             <td>{{$user['mobile']}}</td>
-                            <td>{{$user['name']}}</td>
                             <td>{{$user['created_at']}}</td>
                             <td>
                                 @if($user->roles->count())

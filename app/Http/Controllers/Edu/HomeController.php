@@ -10,14 +10,12 @@
 
 namespace App\Http\Controllers\Edu;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Spatie\Activitylog\Models\Activity;
 
 class HomeController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        return view('edu.home_index');
+        return view('edu.home');
     }
 }

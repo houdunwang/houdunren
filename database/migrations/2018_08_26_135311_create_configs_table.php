@@ -23,7 +23,6 @@ class CreateConfigsTable extends Migration
     {
         Schema::create('configs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->nullable()->unique()->comment('系统配置项标识');
             $table->text('data')->comment('配置项');
             $table->text('module')->nullable()->comment('模块标识');
             $table->timestamps();

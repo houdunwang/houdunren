@@ -38,3 +38,12 @@
 * http://fex.baidu.com/webuploader/
 
 > 100% 免费使用于任何项目
+
+## 会员中心
+### 模板继承
+```
+@extends('member.layouts.master')
+@section('content')
+    
+@endsection
+```

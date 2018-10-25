@@ -9,11 +9,6 @@
                             模板风格
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{route('content.template.cache')}}" class="nav-link mr-3">
-                            更新模板
-                        </a>
-                    </li>
                 </ul>
             </div>
             <div class="card-body">

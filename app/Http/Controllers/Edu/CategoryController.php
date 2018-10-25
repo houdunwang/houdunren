@@ -29,12 +29,12 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = EduCategory::get();
-        return view('edu.category_index', compact('categories'));
+        return view('edu.category.index', compact('categories'));
     }
 
     public function create()
     {
-        return view('edu.category_create');
+        return view('edu.category.create');
     }
 
     public function store(EduCategoryRequest $request)
@@ -50,7 +50,7 @@ class CategoryController extends Controller
 
     public function edit(EduCategory $category)
     {
-        return view('edu.category_edit', compact('category'));
+        return view('edu.category.edit', compact('category'));
     }
 
     public function update(EduCategoryRequest $request, EduCategory $category)

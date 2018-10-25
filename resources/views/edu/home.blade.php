@@ -1,19 +1,11 @@
 @extends('edu.layouts.master')
 @section('content')
-    <!-- Skippy -->
     <a id="skippy" class="sr-only sr-only-focusable u-skippy" href="#content">
         <div class="container">
             <span class="u-skiplink-text">Skip to main content</span>
         </div>
     </a>
-    <!-- End Skippy -->
-    <!-- ========== HEADER ========== -->
-
-    <!-- ========== END HEADER ========== -->
-
-    <!-- ========== MAIN CONTENT ========== -->
     <main id="content" role="main">
-        <!-- Hero Section -->
         <div class="d-lg-flex align-items-lg-center position-relative min-height-100vh--lg u-bg-img-hero u-space-3 u-space-5-top--md u-space-0--lg"
              style="background-image: url(/images/img32.jpg);min-height: 70vh">
             <div class="container mt-lg-5">
@@ -29,98 +21,15 @@
                     </a>
                 </div>
             </div>
-
-            <!-- Clients -->
-        {{--<div class="container position-absolute-bottom-0 u-space-2">--}}
-        {{--<div class="js-slick-carousel u-slick"--}}
-        {{--data-autoplay="true"--}}
-        {{--data-speed="5000"--}}
-        {{--data-infinite="true"--}}
-        {{--data-slides-show="6"--}}
-        {{--data-responsive='[{--}}
-        {{--"breakpoint": 1200,--}}
-        {{--"settings": {--}}
-        {{--"slidesToShow": 4--}}
-        {{--}--}}
-        {{--}, {--}}
-        {{--"breakpoint": 992,--}}
-        {{--"settings": {--}}
-        {{--"slidesToShow": 4--}}
-        {{--}--}}
-        {{--}, {--}}
-        {{--"breakpoint": 768,--}}
-        {{--"settings": {--}}
-        {{--"slidesToShow": 3--}}
-        {{--}--}}
-        {{--}, {--}}
-        {{--"breakpoint": 576,--}}
-        {{--"settings": {--}}
-        {{--"slidesToShow": 3--}}
-        {{--}--}}
-        {{--}, {--}}
-        {{--"breakpoint": 480,--}}
-        {{--"settings": {--}}
-        {{--"slidesToShow": 2--}}
-        {{--}--}}
-        {{--}]'>--}}
-        {{--<div class="js-slide">--}}
-        {{--<img class="u-clients ml-0" src="{{asset('org/front')}}/svg/clients-logo/airbnb-white.svg" alt="Image Description">--}}
-        {{--</div>--}}
-        {{--<div class="js-slide">--}}
-        {{--<img class="u-clients ml-0" src="{{asset('org/front')}}/svg/clients-logo/paypal-white.svg" alt="Image Description">--}}
-        {{--</div>--}}
-        {{--<div class="js-slide">--}}
-        {{--<img class="u-clients ml-0" src="{{asset('org/front')}}/svg/clients-logo/mapbox-white.svg" alt="Image Description">--}}
-        {{--</div>--}}
-        {{--<div class="js-slide">--}}
-        {{--<img class="u-clients ml-0" src="{{asset('org/front')}}/svg/clients-logo/boring-company-white.svg" alt="Image Description">--}}
-        {{--</div>--}}
-        {{--<div class="js-slide">--}}
-        {{--<img class="u-clients ml-0" src="{{asset('org/front')}}/svg/clients-logo/google-white.svg" alt="Image Description">--}}
-        {{--</div>--}}
-        {{--<div class="js-slide">--}}
-        {{--<img class="u-clients ml-0" src="{{asset('org/front')}}/svg/clients-logo/embark-white.svg" alt="Image Description">--}}
-        {{--</div>--}}
-        {{--<div class="js-slide">--}}
-        {{--<img class="u-clients ml-0" src="{{asset('org/front')}}/svg/clients-logo/spotify-white.svg" alt="Image Description">--}}
-        {{--</div>--}}
-        {{--<div class="js-slide">--}}
-        {{--<img class="u-clients ml-0" src="{{asset('org/front')}}/svg/clients-logo/stripe-white.svg" alt="Image Description">--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        <!-- End Clients -->
         </div>
-        <!-- End Hero Section -->
-
         <!-- Icon Blocks Section -->
         <div class="u-bg-light-blue-50">
-            {{--视频播放--}}
-            {{--<div class="d-flex justify-content-center pt-5">--}}
-            {{--<a class="js-fancybox media align-items-center u-media-player" href="javascript:;"--}}
-            {{--data-src="//vimeo.com/167434033"--}}
-            {{--data-speed="700"--}}
-            {{--data-animate-in="zoomIn"--}}
-            {{--data-animate-out="zoomOut"--}}
-            {{--data-caption="向军大叔聊编程">--}}
-            {{--<span class="d-flex mr-3">--}}
-            {{--<span class="u-media-player__icon u-media-player__icon--primary">--}}
-            {{--<span class="fa fa-play u-media-player__icon-inner"></span>--}}
-            {{--</span>--}}
-            {{--</span>--}}
-            {{--<span class="media-body"></span>--}}
-            {{--</a>--}}
-            {{--</div>--}}
-            {{--视频播放结束--}}
             <div class="container u-space-3">
-                <!-- Title -->
                 <div class="w-md-60 w-lg-35 text-center mx-auto mb-9">
                     <h2 class="h5 font-weight-normal">
                         我们的系统课程从零基础开始教你掌握一门 <span class="text-primary font-weight-bold">编程语言.</span>
                     </h2>
                 </div>
-                <!-- End Title -->
-
                 <div class="row justify-content-lg-center">
                     <div class="col-md-6 col-lg-5 mb-7 mb-md-0">
                         <!-- Icon Block -->
@@ -955,9 +864,6 @@
                                 </div>
                             </div>
                         </li>
-                        <!-- End Info Block -->
-
-                        <!-- Info Block -->
                         <li class="u-indicator-steps py-3">
                             <div class="media align-items-center border rounded p-5">
                                 <div class="d-flex u-indicator-steps__inner mr-3">
@@ -970,9 +876,6 @@
                                 </div>
                             </div>
                         </li>
-                        <!-- End Info Block -->
-
-                        <!-- Info Block -->
                         <li class="u-indicator-steps py-3">
                             <div class="media align-items-center border rounded p-5">
                                 <div class="d-flex u-indicator-steps__inner mr-3">
@@ -985,33 +888,22 @@
                                 </div>
                             </div>
                         </li>
-                        <!-- End Info Block -->
                     </ul>
                 </div>
-
                 <div class="col-lg-6 order-lg-1">
                     <div class="pr-lg-7">
-                        <!-- SVG Icon -->
                         <img src="{{asset('org/front')}}/svg/flat-icons/house-agency-flat-concept-illustration.svg"
                              alt="SVG Illustration">
-                        <!-- End SVG Icon -->
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End How It Works Section -->
-
-        <!-- Divider -->
         <div class="container">
             <hr class="my-0">
         </div>
-        <!-- End Divider -->
-
-        <!-- Icon Blocks Section -->
         <div class="container u-space-3">
             <div class="row justify-content-md-between">
                 <div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-0 mb-9 mb-lg-0">
-                    <!-- Icon Block -->
                     <div class="text-center px-lg-5">
             <span class="u-icon u-icon-primary--air u-icon--lg rounded-circle mb-3">
               <span class="fa fa-book u-icon__inner"></span>
@@ -1025,11 +917,8 @@
                             <span class="fa fa-angle-right ml-2"></span>
                         </a>
                     </div>
-                    <!-- End Icon Block -->
                 </div>
-
                 <div class="col-sm-6 col-lg-4 mb-9 mb-lg-0">
-                    <!-- Icon Block -->
                     <div class="text-center px-lg-5">
             <span class="u-icon u-icon-primary--air u-icon--lg rounded-circle mb-3">
               <span class="fa fa-calculator u-icon__inner"></span>
@@ -1042,13 +931,9 @@
                             进入社区
                             <span class="fa fa-angle-right ml-2"></span>
                         </a>
-
                     </div>
-                    <!-- End Icon Block -->
                 </div>
-
                 <div class="col-sm-6 col-lg-4">
-                    <!-- Icon Block -->
                     <div class="text-center px-lg-5">
             <span class="u-icon u-icon-primary--air u-icon--lg rounded-circle mb-3">
               <span class="far fa-calendar-alt u-icon__inner"></span>
@@ -1060,24 +945,17 @@
                             <span class="fa fa-angle-right ml-2"></span>
                         </a>
                     </div>
-                    <!-- End Icon Block -->
                 </div>
             </div>
         </div>
-        <!-- End Icon Blocks Section -->
-
-        <!-- Houses Section -->
         <div class="u-bg-light-blue-50">
             <div class="container u-space-3">
-                <!-- Title -->
                 <div class="w-md-80 w-lg-50 text-center mx-auto mb-9">
                   <span class="u-icon u-icon-primary--air u-icon--xl rounded-circle mb-4">
                     <span class="far fa-building u-icon__inner"></span>
                   </span>
                     <h2 class="font-weight-medium">海量视频大放送</h2>
                 </div>
-                <!-- End Title -->
-                <!-- Slick Carousel -->
                 <div class="js-slick-carousel u-slick u-slick-zoom u-slick--gutters-3 mb-7"
                      data-slides-show="3"
                      data-pagi-classes="text-center u-slick__pagination mt-7 mb-0"
@@ -1092,9 +970,7 @@
                  "slidesToShow": 1
                }
              }]'>
-
                     <div class="js-slide">
-                        <!-- House Items -->
                         <article class="bg-white shadow-sm mb-3">
                             <div class="position-relative">
                                 <img class="img-fluid w-100 rounded-top" src="{{asset('org/front')}}/img/500x550/img15.jpg"
@@ -1114,7 +990,6 @@
                                     <span class="h4 text-white">$750,000</span>
                                 </div>
                             </div>
-
                             <div class="rounded-bottom p-5">
                                 <h4 class="h6">
                                     <a href="#">Secluded Intown Treehouse</a>
@@ -1123,11 +998,8 @@
                                 <a class="text-secondary" href="#">New York, US</a>
                             </div>
                         </article>
-                        <!-- End House Items -->
                     </div>
-
                     <div class="js-slide">
-                        <!-- House Items -->
                         <article class="bg-white shadow-sm mb-3">
                             <div class="position-relative">
                                 <img class="img-fluid w-100 rounded-top" src="{{asset('org/front')}}/img/500x550/img16.jpg"
@@ -1156,11 +1028,8 @@
                                 <a class="text-secondary" href="#">Manhattan, US</a>
                             </div>
                         </article>
-                        <!-- End House Items -->
                     </div>
-
                     <div class="js-slide">
-                        <!-- House Items -->
                         <article class="bg-white shadow-sm mb-3">
                             <div class="position-relative">
                                 <img class="img-fluid w-100 rounded-top" src="{{asset('org/front')}}/img/500x550/img17.jpg"
@@ -1180,7 +1049,6 @@
                                     <span class="h4 text-white">$199,000</span>
                                 </div>
                             </div>
-
                             <div class="rounded-bottom p-5">
                                 <h4 class="h6">
                                     <a href="#">Tintern Crescent</a>
@@ -1189,11 +1057,8 @@
                                 <a class="text-secondary" href="#">Toronto, Canada</a>
                             </div>
                         </article>
-                        <!-- End House Items -->
                     </div>
-
                     <div class="js-slide">
-                        <!-- House Items -->
                         <article class="bg-white shadow-sm mb-3">
                             <div class="position-relative">
                                 <img class="img-fluid w-100 rounded-top" src="{{asset('org/front')}}/img/500x550/img18.jpg"
@@ -1213,7 +1078,6 @@
                                     <span class="h4 text-white">$376,000</span>
                                 </div>
                             </div>
-
                             <div class="rounded-bottom p-5">
                                 <h4 class="h6">
                                     <a href="#">Tiverton Avenue</a>
@@ -1222,25 +1086,17 @@
                                 <a class="text-secondary" href="#">Beijing, China</a>
                             </div>
                         </article>
-                        <!-- End House Items -->
                     </div>
                 </div>
-                <!-- End Slick Carousel -->
-
                 <div class="text-center">
                     <a class="btn u-btn-primary--air u-btn-wide transition-3d-hover" href="{{route('edu.lesson.lists')}}">查看全部</a>
                 </div>
             </div>
         </div>
-        <!-- End Houses Section -->
-
-        <!-- Features Section -->
         <div class="position-relative u-space-3 u-space-4--lg">
-            <!-- SVG Mockups -->
             <figure class="col-lg-6 position-absolute-top-left-0--lg u-content-centered-y--lg mb-9 mb-lg-0">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                      viewBox="0 0 999.1 577.5" style="enable-background:new 0 0 999.1 577.5;" xml:space="preserve">
-          <!-- Laptop Frame -->
                     <path class="u-fill-white u-stroke-light-blue-125" stroke-miterlimit="10" d="M881.3,577H117.5c-14.4,0-26.2-11.8-26.2-26.2V26.7c0-14.4,11.8-26.2,26.2-26.2h763.9
             c14.4,0,26.2,11.8,26.2,26.2v524.2C907.5,565.2,895.7,577,881.3,577z"/>
                     <circle fill="#f7f7f7" cx="498" cy="23.8" r="3"/>
@@ -1300,15 +1156,11 @@
                         <use xlink:href="#phoneFrameID1"
                              style="overflow:visible;fill:none;stroke:#E7EAF3;stroke-miterlimit:10;"/>
                     </g>
-                    <!-- End Phone Frame -->
         </svg>
             </figure>
-            <!-- End SVG Mockups -->
-
             <div class="container">
                 <div class="row justify-content-lg-end">
                     <div class="col-lg-5">
-                        <!-- Title -->
                         <div class="pl-lg-4">
                             <div class="mb-5">
                                 <h2 class="font-weight-medium">全平台适配</h2>
@@ -1316,35 +1168,19 @@
                                     我们针对桌面电脑、移动手机进行了大量调优。让你可以在全平台轻松学习课程，不受时间地点限制影响学习计划。
                                 </p>
                             </div>
-
-                            <!-- Button -->
-
-                            <!-- End Button -->
-
-                            <!-- Button -->
-
-                            <!-- End Button -->
                         </div>
-                        <!-- End Title -->
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End Features Section -->
-
-        <!-- Testimonials -->
         <div class="u-bg-light-blue-50">
             <div class="container u-space-3">
-                <!-- Title -->
                 <div class="w-md-80 w-lg-50 text-center mx-auto mb-9">
           <span class="u-icon u-icon-primary--air u-icon--xl rounded-circle mb-4">
             <span class="far fa-thumbs-up u-icon__inner"></span>
           </span>
                     <h2 class="font-weight-medium">感谢助力</h2>
                 </div>
-                <!-- End Title -->
-
-                <!-- Slick Carousel -->
                 <div class="js-slick-carousel u-slick u-slick--equal-height u-slick--gutters-3"
                      data-slides-show="3"
                      data-autoplay="true"
@@ -1371,8 +1207,6 @@
                                     向大叔讲课必须五星好评，我本来想了解下框架与语言，找个团队开发一款软件自己用的软件。但看了向大叔讲课后，自己深深爱上laravel了，自己先学着，后期用得上。强烈支持向大叔！专业，声音听着舒服！
                                 </p>
                             </div>
-
-                            <!-- Author & Review -->
                             <div class="media">
                                 <div class="d-flex mr-3">
                                     <img class="img-fluid u-avatar rounded-circle"
@@ -1399,13 +1233,9 @@
                                     </ul>
                                 </div>
                             </div>
-                            <!-- End Author & Review -->
                         </div>
-                        <!-- End Testimonial -->
                     </div>
-
                     <div class="js-slide mb-1">
-                        <!-- Testimonial -->
                         <div class="d-flex align-items-start flex-column bg-white border rounded p-5">
                             <div class="mb-auto">
                                 <p>
@@ -1413,8 +1243,6 @@
                                     向军大叔主讲【laravel小白入门篇】通俗易懂！有课程视频可回放学习。免费授课，机会难得。
                                 </p>
                             </div>
-
-                            <!-- Author & Review -->
                             <div class="media">
                                 <div class="d-flex mr-3">
                                     <img class="img-fluid u-avatar rounded-circle"
@@ -1441,19 +1269,13 @@
                                     </ul>
                                 </div>
                             </div>
-                            <!-- End Author & Review -->
                         </div>
-                        <!-- End Testimonial -->
                     </div>
-
                     <div class="js-slide mb-1">
-                        <!-- Testimonial -->
                         <div class="d-flex align-items-start flex-column bg-white border rounded p-5">
                             <div class="mb-auto">
                                 <p>向军老师很实在，由浅入深，讲得非常棒，期待下次直播课，向老师讲的好，容易懂。</p>
                             </div>
-
-                            <!-- Author & Review -->
                             <div class="media">
                                 <div class="d-flex mr-3">
                                     <img class="img-fluid u-avatar rounded-circle"
@@ -1480,36 +1302,21 @@
                                     </ul>
                                 </div>
                             </div>
-                            <!-- End Author & Review -->
                         </div>
-                        <!-- End Testimonial -->
                     </div>
                 </div>
-                <!-- End Slick Carousel -->
             </div>
         </div>
-        <!-- End Testimonials -->
-
-        <!-- CTA -->
         <div class="container text-center u-space-3">
-            <!-- Title -->
             <div class="w-md-60 text-center mx-auto mb-6">
                 <h2 class="font-weight-medium">已经有 <strong class="text-primary">{{\App\User::count()}}</strong>
                     编程爱好者与你此相遇
                 </h2>
             </div>
-            <!-- End Title -->
-
             <div class="mb-6">
                 <a class="btn btn-primary u-btn-primary u-btn-wide transition-3d-hover" href="{{route('edu.dynamic.index')}}">进入社区、结交志同道合的朋友</a>
             </div>
-
-            <!-- 视频介绍 -->
-
-            <!-- End Fancybox -->
         </div>
-        <!-- End CTA -->
-
         <hr class="my-0">
     </main>
 @endsection

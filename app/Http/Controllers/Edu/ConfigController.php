@@ -20,7 +20,7 @@ class ConfigController extends Controller
 
     public function edit()
     {
-        return view('edu.config_edit');
+        return view('edu.config.edit');
     }
 
     public function update(Request $request)

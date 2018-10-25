@@ -27,26 +27,28 @@ class TopicController extends Controller
     public function index()
     {
         $topics = EduTopic::with('category')->paginate(10);
-        return view('edu.topic_index', compact('topics'));
+        return view('edu.topic.index', compact('topics'));
     }
 
     //前台根据分类显示
     public function lists(EduCategory $category)
     {
         $topics = $category->topic()->paginate(10);
-        return view('edu.topic_lists', compact('topics', 'category'));
+        return view('edu.topic.lists', compact('topics', 'category'));
     }
 
     //贴子管理
-    public function manage()
+    public function manage(Request $request)
     {
-
+        session()->flash('url.intended', $request->getRequestUri());
+        $topics = EduTopic::with('category', 'user')->byUserId(auth()->id())->paginate(10);
+        return view('edu.topic.manage', compact('topics'));
     }
 
     public function create(Request $request)
     {
         $category = EduCategory::find($request->query('id'));
-        return view('edu.topic_create', compact('category'));
+        return view('edu.topic.create', compact('category'));
     }
 
     public function store(EduTopicRequest $request, EduTopic $topic)
@@ -57,22 +59,25 @@ class TopicController extends Controller
 
     public function show(EduTopic $topic, Request $request)
     {
-        session(['url.intended' => $request->getRequestUri()]);
-        return view('edu.topic_show', compact('topic'));
+        return view('edu.topic.show', compact('topic'));
     }
 
     public function edit(EduTopic $topic)
     {
+        return view('edu.topic.edit', compact('topic'));
     }
 
     public function update(EduTopicRequest $request, EduTopic $topic)
     {
+        $this->authorize('update', $topic);
+        $topic->update($request->all());
+        return redirect(route('edu.topic.show',$topic))->with('success','修改成功');
     }
 
     public function destroy(EduTopic $topic)
     {
         $this->authorize('delete', $topic);
         $topic->delete();
-        return redirect(route('edu.topic.index'))->with('success', '删除成功');
+        return redirect()->intended(route('edu.topic.index'))->with('success', '删除成功');
     }
 }

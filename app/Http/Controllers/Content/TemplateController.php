@@ -19,12 +19,6 @@ class TemplateController extends Controller
         return view('content.template_index', compact('themes'));
     }
 
-    public function cache(ContentTemplate $contentTemplate)
-    {
-        $contentTemplate->updateCache();
-        return back()->with('success', '缓存更新成功');
-    }
-
     public function create()
     {
         //

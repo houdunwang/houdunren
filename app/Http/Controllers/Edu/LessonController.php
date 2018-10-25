@@ -29,7 +29,7 @@ class LessonController extends Controller
     public function index()
     {
         $lessons = EduLesson::where('user_id', auth()->id())->latest()->paginate(20);
-        return view('edu.lesson_index', compact('lessons'));
+        return view('edu.lesson.index', compact('lessons'));
     }
 
     protected function validation($data)
@@ -76,7 +76,7 @@ class LessonController extends Controller
             ],
             'videos' => [],
         ];
-        return view('edu.lesson_create', compact('field'));
+        return view('edu.lesson.create', compact('field'));
     }
 
     public function store(Request $request)
@@ -97,19 +97,19 @@ class LessonController extends Controller
     public function lists()
     {
         $lessons = EduLesson::with('user')->latest()->paginate(9);
-        return view('edu.lesson_lists', compact('lessons'));
+        return view('edu.lesson.lists', compact('lessons'));
     }
 
     //显示课程
     public function show(EduLesson $lesson)
     {
-        return view('edu.lesson_show', compact('lesson'));
+        return view('edu.lesson.show', compact('lesson'));
     }
 
     public function edit(EduLesson $lesson)
     {
         $field = ['lesson' => $lesson->toArray(), 'videos' => $lesson->video->toArray()];
-        return view('edu.lesson_edit', compact('field', 'lesson'));
+        return view('edu.lesson.edit', compact('field', 'lesson'));
     }
 
     public function update(Request $request, EduLesson $lesson)

@@ -1,4 +1,4 @@
 <?php
 return [
-    '话题管理' => route('edu.topic.manage'),
+    ['name' => '帖子管理', 'route' => route('edu.topic.manage')],
 ];

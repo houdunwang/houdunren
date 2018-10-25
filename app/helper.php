@@ -37,11 +37,20 @@ function config_save(array $data)
  */
 function config_get($path, $default = null)
 {
-    $info = explode('.', $path);
-    $cache = Cache::get('config', function () {
-        return \App\Models\ModuleConfig::pluck('data', 'module');
+    $cache = Cache::rememberForever('config', function () {
+        return \App\Models\Config::pluck('data', 'module');
     });
-    return array_get($cache, implode('.', $info)) ?? $default;
+    return array_get($cache, $path) ?? $default;
+}
+
+/**
+ * 获取模块菜单
+ * @param string $name 菜单类型
+ * @return mixed
+ */
+function module_menus(string $name)
+{
+    return \App\Models\Module::whereNotNull($name)->pluck($name,'name');
 }
 
 /**
@@ -106,7 +115,7 @@ function access($permission, $user = null)
 function module_name()
 {
     $info = explode('/', Route::getCurrentRoute()->uri);
-    return $info[0] ?? 0;
+    return $info[0] ?? null;
 }
 
 /**

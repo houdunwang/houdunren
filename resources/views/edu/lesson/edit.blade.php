@@ -2,6 +2,6 @@
 @section('content')
     <form action="{{route('edu.lesson.update',$lesson)}}" method="post">
         @csrf @method('PUT')
-        @include('edu.layouts._lesson',['field'=>$field])
+        @include('edu.lesson._lesson',['field'=>$field])
     </form>
 @endsection

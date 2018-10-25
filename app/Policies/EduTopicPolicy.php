@@ -10,16 +10,9 @@ class EduTopicPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view the edu topic.
-     *
-     * @param  \App\User $user
-     * @param  \App\Models\EduTopic $eduTopic
-     * @return mixed
-     */
-    public function view(User $user, EduTopic $eduTopic)
+    public function view(User $user, EduTopic $topic)
     {
-        //
+        return $topic['status'] == 1 || $user['id'] == $topic['user_id'];
     }
 
     /**
@@ -33,28 +26,14 @@ class EduTopicPolicy
         //
     }
 
-    /**
-     * Determine whether the user can update the edu topic.
-     *
-     * @param  \App\User $user
-     * @param  \App\Models\EduTopic $eduTopic
-     * @return mixed
-     */
-    public function update(User $user, EduTopic $eduTopic)
+    public function update(User $user, EduTopic $topic)
     {
-        //
+        return $user['id'] == $topic['user_id'] || $user->can('Edu-topic-destroy');
     }
 
-    /**
-     * Determine whether the user can delete the edu topic.
-     *
-     * @param  \App\User $user
-     * @param  \App\Models\EduTopic $eduTopic
-     * @return mixed
-     */
-    public function delete(User $user, EduTopic $eduTopic)
+    public function delete(User $user, EduTopic $topic)
     {
-        return $user['id'] == $eduTopic['user_id'] || $user->can('Edu-topic-destroy');
+        return $user['id'] == $topic['user_id'] || $user->can('Edu-topic-destroy');
     }
 
     /**

@@ -18,10 +18,10 @@ class CreateModulesTable extends Migration
             $table->string('name');
             $table->string('title');
             $table->text('permission');
-            $table->text('center_menu')->comment('会员中心菜单');
-            $table->unsignedTinyInteger('center_menu_setting')->default(1)->comment('会员中心菜单设置:1全站显示 2本模块显示(需要配置域名) 3不显示');
-            $table->text('space_menu')->comment('个人主页菜单');
-            $table->unsignedTinyInteger('space_menu_setting')->default(1)->comment('个人主页菜单设置:1全站显示 2本模块显示(需要配置域名) 3不显示');
+            $table->text('center_menu')->nullable()->comment('会员中心菜单');
+            $table->unsignedTinyInteger('center_menu_setting')->default(1)->comment('会员中心菜单设置:1全站显示 2本模块显示(需要配置域名) 0不显示');
+            $table->text('space_menu')->nullable()->comment('个人主页菜单');
+            $table->unsignedTinyInteger('space_menu_setting')->default(1)->comment('个人主页菜单设置:1全站显示 2本模块显示(需要配置域名) 0不显示');
             $table->text('admin_menu')->comment('后台菜单');
             $table->unsignedTinyInteger('system')->default(0);
             $table->string('domain')->nullable()->comment('模块独立域名');

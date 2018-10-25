@@ -15,8 +15,7 @@ class ConfigController extends Controller
 
     public function edit()
     {
-        $config = ModuleConfig::firstOrNew(['module' => 'content']);
-        return view('content.config_edit', compact('config'));
+        return view('content.config_edit');
     }
 
     public function update(Request $request)

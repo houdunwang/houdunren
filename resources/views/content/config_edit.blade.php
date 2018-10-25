@@ -11,7 +11,7 @@
                     <div class="form-group">
                         <label>列表条数</label>
                         <input type="text" name="list_row" class="form-control"
-                               value="{{old('list_row',module_config('content.list_row'))}}">
+                               value="{{config_get('content.list_row',10)}}">
                         <small id="helpId" class="text-muted">后台列表页显示的条数</small>
                     </div>
                 </div>

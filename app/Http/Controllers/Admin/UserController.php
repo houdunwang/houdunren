@@ -20,7 +20,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = User::byEmail($request->query('email'))
-            ->byMobile($request->query('mobile'))->paginate(2);
+            ->byMobile($request->query('mobile'))->paginate(15);
         return view('admin.user_index', compact('users'));
     }
 

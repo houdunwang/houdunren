@@ -24,6 +24,6 @@ class VideoController extends Controller
     {
         //保存观看记录
         $video->userVideo()->sync([auth()->id()]);
-        return view('edu.video_show', compact('video'));
+        return view('edu.lesson.video', compact('video'));
     }
 }

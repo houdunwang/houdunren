@@ -59,4 +59,15 @@ class EduTopic extends Model
             'content' => mb_substr($this['content'], 0, 300, 'utf8'),
         ];
     }
+
+    /**
+     * 根据会员编号获取贴子
+     * @param $query
+     * @param int $user_id
+     * @return mixed
+     */
+    public function scopeByUserId($query, int $user_id)
+    {
+        return $query->where('user_id', $user_id);
+    }
 }

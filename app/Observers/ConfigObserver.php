@@ -11,6 +11,7 @@
 namespace App\Observers;
 
 use App\Models\Config;
+use Cache;
 
 class ConfigObserver
 {
@@ -31,6 +32,6 @@ class ConfigObserver
 
     protected function cache()
     {
-        \Cache::forever('config', Config::pluck('data', 'module'));
+        Cache::forever('config', Config::pluck('data', 'module'));
     }
 }

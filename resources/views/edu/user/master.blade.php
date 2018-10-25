@@ -6,13 +6,7 @@
     <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/fonts/feather/feather.min.css">
-{{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/highlight/styles/vs2015.min.css">--}}
-{{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/quill/dist/quill.core.css">--}}
-{{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/select2/dist/css/select2.min.css">--}}
-{{--<link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/flatpickr/dist/flatpickr.min.css">--}}
-<!-- Theme CSS -->
-    <!-- Values are "toggle", "light", and "dark". See "Getting Started" for more information -->
-    <!-- Toggle Mode: For demo only, but allows a user to seamlessly toggle between light/dark modes -->
+    <!-- Theme CSS -->
     <link href="{{asset('org/Dashkit-1.1.2')}}/css/theme-dark.min.css" rel="" data-toggle="theme"
           data-theme-mode="dark">
     <link href="{{asset('org/Dashkit-1.1.2')}}/css/theme.min.css" rel="" data-toggle="theme" data-theme-mode="light">
@@ -26,7 +20,6 @@
         themeMode = 'light';
         var themeFile = document.querySelector('[data-toggle="theme"][data-theme-mode="' + themeMode + '"]');
         themeFile.rel = 'stylesheet';
-        // Enable body content
         themeFile.addEventListener('load', function () {
             document.body.style.display = 'block';
         });

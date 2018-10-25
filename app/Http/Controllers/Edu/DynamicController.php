@@ -15,6 +15,6 @@ class DynamicController extends Controller
             $db->whereIn('causer_id', auth()->user()->follower->pluck('id'));
         }
         $activitys = $db->paginate(10);
-        return view('edu.dynamic_index', compact('activitys'));
+        return view('edu.dynamic.index', compact('activitys'));
     }
 }

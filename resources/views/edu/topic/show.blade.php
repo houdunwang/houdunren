@@ -16,9 +16,12 @@
                                        class="btn btn-xs">
                                         <i class="fa fa-heart-o" aria-hidden="true"></i> 收藏</a>
                                 @endif
+                                    @can('update',$topic)
+                                        <a href="{{route('edu.topic.edit',$topic)}}" class="badge badge-primary">编辑</a>
+                                    @endcan
                                 @can('delete',$topic)
                                     <a href="javascript:;" onclick="confirm('确定删除吗')?$(this).next().submit():null;"
-                                       class="badge badge-primary">删除</a>
+                                       class="badge badge-secondary">删除</a>
                                     <form action="{{route('edu.topic.destroy',$topic)}}" method="post">
                                         @csrf @method('DELETE')
                                     </form>
@@ -28,7 +31,6 @@
                     @endauth
                     <div class="row">
                         <div class="col text-center">
-                            {{--<img src="{{$topic->user->icon}}" alt="..." class="img-fluid mb-4" style="max-width: 2.5rem;">--}}
                             <h2 class="mb-4">
                                 {{$topic['title']}}
                             </h2>

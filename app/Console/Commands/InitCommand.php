@@ -3,16 +3,17 @@
 namespace App\Console\Commands;
 
 use App\Models\Config;
+use App\Models\ContentTemplate;
 use App\Models\Module;
 use App\User;
 use Illuminate\Console\Command;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class HdModule extends Command
+class InitCommand extends Command
 {
     //命令
-    protected $signature = 'hd-module';
+    protected $signature = 'hdcms-init';
 
     //命令描述
     protected $description = '生成模块缓存';
@@ -25,16 +26,18 @@ class HdModule extends Command
     //命令执行入口
     public function handle()
     {
-
-        $this->modules(glob(base_path().'/app/Http/Controllers/*'), 1);
+        $this->modules(glob(base_path() . '/app/Http/Controllers/*'), 1);
 
         //设置站长权限
         $this->WebMaseterSyncPermission();
 
-        //删除权限缓存
+        //权限缓存
         app()['cache']->forget('spatie.permission.cache');
 
-        $this->info('模块数据创建成功');
+        //模板缓存
+        app(ContentTemplate::class)->updateCache();
+
+        $this->info('恭喜你，系统初始化成功');
     }
 
     /**
@@ -61,9 +64,9 @@ class HdModule extends Command
         $module = basename(dirname($dir));
         $config = include $dir . '/config.php';
         $permissions = include $dir . '/permission.php';
-        $admin_menu = is_file($dir . '/Menus/admin.php') ? include $dir . '/Menus/admin.php' : [];
-        $center_menu = is_file($dir . '/Menus/center.php') ? include $dir . '/Menus/center.php' : [];
-        $space_menu = is_file($dir . '/Menus/space.php') ? include $dir . '/Menus/space.php' : [];
+        $admin_menu = is_file($dir . '/Menus/admin.php') ? include $dir . '/Menus/admin.php' : null;
+        $center_menu = is_file($dir . '/Menus/center.php') ? include $dir . '/Menus/center.php' : null;
+        $space_menu = is_file($dir . '/Menus/space.php') ? include $dir . '/Menus/space.php' : null;
         //生成模块数据
         Module::firstOrNew(['name' => $module])->fill(
             [
@@ -83,9 +86,6 @@ class HdModule extends Command
                 ['title' => $permission['title'], 'module' => strtolower($module)]
             )->save();
         }
-
-        //生成模块配置项
-        Config::firstOrNew(['name' => "_{$module}"])->fill(['data' => $config, 'module' => $module])->save();
     }
 
     protected function WebMaseterSyncPermission()

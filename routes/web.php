@@ -69,7 +69,6 @@ Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.
     Route::put('config/update', 'ConfigController@update')->name('config.update');
     Route::resource('template', 'TemplateController');
     Route::get('template/{template}', 'TemplateController@update')->name('template.update');
-    Route::get('template_cache', 'TemplateController@cache')->name('template.cache');
     Route::resource('slide', 'SlideController');
     //前台展示
     Route::get('c{category}.html', 'HomeController@lists')->name('list');

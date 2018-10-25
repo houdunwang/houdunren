@@ -13,7 +13,7 @@
                     </li>
                 </ul>
             </div>
-            @include('edu.layouts._category')
+            @include('edu.category._category')
         </div>
     </form>
 @endsection

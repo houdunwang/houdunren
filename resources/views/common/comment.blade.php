@@ -1,7 +1,12 @@
-<div class="text-center mt-5 mb-5">
-    <span class="u-divider u-divider--xs u-divider--text">评论列表</span>
-</div>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
 <div class="comment" id="comment" v-cloak>
+    <div class="text-center mt-5 mb-5 v-cloak">
+        <span class="u-divider u-divider--xs u-divider--text">评论列表</span>
+    </div>
     <div class="card col-sm-12">
         <div class="card-body">
             @auth

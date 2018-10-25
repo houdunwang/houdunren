@@ -8,6 +8,7 @@
                         <a href="{{route('edu.lesson.index')}}"
                            class="nav-link {{active_class(if_route('edu.lesson.index'))}}">
                             课程列表
+
                         </a>
                     </li>
                     <li class="nav-item">

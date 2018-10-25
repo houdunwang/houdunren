@@ -2,6 +2,6 @@
 @section('content')
     <form action="{{route('edu.lesson.store')}}" method="post">
         @csrf
-        @include('edu.layouts._lesson')
+        @include('edu.lesson._lesson')
     </form>
 @endsection

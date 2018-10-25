@@ -21,6 +21,8 @@
                             <th scope="col">模块标识</th>
                             <th scope="col">系统模块</th>
                             <th scope="col">模块域名</th>
+                            <th>会员中心菜单</th>
+                            <th>个人主页菜单</th>
                             <th scope="col">创建时间</th>
                             <th scope="col" width="80"></th>
                         </tr>
@@ -31,9 +33,38 @@
                                 <td>{{$module['id']}}</td>
                                 <td>{{$module['title']}}</td>
                                 <td>{{$module['name']}}</td>
-                                <td>{{$module['system']}}</td>
                                 <td>
-                                    <a href="{{$module['domain']}}" target="_blank">{{$module['domain']}}</a>
+                                    @if($module['system'])
+                                        <span class="fe fe-check-circle mr-4 text-info"></span>
+                                    @else
+                                        <span class="fe fe-x-circle mr-4"></span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{$module['domain']}}" class="text-info"
+                                       target="_blank">{{$module['domain']}}</a>
+                                </td>
+                                <td>
+                                    @switch($module['center_menu_setting'])
+                                        @case(1) <span class="badge badge-secondary">全站显示</span> @break
+                                        @case(2)
+                                        @if($module['domain'])
+                                            <span class="badge badge-info">本模块显示</span>
+                                        @endif
+                                        @break
+                                        @case(0) <span class="badge badge-secondary">隐藏菜单</span>@break
+                                    @endswitch
+                                </td>
+                                <td>
+                                    @switch($module['space_menu_setting'])
+                                        @case(1) <span class="badge badge-secondary">全站显示</span> @break
+                                        @case(2)
+                                        @if($module['domain'])
+                                            <span class="badge badge-info">本模块显示</span>
+                                        @endif
+                                        @break
+                                        @case(0) <span class="badge badge-secondary">隐藏菜单</span>@break
+                                    @endswitch
                                 </td>
                                 <td>{{$module['created_at']->diffForHumans()}}</td>
                                 <td>

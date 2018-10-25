@@ -1,4 +1,4 @@
-{{--用户通知--}}
+{{--用户消息通知--}}
 @auth
     <div class="dropdown mr-4 d-none d-lg-flex">
         <a href="#" class="text-muted small" title="站内消息" role="button" data-toggle="dropdown" aria-haspopup="true"
