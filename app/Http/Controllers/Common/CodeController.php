@@ -54,7 +54,7 @@ class CodeController extends Controller
             'code' => $code,
             'type' => $type,
             'username' => $username,
-            'expire' => time() + system_config('base.code_expire'),
+            'expire' => time() + config_get('admin.base.code_expire'),
         ]);
     }
 

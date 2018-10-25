@@ -33,7 +33,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/">
-                        <img src="{{system_config('site.logo',asset('images/logo.png'))}}" class="navbar-brand-img">
+                        <img src="{{config_get('admin.site.logo',asset('images/logo.png'))}}" class="navbar-brand-img">
                     </a>
                 </li>
             </ul>

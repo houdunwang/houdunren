@@ -80,6 +80,7 @@ Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.
 Route::group(['namespace' => 'Admin', 'middleware' => [], 'as' => 'admin.', 'prefix' => 'admin'], function () {
     //系统管理页面
     Route::get('/', 'AdminController@index')->name('admin');
+    Route::get('cache/update','CacheController@update')->name('update.cache');
     //配置管理
     Route::get('config/{name}/edit', 'ConfigController@edit')->name('config.edit');
     Route::put('config/{name}', 'ConfigController@update')->name('config.update');
@@ -90,8 +91,6 @@ Route::group(['namespace' => 'Admin', 'middleware' => [], 'as' => 'admin.', 'pre
     Route::get('permission/{role}', 'PermissionController@edit')->name('permission.role');
     Route::post('permission/{role}', 'PermissionController@update')->name('permission.role');
     Route::resource('module', 'ModuleController');
-    //模块配置项
-//    Route::put('module_config/{module}', 'ModuleConfigController@update')->name('module_config.update');
 });
 
 //在线教育
@@ -104,6 +103,9 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     //贴子
     Route::resource('topic', 'TopicController');
     Route::get('topics_{category}.html', 'TopicController@lists')->name('topic_list');
+    //会员中心贴子管理
+    Route::get('topic_manage', 'TopicController@manage')->name('topic.manage');
+    //视频
     Route::resource('video', 'VideoController');
     Route::get('search', 'SearchController@lists')->name('search');
     //动态管理

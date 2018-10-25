@@ -74,6 +74,11 @@
             <hr class="my-3">
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
+                    <a class="nav-link" href="{{route('admin.update.cache')}}">
+                        <i class="fe fe-life-buoy"></i> 更新缓存
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="http://www.hdcms.com" target="_blank">
                         <i class="fe fe-git-branch"></i> hdcms <span class="badge badge-primary ml-auto">v5.0</span>
                     </a>

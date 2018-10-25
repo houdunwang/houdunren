@@ -7,7 +7,7 @@ return [
         'menus' => [
             [
                 'name' => '系统配置',
-                'route' => route('admin.config.edit', ['name' => 'base']),
+                'route' => route('admin.config.edit', ['name' => 'site']),
                 'permission' => 'Admin-config',
             ],
             [

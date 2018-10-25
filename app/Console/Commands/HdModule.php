@@ -25,7 +25,8 @@ class HdModule extends Command
     //命令执行入口
     public function handle()
     {
-        $this->modules(glob('app/Http/Controllers/*'), 1);
+
+        $this->modules(glob(base_path().'/app/Http/Controllers/*'), 1);
 
         //设置站长权限
         $this->WebMaseterSyncPermission();

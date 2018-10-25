@@ -273,7 +273,7 @@
                                     @else
                                         <a class="btn btn-sm u-btn--icon u-btn-text-secondary"
                                            href="{{route('login')}}">
-                                            <span class="fa fa-user-circle u-btn--icon__inner font-size-14"></span>
+                                            <span class="fa fa-user-circle u-btn--icon__inner"></span>
                                         </a>
                                     @endauth
                                 </li>

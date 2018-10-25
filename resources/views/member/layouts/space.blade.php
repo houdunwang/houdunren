@@ -27,7 +27,7 @@
     @include('layouts._hdjs')
     @include('layouts._message')
     <link rel="stylesheet" href="{{asset('org/hdjs/package/font-awesome-4.7.0/css/font-awesome.min.css')}}">
-    <title>{{system_config('site.webname')}}</title>
+    <title>{{config_get('admin.site.webname')}}</title>
     @stack('css')
 </head>
 <body>

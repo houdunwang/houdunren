@@ -17,7 +17,6 @@
             <span class="col-sm-2 text-text text-sm-right small text-secondary">
                <i class="fa fa-clock-o" aria-hidden="true"></i> {{$activity->created_at->diffForHumans()}}
             </span>
-
         </div>
     </div>
 </li>

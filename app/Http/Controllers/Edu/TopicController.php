@@ -23,17 +23,24 @@ class TopicController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show', 'lists']]);
     }
 
+    //前台贴子列表
     public function index()
     {
         $topics = EduTopic::with('category')->paginate(10);
         return view('edu.topic_index', compact('topics'));
     }
 
-    //根据分类显示
+    //前台根据分类显示
     public function lists(EduCategory $category)
     {
         $topics = $category->topic()->paginate(10);
         return view('edu.topic_lists', compact('topics', 'category'));
+    }
+
+    //贴子管理
+    public function manage()
+    {
+
     }
 
     public function create(Request $request)
@@ -48,9 +55,9 @@ class TopicController extends Controller
         return redirect(route('edu.topic.show', $topic))->with('success', '发表成功');
     }
 
-    public function show(EduTopic $topic,Request $request)
+    public function show(EduTopic $topic, Request $request)
     {
-        session(['url.intended'=>$request->getRequestUri()]);
+        session(['url.intended' => $request->getRequestUri()]);
         return view('edu.topic_show', compact('topic'));
     }
 

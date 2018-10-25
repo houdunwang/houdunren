@@ -33,7 +33,7 @@
     </script>
     @include('layouts._hdjs')
     @include('layouts._message')
-    <title>{{system_config('site.webname')}}</title>
+    <title>{{config_get('admin.site.webname')}}</title>
     @stack('css')
 </head>
 <body>
