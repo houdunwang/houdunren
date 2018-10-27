@@ -50,6 +50,7 @@ code {
   .video-box {
     overflow: hidden;
     height: 628px;
+    position: relative;
     @media screen and (max-width: 768px) {
       height: 200px;
     }
@@ -60,15 +61,30 @@ code {
         height: 200px;
       }
     }
-  }
-  #videoCata {
-    @media screen and (min-width: 960px) {
+    #category {
+      @media screen and (min-width: 960px) {
+        //display: none;
+      }
       display: none;
+      position: absolute;
+      z-index: 100;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      box-shadow: 10px 0 40px #999;
+      .video-lists {
+        max-height: 626px;
+        overflow: auto;
+        ul {
+          a {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
     }
-    .video-lists {
-      max-height: 628px;
-      overflow: auto;
-    }
+
   }
 }
 

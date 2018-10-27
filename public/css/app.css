@@ -255,6 +255,14 @@
   white-space: nowrap;
 }
 
+.edu-lesson-lists article .position-relative img {
+  height: 195px;
+}
+
+.edu-lesson-lists article h4.h6 {
+  height: 50px;
+}
+
 .dropdown-menu-card {
   border: 1px solid #e3ebf6 !important;
 }
@@ -294,6 +302,7 @@ code {
 .edu-video-show .video-box {
   overflow: hidden;
   height: 628px;
+  position: relative;
 }
 
 @media screen and (max-width: 768px) {
@@ -313,15 +322,26 @@ code {
   }
 }
 
-@media screen and (min-width: 960px) {
-  .edu-video-show #videoCata {
-    display: none;
-  }
+.edu-video-show .video-box #category {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-box-shadow: 10px 0 40px #999;
+          box-shadow: 10px 0 40px #999;
 }
 
-.edu-video-show #videoCata .video-lists {
-  max-height: 628px;
+.edu-video-show .video-box #category .video-lists {
+  max-height: 626px;
   overflow: auto;
+}
+
+.edu-video-show .video-box #category .video-lists ul a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .edu-lesson-lists .listAlias img.card-img-top {

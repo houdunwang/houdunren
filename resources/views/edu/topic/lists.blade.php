@@ -3,35 +3,68 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-12">
-                <div class="list-group">
-                    <div class="list-group-item list-group-item-action rounded-0">
-                        <span class="text-muted font-weight-bold btn">{{$category['title']}}</span>
-                        <a href="{{route('edu.topic.create',['id'=>$category])}}"
-                           class="btn u-btn-primary--air transition-3d-hover mb-1 float-right btn-xs">
-                            <i class="fa fa-plus" aria-hidden="true"></i> 发表
-                        </a>
-                    </div>
-                    @foreach($topics as $topic)
-                        <div class="list-group-item list-group-item-action u-info-v1 p-3 rounded-0 justify-content-sm-between align-items-sm-center">
-                            <div class="row">
-                                <div class="col-sm-10 mb-2 mb-sm-0" style="font-size: 14px;">
-                                    <a href="{{route('member.user.show',$topic->user)}}">
-                                        <img class="u-avatar rounded-circle mr-3" src="{{$topic->user->icon}}">
-                                    </a>
-                                    <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">
-                                        {{$topic->user->name}}
-                                    </a>
-                                    <a href="{{route('edu.topic.show',$topic)}}" class="text-dark">
-                                        {{$topic['title']}}
-                                    </a>
-                                </div>
-                                <span class="col-sm-2 text-text text-sm-right small text-secondary">
-                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    {{$topic->created_at->diffForHumans()}}
-                                        </span>
+                <div class="card" data-toggle="lists" data-lists-values="[&quot;name&quot;]">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h6 class="card-header-title text-secondary">
+                                    {{$category['title']}}
+                                </h6>
+                            </div>
+                            <div class="col-auto">
+                                <a href="{{route('edu.topic.create',['id'=>$category])}}"
+                                   class="btn btn-sm btn-primary">
+                                    发表
+                                </a>
                             </div>
                         </div>
-                    @endforeach
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-lg list-group-flush list my--4">
+                            @foreach($topics as $topic)
+                                <li class="list-group-item px-0">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <a href="{{route('member.user.show',$topic->user)}}">
+                                                <img class="u-avatar u-sm-avatar--bordered rounded-circle"
+                                                     src="{{$topic->user->icon}}"
+                                                     alt="{{$topic->title}}">
+                                            </a>
+                                        </div>
+                                        <div class="col ml--2">
+                                            <h6 class="card-title mb-1 name">
+                                                <a href="{{route('edu.topic.show',$topic)}}">{{$topic->title}}</a>
+                                            </h6>
+                                            <p class="card-text small text-muted mb-1">
+                                                <a href="{{route('member.user.show',$topic->user)}}"
+                                                   class="text-secondary mr-2 small">
+                                                    <i class="fa fa-user-circle"
+                                                       aria-hidden="true"></i> {{$topic->user->name}}
+                                                </a>
+                                                <i class="fa fa-clock-o"
+                                                   aria-hidden="true"></i> {{$topic->updated_at->diffForHumans()}}
+                                            </p>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="btn-group btn-group-toggle">
+                                                @can('update',$topic)
+                                                    <a href="{{route('edu.topic.edit',$topic)}}"
+                                                       class="btn btn-xs btn-light">编辑</a>
+                                                @endcan
+                                                @can('delete',$topic)
+                                                    <a href="javascript:;" class="btn btn-xs btn-secondary"
+                                                    onclick="confirm('确定删除吗？')?$(this).next().submit():null">删除</a>
+                                                        <form action="{{route('edu.topic.destroy',$topic)}}" method="post">
+                                                            @csrf @method('DELETE')
+                                                        </form>
+                                                @endcan
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
                 <div class="mt-5">
                     {{$topics->appends(['id'=>Request::query('id')])->links()}}

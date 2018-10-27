@@ -23,7 +23,7 @@ class LessonController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin:Edu-lesson',['except'=>['lists']]);
+        $this->middleware('admin:Edu-lesson', ['except' => ['lists', 'show']]);
     }
 
     public function index()

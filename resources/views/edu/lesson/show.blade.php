@@ -5,17 +5,19 @@
             <div class="card-header">
                 <div class="justify-content-between">
                     {{$lesson['title']}}
-                    @if($lesson->isFavorite(auth()->user()))
-                        <a href="{{route('common.favorite.make',['model'=>'EduLesson','id'=>$lesson['id']])}}"
-                           class="btn u-btn-primary--air transition-3d-hover btn-xs float-right">
-                            <i class="fa fa-heart-o" aria-hidden="true"></i> 已收藏
-                        </a>
-                    @else
-                        <a href="{{route('common.favorite.make',['model'=>'EduLesson','id'=>$lesson['id']])}}"
-                           class="btn u-btn-secondary--air transition-3d-hover btn-xs float-right">
-                            <i class="fa fa-heart-o" aria-hidden="true"></i> 收藏课程
-                        </a>
-                    @endif
+                    @auth
+                        @if($lesson->isFavorite(auth()->user()))
+                            <a href="{{route('common.favorite.make',['model'=>'EduLesson','id'=>$lesson['id']])}}"
+                               class="btn u-btn-primary--air transition-3d-hover btn-xs float-right">
+                                <i class="fa fa-heart-o" aria-hidden="true"></i> 已收藏
+                            </a>
+                        @else
+                            <a href="{{route('common.favorite.make',['model'=>'EduLesson','id'=>$lesson['id']])}}"
+                               class="btn u-btn-secondary--air transition-3d-hover btn-xs float-right">
+                                <i class="fa fa-heart-o" aria-hidden="true"></i> 收藏课程
+                            </a>
+                        @endif
+                    @endauth
                     <a href="javascript:;" onclick="hideLesson()"
                        class="btn btn-xs btn-light u-btn-light transition-3d-hover btn-xs float-right mr-2">
                         隐藏学习过的课程
@@ -50,7 +52,7 @@
                             </div>
                         @else
                             <div class="isLive media mb-3 {{active_class($index+1!= $lesson->video->count(),'u-indicator-ver-dashed')}}"
-                                 >
+                            >
                                 <div class="d-flex mt-1 mr-3">
                                     <span class="u-icon u-icon-primary u-icon--xs rounded-circle">
                                       <span class="fa fa-check u-icon__inner"></span>

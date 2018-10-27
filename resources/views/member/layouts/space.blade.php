@@ -72,7 +72,7 @@
                         <div class="col">
                             <ul class="nav nav-tabs nav-overflow header-tabs">
                                 <li class="nav-item">
-                                    <a href="team-overview.html" class="nav-link active">
+                                    <a href="#" class="nav-link active">
                                         粉丝列表
                                     </a>
                                 </li>

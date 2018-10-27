@@ -41,7 +41,7 @@ class EduTopicRequest extends FormRequest
     {
         return [
             'title.required'   => '标题不能为空',
-            'title.max'        => '标题长度不能超过50个字符',
+            'title.max'        => '标题长度不能超过50个字',
             'content.required' => '内容不能为空',
         ];
     }

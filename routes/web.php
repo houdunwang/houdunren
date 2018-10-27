@@ -79,7 +79,7 @@ Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.
 Route::group(['namespace' => 'Admin', 'middleware' => [], 'as' => 'admin.', 'prefix' => 'admin'], function () {
     //系统管理页面
     Route::get('/', 'AdminController@index')->name('admin');
-    Route::get('cache/update','CacheController@update')->name('update.cache');
+    Route::get('cache/update', 'CacheController@update')->name('update.cache');
     //配置管理
     Route::get('config/{name}/edit', 'ConfigController@edit')->name('config.edit');
     Route::put('config/{name}', 'ConfigController@update')->name('config.update');
@@ -114,4 +114,9 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::put('config/update', 'ConfigController@update')->name('config.update');
     //会员中心
     Route::get('topic/{user}', 'UserController@topic')->name('user.topic');
+    //文档管理
+    Route::resource('document', 'DocumentController');
+    Route::resource('chapter', 'ChapterController');
+    Route::resource('section','EduSectionController');
+    Route::get('document_manage', 'DocumentController@manage')->name('document.manage');
 });

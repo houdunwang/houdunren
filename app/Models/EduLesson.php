@@ -26,6 +26,7 @@ class EduLesson extends Model
     use Common, LogsActivity, Searchable;
     protected static $logName = 'edu_lesson';
     protected $fillable = [
+        'id',
         'title',
         'description',
         'thumb',

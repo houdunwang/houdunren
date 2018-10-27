@@ -26,10 +26,10 @@ class CreateEduVideosTable extends Migration
             $table->softDeletes();
             $table->timestamps();
             $table->string('title');
-            $table->string('path')->comment('视频文件');
+            $table->text('path')->comment('视频文件');
+            $table->text('question')->nullable()->comment('考题');
             $table->unsignedInteger('user_id')->index();
-            $table->smallInteger('duration')->default(0)->comment('时长');
-            $table->unsignedInteger('lesson_id');
+            $table->unsignedInteger('lesson_id')->index();
             $table->foreign('lesson_id')->references('id')->on('edu_lessons')->onDelete('cascade');
             $table->unsignedInteger('zan_num')->default(0);
             $table->unsignedInteger('favorite_num')->default(0);

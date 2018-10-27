@@ -13,6 +13,7 @@ namespace App\Http\Controllers\Edu;
 use App\Http\Requests\EduTopicRequest;
 use App\Models\EduCategory;
 use App\Models\EduTopic;
+use App\Models\EduVideo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

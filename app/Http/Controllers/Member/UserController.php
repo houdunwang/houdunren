@@ -19,13 +19,12 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware('auth', ['except' => ['show']]);
     }
 
     //会员中心
     public function show(User $user)
     {
-
         return view('member.user_show', compact('user'));
     }
 

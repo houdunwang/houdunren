@@ -16,7 +16,9 @@ class VideoObserver
 {
     public function creating(EduVideo $video)
     {
-        $video['user_id'] = auth()->id();
+        if (!$video['user_id']) {
+            $video['user_id'] = auth()->id();
+        }
     }
 
     public function created(EduVideo $video)

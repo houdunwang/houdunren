@@ -63,7 +63,7 @@
 
                 <!-- Subheading -->
                 <p class="text-muted mb-4">
-                    如有问题请联系我们 Email: {{config_get('site.email')}}
+                    如有问题请联系我们 Email: {{system_config('site.email')}}
                 </p>
                 <a href="/" class="btn btn-sm btn-primary">
                     返回首页
