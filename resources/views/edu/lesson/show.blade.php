@@ -34,7 +34,7 @@
             <div class="card-body lesson-list">
                 <div class="pr-md-4">
                     @foreach($lesson->video as $index=>$video)
-                        @if(!$video->isLive(auth()->id()))
+                        @if(!auth()->check() || !$video->isLive(auth()->id()))
                             <div class="media mb-3 {{active_class($index+1!= $lesson->video->count(),'u-indicator-ver-dashed')}}">
                                 <div class="d-flex mt-1 mr-3">
                                     <span class="u-icon u-icon-brd-secondary u-icon--xs rounded-circle"
@@ -51,8 +51,7 @@
                                 </div>
                             </div>
                         @else
-                            <div class="isLive media mb-3 {{active_class($index+1!= $lesson->video->count(),'u-indicator-ver-dashed')}}"
-                            >
+                            <div class="isLive media mb-3 {{active_class($index+1!= $lesson->video->count(),'u-indicator-ver-dashed')}}">
                                 <div class="d-flex mt-1 mr-3">
                                     <span class="u-icon u-icon-primary u-icon--xs rounded-circle">
                                       <span class="fa fa-check u-icon__inner"></span>

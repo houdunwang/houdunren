@@ -6,6 +6,51 @@
   height: 50px;
 }
 
+.edu-video-show .video-box {
+  overflow: hidden;
+  height: 692px;
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  .edu-video-show .video-box {
+    height: 200px;
+  }
+}
+
+.edu-video-show .video-box #video {
+  width: 100%;
+  background: #000;
+}
+
+@media screen and (max-width: 768px) {
+  .edu-video-show .video-box #video {
+    height: 200px;
+  }
+}
+
+.edu-video-show .video-box #category {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-box-shadow: 10px 0 40px #999;
+          box-shadow: 10px 0 40px #999;
+}
+
+.edu-video-show .video-box #category .video-lists {
+  max-height: 626px;
+  overflow: auto;
+}
+
+.edu-video-show .video-box #category .video-lists ul a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .edu-lesson-show video {
   width: 100%;
   height: auto;
@@ -305,51 +350,6 @@ code {
 
 .editormd ul.editormd-menu a {
   color: #95aac9 !important;
-}
-
-.edu-video-show .video-box {
-  overflow: hidden;
-  height: 628px;
-  position: relative;
-}
-
-@media screen and (max-width: 768px) {
-  .edu-video-show .video-box {
-    height: 200px;
-  }
-}
-
-.edu-video-show .video-box #video {
-  width: 100%;
-  background: #333;
-}
-
-@media screen and (max-width: 768px) {
-  .edu-video-show .video-box #video {
-    height: 200px;
-  }
-}
-
-.edu-video-show .video-box #category {
-  display: none;
-  position: absolute;
-  z-index: 100;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  -webkit-box-shadow: 10px 0 40px #999;
-          box-shadow: 10px 0 40px #999;
-}
-
-.edu-video-show .video-box #category .video-lists {
-  max-height: 626px;
-  overflow: auto;
-}
-
-.edu-video-show .video-box #category .video-lists ul a {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .edu-lesson-lists .listAlias img.card-img-top {
