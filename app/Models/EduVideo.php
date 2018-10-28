@@ -50,7 +50,7 @@ class EduVideo extends Model
     //用户视频关联
     public function userVideo()
     {
-        return $this->belongsToMany(User::class, 'edu_user_videos', 'video_id', 'user_id');
+        return $this->belongsToMany(User::class, 'edu_user_videos', 'video_id', 'user_id')->withTimestamps();
     }
 
     //用户观看视频检测

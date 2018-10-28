@@ -184,20 +184,20 @@
         <div class="card-body">
             <div class="row">
                 <div class="card col-sm-12" v-for="(v,k) in field.videos">
-                    <div class="card-body">
+                    <div class="card-body pb-0">
                         <div class="form-group">
                             <input type="text" v-model="v.title" class="form-control" placeholder="课程标题"
                                    aria-describedby="helpId" required>
                         </div>
-                        <div class="form-group">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" v-model="v.duration" placeholder="播放时长"
-                                       required>
-                                <div class="input-group-append">
-                                    <span class="input-group-text">秒</span>
-                                </div>
-                            </div>
-                        </div>
+                        {{--<div class="form-group">--}}
+                            {{--<div class="input-group mb-3">--}}
+                                {{--<input type="text" class="form-control" v-model="v.duration" placeholder="播放时长"--}}
+                                       {{--required>--}}
+                                {{--<div class="input-group-append">--}}
+                                    {{--<span class="input-group-text">秒</span>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                         <div class="form-group">
                             <input type="text" v-model="v.path" class="form-control" placeholder="视频链接"
                                    aria-describedby="helpId" required>

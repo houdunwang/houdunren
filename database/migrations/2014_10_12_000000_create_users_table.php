@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique()->nullable()->comment('昵称');
+            $table->string('name')->nullable()->comment('昵称');
             $table->string('email')->unique()->nullable()->index()->comment('邮箱');
             $table->string('mobile')->unique()->nullable()->index()->comment('手机');
             $table->string('password');

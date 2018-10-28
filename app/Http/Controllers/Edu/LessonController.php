@@ -40,10 +40,10 @@ class LessonController extends Controller
             'thumb' => ['required', 'regex:/(jpeg|jpg|png|gif)$/i'],
             'type' => 'required|in:system,video',
             'free' => 'required|in:1,0',
-            'subscibe_play' => 'required|in:1,0',
+            'subscibe_play' => 'nullable|in:1,0',
             'click' => 'required|numeric',
             'free_num' => 'required',
-            'price' => 'required|between:0,1000',
+            'price' => 'nullable|between:0,1000',
             'status' => 'required|in:1,0',
             'download_address' => 'nullable|sometimes|url',
             'json' => 'json',
@@ -82,6 +82,7 @@ class LessonController extends Controller
     public function store(Request $request)
     {
         $field = json_decode($request->get('field'), true);
+
         $this->validation($field['lesson']);
         //添加课程
         $lesson = new EduLesson($field['lesson']);
@@ -108,15 +109,17 @@ class LessonController extends Controller
 
     public function edit(EduLesson $lesson)
     {
+        $this->authorize('update', $lesson);
         $field = ['lesson' => $lesson->toArray(), 'videos' => $lesson->video->toArray()];
         return view('edu.lesson.edit', compact('field', 'lesson'));
     }
 
     public function update(Request $request, EduLesson $lesson)
     {
+        $this->authorize('update', $lesson);
         $field = json_decode($request->get('field'), true);
         $this->validation($field['lesson']);
-        $lesson->user()->associate(auth()->user())->update($field['lesson']);
+        $lesson->fill($field['lesson'])->update();
 
         //软删除后添加视频
         $lesson->video()->delete();

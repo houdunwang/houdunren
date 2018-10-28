@@ -5,7 +5,7 @@
             <span class="u-skiplink-text">Skip to main content</span>
         </div>
     </a>
-    <main id="content" role="main">
+    <main id="content" role="main" class="edu-home">
         <div class="d-lg-flex align-items-lg-center position-relative min-height-100vh--lg u-bg-img-hero u-space-3 u-space-5-top--md u-space-0--lg"
              style="background-image: url(/images/img32.jpg);min-height: 70vh">
             <div class="container mt-lg-5">
@@ -303,10 +303,10 @@
                             <p class="mb-4">
                                 Laravel是广受PHP开发团队喜欢的开源框架，开发敏捷、功能丰富、社区完善。
                             </p>
-                            <a class="btn u-btn-danger--air transition-3d-hover" href="{{route('edu.lesson.lists')}}">
-                                进入学习
-                                <span class="fa fa-angle-right ml-2"></span>
-                            </a>
+                            <button class="btn u-btn-danger--air transition-3d-hover disabled" href="{{route('edu.lesson.lists')}}">
+                                近期推出
+                                {{--<span class="fa fa-angle-right ml-2"></span>--}}
+                            </button>
                         </article>
                         <!-- End Icon Block -->
                     </div>
@@ -823,10 +823,10 @@
                             <p class="mb-4">
                                 从软件安装到编程语法，同时结合实战案例，让你轻松掌握PHP这门广泛使用的编程语言。
                             </p>
-                            <a class="btn u-btn-primary--air transition-3d-hover" href="{{route('edu.lesson.lists')}}">
-                                马上学习
-                                <span class="fa fa-angle-right ml-2"></span>
-                            </a>
+                            <button type="button" class="btn u-btn-primary--air transition-3d-hover disabled" href="{{route('edu.lesson.lists')}}">
+                                近期推出
+                                {{--<span class="fa fa-angle-right ml-2"></span>--}}
+                            </button>
                         </article>
                         <!-- End Icon Block -->
                     </div>
@@ -970,123 +970,45 @@
                  "slidesToShow": 1
                }
              }]'>
-                    <div class="js-slide">
-                        <article class="bg-white shadow-sm mb-3">
-                            <div class="position-relative">
-                                <img class="img-fluid w-100 rounded-top" src="{{asset('org/front')}}/img/500x550/img15.jpg"
-                                     alt="Image Description">
-                                <header class="position-absolute-top-0 p-5">
-                                    <a class="media align-items-center text-white" href="#">
-                                        <div class="d-flex mr-2">
-                                            <img class="img-fluid u-sm-avatar rounded-circle"
-                                                 src="/images/100x100/img2.jpg" alt="Image Description">
-                                        </div>
-                                        <div class="media-body">
-                                            <span>Casy Williams</span>
-                                        </div>
-                                    </a>
-                                </header>
-                                <div class="position-absolute-bottom-0 p-5">
-                                    <span class="h4 text-white">$750,000</span>
-                                </div>
-                            </div>
-                            <div class="rounded-bottom p-5">
-                                <h4 class="h6">
-                                    <a href="#">Secluded Intown Treehouse</a>
-                                </h4>
-                                <span class="fa fa-map-marker-alt text-danger mr-2"></span>
-                                <a class="text-secondary" href="#">New York, US</a>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="js-slide">
-                        <article class="bg-white shadow-sm mb-3">
-                            <div class="position-relative">
-                                <img class="img-fluid w-100 rounded-top" src="{{asset('org/front')}}/img/500x550/img16.jpg"
-                                     alt="Image Description">
-                                <header class="position-absolute-top-0 p-5">
-                                    <a class="media align-items-center text-white" href="#">
-                                        <div class="d-flex mr-2">
-                                            <img class="img-fluid u-sm-avatar rounded-circle"
-                                                 src="{{asset('org/front')}}/img/100x100/img3.jpg" alt="Image Description">
-                                        </div>
-                                        <div class="media-body">
-                                            <span>Chris Johnson</span>
-                                        </div>
-                                    </a>
-                                </header>
-                                <div class="position-absolute-bottom-0 p-5">
-                                    <span class="h4 text-white">$173,000</span>
-                                </div>
-                            </div>
 
-                            <div class="rounded-bottom p-5">
-                                <h4 class="h6">
-                                    <a href="#">Malibu Dream Airstream</a>
-                                </h4>
-                                <span class="fa fa-map-marker-alt text-danger mr-2"></span>
-                                <a class="text-secondary" href="#">Manhattan, US</a>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="js-slide">
-                        <article class="bg-white shadow-sm mb-3">
-                            <div class="position-relative">
-                                <img class="img-fluid w-100 rounded-top" src="{{asset('org/front')}}/img/500x550/img17.jpg"
-                                     alt="Image Description">
-                                <header class="position-absolute-top-0 p-5">
-                                    <a class="media align-items-center text-white" href="#">
-                                        <div class="d-flex mr-2">
-                                            <img class="img-fluid u-sm-avatar rounded-circle"
-                                                 src="{{asset('images/xj-s.jpg')}}" alt="Image Description">
-                                        </div>
-                                        <div class="media-body">
-                                            <span>Elon Fisher</span>
-                                        </div>
-                                    </a>
-                                </header>
-                                <div class="position-absolute-bottom-0 p-5">
-                                    <span class="h4 text-white">$199,000</span>
+                    @foreach(\App\Models\EduLesson::where('is_commend',1)->limit(6)->get() as $lesson)
+                        <div class="js-slide">
+                            <article class="bg-white shadow-sm mb-3 lesson-list">
+                                <div class="position-relative">
+                                    <img class="img-fluid w-100 rounded-top" src="{{$lesson['thumb']}}"
+                                         alt="Image Description">
                                 </div>
-                            </div>
-                            <div class="rounded-bottom p-5">
-                                <h4 class="h6">
-                                    <a href="#">Tintern Crescent</a>
-                                </h4>
-                                <span class="fa fa-map-marker-alt text-danger mr-2"></span>
-                                <a class="text-secondary" href="#">Toronto, Canada</a>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="js-slide">
-                        <article class="bg-white shadow-sm mb-3">
-                            <div class="position-relative">
-                                <img class="img-fluid w-100 rounded-top" src="{{asset('org/front')}}/img/500x550/img18.jpg"
-                                     alt="Image Description">
-                                <header class="position-absolute-top-0 p-5">
-                                    <a class="media align-items-center text-white" href="#">
-                                        <div class="d-flex mr-2">
-                                            <img class="img-fluid u-sm-avatar rounded-circle"
-                                                 src="{{asset('org/front')}}/img/100x100/img1.jpg" alt="Image Description">
+                                <div class="rounded-bottom p-5">
+                                    <h4 class="h6">
+                                        <a href="{{route('edu.lesson.show',$lesson)}}">{{$lesson['title']}}</a>
+                                    </h4>
+                                    <div class="small text-secondary row">
+                                        <div class="col-8">
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            {{$lesson['updated_at']->diffForHumans()}}
+                                            <i class="fa fa-film ml-3" aria-hidden="true"></i>
+                                            {{$lesson->video()->count()}} 节课
                                         </div>
-                                        <div class="media-body">
-                                            <span>Maria Muszynska</span>
-                                        </div>
-                                    </a>
-                                </header>
-                                <div class="position-absolute-bottom-0 p-5">
-                                    <span class="h4 text-white">$376,000</span>
+                                        @can('update',$lesson)
+                                            <div class="col-4 text-right">
+                                                <div class="position-relative" style="top: -6px;">
+                                                    <a id="activitySettingsDropdownInvoker" class="u-icon u-icon-secondary--air u-icon--sm u-bg-transparent" href="javascript:;" role="button" aria-controls="{{$lesson['id']}}" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-target="#{{$lesson['id']}}" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                                        <span class="fab fa-windows u-icon__inner"></span>
+                                                    </a>
+                                                    <div id="{{$lesson['id']}}" class="u-unfold right-0 text-left mt-2 u-unfold--css-animation u-unfold--hidden" aria-labelledby="activitySettingsDropdownInvoker" style="min-width: 190px; animation-duration: 300ms; right: 0px;">
+                                                        <a class="u-list__link" href="{{route('edu.lesson.edit',$lesson)}}">
+                                                            <span class="fa fa-eye-slash min-width-3 text-center font-size-13 mr-2"></span>
+                                                            编辑
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endcan
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="rounded-bottom p-5">
-                                <h4 class="h6">
-                                    <a href="#">Tiverton Avenue</a>
-                                </h4>
-                                <span class="fa fa-map-marker-alt text-danger mr-2"></span>
-                                <a class="text-secondary" href="#">Beijing, China</a>
-                            </div>
-                        </article>
-                    </div>
+                            </article>
+                        </div>
+                        @endforeach
                 </div>
                 <div class="text-center">
                     <a class="btn u-btn-primary--air u-btn-wide transition-3d-hover" href="{{route('edu.lesson.lists')}}">查看全部</a>
@@ -1165,7 +1087,7 @@
                             <div class="mb-5">
                                 <h2 class="font-weight-medium">全平台适配</h2>
                                 <p>
-                                    我们针对桌面电脑、移动手机进行了大量调优。让你可以在全平台轻松学习课程，不受时间地点限制影响学习计划。
+                                    我们针对桌面电脑、移动手机进行了大量调优。让你可以在全平台轻松交流学习，不受时间地点限制影响学习计划。
                                 </p>
                             </div>
                         </div>
@@ -1210,7 +1132,7 @@
                             <div class="media">
                                 <div class="d-flex mr-3">
                                     <img class="img-fluid u-avatar rounded-circle"
-                                         src="{{asset('images/xj-s.jpg')}}" alt="Image Description">
+                                         src="{{asset('images/avatar/1.jpeg')}}" alt="Image Description">
                                 </div>
                                 <div class="media-body">
                                     <h4 class="h6 mb-1">Maria Muszynska</h4>
@@ -1246,7 +1168,7 @@
                             <div class="media">
                                 <div class="d-flex mr-3">
                                     <img class="img-fluid u-avatar rounded-circle"
-                                         src="{{asset('images/xj-s.jpg')}}" alt="Image Description">
+                                         src="{{asset('images/avatar/2.jpeg')}}" alt="Image Description">
                                 </div>
                                 <div class="media-body">
                                     <h4 class="h6 mb-1">细****</h4>
@@ -1279,7 +1201,7 @@
                             <div class="media">
                                 <div class="d-flex mr-3">
                                     <img class="img-fluid u-avatar rounded-circle"
-                                         src="{{asset('images/xj-s.jpg')}}" alt="Image Description">
+                                         src="{{asset('images/avatar/3.gif')}}" alt="Image Description">
                                 </div>
                                 <div class="media-body">
                                     <h4 class="h6 mb-1">Mark McManus</h4>

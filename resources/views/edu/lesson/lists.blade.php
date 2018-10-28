@@ -36,9 +36,21 @@
                                             <i class="fa fa-film ml-3" aria-hidden="true"></i>
                                             {{$lesson->video()->count()}} 节课
                                         </div>
-                                        <div class="col-4 text-right">
-
-                                        </div>
+                                        @can('update',$lesson)
+                                            <div class="col-4 text-right">
+                                                <div class="position-relative" style="top: -6px;">
+                                                    <a id="activitySettingsDropdownInvoker" class="u-icon u-icon-secondary--air u-icon--sm u-bg-transparent" href="javascript:;" role="button" aria-controls="{{$lesson['id']}}" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-target="#{{$lesson['id']}}" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                                                        <span class="fab fa-windows u-icon__inner"></span>
+                                                    </a>
+                                                    <div id="{{$lesson['id']}}" class="u-unfold right-0 text-left mt-2 u-unfold--css-animation u-unfold--hidden" aria-labelledby="activitySettingsDropdownInvoker" style="min-width: 190px; animation-duration: 300ms; right: 0px;">
+                                                        <a class="u-list__link" href="{{route('edu.lesson.edit',$lesson)}}">
+                                                            <span class="fa fa-eye-slash min-width-3 text-center font-size-13 mr-2"></span>
+                                                            编辑
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endcan
                                     </div>
                                 </div>
                             </a>

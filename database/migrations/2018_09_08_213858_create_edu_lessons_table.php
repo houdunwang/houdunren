@@ -28,7 +28,8 @@ class CreateEduLessonsTable extends Migration
             $table->string('description')->nullable()->comment('课程介绍');
             $table->string('thumb');
             $table->char('type', 20)->default('video')->index()->comment('类型:system系统，video播客');
-            $table->unsignedTinyInteger('free')->default(0)->index()->comment('免费课1是0否');
+            $table->tinyInteger('status')->default(1)->comment('1:上架 0:下架');
+            $table->unsignedTinyInteger('free')->default(0)->index()->comment('1:免费课 0:收费');
             $table->unsignedTinyInteger('subscribe_free_play')->default(1)->index()->comment('定阅用户免费观看');
             $table->tinyInteger('free_num')->default(0)->index()->comment('免费观看数量');
             $table->decimal('price')->nullable()->comment('售价');

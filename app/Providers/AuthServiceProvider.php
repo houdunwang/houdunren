@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\Comment;
+use App\Models\EduLesson;
 use App\Models\EduTopic;
 use App\Policies\CommentPolicy;
+use App\Policies\EduLessonPolicy;
 use App\Policies\EduTopicPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
@@ -24,6 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         Role::class => RolePolicy::class,
         Comment::class => CommentPolicy::class,
         EduTopic::class => EduTopicPolicy::class,
+        EduLesson::class => EduLessonPolicy::class,
     ];
 
     /**

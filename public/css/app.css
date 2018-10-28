@@ -1,3 +1,11 @@
+.edu-home article.lesson-list .position-relative img {
+  height: 195px;
+}
+
+.edu-home article.lesson-list h4.h6 {
+  height: 50px;
+}
+
 .edu-lesson-show video {
   width: 100%;
   height: auto;
