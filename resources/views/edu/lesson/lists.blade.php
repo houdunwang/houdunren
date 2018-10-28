@@ -34,7 +34,7 @@
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                                             {{$lesson['updated_at']->diffForHumans()}}
                                             <i class="fa fa-film ml-3" aria-hidden="true"></i>
-                                            {{$lesson->video()->count()}} 节课
+                                            {{$lesson->video_num}} 节课
                                         </div>
                                         @can('update',$lesson)
                                             <div class="col-4 text-right">

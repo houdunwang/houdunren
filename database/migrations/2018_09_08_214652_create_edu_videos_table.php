@@ -28,7 +28,6 @@ class CreateEduVideosTable extends Migration
             $table->string('title');
             $table->text('path')->comment('视频文件');
             $table->text('question')->nullable()->comment('考题');
-            $table->unsignedInteger('user_id')->index();
             $table->unsignedInteger('lesson_id')->index();
             $table->foreign('lesson_id')->references('id')->on('edu_lessons')->onDelete('cascade');
             $table->unsignedInteger('zan_num')->default(0);

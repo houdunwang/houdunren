@@ -62,6 +62,10 @@
   color: #555;
 }
 
+.edu-shop-index .shop .price {
+  font-size: 38px;
+}
+
 .chat-news-create,
 .chat-news-edit {
   width: 300px;

@@ -50,7 +50,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="sidebarIcon">
                     <a href="{{route('member.user.show',auth()->user())}}" class="dropdown-item">个人空间</a>
-                    <a href="{{route('changePassword',auth()->user())}}" class="dropdown-item">修改密码</a>
+                    <a href="{{route('member.user.edit',[auth()->user(),'type'=>'password'])}}" class="dropdown-item">修改密码</a>
                     <hr class="dropdown-divider">
                     <a href="{{route('logout')}}" class="dropdown-item">退出</a>
                 </div>
@@ -115,6 +115,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="{{route('member.user.show',auth()->user())}}" class="dropdown-item">个人中心</a>
+                        <a href="{{route('member.user.edit',[auth()->user(),'type'=>'password'])}}" class="dropdown-item">修改密码</a>
                         <hr class="dropdown-divider">
                         <a href="{{route('logout')}}" class="dropdown-item">退出</a>
                     </div>

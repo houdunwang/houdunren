@@ -35,6 +35,7 @@ class CreateEduLessonsTable extends Migration
             $table->decimal('price')->nullable()->comment('售价');
             $table->tinyInteger('is_commend')->nullable()->index();
             $table->tinyInteger('is_hot')->nullable()->index();
+            $table->string('video_num')->default(0)->comment('视频数量');
             $table->mediumInteger('click')->default(0)->comment('查看次数');
             $table->string('download_address')->nullable()->comment('下载地址');
             $table->unsignedInteger('user_id');

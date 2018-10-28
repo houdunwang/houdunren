@@ -28,7 +28,7 @@ class ConfigController extends Controller
 
     public function edit($name)
     {
-        return view('admin.config_' . $name);
+        return view('admin.config.' . $name);
     }
 
     public function update(Request $request, $name)

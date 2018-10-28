@@ -5,7 +5,7 @@
             @csrf @method('PUT')
             <div class="card">
                 <div class="card-body">
-                    @include('admin.layouts._config_menu')
+                    @include('admin.config.layouts._menu')
                     <div class="form-group">
                         <label>邮箱类型</label>
                         <input type="text" class="form-control" name="driver" value="{{config_get('admin.email.driver','smtp')}}">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <label class="mb-1">邮箱密码</label>
-                        <input type="password" class="form-control" name="password" value="{{config_get('admin.email.password')}}">
+                        <input type="text" class="form-control" name="password" value="{{config_get('admin.email.password')}}">
                     </div>
                     <div class="form-group">
                         <label class="mb-1">加密方式</label>

@@ -124,14 +124,14 @@
                         <div class="col-sm-2">订阅用户免费</div>
                         <div class="col-sm-10">
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="subscibe_play1" v-model="field.lesson.subscibe_play"
+                                <input type="radio" id="subscribe_free_play1" v-model="field.lesson.subscribe_free_play"
                                        class="custom-control-input" value="1">
-                                <label class="custom-control-label" for="subscibe_play1">是</label>
+                                <label class="custom-control-label" for="subscribe_free_play1">是</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="subscibe_play2" v-model="field.lesson.subscibe_play"
+                                <input type="radio" id="subscribe_free_play2" v-model="field.lesson.subscribe_free_play"
                                        class="custom-control-input" value="0" checked>
-                                <label class="custom-control-label" for="subscibe_play2">否</label>
+                                <label class="custom-control-label" for="subscribe_free_play2">否</label>
                             </div>
                         </div>
                     </div>

@@ -10,6 +10,7 @@
 
 namespace App\Http\Requests;
 
+use App\Servers\CodeServer;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -30,21 +31,21 @@ class RegisterRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(CodeServer $codeServer)
     {
         return [
-            'name'     => 'sometimes|required|unique:users',
+            'name' => 'sometimes|required|unique:users',
             'password' => 'required|min:5|confirmed',
-            'code'     => [
+            'code' => [
                 'sometimes',
                 'required',
-                function ($attribute, $value, $fail) {
-                    if ($value != session('validate_code.code')) {
+                function ($attribute, $value, $fail) use ($codeServer) {
+                    if (!$codeServer->check(\Request::get('account'), $value)) {
                         return $fail('验证码输入错误');
                     }
                 },
             ],
-            'account'  => [
+            'account' => [
                 'required',
                 function ($attribute, $value, $fail) {
                     if (filter_var($value, FILTER_VALIDATE_EMAIL)) {
@@ -68,10 +69,10 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required'     => '昵称 不能为空',
-            'code.required'     => '验证码 不能为空',
+            'name.required' => '昵称 不能为空',
+            'code.required' => '验证码 不能为空',
             'password.required' => '密码 不能为空',
-            'account.required'  => '帐号 不能为空',
+            'account.required' => '帐号 不能为空',
         ];
     }
 

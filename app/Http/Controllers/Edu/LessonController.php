@@ -26,8 +26,9 @@ class LessonController extends Controller
         $this->middleware('admin:Edu-lesson', ['except' => ['lists', 'show']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        session(['url.intended'=> $request->fullUrl()]);
         $lessons = EduLesson::where('user_id', auth()->id())->latest()->paginate(20);
         return view('edu.lesson.index', compact('lessons'));
     }
@@ -79,15 +80,14 @@ class LessonController extends Controller
         return view('edu.lesson.create', compact('field'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, EduLesson $lesson)
     {
         $field = json_decode($request->get('field'), true);
 
         $this->validation($field['lesson']);
+
         //添加课程
-        $lesson = new EduLesson($field['lesson']);
-        $lesson->user()->associate(auth()->user());
-        $lesson->save();
+        $lesson->user()->associate(auth()->user())->fill($field['lesson'])->save();
 
         //添加视频
         $lesson->video()->createMany($field['videos']);
@@ -95,8 +95,9 @@ class LessonController extends Controller
     }
 
     //前台碎片课程列表
-    public function lists()
+    public function lists(Request $request)
     {
+        session(['url.intended'=> $request->fullUrl()]);
         $lessons = EduLesson::with('user')->latest()->paginate(9);
         return view('edu.lesson.lists', compact('lessons'));
     }
@@ -107,7 +108,7 @@ class LessonController extends Controller
         return view('edu.lesson.show', compact('lesson'));
     }
 
-    public function edit(EduLesson $lesson)
+    public function edit(EduLesson $lesson, Request $request)
     {
         $this->authorize('update', $lesson);
         $field = ['lesson' => $lesson->toArray(), 'videos' => $lesson->video->toArray()];
@@ -128,7 +129,7 @@ class LessonController extends Controller
         }
         //清除软件删除数据
         $lesson->video()->onlyTrashed()->forceDelete();
-        return redirect(route('edu.lesson.index'))->with('success', '课程编辑成功');
+        return redirect()->intended(route('edu.lesson.index'))->with('success', '课程编辑成功');
     }
 
     public function destroy(EduLesson $lesson)

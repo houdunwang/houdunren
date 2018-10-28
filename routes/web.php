@@ -12,6 +12,9 @@
 Route::get('/', function (\App\Models\Module $module) {
     return App::call($module->getEntranceByDomain());
 })->name('home');
+Route::get('home', function (\App\Models\Module $module) {
+    return App::call($module->getEntranceByDomain());
+})->name('home');
 
 //公共控制器
 Route::group(['namespace' => 'Common', 'prefix' => 'common', 'as' => 'common.'], function () {
@@ -26,6 +29,9 @@ Route::group(['namespace' => 'Common', 'prefix' => 'common', 'as' => 'common.'],
     Route::any('upload/lists', 'UploadController@lists')->name('upload.lists');
     //发送验证码
     Route::any('code/send', 'CodeController@send')->name('code.send');
+    //支付宝定单处理
+    Route::any('alipay/sync','AliPayNotifyController@sync')->name('alipay.sync');
+    Route::any('alipay/async','AliPayNotifyController@async')->name('alipay.async');
 });
 
 //微信模块
@@ -53,11 +59,14 @@ Route::group(['namespace' => 'Member', 'prefix' => 'member', 'as' => 'member.'],
 //登录/注册/退出
 Route::get('register', 'Member\RegisterController@create')->name('register');
 Route::post('register', 'Member\RegisterController@store')->name('register');
+Route::post('register/code', 'Member\RegisterController@code')->name('register.send.code');
 Route::get('login', 'Member\LoginController@login')->name('login');
 Route::post('login', 'Member\LoginController@store')->name('login');
 Route::get('logout', 'Member\LoginController@logout')->name('logout');
-Route::get('findPassword', 'Member\LoginController@findPassword')->name('findPassword');
-Route::post('changePassword', 'Member\LoginController@changePassword')->name('changePassword');
+//找回密码
+Route::get('password_reset', 'Member\ResetPasswordController@show')->name('password.reset');
+Route::post('password_reset', 'Member\ResetPasswordController@update')->name('password.reset');
+Route::post('password_reset_code', 'Member\ResetPasswordController@code')->name('password.reset.code');
 
 Route::group(['namespace' => 'Content', 'prefix' => 'content', 'as' => 'content.'], function () {
     Route::get('admin', 'AdminController@index')->name('admin');
@@ -117,6 +126,11 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     //文档管理
     Route::resource('document', 'DocumentController');
     Route::resource('chapter', 'ChapterController');
-    Route::resource('section','EduSectionController');
+    Route::resource('section', 'EduSectionController');
     Route::get('document_manage', 'DocumentController@manage')->name('document.manage');
+    //会员评阅
+    Route::resource('shop', 'ShopController');
+    Route::get('pay/{id}', 'PayController@make')->name('pay');
+    //订阅会员
+    Route::get('order/{shop}/shop', 'OrderController@shop')->name('order.shop');
 });

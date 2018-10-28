@@ -11,7 +11,7 @@
 namespace App\Models;
 
 use App\Models\Traits\Common;
-use App\Observers\VideoObserver;
+use App\Observers\EduVideoObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -32,13 +32,13 @@ class EduVideo extends Model
      */
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['id', 'title', 'path', 'question', 'lesson_id','user_id'];
+    protected $fillable = ['id', 'title', 'path', 'question', 'lesson_id'];
 
     protected $casts = [];
 
     protected static function boot()
     {
-        self::observe(VideoObserver::class);
+        self::observe(EduVideoObserver::class);
         parent::boot();
     }
 

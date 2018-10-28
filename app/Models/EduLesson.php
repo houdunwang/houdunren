@@ -32,7 +32,7 @@ class EduLesson extends Model
         'thumb',
         'type',
         'free',
-        'subscibe_play',
+        'subscribe_free_play',
         'free_num',
         'price',
         'is_commend',

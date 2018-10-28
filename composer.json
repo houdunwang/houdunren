@@ -14,6 +14,7 @@
         "erusev/parsedown": "^1.7",
         "fideloper/proxy": "^4.0",
         "hieu-le/active": "^3.5",
+        "houdunwang/alipay": "^1.0",
         "houdunwang/aliyun": "^1.0",
         "houdunwang/arr": "^1.0",
         "houdunwang/laravel": "^1.0",

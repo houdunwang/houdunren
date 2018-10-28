@@ -51,7 +51,7 @@
                 <button class="btn btn-lg btn-block btn-primary mb-3">注册</button>
                 <div class="text-center">
                     <small class="text-muted text-center">
-                        已有帐号? <a href="{{route('login')}}">登录</a>. <a href="{{route('findPassword')}}">找回密码</a>
+                        已有帐号? <a href="{{route('login')}}">登录</a>. <a href="{{route('password.reset')}}">找回密码</a>
                         . <a href="/">返回首页</a>
                     </small>
                 </div>
@@ -70,7 +70,7 @@
             //按钮
             el: '#bt',
             //后台链接
-            url: '{{route('common.code.send')}}',
+            url: '{{route('register.send.code')}}',
             //验证码等待发送时间
             timeout: '{{config_get('admin.base.code_expire')}}',
             //POST表单数据

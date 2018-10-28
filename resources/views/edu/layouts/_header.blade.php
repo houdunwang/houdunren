@@ -261,7 +261,7 @@
                                            data-unfold-animation-out="fadeOutRight"
                                            data-unfold-duration="500">
                                             <span class="position-relative">
-                                              <img class="u-sidebar--account__toggle-img" src="{{auth()->user()->icon}}"
+                                              <img class="u-sidebar--account__toggle-img" src="{{auth()->user()->avatar}}"
                                                    alt="Image Description">
                                                 @if(auth()->user()->unreadNotifications->count())
                                                     <span class="u-badge u-badge-success u-badge-pos rounded-circle">

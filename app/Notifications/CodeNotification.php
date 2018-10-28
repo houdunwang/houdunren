@@ -1,12 +1,4 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军 <www.aoxiangjun.com>
- * |    WeChat: houdunren2018
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
 
 namespace App\Notifications;
 
@@ -15,14 +7,20 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class RegisterNotification extends Notification implements ShouldQueue
+/**
+ * 邮件验证码发送通知
+ * Class CodeNotification
+ * @package App\Notifications
+ */
+class CodeNotification extends Notification
 {
     use Queueable;
     protected $code;
 
     /**
-     * RegisterNotification constructor.
-     * @param $code
+     * Create a new notification instance.
+     *
+     * @return void
      */
     public function __construct($code)
     {
@@ -46,11 +44,15 @@ class RegisterNotification extends Notification implements ShouldQueue
      * @param  mixed $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail()
+    public function toMail($notifiable)
     {
 //        return (new MailMessage)
-//            ->subject('会员注册')
-//            ->line('您的注册验证码是' . $this->code);
+//            ->line('The introduction to the notification.')
+//            ->action('Notification Action', url('/'))
+//            ->line('Thank you for using our application!');
+        return (new MailMessage)
+            ->subject(config_get('admin.site.webname').'身份验证码')
+            ->line('您的验证码是' . $this->code);
     }
 
     /**

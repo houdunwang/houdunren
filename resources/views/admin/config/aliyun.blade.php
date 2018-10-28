@@ -5,7 +5,7 @@
             @csrf @method('PUT')
             <div class="card">
                 <div class="card-body">
-                    @include('admin.layouts._config_menu')
+                    @include('admin.config.layouts._menu')
                     <div class="form-group">
                         <label>regionId</label>
                         <input type="text" class="form-control" name="regionId"

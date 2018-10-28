@@ -11,9 +11,6 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\FindPasswordRequest;
-use App\User;
-use Url;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -45,36 +42,12 @@ class LoginController extends Controller
         if (\Auth::attempt($data, (bool)$request['remember'])) {
             return redirect()->intended('/');
         }
-        return redirect(session('redirect_url'), '/')->with('error', '登录失败，请检查帐号或密码');
+        return redirect()->intended('/')->with('error', '登录失败，请检查帐号或密码');
     }
 
     public function logout()
     {
         \Auth::logout();
         return redirect('/');
-    }
-
-    //找回密码
-    public function findPassword()
-    {
-        return view('member.findpassword');
-    }
-
-    /**
-     * 更新找回密码
-     * @param FindPasswordRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function changePassword(FindPasswordRequest $request)
-    {
-        //邮箱或手机号
-        $session = session()->get('validate_code');
-        $user = User::where([$session['type'] => $session['username']])->first();
-        if ($user) {
-            $user['password'] = bcrypt($request['password']);
-            $user->save();
-            return redirect(route('login'))->with('success', '密码重置成功');
-        }
-        return back()->with('error', '帐号不存在');
     }
 }

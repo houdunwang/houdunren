@@ -3,14 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
-
     <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/fonts/feather/feather.min.css">
     <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/highlight/styles/vs2015.min.css">
     <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/quill/dist/quill.core.css">
     <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/css/theme.min.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>找回密码</title>
 </head>
 <body class="d-flex align-items-center bg-white border-top-2 border-primary">
@@ -26,7 +25,7 @@
             <p class="text-muted text-center mb-5">
                 感谢你使用 {{config_get('admin.site.webname')}} 网站服务
             </p>
-            <form action="{{route('changePassword')}}" method="post">
+            <form action="{{route('password.reset')}}" method="post">
                 @csrf
                 <div class="form-group">
                     <label>帐号</label>
@@ -46,10 +45,10 @@
                         <button class="btn btn-outline-secondary" type="button" value="{{old('code')}}" id="bt" value="{{old('code')}}">发送验证码</button>
                     </div>
                 </div>
-                <button class="btn btn-lg btn-block btn-primary mb-3">发送</button>
+                <button class="btn btn-lg btn-block btn-primary mb-3">保存修改</button>
                 <div class="text-center">
                     <small class="text-muted text-center">
-                        已有帐号? <a href="{{route('login')}}">登录</a>. <a href="{{route('findPassword')}}">找回密码</a>
+                        已有帐号? <a href="{{route('login')}}">登录</a>
                         . <a href="/">返回首页</a>
                     </small>
                 </div>
@@ -65,11 +64,9 @@
             //按钮
             el: '#bt',
             //后台链接
-            url: '{{route('common.code.send')}}',
+            url: '{{route('password.reset.code')}}',
             //验证码等待发送时间
             timeout: '{{config_get('admin.base.code_expire')}}',
-            //POST表单数据
-            data: {"_token": "{{ csrf_token() }}"},
             //表单，手机号或邮箱的INPUT表单
             input: '[name="account"]'
         };

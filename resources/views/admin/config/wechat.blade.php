@@ -5,7 +5,7 @@
             @csrf @method('PUT')
             <div class="card small">
                 <div class="card-body">
-                    @include('admin.layouts._config_menu')
+                    @include('admin.config.layouts._menu')
                     <div class="card">
                         <div class="card-header">
                             <strong>基本配置</strong>

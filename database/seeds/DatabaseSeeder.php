@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EduCategorySeeder::class);
         $this->call(EduTopicSeeder::class);
         $this->call(EduTagSeeder::class);
+        $this->call(EduShopSeeder::class);
     }
 }

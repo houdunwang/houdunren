@@ -41,7 +41,7 @@
                 </div>
                 <div class="text-center">
                     <small class="text-muted text-center">
-                        没有帐号? <a href="{{route('register')}}">注册</a>. <a href="{{route('findPassword')}}">找回密码</a>
+                        没有帐号? <a href="{{route('register')}}">注册</a>. <a href="{{route('password.reset')}}">找回密码</a>
                         . <a href="/">返回首页</a>
                     </small>
                 </div>

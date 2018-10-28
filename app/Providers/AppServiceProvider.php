@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\Controllers\Content\System\Tag;
+use Houdunwang\Alipay\AliPay;
 use Houdunwang\Aliyun\Aliyun;
 use Houdunwang\WeChat\WeChat;
 use Illuminate\Support\ServiceProvider;
@@ -28,14 +29,9 @@ class AppServiceProvider extends ServiceProvider
 
     protected function loadConfig()
     {
-        //阿里云
-        Aliyun::config([
-            'regionId' => config('aliyun.regionId'),
-            'accessId' => config('aliyun.accessId'),
-            'accessKey' => config('aliyun.accessKey'),
-        ]);
-        //微信公众号
-        WeChat::config(config('hd_wechat'));
+        Aliyun::config(config_get('admin.aliyun', []));
+        WeChat::config(config('hd_wechat', []));
+        AliPay::config(config_get('admin.alipay'));
     }
 
     /**

@@ -43,7 +43,7 @@
                                 <td>{{$lesson['updated_at']->format('Y/m/d')}}</td>
                                 <td class="text-center">
                                 <span class="badge badge-light">
-                                    {{$lesson->video()->count()}}
+                                    {{$lesson->video_num}}
                                 </span>
                                 </td>
                                 <td>

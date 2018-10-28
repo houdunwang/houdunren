@@ -30,6 +30,12 @@
         </a>
     </li>
     <li class="nav-item">
+        <a href="{{route('admin.config.edit',['name'=>'alipay'])}}"
+           class="nav-link mr-3 {{active_class(if_route_param('name','alipay'))}}">
+            支付宝
+        </a>
+    </li>
+    <li class="nav-item">
         <a href="{{route('admin.config.edit',['name'=>'base'])}}"
            class="nav-link mr-3 {{active_class(if_route_param('name','base'))}}">
             其他配置

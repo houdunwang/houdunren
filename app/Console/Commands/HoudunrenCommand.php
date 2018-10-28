@@ -24,9 +24,8 @@ class HoudunrenCommand extends Command
     public function handle()
     {
         $this->user();
-//        $this->lesson();
-//        $this->video();
-
+        $this->lesson();
+        $this->video();
     }
 
     protected function user()
@@ -59,8 +58,7 @@ class HoudunrenCommand extends Command
                     'id' => $video->video_id,
                     'title' => $video->video_title,
                     'path' => $video->video_path,
-                    'lesson_id' => $video->lesson_id,
-                    'user_id' => 1,
+                    'lesson_id' => $video->lesson_id
                 ]);
             }
         });

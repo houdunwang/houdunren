@@ -11,16 +11,18 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Requests\RegisterRequest;
+use App\Servers\CodeServer;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+
     public function create()
     {
         return view('member.register');
@@ -41,5 +43,22 @@ class RegisterController extends Controller
             return redirect(route('login'))->with('success', '帐号注册成功');
         }
         return back()->with('error', '注册失败');
+    }
+
+    /**
+     * 发送验证码
+     * @param Request $request
+     * @param CodeServer $codeServer
+     * @param User $user
+     * @return array
+     * @throws \App\Exceptions\ValidException
+     */
+    public function code(Request $request, CodeServer $codeServer, User $user)
+    {
+        if ($user->getUserByAccount($request['username'])) {
+            return ['code' => 403, 'message' => '帐号已经存在'];
+        }
+        $codeServer->send($request['username']);
+        return ['code' => 0, 'message' => '验证码发送成功'];
     }
 }

@@ -11,8 +11,6 @@
 namespace App;
 
 use App\Models\Attachment;
-use App\Models\EduUserVideo;
-use App\Models\EduVideo;
 use App\Models\Zan;
 use App\Observers\UserObserver;
 use Illuminate\Notifications\Notifiable;
@@ -92,8 +90,33 @@ class User extends Authenticatable
         return $email ? $query->where('email', $email) : $query;
     }
 
+    /**
+     * 根据手机号获取用户
+     * @param $query
+     * @param $mobile
+     * @return mixed
+     */
     public function scopeByMobile($query, $mobile)
     {
         return $mobile ? $query->where('mobile', $mobile) : $query;
+    }
+
+    /**
+     * 根据邮箱或手机获取帐号
+     * @param $account
+     * @return mixed
+     */
+    public function getUserByAccount($account)
+    {
+        return $this->where('email', $account)->orWhere('mobile', $account)->first();
+    }
+
+    /**
+     * 获取会员头像
+     * @return string
+     */
+    public function getAvatarAttribute()
+    {
+        return $this->icon ?? asset('images/user.jpg');
     }
 }
