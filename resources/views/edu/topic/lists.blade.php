@@ -27,8 +27,7 @@
                                         <div class="col-auto">
                                             <a href="{{route('member.user.show',$topic->user)}}">
                                                 <img class="u-avatar u-sm-avatar--bordered rounded-circle"
-                                                     src="{{$topic->user->icon}}"
-                                                     alt="{{$topic->title}}">
+                                                     src="{{$topic->user->avatar}}">
                                             </a>
                                         </div>
                                         <div class="col ml--2">

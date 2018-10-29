@@ -32,9 +32,12 @@ class ResetPasswordController extends Controller
         //邮箱或手机号
         $session = session()->get('_code');
         $user = $user->getUserByAccount($session['account']);
-        $user['password'] = bcrypt($request['password']);
-        $user->save();
-        return redirect(route('login'))->with('success', '密码重置成功');
+        if ($user) {
+            $user['password'] = bcrypt($request['password']);
+            $user->save();
+            return redirect(route('login'))->with('success', '密码重置成功');
+        }
+        return redirect(route('password.reset'))->with('error', '帐号不存在');
     }
 
     /**

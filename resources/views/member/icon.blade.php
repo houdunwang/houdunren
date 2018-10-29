@@ -9,7 +9,8 @@
                     <h4>头像设置</h4>
                 </div>
                 <div class="card-body  text-center">
-                    <input type="hidden" class="form-control  form-control-sm" name="icon" readonly="" value="{{auth()->user()->icon}}">
+                    <input type="hidden" class="form-control  form-control-sm" name="icon" readonly=""
+                           value="{{auth()->user()->icon}}">
                     <div class="avatar avatar-xxl mb-2" onclick="upImagePc(this)">
                         <img src="{{auth()->user()->icon}}" alt="..." class="avatar-img rounded-circle">
                     </div>
@@ -36,7 +37,7 @@
                     $("[name='icon']").val(images[0]);
                     $(".avatar img").attr('src', images[0]);
                     $("#form-icon").submit();
-                }, {width: 700, extensions: 'jpg,jpeg,png,gif,JPG', fileSingleSizeLimit: 200 * 1024, multiple: true})
+                }, {width: 700, fileSingleSizeLimit: 200 * 1024, multiple: true})
             });
         }
     </script>

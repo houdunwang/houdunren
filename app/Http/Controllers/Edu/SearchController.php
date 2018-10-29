@@ -30,6 +30,7 @@ class SearchController extends Controller
             default:
                 return back()->with('error', '参数错误');
         }
+
         return view('edu.search.lists', compact('data'));
     }
 }

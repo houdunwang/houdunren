@@ -68,7 +68,7 @@
                                 <div>
                                     @foreach($topic->zan as $zan)
                                         <div class="avatar">
-                                            <img src="{{$zan->user->icon}}" class="u-avatar rounded-circle">
+                                            <img src="{{$zan->user->avatar}}" class="u-avatar rounded-circle">
                                         </div>
                                     @endforeach
                                 </div>
@@ -89,7 +89,7 @@
                     <div class="card-block text-center p-5">
                         <div class="avatar avatar-xl">
                             <a href="{{route('member.user.show',$topic->user)}}">
-                                <img src="{{$topic->user->icon}}" class="u-xl-avatar rounded-circle">
+                                <img src="{{$topic->user->avatar}}" class="u-xl-avatar rounded-circle">
                             </a>
                         </div>
                     </div>

@@ -3,7 +3,7 @@
         <div class="row justify-content-sm-between align-items-sm-center">
             <div class="col-sm-10 mb-2 mb-sm-0" style="font-size: 14px;">
                 <a href="{{route('member.user.show',$field->user)}}">
-                    <img class="u-avatar rounded-circle mr-3" src="{{$field->user->icon}}">
+                    <img class="u-avatar rounded-circle mr-3" src="{{$field->user->avatar}}">
                 </a>
                 <a href="{{route('edu.topic.show',$field)}}" class="text-dark">
                     {{$field->title}}

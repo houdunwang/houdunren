@@ -45,7 +45,7 @@
                         <div class="card-footer">
                             <div class="row align-items-center">
                                 <div class="col-auto">
-                                    <a href="profile-posts.html" class="avatar avatar-lg">
+                                    <a href="{{route('member.user.show',$video->lesson->user)}}" class="avatar avatar-lg">
                                         <img src="{{$video->lesson->user->icon}}"
                                              class="u-avatar avatar-img rounded-circle">
                                     </a>

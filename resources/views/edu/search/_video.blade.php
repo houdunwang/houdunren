@@ -3,11 +3,11 @@
         <div class="row justify-content-sm-between align-items-sm-center">
             <div class="col-sm-10 mb-2 mb-sm-0" style="font-size: 14px;text-overflow:ellipsis;overflow: hidden;">
                 <div class="row">
-                    <div class="col-12 col-sm-1">
-                        <a href="{{route('member.user.show',$field->user)}}">
-                            <img class="u-avatar rounded-circle mr-3" src="{{$field->user->icon}}">
-                        </a>
-                    </div>
+                    {{--<div class="col-12 col-sm-1">--}}
+                        {{--<a href="{{route('member.user.show',$field->user)}}">--}}
+                            {{--<img class="u-avatar rounded-circle mr-3" src="{{$field->user->icon}}">--}}
+                        {{--</a>--}}
+                    {{--</div>--}}
                     <div class="col-12 col-sm-11">
                         <a href="{{route('edu.video.show',$field)}}" class="text-dark">
                             {{$field->title}}
