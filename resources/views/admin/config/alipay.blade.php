@@ -9,7 +9,7 @@
                 <div class="card-body">
                     @include('admin.config.layouts._menu')
                     <div class="alert alert-light small" role="alert">
-                        具体配置项的含义可查看 <a href="https://github.com/houdunwang/alipay">https://github.com/houdunwang/alipay</a>
+                        具体配置项的含义可查看 <a target="_blank" href="https://github.com/houdunwang/alipay">https://github.com/houdunwang/alipay</a>
                     </div>
                     <div class="form-group">
                         <label>应用ID</label>
@@ -37,13 +37,13 @@
                     </div>
                     <div class="form-group">
                         <label>商户私钥</label>
-                        <textarea rows="5" class="form-control"
+                        <textarea rows="3" class="form-control"
                                   name="merchant_private_key">{{config_get('admin.alipay.merchant_private_key')}}</textarea>
                         <span class="help-block text-muted small">merchant_private_key：使用支付宝提供的签名生成工具创建，注意不要有换行</span>
                     </div>
                     <div class="form-group">
                         <label>支付宝公钥</label>
-                        <textarea rows="5" class="form-control"
+                        <textarea rows="3" class="form-control"
                                   name="alipay_public_key">{{config_get('admin.alipay.alipay_public_key')}}</textarea>
                         <span class="help-block text-muted small">
                             alipay_public_key：支付宝公钥,查看地址：https://openhome.alipay.com/platform/keyManage.htm 对应APPID下的支付宝公钥。使用支付宝提供的签名生成工具创建,，注意不要有换行

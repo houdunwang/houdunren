@@ -26,7 +26,7 @@ class ContentModuleRequest extends FormRequest
         //修改时模块对象
         $module = \Route::current()->parameter('module');
         return [
-            'domain' => 'nullable|url|unique:modules,domain,' . $module['id'],
+            'domain' => 'nullable|unique:modules,domain,' . $module['id'],
         ];
     }
 }

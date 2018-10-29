@@ -10,13 +10,13 @@ use Illuminate\Console\Command;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class InitCommand extends Command
+class ModuleInitCommand extends Command
 {
     //命令
-    protected $signature = 'hdcms-init';
+    protected $signature = 'hdcms-module-init';
 
     //命令描述
-    protected $description = '生成模块缓存';
+    protected $description = '生成模块初始数据';
 
     public function __construct()
     {
@@ -26,7 +26,7 @@ class InitCommand extends Command
     //命令执行入口
     public function handle()
     {
-        \Artisan::call('migrate:refresh', ['--seed'=>'default']);
+//        \Artisan::call('migrate:refresh', ['--seed'=>'default']);
         $this->modules(glob(base_path() . '/app/Http/Controllers/*'), 1);
 
         //设置站长权限

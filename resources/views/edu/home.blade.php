@@ -32,9 +32,7 @@
                 </div>
                 <div class="row justify-content-lg-center">
                     <div class="col-md-6 col-lg-5 mb-7 mb-md-0">
-                        <!-- Icon Block -->
                         <article class="bg-white text-center border rounded p-7">
-                            <!-- SVG Icon -->
                             <figure class="w-75 mx-auto mb-6">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                                      y="0px"
@@ -1135,7 +1133,7 @@
                                          src="{{asset('images/avatar/1.jpeg')}}" alt="Image Description">
                                 </div>
                                 <div class="media-body">
-                                    <h4 class="h6 mb-1">Maria Muszynska</h4>
+                                    <h4 class="h6 mb-1">清****</h4>
                                     <ul class="list-inline text-warning small">
                                         <li class="list-inline-item mx-0">
                                             <span class="fa fa-star"></span>
@@ -1196,7 +1194,7 @@
                     <div class="js-slide mb-1">
                         <div class="d-flex align-items-start flex-column bg-white border rounded p-5">
                             <div class="mb-auto">
-                                <p>向军老师很实在，由浅入深，讲得非常棒，期待下次直播课，向老师讲的好，容易懂。</p>
+                                <p>老师很实在，由浅入深，讲得非常棒，容易懂，期待老师的下次直播课。</p>
                             </div>
                             <div class="media">
                                 <div class="d-flex mr-3">
@@ -1204,7 +1202,7 @@
                                          src="{{asset('images/avatar/3.gif')}}" alt="Image Description">
                                 </div>
                                 <div class="media-body">
-                                    <h4 class="h6 mb-1">Mark McManus</h4>
+                                    <h4 class="h6 mb-1">阿****</h4>
                                     <ul class="list-inline text-warning small">
                                         <li class="list-inline-item mx-0">
                                             <span class="fa fa-star"></span>

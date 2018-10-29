@@ -11,10 +11,13 @@
                 京ICP备12048441号-3
             </small>
             <p class="small text-secondary">
-                <i class="fa fa-phone-square" aria-hidden="true"></i> : 010-86467608
-                <i class="fa fa-telegram" aria-hidden="true"></i> : <a href="mailto:2300071698@qq.com" class="text-secondary">2300071698@qq.com</a>
+                <i class="fa fa-phone-square" aria-hidden="true"></i> : {{config_get('admin.site.tel')}}
+                <i class="fa fa-telegram ml-2" aria-hidden="true"></i> :
+                <a href="mailto:{{config_get('admin.site.email')}}" class="text-secondary">
+                    {{config_get('admin.site.email')}}
+                </a>
                 <br>
-                编码: <a href="http://www.aoxiangjun.com">向军大叔</a> By: <a href="http://www.hdcms.com">HDCMS</a>
+                {{--编码: <a href="http://www.aoxiangjun.com">向军大叔</a> By: <a href="http://www.hdcms.com">HDCMS</a>--}}
             </p>
         </div>
     </div>
@@ -71,3 +74,5 @@
         })
     })
 </script>
+
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=63802236" charset="UTF-8"></script>

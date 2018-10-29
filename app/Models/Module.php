@@ -41,7 +41,7 @@ class Module extends Model
      */
     public function getEntranceByDomain()
     {
-        $domain = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'];
+        $domain = $_SERVER['HTTP_HOST'];
         $module = self::where('domain', $domain)->first();
         if ($module) {
             $class = ($module['system'] ? 'App\Http\Controllers' : 'Addons') . '\\' . $module['name'] . '\\HomeController';

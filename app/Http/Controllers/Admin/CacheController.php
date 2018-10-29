@@ -16,7 +16,7 @@ class CacheController extends Controller
     public function update()
     {
         //模块缓存
-        Artisan::call('hdcms-init');
+        Artisan::call('hdcms-module-init');
         //权限缓存
         app()['cache']->forget('spatie.permission.cache');
         return back()->with('success', '缓存更新成功');

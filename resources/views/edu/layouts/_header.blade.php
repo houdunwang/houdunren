@@ -74,38 +74,38 @@
                                 碎片
                             </a>
                         </li>
-                        <li class="nav-item hs-has-sub-menu u-header__nav-item"
-                            data-event="hover"
-                            data-animation-in="slideInUp"
-                            data-animation-out="fadeOut">
-                            <a id="blogMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"
-                               aria-haspopup="true"
-                               aria-expanded="false"
-                               aria-labelledby="blogSubMenu">
-                                系列
-                                <span class="fa fa-angle-down u-header__nav-link-icon"></span>
-                            </a>
+                        {{--<li class="nav-item hs-has-sub-menu u-header__nav-item"--}}
+                            {{--data-event="hover"--}}
+                            {{--data-animation-in="slideInUp"--}}
+                            {{--data-animation-out="fadeOut">--}}
+                            {{--<a id="blogMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"--}}
+                               {{--aria-haspopup="true"--}}
+                               {{--aria-expanded="false"--}}
+                               {{--aria-labelledby="blogSubMenu">--}}
+                                {{--系列--}}
+                                {{--<span class="fa fa-angle-down u-header__nav-link-icon"></span>--}}
+                            {{--</a>--}}
 
-                            <!-- Blog - Submenu -->
-                            <ul id="blogSubMenu" class="list-inline hs-sub-menu u-header__sub-menu py-3 mb-0"
-                                style="min-width: 220px;"
-                                aria-labelledby="blogMegaMenu">
-                                <!-- Classic -->
-                                <li class="dropdown-item hs-has-sub-menu">
-                                    <a id="navLinkBlogClassic"
-                                       class="nav-link u-header__sub-menu-nav-link u-list__link py-2"
-                                       href="http://houdunren.com">
-                                        PHP编程零基础入门到提高
-                                    </a>
-                                    <a id="navLinkBlogClassic"
-                                       class="nav-link u-header__sub-menu-nav-link u-list__link py-2"
-                                       href="http://houdunren.com">
-                                        Laravel框架开发系列
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- End Submenu -->
-                        </li>
+                            {{--<!-- Blog - Submenu -->--}}
+                            {{--<ul id="blogSubMenu" class="list-inline hs-sub-menu u-header__sub-menu py-3 mb-0"--}}
+                                {{--style="min-width: 220px;"--}}
+                                {{--aria-labelledby="blogMegaMenu">--}}
+                                {{--<!-- Classic -->--}}
+                                {{--<li class="dropdown-item hs-has-sub-menu">--}}
+                                    {{--<a id="navLinkBlogClassic"--}}
+                                       {{--class="nav-link u-header__sub-menu-nav-link u-list__link py-2"--}}
+                                       {{--href="http://houdunren.com">--}}
+                                        {{--PHP编程零基础入门到提高--}}
+                                    {{--</a>--}}
+                                    {{--<a id="navLinkBlogClassic"--}}
+                                       {{--class="nav-link u-header__sub-menu-nav-link u-list__link py-2"--}}
+                                       {{--href="http://houdunren.com">--}}
+                                        {{--Laravel框架开发系列--}}
+                                    {{--</a>--}}
+                                {{--</li>--}}
+                            {{--</ul>--}}
+                            {{--<!-- End Submenu -->--}}
+                        {{--</li>--}}
                         <!-- Home -->
                         <li class="nav-item hs-has-mega-menu u-header__nav-item"
                             data-event="hover"
@@ -165,47 +165,47 @@
                         </li>
                         <!-- End Home -->
                         <!-- Blog -->
-                        <li class="nav-item hs-has-sub-menu u-header__nav-item"
-                            data-event="hover"
-                            data-animation-in="slideInUp"
-                            data-animation-out="fadeOut">
-                            <a id="blogMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"
-                               aria-haspopup="true"
-                               aria-expanded="false"
-                               aria-labelledby="blogSubMenu">
-                                手册
-                                <span class="fa fa-angle-down u-header__nav-link-icon"></span>
-                            </a>
+                        {{--<li class="nav-item hs-has-sub-menu u-header__nav-item"--}}
+                            {{--data-event="hover"--}}
+                            {{--data-animation-in="slideInUp"--}}
+                            {{--data-animation-out="fadeOut">--}}
+                            {{--<a id="blogMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"--}}
+                               {{--aria-haspopup="true"--}}
+                               {{--aria-expanded="false"--}}
+                               {{--aria-labelledby="blogSubMenu">--}}
+                                {{--手册--}}
+                                {{--<span class="fa fa-angle-down u-header__nav-link-icon"></span>--}}
+                            {{--</a>--}}
 
-                            <!-- Blog - Submenu -->
-                            <ul id="blogSubMenu" class="list-inline hs-sub-menu u-header__sub-menu py-3 mb-0"
-                                style="min-width: 220px;"
-                                aria-labelledby="blogMegaMenu">
-                                <!-- Classic -->
-                                <li class="dropdown-item hs-has-sub-menu">
-                                    <a id="navLinkBlogClassic"
-                                       class="nav-link u-header__sub-menu-nav-link u-list__link py-2"
-                                       href="http://houdunren.com">
-                                        Laravel开源框架
-                                    </a>
-                                    <a id="navLinkBlogClassic"
-                                       class="nav-link u-header__sub-menu-nav-link u-list__link py-2"
-                                       href="http://houdunren.com">
-                                        hdcms模块化内容管理系统
-                                    </a>
-                                    <a id="navLinkBlogClassic"
-                                       class="nav-link u-header__sub-menu-nav-link u-list__link py-2"
-                                       href="http://houdunren.com">
-                                        hdjs前端组件库
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                            {{--<!-- Blog - Submenu -->--}}
+                            {{--<ul id="blogSubMenu" class="list-inline hs-sub-menu u-header__sub-menu py-3 mb-0"--}}
+                                {{--style="min-width: 220px;"--}}
+                                {{--aria-labelledby="blogMegaMenu">--}}
+                                {{--<!-- Classic -->--}}
+                                {{--<li class="dropdown-item hs-has-sub-menu">--}}
+                                    {{--<a id="navLinkBlogClassic"--}}
+                                       {{--class="nav-link u-header__sub-menu-nav-link u-list__link py-2"--}}
+                                       {{--href="http://houdunren.com">--}}
+                                        {{--Laravel开源框架--}}
+                                    {{--</a>--}}
+                                    {{--<a id="navLinkBlogClassic"--}}
+                                       {{--class="nav-link u-header__sub-menu-nav-link u-list__link py-2"--}}
+                                       {{--href="http://houdunren.com">--}}
+                                        {{--hdcms模块化内容管理系统--}}
+                                    {{--</a>--}}
+                                    {{--<a id="navLinkBlogClassic"--}}
+                                       {{--class="nav-link u-header__sub-menu-nav-link u-list__link py-2"--}}
+                                       {{--href="http://houdunren.com">--}}
+                                        {{--hdjs前端组件库--}}
+                                    {{--</a>--}}
+                                {{--</li>--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
 
                         <!-- Starter - Link -->
                         <li class="nav-item">
                             <a class="nav-link u-header__nav-link text-primary" href="{{route('edu.dynamic.index')}}">
-                                <strong>社区</strong>
+                                <strong>动态</strong>
                             </a>
                         </li>
                         <li class="nav-item hs-has-sub-menu u-header__nav-item"

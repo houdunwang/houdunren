@@ -13,7 +13,7 @@
                     </div>
                     <div class="form-group">
                         <label class="mb-1">accessId</label>
-                        <input type="password" class="form-control" name="accessId"
+                        <input type="text" class="form-control" name="accessId"
                                value="{{config_get('admin.aliyun.accessId')}}" placeholder="登录阿里云后台查看">
                     </div>
                     <div class="form-group">

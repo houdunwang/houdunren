@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -49,6 +50,15 @@ class Handler extends ExceptionHandler
         if ($exception instanceof UploadException) {
             return $exception->render();
         }
+//        if ($exception instanceof ModelNotFoundException) {
+//            $exception = new NotFoundHttpException($exception->getMessage(), $exception);
+//        }
+//
+//        if($exception instanceof \Symfony\Component\Debug\Exception\FatalErrorException
+//            ) {
+//            return response()->view('errors.default', [], 500);
+//        }
+
         return parent::render($request, $exception);
     }
 }

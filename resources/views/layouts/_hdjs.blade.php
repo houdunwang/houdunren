@@ -46,5 +46,5 @@
         }
     };
 </script>
-<script src="{{asset('org/hdjs/require.js')}}"></script>
-<script src="{{asset('org/hdjs/config.js')}}"></script>
+<script src="{{asset('org/hdjs/require.js')}}?version=5.0.2"></script>
+<script src="{{asset('org/hdjs/config.js')}}?version=5.0.2"></script>

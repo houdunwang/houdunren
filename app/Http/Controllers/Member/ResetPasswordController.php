@@ -30,8 +30,8 @@ class ResetPasswordController extends Controller
     public function update(PasswordResetRequest $request, User $user)
     {
         //邮箱或手机号
-        $session = session()->get('validate_code');
-        $user = $user->getUserByAccount($session['username']);
+        $session = session()->get('_code');
+        $user = $user->getUserByAccount($session['account']);
         $user['password'] = bcrypt($request['password']);
         $user->save();
         return redirect(route('login'))->with('success', '密码重置成功');

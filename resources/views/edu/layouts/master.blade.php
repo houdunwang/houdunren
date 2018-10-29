@@ -24,7 +24,7 @@
 <body>
 @include('edu.layouts._header')
 <div class="alert alert-light text-center m-0 small" role="alert">
-    感谢大家一如既往对后盾人的支持，当前网站版本为公测版，使用中发现问题请向我们 <a href="mailto:2300071698@qq.com">发送邮件</a> 进行反馈。
+    感谢大家一如既往对后盾人的支持，当前网站版本为公测版，使用中发现问题请向我们 <a href="mailto:{{config_get('admin.site.email')}}">发送邮件</a> 进行反馈。
     老用户请使用 <a href="{{route('password.reset')}}">找回密码</a> 功能更新密码后登录。
 </div>
 @yield('content')
