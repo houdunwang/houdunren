@@ -6,7 +6,7 @@
                 <div class="col">
 
                     <!-- Title -->
-                    <h4 class="card-header-title">
+                    <h4 class="card-header-title ">
                         我的文档
                     </h4>
 
@@ -20,6 +20,7 @@
             </div> <!-- / .row -->
         </div>
         <div class="card-body">
+            @if(count($documents))
             <!-- List -->
             <ul class="list-group list-group-lg list-group-flush list my--4">
                 @foreach($documents as $document)
@@ -39,23 +40,31 @@
 
                             </div>
                             <div class="col-auto">
-                                <a href="{{route('edu.document.edit',$document)}}"
-                                   class="btn btn-sm btn-white d-none d-md-inline-block">
-                                    编辑
-                                </a>
-                                <a href="javascript:void(0);" class="btn btn-sm btn-white d-none d-md-inline-block">
-                                    删除
-                                </a>
-                                <form action="{{route('edu.document.destroy',$document)}}" method="post">
-                                    @csrf @method('DELETE')
-                                </form>
+                                @can('update',$document)
+                                    <a href="{{route('edu.document.edit',$document)}}"
+                                       class="btn btn-sm btn-white d-none d-md-inline-block">
+                                        编辑
+                                    </a>
+                                @endcan
+                                @can('delete',$document)
+                                    <a href="javascript:void(0);" onclick="del(this)" class="btn btn-sm btn-white d-none d-md-inline-block">
+                                        删除
+                                    </a>
+                                    <form action="{{route('edu.document.destroy',$document)}}" method="post">
+                                        @csrf @method('DELETE')
+                                    </form>
+                                @endcan
                             </div>
                         </div>
                     </li>
                 @endforeach
             </ul>
+                @else
+                <div class="text-center pt-5 pb-5 text-muted">文档列表为空</div>
+            @endif
         </div>
     </div>
+    {!! $documents->links() !!}
 @endsection
 @push('js')
     <script>

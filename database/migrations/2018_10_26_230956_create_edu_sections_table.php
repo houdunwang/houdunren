@@ -15,8 +15,8 @@ class CreateEduSectionsTable extends Migration
     {
         Schema::create('edu_sections', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->mediumText('content')->comment('内容');
+            $table->string('title')->nullable();
+            $table->mediumText('content')->nullable()->comment('内容');
             $table->unsignedInteger('chapter_id')->index()->comment('文档编号');
             $table->foreign('chapter_id')->references('id')->on('edu_chapters')->onDelete('cascade');
             $table->timestamps();

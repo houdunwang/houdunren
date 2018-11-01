@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Edu;
 
-use App\Http\Requests\SectionRequest;
+use App\Http\Requests\EduSectionRequest;
 use App\Models\EduChapter;
-use App\Models\EduDocument;
 use App\Models\EduSection;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,86 +14,50 @@ class EduSectionController extends Controller
 
     public function __construct(Request $request)
     {
+    	$this->middleware('auth',[
+    		'except'=>['show'],
+		]);
         if ($chapter = $request->query('chapter_id')) {
             $this->chapter = EduChapter::findOrFail($chapter);
         }
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function create(Request $request,EduSection $section)
     {
-        //
+    	$section->title = '请输入节标题';
+    	$section->content = '请输入节内容';
+    	$section->chapter_id = $this->chapter->id;
+    	$section->save();
+		return redirect(route('edu.section.edit', [$section, 'chapter_id' => $this->chapter]));
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
+    public function show(EduSection $section)
     {
-        return view('edu.document.section_create', ['chapter' => $this->chapter]);
+        return view('edu.document.section_show',compact('section'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(SectionRequest $request)
-    {
-        $section = EduSection::create($request->all());
-        return redirect(route('edu.section.edit', [$section, 'chapter_id' => $this->chapter]));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\EduSection $eduSection
-     * @return \Illuminate\Http\Response
-     */
-    public function show(EduSection $eduSection)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\EduSection $eduSection
-     * @return \Illuminate\Http\Response
-     */
     public function edit(EduSection $section)
     {
+		$this->authorize('update', $section);
         return view('edu.document.section_edit', ['section' => $section, 'chapter' => $this->chapter]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\EduSection $eduSection
-     * @return \Illuminate\Http\Response
-     */
-    public function update(SectionRequest $request, EduSection $section)
+    public function update(EduSectionRequest $request, EduSection $section)
     {
+		$this->authorize('update', $section);
         $section->update($request->all());
-        return back()->with('success', '修改成功');
+
+		return $request->expectsJson()
+			? response()->json(['message' => '已自动保存','code'=>1])
+			: back()->with( 'success' , '修改成功' );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\EduSection $eduSection
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(EduSection $eduSection)
+    public function destroy(Request $request,EduSection $section)
     {
-        //
+		$this->authorize('delete', $section);
+		$section->delete();
+		$chapter = $request->query('chapter_id');
+		return redirect(route('edu.chapter.edit',$chapter))->with( 'success' , '删除成功' );
     }
 }

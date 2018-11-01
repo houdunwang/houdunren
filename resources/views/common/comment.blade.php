@@ -30,7 +30,7 @@
                 <div class="row mb-2">
                     <div class="col-auto">
                         <a class="avatar" :href="'/member/user/'+comment.user.id">
-                            <img :src="comment.user.icon" class="u-avatar avatar-img rounded-pseudo">
+                            <img :src="comment.user.icon?comment.user.icon:'/images/user.jpg'" class="u-avatar avatar-img rounded-pseudo">
                         </a>
                     </div>
                     <div class="col ml-0 pl-0">
@@ -51,7 +51,7 @@
         <div class="card-body pl-3 pr-3 pt-0">
             <div class="row" style="border-top:1px solid #edf2f9;">
                 <div class="col-12">
-                    <div class="comment-text pb-3 pt-3" v-html="comment.content"></div>
+                    <div class="comment-text pb-3 pt-3 markdown" v-html="comment.content"></div>
                 </div>
             </div>
         </div>
@@ -73,7 +73,8 @@
         <div class="card col-sm-12 p-0 mt-5 rounded-0">
             <div class="card-body p-2">
                 <div class="alert alert-light small rounded-0" role="alert">
-                    <i class="fa fa-warning" aria-hidden="true"></i> 请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。
+                    <i class="fa fa-warning" aria-hidden="true"></i> 请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。<br>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i> 支持拖放与粘贴图片
                 </div>
                 <form @submit.prevent="send">
                     <div class="form-group">
@@ -174,9 +175,11 @@
                 parseMarkdown() {
                     require(['hdjs', 'marked', 'highlight'], function (hdjs, marked) {
                         $(document).ready(function () {
-                            $('pre code').each(function (i, block) {
-                                hljs.highlightBlock(block);
-                            });
+                            $(".comment-text").each(function(k,comment){
+                                $('pre code').each(function (i, block) {
+                                    hljs.highlightBlock(block);
+                                });
+                            })
                         });
                     })
                 },

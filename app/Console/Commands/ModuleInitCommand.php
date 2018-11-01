@@ -26,7 +26,6 @@ class ModuleInitCommand extends Command
     //命令执行入口
     public function handle()
     {
-//        \Artisan::call('migrate:refresh', ['--seed'=>'default']);
         $this->modules(glob(base_path() . '/app/Http/Controllers/*'), 1);
 
         //设置站长权限

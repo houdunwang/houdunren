@@ -1229,8 +1229,8 @@
         </div>
         <div class="container text-center u-space-3">
             <div class="w-md-60 text-center mx-auto mb-6">
-                <h2 class="font-weight-medium">已经有 <strong class="text-primary">{{\App\User::count()}}</strong>
-                    编程爱好者与你此相遇
+                <h2 class="font-weight-medium">已有 <strong class="text-primary">{{\App\User::count()}}</strong>
+                    位编程爱好者与你共同学习
                 </h2>
             </div>
             <div class="mb-6">

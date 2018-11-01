@@ -40,19 +40,23 @@
                     <div class="row align-items-end">
                         <div class="col-auto">
                             <div class="avatar avatar-xxl header-avatar-top">
-                                <img src="{{$user['icon']}}" alt="..."
+                                <img src="{{$user['avatar']}}"
                                      class="avatar-img rounded border border-4 border-body">
                             </div>
                         </div>
                         <div class="col mb-3 ml--3 ml-md--2">
                             <h6 class="header-pretitle">
-                                {{--普通会员--}}
+                                第 {{$user['id']}} 位会员
                             </h6>
                             <h1 class="header-title">
                                 {{$user['name']}}
                             </h1>
                         </div>
                         <div class="col-12 col-md-auto mt-2 mt-md-0 mb-md-3">
+                            <a class="btn btn-info d-block d-md-inline-block btn-sm"
+                               href="/">
+                              <i class="fa fa-home" aria-hidden="true"></i>  返回首页
+                            </a>
                             @can('follow',$user)
                                 @if(auth()->user()->following($user))
                                     <a class="btn btn-primary d-block d-md-inline-block btn-sm"

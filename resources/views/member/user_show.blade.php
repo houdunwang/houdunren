@@ -2,7 +2,7 @@
 @section('content')
     <div class="row">
         <div class="col-12 col-xl-8">
-            @foreach($fans = $user->fans()->paginate(1) as $fan)
+            @foreach($fans = $user->fans()->paginate(10) as $fan)
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="row align-items-center">
@@ -16,7 +16,7 @@
                                     <a href="{{route('member.user.show',$fan)}}">{{$fan['name']}}</a>
                                 </h4>
                                 <p class="card-text small text-muted mb-1 mt-3">
-                                    @include('member.layouts._community',$fan)
+                                    @include('member.layouts._community',['user'=>$fan])
                                 </p>
                                 {{--<p class="card-text small">--}}
                                 {{--<span class="text-success">●</span> {{$fan->fans->count()}}--}}

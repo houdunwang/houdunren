@@ -66,6 +66,11 @@
   font-size: 38px;
 }
 
+.edu-topic-show img {
+  max-width: 100%;
+  margin: 10px 0;
+}
+
 .chat-news-create,
 .chat-news-edit {
   width: 300px;

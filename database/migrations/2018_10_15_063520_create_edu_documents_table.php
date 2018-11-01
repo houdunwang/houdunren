@@ -17,9 +17,8 @@ class CreateEduDocumentsTable extends Migration
             $table->increments('id');
 			$table->string('title')->comment('文档标题');
 			$table->text('content')->commetn('文档介绍');
-//			$table->text('menus')->comment('文档列表');
 			$table->integer('user_id')->index()->comment('用户id');
-			$table->tinyInteger('flag')->nullable()->comment('1热门,2推荐,3正常');
+			$table->tinyInteger('flag')->nullable()->comment('1置顶');
             $table->timestamps();
         });
     }

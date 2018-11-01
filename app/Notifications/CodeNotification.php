@@ -51,7 +51,6 @@ class CodeNotification extends Notification
 //            ->action('Notification Action', url('/'))
 //            ->line('Thank you for using our application!');
         return (new MailMessage)
-            ->replyTo('2300071698@qq.com')
             ->subject(config_get('admin.site.webname').'身份验证码')
             ->line('您的验证码是' . $this->code);
     }

@@ -20,3 +20,12 @@
         </form>
     </div>
 @endsection
+@push('js')
+    <script>
+        require(['hdjs'],function(hdjs){
+            $('input[name=title]').keyup(function () {
+                $('#chapter_{{$chapter["id"]}}').html($(this).val());
+            })
+        })
+    </script>
+@endpush

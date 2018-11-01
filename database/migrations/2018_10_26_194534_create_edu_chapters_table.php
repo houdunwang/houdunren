@@ -16,8 +16,6 @@ class CreateEduChaptersTable extends Migration
         Schema::create('edu_chapters', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->comment('章节标题');
-//            $table->text('content')->comment('内容');
-//            $table->tinyInteger('level')->default(1)->comment('1:章 2:节');
             $table->unsignedInteger('document_id')->index()->comment('文档编号');
             $table->foreign('document_id')->references('id')->on('edu_documents')->onDelete('cascade');
             $table->timestamps();

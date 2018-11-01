@@ -36,7 +36,8 @@
                             </h2>
                             <p class="text-muted mb-1 text-muted small">
                                 <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">
-                                    <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{$topic->user->name}}
+                                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                    <a href="{{route('member.user.show',$topic->user)}}">{{$topic->user->name}}</a>
                                 </a>
                                 <i class="fa fa-clock-o ml-2" aria-hidden="true"></i>
                                 {{$topic->updated_at->diffForHumans()}}
@@ -66,11 +67,13 @@
                                     @endif
                                 @endauth
                                 <div>
+                                    <div class="avatar">
                                     @foreach($topic->zan as $zan)
-                                        <div class="avatar">
+                                            <a href="{{route('member.user.show',$zan->user)}}">
                                             <img src="{{$zan->user->avatar}}" class="u-avatar rounded-circle">
-                                        </div>
+                                            </a>
                                     @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +87,9 @@
             <div class="col-12 col-xl-3">
                 <div class="card">
                     <div class="card-header">
-                        {{$topic->user->name}}
+                        <div class="text-center">
+                            {{$topic->user->name}}
+                        </div>
                     </div>
                     <div class="card-block text-center p-5">
                         <div class="avatar avatar-xl">

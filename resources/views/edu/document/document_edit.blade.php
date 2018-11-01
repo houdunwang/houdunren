@@ -1,6 +1,6 @@
 @extends('edu.document.layouts.master')
 @section('content')
-    <form action="{{route('edu.document.update',$document)}}" method="post">
+    <form action="{{route('edu.document.update',$document)}}" method="post" id="documentForm">
         @csrf @method('PUT')
         <div class="card">
             <div class="card-body">
@@ -27,7 +27,10 @@
                                     ]
                                 },
                                 //editor.md库位置
-                                path: "{{asset('org/hdjs')}}/package/editor.md/lib/"
+                                path: "{{asset('org/hdjs')}}/package/editor.md/lib/",
+                                onchange() {
+
+                                },
                             });
                         });
                     </script>
@@ -40,3 +43,5 @@
         </div>
     </form>
 @endsection
+
+

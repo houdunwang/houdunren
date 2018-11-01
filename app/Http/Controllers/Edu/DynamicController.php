@@ -10,7 +10,7 @@ class DynamicController extends Controller
 {
     public function index(Request $request)
     {
-        $db = Activity::latest();
+        $db = Activity::latest('updated_at');
         if ($request->query('t') == 'follow') {
             $db->whereIn('causer_id', auth()->user()->follower->pluck('id'));
         }

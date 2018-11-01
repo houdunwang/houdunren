@@ -22,7 +22,8 @@
                 <!-- Input -->
                 <form class="js-focus-state input-group u-form">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="输入搜索关键字" name="w" aria-label="Recipient's username"
+                        <input type="text" class="form-control" placeholder="输入搜索关键字" name="w"
+                               aria-label="Recipient's username"
                                aria-describedby="basic-addon2"/>
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" onclick="search('topic')">文章
@@ -33,9 +34,9 @@
                     </div>
                     @push('js')
                         <script>
-                            function search(t){
+                            function search(t) {
                                 w = $("[name='w']").val();
-                                location.href="{{route('edu.search')}}?w="+w+"&t="+t;
+                                location.href = "{{route('edu.search')}}?w=" + w + "&t=" + t;
                             }
                         </script>
                     @endpush
@@ -74,45 +75,45 @@
                                 碎片
                             </a>
                         </li>
-                        {{--<li class="nav-item hs-has-sub-menu u-header__nav-item"--}}
-                            {{--data-event="hover"--}}
-                            {{--data-animation-in="slideInUp"--}}
-                            {{--data-animation-out="fadeOut">--}}
-                            {{--<a id="blogMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"--}}
-                               {{--aria-haspopup="true"--}}
-                               {{--aria-expanded="false"--}}
-                               {{--aria-labelledby="blogSubMenu">--}}
-                                {{--系列--}}
-                                {{--<span class="fa fa-angle-down u-header__nav-link-icon"></span>--}}
-                            {{--</a>--}}
+                    {{--<li class="nav-item hs-has-sub-menu u-header__nav-item"--}}
+                    {{--data-event="hover"--}}
+                    {{--data-animation-in="slideInUp"--}}
+                    {{--data-animation-out="fadeOut">--}}
+                    {{--<a id="blogMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"--}}
+                    {{--aria-haspopup="true"--}}
+                    {{--aria-expanded="false"--}}
+                    {{--aria-labelledby="blogSubMenu">--}}
+                    {{--系列--}}
+                    {{--<span class="fa fa-angle-down u-header__nav-link-icon"></span>--}}
+                    {{--</a>--}}
 
-                            {{--<!-- Blog - Submenu -->--}}
-                            {{--<ul id="blogSubMenu" class="list-inline hs-sub-menu u-header__sub-menu py-3 mb-0"--}}
-                                {{--style="min-width: 220px;"--}}
-                                {{--aria-labelledby="blogMegaMenu">--}}
-                                {{--<!-- Classic -->--}}
-                                {{--<li class="dropdown-item hs-has-sub-menu">--}}
-                                    {{--<a id="navLinkBlogClassic"--}}
-                                       {{--class="nav-link u-header__sub-menu-nav-link u-list__link py-2"--}}
-                                       {{--href="http://houdunren.com">--}}
-                                        {{--PHP编程零基础入门到提高--}}
-                                    {{--</a>--}}
-                                    {{--<a id="navLinkBlogClassic"--}}
-                                       {{--class="nav-link u-header__sub-menu-nav-link u-list__link py-2"--}}
-                                       {{--href="http://houdunren.com">--}}
-                                        {{--Laravel框架开发系列--}}
-                                    {{--</a>--}}
-                                {{--</li>--}}
-                            {{--</ul>--}}
-                            {{--<!-- End Submenu -->--}}
-                        {{--</li>--}}
-                        <!-- Home -->
+                    {{--<!-- Blog - Submenu -->--}}
+                    {{--<ul id="blogSubMenu" class="list-inline hs-sub-menu u-header__sub-menu py-3 mb-0"--}}
+                    {{--style="min-width: 220px;"--}}
+                    {{--aria-labelledby="blogMegaMenu">--}}
+                    {{--<!-- Classic -->--}}
+                    {{--<li class="dropdown-item hs-has-sub-menu">--}}
+                    {{--<a id="navLinkBlogClassic"--}}
+                    {{--class="nav-link u-header__sub-menu-nav-link u-list__link py-2"--}}
+                    {{--href="http://houdunren.com">--}}
+                    {{--PHP编程零基础入门到提高--}}
+                    {{--</a>--}}
+                    {{--<a id="navLinkBlogClassic"--}}
+                    {{--class="nav-link u-header__sub-menu-nav-link u-list__link py-2"--}}
+                    {{--href="http://houdunren.com">--}}
+                    {{--Laravel框架开发系列--}}
+                    {{--</a>--}}
+                    {{--</li>--}}
+                    {{--</ul>--}}
+                    {{--<!-- End Submenu -->--}}
+                    {{--</li>--}}
+                    <!-- Home -->
                         <li class="nav-item hs-has-mega-menu u-header__nav-item"
                             data-event="hover"
                             data-animation-in="slideInUp"
                             data-animation-out="fadeOut"
                             data-position="left">
-                            <a id="homeMegaMenu" class="nav-link u-header__nav-link pl-0" href="javascript:;"
+                            <a id="homeMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"
                                aria-haspopup="true"
                                aria-expanded="false">
                                 话题
@@ -161,48 +162,45 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- End Home - Mega Menu -->
                         </li>
                         <!-- End Home -->
                         <!-- Blog -->
-                        {{--<li class="nav-item hs-has-sub-menu u-header__nav-item"--}}
-                            {{--data-event="hover"--}}
-                            {{--data-animation-in="slideInUp"--}}
-                            {{--data-animation-out="fadeOut">--}}
-                            {{--<a id="blogMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"--}}
-                               {{--aria-haspopup="true"--}}
-                               {{--aria-expanded="false"--}}
-                               {{--aria-labelledby="blogSubMenu">--}}
-                                {{--手册--}}
-                                {{--<span class="fa fa-angle-down u-header__nav-link-icon"></span>--}}
-                            {{--</a>--}}
+                        <li class="nav-item hs-has-sub-menu u-header__nav-item"
+                            data-event="hover"
+                            data-animation-in="slideInUp"
+                            data-animation-out="fadeOut">
+                            <a id="blogMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"
+                               aria-haspopup="true"
+                               aria-expanded="false"
+                               aria-labelledby="blogSubMenu">
+                                手册
+                                <span class="fa fa-angle-down u-header__nav-link-icon"></span>
+                            </a>
 
-                            {{--<!-- Blog - Submenu -->--}}
-                            {{--<ul id="blogSubMenu" class="list-inline hs-sub-menu u-header__sub-menu py-3 mb-0"--}}
-                                {{--style="min-width: 220px;"--}}
-                                {{--aria-labelledby="blogMegaMenu">--}}
-                                {{--<!-- Classic -->--}}
-                                {{--<li class="dropdown-item hs-has-sub-menu">--}}
-                                    {{--<a id="navLinkBlogClassic"--}}
-                                       {{--class="nav-link u-header__sub-menu-nav-link u-list__link py-2"--}}
-                                       {{--href="http://houdunren.com">--}}
-                                        {{--Laravel开源框架--}}
-                                    {{--</a>--}}
-                                    {{--<a id="navLinkBlogClassic"--}}
-                                       {{--class="nav-link u-header__sub-menu-nav-link u-list__link py-2"--}}
-                                       {{--href="http://houdunren.com">--}}
-                                        {{--hdcms模块化内容管理系统--}}
-                                    {{--</a>--}}
-                                    {{--<a id="navLinkBlogClassic"--}}
-                                       {{--class="nav-link u-header__sub-menu-nav-link u-list__link py-2"--}}
-                                       {{--href="http://houdunren.com">--}}
-                                        {{--hdjs前端组件库--}}
-                                    {{--</a>--}}
-                                {{--</li>--}}
-                            {{--</ul>--}}
-                        {{--</li>--}}
+                            <!-- Blog - Submenu -->
+                            <ul id="blogSubMenu" class="list-inline hs-sub-menu u-header__sub-menu py-3 mb-0"
+                                style="min-width: 220px;"
+                                aria-labelledby="blogMegaMenu">
+                                <!-- Classic -->
+                                <li class="dropdown-item hs-has-sub-menu">
+                                    @foreach(\App\Models\EduDocument::orderBy( 'flag' , 'desc' )->orderBy( 'updated_at' , 'desc' )->limit(5)->get() as $document)
 
-                        <!-- Starter - Link -->
+                                        <a id="navLinkBlogClassic"
+                                           class="nav-link u-header__sub-menu-nav-link u-list__link py-2"
+                                           href="{{route('edu.document.show',$document)}}">
+                                            {{$document->title}}
+                                        </a>
+                                    @endforeach
+                                    <a id="navLinkBlogClassic"
+                                       class="nav-link u-header__sub-menu-nav-link u-list__link py-2"
+                                       href="{{route('edu.document.index')}}">
+                                        更多手册
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    <!-- Starter - Link -->
                         <li class="nav-item">
                             <a class="nav-link u-header__nav-link text-primary" href="{{route('edu.dynamic.index')}}">
                                 <strong>动态</strong>
@@ -261,7 +259,8 @@
                                            data-unfold-animation-out="fadeOutRight"
                                            data-unfold-duration="500">
                                             <span class="position-relative">
-                                              <img class="u-sidebar--account__toggle-img" src="{{auth()->user()->avatar}}"
+                                              <img class="u-sidebar--account__toggle-img"
+                                                   src="{{auth()->user()->avatar}}"
                                                    alt="Image Description">
                                                 @if(auth()->user()->unreadNotifications->count())
                                                     <span class="u-badge u-badge-success u-badge-pos rounded-circle">
@@ -380,14 +379,20 @@
                                                                     <a class="u-sidebar--account__list-link"
                                                                        href="{{route('member.user.edit',[auth()->user(),'type'=>'icon'])}}">
                                                                         <span class="fa fa-user-circle u-sidebar--account__list-icon mr-2"></span>
-                                                                        修改头像
+                                                                        个人中心
                                                                     </a>
                                                                 </li>
+                                                                {{--<li class="u-sidebar--account__list-item">--}}
+                                                                    {{--<a class="u-sidebar--account__list-link"--}}
+                                                                       {{--href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}">--}}
+                                                                        {{--<span class="fa fa-address-book u-sidebar--account__list-icon mr-2"></span>--}}
+                                                                        {{--我的资料--}}
+                                                                    {{--</a>--}}
+                                                                {{--</li>--}}
                                                                 <li class="u-sidebar--account__list-item">
-                                                                    <a class="u-sidebar--account__list-link"
-                                                                       href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}">
-                                                                        <span class="fa fa-address-book u-sidebar--account__list-icon mr-2"></span>
-                                                                        我的资料
+                                                                    <a class="u-sidebar--account__list-link" href="{{route('member.user.show',auth()->user())}}">
+                                                                        <span class="fa fa-cubes u-sidebar--account__list-icon mr-2"></span>
+                                                                        我的主页
                                                                     </a>
                                                                 </li>
                                                                 {{--<li class="u-sidebar--account__list-item">--}}
@@ -413,20 +418,25 @@
 
                                                             <!-- List Links -->
                                                             <ul class="list-unstyled u-sidebar--account__list">
-                                                                {{--<li class="u-sidebar--account__list-item">--}}
-                                                                {{--<a class="u-sidebar--account__list-link"--}}
-                                                                {{--href="#">--}}
-                                                                {{--<span class="fa fa-tasks u-sidebar--account__list-icon mr-2"></span>--}}
-                                                                {{--我的文章--}}
-                                                                {{--</a>--}}
-                                                                {{--</li>--}}
-                                                                {{--<li class="u-sidebar--account__list-item">--}}
-                                                                {{--<a class="u-sidebar--account__list-link"--}}
-                                                                {{--href="#">--}}
-                                                                {{--<span class="fa fa-calendar u-sidebar--account__list-icon mr-2"></span>--}}
-                                                                {{--学习记录--}}
-                                                                {{--</a>--}}
-                                                                {{--</li>--}}
+                                                                <li class="u-sidebar--account__list-item">
+                                                                    <a class="u-sidebar--account__list-link"
+                                                                       href="{{route('logout')}}">
+                                                                        <span class="fa fa-tasks u-sidebar--account__list-icon mr-2"></span>
+                                                                        退出登录
+                                                                    </a>
+                                                                    {{--<a class="u-sidebar--account__list-link"--}}
+                                                                    {{--href="{{rou}}">--}}
+                                                                    {{--<span class="fa fa-tasks u-sidebar--account__list-icon mr-2"></span>--}}
+                                                                    {{--我的文章--}}
+                                                                    {{--</a>--}}
+                                                                    {{--</li>--}}
+                                                                    {{--<li class="u-sidebar--account__list-item">--}}
+                                                                    {{--<a class="u-sidebar--account__list-link"--}}
+                                                                    {{--href="#">--}}
+                                                                    {{--<span class="fa fa-calendar u-sidebar--account__list-icon mr-2"></span>--}}
+                                                                    {{--学习记录--}}
+                                                                    {{--</a>--}}
+                                                                </li>
                                                             </ul>
                                                             <!-- End List Links -->
                                                         </div>

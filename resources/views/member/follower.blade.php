@@ -37,4 +37,5 @@
             </ul>
         </div>
     </div>
+    {{$follows->links()}}
 @endsection

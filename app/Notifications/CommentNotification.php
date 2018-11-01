@@ -67,7 +67,7 @@ class CommentNotification extends Notification
         return [
             'user_id'         => $this->comment->user->id,
             'user_name'       => $this->comment->user->name,
-            'user_icon'       => $this->comment->user->icon,
+            'user_icon'       => $this->comment->user->avatar,
             'comment_id'      => $this->comment->id,
             'comment_content' => $this->comment->content,
             'title'           => $this->comment->belongModel->getTitle(),

@@ -133,4 +133,10 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::get('pay/{id}', 'PayController@make')->name('pay');
     //订阅会员
     Route::get('order/{shop}/shop', 'OrderController@shop')->name('order.shop');
+    //文档管理
+    Route::resource('document', 'DocumentController');
+    Route::get('document/flag/{document}', 'DocumentController@flag')->name('document.flag');
+    Route::resource('chapter', 'ChapterController');
+    Route::resource('section','EduSectionController');
+    Route::get('document_manage', 'DocumentController@manage')->name('document.manage');
 });

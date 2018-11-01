@@ -25,6 +25,7 @@ class EduDocumentRequest extends FormRequest
     {
         return [
             'title' => 'required|max:100',
+            'content' => 'required',
         ];
     }
 
@@ -33,6 +34,7 @@ class EduDocumentRequest extends FormRequest
         return [
             'title.required' => '文档名称不能为空',
             'title.max' => '文档名称不能超过100个字',
+			'content.required' => '文档介绍不能为空',
         ];
     }
 

@@ -17,7 +17,8 @@
                     {{config_get('admin.site.email')}}
                 </a>
                 <br>
-                {{--编码: <a href="http://www.aoxiangjun.com">向军大叔</a> By: <a href="http://www.hdcms.com">HDCMS</a>--}}
+                编码: <a href="http://www.aoxiangjun.com">向军大叔</a>
+                {{--By: <a href="http://www.hdcms.com">HDCMS</a>--}}
             </p>
         </div>
     </div>
@@ -76,3 +77,6 @@
 </script>
 
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=63802236" charset="UTF-8"></script>
+
+<script type="text/javascript" src="//js.users.51.la/19717331.js"></script>
+

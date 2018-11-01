@@ -37,4 +37,5 @@
             </ul>
         </div>
     </div>
+    {{$fans->links()}}
 @endsection

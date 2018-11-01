@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ChapterRequest extends FormRequest
+class EduSectionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,15 @@ class ChapterRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:100'
+            'title' => 'nullable|max:100',
+            'content' => 'nullable',
         ];
     }
 
     public function messages()
     {
         return [
-            'title.required' => '文档名称不能为空',
-            'title.max' => '文档名称不能超过100个字节'
+            'title.max' => '节名称不能超过100个字符',
         ];
     }
 }

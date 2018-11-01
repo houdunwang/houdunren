@@ -27,14 +27,14 @@ class TopicController extends Controller
     //前台贴子列表
     public function index()
     {
-        $topics = EduTopic::with('category')->paginate(10);
+        $topics = EduTopic::with('category')->latest('updated_at')->paginate(10);
         return view('edu.topic.index', compact('topics'));
     }
 
     //前台根据分类显示
     public function lists(EduCategory $category)
     {
-        $topics = $category->topic()->paginate(10);
+        $topics = $category->topic()->latest('updated_at')->paginate(10);
         return view('edu.topic.lists', compact('topics', 'category'));
     }
 

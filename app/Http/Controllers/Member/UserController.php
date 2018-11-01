@@ -32,7 +32,7 @@ class UserController extends Controller
     public function follower(User $user)
     {
         $this->authorize('fans', $user);
-        $follows = $user->follower()->paginate(1);
+        $follows = $user->follower()->paginate(10);
         return view('member.follower', compact('user', 'follows'));
     }
 
@@ -40,7 +40,7 @@ class UserController extends Controller
     public function fans(User $user)
     {
         $this->authorize('fans', $user);
-        $fans = $user->fans()->paginate(1);
+        $fans = $user->fans()->paginate(10);
         return view('member.fans', compact('user', 'fans'));
     }
 

@@ -1,12 +1,12 @@
 @extends('edu.document.layouts.master',['document' => $chapter->document])
 @section('content')
     <div class="container">
-        <form action="{{route('edu.section.update',$section)}}" method="post">
+        <form action="{{route('edu.section.update',$section)}}" method="post" id="sectionForm">
             @csrf @method('PUT')
             <input type="hidden" name="chapter_id" value="{{$chapter['id']}}">
             <div class="card">
                 <div class="card-header">
-                    新增节
+                    编辑节
                 </div>
                 <div class="card-body">
                     <div class="form-group">
@@ -23,9 +23,9 @@
                                 hdjs.editormd("editormd", {
                                     width: '100%',
                                     height: 300,
-                                    toolbarIcons : function() {
+                                    toolbarIcons: function () {
                                         return [
-                                            "bold", "del", "italic", "quote","|",
+                                            "bold", "del", "italic", "quote", "|",
                                             "list-ul", "list-ol", "hr", "|",
                                             "link", "hdimage", "code-block", "|",
                                             "watch", "preview", "fullscreen"
@@ -45,3 +45,46 @@
         </form>
     </div>
 @endsection
+@push('css')
+    <link href="https://cdn.bootcss.com/animate.css/3.7.0/animate.min.css" rel="stylesheet">
+@endpush
+@push('js')
+
+    <script>
+        setInterval(function () {
+            autosave();
+        }, 10000)
+
+        function autosave() {
+            require(['hdjs', 'iziToast','bootstrap'], function (hdjs,iziToast) {
+                $.ajax({
+                    method: 'PUT',
+                    url: "{{route('edu.section.update',$section)}}",
+                    data: $('#sectionForm').serialize(),
+                    success: function (response) {
+                        if (response.code == 1) {
+                            iziToast.show({
+                                theme: 'dark',
+                                icon: 'fa fa-info-circle',
+                                timeout: 1500,
+                                message: response.message,
+                                position: 'topRight', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+                                progressBarColor: 'rgb(255, 255, 255)',
+                            });
+                        }
+                    },
+                    error:function (response) {
+                        //console.log(response.responseJSON.errors.title)
+                    }
+                })
+            })
+        }
+    </script>
+    <script>
+        require(['hdjs'], function (hdjs) {
+            $('input[name=title]').keyup(function () {
+                $("#section_{{$section['id']}}").html($(this).val());
+            })
+        })
+    </script>
+@endpush
