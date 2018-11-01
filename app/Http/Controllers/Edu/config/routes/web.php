@@ -1,0 +1,40 @@
+<?php
+//在线教育
+Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function () {
+    Route::get('admin', 'AdminController@index')->name('admin');
+    Route::get('/', 'HomeController@index')->name('home.index');
+    Route::get('lesson/lists', 'LessonController@lists')->name('lesson.lists');
+    Route::resource('lesson', 'LessonController');
+    Route::resource('category', 'CategoryController');
+    //贴子
+    Route::resource('topic', 'TopicController');
+    Route::get('topics_{category}.html', 'TopicController@lists')->name('topic_list');
+    //会员中心贴子管理
+    Route::get('topic_manage', 'TopicController@manage')->name('topic.manage');
+    //视频
+    Route::resource('video', 'VideoController');
+    Route::get('search', 'SearchController@lists')->name('search');
+    //动态管理
+    Route::resource('dynamic', 'DynamicController');
+    //模块配置
+    Route::get('config/edit', 'ConfigController@edit')->name('config.edit');
+    Route::put('config/update', 'ConfigController@update')->name('config.update');
+    //会员中心
+    Route::get('topic/{user}', 'UserController@topic')->name('user.topic');
+    //文档管理
+    Route::resource('document', 'DocumentController');
+    Route::resource('chapter', 'ChapterController');
+    Route::resource('section', 'EduSectionController');
+    Route::get('document_manage', 'DocumentController@manage')->name('document.manage');
+    //会员评阅
+    Route::resource('shop', 'ShopController');
+    Route::get('pay/{id}', 'PayController@make')->name('pay');
+    //订阅会员
+    Route::get('order/{shop}/shop', 'OrderController@shop')->name('order.shop');
+    //文档管理
+    Route::resource('document', 'DocumentController');
+    Route::get('document/flag/{document}', 'DocumentController@flag')->name('document.flag');
+    Route::resource('chapter', 'ChapterController');
+    Route::resource('section', 'EduSectionController');
+    Route::get('document_manage', 'DocumentController@manage')->name('document.manage');
+});

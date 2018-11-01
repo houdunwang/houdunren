@@ -34,7 +34,7 @@
                         <input type="text" name="domain" value="{{old('domain',$module['domain'])}}"
                                class="form-control" placeholder="如：www.houdunren.com">
                         <small id="helpId" class="text-muted">
-                            设置域名后可直接访问到模块的 HomeController@index 方法 , 域名需要设置协议前缀
+                            设置域名后可直接访问到模块的 HomeController@index 方法 , 域名不需要设置http://
                         </small>
                     </div>
                     <div class="card">

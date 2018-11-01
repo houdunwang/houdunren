@@ -8,7 +8,7 @@
  * | Copyright (c) 2012-2019, www.houdunwang.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
-namespace App\Http\Controllers\Content\System;
+namespace App\Http\Controllers\Content\config;
 
 class Processor
 {

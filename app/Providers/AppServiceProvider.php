@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Http\Controllers\Content\System\Tag;
+use App\Http\Controllers\Content\config\Tag;
 use Houdunwang\Alipay\AliPay;
 use Houdunwang\Aliyun\Aliyun;
 use Houdunwang\WeChat\WeChat;

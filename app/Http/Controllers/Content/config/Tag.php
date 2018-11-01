@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Content\System;
+namespace App\Http\Controllers\Content\config;
 
 use Blade;
 

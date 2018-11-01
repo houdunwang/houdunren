@@ -18,6 +18,9 @@ class ModuleInitCommand extends Command
     //命令描述
     protected $description = '生成模块初始数据';
 
+    //模块
+    protected $module;
+
     public function __construct()
     {
         parent::__construct();
@@ -48,8 +51,10 @@ class ModuleInitCommand extends Command
     protected function modules($modules, $system)
     {
         foreach ($modules as $module) {
-            if (is_dir($module . '/System')) {
-                $this->make($module . '/System', $system);
+            $this->module = basename($module);
+            if (is_dir($module . '/config')) {
+                $this->make($module . '/config', $system);
+                $this->info($this->module.' created');
             }
         }
     }
@@ -61,14 +66,13 @@ class ModuleInitCommand extends Command
      */
     protected function make(String $dir, $system)
     {
-        $module = basename(dirname($dir));
-        $config = include $dir . '/config.php';
-        $permissions = include $dir . '/permission.php';
-        $admin_menu = is_file($dir . '/Menus/admin.php') ? include $dir . '/Menus/admin.php' : null;
-        $center_menu = is_file($dir . '/Menus/center.php') ? include $dir . '/Menus/center.php' : null;
-        $space_menu = is_file($dir . '/Menus/space.php') ? include $dir . '/Menus/space.php' : null;
+        $config = is_file($dir . '/config.php') ? include $dir . '/config.php' : [];
+        $permissions = is_file($dir . '/permission.php') ? include $dir . '/permission.php' : [];
+        $admin_menu = is_file($dir . '/Menus/admin.php') ? include $dir . '/Menus/admin.php' : [];
+        $center_menu = is_file($dir . '/Menus/center.php') ? include $dir . '/Menus/center.php' : [];
+        $space_menu = is_file($dir . '/Menus/space.php') ? include $dir . '/Menus/space.php' : [];
         //生成模块数据
-        Module::firstOrNew(['name' => $module])->fill(
+        Module::firstOrNew(['name' => $this->module])->fill(
             [
                 'system' => $system,
                 'title' => $config['app'],
@@ -81,9 +85,9 @@ class ModuleInitCommand extends Command
 
         //生成模块权限数据,首先删除权限缓存
         foreach ($permissions as $permission) {
-            $name = $module . '-' . $permission['name'];
+            $name = $this->module . '-' . $permission['name'];
             Permission::firstOrNew(['name' => $name])->fill(
-                ['title' => $permission['title'], 'module' => strtolower($module)]
+                ['title' => $permission['title'], 'module' => strtolower($this->module)]
             )->save();
         }
     }

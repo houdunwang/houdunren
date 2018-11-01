@@ -88,7 +88,9 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="text-center">
-                            {{$topic->user->name}}
+                            <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">
+                                {{$topic->user->name}}
+                            </a>
                         </div>
                     </div>
                     <div class="card-block text-center p-5">
