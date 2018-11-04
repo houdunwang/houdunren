@@ -75,7 +75,6 @@
                  }]">
                             <div class="slick-list draggable">
                                 <div class="slick-track" style="opacity: 1; width: 1128px; transform: translate3d(0px, 0px, 0px);">
-
                                     @foreach(\App\Models\EduShop::get() as $shop)
                                         <div class="shop js-slide slick-slide slick-current slick-active" data-slick-index="0"
                                              aria-hidden="false" style="width: 266px; height: auto;" tabindex="0"
@@ -97,7 +96,7 @@
                                                     <ul class="list-unstyled mb-4">
                                                         <li class="u-pricing-v2__list-item py-2 text-center" style="font-size:20px;">{{$shop['description']}}</li>
                                                     </ul>
-                                                    <a href="{{route('edu.order.shop',$shop)}}"
+                                                    <a href="{{route('edu.shop.pay',$shop)}}"
                                                             class="btn btn-sm btn-block u-btn-primary--air u-btn-primary transition-3d-hover"
                                                             tabindex="0">
                                                         去支付宝付款

@@ -71,8 +71,18 @@
                 <div id="navBar" class="collapse navbar-collapse py-0">
                     <ul class="navbar-nav u-header__navbar-nav ml-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link u-header__nav-link" href="{{route('edu.lesson.lists')}}">
-                                碎片
+                            <a class="nav-link u-header__nav-link" href="{{route('edu.dynamic.index')}}">
+                               动态
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link u-header__nav-link" href="{{route('edu.shop.index')}}">
+                                订阅
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link u-header__nav-link text-primary" href="{{route('edu.lesson.lists')}}">
+                                <strong>碎片</strong>
                             </a>
                         </li>
                     {{--<li class="nav-item hs-has-sub-menu u-header__nav-item"--}}
@@ -173,18 +183,14 @@
                                aria-haspopup="true"
                                aria-expanded="false"
                                aria-labelledby="blogSubMenu">
-                                手册
+                                文档
                                 <span class="fa fa-angle-down u-header__nav-link-icon"></span>
                             </a>
-
-                            <!-- Blog - Submenu -->
                             <ul id="blogSubMenu" class="list-inline hs-sub-menu u-header__sub-menu py-3 mb-0"
                                 style="min-width: 220px;"
                                 aria-labelledby="blogMegaMenu">
-                                <!-- Classic -->
                                 <li class="dropdown-item hs-has-sub-menu">
                                     @foreach(\App\Models\EduDocument::orderBy( 'flag' , 'desc' )->orderBy( 'updated_at' , 'desc' )->limit(5)->get() as $document)
-
                                         <a id="navLinkBlogClassic"
                                            class="nav-link u-header__sub-menu-nav-link u-list__link py-2"
                                            href="{{route('edu.document.show',$document)}}">
@@ -200,12 +206,6 @@
                             </ul>
                         </li>
 
-                    <!-- Starter - Link -->
-                        <li class="nav-item">
-                            <a class="nav-link u-header__nav-link text-primary" href="{{route('edu.dynamic.index')}}">
-                                <strong>动态</strong>
-                            </a>
-                        </li>
                         <li class="nav-item hs-has-sub-menu u-header__nav-item"
                             data-event="hover"
                             data-animation-in="slideInUp"
@@ -216,7 +216,6 @@
                                aria-labelledby="blogSubMenu">
                                 <i class="fa fa-pencil-square" aria-hidden="true"></i>
                             </a>
-                            <!-- Blog - Submenu -->
                             <ul id="blogSubMenu"
                                 class="list-group list-inline hs-sub-menu u-header__sub-menu mb-0 small rounded-0"
                                 style="min-width: 220px;"
@@ -242,7 +241,6 @@
                         </li>
                         <li class="nav-item">
                             <ul class="list-inline mb-0">
-                                <!-- Account Login -->
                                 <li class="list-inline-item">
                                     @auth
                                         <a id="sidebarNavToggler"
@@ -276,7 +274,6 @@
                                         </a>
                                     @endauth
                                 </li>
-                                <!-- Account Sidebar Navigation -->
                                 @auth
                                     <aside id="sidebarContent"
                                            class="u-sidebar u-unfold--css-animation u-unfold--hidden"
@@ -323,11 +320,9 @@
                                                                             class="badge u-badge-success ml-1">普通会员</span>
                                                                 </a>
                                                                 <span class="u-sidebar--account__holder-text">
-                                                                uid: {{auth()->id()}}
-                                                            </span>
+                                                                    uid: {{auth()->id()}}
+                                                                </span>
                                                             </div>
-
-                                                            <!-- Settings -->
                                                             <div class="btn-group position-relative ml-auto mb-auto">
                                                                 <a id="sidebar-account-settings-invoker"
                                                                    class="btn btn-xs u-btn--icon u-btn-text-secondary rounded"
@@ -360,11 +355,8 @@
                                                                        href="{{route('logout')}}">退出</a>
                                                                 </div>
                                                             </div>
-                                                            <!-- End Settings -->
                                                         </header>
-                                                        <!-- End Holder Info -->
                                                         <div class="u-sidebar__content--account">
-                                                            <!-- List Links -->
                                                             <ul class="list-unstyled u-sidebar--account__list">
                                                                 @if(Auth::user()->can('Admin-index'))
                                                                     <li class="u-sidebar--account__list-item">
@@ -383,14 +375,15 @@
                                                                     </a>
                                                                 </li>
                                                                 {{--<li class="u-sidebar--account__list-item">--}}
-                                                                    {{--<a class="u-sidebar--account__list-link"--}}
-                                                                       {{--href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}">--}}
-                                                                        {{--<span class="fa fa-address-book u-sidebar--account__list-icon mr-2"></span>--}}
-                                                                        {{--我的资料--}}
-                                                                    {{--</a>--}}
+                                                                {{--<a class="u-sidebar--account__list-link"--}}
+                                                                {{--href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}">--}}
+                                                                {{--<span class="fa fa-address-book u-sidebar--account__list-icon mr-2"></span>--}}
+                                                                {{--我的资料--}}
+                                                                {{--</a>--}}
                                                                 {{--</li>--}}
                                                                 <li class="u-sidebar--account__list-item">
-                                                                    <a class="u-sidebar--account__list-link" href="{{route('member.user.show',auth()->user())}}">
+                                                                    <a class="u-sidebar--account__list-link"
+                                                                       href="{{route('member.user.show',auth()->user())}}">
                                                                         <span class="fa fa-cubes u-sidebar--account__list-icon mr-2"></span>
                                                                         我的主页
                                                                     </a>

@@ -74,10 +74,4 @@ class EduLesson extends Model
     {
         return route('edu.lesson.show', $this) . $param;
     }
-
-    //学习进度
-    public function progress(int $user_id): int
-    {
-
-    }
 }

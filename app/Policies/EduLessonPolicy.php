@@ -2,6 +2,8 @@
 
 namespace App\Policies;
 
+use App\Models\EduLessonBuy;
+use App\Models\EduSubscribe;
 use App\User;
 use App\Models\EduLesson;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -11,21 +13,21 @@ class EduLessonPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view the edu lesson.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Models\EduLesson  $lesson
-     * @return mixed
+     * 视频观看
+     * @param User $user
+     * @param EduLesson $lesson
+     * @return bool
      */
     public function view(User $user, EduLesson $lesson)
     {
-        //
+        return $lesson['free'] || app(EduLessonBuy::class)->isBuy($lesson, $user) ||
+            app(EduSubscribe::class)->subscribe($user);
     }
 
     /**
      * Determine whether the user can create edu lessons.
      *
-     * @param  \App\User  $user
+     * @param  \App\User $user
      * @return mixed
      */
     public function create(User $user)
@@ -36,8 +38,8 @@ class EduLessonPolicy
     /**
      * Determine whether the user can update the edu lesson.
      *
-     * @param  \App\User  $user
-     * @param  \App\Models\EduLesson  $lesson
+     * @param  \App\User $user
+     * @param  \App\Models\EduLesson $lesson
      * @return mixed
      */
     public function update(User $user, EduLesson $lesson)
@@ -48,8 +50,8 @@ class EduLessonPolicy
     /**
      * Determine whether the user can delete the edu lesson.
      *
-     * @param  \App\User  $user
-     * @param  \App\Models\EduLesson  $lesson
+     * @param  \App\User $user
+     * @param  \App\Models\EduLesson $lesson
      * @return mixed
      */
     public function delete(User $user, EduLesson $lesson)
@@ -60,8 +62,8 @@ class EduLessonPolicy
     /**
      * Determine whether the user can restore the edu lesson.
      *
-     * @param  \App\User  $user
-     * @param  \App\Models\EduLesson  $lesson
+     * @param  \App\User $user
+     * @param  \App\Models\EduLesson $lesson
      * @return mixed
      */
     public function restore(User $user, EduLesson $lesson)
@@ -72,8 +74,8 @@ class EduLessonPolicy
     /**
      * Determine whether the user can permanently delete the edu lesson.
      *
-     * @param  \App\User  $user
-     * @param  \App\Models\EduLesson  $lesson
+     * @param  \App\User $user
+     * @param  \App\Models\EduLesson $lesson
      * @return mixed
      */
     public function forceDelete(User $user, EduLesson $lesson)

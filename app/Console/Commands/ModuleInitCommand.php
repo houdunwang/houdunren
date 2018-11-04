@@ -29,6 +29,7 @@ class ModuleInitCommand extends Command
     //命令执行入口
     public function handle()
     {
+        //初始模块、权限
         $this->modules(glob(base_path() . '/app/Http/Controllers/*'), 1);
 
         //设置站长权限
@@ -45,16 +46,16 @@ class ModuleInitCommand extends Command
 
     /**
      * 生成模块数据
-     * @param string $modules 模块列表
+     * @param array $modules 模块列表
      * @param bool $system 系统模块
      */
-    protected function modules($modules, $system)
+    protected function modules(array $modules, $system)
     {
         foreach ($modules as $module) {
             $this->module = basename($module);
             if (is_dir($module . '/config')) {
                 $this->make($module . '/config', $system);
-                $this->info($this->module.' created');
+                $this->info($this->module . ' created');
             }
         }
     }
@@ -68,9 +69,9 @@ class ModuleInitCommand extends Command
     {
         $config = is_file($dir . '/config.php') ? include $dir . '/config.php' : [];
         $permissions = is_file($dir . '/permission.php') ? include $dir . '/permission.php' : [];
-        $admin_menu = is_file($dir . '/Menus/admin.php') ? include $dir . '/Menus/admin.php' : [];
-        $center_menu = is_file($dir . '/Menus/center.php') ? include $dir . '/Menus/center.php' : [];
-        $space_menu = is_file($dir . '/Menus/space.php') ? include $dir . '/Menus/space.php' : [];
+        $admin_menu = is_file($dir . '/menus/admin.php') ? include $dir . '/menus/admin.php' : [];
+        $center_menu = is_file($dir . '/menus/center.php') ? include $dir . '/menus/center.php' : [];
+        $space_menu = is_file($dir . '/menus/space.php') ? include $dir . '/menus/space.php' : [];
         //生成模块数据
         Module::firstOrNew(['name' => $this->module])->fill(
             [
@@ -92,11 +93,13 @@ class ModuleInitCommand extends Command
         }
     }
 
+    /**
+     * 设置站长权限
+     */
     protected function WebMaseterSyncPermission()
     {
         $role = Role::find(1);
         $role->syncPermissions(Permission::pluck('name'));
-
         User::find(1)->assignRole('webmaster');
     }
 }

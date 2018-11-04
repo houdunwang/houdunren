@@ -75,10 +75,12 @@
                     <div class="nav flex-column nav-pills">
                         @foreach(module_menus('center_menu') as $menus)
                             @foreach($menus as $menu)
-                                <a href="{{$menu['route']}}" class="nav-link
+                                @if(!isset($menu['permission']) || auth()->user()->hasAnyPermission($menu['permission']))
+                                    <a href="{{$menu['route']}}" class="nav-link
                                     {{active_class(strpos($menu['route'],\Route::getCurrentRoute()->uri),'active','text-muted')}}">
-                                    {{$menu['name']}}
-                                </a>
+                                        {{$menu['name']}}
+                                    </a>
+                                @endif
                             @endforeach
                         @endforeach
                     </div>

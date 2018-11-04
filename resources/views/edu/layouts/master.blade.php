@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/css/cubeportfolio.min.css">
     <link rel="stylesheet" href="{{asset('org/front')}}/css/front.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="{{mix('/css/app.css')}}">
     @include('layouts._hdjs')
     @include('layouts._message')
     @stack('css')

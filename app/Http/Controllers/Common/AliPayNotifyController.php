@@ -6,6 +6,11 @@ use Houdunwang\Alipay\AliPay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * 支付通知
+ * Class AliPayNotifyController
+ * @package App\Http\Controllers\Common
+ */
 class AliPayNotifyController extends Controller
 {
     /**
@@ -14,6 +19,7 @@ class AliPayNotifyController extends Controller
      */
     public function sync(Request $request)
     {
+
         //签名验证
         if (AliPay::signCheck()) {
             //商户订单号

@@ -63,7 +63,7 @@
             <hr class="my-3">
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.update.cache')}}">
+                    <a class="nav-link" href="{{route('core.update.cache')}}">
                         <i class="fe fe-life-buoy"></i> 更新缓存
                     </a>
                 </li>
@@ -111,7 +111,7 @@
                 <div class="dropdown">
                     <a href="#" class="avatar avatar-sm avatar-online dropdown-toggle" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{{auth()->user()->icon}}" alt="..." class="avatar-img rounded-circle">
+                        <img src="{{auth()->user()->icon}}" class="avatar-img rounded-circle">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="{{route('member.user.show',auth()->user())}}" class="dropdown-item">个人中心</a>
