@@ -35,4 +35,7 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::resource('chapter', 'ChapterController');
     Route::resource('section', 'EduSectionController');
     Route::get('document_manage', 'DocumentController@manage')->name('document.manage');
+    //定单管理
+    Route::resource('order', 'OrderController');
+    Route::get('subscribe', 'SubscribeController@show')->name('subscribe.show');
 });

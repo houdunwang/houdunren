@@ -16,18 +16,21 @@ use Houdunwang\Alipay\AliPay;
 
 class PayServer
 {
-    public function __construct()
-    {
-        $this->config();
-    }
+    //定单记录
+    protected $order;
 
-    //配置
-    protected function config()
+    /**
+     * 创建定单
+     * @param array $data
+     * @return $this
+     */
+    public function create(array $data)
     {
-        $config = config_get('admin.alipay', []);
-        $config['notify_url'] = route('common.alipay.async');
-        $config['return_url'] = route('common.alipay.sync');
-        AliPay::config($config);
+        $data['module'] = module_name();
+        $data['order_sn'] = 'U' . auth()->id() . '-' . date('Ymdhis');
+        $data['user_id'] = auth()->id();
+        $data['status'] = false;
+        return $this->order = Order::create($data);
     }
 
     /**
@@ -35,14 +38,14 @@ class PayServer
      * @param array $data
      * @return mixed
      */
-    public function alipay(array $data)
+    public function pay(array $data)
     {
-        Order::create([
-            'order_sn' => $data['WIDout_trade_no'],
-            'status' => false,
-            'user_id' => auth()->id(),
-            'fee' => $data['WIDtotal_amount'],
-        ]);
+        $data = [
+            'WIDout_trade_no' => $this->order['order_sn'],
+            'WIDsubject' => $data['subject'],
+            'WIDtotal_amount' => $this->order['fee'],
+            'WIDbody' => $data['body'],
+        ];
         AliPay::PagePay($data);
     }
 }

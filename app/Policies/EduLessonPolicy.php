@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\EduLessonBuy;
+use App\Models\EduOrder;
 use App\Models\EduSubscribe;
 use App\User;
 use App\Models\EduLesson;
@@ -20,8 +20,9 @@ class EduLessonPolicy
      */
     public function view(User $user, EduLesson $lesson)
     {
-        return $lesson['free'] || app(EduLessonBuy::class)->isBuy($lesson, $user) ||
-            app(EduSubscribe::class)->subscribe($user);
+        return $lesson['free']
+            || app(EduOrder::class)->isBuy($lesson, $user)
+            || app(EduSubscribe::class)->subscribe($user);
     }
 
     /**

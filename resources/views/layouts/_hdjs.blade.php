@@ -38,7 +38,7 @@
                 'hs.focus-state': {deps: ['hs.core']},
                 'hs.validation': {deps: ['hs.core']},
                 'hs.fancybox': {deps: ['hs.core']},
-                'hs.slick-carousel': {deps: ['hs.core', 'slick']},
+                'hs.slick-carousel': {deps: ['hs.core']},
                 'hs.unfold': {deps: ['hs.core']},
                 'hs.go-to': {deps: ['hs.core']},
                 'hs.show-animation': {deps: ['hs.core']}

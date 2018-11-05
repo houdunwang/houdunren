@@ -11,8 +11,6 @@
 namespace App\Http\Controllers\Edu;
 
 use App\Http\Controllers\Controller;
-use App\Models\EduLessonBuy;
-use App\Models\EduSubscribe;
 use App\Models\EduVideo;
 
 class VideoController extends Controller
@@ -24,7 +22,7 @@ class VideoController extends Controller
 
     public function show(EduVideo $video)
     {
-        if (auth()->user()->can('view', $video->lesson())) {
+        if (auth()->user()->can('view', $video->lesson)) {
             //保存观看记录
             $video->userVideo()->sync([auth()->id()]);
             return view('edu.lesson.video', compact('video'));

@@ -12,7 +12,7 @@ use Illuminate\Console\Command;
 //后盾人转换
 class HoudunrenCommand extends Command
 {
-    protected $signature = 'hdcms-houdunren';
+    protected $signature = 'hdcms-houdunren-lesson';
 
     protected $description = '后盾人旧版数据转换';
 

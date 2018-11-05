@@ -20,7 +20,7 @@ class AdminMiddleware
      * @return \Illuminate\Http\RedirectResponse|mixed
      * @throws \App\Exceptions\PermissionException
      */
-    public function handle($request, Closure $next, $premission = 'Core-index')
+    public function handle($request, Closure $next, $premission = 'Admin-index')
     {
         access($premission);
         return $next($request);

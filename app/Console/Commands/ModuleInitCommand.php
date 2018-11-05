@@ -76,6 +76,7 @@ class ModuleInitCommand extends Command
         Module::firstOrNew(['name' => $this->module])->fill(
             [
                 'system' => $system,
+                'config' => $config,
                 'title' => $config['app'],
                 'permission' => $permissions,
                 'admin_menu' => $admin_menu,

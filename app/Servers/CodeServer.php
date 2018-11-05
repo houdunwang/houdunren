@@ -11,7 +11,6 @@
 
 namespace App\Servers;
 
-
 use App\Exceptions\ValidException;
 use App\Notifications\CodeNotification;
 use App\User;

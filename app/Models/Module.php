@@ -19,6 +19,7 @@ class Module extends Model
         'name',
         'system',
         'title',
+        'config',
         'permission',
         'domain',
         'center_menu',
@@ -29,6 +30,7 @@ class Module extends Model
     ];
 
     protected $casts = [
+        'config' => 'array',
         'permission' => 'array',
         'center_menu' => 'array',
         'space_menu' => 'array',

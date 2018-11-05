@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Order extends Model
 {
-    protected $fillable = ['user_id', 'lesson_id', 'order_sn', 'status', 'alipay_trade_no', 'fee', 'type', 'shop_id','created_at','updated_at'];
+    protected $fillable = ['module', 'order_sn', 'user_id', 'status', 'alipay_trade_no', 'fee','created_at','updated_at'];
 
     public function user()
     {

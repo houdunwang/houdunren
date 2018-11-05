@@ -15,10 +15,11 @@ class CreateEduOrdersTable extends Migration
     {
         Schema::create('edu_orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('order_sn')->comment('订单号');
+            $table->unsignedInteger('order_id')->unique()->comment('订单号');
             $table->unsignedInteger('shop_id')->nullable()->comment('订阅编号');
             $table->unsignedInteger('lesson_id')->nullable()->comment('课程编号');
             $table->unsignedInteger('user_id')->index();
+            $table->unsignedTinyInteger('status')->default(0)->comment('定单状态');
             $table->timestamps();
         });
     }

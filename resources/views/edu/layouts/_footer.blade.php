@@ -34,7 +34,7 @@
 </a>
 <script>
     require([
-        'jquery-migrate', 'bootstrap', 'popper', 'hs.megamenu', 'jquery.validate', 'jquery.fancybox', 'slick',
+        'jquery-migrate', 'bootstrap', 'popper',
         'hs.core', 'hs.header', 'hs.focus-state', 'hs.validation', 'hs.unfold', 'hs.show-animation',
         'hs.fancybox', 'hs.slick-carousel', 'hs.go-to'
     ], function () {
@@ -77,6 +77,3 @@
 </script>
 
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=63802236" charset="UTF-8"></script>
-
-<script type="text/javascript" src="//js.users.51.la/19717331.js"></script>
-

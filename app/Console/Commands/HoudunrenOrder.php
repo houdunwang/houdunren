@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\EduLessonBuy;
 use App\Models\EduOrder;
 use App\Models\EduSubscribe;
+use App\Models\Order;
 use Illuminate\Console\Command;
 use DB;
 
@@ -22,7 +23,7 @@ class HoudunrenOrder extends Command
     public function handle()
     {
         $this->order();
-        $this->buy();
+//        $this->buy();
         $this->subscribe();
         $this->info('导入成功');
     }
@@ -59,19 +60,42 @@ class HoudunrenOrder extends Command
     protected function order()
     {
         DB::table('edu_orders')->truncate();
+        DB::table('orders')->truncate();
         DB::table('hd_houdunren_order')->where('status', 1)
             ->get()->each(function ($order) {
+                $PayOrder = Order::create([
+                    'module' => 'Edu',
+                    'order_sn' => 'U' . $order->uid . '-' . $order->order_sn,
+                    'user_id' => $order->uid,
+                    'status' => $order->status,
+                    'alipay_trade_no' => $order->alipay_trade_no,
+                    'fee' => $order->fee,
+                    'created_at' => $order->created_at,
+                    'updated_at' => $order->updated_at,
+//
+//
+//                    'shop_id' => $order->shop_id,
+//                    'lesson_id' => $order->lesson_id,
+//                    'order_id' => null,
+//                    'type' => $order->type,
+//                    'created_at' => $order->created_at,
+//                    'updated_at' => $order->updated_at,
+                ]);
                 EduOrder::create([
                     'user_id' => $order->uid,
                     'shop_id' => $order->shop_id,
                     'lesson_id' => $order->lesson_id,
-                    'order_sn' => $order->order_sn,
                     'status' => $order->status,
-                    'alipay_trade_no' => $order->alipay_trade_no,
-                    'fee' => $order->fee,
-                    'type' => $order->type,
+                    'order_id' => $PayOrder->id,
                     'created_at' => $order->created_at,
                     'updated_at' => $order->updated_at,
+//
+//                    'order_sn' => $order->order_sn,
+//                    'alipay_trade_no' => $order->alipay_trade_no,
+//                    'fee' => $order->fee,
+//                    'type' => $order->type,
+//                    'created_at' => $order->created_at,
+//                    'updated_at' => $order->updated_at,
                 ]);
             });
     }

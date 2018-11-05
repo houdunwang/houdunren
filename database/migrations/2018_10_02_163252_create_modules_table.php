@@ -15,8 +15,9 @@ class CreateModulesTable extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('title');
+            $table->text('config')->comment('配置项');
             $table->text('permission');
             $table->text('center_menu')->nullable()->comment('会员中心菜单');
             $table->unsignedTinyInteger('center_menu_setting')->default(1)->comment('会员中心菜单设置:1全站显示 2本模块显示(需要配置域名) 0不显示');

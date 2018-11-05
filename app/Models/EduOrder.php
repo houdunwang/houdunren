@@ -8,7 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 //课程订单记录
 class EduOrder extends Model
 {
-    protected $fillable = ['user_id', 'order_id', 'lesson_id', 'shop_id', 'created_at', 'updated_at'];
+    protected $fillable = ['order_id', 'shop_id', 'lesson_id', 'user_id', 'status', 'created_at', 'updated_at'];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
+    }
+
+    public function shop()
+    {
+        return $this->belongsTo(EduShop::class, 'shop_id');
+    }
 
     /**
      * 会员购买课程检测
@@ -16,8 +26,13 @@ class EduOrder extends Model
      * @param User $user
      * @return mixed
      */
-    public function isBuy(EduLesson $lesson, User $user)
+    public function isBuy(EduLesson $lesson, User $user): bool
     {
-        return $this->where('user_id', $user['id'])->where('lesson_id', $lesson['id'])->first();
+        $where = [
+            ['user_id', $user['id']],
+            ['status', true],
+            ['lesson_id', $lesson['id']],
+        ];
+        return $this->where($where)->first() ? true : false;
     }
 }

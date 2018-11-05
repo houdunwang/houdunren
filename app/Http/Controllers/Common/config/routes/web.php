@@ -13,6 +13,6 @@ Route::group(['namespace' => 'Common', 'prefix' => 'common', 'as' => 'common.'],
     //发送验证码
     Route::any('code/send', 'CodeController@send')->name('code.send');
     //支付宝定单处理
-    Route::any('alipay/sync', 'AliPayNotifyController@sync')->name('alipay.sync');
-    Route::any('alipay/async', 'AliPayNotifyController@async')->name('alipay.async');
+    Route::any('alipay/sync', 'PayNotifyController@sync')->name('pay.sync');
+    Route::any('alipay/async', 'PayNotifyController@async')->name('pay.async');
 });

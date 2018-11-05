@@ -15,7 +15,7 @@ class CreateEduSubscribesTable extends Migration
     {
         Schema::create('edu_subscribes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->unique()->comment('会员编号');
             $table->dateTime('begin_time')->nullable();
             $table->dateTime('end_time')->nullable();
             $table->timestamps();

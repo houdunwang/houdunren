@@ -25,8 +25,11 @@
  */
 function config_save(array $data)
 {
-    return \App\Models\Config::updateOrCreate(['module' => module_name()],
-        ['module' => module_name(), 'data' => $data,])->save();
+    $module = strtolower(module_name());
+    return \App\Models\Config::updateOrCreate(
+        ['module' => $module],
+        ['module' => $module, 'data' => $data,]
+    )->save();
 }
 
 /**
@@ -50,7 +53,7 @@ function config_get($path, $default = null)
  */
 function module_menus(string $name)
 {
-    return \App\Models\Module::whereNotNull($name)->pluck($name,'name');
+    return \App\Models\Module::whereNotNull($name)->pluck($name, 'name');
 }
 
 /**
@@ -92,6 +95,19 @@ function model_instance()
 }
 
 /**
+ * 获取模块命名空间
+ * @param $module
+ * @return string
+ */
+function module_namespace($module)
+{
+    $system = \App\Models\Module::where('name', $module)->value('system');
+    if ($system) {
+        return '\App\Http\Controllers\\' . $module;
+    }
+}
+
+/**
  * 验证权限
  * @param $permission
  * @param null $user
@@ -115,7 +131,7 @@ function access($permission, $user = null)
 function module_name()
 {
     $info = explode('/', Route::getCurrentRoute()->uri);
-    return $info[0] ?? null;
+    return $info[0] ? \App\Models\Module::where('name', $info[0])->value('name') : null;
 }
 
 /**

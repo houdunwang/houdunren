@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 class EduSubscribe extends Model
 {
     protected $fillable = ['user_id', 'begin_time', 'end_time', 'created_at', 'updated_at'];
+    protected $casts = [
+        'begin_time' => 'datetime',
+        'end_time' => 'datetime',
+    ];
 
     public function user()
     {
@@ -20,9 +24,9 @@ class EduSubscribe extends Model
      * @param User $user
      * @return bool
      */
-    public function subscribe(User $user)
+    public function subscribe(User $user): bool
     {
         $end_time = $this->where('user_id', $user['id'])->value('end_time');
-        return $end_time > (new Carbon());
+        return $end_time >= (new Carbon());
     }
 }

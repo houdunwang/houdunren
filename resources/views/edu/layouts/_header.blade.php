@@ -72,7 +72,7 @@
                     <ul class="navbar-nav u-header__navbar-nav ml-lg-auto">
                         <li class="nav-item">
                             <a class="nav-link u-header__nav-link" href="{{route('edu.dynamic.index')}}">
-                               动态
+                                动态
                             </a>
                         </li>
                         <li class="nav-item">
@@ -316,8 +316,7 @@
                                                             <div class="ml-3">
                                                                 <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}"
                                                                    class="text-dark">
-                                                                    {{auth()->user()->name}} <span
-                                                                            class="badge u-badge-success ml-1">普通会员</span>
+                                                                    {{auth()->user()->name}}
                                                                 </a>
                                                                 <span class="u-sidebar--account__holder-text">
                                                                     uid: {{auth()->id()}}
@@ -348,11 +347,8 @@
                                                                        href="{{route('member.user.edit',[auth()->user(),'type'=>'icon'])}}">设置头像</a>
                                                                     <a class="u-list__link"
                                                                        href="{{route('member.user.edit',[auth()->user(),'type'=>'password'])}}">修改密码</a>
-                                                                    <a class="u-list__link"
-                                                                       href="{{route('member.user.show',[auth()->user()])}}">我的空间</a>
                                                                     <div class="dropdown-divider"></div>
-                                                                    <a class="u-list__link"
-                                                                       href="{{route('logout')}}">退出</a>
+                                                                    <a class="u-list__link" href="{{route('logout')}}">退出</a>
                                                                 </div>
                                                             </div>
                                                         </header>
@@ -386,6 +382,13 @@
                                                                        href="{{route('member.user.show',auth()->user())}}">
                                                                         <span class="fa fa-cubes u-sidebar--account__list-icon mr-2"></span>
                                                                         我的主页
+                                                                    </a>
+                                                                </li>
+                                                                <li class="u-sidebar--account__list-item">
+                                                                    <a class="u-sidebar--account__list-link"
+                                                                       href="{{route('edu.subscribe.show')}}">
+                                                                        <i class="fa fa-shopping-bag mr-2" aria-hidden="true"></i>
+                                                                        会员时长
                                                                     </a>
                                                                 </li>
                                                                 {{--<li class="u-sidebar--account__list-item">--}}
@@ -441,7 +444,7 @@
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item pr-3">
                                                             <a class="u-sidebar__footer--account__text"
-                                                               href="mailto:2300071698@qq.com">问题反馈</a>
+                                                               href="mailto:houdunren@qq.com">问题反馈</a>
                                                         </li>
                                                         {{--<li class="list-inline-item pr-3">--}}
                                                         {{--<a class="u-sidebar__footer--account__text" href="../pages/terms.html">联系我们</a>--}}

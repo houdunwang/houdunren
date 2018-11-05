@@ -63,7 +63,7 @@
             <hr class="my-3">
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('core.update.cache')}}">
+                    <a class="nav-link" href="{{route('admin.update.cache')}}">
                         <i class="fe fe-life-buoy"></i> 更新缓存
                     </a>
                 </li>
