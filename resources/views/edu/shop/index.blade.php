@@ -9,7 +9,7 @@
                              <span class="font-weight-bold">投资学习会得到加倍的回报</span>
                         </h1>
                         <h3 class="text-white">
-                            订阅会员免费观看所有录播视频
+                            订阅会员免费观看所有视频
                         </h3>
                     </div>
                 </div>

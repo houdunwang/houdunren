@@ -243,9 +243,9 @@
                             <ul class="list-inline mb-0">
                                 <li class="list-inline-item">
                                     @auth
-                                        <a id="sidebarNavToggler"
+                                        <a id="sidebarNavToggler" href="{{route('member.user.edit',[auth()->user(),'type'=>'icon'])}}"
                                            class="btn btn-xs u-btn-text-secondary u-sidebar--account__toggle-bg pl-1 ml-1"
-                                           href="javascript:;" role="button"
+                                           role="button"
                                            aria-controls="sidebarContent"
                                            aria-haspopup="true"
                                            aria-expanded="false"
@@ -258,8 +258,7 @@
                                            data-unfold-duration="500">
                                             <span class="position-relative">
                                               <img class="u-sidebar--account__toggle-img"
-                                                   src="{{auth()->user()->avatar}}"
-                                                   alt="Image Description">
+                                                   src="{{auth()->user()->avatar}}">
                                                 @if(auth()->user()->unreadNotifications->count())
                                                     <span class="u-badge u-badge-success u-badge-pos rounded-circle">
                                                           {{auth()->user()->unreadNotifications->count()}}

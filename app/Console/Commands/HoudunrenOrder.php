@@ -23,7 +23,6 @@ class HoudunrenOrder extends Command
     public function handle()
     {
         $this->order();
-//        $this->buy();
         $this->subscribe();
         $this->info('导入成功');
     }
@@ -43,20 +42,6 @@ class HoudunrenOrder extends Command
         });
     }
 
-    protected function buy()
-    {
-        DB::table('edu_lesson_buys')->truncate();
-        DB::table('hd_houdunren_lesson_buy')
-            ->get()->each(function ($lesson) {
-                EduLessonBuy::create([
-                    'user_id' => $lesson->uid,
-                    'lesson_id' => $lesson->lesson_id,
-                    'created_at' => $lesson->created_at,
-                    'updated_at' => $lesson->updated_at,
-                ]);
-            });
-    }
-
     protected function order()
     {
         DB::table('edu_orders')->truncate();
@@ -72,14 +57,6 @@ class HoudunrenOrder extends Command
                     'fee' => $order->fee,
                     'created_at' => $order->created_at,
                     'updated_at' => $order->updated_at,
-//
-//
-//                    'shop_id' => $order->shop_id,
-//                    'lesson_id' => $order->lesson_id,
-//                    'order_id' => null,
-//                    'type' => $order->type,
-//                    'created_at' => $order->created_at,
-//                    'updated_at' => $order->updated_at,
                 ]);
                 EduOrder::create([
                     'user_id' => $order->uid,
@@ -89,13 +66,6 @@ class HoudunrenOrder extends Command
                     'order_id' => $PayOrder->id,
                     'created_at' => $order->created_at,
                     'updated_at' => $order->updated_at,
-//
-//                    'order_sn' => $order->order_sn,
-//                    'alipay_trade_no' => $order->alipay_trade_no,
-//                    'fee' => $order->fee,
-//                    'type' => $order->type,
-//                    'created_at' => $order->created_at,
-//                    'updated_at' => $order->updated_at,
                 ]);
             });
     }

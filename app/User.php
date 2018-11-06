@@ -22,6 +22,7 @@ class User extends Authenticatable
     use Notifiable, HasRoles;
 
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -117,6 +118,6 @@ class User extends Authenticatable
      */
     public function getAvatarAttribute()
     {
-        return $this->icon ?:  asset('images/user.jpg');
+        return $this->icon ?: asset('images/user.jpg');
     }
 }

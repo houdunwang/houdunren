@@ -8,7 +8,12 @@
             <h3 class="text-secondary mb-0">
                 @if($subscribe)
                     你的会员到期时间为
-                    <span class="text-info">{{$subscribe->end_time}}</span>
+                    <span class="text-info">
+                        @if($subscribe->end_time>\Carbon\Carbon::createFromDate(2030,1,1)) 永不过期
+                            @else
+                            {{$subscribe->end_time}}
+                        @endif
+                    </span>
                 @else
                     <span class="text-secondary">
                       <i class="fa fa-info-circle" aria-hidden="true"></i>  你还没有订阅会员，订阅后可学习所有视频 !

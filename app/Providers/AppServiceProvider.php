@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
     protected function loadConfig()
     {
         Aliyun::config(config_get('admin.aliyun', []));
-        WeChat::config(config('hd_wechat', []));
+        WeChat::config(config('admin.wechat', []));
         AliPay::config(config_get('admin.alipay', []));
     }
 

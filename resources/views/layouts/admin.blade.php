@@ -36,7 +36,7 @@
                 aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="/" target="_blank">
+        <a class="navbar-brand" href="/index.php" target="_blank">
             <img src="{{config_get('admin.site.logo',asset('images/logo.png'))}}" class="navbar-brand-img mx-auto">
         </a>
         <div class="navbar-user d-md-none">
