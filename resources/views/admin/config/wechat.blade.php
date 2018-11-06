@@ -3,6 +3,7 @@
     <div class="row">
         <form action="{{route('admin.config.update',['name'=>'wechat'])}}" method="post" class="col-sm-12">
             @csrf @method('PUT')
+            <input type="hidden" name="cache_path" value="storage/houdunren/wechat">
             <div class="card small">
                 <div class="card-body">
                     @include('admin.config.layouts._menu')
@@ -79,7 +80,9 @@
                                     <input class="form-control" name="apiclient_cert"
                                            value="{{config_get('admin.wechat.apiclient_cert')}}" readonly="">
                                     <div class="input-group-append">
-                                        <button onclick="upFile('apiclient_cert')" class="btn btn-secondary" type="button">选择</button>
+                                        <button onclick="upFile('apiclient_cert')" class="btn btn-secondary"
+                                                type="button">选择
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +92,9 @@
                                     <input class="form-control" name="apiclient_key"
                                            value="{{config_get('admin.wechat.apiclient_key')}}" readonly="">
                                     <div class="input-group-append">
-                                        <button onclick="upFile('apiclient_key')" class="btn btn-secondary" type="button">选择</button>
+                                        <button onclick="upFile('apiclient_key')" class="btn btn-secondary"
+                                                type="button">选择
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +104,8 @@
                                     <input class="form-control" name="rootca"
                                            value="{{config_get('admin.wechat.rootca')}}" readonly="">
                                     <div class="input-group-append">
-                                        <button onclick="upFile('rootca')" class="btn btn-secondary" type="button">选择</button>
+                                        <button onclick="upFile('rootca')" class="btn btn-secondary" type="button">选择
+                                        </button>
                                     </div>
                                 </div>
                             </div>
