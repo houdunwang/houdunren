@@ -10,10 +10,15 @@ use Illuminate\Console\Command;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class ModuleInitCommand extends Command
+/**
+ * 更新网站缓存
+ * Class CacheCommand
+ * @package App\Console\Commands
+ */
+class CacheCommand extends Command
 {
     //命令
-    protected $signature = 'hdcms-module-init';
+    protected $signature = 'hdcms-cache-clear';
 
     //命令描述
     protected $description = '生成模块初始数据';
@@ -41,7 +46,7 @@ class ModuleInitCommand extends Command
         //模板缓存
         app(ContentTemplate::class)->updateCache();
 
-        $this->info('恭喜你，系统初始化成功');
+        $this->info('恭喜你，网站缓存更新成功');
     }
 
     /**
