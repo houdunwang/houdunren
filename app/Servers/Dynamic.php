@@ -5,21 +5,19 @@
  * |-------------------------------------------------------------------
  * |    Author: 向军 <www.aoxiangjun.com>
  * |    WeChat: houdunren2018
+ * |      Date: 2018/11/8
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
-namespace App\Http\Controllers\Edu;
+namespace App\Servers;
 
-use App\Http\Controllers\Controller;
-use App\Models\EduLesson;
-use Spatie\Activitylog\Models\Activity;
-
-class HomeController extends Controller
+//动态
+class Dynamic
 {
-    public function index()
+    public function all($row = 10, $module = null)
     {
-        $activitys = Activity::latest('updated_at')->paginate(10);
-        $lessons = EduLesson::with('user')->latest()->where('video_num', '>', 0)->paginate(12);
-        return view('edu.dynamic.index', compact('activitys', 'lessons'));
+        $module = $module ?? module_name();
+        $activitys = Activity::where('log_name', 'like', $module . '%')->latest('updated_at')->paginate($row);
+
     }
 }

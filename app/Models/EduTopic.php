@@ -29,6 +29,8 @@ class EduTopic extends Model
 
     protected static $logName = 'edu_topic';
 
+    protected static $recordEvents = ['created', 'updated'];
+
     protected static $logAttributes = ['title', 'created_at', 'updated_at'];
 
     public function category()
@@ -36,17 +38,12 @@ class EduTopic extends Model
         return $this->belongsTo(EduCategory::class);
     }
 
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
     public function comment()
     {
         return $this->morphMany(Comment::class, 'comment');
     }
 
-    public function link($param)
+    public function link($param='')
     {
         return route('edu.topic.show', $this) . $param;
     }

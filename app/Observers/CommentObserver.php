@@ -39,7 +39,7 @@ class CommentObserver
      */
     public function deleted(Comment $comment)
     {
-        //
+        $comment->zan()->delete();
     }
 
     /**

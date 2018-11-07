@@ -70,7 +70,7 @@ class CommentNotification extends Notification
             'user_icon'       => $this->comment->user->avatar,
             'comment_id'      => $this->comment->id,
             'comment_content' => $this->comment->content,
-            'title'           => $this->comment->belongModel->getTitle(),
+            'title'           => $this->comment->belongModel->title,
             'link'            => $this->comment->belongModel->link('#comment-' . $this->comment->id),
         ];
     }

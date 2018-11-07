@@ -8,16 +8,15 @@
                 <a href="{{route('member.user.show',$activity->causer)}}" class="text-secondary">
                     {{$activity->causer->name}}
                 </a>
-                <span class="badge badge-light text-secondary small">评论了</span>
-                <a href="{{$activity->subject->belongModel->link('#comment-'.$activity->subject->id)}}"
-                   class="text-dark">
-                    {{$activity->subject->belongModel->title}}
+                <span class="badge badge-light text-secondary small">赞了</span>
+                <a href="{{$activity->subject->link()}}" class="text-dark">
+                    {{$activity->subject->title}}
                 </a>
             </div>
             <span class="col-sm-2 text-text text-sm-right small text-secondary">
-               <i class="fa fa-clock-o" aria-hidden="true"></i> {{$activity->created_at->diffForHumans()}}
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                {{$activity->created_at->diffForHumans()}}
             </span>
         </div>
     </div>
 </li>
-

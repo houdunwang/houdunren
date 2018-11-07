@@ -11,6 +11,7 @@
 namespace App\Observers;
 
 use App\Models\Zan;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * 点赞事件
@@ -26,6 +27,9 @@ class ZanObserver
 
     public function deleted(Zan $zan)
     {
+        //删除动态日志
+        Activity::where('subject_type','App\Models\Zan')->where('subject_id',$zan['id'])->delete();
+
         $zan->belongModel->decrement('zan_num');
     }
 }

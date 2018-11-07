@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "14052b2dc7968be328b9db6e27899693",
+    "content-hash": "a992d6c765571132e473447e78006a2d",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -2466,16 +2466,16 @@
         },
         {
             "name": "spatie/laravel-activitylog",
-            "version": "2.8.4",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-activitylog.git",
-                "reference": "28f481486706d22255879965f4f57b7562d13c3b"
+                "reference": "59c3a6cf8abdcad7143b8b9d0a114148cc857a91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-activitylog/zipball/28f481486706d22255879965f4f57b7562d13c3b",
-                "reference": "28f481486706d22255879965f4f57b7562d13c3b",
+                "url": "https://api.github.com/repos/spatie/laravel-activitylog/zipball/59c3a6cf8abdcad7143b8b9d0a114148cc857a91",
+                "reference": "59c3a6cf8abdcad7143b8b9d0a114148cc857a91",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2488,12 +2488,12 @@
                 "illuminate/config": "~5.5.0|~5.6.0|~5.7.0",
                 "illuminate/database": "~5.5.0|~5.6.0|~5.7.0",
                 "illuminate/support": "~5.5.0|~5.6.0|~5.7.0",
-                "php": "^7.0",
+                "php": "^7.1",
                 "spatie/string": "^2.1"
             },
             "require-dev": {
                 "orchestra/testbench": "~3.5.0|~3.6.0|~3.7.0",
-                "phpunit/phpunit": "^6.2|^7.0"
+                "phpunit/phpunit": "^7.4"
             },
             "type": "library",
             "extra": {
@@ -2538,7 +2538,7 @@
                 "spatie",
                 "user"
             ],
-            "time": "2018-09-23T12:00:26+00:00"
+            "time": "2018-10-18T19:00:00+00:00"
         },
         {
             "name": "spatie/laravel-permission",

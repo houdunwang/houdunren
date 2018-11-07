@@ -29,6 +29,9 @@
                                 @case('edu_lesson')
                                 @include('edu.dynamic._lesson')
                                 @break
+                                @case('edu_zan')
+                                @include('edu.dynamic._zan')
+                                @break
                             @endswitch
                         @endif
                     @endforeach

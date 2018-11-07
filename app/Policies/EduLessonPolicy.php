@@ -19,7 +19,7 @@ class EduLessonPolicy
      * @return bool
      */
     public function view(User $user, EduLesson $lesson)
-    {return true;
+    {
         return $lesson['free']
             || app(EduOrder::class)->isBuy($lesson, $user)
             || app(EduSubscribe::class)->subscribe($user);

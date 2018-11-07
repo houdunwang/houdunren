@@ -10,12 +10,19 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Common;
 use App\Observers\ZanObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Zan extends Model
 {
+    use Common, LogsActivity;
+
+    protected static $logAttributes = ['created_at', 'updated_at'];
+    protected static $recordEvents = ['created'];
+    protected static $logName = 'edu_zan';
     protected $fillable = ['user_id'];
 
     public function __construct(array $attributes = [])
@@ -37,5 +44,28 @@ class Zan extends Model
     public function belongModel()
     {
         return $this->morphTo('zan');
+    }
+
+    //赞标题
+    protected function getTitleAttribute()
+    {
+        switch (class_basename($this->belongModel)) {
+            case 'EduTopic':
+                return $this->belongModel->title;
+            case 'Comment':
+                return $this->belongModel->belongModel->user->name . '的评论';
+        }
+    }
+
+    //链接
+    public function link()
+    {
+        switch (class_basename($this->belongModel)) {
+            case 'EduTopic':
+                return $this->belongModel->link();
+            case 'Comment':
+                $param = '#comment-' . $this->belongModel->id;
+                return $this->belongModel->belongModel->link($param);
+        }
     }
 }

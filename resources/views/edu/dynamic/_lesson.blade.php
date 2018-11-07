@@ -8,7 +8,7 @@
                 <a href="{{route('member.user.show',$activity->causer)}}" class="text-secondary">
                     {{$activity->causer->name}}
                 </a>
-                <span class="badge badge-light text-secondary small">更新了课程</span>
+                <span class="badge badge-light text-primary small">更新了课程</span>
                 <a href="{{route('edu.lesson.show',$activity->subject)}}"
                    class="text-dark">
                     {{$activity->subject->title}}

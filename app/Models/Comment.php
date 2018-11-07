@@ -10,6 +10,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Common;
 use App\Observers\CommentObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +19,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 //评论
 class Comment extends Model
 {
-    use LogsActivity;
+    use LogsActivity, Common;
 
     protected $fillable = ['content', 'user_id', 'url'];
 
@@ -36,16 +37,5 @@ class Comment extends Model
     public function belongModel()
     {
         return $this->morphTo('comment');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    //点赞关联
-    public function zan()
-    {
-        return $this->morphMany(Zan::class, 'zan');
     }
 }
