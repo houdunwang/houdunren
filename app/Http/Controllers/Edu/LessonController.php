@@ -98,7 +98,7 @@ class LessonController extends Controller
     public function lists(Request $request)
     {
         session(['url.intended'=> $request->fullUrl()]);
-        $lessons = EduLesson::with('user')->latest()->paginate(9);
+        $lessons = EduLesson::with('user')->latest()->where('video_num','>',0)->paginate(12);
         return view('edu.lesson.lists', compact('lessons'));
     }
 

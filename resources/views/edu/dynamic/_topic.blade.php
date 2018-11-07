@@ -1,5 +1,5 @@
-<li class="my-2">
-    <div class="u-info-v1 p-3">
+<li class="mt-0">
+    <div class="u-info-v1 p-3 border-bottom-0 rounded-0">
         <div class="row justify-content-sm-between align-items-sm-center">
             <div class="col-sm-10 mb-2 mb-sm-0" style="font-size: 14px;">
                 <a href="{{route('member.user.show',$activity->causer)}}">

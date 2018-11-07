@@ -16,41 +16,26 @@
             {{--</div>--}}
             <div class="row listAlias mt-5">
                 @foreach($lessons as $lesson)
-                    <div class="col-12 col-md-6 col-xl-4">
+                    <div class="col-12 col-md-6 col-xl-3">
                         <article class="bg-white shadow-sm mb-3">
                             <a href="{{route('edu.lesson.show',$lesson)}}">
                                 <div class="position-relative">
                                     <img class="img-fluid w-100 rounded-top"
-                                         src="{{$lesson['thumb']}}" alt="Image Description">
+                                         src="{{$lesson['thumb']}}" alt="{{$lesson['title']}}">
                                 </div>
-                                <div class="rounded-bottom p-5">
-                                    <h4 class="h6">
+                                <div class="rounded-bottom p-3">
+                                    <h4 class="lesson-title">
                                         <a href="{{route('edu.lesson.show',$lesson)}}" tabindex="0" class="text-dark">
                                             {{$lesson['title']}}
                                         </a>
                                     </h4>
                                     <div class="small text-secondary row">
-                                        <div class="col-8">
+                                        <div class="col-12">
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                                             {{$lesson['updated_at']->diffForHumans()}}
                                             <i class="fa fa-film ml-3" aria-hidden="true"></i>
                                             {{$lesson->video_num}} 节课
                                         </div>
-                                        @can('update',$lesson)
-                                            <div class="col-4 text-right">
-                                                <div class="position-relative" style="top: -6px;">
-                                                    <a id="activitySettingsDropdownInvoker" class="u-icon u-icon-secondary--air u-icon--sm u-bg-transparent" href="javascript:;" role="button" aria-controls="{{$lesson['id']}}" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-target="#{{$lesson['id']}}" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
-                                                        <span class="fab fa-windows u-icon__inner"></span>
-                                                    </a>
-                                                    <div id="{{$lesson['id']}}" class="u-unfold right-0 text-left mt-2 u-unfold--css-animation u-unfold--hidden" aria-labelledby="activitySettingsDropdownInvoker" style="min-width: 190px; animation-duration: 300ms; right: 0px;">
-                                                        <a class="u-list__link" href="{{route('edu.lesson.edit',$lesson)}}">
-                                                            <span class="fa fa-eye-slash min-width-3 text-center font-size-13 mr-2"></span>
-                                                            编辑
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endcan
                                     </div>
                                 </div>
                             </a>

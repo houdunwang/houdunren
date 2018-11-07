@@ -11,11 +11,15 @@
 namespace App\Http\Controllers\Edu;
 
 use App\Http\Controllers\Controller;
+use App\Models\EduLesson;
+use Spatie\Activitylog\Models\Activity;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('edu.home');
+        $activitys = Activity::latest('updated_at')->paginate(10);
+        $lessons = EduLesson::with('user')->latest()->where('video_num','>',0)->paginate(12);
+        return view('edu.dynamic.index', compact('activitys','lessons'));
     }
 }

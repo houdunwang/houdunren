@@ -20,27 +20,7 @@
                 </button>
                 <!-- End Close Button -->
                 <!-- Input -->
-                <form class="js-focus-state input-group u-form">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="输入搜索关键字" name="w"
-                               aria-label="Recipient's username"
-                               aria-describedby="basic-addon2"/>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" onclick="search('topic')">文章
-                            </button>
-                            <button class="btn btn-outline-secondary" type="button" onclick="search('video')">课程
-                            </button>
-                        </div>
-                    </div>
-                    @push('js')
-                        <script>
-                            function search(t) {
-                                w = $("[name='w']").val();
-                                location.href = "{{route('edu.search')}}?w=" + w + "&t=" + t;
-                            }
-                        </script>
-                    @endpush
-                </form>
+                @include('edu.layouts._search')
                 <!-- End Input -->
             </div>
         </div>
@@ -70,19 +50,19 @@
                 <!-- Navigation -->
                 <div id="navBar" class="collapse navbar-collapse py-0">
                     <ul class="navbar-nav u-header__navbar-nav ml-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link u-header__nav-link" href="{{route('edu.dynamic.index')}}">
-                                动态
-                            </a>
-                        </li>
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link u-header__nav-link" href="{{route('edu.dynamic.index')}}">--}}
+                                {{--动态--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
                         <li class="nav-item">
                             <a class="nav-link u-header__nav-link" href="{{route('edu.shop.index')}}">
                                 订阅
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link u-header__nav-link text-primary" href="{{route('edu.lesson.lists')}}">
-                                <strong>碎片</strong>
+                            <a class="nav-link u-header__nav-link" href="{{route('edu.lesson.lists')}}">
+                                碎片
                             </a>
                         </li>
                     {{--<li class="nav-item hs-has-sub-menu u-header__nav-item"--}}

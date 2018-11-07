@@ -10,11 +10,10 @@ class DynamicController extends Controller
 {
     public function index(Request $request)
     {
-        $db = Activity::latest('updated_at');
-        if ($request->query('t') == 'follow') {
-            $db->whereIn('causer_id', auth()->user()->follower->pluck('id'));
-        }
-        $activitys = $db->paginate(10);
+        $activitys = Activity::latest('updated_at')->paginate(10);
+//        if ($request->query('t') == 'follow') {
+//            $db->whereIn('causer_id', auth()->user()->follower->pluck('id'));
+//        }
         return view('edu.dynamic.index', compact('activitys'));
     }
 }

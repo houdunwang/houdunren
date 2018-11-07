@@ -6,20 +6,26 @@
                 <div class="justify-content-between">
                     {{$lesson['title']}}
                     @auth
+                        @can('update',$lesson)
+                            <a href="{{route('edu.lesson.edit',$lesson)}}"
+                               class="btn btn-xs btn-light u-btn-light transition-3d-hover btn-xs float-right ml-2 text-secondary">
+                                <i class="fa fa-heart-o" aria-hidden="true"></i> 编辑
+                            </a>
+                        @endcan
                         @if($lesson->isFavorite(auth()->user()))
                             <a href="{{route('common.favorite.make',['model'=>'EduLesson','id'=>$lesson['id']])}}"
-                               class="btn u-btn-primary--air transition-3d-hover btn-xs float-right">
+                               class="btn u-btn-primary--air transition-3d-hover btn-xs float-right text-secondary">
                                 <i class="fa fa-heart-o" aria-hidden="true"></i> 已收藏
                             </a>
                         @else
                             <a href="{{route('common.favorite.make',['model'=>'EduLesson','id'=>$lesson['id']])}}"
-                               class="btn u-btn-secondary--air transition-3d-hover btn-xs float-right">
+                               class="btn btn-xs btn-light u-btn-light transition-3d-hover btn-xs float-right text-secondary">
                                 <i class="fa fa-heart-o" aria-hidden="true"></i> 收藏课程
                             </a>
                         @endif
                     @endauth
                     <a href="javascript:;" onclick="hideLesson()"
-                       class="btn btn-xs btn-light u-btn-light transition-3d-hover btn-xs float-right mr-2">
+                       class="btn btn-xs btn-light u-btn-light transition-3d-hover btn-xs float-right mr-2 text-secondary">
                         隐藏学习过的课程
                     </a>
                     @push('js')

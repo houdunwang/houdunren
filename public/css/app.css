@@ -346,11 +346,15 @@
 }
 
 .edu-lesson-lists article .position-relative img {
-  height: 195px;
+  height: 130px;
 }
 
-.edu-lesson-lists article h4.h6 {
+.edu-lesson-lists article h4.lesson-title {
+  font-weight: normal;
+  font-size: 14px;
   height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dropdown-menu-card {

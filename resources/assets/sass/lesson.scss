@@ -14,11 +14,15 @@
   article {
     .position-relative {
       img {
-        height: 195px;
+        height: 130px;
       }
     }
-    h4.h6 {
+    h4.lesson-title {
+      font-weight: normal;
+      font-size: 14px;
       height: 50px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
