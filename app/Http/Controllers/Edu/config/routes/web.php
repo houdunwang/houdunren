@@ -38,4 +38,6 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     //定单管理
     Route::resource('order', 'OrderController');
     Route::get('subscribe', 'SubscribeController@show')->name('subscribe.show');
+    //直播
+    Route::get('live','LiveController@make')->name('live');
 });

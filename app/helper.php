@@ -20,12 +20,13 @@
 
 /**
  * 保存模块配置项
- * @param array $data
- * @return bool
+ * @param array $data 配置项
+ * @param null $module 模块标识
+ * @return mixed
  */
-function config_save(array $data)
+function config_save(array $data, $module = null)
 {
-    $module = strtolower(module_name());
+    $module = $module ?? strtolower(module_name());
     return \App\Models\Config::updateOrCreate(
         ['module' => $module],
         ['module' => $module, 'data' => $data,]

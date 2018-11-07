@@ -6,4 +6,5 @@ return [
     ['title' => '配置管理', 'name' => 'config'],
     ['title' => '帖子删除', 'name' => 'topic-destroy'],
     ['title' => '文档管理', 'name' => 'document'],
+    ['title' => '开启直播', 'name' => 'live'],
 ];

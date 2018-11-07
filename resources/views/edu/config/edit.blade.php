@@ -22,6 +22,14 @@
                                  class="img-responsive img-thumbnail" width="150">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label>直播地址</label>
+                        <input type="text" class="form-control" name="live_path" value="{{config_get('edu.live_path','')}}">
+                    </div>
+                    <div class="form-group">
+                        <label>直播标题</label>
+                        <input type="text" class="form-control" name="live_title" value="{{config_get('edu.live_title','')}}">
+                    </div>
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-primary btn-sm">保存提交</button>

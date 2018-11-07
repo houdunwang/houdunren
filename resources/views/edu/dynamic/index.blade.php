@@ -1,5 +1,6 @@
 @extends('edu.layouts.master')
 @section('content')
+    @include('edu.layouts._live')
     <div class="container {{route_class()}}">
         <div class="row pt-5">
             <div class="col-sm-12">

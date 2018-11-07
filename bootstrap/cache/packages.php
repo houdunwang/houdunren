@@ -35,6 +35,17 @@
       'Active' => 'HieuLe\\Active\\Facades\\Active',
     ),
   ),
+  'hisorange/browser-detect' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'hisorange\\BrowserDetect\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Browser' => 'hisorange\\BrowserDetect\\Facade',
+    ),
+  ),
   'houdunwang/laravel-upload' => 
   array (
     'providers' => 
