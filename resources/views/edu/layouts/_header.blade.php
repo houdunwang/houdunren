@@ -307,8 +307,7 @@
                                                             <div class="position-relative">
                                                                 <a href="{{route('member.user.edit',[auth()->user(),'type'=>'icon'])}}">
                                                                     <img class="u-sidebar--account__holder-img"
-                                                                         src="{{auth()->user()->icon}}"
-                                                                         alt="Image Description">
+                                                                         src="{{auth()->user()->avatar}}">
                                                                     <span class="u-badge u-badge--xs u-badge-border-success u-badge-pos rounded-circle"></span>
                                                                 </a>
                                                             </div>

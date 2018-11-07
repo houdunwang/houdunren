@@ -118,6 +118,6 @@ class User extends Authenticatable
      */
     public function getAvatarAttribute()
     {
-        return $this->icon ?: asset('images/user.jpg');
+        return $this->icon ? $this->icon : asset('images/user.jpg');
     }
 }

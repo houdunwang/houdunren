@@ -29,7 +29,7 @@
                 @csrf
                 <div class="form-group">
                     <label>帐号</label>
-                    <input type="text" name="account" class="form-control" placeholder="请输入邮箱或手机号" value="2300071698@qq.com"  value="{{old('account')}}">
+                    <input type="text" name="account" class="form-control" placeholder="请输入邮箱或手机号" value="{{old('account')}}">
                 </div>
                 <div class="form-group">
                     <label>新密码</label>
