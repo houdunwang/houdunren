@@ -56,13 +56,18 @@
                             {{--</a>--}}
                         {{--</li>--}}
                         <li class="nav-item">
+                            <a class="nav-link u-header__nav-link" href="{{route('edu.lesson.lists')}}">
+                                碎片
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link u-header__nav-link" href="{{route('edu.shop.index')}}">
                                 订阅
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link u-header__nav-link" href="{{route('edu.lesson.lists')}}">
-                                碎片
+                            <a class="nav-link u-header__nav-link" href="{{route('edu.topic.index')}}">
+                                话题
                             </a>
                         </li>
                     {{--<li class="nav-item hs-has-sub-menu u-header__nav-item"--}}
@@ -98,61 +103,61 @@
                     {{--<!-- End Submenu -->--}}
                     {{--</li>--}}
                     <!-- Home -->
-                        <li class="nav-item hs-has-mega-menu u-header__nav-item"
-                            data-event="hover"
-                            data-animation-in="slideInUp"
-                            data-animation-out="fadeOut"
-                            data-position="left">
-                            <a id="homeMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"
-                               aria-haspopup="true"
-                               aria-expanded="false">
-                                话题
-                                <span class="fa fa-angle-down u-header__nav-link-icon"></span>
-                            </a>
-                            <!-- Home - Mega Menu -->
-                            <div class="hs-mega-menu u-header__sub-menu w-100 u-header__mega-menu-wrapper-v2 ml-1"
-                                 style="margin-left: 300px;"
-                                 aria-labelledby="homeMegaMenu">
-                                <div class="row p-0 mr-0">
-                                    <div class="col-lg-9 pr-0">
-                                        <div class="d-none d-lg-block u-header__banner-v1"
-                                             data-bg-img-src="{{asset('org/front')}}/img/750x750/img1.jpg">
-                                            <div class="w-100 text-center u-header__banner-v1-content u-content-centered-y p-4">
-                                                <div class="mb-4">
-                                                    <strong class="d-block u-header__banner-v1-title mb-2">向军大叔每晚直播</strong>
-                                                    <span class="u-header__banner-v1-text">
-                                                        技术点均以实战为主，大叔用直播形式教你进行编程世界。
-                                                    </span>
-                                                </div>
-                                                <a class="btn btn-primary u-btn-primary btn-sm transition-3d-hover"
-                                                   href="https://ke.qq.com/course/288236?tuin=89184f12" target="_blank">
-                                                    进入直播间 <span class="fa fa-angle-right ml-2"></span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 u-header__mega-menu-wrapper-v3">
-                                        <div class="row u-header__mega-menu-wrapper-v1">
-                                            <div class="col-sm-12">
-                                                <ul class="list-unstyled mb-4 row">
-                                                    @foreach(\App\Models\EduCategory::get() as $category)
-                                                        <li class="col-sm-12">
-                                                            <div class="nav-link u-list__link py-3 px-0">
-                                                                <a class="text-secondary"
-                                                                   href="{{route('edu.topic_list',$category['id'])}}">
-                                                                    <i class="{{$category['icon']}} w-15 pr-0"
-                                                                       aria-hidden="true"></i>{{$category['title']}}
-                                                                </a>
-                                                            </div>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                        {{--<li class="nav-item hs-has-mega-menu u-header__nav-item"--}}
+                            {{--data-event="hover"--}}
+                            {{--data-animation-in="slideInUp"--}}
+                            {{--data-animation-out="fadeOut"--}}
+                            {{--data-position="left">--}}
+                            {{--<a id="homeMegaMenu" class="nav-link u-header__nav-link" href="#"--}}
+                               {{--aria-haspopup="true"--}}
+                               {{--aria-expanded="false">--}}
+                                {{--话题--}}
+                                {{--<span class="fa fa-angle-down u-header__nav-link-icon"></span>--}}
+                            {{--</a>--}}
+                            {{--<!-- Home - Mega Menu -->--}}
+                            {{--<div class="hs-mega-menu u-header__sub-menu w-100 u-header__mega-menu-wrapper-v2 ml-1"--}}
+                                 {{--style="margin-left: 300px;"--}}
+                                 {{--aria-labelledby="homeMegaMenu">--}}
+                                {{--<div class="row p-0 mr-0">--}}
+                                    {{--<div class="col-lg-9 pr-0">--}}
+                                        {{--<div class="d-none d-lg-block u-header__banner-v1"--}}
+                                             {{--data-bg-img-src="{{asset('org/front')}}/img/750x750/img1.jpg">--}}
+                                            {{--<div class="w-100 text-center u-header__banner-v1-content u-content-centered-y p-4">--}}
+                                                {{--<div class="mb-4">--}}
+                                                    {{--<strong class="d-block u-header__banner-v1-title mb-2">向军大叔每晚直播</strong>--}}
+                                                    {{--<span class="u-header__banner-v1-text">--}}
+                                                        {{--技术点均以实战为主，大叔用直播形式教你进行编程世界。--}}
+                                                    {{--</span>--}}
+                                                {{--</div>--}}
+                                                {{--<a class="btn btn-primary u-btn-primary btn-sm transition-3d-hover"--}}
+                                                   {{--href="https://ke.qq.com/course/288236?tuin=89184f12" target="_blank">--}}
+                                                    {{--进入直播间 <span class="fa fa-angle-right ml-2"></span>--}}
+                                                {{--</a>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="col-lg-3 u-header__mega-menu-wrapper-v3">--}}
+                                        {{--<div class="row u-header__mega-menu-wrapper-v1">--}}
+                                            {{--<div class="col-sm-12">--}}
+                                                {{--<ul class="list-unstyled mb-4 row">--}}
+                                                    {{--@foreach(\App\Models\EduCategory::get() as $category)--}}
+                                                        {{--<li class="col-sm-12">--}}
+                                                            {{--<div class="nav-link u-list__link py-3 px-0">--}}
+                                                                {{--<a class="text-secondary"--}}
+                                                                   {{--href="{{route('edu.topic_list',$category['id'])}}">--}}
+                                                                    {{--<i class="{{$category['icon']}} w-15 pr-0"--}}
+                                                                       {{--aria-hidden="true"></i>{{$category['title']}}--}}
+                                                                {{--</a>--}}
+                                                            {{--</div>--}}
+                                                        {{--</li>--}}
+                                                    {{--@endforeach--}}
+                                                {{--</ul>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
                         <!-- End Home -->
                         <!-- Blog -->
                         <li class="nav-item hs-has-sub-menu u-header__nav-item"

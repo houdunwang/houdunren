@@ -25,7 +25,7 @@
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                             <a href="{{route('member.user.show',$topic->user)}}">
-                                                <img class="u-avatar u-sm-avatar--bordered rounded-circle" src="{{$topic->user->icon}}"
+                                                <img class="u-avatar u-sm-avatar--bordered rounded-circle" src="{{$topic->user->avatar}}"
                                                      alt="{{$topic->title}}">
                                             </a>
                                         </div>
@@ -33,7 +33,7 @@
                                             <h6 class="card-title mb-1 name">
                                                 <a href="{{route('edu.topic.show',$topic)}}">{{$topic->title}}</a>
                                             </h6>
-                                            <p class="card-text small text-muted mb-1">
+                                            <p class="card-text small mb-1">
                                                 <a href="{{route('member.user.show',$topic->user)}}"
                                                    class="text-secondary mr-2">
                                                     <i class="fa fa-user-circle"
@@ -41,6 +41,9 @@
                                                 </a>
                                                 <i class="fa fa-clock-o"
                                                    aria-hidden="true"></i> {{$topic->updated_at->diffForHumans()}}
+
+                                                <a href="{{route('edu.topic_list',['id'=>$topic['category_id']])}}" class="text-secondary ml-2">
+                                                    <i class="fa fa-folder-o" aria-hidden="true"></i> {{$topic->category->title}}</a>
                                             </p>
                                         </div>
                                         <div class="col-auto">
