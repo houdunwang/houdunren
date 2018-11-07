@@ -12,12 +12,33 @@
 namespace App\Servers;
 
 //动态
+use Spatie\Activitylog\Models\Activity;
+
 class Dynamic
 {
-    public function all($row = 10, $module = null)
+    //todo
+    public function all($row = 10)
     {
-        $module = $module ?? module_name();
-        $activitys = Activity::where('log_name', 'like', $module . '%')->latest('updated_at')->paginate($row);
-
+        $activities = Activity::latest('updated_at')->paginate($row);
+        $data = collect();
+        foreach ($activities as $key => $activity) {
+            if ($activity->subject && $activity->causer) {
+                switch ($activity->log_name) {
+                    case 'comment':
+                        $data[] = [
+                            'link' => $activity->subject->belongModel->link('#comment-' . $activity->subject->id),
+                            'title' => $activity->subject->belongModel->title,
+                        ];
+                        break;
+                    case 'edu_topic':
+                        break;
+                    case 'edu_lesson':
+                        break;
+                    case 'edu_zan':
+                        break;
+                }
+            }
+        }
+        return $data;
     }
 }
