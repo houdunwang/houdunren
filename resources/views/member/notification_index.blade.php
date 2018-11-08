@@ -25,7 +25,7 @@
                                     <a href="{{route('member.user.show',$notification['data']['user_id'])}}" class="text-secondary">
                                         {{$notification['data']['user_name']}}
                                     </a>
-                                    <span class="text-muted">回复了</span>
+                                    <span class="text-muted">{{$notification['data']['active']??''}}</span>
                                     <a href="{{route('member.notification.show',$notification)}}"  class="text-secondary">
                                         {{$notification['data']['title']}}
                                     </a>

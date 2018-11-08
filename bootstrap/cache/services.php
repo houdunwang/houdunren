@@ -32,15 +32,16 @@
     28 => 'Houdunwang\\WeChat\\WeChatProvider',
     29 => 'Laravel\\Scout\\ScoutServiceProvider',
     30 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    31 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    32 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
-    33 => 'Spatie\\Permission\\PermissionServiceProvider',
-    34 => 'HieuLe\\Active\\ActiveServiceProvider',
-    35 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
-    36 => 'App\\Providers\\AppServiceProvider',
-    37 => 'App\\Providers\\AuthServiceProvider',
-    38 => 'App\\Providers\\EventServiceProvider',
-    39 => 'App\\Providers\\RouteServiceProvider',
+    31 => 'Mews\\Purifier\\PurifierServiceProvider',
+    32 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    33 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
+    34 => 'Spatie\\Permission\\PermissionServiceProvider',
+    35 => 'HieuLe\\Active\\ActiveServiceProvider',
+    36 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
+    37 => 'App\\Providers\\AppServiceProvider',
+    38 => 'App\\Providers\\AuthServiceProvider',
+    39 => 'App\\Providers\\EventServiceProvider',
+    40 => 'App\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -173,6 +174,7 @@
     'command.ide-helper.models' => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
     'browser-detect' => 'hisorange\\BrowserDetect\\ServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
+    'purifier' => 'Mews\\Purifier\\PurifierServiceProvider',
     'NunoMaduro\\Collision\\Contracts\\Provider' => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
   ),
   'when' => 
@@ -220,6 +222,9 @@
     array (
     ),
     'Laravel\\Tinker\\TinkerServiceProvider' => 
+    array (
+    ),
+    'Mews\\Purifier\\PurifierServiceProvider' => 
     array (
     ),
     'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => 

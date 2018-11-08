@@ -11,6 +11,7 @@
 namespace App;
 
 use App\Models\Attachment;
+use App\Models\Traits\Common;
 use App\Models\Zan;
 use App\Observers\UserObserver;
 use Illuminate\Notifications\Notifiable;
@@ -19,7 +20,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles;
+    use Notifiable, HasRoles, Common;
 
     protected $fillable = [
         'id',

@@ -11,30 +11,53 @@
                         <div class="position-relative float-right">
                             <a class="btn btn-primary btn-xs p-1 pl-2 pr-2 text-white"
                                href="{{route('edu.topic.create',['id'=>1])}}">
-                                讨论
+                                发表
                             </a>
                         </div>
                     </div>
                 </div>
                 <ul class="list-unstyled mb-0">
-                    @foreach($activitys as $activity)
-                        @if($activity->subject && $activity->causer)
-                            @switch($activity->log_name)
-                                @case('comment')
-                                @include('edu.dynamic._comment')
-                                @break
-                                @case('edu_topic')
-                                @include('edu.dynamic._topic')
-                                @break
-                                @case('edu_lesson')
-                                @include('edu.dynamic._lesson')
-                                @break
-                                @case('edu_zan')
-                                @include('edu.dynamic._zan')
-                                @break
-                            @endswitch
-                        @endif
+                    @foreach($condition as $cond)
+                        <li class="mt-0">
+                            <div class="u-info-v1 p-3 border-bottom-0 rounded-0">
+                                <div class="row justify-content-sm-between align-items-sm-center">
+                                    <div class="col-sm-10 mb-2 mb-sm-0" style="font-size: 14px;">
+                                        <a href="{{route('member.user.show',$cond['activity']->causer)}}" class="float-left">
+                                            <img class="u-sm-avatar rounded-circle mr-3" src="{{$cond['activity']->causer->avatar}}">
+                                        </a>
+                                        <a href="{{route('member.user.show',$cond['activity']->causer)}}" class="text-secondary pt-1" style="display: inline-block;">
+                                            {{$cond['activity']->causer->name}}
+                                        </a>
+                                        <span class="badge badge-light text-secondary small">{{$cond['active']}}</span>
+                                        <a href="{{$cond['link']}}" class="text-secondary">
+                                            {{$cond['title']}}
+                                        </a>
+                                    </div>
+                                    <span class="col-sm-2 text-text text-sm-right small text-secondary">
+                                       <i class="fa fa-clock-o" aria-hidden="true"></i> {{$cond['activity']->created_at->diffForHumans()}}
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
                     @endforeach
+                    {{--@foreach($activitys as $activity)--}}
+                        {{--@if($activity->subject && $activity->causer)--}}
+                            {{--@switch($activity->log_name)--}}
+                                {{--@case('comment')--}}
+                                {{--@include('edu.dynamic._comment')--}}
+                                {{--@break--}}
+                                {{--@case('edu_topic')--}}
+                                {{--@include('edu.dynamic._topic')--}}
+                                {{--@break--}}
+                                {{--@case('edu_lesson')--}}
+                                {{--@include('edu.dynamic._lesson')--}}
+                                {{--@break--}}
+                                {{--@case('edu_zan')--}}
+                                {{--@include('edu.dynamic._zan')--}}
+                                {{--@break--}}
+                            {{--@endswitch--}}
+                        {{--@endif--}}
+                    {{--@endforeach--}}
                     <li class="mt-0">
                         <div class="u-info-v1 p-3 border-bottom-0 rounded-0">
                             <div class="row justify-content-sm-between align-items-sm-center">

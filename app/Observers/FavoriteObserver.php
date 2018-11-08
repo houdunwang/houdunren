@@ -37,7 +37,7 @@ class FavoriteObserver
      */
     public function restored(Favorite $favorite)
     {
-        //
+
     }
 
     /**

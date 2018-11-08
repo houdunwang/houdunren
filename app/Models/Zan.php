@@ -14,6 +14,7 @@ use App\Models\Traits\Common;
 use App\Observers\ZanObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Zan extends Model
@@ -47,14 +48,9 @@ class Zan extends Model
     }
 
     //赞标题
-    protected function getTitleAttribute()
+    public function title()
     {
-        switch (class_basename($this->belongModel)) {
-            case 'EduTopic':
-                return $this->belongModel->title;
-            case 'Comment':
-                return $this->belongModel->belongModel->user->name . '的评论';
-        }
+        return $this->belongModel->title();
     }
 
     //链接

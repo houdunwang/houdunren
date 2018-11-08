@@ -64,7 +64,7 @@ class EduVideo extends Model
         return in_array($this['id'], $cache[$name]);
     }
 
-    public function getTitle()
+    public function title()
     {
         return $this->title;
     }

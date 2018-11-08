@@ -15,6 +15,7 @@ class EduVideoObserver
     {
         $this->changeLessonVideoNum($video);
     }
+
     //更新课程视频数量
     protected function changeLessonVideoNum(EduVideo $video)
     {
@@ -25,6 +26,7 @@ class EduVideoObserver
 
     public function deleted(EduVideo $video)
     {
+        $video->activity()->delete();
     }
 
     public function restored(EduVideo $video)

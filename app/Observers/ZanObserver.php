@@ -11,6 +11,7 @@
 namespace App\Observers;
 
 use App\Models\Zan;
+use App\Notifications\ZanNotification;
 use Spatie\Activitylog\Models\Activity;
 
 /**
@@ -22,14 +23,14 @@ class ZanObserver
 {
     public function created(Zan $zan)
     {
+        $zan->belongModel->user->notify(new ZanNotification($zan));
         $zan->belongModel->increment('zan_num');
     }
 
     public function deleted(Zan $zan)
     {
         //删除动态日志
-        Activity::where('subject_type','App\Models\Zan')->where('subject_id',$zan['id'])->delete();
-
+        $zan->activity()->delete();
         $zan->belongModel->decrement('zan_num');
     }
 }

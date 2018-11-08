@@ -15,52 +15,32 @@ use App\Notifications\CommentNotification;
 
 class CommentObserver
 {
+    public function creating(Comment $comment)
+    {
+        //提取评论部分内容为摘要，markdown转html
+        $content = (new \Parsedown())->text($comment['content']);
+        $comment['description'] = mb_substr(strip_tags($content), 0, 50);
+    }
+
     public function created(Comment $comment)
     {
         $comment->belongModel->user->notify(new CommentNotification($comment));
     }
 
-    /**
-     * Handle the comment "updated" event.
-     *
-     * @param  \App\Models\Comment $comment
-     * @return void
-     */
     public function updated(Comment $comment)
     {
-        //
     }
 
-    /**
-     * Handle the comment "deleted" event.
-     *
-     * @param  \App\Models\Comment $comment
-     * @return void
-     */
     public function deleted(Comment $comment)
     {
         $comment->zan()->delete();
     }
 
-    /**
-     * Handle the comment "restored" event.
-     *
-     * @param  \App\Models\Comment $comment
-     * @return void
-     */
     public function restored(Comment $comment)
     {
-        //
     }
 
-    /**
-     * Handle the comment "force deleted" event.
-     *
-     * @param  \App\Models\Comment $comment
-     * @return void
-     */
     public function forceDeleted(Comment $comment)
     {
-        //
     }
 }

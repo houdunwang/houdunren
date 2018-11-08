@@ -11,6 +11,7 @@
 namespace App\Models;
 
 use App\Models\Traits\Common;
+use App\Observers\EduTopicObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
@@ -33,6 +34,13 @@ class EduTopic extends Model
 
     protected static $logAttributes = ['title', 'created_at', 'updated_at'];
 
+    protected static function boot()
+    {
+        EduTopic::observe(EduTopicObserver::class);
+        parent::boot();
+    }
+
+
     public function category()
     {
         return $this->belongsTo(EduCategory::class);
@@ -43,9 +51,14 @@ class EduTopic extends Model
         return $this->morphMany(Comment::class, 'comment');
     }
 
-    public function link($param='')
+    public function link($param = '')
     {
         return route('edu.topic.show', $this) . $param;
+    }
+
+    public function title()
+    {
+        return $this['title'];
     }
 
     //配置algolia可搜索属性

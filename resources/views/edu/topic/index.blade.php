@@ -12,7 +12,7 @@
                                 </h6>
                             </div>
                             <div class="col-auto">
-                                <a href="#" class="btn btn-sm btn-primary">
+                                <a href="{{route('edu.topic.create')}}" class="btn btn-xs btn-primary">
                                     发表
                                 </a>
                             </div>

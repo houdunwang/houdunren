@@ -38,4 +38,14 @@ class Comment extends Model
     {
         return $this->morphTo('comment');
     }
+
+    public function link()
+    {
+        return $this->belongModel->link('#comment-' . $this['id']);
+    }
+
+    public function title()
+    {
+        return $this->description ?? mb_substr(strip_tags((new \Parsedown())->text($this['content'])), 0, 50);
+    }
 }

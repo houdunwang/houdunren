@@ -11,34 +11,36 @@
 
 namespace App\Servers;
 
-//动态
-use Spatie\Activitylog\Models\Activity;
+use Illuminate\Support\Collection;
 
 class Dynamic
 {
-    //todo
-    public function all($row = 10)
+    /**
+     * 格式化网站动态数据
+     * @param $activities
+     * @return \Illuminate\Support\Collection
+     */
+    public function format($activities)
     {
-        $activities = Activity::latest('updated_at')->paginate($row);
-        $data = collect();
-        foreach ($activities as $key => $activity) {
+        return $activities->map(function ($activity) {
             if ($activity->subject && $activity->causer) {
+                $res = [
+                    'activity' => $activity,
+                    'link' => $activity->subject->link(),
+                    'title' => $activity->subject->title(),
+                ];
                 switch ($activity->log_name) {
                     case 'comment':
-                        $data[] = [
-                            'link' => $activity->subject->belongModel->link('#comment-' . $activity->subject->id),
-                            'title' => $activity->subject->belongModel->title,
-                        ];
-                        break;
-                    case 'edu_topic':
-                        break;
-                    case 'edu_lesson':
+                        $res['active'] = '发表评论';
                         break;
                     case 'edu_zan':
+                        $res['active'] = '赞了';
                         break;
+                    default:
+                        $res['active'] = $activity['description'] == 'created' ? '发表了' : '更新了';
                 }
+                return $res;
             }
-        }
-        return $data;
+        })->filter();
     }
 }

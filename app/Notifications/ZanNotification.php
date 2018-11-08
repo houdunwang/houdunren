@@ -1,34 +1,24 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军 <www.aoxiangjun.com>
- * |    WeChat: houdunren2018
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
 
 namespace App\Notifications;
 
-use App\Models\Comment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class CommentNotification extends Notification
+class ZanNotification extends Notification
 {
     use Queueable;
-    protected $comment;
+    protected $zan;
 
     /**
-     * Create a new notification instance.
-     *
-     * @return void
+     * ZanNotification constructor.
+     * @param $zan
      */
-    public function __construct(Comment $comment)
+    public function __construct($zan)
     {
-        $this->comment = $comment;
+        $this->zan = $zan;
     }
 
     /**
@@ -65,12 +55,12 @@ class CommentNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'user_id' => $this->comment->user->id,
-            'user_name' => $this->comment->user->name,
-            'user_icon' => $this->comment->user->avatar,
-            'active' => '评论了',
-            'title' => $this->comment->belongModel->title(),
-            'link' => $this->comment->belongModel->link('#comment-' . $this->comment->id),
+            'user_id' => $this->zan->user->id,
+            'user_name' => $this->zan->user->name,
+            'user_icon' => $this->zan->user->avatar,
+            'active' => '赞了',
+            'title' => $this->zan->belongModel->title(),
+            'link' => $this->zan->belongModel->link(),
         ];
     }
 }

@@ -11,6 +11,7 @@
 namespace App\Models;
 
 use App\Models\Traits\Common;
+use App\Observers\EduLessonObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
@@ -46,6 +47,12 @@ class EduLesson extends Model
 
     protected $casts = [];
 
+    protected static function boot()
+    {
+        EduLesson::observe(EduLessonObserver::class);
+        parent::boot();
+    }
+
     //配置algolia可搜索属性
     public function toSearchableArray()
     {
@@ -65,12 +72,12 @@ class EduLesson extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getTitle()
+    public function title()
     {
         return $this->title;
     }
 
-    public function link($param)
+    public function link(string $param = '')
     {
         return route('edu.lesson.show', $this) . $param;
     }

@@ -18,4 +18,9 @@ class UserObserver
     {
         $user->token = str_random(10);
     }
+
+    public function deleted(User $user)
+    {
+        $user->activity()->delete();
+    }
 }

@@ -12,14 +12,16 @@ namespace App\Http\Controllers\Edu;
 
 use App\Http\Controllers\Controller;
 use App\Models\EduLesson;
+use App\Servers\Dynamic;
 use Spatie\Activitylog\Models\Activity;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Dynamic $dynamic)
     {
         $activitys = Activity::latest('updated_at')->paginate(10);
+        $condition = $dynamic->format($activitys);
         $lessons = EduLesson::with('user')->latest()->where('video_num', '>', 0)->paginate(12);
-        return view('edu.dynamic.index', compact('activitys', 'lessons'));
+        return view('edu.dynamic.index', compact('activitys', 'condition', 'lessons'));
     }
 }

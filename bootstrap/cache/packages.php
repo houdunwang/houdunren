@@ -81,6 +81,17 @@
       0 => 'Laravel\\Tinker\\TinkerServiceProvider',
     ),
   ),
+  'mews/purifier' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Mews\\Purifier\\PurifierServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Purifier' => 'Mews\\Purifier\\Facades\\Purifier',
+    ),
+  ),
   'nunomaduro/collision' => 
   array (
     'providers' => 

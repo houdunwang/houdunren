@@ -12,8 +12,10 @@ namespace App\Models\Traits;
 
 use App\Models\Comment;
 use App\Models\Favorite;
+use App\Models\Notification;
 use App\User;
 use App\Models\Zan;
+use Spatie\Activitylog\Models\Activity;
 
 trait Common
 {
@@ -35,10 +37,23 @@ trait Common
         return $this->morphMany(Favorite::class, 'favorite');
     }
 
+    //动态日志
+    public function activity()
+    {
+        return $this->morphMany(Activity::class, 'subject');
+    }
+
     //用户是否收藏文章
     public function isFavorite(User $user)
     {
         return $this->favorite()->where('user_id', $user['id'])->first();
+    }
+
+    //通知关联
+    public function notification()
+    {
+        return $this->morphMany(Notification::class, 'notifiable');
+
     }
 
     //评论关联
