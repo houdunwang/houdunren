@@ -12,6 +12,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 会员关注
+ * Class Follower
+ * @package App\Models
+ */
 class Follower extends Model
 {
     protected $fillable = ['user_id', 'follower_id'];

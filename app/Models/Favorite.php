@@ -14,7 +14,11 @@ use App\Observers\FavoriteObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-//收藏
+/**
+ * 收藏
+ * Class Favorite
+ * @package App\Models
+ */
 class Favorite extends Model
 {
     protected $fillable = ['user_id', 'favorite_num'];

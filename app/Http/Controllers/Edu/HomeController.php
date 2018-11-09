@@ -21,7 +21,7 @@ class HomeController extends Controller
     {
         $activitys = Activity::latest('updated_at')->paginate(10);
         $condition = $dynamic->format($activitys);
-        $lessons = EduLesson::with('user')->latest()->where('video_num', '>', 0)->paginate(12);
+        $lessons = EduLesson::with('user')->latest()->where('video_num', '>', 0)->limit(12)->get();
         return view('edu.dynamic.index', compact('activitys', 'condition', 'lessons'));
     }
 }

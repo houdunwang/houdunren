@@ -5,6 +5,11 @@ namespace App\Models;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 文章内容
+ * Class ContentArticle
+ * @package App\Models
+ */
 class ContentArticle extends Model
 {
     protected $fillable = [

@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Models;
-
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-//课程订单记录
+/**
+ * 课程|订阅订单
+ * Class EduOrder
+ * @package App\Models
+ */
 class EduOrder extends Model
 {
     protected $fillable = ['order_id', 'shop_id', 'lesson_id', 'user_id', 'status', 'created_at', 'updated_at'];

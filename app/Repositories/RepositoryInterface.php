@@ -5,16 +5,25 @@
  * |-------------------------------------------------------------------
  * |    Author: 向军 <www.aoxiangjun.com>
  * |    WeChat: houdunren2018
+ * |      Date: 2018/11/10
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
-namespace App\Models;
+namespace App\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
-
-class VideoTag extends Model
+interface RepositoryInterface
 {
-    protected $fillable = ['name'];
+    public function all(array $columns = ['*']);
 
-    protected $casts = [];
+    public function paginate($row = 10, array $columns = ['*']);
+
+    public function create($attributes);
+
+    public function update($attributes);
+
+    public function delete();
+
+    public function find($id, $columns = ['*']);
+
+    public function findBy($field, $value, $columns = ['*']);
 }

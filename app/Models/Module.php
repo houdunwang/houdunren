@@ -1,18 +1,14 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军 <www.aoxiangjun.com>
- * |    WeChat: houdunren2018
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
-
 namespace App\Models;
 
 use App\Http\Controllers\Content\HomeController;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 模型
+ * Class Module
+ * @package App\Models
+ */
 class Module extends Model
 {
     protected $fillable = [

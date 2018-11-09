@@ -14,6 +14,7 @@
                     </div>
                 </div>
             </div>
+
             <figure class="w-75 w-sm-50 w-lg-30 position-absolute-top-left-0 z-index-minus-1">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                      viewBox="0 0 603.8 550.5" style="enable-background:new 0 0 603.8 550.5;" xml:space="preserve">

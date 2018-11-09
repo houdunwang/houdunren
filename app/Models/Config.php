@@ -13,6 +13,11 @@ namespace App\Models;
 use App\Observers\ConfigObserver;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 配置管理
+ * Class Config
+ * @package App\Models
+ */
 class Config extends Model
 {
     protected $fillable = ['name', 'data', 'module'];

@@ -22,12 +22,7 @@ class VideoController extends Controller
 
     public function show(EduVideo $video)
     {
-        if (auth()->user()->can('view', $video->lesson)) {
-            //保存观看记录
-            $video->userVideo()->sync([auth()->id()]);
-            return view('edu.lesson.video', compact('video'));
-        }
-        //没有权限时跳转订阅页面
-        return redirect(route('edu.shop.index'));
+        $video->userVideo()->sync([auth()->id()]);
+        return view('edu.lesson.video', compact('video'));
     }
 }

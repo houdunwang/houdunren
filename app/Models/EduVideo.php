@@ -1,16 +1,7 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军 <www.aoxiangjun.com>
- * |    WeChat: houdunren2018
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
-
 namespace App\Models;
 
-use App\Models\Traits\Common;
+use App\Models\Foundations\CommonRelation;
 use App\Observers\EduVideoObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +15,7 @@ use Laravel\Scout\Searchable;
  */
 class EduVideo extends Model
 {
-    use SoftDeletes, Common, Searchable;
+    use SoftDeletes, CommonRelation, Searchable;
     /**
      * 需要转换成日期的属性
      *
@@ -66,7 +57,7 @@ class EduVideo extends Model
 
     public function title()
     {
-        return $this->title;
+        return preg_replace('/^\d+\s*/', '', $this->title);
     }
 
     public function link($param)

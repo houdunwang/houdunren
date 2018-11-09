@@ -10,16 +10,19 @@
 
 namespace App\Models;
 
-use App\Models\Traits\Common;
+use App\Models\Foundations\CommonRelation;
 use App\Observers\CommentObserver;
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-//评论
+/**
+ * 评论
+ * Class Comment
+ * @package App\Models
+ */
 class Comment extends Model
 {
-    use LogsActivity, Common;
+    use LogsActivity, CommonRelation;
 
     protected $fillable = ['content', 'user_id', 'url'];
 

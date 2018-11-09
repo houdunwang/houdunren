@@ -1,9 +1,13 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 文章模板
+ * Class ContentTemplate
+ * @package App\Models
+ */
 class ContentTemplate extends Model
 {
     protected $fillable = ['name', 'preview', 'mode', 'package'];

@@ -6,7 +6,7 @@ use App\Observers\ModuleConfigObserver;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 模块配置项
+ * 模块配置
  * Class ModuleConfig
  * @package App\Models
  */

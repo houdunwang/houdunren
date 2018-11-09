@@ -6,6 +6,11 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 订阅记录
+ * Class EduSubscribe
+ * @package App\Models
+ */
 class EduSubscribe extends Model
 {
     protected $fillable = ['user_id', 'begin_time', 'end_time', 'created_at', 'updated_at'];

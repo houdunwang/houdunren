@@ -11,7 +11,7 @@
 namespace App;
 
 use App\Models\Attachment;
-use App\Models\Traits\Common;
+use App\Models\Foundations\CommonRelation;
 use App\Models\Zan;
 use App\Observers\UserObserver;
 use Illuminate\Notifications\Notifiable;
@@ -20,7 +20,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles, Common;
+    use Notifiable, HasRoles, CommonRelation;
 
     protected $fillable = [
         'id',
@@ -120,5 +120,15 @@ class User extends Authenticatable
     public function getAvatarAttribute()
     {
         return $this->icon ? $this->icon : asset('images/user.jpg');
+    }
+
+    /**
+     * 活跃用户
+     * @param int $row
+     * @return mixed
+     */
+    public function active($row = 6)
+    {
+        return User::limit($row)->latest('updated_at')->get();
     }
 }

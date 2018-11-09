@@ -1,16 +1,7 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军 <www.aoxiangjun.com>
- * |    WeChat: houdunren2018
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
-
 namespace App\Models;
 
-use App\Models\Traits\Common;
+use App\Models\Foundations\CommonRelation;
 use App\Observers\EduLessonObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -18,13 +9,13 @@ use Laravel\Scout\Searchable;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
- * 课程管理
+ * 视频课程
  * Class EduLesson
  * @package App\Models
  */
 class EduLesson extends Model
 {
-    use Common, LogsActivity, Searchable;
+    use CommonRelation, LogsActivity, Searchable;
     protected static $logName = 'edu_lesson';
     protected $fillable = [
         'id',

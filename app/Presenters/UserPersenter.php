@@ -5,21 +5,23 @@
  * |-------------------------------------------------------------------
  * |    Author: 向军 <www.aoxiangjun.com>
  * |    WeChat: houdunren2018
+ * |      Date: 2018/11/10
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
-namespace App\Models;
+namespace App\Presenters;
 
-use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 /**
- * 标签
- * Class EduTag
- * @package App\Models
+ * 处理模型属性
+ * Class UserPresenter
+ * @package App\Presenters
  */
-class EduTag extends Model
+class UserPresenter
 {
-    protected $fillable = ['name'];
-
-    protected $casts = [];
+    public function avatar(User $user)
+    {
+        return $user['icon'] ? $user['icon'] : asset('images/user.jpg');
+    }
 }
