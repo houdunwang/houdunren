@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-use App\Models\Foundations\CommonRelation;
+use App\Foundations\CommonRelation;
 use App\Observers\EduLessonObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +16,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class EduLesson extends Model
 {
     use CommonRelation, LogsActivity, Searchable;
+
     protected static $logName = 'edu_lesson';
+
     protected $fillable = [
         'id',
         'title',

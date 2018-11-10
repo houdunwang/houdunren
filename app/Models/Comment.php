@@ -10,7 +10,7 @@
 
 namespace App\Models;
 
-use App\Models\Foundations\CommonRelation;
+use App\Foundations\CommonRelation;
 use App\Observers\CommentObserver;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;

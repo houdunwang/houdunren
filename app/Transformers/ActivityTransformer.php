@@ -5,40 +5,41 @@
  * |-------------------------------------------------------------------
  * |    Author: 向军 <www.aoxiangjun.com>
  * |    WeChat: houdunren2018
- * |      Date: 2018/11/8
+ * |      Date: 2018/11/10
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
-namespace App\Servers;
+namespace App\Transformers;
 
-class Dynamic
+/**
+ * 网站动态
+ * Class ActivityTransformer
+ * @package App\Transformers
+ */
+class ActivityTransformer implements TransformInterface
 {
-    /**
-     * 格式化网站动态数据
-     * @param $activities
-     * @return mixed
-     */
-    public function format($activities)
+    public function transform($collection)
     {
-        return $activities->map(function ($activity) {
+        return $collection->map(function ($activity) {
             if ($activity->subject && $activity->causer) {
-                $res = [
-                    'activity' => $activity,
-                    'link' => $activity->subject->link(),
-                    'title' => $activity->subject->title(),
-                ];
+                $activity['link'] = $activity->subject->link();
+                $activity['title'] = $activity->subject->title();
                 switch ($activity->log_name) {
                     case 'comment':
-                        $res['active'] = '发表评论';
+                        $activity['active'] = '发表评论';
                         break;
                     case 'edu_zan':
-                        $res['active'] = '赞了';
+                        $activity['active'] = '赞了';
                         break;
                     default:
-                        $res['active'] = $activity['description'] == 'created' ? '发表了' : '更新了';
+                        $activity['active'] = $activity['description'] == 'created' ? '发表了' : '更新了';
                 }
-                return $res;
+                return $activity;
             }
         })->filter();
+    }
+
+    public function item($item)
+    {
     }
 }

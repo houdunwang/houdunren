@@ -11,7 +11,7 @@
 namespace App;
 
 use App\Models\Attachment;
-use App\Models\Foundations\CommonRelation;
+use App\Foundations\CommonRelation;
 use App\Models\Zan;
 use App\Observers\UserObserver;
 use Illuminate\Notifications\Notifiable;

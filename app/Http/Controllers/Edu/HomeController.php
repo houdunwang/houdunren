@@ -12,16 +12,19 @@ namespace App\Http\Controllers\Edu;
 
 use App\Http\Controllers\Controller;
 use App\Models\EduLesson;
-use App\Servers\Dynamic;
-use Spatie\Activitylog\Models\Activity;
+use App\Repositories\ActivityRepository;
+use App\Repositories\EduLessonRepository;
 
 class HomeController extends Controller
 {
-    public function index(Dynamic $dynamic)
+    public function index( ActivityRepository $activityRepository, EduLessonRepository $eduLessonRepository)
     {
-        $activitys = Activity::latest('updated_at')->paginate(10);
-        $condition = $dynamic->format($activitys);
-        $lessons = EduLesson::with('user')->latest()->where('video_num', '>', 0)->limit(12)->get();
-        return view('edu.dynamic.index', compact('activitys', 'condition', 'lessons'));
+//        $activities = \Cache::remember('activity', 1, function () use ($activityRepository) {
+//            return $activityRepository->paginate(10);
+//        });
+//        $lessons = \Cache::remember('home_edu_lesson', 30, function () use ($eduLessonRepository) {
+            return $eduLessonRepository->paginate(12);
+//        });
+        return view('edu.dynamic.index', compact('activities', 'lessons'));
     }
 }

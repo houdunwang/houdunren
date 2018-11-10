@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Foundations;
+namespace App\Foundations;
 
 use App\Models\Comment;
 use App\Models\Favorite;

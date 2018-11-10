@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-use App\Models\Foundations\CommonRelation;
+use App\Foundations\CommonRelation;
 use App\Observers\EduVideoObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Model;

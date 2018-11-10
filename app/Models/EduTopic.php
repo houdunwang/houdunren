@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-use App\Models\Foundations\CommonRelation;
+use App\Foundations\CommonRelation;
 use App\Observers\EduTopicObserver;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
