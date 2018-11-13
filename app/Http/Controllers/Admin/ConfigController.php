@@ -11,6 +11,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Config;
+use App\Repositories\ConfigRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -31,11 +32,11 @@ class ConfigController extends Controller
         return view('admin.config.' . $name);
     }
 
-    public function update(Request $request, $name)
+    public function update(Request $request, $name, ConfigRepository $configRepository)
     {
         $config = config_get('admin', []);
         $config[$name] = $request->except(['_token', '_method']);
-        config_save($config);
+        $configRepository->save($config, 'admin');
         return back()->with('success', '保存成功');
     }
 }

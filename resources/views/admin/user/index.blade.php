@@ -11,18 +11,16 @@
             </ul>
             <div class="card" id="search">
                 <div class="card-body">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="text" v-model="content" class="form-control" aria-label="Text input with dropdown button">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">会员搜索</button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#" @click.prevent="submit('email')">搜索邮箱</a>
-                                    <a class="dropdown-item" href="#" @click.prevent="submit('mobile')">搜索手机号</a>
+                    <form action="{{route('admin.user.index')}}">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" name="w" class="form-control" aria-label="Text input with dropdown button">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit" aria-expanded="false">会员搜索</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="table-responsive">
@@ -71,42 +69,3 @@
         </div>
     </div>
 @endsection
-@push('js')
-    <script>
-        require(['vue', 'jquery', 'hdjs'], function (Vue, $, hdjs) {
-            new Vue({
-                el: "#search",
-                data: {
-                    content: ''
-                },
-                methods: {
-                    submit: function (type) {
-                        if (this.content == '') {
-                            hdjs.message('搜索内容不能为空');
-                            return;
-                        }
-                        let msg = '';
-                        switch (type) {
-                            case 'email':
-                                if (!/@/.test(this.content)) {
-                                    msg = '邮箱格式错误';
-                                    hdjs.info(msg);
-                                    return;
-                                }
-                                location.href = "{{route('admin.user.index')}}?email=" + this.content;
-                                break;
-                            case 'mobile':
-                                if (!/^\d+$/.test(this.content)) {
-                                    msg = '手机号错误';
-                                    hdjs.info(msg);
-                                    return;
-                                }
-                                location.href = "{{route('admin.user.index')}}?mobile=" + this.content;
-                                break;
-                        }
-                    }
-                }
-            })
-        })
-    </script>
-@endpush

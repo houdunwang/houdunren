@@ -34,23 +34,6 @@ class Module extends Model
     ];
 
     /**
-     * 根据域名获取可访问模块
-     * @return string
-     */
-    public function getEntranceByDomain()
-    {
-        $domain = $_SERVER['HTTP_HOST'];
-        $module = self::where('domain', $domain)->first();
-        if ($module) {
-            $class = ($module['system'] ? 'App\Http\Controllers' : 'Addons') . '\\' . $module['name'] . '\\HomeController';
-            if (class_exists($class) && method_exists($class, 'index')) {
-                return $class . '@index';
-            }
-        }
-        return HomeController::class . '@index';
-    }
-
-    /**
      * 获取后台菜单
      * @return \Illuminate\Support\Collection
      */

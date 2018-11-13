@@ -11,54 +11,75 @@
 
 namespace App\Repositories;
 
-trait Repository
+use App\Exceptions\InvalidParamException;
+use Illuminate\Database\Eloquent\Model;
+
+abstract class Repository
 {
+    protected $name;
+
     protected $model;
 
-    /**
-     * 根据属性或当前类生成模型对象
-     * @return \Illuminate\Foundation\Application|mixed
-     */
-    public function makeModel()
+    public function __construct()
     {
-        if (empty($this->model)) {
-            return app('App\Models\\' . substr(__CLASS__, 17, -10));
+        if (!class_exists($this->name)) {
+            throw new InvalidParamException('model does not exists');
         }
-        return app($this->model);
+        $this->model = app($this->name);
     }
 
     public function all(array $columns = ['*'])
     {
-        return $this->makeModel()->all($columns);
+        return $this->model->get($columns);
     }
 
     public function paginate($row = 10, array $columns = ['*'])
     {
-        return $this->makeModel()->paginate($row, $columns);
+        return $this->model->latest()->paginate($row, $columns);
     }
 
-    public function create($attributes)
+    public function create(array $attributes)
     {
-        return call_user_func_array([$this->model(), 'create'], $attributes);
+        return $this->model->fill($attributes);
     }
 
-    public function update($attributes)
+    public function update(Model $model, array $attributes)
     {
-        return call_user_func_array([$this->model(), 'update'], $attributes);
+        return $model->update($attributes);
     }
 
-    public function delete($model)
+    public function delete(Model $model)
     {
         return $model->delete();
     }
 
     public function find($id, $columns = ['*'])
     {
-        return $this->makeModel()->find($id, $columns);
+        return $this->model->find($id, $columns);
     }
 
     public function findBy($field, $value, $columns = ['*'])
     {
-        return $this->makeModel()->where($field, $value)->first($columns);
+        return $this->model->where($field, $value)->first($columns);
+    }
+
+    public function where(array $attributes)
+    {
+        foreach (array_filter($attributes) as $name => $attribute) {
+            if (!empty($attribute)) {
+                $this->model->where($name, $attribute);
+            }
+        }
+        return $this;
+    }
+
+    public function orWhere(array $attributes)
+    {
+        foreach (array_filter($attributes) as $name => $attribute) {
+            if (!empty($attribute)) {
+                $this->model = $this->model->orWhere($name, $attribute);
+            }
+        }
+        return $this;
     }
 }

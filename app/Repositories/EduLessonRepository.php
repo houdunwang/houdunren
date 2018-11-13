@@ -13,43 +13,17 @@ namespace App\Repositories;
 
 use App\Models\EduLesson;
 
-class EduLessonRepository implements RepositoryInterface
+/**
+ * 课程
+ * Class EduLessonRepository
+ * @package App\Repositories
+ */
+class EduLessonRepository  extends Repository implements RepositoryInterface
 {
-    use Repository;
-
-    public function all(array $columns = ['*'])
-    {
-
-    }
+    protected $name = EduLesson::class;
 
     public function paginate($row = 10, array $columns = ['*'])
     {
         return EduLesson::with('user')->latest()->where('video_num', '>', 0)->paginate($row);
     }
-
-    public function create($attributes)
-    {
-        // TODO: Implement create() method.
-    }
-
-    public function update($attributes)
-    {
-        // TODO: Implement update() method.
-    }
-
-    public function delete()
-    {
-        // TODO: Implement delete() method.
-    }
-
-    public function find($id, $columns = ['*'])
-    {
-        // TODO: Implement find() method.
-    }
-
-    public function findBy($field, $value, $columns = ['*'])
-    {
-        // TODO: Implement findBy() method.
-    }
-
 }

@@ -11,7 +11,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Module;
+use App\Repositories\ModuleRepository;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -22,15 +22,15 @@ class PermissionController extends Controller
         $this->middleware('admin:Admin-role-permission');
     }
 
-    public function index()
+    public function index(ModuleRepository $repository)
     {
-        $modules = Module::get();
+        $modules = $repository->all();
         return view('admin.permission.index', compact('modules'));
     }
 
-    public function edit(Role $role)
+    public function edit(Role $role, ModuleRepository $repository)
     {
-        $modules = Module::get();
+        $modules = $repository->all();
         return view('admin.permission.edit', compact('modules', 'role'));
     }
 

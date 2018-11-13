@@ -10,13 +10,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repositories\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 
 /**
- * 后台会员管理
+ * 会员管理
  * Class UserController
  * @package App\Http\Controllers\Core
  */
@@ -27,26 +28,15 @@ class UserController extends Controller
         $this->middleware('admin:Admin-user');
     }
 
-    public function index(Request $request)
+    public function index(Request $request, UserRepository $repository)
     {
-        $users = User::byEmail($request->query('email'))
-            ->byMobile($request->query('mobile'))->paginate(15);
+        $users = $repository->orWhere([
+            'email' => $request->query('w'),
+            'mobile' => $request->query('w'),
+            'name' => $request->query('w'),
+        ])->paginate(15);
+
         return view('admin.user.index', compact('users'));
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(User $user)
-    {
-        //
     }
 
     public function edit(User $user)
@@ -57,12 +47,7 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $user->assignRole($request->get('role'));
+        $user->syncRoles($request->get('role'));
         return redirect(route('admin.user.index'))->with('success', '修改成功');
-    }
-
-    public function destroy(User $user)
-    {
-        //
     }
 }

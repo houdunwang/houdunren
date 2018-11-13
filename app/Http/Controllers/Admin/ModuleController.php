@@ -13,34 +13,19 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContentModuleRequest;
 use App\Models\Module;
-use Illuminate\Http\Request;
+use App\Repositories\ModuleRepository;
 
 class ModuleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('admin:module');
     }
 
-    public function index()
+    public function index(ModuleRepository $repository)
     {
-        $modules = Module::get();
+        $modules = $repository->all();
         return view('admin.module.index', compact('modules'));
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Module $module)
-    {
-        //
     }
 
     public function edit(Module $module)
@@ -48,14 +33,9 @@ class ModuleController extends Controller
         return view('admin.module.edit', compact('module'));
     }
 
-    public function update(ContentModuleRequest $request, Module $module)
+    public function update(ContentModuleRequest $request, Module $module, ModuleRepository $repository)
     {
-        $module->update($request->all());
+        $repository->update($module, $request->all());
         return redirect(route('admin.module.index'))->with('success', '模块修改成功');
-    }
-
-    public function destroy(Module $module)
-    {
-        //
     }
 }

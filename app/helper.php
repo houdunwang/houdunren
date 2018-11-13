@@ -1,36 +1,12 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军 <www.aoxiangjun.com>
- * |    WeChat: houdunren2018
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
-/**
- * 当前访问是否为指定路由前缀
- * 用于后台菜单列表展示
- * @param $name
- * @return bool
- */
-//function routePrefixCheck($name)
-//{
-//    return \Route::current()->getPrefix() == '/' . $name;
-//}
-
 /**
  * 保存模块配置项
- * @param array $data 配置项
- * @param null $module 模块标识
- * @return mixed
+ * @param array $config
+ * @param string $module
  */
-function config_save(array $data, $module = null)
+function config_save(array $config, string $module)
 {
-    $module = $module ?? strtolower(module_name());
-    return \App\Models\Config::updateOrCreate(
-        ['module' => $module],
-        ['module' => $module, 'data' => $data,]
-    )->save();
+    app(\App\Repositories\ConfigRepository::class)->save($config, $module);
 }
 
 /**
@@ -41,10 +17,7 @@ function config_save(array $data, $module = null)
  */
 function config_get($path, $default = null)
 {
-    $cache = Cache::rememberForever('config', function () {
-        return \App\Models\Config::pluck('data', 'module');
-    });
-    return array_get($cache, $path) ?? $default;
+    return app(\App\Repositories\ConfigRepository::class)->get($path, $default);
 }
 
 /**

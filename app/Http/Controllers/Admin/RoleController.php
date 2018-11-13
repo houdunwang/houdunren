@@ -23,7 +23,7 @@ class RoleController extends Controller
 
     public function index()
     {
-        $roles = Role::where('id', '>', 1)->get();
+        $roles = Role::where('id', '>', 2)->get();
         return view('admin.role.index', compact('roles'));
     }
 
@@ -36,11 +36,6 @@ class RoleController extends Controller
     {
         $role->create($request->only(['name', 'title']));
         return redirect(route('admin.role.index'))->with('success', '角色添加成功');
-    }
-
-    public function show(Role $role)
-    {
-        //
     }
 
     public function edit(Role $role)
@@ -56,7 +51,6 @@ class RoleController extends Controller
 
     public function destroy(Role $role)
     {
-        $this->authorize('delete', $role);
         $role->delete();
         return redirect(route('admin.role.index'))->with('success', '删除成功');
     }

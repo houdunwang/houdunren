@@ -18,39 +18,7 @@ use Spatie\Activitylog\Models\Activity;
  * Class ActivityRepository
  * @package App\Repositories
  */
-class ActivityRepository implements RepositoryInterface
+class ActivityRepository extends Repository implements RepositoryInterface
 {
-    public function all(array $columns = ['*'])
-    {
-    }
-
-    public function paginate($row = 10, array $columns = ['*'])
-    {
-        return Activity::latest('updated_at')->paginate($row);
-    }
-
-    public function create($attributes)
-    {
-    }
-
-    public function update($attributes)
-    {
-        // TODO: Implement update() method.
-    }
-
-    public function delete()
-    {
-        // TODO: Implement delete() method.
-    }
-
-    public function find($id, $columns = ['*'])
-    {
-        // TODO: Implement find() method.
-    }
-
-    public function findBy($field, $value, $columns = ['*'])
-    {
-        // TODO: Implement findBy() method.
-    }
-
+    protected $name = Activity::class;
 }

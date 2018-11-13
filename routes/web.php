@@ -1,6 +1,6 @@
 <?php
 //网站首页
-Route::get('/', 'Admin\RouteController@make')->name('home');
+Route::get('/', 'Admin\HomeController@make')->name('home');
 Route::get('home', 'Admin\RouteController@make')->name('home');
 
 //登录/注册/退出

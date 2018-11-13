@@ -19,6 +19,8 @@ class HomeController extends Controller
 {
     public function index( ActivityRepository $activityRepository, EduLessonRepository $eduLessonRepository)
     {
+        dd(99999);
+        return 31113;
 //        $activities = \Cache::remember('activity', 1, function () use ($activityRepository) {
 //            return $activityRepository->paginate(10);
 //        });

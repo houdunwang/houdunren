@@ -11,6 +11,8 @@
 
 namespace App\Transformers;
 
+use Illuminate\Support\Collection;
+
 /**
  * 网站动态
  * Class ActivityTransformer
@@ -18,7 +20,7 @@ namespace App\Transformers;
  */
 class ActivityTransformer implements TransformInterface
 {
-    public function transform($collection)
+    public function transform(Collection $collection)
     {
         return $collection->map(function ($activity) {
             if ($activity->subject && $activity->causer) {

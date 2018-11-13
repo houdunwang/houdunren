@@ -11,19 +11,25 @@
 
 namespace App\Repositories;
 
+use Illuminate\Database\Eloquent\Model;
+
 interface RepositoryInterface
 {
     public function all(array $columns = ['*']);
 
     public function paginate($row = 10, array $columns = ['*']);
 
-    public function create($attributes);
+    public function create(array $attributes);
 
-    public function update($attributes);
+    public function update(Model $model, array $attributes);
 
-    public function delete();
+    public function delete(Model $model);
 
     public function find($id, $columns = ['*']);
 
     public function findBy($field, $value, $columns = ['*']);
+
+    public function where(array $attributes);
+
+    public function orWhere(array $attributes);
 }
