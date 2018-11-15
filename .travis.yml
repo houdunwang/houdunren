@@ -13,7 +13,6 @@ sudo: false
 # travis_retry 重试3次执行后面的命令
 # --no-interaction：不要询问任何交互问题   --prefer-source：从版本库下载
 install:
-- composer require --dev phpunit/phpunit
 - travis_retry composer install --no-interaction --prefer-source
 
 # 项目构建脚本
