@@ -1,8 +1,6 @@
 <?php
-
 namespace App\Http\Controllers\Edu;
 
-use App\Models\ModuleConfig;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -25,7 +23,7 @@ class ConfigController extends Controller
 
     public function update(Request $request)
     {
-        config_save($request->except('_token', '_method'));
+        config_save($request->except('_token', '_method'), 'edu');
         return redirect(route('edu.config.edit'))->with('success', '配置项修改成功');
     }
 }

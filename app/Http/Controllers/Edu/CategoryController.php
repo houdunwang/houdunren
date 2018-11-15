@@ -43,11 +43,6 @@ class CategoryController extends Controller
         return redirect(route('edu.category.index'))->with('success', '添加成功');
     }
 
-    public function show(EduCategory $category)
-    {
-        //
-    }
-
     public function edit(EduCategory $category)
     {
         return view('edu.category.edit', compact('category'));
