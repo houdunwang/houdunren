@@ -16,13 +16,6 @@ class ModuleConfig extends Model
 
     protected $casts = ['data' => 'array'];
 
-    protected static function boot()
-    {
-        self::observe(ModuleConfigObserver::class);
-        parent::boot();
-    }
-
-
     /**
      * 获取模块配置项
      * @param string $module

@@ -27,12 +27,6 @@ class EduVideo extends Model
 
     protected $casts = [];
 
-    protected static function boot()
-    {
-        self::observe(EduVideoObserver::class);
-        parent::boot();
-    }
-
     public function lesson()
     {
         return $this->belongsTo(EduLesson::class);

@@ -40,12 +40,6 @@ class EduLesson extends Model
 
     protected $casts = [];
 
-    protected static function boot()
-    {
-        EduLesson::observe(EduLessonObserver::class);
-        parent::boot();
-    }
-
     //配置algolia可搜索属性
     public function toSearchableArray()
     {

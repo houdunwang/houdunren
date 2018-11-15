@@ -24,13 +24,6 @@ class EduTopic extends Model
 
     protected static $logAttributes = ['title', 'created_at', 'updated_at'];
 
-    protected static function boot()
-    {
-        EduTopic::observe(EduTopicObserver::class);
-        parent::boot();
-    }
-
-
     public function category()
     {
         return $this->belongsTo(EduCategory::class);

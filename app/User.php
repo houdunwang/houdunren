@@ -1,12 +1,4 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军 <www.aoxiangjun.com>
- * |    WeChat: houdunren2018
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
 
 namespace App;
 
@@ -14,9 +6,10 @@ use App\Models\Attachment;
 use App\Foundations\CommonRelation;
 use App\Models\Zan;
 use App\Observers\UserObserver;
+
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -29,6 +22,9 @@ class User extends Authenticatable
         'email',
         'password',
         'mobile',
+        'email_verified_at',
+        'token',
+        'mobile_verified_at',
         'icon',
     ];
 
@@ -41,12 +37,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-        User::observe(UserObserver::class);
-    }
 
     public function attachment()
     {

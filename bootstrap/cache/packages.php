@@ -17,6 +17,13 @@
       0 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
     ),
   ),
+  'beyondcode/laravel-dump-server' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
+    ),
+  ),
   'fideloper/proxy' => 
   array (
     'providers' => 
@@ -33,27 +40,6 @@
     'aliases' => 
     array (
       'Active' => 'HieuLe\\Active\\Facades\\Active',
-    ),
-  ),
-  'hisorange/browser-detect' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'hisorange\\BrowserDetect\\ServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Browser' => 'hisorange\\BrowserDetect\\Facade',
-    ),
-  ),
-  'houdunwang/laravel-upload' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Houdunwang\\LaravelUpload\\ServiceProvider',
-    ),
-    'aliases' => 
-    array (
     ),
   ),
   'houdunwang/wechat' => 
@@ -81,15 +67,11 @@
       0 => 'Laravel\\Tinker\\TinkerServiceProvider',
     ),
   ),
-  'mews/purifier' => 
+  'nesbot/carbon' => 
   array (
     'providers' => 
     array (
-      0 => 'Mews\\Purifier\\PurifierServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Purifier' => 'Mews\\Purifier\\Facades\\Purifier',
+      0 => 'Carbon\\Laravel\\ServiceProvider',
     ),
   ),
   'nunomaduro/collision' => 

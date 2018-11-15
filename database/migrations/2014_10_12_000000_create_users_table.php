@@ -1,12 +1,4 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军 <www.aoxiangjun.com>
- * |    WeChat: houdunren2018
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -28,13 +20,13 @@ class CreateUsersTable extends Migration
             $table->string('mobile')->unique()->nullable()->index()->comment('手机');
             $table->string('password');
             $table->string('icon')->nullable()->comment('头像');
-            $table->string('token')->comment('邮箱或手机验证码');
+            $table->string('token')->nullable()->comment('邮箱或手机验证码');
             $table->string('weibo')->nullable();
             $table->string('wechat')->nullable();
             $table->string('github')->nullable();
             $table->string('qq')->nullable();
-            $table->tinyInteger('email_valid')->default(0)->comment('邮箱验证状态');
-            $table->tinyInteger('mobile_valid')->default(0)->comment('手机号验证状态');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('mobile_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -48,6 +40,5 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('activity_log');
     }
 }

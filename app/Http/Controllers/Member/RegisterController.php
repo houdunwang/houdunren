@@ -14,6 +14,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Servers\CodeServer;
 use App\User;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -33,10 +34,10 @@ class RegisterController extends Controller
         $data = $request->all();
         if (filter_var($request['account'], FILTER_VALIDATE_EMAIL)) {
             $data['email'] = $request['account'];
-            $data['email_valid'] = true;
+            $data['email_verified_at'] = new Carbon();
         } else {
             $data['mobile'] = $request['account'];
-            $data['mobile_valid'] = true;
+            $data['mobile_verified_at'] = new Carbon();
         }
         $data['password'] = bcrypt($request['password']);
         if (User::create($data)) {

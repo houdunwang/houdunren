@@ -30,12 +30,6 @@ class Comment extends Model
     protected static $recordEvents = ['created', 'updated'];
     protected static $logName = 'comment';
 
-    protected static function boot()
-    {
-        self::observe(CommentObserver::class);
-        parent::boot();
-    }
-
     //获得拥有此评论的模型
     public function belongModel()
     {

@@ -27,12 +27,6 @@ class Zan extends Model
         parent::__construct($attributes);
     }
 
-    protected static function boot()
-    {
-        Zan::observe(ZanObserver::class);
-        parent::boot();
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);

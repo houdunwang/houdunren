@@ -28,10 +28,4 @@ class Config extends Model
     {
         return $query->where('name', $name);
     }
-
-    protected static function boot()
-    {
-        Config::observe(ConfigObserver::class);
-        parent::boot();
-    }
 }
