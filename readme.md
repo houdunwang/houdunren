@@ -1,4 +1,7 @@
 # HDCMS 5.0
+
+[![Build Status](https://travis-ci.com/houdunwang/hdcms.svg?branch=master)](https://travis-ci.com/houdunwang/hdcms)
+
 > 当前为5.0.1 beta 测试版开发阶段，不可以实际使用
 
 基于Laravel 框架重构的PC、WAP、微信公众号、微信小程序多应用平台。
