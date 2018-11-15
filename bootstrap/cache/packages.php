@@ -67,13 +67,6 @@
       'WeChat' => 'Houdunwang\\WeChat\\WeChatFacade',
     ),
   ),
-  'laravel/dusk' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laravel\\Dusk\\DuskServiceProvider',
-    ),
-  ),
   'laravel/scout' => 
   array (
     'providers' => 
