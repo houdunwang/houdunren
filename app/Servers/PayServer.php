@@ -26,7 +26,7 @@ class PayServer
      */
     public function create(array $data)
     {
-        $data['module'] = module_name();
+        $data['module'] = module_name_from_url();
         $data['order_sn'] = 'U' . auth()->id() . '-' . date('Ymdhis');
         $data['user_id'] = auth()->id();
         $data['status'] = false;

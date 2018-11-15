@@ -22,12 +22,12 @@ function config_get($path, $default = null)
 
 /**
  * 获取模块菜单
- * @param string $name 菜单类型
+ * @param string $name 菜单类型:center_menu
  * @return mixed
  */
 function module_menus(string $name)
 {
-    return \App\Models\Module::whereNotNull($name)->pluck($name, 'name');
+    return app(\App\Repositories\ModuleRepository::class)->menus($name);
 }
 
 /**
@@ -54,17 +54,18 @@ function route_class()
 }
 
 /**
- * 生成模型实例
+ * 获取模型实例
+ * @param string $dash 连接符
  * @return mixed
  */
-function model_instance()
+function model_instance(string $dash = '-')
 {
-    $name = Request::query('model');
-    if (!strpos($name, '-')) {
-        $name = 'App-Models-' . $name;
-    }
+    $model = Request::query('model');
     $id = Request::query('id');
-    $class = '\\' . str_replace('-', '\\', $name);
+    if (!strpos($model, $dash)) {
+        $model = 'App-Models-' . $model;
+    }
+    $class = '\\' . str_replace($dash, '\\', $model);
     return $class::find($id);
 }
 
@@ -75,10 +76,26 @@ function model_instance()
  */
 function module_namespace($module)
 {
-    $system = \App\Models\Module::where('name', $module)->value('system');
-    if ($system) {
-        return '\App\Http\Controllers\\' . $module;
-    }
+    return app(\App\Repositories\ModuleRepository::class)->getNamespace($module);
+}
+
+/**
+ * 根据路由获取模块标识
+ * @return array
+ */
+function module_name_from_url()
+{
+    return app(\App\Repositories\ModuleRepository::class)->getNameFromUrl();
+}
+
+/**
+ * 获取后台菜单列表
+ * @param string $module 模块标识
+ * @return mixed
+ */
+function module_admin_menus(string $module)
+{
+    return app(\App\Repositories\ModuleRepository::class)->getAdminMenus($module);
 }
 
 /**
@@ -96,24 +113,4 @@ function access($permission, $user = null)
         throw new \App\Exceptions\PermissionException('没有访问权限');
     }
     return true;
-}
-
-/**
- * 根据路由获取模块标识
- * @return array
- */
-function module_name()
-{
-    $info = explode('/', Route::getCurrentRoute()->uri);
-    return $info[0] ? \App\Models\Module::where('name', $info[0])->value('name') : null;
-}
-
-/**
- * 获取后台菜单列表
- * @return mixed
- */
-function module_admin_menus()
-{
-    $name = explode('/', Route::getCurrentRoute()->uri);
-    return \App\Models\Module::where(['name' => $name[0]])->first()->adminMenus();
 }

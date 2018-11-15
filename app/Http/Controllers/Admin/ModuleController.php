@@ -19,7 +19,7 @@ class ModuleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin:module');
+        $this->middleware('admin:Admin-module');
     }
 
     public function index(ModuleRepository $repository)

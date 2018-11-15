@@ -29,7 +29,7 @@
                         </thead>
                         <tbody>
                         @foreach($modules as $module)
-                            @if($module['config']['show']??true)
+                            @if($module['config']['manage']??true)
                                 <tr>
                                     <td>{{$module['id']}}</td>
                                     <td>{{$module['title']}}</td>

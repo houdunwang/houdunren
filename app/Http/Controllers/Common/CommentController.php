@@ -22,10 +22,10 @@ class CommentController extends Controller
         $this->middleware('auth', ['except' => ['store', 'destroy']]);
     }
 
-    public function index(Request $request)
+    public function index()
     {
         //获取模型
-        $model = model_instance($request->input('model'), $request->input('id'));
+        $model = model_instance();
         //获取模型并包含用户与赞数据
         $comments = $model->comment()->with('user')->withCount('zan')->get();
         return ['comments' => $comments, 'code' => 0];

@@ -16,33 +16,34 @@ class ConfigRepositoryTest extends TestCase
 {
     protected $repository;
 
-    protected $data = [
-        'name' => 'beats',
-    ];
+    protected $data = [];
 
     protected function setUp()
     {
         parent::setUp();
+        \Cache::flush();
         $this->repository = app(ConfigRepository::class);
+        $this->data = $this->repository->get('admin');
     }
 
     public function testSaveParamException()
     {
         $this->expectException(InvalidParamException::class);
         $this->expectExceptionMessage('module does not exists');
-        $this->repository->save($this->data, 'test');
+        $this->repository->save([],'test');
         $this->fail('fail param check');
     }
 
     public function testSave()
     {
+        $this->data['test'] = 'phpunit';
         $this->assertTrue($this->repository->save($this->data, 'admin'));
     }
 
     public function testGet()
     {
-        $name = $this->repository->get('admin.name');
-        return $this->assertSame($name, 'beats');
+        $name = $this->repository->get('admin.test');
+        return $this->assertSame($name, 'phpunit');
     }
 
 }

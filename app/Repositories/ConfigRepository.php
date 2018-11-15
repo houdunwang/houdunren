@@ -29,7 +29,7 @@ class ConfigRepository extends Repository implements RepositoryInterface
      */
     public function save(array $data, string $module): bool
     {
-        if (!app(ModuleRepository::class)->hasName($module)) {
+        if (!app(ModuleRepository::class)->has($module)) {
             throw new InvalidParamException('module does not exists');
         }
         return Config::updateOrCreate(

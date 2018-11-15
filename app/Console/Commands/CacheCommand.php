@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Config;
 use App\Models\ContentTemplate;
 use App\Models\Module;
 use App\User;
