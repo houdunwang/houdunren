@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label class="mb-1">accessKey</label>
-                        <input type="password" class="form-control" name="accessKey"
+                        <input type="text" class="form-control" name="accessKey"
                                value="{{config_get('admin.aliyun.accessKey')}}" placeholder="登录阿里云后台查看">
                     </div>
                     <button class="btn btn-sm btn-primary">

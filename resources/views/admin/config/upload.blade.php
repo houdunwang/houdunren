@@ -8,61 +8,138 @@
                     @include('admin.config.layouts._menu')
                     <div class="card">
                         <div class="card-header">
-                            图片设置
+                            上传方式
                         </div>
                         <div class="card-body">
-                            <div class="form-group">
-                                <label>图片大小</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="image_size" value="{{config_get('admin.upload.image_size',5000000)}}">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">字节</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="driver" id="driver1" value="local"
+                                {{active_class(config_get('admin.upload.driver','local')=='local','checked')}}>
+                                <label class="form-check-label" for="driver1">本地上传</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="driver" id="driver2" value="oss"
+                                        {{active_class(config_get('admin.upload.driver')=='oss','checked')}}>
+                                <label class="form-check-label" for="driver2">阿里云（请先配置阿里云）</label>
+                            </div>
+                            <div class="card mt-3">
+                                <div class="card-header">
+                                    阿里云设置
+                                </div>
+                                <div class="card-body">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">accessKeyId</span>
+                                        </div>
+                                        <input type="text" class="form-control" name="oss[accessKeyId]"
+                                               value="{{config_get('admin.upload.oss.accessKeyId')}}">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">accessKeySecret</span>
+                                        </div>
+                                        <input type="text" class="form-control" name="oss[accessKeySecret]"
+                                               value="{{config_get('admin.upload.oss.accessKeySecret')}}">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">bucket</span>
+                                        </div>
+                                        <input type="text" class="form-control" name="oss[bucket]"
+                                               value="{{config_get('admin.upload.oss.bucket')}}">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">endpoint</span>
+                                        </div>
+                                        <input type="text" class="form-control" name="oss[endpoint]"
+                                               value="{{config_get('admin.upload.oss.endpoint')}}">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label>图片最大宽度</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="image_width" value="{{config_get('admin.upload.image_width',1000)}}">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">像素</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>图片最大高度</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="image_height" value="{{config_get('admin.upload.image_height',1000)}}">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">像素</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="mb-1">允许类型</label>
-                                <input type="text" class="form-control" name="image_type" value="{{config_get('admin.upload.image_type','jpg,jpeg,gif,png')}}">
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="card">
-                        <div class="card-header">
-                            文件设置
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label>文件大小</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="file_size" value="{{config_get('admin.upload.file_size',2000)}}">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">字节</span>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">图片上传设置</div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">图片大小</span>
+                                            </div>
+                                            <input type="text" class="form-control" name="image[size]"
+                                                   value="{{config_get('admin.upload.image.size',2000000)}}">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">字节</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">最大宽度</span>
+                                            </div>
+                                            <input type="text" class="form-control" name="image[width]"
+                                                   value="{{config_get('admin.upload.image.width',800)}}">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">像素</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">最大高度</span>
+                                            </div>
+                                            <input type="text" class="form-control" name="image[height]"
+                                                   value="{{config_get('admin.upload.image.height',600)}}">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">像素</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">允许类型</span>
+                                            </div>
+                                            <input type="text" class="form-control" name="image[type]"
+                                                   value="{{config_get('admin.upload.image.type','jpg,jpeg,gif,png')}}">
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-light small" role="alert">
+                                        超过图片允许的最大高度或宽度将自动裁切
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="mb-1">允许文件类型</label>
-                                <input type="text" class="form-control" name="file_type" value="{{config_get('admin.upload.file_type','zip,rar,doc,txt,pem,json')}}">
+                        </div>
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">文件上传设置</div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">文件大小</span>
+                                            </div>
+                                            <input type="text" class="form-control" name="file[size]"
+                                                   value="{{config_get('admin.upload.file.size',2000000)}}">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">字节</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">文件类型</span>
+                                            </div>
+                                            <input type="text" class="form-control" name="file[type]"
+                                                   value="{{config_get('admin.upload.file.type','zip,rar,doc,txt,pem,json')}}">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

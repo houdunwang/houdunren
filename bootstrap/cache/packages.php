@@ -42,6 +42,17 @@
       'Active' => 'HieuLe\\Active\\Facades\\Active',
     ),
   ),
+  'houdunwang/uploader' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Houdunwang\\Uploader\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Uploader' => 'Houdunwang\\Uploader\\Facade',
+    ),
+  ),
   'houdunwang/wechat' => 
   array (
     'providers' => 
@@ -51,6 +62,17 @@
     'aliases' => 
     array (
       'WeChat' => 'Houdunwang\\WeChat\\WeChatFacade',
+    ),
+  ),
+  'intervention/image' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Intervention\\Image\\ImageServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
   'laravel/scout' => 

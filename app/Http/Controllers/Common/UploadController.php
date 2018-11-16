@@ -22,7 +22,7 @@ class UploadController extends Controller
     {
         //普通上传
         if ($file = $request->file('file')) {
-            $path = $uploadServer->upload($file, $this->isImage($file) ? 'image' : 'file');
+            $path = $uploadServer->upload($file);
             \Auth::user()->attachment()->create(['filename' => $file->getClientOriginalName(), 'path' => url($path)]);
             return ['file' => url($path), 'code' => 0];
         } elseif ($content = $request->input('file')) {
@@ -36,7 +36,6 @@ class UploadController extends Controller
     {
         $ext = $file->getClientOriginalExtension();
         return in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'gif']);
-
     }
 
     public function lists()
