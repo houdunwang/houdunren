@@ -1,19 +1,21 @@
 <?php
 /** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
  * |    Author: 向军 <www.aoxiangjun.com>
  * |    WeChat: houdunren2018
- * |      Date: 2018/11/10
+ * |      Date: 2018/11/17
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
-namespace App\Transformers;
+namespace App\Repositories;
 
-interface TransformInterface
+use App\Models\EduUserVideo;
+
+/**
+ * 学习动态
+ * Class EduUserVideoRepository
+ * @package App\Repositories
+ */
+class EduUserVideoRepository extends Repository implements RepositoryInterface
 {
-    public function transform($collection);
-
-    public function item($item);
+    protected $name = EduUserVideo::class;
 }

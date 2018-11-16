@@ -4,7 +4,7 @@
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" style="border-color: #ccd1d6" type="button" onclick="search('topic',this)">贴子
             </button>
-            <button class="btn btn-outline-secondary rounded-0" style="border-color: #ccd1d6" type="button" onclick="search('video',this)">视频
+            <button class="btn btn-outline-secondary rounded-0" style="border-color: #ccd1d6" type="button" onclick="search('lesson',this)">课程
             </button>
         </div>
     </div>

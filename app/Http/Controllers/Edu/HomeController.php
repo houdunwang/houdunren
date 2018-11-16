@@ -30,12 +30,9 @@ class HomeController extends Controller
      */
     public function index(ActivityRepository $activityRepository, EduLessonRepository $eduLessonRepository)
     {
-//        $activities = \Cache::remember('activity', 1, function () use ($activityRepository) {
-//            return $activityRepository->paginate(10);
-//        });
-//        $lessons = \Cache::remember('home_edu_lesson', 30, function () use ($eduLessonRepository) {
-//            return $eduLessonRepository->paginate(12);
-//        });
+        $activities = $activityRepository->paginate(10);
+        $lessons = $eduLessonRepository->paginate(12);
+
         return view('edu.dynamic.index', compact('activities', 'lessons'));
     }
 }

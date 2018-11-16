@@ -38,10 +38,11 @@
     34 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
     35 => 'Spatie\\Permission\\PermissionServiceProvider',
     36 => 'HieuLe\\Active\\ActiveServiceProvider',
-    37 => 'App\\Providers\\AppServiceProvider',
-    38 => 'App\\Providers\\AuthServiceProvider',
-    39 => 'App\\Providers\\EventServiceProvider',
-    40 => 'App\\Providers\\RouteServiceProvider',
+    37 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
+    38 => 'App\\Providers\\AppServiceProvider',
+    39 => 'App\\Providers\\AuthServiceProvider',
+    40 => 'App\\Providers\\EventServiceProvider',
+    41 => 'App\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (

@@ -88,3 +88,18 @@
 .edu-section-show {
 
 }
+
+//学习动态
+.learning_dynamic {
+  .media-body{
+    p{
+      a{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 98%;
+        display: inline-block;
+      }
+    }
+  }
+}

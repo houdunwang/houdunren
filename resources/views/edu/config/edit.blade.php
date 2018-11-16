@@ -30,6 +30,10 @@
                         <label>直播标题</label>
                         <input type="text" class="form-control" name="live_title" value="{{config_get('edu.live_title','')}}">
                     </div>
+                    <div class="form-group">
+                        <label class="mb-1">公告</label>
+                        <textarea class="form-control" rows="3" name="notice"></textarea>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-primary btn-sm">保存提交</button>

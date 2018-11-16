@@ -10,6 +10,7 @@
 
 namespace App\Http\Controllers\Edu;
 
+use App\Models\EduLesson;
 use App\Models\EduTopic;
 use App\Models\EduVideo;
 use Illuminate\Http\Request;
@@ -24,8 +25,8 @@ class SearchController extends Controller
             case 'topic':
                 $data = EduTopic::search($w)->paginate(10);
                 break;
-            case 'video':
-                $data = EduVideo::search($w)->paginate(10);
+            case 'lesson':
+                $data = EduLesson::search($w)->paginate(10);
                 break;
             default:
                 return back()->with('error', '参数错误');

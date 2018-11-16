@@ -21,4 +21,10 @@ use Spatie\Activitylog\Models\Activity;
 class ActivityRepository extends Repository implements RepositoryInterface
 {
     protected $name = Activity::class;
+
+    public function paginate($row = 10, array $columns = ['*'], $latest = null)
+    {
+        return $this->model->with(['causer', 'subject'])->latest($latest)->paginate($row, $columns);
+    }
+
 }

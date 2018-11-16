@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\EduLesson;
 use App\Models\EduVideo;
+use App\Repositories\EduVideoRepository;
 use App\User;
 use Carbon\Carbon;
 use DB;
@@ -26,6 +27,15 @@ class HoudunrenCommand extends Command
         $this->user();
         $this->lesson();
         $this->video();
+        $this->updateLessonVideoNum();
+    }
+
+    public function updateLessonVideoNum()
+    {
+        EduLesson::get()->each(function ($lesson) {
+            $lesson['video_num'] = $lesson->video()->count();
+            $lesson->save();
+        });
     }
 
     protected function user()
@@ -126,7 +136,7 @@ class HoudunrenCommand extends Command
         \DB::table('edu_lessons')->delete();
         \DB::table('hd_houdunren_lesson')->get()->each(function ($lesson) {
             $lesson = (array)$lesson;
-            EduLesson::create([
+            $lesson = EduLesson::create([
                 'id' => $lesson['lesson_id'],
                 'title' => $lesson['lesson_title'],
                 'description' => '',

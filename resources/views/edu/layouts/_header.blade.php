@@ -36,25 +36,25 @@
                     <img src="{{config_get('edu.logo',asset('images/front-logo.png'))}}" alt="Logo"
                          style="width: 12rem;margin-top: 5px;">
                 </a>
-                <!-- Responsive Toggle Button -->
                 <button type="button" class="navbar-toggler btn u-hamburger"
                         aria-label="Toggle navigation"
                         aria-expanded="false"
                         aria-controls="navBar"
                         data-toggle="collapse"
                         data-target="#navBar">
-            <span id="hamburgerTrigger" class="u-hamburger__box">
-              <span class="u-hamburger__inner"></span>
-            </span>
+                    <span id="hamburgerTrigger" class="u-hamburger__box">
+                      <span class="u-hamburger__inner"></span>
+                    </span>
                 </button>
+
                 <!-- Navigation -->
                 <div id="navBar" class="collapse navbar-collapse py-0">
                     <ul class="navbar-nav u-header__navbar-nav ml-lg-auto">
-                        {{--<li class="nav-item">--}}
-                            {{--<a class="nav-link u-header__nav-link" href="{{route('edu.dynamic.index')}}">--}}
-                                {{--动态--}}
-                            {{--</a>--}}
-                        {{--</li>--}}
+                        <li class="nav-item">
+                            <a class="nav-link u-header__nav-link" href="{{route('edu.dynamic.index')}}">
+                                动态
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link u-header__nav-link" href="{{route('edu.lesson.lists')}}">
                                 碎片

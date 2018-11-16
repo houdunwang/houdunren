@@ -20,28 +20,40 @@ use Illuminate\Support\Collection;
  */
 class ActivityTransformer implements TransformInterface
 {
-    public function transform(Collection $collection)
+    /**
+     * 动态列表
+     * @param $collection
+     * @return mixed
+     */
+    public function transform($collection)
     {
         return $collection->map(function ($activity) {
             if ($activity->subject && $activity->causer) {
-                $activity['link'] = $activity->subject->link();
-                $activity['title'] = $activity->subject->title();
-                switch ($activity->log_name) {
-                    case 'comment':
-                        $activity['active'] = '发表评论';
-                        break;
-                    case 'edu_zan':
-                        $activity['active'] = '赞了';
-                        break;
-                    default:
-                        $activity['active'] = $activity['description'] == 'created' ? '发表了' : '更新了';
-                }
-                return $activity;
+                return $this->item($activity);
             }
         })->filter();
     }
 
-    public function item($item)
+    /**
+     * 单条动态
+     * @param $activity
+     * @return mixed
+     */
+    public function item($activity)
     {
+        $activity['link'] = $activity->subject->link();
+        $activity['title'] = $activity->subject->title();
+        switch ($activity->log_name) {
+            case 'comment':
+                $activity['active'] = '发表评论';
+                break;
+            case 'edu_zan':
+                $activity['active'] = '赞了';
+                break;
+            case 'edu_topic':
+                $activity['active'] = $activity['description'] == 'created' ? '发布话题' : '更新话题';
+                break;
+        }
+        return $activity;
     }
 }
