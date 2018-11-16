@@ -76,7 +76,7 @@
                  }]">
                             <div class="slick-list draggable">
                                 <div class="slick-track" style="opacity: 1; width: 1128px; transform: translate3d(0px, 0px, 0px);">
-                                    @foreach(\App\Models\EduShop::get() as $shop)
+                                    @foreach(\App\Models\EduShop::orderBy('price','ASC')->where('status',1)->get() as $shop)
                                         <div class="shop js-slide slick-slide slick-current slick-active" data-slick-index="0"
                                              aria-hidden="false" style="width: 266px; height: auto;" tabindex="0"
                                              role="tabpanel" id="slick-slide00" aria-describedby="slick-slide-control00">

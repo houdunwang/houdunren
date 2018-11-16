@@ -18,4 +18,14 @@ use App\Models\EduUserVideo;
 class EduUserVideoRepository extends Repository implements RepositoryInterface
 {
     protected $name = EduUserVideo::class;
+
+    /**
+     * 学习动态
+     * @param $row
+     * @return mixed
+     */
+    public function dynamic($row)
+    {
+        return $this->model->groupBy('user_id')->latest('updated_at')->limit($row)->get();
+    }
 }

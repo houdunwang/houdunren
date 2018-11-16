@@ -51,7 +51,7 @@ class EduVideo extends Model
 
     public function title()
     {
-        return preg_replace('/^\d+\s*/', '', $this->title);
+        return preg_replace('/^\d+\.?\s*/', '', $this->title);
     }
 
     public function link($param)

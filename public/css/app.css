@@ -71,6 +71,10 @@
   margin: 10px 0;
 }
 
+.learning_dynamic .media-body {
+  overflow: hidden;
+}
+
 .learning_dynamic .media-body p a {
   text-overflow: ellipsis;
   overflow: hidden;

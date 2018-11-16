@@ -85,7 +85,7 @@
                 {{--</div>--}}
                 {{--@include('edu.layouts._active_user')--}}
                 <div class="mt-0">
-                    @include('edu.layouts._learning_dynamic',['row'=>6])
+                    @include('edu.layouts._learning_dynamic',['row'=>8])
                 </div>
             </div>
         </div>

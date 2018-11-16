@@ -2,7 +2,7 @@
     <div class="card-header text-secondary">学习动态</div>
     <div class="card-body">
         <ul class="list-unstyled">
-            @foreach(app(\App\Repositories\EduUserVideoRepository::class)->paginate($row) as $pivot)
+            @foreach(app(\App\Repositories\EduUserVideoRepository::class)->dynamic($row) as $pivot)
                 <li class="media u-indicator-ver-dashed-modern mb-3">
                     <a href="{{route('member.user.show',$pivot->user)}}">
                         <img class="u-icon u-icon--xs rounded-circle mr-3 " src="{{$pivot->user->avatar}}"

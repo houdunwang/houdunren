@@ -92,6 +92,7 @@
 //学习动态
 .learning_dynamic {
   .media-body{
+    overflow: hidden;
     p{
       a{
         text-overflow: ellipsis;
