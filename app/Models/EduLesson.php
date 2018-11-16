@@ -22,6 +22,7 @@ class EduLesson extends Model
     protected $fillable = [
         'id',
         'title',
+        'user_id',
         'description',
         'thumb',
         'type',

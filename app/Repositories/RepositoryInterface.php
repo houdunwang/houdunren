@@ -17,7 +17,7 @@ interface RepositoryInterface
 {
     public function all(array $columns = ['*']);
 
-    public function paginate($row = 10, array $columns = ['*']);
+    public function paginate($row = 10, array $columns = ['*'], $latest = null);
 
     public function create(array $attributes);
 
@@ -29,7 +29,7 @@ interface RepositoryInterface
 
     public function findBy($field, $value, $columns = ['*']);
 
-    public function where(array $attributes);
+//    public function where(array $attributes);
 
-    public function orWhere(array $attributes);
+//    public function orWhere(array $attributes);
 }

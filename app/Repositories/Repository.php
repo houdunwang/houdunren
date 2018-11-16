@@ -33,14 +33,14 @@ abstract class Repository
         return $this->model->get($columns);
     }
 
-    public function paginate($row = 10, array $columns = ['*'])
+    public function paginate($row = 10, array $columns = ['*'], $latest = null)
     {
-        return $this->model->latest()->paginate($row, $columns);
+        return $this->model->latest($latest)->paginate($row, $columns);
     }
 
     public function create(array $attributes)
     {
-        return $this->model->fill($attributes);
+        return $this->model->fill($attributes)->save();
     }
 
     public function update(Model $model, array $attributes)
@@ -63,23 +63,15 @@ abstract class Repository
         return $this->model->where($field, $value)->first($columns);
     }
 
-    public function where(array $attributes)
-    {
-        foreach (array_filter($attributes) as $name => $attribute) {
-            if (!empty($attribute)) {
-                $this->model->where($name, $attribute);
-            }
-        }
-        return $this;
-    }
-
-    public function orWhere(array $attributes)
-    {
-        foreach (array_filter($attributes) as $name => $attribute) {
-            if (!empty($attribute)) {
-                $this->model = $this->model->orWhere($name, $attribute);
-            }
-        }
-        return $this;
-    }
+//    public function where(array $attributes)
+//    {
+//        $this->model->where(array_filter($attributes));
+//        return $this;
+//    }
+//
+//    public function orWhere(array $attributes)
+//    {
+//        $this->model->orWhere(array_filter($attributes));
+//        return $this;
+//    }
 }

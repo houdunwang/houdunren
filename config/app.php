@@ -133,7 +133,6 @@ return [
     */
 
     'providers' => [
-        Intervention\Image\ImageServiceProvider::class,
         HieuLe\Active\ActiveServiceProvider::class,
         /*
          * Laravel Framework Service Providers...
@@ -188,7 +187,6 @@ return [
     */
 
     'aliases' => [
-        'Image' => Intervention\Image\Facades\Image::class,
         'Active' => HieuLe\Active\Facades\Active::class,
         //
         'App' => Illuminate\Support\Facades\App::class,

@@ -1633,7 +1633,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/_babel-loader@7.1.5@babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/ExampleComponent.vue":
+/***/ "./node_modules/_babel-loader@7.1.5@babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/ExampleComponent.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1672,7 +1672,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__("./node_modules/_jquery@3.3.1@jquery/dist/jquery.js"), __webpack_require__("./node_modules/_popper.js@1.14.4@popper.js/dist/esm/popper.js")) :
+   true ? factory(exports, __webpack_require__("./node_modules/_jquery@3.3.1@jquery/dist/jquery.js"), __webpack_require__("./node_modules/_popper.js@1.14.5@popper.js/dist/esm/popper.js")) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -33130,14 +33130,14 @@ return jQuery;
 
 /***/ }),
 
-/***/ "./node_modules/_popper.js@1.14.4@popper.js/dist/esm/popper.js":
+/***/ "./node_modules/_popper.js@1.14.5@popper.js/dist/esm/popper.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(global) {/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.14.4
+ * @version 1.14.5
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -33234,7 +33234,8 @@ function getStyleComputedProperty(element, property) {
     return [];
   }
   // NOTE: 1 DOM access here
-  var css = getComputedStyle(element, null);
+  var window = element.ownerDocument.defaultView;
+  var css = window.getComputedStyle(element, null);
   return property ? css[property] : css;
 }
 
@@ -33322,7 +33323,7 @@ function getOffsetParent(element) {
   var noOffsetParent = isIE(10) ? document.body : null;
 
   // NOTE: 1 DOM access here
-  var offsetParent = element.offsetParent;
+  var offsetParent = element.offsetParent || null;
   // Skip hidden elements which don't have an offsetParent
   while (offsetParent === noOffsetParent && element.nextElementSibling) {
     offsetParent = (element = element.nextElementSibling).offsetParent;
@@ -33334,9 +33335,9 @@ function getOffsetParent(element) {
     return element ? element.ownerDocument.documentElement : document.documentElement;
   }
 
-  // .offsetParent will return the closest TD or TABLE in case
+  // .offsetParent will return the closest TH, TD or TABLE in case
   // no offsetParent is present, I hate this job...
-  if (['TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
+  if (['TH', 'TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
     return getOffsetParent(offsetParent);
   }
 
@@ -33884,7 +33885,8 @@ function getReferenceOffsets(state, popper, reference) {
  * @returns {Object} object containing width and height properties
  */
 function getOuterSizes(element) {
-  var styles = getComputedStyle(element);
+  var window = element.ownerDocument.defaultView;
+  var styles = window.getComputedStyle(element);
   var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
   var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
   var result = {
@@ -36238,7 +36240,7 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ "./node_modules/_vue-loader@13.7.3@vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-7168fb6a\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/ExampleComponent.vue":
+/***/ "./node_modules/_vue-loader@13.7.3@vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-299e239e\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/ExampleComponent.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -36276,7 +36278,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-7168fb6a", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-299e239e", module.exports)
   }
 }
 
@@ -47306,7 +47308,7 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/assets/js/app.js":
+/***/ "./resources/js/app.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -47316,9 +47318,25 @@ module.exports = function(module) {
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__("./resources/assets/js/bootstrap.js");
+__webpack_require__("./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__("./node_modules/_vue@2.5.17@vue/dist/vue.common.js");
+
+/**
+ * The following block of code may be used to automatically register your
+ * Vue components. It will recursively scan this directory for the Vue
+ * components and automatically register them with their "basename".
+ *
+ * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ */
+
+Vue.component('example-component', __webpack_require__("./resources/js/components/ExampleComponent.vue"));
+
+// const files = require.context('./', true, /\.vue$/i)
+
+// files.keys().map(key => {
+//     return Vue.component(_.last(key.split('/')).split('.')[0], files(key))
+// })
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -47326,20 +47344,17 @@ window.Vue = __webpack_require__("./node_modules/_vue@2.5.17@vue/dist/vue.common
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', __webpack_require__("./resources/assets/js/components/ExampleComponent.vue"));
-
 var app = new Vue({
   el: '#app'
 });
 
 /***/ }),
 
-/***/ "./resources/assets/js/bootstrap.js":
+/***/ "./resources/js/bootstrap.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 
 window._ = __webpack_require__("./node_modules/_lodash@4.17.11@lodash/lodash.js");
-window.Popper = __webpack_require__("./node_modules/_popper.js@1.14.4@popper.js/dist/esm/popper.js").default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -47348,6 +47363,7 @@ window.Popper = __webpack_require__("./node_modules/_popper.js@1.14.4@popper.js/
  */
 
 try {
+  window.Popper = __webpack_require__("./node_modules/_popper.js@1.14.5@popper.js/dist/esm/popper.js").default;
   window.$ = window.jQuery = __webpack_require__("./node_modules/_jquery@3.3.1@jquery/dist/jquery.js");
 
   __webpack_require__("./node_modules/_bootstrap@4.1.3@bootstrap/dist/js/bootstrap.js");
@@ -47396,15 +47412,15 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/ExampleComponent.vue":
+/***/ "./resources/js/components/ExampleComponent.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__("./node_modules/_vue-loader@13.7.3@vue-loader/lib/component-normalizer.js")
 /* script */
-var __vue_script__ = __webpack_require__("./node_modules/_babel-loader@7.1.5@babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/ExampleComponent.vue")
+var __vue_script__ = __webpack_require__("./node_modules/_babel-loader@7.1.5@babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/ExampleComponent.vue")
 /* template */
-var __vue_template__ = __webpack_require__("./node_modules/_vue-loader@13.7.3@vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-7168fb6a\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/ExampleComponent.vue")
+var __vue_template__ = __webpack_require__("./node_modules/_vue-loader@13.7.3@vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-299e239e\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/ExampleComponent.vue")
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -47421,7 +47437,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/ExampleComponent.vue"
+Component.options.__file = "resources/js/components/ExampleComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -47430,9 +47446,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7168fb6a", Component.options)
+    hotAPI.createRecord("data-v-299e239e", Component.options)
   } else {
-    hotAPI.reload("data-v-7168fb6a", Component.options)
+    hotAPI.reload("data-v-299e239e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -47444,7 +47460,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ "./resources/assets/sass/app.scss":
+/***/ "./resources/sass/app.scss":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -47454,8 +47470,8 @@ module.exports = Component.exports
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__("./resources/assets/js/app.js");
-module.exports = __webpack_require__("./resources/assets/sass/app.scss");
+__webpack_require__("./resources/js/app.js");
+module.exports = __webpack_require__("./resources/sass/app.scss");
 
 
 /***/ })

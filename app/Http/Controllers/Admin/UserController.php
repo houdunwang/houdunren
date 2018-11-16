@@ -30,11 +30,7 @@ class UserController extends Controller
 
     public function index(Request $request, UserRepository $repository)
     {
-        $users = $repository->orWhere([
-            'email' => $request->query('w'),
-            'mobile' => $request->query('w'),
-            'name' => $request->query('w'),
-        ])->paginate(15);
+        $users = $repository->search($request->query('w'));
 
         return view('admin.user.index', compact('users'));
     }

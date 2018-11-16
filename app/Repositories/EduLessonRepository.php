@@ -12,18 +12,37 @@
 namespace App\Repositories;
 
 use App\Models\EduLesson;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * 课程
  * Class EduLessonRepository
  * @package App\Repositories
  */
-class EduLessonRepository  extends Repository implements RepositoryInterface
+class EduLessonRepository extends Repository implements RepositoryInterface
 {
     protected $name = EduLesson::class;
 
-    public function paginate($row = 10, array $columns = ['*'])
+    public function create(array $attributes)
     {
-        return EduLesson::with('user')->latest()->where('video_num', '>', 0)->paginate($row);
+        $attributes['user_id'] = auth()->id();
+        return $this->model->create($attributes);
     }
+
+    /**
+     * 课程列表
+     * @return mixed
+     */
+    public function lists()
+    {
+        return $this->model->with('user')->latest()->where('video_num', '>', 0)->paginate(12);
+    }
+
+    public function delete(Model $lesson)
+    {
+        //删除视频
+        $lesson->video()->withTrashed()->forceDelete();
+        return $lesson->delete();
+    }
+
 }

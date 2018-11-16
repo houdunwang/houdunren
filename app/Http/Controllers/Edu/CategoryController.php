@@ -13,6 +13,7 @@ namespace App\Http\Controllers\Edu;
 use App\Http\Requests\EduCategoryRequest;
 use App\Models\EduCategory;
 use App\Http\Controllers\Controller;
+use App\Repositories\EduCategoryRepository;
 
 /**
  * 分类管理
@@ -26,9 +27,9 @@ class CategoryController extends Controller
         $this->middleware('admin:Edu-category');
     }
 
-    public function index()
+    public function index(EduCategoryRepository $repository)
     {
-        $categories = EduCategory::get();
+        $categories = $repository->all();
         return view('edu.category.index', compact('categories'));
     }
 
@@ -37,9 +38,9 @@ class CategoryController extends Controller
         return view('edu.category.create');
     }
 
-    public function store(EduCategoryRequest $request)
+    public function store(EduCategoryRequest $request, EduCategoryRepository $repository)
     {
-        EduCategory::create($request->all());
+        $repository->create($request->all());
         return redirect(route('edu.category.index'))->with('success', '添加成功');
     }
 
@@ -48,15 +49,15 @@ class CategoryController extends Controller
         return view('edu.category.edit', compact('category'));
     }
 
-    public function update(EduCategoryRequest $request, EduCategory $category)
+    public function update(EduCategoryRequest $request, EduCategory $category, EduCategoryRepository $repository)
     {
-        $category->update($request->all());
+        $repository->update($category, $request->all());
         return redirect(route('edu.category.index'))->with('success', '修改成功');
     }
 
-    public function destroy(EduCategory $category)
+    public function destroy(EduCategory $category,EduCategoryRepository $repository)
     {
-        $category->delete();
+        $repository->delete($category);
         return redirect(route('edu.category.index'))->with('success', '删除成功');
     }
 }

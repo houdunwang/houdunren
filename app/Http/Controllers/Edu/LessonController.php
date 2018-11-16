@@ -12,6 +12,8 @@ namespace App\Http\Controllers\Edu;
 
 use App\Http\Controllers\Controller;
 use App\Models\EduLesson;
+use App\Repositories\EduLessonRepository;
+use App\Repositories\EduVideoRepository;
 use Illuminate\Http\Request;
 
 /**
@@ -26,13 +28,23 @@ class LessonController extends Controller
         $this->middleware('admin:Edu-lesson', ['except' => ['lists', 'show']]);
     }
 
-    public function index(Request $request)
+    /**
+     * 后台课程列表
+     * @param Request $request
+     * @param EduLessonRepository $repository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(Request $request, EduLessonRepository $repository)
     {
-        session(['url.intended'=> $request->fullUrl()]);
-        $lessons = EduLesson::where('user_id', auth()->id())->latest()->paginate(20);
+        session(['url.intended' => $request->fullUrl()]);;
+        $lessons = $repository->paginate(20, ['*'], 'updated_at');
         return view('edu.lesson.index', compact('lessons'));
     }
 
+    /**
+     * 字段验证
+     * @param $data
+     */
     protected function validation($data)
     {
         \Validator::make($data, [
@@ -57,6 +69,10 @@ class LessonController extends Controller
         ])->validate();
     }
 
+    /**
+     * 新增
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         $field = [
@@ -80,62 +96,97 @@ class LessonController extends Controller
         return view('edu.lesson.create', compact('field'));
     }
 
-    public function store(Request $request, EduLesson $lesson)
+    /**
+     * 保存
+     * @param Request $request
+     * @param EduLessonRepository $repository
+     * @param EduVideoRepository $eduVideoRepository
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request, EduLessonRepository $repository, EduVideoRepository $eduVideoRepository)
     {
-        $field = json_decode($request->get('field'), true);
+        $field = \json_decode($request->get('field'), true);
 
         $this->validation($field['lesson']);
-
         //添加课程
-        $lesson->user()->associate(auth()->user())->fill($field['lesson'])->save();
-
+        $lesson = $repository->create($field['lesson']);
         //添加视频
-        $lesson->video()->createMany($field['videos']);
+        $eduVideoRepository->createManyVideo($lesson, $field['videos']);
+
         return redirect(route('edu.lesson.index'))->with('success', '课程添加成功');
     }
 
-    //前台碎片课程列表
-    public function lists(Request $request)
+    /**
+     * 前台碎片课程列表
+     * @param Request $request
+     * @param EduLessonRepository $repository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function lists(Request $request, EduLessonRepository $repository)
     {
-        session(['url.intended'=> $request->fullUrl()]);
-        $lessons = EduLesson::with('user')->latest()->where('video_num','>',0)->paginate(12);
+        session(['url.intended' => $request->fullUrl()]);
+        $lessons = $repository->lists();
         return view('edu.lesson.lists', compact('lessons'));
     }
 
-    //显示课程
+    /**
+     * 显示课程
+     * @param EduLesson $lesson
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(EduLesson $lesson)
     {
         return view('edu.lesson.show', compact('lesson'));
     }
 
-    public function edit(EduLesson $lesson, Request $request)
+    /**
+     * 编辑
+     * @param EduLesson $lesson
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function edit(EduLesson $lesson)
     {
         $this->authorize('update', $lesson);
         $field = ['lesson' => $lesson->toArray(), 'videos' => $lesson->video->toArray()];
         return view('edu.lesson.edit', compact('field', 'lesson'));
     }
 
-    public function update(Request $request, EduLesson $lesson)
-    {
+    /**
+     * 更新课程
+     * @param Request $request
+     * @param EduLesson $lesson
+     * @param EduLessonRepository $repository
+     * @param EduVideoRepository $eduVideoRepository
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function update(
+        Request $request,
+        EduLesson $lesson,
+        EduLessonRepository $repository,
+        EduVideoRepository $eduVideoRepository
+    ) {
         $this->authorize('update', $lesson);
         $field = json_decode($request->get('field'), true);
         $this->validation($field['lesson']);
-        $lesson->fill($field['lesson'])->update();
+        $repository->update($lesson, $field['lesson']);
 
-        //软删除后添加视频
-        $lesson->video()->delete();
-        foreach ($field['videos'] as $video) {
-            $lesson->video()->withTrashed()->updateOrCreate(['id' => $video['id'] ?? 0], $video)->restore();
-        }
-        //清除软件删除数据
-        $lesson->video()->onlyTrashed()->forceDelete();
+        $eduVideoRepository->updateManyVideo($lesson, $field['videos']);
+
         return redirect()->intended(route('edu.lesson.index'))->with('success', '课程编辑成功');
     }
 
-    public function destroy(EduLesson $lesson)
+    /**
+     * 删除课程与视频
+     * @param EduLesson $lesson
+     * @param EduLessonRepository $repository
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(EduLesson $lesson, EduLessonRepository $repository)
     {
-        $lesson->video()->withTrashed()->forceDelete();
-        $lesson->delete();
+        $repository->delete($lesson);
+
         return redirect(route('edu.lesson.index'))->with('success', '课程删除成功');
     }
 }

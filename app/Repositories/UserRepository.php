@@ -14,10 +14,15 @@ class UserRepository extends Repository implements RepositoryInterface
 {
     protected $name = User::class;
 
-    public function paginate($row = 10, array $columns = ['*'])
+    /**
+     * 搜索
+     * @param $w
+     * @param int $row
+     * @return mixed
+     */
+    public function search($w, $row = 10)
     {
-        $this->model = $this->model->with('roles');
-        return parent::paginate($row, $columns);
+        return $this->model->orWhere('email', 'like', "%$w%")->orWhere('mobile', 'like', "%$w%")
+            ->orWhere('name', 'like', "%$w%")->paginate($row);
     }
-
 }

@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers\Edu;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-//直播控制
+/**
+ * 直播控制
+ * Class LiveController
+ * @package App\Http\Controllers\Edu
+ */
 class LiveController extends Controller
 {
-    //开关直播
+    /**
+     * 开关直播
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function make()
     {
         $config = config_get('edu');
-        $config['is_live'] = !isset($config['is_live']) || !$config['is_live']?true:false;
-        config_save($config);
+        $config['is_live'] = !isset($config['is_live']) || !$config['is_live'] ? true : false;
+        config_save($config, 'edu');
         return back()->with('success', $config['is_live'] ? '开启' : '关闭');
     }
 }
