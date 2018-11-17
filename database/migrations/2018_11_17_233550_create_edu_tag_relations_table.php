@@ -15,12 +15,10 @@ class CreateEduTagRelationsTable extends Migration
     {
         Schema::create('edu_tag_relations', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('tag_id')->index();
-            $table->foreign('tag_id')->references('id')->on('edu_tags')->onDelete('cascade');
+            $table->unsignedInteger('edu_tag_id')->index();
+            $table->foreign('edu_tag_id')->references('id')->on('edu_tags')->onDelete('cascade');
             $table->unsignedInteger('relation_id');
             $table->string('relation_type');
-            $table->timestamps();
-
         });
     }
 

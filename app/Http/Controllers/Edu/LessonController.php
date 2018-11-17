@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Edu;
 
 use App\Http\Controllers\Controller;
 use App\Models\EduLesson;
+use App\Models\EduTag;
 use App\Repositories\EduLessonRepository;
 use App\Repositories\EduVideoRepository;
 use Illuminate\Http\Request;
@@ -103,6 +104,7 @@ class LessonController extends Controller
      * @param EduLessonRepository $repository
      * @param EduVideoRepository $eduVideoRepository
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request, EduLessonRepository $repository, EduVideoRepository $eduVideoRepository)
     {
@@ -161,6 +163,7 @@ class LessonController extends Controller
      * @param EduVideoRepository $eduVideoRepository
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(
         Request $request,

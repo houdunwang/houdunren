@@ -1,4 +1,5 @@
 {{--后台发表课程--}}
+@inject('TagRepository','App\Repositories\EduTagRepository')
 <div class="row small" id="app">
     <div class="card col-sm-12">
         <div class="card-body border-bottom-0">
@@ -20,6 +21,19 @@
                 <label class="col-sm-2 col-form-label">课程标题</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" v-model="field.lesson.title" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">所属标签</label>
+                <div class="col-sm-10">
+                    @foreach($TagRepository->all() as $tag)
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="tags[]"
+                                   {{active_class($lesson->hasTag($tag),'checked')}}
+                                   value="{{$tag['id']}}" type="checkbox" id="tag{{$tag['id']}}">
+                            <label class="form-check-label" for="tag{{$tag['id']}}">{{$tag['name']}}</label>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <div class="form-group row">
@@ -190,13 +204,13 @@
                                    aria-describedby="helpId" required>
                         </div>
                         {{--<div class="form-group">--}}
-                            {{--<div class="input-group mb-3">--}}
-                                {{--<input type="text" class="form-control" v-model="v.duration" placeholder="播放时长"--}}
-                                       {{--required>--}}
-                                {{--<div class="input-group-append">--}}
-                                    {{--<span class="input-group-text">秒</span>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                        {{--<div class="input-group mb-3">--}}
+                        {{--<input type="text" class="form-control" v-model="v.duration" placeholder="播放时长"--}}
+                        {{--required>--}}
+                        {{--<div class="input-group-append">--}}
+                        {{--<span class="input-group-text">秒</span>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
                         {{--</div>--}}
                         <div class="form-group">
                             <input type="text" v-model="v.path" class="form-control" placeholder="视频链接"

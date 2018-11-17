@@ -26,8 +26,17 @@ class EduLessonRepository extends Repository implements RepositoryInterface
     public function create(array $attributes)
     {
         $attributes['user_id'] = auth()->id();
-        return $this->model->create($attributes);
+        $lesson = $this->model->create($attributes);
+        $lesson->tags()->sync(request()->input('tags'));
+        return $lesson;
     }
+
+    public function update(Model $model, array $attributes)
+    {
+        $model->tags()->sync(request()->input('tags'));
+        return parent::update($model, $attributes);
+    }
+
 
     /**
      * 课程列表

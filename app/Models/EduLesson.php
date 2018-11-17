@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Foundations\CommonRelation;
@@ -48,6 +49,17 @@ class EduLesson extends Model
             'title' => $this['title'],
             'description' => $this['description'],
         ];
+    }
+
+    public function tags()
+    {
+        return $this->morphToMany(EduTag::class, 'relation', 'edu_tag_relations', 'relation_id');
+
+    }
+
+    public function hasTag(EduTag $tag)
+    {
+        return $this->tags->pluck('id')->search($tag['id']) !== false;
     }
 
     public function video()
