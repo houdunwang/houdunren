@@ -30,31 +30,13 @@
                 </div>
                 <ul class="list-unstyled mb-0">
                     @foreach($activityTransformer->transform($activities) as $cond)
-                        <li class="mt-0">
-                            <div class="u-info-v1 p-3 border-bottom-0 rounded-0">
-                                <div class="row justify-content-sm-between align-items-sm-center">
-                                    <div class="col-sm-10 mb-2 mb-sm-0" style="font-size: 14px;">
-                                        <a href="{{route('member.user.show',$cond->causer)}}"
-                                           class="float-left">
-                                            <img class="u-sm-avatar rounded-circle mr-3"
-                                                 src="{{$cond->causer->avatar}}">
-                                        </a>
-                                        <a href="{{route('member.user.show',$cond->causer)}}"
-                                           class="text-secondary pt-1" style="display: inline-block;">
-                                            {{$cond->causer->name}}
-                                        </a>
-                                        <span class="badge badge-light text-secondary small">{{$cond['active']}}</span>
-                                        <a href="{{$cond['link']}}" class="text-secondary">
-                                            {{$cond['title']}}
-                                        </a>
-                                    </div>
-                                    <span class="col-sm-2 text-text text-sm-right small text-secondary">
-                                       <i class="fa fa-clock-o"
-                                          aria-hidden="true"></i> {{$cond->created_at->diffForHumans()}}
-                                    </span>
-                                </div>
-                            </div>
-                        </li>
+                        @switch($cond['log_name'])
+                            @case('edu_topic')
+                            @include('edu.dynamic._topic')
+                            @break
+                            @default
+                            @include('edu.dynamic._default')
+                        @endswitch
                     @endforeach
                     <li class="mt-0">
                         <div class="u-info-v1 p-3 border-bottom-0 rounded-0">
@@ -69,19 +51,19 @@
             </div>
             <div class="col-sm-3">
                 {{--<div class="card">--}}
-                    {{--<div class="card-header text-secondary">--}}
-                        {{--社区公告版--}}
-                    {{--</div>--}}
-                    {{--<div class="card-body">--}}
-                        {{--<ul class="list-unstyled u-list">--}}
-                            {{--<li>--}}
-                                {{--<a class="u-list__link" href="/edu/document/5">--}}
-                                    {{--<span class="fa fa-angle-right u-list__link-icon mr-1"></span>--}}
-                                    {{--Laravel 5.7 中文手册--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                        {{--</ul>--}}
-                    {{--</div>--}}
+                {{--<div class="card-header text-secondary">--}}
+                {{--社区公告版--}}
+                {{--</div>--}}
+                {{--<div class="card-body">--}}
+                {{--<ul class="list-unstyled u-list">--}}
+                {{--<li>--}}
+                {{--<a class="u-list__link" href="/edu/document/5">--}}
+                {{--<span class="fa fa-angle-right u-list__link-icon mr-1"></span>--}}
+                {{--Laravel 5.7 中文手册--}}
+                {{--</a>--}}
+                {{--</li>--}}
+                {{--</ul>--}}
+                {{--</div>--}}
                 {{--</div>--}}
                 {{--@include('edu.layouts._active_user')--}}
                 <div class="mt-0">

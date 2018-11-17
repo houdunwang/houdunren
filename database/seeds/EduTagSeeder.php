@@ -12,9 +12,16 @@ class EduTagSeeder extends Seeder
     public function run()
     {
         $data = [
+            ['name' => 'Composer'],
             ['name' => 'PHP'],
+            ['name' => 'Linux'],
+            ['name' => 'ThinkPHP'],
             ['name' => 'Laravel'],
-            ['name' => 'HDCMS'],
+            ['name' => '码农生活'],
+            ['name' => 'CSS'],
+            ['name' => 'Vue.js'],
+            ['name' => 'Webpack'],
+            ['name' => 'Gulp'],
         ];
         foreach ($data as $d) {
             \App\Models\EduTag::create(['name' => $d['name']], $d);

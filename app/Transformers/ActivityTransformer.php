@@ -11,8 +11,6 @@
 
 namespace App\Transformers;
 
-use Illuminate\Support\Collection;
-
 /**
  * 网站动态
  * Class ActivityTransformer

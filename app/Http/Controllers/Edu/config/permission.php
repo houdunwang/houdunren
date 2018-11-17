@@ -7,4 +7,5 @@ return [
     ['title' => '帖子删除', 'name' => 'topic-destroy'],
     ['title' => '文档管理', 'name' => 'document'],
     ['title' => '开启直播', 'name' => 'live'],
+    ['title' => '标签管理', 'name' => 'tag'],
 ];

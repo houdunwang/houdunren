@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <input type="text" name="title" class="form-control" placeholder="请输入标题"
-                                   aria-describedby="helpId">
+                                   aria-describedby="helpId" required>
                         </div>
                         <div class="form-group">
                             <select class="form-control text-secondary" name="category_id">

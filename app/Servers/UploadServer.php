@@ -20,6 +20,7 @@ class UploadServer
      * @param $file
      * @return string
      * @throws UploadException
+     * @throws \Houdunwang\Uploader\Exceptions\InvalidParamException
      * @throws \Spatie\Image\Exceptions\InvalidManipulation
      */
     public function upload($file)
@@ -35,10 +36,10 @@ class UploadServer
             }
         }
         if (config_get('admin.upload.driver') == 'oss') {
-            $path = \Uploader::config(config_get('admin.upload'))->upload($uploadFile);
+            $uploadFile = \Uploader::config(config_get('admin.upload'))->upload($uploadFile);
             @unlink($uploadFile);
-            return $path;
         }
+        return $uploadFile;
     }
 
     protected function save($file)

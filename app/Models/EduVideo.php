@@ -1,8 +1,8 @@
 <?php
+
 namespace App\Models;
 
 use App\Foundations\CommonRelation;
-use App\Observers\EduVideoObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -30,6 +30,11 @@ class EduVideo extends Model
     public function lesson()
     {
         return $this->belongsTo(EduLesson::class);
+    }
+
+    public function user()
+    {
+        return $this->lesson->user();
     }
 
     //用户视频关联

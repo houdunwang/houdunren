@@ -44,6 +44,7 @@ class LessonController extends Controller
     /**
      * 字段验证
      * @param $data
+     * @throws \Illuminate\Validation\ValidationException
      */
     protected function validation($data)
     {

@@ -16,6 +16,11 @@ return [
                 'permission' => 'Edu-category',
             ],
             [
+                'name' => '标签管理',
+                'route' => route('edu.tag.index'),
+                'permission' => 'Edu-tag',
+            ],
+            [
                 'name' => '课程管理',
                 'route' => route('edu.lesson.index'),
                 'permission' => 'Edu-lesson',

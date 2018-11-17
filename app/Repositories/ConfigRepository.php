@@ -32,6 +32,7 @@ class ConfigRepository extends Repository implements RepositoryInterface
         if (!app(ModuleRepository::class)->has($module)) {
             throw new InvalidParamException('module does not exists');
         }
+        \Cache::forget('config');
         return Config::updateOrCreate(
             ['module' => $module],
             ['module' => $module, 'data' => $data,]

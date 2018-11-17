@@ -4,7 +4,9 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::get('admin', 'AdminController@index')->name('admin');
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('lesson/lists', 'LessonController@lists')->name('lesson.lists');
+    //课程管理
     Route::resource('lesson', 'LessonController');
+    Route::resource('tag', 'TagController');
     Route::resource('category', 'CategoryController');
     //贴子
     Route::resource('topic', 'TopicController');
@@ -39,5 +41,5 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::resource('order', 'OrderController');
     Route::get('subscribe', 'SubscribeController@show')->name('subscribe.show');
     //直播
-    Route::get('live','LiveController@make')->name('live');
+    Route::get('live', 'LiveController@make')->name('live');
 });
