@@ -20,7 +20,7 @@
             </div>
             <div class="row listAlias mt-5">
                 @foreach($lessons as $lesson)
-                    <div class="col-12 col-md-6 col-xl-3">
+                    <div class="col-12 col-md-6 col-xl-3 mt-3">
                         <article class="bg-white shadow-sm mb-3">
                             <a href="{{route('edu.lesson.show',$lesson)}}">
                                 <div class="position-relative">

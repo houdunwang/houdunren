@@ -27,7 +27,7 @@ class LessonController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin:Edu-lesson', ['except' => ['lists', 'show']]);
+        $this->middleware('admin:Edu-lesson', ['except' => ['lists', 'show','tag']]);
     }
 
     /**
@@ -133,6 +133,12 @@ class LessonController extends Controller
         return view('edu.lesson.lists', compact('lessons'));
     }
 
+    /**
+     * 按标签检索
+     * @param EduTag $tag
+     * @param EduTagRepository $repository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function tag(EduTag $tag, EduTagRepository $repository)
     {
         $lessons = $repository->lessons($tag, 12);
