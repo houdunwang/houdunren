@@ -26,6 +26,6 @@ class EduUserVideoRepository extends Repository implements RepositoryInterface
      */
     public function dynamic($row)
     {
-        return $this->model->groupBy('user_id')->latest('updated_at')->limit($row)->get();
+        return $this->model->latest('updated_at')->limit(50)->get()->unique('user_id')->take($row);
     }
 }
