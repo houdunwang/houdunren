@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Models\EduLesson;
 use App\Models\EduTag;
 use App\Repositories\EduLessonRepository;
+use App\Repositories\EduTagRepository;
 use App\Repositories\EduVideoRepository;
 use Illuminate\Http\Request;
 
@@ -129,6 +130,12 @@ class LessonController extends Controller
     {
         session(['url.intended' => $request->fullUrl()]);
         $lessons = $repository->lists();
+        return view('edu.lesson.lists', compact('lessons'));
+    }
+
+    public function tag(EduTag $tag, EduTagRepository $repository)
+    {
+        $lessons = $repository->lessons($tag, 12);
         return view('edu.lesson.lists', compact('lessons'));
     }
 

@@ -83,6 +83,13 @@
   display: inline-block;
 }
 
+.edu-dynamic-list .item {
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .chat-news-create,
 .chat-news-edit {
   width: 300px;

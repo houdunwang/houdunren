@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <label class="mb-1">公告</label>
-                        <textarea class="form-control" rows="3" name="notice"></textarea>
+                        <textarea class="form-control" rows="3" name="notice">{{config_get('edu.notice')}}</textarea>
                     </div>
                 </div>
                 <div class="card-footer">

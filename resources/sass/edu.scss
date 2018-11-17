@@ -91,10 +91,10 @@
 
 //学习动态
 .learning_dynamic {
-  .media-body{
+  .media-body {
     overflow: hidden;
-    p{
-      a{
+    p {
+      a {
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
@@ -102,5 +102,15 @@
         display: inline-block;
       }
     }
+  }
+}
+
+//动态列表
+.edu-dynamic-list {
+  .item {
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }

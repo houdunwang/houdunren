@@ -50,6 +50,13 @@
                 <!-- Navigation -->
                 <div id="navBar" class="collapse navbar-collapse py-0">
                     <ul class="navbar-nav u-header__navbar-nav ml-lg-auto">
+                        @can('Edu-live')
+                        <li class="nav-item">
+                            <a class="nav-link u-header__nav-link" href="{{route('edu.live')}}">
+                                直播
+                            </a>
+                        </li>
+                        @endcan
                         <li class="nav-item">
                             <a class="nav-link u-header__nav-link" href="{{route('edu.dynamic.index')}}">
                                 动态

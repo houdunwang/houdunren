@@ -11,6 +11,7 @@
         "caouecs/laravel-lang": "^3.0",
         "fideloper/proxy": "^4.0",
         "hieu-le/active": "^3.5",
+        "hisorange/browser-detect": "^3.1",
         "houdunwang/alipay": "^1.0",
         "houdunwang/aliyun": "^1.0",
         "houdunwang/arr": "^2.0",

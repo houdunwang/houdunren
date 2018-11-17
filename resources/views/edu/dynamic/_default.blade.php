@@ -1,7 +1,7 @@
-<li class="mt-0">
+<li class="mt-0 edu-dynamic-list">
     <div class="u-info-v1 p-3 border-bottom-0 rounded-0">
         <div class="row justify-content-sm-between align-items-sm-center">
-            <div class="col-sm-10 mb-2 mb-sm-0" style="font-size: 14px;">
+            <div class="col-sm-10 mb-2 mb-sm-0 item">
                 <a href="{{route('member.user.show',$cond->causer)}}" class="float-left">
                     <img class="u-sm-avatar rounded-circle mr-3" src="{{$cond->causer->avatar}}">
                 </a>

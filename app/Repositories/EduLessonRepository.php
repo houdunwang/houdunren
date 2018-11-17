@@ -40,11 +40,12 @@ class EduLessonRepository extends Repository implements RepositoryInterface
 
     /**
      * 课程列表
+     * @param int $row
      * @return mixed
      */
-    public function lists()
+    public function lists(int $row = 12)
     {
-        return $this->model->with('user')->latest()->where('video_num', '>', 0)->paginate(12);
+        return $this->model->with('user')->latest()->where('video_num', '>', 0)->paginate($row);
     }
 
     public function delete(Model $lesson)

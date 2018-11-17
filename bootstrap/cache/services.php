@@ -28,21 +28,22 @@
     24 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
     25 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     26 => 'HieuLe\\Active\\ActiveServiceProvider',
-    27 => 'Houdunwang\\Uploader\\ServiceProvider',
-    28 => 'Houdunwang\\WeChat\\WeChatProvider',
-    29 => 'Intervention\\Image\\ImageServiceProvider',
-    30 => 'Laravel\\Scout\\ScoutServiceProvider',
-    31 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    32 => 'Carbon\\Laravel\\ServiceProvider',
-    33 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    34 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
-    35 => 'Spatie\\Permission\\PermissionServiceProvider',
-    36 => 'HieuLe\\Active\\ActiveServiceProvider',
-    37 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
-    38 => 'App\\Providers\\AppServiceProvider',
-    39 => 'App\\Providers\\AuthServiceProvider',
-    40 => 'App\\Providers\\EventServiceProvider',
-    41 => 'App\\Providers\\RouteServiceProvider',
+    27 => 'hisorange\\BrowserDetect\\ServiceProvider',
+    28 => 'Houdunwang\\Uploader\\ServiceProvider',
+    29 => 'Houdunwang\\WeChat\\WeChatProvider',
+    30 => 'Intervention\\Image\\ImageServiceProvider',
+    31 => 'Laravel\\Scout\\ScoutServiceProvider',
+    32 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    33 => 'Carbon\\Laravel\\ServiceProvider',
+    34 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    35 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
+    36 => 'Spatie\\Permission\\PermissionServiceProvider',
+    37 => 'HieuLe\\Active\\ActiveServiceProvider',
+    38 => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
+    39 => 'App\\Providers\\AppServiceProvider',
+    40 => 'App\\Providers\\AuthServiceProvider',
+    41 => 'App\\Providers\\EventServiceProvider',
+    42 => 'App\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -177,6 +178,7 @@
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'command.ide-helper.generate' => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
     'command.ide-helper.models' => 'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
+    'browser-detect' => 'hisorange\\BrowserDetect\\ServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
     'NunoMaduro\\Collision\\Contracts\\Provider' => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
   ),
@@ -219,6 +221,9 @@
     array (
     ),
     'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider' => 
+    array (
+    ),
+    'hisorange\\BrowserDetect\\ServiceProvider' => 
     array (
     ),
     'Houdunwang\\Uploader\\ServiceProvider' => 

@@ -18,4 +18,15 @@ use App\Models\EduTag;
 class EduTagRepository extends Repository implements RepositoryInterface
 {
     protected $name = EduTag::class;
+
+    /**
+     * 课程列表
+     * @param EduTag $tag
+     * @param int $row
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function lessons(EduTag $tag, $row = 12)
+    {
+        return $tag->lessons()->paginate($row);
+    }
 }

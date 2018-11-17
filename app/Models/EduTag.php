@@ -22,4 +22,9 @@ class EduTag extends Model
     protected $fillable = ['name'];
 
     protected $casts = [];
+
+    public function lessons()
+    {
+        return $this->morphedByMany(EduLesson::class, 'relation', 'edu_tag_relations');
+    }
 }
