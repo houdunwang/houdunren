@@ -9,6 +9,8 @@ Route::group(['namespace' => 'Common', 'prefix' => 'common', 'as' => 'common.'],
     Route::resource('comment', 'CommentController');
     //上传处理
     Route::post('upload/upload', 'UploadController@upload')->name('upload.upload');
+    Route::post('upload/image', 'UploadController@image')->name('upload.image');
+
     Route::any('upload/lists', 'UploadController@lists')->name('upload.lists');
     //发送验证码
     Route::any('code/send', 'CodeController@send')->name('code.send');

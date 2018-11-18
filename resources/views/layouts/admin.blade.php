@@ -127,6 +127,7 @@
         @yield('content')
     </div>
 </div>
+{{--<script src="{{mix('js/app.js')}}"></script>--}}
 <script>
     require(['bootstrap', 'jquery'])
 </script>

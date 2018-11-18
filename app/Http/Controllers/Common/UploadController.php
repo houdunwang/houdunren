@@ -31,6 +31,17 @@ class UploadController extends Controller
         }
     }
 
+    public function image(Request $request, UploadServer $uploadServer)
+    {
+        //普通上传
+        if ($file = $request->image) {
+            $path = $uploadServer->upload($file);
+            \Auth::user()->attachment()->create(['filename' => $file->getClientOriginalName(), 'path' => url($path)]);
+            return url($path);
+            return ['file' => url($path), 'code' => 0];
+        }
+    }
+
     //图片类型检测
     protected function isImage($file)
     {
@@ -40,7 +51,7 @@ class UploadController extends Controller
 
     public function lists()
     {
-        $db = Attachment::where('user_id',auth()->id())->paginate(20);
+        $db = Attachment::where('user_id', auth()->id())->paginate(20);
         $attachments = $db->toArray();
         foreach ($attachments['data'] as $k => $v) {
             $attachments['data'][$k]['url'] = url($v['path']);

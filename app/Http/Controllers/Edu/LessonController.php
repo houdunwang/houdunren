@@ -27,7 +27,7 @@ class LessonController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin:Edu-lesson', ['except' => ['lists', 'show','tag']]);
+        $this->middleware('admin:Edu-lesson', ['except' => ['lists', 'show', 'tag']]);
     }
 
     /**
@@ -73,10 +73,11 @@ class LessonController extends Controller
     }
 
     /**
-     * 新增
+     * 新增课程
+     * @param EduLesson $lesson
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create(EduLesson $lesson)
     {
         $field = [
             'lesson' => [
@@ -96,7 +97,7 @@ class LessonController extends Controller
             ],
             'videos' => [],
         ];
-        return view('edu.lesson.create', compact('field'));
+        return view('edu.lesson.create', compact('field', 'lesson'));
     }
 
     /**

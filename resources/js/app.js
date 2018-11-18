@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -16,9 +15,13 @@ window.Vue = require('vue');
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
+// import 'mavon-editor/dist/css/index.css';
+// import mavonEditor from 'mavon-editor';
 
+// Vue.use(mavonEditor);
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
+// Vue.component('markdown-editor', require('./components/MarkdownEditorComponent.vue'));
+Vue.component('edit', require('./components/EditComponent.vue'));
 // const files = require.context('./', true, /\.vue$/i)
 
 // files.keys().map(key => {
