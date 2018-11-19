@@ -45,7 +45,7 @@ class EduLessonRepository extends Repository implements RepositoryInterface
      */
     public function lists(int $row = 12)
     {
-        return $this->model->with('user')->latest()->where('video_num', '>', 0)->paginate($row);
+        return $this->model->with('user')->latest('updated_at')->where('video_num', '>', 0)->paginate($row);
     }
 
     public function delete(Model $lesson)

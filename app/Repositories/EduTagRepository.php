@@ -27,6 +27,6 @@ class EduTagRepository extends Repository implements RepositoryInterface
      */
     public function lessons(EduTag $tag, $row = 12)
     {
-        return $tag->lessons()->paginate($row);
+        return $tag->lessons()->latest('updated_at')->where('video_num', '>', 0)->paginate($row);
     }
 }
