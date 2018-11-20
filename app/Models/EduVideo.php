@@ -15,7 +15,7 @@ use Laravel\Scout\Searchable;
  */
 class EduVideo extends Model
 {
-    use SoftDeletes, CommonRelation, Searchable;
+    use SoftDeletes, CommonRelation;
     /**
      * 需要转换成日期的属性
      *
@@ -25,7 +25,9 @@ class EduVideo extends Model
 
     protected $fillable = ['id', 'title', 'path', 'question', 'lesson_id'];
 
-    protected $casts = [];
+    protected $casts = [
+        'question'=>'array'
+    ];
 
     public function lesson()
     {

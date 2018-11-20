@@ -203,15 +203,6 @@
                             <input type="text" v-model="v.title" class="form-control" placeholder="课程标题"
                                    aria-describedby="helpId" required>
                         </div>
-                        {{--<div class="form-group">--}}
-                        {{--<div class="input-group mb-3">--}}
-                        {{--<input type="text" class="form-control" v-model="v.duration" placeholder="播放时长"--}}
-                        {{--required>--}}
-                        {{--<div class="input-group-append">--}}
-                        {{--<span class="input-group-text">秒</span>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
                         <div class="form-group">
                             <input type="text" v-model="v.path" class="form-control" placeholder="视频链接"
                                    aria-describedby="helpId" required>
@@ -219,9 +210,65 @@
                     </div>
                     <div class="card-footer text-muted">
                         <button class="btn btn-white btn-sm" type="button" @click="delVideo(k)">删除</button>
+                        <button class="btn btn-white btn-sm" type="button" @click="question_show(v)"
+                                data-toggle="modal" :data-target="'#question'+k">考题
+                        </button>
+                        {{--考题--}}
+                        <div class="modal fade bd-example-modal-lg" :id="'question'+k" tabindex="-1" role="dialog"
+                             aria-labelledby="video.question"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">考题</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="card" v-for="(v,k) in currentEditVideo.question">
+                                            <div class="card-header">
+                                                <div class="form-group mb-0">
+                                                    <input type="text" v-model="v.title" class="form-control form-control-sm"
+                                                           placeholder="请输入问题">
+                                                </div>
+                                            </div>
+                                            <div class="card-body pt-3 pb-0">
+                                                <div class="input-group mb-3 input-group-sm" v-for="(topic,n) in v.topics">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <input type="checkbox" v-model="topic.right">
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control"
+                                                           aria-label="Text input with checkbox"
+                                                           v-model="topic.topic">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-secondary" type="button"
+                                                                @click="question_del(topics,n)">删除
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer text-muted">
+                                                <button type="button" class="btn btn-light btn-sm"
+                                                        @click="topic_add(v.topics)">添加答案
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary btn-sm" @click="question_add()">
+                                            添加考题
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{--考题结束--}}
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="card-footer">
@@ -233,18 +280,19 @@
         </div>
     </div>
 </div>
-
 @push('js')
     <script>
-        require(['vue', 'hdjs', 'jquery'], function (Vue, hdjs, $) {
-            let vm = new Vue({
+        require(['vue', 'hdjs'], function (Vue, hdjs) {
+            new Vue({
                 el: "#app",
                 data: {
                     field:{!! old('field',json_encode($field)) !!},
+                    //当前编辑的视频
+                    currentEditVideo: {},
                 },
                 methods: {
                     addVideo() {
-                        this.field.videos.push({title: '', path: '', duration: 0})
+                        this.field.videos.push({title: '', path: '', duration: 0, question: []})
                     },
                     delVideo(index) {
                         this.field.videos.splice(index, 1)
@@ -253,6 +301,19 @@
                         hdjs.image((images) => {
                             this.field.lesson.thumb = images[0];
                         }, {})
+                    },
+                    question_show(video) {
+                        video.question = video.question ? video.question : [];
+                        this.currentEditVideo = video;
+                    },
+                    question_add() {
+                        this.currentEditVideo.question.push({title: '', topics: [{topic: '', right: false}]});
+                    },
+                    question_del(k) {
+                        this.currentEditVideo.question.splice(k, 1);
+                    },
+                    topic_add(topic) {
+                        topic.push({topic: '', right: false})
                     }
                 }
             })
