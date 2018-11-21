@@ -26,7 +26,8 @@ class CreateEduVideosTable extends Migration
             $table->softDeletes();
             $table->timestamps();
             $table->string('title');
-            $table->text('path')->comment('视频文件');
+            $table->text('path')->nullable()->comment('视频文件');
+            $table->text('external_address')->nullable()->comment('外部播放地址');
             $table->text('question')->nullable()->comment('考题');
             $table->unsignedInteger('lesson_id')->index();
             $table->foreign('lesson_id')->references('id')->on('edu_lessons')->onDelete('cascade');

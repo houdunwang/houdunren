@@ -38,7 +38,7 @@ class Comment extends Model
 
     public function link()
     {
-        return $this->belongModel->link('#comment-' . $this['id']);
+        return $this->belongModel ? $this->belongModel->link('#comment-' . $this['id']) : '';
     }
 
     public function title()

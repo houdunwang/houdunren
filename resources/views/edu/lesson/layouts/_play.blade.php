@@ -1,17 +1,22 @@
 <div class="card">
     <div class="row">
         <div class="col video-box">
-            <video id="video" playsinline="" webkit-playsinline=""
-                   class="video-js vjs-big-play-centered VideoSpeed"
-                   controls preload="auto" data-setup="{}"
-                   style="width:100%; height:100%;object-fit:contain">
-                <source src="{{$video['path']}}" type="video/mp4">
-                <p class="vjs-no-js">
-                    要查看此视频，请启用JavaScript，并考虑升级到web浏览器
-                    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5
-                        video</a>
-                </p>
-            </video>
+            @if($video['path'])
+                <video id="video" playsinline="" webkit-playsinline=""
+                       class="video-js vjs-big-play-centered VideoSpeed"
+                       controls preload="auto" data-setup="{}"
+                       style="width:100%; height:100%;object-fit:contain">
+                    <source src="{{$video['path']}}" type="video/mp4">
+                    <p class="vjs-no-js">
+                        要查看此视频，请启用JavaScript，并考虑升级到web浏览器
+                        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5
+                            video</a>
+                    </p>
+                </video>
+            @endif
+            @if($video['external_address'])
+                {!! $video['external_address'] !!}
+            @endif
             {{--目录--}}
             <div class="col-12 col-lg-3 pl-0" id="category">
                 <div class="video-lists p-0">

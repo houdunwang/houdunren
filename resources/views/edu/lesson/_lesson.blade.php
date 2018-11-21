@@ -205,7 +205,11 @@
                         </div>
                         <div class="form-group">
                             <input type="text" v-model="v.path" class="form-control" placeholder="视频链接"
-                                   aria-describedby="helpId" required>
+                                   aria-describedby="helpId">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" v-model="v.external_address" class="form-control"
+                                   placeholder="外部播放地址，比如B站播放地址" aria-describedby="helpId">
                         </div>
                     </div>
                     <div class="card-footer text-muted">

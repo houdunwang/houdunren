@@ -26,7 +26,7 @@ class ActivityTransformer implements TransformInterface
     public function transform($collection)
     {
         return $collection->map(function ($activity) {
-            if ($activity->subject && $activity->causer) {
+            if ($activity->subject && $activity->subject->link() && $activity->causer) {
                 return $this->item($activity);
             }
         })->filter();

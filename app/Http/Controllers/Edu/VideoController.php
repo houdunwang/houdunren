@@ -23,6 +23,6 @@ class VideoController extends Controller
     public function show(EduVideo $video)
     {
         $video->userVideo()->sync([auth()->id()]);
-        return view('edu.lesson.video', compact('video'));
+        return view('edu.video.show', compact('video'));
     }
 }

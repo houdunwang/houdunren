@@ -23,7 +23,7 @@ class EduVideo extends Model
      */
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['id', 'title', 'path', 'question', 'lesson_id'];
+    protected $fillable = ['id', 'title', 'path', 'question', 'lesson_id','external_address'];
 
     protected $casts = [
         'question'=>'array'

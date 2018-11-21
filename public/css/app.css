@@ -18,6 +18,11 @@
   }
 }
 
+.edu-video-show .video-box iframe {
+  width: 100%;
+  height: 100%;
+}
+
 .edu-video-show .video-box #video {
   width: 100%;
   background: #000;
@@ -364,13 +369,11 @@
   white-space: nowrap;
 }
 
-.edu-lesson-lists article .position-relative img,
-.edu-lesson-tag article .position-relative img {
+.edu-lesson-lists article .position-relative img {
   height: 130px;
 }
 
-.edu-lesson-lists article h4.lesson-title,
-.edu-lesson-tag article h4.lesson-title {
+.edu-lesson-lists article h4.lesson-title {
   font-weight: normal;
   font-size: 14px;
   height: 50px;
