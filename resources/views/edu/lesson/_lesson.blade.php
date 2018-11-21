@@ -197,82 +197,92 @@
         <div class="card-header mb-2">课程视频</div>
         <div class="card-body">
             <div class="row">
-                <div class="card col-sm-12" v-for="(v,k) in field.videos">
-                    <div class="card-body pb-0">
-                        <div class="form-group">
-                            <input type="text" v-model="v.title" class="form-control" placeholder="课程标题"
-                                   aria-describedby="helpId" required>
+                <draggable v-model="field.videos" element="ul"  @start="drag=true" @end="drag=false" class="col-12">
+                <li class="card col-sm-12" v-for="(video,k) in field.videos" :key="k">
+                        <div class="card-body pb-0">
+                            <div class="form-group">
+                                <input type="text" v-model="video.title" class="form-control" placeholder="课程标题"
+                                       aria-describedby="helpId" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" v-model="video.path" class="form-control" placeholder="视频链接"
+                                       aria-describedby="helpId">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" v-model="video.external_address" class="form-control"
+                                       placeholder="外部播放地址，比如B站播放地址" aria-describedby="helpId">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="text" v-model="v.path" class="form-control" placeholder="视频链接"
-                                   aria-describedby="helpId">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" v-model="v.external_address" class="form-control"
-                                   placeholder="外部播放地址，比如B站播放地址" aria-describedby="helpId">
-                        </div>
-                    </div>
-                    <div class="card-footer text-muted">
-                        <button class="btn btn-white btn-sm" type="button" @click="delVideo(k)">删除</button>
-                        <button class="btn btn-white btn-sm" type="button" @click="question_show(v)"
-                                data-toggle="modal" :data-target="'#question'+k">考题
-                        </button>
-                        {{--考题--}}
-                        <div class="modal fade bd-example-modal-lg" :id="'question'+k" tabindex="-1" role="dialog"
-                             aria-labelledby="video.question"
-                             aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">考题</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="card" v-for="(v,k) in currentEditVideo.question">
-                                            <div class="card-header">
-                                                <div class="form-group mb-0">
-                                                    <input type="text" v-model="v.title" class="form-control form-control-sm"
-                                                           placeholder="请输入问题">
+                        <div class="card-footer text-muted">
+                            <button class="btn btn-white btn-sm" type="button" @click="delVideo(k)">删除</button>
+                            <button class="btn btn-white btn-sm" type="button" @click="question_show(video)"
+                                    data-toggle="modal" :data-target="'#question'+k">
+                                考题 <span class="badge badge-light">@{{video.question.length}}</span>
+                            </button>
+                            <button class="btn btn-white btn-sm" type="button" @click="addNextVideo(k)">插入视频</button>
+                            {{--考题--}}
+                            <div class="modal fade bd-example-modal-lg" :id="'question'+k" tabindex="-1" role="dialog"
+                                 aria-labelledby="video.question"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">考题</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="card" v-for="(question,k) in video.question">
+                                                <div class="card-header">
+                                                    <div class="form-group mb-0">
+                                                        <input type="text" v-model="question.title"
+                                                               class="form-control form-control-sm"
+                                                               placeholder="请输入问题">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="card-body pt-3 pb-0">
-                                                <div class="input-group mb-3 input-group-sm" v-for="(topic,n) in v.topics">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <input type="checkbox" v-model="topic.right">
+                                                <div class="card-body pt-3 pb-0">
+                                                    <div class="input-group mb-3 input-group-sm"
+                                                         v-for="(topic,n) in question.topics">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <input type="checkbox" v-model="topic.right">
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control"
+                                                               aria-label="Text input with checkbox"
+                                                               v-model="topic.topic">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-outline-secondary" type="button"
+                                                                    @click="topic_del(question.topics,n)">删除
+                                                            </button>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control"
-                                                           aria-label="Text input with checkbox"
-                                                           v-model="topic.topic">
-                                                    <div class="input-group-append">
-                                                        <button class="btn btn-outline-secondary" type="button"
-                                                                @click="question_del(topics,n)">删除
-                                                        </button>
-                                                    </div>
+                                                </div>
+                                                <div class="card-footer text-muted">
+                                                    <button type="button" class="btn btn-light btn-sm"
+                                                            @click="topic_add(question.topics)">添加答案
+                                                    </button>
+                                                    <button type="button" class="btn btn-light btn-sm"
+                                                            @click="question_del(video,k)">删除考题
+                                                    </button>
                                                 </div>
                                             </div>
-                                            <div class="card-footer text-muted">
-                                                <button type="button" class="btn btn-light btn-sm"
-                                                        @click="topic_add(v.topics)">添加答案
-                                                </button>
-                                            </div>
-                                        </div>
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary btn-sm" @click="question_add()">
-                                            添加考题
-                                        </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                    @click="question_add(video)">
+                                                添加考题
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            {{--考题结束--}}
                         </div>
-                        {{--考题结束--}}
-                    </div>
-                </div>
+                    </li>
+                </draggable>
             </div>
         </div>
         <div class="card-footer">
@@ -286,9 +296,12 @@
 </div>
 @push('js')
     <script>
-        require(['vue', 'hdjs'], function (Vue, hdjs) {
+        require(['vue', 'hdjs', 'sortablejs', 'vuedraggable',], function (Vue, hdjs,sortablejs,draggable) {
             new Vue({
                 el: "#app",
+                components:{
+                    draggable:draggable
+                },
                 data: {
                     field:{!! old('field',json_encode($field)) !!},
                     //当前编辑的视频
@@ -298,6 +311,9 @@
                     addVideo() {
                         this.field.videos.push({title: '', path: '', duration: 0, question: []})
                     },
+                    addNextVideo(k){
+                      this.field.videos.splice(k,0,{title: '', path: '', duration: 0, question: []})
+                    },
                     delVideo(index) {
                         this.field.videos.splice(index, 1)
                     },
@@ -306,18 +322,24 @@
                             this.field.lesson.thumb = images[0];
                         }, {})
                     },
+                    //问题
                     question_show(video) {
                         video.question = video.question ? video.question : [];
-                        this.currentEditVideo = video;
                     },
-                    question_add() {
-                        this.currentEditVideo.question.push({title: '', topics: [{topic: '', right: false}]});
+                    question_add(video) {
+                        video.question.push({title: '', topics: [{topic: '', right: false}]});
                     },
-                    question_del(k) {
-                        this.currentEditVideo.question.splice(k, 1);
+                    question_del(video, k) {
+                        hdjs.confirm('确定删除这个问题吗', function () {
+                            video.question.splice(k, 1);
+                        })
                     },
-                    topic_add(topic) {
-                        topic.push({topic: '', right: false})
+                    //答案
+                    topic_add(topics) {
+                        topics.push({topic: '', right: false})
+                    },
+                    topic_del(topics, k) {
+                        topics.splice(k, 1);
                     }
                 }
             })

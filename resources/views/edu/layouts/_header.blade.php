@@ -178,47 +178,41 @@
                                 文档
                                 <span class="fa fa-angle-down u-header__nav-link-icon"></span>
                             </a>
-                            <ul id="blogSubMenu" class="list-inline hs-sub-menu u-header__sub-menu py-3 mb-0"
-                                style="min-width: 220px;"
-                                aria-labelledby="blogMegaMenu">
-                                <li class="dropdown-item hs-has-sub-menu">
-                                    @foreach(\App\Models\EduDocument::orderBy( 'flag' , 'desc' )->orderBy( 'updated_at' , 'desc' )->limit(5)->get() as $document)
-                                        <a id="navLinkBlogClassic"
-                                           class="nav-link u-header__sub-menu-nav-link u-list__link py-2"
-                                           href="{{route('edu.document.show',$document)}}">
-                                            {{$document->title}}
-                                        </a>
-                                    @endforeach
-                                    <a id="navLinkBlogClassic"
-                                       class="nav-link u-header__sub-menu-nav-link u-list__link py-2"
-                                       href="{{route('edu.document.index')}}">
-                                        更多手册
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item hs-has-sub-menu u-header__nav-item"
-                            data-event="hover"
-                            data-animation-in="slideInUp"
-                            data-animation-out="fadeOut">
-                            <a id="blogMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"
-                               aria-haspopup="true"
-                               aria-expanded="false"
-                               aria-labelledby="blogSubMenu">
-                                <i class="fa fa-pencil-square" aria-hidden="true"></i>
-                            </a>
                             <ul id="blogSubMenu"
                                 class="list-group list-inline hs-sub-menu u-header__sub-menu mb-0 small rounded-0"
                                 style="min-width: 220px;"
                                 aria-labelledby="blogMegaMenu">
-                                @foreach(\App\Models\EduCategory::get() as $category)
-                                    <a href="{{route('edu.topic.create',['id'=>$category['id']])}}"
+                                @foreach(\App\Models\EduDocument::orderBy( 'flag' , 'desc' )->orderBy( 'updated_at' , 'desc' )->limit(5)->get() as $document)
+                                    <a href="{{route('edu.document.show',$document)}}"
                                        class="list-group-item list-group-item-action rounded-0">
-                                        <i class="{{$category['icon']}}" aria-hidden="true"></i> {{$category['title']}}
+                                        {{$document->title}}
                                     </a>
                                 @endforeach
                             </ul>
+                            <ul id="blogSubMenu" class="list-group list-inline hs-sub-menu u-header__sub-menu mb-0 small rounded-0"
+                                style="min-width: 220px;"
+                                aria-labelledby="blogMegaMenu">
+                                    @foreach(\App\Models\EduDocument::orderBy( 'flag' , 'desc' )->orderBy( 'updated_at' , 'desc' )->limit(5)->get() as $document)
+                                        <a
+                                                class="list-group-item list-group-item-action rounded-0"
+                                           href="{{route('edu.document.show',$document)}}">
+                                            {{$document->title}}
+                                        </a>
+                                    @endforeach
+                                    <a
+                                            class="list-group-item list-group-item-action rounded-0"
+                                       href="{{route('edu.document.index')}}">
+                                        更多手册
+                                    </a>
+                            </ul>
+                        </li>
+                        <li class="nav-item hs-has-sub-menu u-header__nav-item"
+                            data-event="hover"
+                            data-animation-in="slideInUp"
+                            data-animation-out="fadeOut">
+                            <a class="nav-link u-header__nav-link" href="{{route('edu.topic.create')}}">
+                                <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="mr-2" href="javascript:;"

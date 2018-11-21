@@ -20,9 +20,18 @@
                 'hs.slick-carousel': '/org/front/js/components/hs.slick-carousel',
                 'hs.unfold': '/org/front/js/components/hs.unfold',
                 'hs.go-to': '/org/front/js/components/hs.go-to',
-                'hs.show-animation': '/org/front/js/components/hs.show-animation'
+                'hs.show-animation': '/org/front/js/components/hs.show-animation',
+                //VUE托放
+                'vuedraggable': "{{asset('js/vuedraggable.min')}}",
+                'sortablejs': "/js/Sortable.min"
             },
             shim: {
+                'vuedraggable': {
+                    deps: ['vue', 'sortablejs']
+                },
+                'sortablejs': {
+                    exports: 'sortablejs'
+                },
                 'jquery-migrate': {deps: ['jquery', 'bootstrap']},
                 'popper': {deps: ['jquery']},
                 'hs.megamenu': {deps: ['jquery', 'popper']},
