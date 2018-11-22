@@ -30,10 +30,15 @@ class ZanController extends Controller
     {
         $model = model_instance()->zan();
         $zan = $model->where('user_id', auth()->id())->first();
+
         if ($zan) {
             $zan->delete();
         } else {
-            $model->create(['user_id' => auth()->id()]);
+            $model->create([
+                'user_id' => auth()->id(),
+                'title' => model_instance()->title(),
+                'url' => model_instance()->link(),
+            ]);
         }
 
         if ($request->ajax()) {

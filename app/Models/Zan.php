@@ -19,8 +19,8 @@ class Zan extends Model
 
     protected static $logAttributes = ['created_at', 'updated_at'];
     protected static $recordEvents = ['created'];
-    protected static $logName = 'edu_zan';
-    protected $fillable = ['user_id'];
+    protected static $logName = 'zan';
+    protected $fillable = ['user_id', 'url','title'];
 
     public function __construct(array $attributes = [])
     {
@@ -40,18 +40,12 @@ class Zan extends Model
     //赞标题
     public function title()
     {
-        return $this->belongModel->title();
+        return $this['title'];
     }
 
     //链接
     public function link()
     {
-        switch (class_basename($this->belongModel)) {
-            case 'EduTopic':
-                return $this->belongModel->link();
-            case 'Comment':
-                $param = '#comment-' . $this->belongModel->id;
-                return $this->belongModel->belongModel->link($param);
-        }
+        return $this['url'];
     }
 }

@@ -17,9 +17,6 @@ class CommentObserver
 {
     public function creating(Comment $comment)
     {
-        //提取评论部分内容为摘要，markdown转html
-        $content = (new \Parsedown())->text($comment['content']);
-        $comment['description'] = mb_substr(strip_tags($content), 0, 50);
     }
 
     public function created(Comment $comment)
@@ -34,6 +31,7 @@ class CommentObserver
     public function deleted(Comment $comment)
     {
         $comment->zan()->delete();
+        $comment->activity()->delete();
     }
 
     public function restored(Comment $comment)

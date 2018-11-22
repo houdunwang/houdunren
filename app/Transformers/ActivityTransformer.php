@@ -26,8 +26,8 @@ class ActivityTransformer implements TransformInterface
     public function transform($collection)
     {
         return $collection->map(function ($activity) {
-            if ($activity->subject && $activity->subject->link() && $activity->causer) {
-                return $this->item($activity);
+            if ($activity->subject && $activity->causer) {
+                return $this->item($activity)??null;
             }
         })->filter();
     }
@@ -39,19 +39,23 @@ class ActivityTransformer implements TransformInterface
      */
     public function item($activity)
     {
-        $activity['link'] = $activity->subject->link();
-        $activity['title'] = $activity->subject->title();
-        switch ($activity->log_name) {
-            case 'comment':
-                $activity['active'] = '发表评论';
-                break;
-            case 'edu_zan':
-                $activity['active'] = '赞了';
-                break;
-            case 'edu_topic':
-                $activity['active'] = $activity['description'] == 'created' ? '发布话题' : '更新话题';
-                break;
+        $link = $activity->subject->link();
+        $title = $activity->subject->title();
+        if ($link && $title) {
+            $activity['link'] = $link;
+            $activity['title'] = $title;
+            switch ($activity->log_name) {
+                case 'comment':
+                    $activity['active'] = '发表评论';
+                    break;
+                case 'edu_zan':
+                    $activity['active'] = '赞了';
+                    break;
+                case 'edu_topic':
+                    $activity['active'] = $activity['description'] == 'created' ? '发布话题' : '更新话题';
+                    break;
+            }
+            return $activity;
         }
-        return $activity;
     }
 }

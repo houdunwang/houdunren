@@ -58,9 +58,9 @@ abstract class Repository
         return $this->model->find($id, $columns);
     }
 
-    public function findBy($field, $value, $columns = ['*'])
+    public function findByAttributes(array $attributes, $columns = ['*'])
     {
-        return $this->model->where($field, $value)->first($columns);
+        return $this->model->where($attributes)->first($columns);
     }
 
 //    public function where(array $attributes)

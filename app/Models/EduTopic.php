@@ -42,7 +42,7 @@ class EduTopic extends Model
 
     public function title()
     {
-        return $this['title'];
+        return '[话题] '.$this['title'];
     }
 
     //配置algolia可搜索属性

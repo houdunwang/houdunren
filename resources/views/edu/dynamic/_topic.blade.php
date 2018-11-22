@@ -9,9 +9,9 @@
                    class="text-secondary pt-1" style="display: inline-block;">
                     {{$cond->causer->name}}
                 </a>
-                <span class="badge badge-light text-secondary small">{{$cond['active']}}</span>
-                <a href="{{$cond['link']}}" class="text-secondary">
-                    {{$cond['title']}}
+                <span class="badge badge-light text-secondary small">发表了</span>
+                <a href="{{$cond->subject->link()}}" class="text-secondary">
+                    {{$cond->subject->title()}}
                 </a>
             </div>
             <span class="col-sm-2 text-text text-sm-right small text-secondary">

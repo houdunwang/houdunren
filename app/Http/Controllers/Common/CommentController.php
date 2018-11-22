@@ -36,6 +36,8 @@ class CommentController extends Controller
         $model = model_instance();
         $data = $request->only(['content', 'url']);
         $data['user_id'] = auth()->id();
+        $data['url'] = model_instance()->link();
+        $data['description'] = mb_substr(strip_tags((new \Parsedown())->text($data['content'])), 0, 50);
         $comment = $model->comment()->create($data);
 
         return ['comment' => $comment->with('user', 'zan')->find($comment['id']), 'code' => 0];

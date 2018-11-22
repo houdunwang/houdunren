@@ -24,7 +24,7 @@ class Comment extends Model
 {
     use LogsActivity, CommonRelation;
 
-    protected $fillable = ['content', 'user_id', 'url'];
+    protected $fillable = ['content', 'user_id', 'url','description'];
 
     protected static $logFillable = true;
     protected static $recordEvents = ['created', 'updated'];
@@ -38,11 +38,11 @@ class Comment extends Model
 
     public function link()
     {
-        return $this->belongModel ? $this->belongModel->link('#comment-' . $this['id']) : '';
+        return $this['url'] . '#comment-' . $this['id'];
     }
 
     public function title()
     {
-        return $this->description ?? mb_substr(strip_tags((new \Parsedown())->text($this['content'])), 0, 50);
+        return '[评论] '.$this['description'];
     }
 }

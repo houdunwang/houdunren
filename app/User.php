@@ -5,10 +5,8 @@ namespace App;
 use App\Models\Attachment;
 use App\Foundations\CommonRelation;
 use App\Models\Zan;
-use App\Observers\UserObserver;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 

@@ -29,10 +29,16 @@
                     </div>
                 </div>
                 <ul class="list-unstyled mb-0">
-                    @foreach($activityTransformer->transform($activities) as $cond)
+                    @foreach($activities as $cond)
                         @switch($cond['log_name'])
                             @case('edu_topic')
                             @include('edu.dynamic._topic')
+                            @break
+                            @case('comment')
+                            @include('edu.dynamic._comment')
+                            @break
+                            @case('zan')
+                            @include('edu.dynamic._zan')
                             @break
                             @default
                             @include('edu.dynamic._default')

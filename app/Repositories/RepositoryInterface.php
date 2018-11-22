@@ -27,9 +27,5 @@ interface RepositoryInterface
 
     public function find($id, $columns = ['*']);
 
-    public function findBy($field, $value, $columns = ['*']);
-
-//    public function where(array $attributes);
-
-//    public function orWhere(array $attributes);
+    public function findByAttributes(array $attributes, $columns = ['*']);
 }
