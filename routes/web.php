@@ -1,6 +1,7 @@
 <?php
 //网站首页
 Route::get('/', 'Admin\HomeController@make')->name('home');
+//Route::get('/', 'Edu\TopicController@index')->name('home');
 Route::get('home', 'Admin\HomeController@make')->name('home');
 
 //登录/注册/退出

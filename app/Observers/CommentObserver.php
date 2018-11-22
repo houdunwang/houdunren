@@ -28,9 +28,12 @@ class CommentObserver
     {
     }
 
+    public function deleting(Comment $comment)
+    {
+    }
+
     public function deleted(Comment $comment)
     {
-        $comment->zan()->delete();
         $comment->activity()->delete();
     }
 
