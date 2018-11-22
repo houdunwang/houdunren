@@ -40,7 +40,7 @@
                                     <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">{{$topic->user->name}}</a>
                                 </a>
                                 <i class="fa fa-clock-o ml-2" aria-hidden="true"></i>
-                                {{$topic->updated_at->diffForHumans()}}
+                                {{$topic->created_at->diffForHumans()}}
 
                                 <a href="{{route('edu.topic_list',['id'=>$topic->category->id])}}" class="text-secondary">
                                     <i class="fa fa-folder-o ml-2" aria-hidden="true"></i>
