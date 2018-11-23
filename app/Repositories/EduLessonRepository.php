@@ -37,7 +37,6 @@ class EduLessonRepository extends Repository implements RepositoryInterface
         return parent::update($model, $attributes);
     }
 
-
     /**
      * 课程列表
      * @param int $row
@@ -48,6 +47,17 @@ class EduLessonRepository extends Repository implements RepositoryInterface
         return $this->model->with('user')->latest('updated_at')->where('video_num', '>', 0)->paginate($row);
     }
 
+    public function getCommend($limit = 10)
+    {
+        return $this->model->where('is_commend', 1)->latest('updated_at')->where('video_num', '>', 0)->limit($limit)->get();
+    }
+
+    /**
+     * 删除课程
+     * @param Model $lesson
+     * @return bool|null
+     * @throws \Exception
+     */
     public function delete(Model $lesson)
     {
         //删除视频

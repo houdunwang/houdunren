@@ -53,6 +53,11 @@
                         <textarea class="form-control" rows="3"
                                   name="notice">{{config_get('admin.site.notice')}}</textarea>
                     </div>
+                    <div class="form-group">
+                        <label class="mb-1">统计代码</label>
+                        <textarea class="form-control" rows="3"
+                                  name="statistics">{{config_get('admin.site.statistics')}}</textarea>
+                    </div>
                     <button class="btn btn-sm btn-primary">
                         保存
                     </button>

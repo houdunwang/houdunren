@@ -43,12 +43,12 @@
     </div>
     <div class="card-footer">
         <div class="row align-items-center">
-            <div class="col-auto">
-                <a href="{{route('member.user.show',$video->lesson->user)}}" class="avatar avatar-lg">
-                    <img src="{{$video->lesson->user->icon}}"
-                         class="u-avatar avatar-img rounded-circle">
-                </a>
-            </div>
+            {{--<div class="col-auto">--}}
+                {{--<a href="{{route('member.user.show',$video->lesson->user)}}" class="avatar avatar-lg">--}}
+                    {{--<img src="{{$video->lesson->user->icon}}"--}}
+                         {{--class="u-avatar avatar-img rounded-circle">--}}
+                {{--</a>--}}
+            {{--</div>--}}
             <div class="col ml--2">
                 <h5 class="card-title mb-1 text-secondary">
                     {{$video->title}}

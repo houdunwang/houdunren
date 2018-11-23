@@ -75,5 +75,4 @@
         })
     })
 </script>
-
-<script type="text/javascript" src="http://tajs.qq.com/stats?sId=63802236" charset="UTF-8"></script>
+{!! config_get('admin.site.statistics') !!}

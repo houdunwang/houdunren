@@ -217,7 +217,7 @@
                             <button class="btn btn-white btn-sm" type="button" @click="delVideo(k)">删除</button>
                             <button class="btn btn-white btn-sm" type="button" @click="question_show(video)"
                                     data-toggle="modal" :data-target="'#question'+k">
-                                考题 <span class="badge badge-light">@{{video.question.length}}</span>
+                                考题 <span class="badge badge-light">@{{video.question?video.question.length:0}}</span>
                             </button>
                             <button class="btn btn-white btn-sm" type="button" @click="addNextVideo(k)">插入视频</button>
                             {{--考题--}}

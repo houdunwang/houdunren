@@ -11,7 +11,6 @@
 namespace App\Http\Controllers\Edu;
 
 use App\Http\Controllers\Controller;
-use App\Models\EduLesson;
 use App\Repositories\ActivityRepository;
 use App\Repositories\EduLessonRepository;
 
@@ -31,7 +30,7 @@ class HomeController extends Controller
     public function index(ActivityRepository $activityRepository, EduLessonRepository $eduLessonRepository)
     {
         $activities = $activityRepository->paginate(12);
-        $lessons = $eduLessonRepository->paginate(12,['*'],'updated_at');
+        $lessons = $eduLessonRepository->getCommend(12);
 
         return view('edu.dynamic.index', compact('activities', 'lessons'));
     }
