@@ -49,4 +49,19 @@ class EduVideoRepository extends Repository implements RepositoryInterface
         $lesson->save();
         return true;
     }
+
+    /**
+     * 上一课/下一课
+     * @param EduVideo $video 视频
+     * @param string $type prev or next
+     * @return mixed
+     */
+    public function nextOrPrev(EduVideo $video, $type = 'prev')
+    {
+        $where = [
+            ['lesson_id', $video['lesson_id']],
+            ['id', $type == 'next' ? '>' : '<', $video['id']],
+        ];
+        return EduVideo::where($where)->orderBy('id', $type == 'next' ? 'ASC' : 'DESC')->first();
+    }
 }

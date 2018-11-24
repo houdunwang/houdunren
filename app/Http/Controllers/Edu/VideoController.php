@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Edu;
 
 use App\Http\Controllers\Controller;
 use App\Models\EduVideo;
+use App\Repositories\EduVideoRepository;
 
 class VideoController extends Controller
 {
@@ -20,9 +21,9 @@ class VideoController extends Controller
         $this->middleware('auth');
     }
 
-    public function show(EduVideo $video)
+    public function show(EduVideo $video,EduVideoRepository $repository)
     {
         $video->userVideo()->sync([auth()->id()]);
-        return view('edu.video.show', compact('video'));
+        return view('edu.video.show', compact('video','repository'));
     }
 }

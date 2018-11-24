@@ -41,7 +41,6 @@
                                 <td scope="row">{{$lesson['id']}}</td>
                                 <td>
                                     {{$lesson['title']}}
-                                    <img src="{{$lesson['thumb']}}" style="width: 80px;">
                                 </td>
                                 <td>{{$lesson['updated_at']->format('Y/m/d')}}</td>
                                 <td class="text-center">

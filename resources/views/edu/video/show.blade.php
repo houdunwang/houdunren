@@ -5,9 +5,9 @@
             <div class="row mb-3">
                 <div class="col-12">
                     @can('view',$video->lesson)
-                        @include('edu.lesson.layouts._play')
+                        @include('edu.video.layouts._play')
                         @else
-                        @include('edu.lesson.layouts._cant_play')
+                        @include('edu.video.layouts._cant_play')
                     @endcan
                 </div>
             </div>
@@ -26,7 +26,6 @@
         function category() {
             $("#category").toggle();
         }
-
         require(['hdjs'], function (hdjs) {
             hdjs.video('video');
             hdjs.scrollTo('body', '#video', 1000, {queue: true});

@@ -44,10 +44,10 @@
     <div class="card-footer">
         <div class="row align-items-center">
             {{--<div class="col-auto">--}}
-                {{--<a href="{{route('member.user.show',$video->lesson->user)}}" class="avatar avatar-lg">--}}
-                    {{--<img src="{{$video->lesson->user->icon}}"--}}
-                         {{--class="u-avatar avatar-img rounded-circle">--}}
-                {{--</a>--}}
+            {{--<a href="{{route('member.user.show',$video->lesson->user)}}" class="avatar avatar-lg">--}}
+            {{--<img src="{{$video->lesson->user->icon}}"--}}
+            {{--class="u-avatar avatar-img rounded-circle">--}}
+            {{--</a>--}}
             {{--</div>--}}
             <div class="col ml--2">
                 <h5 class="card-title mb-1 text-secondary">
@@ -63,6 +63,18 @@
                 </p>
             </div>
             <div class="col-auto">
+                @if($v = $repository->nextOrPrev($video,'prev'))
+                    <a href="{{route('edu.video.show',$v)}}"
+                       class="btn u-btn-primary--air transition-3d-hover mb-1 btn-xs">
+                        上一课
+                    </a>
+                @endif
+                @if($v = $repository->nextOrPrev($video,'next'))
+                    <a href="{{route('edu.video.show',$v)}}"
+                       class="btn u-btn-primary--air transition-3d-hover mb-1 btn-xs">
+                        下一课
+                    </a>
+                @endif
                 <a href="javascript:;" onclick="category()"
                    class="btn u-btn-primary--air transition-3d-hover mb-1 btn-xs">
                     课程目录
