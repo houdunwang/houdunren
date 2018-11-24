@@ -86,12 +86,6 @@
                 </form>
             </div>
         </div>
-    @else
-        <div class="card">
-            <div class="card-body text-center">
-                <a href="{{route('login')}}" class="text-muted">登录后参与讨论</a>
-            </div>
-        </div>
     @endauth
 </div>
 <script>

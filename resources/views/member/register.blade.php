@@ -3,16 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
-    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/fonts/feather/feather.min.css">
-    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/highlight/styles/vs2015.min.css">
-    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/quill/dist/quill.core.css">
-    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/select2/dist/css/select2.min.css">
-    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/libs/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/css/theme.min.css">
-    <title>注册</title>
+    <title>会员注册</title>
+    @include('layouts._hdjs')
 </head>
 <body class="d-flex align-items-center bg-white border-top-2 border-primary">
+@include('layouts._message')
 <div class="container-fluid">
     <div class="row align-items-center justify-content-center">
         <div class="col-12 col-md-5 col-lg-6 col-xl-4 px-lg-6 my-5">
@@ -27,25 +23,25 @@
                 @csrf
                 <div class="form-group">
                     <label>昵称</label>
-                    <input type="text" name="name" class="form-control" placeholder="个性昵称" value="{{old('name')}}">
+                    <input type="text" name="name" class="form-control" placeholder="个性昵称" value="{{old('name')}}" required>
                 </div>
                 <div class="form-group">
                     <label>帐号</label>
-                    <input type="text" name="account" class="form-control" placeholder="请输入邮箱或手机号" value="{{old('account')}}">
+                    <input type="text" name="account" class="form-control" placeholder="请输入邮箱或手机号" value="{{old('account')}}" required>
                 </div>
                 <div class="form-group">
                     <label>密码</label>
-                    <input type="password" name="password" class="form-control" placeholder="输入登录密码"  value="{{old('password')}}">
+                    <input type="password" name="password" class="form-control" placeholder="输入登录密码"  value="{{old('password')}}" required>
                 </div>
                 <div class="form-group">
                     <label>确认密码</label>
-                    <input type="password" name="password_confirmation" class="form-control" placeholder="输入登录密码" value="{{old('password_confirmation')}}">
+                    <input type="password" name="password_confirmation" class="form-control" placeholder="输入登录密码" value="{{old('password_confirmation')}}" required>
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="输入验证码" name="code">
+                    <input type="text" class="form-control" placeholder="输入验证码" name="code" required>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" value="{{old('code')}}" id="bt" value="{{old('code')}}">发送验证码</button>
+                        <button class="btn btn-outline-secondary" type="button" value="{{old('code')}}" id="bt">发送验证码</button>
                     </div>
                 </div>
                 <button class="btn btn-lg btn-block btn-primary mb-3">注册</button>
@@ -62,8 +58,6 @@
         </div>
     </div>
 </div>
-@include('layouts._hdjs')
-@include('layouts._message')
 <script>
     require(['hdjs', 'bootstrap'], function (hdjs) {
         let option = {

@@ -42,7 +42,7 @@ class LoginController extends Controller
         if (\Auth::attempt($data, (bool)$request['remember'])) {
             return redirect()->intended('/');
         }
-        return redirect()->intended('/')->with('error', '登录失败，请检查帐号或密码');
+        return back()->with('error', '登录失败，帐号或密码错误');
     }
 
     public function logout()

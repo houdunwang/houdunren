@@ -5,6 +5,7 @@
                 <video id="video" playsinline="" webkit-playsinline=""
                        class="video-js vjs-big-play-centered VideoSpeed"
                        controls preload="auto" data-setup="{}"
+                       poster="{{asset('images/poster.jpg')}}"
                        style="width:100%; height:100%;object-fit:contain">
                     <source src="{{$video['path']}}" type="video/mp4">
                     <p class="vjs-no-js">

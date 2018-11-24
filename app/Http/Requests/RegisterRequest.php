@@ -69,10 +69,13 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => '昵称 不能为空',
-            'code.required' => '验证码 不能为空',
-            'password.required' => '密码 不能为空',
-            'account.required' => '帐号 不能为空',
+            'name.required' => '昵称不能为空',
+            'name.unique' => '昵称已经存在',
+            'code.required' => '验证码不能为空',
+            'password.required' => '密码不能为空',
+            'password.min' => "密码不能小于5位",
+            'password.confirmed' => "两次密码输入不一致",
+            'account.required' => '帐号不能为空',
         ];
     }
 
