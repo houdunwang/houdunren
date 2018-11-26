@@ -87,53 +87,53 @@
         <div class="container">
             <hr class="my-0">
         </div>
-        <div class="container u-space-3">
-            <div class="row justify-content-md-between">
-                <div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-0 mb-9 mb-lg-0">
-                    <div class="text-center px-lg-5">
-            <span class="u-icon u-icon-primary--air u-icon--lg rounded-circle mb-3">
-              <span class="fa fa-book u-icon__inner"></span>
-            </span>
-                        <h3 class="h5">完善的手册</h3>
-                        <p>
-                            我们针对常用框架与组件进行了手册的翻译，提升工程师的开发效率。
-                        </p>
-                        <a class="btn btn-sm u-btn-primary--air transition-3d-hover" href="#">
-                            查看手册
-                            <span class="fa fa-angle-right ml-2"></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4 mb-9 mb-lg-0">
-                    <div class="text-center px-lg-5">
-            <span class="u-icon u-icon-primary--air u-icon--lg rounded-circle mb-3">
-              <span class="fa fa-calculator u-icon__inner"></span>
-            </span>
-                        <h3 class="h5">社区讨论</h3>
-                        <p>
-                            提供在线讨论、QQ交流群、每日直播课等方式，无数小伙伴与你同学习进步！
-                        </p>
-                        <a class="btn btn-sm u-btn-primary--air transition-3d-hover" href="{{route('edu.dynamic.index')}}">
-                            进入社区
-                            <span class="fa fa-angle-right ml-2"></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="text-center px-lg-5">
-            <span class="u-icon u-icon-primary--air u-icon--lg rounded-circle mb-3">
-              <span class="far fa-calendar-alt u-icon__inner"></span>
-            </span>
-                        <h3 class="h5">全程实战</h3>
-                        <p>课程面向企业级实际应用，课程以实战贯穿始终。深入浅出，细致入微。</p>
-                        <a class="btn btn-sm u-btn-primary--air transition-3d-hover" href="{{route('edu.lesson.lists')}}">
-                            查看课程
-                            <span class="fa fa-angle-right ml-2"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{--<div class="container u-space-3">--}}
+            {{--<div class="row justify-content-md-between">--}}
+                {{--<div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-0 mb-9 mb-lg-0">--}}
+                    {{--<div class="text-center px-lg-5">--}}
+            {{--<span class="u-icon u-icon-primary--air u-icon--lg rounded-circle mb-3">--}}
+              {{--<span class="fa fa-book u-icon__inner"></span>--}}
+            {{--</span>--}}
+                        {{--<h3 class="h5">完善的手册</h3>--}}
+                        {{--<p>--}}
+                            {{--我们针对常用框架与组件进行了手册的翻译，提升工程师的开发效率。--}}
+                        {{--</p>--}}
+                        {{--<a class="btn btn-sm u-btn-primary--air transition-3d-hover" href="#">--}}
+                            {{--查看手册--}}
+                            {{--<span class="fa fa-angle-right ml-2"></span>--}}
+                        {{--</a>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="col-sm-6 col-lg-4 mb-9 mb-lg-0">--}}
+                    {{--<div class="text-center px-lg-5">--}}
+            {{--<span class="u-icon u-icon-primary--air u-icon--lg rounded-circle mb-3">--}}
+              {{--<span class="fa fa-calculator u-icon__inner"></span>--}}
+            {{--</span>--}}
+                        {{--<h3 class="h5">社区讨论</h3>--}}
+                        {{--<p>--}}
+                            {{--提供在线讨论、QQ交流群、每日直播课等方式，无数小伙伴与你同学习进步！--}}
+                        {{--</p>--}}
+                        {{--<a class="btn btn-sm u-btn-primary--air transition-3d-hover" href="{{route('edu.dynamic.index')}}">--}}
+                            {{--进入社区--}}
+                            {{--<span class="fa fa-angle-right ml-2"></span>--}}
+                        {{--</a>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="col-sm-6 col-lg-4">--}}
+                    {{--<div class="text-center px-lg-5">--}}
+            {{--<span class="u-icon u-icon-primary--air u-icon--lg rounded-circle mb-3">--}}
+              {{--<span class="far fa-calendar-alt u-icon__inner"></span>--}}
+            {{--</span>--}}
+                        {{--<h3 class="h5">全程实战</h3>--}}
+                        {{--<p>课程面向企业级实际应用，课程以实战贯穿始终。深入浅出，细致入微。</p>--}}
+                        {{--<a class="btn btn-sm u-btn-primary--air transition-3d-hover" href="{{route('edu.lesson.lists')}}">--}}
+                            {{--查看课程--}}
+                            {{--<span class="fa fa-angle-right ml-2"></span>--}}
+                        {{--</a>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
         <div class="u-bg-light-blue-50">
             <div class="container u-space-3">
                 <div class="w-md-80 w-lg-50 text-center mx-auto mb-9">

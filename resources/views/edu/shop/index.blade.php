@@ -6,11 +6,17 @@
                 <div class="w-md-80 w-lg-60 text-center mx-auto  pt-5">
                     <div class="mb-6 pt-5">
                         <h1 class="text-white">
-                             <span class="font-weight-bold">投资学习会得到加倍的回报</span>
+                             <span class="font-weight-bold">
+                                 {{--投资学习会得到加倍的回报--}}
+                                 一件衣服的投入获得一个赚钱的技能
+                             </span>
                         </h1>
                         <h3 class="text-white">
                             订阅会员免费观看所有视频
                         </h3>
+                        <h5 class="text-white" style="font-size: 14px;">
+                            半年付499元 / 全站{{$videoCount = \App\Models\EduVideo::count()}}个视频 = {{round(499/$videoCount,2)}} 元 （超合算）
+                        </h5>
                     </div>
                 </div>
             </div>
