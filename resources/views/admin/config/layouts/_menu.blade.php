@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs nav-tabs-sm mb-4">
+<ul class="nav nav-tabs nav-tabs-line nav-tabs-line-success nav-tabs-bold" role="tablist">
     <li class="nav-item">
         <a href="{{route('admin.config.edit',['name'=>'site'])}}"
            class="nav-link mr-3 {{active_class(if_route_param('name','site'))}}">

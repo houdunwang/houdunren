@@ -48,20 +48,35 @@ class ModuleRepository extends Repository implements RepositoryInterface
      * @param string $menu 菜单类型:center_menu
      * @return mixed
      */
-    public function menus(string $menu)
+    public function allModuleMenus(string $menu)
     {
-        return $this->model->whereNotNull($menu)->pluck($menu, 'name');
+        return $this->model->whereNotNull($menu)->pluck('name')->map(function ($module) {
+            return $this->menu($module);
+        })->filter();
     }
 
-    public function getAdminMenus(string $module)
+    /**
+     * 模块菜单
+     * @param string $name 模块标识
+     * @param string $menuType 菜单类型
+     * @return array
+     */
+    public function menu(string $name, $menuType = 'admin_menu')
     {
-        $adminMenu = $this->model->where(['name' => $module])->value('admin_menu');
-        return collect($adminMenu)->map(function ($menu) {
-            $menu['permission'] = array_map(function ($menu) {
-                return $menu['permission'];
-            }, $menu['menus']);
-            return $menu;
-        });
+        $module = $this->model->where(['name' => $name])->first();
+        if ($module && !empty($module[$menuType])) {
+            return [
+                'title' => $module['title'],
+                'module' => $module['name'],
+                //'name' => $module[$menuType]['name'],
+                'system' => $module['system'],
+                'icon' => $module[$menuType]['icon'],
+                'menus' => $module[$menuType]['menus'],
+                'permission' => array_map(function ($menu) {
+                    return $menu['permission'];
+                }, $module[$menuType]['menus']),
+            ];
+        }
     }
 
     /**

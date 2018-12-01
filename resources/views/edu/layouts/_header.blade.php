@@ -15,8 +15,8 @@
                 </button>
                 <!-- End Close Button -->
                 <!-- Input -->
-                @include('edu.layouts._search')
-                <!-- End Input -->
+            @include('edu.layouts._search')
+            <!-- End Input -->
             </div>
         </div>
     </div>
@@ -47,17 +47,41 @@
                 <div id="navBar" class="collapse navbar-collapse py-0">
                     <ul class="navbar-nav u-header__navbar-nav ml-lg-auto">
                         @can('Edu-live')
-                        <li class="nav-item">
-                            <a class="nav-link u-header__nav-link" href="{{route('edu.live')}}">
-                                直播
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link u-header__nav-link" href="{{route('edu.live')}}">
+                                    直播
+                                </a>
+                            </li>
                         @endcan
                         <li class="nav-item">
                             <a class="nav-link u-header__nav-link" href="{{route('edu.dynamic.index')}}">
                                 动态
                             </a>
                         </li>
+                            <li class="nav-item hs-has-sub-menu u-header__nav-item"
+                                data-event="hover"
+                                data-animation-in="slideInUp"
+                                data-animation-out="fadeOut">
+                                <a id="blogMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"
+                                   aria-haspopup="true"
+                                   aria-expanded="false"
+                                   aria-labelledby="blogSubMenu">
+                                    系统
+                                    <span class="fa fa-angle-down u-header__nav-link-icon"></span>
+                                </a>
+                                <ul id="blogSubMenu"
+                                    class="list-group list-inline hs-sub-menu u-header__sub-menu mb-0 small rounded-0"
+                                    style="min-width: 220px;"
+                                    aria-labelledby="blogMegaMenu">
+                                    @inject('EduLessonRepository',\App\Repositories\EduSystemLessonRepository)
+                                    @foreach($EduLessonRepository->all() as $systemlesson)
+                                        <a class="pl-3 rounded-0"
+                                                href="{{route('edu.system.show',$systemlesson)}}">
+                                            {{$systemlesson['title']}}
+                                        </a>
+                                    @endforeach
+                                </ul>
+                            </li>
                         <li class="nav-item">
                             <a class="nav-link u-header__nav-link" href="{{route('edu.lesson.lists')}}">
                                 碎片
@@ -106,62 +130,62 @@
                     {{--<!-- End Submenu -->--}}
                     {{--</li>--}}
                     <!-- Home -->
-                        {{--<li class="nav-item hs-has-mega-menu u-header__nav-item"--}}
-                            {{--data-event="hover"--}}
-                            {{--data-animation-in="slideInUp"--}}
-                            {{--data-animation-out="fadeOut"--}}
-                            {{--data-position="left">--}}
-                            {{--<a id="homeMegaMenu" class="nav-link u-header__nav-link" href="#"--}}
-                               {{--aria-haspopup="true"--}}
-                               {{--aria-expanded="false">--}}
-                                {{--话题--}}
-                                {{--<span class="fa fa-angle-down u-header__nav-link-icon"></span>--}}
-                            {{--</a>--}}
-                            {{--<!-- Home - Mega Menu -->--}}
-                            {{--<div class="hs-mega-menu u-header__sub-menu w-100 u-header__mega-menu-wrapper-v2 ml-1"--}}
-                                 {{--style="margin-left: 300px;"--}}
-                                 {{--aria-labelledby="homeMegaMenu">--}}
-                                {{--<div class="row p-0 mr-0">--}}
-                                    {{--<div class="col-lg-9 pr-0">--}}
-                                        {{--<div class="d-none d-lg-block u-header__banner-v1"--}}
-                                             {{--data-bg-img-src="{{asset('org/front')}}/img/750x750/img1.jpg">--}}
-                                            {{--<div class="w-100 text-center u-header__banner-v1-content u-content-centered-y p-4">--}}
-                                                {{--<div class="mb-4">--}}
-                                                    {{--<strong class="d-block u-header__banner-v1-title mb-2">向军大叔每晚直播</strong>--}}
-                                                    {{--<span class="u-header__banner-v1-text">--}}
-                                                        {{--技术点均以实战为主，大叔用直播形式教你进行编程世界。--}}
-                                                    {{--</span>--}}
-                                                {{--</div>--}}
-                                                {{--<a class="btn btn-primary u-btn-primary btn-sm transition-3d-hover"--}}
-                                                   {{--href="https://ke.qq.com/course/288236?tuin=89184f12" target="_blank">--}}
-                                                    {{--进入直播间 <span class="fa fa-angle-right ml-2"></span>--}}
-                                                {{--</a>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="col-lg-3 u-header__mega-menu-wrapper-v3">--}}
-                                        {{--<div class="row u-header__mega-menu-wrapper-v1">--}}
-                                            {{--<div class="col-sm-12">--}}
-                                                {{--<ul class="list-unstyled mb-4 row">--}}
-                                                    {{--@foreach(\App\Models\EduCategory::get() as $category)--}}
-                                                        {{--<li class="col-sm-12">--}}
-                                                            {{--<div class="nav-link u-list__link py-3 px-0">--}}
-                                                                {{--<a class="text-secondary"--}}
-                                                                   {{--href="{{route('edu.topic_list',$category['id'])}}">--}}
-                                                                    {{--<i class="{{$category['icon']}} w-15 pr-0"--}}
-                                                                       {{--aria-hidden="true"></i>{{$category['title']}}--}}
-                                                                {{--</a>--}}
-                                                            {{--</div>--}}
-                                                        {{--</li>--}}
-                                                    {{--@endforeach--}}
-                                                {{--</ul>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
-                        <!-- End Home -->
+                    {{--<li class="nav-item hs-has-mega-menu u-header__nav-item"--}}
+                    {{--data-event="hover"--}}
+                    {{--data-animation-in="slideInUp"--}}
+                    {{--data-animation-out="fadeOut"--}}
+                    {{--data-position="left">--}}
+                    {{--<a id="homeMegaMenu" class="nav-link u-header__nav-link" href="#"--}}
+                    {{--aria-haspopup="true"--}}
+                    {{--aria-expanded="false">--}}
+                    {{--话题--}}
+                    {{--<span class="fa fa-angle-down u-header__nav-link-icon"></span>--}}
+                    {{--</a>--}}
+                    {{--<!-- Home - Mega Menu -->--}}
+                    {{--<div class="hs-mega-menu u-header__sub-menu w-100 u-header__mega-menu-wrapper-v2 ml-1"--}}
+                    {{--style="margin-left: 300px;"--}}
+                    {{--aria-labelledby="homeMegaMenu">--}}
+                    {{--<div class="row p-0 mr-0">--}}
+                    {{--<div class="col-lg-9 pr-0">--}}
+                    {{--<div class="d-none d-lg-block u-header__banner-v1"--}}
+                    {{--data-bg-img-src="{{asset('org/front')}}/img/750x750/img1.jpg">--}}
+                    {{--<div class="w-100 text-center u-header__banner-v1-content u-content-centered-y p-4">--}}
+                    {{--<div class="mb-4">--}}
+                    {{--<strong class="d-block u-header__banner-v1-title mb-2">向军大叔每晚直播</strong>--}}
+                    {{--<span class="u-header__banner-v1-text">--}}
+                    {{--技术点均以实战为主，大叔用直播形式教你进行编程世界。--}}
+                    {{--</span>--}}
+                    {{--</div>--}}
+                    {{--<a class="btn btn-primary u-btn-primary btn-sm transition-3d-hover"--}}
+                    {{--href="https://ke.qq.com/course/288236?tuin=89184f12" target="_blank">--}}
+                    {{--进入直播间 <span class="fa fa-angle-right ml-2"></span>--}}
+                    {{--</a>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-lg-3 u-header__mega-menu-wrapper-v3">--}}
+                    {{--<div class="row u-header__mega-menu-wrapper-v1">--}}
+                    {{--<div class="col-sm-12">--}}
+                    {{--<ul class="list-unstyled mb-4 row">--}}
+                    {{--@foreach(\App\Models\EduCategory::get() as $category)--}}
+                    {{--<li class="col-sm-12">--}}
+                    {{--<div class="nav-link u-list__link py-3 px-0">--}}
+                    {{--<a class="text-secondary"--}}
+                    {{--href="{{route('edu.topic_list',$category['id'])}}">--}}
+                    {{--<i class="{{$category['icon']}} w-15 pr-0"--}}
+                    {{--aria-hidden="true"></i>{{$category['title']}}--}}
+                    {{--</a>--}}
+                    {{--</div>--}}
+                    {{--</li>--}}
+                    {{--@endforeach--}}
+                    {{--</ul>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</li>--}}
+                    <!-- End Home -->
                         <!-- Blog -->
                         <li class="nav-item hs-has-sub-menu u-header__nav-item"
                             data-event="hover"
@@ -179,27 +203,17 @@
                                 style="min-width: 220px;"
                                 aria-labelledby="blogMegaMenu">
                                 @foreach(\App\Models\EduDocument::orderBy( 'flag' , 'desc' )->orderBy( 'updated_at' , 'desc' )->limit(5)->get() as $document)
-                                    <a href="{{route('edu.document.show',$document)}}"
-                                       class="list-group-item list-group-item-action rounded-0">
+                                    <a
+                                            class="list-group-item list-group-item-action rounded-0"
+                                            href="{{route('edu.document.show',$document)}}">
                                         {{$document->title}}
                                     </a>
                                 @endforeach
-                            </ul>
-                            <ul id="blogSubMenu" class="list-group list-inline hs-sub-menu u-header__sub-menu mb-0 small rounded-0"
-                                style="min-width: 220px;"
-                                aria-labelledby="blogMegaMenu">
-                                    @foreach(\App\Models\EduDocument::orderBy( 'flag' , 'desc' )->orderBy( 'updated_at' , 'desc' )->limit(5)->get() as $document)
-                                        <a
-                                                class="list-group-item list-group-item-action rounded-0"
-                                           href="{{route('edu.document.show',$document)}}">
-                                            {{$document->title}}
-                                        </a>
-                                    @endforeach
-                                    <a
-                                            class="list-group-item list-group-item-action rounded-0"
-                                       href="{{route('edu.document.index')}}">
-                                        更多手册
-                                    </a>
+                                <a
+                                        class="pl-3 rounded-0"
+                                        href="{{route('edu.document.index')}}">
+                                    更多手册
+                                </a>
                             </ul>
                         </li>
                         <li class="nav-item hs-has-sub-menu u-header__nav-item"
@@ -225,7 +239,8 @@
                             <ul class="list-inline mb-0">
                                 <li class="list-inline-item">
                                     @auth
-                                        <a id="sidebarNavToggler" href="{{route('member.user.edit',[auth()->user(),'type'=>'icon'])}}"
+                                        <a id="sidebarNavToggler"
+                                           href="{{route('member.user.edit',[auth()->user(),'type'=>'icon'])}}"
                                            class="btn btn-xs u-btn-text-secondary u-sidebar--account__toggle-bg pl-1 ml-1"
                                            role="button"
                                            aria-controls="sidebarContent"
@@ -367,7 +382,8 @@
                                                                 <li class="u-sidebar--account__list-item">
                                                                     <a class="u-sidebar--account__list-link"
                                                                        href="{{route('edu.subscribe.show')}}">
-                                                                        <i class="fa fa-shopping-bag mr-2" aria-hidden="true"></i>
+                                                                        <i class="fa fa-shopping-bag mr-2"
+                                                                           aria-hidden="true"></i>
                                                                         会员时长
                                                                     </a>
                                                                 </li>

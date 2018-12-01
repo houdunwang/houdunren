@@ -1,0 +1,1 @@
+"use strict";var KBootstrapMultipleSelectsplitter={init:function(){$("#k_multipleselectsplitter_1, #k_multipleselectsplitter_2").multiselectsplitter()}};jQuery(document).ready(function(){KBootstrapMultipleSelectsplitter.init()});

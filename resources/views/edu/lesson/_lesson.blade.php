@@ -193,7 +193,7 @@
             </div>
         </div>
     </div>
-    <div class="card col-sm-12">
+    <div class="card col-sm-12" v-show="editLessonVideo">
         <div class="card-header mb-2">课程视频</div>
         <div class="card-body">
             <div class="row">
@@ -289,8 +289,11 @@
             <textarea name="field" hidden cols="30" rows="10">@{{field}}</textarea>
             <button class="btn btn-white btn-sm" type="button" @click="addVideo()">添加视频</button>
         </div>
+    </div>
+    <div class="card col-sm-12">
         <div class="card-footer">
             <button class="btn btn-primary btn-sm">保存发布</button>
+            <button class="btn btn-white btn-sm" @click="editLessonVideo= !editLessonVideo" type="button">编辑视频</button>
         </div>
     </div>
 </div>
@@ -306,6 +309,8 @@
                     field:{!! old('field',json_encode($field)) !!},
                     //当前编辑的视频
                     currentEditVideo: {},
+                    //编辑视频状态
+                    editLessonVideo:false,
                 },
                 methods: {
                     addVideo() {

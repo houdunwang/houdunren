@@ -1,0 +1,1 @@
+"use strict";var KStickyPanelsDemo={init:function(){}};jQuery(document).ready(function(){KStickyPanelsDemo.init()});

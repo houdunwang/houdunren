@@ -84,7 +84,7 @@
                                               id="lesson{{$lesson['id']}}">
                                             @csrf @method('DELETE')
                                         </form>
-                                        <a class="btn btn-white" href="{{route('edu.lesson.show',$lesson)}}">查看</a>
+                                        <a class="btn btn-white" href="{{route('edu.lesson.show',$lesson)}}" target="_blank">查看</a>
                                     </div>
                                 </td>
                             </tr>

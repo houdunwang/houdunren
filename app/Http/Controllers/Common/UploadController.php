@@ -31,24 +31,32 @@ class UploadController extends Controller
         }
     }
 
-    public function image(Request $request, UploadServer $uploadServer)
-    {
-        //普通上传
-        if ($file = $request->image) {
-            $path = $uploadServer->upload($file);
-            \Auth::user()->attachment()->create(['filename' => $file->getClientOriginalName(), 'path' => url($path)]);
-            return url($path);
-            return ['file' => url($path), 'code' => 0];
-        }
-    }
+//    public function image(Request $request, UploadServer $uploadServer)
+//    {
+//        //普通上传
+//        if ($file = $request->image) {
+//            $path = $uploadServer->upload($file);
+//            \Auth::user()->attachment()->create(['filename' => $file->getClientOriginalName(), 'path' => url($path)]);
+//            return url($path);
+//            return ['file' => url($path), 'code' => 0];
+//        }
+//    }
 
-    //图片类型检测
+    /**
+     * 图片类型检测
+     * @param string $file 文件
+     * @return bool
+     */
     protected function isImage($file)
     {
         $ext = $file->getClientOriginalExtension();
         return in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'gif']);
     }
 
+    /**
+     * 文件列表
+     * @return array
+     */
     public function lists()
     {
         $db = Attachment::where('user_id', auth()->id())->paginate(20);

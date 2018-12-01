@@ -1,0 +1,133 @@
+//
+// Markdown
+//
+
+
+
+
+// Base
+@mixin k-bootstrap-markdown-base() {
+    .md-editor {
+        @include k-rounded {
+            border-radius: $k-border-radius;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        @include k-not-rounded {
+            border-radius: 0 !important;
+        }
+
+        outline: none !important;
+
+        .md-footer, 
+        .md-header {
+            padding: 10px 10px;
+        }
+
+        .md-header {
+            @include k-rounded {
+                border-top-left-radius: $k-border-radius;
+                border-top-right-radius: $k-border-radius;
+            }
+
+            @include k-not-rounded {
+                border-radius: 0 !important;
+            }
+
+            .btn-group {
+                margin-right: 10px;
+
+                .btn {
+                    background: white;
+                    border: 1px solid k-base-color(grey, 2);
+                    color: k-base-color(label, 2);
+                    @include k-transition();
+
+                    &:hover,
+                    &:focus,
+                    &:active,
+                    &.active {
+                        @include k-transition();
+                        color: k-base-color(label, 3);
+                        background: transparent;
+                    }
+                }
+            }
+        }
+
+        .md-footer {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+
+            @include k-not-rounded {
+                border-radius: 0 !important;
+            }
+        }
+
+        > textarea {
+            padding: 10px 10px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+
+            @include k-not-rounded {
+                border-radius: 0 !important;
+            }
+        }
+    }
+}
+
+// Skin
+@mixin k-bootstrap-markdown-skin() {
+    .md-editor {
+        border: 1px solid $input-border-color; 
+
+        &.active {
+            border: 1px solid  $input-border-color; 
+            box-shadow: none;
+        }
+
+        .md-footer, 
+        .md-header {
+            background: k-base-color(grey, 1);
+        }
+
+        > textarea {
+            background: k-base-color(grey, 1);
+        }
+
+        &.active {
+            > textarea {
+                background: k-base-color(grey, 1);
+            }
+        }
+    }
+
+    // Validation
+    .is-valid {
+        .md-editor {
+            border-color: k-state-color(success, base); 
+        }
+    }
+
+    .is-invalid {
+        .md-editor {
+            border-color: k-state-color(danger, base);
+        }
+    }
+}
+
+@mixin k-bootstrap-markdown-validation-state($state, $color) {
+    .k-form.k-form--state .has-#{$state} {
+        .md-editor {
+            border: 1px solid $color; 
+        }
+    }
+}
+
+
+// Base
+@include k-bootstrap-markdown-base();
+
+// Skin
+@include k-bootstrap-markdown-skin();

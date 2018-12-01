@@ -1,25 +1,38 @@
-<ul class="navbar-nav">
-    @foreach(module_admin_menus(explode('/', Route::getCurrentRoute()->uri)[0]) as $menu)
-        @if(auth()->user()->hasAnyPermission($menu['permission']))
-            <li class="nav-item" menu="role">
-                <a class="nav-link" href="#role" role="button" aria-expanded="false"
-                   aria-controls="sidebarPages">
-                    <i class="{{$menu['icon']}}"></i> <strong>{{$menu['name']}}</strong>
-                </a>
-                <div class="collapse show" id="role">
-                    <ul class="nav nav-sm flex-column">
-                        @foreach($menu['menus'] as $m)
-                            @can($m['permission'])
-                                <li class="nav-item">
-                                    <a href="{{$m['route']}}" class="nav-link">
-                                        {{$m['name']}}
-                                    </a>
-                                </li>
-                            @endcan
-                        @endforeach
-                    </ul>
-                </div>
+<div class="k-aside-menu-wrapper	k-grid__item k-grid__item--fluid" id="k_aside_menu_wrapper">
+    <div id="k_aside_menu" class="k-aside-menu mt-0" data-kmenu-vertical="1" data-kmenu-scroll="1"
+         data-kmenu-dropdown-timeout="500">
+        <ul class="k-menu__nav pt-0">
+            @foreach(menus('admin_menu') as $module)
+                @if(auth()->user()->hasAnyPermission($module['permission']))
+                    <li class="k-menu__item k-menu__item--submenu
+                        {{active_class(if_uri_pattern('*'.strtolower($module['module']).'*'),'k-menu__item--open')}}"
+                        aria-haspopup="true" data-kmenu-submenu-toggle="hover">
+                        <a href="javascript:;" class="k-menu__link k-menu__toggle">
+                            <i class="k-menu__link-icon {{$module['icon']}}"> </i>
+                            <span class="k-menu__link-text">{{$module['title']}} {{strtolower($module['module'])}}</span>
+                            <i class="k-menu__ver-arrow la la-angle-right"></i>
+                        </a>
+                        <div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+                            <ul class="k-menu__subnav">
+                                @foreach($module['menus'] as $menu)
+                                    @can($menu['permission'])
+                                        <li class="k-menu__item " aria-haspopup="true">
+                                            <a href="{{$menu['route']}}" class="k-menu__link ">
+                                                <i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i>
+                                                <span class="k-menu__link-text">{{$menu['name']}}</span>
+                                            </a>
+                                        </li>
+                                    @endcan
+                                @endforeach
+                            </ul>
+                        </div>
+                    </li>
+                @endif
+            @endforeach
+            <li class="k-menu__section ">
+                <h4 class="k-menu__section-text">扩展插件</h4>
+                <i class="k-menu__section-icon flaticon-more-v2"></i>
             </li>
-        @endif
-    @endforeach
-</ul>
+        </ul>
+    </div>
+</div>

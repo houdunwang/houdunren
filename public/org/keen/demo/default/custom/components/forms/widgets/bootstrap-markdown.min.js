@@ -1,0 +1,1 @@
+"use strict";var KBootstrapMarkdown={init:function(){}};jQuery(document).ready(function(){KBootstrapMarkdown.init()});

@@ -74,11 +74,6 @@
                             </div>
                     @endif
                 @endforeach
-                <!-- End Info -->
-                    <!-- Info -->
-
-                    <!-- End Info -->
-
                 </div>
             </div>
         </div>

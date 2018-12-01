@@ -1,0 +1,71 @@
+/*
+$k-media-breakpoints: (
+    // Small screen / phone
+    sm: 576px,
+    
+    // Medium screen / tablet
+    md: 768px,
+    
+    // Large screen / desktop
+    lg: 1024px,
+    
+    // Extra large screen / wide desktop
+    xl: 1200px,
+
+    // Extra large screen / wide desktop
+    xxl: 1600px
+)!default;
+*/
+.k-error404-v4--enabled {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; }
+
+.k-error404-v4 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end; }
+  @media (max-width: 768px) {
+    .k-error404-v4 {
+      padding: 2rem; } }
+  .k-error404-v4 .k-error404-v4__content {
+    margin-bottom: 7rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center; }
+    .k-error404-v4 .k-error404-v4__content .k-error404-v4__title {
+      font-size: 3rem;
+      color: #ffffff;
+      font-weight: 600;
+      margin-bottom: 3rem; }
+    .k-error404-v4 .k-error404-v4__content .k-error404-v4__button {
+      color: #ffffff;
+      background-color: #f7098f; }
+      .k-error404-v4 .k-error404-v4__content .k-error404-v4__button:hover {
+        color: #ffffff; }
+
+.k-bg-error404-v4 {
+  background-image: url("../../media/misc/404-bg4.jpg"); }
+  @media (max-width: 768px) {
+    .k-bg-error404-v4 {
+      background-image: url("../../media/misc/bg-mobile-4.jpg") !important; } }

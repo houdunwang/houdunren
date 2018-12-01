@@ -1,0 +1,1 @@
+"use strict";var KAutosize={init:function(){var t,i;t=$("#k_autosize_1"),i=$("#k_autosize_2"),autosize(t),autosize(i),autosize.update(i)}};jQuery(document).ready(function(){KAutosize.init()});

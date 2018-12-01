@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-body">
                     @include('admin.config.layouts._menu')
-                    <div class="card">
+                    <div class="card mb-3">
                         <div class="card-header">
                             上传方式
                         </div>
@@ -19,7 +19,7 @@
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="driver" id="driver2" value="oss"
                                         {{active_class(config_get('admin.upload.driver')=='oss','checked')}}>
-                                <label class="form-check-label" for="driver2">阿里云（请先配置阿里云）</label>
+                                <label class="form-check-label" for="driver2">阿里云（请先配置下面的阿里云设置）</label>
                             </div>
                             <div class="card mt-3">
                                 <div class="card-header">
@@ -108,8 +108,14 @@
                                                    value="{{config_get('admin.upload.image.type','jpg,jpeg,gif,png')}}">
                                         </div>
                                     </div>
-                                    <div class="alert alert-light small" role="alert">
-                                        超过图片允许的最大高度或宽度将自动裁切
+                                    <div class="alert alert-outline-accent fade show" role="alert">
+                                        <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                                        <div class="alert-text">超过图片允许的最大高度或宽度将自动裁切</div>
+                                        <div class="alert-close">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"><i class="la la-close"></i></span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

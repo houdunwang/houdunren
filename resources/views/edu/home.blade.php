@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-{{--        @include('edu.layouts._system_lesson_ad')--}}
+        @include('edu.layouts._system_lesson_ad')
         @endif
         <!-- How It Works Section -->
         <div class="container u-space-3">

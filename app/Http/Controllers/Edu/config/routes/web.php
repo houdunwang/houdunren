@@ -4,7 +4,9 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::get('admin', 'AdminController@index')->name('admin');
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('lesson/lists', 'LessonController@lists')->name('lesson.lists');
-    Route::get('lesson/{tag}/tag','LessonController@tag')->name('lesson.tag');
+    Route::get('lesson/{tag}/tag', 'LessonController@tag')->name('lesson.tag');
+    //系统课程
+    Route::resource('lesson/system', 'SystemLessonController');
     //课程管理
     Route::resource('lesson', 'LessonController');
     Route::resource('tag', 'TagController');

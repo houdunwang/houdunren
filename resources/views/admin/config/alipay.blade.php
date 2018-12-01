@@ -8,9 +8,16 @@
             <div class="card">
                 <div class="card-body">
                     @include('admin.config.layouts._menu')
-                    <div class="alert alert-light small" role="alert">
-                        具体配置项的含义可查看 <a target="_blank" href="https://github.com/houdunwang/alipay">https://github.com/houdunwang/alipay</a>
+                    <div class="alert alert-outline-accent fade show" role="alert">
+                        <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                        <div class="alert-text">具体配置项的含义可查看 <a target="_blank" href="https://github.com/houdunwang/alipay">https://github.com/houdunwang/alipay</a></div>
+                        <div class="alert-close">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true"><i class="la la-close"></i></span>
+                            </button>
+                        </div>
                     </div>
+
                     <div class="form-group">
                         <label>应用ID</label>
                         <input type="text" class="form-control" name="app_id"

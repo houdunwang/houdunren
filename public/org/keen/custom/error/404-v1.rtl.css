@@ -1,0 +1,74 @@
+/*
+$k-media-breakpoints: (
+    // Small screen / phone
+    sm: 576px,
+    
+    // Medium screen / tablet
+    md: 768px,
+    
+    // Large screen / desktop
+    lg: 1024px,
+    
+    // Extra large screen / wide desktop
+    xl: 1200px,
+
+    // Extra large screen / wide desktop
+    xxl: 1600px
+)!default;
+*/
+.k-error404-v1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+  @media (max-width: 768px) {
+    .k-error404-v1 {
+      padding: 2rem;
+      -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+      align-items: stretch; } }
+  .k-error404-v1 .k-error404-v1__content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column; }
+    @media (max-width: 768px) {
+      .k-error404-v1 .k-error404-v1__content {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center; } }
+    .k-error404-v1 .k-error404-v1__content .k-error404-v1__title {
+      font-size: 12rem;
+      color: #fb2f73;
+      font-weight: 700; }
+    .k-error404-v1 .k-error404-v1__content .k-error404-v1__desc {
+      font-size: 1.5rem; }
+  .k-error404-v1 .k-error404-v1__image {
+    width: 50%;
+    position: relative; }
+    @media (max-width: 768px) {
+      .k-error404-v1 .k-error404-v1__image {
+        width: 100%;
+        -ms-flex-preferred-size: 100%;
+        flex-basis: 100%; } }
+    .k-error404-v1 .k-error404-v1__image .k-error404-v1__image-content {
+      width: 100%; }

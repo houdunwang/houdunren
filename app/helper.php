@@ -21,13 +21,13 @@ function config_get($path, $default = null)
 }
 
 /**
- * 获取模块菜单
+ * 获取所有模块菜单
  * @param string $name 菜单类型:center_menu
  * @return mixed
  */
-function module_menus(string $name)
+function menus(string $name)
 {
-    return app(\App\Repositories\ModuleRepository::class)->menus($name);
+    return app(\App\Repositories\ModuleRepository::class)->allModuleMenus($name);
 }
 
 /**

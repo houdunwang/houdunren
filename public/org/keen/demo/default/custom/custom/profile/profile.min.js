@@ -1,0 +1,1 @@
+"use strict";var KProfile={init:function(){KLib.initMiniChart($("#k_profile_mini_chart_1"),[6,12,9,18,15,9,11,8],KApp.getStateColor("danger"),2),KLib.initMiniChart($("#k_profile_mini_chart_2"),[8,13,10,14,12,10,11,14],KApp.getStateColor("brand"),2),new KAvatar("k_profile_avatar")}};jQuery(document).ready(function(){KProfile.init()});

@@ -1,0 +1,1 @@
+"use strict";var KAvatarDemo={init:function(){new KAvatar("k_profile_avatar_1"),new KAvatar("k_profile_avatar_2"),new KAvatar("k_profile_avatar_3"),new KAvatar("k_profile_avatar_4")}};jQuery(document).ready(function(){KAvatarDemo.init()});

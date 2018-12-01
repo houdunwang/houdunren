@@ -1,0 +1,77 @@
+//
+// SweetAlert2
+//
+
+
+
+
+// Base
+@mixin k-sweetalert-base() {
+	html.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown),
+	body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
+    	overflow-y: initial !important;
+
+    	&:not(.k-sweetalert2--nopadding) {
+    		padding-right: 0 !important;	
+    	}
+
+    	@include k-hack-ie {
+			overflow: visible;
+		}
+	}
+
+	.swal2-popup {	   	
+		@include k-rounded {
+			border-radius: $k-border-radius;
+		}
+		padding: 3rem;
+
+		.swal2-title {
+			font-weight: 500;
+			font-size: 1.2rem;
+			margin: 0 0 1rem;
+		}
+
+		.swal2-content {
+			font-weight: normal;
+			font-size: 1rem;
+		}
+
+		.btn {
+			margin: 15px 5px 0;
+		}
+
+		.swal2-styled {
+			&:focus {
+				box-shadow: none;
+			}
+		}
+	}
+
+	.swal2-container {
+		overflow-y: hidden !important;
+	}
+}
+
+@mixin k-sweetalert-skin() {
+	.swal2-container.swal2-shown {
+    	background-color: rgba(0, 0, 0, 0.2);
+	}
+
+    .swal2-popup {	   	
+		.swal2-title {
+			color: k-base-color(label, 4);
+		}
+
+		.swal2-content {
+			color: k-base-color(label, 2);
+		}
+	}
+}
+
+// Build
+// Base
+@include k-sweetalert-base();
+
+// Skin
+@include k-sweetalert-skin();

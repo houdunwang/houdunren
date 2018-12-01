@@ -129,7 +129,6 @@ class LessonController extends Controller
      */
     public function lists(Request $request, EduLessonRepository $repository)
     {
-        session(['url.intended' => $request->fullUrl()]);
         $lessons = $repository->lists();
         return view('edu.lesson.lists', compact('lessons'));
     }
@@ -192,7 +191,7 @@ class LessonController extends Controller
 
         $eduVideoRepository->updateManyVideo($lesson, $field['videos']);
 
-        return redirect()->intended(route('edu.lesson.index'))->with('success', '课程编辑成功');
+        return redirect()->route('edu.lesson.index')->with('success', '课程编辑成功');
     }
 
     /**
