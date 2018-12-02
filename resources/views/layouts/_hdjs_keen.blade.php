@@ -17,8 +17,17 @@
                 sticky: "https://cdn.bootcss.com/sticky-js/1.2.0/sticky.compile",
                 "wNumb": "{{asset('org/keen')}}/vendors/general/wnumb/wNumb",
                 "js.cookie": "{{asset('org/keen')}}/vendors/general/js-cookie/src/js.cookie",
+                //VUE托放
+                'vuedraggable': "{{asset('js/vuedraggable.min')}}",
+                'sortablejs': "/js/Sortable.min"
             },
             shim: {
+                'vuedraggable': {
+                    deps: ['vue', 'sortablejs']
+                },
+                'sortablejs': {
+                    exports: 'sortablejs'
+                },
                 "js.cookie": {
                     exports: 'Cookies'
                 },

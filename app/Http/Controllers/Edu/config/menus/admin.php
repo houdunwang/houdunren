@@ -27,11 +27,6 @@ return [
             'name' => '系统课程',
             'route' => route('edu.system.index'),
             'permission' => 'Edu-system-lesson',
-        ],
-        [
-            'name' => '会员订单',
-            'route' => route('edu.lesson.index'),
-            'permission' => 'Edu-order',
-        ],
+        ]
     ],
 ];

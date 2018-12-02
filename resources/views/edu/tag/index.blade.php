@@ -3,7 +3,7 @@
     <div class="container">
         <div class="card">
             <div class="card-body pb-0">
-                <ul class="nav nav-tabs nav-overflow nav-tabs-sm">
+                <ul class="nav nav-tabs nav-tabs-line nav-tabs-line-success nav-tabs-bold" role="tablist">
                     <li class="nav-item">
                         <a href="{{route('edu.tag.index')}}"
                            class="nav-link {{active_class(if_route('edu.tag.index'))}}">
@@ -17,8 +17,6 @@
                         </a>
                     </li>
                 </ul>
-            </div>
-            <div class="card-body small text-secondary">
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -35,10 +33,10 @@
                                 <td scope="row">{{$tag['id']}}</td>
                                 <td>{{$tag['name']}}</td>
                                 <td>{{$tag['updated_at']->format('Y/m/d')}}</td>
-                                <td class="text-right">
+                                <td>
                                     <div class="btn-group btn-group-sm" role="group" aria-label="First group">
-                                        <a class="btn btn-white" href="{{route('edu.tag.edit',$tag)}}">编辑</a>
-                                        <a class="btn btn-light" onclick="del('{{$tag['id']}}')">删除</a>
+                                        <a class="btn btn-secondary" href="{{route('edu.tag.edit',$tag)}}">编辑</a>
+                                        <a class="btn btn-secondary" onclick="del('{{$tag['id']}}')">删除</a>
                                         <form action="{{route('edu.tag.destroy',$tag)}}" method="post" id="tag{{$tag['id']}}">
                                             @csrf @method('DELETE')
                                         </form>

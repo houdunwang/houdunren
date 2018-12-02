@@ -3,9 +3,9 @@
     <div class="row">
         <form action="{{route('edu.config.update')}}" method="post" class="col-12">
             @csrf @method('PUT')
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-header">
-                    配置设置
+                    基本配置
                 </div>
                 <div class="card-body small">
                     <div class="form-group">
@@ -22,17 +22,26 @@
                                  class="img-responsive img-thumbnail" width="150">
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    直播设置
+                </div>
+                <div class="card-body small">
                     <div class="form-group">
                         <label>直播地址</label>
-                        <input type="text" class="form-control" name="live_path" value="{{config_get('edu.live_path','')}}">
+                        <input type="text" class="form-control" name="live_path"
+                               value="{{config_get('edu.live_path','')}}" placeholder="输入B站或斗鱼的直播链接">
                     </div>
                     <div class="form-group">
                         <label>直播标题</label>
-                        <input type="text" class="form-control" name="live_title" value="{{config_get('edu.live_title','')}}">
+                        <input type="text" class="form-control" name="live_title"
+                               value="{{config_get('edu.live_title','')}}" placeholder="首页直播窗口标题">
                     </div>
                     <div class="form-group">
-                        <label class="mb-1">公告</label>
-                        <textarea class="form-control" rows="3" name="notice">{{config_get('edu.notice')}}</textarea>
+                        <label class="mb-1">直播广告</label>
+                        <textarea class="form-control" rows="3" name="notice" placeholder="直播窗口下的广告内容">{{config_get('edu.notice')}}</textarea>
                     </div>
                 </div>
                 <div class="card-footer">

@@ -19,12 +19,14 @@
                             </li>
                         </ul>
                         <div class="form-group">
-                            <label for="">中文描述</label>
-                            <input type="text" name="title" value="{{old('title')}}" class="form-control" placeholder="" aria-describedby="helpId">
+                            <label>中文描述</label>
+                            <input type="text" name="title" value="{{old('title')}}" class="form-control" placeholder="请输入角色中文名称"
+                                   aria-describedby="helpId" required>
                         </div>
                         <div class="form-group">
-                            <label for="">角色标识</label>
-                            <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="" aria-describedby="helpId">
+                            <label>角色标识</label>
+                            <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="请输入角色的英文字母标识"
+                                   aria-describedby="helpId" required>
                         </div>
                     </div>
                     <div class="card-footer">

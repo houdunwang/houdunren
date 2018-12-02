@@ -9,7 +9,7 @@
                         aria-haspopup="true" data-kmenu-submenu-toggle="hover">
                         <a href="javascript:;" class="k-menu__link k-menu__toggle">
                             <i class="k-menu__link-icon {{$module['icon']}}"> </i>
-                            <span class="k-menu__link-text">{{$module['title']}} {{strtolower($module['module'])}}</span>
+                            <span class="k-menu__link-text">{{$module['title']}}</span>
                             <i class="k-menu__ver-arrow la la-angle-right"></i>
                         </a>
                         <div class="k-menu__submenu "><span class="k-menu__arrow"></span>

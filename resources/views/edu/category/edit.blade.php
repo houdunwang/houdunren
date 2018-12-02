@@ -12,8 +12,11 @@
                         <a class="nav-link active" href="#">修改分类</a>
                     </li>
                 </ul>
+                @include('edu.category._category')
             </div>
-            @include('edu.category._category')
+            <div class="card-footer">
+                <button class="btn btn-primary btn-sm" type="submit">保存提交</button>
+            </div>
         </div>
     </form>
 @endsection

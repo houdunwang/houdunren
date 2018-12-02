@@ -3,7 +3,7 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <ul class="nav nav-tabs nav-overflow nav-tabs-sm">
+                <ul class="nav nav-tabs nav-tabs-line nav-tabs-line-success nav-tabs-bold" role="tablist">
                     <li class="nav-item">
                         <a href="{{route('edu.lesson.index')}}"
                            class="nav-link {{active_class(if_route('edu.lesson.index'))}}">
@@ -18,8 +18,6 @@
                         </a>
                     </li>
                 </ul>
-            </div>
-            <div class="card-body small text-secondary">
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -78,13 +76,13 @@
                                 </td>
                                 <td class="text-right">
                                     <div class="btn-group btn-group-sm" role="group" aria-label="First group">
-                                        <a class="btn btn-white" href="{{route('edu.lesson.edit',$lesson)}}">编辑</a>
-                                        <a class="btn btn-light" onclick="del('{{$lesson['id']}}')">删除</a>
+                                        <a class="btn btn-secondary" href="{{route('edu.lesson.edit',$lesson)}}">编辑</a>
+                                        <a class="btn btn-secondary" href="{{route('edu.lesson.show',$lesson)}}" target="_blank">查看</a>
+                                        <a class="btn btn-secondary" href="javascript:;" onclick="del('{{$lesson['id']}}')">删除</a>
                                         <form action="{{route('edu.lesson.destroy',$lesson)}}" method="post"
                                               id="lesson{{$lesson['id']}}">
                                             @csrf @method('DELETE')
                                         </form>
-                                        <a class="btn btn-white" href="{{route('edu.lesson.show',$lesson)}}" target="_blank">查看</a>
                                     </div>
                                 </td>
                             </tr>
