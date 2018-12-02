@@ -48,10 +48,10 @@ class ModuleRepository extends Repository implements RepositoryInterface
      * @param string $menu 菜单类型:center_menu
      * @return mixed
      */
-    public function allModuleMenus(string $menu)
+    public function allMenus(string $menu)
     {
-        return $this->model->whereNotNull($menu)->pluck('name')->map(function ($module) {
-            return $this->menu($module);
+        return $this->model->whereNotNull($menu)->pluck('name')->map(function ($module) use ($menu) {
+            return $this->menu($module, $menu);
         })->filter();
     }
 
@@ -65,17 +65,25 @@ class ModuleRepository extends Repository implements RepositoryInterface
     {
         $module = $this->model->where(['name' => $name])->first();
         if ($module && !empty($module[$menuType])) {
-            return [
-                'title' => $module['title'],
-                'module' => $module['name'],
-                //'name' => $module[$menuType]['name'],
-                'system' => $module['system'],
-                'icon' => $module[$menuType]['icon'],
-                'menus' => $module[$menuType]['menus'],
-                'permission' => array_map(function ($menu) {
-                    return $menu['permission'];
-                }, $module[$menuType]['menus']),
-            ];
+            switch ($menuType) {
+                //后台菜单
+                case 'admin_menu':
+                    return [
+                        'title' => $module['title'],
+                        'module' => $module['name'],
+                        //'name' => $module[$menuType]['name'],
+                        'system' => $module['system'],
+                        'icon' => $module[$menuType]['icon'],
+                        'menus' => $module[$menuType]['menus'],
+                        'permission' => array_map(function ($menu) {
+                            return $menu['permission'];
+                        }, $module[$menuType]['menus']),
+                    ];
+                default:
+                    //会员中心
+                    return $module[$menuType];
+            }
+
         }
     }
 

@@ -75,7 +75,7 @@
                                     aria-labelledby="blogMegaMenu">
                                     @inject('EduLessonRepository',\App\Repositories\EduSystemLessonRepository)
                                     @foreach($EduLessonRepository->all() as $systemlesson)
-                                        <a class="pl-3 rounded-0"
+                                        <a class="list-group-item list-group-item-action rounded-0"
                                                 href="{{route('edu.system.show',$systemlesson)}}">
                                             {{$systemlesson['title']}}
                                         </a>
@@ -209,8 +209,7 @@
                                         {{$document->title}}
                                     </a>
                                 @endforeach
-                                <a
-                                        class="pl-3 rounded-0"
+                                <a class="list-group-item list-group-item-action rounded-0"
                                         href="{{route('edu.document.index')}}">
                                     更多手册
                                 </a>

@@ -4,4 +4,5 @@ return [
     ['title' => '系统配置', 'name' => 'config'],
     ['title' => '模块管理', 'name' => 'module'],
     ['title' => '设计模块', 'name' => 'module-design'],
+    ['title' => '管理员', 'name' => 'manage'],
 ];

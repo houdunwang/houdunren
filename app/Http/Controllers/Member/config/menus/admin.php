@@ -5,7 +5,7 @@ return [
     'menus' => [
         [
             'name' => '会员列表',
-            'route' => route('admin.user.index'),
+            'route' => route('member.user.index'),
             'permission' => 'Admin-config',
         ],
     ],

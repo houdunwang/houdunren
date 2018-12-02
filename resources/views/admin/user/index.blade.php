@@ -5,20 +5,10 @@
             <ul class="nav nav-tabs nav-tabs-line nav-tabs-line-success nav-tabs-bold" role="tablist">
                 <li class="nav-item">
                     <a href="{{route('admin.user.index')}}" class="nav-link active">
-                        会员列表
+                        管理员列表
                     </a>
                 </li>
             </ul>
-            <form action="{{route('admin.user.index')}}">
-                <div class="form-group">
-                    <div class="input-group">
-                        <input type="text" name="w" class="form-control" aria-label="Text input with dropdown button">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="submit" aria-expanded="false">会员搜索</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -51,7 +41,7 @@
                             </td>
                             <td>
                                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                    <a href="{{route('admin.user.edit',$user)}}" class="btn btn-secondary">设置会员角色</a>
+                                    <a href="{{route('admin.user.edit',$user)}}" class="btn btn-secondary">设置角色</a>
                                 </div>
                             </td>
                         </tr>
@@ -59,9 +49,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-        <div class="card-footer">
-            {{$users->appends(['type'=>Request::query('type'),'content'=>Request::query('content')])->links()}}
         </div>
     </div>
 @endsection

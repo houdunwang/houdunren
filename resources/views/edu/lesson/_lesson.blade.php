@@ -36,7 +36,7 @@
                   </div>
               </div>
               <div class="form-group row">
-                  <div class="col-sm-2">课程类型</div>
+                  <label class="col-sm-2">课程类型</label>
                   <div class="col-sm-10">
                       <div class="custom-control custom-radio custom-control-inline">
                           <input type="radio" id="type1" v-model="field.lesson.type" class="custom-control-input"
@@ -86,7 +86,7 @@
                   </div>
               </div>
               <div class="form-group row">
-                  <div class="col-sm-2">状态</div>
+                  <label class="col-sm-2">状态</label>
                   <div class="col-sm-10">
                       <div class="custom-control custom-radio custom-control-inline">
                           <input type="radio" id="status1" v-model="field.lesson.status" class="custom-control-input"
@@ -101,7 +101,22 @@
                   </div>
               </div>
               <div class="form-group row">
-                  <div class="col-sm-2">收费方式</div>
+                  <label class="col-sm-2">特殊属性</label>
+                  <div class="col-sm-10">
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                          <input type="checkbox" class="custom-control-input" v-model="field.lesson.is_commend"
+                                 id="is_commend" value="1">
+                          <label class="custom-control-label" for="is_commend">推荐</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                          <input type="checkbox" class="custom-control-input" v-model="field.lesson.is_hot" id="is_hot"
+                                 value="1">
+                          <label class="custom-control-label" for="is_hot">热门</label>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-sm-2">收费方式</label>
                   <div class="col-sm-10">
                       <div class="custom-control custom-radio custom-control-inline">
                           <input type="radio" id="free1" v-model="field.lesson.free" class="custom-control-input"
@@ -115,6 +130,7 @@
                       </div>
                   </div>
               </div>
+
               <div class="card" v-if="field.lesson.free==0">
                   <div class="card-header">
                       收费课程设置
@@ -154,39 +170,6 @@
                               <input type="text" class="form-control" v-model="field.lesson.free_num"
                                      value="{{old('free_num',3)}}">
                           </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="card mt-3">
-          <div class="card-header">课程属性</div>
-          <div class="card-body">
-              <div class="form-group row">
-                  <div class="col-sm-2">特殊属性</div>
-                  <div class="col-sm-10">
-                      <div class="custom-control custom-checkbox custom-control-inline">
-                          <input type="checkbox" class="custom-control-input" v-model="field.lesson.is_commend"
-                                 id="is_commend" value="1">
-                          <label class="custom-control-label" for="is_commend">推荐</label>
-                      </div>
-                      <div class="custom-control custom-checkbox custom-control-inline">
-                          <input type="checkbox" class="custom-control-input" v-model="field.lesson.is_hot" id="is_hot"
-                                 value="1">
-                          <label class="custom-control-label" for="is_hot">热门</label>
-                      </div>
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <div class="col-sm-2">课程标签</div>
-                  <div class="col-sm-10">
-                      <div class="custom-control custom-checkbox custom-control-inline">
-                          <input type="checkbox" class="custom-control-input" id="is_commend11">
-                          <label class="custom-control-label" for="is_commend11">PHP</label>
-                      </div>
-                      <div class="custom-control custom-checkbox custom-control-inline">
-                          <input type="checkbox" class="custom-control-input" id="is_hot22">
-                          <label class="custom-control-label" for="is_hot22">LINUX</label>
                       </div>
                   </div>
               </div>

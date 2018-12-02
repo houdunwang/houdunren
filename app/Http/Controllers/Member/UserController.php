@@ -11,6 +11,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Requests\UserRequest;
+use App\Repositories\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,9 +21,27 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['show']]);
+        $this->middleware('admin:Admin-user', ['only' => ['index']]);
     }
 
-    //会员中心
+    /**
+     * 后台会员列表
+     * @param Request $request
+     * @param UserRepository $repository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(Request $request, UserRepository $repository)
+    {
+        $users = $repository->member($request->query('w'));
+
+        return view('member.user.index', compact('users'));
+    }
+
+    /**
+     * 会员中心
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(User $user)
     {
         return view('member.user_show', compact('user'));

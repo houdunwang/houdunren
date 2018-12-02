@@ -25,22 +25,38 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin:Admin-user');
+        $this->middleware('admin:Admin-manage');
     }
 
-    public function index(Request $request, UserRepository $repository)
+    /**
+     * 管理员列表
+     * @param Request $request
+     * @param UserRepository $repository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(UserRepository $repository)
     {
-        $users = $repository->search($request->query('w'));
-
+        $users = $repository->admin();
         return view('admin.user.index', compact('users'));
     }
 
+    /**
+     * 设置管理员角色
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(User $user)
     {
         $roles = Role::where('id', '>', 1)->get();
         return view('admin.user.edit', compact('user', 'roles'));
     }
 
+    /**
+     * 更新管理员角色
+     * @param Request $request
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, User $user)
     {
         $user->syncRoles($request->get('role'));

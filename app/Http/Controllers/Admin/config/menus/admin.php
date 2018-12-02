@@ -18,5 +18,10 @@ return [
             'route' => route('admin.role.index'),
             'permission' => 'Admin-role',
         ],
+        [
+            'name' => '管理员',
+            'route' => route('admin.user.index'),
+            'permission' => 'Admin-manage',
+        ],
     ],
 ];

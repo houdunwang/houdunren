@@ -6,13 +6,13 @@
             <div class="card-body">
                 <ul class="nav nav-tabs nav-tabs-line nav-tabs-line-success nav-tabs-bold" role="tablist">
                     <li class="nav-item">
-                        <a href="{{route('admin.user.index')}}" class="nav-link">
-                            管理员列表
+                        <a href="{{route('member.user.index')}}" class="nav-link">
+                            会员列表
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link active">
-                            设置管理员角色
+                            设置角色
                         </a>
                     </li>
                 </ul>

@@ -1,4 +1,19 @@
-<div class="k-aside-menu-wrapper	k-grid__item k-grid__item--fluid" id="k_aside_menu_wrapper">
+<!-- begin:: Aside -->
+<div class="k-aside__brand	k-grid__item " id="k_aside_brand">
+    <div class="k-aside__brand-logo">
+        <a href="/" target="_blank">
+            <img alt="Logo" src="{{config_get('admin.site.logo',asset('images/logo.png'))}}"/>
+        </a>
+    </div>
+    <div class="k-aside__brand-tools">
+        <button class="k-aside__brand-aside-toggler k-aside__brand-aside-toggler--left"
+                id="k_aside_toggler">
+            <span></span>
+        </button>
+    </div>
+</div>
+<!-- end:: Aside -->
+<div class="k-aside-menu-wrapper k-grid__item k-grid__item--fluid" id="k_aside_menu_wrapper">
     <div id="k_aside_menu" class="k-aside-menu mt-0" data-kmenu-vertical="1" data-kmenu-scroll="1"
          data-kmenu-dropdown-timeout="500">
         <ul class="k-menu__nav pt-0">

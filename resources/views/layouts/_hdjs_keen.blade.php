@@ -8,15 +8,14 @@
                 "app": "{{asset('org/keen')}}/app/scripts/bundle/app.bundle",
                 'popper': '/js/popper.min',
                 "tooltip": "{{asset('org/keen/demo/default/custom/components/base/tooltips')}}",
-                "perfect-scrollbar": "https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.4.0/perfect-scrollbar.min",
-                {{--"popper": "{{asset('js/popper.min.js
-                ')}}",--}}
+                "perfect-scrollbar": "https://cdn.bootcss.com/jquery.perfect-scrollbar/1.4.0/perfect-scrollbar.min",
+                {{--"popper": "{{asset('js/popper.min.js')}}",--}}
                 scripts: "{{asset('org/keen')}}/demo/default/base/scripts.bundle",
                 {{--"sticky": "{{asset('org/keen/vendors/general/sticky-js/dist/sticky.min')}}",--}}
                 // sticky: "component/sticky",
                 sticky: "https://cdn.bootcss.com/sticky-js/1.2.0/sticky.compile",
-                "wNumb": "{{asset('org/keen')}}/vendors/general/wnumb/wNumb",
-                "js.cookie": "{{asset('org/keen')}}/vendors/general/js-cookie/src/js.cookie",
+                {{--"wNumb": "{{asset('org/keen')}}/vendors/general/wnumb/wNumb",--}}
+                "js.cookie": "https://cdn.bootcss.com/js-cookie/latest/js.cookie.min",
                 //VUE托放
                 'vuedraggable': "{{asset('js/vuedraggable.min')}}",
                 'sortablejs': "/js/Sortable.min"
@@ -28,9 +27,9 @@
                 'sortablejs': {
                     exports: 'sortablejs'
                 },
-                "js.cookie": {
-                    exports: 'Cookies'
-                },
+                // "js.cookie": {
+                //     exports: 'Cookies'
+                // },
                 // "wNumb": {
                 //     deps: ['sticky']
                 // },
@@ -52,17 +51,17 @@
                     exports: "PerfectScrollbar"
                 },
                 "scripts": {
-                    deps: ['perfect-scrollbar', 'js.cookie']
+                    deps: ['perfect-scrollbar']
                 },
                 "app": {
                     deps: [
                         // "popper",
-                        "js.cookie",
+                        // "js.cookie",
                         "moment",
                         "tooltip",
                         "perfect-scrollbar",
                         // "sticky",
-                        "wNumb",
+                        // "wNumb",
                         "scripts"
                     ]
                 }

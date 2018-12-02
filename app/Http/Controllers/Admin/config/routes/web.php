@@ -4,7 +4,6 @@ Route::group(['namespace' => 'Admin', 'middleware' => [], 'as' => 'admin.', 'pre
     //系统管理页面
     Route::get('/', 'AdminController@index')->name('admin');
     Route::get('cache/update', 'CacheController@update')->name('update.cache');
-
     //配置管理
     Route::get('config/{name}/edit', 'ConfigController@edit')->name('config.edit');
     Route::put('config/{name}', 'ConfigController@update')->name('config.update');

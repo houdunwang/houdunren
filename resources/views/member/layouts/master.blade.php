@@ -73,7 +73,7 @@
             <div class="card">
                 <div class="card-body text-center">
                     <div class="nav flex-column nav-pills">
-                        @foreach(module_menus('center_menu') as $menus)
+                        @foreach(menus('center_menu') as $menus)
                             @foreach($menus as $menu)
                                 @if(!isset($menu['permission']) || auth()->user()->hasAnyPermission($menu['permission']))
                                     <a href="{{$menu['route']}}" class="nav-link

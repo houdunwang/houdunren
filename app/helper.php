@@ -21,16 +21,6 @@ function config_get($path, $default = null)
 }
 
 /**
- * 获取所有模块菜单
- * @param string $name 菜单类型:center_menu
- * @return mixed
- */
-function menus(string $name)
-{
-    return app(\App\Repositories\ModuleRepository::class)->allModuleMenus($name);
-}
-
-/**
  * 生成随机数值
  * @param $num
  * @return string
@@ -89,13 +79,24 @@ function module_name_from_url()
 }
 
 /**
- * 获取后台菜单列表
- * @param string $module 模块标识
+ * 获取所有模块菜单
+ * @param string $name 菜单类型:center_menu
  * @return mixed
  */
-function module_admin_menus(string $module)
+function menus(string $name)
 {
-    return app(\App\Repositories\ModuleRepository::class)->getAdminMenus($module);
+    return app(\App\Repositories\ModuleRepository::class)->allMenus($name);
+}
+
+/**
+ * 获取后台菜单列表
+ * @param string $module 模块标识
+ * @param string $type
+ * @return mixed
+ */
+function module_menu(string $module, $type = 'admin_menu')
+{
+    return app(\App\Repositories\ModuleRepository::class)->menu($module, $type);
 }
 
 /**

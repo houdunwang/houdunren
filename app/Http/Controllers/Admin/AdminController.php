@@ -21,7 +21,7 @@ class AdminController extends Controller
     //系统管理
     public function index()
     {
-//        dd(menus('admin_menu'));
+//        dd(module_menu('content'));
         return view('admin.admin.index');
     }
 }

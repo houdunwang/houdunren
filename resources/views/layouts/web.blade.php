@@ -14,11 +14,11 @@ Follow: https://space.bilibili.com/277339333
     <meta name="description" content="Latest updates and statistic charts">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <link href="{{asset('org/keen/vendors/line-awesome/css/line-awesome.css')}}" rel="stylesheet"
+    <link href="{{asset('org/keen')}}/vendors/custom/vendors/line-awesome/css/line-awesome.css" rel="stylesheet"
           type="text/css"/>
-    <link href="{{asset('org/keen/vendors/flaticon/flaticon.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('org/keen/vendors/flaticon2/flaticon.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('org/keen/vendors/fontawesome5/css/all.min.css')}}" rel="stylesheet"
+    <link href="{{asset('org/keen')}}/vendors/custom/vendors/flaticon/flaticon.css" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('org/keen')}}/vendors/custom/vendors/flaticon2/flaticon.css" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('org/keen')}}/vendors/custom/vendors/fontawesome5/css/all.min.css" rel="stylesheet"
           type="text/css"/>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!--begin::Web font -->
@@ -34,7 +34,8 @@ Follow: https://space.bilibili.com/277339333
     </script>
     <!--end::Web font -->
     <!--begin::Page Vendors Styles -->
-    {{--<link href="{{asset('org/keen/vendors/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css"/>--}}
+    <link href="{{asset('org/keen/vendors/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet"
+          type="text/css"/>
     <!--end::Page Vendors Styles -->
     <!--begin::Global Theme Styles -->
     {{--<link href="/org/keen/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />--}}
@@ -57,7 +58,7 @@ Follow: https://space.bilibili.com/277339333
     {{--a.appendChild(r);--}}
     {{--})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');--}}
     {{--</script>--}}
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
     {{--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-37564768-1"></script>--}}
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -81,8 +82,6 @@ Follow: https://space.bilibili.com/277339333
         </a>
     </div>
     <div class="k-header-mobile__toolbar">
-        <button class="k-header-mobile__toolbar-toggler k-header-mobile__toolbar-toggler--left"
-                id="k_aside_mobile_toggler"><span></span></button>
         <button class="k-header-mobile__toolbar-toggler" id="k_header_mobile_toggler"><span></span></button>
         <button class="k-header-mobile__toolbar-topbar-toggler" id="k_header_mobile_topbar_toggler"><i
                     class="flaticon-more"></i></button>
@@ -95,55 +94,9 @@ Follow: https://space.bilibili.com/277339333
         <button class="k-aside-close" id="k_aside_close_btn">
             <i class="la la-close"></i>
         </button>
-        <div class="k-aside k-aside--fixed k-grid__item k-grid k-grid--desktop k-grid--hor-desktop" id="k_aside">
-            <!-- begin:: Aside Menu -->
-            @include('layouts._admin_menu')
-            <!-- end:: Aside Menu -->
-            <!-- begin:: Aside -->
-            <div class="k-aside__footer	k-grid__item" id="k_aside_footer">
-                <div class="k-aside__footer-nav">
-                    <div class="k-aside__footer-item">
-                        <a href="{{route('admin.config.edit','site')}}" class="btn btn-icon">
-                            <i class="flaticon2-gear"></i>
-                        </a>
-                    </div>
-                    <div class="k-aside__footer-item">
-                        <a href="{{route('admin.update.cache')}}" class="btn btn-icon">
-                            <i class="flaticon2-cube"></i>
-                        </a>
-                    </div>
 
-                    <div class="k-aside__footer-item">
-                        <button type="button" class="btn btn-icon" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                            <i class="flaticon2-add"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-left">
-                            <ul class="k-nav">
-                                <li class="k-nav__section k-nav__section--first">
-                                    <span class="k-nav__section-text">发布内容</span>
-                                </li>
-                                <li class="k-nav__item">
-                                    <a href="#" class="k-nav__link">
-                                        <i class="k-nav__link-icon la la-file-text-o"></i>
-                                        <span class="k-nav__link-text">文章</span>
-                                    </a>
-                                </li>
-                                <li class="k-nav__item">
-                                    <a href="#" class="k-nav__link">
-                                        <i class="k-nav__link-icon la la-file-pdf-o"></i>
-                                        <span class="k-nav__link-text">课程</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <!-- end:: Aside -->    </div>
         <!-- end:: Aside -->
-        <div class="k-grid__item k-grid__item--fluid k-grid k-grid--hor k-wrapper" id="k_wrapper">
+        <div class="k-grid__item k-grid__item--fluid k-grid k-grid--hor k-wrapper" id="k_wrapper" style="padding-left: 0;">
             <!-- begin:: Header -->
             <div id="k_header" class="k-header k-grid__item ">
                 <!-- begin: Header Menu -->
@@ -186,7 +139,8 @@ Follow: https://space.bilibili.com/277339333
                                     <ul class="k-menu__subnav">
                                         @foreach(module_menu('edu')['menus'] as $menu)
                                             @if(auth()->user()->hasAnyPermission($menu['permission']))
-                                                <li class="k-menu__item " data-kmenu-link-redirect="1" aria-haspopup="true">
+                                                <li class="k-menu__item " data-kmenu-link-redirect="1"
+                                                    aria-haspopup="true">
                                                     <a href="{{$menu['route']}}" class="k-menu__link">
                                                         <i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i>
                                                         <span class="k-menu__link-text">{{$menu['name']}}</span>
@@ -276,7 +230,7 @@ Follow: https://space.bilibili.com/277339333
                             <div class="k-header__topbar-user">
                                 <span class="k-header__topbar-welcome k-hidden-mobile">Hi,</span>
                                 <span class="k-header__topbar-username k-hidden-mobile">{{auth()->user()->name}}</span>
-                                <img alt="Pic" src="{{auth()->user()->avatar}}" style="width: 30px;height: 30px;"/>
+                                <img alt="Pic" src="{{auth()->user()->avatar}}"/>
                                 <!--use below badge element instead the user avatar to display username's first letter(remove k-hidden class to display it) -->
                                 <span class="k-badge k-badge--username k-badge--lg k-badge--brand k-hidden">A</span>
                             </div>
@@ -286,7 +240,7 @@ Follow: https://space.bilibili.com/277339333
                                  style="background-image: url(/org/keen/media/misc/head_bg_sm.jpg)">
                                 <div class="k-user-card__wrapper">
                                     <div class="k-user-card__pic">
-                                        <img alt="Pic" src="{{auth()->user()->avatar}}" style="width: 30px;height: 30px;"/>
+                                        <img alt="Pic" src="{{auth()->user()->avatar}}"/>
                                     </div>
                                     <div class="k-user-card__details">
                                         <div class="k-user-card__name">{{auth()->user()->name}}</div>
@@ -374,7 +328,94 @@ Follow: https://space.bilibili.com/277339333
 <!-- begin::Demo Panel -->
 
 <div id="k_demo_panel" class="k-demo-panel">
-
+    <div class="k-demo-panel__head">
+        <h3 class="k-demo-panel__title">
+            Select A Demo
+            <!--<small>5</small>-->
+        </h3>
+        <a href="#" class="k-demo-panel__close" id="k_demo_panel_close"><i class="flaticon2-delete"></i></a>
+    </div>
+    <div class="k-demo-panel__body">
+        <br/>
+        <b>Notice</b>: Undefined index: REQUEST_URI in <b>/home/keenthemes/www/keen/themes/themes/keen/dist/preview/inc/view/partials/layout/demo-panel.php</b>
+        on line <b>62</b><br/>
+        <div class="k-demo-panel__item k-demo-panel__item--active">
+            <div class="k-demo-panel__item-title">
+                Default
+            </div>
+            <div class="k-demo-panel__item-preview">
+                <img src="/org/keen/media/demos-mini/default.png" alt=""/>
+                <div class="k-demo-panel__item-preview-overlay">
+                    <a href="/default/index.html" class="btn btn-brand btn-elevate" target="_blank">Default</a>
+                    <a href="/default/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <b>Notice</b>: Undefined index: REQUEST_URI in <b>/home/keenthemes/www/keen/themes/themes/keen/dist/preview/inc/view/partials/layout/demo-panel.php</b>
+        on line <b>62</b><br/>
+        <div class="k-demo-panel__item ">
+            <div class="k-demo-panel__item-title">
+                Demo 2
+            </div>
+            <div class="k-demo-panel__item-preview">
+                <img src="/org/keen/media/demos-mini/demo2.png" alt=""/>
+                <div class="k-demo-panel__item-preview-overlay">
+                    <a href="/demo2/index.html" class="btn btn-brand btn-elevate" target="_blank">Default</a>
+                    <a href="/demo2/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <b>Notice</b>: Undefined index: REQUEST_URI in <b>/home/keenthemes/www/keen/themes/themes/keen/dist/preview/inc/view/partials/layout/demo-panel.php</b>
+        on line <b>62</b><br/>
+        <div class="k-demo-panel__item ">
+            <div class="k-demo-panel__item-title">
+                Demo 3
+            </div>
+            <div class="k-demo-panel__item-preview">
+                <img src="/org/keen/media/demos-mini/demo3.png" alt=""/>
+                <div class="k-demo-panel__item-preview-overlay">
+                    <a href="/demo3/index.html" class="btn btn-brand btn-elevate" target="_blank">Default</a>
+                    <a href="/demo3/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <b>Notice</b>: Undefined index: REQUEST_URI in <b>/home/keenthemes/www/keen/themes/themes/keen/dist/preview/inc/view/partials/layout/demo-panel.php</b>
+        on line <b>62</b><br/>
+        <div class="k-demo-panel__item ">
+            <div class="k-demo-panel__item-title">
+                Demo 4
+            </div>
+            <div class="k-demo-panel__item-preview">
+                <img src="/org/keen/media/demos-mini/demo4.png" alt=""/>
+                <div class="k-demo-panel__item-preview-overlay">
+                    <a href="/demo4/index.html" class="btn btn-brand btn-elevate" target="_blank">Default</a>
+                    <a href="/demo4/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <b>Notice</b>: Undefined index: REQUEST_URI in <b>/home/keenthemes/www/keen/themes/themes/keen/dist/preview/inc/view/partials/layout/demo-panel.php</b>
+        on line <b>62</b><br/>
+        <div class="k-demo-panel__item ">
+            <div class="k-demo-panel__item-title">
+                Demo 5
+            </div>
+            <div class="k-demo-panel__item-preview">
+                <img src="/org/keen/media/demos-mini/demo5.png" alt=""/>
+                <div class="k-demo-panel__item-preview-overlay">
+                    <a href="/demo5/index.html" class="btn btn-brand btn-elevate" target="_blank">Default</a>
+                    <a href="/demo5/rtl/index.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                </div>
+            </div>
+        </div>
+        <a href="https://themes.getbootstrap.com/product/keen-the-ultimate-bootstrap-admin-theme/" target="_blank"
+           class="k-demo-panel__purchase btn btn-brand btn-elevate btn-bold btn-upper">
+            Buy Keen Now!
+        </a>
+    </div>
 </div>
 <!-- end::Demo Panel -->
 <!-- begin::Global Config -->
@@ -417,23 +458,5 @@ Follow: https://space.bilibili.com/277339333
         })
     })
 </script>
-<!-- end::Global Config -->
-
-<!--begin::Global Theme Bundle -->
-{{--<script src="/org/keen/vendors/base/vendors.bundle.js" type="text/javascript"></script>--}}
-{{--<script src="/org/keen/demo/default/base/scripts.bundle.js" type="text/javascript"></script>--}}
-<!--end::Global Theme Bundle -->
-
-
-<!--begin::Page Vendors -->
-{{--<script src="/org/keen/vendors/custom/fullcalendar/fullcalendar.bundle.js" type="text/javascript"></script>--}}
-<!--end::Page Vendors -->
-<!--begin::Page Scripts -->
-{{--<script src="/org/keen/app/scripts/custom/dashboard.js" type="text/javascript"></script>--}}
-<!--end::Page Scripts -->
-<!--begin::Global App Bundle -->
-{{--<script src="/org/keen/app/scripts/bundle/app.bundle.js" type="text/javascript"></script>--}}
-<!--end::Global App Bundle -->
 </body>
-<!-- end::Body -->
 </html>

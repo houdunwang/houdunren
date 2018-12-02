@@ -1,5 +1,5 @@
 <?php
 return [
-    'app' => '会员中心',
+    'app' => '会员管理',
     'manage' => false,
 ];

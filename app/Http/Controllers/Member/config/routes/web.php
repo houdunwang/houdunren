@@ -6,6 +6,8 @@ Route::group(['namespace' => 'Member', 'prefix' => 'member', 'as' => 'member.'],
     Route::get('fans/{user}', 'UserController@fans')->name('fans');
     Route::get('follow/{user}', 'UserController@follow')->name('follow');
     Route::get('follower/{user}', 'UserController@follower')->name('follower');
+    //会员角色设置
+    Route::resource('role', 'RoleController');
     //消息中心
     Route::resource('notification', 'NotificationController');
 });

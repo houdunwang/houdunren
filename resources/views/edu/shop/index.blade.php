@@ -7,8 +7,7 @@
                     <div class="mb-6 pt-5">
                         <h1 class="text-white">
                              <span class="font-weight-bold">
-                                 {{--投资学习会得到加倍的回报--}}
-                                 一件衣服的投入获得一个赚钱的技能
+                                 投资学习会得到加倍的回报
                              </span>
                         </h1>
                         <h3 class="text-white">

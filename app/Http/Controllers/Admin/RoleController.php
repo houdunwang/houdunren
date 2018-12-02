@@ -14,6 +14,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
 use Spatie\Permission\Models\Role;
 
+/**
+ * 角色管理
+ * Class RoleController
+ * @package App\Http\Controllers\Admin
+ */
 class RoleController extends Controller
 {
     public function __construct()
