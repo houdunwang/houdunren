@@ -84,23 +84,21 @@
   margin: 10px 0;
 }
 
-.learning_dynamic .media-body {
-  overflow: hidden;
+.learning_dynamic .k-timeline__item-datetime {
+  font-size: 1.1rem !important;
 }
 
-.learning_dynamic .media-body p a {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 98%;
-  display: inline-block;
+.learning_dynamic .k-timeline__item-text {
+  margin-left: 3.6rem !important;
 }
 
-.edu-dynamic-list .item {
+.learning_dynamic .k-timeline__item-info {
+  padding-left: 3.6rem !important;
+}
+
+.edu-dynamic-list a {
   font-size: 14px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-weight: normal !important;
 }
 
 .chat-news-create,

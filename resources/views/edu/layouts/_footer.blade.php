@@ -5,7 +5,7 @@
     <hr class="my-0">
     <div class="text-center py-7">
         <div>
-            <p class="text-muted">我们的使命：传播互联网前沿技术，帮助更多的人实现梦想</p>
+            {{--<p class="text-muted">我们的使命：传播互联网前沿技术，帮助更多的人实现梦想</p>--}}
             <small class="small text-secondary">
                 Copyright © 2010-2018 houdunren.com All Rights Reserved
                 京ICP备12048441号-3

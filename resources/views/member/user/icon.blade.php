@@ -6,13 +6,13 @@
             @method('PUT')
             <div class="card">
                 <div class="card-header">
-                    <h4>头像设置</h4>
+                    头像设置
                 </div>
                 <div class="card-body  text-center">
                     <input type="hidden" class="form-control  form-control-sm" name="icon" readonly=""
                            value="{{auth()->user()->icon}}">
-                    <div class="avatar avatar-xxl mb-2" onclick="upImagePc(this)">
-                        <img src="{{auth()->user()->icon}}" alt="..." class="avatar-img rounded-circle">
+                    <div class="avatar avatar-xl mb-2" onclick="upImagePc(this)">
+                        <img src="{{auth()->user()->icon}}" alt="..." class="u-xl-avatar rounded-circle">
                     </div>
                     <br>
                     <span class="help-block text-muted small">请上传 200X200 像素并小于200KB的JPG图片</span>

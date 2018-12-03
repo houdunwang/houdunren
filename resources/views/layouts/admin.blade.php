@@ -335,7 +335,7 @@ Follow: https://space.bilibili.com/277339333
             <div class="k-footer k-grid__item k-grid k-grid--desktop k-grid--ver-desktop">
                 <div class="k-footer__copyright">
                     2018&nbsp;&copy;&nbsp;<a href="http://hdcms.com" target="_blank" class="k-link">hdcms</a>&nbsp;
-                    每周五更新功能，提供功能丰富、系统稳定的开源产品。
+                    不断更新功能，提供功能丰富、系统稳定的开源产品。
                 </div>
                 <div class="k-footer__menu">
                     <a href="https://www.houdunren.com" target="_blank" class="k-footer__menu-link k-link">教程</a>

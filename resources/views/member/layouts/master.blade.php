@@ -1,100 +1,124 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+    {{--前台--}}
+    <title>{{config_get('admin.site.webname')}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+    <link rel="shortcut icon" href="favicon.ico">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="{{asset('org/Dashkit-1.1.2')}}/fonts/feather/feather.min.css">
-    <link href="{{asset('org/Dashkit-1.1.2')}}/css/theme-dark.min.css" rel="" data-toggle="theme"
-          data-theme-mode="dark">
-    <link href="{{asset('org/Dashkit-1.1.2')}}/css/theme.min.css" rel="" data-toggle="theme" data-theme-mode="light">
-    <style>
-        body {
-            display: none;
-        }
-    </style>
-    <script>
-        var themeMode = (localStorage.getItem('dashkitThemeMode')) ? localStorage.getItem('dashkitThemeMode') : 'light';
-        themeMode = 'light';
-        var themeFile = document.querySelector('[data-toggle="theme"][data-theme-mode="' + themeMode + '"]');
-        themeFile.rel = 'stylesheet';
-        // Enable body content
-        themeFile.addEventListener('load', function () {
-            document.body.style.display = 'block';
-        });
-    </script>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/org/front/vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/css/animate.min.css">
+    <link rel="stylesheet" href="/css/hs.megamenu.css">
+    <link rel="stylesheet" href="/css/jquery.fancybox.css">
+    <link rel="stylesheet" href="/css/slick.css">
+    <link rel="stylesheet" href="/css/cubeportfolio.min.css">
+    <link rel="stylesheet" href="{{asset('org/front')}}/css/front.css">
+    <link href="{{asset('org/hdjs/package/font-awesome-4.7.0/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{mix('/css/app.css')}}">
+    <link rel="stylesheet" href="{{asset('org/front/css/theme.css')}}">
     @include('layouts._hdjs')
     @include('layouts._message')
-    <title>{{config_get('admin.site.webname')}}</title>
     @stack('css')
 </head>
 <body>
-@include('member.layouts._header')
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="card">
-                <div class="card-block text-center pt-5">
-                    <div class="avatar avatar-xxl">
-                        <a href="{{route('member.user.edit',[auth()->user(),'type'=>'icon'])}}">
-                            <img src="{{auth()->user()->avatar}}" class="avatar-img rounded-circle">
-                        </a>
-                    </div>
-                    <div class="text-center mt-4">
-                        <a href="{{route('member.user.edit',[auth()->user(),'type'=>'info'])}}">
-                            <h3 class="text-secondary">{{auth()->user()->name}}</h3>
-                        </a>
-                    </div>
+<main id="content" role="main">
+    <!-- Breadcrumb Section -->
+    <div class="bg-primary">
+        <div class="container pt-3 pb-3">
+            <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+                <div class="mb-3 mb-sm-0">
+                    <!-- Breadcrumb -->
+                    <ol class="breadcrumb breadcrumb-white breadcrumb-no-gutter mb-0">
+                        <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">首页</a></li>
+                        <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">个人中心</a></li>
+                    </ol>
+                    <!-- End Breadcrumb -->
                 </div>
-                <div class="card-body text-center pt-1 pb-2">
-                    <div class="nav flex-column nav-pills ">
-                        <a href="{{route('member.user.edit',[auth()->user(),'type'=>'password'])}}"
-                           class="nav-link {{active_class(if_query('type','password'),'active','text-muted')}}">
-                            修改密码
-                        </a>
-                    </div>
-                    <div class="nav flex-column nav-pills ">
-                        <a href="{{route('member.fans',auth()->user())}}"
-                           class="nav-link {{active_class(if_route('member.fans'),'active','text-muted')}}">
-                            粉丝列表
-                        </a>
-                        <a href="{{route('member.follower',auth()->user())}}"
-                           class="nav-link {{active_class(if_route('member.follower'),'active','text-muted')}}">
-                            关注列表
-                        </a>
-                        <a href="{{route('member.notification.index')}}"
-                           class="nav-link {{active_class(if_route('member.notification.index'),'active','text-muted')}}">
-                            消息中心
-                        </a>
-                    </div>
-                </div>
+
+                <!-- Edit Profile -->
+                <a class="btn btn-sm btn-soft-white transition-3d-hover"
+                   href="{{route('member.user.edit',[auth()->id(),'type'=>'password'])}}">
+                    <span class="fas fa-user-cog small mr-2"></span>
+                    修改资料
+                </a>
+                <!-- End Edit Profile -->
             </div>
-            <div class="card">
-                <div class="card-body text-center">
-                    <div class="nav flex-column nav-pills">
-                        @foreach(menus('center_menu') as $menus)
-                            @foreach($menus as $menu)
-                                @if(!isset($menu['permission']) || auth()->user()->hasAnyPermission($menu['permission']))
-                                    <a href="{{$menu['route']}}" class="nav-link
-                                    {{active_class(strpos($menu['route'],\Route::getCurrentRoute()->uri),'active','text-muted')}}">
-                                        {{$menu['name']}}
-                                    </a>
-                                @endif
-                            @endforeach
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-9">
-            @yield('content')
+
         </div>
     </div>
-</div>
-<script>
-    require(['hdjs', 'bootstrap']);
-</script>
+    <!-- End Breadcrumb Section -->
+
+    <!-- Content Section -->
+    <div class="bg-light">
+        <div class="container space-2">
+            <div class="row">
+                <div class="col-lg-3 mb-7 mb-lg-0">
+                    <!-- Profile Card -->
+                    <div class="card p-1 mb-4">
+                        <div class="card-body text-center">
+                            <div class="mb-3">
+                                <a href="{{route('member.user.edit',[auth()->id(),'type'=>'icon'])}}">
+                                    <img class="u-lg-avatar rounded-circle" src="{{auth()->user()->avatar}}"
+                                         alt="Image Description">
+                                </a>
+                            </div>
+
+                            <div class="mb-3">
+                                <h1 class="h6 font-weight-medium mb-0">{{auth()->user()->name}} </h1>
+                                <small class="d-block text-muted">UID: {{auth()->id()}}</small>
+                            </div>
+                            <hr>
+                            <a class="text-secondary small" href="{{route('member.user.show',auth()->id())}}">
+                                <i class="far fa-flag mr-1"></i> 个人主页
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <ul class="list-group list-group-flush list-group-borderless mb-0">
+                                <li class="list-group-item">
+                                    <a class="d-block
+                                        {{active_class(if_query('type','password'),'btn btn-sm btn-soft-secondary','text-muted')}}"
+                                       href="{{route('member.user.edit',[auth()->user(),'type'=>'password'])}}">
+                                        修改密码
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a class="d-block
+                                        {{active_class(if_route('member.fans'),'btn btn-sm btn btn-soft-secondary','text-muted')}}"
+                                       href="{{route('member.fans',auth()->user())}}">
+                                        粉丝列表
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a class="d-block
+                                        {{active_class(if_route('member.follower'),'btn btn-sm btn btn-soft-secondary','text-muted')}}"
+                                       href="{{route('member.follower',auth()->user())}}">
+                                        关注列表
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a class="d-block
+                                       {{active_class(if_route('member.notification.index'),'btn btn-sm btn btn-soft-secondary','text-muted')}}"
+                                       href="{{route('member.notification.index')}}">
+                                        消息中心
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Content Section -->
+</main>
+@include('edu.layouts._footer')
 @stack('js')
 </body>
 </html>

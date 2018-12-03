@@ -55,7 +55,12 @@ class UserController extends Controller
         return view('member.follower', compact('user', 'follows'));
     }
 
-    //粉丝列表
+    /**
+     * 粉丝列表
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function fans(User $user)
     {
         $this->authorize('fans', $user);
@@ -66,7 +71,7 @@ class UserController extends Controller
     public function edit(User $user, Request $request)
     {
         $this->authorize('update', $user);
-        return view('member.' . $request->query('type'));
+        return view('member.user.' . $request->query('type'));
     }
 
     public function update(UserRequest $request, User $user)

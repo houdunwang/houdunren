@@ -1,12 +1,8 @@
 @extends('member.layouts.master')
 @section('content')
     <div class="card" data-toggle="lists">
-        <div class="card-header">
-            <div class="row align-items-center">
-                <div class="col">
-                    <h4 class="card-header-title">粉丝列表</h4>
-                </div>
-            </div>
+        <div class="card-header text-secondary">
+            粉丝列表
         </div>
         <div class="card-body">
             @if($fans->count()==0)
@@ -16,18 +12,18 @@
                 @foreach($fans as $fan)
                     <li class="list-group-item px-0">
                         <div class="row">
-                            <div class="col-auto">
-                                <a href="{{route('member.user.show',$fan)}}" class="avatar ">
-                                    <img src="{{$fan->icon}}" alt="sdf" class="avatar-img rounded">
+                            <div class="col-auto pr-1">
+                                <a href="{{route('member.user.show',$fan)}}">
+                                    <img src="{{$fan->icon}}" class="u-avatar u-sm-avatar--bordered rounded">
                                 </a>
                             </div>
                             <div class="col ml--2">
-                                <h4 class="card-title mb-3 name">
-                                    <a href="{{route('member.user.show',$fan)}}">
+                                <h6 class="card-title mb-1 name">
+                                    <a href="{{route('member.user.show',$fan)}}" class="text-dark">
                                         {{$fan->name}}
                                     </a>
-                                </h4>
-                                <p class="card-text small text-muted">
+                                </h6>
+                                <p class="card-text text-muted">
                                     <span class="fe fe-clock"></span> 注册时间 {{$fan->created_at}}
                                 </p>
                             </div>

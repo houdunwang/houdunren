@@ -3,6 +3,8 @@
     <div class="container {{route_class()}} mt-5">
         <div class="alert alert-light text-secondary" role="alert">
             通过系统课程的学习，你可以轻松掌握一门语言。每个视频都有测试题，验证你的学习结果。
+            如果你有其他好的建议，也可以 <a href="{{route('edu.topic.create')}}">发表贴子</a>
+            告诉我们。
         </div>
         <div class="row">
             <div class="col-sm-9">
@@ -26,9 +28,10 @@
                         <div class="card-footer">
                             <div class="float-right">
                                 @if($lesson['video_num']>0)
-                                    <a href="#" class="btn btn-soft-instagram btn-xs">开始学习</a>
+                                    <a href="{{route('edu.lesson.show',$lesson)}}" class="btn btn-primary btn-xs">开始学习</a>
                                 @else
-                                    <button type="button" disabled="" class="btn btn-soft-instagram btn-xs">即将发布
+                                    <button type="button" disabled="" class="btn btn-soft-instagram btn-xs">
+                                        即将发布
                                     </button>
                                 @endif
                             </div>

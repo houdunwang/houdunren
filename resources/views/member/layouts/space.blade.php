@@ -53,9 +53,8 @@
                             </h1>
                         </div>
                         <div class="col-12 col-md-auto mt-2 mt-md-0 mb-md-3">
-                            <a class="btn btn-info d-block d-md-inline-block btn-sm"
-                               href="/">
-                              <i class="fa fa-home" aria-hidden="true"></i>  返回首页
+                            <a class="btn btn-info d-block d-md-inline-block btn-sm" href="/">
+                                <i class="fa fa-home" aria-hidden="true"></i> 返回首页
                             </a>
                             @can('follow',$user)
                                 @if(auth()->user()->following($user))
@@ -95,6 +94,8 @@
         <a href="/" class="text-secondary small">网站首页</a>
     </div>
 </div>
-
+<script>
+    require(['bootstrap'])
+</script>
 </body>
 </html>
