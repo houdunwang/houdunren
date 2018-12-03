@@ -11,6 +11,7 @@
 
 namespace App\Repositories;
 
+use App\User;
 use Spatie\Activitylog\Models\Activity;
 
 /**
@@ -27,4 +28,16 @@ class ActivityRepository extends Repository implements RepositoryInterface
         return $this->model->with(['causer', 'subject'])->latest($latest)->paginate($row, $columns);
     }
 
+    /**
+     * 用户动态
+     * @param User $user
+     * @param $row
+     * @return mixed
+     */
+    public function userPaginateList(User $user, $row = 10)
+    {
+        return $this->model->with(['causer', 'subject'])
+            ->where('causer_id', $user['id'])
+            ->latest('id')->paginate($row);
+    }
 }

@@ -31,32 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <ul class="list-unstyled mb-0">
-                    @foreach($activities as $cond)
-                        @switch($cond['log_name'])
-                            @case('edu_topic')
-                            @include('edu.dynamic._topic')
-                            @break
-                            @case('comment')
-                            @include('edu.dynamic._comment')
-                            @break
-                            @case('zan')
-                            @include('edu.dynamic._zan')
-                            @break
-                            @default
-                            @include('edu.dynamic._default')
-                        @endswitch
-                    @endforeach
-                    <li class="mt-0">
-                        <div class="u-info-v1 p-3 border-bottom-0 rounded-0">
-                            <div class="row justify-content-sm-between align-items-sm-center">
-                                <div class="col-sm-10 mb-2 mb-sm-0" style="font-size: 14px;">
-                                    {!! $activities->links() !!}
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                @include('layouts.dynamic')
             </div>
             <div class="col-sm-3">
                 @include('edu.layouts._learning_dynamic',['row'=>8])

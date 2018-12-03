@@ -38,13 +38,13 @@ class UserController extends Controller
     }
 
     /**
-     * 会员中心
+     * 个人主页
      * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(User $user)
     {
-        return view('member.space.fans', compact('user'));
+        return view('member.space.dynamic', compact('user'));
     }
 
     //关注列表

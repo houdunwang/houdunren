@@ -13,4 +13,5 @@ Route::group(['namespace' => 'Member', 'prefix' => 'member', 'as' => 'member.'],
     //个人空间
     Route::get('space/fans/{user}', 'SpaceController@fans')->name('space.fans');
     Route::get('space/follower/{user}', 'SpaceController@follower')->name('space.follower');
+    Route::get('space/dynamic/{user}', 'SpaceController@dynamic')->name('space.dynamic');
 });

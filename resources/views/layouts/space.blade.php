@@ -73,6 +73,16 @@
                                         data-event="hover" data-animation-in="slideInUp" data-animation-out="fadeOut">
                                         <a id="generalDropdown"
                                            class="nav-link u-header__nav-link"
+                                           href="{{route('member.space.dynamic',$user)}}" aria-haspopup="true"
+                                           aria-expanded="false"
+                                           aria-labelledby="generalDropdownMenu">
+                                            动态
+                                        </a>
+                                    </li>
+                                    <li class="nav-item hs-has-sub-menu u-header__nav-item hs-sub-menu-opened"
+                                        data-event="hover" data-animation-in="slideInUp" data-animation-out="fadeOut">
+                                        <a id="generalDropdown"
+                                           class="nav-link u-header__nav-link"
                                            href="{{route('member.space.fans',$user)}}" aria-haspopup="true"
                                            aria-expanded="false"
                                            aria-labelledby="generalDropdownMenu">
@@ -96,7 +106,7 @@
                                                 data-animation-out="fadeOut">
                                                 <a id="generalDropdown"
                                                    class="nav-link u-header__nav-link"
-                                                   href="{{$menu['route']}}" aria-haspopup="true"
+                                                   href="{{route($menu['route'],$user)}}" aria-haspopup="true"
                                                    aria-expanded="false"
                                                    aria-labelledby="generalDropdownMenu">
                                                     {{$menu['name']}}
