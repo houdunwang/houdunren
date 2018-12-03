@@ -44,7 +44,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('member.user_show', compact('user'));
+        return view('member.space.fans', compact('user'));
     }
 
     //关注列表

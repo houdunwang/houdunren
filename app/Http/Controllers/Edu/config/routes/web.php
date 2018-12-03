@@ -16,6 +16,9 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::get('topics_{category}.html', 'TopicController@lists')->name('topic_list');
     //会员中心贴子管理
     Route::get('topic_manage', 'TopicController@manage')->name('topic.manage');
+    //个人主页
+    Route::get('space/topic/{user}','SpaceController@topic')->name('space.topic');
+    Route::get('space/lesson/{user}','SpaceController@lesson')->name('space.lesson');
     //视频
     Route::resource('video', 'VideoController');
     Route::get('search', 'SearchController@lists')->name('search');

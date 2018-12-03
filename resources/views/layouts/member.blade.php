@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="favicon.ico">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="/css/bootstrap.css">
+    {{--<link rel="stylesheet" href="/css/bootstrap.css">--}}
     <link rel="stylesheet" href="/org/front/vendor/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="/css/animate.min.css">
     <link rel="stylesheet" href="/css/hs.megamenu.css">
@@ -23,8 +23,8 @@
     @stack('css')
 </head>
 <body>
+@include('layouts._web_header')
 <main id="content" role="main">
-    <!-- Breadcrumb Section -->
     <div class="bg-primary">
         <div class="container pt-3 pb-3">
             <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
@@ -36,10 +36,9 @@
                     </ol>
                     <!-- End Breadcrumb -->
                 </div>
-
                 <!-- Edit Profile -->
                 <a class="btn btn-sm btn-soft-white transition-3d-hover"
-                   href="{{route('member.user.edit',[auth()->id(),'type'=>'password'])}}">
+                   href="{{route('member.user.edit',[auth()->id(),'type'=>'info'])}}">
                     <span class="fas fa-user-cog small mr-2"></span>
                     修改资料
                 </a>
@@ -49,14 +48,13 @@
         </div>
     </div>
     <!-- End Breadcrumb Section -->
-
     <!-- Content Section -->
-    <div class="bg-light">
-        <div class="container space-2">
+    <div class="bg-light pb-5">
+        <div class="container pt-5">
             <div class="row">
                 <div class="col-lg-3 mb-7 mb-lg-0">
                     <!-- Profile Card -->
-                    <div class="card p-1 mb-4">
+                    <div class="card p-1 mb-4 shadow-sm">
                         <div class="card-body text-center">
                             <div class="mb-3">
                                 <a href="{{route('member.user.edit',[auth()->id(),'type'=>'icon'])}}">
@@ -64,20 +62,22 @@
                                          alt="Image Description">
                                 </a>
                             </div>
-
                             <div class="mb-3">
                                 <h1 class="h6 font-weight-medium mb-0">{{auth()->user()->name}} </h1>
                                 <small class="d-block text-muted">UID: {{auth()->id()}}</small>
                             </div>
-                            <hr>
                             <a class="text-secondary small" href="{{route('member.user.show',auth()->id())}}">
                                 <i class="far fa-flag mr-1"></i> 个人主页
                             </a>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body text-center">
+                            <hr>
                             <ul class="list-group list-group-flush list-group-borderless mb-0">
+                                <li class="list-group-item">
+                                    <a class="d-block
+                                        {{active_class(if_query('type','info'),'btn btn-sm btn-soft-secondary','text-muted')}}"
+                                       href="{{route('member.user.edit',[auth()->id(),'type'=>'info'])}}">
+                                        个人信息
+                                    </a>
+                                </li>
                                 <li class="list-group-item">
                                     <a class="d-block
                                         {{active_class(if_query('type','password'),'btn btn-sm btn-soft-secondary','text-muted')}}"
@@ -107,6 +107,22 @@
                                     </a>
                                 </li>
                             </ul>
+                            <hr>
+                            @foreach(menus('center_menu') as $menus)
+                                <ul class="list-group list-group-flush list-group-borderless mb-0">
+                                    @foreach($menus as $menu)
+                                        @if(!isset($menu['permission']) || auth()->user()->hasAnyPermission($menu['permission']))
+                                            <li class="list-group-item">
+                                                <a class="d-block
+                                        {{active_class(strpos($menu['route'],\Route::getCurrentRoute()->uri),'btn btn-sm btn-soft-secondary','text-muted')}}"
+                                                   href="{{$menu['route']}}">
+                                                    {{$menu['name']}}
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -116,9 +132,8 @@
             </div>
         </div>
     </div>
-    <!-- End Content Section -->
 </main>
-@include('edu.layouts._footer')
+@include('layouts._web_footer')
 @stack('js')
 </body>
 </html>

@@ -10,4 +10,7 @@ Route::group(['namespace' => 'Member', 'prefix' => 'member', 'as' => 'member.'],
     Route::resource('role', 'RoleController');
     //消息中心
     Route::resource('notification', 'NotificationController');
+    //个人空间
+    Route::get('space/fans/{user}', 'SpaceController@fans')->name('space.fans');
+    Route::get('space/follower/{user}', 'SpaceController@follower')->name('space.follower');
 });

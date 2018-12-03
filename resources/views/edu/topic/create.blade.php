@@ -1,9 +1,12 @@
-@extends('edu.layouts.master')
+@extends('layouts.web')
+@section('menu')
+    @include('edu.layouts._menu')
+@endsection
 @section('content')
     <div class="container">
         <form action="{{route('edu.topic.store')}}" method="post" class="mt-5">
             @csrf
-            <div class="justify-content-center ">
+            <div class="justify-content-center shadow-sm">
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group">

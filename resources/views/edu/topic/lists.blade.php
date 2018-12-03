@@ -1,4 +1,7 @@
-@extends('edu.layouts.master')
+@extends('layouts.web')
+@section('menu')
+    @include('edu.layouts._menu')
+@endsection
 @section('content')
     <div class="container mt-5">
         <div class="row">

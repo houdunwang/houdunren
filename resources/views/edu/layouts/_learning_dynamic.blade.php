@@ -1,4 +1,4 @@
-<div class="card learning_dynamic">
+<div class="card learning_dynamic shadow-sm">
     <div class="card-header text-secondary">学习动态</div>
     <div class="card-body">
         <ul class="list-unstyled">

@@ -398,7 +398,7 @@
 }
 
 body {
-  background: #F2F5F9;
+  background: #F2F5F9 !important;
 }
 
 [v-cloak] {
@@ -428,5 +428,16 @@ code {
 .edu-lesson-lists .listAlias img.card-img-top {
   border-radius: 0;
   height: 250px;
+}
+
+.web-header li.nav-item ul.list-group {
+  padding: 0 !important;
+}
+
+.web-header li.nav-item ul.list-group a.list-group-item {
+  border: none;
+  border-radius: 0;
+  border-top: solid 1px #ddd !important;
+  padding: .7rem 1.2rem;
 }
 

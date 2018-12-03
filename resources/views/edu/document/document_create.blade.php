@@ -1,5 +1,5 @@
-@extends('member.layouts.master')
-@section('content')
+@extends('edu.document.layouts.master')
+@section('document_content')
     <div class="container">
         <form action="{{route('edu.document.store')}}" method="post">
             @csrf

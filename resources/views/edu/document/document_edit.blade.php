@@ -1,5 +1,5 @@
 @extends('edu.document.layouts.master')
-@section('content')
+@section('document_content')
     <form action="{{route('edu.document.update',$document)}}" method="post" id="documentForm">
         @csrf @method('PUT')
         <div class="card">

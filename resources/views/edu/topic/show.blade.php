@@ -1,4 +1,7 @@
-@extends('edu.layouts.master')
+@extends('layouts.web')
+@section('menu')
+    @include('edu.layouts._menu')
+@endsection
 @section('content')
     <div class="container">
         <div class="row {{route_class()}} mt-3">
@@ -91,7 +94,7 @@
                 </div>
             </div>
             <div class="col-12 col-xl-3">
-                <div class="card">
+                <div class="card shadow">
                     <div class="card-header">
                         <div class="text-center">
                             <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">

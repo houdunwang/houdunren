@@ -1,4 +1,7 @@
-@extends('edu.layouts.master')
+@extends('layouts.web')
+@section('menu')
+    @include('edu.layouts._menu')
+@endsection
 @inject('activityTransformer','App\Transformers\ActivityTransformer')
 @section('content')
     @include('edu.layouts._live')
@@ -17,7 +20,7 @@
                 @include('edu.layouts._search')
             </div>
             <div class="col-sm-9">
-                <div class="card border-bottom-0 rounded-0">
+                <div class="card border-bottom-0 rounded-0 shadow-sm">
                     <div class="card-header border-bottom-0">
                         <span class="text-muted">动态</span>
                         <div class="position-relative float-right">
@@ -56,25 +59,7 @@
                 </ul>
             </div>
             <div class="col-sm-3">
-                {{--<div class="card">--}}
-                {{--<div class="card-header text-secondary">--}}
-                {{--社区公告版--}}
-                {{--</div>--}}
-                {{--<div class="card-body">--}}
-                {{--<ul class="list-unstyled u-list">--}}
-                {{--<li>--}}
-                {{--<a class="u-list__link" href="/edu/document/5">--}}
-                {{--<span class="fa fa-angle-right u-list__link-icon mr-1"></span>--}}
-                {{--Laravel 5.7 中文手册--}}
-                {{--</a>--}}
-                {{--</li>--}}
-                {{--</ul>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--@include('edu.layouts._active_user')--}}
-                <div class="mt-0">
-                    @include('edu.layouts._learning_dynamic',['row'=>8])
-                </div>
+                @include('edu.layouts._learning_dynamic',['row'=>8])
             </div>
         </div>
     </div>
@@ -122,8 +107,8 @@
         </div>
     </div>
     <div class="container mt-3">
-        <div class="card-deck d-block d-lg-flex mb-6">
-            <div class="card mb-3 mb-lg-0">
+        <div class="card-deck d-block d-lg-flex mb-6 ">
+            <div class="card mb-3 mb-lg-0 shadow">
                 <div class="card-body p-5">
                     <div class="media">
                         <span class="u-icon u-icon-primary--air u-icon--xl rounded-circle mr-4">
@@ -136,20 +121,7 @@
                     </div>
                 </div>
             </div>
-            {{--<div class="card mb-3 mb-lg-0">--}}
-            {{--<div class="card-body p-5">--}}
-            {{--<div class="media">--}}
-            {{--<span class="u-icon u-icon-primary--air u-icon--xl rounded-circle mr-4">--}}
-            {{--<i class="fa fa-file-code-o mt-3" aria-hidden="true"></i>--}}
-            {{--</span>--}}
-            {{--<div class="media-body">--}}
-            {{--<span class="d-block font-size-32">{{\App\Models\EduTopic::count()}}</span>--}}
-            {{--<h2 class="h6 text-secondary font-weight-normal mb-0 pl-1">话题</h2>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-body p-5">
                     <div class="media">
                         <span class="u-icon u-icon-warning--air u-icon--xl rounded-circle mr-4">

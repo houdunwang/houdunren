@@ -1,4 +1,4 @@
-@extends('member.layouts.master')
+@extends('layouts.member')
 @section('content')
     <div class="card" data-toggle="lists">
         <div class="card-header text-secondary">

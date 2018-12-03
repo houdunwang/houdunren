@@ -1,4 +1,7 @@
-@extends('edu.layouts.master')
+@extends('layouts.web')
+@section('menu')
+    @include('edu.layouts._menu')
+@endsection
 @section('content')
     <main id="content" role="main" class="{{route_class()}}">
         <div class="position-relative u-gradient-half-primary-v1">

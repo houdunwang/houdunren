@@ -1,9 +1,12 @@
-@extends('edu.layouts.master')
+@extends('layouts.web')
+@section('menu')
+    @include('edu.layouts._menu')
+@endsection
 @section('content')
     <div class="container mt-5">
         <div class="row">
             <div class="col-12">
-                <div class="card" data-toggle="lists" data-lists-values="[&quot;name&quot;]">
+                <div class="card shadow" data-toggle="lists" data-lists-values="[&quot;name&quot;]">
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">

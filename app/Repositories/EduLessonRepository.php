@@ -77,5 +77,4 @@ class EduLessonRepository extends Repository implements RepositoryInterface
         $lesson->video()->withTrashed()->forceDelete();
         return $lesson->delete();
     }
-
 }

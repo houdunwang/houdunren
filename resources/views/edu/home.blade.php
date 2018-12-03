@@ -1,4 +1,7 @@
-@extends('edu.layouts.master')
+@extends('layouts.web')
+@section('menu')
+    @include('edu.layouts._menu')
+@endsection
 @section('content')
     @include('edu.layouts._live')
     <main id="content" role="main" class="edu-home">

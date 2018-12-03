@@ -1,4 +1,4 @@
-@extends('member.layouts.master')
+@extends('layouts.member')
 @section('content')
     <div class="row justify-content-center  __web-inspector-hide-shortcut__">
         <form action="{{route('member.user.update',auth()->user())}}" method="post" class="col-sm-8" id="form-icon">

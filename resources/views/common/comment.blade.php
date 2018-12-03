@@ -82,7 +82,7 @@
                             <textarea style="display:none;"></textarea>
                         </div>
                     </div>
-                    <button class="btn btn-primary mb-2 btn-sm">发表评论</button>
+                    <button class="btn btn-primary mb-2 btn-xs">发表评论</button>
                 </form>
             </div>
         </div>

@@ -1,5 +1,5 @@
 @extends('edu.document.layouts.master',['document' => $chapter->document])
-@section('content')
+@section('document_content')
     <div class="container">
         <form action="{{route('edu.section.store',['chapter_id' => $chapter['id']])}}" method="post">
             @csrf

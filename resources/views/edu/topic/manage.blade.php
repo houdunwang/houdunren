@@ -1,10 +1,17 @@
-@extends('member.layouts.master')
+@extends('layouts.member')
 @section('content')
     <div class="card" data-toggle="lists">
         <div class="card-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h4 class="card-header-title">话题列表</h4>
+                    <h6 class="card-header-title text-secondary">
+                        帖子列表
+                    </h6>
+                </div>
+                <div class="col-auto">
+                    <a href="{{route('edu.topic.create')}}" class="btn btn-xs btn-primary">
+                        发表
+                    </a>
                 </div>
             </div>
         </div>
@@ -12,25 +19,25 @@
             <ul class="list-group list-group-lg list-group-flush list my--4">
                 @foreach($topics as $topic)
                     <li class="list-group-item px-0">
-                        <div class="row">
-                            <div class="col col-10">
-                                <h4 class="card-title mb-3 name">
-                                    <a href="{{route('edu.topic.show',$topic)}}">
-                                        {{$topic['title']}}
+                        <div class="row align-items-center">
+                            <div class="col ml--2">
+                                <h6 class="card-title mb-1 name">
+                                    <a href="{{route('edu.topic.show',$topic)}}"> {{$topic['title']}}</a>
+                                </h6>
+                                <p class="card-text small mb-1">
+                                    <i class="fa fa-clock-o"
+                                       aria-hidden="true"></i> {{$topic['created_at']->format('Y-m-d H:i')}}
+                                    <a href="http://hdcms.test/edu/topics_1.html" class="text-secondary ml-2">
+                                        <i class="fa fa-folder-o" aria-hidden="true"></i>
+                                        {{$topic->category->title}}
                                     </a>
-                                </h4>
-                                <p class="card-text small text-muted">
-                                    {{$topic->category->title}}
-                                    <span class="fe fe-clock"></span> {{$topic['created_at']->format('Y-m-d H:i')}}
                                 </p>
                             </div>
-                            <div class="col text-right">
-                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                    <a href="{{route('edu.topic.edit',$topic)}}" class="btn btn-white">
-                                        编辑
-                                    </a>
-                                    <button type="button" class="btn btn-light" onclick="del(this)">删除</button>
-                                    <form action="{{route('edu.topic.destroy',$topic)}}" method="post">
+                            <div class="col-auto">
+                                <div class="btn-group btn-group-toggle btn-group-xs">
+                                    <a href="{{route('edu.topic.edit',$topic)}}" class="btn btn-xs btn-soft-secondary">编辑</a>
+                                    <a href="javascript:;" class="btn btn-xs btn-soft-dark" onclick="del(this)">删除</a>
+                                    <form action="{{route('edu.topic.destroy',$topic)}}" method="post" hidden>
                                         @csrf @method('DELETE')
                                     </form>
                                 </div>

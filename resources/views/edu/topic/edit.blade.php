@@ -1,4 +1,7 @@
-@extends('edu.layouts.master')
+@extends('layouts.web')
+@section('menu')
+    @include('edu.layouts._menu')
+@endsection
 @section('content')
     <div class="container">
         <form action="{{route('edu.topic.update',$topic)}}" method="post" class="mt-5">

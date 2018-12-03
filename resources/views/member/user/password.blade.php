@@ -1,4 +1,4 @@
-@extends('member.layouts.master')
+@extends('layouts.member')
 @section('content')
     <div class="row justify-content-center">
         <form action="{{route('member.user.update',auth()->user())}}" method="post" class="col-sm-12">
@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary" type="submit">确定</button>
+                    <button class="btn btn-primary btn-xs" type="submit">确定</button>
                 </div>
             </div>
         </form>

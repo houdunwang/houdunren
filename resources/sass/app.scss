@@ -14,7 +14,7 @@
 }
 
 body {
-  background: #F2F5F9;
+  background: #F2F5F9 !important;
 }
 
 [v-cloak] {
@@ -39,6 +39,7 @@ code {
 //编辑器
 .editormd {
   border: solid 1px #e3e3e3 !important;
+
   ul.editormd-menu {
     a {
       color: #95aac9 !important;
@@ -46,14 +47,27 @@ code {
   }
 }
 
-
-
 //课程列表
 .edu-lesson-lists {
   .listAlias {
     img.card-img-top {
       border-radius: 0;
       height: 250px;
+    }
+  }
+}
+
+//头部菜单
+.web-header {
+  li.nav-item {
+    ul.list-group{
+      padding: 0 !important;
+      a.list-group-item{
+        border:none;
+        border-radius: 0;
+        border-top: solid 1px #ddd !important;
+        padding: .7rem 1.2rem;
+      }
     }
   }
 }
