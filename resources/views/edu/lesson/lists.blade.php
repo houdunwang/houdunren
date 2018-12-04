@@ -3,25 +3,27 @@
     @include('edu.layouts._menu')
 @endsection
 @section('content')
-    <div class="container {{route_class()}}">
+    <div class="container {{route_class()}} mt-5">
         <div class="{{route_class()}}">
-            <div class="container u-space-3 pb-1" style="padding-top: 5rem;">
-                <div class="u-cubeportfolio">
-                    <div id="filterControls" class="list-inline cbp-l-filters-alignRight text-center">
-                        <a class="list-inline-item  u-cubeportfolio__item cbp-filter-item-active"
-                           href="{{route('edu.lesson.lists')}}">
-                            <span class="badge {{active_class(if_route('edu.lesson.lists'),'badge-primary','badge-soft-secondary')}}">全部</span>
-                        </a>
-                        @foreach(\App\Models\EduTag::all() as $tag)
-                        <a class="list-inline-item cbp-filter-item u-cubeportfolio__item"
-                           href="{{route('edu.lesson.tag',$tag)}}">
-                            <span class="badge {{active_class(if_route_param('tag',$tag['id']),'badge-primary','badge-soft-secondary')}}">{{$tag['name']}}</span>
-                        </a>
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="u-cubeportfolio">
+                        <div id="filterControls" class="list-inline cbp-l-filters-alignRight text-center mb-0">
+                            <a class="list-inline-item  u-cubeportfolio__item cbp-filter-item-active"
+                               href="{{route('edu.lesson.lists')}}">
+                                <span class="badge {{active_class(if_route('edu.lesson.lists'),'badge-primary','badge-soft-secondary')}}">全部</span>
+                            </a>
+                            @foreach(\App\Models\EduTag::all() as $tag)
+                                <a class="list-inline-item cbp-filter-item u-cubeportfolio__item"
+                                   href="{{route('edu.lesson.tag',$tag)}}">
+                                    <span class="badge {{active_class(if_route_param('tag',$tag['id']),'badge-primary','badge-soft-secondary')}}">{{$tag['name']}}</span>
+                                </a>
                             @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row listAlias mt-5">
+            <div class="row listAlias mt-2">
                 @foreach($lessons as $lesson)
                     <div class="col-12 col-md-6 col-xl-3 mt-3">
                         <article class="bg-white shadow-sm mb-3">
@@ -32,7 +34,8 @@
                                 </div>
                                 <div class="rounded-bottom p-3">
                                     <h4 class="lesson-title">
-                                        <a href="{{route('edu.lesson.show',$lesson)}}" tabindex="0" class="text-dark">
+                                        <a href="{{route('edu.lesson.show',$lesson)}}" tabindex="0"
+                                           class="text-dark">
                                             {{$lesson['title']}}
                                         </a>
                                     </h4>
@@ -50,8 +53,6 @@
                     </div>
                 @endforeach
             </div>
-        </div>
-        <div class="mt-3">
             {!! $lessons->links() !!}
         </div>
     </div>
