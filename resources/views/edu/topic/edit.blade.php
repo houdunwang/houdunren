@@ -32,7 +32,7 @@
                         <span class="badge badge-pill badge-light text-secondary">支持粘贴与拖放上传图片</span>
                     </div>
                     <div class="card-footer text-muted text-center">
-                        <button class="btn btn-primary btn-xs">保存发布</button>
+                        <button class="btn btn-primary btn-xs" type="submit">保存发布</button>
                     </div>
                 </div>
             </div>

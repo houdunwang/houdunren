@@ -9,7 +9,9 @@
                    class="text-secondary pt-1" style="display: inline-block;">
                     {{$cond->causer->name}}
                 </a>
-                <span class="badge badge-light text-secondary small">发表了</span>
+                <span class="badge badge-light text-secondary small">
+                    {{$cond->description=='updated'?'更新了':'发表了'}}
+                </span>
                 <a href="{{$cond->subject->link()}}" class="text-secondary">
                     {{$cond->subject->title()}}
                 </a>

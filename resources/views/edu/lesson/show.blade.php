@@ -9,10 +9,11 @@
                 <div class="justify-content-between">
                     {{$lesson['title']}}
                     @auth
+                        @include('edu.layouts._download_lesson')
                         @can('update',$lesson)
                             <a href="{{route('edu.lesson.edit',$lesson)}}"
                                class="btn btn-xs btn-light u-btn-light transition-3d-hover btn-xs float-right ml-2 text-secondary">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i> 编辑
+                                <i class="fa fa-edit" aria-hidden="true"></i> 编辑
                             </a>
                         @endcan
                         @if($lesson->isFavorite(auth()->user()))
@@ -75,8 +76,8 @@
                                     </h3>
                                 </div>
                             </div>
-                    @endif
-                @endforeach
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>

@@ -61,7 +61,7 @@ class LessonController extends Controller
             'free_num' => 'required',
             'price' => 'nullable|between:0,1000',
             'status' => 'required|in:1,0',
-            'download_address' => 'nullable|sometimes|url',
+//            'download_address' => 'nullable|sometimes|url',
             'json' => 'json',
         ], [
             'title.required' => '课程名称不能为空',

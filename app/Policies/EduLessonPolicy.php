@@ -24,7 +24,19 @@ class EduLessonPolicy
             || app(EduOrder::class)->isBuy($lesson, $user)
             || app(EduSubscribe::class)->subscribe($user);
     }
-
+    /**
+     * 下载视频
+     * @param User $user
+     * @param EduLesson $lesson
+     * @return bool
+     */
+    public function download(User $user, EduLesson $lesson)
+    {
+        return ($lesson['free']
+            || app(EduOrder::class)->isBuy($lesson, $user)
+            || app(EduSubscribe::class)->subscribe($user))
+            && !empty($lesson['download_address']);
+    }
     /**
      * Determine whether the user can create edu lessons.
      *

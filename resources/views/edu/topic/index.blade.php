@@ -24,7 +24,7 @@
                     <div class="card-body">
                         <ul class="list-group list-group-lg list-group-flush list my--4">
                             @foreach($topics as $topic)
-                                <li class="list-group-item px-0">
+                                <li class="list-group-item pb-2 mb-2 border-top-0 border-bottom">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                             <a href="{{route('member.user.show',$topic->user)}}">

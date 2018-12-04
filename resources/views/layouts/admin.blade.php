@@ -410,13 +410,7 @@ Follow: https://space.bilibili.com/277339333
     })
 </script>
 @stack('js')
-<script>
-    require(['jquery'], function ($) {
-        $("form").submit(function () {
-            $("button[type='submit']").attr('disabled', true);
-        })
-    })
-</script>
+<script src="{{mix('/js/hdcms.js')}}"></script>
 <!-- end::Global Config -->
 
 <!--begin::Global Theme Bundle -->

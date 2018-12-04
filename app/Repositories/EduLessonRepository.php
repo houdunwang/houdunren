@@ -44,7 +44,17 @@ class EduLessonRepository extends Repository implements RepositoryInterface
      */
     public function lists(int $row = 12)
     {
-        return $this->model->with('user')->latest('created_at')->where('video_num', '>', 0)->paginate($row);
+        return $this->model->with('user')->latest('id')->where('video_num', '>', 0)->paginate($row);
+    }
+
+    /**
+     * 获取推荐课程
+     * @param int $row
+     * @return mixed
+     */
+    public function commend($row = 12)
+    {
+        return EduLesson::where('is_commend', 1)->with('user')->latest('id')->limit($row)->get();
     }
 
     /**
@@ -54,7 +64,7 @@ class EduLessonRepository extends Repository implements RepositoryInterface
     public function getSystem()
     {
         $where = [
-            ['type', 'system']
+            ['type', 'system'],
         ];
         return $this->model->with('user')->latest('updated_at')->where($where)->get();
     }

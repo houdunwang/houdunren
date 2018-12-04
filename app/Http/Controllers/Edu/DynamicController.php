@@ -22,7 +22,7 @@ class DynamicController extends Controller
     public function index(ActivityRepository $activityRepository, EduLessonRepository $eduLessonRepository)
     {
         $activities = $activityRepository->paginate(12);
-        $lessons = $eduLessonRepository->paginate(12);
+        $lessons = $eduLessonRepository->commend(12);
         return view('edu.dynamic.index', compact('activities', 'lessons'));
     }
 }

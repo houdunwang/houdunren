@@ -1,4 +1,4 @@
-<ul class="list-unstyled mb-0">
+<ul class="list-unstyled mb-0" style="border-bottom: 1px solid #e7eaf3;">
     @inject('repository','App\Repositories\ActivityRepository')
     @if(isset($user))
         <?php $activities = $repository->userPaginateList($user, 15);?>
@@ -20,13 +20,15 @@
             @include('layouts.dynamic._default')
         @endswitch
     @endforeach
-    <li class="mt-0">
-        <div class="u-info-v1 p-3 border-bottom-0 rounded-0">
-            <div class="row justify-content-sm-between align-items-sm-center">
-                <div class="col-sm-10 mb-2 mb-sm-0" style="font-size: 14px;">
-                    {!! $activities->links() !!}
+    @if($activities->total()>1)
+        <li class="mt-0">
+            <div class="u-info-v1 p-3 border-bottom-0 rounded-0">
+                <div class="row justify-content-sm-between align-items-sm-center">
+                    <div class="col-sm-10 mb-2 mb-sm-0" style="font-size: 14px;">
+                        {!! $activities->links() !!}
+                    </div>
                 </div>
             </div>
-        </div>
-    </li>
+        </li>
+    @endif
 </ul>

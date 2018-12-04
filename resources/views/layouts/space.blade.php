@@ -47,11 +47,13 @@
                     <div class="media d-block d-sm-flex align-items-sm-center">
                         <div class="u-lg-avatar position-relative mb-3 mb-sm-0 mr-3">
                             <img class="u-lg-avatar rounded-circle" src="{{$user->avatar}}" alt="{{$user->name}}">
-                            @if(auth()->user()->following($user))
-                                <span class="badge badge-md badge-outline-success badge-pos badge-pos--bottom-right rounded-circle">
+                            @can('follow',$user)
+                                @if(auth()->user()->following($user))
+                                    <span class="badge badge-md badge-outline-success badge-pos badge-pos--bottom-right rounded-circle">
                                   <span class="fas fa-check"></span>
                                 </span>
-                            @endif
+                                @endif
+                            @endcan
                         </div>
                         <div class="media-body">
                             <h1 class="h3 text-white font-weight-medium mb-1">{{$user->name}}</h1>
@@ -138,7 +140,7 @@
             </div>
         </div>
     </div>
-    <div class="bg-light mt-5">
+    <div class="bg-light mt-5 pb-5">
         @yield('content')
     </div>
 </main>

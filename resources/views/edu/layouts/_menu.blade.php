@@ -10,30 +10,30 @@
         动态
     </a>
 </li>
-<li class="nav-item hs-has-sub-menu u-header__nav-item"
-    data-event="hover"
-    data-animation-in="slideInUp"
-    data-animation-out="fadeOut">
-    <a id="blogMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"
-       aria-haspopup="true"
-       aria-expanded="false"
-       aria-labelledby="blogSubMenu">
-        系统
-        <span class="fa fa-angle-down u-header__nav-link-icon"></span>
-    </a>
-    <ul
-        class="list-group hs-sub-menu u-header__sub-menu mb-0 small rounded-0"
-        style="min-width: 220px;"
-        aria-labelledby="blogMegaMenu">
-        @inject('EduLessonRepository',\App\Repositories\EduSystemLessonRepository)
-        @foreach($EduLessonRepository->all() as $systemlesson)
-            <a class="list-group-item list-group-item-action"
-               href="{{route('edu.system.show',$systemlesson)}}">
-                {{$systemlesson['title']}}
-            </a>
-        @endforeach
-    </ul>
-</li>
+{{--<li class="nav-item hs-has-sub-menu u-header__nav-item"--}}
+    {{--data-event="hover"--}}
+    {{--data-animation-in="slideInUp"--}}
+    {{--data-animation-out="fadeOut">--}}
+    {{--<a id="blogMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"--}}
+       {{--aria-haspopup="true"--}}
+       {{--aria-expanded="false"--}}
+       {{--aria-labelledby="blogSubMenu">--}}
+        {{--系统--}}
+        {{--<span class="fa fa-angle-down u-header__nav-link-icon"></span>--}}
+    {{--</a>--}}
+    {{--<ul--}}
+        {{--class="list-group hs-sub-menu u-header__sub-menu mb-0 small rounded-0"--}}
+        {{--style="min-width: 220px;"--}}
+        {{--aria-labelledby="blogMegaMenu">--}}
+        {{--@inject('EduLessonRepository',\App\Repositories\EduSystemLessonRepository)--}}
+        {{--@foreach($EduLessonRepository->all() as $systemlesson)--}}
+            {{--<a class="list-group-item list-group-item-action"--}}
+               {{--href="{{route('edu.system.show',$systemlesson)}}">--}}
+                {{--{{$systemlesson['title']}}--}}
+            {{--</a>--}}
+        {{--@endforeach--}}
+    {{--</ul>--}}
+{{--</li>--}}
 <li class="nav-item">
     <a class="nav-link u-header__nav-link" href="{{route('edu.lesson.lists')}}">
         碎片

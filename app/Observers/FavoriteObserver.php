@@ -10,6 +10,7 @@
 
 namespace App\Observers;
 
+use App\Models\EduLesson;
 use App\Models\Favorite;
 
 /**
@@ -21,12 +22,14 @@ class FavoriteObserver
 {
     public function created(Favorite $favorite)
     {
-        $favorite->belongModel()->increment('favorite_num');
+        $model = $favorite->belongModel()->getModel();
+        \DB::table($model->getTable())->update(['favorite_num'=>$model['favorite_num']+1]);
     }
 
     public function deleted(Favorite $favorite)
     {
-        $favorite->belongModel()->decrement('favorite_num');
+        $model = $favorite->belongModel()->getModel();
+        \DB::table($model->getTable())->update(['favorite_num'=>$model['favorite_num']-1]);
     }
 
     /**

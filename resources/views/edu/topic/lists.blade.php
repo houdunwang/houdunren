@@ -25,7 +25,7 @@
                     <div class="card-body">
                         <ul class="list-group list-group-lg list-group-flush list my--4">
                             @foreach($topics as $topic)
-                                <li class="list-group-item px-0">
+                                <li class="list-group-item pb-2 mb-2 border-top-0 border-bottom">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                             <a href="{{route('member.user.show',$topic->user)}}">
@@ -48,7 +48,7 @@
                                             </p>
                                         </div>
                                         <div class="col-auto">
-                                            <div class="btn-group btn-group-toggle">
+                                            <div class="btn-group btn-group-toggle btn-group-xs">
                                                 @can('update',$topic)
                                                     <a href="{{route('edu.topic.edit',$topic)}}"
                                                        class="btn btn-xs btn-light">编辑</a>
@@ -56,7 +56,7 @@
                                                 @can('delete',$topic)
                                                     <a href="javascript:;" class="btn btn-xs btn-secondary"
                                                     onclick="confirm('确定删除吗？')?$(this).next().submit():null">删除</a>
-                                                        <form action="{{route('edu.topic.destroy',$topic)}}" method="post">
+                                                        <form action="{{route('edu.topic.destroy',$topic)}}" method="post" hidden>
                                                             @csrf @method('DELETE')
                                                         </form>
                                                 @endcan

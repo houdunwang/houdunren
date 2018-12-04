@@ -23,14 +23,15 @@ class ZanObserver
 {
     public function created(Zan $zan)
     {
-        $zan->belongModel->user->notify(new ZanNotification($zan));
-        $zan->belongModel->increment('zan_num');
+        $model = $zan->belongModel()->getModel();
+        \DB::table($model->getTable())->update(['zan_num'=>$model['zan_num']+1]);
     }
 
     public function deleted(Zan $zan)
     {
         //删除动态日志
         $zan->activity()->delete();
-        $zan->belongModel->decrement('zan_num');
+        $model = $zan->belongModel()->getModel();
+        \DB::table($model->getTable())->update(['zan_num'=>$model['zan_num']-1]);
     }
 }

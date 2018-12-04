@@ -18,7 +18,7 @@
                     </a>
                     <br>
                     编码: <a href="http://www.aoxiangjun.com">向军大叔</a>
-                    基于 <a href="http://www.hdcms.com">HDCMS</a> 构建
+                    {{--基于 <a href="http://www.hdcms.com">HDCMS</a> 构建--}}
                 </p>
             </div>
         </div>
@@ -76,4 +76,5 @@
         })
     </script>
     {!! config_get('admin.site.statistics') !!}
+    <script src="{{mix('/js/hdcms.js')}}"></script>
 </div>

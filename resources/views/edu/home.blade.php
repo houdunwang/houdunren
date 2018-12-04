@@ -204,86 +204,96 @@
                 </div>
             </div>
         </div>
-        <div class="position-relative u-space-3 u-space-4--lg">
-            <figure class="col-lg-6 position-absolute-top-left-0--lg u-content-centered-y--lg mb-9 mb-lg-0">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                     viewBox="0 0 999.1 577.5" style="enable-background:new 0 0 999.1 577.5;" xml:space="preserve">
-                    <path class="u-fill-white u-stroke-light-blue-125" stroke-miterlimit="10" d="M881.3,577H117.5c-14.4,0-26.2-11.8-26.2-26.2V26.7c0-14.4,11.8-26.2,26.2-26.2h763.9
-            c14.4,0,26.2,11.8,26.2,26.2v524.2C907.5,565.2,895.7,577,881.3,577z"/>
-                    <circle fill="#f7f7f7" cx="498" cy="23.8" r="3"/>
-                    <path class="u-fill-white" d="M996.3,561.2H2.9c-1.5,0-2.8-1.3-2.8-2.8l0,0c0-1.5,1.3-2.8,2.8-2.8h993.4c1.5,0,2.8,1.3,2.8,2.8l0,0
-            C999.1,559.9,997.9,561.2,996.3,561.2z"/>
-                    <path fill="#efefef"
-                          d="M499.6,563L0,561.2c0,0,24.1,11.3,117.8,15.8H498h3.1h380.2c93.7-4.5,117.8-15.8,117.8-15.8L499.6,563z"/>
-                    <linearGradient id="laptopFrameID1" gradientUnits="userSpaceOnUse" x1="403.8206" y1="559.1469"
-                                    x2="594.97" y2="559.1469">
-                        <stop offset="5.908129e-07" style="stop-color:#F0F1F2"/>
-                        <stop offset="5.235744e-02" style="stop-color:#F6F7F8"/>
-                        <stop offset="0.1708" style="stop-color:#FDFDFD"/>
-                        <stop offset="0.5" style="stop-color:#FFFFFF"/>
-                        <stop offset="0.8292" style="stop-color:#FDFDFD"/>
-                        <stop offset="0.9476" style="stop-color:#F6F7F8"/>
-                        <stop offset="1" style="stop-color:#F0F1F2"/>
-                    </linearGradient>
-                    <path fill="url(#laptopFrameID1)"
-                          d="M591.4,562.7H407.4c-1.9,0-3.5-1.6-3.5-3.5v-3.5H595v3.5C595,561.1,593.4,562.7,591.4,562.7z"/>
-                    <g>
-                        <defs>
-                            <rect id="laptopFrameID2" x="121.7" y="38" width="752.5" height="469.7"/>
-                        </defs>
-                        <clipPath id="laptopFrameID3">
-                            <use xlink:href="#laptopFrameID2" style="overflow:visible;"/>
-                        </clipPath>
-                        <g style="clip-path:url(#laptopFrameID3);">
-                            <!-- Apply your (1618px width to 1010px height) image here -->
-                            <image style="overflow:visible;" width="1618" height="1010"
-                                   xlink:href="/images/img2.jpg"
-                                   transform="matrix(0.4651 0 0 0.4651 121.7472 37.9679)"></image>
-                        </g>
-                        <use xlink:href="#laptopFrameID2"
-                             style="overflow:visible;fill:none;stroke:#E7EAF3;stroke-miterlimit:10;"/>
-                    </g>
-                    <!-- End Laptop Frame -->
+            <div class="position-relative space-2 space-md-3 space-lg-4">
+                <!-- SVG Mockups -->
+                <div id="SVGlaptopAndIphone" class="col-lg-6 position-lg-absolute top-lg-0 left-lg-0 content-centered-y--lg mb-9 mb-lg-0" style="">
+                    <figure class="ie-laptop-and-iphone">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 999.1 577.5" style="enable-background:new 0 0 999.1 577.5;" xml:space="preserve" class="injected-svg js-svg-injector" data-img-paths="[
+                 {&quot;targetId&quot;: &quot;#SVGlaptopAndIphoneImg1&quot;, &quot;newPath&quot;: &quot;../../assets/img/1618x1010/img2.jpg&quot;},
+                 {&quot;targetId&quot;: &quot;#SVGlaptopAndIphoneImg2&quot;, &quot;newPath&quot;: &quot;../../assets/img/282x500/img8.jpg&quot;}
+               ]" data-parent="#SVGlaptopAndIphone">
+<style type="text/css">
+    .laptop-and-iphone-0{fill:#FFFFFF;stroke:#E7EAF3;}
+    .laptop-and-iphone-1{fill:#F7F7F7;}
+    .laptop-and-iphone-2{fill:#FFFFFF;}
+    .laptop-and-iphone-3{fill:#E7EAF3;}
+    .laptop-and-iphone-4{fill:#F7F7F7;}
+</style>
+                            <path class="laptop-and-iphone-0 fill-white stroke-gray-300" stroke-miterlimit="10" d="M881.3,577H117.5c-14.4,0-26.2-11.8-26.2-26.2V26.7c0-14.4,11.8-26.2,26.2-26.2h763.9  c14.4,0,26.2,11.8,26.2,26.2v524.2C907.5,565.2,895.7,577,881.3,577z"></path>
+                            <circle class="laptop-and-iphone-1 fill-gray-200" cx="498" cy="23.8" r="3"></circle>
+                            <path class="laptop-and-iphone-2 fill-white" d="M996.3,561.2H2.9c-1.5,0-2.8-1.3-2.8-2.8l0,0c0-1.5,1.3-2.8,2.8-2.8h993.4c1.5,0,2.8,1.3,2.8,2.8l0,0  C999.1,559.9,997.9,561.2,996.3,561.2z"></path>
+                            <path class="laptop-and-iphone-3 fill-gray-300" d="M499.6,563L0,561.2c0,0,24.1,11.3,117.8,15.8H498h3.1h380.2c93.7-4.5,117.8-15.8,117.8-15.8L499.6,563z"></path>
+                            <linearGradient id="laptopAndiPhoneID1" gradientUnits="userSpaceOnUse" x1="403.8206" y1="559.1469" x2="594.97" y2="559.1469">
+                                <stop offset="5.908129e-07" style="stop-color:#F0F1F2"></stop>
+                                <stop offset="5.235744e-02" style="stop-color:#F6F7F8"></stop>
+                                <stop offset="0.1708" style="stop-color:#FDFDFD"></stop>
+                                <stop offset="0.5" style="stop-color:#FFFFFF"></stop>
+                                <stop offset="0.8292" style="stop-color:#FDFDFD"></stop>
+                                <stop offset="0.9476" style="stop-color:#F6F7F8"></stop>
+                                <stop offset="1" style="stop-color:#F0F1F2"></stop>
+                            </linearGradient>
+                            <path fill="url(#laptopAndiPhoneID1)" d="M591.4,562.7H407.4c-1.9,0-3.5-1.6-3.5-3.5v-3.5H595v3.5C595,561.1,593.4,562.7,591.4,562.7z"></path>
+                            <g>
+                                <defs>
+                                    <rect id="SVGID_2_" x="121.7" y="38" width="752.5" height="469.7"></rect>
+                                </defs>
+                                <clipPath id="SVGID_3_">
+                                    <use xlink:href="#SVGID_2_" style="overflow:visible;"></use>
+                                </clipPath>
+                                <g style="clip-path:url(#SVGID_3_);">
+                                    <!-- Apply your (1618px width to 1010px height) image here -->
+                                    <image id="SVGlaptopAndIphoneImg1" style="overflow:visible;" width="1618" height="1010" xlink:href="/images/img2.jpg" transform="matrix(0.4651 0 0 0.4651 121.7472 37.9679)"></image>
+                                </g>
+                                <use xlink:href="#SVGID_2_" style="overflow:visible;fill:none;stroke:#E7EAF3;stroke-miterlimit:10;"></use>
+                            </g>
+                            <path class="laptop-and-iphone-0 fill-white stroke-gray-300" stroke-miterlimit="10" d="M944,577H823.1c-29.7,0-54-24.3-54-54V150.9c0-29.7,24.3-54,54-54H944c29.7,0,54,24.3,54,54V523  C998,552.7,973.7,577,944,577z"></path>
+                            <circle class="laptop-and-iphone-1 fill-gray-200" cx="884.3" cy="543.4" r="18.4"></circle>
+                            <path class="laptop-and-iphone-4 fill-gray-200" fill-rule="evenodd" clip-rule="evenodd" d="M899.1,133.7h-30.3c-1.6,0-2.9-1.3-2.9-2.9l0,0c0-1.6,1.3-2.9,2.9-2.9h30.3c1.6,0,2.9,1.3,2.9,2.9l0,0  C902,132.4,900.7,133.7,899.1,133.7z"></path>
+                            <g>
+                                <defs>
+                                    <rect id="SVGID_4_" x="783.1" y="154.8" width="202.2" height="361"></rect>
+                                </defs>
+                                <clipPath id="SVGID_5_">
+                                    <use xlink:href="#SVGID_4_" style="overflow:visible;"></use>
+                                </clipPath>
+                                <g style="clip-path:url(#SVGID_5_);">
+                                    <!-- Apply your (282px width to 500px height) image here -->
+                                    <image id="SVGlaptopAndIphoneImg2" style="overflow:visible;" width="282" height="500" xlink:href="/images/img8.jpg" transform="matrix(0.722 0 0 0.722 782.1237 155.3553)"></image>
+                                </g>
+                                <use xlink:href="#SVGID_4_" style="overflow:visible;fill:none;stroke:#E7EAF3;stroke-miterlimit:10;"></use>
+                            </g>
+</svg>
+                    </figure>
+                </div>
+                <!-- End SVG Mockups -->
 
-                    <!-- Phone Frame -->
-                    <path class="u-fill-white u-stroke-light-blue-125" stroke-miterlimit="10" d="M944,577H823.1c-29.7,0-54-24.3-54-54V150.9c0-29.7,24.3-54,54-54H944c29.7,0,54,24.3,54,54V523
-            C998,552.7,973.7,577,944,577z"/>
-                    <circle fill="#f7f7f7" cx="884.3" cy="543.4" r="18.4"/>
-                    <path class="u-fill-gray-75" fill-rule="evenodd" clip-rule="evenodd" d="M899.1,133.7h-30.3c-1.6,0-2.9-1.3-2.9-2.9l0,0c0-1.6,1.3-2.9,2.9-2.9h30.3c1.6,0,2.9,1.3,2.9,2.9l0,0
-            C902,132.4,900.7,133.7,899.1,133.7z"/>
-                    <g>
-                        <defs>
-                            <rect id="phoneFrameID1" x="783.1" y="154.8" width="202.2" height="361"/>
-                        </defs>
-                        <clipPath id="phoneFrameID2">
-                            <use xlink:href="#phoneFrameID1" style="overflow:visible;"/>
-                        </clipPath>
-                        <g style="clip-path:url(#phoneFrameID2);">
-                            <!-- Apply your (282px width to 500px height) image here -->
-                            <image style="overflow:visible;" width="282" height="500"
-                                   xlink:href="/images/img8.jpg"
-                                   transform="matrix(0.722 0 0 0.722 782.1237 155.3553)"></image>
-                        </g>
-                        <use xlink:href="#phoneFrameID1"
-                             style="overflow:visible;fill:none;stroke:#E7EAF3;stroke-miterlimit:10;"/>
-                    </g>
-        </svg>
-            </figure>
-            <div class="container">
-                <div class="row justify-content-lg-end">
-                    <div class="col-lg-5">
-                        <div class="pl-lg-4">
-                            <div class="mb-5">
-                                <h2 class="font-weight-medium">全平台适配</h2>
-                                <p>
-                                    我们针对桌面电脑、移动手机进行了大量调优。让你可以在全平台轻松交流学习，不受时间地点限制影响学习计划。
-                                </p>
+                <div class="container">
+                    <div class="row justify-content-lg-end">
+                        <div class="col-lg-5">
+                            <!-- Title -->
+                            <div class="pl-lg-4">
+                                <div class="mb-5">
+                                    <h2 class="font-weight-medium">全平台适配</h2>
+                                    <p>
+
+                                        我们针对桌面电脑、移动手机进行了大量调优。让你可以在全平台轻松交流学习，不受时间地点限制影响学习计划。
+
+                                    </p>
+                                </div>
+
+                                <!-- Button -->
+
+                                <!-- End Button -->
+
+                                <!-- Button -->
+
+                                <!-- End Button -->
                             </div>
+                            <!-- End Title -->
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         <div class="u-bg-light-blue-50">
             <div class="container u-space-3">
                 <div class="w-md-80 w-lg-50 text-center mx-auto mb-9">
