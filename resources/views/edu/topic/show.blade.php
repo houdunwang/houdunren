@@ -19,9 +19,9 @@
                                        class="btn btn-xs">
                                         <i class="fa fa-heart-o" aria-hidden="true"></i> 收藏</a>
                                 @endif
-                                    @can('update',$topic)
-                                        <a href="{{route('edu.topic.edit',$topic)}}" class="badge badge-primary">编辑</a>
-                                    @endcan
+                                @can('update',$topic)
+                                    <a href="{{route('edu.topic.edit',$topic)}}" class="badge badge-primary">编辑</a>
+                                @endcan
                                 @can('delete',$topic)
                                     <a href="javascript:;" onclick="confirm('确定删除吗')?$(this).next().submit():null;"
                                        class="badge badge-secondary">删除</a>
@@ -38,19 +38,21 @@
                                 {{$topic['title']}}
                             </h2>
                             <p class="text-muted mb-1 text-muted small">
-                                <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">
-                                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                                    <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">{{$topic->user->name}}</a>
-                                </a>
-                                <i class="fa fa-clock-o ml-2" aria-hidden="true"></i> {{$topic->created_at->diffForHumans()}}
-
-                                <a href="{{route('edu.topic_list',['id'=>$topic->category->id])}}" class="text-secondary">
+                                <i class="fa fa-clock-o ml-2"
+                                   aria-hidden="true"></i> {{$topic->created_at->diffForHumans()}}
+                                <span title="评论数">
+                                    <i class="fa fa-comment-o ml-2" aria-hidden="true"></i> {{$topic->comment->count()}} 条评论
+                                </span>
+                                <a href="{{route('edu.topic_list',['id'=>$topic->category->id])}}"
+                                   class="text-secondary">
                                     <i class="fa fa-folder-o ml-2" aria-hidden="true"></i>
                                     {{$topic->category->title}}
                                 </a>
-                                <i class="fa fa-comment-o ml-2" aria-hidden="true"></i> {{$topic->comment->count()}}
-                                <span class="ml-2">
-                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{$topic->zan_num}}
+                                <span class="ml-2" title="点赞数">
+                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{$topic->zan_num}} 人点赞
+                                </span>
+                                <span class="ml-2" title="收藏数">
+                                    <i class="fa fa-heart-o" aria-hidden="true"></i> {{$topic->favorite_num}} 人收藏
                                 </span>
                             </p>
                         </div>
@@ -78,11 +80,11 @@
                                 @endauth
                                 <div>
                                     <div class="avatar">
-                                    @foreach($topic->zan as $zan)
+                                        @foreach($topic->zan as $zan)
                                             <a href="{{route('member.user.show',$zan->user)}}">
-                                            <img src="{{$zan->user->avatar}}" class="u-avatar rounded-circle">
+                                                <img src="{{$zan->user->avatar}}" class="u-avatar rounded-circle">
                                             </a>
-                                    @endforeach
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
