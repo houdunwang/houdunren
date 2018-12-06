@@ -16,6 +16,7 @@ use App\Models\EduTag;
 use App\Repositories\EduLessonRepository;
 use App\Repositories\EduTagRepository;
 use App\Repositories\EduVideoRepository;
+use App\Servers\EduLessonServer;
 use Illuminate\Http\Request;
 
 /**
@@ -148,10 +149,12 @@ class LessonController extends Controller
     /**
      * 显示课程
      * @param EduLesson $lesson
+     * @param EduLessonServer $eduLessonServer
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(EduLesson $lesson)
+    public function show(EduLesson $lesson, EduLessonServer $eduLessonServer)
     {
+        $eduLessonServer->log($lesson);
         return view('edu.lesson.show', compact('lesson'));
     }
 

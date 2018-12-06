@@ -62,6 +62,11 @@ class EduLesson extends Model
         return $this->tags->pluck('id')->search($tag['id']) !== false;
     }
 
+    public function userLesson()
+    {
+        return $this->belongsToMany(User::class, 'edu_user_lessons', 'lesson_id', 'user_id');
+    }
+
     public function video()
     {
         return $this->hasMany(EduVideo::class, 'lesson_id');
@@ -74,7 +79,7 @@ class EduLesson extends Model
 
     public function title()
     {
-        return ' [课程] '.$this->title;
+        return ' [课程] ' . $this->title;
     }
 
     public function link(string $param = '')

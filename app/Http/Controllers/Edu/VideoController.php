@@ -13,7 +13,14 @@ namespace App\Http\Controllers\Edu;
 use App\Http\Controllers\Controller;
 use App\Models\EduVideo;
 use App\Repositories\EduVideoRepository;
+use App\Servers\EduLessonServer;
+use App\Servers\EduVideoServer;
 
+/**
+ * 课程视频
+ * Class VideoController
+ * @package App\Http\Controllers\Edu
+ */
 class VideoController extends Controller
 {
     public function __construct()
@@ -25,11 +32,15 @@ class VideoController extends Controller
      * 视频播放
      * @param EduVideo $video
      * @param EduVideoRepository $repository
+     * @param EduVideoServer $eduVideoServer
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(EduVideo $video, EduVideoRepository $repository)
-    {
-        $video->userVideo()->sync([auth()->id()]);
+    public function show(
+        EduVideo $video,
+        EduVideoServer $eduVideoServer
+    ) {
+        $eduVideoServer->log($video);
+
         return view('edu.video.show', compact('video', 'repository'));
     }
 }
