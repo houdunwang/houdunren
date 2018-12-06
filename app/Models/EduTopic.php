@@ -1,15 +1,13 @@
 <?php
-
 namespace App\Models;
 
 use App\Foundations\CommonRelation;
-use App\Observers\EduTopicObserver;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
- * 话题
+ * 贴子
  * Class EduTopic
  * @package App\Models
  */
@@ -24,6 +22,9 @@ class EduTopic extends Model
     protected static $recordEvents = ['created', 'updated'];
 
     protected static $logAttributes = ['title', 'created_at', 'updated_at'];
+
+    //全站动态
+    public $activity = ['action' => '发表了'];
 
     public function category()
     {
@@ -42,7 +43,7 @@ class EduTopic extends Model
 
     public function title()
     {
-        return '[话题] '.$this['title'];
+        return '[' . $this->category->title . '] ' . $this['title'];
     }
 
     //配置algolia可搜索属性

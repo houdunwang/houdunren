@@ -11,6 +11,8 @@
 
 namespace App\Transformers;
 
+use Illuminate\Support\Collection;
+
 interface TransformInterface
 {
     public function transform($collection);

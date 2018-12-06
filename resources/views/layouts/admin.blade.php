@@ -67,6 +67,7 @@ Follow: https://space.bilibili.com/277339333
         gtag('js', new Date());
         gtag('config', 'UA-37564768-1');
     </script>
+    <link rel="stylesheet" href="{{mix('/css/app.css')}}">
     @stack('css')
 </head>
 <!-- end::Head -->

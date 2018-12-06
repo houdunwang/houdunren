@@ -6,6 +6,7 @@ use App\Foundations\CommonRelation;
 use App\Observers\ZanObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -15,12 +16,16 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class Zan extends Model
 {
-    use CommonRelation, LogsActivity;
-
-    protected static $logAttributes = ['created_at', 'updated_at'];
+    use CommonRelation, LogsActivity, SoftDeletes;
+    //软删除
+    protected $dates = ['deleted_at'];
+    protected static $logAttributes = ['created_at', 'updated_at','restore'];
     protected static $recordEvents = ['created'];
     protected static $logName = 'zan';
-    protected $fillable = ['user_id', 'url','title'];
+    protected $fillable = ['user_id', 'url', 'title'];
+
+    //全站动态
+    public $activity = ['action' => '点赞了'];
 
     public function __construct(array $attributes = [])
     {

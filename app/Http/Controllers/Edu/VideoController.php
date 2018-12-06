@@ -21,9 +21,15 @@ class VideoController extends Controller
         $this->middleware('auth');
     }
 
-    public function show(EduVideo $video,EduVideoRepository $repository)
+    /**
+     * 视频播放
+     * @param EduVideo $video
+     * @param EduVideoRepository $repository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(EduVideo $video, EduVideoRepository $repository)
     {
         $video->userVideo()->sync([auth()->id()]);
-        return view('edu.video.show', compact('video','repository'));
+        return view('edu.video.show', compact('video', 'repository'));
     }
 }

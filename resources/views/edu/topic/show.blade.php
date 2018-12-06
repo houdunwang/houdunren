@@ -42,15 +42,16 @@
                                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                                     <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">{{$topic->user->name}}</a>
                                 </a>
-                                <i class="fa fa-clock-o ml-2" aria-hidden="true"></i>
-                                {{$topic->created_at->diffForHumans()}}
+                                <i class="fa fa-clock-o ml-2" aria-hidden="true"></i> {{$topic->created_at->diffForHumans()}}
 
                                 <a href="{{route('edu.topic_list',['id'=>$topic->category->id])}}" class="text-secondary">
                                     <i class="fa fa-folder-o ml-2" aria-hidden="true"></i>
                                     {{$topic->category->title}}
                                 </a>
-
                                 <i class="fa fa-comment-o ml-2" aria-hidden="true"></i> {{$topic->comment->count()}}
+                                <span class="ml-2">
+                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{$topic->zan_num}}
+                                </span>
                             </p>
                         </div>
                     </div>

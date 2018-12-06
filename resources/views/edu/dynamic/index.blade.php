@@ -2,7 +2,6 @@
 @section('menu')
     @include('edu.layouts._menu')
 @endsection
-@inject('activityTransformer','App\Transformers\ActivityTransformer')
 @section('content')
     @include('edu.layouts._live')
     @if(config_get('edu.notice'))

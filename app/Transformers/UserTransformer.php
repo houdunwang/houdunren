@@ -21,7 +21,11 @@ use Illuminate\Support\Collection;
  */
 class UserTransformer implements TransformInterface
 {
-    public function transform(Collection $collection)
+    /**
+     * @param Collection $collection
+     * @return Collection
+     */
+    public function transform($collection)
     {
         return $collection->map(function ($user) {
             return $this->format($user);

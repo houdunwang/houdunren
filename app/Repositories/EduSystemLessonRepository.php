@@ -21,12 +21,12 @@ class EduSystemLessonRepository extends Repository implements RepositoryInterfac
     protected $name = EduSystemLesson::class;
 
     /**
-     * 获取课程
+     * 获取系统课程
      * @param EduSystemLesson $lesson
      * @return mixed
      */
     public function lesson(EduSystemLesson $lesson)
     {
-        return EduLesson::whereIn('id', explode(',',$lesson['lessons']))->get();
+        return EduLesson::whereIn('id', explode(',', $lesson['lessons']))->latest('id')->get();
     }
 }

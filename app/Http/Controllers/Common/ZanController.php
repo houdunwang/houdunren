@@ -11,9 +11,14 @@
 namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
+use App\Servers\ZanServer;
 use Illuminate\Http\Request;
 
-//点赞
+/**
+ * 点赞处理
+ * Class ZanController
+ * @package App\Http\Controllers\Common
+ */
 class ZanController extends Controller
 {
     public function __construct()
@@ -24,26 +29,13 @@ class ZanController extends Controller
     /**
      * 点赞
      * @param Request $request
+     * @param ZanServer $server
      * @return array|\Illuminate\Http\RedirectResponse
+     * @throws \App\Exceptions\InvalidParamException
      */
-    public function make(Request $request)
+    public function make(Request $request, ZanServer $server)
     {
-        $model = model_instance()->zan();
-        $zan = $model->where('user_id', auth()->id())->first();
-
-        if ($zan) {
-            $zan->delete();
-        } else {
-            $model->create([
-                'user_id' => auth()->id(),
-                'title' => model_instance()->title(),
-                'url' => model_instance()->link(),
-            ]);
-        }
-
-        if ($request->ajax()) {
-            return ['count' => model_instance()->zan_num, 'code' => 0];
-        }
-        return back();
+        $zanNum = $server->make();
+        return $request->ajax() ? ['count' => $zanNum, 'code' => 0] : back();
     }
 }

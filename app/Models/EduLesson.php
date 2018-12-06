@@ -45,11 +45,11 @@ class EduLesson extends Model
     //配置algolia可搜索属性
     public function toSearchableArray()
     {
-        return [
-            'title' => $this['title'],
-            'description' => $this['description'],
-        ];
+        return ['title' => $this['title'], 'description' => $this['description'],];
     }
+
+    //全站动态
+    public $activity = ['title' => '课程', 'action' => '发布了'];
 
     public function tags()
     {

@@ -164,7 +164,7 @@ class LessonController extends Controller
     public function edit(EduLesson $lesson)
     {
         $this->authorize('update', $lesson);
-        $field = ['lesson' => $lesson->toArray(), 'videos' => $lesson->video->toArray()];
+        $field = ['lesson' => $lesson->toArray(), 'videos' => $lesson->video()->latest('rank')->get()->toArray()];
         return view('edu.lesson.edit', compact('field', 'lesson'));
     }
 

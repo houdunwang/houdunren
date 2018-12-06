@@ -16,6 +16,11 @@ use App\Notifications\CodeNotification;
 use App\User;
 use Houdunwang\Aliyun\Aliyun;
 
+/**
+ * 验证码发送服务
+ * Class CodeServer
+ * @package App\Servers
+ */
 class CodeServer
 {
     public function __construct()

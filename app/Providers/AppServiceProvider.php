@@ -62,7 +62,6 @@ class AppServiceProvider extends ServiceProvider
         Favorite::observe(FavoriteObserver::class);
         ModuleConfig::observe(ModuleConfigObserver::class);
         User::observe(UserObserver::class);
-        Zan::observe(ZanObserver::class);
     }
 
     protected function loadConfig()

@@ -24,11 +24,14 @@ class Comment extends Model
 {
     use LogsActivity, CommonRelation;
 
-    protected $fillable = ['content', 'user_id', 'url','description'];
+    protected $fillable = ['content', 'user_id', 'url', 'description'];
 
     protected static $logFillable = true;
     protected static $recordEvents = ['created', 'updated'];
     protected static $logName = 'comment';
+
+    //动态
+    public $activity = [ 'action' => '发表了'];
 
     //获得拥有此评论的模型
     public function belongModel()
@@ -43,6 +46,6 @@ class Comment extends Model
 
     public function title()
     {
-        return '[评论] '.$this['description'];
+        return '[评论] ' . $this['description'];
     }
 }

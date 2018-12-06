@@ -40,7 +40,8 @@ class EduVideoRepository extends Repository implements RepositoryInterface
     {
         //软删除后添加视频
         $lesson->video()->delete();
-        foreach ($videos as $video) {
+        foreach ($videos as $rank => $video) {
+            $video['rank'] = $rank;
             $lesson->video()->withTrashed()->updateOrCreate(['id' => $video['id'] ?? 0], $video)->restore();
         }
         //清除软件删除数据

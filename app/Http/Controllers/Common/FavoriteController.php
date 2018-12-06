@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
 use App\Models\Favorite;
+use App\Servers\FavoriteServer;
 
 //收藏
 class FavoriteController extends Controller
@@ -33,18 +34,20 @@ class FavoriteController extends Controller
 
     /**
      * 记录或取消收藏
+     * @param FavoriteServer $server
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function make()
+    public function make(FavoriteServer $server)
     {
-        $model = model_instance()->favorite();
-        $favorite = $model->where('user_id', auth()->id())->first();
-        if ($favorite) {
-            $favorite->delete();
-            return back()->with('success', '取消成功');
-        } else {
-            $model->create(['user_id' => auth()->id()]);
-            return back()->with('success', '收藏成功');
-        }
+        $server->make();
+        return back();
+// $favorite = $model->where('user_id', auth()->id())->first();
+//        if ($favorite) {
+//            $favorite->delete();
+//            return back()->with('success', '取消成功');
+//        } else {
+//            $model->create(['user_id' => auth()->id()]);
+//            return back()->with('success', '收藏成功');
+//        }
     }
 }

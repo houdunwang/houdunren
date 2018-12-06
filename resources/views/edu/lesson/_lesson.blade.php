@@ -1,6 +1,6 @@
 {{--后台发表课程--}}
 @inject('TagRepository','App\Repositories\EduTagRepository')
-<div class="row" id="app">
+<div class="row" id="app" v-cloak="">
   <div class="col-12">
       <div class="card">
           <div class="card-body border-bottom-0">
@@ -303,7 +303,9 @@
                       this.field.videos.splice(k,0,{title: '', path: '', duration: 0, question: []})
                     },
                     delVideo(index) {
+                        hdjs.confirm('确定删除吗？',function(){
                         this.field.videos.splice(index, 1)
+                        })
                     },
                     uploadLessonThumb() {
                         hdjs.image((images) => {

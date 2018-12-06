@@ -14,6 +14,11 @@ namespace App\Servers;
 use App\Models\Order;
 use Houdunwang\Alipay\AliPay;
 
+/**
+ * 支付处理服务
+ * Class PayServer
+ * @package App\Servers
+ */
 class PayServer
 {
     //定单记录
