@@ -11,6 +11,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * 会员关注
@@ -19,5 +20,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Follower extends Model
 {
+    use LogsActivity;
+
+    protected static $logName = 'follower';
+
+    protected static $recordEvents = ['created', 'updated'];
+
     protected $fillable = ['user_id', 'follower_id'];
+
 }

@@ -74,7 +74,7 @@ class EduLesson extends Model
 
     public function title()
     {
-        return $this->title;
+        return ' [课程] '.$this->title;
     }
 
     public function link(string $param = '')

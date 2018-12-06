@@ -11,6 +11,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Requests\UserRequest;
+use App\Repositories\ActivityRepository;
 use App\Repositories\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
@@ -40,11 +41,13 @@ class UserController extends Controller
     /**
      * 个人主页
      * @param User $user
+     * @param ActivityRepository $activityRepository
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(User $user)
+    public function show(User $user, ActivityRepository $activityRepository)
     {
-        return view('member.space.dynamic', compact('user'));
+        $activities = $activityRepository->userPaginateList($user, 10);
+        return view('member.space.dynamic', compact('user', 'activities'));
     }
 
     //关注列表
@@ -96,7 +99,17 @@ class UserController extends Controller
     public function follow(User $user)
     {
         $this->authorize('follow', $user);
-        auth()->user()->follower()->toggle([$user->id]);
+
+        $followers = auth()->user()->follower()->toggle([$user->id]);
+        if (in_array($user->id, $followers['attached'])) {
+            activity()
+                ->performedOn($user)
+                ->causedBy(auth()->user())
+                ->log('follower');
+        } else {
+            //取关
+            $user->activity()->where('causer_id', auth()->id())->delete();
+        }
         return back();
     }
 }

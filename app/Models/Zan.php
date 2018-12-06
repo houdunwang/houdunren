@@ -19,7 +19,7 @@ class Zan extends Model
     use CommonRelation, LogsActivity, SoftDeletes;
     //软删除
     protected $dates = ['deleted_at'];
-    protected static $logAttributes = ['created_at', 'updated_at','restore'];
+    protected static $logAttributes = ['created_at', 'updated_at'];
     protected static $recordEvents = ['created'];
     protected static $logName = 'zan';
     protected $fillable = ['user_id', 'url', 'title'];

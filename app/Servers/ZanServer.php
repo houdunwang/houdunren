@@ -8,7 +8,6 @@
 
 namespace App\Servers;
 
-use App\Models\Zan;
 use App\Notifications\ZanNotification;
 use App\Exceptions\InvalidParamException;
 

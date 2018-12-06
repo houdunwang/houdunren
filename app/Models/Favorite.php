@@ -10,18 +10,28 @@
 
 namespace App\Models;
 
-use App\Observers\FavoriteObserver;
+use App\Foundations\CommonRelation;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
- * 收藏
+ * 收藏内容
  * Class Favorite
  * @package App\Models
  */
 class Favorite extends Model
 {
-    protected $fillable = ['user_id', 'favorite_num'];
+    use CommonRelation, LogsActivity, SoftDeletes;
+    //软删除
+    protected $dates = ['deleted_at'];
+    protected static $logAttributes = ['created_at', 'updated_at'];
+    protected static $recordEvents = ['created'];
+    //全站动态
+    public $activity = ['action' => '收藏了'];
+
+    protected $fillable = ['user_id', 'favorite_num','title','url'];
 
     public function belongModel()
     {
@@ -31,5 +41,16 @@ class Favorite extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    //赞标题
+    public function title()
+    {
+        return $this['title'];
+    }
+
+    //链接
+    public function link()
+    {
+        return $this['url'];
     }
 }

@@ -8,12 +8,13 @@ use App\Models\Zan;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use Notifiable, HasRoles, CommonRelation;
-
+    public $activity = ['action' => '关注了'];
     protected $fillable = [
         'id',
         'name',
@@ -119,5 +120,15 @@ class User extends Authenticatable
     public function active($row = 6)
     {
         return User::limit($row)->latest('updated_at')->get();
+    }
+
+    public function link()
+    {
+        return route('member.user.show', $this);
+    }
+
+    public function title()
+    {
+        return $this['name'];
     }
 }
