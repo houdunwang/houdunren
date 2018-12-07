@@ -32,6 +32,6 @@ class HomeController extends Controller
         $activities = $activityRepository->paginate(12);
         $lessons = $eduLessonRepository->getCommend(12);
 
-        return view('edu.home', compact('activities', 'lessons'));
+        return view('edu.home.index', compact('activities', 'lessons'));
     }
 }

@@ -3,7 +3,6 @@
     @include('edu.layouts._menu')
 @endsection
 @section('content')
-    @include('edu.layouts._live')
     @if(config_get('edu.notice'))
         <div class="container">
             <div class="card mt-5">

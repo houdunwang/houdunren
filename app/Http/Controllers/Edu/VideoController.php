@@ -37,10 +37,12 @@ class VideoController extends Controller
      */
     public function show(
         EduVideo $video,
-        EduVideoServer $eduVideoServer
+        EduVideoServer $eduVideoServer,
+        EduVideoRepository $repository
     ) {
         $eduVideoServer->log($video);
-
-        return view('edu.video.show', compact('video', 'repository'));
+        $nextVideo = $repository->nextOrPrev($video, 'next');
+        $prevVideo = $repository->nextOrPrev($video, 'prev');
+        return view('edu.video.show', compact('video', 'nextVideo', 'prevVideo'));
     }
 }

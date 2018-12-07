@@ -11,5 +11,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EduSystemLesson extends Model
 {
-    protected $fillable=['title','lessons','description'];
+    protected $fillable = ['title', 'lessons', 'description', 'thumb'];
 }

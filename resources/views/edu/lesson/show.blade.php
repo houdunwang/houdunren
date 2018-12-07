@@ -94,19 +94,6 @@
                     </div>
                 </div>
             </div>
-            {{--<div class="col-sm-3">--}}
-                {{--<div class="card">--}}
-                    {{--<div class="card-header">--}}
-                        {{--10盾友正在学习本课程--}}
-                    {{--</div>--}}
-                    {{--<div class="card-body row">--}}
-                        {{--<div class="col-sm-3 mb-2">--}}
-                            {{--<img class="u-sm-avatar rounded-circle" src="{{auth()->user()->icon}}">--}}
-                        {{--</div>--}}
-
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
         </div>
     </div>
 @endsection

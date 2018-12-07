@@ -33,7 +33,7 @@ abstract class Repository
         return $this->model->get($columns);
     }
 
-    public function paginate($row = 10, array $columns = ['*'], $latest = null)
+    public function paginate($row = 10, array $columns = ['*'], $latest = 'updated_at')
     {
         return $this->model->latest($latest)->paginate($row, $columns);
     }

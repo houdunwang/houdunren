@@ -20,6 +20,12 @@ class SystemLessonController extends Controller
         return view('edu.system_lesson.index', compact('lessons'));
     }
 
+    public function lists(EduSystemLessonRepository $repository)
+    {
+        $lessons = $repository->paginate(1);
+        return view('edu.system_lesson.lists', compact('lessons'));
+    }
+
     public function create()
     {
         return view('edu.system_lesson.create');
@@ -48,9 +54,9 @@ class SystemLessonController extends Controller
         return redirect()->route('edu.system.index')->with('success', '修改成功');
     }
 
-    public function destroy(EduSystemLesson $system,EduSystemLessonRepository $repository)
+    public function destroy(EduSystemLesson $system, EduSystemLessonRepository $repository)
     {
         $repository->delete($system);
-        return back()->with('success','删除成功');
+        return back()->with('success', '删除成功');
     }
 }

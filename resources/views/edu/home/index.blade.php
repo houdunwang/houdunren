@@ -3,9 +3,7 @@
     @include('edu.layouts._menu')
 @endsection
 @section('content')
-    @include('edu.layouts._live')
     <main id="content" role="main" class="edu-home">
-        @if(!config_get('edu.is_live'))
         <div class="d-lg-flex align-items-lg-center position-relative min-height-100vh--lg u-bg-img-hero u-space-3 u-space-5-top--md u-space-0--lg"
              style="background-image: url(/images/img32.jpg);min-height: 70vh">
             <div class="container mt-lg-5">
@@ -23,7 +21,6 @@
             </div>
         </div>
         @include('edu.layouts._system_lesson_ad')
-        @endif
         <!-- How It Works Section -->
         <div class="container u-space-3">
             <!-- Title -->

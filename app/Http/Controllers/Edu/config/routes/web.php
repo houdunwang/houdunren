@@ -7,6 +7,7 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::get('lesson/{tag}/tag', 'LessonController@tag')->name('lesson.tag');
     //系统课程
     Route::resource('lesson/system', 'SystemLessonController');
+    Route::get('lesson_system', 'SystemLessonController@lists')->name('lesson.system.lists');
     //课程管理
     Route::resource('lesson', 'LessonController');
     Route::resource('tag', 'TagController');
@@ -17,8 +18,8 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     //会员中心贴子管理
     Route::get('topic_manage', 'TopicController@manage')->name('topic.manage');
     //个人主页
-    Route::get('space/topic/{user}','SpaceController@topic')->name('space.topic');
-    Route::get('space/lesson/{user}','SpaceController@lesson')->name('space.lesson');
+    Route::get('space/topic/{user}', 'SpaceController@topic')->name('space.topic');
+    Route::get('space/lesson/{user}', 'SpaceController@lesson')->name('space.lesson');
     //视频
     Route::resource('video', 'VideoController');
     Route::get('search', 'SearchController@lists')->name('search');
@@ -48,4 +49,5 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::get('subscribe', 'SubscribeController@show')->name('subscribe.show');
     //直播
     Route::get('live', 'LiveController@make')->name('live');
+    Route::get('live/show' , 'LiveController@show')->name('live.show');
 });

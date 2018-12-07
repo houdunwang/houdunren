@@ -22,11 +22,15 @@ class EduSystemLessonRepository extends Repository implements RepositoryInterfac
 
     /**
      * 获取系统课程
-     * @param EduSystemLesson $lesson
+     * @param EduSystemLesson $systemLesson
      * @return mixed
      */
-    public function lesson(EduSystemLesson $lesson)
+    public function lesson(EduSystemLesson $systemLesson)
     {
-        return EduLesson::whereIn('id', explode(',', $lesson['lessons']))->latest('id')->get();
+        $lessons = [];
+        foreach ((array)explode(',', $systemLesson['lessons']) as $lessonId) {
+            $lessons[] = EduLesson::where('id', $lessonId)->first();
+        }
+        return $lessons;
     }
 }

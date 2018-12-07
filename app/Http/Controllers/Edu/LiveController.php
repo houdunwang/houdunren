@@ -22,4 +22,9 @@ class LiveController extends Controller
         config_save($config, 'edu');
         return back()->with('success', $config['is_live'] ? '开启' : '关闭');
     }
+
+    public function show()
+    {
+        return view('edu.live.show');
+    }
 }
