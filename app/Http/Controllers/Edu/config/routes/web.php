@@ -23,6 +23,8 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     //视频
     Route::resource('video', 'VideoController');
     Route::get('search', 'SearchController@lists')->name('search');
+    //课程视频考试
+    Route::resource('question/video','VideoQuestionController',['as'=>'video.question']);
     //动态管理
     Route::resource('dynamic', 'DynamicController');
     //模块配置

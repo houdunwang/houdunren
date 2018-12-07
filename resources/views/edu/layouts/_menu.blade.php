@@ -1,7 +1,7 @@
 @can('Edu-live')
     <li class="nav-item">
         <a class="nav-link u-header__nav-link" href="{{route('edu.live')}}">
-            开关直播
+            直播
         </a>
     </li>
 @endcan
@@ -13,7 +13,7 @@
 @if(config_get('edu.is_live'))
     <li class="nav-item">
         <a class="nav-link u-header__nav-link text-primary" href="{{route('edu.live.show')}}">
-            直播间
+            直播
         </a>
     </li>
 @endif
@@ -37,35 +37,40 @@
         话题
     </a>
 </li>
-<!-- Blog -->
-<li class="nav-item hs-has-sub-menu u-header__nav-item"
-    data-event="hover"
-    data-animation-in="slideInUp"
-    data-animation-out="fadeOut">
-    <a id="blogMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"
-       aria-haspopup="true"
-       aria-expanded="false"
-       aria-labelledby="blogSubMenu">
+<li class="nav-item">
+    <a class="nav-link u-header__nav-link" href="{{route('edu.document.index')}}">
         文档
-        <span class="fa fa-angle-down u-header__nav-link-icon"></span>
     </a>
-    <ul id="blogSubMenu"
-        class="list-group list-inline hs-sub-menu u-header__sub-menu mb-0 small rounded-0"
-        style="min-width: 220px;"
-        aria-labelledby="blogMegaMenu">
-        @foreach(\App\Models\EduDocument::orderBy( 'flag' , 'desc' )->orderBy( 'updated_at' , 'desc' )->limit(5)->get() as $document)
-            <a
-                    class="list-group-item list-group-item-action rounded-0"
-                    href="{{route('edu.document.show',$document)}}">
-                {{$document->title}}
-            </a>
-        @endforeach
-        <a class="list-group-item list-group-item-action rounded-0"
-           href="{{route('edu.document.index')}}">
-            更多手册
-        </a>
-    </ul>
 </li>
+<!-- Blog -->
+{{--<li class="nav-item hs-has-sub-menu u-header__nav-item"--}}
+    {{--data-event="hover"--}}
+    {{--data-animation-in="slideInUp"--}}
+    {{--data-animation-out="fadeOut">--}}
+    {{--<a id="blogMegaMenu" class="nav-link u-header__nav-link" href="javascript:;"--}}
+       {{--aria-haspopup="true"--}}
+       {{--aria-expanded="false"--}}
+       {{--aria-labelledby="blogSubMenu">--}}
+        {{--文档--}}
+        {{--<span class="fa fa-angle-down u-header__nav-link-icon"></span>--}}
+    {{--</a>--}}
+    {{--<ul id="blogSubMenu"--}}
+        {{--class="list-group list-inline hs-sub-menu u-header__sub-menu mb-0 small rounded-0"--}}
+        {{--style="min-width: 220px;"--}}
+        {{--aria-labelledby="blogMegaMenu">--}}
+        {{--@foreach(\App\Models\EduDocument::orderBy( 'flag' , 'desc' )->orderBy( 'updated_at' , 'desc' )->limit(5)->get() as $document)--}}
+            {{--<a--}}
+                    {{--class="list-group-item list-group-item-action rounded-0"--}}
+                    {{--href="{{route('edu.document.show',$document)}}">--}}
+                {{--{{$document->title}}--}}
+            {{--</a>--}}
+        {{--@endforeach--}}
+        {{--<a class="list-group-item list-group-item-action rounded-0"--}}
+           {{--href="{{route('edu.document.index')}}">--}}
+            {{--更多手册--}}
+        {{--</a>--}}
+    {{--</ul>--}}
+{{--</li>--}}
 <li class="nav-item hs-has-sub-menu u-header__nav-item"
     data-event="hover"
     data-animation-in="slideInUp"

@@ -17,50 +17,81 @@ class EduVideo extends Model
 {
     use SoftDeletes, CommonRelation;
     /**
-     * 需要转换成日期的属性
-     *
+     * 软删除
      * @var array
      */
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['id', 'title', 'path', 'question', 'lesson_id','external_address','rank'];
+    /**
+     * 填充字段
+     * @var array
+     */
+    protected $fillable = ['id', 'title', 'path', 'question', 'lesson_id', 'external_address', 'rank'];
 
+    /**
+     * 字段转换
+     * @var array
+     */
     protected $casts = [
-        'question'=>'array'
+        'question' => 'array',
     ];
 
+    /**
+     * 课程关联
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function lesson()
     {
         return $this->belongsTo(EduLesson::class);
     }
 
+    /**
+     * 用户关联
+     * @return mixed
+     */
     public function user()
     {
         return $this->lesson->user();
     }
 
-    //用户视频关联
+    /**
+     * 用户视频关联
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function userVideo()
     {
         return $this->belongsToMany(User::class, 'edu_user_videos', 'video_id', 'user_id')->withTimestamps();
     }
 
-    //用户观看视频检测
-    public function isLive(int $user_id): bool
+    /**
+     * 视频学习检测
+     * @param User $user
+     * @return bool
+     */
+    public function learned(User $user): bool
     {
         static $cache = [];
-        $name = 'log' . $this['id'] . $user_id['id'];
+        $name = 'log' . $this['id'] . $user['id'];
         if (!isset($cache[$name])) {
-            $cache[$name] = $this->userVideo()->where('user_id', $user_id)->pluck('video_id')->toArray();
+            $cache[$name] = $this->userVideo()->where('user_id', $user['id'])->pluck('video_id')->toArray();
         }
-        return in_array($this['id'], $cache[$name]);
+        return (bool)in_array($this['id'], $cache[$name]);
     }
 
+    /**
+     * 视频标题
+     * @return string|string[]|null
+     */
     public function title()
     {
         return preg_replace('/^\d+\.?\s*/', '', $this->title);
     }
 
+    /**
+     * 视频链接
+     * @param $param
+     * @return string
+     */
     public function link($param)
     {
         return route('edu.video.show', $this) . $param;

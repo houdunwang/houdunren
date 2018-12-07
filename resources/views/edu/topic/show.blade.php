@@ -38,6 +38,10 @@
                                 {{$topic['title']}}
                             </h2>
                             <p class="text-muted mb-1 text-muted small">
+                                <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">
+                                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                    <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">{{$topic->user->name}}</a>
+                                </a>
                                 <i class="fa fa-clock-o ml-2"
                                    aria-hidden="true"></i> {{$topic->created_at->diffForHumans()}}
                                 <span title="评论数">
@@ -48,12 +52,12 @@
                                     <i class="fa fa-folder-o ml-2" aria-hidden="true"></i>
                                     {{$topic->category->title}}
                                 </a>
-                                <span class="ml-2" title="点赞数">
-                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{$topic->zan_num}} 人点赞
-                                </span>
-                                <span class="ml-2" title="收藏数">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i> {{$topic->favorite_num}} 人收藏
-                                </span>
+                                {{--<span class="ml-2" title="点赞数">--}}
+                                    {{--<i class="fa fa-thumbs-up" aria-hidden="true"></i> {{$topic->zan_num}} 人点赞--}}
+                                {{--</span>--}}
+                                {{--<span class="ml-2" title="收藏数">--}}
+                                    {{--<i class="fa fa-heart-o" aria-hidden="true"></i> {{$topic->favorite_num}} 人收藏--}}
+                                {{--</span>--}}
                             </p>
                         </div>
                     </div>

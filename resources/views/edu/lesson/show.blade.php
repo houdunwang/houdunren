@@ -2,8 +2,13 @@
 @section('menu')
     @include('edu.layouts._menu')
 @endsection
+@inject('eduVideoServer','App\Servers\EduVideoServer')
 @section('content')
     <div class="container mt-5 {{route_class()}}">
+        <div class="alert alert-light border" role="alert">
+            <span><i class="fa fa-info-circle" aria-hidden="true"></i></span>
+            <small>有考试题的课程，必须考试通过后才认为学习完成。</small>
+        </div>
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
@@ -46,28 +51,38 @@
                     <div class="card-body lesson-list">
                         <div class="pr-md-4">
                             @foreach($lesson->video as $index=>$video)
-                                @if(!auth()->check() || !$video->isLive(auth()->id()))
+                                @if(!$eduVideoServer->learned($video,auth()->user()))
                                     <div class="media mb-3 {{active_class($index+1!= $lesson->video->count(),'u-indicator-ver-dashed')}}">
                                         <div class="d-flex mt-1 mr-2">
-                                    <span class="u-icon u-icon-brd-secondary u-icon--xs rounded-circle"
-                                          style="background: #fff;">
-                                    </span>
+                                            <span class="u-icon u-icon-brd-secondary u-icon--xs rounded-circle"
+                                                  style="background: #fff;"></span>
                                         </div>
                                         <div class="media-body">
-                                            <h3 class="h5 text-light">
-                                                <a href="{{route('edu.video.show',$video)}}"
-                                                   class="text-secondary video-title">
-                                                    {{$video->title}}
-                                                </a>
-                                            </h3>
+                                            <div class="row">
+                                                <h3 class="h5 text-light col-8">
+                                                    <a href="{{route('edu.video.show',$video)}}"
+                                                       class="text-secondary video-title">
+                                                        {{$video->title}}
+                                                    </a>
+                                                </h3>
+                                                <div class="col-4 pr-0">
+                                                    <div class="btn-group float-right" role="group">
+                                                        @if($video['question'])
+                                                            <a href="{{route('edu.video.question.video.show',$video)}}" class="btn btn-outline-primary btn-xs">参加考试</a>
+                                                        @endif
+                                                        <a href="{{route('edu.video.show',$video)}}"
+                                                           class="btn btn-outline-success btn-xs">继续学习</a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 @else
                                     <div class="isLive media mb-3 {{active_class($index+1!= $lesson->video->count(),'u-indicator-ver-dashed')}}">
                                         <div class="d-flex mt-1 mr-2">
-                                    <span class="u-icon u-icon-primary u-icon--xs rounded-circle">
-                                      <span class="fa fa-check u-icon__inner"></span>
-                                    </span>
+                                            <span class="u-icon u-icon-primary u-icon--xs rounded-circle">
+                                              <span class="fa fa-check u-icon__inner"></span>
+                                            </span>
                                         </div>
                                         <div class="media-body">
                                             <div class="row">
@@ -78,11 +93,12 @@
                                                     </a>
                                                 </h3>
                                                 <div class="col-4 pr-0">
-                                                    <div class="btn-group float-right" role="group"
-                                                         aria-label="Basic example">
-                                                        <a href="" class="btn btn-primary btn-xs">参加考试</a>
+                                                    <div class="btn-group float-right" role="group">
+                                                        @if($video['question'])
+                                                            <a href="{{route('edu.video.question.video.show',$video)}}" class="btn btn-outline-primary btn-xs">参加考试</a>
+                                                        @endif
                                                         <a href="{{route('edu.video.show',$video)}}"
-                                                           class="btn btn-light btn-xs">继续学习</a>
+                                                           class="btn btn-outline-success btn-xs">继续学习</a>
                                                     </div>
                                                 </div>
                                             </div>

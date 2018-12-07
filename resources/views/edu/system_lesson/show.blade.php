@@ -12,8 +12,10 @@
         <div class="row">
             <div class="col-sm-9">
                 <div class="card bg-light mb-5 shadow-sm">
-                @foreach($lessons as $lesson)
-                        <div class="card-header">{{$lesson['title']}}</div>
+                @foreach($lessons as $k=>$lesson)
+                        <div class="card-header">
+                           <span class="text-muted mr-3">第{{$k+1}}阶段</span> {{$lesson['title']}}
+                        </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-10">

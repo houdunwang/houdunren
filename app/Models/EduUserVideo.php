@@ -12,11 +12,19 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EduUserVideo extends Model
 {
+    /**
+     * 会员关联
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * 视频关联
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function video()
     {
         return $this->belongsTo(EduVideo::class, 'video_id');
