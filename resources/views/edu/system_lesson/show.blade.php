@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <h3 class="float-right">
-                                        <span class="badge badge-light text-muted">80%</span>
+                                        {{--<span class="badge badge-light text-muted">80%</span>--}}
                                     </h3>
                                 </div>
                             </div>

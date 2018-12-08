@@ -23,5 +23,10 @@ return [
             'route' => route('admin.user.index'),
             'permission' => 'Admin-manage',
         ],
+        [
+            'name' => '积分配置',
+            'route' => route('admin.credit.create'),
+            'permission' => 'Admin-credit',
+        ],
     ],
 ];

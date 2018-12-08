@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.7.13 on 2018-11-16 19:08:04.
+ * Generated for Laravel 5.7.13 on 2018-12-08 22:37:23.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -14394,6 +14394,42 @@ namespace Barryvdh\Debugbar {
  
 }
 
+namespace hisorange\BrowserDetect { 
+
+    /**
+     * Class Facade
+     *
+     * @example Browser::isMobile();
+     * @package hisorange\BrowserDetect
+     */ 
+    class Facade {
+        
+        /**
+         * 
+         *
+         * @inheritdoc 
+         * @static 
+         */ 
+        public static function detect()
+        {
+            return \hisorange\BrowserDetect\Parser::detect();
+        }
+        
+        /**
+         * 
+         *
+         * @inheritdoc 
+         * @static 
+         */ 
+        public static function parse($agent)
+        {
+            return \hisorange\BrowserDetect\Parser::parse($agent);
+        }
+         
+    }
+ 
+}
+
 namespace Houdunwang\Uploader { 
 
     /**
@@ -16915,6 +16951,8 @@ namespace  {
     class View extends \Illuminate\Support\Facades\View {}
 
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
+
+    class Browser extends \hisorange\BrowserDetect\Facade {}
 
     class Uploader extends \Houdunwang\Uploader\Facade {}
 

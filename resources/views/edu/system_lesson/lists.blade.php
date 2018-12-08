@@ -18,7 +18,7 @@
                         <article class="card border-0 shadow-sm transition-3d-hover">
                             <div class="card-body p-6">
                               <span class="btn btn-lg btn-icon btn-soft-primary rounded-circle mb-9">
-                                <span class="far fa-file-archive font-size-5 btn-icon__inner btn-icon__inner-bottom-minus"></span>
+                                <i class="{{$lesson['thumb']}} font-size-5 btn-icon__inner btn-icon__inner-bottom-minus" style="top:52%;"></i>
                               </span>
                                 <small class="d-block text-primary text-uppercase mb-1">{{$lesson['description']}}</small>
                                 <h3 class="h5 mb-3">

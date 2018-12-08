@@ -14,29 +14,29 @@
            placeholder="输入课程编号，用逗号连接">
 </div>
 <div class="form-group">
-    <label for="">缩略图</label>
-        <div class="input-group mb-1">
-            <input class="form-control" name="thumb" readonly="" value="{{$lesson['thumb']}}">
-            <div class="input-group-append">
-                <button onclick="uploadLessonThumb(this)" class="btn btn-secondary" type="button">单图上传</button>
-            </div>
+    <label for="">图标</label>
+    <div class="input-group mb-1">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="font">
+                <i class="fa fa-check" aria-hidden="true"></i>
+            </span>
         </div>
-        <div style="display: inline-block;position: relative;">
-            <img src="{{$lesson['thumb']??asset('images/nopic.jpg')}}" class="img-responsive img-thumbnail" width="150">
-            <em class="close" style="position: absolute;top: 3px;right: 8px;" title="删除这张图片"
-                onclick="removeImg(this)">×</em>
+        <input class="form-control" name="thumb" readonly="" value="{{$lesson['thumb']??''}}">
+        <div class="input-group-append">
+            <button onclick="uploadFont(this)" class="btn btn-secondary" type="button">单图上传</button>
         </div>
+    </div>
+
 </div>
 @push('js')
     <script>
-        function uploadLessonThumb() {
+        function uploadFont() {
             require(['hdjs'], function (hdjs) {
-                hdjs.image(function (images) {
-                    //上传成功的图片，数组类型
-                    $("[name='thumb']").val(images[0]);
-                    $(".img-thumbnail").attr('src', images[0]);
+                hdjs.font(function (icon) {
+                    $("[name='thumb']").val(icon);
+                    $("#font i").attr('class',icon);
                 })
-            });
+            })
         }
     </script>
 @endpush

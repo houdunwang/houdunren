@@ -14,4 +14,6 @@ Route::group(['namespace' => 'Admin', 'middleware' => [], 'as' => 'admin.', 'pre
     Route::get('permission/{role}', 'PermissionController@edit')->name('permission.role');
     Route::post('permission/{role}', 'PermissionController@update')->name('permission.role');
     Route::resource('module', 'ModuleController');
+    //积分设置
+    Route::resource('credit', 'CreditController');
 });
