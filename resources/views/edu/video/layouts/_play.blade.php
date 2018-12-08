@@ -65,14 +65,14 @@
             </div>
             <div class="col-auto">
                 @include('edu.layouts._download_lesson',['lesson'=>$video->lesson])
-                @if($nextVideo)
-                    <a href="{{route('edu.video.show',$v)}}"
+                @if($prevVideo)
+                    <a href="{{route('edu.video.show',$prevVideo)}}"
                        class="btn u-btn-primary--air transition-3d-hover mb-1 btn-xs">
                         上一课
                     </a>
                 @endif
-                @if($prevVideo)
-                    <a href="{{route('edu.video.show',$v)}}"
+                @if($nextVideo)
+                    <a href="{{route('edu.video.show',$nextVideo)}}"
                        class="btn u-btn-primary--air transition-3d-hover mb-1 btn-xs">
                         下一课
                     </a>
