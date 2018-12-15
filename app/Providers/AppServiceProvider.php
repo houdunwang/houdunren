@@ -9,9 +9,7 @@ use App\Models\EduLesson;
 use App\Models\EduTopic;
 use App\Models\EduVideo;
 use App\Models\Favorite;
-use App\Models\Module;
 use App\Models\ModuleConfig;
-use App\Models\Zan;
 use App\Observers\CommentObserver;
 use App\Observers\ConfigObserver;
 use App\Observers\EduLessonObserver;
@@ -30,11 +28,6 @@ use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
     public function boot()
     {
         $this->init();
@@ -79,6 +72,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
     }
 }

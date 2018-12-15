@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Member;
 
+use App\Repositories\ActivityRepository;
 use App\User;
 use App\Http\Controllers\Controller;
 
 class SpaceController extends Controller
 {
-    public function dynamic(User $user)
+    public function dynamic(User $user,ActivityRepository $activityRepository)
     {
-        return view('member.space.dynamic', compact('user'));
+        $activities = $activityRepository->userPaginateList($user, 10);
+        return view('member.space.dynamic', compact('user','activities'));
     }
 
     public function fans(User $user)

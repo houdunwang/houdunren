@@ -7,12 +7,14 @@ use App\Models\EduChapter;
 use App\Models\EduDocument;
 use App\Models\EduLesson;
 use App\Models\EduSection;
+use App\Models\EduSign;
 use App\Models\EduTopic;
 use App\Policies\CommentPolicy;
 use App\Policies\EduChapterPolicy;
 use App\Policies\EduDocumentPolicy;
 use App\Policies\EduLessonPolicy;
 use App\Policies\EduSectionPolicy;
+use App\Policies\EduSignPolicy;
 use App\Policies\EduTopicPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
@@ -38,6 +40,7 @@ class AuthServiceProvider extends ServiceProvider
         EduDocument::class => EduDocumentPolicy::class,
         EduChapter::class => EduChapterPolicy::class,
         EduSection::class => EduSectionPolicy::class,
+        EduSign::class => EduSignPolicy::class,
     ];
 
     /**

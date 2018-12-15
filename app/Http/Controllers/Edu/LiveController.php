@@ -19,7 +19,7 @@ class LiveController extends Controller
     {
         $config = config_get('edu');
         $config['is_live'] = !isset($config['is_live']) || !$config['is_live'] ? true : false;
-        config_save($config, 'edu');
+        config_save($config);
         return back()->with('success', $config['is_live'] ? '开启' : '关闭');
     }
 

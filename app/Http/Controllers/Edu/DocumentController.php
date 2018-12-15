@@ -13,7 +13,6 @@ use App\Http\Controllers\Controller;
 /**
  * 手册文档管理
  * Class DocumentController
- *
  * @package App\Http\Controllers\Edu
  */
 class DocumentController extends Controller
@@ -28,7 +27,6 @@ class DocumentController extends Controller
     {
         //获取所有文档数据
         $documents = EduDocument::orderBy('flag', 'desc')->orderBy('updated_at', 'desc')->paginate(10);
-
         return view('edu.document.index', compact('documents'));
     }
 
@@ -56,8 +54,7 @@ class DocumentController extends Controller
 
     public function create(EduDocument $document)
     {
-
-        return view('edu.document.document_create');
+        return view('edu.document.document_create',compact('document'));
     }
 
     public function store(EduDocumentRequest $request)

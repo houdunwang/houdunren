@@ -389,6 +389,27 @@
   text-overflow: ellipsis;
 }
 
+.edu-sign-create ul.moods {
+  padding: 5px;
+  background: #fafafa;
+  height: auto;
+  overflow: hidden;
+}
+
+.edu-sign-create ul.moods li {
+  list-style: none;
+  float: left;
+  border: solid 1px #fff;
+  margin-right: 10px;
+  padding: 5px 0;
+}
+
+.edu-sign-create ul.moods li.active {
+  background: #f7faff;
+  border: 2px dashed #d1d8d8;
+  padding: 5px;
+}
+
 .dropdown-menu-card {
   border: 1px solid #e3ebf6 !important;
 }

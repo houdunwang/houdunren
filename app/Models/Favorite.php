@@ -26,9 +26,9 @@ class Favorite extends Model
     use CommonRelation, LogsActivity, SoftDeletes;
     //软删除
     protected $dates = ['deleted_at'];
-    protected static $logAttributes = ['created_at', 'updated_at'];
-    protected static $recordEvents = ['created'];
+
     //全站动态
+    protected static $logName = 'favorite';
     public $activity = ['action' => '收藏了'];
 
     protected $fillable = ['user_id', 'favorite_num','title','url'];

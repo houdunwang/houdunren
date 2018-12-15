@@ -24,7 +24,7 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::resource('video', 'VideoController');
     Route::get('search', 'SearchController@lists')->name('search');
     //课程视频考试
-    Route::resource('question/video','VideoQuestionController',['as'=>'video.question']);
+    Route::resource('question/video', 'VideoQuestionController', ['as' => 'video.question']);
     //动态管理
     Route::resource('dynamic', 'DynamicController');
     //模块配置
@@ -44,12 +44,14 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::resource('document', 'DocumentController');
     Route::get('document/flag/{document}', 'DocumentController@flag')->name('document.flag');
     Route::resource('chapter', 'ChapterController');
-    Route::resource('section', 'EduSectionController');
+    Route::resource('section', 'SectionController');
     Route::get('document_manage', 'DocumentController@manage')->name('document.manage');
     //定单管理
     Route::resource('order', 'OrderController');
     Route::get('subscribe', 'SubscribeController@show')->name('subscribe.show');
     //直播
     Route::get('live', 'LiveController@make')->name('live');
-    Route::get('live/show' , 'LiveController@show')->name('live.show');
+    Route::get('live/show', 'LiveController@show')->name('live.show');
+    //签到
+    Route::resource('sign', 'SignController');
 });

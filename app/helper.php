@@ -1,12 +1,11 @@
 <?php
 /**
  * 保存模块配置项
- * @param array $config
- * @param string $module
+ * @return mixed
  */
-function config_save(array $config, string $module)
+function config_save(array $data)
 {
-    app(\App\Repositories\ConfigRepository::class)->save($config, $module);
+    return app()->call('\App\Repositories\ConfigRepository@save', ['data'=>$data]);
 }
 
 /**

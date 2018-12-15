@@ -25,7 +25,10 @@ class ActivityRepository extends Repository implements RepositoryInterface
 
     public function paginate($row = 10, array $columns = ['*'], $latest = null)
     {
-        return $this->model->with(['causer', 'subject'])->latest($latest)->paginate($row, $columns);
+        return $this->model
+            ->with(['causer', 'subject'])
+            ->where('description', '<>', 'deleted')
+            ->latest($latest)->paginate($row, $columns);
     }
 
     /**

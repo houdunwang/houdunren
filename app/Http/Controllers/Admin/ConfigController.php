@@ -36,7 +36,7 @@ class ConfigController extends Controller
     {
         $config = config_get('admin', []);
         $config[$name] = $request->except(['_token', '_method']);
-        $configRepository->save($config, 'admin');
+        config_save($config);
         return back()->with('success', '保存成功');
     }
 }

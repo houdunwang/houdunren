@@ -14,7 +14,9 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use Notifiable, HasRoles, CommonRelation;
+
     public $activity = ['action' => '关注了'];
+
     protected $fillable = [
         'id',
         'name',

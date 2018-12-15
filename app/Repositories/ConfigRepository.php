@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 use App\Exceptions\InvalidParamException;
 use App\Models\Config;
+use Illuminate\Http\Request;
 
 /**
  * 网站配置
@@ -23,19 +24,17 @@ class ConfigRepository extends Repository implements RepositoryInterface
     /**
      * 添加模块配置项
      * @param array $data
-     * @param string $module
+     * @param ModuleRepository $moduleRepository
      * @return bool
      * @throws InvalidParamException
      */
-    public function save(array $data, string $module): bool
+    public function save(array $data, ModuleRepository $moduleRepository): bool
     {
-        if (!app(ModuleRepository::class)->has($module)) {
-            throw new InvalidParamException('module does not exists');
-        }
+        $module = strtolower($moduleRepository->getNameFromUrl());
         \Cache::forget('config');
         return Config::updateOrCreate(
             ['module' => $module],
-            ['module' => $module, 'data' => $data,]
+            ['module' => $module, 'data' => array_merge($this->get($module)??[],$data)]
         )->save();
     }
 

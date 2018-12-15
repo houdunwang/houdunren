@@ -11,7 +11,7 @@
                     <div class="form-group">
                         <label>网站标志</label>
                         <div class="input-group mb-1">
-                            <input class="form-control" name="logo" readonly=""
+                            <input class="form-control" name="logo"
                                    value="{{config_get('edu.logo')}}">
                             <div class="input-group-append">
                                 <button onclick="upImagePc(this)" class="btn btn-secondary" type="button">单图上传</button>

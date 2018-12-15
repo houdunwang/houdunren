@@ -19,8 +19,6 @@ class EduTopic extends Model
 
     protected static $logName = 'edu_topic';
 
-    protected static $recordEvents = ['created', 'updated'];
-
     protected static $logAttributes = ['title', 'created_at', 'updated_at'];
 
     //全站动态

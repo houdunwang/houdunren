@@ -33,7 +33,7 @@ abstract class Repository
         return $this->model->get($columns);
     }
 
-    public function paginate($row = 10, array $columns = ['*'], $latest = 'updated_at')
+    public function paginate($row = 10, array $columns = ['*'], $latest = null)
     {
         return $this->model->latest($latest)->paginate($row, $columns);
     }
@@ -63,15 +63,4 @@ abstract class Repository
         return $this->model->where($attributes)->first($columns);
     }
 
-//    public function where(array $attributes)
-//    {
-//        $this->model->where(array_filter($attributes));
-//        return $this;
-//    }
-//
-//    public function orWhere(array $attributes)
-//    {
-//        $this->model->orWhere(array_filter($attributes));
-//        return $this;
-//    }
 }

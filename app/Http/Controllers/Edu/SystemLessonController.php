@@ -11,7 +11,7 @@ class SystemLessonController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin:Edu-system-lesson', ['except' => ['show']]);
+        $this->middleware('admin:Edu-system-lesson', ['except' => ['show','lists']]);
     }
 
     public function index(EduSystemLessonRepository $repository)
