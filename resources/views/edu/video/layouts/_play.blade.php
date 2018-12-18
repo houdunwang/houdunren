@@ -25,7 +25,7 @@
                         @foreach($video->lesson->video as $v)
                             @if($video->id == $v['id'])
                                 <a href="{{route('edu.video.show',$v)}}"
-                                   class="text-primary list-group-item  px-0">
+                                   class="text-primary list-group-item px-0">
                                     {{$v->title}}
                                     <i class="fa fa-check" aria-hidden="true"></i>
                                 </a>
@@ -81,6 +81,12 @@
                    class="btn u-btn-primary--air transition-3d-hover mb-1 btn-xs">
                     课程目录
                 </a>
+                @if ($video['question'])
+                    <a href="{{route('edu.video.question.video.show',$video)}}"
+                       class="btn u-btn-primary--air transition-3d-hover mb-1 btn-xs">
+                        参加考试
+                    </a>
+                @endif
             </div>
         </div>
     </div>

@@ -38,6 +38,7 @@ class EduLesson extends Model
         'status',
         'download_address',
         'user_id',
+        'order_learn'
     ];
 
     protected $casts = [];

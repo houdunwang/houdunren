@@ -7,11 +7,12 @@
         <div class="{{route_class()}}">
             <div class="row mb-3">
                 <div class="col-12">
-                    @can('view',$video->lesson)
-                        @include('edu.video.layouts._play')
-                        @else
-                        @include('edu.video.layouts._cant_play')
-                    @endcan
+                    @include('edu.video.layouts._play')
+                    {{--@can('view',$video->lesson)--}}
+                        {{--@include('edu.video.layouts._play')--}}
+                        {{--@else--}}
+                        {{--@include('edu.video.layouts._cant_play')--}}
+                    {{--@endcan--}}
                 </div>
             </div>
             {{--评论--}}

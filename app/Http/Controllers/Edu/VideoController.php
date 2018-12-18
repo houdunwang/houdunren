@@ -40,12 +40,16 @@ class VideoController extends Controller
         EduVideoServer $eduVideoServer,
         EduVideoRepository $repository
     ) {
-        //不存在考题时记录，有考题的需要考试通过才记录
-        if (!$video['question']) {
-            $eduVideoServer->log($video);
-        }
         $nextVideo = $repository->nextOrPrev($video, 'next');
         $prevVideo = $repository->nextOrPrev($video, 'prev');
-        return view('edu.video.show', compact('video', 'nextVideo', 'prevVideo'));
+        if ($video->lesson['order_learn'] && $prevVideo && !$eduVideoServer->learned($prevVideo, auth()->user())) {
+            return view('edu.video.prev_video_learn_notice', compact('prevVideo'));
+        }
+        if (auth()->user()->can('view', $video->lesson)) {
+            //不存在考题时记录，有考题的需要考试通过才记录
+            $eduVideoServer->log($video);
+            return view('edu.video.show', compact('video', 'nextVideo', 'prevVideo'));
+        }
+        return redirect()->route('edu.shop.index');
     }
 }

@@ -95,6 +95,7 @@ class LessonController extends Controller
                 'price' => 0,
                 'is_commend' => 0,
                 'is_hot' => 0,
+                'order_learn' => 0,
             ],
             'videos' => [],
         ];
@@ -102,7 +103,7 @@ class LessonController extends Controller
     }
 
     /**
-     * 保存
+     * 保存课程
      * @param Request $request
      * @param EduLessonRepository $repository
      * @param EduVideoRepository $eduVideoRepository
@@ -112,14 +113,13 @@ class LessonController extends Controller
     public function store(Request $request, EduLessonRepository $repository, EduVideoRepository $eduVideoRepository)
     {
         $field = \json_decode($request->get('field'), true);
-
         $this->validation($field['lesson']);
         //添加课程
         $lesson = $repository->create($field['lesson']);
         //添加视频
         $eduVideoRepository->createManyVideo($lesson, $field['videos']);
 
-        return redirect(route('edu.lesson.index'))->with('success', '课程添加成功');
+        return back()->with('success', '课程添加成功');
     }
 
     /**
@@ -194,7 +194,7 @@ class LessonController extends Controller
 
         $eduVideoRepository->updateManyVideo($lesson, $field['videos']);
 
-        return redirect()->route('edu.lesson.index')->with('success', '课程编辑成功');
+        return back()->with('success', '课程编辑成功');
     }
 
     /**
@@ -202,6 +202,7 @@ class LessonController extends Controller
      * @param EduLesson $lesson
      * @param EduLessonRepository $repository
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(EduLesson $lesson, EduLessonRepository $repository)
     {

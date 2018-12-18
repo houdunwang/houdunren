@@ -63,20 +63,20 @@ class EduVideo extends Model
         return $this->belongsToMany(User::class, 'edu_user_videos', 'video_id', 'user_id')->withTimestamps();
     }
 
-    /**
-     * 视频学习检测
-     * @param User $user
-     * @return bool
-     */
-    public function learned(User $user): bool
-    {
-        static $cache = [];
-        $name = 'log' . $this['id'] . $user['id'];
-        if (!isset($cache[$name])) {
-            $cache[$name] = $this->userVideo()->where('user_id', $user['id'])->pluck('video_id')->toArray();
-        }
-        return (bool)in_array($this['id'], $cache[$name]);
-    }
+//    /**
+//     * 视频学习检测
+//     * @param User $user
+//     * @return bool
+//     */
+//    public function learned(User $user): bool
+//    {
+//        static $cache = [];
+//        $name = 'log' . $this['id'] . $user['id'];
+//        if (!isset($cache[$name])) {
+//            $cache[$name] = $this->userVideo()->where('user_id', $user['id'])->pluck('video_id')->toArray();
+//        }
+//        return (bool)in_array($this['id'], $cache[$name]);
+//    }
 
     /**
      * 视频标题

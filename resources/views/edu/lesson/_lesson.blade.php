@@ -101,6 +101,21 @@
                   </div>
               </div>
               <div class="form-group row">
+                  <label class="col-sm-2">按顺序学习</label>
+                  <div class="col-sm-10">
+                      <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="order_learn1" v-model="field.lesson.order_learn" class="custom-control-input"
+                                 value="1" checked>
+                          <label class="custom-control-label" for="order_learn1">是</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="order_learn2" v-model="field.lesson.order_learn" class="custom-control-input"
+                                 value="0">
+                          <label class="custom-control-label" for="order_learn2">否</label>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group row">
                   <label class="col-sm-2">特殊属性</label>
                   <div class="col-sm-10">
                       <div class="custom-control custom-checkbox custom-control-inline">
@@ -180,7 +195,7 @@
           <div class="card-body">
               <div class="row">
                   <draggable v-model="field.videos" element="ul"  @start="drag=true" @end="drag=false" class="col-12">
-                      <li class="card" v-for="(video,k) in field.videos" :key="k">
+                      <li class="card mb-2" v-for="(video,k) in field.videos" :key="k">
                           <div class="card-body pb-0">
                               <div class="form-group">
                                   <input type="text" v-model="video.title" class="form-control" placeholder="课程标题"

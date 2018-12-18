@@ -38,7 +38,7 @@ class VideoQuestionController extends Controller
 
     public function update(Request $request, EduVideo $video, EduVideoServer $videoServer)
     {
-        $topics = $request->input('topics');
+        $topics = $request->input('topics',[]);
         $result = $videoServer->question($video, $topics);
         return view('edu.video_question.update',compact('video','result','topics'));
     }

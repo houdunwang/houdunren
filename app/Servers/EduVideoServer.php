@@ -8,8 +8,9 @@
 
 namespace App\Servers;
 
-
+use App\Models\EduUserVideo;
 use App\Models\EduVideo;
+use App\Repositories\EduVideoRepository;
 use App\User;
 
 /**
@@ -21,12 +22,16 @@ class EduVideoServer
 {
     /**
      * 视频学习记录
-     * @param EduVideo $video
-     * @return array
+     * @param EduVideo $video 视频
+     * @param bool $force 强制记录
+     * @return bool
      */
-    public function log(EduVideo $video)
+    public function log(EduVideo $video, $force = false)
     {
-        return $video->userVideo()->withTimestamps()->sync([auth()->id()]);
+        if (!$video['question'] || $force) {
+            return (bool)$video->userVideo()->withTimestamps()->sync([auth()->id()]);
+        }
+        return false;
     }
 
     /**
@@ -73,13 +78,25 @@ class EduVideoServer
                 }
             }
         }
+        //分数
+        $grade = round(count($rights) / count($video['question']) * 100);
+        //错题数
+        $wrong = count($video['question']) - count($rights);
+        if ($wrong == 0) {
+            $this->log($video, true);
+        }
         return [
-            'wrong' => count($video['question']) - count($rights),
+            'wrong' => $wrong,
             'rights' => $rights,
-            'grade' => round(count($rights) / count($video['question']) * 100),
+            'grade' => $grade,
         ];
     }
 
+    /**
+     * 获取正确答案
+     * @param EduVideo $video
+     * @return array
+     */
     protected function getQuestionRightAnswers(EduVideo $video)
     {
         $answers = [];
@@ -92,4 +109,23 @@ class EduVideoServer
         }
         return $answers;
     }
+
+    /**
+     * 检测上一课
+     * @param EduVideo $video
+     * @return bool
+     */
+//    public function prevVideoLearned(EduVideo $video)
+//    {
+//        //上一课
+//        $prevVideo = app(EduVideoRepository::class)->nextOrPrev($video, 'prev');
+//        if ($prevVideo) {
+//            $has = EduUserVideo::whereExists(function ($query) use ($video, $prevVideo) {
+//                $query->from($video->getTable())
+//                    ->whereRaw('edu_user_videos.video_id =? ', [$prevVideo['id']]);
+//            })->first();
+//            return (bool)$has;
+//        }
+//        return true;
+//    }
 }
