@@ -38,7 +38,7 @@ class ZanServer
      */
     protected function create()
     {
-        //软件删除的恢复，避免重复通知
+        //软删除的恢复，避免重复通知
         $zan = model_instance()->zan()->where('user_id', auth()->id())->withTrashed()->first();
         if ($zan) {
             //恢复软件删除
@@ -73,6 +73,6 @@ class ZanServer
     protected function changeModelZanNum($zan, $num)
     {
         $model = $zan->belongModel()->getModel();
-        \DB::table($model->getTable())->update(['zan_num' => (int)$model['zan_num'] + $num]);
+        \DB::table($model->getTable())->update(['zan_num' => max(0, (int)$model['zan_num'] + $num)]);
     }
 }

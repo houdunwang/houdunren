@@ -22,6 +22,8 @@ class Zan extends Model
 
     //全站动态
     protected static $logName = 'zan';
+
+    protected $fillable = ['user_id','title','url'];
     public $activity = ['action' => '点赞了'];
 
     public function __construct(array $attributes = [])
