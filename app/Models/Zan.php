@@ -24,7 +24,7 @@ class Zan extends Model
     protected static $logName = 'zan';
 
     protected $fillable = ['user_id','title','url'];
-    public $activity = ['action' => '点赞了'];
+    public $activity = ['create' => '点赞了','update'=>"点赞了"];
 
     public function __construct(array $attributes = [])
     {

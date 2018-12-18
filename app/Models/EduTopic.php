@@ -22,7 +22,7 @@ class EduTopic extends Model
     protected static $logAttributes = ['title', 'created_at', 'updated_at'];
 
     //全站动态
-    public $activity = ['action' => '发表了'];
+    public $activity = ['create' => '发表了','update'=>'更新了'];
 
     public function category()
     {

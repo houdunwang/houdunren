@@ -31,7 +31,7 @@ class Comment extends Model
     protected static $logName = 'comment';
 
     //动态
-    public $activity = [ 'action' => '发表了'];
+    public $activity = [ 'create' => '发表了'];
 
     //获得拥有此评论的模型
     public function belongModel()

@@ -15,7 +15,8 @@ class EduSign extends Model
 
     //全站动态
     protected static $logName = 'edu_sign';
-    public $activity = ['action' => '完成签到'];
+
+    public $activity = ['create' => '完成签到','update' => '完成签到'];
 
     public function info()
     {

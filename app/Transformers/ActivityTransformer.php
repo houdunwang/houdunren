@@ -38,7 +38,7 @@ class ActivityTransformer implements TransformInterface
     public function item($activity)
     {
         if ($activity->subject) {
-            $action = $activity->description == 'updated' ? '更新了' : $activity->subject->activity['action'];
+            $action = $activity->description == 'updated' ? $activity->subject->activity['update'] : $activity->subject->activity['create'];
             array_set($activity, 'action', $action);
             return $activity;
         }

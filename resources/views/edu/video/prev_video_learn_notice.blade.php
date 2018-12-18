@@ -35,18 +35,13 @@
 
                     </div>
                 </div>
-                <!-- End SVG Phone Mockup -->
             </div>
-            <!-- End Devices v2 -->
-
-
         </div>
-
         <div class="card">
             <div class="card-body">
                 <div class="position-relative">
                     <!-- Title -->
-                    <div class="w-md-80 w-lg-50 text-center mx-md-auto">
+                    <div class="w-md-80 w-lg-80 text-center mx-md-auto">
                         <div class="mb-4">
                             <h2 class="h1 text-primary">怎么办 <span class="font-weight-semi-bold">？</span></h2>
                             <p>

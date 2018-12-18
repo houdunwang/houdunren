@@ -29,7 +29,7 @@ class Favorite extends Model
 
     //全站动态
     protected static $logName = 'favorite';
-    public $activity = ['action' => '收藏了'];
+    public $activity = ['create' => '收藏了'];
 
     protected $fillable = ['user_id', 'favorite_num','title','url'];
 

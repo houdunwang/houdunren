@@ -15,7 +15,7 @@ class User extends Authenticatable
 {
     use Notifiable, HasRoles, CommonRelation;
 
-    public $activity = ['action' => '关注了'];
+    public $activity = ['create' => '关注了'];
 
     protected $fillable = [
         'id',

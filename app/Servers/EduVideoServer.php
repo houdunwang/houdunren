@@ -10,6 +10,7 @@ namespace App\Servers;
 
 use App\Models\EduUserVideo;
 use App\Models\EduVideo;
+use App\Models\EduVideoExamLog;
 use App\Repositories\EduVideoRepository;
 use App\User;
 
@@ -82,9 +83,15 @@ class EduVideoServer
         $grade = round(count($rights) / count($video['question']) * 100);
         //错题数
         $wrong = count($video['question']) - count($rights);
+        //记录学习
         if ($wrong == 0) {
             $this->log($video, true);
         }
+        //记录成绩
+        EduVideoExamLog::updateOrCreate([
+            'user_id' => auth()->id(),
+            'video_id' => $video['id'],
+        ], ['grade' => $grade]);
         return [
             'wrong' => $wrong,
             'rights' => $rights,

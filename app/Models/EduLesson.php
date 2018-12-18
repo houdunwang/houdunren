@@ -50,7 +50,7 @@ class EduLesson extends Model
     }
 
     //全站动态
-    public $activity = ['title' => '课程', 'action' => '发布了'];
+    public $activity = ['title' => '课程', 'create' => '发布了','update'=>'更新了'];
 
     public function tags()
     {
