@@ -62,14 +62,30 @@ code {
 //头部菜单
 .web-header {
   li.nav-item {
-    ul.list-group{
+    ul.list-group {
       padding: 0 !important;
-      a.list-group-item{
-        border:none;
+
+      a.list-group-item {
+        border: none;
         border-radius: 0;
         border-top: solid 1px #ddd !important;
         padding: .7rem 1.2rem;
       }
     }
   }
+}
+
+//编辑器
+.editor-toolbar{
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+.editor-toolbar.fullscreen {
+  z-index: 200 !important;
+}
+.CodeMirror-fullscreen{
+  z-index: 201 !important;
+}
+.editor-preview-side{
+  z-index: 201 !important;
 }

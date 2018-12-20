@@ -92,7 +92,7 @@
     require(['hdjs', 'jquery', 'vue', 'axios', 'moment', 'MarkdownIt'], function (hdjs, $, Vue, axios, moment, MarkdownIt) {
         vm = new Vue({
             el: "#comment",
-            data: {model: '', comments: [], field: {content: '', url: "{{$_SERVER['REQUEST_URI']}}"}},
+            data: {markdownEditor:null,model: '', comments: [], field: {content: '', url: "{{$_SERVER['REQUEST_URI']}}"}},
             mounted() {
                 this.model = "{{str_replace('\\','-',get_class($model))}}";
                 axios.get("/common/comment?model=" + this.model + "&id={{$model['id']}}").then((response) => {
@@ -105,21 +105,27 @@
                 });
 
                 //创建编辑器
-                hdjs.editormd("commentEditor", {
-                    width: '100%',
-                    height: 300,
-                    toolbarIcons: function () {
-                        return [
-                            "link", "hdimage", "watch", "fullscreen"
-                        ]
-                    },
-                    watch: true,
-                    //editor.md库位置
-                    path: "{{asset('org/hdjs')}}/package/editor.md/lib/",
-                    onchange: function () {
-                        vm.$set(vm.field, 'content', this.getValue());
-                    }
-                });
+                hdjs.simplemdeMarkdownEditor('commentEditor',{},function(simplemde){
+                    simplemde.codemirror.on("change", function(){
+                        vm.markdownEditor=simplemde;
+                        vm.$set(vm.field, 'content', simplemde.value());
+                    });
+                })
+                {{--hdjs.editormd("commentEditor", {--}}
+                    {{--width: '100%',--}}
+                    {{--height: 300,--}}
+                    {{--toolbarIcons: function () {--}}
+                        {{--return [--}}
+                            {{--"link", "hdimage", "watch", "fullscreen"--}}
+                        {{--]--}}
+                    {{--},--}}
+                    {{--watch: true,--}}
+                    {{--//editor.md库位置--}}
+                    {{--path: "{{asset('org/hdjs')}}/package/editor.md/lib/",--}}
+                    {{--onchange: function () {--}}
+                        {{--vm.$set(vm.field, 'content', this.getValue());--}}
+                    {{--}--}}
+                {{--});--}}
             },
             updated() {
                 hdjs.scrollTo('body', location.hash, 0, {queue: true});
@@ -157,8 +163,7 @@
                             this.comments.push(comment);
                             //设置评论内容与评论框为空
                             this.field.content = '';
-                            commentEditor.setSelection({line: 0, ch: 0}, {line: 9999, ch: 9999});
-                            commentEditor.replaceSelection("");
+                            vm.markdownEditor.value('');
                             hdjs.swal({
                                 text: '评论发表成功',
                                 buttons: false, timer: 3000, icon: 'success',

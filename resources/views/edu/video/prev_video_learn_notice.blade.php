@@ -13,7 +13,7 @@
           </span>
                     <h2 class="h1 text-white">现在还不能 <span class="font-weight-semi-bold">学习</span>  这个课程</h2>
                     <p class="lead text-white-70 mb-0">
-                        当前课程需要按顺序学习，这是为了保障您的学习成果的好方式，可以让你系统掌握技术，成就目标。
+                        为了保障您的学习结果，当前课程需要按顺序学习，<br> 这样做可以让你系统掌握技术，成就目标。
                     </p>
                 </div>
                 <!-- End Title -->

@@ -47,8 +47,7 @@ class EduVideoRepository extends Repository implements RepositoryInterface
         //清除软件删除数据
         $lesson->video()->onlyTrashed()->forceDelete();
         $lesson['video_num'] = $lesson->video()->count();
-        $lesson->save();
-        return true;
+        return $lesson->save();
     }
 
     /**

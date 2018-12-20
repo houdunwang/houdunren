@@ -27,7 +27,7 @@
                         </div>
                         @endif
                         <div id="editorMd">
-                            <textarea style="display:none;" name="content">{{$topic['content']}}</textarea>
+                            <textarea style="display:none;" name="content" id="content">{{$topic['content']}}</textarea>
                         </div>
                         <span class="badge badge-pill badge-light text-secondary">支持粘贴与拖放上传图片</span>
                     </div>
@@ -42,22 +42,23 @@
 @push('js')
     <script>
         require(['hdjs'], function (hdjs) {
-            hdjs.editormd("editorMd", {
-                width: '100%',
-                height: 300,
-                toolbarIcons: function () {
-                    return [
-                        "bold", "del", "italic", "quote",
-                        "list-ul", "list-ol", "hr",
-                        "link", "hdimage", "code-block",
-                        "watch", "preview", "fullscreen"
-                    ]
-                },
-                //后台上传地址，默认为 hdjs配置项window.hdjs.uploader
-                server: '',
-                //editor.md库位置
-                path: "{{asset('org/hdjs')}}/package/editor.md/lib/"
-            });
+            hdjs.simplemdeMarkdownEditor('content')
+            {{--hdjs.editormd("editorMd", {--}}
+                {{--width: '100%',--}}
+                {{--height: 300,--}}
+                {{--toolbarIcons: function () {--}}
+                    {{--return [--}}
+                        {{--"bold", "del", "italic", "quote",--}}
+                        {{--"list-ul", "list-ol", "hr",--}}
+                        {{--"link", "hdimage", "code-block",--}}
+                        {{--"watch", "preview", "fullscreen"--}}
+                    {{--]--}}
+                {{--},--}}
+                {{--//后台上传地址，默认为 hdjs配置项window.hdjs.uploader--}}
+                {{--server: '',--}}
+                {{--//editor.md库位置--}}
+                {{--path: "{{asset('org/hdjs')}}/package/editor.md/lib/"--}}
+            {{--});--}}
         });
     </script>
 @endpush

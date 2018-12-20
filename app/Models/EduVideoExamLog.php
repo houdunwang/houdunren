@@ -36,6 +36,6 @@ class EduVideoExamLog extends Model
 
     public function title()
     {
-        return $this['video']['title'] . '的考试，得到了' . $this['grade'] . '分';
+        return preg_replace('/\s*\d+/','',$this['video']['title']) . '的考试，得到了' . $this['grade'] . '分';
     }
 }

@@ -18,7 +18,7 @@
 @if(config_get('edu.is_live'))
     <li class="nav-item">
         <a class="nav-link u-header__nav-link text-primary" href="{{route('edu.live.show')}}">
-            直播
+            直播间
         </a>
     </li>
 @endif
