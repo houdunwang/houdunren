@@ -1,5 +1,6 @@
 <ul class="list-unstyled mb-0" style="border-bottom: 1px solid #e7eaf3;">
     @inject('activityTransform','\App\Transformers\ActivityTransformer')
+    {{--动态列表--}}
     @foreach($activityTransform->transform($activities->items()) as $activity)
         <li class="mt-0 edu-dynamic-list">
             <div class="u-info-v1 p-3 border-bottom-0 rounded-0">

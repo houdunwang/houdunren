@@ -327,10 +327,7 @@ Follow: https://space.bilibili.com/277339333
             <!-- end:: Header -->                <!-- begin:: Content -->
             <div class="k-content	k-grid__item k-grid__item--fluid k-grid k-grid--hor" id="k_content">
                 <!-- begin:: Content Head -->
-            @yield('content')
-            <!-- end:: Content Head --> <!-- begin:: Content Body -->
-
-                <!-- end:: Content Body -->
+                @yield('content')
             </div>
             <!-- end:: Content -->                <!-- begin:: Footer -->
             <div class="k-footer k-grid__item k-grid k-grid--desktop k-grid--ver-desktop">

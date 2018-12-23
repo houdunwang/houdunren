@@ -15,6 +15,7 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     //贴子
     Route::resource('topic', 'TopicController');
     Route::get('topics_{category}.html', 'TopicController@lists')->name('topic_list');
+    Route::get('topic_recommend/{topic}', 'TopicController@recommend')->name('topic.recommend');
     //会员中心贴子管理
     Route::get('topic_manage', 'TopicController@manage')->name('topic.manage');
     //个人主页

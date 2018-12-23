@@ -30,19 +30,24 @@
                 </div>
                 <div class="card-body small">
                     <div class="form-group">
-                        <label>直播地址</label>
+                        <label>直播间地址</label>
+                        <input type="text" class="form-control" name="live_home"
+                               value="{{config_get('edu.live_home','')}}" placeholder="输入B站或斗鱼的址播间地址">
+                    </div>
+                    <div class="form-group">
+                        <label>Flash播放地址</label>
                         <input type="text" class="form-control" name="live_path"
-                               value="{{config_get('edu.live_path','')}}" placeholder="输入B站或斗鱼的直播链接">
+                               value="{{config_get('edu.live_path','')}}" placeholder="输入B站或斗鱼的Flash播放地址">
                     </div>
-                    <div class="form-group">
-                        <label>直播标题</label>
-                        <input type="text" class="form-control" name="live_title"
-                               value="{{config_get('edu.live_title','')}}" placeholder="首页直播窗口标题">
-                    </div>
-                    <div class="form-group">
-                        <label class="mb-1">直播广告</label>
-                        <textarea class="form-control" rows="3" name="notice" placeholder="直播窗口下的广告内容">{{config_get('edu.notice')}}</textarea>
-                    </div>
+                    {{--<div class="form-group">--}}
+                        {{--<label>直播标题</label>--}}
+                        {{--<input type="text" class="form-control" name="live_title"--}}
+                               {{--value="{{config_get('edu.live_title','')}}" placeholder="首页直播窗口标题">--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group">--}}
+                        {{--<label class="mb-1">直播广告</label>--}}
+                        {{--<textarea class="form-control" rows="3" name="notice" placeholder="直播窗口下的广告内容">{{config_get('edu.notice')}}</textarea>--}}
+                    {{--</div>--}}
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-primary btn-sm">保存提交</button>

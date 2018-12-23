@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Foundations\CommonRelation;
@@ -15,14 +16,16 @@ class EduTopic extends Model
 {
     use CommonRelation, LogsActivity, Searchable;
 
-    protected $fillable = ['title', 'content', 'category_id', 'user_id'];
+    protected $fillable = ['title', 'content', 'category_id', 'user_id', 'recommend'];
 
     protected static $logName = 'edu_topic';
 
     protected static $logAttributes = ['title', 'created_at', 'updated_at'];
 
     //全站动态
-    public $activity = ['create' => '发表了','update'=>'更新了'];
+    public $activity = ['create' => '发表了', 'update' => '更新了'];
+
+    protected $casts = ['recommend' => 'bool'];
 
     public function category()
     {

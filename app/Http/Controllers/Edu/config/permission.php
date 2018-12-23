@@ -10,4 +10,5 @@ return [
     ['title' => '开启直播', 'name' => 'live'],
     ['title' => '标签管理', 'name' => 'tag'],
     ['title' => '签到管理', 'name' => 'sign'],
+    ['title' => '设置推荐帖子', 'name' => 'topic-recommend'],
 ];

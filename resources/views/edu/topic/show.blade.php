@@ -19,6 +19,13 @@
                                        class="btn btn-xs">
                                         <i class="fa fa-heart-o" aria-hidden="true"></i> 收藏</a>
                                 @endif
+                                @can('Edu-topic-recommend',$topic)
+                                    @if($topic['recommend'])
+                                        <a href="{{route('edu.topic.recommend',$topic)}}" class="badge badge-success"">取消推荐</a>
+                                    @else
+                                        <a href="{{route('edu.topic.recommend',$topic)}}" class="badge badge-success">推荐</a>
+                                    @endif
+                                @endcan
                                 @can('update',$topic)
                                     <a href="{{route('edu.topic.edit',$topic)}}" class="badge badge-primary">编辑</a>
                                 @endcan
@@ -40,7 +47,8 @@
                             <p class="text-muted mb-1 text-muted small">
                                 <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">
                                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                                    <a href="{{route('member.user.show',$topic->user)}}" class="text-secondary">{{$topic->user->name}}</a>
+                                    <a href="{{route('member.user.show',$topic->user)}}"
+                                       class="text-secondary">{{$topic->user->name}}</a>
                                 </a>
                                 <i class="fa fa-clock-o ml-2"
                                    aria-hidden="true"></i> {{$topic->created_at->diffForHumans()}}
@@ -53,10 +61,10 @@
                                     {{$topic->category->title}}
                                 </a>
                                 {{--<span class="ml-2" title="点赞数">--}}
-                                    {{--<i class="fa fa-thumbs-up" aria-hidden="true"></i> {{$topic->zan_num}} 人点赞--}}
+                                {{--<i class="fa fa-thumbs-up" aria-hidden="true"></i> {{$topic->zan_num}} 人点赞--}}
                                 {{--</span>--}}
                                 {{--<span class="ml-2" title="收藏数">--}}
-                                    {{--<i class="fa fa-heart-o" aria-hidden="true"></i> {{$topic->favorite_num}} 人收藏--}}
+                                {{--<i class="fa fa-heart-o" aria-hidden="true"></i> {{$topic->favorite_num}} 人收藏--}}
                                 {{--</span>--}}
                             </p>
                         </div>

@@ -23,7 +23,9 @@ class TopicController extends Controller
     {
         $this->middleware('auth', ['except' => ['index', 'show', 'lists']]);
     }
-
+    public function test(){
+        
+    }
     //前台贴子列表
     public function index()
     {
@@ -72,7 +74,7 @@ class TopicController extends Controller
     {
         $this->authorize('update', $topic);
         $topic->update($request->all());
-        return redirect(route('edu.topic.show',$topic))->with('success','修改成功');
+        return redirect(route('edu.topic.show', $topic))->with('success', '修改成功');
     }
 
     public function destroy(EduTopic $topic)
@@ -80,5 +82,13 @@ class TopicController extends Controller
         $this->authorize('delete', $topic);
         $topic->delete();
         return redirect()->intended(route('edu.topic.index'))->with('success', '删除成功');
+    }
+
+    public function recommend(EduTopic $topic)
+    {
+        $this->authorize('recommend', $topic);
+        $topic['recommend'] = !$topic['recommend'];
+        $topic->save();
+        return back();
     }
 }

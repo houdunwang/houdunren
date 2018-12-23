@@ -21,7 +21,8 @@ class SearchController extends Controller
     public function lists(Request $request)
     {
         $w = $request->query('w');
-        switch ($request->query('t')) {
+        $type = $request->query('t');
+        switch ($type) {
             case 'topic':
                 $data = EduTopic::search($w)->paginate(10);
                 break;
@@ -32,6 +33,6 @@ class SearchController extends Controller
                 return back()->with('error', '参数错误');
         }
 
-        return view('edu.search.lists', compact('data'));
+        return view('edu.search.lists', compact('data','type'));
     }
 }

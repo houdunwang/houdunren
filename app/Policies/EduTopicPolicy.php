@@ -31,6 +31,11 @@ class EduTopicPolicy
         return $user['id'] == $topic['user_id'] || $user->can('Edu-topic-destroy');
     }
 
+    public function recommend(User $user, EduTopic $topic)
+    {
+        return $topic['user_id'] == $user['id'] || $user->can('Edu-topic-recommend');
+    }
+
     public function delete(User $user, EduTopic $topic)
     {
         return $user['id'] == $topic['user_id'] || $user->can('Edu-topic-destroy');

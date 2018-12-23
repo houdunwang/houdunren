@@ -39,4 +39,5 @@ class ConfigController extends Controller
         config_save($config);
         return back()->with('success', '保存成功');
     }
+         
 }

@@ -30,4 +30,9 @@ class EduTopicRepository extends Repository implements RepositoryInterface
     {
         return EduTopic::with('category')->where('user_id', $user['id'])->latest('id')->paginate($row);
     }
+
+    public function recommendLists($row = 5)
+    {
+        return EduTopic::limit($row)->where('recommend', true)->get();
+    }
 }

@@ -1,10 +1,6 @@
-<?php
-function recursive(int $n)
-{
-    if($n==1){
-        return $n;
-    }
-    return $n * recursive($n - 1);
-}
-
-echo recursive(4);
+/*
+ * @Author: mikey.zhaopeng 
+ * @Date: 2018-12-23 01:53:06 
+ * @Last Modified by:   mikey.zhaopeng 
+ * @Last Modified time: 2018-12-23 01:53:06 
+ */

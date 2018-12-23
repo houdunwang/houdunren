@@ -11,9 +11,7 @@
                 </div>
                 <hr>
                 <ul class="list-unstyled mb-0">
-                    @foreach($data as $field)
-                        @include('edu.search._'.Request::query('t'))
-                    @endforeach
+                    @include('edu.search._'.Request::query('t'))
                 </ul>
                 <div class="mt-5">
                     {{$data->appends(['t'=>$_GET['t'],'w'=>$_GET['w']])->links()}}

@@ -28,5 +28,10 @@ return [
             'route' => route('admin.credit.create'),
             'permission' => 'Admin-credit',
         ],
+        [
+            'name' => '模块管理',
+            'route' => route('admin.module.index'),
+            'permission' => 'Admin-module',
+        ],
     ],
 ];

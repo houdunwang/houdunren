@@ -3,15 +3,15 @@
     @include('edu.layouts._menu')
 @endsection
 @section('content')
-    @if(config_get('edu.notice'))
-        <div class="container">
-            <div class="card mt-5">
-                <div class="card-body text-center text-secondary">
-                    {!! config_get('edu.notice') !!}
-                </div>
-            </div>
-        </div>
-    @endif
+    {{--@if(config_get('edu.notice'))--}}
+        {{--<div class="container">--}}
+            {{--<div class="card mt-5">--}}
+                {{--<div class="card-body text-center text-secondary">--}}
+                    {{--{!! config_get('edu.notice') !!}--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--@endif--}}
     <div class="container {{route_class()}}">
         <div class="row pt-5">
             <div class="col-12">
@@ -29,6 +29,29 @@
                         </div>
                     </div>
                 </div>
+                {{--推荐贴子--}}
+                <ul class="list-unstyled mb-0" style="border-bottom: 1px solid #e7eaf3;">
+                @foreach($topics as $topic)
+                    <li class="mt-0 edu-dynamic-list">
+                        <div class="u-info-v1 p-3 border-bottom-0 rounded-0">
+                            <div class="row justify-content-sm-between align-items-sm-center">
+                                <div class="col-sm-10 mb-2 mb-sm-0 item">
+                                    <a href="{{route('member.user.show',$topic->user)}}" class="float-left">
+                                        <img class="u-sm-avatar rounded-circle mr-3" src="{{$topic->user->avatar}}">
+                                    </a>
+                                    <a href="{{route('edu.topic.show',$topic)}}" class="text-secondary">
+                                            <i class="fa fa-thumbs-up text-success" aria-hidden="true"></i>
+                                            {{$topic->title}}
+                                    </a>
+                                </div>
+                                <span class="col-sm-2 text-text text-sm-right small text-secondary">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i> {{$topic->created_at->diffForHumans()}}
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                @endforeach
+                </ul>
                 @include('layouts.dynamic')
             </div>
             <div class="col-sm-3">
