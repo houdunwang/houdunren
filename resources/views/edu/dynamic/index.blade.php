@@ -12,7 +12,7 @@
             {{--</div>--}}
         {{--</div>--}}
     {{--@endif--}}
-    <div class="container {{route_class()}}">
+    <div class="container">
         <div class="row pt-5">
             <div class="col-12">
                 @include('edu.layouts._search')
@@ -22,7 +22,7 @@
                     <div class="card-header border-bottom-0">
                         <span class="text-muted">动态</span>
                         <div class="position-relative float-right">
-                            <a class="btn btn-primary btn-xs p-1 pl-2 pr-2 text-white"
+                            <a class="btn btn-secondary btn-xs p-1 pl-2 pr-2 text-white"
                                href="{{route('edu.topic.create',['id'=>1])}}">
                                 发表
                             </a>

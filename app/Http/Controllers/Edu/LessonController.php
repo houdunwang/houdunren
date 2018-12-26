@@ -130,7 +130,7 @@ class LessonController extends Controller
      */
     public function lists(Request $request, EduLessonRepository $repository)
     {
-        $lessons = $repository->lists();
+        $lessons = $repository->lists('video');
         return view('edu.lesson.lists', compact('lessons'));
     }
 

@@ -1,7 +1,7 @@
-<div class="card mt-5">
+<div class="card">
 <div class="row">
     <div class="col-12" style="padding: 100px 0">
-        <div class="w-md-80 w-lg-50 text-center mx-auto">
+        <div class="w-md-90 w-lg-90 text-center mx-auto">
             <div class="mb-4">
                 <h1 class="text-primary">
                     <strong class="font-weight-bold">投资学习会得到加倍的回报！</strong>

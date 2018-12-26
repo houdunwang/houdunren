@@ -22,7 +22,7 @@
     @include('layouts._message')
     @stack('css')
 </head>
-<body>
+<body class=" {{route_class()}}">
 @include('layouts._web_header')
 @yield('content')
 @include('layouts._web_footer')

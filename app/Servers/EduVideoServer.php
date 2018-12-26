@@ -8,6 +8,7 @@
 
 namespace App\Servers;
 
+use App\Models\EduLesson;
 use App\Models\EduUserVideo;
 use App\Models\EduVideo;
 use App\Models\EduVideoExamLog;
@@ -30,7 +31,10 @@ class EduVideoServer
     public function log(EduVideo $video, $force = false)
     {
         if (!$video['question'] || $force) {
-            return (bool)$video->userVideo()->withTimestamps()->sync([auth()->id()]);
+            $video->userVideo()->detach([auth()->id()]);
+            $video->userVideo()->attach([auth()->id()],
+                ['lesson_id' => $video['lesson_id']]
+            );
         }
         return false;
     }
@@ -47,6 +51,40 @@ class EduVideoServer
     }
 
     /**
+     * 针对按顺序学习的课程，检测是否跳课学习
+     * @param EduVideo $video
+     * @param User|null $user
+     * @return bool
+     */
+    public function isSkipLesson(EduVideo $video, User $user = null): bool
+    {
+        $user = $user ?? auth()->user();
+        $prevVideo = app(EduVideoRepository::class)->nextOrPrev($video, 'prev');
+//        dd($prevVideo->toArray());
+        if ($video->lesson['order_learn'] && $prevVideo && !$this->learned($prevVideo, $user)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 在按顺序学习时，获取将要学习的课程
+     *
+     * @param EduLesson $lesson
+     * @param User $user
+     * @return EduVideo
+     */
+    public function getLearnVideo(EduLesson $lesson, User $user): EduVideo
+    {
+        $videos = app(EduVideoRepository::class)->videos($lesson);
+        $learnedVideos = EduUserVideo::where('lesson_id', $lesson['id'])->where('user_id',$user['id'])->pluck('video_id','video_id');
+        return $videos->first(function ($v) use ($learnedVideos) {
+            return !$learnedVideos->has($v['id']);
+        });
+    }
+
+    /**
+     * 学习列表
      * @param EduVideo $video
      * @param User $user
      * @return array

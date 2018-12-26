@@ -58,11 +58,16 @@ class EduVideoRepository extends Repository implements RepositoryInterface
      */
     public function nextOrPrev(EduVideo $video, $type = 'prev')
     {
-        $where = [
-            ['lesson_id', $video['lesson_id']],
-            ['id', $type == 'next' ? '>' : '<', $video['id']],
-        ];
-        return EduVideo::where($where)->orderBy('id', $type == 'next' ? 'ASC' : 'DESC')->first();
+        $videos = $this->videos($video->lesson);
+        $videos = $type=='next'?$videos->reverse():$videos;
+        $filters = collect();
+        foreach ($videos as $v){
+            if($v['id']==$video['id']){
+                break;
+            }
+            $filters->push($v);
+        }
+        return $filters->last();
     }
 
     /**

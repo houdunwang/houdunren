@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Edu;
 
+use App\Http\Requests\EduSystemRequest;
 use App\Models\EduSystemLesson;
 use App\Http\Controllers\Controller;
 use App\Repositories\EduSystemLessonRepository;
@@ -31,7 +32,7 @@ class SystemLessonController extends Controller
         return view('edu.system_lesson.create');
     }
 
-    public function store(Request $request, EduSystemLessonRepository $repository)
+    public function store(EduSystemRequest $request, EduSystemLessonRepository $repository)
     {
         $repository->create($request->all());
         return redirect()->route('edu.system.index')->with('success', '保存成功');
@@ -48,7 +49,7 @@ class SystemLessonController extends Controller
         return view('edu.system_lesson.edit', ['lesson' => $system]);
     }
 
-    public function update(Request $request, EduSystemLesson $system, EduSystemLessonRepository $repository)
+    public function update(EduSystemRequest $request, EduSystemLesson $system, EduSystemLessonRepository $repository)
     {
         $repository->update($system, $request->all());
         return redirect()->route('edu.system.index')->with('success', '修改成功');

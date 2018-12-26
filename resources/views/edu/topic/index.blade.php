@@ -6,7 +6,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-12">
-                <div class="card shadow" data-toggle="lists" data-lists-values="[&quot;name&quot;]">
+                <div class="card" data-toggle="lists" data-lists-values="[&quot;name&quot;]">
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
@@ -15,7 +15,7 @@
                                 </h6>
                             </div>
                             <div class="col-auto">
-                                <a href="{{route('edu.topic.create')}}" class="btn btn-xs btn-primary">
+                                <a href="{{route('edu.topic.create')}}" class="btn btn-xs btn-secondary">
                                     发表
                                 </a>
                             </div>

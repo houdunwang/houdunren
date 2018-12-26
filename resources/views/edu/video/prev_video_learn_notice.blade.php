@@ -46,14 +46,14 @@
                             <h2 class="h1 text-primary">怎么办 <span class="font-weight-semi-bold">？</span></h2>
                             <p>
                                 你需要先学习
-                                <a href="{{route('edu.video.show',$prevVideo)}}">{{$prevVideo['title']}}</a>
-                                @if ($prevVideo['question'])
-                                    并进行课程的 <a href="{{route('edu.video.question.video.show',$prevVideo)}}">考试</a>
+                                <a href="{{route('edu.video.show',$video)}}">{{$video['title']}}</a>
+                                @if ($video['question'])
+                                    并进行课程的 <a href="{{route('edu.video.question.video.show',$video)}}">考试</a>
                                 @endif
                                 ，才可以学习本课程。
                             </p>
                         </div>
-                        <a class="btn btn-primary transition-3d-hover" href="{{route('edu.video.show',$prevVideo)}}" style="display: inline-block;">
+                        <a class="btn btn-primary transition-3d-hover" href="{{route('edu.video.show',$video)}}" style="display: inline-block;">
                             马上学习
                         </a>
                     </div>

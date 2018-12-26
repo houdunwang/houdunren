@@ -12,6 +12,8 @@ Route::group(['namespace' => 'Edu', 'prefix' => 'edu', 'as' => 'edu.'], function
     Route::resource('lesson', 'LessonController');
     Route::resource('tag', 'TagController');
     Route::resource('category', 'CategoryController');
+    //更新列表
+    Route::get('update_lists', 'VideoController@updateLists')->name('update_lists');
     //贴子
     Route::resource('topic', 'TopicController');
     Route::get('topics_{category}.html', 'TopicController@lists')->name('topic_list');

@@ -21,7 +21,7 @@
         </div>
     </div>
     <!-- End Search -->
-    <div class="u-header__section">
+    <div class="u-header__section shadow-sm">
         <div id="logoAndNav" class="container">
             <!-- Nav -->
             <nav class="js-mega-menu navbar navbar-expand-md u-header__navbar">

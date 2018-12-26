@@ -1,7 +1,7 @@
 @extends('layouts.web')
 @section('content')
     <main id="content" role="main">
-        <div class="bg-primary">
+        <div class="bg-primary" >
             <div class="container pt-3 pb-3">
                 <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
                     <div class="mb-3 mb-sm-0">

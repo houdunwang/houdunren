@@ -22,7 +22,7 @@
             <div class="col-12 col-lg-3 pl-0" id="category">
                 <div class="video-lists p-0">
                     <ul class="list-group list-group-flush small">
-                        @foreach($video->lesson->video as $v)
+                        @foreach($videos as $v)
                             @if($video->id == $v['id'])
                                 <a href="{{route('edu.video.show',$v)}}"
                                    class="text-primary list-group-item px-0">
@@ -77,10 +77,10 @@
                         下一课
                     </a>
                 @endif
-                <a href="javascript:;" onclick="category()"
-                   class="btn u-btn-primary--air transition-3d-hover mb-1 btn-xs">
-                    课程目录
-                </a>
+                {{--<a href="javascript:;" onclick="category()"--}}
+                   {{--class="btn u-btn-primary--air transition-3d-hover mb-1 btn-xs">--}}
+                    {{--课程目录--}}
+                {{--</a>--}}
                 @if ($video['question'])
                     <a href="{{route('edu.video.question.video.show',$video)}}"
                        class="btn u-btn-primary--air transition-3d-hover mb-1 btn-xs">

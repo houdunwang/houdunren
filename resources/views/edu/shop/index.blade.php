@@ -17,7 +17,7 @@
                             订阅会员免费观看所有视频
                         </h3>
                         <h5 class="text-white" style="font-size: 14px;">
-                            半年付499元 / 全站{{$videoCount = \App\Models\EduVideo::count()}}个视频 = {{round(499/$videoCount,2)}} 元 （超合算）
+                            {{--半年付499元 / 全站{{$videoCount = \App\Models\EduVideo::count()}}个视频 = {{round(499/$videoCount,2)}} 元 （超合算）--}}
                         </h5>
                     </div>
                 </div>

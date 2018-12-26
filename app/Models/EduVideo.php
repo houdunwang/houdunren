@@ -92,7 +92,7 @@ class EduVideo extends Model
      * @param $param
      * @return string
      */
-    public function link($param)
+    public function link($param='')
     {
         return route('edu.video.show', $this) . $param;
     }

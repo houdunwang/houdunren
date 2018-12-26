@@ -39,12 +39,19 @@ class EduLessonRepository extends Repository implements RepositoryInterface
 
     /**
      * 课程列表
+     * @param string|null $type 课程类型
      * @param int $row
      * @return mixed
      */
-    public function lists(int $row = 12)
+    public function lists(string $type = null, int $row = 12)
     {
-        return $this->model->with('user')->latest('id')->where('video_num', '>', 0)->paginate($row);
+        $query = $this->model->with('user')->latest('id')->where('video_num', '>', 0);
+        return $query->where(function ($query) use ($type) {
+            if (!is_null($type)) {
+                $query->where('type', $type);
+            }
+        })->paginate($row);
+//        return $query->paginate($row);
     }
 
     /**

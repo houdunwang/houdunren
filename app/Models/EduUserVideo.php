@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EduUserVideo extends Model
 {
+    protected $fillable = ['lesson_id'];
+
     /**
      * 会员关联
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -4,10 +4,10 @@
     }
 </style>
 <div class="comment" id="comment" v-cloak>
-    <div class="text-center mt-5 mb-5 v-cloak">
-        <span class="u-divider u-divider--xs u-divider--text">评论列表</span>
-    </div>
-    <div class="card col-sm-12">
+    {{--<div class="text-center mt-5 mb-5 v-cloak">--}}
+        {{--<span class="u-divider u-divider--xs u-divider--text">评论列表</span>--}}
+    {{--</div>--}}
+    <div class="card col-sm-12 rounded-0">
         <div class="card-body">
             @auth
                 <div class="">
@@ -24,7 +24,7 @@
             @endauth
         </div>
     </div>
-    <div class="card col-sm-12 mt-5" v-for="(comment,key) in comments" :id="'comment-'+comment.id">
+    <div class="card col-sm-12 mb-3 rounded-0" v-for="(comment,key) in comments" :id="'comment-'+comment.id">
         <div class="card-body pb-0 pl-0">
             <div class="comment mb-0">
                 <div class="row mb-2">

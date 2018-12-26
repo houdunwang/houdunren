@@ -101,6 +101,10 @@
   font-weight: normal !important;
 }
 
+.edu-dynamic-index {
+  background: url("/images/background.png") #f2f2f2 !important;
+}
+
 .chat-news-create,
 .chat-news-edit {
   width: 300px;

@@ -35,21 +35,24 @@ class VideoController extends Controller
      * @param EduVideoServer $eduVideoServer
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(
-        EduVideo $video,
-        EduVideoServer $eduVideoServer,
-        EduVideoRepository $repository
-    ) {
+    public function show(EduVideo $video, EduVideoServer $eduVideoServer, EduVideoRepository $repository)
+    {
+        //跳课学习检测
+        if ($eduVideoServer->isSkipLesson($video) === false) {
+            $video = $eduVideoServer->getLearnVideo($video->lesson, auth()->user());
+            return view('edu.video.prev_video_learn_notice', compact('video'));
+        }
+        //不存在考题时记录，有考题的需要考试通过才记录
+        $eduVideoServer->log($video);
         $nextVideo = $repository->nextOrPrev($video, 'next');
         $prevVideo = $repository->nextOrPrev($video, 'prev');
-        if ($video->lesson['order_learn'] && $prevVideo && !$eduVideoServer->learned($prevVideo, auth()->user())) {
-            return view('edu.video.prev_video_learn_notice', compact('prevVideo'));
-        }
-        if (auth()->user()->can('view', $video->lesson)) {
-            //不存在考题时记录，有考题的需要考试通过才记录
-            $eduVideoServer->log($video);
-            return view('edu.video.show', compact('video', 'nextVideo', 'prevVideo'));
-        }
-        return redirect()->route('edu.shop.index');
+        $videos = $repository->videos($video->lesson);
+        return view('edu.video.show', compact('video', 'videos', 'nextVideo', 'prevVideo'));
+    }
+
+    public function updateLists(EduVideoRepository $repository)
+    {
+        $videos = $repository->paginate(16);
+        return view('edu.video.update_lists', compact('videos'));
     }
 }
