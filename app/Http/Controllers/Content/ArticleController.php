@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContentArticleRequest;
-use App\Models\Article;
 use App\Models\ContentArticle;
 use App\Models\ContentCategory;
 use Illuminate\Http\Request;
 
+/**
+ * 文章管理
+ * Class ArticleController
+ * @package App\Http\Controllers\Content
+ */
 class ArticleController extends Controller
 {
     public function __construct()
@@ -18,7 +22,7 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = ContentArticle::latest()->paginate(module_config('content.list_row'));
+        $articles = ContentArticle::latest()->paginate(config_get('content.list_row'));
         return view('content.article_index', compact('articles'));
     }
 

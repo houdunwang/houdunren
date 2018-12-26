@@ -40,3 +40,35 @@
 - <http://fex.baidu.com/webuploader/>
 
 > 100% 免费使用于任何项目
+
+
+
+# 使用手册
+
+## 前端组件
+
+### nav
+
+**使用效果**
+
+![image-20181226204749663](assets/image-20181226204749663-5828469.png)
+
+**示例代码**
+
+```
+@component('components.nav',['navs'=>[
+	['title'=>'文章列表','url'=>route('content.article.index'),'active'=>true],
+	['title'=>'发表文章','url'=>route('content.select_category')]
+]])
+@endcomponent
+```
+
+**属性说明**
+
+| 属性   | 说明         |
+| ------ | ------------ |
+| title  | 菜单名称     |
+| url    | 菜单链接     |
+| active | 当前高亮菜单 |
+
+

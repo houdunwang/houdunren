@@ -152,10 +152,14 @@ class LessonController extends Controller
      * @param EduLessonServer $eduLessonServer
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(EduLesson $lesson, EduLessonServer $eduLessonServer)
-    {
+    public function show(
+        EduLesson $lesson,
+        EduLessonServer $eduLessonServer,
+        EduVideoRepository $eduVideoRepository
+    ) {
         $eduLessonServer->log($lesson);
-        return view('edu.lesson.show', compact('lesson'));
+        $videos = $eduVideoRepository->videos($lesson);
+        return view('edu.lesson.show', compact('lesson', 'videos'));
     }
 
     /**
@@ -167,7 +171,10 @@ class LessonController extends Controller
     public function edit(EduLesson $lesson)
     {
         $this->authorize('update', $lesson);
-        $field = ['lesson' => $lesson->toArray(), 'videos' => $lesson->video()->orderBy('rank','asc')->get()->toArray()];
+        $field = [
+            'lesson' => $lesson->toArray(),
+            'videos' => $lesson->video()->orderBy('rank', 'asc')->get()->toArray(),
+        ];
         return view('edu.lesson.edit', compact('field', 'lesson'));
     }
 

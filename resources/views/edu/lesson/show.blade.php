@@ -50,7 +50,7 @@
                     </div>
                     <div class="card-body lesson-list">
                         <div class="pr-md-4">
-                            @foreach($lesson->video as $index=>$video)
+                            @foreach($videos as $index=>$video)
                                 @if(!$eduVideoServer->learned($video,auth()->user()))
                                     <div class="media mb-3 {{active_class($index+1!= $lesson->video->count(),'u-indicator-ver-dashed')}}">
                                         <div class="d-flex mt-1 mr-2">

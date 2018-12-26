@@ -64,4 +64,14 @@ class EduVideoRepository extends Repository implements RepositoryInterface
         ];
         return EduVideo::where($where)->orderBy('id', $type == 'next' ? 'ASC' : 'DESC')->first();
     }
+
+    /**
+     * 获取课程视频列表
+     * @param EduLesson $lesson
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function videos(EduLesson $lesson)
+    {
+        return $lesson->video()->orderBy('rank')->orderBy('id')->get();
+    }
 }
