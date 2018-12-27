@@ -75,11 +75,31 @@
 
 系统内置了评论功能，可方便集成到各个模块中使用。
 
-
-
-使用方法
+模型需要引入 CommonRelation 这个 trait
 
 ```
-@include('common.comment',['model'=>$topic])
+class EduTopic extends Model
+{
+    use CommonRelation;
+    ...
+}
+```
+
+后台控制器
+
+```
+public function show(EduVideo $video,CommentRepository $commentRepository)
+{
+   	...
+   	# 获取评论列表，每页显示10条
+	$comments = $commentRepository->lists($video,10);
+	return view('edu.video.show', compact('video','comments'));
+}
+```
+
+前台视图调用
+
+```
+@include('common.comment',['comments'=>$comments,'model'=>$topic])
 ```
 

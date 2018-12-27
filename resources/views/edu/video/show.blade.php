@@ -45,7 +45,7 @@
             </div>
             <div class="col-sm-8">
                 @can('view',$video->lesson)
-                    @include('common.comment',['model'=>$video])
+                    @include('common.comment',['comments'=>$comments,'model'=>$video])
                 @endcan
             </div>
         </div>

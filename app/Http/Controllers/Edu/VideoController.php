@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Edu;
 
 use App\Http\Controllers\Controller;
 use App\Models\EduVideo;
+use App\Repositories\CommentRepository;
 use App\Repositories\EduVideoRepository;
 use App\Servers\EduLessonServer;
 use App\Servers\EduVideoServer;
@@ -35,7 +36,7 @@ class VideoController extends Controller
      * @param EduVideoServer $eduVideoServer
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(EduVideo $video, EduVideoServer $eduVideoServer, EduVideoRepository $repository)
+    public function show(EduVideo $video, EduVideoServer $eduVideoServer, EduVideoRepository $repository,CommentRepository $commentRepository)
     {
         //跳课学习检测
         if ($eduVideoServer->isSkipLesson($video) === false) {
@@ -47,7 +48,8 @@ class VideoController extends Controller
         $nextVideo = $repository->nextOrPrev($video, 'next');
         $prevVideo = $repository->nextOrPrev($video, 'prev');
         $videos = $repository->videos($video->lesson);
-        return view('edu.video.show', compact('video', 'videos', 'nextVideo', 'prevVideo'));
+        $comments = $commentRepository->lists($video);
+        return view('edu.video.show', compact('video', 'videos', 'nextVideo', 'prevVideo','comments'));
     }
 
     public function updateLists(EduVideoRepository $repository)
