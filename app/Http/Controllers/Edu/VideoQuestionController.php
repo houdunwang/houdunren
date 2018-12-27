@@ -27,8 +27,13 @@ class VideoQuestionController extends Controller
     {
     }
 
-    public function show(EduVideo $video)
+    public function show(EduVideo $video,EduVideoServer $eduVideoServer)
     {
+        //跳课学习检测
+        if ($eduVideoServer->isSkipLesson($video) === false) {
+            $video = $eduVideoServer->getLearnVideo($video->lesson, auth()->user());
+            return view('edu.video.prev_video_learn_notice', compact('video'));
+        }
         return view('edu.video_question.show', compact('video'));
     }
 

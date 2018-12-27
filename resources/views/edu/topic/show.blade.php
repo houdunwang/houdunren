@@ -105,7 +105,7 @@
                 </div>
                 {{--评论--}}
                 <div class="mt-5">
-                    @include('common.comment',['model'=>$topic])
+                    @include('common.comment',['comments'=>$comments,'model'=>$topic])
                 </div>
             </div>
             <div class="col-12 col-xl-3">

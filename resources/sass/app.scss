@@ -10,6 +10,10 @@
   border: 1px solid #e3ebf6 !important;
 }
 
+[v-cloak] {
+  display: none;
+}
+
 .card {
   border-radius: .2rem;
 }
@@ -75,16 +79,19 @@ code {
 }
 
 //编辑器
-.editor-toolbar{
+.editor-toolbar {
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
 }
+
 .editor-toolbar.fullscreen {
   z-index: 200 !important;
 }
-.CodeMirror-fullscreen{
+
+.CodeMirror-fullscreen {
   z-index: 201 !important;
 }
-.editor-preview-side{
+
+.editor-preview-side {
   z-index: 201 !important;
 }

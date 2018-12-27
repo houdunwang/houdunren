@@ -13,7 +13,7 @@ namespace App\Http\Controllers\Edu;
 use App\Http\Requests\EduTopicRequest;
 use App\Models\EduCategory;
 use App\Models\EduTopic;
-use App\Models\EduVideo;
+use App\Repositories\CommentRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -23,9 +23,12 @@ class TopicController extends Controller
     {
         $this->middleware('auth', ['except' => ['index', 'show', 'lists']]);
     }
-    public function test(){
-        
+
+    public function test()
+    {
+
     }
+
     //前台贴子列表
     public function index()
     {
@@ -60,9 +63,10 @@ class TopicController extends Controller
         return redirect(route('edu.topic.show', $topic))->with('success', '发表成功');
     }
 
-    public function show(EduTopic $topic, Request $request)
+    public function show(EduTopic $topic, Request $request, CommentRepository $commentRepository)
     {
-        return view('edu.topic.show', compact('topic'));
+        $comments = $commentRepository->lists($topic);
+        return view('edu.topic.show', compact('topic', 'comments'));
     }
 
     public function edit(EduTopic $topic)

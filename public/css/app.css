@@ -418,6 +418,10 @@
   border: 1px solid #e3ebf6 !important;
 }
 
+[v-cloak] {
+  display: none;
+}
+
 .card {
   border-radius: .2rem;
 }
