@@ -5,7 +5,7 @@
  */
 function config_save(array $data)
 {
-    return app()->call('\App\Repositories\ConfigRepository@save', ['data'=>$data]);
+    return app()->call('\App\Repositories\ConfigRepository@save', ['data' => $data]);
 }
 
 /**
@@ -113,4 +113,14 @@ function access($permission, $user = null)
         throw new \App\Exceptions\PermissionException('没有访问权限');
     }
     return true;
+}
+
+/**
+ * markdown转html
+ * @param $content
+ * @return string
+ */
+function markdown_to_html($content)
+{
+    return app(Parsedown::class)->text($content);
 }

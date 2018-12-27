@@ -1,4 +1,4 @@
-<div class="comment" id="comment">
+<div class="comment" id="comment" v-cloak="">
     <div class="card col-sm-12 rounded-0">
         <div class="card-body">
             @auth
@@ -47,9 +47,7 @@
             <div class="card-body pl-3 pr-3 pt-0">
                 <div class="row" style="border-top:1px solid #edf2f9;">
                     <div class="col-12">
-                        <div class="comment-text pb-3 pt-3 markdown">
-                            {{$comment->content}}
-                        </div>
+                        <div class="comment-text pb-3 pt-3 markdown">{{ $comment->content }}</div>
                     </div>
                 </div>
             </div>
@@ -102,9 +100,7 @@
             <div class="card-body pl-3 pr-3 pt-0">
                 <div class="row" style="border-top:1px solid #edf2f9;">
                     <div class="col-12">
-                        <div class="comment-text pb-3 pt-3 markdown">
-                            @{{comment.content}}
-                        </div>
+                        <div class="comment-text pb-3 pt-3 markdown" v-html="comment.content"></div>
                     </div>
                 </div>
             </div>
@@ -144,7 +140,7 @@
     @endauth
 </div>
 <script>
-    require(['hdjs', 'jquery', 'vue', 'axios', 'moment', 'MarkdownIt'], function (hdjs, $, Vue, axios, moment, MarkdownIt) {
+    require(['hdjs', 'jquery', 'vue', 'axios', 'moment', 'MarkdownIt','marked'], function (hdjs, $, Vue, axios, moment, MarkdownIt,marked) {
         vm = new Vue({
             el: "#comment",
             data: {
@@ -161,11 +157,14 @@
                         vm.markdownEditor = simplemde;
                         vm.$set(vm.field, 'content', simplemde.value());
                     });
+                });
+                $(".comment-text").each(function (k, comment) {
+                    $(comment).html(marked($(comment).html()));
                 })
             },
             updated() {
                 hdjs.scrollTo('body', location.hash, 0, {queue: true});
-                this.parseMarkdown();
+                // this.parseMarkdown();
             },
             methods: {
                 //跳转到评论表单
@@ -198,7 +197,7 @@
                             let md = new MarkdownIt();
                             this.comments.push({
                                 id: comment.id,
-                                content: md.render(comment.content),
+                                content: marked(comment.content),
                                 zan_count: comment.zan_count ? comment.zan_count : 0,
                                 updated_at: comment.updated_at
                             });
@@ -216,7 +215,11 @@
                 parseMarkdown() {
                     require(['hdjs', 'marked', 'highlight'], function (hdjs, marked) {
                         $(document).ready(function () {
+                            alert(3)
                             $(".comment-text").each(function (k, comment) {
+
+                                // let md = new MarkdownIt();
+                                $(comment).html(marked('#这是markdown内容'));
                                 $('pre code').each(function (i, block) {
                                     hljs.highlightBlock(block);
                                 });
