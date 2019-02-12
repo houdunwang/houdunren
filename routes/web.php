@@ -1,23 +1,39 @@
 <?php
-//网站首页
-Route::get('/', 'Admin\HomeController@make')->name('home');
-//Route::get('/', 'Edu\TopicController@index')->name('home');
-Route::get('home', 'Admin\HomeController@make')->name('home');
 
-//登录/注册/退出
-Route::get('register', 'Member\RegisterController@create')->name('register');
-Route::post('register', 'Member\RegisterController@store')->name('register');
-Route::post('register/code', 'Member\RegisterController@code')->name('register.send.code');
-Route::get('login', 'Member\LoginController@login')->name('login');
-Route::post('login', 'Member\LoginController@store')->name('login');
-Route::get('logout', 'Member\LoginController@logout')->name('logout');
-//找回密码
-Route::get('password_reset', 'Member\ResetPasswordController@show')->name('password.reset');
-Route::post('password_reset', 'Member\ResetPasswordController@update')->name('password.reset');
-Route::post('password_reset_code', 'Member\ResetPasswordController@code')->name('password.reset.code');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
 
-//加载系统模块路由
-collect(glob(base_path('app/Http/Controllers/*')))->each(function ($module) {
-    $file = $module . '/config/routes/web.php';
-    file_exists($file) && include $file;
+Route::get('/', function () {
+    return view('welcome');
+});
+//后台管理
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('admin', 'AdminController');
+    Route::resource('site', 'SiteController');
+});
+//登录退出
+Route::resource('login', 'LoginController');
+Route::get('login', 'LoginController@index')->name('login');
+Route::get('logout', 'LoginController@logout')->name('logout');
+//公共
+Route::group(['prefix' => 'common', 'as' => 'common.'], function () {
+    Route::any('upload', 'Common\UploadController@upload')->name('upload.make');
+    Route::any('upload-lists', 'Common\UploadController@lists')->name('upload.lists');
+});
+//用户管理
+Route::group(['middleware' => ['auth']], function () {
+    //个人中心
+    Route::resource('user', 'UserController');
+    //后台用户管理
+    Route::resource('user', 'UserController');
+    //站点管理
+    Route::resource('site', 'SiteController');
 });

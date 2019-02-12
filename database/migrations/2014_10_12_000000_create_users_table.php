@@ -21,10 +21,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('icon')->nullable()->comment('头像');
             $table->string('token')->nullable()->comment('邮箱或手机验证码');
-            $table->string('weibo')->nullable();
-            $table->string('wechat')->nullable();
-            $table->string('github')->nullable();
-            $table->string('qq')->nullable();
+            $table->string('weibo')->nullable()->comment('微博帐号');
+            $table->string('wechat')->nullable()->comment('微信');
+            $table->string('github')->nullable()->comment('github地址');
+            $table->string('qq')->nullable()->comment('QQ号');
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('mobile_verified_at')->nullable();
             $table->rememberToken();

@@ -11,36 +11,42 @@
 
 namespace App\Repositories;
 
-use App\Exceptions\InvalidParamException;
+use App\Exceptions\CustomException;
 use Illuminate\Database\Eloquent\Model;
 
-abstract class Repository
+/**
+ * 仓库抽像类
+ * Class Repository
+ * @package App\Repositories
+ */
+abstract class Repository implements RepositoryInterface
 {
-    protected $name;
-
+    //模型类
     protected $model;
+    //模型实例
+    protected $instance;
 
     public function __construct()
     {
-        if (!class_exists($this->name)) {
-            throw new InvalidParamException('model does not exists');
+        if (!class_exists($this->model)) {
+            throw new CustomException('模型文件不存在');
         }
-        $this->model = app($this->name);
+        $this->instance = app($this->model);
     }
 
     public function all(array $columns = ['*'])
     {
-        return $this->model->get($columns);
+        return $this->instance->get($columns);
     }
 
     public function paginate($row = 10, array $columns = ['*'], $latest = null)
     {
-        return $this->model->latest($latest)->paginate($row, $columns);
+        return $this->instance->latest($latest)->paginate($row, $columns);
     }
 
     public function create(array $attributes)
     {
-        return $this->model->fill($attributes)->save();
+        return $this->instance->fill($attributes)->save();
     }
 
     public function update(Model $model, array $attributes)
@@ -55,12 +61,11 @@ abstract class Repository
 
     public function find($id, $columns = ['*'])
     {
-        return $this->model->find($id, $columns);
+        return $this->instance->find($id, $columns);
     }
 
     public function findByAttributes(array $attributes, $columns = ['*'])
     {
-        return $this->model->where($attributes)->first($columns);
+        return $this->instance->where($attributes)->first($columns);
     }
-
 }

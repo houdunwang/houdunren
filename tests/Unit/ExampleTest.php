@@ -2,7 +2,6 @@
 
 namespace Tests\Unit;
 
-use App\Exceptions\ValidException;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

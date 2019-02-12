@@ -1,3 +1,87 @@
-.navbar-vertical.navbar-expand-md .navbar-nav .nav .nav-link{
-  font-size: 14px;
+.admin {
+  background: url('../images/admin.jpg');
+  background-size: contain;
+  //系统与站点顶部导航菜单
+  .top-menu {
+    background: #353644;
+    margin-bottom: 10px;
+
+    .navbar {
+      border: 0;
+      margin-bottom: 0;
+      background: #353644;
+
+      ul.navbar-nav {
+        li.top_menu {
+          &.active {
+            a {
+              color: #57b382;
+              background: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .setting-menu {
+    margin-top: 30px;
+    margin-bottom: 20px;
+
+    .logo {
+      background: url('../images/logo.png') no-repeat;
+      background-size: contain;
+      height: 60px;
+      opacity: .9;
+    }
+
+    //顶部大导航块
+    ul.nav-pills {
+      li {
+        margin-right: 10px;
+
+        a {
+          &.tile {
+            margin: 0px;
+            padding: .5em 1em .5em 1em;
+            display: block;
+            width: 8em;
+            text-align: center;
+            background: #438384;
+            color: #eeeeee;
+            opacity: .8;
+            box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
+
+            &:hover {
+              background: #006675;
+            }
+
+            i {
+              display: block;
+            }
+          }
+
+          &.active {
+            opacity: .95;
+            background: #006675;
+          }
+        }
+      }
+    }
+
+
+  }
+
+  //底部
+  .admin-footer {
+    margin-bottom: 50px;
+    color: #ffffff;
+    font-size: 15px;
+    text-align: center;
+    a {
+      color: #ffffff;
+      display: inline-block;
+      padding: 5px;
+    }
+  }
 }

@@ -1,1 +1,0 @@
-"use strict";var KBootstrapSelect={init:function(){$(".k_selectpicker").selectpicker()}};jQuery(document).ready(function(){KBootstrapSelect.init()});

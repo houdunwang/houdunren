@@ -1,1 +1,0 @@
-"use strict";var KSummernoteDemo={init:function(){$(".summernote").summernote({height:150})}};jQuery(document).ready(function(){KSummernoteDemo.init()});

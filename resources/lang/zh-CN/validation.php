@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'accepted'             => ':attribute 必须接受。',
+    'accepted'             => '您必须接受 :attribute。',
     'active_url'           => ':attribute 不是一个有效的网址。',
     'after'                => ':attribute 必须要晚于 :date。',
     'after_or_equal'       => ':attribute 必须要等于 :date 或更晚。',
@@ -94,7 +94,7 @@ return [
     'regex'                => ':attribute 格式不正确。',
     'required'             => ':attribute 不能为空。',
     'required_if'          => '当 :other 为 :value 时 :attribute 不能为空。',
-    'required_unless'      => '当 :other 不为 :value 时 :attribute 不能为空。',
+    'required_unless'      => '当 :other 不为 :values 时 :attribute 不能为空。',
     'required_with'        => '当 :values 存在时 :attribute 不能为空。',
     'required_with_all'    => '当 :values 存在时 :attribute 不能为空。',
     'required_without'     => '当 :values 不存在时 :attribute 不能为空。',
@@ -111,6 +111,7 @@ return [
     'unique'               => ':attribute 已经存在。',
     'uploaded'             => ':attribute 上传失败。',
     'url'                  => ':attribute 格式不正确。',
+    'uuid'                 => ':attribute 必须是有效的 UUID。',
 
     /*
     |--------------------------------------------------------------------------

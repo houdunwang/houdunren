@@ -10,7 +10,7 @@
 
 namespace App\Servers;
 
-use App\Exceptions\UploadException;
+use App\Exceptions\CustomException;
 use Spatie\Image\Image;
 
 class UploadServer
@@ -19,7 +19,7 @@ class UploadServer
      * 上传处理
      * @param $file
      * @return string
-     * @throws UploadException
+     * @throws CustomException
      * @throws \Houdunwang\Uploader\Exceptions\InvalidParamException
      * @throws \Spatie\Image\Exceptions\InvalidManipulation
      */
@@ -70,17 +70,17 @@ class UploadServer
      * 文件类型与大小检测
      * @param $file object 文件
      * @param $type string 文件类型 image：图片 file：普通文件
-     * @throws UploadException
+     * @throws CustomException
      * @return bool
      */
     protected function check($file, $type): bool
     {
         $ext = strtolower($file->getClientOriginalExtension());
         if (!in_array($ext, explode(',', config_get('admin.upload.' . $type . '.type')))) {
-            throw new UploadException('文件类型错误');
+            throw new CustomException('文件类型错误');
         }
         if ($file->getSize() > config_get('admin.upload.' . $type . '.size')) {
-            throw new UploadException('文件过大不允许上传');
+            throw new CustomException('文件过大不允许上传');
         }
         return true;
     }
@@ -89,7 +89,7 @@ class UploadServer
      * 上传BASE64图片
      * @param $content
      * @return string
-     * @throws UploadException
+     * @throws CustomException
      */
     public function uploadBase64Image($content)
     {
@@ -98,7 +98,7 @@ class UploadServer
         $allowSize = config_get('admin.upload.image.size');
         //上传大小检测
         if (strlen($content) > $allowSize) {
-            throw new UploadException('上传失败，文件过大', 200);
+            throw new CustomException('上传失败，文件过大', 200);
         }
         $decodedData = base64_decode($imgData);
         $dir = 'uploads/' . date('ym/d') . '/';

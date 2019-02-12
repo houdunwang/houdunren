@@ -1,17 +1,14 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军 <www.aoxiangjun.com>
- * |    WeChat: houdunren2018
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
 
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * 修改用户资料
+ * Class UserRequest
+ * @package App\Http\Requests
+ */
 class UserRequest extends FormRequest
 {
     /**
@@ -31,18 +28,11 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name'     => 'sometimes|required',
-            'password' => 'sometimes|required|min:5|confirmed',
-            'icon'     => 'sometimes|required',
-        ];
+
     }
 
     public function messages()
     {
-        return [
-            'name.required' => '昵称不能为空',
-            'icon.required' => '头像不能为空',
-        ];
+
     }
 }

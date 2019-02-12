@@ -1,38 +1,51 @@
-<?php
-/** .-------------------------------------------------------------------
- * |    Author: 向军 <www.aoxiangjun.com>
- * |    WeChat: houdunren2018
- * |      Date: 2018-12-07
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
+<?php namespace App\Servers;
 
-namespace App\Servers;
-
+use App\Rules\UserPasswordRule;
 use App\User;
+use Illuminate\Http\Request;
 
 /**
- * 用户服务
+ * 会员服务
  * Class UserServer
  * @package App\Servers
  */
 class UserServer
 {
     /**
-     * 粉丝关注
-     * @param User $user
+     * 用户登录
+     * name字段做为登录字段可以邮箱或手机号
+     * @param array $user
+     * @return bool
      */
-    public function follower(User $user)
+    public function login(array $user): bool
     {
-        $followers = auth()->user()->follower()->toggle([$user['id']]);
-        if (in_array($user['id'], $followers['attached'])) {
-            //关注时记录全站动态
-            activity()
-                ->performedOn($user)
-                ->causedBy(auth()->user())
-                ->log('follower');
+        $isEmail = filter_var($user['name'], FILTER_VALIDATE_EMAIL);
+        if ($isEmail) {
+            return auth()->attempt(['email' => $user['name'], 'password' => $user['password']]);
         } else {
-            //取关时删除动态
-            $user->activity()->where('causer_id', auth()->id())->delete();
+            return auth()->attempt(['mobile' => $user['name'], 'password' => $user['password']]);
         }
+    }
+
+    /**
+     * 修改密码
+     * @param User $user
+     * @param Request $request [original_password:原密码,password:新密码,password_confirmation:确认密码]
+     * @return bool
+     */
+    public function changePassword(User $user, Request $request): bool
+    {
+        $request->validate([
+            'original_password' => ['sometimes', new UserPasswordRule()],
+            'password' => ['required', 'min:5', 'confirmed'],
+        ], ['password.confirmed' => '确认密码输入错误']);
+
+        $user['password'] = \Hash::make($request['password']);
+        return $user->save();
+    }
+
+    public function setIcon(User $user,string $icon): bool
+    {
+
     }
 }

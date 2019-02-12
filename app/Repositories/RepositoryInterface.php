@@ -13,6 +13,11 @@ namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 仓库接口
+ * Interface RepositoryInterface
+ * @package App\Repositories
+ */
 interface RepositoryInterface
 {
     public function all(array $columns = ['*']);

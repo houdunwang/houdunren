@@ -1,139 +1,222 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    {{--前台--}}
-    <title>{{config_get('admin.site.webname')}}</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>会员中心</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{--<link rel="stylesheet" href="/css/bootstrap.css">--}}
-    <link rel="stylesheet" href="/org/front/vendor/font-awesome/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="/css/animate.min.css">
-    <link rel="stylesheet" href="/css/hs.megamenu.css">
-    <link rel="stylesheet" href="/css/jquery.fancybox.css">
-    <link rel="stylesheet" href="/css/slick.css">
-    <link rel="stylesheet" href="/css/cubeportfolio.min.css">
-    <link rel="stylesheet" href="{{asset('org/front')}}/css/front.css">
-    <link href="{{asset('org/hdjs/package/font-awesome-4.7.0/css/font-awesome.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{mix('/css/app.css')}}">
-    <link rel="stylesheet" href="{{asset('org/front/css/theme.css')}}">
-    @include('layouts._hdjs')
-    @include('layouts._message')
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('org/AdminLTE-2.4.5')}}/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="{{asset('org/AdminLTE-2.4.5')}}/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    @include('layouts.hdjs')
     @stack('css')
 </head>
-<body>
-@include('layouts._web_header')
-<main id="content" role="main">
-    <div class="bg-secondary">
-        <div class="container pt-3 pb-3">
-            <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
-                <div class="mb-3 mb-sm-0">
-                    <!-- Breadcrumb -->
-                    <ol class="breadcrumb breadcrumb-white breadcrumb-no-gutter mb-0">
-                        <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">首页</a></li>
-                        <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">个人中心</a></li>
-                    </ol>
-                    <!-- End Breadcrumb -->
-                </div>
-                <!-- Edit Profile -->
-                <a class="btn btn-sm btn-soft-white transition-3d-hover"
-                   href="{{route('member.user.edit',[auth()->id(),'type'=>'info'])}}">
-                    <span class="fas fa-user-cog small mr-2"></span>
-                    修改资料
-                </a>
-                <!-- End Edit Profile -->
+<body class="sidebar-collapse sidebar-mini skin-black-light">
+@include('layouts.message')
+<div class="wrapper">
+    <header class="main-header">
+        <a href="/" class="logo">
+            <span class="logo-mini"><b>H</b>D</span>
+            <span class="logo-lg"><b>HD</b>CMS</span>
+        </a>
+        <nav class="navbar navbar-static-top">
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#navbar-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
             </div>
-
-        </div>
-    </div>
-    <!-- End Breadcrumb Section -->
-    <!-- Content Section -->
-    <div class="bg-light pb-5">
-        <div class="container pt-5">
-            <div class="row">
-                <div class="col-lg-3 mb-7 mb-lg-0">
-                    <!-- Profile Card -->
-                    <div class="card p-1 mb-4 shadow-sm">
-                        <div class="card-body text-center">
-                            <div class="mb-3">
-                                <a href="{{route('member.user.edit',[auth()->id(),'type'=>'icon'])}}">
-                                    <img class="u-lg-avatar rounded-circle" src="{{auth()->user()->avatar}}"
-                                         alt="Image Description">
-                                </a>
-                            </div>
-                            <div class="mb-3">
-                                <h1 class="h6 font-weight-medium mb-0">{{auth()->user()->name}} </h1>
-                                <small class="d-block text-muted">UID: {{auth()->id()}}</small>
-                            </div>
-                            <a class="text-secondary small" href="{{route('member.user.show',auth()->id())}}">
-                                <i class="far fa-flag mr-1"></i> 个人主页
-                            </a>
-                            <hr>
-                            <ul class="list-group list-group-flush list-group-borderless mb-0">
-                                <li class="list-group-item">
-                                    <a class="d-block
-                                        {{active_class(if_query('type','info'),'btn btn-sm btn-soft-secondary','text-muted')}}"
-                                       href="{{route('member.user.edit',[auth()->id(),'type'=>'info'])}}">
-                                        个人信息
-                                    </a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a class="d-block
-                                        {{active_class(if_query('type','password'),'btn btn-sm btn-soft-secondary','text-muted')}}"
-                                       href="{{route('member.user.edit',[auth()->user(),'type'=>'password'])}}">
-                                        修改密码
-                                    </a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a class="d-block
-                                        {{active_class(if_route('member.fans'),'btn btn-sm btn btn-soft-secondary','text-muted')}}"
-                                       href="{{route('member.fans',auth()->user())}}">
-                                        粉丝列表
-                                    </a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a class="d-block
-                                        {{active_class(if_route('member.follower'),'btn btn-sm btn btn-soft-secondary','text-muted')}}"
-                                       href="{{route('member.follower',auth()->user())}}">
-                                        关注列表
-                                    </a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a class="d-block
-                                       {{active_class(if_route('member.notification.index'),'btn btn-sm btn btn-soft-secondary','text-muted')}}"
-                                       href="{{route('member.notification.index')}}">
-                                        消息中心
-                                    </a>
-                                </li>
-                            </ul>
-                            <hr>
-                            @foreach(menus('center_menu') as $menus)
-                                <ul class="list-group list-group-flush list-group-borderless mb-0">
-                                    @foreach($menus as $menu)
-                                        @if(!isset($menu['permission']) || auth()->user()->hasAnyPermission($menu['permission']))
-                                            <li class="list-group-item">
-                                                <a class="d-block
-                                        {{active_class(strpos($menu['route'],\Route::getCurrentRoute()->uri),'btn btn-sm btn-soft-secondary','text-muted')}}"
-                                                   href="{{$menu['route']}}">
-                                                    {{$menu['name']}}
-                                                </a>
-                                            </li>
-                                        @endif
-                                    @endforeach
+            <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">网站首页 <span class="sr-only">(current)</span></a></li>
+                </ul>
+            </div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown messages-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="label label-success">4</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">你有 4 条未读消息</li>
+                            <li>
+                                <ul class="menu">
+                                    <li>
+                                        <a href="#">
+                                            <div class="pull-left">
+                                                <img src="{{asset('org/AdminLTE-2.4.5')}}/dist/img/user2-160x160.jpg"
+                                                     class="img-circle" alt="User Image">
+                                            </div>
+                                            <h4>
+                                                向军
+                                                <small><i class="fa fa-clock-o"></i> 5 分钟前</small>
+                                            </h4>
+                                            <p>感谢你分享的技术文档</p>
+                                        </a>
+                                    </li>
                                 </ul>
-                            @endforeach
-                        </div>
+                            </li>
+                            <li class="footer"><a href="#">查看全部消息</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-warning">10</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">你有 10 条通知</li>
+                            <li>
+                                <!-- Inner Menu: contains the notifications -->
+                                <ul class="menu">
+                                    <li><!-- start notification -->
+                                        <a href="#">
+                                            <i class="fa fa-users text-aqua"></i> 系统有新更新
+                                        </a>
+                                    </li>
+                                    <!-- end notification -->
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">查看全部</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{auth()->user()['avatar']}}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{auth()->user()['name']}}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="{{auth()->user()['avatar']}}" class="img-circle" alt="User Image">
+                                <p>
+                                    {{auth()->user()['name']}}
+                                    <small>{{auth()->user()['email']}}</small>
+                                    <small>{{auth()->user()['mobile']}}</small>
+                                </p>
+                            </li>
+                            <li class="user-body">
+                                <div class="row">
+                                    <div class="col-xs-4 text-center">
+                                        <a href="{{route('user.edit',[auth()->id(),'action'=>'password'])}}">修改密码</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="{{route('user.edit',[auth()->id(),'action'=>'avatar'])}}">设置头像</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="{{route('user.edit',[auth()->id(),'action'=>'email'])}}">更改邮箱</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="{{route('user.index')}}" class="btn btn-default btn-flat">个人中心</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="{{route('logout')}}" class="btn btn-default btn-flat">退出登录</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">基础设置</li>
+                <li class="treeview menu-open">
+                    <a href="#">
+                        <i class="fa fa-info-circle"></i> <span>我的资料</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu" style="display: block;">
+                        <li><a href="{{route('user.edit',[auth()->id(),'action'=>'password'])}}"><i class="fa fa-circle-o"></i> 修改密码</a></li>
+                        <li><a href="{{route('user.edit',[auth()->id(),'action'=>'avatar'])}}"><i class="fa fa-circle-o"></i> 设置头像</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../widgets.html">
+                        <i class="fa fa-user"></i> <span>粉丝列表</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../widgets.html">
+                        <i class="fa fa-user-plus"></i> <span>关注列表</span>
+                    </a>
+                </li>
+                <li class="header">扩展功能</li>
+                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+    <div class="content-wrapper">
+        <section class="content {{route_class()}}">
+            @yield('content')
+        </section>
+    </div>
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 5.7.0
+        </div>
+        <strong>Copyright &copy; 2010-2019 <a href="http://hdcms.com">HDCMS</a>.</strong> All rights
+        reserved.
+    </footer>
+    <aside class="control-sidebar control-sidebar-dark">
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+            <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+            <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane" id="control-sidebar-home-tab">
+                <h3 class="control-sidebar-heading">官网消息</h3>
+                <ul class="control-sidebar-menu">
+                    <li>
+                        <a href="javascript:void(0)">
+                            <div class="menu-info">
+                                <h4 class="control-sidebar-subheading">HDCMS 5.7发布了</h4>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+            <div class="tab-pane" id="control-sidebar-settings-tab">
+                <form method="post">
+                    <h3 class="control-sidebar-heading">帮助文档</h3>
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            <a href="http://www.hdcms.com">HDCMS官网</a>
+                        </label>
                     </div>
-                </div>
-                <div class="col-lg-9">
-                    @yield('content')
-                </div>
+                </form>
             </div>
         </div>
-    </div>
-</main>
-@include('layouts._web_footer')
+    </aside>
+    <div class="control-sidebar-bg"></div>
+</div>
+<script>
+    require(['jquery','bootstrap','adminLte'])
+</script>
 @stack('js')
 </body>
 </html>

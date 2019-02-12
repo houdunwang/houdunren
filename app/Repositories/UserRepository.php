@@ -2,38 +2,51 @@
 /** .-------------------------------------------------------------------
  * |    Author: 向军 <www.aoxiangjun.com>
  * |    WeChat: houdunren2018
- * |      Date: 2018/11/14
+ * |      Date: 2019-02-08
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
 namespace App\Repositories;
 
+use App\Exceptions\InvalidParamException;
+use App\Http\Requests\UserRequest;
 use App\User;
-use Spatie\Permission\Models\Role;
+use Illuminate\Http\Request;
 
-class UserRepository extends Repository implements RepositoryInterface
+/**
+ * 会员管理仓库
+ * Class UserRepository
+ * @package App\Repositories
+ */
+class UserRepository
 {
-    protected $name = User::class;
-
     /**
-     * 搜索会员
-     * @param $w
-     * @param int $row
-     * @return mixed
+     * 根据邮箱查找
+     * @param string $email
+     * @return User|null
      */
-    public function member($w, $row = 20)
+    public function findByEmail(string $email): ?User
     {
-        $users = $this->model->paginate($row);
-        if ($w) {
-            $users = $this->model->orWhere('email', 'like', "%$w%")->orWhere('mobile', 'like', "%$w%")
-                ->orWhere('name', 'like', "%$w%")->paginate($row);
-        }
-        return $users;
+        return User::where('email', $email)->first();
     }
 
-    public function admin()
+    /**
+     * 根据手机号查找
+     * @param string $mobile
+     * @return User|null
+     */
+    public function findByMobile(string $mobile): ?User
     {
-        $roles = Role::where('admin', 1)->pluck('name');
-        return User::role($roles)->where('id', '<>', 1)->get();
+        return User::where('email', $mobile)->first();
+    }
+
+    public function changePassword(Request $request, User $user): bool
+    {
+        if ($user['password'] != $request['original_password']) {
+            throw new InvalidParamException('原密码输入错误');
+        }
+        $user['password'] = bcrypt($user['password']);
+        $user->save();
+        return true;
     }
 }

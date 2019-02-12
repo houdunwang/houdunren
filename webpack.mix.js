@@ -12,8 +12,4 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .version();
-
-mix.copy('resources/js/hdcms.js', 'public/js/hdcms.js');
-
+   .sass('resources/sass/app.scss', 'public/css');
