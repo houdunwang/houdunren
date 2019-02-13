@@ -1,11 +1,14 @@
 .admin {
   background: url('../images/admin.jpg');
   background-size: contain;
+  height: 100vh;
+  a:hover{
+    text-decoration: none !important;
+  }
   //系统与站点顶部导航菜单
   .top-menu {
     background: #353644;
     margin-bottom: 10px;
-
     .navbar {
       border: 0;
       margin-bottom: 0;
@@ -23,11 +26,15 @@
       }
     }
   }
-
-  .setting-menu {
+  //面包屑导航
+  .breadcrumb {
+    a {
+      color: #666 !important;
+    }
+  }
+  .admin-setting-menu {
     margin-top: 30px;
     margin-bottom: 20px;
-
     .logo {
       background: url('../images/logo.png') no-repeat;
       background-size: contain;
@@ -36,40 +43,36 @@
     }
 
     //顶部大导航块
-    ul.nav-pills {
-      li {
-        margin-right: 10px;
+    .admin-site-menu {
+      a {
+        &.tile {
+          margin-right: 10px;
+          padding: .5em 1em .5em 1em;
+          display: block;
+          float: right;
+          width: 8em;
+          text-align: center;
+          background: #006675;
+          color: #eeeeee;
+          opacity: .8;
+          box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
+          text-decoration: none;
 
-        a {
-          &.tile {
-            margin: 0px;
-            padding: .5em 1em .5em 1em;
-            display: block;
-            width: 8em;
-            text-align: center;
+          &:hover {
             background: #438384;
-            color: #eeeeee;
-            opacity: .8;
-            box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
-
-            &:hover {
-              background: #006675;
-            }
-
-            i {
-              display: block;
-            }
           }
 
-          &.active {
-            opacity: .95;
-            background: #006675;
+          i {
+            display: block;
           }
+        }
+
+        &.active {
+          opacity: .95;
+          background: #006675;
         }
       }
     }
-
-
   }
 
   //底部
@@ -78,6 +81,7 @@
     color: #ffffff;
     font-size: 15px;
     text-align: center;
+
     a {
       color: #ffffff;
       display: inline-block;

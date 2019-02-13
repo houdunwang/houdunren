@@ -27,33 +27,15 @@ class UploadController extends Controller
      */
     public function upload(Request $request, UploadServer $uploadServer)
     {
-        $file = $request->file('file');
-        $dir = 'attachments/' . date('Y/m');
-        $filename = auth()->id() . time() . mt_rand(1, 999) . '.' . $file->getClientOriginalExtension();
-        $file->move($dir, $filename);
-        return ['file' => url($dir . '/' . $filename), 'code' => 0];
-
-
-//        //普通上传
-//        if ($file = $request->file('file')) {
-//            $path = $uploadServer->upload($file);
-//            \Auth::user()->attachment()->create(['filename' => $file->getClientOriginalName(), 'path' => url($path)]);
-//            return ['file' => url($path), 'code' => 0];
-//        } elseif ($content = $request->input('file')) {
-//            $file = $uploadServer->uploadBase64Image($content);
-//            return ['file' => url($file), 'code' => 0];
-//        }
-    }
-
-    /**
-     * 图片类型检测
-     * @param string $file 文件
-     * @return bool
-     */
-    protected function isImage($file)
-    {
-        $ext = $file->getClientOriginalExtension();
-        return in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'gif']);
+        //普通上传
+        if ($file = $request->file('file')) {
+            $path = $uploadServer->upload($file);
+            \Auth::user()->attachment()->create(['filename' => $file->getClientOriginalName(), 'path' => url($path)]);
+            return ['file' => url($path), 'code' => 0];
+        } elseif ($content = $request->input('file')) {
+            $file = $uploadServer->uploadBase64Image($content);
+            return ['file' => url($file), 'code' => 0];
+        }
     }
 
     /**

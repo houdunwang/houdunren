@@ -1,0 +1,29 @@
+.setting-index {
+  a {
+    &.tile {
+      margin-right: 10px;
+      padding: .5em 1em .5em 1em;
+      display: block;
+      float: left;
+      width: 8em;
+      text-align: center;
+      background: #eee;
+      color: #333;
+      box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
+      text-decoration: none;
+      &:hover {
+        background: #7dacdd;
+        color: #ffffff;
+      }
+      i {
+        display: block;
+        font-size: 2em;
+      }
+    }
+
+    &.active {
+      opacity: .95;
+      background: #006675;
+    }
+  }
+}

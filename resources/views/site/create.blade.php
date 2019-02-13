@@ -1,12 +1,13 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="box box-primary">
-        <div class="box-header with-border">
-            <h3 class="box-title">新建站点</h3>
-        </div>
-        <form role="form" method="post" action="{{route('site.store')}}">
-            @csrf
-            @include('site.form')
-        </form>
-    </div>
-@stop
+    <ol class="breadcrumb">
+        <li><i class="fa fa-home"></i></li>
+        <li><a href="#">首页</a></li>
+        <li>设置站点基本信息</li>
+    </ol>
+    <form role="form" method="post" action="{{route('site.store')}}" class="form-horizontal">
+        @csrf
+        @include('site.form')
+        <button type="submit" class="btn btn-primary">保存提交</button>
+    </form>
+@endsection

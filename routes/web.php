@@ -36,4 +36,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('user', 'UserController');
     //站点管理
     Route::resource('site', 'SiteController');
+    //系统设置
+    Route::resource('setting', 'SettingController')->middleware('SuperAdmin');
 });

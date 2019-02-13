@@ -1,3 +1,71 @@
+.nav.nav-tabs {
+  margin-bottom: 20px;
+  border-color: #ddd;
+}
+
+.nav.nav-tabs li.active a,
+.nav.nav-tabs li.active a:hover,
+.nav.nav-tabs li.active a:focus {
+  border: 1px solid #ddd !important;
+  background-color: #e4eaec !important;
+  color: #58666e !important;
+}
+
+.nav.nav-tabs li a {
+  color: #666;
+}
+
+.nav.nav-tabs li a:hover {
+  background: #f3f3f3 !important;
+  border-color: #dcdcdc #dcdcdc #ddd #dcdcdc;
+}
+
+.nav.nav-tabs li a:focus {
+  background: none;
+  border-bottom: solid 1px #e4eaec;
+}
+
+input,
+button,
+.btn,
+.alert,
+.form-control {
+  border-radius: 0 !important;
+}
+
+.nav-tabs li > a {
+  border-radius: 0 !important;
+}
+
+.panel {
+  border-radius: 0 !important;
+}
+
+.input-group-addon {
+  border-radius: 0 !important;
+}
+
+.well {
+  border-radius: 0 !important;
+}
+
+.img-rounded {
+  border-radius: 0 !important;
+}
+
+.list-group-item {
+  border-radius: 0 !important;
+}
+
+.modal-content {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.btn {
+  border-radius: 0 !important;
+}
+
 .login h1.big-title {
   font-size: 35px;
   font-weight: 700;
@@ -38,6 +106,11 @@
 .admin {
   background: url(/images/admin.jpg?88b465ee3f56974831ba1b781d8dfaf4);
   background-size: contain;
+  height: 100vh;
+}
+
+.admin a:hover {
+  text-decoration: none !important;
 }
 
 .admin .top-menu {
@@ -56,43 +129,45 @@
   background: none;
 }
 
-.admin .setting-menu {
+.admin .breadcrumb a {
+  color: #666 !important;
+}
+
+.admin .admin-setting-menu {
   margin-top: 30px;
   margin-bottom: 20px;
 }
 
-.admin .setting-menu .logo {
+.admin .admin-setting-menu .logo {
   background: url(/images/logo.png?b3f5a49c0352569233e01d072020e8a8) no-repeat;
   background-size: contain;
   height: 60px;
   opacity: 0.9;
 }
 
-.admin .setting-menu ul.nav-pills li {
+.admin .admin-setting-menu .admin-site-menu a.tile {
   margin-right: 10px;
-}
-
-.admin .setting-menu ul.nav-pills li a.tile {
-  margin: 0px;
   padding: 0.5em 1em 0.5em 1em;
   display: block;
+  float: right;
   width: 8em;
   text-align: center;
-  background: #438384;
+  background: #006675;
   color: #eeeeee;
   opacity: 0.8;
   box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
+  text-decoration: none;
 }
 
-.admin .setting-menu ul.nav-pills li a.tile:hover {
-  background: #006675;
+.admin .admin-setting-menu .admin-site-menu a.tile:hover {
+  background: #438384;
 }
 
-.admin .setting-menu ul.nav-pills li a.tile i {
+.admin .admin-setting-menu .admin-site-menu a.tile i {
   display: block;
 }
 
-.admin .setting-menu ul.nav-pills li a.active {
+.admin .admin-setting-menu .admin-site-menu a.active {
   opacity: 0.95;
   background: #006675;
 }
@@ -117,5 +192,33 @@
 
 .site-index .panel .panel-footer a {
   color: #999999;
+}
+
+.setting-index a.tile {
+  margin-right: 10px;
+  padding: 0.5em 1em 0.5em 1em;
+  display: block;
+  float: left;
+  width: 8em;
+  text-align: center;
+  background: #eee;
+  color: #333;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
+  text-decoration: none;
+}
+
+.setting-index a.tile:hover {
+  background: #7dacdd;
+  color: #ffffff;
+}
+
+.setting-index a.tile i {
+  display: block;
+  font-size: 2em;
+}
+
+.setting-index a.active {
+  opacity: 0.95;
+  background: #006675;
 }
 

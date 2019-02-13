@@ -24,7 +24,8 @@ class CreateConfigsTable extends Migration
         Schema::create('configs', function (Blueprint $table) {
             $table->increments('id');
             $table->text('data')->comment('配置项');
-            $table->text('name')->nullable()->comment('标识');
+            $table->string('system')->nullable()->comment('系统配置');
+            $table->string('module')->nullable()->comment('模块配置');
             $table->timestamps();
         });
     }
