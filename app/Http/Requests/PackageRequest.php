@@ -4,12 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-/**
- * 修改用户资料
- * Class UserRequest
- * @package App\Http\Requests
- */
-class UserRequest extends FormRequest
+class PackageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,16 +13,22 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return isSuperAdmin();
     }
 
     public function rules()
     {
-
+        return [
+            'name' => 'required|max:10',
+        ];
     }
 
     public function messages()
     {
-
+        return [
+            'name.required' => '套餐名称不能为空',
+            'name.max' => '套餐名称不能超过10个字',
+        ];
     }
+
 }

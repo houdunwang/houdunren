@@ -19,3 +19,12 @@ function config_get($path, $default = null, $type = 'module')
 {
     return app(\App\Repositories\ConfigRepository::class)->get($path, $default, $type);
 }
+
+/**
+ * 超级管理员检测
+ * @return bool
+ */
+function isSuperAdmin(): bool
+{
+    return auth()->check() && auth()->user()['id'] == 1;
+}

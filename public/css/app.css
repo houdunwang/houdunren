@@ -1,3 +1,22 @@
+a {
+  color: #6c757d;
+  text-decoration: none;
+}
+
+.card {
+  border-radius: 0;
+}
+
+.nav-tabs .nav-link {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.nav-tabs .nav-link.active {
+  background: #e4eaec !important;
+  border-color: #dee2e6 #dee2e6 #dee2e6;
+}
+
 .login h1.big-title {
   font-size: 35px;
   font-weight: 700;
@@ -130,7 +149,7 @@ html {
 
 .setting-index a.tile {
   margin-right: 10px;
-  padding: 0.5em 1em 0.5em 1em;
+  padding: 0.8em 1em 0.5em 1em;
   display: block;
   float: left;
   width: 8em;

@@ -1,67 +1,18 @@
-//.nav.nav-tabs {
-//  margin-bottom: 20px;
-//  border-color: #ddd;
-//
-//  li {
-//    &.active {
-//      a, a:hover, a:focus {
-//        border: 1px solid #ddd !important;
-//        background-color: #e4eaec !important;
-//        color: #58666e !important;
-//      }
-//    }
-//
-//    a {
-//      color: #666;
-//
-//      &:hover {
-//        background: #f3f3f3 !important;
-//        border-color: #dcdcdc #dcdcdc #ddd #dcdcdc;
-//      }
-//
-//      &:focus {
-//        background: none;
-//        border-bottom: solid 1px #e4eaec;
-//      }
-//    }
-//  }
-//}
-//
-//input, button, .btn, .alert, .form-control {
-//  border-radius: 0 !important;
-//}
-//
-//.nav-tabs {
-//  li > a {
-//    border-radius: 0 !important;
-//  }
-//}
-//
-//.panel {
-//  border-radius: 0 !important;
-//}
-//
-//.input-group-addon {
-//  border-radius: 0 !important;
-//}
-//
-//.well {
-//  border-radius: 0 !important;
-//}
-//
-//.img-rounded {
-//  border-radius: 0 !important;
-//}
-//
-//.list-group-item {
-//  border-radius: 0 !important;
-//}
-//
-//.modal-content {
-//  box-shadow: none !important;
-//  border-radius: 0 !important;
-//}
-//
-//.btn {
-//  border-radius: 0 !important;
-//}
+a {
+  color: #6c757d;
+  text-decoration: none;
+}
+.card{
+  border-radius:0;
+}
+.nav-tabs {
+  .nav-link {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    &.active {
+      background: #e4eaec !important;
+      border-color: #dee2e6 #dee2e6 #dee2e6;
+    }
+  }
+}

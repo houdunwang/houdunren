@@ -26,4 +26,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('site', 'SiteController');
     //系统设置
     Route::resource('setting', 'SettingController')->middleware('SuperAdmin');
+    //会员组
+    Route::resource('group', 'GroupController')->middleware('SuperAdmin');
+    //套餐
+    Route::resource('package', 'PackageController')->middleware('SuperAdmin');
 });

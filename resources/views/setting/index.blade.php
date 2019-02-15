@@ -40,7 +40,7 @@
                 <i class="fa fa-user"></i>
                 <span>用户管理</span>
             </a>
-            <a href="http://www.houdunwang.com?s=system/group/lists" class="tile img-rounded">
+            <a href="{{route('group.index')}}" class="tile img-rounded">
                 <i class="fa fa-users"></i>
                 <span>用户组管理</span>
             </a>
@@ -56,7 +56,7 @@
                 <i class="fa fa-sitemap"></i>
                 <span>站点列表</span>
             </a>
-            <a href="?s=system/package/lists" class="tile img-rounded">
+            <a href="{{route('package.index')}}" class="tile img-rounded">
                 <i class="fa fa-comments-o"></i>
                 <span>服务套餐</span>
             </a>

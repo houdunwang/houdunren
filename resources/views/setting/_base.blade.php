@@ -1,22 +1,20 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="card">
+    <div class="card-header">
         基本配置
     </div>
-    <div class="panel-body">
-        <div class="form-group">
-            <label class="col-sm-2 control-label">网站标志</label>
+    <div class="card-body">
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-2 col-form-label text-right">网站标志</label>
             <div class="col-sm-10">
-                <div class="input-group">
-                    <input class="form-control ng-pristine ng-untouched ng-valid" name="logo"
-                           value="{{$config['logo']??asset('images/logo.png')}}" readonly="">
-                    <div class="input-group-btn">
-                        <button onclick="uploadLogo(this)" class="btn btn-default" type="button">选择图片</button>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="logo" value="{{$config['logo']??asset('images/logo.png')}}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" onclick="uploadLogo(this)" type="button">选择图片</button>
                     </div>
                 </div>
                 <div class="input-group" style="margin-top:5px;">
-                    <img src="{{$config['logo']??asset('images/logo.png')}}" class="img-responsive img-thumbnail"
-                         width="150" id="logo-img" style="background: #dcdcdc">
-                    <em class="close" style="position:absolute; top: 0px; right: -14px;" title="删除这张图片">×</em>
+                    <img src="{{$config['logo']??asset('images/logo.png')}}" class="img-fluid"
+                         id="logo-img" style="background: #dcdcdc">
                 </div>
             </div>
         </div>

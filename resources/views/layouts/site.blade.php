@@ -6,7 +6,7 @@
     <title>站点管理 </title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{{asset('favicon.ico')}}" type="image/x-icon"/>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('org/AdminLTE-2.4.5')}}/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="{{asset('org/AdminLTE-2.4.5')}}/dist/css/skins/_all-skins.min.css">

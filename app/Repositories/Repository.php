@@ -46,12 +46,12 @@ abstract class Repository implements RepositoryInterface
 
     public function create(array $attributes)
     {
-        return $this->instance->fill($attributes)->save();
+        return $this->instance->create($attributes);
     }
 
-    public function update(Model $model, array $attributes)
+    public function save(Model $model, array $attributes)
     {
-        return $model->update($attributes);
+        return $model->fill($attributes)->save();
     }
 
     public function delete(Model $model)
