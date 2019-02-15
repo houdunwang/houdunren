@@ -1,9 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-        <ol class="breadcrumb">
-            <li><i class="fa fa-home"></i></li>
-            <li><a href="{{route('setting.index')}}">系统</a></li>
-        </ol>
         <h5 class="page-header">云服务</h5>
         <div class="clearfix">
             <a href="http://www.houdunwang.com?s=system/cloud/upgrade" class="tile img-rounded">
@@ -64,7 +60,7 @@
                 <i class="fa fa-comments-o"></i>
                 <span>服务套餐</span>
             </a>
-            <a href="{{route('setting.edit','upload')}}" class="tile img-rounded">
+            <a href="{{route('setting.edit','base')}}" class="tile img-rounded">
                 <i class="fa fa-tachometer"></i>
                 <span>系统配置</span>
             </a>

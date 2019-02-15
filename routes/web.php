@@ -1,16 +1,4 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -24,7 +12,7 @@ Route::resource('login', 'LoginController');
 Route::get('login', 'LoginController@index')->name('login');
 Route::get('logout', 'LoginController@logout')->name('logout');
 //公共
-Route::group(['prefix' => 'common', 'as' => 'common.'], function () {
+Route::group(['middleware' => [], 'prefix' => 'common', 'as' => 'common.'], function () {
     Route::any('upload', 'Common\UploadController@upload')->name('upload.make');
     Route::any('upload-lists', 'Common\UploadController@lists')->name('upload.lists');
 });

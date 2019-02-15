@@ -1,3 +1,6 @@
+html{
+  font-size: 14px;
+}
 .admin {
   background: url('../images/admin.jpg');
   background-size: contain;
@@ -9,22 +12,6 @@
   .top-menu {
     background: #353644;
     margin-bottom: 10px;
-    .navbar {
-      border: 0;
-      margin-bottom: 0;
-      background: #353644;
-
-      ul.navbar-nav {
-        li.top_menu {
-          &.active {
-            a {
-              color: #57b382;
-              background: none;
-            }
-          }
-        }
-      }
-    }
   }
   //面包屑导航
   .breadcrumb {
@@ -33,15 +20,12 @@
     }
   }
   .admin-setting-menu {
-    margin-top: 30px;
-    margin-bottom: 20px;
     .logo {
       background: url('../images/logo.png') no-repeat;
       background-size: contain;
       height: 60px;
       opacity: .9;
     }
-
     //顶部大导航块
     .admin-site-menu {
       a {

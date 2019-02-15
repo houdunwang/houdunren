@@ -6,7 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
+    {{--<link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">--}}
+    <link href="{{asset('org/hdjs/package/bootstrap/bootstrap.min.css')}}" rel="stylesheet">
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     @include('layouts.hdjs')
@@ -16,61 +17,52 @@
 @include('layouts.message')
 <div>
     <div class="container-fluid top-menu">
-        <!--导航-->
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="?s=system/manage/menu"><i class="fa fa-w fa-cogs"></i> 系统管理</a>
-                        </li>
-                        <li>
-                            <a href="?s=site/entry/home&siteid=11" target="_blank">
-                                <i class="fa fa-share"></i> 继续管理公众号 (后盾网)
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-w fa-cogs"></i> 系统管理
+                        </a>
+                    </li>
+                    <li class="nav-item  pr-1">
+                        <a href="?s=site/entry/home&siteid=11" class="nav-link">
+                            <i class="fa fa-share"></i> 继续管理公众号 (后盾网)
+                        </a>
+                    </li>
+                    <li class="nav-item  pr-1">
+                        <a href="http://doc.hdcms.com" class="nav-link">
+                            <i class="fa fa-w fa-file-code-o"></i> 在线文档
+                        </a>
+                    </li>
+                    <li class="nav-item  pr-1">
+                        <a href="http://www.hdcms.com" class="nav-link ">
+                            <i class="fa fa-w fa-forumbee"></i> 交流讨论
+                        </a>
+                    </li>
+                </ul>
+                <div class="my-2 my-lg-0">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-group"></i> 后盾网
                             </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">编辑当前帐号资料</a>
+                                <a class="dropdown-item" href="#">管理站点</a>
+                            </div>
                         </li>
-                        <li>
-                            <a href="http://doc.hdcms.com" target="_blank">
-                                <i class="fa fa-w fa-file-code-o"></i> 在线文档
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-w fa-user"></i> admin
                             </a>
-                        </li>
-                        <li>
-                            <a href="http://www.hdcms.com" target="_blank">
-                                <i class="fa fa-w fa-forumbee"></i> 交流讨论
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle"
-                               data-toggle="dropdown"
-                               aria-expanded="false">
-                                <i class="fa fa-group"></i> 后盾网 <b
-                                        class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="?s=system/site/edit&siteid=11"><i
-                                                class="fa fa-weixin fa-fw"></i>
-                                        编辑当前账号资料</a></li>
-                                <li><a href="?s=system/site/lists">
-                                        <i class="fa fa-cogs fa-fw"></i> 管理其它公众号</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                               role="button">
-                                <i class="fa fa-w fa-user"></i>
-                                admin <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="?s=system/user/info">我的帐号</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="?s=system/manage/menu">系统选项</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="?s=system/entry/quit">退出</a></li>
-                            </ul>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">我的帐号</a>
+                                <a class="dropdown-item" href="#">修改密码</a>
+                                <a class="dropdown-item" href="#">退出登录</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -78,8 +70,8 @@
         </nav>
         <!--导航end-->
     </div>
-    <div class="container-fluid ">
-        <div class="container-fluid admin-setting-menu">
+    <div class="container-fluid pt-5 pb-5">
+        <div class="container-fluid admin-setting-menu row">
             <div class="col-md-4 logo"></div>
             <div class="col-md-8 text-right admin-site-menu">
                 <a href="{{route('logout')}}" class="tile">
@@ -93,8 +85,10 @@
                 </a>
             </div>
         </div>
-        <div class="well clearfix {{route_class()}}">
-            @yield('content')
+        <div class="card bg-light mt-5">
+            <div class="card-body {{route_class()}}">
+                @yield('content')
+            </div>
         </div>
         <div class="text-muted admin-footer">
             <a href="http://www.houdunwang.com">实战培训</a>

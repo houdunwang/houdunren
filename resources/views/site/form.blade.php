@@ -1,17 +1,8 @@
-{{--<div class="box-body">--}}
-    {{--<div class="form-group">--}}
-        {{--<label>站点名称</label>--}}
-        {{--<input type="text" class="form-control" required name="name" value="{{old('name',$site['name']??'')}}"--}}
-               {{--placeholder="请输入站点中文名称">--}}
-    {{--</div>--}}
-{{--</div>--}}
-
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title">设置站点基本信息</h4>
+<div class="card">
+    <div class="card-header">
+        设置站点基本信息
     </div>
-    <div class="panel-body">
+    <div class="card-body">
         <div class="form-group">
             <label class="col-sm-2 control-label">站点名称</label>
             <div class="col-sm-10">

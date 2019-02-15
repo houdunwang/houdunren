@@ -1,71 +1,3 @@
-.nav.nav-tabs {
-  margin-bottom: 20px;
-  border-color: #ddd;
-}
-
-.nav.nav-tabs li.active a,
-.nav.nav-tabs li.active a:hover,
-.nav.nav-tabs li.active a:focus {
-  border: 1px solid #ddd !important;
-  background-color: #e4eaec !important;
-  color: #58666e !important;
-}
-
-.nav.nav-tabs li a {
-  color: #666;
-}
-
-.nav.nav-tabs li a:hover {
-  background: #f3f3f3 !important;
-  border-color: #dcdcdc #dcdcdc #ddd #dcdcdc;
-}
-
-.nav.nav-tabs li a:focus {
-  background: none;
-  border-bottom: solid 1px #e4eaec;
-}
-
-input,
-button,
-.btn,
-.alert,
-.form-control {
-  border-radius: 0 !important;
-}
-
-.nav-tabs li > a {
-  border-radius: 0 !important;
-}
-
-.panel {
-  border-radius: 0 !important;
-}
-
-.input-group-addon {
-  border-radius: 0 !important;
-}
-
-.well {
-  border-radius: 0 !important;
-}
-
-.img-rounded {
-  border-radius: 0 !important;
-}
-
-.list-group-item {
-  border-radius: 0 !important;
-}
-
-.modal-content {
-  box-shadow: none !important;
-  border-radius: 0 !important;
-}
-
-.btn {
-  border-radius: 0 !important;
-}
-
 .login h1.big-title {
   font-size: 35px;
   font-weight: 700;
@@ -103,6 +35,10 @@ button,
   text-decoration: none;
 }
 
+html {
+  font-size: 14px;
+}
+
 .admin {
   background: url(/images/admin.jpg?88b465ee3f56974831ba1b781d8dfaf4);
   background-size: contain;
@@ -118,24 +54,8 @@ button,
   margin-bottom: 10px;
 }
 
-.admin .top-menu .navbar {
-  border: 0;
-  margin-bottom: 0;
-  background: #353644;
-}
-
-.admin .top-menu .navbar ul.navbar-nav li.top_menu.active a {
-  color: #57b382;
-  background: none;
-}
-
 .admin .breadcrumb a {
   color: #666 !important;
-}
-
-.admin .admin-setting-menu {
-  margin-top: 30px;
-  margin-bottom: 20px;
 }
 
 .admin .admin-setting-menu .logo {
@@ -192,6 +112,20 @@ button,
 
 .site-index .panel .panel-footer a {
   color: #999999;
+}
+
+.setting-index h5.page-header {
+  border: none;
+  border-left: 0.3em #333333 solid;
+  padding-left: 1em;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding-bottom: 0;
+  font-size: 1rem;
+}
+
+.setting-index h5.page-header:first-child {
+  margin-top: 10px;
 }
 
 .setting-index a.tile {

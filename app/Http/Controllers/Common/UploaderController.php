@@ -23,7 +23,6 @@ class UploadController extends Controller
      * @param UploadServer $uploadServer
      * @return array
      * @throws \App\Exceptions\CustomException
-     * @throws \Spatie\Image\Exceptions\InvalidManipulation
      */
     public function upload(Request $request, UploadServer $uploadServer)
     {

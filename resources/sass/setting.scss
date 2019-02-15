@@ -1,4 +1,16 @@
 .setting-index {
+  h5.page-header{
+    border: none;
+    border-left: 0.3em #333333 solid;
+    padding-left: 1em;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-bottom: 0;
+    font-size: 1rem;
+    &:first-child{
+      margin-top: 10px;
+    }
+  }
   a {
     &.tile {
       margin-right: 10px;
@@ -26,4 +38,8 @@
       background: #006675;
     }
   }
+}
+
+//系统设置
+.setting-edit{
 }

@@ -9,12 +9,13 @@ function route_class()
 }
 
 /**
- * 获取系统配置
+ * 获取模块配置项
  * @param $path
  * @param null $default
- * @return null
+ * @param string $type
+ * @return mixed
  */
-function config_system($path, $default = null)
+function config_get($path, $default = null, $type = 'module')
 {
-    return app(\App\Repositories\ConfigRepository::class)->get($path, $default);
+    return app(\App\Repositories\ConfigRepository::class)->get($path, $default, $type);
 }

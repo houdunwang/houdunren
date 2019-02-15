@@ -25,12 +25,13 @@ class ConfigRepository extends Repository implements RepositoryInterface
      * 保存配置
      * @param Request $request
      * @param string $name
+     * @param string $type
      * @return bool
      */
     public function save(Request $request, string $name, $type = 'module'): bool
     {
+        Cache::forget($type);
         $data = $request->except(['_token', '_method']);
-        Cache::forget('config');
         return Config::updateOrCreate(
             [$type => $name],
             [$type => $name, 'data' => array_merge($this->get($name) ?? [], $data)]
@@ -41,12 +42,12 @@ class ConfigRepository extends Repository implements RepositoryInterface
      * 获取默认值
      * @param string $name 支持点语法
      * @param null $default
+     * @param string $type
      * @return mixed|null
      */
     public function get(string $name, $default = null, $type = 'module')
     {
-        Cache::forget('config');
-        $cache = Cache::rememberForever('config', function () use ($type) {
+        $cache = Cache::rememberForever($type, function () use ($type) {
             return Config::pluck('data', $type);
         });
         return array_get($cache, $name) ?? $default;
