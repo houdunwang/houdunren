@@ -19,13 +19,18 @@ Route::group(['middleware' => [], 'prefix' => 'common', 'as' => 'common.'], func
 //用户管理
 Route::group(['middleware' => ['auth']], function () {
     //个人中心
-    Route::resource('user', 'UserController');
+    Route::resource('member', 'MemberController');
+    //后台用户管理
+    Route::resource('user', 'UserController')->middleware('SuperAdmin');
+    Route::get('user-change-lock/{user}/{state}', 'UserController@changeLock')->name('user.change.lock')->middleware('SuperAdmin');
     //后台用户管理
     Route::resource('user', 'UserController');
     //站点管理
     Route::resource('site', 'SiteController');
     //系统设置
     Route::resource('setting', 'SettingController')->middleware('SuperAdmin');
+    //更新全站缓存
+    Route::get('update-cache', 'SettingController@updateCache')->name('update-cache')->middleware('SuperAdmin');
     //会员组
     Route::resource('group', 'GroupController')->middleware('SuperAdmin');
     //套餐

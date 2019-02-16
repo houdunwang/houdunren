@@ -25,6 +25,7 @@
                     <th scope="col">可用模板</th>
                     <th scope="col">默认套餐</th>
                     <th scope="col">系统套餐</th>
+                    <th scope="col">用户组</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
@@ -51,6 +52,13 @@
                             @else
                                 <i class="fa fa-times-circle text-secondary"></i>
                             @endif
+                        </td>
+                        <td>
+                            @foreach ($package->group()->get() as $group)
+                                <a href="{{route('group.edit',$group)}}" class="badge badge-info">
+                                    {{$group['name']}}
+                                </a>
+                            @endforeach
                         </td>
                         <td class=" text-right">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">

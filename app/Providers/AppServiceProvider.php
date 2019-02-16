@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Models\Package;
 use App\Observers\PackageObserver;
+use App\Observers\UserObserver;
+use App\User;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
     protected function observer()
     {
         Package::observe(PackageObserver::class);
+        User::observe(UserObserver::class);
     }
 
     /**

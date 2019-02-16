@@ -111,17 +111,9 @@ html {
   background: #006675;
 }
 
-.admin .admin-footer {
-  margin-bottom: 50px;
-  color: #ffffff;
-  font-size: 15px;
-  text-align: center;
-}
-
 .admin .admin-footer a {
   color: #ffffff;
   display: inline-block;
-  padding: 5px;
 }
 
 .user-edit #icon {

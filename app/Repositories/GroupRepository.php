@@ -24,7 +24,7 @@ class GroupRepository extends Repository
 
     public function save(Model $model, array $attributes)
     {
-         parent::save($model, $attributes);
+         parent::update($model, $attributes);
         return $model->package()->sync(request()->input('packages'));
     }
 

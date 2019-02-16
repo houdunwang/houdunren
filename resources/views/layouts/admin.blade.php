@@ -71,14 +71,17 @@
     </div>
     <div class="container-fluid pt-5 pb-5">
         <div class="container-fluid admin-setting-menu row">
-            <div class="col-md-4 logo"></div>
+            <div class="col-md-4 logo"
+                 style="background-image: url('{!! config_get('base.logo','','system') !!}')"></div>
             <div class="col-md-8 text-right admin-site-menu">
                 <a href="{{route('logout')}}" class="tile">
                     <i class="fa fa-sign-out fa-2x"></i>退出
                 </a>
-                <a href="{{route('setting.index')}}" class="tile">
-                    <i class="fa fa-support fa-2x"></i>系统设置
-                </a>
+                @if (isSuperAdmin())
+                    <a href="{{route('setting.index')}}" class="tile">
+                        <i class="fa fa-support fa-2x"></i>系统设置
+                    </a>
+                @endif
                 <a href="{{route('site.index')}}" class="tile">
                     <i class="fa fa-sitemap fa-2x"></i>网站管理
                 </a>
@@ -89,11 +92,15 @@
                 @yield('content')
             </div>
         </div>
-        <div class="text-muted admin-footer">
-            <a href="http://www.houdunwang.com">实战培训</a>
-            <a href="http://www.hdcms.com">开源框架</a>
-            <br/>
-            Powered by hdcms v5.7.0 Build: 20171213155315 © 2014-2019 www.hdcms.com
+        <div class="text-light admin-footer pb-5 mt-5 small text-center">
+            <div class="mb-1">
+                <a href="http://www.houdunwang.com" class="mr-2">实战培训</a>
+                <a href="http://www.hdcms.com" class="mr-2">开源框架</a>
+                <a href="http://www.houdunren.com">在线学习</a>
+            </div>
+            <span class="small">
+                Powered by hdcms v5.7.0 © 2014-2019 www.hdcms.com
+            </span>
         </div>
     </div>
 </div>

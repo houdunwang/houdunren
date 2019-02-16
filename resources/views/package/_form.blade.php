@@ -85,4 +85,4 @@
         </table>
     </div>
 </div>
-<button class="btn btn-primary mt-3">保存提交</button>
+<button class="btn btn-success mt-3">保存提交</button>

@@ -13,16 +13,16 @@
             <input type="text" name="site_num" class="form-control col-sm-6" required value="{{$group['site_num']??3}}">
             <small class="text-muted">可创建的站点数量</small>
         </div>
-        <div class="form-group">
-            <label>有效期限</label>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control col-sm-6" name="days" value="{{$group['days']??30}}" required>
-                <div class="input-group-append">
-                    <span class="input-group-text">天</span>
-                </div>
-            </div>
-            <small class="text-muted">设置用户组的有效期限, 到期后该用户组的所有公众号只能使用 "基础服务"。</small>
-        </div>
+        {{--<div class="form-group">--}}
+            {{--<label>有效期限</label>--}}
+            {{--<div class="input-group mb-3">--}}
+                {{--<input type="text" class="form-control col-sm-6" name="days" value="{{$group['days']??30}}" required>--}}
+                {{--<div class="input-group-append">--}}
+                    {{--<span class="input-group-text">天</span>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<small class="text-muted">设置用户组的有效期限, 到期后该用户组的将不能使用任何服务</small>--}}
+        {{--</div>--}}
     </div>
 </div>
 <div class="card mt-3">
@@ -63,9 +63,7 @@
         </table>
     </div>
 </div>
-<button class="btn btn-primary mt-3">保存提交</button>
-
-
+<button class="btn btn-success mt-3">保存提交</button>
 @push('js')
     <script>
         function selectAll() {

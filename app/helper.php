@@ -28,3 +28,14 @@ function isSuperAdmin(): bool
 {
     return auth()->check() && auth()->user()['id'] == 1;
 }
+
+/**
+ * 表外键关联约束
+ * @param string $tableName 关联表
+ * @param int $foreignKey 关联字段
+ */
+function tableForeign(string $tableName, int $foreignKey)
+{
+    $table->unsignedInteger($foreignKey);
+    $table->foreign($foreignKey)->references('id')->on($tableName)->onDelete('cascade');
+}

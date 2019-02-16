@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Repositories\GroupRepository;
 use App\Repositories\UserRepository;
 use App\Servers\UserServer;
 use App\User;
@@ -17,53 +18,50 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('user.index');
+        $users = User::with('group')->where('id', '>', 1)->paginate(15);
+        return view('user.index', compact('users'));
     }
 
-    public function create()
+    public function create(GroupRepository $groupRepository)
     {
+        $groups = $groupRepository->all();
+        return view('user.create', compact('groups'));
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request, UserRepository $repository)
     {
+        $this->validate($request, ['password' => 'required'],['password.required'=>'请输入用户密码']);
+        $repository->create($request->input());
+        return redirect(route('user.index'))->with('success', '用户添加成功');
     }
 
     public function show(User $user)
     {
     }
 
-    public function edit(User $user, Request $request)
+    public function edit(User $user, GroupRepository $groupRepository)
     {
-        $action = $request->query('action');
-        if (!in_array($action, ['avatar', 'password'])) {
-            abort(404);
-        }
-//        dd(auth()->user()->i);
-        $this->authorize('update', $user);
-        return view('user.' . $action, compact('user'));
+        $groups = $groupRepository->all();
+        return view('user.edit', compact('user', 'groups'));
     }
 
-    public function update(Request $request, UserServer $server)
+    public function update(UserRequest $request, User $user, UserRepository $repository)
     {
-        $user = auth()->user();
-        $this->authorize('update', $user);
-        switch ($request->query('action')) {
-            case 'password':
-                $server->changePassword($user, $request, true);
-                return back()->with('success', '密码修改成功');
-                break;
-            case 'avatar':
-                $user['icon'] = $request->input('icon');
-                $user->save();
-                return back()->with('success', '头像设置成功');
-                break;
-            default:
-                return abort(404);
-        }
+        $repository->update($user, array_filter($request->input()));
+        return redirect(route('user.index'))->with('success', '修改成功');
+    }
 
+    public function changeLock(User $user, $state, Request $request)
+    {
+        $user['lock'] = $state == 'lock';
+        $user->save();
+        return back()->with('success', '锁定状态修改成功');
     }
 
     public function destroy(User $user)
     {
+        $this->authorize('delete', $user);
+        $user->delete();
+        return back()->with('success', '用户删除成功');
     }
 }

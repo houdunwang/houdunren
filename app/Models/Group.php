@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Group extends Model
 {
-    protected $fillable = ['name', 'site_num', 'days'];
+    protected $fillable = ['name', 'site_num'];
     protected $casts = ['package' => 'array', 'system' => 'bool'];
 
     public function package()

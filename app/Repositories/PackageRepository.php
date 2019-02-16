@@ -22,6 +22,6 @@ class PackageRepository extends Repository
 
     public function update(Model $model, array $attributes)
     {
-        return parent::save($model, $attributes);
+        return parent::update($model, $attributes);
     }
 }

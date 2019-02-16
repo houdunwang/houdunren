@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Attachment;
+use App\Models\Group;
 use App\Models\Site;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -27,7 +28,12 @@ class User extends Authenticatable
         'token',
         'mobile_verified_at',
         'icon',
+        'admin_end',
+        'lock',
+        'group_id',
+        'real_name',
     ];
+    protected $casts = ['lock' => 'boolean', 'admin_end' => 'datetime'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -42,6 +48,11 @@ class User extends Authenticatable
     public function getAvatarAttribute()
     {
         return $this['icon'] ?? asset('images/user.jpg');
+    }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
     }
 
     /**

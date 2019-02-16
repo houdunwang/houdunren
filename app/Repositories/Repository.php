@@ -49,7 +49,7 @@ abstract class Repository implements RepositoryInterface
         return $this->instance->create($attributes);
     }
 
-    public function save(Model $model, array $attributes)
+    public function update(Model $model, array $attributes)
     {
         return $model->fill($attributes)->save();
     }

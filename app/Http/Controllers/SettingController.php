@@ -32,18 +32,24 @@ class SettingController extends Controller
 
     public function edit($name, ConfigRepository $repository)
     {
-        $config = $repository->get($name,[],'system');
-        return view('setting.edit', compact('config','name'));
+        $config = $repository->get($name, [], 'system');
+        return view('setting.edit', compact('config', 'name'));
     }
 
-    public function update(Request $request, $name,ConfigRepository $repository)
+    public function update(Request $request, $name, ConfigRepository $repository)
     {
-        $repository->save($request,$name,'system');
-        return back()->with('success','保存成功');
+        $repository->save($request, $name, 'system');
+        return back()->with('success', '保存成功');
     }
 
     public function destroy($id)
     {
         //
+    }
+
+    public function updateCache()
+    {
+        \Cache::flush();
+        return back()->with('success', '全站缓存更新成功');
     }
 }

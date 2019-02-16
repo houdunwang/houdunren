@@ -15,7 +15,8 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->nullable()->comment('昵称');
+            $table->string('name',30)->unique()->nullable()->comment('昵称');
+            $table->string('real_name', 20)->nullable()->comment('真实姓名');
             $table->string('email')->unique()->nullable()->index()->comment('邮箱');
             $table->string('mobile')->unique()->nullable()->index()->comment('手机');
             $table->string('password');
@@ -27,6 +28,9 @@ class CreateUsersTable extends Migration
             $table->string('qq')->nullable()->comment('QQ号');
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('mobile_verified_at')->nullable();
+            $table->unsignedInteger('group_id')->comment('后台用户组');
+            $table->timestamp('admin_end')->nullable()->comment('后台结束时间');
+            $table->unsignedTinyInteger('lock')->comment('锁定后台操作权限');
             $table->rememberToken();
             $table->timestamps();
         });

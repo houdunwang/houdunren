@@ -18,8 +18,10 @@ use Illuminate\Http\Request;
  * Class UserRepository
  * @package App\Repositories
  */
-class UserRepository
+class UserRepository extends Repository
 {
+    protected $model = User::class;
+
     /**
      * 根据邮箱查找
      * @param string $email

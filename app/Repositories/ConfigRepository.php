@@ -30,12 +30,13 @@ class ConfigRepository extends Repository implements RepositoryInterface
      */
     public function save(Request $request, string $name, $type = 'module'): bool
     {
-        Cache::forget($type);
+        ;
         $data = $request->except(['_token', '_method']);
-        return Config::updateOrCreate(
+         Config::updateOrCreate(
             [$type => $name],
             [$type => $name, 'data' => array_merge($this->get($name) ?? [], $data)]
         )->save();
+        return Cache::forget($type);
     }
 
     /**

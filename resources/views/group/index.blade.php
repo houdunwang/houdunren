@@ -23,6 +23,7 @@
                     <th scope="col">名称</th>
                     <th scope="col">可创建站点数量</th>
                     <th scope="col">有效期限</th>
+                    <th>套餐</th>
                     <th scope="col">系统组</th>
                     <th scope="col"></th>
                 </tr>
@@ -34,6 +35,11 @@
                         <td>{{$group['site_num']}}</td>
                         <td>
                             <span class="badge badge-success">{{$group['days']}}天</span>
+                        </td>
+                        <td>
+                            @foreach ($group->package()->get() as $package)
+                                <a href="{{route('package.edit',$package)}}" class="badge badge-info">{{$package['name']}}</a>
+                            @endforeach
                         </td>
                         <td>
                             @if ($group['system'])

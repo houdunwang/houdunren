@@ -17,14 +17,12 @@ class CreateGroupsTable extends Migration
             $table->increments('id');
             $table->string('name')->comment('组名称');
             $table->unsignedSmallInteger('site_num')->comment('可创建的站点数量');
-            $table->unsignedSmallInteger('days')->comment('有效天数');
             $table->unsignedTinyInteger('system')->nullable()->comment('系统用户组');
             $table->timestamps();
         });
         DB::table('groups')->insert([
             'name' => '体验组',
             'site_num' => 3,
-            'days' => 30,
             'system' => true,
         ]);
     }

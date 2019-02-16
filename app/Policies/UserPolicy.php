@@ -53,7 +53,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        //
+        return $model['id'] > 1 && isSuperAdmin();
     }
 
     /**
