@@ -1,3 +1,5 @@
+@inject('moduleRepository','App\Repositories\ModuleRepository')
+@inject('templateRepository','App\Repositories\TemplateRepository')
 <div class="card">
     <div class="card-header">
         服务套餐管理
@@ -5,84 +7,89 @@
     <div class="card-body">
         <div class="form-group">
             <label>服务套餐名称</label>
-            <input type="text" name="name" class="form-control col-sm-6" required placeholder="请输入套餐中文名称" value="{{$package['name']??''}}">
-        </div>
-        <div class="form-group">
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" name="is_default" value="1"
-                    {{active_class($package['is_default']??'','checked')}}>
-                    默认套餐
-                </label>
-            </div>
-            <small id="helpId" class="text-muted">新注册用户默认使用的套餐</small>
+            <input type="text" name="name" class="form-control col-sm-6" required placeholder="请输入套餐中文名称"
+                   value="{{$package['name']??''}}">
         </div>
     </div>
 </div>
-<div class="card mt-3">
-    <div class="card-header">
-        设置当前用户允许使用的模块
+@if (count( $moduleRepository->all()))
+    <div class="card mt-3">
+        <div class="card-header">
+            选择套餐使用的模块
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-light small">
+                <tr>
+                    <th scope="col" style="width: 150px;">
+                        <label class="mb-0 text-secondary">
+                            {{--<input type="checkbox" name="modules[]" value="1"> (全选)选择--}}
+                        </label>
+                    </th>
+                    <th scope="col">模块名称</th>
+                    <th scope="col">模块标识</th>
+                    <th scope="col" class="w-50"></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($moduleRepository->all() as $module)
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="modules[]" value="{{$module['id']}}"
+                                    {{active_class($package->module->contains($module),'checked')}}>
+                        </td>
+                        <td>{{$module['title']}}</td>
+                        <td>{{$module['name']}}</td>
+                        <td>
+                            @if ($module['local'])
+                                <span class="badge badge-success">本地模块</span>
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="card-body">
-        <table class="table">
-            <thead class="thead-light small">
-            <tr>
-                <th scope="col" style="width: 150px;">
-                    <label class="mb-0 text-secondary">
-                        <input type="checkbox" name="modules[]" value="1"> (全选)选择
-                    </label>
-                </th>
-                <th scope="col">模块名称</th>
-                <th scope="col">模块标识</th>
-                <th scope="col" class="w-50">功能简介</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <input type="checkbox" name="" value="1">
-                </td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>
-                    <span class="badge badge-success">30天</span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+@endif
+@if (count($templateRepository->all()))
+    <div class="card mt-3">
+        <div class="card-header">
+            选择套餐使用的模板
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-light small">
+                <tr>
+                    <th scope="col" style="width: 150px;">
+                        <label class="mb-0 text-secondary">
+                            {{--<input type="checkbox" name="modules[]" value="1"> (全选)选择--}}
+                        </label>
+                    </th>
+                    <th scope="col">模板名称</th>
+                    <th scope="col">模板标识</th>
+                    <th scope="col" class="w-50"></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($templateRepository->all() as $template)
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="templates[]" value="{{$template['id']}}"
+                                    {{active_class($package->template->contains($template),'checked')}}>
+                        </td>
+                        <td>{{$template['title']}}</td>
+                        <td>{{$template['name']}}</td>
+                        <td>
+                            @if ($template['local'])
+                                <span class="badge badge-success">本地模块</span>
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-<div class="card mt-3">
-    <div class="card-header">
-        设置当前用户允许使用的模板
-    </div>
-    <div class="card-body">
-        <table class="table small">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col" style="width: 150px;">
-                    <label class="mb-0 text-secondary">
-                        <input type="checkbox" name="" value="1"> (全选)选择
-                    </label>
-                </th>
-                <th scope="col">模板名称</th>
-                <th scope="col">模板标识</th>
-                <th scope="col" class="w-50">模板描述</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">
-                    <input type="checkbox" name="templages[]" value="1">
-                </th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>
-                    <span class="badge badge-success">30天</span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+@endif
 <button class="btn btn-success mt-3">保存提交</button>

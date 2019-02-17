@@ -11,6 +11,7 @@ namespace App\Repositories;
 use App\Exceptions\InvalidParamException;
 use App\Http\Requests\UserRequest;
 use App\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 /**
@@ -21,6 +22,29 @@ use Illuminate\Http\Request;
 class UserRepository extends Repository
 {
     protected $model = User::class;
+
+    protected function formatAttribute(array $attributes): array
+    {
+        $attributes = array_filter($attributes);
+        if (isset($attributes['password'])) {
+            $attributes['password'] = bcrypt($attributes['password']);
+        }
+        return $attributes;
+    }
+
+    public function create(array $attributes)
+    {
+        $attributes = $this->formatAttribute($attributes);
+        $attributes['lock'] = false;
+        $attributes['admin_end'] = (new Carbon())->addDays(config_get('register.days', 7));
+        $attributes['group_id'] = config_get('register.group_id', 1);
+        return parent::create($attributes);
+    }
+
+    public function update(Model $model, array $attributes)
+    {
+        return parent::update($model, $this->formatAttribute($attributes));
+    }
 
     /**
      * 根据邮箱查找

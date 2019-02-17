@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PackageRequest;
 use App\Models\Package;
+use App\Repositories\ModuleRepository;
 use App\Repositories\PackageRepository;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,9 @@ class PackageController extends Controller
         return view('package.index', compact('packages'));
     }
 
-    public function create()
+    public function create(Package $package)
     {
-        return view('package.create');
+        return view('package.create',compact('package'));
     }
 
     public function store(PackageRequest $request, PackageRepository $repository)
@@ -30,9 +31,10 @@ class PackageController extends Controller
     {
     }
 
-    public function edit(Package $package, PackageRepository $repository)
+    public function edit(Package $package, ModuleRepository $moduleRepository)
     {
-        return view('package.edit', compact('package'));
+        $modules = $moduleRepository->all();
+        return view('package.edit', compact('package', 'modules'));
     }
 
     public function update(PackageRequest $request, Package $package, PackageRepository $repository)
@@ -43,8 +45,8 @@ class PackageController extends Controller
 
     public function destroy(Package $package, PackageRepository $repository)
     {
-        $this->authorize('delete',$package);
+        $this->authorize('delete', $package);
         $repository->delete($package);
-        return back()->with('success','套餐删除成功');
+        return back()->with('success', '套餐删除成功');
     }
 }

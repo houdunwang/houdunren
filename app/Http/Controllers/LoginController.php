@@ -14,6 +14,7 @@ class LoginController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('guest', ['only' => 'index']);
     }
 
     public function index()
@@ -24,7 +25,7 @@ class LoginController extends Controller
     public function store(Request $request, UserServer $server)
     {
         if ($server->login($request->only(['name', 'password']))) {
-            return redirect()->intended(route('admin.index'));
+            return redirect()->intended(route('home'));
         } else {
             return back()->with('error', '帐号或密码错误');
         }

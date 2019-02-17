@@ -1,6 +1,25 @@
+<ul class="nav nav-tabs mb-2">
+    @can('index',auth()->user())
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('user.index')}}">
+                用户列表
+            </a>
+        </li>
+    @endcan
+    <li class="nav-item">
+        <a class="nav-link active" href="#">
+            设置用户
+        </a>
+    </li>
+</ul>
 <div class="card">
     <div class="card-header">设置用户信息</div>
     <div class="card-body">
+        <div class="form-group">
+            <label>昵称</label>
+            <input type="text" name="name" class="form-control col-sm-6" required
+                   value="{{old('name',$user['name']??'')}}">
+        </div>
         <div class="form-group">
             <label>邮箱</label>
             <input type="email" name="email" class="form-control col-sm-6"
@@ -24,7 +43,8 @@
             <div>
                 <select class="custom-select my-1 mr-sm-2 col-sm-6" name="group_id">
                     @foreach($groups as $group)
-                        <option value="{{$group['id']}}">{{$group['name']}}</option>
+                        <option value="{{$group['id']}}"
+                                {{active_class(($user['group_id']??null)==$group['id'],'selected')}}>{{$group['name']}}</option>
                     @endforeach
                 </select>
             </div>
@@ -55,11 +75,6 @@
 <div class="card mt-3">
     <div class="card-header">用户其他资料</div>
     <div class="card-body">
-        <div class="form-group">
-            <label>昵称</label>
-            <input type="text" name="name" class="form-control col-sm-6" required
-                   value="{{old('name',$user['name']??'')}}">
-        </div>
         <div class="form-group">
             <label>真实姓名</label>
             <input type="text" name="real_name" class="form-control col-sm-6"

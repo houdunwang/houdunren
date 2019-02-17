@@ -1,3 +1,9 @@
+.module-create img.img-thumbnail,
+.module-edit img.img-thumbnail {
+  background: #dcdcdc;
+  width: 150px;
+}
+
 a {
   color: #6c757d;
   text-decoration: none;

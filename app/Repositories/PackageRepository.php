@@ -17,11 +17,19 @@ class PackageRepository extends Repository
 
     public function create(array $attributes)
     {
-        return parent::create($attributes);
+        \DB::transaction(function () use ($attributes) {
+            $model = parent::create($attributes);
+            $model->module()->sync($attributes['modules'] ?? []);
+            $model->template()->sync($attributes['templates'] ?? []);
+        });
     }
 
     public function update(Model $model, array $attributes)
     {
-        return parent::update($model, $attributes);
+        \DB::transaction(function () use ($model, $attributes) {
+            parent::update($model, $attributes);
+            $model->module()->sync($attributes['modules'] ?? []);
+            $model->template()->sync($attributes['templates'] ?? []);
+        });
     }
 }

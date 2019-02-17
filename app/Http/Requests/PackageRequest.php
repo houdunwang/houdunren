@@ -19,7 +19,7 @@ class PackageRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:10',
+            'name' => 'required|max:10|unique:packages,name,' . request('package')['id'],
         ];
     }
 
@@ -28,6 +28,7 @@ class PackageRequest extends FormRequest
         return [
             'name.required' => '套餐名称不能为空',
             'name.max' => '套餐名称不能超过10个字',
+            'name.unique' => '套餐名称已经存在',
         ];
     }
 

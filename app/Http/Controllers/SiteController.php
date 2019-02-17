@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SiteRequest;
 use App\Models\Site;
+use App\Repositories\SiteRepository;
+use App\User;
 
 /**
  * 站点管理
@@ -12,9 +14,9 @@ use App\Models\Site;
  */
 class SiteController extends Controller
 {
-    public function index()
+    public function index(SiteRepository $repository)
     {
-        $sites = auth()->user()->site;
+        $sites = $repository->paginate(20);
         return view('site.index', compact('sites'));
     }
 
@@ -23,38 +25,43 @@ class SiteController extends Controller
         return view('site.create');
     }
 
-    public function store(SiteRequest $request)
+    public function store(SiteRequest $request, SiteRepository $repository)
     {
-        auth()->user()->site()->create($request->input());
+        $repository->create($request->input());
         return redirect(route('site.index'))->with('success', '站点创建成功');
     }
 
-    public function show(Site $site)
+    public function show(Site $site, SiteRepository $siteRepository)
     {
+        $siteRepository->cacheSite($site);
         return view('site.show', compact('site'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Site $site)
     {
         return view('site.edit', compact('site'));
     }
 
-    public function update(SiteRequest $request, Site $site)
+    public function update(SiteRequest $request, Site $site, SiteRepository $repository)
     {
-        $site->update($request->input());
+        $repository->update($site, $request->input());
         return redirect(route('site.index'))->with('success', '站点修改成功');
     }
 
-    public function destroy(Site $site)
+    public function destroy(Site $site, SiteRepository $repository)
     {
         $this->authorize('delete', $site);
-        $site->delete();
+        $repository->delete($site);
         return back()->with('success', '站点删除成功');
+    }
+
+    public function access(Site $site, SiteRepository $siteRepository)
+    {
+        return view('site.access', compact('site'));
+    }
+
+    public function users(Site $site)
+    {
+        return view('site.user', compact('site'));
     }
 }

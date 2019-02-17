@@ -25,8 +25,8 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|max:30|unique:users,name,' . request('user')['id'],
-            'email' => 'sometimes|required|email|unique:users,email,' . request('user')['id'],
-            'mobile' => 'sometimes|required|unique:users,mobile,' . request('user')['id'],
+            'email' => 'sometimes|nullable|email|unique:users,email,' . request('user')['id'],
+            'mobile' => 'sometimes|nullable|numeric|unique:users,mobile,' . request('user')['id'],
             'password' => 'nullable|confirmed|min:5|max:20',
             'group_id' => 'sometimes|required|numeric',
             'admin_end' => 'sometimes|required|date',
@@ -45,7 +45,9 @@ class UserRequest extends FormRequest
             'group_id.required' => '会员组不能为空',
             'admin_end.required' => '到期时间不能为空',
             'admin_end.date' => '至期时间格式错误',
-            'qq.numeric'=>'QQ号输入错误'
+            'qq.numeric' => 'QQ号输入错误',
+            'mobile.numeric' => '手机号格式错误',
+            'email.email' => '邮箱格式错误',
         ];
     }
 }

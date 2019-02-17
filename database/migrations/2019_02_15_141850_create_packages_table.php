@@ -17,14 +17,13 @@ class CreatePackagesTable extends Migration
             $table->increments('id');
             $table->char('name', 20)->unique()->comment('套餐名称');
             $table->unsignedTinyInteger('system')->nullable()->comment('系统套餐');
-            $table->unsignedTinyInteger('is_default')->nullable()->comment('默认套餐');
+            $table->text('modules')->nullable()->comment('模块列表');
+            $table->text('templates')->nullable()->comment('模板列表');
             $table->timestamps();
         });
         DB::table('packages')->insert([
             'name' => '体验套餐',
-            'system' => true,
-            'is_default' => true,
-        ]);
+            'system' => true]);
     }
 
     /**

@@ -64,13 +64,13 @@ class User extends Authenticatable
         return $this->hasMany(Attachment::class);
     }
 
-    public function site()
-    {
-        return $this->hasMany(Site::class);
-    }
-
     public function isSuperAdmin()
     {
         return $this['id'] == 1;
+    }
+
+    public function site()
+    {
+        return $this->belongsToMany(Site::class)->as('role')->withPivot('role')->withTimestamps();
     }
 }

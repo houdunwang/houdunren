@@ -3,12 +3,13 @@
 namespace App\Observers;
 
 use App\User;
+use Carbon\Carbon;
 
 class UserObserver
 {
     public function creating(User $user)
     {
-        $user['lock']=false;
+
     }
 
     public function updating(User $user)

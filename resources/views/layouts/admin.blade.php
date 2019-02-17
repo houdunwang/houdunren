@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+@inject('repository',App\Repositories\SiteRepository')
+        <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -25,9 +26,11 @@
                         </a>
                     </li>
                     <li class="nav-item  pr-1">
-                        <a href="?s=site/entry/home&siteid=11" class="nav-link">
-                            <i class="fa fa-share"></i> 继续管理公众号 (后盾网)
-                        </a>
+                        @if ($site = $repository->historySite())
+                            <a href="{{route('site.show',$site)}}" class="nav-link">
+                                <i class="fa fa-share"></i> 继续管理公众号 ({{$site['name']}})
+                            </a>
+                        @endif
                     </li>
                     <li class="nav-item  pr-1">
                         <a href="http://doc.hdcms.com" class="nav-link">
@@ -42,25 +45,26 @@
                 </ul>
                 <div class="my-2 my-lg-0">
                     <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-group"></i> 后盾网
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">编辑当前帐号资料</a>
-                                <a class="dropdown-item" href="#">管理站点</a>
-                            </div>
-                        </li>
+                        @if ($site = $repository->historySite())
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-group"></i> {{$site['name']}}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="{{route('site.edit',$site)}}">编辑当前站点资料</a>
+                                    <a class="dropdown-item" href="{{route('site.index')}}">设置操作员权限</a>
+                                </div>
+                            </li>
+                        @endif
                         <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-w fa-user"></i> admin
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">我的帐号</a>
-                                <a class="dropdown-item" href="#">修改密码</a>
-                                <a class="dropdown-item" href="#">退出登录</a>
+                                <a class="dropdown-item" href="{{route('user.edit',auth()->user())}}">修改资料</a>
+                                <a class="dropdown-item" href="{{route('logout')}}">退出登录</a>
                             </div>
                         </li>
                     </ul>

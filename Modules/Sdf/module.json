@@ -1,0 +1,14 @@
+{
+    "name": "Sdf",
+    "alias": "sdf",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Sdf\\Providers\\SdfServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

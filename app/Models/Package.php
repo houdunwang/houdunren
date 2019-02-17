@@ -11,11 +11,21 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Package extends Model
 {
-    protected $fillable = ['name', 'is_default'];
-    protected $casts = ['is_default' => 'bool', 'system' => 'bool'];
+    protected $fillable = ['name', 'modules', 'templates'];
+    protected $casts = ['system' => 'bool', 'modules' => 'array', 'templates' => 'array'];
 
     public function group()
     {
         return $this->belongsToMany(Group::class);
+    }
+
+    public function module()
+    {
+        return $this->belongsToMany(Module::class);
+    }
+
+    public function template()
+    {
+        return $this->belongsToMany(Template::class);
     }
 }

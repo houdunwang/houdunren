@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-
     <div class="clearfix">
         <div class="input-group">
             <a href="{{route('site.create')}}" class="btn btn-success">
@@ -43,24 +42,28 @@
             <div class="card-footer text-muted">
                 <div class="row">
                     <div class="col-md-6 small">
-                        服务有效期 : 2017-04-09 ~ 2022-12-16&nbsp;&nbsp;&nbsp;站长 : hdxj (后盾人官方)
+                        到期时间 : {{$site->admin['admin_end']->format('Y-m-d')}}&nbsp;&nbsp;&nbsp;
+                        站长 : <a href="">{{$site->admin['name']}}</a>
                     </div>
                     <div class="col-md-6 text-right small">
-                        <a href="?s=system/site/access_setting&siteid=11" class="text-muted">
+                        <a href="{{route('site.access',$site)}}" class="text-muted">
                             <i class="fa fa-key"></i> 设置权限
                         </a>&nbsp;&nbsp;&nbsp;
                         <a href="?s=system/site/wechat&step=wechat&siteid=11" class="text-muted">
                             <i class="fa fa-comment-o"></i> 微信公众号
                         </a>&nbsp;&nbsp;&nbsp;
-                        <a href="?s=system/permission/users&siteid=11" class="text-muted">
+                        <a href="{{route('site.user',$site)}}" class="text-muted">
                             <i class="fa fa-user"></i> 操作员管理
                         </a>&nbsp;&nbsp;&nbsp;
-                        <a href="javascript:;" onclick="delSite(11,'后盾网')" class="text-muted">
-                            <i class="fa fa-trash"></i> 删除
-                        </a>&nbsp;&nbsp;&nbsp;
-                        <a href="?s=system/site/edit&siteid=11" class="text-muted">
+                        <a href="{{route('site.edit',$site)}}" class="text-muted mt-3">
                             <i class="fa fa-pencil-square-o"></i> 编辑
+                        </a>&nbsp;&nbsp;&nbsp;
+                        <a href="javascript:void(0)" onclick="destroy(this)" class="text-muted">
+                            <i class="fa fa-trash"></i> 删除
                         </a>
+                        <form action="{{route('site.destroy',$site)}}" method="post">
+                            @csrf @method('DELETE')
+                        </form>
                     </div>
                 </div>
             </div>

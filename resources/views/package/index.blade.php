@@ -34,10 +34,14 @@
                     <tr>
                         <td>{{$package['name']}}</td>
                         <td>
-                            <span class="badge badge-info">sdf</span>
+                            @foreach($package->module as $module)
+                                <span class="badge badge-info">{{$module['title']}}</span>
+                            @endforeach
                         </td>
                         <td>
-                            <span class="badge badge-success">sdf</span>
+                            @foreach($package->template as $template)
+                                <span class="badge badge-success">{{$template['title']}}</span>
+                            @endforeach
                         </td>
                         <td>
                             @if ($package['is_default'])
@@ -62,9 +66,9 @@
                         </td>
                         <td class=" text-right">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <a class="btn btn-secondary" href="{{route('package.edit',$package)}}">编辑</a>
+                                <a class="btn btn-outline-success" href="{{route('package.edit',$package)}}">编辑</a>
                                 @can('delete',$package)
-                                    <button type="button" class="btn btn-secondary" onclick="destroy(this)">删除</button>
+                                    <button type="button" class="btn btn-outline-danger" onclick="destroy(this)">删除</button>
                                     <form action="{{route('package.destroy',$package)}}" method="post">
                                         @csrf @method('DELETE')
                                     </form>

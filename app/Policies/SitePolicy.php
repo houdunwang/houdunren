@@ -54,7 +54,7 @@ class SitePolicy
      */
     public function delete(User $user, Site $site)
     {
-        return $user['id'] == $site['user_id'];
+        return $user['id'] == $site['user_id'] || isSuperAdmin();
     }
 
     /**

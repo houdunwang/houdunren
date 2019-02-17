@@ -9,4 +9,9 @@
             上传配置
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link {{active_class($name=='register','active')}}" href="{{route('setting.edit','register')}}">
+            注册设置
+        </a>
+    </li>
 </ul>

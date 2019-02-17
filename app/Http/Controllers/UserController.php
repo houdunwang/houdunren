@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Models\Site;
 use App\Repositories\GroupRepository;
 use App\Repositories\UserRepository;
 use App\Servers\UserServer;
@@ -16,8 +17,14 @@ use Illuminate\Http\Request;
  */
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['SuperAdmin'], ['only' => 'lock']);
+    }
+
     public function index()
     {
+        $this->authorize('index', auth()->user());
         $users = User::with('group')->where('id', '>', 1)->paginate(15);
         return view('user.index', compact('users'));
     }
@@ -30,28 +37,31 @@ class UserController extends Controller
 
     public function store(UserRequest $request, UserRepository $repository)
     {
-        $this->validate($request, ['password' => 'required'],['password.required'=>'请输入用户密码']);
+        $this->validate($request, ['password' => 'required'], ['password.required' => '请输入用户密码']);
         $repository->create($request->input());
         return redirect(route('user.index'))->with('success', '用户添加成功');
     }
 
     public function show(User $user)
     {
+
     }
 
     public function edit(User $user, GroupRepository $groupRepository)
     {
+        $this->authorize('update', $user);
         $groups = $groupRepository->all();
         return view('user.edit', compact('user', 'groups'));
     }
 
     public function update(UserRequest $request, User $user, UserRepository $repository)
     {
-        $repository->update($user, array_filter($request->input()));
-        return redirect(route('user.index'))->with('success', '修改成功');
+        $this->authorize('update', $user);
+        $repository->update($user, $request->input());
+        return back()->with('success', '修改成功');
     }
 
-    public function changeLock(User $user, $state, Request $request)
+    public function lock(User $user, $state)
     {
         $user['lock'] = $state == 'lock';
         $user->save();

@@ -26,26 +26,4 @@ class UserServer
             return auth()->attempt(['mobile' => $user['name'], 'password' => $user['password']]);
         }
     }
-
-    /**
-     * 修改密码
-     * @param User $user
-     * @param Request $request [original_password:原密码,password:新密码,password_confirmation:确认密码]
-     * @return bool
-     */
-    public function changePassword(User $user, Request $request): bool
-    {
-        $request->validate([
-            'original_password' => ['sometimes', new UserPasswordRule()],
-            'password' => ['required', 'min:5', 'confirmed'],
-        ], ['password.confirmed' => '确认密码输入错误']);
-
-        $user['password'] = \Hash::make($request['password']);
-        return $user->save();
-    }
-
-    public function setIcon(User $user,string $icon): bool
-    {
-
-    }
 }
