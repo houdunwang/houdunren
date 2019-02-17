@@ -26,7 +26,7 @@
                         </a>
                     </li>
                     <li class="nav-item  pr-1">
-                        @if ($site = $repository->historySite())
+                        @if ($site = $repository->getAdminCacheSite())
                             <a href="{{route('site.show',$site)}}" class="nav-link">
                                 <i class="fa fa-share"></i> 继续管理公众号 ({{$site['name']}})
                             </a>
@@ -45,7 +45,7 @@
                 </ul>
                 <div class="my-2 my-lg-0">
                     <ul class="navbar-nav">
-                        @if ($site = $repository->historySite())
+                        @if ($site = $repository->getAdminCacheSite())
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

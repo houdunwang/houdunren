@@ -21,9 +21,6 @@ class CreatePackagesTable extends Migration
             $table->text('templates')->nullable()->comment('模板列表');
             $table->timestamps();
         });
-        DB::table('packages')->insert([
-            'name' => '体验套餐',
-            'system' => true]);
     }
 
     /**

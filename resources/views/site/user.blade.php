@@ -34,7 +34,7 @@
                         <td></td>
                         <td class="text-right">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <a class="btn btn-outline-success" href="">
+                                <a class="btn btn-outline-success" href="{{route('site.permission',[$site,$user])}}">
                                     设置权限
                                 </a>
                                 @if (isSuperAdmin())

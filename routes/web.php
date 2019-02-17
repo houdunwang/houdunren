@@ -34,6 +34,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('site', 'SiteController');
     Route::get('site/access/{site}', 'SiteController@access')->name('site.access');
     Route::get('site/user/{site}','SiteController@users')->name('site.user');
+    //操作员权限
+    Route::get('site/permission/{site}/{user}','SitePermissionController@edit')->name('site.permission');
+    Route::put('site/permission/{site}/{user}','SitePermissionController@store')->name('site.permission');
+    //更新站点权限
+    Route::get('site-permission-cache/{site}','SitePermissionController@site')->name('site.permission.cache');
+
 });
 //系统设置
 Route::group(['middleware' => ['SuperAdmin']], function () {

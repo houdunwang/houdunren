@@ -1,7 +1,7 @@
 <?php return array (
   'title' => '商城',
   'name' => 'Shop',
-  'thumb' => 'http://hdcms.test/attachments/2019/02/11550419345718.jpeg',
+  'thumb' => 'http://hdcms.test/attachments/2019/02/11550426638111.jpeg',
   'wx_replies' => '1',
   'wx_cover' => '1',
   'menu_web' => '1',

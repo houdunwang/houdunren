@@ -20,11 +20,6 @@ class CreateGroupsTable extends Migration
             $table->unsignedTinyInteger('system')->nullable()->comment('系统用户组');
             $table->timestamps();
         });
-        DB::table('groups')->insert([
-            'name' => '体验组',
-            'site_num' => 3,
-            'system' => true,
-        ]);
     }
 
     /**

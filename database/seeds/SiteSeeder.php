@@ -12,7 +12,6 @@ class SiteSeeder extends Seeder
     public function run()
     {
         $site = \App\Models\Site::create([
-            'user_id' => 1,
             'name' => '测试站点',
             'description' => '这是用来演示的测试站点，随时可以删除',
         ]);

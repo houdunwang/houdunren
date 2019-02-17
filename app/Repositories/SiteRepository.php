@@ -26,7 +26,7 @@ class SiteRepository extends Repository
     public function create(array $attributes)
     {
         $model = parent::create($attributes);
-        $model->site()->save(auth()->user(), ['role' => 'admin']);
+        $model->user()->save(auth()->user(), ['role' => 'admin']);
     }
 
     /**
@@ -34,9 +34,9 @@ class SiteRepository extends Repository
      * @param Site $site
      * @throws \Exception
      */
-    public function cacheSite(Site $site)
+    public function cacheAdminSite(Site $site)
     {
-        return cache()->forever(auth()->id() . '-site', $site);
+        return cache()->forever(auth()->id() . 'admin-site', $site);
     }
 
     /**
@@ -44,9 +44,9 @@ class SiteRepository extends Repository
      * @return mixed
      * @throws \Exception
      */
-    public function historySite()
+    public function getAdminCacheSite()
     {
-        return cache()->rememberForever(auth()->id() . '-site', function () {
+        return cache()->rememberForever(auth()->id() . 'admin-site', function () {
             return auth()->user()->site()->first();
         });
     }
@@ -58,11 +58,6 @@ class SiteRepository extends Repository
      */
     public function packages(Site $site)
     {
-        return $site->user->group->package;
-    }
-
-    public function role(Site $site, User $user)
-    {
-        return $site->user()->wherePivot('user_id', $user['id'])->wherePivot('site_id', $site['id']);
+        return $site->user()->wherePivot('role','admin')->first()->group->package;
     }
 }

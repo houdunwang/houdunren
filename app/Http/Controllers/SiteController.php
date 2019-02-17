@@ -33,7 +33,7 @@ class SiteController extends Controller
 
     public function show(Site $site, SiteRepository $siteRepository)
     {
-        $siteRepository->cacheSite($site);
+        $siteRepository->cacheAdminSite($site);
         return view('site.show', compact('site'));
     }
 
@@ -55,7 +55,7 @@ class SiteController extends Controller
         return back()->with('success', '站点删除成功');
     }
 
-    public function access(Site $site, SiteRepository $siteRepository)
+    public function access(Site $site)
     {
         return view('site.access', compact('site'));
     }
