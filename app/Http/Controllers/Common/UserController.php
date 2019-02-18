@@ -11,12 +11,14 @@ class UserController extends Controller
 {
     public function search(UserRepository $repository, Request $request)
     {
+        //排除用户字段
+        $id = request()->query('id', '');
         if ($w = $request->input('w')) {
             $users = User::where('name', 'like', "%$w%")
                 ->orWhere('email', 'like', "%$w%")
                 ->orWhere('mobile', 'like', "%$w%")->paginate(10);
         } else {
-            $users = $repository->paginate(8);
+            $users = User::whereNotIn('id', explode(',', $id))->paginate(8);
         }
         return view('common.user.search', compact('users'));
     }

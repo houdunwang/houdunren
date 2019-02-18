@@ -47,7 +47,7 @@
                         <td class=" text-right">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                 <a class="btn btn-outline-success" href="{{route('user.edit',$user)}}">编辑</a>
-                                <a class="btn btn-outline-info" href="{{route('user.edit',$user)}}">查看操作权限</a>
+                                <a class="btn btn-outline-info" href="{{route('user.show',$user)}}">查看操作权限</a>
                                 @if ($user['lock'])
                                     <a class="btn btn-outline-danger" href="{{route('user.lock',[$user,'unlock'])}}">
                                         解锁用户

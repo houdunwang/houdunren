@@ -14,7 +14,7 @@ Route::get('logout', 'LoginController@logout')->name('logout');
 Route::group(['prefix' => 'common', 'as' => 'common.'], function () {
     Route::any('upload', 'Common\UploadController@upload')->name('upload.make');
     Route::any('upload-lists', 'Common\UploadController@lists')->name('upload.lists');
-    Route::any('user/search','Common\UserController@search')->name('user.search');
+    Route::any('user/search', 'Common\UserController@search')->name('user.search');
 });
 //用户
 Route::group(['middleware' => ['auth']], function () {
@@ -34,12 +34,14 @@ Route::group(['middleware' => ['auth']], function () {
     //站点管理
     Route::resource('site', 'SiteController');
     Route::get('site/access/{site}', 'SiteController@access')->name('site.access');
-    Route::get('site/user/{site}','SiteController@users')->name('site.user');
+    //设置操作员
+    Route::get('site/user/{site}', 'SiteController@users')->name('site.user');
+    Route::get('site/operator/{site}', 'SiteController@operator')->name('site.operator.set');
     //操作员权限
-    Route::get('site/permission/{site}/{user}','SitePermissionController@edit')->name('site.permission');
-    Route::put('site/permission/{site}/{user}','SitePermissionController@store')->name('site.permission');
+    Route::get('site/permission/{site}/{user}', 'SitePermissionController@edit')->name('site.permission');
+    Route::put('site/permission/{site}/{user}', 'SitePermissionController@store')->name('site.permission');
     //更新站点权限
-    Route::get('site-permission-cache/{site}','SitePermissionController@site')->name('site.permission.cache');
+    Route::get('site-permission-cache/{site}', 'SitePermissionController@site')->name('site.permission.cache');
 
 });
 //系统设置

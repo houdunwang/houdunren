@@ -42,12 +42,14 @@
             <div class="card-footer text-muted">
                 <div class="row">
                     <div class="col-md-6 small">
-                        到期时间 : {{$site->admin['admin_end']->format('Y-m-d')}}&nbsp;&nbsp;&nbsp;
-                        站长 : <a href="">{{$site->admin['name']}}</a>
+                        @if ($site->admin)
+                            到期时间 : {{$site->admin['admin_end']->format('Y-m-d')}}&nbsp;&nbsp;&nbsp;
+                            站长 : <a href="">{{$site->admin['name']}}</a>
+                        @endif
                     </div>
                     <div class="col-md-6 text-right small">
                         <a href="{{route('site.access',$site)}}" class="text-muted">
-                            <i class="fa fa-key"></i> 设置权限
+                            <i class="fa fa-key"></i> 站点权限
                         </a>&nbsp;&nbsp;&nbsp;
                         <a href="?s=system/site/wechat&step=wechat&siteid=11" class="text-muted">
                             <i class="fa fa-comment-o"></i> 微信公众号

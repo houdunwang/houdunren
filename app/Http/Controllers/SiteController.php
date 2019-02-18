@@ -55,13 +55,39 @@ class SiteController extends Controller
         return back()->with('success', '站点删除成功');
     }
 
+    /**
+     * 站点套餐权限列表
+     * @param Site $site
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function access(Site $site)
     {
         return view('site.access', compact('site'));
     }
 
+    /**
+     * 站点操作员列表
+     * @param Site $site
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function users(Site $site)
     {
         return view('site.user', compact('site'));
+    }
+
+    /**
+     * 设置站点操作员
+     * @param Site $site
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function operator(Site $site)
+    {
+        $user = User::findOrFail(request('id'));
+        $user->site()->toggle([$site['id'] => ['role' => 'operator']]);
+        if (request()->expectsJson()) {
+            return response()->json(['message' => '操作员设置成功', 'code' => 0]);
+        } else {
+            return back()->with('success', '操作员设置成功');
+        }
     }
 }
