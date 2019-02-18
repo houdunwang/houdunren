@@ -14,6 +14,10 @@ class Group extends Model
     protected $fillable = ['name', 'site_num'];
     protected $casts = ['package' => 'array', 'system' => 'bool'];
 
+    /**
+     * 组套餐
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function package()
     {
         return $this->belongsToMany(Package::class)->withTimestamps();

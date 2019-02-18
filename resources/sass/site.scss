@@ -1,10 +1,30 @@
-//站点管理
-.site-index {
-  .panel {
-    .panel-footer {
-      a {
-        color: #999999;
-      }
-    }
+body {
+  background: #f8f9fa;
+}
+
+.admin-site {
+  background-size: contain;
+  height: 100vh;
+  a:hover {
+    text-decoration: none !important;
+  }
+
+  //系统与站点顶部导航菜单
+  .top-menu {
+    background: #353644;
+    margin-bottom: 10px;
+  }
+  .site-container {
+    //display: flex;
+    //flex-direction: row;
+    //justify-content: flex-start;
+    //align-items: stretch;
+    //min-height: calc(100vh - 50px);
+    //div.menu {
+    //  width:220px;
+    //}
+    //div.content {
+    //  flex: 1;
+    //}
   }
 }

@@ -15,7 +15,7 @@
     <div class="card">
         <div class="card-header">用户列表</div>
         <div class="card-body">
-            <table class="table table-hover ">
+            <table class="table table-hover table-responsive-sm">
                 <thead class="">
                 <tr>
                     <th scope="col">昵称</th>

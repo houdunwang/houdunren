@@ -17,7 +17,7 @@
             会员组列表
         </div>
         <div class="card-body">
-            <table class="table">
+            <table class="table table-responsive-sm">
                 <thead class="thead-light">
                 <tr>
                     <th scope="col">名称</th>

@@ -45,9 +45,10 @@ class SiteRepository extends Repository
      */
     public function getAdminCacheSite()
     {
-        return cache()->rememberForever(auth()->id() . 'admin-site', function () {
+        $site = cache()->rememberForever(auth()->id() . 'admin-site', function () {
             return auth()->user()->site()->first();
         });
+        return Site::find($site['id']) ?? null;
     }
 
     /**
@@ -57,6 +58,6 @@ class SiteRepository extends Repository
      */
     public function packages(Site $site)
     {
-        return $site->user()->wherePivot('role','admin')->first()->group->package;
+        return $site->user()->wherePivot('role', 'admin')->first()->group->package;
     }
 }

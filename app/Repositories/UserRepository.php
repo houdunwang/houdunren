@@ -10,6 +10,8 @@ namespace App\Repositories;
 
 use App\Exceptions\InvalidParamException;
 use App\Http\Requests\UserRequest;
+use App\Models\Module;
+use App\Models\Site;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -46,33 +48,18 @@ class UserRepository extends Repository
         return parent::update($model, $this->formatAttribute($attributes));
     }
 
-    /**
-     * 根据邮箱查找
-     * @param string $email
-     * @return User|null
-     */
-    public function findByEmail(string $email): ?User
+    public function modules(?Site $site, User $user)
     {
-        return User::where('email', $email)->first();
-    }
-
-    /**
-     * 根据手机号查找
-     * @param string $mobile
-     * @return User|null
-     */
-    public function findByMobile(string $mobile): ?User
-    {
-        return User::where('email', $mobile)->first();
-    }
-
-    public function changePassword(Request $request, User $user): bool
-    {
-        if ($user['password'] != $request['original_password']) {
-            throw new InvalidParamException('原密码输入错误');
+        //站长获取所有模块
+        if ($site->admin['id'] == $user['id']) {
+            $modules = collect();
+            foreach ($user->group->package as $package) {
+                $modules = $modules->merge($package->module);
+            }
+            return $modules;
         }
-        $user['password'] = bcrypt($user['password']);
-        $user->save();
-        return true;
+        //操作员返回指定模块
+        $modules = $user->getAllPermissions()->where('site_id', $site['id'])->pluck('module')->unique()->toArray();
+        return Module::whereIn('name', $modules)->get();
     }
 }

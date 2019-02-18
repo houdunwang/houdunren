@@ -5,7 +5,7 @@
             站点的应用列表
         </div>
         <div class="card-body">
-            <table class="table">
+            <table class="table table-responsive-sm">
                 <thead class="thead-light small">
                 <tr>
                     <th scope="col">用户编号</th>

@@ -85,7 +85,7 @@ class SitePermissionRepository extends Repository
                 'module' => $module['name'],
             ];
             $permissions[] = [
-                'name' => 'wx_replies',
+                'name' => 'wx_entry',
                 'title' => '微信封面入口',
                 'site_id' => $site['id'],
                 'module' => $module['name'],

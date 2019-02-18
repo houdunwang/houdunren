@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Site;
-use App\Repositories\PermissionRepository;
 use App\Repositories\SitePermissionRepository;
 use App\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 /**
  * 设置会员站点权限
@@ -38,7 +38,8 @@ class SitePermissionController extends Controller
      */
     public function store(Site $site, User $user, SitePermissionRepository $repository, Request $request)
     {
-        $user->syncPermissions($request->input('permissions'));
+        $ids = Permission::whereIn('name',$request->input('permissions'))->pluck('id')->toArray();
+        $user->permissions()->syncWithoutDetaching($ids);
         return back()->with('success', '操作员权限设置成功');
     }
 

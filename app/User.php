@@ -8,6 +8,7 @@ use App\Models\Site;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -74,5 +75,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Site::class)->as('role')
             ->withPivot('role')->withTimestamps();
+    }
+
+    public function permissions()
+    {
+        return $this->morphToMany(Permission::class,'model','model_has_permissions');
     }
 }

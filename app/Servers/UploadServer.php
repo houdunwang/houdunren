@@ -10,7 +10,6 @@
 
 namespace App\Servers;
 
-use App\Exceptions\CustomException;
 use App\Exceptions\UploadException;
 
 class UploadServer
@@ -19,7 +18,7 @@ class UploadServer
      * 上传处理
      * @param $file
      * @return string
-     * @throws CustomException
+     * @throws UploadException
      */
     public function upload($file)
     {

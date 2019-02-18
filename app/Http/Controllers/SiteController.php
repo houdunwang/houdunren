@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SiteRequest;
 use App\Models\Site;
+use App\Repositories\SitePermissionRepository;
 use App\Repositories\SiteRepository;
+use App\Repositories\UserRepository;
 use App\User;
+use Spatie\Permission\Models\Permission;
 
 /**
  * 站点管理
@@ -31,10 +34,14 @@ class SiteController extends Controller
         return redirect(route('site.index'))->with('success', '站点创建成功');
     }
 
-    public function show(Site $site, SiteRepository $siteRepository)
+    public function show(Site $site, SiteRepository $siteRepository, UserRepository $userRepository)
     {
         $siteRepository->cacheAdminSite($site);
-        return view('site.show', compact('site'));
+        $modules = $userRepository->modules($site, auth()->user());
+        if (!count($modules)) {
+            return back()->with('error', '你没有操作权限');
+        }
+        return view('site.show', compact('site', 'modules'));
     }
 
     public function edit(Site $site)
@@ -84,6 +91,10 @@ class SiteController extends Controller
     {
         $user = User::findOrFail(request('id'));
         $user->site()->toggle([$site['id'] => ['role' => 'operator']]);
+        //删除操作员时同时移除权限数据
+        if (!$site->user()->where('name', $user['name'])->first()) {
+            $user->permissions()->detach($site->permissions->pluck('id')->toArray());
+        }
         if (request()->expectsJson()) {
             return response()->json(['message' => '操作员设置成功', 'code' => 0]);
         } else {

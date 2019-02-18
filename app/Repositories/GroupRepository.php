@@ -8,10 +8,14 @@
 
 namespace App\Repositories;
 
-
 use App\Models\Group;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 后台管理组
+ * Class GroupRepository
+ * @package App\Repositories
+ */
 class GroupRepository extends Repository
 {
     protected $model = Group::class;
@@ -24,7 +28,7 @@ class GroupRepository extends Repository
 
     public function save(Model $model, array $attributes)
     {
-         parent::update($model, $attributes);
+        parent::update($model, $attributes);
         return $model->package()->sync(request()->input('packages'));
     }
 

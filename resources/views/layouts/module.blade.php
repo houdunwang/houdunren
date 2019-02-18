@@ -62,30 +62,32 @@
         <div class="col-sm-3 col-md-2">
             <div class="card">
                 @foreach($userRepository->modules(site(),auth()->user()) as $module)
-                    <div class="card-header">
-                        {{$module['title']}}
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        @foreach ($module['menus'] as $menus)
-                            @foreach ($menus as $menu)
-                                @can('s'.site()['id'].'.'.$module['name'].'.'.$menu['permission'])
-                                    <a href="{{$menu['url']}}?mid={{$module['id']}}"
-                                       class="list-group-item">{{$menu['title']}}</a>
-                                @endcan
-                            @endforeach
+                    @if($module['name'] == module()['name'])
+                        @foreach ($module['menus'] as $title=>$menus)
+                            <div class="card-header">
+                                {{$title}}
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                @foreach ($menus as $menu)
+                                    @can('s'.site()['id'].'.'.$module['name'].'.'.$menu['permission'])
+                                        <a href="{{$menu['url']}}" class="list-group-item">{{$menu['title']}}</a>
+                                    @endcan
+                                @endforeach
+                            </ul>
                         @endforeach
-                    </ul>
+                    @endif
                 @endforeach
             </div>
         </div>
         <div class="col-sm-9 col-md-10 mt-2 mt-sm-0">
-            <div class="card">
-                <div class="card-header">
-                    模块列表
-                </div>
-                <div class="card-body {{route_class()}}">
-                    @yield('content')
-                </div>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <i class="fa fa-cogs"></i> <a href="{{route('site.show',site())}}">站点管理</a>
+                </li>
+                <li class="breadcrumb-item"><a href="#">{{module()['title']}}</a></li>
+            </ol>
+            <div class="{{route_class()}}">
+                @yield('content')
             </div>
         </div>
     </div>

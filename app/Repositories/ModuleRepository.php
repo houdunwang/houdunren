@@ -12,6 +12,11 @@ use App\Models\Module;
 use App\Repositories\Traits\ModuleTrait;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 模块管理
+ * Class ModuleRepository
+ * @package App\Repositories
+ */
 class ModuleRepository extends Repository
 {
     use ModuleTrait;
@@ -23,6 +28,7 @@ class ModuleRepository extends Repository
         $this->package = array_merge($this->package, $attributes);
         \Artisan::call('hdcms:module-make', ['name' => $this->package['name']]);
         $this->writeConfig();
+        $this->formatMenus();
         return parent::create([
             'title' => $this->package['title'],
             'name' => $this->package['name'],
@@ -39,6 +45,7 @@ class ModuleRepository extends Repository
         $this->permissions = include $this->configPath() . 'permissions.php';
         $this->menus = include $this->configPath() . 'menus.php';
         $this->writeConfig();
+        $this->formatMenus();
         return parent::update($model, [
             'title' => $this->package['title'],
             'name' => $this->package['name'],
@@ -85,11 +92,29 @@ class ModuleRepository extends Repository
         $this->package = include $this->configPath($model['name']) . 'package.php';
         $this->permissions = include $this->configPath($model['name']) . 'permissions.php';
         $this->menus = include $this->configPath($model['name']) . 'menus.php';
+        $this->formatMenus();
         return parent::update($model, [
             'title' => $this->package['title'],
             'name' => $this->package['name'],
+            'menus' => $this->menus,
             'local' => true,
             'package' => $this->package,
         ]);
+    }
+
+    /**
+     * 添加系统管理菜单
+     */
+    protected function formatMenus()
+    {
+        $this->menus['系统功能'] = [
+            ['title' => '域名管理', 'url' => route('domain.create'), 'permission' => 'domain'],
+            ['title' => '桌面会员中心菜单', 'url' => 'menu_mobile', 'permission' => 'menu_mobile'],
+            ['title' => '手机会员中心菜单', 'url' => 'menu_web', 'permission' => 'menu_web'],
+        ];
+        $this->menus['微信回复'] = [
+            ['title' => '微信回复列表', 'url' => 'wx_replies', 'permission' => 'wx_replies'],
+            ['title' => '微信封面入口', 'url' => 'wx_entry', 'permission' => 'wx_entry'],
+        ];
     }
 }

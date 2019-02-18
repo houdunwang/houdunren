@@ -39,3 +39,21 @@ function tableForeign(string $tableName, int $foreignKey)
     $table->unsignedInteger($foreignKey);
     $table->foreign($foreignKey)->references('id')->on($tableName)->onDelete('cascade');
 }
+
+/**
+ * 获取缓存站点的编号
+ */
+function site()
+{
+    return (new \App\Repositories\SiteRepository())->getAdminCacheSite();
+}
+
+/**
+ * 获取缓存的模块
+ * @return \Illuminate\Contracts\Cache\Repository
+ * @throws Exception
+ */
+function module()
+{
+    return cache()->get('module');
+}

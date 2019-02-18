@@ -79,10 +79,6 @@ a {
   margin-bottom: 10px;
 }
 
-.admin .breadcrumb a {
-  color: #666 !important;
-}
-
 .admin .admin-setting-menu .logo {
   background: url(/images/logo.png?b3f5a49c0352569233e01d072020e8a8) no-repeat;
   background-size: contain;
@@ -127,8 +123,22 @@ a {
   height: 200px;
 }
 
-.site-index .panel .panel-footer a {
-  color: #999999;
+body {
+  background: #f8f9fa;
+}
+
+.admin-site {
+  background-size: contain;
+  height: 100vh;
+}
+
+.admin-site a:hover {
+  text-decoration: none !important;
+}
+
+.admin-site .top-menu {
+  background: #353644;
+  margin-bottom: 10px;
 }
 
 .setting-index h5.page-header {
