@@ -4,6 +4,10 @@
   width: 150px;
 }
 
+html {
+  font-size: 14px;
+}
+
 a {
   color: #6c757d;
   text-decoration: none;
@@ -58,10 +62,6 @@ a {
 
 .login .remind a:hover {
   text-decoration: none;
-}
-
-html {
-  font-size: 14px;
 }
 
 .admin {

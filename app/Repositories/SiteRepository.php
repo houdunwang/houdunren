@@ -9,7 +9,6 @@
 namespace App\Repositories;
 
 use App\Models\Site;
-use App\User;
 
 class SiteRepository extends Repository
 {

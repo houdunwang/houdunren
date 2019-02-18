@@ -9,37 +9,20 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class PackagePolicy
 {
     use HandlesAuthorization;
-
-    /**
-     * Determine whether the user can view the package.
-     *
-     * @param  \App\User $user
-     * @param  \App\Models\Package $package
-     * @return mixed
-     */
+    public function before($user, $model)
+    {
+        return isSuperAdmin() ? true : null;
+    }
     public function view(User $user, Package $package)
     {
         //
     }
 
-    /**
-     * Determine whether the user can create packages.
-     *
-     * @param  \App\User $user
-     * @return mixed
-     */
     public function create(User $user)
     {
         //
     }
 
-    /**
-     * Determine whether the user can update the package.
-     *
-     * @param  \App\User $user
-     * @param  \App\Models\Package $package
-     * @return mixed
-     */
     public function update(User $user, Package $package)
     {
         //

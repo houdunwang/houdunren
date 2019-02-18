@@ -13,6 +13,7 @@ class SitePermissionController extends Controller
     public function edit(Site $site, User $user, SitePermissionRepository $repository)
     {
         $permissions = $repository->permissions($site);
+//        dd($permissions->toArray());
         return view('site_permission.edit', compact('site', 'user', 'permissions'));
     }
 

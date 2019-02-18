@@ -25,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Site::class => SitePolicy::class,
         Group::class => GroupPolicy::class,
-        Package::class=>PackagePolicy::class
+        Package::class => PackagePolicy::class,
     ];
 
     /**
@@ -37,6 +37,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::before(function () {
+            return isSuperAdmin() ? true : null;
+        });
     }
 }

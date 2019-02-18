@@ -55,6 +55,7 @@ class SitePermissionRepository extends Repository
                         Permission::firstOrCreate(['name' => $name], [
                             'name' => $name,
                             'title' => $permission['title'],
+                            'permission' => $module['name'] . '.' . $permission['name'],
                             'site_id' => $site['id'],
                             'module' => $module['name'],
                         ]);

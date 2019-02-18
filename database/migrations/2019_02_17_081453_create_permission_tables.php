@@ -20,6 +20,7 @@ class CreatePermissionTables extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('title');
+            $table->string('permission')->comment('用户定义的模块权限');
             $table->string('site_id');
             $table->string('module');
             $table->string('guard_name');

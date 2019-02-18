@@ -8,6 +8,9 @@
         filesLists: '{{route('common.upload.lists')}}?',
         //require.js配置项（可为空）
         requireJs: {
+            paths:{
+                util: '/util/util',
+            }
             {{--paths: {--}}
                 {{--adminLte:"{{asset('org/AdminLTE-2.4.5')}}/dist/js/demo",--}}
             {{--},--}}

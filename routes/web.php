@@ -1,19 +1,20 @@
 <?php
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('admin.index');
 });
 Route::get('home', function () {
-    return redirect('/');
-});
+    return redirect()->route('admin.index');
+})->name('home');
 
 //登录退出
 Route::resource('login', 'LoginController');
 Route::get('login', 'LoginController@index')->name('login');
 Route::get('logout', 'LoginController@logout')->name('logout');
 //公共
-Route::group(['middleware' => [], 'prefix' => 'common', 'as' => 'common.'], function () {
+Route::group(['prefix' => 'common', 'as' => 'common.'], function () {
     Route::any('upload', 'Common\UploadController@upload')->name('upload.make');
     Route::any('upload-lists', 'Common\UploadController@lists')->name('upload.lists');
+    Route::any('user/search','Common\UserController@search')->name('user.search');
 });
 //用户
 Route::group(['middleware' => ['auth']], function () {
@@ -52,6 +53,7 @@ Route::group(['middleware' => ['SuperAdmin']], function () {
     //套餐
     Route::resource('package', 'PackageController');
 });
+
 //模块
 Route::group(['middleware' => ['SuperAdmin']], function () {
     //模块管理

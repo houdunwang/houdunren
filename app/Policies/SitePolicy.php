@@ -10,48 +10,23 @@ class SitePolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view the site.
-     *
-     * @param  \App\User $user
-     * @param  \App\Models\Site $site
-     * @return mixed
-     */
+    public function before($user, $model)
+    {
+        return isSuperAdmin() ? true : null;
+    }
+
     public function view(User $user, Site $site)
     {
-        //
     }
 
-    /**
-     * Determine whether the user can create sites.
-     *
-     * @param  \App\User $user
-     * @return mixed
-     */
     public function create(User $user)
     {
-        //
     }
 
-    /**
-     * Determine whether the user can update the site.
-     *
-     * @param  \App\User $user
-     * @param  \App\Models\Site $site
-     * @return mixed
-     */
     public function update(User $user, Site $site)
     {
-        //
     }
 
-    /**
-     * Determine whether the user can delete the site.
-     *
-     * @param  \App\User $user
-     * @param  \App\Models\Site $site
-     * @return mixed
-     */
     public function delete(User $user, Site $site)
     {
         return $user['id'] == $site['user_id'] || isSuperAdmin();

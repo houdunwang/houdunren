@@ -9,6 +9,11 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
+    public function before($user, $model)
+    {
+        return isSuperAdmin() ? true : null;
+    }
+
     public function index(User $user)
     {
         return isSuperAdmin();
@@ -16,7 +21,6 @@ class UserPolicy
 
     public function view(User $user, User $model)
     {
-        //
     }
 
     public function create(User $user)

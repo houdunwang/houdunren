@@ -7,6 +7,10 @@
         <li class="breadcrumb-item active"><a href="#">设置操作员权限</a></li>
     </ol>
     <div class="card">
+        <div class="card-header small text-secondary">
+            设置用户 <span class="text-info">{{$user['name']}}</span> 在
+            <span class="text-success">{{$site['name']}}</span> 站点上的权限
+        </div>
         <div class="card-body">
             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                 <a class="btn btn-outline-info" href="{{route('site.permission.cache',$site)}}">
@@ -37,7 +41,7 @@
                                         @endif
 
                                         <span data-container="body" data-toggle="popover" data-placement="top"
-                                              data-content="{{$p['name']}}">
+                                              data-content="{{$p['permission']}}">
                                         {{$p['title']}}
                                     </span>
                                     </label>

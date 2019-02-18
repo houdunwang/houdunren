@@ -72,6 +72,7 @@ class User extends Authenticatable
 
     public function site()
     {
-        return $this->belongsToMany(Site::class)->as('role')->withPivot('role')->withTimestamps();
+        return $this->belongsToMany(Site::class)->as('role')
+            ->withPivot('role')->withTimestamps();
     }
 }
