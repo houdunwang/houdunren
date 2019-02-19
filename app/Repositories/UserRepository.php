@@ -48,18 +48,5 @@ class UserRepository extends Repository
         return parent::update($model, $this->formatAttribute($attributes));
     }
 
-    public function modules(?Site $site, User $user)
-    {
-        //站长获取所有模块
-        if ($site->admin['id'] == $user['id']) {
-            $modules = collect();
-            foreach ($user->group->package as $package) {
-                $modules = $modules->merge($package->module);
-            }
-            return $modules;
-        }
-        //操作员返回指定模块
-        $modules = $user->getAllPermissions()->where('site_id', $site['id'])->pluck('module')->unique()->toArray();
-        return Module::whereIn('name', $modules)->get();
-    }
+
 }

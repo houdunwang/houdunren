@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Config extends Model
 {
-    protected $fillable = ['name', 'data', 'module','system'];
+    protected $fillable = ['name', 'data', 'module','system','site'];
 
     protected $casts = ['data' => 'array'];
 

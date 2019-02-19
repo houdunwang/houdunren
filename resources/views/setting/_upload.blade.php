@@ -35,7 +35,7 @@
             <div class="col-sm-6">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" name="file_size"
-                           value="{{$config['local']['file_size']??200000000}}">
+                           value="{{$config['file_size']??200000000}}">
                     <div class="input-group-append">
                         <span class="input-group-text">字节</span>
                     </div>

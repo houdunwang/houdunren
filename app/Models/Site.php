@@ -33,6 +33,10 @@ class Site extends Model
         return $this->user()->wherePivot('role', 'admin')->first();
     }
 
+    /**
+     * 站点的所有权限
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function permissions()
     {
         return $this->hasMany(Permission::class);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SiteRequest;
 use App\Models\Site;
+use App\Repositories\ModuleRepository;
 use App\Repositories\SiteRepository;
 use App\Repositories\UserRepository;
 use App\User;
@@ -32,23 +33,34 @@ class SiteController extends Controller
         return redirect(route('site.index'))->with('success', '站点创建成功');
     }
 
-    public function show(Site $site, SiteRepository $siteRepository, UserRepository $userRepository)
+    /**
+     * 站点管理主页
+     * @param Site $site
+     * @param SiteRepository $siteRepository
+     * @param ModuleRepository $moduleRepository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function show(Site $site, SiteRepository $siteRepository, ModuleRepository $moduleRepository)
     {
+        $this->authorize('view', $site);
         $siteRepository->cacheAdminSite($site);
-        $modules = $userRepository->modules($site, auth()->user());
+        $modules = $moduleRepository->getSiteModulesByUser($site, auth()->user());
         if (!count($modules)) {
-            return back()->with('error', '你没有操作权限');
+            return back()->with('error', '站点没有模块可使用或你没有操作权限');
         }
         return view('site.show', compact('site', 'modules'));
     }
 
     public function edit(Site $site)
     {
+        $this->authorize('update', $site);
         return view('site.edit', compact('site'));
     }
 
     public function update(SiteRequest $request, Site $site, SiteRepository $repository)
     {
+        $this->authorize('update', $site);
         $repository->update($site, $request->input());
         return redirect(route('site.index'))->with('success', '站点修改成功');
     }
@@ -74,9 +86,12 @@ class SiteController extends Controller
      * 站点操作员列表
      * @param Site $site
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function users(Site $site)
     {
+        $this->authorize('update', $site);
+        $this->authorize('view', $site);
         return view('site.user', compact('site'));
     }
 
@@ -84,9 +99,11 @@ class SiteController extends Controller
      * 设置站点操作员
      * @param Site $site
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function operator(Site $site)
     {
+        $this->authorize('update', $site);
         $user = User::findOrFail(request('id'));
         $user->site()->toggle([$site['id'] => ['role' => 'operator']]);
         //删除操作员时同时移除权限数据

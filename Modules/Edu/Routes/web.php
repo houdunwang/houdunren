@@ -11,5 +11,5 @@
 |
 */
 Route::group(['prefix' => 'edu', 'name' => 'edu.'], function () {
-    Route::resource('test', 'TestController');
+//    Route::resource('test', 'TestController');
 });

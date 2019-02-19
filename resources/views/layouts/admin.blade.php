@@ -139,7 +139,6 @@
         Powered by hdcms v5.7.0 © 2014-2019 www.hdcms.com
     </span>
 </div>
-
 @stack('js')
 <script>
     require(['bootstrap'])

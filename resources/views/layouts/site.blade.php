@@ -61,17 +61,17 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 mb-5">
             <div class="card">
-                @foreach($userRepository->modules(site(),auth()->user()) as $module)
+                @foreach($moduleRepository->getSiteModulesByUser(site(),auth()->user()) as $module)
                     <div class="card-header">
                         {{$module['title']}}
                     </div>
                     <ul class="list-group list-group-flush">
                         @foreach ($module['menus'] as $menus)
                             @foreach ($menus as $menu)
-                                @can('s'.site()['id'].'.'.$module['name'].'.'.$menu['permission'])
+                                @if (module_access($menu['permission'],$module['name']))
                                     <a href="{{$menu['url']}}?mid={{$module['id']}}"
                                        class="list-group-item">{{$menu['title']}}</a>
-                                @endcan
+                                @endif
                             @endforeach
                         @endforeach
                     </ul>

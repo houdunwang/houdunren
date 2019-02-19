@@ -9,12 +9,14 @@ class ModuleMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if ($mid = request()->query('mid')) {
-            cache()->forever('cache_module', Module::findOrFail($mid));
+        if (!\site()) {
+            abort(404, '您访问的站点不存在');
         }
-        //站点或模块不存在时禁止访问
-        if (!\site() || !\module()) {
-            abort(404, '请求页面不存在');
+        if ($mid = request()->query('mid')) {
+            cache()->forever('cache_admin_s' . site()['id'] . '_module', Module::findOrFail($mid));
+        }
+        if (!\module()) {
+            abort(404, '您请求的模块不存在');
         }
         return $next($request);
     }

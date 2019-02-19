@@ -11,5 +11,5 @@
 |
 */
 Route::group(['prefix' => 'setting', 'name' => 'setting.'], function () {
-    Route::resource('test', 'TestController');
+//    Route::resource('test', 'TestController');
 });

@@ -9,7 +9,9 @@
 namespace App\Repositories;
 
 use App\Models\Module;
+use App\Models\Site;
 use App\Repositories\Traits\ModuleTrait;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -126,5 +128,27 @@ class ModuleRepository extends Repository
         if ($this->package['wx_cover']) {
             $this->menus['微信回复'][] = ['title' => '微信封面入口', 'url' => 'wx_entry', 'permission' => 'wx_cover'];
         }
+    }
+
+    /**
+     * 获取用户在站点的模块
+     * @param Site|null $site
+     * @param User $user
+     * @return array|\Illuminate\Support\Collection
+     * @throws \Exception
+     */
+    public function getSiteModulesByUser(?Site $site, User $user)
+    {
+        //站长获取所有模块
+        if ($site->admin['id'] == $user['id']) {
+            $modules = collect();
+            foreach ($user->group->package as $package) {
+                $modules = $modules->merge($package->module);
+            }
+            return $modules;
+        }
+        //操作员返回指定模块
+        $modules = $user->getAllPermissions()->where('site_id', $site['id'])->pluck('module')->unique()->toArray();
+        return Module::whereIn('name', $modules)->get();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\ModuleMiddleware;
+use App\Http\Middleware\SiteMiddleware;
 use App\Http\Middleware\SuperAdminMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 

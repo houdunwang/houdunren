@@ -45,11 +45,11 @@ class ConfigRepository extends Repository implements RepositoryInterface
      * @param string $type
      * @return mixed|null
      */
-    public function get(string $name, $default = null, $type = 'module')
+    public function get(?string $name, $default = null, $type = 'module')
     {
         $cache = Cache::rememberForever($type, function () use ($type, $name) {
-            return Config::where($type, $name)->pluck('data', $type);
+            return Config::pluck('data', $type);
         });
-        return array_get($cache, $name) ?? $default;
+        return $name ? (array_get($cache, $name) ?? $default) : $cache;
     }
 }

@@ -10,14 +10,24 @@ function route_class()
 
 /**
  * 获取模块配置项
- * @param $path
- * @param null $default
- * @param string $type
+ * @param string $path 支持点语法的配置项
+ * @param null $default 转变值
+ * @param string $type 类型 module:模块,system:系统,site:站点
  * @return mixed
  */
-function config_get($path, $default = null, $type = 'module')
+function config_get(string $path, $default = null, $type = 'module')
 {
-    return app(\App\Repositories\ConfigRepository::class)->get($path, $default, $type);
+    switch ($type) {
+        //站点配置
+        case 'site':
+            $path = $path ? ('s' . site()['id'] . $path) : null;
+            return app(\App\Repositories\ConfigRepository::class)->get($path, $default, $type);
+            break;
+        case 'module':
+        case 'system':
+        default:
+            return app(\App\Repositories\ConfigRepository::class)->get($path, $default, $type);
+    }
 }
 
 /**
@@ -55,5 +65,28 @@ function site()
  */
 function module()
 {
-    return cache()->get('cache_module');
+    return cache()->get('cache_admin_s' . site()['id'] . '_module');
+}
+
+/**
+ * 模块权限判断
+ * @param string $permission 权限标识
+ * @param string|null $module 模块标识
+ * @param bool $abort 验证失败时显示错误页面
+ * @return mixed
+ * @throws Exception
+ */
+function module_access(string $permission, string $module = null, $abort = false)
+{
+    if (site()['admin']['id'] == auth()->id()) {
+        $status = true;
+    } else {
+        $module = $module ?? module()['name'];
+        $permission = 's' . site()['id'] . '.' . $module . '.' . $permission;
+        $status = auth()->user()->can($permission);
+    }
+    if (!$status && $abort) {
+        abort(403, '您没有操作权限');
+    }
+    return $status;
 }

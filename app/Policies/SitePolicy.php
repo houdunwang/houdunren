@@ -10,13 +10,14 @@ class SitePolicy
 {
     use HandlesAuthorization;
 
-    public function before($user, $model)
+    public function before($user, $action)
     {
         return isSuperAdmin() ? true : null;
     }
 
     public function view(User $user, Site $site)
     {
+        return $site->user->contains($user) || isSuperAdmin();
     }
 
     public function create(User $user)
@@ -25,11 +26,12 @@ class SitePolicy
 
     public function update(User $user, Site $site)
     {
+        return ($site['admin']['id'] == $user['id']) || isSuperAdmin();
     }
 
     public function delete(User $user, Site $site)
     {
-        return $user['id'] == $site['user_id'] || isSuperAdmin();
+        return ($site['admin']['id'] == $user['id']) || isSuperAdmin();
     }
 
     /**
@@ -41,7 +43,6 @@ class SitePolicy
      */
     public function restore(User $user, Site $site)
     {
-        //
     }
 
     /**

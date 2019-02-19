@@ -25,6 +25,7 @@ class CreateConfigsTable extends Migration
             $table->increments('id');
             $table->text('data')->comment('配置项');
             $table->string('system')->nullable()->comment('系统配置');
+            $table->string('site')->nullable()->comment('网站配置');
             $table->string('module')->nullable()->comment('模块配置');
             $table->timestamps();
         });

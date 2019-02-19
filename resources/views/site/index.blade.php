@@ -42,30 +42,35 @@
             <div class="card-footer text-muted">
                 <div class="row">
                     <div class="col-md-6 small">
-                        @if ($site->admin)
-                            到期时间 : {{$site->admin['admin_end']->format('Y-m-d')}}&nbsp;&nbsp;&nbsp;
-                            站长 : <a href="">{{$site->admin['name']}}</a>
-                        @endif
+                        到期时间 : {{$site->admin['admin_end']->format('Y-m-d')}}&nbsp;&nbsp;&nbsp;
+                        站长 : <a href="">{{$site->admin['name']}}</a>
                     </div>
                     <div class="col-md-6 text-right small">
-                        <a href="{{route('site.access',$site)}}" class="text-muted">
-                            <i class="fa fa-key"></i> 站点权限
-                        </a>&nbsp;&nbsp;&nbsp;
-                        <a href="?s=system/site/wechat&step=wechat&siteid=11" class="text-muted">
-                            <i class="fa fa-comment-o"></i> 微信公众号
-                        </a>&nbsp;&nbsp;&nbsp;
-                        <a href="{{route('site.user',$site)}}" class="text-muted">
-                            <i class="fa fa-user"></i> 操作员管理
-                        </a>&nbsp;&nbsp;&nbsp;
-                        <a href="{{route('site.edit',$site)}}" class="text-muted mt-3">
-                            <i class="fa fa-pencil-square-o"></i> 编辑
-                        </a>&nbsp;&nbsp;&nbsp;
-                        <a href="javascript:void(0)" onclick="destroy(this)" class="text-muted">
-                            <i class="fa fa-trash"></i> 删除
-                        </a>
-                        <form action="{{route('site.destroy',$site)}}" method="post">
-                            @csrf @method('DELETE')
-                        </form>
+                        @can('update',$site)
+                            <a href="{{route('config.site.edit',[$site,'name'=>'info'])}}" class="text-muted mr-2">
+                                <i class="fa fa-key"></i> 网站配置
+                            </a>
+                            <a href="{{route('site.access',$site)}}" class="text-muted mr-2">
+                                <i class="fa fa-key"></i> 站点模块
+                            </a>
+                            <a href="?s=system/site/wechat&step=wechat&siteid=11" class="text-muted mr-2">
+                                <i class="fa fa-comment-o"></i> 微信公众号
+                            </a>
+                            <a href="{{route('site.user',$site)}}" class="text-muted mr-2">
+                                <i class="fa fa-user"></i> 操作员管理
+                            </a>
+                            <a href="{{route('site.edit',$site)}}" class="text-muted mr-2">
+                                <i class="fa fa-pencil-square-o"></i> 编辑
+                            </a>
+                        @endcan
+                        @can('delete',$site)
+                            <a href="javascript:void(0)" onclick="destroy(this)" class="text-muted">
+                                <i class="fa fa-trash"></i> 删除
+                            </a>
+                            <form action="{{route('site.destroy',$site)}}" method="post">
+                                @csrf @method('DELETE')
+                            </form>
+                        @endcan
                     </div>
                 </div>
             </div>
