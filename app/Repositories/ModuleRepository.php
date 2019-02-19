@@ -111,7 +111,11 @@ class ModuleRepository extends Repository
     protected function formatMenus()
     {
         if ($this->package['config']) {
-            $this->menus['系统功能'][] = ['title' => '模块配置', 'url' => route('config.edit',$this->package['name']), 'permission' => 'config'];
+            $this->menus['系统功能'][] = [
+                'title' => '模块配置',
+                'url' => route('config.edit', $this->package['name']),
+                'permission' => 'config',
+            ];
         }
         if ($this->package['domain']) {
             $this->menus['系统功能'][] = ['title' => '域名管理', 'url' => route('domain.create'), 'permission' => 'domain'];
@@ -139,16 +143,31 @@ class ModuleRepository extends Repository
      */
     public function getSiteModulesByUser(?Site $site, User $user)
     {
+        $modules = $this->getSiteAllModule($site)->toArray();
         //站长获取所有模块
-        if ($site->admin['id'] == $user['id']) {
-            $modules = collect();
-            foreach ($user->group->package as $package) {
-                $modules = $modules->merge($package->module);
+        if ($site->admin['id'] != $user['id']) {
+            foreach ($modules as $k => $module) {
+                foreach ($module['menus'] as $title => $menus) {
+                    $modules[$k]['menus'][$title] = array_filter($menus, function ($menu) use ($module) {
+                        return module_access($menu['permission'], $module['name']);
+                    });
+                }
             }
-            return $modules;
         }
-        //操作员返回指定模块
-        $modules = $user->getAllPermissions()->where('site_id', $site['id'])->pluck('module')->unique()->toArray();
-        return Module::whereIn('name', $modules)->get();
+        return $modules;
+    }
+
+    /**
+     * 获取站点所有模块
+     * @param Site $site
+     * @return \Illuminate\Support\Collection
+     */
+    public function getSiteAllModule(Site $site)
+    {
+        $modules = collect();
+        foreach ($site->admin->group->package as $package) {
+            $modules = $modules->merge($package->module);
+        }
+        return $modules;
     }
 }

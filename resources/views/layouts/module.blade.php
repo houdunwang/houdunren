@@ -64,17 +64,19 @@
                 @foreach($moduleRepository->getSiteModulesByUser(site(),auth()->user()) as $module)
                     @if($module['name'] == module()['name'])
                         @foreach ($module['menus'] as $title=>$menus)
-                            <div class="card-header">
-                                {{$title}}
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                @foreach ($menus as $menu)
-                                    @if (module_access($menu['permission'],$module['name']))
-                                        <a href="{{$menu['url']}}?mid={{$module['id']}}"
-                                           class="list-group-item">{{$menu['title']}}</a>
-                                    @endif
-                                @endforeach
-                            </ul>
+                            @if (count($menus))
+                                <div class="card-header">
+                                    {{$title}}
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    @foreach ($menus as $menu)
+                                        @if (module_access($menu['permission'],$module['name']))
+                                            <a href="{{$menu['url']}}?mid={{$module['id']}}"
+                                               class="list-group-item">{{$menu['title']}}</a>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            @endif
                         @endforeach
                     @endif
                 @endforeach
