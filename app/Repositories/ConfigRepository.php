@@ -30,9 +30,8 @@ class ConfigRepository extends Repository implements RepositoryInterface
      */
     public function save(Request $request, string $name, $type = 'module'): bool
     {
-        ;
         $data = $request->except(['_token', '_method']);
-         Config::updateOrCreate(
+        Config::updateOrCreate(
             [$type => $name],
             [$type => $name, 'data' => array_merge($this->get($name) ?? [], $data)]
         )->save();
@@ -48,8 +47,8 @@ class ConfigRepository extends Repository implements RepositoryInterface
      */
     public function get(string $name, $default = null, $type = 'module')
     {
-        $cache = Cache::rememberForever($type, function () use ($type) {
-            return Config::pluck('data', $type);
+        $cache = Cache::rememberForever($type, function () use ($type, $name) {
+            return Config::where($type, $name)->pluck('data', $type);
         });
         return array_get($cache, $name) ?? $default;
     }

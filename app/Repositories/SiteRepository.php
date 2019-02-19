@@ -35,7 +35,7 @@ class SiteRepository extends Repository
      */
     public function cacheAdminSite(Site $site)
     {
-        return cache()->forever(auth()->id() . 'admin-site', $site);
+        return cache()->forever(auth()->id() . '-admin-site', $site);
     }
 
     /**
@@ -45,7 +45,7 @@ class SiteRepository extends Repository
      */
     public function getAdminCacheSite()
     {
-        $site = cache()->rememberForever(auth()->id() . 'admin-site', function () {
+        $site = cache()->rememberForever(auth()->id() . '-admin-site', function () {
             return auth()->user()->site()->first();
         });
         return Site::find($site['id']) ?? null;

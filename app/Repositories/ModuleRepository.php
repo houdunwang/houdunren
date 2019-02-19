@@ -9,7 +9,6 @@
 namespace App\Repositories;
 
 use App\Models\Module;
-use App\Models\Site;
 use App\Repositories\Traits\ModuleTrait;
 use Illuminate\Database\Eloquent\Model;
 
@@ -91,7 +90,7 @@ class ModuleRepository extends Repository
      */
     public function refresh(Model $model)
     {
-        $this->package = include $this->configPath($model['name']) . 'package.php';
+        $this->package = array_merge($this->package, include $this->configPath($model['name']) . 'package.php');
         $this->permissions = include $this->configPath($model['name']) . 'permissions.php';
         $this->menus = include $this->configPath($model['name']) . 'menus.php';
         $this->formatMenus();
@@ -109,6 +108,9 @@ class ModuleRepository extends Repository
      */
     protected function formatMenus()
     {
+        if ($this->package['config']) {
+            $this->menus['系统功能'][] = ['title' => '模块配置', 'url' => route('config.edit',$this->package['name']), 'permission' => 'config'];
+        }
         if ($this->package['domain']) {
             $this->menus['系统功能'][] = ['title' => '域名管理', 'url' => route('domain.create'), 'permission' => 'domain'];
         }

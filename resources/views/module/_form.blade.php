@@ -45,6 +45,12 @@
             <div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="config" value="1"
+                                {{active_class($module['package']['config']??true,'checked')}}> 模块配置
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="domain" value="1"
                                 {{active_class($module['package']['domain']??true,'checked')}}> 域名管理
                     </label>

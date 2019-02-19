@@ -18,6 +18,8 @@ trait ModuleTrait
         'name' => '',
         //预览图
         'thumb' => '',
+        //模块配置
+        'config'=>false,
         //域名管理
         'domain' => false,
         //微信回复列表

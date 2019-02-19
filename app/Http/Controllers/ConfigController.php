@@ -8,31 +8,27 @@
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Models\Config;
 use App\Repositories\ConfigRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 /**
- * 系统配置项
+ * 模块配置项
  * Class ConfigController
  * @package App\Http\Controllers\Admin
  */
 class ConfigController extends Controller
 {
-    public function edit($name)
+    public function edit($name, ConfigRepository $repository)
     {
-        return view('admin.config.' . $name);
+        $config = $repository->get($name, []);
+        return view('config.edit', compact('config', 'name'));
     }
 
-    public function update(Request $request, $name, ConfigRepository $configRepository)
+    public function update(Request $request, $name, ConfigRepository $repository)
     {
-        $config = config_get('admin', []);
-        $config[$name] = $request->except(['_token', '_method']);
-        config_save($config);
-        return back()->with('success', '保存成功');
+        $repository->save($request, $name);
+        return back()->with('success', '配置项保存成功');
     }
-         
 }

@@ -55,5 +55,5 @@ function site()
  */
 function module()
 {
-    return cache()->get('module');
+    return cache()->get('cache_module');
 }

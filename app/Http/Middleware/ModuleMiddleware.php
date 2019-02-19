@@ -10,7 +10,7 @@ class ModuleMiddleware
     public function handle($request, Closure $next)
     {
         if ($mid = request()->query('mid')) {
-            cache()->forever('module', Module::findOrFail($mid));
+            cache()->forever('cache_module', Module::findOrFail($mid));
         }
         //站点或模块不存在时禁止访问
         if (!\site() || !\module()) {

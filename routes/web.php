@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     //模块域名
     Route::resource('domain', 'DomainController');
     //模块配置
-    Route::resource('module-config', 'ModuleConfigController');
+    Route::resource('config', 'ConfigController')->middleware('module');
 });
 //系统设置
 Route::group(['middleware' => ['SuperAdmin']], function () {
