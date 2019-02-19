@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\ConfigRepository;
+use App\Repositories\SiteRepository;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -44,12 +45,12 @@ class SettingController extends Controller
 
     public function destroy($id)
     {
-        //
     }
 
-    public function updateCache()
+    public function updateCache(SiteRepository $siteRepository)
     {
         \Cache::flush();
+        $siteRepository->loadAllSitePermission();
         return back()->with('success', '全站缓存更新成功');
     }
 }

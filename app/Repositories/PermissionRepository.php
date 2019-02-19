@@ -18,12 +18,12 @@ use Storage;
  * Class PermissionRepository
  * @package App\Repositories
  */
-class SitePermissionRepository extends Repository
+class PermissionRepository extends Repository
 {
     protected $model = Permission::class;
 
     /**
-     * 获取站点所有权限
+     * 获取站点所有分层权限
      * @param Site $site
      * @return mixed
      */
@@ -31,8 +31,10 @@ class SitePermissionRepository extends Repository
     {
         $permissions = collect();
         foreach (Module::all() as $module) {
-            $permissions->put($module['title'],
-                Permission::where('site_id', $site['id'])->where('module', $module['name'])->get());
+            $permissions->put(
+                $module['title'],
+                Permission::where([['site_id', $site['id']], ['module', $module['name']]])->get()
+            );
         }
         return $permissions;
     }
@@ -67,6 +69,12 @@ class SitePermissionRepository extends Repository
         return true;
     }
 
+    /**
+     * 添加模块系统权限
+     * @param Site $site
+     * @param Module $module
+     * @return array
+     */
     protected function formatPermission(Site $site, Module $module)
     {
         $file = Storage::disk('module')->path($module['name'] . '/Config') . DIRECTORY_SEPARATOR . 'permissions.php';

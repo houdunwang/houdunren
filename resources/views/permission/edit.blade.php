@@ -4,7 +4,8 @@
         <li class="breadcrumb-item">
             <a href="{{route('site.index')}}"> <i class="fa fa-home"></i> 站点列表</a>
         </li>
-        <li class="breadcrumb-item active"><a href="#">设置操作员权限</a></li>
+        <li class="breadcrumb-item"><a href="{{route('site.user',$site)}}">操作员管理</a></li>
+        <li class="breadcrumb-item active">设置操作员权限</li>
     </ol>
     <div class="card">
         <div class="card-header small text-secondary">
@@ -29,15 +30,15 @@
                 <div class="card-body">
                     <div class="row">
                         @foreach ($permission as $p)
-                            <div class="col-sm-2">
+                            <div class="col-sm-2 mb-2">
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
                                         @if ($user->hasPermissionTo($p['name']))
                                             <input class="form-check-input" type="checkbox" name="permissions[]"
-                                                   value="{{$p['name']}}" checked>
+                                                   value="{{$p['id']}}" checked>
                                         @else
                                             <input class="form-check-input" type="checkbox" name="permissions[]"
-                                                   value="{{$p['name']}}">
+                                                   value="{{$p['id']}}">
                                         @endif
 
                                         <span data-container="body" data-toggle="popover" data-placement="top"

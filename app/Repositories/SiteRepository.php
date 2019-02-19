@@ -60,4 +60,15 @@ class SiteRepository extends Repository
     {
         return $site->user()->wherePivot('role', 'admin')->first()->group->package;
     }
+
+    /**
+     * 更新所有站点模块权限
+     * @return Site[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function loadAllSitePermission()
+    {
+        return Site::all()->each(function ($site) {
+            (new PermissionRepository())->loadModulePermissions($site);
+        });
+    }
 }

@@ -9,6 +9,7 @@
 namespace App\Repositories;
 
 use App\Models\Module;
+use App\Models\Site;
 use App\Repositories\Traits\ModuleTrait;
 use Illuminate\Database\Eloquent\Model;
 

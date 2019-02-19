@@ -52,6 +52,10 @@ class User extends Authenticatable
         return $this['icon'] ?? asset('images/user.jpg');
     }
 
+    /**
+     * 会员组关联
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function group()
     {
         return $this->belongsTo(Group::class);
@@ -66,19 +70,22 @@ class User extends Authenticatable
         return $this->hasMany(Attachment::class);
     }
 
+    /**
+     * 超级管理员
+     * @return bool
+     */
     public function isSuperAdmin()
     {
         return $this['id'] == 1;
     }
 
+    /**
+     * 站点关联
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function site()
     {
         return $this->belongsToMany(Site::class)->as('role')
             ->withPivot('role')->withTimestamps();
-    }
-
-    public function permissions()
-    {
-        return $this->morphToMany(Permission::class,'model','model_has_permissions');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ModuleRequest;
 use App\Models\Module;
 use App\Repositories\ModuleRepository;
+use App\Repositories\SiteRepository;
 use Illuminate\Http\Request;
 
 class ModuleController extends Controller
@@ -20,9 +21,10 @@ class ModuleController extends Controller
         return view('module.create');
     }
 
-    public function store(ModuleRequest $request, ModuleRepository $repository)
+    public function store(ModuleRequest $request, ModuleRepository $repository, SiteRepository $siteRepository)
     {
         $repository->create($request->except('_token'));
+        $siteRepository->loadAllSitePermission();
         return redirect(route('module.index'))->with('success', '模块创建成功');
     }
 
@@ -36,20 +38,28 @@ class ModuleController extends Controller
         return view('module.edit', compact('module'));
     }
 
-    public function update(Request $request, Module $module, ModuleRepository $repository)
-    {
+    public function update(
+        Request $request,
+        Module $module,
+        ModuleRepository $repository,
+        SiteRepository $siteRepository
+    ) {
         $repository->update($module, $request->except('_token', '_method'));
+        $siteRepository->loadAllSitePermission();
         return redirect(route('module.index'))->with('success', '模块修改成功');
     }
 
-    public function destroy(Module $module,ModuleRepository $repository)
+    public function destroy(Module $module, ModuleRepository $repository, SiteRepository $siteRepository)
     {
         $repository->delete($module);
-        return back()->with('success','模块删除成功');
+        $siteRepository->loadAllSitePermission();
+        return back()->with('success', '模块删除成功');
     }
 
-    public function refresh(Module $module,ModuleRepository $repository){
+    public function refresh(Module $module, ModuleRepository $repository, SiteRepository $siteRepository)
+    {
         $repository->refresh($module);
-        return back()->with('success','模块刷新成功');
+        $siteRepository->loadAllSitePermission();
+        return back()->with('success', '模块刷新成功');
     }
 }

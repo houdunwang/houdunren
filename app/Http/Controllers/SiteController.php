@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SiteRequest;
 use App\Models\Site;
-use App\Repositories\SitePermissionRepository;
 use App\Repositories\SiteRepository;
 use App\Repositories\UserRepository;
 use App\User;
-use Spatie\Permission\Models\Permission;
 
 /**
  * 站点管理

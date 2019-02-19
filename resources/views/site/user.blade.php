@@ -1,5 +1,11 @@
 @extends('layouts.admin')
 @section('content')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{route('site.index')}}"> <i class="fa fa-home"></i> 站点管理</a>
+        </li>
+        <li class="breadcrumb-item"><a href="{{route('site.user',$site)}}">操作员管理</a></li>
+    </ol>
     <div class="card">
         <div class="card-header">
             站点的应用列表
