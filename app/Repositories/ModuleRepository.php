@@ -42,6 +42,7 @@ class ModuleRepository extends Repository
 
     public function update(Model $model, array $attributes)
     {
+        $attributes = array_merge(array_except($this->package, ['name']), $attributes);
         $this->package = array_merge($model['package'], $attributes);
         $this->permissions = include $this->configPath() . 'permissions.php';
         $this->menus = include $this->configPath() . 'menus.php';
@@ -108,14 +109,20 @@ class ModuleRepository extends Repository
      */
     protected function formatMenus()
     {
-        $this->menus['系统功能'] = [
-            ['title' => '域名管理', 'url' => route('domain.create'), 'permission' => 'domain'],
-            ['title' => '桌面会员中心菜单', 'url' => 'menu_mobile', 'permission' => 'menu_mobile'],
-            ['title' => '手机会员中心菜单', 'url' => 'menu_web', 'permission' => 'menu_web'],
-        ];
-        $this->menus['微信回复'] = [
-            ['title' => '微信回复列表', 'url' => 'wx_replies', 'permission' => 'wx_replies'],
-            ['title' => '微信封面入口', 'url' => 'wx_entry', 'permission' => 'wx_entry'],
-        ];
+        if ($this->package['domain']) {
+            $this->menus['系统功能'][] = ['title' => '域名管理', 'url' => route('domain.create'), 'permission' => 'domain'];
+        }
+        if ($this->package['menu_mobile']) {
+            $this->menus['系统功能'][] = ['title' => '桌面会员中心菜单', 'url' => 'menu_mobile', 'permission' => 'menu_mobile'];
+        }
+        if ($this->package['menu_web']) {
+            $this->menus['系统功能'][] = ['title' => '手机会员中心菜单', 'url' => 'menu_web', 'permission' => 'menu_web'];
+        }
+        if ($this->package['wx_replies']) {
+            $this->menus['微信回复'][] = ['title' => '微信回复列表', 'url' => 'wx_replies', 'permission' => 'wx_replies'];
+        }
+        if ($this->package['wx_cover']) {
+            $this->menus['微信回复'][] = ['title' => '微信封面入口', 'url' => 'wx_entry', 'permission' => 'wx_cover'];
+        }
     }
 }

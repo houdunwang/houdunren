@@ -7,11 +7,5 @@
       'url' => 'http://www.houdunren.com',
       'permission' => 'user-manage',
     ),
-    1 => 
-    array (
-      'title' => '用户列表',
-      'url' => 'http://www.houdunren.com',
-      'permission' => 'user-lists',
-    ),
   ),
 );

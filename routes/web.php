@@ -29,10 +29,6 @@ Route::group(['middleware' => ['auth']], function () {
     //后台用户管理
     Route::resource('user', 'UserController');
 });
-//模块
-Route::group(['middleware' => ['module']], function () {
-    Route::resource('domain', 'DomainController');
-});
 //站点
 Route::group(['middleware' => ['auth']], function () {
     //站点管理
@@ -46,6 +42,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('site/permission/{site}/{user}', 'PermissionController@store')->name('site.permission');
     //更新站点权限
     Route::get('site-permission-cache/{site}', 'PermissionController@site')->name('site.permission.cache');
+    //模块域名
+    Route::resource('domain', 'DomainController');
+    //模块配置
+    Route::resource('module-config', 'ModuleConfigController');
 });
 //系统设置
 Route::group(['middleware' => ['SuperAdmin']], function () {
@@ -59,7 +59,7 @@ Route::group(['middleware' => ['SuperAdmin']], function () {
     Route::resource('package', 'PackageController');
 });
 
-//模块
+//模块管理
 Route::group(['middleware' => ['SuperAdmin']], function () {
     //模块管理
     Route::resource('module', 'ModuleController');

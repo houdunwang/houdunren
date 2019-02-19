@@ -46,31 +46,31 @@
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="domain" value="1"
-                                {{active_class($module['domain']??true,'checked')}}> 域名管理
+                                {{active_class($module['package']['domain']??true,'checked')}}> 域名管理
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="wx_replies" value="1"
-                                {{active_class($module['wx_replies']??true,'checked')}}> 微信回复列表
+                                {{active_class($module['package']['wx_replies']??true,'checked')}}> 微信回复列表
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="wx_cover" value="1"
-                                {{active_class($module['wx_cover']??true,'checked')}}> 微信封面入口
+                                {{active_class($module['package']['wx_cover']??true,'checked')}}> 微信封面入口
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="menu_web" value="1"
-                                {{active_class($module['menu_web']??true,'checked')}}> 桌面会员中心菜单
+                                {{active_class($module['package']['menu_web']??true,'checked')}}> 桌面会员中心菜单
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="menu_mobile" value="1"
-                                {{active_class($module['menu_mobile']??true,'checked')}}> 手机会员中心菜单
+                                {{active_class($module['package']['menu_mobile']??true,'checked')}}> 手机会员中心菜单
                     </label>
                 </div>
             </div>
@@ -86,7 +86,7 @@
             <div class="form-check">
                 <label class="form-check-label">
                     <input type="checkbox" class="form-check-input" name="subscribe" value="1"
-                            {{active_class($module['subscribe']??true,'checked')}}>
+                            {{active_class($module['package']['subscribe']??true,'checked')}}>
                     微信订阅消息处理
                 </label>
             </div>
@@ -103,7 +103,7 @@
             <div class="form-check">
                 <label class="form-check-label">
                     <input type="checkbox" class="form-check-input" name="processor" value="1"
-                            {{active_class($module['processor']??true,'checked')}}>
+                            {{active_class($module['package']['processor']??true,'checked')}}>
                     直接处理微信消息
                 </label>
             </div>

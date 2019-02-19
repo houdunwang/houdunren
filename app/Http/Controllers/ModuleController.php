@@ -30,7 +30,6 @@ class ModuleController extends Controller
 
     public function show(Module $module)
     {
-
     }
 
     public function edit(Module $module)

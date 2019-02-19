@@ -93,7 +93,7 @@ class PermissionRepository extends Repository
                 'module' => $module['name'],
             ];
             $permissions[] = [
-                'name' => 'wx_entry',
+                'name' => 'wx_cover',
                 'title' => '微信封面入口',
                 'site_id' => $site['id'],
                 'module' => $module['name'],

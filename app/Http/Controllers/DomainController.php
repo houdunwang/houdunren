@@ -2,58 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Module;
+use App\Http\Requests\DomainRequest;
 use Illuminate\Http\Request;
 
 class DomainController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
     }
 
     public function create()
     {
-        $module = cache()->get('module');
-        return view('domain.create', compact('module'));
+        $domain = module()->domain;
+        return view('domain.create',compact('domain'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(DomainRequest $request)
     {
-        //
+        module()->domain()->updateOrCreate(['module_id' => module()['id']], ['name' => $request->input('name')]);
+        return back()->with('success', '模块域名设置成功');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
     }
 
     /**

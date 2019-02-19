@@ -25,4 +25,9 @@ class Module extends Model
         'menus' => 'array',
         'local' => 'boolean',
     ];
+
+    public function domain()
+    {
+        return $this->hasOne(Domain::class);
+    }
 }

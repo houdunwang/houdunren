@@ -18,18 +18,20 @@ trait ModuleTrait
         'name' => '',
         //预览图
         'thumb' => '',
+        //域名管理
+        'domain' => false,
         //微信回复列表
-        'wx_replies' => true,
+        'wx_replies' => false,
         //微信封面入口
-        'wx_cover' => true,
+        'wx_cover' => false,
         //桌面会员中心菜单
-        'menu_web' => true,
+        'menu_web' => false,
         //手机会员中心菜单
-        'menu_mobile' => true,
+        'menu_mobile' => false,
         //微信订阅消息处理
-        'subscribe' => true,
+        'subscribe' => false,
         //直接处理微信消息
-        'processor' => true,
+        'processor' => false,
     ];
     //权限配置
     protected $permissions = [
