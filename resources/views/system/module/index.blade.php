@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    @include('module._tabs')
+    @include('system.module._tabs')
     <div class="card">
         <div class="card-header">已安装模块列表</div>
         <div class="card-body">
@@ -23,10 +23,10 @@
                     <div class="col-xs-4 col-md-6 text-right mt-3">
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                             @if ($module['local'])
-                                <a class="btn btn-outline-success" href="{{route('module.edit',$module)}}">
+                                <a class="btn btn-outline-success" href="{{route('system.module.edit',$module)}}">
                                     编辑模块
                                 </a>
-                                <a class="btn btn-outline-info" href="{{route('module.refresh',$module)}}" data-container="body" data-toggle="popover"
+                                <a class="btn btn-outline-info" href="{{route('system.module.refresh',$module)}}" data-container="body" data-toggle="popover"
                                    data-placement="top" data-content="修改本地模块配置项后需要重新更新模块">更新模块配置</a>
                             @endif
                             <button type="button" class="btn btn-outline-danger" onclick="destroy(this)"
@@ -34,7 +34,7 @@
                                     data-content="删除模块将删除模块所有数据与文件">
                                 卸载模块
                             </button>
-                            <form action="{{route('module.destroy',$module)}}" method="post">
+                            <form action="{{route('system.module.destroy',$module)}}" method="post">
                                 @csrf @method('DELETE')
                             </form>
                             @if ($module['local'])

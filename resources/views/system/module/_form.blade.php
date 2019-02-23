@@ -1,4 +1,4 @@
-@include('module._tabs')
+@include('system.module._tabs')
 <div class="card">
     <div class="card-header">模块设计</div>
     <div class="card-body">
@@ -7,7 +7,7 @@
             <input type="text" name="title" class="form-control" value="{{old('title',$module['title']??'')}}" required>
             <small class="text-muted">请输入模块中文名称</small>
         </div>
-        @if (if_route('module.create'))
+        @if (if_route('system.module.create'))
             <div class="form-group">
                 <label>模块英文标识</label>
                 <input type="text" name="name" class="form-control" value="{{old('name',$module['name']??'')}}" required>

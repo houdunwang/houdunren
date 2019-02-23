@@ -19,19 +19,19 @@ class ModuleController extends Controller
     public function index(ModuleRepository $repository)
     {
         $modules = $repository->all();
-        return view('module.index', compact('modules'));
+        return view('system.module.index', compact('modules'));
     }
 
     public function create()
     {
-        return view('module.create');
+        return view('system.module.create');
     }
 
     public function store(ModuleRequest $request, ModuleRepository $repository, SiteRepository $siteRepository)
     {
         $repository->create($request->except('_token'));
         $siteRepository->loadAllSitePermission();
-        return redirect(route('module.index'))->with('success', '模块创建成功');
+        return redirect(route('system.module.index'))->with('success', '模块创建成功');
     }
 
     /**
@@ -48,7 +48,7 @@ class ModuleController extends Controller
 
     public function edit(Module $module)
     {
-        return view('module.edit', compact('module'));
+        return view('system.module.edit', compact('module'));
     }
 
     public function update(
@@ -59,7 +59,7 @@ class ModuleController extends Controller
     ) {
         $repository->update($module, $request->except('_token', '_method'));
         $siteRepository->loadAllSitePermission();
-        return redirect(route('module.index'))->with('success', '模块修改成功');
+        return redirect(route('system.module.index'))->with('success', '模块修改成功');
     }
 
     public function destroy(Module $module, ModuleRepository $repository, SiteRepository $siteRepository)

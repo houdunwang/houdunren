@@ -18,40 +18,36 @@ use Illuminate\Http\Request;
  */
 class UserController extends Controller
 {
-    public function __construct()
-    {
-    }
-
     public function index()
     {
         $this->authorize('index', auth()->user());
         $users = User::with('group')->where('id', '>', 1)->paginate(15);
-        return view('user.index', compact('users'));
+        return view('system.user.index', compact('users'));
     }
 
     public function create(GroupRepository $groupRepository)
     {
         $groups = $groupRepository->all();
-        return view('user.create', compact('groups'));
+        return view('system.user.create', compact('groups'));
     }
 
     public function store(UserRequest $request, UserRepository $repository)
     {
         $this->validate($request, ['password' => 'required'], ['password.required' => '请输入用户密码']);
         $repository->create($request->input());
-        return redirect(route('user.index'))->with('success', '用户添加成功');
+        return redirect(route('system.user.index'))->with('success', '用户添加成功');
     }
 
     public function show(User $user)
     {
-        return view('user.show', compact('user'));
+        return view('system.user.show', compact('user'));
     }
 
     public function edit(User $user, GroupRepository $groupRepository)
     {
         $this->authorize('update', $user);
         $groups = $groupRepository->all();
-        return view('user.edit', compact('user', 'groups'));
+        return view('system.user.edit', compact('user', 'groups'));
     }
 
     public function update(UserRequest $request, User $user, UserRepository $repository)

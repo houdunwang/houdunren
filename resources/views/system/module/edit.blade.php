@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
-    <form action="{{route('module.update',$module)}}" method="post">
+    <form action="{{route('system.module.update',$module)}}" method="post">
         @csrf @method('PUT')
-        @include('module._form')
+        @include('system.module._form')
     </form>
 @stop

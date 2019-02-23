@@ -2,12 +2,12 @@
 @section('content')
     <ul class="nav nav-tabs mb-2">
         <li class="nav-item">
-            <a class="nav-link active" href="{{route('user.index')}}">
+            <a class="nav-link active" href="{{route('system.user.index')}}">
                 用户列表
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{route('user.create')}}">
+            <a class="nav-link" href="{{route('system.user.create')}}">
                 添加用户
             </a>
         </li>
@@ -18,6 +18,7 @@
             <table class="table table-hover table-responsive-sm">
                 <thead class="">
                 <tr>
+                    <th scope="col">#编号</th>
                     <th scope="col">昵称</th>
                     <th scope="col">真实姓名</th>
                     <th scope="col">会员组</th>
@@ -30,6 +31,7 @@
                 <tbody>
                 @foreach($users as $user)
                     <tr>
+                        <td>{{$user['id']}}</td>
                         <td>{{$user['name']}}</td>
                         <td>{{$user['real_name']}}</td>
                         <td>
@@ -46,21 +48,21 @@
                         <td>{{$user['admin_end']->format('Y-m-d')}}</td>
                         <td class=" text-right">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <a class="btn btn-outline-success" href="{{route('user.edit',$user)}}">编辑</a>
-                                <a class="btn btn-outline-info" href="{{route('user.show',$user)}}">查看操作权限</a>
+                                <a class="btn btn-outline-success" href="{{route('system.user.edit',$user)}}">编辑</a>
+                                <a class="btn btn-outline-info" href="{{route('system.user.show',$user)}}">查看操作权限</a>
                                 @if ($user['lock'])
-                                    <a class="btn btn-outline-danger" href="{{route('user.lock',[$user,'unlock'])}}">
+                                    <a class="btn btn-outline-danger" href="{{route('system.user.lock',[$user,'unlock'])}}">
                                         解锁用户
                                     </a>
                                 @else
-                                    <a class="btn btn-outline-secondary" href="{{route('user.lock',[$user,'lock'])}}">
+                                    <a class="btn btn-outline-secondary" href="{{route('system.user.lock',[$user,'lock'])}}">
                                         锁定用户
                                     </a>
                                 @endif
                                 <button type="button" class="btn btn-outline-secondary" onclick="destroy(this)">
                                     删除用户
                                 </button>
-                                <form action="{{route('user.destroy',$user)}}" method="post">
+                                <form action="{{route('system.user.destroy',$user)}}" method="post">
                                     @csrf @method('DELETE')
                                 </form>
                             </div>

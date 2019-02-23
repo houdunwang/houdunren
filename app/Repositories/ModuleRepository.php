@@ -113,12 +113,12 @@ class ModuleRepository extends Repository
         if ($this->package['config']) {
             $this->menus['系统功能'][] = [
                 'title' => '模块配置',
-                'url' => route('config.edit', $this->package['name']),
+                'url' => route('module.config.edit', $this->package['name']),
                 'permission' => 'config',
             ];
         }
         if ($this->package['domain']) {
-            $this->menus['系统功能'][] = ['title' => '域名管理', 'url' => route('domain.create'), 'permission' => 'domain'];
+            $this->menus['系统功能'][] = ['title' => '域名管理', 'url' => route('module.domain.create'), 'permission' => 'domain'];
         }
         if ($this->package['menu_mobile']) {
             $this->menus['系统功能'][] = ['title' => '桌面会员中心菜单', 'url' => 'menu_mobile', 'permission' => 'menu_mobile'];

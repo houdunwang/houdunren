@@ -11,5 +11,5 @@
 |
 */
 Route::group(['prefix' => 'shop', 'name' => 'shop.'], function () {
-//    Route::resource('test', 'TestController');
+    Route::resource('test', 'TestController');
 });

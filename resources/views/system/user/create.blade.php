@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
-    <form action="{{route('user.store')}}" method="post">
+    <form action="{{route('system.user.store')}}" method="post">
         @csrf
-        @include('user._form')
+        @include('system.user._form')
     </form>
 @endsection

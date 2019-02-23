@@ -2,7 +2,7 @@
 @section('content')
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <i class="fa fa-home"></i> <a href="{{route('site.index')}}">站点列表</a>
+            <i class="fa fa-home"></i> <a href="{{route('site.site.index')}}">站点列表</a>
         </li>
         <li class="breadcrumb-item"><a href="#">会员操作权限</a></li>
     </ol>

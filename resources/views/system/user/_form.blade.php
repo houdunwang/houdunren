@@ -1,7 +1,7 @@
 <ul class="nav nav-tabs mb-2">
     @can('index',auth()->user())
         <li class="nav-item">
-            <a class="nav-link" href="{{route('user.index')}}">
+            <a class="nav-link" href="{{route('system.user.index')}}">
                 用户列表
             </a>
         </li>

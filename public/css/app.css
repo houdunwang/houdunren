@@ -1,5 +1,5 @@
-.module-create img.img-thumbnail,
-.module-edit img.img-thumbnail {
+.system-module-create img.img-thumbnail,
+.system-module-edit img.img-thumbnail {
   background: #dcdcdc;
   width: 150px;
 }

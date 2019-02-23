@@ -16,7 +16,7 @@ class SettingController extends Controller
 {
     public function index()
     {
-        return view('setting.index');
+        return view('system.setting.index');
     }
 
     public function create()
@@ -34,7 +34,7 @@ class SettingController extends Controller
     public function edit($name, ConfigRepository $repository)
     {
         $config = $repository->get($name, [], 'system');
-        return view('setting.edit', compact('config', 'name'));
+        return view('system.setting.edit', compact('config', 'name'));
     }
 
     public function update(Request $request, $name, ConfigRepository $repository)
