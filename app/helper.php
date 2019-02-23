@@ -90,3 +90,12 @@ function module_access(string $permission, string $module = null, $abort = false
     }
     return $status;
 }
+
+/**
+ * 域名
+ * @return string
+ */
+function host()
+{
+    return (request()->secure() ? 'https://' : 'http://') . request()->getHost();
+}

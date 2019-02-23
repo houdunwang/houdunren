@@ -69,7 +69,7 @@
             <label>二维码</label>
             <div class="input-group mb-1">
                 <input type="text" class="form-control" name="qr" readonly="" required
-                       value="{{old('qr',$wechat['qr']??'')}}">
+                       value="{{old('qr',$wechat['qr']??asset('images/nopic.jpg'))}}">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" onclick="uploadQr()" type="button">
                         选择二维码图片
@@ -95,7 +95,7 @@
             <label>公众号图标</label>
             <div class="input-group mb-1">
                 <input type="text" class="form-control" name="icon" readonly="" required
-                       value="{{old('icon',$wechat['icon']??'')}}">
+                       value="{{old('icon',$wechat['icon']??asset('images/nopic.jpg'))}}">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" onclick="uploadIcon()" type="button">
                         选择图标

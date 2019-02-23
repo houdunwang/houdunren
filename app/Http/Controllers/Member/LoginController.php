@@ -20,7 +20,7 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view('login.create');
+        return view('member.login.create');
     }
 
     public function store(Request $request, UserServer $server)
@@ -28,6 +28,7 @@ class LoginController extends Controller
         if ($server->login($request->only(['name', 'password']))) {
             return redirect()->intended(route('home'));
         } else {
+
             return back()->with('error', '帐号或密码错误');
         }
     }

@@ -46,21 +46,23 @@
                         </td>
                         <td class="text-right">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                @if ($user->role['role']=='operator')
+                                @can('admin',$site)
                                     <a class="btn btn-outline-success"
                                        href="{{route('site.permission.user.edit',[$site,$user])}}">
                                         设置权限
                                     </a>
-                                @endif
+                                @endcan
                                 @if (isSuperAdmin())
-                                    <a class="btn btn-outline-info" href="{{route('site.user.edit',[$site,$user])}}">编辑用户</a>
+                                    <a class="btn btn-outline-info" href="{{route('system.user.edit',[$site,$user])}}">
+                                        编辑用户
+                                    </a>
                                 @endif
-                                <a class="btn btn-outline-secondary" href="{{route('site.user.show',[$site,$user])}}">
+                                <a class="btn btn-outline-secondary" href="{{route('system.user.show',[$site,$user])}}">
                                     查看操作权限
                                 </a>
                                 @if ($user->role['role']=='operator')
-                                    <a class="btn btn-outline-danger"
-                                       href="javascript:void(0);" onclick="delUser(this)">
+                                    <a href="javascript:void(0);"
+                                       class="btn btn-outline-danger" onclick="delUser(this)">
                                         删除操作员
                                     </a>
                                     <form action="{{route('site.user.update',[$site,$user])}}" method="post">
@@ -88,11 +90,12 @@
                 })
             });
         }
+
         //选择操作员
         function users() {
             require(['util', 'axios', 'hdjs'], function (util, axios, hdjs) {
                 util.user(function (id) {
-                    axios.put('/s/{{$site["id"]}}/user/' + id, {}).then(function (response) {
+                    axios.put('/site/{{$site["id"]}}/user/' + id, {}).then(function (response) {
                         hdjs.message(response.data.message, '', 'success', 2, {
                             events: {
                                 'hidden.bs.modal': function () {

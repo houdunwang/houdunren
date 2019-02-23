@@ -19,9 +19,9 @@ class WeChatController extends Controller
     public function index(Site $site)
     {
         $this->authorize('admin', $site);
-        $weChat = WeChat::site($site)->first();
-        if ($weChat) {
-            return redirect(route('site.wechat.edit', [$site, $weChat]));
+        $wechat = WeChat::site($site)->first();
+        if ($wechat) {
+            return redirect(route('site.wechat.edit', [$site, $wechat]));
         } else {
             return redirect(route('site.wechat.create', [$site]));
         }
@@ -40,8 +40,8 @@ class WeChatController extends Controller
         $data['token'] = str_random(16);
         $data['EncodingAESKey'] = str_random(43);
         $data['site_id'] = $site['id'];
-        $weChat = $repository->create($data);
-        return redirect(route('site.wechat.show', [$site, $weChat]));
+        $wechat = $repository->create($data);
+        return redirect(route('site.wechat.show', [$site, $wechat]));
     }
 
     public function show(Site $site, WeChat $wechat)
@@ -60,10 +60,22 @@ class WeChatController extends Controller
     {
         $this->authorize('admin', $site);
         $wechat->update($request->input());
-        return redirect(route('site.wechat.show', [$site,$wechat]))->with('success', '微信公众号修改成功');
+        return redirect(route('site.wechat.show', [$site, $wechat]))->with('success', '微信公众号修改成功');
     }
 
-    public function destroy(WeChat $weChat)
+    public function destroy(Site $site, WeChat $wechat)
     {
+        $this->authorize('admin', $site);
+        $wechat->delete();
+        return redirect(route('site.site.index'))->with('success', $wechat['name'] . '公众号删除成功');
+    }
+
+    public function refreshToken(Site $site, WeChat $wechat)
+    {
+        $this->authorize('admin', $site);
+        $wechat['token'] = str_random(16);
+        $wechat['EncodingAESKey'] = str_random(43);
+        $wechat->save();
+        return back()->with('info', 'TOKEN刷新成功,请重新在微信服务器上配置');
     }
 }

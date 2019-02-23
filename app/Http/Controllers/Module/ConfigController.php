@@ -24,7 +24,7 @@ class ConfigController extends Controller
     public function edit($name, ConfigRepository $repository)
     {
         $config = $repository->get($name, []);
-        return view('config.edit', compact('config', 'name'));
+        return view('module.config.edit', compact('config', 'name'));
     }
 
     public function update(Request $request, $name, ConfigRepository $repository)

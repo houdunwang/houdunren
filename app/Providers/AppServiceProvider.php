@@ -18,6 +18,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->observer();
+//        \Blade::component('components.breadcrumb', 'breadcrumb');
+//        \Blade::directive('breadcrumb', function ($menus) {
+//            return view('components.breadcrumb', compact('menus'));
+//        });
     }
 
     protected function observer()

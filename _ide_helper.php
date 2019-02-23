@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.7.26 on 2019-02-18 09:27:11.
+ * Generated for Laravel 5.7.26 on 2019-02-23 17:19:34.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -14138,6 +14138,50 @@ namespace Barryvdh\Debugbar {
  
 }
 
+namespace Houdunwang\WeChat { 
+
+    /**
+     * Class Facade
+     *
+     * @package Houdunwang\Module
+     */ 
+    class WeChatFacade {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function single()
+        {
+            return \Houdunwang\WeChat\WeChat::single();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function config($config)
+        {
+            return \Houdunwang\WeChat\WeChat::config($config);
+        }
+        
+        /**
+         * 
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getConfig($name)
+        {
+            return \Houdunwang\WeChat\WeChat::getConfig($name);
+        }
+         
+    }
+ 
+}
+
 namespace Intervention\Image\Facades { 
 
     /**
@@ -17200,6 +17244,8 @@ namespace  {
     class View extends \Illuminate\Support\Facades\View {}
 
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
+
+    class WeChat extends \Houdunwang\WeChat\WeChatFacade {}
 
     class Image extends \Intervention\Image\Facades\Image {}
 

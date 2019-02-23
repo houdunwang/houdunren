@@ -19,7 +19,7 @@
 @include('layouts.message')
 <div class="container {{route_class()}}">
     <h1 class="big-title text-muted">会员登录</h1>
-    <form class="form-horizontal" role="form" action="{{route('login.store')}}" method="post">
+    <form class="form-horizontal" role="form" action="{{route('login')}}" method="post">
         {{csrf_field()}}
         <div class="form-group">
             <div class="col-sm-12">

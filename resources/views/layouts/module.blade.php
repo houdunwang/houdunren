@@ -44,12 +44,6 @@
             </div>
         </div>
         <div class="col-sm-9 col-md-10 mt-2 mt-sm-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <i class="fa fa-cogs"></i> <a href="{{route('site.show',site())}}">站点管理</a>
-                </li>
-                <li class="breadcrumb-item"><a href="#">{{module()['title']}}</a></li>
-            </ol>
             <div class="{{route_class()}}">
                 @yield('content')
             </div>

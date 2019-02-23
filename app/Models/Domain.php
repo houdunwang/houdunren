@@ -9,10 +9,26 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Domain extends Model
 {
-    protected $fillable = ['name', 'module'];
+    protected $fillable = ['name', 'module', 'site_id'];
+
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
+    }
 
     public function module()
     {
         return $this->belongsTo(Module::class);
+    }
+
+    /**
+     * 域名查找
+     * @param $query
+     * @param $name
+     * @return mixed
+     */
+    public function scopeName($query, $name)
+    {
+        return $query->where('name', $name);
     }
 }

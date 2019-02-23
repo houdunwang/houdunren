@@ -9,13 +9,13 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item pr-3">
                     @if ($site = $siteRepository->getAdminCacheSite())
-                        <a href="{{route('site.index')}}" class="nav-link">
+                        <a href="{{route('site.site.index')}}" class="nav-link">
                             <i class="fa fa-reply-all"></i> 返回系统管理
                         </a>
                     @endif
                 </li>
                 <li class="nav-item pr-3">
-                    <a href="{{route('site.show',$siteRepository->getAdminCacheSite())}}" class="nav-link">
+                    <a href="{{route('site.site.show',$siteRepository->getAdminCacheSite())}}" class="nav-link">
                         <i class="fa fa-w fa-file-code-o"></i> 应用列表
                     </a>
                 </li>
@@ -28,7 +28,7 @@
                             <i class="fa fa-w fa-user"></i> {{auth()->user()['name']}}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{route('user.edit',auth()->user())}}">修改资料</a>
+                            <a class="dropdown-item" href="{{route('system.user.edit',auth()->user())}}">修改资料</a>
                             <a class="dropdown-item" href="{{route('logout')}}">退出登录</a>
                         </div>
                     </li>

@@ -1,9 +1,9 @@
 <?php
-//主页
-Route::get('/', 'Site\SiteController@index');
+Route::get('/', 'Module\DomainController@index');
 Route::get('home', 'Site\SiteController@index')->name('home');
 //登录退出
 Route::get('login', 'Member\LoginController@index')->name('login');
+Route::post('login', 'Member\LoginController@store')->name('login');
 Route::get('logout', 'Member\LoginController@logout')->name('logout');
 //后台登录
 Route::get('admin', 'Site\SiteController@index');
@@ -12,7 +12,6 @@ Route::group(['prefix' => 'common', 'as' => 'common.'], function () {
     Route::any('upload', 'Common\UploadController@upload')->name('upload.make');
     Route::any('upload-lists', 'Common\UploadController@lists')->name('upload.lists');
     Route::any('user/search', 'Common\UserController@search')->name('user.search');
-
 });
 //用户
 Route::group(['middleware' => ['auth'], 'prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.'], function () {
@@ -47,19 +46,24 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'site', 'as' => 'site.', 'na
     //操作员
     Route::resource('{site}/user', 'UserController');
     //权限
-    Route::resource('{site}/permission/user','PermissionController',['as'=>'permission']);
+    Route::resource('{site}/permission/user', 'PermissionController', ['as' => 'permission']);
     //更新站点权限
     Route::get('{site}/permission/cache', 'PermissionController@site')->name('permission.cache');
     //站点配置
     Route::resource('{site}/config', 'ConfigController');
     //微信公众号
     Route::resource('{site}/wechat', 'WeChatController');
+    Route::get('{site}/weChatToken/{wechat}', 'WeChatController@refreshToken')->name('wechat.token');
 });
 //模块
 Route::group(['middleware' => ['auth', 'module'], 'as' => 'module.', 'prefix' => 'module', 'namespace' => 'Module'],
     function () {
+        Route::resource('module', 'ModuleController');
         //模块域名
         Route::resource('domain', 'DomainController');
         //模块配置
         Route::resource('config', 'ConfigController');
+        //模块菜单
+        Route::get('menu/{type}/lists', 'MenuController@lists')->name('menu.lists');
+        Route::resource('menu', 'MenuController');
     });

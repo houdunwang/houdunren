@@ -40,7 +40,7 @@ class ModuleCreate extends Command
     protected function route($name)
     {
         $lowerModule = strtolower($name);
-        $content = file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'Files'.DIRECTORY_SEPARATOR.'web.route');
+        $content = file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'Files'.DIRECTORY_SEPARATOR.'web.php');
         $content = str_replace('{lower-module}',$lowerModule,$content);
 
         file_put_contents(base_path('Modules').DIRECTORY_SEPARATOR.$name.DIRECTORY_SEPARATOR.'Routes'.DIRECTORY_SEPARATOR.'web.php',$content);

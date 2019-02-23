@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Site;
 use App\Servers\WeChatServer;
 use App\Http\Controllers\Controller;
+use Houdunwang\WeChat\WeChat;
 
 class WeChatController extends Controller
 {
@@ -16,7 +17,7 @@ class WeChatController extends Controller
      */
     public function processor(Site $site, WeChatServer $weChatServer)
     {
-        dd($site->toArray());
-        return $weChatServer->handle();
+        WeChat::config([]);
+        //return $weChatServer->handle();
     }
 }

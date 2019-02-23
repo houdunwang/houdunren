@@ -112,25 +112,45 @@ class ModuleRepository extends Repository
     {
         if ($this->package['config']) {
             $this->menus['系统功能'][] = [
-                'title' => '模块配置',
+                'title' => '参数设置',
                 'url' => route('module.config.edit', $this->package['name']),
                 'permission' => 'config',
             ];
         }
         if ($this->package['domain']) {
-            $this->menus['系统功能'][] = ['title' => '域名管理', 'url' => route('module.domain.create'), 'permission' => 'domain'];
+            $this->menus['系统功能'][] = [
+                'title' => '域名管理',
+                'url' => route('module.domain.create'),
+                'permission' => 'domain',
+            ];
         }
         if ($this->package['menu_mobile']) {
-            $this->menus['系统功能'][] = ['title' => '桌面会员中心菜单', 'url' => 'menu_mobile', 'permission' => 'menu_mobile'];
+            $this->menus['系统功能'][] = [
+                'title' => '桌面会员中心菜单',
+                'url' => route('module.menu.lists', ['type' => 'web']),
+                'permission' => 'menu_mobile',
+            ];
         }
         if ($this->package['menu_web']) {
-            $this->menus['系统功能'][] = ['title' => '手机会员中心菜单', 'url' => 'menu_web', 'permission' => 'menu_web'];
+            $this->menus['系统功能'][] = [
+                'title' => '手机会员中心菜单',
+                'url' => route('module.menu.lists', ['type' => 'mobile']),
+                'permission' => 'menu_web',
+            ];
         }
         if ($this->package['wx_replies']) {
-            $this->menus['微信回复'][] = ['title' => '微信回复列表', 'url' => 'wx_replies', 'permission' => 'wx_replies'];
+            $this->menus['微信回复'][] = [
+                'title' => '微信回复列表',
+                'url' => 'wx_replies',
+                'permission' => 'wx_replies',
+            ];
         }
         if ($this->package['wx_cover']) {
-            $this->menus['微信回复'][] = ['title' => '微信封面入口', 'url' => 'wx_entry', 'permission' => 'wx_cover'];
+            $this->menus['微信回复'][] = [
+                'title' => '微信封面入口',
+                'url' => 'wx_entry',
+                'permission' => 'wx_cover',
+            ];
         }
     }
 
@@ -186,5 +206,16 @@ class ModuleRepository extends Repository
                 }
             }
         }
+    }
+
+    /**
+     * 缓存模块
+     * @param Site $site
+     * @param Module $module
+     * @throws \Exception
+     */
+    public function cacheModule(Site $site, Module $module)
+    {
+        return cache()->forever('cache_admin_s' . $site['id'] . '_module', $module);
     }
 }
