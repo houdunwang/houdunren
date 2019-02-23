@@ -13,9 +13,9 @@
                     </div>
                 </div>
                 <small class="text-muted">后台系统管理界面的标志</small>
-                <div class="input-group" style="margin-top:5px;">
-                    <img src="{{$config['logo']??asset('images/logo.png')}}" class="img-fluid"
-                         id="logo-img" style="background: #dcdcdc">
+                <div class="input-group">
+                    <img src="{{$config['logo']??asset('images/logo.png')}}" class="img-thumbnail d-block"
+                         id="logo-img" style="background: #dcdcdc;">
                 </div>
             </div>
         </div>

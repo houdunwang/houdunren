@@ -1,19 +1,7 @@
 @extends('layouts.admin')
 @section('content')
-    <ul class="nav nav-tabs mb-2">
-        <li class="nav-item">
-            <a class="nav-link " href="{{route('group.index')}}">
-                用户组列表
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="{{route('group.create')}}">
-                添加用户组
-            </a>
-        </li>
-    </ul>
-    <form action="{{route('group.store')}}" method="post">
+    <form action="{{route('system.group.store')}}" method="post">
         @csrf
-       @include('group._form')
+       @include('system.group._form')
     </form>
 @endsection

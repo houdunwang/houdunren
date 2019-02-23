@@ -1,11 +1,9 @@
 <ul class="nav nav-tabs mb-2">
-    @can('index',auth()->user())
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('system.user.index')}}">
-                用户列表
-            </a>
-        </li>
-    @endcan
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('system.user.index')}}">
+            用户列表
+        </a>
+    </li>
     <li class="nav-item">
         <a class="nav-link active" href="#">
             设置用户
@@ -29,14 +27,6 @@
             <label>手机号</label>
             <input type="text" name="mobile" class="form-control col-sm-6"
                    value="{{old('mobile',$user['mobile']??'')}}">
-        </div>
-        <div class="form-group">
-            <label>密码</label>
-            <input type="password" name="password" class="form-control col-sm-6">
-        </div>
-        <div class="form-group">
-            <label>确认密码</label>
-            <input type="password" name="password_confirmation" class="form-control col-sm-6">
         </div>
         <div class="form-group">
             <label>所属用户组</label>

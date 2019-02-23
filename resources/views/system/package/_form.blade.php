@@ -1,5 +1,17 @@
 @inject('moduleRepository','App\Repositories\ModuleRepository')
 @inject('templateRepository','App\Repositories\TemplateRepository')
+<ul class="nav nav-tabs mb-2">
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('system.package.index')}}">
+            套餐列表
+        </a>
+    </li>
+    <li class="nav-item">
+        <span class="nav-link active">
+            设置套餐
+        </span>
+    </li>
+</ul>
 <div class="card">
     <div class="card-header">
         服务套餐管理

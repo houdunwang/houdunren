@@ -2,12 +2,12 @@
 @section('content')
     <ul class="nav nav-tabs mb-2">
         <li class="nav-item">
-            <a class="nav-link active" href="{{route('package.index')}}">
+            <a class="nav-link active" href="{{route('system.package.index')}}">
                 套餐列表
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{route('package.create')}}">
+            <a class="nav-link" href="{{route('system.package.create')}}">
                 添加套餐
             </a>
         </li>
@@ -59,17 +59,17 @@
                         </td>
                         <td>
                             @foreach ($package->group()->get() as $group)
-                                <a href="{{route('group.edit',$group)}}" class="badge badge-info">
+                                <a href="{{route('system.group.edit',$group)}}" class="badge badge-info">
                                     {{$group['name']}}
                                 </a>
                             @endforeach
                         </td>
                         <td class=" text-right">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <a class="btn btn-outline-success" href="{{route('package.edit',$package)}}">编辑</a>
+                                <a class="btn btn-outline-success" href="{{route('system.package.edit',$package)}}">编辑</a>
                                 @can('delete',$package)
                                     <button type="button" class="btn btn-outline-danger" onclick="destroy(this)">删除</button>
-                                    <form action="{{route('package.destroy',$package)}}" method="post">
+                                    <form action="{{route('system.package.destroy',$package)}}" method="post">
                                         @csrf @method('DELETE')
                                     </form>
                                 @endcan

@@ -20,7 +20,6 @@ class UserController extends Controller
 {
     public function index()
     {
-        $this->authorize('index', auth()->user());
         $users = User::with('group')->where('id', '>', 1)->paginate(15);
         return view('system.user.index', compact('users'));
     }
@@ -45,14 +44,12 @@ class UserController extends Controller
 
     public function edit(User $user, GroupRepository $groupRepository)
     {
-        $this->authorize('update', $user);
         $groups = $groupRepository->all();
         return view('system.user.edit', compact('user', 'groups'));
     }
 
     public function update(UserRequest $request, User $user, UserRepository $repository)
     {
-        $this->authorize('update', $user);
         $repository->update($user, $request->input());
         return back()->with('success', '修改成功');
     }
@@ -72,7 +69,6 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        $this->authorize('delete', $user);
         $user->delete();
         return back()->with('success', '用户删除成功');
     }

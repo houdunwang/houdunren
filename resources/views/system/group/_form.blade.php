@@ -1,3 +1,15 @@
+<ul class="nav nav-tabs mb-2">
+    <li class="nav-item">
+        <a class="nav-link " href="{{route('system.group.index')}}">
+            用户组列表
+        </a>
+    </li>
+    <li class="nav-item">
+        <span class="nav-link active">
+            设置用户组
+        </span>
+    </li>
+</ul>
 <div class="card">
     <div class="card-header">
         创建用户组
