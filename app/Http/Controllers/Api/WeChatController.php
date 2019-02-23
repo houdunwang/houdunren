@@ -17,6 +17,7 @@ class WeChatController extends Controller
      */
     public function processor(Site $site, WeChatServer $weChatServer)
     {
+        $wechat = (new \App\Models\WeChat())->site($site['id'])->first();
         WeChat::config([]);
         //return $weChatServer->handle();
     }

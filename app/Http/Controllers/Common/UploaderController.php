@@ -22,7 +22,7 @@ class UploadController extends Controller
      * @param Request $request
      * @param UploadServer $uploadServer
      * @return array
-     * @throws \App\Exceptions\CustomException
+     * @throws \App\Exceptions\UploadException
      */
     public function upload(Request $request, UploadServer $uploadServer)
     {

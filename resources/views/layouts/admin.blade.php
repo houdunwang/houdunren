@@ -10,6 +10,7 @@
     <link href="{{asset('org/hdjs/package/bootstrap/bootstrap.min.css')}}" rel="stylesheet">
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <script src="{{asset('js/util.js')}}"></script>
     @include('layouts.hdjs')
     @stack('css')
 </head>

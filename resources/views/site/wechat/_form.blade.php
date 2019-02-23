@@ -54,16 +54,85 @@
             <small class="text-muted">注意：即使公众平台显示为“未认证”, 但只要【公众号设置】/【账号详情】下【认证情况】显示资质审核通过, 即可认定为认证号.</small>
         </div>
         <div class="form-group">
-            <label>AppId</label>
-            <input type="text" name="app_id" class="form-control" required
-                   value="{{old('app_id',$wechat['app_id']??'')}}">
+            <label>身份标识
+                (appId)</label>
+            <input type="text" name="appid" class="form-control" required
+                   value="{{old('appid',$wechat['appid']??'')}}">
             <small class="text-muted">请填写微信公众平台后台的AppId</small>
         </div>
         <div class="form-group">
-            <label>AppSecret</label>
-            <input type="text" name="app_secret" class="form-control" required
-                   value="{{old('app_secret',$wechat['app_secret']??'')}}">
+            <label>身份密钥
+                (appSecret)</label>
+            <input type="text" name="appsecret" class="form-control" required
+                   value="{{old('appsecret',$wechat['appsecret']??'')}}">
             <small class="text-muted">请填写微信公众平台后台的AppSecret, 只有填写这两项才能管理自定义菜单</small>
+        </div>
+        <div class="form-group">
+            <label>微信支付商户号
+                (MchId)</label>
+            <input type="text" name="mch_id" class="form-control" required
+                   value="{{old('mch_id',$wechat['mch_id']??'')}}">
+            <small class="text-muted">请填写微信公众平台后台的AppSecret, 只有填写这两项才能管理自定义菜单</small>
+        </div>
+        <div class="form-group">
+            <label>商户支付密钥 (API密钥)</label>
+            <div class="input-group mb-1">
+                <input type="text" class="form-control" name="key" readonly="" required
+                       value="{{old('key',$wechat['key']??'')}}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" onclick="md5('key')" type="button">
+                        生成新的
+                    </button>
+                </div>
+                @push('js')
+                    <script>
+                        function md5(name){
+                            require(['hdjs'],function(hdjs){
+                                hdjs.md5('houdunren.com',function(hash){
+                                    $("[name="+name+"]").val(hash)
+                                });
+                            })
+                        }
+                    </script>
+                    @endpush
+            </div>
+            <small class="text-muted">此值需要手动在腾讯商户后台API密钥保持一致。查看设置教程</small>
+        </div>
+        <div class="form-group">
+            <label>证书格式 (apiclient_cert.pem)</label>
+            <div class="input-group mb-1">
+                <input type="text" class="form-control" name="apiclient_cert" readonly=""
+                       value="{{old('apiclient_cert',$wechat['apiclient_cert']??'')}}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" onclick="uploadFile('apiclient_cert','pem')" type="button">
+                        选择文件
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>证书密钥格式 (apiclient_key.pem)</label>
+            <div class="input-group mb-1">
+                <input type="text" class="form-control" name="apiclient_key" readonly=""
+                       value="{{old('apiclient_key',$wechat['apiclient_key']??'')}}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" onclick="uploadFile('apiclient_key','pem')" type="button">
+                        选择文件
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>CA证书 (rootca.pem)</label>
+            <div class="input-group mb-1">
+                <input type="text" class="form-control" name="rootca" readonly=""
+                       value="{{old('rootca',$wechat['rootca']??'')}}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" onclick="uploadFile('rootca','pem')" type="button">
+                        选择文件
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label>二维码</label>
@@ -71,25 +140,13 @@
                 <input type="text" class="form-control" name="qr" readonly="" required
                        value="{{old('qr',$wechat['qr']??asset('images/nopic.jpg'))}}">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" onclick="uploadQr()" type="button">
-                        选择二维码图片
+                    <button class="btn btn-outline-secondary" onclick="uploadImage('qr')" type="button">
+                        选择文件
                     </button>
                 </div>
             </div>
             <img class="img-thumbnail d-block" id="qr"
                  src="{{old('qr',$wechat['qr']??asset('images/nopic.jpg'))}}" style="width: 150px;">
-            @push('js')
-                <script>
-                    function uploadQr() {
-                        require(['hdjs'], function (hdjs) {
-                            hdjs.image(function (images) {
-                                $("[name=qr]").val(images[0]);
-                                $("#qr").attr('src', images[0]);
-                            })
-                        });
-                    }
-                </script>
-            @endpush
         </div>
         <div class="form-group">
             <label>公众号图标</label>
@@ -97,26 +154,13 @@
                 <input type="text" class="form-control" name="icon" readonly="" required
                        value="{{old('icon',$wechat['icon']??asset('images/nopic.jpg'))}}">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" onclick="uploadIcon()" type="button">
+                    <button class="btn btn-outline-secondary" onclick="uploadImage('icon')" type="button">
                         选择图标
                     </button>
-
                 </div>
             </div>
-            <img class="img-thumbnail d-block" id="icon"
+            <img class="img-thumbnail d-block"
                  src="{{old('icon',$wechat['icon']??asset('images/nopic.jpg'))}}" style="width: 150px;">
-            @push('js')
-                <script>
-                    function uploadIcon() {
-                        require(['hdjs'], function (hdjs) {
-                            hdjs.image(function (images) {
-                                $("[name=icon]").val(images[0]);
-                                $("#icon").attr('src', images[0]);
-                            })
-                        });
-                    }
-                </script>
-            @endpush
         </div>
     </div>
 </div>

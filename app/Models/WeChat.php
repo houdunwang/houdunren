@@ -13,16 +13,21 @@ class WeChat extends Model
 {
     protected $fillable = [
         'site_id',
+        'token',
+        'encodingaeskey',
         'name',
         'account',
         'original',
         'genre',
-        'app_id',
-        'app_secret',
+        'appid',
+        'appsecret',
+        'mch_id',
+        'key',
+        'apiclient_cert',
+        'apiclient_key',
+        'rootca',
         'qr',
         'icon',
-        'token',
-        'EncodingAESKey',
     ];
     protected $casts = [];
 

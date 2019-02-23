@@ -93,8 +93,8 @@
 
         //选择操作员
         function users() {
-            require(['util', 'axios', 'hdjs'], function (util, axios, hdjs) {
-                util.user(function (id) {
+            require(['axios', 'hdjs'], function (axios, hdjs) {
+                user(function (id) {
                     axios.put('/site/{{$site["id"]}}/user/' + id, {}).then(function (response) {
                         hdjs.message(response.data.message, '', 'success', 2, {
                             events: {
