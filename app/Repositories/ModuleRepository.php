@@ -141,7 +141,7 @@ class ModuleRepository extends Repository
      * @return array|\Illuminate\Support\Collection
      * @throws \Exception
      */
-    public function getSiteModulesByUser(?Site $site, User $user)
+    public function getSiteModulesByUser(?Site $site, User $user): array
     {
         $modules = $this->getSiteAllModule($site)->toArray();
         //站长获取所有模块
@@ -169,5 +169,22 @@ class ModuleRepository extends Repository
             $modules = $modules->merge($package->module);
         }
         return $modules;
+    }
+
+    /**
+     * 获取当前用户有权限执行的模块第一个链接
+     * @param Module $module
+     * @return string|null
+     * @throws \Exception
+     */
+    public function getModuleFirstUrl(Module $module): ?string
+    {
+        foreach ($module['menus'] as $title => $menus) {
+            foreach ($menus as $menu) {
+                if (module_access($menu['permission'], $module['name'])) {
+                    return $menu['url'];
+                }
+            }
+        }
     }
 }

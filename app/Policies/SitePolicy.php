@@ -15,6 +15,17 @@ class SitePolicy
         return isSuperAdmin() ? true : null;
     }
 
+    /**
+     * 站点管理权限
+     * @param User $user
+     * @param Site $site
+     * @return bool
+     */
+    public function admin(User $user, Site $site)
+    {
+        return $site['admin']['id'] == $user['id'] || isSuperAdmin();
+    }
+
     public function view(User $user, Site $site)
     {
         return $site->user->contains($user) || isSuperAdmin();

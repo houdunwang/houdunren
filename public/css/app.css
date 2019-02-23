@@ -141,7 +141,7 @@ body {
   margin-bottom: 10px;
 }
 
-.setting-index h5.page-header {
+.system-setting-index h5.page-header {
   border: none;
   border-left: 0.3em #333333 solid;
   padding-left: 1em;
@@ -151,11 +151,11 @@ body {
   font-size: 1rem;
 }
 
-.setting-index h5.page-header:first-child {
+.system-setting-index h5.page-header:first-child {
   margin-top: 10px;
 }
 
-.setting-index a.tile {
+.system-setting-index a.tile {
   margin-right: 10px;
   padding: 0.8em 1em 0.5em 1em;
   display: block;
@@ -168,17 +168,17 @@ body {
   text-decoration: none;
 }
 
-.setting-index a.tile:hover {
+.system-setting-index a.tile:hover {
   background: #7dacdd;
   color: #ffffff;
 }
 
-.setting-index a.tile i {
+.system-setting-index a.tile i {
   display: block;
   font-size: 2em;
 }
 
-.setting-index a.active {
+.system-setting-index a.active {
   opacity: 0.95;
   background: #006675;
 }

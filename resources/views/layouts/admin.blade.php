@@ -31,29 +31,29 @@
                 {{--</li>--}}
                 <li class="nav-item pr-2">
                     @if ($site = $repository->getAdminCacheSite())
-                        <a href="{{route('site.show',$site)}}" class="nav-link">
+                        <a href="{{route('site.site.show',$site)}}" class="nav-link">
                             <i class="fa fa-share"></i> 继续管理站点 ({{$site['name']}})
                         </a>
                     @endif
                 </li>
                 @if (isSuperAdmin())
                     <li class="nav-item pr-2">
-                        <a href="{{route('module.index')}}" class="nav-link">
+                        <a href="{{route('system.module.index')}}" class="nav-link">
                             <i class="fa fa-cubes"></i> 模块管理
                         </a>
                     </li>
                     <li class="nav-item pr-2">
-                        <a href="{{route('user.index')}}" class="nav-link">
+                        <a href="{{route('system.user.index')}}" class="nav-link">
                             <i class="fa fa-user"></i> 用户管理
                         </a>
                     </li>
                     <li class="nav-item pr-2 d-block d-sm-none">
-                        <a href="{{route('setting.index')}}" class="nav-link">
+                        <a href="{{route('system.setting.index')}}" class="nav-link">
                             <i class="fa fa-support"></i> 系统设置
                         </a>
                     </li>
                     <li class="nav-item pr-2">
-                        <a href="{{route('update-cache')}}" class="nav-link">
+                        <a href="{{route('system.update-cache')}}" class="nav-link">
                             <i class="fa fa-refresh"></i> 更新缓存
                         </a>
                     </li>
@@ -92,7 +92,7 @@
                             <i class="fa fa-w fa-user"></i> {{auth()->user()['name']}}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{route('user.edit',auth()->user())}}">修改资料</a>
+                            <a class="dropdown-item" href="{{route('system.user.edit',auth()->user())}}">修改资料</a>
                             <a class="dropdown-item" href="{{route('logout')}}">退出登录</a>
                         </div>
                     </li>
@@ -112,11 +112,11 @@
                 <i class="fa fa-sign-out fa-2x"></i>退出
             </a>
             @if (isSuperAdmin())
-                <a href="{{route('setting.index')}}" class="tile">
+                <a href="{{route('system.setting.index')}}" class="tile">
                     <i class="fa fa-support fa-2x"></i>系统设置
                 </a>
             @endif
-            <a href="{{route('site.index')}}" class="tile">
+            <a href="{{route('site.site.index')}}" class="tile">
                 <i class="fa fa-sitemap fa-2x"></i>网站管理
             </a>
         </div>

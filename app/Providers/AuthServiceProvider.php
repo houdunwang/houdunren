@@ -5,10 +5,12 @@ namespace App\Providers;
 use App\Models\Group;
 use App\Models\Package;
 use App\Models\Site;
+use App\Models\WeChat;
 use App\Policies\GroupPolicy;
 use App\Policies\PackagePolicy;
 use App\Policies\SitePolicy;
 use App\Policies\UserPolicy;
+use App\Policies\WeChatPolicy;
 use App\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -26,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         Site::class => SitePolicy::class,
         Group::class => GroupPolicy::class,
         Package::class => PackagePolicy::class,
+        WeChat::class => WeChatPolicy::class,
     ];
 
     /**

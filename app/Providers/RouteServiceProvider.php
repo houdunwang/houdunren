@@ -23,8 +23,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
+        // 约束路由参数
+        Route::pattern('id', '[0-9]+');
         parent::boot();
     }
 
