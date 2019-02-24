@@ -43,8 +43,8 @@
                 <label for="staticEmail" class="col-sm-2 col-form-label text-right">EncodingAESKey</label>
                 <div class="col-sm-10">
                     <a href="javascript:void(0);" readonly class="form-control-plaintext text-primary copy"
-                       data-clipboard-text="{{$wechat['EncodingAESKey']}}">
-                        {{$wechat['EncodingAESKey']}}
+                       data-clipboard-text="{{$wechat['encodingaeskey']}}">
+                        {{$wechat['encodingaeskey']}}
                     </a>
                 </div>
             </div>

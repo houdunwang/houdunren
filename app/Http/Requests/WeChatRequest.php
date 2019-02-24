@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class WeChatRequest extends FormRequest
 {
@@ -19,12 +20,14 @@ class WeChatRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => ['required',Rule::unique('we_chats')->where(function ($query) {
+                return $query->where('id','<>',request('wechat')['id'])->where('site_id',request('site')['id']);
+            })],
             'account' => 'required',
             'original' => 'required',
             'genre' => 'required',
-            'app_id' => 'required',
-            'app_secret' => 'required',
+            'appid' => 'required',
+            'appsecret' => 'required',
             'qr' => 'required',
             'icon' => 'required',
         ];
@@ -34,11 +37,12 @@ class WeChatRequest extends FormRequest
     {
         return [
             'name.required' => '公众号名称 不能为空',
+            'name.unique' => '公众号名称 已经存在',
             'account.required' => '微信号 不能为空',
             'original.required' => '原始ID 不能为空',
             'genre.required' => '公众号类型 不能为空',
-            'app_id.required' => 'AppId 不能为空',
-            'app_secret.required' => 'AppSecret 不能为空',
+            'appid.required' => 'AppId 不能为空',
+            'appsecret.required' => 'AppSecret 不能为空',
             'qr.required' => '二维码 不能为空',
             'icon.required' => '图标 不能为空',
         ];

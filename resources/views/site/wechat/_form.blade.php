@@ -14,10 +14,16 @@
             <small class="text-muted">填写公众号的帐号，一般为英文帐号</small>
         </div>
         <div class="form-group">
-            <label>原始ID</label>
+            <label>开发者ID(AppID)</label>
             <input type="text" name="original" class="form-control" required
                    value="{{old('original',$wechat['original']??'')}}">
-            <small class="text-muted">在给粉丝发送客服消息时,原始ID不能为空,以gh_开始的</small>
+            <small class="text-muted">开发者ID是公众号开发识别码，配合开发者密码可调用公众号的接口能力。</small>
+        </div>
+        <div class="form-group">
+            <label>开发者密码(AppSecret)</label>
+            <input type="text" name="encodingaeskey" class="form-control" required
+                   value="{{old('encodingaeskey',$wechat['encodingaeskey']??'')}}">
+            <small class="text-muted">开发者密码是校验公众号开发者身份的密码，具有极高的安全性。切记勿把密码直接交给第三方开发者或直接存储在代码中。如需第三方代开发公众号，请使用授权方式接入。</small>
         </div>
         <div class="form-group">
             <label>公众号类型</label>
@@ -70,14 +76,14 @@
         <div class="form-group">
             <label>微信支付商户号
                 (MchId)</label>
-            <input type="text" name="mch_id" class="form-control" required
+            <input type="text" name="mch_id" class="form-control"
                    value="{{old('mch_id',$wechat['mch_id']??'')}}">
-            <small class="text-muted">请填写微信公众平台后台的AppSecret, 只有填写这两项才能管理自定义菜单</small>
+            <small class="text-muted">公众号支付请求中用于加密的密钥Key</small>
         </div>
         <div class="form-group">
             <label>商户支付密钥 (API密钥)</label>
             <div class="input-group mb-1">
-                <input type="text" class="form-control" name="key" readonly="" required
+                <input type="text" class="form-control" name="key" readonly=""
                        value="{{old('key',$wechat['key']??'')}}">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" onclick="md5('key')" type="button">

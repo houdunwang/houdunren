@@ -16,15 +16,10 @@ use Illuminate\Http\Request;
  */
 class WeChatController extends Controller
 {
-    public function index(Site $site)
+    public function index(Site $site, WeChat $weChat)
     {
-        $this->authorize('admin', $site);
-        $wechat = WeChat::site($site)->first();
-        if ($wechat) {
-            return redirect(route('site.wechat.edit', [$site, $wechat]));
-        } else {
-            return redirect(route('site.wechat.create', [$site]));
-        }
+        $wechats = $weChat->site($site)->get();
+        return view('site.wechat.index', compact('site', 'wechats'));
     }
 
     public function create(Site $site)
@@ -67,7 +62,7 @@ class WeChatController extends Controller
     {
         $this->authorize('admin', $site);
         $wechat->delete();
-        return redirect(route('site.site.index'))->with('success', $wechat['name'] . '公众号删除成功');
+        return redirect(route('site.wechat.index',[$site]))->with('success', $wechat['name'] . '公众号删除成功');
     }
 
     public function refreshToken(Site $site, WeChat $wechat)

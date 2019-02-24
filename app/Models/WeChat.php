@@ -35,4 +35,10 @@ class WeChat extends Model
     {
         return $query->where('site_id', $site['id']);
     }
+
+    public function getGenreTitleAttribute()
+    {
+        $type = ['普通订阅号','普通服务号','认证订阅号','认证服务号/认证媒体/政府订阅号'];
+        return $type[$this['genre']];
+    }
 }
