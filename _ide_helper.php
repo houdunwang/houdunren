@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.7.26 on 2019-02-23 17:19:34.
+ * Generated for Laravel 5.7.26 on 2019-02-24 12:42:30.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -14168,9 +14168,10 @@ namespace Houdunwang\WeChat {
         }
         
         /**
-         * 
+         * 获取配置项
          *
-         * @return array 
+         * @param $name
+         * @return mixed 
          * @static 
          */ 
         public static function getConfig($name)

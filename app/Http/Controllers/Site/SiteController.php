@@ -18,6 +18,9 @@ class SiteController extends Controller
 {
     public function index(SiteRepository $repository)
     {
+$d=         simplexml_load_string(file_get_contents('wechat.xml'), 'SimpleXMLElement',
+            LIBXML_NOCDATA);
+        var_dump($d->FromUserName);die;
         $sites = $repository->paginate(20);
         return view('site.site.index', compact('sites'));
     }

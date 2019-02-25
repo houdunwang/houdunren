@@ -6,7 +6,7 @@ Route::get('login', 'Member\LoginController@index')->name('login');
 Route::post('login', 'Member\LoginController@store')->name('login');
 Route::get('logout', 'Member\LoginController@logout')->name('logout');
 //后台登录
-Route::get('admin', 'Site\SiteController@index');
+Route::get('admin', 'Site\SiteController@index')->middleware('auth');
 //公共
 Route::group(['prefix' => 'common', 'as' => 'common.'], function () {
     Route::any('upload', 'Common\UploadController@upload')->name('upload.make');
@@ -53,7 +53,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'site', 'as' => 'site.', 'na
     Route::resource('{site}/config', 'ConfigController');
     //微信公众号
     Route::resource('{site}/wechat', 'WeChatController');
-    Route::get('{site}/weChatToken/{wechat}', 'WeChatController@refreshToken')->name('wechat.token');
 });
 //模块
 Route::group(['middleware' => ['auth', 'module'], 'as' => 'module.', 'prefix' => 'module', 'namespace' => 'Module'],

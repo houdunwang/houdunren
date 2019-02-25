@@ -4,7 +4,10 @@
     </div>
     <div class="card-body">
         <div class="form-group row">
-            <label for="inputPassword" class="col-sm-1 col-form-label">体验天数</label>
+            <label for="inputPassword" class="col-sm-1 col-form-label">
+                体验天数
+                <small class="text-secondary">(days)</small>
+            </label>
             <div class="col-sm-5">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" name="days"
@@ -17,7 +20,10 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-1 col-form-label">默认会员组</label>
+            <label class="col-sm-1 col-form-label">
+                默认会员组
+                <small class="text-secondary">(group_id)</small>
+            </label>
             <div class="col-sm-5">
                 <select class="custom-select my-1" name="group_id">
                     @foreach(\App\Models\Group::all() as $group)

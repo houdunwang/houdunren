@@ -17,4 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/weChat/{site}', 'Api\WeChatController@processor')->name('api.weChat');
+Route::any('/weChat/{weChat}', 'Api\WeChatController@processor')->name('api.weChat');

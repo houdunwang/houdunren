@@ -10,7 +10,6 @@
 
 namespace Houdunwang\WeChat\Build\Material;
 
-use houdunwang\curl\Curl;
 use Houdunwang\WeChat\Build\Base;
 
 /**
@@ -31,7 +30,7 @@ class Material extends Base
     public function total()
     {
         $url = $this->apiUrl
-            ."/cgi-bin/material/get_materialcount?access_token={$this->accessToken}";
+            . "/cgi-bin/material/get_materialcount?access_token={$this->accessToken}";
 
         return $this->get(Curl::get($url));
     }
@@ -45,9 +44,9 @@ class Material extends Base
      */
     public function lists($param)
     {
-        $url     = $this->apiUrl
-            ."/cgi-bin/material/batchget_material?access_token="
-            .$this->getAccessToken();
+        $url = $this->apiUrl
+            . "/cgi-bin/material/batchget_material?access_token="
+            . $this->getAccessToken();
         $content = Curl::post($url,
             json_encode($param, JSON_UNESCAPED_UNICODE));
 

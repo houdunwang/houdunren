@@ -16,7 +16,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">站点介绍</label>
             <div class="col-sm-6">
-                <textarea name="description"  class="form-control" cols="30" rows="3" required>{{old('description',$site['description']??'')}}</textarea>
+                <textarea name="description"  class="form-control" cols="30" rows="3">{{old('description',$site['description']??'')}}</textarea>
             </div>
         </div>
     </div>

@@ -8,6 +8,8 @@
 
 namespace App\Servers;
 
+use App\Models\WeChat;
+
 /**
  * 微信处理服务
  * Class WeChatServer
@@ -15,8 +17,14 @@ namespace App\Servers;
  */
 class WeChatServer
 {
-    public function handle():string
+    /**
+     * 加载配置项
+     * @param WeChat $weChat
+     * @return $this
+     */
+    public function config(WeChat $weChat)
     {
-        return 33;
+        \Houdunwang\WeChat\WeChat::config($weChat);
+        return $this;
     }
 }

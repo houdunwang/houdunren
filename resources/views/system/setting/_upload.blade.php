@@ -1,10 +1,11 @@
 <div class="card">
-    <div class="card-header">
-        上传方式
-    </div>
+    <div class="card-header">上传方式</div>
     <div class="card-body">
         <div class="form-group row">
-            <label class="col-form-label col-sm-1 pt-0">上传设置</label>
+            <label class="col-form-label col-sm-1 pt-0">
+                上传设置
+                <small class="text-secondary">(local)</small>
+            </label>
             <div class="col-sm-6">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label mr-3">
@@ -19,9 +20,12 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="inputPassword" class="col-sm-1 col-form-label">图片大小</label>
+            <label for="inputPassword" class="col-sm-1 col-form-label">
+                图片大小
+                <small class="text-secondary">(image_size)</small>
+            </label>
             <div class="col-sm-6">
-                <div class="input-group mb-3">
+                <div class="input-group">
                     <input type="text" class="form-control" name="image_size"
                            value="{{$config['image_size']??200000000}}">
                     <div class="input-group-append">
@@ -31,7 +35,9 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="inputPassword" class="col-sm-1 col-form-label">文件大小</label>
+            <label for="inputPassword" class="col-sm-1 col-form-label">
+                文件大小<small class="text-secondary">(file_size)</small>
+            </label>
             <div class="col-sm-6">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" name="file_size"
@@ -43,7 +49,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-1 col-form-label">上传类型</label>
+            <label class="col-sm-1 col-form-label">上传类型 <small class="text-secondary">(type)</small></label>
             <div class="col-sm-6">
                 <input type="text" class="form-control" name="type"
                        value="{{$config['type']??'jpg,jpeg,gif,png,zip,rar,doc,txt,pem,json'}}">
@@ -58,10 +64,12 @@
     </div>
     <div class="card-body">
         <div class="form-group row">
-            <label class="col-sm-1 col-form-label">上传目录</label>
+            <label class="col-sm-1 col-form-label">
+                上传目录<small class="text-secondary">(path)</small>
+            </label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="local[path]"
-                       value="{{$config['local']['path']??'attachment'}}">
+                <input type="text" class="form-control" name="path"
+                       value="{{$config['path']??'attachment'}}">
                 <span class="help-block small text-secondary">上传到本地服务器的目录名称</span>
             </div>
         </div>
@@ -73,28 +81,40 @@
     </div>
     <div class="card-body">
         <div class="form-group row">
-            <label class="col-sm-1 col-form-label">regionId</label>
+            <label class="col-sm-1 col-form-label">
+                regionId
+                <small class="text-secondary">(oss.regionId)</small>
+            </label>
             <div class="col-sm-6">
                 <input type="text" class="form-control" name="oss[regionId]"
                        value="{{$config['oss']['regionId']??''}}">
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-1 col-form-label">accessKeySecret</label>
+            <label class="col-sm-1 col-form-label">
+                accessKeySecret
+                <small class="text-secondary">(oss.accessKeySecret)</small>
+            </label>
             <div class="col-sm-6">
                 <input type="text" class="form-control" name="oss[accessKeySecret]"
                        value="{{$config['oss']['accessKeySecret']??''}}">
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-1 col-form-label">bucket</label>
+            <label class="col-sm-1 col-form-label">
+                bucket
+                <small class="text-secondary">(oss.bucket)</small>
+            </label>
             <div class="col-sm-6">
                 <input type="text" class="form-control" name="oss[bucket]"
                        value="{{$config['oss']['bucket']??''}}">
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-1 col-form-label">endpoint</label>
+            <label class="col-sm-1 col-form-label">
+                endpoint
+                <small class="text-secondary">(oss.endpoint)</small>
+            </label>
             <div class="col-sm-6">
                 <input type="text" class="form-control" name="oss[endpoint]"
                        value="{{$config['oss']['endpoint']??''}}">

@@ -16,7 +16,7 @@ class SiteRequest extends FormRequest
     {
         return [
             'name' => 'required|max:10|unique:sites,name,' . request('site')['id'],
-            'description' => 'required|nullable|max:50',
+            'description' => 'nullable|max:50',
         ];
     }
 

@@ -13,49 +13,39 @@ namespace Houdunwang\WeChat\Build\Message;
 /**
  * 消息回复
  * Trait Send
- *
- * @package Houdunwang\WeChat\Build\message
+ * @package Houdunwang\WeChat\Build\Message
  */
 trait Send
 {
     //回复文本
     protected static $REPLY_TYPE_TEXT = 'text';
-
     //回复图文
     protected static $REPLY_TYPE_IMAGE = 'image';
-
     //回复语音
     protected static $REPLY_TYPE_VOICE = 'voice';
-
     //回复视频
     protected static $REPLY_TYPE_VIDEO = 'video';
-
     //音乐消息
     protected static $REPLY_TYPE_MUSIC = 'music';
-
     //图文信息
     protected static $REPLY_TYPE_NEWS = 'news';
 
     /**
      * 回复文本消息
-     *
-     * @param $content
+     * @param string $content
+     * @return string
      */
-    public function text($content)
+    public function text(string $content): string
     {
-        $xml
-              = '<xml>
+        header('Content-type:application/xml');
+        $xml = '<xml>
 <ToUserName><![CDATA[%s]]></ToUserName>
 <FromUserName><![CDATA[%s]]></FromUserName>
 <CreateTime>%s</CreateTime>
 <MsgType><![CDATA[%s]]></MsgType>
 <Content><![CDATA[%s]]></Content>
 </xml>';
-        $text = sprintf($xml, $this->message->FromUserName,
-            $this->message->ToUserName, time(), self::$REPLY_TYPE_TEXT,
-            $content);
-        header('Content-type:application/xml');
-        return $text;
+        return sprintf($xml, $this->FromUserName, $this->ToUserName, time(), self::$REPLY_TYPE_TEXT, $content);
     }
 
     /**
@@ -66,7 +56,7 @@ trait Send
     public function image($media_id)
     {
         $xml
-              = '<xml>
+            = '<xml>
 <ToUserName><![CDATA[%s]]></ToUserName>
 <FromUserName><![CDATA[%s]]></FromUserName>
 <CreateTime>%s</CreateTime>
@@ -90,7 +80,7 @@ trait Send
     public function voice($media_id)
     {
         $xml
-              = '<xml>
+            = '<xml>
 <ToUserName><![CDATA[%s]]></ToUserName>
 <FromUserName><![CDATA[%s]]></FromUserName>
 <CreateTime>%s</CreateTime>
@@ -114,7 +104,7 @@ trait Send
     public function video($video)
     {
         $xml
-              = '<xml>
+            = '<xml>
 <ToUserName><![CDATA[%s]]></ToUserName>
 <FromUserName><![CDATA[%s]]></FromUserName>
 <CreateTime>%s</CreateTime>
@@ -140,7 +130,7 @@ trait Send
     public function music($music)
     {
         $xml
-              = '<xml>
+            = '<xml>
 <ToUserName><![CDATA[%s]]></ToUserName>
 <FromUserName><![CDATA[%s]]></FromUserName>
 <CreateTime>%s</CreateTime>
@@ -169,7 +159,7 @@ trait Send
     public function news($news)
     {
         $xml
-               = '<xml>
+            = '<xml>
 <ToUserName><![CDATA[%s]]></ToUserName>
 <FromUserName><![CDATA[%s]]></FromUserName>
 <CreateTime>%s</CreateTime>
@@ -180,7 +170,7 @@ trait Send
 </Articles>
 </xml>';
         $item
-               = '<item>
+            = '<item>
 <Title><![CDATA[%s]]></Title>
 <Description><![CDATA[%s]]></Description>
 <PicUrl><![CDATA[%s]]></PicUrl>

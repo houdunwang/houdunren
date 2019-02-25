@@ -16,5 +16,6 @@ mix.sass('resources/sass/app.scss', 'public/css').version();
 mix.scripts([
     'resources/util/user.js',
     'resources/util/upload.js',
+    'resources/util/util.js',
 ], 'public/js/util.js');
 

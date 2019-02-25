@@ -24,18 +24,14 @@ class Cache
     public function dir($dir)
     {
         $this->dir = $dir;
-        $status = is_dir($dir) or mkdir($dir, 0755, true);
-        if ( ! $status) {
-            throw new Exception("缓存目录创建失败或目录不可写");
-        }
-
+        is_dir($this->dir) or mkdir($this->dir, 0755, true);
         return $this;
     }
 
     //缓存文件
     private function getFile($name)
     {
-        return $this->dir.'/'.md5($name).".php";
+        return $this->dir . '/' . md5($name) . ".php";
     }
 
     //设置
@@ -44,7 +40,7 @@ class Cache
         $file = $this->getFile($name);
         //缓存时间
         $expire = sprintf("%010d", $expire);
-        $data   = $expire.serialize($data);
+        $data = $expire . serialize($data);
 
         return file_put_contents($file, $data);
     }
@@ -54,11 +50,11 @@ class Cache
     {
         $file = $this->getFile($name);
         //缓存文件不存在
-        if ( ! is_file($file) || ! is_readable($file)) {
+        if (!is_file($file) || !is_readable($file)) {
             return null;
         }
         $content = file_get_contents($file);
-        $expire  = intval(substr($content, 0, 10));
+        $expire = intval(substr($content, 0, 10));
         //修改时间
         $mtime = filemtime($file);
 
@@ -85,7 +81,7 @@ class Cache
     //刷新缓存池
     public function flush($dir)
     {
-        if ( ! is_dir($this->dir)) {
+        if (!is_dir($this->dir)) {
             return true;
         }
         $files = array_diff(scandir($dir), ['.', '..']);

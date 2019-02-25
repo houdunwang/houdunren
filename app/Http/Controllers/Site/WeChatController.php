@@ -32,8 +32,6 @@ class WeChatController extends Controller
     {
         $this->authorize('admin', $site);
         $data = $request->input();
-        $data['token'] = str_random(16);
-        $data['encodingaeskey'] = str_random(43);
         $data['site_id'] = $site['id'];
         $wechat = $repository->create($data);
         return redirect(route('site.wechat.show', [$site, $wechat]));
@@ -63,14 +61,5 @@ class WeChatController extends Controller
         $this->authorize('admin', $site);
         $wechat->delete();
         return redirect(route('site.wechat.index',[$site]))->with('success', $wechat['name'] . '公众号删除成功');
-    }
-
-    public function refreshToken(Site $site, WeChat $wechat)
-    {
-        $this->authorize('admin', $site);
-        $wechat['token'] = str_random(16);
-        $wechat['encodingaeskey'] = str_random(43);
-        $wechat->save();
-        return back()->with('info', 'TOKEN刷新成功,请重新在微信服务器上配置');
     }
 }

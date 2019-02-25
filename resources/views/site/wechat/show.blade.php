@@ -25,8 +25,8 @@
                 <label for="staticEmail" class="col-sm-2 col-form-label text-right">URL</label>
                 <div class="col-sm-10">
                     <a href="javascript:void(0);" class="form-control-plaintext text-primary copy"
-                       data-clipboard-text="{{route('api.weChat',$site)}}">
-                        {{route('api.weChat',$site)}}
+                       data-clipboard-text="{{route('api.weChat',$wechat)}}">
+                        {{route('api.weChat',$wechat)}}
                     </a>
                 </div>
             </div>
@@ -67,7 +67,6 @@
         <a class="btn btn-outline-success" href="{{route('site.wechat.edit',[$site,$wechat])}}">
             继续编辑公众号资料
         </a>
-        <a class="btn btn-outline-info" href="{{route('site.wechat.token',[$site,$wechat])}}">重新生成Token等资料</a>
         <button type="button" class="btn btn-outline-danger" onclick="destroy(this)">
             删除公众号
         </button>

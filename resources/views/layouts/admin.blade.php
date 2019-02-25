@@ -15,6 +15,7 @@
     @stack('css')
 </head>
 <body class="admin">
+
 @include('layouts.message')
 <div class="container-fluid top-menu">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

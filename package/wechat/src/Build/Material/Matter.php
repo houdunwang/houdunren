@@ -11,6 +11,7 @@
 namespace Houdunwang\WeChat\Build\Material;
 
 use houdunwang\curl\Curl;
+use GuzzleHttp\Client;
 
 /**
  * 永久素材
@@ -30,57 +31,49 @@ trait Matter
      */
     public function addMaterial($type, $file)
     {
-        $url = $this->apiUrl."/cgi-bin/material/add_material?access_token={$this->accessToken}&type=$type";
-
+        $url = $this->apiUrl . "/cgi-bin/material/add_material?access_token={$this->accessToken}&type=$type";
         return $this->get(Curl::post($url, $this->getPostMedia($file)));
     }
 
     /**
      * 上传永久视频素材
-     *
-     * @param string $file        素材文件
-     * @param array  $description 描述信息
-     *
-     * @return array|mixed
+     * @param string $file 素材文件
+     * @param array $description 描述信息
+     * @return mixed
      */
-    public function addVideoMaterial($file, array $description)
+    public function addVideoMaterial(string $file, array $description)
     {
-        $url                 = $this->apiUrl
-                               ."/cgi-bin/material/add_material?access_token={$this->accessToken}&type=video";
-        $post                = $this->getPostMedia($file);
-        $post['description'] = json_encode($description,
-            JSON_UNESCAPED_UNICODE);
-
-        return $this->get(Curl::post($url, $post));
+        $url = $this->apiUrl
+            . "/cgi-bin/material/add_material?access_token={$this->accessToken}&type=video";
+        $post = $this->getPostMedia($file);
+        $post['description'] = json_encode($description, JSON_UNESCAPED_UNICODE);
+        $client = (new Client())->request('POST',$url,$post);
+        return $this->get($client);
     }
 
     /**
      * 获取永久素材
-     *
-     * @param $mediaId
-     *
-     * @return array|mixed
+     * @param string $mediaId 素材编号
+     * @return mixed
      */
-    public function getMaterial($mediaId)
+    public function getMaterial(string $mediaId)
     {
-        $url  = $this->apiUrl
-                ."/cgi-bin/material/get_material?access_token={$this->accessToken}";
-        $json = '{"media_id":"'.$mediaId.'"}';
+        $url = $this->apiUrl
+            . "/cgi-bin/material/get_material?access_token={$this->accessToken}";
+        $json = '{"media_id":"' . $mediaId . '"}';
         return $this->get(Curl::post($url, $json));
     }
 
-    /**
-     * 删除永久素材
+    /**删除永久素材
      *
-     * @param $media_id
-     *
-     * @return array|mixed
+     * @param string $media_id 素材编号
+     * @return mixed
      */
-    public function delMaterial($media_id)
+    public function delMaterial(string $media_id)
     {
-        $url  = $this->apiUrl
-                ."/cgi-bin/material/del_material?access_token={$this->accessToken}";
-        $json = '{"media_id":"'.$media_id.'"}';
+        $url = $this->apiUrl
+            . "/cgi-bin/material/del_material?access_token={$this->accessToken}";
+        $json = '{"media_id":"' . $media_id . '"}';
 
         return $this->get(Curl::post($url, $json));
     }
