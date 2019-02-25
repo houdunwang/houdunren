@@ -1,6 +1,6 @@
 @inject('siteRepository',App\Repositories\SiteRepository')
 @inject('moduleRepository',App\Repositories\ModuleRepository')
-@inject('userRepository',App\Repositories\userRepository')
+@inject('userRepository',App\Repositories\UserRepository')
         <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,25 +22,18 @@
     <div class="row">
         <div class="col-sm-3 col-md-2">
             <div class="card">
-                @foreach($moduleRepository->getSiteModulesByUser(site(),auth()->user()) as $module)
-                    @if($module['name'] == module()['name'])
-                        @foreach ($module['menus'] as $title=>$menus)
-                            @if (count($menus))
-                                <div class="card-header">
-                                    {{$title}}
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    @foreach ($menus as $menu)
-                                        @if (module_access($menu['permission'],$module['name']))
-                                            <a href="{{$menu['url']}}?mid={{$module['id']}}"
-                                               class="list-group-item">{{$menu['title']}}</a>
-                                        @endif
-                                    @endforeach
-                                </ul>
-                            @endif
-                        @endforeach
-                    @endif
-                @endforeach
+                <?php $collect = $moduleRepository->filterModuleMenu(site(),module(),auth()->user());?>
+                    @foreach ($collect['menus'] as $title=>$menus)
+                        <div class="card-header">
+                            {{$title}}
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            @foreach ($menus as $menu)
+                                <a href="{{$menu['url']}}"
+                                   class="list-group-item">{{$menu['title']}}</a>
+                            @endforeach
+                        </ul>
+                    @endforeach
             </div>
         </div>
         <div class="col-sm-9 col-md-10 mt-2 mt-sm-0">

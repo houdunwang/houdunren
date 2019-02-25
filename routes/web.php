@@ -32,10 +32,13 @@ Route::group(['middleware' => ['auth', 'system'], 'prefix' => 'system', 'as' => 
         //模块管理
         Route::resource('module', 'ModuleController');
         Route::get('moduleRefresh/{module}', 'ModuleController@refresh')->name('module.refresh');
+        Route::get('moduleLocal', 'ModuleController@local')->name('module.local');
         //用户管理
         Route::resource('user', 'UserController');
         //锁定解锁用户
         Route::get('lock/{user}/{state}', 'UserController@lock')->name('user.lock');
+        //应用
+        Route::resource('app', 'AppController');
     });
 //站点
 Route::group(['middleware' => ['auth'], 'prefix' => 'site', 'as' => 'site.', 'namespace' => 'Site'], function () {
@@ -63,6 +66,5 @@ Route::group(['middleware' => ['auth', 'module'], 'as' => 'module.', 'prefix' =>
         //模块配置
         Route::resource('config', 'ConfigController');
         //模块菜单
-        Route::get('menu/{type}/lists', 'MenuController@lists')->name('menu.lists');
-        Route::resource('menu', 'MenuController');
+        Route::resource('{type}/menu', 'MenuController');
     });

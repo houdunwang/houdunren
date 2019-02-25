@@ -9,7 +9,6 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <style>
@@ -478,7 +477,7 @@
     </div>
 
     <div class="relative pb-full md:flex md:pb-0 md:min-h-screen w-full md:w-1/2">
-        <div style="background-image: url(http://hdcms.test/svg/403.svg);" class="absolute pin bg-cover bg-no-repeat md:bg-left lg:bg-center">
+        <div style="background-image: url({{asset('svg/403.svg')}});" class="absolute pin bg-cover bg-no-repeat md:bg-left lg:bg-center">
         </div>
     </div>
 </div>

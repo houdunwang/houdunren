@@ -20,7 +20,7 @@ class CreateModulesTable extends Migration
             $table->tinyInteger('local')->comment('本地模块');
             $table->text('package')->comment('模块配置');
             $table->text('permissions')->nullable()->comment('权限列表');
-            $table->text('menus')->nullable()->comment('menus');
+//            $table->text('menus')->nullable()->comment('menus');
             $table->timestamps();
         });
     }

@@ -1,5 +1,4 @@
-@inject('repository',App\Repositories\SiteRepository')
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -26,18 +25,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav mr-auto">
-                {{--<li class="nav-item ">--}}
-                {{--<a class="nav-link" href="{{route('setting.index')}}">--}}
-                {{--<i class="fa fa-w fa-cogs"></i> 系统管理--}}
-                {{--</a>--}}
-                {{--</li>--}}
-                <li class="nav-item pr-2">
-                    @if ($site = $repository->getAdminCacheSite())
-                        <a href="{{route('site.site.show',$site)}}" class="nav-link">
-                            <i class="fa fa-share"></i> 继续管理站点 ({{$site['name']}})
-                        </a>
-                    @endif
-                </li>
                 @if (isSuperAdmin())
                     <li class="nav-item pr-2">
                         <a href="{{route('system.module.index')}}" class="nav-link">
@@ -73,21 +60,6 @@
             </ul>
             <div class="my-2 my-lg-0">
                 <ul class="navbar-nav">
-                    {{--@if ($site = $repository->getAdminCacheSite())--}}
-                    {{--<li class="nav-item dropdown">--}}
-                    {{--<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"--}}
-                    {{--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-                    {{--<i class="fa fa-group"></i> {{$site['name']}}--}}
-                    {{--</a>--}}
-                    {{--<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">--}}
-                    {{--<a class="dropdown-item" href="{{route('site.edit',$site)}}">编辑当前站点资料</a>--}}
-
-                    {{--<a class="dropdown-item" href="{{route('site.permission',[$site,auth()->user()])}}">--}}
-                    {{--设置操作员权限--}}
-                    {{--</a>--}}
-                    {{--</div>--}}
-                    {{--</li>--}}
-                    {{--@endif--}}
                     <li class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

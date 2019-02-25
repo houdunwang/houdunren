@@ -1,6 +1,6 @@
 @inject('siteRepository',App\Repositories\SiteRepository')
 @inject('moduleRepository',App\Repositories\ModuleRepository')
-@inject('userRepository',App\Repositories\userRepository')
+@inject('UserRepository',App\Repositories\UserRepository')
         <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,19 +23,19 @@
         <div class="col-sm-3 col-md-2 mb-5">
             <div class="card">
                 @foreach($moduleRepository->getSiteModulesByUser(site(),auth()->user()) as $module)
-                    <div class="card-header">
-                        {{$module['title']}}
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        @foreach ($module['menus'] as $menus)
-                            @foreach ($menus as $menu)
-                                @if (module_access($menu['permission'],$module['name']))
-                                    <a href="{{$menu['url']}}?mid={{$module['id']}}"
+                    @if (count($module['menus']))
+                        <div class="card-header">
+                            {{$module['title']}}
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            @foreach ($module['menus'] as $menus)
+                                @foreach ($menus as $menu)
+                                    <a href="{{$menu['url']}}"
                                        class="list-group-item">{{$menu['title']}}</a>
-                                @endif
+                                @endforeach
                             @endforeach
-                        @endforeach
-                    </ul>
+                        </ul>
+                    @endif
                 @endforeach
             </div>
         </div>

@@ -50,13 +50,12 @@ trait Send
 
     /**
      * 回复图片消息
-     *
-     * @param $media_id
+     * @param string $media_id
+     * @return string
      */
-    public function image($media_id)
+    public function image(string $media_id): string
     {
-        $xml
-            = '<xml>
+        $xml = '<xml>
 <ToUserName><![CDATA[%s]]></ToUserName>
 <FromUserName><![CDATA[%s]]></FromUserName>
 <CreateTime>%s</CreateTime>
@@ -65,22 +64,18 @@ trait Send
 <MediaId><![CDATA[%s]]></MediaId>
 </Image>
 </xml>';
-        $text = sprintf($xml, $this->message->FromUserName,
-            $this->message->ToUserName, time(), self::$REPLY_TYPE_IMAGE,
-            $media_id);
         header('Content-type:application/xml');
-        return $text;
+        return sprintf($xml, $this->FromUserName, $this->ToUserName, time(), self::$REPLY_TYPE_IMAGE, $media_id);
     }
 
     /**
      * 回复语音消息
-     *
-     * @param $media_id
+     * @param string $media_id
+     * @return string
      */
-    public function voice($media_id)
+    public function voice(string $media_id): string
     {
-        $xml
-            = '<xml>
+        $xml = '<xml>
 <ToUserName><![CDATA[%s]]></ToUserName>
 <FromUserName><![CDATA[%s]]></FromUserName>
 <CreateTime>%s</CreateTime>
@@ -89,19 +84,16 @@ trait Send
 <MediaId><![CDATA[%s]]></MediaId>
 </Voice>
 </xml>';
-        $text = sprintf($xml, $this->message->FromUserName,
-            $this->message->ToUserName, time(), self::$REPLY_TYPE_VOICE,
-            $media_id);
         header('Content-type:application/xml');
-        return $text;
+        return sprintf($xml, $this->FromUserName, $this->ToUserName, time(), self::$REPLY_TYPE_VOICE, $media_id);
     }
 
     /**
      * 回复视频消息
-     *
-     * @param $video
+     * @param string $video
+     * @return string
      */
-    public function video($video)
+    public function video(string $video): string
     {
         $xml
             = '<xml>
@@ -115,22 +107,19 @@ trait Send
 <Description><![CDATA[%s]]></Description>
 </Video>
 </xml>';
-        $text = sprintf($xml, $this->message->FromUserName,
-            $this->message->ToUserName, time(), self::$REPLY_TYPE_VIDEO,
-            $video['media_id'], $video['title'], $video['description']);
         header('Content-type:application/xml');
-        return $text;
+        return sprintf($xml, $this->FromUserName, $this->ToUserName, time(), self::$REPLY_TYPE_VIDEO,
+            $video['media_id'], $video['title'], $video['description']);
     }
 
     /**
      * 回复音乐消息
-     *
-     * @param $music
+     * @param string $music
+     * @return string
      */
-    public function music($music)
+    public function music(string $music): string
     {
-        $xml
-            = '<xml>
+        $xml = '<xml>
 <ToUserName><![CDATA[%s]]></ToUserName>
 <FromUserName><![CDATA[%s]]></FromUserName>
 <CreateTime>%s</CreateTime>
@@ -143,23 +132,19 @@ trait Send
 <ThumbMediaId><![CDATA[%s]]></ThumbMediaId>
 </Music>
 </xml>';
-        $text = sprintf($xml, $this->message->FromUserName,
-            $this->message->ToUserName, time(), self::$REPLY_TYPE_MUSIC,
-            $music['title'], $music['description'], $music['musicurl'],
-            $music['hqmusicurl'], $music['thumbmediaid']);
         header('Content-type:application/xml');
-        return $text;
+        return sprintf($xml, $this->FromUserName, $this->ToUserName, time(), self::$REPLY_TYPE_MUSIC,
+            $music['title'], $music['description'], $music['musicurl'], $music['hqmusicurl'], $music['thumbmediaid']);
     }
 
     /**
      * 回复图文信息
-     *
-     * @param $news
+     * @param array $news
+     * @return string
      */
-    public function news($news)
+    public function news(array $news):string
     {
-        $xml
-            = '<xml>
+        $xml = '<xml>
 <ToUserName><![CDATA[%s]]></ToUserName>
 <FromUserName><![CDATA[%s]]></FromUserName>
 <CreateTime>%s</CreateTime>
@@ -169,8 +154,7 @@ trait Send
 %s
 </Articles>
 </xml>';
-        $item
-            = '<item>
+        $item = '<item>
 <Title><![CDATA[%s]]></Title>
 <Description><![CDATA[%s]]></Description>
 <PicUrl><![CDATA[%s]]></PicUrl>
@@ -180,12 +164,7 @@ trait Send
         foreach ((array)$news as $n) {
             $items .= sprintf($item, $n['title'], $n['discription'], $n['picurl'], $n['url']);
         }
-
-        $text = sprintf($xml, $this->message->FromUserName,
-            $this->message->ToUserName, time(), self::$REPLY_TYPE_NEWS,
-            count($news), $items);
-
         header('Content-type:application/xml');
-        return $text;
+        return sprintf($xml, $this->FromUserName, $this->ToUserName, time(), self::$REPLY_TYPE_NEWS, count($news), $items);
     }
 }

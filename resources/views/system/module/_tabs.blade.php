@@ -17,7 +17,7 @@
         </li>
     @endif
     <li class="nav-item">
-        <a class="nav-link {{active_class(if_route('system.module.create'),'active')}}" href="{{route('system.module.index')}}">
+        <a class="nav-link {{active_class(if_route('system.app.index'),'active')}}" href="{{route('system.app.index')}}">
             已购模块
         </a>
     </li>

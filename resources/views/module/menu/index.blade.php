@@ -3,18 +3,18 @@
     @component('components.breadcrumb',['menus'=>['桌面会员中心菜单设置'=>'#']]) @endcomponent
     <ul class="nav nav-tabs mb-2">
         <li class="nav-item">
-            <a class="nav-link active" href="#">
-                菜单列表
-            </a>
+            <a class="nav-link active" href="#">菜单列表</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{route('module.menu.create',['type'=>request('type')])}}">
+            <a class="nav-link" href="{{module_link('module.menu.create',request('type'))}}">
                 添加菜单
             </a>
         </li>
     </ul>
     <div class="card">
-
+        <div class="card-header">
+            {{$type=='web'?'桌面会员中心菜单':'手机会员中心菜单'}}列表
+        </div>
         <div class="card-body">
             <table class="table">
                 <thead>
@@ -47,13 +47,14 @@
                         </td>
                         <td class="text-right">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <a class="btn btn-outline-success" href="{{route('module.menu.edit',$menu)}}">
+                                <a class="btn btn-outline-success"
+                                   href="{{module_link('module.menu.edit',[request('type'),$menu])}}">
                                     编辑菜单
                                 </a>
                                 <button type="button" class="btn btn-outline-danger" onclick="destroy(this)">
                                     删除菜单
                                 </button>
-                                <form action="{{route('module.menu.destroy',$menu)}}" method="post">
+                                <form action="{{module_link('module.menu.destroy',[$type,$menu])}}" method="post">
                                     @csrf @method('DELETE')
                                 </form>
                             </div>

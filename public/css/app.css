@@ -141,6 +141,10 @@ body {
   margin-bottom: 10px;
 }
 
+.site-wechat-index .wx-img {
+  height: 60px;
+}
+
 .system-setting-index h5.page-header {
   border: none;
   border-left: 0.3em #333333 solid;

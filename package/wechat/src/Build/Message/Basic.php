@@ -46,7 +46,7 @@ trait Basic
      */
     public function isTextMsg()
     {
-        return $this->message->MsgType == self::$MSG_TYPE_TEXT;
+        return $this->MsgType == self::$MSG_TYPE_TEXT;
     }
 
     /**
@@ -56,7 +56,7 @@ trait Basic
      */
     public function isImageMsg()
     {
-        return $this->message->MsgType == self::$MSG_TYPE_IMAGE;
+        return $this->MsgType == self::$MSG_TYPE_IMAGE;
     }
 
     /**
@@ -66,7 +66,7 @@ trait Basic
      */
     public function isVoiceMsg()
     {
-        return $this->message->MsgType == self::$MSG_TYPE_VOICE;
+        return $this->MsgType == self::$MSG_TYPE_VOICE;
     }
 
     /**
@@ -76,7 +76,7 @@ trait Basic
      */
     public function isLocationMsg()
     {
-        return $this->message->MsgType == self::$MSG_TYPE_LOCATION;
+        return $this->MsgType == self::$MSG_TYPE_LOCATION;
     }
 
     /**
@@ -86,7 +86,7 @@ trait Basic
      */
     public function isLinkMsg()
     {
-        return $this->message->MsgType == self::$MSG_TYPE_LINK;
+        return $this->MsgType == self::$MSG_TYPE_LINK;
     }
 
     /**
@@ -96,7 +96,7 @@ trait Basic
      */
     public function isVideoMsg()
     {
-        return $this->message->MsgType == self::$MSG_TYPE_VIDEO;
+        return $this->MsgType == self::$MSG_TYPE_VIDEO;
     }
 
     /**
@@ -106,6 +106,6 @@ trait Basic
      */
     public function isSmallVideoMsg()
     {
-        return $this->message->MsgType == self::$MSG_TYPE_SMALL_VIDEO;
+        return $this->MsgType == self::$MSG_TYPE_SMALL_VIDEO;
     }
 }

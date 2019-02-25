@@ -21,15 +21,15 @@ use Illuminate\Http\Request;
  */
 class ConfigController extends Controller
 {
-    public function edit($name, ConfigRepository $repository)
+    public function create(ConfigRepository $repository)
     {
-        $config = $repository->get($name, []);
-        return view('module.config.edit', compact('config', 'name'));
+        $config = $repository->get(module()['name'], []);
+        return view('module.config.create', compact('config'));
     }
 
-    public function update(Request $request, $name, ConfigRepository $repository)
+    public function store(Request $request, ConfigRepository $repository)
     {
-        $repository->save($request, $name);
+        $repository->save($request, module()['name']);
         return back()->with('success', '配置项保存成功');
     }
 }

@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 @section('content')
     @include('site.wechat._tabs')
-
     <div class="card">
         <div class="card-header">
             微信公众号列表
@@ -10,11 +9,9 @@
             @if (count($wechats)>0)
                 @foreach($wechats as $wechat)
                     <div class="row">
-                        <div class="col-xs-3 col-md-1 text-dark">
-                            <img src="{{$wechat['icon']}}" class="img-thumbnail">
-                        </div>
-                        <div class="col-xs-3 col-md-1 text-dark">
-                            <img src="{{$wechat['qr']}}" class="img-thumbnail">
+                        <div class="col-xs-3 col-md-2 text-dark">
+                            <img src="{{$wechat['icon']}}" class="img-thumbnail wx-img">
+                            <img src="{{$wechat['qr']}}" class="img-thumbnail wx-img">
                         </div>
                         <div class="col-xs-3 col-md-5 text-dark">
                             <strong class="title text-dark d-block">

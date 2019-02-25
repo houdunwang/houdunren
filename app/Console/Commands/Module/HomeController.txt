@@ -1,0 +1,18 @@
+<?php
+namespace Modules\{module}\Http\Controllers\System;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Controller;
+
+class HomeController extends Controller
+{
+    /**
+    * 模块域名访问
+    * @return string
+    */
+    public function domain()
+    {
+        return '你现在使用域名在访问';
+    }
+}

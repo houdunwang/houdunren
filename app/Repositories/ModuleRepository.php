@@ -12,7 +12,10 @@ use App\Models\Module;
 use App\Models\Site;
 use App\Repositories\Traits\ModuleTrait;
 use App\User;
+use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Image\Image;
+use Spatie\Image\Manipulations;
 
 /**
  * 模块管理
@@ -29,8 +32,9 @@ class ModuleRepository extends Repository
         $attributes['name'] = ucfirst($attributes['name']);
         $this->package = array_merge($this->package, $attributes);
         \Artisan::call('hdcms:module-make', ['name' => $this->package['name']]);
+        //写入配置项
+        $this->fitThumb();
         $this->writeConfig();
-        $this->formatMenus();
         return parent::create([
             'title' => $this->package['title'],
             'name' => $this->package['name'],
@@ -47,8 +51,8 @@ class ModuleRepository extends Repository
         $this->package = array_merge($model['package'], $attributes);
         $this->permissions = include $this->configPath() . 'permissions.php';
         $this->menus = include $this->configPath() . 'menus.php';
+        $this->fitThumb();
         $this->writeConfig();
-        $this->formatMenus();
         return parent::update($model, [
             'title' => $this->package['title'],
             'name' => $this->package['name'],
@@ -57,6 +61,22 @@ class ModuleRepository extends Repository
             'permissions' => $this->permissions,
             'menus' => $this->menus,
         ]);
+    }
+
+    /**
+     * 写入模块图片
+     * @return bool
+     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     */
+    protected function fitThumb(): bool
+    {
+        $response = (new Client())->get($this->package['thumb']);
+        $thumb = \Storage::disk('module')->path($this->package['name']) . '/thumb.jpeg';
+        if (file_put_contents($thumb, $response->getBody()->getContents())) {
+            Image::load($thumb)->fit(Manipulations::FIT_CROP, 500, 300)->save();
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -95,7 +115,6 @@ class ModuleRepository extends Repository
         $this->package = array_merge($this->package, include $this->configPath($model['name']) . 'package.php');
         $this->permissions = include $this->configPath($model['name']) . 'permissions.php';
         $this->menus = include $this->configPath($model['name']) . 'menus.php';
-        $this->formatMenus();
         return parent::update($model, [
             'title' => $this->package['title'],
             'name' => $this->package['name'],
@@ -106,75 +125,101 @@ class ModuleRepository extends Repository
     }
 
     /**
-     * 添加系统管理菜单
-     */
-    protected function formatMenus()
-    {
-        if ($this->package['config']) {
-            $this->menus['系统功能'][] = [
-                'title' => '参数设置',
-                'url' => route('module.config.edit', $this->package['name']),
-                'permission' => 'config',
-            ];
-        }
-        if ($this->package['domain']) {
-            $this->menus['系统功能'][] = [
-                'title' => '域名管理',
-                'url' => route('module.domain.create'),
-                'permission' => 'domain',
-            ];
-        }
-        if ($this->package['menu_mobile']) {
-            $this->menus['系统功能'][] = [
-                'title' => '桌面会员中心菜单',
-                'url' => route('module.menu.lists', ['type' => 'web']),
-                'permission' => 'menu_mobile',
-            ];
-        }
-        if ($this->package['menu_web']) {
-            $this->menus['系统功能'][] = [
-                'title' => '手机会员中心菜单',
-                'url' => route('module.menu.lists', ['type' => 'mobile']),
-                'permission' => 'menu_web',
-            ];
-        }
-        if ($this->package['wx_replies']) {
-            $this->menus['微信回复'][] = [
-                'title' => '微信回复列表',
-                'url' => 'wx_replies',
-                'permission' => 'wx_replies',
-            ];
-        }
-        if ($this->package['wx_cover']) {
-            $this->menus['微信回复'][] = [
-                'title' => '微信封面入口',
-                'url' => 'wx_entry',
-                'permission' => 'wx_cover',
-            ];
-        }
-    }
-
-    /**
      * 获取用户在站点的模块
      * @param Site|null $site
      * @param User $user
      * @return array|\Illuminate\Support\Collection
      * @throws \Exception
      */
-    public function getSiteModulesByUser(?Site $site, User $user): array
+    public function getSiteModulesByUser(?Site $site, User $user)
     {
-        $modules = $this->getSiteAllModule($site)->toArray();
+        $modules = collect();
         //站长获取所有模块
-        if ($site->admin['id'] != $user['id']) {
-            foreach ($modules as $k => $module) {
-                foreach ($module['menus'] as $title => $menus) {
-                    $modules[$k]['menus'][$title] = array_filter($menus, function ($menu) use ($module) {
-                        return module_access($menu['permission'], $module['name']);
-                    });
-                }
+        foreach ($this->getSiteAllModule($site) as $k => $module) {
+            $module = $this->filterModuleMenu($site, $module, $user);
+            if ($module['menus']) {
+                $modules->push($module);
             }
         }
         return $modules;
+    }
+
+    /**
+     * 过滤掉没权限的模块菜单
+     * @param Site $site
+     * @param Module $module
+     * @param User $user
+     * @return Module|null
+     */
+    public function filterModuleMenu(Site $site, Module $module, User $user): ?Module
+    {
+        $module = $this->addSystemMenu($site, $module);
+        $formats = [];
+        foreach ($module['menus'] as $title => $menus) {
+            $menus = array_filter($menus, function ($menu) use ($module, $site, $user) {
+                return ($site->admin['id'] == $user['id']) || module_access($menu['permission'], $module['name']);
+            });
+            if ($menus) {
+                $formats[$title] = $menus;
+            }
+        }
+        $module['menus'] = $formats;
+        return $module;
+    }
+
+    /**
+     * 向模块添加系统菜单
+     * @param Site $site
+     * @param Module $module
+     * @return Module
+     */
+    public function addSystemMenu(Site $site, Module $module)
+    {
+        $menus = include \Storage::drive('module')->path($module['name']) . '/Config/menus.php';
+        if ($module['package']['config']) {
+            $menus['系统功能'][] = [
+                'title' => '参数设置',
+                'url' => module_link('module.config.create', '', $site, $module),
+                'permission' => 'config',
+            ];
+        }
+        if ($module['package']['domain']) {
+            $menus['系统功能'][] = [
+                'title' => '域名管理',
+                'url' => module_link('module.domain.create', '', $site, $module),
+                'permission' => 'domain',
+            ];
+        }
+        if ($module['package']['menu_web']) {
+            $menus['系统功能'][] = [
+                'title' => '桌面会员中心菜单',
+                'url' => module_link('module.menu.index', 'web',$site,$module),
+                'permission' => 'menu_web',
+            ];
+        }
+        if ($module['package']['menu_mobile']) {
+            $menus['系统功能'][] = [
+                'title' => '手机会员中心菜单',
+                'url' => module_link('module.menu.index', 'mobile',$site,$module),
+                'permission' => 'menu_mobile',
+            ];
+        }
+        if ($module['package']['wx_replies']) {
+            $menus['微信回复'][] = [
+                'title' => '微信回复列表',
+                'url' => 'wx_replies',
+                'permission' => 'wx_replies',
+            ];
+        }
+        if ($module['package']['wx_cover']) {
+            $menus['微信回复'][] = [
+                'title' => '微信封面入口',
+                'url' => 'wx_entry',
+                'permission' => 'wx_cover',
+            ];
+        }
+        $module['menus'] = $menus;
+        return $module;
     }
 
     /**
@@ -192,13 +237,17 @@ class ModuleRepository extends Repository
     }
 
     /**
-     * 获取当前用户有权限执行的模块第一个链接
+     * 获取当前用户有权限执行的
+     * 模块第一个后台链接
+     * @param Site $site
      * @param Module $module
+     * @param User $user
      * @return string|null
      * @throws \Exception
      */
-    public function getModuleFirstUrl(Module $module): ?string
+    public function getModuleFirstUrl(Site $site,Module $module,User $user): ?string
     {
+        $module = $this->filterModuleMenu($site,$module,$user);
         foreach ($module['menus'] as $title => $menus) {
             foreach ($menus as $menu) {
                 if (module_access($menu['permission'], $module['name'])) {
@@ -208,14 +257,4 @@ class ModuleRepository extends Repository
         }
     }
 
-    /**
-     * 缓存模块
-     * @param Site $site
-     * @param Module $module
-     * @throws \Exception
-     */
-    public function cacheModule(Site $site, Module $module)
-    {
-        return cache()->forever('cache_admin_s' . $site['id'] . '_module', $module);
-    }
 }

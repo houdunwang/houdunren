@@ -8,14 +8,12 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item pr-3">
-                    @if ($site = $siteRepository->getAdminCacheSite())
-                        <a href="{{route('site.site.index')}}" class="nav-link">
-                            <i class="fa fa-reply-all"></i> 返回系统管理
-                        </a>
-                    @endif
+                    <a href="{{route('site.site.index')}}" class="nav-link">
+                        <i class="fa fa-reply-all"></i> 返回系统管理
+                    </a>
                 </li>
                 <li class="nav-item pr-3">
-                    <a href="{{route('site.site.show',$siteRepository->getAdminCacheSite())}}" class="nav-link">
+                    <a href="{{route('site.site.show',site())}}" class="nav-link">
                         <i class="fa fa-w fa-file-code-o"></i> 应用列表
                     </a>
                 </li>

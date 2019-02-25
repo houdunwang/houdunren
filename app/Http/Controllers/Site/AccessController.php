@@ -17,12 +17,4 @@ class AccessController extends Controller
     {
         return view('site.access.index', compact('site'));
     }
-
-    public function update(Request $request, $id)
-    {
-    }
-
-    public function destroy($id)
-    {
-    }
 }

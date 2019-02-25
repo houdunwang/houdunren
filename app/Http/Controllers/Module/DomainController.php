@@ -18,13 +18,12 @@ class DomainController extends Controller
      * 模块域名访问
      * @param Domain $domain
      * @return mixed
-     * @throws \App\Exceptions\CustomException
      */
     public function index(Domain $domain)
     {
-        if ($domain =$domain->name(host())->first()) {
-            (new \App\Repositories\ModuleRepository())->cacheModule($domain->site, $domain->module);
-            return app()->call('Modules\\' . ($domain->module['name']) . '\\Http\Controllers\SystemController@domain');
+        if ($domain = $domain->name(host())->first()) {
+            \module($domain->module);
+            return app()->call('Modules\\' . ($domain->module['name']) . '\\Http\Controllers\System\HomeController@domain');
         }
         abort(404, '您访问的模块不存在');
     }

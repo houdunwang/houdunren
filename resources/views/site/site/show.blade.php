@@ -9,7 +9,7 @@
                     </a>
                     <div class="card-body p-2 text-center">
                         <h6 class="p-0 m-0">
-                            <a href="{{route('module.module.show',$module['id'])}}" class="text-dark">{{$module['title']}}</a>
+                            <a href="{{module_link('module.module.show',$module,site(),$module)}}" class="text-dark">{{$module['title']}}</a>
                         </h6>
                     </div>
                 </div>

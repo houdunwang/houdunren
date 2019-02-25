@@ -29,29 +29,6 @@ class SiteRepository extends Repository
     }
 
     /**
-     * 缓存最近操作的站点
-     * @param Site $site
-     * @throws \Exception
-     */
-    public function cacheAdminSite(Site $site)
-    {
-        return cache()->forever(auth()->id() . '-admin-site', $site);
-    }
-
-    /**
-     * 获取历史编辑站点
-     * @return mixed
-     * @throws \Exception
-     */
-    public function getAdminCacheSite()
-    {
-        $site = cache()->rememberForever(auth()->id() . '-admin-site', function () {
-            return auth()->user()->site()->first();
-        });
-        return Site::find($site['id']) ?? null;
-    }
-
-    /**
      * 获取站点套餐
      * @param Site $site
      * @return mixed

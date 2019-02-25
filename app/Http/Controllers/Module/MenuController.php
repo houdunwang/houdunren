@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Module;
 use App\Http\Requests\MenuRequest;
 use App\Models\Menu;
 use App\Http\Controllers\Controller;
+use App\Models\Site;
 
 /**
  * 模块菜单管理
@@ -13,42 +14,42 @@ use App\Http\Controllers\Controller;
  */
 class MenuController extends Controller
 {
-    public function lists(Menu $menu)
+    public function index(Menu $menu, $type)
     {
-        $menus = $menu->type(request('type'))->get();
-        return view('module.menu.lists', compact('menus'));
+        $menus = $menu->type($type)->get();
+        return view('module.menu.index', compact('menus', 'type'));
     }
 
-    public function create()
+    public function create($type)
     {
-        return view('module.menu.create', ['type' => request()->query('type')]);
+        return view('module.menu.create', compact('type'));
     }
 
-    public function store(MenuRequest $request)
+    public function store(MenuRequest $request, $type)
     {
         $data = $request->input();
         $data['site_id'] = site()['id'];
         $data['module_id'] = module()['id'];
         Menu::create($data);
-        return redirect()->route('module.menu.lists', ['type' => $request->query('type')]);
+        return redirect(module_link('module.menu.index', $type))->with('success', '菜单添加成功');;
     }
 
     public function show($id)
     {
     }
 
-    public function edit(Menu $menu)
+    public function edit($type, Menu $menu)
     {
-        return view('module.menu.edit', compact('menu'));
+        return view('module.menu.edit', compact('menu', 'type'));
     }
 
-    public function update(Menu $menu, MenuRequest $request)
+    public function update($type, Menu $menu, MenuRequest $request)
     {
         $menu->update($request->input());
-        return redirect()->route('module.menu.lists', ['type' => $menu['type']]);
+        return redirect(module_link('module.menu.index', $type))->with('success', '菜单修改成功');
     }
 
-    public function destroy(Menu $menu)
+    public function destroy($type, Menu $menu)
     {
         $menu->delete();
         return back()->with('success', '菜单删除成功');

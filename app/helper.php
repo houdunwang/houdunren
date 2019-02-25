@@ -51,27 +51,37 @@ function tableForeign(string $tableName, int $foreignKey)
 }
 
 /**
- * 获取缓存站点的编号
+ * 保存或获取当前站点
+ * @param \App\Models\Site|null $site
+ * @return \App\Models\Site
  */
-function site()
+function site(\App\Models\Site $site = null): ?\App\Models\Site
 {
-    return (new \App\Repositories\SiteRepository())->getAdminCacheSite();
+    static $cache = null;
+    if (is_null($site)) {
+        return $cache;
+    }
+    return $cache = $site;
 }
 
 /**
- * 获取缓存的模块
- * @return \Illuminate\Contracts\Cache\Repository
- * @throws Exception
+ * 保存或获取当前模块
+ * @param \App\Models\Module $module
+ * @return \App\Models\Module|null
  */
-function module()
+function module(\App\Models\Module $module = null): ?\App\Models\Module
 {
-    return cache()->get('cache_admin_s' . site()['id'] . '_module');
+    static $cache = null;
+    if (is_null($module)) {
+        return $cache;
+    }
+    return $cache = $module;
 }
 
 /**
  * 模块权限判断
  * @param string $permission 权限标识
- * @param string|null $module 模块标识
+ * @param string|null $module 模块标识（一般不用设置系统会自动获取当前模块）
  * @param bool $abort 验证失败时显示错误页面
  * @return mixed
  * @throws Exception
@@ -98,4 +108,24 @@ function module_access(string $permission, string $module = null, $abort = false
 function host()
 {
     return (request()->secure() ? 'https://' : 'http://') . request()->getHost();
+}
+
+/**
+ * 模块链接
+ * @param string $route 路由
+ * @param string $params 路由参数
+ * @param \App\Models\Site|null|array $site
+ * @param \App\Models\Module|null|array $module
+ * @return string
+ */
+function module_link(
+    string $route,
+    $params = '',
+    $site = null,
+    $module = null
+): string {
+    $params = is_array($params) ? $params : [$params];
+    $site = $site ?? site();
+    $module = $module ?? \module();
+    return route($route, array_merge($params, ['sid' => $site['id'], 'mid' => $module['id']]));
 }

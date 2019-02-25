@@ -5,8 +5,8 @@
         使用 config_get('模块标识.配置变量') 形式读取配置项 <br>
         配置项模板位于 Modules/{{module()['name']}}/Resources/views/system/config.blade.php
     </div>
-    <form method="post" class="form-horizontal" method="post" action="{{route('module.config.update',$name)}}">
-        @csrf @method('PUT')
+    <form method="post" class="form-horizontal" method="post" action="{{module_link('module.config.store')}}">
+        @csrf
         <div class="card">
             <div class="card-header">
                 <span class="text-dark">{{module()['title']}}</span> 模块配置设置

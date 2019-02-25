@@ -4,7 +4,7 @@
     <div class="alert alert-info" role="alert">
         当模块设置域名后，使用域名访问时将访问到 "{{module()['name']}}/Http/Controllers/SystemController@domain"
     </div>
-    <form action="{{route('module.domain.store')}}" method="post">
+    <form action="{{module_link('module.domain.store')}}" method="post">
         @csrf
         <div class="card">
             <div class="card-header">

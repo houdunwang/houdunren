@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs mb-2">
     <li class="nav-item">
-        <a class="nav-link" href="{{route('module.menu.index',['type'=>request()->query('type')])}}">
+        <a class="nav-link" href="{{module_link('module.menu.index',$type)}}">
             菜单列表
         </a>
     </li>
@@ -12,9 +12,10 @@
 </ul>
 <div class="card">
     <div class="card-header">
-        桌面会员中心菜单设置
+        {{$type=='web'?'桌面会员中心菜单':'手机会员中心菜单'}}
     </div>
     <div class="card-body">
+        <input type="hidden" name="type" value="{{$type}}">
         <div class="form-group">
             <label>菜单名称</label>
             <input type="text" name="title" class="form-control" value="{{old('title',$menu['title']??'')}}">
