@@ -13,7 +13,7 @@
     @include('layouts.hdjs')
     @stack('css')
 </head>
-<body class="admin">
+<body class="admin" style="background: url('{{asset('images/admin.jpg')}}')">
 
 @include('layouts.message')
 <div class="container-fluid top-menu">

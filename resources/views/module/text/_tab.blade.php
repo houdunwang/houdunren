@@ -1,3 +1,4 @@
+@component('components.breadcrumb',['menus'=>['微信普通文本回复'=>'#']]) @endcomponent
 <ul class="nav nav-tabs mb-2">
     <li class="nav-item">
         <a class="nav-link {{active_class(if_route('module.text.index'),'active')}}" href="{{module_link('module.text.index')}}">

@@ -41,8 +41,7 @@ class ChatController extends Controller
             return $message->text($chat['default']);
         }
         //关注回复
-        if ($message->isSubscribeEvent())
-        {
+        if ($message->isSubscribeEvent()) {
             //向用户回复消息
             return $message->text("感谢你关注后盾网微信");
         }
@@ -96,6 +95,13 @@ class ChatController extends Controller
     protected function news(Site $site, Chat $chat, Message $message, Keyword $keyword): ?string
     {
 
+    }
+
+    protected function cover(Site $site, Chat $chat, Message $message, Keyword $keyword): ?string
+    {
+        if ($model = $keyword->model) {
+            return $message->news([$model->toArray(),$model->toArray()]);
+        }
     }
 
     /**

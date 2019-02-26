@@ -206,15 +206,15 @@ class ModuleRepository extends Repository
         }
         if ($module['package']['wx_replies']) {
             $menus['微信回复'][] = [
-                'title' => '微信文本回复',
+                'title' => '文本消息回复',
                 'url' => module_link('module.text.index','',$site,$module),
                 'permission' => 'wx_replies',
             ];
         }
         if ($module['package']['wx_cover']) {
             $menus['微信回复'][] = [
-                'title' => '模块微信入口',
-                'url' => 'wx_entry',
+                'title' => '模块封面入口',
+                'url' => module_link('module.cover.create','',$site,$module),
                 'permission' => 'wx_cover',
             ];
         }

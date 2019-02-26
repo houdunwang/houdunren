@@ -1,6 +1,5 @@
 @extends('layouts.module')
 @section('content')
-    @component('components.breadcrumb',['menus'=>['微信文本回复'=>'#']]) @endcomponent
     @include('module.text._tab')
     <div class="card">
         <div class="card-header">

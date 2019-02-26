@@ -1,5 +1,5 @@
 @include('module.text._tab')
-@component('components.keyword',['tag'=>'text','system'=>1,'model'=>$text??null]) @endcomponent
+@include('components.keyword',['tag'=>'text','system'=>1,'model'=>$text])
 <div id="app" v-cloak="">
     <div class="card">
         <div class="card-header">
@@ -14,8 +14,10 @@
         </div>
     </div>
     <div class="mt-3">
-        <button type="button" class="btn btn-info" @click="add">添加回复内容</button>
-        <button class="btn btn-success">保存提交</button>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-outline-secondary" @click="add">添加回复内容</button>
+          <button type="submit" class="btn btn-success">保存提交</button>
+        </div>
     </div>
     <textarea hidden name="content">@{{ contents }}</textarea>
 </div>

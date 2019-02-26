@@ -2,11 +2,19 @@
 <div class="card mb-3">
     <div class="card-header">关键词设置</div>
     <div class="card-body">
-        <div class="form-group">
-            <label>规则描述</label>
-            <input type="text" name="keyword[title]" class="form-control" required
-                   value="{{old('keyword.title',$model->keyword['title']??'')}}">
-        </div>
+        @if (if_route('module.cover.create'))
+            <div class="form-group" hidden>
+                <label>规则描述</label>
+                <input type="text" name="keyword[title]" class="form-control" required
+                       value="模块封面入口">
+            </div>
+        @else
+            <div class="form-group">
+                <label>规则描述</label>
+                <input type="text" name="keyword[title]" class="form-control" required
+                       value="{{old('keyword.title',$model->keyword['title']??'')}}">
+            </div>
+        @endif
         <div class="form-group">
             <label>微信公众号</label>
             <select class="form-control" name="keyword[chat_id]" required>

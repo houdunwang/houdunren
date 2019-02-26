@@ -69,4 +69,6 @@ Route::group(['middleware' => ['auth', 'module'], 'as' => 'module.', 'prefix' =>
         Route::resource('{type}/menu', 'MenuController');
         //微信文本
         Route::resource('text', 'TextController');
+        //图文消息
+        Route::resource('cover', 'CoverController');
     });

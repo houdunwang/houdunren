@@ -20,20 +20,22 @@ class TextController extends Controller
         return view('module.text.index', compact('texts'));
     }
 
-    public function create()
+    public function create(Text $text)
     {
-        return view('module.text.create');
+        return view('module.text.create',compact('text'));
     }
 
-    public function store(Request $request, ChatServer $server,Text $text)
+    public function store(Request $request, ChatServer $server)
     {
+        $data = $request->input();
+        $data['site_id'] = site()['id'];
+        $data['module_id'] = module()['id'];
+
         //保存微信数据
-        $server->save($text);
+        \DB::beginTransaction();
+        $server->save(Text::create($data));
+        \DB::commit();
         return redirect(module_link('module.text.index'))->with('success', '保存成功');
-    }
-
-    public function show($id)
-    {
     }
 
     public function edit(Text $text)
@@ -43,8 +45,10 @@ class TextController extends Controller
 
     public function update(Request $request, Text $text, ChatServer $server)
     {
+        \DB::beginTransaction();
         $text->update($request->input());
         $server->save($text);
+        \DB::commit();
         return redirect(module_link('module.text.index'))->with('success', '保存成功');
     }
 

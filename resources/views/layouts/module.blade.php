@@ -19,7 +19,7 @@
 <body class="admin-site">
 @include('layouts.message')
 @include('layouts.site_header')
-<div class="container-fluid mt-3">
+<div class="container-fluid mt-3 mb-5">
     <div class="row">
         <div class="col-sm-3 col-md-2">
             <div class="card">
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="col-sm-9 col-md-10 mt-2 mt-sm-0">
-            <div class="{{route_class()}}">
+            <div class="{{route_class()}} mb-5">
                 @yield('content')
             </div>
         </div>
