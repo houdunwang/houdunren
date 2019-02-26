@@ -4,12 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * 微信公众号
- * Class WeChat
- * @package App\Models
- */
-class WeChat extends Model
+class Chat extends Model
 {
     protected $fillable = [
         'site_id',
@@ -28,6 +23,7 @@ class WeChat extends Model
         'rootca',
         'qr',
         'icon',
+        'default','welcome'
     ];
     protected $casts = [];
 

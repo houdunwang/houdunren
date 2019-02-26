@@ -17,7 +17,6 @@ class Module extends Model
         'package',
         'local',
         'permissions',
-        'menus',
     ];
     protected $casts = [
         'package' => 'array',

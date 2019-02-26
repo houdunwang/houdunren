@@ -8,7 +8,7 @@
 
 namespace App\Servers;
 
-use App\Models\WeChat;
+use Illuminate\Validation\Rule;
 
 /**
  * 微信处理服务
@@ -18,13 +18,34 @@ use App\Models\WeChat;
 class WeChatServer
 {
     /**
-     * 加载配置项
-     * @param WeChat $weChat
-     * @return $this
+     * 保存关键词数据
+     * @param $model
+     * @return bool
+     * @throws \Exception
      */
-    public function config(WeChat $weChat)
+    public function save($model)
     {
-        \Houdunwang\WeChat\WeChat::config($weChat);
-        return $this;
+        \DB::beginTransaction();
+        $data = request()->input();
+        $data['site_id'] = site()['id'];
+        $data['module_id'] = module()['id'];
+        $model = $model->firstOrCreate(['id' => $model['id']], $data);
+        $model->save($data);
+        $this->validate($model);
+        $model->keyword()->updateOrCreate(['id' => $model->keyword['id']], request()->input('keyword'));
+        \DB::commit();
+        return true;
+    }
+
+    protected function validate($model)
+    {
+        $keyword = request()->input('keyword');
+        //添加关键词
+        \Validator::make($keyword, [
+            'key' => [
+                'required',
+                'unique:keywords,key,'.$model['keyword']['id']??null
+            ],
+        ], ['key.required' => '关键词不能为空', 'key.unique' => '关键词已经在公众号中被使用'])->validate();
     }
 }

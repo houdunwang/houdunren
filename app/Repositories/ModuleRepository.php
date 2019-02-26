@@ -193,27 +193,27 @@ class ModuleRepository extends Repository
         if ($module['package']['menu_web']) {
             $menus['系统功能'][] = [
                 'title' => '桌面会员中心菜单',
-                'url' => module_link('module.menu.index', 'web',$site,$module),
+                'url' => module_link('module.menu.index', 'web', $site, $module),
                 'permission' => 'menu_web',
             ];
         }
         if ($module['package']['menu_mobile']) {
             $menus['系统功能'][] = [
                 'title' => '手机会员中心菜单',
-                'url' => module_link('module.menu.index', 'mobile',$site,$module),
+                'url' => module_link('module.menu.index', 'mobile', $site, $module),
                 'permission' => 'menu_mobile',
             ];
         }
         if ($module['package']['wx_replies']) {
             $menus['微信回复'][] = [
-                'title' => '微信回复列表',
-                'url' => 'wx_replies',
+                'title' => '微信文本回复',
+                'url' => module_link('module.text.index','',$site,$module),
                 'permission' => 'wx_replies',
             ];
         }
         if ($module['package']['wx_cover']) {
             $menus['微信回复'][] = [
-                'title' => '微信封面入口',
+                'title' => '模块微信入口',
                 'url' => 'wx_entry',
                 'permission' => 'wx_cover',
             ];
@@ -245,9 +245,9 @@ class ModuleRepository extends Repository
      * @return string|null
      * @throws \Exception
      */
-    public function getModuleFirstUrl(Site $site,Module $module,User $user): ?string
+    public function getModuleFirstUrl(Site $site, Module $module, User $user): ?string
     {
-        $module = $this->filterModuleMenu($site,$module,$user);
+        $module = $this->filterModuleMenu($site, $module, $user);
         foreach ($module['menus'] as $title => $menus) {
             foreach ($menus as $menu) {
                 if (module_access($menu['permission'], $module['name'])) {

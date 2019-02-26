@@ -1,42 +1,42 @@
 @extends('layouts.admin')
 @section('content')
-    @include('site.wechat._tabs')
+    @include('site.chat._tabs')
     <div class="card">
         <div class="card-header">
             微信公众号列表
         </div>
         <div class="card-body">
-            @if (count($wechats)>0)
-                @foreach($wechats as $wechat)
+            @if (count($chats)>0)
+                @foreach($chats as $chat)
                     <div class="row">
                         <div class="col-xs-3 col-md-2 text-dark">
-                            <img src="{{$wechat['icon']}}" class="img-thumbnail wx-img">
-                            <img src="{{$wechat['qr']}}" class="img-thumbnail wx-img">
+                            <img src="{{$chat['icon']}}" class="img-thumbnail wx-img">
+                            <img src="{{$chat['qr']}}" class="img-thumbnail wx-img">
                         </div>
                         <div class="col-xs-3 col-md-5 text-dark">
                             <strong class="title text-dark d-block">
-                                {{$wechat['name']}}
+                                {{$chat['name']}}
                             </strong>
                             <small class="text-secondary pr-2">
-                                类型: {{$wechat['genreTitle']}}
+                                类型: {{$chat['genreTitle']}}
                             </small>
                             <small class="text-secondary">
-                                微信号: {{$wechat['account']}}
+                                微信号: {{$chat['account']}}
                             </small>
                         </div>
                         <div class="col-xs-4 col-md-5 text-right mt-3">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <a class="btn btn-outline-success" href="{{route('site.wechat.edit',[$site,$wechat])}}">
+                                <a class="btn btn-outline-success" href="{{route('site.chat.edit',[$site,$chat])}}">
                                     编辑公众号资料
                                 </a>
                                 <button type="button" class="btn btn-outline-danger"
-                                        onclick="destroy(this,'{{$wechat['name']}}')">
+                                        onclick="destroy(this,'{{$chat['name']}}')">
                                     删除公众号
                                 </button>
-                                <form action="{{route('site.wechat.destroy',[$site,$wechat])}}" method="post">
+                                <form action="{{route('site.chat.destroy',[$site,$chat])}}" method="post">
                                     @csrf @method('DELETE')
                                 </form>
-                                <a class="btn btn-outline-info" href="{{route('site.wechat.show',[$site,$wechat])}}">
+                                <a class="btn btn-outline-info" href="{{route('site.chat.show',[$site,$chat])}}">
                                     查看公众号信息
                                 </a>
                             </div>

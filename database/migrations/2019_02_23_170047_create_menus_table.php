@@ -15,9 +15,9 @@ class CreateMenusTable extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('site_id')->comment('用户组编号');
+            $table->unsignedInteger('site_id')->comment('站点编号');
             $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
-            $table->unsignedInteger('module_id')->comment('用户组编号');
+            $table->unsignedInteger('module_id')->comment('模块编号');
             $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
             $table->string('title');
             $table->string('url');

@@ -8,14 +8,25 @@
 
 namespace App\Repositories;
 
-use App\Models\WeChat;
+use App\Models\Site;
+use App\Models\Chat;
 
 /**
  * 微信公众号
  * Class WeChatRepository
  * @package App\Repositories
  */
-class WeChatRepository extends Repository
+class ChatRepository extends Repository
 {
-    protected $model = WeChat::class;
+    protected $model = Chat::class;
+
+    /**
+     * 获取站点的所有公众号
+     * @param Site $site
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function getBySite(Site $site)
+    {
+        return $site->chat;
+    }
 }

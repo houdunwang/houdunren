@@ -41,4 +41,13 @@ class Site extends Model
     {
         return $this->hasMany(Permission::class);
     }
+
+    /**
+     * 公众号关联
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function chat()
+    {
+        return $this->hasMany(Chat::class, 'site_id');
+    }
 }

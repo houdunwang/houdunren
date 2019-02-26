@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class WeChatRequest extends FormRequest
+class ChatRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,8 +20,8 @@ class WeChatRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required',Rule::unique('we_chats')->where(function ($query) {
-                return $query->where('id','<>',request('wechat')['id'])->where('site_id',request('site')['id']);
+            'name' => ['required',Rule::unique('chats')->where(function ($query) {
+                return $query->where('id','<>',request('chat')['id'])->where('site_id',request('site')['id']);
             })],
             'account' => 'required',
             'original' => 'required',

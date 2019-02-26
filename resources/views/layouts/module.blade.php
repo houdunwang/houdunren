@@ -13,6 +13,7 @@
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     @include('layouts.hdjs')
+    <script src="{{asset('js/util.js')}}"></script>
     @stack('css')
 </head>
 <body class="admin-site">

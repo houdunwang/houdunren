@@ -8,6 +8,10 @@ html {
   font-size: 14px;
 }
 
+[v-cloak] {
+  display: none;
+}
+
 a {
   color: #6c757d;
   text-decoration: none;

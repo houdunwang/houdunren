@@ -53,7 +53,7 @@
                             <a href="{{route('site.access.index',[$site])}}" class="text-muted mr-2">
                                 <i class="fa fa-key"></i> 站点模块
                             </a>
-                            <a href="{{route('site.wechat.index',[$site])}}" class="text-muted mr-2">
+                            <a href="{{route('site.chat.index',[$site])}}" class="text-muted mr-2">
                                 <i class="fa fa-comment-o"></i> 微信公众号
                             </a>
                             <a href="{{route('site.user.index',['sid'=>$site])}}" class="text-muted mr-2">

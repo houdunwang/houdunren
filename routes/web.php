@@ -55,7 +55,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'site', 'as' => 'site.', 'na
     //站点配置
     Route::resource('{site}/config', 'ConfigController');
     //微信公众号
-    Route::resource('{site}/wechat', 'WeChatController');
+    Route::resource('{site}/chat', 'ChatController');
 });
 //模块
 Route::group(['middleware' => ['auth', 'module'], 'as' => 'module.', 'prefix' => 'module', 'namespace' => 'Module'],
@@ -67,4 +67,6 @@ Route::group(['middleware' => ['auth', 'module'], 'as' => 'module.', 'prefix' =>
         Route::resource('config', 'ConfigController');
         //模块菜单
         Route::resource('{type}/menu', 'MenuController');
+        //微信文本
+        Route::resource('text', 'TextController');
     });

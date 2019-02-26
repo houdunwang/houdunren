@@ -9,21 +9,19 @@
  * '-------------------------------------------------------------------*/
 
 namespace Houdunwang\WeChat\Build\Message;
-
-use houdunwang\curl\Curl;
-
 /**
  * 群发消息
  * Trait SendAll
- *
- * @package Houdunwang\WeChat\Build\message
+ * @package Houdunwang\WeChat\Build\Message
  */
 trait SendAll
 {
     /**
      * 群发消息正式发送
+     * @param array $data
+     * @return mixed
      */
-    public function sendAll($data)
+    public function sendAll(array $data)
     {
         $url = $this->apiUrl . '/cgi-bin/message/mass/sendall?access_token=' . $this->getAccessToken();
         $content = Curl::post($url, json_encode($data, JSON_UNESCAPED_UNICODE));
@@ -32,6 +30,8 @@ trait SendAll
 
     /**
      * 群发消息预览发送
+     * @param $data
+     * @return mixed
      */
     public function preview($data)
     {
@@ -42,9 +42,7 @@ trait SendAll
 
     /**
      * 删除群发消息
-     *
      * @param $data
-     *
      * @return mixed
      */
     public function delMassMessage($data)
@@ -56,9 +54,7 @@ trait SendAll
 
     /**
      * 查询群发消息发送状态
-     *
      * @param $data
-     *
      * @return mixed
      */
     public function getMassMessageState($data)
@@ -70,7 +66,6 @@ trait SendAll
 
     /**
      * 群发消息推送事件
-     *
      * @return bool
      */
     public function isMassMessage()

@@ -10,3 +10,17 @@ function input_random(name, len) {
         $("[name=" + name + "]").val(hash.substr(0, len))
     });
 }
+
+/**
+ * 删除事件
+ * @param bt 按钮
+ * @param message 提示消息
+ */
+function destroy(bt, message) {
+    message = message ? message : '确定删除吗？';
+    require(['hdjs'], function (hdjs) {
+        hdjs.confirm(message, function () {
+            $(bt).next('form').submit();
+        });
+    })
+}

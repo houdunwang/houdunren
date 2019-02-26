@@ -41,10 +41,11 @@ function isSuperAdmin(): bool
 
 /**
  * 表外键关联约束
+ * @param Illuminate\Database\Schema\Blueprint $table Blueprint 对象数据迁移
  * @param string $tableName 关联表
- * @param int $foreignKey 关联字段
+ * @param string $foreignKey 关联字段
  */
-function tableForeign(string $tableName, int $foreignKey)
+function tableForeign(\Illuminate\Database\Schema\Blueprint $table, string $tableName, string $foreignKey): void
 {
     $table->unsignedInteger($foreignKey);
     $table->foreign($foreignKey)->references('id')->on($tableName)->onDelete('cascade');
@@ -52,7 +53,7 @@ function tableForeign(string $tableName, int $foreignKey)
 
 /**
  * 保存或获取当前站点
- * @param \App\Models\Site|null $site
+ * @param \App\Models\Site|null $site 站点模型
  * @return \App\Models\Site
  */
 function site(\App\Models\Site $site = null): ?\App\Models\Site
@@ -66,7 +67,7 @@ function site(\App\Models\Site $site = null): ?\App\Models\Site
 
 /**
  * 保存或获取当前模块
- * @param \App\Models\Module $module
+ * @param \App\Models\Module $module 模型对象
  * @return \App\Models\Module|null
  */
 function module(\App\Models\Module $module = null): ?\App\Models\Module
@@ -102,7 +103,7 @@ function module_access(string $permission, string $module = null, $abort = false
 }
 
 /**
- * 域名
+ * 获取当前访问域名
  * @return string
  */
 function host()

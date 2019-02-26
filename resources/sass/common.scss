@@ -1,6 +1,9 @@
 html{
   font-size: 14px;
 }
+[v-cloak]{
+  display: none;
+}
 //面包屑导航
 .breadcrumb {
   a {

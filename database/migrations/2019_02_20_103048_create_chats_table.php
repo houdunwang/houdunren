@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWeChatsTable extends Migration
+class CreateChatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateWeChatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('we_chats', function (Blueprint $table) {
+        Schema::create('chats', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('site_id')->comment('站点编号');
             $table->string('token');
@@ -32,6 +32,8 @@ class CreateWeChatsTable extends Migration
             $table->string('rootca')->nullable()->comment('AppSecret');
             $table->string('qr')->comment('二维码');
             $table->string('icon')->comment('图标');
+            $table->string('welcome')->nullable()->comment('订阅欢迎消息');
+            $table->string('default')->nullable()->comment('默认回复消息');
             $table->timestamps();
         });
     }
@@ -43,6 +45,6 @@ class CreateWeChatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('we_chats');
+        Schema::dropIfExists('chats');
     }
 }
