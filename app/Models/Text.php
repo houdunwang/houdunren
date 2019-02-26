@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Text extends Model
 {
     protected $fillable = ['content', 'site_id', 'module_id'];
-//    protected $casts = ['content' => 'array'];
 
     public function scopeSite($query)
     {

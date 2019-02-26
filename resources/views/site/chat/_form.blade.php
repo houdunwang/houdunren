@@ -128,12 +128,12 @@
     <div class="card-body">
         <div class="form-group">
             <label>默认消息</label>
-            <input type="text" name="default" class="form-control" value="{{old('default',$chat['default']??'')}}">
+            <input type="text" name="default" class="form-control" value="{{old('default',$chat['default']??'您的消息我们已经收到')}}">
             <small class="text-muted">公众号没有匹配内容时的默认回复消息，支持微信关键词</small>
         </div>
         <div class="form-group">
             <label>欢迎消息</label>
-            <input type="text" name="welcome" class="form-control" value="{{old('welcome',$chat['welcome']??'')}}">
+            <input type="text" name="welcome" class="form-control" value="{{old('welcome',$chat['welcome']??'感谢您的关注')}}">
             <small class="text-muted">粉丝关注公众号时回复的消息，支持微信关键词</small>
         </div>
     </div>

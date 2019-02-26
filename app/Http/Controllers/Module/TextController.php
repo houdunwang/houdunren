@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Module;
 
 use App\Models\Text;
-use App\Servers\WeChatServer;
+use App\Servers\ChatServer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -25,7 +25,7 @@ class TextController extends Controller
         return view('module.text.create');
     }
 
-    public function store(Request $request, WeChatServer $server,Text $text)
+    public function store(Request $request, ChatServer $server,Text $text)
     {
         //保存微信数据
         $server->save($text);
@@ -41,7 +41,7 @@ class TextController extends Controller
         return view('module.text.edit', compact('text'));
     }
 
-    public function update(Request $request, Text $text, WeChatServer $server)
+    public function update(Request $request, Text $text, ChatServer $server)
     {
         $text->update($request->input());
         $server->save($text);

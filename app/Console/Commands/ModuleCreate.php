@@ -34,6 +34,7 @@ class ModuleCreate extends Command
         //控制器
         mkdir($this->modulePath . 'Http/Controllers/System',0755,true);
         $this->copyFile('HomeController.txt', 'Http/Controllers/System/HomeController.php');
+        $this->copyFile('ChatController.txt', 'Http/Controllers/System/ChatController.php');
         //视图
         mkdir($this->modulePath . 'Resources/views/system',0755,true);
         $this->copyFile('config.blade.txt', 'Resources/views/system/config.blade.php');

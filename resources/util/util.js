@@ -20,7 +20,7 @@ function destroy(bt, message) {
     message = message ? message : '确定删除吗？';
     require(['hdjs'], function (hdjs) {
         hdjs.confirm(message, function () {
-            $(bt).next('form').submit();
+            $(bt).prev('form').submit();
         });
     })
 }

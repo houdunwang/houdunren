@@ -8,14 +8,12 @@
 
 namespace App\Servers;
 
-use Illuminate\Validation\Rule;
-
 /**
  * 微信处理服务
- * Class WeChatServer
+ * Class ChatServer
  * @package App\Servers
  */
-class WeChatServer
+class ChatServer
 {
     /**
      * 保存关键词数据

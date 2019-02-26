@@ -24,6 +24,11 @@ class Keyword extends Model
     ];
     protected $casts = ['system' => "boolean"];
 
+    public function model()
+    {
+        return $this->morphTo();
+    }
+
     /**
      * 根据关键词获取
      * @param $query

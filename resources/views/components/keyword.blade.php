@@ -1,4 +1,4 @@
-@inject('WeChatRepository','App\Repositories\WeChatRepository')
+@inject('ChatRepository','App\Repositories\ChatRepository')
 <div class="card mb-3">
     <div class="card-header">关键词设置</div>
     <div class="card-body">
@@ -10,7 +10,7 @@
         <div class="form-group">
             <label>微信公众号</label>
             <select class="form-control" name="keyword[chat_id]" required>
-                @foreach($WeChatRepository->getBySite(site()) as $wx)
+                @foreach($ChatRepository->getBySite(site()) as $wx)
                     <option value="{{$wx['id']}}"
                             {{active_class($wx['id']==($model?$model->keyword['chat_id']:''),'selected')}}>
                         {{$wx['name']}}

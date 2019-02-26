@@ -20,33 +20,21 @@
         <div class="card-body">
             <img src="{{asset('images/chat/2.png')}}">
             <hr>
-            <span class="text-secondary">将以下链接链接填入对应输入框</span>
-            <div class="form-group row">
-                <label for="staticEmail" class="col-sm-2 col-form-label text-right">URL</label>
-                <div class="col-sm-10">
-                    <a href="javascript:void(0);" class="form-control-plaintext text-primary copy"
-                       data-clipboard-text="{{route('api.chat',[$site,$chat])}}">
-                        {{route('api.chat',[$site,$chat])}}
-                    </a>
-                </div>
+            <h6 class="text-dark">将以下链接链接填入对应输入框</h6>
+            <div class="row mb-2">
+                <span class="col-md-2">URL:</span>
+                <a href="javascript:void(0);" class="col-md-8 text-primary copy"
+                   data-clipboard-text="{{route('api.chat',[$site,$chat])}}">{{route('api.chat',[$site,$chat])}}</a>
             </div>
-            <div class="form-group row">
-                <label for="staticEmail" class="col-sm-2 col-form-label text-right">Token</label>
-                <div class="col-sm-10">
-                    <a href="javascript:void(0);" readonly class="form-control-plaintext text-primary copy"
-                       data-clipboard-text="{{$chat['token']}}">
-                        {{$chat['token']}}
-                    </a>
-                </div>
+            <div class="row mb-2">
+                <span class="col-md-2">Token:</span>
+                <a href="javascript:void(0);" class="col-md-8 text-primary copy"
+                   data-clipboard-text="{{$chat['token']}}">{{$chat['token']}}</a>
             </div>
-            <div class="form-group row">
-                <label for="staticEmail" class="col-sm-2 col-form-label text-right">EncodingAESKey</label>
-                <div class="col-sm-10">
-                    <a href="javascript:void(0);" readonly class="form-control-plaintext text-primary copy"
-                       data-clipboard-text="{{$chat['encodingaeskey']}}">
-                        {{$chat['encodingaeskey']}}
-                    </a>
-                </div>
+            <div class="row mb-2">
+                <span class="col-md-2">EncodingAESKey:</span>
+                <a href="javascript:void(0);" class="col-md-8 text-primary copy"
+                   data-clipboard-text="{{$chat['encodingaeskey']}}">{{$chat['encodingaeskey']}}</a>
             </div>
             @push('js')
                 <script>
@@ -60,19 +48,31 @@
             @endpush
         </div>
     </div>
-    <div class="alert alert-success mt-3">
-        配置好微信后， 发送关键词 <strong>hdcms</strong> 检查配置状态吧
+    <div class="card mt-3">
+        <div class="card-header">
+            公众号二维码
+        </div>
+        <div class="card-body">
+            <img src="{{$chat['qr']}}" style="height: 100px;">
+        </div>
+        <div class="card-footer text-muted">
+            配置好微信后， 发送关键词 <strong>hdcms</strong> 检查配置状态吧
+        </div>
     </div>
-    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-        <a class="btn btn-outline-success" href="{{route('site.chat.edit',[$site,$chat])}}">
-            继续编辑公众号资料
+    <div class="btn-group  mt-3" role="group" aria-label="Basic example">
+        <a class="btn btn-success" href="{{route('site.chat.edit',[$site,$chat])}}">
+            继续编辑公众号
         </a>
-        <button type="button" class="btn btn-outline-danger" onclick="destroy(this)">
-            删除公众号
-        </button>
+
+        <a class="btn btn-info" href="{{route('site.chat.index',[$site])}}">
+            返回公众号列表
+        </a>
         <form action="{{route('site.chat.destroy',[$site,$chat])}}" method="post">
             @csrf @method('DELETE')
         </form>
+        <button type="button" class="btn btn-secondary" onclick="destroy(this)">
+            删除公众号
+        </button>
     </div>
 @stop
 @push('js')
