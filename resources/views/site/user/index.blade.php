@@ -57,7 +57,7 @@
                                         编辑用户
                                     </a>
                                 @endif
-                                <a class="btn btn-outline-secondary" href="{{route('system.user.show',[$site,$user])}}">
+                                <a class="btn btn-outline-secondary" href="{{route('system.user.show',$user)}}">
                                     查看操作权限
                                 </a>
                                 @if ($user->role['role']=='operator')

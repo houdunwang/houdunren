@@ -175,7 +175,7 @@ class ModuleRepository extends Repository
      */
     public function addSystemMenu(Site $site, Module $module)
     {
-        $menus = include \Storage::drive('module')->path($module['name']) . '/Config/menus.php';
+        $menus =[];
         if ($module['package']['config']) {
             $menus['系统功能'][] = [
                 'title' => '参数设置',
@@ -218,7 +218,7 @@ class ModuleRepository extends Repository
                 'permission' => 'wx_cover',
             ];
         }
-        $module['menus'] = $menus;
+        $module['menus'] = array_merge($menus, include \Storage::drive('module')->path($module['name']) . '/Config/menus.php');
         return $module;
     }
 

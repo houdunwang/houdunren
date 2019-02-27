@@ -13,6 +13,6 @@ class HomeController extends Controller
     */
     public function domain()
     {
-        return '你现在使用域名在访问';
+        return '正在使用域名访问模块,当前访问动作: '.__METHOD__;
     }
 }

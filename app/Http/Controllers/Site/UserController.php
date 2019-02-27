@@ -29,7 +29,7 @@ class UserController extends Controller
     public function update(Site $site, User $user)
     {
         $this->authorize('update', $site);
-        $user->site()->toggle([$site['id'] => ['role' => 'operator']]);
+        $user->sites()->toggle([$site['id'] => ['role' => 'operator']]);
         //删除操作员时同时移除权限数据
         if (!$site->user->contains($user)) {
             $user->permissions()->detach($site->permissions->pluck('id')->toArray());

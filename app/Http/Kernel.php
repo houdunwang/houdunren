@@ -2,7 +2,10 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\ModuleMiddleware;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\LoadSiteModuleMiddleware;
+use App\Http\Middleware\SiteMiddleware;
 use App\Http\Middleware\SystemMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -43,6 +46,21 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+        //系统
+        'system' => [
+            Authenticate::class,
+            SystemMiddleware::class,
+        ],
+        //站点
+        'admin' => [
+            Authenticate::class,
+            SiteMiddleware::class,
+            AdminMiddleware::class,
+        ],
+        //前台
+        'site' => [
+            SiteMiddleware::class,
+        ],
     ];
 
     /**
@@ -62,9 +80,6 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'system' => SystemMiddleware::class,
-        'module' => ModuleMiddleware::class,
-
     ];
 
     /**

@@ -30,11 +30,11 @@
                 <thead>
                 <tr>
                     <th width="150">站点</th>
-                    <th>角色</th>
+                    <th>角色 <small class="text-secondary">[admin:站长 operator:操作员]</small></th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($user->site as $site)
+                @foreach($user->sites as $site)
                     <tr>
                         <td scope="row">{{$site['name']}}</td>
                         <td>{{$site['role']['role']}}</td>

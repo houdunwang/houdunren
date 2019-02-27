@@ -81,23 +81,30 @@ function module(\App\Models\Module $module = null): ?\App\Models\Module
 
 /**
  * 模块权限判断
- * @param string $permission 权限标识
+ * @param string|array $permission 权限标识
  * @param string|null $module 模块标识（一般不用设置系统会自动获取当前模块）
  * @param bool $abort 验证失败时显示错误页面
  * @return mixed
  * @throws Exception
  */
-function module_access(string $permission, string $module = null, $abort = false)
+function module_access($permission, string $module = null, $abort = false): bool
 {
-    if (site()['admin']['id'] == auth()->id()) {
-        $status = true;
-    } else {
-        $module = $module ?? module()['name'];
-        $permission = 's' . site()['id'] . '.' . $module . '.' . $permission;
-        $status = auth()->user()->can($permission);
-    }
-    if (!$status && $abort) {
-        abort(403, '您没有操作权限');
+    $permissions = is_array($permission) ? $permission : [$permission];
+    $status = false;
+    if (auth()->check()) {
+        if (site()['admin']['id'] == auth()->id()) {
+            return true;
+        } else {
+            $module = $module ?? module()['name'];
+            foreach ($permissions as $permission) {
+                $permission = 's' . site()['id'] . '.' . $module . '.' . $permission;
+                $status = auth()->user()->can($permission);
+                if (!$status) {
+                    return $abort ? abort(403, '您没有操作权限') : false;
+                }
+            }
+            return true;
+        }
     }
     return $status;
 }
@@ -129,4 +136,14 @@ function module_link(
     $site = $site ?? site();
     $module = $module ?? \module();
     return route($route, array_merge($params, ['sid' => $site['id'], 'mid' => $module['id']]));
+}
+
+function number_random($len = 5)
+{
+    $seeds = '0123456789';
+    $number = '';
+    for ($i = 0; $i < $len; $i++) {
+        $number .= $seeds[mt_rand(0, 9)];
+    }
+    return $number;
 }

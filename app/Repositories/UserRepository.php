@@ -13,6 +13,7 @@ use App\Http\Requests\UserRequest;
 use App\Models\Module;
 use App\Models\Site;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -39,7 +40,7 @@ class UserRepository extends Repository
         $attributes = $this->formatAttribute($attributes);
         $attributes['lock'] = false;
         $attributes['admin_end'] = (new Carbon())->addDays(config_get('register.days', 7));
-        $attributes['group_id'] = config_get('register.group_id', 1);
+        $attributes['group_id'] = config_get('register.group_id', 1, 'system');
         return parent::create($attributes);
     }
 
@@ -47,6 +48,4 @@ class UserRepository extends Repository
     {
         return parent::update($model, $this->formatAttribute($attributes));
     }
-
-
 }

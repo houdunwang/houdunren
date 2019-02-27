@@ -15,10 +15,12 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',30)->unique()->nullable()->comment('昵称');
+            $table->unsignedInteger('site_id')->nullable()->comment('站点编号');
+            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
+            $table->string('name', 30)->nullable()->comment('昵称');
+            $table->string('email')->unique()->nullable()->comment('邮箱');
+            $table->string('mobile')->unique()->nullable()->comment('手机');
             $table->string('real_name', 20)->nullable()->comment('真实姓名');
-            $table->string('email')->unique()->nullable()->index()->comment('邮箱');
-            $table->string('mobile')->unique()->nullable()->index()->comment('手机');
             $table->string('password');
             $table->string('icon')->nullable()->comment('头像');
             $table->string('token')->nullable()->comment('邮箱或手机验证码');

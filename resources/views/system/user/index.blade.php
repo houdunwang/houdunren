@@ -23,6 +23,7 @@
                     <th scope="col">真实姓名</th>
                     <th scope="col">会员组</th>
                     <th scope="col">状态</th>
+                    <th scope="col">站点</th>
                     <th scope="col">注册时间</th>
                     <th scope="col">结束时间</th>
                     <th scope="col"></th>
@@ -44,6 +45,7 @@
                                 <span class="badge badge-success" data-container="body" data-toggle="popover" data-placement="top" data-content="被锁定用户将不能进行后台操作">正常访问</span>
                             @endif
                         </td>
+                        <td>{{$user->site['name']}}</td>
                         <td>{{$user['created_at']->format('Y-m-d')}}</td>
                         <td>{{$user['admin_end']->format('Y-m-d')}}</td>
                         <td class=" text-right">

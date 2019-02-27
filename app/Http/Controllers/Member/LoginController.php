@@ -15,20 +15,19 @@ class LoginController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest', ['only' => 'index']);
+        $this->middleware('guest', ['only' => 'login']);
     }
 
-    public function index()
+    public function login()
     {
-        return view('member.login.create');
+        return view('member.login.login');
     }
 
     public function store(Request $request, UserServer $server)
     {
-        if ($server->login($request->only(['name', 'password']))) {
+        if ($server->login($request->only(['username', 'password']))) {
             return redirect()->intended(route('home'));
         } else {
-
             return back()->with('error', '帐号或密码错误');
         }
     }
@@ -36,6 +35,6 @@ class LoginController extends Controller
     public function logout()
     {
         auth()->logout();
-        return redirect('/')->with('success', '您已成功退出');
+        return redirect()->route('login')->with('success', '您已成功退出');
     }
 }

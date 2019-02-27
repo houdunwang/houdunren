@@ -1,3 +1,6 @@
+<div class="alert alert-secondary small" role="alert">
+    使用 config_get('变量名','默认值','site') 形式获取配置项，如获取站点名称 config_get('info.webname','默认值','site')
+</div>
 <div class="card">
     <div class="card-header">网站基本配置</div>
     <div class="card-body">

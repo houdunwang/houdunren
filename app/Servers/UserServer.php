@@ -1,5 +1,6 @@
 <?php namespace App\Servers;
 
+use App\Repositories\UserRepository;
 use App\Rules\UserPasswordRule;
 use App\User;
 use Illuminate\Http\Request;
@@ -19,11 +20,11 @@ class UserServer
      */
     public function login(array $user): bool
     {
-        $isEmail = filter_var($user['name'], FILTER_VALIDATE_EMAIL);
-        if ($isEmail) {
-            return auth()->attempt(['email' => $user['name'], 'password' => $user['password']]);
-        } else {
-            return auth()->attempt(['mobile' => $user['name'], 'password' => $user['password']]);
+        if (filter_var($user['username'], FILTER_VALIDATE_EMAIL)) {
+            return auth()->attempt(['email' => $user['username'], 'password' => $user['password']]);
+        }
+        if (preg_match('/^1\d{10}$/', $user['username'])) {
+            return auth()->attempt(['mobile' => $user['username'], 'password' => $user['password']]);
         }
     }
 }

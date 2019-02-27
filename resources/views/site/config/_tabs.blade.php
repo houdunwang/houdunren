@@ -19,4 +19,9 @@
             支付宝
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link {{active_class($name=='user','active')}}" href="{{route('site.config.edit',[$site,'name'=>'user'])}}">
+            用户相关
+        </a>
+    </li>
 </ul>

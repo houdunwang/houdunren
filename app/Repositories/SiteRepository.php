@@ -19,7 +19,8 @@ class SiteRepository extends Repository
         if (isSuperAdmin()) {
             return parent::paginate($row, $columns, $latest);
         }
-        return auth()->user()->site;
+
+        return auth()->user()->sites;
     }
 
     public function create(array $attributes)

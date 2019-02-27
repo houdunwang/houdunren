@@ -15,8 +15,8 @@ class SystemMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!auth()->check() || !auth()->user()->isSuperAdmin()) {
-            return back()->with('error', '您不是超级管理站不允许执行此操作');
+        if (!auth()->user()->isSuperAdmin()) {
+            return redirect()->route('admin')->with('error', '您不是超级管理站不允许执行此操作');
         }
         return $next($request);
     }

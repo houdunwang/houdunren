@@ -458,7 +458,8 @@
     <div class="w-full md:w-1/2 bg-white flex items-center justify-center">
         <div class="max-w-sm m-8">
             <div class="text-black text-5xl md:text-15xl font-black">
-                403                    </div>
+                403
+            </div>
 
             <div class="w-16 h-1 bg-purple-light my-3 md:my-6"></div>
 

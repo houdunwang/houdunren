@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Module;
 
+use App\Events\NotificationEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DomainRequest;
-use App\Models\Domain;
 use Modules\Shop\Http\Controllers\SystemController;
 
 /**
@@ -16,20 +16,19 @@ class DomainController extends Controller
 {
     /**
      * 模块域名访问
-     * @param Domain $domain
-     * @return mixed
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|mixed
      */
-    public function index(Domain $domain)
+    public function index()
     {
-        if ($domain = $domain->name(host())->first()) {
-            \module($domain->module);
-            return app()->call('Modules\\' . ($domain->module['name']) . '\\Http\Controllers\System\HomeController@domain');
+        if ($module = \module()) {
+            return app()->call('Modules\\' . ($module['name']) . '\\Http\Controllers\System\HomeController@domain');
         }
-        abort(404, '您访问的模块不存在');
+        return view('module.domain.index');
     }
 
     public function create()
     {
+        event(new NotificationEvent(['subject'=>'邮件主题','to'=>'2300071698@qq.com','message'=>'这是邮件正文内容']));
         $domain = module()->domain;
         return view('module.domain.create', compact('domain'));
     }

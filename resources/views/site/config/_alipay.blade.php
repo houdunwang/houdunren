@@ -1,11 +1,11 @@
+<div class="alert alert-secondary small">
+    <div class="alert-text">
+        <i class="fa fa-info-circle"></i>
+        具体配置项的含义可查看 <a target="_blank" href="https://github.com/houdunwang/alipay">https://github.com/houdunwang/alipay</a>
+    </div>
+</div>
 <div class="card">
     <div class="card-body">
-        <div class="alert alert-info">
-            <div class="alert-text">
-                <i class="fa fa-info-circle"></i>
-                具体配置项的含义可查看 <a target="_blank" href="https://github.com/houdunwang/alipay">https://github.com/houdunwang/alipay</a>
-            </div>
-        </div>
         <div class="form-group">
             <label>应用ID<small class="text-secondary">(app_id)</small></label>
             <input type="text" class="form-control" name="app_id" value="{{$config['app_id']??''}}">

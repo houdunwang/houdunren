@@ -1,3 +1,6 @@
+<div class="alert alert-secondary small" role="alert">
+    站点需要使用邮件发送功能时（如用户邮箱验证）必须正确设置邮箱配置
+</div>
 <div class="card">
     <div class="card-header">
         邮箱配置
@@ -47,6 +50,26 @@
             <input type="text" class="form-control" name="from[address]"
                    value="{{old('from.address',array_get($config,'from.address')??'')}}">
             <span class="help-block text-secondary small">收件方回复使用的邮箱，一般设置成和邮箱帐号一至</span>
+        </div>
+    </div>
+</div>
+<div class="card mt-2">
+    <div class="card-header">
+        测试
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <label class="mb-1">测试邮箱 <small class="text-secondary">(test_mail)</small></label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="test_mail"
+                        value="{{old('test_mail',$config['test_mail']??'')}}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">发送测试邮件</button>
+                </div>
+            </div>
+            <span class="help-block text-secondary small">
+                检测邮箱配置关注的测试邮箱，需要先保存配置后再测试
+            </span>
         </div>
     </div>
 </div>

@@ -14,7 +14,7 @@ html {
 
 a {
   color: #6c757d;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .card {
@@ -70,7 +70,6 @@ a {
 
 .admin {
   background-size: contain;
-  height: 100vh;
 }
 
 .admin a:hover {

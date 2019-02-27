@@ -10,11 +10,22 @@
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <script src="{{asset('js/util.js')}}"></script>
-    @include('layouts.hdjs')
+    <script>
+        window.hdjs = {
+            base: '/org/hdjs',
+            uploader: '{{route('common.upload.make')}}?',
+            filesLists: '{{route('common.upload.lists')}}?',
+        };
+        window.system = {
+            upload:{!! json_encode(config_get('upload','','system')) !!},
+        }
+    </script>
+    <script src="{{asset('org/hdjs/require.js')}}"></script>
+    <script src="{{asset('org/hdjs/config.js')}}"></script>
+
     @stack('css')
 </head>
 <body class="admin" style="background: url('{{asset('images/admin.jpg')}}')">
-
 @include('layouts.message')
 <div class="container-fluid top-menu">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

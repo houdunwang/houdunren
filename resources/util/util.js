@@ -24,3 +24,24 @@ function destroy(bt, message) {
         });
     })
 }
+
+/**
+ * 发送验证码
+ * @param btId
+ * @param inputName
+ */
+function send_code(btId, inputName) {
+    require(['hdjs', 'bootstrap'], function (hdjs) {
+        let option = {
+            //按钮
+            el:  btId,
+            //后台链接
+            url: '/common/notification/code',
+            //验证码等待发送时间
+            timeout: window.system.message_timeout,
+            //表单，手机号或邮箱的INPUT表单
+            input: inputName
+        };
+        hdjs.validCode(option);
+    })
+}

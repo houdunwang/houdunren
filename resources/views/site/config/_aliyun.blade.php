@@ -1,5 +1,6 @@
-<div class="alert alert-info small">
-    配置阿里云可以使用阿里云发送短信、开启直播等众多功能
+<div class="alert alert-secondary small">
+    <i class="fa fa-info-circle"></i>
+    站点需要使用发送短信、开启直播等功能时必须正确配置阿里云。
 </div>
 <div class="card">
     <div class="card-body">

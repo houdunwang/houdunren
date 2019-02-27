@@ -21,6 +21,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'id',
+        'site_id',
         'name',
         'email',
         'password',
@@ -79,12 +80,21 @@ class User extends Authenticatable
     }
 
     /**
-     * 站点关联
+     * 用户可以使用的站点列表
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function site()
+    public function sites()
     {
         return $this->belongsToMany(Site::class)->as('role')
             ->withPivot('role')->withTimestamps();
+    }
+
+    /**
+     * 当前用户所在站点
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function site()
+    {
+        return $this->belongsTo(Site::class,'site_id');
     }
 }

@@ -32,11 +32,6 @@
                             <a href="{{route('site.site.show',$site)}}" class="text-dark">{{$site['name']}}</a>
                         </h4>
                     </div>
-                    <div class="col-xs-4 col-md-6 text-right">
-                        {{--<a href="javascript:;" data-toggle="tooltip" data-placement="top" title="接入状态: 接入成功">--}}
-                        {{--<i class="fa fa-check-circle fa-2x text-info"></i>--}}
-                        {{--</a>--}}
-                    </div>
                 </div>
             </div>
             <div class="card-footer text-muted">
