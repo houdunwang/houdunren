@@ -93,8 +93,8 @@ class User extends Authenticatable
      * 当前用户所在站点
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function site()
-    {
-        return $this->belongsTo(Site::class,'site_id');
-    }
+//    public function site()
+//    {
+//        return $this->belongsTo(Site::class,'site_id');
+//    }
 }

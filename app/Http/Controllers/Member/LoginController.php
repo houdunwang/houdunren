@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use App\Models\Domain;
+use App\Models\Site;
+use App\Repositories\UserRepository;
 use App\Servers\UserServer;
 use Illuminate\Http\Request;
 
@@ -23,9 +26,14 @@ class LoginController extends Controller
         return view('member.login.login');
     }
 
-    public function store(Request $request, UserServer $server)
+    public function store(Request $request, UserServer $server, UserRepository $userRepository)
     {
         if ($server->login($request->only(['username', 'password']))) {
+            $sid = request('sid', Domain::firstOrNew(['name' => host()])['site_id'] ?? 0);
+            $site = Site::find($sid);
+            if ($site) {
+                $userRepository->addSite(auth()->user(),$site, 'user');
+            }
             return redirect()->intended(route('home'));
         } else {
             return back()->with('error', '帐号或密码错误');

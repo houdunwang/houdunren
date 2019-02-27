@@ -25,8 +25,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($site->user as $user)
-                    {{--@unless($user->role['role']=='admin' || isSuperAdmin())--}}
+                @foreach($site->user()->wherePivotIn('role', ['admin','operator'])->get() as $user)
                     <tr>
                         <td>{{$user['id']}}</td>
                         <td>{{$user['name']}}</td>
@@ -72,7 +71,6 @@
                             </div>
                         </td>
                     </tr>
-                    {{--@endunless--}}
                 @endforeach
                 </tbody>
             </table>

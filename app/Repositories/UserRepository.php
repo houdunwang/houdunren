@@ -9,13 +9,10 @@
 namespace App\Repositories;
 
 use App\Exceptions\InvalidParamException;
-use App\Http\Requests\UserRequest;
-use App\Models\Module;
 use App\Models\Site;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 
 /**
  * 会员管理仓库
@@ -47,5 +44,20 @@ class UserRepository extends Repository
     public function update(Model $model, array $attributes)
     {
         return parent::update($model, $this->formatAttribute($attributes));
+    }
+
+    /**
+     * 为站点添加用户
+     * @param User $user
+     * @param Site $site
+     * @param string $role
+     * @return mixed
+     */
+    public function addSite(User $user, Site $site, $role = 'user')
+    {
+        $has = \DB::table('site_user')->where('site_id', $site['id'])->where('user_id', $user['id'])->first();
+        if (!$has) {
+            return $user->sites()->save($site, ['role' => $role]);
+        }
     }
 }

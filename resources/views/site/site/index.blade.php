@@ -37,8 +37,10 @@
             <div class="card-footer text-muted">
                 <div class="row">
                     <div class="col-md-6 small">
+                        @if ($site->admin)
                         到期时间 : {{$site->admin['admin_end']->format('Y-m-d')}}&nbsp;&nbsp;&nbsp;
                         站长 : <a href="">{{$site->admin['name']}}</a>
+                        @endif
                     </div>
                     <div class="col-md-6 text-right small">
                         @can('admin',$site)
