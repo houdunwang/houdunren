@@ -38,9 +38,9 @@ class App
         $domain = "dysmsapi.aliyuncs.com";
 
         // TODO 此处需要替换成开发者自己的AK (https://ak-console.aliyun.com/)
-        $accessKeyId = Aliyun::getConfig('accessId');
+        $accessKeyId = Aliyun::getConfig('accessKeyId');
 
-        $accessKeySecret = Aliyun::getConfig('accessKey');
+        $accessKeySecret = Aliyun::getConfig('accessKeySecret');
 
         // 暂时不支持多Region
         $region = Aliyun::getConfig('regionId');

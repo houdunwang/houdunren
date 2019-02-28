@@ -52,8 +52,8 @@ class Aliyun
     {
         //regionId,根据服务器所在区域进行选择 https://help.aliyun.com/document_detail/40654.html?spm=5176.7114037.1996646101.1.OCtdEo
         $regionId = self::getConfig('regionId');
-        $accessKeyId = self::getConfig('accessId');
-        $accessKeySecret = self::getConfig('accessKey');
+        $accessKeyId = self::getConfig('accessKeyId');
+        $accessKeySecret = self::getConfig('accessKeySecret');
         $iClientProfile = \DefaultProfile::getProfile($regionId, $accessKeyId, $accessKeySecret);
         return new \DefaultAcsClient($iClientProfile);
     }

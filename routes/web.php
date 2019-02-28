@@ -5,7 +5,7 @@ Route::get('home', 'Site\SiteController@index')->name('home');
 Route::get('login', 'Member\LoginController@login')->name('login');
 Route::post('login', 'Member\LoginController@store')->name('login');
 Route::get('logout', 'Member\LoginController@logout')->name('logout')->middleware('auth');
-Route::resource('register', 'Member\RegisterController');
+Route::resource('register', 'Member\RegisterController')->middleware(['site']);
 Route::resource('findPassword', 'Member\FindPasswordController')->middleware('guest');
 //后台登录
 Route::get('admin', 'Site\SiteController@index')->middleware('auth')->name('admin');

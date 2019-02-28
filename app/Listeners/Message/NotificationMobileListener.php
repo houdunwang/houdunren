@@ -2,6 +2,7 @@
 
 namespace App\Listeners\Message;
 
+use Houdunwang\Aliyun\Aliyun;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -30,6 +31,8 @@ class NotificationMobileListener
      */
     public function handle($event)
     {
-        //
+        Aliyun::config(config_get('aliyun', [], 'site'));
+        $event->message['mobile'] = $event->message['to'];
+        Aliyun::instance('Sms')->send($event->message);
     }
 }

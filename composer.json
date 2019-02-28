@@ -45,7 +45,8 @@
         "psr-4": {
             "App\\": "app/",
             "Modules\\": "Modules/",
-            "Houdunwang\\WeChat\\":"package/wechat/src/"
+            "Houdunwang\\WeChat\\":"package/wechat/src/",
+            "Houdunwang\\Aliyun\\":"package/aliyun/src/"
         },
         "classmap": [
             "database/seeds",

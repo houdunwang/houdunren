@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Member;
 
+use App\Events\NotificationEvent;
 use App\Http\Requests\UserMemberRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

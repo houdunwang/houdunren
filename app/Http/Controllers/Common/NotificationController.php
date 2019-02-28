@@ -29,6 +29,13 @@ class NotificationController extends Controller
             'subject' => '验证码',
             'to' => $request->input('username'),
             'message' => '您的验证码是: ' . $code,
+            //==========短信配置==========
+            //短信签名
+            'sign' => '后盾网',
+            //短信模板
+            'template' => 'SMS_12840367',
+            //模板变量
+            'vars' => ["code" => $code, "product" => site()['name']]
         ]));
         Cache::put($sessionId . 'code', $code, 30);
         Cache::put($sessionId . 'codeTimeout', 'code', now()->addSecond($timeout));
