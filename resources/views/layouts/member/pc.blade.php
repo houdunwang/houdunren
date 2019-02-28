@@ -61,11 +61,13 @@
     <div class="row">
         <div class="col-sm-2 px-0">
             <div class="card shadow-sm d-none d-sm-block">
-                <a href="{{route('member.icon.index')}}">
+                <a href="{{route('member.icon.index')}}" class="d-block">
                     <img src="{{auth()->user()['avatar']}}" class="card-img-top">
                 </a>
                 <div class="card-body">
-                    <h5 class="card-title">{{auth()->user()['name']}}</h5>
+                    <a class="card-title text-secondary" href="{{route('member.info.index')}}">
+                        <h5>{{auth()->user()['name']}}</h5>
+                    </a>
                     <div class="dropdown-divider"></div>
                     <div class="text-left">
                         <a class="mb-0 mr-2" href="{{route('member.mail.index')}}">
@@ -94,23 +96,27 @@
                     资料修改
                 </div>
                 <div class="card-body p-0">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item list-group-item-action">
-                            <a href="{{route('member.info.index')}}" class="d-block">资料修改</a>
-                        </li>
-                        <li class="list-group-item list-group-item-action">
-                            <a href="{{route('member.change-password.index')}}" class="d-block">修改密码</a>
-                        </li>
-                        <li class="list-group-item list-group-item-action">
-                            <a href="{{route('member.icon.index')}}" class="d-block">设置头像</a>
-                        </li>
-                        <li class="list-group-item list-group-item-action">
-                            <a href="{{route('member.mail.index')}}" class="d-block">绑定邮箱</a>
-                        </li>
-                        <li class="list-group-item list-group-item-action">
-                            <a href="" class="d-block">修改手机</a>
-                        </li>
-                    </ul>
+                    <div class="list-group list-group-flush">
+                        <a class="list-group-item list-group-item-action text-secondary"
+                           href="{{route('member.info.index')}}">
+                            资料修改
+                        </a>
+                        <a class="list-group-item list-group-item-action text-secondary"
+                           href="{{route('member.change-password.index')}}">
+                            修改密码
+                        </a>
+                        <a class="list-group-item list-group-item-action text-secondary"
+                           href="{{route('member.icon.index')}}">
+                            设置头像
+                        </a>
+                        <a class="list-group-item list-group-item-action text-secondary"
+                           href="{{route('member.mail.index')}}">
+                            绑定邮箱
+                        </a>
+                        <a class="list-group-item list-group-item-action text-secondary">
+                            修改手机
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="card mt-0">

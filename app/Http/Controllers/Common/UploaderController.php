@@ -10,6 +10,7 @@
 
 namespace App\Http\Controllers\Common;
 
+use App\Events\UploadEvent;
 use App\Models\Attachment;
 use App\Servers\UploadServer;
 use Illuminate\Http\Request;
@@ -21,20 +22,21 @@ class UploadController extends Controller
      * 上传处理
      * @param Request $request
      * @param UploadServer $uploadServer
-     * @return array
-     * @throws \App\Exceptions\UploadException
      */
     public function upload(Request $request, UploadServer $uploadServer)
     {
-        //普通上传
-        if ($file = $request->file('file')) {
-            $path = $uploadServer->upload($file);
-            \Auth::user()->attachment()->create(['filename' => $file->getClientOriginalName(), 'path' => url($path)]);
-            return ['file' => url($path), 'code' => 0];
-        } elseif ($content = $request->input('file')) {
-            $file = $uploadServer->uploadBase64Image($content);
-            return ['file' => url($file), 'code' => 0];
-        }
+        event(new UploadEvent('file', function ($path) {
+            die(json_encode(['file' => url($path), 'code' => 0]));
+        }));
+//        //普通上传
+//        if ($file = $request->file('file')) {
+//            $path = $uploadServer->upload($file);
+//            \Auth::user()->attachment()->create(['filename' => $file->getClientOriginalName(), 'path' => url($path)]);
+//            return ['file' => url($path), 'code' => 0];
+//        } elseif ($content = $request->input('file')) {
+//            $file = $uploadServer->uploadBase64Image($content);
+//            return ['file' => url($file), 'code' => 0];
+//        }
     }
 
     /**

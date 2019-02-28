@@ -10,6 +10,11 @@
         </a>
     </li>
     <li class="nav-item">
+        <a class="nav-link {{active_class($name=='aliyun','active')}}" href="{{route('system.setting.edit','aliyun')}}">
+            阿里云
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link {{active_class($name=='register','active')}}" href="{{route('system.setting.edit','register')}}">
             注册设置
         </a>

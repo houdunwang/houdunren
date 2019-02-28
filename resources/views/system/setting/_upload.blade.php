@@ -56,13 +56,6 @@
                 <span class="help-block small text-secondary">请用英文半角逗号分隔文件类型</span>
             </div>
         </div>
-    </div>
-</div>
-<div class="card mt-3">
-    <div class="card-header">
-        本地上传配置
-    </div>
-    <div class="card-body">
         <div class="form-group row">
             <label class="col-sm-1 col-form-label">
                 上传目录<small class="text-secondary">(path)</small>
@@ -71,53 +64,6 @@
                 <input type="text" class="form-control" name="path"
                        value="{{$config['path']??'attachment'}}">
                 <span class="help-block small text-secondary">上传到本地服务器的目录名称</span>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card mt-3">
-    <div class="card-header">
-        阿里云上传配置
-    </div>
-    <div class="card-body">
-        <div class="form-group row">
-            <label class="col-sm-1 col-form-label">
-                regionId
-                <small class="text-secondary">(oss.regionId)</small>
-            </label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="oss[regionId]"
-                       value="{{$config['oss']['regionId']??''}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-1 col-form-label">
-                accessKeySecret
-                <small class="text-secondary">(oss.accessKeySecret)</small>
-            </label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="oss[accessKeySecret]"
-                       value="{{$config['oss']['accessKeySecret']??''}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-1 col-form-label">
-                bucket
-                <small class="text-secondary">(oss.bucket)</small>
-            </label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="oss[bucket]"
-                       value="{{$config['oss']['bucket']??''}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-1 col-form-label">
-                endpoint
-                <small class="text-secondary">(oss.endpoint)</small>
-            </label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="oss[endpoint]"
-                       value="{{$config['oss']['endpoint']??''}}">
             </div>
         </div>
     </div>

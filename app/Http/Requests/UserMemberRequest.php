@@ -35,6 +35,7 @@ class UserMemberRequest extends FormRequest
             'mobile' => 'sometimes|regex:/^1\d{10}$/|unique:users,mobile,' . auth()->id(),
             'code' => [
                 'sometimes',
+                'required',
                 function ($attribute, $value, $fail) {
                     $key = session()->getId() . 'code';
                     if ($value != \Cache::get($key)) {
@@ -65,6 +66,7 @@ class UserMemberRequest extends FormRequest
             'email.unique' => '邮箱已经被占用',
             'mobile.regex' => '手机号格式错误',
             'mobile.unique' => '手机号已经被使用',
+            'code.required' => '验证码不能为空',
             'password.confirmed' => '确认密码输入错误',
             'password.min' => '密码不能小于五位',
             'password.max' => '密码长度不能超过20位',

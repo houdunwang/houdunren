@@ -33,9 +33,6 @@
                                    value="{{old('qq',$user['qq']??'')}}">
                         </div>
                     </div>
-                    <div class="col-6">
-
-                    </div>
                 </div>
             </div>
         </div>

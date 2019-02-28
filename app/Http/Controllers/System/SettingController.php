@@ -19,18 +19,6 @@ class SettingController extends Controller
         return view('system.setting.index');
     }
 
-    public function create()
-    {
-    }
-
-    public function store(Request $request)
-    {
-    }
-
-    public function show($id)
-    {
-    }
-
     public function edit($name, ConfigRepository $repository)
     {
         $config = $repository->get($name, [], 'system');
@@ -41,10 +29,6 @@ class SettingController extends Controller
     {
         $repository->save($request, $name, 'system');
         return back()->with('success', '保存成功');
-    }
-
-    public function destroy($id)
-    {
     }
 
     public function updateCache(SiteRepository $siteRepository)

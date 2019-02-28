@@ -18,7 +18,6 @@
 @stop
 @push('js')
     <script>
-        window.system.upload = {!! json_encode(config_get('upload','','system')) !!},
         function uploadImage() {
             require(['hdjs'], function (hdjs) {
                 hdjs.image(function (images) {
