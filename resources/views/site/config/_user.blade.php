@@ -50,23 +50,3 @@
         </div>
     </div>
 </div>
-<div class="card mt-3">
-    <div class="card-header">
-        消息通知
-    </div>
-    <div class="card-body">
-        <div class="form-group">
-            <label>
-                短信/邮件发送间隔时间
-                <small class="text-secondary">message_timeout</small>
-            </label>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" name="message_timeout"
-                       value="{{old('message_timeout',$config['message_timeout']??60)}}">
-                <div class="input-group-append">
-                    <span class="input-group-text">秒</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

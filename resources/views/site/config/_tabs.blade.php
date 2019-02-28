@@ -24,4 +24,9 @@
             用户相关
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link {{active_class($name=='notify','active')}}" href="{{route('site.config.edit',[$site,'name'=>'notify'])}}">
+            通知设置
+        </a>
+    </li>
 </ul>

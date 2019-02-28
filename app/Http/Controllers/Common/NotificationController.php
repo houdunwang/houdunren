@@ -18,7 +18,7 @@ class NotificationController extends Controller
     {
         $code = number_random(5);
         $sessionId = session()->getId();
-        $timeout = config_get('user.message_timeout', 60, 'site');
+        $timeout = config_get('notify.message_timeout', 60, 'site');
         if (Cache::has($sessionId . 'codeTimeout')) {
             return response()->json(['message' => '发送过于频繁请稍后再试', 'code' => 0]);
         }
@@ -31,11 +31,11 @@ class NotificationController extends Controller
             'message' => '您的验证码是: ' . $code,
             //==========短信配置==========
             //短信签名
-            'sign' => '后盾网',
+            'sign' => config_get('notify.sign', '', 'site'),
             //短信模板
-            'template' => 'SMS_12840367',
+            'template' => config_get('notify.template', '', 'site'),
             //模板变量
-            'vars' => ["code" => $code, "product" => site()['name']]
+            'vars' => ["code" => $code, "product" => site()['name']],
         ]));
         Cache::put($sessionId . 'code', $code, 30);
         Cache::put($sessionId . 'codeTimeout', 'code', now()->addSecond($timeout));

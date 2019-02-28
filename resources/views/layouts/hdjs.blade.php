@@ -7,6 +7,7 @@
     window.system = {
         upload:{!! json_encode(config_get('upload','','system')) !!},
         user:{!! json_encode(config_get('user',[],'site')) !!},
+        message_timeout: {!! config_get('notify.message_timeout','','site') !!}
     }
 </script>
 <script src="{{asset('org/hdjs/require.js')}}"></script>
