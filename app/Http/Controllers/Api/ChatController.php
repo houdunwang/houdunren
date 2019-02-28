@@ -4,22 +4,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Keyword;
+use App\Models\Module;
 use App\Models\Site;
 use App\Models\Chat;
+use App\Repositories\ModuleRepository;
 use Houdunwang\WeChat\Build\Message\Message;
 
 class ChatController extends Controller
 {
-    /**
-     * 初始环境
-     * @param Site $site
-     * @param Chat $chat
-     */
-    protected function init(Site $site, Chat $chat)
-    {
-        \site($site);
-        (new Message())->config($chat)->valid();
-    }
+    protected $site;
+    protected $message;
+    protected $chat;
+    protected $keyword;
 
     /**
      * 被动消息处理
@@ -30,15 +26,18 @@ class ChatController extends Controller
      */
     public function processor(Site $site, Chat $chat, Message $message)
     {
-        $this->init($site, $chat);
-        //文本消息
-        if ($response = $this->textProcessor($site, $chat, $message)) {
-            return $response;
-        }
+        $this->site = $site;
+        $this->chat = $chat;
+        $this->message = $message->config($chat)->valid();
+//        $this->subscribe();
 
-        //默认回复
-        if ($message->isTextMsg() && isset($chat['default'])) {
-            return $message->text($chat['default']);
+        if ($message->isTextMsg()) {
+            if ($response = $this->textProcessor()) {
+                return $response;
+            }
+            if (isset($chat['default'])) {
+                return $message->text($chat['default']);
+            }
         }
         //关注回复
         if ($message->isSubscribeEvent()) {
@@ -48,72 +47,68 @@ class ChatController extends Controller
     }
 
     /**
+     * 微信订阅消息处理
+     */
+    protected function subscribe()
+    {
+        foreach (Module::all() as $module) {
+            if ($module['subscribe']) {
+                $this->runModuleAction($module, 'subscribe');
+            }
+        }
+    }
+
+    /**
+     * 执行模块动作
+     * @param Module $module
+     * @param string $action
+     * @return mixed
+     */
+    protected function runModuleAction(Module $module, string $action)
+    {
+        $method = 'Modules\\' . $module['name'] . '\Http\Controllers\System\ChatController@' . $action;
+        return app()->call($method,
+            ['site' => $this->site, 'chat' => $this->chat, 'message' => $this->message, 'keyword' => $this->keyword]);
+    }
+
+    /**
      * 文本消息处理
-     * @param Site $site
-     * @param Chat $chat
-     * @param Message $message
      * @return string|null
      */
-    protected function textProcessor(Site $site, Chat $chat, Message $message): ?string
+    protected function textProcessor(): ?string
     {
-        if ($message->isTextMsg()) {
-            if ($message->Content == 'hdcms') {
-                return $message->text('恭喜~ 微信公众号配置成功');
-            }
-            $keyword = Keyword::where('key', $message->Content)->first();
-            if ($keyword) {
-                return $keyword['system'] ?
-                    call_user_func_array([$this, $keyword['tag']], [$site, $chat, $message, $keyword])
-                    : $this->moduleProcessor($site, $chat, $message, $keyword);
-            }
+
+        if ($this->message->Content == 'hdcms') {
+            return $this->message->text('恭喜~ 微信公众号配置成功');
+        }
+        $this->keyword = Keyword::where('key', $this->message->Content)->first();
+        if ($this->keyword) {
+            return $this->keyword['system'] ?
+                call_user_func_array([$this, $this->keyword['tag']], [])
+                : $this->runModuleAction(Module::find($this->keyword['id']), 'processor');
         }
         return null;
     }
 
     /**
      * 普通文本回复
-     * @param Site $site
-     * @param Chat $chat
-     * @param Message $message
-     * @param Keyword $keyword
      * @return string|null
      */
-    protected function text(Site $site, Chat $chat, Message $message, Keyword $keyword): ?string
+    protected function text(): ?string
     {
-        if ($contents = $keyword->model['content']) {
-            return $message->text(array_random(json_decode($contents, true))['content']);
+        if ($contents = $this->keyword->model['content']) {
+            return $this->message->text(array_random(json_decode($contents, true))['content']);
         }
     }
 
     /**
      * 图文消息回复
-     * @param Site $site
-     * @param Chat $chat
-     * @param Message $message
      * @return string|null
      */
-    protected function news(Site $site, Chat $chat, Message $message, Keyword $keyword): ?string
+    protected function cover(): ?string
     {
-
-    }
-
-    protected function cover(Site $site, Chat $chat, Message $message, Keyword $keyword): ?string
-    {
-        if ($model = $keyword->model) {
-            return $message->news([$model->toArray(),$model->toArray()]);
+        if ($model = $this->keyword->model) {
+            return $this->message->news([$model->toArray()]);
         }
-    }
-
-    /**
-     * 模块处理
-     * @param Site $site
-     * @param Chat $chat
-     * @param Message $message
-     * @param Keyword $keyword
-     * @return string|null
-     */
-    protected function moduleProcessor(Site $site, Chat $chat, Message $message, Keyword $keyword): ?string
-    {
-
     }
 }

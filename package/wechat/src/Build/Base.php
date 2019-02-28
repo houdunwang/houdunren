@@ -115,30 +115,25 @@ class Base extends Error
 
     /**
      * 微信接口整合验证进行绑定
-     * @return bool
+     * @return $this
      */
-    public function valid(): bool
+    public function valid()
     {
-        $status = !isset($_GET["echostr"]) || !isset($_GET["signature"])
-            || !isset($_GET["timestamp"]) || !isset($_GET["nonce"]);
+        $status = isset($_GET["echostr"]) && isset($_GET["signature"])
+            && isset($_GET["timestamp"]) && isset($_GET["nonce"]);
         if ($status) {
-            return false;
+            $echoStr = $_GET["echostr"];
+            $signature = $_GET["signature"];
+            $timestamp = $_GET["timestamp"];
+            $nonce = $_GET["nonce"];
+            $token = $this->getConfig('token');
+            $tmpArr = [$token, $timestamp, $nonce];
+            sort($tmpArr, SORT_STRING);
+            $tmpStr = implode($tmpArr);
+            $tmpStr = sha1($tmpStr);
+            die($tmpStr == $signature ? $echoStr : '');
         }
-        $echoStr = $_GET["echostr"];
-        $signature = $_GET["signature"];
-        $timestamp = $_GET["timestamp"];
-        $nonce = $_GET["nonce"];
-        $token = $this->getConfig('token');
-        $tmpArr = [$token, $timestamp, $nonce];
-        sort($tmpArr, SORT_STRING);
-        $tmpStr = implode($tmpArr);
-        $tmpStr = sha1($tmpStr);
-        if ($tmpStr == $signature) {
-            echo $echoStr;
-            exit;
-        } else {
-            return false;
-        }
+        return $this;
     }
 
     /**

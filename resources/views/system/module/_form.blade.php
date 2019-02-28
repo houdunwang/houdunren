@@ -46,37 +46,43 @@
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="config" value="1"
-                                {{active_class($module['package']['config']??true,'checked')}}> 模块配置
+                                {{active_class($module['package']['config']??false,'checked')}}> 模块配置
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="domain" value="1"
-                                {{active_class($module['package']['domain']??true,'checked')}}> 域名管理
+                                {{active_class($module['package']['domain']??false,'checked')}}> 域名管理
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="wx_replies" value="1"
-                                {{active_class($module['package']['wx_replies']??true,'checked')}}> 微信回复列表
+                                {{active_class($module['package']['wx_replies']??false,'checked')}}> 微信回复列表
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="wx_cover" value="1"
-                                {{active_class($module['package']['wx_cover']??true,'checked')}}> 微信封面入口
+                                {{active_class($module['package']['wx_cover']??false,'checked')}}> 微信封面入口
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="menu_navigation" value="1"
+                                {{active_class($module['package']['menu_navigation']??false,'checked')}}> 桌面导航菜单
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="menu_web" value="1"
-                                {{active_class($module['package']['menu_web']??true,'checked')}}> 桌面会员中心菜单
+                                {{active_class($module['package']['menu_web']??false,'checked')}}> 桌面会员中心菜单
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="menu_mobile" value="1"
-                                {{active_class($module['package']['menu_mobile']??true,'checked')}}> 手机会员中心菜单
+                                {{active_class($module['package']['menu_mobile']??false,'checked')}}> 手机会员中心菜单
                     </label>
                 </div>
             </div>
@@ -102,23 +108,8 @@
             <span class="badge badge-info"></span>
             <div class="alert alert-warning small">
                 注意: 订阅的消息信息是只读的, 只能用作分析统计 <br>
-                订阅消息在 system/subscribe.php 文件中实现
+                订阅消息在 Http/Controllers/System/ChatController.php控制器的subscribe方法中实现
             </div>
-        </div>
-        <div class="form-group">
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" name="processor" value="1"
-                            {{active_class($module['package']['processor']??true,'checked')}}>
-                    直接处理微信消息
-                </label>
-            </div>
-            <div class="alert alert-warning small">
-                注意: 关键字路由只能针对文本消息有效, 文本消息最为重要. 其他类型的消息并不能被直接理解, 多数情况需要使用文本消息来进行语境分析, 再处理其他相关消息类型
-                <br>
-                直接处理消息在 system/processor.php 文件中实现
-            </div>
-            <span class="badge badge-info"></span>
         </div>
     </div>
 </div>

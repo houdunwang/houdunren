@@ -15,6 +15,7 @@ class Module extends Model
         'title',
         'name',
         'package',
+        'subscribe',
         'local',
         'permissions',
     ];

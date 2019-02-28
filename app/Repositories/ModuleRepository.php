@@ -38,10 +38,10 @@ class ModuleRepository extends Repository
         return parent::create([
             'title' => $this->package['title'],
             'name' => $this->package['name'],
+            'subscribe' => $this->package['subscribe'] ?? false,
             'local' => true,
             'package' => $this->package,
-            'permissions' => $this->permissions,
-            'menus' => $this->menus,
+            'permissions' => $this->permissions
         ]);
     }
 
@@ -175,7 +175,7 @@ class ModuleRepository extends Repository
      */
     public function addSystemMenu(Site $site, Module $module)
     {
-        $menus =[];
+        $menus = [];
         if ($module['package']['config']) {
             $menus['系统功能'][] = [
                 'title' => '参数设置',
@@ -207,18 +207,19 @@ class ModuleRepository extends Repository
         if ($module['package']['wx_replies']) {
             $menus['微信回复'][] = [
                 'title' => '文本消息回复',
-                'url' => module_link('module.text.index','',$site,$module),
+                'url' => module_link('module.text.index', '', $site, $module),
                 'permission' => 'wx_replies',
             ];
         }
         if ($module['package']['wx_cover']) {
             $menus['微信回复'][] = [
                 'title' => '模块封面入口',
-                'url' => module_link('module.cover.create','',$site,$module),
+                'url' => module_link('module.cover.create', '', $site, $module),
                 'permission' => 'wx_cover',
             ];
         }
-        $module['menus'] = array_merge($menus, include \Storage::drive('module')->path($module['name']) . '/Config/menus.php');
+        $module['menus'] = array_merge($menus,
+            include \Storage::drive('module')->path($module['name']) . '/Config/menus.php');
         return $module;
     }
 

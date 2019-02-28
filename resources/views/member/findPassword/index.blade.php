@@ -46,21 +46,23 @@
                             <input type="password" name="password_confirmation" class="form-control" required
                                    placeholder="请输入不小于5位的登录密码" value="{{old('password_confirmation')}}">
                         </div>
-                        <div class="form-group">
-                            <label>验证码</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="code" placeholder="请输入验证码"
-                                       value="{{old('code')}}">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button" id="sendCode">
-                                        发送验证码
-                                    </button>
+                        @if (config_get('user.verification','','site'))
+                            <div class="form-group">
+                                <label>验证码</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="code" placeholder="请输入验证码"
+                                           value="{{old('code')}}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="sendCode">
+                                            发送验证码
+                                        </button>
+                                    </div>
                                 </div>
+                                <script>
+                                    send_code("#sendCode", '[name="username"]');
+                                </script>
                             </div>
-                            <script>
-                                send_code("#sendCode",'[name="username"]');
-                            </script>
-                        </div>
+                        @endif
                         <button class="btn btn-success btn-sm">更新密码</button>
                     </div>
                     <div class="card-footer text-muted">
