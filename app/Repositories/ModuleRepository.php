@@ -41,7 +41,7 @@ class ModuleRepository extends Repository
             'subscribe' => $this->package['subscribe'] ?? false,
             'local' => true,
             'package' => $this->package,
-            'permissions' => $this->permissions
+            'permissions' => $this->permissions,
         ]);
     }
 
@@ -126,16 +126,16 @@ class ModuleRepository extends Repository
 
     /**
      * 获取用户在站点的模块
-     * @param Site|null $site
+     * @param Site $site
      * @param User $user
      * @return array|\Illuminate\Support\Collection
      * @throws \Exception
      */
-    public function getSiteModulesByUser(?Site $site, User $user)
+    public function getSiteModulesByUser(Site $site, User $user)
     {
         $modules = collect();
         //站长获取所有模块
-        foreach ($this->getSiteAllModule($site) as $k => $module) {
+        foreach ($site->modules as $module) {
             $module = $this->filterModuleMenu($site, $module, $user);
             if ($module['menus']) {
                 $modules->push($module);
@@ -221,20 +221,6 @@ class ModuleRepository extends Repository
         $module['menus'] = array_merge($menus,
             include \Storage::drive('module')->path($module['name']) . '/Config/menus.php');
         return $module;
-    }
-
-    /**
-     * 获取站点所有模块
-     * @param Site $site
-     * @return \Illuminate\Support\Collection
-     */
-    public function getSiteAllModule(Site $site)
-    {
-        $modules = collect();
-        foreach ($site->admin->group->package as $package) {
-            $modules = $modules->merge($package->module);
-        }
-        return $modules;
     }
 
     /**

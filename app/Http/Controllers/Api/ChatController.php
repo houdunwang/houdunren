@@ -26,11 +26,10 @@ class ChatController extends Controller
      */
     public function processor(Site $site, Chat $chat, Message $message)
     {
-        $this->site = $site;
+        \site($this->site = $site);
         $this->chat = $chat;
         $this->message = $message->config($chat)->valid();
-//        $this->subscribe();
-
+        $this->subscribe();
         if ($message->isTextMsg()) {
             if ($response = $this->textProcessor()) {
                 return $response;
@@ -51,7 +50,7 @@ class ChatController extends Controller
      */
     protected function subscribe()
     {
-        foreach (Module::all() as $module) {
+        foreach ($this->site->modules as $module) {
             if ($module['subscribe']) {
                 $this->runModuleAction($module, 'subscribe');
             }
@@ -77,7 +76,6 @@ class ChatController extends Controller
      */
     protected function textProcessor(): ?string
     {
-
         if ($this->message->Content == 'hdcms') {
             return $this->message->text('恭喜~ 微信公众号配置成功');
         }

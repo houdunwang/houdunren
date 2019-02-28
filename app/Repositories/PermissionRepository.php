@@ -24,13 +24,14 @@ class PermissionRepository extends Repository
 
     /**
      * 获取站点所有分层权限
+     * 用于设置操作员权限
      * @param Site $site
      * @return mixed
      */
     public function permissions(Site $site)
     {
         $permissions = collect();
-        foreach (Module::all() as $module) {
+        foreach ($site->modules as $module) {
             $permissions->put(
                 $module['title'],
                 Permission::where([['site_id', $site['id']], ['module', $module['name']]])->get()

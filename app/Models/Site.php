@@ -50,4 +50,39 @@ class Site extends Model
     {
         return $this->hasMany(Chat::class, 'site_id');
     }
+
+    /**
+     * 站点所有套餐
+     * @return mixed
+     */
+    public function packages()
+    {
+        return $this->user()->wherePivot('role', 'admin')->first()->group->package();
+    }
+
+    /**
+     * 模块集合
+     * @return \Illuminate\Support\Collection
+     */
+    public function getModulesAttribute()
+    {
+        $modules = collect();
+        foreach ($this->packages as $package) {
+            $modules = $modules->merge($package->module);
+        }
+        return $modules;
+    }
+
+    /**
+     * 模板集合
+     * @return \Illuminate\Support\Collection
+     */
+    public function getTemplatesAttribute()
+    {
+        $templates = collect();
+        foreach ($this->packages as $package) {
+            $templates = $templates->merge($package->template);
+        }
+        return $templates;
+    }
 }

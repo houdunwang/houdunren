@@ -11,6 +11,11 @@ namespace App\Repositories;
 use App\Models\Package;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 套餐管理
+ * Class PackageRepository
+ * @package App\Repositories
+ */
 class PackageRepository extends Repository
 {
     protected $model = Package::class;

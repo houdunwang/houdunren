@@ -10,6 +10,11 @@ namespace App\Repositories;
 
 use App\Models\Site;
 
+/**
+ * 站点管理
+ * Class SiteRepository
+ * @package App\Repositories
+ */
 class SiteRepository extends Repository
 {
     protected $model = Site::class;
@@ -27,16 +32,6 @@ class SiteRepository extends Repository
     {
         $model = parent::create($attributes);
         $model->user()->save(auth()->user(), ['role' => 'admin']);
-    }
-
-    /**
-     * 获取站点套餐
-     * @param Site $site
-     * @return mixed
-     */
-    public function packages(Site $site)
-    {
-        return $site->user()->wherePivot('role', 'admin')->first()->group->package;
     }
 
     /**

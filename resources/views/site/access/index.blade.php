@@ -22,7 +22,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($SiteRepository->packages($site) as $package)
+                @foreach($site->packages as $package)
                     <tr>
                         <td>{{$package['name']}}</td>
                         <td>
