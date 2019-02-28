@@ -14,6 +14,7 @@
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
         "hieu-le/active": "^3.5",
+        "hisorange/browser-detect": "^3.1",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "nwidart/laravel-modules": "^4.0",

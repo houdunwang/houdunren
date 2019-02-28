@@ -30,6 +30,10 @@ class User extends Authenticatable
         'token',
         'mobile_verified_at',
         'icon',
+        'weibo',
+        'wechat',
+        'github',
+        'qq',
         'admin_end',
         'lock',
         'group_id',
@@ -88,7 +92,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Site::class)->as('role')
             ->withPivot('role')->withTimestamps();
     }
-
     /**
      * 当前用户所在站点
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Member;
 
 use App\Repositories\UserRepository;

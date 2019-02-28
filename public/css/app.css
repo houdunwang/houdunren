@@ -1,3 +1,7 @@
+.member .header {
+  border-width: 4px !important;
+}
+
 .system-module-create img.img-thumbnail,
 .system-module-edit img.img-thumbnail {
   background: #dcdcdc;

@@ -17,10 +17,14 @@ Route::group(['prefix' => 'common', 'as' => 'common.'], function () {
     Route::any('notification/code',
         'Common\NotificationController@code')->name('notification.code')->middleware('site');
 });
-//用户
-Route::group(['middleware' => ['auth'], 'prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.'], function () {
+//会员中心
+Route::get('member', 'Member\HomeController')->middleware(['auth','site'])->name('member.home');
+Route::group(['middleware' => ['auth','site'], 'prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.'], function () {
     //资料修改
-    Route::resource('user', 'UserController');
+    Route::resource('info', 'InfoController');
+    Route::resource('icon', 'IconController');
+    Route::resource('mail', 'MailController');
+    Route::resource('change-password', 'ChangePasswordController');
 });
 //系统
 Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.', 'namespace' => 'System'],
