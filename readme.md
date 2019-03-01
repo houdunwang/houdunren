@@ -2,6 +2,8 @@
 
 基于Laravel 框架重构的PC、WAP、微信公众号、微信小程序多应用平台。
 
+> 100% 免费使用于任何项目
+
 ## 产品特点
 
 - 全新的产品设计、快速的产品创新、超出用户期待的产品价值，基于微信/桌面/移动三网通设计模式为企业提供开发、运营、培训、推广一体化解决方案，帮助企业实现线上线下互通（O2O），社会化客户关系管理（SCRM），移动电商，轻应用（lightapp）WMAPP等多个层面的业务开发。
@@ -41,5 +43,3 @@
 - https://getbootstrap.com/docs/4.3/content/tables/
 - http://www.fontawesome.com.cn/faicons/#new
 - https://github.com/axios/axios
-
-> 100% 免费使用于任何项目
