@@ -56,6 +56,14 @@ class SiteController extends Controller
         return view('site.site.edit', compact('site'));
     }
 
+    /**
+     * 更新资源
+     * @param SiteRequest $request
+     * @param Site $site
+     * @param SiteRepository $repository
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(SiteRequest $request, Site $site, SiteRepository $repository)
     {
         $this->authorize('update', $site);

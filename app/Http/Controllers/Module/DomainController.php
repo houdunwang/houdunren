@@ -21,7 +21,8 @@ class DomainController extends Controller
     public function index()
     {
         if ($module = \module()) {
-            return app()->call('Modules\\' . ($module['name']) . '\\Http\Controllers\System\HomeController@domain');
+            return app()->call('Modules\\' .
+                ($module['name']) . '\\Http\Controllers\System\HomeController@domain');
         }
         return view('module.domain.index');
     }
