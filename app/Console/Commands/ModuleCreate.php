@@ -14,6 +14,7 @@ class ModuleCreate extends Command
     protected $signature = 'hdcms:module-make {name}';
     //模块名称
     protected $name;
+
     //模块目录
     protected $modulePath;
     //复制的文件目录
