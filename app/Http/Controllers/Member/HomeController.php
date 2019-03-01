@@ -22,6 +22,10 @@ class HomeController extends Controller
         return app()->call(HomeController::class . '@' . $action);
     }
 
+    /**
+     * 桌面
+     * @return mixed
+     */
     public function pc()
     {
         return app()->call(InfoController::class . '@index');
