@@ -1,5 +1,5 @@
 #! /bin/bash 
-cd ~/work/hdcms
+php artisan cms:create-update-file
 git add .
 git commit -m '生成更新列表'
 git push
