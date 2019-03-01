@@ -1,8 +1,6 @@
-# HDCMS 5.0
+# HDCMS 5.7 Beta
 
 基于Laravel 框架重构的PC、WAP、微信公众号、微信小程序多应用平台。
-
-> 5.0.1 beta 测试版开发阶段
 
 ## 产品特点
 
@@ -12,7 +10,7 @@
 
 ## 软件截图
 
-[![image-20180912025329788](https://github.com/houdunwang/hdcms/raw/30f2fb07ef0e95f6cb3a92522b1dcc30a5cc5561/assets/image-20180912025329788.png)](https://github.com/houdunwang/hdcms/blob/30f2fb07ef0e95f6cb3a92522b1dcc30a5cc5561/assets/image-20180912025329788.png)
+![image-20190301115715970](https://user-images.githubusercontent.com/13848593/53615562-7e295e00-3c19-11e9-885b-77f63e1eae90.png)
 
 ## 在线手册
 
