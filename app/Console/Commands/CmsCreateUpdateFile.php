@@ -17,15 +17,15 @@ class CmsCreateUpdateFile extends Command
     public function handle()
     {
         exec("git diff master dev --name-status", $files);
-        exec("git log dev ^master --name-status", $files);
-        dd($files);
+        exec('git log dev ^master --pretty=format:"%s"', $logs);
         $files = $this->format($files);
         if (!empty($files)) {
-            file_put_contents('update_files.php','<?php return '.var_export([
-                'build'=>time(),
-                'total'=>count($files),
-                'files'=>$files
-            ],true).';');
+            file_put_contents('update_files.php', '<?php return ' . var_export([
+                    'build' => time(),
+                    'total' => count($files),
+                    'logs' => $logs,
+                    'files' => $files,
+                ], true) . ';');
         }
     }
 
