@@ -1,6 +1,6 @@
 <?php
 Route::get('/', 'Module\DomainController@index')->middleware('site');
-Route::get('home', 'Module\DomainController@index')->name('home')->middleware('site');
+Route::get('home', 'Site\SiteController@index')->name('home')->middleware('auth');
 //登录注册
 Route::get('login', 'Member\LoginController@login')->name('login');
 Route::post('login', 'Member\LoginController@store')->name('login');
@@ -8,7 +8,7 @@ Route::get('logout', 'Member\LoginController@logout')->name('logout')->middlewar
 Route::resource('register', 'Member\RegisterController')->middleware(['site']);
 Route::resource('findPassword', 'Member\FindPasswordController')->middleware('guest');
 //后台登录
-Route::get('admin', 'Site\SiteController@index')->middleware('auth')->name('admin');
+Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware('auth');
 //公共
 Route::group(['prefix' => 'common', 'as' => 'common.'], function () {
     Route::any('upload', 'Common\UploadController@upload')->name('upload.make');

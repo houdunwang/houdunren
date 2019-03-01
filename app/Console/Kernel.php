@@ -2,7 +2,9 @@
 
 namespace App\Console;
 
-use App\Console\Commands\ModuleCreate;
+use App\Console\Commands\CmsUpdateZip;
+use App\Console\Commands\CreateModule;
+use App\Console\Commands\UpdateZip;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,7 +16,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        ModuleCreate::class,
+        CreateModule::class,
+        CmsUpdateZip::class,
     ];
 
     /**

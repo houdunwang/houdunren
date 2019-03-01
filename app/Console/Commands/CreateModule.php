@@ -9,9 +9,9 @@ use Illuminate\Console\Command;
  * Class ModuleCreate
  * @package App\Console\Commands
  */
-class ModuleCreate extends Command
+class CreateModule extends Command
 {
-    protected $signature = 'hdcms:module-make {name}';
+    protected $signature = 'cms:module-make {name}';
     //模块名称
     protected $name;
 

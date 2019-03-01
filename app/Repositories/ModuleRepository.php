@@ -31,7 +31,7 @@ class ModuleRepository extends Repository
     {
         $attributes['name'] = ucfirst($attributes['name']);
         $this->package = array_merge($this->package, $attributes);
-        \Artisan::call('hdcms:module-make', ['name' => $this->package['name']]);
+        \Artisan::call('cms:module-make', ['name' => $this->package['name']]);
         //写入配置项
         $this->fitThumb();
         $this->writeConfig();

@@ -598,6 +598,7 @@ class ComposerStaticInit7b70807b8c283799e4abb98538ce22e6
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\CmsUpdateZip' => __DIR__ . '/../..' . '/app/Console/Commands/CmsUpdateZip.php',
         'App\\Console\\Commands\\ModuleCreate' => __DIR__ . '/../..' . '/app/Console/Commands/ModuleCreate.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Events\\NotificationEvent' => __DIR__ . '/../..' . '/app/Events/NotificationEvent.php',
@@ -3093,7 +3094,6 @@ class ComposerStaticInit7b70807b8c283799e4abb98538ce22e6
         'Mockery\\Undefined' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Undefined.php',
         'Mockery\\VerificationDirector' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationDirector.php',
         'Mockery\\VerificationExpectation' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationExpectation.php',
-        'Modules\\App\\Console\\CreateVersion' => __DIR__ . '/../..' . '/Modules/App/Console/CreateVersion.php',
         'Modules\\App\\Database\\Seeders\\AppDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/App/Database/Seeders/AppDatabaseSeeder.php',
         'Modules\\App\\Entities\\AppFile' => __DIR__ . '/../..' . '/Modules/App/Entities/AppFile.php',
         'Modules\\App\\Entities\\AppVersion' => __DIR__ . '/../..' . '/Modules/App/Entities/AppVersion.php',

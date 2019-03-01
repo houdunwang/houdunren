@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\CmsUpdateZip' => $baseDir . '/app/Console/Commands/CmsUpdateZip.php',
     'App\\Console\\Commands\\ModuleCreate' => $baseDir . '/app/Console/Commands/ModuleCreate.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Events\\NotificationEvent' => $baseDir . '/app/Events/NotificationEvent.php',
@@ -2501,7 +2502,6 @@ return array(
     'Mockery\\Undefined' => $vendorDir . '/mockery/mockery/library/Mockery/Undefined.php',
     'Mockery\\VerificationDirector' => $vendorDir . '/mockery/mockery/library/Mockery/VerificationDirector.php',
     'Mockery\\VerificationExpectation' => $vendorDir . '/mockery/mockery/library/Mockery/VerificationExpectation.php',
-    'Modules\\App\\Console\\CreateVersion' => $baseDir . '/Modules/App/Console/CreateVersion.php',
     'Modules\\App\\Database\\Seeders\\AppDatabaseSeeder' => $baseDir . '/Modules/App/Database/Seeders/AppDatabaseSeeder.php',
     'Modules\\App\\Entities\\AppFile' => $baseDir . '/Modules/App/Entities/AppFile.php',
     'Modules\\App\\Entities\\AppVersion' => $baseDir . '/Modules/App/Entities/AppVersion.php',
