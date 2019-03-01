@@ -9,25 +9,23 @@ use Illuminate\Console\Command;
  * Class CmsUpdateZip
  * @package App\Console\Commands
  */
-class CmsUpdateZip extends Command
+class CmsCreateUpdateFile extends Command
 {
-    protected $signature = 'cms:update-zip';
+    protected $signature = 'cms:create-update-file';
     protected $description = '创建CMS更新包';
 
     public function handle()
     {
         exec("git diff master dev --name-status", $files);
+        exec("git log dev ^master --name-status", $files);
+        dd($files);
         $files = $this->format($files);
         if (!empty($files)) {
-            file_put_contents('version.php',[
+            file_put_contents('update_files.php','<?php return '.var_export([
                 'build'=>time(),
+                'total'=>count($files),
                 'files'=>$files
-            ]);
-            return;
-            $zipper = new \Chumper\Zipper\Zipper();
-            foreach ($files as $file => $tag) {
-                $zipper->make('/Users/xj/Desktop/hdCms.zip')->add($file, $file);
-            }
+            ],true).';');
         }
     }
 
@@ -43,8 +41,6 @@ class CmsUpdateZip extends Command
             preg_match('/\w+\s+([^\s]+)/', $f, $file);
             if (is_file($file[1])) {
                 $format[$file[1]] = in_array($file[0], ['A', 'M']) ? $file[0] : 'M';
-            } else {
-                $format[$file[1]] = 'D';
             }
         }
         return $format;

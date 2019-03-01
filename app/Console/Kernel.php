@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CmsCreateUpdateFile;
 use App\Console\Commands\CmsUpdateZip;
 use App\Console\Commands\CreateModule;
 use App\Console\Commands\UpdateZip;
@@ -17,7 +18,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         CreateModule::class,
-        CmsUpdateZip::class,
+        CmsCreateUpdateFile::class,
     ];
 
     /**

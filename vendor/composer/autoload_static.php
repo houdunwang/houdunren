@@ -186,7 +186,6 @@ class ComposerStaticInit7b70807b8c283799e4abb98538ce22e6
             'Composer\\Semver\\' => 16,
             'Composer\\CaBundle\\' => 18,
             'Composer\\' => 9,
-            'Chumper\\Zipper\\' => 15,
         ),
         'B' => 
         array (
@@ -532,10 +531,6 @@ class ComposerStaticInit7b70807b8c283799e4abb98538ce22e6
         array (
             0 => __DIR__ . '/..' . '/composer/composer/src/Composer',
         ),
-        'Chumper\\Zipper\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper',
-        ),
         'BeyondCode\\DumpServer\\' => 
         array (
             0 => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src',
@@ -598,8 +593,8 @@ class ComposerStaticInit7b70807b8c283799e4abb98538ce22e6
     );
 
     public static $classMap = array (
-        'App\\Console\\Commands\\CmsUpdateZip' => __DIR__ . '/../..' . '/app/Console/Commands/CmsUpdateZip.php',
-        'App\\Console\\Commands\\ModuleCreate' => __DIR__ . '/../..' . '/app/Console/Commands/ModuleCreate.php',
+        'App\\Console\\Commands\\CmsCreateUpdateFile' => __DIR__ . '/../..' . '/app/Console/Commands/CmsCreateUpdateFile.php',
+        'App\\Console\\Commands\\CreateModule' => __DIR__ . '/../..' . '/app/Console/Commands/CreateModule.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Events\\NotificationEvent' => __DIR__ . '/../..' . '/app/Events/NotificationEvent.php',
         'App\\Events\\UploadEvent' => __DIR__ . '/../..' . '/app/Events/UploadEvent.php',
@@ -795,11 +790,6 @@ class ComposerStaticInit7b70807b8c283799e4abb98538ce22e6
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
         'Carbon\\Laravel\\ServiceProvider' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Laravel/ServiceProvider.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
-        'Chumper\\Zipper\\Facades\\Zipper' => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper/Facades/Zipper.php',
-        'Chumper\\Zipper\\Repositories\\RepositoryInterface' => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper/Repositories/RepositoryInterface.php',
-        'Chumper\\Zipper\\Repositories\\ZipRepository' => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper/Repositories/ZipRepository.php',
-        'Chumper\\Zipper\\Zipper' => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper/Zipper.php',
-        'Chumper\\Zipper\\ZipperServiceProvider' => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper/ZipperServiceProvider.php',
         'Composer\\Autoload\\AutoloadGenerator' => __DIR__ . '/..' . '/composer/composer/src/Composer/Autoload/AutoloadGenerator.php',
         'Composer\\Autoload\\ClassLoader' => __DIR__ . '/..' . '/composer/composer/src/Composer/Autoload/ClassLoader.php',
         'Composer\\Autoload\\ClassMapGenerator' => __DIR__ . '/..' . '/composer/composer/src/Composer/Autoload/ClassMapGenerator.php',
@@ -3094,14 +3084,6 @@ class ComposerStaticInit7b70807b8c283799e4abb98538ce22e6
         'Mockery\\Undefined' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Undefined.php',
         'Mockery\\VerificationDirector' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationDirector.php',
         'Mockery\\VerificationExpectation' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationExpectation.php',
-        'Modules\\App\\Database\\Seeders\\AppDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/App/Database/Seeders/AppDatabaseSeeder.php',
-        'Modules\\App\\Entities\\AppFile' => __DIR__ . '/../..' . '/Modules/App/Entities/AppFile.php',
-        'Modules\\App\\Entities\\AppVersion' => __DIR__ . '/../..' . '/Modules/App/Entities/AppVersion.php',
-        'Modules\\App\\Http\\Controllers\\AppController' => __DIR__ . '/../..' . '/Modules/App/Http/Controllers/AppController.php',
-        'Modules\\App\\Http\\Controllers\\System\\HomeController' => __DIR__ . '/../..' . '/Modules/App/Http/Controllers/System/HomeController.php',
-        'Modules\\App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/Modules/App/Providers/AppServiceProvider.php',
-        'Modules\\App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/App/Providers/RouteServiceProvider.php',
-        'Modules\\Shop\\Http\\Controllers\\System\\ChatController' => __DIR__ . '/../..' . '/Modules/App/Http/Controllers/System/ChatController.php',
         'Monolog\\ErrorHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/ErrorHandler.php',
         'Monolog\\Formatter\\ChromePHPFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/ChromePHPFormatter.php',
         'Monolog\\Formatter\\ElasticaFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/ElasticaFormatter.php',
