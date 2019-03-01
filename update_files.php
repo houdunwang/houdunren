@@ -1,23 +1,27 @@
 <?php return array (
-  'build' => 1551450194,
-  'total' => 20,
+  'build' => 1551450230,
+  'total' => 23,
   'logs' => 
   array (
     0 => '菜单细化',
-    1 => '优化更新机制',
-    2 => 'remove zipper',
-    3 => '包更新',
+    1 => '菜单细化',
+    2 => '优化更新机制',
+    3 => 'remove zipper',
+    4 => '包更新',
   ),
   'files' => 
   array (
     'app/Console/Commands/CmsCreateUpdateFile.php' => 'M',
     'app/Console/Kernel.php' => 'M',
+    'app/Http/Controllers/Module/DomainController.php' => 'M',
     'app/Http/Controllers/Module/MenuController.php' => 'M',
     'app/Models/Menu.php' => 'M',
+    'app/Repositories/MenuRepository.php' => 'M',
     'app/Repositories/ModuleRepository.php' => 'M',
     'app/Repositories/Traits/ModuleTrait.php' => 'M',
     'composer.json' => 'M',
     'resources/views/components/breadcrumb.blade.php' => 'M',
+    'resources/views/layouts/member/pc.blade.php' => 'M',
     'resources/views/layouts/module.blade.php' => 'M',
     'resources/views/layouts/site.blade.php' => 'M',
     'resources/views/module/menu/_form.blade.php' => 'M',
