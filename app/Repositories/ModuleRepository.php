@@ -244,4 +244,8 @@ class ModuleRepository extends Repository
         }
     }
 
+    public function menus(string $type )
+    {
+
+    }
 }

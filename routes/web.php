@@ -1,6 +1,6 @@
 <?php
 Route::get('/', 'Module\DomainController@index')->middleware('site');
-Route::get('home', 'Site\SiteController@index')->name('home');
+Route::get('home', 'Module\DomainController@index')->name('home')->middleware('site');
 //登录注册
 Route::get('login', 'Member\LoginController@login')->name('login');
 Route::post('login', 'Member\LoginController@store')->name('login');
@@ -18,12 +18,13 @@ Route::group(['prefix' => 'common', 'as' => 'common.'], function () {
         'Common\NotificationController@code')->name('notification.code')->middleware('site');
 });
 //会员中心
-Route::get('member', 'Member\HomeController')->middleware(['auth','site'])->name('member.home');
+Route::get('member', 'Member\HomeController')->middleware(['auth','site'])->name('member');
 Route::group(['middleware' => ['auth','site'], 'prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.'], function () {
     //资料修改
     Route::resource('info', 'InfoController');
     Route::resource('icon', 'IconController');
     Route::resource('mail', 'MailController');
+    Route::resource('mobile','MobileController');
     Route::resource('change-password', 'ChangePasswordController');
 });
 //系统

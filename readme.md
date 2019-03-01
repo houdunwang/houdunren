@@ -8,17 +8,17 @@
 - 系统提供方便的二次开发机制，可根据自身业务需要快捷开发功能模块，并可将功能模块发布到应用商店进行二次获利。
 - 完全免费使用的同时HDCMS不定期发布版本更新，不断推出让使用者惊喜的新功能，新模块。企业或个人也可以使用HDCMS做成云服务，让其他用户入住云应用，进行网站搭建与模块使用，企业只需要配置好相应套餐即可轻松营利。
 
-## 软件截图
-
-![image-20190301115715970](https://user-images.githubusercontent.com/13848593/53615562-7e295e00-3c19-11e9-885b-77f63e1eae90.png)
-
-## 在线手册
-
-官方提供了完善的帮助手册，便于开发者进行二次开发 [查看手册](http://doc.hdcms.com/)
-
 ## 官方网站
 
 [http://www.hdcms.com](http://www.hdcms.com/)
+
+## 获取帮助
+
+官方提供了完善的帮助手册，便于开发者进行二次开发 [查看手册](http://doc.hdcms.com/)，或者登录 [http://www.hdcms.com](http://www.hdcms.com) 观看教学视频。
+
+## 软件截图
+
+![image-20190301115715970](https://user-images.githubusercontent.com/13848593/53615562-7e295e00-3c19-11e9-885b-77f63e1eae90.png)
 
 ## 感谢
 
@@ -38,10 +38,3 @@
 - <http://fex.baidu.com/webuploader/>
 
 > 100% 免费使用于任何项目
-
-
-
-# 获取帮助
-官网: [http://www.hdcms.com](http://www.hdcms.com)
-手册: [http://doc.hdcms.com](http://doc.hdcms.com)
-

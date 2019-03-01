@@ -26,7 +26,7 @@
 </head>
 <body class="member">
 @include('layouts.message')
-@if (!if_route('member.home'))
+@if (!if_route('member'))
     <div class="bg-light shadow-sm mb-2 border-top border-info">
         <div class="container px-0 border-bottom">
             <nav class="navbar navbar-expand-lg navbar-light bg-se border-0">
@@ -46,7 +46,7 @@
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown ">
                                 <div class="dropdown-divider"></div>
-                                <a class="nav-link" href="{{route('member.home')}}">
+                                <a class="nav-link" href="{{route('member')}}">
                                     会员中心
                                 </a>
                                 <a class="nav-link" href="{{route('member.info.index')}}">修改资料</a>

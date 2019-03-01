@@ -22,10 +22,10 @@ class SiteRepository extends Repository
     public function paginate($row = 10, array $columns = ['*'], $latest = null)
     {
         if (isSuperAdmin()) {
-            return parent::paginate($row, $columns, $latest);
+            return parent::paginate(100, $columns, $latest);
         }
 
-        return auth()->user()->sites;
+        return auth()->user()->sites()->wherePivotIn('role', ['admin', 'ss'])->get();
     }
 
     public function create(array $attributes)

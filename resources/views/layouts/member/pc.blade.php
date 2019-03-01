@@ -73,8 +73,8 @@
                         <a class="mb-0 mr-2" href="{{route('member.mail.index')}}">
                             <i class="fa fa-envelope {{active_class(auth()->user()['email'],'text-info')}}"></i>
                         </a>
-                        <a class="mb-0 mr-2" href="{{route('member.mail.index')}}">
-                            <i class="fa fa-phone-square" {{active_class(auth()->user()['mobile'],'text-info')}}></i>
+                        <a class="mb-0 mr-2" href="{{route('member.mobile.index')}}">
+                            <i class="fa fa-phone-square {{active_class(auth()->user()['mobile'],'text-info')}}"></i>
                         </a>
                         <a class="mb-0 mr-2" href="{{route('member.info.index')}}">
                             <i class="fa fa-weibo {{active_class(auth()->user()['weibo'],'text-info')}}"></i>
@@ -113,7 +113,8 @@
                            href="{{route('member.mail.index')}}">
                             绑定邮箱
                         </a>
-                        <a class="list-group-item list-group-item-action text-secondary">
+                        <a class="list-group-item list-group-item-action text-secondary"
+                        href="{{route('member.mobile.index')}}">
                             修改手机
                         </a>
                     </div>
