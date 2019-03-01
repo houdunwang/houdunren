@@ -28,7 +28,6 @@ class DomainController extends Controller
 
     public function create()
     {
-        event(new NotificationEvent(['subject' => '邮件主题', 'to' => '2300071698@qq.com', 'message' => '这是邮件正文内容']));
         $domain = module()->domain;
         return view('module.domain.create', compact('domain'));
     }

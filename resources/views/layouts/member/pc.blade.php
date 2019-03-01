@@ -26,6 +26,7 @@
 </head>
 <body class="member">
 @include('layouts.message')
+@inject('ModuleRepository','App\Repositories\ModuleRepository')
 <div class="header bg-light shadow-sm border-top border-info">
     <div class="container px-0 border-bottom">
         <nav class="navbar navbar-expand-lg navbar-light bg-se border-0">
@@ -114,33 +115,29 @@
                             绑定邮箱
                         </a>
                         <a class="list-group-item list-group-item-action text-secondary"
-                        href="{{route('member.mobile.index')}}">
+                           href="{{route('member.mobile.index')}}">
                             修改手机
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="card mt-0">
-                <div class="card-header">
-                    资料修改
+            @foreach($ModuleRepository->getMenus(site(),'member_pc') as $moduleTitle=>$menus)
+                <div class="card mt-0">
+                    <div class="card-header">
+                        {{$moduleTitle}}
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush">
+                            @foreach($menus as $menu)
+                                <a class="list-group-item list-group-item-action text-secondary"
+                                   href="{{$menu['url']}}">
+                                    {{$menu['title']}}
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body p-0">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <a href="">修改密码</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="">设置头像</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="">绑定邮箱</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="">修改手机</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            @endforeach
         </div>
         <div class="col-sm-10 pr-0 mt-1 mt-sm-0 pl-sm-3 d-none pl-0 d-sm-block">
             @yield('content')

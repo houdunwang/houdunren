@@ -148,16 +148,15 @@ class ModuleRepository extends Repository
     /**
      * 获取前台菜单（会员中心、个人空间、前台）
      * @param Site $site 站点
-     * @param string $type home:前台,member:会员中心菜单,space:个人空间菜单
-     * @param string $facility pc:桌面端,mobile:移动端
+     * @param string $type 菜单类型: member_pc桌面会员中心菜单,member_mobile移动端会员中心菜单
      * @return array
      */
-    public function getMenus(Site $site, string $type, string $facility): array
+    public function getMenus(Site $site, string $type): array
     {
         $menus = [];
-        foreach ((array)$site->modules as $module) {
+        foreach ($site->modules as $module) {
             $config = include \Storage::drive('module')->path($module['name']) . '/Config/menus.php';
-            $menus[] = $config[$type][$facility];
+            $menus[$module['title']] = $config[$type];
         }
         return $menus;
     }
@@ -208,21 +207,21 @@ class ModuleRepository extends Repository
                 'permission' => 'domain',
             ];
         }
-        if ($module['package']['menu_web']) {
+        if ($module['package']['home_pc']) {
             $business['系统功能'][] = [
                 'title' => '桌面导航菜单',
                 'url' => module_link('module.menu.index', 'home_pc', $site, $module),
                 'permission' => 'home_pc',
             ];
         }
-        if ($module['package']['menu_web']) {
+        if ($module['package']['space_pc']) {
             $business['系统功能'][] = [
                 'title' => '桌面个人空间菜单',
                 'url' => module_link('module.menu.index', 'space_pc', $site, $module),
                 'permission' => 'space_pc',
             ];
         }
-        if ($module['package']['menu_mobile']) {
+        if ($module['package']['space_mobile']) {
             $business['系统功能'][] = [
                 'title' => '手机个人空间菜单',
                 'url' => module_link('module.menu.index', 'space_mobile', $site, $module),
