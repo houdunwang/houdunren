@@ -33,6 +33,11 @@ class DomainController extends Controller
         return view('module.domain.create', compact('domain'));
     }
 
+    /**
+     * 保存域名
+     * @param DomainRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(DomainRequest $request)
     {
         module()->domain()->updateOrCreate(['module_id' => module()['id'], 'site_id' => site()['id']],

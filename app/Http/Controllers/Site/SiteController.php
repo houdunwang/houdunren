@@ -57,7 +57,7 @@ class SiteController extends Controller
     }
 
     /**
-     * 更新资源
+     * 更新站点
      * @param SiteRequest $request
      * @param Site $site
      * @param SiteRepository $repository
