@@ -36,5 +36,10 @@
 - <https://github.com/chriso/validator.js>
 - <https://github.com/zeroclipboard/zeroclipboard>
 - <http://fex.baidu.com/webuploader/>
+- https://github.com/laravolt/avatar
+- http://docs.guzzlephp.org/en/stable/
+- https://getbootstrap.com/docs/4.3/content/tables/
+- http://www.fontawesome.com.cn/faicons/#new
+- https://github.com/axios/axios
 
 > 100% 免费使用于任何项目
