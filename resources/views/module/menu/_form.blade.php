@@ -12,7 +12,7 @@
 </ul>
 <div class="card">
     <div class="card-header">
-        {{$type=='web'?'桌面会员中心菜单':'手机会员中心菜单'}}
+        {{$typeName}}
     </div>
     <div class="card-body">
         <input type="hidden" name="type" value="{{$type}}">

@@ -4,7 +4,7 @@
         @foreach ($modules as $module)
             <div class="col-sm-2 col-6">
                 <div class="card bg-light">
-                    <a href="{{route('module.module.show',$module['id'])}}">
+                    <a href="{{module_link('module.module.show',$module,site(),$module)}}">
                         <img class="card-img-top" src="{{$module['package']['thumb']}}">
                     </a>
                     <div class="card-body p-2 text-center">

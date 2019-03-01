@@ -13,7 +13,7 @@
     </ul>
     <div class="card">
         <div class="card-header">
-            {{$type=='web'?'桌面会员中心菜单':'手机会员中心菜单'}}列表
+            {{$typeName}}
         </div>
         <div class="card-body">
             <table class="table">

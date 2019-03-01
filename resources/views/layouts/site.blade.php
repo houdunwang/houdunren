@@ -23,15 +23,16 @@
         <div class="col-sm-3 col-md-2 mb-5">
             <div class="card">
                 @foreach($moduleRepository->getSiteModulesByUser(site(),auth()->user()) as $module)
-                    @if (count($module['menus']))
+                    @if (count($module['business']))
                         <div class="card-header">
                             {{$module['title']}}
                         </div>
                         <ul class="list-group list-group-flush">
-                            @foreach ($module['menus'] as $menus)
-                                @foreach ($menus as $menu)
-                                    <a href="{{$menu['url']}}"
-                                       class="list-group-item">{{$menu['title']}}</a>
+                            @foreach ($module['business'] as $business)
+                                @foreach ($business as $menu)
+                                    <a href="{{$menu['url']}}" class="list-group-item">
+                                        {{$menu['title']}}
+                                    </a>
                                 @endforeach
                             @endforeach
                         </ul>

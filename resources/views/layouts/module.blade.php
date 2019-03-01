@@ -24,14 +24,15 @@
         <div class="col-sm-3 col-md-2">
             <div class="card">
                 <?php $collect = $moduleRepository->filterModuleMenu(site(),module(),auth()->user());?>
-                    @foreach ($collect['menus'] as $title=>$menus)
+                    @foreach ($collect['business'] as $title=>$business)
                         <div class="card-header">
                             {{$title}}
                         </div>
                         <ul class="list-group list-group-flush">
-                            @foreach ($menus as $menu)
-                                <a href="{{$menu['url']}}"
-                                   class="list-group-item">{{$menu['title']}}</a>
+                            @foreach ($business as $menu)
+                                <a href="{{$menu['url']}}" class="list-group-item">
+                                    {{$menu['title']}}
+                                </a>
                             @endforeach
                         </ul>
                     @endforeach

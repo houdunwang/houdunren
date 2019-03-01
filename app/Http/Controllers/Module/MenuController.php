@@ -17,12 +17,14 @@ class MenuController extends Controller
     public function index(Menu $menu, $type)
     {
         $menus = $menu->type($type)->get();
-        return view('module.menu.index', compact('menus', 'type'));
+        $typeName = $menu->getTypeName($type);
+        return view('module.menu.index', compact('menus', 'type','typeName'));
     }
 
-    public function create($type)
+    public function create($type,Menu $menu)
     {
-        return view('module.menu.create', compact('type'));
+        $typeName = $menu->getTypeName($type);
+        return view('module.menu.create', compact('type','typeName'));
     }
 
     public function store(MenuRequest $request, $type)
@@ -31,16 +33,14 @@ class MenuController extends Controller
         $data['site_id'] = site()['id'];
         $data['module_id'] = module()['id'];
         Menu::create($data);
-        return redirect(module_link('module.menu.index', $type))->with('success', '菜单添加成功');;
-    }
 
-    public function show($id)
-    {
+        return redirect(module_link('module.menu.index', $type))->with('success', '菜单添加成功');;
     }
 
     public function edit($type, Menu $menu)
     {
-        return view('module.menu.edit', compact('menu', 'type'));
+        $typeName = $menu->getTypeName($type);
+        return view('module.menu.edit', compact('menu', 'type','typeName'));
     }
 
     public function update($type, Menu $menu, MenuRequest $request)

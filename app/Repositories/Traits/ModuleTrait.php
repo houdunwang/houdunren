@@ -19,7 +19,7 @@ trait ModuleTrait
         //预览图
         'thumb' => '',
         //模块配置
-        'config'=>false,
+        'config' => false,
         //域名管理
         'domain' => false,
         //微信回复列表
@@ -39,10 +39,33 @@ trait ModuleTrait
     protected $permissions = [
         ['title' => '用户管理', 'name' => 'user-manage'],
     ];
-    //菜单配置
+    //会员菜单
     protected $menus = [
+//        //桌面首页菜单
+//        'home_pc' => [
+//            ['title' => '官网首页菜单', 'url' => 'http://www.hdcms.com'],
+//        ],
+        //桌面会员中心菜单
+        'member_pc' => [
+            ['title' => '会员中心菜单pc', 'url' => 'http://www.hdcms.com','permission' => ''],
+        ],
+        //移动端会员中心菜单
+        'member_mobile' => [
+            ['title' => '会员中心菜单mobile', 'url' => 'http://www.houdunren.com','permission' => ''],
+        ],
+//        //桌面个人空间菜单
+//        'space_pc' => [
+//            ['title' => '个人空间菜单pc', 'url' => 'http://www.hdcms.com'],
+//        ],
+//        //移动端个人空间菜单
+//        'space_mobile' => [
+//            ['title' => '个人空间菜单mobile', 'url' => 'http://www.houdunren.com'],
+//        ],
+    ];
+    //业务菜单
+    protected $business = [
         '业务管理' => [
-            ['title' => '用户管理', 'url' => 'http://www.houdunren.com', 'permission' => 'user-manage'],
+            ['title' => '用户管理', 'url' => '/', 'permission' => 'user-manage'],
         ],
     ];
 

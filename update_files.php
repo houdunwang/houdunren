@@ -1,10 +1,11 @@
 <?php return array (
-  'build' => 1551442643,
+  'build' => 1551442869,
   'total' => 10,
   'logs' => 
   array (
-    0 => 'remove zipper',
-    1 => '包更新',
+    0 => '优化更新机制',
+    1 => 'remove zipper',
+    2 => '包更新',
   ),
   'files' => 
   array (

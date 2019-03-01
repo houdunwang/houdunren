@@ -50,6 +50,7 @@ class ModuleRepository extends Repository
         $attributes = array_merge(array_except($this->package, ['name']), $attributes);
         $this->package = array_merge($model['package'], $attributes);
         $this->permissions = include $this->configPath() . 'permissions.php';
+        $this->business = include $this->configPath() . 'business.php';
         $this->menus = include $this->configPath() . 'menus.php';
         $this->fitThumb();
         $this->writeConfig();
@@ -59,7 +60,6 @@ class ModuleRepository extends Repository
             'local' => true,
             'package' => $this->package,
             'permissions' => $this->permissions,
-            'menus' => $this->menus,
         ]);
     }
 
@@ -88,6 +88,7 @@ class ModuleRepository extends Repository
         return collect([
             'package.php' => $this->package,
             'permissions.php' => $this->permissions,
+            'business.php' => $this->business,
             'menus.php' => $this->menus,
         ])->each(function ($data, $file) {
             file_put_contents($this->configPath() . $file, '<?php return ' . var_export($data, true) . ';');
@@ -114,13 +115,13 @@ class ModuleRepository extends Repository
     {
         $this->package = array_merge($this->package, include $this->configPath($model['name']) . 'package.php');
         $this->permissions = include $this->configPath($model['name']) . 'permissions.php';
-        $this->menus = include $this->configPath($model['name']) . 'menus.php';
+        $this->business = include $this->configPath($model['name']) . 'business.php';
         return parent::update($model, [
             'title' => $this->package['title'],
             'name' => $this->package['name'],
-            'menus' => $this->menus,
             'local' => true,
             'package' => $this->package,
+            'permissions' => $this->permissions,
         ]);
     }
 
@@ -137,11 +138,28 @@ class ModuleRepository extends Repository
         //站长获取所有模块
         foreach ($site->modules as $module) {
             $module = $this->filterModuleMenu($site, $module, $user);
-            if ($module['menus']) {
+            if ($module['business']) {
                 $modules->push($module);
             }
         }
         return $modules;
+    }
+
+    /**
+     * 获取前台菜单（会员中心、个人空间、前台）
+     * @param Site $site 站点
+     * @param string $type home:前台,member:会员中心菜单,space:个人空间菜单
+     * @param string $facility pc:桌面端,mobile:移动端
+     * @return array
+     */
+    public function getMenus(Site $site, string $type, string $facility): array
+    {
+        $menus = [];
+        foreach ((array)$site->modules as $module) {
+            $config = include \Storage::drive('module')->path($module['name']) . '/Config/menus.php';
+            $menus[] = $config[$type][$facility];
+        }
+        return $menus;
     }
 
     /**
@@ -155,15 +173,15 @@ class ModuleRepository extends Repository
     {
         $module = $this->addSystemMenu($site, $module);
         $formats = [];
-        foreach ($module['menus'] as $title => $menus) {
-            $menus = array_filter($menus, function ($menu) use ($module, $site, $user) {
+        foreach ($module['business'] as $title => $business) {
+            $business = array_filter($business, function ($menu) use ($module, $site, $user) {
                 return ($site->admin['id'] == $user['id']) || module_access($menu['permission'], $module['name']);
             });
-            if ($menus) {
-                $formats[$title] = $menus;
+            if ($business) {
+                $formats[$title] = $business;
             }
         }
-        $module['menus'] = $formats;
+        $module['business'] = $formats;
         return $module;
     }
 
@@ -175,51 +193,58 @@ class ModuleRepository extends Repository
      */
     public function addSystemMenu(Site $site, Module $module)
     {
-        $menus = [];
+        $business = [];
         if ($module['package']['config']) {
-            $menus['系统功能'][] = [
+            $business['系统功能'][] = [
                 'title' => '参数设置',
                 'url' => module_link('module.config.create', '', $site, $module),
                 'permission' => 'config',
             ];
         }
         if ($module['package']['domain']) {
-            $menus['系统功能'][] = [
+            $business['系统功能'][] = [
                 'title' => '域名管理',
                 'url' => module_link('module.domain.create', '', $site, $module),
                 'permission' => 'domain',
             ];
         }
         if ($module['package']['menu_web']) {
-            $menus['系统功能'][] = [
-                'title' => '桌面会员中心菜单',
-                'url' => module_link('module.menu.index', 'web', $site, $module),
-                'permission' => 'menu_web',
+            $business['系统功能'][] = [
+                'title' => '桌面导航菜单',
+                'url' => module_link('module.menu.index', 'home_pc', $site, $module),
+                'permission' => 'home_pc',
+            ];
+        }
+        if ($module['package']['menu_web']) {
+            $business['系统功能'][] = [
+                'title' => '桌面个人空间菜单',
+                'url' => module_link('module.menu.index', 'space_pc', $site, $module),
+                'permission' => 'space_pc',
             ];
         }
         if ($module['package']['menu_mobile']) {
-            $menus['系统功能'][] = [
-                'title' => '手机会员中心菜单',
-                'url' => module_link('module.menu.index', 'mobile', $site, $module),
-                'permission' => 'menu_mobile',
+            $business['系统功能'][] = [
+                'title' => '手机个人空间菜单',
+                'url' => module_link('module.menu.index', 'space_mobile', $site, $module),
+                'permission' => 'space_mobile',
             ];
         }
         if ($module['package']['wx_replies']) {
-            $menus['微信回复'][] = [
+            $business['微信回复'][] = [
                 'title' => '文本消息回复',
                 'url' => module_link('module.text.index', '', $site, $module),
                 'permission' => 'wx_replies',
             ];
         }
         if ($module['package']['wx_cover']) {
-            $menus['微信回复'][] = [
+            $business['微信回复'][] = [
                 'title' => '模块封面入口',
                 'url' => module_link('module.cover.create', '', $site, $module),
                 'permission' => 'wx_cover',
             ];
         }
-        $module['menus'] = array_merge($menus,
-            include \Storage::drive('module')->path($module['name']) . '/Config/menus.php');
+        $module['business'] = array_merge($business,
+            include \Storage::drive('module')->path($module['name']) . '/Config/business.php');
         return $module;
     }
 
@@ -235,17 +260,12 @@ class ModuleRepository extends Repository
     public function getModuleFirstUrl(Site $site, Module $module, User $user): ?string
     {
         $module = $this->filterModuleMenu($site, $module, $user);
-        foreach ($module['menus'] as $title => $menus) {
-            foreach ($menus as $menu) {
+        foreach ($module['business'] as $title => $business) {
+            foreach ($business as $menu) {
                 if (module_access($menu['permission'], $module['name'])) {
                     return $menu['url'];
                 }
             }
         }
-    }
-
-    public function menus(string $type )
-    {
-
     }
 }

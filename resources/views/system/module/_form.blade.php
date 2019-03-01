@@ -69,20 +69,20 @@
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="menu_navigation" value="1"
-                                {{active_class($module['package']['menu_navigation']??false,'checked')}}> 桌面导航菜单
+                        <input class="form-check-input" type="checkbox" name="home_pc" value="1"
+                                {{active_class($module['package']['home_pc']??false,'checked')}}> 桌面导航菜单
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="menu_web" value="1"
-                                {{active_class($module['package']['menu_web']??false,'checked')}}> 桌面会员中心菜单
+                        <input class="form-check-input" type="checkbox" name="space_pc" value="1"
+                                {{active_class($module['package']['space_pc']??false,'checked')}}> 桌面个人空间菜单
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="menu_mobile" value="1"
-                                {{active_class($module['package']['menu_mobile']??false,'checked')}}> 手机会员中心菜单
+                        <input class="form-check-input" type="checkbox" name="space_mobile" value="1"
+                                {{active_class($module['package']['space_mobile']??false,'checked')}}> 手机个人空间菜单
                     </label>
                 </div>
             </div>
