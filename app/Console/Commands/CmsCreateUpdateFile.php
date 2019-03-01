@@ -19,14 +19,15 @@ class CmsCreateUpdateFile extends Command
         exec("git diff master dev --name-status", $files);
         exec('git log dev ^master --pretty=format:"%s"', $logs);
         $files = $this->format($files);
-        if (!empty($files)) {
-            file_put_contents('update_files.php', '<?php return ' . var_export([
-                    'build' => time(),
+//        if (!empty($files)) {
+            $build = time();
+            file_put_contents('updateLists/'.$build.'.php', '<?php return ' . var_export([
+                    'build' => $build,
                     'total' => count($files),
                     'logs' => $logs,
                     'files' => $files,
                 ], true) . ';');
-        }
+//        }
     }
 
     /**
