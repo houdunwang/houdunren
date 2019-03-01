@@ -29,15 +29,13 @@ class LoginController extends Controller
     public function store(Request $request, UserServer $server, UserRepository $userRepository)
     {
         if ($server->login($request->only(['username', 'password']))) {
-            $sid = request('sid', Domain::firstOrNew(['name' => host()])['site_id'] ?? 0);
-            $site = Site::find($sid);
+            $site = Site::find(Domain::firstOrNew(['name' => host()])['site_id'] ?? 0);
             if ($site) {
-                $userRepository->addSite(auth()->user(),$site, 'user');
+                $userRepository->addSite(auth()->user(), $site, 'user');
             }
             return redirect()->intended(route('home'));
-        } else {
-            return back()->with('error', '帐号或密码错误');
         }
+        return redirect(route('login'))->with('error', '帐号或密码错误');
     }
 
     public function logout()

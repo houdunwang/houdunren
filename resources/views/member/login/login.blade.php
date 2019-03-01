@@ -6,7 +6,6 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>会员登录</title>
-    <!--会员中心父级模板-->
     <meta name="csrf-token" content="{{csrf_token()}}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
@@ -15,7 +14,7 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     @include('layouts.hdjs')
 </head>
-<body class="">
+<body>
 @include('layouts.message')
 <div class="container">
     <div class="d-flex align-items-center justify-content-center w-100  mx-0" style=" height: 70vh">

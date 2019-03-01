@@ -26,5 +26,6 @@ class UserServer
         if (preg_match('/^1\d{10}$/', $user['username'])) {
             return auth()->attempt(['mobile' => $user['username'], 'password' => $user['password']]);
         }
+        return false;
     }
 }

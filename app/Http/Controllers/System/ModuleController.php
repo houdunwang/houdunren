@@ -19,6 +19,7 @@ class ModuleController extends Controller
     public function index(ModuleRepository $repository)
     {
         $modules = $repository->all();
+
         return view('system.module.index', compact('modules'));
     }
 
