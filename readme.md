@@ -43,63 +43,7 @@
 
 
 
-# 使用手册
-
-## 前端组件
-
-### tabs
-
-**使用效果**
-
-![image-20181226204749663](assets/image-20181226204749663-5828469.png)
-
-**示例代码**
-
-```
-@component('components.nav',['navs'=>[
-	['title'=>'文章列表','url'=>route('content.article.index'),'active'=>true],
-	['title'=>'发表文章','url'=>route('content.select_category')]
-]])
-@endcomponent
-```
-
-**属性说明**
-
-| 属性   | 说明         |
-| ------ | ------------ |
-| title  | 菜单名称     |
-| url    | 菜单链接     |
-| active | 当前高亮菜单 |
-
-## 内容评论
-
-系统内置了评论功能，可方便集成到各个模块中使用。
-
-模型需要引入 CommonRelation 这个 trait
-
-```
-class EduTopic extends Model
-{
-    use CommonRelation;
-    ...
-}
-```
-
-后台控制器
-
-```
-public function show(EduVideo $video,CommentRepository $commentRepository)
-{
-   	...
-   	# 获取评论列表，每页显示10条
-	$comments = $commentRepository->lists($video,10);
-	return view('edu.video.show', compact('video','comments'));
-}
-```
-
-前台视图调用
-
-```
-@include('common.comment',['comments'=>$comments,'model'=>$topic])
-```
+# 获取帮助
+官网: [http://www.hdcms.com](http://www.hdcms.com)
+手册: [http://doc.hdcms.com](http://doc.hdcms.com)
 
