@@ -1,12 +1,20 @@
 {
-    "name": "laravel/laravel",
+    "name": "houdunwang/hdcms",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "基于Laravel框架开发的开源免费的内容管理系统.",
     "keywords": [
-        "framework",
+        "hdcms",
+        "houdunren",
         "laravel"
     ],
+    "homepage": "http://www.hdcms.com/",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "敖向军",
+            "email": "2300071698@qq.com"
+        }
+    ],
     "require": {
         "php": "^7.1.3",
         "aliyuncs/oss-sdk-php": "^2.3",
@@ -61,7 +69,7 @@
             "Tests\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [
@@ -74,11 +82,5 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
-    },
-    "repositories": {
-        "wechat": {
-            "type": "path",
-            "url": "./package/wechat"
-        }
     }
 }
