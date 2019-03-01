@@ -4,6 +4,11 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
+/**
+ * 创建模块
+ * Class ModuleCreate
+ * @package App\Console\Commands
+ */
 class ModuleCreate extends Command
 {
     protected $signature = 'hdcms:module-make {name}';
@@ -15,11 +20,6 @@ class ModuleCreate extends Command
     protected $tplPath;
     //替换变量表
     protected $vars = [];
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = '创建新模块';
 
     public function handle()

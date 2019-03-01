@@ -115,14 +115,19 @@
     </div>
 </div>
 <div class="text-light admin-footer pb-5 mt-5 small text-center">
-    <div class="mb-1">
-        <a href="http://www.houdunwang.com" class="mr-2">实战培训</a>
-        <a href="http://www.hdcms.com" class="mr-2">开源框架</a>
-        <a href="http://www.houdunren.com">在线学习</a>
-    </div>
-    <span class="small">
+    @if (config_get('base.footer','','system'))
+        {!! config_get('base.footer','','system') !!}
+    @else
+        <div class="mb-1">
+            <a href="http://www.houdunwang.com" class="mr-2">实战培训</a>
+            <a href="http://www.hdcms.com" class="mr-2">开源框架</a>
+            <a href="http://www.houdunren.com">在线学习</a>
+        </div>
+        <span class="small">
         Powered by hdcms v5.7.0 © 2014-2019 www.hdcms.com
     </span>
+    @endif
+
 </div>
 @stack('js')
 <script>

@@ -42,14 +42,19 @@ return [
     */
 
     'disks' => [
-        'local' => [
+        'base' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => base_path('.'),
         ],
         'module' => [
             'driver' => 'local',
             'root' => base_path('Modules'),
         ],
+        'local' => [
+            'driver' => 'local',
+            'root' => storage_path('app'),
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
