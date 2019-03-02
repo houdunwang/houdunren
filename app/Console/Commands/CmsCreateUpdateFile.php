@@ -18,7 +18,7 @@ class CmsCreateUpdateFile extends Command
     {
         exec("git diff master dev --name-status", $files);
         exec('git log dev ^master --pretty=format:"%s"', $logs);
-        \Storage::driver('base')->makeDirectory('updateLists');
+        \Storage::disk('base')->makeDirectory('updateLists');
         $files = $this->format($files);
         if (!empty($files)) {
             $build = time();
