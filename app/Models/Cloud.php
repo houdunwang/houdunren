@@ -11,5 +11,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Cloud extends Model
 {
-    protected $fillable = ['build', 'token'];
+    protected $fillable = ['build', 'access_token','refresh_token'];
 }

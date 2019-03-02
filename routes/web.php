@@ -49,7 +49,7 @@ Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.
         Route::get('lock/{user}/{state}', 'UserController@lock')->name('user.lock');
         //应用
         Route::resource('app', 'AppController');
-        //云
+        //云帐号
         Route::resource('cloud','CloudController');
     });
 //系统更新

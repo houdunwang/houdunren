@@ -20,8 +20,8 @@ class UpdateController extends Controller
 
     public function __construct()
     {
-        $this->host = Cloud::find(1)['api_host'] ?? config('app.api_host');
-        $this->client = new Client(['base_uri' => $this->host . '/cms/']);
+        $this->host = Cloud::find(1)['api_host'] ?? config('app.api_host').'/api';
+        $this->client = new Client(['base_uri' => $this->host . '/shop/cms/']);
     }
 
     /**

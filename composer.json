@@ -25,6 +25,7 @@
         "hieu-le/active": "^3.5",
         "hisorange/browser-detect": "^3.1",
         "laravel/framework": "5.7.*",
+        "laravel/passport": "^7.2",
         "laravel/tinker": "^1.0",
         "nwidart/laravel-modules": "^4.0",
         "spatie/image": "^1.6",

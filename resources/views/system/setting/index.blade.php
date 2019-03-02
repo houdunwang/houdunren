@@ -6,7 +6,7 @@
             <i class="fa fa-cloud-download"></i>
             <span>一键更新</span>
         </a>
-        <a href="http://www.houdunwang.com?s=system/cloud/account" class="tile img-rounded">
+        <a href="{{route('system.cloud.create')}}" class="tile img-rounded">
             <i class="fa fa-globe"></i>
             <span>云帐号</span>
         </a>

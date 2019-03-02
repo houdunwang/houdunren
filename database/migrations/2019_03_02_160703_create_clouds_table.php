@@ -17,7 +17,8 @@ class CreateCloudsTable extends Migration
             $table->increments('id');
             $table->string('api_host')->nullable()->comment('云主机地址');
             $table->string('build')->nullable()->comment('版本编译号');
-            $table->string('token')->nullable()->comment('应用商店接口TOKEN');
+            $table->string('access_token',2000)->nullable()->comment('token');
+            $table->string('refresh_token',2000)->nullable()->comment('refresh_token');
             $table->timestamps();
         });
     }

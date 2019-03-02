@@ -15,7 +15,8 @@ class CloudSeeder extends Seeder
         \App\Models\Cloud::create([
             'api_host' => null,
             'build' => $update['build'],
-            'token' => null,
+            'access_token' => null,
+            'refresh_token' => null,
         ]);
     }
 }
