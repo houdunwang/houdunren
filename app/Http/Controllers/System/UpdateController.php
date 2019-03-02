@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\System;
 
+use App\Models\Cloud;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,7 +19,7 @@ class UpdateController extends Controller
 
     public function __construct()
     {
-        $this->host = Cloud::find(1)['api_host'] ?? config('app.api_host').'/app';
+        $this->host = Cloud::find(1)['api_host'] ?? config('app.api_host') . '/app';
         $this->client = new Client(['base_uri' => $this->host . '/cms/']);
     }
 
@@ -29,19 +30,18 @@ class UpdateController extends Controller
      */
     public function check()
     {
-        $build = 2009;
-        $response = $this->client->request('GET', "$build");
-        $update = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
-        //检测目录权限
-        foreach ($update['files'] as $file => $stat) {
-            if (!is_writable('../' . dirname($file))) {
-                return back()->with('info', dirname($file) . '目录\r\n没有写入权限,不能执行更新操作');
+        if ($build = Cloud::find(1)['build'] ?? null) {
+            $response = $this->client->request('GET', "$build");
+            $update = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+            //检测目录权限
+            foreach ($update['files'] as $file => $stat) {
+                if (!is_writable('../' . dirname($file))) {
+                    return back()->with('info', dirname($file) . '目录\r\n没有写入权限,不能执行更新操作');
+                }
             }
-        }
-        if ($update['build']) {
             $this->cache($update);
         }
-        return view('system.update.check', compact('update'));
+        return view('system.update.check', compact('update', 'build'));
     }
 
     /**
@@ -130,17 +130,16 @@ class UpdateController extends Controller
     {
         $cache = \Cache::get('updateLists');
         \Artisan::call('migrate');
-        $backupPath = "backup/{$cache['build']}";
-        \Storage::drive('base')->makeDirectory($backupPath);
-        //备份原文件
+        $buildPath = "backup/{$cache['build']}";
+        $storage = \Storage::drive('base');
+        $storage->makeDirectory($buildPath);
         foreach ($cache['files'] as $file => $stat) {
-            \Storage::drive('base')->move($file, "{$backupPath}/{$file}");
-        }
-        //更新文件
-        foreach ($cache['files'] as $file => $stat) {
-            \Storage::drive('base')->copy("backup/cms/{$file}", $file);
+            $storage->move($file, "{$buildPath}/{$file}");
+            $storage->move("backup/cms/{$file}", $file);
         }
         \Cache::forget('updateLists');
+        Cloud::find(1)->update(['build' => $cache['build']]);
+        $storage->deleteDirectory("backup/cms");
         return response(['code' => true]);
     }
 

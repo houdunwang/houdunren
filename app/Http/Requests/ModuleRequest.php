@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ModuleRequest extends FormRequest
 {
@@ -13,10 +14,15 @@ class ModuleRequest extends FormRequest
 
     public function rules()
     {
-
         return [
             'title' => 'required|max:10|unique:modules,title,' . request('id'),
-            'name' => 'sometimes|required|max:10|regex:/^[a-z]+$/i|unique:modules,name,' . request('id'),
+            'name' => [
+                'sometimes',
+                'required',
+                'max:10',
+                Rule::notIn(['app', 'system', 'shop', 'edu', 'article', 'admin', 'news', 'community']),
+                'regex:/^[a-z]+$/i|unique:modules,name,' . request('id'),
+            ],
             'thumb' => 'required',
         ];
     }

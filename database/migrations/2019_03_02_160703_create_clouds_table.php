@@ -15,9 +15,9 @@ class CreateCloudsTable extends Migration
     {
         Schema::create('clouds', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('api_host')->comment('云主机地址');
-            $table->string('build')->comment('版本编译号');
-            $table->string('token')->comment('应用商店接口TOKEN');
+            $table->string('api_host')->nullable()->comment('云主机地址');
+            $table->string('build')->nullable()->comment('版本编译号');
+            $table->string('token')->nullable()->comment('应用商店接口TOKEN');
             $table->timestamps();
         });
     }

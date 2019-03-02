@@ -26,17 +26,8 @@ class UploadController extends Controller
     public function upload(Request $request, UploadServer $uploadServer)
     {
         event(new UploadEvent('file', function ($path) {
-            die(json_encode(['file' => url($path), 'code' => 0]));
+            die(\GuzzleHttp\json_encode(['file' => url($path), 'code' => 0]));
         }));
-//        //普通上传
-//        if ($file = $request->file('file')) {
-//            $path = $uploadServer->upload($file);
-//            \Auth::user()->attachment()->create(['filename' => $file->getClientOriginalName(), 'path' => url($path)]);
-//            return ['file' => url($path), 'code' => 0];
-//        } elseif ($content = $request->input('file')) {
-//            $file = $uploadServer->uploadBase64Image($content);
-//            return ['file' => url($file), 'code' => 0];
-//        }
     }
 
     /**
