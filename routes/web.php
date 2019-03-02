@@ -51,6 +51,8 @@ Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.
         Route::resource('app', 'AppController');
         //云帐号
         Route::resource('cloud','CloudController');
+        //模块打包
+        Route::resource('zip','ZipController');
     });
 //系统更新
 Route::group(['middleware' => ['system'], 'prefix' => 'cloud', 'as' => 'cloud.', 'namespace' => 'System',],

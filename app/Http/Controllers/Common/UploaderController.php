@@ -36,7 +36,7 @@ class UploadController extends Controller
      */
     public function lists()
     {
-        $db = Attachment::where('user_id', auth()->id())->paginate(20);
+        $db = Attachment::where('user_id', auth()->id())->orderBy('id','DESC')->paginate(20);
         $attachments = $db->toArray();
         foreach ($attachments['data'] as $k => $v) {
             $attachments['data'][$k]['url'] = url($v['path']);

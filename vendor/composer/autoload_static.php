@@ -194,6 +194,7 @@ class ComposerStaticInit89c920f4718e7c0a21773993449dca38
             'Composer\\Semver\\' => 16,
             'Composer\\CaBundle\\' => 18,
             'Composer\\' => 9,
+            'Chumper\\Zipper\\' => 15,
         ),
         'B' => 
         array (
@@ -567,6 +568,10 @@ class ComposerStaticInit89c920f4718e7c0a21773993449dca38
         array (
             0 => __DIR__ . '/..' . '/composer/composer/src/Composer',
         ),
+        'Chumper\\Zipper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper',
+        ),
         'BeyondCode\\DumpServer\\' => 
         array (
             0 => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src',
@@ -677,6 +682,7 @@ class ComposerStaticInit89c920f4718e7c0a21773993449dca38
         'App\\Http\\Controllers\\System\\TemplateController' => __DIR__ . '/../..' . '/app/Http/Controllers/System/TemplateController.php',
         'App\\Http\\Controllers\\System\\UpdateController' => __DIR__ . '/../..' . '/app/Http/Controllers/System/UpdateController.php',
         'App\\Http\\Controllers\\System\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/System/UserController.php',
+        'App\\Http\\Controllers\\System\\ZipController' => __DIR__ . '/../..' . '/app/Http/Controllers/System/ZipController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\AdminMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminMiddleware.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -830,6 +836,11 @@ class ComposerStaticInit89c920f4718e7c0a21773993449dca38
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
         'Carbon\\Laravel\\ServiceProvider' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Laravel/ServiceProvider.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
+        'Chumper\\Zipper\\Facades\\Zipper' => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper/Facades/Zipper.php',
+        'Chumper\\Zipper\\Repositories\\RepositoryInterface' => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper/Repositories/RepositoryInterface.php',
+        'Chumper\\Zipper\\Repositories\\ZipRepository' => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper/Repositories/ZipRepository.php',
+        'Chumper\\Zipper\\Zipper' => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper/Zipper.php',
+        'Chumper\\Zipper\\ZipperServiceProvider' => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper/ZipperServiceProvider.php',
         'CloudSeeder' => __DIR__ . '/../..' . '/database/seeds/CloudSeeder.php',
         'Composer\\Autoload\\AutoloadGenerator' => __DIR__ . '/..' . '/composer/composer/src/Composer/Autoload/AutoloadGenerator.php',
         'Composer\\Autoload\\ClassLoader' => __DIR__ . '/..' . '/composer/composer/src/Composer/Autoload/ClassLoader.php',
@@ -3264,8 +3275,12 @@ class ComposerStaticInit89c920f4718e7c0a21773993449dca38
         'Modules\\App\\Http\\Controllers\\System\\HomeController' => __DIR__ . '/../..' . '/Modules/Shop/Http/Controllers/System/HomeController.php',
         'Modules\\Shop\\Database\\Seeders\\ShopDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Shop/Database/Seeders/ShopDatabaseSeeder.php',
         'Modules\\Shop\\Entities\\ShopCms' => __DIR__ . '/../..' . '/Modules/Shop/Entities/ShopCms.php',
+        'Modules\\Shop\\Entities\\ShopModule' => __DIR__ . '/../..' . '/Modules/Shop/Entities/ShopModule.php',
+        'Modules\\Shop\\Entities\\ShopPackage' => __DIR__ . '/../..' . '/Modules/Shop/Entities/ShopPackage.php',
         'Modules\\Shop\\Http\\Controllers\\Api\\CmsController' => __DIR__ . '/../..' . '/Modules/Shop/Http/Controllers/Api/CmsController.php',
         'Modules\\Shop\\Http\\Controllers\\CmsController' => __DIR__ . '/../..' . '/Modules/Shop/Http/Controllers/CmsController.php',
+        'Modules\\Shop\\Http\\Controllers\\ModuleController' => __DIR__ . '/../..' . '/Modules/Shop/Http/Controllers/ModuleController.php',
+        'Modules\\Shop\\Http\\Controllers\\PackageController' => __DIR__ . '/../..' . '/Modules/Shop/Http/Controllers/PackageController.php',
         'Modules\\Shop\\Http\\Controllers\\System\\ChatController' => __DIR__ . '/../..' . '/Modules/Shop/Http/Controllers/System/ChatController.php',
         'Modules\\Shop\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/Shop/Providers/RouteServiceProvider.php',
         'Modules\\Shop\\Providers\\ShopServiceProvider' => __DIR__ . '/../..' . '/Modules/Shop/Providers/ShopServiceProvider.php',

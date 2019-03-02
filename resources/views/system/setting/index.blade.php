@@ -16,9 +16,9 @@
         <a href="{{route('system.module.index')}}" class="tile img-rounded">
             <i class="fa fa-cubes"></i> <span>模块</span>
         </a>
-        <a href="?s=system/template/installed" class="tile img-rounded">
-            <i class="fa fa-file-code-o"></i> <span>模板</span>
-        </a>
+        {{--<a href="?s=system/template/installed" class="tile img-rounded">--}}
+            {{--<i class="fa fa-file-code-o"></i> <span>模板</span>--}}
+        {{--</a>--}}
     </div>
     <h5 class="page-header">用户管理</h5>
     <div class="clearfix">

@@ -42,10 +42,10 @@ class ModuleController extends Controller
      * @return string|null
      * @throws \Exception
      */
-    public function show(Module $module, ModuleRepository $moduleRepository)
-    {
-        return redirect($moduleRepository->getModuleFirstUrl($module));
-    }
+//    public function show(Module $module, ModuleRepository $moduleRepository)
+//    {
+//        return redirect($moduleRepository->getModuleFirstUrl(\site(),$module,auth()->user()));
+//    }
 
     public function edit(Module $module)
     {

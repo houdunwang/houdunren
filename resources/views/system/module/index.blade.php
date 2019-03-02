@@ -40,7 +40,7 @@
                                     @csrf @method('DELETE')
                                 </form>
                                 @if ($module['local'])
-                                    <a class="btn btn-outline-secondary" href="" data-container="body"
+                                    <a class="btn btn-outline-secondary" href="{{route('system.zip.edit',$module)}}" target="_blank" data-container="body"
                                        data-toggle="popover"
                                        data-placement="top" data-content="打包下载提到应用商店出售">打包下载</a>
                                 @endif
