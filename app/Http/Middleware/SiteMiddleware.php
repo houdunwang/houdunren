@@ -27,6 +27,11 @@ class SiteMiddleware
         }
         \site($site) && \module($module);
         config(['app.name' => \site()['name']]);
+//        if ($user = auth()->user()) {
+//            if (!$user->sites->contains(\site())) {
+//                dd(3);
+//            }
+//        }
         return $next($request);
     }
 }

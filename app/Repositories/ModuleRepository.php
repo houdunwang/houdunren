@@ -8,12 +8,14 @@
 
 namespace App\Repositories;
 
+use App\Exceptions\CustomException;
 use App\Models\Module;
 use App\Models\Site;
 use App\Repositories\Traits\ModuleTrait;
 use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;
+use mysql_xdevapi\Exception;
 use Spatie\Image\Image;
 use Spatie\Image\Manipulations;
 
@@ -66,17 +68,20 @@ class ModuleRepository extends Repository
     /**
      * 写入模块图片
      * @return bool
-     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     * @throws CustomException
      */
     protected function fitThumb(): bool
     {
-        $response = (new Client())->get($this->package['thumb']);
-        $thumb = \Storage::disk('module')->path($this->package['name']) . '/thumb.jpeg';
-        if (file_put_contents($thumb, $response->getBody()->getContents())) {
-            Image::load($thumb)->fit(Manipulations::FIT_CROP, 500, 300)->save();
-            return true;
+        try {
+            $response = (new Client())->get($this->package['thumb']);
+            $thumb = \Storage::drive('module')->path($this->package['name']) . '/thumb.jpeg';
+            if (file_put_contents($thumb, $response->getBody()->getContents())) {
+                Image::load($thumb)->fit(Manipulations::FIT_CROP, 500, 300)->save();
+                return true;
+            }
+        } catch (\Exception $exception) {
+            throw  new CustomException('缩略图错误');
         }
-        return false;
     }
 
     /**

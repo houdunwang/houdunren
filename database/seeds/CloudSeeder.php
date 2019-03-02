@@ -11,9 +11,10 @@ class CloudSeeder extends Seeder
      */
     public function run()
     {
+        $update =include base_path().'/update_files.php';
         \App\Models\Cloud::create([
             'api_host' => null,
-            'build' => time(),
+            'build' => $update['build'],
             'token' => null,
         ]);
     }

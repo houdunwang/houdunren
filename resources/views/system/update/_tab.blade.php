@@ -5,7 +5,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{active_class(if_route('cloud.update.check'),'active')}}" href="{{route('cloud.update.check')}}">
+        <a class="nav-link active" href="javascript:void(0);">
             一键更新
         </a>
     </li>

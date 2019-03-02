@@ -4,9 +4,22 @@
     </div>
     <div class="card-body">
         <div class="form-group row">
+            <label class="col-form-label col-sm-1 pt-0 text-right">
+                调试模式 <small class="text-secondary">(debug)</small>
+            </label>
+            <div class="col-sm-6">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label mr-3">
+                        <input class="form-check-input" type="checkbox" value="1" name="debug"
+                                {{active_class($config['debug']??false,'checked')}}> 开启
+                    </label>
+                </div>
+                <small class="text-muted d-block">开启调试模式可以看到错误信息，在二次开发或模块开发时使用</small>
+            </div>
+        </div>
+        <div class="form-group row">
             <label for="staticEmail" class="col-sm-1 col-form-label text-right">
-                后台标志
-                <small class="text-secondary">(logo)</small>
+                后台标志 <small class="text-secondary">(logo)</small>
             </label>
             <div class="col-sm-8">
                 <div class="input-group mb-3">
@@ -30,7 +43,7 @@
                 <small class="text-secondary">(footer)</small>
             </label>
             <div class="col-sm-6">
-                <textarea name="footer" class="form-control" cols="30" rows="3">{{$config['footer']}}</textarea>
+                <textarea name="footer" class="form-control" cols="30" rows="3">{{$config['footer']??''}}</textarea>
                 <small class="text-secondary">
                     后台页面底部信息支持HTML
                 </small>

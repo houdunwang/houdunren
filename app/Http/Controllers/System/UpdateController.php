@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\System;
 
+use App\Exceptions\CustomException;
 use App\Models\Cloud;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class UpdateController extends Controller
 
     public function __construct()
     {
-        $this->host = Cloud::find(1)['api_host'] ?? config('app.api_host') . '/app';
+        $this->host = Cloud::find(1)['api_host'] ?? config('app.api_host');
         $this->client = new Client(['base_uri' => $this->host . '/cms/']);
     }
 
@@ -30,17 +31,21 @@ class UpdateController extends Controller
      */
     public function check()
     {
-        $build = Cloud::find(1)['build'] ?? null;
-        $response = $this->client->request('GET', "$build");
-        $update = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
-        //检测目录权限
-        foreach ($update['files'] as $file => $stat) {
-            if (!is_writable('../' . dirname($file))) {
-                return back()->with('info', dirname($file) . '目录\r\n没有写入权限,不能执行更新操作');
+        try {
+            $cloud = Cloud::find(1) ?? null;
+            $response = $this->client->request('GET', $cloud['build']);
+            $update = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+            //检测目录权限
+            foreach ($update['files'] as $file => $stat) {
+                if (!is_writable('../' . dirname($file))) {
+                    return back()->with('info', dirname($file) . '目录\r\n没有写入权限,不能执行更新操作');
+                }
             }
+            $this->cache($update);
+            return view('system.update.check', compact('update', 'cloud'));
+        } catch (\Exception $e) {
+            return back()->with('info', '连接远程服务器失败');
         }
-        $this->cache($update);
-        return view('system.update.check', compact('update'));
     }
 
     /**
@@ -83,17 +88,20 @@ class UpdateController extends Controller
         }
         foreach ($cache['files'] as $file => $stat) {
             if ($stat != 'downloaded') {
-                $this->downFile($file);
-                return response(['message' => "file", 'file' => $file]);
+                try {
+                    $this->downFile($file);
+                    return response(['code' => 1, 'file' => $file]);
+                } catch (\Exception $e) {
+                    abort('500', $e->getMessage());
+                }
             }
         }
-        return response(['message' => 'success']);
+        return response(['code' => 2, 'message' => '文件下载完成']);
     }
 
     /**
      * 下载文件
      * @param string $file
-     * @return null
      * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
      */
     protected function downFile(string $file)

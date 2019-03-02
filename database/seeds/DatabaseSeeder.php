@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PackageSeeder::class,
             GroupSeeder::class,
-            GroupPackageSeeder::class
+            GroupPackageSeeder::class,
+            CloudSeeder::class,
         ]);
     }
 }
