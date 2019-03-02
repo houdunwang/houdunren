@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 /**
- * 生成CMS更新包
+ * 生成更新包
  * Class CmsUpdateZip
  * @package App\Console\Commands
  */
