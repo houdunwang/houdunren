@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\System;
 
+use App\Exceptions\CustomException;
 use GuzzleHttp\Client;
 use Houdunwang\WeChat\Build\Cache;
 use Illuminate\Http\Request;
@@ -39,7 +40,7 @@ class UpdateController extends Controller
             }
         }
         if ($update['build']) {
-            \Cache::forever('updateLists', $update);
+            $this->cache($update);
         }
         return view('system.update.check', compact('update'));
     }
@@ -51,7 +52,24 @@ class UpdateController extends Controller
     public function downloadShow()
     {
         $update = \Cache::get('updateLists');
+        if (!$update['total']) {
+            return redirect(route('cloud.update.check'));
+        }
         return view('system.update.download_show', compact('update'));
+    }
+
+    /**
+     * 缓存列表移除已经更新文件
+     * @return null
+     * @param $update
+     */
+    protected function cache($update)
+    {
+        $update['files'] = array_filter($update['files'], function ($stat) {
+            return $stat != 'downloaded';
+        });
+        $update['total'] = count($update['files']);
+        \Cache::forever('updateLists', $update);
     }
 
     /**
@@ -61,15 +79,14 @@ class UpdateController extends Controller
      */
     public function download()
     {
-        $cache = \Cache::get('updateLists');
-        if (!$cache) {
+        if (!($cache = \Cache::get('updateLists'))) {
             return redirect()->route('cloud.update.check');
         }
         foreach ($cache['files'] as $file => $stat) {
             if ($stat != 'downloaded') {
 //                try {
                 $this->downFile($file);
-                return response(['message' => "file"]);
+                return response(['message' => "file", 'file' => $file]);
 //                } catch (\Exception $exception) {
 //                    return response('下载失败：' . $exception->getMessage(), '500');
 //                }
@@ -87,18 +104,17 @@ class UpdateController extends Controller
      */
     protected function downFile(string $file)
     {
-        throw new \Exception('文件下载失败');
         $response = $this->client->request('POST', "file", ['form_params' => ['file' => $file]]);
         if ($response->getStatusCode() == 200) {
             $content = $response->getBody()->getContents();
             \Storage::drive('base')->makeDirectory('backup/cms/' . dirname($file));
             if (!file_put_contents('../backup/cms/' . $file, $content)) {
-                throw new \Exception('文件保存失败');
+                throw new \Exception('文件保存失败: backup/cms 目录不可写');
             }
+            $cache = \Cache::get('updateLists');
             $cache['files'][$file] = 'downloaded';
-            \Cache::forever('updateLists', $cache);
+            $this->cache($cache);
         }
-        throw new \Exception('文件下载失败');
     }
 
     /**
@@ -119,7 +135,7 @@ class UpdateController extends Controller
             foreach ($cache['files'] as $file => $stat) {
                 \Storage::drive('base')->move("backup/cms/{$file}", $file);
             }
-            return \Cache::forever('updateLists', $cache);
+            $this->cache($cache);
         } catch (\Exception $exception) {
 
         }
@@ -132,6 +148,6 @@ class UpdateController extends Controller
      */
     public function finish()
     {
-        return view('system . update . finish');
+        return view('system.update.finish');
     }
 }
