@@ -42,7 +42,8 @@ Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.
         //模块管理
         Route::resource('module', 'ModuleController');
         Route::get('moduleRefresh/{module}', 'ModuleController@refresh')->name('module.refresh');
-        Route::get('moduleLocal', 'ModuleController@local')->name('module.local');
+        Route::get('module_local', 'ModuleController@local')->name('module.local');
+        Route::get('module_local/{name}', 'ModuleController@install')->name('module.install');
         //用户管理
         Route::resource('user', 'UserController');
         //锁定解锁用户
@@ -50,9 +51,9 @@ Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.
         //应用
         Route::resource('app', 'AppController');
         //云帐号
-        Route::resource('cloud','CloudController');
+        Route::resource('cloud', 'CloudController');
         //模块打包
-        Route::resource('zip','ZipController');
+        Route::resource('zip', 'ZipController');
     });
 //系统更新
 Route::group(['middleware' => ['system'], 'prefix' => 'cloud', 'as' => 'cloud.', 'namespace' => 'System',],

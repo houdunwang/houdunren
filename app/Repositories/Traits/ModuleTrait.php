@@ -14,6 +14,8 @@ trait ModuleTrait
     protected $package = [
         //模块中文名称
         'title' => '',
+        //本地模块
+        'local' => true,
         //模块标识
         'name' => '',
         //预览图
@@ -43,11 +45,11 @@ trait ModuleTrait
     protected $menus = [
         //桌面会员中心菜单
         'member_pc' => [
-            ['title' => '会员中心菜单pc', 'url' => 'http://www.hdcms.com','permission' => ''],
+            ['title' => '会员中心菜单pc', 'url' => 'http://www.hdcms.com', 'permission' => ''],
         ],
         //移动端会员中心菜单
         'member_mobile' => [
-            ['title' => '会员中心菜单mobile', 'url' => 'http://www.houdunren.com','permission' => ''],
+            ['title' => '会员中心菜单mobile', 'url' => 'http://www.houdunren.com', 'permission' => ''],
         ],
     ];
     //业务菜单

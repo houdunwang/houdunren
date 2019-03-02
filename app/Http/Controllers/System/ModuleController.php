@@ -83,4 +83,25 @@ class ModuleController extends Controller
         $siteRepository->loadAllSitePermission();
         return back()->with('success', '模块刷新成功');
     }
+
+    /**
+     * 安装本地模块视图
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function local()
+    {
+        $dirs = \Storage::drive('module')->directories();
+        $names = Module::pluck('name') ?? collect();
+        $modules = [];
+        foreach (array_diff($dirs, $names->toArray()) as $dir) {
+            $modules[] = include \Storage::drive('module')->path($dir . '/Config/package.php');
+        }
+        return view('system.module.local', compact('modules'));
+    }
+
+    public function install(string $name, ModuleRepository $repository)
+    {
+        $repository->install($name);
+        return redirect()->route('system.module.index')->with('success', '模块安装成功');
+    }
 }

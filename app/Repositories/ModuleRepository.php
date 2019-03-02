@@ -15,7 +15,6 @@ use App\Repositories\Traits\ModuleTrait;
 use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;
-use mysql_xdevapi\Exception;
 use Spatie\Image\Image;
 use Spatie\Image\Manipulations;
 
@@ -29,14 +28,18 @@ class ModuleRepository extends Repository
     use ModuleTrait;
     protected $model = Module::class;
 
-    public function create(array $attributes)
+    /**
+     * 安装模块
+     * @param string $name 模块标识
+     * @return mixed
+     */
+    public function install(string $name)
     {
-        $attributes['name'] = ucfirst($attributes['name']);
-        $this->package = array_merge($this->package, $attributes);
-        \Artisan::call('cms:module-make', ['name' => $this->package['name']]);
-        //写入配置项
-        $this->fitThumb();
-        $this->writeConfig();
+        $this->package = include $this->configPath($name) . 'package.php';
+        $this->permissions = include $this->configPath($name) . 'permissions.php';
+        $this->business = include $this->configPath($name) . 'business.php';
+        $this->menus = include $this->configPath($name) . 'menus.php';
+        \Artisan::call('module:migrate', ['module' => $this->package['name']]);
         return parent::create([
             'title' => $this->package['title'],
             'name' => $this->package['name'],
@@ -47,6 +50,31 @@ class ModuleRepository extends Repository
         ]);
     }
 
+    public function create(array $attributes)
+    {
+        $attributes['name'] = ucfirst($attributes['name']);
+        $this->package = array_merge($this->package, $attributes);
+        \Artisan::call('cms:module-make', ['name' => $this->package['name']]);
+        //写入配置项
+        $this->fitThumb();
+        $this->writeConfig();
+//        return parent::create([
+//            'title' => $this->package['title'],
+//            'name' => $this->package['name'],
+//            'subscribe' => $this->package['subscribe'] ?? false,
+//            'local' => true,
+//            'package' => $this->package,
+//            'permissions' => $this->permissions,
+//        ]);
+    }
+
+    /**
+     * 更新模块配置
+     * @param Model $model
+     * @param array $attributes
+     * @return bool|void
+     * @throws CustomException
+     */
     public function update(Model $model, array $attributes)
     {
         $attributes = array_merge(array_except($this->package, ['name']), $attributes);
@@ -56,13 +84,12 @@ class ModuleRepository extends Repository
         $this->menus = include $this->configPath() . 'menus.php';
         $this->fitThumb();
         $this->writeConfig();
-        return parent::update($model, [
-            'title' => $this->package['title'],
-            'name' => $this->package['name'],
-            'local' => true,
-            'package' => $this->package,
-            'permissions' => $this->permissions,
-        ]);
+//        return parent::update($model, [
+//            'title' => $this->package['title'],
+//            'name' => $this->package['name'],
+//            'package' => $this->package,
+//            'permissions' => $this->permissions,
+//        ]);
     }
 
     /**
@@ -96,7 +123,8 @@ class ModuleRepository extends Repository
             'business.php' => $this->business,
             'menus.php' => $this->menus,
         ])->each(function ($data, $file) {
-            file_put_contents($this->configPath() . $file, '<?php return ' . var_export($data, true) . ';');
+            file_put_contents($this->configPath() . $file,
+                '<?php return ' . var_export($data, true) . ';');
         });
     }
 
@@ -107,7 +135,10 @@ class ModuleRepository extends Repository
      */
     public function delete(Model $model)
     {
-        \Storage::disk('module')->deleteDirectory($model['name']);
+        \Artisan::call('module:migrate-reset', ['module' => $this->package['name']]);
+        if (!$model['local']) {
+            \Storage::disk('module')->deleteDirectory($model['name']);
+        }
         return parent::delete($model);
     }
 
@@ -121,13 +152,15 @@ class ModuleRepository extends Repository
         $this->package = array_merge($this->package, include $this->configPath($model['name']) . 'package.php');
         $this->permissions = include $this->configPath($model['name']) . 'permissions.php';
         $this->business = include $this->configPath($model['name']) . 'business.php';
-        return parent::update($model, [
-            'title' => $this->package['title'],
-            'name' => $this->package['name'],
-            'local' => true,
-            'package' => $this->package,
-            'permissions' => $this->permissions,
-        ]);
+        $this->menus = include $this->configPath() . 'menus.php';
+        $this->writeConfig();
+//        return parent::update($model, [
+//            'title' => $this->package['title'],
+//            'name' => $this->package['name'],
+//            'local' => true,
+//            'package' => $this->package,
+//            'permissions' => $this->permissions,
+//        ]);
     }
 
     /**
