@@ -9,7 +9,9 @@ use App\Models\Site;
 use App\Models\Chat;
 use App\Repositories\ModuleRepository;
 use Houdunwang\WeChat\Build\Message\Message;
-
+/**
+ * 微信通信接口
+ */
 class ChatController extends Controller
 {
     protected $site;
