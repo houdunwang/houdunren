@@ -84,12 +84,8 @@ class UpdateController extends Controller
         }
         foreach ($cache['files'] as $file => $stat) {
             if ($stat != 'downloaded') {
-//                try {
                 $this->downFile($file);
                 return response(['message' => "file", 'file' => $file]);
-//                } catch (\Exception $exception) {
-//                    return response('下载失败：' . $exception->getMessage(), '500');
-//                }
             }
         }
         \Cache::forget('updateLists');
@@ -117,29 +113,31 @@ class UpdateController extends Controller
         }
     }
 
+    public function moveShow()
+    {
+        $update = \Cache::get('updateLists');
+        return view('system.update.move_show', compact('update'));
+    }
+
     /**
      * 移动文件
      */
-    protected function moveFile()
+    public function moveFile()
     {
-        try {
-            \Artisan::call('migrate');
-            $cache = \Cache::get('updateLists');
-            $backupPath = "backup/{$cache['build']}";
-            \Storage::drive('base')->makeDirectory($backupPath);
-            //备份原文件
-            foreach ($cache['files'] as $file => $stat) {
-                \Storage::drive('base')->copy($file, "{$backupPath}/{$file}");
-            }
-            //移动文件
-            foreach ($cache['files'] as $file => $stat) {
-                \Storage::drive('base')->move("backup/cms/{$file}", $file);
-            }
-            $this->cache($cache);
-        } catch (\Exception $exception) {
-
+        return;
+        \Artisan::call('migrate');
+        $cache = \Cache::get('updateLists');
+        $backupPath = "backup/{$cache['build']}";
+        \Storage::drive('base')->makeDirectory($backupPath);
+        //备份原文件
+        foreach ($cache['files'] as $file => $stat) {
+            \Storage::drive('base')->copy($file, "{$backupPath}/{$file}");
         }
-
+        //移动文件
+        foreach ($cache['files'] as $file => $stat) {
+            \Storage::drive('base')->move("backup/cms/{$file}", $file);
+        }
+        return response(['code' => true]);
     }
 
     /**

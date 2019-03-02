@@ -19,14 +19,14 @@
                         $("#lists").prepend('<li>'+response.data.file + "更新完成</li>");
                         setTimeout(function(){download()},1000);
                     } else {
-{{--                        location.href="{{route('cloud.upload.finish')}}";--}}
+                        //下载完成请求移动
+                        location.href="{{route('cloud.update.move')}}";
                     }
                 }).catch(function (error) {
                     hdjs.info(error.response.data.message);
                 })
             })
         }
-
         download();
     </script>
 @endpush

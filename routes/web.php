@@ -56,6 +56,8 @@ Route::group(['middleware' => ['system'], 'prefix' => 'cloud', 'as' => 'cloud.',
         Route::get('update/check', 'UpdateController@check')->name('update.check');
         Route::get('update/download', 'UpdateController@downloadShow')->name('update.download');
         Route::post('update/download', 'UpdateController@download')->name('update.download');
+        Route::get('update/move', 'UpdateController@moveShow')->name('update.move');
+        Route::post('update/move', 'UpdateController@moveFile')->name('update.move');
         Route::get('update/finish', 'UpdateController@finish')->name('upload.finish');
     });
 //站点
