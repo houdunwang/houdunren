@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\System;
 
-use App\Exceptions\CustomException;
 use GuzzleHttp\Client;
-use Houdunwang\WeChat\Build\Cache;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,10 +14,11 @@ use App\Http\Controllers\Controller;
 class UpdateController extends Controller
 {
     protected $client;
-    protected $host = 'http://test.hdcms.com/api/app';
+    protected $host;
 
     public function __construct()
     {
+        $this->host = Cloud::find(1)['api_host'] ?? config('app.api_host').'/app';
         $this->client = new Client(['base_uri' => $this->host . '/cms/']);
     }
 
@@ -129,20 +128,19 @@ class UpdateController extends Controller
      */
     public function moveFile()
     {
-        \Artisan::call('migrate');
         $cache = \Cache::get('updateLists');
-        return $cache['files'];
+        \Artisan::call('migrate');
         $backupPath = "backup/{$cache['build']}";
         \Storage::drive('base')->makeDirectory($backupPath);
         //备份原文件
         foreach ($cache['files'] as $file => $stat) {
-            \Storage::drive('base')->copy($file, "{$backupPath}/{$file}");
+            \Storage::drive('base')->move($file, "{$backupPath}/{$file}");
         }
-        //移动文件
+        //更新文件
         foreach ($cache['files'] as $file => $stat) {
-            \Storage::drive('base')->move("backup/cms/{$file}", $file);
+            \Storage::drive('base')->copy("backup/cms/{$file}", $file);
         }
-//        \Cache::forget('updateLists');
+        \Cache::forget('updateLists');
         return response(['code' => true]);
     }
 
