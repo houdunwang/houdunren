@@ -1,5 +1,6 @@
 @extends('layouts.system')
 @section('content')
+    @include('system.update._tab')
     <div class="card">
         <div class="card-header">
             更新完成

@@ -1,5 +1,6 @@
 @extends('layouts.system')
 @section('content')
+    @include('system.update._tab')
     <div class="alert alert-danger" role="alert">
         本次共需要更新 {{$update['download_total']}} 个文件，请不要关闭窗口，如果长时间无响应可以刷新当前页面。
     </div>

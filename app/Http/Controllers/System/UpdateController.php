@@ -30,18 +30,17 @@ class UpdateController extends Controller
      */
     public function check()
     {
-        if ($build = Cloud::find(1)['build'] ?? null) {
-            $response = $this->client->request('GET', "$build");
-            $update = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
-            //检测目录权限
-            foreach ($update['files'] as $file => $stat) {
-                if (!is_writable('../' . dirname($file))) {
-                    return back()->with('info', dirname($file) . '目录\r\n没有写入权限,不能执行更新操作');
-                }
+        $build = Cloud::find(1)['build'] ?? null;
+        $response = $this->client->request('GET', "$build");
+        $update = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        //检测目录权限
+        foreach ($update['files'] as $file => $stat) {
+            if (!is_writable('../' . dirname($file))) {
+                return back()->with('info', dirname($file) . '目录\r\n没有写入权限,不能执行更新操作');
             }
-            $this->cache($update);
         }
-        return view('system.update.check', compact('update', 'build'));
+        $this->cache($update);
+        return view('system.update.check', compact('update'));
     }
 
     /**

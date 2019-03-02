@@ -1,5 +1,6 @@
 @extends('layouts.system')
 @section('content')
+    @include('system.update._tab')
     @if($update['total'])
         <div class="alert alert-success" role="alert">
             本次共需要更新 {{$update['total']}} 个文件，请不要关闭窗口
@@ -21,7 +22,7 @@
                 温馨提示
             </div>
             <div class="card-body">
-                恭喜您！使用的是最新版本
+                <i class="fa fa-info-circle"></i> 当前系统是最新版本。
             </div>
         </div>
     @endif
