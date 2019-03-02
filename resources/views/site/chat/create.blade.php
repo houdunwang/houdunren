@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.system')
 @section('content')
     @include('site.chat._tabs')
     <form action="{{route('site.chat.store',[$site])}}" method="post">

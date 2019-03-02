@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit7b70807b8c283799e4abb98538ce22e6
+class ComposerStaticInit89c920f4718e7c0a21773993449dca38
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -696,6 +696,7 @@ class ComposerStaticInit7b70807b8c283799e4abb98538ce22e6
         'App\\Repositories\\ChatRepository' => __DIR__ . '/../..' . '/app/Repositories/ChatRepository.php',
         'App\\Repositories\\ConfigRepository' => __DIR__ . '/../..' . '/app/Repositories/ConfigRepository.php',
         'App\\Repositories\\GroupRepository' => __DIR__ . '/../..' . '/app/Repositories/GroupRepository.php',
+        'App\\Repositories\\MenuRepository' => __DIR__ . '/../..' . '/app/Repositories/MenuRepository.php',
         'App\\Repositories\\ModuleRepository' => __DIR__ . '/../..' . '/app/Repositories/ModuleRepository.php',
         'App\\Repositories\\PackageRepository' => __DIR__ . '/../..' . '/app/Repositories/PackageRepository.php',
         'App\\Repositories\\PermissionRepository' => __DIR__ . '/../..' . '/app/Repositories/PermissionRepository.php',
@@ -3084,6 +3085,14 @@ class ComposerStaticInit7b70807b8c283799e4abb98538ce22e6
         'Mockery\\Undefined' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Undefined.php',
         'Mockery\\VerificationDirector' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationDirector.php',
         'Mockery\\VerificationExpectation' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationExpectation.php',
+        'Modules\\App\\Database\\Seeders\\AppDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/App/Database/Seeders/AppDatabaseSeeder.php',
+        'Modules\\App\\Entities\\AppCms' => __DIR__ . '/../..' . '/Modules/App/Entities/AppCms.php',
+        'Modules\\App\\Http\\Controllers\\Api\\CmsController' => __DIR__ . '/../..' . '/Modules/App/Http/Controllers/Api/CmsController.php',
+        'Modules\\App\\Http\\Controllers\\CmsController' => __DIR__ . '/../..' . '/Modules/App/Http/Controllers/CmsController.php',
+        'Modules\\App\\Http\\Controllers\\System\\HomeController' => __DIR__ . '/../..' . '/Modules/App/Http/Controllers/System/HomeController.php',
+        'Modules\\App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/Modules/App/Providers/AppServiceProvider.php',
+        'Modules\\App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/App/Providers/RouteServiceProvider.php',
+        'Modules\\Shop\\Http\\Controllers\\System\\ChatController' => __DIR__ . '/../..' . '/Modules/App/Http/Controllers/System/ChatController.php',
         'Monolog\\ErrorHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/ErrorHandler.php',
         'Monolog\\Formatter\\ChromePHPFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/ChromePHPFormatter.php',
         'Monolog\\Formatter\\ElasticaFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/ElasticaFormatter.php',
@@ -5365,11 +5374,11 @@ class ComposerStaticInit7b70807b8c283799e4abb98538ce22e6
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit7b70807b8c283799e4abb98538ce22e6::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit7b70807b8c283799e4abb98538ce22e6::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit7b70807b8c283799e4abb98538ce22e6::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit7b70807b8c283799e4abb98538ce22e6::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit7b70807b8c283799e4abb98538ce22e6::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit89c920f4718e7c0a21773993449dca38::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit89c920f4718e7c0a21773993449dca38::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit89c920f4718e7c0a21773993449dca38::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit89c920f4718e7c0a21773993449dca38::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit89c920f4718e7c0a21773993449dca38::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.system')
 @section('content')
     <div class="clearfix">
         <div class="input-group">

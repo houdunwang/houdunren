@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.system')
 @section('content')
     @include('site.chat._tabs')
     <div class="card">

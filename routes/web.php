@@ -18,15 +18,16 @@ Route::group(['prefix' => 'common', 'as' => 'common.'], function () {
         'Common\NotificationController@code')->name('notification.code')->middleware('site');
 });
 //会员中心
-Route::get('member', 'Member\HomeController')->middleware(['auth','site'])->name('member');
-Route::group(['middleware' => ['auth','site'], 'prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.'], function () {
-    //资料修改
-    Route::resource('info', 'InfoController');
-    Route::resource('icon', 'IconController');
-    Route::resource('mail', 'MailController');
-    Route::resource('mobile','MobileController');
-    Route::resource('change-password', 'ChangePasswordController');
-});
+Route::get('member', 'Member\HomeController')->middleware(['auth', 'site'])->name('member');
+Route::group(['middleware' => ['auth', 'site'], 'prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.'],
+    function () {
+        //资料修改
+        Route::resource('info', 'InfoController');
+        Route::resource('icon', 'IconController');
+        Route::resource('mail', 'MailController');
+        Route::resource('mobile', 'MobileController');
+        Route::resource('change-password', 'ChangePasswordController');
+    });
 //系统
 Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.', 'namespace' => 'System'],
     function () {
@@ -48,6 +49,14 @@ Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.
         Route::get('lock/{user}/{state}', 'UserController@lock')->name('user.lock');
         //应用
         Route::resource('app', 'AppController');
+    });
+//系统更新
+Route::group(['middleware' => ['system'], 'prefix' => 'cloud', 'as' => 'cloud.', 'namespace' => 'System',],
+    function () {
+        Route::get('update/check', 'UpdateController@check')->name('update.check');
+        Route::get('update/download', 'UpdateController@downloadShow')->name('update.download');
+        Route::post('update/download', 'UpdateController@download')->name('update.download');
+        Route::get('update/finish', 'UpdateController@finish')->name('upload.finish');
     });
 //站点
 Route::group(['middleware' => ['auth'], 'prefix' => 'site', 'as' => 'site.', 'namespace' => 'Site'], function () {

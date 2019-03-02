@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.system')
 @inject('SiteRepository','App\Repositories\SiteRepository')
 @section('content')
     <ol class="breadcrumb small">

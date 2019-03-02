@@ -118,38 +118,6 @@ trait HasPermissions
      */
     public function hasPermissionTo($permission, $guardName = null): bool
     {
-        if (! is_string($permission) && ! is_int($permission) && ! $permission instanceof Permission) {
-            throw new PermissionDoesNotExist;
-        }
-
-        $registrar = app(PermissionRegistrar::class);
-        if (! $registrar::$cacheIsTaggable) {
-            return $this->hasUncachedPermissionTo($permission, $guardName);
-        }
-
-        return $registrar->getCacheStore()
-            ->tags($this->getCacheTags($permission))
-            ->remember(
-                $this->getPermissionCacheKey($permission),
-                $registrar::$cacheExpirationTime,
-                function () use ($permission, $guardName) {
-                    return $this->hasUncachedPermissionTo($permission, $guardName);
-                }
-            );
-    }
-
-    /**
-     * Check the uncached permissions for the model.
-     *
-     * @param string|int|Permission $permission
-     * @param string|null $guardName
-     *
-     * @return bool
-     *
-     * @throws PermissionDoesNotExist
-     */
-    public function hasUncachedPermissionTo($permission, $guardName = null): bool
-    {
         $permissionClass = $this->getPermissionClass();
 
         if (is_string($permission)) {
@@ -174,6 +142,15 @@ trait HasPermissions
     }
 
     /**
+     * @deprecated since 2.35.0
+     * @alias of hasPermissionTo()
+     */
+    public function hasUncachedPermissionTo($permission, $guardName = null): bool
+    {
+        return $this->hasPermissionTo($permission, $guardName);
+    }
+
+    /**
      * An alias to hasPermissionTo(), but avoids throwing an exception.
      *
      * @param string|int|\Spatie\Permission\Contracts\Permission $permission
@@ -188,71 +165,6 @@ trait HasPermissions
         } catch (PermissionDoesNotExist $e) {
             return false;
         }
-    }
-
-    /**
-     * Construct the key for the cache entry.
-     *
-     * @param null|string|int|\Spatie\Permission\Contracts\Permission $permission
-     *
-     * @return string
-     */
-    protected function getPermissionCacheKey($permission = null)
-    {
-        $key = PermissionRegistrar::$cacheKey.'.'.$this->getClassCacheString();
-
-        if ($permission !== null) {
-            $key .= $this->getPermissionCacheString($permission);
-        }
-
-        return $key;
-    }
-
-    /**
-     * Construct the tags for the cache entry.
-     *
-     * @param null|string|int|\Spatie\Permission\Contracts\Permission $permission
-     *
-     * @return array
-     */
-    protected function getCacheTags($permission = null)
-    {
-        $tags = [
-            PermissionRegistrar::$cacheKey,
-            $this->getClassCacheString(),
-        ];
-
-        if ($permission !== null) {
-            $tags[] = $this->getPermissionCacheString($permission);
-        }
-
-        return $tags;
-    }
-
-    /**
-     * Get the key to cache the model by.
-     *
-     * @return string
-     */
-    private function getClassCacheString()
-    {
-        return str_replace('\\', '.', get_class($this)).'.'.$this->getKey();
-    }
-
-    /**
-     * Get the key to cache the permission by.
-     *
-     * @param string|int|\Spatie\Permission\Contracts\Permission $permission
-     *
-     * @return mixed
-     */
-    protected function getPermissionCacheString($permission)
-    {
-        if ($permission instanceof Permission) {
-            $permission = $permission[PermissionRegistrar::$cacheModelKey];
-        }
-
-        return str_replace('\\', '.', Permission::class).'.'.$permission;
     }
 
     /**
@@ -363,28 +275,13 @@ trait HasPermissions
      */
     public function getAllPermissions(): Collection
     {
-        $functionGetAllPermissions = function () {
-            $permissions = $this->permissions;
+        $permissions = $this->permissions;
 
-            if ($this->roles) {
-                $permissions = $permissions->merge($this->getPermissionsViaRoles());
-            }
-
-            return $permissions->sort()->values();
-        };
-
-        $registrar = app(PermissionRegistrar::class);
-        if ($registrar::$cacheIsTaggable) {
-            return $registrar->getCacheStore()
-                ->tags($this->getCacheTags())
-                ->remember(
-                    $this->getPermissionCacheKey(),
-                    $registrar::$cacheExpirationTime,
-                    $functionGetAllPermissions
-                );
+        if ($this->roles) {
+            $permissions = $permissions->merge($this->getPermissionsViaRoles());
         }
 
-        return $functionGetAllPermissions();
+        return $permissions->sort()->values();
     }
 
     /**
@@ -399,6 +296,10 @@ trait HasPermissions
         $permissions = collect($permissions)
             ->flatten()
             ->map(function ($permission) {
+                if (empty($permission)) {
+                    return false;
+                }
+
                 return $this->getStoredPermission($permission);
             })
             ->filter(function ($permission) {
@@ -466,6 +367,11 @@ trait HasPermissions
         $this->load('permissions');
 
         return $this;
+    }
+
+    public function getPermissionNames(): Collection
+    {
+        return $this->permissions->pluck('name');
     }
 
     /**

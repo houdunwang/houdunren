@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.system')
 @section('content')
     <ul class="nav nav-tabs mb-2">
         <li class="nav-item">

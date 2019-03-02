@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.system')
 @section('content')
 <form method="post" class="form-horizontal" method="post" action="{{route('system.setting.update',$name)}}">
         @include('system.setting._tabs',['name'=>$name])

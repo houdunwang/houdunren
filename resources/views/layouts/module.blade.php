@@ -18,7 +18,7 @@
 </head>
 <body class="admin-site">
 @include('layouts.message')
-@include('layouts.site_header')
+@include('layouts.components.header')
 <div class="container-fluid mt-3 mb-5">
     <div class="row">
         <div class="col-sm-3 col-md-2">

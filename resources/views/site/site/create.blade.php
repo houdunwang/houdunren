@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.system')
 @section('content')
     <form role="form" method="post" action="{{route('site.site.store')}}" class="form-horizontal">
         @csrf
