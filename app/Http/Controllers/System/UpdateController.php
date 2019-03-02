@@ -65,10 +65,11 @@ class UpdateController extends Controller
      */
     protected function cache($update)
     {
-        $update['files'] = array_filter($update['files'], function ($stat) {
-            return $stat != 'downloaded';
+        $update['download_files'] = array_filter($update['files'], function ($stat) {
+            return $stat == 'downloaded';
         });
         $update['total'] = count($update['files']);
+        $update['download_total'] = $update['total'] - count($update['download_files']);
         \Cache::forever('updateLists', $update);
     }
 
@@ -88,7 +89,6 @@ class UpdateController extends Controller
                 return response(['message' => "file", 'file' => $file]);
             }
         }
-        \Cache::forget('updateLists');
         return response(['message' => 'success']);
     }
 
@@ -113,6 +113,10 @@ class UpdateController extends Controller
         }
     }
 
+    /**
+     * 备份旧版本与更新新文件
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function moveShow()
     {
         $update = \Cache::get('updateLists');
@@ -120,13 +124,14 @@ class UpdateController extends Controller
     }
 
     /**
-     * 移动文件
+     * 备份旧版本与更新新文件
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function moveFile()
     {
-        return;
         \Artisan::call('migrate');
         $cache = \Cache::get('updateLists');
+        return $cache['files'];
         $backupPath = "backup/{$cache['build']}";
         \Storage::drive('base')->makeDirectory($backupPath);
         //备份原文件
@@ -137,6 +142,7 @@ class UpdateController extends Controller
         foreach ($cache['files'] as $file => $stat) {
             \Storage::drive('base')->move("backup/cms/{$file}", $file);
         }
+//        \Cache::forget('updateLists');
         return response(['code' => true]);
     }
 

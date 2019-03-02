@@ -16,6 +16,7 @@
     <script>
         require(['hdjs', 'axios', 'jquery'], function (hdjs, axios, $) {
             axios.post('{{route('cloud.update.move')}}').then((response) => {
+                console.log(response.data);
                 if (response.data.code) {
                     location.href = "{{route('cloud.upload.finish')}}";
                 }
