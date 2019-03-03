@@ -1,6 +1,6 @@
 <?php
 Route::get('/', 'Module\DomainController@index')->middleware('site')->name('home');
-//Route::get('home', 'Site\SiteController@index')->name('home')->middleware('auth');
+Route::get('home', 'Site\SiteController@index')->name('home')->middleware('auth');
 //登录注册
 Route::get('login', 'Member\LoginController@login')->name('login');
 Route::post('login', 'Member\LoginController@store')->name('login');
