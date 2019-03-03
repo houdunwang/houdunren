@@ -6,6 +6,7 @@
  * |    Author: 向军大叔 <www.aoxiangjun.com>
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Http\Controllers\System;
 
 use App\Exceptions\ResponseHttpException;
@@ -115,7 +116,7 @@ class UpdateController extends Controller
         if ($response->getStatusCode() == 200) {
             $content = $response->getBody()->getContents();
             \Storage::drive('base')->makeDirectory('backup/cms/' . dirname($file));
-            if (!file_put_contents('../backup/cms/' . $file, $content)) {
+            if (file_put_contents('../backup/cms/' . $file, $content)===false) {
                 throw new \Exception('文件保存失败: backup/cms 目录不可写');
             }
             $cache = \Cache::get('updateLists');
@@ -147,12 +148,16 @@ class UpdateController extends Controller
         $storage = \Storage::drive('base');
         $storage->makeDirectory($buildPath);
         foreach ($cache['files'] as $file => $stat) {
-            $storage->move($file, "{$buildPath}/{$file}");
-            $storage->move("backup/cms/{$file}", $file);
+            try {
+                $storage->move($file, "{$buildPath}/{$file}");
+                $storage->move("backup/cms/{$file}", $file);
+            } catch (\Exception $exception) {
+                throw new ResponseHttpException("备份文件失败\n{$buildPath}/{$file}文件已经存在");
+            }
         }
         \Cache::forget('updateLists');
         Cloud::find(1)->update(['build' => $cache['build']]);
-        put_contents_file('version.php', ['build' => $cache['build']);
+        put_contents_file('version.php', ['build' => $cache['build']]);
         $storage->deleteDirectory("backup/cms");
         return response(['code' => true]);
     }

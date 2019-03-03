@@ -39,7 +39,7 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto mt-lg-0">
                     <li class="nav-item mr-3">
-                        <a class="nav-link " href="#">应用列表</a>
+                        <a class="nav-link " href="#">应用商店</a>
                     </li>
                     <li class="nav-item mr-3">
                         <a class="nav-link " href="http://doc.hdcms.com">在线手册</a>
