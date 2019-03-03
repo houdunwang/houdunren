@@ -147,3 +147,19 @@ function number_random($len = 5)
     }
     return $number;
 }
+
+/**
+ * 写入文件内容
+ * @param string $file 文件名
+ * @param array $data 内容数据
+ * @return bool
+ * @throws \App\Exceptions\ResponseHttpException
+ */
+function put_contents_file(string $file, array $data): bool
+{
+    $content = '<?php return ' . var_export($data, true) . ';';
+    if (file_put_contents($file, $content) === false) {
+        throw new \App\Exceptions\ResponseHttpException('文件写入失败');
+    }
+    return true;
+}

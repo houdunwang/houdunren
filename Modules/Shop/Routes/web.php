@@ -11,13 +11,24 @@ Route::group(['prefix' => 'shop', 'as' => 'shop.', 'middleware' => ['site']], fu
 //    Route::resource('test', 'AppController');
 });
 
-Route::group(['prefix' => 'shop', 'as' => 'shop.', 'middleware' => ['admin']], function () {
-    Route::resource('cms', 'CmsController');
-});
+Route::group([
+    'prefix' => 'shop/admin',
+    'as' => 'shop.admin.',
+    'namespace' => 'Admin',
+    'middleware' => ['admin'],
+],
+    function () {
+        Route::resource('cms', 'CmsController');
+    });
 
-Route::group(['as' => 'shop.', 'prefix' => 'shop', 'middleware' => ['auth','site']], function () {
-    Route::resource('module','ModuleController');
-    Route::resource('package','PackageController');
+Route::group([
+    'prefix' => 'shop/member',
+    'as' => 'shop.member.',
+    'namespace' => 'Member',
+    'middleware' => ['auth', 'site'],
+], function () {
+    Route::resource('module', 'ModuleController');
+    Route::resource('package', 'PackageController');
 });
 
 

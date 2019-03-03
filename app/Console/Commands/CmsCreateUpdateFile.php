@@ -22,13 +22,26 @@ class CmsCreateUpdateFile extends Command
         $files = $this->format($files);
         if (!empty($files)) {
             $build = time();
-            file_put_contents('updateLists/'.$build.'.php', '<?php return ' . var_export([
-                    'build' => $build,
-                    'total' => count($files),
-                    'logs' => $logs,
-                    'files' => $files,
-                ], true) . ';');
+            put_contents_file("updateLists/{$build}.php",[
+                'build' => $build,
+                'total' => count($files),
+                'logs' => $logs,
+                'files' => $files,
+            ]);
+            put_contents_file('version.php',['build'=>$build]);
         }
+    }
+
+    /**
+     * 写入文件
+     * @param string $file
+     * @param array $data
+     * @return bool|int
+     */
+    protected function filePutContent(string $file, array $data)
+    {
+        $content = '<?php return ' . var_export($data, true) . ';';
+        return file_put_contents($file, $content);
     }
 
     /**

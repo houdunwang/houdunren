@@ -16,7 +16,11 @@ class CmsController extends Controller
     public function index($build)
     {
         $cms = ShopCms::where('build', '>', $build)->orderBy('id', 'desc')->get();
-        $response = ['build' => $cms->first()['build'], 'logs' => [], 'files' => []];
+        $response = [
+            'build' => $cms->first()['build'],
+            'logs' => [],
+            'files' => [],
+        ];
         foreach ($cms as $c) {
             $response['logs'] = array_unique(array_merge($response['logs'], $c['logs']));
             $response['files'] = array_merge($response['files'], $c['files']);

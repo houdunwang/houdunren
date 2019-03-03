@@ -2,8 +2,8 @@
 @section('content')
     <ul class="nav nav-tabs mb-2">
         <li class="nav-item">
-            <a class="nav-link {{active_class(if_route('shop.module.index'),'active')}}"
-               href="{{module_link('shop.module.index')}}">模块列表</a>
+            <a class="nav-link {{active_class(if_route('shop.member.module.index'),'active')}}"
+               href="{{module_link('shop.member.module.index')}}">模块列表</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active"
@@ -12,7 +12,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{module_link('shop.module.create')}}">
+            <a class="nav-link" href="{{module_link('shop.member.module.create')}}">
                 添加压缩包
             </a>
         </li>
@@ -46,7 +46,7 @@
                                 <a class="btn btn-outline-success" href="{{$package['path']}}">
                                     下载压缩包
                                 </a>
-                                <form action="{{module_link('shop.package.destroy',$package)}}" method="post">
+                                <form action="{{module_link('shop.member.package.destroy',$package)}}" method="post">
                                     @csrf @method('DELETE')
                                 </form>
                                 <button type="button" class="btn btn-outline-danger" onclick="destroy(this)">

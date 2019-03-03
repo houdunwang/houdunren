@@ -1,4 +1,11 @@
 <?php
+/** .-------------------------------------------------------------------
+ * |  Software: [hdcms framework]
+ * |      Site: www.hdcms.com
+ * |-------------------------------------------------------------------
+ * |    Author: 向军 <www.aoxiangjun.com>
+ * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
+ * '-------------------------------------------------------------------*/
 
 namespace App\Http\Controllers\Module;
 
@@ -18,13 +25,13 @@ class MenuController extends Controller
     {
         $menus = $menu->type($type)->get();
         $typeName = $menu->getTypeName($type);
-        return view('module.menu.index', compact('menus', 'type','typeName'));
+        return view('module.menu.index', compact('menus', 'type', 'typeName'));
     }
 
-    public function create($type,Menu $menu)
+    public function create($type, Menu $menu)
     {
         $typeName = $menu->getTypeName($type);
-        return view('module.menu.create', compact('type','typeName'));
+        return view('module.menu.create', compact('type', 'typeName'));
     }
 
     public function store(MenuRequest $request, $type)
@@ -40,7 +47,7 @@ class MenuController extends Controller
     public function edit($type, Menu $menu)
     {
         $typeName = $menu->getTypeName($type);
-        return view('module.menu.edit', compact('menu', 'type','typeName'));
+        return view('module.menu.edit', compact('menu', 'type', 'typeName'));
     }
 
     public function update($type, Menu $menu, MenuRequest $request)

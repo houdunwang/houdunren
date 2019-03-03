@@ -1,28 +1,38 @@
 <?php
 
-namespace Modules\Shop\Http\Controllers;
+namespace Modules\Shop\Http\Controllers\Member;
 
 use App\Exceptions\ResponseHttpException;
 use Chumper\Zipper\Zipper;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Shop\Entities\ShopModule;
 
+/**
+ * 模块管理
+ * Class ModuleController
+ * @package Modules\Shop\Http\Controllers\Member
+ */
 class ModuleController extends Controller
 {
     use AuthorizesRequests;
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $modules = ShopModule::paginate(10);
-        return view('shop::module.index', compact('modules'));
+        return view('shop::member.module.index', compact('modules'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
-        return view('shop::module.create');
+        return view('shop::member.module.create');
     }
 
     /**
@@ -40,7 +50,7 @@ class ModuleController extends Controller
             ShopModule::updateOrCreate(['name' => $config['name']], $config);
             $module = ShopModule::where(['name' => $config['name']])->first();
             $module->packages()->create(['path' => $request->input('zip')]);
-            return redirect()->route('shop.module.edit', $module);
+            return redirect(module_link('shop.member.module.edit', $module))->with('success', '模块保存成功');
         } catch (\Exception $e) {
             throw new ResponseHttpException($e->getMessage());
         }
@@ -83,20 +93,36 @@ class ModuleController extends Controller
         return $config;
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function edit($id)
     {
         $module = ShopModule::find($id);
         $this->authorize('update', $module);
-        return view('shop::module.edit', compact('module'));
+        return view('shop::member.module.edit', compact('module'));
     }
 
+    /**
+     * @param Request $request
+     * @param ShopModule $module
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(Request $request, ShopModule $module)
     {
         $this->authorize('update', $module);
         $module->update($request->input());
-        return redirect()->route('shop.module.index');
+        return redirect(module_link('shop.member.module.index'))->with('success', '模块保存成功');
     }
 
+    /**
+     * @param ShopModule $module
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
     public function destroy(ShopModule $module)
     {
         foreach ($module->packages as $package) {

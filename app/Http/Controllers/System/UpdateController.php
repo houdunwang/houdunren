@@ -1,11 +1,16 @@
 <?php
-
+/** .-------------------------------------------------------------------
+ * |  Software: [hdcms framework]
+ * |      Site: www.hdcms.com
+ * |-------------------------------------------------------------------
+ * |    Author: 向军大叔 <www.aoxiangjun.com>
+ * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
+ * '-------------------------------------------------------------------*/
 namespace App\Http\Controllers\System;
 
 use App\Exceptions\ResponseHttpException;
 use App\Models\Cloud;
 use GuzzleHttp\Client;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 /**
@@ -20,7 +25,7 @@ class UpdateController extends Controller
 
     public function __construct()
     {
-        $this->host = Cloud::find(1)['api_host'] ?? config('app.api_host').'/api';
+        $this->host = Cloud::find(1)['api_host'] ?? config('app.api_host') . '/api';
         $this->client = new Client(['base_uri' => $this->host . '/shop/cms/']);
     }
 
@@ -132,6 +137,7 @@ class UpdateController extends Controller
     /**
      * 备份旧版本与更新新文件
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @throws ResponseHttpException
      */
     public function moveFile()
     {
@@ -146,6 +152,7 @@ class UpdateController extends Controller
         }
         \Cache::forget('updateLists');
         Cloud::find(1)->update(['build' => $cache['build']]);
+        put_contents_file('version.php', ['build' => $cache['build']);
         $storage->deleteDirectory("backup/cms");
         return response(['code' => true]);
     }

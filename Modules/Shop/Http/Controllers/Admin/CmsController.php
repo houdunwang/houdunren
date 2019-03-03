@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Shop\Http\Controllers;
+namespace Modules\Shop\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -12,7 +12,7 @@ class CmsController extends Controller
     public function index()
     {
         $apps = ShopCms::orderBy('id', 'desc')->get();
-        return view('shop::cms.index', compact('apps'));
+        return view('shop::admin.cms.index', compact('apps'));
     }
 
     /**

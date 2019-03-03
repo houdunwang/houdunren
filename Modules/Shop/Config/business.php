@@ -3,7 +3,7 @@
         [
             [
                 'title' => '应用管理',
-                'url' => module_link('shop.cms.index'),
+                'url' => module_link('shop.admin.cms.index'),
                 'permission' => 'shop-manage',
             ],
         ],

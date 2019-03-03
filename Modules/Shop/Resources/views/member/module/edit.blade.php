@@ -1,7 +1,7 @@
 @extends('layouts.member')
 @section('content')
-    @include('shop::module._tab')
-    <form action="{{route('shop.module.update',$module)}}" method="post">
+    @include('shop::member.module._tab')
+    <form action="{{route('shop.member.module.update',$module)}}" method="post">
         @csrf @method('PUT')
         <div class="card">
             <div class="card-header">设置模块参数</div>

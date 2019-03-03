@@ -1,7 +1,7 @@
 @extends('layouts.member')
 @section('content')
-    @include('shop::module._tab')
-    <form action="{{route('shop.module.store')}}" method="post">
+    @include('shop::member.module._tab')
+    <form action="{{route('shop.member.module.store')}}" method="post">
         @csrf
         <div class="card">
             <div class="card-header">选择模块压缩包</div>

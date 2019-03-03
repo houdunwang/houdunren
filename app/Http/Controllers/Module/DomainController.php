@@ -1,8 +1,13 @@
 <?php
-
+/** .-------------------------------------------------------------------
+ * |  Software: [hdcms framework]
+ * |      Site: www.hdcms.com
+ * |-------------------------------------------------------------------
+ * |    Author: 向军 <www.aoxiangjun.com>
+ * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
+ * '-------------------------------------------------------------------*/
 namespace App\Http\Controllers\Module;
 
-use App\Events\NotificationEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DomainRequest;
 use Modules\Shop\Http\Controllers\SystemController;
