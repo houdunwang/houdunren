@@ -6,7 +6,7 @@ use Exception;
 use Throwable;
 
 /**
- * 上传
+ * 上传异常处理
  * Class UploadException
  * @package App\Exceptions
  */
@@ -19,6 +19,6 @@ class UploadException extends Exception
 
     public function render()
     {
-        return response()->json(['message' => $this->getMessage(), 'code' => 403], 200);
+        return response()->json(['message' => $this->getMessage(), 'code' => 403], 401);
     }
 }

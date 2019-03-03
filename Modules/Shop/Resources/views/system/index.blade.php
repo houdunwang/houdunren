@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div class="container-fluid bg-white pt-5 pb-5 shadow-sm">
+        <div class="container-fluid bg-white pt-sm-5 pt-5 pb-sm-3 shadow-sm">
             <div class="container pt-sm-5 pb-sm-5">
                 <h2 class="text-center col-12 mb-3">互联网应用集成解决方案</h2>
                 <div class="align-items-center">
@@ -71,32 +71,32 @@
                         <div class="row pb-3">
                             <div class="col-sm-4 col-4 mt-2">
                                 <h5>
-                                    <i class="fa fa-user-plus fa-1x d-inline-block border pt-2 pb-2 pl-3 pr-3 mr-2 rounded text-secondary"></i> 教育
+                                    <i class="fa fa-user-plus fa-1x d-inline-block border pt-2 pb-2 pl-sm-3 pl-2 pr-2 pr-sm-3 mr-2 rounded text-secondary"></i> 教育
                                 </h5>
                             </div>
                             <div class="col-sm-4 col-4 mt-2">
                                 <h5>
-                                    <i class="fa fa-home fa-1x d-inline-block border pt-2 pb-2 pl-3 pr-3 mr-2 rounded text-secondary"></i> 房产
+                                    <i class="fa fa-home fa-1x d-inline-block border pt-2 pb-2 pl-sm-3 pl-2 pr-2 pr-sm-3 mr-2 rounded text-secondary"></i> 房产
                                 </h5>
                             </div>
                             <div class="col-sm-4 col-4 mt-2">
                                 <h5>
-                                    <i class="fa fa-shopping-bag fa-1x d-inline-block border pt-2 pb-2 pl-3 pr-3 mr-2 rounded text-secondary"></i> 商城
+                                    <i class="fa fa-shopping-bag fa-1x d-inline-block border pt-2 pb-2 pl-sm-3 pl-2 pr-2 pr-sm-3 mr-2 rounded text-secondary"></i> 商城
                                 </h5>
                             </div>
                             <div class="col-sm-4 col-4 mt-2">
                                 <h5>
-                                    <i class="fa fa-sitemap fa-1x d-inline-block border pt-2 pb-2 pl-3 pr-3 mr-2 rounded text-secondary"></i> 站群
+                                    <i class="fa fa-sitemap fa-1x d-inline-block border pt-2 pb-2 pl-sm-3 pl-2 pr-2 pr-sm-3 mr-2 rounded text-secondary"></i> 站群
                                 </h5>
                             </div>
                             <div class="col-sm-4 col-4 mt-2">
                                 <h5>
-                                    <i class="fa fa-shopping-basket fa-1x d-inline-block border pt-2 pb-2 pl-3 pr-3 mr-2 rounded text-secondary"></i> 餐饮
+                                    <i class="fa fa-shopping-basket fa-1x d-inline-block border pt-2 pb-2 pl-sm-3 pl-2 pr-2 pr-sm-3 mr-2 rounded text-secondary"></i> 餐饮
                                 </h5>
                             </div>
                             <div class="col-sm-4 col-4 mt-2">
                                 <h5>
-                                    <i class="fa fa-wechat fa-1x d-inline-block border pt-2 pb-2 pl-3 pr-3 mr-2 rounded text-secondary"></i> 社区
+                                    <i class="fa fa-wechat fa-1x d-inline-block border pt-2 pb-2 pl-sm-3 pl-2 pr-2 pr-sm-3 mr-2 rounded text-secondary"></i> 社区
                                 </h5>
                             </div>
                         </div>

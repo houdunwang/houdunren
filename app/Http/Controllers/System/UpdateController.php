@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\System;
 
-use App\Exceptions\CustomException;
+use App\Exceptions\ResponseHttpException;
 use App\Models\Cloud;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;

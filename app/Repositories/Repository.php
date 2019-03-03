@@ -11,7 +11,7 @@
 
 namespace App\Repositories;
 
-use App\Exceptions\CustomException;
+use App\Exceptions\ResponseHttpException;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -29,7 +29,7 @@ abstract class Repository implements RepositoryInterface
     public function __construct()
     {
         if (!class_exists($this->model)) {
-            throw new CustomException('模型文件不存在');
+            throw new ResponseHttpException('模型文件不存在');
         }
         $this->instance = app($this->model);
     }

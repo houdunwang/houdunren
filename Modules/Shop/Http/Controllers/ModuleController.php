@@ -2,7 +2,7 @@
 
 namespace Modules\Shop\Http\Controllers;
 
-use App\Exceptions\CustomException;
+use App\Exceptions\ResponseHttpException;
 use Chumper\Zipper\Zipper;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class ModuleController extends Controller
      * 发布与增加包
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
-     * @throws CustomException
+     * @throws ResponseHttpException
      */
     public function store(Request $request)
     {
@@ -42,7 +42,7 @@ class ModuleController extends Controller
             $module->packages()->create(['path' => $request->input('zip')]);
             return redirect()->route('shop.module.edit', $module);
         } catch (\Exception $e) {
-            throw new CustomException($e->getMessage());
+            throw new ResponseHttpException($e->getMessage());
         }
     }
 
@@ -61,7 +61,7 @@ class ModuleController extends Controller
     /**
      * 根据压缩包获取配置项
      * @return mixed
-     * @throws CustomException
+     * @throws ResponseHttpException
      */
     protected function getConfig()
     {
@@ -78,7 +78,7 @@ class ModuleController extends Controller
         $versionValidate = ShopModule::where(['name' => $config['name']])
             ->where('version', '>=', $config['version'])->first();
         if ($versionValidate) {
-            throw new CustomException('你上传的版本过低或模块已经存在');
+            throw new ResponseHttpException('你上传的版本过低或模块已经存在');
         }
         return $config;
     }

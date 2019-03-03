@@ -18,6 +18,7 @@
         };
         window.system = {
             upload:{!! json_encode(config_get('upload','','system')) !!},
+            message_timeout:{!! config_get('notify.message_timeout', 60, 'site') !!}
         }
     </script>
     <script src="{{asset('org/hdjs/require.js')}}"></script>

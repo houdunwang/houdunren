@@ -27,7 +27,7 @@
 </head>
 <body class="admin" style="background: url('{{asset('images/admin.jpg')}}')">
 @include('layouts.message')
-<div class="container-fluid top-menu">
+<div class="container-fluid top-menu shadow-lg border-bottom border-dark">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -108,7 +108,7 @@
     </div>
 </div>
 <div class="container-fluid">
-    <div class="card bg-light mt-sm-5 mt-0">
+    <div class="card bg-light mt-sm-5 mt-0 shadow-lg">
         <div class="card-body {{route_class()}}">
             @yield('content')
         </div>
@@ -127,7 +127,6 @@
         Powered by hdcms v5.7.0 © 2014-2019 www.hdcms.com
     </span>
     @endif
-
 </div>
 @stack('js')
 <script>

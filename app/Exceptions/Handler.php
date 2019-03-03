@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use AliyunMNS\Exception\InvalidArgumentException;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 

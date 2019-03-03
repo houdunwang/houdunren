@@ -1,4 +1,4 @@
-<ol class="breadcrumb">
+<ol class="breadcrumb rounded-0 border-bottom">
     <li class="breadcrumb-item">
         <i class="fa fa-cogs"></i> <a href="{{route('site.site.show',site())}}">站点管理</a>
     </li>

@@ -8,7 +8,7 @@
 
 namespace App\Repositories;
 
-use App\Exceptions\CustomException;
+use App\Exceptions\ResponseHttpException;
 use App\Models\Module;
 use App\Models\Site;
 use App\Repositories\Traits\ModuleTrait;
@@ -73,7 +73,7 @@ class ModuleRepository extends Repository
      * @param Model $model
      * @param array $attributes
      * @return bool|void
-     * @throws CustomException
+     * @throws ResponseHttpException
      */
     public function update(Model $model, array $attributes)
     {
@@ -95,7 +95,7 @@ class ModuleRepository extends Repository
     /**
      * 写入模块图片
      * @return bool
-     * @throws CustomException
+     * @throws ResponseHttpException
      */
     protected function fitThumb(): bool
     {
@@ -107,7 +107,7 @@ class ModuleRepository extends Repository
                 return true;
             }
         } catch (\Exception $exception) {
-            throw  new CustomException('缩略图错误');
+            throw  new ResponseHttpException('缩略图错误');
         }
     }
 
