@@ -1,11 +1,13 @@
 <?php
-Route::get('/', 'Module\DomainController@index')->middleware('site');
-Route::get('home', 'Site\SiteController@index')->name('home')->middleware('auth');
+Route::get('/', 'Module\DomainController@index')->middleware('site')->name('home');
+//Route::get('home', 'Site\SiteController@index')->name('home')->middleware('auth');
 //登录注册
 Route::get('login', 'Member\LoginController@login')->name('login');
 Route::post('login', 'Member\LoginController@store')->name('login');
 Route::get('logout', 'Member\LoginController@logout')->name('logout')->middleware('auth');
+
 Route::resource('register', 'Member\RegisterController')->middleware(['site']);
+Route::get('reg', 'Member\RegisterController@index')->name('register');
 Route::resource('findPassword', 'Member\FindPasswordController')->middleware('guest');
 //后台登录
 Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware('auth');
