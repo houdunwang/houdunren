@@ -39,14 +39,11 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto mt-lg-0">
                     <li class="nav-item mr-3">
-                        <a class="nav-link " href="#">应用商店</a>
+                        <a class="nav-link {{active_class(if_route_pattern('shop.front.module*'),'active')}}" href="{{module_link('shop.front.module.index')}}">应用商店</a>
                     </li>
                     <li class="nav-item mr-3">
                         <a class="nav-link " href="http://doc.hdcms.com">在线手册</a>
                     </li>
-                    {{--<li class="nav-item mr-3">--}}
-                        {{--<a class="nav-link  text-muted" href="#" tabindex="-1" aria-disabled="true">视频教程</a>--}}
-                    {{--</li>--}}
                 </ul>
                 @auth()
                     <ul class="navbar-nav ">
@@ -74,9 +71,21 @@
         </nav>
     </div>
 </div>
-@yield('content')
+<div class="front {{route_class()}}">
+    @yield('content')
+</div>
+<div class="container-fluid bg-dark mt-5">
+    <div class="container">
+        <div class="text-center p-5 text-secondary">
+            我们的使命：帮助中小企业快速实现互联网价值,增长企业效益!11
+            <hr>
+            Copyright © 2010-2016 hdcms.com All Rights Reserved 京ICP备京ICP备12048441号-7
+        </div>
+    </div>
+</div>
 <script>
     require(['bootstrap'])
 </script>
+@stack('js')
 </body>
 </html>

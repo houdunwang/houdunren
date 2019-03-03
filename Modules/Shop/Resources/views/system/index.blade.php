@@ -1,6 +1,5 @@
 @extends('shop::layouts.master')
 @section('content')
-    <div class="mb-2 pb-5"></div>
     <div class="home">
         <div class="container-fluid border-bottom pb-3 shadow plan">
             <div class="container pt-sm-5 pb-sm-5">
@@ -186,20 +185,12 @@
                 </div>
             </div>
         </div>
+
         <div class="pt-5 bg-primary p-5 text-center mt-5">
 <a  class="btn btn-light text-primary">视频教程</a>
             <p class="text-white mt-5">
                 我们提供了全面细致的视频教程，帮助你轻松掌握{{\module()['title']}}的使用
             </p>
-        </div>
-        <div class="container-fluid bg-dark">
-            <div class="container">
-                <div class="text-center p-5 text-secondary">
-                    我们的使命：帮助中小企业快速实现互联网价值,增长企业效益!11
-                    <hr>
-                    Copyright © 2010-2016 hdcms.com All Rights Reserved 京ICP备京ICP备12048441号-7
-                </div>
-            </div>
         </div>
     </div>
 @endsection

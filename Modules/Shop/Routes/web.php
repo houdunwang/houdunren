@@ -37,8 +37,8 @@ Route::group([
     'namespace' => 'Front',
     'middleware' => ['site'],
 ], function () {
-    Route::resource('module', 'Front\ModuleController');
-
+    Route::resource('module', 'ModuleController');
+    Route::get('buy/{module}/module', 'BuyController@module')->name('buy.module');
 });
 
 

@@ -16,8 +16,8 @@ class CreateNewsTable extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->increments('id');
             $table->string('content')->comment('回复的文本内容');
-            tableForeign($table, 'sites', 'site_id');
-            tableForeign($table, 'modules', 'module_id');
+            table_foreign($table, 'sites', 'site_id');
+            table_foreign($table, 'modules', 'module_id');
             $table->timestamps();
         });
     }

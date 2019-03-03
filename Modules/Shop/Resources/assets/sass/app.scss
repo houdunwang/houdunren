@@ -1,27 +1,38 @@
 .shop {
-  .home {
-    .plan {
-      background-image: -webkit-linear-gradient(left, white, #efefef);
+  .front{
+    margin-top: 5rem;
+    .home {
+      .plan {
+        background-image: -webkit-linear-gradient(left, white, #efefef);
 
-      .banner {
-        background-image: url("../images/shop_home_banner.png");
-        background-repeat: no-repeat;
-        background-position: right;
+        .banner {
+          background-image: url("../images/shop_home_banner.png");
+          background-repeat: no-repeat;
+          background-position: right;
 
+        }
+      }
+
+      .application {
+        background-image: -webkit-linear-gradient(bottom, white, #dae6f3);
+
+        .scenario {
+          background: url("../images/shop_kuaisu.png") no-repeat right;
+        }
+      }
+
+      .soft {
+        background: url("../images/shop_Jietu20190303-110612.jpg") no-repeat;
+        background-size: contain;
       }
     }
-
-    .application {
-      background-image: -webkit-linear-gradient(bottom, white, #dae6f3);
-
-      .scenario {
-        background: url("../images/shop_kuaisu.png") no-repeat right;
-      }
-    }
-
-    .soft {
-      background: url("../images/shop_Jietu20190303-110612.jpg") no-repeat;
-      background-size: contain;
+  }
+}
+//模块展示
+.shop-front-module-show{
+  .content{
+    img{
+      max-width: 100%;
     }
   }
 }

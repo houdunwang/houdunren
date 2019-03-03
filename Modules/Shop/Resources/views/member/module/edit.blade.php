@@ -31,9 +31,14 @@
                     <small class="text-secondary d-block mt-1">每行一条更新日志</small>
                 </div>
                 <div class="form-group">
-                    <label>文章正文</label>
+                    <label>简短介绍</label>
+                    <textarea class="form-control" name="description" rows="3" required>{{$module['description']}}</textarea>
+                    <small class="text-secondary d-block mt-1">请输入不大于50个字的简短介绍</small>
+                </div>
+                <div class="form-group">
+                    <label>详细介绍</label>
                     <div class="input-group">
-                        <textarea id="content" name="description" style="height:300px;width:100%;">{{$module['description']}}</textarea>
+                        <textarea id="content" name="content" style="height:300px;width:100%;">{{$module['content']}}</textarea>
                         <script>
                             require(['hdjs'], function (hdjs) {
                                 hdjs.ueditor('content');

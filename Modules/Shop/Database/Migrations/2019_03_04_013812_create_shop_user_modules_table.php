@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTextsTable extends Migration
+class CreateShopUserModulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateTextsTable extends Migration
      */
     public function up()
     {
-        Schema::create('texts', function (Blueprint $table) {
+        Schema::create('shop_user_modules', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('content')->comment('回复的文本内容');
-            table_foreign($table, 'sites', 'site_id');
-            table_foreign($table, 'modules', 'module_id');
+            table_foreign($table,'users','user_id');
+            table_foreign($table,'shop_modules','module_id');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateTextsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('texts');
+        Schema::dropIfExists('shop_user_modules');
     }
 }

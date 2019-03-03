@@ -45,7 +45,7 @@ function isSuperAdmin(): bool
  * @param string $tableName 关联表
  * @param string $foreignKey 关联字段
  */
-function tableForeign(\Illuminate\Database\Schema\Blueprint $table, string $tableName, string $foreignKey): void
+function table_foreign(\Illuminate\Database\Schema\Blueprint $table, string $tableName, string $foreignKey): void
 {
     $table->unsignedInteger($foreignKey);
     $table->foreign($foreignKey)->references('id')->on($tableName)->onDelete('cascade');
@@ -138,6 +138,11 @@ function module_link(
     return route($route, array_merge($params, ['sid' => $site['id'], 'mid' => $module['id']]));
 }
 
+/**
+ * 生成随机数字
+ * @param int $len
+ * @return string
+ */
 function number_random($len = 5)
 {
     $seeds = '0123456789';

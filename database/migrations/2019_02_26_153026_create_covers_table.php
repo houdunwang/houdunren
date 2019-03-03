@@ -19,8 +19,8 @@ class CreateCoversTable extends Migration
             $table->string('discription');
             $table->string('picurl');
             $table->string('url');
-            tableForeign($table, 'sites', 'site_id');
-            tableForeign($table, 'modules', 'module_id');
+            table_foreign($table, 'sites', 'site_id');
+            table_foreign($table, 'modules', 'module_id');
             $table->timestamps();
         });
     }

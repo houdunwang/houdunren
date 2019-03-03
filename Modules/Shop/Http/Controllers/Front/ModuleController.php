@@ -5,22 +5,16 @@ namespace Modules\Shop\Http\Controllers\Front;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Shop\Entities\ShopModule;
 
 class ModuleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
     public function index()
     {
-        return view('shop::index');
+        $modules = ShopModule::paginate(10);
+        return view('shop::front.module.index', compact('modules'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
     public function create()
     {
         return view('shop::create');
@@ -35,13 +29,9 @@ class ModuleController extends Controller
     {
     }
 
-    /**
-     * Show the specified resource.
-     * @return Response
-     */
-    public function show()
+    public function show(ShopModule $module)
     {
-        return view('shop::show');
+        return view('shop::front.module.show', compact('module'));
     }
 
     /**

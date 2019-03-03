@@ -24,7 +24,9 @@ class CreateShopModulesTable extends Migration
             $table->text('logs')->nullable()->comment('更新日志');
             $table->unsignedInteger('user_id')->index()->comment('用户编号');
             $table->text('package')->comment('配置项');
-            $table->text('description')->nullable()->comment('模块介绍');
+            $table->string('description')->nullable()->comment('模块介绍');
+            $table->text('content')->nullable()->comment('模块介绍');
+            $table->decimal('price')->nullable()->comment('售价');
             $table->timestamps();
         });
     }
