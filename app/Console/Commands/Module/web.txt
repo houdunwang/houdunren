@@ -36,5 +36,6 @@ Route::group([
     'namespace' => 'Front',
     'middleware' => ['site'],
 ], function () {
-
+    //主页
+    Route::get('/', 'HomeController@index')->name('home');
 });

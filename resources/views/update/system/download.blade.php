@@ -1,6 +1,6 @@
 @extends('layouts.system')
 @section('content')
-    @include('system.update._tab')
+    @include('update.system._tab')
     <div class="alert alert-danger" role="alert">
         本次共需要更新 <span class="badge badge-info">{{$update['download_total']}}</span> 个文件，如果长时间无响应可以刷新当前页面。
     </div>
@@ -15,14 +15,14 @@
     <script>
         function download() {
             require(['hdjs', 'axios','jquery'], function (hdjs, axios,$) {
-                axios.post('{{route('cloud.update.download')}}').then((response) => {
+                axios.post('{{route('update.system.download')}}').then((response) => {
                     if (response.data.code == 1) {
                         $("#lists").prepend('<li>'+response.data.file + "更新完成</li>");
                         setTimeout(function(){download()},1000);
                     }
                     //下载完成请求移动
                     if (response.data.code == 2) {
-                        location.href="{{route('cloud.update.move')}}";
+                        location.href="{{route('update.system.move')}}";
                     }
                 }).catch(function (error) {
                     console.log(error.response.data);

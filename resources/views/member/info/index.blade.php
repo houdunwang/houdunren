@@ -13,6 +13,11 @@
                                    value="{{old('name',$user['name']??'')}}">
                         </div>
                         <div class="form-group">
+                            <label>个人网站</label>
+                            <input type="text" name="home" class="form-control"
+                                   value="{{old('home',$user['home']??'')}}">
+                        </div>
+                        <div class="form-group">
                             <label>微博帐号</label>
                             <input type="text" name="weibo" class="form-control"
                                    value="{{old('weibo',$user['weibo']??'')}}">

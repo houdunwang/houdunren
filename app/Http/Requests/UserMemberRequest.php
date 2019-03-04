@@ -6,6 +6,7 @@
  * |    Author: 向军大叔 <www.aoxiangjun.com>
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -27,6 +28,9 @@ class UserMemberRequest extends FormRequest
         return [
             'name' => 'sometimes|required|min:3|max:30|unique:users,name,' . auth()->id(),
             'icon' => 'sometimes|required',
+            'home' => 'sometimes|url',
+            'weibo' => 'sometimes|url',
+            'github' => 'sometimes|url',
             'email' => 'sometimes|email|unique:users,email,' . auth()->id(),
             'mobile' => 'sometimes|regex:/^1\d{10}$/|unique:users,mobile,' . auth()->id(),
             'code' => [
@@ -62,6 +66,9 @@ class UserMemberRequest extends FormRequest
             'email.unique' => '邮箱已经被占用',
             'mobile.regex' => '手机号格式错误',
             'mobile.unique' => '手机号已经被使用',
+            'weibo.url'=>'微博网址错误',
+            'home.url'=>'网站地址错误',
+            'github.url'=>'GitHub网址错误',
             'code.required' => '验证码不能为空',
             'password.confirmed' => '确认密码输入错误',
             'password.min' => '密码不能小于五位',

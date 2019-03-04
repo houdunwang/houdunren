@@ -23,7 +23,7 @@ Route::group([
     'namespace' => 'Member',
     'middleware' => ['auth', 'site'],
 ], function () {
-    Route::resource('module', 'ModuleController');
+    Route::resource('module', 'ModuleController')->middleware(['auth','site']);
     Route::resource('package', 'PackageController');
 });
 /*
@@ -31,12 +31,15 @@ Route::group([
 | 前台路由: 前台会员浏览使用，如果需要用户登录检测请添加auth中间件
 |--------------------------------------------------------------------------
 */
+
 Route::group([
     'prefix' => 'shop/front',
     'as' => 'shop.front.',
     'namespace' => 'Front',
     'middleware' => ['site'],
 ], function () {
+    //主页
+    Route::get('/', 'HomeController@index')->name('home');
     Route::resource('module', 'ModuleController');
     Route::get('buy/{module}/module', 'BuyController@module')->name('buy.module');
 });

@@ -7,6 +7,11 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Shop\Entities\ShopModule;
 
+/**
+ * 购买模块模板
+ * Class BuyController
+ * @package Modules\Shop\Http\Controllers\Front
+ */
 class BuyController extends Controller
 {
     public function __construct()
@@ -16,7 +21,7 @@ class BuyController extends Controller
 
     public function module(ShopModule $module)
     {
-        $module->user()->syncWithoutDetaching([1]);
-        return back()->with('success', '模块购买成功');
+        $module->users()->syncWithoutDetaching([auth()->id()]);
+        return redirect(module_link('shop.front.module.show',$module))->with('success', '模块购买成功');
     }
 }

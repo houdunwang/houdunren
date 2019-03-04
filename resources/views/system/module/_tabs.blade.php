@@ -22,8 +22,15 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{active_class(if_route('system.app.index'),'active')}}" href="{{route('system.app.index')}}">
+        <a class="nav-link {{active_class(if_route('update.module.index'),'active')}}" href="{{route('update.module.index')}}">
             已购模块
         </a>
     </li>
+    @if (if_route('update.module.show'))
+        <li class="nav-item">
+            <a class="nav-link {{active_class(if_route('update.module.show'),'active')}}" href="{{route('update.module.show',['name'=>$module['name']])}}">
+                安装模块
+            </a>
+        </li>
+    @endif
 </ul>

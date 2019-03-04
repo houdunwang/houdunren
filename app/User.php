@@ -31,6 +31,7 @@ class User extends Authenticatable
         'token',
         'mobile_verified_at',
         'icon',
+        'home',
         'weibo',
         'wechat',
         'github',

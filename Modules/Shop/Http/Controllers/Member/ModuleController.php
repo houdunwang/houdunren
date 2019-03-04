@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Shop\Entities\ShopModule;
+use Storage;
 
 /**
  * 模块管理
@@ -62,10 +63,15 @@ class ModuleController extends Controller
      */
     protected function extract()
     {
-        $url = request()->input('zip');
-        $file = strstr($url, 'attachments');
-        $zipper = new Zipper();
-        $zipper->make($file)->extractTo("Modules/" . auth()->id());
+        try {
+            $temp = 'temp/' . auth()->id();
+            $url = request()->input('zip');
+            $file = strstr($url, 'attachments');
+            Storage::deleteDirectory($temp);
+            (new Zipper())->make($file)->extractTo(Storage::path($temp));
+        } catch (\Exception $exception) {
+            throw new ResponseHttpException('压缩包释放失败');
+        }
     }
 
     /**
@@ -75,21 +81,25 @@ class ModuleController extends Controller
      */
     protected function getConfig()
     {
+        $temp = 'temp/' . auth()->id();
         $this->extract();
-        $storage = \Storage::drive('base');
-        $dirs = $storage->directories('public/Modules/' . auth()->id() . '/Modules');
-        $config = include(base_path($dirs[0]) . "/Config/package.php");
+        $dirs = Storage::directories("{$temp}/Modules");
+        $config = include(base_path("storage/app/{$dirs[0]}/Config/package.php"));
         $config['name'] = basename($dirs[0]);
-        $path = 'public/attachments/Modules';
-        $storage->makeDirectory($path);
-        $storage->delete("{$path}/{$config['name']}.jpeg");
-        $storage->copy("{$dirs[0]}/thumb.jpeg", "{$path}/{$config['name']}.jpeg");
-        $config['thumb'] = url("attachments/Modules/{$config['name']}.jpeg");
+
+        //版本检测
         $versionValidate = ShopModule::where(['name' => $config['name']])
             ->where('version', '>=', $config['version'])->first();
         if ($versionValidate) {
             throw new ResponseHttpException('你上传的版本过低或模块已经存在');
         }
+        //更新缩略图
+        $path = 'public/attachments/Modules';
+        Storage::drive('base')->makeDirectory($path);
+        Storage::drive('base')->delete("{$path}/{$config['name']}.jpeg");
+        Storage::drive('base')
+            ->copy("storage/app/{$dirs[0]}/thumb.jpeg", "{$path}/{$config['name']}.jpeg");
+        $config['thumb'] = url("attachments/Modules/{$config['name']}.jpeg");
         return $config;
     }
 

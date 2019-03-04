@@ -6,9 +6,12 @@
  * |    Author: 向军大叔 <www.aoxiangjun.com>
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Http\Controllers\System;
 
+use App\Exceptions\ResponseHttpException;
 use App\Models\Cloud;
+use App\Servers\HttpServer;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,29 +23,21 @@ use App\Http\Controllers\Controller;
  */
 class CloudController extends Controller
 {
-    protected $host;
-
-    public function __construct()
-    {
-        $this->host = Cloud::find(1)['api_host'] ?? config('app.api_host');
-    }
-
     public function create()
     {
         return view('system.cloud.create', compact('status'));
     }
-
     /**
      * 获取token
      * @param Request $request
+     * @param HttpServer $httpServer
      * @return \Illuminate\Http\RedirectResponse
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function store(Request $request)
+    public function store(Request $request, HttpServer $httpServer)
     {
         try {
-            $client = new Client();
-            $response = $client->request('POST', $this->host . '/api/token',
+            $response = $httpServer->request('POST', 'api/token',
                 ['form_params' => $request->only(['username', 'password'])]);
             $data = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
             Cloud::find(1)->update($data);
@@ -52,20 +47,24 @@ class CloudController extends Controller
         }
     }
 
-    protected function refreshToken(): bool
+    /**
+     * 刷新TOKEN
+     * @param HttpServer $httpServer
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws ResponseHttpException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function refreshToken(HttpServer $httpServer)
     {
-        if ($refreshToken = Cloud::find(1)['refresh_token']) {
-            try {
-                $client = new Client();
-                $response = $client->request('PUT', $this->host . '/api/token',
-                    ['form_params' => ['refresh_token' => $refreshToken]]);
-                $data = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
-                Cloud::find(1)->update($data);
-                return true;
-            } catch (\Exception $e) {
-                return false;
-            }
+        try {
+            $refreshToken = Cloud::find(1)['refresh_token'];
+            $response = $httpServer->request('PUT', 'api/token',
+                ['form_params' => ['refresh_token' => $refreshToken]]);
+            $data = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+            Cloud::find(1)->update($data);
+            return back()->with('success', '令牌刷新成功');
+        } catch (\Exception $e) {
+            throw new ResponseHttpException('令牌刷新失败，请尝试重新登录获取');
         }
-        return false;
     }
 }

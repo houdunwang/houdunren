@@ -14,6 +14,11 @@
                 </a>
             @endif
             @if ($user['weibo'])
+                <a class="mb-0 mr-2" href="{{$user['home']}}">
+                    <i class="fa fa-home text-info"></i>
+                </a>
+            @endif
+            @if ($user['weibo'])
                 <a class="mb-0 mr-2" href="{{$user['weibo']}}">
                     <i class="fa fa-weibo text-info"></i>
                 </a>

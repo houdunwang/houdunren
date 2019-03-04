@@ -45,7 +45,7 @@ class ModuleRepository extends Repository
             'title' => $this->package['title'],
             'name' => $this->package['name'],
             'subscribe' => $this->package['subscribe'] ?? false,
-            'local' => true,
+            'local' => $this->package['local'],
             'package' => $this->package,
             'permissions' => $this->permissions,
         ]);
@@ -136,7 +136,7 @@ class ModuleRepository extends Repository
      */
     public function delete(Model $model)
     {
-        \Artisan::call('module:migrate-reset', ['module' => $this->package['name']]);
+        \Artisan::call('module:migrate-reset', ['module' => $model['name']]);
         if (!$model['local']) {
             \Storage::disk('module')->deleteDirectory($model['name']);
         }
@@ -305,5 +305,15 @@ class ModuleRepository extends Repository
                 }
             }
         }
+    }
+
+    /**
+     * 检测模块是否已经存在或安装到数据库
+     * @param $name
+     * @return bool
+     */
+    public function has($name)
+    {
+        return Module::where(['name' => $name])->first() || is_dir(base_path("Modules/{$name}"));
     }
 }

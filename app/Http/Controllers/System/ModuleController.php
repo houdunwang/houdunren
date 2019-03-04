@@ -6,6 +6,7 @@
  * |    Author: 向军大叔 <www.aoxiangjun.com>
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
@@ -41,18 +42,6 @@ class ModuleController extends Controller
         return redirect(route('system.module.index'))->with('success', '模块创建成功');
     }
 
-    /**
-     * 显示模块
-     * @param Module $module
-     * @param ModuleRepository $moduleRepository
-     * @return string|null
-     * @throws \Exception
-     */
-//    public function show(Module $module, ModuleRepository $moduleRepository)
-//    {
-//        return redirect($moduleRepository->getModuleFirstUrl(\site(),$module,auth()->user()));
-//    }
-
     public function edit(Module $module)
     {
         return view('system.module.edit', compact('module'));
@@ -69,6 +58,13 @@ class ModuleController extends Controller
         return redirect(route('system.module.index'))->with('success', '模块修改成功');
     }
 
+    /**
+     * 删除模块
+     * @param Module $module
+     * @param ModuleRepository $repository
+     * @param SiteRepository $siteRepository
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Module $module, ModuleRepository $repository, SiteRepository $siteRepository)
     {
         $repository->delete($module);
@@ -105,6 +101,12 @@ class ModuleController extends Controller
         return view('system.module.local', compact('modules'));
     }
 
+    /**
+     * 安装本地模块
+     * @param string $name
+     * @param ModuleRepository $repository
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function install(string $name, ModuleRepository $repository)
     {
         $repository->install($name);

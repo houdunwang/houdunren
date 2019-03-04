@@ -6,6 +6,7 @@
  * |    Author: 向军 <www.aoxiangjun.com>
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Http\Controllers\Module;
 
 use App\Http\Controllers\Controller;
@@ -21,15 +22,12 @@ class DomainController extends Controller
 {
     /**
      * 模块域名访问
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|mixed
+     * @return mixed
      */
     public function index()
     {
-        if ($module = \module()) {
-            return app()->call('Modules\\' .
-                ($module['name']) . '\\Http\Controllers\System\HomeController@domain');
-        }
-        return view('module.domain.index');
+        $route = strtolower(module()['name']) . '.front.home';
+        return \Route::respondWithRoute($route);
     }
 
     public function create()

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>会员中心</title>
+    <title>{{config_get('info.webname','','site')}}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="shortcut icon" href="{{asset('favicon.ico')}}" type="image/x-icon"/>
@@ -31,7 +31,9 @@
 <div class="header bg-light shadow-sm border-primary shadow pb-2 pt-2 fixed-top border-bottom">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="mr-5 text-primary navbar-brand" href="/"><i class="fa fa-comments"></i> {{module()['title']}}</a>
+            <a class="mr-5 text-primary navbar-brand" href="/">
+                <i class="fa fa-comments"></i> {{config_get('info.webname','','site')}}
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
                     aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

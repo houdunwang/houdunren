@@ -1,10 +1,5 @@
 @extends('layouts.system')
 @section('content')
-    {{--@if ($status)--}}
-        {{--<div class="alert alert-success" role="alert">--}}
-            {{--<strong> <i class="fa fa-info-circle"></i> 当前状态：绑定成功</strong>--}}
-        {{--</div>--}}
-    {{--@endif--}}
     <form action="{{route('system.cloud.store')}}" method="post">
         @csrf
         <div class="card">

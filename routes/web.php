@@ -12,13 +12,14 @@ Route::resource('findPassword', 'Member\FindPasswordController')->middleware('gu
 //后台登录
 Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware('auth');
 //公共
-Route::group(['prefix' => 'common', 'as' => 'common.'], function () {
-    Route::any('upload', 'Common\UploadController@upload')->name('upload.make');
-    Route::any('upload-lists', 'Common\UploadController@lists')->name('upload.lists');
-    Route::any('user/search', 'Common\UserController@search')->name('user.search');
-    Route::any('notification/code',
-        'Common\NotificationController@code')->name('notification.code')->middleware('site');
-});
+Route::group(['prefix' => 'common', 'as' => 'common.'],
+    function () {
+        Route::any('upload', 'Common\UploadController@upload')->name('upload.make');
+        Route::any('upload-lists', 'Common\UploadController@lists')->name('upload.lists');
+        Route::any('user/search', 'Common\UserController@search')->name('user.search');
+        Route::any('notification/code', 'Common\NotificationController@code')
+            ->name('notification.code')->middleware('site');
+    });
 //会员中心
 Route::get('member', 'Member\HomeController')->middleware(['auth', 'site'])->name('member');
 Route::group(['middleware' => ['auth', 'site'], 'prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.'],
@@ -50,40 +51,43 @@ Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.
         Route::resource('user', 'UserController');
         //锁定解锁用户
         Route::get('lock/{user}/{state}', 'UserController@lock')->name('user.lock');
-        //应用
-        Route::resource('app', 'AppController');
         //云帐号
         Route::resource('cloud', 'CloudController');
         //模块打包
-        Route::resource('zip', 'ZipController');
+        Route::get('zip/{name}', 'ZipController@module')->name('zip.module');
     });
-//系统更新
-Route::group(['middleware' => ['system'], 'prefix' => 'cloud', 'as' => 'cloud.', 'namespace' => 'System',],
+//更新管理
+Route::group(['middleware' => ['system'], 'prefix' => 'update', 'as' => 'update.', 'namespace' => 'Update',],
     function () {
-        Route::get('update/check', 'UpdateController@check')->name('update.check');
-        Route::get('update/download', 'UpdateController@downloadShow')->name('update.download');
-        Route::post('update/download', 'UpdateController@download')->name('update.download');
-        Route::get('update/move', 'UpdateController@moveShow')->name('update.move');
-        Route::post('update/move', 'UpdateController@moveFile')->name('update.move');
-        Route::get('update/finish', 'UpdateController@finish')->name('upload.finish');
+        Route::get('system/check', 'SystemController@check')->name('system.check');
+        Route::get('system/download', 'SystemController@downloadShow')->name('system.download');
+        Route::post('system/download', 'SystemController@download')->name('system.download');
+        Route::get('system/move', 'SystemController@moveShow')->name('system.move');
+        Route::post('system/move', 'SystemController@moveFile')->name('system.move');
+        Route::get('system/finish', 'SystemController@finish')->name('system.finish');
+        //模块
+        Route::get('module', 'ModuleController@index')->name('module.index');
+        Route::get('module/{name}/show', 'ModuleController@show')->name('module.show');
+        Route::get('module/{name}/download', 'ModuleController@download')->name('module.download');
     });
 //站点
-Route::group(['middleware' => ['auth'], 'prefix' => 'site', 'as' => 'site.', 'namespace' => 'Site'], function () {
-    //站点管理
-    Route::resource('site', 'SiteController');
-    //模型会员组
-    Route::resource('{site}/access', 'AccessController');
-    //操作员
-    Route::resource('{site}/user', 'UserController');
-    //权限
-    Route::resource('{site}/permission/user', 'PermissionController', ['as' => 'permission']);
-    //更新站点权限
-    Route::get('{site}/permission/cache', 'PermissionController@site')->name('permission.cache');
-    //站点配置
-    Route::resource('{site}/config', 'ConfigController');
-    //微信公众号
-    Route::resource('{site}/chat', 'ChatController');
-});
+Route::group(['middleware' => ['auth'], 'prefix' => 'site', 'as' => 'site.', 'namespace' => 'Site'],
+    function () {
+        //站点管理
+        Route::resource('site', 'SiteController');
+        //模型会员组
+        Route::resource('{site}/access', 'AccessController');
+        //操作员
+        Route::resource('{site}/user', 'UserController');
+        //权限
+        Route::resource('{site}/permission/user', 'PermissionController', ['as' => 'permission']);
+        //更新站点权限
+        Route::get('{site}/permission/cache', 'PermissionController@site')->name('permission.cache');
+        //站点配置
+        Route::resource('{site}/config', 'ConfigController');
+        //微信公众号
+        Route::resource('{site}/chat', 'ChatController');
+    });
 //模块
 Route::group(['middleware' => ['admin'], 'as' => 'module.', 'prefix' => 'module', 'namespace' => 'Module'],
     function () {

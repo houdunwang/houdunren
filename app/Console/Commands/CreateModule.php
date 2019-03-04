@@ -33,11 +33,10 @@ class CreateModule extends Command
         //复制路由
         $this->copyFile('web.txt', 'Routes/web.php');
         //控制器
-        mkdir($this->modulePath . 'Http/Controllers/System',0755,true);
-        $this->copyFile('HomeController.txt', 'Http/Controllers/System/HomeController.php');
+        $this->copyFile('HomeController.txt', 'Http/Controllers/Front/HomeController.php');
         $this->copyFile('ChatController.txt', 'Http/Controllers/System/ChatController.php');
         //视图
-        mkdir($this->modulePath . 'Resources/views/system',0755,true);
+        mkdir($this->modulePath . 'Resources/views/front/home',0755,true);
         $this->copyFile('config.blade.txt', 'Resources/views/system/config.blade.php');
     }
 

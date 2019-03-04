@@ -19,7 +19,7 @@
                             模块标识：{{$module['name']}}
                         </small>
                         <small class="text-secondary d-block">
-                            更新时间：{{$module['updated_at']->format('Y-m-d H:i')}}
+                            更新时间：{{$module['updated_at']}}
                         </small>
                         <small class="text-secondary d-block">
                             状态：

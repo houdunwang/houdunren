@@ -168,3 +168,24 @@ function put_contents_file(string $file, array $data): bool
     }
     return true;
 }
+
+/**
+ * HTTP请求
+ * @param $method
+ * @param string $uri 请求地址
+ * @param array $options
+ * @return mixed|\Psr\Http\Message\ResponseInterface
+ * @throws \GuzzleHttp\Exception\GuzzleException
+ */
+function request_http($method, $uri = '', array $options = [])
+{
+    $config = [];
+    if (!preg_match('@http(s?)://@', $uri)) {
+        $config = [
+            'base_uri' => \App\Models\Cloud::find(1)['api_host'] ?? config('app.api_host'),
+            'timeout' => 2.0,
+        ];
+    }
+    $client = new \GuzzleHttp\Client($config);
+    return $client->request($method, $uri, $options);
+}

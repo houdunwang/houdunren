@@ -1,6 +1,6 @@
 @extends('layouts.system')
 @section('content')
-    @include('system.update._tab')
+    @include('update.system._tab')
     @if($update['total'])
         <div class="alert alert-success rounded-0">
             本次共需要更新 <span class="badge badge-info">{{$update['total']}}</span> 个文件，请不要关闭窗口
@@ -80,7 +80,7 @@
                     </div>
                 </div>
             </div>
-            <a href="{{route('cloud.update.download')}}" class="btn btn-success mt-3 rounded-0"
+            <a href="{{route('update.system.download')}}" class="btn btn-success mt-3 rounded-0"
                v-show="canSend">开始执行更新</a>
             <button type="button" disabled class="btn btn-outline-dark mt-3 rounded-0" v-show="!canSend">请先接受所有更新协议</button>
         </div>

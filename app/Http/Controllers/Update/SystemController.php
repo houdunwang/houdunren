@@ -7,7 +7,7 @@
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
-namespace App\Http\Controllers\System;
+namespace App\Http\Controllers\Update;
 
 use App\Exceptions\ResponseHttpException;
 use App\Models\Cloud;
@@ -19,7 +19,7 @@ use App\Http\Controllers\Controller;
  * Class UpdateController
  * @package App\Http\Controllers\System
  */
-class UpdateController extends Controller
+class SystemController extends Controller
 {
     protected $client;
     protected $host;
@@ -37,7 +37,7 @@ class UpdateController extends Controller
      */
     public function check()
     {
-        try {
+//        try {
             $cloud = Cloud::find(1) ?? null;
             $response = $this->client->request('GET', $cloud['build']);
             $update = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
@@ -48,10 +48,10 @@ class UpdateController extends Controller
                 }
             }
             $this->cache($update);
-            return view('system.update.check', compact('update', 'cloud'));
-        } catch (\Exception $e) {
-            return back()->with('info', '连接远程服务器失败');
-        }
+            return view('update.system.check', compact('update', 'cloud'));
+//        } catch (\Exception $e) {
+//            return back()->with('info', '连接远程服务器失败 ! 可以尝试重新绑定云帐号');
+//        }
     }
 
     /**
@@ -62,9 +62,9 @@ class UpdateController extends Controller
     {
         $update = \Cache::get('updateLists');
         if (!$update['total']) {
-            return redirect(route('cloud.update.check'));
+            return redirect(route('update.system.check'));
         }
-        return view('system.update.download_show', compact('update'));
+        return view('update.system.download', compact('update'));
     }
 
     /**
@@ -90,7 +90,7 @@ class UpdateController extends Controller
     public function download()
     {
         if (!($cache = \Cache::get('updateLists'))) {
-            return redirect()->route('cloud.update.check');
+            return redirect()->route('update.system.check');
         }
         foreach ($cache['files'] as $file => $stat) {
             if ($stat != 'downloaded') {
@@ -129,10 +129,10 @@ class UpdateController extends Controller
      * 备份旧版本与更新新文件
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function moveShow()
+    public function move()
     {
         $update = \Cache::get('updateLists');
-        return view('system.update.move_show', compact('update'));
+        return view('update.system.move', compact('update'));
     }
 
     /**

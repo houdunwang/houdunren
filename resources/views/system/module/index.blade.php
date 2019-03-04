@@ -29,18 +29,20 @@
                                     </a>
                                     <a class="btn btn-outline-info" href="{{route('system.module.refresh',$module)}}"
                                        data-container="body" data-toggle="popover"
-                                       data-placement="top" data-content="修改本地模块配置项后需要重新更新模块">更新模块配置</a>
+                                       data-placement="top" data-content="修改本地模块配置项后需要执行这个动作">更新模块配置</a>
                                 @endif
                                 <button type="button" class="btn btn-outline-danger" onclick="destroy(this)"
                                         data-container="body" data-toggle="popover" data-placement="top"
-                                        data-content="删除模块将删除模块所有数据与文件">
+                                        data-content="本地模块只删除数据，远程模块同时删除数据与文件">
                                     卸载模块
                                 </button>
                                 <form action="{{route('system.module.destroy',$module)}}" method="post">
                                     @csrf @method('DELETE')
                                 </form>
                                 @if ($module['local'])
-                                    <a class="btn btn-outline-secondary" href="{{route('system.zip.edit',$module)}}" target="_blank" data-container="body"
+                                    <a class="btn btn-outline-secondary"
+                                       href="{{route('system.zip.module',['name'=>$module['name']])}}"
+                                       data-container="body"
                                        data-toggle="popover"
                                        data-placement="top" data-content="打包下载提到应用商店出售">打包下载</a>
                                 @endif

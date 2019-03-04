@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('mobile')->unique()->nullable()->comment('手机');
             $table->string('real_name', 20)->nullable()->comment('真实姓名');
             $table->string('password');
+            $table->string('home')->nullable()->comment('个人主页');
             $table->string('icon')->nullable()->comment('头像');
             $table->string('token')->nullable()->comment('邮箱或手机验证码');
             $table->string('weibo')->nullable()->comment('微博帐号');
