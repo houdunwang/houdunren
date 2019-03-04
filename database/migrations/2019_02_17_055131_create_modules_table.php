@@ -17,6 +17,7 @@ class CreateModulesTable extends Migration
             $table->increments('id');
             $table->string('title')->comment('模块名称');
             $table->string('name')->unique()->comment('模块标识');
+            $table->string('version')->comment('版本号');
             $table->tinyInteger('subscribe')->index()->comment('微信订阅消息处理');
             $table->tinyInteger('local')->comment('本地模块');
             $table->text('package')->comment('模块配置');

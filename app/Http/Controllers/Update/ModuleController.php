@@ -36,12 +36,23 @@ class ModuleController extends Controller
         try {
             $response = $httpServer->authRequest('GET', 'api/shop/module');
             $modules = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
-            $modules['data'] = array_filter($modules['data'], function ($module) {
-                return !Module::where('name', $module['name'])->first();
+            $modules['data'] = array_map(function ($module) {
+                $installedModule = Module::where(['name' => $module['name']])->first();
+                if ($installedModule) {
+                    $module['local'] = $installedModule['local'];
+                    $module['installed'] = true;
+                    $module['has_update'] = $module['version'] > $installedModule['version'];
+                }
+                return $module;
+            }, $modules['data']);
+            //排序
+            $modules['data'] = array_sort($modules['data'], function ($module) {
+                return $module['has_update'];
             });
-            return view('update.module.index', compact('modules'));
+            $installRemotes = Module::where('local', false)->get();
+            return view('update.module.index', compact('modules', 'installRemotes'));
         } catch (\Exception $exception) {
-            throw new ResponseHttpException('获取已购模块列表失败');
+            throw new ResponseHttpException($exception->getMessage());
         }
     }
 
@@ -64,6 +75,20 @@ class ModuleController extends Controller
     }
 
     /**
+     * 更新模块
+     * @param string $name
+     * @param HttpServer $httpServer
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function update(string $name, HttpServer $httpServer)
+    {
+        $client = $httpServer->authRequest('GET', "api/shop/module/{$name}");
+        $content = \GuzzleHttp\json_decode($client->getBody()->getContents(), true);
+        return view('update.module.update', ['module' => $content['data']]);
+    }
+
+    /**
      * 下载模块
      * @param string $name
      * @param HttpServer $httpServer
@@ -74,9 +99,6 @@ class ModuleController extends Controller
      */
     public function download(string $name, HttpServer $httpServer, ModuleRepository $moduleRepository)
     {
-        if ($moduleRepository->has($name)) {
-            throw new ResponseHttpException('模块已经安装');
-        }
         try {
             $response = $httpServer->authRequest('GET', "api/shop/module/{$name}/download");
             if ($response->getStatusCode() == 200) {
@@ -84,7 +106,7 @@ class ModuleController extends Controller
                 Storage::deleteDirectory("temp/{$name}");
                 $content = $response->getBody()->getContents();
                 if (file_put_contents(Storage::path("temp/{$name}.zip"), $content) === false) {
-                    throw new \Exception('模块下载失败');
+//                    throw new \Exception('模块文件下载失败');
                 }
             }
             $this->move($name);

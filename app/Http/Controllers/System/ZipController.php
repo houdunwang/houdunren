@@ -10,9 +10,6 @@
 namespace App\Http\Controllers\System;
 
 use App\Exceptions\ResponseHttpException;
-use App\Models\Module;
-use function Composer\Autoload\includeFile;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 /**
@@ -34,8 +31,8 @@ class ZipController extends Controller
             $lowerName = strtolower($module);
             $storage = \Storage::disk('base');
             //更新配置
-            $config['version'] = time();
             $config = include($storage->path("Modules/{$module}/Config/package.php"));
+            $config['version'] = time();
             put_contents_file($storage->path("Modules/{$module}/Config/package.php"), $config);
             is_file($module . '.zip') && @unlink($module . '.zip');
 

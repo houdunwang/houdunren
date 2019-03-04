@@ -40,10 +40,11 @@ class ModuleRepository extends Repository
         $this->permissions = include $this->configPath($name) . 'permissions.php';
         $this->business = include $this->configPath($name) . 'business.php';
         $this->menus = include $this->configPath($name) . 'menus.php';
-        \Artisan::call('module:migrate', ['module' => $this->package['name']]);
+        \Artisan::call('module:migrate', ['module' => $name]);
         return parent::create([
             'title' => $this->package['title'],
             'name' => $this->package['name'],
+            'version' => $this->package['version'],
             'subscribe' => $this->package['subscribe'] ?? false,
             'local' => $this->package['local'],
             'package' => $this->package,
@@ -51,22 +52,20 @@ class ModuleRepository extends Repository
         ]);
     }
 
+    /**
+     * 设计模块
+     * @param array $attributes
+     * @throws ResponseHttpException
+     */
     public function create(array $attributes)
     {
         $attributes['name'] = ucfirst($attributes['name']);
         $this->package = array_merge($this->package, $attributes);
+        $this->package['version'] = time();
         \Artisan::call('cms:module-make', ['name' => $this->package['name']]);
         //写入配置项
         $this->fitThumb();
         $this->writeConfig();
-//        return parent::create([
-//            'title' => $this->package['title'],
-//            'name' => $this->package['name'],
-//            'subscribe' => $this->package['subscribe'] ?? false,
-//            'local' => true,
-//            'package' => $this->package,
-//            'permissions' => $this->permissions,
-//        ]);
     }
 
     /**
@@ -74,23 +73,18 @@ class ModuleRepository extends Repository
      * @param Model $model
      * @param array $attributes
      * @return bool|void
-     * @throws ResponseHttpException
+     * @throws ResponseHttpException'
      */
     public function update(Model $model, array $attributes)
     {
         $attributes = array_merge(array_except($this->package, ['name']), $attributes);
-        $this->package = array_merge($model['package'], $attributes);
+        $this->package = array_merge(include $this->configPath($model['name']) . 'permissions.php', $attributes);
+        $this->package['version'] = time();
         $this->permissions = include $this->configPath() . 'permissions.php';
         $this->business = include $this->configPath() . 'business.php';
         $this->menus = include $this->configPath() . 'menus.php';
         $this->fitThumb();
         $this->writeConfig();
-//        return parent::update($model, [
-//            'title' => $this->package['title'],
-//            'name' => $this->package['name'],
-//            'package' => $this->package,
-//            'permissions' => $this->permissions,
-//        ]);
     }
 
     /**
@@ -124,8 +118,7 @@ class ModuleRepository extends Repository
             'business.php' => $this->business,
             'menus.php' => $this->menus,
         ])->each(function ($data, $file) {
-            file_put_contents($this->configPath() . $file,
-                '<?php return ' . var_export($data, true) . ';');
+            put_contents_file($this->configPath() . $file, $data);
         });
     }
 
@@ -155,13 +148,14 @@ class ModuleRepository extends Repository
         $this->business = include $this->configPath($model['name']) . 'business.php';
         $this->menus = include $this->configPath() . 'menus.php';
         $this->writeConfig();
-//        return parent::update($model, [
-//            'title' => $this->package['title'],
-//            'name' => $this->package['name'],
-//            'local' => true,
-//            'package' => $this->package,
-//            'permissions' => $this->permissions,
-//        ]);
+        \Artisan::call('module:migrate', ['module' => $model['name']]);
+        return parent::update($model, [
+            'title' => $this->package['title'],
+            'name' => $this->package['name'],
+            'version' => $this->package['version'],
+            'package' => $this->package,
+            'permissions' => $this->permissions,
+        ]);
     }
 
     /**

@@ -12,6 +12,3 @@ yarn-error.log
 .idea
 /backup
 /Modules/*
-!/Modules/Shop
-!/Modules/Edu
-!/.gitignore

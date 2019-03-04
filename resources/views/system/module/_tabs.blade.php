@@ -18,7 +18,7 @@
     @endif
     <li class="nav-item">
         <a class="nav-link {{active_class(if_route('system.module.local'),'active')}}" href="{{route('system.module.local')}}">
-            安装本地模块
+            本地模块
         </a>
     </li>
     <li class="nav-item">

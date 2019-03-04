@@ -68,6 +68,7 @@ Route::group(['middleware' => ['system'], 'prefix' => 'update', 'as' => 'update.
         //模块
         Route::get('module', 'ModuleController@index')->name('module.index');
         Route::get('module/{name}/show', 'ModuleController@show')->name('module.show');
+        Route::get('module/{name}/update', 'ModuleController@update')->name('module.update');
         Route::get('module/{name}/download', 'ModuleController@download')->name('module.download');
     });
 //站点

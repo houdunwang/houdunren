@@ -39,31 +39,41 @@ class HttpServer
 
     /**
      * 不需要验证的HTTP请求
-     * @param string $method 请求类型
-     * @param string $uri 请求地址不以http开始时添加应用商城地址前缀
-     * @param array $options 参数选项
+     * @param $method
+     * @param string $uri
+     * @param array $options
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function request($method, $uri = '', array $options = [])
     {
-        return $this->client($uri)->request($method, $uri, $options);
+        try {
+            return $this->client($uri)->request($method, $uri, $options);
+        } catch (\Exception $e) {
+            throw new \Exception('远程服务器请求失败');
+        }
     }
 
     /**
      * 验证的HTTP请求
-     * @param string $method 请求类型
-     * @param string $uri 请求地址不以http开始时添加应用商城地址前缀
-     * @param array $options 参数选项
+     * @param string $method
+     * @param string $uri
+     * @param array $options
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function authRequest(string $method, $uri = '', array $options = [])
     {
         $accessToken = Cloud::first()['access_token'] ?? '';
-        return $this->client($uri)->request($method, $uri,
-            array_merge([
-                'headers' => ['Accept' => 'application/json', 'Authorization' => 'Bearer ' . $accessToken,],
-            ], $options));
+        $client = $this->client($uri);
+        try {
+            return $client->request($method, $uri,
+                array_merge([
+                    'headers' => ['Accept' => 'application/json', 'Authorization' => 'Bearer ' . $accessToken,],
+                    'http_errors' => true,
+                ], $options));
+        } catch (\Exception $e) {
+            throw new \Exception('远程服务器请求失败');
+        }
     }
 }

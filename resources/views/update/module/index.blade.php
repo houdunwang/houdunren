@@ -9,31 +9,42 @@
         <div class="card-body">
             @if (count($modules['data'])>0)
                 @foreach($modules['data'] as $module)
-                    <div class="row">
-                        <div class="col-xs-4 col-md-1 text-dark">
-                            <img src="{{$module['thumb']}}" class="img-thumbnail">
-                        </div>
-                        <div class="col-xs-4 col-md-5 text-dark">
-                            <strong class="title text-dark d-block">
-                                {{$module['title']}}
-                            </strong>
-                            <small class="text-secondary">
-                                标识：{{$module['name']}}
-                            </small>
-                        </div>
-                        <div class="col-xs-4 col-md-6 text-right mt-3">
-                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <a class="btn btn-outline-success" href="{{route('update.module.show',['name'=>$module['name']])}}">
-                                    下载安装
-                                </a>
-                                <a class="btn btn-outline-info"
-                                   href="http://www.hdcms.com/shop/front/module/{{$module['id']}}">
-                                    访问模块页面
-                                </a>
+                    @if (true)
+                        <div class="row">
+                            <div class="col-xs-4 col-md-1 text-dark">
+                                <img src="{{$module['thumb']}}" class="img-thumbnail">
+                            </div>
+                            <div class="col-xs-4 col-md-5 text-dark">
+                                <strong class="title text-dark d-block">
+                                    {{$module['title']}}
+                                </strong>
+                                <small class="text-secondary">
+                                    标识：{{$module['name']}}
+                                </small>
+                            </div>
+                            <div class="col-xs-4 col-md-6 text-right mt-3">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                    @if (!$module['installed'])
+                                        <a class="btn btn-outline-success"
+                                           href="{{route('update.module.show',['name'=>$module['name']])}}">
+                                            下载安装
+                                        </a>
+                                    @endif
+                                    @if ($module['has_update'])
+                                        <a class="btn btn-outline-danger"
+                                           href="{{route('update.module.update',['name'=>$module['name']])}}">
+                                            更新模块
+                                        </a>
+                                    @endif
+                                    <a class="btn btn-outline-info"
+                                       href="http://www.hdcms.com/shop/front/module/{{$module['id']}}">
+                                        访问模块页面
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <hr>
+                        <hr>
+                    @endif
                 @endforeach
             @else
                 <div class="alert alert-light d-block text-center" role="alert">
