@@ -62,7 +62,7 @@ Route::group(['middleware' => ['system'], 'prefix' => 'update', 'as' => 'update.
         Route::get('system/check', 'SystemController@check')->name('system.check');
         Route::get('system/download', 'SystemController@downloadShow')->name('system.download');
         Route::post('system/download', 'SystemController@download')->name('system.download');
-        Route::get('system/move', 'SystemController@moveShow')->name('system.move');
+        Route::get('system/move', 'SystemController@move')->name('system.move');
         Route::post('system/move', 'SystemController@moveFile')->name('system.move');
         Route::get('system/finish', 'SystemController@finish')->name('system.finish');
         //模块

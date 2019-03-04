@@ -37,7 +37,7 @@ class SystemController extends Controller
      */
     public function check()
     {
-//        try {
+        try {
             $cloud = Cloud::find(1) ?? null;
             $response = $this->client->request('GET', $cloud['build']);
             $update = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
@@ -49,9 +49,9 @@ class SystemController extends Controller
             }
             $this->cache($update);
             return view('update.system.check', compact('update', 'cloud'));
-//        } catch (\Exception $e) {
-//            return back()->with('info', '连接远程服务器失败 ! 可以尝试重新绑定云帐号');
-//        }
+        } catch (\Exception $e) {
+            return back()->with('info', '连接远程服务器失败 ! 可以尝试重新绑定云帐号');
+        }
     }
 
     /**
@@ -168,6 +168,6 @@ class SystemController extends Controller
      */
     public function finish()
     {
-        return view('system.update.finish');
+        return view('update.system.finish');
     }
 }
