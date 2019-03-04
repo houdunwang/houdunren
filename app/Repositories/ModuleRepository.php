@@ -31,8 +31,9 @@ class ModuleRepository extends Repository
 
     /**
      * 安装模块
-     * @param string $name 模块标识
+     * @param string $name
      * @return mixed
+     * @throws \Exception
      */
     public function install(string $name)
     {
@@ -40,8 +41,9 @@ class ModuleRepository extends Repository
         $this->permissions = include $this->configPath($name) . 'permissions.php';
         $this->business = include $this->configPath($name) . 'business.php';
         $this->menus = include $this->configPath($name) . 'menus.php';
+        \DB::beginTransaction();
         \Artisan::call('module:migrate', ['module' => $name]);
-        return parent::create([
+        parent::create([
             'title' => $this->package['title'],
             'name' => $this->package['name'],
             'version' => $this->package['version'],
@@ -50,6 +52,7 @@ class ModuleRepository extends Repository
             'package' => $this->package,
             'permissions' => $this->permissions,
         ]);
+        \DB::commit();
     }
 
     /**
@@ -140,6 +143,7 @@ class ModuleRepository extends Repository
      * 在本地修改模块配置文件后刷新使用
      * @param Model $model
      * @return bool
+     * @throws \Exception
      */
     public function refresh(Model $model)
     {
@@ -148,14 +152,16 @@ class ModuleRepository extends Repository
         $this->business = include $this->configPath($model['name']) . 'business.php';
         $this->menus = include $this->configPath() . 'menus.php';
         $this->writeConfig();
+        \DB::beginTransaction();
         \Artisan::call('module:migrate', ['module' => $model['name']]);
-        return parent::update($model, [
+        parent::update($model, [
             'title' => $this->package['title'],
             'name' => $this->package['name'],
             'version' => $this->package['version'],
             'package' => $this->package,
             'permissions' => $this->permissions,
         ]);
+        \DB::commit();
     }
 
     /**

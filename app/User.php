@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use App\Models\Attachment;
@@ -52,12 +53,21 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    /**
+     * 接口用户条件
+     * @param $username
+     * @return mixed
+     */
     public function findForPassport($username)
     {
+        \site(null, true);
         filter_var($username, FILTER_VALIDATE_EMAIL) ?
             $where['email'] = $username :
             $where['mobile'] = $username;
-        return self::where($where)->first();
+        $user = self::where($where)->first();
+        if ($user && $user->sites->contains(\site())) {
+            return $user;
+        }
     }
 
     public function getAvatarAttribute()
@@ -93,7 +103,7 @@ class User extends Authenticatable
     }
 
     /**
-     * 用户可以使用的站点列表
+     * 用户站点关联
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function sites()

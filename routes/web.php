@@ -44,9 +44,9 @@ Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.
         Route::resource('package', 'PackageController');
         //模块管理
         Route::resource('module', 'ModuleController');
-        Route::get('moduleRefresh/{module}', 'ModuleController@refresh')->name('module.refresh');
-        Route::get('module_local', 'ModuleController@local')->name('module.local');
-        Route::get('module_local/{name}', 'ModuleController@install')->name('module.install');
+        Route::get('refresh/module/{module}', 'ModuleController@refresh')->name('module.refresh');
+        Route::get('local/module', 'ModuleController@local')->name('module.local');
+        Route::get('install/module/{name}', 'ModuleController@install')->name('module.install');
         //用户管理
         Route::resource('user', 'UserController');
         //锁定解锁用户
@@ -104,3 +104,8 @@ Route::group(['middleware' => ['admin'], 'as' => 'module.', 'prefix' => 'module'
         //图文消息
         Route::resource('cover', 'CoverController');
     });
+
+//安装系统
+Route::group(['as' => 'install.', 'prefix' => 'install'],function(){
+    Route::get('/', 'InstallController@index');
+});

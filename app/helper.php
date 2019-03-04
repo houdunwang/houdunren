@@ -53,11 +53,16 @@ function table_foreign(\Illuminate\Database\Schema\Blueprint $table, string $tab
 
 /**
  * 保存或获取当前站点
- * @param \App\Models\Site|null $site 站点模型
- * @return \App\Models\Site
+ * @param \App\Models\Site|null $site
+ * @param bool $load
+ * @return \App\Models\Site|null
  */
-function site(\App\Models\Site $site = null): ?\App\Models\Site
+function site(\App\Models\Site $site = null, $load = false): ?\App\Models\Site
 {
+    if ($load === true) {
+        $sid = request('sid', \App\Models\Domain::firstOrNew(['name' => host()])['site_id'] ?? 0);
+        $site = \App\Models\Site::find($sid);
+    }
     static $cache = null;
     if (is_null($site)) {
         return $cache;
@@ -67,11 +72,16 @@ function site(\App\Models\Site $site = null): ?\App\Models\Site
 
 /**
  * 保存或获取当前模块
- * @param \App\Models\Module $module 模型对象
+ * @param \App\Models\Module|null $module
+ * @param bool $load 加载模块
  * @return \App\Models\Module|null
  */
-function module(\App\Models\Module $module = null): ?\App\Models\Module
+function module(\App\Models\Module $module = null, $load = false): ?\App\Models\Module
 {
+    if ($load === true) {
+        $mid = request('mid', \App\Models\Domain::firstOrNew(['name' => host()])['module_id']);
+        $module = \App\Models\Module::find($mid);
+    }
     static $cache = null;
     if (is_null($module)) {
         return $cache;

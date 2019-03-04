@@ -18,6 +18,7 @@ class Module extends Model
         'subscribe',
         'local',
         'permissions',
+        'version',
     ];
     protected $casts = [
         'package' => 'array',

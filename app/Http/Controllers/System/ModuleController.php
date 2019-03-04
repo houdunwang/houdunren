@@ -78,6 +78,7 @@ class ModuleController extends Controller
      * @param ModuleRepository $repository
      * @param SiteRepository $siteRepository
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function refresh(Module $module, ModuleRepository $repository, SiteRepository $siteRepository)
     {
@@ -96,7 +97,10 @@ class ModuleController extends Controller
         $names = Module::pluck('name') ?? collect();
         $modules = [];
         foreach (array_diff($dirs, $names->toArray()) as $dir) {
-            $modules[] = include \Storage::drive('module')->path($dir . '/Config/package.php');
+            $package = include \Storage::drive('module')->path($dir . '/Config/package.php');
+            if ($package['local']) {
+                $modules[] = $package;
+            }
         }
         return view('system.module.local', compact('modules'));
     }
@@ -106,6 +110,7 @@ class ModuleController extends Controller
      * @param string $name
      * @param ModuleRepository $repository
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function install(string $name, ModuleRepository $repository)
     {

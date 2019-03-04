@@ -20,6 +20,47 @@ use GuzzleHttp\Client;
 class HttpServer
 {
     /**
+     * 刷新TOKEN
+     * @param $refreshToken
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function refreshToken($refreshToken)
+    {
+        $oauthClient = \DB::table('oauth_clients')->where(['password_client' => 1,])->first();
+        $response = $this->request('POST', 'oauth/token', [
+            'form_params' => [
+                'grant_type' => 'refresh_token',
+                'client_id' => $oauthClient->id ?? 0,
+                'client_secret' => $oauthClient->secret ?? 0,
+                'refresh_token' => $refreshToken,
+            ],
+        ]);
+        return $response;
+    }
+
+    /**
+     * 接口登录
+     * @param array $user
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function token(array $user)
+    {
+        $oauthClient = \DB::table('oauth_clients')->where(['password_client' => 1,])->first();
+        $response = $this->request('POST', 'oauth/token', [
+            'form_params' => [
+                'grant_type' => 'password',
+                'client_id' => $oauthClient->id ?? 0,
+                'client_secret' => $oauthClient->secret ?? 0,
+                'username' => $user['username'],
+                'password' => $user['password'],
+            ],
+        ]);
+        return $response;
+    }
+
+    /**
      * HTTP实例
      * @param string $uri
      * @return Client
