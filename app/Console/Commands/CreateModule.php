@@ -30,13 +30,12 @@ class CreateModule extends Command
         $this->modulePath = \Storage::disk('module')->path($this->name . DIRECTORY_SEPARATOR);
         $this->tplPath = __DIR__ . '/Module/';
         $this->vars = ['{lower-module}' => strtolower($this->name), '{module}' => $this->name];
-        //复制路由
+        //路由
         $this->copyFile('web.txt', 'Routes/web.php');
         //控制器
         $this->copyFile('HomeController.txt', 'Http/Controllers/Front/HomeController.php');
         $this->copyFile('ChatController.txt', 'Http/Controllers/System/ChatController.php');
         //视图
-        mkdir($this->modulePath . 'Resources/views/front/home',0755,true);
         $this->copyFile('config.blade.txt', 'Resources/views/system/config.blade.php');
     }
 
@@ -48,6 +47,8 @@ class CreateModule extends Command
      */
     protected function copyFile(string $resFile, string $toFile): string
     {
+        $path = $this->modulePath.dirname($toFile);
+        is_dir($path) || mkdir($path, 0755, true);
         $content = file_get_contents($this->tplPath . $resFile);
         foreach ($this->vars as $name => $value) {
             $content = str_replace($name, $value, $content);
