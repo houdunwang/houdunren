@@ -1,6 +1,6 @@
 <?php
 Route::get('/', 'Module\DomainController@index')->middleware('site')->name('home');
-Route::get('home', 'Site\SiteController@index')->name('home')->middleware('auth');
+Route::get('home', 'Site\SiteController@index')->middleware('auth')->name('home');
 //登录注册
 Route::get('login', 'Member\LoginController@login')->name('login');
 Route::post('login', 'Member\LoginController@store')->name('login');
@@ -72,7 +72,7 @@ Route::group(['middleware' => ['system'], 'prefix' => 'update', 'as' => 'update.
         Route::get('module/{name}/download', 'ModuleController@download')->name('module.download');
     });
 //站点
-Route::group(['middleware' => ['auth'], 'prefix' => 'site', 'as' => 'site.', 'namespace' => 'Site'],
+Route::group(['middleware' => ['auth','install'], 'prefix' => 'site', 'as' => 'site.', 'namespace' => 'Site'],
     function () {
         //站点管理
         Route::resource('site', 'SiteController');
@@ -106,6 +106,11 @@ Route::group(['middleware' => ['admin'], 'as' => 'module.', 'prefix' => 'module'
     });
 
 //安装系统
-Route::group(['as' => 'install.', 'prefix' => 'install'],function(){
-    Route::get('/', 'InstallController@index');
+Route::group(['as' => 'install.', 'prefix' => 'install'], function () {
+    Route::get('/', 'InstallController@index')->name('home');
+    Route::get('database', 'InstallController@database')->name('database');
+    Route::post('connect', 'InstallController@connect')->name('connect');
+    Route::get('migrate', 'InstallController@migrate')->name('migrate');
+    Route::get('create', 'InstallController@create')->name('create');
+    Route::get('complete', 'InstallController@complete')->name('complete');
 });

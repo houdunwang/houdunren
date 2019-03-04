@@ -17,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadConfig();
         $this->observer();
         \Schema::defaultStringLength(191);
 //        config(['app.debug' => config_get('base.debug', false, 'system')]);
@@ -31,6 +32,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Package::observe(PackageObserver::class);
         User::observe(UserObserver::class);
+    }
+
+    protected function loadConfig()
+    {
+        $config = config('database.connections.mysql');
+        $config = array_merge($config, include base_path('database.php'));
+        config(['database.connections.mysql' => $config]);
     }
 
     /**
