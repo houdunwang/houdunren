@@ -19,7 +19,7 @@ class CmsCreateUpdateFile extends Command
         $build = time();
         put_contents_file('version.php', ['build' => $build]);
         exec("git add");
-        exec("git commit -m '生成版本号'");
+        exec("git commit -m '生成编译版本号'");
         exec("git push");
         exec("git diff master dev --name-status", $files);
         exec('git log dev ^master --pretty=format:"%s"', $logs);
