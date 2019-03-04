@@ -16,13 +16,13 @@ class CmsCreateUpdateFile extends Command
 
     public function handle()
     {
-        $build = time();
-        put_contents_file('version.php', ['build' => $build]);
         exec("git diff master dev --name-status", $files);
         exec('git log dev ^master --pretty=format:"%s"', $logs);
         \Storage::disk('base')->makeDirectory('updateLists');
         $files = $this->format($files);
         if (!empty($files)) {
+            $build = time();
+            put_contents_file('version.php', ['build' => $build]);
             put_contents_file("updateLists/{$build}.php", [
                 'build' => $build,
                 'total' => count($files),
