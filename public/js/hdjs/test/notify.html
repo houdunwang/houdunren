@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<script>
+    require(['hdjs','bootstrap'], function (hdjs) {
+        hdjs.notify({
+            title: "提示:",
+            message: 'HDJS 开发必用',
+            type: 'danger',
+            icon: 'glyphicon glyphicon-star',
+            url: "https://hdjs.hdphp.com"
+        }, {
+            offset: 50,
+            type: 'warning',
+            delay: 3000
+        })
+    })
+</script>
+</body>
+</html>

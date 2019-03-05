@@ -1,0 +1,82 @@
+{
+	"IcoMoonType": "selection",
+	"icons": [
+		{
+			"icon": {
+				"paths": [
+					"M877.248 786.752l-146.752-146.752-90.496 90.496 146.752 146.752-146.752 146.752h384v-384zM384 0h-384v384l146.752-146.752 145.376 145.248 90.496-90.496-145.376-145.248zM384 730.496l-90.496-90.496-146.752 146.752-146.752-146.752v384h384l-146.752-146.752zM1024 0h-384l146.752 146.752-145.376 145.248 90.496 90.496 145.376-145.248 146.752 146.752z"
+				],
+				"tags": [
+					"fullscreen",
+					"expand"
+				],
+				"grid": 16,
+				"attrs": []
+			},
+			"attrs": [],
+			"properties": {
+				"id": 99,
+				"order": 2,
+				"prevSize": 16,
+				"code": 58880,
+				"name": "fullscreen"
+			},
+			"setIdx": 1,
+			"setId": 6,
+			"iconIdx": 99
+		}
+	],
+	"height": 1024,
+	"metadata": {
+		"name": "icomoon"
+	},
+	"preferences": {
+		"fontPref": {
+			"prefix": "icon-",
+			"metadata": {
+				"fontFamily": "icomoon",
+				"majorVersion": 1,
+				"minorVersion": 0
+			},
+			"showGlyphs": true,
+			"metrics": {
+				"emSize": 512,
+				"baseline": 6.25,
+				"whitespace": 50
+			},
+			"resetPoint": 58880,
+			"showQuickUse": true,
+			"quickUsageToken": false,
+			"showMetrics": false,
+			"showMetadata": false,
+			"autoHost": true,
+			"embed": false,
+			"ie7": false,
+			"showSelector": false,
+			"showVersion": true
+		},
+		"imagePref": {
+			"color": 0,
+			"height": 32,
+			"columns": 16,
+			"margin": 16,
+			"png": false,
+			"sprites": true,
+			"prefix": "icon-"
+		},
+		"historySize": 100,
+		"showCodes": true,
+		"gridSize": 16,
+		"showLiga": false,
+		"showGrid": true,
+		"showGlyphs": true,
+		"showQuickUse": true,
+		"search": "",
+		"quickUsageToken": {
+			"UntitledProject1": "ZWEwOTk2NTRmNjMyOGQ1MzAwZWFiYmJlODViMWMzZDcjMiMxNDA3NzM0MTA2IyMj"
+		},
+		"showQuickUse2": true,
+		"showSVGs": true,
+		"fontHostingName": false
+	}
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>颜色选择</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<input id="hd">
+<script>
+    require(['hdjs'], function (hdjs) {
+        hdjs.colorpicker('#hd',{
+            color: "#ffd966",
+            //回调函数
+            change: function(color) {
+                console.log(color.toHexString());
+            }
+        });
+    })
+</script>
+</body>
+</html>

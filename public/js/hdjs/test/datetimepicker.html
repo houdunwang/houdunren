@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'test/php/uploader.php?';
+        window.hdjs.filesLists = 'test/php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<h2>日期与时间</h2>
+<input id="datetimepicker" class="form-control">
+<script>
+    require(['hdjs'], function (hdjs) {
+        hdjs.datetimepicker('#datetimepicker', {
+            timepicker: false,
+            format: 'Y-m-d',
+            onChangeDateTime: function (dp, $input) {
+                console.log($input.val())
+            }
+        });
+    })
+</script>
+
+<h2>区间时间</h2>
+Start <input id="date_timepicker_start" value="">
+End <input id="date_timepicker_end" value="">
+<script>
+    require(['hdjs'], function (hdjs) {
+        hdjs.datetimepicker('#date_timepicker_start', {
+            format: 'Y/m/d',
+            onShow: function (ct) {
+                this.setOptions({
+                    maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false
+                })
+            },
+            timepicker: false
+        });
+        hdjs.datetimepicker('#date_timepicker_end', {
+            format: 'Y/m/d',
+            onShow: function (ct) {
+                this.setOptions({
+                    minDate: jQuery('#date_timepicker_start').val() ? jQuery('#date_timepicker_start').val() : false
+                })
+            },
+            timepicker: false
+        });
+    })
+</script>
+
+<h2>时间选择</h2>
+时间<input id="datetimepickertime" class="form-control">
+<script>
+    require(['hdjs'], function (hdjs) {
+        hdjs.datetimepicker('#datetimepickertime', {
+            datepicker: false,
+            format: 'H:i'
+        });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+{
+    "require": {
+        "houdunwang/oss": "^1.0"
+    }
+}

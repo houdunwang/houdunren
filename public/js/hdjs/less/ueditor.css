@@ -1,0 +1,12 @@
+.edui-default .edui-editor {
+  border-radius: 0 !important;
+}
+.edui-default .edui-editor-toolbarbox {
+  box-shadow: none !important;
+}
+.edui-default .edui-editor-toolbarboxouter {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  background-image: none !important;
+}
+/*# sourceMappingURL=ueditor.css.map */

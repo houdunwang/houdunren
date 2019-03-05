@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<select name="birthyear" class="btn btn-default"></select>
+<select name="birthmonth" class="btn btn-default"></select>
+<select name="birthday" class="btn btn-default"></select>
+<script>
+    require(['hdjs'], function (hdjs) {
+        hdjs.dateselect({
+            year: document.querySelector('[name="birthyear"]'),
+            month: document.querySelector('[name="birthmonth"]'),
+            day: document.querySelector('[name="birthday"]'),
+        }, {
+            year: "{{$user['birthyear']}}",
+            month: "{{$user['birthmonth']}}",
+            day: "{{$user['birthday']}}"
+        });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>二维码</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<div id="qrcode"></div>
+<script>
+    require(['hdjs'], function (hdjs) {
+        hdjs.qrcode('#qrcode', 'http://www.houdunren.com');
+    })
+</script>
+</body>
+</html>

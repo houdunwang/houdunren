@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>GET参数</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<div class="alert alert-info" role="alert">
+    请在console控制台看效果
+</div>
+<script>
+    require(['hdjs','bootstrap'], function (hdjs) {
+        console.log(hdjs.get.get('a'));
+    })
+</script>
+<script>
+    require(['hdjs'], function (hdjs) {
+        console.log(hdjs.get.get('name','http://hdphp.com?name=hdxj'));
+    })
+</script>
+<script>
+    require(['hdjs'], function (hdjs) {
+        console.log(hdjs.get.set('name','hdphp'));
+    })
+</script>
+<script>
+    require(['hdjs'], function (hdjs) {
+        console.log(hdjs.get.set('name','hdphp','http://hdphp.com?name=hdxj'));
+    })
+</script>
+</body>
+</html>

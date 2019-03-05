@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<div class="input-group mb-3">
+<input type="text" class="form-control" id="foo" value="https://github.com/zenorocha/clipboard.js.git" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+<div class="input-group-append">
+<button class="btn btn-outline-secondary" type="button" data-clipboard-target="#foo">复制</button>
+</div>
+</div>
+<script>
+require(['hdjs', 'bootstrap'], function (hdjs) {
+hdjs.clipboard('.btn', {}, function (e) {
+console.info('Action:', e.action);
+console.info('Text:', e.text);
+console.info('Trigger:', e.trigger);
+hdjs.notify('复制成功');
+e.clearSelection();
+})
+})
+</script>
+<hr>
+<a href="javascript:;" class="copy btn btn-success" data-clipboard-text="我是复制的内容">复制元素文本</a>
+<script>
+require(['hdjs'], function (hdjs) {
+hdjs.clipboard('.copy', {}, function (e) {
+e.clearSelection();
+})
+});
+</script>
+<hr>
+<div class="input-group mb-3">
+    <input type="text" class="form-control" name="content" value="后盾人 人人做后盾 houdunren.com" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary hdphp" type="button">复制指定表单内容</button>
+    </div>
+</div>
+<script>
+    require(['hdjs'], function (hdjs) {
+        hdjs.clipboard('.hdphp', {
+            text: function (trigger) {
+                return $("[name='content']").val();
+            }
+        }, function (e) {
+            console.info('Action:', e.action);
+            console.info('Text:', e.text);
+            console.info('Trigger:', e.trigger);
+            e.clearSelection();
+        })
+    })
+</script>
+</body>
+</html>

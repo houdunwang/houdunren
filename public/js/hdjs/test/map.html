@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<buttoon class="btn btn-success" onclick="showmap()">打开地图</buttoon>
+<script>
+    require(['bootstrap']);
+    function showmap() {
+        require(['hdjs'], function (hdjs) {
+            hdjs.map('', function (res) {
+                //返回值是数组
+                alert("地址:" + res.address + ";经度" + res.lng + ";纬度:" + res.lat);
+            });
+        });
+    }
+</script>
+
+<buttoon class="btn btn-success" onclick="coord()">显示上海市</buttoon>
+<script>
+    require(['hdjs'])
+    function coord() {
+        require(['hdjs'], function (hdjs) {
+            hdjs.map({lng:121.480237,lat:31.236305}, function (res) {
+                //返回值是数组
+                alert("地址:" + res.address + ";经度" + res.lng + ";纬度:" + res.lat);
+            });
+        });
+    }
+</script>
+</body>
+</html>

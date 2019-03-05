@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<h5>文件表单</h5>
+<input type="file" class="filestyle" data-text="上传图片"  data-placeholder="请选择上传文件" data-btnClass="btn-primary">
+<script>
+    require(['hdjs','bootstrap'], function (hdjs) {
+        hdjs.bootstrapfilestyle(':file');
+    })
+</script>
+<hr>
+<h5>列表框</h5>
+<div>
+    <select class="js-example-basic-single form-control" multiple="multiple">
+        <option value="hdr">后盾人</option>
+        <option value="hdphp">HDPHP</option>
+        <option value="hdy">后盾云</option>
+    </select>
+</div>
+<script>
+    require(['hdjs','bootstrap'], function (hdjs) {
+        hdjs.select2('.js-example-basic-single');
+    })
+</script>
+<hr>
+<h5>复选框</h5>
+<input type="checkbox" name="status" class="bootstrap-switch">
+<script>
+    require(['hdjs','bootstrap'],function(hdjs){
+        hdjs.bootstrapswitch('.bootstrap-switch');
+    })
+</script>
+</body>
+</html>

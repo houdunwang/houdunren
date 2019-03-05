@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<div class="alert alert-info" role="alert">
+    <strong>请在console控制台看效果</strong>
+</div>
+<button class="btn btn-success" onclick="set()">设置</button>
+<script>
+    require(['bootstrap']);
+    function set() {
+        require(['hdjs'], function (hdjs) {
+            hdjs.cookie(function (Cookie) {
+                Cookie.set('hdjs', '这是使用 hdjs 创建的cookie');
+                console.log('设置COOKIE成功');
+            })
+        })
+    }
+</script>
+
+<button class="btn btn-success" onclick="alls()">获取所有</button>
+<script>
+    function alls() {
+        require(['hdjs'], function (hdjs) {
+            hdjs.cookie(function (Cookie) {
+                console.log(Cookie.get());
+            })
+        })
+    }
+</script>
+
+<button class="btn btn-success" onclick="remove()">删除</button>
+<script>
+    function remove() {
+        require(['hdjs'], function (hdjs) {
+            hdjs.cookie(function (Cookie) {
+                Cookie.remove('hdjs');
+                console.log('删除COOKIE成功');
+            })
+        })
+    }
+</script>
+</body>
+</html>

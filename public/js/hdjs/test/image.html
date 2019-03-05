@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<div class="col-sm-10">
+    <div class="input-group mb-1">
+        <input class="form-control" name="thumb" readonly="" value="">
+        <div class="input-group-append">
+            <button onclick="upImagePc(this)" class="btn btn-outline-secondary" type="button">单图上传</button>
+        </div>
+    </div>
+    <div style="display: inline-block;position: relative;">
+        <img src="../image/nopic.jpg" class="img-responsive img-thumbnail" width="150">
+        <em class="close" style="position: absolute;top: 3px;right: 8px;" title="删除这张图片"
+            onclick="removeImg(this)">×</em>
+    </div>
+</div>
+<script>
+    require(['hdjs','bootstrap']);
+    //上传图片
+    function upImagePc() {
+        require(['hdjs'], function (hdjs) {
+            var options = {
+                multiple: false,//是否允许多图上传
+                //data是向后台服务器提交的POST数据
+                data: {name: '后盾人', year: 2099},
+            };
+            hdjs.image(function (images) {
+                //上传成功的图片，数组类型
+                $("[name='thumb']").val(images[0]);
+                $(".img-thumbnail").attr('src', images[0]);
+            }, options)
+        });
+    }
+    //移除图片
+    function removeImg(obj) {
+        $(obj).prev('img').attr('src', '../dist/static/image/nopic.jpg');
+        $(obj).parent().prev().find('input').val('');
+    }
+</script>
+<hr>
+<style>
+    #box img {
+        width: 200px;
+        float: left;
+        margin-right: 10px;
+        border: solid 1px #999;
+        padding: 10px;
+        height: 200px;
+    }
+</style>
+<button onclick="upImageMul(this)" class="btn btn-success mb-3" type="button">多图上传</button>
+<div id="box"></div>
+<script>
+    require(['hdjs']);
+    //上传图片
+    function upImageMul(obj) {
+        require(['hdjs'], function (hdjs) {
+            hdjs.image(function (images) {
+                $(images).each(function (k, v) {
+                    $("<img src='" + v + "'/>").appendTo('#box');
+                })
+            }, {
+                //上传多图
+                multiple: true,
+            })
+        });
+    }
+</script>
+</body>
+</html>

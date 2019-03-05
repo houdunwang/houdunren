@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+
+<h5 onclick="base()" class="btn btn-success">基本使用</h5>
+<script>
+    require(['bootstrap'])
+    function base() {
+        require(['hdjs','bootstrap'], function (hdjs) {
+            var modalObj = hdjs.modal({
+                title: '友情提示',//标题
+                content: '后盾人 人人做后盾',//内容
+                footer: '<button type="button" class="btn btn-default confirm" data-dismiss="modal">关闭</button>',//底部
+                events: {
+                    confirm: function () {
+                        //哪个元素上有.confirm类，被点击就执行这个回调
+                        alert('点击了关闭按钮');
+                    }
+                }
+            });
+        });
+    }
+</script>
+
+<h5 onclick="ajax()" class="btn btn-success">远程加载</h5>
+<script>
+    function ajax() {
+        require(['hdjs','bootstrap'], function (hdjs) {
+            hdjs.modal({
+                //加载的远程地址
+                content: ['index.html'],
+                title: '添加用户',
+                width: 800,
+                show: true,//直接显示
+            });
+        });
+    }
+</script>
+
+<h5 onclick="post()" class="btn btn-success">加载并传递POST数据</h5>
+<script>
+    function post() {
+        require(['hdjs','bootstrap'], function (hdjs) {
+            hdjs.modal({
+                //加载的远程地址
+                content: ['php/modal.php', {name: '后盾网'}],
+                title: '添加站点',
+                width: 800
+            });
+        });
+    }
+</script>
+</body>
+</html>

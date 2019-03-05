@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<button onclick="upFile(this)" class="btn btn-success" type="button">选择文件</button>
+<script>
+    require(['bootstrap']);
+    //上传图片
+    function upFile() {
+        require(['hdjs','bootstrap'], function (hdjs) {
+            let options = {
+                extensions: 'txt,php',
+                //data是向后台服务器提交的POST数据
+                data:{name:'后盾人',year:2099},
+                //单个文件允许为5MB
+                fileSingleSizeLimit:5 * 1024 * 1024
+            };
+            hdjs.file(function (files) {
+                //上传成功的文件，数组类型
+                console.log(files);
+            }, options)
+        });
+    }
+</script>
+</body>
+</html>

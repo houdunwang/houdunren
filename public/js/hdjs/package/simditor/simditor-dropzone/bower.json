@@ -1,0 +1,27 @@
+{
+  "name": "simditor-dropzone",
+  "version": "2.0.1",
+  "authors": [
+    "ichord <chord.luo@gmail.com>"
+  ],
+  "description": "simple drag and drop for Simditor",
+  "main": "lib/simditor-dropzone.js",
+  "keywords": [
+    "simditor",
+    "dragdrop",
+    "dnd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "vendor",
+    "Gemfile",
+    "Gemfile.lock",
+    "Gruntfile.coffee",
+    "package.json"
+  ],
+  "dependencies": {
+    "simditor": "2.x"
+  }
+}

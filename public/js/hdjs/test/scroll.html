@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<button onclick="scrollToBottom()" class="btn btn-success" id="bt">滚动到底部</button>
+<script>
+    require(['bootstrap']);
+    function scrollToBottom() {
+        require(['hdjs'], function (hdjs) {
+            hdjs.scrollTo('body','#bottom',1000, {queue:true});
+        });
+    }
+</script>
+<div style="background: red;height: 2000px;"></div>
+<h2 id="bottom">会滚动到这里</h2>
+</body>
+</html>

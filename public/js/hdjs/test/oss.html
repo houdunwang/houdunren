@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<div id="container">
+    <div class="row">
+        <h1 class="text-center"></h1>
+        <div class="input-group">
+            <input type="text" name="file" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="selectfiles">选择文件</button>
+                <button class="btn btn-outline-secondary" type="button" id="postfiles">开始上传</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require(['oss', 'bootstrap'], function (oss) {
+        oss.upload({
+            //容器
+            container: 'container',
+            //文件选择按钮
+            pick: 'selectfiles',
+            //开始上传按钮
+            upButton: 'postfiles',
+            //获取签名
+            serverUrl: '/plugin/hdjs/test/php/ossSign.php?',
+            //上传目录
+            dir: 'houdunren/',
+            //local_name本地文件名 random_name随机文件名
+            name_type: 'random_name',
+            //允许上传类型
+            filters: {
+                //文件类型
+                mime_types: [
+                    //只允许上传图片和zip,rar文件
+                    {title: "Image files", extensions: "jpg,gif,png,bmp,jpeg"},
+                    {title: "Zip files", extensions: "zip,rar"},
+                    {title: "Video", extensions: "mp4"}
+                ],
+                //最大只能上传10mb的文件
+                max_file_size: '10000mb',
+                //不允许选取重复文件
+                prevent_duplicates: true
+            },
+            event: {
+                //选择文件
+                select: function (file) {
+                    $('h1').html('0%');
+                },
+                //开始上传
+                start: function (up, file) {
+                    console.log('开始上传');
+                },
+                progress: function (up, file) {
+                    //上传进度
+                    $('h1').html('<span>' + file.percent + "%</span>");
+                },
+                success: function (up, file, info) {
+                    $("[name='file']").val(file.name);
+                    $("h1").remove();
+                },
+                error: function (up, file, info) {
+                    alert(info.response);
+                }
+            }
+        });
+    })
+</script>
+</body>
+</html>

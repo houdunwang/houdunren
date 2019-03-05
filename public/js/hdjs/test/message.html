@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<button onclick="base()" class="btn btn-success">基本使用</button>
+<script>
+    require(['bootstrap']);
+    function base() {
+        require(['hdjs'], function (hdjs) {
+            hdjs.message('基本使用', '', 'success');
+        })
+    }
+</script>
+
+<button onclick="size()" class="btn btn-success">弹出框宽度100%</button>
+<script>
+    function size() {
+        require(['hdjs'], function (hdjs) {
+            hdjs.message('弹出框宽度100%', '', 'success', 2, {width: '80%'});
+        })
+    }
+</script>
+
+<button onclick="hideModal()" class="btn btn-success">使用modal模态框事件处理</button>
+<script>
+    function hideModal() {
+        require(['hdjs'], function (hdjs) {
+            hdjs.message('使用modal模态框事件处理', '', 'success', 2, {
+                events: {
+                    'hidden.bs.modal': function () {
+                        alert('模态框消失时，我来了');
+                    }
+                }
+            });
+        })
+    }
+</script>
+
+<button onclick="confirm()" class="btn btn-success">确认消息</button>
+<script>
+    function confirm() {
+        require(['hdjs'], function (hdjs) {
+            hdjs.confirm('确定删除吗?', function () {
+                alert('点击确定后执行的回调函数');
+            })
+        })
+    }
+</script>
+</body>
+</html>

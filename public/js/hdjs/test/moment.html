@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'test/php/uploader.php?';
+        window.hdjs.filesLists = 'test/php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<h4>请查看控制器看效果</h4>
+<script type="text/javascript">
+    require(['moment'], function (moment) {
+        //设置语言
+        moment.locale('zh-CN');
+        console.log(moment().format('YYYY-MM-DD HH:mm:ss'));
+    });
+</script>
+</body>
+</html>

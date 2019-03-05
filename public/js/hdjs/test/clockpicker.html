@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'test/php/uploader.php?';
+        window.hdjs.filesLists = 'test/php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+<h5>使用示例</h5>
+<div class="input-group clockpicker">
+    <input type="text" class="form-control" value="09:30">
+    <span class="input-group-addon">
+        <span class="glyphicon glyphicon-time"></span>
+    </span>
+</div>
+<script type="text/javascript">
+    require(['hdjs','bootstrap'], function (hdjs) {
+        hdjs.clockpicker('.clockpicker',{
+            afterDone: function() {
+                console.log("after hide times is "+$('.clockpicker input').val());
+            }
+        });
+    });
+</script>
+</body>
+</html>

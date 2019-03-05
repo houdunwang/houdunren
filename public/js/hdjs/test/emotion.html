@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>表情选择</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        window.hdjs = {};
+        window.hdjs.base = '../';
+        window.hdjs.uploader = 'php/uploader.php?';
+        window.hdjs.filesLists = 'php/filesLists.php?';
+    </script>
+    <script src="../require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body style="padding: 50px;">
+
+<input class="form-control" name="icon" placeholder="点击文本框选择表情">
+<script>
+    require(['hdjs','bootstrap'], function (hdjs) {
+        $(function () {
+            hdjs.emotion({
+                //点击的元素，可以为任何元素触发
+                btn: "[name='icon']",
+                //选中图标后填入的文本框
+                input: "[name='icon']",
+                //选择图标后执行的回调函数
+                callback: function () {
+                    console.log('选择表情后的执行的回调函数');
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
