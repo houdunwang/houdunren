@@ -36,9 +36,12 @@ class AppServiceProvider extends ServiceProvider
 
     protected function loadConfig()
     {
-        $config = config('database.connections.mysql');
-        $config = array_merge($config, include base_path('database.php'));
-        config(['database.connections.mysql' => $config]);
+        try {
+            $config = config('database.connections.mysql');
+            $config = array_merge($config, include base_path('database.php'));
+            config(['database.connections.mysql' => $config]);
+        } catch (\Exception $e) {
+        }
     }
 
     /**

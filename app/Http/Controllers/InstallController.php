@@ -32,7 +32,7 @@ class InstallController extends Controller
             $pass = $request->input('password');
             new \PDO("mysql:host={$host};dbname={$db}", $user, $pass);
             put_contents_file(base_path('database.php'),
-                array_merge(array_merge(include base_path('database.php'), $request->except('_token'))));
+                ['host' => $host, 'database' => $db, 'username' => $user, 'password' => $pass]);
             return redirect()->route('install.migrate')->with('success', '数据库配置正确');
         } catch (\Exception $e) {
             return redirect(route('install.database'))->with('info', '数据为连接失败');

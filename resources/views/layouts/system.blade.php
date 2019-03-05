@@ -6,23 +6,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="shortcut icon" href="{{asset('favicon.ico')}}" type="image/x-icon"/>
-    <link href="{{asset('org/hdjs/package/bootstrap/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <script src="{{asset('js/util.js')}}"></script>
     <script>
-        window.hdjs = {
-            base: '/org/hdjs',
-            uploader: '{{route('common.upload.make')}}?',
-            filesLists: '{{route('common.upload.lists')}}?',
-        };
         window.system = {
             upload:{!! json_encode(config_get('upload','','system')) !!},
         }
     </script>
-    <script src="{{asset('org/hdjs/require.js')}}"></script>
-    <script src="{{asset('org/hdjs/config.js')}}"></script>
-
+    @include('layouts.hdjs')
     @stack('css')
 </head>
 <body class="admin" style="background: url('{{asset('images/system/admin_bg.jpg')}}')">
