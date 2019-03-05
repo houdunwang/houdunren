@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadConfig();
+        $this->initialization();
         $this->observer();
         \Schema::defaultStringLength(191);
 //        config(['app.debug' => config_get('base.debug', false, 'system')]);
@@ -34,12 +34,17 @@ class AppServiceProvider extends ServiceProvider
         User::observe(UserObserver::class);
     }
 
-    protected function loadConfig()
+    protected function initialization()
     {
         try {
-            $config = config('database.connections.mysql');
-            $config = array_merge($config, include base_path('database.php'));
-            config(['database.connections.mysql' => $config]);
+            if (!config('app.key')) {
+                rename(base_path('.env.example'),base_path('.env'));
+                \Artisan::call('key:generate');
+            } else {
+                $config = config('database.connections.mysql');
+                $config = array_merge($config, include base_path('database.php'));
+                config(['database.connections.mysql' => $config]);
+            }
         } catch (\Exception $e) {
         }
     }
