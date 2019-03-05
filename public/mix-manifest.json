@@ -1,5 +1,7 @@
 {
     "/js/app.js": "/js/app.js?id=d39a331609bdc913ac08",
     "/css/app.css": "/css/app.css?id=4657b410300ea85c6f29",
-    "/js/util.js": "/js/util.js?id=57f431c3af736c52bec4"
+    "/js/util.js": "/js/util.js?id=57f431c3af736c52bec4",
+    "/js/shop.js": "/js/shop.js",
+    "/css/shop.css": "/css/shop.css"
 }
