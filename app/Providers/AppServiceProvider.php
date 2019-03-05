@@ -37,14 +37,9 @@ class AppServiceProvider extends ServiceProvider
     protected function initialization()
     {
         try {
-            if (!config('app.key')) {
-                rename(base_path('.env.example'),base_path('.env'));
-                \Artisan::call('key:generate');
-            } else {
-                $config = config('database.connections.mysql');
-                $config = array_merge($config, include base_path('database.php'));
-                config(['database.connections.mysql' => $config]);
-            }
+            $config = config('database.connections.mysql');
+            $config = array_merge($config, include base_path('database.php'));
+            config(['database.connections.mysql' => $config]);
         } catch (\Exception $e) {
         }
     }
