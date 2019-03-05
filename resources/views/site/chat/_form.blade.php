@@ -95,7 +95,7 @@
             <label>二维码</label>
             <div class="input-group mb-1">
                 <input type="text" class="form-control" name="qr" readonly="" required
-                       value="{{old('qr',$chat['qr']??asset('images/nopic.jpg'))}}">
+                       value="{{old('qr',$chat['qr']??asset('images/system/nopic.jpg'))}}">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" onclick="uploadImage('qr')" type="button">
                         选择文件
@@ -103,13 +103,13 @@
                 </div>
             </div>
             <img class="img-thumbnail d-block" id="qr"
-                 src="{{old('qr',$chat['qr']??asset('images/nopic.jpg'))}}" style="width: 150px;">
+                 src="{{old('qr',$chat['qr']??asset('images/system/nopic.jpg'))}}" style="width: 150px;">
         </div>
         <div class="form-group">
             <label>公众号图标</label>
             <div class="input-group mb-1">
                 <input type="text" class="form-control" name="icon" readonly="" required
-                       value="{{old('icon',$chat['icon']??asset('images/nopic.jpg'))}}">
+                       value="{{old('icon',$chat['icon']??asset('images/system/nopic.jpg'))}}">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" onclick="uploadImage('icon')" type="button">
                         选择图标
@@ -117,7 +117,7 @@
                 </div>
             </div>
             <img class="img-thumbnail d-block"
-                 src="{{old('icon',$chat['icon']??asset('images/nopic.jpg'))}}" style="width: 150px;">
+                 src="{{old('icon',$chat['icon']??asset('images/system/nopic.jpg'))}}" style="width: 150px;">
         </div>
     </div>
 </div>

@@ -25,7 +25,7 @@
                     </button>
                 </div>
             </div>
-            <img class="img-thumbnail d-block" src="{{old('thumb',$module['package']['thumb']??asset('images/nopic.jpg'))}}">
+            <img class="img-thumbnail d-block" src="{{old('thumb',$module['package']['thumb']??asset('images/system/nopic.jpg'))}}">
             <span class="text-muted">请输入500x300的模块预览图片，图片类型要求为jpeg</span>
             @push('js')
                 <script>

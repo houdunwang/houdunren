@@ -21,7 +21,7 @@
                     <label>文章图片</label>
                     <div class="input-group">
                         <input type="text" class="form-control" name="picurl" readonly="" required
-                               value="{{old('picurl',$cover['picurl']??asset('images/nopic.jpg'))}}">
+                               value="{{old('picurl',$cover['picurl']??asset('images/system/nopic.jpg'))}}">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" onclick="uploadImage('picurl')" type="button">
                                 选择文件
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <img class="img-thumbnail d-block mt-1"
-                         src="{{old('picurl',$cover['picurl']??asset('images/nopic.jpg'))}}" style="width: 150px;">
+                         src="{{old('picurl',$cover['picurl']??asset('images/system/nopic.jpg'))}}" style="width: 150px;">
                 </div>
                 <div class="form-group">
                     <label>跳转链接</label>

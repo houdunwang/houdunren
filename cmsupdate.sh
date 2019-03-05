@@ -8,4 +8,5 @@ git commit -m '新版发布'
 git push
 git checkout master
 git merge dev
+git push
 git checkout dev
