@@ -26,8 +26,8 @@
                             <div class="col-3 border-right text-center p-2 bg-info text-light"
                                  style="">配置数据库
                             </div>
-                            <div class="col-3 border-right text-center p-2 bg-dark text-light">创建数据表</div>
-                            <div class="col-3 text-center p-2 bg-info text-light">完成安装</div>
+                            <div class="col-3 border-right text-center p-2 bg-info text-light">创建数据表</div>
+                            <div class="col-3 text-center p-2 bg-dark text-light">完成安装</div>
                         </div>
                     </div>
 

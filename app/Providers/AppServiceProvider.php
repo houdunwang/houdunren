@@ -20,12 +20,6 @@ class AppServiceProvider extends ServiceProvider
         $this->initialization();
         $this->observer();
         \Schema::defaultStringLength(191);
-//        config(['app.debug' => config_get('base.debug', false, 'system')]);
-
-//        \Blade::component('components.breadcrumb', 'breadcrumb');
-//        \Blade::directive('breadcrumb', function ($menus) {
-//            return view('components.breadcrumb', compact('menus'));
-//        });
     }
 
     protected function observer()
