@@ -86,7 +86,7 @@ a {
 }
 
 .admin .admin-setting-menu .logo {
-  background: url(/images/logo.png?b3f5a49c0352569233e01d072020e8a8) no-repeat;
+  background-repeat: no-repeat;
   background-size: contain;
   height: 60px;
   opacity: 0.9;

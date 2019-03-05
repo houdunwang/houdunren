@@ -10,7 +10,7 @@
             登录 <a href="https://mp.weixin.qq.com/" target="_blank">微信公众平台</a>，点击左侧菜单最后一项，进入 [ 开发者中心 ]
         </div>
         <div class="card-body">
-            <img src="{{asset('images/chat/Snip20160308_5.png')}}" alt="">
+            <img src="{{asset('images/system/wechat_setting.png')}}" alt="">
         </div>
     </div>
     <div class="card mt-3">
@@ -18,7 +18,7 @@
             在开发者中心，找到［ 服务器配置 ］栏目下URL和Token设置
         </div>
         <div class="card-body">
-            <img src="{{asset('images/chat/2.png')}}">
+            <img src="{{asset('images/system/wechat_url.png')}}">
             <hr>
             <h6 class="text-dark">将以下链接链接填入对应输入框</h6>
             <div class="row mb-2">

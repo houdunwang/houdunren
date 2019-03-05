@@ -25,7 +25,7 @@
 
     @stack('css')
 </head>
-<body class="admin" style="background: url('{{asset('images/admin.jpg')}}')">
+<body class="admin" style="background: url('{{asset('images/system/admin_bg.jpg')}}')">
 @include('layouts.message')
 <div class="container-fluid top-menu shadow-lg border-bottom border-dark">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -89,8 +89,8 @@
 </div>
 <div class="container-fluid admin-setting-menu  pt-5 d-none d-md-block d-lg-block">
     <div class="row">
-        <div class="col-md-4 logo">
-            <div style="background-image: url('{!! config_get('base.logo','','system') !!}')">&nbsp;</div>
+        <div class="col-md-4 logo"
+             style="background-image: url('{!! config_get('base.logo',asset('images/system/logo.png'),'system') !!}')">
         </div>
         <div class="col-md-8 text-right admin-site-menu">
             <a href="{{route('logout')}}" class="tile">
