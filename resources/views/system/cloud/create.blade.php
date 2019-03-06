@@ -8,17 +8,12 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    <label>服务器</label>
-                    <select class="form-control" name="api_host" required>
-                        <option>http://test.hdcms.com</option>
-                    </select>
-                    <small class="text-secondary">
-                        请填写 <a href="http://www.hdcms.com" class="text-primary" target="_blank">应用商店</a> 的帐号与密码
-                    </small>
+                    <label>云主机</label>
+                    <input type="text" name="api_host" value="{{$cloud['api_host']??'https://www.hdcms.com'}}" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>帐号</label>
-                    <input type="text" name="username" class="form-control">
+                    <input type="text" name="username" class="form-control" value="{{$cloud['username']??''}}">
                 </div>
                 <div class="form-group">
                     <label>密码</label>

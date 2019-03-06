@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
             GroupSeeder::class,
             GroupPackageSeeder::class,
             CloudSeeder::class,
-            AuthClientSeeder::class
         ]);
     }
 }

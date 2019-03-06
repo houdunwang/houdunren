@@ -25,8 +25,10 @@ class CloudController extends Controller
 {
     public function create()
     {
-        return view('system.cloud.create', compact('status'));
+        $cloud = Cloud::first();
+        return view('system.cloud.create', compact('cloud'));
     }
+
     /**
      * 获取token
      * @param Request $request
@@ -36,6 +38,7 @@ class CloudController extends Controller
      */
     public function store(Request $request, HttpServer $httpServer)
     {
+        Cloud::find(1)->update(['api_host'=>$request->input('api_host')]);
         try {
             $response = $httpServer->request('POST', 'api/token',
                 ['form_params' => $request->only(['username', 'password'])]);
@@ -43,7 +46,7 @@ class CloudController extends Controller
             Cloud::find(1)->update($data);
             return back()->with('success', '服务器帐号绑定成功');
         } catch (\Exception $exception) {
-            return back()->with('info', '帐号或密码错误');
+            return back()->with('info', $exception->getMessage());
         }
     }
 
