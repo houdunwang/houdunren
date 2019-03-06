@@ -9,6 +9,11 @@
 
 namespace App\Traits;
 
+/**
+ * 点赞
+ * Trait Favour
+ * @package App\Traits
+ */
 trait Favour
 {
     /**

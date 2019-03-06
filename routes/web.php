@@ -23,6 +23,8 @@ Route::group(['prefix' => 'common', 'as' => 'common.'],
         Route::get('user/{user}/follow', 'Common\UserController@follow')->name('user.follow');
         //点赞
         Route::get('favour/{model}/{id}', 'Common\FavourController@make')->name('favour.make');
+        //收藏
+        Route::get('favorite/{model}/{id}', 'Common\FavoriteController@make')->name('favorite.make');
     });
 //会员中心
 Route::get('member', 'Member\HomeController')->middleware(['auth', 'site'])->name('member');

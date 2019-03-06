@@ -5,6 +5,7 @@ namespace App;
 use App\Models\Attachment;
 use App\Models\Group;
 use App\Models\Site;
+use App\Traits\Favorite;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,7 +15,7 @@ use App\Traits\Favour;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles, HasApiTokens, Favour;
+    use Notifiable, HasRoles, HasApiTokens, Favour, Favorite;
 
     /**
      * The attributes that are mass assignable.

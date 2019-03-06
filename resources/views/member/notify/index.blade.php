@@ -14,44 +14,37 @@
             </a>
         </li>
     </ul>
-    <div class="card">
-        <div class="card-header">
-            站内消息
-        </div>
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>消息</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($notifications as $notification)
-                    <tr>
-                        <td scope="row">
-                            {!!  $notification->data['message']!!}
-                        </td>
-                        <td class="text-right">
-                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                @if ($notification->data['url'])
-                                    <a href="{{route('member.notify.show',$notification['id'])}}"
-                                       class="btn btn-outline-success">查看</a>
-                                @endif
-                                <form action="{{route('member.notify.destroy',$notification)}}" method="post">
-                                    @csrf @method('DELETE')
-                                </form>
-                                <button type="button" class="btn btn-outline-danger" onclick="destroy(this)">
-                                    删除
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <table class="table table-bordered bg-light table-striped border">
+        <thead class="">
+        <tr>
+            <th>消息</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ($notifications as $notification)
+            <tr>
+                <td scope="row">
+                    {!!  $notification->data['message']!!}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        @if ($notification->data['url'])
+                            <a href="{{route('member.notify.show',$notification['id'])}}"
+                               class="btn btn-outline-success">查看</a>
+                        @endif
+                        <form action="{{route('member.notify.destroy',$notification)}}" method="post">
+                            @csrf @method('DELETE')
+                        </form>
+                        <button type="button" class="btn btn-outline-danger" onclick="destroy(this)">
+                            删除
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
     <div class="mt-2">
         {{$notifications->links()}}
     </div>
