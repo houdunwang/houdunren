@@ -9,14 +9,25 @@
 
 namespace App\Http\Controllers\Common;
 
+use App\Models\Site;
 use App\Repositories\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * 用户相关
+ * Class UserController
+ * @package App\Http\Controllers\Common
+ */
 class UserController extends Controller
 {
-    public function search(UserRepository $repository, Request $request)
+    /**
+     * 搜索用户
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function search(Request $request)
     {
         //排除用户字段
         $id = request()->query('id', '');
@@ -28,5 +39,24 @@ class UserController extends Controller
             $users = User::whereNotIn('id', explode(',', $id))->paginate(8);
         }
         return view('common.user.search', compact('users'));
+    }
+
+    /**
+     * 关注与取消关注
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function follow(User $user)
+    {
+        \site(null, true);
+        \module(null, true);
+        if ($user->hasFans(auth()->user())) {
+            $user->fans()->detach([auth()->id()]);
+            return back()->with('关注已取消');
+        } else {
+            $user->fans()->attach(
+                auth()->id(), ['site_id' => \site()['id'], 'module_id' => \module()['id']]);
+            return back()->with('关注成功');
+        }
     }
 }

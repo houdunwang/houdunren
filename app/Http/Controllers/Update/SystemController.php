@@ -11,7 +11,7 @@ namespace App\Http\Controllers\Update;
 
 use App\Exceptions\ResponseHttpException;
 use App\Models\Cloud;
-use GuzzleHttp\Client;
+use App\Servers\HttpServer;
 use App\Http\Controllers\Controller;
 
 /**
@@ -21,25 +21,16 @@ use App\Http\Controllers\Controller;
  */
 class SystemController extends Controller
 {
-    protected $client;
-    protected $host;
-
-    public function __construct()
-    {
-        $this->host = Cloud::find(1)['api_host'] ?? config('app.api_host') . '/api';
-        $this->client = new Client(['base_uri' => $this->host . '/shop/cms/']);
-    }
-
     /**
      * 检测更新
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function check()
+    public function check(HttpServer $httpServer)
     {
         try {
             $cloud = Cloud::find(1) ?? null;
-            $response = $this->client->request('GET', $cloud['build']);
+            $response = $httpServer->request('GET', "api/shop/cms/{$cloud['build']}");
             $update = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
             //检测目录权限
             foreach ($update['files'] as $file => $stat) {
@@ -112,11 +103,12 @@ class SystemController extends Controller
      */
     protected function downFile(string $file)
     {
-        $response = $this->client->request('POST', "file", ['form_params' => ['file' => $file]]);
+        $httpServer = new HttpServer();
+        $response = $httpServer->request('POST', "api/shop/cms/file", ['form_params' => ['file' => $file]]);
         if ($response->getStatusCode() == 200) {
             $content = $response->getBody()->getContents();
             \Storage::drive('base')->makeDirectory('backup/cms/' . dirname($file));
-            if (file_put_contents('../backup/cms/' . $file, $content)===false) {
+            if (file_put_contents('../backup/cms/' . $file, $content) === false) {
                 throw new \Exception('文件保存失败: backup/cms 目录不可写');
             }
             $cache = \Cache::get('updateLists');

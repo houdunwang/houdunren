@@ -54,6 +54,44 @@ class User extends Authenticatable
     ];
 
     /**
+     * 我的粉丝
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function fans()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id')->wherePivot('site_id',\site()['id'])->withTimestamps();
+    }
+
+    /**
+     * 我关注册的人
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id')->wherePivot('site_id',\site()['id'])->withTimestamps();
+    }
+
+    /**
+     * 指定用户是否为我的粉丝
+     * @param User $user
+     * @return mixed
+     */
+    public function hasFans(User $user)
+    {
+        return $this->fans->contains($user);
+    }
+
+    /**
+     * 我是否关注指定用户
+     * @param User $user
+     * @return mixed
+     */
+    public function following(User $user)
+    {
+        return $this->followers->contains($user);
+    }
+
+    /**
      * 接口用户条件
      * @param $username
      * @return mixed

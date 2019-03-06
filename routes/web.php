@@ -19,6 +19,8 @@ Route::group(['prefix' => 'common', 'as' => 'common.'],
         Route::any('user/search', 'Common\UserController@search')->name('user.search');
         Route::any('notification/code', 'Common\NotificationController@code')
             ->name('notification.code');
+        //粉丝关注
+        Route::get('user/{user}/follow','Common\UserController@follow')->name('user.follow');
     });
 //会员中心
 Route::get('member', 'Member\HomeController')->middleware(['auth', 'site'])->name('member');
