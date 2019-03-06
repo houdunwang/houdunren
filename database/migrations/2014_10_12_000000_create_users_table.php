@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('group_id')->comment('后台用户组');
             $table->timestamp('admin_end')->nullable()->comment('后台结束时间');
             $table->unsignedTinyInteger('lock')->comment('锁定后台操作权限');
+            $table->unsignedMediumInteger('favour_count')->default(0)->comment('点赞数');
             $table->rememberToken();
             $table->timestamps();
         });

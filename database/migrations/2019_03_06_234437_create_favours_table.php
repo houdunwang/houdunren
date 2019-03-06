@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFollowersTable extends Migration
+class CreateFavoursTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateFollowersTable extends Migration
      */
     public function up()
     {
-        Schema::create('followers', function (Blueprint $table) {
+        Schema::create('favours', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id')->index();
-            $table->unsignedInteger('follower_id')->index();
+            $table->unsignedInteger('favour_id')->index();
+            $table->string('favour_type')->index();
             $table->unsignedInteger('site_id')->comment('站点编号');
             $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
             $table->unsignedInteger('module_id')->comment('用户组编号');
@@ -32,6 +33,6 @@ class CreateFollowersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('followers');
+        Schema::dropIfExists('favours');
     }
 }

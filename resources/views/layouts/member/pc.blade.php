@@ -23,6 +23,14 @@
                 </ul>
                 <div class="my-2 my-lg-0">
                     <ul class="navbar-nav">
+                        @if($notifyCount = auth()->user()->unreadNotifications->count())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('member.notify.index')}}">
+                                消息
+                                <span class="badge badge-success rounded-pill align-top small"> {{$notifyCount}}</span>
+                            </a>
+                        </li>
+                        @endif
                         <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -99,6 +107,10 @@
                         <a class="list-group-item list-group-item-action text-secondary"
                            href="{{route('member.mobile.index')}}">
                             修改手机
+                        </a>
+                        <a class="list-group-item list-group-item-action text-secondary"
+                           href="{{route('member.notify.index')}}">
+                            站内消息
                         </a>
                     </div>
                 </div>

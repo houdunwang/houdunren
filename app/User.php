@@ -10,10 +10,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Passport\HasApiTokens;
+use App\Traits\Favour;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles, HasApiTokens;
+    use Notifiable, HasRoles, HasApiTokens, Favour;
 
     /**
      * The attributes that are mass assignable.
@@ -39,6 +40,7 @@ class User extends Authenticatable
         'admin_end',
         'lock',
         'group_id',
+        'favour_count',
         'real_name',
     ];
     protected $casts = ['lock' => 'boolean', 'admin_end' => 'datetime'];
@@ -53,13 +55,21 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function favourUpdate()
+    {
+        $this['favour_count'] = $this->favourCount();
+        return $this->save();
+    }
+
     /**
      * 我的粉丝
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function fans()
     {
-        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id')->wherePivot('site_id',\site()['id'])->withTimestamps();
+        return $this
+            ->belongsToMany(User::class, 'followers', 'user_id', 'follower_id')
+            ->wherePivot('site_id', \site()['id'])->withTimestamps();
     }
 
     /**
@@ -68,7 +78,8 @@ class User extends Authenticatable
      */
     public function followers()
     {
-        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id')->wherePivot('site_id',\site()['id'])->withTimestamps();
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id')->wherePivot('site_id',
+            \site()['id'])->withTimestamps();
     }
 
     /**

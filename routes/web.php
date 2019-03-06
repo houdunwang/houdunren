@@ -20,7 +20,9 @@ Route::group(['prefix' => 'common', 'as' => 'common.'],
         Route::any('notification/code', 'Common\NotificationController@code')
             ->name('notification.code');
         //粉丝关注
-        Route::get('user/{user}/follow','Common\UserController@follow')->name('user.follow');
+        Route::get('user/{user}/follow', 'Common\UserController@follow')->name('user.follow');
+        //点赞
+        Route::get('favour/{model}/{id}', 'Common\FavourController@make')->name('favour.make');
     });
 //会员中心
 Route::get('member', 'Member\HomeController')->middleware(['auth', 'site'])->name('member');
@@ -32,6 +34,8 @@ Route::group(['middleware' => ['auth', 'site'], 'prefix' => 'member', 'namespace
         Route::resource('mail', 'MailController');
         Route::resource('mobile', 'MobileController');
         Route::resource('change-password', 'ChangePasswordController');
+        Route::resource('notify', 'NotifyController');
+        Route::get('notify-all', 'NotifyController@all')->name('notify.all');
     });
 //系统
 Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.', 'namespace' => 'System'],
@@ -74,7 +78,7 @@ Route::group(['middleware' => ['system'], 'prefix' => 'update', 'as' => 'update.
         Route::get('module/{name}/download', 'ModuleController@download')->name('module.download');
     });
 //站点
-Route::group(['middleware' => ['auth','install'], 'prefix' => 'site', 'as' => 'site.', 'namespace' => 'Site'],
+Route::group(['middleware' => ['auth', 'install'], 'prefix' => 'site', 'as' => 'site.', 'namespace' => 'Site'],
     function () {
         //站点管理
         Route::resource('site', 'SiteController');
@@ -88,8 +92,8 @@ Route::group(['middleware' => ['auth','install'], 'prefix' => 'site', 'as' => 's
         Route::get('{site}/permission/cache', 'PermissionController@site')->name('permission.cache');
         //站点配置
         Route::resource('{site}/config', 'ConfigController');
-        Route::post('{site}/send_test_mail','ConfigController@sendTestMail')->name('send.test.mail');
-        Route::post('{site}/send_test_mobile','ConfigController@sendTestMobile')->name('send.test.mobile');
+        Route::post('{site}/send_test_mail', 'ConfigController@sendTestMail')->name('send.test.mail');
+        Route::post('{site}/send_test_mobile', 'ConfigController@sendTestMobile')->name('send.test.mobile');
         //微信公众号
         Route::resource('{site}/chat', 'ChatController');
     });
