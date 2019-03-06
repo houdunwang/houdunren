@@ -81,7 +81,7 @@ class ModuleRepository extends Repository
     public function update(Model $model, array $attributes)
     {
         $attributes = array_merge(array_except($this->package, ['name']), $attributes);
-        $this->package = array_merge(include $this->configPath($model['name']) . 'permissions.php', $attributes);
+        $this->package = array_merge(include $this->configPath($model['name']) . 'package.php', $attributes);
         $this->package['version'] = time();
         $this->permissions = include $this->configPath() . 'permissions.php';
         $this->business = include $this->configPath() . 'business.php';

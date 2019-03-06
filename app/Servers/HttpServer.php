@@ -91,7 +91,7 @@ class HttpServer
         try {
             return $this->client($uri)->request($method, $uri, $options);
         } catch (\Exception $e) {
-            throw new \Exception('远程服务器请求失败');
+            throw new \Exception('远程服务器请求失败,请重新绑定云帐号');
         }
     }
 
@@ -114,7 +114,7 @@ class HttpServer
                     'http_errors' => true,
                 ], $options));
         } catch (\Exception $e) {
-            throw new \Exception('远程服务器请求失败');
+            throw new \Exception('远程服务器请求失败,请重新绑定云帐号');
         }
     }
 }

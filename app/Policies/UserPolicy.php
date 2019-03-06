@@ -6,6 +6,7 @@
  * |    Author: 向军大叔 <www.aoxiangjun.com>
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Policies;
 
 use App\User;
@@ -14,11 +15,6 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class UserPolicy
 {
     use HandlesAuthorization;
-
-    public function before($user, $model)
-    {
-        return isSuperAdmin() ? true : null;
-    }
 
     public function index(User $user)
     {
@@ -37,6 +33,11 @@ class UserPolicy
     public function update(User $user, User $model)
     {
         return $user['id'] == $model['id'] || isSuperAdmin();
+    }
+
+    public function lock(User $user, User $model)
+    {
+        return $model['id'] > 1 && isSuperAdmin();
     }
 
     public function delete(User $user, User $model)

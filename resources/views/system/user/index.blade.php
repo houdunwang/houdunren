@@ -23,7 +23,7 @@
                     <th scope="col">真实姓名</th>
                     <th scope="col">会员组</th>
                     <th scope="col">状态</th>
-                    <th scope="col">站点</th>
+                    <th scope="col">所在站点</th>
                     <th scope="col">注册时间</th>
                     <th scope="col">结束时间</th>
                     <th scope="col"></th>
@@ -40,30 +40,46 @@
                         </td>
                         <td>
                             @if ($user['lock'])
-                                <span class="badge badge-danger" data-container="body" data-toggle="popover" data-placement="top" data-content="被锁定用户将不能进行后台操作">被锁定</span>
+                                <span class="badge badge-danger" data-container="body" data-toggle="popover"
+                                      data-placement="top" data-content="被锁定用户将不能进行后台操作">被锁定</span>
                             @else
-                                <span class="badge badge-success" data-container="body" data-toggle="popover" data-placement="top" data-content="被锁定用户将不能进行后台操作">正常访问</span>
+                                <span class="badge badge-success" data-container="body" data-toggle="popover"
+                                      data-placement="top" data-content="被锁定用户将不能进行后台操作">正常访问</span>
                             @endif
                         </td>
-                        <td>{{$user->site['name']}}</td>
+                        <td>
+                            @foreach($user->sites as $site)
+                                <span class="badge badge-light text-secondary">
+                                    {{$site['name']}}
+                                </span>
+                            @endforeach
+                        </td>
                         <td>{{$user['created_at']->format('Y-m-d')}}</td>
                         <td>{{$user['admin_end']->format('Y-m-d')}}</td>
                         <td class=" text-right">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                 <a class="btn btn-outline-success" href="{{route('system.user.edit',$user)}}">编辑</a>
-                                <a class="btn btn-outline-info" href="{{route('system.user.show',$user)}}">查看操作权限</a>
-                                @if ($user['lock'])
-                                    <a class="btn btn-outline-danger" href="{{route('system.user.lock',[$user,'unlock'])}}">
-                                        解锁用户
-                                    </a>
-                                @else
-                                    <a class="btn btn-outline-secondary" href="{{route('system.user.lock',[$user,'lock'])}}">
-                                        锁定用户
-                                    </a>
-                                @endif
-                                <button type="button" class="btn btn-outline-secondary" onclick="destroy(this)">
-                                    删除用户
-                                </button>
+                                <a class="btn btn-outline-info" href="{{route('system.user.show',$user)}}">
+                                    查看操作权限
+                                </a>
+                                @can('lock',$user)
+                                    @if ($user['lock'])
+                                        <a class="btn btn-outline-danger"
+                                           href="{{route('system.user.lock',[$user,'unlock'])}}">
+                                            解锁用户
+                                        </a>
+                                    @else
+                                        <a class="btn btn-outline-secondary"
+                                           href="{{route('system.user.lock',[$user,'lock'])}}">
+                                            锁定用户
+                                        </a>
+                                    @endif
+                                @endcan
+                                @can('delete',$user)
+                                    <button type="button" class="btn btn-outline-secondary" onclick="destroy(this)">
+                                        删除用户
+                                    </button>
+                                @endcan
                                 <form action="{{route('system.user.destroy',$user)}}" method="post">
                                     @csrf @method('DELETE')
                                 </form>
@@ -89,7 +105,8 @@
                 });
             })
         }
-        require(['bootstrap'],function(){
+
+        require(['bootstrap'], function () {
             $(function () {
                 $('[data-toggle="popover"]').popover({
                     trigger: 'hover'

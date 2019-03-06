@@ -24,8 +24,10 @@
                         <div class="col-xs-4 col-md-6 text-right mt-3">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                 @if ($module['local'])
-                                    <a class="btn btn-outline-success" href="{{route('system.module.edit',$module)}}">
-                                        编辑模块
+                                    <a class="btn btn-outline-success" href="{{route('system.module.edit',$module)}}"
+                                       data-container="body" data-toggle="popover"
+                                       data-placement="top" data-content="如果模块已经安装，需要点击'更新模块配置'按钮刷新">
+                                        编辑模块配置
                                     </a>
                                     <a class="btn btn-outline-info" href="{{route('system.module.refresh',$module)}}"
                                        data-container="body" data-toggle="popover"

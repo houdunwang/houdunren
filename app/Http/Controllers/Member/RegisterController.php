@@ -6,6 +6,7 @@
  * |    Author: 向军 <www.aoxiangjun.com>
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Http\Controllers\Member;
 
 use App\Repositories\UserRepository;
@@ -21,6 +22,7 @@ class RegisterController extends Controller
 {
     public function __construct()
     {
+        \site(null, true);
         $this->middleware('guest', ['only' => ['index']]);
     }
 
@@ -30,6 +32,8 @@ class RegisterController extends Controller
             config_get('user.register_email', '', 'site') ? '邮箱' : '',
             config_get('user.register_mobile', '', 'site') ? '手机号' : '',
         ];
+        $usersPlaceholder = empty(array_filter($usersPlaceholder)) ? '请输入邮箱或手机号' :
+            "请输入" . trim(implode('或', $usersPlaceholder), '或');
         return view('member.register.index', compact('usersPlaceholder'));
     }
 

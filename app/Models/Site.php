@@ -21,7 +21,9 @@ class Site extends Model
      */
     public function user()
     {
-        return $this->belongsToMany(User::class)->withPivot('role')->as('role')->withTimestamps();
+        return $this->belongsToMany(User::class)
+            ->withPivot('role')
+            ->as('role')->withTimestamps();
     }
 
     /**

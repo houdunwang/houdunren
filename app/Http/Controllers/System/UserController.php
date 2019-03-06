@@ -6,6 +6,7 @@
  * |    Author: 向军大叔 <www.aoxiangjun.com>
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
@@ -26,7 +27,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('group')->where('id', '>', 1)->paginate(15);
+        $users = User::with(['group','sites'])->paginate(15);
         return view('system.user.index', compact('users'));
     }
 
@@ -65,9 +66,11 @@ class UserController extends Controller
      * @param User $user
      * @param $state
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function lock(User $user, $state)
     {
+        $this->authorize('lock', $user);
         $user['lock'] = $state == 'lock';
         $user->save();
         return back()->with('success', '锁定状态修改成功');
@@ -75,6 +78,7 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        $this->authorize('delete', $user);
         $user->delete();
         return back()->with('success', '用户删除成功');
     }

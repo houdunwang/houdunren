@@ -108,7 +108,7 @@ class User extends Authenticatable
      */
     public function sites()
     {
-        return $this->belongsToMany(Site::class)->as('role')
-            ->withPivot('role')->withTimestamps();
+        return $this->belongsToMany(Site::class)
+            ->withPivot('role')->as('role')->withTimestamps();
     }
 }

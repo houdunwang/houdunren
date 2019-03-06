@@ -6,7 +6,7 @@ Route::get('login', 'Member\LoginController@login')->name('login');
 Route::post('login', 'Member\LoginController@store')->name('login');
 Route::get('logout', 'Member\LoginController@logout')->name('logout')->middleware('auth');
 
-Route::resource('register', 'Member\RegisterController')->middleware(['site']);
+Route::resource('register', 'Member\RegisterController');
 Route::get('reg', 'Member\RegisterController@index')->name('register');
 Route::resource('findPassword', 'Member\FindPasswordController')->middleware('guest');
 //后台登录
@@ -86,6 +86,7 @@ Route::group(['middleware' => ['auth','install'], 'prefix' => 'site', 'as' => 's
         Route::get('{site}/permission/cache', 'PermissionController@site')->name('permission.cache');
         //站点配置
         Route::resource('{site}/config', 'ConfigController');
+        Route::post('{site}/send_test_mail','ConfigController@sendTestMail')->name('send.test.mail');
         //微信公众号
         Route::resource('{site}/chat', 'ChatController');
     });

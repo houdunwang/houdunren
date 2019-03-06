@@ -6,6 +6,7 @@
  * |    Author: 向军 <www.aoxiangjun.com>
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
@@ -24,7 +25,8 @@ class LoginController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest', ['only' => 'login','except'=>'logout']);
+        \site(null, true);
+        $this->middleware('guest', ['only' => 'login', 'except' => 'logout']);
     }
 
     public function login()
@@ -35,8 +37,7 @@ class LoginController extends Controller
     public function store(Request $request, UserServer $server, UserRepository $userRepository)
     {
         if ($server->login($request->only(['username', 'password']))) {
-            $site = Site::find(Domain::firstOrNew(['name' => host()])['site_id'] ?? 0);
-            if ($site) {
+            if ($site = \site()) {
                 $userRepository->addSite(auth()->user(), $site, 'user');
             }
             return redirect()->intended(route('home'));

@@ -25,10 +25,9 @@ class NotificationEmailListener
     }
 
     /**
-     * Handle the event.
-     *
-     * @param  object $event
-     * @return void
+     * @param $event
+     * @return bool
+     * @throws \App\Exceptions\ResponseHttpException
      */
     public function handle($event)
     {
@@ -37,6 +36,7 @@ class NotificationEmailListener
             $user = new User();
             $user['email'] = $event->message['to'];
             $user->notify(new EmailNotification($event->message));
+            return false;
         }
     }
 }

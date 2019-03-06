@@ -34,7 +34,7 @@
                             <div class="form-group">
                                 <label>帐号</label>
                                 <input type="text" name="username" class="form-control" required
-                                       placeholder="请输入{{trim(implode('或',$usersPlaceholder),'或')}}"
+                                       placeholder="{{$usersPlaceholder}}"
                                        value="{{old('username')}}">
                             </div>
                             <div class="form-group">
