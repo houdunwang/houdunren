@@ -76,7 +76,7 @@
             <label class="mb-1">测试邮箱
                 <small class="text-secondary">(test_mail)</small>
             </label>
-            <div class="input-group mb-3">
+            <div class="input-group mb-1">
                 <input type="text" class="form-control" name="test_mail"
                        value="{{old('test_mail',$config['test_mail']??'')}}">
                 <div class="input-group-append">
@@ -84,7 +84,7 @@
                 </div>
             </div>
             <span class="help-block text-secondary small">
-                检测邮箱配置关注的测试邮箱，需要先保存配置后再测试
+                检测邮箱配置的测试邮箱，需要先保存配置后再测试
             </span>
         </div>
     </div>

@@ -59,4 +59,33 @@ class ConfigController extends Controller
             throw new ResponseHttpException('邮箱配置错误' . request()->input('email'));
         }
     }
+
+    /**
+     * 发送手机测试短信
+     * @throws ResponseHttpException
+     */
+    public function sendTestMobile()
+    {
+        $mobile = request()->input('mobile');
+        try {
+            event(new NotificationEvent([
+                'subject' => '配置正确',
+                'to' => $mobile,
+                'message' => '测试通过',
+                //短信签名
+                'sign' => config_get('notify.sign', '', 'site'),
+                //短信模板
+                'template' => config_get('notify.template', '', 'site'),
+                //模板变量
+                'vars' => ["code" => "8888", "product" => "【绑定测试短信】"],
+            ]));
+
+            return response()->json([
+                'code' => 0,
+                'message' => '短消息已经发送到你的手机' . $mobile,
+            ]);
+        } catch (\Exception $exception) {
+            throw new ResponseHttpException('配置错误');
+        }
+    }
 }

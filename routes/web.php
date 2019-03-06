@@ -87,6 +87,7 @@ Route::group(['middleware' => ['auth','install'], 'prefix' => 'site', 'as' => 's
         //站点配置
         Route::resource('{site}/config', 'ConfigController');
         Route::post('{site}/send_test_mail','ConfigController@sendTestMail')->name('send.test.mail');
+        Route::post('{site}/send_test_mobile','ConfigController@sendTestMobile')->name('send.test.mobile');
         //微信公众号
         Route::resource('{site}/chat', 'ChatController');
     });
