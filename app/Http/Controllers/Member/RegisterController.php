@@ -28,12 +28,12 @@ class RegisterController extends Controller
 
     public function index()
     {
-        $usersPlaceholder = [
+        $usersPlaceholder = array_filter([
             config_get('user.register_email', '', 'site') ? '邮箱' : '',
             config_get('user.register_mobile', '', 'site') ? '手机号' : '',
-        ];
-        $usersPlaceholder = empty(array_filter($usersPlaceholder)) ? '请输入邮箱或手机号' :
-            "请输入" . trim(implode('或', $usersPlaceholder), '或');
+        ]);
+        $usersPlaceholder = empty($usersPlaceholder) ? '请输入邮箱或手机号' :
+            "请输入" .trim(implode('|', $usersPlaceholder), '|') ;
         return view('member.register.index', compact('usersPlaceholder'));
     }
 

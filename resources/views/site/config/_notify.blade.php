@@ -35,7 +35,7 @@
             <label>模板变量<small class="text-secondary">(vars)</small></label>
             <textarea name="vars" class="form-control" rows="3">{{$config['vars']??''}}</textarea>
             <small class="text-secondary">
-                如: "code:2019,product:商城"，发送短信验证码不需要设置模板变量。
+                如: "code:2019,product:商城"，如果使用 `SMS_12840367` 时不需要设置模板变量。
             </small>
         </div>
     </div>

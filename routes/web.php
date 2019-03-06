@@ -18,7 +18,7 @@ Route::group(['prefix' => 'common', 'as' => 'common.'],
         Route::any('upload-lists', 'Common\UploadController@lists')->name('upload.lists');
         Route::any('user/search', 'Common\UserController@search')->name('user.search');
         Route::any('notification/code', 'Common\NotificationController@code')
-            ->name('notification.code')->middleware('site');
+            ->name('notification.code');
     });
 //会员中心
 Route::get('member', 'Member\HomeController')->middleware(['auth', 'site'])->name('member');

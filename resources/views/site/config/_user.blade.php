@@ -1,3 +1,6 @@
+<div class="alert alert-info " role="alert">
+    需要先为站点的某个模块设置域名，然后通过域名访问才有效。
+</div>
 <div class="card">
     <div class="card-header">
         登录注册相关

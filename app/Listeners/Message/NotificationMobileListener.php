@@ -20,14 +20,11 @@ class NotificationMobileListener
      */
     public function __construct()
     {
-        //
     }
 
     /**
-     * Handle the event.
-     *
-     * @param  object $event
-     * @return void
+     * @param $event
+     * @throws \App\Exceptions\ResponseHttpException
      */
     public function handle($event)
     {

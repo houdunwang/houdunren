@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
         $user->name = '向军大叔';
         $user->email = '2300071698@qq.com';
         $user->mobile = null;
+        $user->icon = asset('images/system/user.jpg');
         $user->site_id = null;
 
         \App\Models\Site::find(1)->user()->save(\App\User::find(1), ['role' => 'admin']);
@@ -32,6 +33,7 @@ class UserSeeder extends Seeder
         $user->name = '后盾人';
         $user->email = '931241005@qq.com';
         $user->mobile = null;
+        $user->icon = asset('images/system/user.jpg');
         $user->site_id = 1;
         $user->save();
     }

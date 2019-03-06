@@ -6,6 +6,7 @@
  * |    Author: 向军 <www.aoxiangjun.com>
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Http\Controllers\Common;
 
 use App\Events\NotificationEvent;
@@ -16,6 +17,11 @@ use Cache;
 
 class NotificationController extends Controller
 {
+    public function __construct()
+    {
+        \site(null, true);
+    }
+
     /**
      * 发送验证码
      * @param Request $request
