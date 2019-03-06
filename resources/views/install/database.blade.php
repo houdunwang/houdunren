@@ -18,8 +18,8 @@
                     </div>
                     <div class="card-header bg-light p-0 border-info  shadow-lg">
                         <div class="row">
-                            <div class="col-3 border-right text-center p-2 bg-dark text-light">欢迎使用</div>
-                            <div class="col-3 border-right text-center p-2 bg-info text-light"
+                            <div class="col-3 border-right text-center p-2 bg-info text-light">欢迎使用</div>
+                            <div class="col-3 border-right text-center p-2 bg-dark text-light"
                                  style="">配置数据库
                             </div>
                             <div class="col-3 border-right text-center p-2 bg-info text-light">创建数据表</div>
