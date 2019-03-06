@@ -6,12 +6,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>站点管理 - 免费开源多站点管理系统</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="shortcut icon" href="{{asset('favicon.ico')}}" type="image/x-icon"/>
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
     @include('layouts.hdjs')
-    @stack('css')
 </head>
 <body class="admin-site">
 @include('layouts.message')

@@ -6,6 +6,7 @@
  * |    Author: 向军大叔 <www.aoxiangjun.com>
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Http\Controllers\Site;
 
 use App\Events\NotificationEvent;
@@ -21,17 +22,22 @@ use Illuminate\Http\Request;
  */
 class ConfigController extends Controller
 {
+    public function __construct()
+    {
+        \site(Site::find(request('site')));
+    }
+
     public function edit(Site $site, string $name, ConfigRepository $repository)
     {
         $this->authorize('update', $site);
-        $config = $repository->get('s' . $site['id'] . $name, [], 'site');
+        $config = $repository->get($name, [], 'site');
         return view('site.config.edit', compact('config', 'name', 'site'));
     }
 
     public function update(Site $site, string $name, Request $request, ConfigRepository $repository)
     {
         $this->authorize('update', $site);
-        $repository->save($request, 's' . $site['id'] . $name, 'site');
+        $repository->save($request, $name, 'site');
         return back()->with('success', '配置项保存成功');
     }
 }

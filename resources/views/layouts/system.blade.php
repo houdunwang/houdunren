@@ -2,19 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>HDCMS - 免费开源多站点管理系统</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="shortcut icon" href="{{asset('favicon.ico')}}" type="image/x-icon"/>
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <script src="{{asset('js/util.js')}}"></script>
+    <title>系统管理</title>
     <script>
         window.system = {
             upload:{!! json_encode(config_get('upload','','system')) !!},
         }
     </script>
     @include('layouts.hdjs')
-    @stack('css')
 </head>
 <body class="admin" style="background: url('{{asset('images/system/admin_bg.jpg')}}')">
 @include('layouts.message')

@@ -13,21 +13,13 @@ function route_class()
  * @param string $path 支持点语法的配置项
  * @param null $default 转变值
  * @param string $type 类型 module:模块,system:系统,site:站点
- * @return mixed
+ * @return mixed|null
+ * @throws \App\Exceptions\ResponseHttpException
  */
 function config_get(string $path, $default = null, $type = 'module')
 {
-    switch ($type) {
-        //站点配置
-        case 'site':
-            $path = $path ? ('s' . site()['id'] . $path) : null;
-            return app(\App\Repositories\ConfigRepository::class)->get($path, $default, $type);
-            break;
-        case 'module':
-        case 'system':
-        default:
-            return app(\App\Repositories\ConfigRepository::class)->get($path, $default, $type);
-    }
+    $repository = new \App\Repositories\ConfigRepository;
+    return $repository->get($path, $default, $type);
 }
 
 /**
