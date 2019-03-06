@@ -3,7 +3,7 @@
 if (!is_file(__DIR__ . '/../.env')) {
     try {
         copy(__DIR__ . '/../.env.example', __DIR__ . '/../.env');
-        put_contents_file('database.php', []);
+        put_contents_file(__DIR__.'/../database.php', []);
     } catch (Exception $exception) {
         die('File creation failed. Directory has no write permissions');
     }
