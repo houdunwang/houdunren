@@ -53,3 +53,13 @@ Route::group(['middleware' => ['system'], 'prefix' => 'update', 'as' => 'update.
         Route::get('module/{name}/update', 'ModuleController@update')->name('module.update');
         Route::get('module/{name}/download', 'ModuleController@download')->name('module.download');
     });
+
+//系统安装
+Route::group(['as' => 'install.', 'prefix' => 'install'], function () {
+    Route::get('/', 'InstallController@index')->name('home');
+    Route::get('database', 'InstallController@database')->name('database');
+    Route::post('connect', 'InstallController@connect')->name('connect');
+    Route::get('migrate', 'InstallController@migrate')->name('migrate');
+    Route::get('create', 'InstallController@create')->name('create');
+    Route::get('complete', 'InstallController@complete')->name('complete');
+});
