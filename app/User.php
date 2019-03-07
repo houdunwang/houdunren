@@ -51,6 +51,18 @@ class User extends Authenticatable
     protected $casts = ['lock' => 'boolean', 'admin_end' => 'datetime'];
 
     /**
+     * 动态自定义字段赋值
+     * @param Activity $activity
+     * @param string $eventName
+     */
+    public function tapActivity(Activity $activity, string $eventName)
+    {
+        $activity->site_id = \site()['id'];
+        $activity->module_id = \module()['id'];
+        $activity->module = \module()['name'];
+    }
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array

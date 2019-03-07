@@ -13,11 +13,11 @@ class CreateActivityLogTable extends Migration
     {
         Schema::create(config('activitylog.table_name'), function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('site_id')->comment('站点编号');
+            $table->unsignedInteger('site_id')->nullable()->comment('站点编号');
             $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
-            $table->unsignedInteger('module_id')->comment('用户组编号');
-            $table->string('module')->index()->comment('模块标识');
+            $table->unsignedInteger('module_id')->nullable()->comment('用户组编号');
             $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
+            $table->string('module')->nullable()->index()->comment('模块标识');
             $table->string('log_name')->nullable();
             $table->text('description');
             $table->integer('subject_id')->nullable();
