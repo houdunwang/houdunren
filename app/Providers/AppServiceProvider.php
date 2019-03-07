@@ -19,15 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->initialization();
         $this->observer();
-        $this->debug();
         \Schema::defaultStringLength(191);
-    }
-
-    protected function debug()
-    {
-        if (INSTALLED) {
-            config('app.debug', config_get('base.debug', false, 'system'));
-        }
     }
 
     protected function observer()
