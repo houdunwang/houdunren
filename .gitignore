@@ -12,5 +12,4 @@ yarn-error.log
 .idea
 /Modules/*
 database.php
-.gitignore
 !/.gitignore
