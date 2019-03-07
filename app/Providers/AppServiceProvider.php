@@ -38,9 +38,11 @@ class AppServiceProvider extends ServiceProvider
 
     protected function initialization()
     {
-        $config = config('database.connections.mysql');
-        $config = array_merge($config, include base_path('database.php'));
-        config(['database.connections.mysql' => $config]);
+        if (is_file(base_path('database.php'))) {
+            $config = config('database.connections.mysql');
+            $config = array_merge($config, include base_path('database.php'));
+            config(['database.connections.mysql' => $config]);
+        }
     }
 
     /**

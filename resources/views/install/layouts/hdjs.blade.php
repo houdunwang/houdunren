@@ -7,8 +7,8 @@
 <script>
     window.hdjs = {
         base: '/js/hdjs',
-        uploader: '{{route('common.upload.make')}}?',
-        filesLists: '{{route('common.upload.lists')}}?',
+        uploader: '',
+        filesLists: '',
     };
 </script>
 <script src="{{asset('js/hdjs/require.js')}}"></script>
