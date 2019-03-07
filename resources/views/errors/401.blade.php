@@ -1,7 +1,7 @@
 @extends('errors::illustrated-layout')
 
-@section('code', '403')
-@section('title', __('Forbidden'))
+@section('code', '401')
+@section('title', __('Unauthorized'))
 
 @section('image')
     <div style="background-image: url({{ asset('/svg/403.svg') }});"
@@ -9,4 +9,4 @@
     </div>
 @endsection
 
-@section('message', $exception->getMessage() ?: '对不起，您被禁止访问此页面。'))
+@section('message', $exception->getMessage()?:'对不起，您无权访问此页面。')

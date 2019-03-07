@@ -44,6 +44,16 @@ function table_foreign(\Illuminate\Database\Schema\Blueprint $table, string $tab
 }
 
 /**
+ * 站点关联
+ * @param $table
+ */
+function table_site_relation($table)
+{
+    $table->unsignedInteger('site_id')->comment('站点编号');
+    $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
+}
+
+/**
  * 保存或获取当前站点
  * @param \App\Models\Site|null $site
  * @param bool $load

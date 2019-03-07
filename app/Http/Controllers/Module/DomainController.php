@@ -27,7 +27,12 @@ class DomainController extends Controller
     public function index()
     {
         $route = strtolower(module()['name']) . '.front.home';
-        return \Route::respondWithRoute($route);
+        if (\Route::has($route)) {
+            return \Route::respondWithRoute($route);
+        } else {
+            $message = sprintf("【%s】站点的\"%s\"模块没有定义路由\"%s\"", \site()['name'], \module()['name'], $route);
+            abort(500, $message);
+        }
     }
 
     public function create()
