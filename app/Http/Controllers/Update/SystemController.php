@@ -34,11 +34,14 @@ class SystemController extends Controller
             $update = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
             //检测目录权限
             foreach ($update['files'] as $file => $stat) {
-                if (!is_writable('../' . dirname($file))) {
+                $dir = '../' . dirname($file);
+                is_dir($dir) or mkdir($dir, 0755, true);
+                if (!is_writable($dir)) {
                     return back()->with('info', dirname($file) . '目录\r\n没有写入权限,不能执行更新操作');
                 }
             }
             $this->cache($update);
+
             return view('update.system.check', compact('update', 'cloud'));
         } catch (\Exception $e) {
             return back()->with('info', '连接远程服务器失败 ! 可以尝试重新绑定云帐号');

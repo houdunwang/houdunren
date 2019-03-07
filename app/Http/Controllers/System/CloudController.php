@@ -12,7 +12,6 @@ namespace App\Http\Controllers\System;
 use App\Exceptions\ResponseHttpException;
 use App\Models\Cloud;
 use App\Servers\HttpServer;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
