@@ -37,7 +37,7 @@
     </div>
     <h5 class="page-header">系统管理</h5>
     <div class="clearfix">
-        <a href="{{route('site.site.index')}}" class="tile img-rounded">
+        <a href="{{route('system.site.index')}}" class="tile img-rounded">
             <i class="fa fa-sitemap"></i> <span>站点列表</span>
         </a>
         <a href="{{route('system.setting.edit','base')}}" class="tile img-rounded">

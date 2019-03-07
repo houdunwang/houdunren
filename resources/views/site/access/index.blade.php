@@ -4,7 +4,7 @@
     <ol class="breadcrumb small">
         <li class="breadcrumb-item active">
             <i class="fa fa-home"></i>
-            <a href="{{route('site.site.index')}}">站点列表</a>
+            <a href="{{route('system.site.index')}}">站点列表</a>
         </li>
         <li class="breadcrumb-item"><a href="#">站点权限</a></li>
     </ol>

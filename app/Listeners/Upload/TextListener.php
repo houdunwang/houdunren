@@ -2,6 +2,7 @@
 
 namespace App\Listeners\Upload;
 
+use App\Exceptions\UploadException;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -30,13 +31,14 @@ class TextListener
      */
     public function handle($event)
     {
-        //
     }
 
     /**
      * 上传BASE64图片
      * @param $content
      * @return string
+     * @throws UploadException
+     * @throws \App\Exceptions\ResponseHttpException
      */
     public function uploadBase64Image($content)
     {

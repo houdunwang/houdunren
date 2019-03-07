@@ -40,23 +40,4 @@ class UserController extends Controller
         }
         return view('common.user.search', compact('users'));
     }
-
-    /**
-     * 关注与取消关注
-     * @param User $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function follow(User $user)
-    {
-        \site(null, true);
-        \module(null, true);
-        if ($user->hasFans(auth()->user())) {
-            $user->fans()->detach([auth()->id()]);
-            return back()->with('关注已取消');
-        } else {
-            $user->fans()->attach(
-                auth()->id(), ['site_id' => \site()['id'], 'module_id' => \module()['id']]);
-            return back()->with('关注成功');
-        }
-    }
 }

@@ -22,7 +22,6 @@ class LocalListener
      */
     public function __construct()
     {
-        //
     }
 
     /**
@@ -34,11 +33,11 @@ class LocalListener
     {
         $type = \Validator::make(request()->all(), [$this->event->field => 'image']) ? 'image' : 'file';
         $ext = strtolower($this->event->file->getClientOriginalExtension());
-        $allowExts = config_get('upload.type', 'jpeg,png,jpg,gif', 'system');
+        $allowExts = $this->event->config('upload.extension', 'jpeg,png,jpg,gif');
         if (!in_array($ext, explode(',', $allowExts))) {
             throw new UploadException('文件类型错误');
         }
-        if ($this->event->file->getSize() > config_get('upload.' . $type . '_size', 200000000, 'system')) {
+        if ($this->event->file->getSize() > $this->event->config('upload.' . $type . '_size', 200000000)) {
             throw new UploadException('文件过大不允许上传');
         }
         return true;
@@ -59,8 +58,8 @@ class LocalListener
     public function handle($event)
     {
         $this->event = $event;
-        $this->check();
-        if (config_get('upload.way', 'local', 'system') == 'local') {
+        if ($this->event->config('upload.type') == 'local') {
+            $this->check();
             $this->event->create($this->save());
             return false;
         }

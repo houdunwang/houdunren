@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Common;
+namespace App\Http\Controllers\Front;
 
 use App\Exceptions\ResponseHttpException;
 use Illuminate\Http\Request;
@@ -13,12 +13,6 @@ use App\Http\Controllers\Controller;
  */
 class FavoriteController extends Controller
 {
-    public function __construct()
-    {
-        \site(null, true);
-        \module(null, true);
-    }
-
     /**
      * 收藏操作
      * @param $model

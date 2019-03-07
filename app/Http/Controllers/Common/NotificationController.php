@@ -15,13 +15,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Cache;
 
+/**
+ * 用户通知
+ * Class NotificationController
+ * @package App\Http\Controllers\Common
+ */
 class NotificationController extends Controller
 {
-    public function __construct()
-    {
-        \site(null, true);
-    }
-
     /**
      * 发送验证码
      * @param Request $request

@@ -26,7 +26,7 @@ class SiteRepository extends Repository
             return parent::paginate(100, $columns, $latest);
         }
 
-        return auth()->user()->sites()->wherePivotIn('role', ['admin', 'ss'])->get();
+        return auth()->user()->sites()->wherePivotIn('role', ['admin', ''])->get();
     }
 
     public function create(array $attributes)

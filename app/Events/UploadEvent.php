@@ -21,17 +21,31 @@ class UploadEvent
     public $callback;
     //本地保存文件
     public $path;
+    protected $config;
 
     /**
      * UploadEvent constructor.
-     * @param $field
+     * @param string $field
+     * @param array $config
      * @param \Closure|null $callback
      */
-    public function __construct($field, \Closure $callback = null)
+    public function __construct(string $field, array $config, \Closure $callback = null)
     {
         $this->field = $field;
         $this->file = request()->file($field);
         $this->callback = $callback;
+        $this->config = $config;
+    }
+
+    /**
+     * 获取配置项
+     * @param string $name
+     * @param null $default
+     * @return mixed|null
+     */
+    public function config(string $name, $default = null)
+    {
+        return array_get($this->config, $name) ?? $default;
     }
 
     /**

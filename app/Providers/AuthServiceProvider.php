@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Chat;
 use App\Models\Group;
 use App\Models\Package;
 use App\Models\Site;
+use App\Policies\ChatPolicy;
 use App\Policies\GroupPolicy;
 use App\Policies\PackagePolicy;
 use App\Policies\SitePolicy;
@@ -28,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         Site::class => SitePolicy::class,
         Group::class => GroupPolicy::class,
         Package::class => PackagePolicy::class,
-        WeChat::class => WeChatPolicy::class,
+        Chat::class => ChatPolicy::class,
     ];
 
     /**

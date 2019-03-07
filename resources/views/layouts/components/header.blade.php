@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item pr-3">
-                    <a href="{{route('site.site.index')}}" class="nav-link">
+                    <a href="{{route('system.site.index')}}" class="nav-link">
                         <i class="fa fa-reply-all"></i> 返回系统管理
                     </a>
                 </li>

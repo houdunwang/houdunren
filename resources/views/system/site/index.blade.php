@@ -2,7 +2,7 @@
 @section('content')
     <div class="clearfix">
         <div class="input-group">
-            <a href="{{route('site.site.create')}}" class="btn btn-success">
+            <a href="{{route('system.site.create')}}" class="btn btn-success">
                 <i class="fa fa-plus"></i> 添加网站
             </a>
         </div>
@@ -56,7 +56,7 @@
                             <a href="{{route('site.user.index',['sid'=>$site])}}" class="text-muted mr-2">
                                 <i class="fa fa-user"></i> 操作员管理
                             </a>
-                            <a href="{{route('site.site.edit',$site)}}" class="text-muted mr-2">
+                            <a href="{{route('system.site.edit',$site)}}" class="text-muted mr-2">
                                 <i class="fa fa-pencil-square-o"></i> 编辑
                             </a>
                         @endcan
@@ -64,7 +64,7 @@
                             <a href="javascript:void(0)" onclick="destroy(this)" class="text-muted">
                                 <i class="fa fa-trash"></i> 删除
                             </a>
-                            <form action="{{route('site.site.destroy',$site)}}" method="post">
+                            <form action="{{route('system.site.destroy',$site)}}" method="post">
                                 @csrf @method('DELETE')
                             </form>
                         @endcan

@@ -1,31 +1,34 @@
 <?php
 Route::get('/', 'Module\DomainController@index')->middleware('site')->name('home');
 Route::get('home', 'Site\SiteController@index')->middleware('auth')->name('home');
-//登录注册
+//登录注册找回密码
 Route::get('login', 'Member\LoginController@login')->name('login');
 Route::post('login', 'Member\LoginController@store')->name('login');
 Route::get('logout', 'Member\LoginController@logout')->name('logout')->middleware('auth');
-
 Route::resource('register', 'Member\RegisterController');
 Route::get('reg', 'Member\RegisterController@index')->name('register');
 Route::resource('findPassword', 'Member\FindPasswordController')->middleware('guest');
 //后台登录
-Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware('auth');
-//公共
-Route::group(['prefix' => 'common', 'as' => 'common.'],
+Route::get('admin', 'System\SiteController@index')->name('admin')->middleware('auth');
+//公共服务
+Route::group(['prefix' => 'common', 'as' => 'common.', 'middleware' => ['auth']],
     function () {
-        Route::any('upload', 'Common\UploadController@upload')->name('upload.make');
         Route::any('upload-lists', 'Common\UploadController@lists')->name('upload.lists');
         Route::any('user/search', 'Common\UserController@search')->name('user.search');
-        Route::any('notification/code', 'Common\NotificationController@code')
-            ->name('notification.code');
-        //粉丝关注
-        Route::get('user/{user}/follow', 'Common\UserController@follow')->name('user.follow');
-        //点赞
-        Route::get('favour/{model}/{id}', 'Common\FavourController@make')->name('favour.make');
-        //收藏
-        Route::get('favorite/{model}/{id}', 'Common\FavoriteController@make')->name('favorite.make');
     });
+
+//前台服务
+Route::group(['middleware' => ['auth', 'module'], 'as' => 'common.module.', 'namespace' => 'Front'], function () {
+    Route::any('notify/code', 'NotifyController@code')->name('notify.code');
+    Route::any('upload', 'UploadController@upload')->name('upload.make');
+    //粉丝关注
+    Route::get('user/{user}/follow', 'FollowController@make')->name('user.follow');
+    //点赞
+    Route::get('favour/{model}/{id}', 'FavourController@make')->name('favour.make');
+    //收藏
+    Route::get('favorite/{model}/{id}', 'FavoriteController@make')->name('favorite.make');
+});
+
 //会员中心
 Route::get('member', 'Member\HomeController')->middleware(['auth', 'site'])->name('member');
 Route::group(['middleware' => ['auth', 'site'], 'prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.'],
@@ -39,9 +42,13 @@ Route::group(['middleware' => ['auth', 'site'], 'prefix' => 'member', 'namespace
         Route::resource('notify', 'NotifyController');
         Route::get('notify-all', 'NotifyController@all')->name('notify.all');
     });
-//系统
+
+//系统管理
 Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.', 'namespace' => 'System'],
     function () {
+        //上传处理
+        Route::any('upload', 'UploaderController@make')->name('upload.make');
+        Route::any('upload-lists', 'UploaderController@lists')->name('upload.lists');
         //系统设置
         Route::resource('setting', 'SettingController');
         //更新全站缓存
@@ -50,6 +57,8 @@ Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.
         Route::resource('group', 'GroupController');
         //套餐
         Route::resource('package', 'PackageController');
+        //站点列表
+        Route::resource('site', 'SiteController');
         //模块管理
         Route::resource('module', 'ModuleController');
         Route::get('refresh/module/{module}', 'ModuleController@refresh')->name('module.refresh');
@@ -64,23 +73,9 @@ Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.
         //模块打包
         Route::get('zip/{name}', 'ZipController@module')->name('zip.module');
     });
-//更新管理
-Route::group(['middleware' => ['system'], 'prefix' => 'update', 'as' => 'update.', 'namespace' => 'Update',],
-    function () {
-        Route::get('system/check', 'SystemController@check')->name('system.check');
-        Route::get('system/download', 'SystemController@downloadShow')->name('system.download');
-        Route::post('system/download', 'SystemController@download')->name('system.download');
-        Route::get('system/move', 'SystemController@move')->name('system.move');
-        Route::post('system/move', 'SystemController@moveFile')->name('system.move');
-        Route::get('system/finish', 'SystemController@finish')->name('system.finish');
-        //模块
-        Route::get('module', 'ModuleController@index')->name('module.index');
-        Route::get('module/{name}/show', 'ModuleController@show')->name('module.show');
-        Route::get('module/{name}/update', 'ModuleController@update')->name('module.update');
-        Route::get('module/{name}/download', 'ModuleController@download')->name('module.download');
-    });
-//站点
-Route::group(['middleware' => ['auth', 'install'], 'prefix' => 'site', 'as' => 'site.', 'namespace' => 'Site'],
+
+//站点管理
+Route::group(['middleware' => ['site'], 'prefix' => 'site', 'as' => 'site.', 'namespace' => 'Site'],
     function () {
         //站点管理
         Route::resource('site', 'SiteController');
@@ -99,8 +94,9 @@ Route::group(['middleware' => ['auth', 'install'], 'prefix' => 'site', 'as' => '
         //微信公众号
         Route::resource('{site}/chat', 'ChatController');
     });
-//模块
-Route::group(['middleware' => ['admin'], 'as' => 'module.', 'prefix' => 'module', 'namespace' => 'Module'],
+
+//模块管理
+Route::group(['middleware' => ['module'], 'as' => 'module.', 'prefix' => 'module', 'namespace' => 'Module'],
     function () {
         Route::resource('module', 'ModuleController');
         //模块域名
@@ -115,7 +111,7 @@ Route::group(['middleware' => ['admin'], 'as' => 'module.', 'prefix' => 'module'
         Route::resource('cover', 'CoverController');
     });
 
-//安装系统
+//系统安装
 Route::group(['as' => 'install.', 'prefix' => 'install'], function () {
     Route::get('/', 'InstallController@index')->name('home');
     Route::get('database', 'InstallController@database')->name('database');
@@ -124,3 +120,20 @@ Route::group(['as' => 'install.', 'prefix' => 'install'], function () {
     Route::get('create', 'InstallController@create')->name('create');
     Route::get('complete', 'InstallController@complete')->name('complete');
 });
+
+//更新管理
+Route::group(['middleware' => ['system'], 'prefix' => 'update', 'as' => 'update.', 'namespace' => 'Update',],
+    function () {
+        //系统更新
+        Route::get('system/check', 'SystemController@check')->name('system.check');
+        Route::get('system/download', 'SystemController@downloadShow')->name('system.download');
+        Route::post('system/download', 'SystemController@download')->name('system.download');
+        Route::get('system/move', 'SystemController@move')->name('system.move');
+        Route::post('system/move', 'SystemController@moveFile')->name('system.move');
+        Route::get('system/finish', 'SystemController@finish')->name('system.finish');
+        //模块更新
+        Route::get('module', 'ModuleController@index')->name('module.index');
+        Route::get('module/{name}/show', 'ModuleController@show')->name('module.show');
+        Route::get('module/{name}/update', 'ModuleController@update')->name('module.update');
+        Route::get('module/{name}/download', 'ModuleController@download')->name('module.download');
+    });

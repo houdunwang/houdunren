@@ -7,15 +7,9 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use OSS\OssClient;
 
-class OssListener
+class AliYunListener
 {
-    protected $config;
     protected $event;
-
-    public function __construct()
-    {
-        $this->config = config_get('aliyun', [], 'system');
-    }
 
     /**
      * OSS服务
@@ -24,17 +18,21 @@ class OssListener
      */
     public function getHttpClient()
     {
-        return new OssClient($this->config['accessKeyId'], $this->config['accessKeySecret'], $this->config['endpoint']);
+        return new OssClient(
+            $this->event->config('aliyun.accessKeyId'),
+            $this->event->config('aliyun.accessKeySecret'),
+            $this->event->config('aliyun.endpoint')
+        );
     }
 
     public function handle($event)
     {
         $this->event = $event;
-        if (config_get('upload.way', 'local', 'system') == 'oss') {
+        if ($this->event->config('upload.type') == 'aliyun') {
             try {
                 $fileName = auth()->id() . time() . '.' . $this->event->file->getClientOriginalExtension();
                 $res = $this->getHttpClient()->uploadFile(
-                    $this->config['bucket'], $fileName,
+                    $this->event->config('aliyun.bucket'), $fileName,
                     $event->file->getRealPath()
                 );
                 $this->event->create($res['oss-request-url']);
@@ -42,8 +40,6 @@ class OssListener
             } catch (\Exception $e) {
                 throw new UploadException($e->getMessage(), $e->getCode(), $e);
             }
-
-
         }
     }
 }

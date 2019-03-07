@@ -2,10 +2,11 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\FrontMiddleware;
 use App\Http\Middleware\InstallMiddleware;
-use App\Http\Middleware\LoadSiteModuleMiddleware;
+use App\Http\Middleware\MemberMiddleware;
+use App\Http\Middleware\ModuleMiddleware;
 use App\Http\Middleware\SiteMiddleware;
 use App\Http\Middleware\SystemMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -54,16 +55,27 @@ class Kernel extends HttpKernel
             SystemMiddleware::class,
         ],
         //站点
-        'admin' => [
+        'site' => [
             InstallMiddleware::class,
             Authenticate::class,
             SiteMiddleware::class,
-            AdminMiddleware::class,
         ],
-        //前台
-        'site' => [
+        //后台模块
+        'module' => [
             InstallMiddleware::class,
-            SiteMiddleware::class,
+            Authenticate::class,
+            ModuleMiddleware::class,
+        ],
+        //会员中心
+        'member' => [
+            InstallMiddleware::class,
+            Authenticate::class,
+            MemberMiddleware::class,
+        ],
+        //前台模块
+        'front' => [
+            InstallMiddleware::class,
+            FrontMiddleware::class,
         ],
     ];
 

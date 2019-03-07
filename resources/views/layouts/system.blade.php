@@ -3,12 +3,23 @@
 <head>
     <meta charset="utf-8"/>
     <title>系统管理</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="{{asset('favicon.ico')}}" type="image/x-icon"/>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <script>
-        window.system = {
-            upload:{!! json_encode(config_get('upload','','system')) !!},
-        }
+        window.hdjs = {
+            base: '/js/hdjs',
+            uploader: '{{route('system.upload.make')}}?',
+            filesLists: '{{route('system.upload.lists')}}?',
+        };
     </script>
-    @include('layouts.hdjs')
+    <script src="{{asset('js/hdjs/require.js')}}"></script>
+    <script src="{{asset('js/hdjs/config.js')}}"></script>
+    <script src="{{asset('js/util.js')}}"></script>
+    @stack('css')
 </head>
 <body class="admin" style="background: url('{{asset('images/system/admin_bg.jpg')}}')">
 @include('layouts.message')
@@ -86,7 +97,7 @@
                     <i class="fa fa-support fa-2x"></i>系统设置
                 </a>
             @endif
-            <a href="{{route('site.site.index')}}" class="tile">
+            <a href="{{route('system.site.index')}}" class="tile">
                 <i class="fa fa-sitemap fa-2x"></i>网站管理
             </a>
         </div>

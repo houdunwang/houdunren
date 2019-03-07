@@ -8,7 +8,6 @@ use App\Listeners\Message\NotificationEmailListener;
 use App\Listeners\Message\NotificationMobileListener;
 use App\Listeners\Upload\AliYunListener;
 use App\Listeners\Upload\LocalListener;
-use App\Listeners\Upload\OssListener;
 use App\Listeners\Upload\TextListener;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
@@ -35,7 +34,7 @@ class EventServiceProvider extends ServiceProvider
         UploadEvent::class => [
             TextListener::class,
             LocalListener::class,
-            OssListener::class,
+            AliYunListener::class,
         ],
     ];
 

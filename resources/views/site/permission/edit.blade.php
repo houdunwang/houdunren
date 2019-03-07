@@ -2,7 +2,7 @@
 @section('content')
     <ol class="breadcrumb border">
         <li class="breadcrumb-item">
-            <a href="{{route('site.site.index')}}"> <i class="fa fa-home"></i> 站点列表</a>
+            <a href="{{route('system.site.index')}}"> <i class="fa fa-home"></i> 站点列表</a>
         </li>
         <li class="breadcrumb-item"><a href="{{route('site.user.index',['sid'=>$site])}}">操作员管理</a></li>
         <li class="breadcrumb-item active">设置操作员权限</li>
