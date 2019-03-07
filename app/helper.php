@@ -145,7 +145,7 @@ function module_link(
     $module = null
 ): string {
     $params = is_array($params) ? $params : [$params];
-    $site = $site ?? site();
+    $site = $site ?? \site();
     $module = $module ?? \module();
     return route($route, array_merge($params, ['sid' => $site['id'], 'mid' => $module['id']]));
 }

@@ -195,7 +195,8 @@ class ModuleRepository extends Repository
         $menus = [];
         foreach ($site->modules as $module) {
             $config = include \Storage::drive('module')->path($module['name']) . '/Config/menus.php';
-            $menus[$module['title']] = $config[$type];
+            $menus[$module['title']]['menus'] = $config[$type]??[];
+            $menus[$module['title']]['module'] = $module;
         }
         return $menus;
     }

@@ -30,7 +30,7 @@ class DomainController extends Controller
         if (\Route::has($route)) {
             return \Route::respondWithRoute($route);
         } else {
-            $message = sprintf("【%s】站点的\"%s\"模块没有定义路由\"%s\"", \site()['name'], \module()['name'], $route);
+            $message = sprintf("【%s】站点的\"%s\"模块没有定义路由\"%s\"", \site()['name'], \module()['title'], $route);
             abort(500, $message);
         }
     }

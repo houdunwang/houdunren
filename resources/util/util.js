@@ -34,7 +34,7 @@ function send_code(btId, inputName) {
     require(['hdjs', 'bootstrap'], function (hdjs) {
         let option = {
             //按钮
-            el:  btId,
+            el: btId,
             //后台链接
             url: '/member/send/code',
             //验证码等待发送时间
@@ -44,4 +44,50 @@ function send_code(btId, inputName) {
         };
         hdjs.validCode(option);
     })
+}
+
+/**
+ * 异步POST请求
+ * @param action
+ * @param data
+ */
+function ajax_post_request(action, data) {
+    require(['axios', 'hdjs'], function (axios, hdjs) {
+        axios.post(action, data).then(function (response) {
+            hdjs.swal({
+                text: response.data.message,
+                button: false,
+                icon: 'success'
+            });
+        }).catch(function (error) {
+            hdjs.swal({
+                text: error.response.data.message,
+                button: false,
+                icon: 'warning'
+            });
+        })
+    });
+}
+
+/**
+ * 异步GET请求
+ * @param action
+ * @param data
+ */
+function ajax_get_request(action, data) {
+    require(['axios', 'hdjs'], function (axios, hdjs) {
+        axios.get(action, {params: data}).then(function (response) {
+            hdjs.swal({
+                text: response.data.message,
+                button: false,
+                icon: 'success'
+            });
+        }).catch(function (error) {
+            hdjs.swal({
+                text: error.response.data.message,
+                button: false,
+                icon: 'warning'
+            });
+        })
+    });
 }

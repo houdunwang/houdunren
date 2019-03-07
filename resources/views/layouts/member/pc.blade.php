@@ -24,12 +24,12 @@
                 <div class="my-2 my-lg-0">
                     <ul class="navbar-nav">
                         @if($notifyCount = auth()->user()->unreadNotifications->count())
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('member.notify.index')}}">
-                                消息
-                                <span class="badge badge-success rounded-pill align-top small"> {{$notifyCount}}</span>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('member.notify.index')}}">
+                                    消息
+                                    <span class="badge badge-success rounded-pill align-top small"> {{$notifyCount}}</span>
+                                </a>
+                            </li>
                         @endif
                         <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
@@ -116,21 +116,23 @@
                 </div>
             </div>
             @foreach($ModuleRepository->getMenus(site(),'member_pc') as $moduleTitle=>$menus)
-                <div class="card mt-0">
-                    <div class="card-header">
-                        {{$moduleTitle}}
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="list-group list-group-flush">
-                            @foreach($menus as $menu)
-                                <a class="list-group-item list-group-item-action text-secondary"
-                                   href="{{$menu['url']}}">
-                                    {{$menu['title']}}
-                                </a>
-                            @endforeach
+                @if (count($menus['menus']))
+                    <div class="card mt-0 border-top-0">
+                        <div class="card-header">
+                            {{$moduleTitle}}
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="list-group list-group-flush">
+                                @foreach($menus['menus'] as $menu)
+                                    <a class="list-group-item list-group-item-action text-secondary"
+                                       href="{{$menu['url']}}?sid={{\site()['id']}}&mid={{$menus['module']['id']}}">
+                                        {{$menu['title']}}
+                                    </a>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
             @endforeach
         </div>
         <div class="col-sm-10 pr-0 mt-1 mt-sm-0 pl-sm-3 d-none pl-0 d-sm-block">

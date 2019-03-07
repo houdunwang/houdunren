@@ -1,5 +1,6 @@
 @extends('layouts.member.mobile')
 @section('content')
+    @inject('ModuleRepository','App\Repositories\ModuleRepository')
     <div class="card mb-1">
         <div class="card-body header border-top border-info">
             <div class="media">
@@ -75,4 +76,23 @@
             </ul>
         </div>
     </div>
+    @foreach($ModuleRepository->getMenus(site(),'member_mobile') as $moduleTitle=>$menus)
+        @if (count($menus['menus']))
+            <div class="card mt-0 border-top-0">
+                <div class="card-header">
+                    {{$moduleTitle}}
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        @foreach($menus['menus'] as $menu)
+                            <a class="list-group-item list-group-item-action text-secondary"
+                               href="{{$menu['url']}}?sid={{\site()['id']}}&mid={{$menus['module']['id']}}">
+                                {{$menu['title']}}
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        @endif
+    @endforeach
 @stop
