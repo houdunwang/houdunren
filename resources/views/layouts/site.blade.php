@@ -3,25 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>系统管理</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="shortcut icon" href="{{asset('favicon.ico')}}" type="image/x-icon"/>
-    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <script>
-        window.hdjs = {
-            base: '/js/hdjs',
-            uploader: '{{route('site.upload.make',\site())}}?',
-            filesLists: '{{route('site.upload.lists',\site())}}?',
-        };
-    </script>
-    <script src="{{asset('js/hdjs/require.js')}}"></script>
-    <script src="{{asset('js/hdjs/config.js')}}"></script>
-    <script src="{{asset('js/util.js')}}"></script>
-    <script>
-        window.sid = {{\site()['id']}}
-    </script>
+    @include('layouts.hdjs')
     @stack('css')
 </head>
 <body class="admin" style="background: url('{{asset('images/system/admin_bg.jpg')}}')">

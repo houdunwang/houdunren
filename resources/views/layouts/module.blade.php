@@ -3,8 +3,6 @@
 <head>
     <meta charset="utf-8"/>
     <title>站点管理</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     @include('layouts.hdjs')
 </head>
 <body class="admin-site">
