@@ -43,9 +43,19 @@
                             <i class="fa fa-user"></i> 用户管理
                         </a>
                     </li>
-                    <li class="nav-item pr-2 d-block d-sm-none">
+                    <li class="nav-item pr-2 d-block">
                         <a href="{{route('system.setting.index')}}" class="nav-link">
                             <i class="fa fa-support"></i> 系统设置
+                        </a>
+                    </li>
+                    <li class="nav-item pr-2 d-block">
+                        <a href="{{route('update.system.check')}}" class="nav-link">
+                            <i class="fa fa-bitbucket"></i> 更新系统
+                        </a>
+                    </li>
+                    <li class="nav-item pr-2 d-block">
+                        <a href="{{route('system.package.index')}}" class="nav-link">
+                            <i class="fa fa-bookmark"></i> 套餐列表
                         </a>
                     </li>
                     <li class="nav-item pr-2">

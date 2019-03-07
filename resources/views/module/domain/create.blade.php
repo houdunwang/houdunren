@@ -13,7 +13,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>域名设置</label>
-                    <input type="text" name="name" class="form-control" required
+                    <input type="text" name="name" class="form-control"
                            value="{{old('name',$domain['name'])}}">
                     <small class="text-muted">
                         可以通过域名直接访问到模块，但模块必须存在 "模块标识.home" 的路由

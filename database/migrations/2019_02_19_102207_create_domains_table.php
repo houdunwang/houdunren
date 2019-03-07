@@ -15,7 +15,7 @@ class CreateDomainsTable extends Migration
     {
         Schema::create('domains', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->comment('域名');
+            $table->string('name')->nullable()->comment('域名');
             $table->unsignedInteger('site_id')->comment('用户组编号');
             $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
             $table->unsignedInteger('module_id')->comment('用户组编号');
