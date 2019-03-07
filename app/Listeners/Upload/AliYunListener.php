@@ -32,7 +32,8 @@ class AliYunListener
             try {
                 $fileName = auth()->id() . time() . '.' . $this->event->file->getClientOriginalExtension();
                 $res = $this->getHttpClient()->uploadFile(
-                    $this->event->config('aliyun.bucket'), $fileName,
+                    $this->event->config('aliyun.bucket'),
+                    $fileName,
                     $event->file->getRealPath()
                 );
                 $this->event->create($res['oss-request-url']);

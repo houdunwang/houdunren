@@ -47,7 +47,7 @@ define([
                                 }else{
                                     hdjs.message(ret.message)
                                 }
-                            });
+                            },'json');
                         };
                         var url = reader.readAsDataURL(blob);
                     }

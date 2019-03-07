@@ -5,6 +5,7 @@ namespace App\Listeners\Upload;
 use App\Exceptions\UploadException;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use OSS\OssClient;
 
 /**
  * Base64上传
@@ -13,6 +14,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
  */
 class TextListener
 {
+    protected $event;
+
     /**
      * Create the event listener.
      *
@@ -24,36 +27,54 @@ class TextListener
     }
 
     /**
-     * Handle the event.
-     *
-     * @param  object $event
-     * @return void
+     * @param $event
+     * @return bool
+     * @throws UploadException
+     * @throws \OSS\Core\OssException
      */
     public function handle($event)
     {
+        $this->event = $event;
+        $content = request()->input('file');
+        if (is_string($content)) {
+            //粘贴上传BASE64图片，如editor.md编辑器中的使用
+            $imgData = substr($content, strpos($content, ",") + 1);
+            $allowSize = $this->event->config('upload.image_size');
+            //上传大小检测
+            if (strlen($content) > $allowSize) {
+                throw new UploadException('文件过大不允许上传', 200);
+            }
+            $decodedData = base64_decode($imgData);
+            $path = $this->save($decodedData);
+            $event->create($path);
+            return false;
+        }
     }
 
     /**
-     * 上传BASE64图片
+     * 保存文件
      * @param $content
      * @return string
-     * @throws UploadException
-     * @throws \App\Exceptions\ResponseHttpException
+     * @throws \OSS\Core\OssException
      */
-    public function uploadBase64Image($content)
+    public function save($content)
     {
-        //粘贴上传BASE64图片，如editor.md编辑器中的使用
-        $imgData = substr($content, strpos($content, ",") + 1);
-        $allowSize = config_get('admin.upload.image.size');
-        //上传大小检测
-        if (strlen($content) > $allowSize) {
-            throw new UploadException('上传失败，文件过大', 200);
+        if ($this->event->config('upload.type') == 'local') {
+            $file = 'attachments/' . date('Y/m') . '/' . auth()->id() . time() . '.jpeg';
+            file_put_contents($file, $content);
+            return $file;
+        } else {
+            $client = new OssClient(
+                $this->event->config('aliyun.accessKeyId'),
+                $this->event->config('aliyun.accessKeySecret'),
+                $this->event->config('aliyun.endpoint')
+            );
+            $res = $client->putObject(
+                $this->event->config('aliyun.bucket'),
+                date('Y/m') . '/' . auth()->id() . time() . '.jpeg',
+                $content
+            );
+            $this->event->create($res['oss-request-url']);
         }
-        $decodedData = base64_decode($imgData);
-        $dir = 'uploads/' . date('ym/d') . '/';
-        is_dir($dir) or mkdir($dir, 0755, true);
-        $fileName = $dir . str_random(10) . microtime(true) . '.jpeg';
-        file_put_contents($fileName, $decodedData);
-        return $fileName;
     }
 }
