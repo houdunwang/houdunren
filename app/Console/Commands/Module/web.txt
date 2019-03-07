@@ -8,7 +8,7 @@ Route::group([
     'prefix' => '{lower-module}/admin',
     'as' => '{lower-module}.admin.',
     'namespace' => 'Admin',
-    'middleware' => ['admin'],
+    'middleware' => ['module'],
 ], function () {
     Route::resource('cms', 'CmsController');
 });
@@ -21,7 +21,7 @@ Route::group([
     'prefix' => '{lower-module}/member',
     'as' => '{lower-module}.member.',
     'namespace' => 'Member',
-    'middleware' => ['auth', 'site'],
+    'middleware' => ['member'],
 ], function () {
 
 });
@@ -34,7 +34,7 @@ Route::group([
     'prefix' => '{lower-module}/front',
     'as' => '{lower-module}.front.',
     'namespace' => 'Front',
-    'middleware' => ['site'],
+    'middleware' => ['front'],
 ], function () {
     //主页
     Route::get('/', 'HomeController@index')->name('home');

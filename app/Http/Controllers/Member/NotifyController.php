@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Member;
 
+use App\Servers\NotifyServer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Notifications\DatabaseNotification;
@@ -45,5 +46,21 @@ class NotifyController extends Controller
     {
         $notify->delete();
         return back();
+    }
+
+    /**
+     * 发送验证码
+     * @param Request $request
+     * @param NotifyServer $notifyServer
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\ResponseHttpException
+     */
+    public function code(Request $request, NotifyServer $notifyServer)
+    {
+        $notifyServer->code($request->input('username'), 4);
+        return response()->json([
+            'message' => '验证码已经发送到 ' . $request->input('username') . ' 请注意查收',
+            'code' => 0,
+        ], 200);
     }
 }

@@ -38,7 +38,7 @@
                             <i class="fa fa-w fa-user"></i> {{auth()->user()['name']}}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{route('system.user.edit',auth()->user())}}">修改资料</a>
+                            <a class="dropdown-item" href="{{route('member')}}">修改资料</a>
                             <a class="dropdown-item" href="{{route('logout')}}">退出登录</a>
                         </div>
                     </li>

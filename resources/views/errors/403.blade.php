@@ -467,7 +467,7 @@
                 你没有权限访问这个页面。
             </p>
 
-            <a href="http://hdcms.test">
+            <a href="/">
                 <a href="/" class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
                     返回首页
                 </a>

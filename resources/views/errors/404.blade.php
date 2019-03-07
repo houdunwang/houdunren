@@ -466,7 +466,7 @@
                 {{$exception->getMessage()?:'对不起，您要找的页面找不到。'}}
             </p>
 
-            <a href="http://hdcms.test">
+            <a href="/">
                 <button class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
                     返回首页
                 </button>

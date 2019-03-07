@@ -7,9 +7,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-
     <!-- Styles -->
     <style>
         html {
@@ -468,7 +465,7 @@
             <p class="text-grey-darker text-2xl md:text-3xl font-light mb-8 leading-normal">
                 对不起，您的会话已过期。请刷新并重试。                   </p>
 
-            <a href="http://hdcms.test">
+            <a href="/">
                 <button class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
                     返回首页
                 </button>

@@ -86,7 +86,7 @@ function send_code(btId, inputName) {
             //按钮
             el:  btId,
             //后台链接
-            url: '/common/notification/code',
+            url: '/member/send/code',
             //验证码等待发送时间
             timeout: window.system.message_timeout,
             //表单，手机号或邮箱的INPUT表单

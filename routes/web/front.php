@@ -8,7 +8,7 @@
  * '-------------------------------------------------------------------*/
 
 //前台服务
-Route::group(['middleware' => ['auth', 'front'], 'as' => 'front.', 'namespace' => 'Front'], function () {
+Route::group(['middleware' => ['front'], 'as' => 'front.', 'namespace' => 'Front'], function () {
     Route::any('notify/code', 'NotifyController@code')->name('notify.code');
     Route::any('upload', 'UploadController@upload')->name('upload.make');
     //粉丝关注

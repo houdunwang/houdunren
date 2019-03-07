@@ -1,6 +1,8 @@
 <?php
-Route::get('/', 'Module\DomainController@index')->middleware('front')->name('home');
-Route::get('home', 'Module\DomainController@index')->middleware('front')->name('home');
+Route::group(['namespace' => 'Module', 'middleware' => 'front'], function () {
+    Route::get('/', 'DomainController@index')->name('home');
+    Route::get('home', 'DomainController@index')->name('home');
+});
 
 foreach (['front', 'member', 'module', 'site', 'system'] as $route) {
     include base_path("routes/web/{$route}.php");

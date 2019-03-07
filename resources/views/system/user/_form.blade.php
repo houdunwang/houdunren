@@ -20,12 +20,12 @@
         </div>
         <div class="form-group">
             <label>邮箱</label>
-            <input type="email" name="email" class="form-control col-sm-6"
+            <input type="email" class="form-control col-sm-6" disabled
                    value="{{old('email',$user['email']??'')}}">
         </div>
         <div class="form-group">
             <label>手机号</label>
-            <input type="text" name="mobile" class="form-control col-sm-6"
+            <input type="text" class="form-control col-sm-6" disabled=""
                    value="{{old('mobile',$user['mobile']??'')}}">
         </div>
         <div class="form-group">
