@@ -30,10 +30,12 @@ return array(
     '6124b4c8570aa390c21fafd04a26c69f' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
     'decc78cc4436b1292c6c0d151b19445c' => $vendorDir . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
     '801c31d8ed748cfa537fa45402288c95' => $vendorDir . '/psy/psysh/src/functions.php',
+    'e91d0dc994644828154ae2387ede1ca8' => $vendorDir . '/spatie/string/src/string_functions.php',
     '4a1f389d6ce373bda9e57857d3b61c84' => $vendorDir . '/barryvdh/laravel-debugbar/src/helpers.php',
     '0d8253363903f0ac7b0978dcde4e28a0' => $vendorDir . '/beyondcode/laravel-dump-server/helpers.php',
     'c9b7496aa2e287ba00ff44d2d2a861b1' => $vendorDir . '/hieu-le/active/src/helpers.php',
     '9f394da3192a168c4633675768d80428' => $vendorDir . '/nwidart/laravel-modules/src/helpers.php',
+    '72b1e3f4a2af9b30b3f137b3ec2057fc' => $vendorDir . '/spatie/laravel-activitylog/src/helpers.php',
     '377b22b161c09ed6e5152de788ca020a' => $vendorDir . '/spatie/laravel-permission/src/helpers.php',
     '26dccccce9c39770aa68a9acc12d4925' => $baseDir . '/app/helper.php',
 );

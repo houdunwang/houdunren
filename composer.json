@@ -30,6 +30,7 @@
         "laravel/tinker": "^1.0",
         "nwidart/laravel-modules": "^4.0",
         "spatie/image": "^1.6",
+        "spatie/laravel-activitylog": "^3.2",
         "spatie/laravel-permission": "^2.32"
     },
     "require-dev": {

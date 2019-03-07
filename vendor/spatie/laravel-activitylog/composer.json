@@ -1,0 +1,67 @@
+{
+    "name": "spatie/laravel-activitylog",
+    "description": "A very simple activity logger to monitor the users of your website or application",
+    "homepage": "https://github.com/spatie/activitylog",
+    "keywords":
+    [
+        "spatie",
+        "log",
+        "user",
+        "activity",
+        "laravel"
+    ],
+    "authors": [
+        {
+            "name": "Freek Van der Herten",
+            "email": "freek@spatie.be",
+            "homepage": "https://spatie.be",
+            "role": "Developer"
+        },
+        {
+            "name": "Sebastian De Deyne",
+            "email": "sebastian@spatie.be",
+            "homepage": "https://spatie.be",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : "^7.1",
+        "illuminate/config": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+        "illuminate/database": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+        "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+        "spatie/string": "^2.1"
+    },
+    "require-dev": {
+        "ext-json": "*",
+        "phpunit/phpunit": "^7.4 | ^8.0",
+        "orchestra/testbench": "~3.5.0|~3.6.0|~3.7.0|~3.8.0",
+        "scrutinizer/ocular": "^1.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Spatie\\Activitylog\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Spatie\\Activitylog\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "license": "MIT",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Spatie\\Activitylog\\ActivitylogServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
