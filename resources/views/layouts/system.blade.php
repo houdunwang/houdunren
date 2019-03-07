@@ -74,7 +74,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="{{route('member')}}">修改资料</a>
-                            <a class="dropdown-item" href="{{route('logout')}}">退出登录</a>
+                            <a class="dropdown-item" href="{{route('system.logout')}}">退出登录</a>
                         </div>
                     </li>
                 </ul>
@@ -89,7 +89,7 @@
              style="background-image: url('{!! config_get('base.logo',asset('images/system/logo.png'),'system') !!}')">
         </div>
         <div class="col-md-8 text-right admin-site-menu">
-            <a href="{{route('logout')}}" class="tile">
+            <a href="{{route('system.logout')}}" class="tile">
                 <i class="fa fa-sign-out fa-2x"></i>退出
             </a>
             @if (isSuperAdmin())

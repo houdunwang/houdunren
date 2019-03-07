@@ -1,4 +1,4 @@
-<div class="alert alert-secondary small" role="alert">
+<div class="alert alert-secondary" role="alert">
     站点需要使用邮件发送功能时（如用户邮箱验证）必须正确设置邮箱配置
 </div>
 <div class="card">

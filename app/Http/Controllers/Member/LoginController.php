@@ -25,7 +25,6 @@ class LoginController extends Controller
 {
     public function __construct()
     {
-        \site(null, true);
         $this->middleware('guest', ['only' => 'login', 'except' => 'logout']);
     }
 

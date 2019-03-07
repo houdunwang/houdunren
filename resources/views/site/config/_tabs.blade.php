@@ -20,6 +20,11 @@
         </a>
     </li>
     <li class="nav-item">
+        <a class="nav-link {{active_class($name=='upload','active')}}" href="{{route('site.config.edit',[$site,'name'=>'upload'])}}">
+            上传配置
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link {{active_class($name=='user','active')}}" href="{{route('site.config.edit',[$site,'name'=>'user'])}}">
             用户相关
         </a>

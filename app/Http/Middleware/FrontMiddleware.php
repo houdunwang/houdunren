@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 
 /**
- * 前台管理
+ * 会员前台
  * Class FrontMiddleware
  * @package App\Http\Middleware
  */

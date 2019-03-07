@@ -1,4 +1,4 @@
-@extends('layouts.system')
+@extends('layouts.site')
 @section('content')
     <ol class="breadcrumb border">
         <li class="breadcrumb-item">

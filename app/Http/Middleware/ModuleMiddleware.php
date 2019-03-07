@@ -4,6 +4,11 @@ namespace App\Http\Middleware;
 
 use Closure;
 
+/**
+ * 模块后台管理
+ * Class ModuleMiddleware
+ * @package App\Http\Middleware
+ */
 class ModuleMiddleware
 {
     /**

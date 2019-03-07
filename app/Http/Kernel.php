@@ -51,19 +51,16 @@ class Kernel extends HttpKernel
         //系统
         'system' => [
             InstallMiddleware::class,
-            Authenticate::class,
             SystemMiddleware::class,
         ],
         //站点
         'site' => [
             InstallMiddleware::class,
-            Authenticate::class,
             SiteMiddleware::class,
         ],
         //后台模块
         'module' => [
             InstallMiddleware::class,
-            Authenticate::class,
             ModuleMiddleware::class,
         ],
         //会员中心

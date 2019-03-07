@@ -1,4 +1,4 @@
-@extends('layouts.system')
+@extends('layouts.site')
 @section('content')
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -92,7 +92,7 @@
         //选择操作员
         function users() {
             require(['axios', 'hdjs'], function (axios, hdjs) {
-                user(function (id) {
+                site_user(function (id) {
                     axios.put('/site/{{$site["id"]}}/user/' + id, {}).then(function (response) {
                         hdjs.message(response.data.message, '', 'success', 2, {
                             events: {

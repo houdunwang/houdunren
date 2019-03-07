@@ -23,7 +23,11 @@ class SiteMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (!\site(request('site'))) {
+        if (!auth()->check()) {
+            return redirect()->route('system.login.show');
+        }
+        $site = request('site');
+        if (!\site(is_numeric($site) ? Site::findOrFail($site) : $site)) {
             abort(404, '站点不存在或域名没有绑定到模块');
         }
         config(['app.name' => \site()['name']]);

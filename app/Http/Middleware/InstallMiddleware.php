@@ -9,13 +9,13 @@ class InstallMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        if (!is_file(base_path('install.lock')) && !if_route_pattern('install/*')) {
+        if (!INSTALLED && !if_route_pattern('install/*')) {
             return redirect(route('install.home'));
         }
         return $next($request);

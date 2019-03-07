@@ -1,9 +1,13 @@
 <?php
-
-if (!is_file(__DIR__ . '/../.env')) {
+define('INSTALLED', is_file(__DIR__ . '/../install.lock'));
+if (!INSTALLED) {
     try {
-        copy(__DIR__ . '/../.env.example', __DIR__ . '/../.env');
-        put_contents_file(__DIR__.'/../database.php', []);
+        if (!is_file(__DIR__ . '/../.env')) {
+            copy(__DIR__ . '/../.env.example', __DIR__ . '/../.env');
+        }
+        if (!is_file(__DIR__ . '/../.env')) {
+            put_contents_file(__DIR__ . '/../database.php', []);
+        }
     } catch (Exception $exception) {
         die('File creation failed. Directory has no write permissions');
     }

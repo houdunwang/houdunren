@@ -1,4 +1,4 @@
-<div class="alert alert-secondary small">
+<div class="alert alert-secondary">
     <div class="alert-text">
         <i class="fa fa-info-circle"></i>
         具体配置项的含义可查看 <a target="_blank" href="https://github.com/houdunwang/alipay">https://github.com/houdunwang/alipay</a>
