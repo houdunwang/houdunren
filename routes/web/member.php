@@ -14,6 +14,8 @@ Route::group(['middleware' => 'front', 'namespace' => 'Member'], function () {
     Route::get('reg', 'RegisterController@index')->name('register');
     Route::get('logout', 'LoginController@logout')->name('logout')->middleware('auth');
     Route::resource('findPassword', 'FindPasswordController')->middleware('guest');
+    //发送验证码
+    Route::post('member/send/code', 'NotifyController@code')->name('member.send.code');
 });
 
 //会员中心
@@ -28,6 +30,4 @@ Route::group(['middleware' => ['member'], 'prefix' => 'member', 'namespace' => '
         Route::resource('change-password', 'ChangePasswordController');
         Route::resource('notify', 'NotifyController');
         Route::get('notify-all', 'NotifyController@all')->name('notify.all');
-        //发送验证码
-        Route::post('send/code', 'NotifyController@code')->name('send.code');
     });
