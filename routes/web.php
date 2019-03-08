@@ -4,6 +4,6 @@ Route::group(['namespace' => 'Module', 'middleware' => 'front'], function () {
     Route::get('home', 'DomainController@index')->name('home');
 });
 
-foreach (['member', 'module', 'site', 'system'] as $route) {
+foreach (['common','member', 'module', 'site', 'system'] as $route) {
     include base_path("routes/web/{$route}.php");
 }

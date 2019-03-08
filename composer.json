@@ -57,7 +57,8 @@
             "App\\": "app/",
             "Modules\\": "Modules/",
             "Houdunwang\\WeChat\\":"package/wechat/src/",
-            "Houdunwang\\Aliyun\\":"package/aliyun/src/"
+            "Houdunwang\\Aliyun\\":"package/aliyun/src/",
+            "Houdunwang\\AliPay\\":"package/alipay/src/"
         },
         "classmap": [
             "database/seeds",

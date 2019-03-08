@@ -1,5 +1,5 @@
 <?php
-namespace Modules\Shop\Http\Controllers\System;
+namespace Modules\{module}\Http\Controllers\System;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

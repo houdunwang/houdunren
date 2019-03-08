@@ -43,4 +43,5 @@ Route::group(['middleware' => ['member'], 'prefix' => 'member', 'namespace' => '
         Route::resource('change-password', 'ChangePasswordController');
         Route::resource('notify', 'NotifyController');
         Route::get('notify-all', 'NotifyController@all')->name('notify.all');
+        Route::resource('order', 'OrderController');
     });

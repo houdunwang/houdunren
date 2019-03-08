@@ -11,6 +11,8 @@ namespace App\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use App\Repositories\ConfigRepository;
 use App\Repositories\SiteRepository;
+use App\Servers\PayServer;
+use App\Test;
 use Illuminate\Http\Request;
 
 /**

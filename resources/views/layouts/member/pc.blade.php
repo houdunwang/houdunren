@@ -112,12 +112,16 @@
                            href="{{route('member.notify.index')}}">
                             站内消息
                         </a>
+                        <a class="list-group-item list-group-item-action text-secondary"
+                           href="{{route('member.order.index')}}">
+                            我的定单
+                        </a>
                     </div>
                 </div>
             </div>
             @foreach($ModuleRepository->getMenus(site(),'member_pc') as $moduleTitle=>$menus)
                 @if (count($menus['menus']))
-                    <div class="card mt-0 border-top-0">
+                    <div class="card mt-2">
                         <div class="card-header">
                             {{$moduleTitle}}
                         </div>

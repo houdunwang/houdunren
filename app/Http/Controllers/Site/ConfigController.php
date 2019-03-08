@@ -14,6 +14,8 @@ use App\Exceptions\ResponseHttpException;
 use App\Http\Controllers\Controller;
 use App\Models\Site;
 use App\Repositories\ConfigRepository;
+use App\Servers\PayServer;
+use App\Test;
 use Illuminate\Http\Request;
 
 /**
@@ -28,7 +30,7 @@ class ConfigController extends Controller
         \site(Site::find(request('site')));
     }
 
-    public function edit(Site $site, string $name, ConfigRepository $repository)
+    public function edit(Site $site, string $name, ConfigRepository $repository, PayServer $payServer)
     {
         $this->authorize('update', $site);
         $config = $repository->get($name, [], 'site');
