@@ -23,7 +23,7 @@ class ChatPolicy
 
     public function create(User $user)
     {
-        return isSuperAdmin() || site()['admin']['id'] == $user['id'];
+        return is_super_admin() || site()['admin']['id'] == $user['id'];
     }
 
     public function update(User $user, Chat $Chat)

@@ -1,11 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Front;
+namespace App\Http\Controllers\Member;
 
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * 粉丝关注
+ * Class FollowController
+ * @package App\Http\Controllers\Member
+ */
 class FollowController extends Controller
 {
     /**

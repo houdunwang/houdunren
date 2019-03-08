@@ -19,7 +19,7 @@ class CreateFollowersTable extends Migration
             $table->unsignedInteger('follower_id')->index();
             $table->unsignedInteger('site_id')->comment('站点编号');
             $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
-            $table->unsignedInteger('module_id')->comment('用户组编号');
+            $table->unsignedInteger('module_id')->nullable()->comment('用户组编号');
             $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
             $table->timestamps();
         });

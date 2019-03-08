@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Front;
+namespace App\Http\Controllers\Member;
 
 use App\Exceptions\ResponseHttpException;
 use Illuminate\Http\Request;
@@ -34,8 +34,14 @@ class FavourController extends Controller
             $favour = $model->favour()->where($params)->first();
             $favour ? $favour->delete() : $model->favour()->create($params);
 
-            call_user_func([$model,'favourUpdate']);
-            return back()->with('success', $favour ? '取消成功' : '点赞成功');
+            call_user_func([$model, 'favourUpdate']);
+            if (\request()->expectsJson()) {
+                return response()->json($favour ?
+                    ['message' => '取消成功', 'active' => 'del'] :
+                    ['message' => '点赞成功', 'action' => "add"]);
+            } else {
+                return back()->with('success', $favour ? '取消赞' : '点赞成功');
+            }
         } catch (\Exception $exception) {
             throw new ResponseHttpException($exception->getMessage());
         }

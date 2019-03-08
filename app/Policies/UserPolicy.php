@@ -18,7 +18,7 @@ class UserPolicy
 
     public function index(User $user)
     {
-        return isSuperAdmin();
+        return is_super_admin();
     }
 
     public function view(User $user, User $model)
@@ -27,22 +27,22 @@ class UserPolicy
 
     public function create(User $user)
     {
-        return isSuperAdmin();
+        return is_super_admin();
     }
 
     public function update(User $user, User $model)
     {
-        return $user['id'] == $model['id'] || isSuperAdmin();
+        return $user['id'] == $model['id'] || is_super_admin();
     }
 
     public function lock(User $user, User $model)
     {
-        return $model['id'] > 1 && isSuperAdmin();
+        return $model['id'] > 1 && is_super_admin();
     }
 
     public function delete(User $user, User $model)
     {
-        return $model['id'] > 1 && isSuperAdmin();
+        return $model['id'] > 1 && is_super_admin();
     }
 
     public function restore(User $user, User $model)

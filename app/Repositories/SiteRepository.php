@@ -22,7 +22,7 @@ class SiteRepository extends Repository
 
     public function paginate($row = 10, array $columns = ['*'], $latest = null)
     {
-        if (isSuperAdmin()) {
+        if (is_super_admin()) {
             return parent::paginate(100, $columns, $latest);
         }
 

@@ -15,7 +15,7 @@ class ModuleRequest extends FormRequest
 {
     public function authorize()
     {
-        return isSuperAdmin();
+        return is_super_admin();
     }
 
     public function rules()

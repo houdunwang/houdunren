@@ -18,7 +18,7 @@ class GroupPolicy
 
     public function before($user, $model)
     {
-        return isSuperAdmin() ? true : null;
+        return is_super_admin() ? true : null;
     }
 
     public function view(User $user, Group $group)

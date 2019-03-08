@@ -18,7 +18,7 @@ class SitePolicy
 
     public function before($user, $action)
     {
-        return isSuperAdmin() ? true : null;
+        return is_super_admin() ? true : null;
     }
 
     /**
@@ -29,12 +29,12 @@ class SitePolicy
      */
     public function admin(User $user, Site $site)
     {
-        return $site['admin']['id'] == $user['id'] || isSuperAdmin();
+        return $site['admin']['id'] == $user['id'] || is_super_admin();
     }
 
     public function view(User $user, Site $site)
     {
-        return $site->user->contains($user) || isSuperAdmin();
+        return $site->user->contains($user) || is_super_admin();
     }
 
     public function create(User $user)
@@ -43,12 +43,12 @@ class SitePolicy
 
     public function update(User $user, Site $site)
     {
-        return ($site['admin']['id'] == $user['id']) || isSuperAdmin();
+        return ($site['admin']['id'] == $user['id']) || is_super_admin();
     }
 
     public function delete(User $user, Site $site)
     {
-        return ($site['admin']['id'] == $user['id']) || isSuperAdmin();
+        return ($site['admin']['id'] == $user['id']) || is_super_admin();
     }
 
     /**

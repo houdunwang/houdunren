@@ -26,7 +26,7 @@ function config_get(string $path, $default = null, $type = 'module')
  * 超级管理员检测
  * @return bool
  */
-function isSuperAdmin(): bool
+function is_super_admin(): bool
 {
     return auth()->check() && auth()->user()['id'] == 1;
 }

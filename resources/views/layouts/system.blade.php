@@ -32,7 +32,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav mr-auto">
-                @if (isSuperAdmin())
+                @if (is_super_admin())
                     <li class="nav-item pr-2">
                         <a href="{{route('system.module.index')}}" class="nav-link">
                             <i class="fa fa-cubes"></i> 模块管理
@@ -102,7 +102,7 @@
             <a href="{{route('system.logout')}}" class="tile">
                 <i class="fa fa-sign-out fa-2x"></i>退出
             </a>
-            @if (isSuperAdmin())
+            @if (is_super_admin())
                 <a href="{{route('system.setting.index')}}" class="tile">
                     <i class="fa fa-support fa-2x"></i>系统设置
                 </a>

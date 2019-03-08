@@ -12,17 +12,29 @@ use Illuminate\Http\Request;
  */
 class InstallController extends Controller
 {
-    //安装首页
+    /**
+     * 欢迎页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         return view('install.index');
     }
 
+    /**
+     * 数据库配置
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function database()
     {
         return view('install.database');
     }
 
+    /**
+     * 数据库连接测试
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function connect(Request $request)
     {
         try {
@@ -39,11 +51,20 @@ class InstallController extends Controller
         }
     }
 
+    /**
+     * 数据迁移
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function migrate()
     {
         return view('install.migrate');
     }
 
+    /**
+     * 执行数据迁移
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws ResponseHttpException
+     */
     public function create()
     {
         try {
@@ -59,6 +80,10 @@ class InstallController extends Controller
         }
     }
 
+    /**
+     * 安装完成
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function complete()
     {
         file_put_contents(base_path('install.lock'), 'The installation is complete');

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Front;
+namespace App\Http\Controllers\Member;
 
 use App\Exceptions\ResponseHttpException;
 use Illuminate\Http\Request;
@@ -33,8 +33,14 @@ class FavoriteController extends Controller
             $favorite = $model->favorite()->where($params)->first();
             $favorite ? $favorite->delete() : $model->favorite()->create($params);
 
-            call_user_func([$model,'favoriteUpdate']);
-            return back()->with('success', $favorite ? '取消成功' : '收藏成功');
+            call_user_func([$model, 'favoriteUpdate']);
+            if (\request()->expectsJson()) {
+                return response()->json($favorite ?
+                    ['message' => '收藏成功', 'action' => "add"] :
+                    ['message' => '取消成功', 'active' => 'del']);
+            } else {
+                return back()->with('success', $favorite ? '取消成功' : '收藏成功');
+            }
         } catch (\Exception $exception) {
             throw new ResponseHttpException($exception->getMessage());
         }

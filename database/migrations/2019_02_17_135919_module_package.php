@@ -17,7 +17,7 @@ class ModulePackage extends Migration
             $table->increments('id');
             $table->unsignedInteger('package_id')->comment('用户组编号');
             $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
-            $table->unsignedInteger('module_id')->comment('用户组编号');
+            $table->unsignedInteger('module_id')->comment('模块编号');
             $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
             $table->timestamps();
         });

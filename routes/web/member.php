@@ -17,7 +17,20 @@ Route::group(['middleware' => 'front', 'namespace' => 'Member'], function () {
     //发送验证码
     Route::post('member/send/code', 'NotifyController@code')->name('member.send.code');
 });
-
+//用户粉丝
+Route::group(['middleware' => ['member'], 'prefix' => "member", 'as' => 'member.', 'namespace' => 'Member'],
+    function () {
+        Route::any('notify/code', 'NotifyController@code')->name('notify.code');
+        //粉丝关注
+        Route::get('follow/make/{user}', 'FollowController@make')->name('follow.make');
+        //点赞
+        Route::get('favour/make/{model}/{id}', 'FavourController@make')->name('favour.make');
+        //收藏
+        Route::get('favorite/make/{model}/{id}', 'FavoriteController@make')->name('favorite.make');
+        //上传处理
+        Route::any('upload', 'UploaderController@make')->name('upload.make');
+        Route::any('upload/lists', 'UploaderController@lists')->name('upload.lists');
+    });
 //会员中心
 Route::get('member', 'Member\HomeController')->middleware(['member'])->name('member');
 Route::group(['middleware' => ['member'], 'prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.'],

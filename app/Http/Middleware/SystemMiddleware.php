@@ -28,7 +28,7 @@ class SystemMiddleware
         if (!auth()->check()) {
             return redirect()->route('system.login.show');
         }
-        if (!isSuperAdmin()) {
+        if (!is_super_admin()) {
             return redirect()->route('system.site.index')->with('error', '您不是超级管理站不允许执行此操作');
         }
         return $next($request);

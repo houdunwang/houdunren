@@ -10,6 +10,7 @@ use App\Traits\Favorite;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Modules\Comment\Traits\Comment;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
@@ -18,7 +19,7 @@ use App\Traits\Favour;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles, HasApiTokens, Favour, Favorite, LogsActivity, ActivityRecord;
+    use Notifiable, HasRoles, HasApiTokens, Favour, Favorite, LogsActivity, ActivityRecord, Comment;
     protected static $recordEvents = ['created'];
     protected static $logName = 'user';
 
@@ -164,7 +165,7 @@ class User extends Authenticatable
      * 超级管理员
      * @return bool
      */
-    public function isSuperAdmin()
+    public function is_super_admin()
     {
         return $this['id'] == 1;
     }

@@ -7,8 +7,8 @@
 <script>
     window.hdjs = {
         base: '/js/hdjs',
-        uploader: '{{route('site.upload.make',site()['id'])}}?',
-        filesLists: '{{route('site.upload.lists',site()['id'])}}?',
+        uploader: '{{route('member.upload.make',site()['id'])}}?',
+        filesLists: '{{route('member.upload.lists',site()['id'])}}?',
     };
     window.system = {
         message_timeout: {!! config_get('notify.message_timeout',60,'site') !!}

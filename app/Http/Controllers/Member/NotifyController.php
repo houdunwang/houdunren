@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Notifications\DatabaseNotification;
 
 /**
- * 用户通知管理
+ * 用户通知
  * Class NotifyController
  * @package App\Http\Controllers\Member
  */

@@ -43,7 +43,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
         Passport::routes();
 //        Gate::before(function () {
-//            return isSuperAdmin() ? true : null;
+//            return is_super_admin() ? true : null;
 //        });
     }
 }

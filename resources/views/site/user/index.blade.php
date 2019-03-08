@@ -51,7 +51,7 @@
                                         设置权限
                                     </a>
                                 @endcan
-                                @if (isSuperAdmin())
+                                @if (is_super_admin())
                                     <a class="btn btn-outline-info" href="{{route('system.user.edit',[$site,$user])}}">
                                         编辑用户
                                     </a>

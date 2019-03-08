@@ -7,7 +7,7 @@
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
-namespace App\Http\Controllers\Front;
+namespace App\Http\Controllers\Member;
 
 use App\Events\UploadEvent;
 use App\Models\Attachment;
@@ -15,16 +15,18 @@ use App\Servers\UploadServer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * 会员上传
+ * Class UploaderController
+ * @package App\Http\Controllers\Member
+ */
 class UploaderController extends Controller
 {
-    /**
-     * 上传处理
-     * @param Request $request
-     * @param UploadServer $uploadServer
-     */
-    public function upload(Request $request, UploadServer $uploadServer)
+    public function make()
     {
-        event(new UploadEvent('file', function ($path) {
+        $config['upload'] = config_get('upload', ['type' => 'local'], 'site');
+        $config['aliyun'] = config_get('aliyun', [], 'site');
+        event(new UploadEvent('file', $config, function ($path) {
             die(\GuzzleHttp\json_encode(['file' => url($path), 'code' => 0]));
         }));
     }
@@ -35,7 +37,7 @@ class UploaderController extends Controller
      */
     public function lists()
     {
-        $db = Attachment::where('user_id', auth()->id())->orderBy('id','DESC')->paginate(20);
+        $db = Attachment::where('user_id', auth()->id())->orderBy('id', 'DESC')->paginate(20);
         $attachments = $db->toArray();
         foreach ($attachments['data'] as $k => $v) {
             $attachments['data'][$k]['url'] = url($v['path']);
