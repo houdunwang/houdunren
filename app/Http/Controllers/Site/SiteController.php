@@ -9,12 +9,8 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SiteRequest;
 use App\Models\Site;
 use App\Repositories\ModuleRepository;
-use App\Repositories\SiteRepository;
-use App\Servers\PayServer;
-use App\Test;
 
 /**
  * 站点管理
@@ -30,15 +26,8 @@ class SiteController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function show(Site $site, ModuleRepository $moduleRepository,PayServer $payServer)
+    public function show(Site $site, ModuleRepository $moduleRepository)
     {
-        $model = Test::create([
-            'price' => 0.01,
-            'subject' => '这是商品名称',
-            'sn' => time(),
-        ]);
-        dd($payServer->aliPay($model));
-        die;
         $this->authorize('view', $site);
         $modules = $moduleRepository->getSiteModulesByUser($site, auth()->user());
         if (!count($modules)) {
