@@ -27,7 +27,7 @@ class HttpServer
      */
     public function refreshToken($refreshToken)
     {
-        $oauthClient = \DB::table('oauth_clients')->where(['password_client' => 1,])->first();
+        $oauthClient = \DB::table('oauth_clients')->where(['password_client' => 1,])->latest('id')->first();
         $response = $this->request('POST', 'oauth/token', [
             'form_params' => [
                 'grant_type' => 'refresh_token',

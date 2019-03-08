@@ -10,3 +10,4 @@ git checkout master
 git merge dev
 git push
 git checkout dev
+git archive --format zip --output public/hdcms.zip master

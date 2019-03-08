@@ -23,13 +23,17 @@ class SystemController extends Controller
 {
     /**
      * 检测更新
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param HttpServer $httpServer
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function check(HttpServer $httpServer)
     {
         try {
-            $cloud = Cloud::find(1) ?? null;
+            $cloud = Cloud::firstOrNew(['id' => 1]);
+            $localVersion = include base_path('version.php');
+            $cloud['build'] = max($cloud['build'], $localVersion['build']);
+            $cloud->save();
             $response = $httpServer->request('GET', "api/shop/cms/{$cloud['build']}");
             $update = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
             //检测目录权限
@@ -144,10 +148,14 @@ class SystemController extends Controller
         $storage->makeDirectory($buildPath);
         foreach ($cache['files'] as $file => $stat) {
             try {
-                $storage->move($file, "{$buildPath}/{$file}");
-                $storage->move("backup/cms/{$file}", $file);
+                if (!is_file(base_path("{$buildPath}/{$file}")) && is_file(base_path($file))) {
+                    $storage->move($file, "{$buildPath}/{$file}");
+                }
+                if (!is_file(base_path($file))) {
+                    $storage->move("backup/cms/{$file}", $file);
+                }
             } catch (\Exception $exception) {
-                throw new ResponseHttpException("备份文件失败\n{$buildPath}/{$file}文件已经存在");
+                throw new ResponseHttpException($exception->getMessage());
             }
         }
         \Cache::forget('updateLists');
