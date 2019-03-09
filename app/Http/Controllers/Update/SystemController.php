@@ -31,9 +31,9 @@ class SystemController extends Controller
     {
         try {
             $cloud = Cloud::firstOrNew(['id' => 1]);
-            $localVersion = include base_path('version.php');
-            $cloud['build'] = max($cloud['build'], $localVersion['build']);
-            $cloud->save();
+            if ($this->localUpdate()) {
+                return redirect()->route('update.system.check')->with('info', '本地更新完成，数据表已经更新');
+            }
             $response = $httpServer->request('GET', "api/shop/cms/{$cloud['build']}");
             $update = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
             //检测目录权限
@@ -50,6 +50,23 @@ class SystemController extends Controller
         } catch (\Exception $e) {
             return back()->with('info', '连接远程服务器失败 ! 可以尝试重新绑定云帐号');
         }
+    }
+
+    /**
+     * 本地更新
+     * @return bool|null
+     */
+    protected function localUpdate(): ?bool
+    {
+        $cloud = Cloud::firstOrNew(['id' => 1]);
+        $localVersion = include base_path('version.php');
+        if ($localVersion['build'] > $cloud['build']) {
+            \Artisan::call('migrate');
+            $cloud['build'] = max($cloud['build'], $localVersion['build']);
+            $cloud->save();
+            return true;
+        }
+        return false;
     }
 
     /**
