@@ -30,10 +30,8 @@ class SystemController extends Controller
     public function check(HttpServer $httpServer)
     {
         try {
-            $cloud = Cloud::firstOrNew(['id' => 1]);
-            if ($this->localUpdate()) {
-                return redirect()->route('update.system.check')->with('info', '本地更新完成，数据表已经更新');
-            }
+            $this->localUpdate();
+            $cloud = Cloud::find(1);
             $response = $httpServer->request('GET', "api/shop/cms/{$cloud['build']}");
             $update = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
             //检测目录权限
@@ -56,7 +54,7 @@ class SystemController extends Controller
      * 本地更新
      * @return bool|null
      */
-    protected function localUpdate(): ?bool
+    protected function localUpdate(): bool
     {
         $cloud = Cloud::firstOrNew(['id' => 1]);
         $localVersion = include base_path('version.php');
