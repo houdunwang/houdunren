@@ -47,7 +47,7 @@
             <label class="mb-1">邮箱密码
                 <small class="text-secondary">(password)</small>
             </label>
-            <input type="text" class="form-control" name="password" value="{{old('password',$config['password']??'')}}">
+            <input type="{{config_get('base.field','password','system')}}" class="form-control" name="password" value="{{old('password',$config['password']??'')}}">
         </div>
         <div class="form-group">
             <label class="mb-1">发件人名称

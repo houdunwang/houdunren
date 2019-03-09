@@ -9,7 +9,7 @@
                 <small class="text-secondary">(accessKeyId)</small>
             </label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="accessKeyId"
+                <input type="{{config_get('base.field','password','system')}}" class="form-control" name="accessKeyId"
                        value="{{$config['accessKeyId']??''}}">
                 <small class="text-secondary">
                     如果使用主账号访问，登陆阿里云 AccessKey 管理页面创建、查看
@@ -24,7 +24,7 @@
                 <small class="text-secondary">(accessKeySecret)</small>
             </label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="accessKeySecret"
+                <input type="{{config_get('base.field','password','system')}}" class="form-control" name="accessKeySecret"
                        value="{{$config['accessKeySecret']??''}}">
                 <small class="text-secondary">
                     如果使用主账号访问，登陆阿里云 AccessKey 管理页面创建、查看

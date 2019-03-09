@@ -23,6 +23,10 @@ use Illuminate\Http\Request;
  */
 class ModuleController extends Controller
 {
+    /**
+     * @param ModuleRepository $repository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(ModuleRepository $repository)
     {
         $modules = $repository->all();
@@ -30,11 +34,23 @@ class ModuleController extends Controller
         return view('system.module.index', compact('modules'));
     }
 
+    /**
+     * 新增模块
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view('system.module.create');
     }
 
+    /**
+     * 保存新增
+     * @param ModuleRequest $request
+     * @param ModuleRepository $repository
+     * @param SiteRepository $siteRepository
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \App\Exceptions\ResponseHttpException
+     */
     public function store(ModuleRequest $request, ModuleRepository $repository, SiteRepository $siteRepository)
     {
         $repository->create($request->except('_token'));
@@ -42,11 +58,25 @@ class ModuleController extends Controller
         return redirect(route('system.module.index'))->with('success', '模块创建成功');
     }
 
+    /**
+     * 修改模块
+     * @param Module $module
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(Module $module)
     {
         return view('system.module.edit', compact('module'));
     }
 
+    /**
+     * 更新模块
+     * @param Request $request
+     * @param Module $module
+     * @param ModuleRepository $repository
+     * @param SiteRepository $siteRepository
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \App\Exceptions\ResponseHttpException
+     */
     public function update(
         Request $request,
         Module $module,

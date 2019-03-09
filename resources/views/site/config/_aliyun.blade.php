@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
             <label class="mb-1">accessKeyId<small class="text-secondary">(accessKeyId)</small></label>
-            <input type="text" class="form-control" name="accessKeyId" value="{{$config['accessKeyId']??''}}">
+            <input type="{{config_get('base.field','password','system')}}" class="form-control" name="accessKeyId" value="{{$config['accessKeyId']??''}}">
             <span class="help-block text-muted small">
                 如果使用主账号访问，登陆阿里云 AccessKey 管理页面创建、查看
     | 如果使用子账号访问，请登录阿里云访问控制控制台查看
@@ -24,7 +24,7 @@
         </div>
         <div class="form-group">
             <label class="mb-1">accessKeySecret<small class="text-secondary">(accessKeySecret)</small></label>
-            <input type="text" class="form-control" name="accessKeySecret" value="{{$config['accessKeySecret']??''}}" placeholder="">
+            <input type="{{config_get('base.field','password','system')}}" class="form-control" name="accessKeySecret" value="{{$config['accessKeySecret']??''}}" placeholder="">
             <span class="help-block text-muted small">
                 如果使用主账号访问，登陆阿里云 AccessKey 管理页面创建、查看
     | 如果使用子账号访问，请登录阿里云访问控制控制台查看

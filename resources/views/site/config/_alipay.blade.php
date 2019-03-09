@@ -8,7 +8,7 @@
     <div class="card-body">
         <div class="form-group">
             <label>应用ID<small class="text-secondary">(app_id)</small></label>
-            <input type="text" class="form-control" name="app_id" value="{{$config['app_id']??''}}">
+            <input type="{{config_get('base.field','password','system')}}" class="form-control" name="app_id" value="{{$config['app_id']??''}}">
             <span class="help-block text-muted small">您的应用的APPID</span>
         </div>
         <div class="form-group">
@@ -28,13 +28,13 @@
         </div>
         <div class="form-group">
             <label>商户私钥<small class="text-secondary">(merchant_private_key)</small></label>
-            <textarea rows="3" class="form-control"
+            <textarea rows="2" class="form-control"
                       name="merchant_private_key">{{$config['merchant_private_key']??''}}</textarea>
             <span class="help-block text-muted small">使用支付宝提供的签名生成工具创建，注意不要有换行</span>
         </div>
         <div class="form-group">
             <label>支付宝公钥<small class="text-secondary">(alipay_public_key)</small></label>
-            <textarea rows="3" class="form-control"
+            <textarea rows="2" class="form-control"
                       name="alipay_public_key">{{$config['alipay_public_key']??''}}</textarea>
             <span class="help-block text-muted small">
                 支付宝公钥,查看地址：
