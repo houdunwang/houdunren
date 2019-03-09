@@ -25,7 +25,7 @@ class FrontMiddleware
         if (!\module(null, true)) {
             abort(404, '您请求的模块不存在');
         }
-        if (config_get('close.state', true, 'site')) {
+        if (config_get('close.state', false, 'site')) {
             if (site()->isManage(auth()->user())) {
                 return \Route::respondWithRoute('site.close');
             }
