@@ -34,4 +34,9 @@
             通知设置
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link {{active_class($name=='close','active')}}" href="{{route('site.config.edit',[$site,'name'=>'close'])}}">
+            临时维护
+        </a>
+    </li>
 </ul>

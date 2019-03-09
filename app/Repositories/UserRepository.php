@@ -9,7 +9,6 @@
 
 namespace App\Repositories;
 
-use App\Exceptions\InvalidParamException;
 use App\Models\Site;
 use App\User;
 use Carbon\Carbon;

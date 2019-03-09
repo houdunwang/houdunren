@@ -6,6 +6,7 @@
  * |    Author: 向军大叔 <www.aoxiangjun.com>
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
@@ -31,8 +32,16 @@ class SiteController extends Controller
         $this->authorize('view', $site);
         $modules = $moduleRepository->getSiteModulesByUser($site, auth()->user());
         if (!count($modules)) {
-            return redirect(route('system.site.index'))->with('error', '站点没有模块可使用或你没有操作权限');
+            return redirect(route('system.site.index'))->with('error', '站点没有安装任何模块');
         }
         return view('site.site.show', compact('site', 'modules'));
+    }
+
+    /**
+     * 站点维护
+     */
+    public function close()
+    {
+        return view('site.site.close');
     }
 }

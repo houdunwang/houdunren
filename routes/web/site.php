@@ -6,7 +6,7 @@
  * |    Author: 向军大叔 <www.aoxiangjun.com>
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
-
+Route::get('site/close','Site\SiteController@close')->name('site.close');
 //站点管理
 Route::group(['middleware' => ['site'], 'prefix' => 'site', 'as' => 'site.', 'namespace' => 'Site'],
     function () {

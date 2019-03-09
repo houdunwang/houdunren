@@ -15,6 +15,7 @@ class FrontMiddleware
      * @param $request
      * @param Closure $next
      * @return mixed
+     * @throws \App\Exceptions\ResponseHttpException
      */
     public function handle($request, Closure $next)
     {
@@ -23,6 +24,11 @@ class FrontMiddleware
         }
         if (!\module(null, true)) {
             abort(404, '您请求的模块不存在');
+        }
+        if (config_get('close.state', true, 'site')) {
+            if (site()->isManage(auth()->user())) {
+                return \Route::respondWithRoute('site.close');
+            }
         }
         return $next($request);
     }

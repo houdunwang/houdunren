@@ -34,7 +34,7 @@ class SitePolicy
 
     public function view(User $user, Site $site)
     {
-        return $site->user->contains($user) || is_super_admin();
+        return $site->isManage($user);
     }
 
     public function create(User $user)

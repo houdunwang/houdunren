@@ -28,9 +28,12 @@ class SiteMiddleware
         }
         $site = request('site');
         if (!\site(is_numeric($site) ? Site::findOrFail($site) : $site)) {
-            abort(404, '站点不存在或域名没有绑定到模块');
+            abort(404, '您访问的站点不存在');
         }
         config(['app.name' => \site()['name']]);
+        if (!\site()->isManage(auth()->user())) {
+            abort(403, '您不是站点的管理员或操作员');
+        }
         return $next($request);
     }
 }
