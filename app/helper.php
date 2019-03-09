@@ -61,11 +61,14 @@ function table_site_relation($table)
  */
 function site(\App\Models\Site $site = null, $load = false): ?\App\Models\Site
 {
-    if ($load === true) {
-        $sid = request('sid', \App\Models\Domain::firstOrNew(['name' => host()])['site_id'] ?? 0);
-        $site = \App\Models\Site::find($sid);
-    }
     static $cache = null;
+    if ($load === true) {
+        if ($sid = request('sid')) {
+            $site = \App\Models\Site::find($sid);
+        } else {
+            $site = \App\Models\Domain::firstOrNew(['name' => host()])->site ?? request('site');
+        }
+    }
     if (is_null($site)) {
         return $cache;
     }

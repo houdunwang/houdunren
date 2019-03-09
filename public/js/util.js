@@ -72,7 +72,8 @@ function destroy(bt, message) {
         hdjs.confirm(message, function () {
             $(bt).prev('form').submit();
         });
-    })
+    });
+    return false;
 }
 
 /**

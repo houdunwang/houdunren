@@ -7,14 +7,7 @@
     </div>
     <form method="post" class="form-horizontal" method="post" action="{{module_link('module.config.store')}}">
         @csrf
-        <div class="card">
-            <div class="card-header">
-                <span class="text-dark">{{module()['title']}}</span> 模块配置设置
-            </div>
-            <div class="card-body">
-                @include(strtolower(module()['name']).'::system.config')
-            </div>
-        </div>
+        @include(strtolower(module()['name']).'::system.config')
         <button class="btn btn-success mt-2">保存提交</button>
     </form>
 @stop

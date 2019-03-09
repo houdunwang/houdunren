@@ -7,9 +7,17 @@
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
-Route::group(['middleware' => 'front', 'as' => 'common.', 'prefix' => 'common', 'namespace' => 'Common'],
-    function () {
-        //支付通知
-        Route::any('alipay/async/{site}', 'AliPayController@async')->name('alipay.async');
-        Route::get('alipay/sync/{site}', 'AliPayController@sync')->name('alipay.sync');
-    });
+namespace App\Traits;
+
+/**
+ * 站点
+ * Trait Site
+ * @package App\Traits
+ */
+trait Site
+{
+    public function scopeSite($query)
+    {
+        return $query->where('site_id', \site()['id']);
+    }
+}

@@ -10,7 +10,7 @@ Route::group([
     'namespace' => 'Admin',
     'middleware' => ['module'],
 ], function () {
-    Route::resource('cms', 'CmsController');
+
 });
 /*
 |--------------------------------------------------------------------------

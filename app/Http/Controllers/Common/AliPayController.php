@@ -14,11 +14,9 @@ use App\Http\Controllers\Controller;
  */
 class AliPayController extends Controller
 {
-    public function __construct()
-    {
+    protected function site(){
         \site(Site::findOrFail(\request('site')));
     }
-
     /**
      * 异步通知
      * @param AliPay $aliPay

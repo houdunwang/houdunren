@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->initialization();
         $this->observer();
+        \Carbon\Carbon::setLocale('zh');
         \Schema::defaultStringLength(191);
     }
 

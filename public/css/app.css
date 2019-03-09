@@ -12,6 +12,10 @@ html {
   font-size: 14px;
 }
 
+html body {
+  color: #636b6f;
+}
+
 [v-cloak] {
   display: none;
 }

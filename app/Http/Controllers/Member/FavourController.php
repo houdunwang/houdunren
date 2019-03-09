@@ -37,8 +37,8 @@ class FavourController extends Controller
             call_user_func([$model, 'favourUpdate']);
             if (\request()->expectsJson()) {
                 return response()->json($favour ?
-                    ['message' => '取消成功', 'active' => 'del'] :
-                    ['message' => '点赞成功', 'action' => "add"]);
+                    ['message' => '取消成功', 'action' => 'del', "total" => $model->favourCount()] :
+                    ['message' => '点赞成功', 'action' => "add", "total" => $model->favourCount()]);
             } else {
                 return back()->with('success', $favour ? '取消赞' : '点赞成功');
             }

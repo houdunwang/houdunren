@@ -1,9 +1,14 @@
-html{
+html {
   font-size: 14px;
+  body{
+    color: #636b6f;
+  }
 }
-[v-cloak]{
+
+[v-cloak] {
   display: none;
 }
+
 //面包屑导航
 .breadcrumb {
   a {
@@ -15,9 +20,11 @@ a {
   color: #6c757d;
   text-decoration: none !important;
 }
-.card{
-  border-radius:0;
+
+.card {
+  border-radius: 0;
 }
+
 .nav-tabs {
   .nav-link {
     border-top-left-radius: 0;

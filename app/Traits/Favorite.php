@@ -45,15 +45,10 @@ trait Favorite
 
     /**
      * 收藏检测
-     * @param string $model
-     * @param int $id
      * @return bool
      */
-    public function isFavorite(string $model, int $id): bool
+    public function isFavorite(): bool
     {
-        $model = str_replace('-', '\\', $model);
-        return $this->favorite()
-            ->where('favorite_type', $model)
-            ->where('favorite_id', $id)->first() ? true : false;
+        return $this->favorite->where('user_id', auth()->id() ?? 0)->first() ? true : false;
     }
 }

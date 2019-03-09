@@ -34,4 +34,13 @@ trait Favour
     {
         return true;
     }
+
+    /**
+     * 收藏检测
+     * @return bool
+     */
+    public function isFavour(): bool
+    {
+        return $this->favour()->where('user_id',auth()->id())->first() ? true : false;
+    }
 }
