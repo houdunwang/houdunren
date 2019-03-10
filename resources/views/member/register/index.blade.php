@@ -19,10 +19,15 @@
                             <h4 class="text-secondary"><i class="fa fa-user"></i> 会员注册</h4>
                         </div>
                         <div class="card-body">
+                            @php
+                                $placeholder = config_get('user.register_email', '', 'site')?'邮箱或':'';
+                                $placeholder .= config_get('user.register_mobile', '', 'site')?'手机号':'';
+                            @endphp
+
                             <div class="form-group">
                                 <label>帐号</label>
                                 <input type="text" name="username" class="form-control" required
-                                       placeholder="{{$usersPlaceholder}}"
+                                       placeholder="{{$placeholder}}"
                                        value="{{old('username')}}">
                             </div>
                             <div class="form-group">

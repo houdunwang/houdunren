@@ -9,6 +9,7 @@
 
 namespace App\Http\Controllers\Member;
 
+use App\Exceptions\ResponseHttpException;
 use App\Http\Controllers\Controller;
 use App\Models\Domain;
 use App\Models\Site;
@@ -33,15 +34,25 @@ class LoginController extends Controller
         return view('member.login.login');
     }
 
+    /**
+     * 会员登录
+     * @param Request $request
+     * @param UserServer $server
+     * @param UserRepository $userRepository
+     * @return array|\Illuminate\Http\RedirectResponse
+     * @throws ResponseHttpException
+     */
     public function store(Request $request, UserServer $server, UserRepository $userRepository)
     {
         if ($server->login($request->only(['username', 'password']))) {
             if ($site = \site()) {
                 $userRepository->addSite(auth()->user(), $site, 'user');
             }
-            return redirect()->intended(route('home'));
+            return $request->expectsJson() ?
+                ['message' => '登录成功', 'code' => 0, 'user_id' => auth()->id()] :
+                redirect()->intended(route('home'));
         }
-        return redirect(route('login'))->with('error', '帐号或密码错误');
+        throw new ResponseHttpException('帐号或密码错误');
     }
 
     public function logout()

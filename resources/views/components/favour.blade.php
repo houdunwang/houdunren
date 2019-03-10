@@ -34,27 +34,29 @@
 @push('js')
     <script>
         function modelFavour() {
-            require(['hdjs', 'axios'], function (hdjs, axios) {
-                let url = "{{route('member.favour.make',['Modules-Edu-Entities-EduTopic',$model['id']])}}";
-                axios.get(url).then(function (response) {
-                    $(".favourCount").html(response.data.total);
-                    $(".favour").each(function () {
-                        $(this).toggleClass('d-none');
-                    });
-                    switch (response.data.action) {
-                        case 'add':
-                            $(".favour-current-{{auth()->id()}}").removeClass('d-none');
-                            break;
-                        case 'del':
-                            $(".favour-current-user").addClass('d-none');
-                            $(".favour-{{auth()->id()}}").remove();
-                            $(".favour-current-{{auth()->id()}}").addClass('d-none');
-                            break;
-                    }
-                }).catch(function (error) {
-                    hdjs.info(error.response.data.message);
-                })
-            });
+            if (user_login()) {
+                require(['hdjs', 'axios'], function (hdjs, axios) {
+                    let url = "{{route('member.favour.make',['Modules-Edu-Entities-EduTopic',$model['id']])}}";
+                    axios.get(url).then(function (response) {
+                        $(".favourCount").html(response.data.total);
+                        $(".favour").each(function () {
+                            $(this).toggleClass('d-none');
+                        });
+                        switch (response.data.action) {
+                            case 'add':
+                                $(".favour-current-{{auth()->id()}}").removeClass('d-none');
+                                break;
+                            case 'del':
+                                $(".favour-current-user").addClass('d-none');
+                                $(".favour-{{auth()->id()}}").remove();
+                                $(".favour-current-{{auth()->id()}}").addClass('d-none');
+                                break;
+                        }
+                    }).catch(function (error) {
+                        hdjs.info(error.response.data.message);
+                    })
+                });
+            }
         }
     </script>
 @endpush

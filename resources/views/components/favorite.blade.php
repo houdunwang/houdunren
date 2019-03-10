@@ -13,17 +13,19 @@
 @push('js')
     <script>
         function modelFavorite() {
-            require(['hdjs', 'axios'], function (hdjs, axios) {
-                let url = "{{route('member.favorite.make',['Modules-Edu-Entities-EduTopic',$topic['id']])}}";
-                axios.get(url).then(function (response) {
-                    $(".favoriteCount").html(response.data.total);
-                    $(".favorite").each(function () {
-                        $(this).toggleClass('d-none');
-                    });
-                }).catch(function (error) {
-                    hdjs.info(error.response.data.message);
-                })
-            });
+            if (user_login()) {
+                require(['hdjs', 'axios'], function (hdjs, axios) {
+                    let url = "{{route('member.favorite.make',['Modules-Edu-Entities-EduTopic',$topic['id']])}}";
+                    axios.get(url).then(function (response) {
+                        $(".favoriteCount").html(response.data.total);
+                        $(".favorite").each(function () {
+                            $(this).toggleClass('d-none');
+                        });
+                    }).catch(function (error) {
+                        hdjs.info(error.response.data.message);
+                    })
+                });
+            }
         }
     </script>
 @endpush

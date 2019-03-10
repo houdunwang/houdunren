@@ -204,3 +204,13 @@ function request_http($method, $uri = '', array $options = [])
     $client = new \GuzzleHttp\Client($config);
     return $client->request($method, $uri, $options);
 }
+
+/**
+ * 是否为站点管理员或操作员
+ * @param \App\User|null $user 用户默认当前用户
+ * @return bool
+ */
+function is_site_manage(\App\User $user = null)
+{
+    return \site()->isManage($user ?? auth()->user());
+}

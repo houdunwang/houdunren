@@ -14,6 +14,7 @@
         message_timeout: {!! config_get('notify.message_timeout',60,'site') !!}
     };
     window.sid = {{\site()['id']}};
+    window.user_id = {{auth()->id()??0}}
 </script>
 <script src="{{asset('js/hdjs/require.js')}}"></script>
 <script src="{{asset('js/hdjs/config.js')}}"></script>

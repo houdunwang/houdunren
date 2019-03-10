@@ -8,6 +8,7 @@
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
+use App\Exceptions\ResponseHttpException;
 use App\Rules\UserPasswordRule;
 
 /**
@@ -17,6 +18,12 @@ use App\Rules\UserPasswordRule;
  */
 class UserServer
 {
+    /**
+     * 用户登录
+     * name字段做为登录字段可以邮箱或手机号
+     * @param array $user
+     * @return bool
+     */
     /**
      * 用户登录
      * name字段做为登录字段可以邮箱或手机号
