@@ -42,7 +42,7 @@ config = {
         'simditor-dropzone': 'package/simditor/simditor-dropzone/lib/simditor-dropzone',
         'simple-module': 'package/simditor/scripts/module',
         DPlayer: 'package/dplayer/DPlayer.min',
-        highlight: 'package/highlight.min',
+        highlight: 'https://cdn.bootcss.com/highlight.js/9.15.6/highlight.min',
         MarkdownIt: 'package/markdown-it.min',
         //editor.md
         prettify: 'package/prettify.min',
@@ -106,7 +106,7 @@ config = {
             exports: 'plupload'
         },
         highlight: {
-            deps: ['css!https://cdn.bootcss.com/highlight.js/9.12.0/styles/atom-one-dark.min.css']
+            deps: ['css!https://cdn.bootcss.com/highlight.js/9.15.6/styles/androidstudio.min.css']
         },
         editormd: {
             deps: [
@@ -130,7 +130,7 @@ config = {
         },
         prism: {
             deps: [
-                'css!package/prism/prism.css'
+                'css!https://cdn.bootcss.com/prism/9000.0.1/themes/prism-dark.min.css'
             ]
         },
         ueditor: {

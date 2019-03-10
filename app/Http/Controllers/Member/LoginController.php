@@ -58,6 +58,6 @@ class LoginController extends Controller
     public function logout()
     {
         auth()->logout();
-        return redirect()->route('login')->with('success', '您已成功退出');
+        return redirect('/')->with('success', '您已成功退出');
     }
 }

@@ -76,7 +76,7 @@ define([
                     });
                     return false;
                 }
-                function ajaxUpload(uploadUrl, files, callback) {
+                function ajaxUpload(uploadUrl, files) {
                     var formData = new FormData();
                     formData.append('file', files[0]);
                     // 可以添加其他需要传给后端的参数
@@ -89,7 +89,6 @@ define([
                         dataType: 'json',
                         success: function (data) {
                             simplemde.value(simplemde.value()+"\n![aa](" + data.file + ")");
-                            callback(data);
                         },
                         complete: function (data) {
                         }

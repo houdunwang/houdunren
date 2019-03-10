@@ -1,0 +1,36 @@
+.markdown {
+  color: #636b6f !important;
+
+  h1, h2 {
+    font-size: 1.3em;
+    border-bottom: solid 1px #dddddd;
+    padding-bottom: 15px !important;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  h3, h4, h5, h6 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  li {
+    pre {
+      margin-left: -83px;
+      margin-right: -43px;
+    }
+  }
+
+  pre {
+    margin-left: -44px;
+    margin-right: -43px;
+    padding: 25px 35px;
+    background-color: #282c34;
+
+    code {
+      line-height: 2em;
+    }
+  }
+}
