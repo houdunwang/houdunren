@@ -40,8 +40,9 @@ class Site extends Model
      * @param User $user
      * @return bool
      */
-    public function isManage(User $user)
+    public function isManage(?User $user = null)
     {
+        $user = $user ?? auth()->user();
         return is_super_admin() || $this->getManageAttribute()->contains($user);
     }
 

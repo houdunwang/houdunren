@@ -16,7 +16,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $pays = auth()->user()->pays()->paginate(20);
+        $pays = auth()->user()->pays()->latest()->paginate(20);
         return view('member.order.index', compact('pays'));
     }
 

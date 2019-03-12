@@ -97,7 +97,7 @@
                 <input type="text" class="form-control" name="qr" readonly="" required
                        value="{{old('qr',$chat['qr']??asset('images/system/nopic.jpg'))}}">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" onclick="uploadImage('qr')" type="button">
+                    <button class="btn btn-outline-secondary" onclick="upload_image('qr')" type="button">
                         选择文件
                     </button>
                 </div>
@@ -111,7 +111,7 @@
                 <input type="text" class="form-control" name="icon" readonly="" required
                        value="{{old('icon',$chat['icon']??asset('images/system/nopic.jpg'))}}">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" onclick="uploadImage('icon')" type="button">
+                    <button class="btn btn-outline-secondary" onclick="upload_image('icon')" type="button">
                         选择图标
                     </button>
                 </div>
@@ -168,7 +168,7 @@
                 <input type="text" class="form-control" name="apiclient_cert" readonly=""
                        value="{{old('apiclient_cert',$chat['apiclient_cert']??'')}}">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" onclick="uploadFile('apiclient_cert','pem')" type="button">
+                    <button class="btn btn-outline-secondary" onclick="upload_file('apiclient_cert','pem')" type="button">
                         选择文件
                     </button>
                 </div>
@@ -180,7 +180,7 @@
                 <input type="text" class="form-control" name="apiclient_key" readonly=""
                        value="{{old('apiclient_key',$chat['apiclient_key']??'')}}">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" onclick="uploadFile('apiclient_key','pem')" type="button">
+                    <button class="btn btn-outline-secondary" onclick="upload_file('apiclient_key','pem')" type="button">
                         选择文件
                     </button>
                 </div>
@@ -192,7 +192,7 @@
                 <input type="text" class="form-control" name="rootca" readonly=""
                        value="{{old('rootca',$chat['rootca']??'')}}">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" onclick="uploadFile('rootca','pem')" type="button">
+                    <button class="btn btn-outline-secondary" onclick="upload_file('rootca','pem')" type="button">
                         选择文件
                     </button>
                 </div>

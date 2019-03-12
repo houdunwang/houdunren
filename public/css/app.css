@@ -9,7 +9,7 @@
 }
 
 html {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 html body {
@@ -224,19 +224,28 @@ body {
   margin-bottom: 20px;
 }
 
-.markdown li pre {
-  margin-left: -83px;
-  margin-right: -43px;
+.markdown table {
+  width: 100%;
+}
+
+.markdown table th {
+  background: #f3f3f3;
+}
+
+.markdown table td,
+.markdown table th {
+  border: solid 1px #ddd;
+  padding: 10px;
 }
 
 .markdown pre {
-  margin-left: -44px;
-  margin-right: -43px;
-  padding: 25px 35px;
+  word-break: break-word;
   background-color: #282c34;
 }
 
 .markdown pre code {
+  word-break: break-word;
+  white-space: pre-wrap;
   line-height: 2em;
 }
 

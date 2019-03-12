@@ -56,9 +56,16 @@ config = {
         iziToast: 'package/iziToast/iziToast.min',
         tuiEditor: 'https://uicdn.toast.com/tui-editor/latest/tui-editor-Editor',
         //
-        bootstrapTable: 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/locale/bootstrap-table-zh-CN.min'
+        bootstrapTable: 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/locale/bootstrap-table-zh-CN.min',
+        sortablejs:'https://cdn.bootcss.com/Sortable/1.8.3/Sortable.min',
+        vuedraggable:'https://cdn.bootcss.com/Vue.Draggable/15.0.0/vuedraggable.min',
     },
     shim: {
+        vuedraggable:{
+          deps:[
+              'sortablejs'
+          ]
+        },
         semantic:{
           deps:[
               'jquery'

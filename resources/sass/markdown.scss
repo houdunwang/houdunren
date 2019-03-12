@@ -16,20 +16,28 @@
     margin-bottom: 20px;
   }
 
-  li {
-    pre {
-      margin-left: -83px;
-      margin-right: -43px;
+  table {
+    width: 100%;
+
+    th {
+      background: #f3f3f3;
     }
+
+    td, th {
+      border: solid 1px #ddd;
+      padding: 10px;
+    }
+
   }
 
-  pre {
-    margin-left: -44px;
-    margin-right: -43px;
-    padding: 25px 35px;
-    background-color: #282c34;
 
+  pre {
+    word-break: break-word;
+    background-color: #282c34;
     code {
+      word-break: break-word;
+      white-space: pre-wrap;
+
       line-height: 2em;
     }
   }

@@ -13,7 +13,7 @@
                     <input type="text" class="form-control" name="logo"
                            value="{{$config['logo']??asset('images/system/logo.png')}}">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" onclick="uploadImage('logo')" type="button">
+                        <button class="btn btn-outline-secondary" onclick="upload_image('logo')" type="button">
                             选择图片
                         </button>
                     </div>

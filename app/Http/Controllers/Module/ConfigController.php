@@ -28,7 +28,7 @@ class ConfigController extends Controller
 
     public function store(Request $request, ConfigRepository $repository)
     {
-        $repository->save($request, module()['name']);
+        $repository->save(module()['name'], $request->except(['_token', '_method']));
         return back()->with('success', '配置项保存成功');
     }
 }

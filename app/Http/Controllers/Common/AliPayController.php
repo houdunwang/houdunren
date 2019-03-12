@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Http\Controllers\Common;
 
+use App\Exceptions\ResponseHttpException;
 use App\Models\Pay;
 use App\Models\Site;
 use Houdunwang\AliPay\AliPay;
@@ -14,9 +16,11 @@ use App\Http\Controllers\Controller;
  */
 class AliPayController extends Controller
 {
-    protected function site(){
+    protected function site()
+    {
         \site(Site::findOrFail(\request('site')));
     }
+
     /**
      * 异步通知
      * @param AliPay $aliPay
@@ -60,9 +64,13 @@ class AliPayController extends Controller
             $pay['alipay_trade_no'] = htmlspecialchars($_GET['trade_no']);
             $pay->save();
             //通知模块模型
-            if ($pay->relation) {
+            try {
                 $pay->relation->success($pay);
+                return redirect_route('member.order.index', '支付成功');
+            } catch (\Exception $exception) {
+                return redirect_route('member.order.index', '修改模块定单失败，请联系管理员处理');
             }
+
         } else {
             return redirect('/')->with('info', '更改定单失败，如果您已经支付请联系管理员处理');
         }

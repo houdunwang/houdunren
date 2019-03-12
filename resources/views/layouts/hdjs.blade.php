@@ -11,7 +11,8 @@
         filesLists: '{{route('member.upload.lists',site()['id'])}}?',
     };
     window.system = {
-        message_timeout: {!! config_get('notify.message_timeout',60,'site') !!}
+        message_timeout: {!! config_get('notify.message_timeout',60,'site') !!},
+        upload:{!! json_encode(config_get('upload',[],'site')) !!},
     };
     window.sid = {{\site()['id']}};
     window.user_id = {{auth()->id()??0}}

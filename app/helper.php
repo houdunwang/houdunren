@@ -54,6 +54,16 @@ function table_site_relation($table)
 }
 
 /**
+ * 用户关联
+ * @param $table
+ */
+function table_user_relation($table)
+{
+    $table->unsignedInteger('user_id')->comment('会员编号');
+    $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+}
+
+/**
  * 保存或获取当前站点
  * @param \App\Models\Site|null $site
  * @param bool $load
@@ -62,17 +72,18 @@ function table_site_relation($table)
 function site(\App\Models\Site $site = null, $load = false): ?\App\Models\Site
 {
     static $cache = null;
-    if ($load === true) {
-        if ($sid = request('sid')) {
-            $site = \App\Models\Site::find($sid);
-        } else {
-            $site = \App\Models\Domain::firstOrNew(['name' => host()])->site ?? request('site');
+    if (is_null($cache)) {
+        if ($load === true) {
+            if ($sid = request('sid')) {
+                $site = \App\Models\Site::find($sid);
+            } else {
+                $site = \App\Models\Domain::firstOrNew(['name' => host()])->site ?? request('site');
+            }
         }
+        return $cache = $site;
     }
-    if (is_null($site)) {
-        return $cache;
-    }
-    return $cache = $site;
+    return $cache;
+
 }
 
 /**
@@ -83,15 +94,15 @@ function site(\App\Models\Site $site = null, $load = false): ?\App\Models\Site
  */
 function module(\App\Models\Module $module = null, $load = false): ?\App\Models\Module
 {
-    if ($load === true) {
-        $mid = request('mid', \App\Models\Domain::firstOrNew(['name' => host()])['module_id']);
-        $module = \App\Models\Module::find($mid);
-    }
     static $cache = null;
-    if (is_null($module)) {
-        return $cache;
+    if (is_null($cache)) {
+        if ($load === true) {
+            $mid = request('mid', \App\Models\Domain::firstOrNew(['name' => host()])['module_id']);
+            $module = \App\Models\Module::find($mid);
+        }
+        return $cache = $module;
     }
-    return $cache = $module;
+    return $cache;
 }
 
 /**
@@ -213,4 +224,18 @@ function request_http($method, $uri = '', array $options = [])
 function is_site_manage(\App\User $user = null)
 {
     return \site()->isManage($user ?? auth()->user());
+}
+
+/**
+ * 页面响应
+ * @param string $route 路由
+ * @param string $message 提示消息
+ * @param int $code 状态码
+ * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+ */
+function redirect_route(string $route, string $message, int $code = 200)
+{
+    return request()->expectsJson()
+        ? response()->json(['message' => $message], $code)
+        : redirect(module_link($route))->with('info', $message);
 }

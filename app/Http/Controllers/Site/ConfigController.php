@@ -38,7 +38,7 @@ class ConfigController extends Controller
     public function update(Site $site, string $name, Request $request, ConfigRepository $repository)
     {
         $this->authorize('update', $site);
-        $repository->save($request, $name, 'site');
+        $repository->save($name, $request->except(['_token', '_method']), 'site');
         return back()->with('success', '配置项保存成功');
     }
 

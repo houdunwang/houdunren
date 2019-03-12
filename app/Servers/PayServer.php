@@ -38,7 +38,7 @@ class PayServer
             $aliPay->config($config);
             //定单信息
             $data = [
-                'WIDout_trade_no' => $this->sn($model),//支付订单号和商品定单号不同
+                'WIDout_trade_no' => $model->sn(),//支付订单号和商品定单号不同
                 'WIDtotal_amount' => $model->price(),//付款金额单位元
                 'WIDsubject' => $model->subject(),//商品名称
                 'WIDbody' => $model->subject(),//商品描述
@@ -49,9 +49,13 @@ class PayServer
         }
     }
 
-    protected function sn(Model $model)
+    /**
+     * 生成定单号
+     * @return string
+     */
+    public function generateOrderSn()
     {
-        return sprintf("S%sM%s-U%s-SN%s", \site()['id'], \module()['id'], auth()->id(), $model->sn());
+        return sprintf("S%sM%s-U%s-SN%s-%s", \site()['id'], \module()['id'], auth()->id(), time(), mt_rand(1, 999));
     }
 
     /**
@@ -66,7 +70,7 @@ class PayServer
             'user_id' => auth()->id(),
             'subject' => $model->subject(),
             'price' => $model->price(),
-            'sn' => $this->sn($model),
+            'sn' => $model->sn(),
         ]);
     }
 }

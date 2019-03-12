@@ -36,7 +36,7 @@
         function modelFavour() {
             if (user_login()) {
                 require(['hdjs', 'axios'], function (hdjs, axios) {
-                    let url = "{{route('member.favour.make',['Modules-Edu-Entities-EduTopic',$model['id']])}}";
+                    let url = "{{route('member.favour.make',[str_replace('\\','-',get_class($model)),$model['id']])}}";
                     axios.get(url).then(function (response) {
                         $(".favourCount").html(response.data.total);
                         $(".favour").each(function () {

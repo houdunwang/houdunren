@@ -13,12 +13,12 @@
             <div class="input-group mb-1">
                 <input type="text" class="form-control" name="logo" value="{{$config['logo']??''}}" readonly="">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" onclick="uploadImage('logo')" type="button">
+                    <button class="btn btn-outline-secondary" onclick="upload_image('logo')" type="button">
                         选择图片
                     </button>
                 </div>
             </div>
-            <img class="img-thumbnail d-block" src="{{$config['logo']??asset('images/system/nopic.jpg')}}" style="width: 150px;">
+            <img class="img-thumbnail d-block" src="{{$config['logo']?asset($config['logo']):asset('images/system/nopic.jpg')}}" style="width: 150px;">
         </div>
         <div class="form-group col-sm-6">
             <label>网站关键字<small class="text-secondary">(info.keyword)</small></label>

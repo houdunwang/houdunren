@@ -97,6 +97,8 @@ return [
         | Set the generate key to false to not generate that folder
         */
         'generator' => [
+            'service' => ['path' => 'Services', 'generate' => true],
+            //
             'config' => ['path' => 'Config', 'generate' => true],
             'command' => ['path' => 'Console', 'generate' => false],
             'migration' => ['path' => 'Database/Migrations', 'generate' => true],

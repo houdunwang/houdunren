@@ -68,15 +68,15 @@ class ActivityServer
     }
 
     /**
-     * 获取指定模块的动态
-     * @param string|array ...$module
+     * 按LOG_NAME获取
+     * @param mixed ...$name
      * @return mixed
      */
-    public function getByModule(...$module)
+    public function getByLogName(...$name)
     {
-        if (is_array($module[0])) {
-            $module = $module[0];
+        if (is_array($name[0])) {
+            $name = $name[0];
         }
-        return Activity::where('site_id', \site()['id'])->whereIn('module', $module);
+        return Activity::where('site_id', \site()['id'])->whereIn('log_name', $name);
     }
 }

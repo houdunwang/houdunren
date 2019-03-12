@@ -25,9 +25,12 @@ class UploaderController extends Controller
     public function make()
     {
         $config['upload'] = config_get('upload', ['type' => 'local'], 'site');
+        if ($mode = request()->input('mode')) {
+            $config['upload']['type'] = $mode;
+        }
         $config['aliyun'] = config_get('aliyun', [], 'site');
         event(new UploadEvent('file', $config, function ($path) {
-            die(\GuzzleHttp\json_encode(['file' => url($path), 'code' => 0]));
+            die(\GuzzleHttp\json_encode(['file' => $path, 'code' => 0]));
         }));
     }
 
@@ -40,7 +43,7 @@ class UploaderController extends Controller
         $db = Attachment::where('user_id', auth()->id())->orderBy('id', 'DESC')->paginate(20);
         $attachments = $db->toArray();
         foreach ($attachments['data'] as $k => $v) {
-            $attachments['data'][$k]['url'] = url($v['path']);
+            $attachments['data'][$k]['url'] = $v['path'];
         }
         return ['data' => $attachments['data'], 'page' => $db->links() . '', 'code' => 0];
     }

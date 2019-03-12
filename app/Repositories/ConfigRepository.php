@@ -24,20 +24,20 @@ class ConfigRepository extends Repository implements RepositoryInterface
 
     /**
      * 保存配置
-     * @param Request $request
      * @param string $name
+     * @param array $data
      * @param string $type
      * @return bool
      */
-    public function save(Request $request, string $name, $type = 'module'): bool
+    public function save(string $name, array $data, $type = 'module'): bool
     {
-        $data = $request->except(['_token', '_method']);
+        $key = $name;
         if (in_array($type, ['module', 'site'])) {
-            $name = $name ? ('s' . site()['id'] . $name) : null;
+            $key = $name ? ('s' . site()['id'] . $name) : null;
         }
         Config::updateOrCreate(
-            [$type => $name],
-            [$type => $name, 'data' => array_merge($this->get($name) ?? [], $data)]
+            [$type => $key],
+            [$type => $key, 'data' => array_merge($this->get($name) ?? [], $data)]
         )->save();
         return Cache::forget($type);
     }

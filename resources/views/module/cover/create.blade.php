@@ -23,7 +23,7 @@
                         <input type="text" class="form-control" name="picurl" readonly="" required
                                value="{{old('picurl',$cover['picurl']??asset('images/system/nopic.jpg'))}}">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" onclick="uploadImage('picurl')" type="button">
+                            <button class="btn btn-outline-secondary" onclick="upload_image('picurl')" type="button">
                                 选择文件
                             </button>
                         </div>

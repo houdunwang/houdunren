@@ -9,6 +9,8 @@
 
 namespace App\Traits;
 
+use App\User;
+
 /**
  * 站点
  * Trait Site
@@ -19,5 +21,10 @@ trait Site
     public function scopeSite($query)
     {
         return $query->where('site_id', \site()['id']);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

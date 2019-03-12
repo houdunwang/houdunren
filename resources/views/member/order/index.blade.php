@@ -2,7 +2,7 @@
 @section('content')
     <div class="card border-bottom-0">
         <div class="card-header border-bottom-0">
-            我的支付
+            我的订单
         </div>
     </div>
     <table class="table table-bordered text-center bg-white">

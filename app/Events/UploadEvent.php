@@ -56,7 +56,7 @@ class UploadEvent
     {
         \Auth::user()->attachment()->create([
             'filename' => basename($path),
-            'path' => url($path),
+            'path' => $path,
         ]);
         if ($this->callback) {
             $callback = $this->callback;

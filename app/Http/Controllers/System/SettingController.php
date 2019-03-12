@@ -6,6 +6,7 @@
  * |    Author: 向军大叔 <www.aoxiangjun.com>
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
@@ -35,7 +36,7 @@ class SettingController extends Controller
 
     public function update(Request $request, $name, ConfigRepository $repository)
     {
-        $repository->save($request, $name, 'system');
+        $repository->save($name, $request->except(['_token', '_method']), 'system');
         return back()->with('success', '保存成功');
     }
 
