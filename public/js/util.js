@@ -72,7 +72,6 @@ function upload_file(name, type, options) {
             extensions: type,
             fileSingleSizeLimit: system.upload.file_size
         }, options);
-        console.log(options);
         hdjs.file(function (files) {
             $("[name=" + name + "]").val(files[0]);
         }, options)
