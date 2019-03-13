@@ -80,10 +80,10 @@ class ModuleRepository extends Repository
     {
         $attributes = array_merge(array_except($this->package, ['name']), $attributes);
         $this->package = array_merge(include $this->configPath($model['name']) . 'package.php', $attributes);
-        $this->package['version'] = time();
         $this->permissions = include $this->configPath() . 'permissions.php';
         $this->fitThumb();
         $this->writeConfig();
+        \Artisan::call('module:migrate', ['module' => $model['name']]);
     }
 
     /**

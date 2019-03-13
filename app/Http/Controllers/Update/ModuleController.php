@@ -113,10 +113,26 @@ class ModuleController extends Controller
                 }
             }
             $this->move($name);
-            $moduleRepository->install($name);
+            $this->install($name, $moduleRepository);
             return ['code' => 0, 'message' => '模块下载成功'];
         } catch (\Exception $exception) {
             throw new ResponseHttpException($exception->getMessage());
+        }
+    }
+
+    /**
+     * 下载模块后执行安装或更新
+     * @param string $name
+     * @param ModuleRepository $moduleRepository
+     * @throws ResponseHttpException
+     */
+    protected function install(string $name, ModuleRepository $moduleRepository)
+    {
+        $module = Module::where('name', $name)->first();
+        if ($module) {
+            $moduleRepository->update($module, []);
+        } else {
+            $moduleRepository->install($name);
         }
     }
 
