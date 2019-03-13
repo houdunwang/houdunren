@@ -1,11 +1,9 @@
 <?php
-define('INSTALLED', is_file(__DIR__ . '/../install.lock'));
-if (!INSTALLED) {
+//defined('INSTALLED') or define('INSTALLED', is_file(__DIR__ . '/../install.lock'));
+if (!is_file(__DIR__ . '/../install.lock')) {
     try {
         if (!is_file(__DIR__ . '/../.env')) {
             copy(__DIR__ . '/../.env.example', __DIR__ . '/../.env');
-        }
-        if (!is_file(__DIR__ . '/../.env')) {
             put_contents_file(__DIR__ . '/../database.php', []);
         }
     } catch (Exception $exception) {

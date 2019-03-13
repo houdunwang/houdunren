@@ -39,8 +39,6 @@ class ModuleRepository extends Repository
     {
         $this->package = include $this->configPath($name) . 'package.php';
         $this->permissions = include $this->configPath($name) . 'permissions.php';
-        $this->business = include $this->configPath($name) . 'business.php';
-        $this->menus = include $this->configPath($name) . 'menus.php';
         \DB::beginTransaction();
         \Artisan::call('module:migrate', ['module' => $name]);
         parent::create([
@@ -84,8 +82,6 @@ class ModuleRepository extends Repository
         $this->package = array_merge(include $this->configPath($model['name']) . 'package.php', $attributes);
         $this->package['version'] = time();
         $this->permissions = include $this->configPath() . 'permissions.php';
-        $this->business = include $this->configPath() . 'business.php';
-        $this->menus = include $this->configPath() . 'menus.php';
         $this->fitThumb();
         $this->writeConfig();
     }
@@ -125,8 +121,6 @@ class ModuleRepository extends Repository
         return collect([
             'package.php' => $this->package,
             'permissions.php' => $this->permissions,
-            'business.php' => $this->business,
-            'menus.php' => $this->menus,
         ])->each(function ($data, $file) {
             put_contents_file($this->configPath() . $file, $data);
         });
@@ -159,8 +153,6 @@ class ModuleRepository extends Repository
     {
         $this->package = array_merge($this->package, include $this->configPath($model['name']) . 'package.php');
         $this->permissions = include $this->configPath($model['name']) . 'permissions.php';
-        $this->business = include $this->configPath($model['name']) . 'business.php';
-        $this->menus = include $this->configPath() . 'menus.php';
         $this->writeConfig();
         \DB::beginTransaction();
         \Artisan::call('module:migrate', ['module' => $model['name']]);
