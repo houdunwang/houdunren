@@ -14,3 +14,4 @@ yarn-error.log
 database.php
 !/.gitignore
 hdcms.zip
+/public/modules
