@@ -30,7 +30,7 @@ class SystemController extends Controller
     public function check(HttpServer $httpServer)
     {
         try {
-            $this->localUpdate();
+//            $this->localUpdate();
             $cloud = Cloud::find(1);
             $response = $httpServer->request('GET', "api/shop/cms/{$cloud['build']}");
             $update = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
