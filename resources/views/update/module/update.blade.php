@@ -29,7 +29,7 @@
                 hdjs.message('模块安装成功', '', 'success', 10, {
                     events: {
                         'hidden.bs.modal': function () {
-                            location.href = '{{route("system.module.update")}}';
+                            location.href = '{{route("update.module.index")}}';
                         }
                     }
                 });
