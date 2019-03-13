@@ -27,7 +27,7 @@ class UploaderController extends Controller
         $config['upload'] = config_get('upload', ['type' => 'local'], 'system');
         $config['aliyun'] = config_get('aliyun', [], 'system');
         event(new UploadEvent('file', $config, function ($path) {
-            die(\GuzzleHttp\json_encode(['file' => url($path), 'code' => 0]));
+            die(\GuzzleHttp\json_encode(['file' => $path, 'code' => 0]));
         }));
     }
 

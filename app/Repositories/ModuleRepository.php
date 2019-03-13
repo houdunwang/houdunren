@@ -98,7 +98,7 @@ class ModuleRepository extends Repository
     protected function fitThumb(): bool
     {
         try {
-            $response = (new Client())->get($this->package['thumb']);
+            $response = (new Client())->get(url($this->package['thumb']));
             $thumb = \Storage::drive('module')->path($this->package['name']) . '/thumb.jpeg';
             $lowerName = strtolower($this->package['name']);
             $this->package['thumb'] = "modules/{$lowerName}/thumb.jpeg";
