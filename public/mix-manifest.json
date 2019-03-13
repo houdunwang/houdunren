@@ -14,5 +14,7 @@
     "/js/edu.js": "/js/edu.js",
     "/css/edu.css": "/css/edu.css",
     "/modules/edu/js/app.js": "/modules/edu/js/app.js",
-    "/modules/edu/css/app.css": "/modules/edu/css/app.css"
+    "/modules/edu/css/app.css": "/modules/edu/css/app.css",
+    "/js/comment.js": "/js/comment.js",
+    "/css/comment.css": "/css/comment.css"
 }

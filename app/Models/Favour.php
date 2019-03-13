@@ -14,6 +14,9 @@ class Favour extends Model
 {
     protected $fillable = ['site_id', 'user_id', 'module_id'];
 
+    //全站动态
+    protected static $logName = 'favour';
+
     public function user()
     {
         return $this->belongsTo(User::class);

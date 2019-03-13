@@ -35,6 +35,12 @@ class CreateUsersTable extends Migration
             $table->timestamp('admin_end')->nullable()->comment('后台结束时间');
             $table->unsignedTinyInteger('lock')->comment('锁定后台操作权限');
             $table->unsignedMediumInteger('favour_count')->default(0)->comment('点赞数');
+            $table->unsignedInteger('credit1')->nullable();
+            $table->unsignedInteger('credit2')->nullable();
+            $table->unsignedInteger('credit3')->nullable();
+            $table->unsignedInteger('credit4')->nullable();
+            $table->unsignedInteger('credit5')->nullable();
+            $table->unsignedInteger('credit6')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
