@@ -130,7 +130,8 @@ class ModuleController extends Controller
     {
         $module = Module::where('name', $name)->first();
         if ($module) {
-            $moduleRepository->update($module, []);
+            $config = $moduleRepository->loadConfig($name);
+            $moduleRepository->update($module, $config);
         } else {
             $moduleRepository->install($name);
         }
