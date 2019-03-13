@@ -15,8 +15,6 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('site_id')->nullable()->comment('站点编号');
-            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
             $table->string('name', 30)->nullable()->comment('昵称');
             $table->string('email')->unique()->nullable()->comment('邮箱');
             $table->string('mobile')->unique()->nullable()->comment('手机');
