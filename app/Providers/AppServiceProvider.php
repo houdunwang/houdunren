@@ -17,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        config(['app.url' => host()]);
         $this->initialization();
         $this->observer();
         \Carbon\Carbon::setLocale('zh');

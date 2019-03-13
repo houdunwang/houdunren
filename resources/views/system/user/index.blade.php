@@ -55,7 +55,7 @@
                             @endforeach
                         </td>
                         <td>{{$user['created_at']->format('Y-m-d')}}</td>
-                        <td>{{$user['admin_end']->format('Y-m-d')}}</td>
+                        <td>{{$user['admin_end']?$user['admin_end']->format('Y-m-d'):''}}</td>
                         <td class=" text-right">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                 <a class="btn btn-outline-success" href="{{route('system.user.edit',$user)}}">编辑</a>

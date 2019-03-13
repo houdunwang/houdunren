@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
         $user->name = '向军大叔';
         $user->email = '2300071698@qq.com';
         $user->mobile = null;
-        $user->icon = asset('images/system/user.jpg');
+        $user->icon = 'images/system/user.jpg';
         $user->save();
         \App\Models\Site::find(1)->user()->save(\App\User::find(1), ['role' => 'admin']);
     }
