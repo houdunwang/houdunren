@@ -31,6 +31,7 @@ return [
     'boolean'              => ':attribute mesti benar atau salah.',
     'confirmed'            => ':attribute pengesahan yang tidak sepadan.',
     'date'                 => ':attribute bukan tarikh yang sah.',
+    'date_equals'          => ':attribute mesti tarikh sama dengan :date.',
     'date_format'          => ':attribute tidak mengikut format :format.',
     'different'            => ':attribute dan :other mesti berlainan.',
     'dimensions'           => ':attribute tidak sah',
@@ -106,12 +107,13 @@ return [
         'string'  => 'Saiz :attribute mesti :size aksara.',
         'array'   => 'Saiz :attribute mesti mengandungi :size perkara.',
     ],
+    'starts_with'          => ':attribute mesti bermula dengan salah satu dari: :values',
     'string'               => ':attribute mesti aksara.',
     'timezone'             => ':attribute mesti zon masa yang sah.',
     'unique'               => ':attribute telah wujud.',
     'uploaded'             => ':attribute gagal dimuat naik.',
     'url'                  => ':attribute format tidak sah.',
-    'uuid'                 => 'The :attribute must be a valid UUID.',
+    'uuid'                 => ':attribute mesti UUID yang sah.',
 
     /*
     |--------------------------------------------------------------------------

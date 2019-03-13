@@ -48,7 +48,7 @@ return [
         ],
         'module' => [
             'driver' => 'local',
-            'root' => base_path('Modules'),
+            'root' => base_path('modules'),
         ],
         'local' => [
             'driver' => 'local',

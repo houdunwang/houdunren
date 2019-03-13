@@ -9,6 +9,7 @@
 
 namespace App\Http\Controllers\System;
 
+use App\Exceptions\ResponseHttpException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ModuleRequest;
 use App\Models\Module;
@@ -53,9 +54,13 @@ class ModuleController extends Controller
      */
     public function store(ModuleRequest $request, ModuleRepository $repository, SiteRepository $siteRepository)
     {
+        $module = ucfirst($request->input('name'));
+        if (is_dir(\Storage::drive('module')->path($module))) {
+            return back()->with('error', '模块已经存在')->withInput();
+        }
         $repository->create($request->except('_token'));
         $siteRepository->loadAllSitePermission();
-        return redirect(route('system.module.index'))->with('success', '模块创建成功');
+        return redirect(route('system.module.local'))->with('success', '模块创建成功');
     }
 
     /**
@@ -70,7 +75,7 @@ class ModuleController extends Controller
 
     /**
      * 更新模块
-     * @param Request $request
+     * @param ModuleRequest $request
      * @param Module $module
      * @param ModuleRepository $repository
      * @param SiteRepository $siteRepository
@@ -78,7 +83,7 @@ class ModuleController extends Controller
      * @throws \App\Exceptions\ResponseHttpException
      */
     public function update(
-        Request $request,
+        ModuleRequest $request,
         Module $module,
         ModuleRepository $repository,
         SiteRepository $siteRepository
@@ -89,17 +94,37 @@ class ModuleController extends Controller
     }
 
     /**
-     * 删除模块
+     * 删除模块数据不删除文件
      * @param Module $module
      * @param ModuleRepository $repository
      * @param SiteRepository $siteRepository
-     * @return \Illuminate\Http\RedirectResponse
+     * @return ResponseHttpException|\Illuminate\Http\RedirectResponse
      */
     public function destroy(Module $module, ModuleRepository $repository, SiteRepository $siteRepository)
     {
-        $repository->delete($module);
-        $siteRepository->loadAllSitePermission();
-        return back()->with('success', '模块删除成功');
+        try {
+            $repository->delete($module);
+            $siteRepository->loadAllSitePermission();
+            return back()->with('success', '模块删除成功');
+        } catch (\Exception $exception) {
+            return new ResponseHttpException($exception->getMessage());
+        }
+    }
+
+    /**
+     * 删除本地所有模块文件
+     * @param string $name
+     * @return ResponseHttpException|\Illuminate\Http\RedirectResponse
+     */
+    public function delete(string $name)
+    {
+        try {
+            \Storage::drive('module')->deleteDirectory($name);
+            \Storage::drive('base')->deleteDirectory("public/modules/{$name}");
+            return back()->with('success', '模块所有文件删除成功');
+        } catch (\Exception $exception) {
+            return new ResponseHttpException($exception->getMessage());
+        }
     }
 
     /**

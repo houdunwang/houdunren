@@ -30,6 +30,7 @@ class CreateModule extends Command
         $this->modulePath = \Storage::disk('module')->path($this->name . DIRECTORY_SEPARATOR);
         $this->tplPath = __DIR__ . '/Module/';
         $this->vars = ['{lower-module}' => strtolower($this->name), '{module}' => $this->name];
+//        $this->mkdir();
         //路由
         $this->copyFile('web.txt', 'Routes/web.php');
         //控制器
@@ -37,7 +38,20 @@ class CreateModule extends Command
         $this->copyFile('ChatController.txt', 'Http/Controllers/System/ChatController.php');
         //视图
         $this->copyFile('config.blade.txt', 'Resources/views/system/config.blade.php');
+        //webpack
+        $this->copyFile('webpack.mix.txt', 'webpack.mix.js');
     }
+
+    /**
+     * 创建静态目录
+     */
+//    protected function mkdir()
+//    {
+//        $name = strtolower($this->name);
+//        foreach (['images', 'css', 'js'] as $dir) {
+//            \Storage::drive('base')->createDir("public/modules/{$name}/{$dir}");
+//        }
+//    }
 
     /**
      * 替换内容变量
@@ -47,7 +61,7 @@ class CreateModule extends Command
      */
     protected function copyFile(string $resFile, string $toFile): string
     {
-        $path = $this->modulePath.dirname($toFile);
+        $path = $this->modulePath . dirname($toFile);
         is_dir($path) || mkdir($path, 0755, true);
         $content = file_get_contents($this->tplPath . $resFile);
         foreach ($this->vars as $name => $value) {

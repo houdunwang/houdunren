@@ -61,11 +61,11 @@ trait ModuleTrait
 
     public function modulePath(string $name = null): string
     {
-        return base_path('Modules') . DIRECTORY_SEPARATOR . ($name ?? $this->package['name']) . DIRECTORY_SEPARATOR;
+        return base_path('modules') . DIRECTORY_SEPARATOR . ($name ?? $this->package['name']) . DIRECTORY_SEPARATOR;
     }
 
     public function configPath(string $name = null): string
     {
-        return base_path('Modules') . DIRECTORY_SEPARATOR . ($name ?? $this->package['name']) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR;
+        return base_path('modules') . DIRECTORY_SEPARATOR . ($name ?? $this->package['name']) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR;
     }
 }

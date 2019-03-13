@@ -26,7 +26,7 @@
                 </div>
             </div>
             <img class="img-thumbnail d-block" src="{{old('thumb',$module['package']['thumb']??asset('images/system/nopic.jpg'))}}">
-            <span class="text-muted">请上传200x200的模块预览图片，图片类型要求为jpeg</span>
+            <span class="text-muted">请上传200x200的模块预览图片，图片类型要求为jpeg，系统会自动进行尺寸裁切处理。</span>
             @push('js')
                 <script>
                     function uploadThumb(obj) {
@@ -46,43 +46,43 @@
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="config" value="1"
-                                {{active_class($module['package']['config']??false,'checked')}}> 模块配置
+                                {{active_class($module['package']['config']??true,'checked')}}> 模块配置
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="domain" value="1"
-                                {{active_class($module['package']['domain']??false,'checked')}}> 域名管理
+                                {{active_class($module['package']['domain']??true,'checked')}}> 域名管理
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="wx_replies" value="1"
-                                {{active_class($module['package']['wx_replies']??false,'checked')}}> 微信回复列表
+                                {{active_class($module['package']['wx_replies']??true,'checked')}}> 微信回复列表
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="wx_cover" value="1"
-                                {{active_class($module['package']['wx_cover']??false,'checked')}}> 微信封面入口
+                                {{active_class($module['package']['wx_cover']??true,'checked')}}> 微信封面入口
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="home_pc" value="1"
-                                {{active_class($module['package']['home_pc']??false,'checked')}}> 桌面导航菜单
+                                {{active_class($module['package']['home_pc']??true,'checked')}}> 桌面导航菜单
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="space_pc" value="1"
-                                {{active_class($module['package']['space_pc']??false,'checked')}}> 桌面个人空间菜单
+                                {{active_class($module['package']['space_pc']??true,'checked')}}> 桌面个人空间菜单
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="space_mobile" value="1"
-                                {{active_class($module['package']['space_mobile']??false,'checked')}}> 手机个人空间菜单
+                                {{active_class($module['package']['space_mobile']??true,'checked')}}> 手机个人空间菜单
                     </label>
                 </div>
             </div>

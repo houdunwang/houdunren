@@ -31,29 +31,20 @@ class ZipController extends Controller
             $lowerName = strtolower($module);
             $storage = \Storage::disk('base');
             //更新配置
-            $config = include($storage->path("Modules/{$module}/Config/package.php"));
+            $config = include($storage->path("modules/{$module}/Config/package.php"));
             $config['version'] = time();
-            put_contents_file($storage->path("Modules/{$module}/Config/package.php"), $config);
+            put_contents_file($storage->path("modules/{$module}/Config/package.php"), $config);
             is_file($module . '.zip') && @unlink($module . '.zip');
-
             //打包
             $zipper = new \Chumper\Zipper\Zipper();
-            foreach ($storage->allFiles("Modules/{$module}") as $file) {
-                $isNodeModule = strstr($file, "Modules/{$module}/node_modules");
+            foreach ($storage->allFiles("modules/{$module}") as $file) {
+                $isNodeModule = strstr($file, "modules/{$module}/node_modules");
                 if ($isNodeModule === false) {
                     $zipper->make(public_path($module . '.zip'))->folder(dirname($file))->add(base_path($file));
                 }
             }
-            if (is_file("js/{$lowerName}.js")) {
-                $zipper->make(public_path($module . '.zip'))->folder("js")->add("js/{$lowerName}.js");
-            }
-            if (is_file("css/{$lowerName}.css")) {
-                $zipper->make(public_path($module . '.zip'))->folder("css")->add("css/{$lowerName}.css");
-            }
-            foreach ($storage->allFiles("public/images") as $file) {
-                if (strstr($file, "{$lowerName}_") !== false) {
-                    $zipper->make(public_path($module . '.zip'))->folder('images')->add(base_path($file));
-                }
+            foreach ($storage->allFiles("public/modules/{$lowerName}") as $file) {
+                $zipper->make(public_path($module . '.zip'))->folder(dirname($file))->add(base_path($file));
             }
             return redirect(url("{$module}.zip"));
         } catch (\Exception $exception) {

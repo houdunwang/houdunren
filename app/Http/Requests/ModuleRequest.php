@@ -6,6 +6,7 @@
  * |    Author: 向军大叔 <www.aoxiangjun.com>
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -21,14 +22,14 @@ class ModuleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:10|unique:modules,title,' . request('id'),
+            'title' => 'required|max:10|unique:modules,title,' . request('module')['id'],
             'name' => [
                 'sometimes',
                 'required',
                 'max:10',
-//                Rule::notIn(['app', 'system', 'shop', 'edu', 'article', 'admin', 'news', 'community']),
+                //Rule::notIn(['app', 'system', 'shop', 'edu', 'article', 'admin', 'news', 'community']),
                 'regex:/^[a-z]+$/i',
-                'unique:modules,name,' . request('id'),
+                'unique:modules,name,' . request('module')['id'],
             ],
             'thumb' => 'required',
         ];
@@ -41,7 +42,7 @@ class ModuleRequest extends FormRequest
             'title.max' => '模块名称最多为10个字符',
             'title.unique' => '模块名称已经存在',
             'name.required' => '模块标识不能为空',
-            'name.not_in'=>'模块标识已经存在',
+            'name.not_in' => '模块标识已经存在',
             'name.unique' => '模块标识已经存在',
             'name.max' => '模块标识最多为10个英文字符',
             'name.regex' => '模块标识必须为字母构成',

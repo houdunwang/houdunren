@@ -1,0 +1,133 @@
+.component-learn .title {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.edu {
+  background-color: #f0f2f5 !important;
+}
+
+.edu .header {
+  border-width: 4px !important;
+}
+
+.edu .avatar {
+  width: 45px;
+  height: 45px;
+  background-size: cover;
+  display: inline-block;
+}
+
+.edu .avatar-small {
+  width: 35px;
+  height: 35px;
+  background-size: cover;
+  display: inline-block;
+}
+
+.edu .edu-front-topic-show .content-markdown {
+  min-height: 300px;
+}
+
+@media screen and (min-width: 600px) {
+  .edu .edu-front-topic-show .content-markdown pre {
+    margin-left: -45px;
+    margin-right: -45px;
+    padding: 20px 20px 20px 45px;
+  }
+}
+
+.edu .edu-front-topic-edit .content,
+.edu .edu-front-topic-create .content {
+  min-height: 380px;
+}
+
+.edu .edu-front-sign-index .moods {
+  list-style: none;
+  padding: 0;
+}
+
+.edu .edu-front-sign-index .moods li {
+  float: left;
+  border: solid 5px #eae8e8;
+  margin-right: 10px;
+  padding: 5px 6px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: #f3f3f3;
+}
+
+.edu .edu-front-sign-index .moods li.active {
+  border: solid 5px #d64141;
+}
+
+.edu .edu-front-sign-index .moods li img {
+  cursor: pointer;
+}
+
+.edu .edu-front-lesson-index .lessons .card-body.thumb {
+  overflow: hidden;
+  height: 160px;
+}
+
+.edu .edu-front-lesson-index .lessons .card-body.thumb img {
+  width: 100%;
+  height: 100%;
+}
+
+.edu .edu-front-lesson-index .lessons .title {
+  height: 65px;
+}
+
+.edu .edu-front-video-show {
+  overflow: hidden;
+  position: relative;
+}
+
+@media screen and (min-width: 600px) {
+  .edu .edu-front-video-show .video-box {
+    height: 650px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .edu .edu-front-video-show .video-box {
+    height: 250px;
+  }
+}
+
+.edu .edu-front-subscribe-index .subscribe-header {
+  background-image: linear-gradient(150deg, #2d1582 0%, #19a0ff 100%);
+  background-repeat: repeat-x;
+  height: 380px;
+  padding: 20px;
+}
+
+.edu .edu-front-subscribe-index .subscribe-header h1 {
+  font-size: 4rem;
+  opacity: .9;
+}
+
+.edu .edu-front-subscribe-index .subscribe-header h2 {
+  font-size: 2rem;
+  opacity: .6;
+}
+
+.edu .pay {
+  margin-top: -55px;
+}
+
+.edu .pay .item {
+  background-image: linear-gradient(150deg, #e4e8da 0%, #ffffff 100%);
+}
+
+.edu .pay .item .price {
+  text-shadow: 0 0 10px #dddddd;
+}
+
+.edu .pay .item .price small {
+  font-size: 1rem;
+}
+

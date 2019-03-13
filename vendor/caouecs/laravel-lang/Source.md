@@ -162,6 +162,7 @@ Japanese (ja)
 * [Hirohisa Kawase](https://github.com/HiroKws)
 * [Yuya Takahashi](https://github.com/takahashiyuya)
 * [Jumilla](https://github.com/jumilla)
+* [Keishi Mitsuhashi](https://github.com/xenbeat)
 
 Korean (ko)
 
@@ -220,6 +221,7 @@ Russian (ru)
 
 * [Evgeny Kovalev](https://github.com/EvgenyKovalev)
 * [Vasily Tsybenko](https://github.com/VasayXTX)
+* [Andrey Helldar](https://github.com/andrey-helldar)
 
 Sardinian (sc)
 

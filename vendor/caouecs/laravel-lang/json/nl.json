@@ -36,12 +36,14 @@
   "Sorry, you are not authorized to access this page.": "Sorry, je bent niet geautoriseerd om toegang te krijgen tot deze pagina.",
   "Sorry, your session has expired. Please refresh and try again.": "Sorry, je sessie is verlopen. Herlaad de pagina en probeer het opnieuw.",
   "Sorry, we are doing some maintenance. Please check back soon.": "Sorry, we zijn op dit moment bezig met onderhoud. Probeer het binnenkort opnieuw.",
-  "Toggle navigation": "Toggle navigation",
+  "This password reset link will expire in :count minutes.": "Deze wachtwoord herstel link verloopt over :count minuten.",
+  "Toggle navigation": "Aan/uitzetten navigatie",
   "Too Many Requests": "Te veel verzoeken",
   "Unauthorized": "Onbevoegd",
   "Verify Email Address": "Verifieer e-mailadres",
   "Verify Your Email Address": "Verifieer je e-mailadres",
   "You are receiving this email because we received a password reset request for your account.": "Je ontvangt deze email omdat we een wachtwoord herstel hebben ontvangen voor je account.",
   "Whoops!": "Oops!",
-  "Whoops, something went wrong on our servers.": "Oops, er ging iets fout op onze servers."
+  "Whoops, something went wrong on our servers.": "Oops, er ging iets fout op onze servers.",
+  "This action is unauthorized.": "Deze actie is niet toegestaan."
 }

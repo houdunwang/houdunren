@@ -4,7 +4,6 @@
     <div class="card">
         <div class="card-header">
             已购模块列表
-            <small class="text-secondary">忽略同名本地模块</small>
         </div>
         <div class="card-body">
             @if (count($modules['data'])>0)
@@ -24,20 +23,25 @@
                             </div>
                             <div class="col-xs-4 col-md-6 text-right mt-3">
                                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                    @if (!$module['installed'])
-                                        <a class="btn btn-outline-success"
+                                    @if ($module['local'])
+                                        <button class="btn btn-outline-secondary" disabled="">
+                                            已存在同名本地模块
+                                        </button>
+                                    @endif
+                                    @if (!$module['installed'] && !$module['local'])
+                                        <a class="btn btn-success"
                                            href="{{route('update.module.show',['name'=>$module['name']])}}">
                                             下载安装
                                         </a>
                                     @endif
-                                    @if ($module['has_update'])
+                                    @if ($module['has_update'] && !$module['local'])
                                         <a class="btn btn-outline-danger"
                                            href="{{route('update.module.update',['name'=>$module['name']])}}">
                                             更新模块
                                         </a>
                                     @endif
-                                    <a class="btn btn-outline-info"
-                                       href="http://www.hdcms.com/shop/front/module/{{$module['id']}}">
+                                    <a class="btn btn-outline-info" target="_blank"
+                                       href="{{$cloud['host']??''}}/shop/front/module/{{$module['id']}}">
                                         访问模块页面
                                     </a>
                                 </div>

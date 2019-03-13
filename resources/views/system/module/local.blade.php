@@ -8,7 +8,7 @@
                 @foreach($modules as $module)
                     <div class="row">
                         <div class="col-xs-4 col-md-1 text-dark">
-                            <img src="{{$module['thumb']}}" class="img-thumbnail">
+                            <img src="{{asset($module['thumb'])}}" class="img-thumbnail">
                         </div>
                         <div class="col-xs-4 col-md-5 text-dark">
                             <strong class="title text-dark d-block">
@@ -29,6 +29,16 @@
                                    data-container="body"
                                    data-toggle="popover"
                                    data-placement="top" data-content="打包下载提到应用商店出售">打包下载</a>
+                                <form action="{{route('system.module.delete',['name'=>$module['name']])}}" method="post">
+                                    @csrf
+                                </form>
+                                <button type="button" class="btn btn-outline-danger"
+                                        onclick="destroy(this,'确定删除模块的所有文件与数据吗？')"
+                                        data-container="body" data-toggle="popover" data-placement="top"
+                                        data-content="将删除模块的所有数据与文件">
+                                    删除模块所有文件
+                                </button>
+
                             </div>
                         </div>
                     </div>

@@ -100,12 +100,19 @@ class ModuleRepository extends Repository
         try {
             $response = (new Client())->get($this->package['thumb']);
             $thumb = \Storage::drive('module')->path($this->package['name']) . '/thumb.jpeg';
-            if (file_put_contents($thumb, $response->getBody()->getContents())) {
+            $lowerName = strtolower($this->package['name']);
+            $this->package['thumb'] = "modules/{$lowerName}/thumb.jpeg";
+            $imageContent = $response->getBody()->getContents();
+            if (file_put_contents($thumb, $imageContent)) {
                 Image::load($thumb)->fit(Manipulations::FIT_CROP, 500, 300)->save();
+                $storage = \Storage::drive('base');
+                $storage->makeDirectory("public/modules/{$lowerName}/images");
+                Image::load($thumb)->fit(Manipulations::FIT_CROP, 500,
+                    300)->save(public_path("modules/{$lowerName}/thumb.jpeg"));
                 return true;
             }
         } catch (\Exception $exception) {
-            throw  new ResponseHttpException('缩略图错误');
+            throw  new ResponseHttpException('缩略图创建失败');
         }
     }
 
@@ -132,9 +139,12 @@ class ModuleRepository extends Repository
      */
     public function delete(Model $model)
     {
-        \Artisan::call('module:migrate-reset', ['module' => $model['name']]);
-        if (!$model['local']) {
-            \Storage::disk('module')->deleteDirectory($model['name']);
+        $storage = \Storage::drive('module');
+        if (is_dir($storage->path($model['name']))) {
+            \Artisan::call('module:migrate-reset', ['module' => $model['name']]);
+            if (!$model['local']) {
+                $storage->deleteDirectory($model['name']);
+            }
         }
         return parent::delete($model);
     }
@@ -195,7 +205,7 @@ class ModuleRepository extends Repository
         $menus = [];
         foreach ($site->modules as $module) {
             $config = include \Storage::drive('module')->path($module['name']) . '/Config/menus.php';
-            $menus[$module['title']]['menus'] = $config[$type]??[];
+            $menus[$module['title']]['menus'] = $config[$type] ?? [];
             $menus[$module['title']]['module'] = $module;
         }
         return $menus;
@@ -309,12 +319,38 @@ class ModuleRepository extends Repository
     }
 
     /**
+     * 检测模块是否为本地模块
+     * @param string $name
+     * @return bool
+     */
+    public function isLocalModule(string $name): bool
+    {
+        if ($this->has($name)) {
+            $config = include \Storage::drive('module')->path("modules/{$name}/Config/package.php");
+            return $config['local'] ?? false;
+        }
+        return false;
+    }
+
+    /**
+     * 加载模块配置文件
+     * @param $name
+     * @return mixed
+     */
+    public function loadConfig($name)
+    {
+        if ($this->has($name)) {
+            return include $this->configPath($name) . 'package.php';
+        }
+    }
+
+    /**
      * 检测模块是否已经存在或安装到数据库
      * @param $name
      * @return bool
      */
-    public function has($name)
+    public function has(string $name): bool
     {
-        return Module::where(['name' => $name])->first() || is_dir(base_path("Modules/{$name}"));
+        return Module::where(['name' => $name])->first() || is_dir(base_path("modules/{$name}"));
     }
 }

@@ -8,7 +8,7 @@ return [
     |
     | The following language lines contain the default error messages used by
     | the validator class. Some of these rules have multiple versions such
-    | as the size rules. Feel free to tweak each of these messages.
+    | as the size rules. Feel free to tweak each of these messages here.
     |
     */
 
@@ -31,8 +31,9 @@ return [
     'boolean'              => 'يجب أن تكون قيمة :attribute إما true أو false .',
     'confirmed'            => 'حقل التأكيد غير مُطابق للحقل :attribute.',
     'date'                 => ':attribute ليس تاريخًا صحيحًا.',
+    'date_equals'          => 'يجب أن يكون :attribute مطابقاً للتاريخ :date.',
     'date_format'          => 'لا يتوافق :attribute مع الشكل :format.',
-    'different'            => 'يجب أن يكون الحقلان :attribute و :other مُختلفان.',
+    'different'            => 'يجب أن يكون الحقلان :attribute و :other مُختلفين.',
     'digits'               => 'يجب أن يحتوي :attribute على :digits رقمًا/أرقام.',
     'digits_between'       => 'يجب أن يحتوي :attribute بين :min و :max رقمًا/أرقام .',
     'dimensions'           => 'الـ :attribute يحتوي على أبعاد صورة غير صالحة.',
@@ -106,7 +107,8 @@ return [
         'string'  => 'يجب أن يحتوي النص :attribute على :size حروفٍ/حرفًا بالضبط.',
         'array'   => 'يجب أن يحتوي :attribute على :size عنصرٍ/عناصر بالضبط.',
     ],
-    'string'               => 'يجب أن يكون :attribute نصآ.',
+    'starts_with'          => 'يجب أن يبدأ :attribute بأحد القيم التالية: :values',
+    'string'               => 'يجب أن يكون :attribute نصًا.',
     'timezone'             => 'يجب أن يكون :attribute نطاقًا زمنيًا صحيحًا.',
     'unique'               => 'قيمة :attribute مُستخدمة من قبل.',
     'uploaded'             => 'فشل في تحميل الـ :attribute.',
@@ -147,8 +149,8 @@ return [
         'email'                 => 'البريد الالكتروني',
         'first_name'            => 'الاسم الأول',
         'last_name'             => 'اسم العائلة',
-        'password'              => 'كلمة السر',
-        'password_confirmation' => 'تأكيد كلمة السر',
+        'password'              => 'كلمة المرور',
+        'password_confirmation' => 'تأكيد كلمة المرور',
         'city'                  => 'المدينة',
         'country'               => 'الدولة',
         'address'               => 'عنوان السكن',

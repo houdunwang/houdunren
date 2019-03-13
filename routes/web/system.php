@@ -24,6 +24,7 @@ Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.
         Route::resource('package', 'PackageController');
         //模块管理
         Route::resource('module', 'ModuleController');
+        Route::post('module/delete/{name}', 'ModuleController@delete')->name('module.delete');
         Route::get('refresh/module/{module}', 'ModuleController@refresh')->name('module.refresh');
         Route::get('local/module', 'ModuleController@local')->name('module.local');
         Route::get('install/module/{name}', 'ModuleController@install')->name('module.install');
