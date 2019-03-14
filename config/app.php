@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'api_host' => 'http://test.hdcms.com',
     /*
     |--------------------------------------------------------------------------
     | Application Name
