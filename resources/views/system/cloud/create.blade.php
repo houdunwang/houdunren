@@ -9,7 +9,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>云主机</label>
-                    <input type="text" name="api_host" value="{{$cloud['api_host']??'http://www.hdcms.com'}}" class="form-control">
+                    <input type="text" name="api_host" value="{{$cloud['api_host']??'https://www.hdcms.com'}}" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>帐号</label>
