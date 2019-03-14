@@ -52,7 +52,7 @@ class LocalListener
         $dir = 'attachments/' . date('Y/m');
         $file = auth()->id() . time() . '.' . $this->event->file->getClientOriginalExtension();
         $this->event->file->move($dir, $file);
-        return $this->event->path = $dir . '/' . $file;
+        return $this->event->path = '/'.$dir . '/' . $file;
     }
 
     public function handle($event)

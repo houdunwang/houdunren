@@ -27,7 +27,7 @@
                 </div>
             </div>
             <img class="img-thumbnail d-block"
-                 src="{{url(old('thumb',$module['package']['thumb']??'images/system/nopic.jpg'))}}">
+                 src="{{old('thumb',$module['package']['thumb']??'images/system/nopic.jpg')}}">
             <span class="text-muted">请上传200x200的模块预览图片，图片类型要求为jpeg，系统会自动进行尺寸裁切处理。</span>
             @push('js')
                 <script>
@@ -35,7 +35,7 @@
                         require(['hdjs'], function (hdjs) {
                             hdjs.image(function (images) {
                                 $("[name=thumb]").val(images[0]);
-                                $(".img-thumbnail").attr('src', '/'+images[0]);
+                                $(".img-thumbnail").attr('src', images[0]);
                             })
                         });
                     }
