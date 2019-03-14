@@ -51,5 +51,30 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="form-group">
+            <label>
+                必须设置头像
+                <small class="text-secondary">validate_icon</small>
+                <span class="help-block small">如果用户没设置头像将强制要求设置</span>
+            </label>
+            <div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" name="validate_icon" type="radio" id="validate_icon_open" value="1"
+                            {{active_class(old('validate_icon',$config['validate_icon']??false),'checked')}}>
+                    <label class="form-check-label" for="validate_icon_open">
+                        开启
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" name="validate_icon" type="radio" id="validate_icon_close"
+                           value="0"
+                            {{active_class(old('validate_icon',($config['validate_icon']??false)==0),'checked')}}>
+                    <label class="form-check-label" for="validate_icon_close">
+                        关闭
+                    </label>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

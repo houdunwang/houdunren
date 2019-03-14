@@ -30,6 +30,11 @@ class FrontMiddleware
                 return \Route::respondWithRoute('site.close');
             }
         }
+        if (config_get('user.validate_icon', false, 'site')) {
+            if (auth()->check() && auth()->user()['icon'] == '') {
+                return redirect()->route('member.icon.index')->with('info', '你需要先设置头像');
+            }
+        }
         return $next($request);
     }
 }
