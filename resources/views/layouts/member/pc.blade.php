@@ -38,6 +38,8 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="{{route('member.info.index')}}">修改资料</a>
+                                <a class="dropdown-item"
+                                   href="{{route('user.home',auth()->user())}}">个人中心</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{route('logout')}}">退出登录</a>
                             </div>

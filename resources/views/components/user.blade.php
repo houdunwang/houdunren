@@ -1,6 +1,6 @@
-<div class="card shadow-sm  border-0 rounded-0">
+<div class="card shadow-sm border-0 rounded">
     <a href="{{route('member.icon.index')}}" class="d-block">
-        <img src="{{$user['avatar']}}" class="card-img-top rounded-0">
+        <img src="{{$user['avatar']}}" class="card-img-top rounded">
     </a>
     <div class="card-body">
         <a class="card-title text-secondary" href="{{route('member.info.index')}}">
