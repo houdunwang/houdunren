@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Models\Site;
 use App\Http\Controllers\Controller;
+use App\Models\SiteUser;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -37,10 +38,12 @@ class UserController extends Controller
     public function update(Site $site, User $user)
     {
         $this->authorize('update', $site);
-        $user->sites()->toggle([$site['id'] => ['role' => 'operator']]);
-        //删除操作员时同时移除权限数据
-        if (!$site->user->contains($user)) {
+        if ($site->manage->contains($user)) {
+            SiteUser::updateOrCreate(['site_id' => $site['id'], 'user_id' => $user['id']], ['role' => 'user']);
+            //删除操作员时同时移除权限数据
             $user->permissions()->detach($site->permissions->pluck('id')->toArray());
+        } else {
+            SiteUser::updateOrCreate(['site_id' => $site['id'], 'user_id' => $user['id']], ['role' => 'operator']);
         }
         if (request()->expectsJson()) {
             return response()->json(['message' => '操作员设置成功', 'code' => 0]);

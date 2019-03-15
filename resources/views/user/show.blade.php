@@ -1,8 +1,6 @@
 @extends('user.layouts.master')
 @section('content')
-    <h5>
-        <i class="fa fa-archive"></i> 他的动态
-    </h5>
+    <h5><i class="fa fa-archive"></i> 他的动态</h5>
     <hr>
     <div class="border-gray mb-3">
         @foreach($activities as $activity)

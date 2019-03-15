@@ -10,12 +10,13 @@
 namespace App\Repositories;
 
 use App\Models\Site;
+use App\Models\SiteUser;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 会员管理仓库
+ * 会员管理
  * Class UserRepository
  * @package App\Repositories
  */
@@ -55,7 +56,13 @@ class UserRepository extends Repository
      */
     public function addSite(User $user, Site $site, $role = 'user')
     {
-        $has = \DB::table('site_user')->where('site_id', $site['id'])->where('user_id', $user['id'])->first();
+        $where = [
+            ['site_id', $site['id']],
+            ['user_id', $user['id']],
+        ];
+        //防止多条记录对用户处理
+        SiteUser::where($where)->offset(1)->delete();
+        $has = SiteUser::where($where)->first();
         if (!$has) {
             return $user->sites()->save($site, ['role' => $role]);
         }

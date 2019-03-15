@@ -73,6 +73,24 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    /**
+     * 返回当前模型的链接
+     * @return string
+     */
+    public function getLink()
+    {
+        return route('user.home', $this);
+    }
+
+    /**
+     * 返回当前模型的标题
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this['name'];
+    }
+
     public function favourUpdate()
     {
         $this['favour_count'] = $this->favourCount();
@@ -148,7 +166,7 @@ class User extends Authenticatable
 
     public function getAvatarAttribute()
     {
-        return $this['icon'] ?url($this['icon']): asset('images/system/user.jpg');
+        return $this['icon'] ? url($this['icon']) : asset('images/system/user.jpg');
     }
 
     /**

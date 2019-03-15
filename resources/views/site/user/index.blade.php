@@ -102,7 +102,7 @@
                             }
                         });
                     });
-                }, "{{ implode(',',$site->user->pluck('id')->toArray()??[]) }}");
+                }, "{{ implode(',',$site->manage->pluck('id')->toArray()??[]) }}");
             });
         }
     </script>
