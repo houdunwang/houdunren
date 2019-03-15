@@ -1,6 +1,6 @@
 @extends('layouts.member.mobile')
 @section('content')
-    @inject('ModuleRepository','App\Repositories\ModuleRepository')
+    @inject('MenuRepository','App\Repositories\MenuRepository')
     <div class="card mb-1">
         <div class="card-body header border-top border-info">
             <div class="media">
@@ -52,7 +52,7 @@
             </ul>
         </div>
     </div>
-    @foreach($ModuleRepository->getMenus(site(),'member_mobile') as $moduleTitle=>$menus)
+    @foreach($MenuRepository->get(site(),'member_mobile') as $moduleTitle=>$menus)
         @if (count($menus['menus']))
             <div class="card mt-0 border-top-0">
                 <div class="card-header">

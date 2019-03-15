@@ -187,23 +187,6 @@ class ModuleRepository extends Repository
     }
 
     /**
-     * 获取前台菜单（会员中心、个人空间、前台）
-     * @param Site $site 站点
-     * @param string $type 菜单类型: member_pc桌面会员中心菜单,member_mobile移动端会员中心菜单
-     * @return array
-     */
-    public function getMenus(Site $site, string $type): array
-    {
-        $menus = [];
-        foreach ($site->modules as $module) {
-            $config = include \Storage::drive('module')->path($module['name']) . '/Config/menus.php';
-            $menus[$module['title']]['menus'] = $config[$type] ?? [];
-            $menus[$module['title']]['module'] = $module;
-        }
-        return $menus;
-    }
-
-    /**
      * 过滤掉没权限的模块菜单
      * @param Site $site
      * @param Module $module

@@ -8,7 +8,7 @@
 </head>
 <body class="member">
 @include('layouts.message')
-@inject('ModuleRepository','App\Repositories\ModuleRepository')
+@inject('MenuRepository','App\Repositories\MenuRepository')
 @include('components.header')
 <div class="container mt-1 mt-sm-3 mb-5">
     <div class="row">
@@ -71,12 +71,9 @@
                 </div>
             </div>
             <div class="card mt-2">
-                {{--<div class="card-header">--}}
-                {{--{{$moduleTitle}}--}}
-                {{--</div>--}}
                 <div class="card-body p-0">
                     <div class="list-group list-group-flush">
-                        @foreach($ModuleRepository->getMenus(site(),'member_pc') as $moduleTitle=>$menus)
+                        @foreach($MenuRepository->get(site(),'member_pc') as $moduleTitle=>$menus)
                             @if (count($menus['menus']))
                                 @foreach($menus['menus'] as $menu)
                                     <a class="list-group-item list-group-item-action text-secondary"
