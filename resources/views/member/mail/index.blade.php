@@ -1,9 +1,9 @@
 @extends('layouts.member')
 @section('content')
+    @include('member.layouts._tab_info')
     <form action="{{route('member.info.store')}}" method="post">
         @csrf
         <div class="card shadow-sm">
-            <div class="card-header">修改邮箱</div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-sm-6">

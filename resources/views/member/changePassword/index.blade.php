@@ -1,12 +1,12 @@
 @extends('layouts.member')
 @section('content')
+    @include('member.layouts._tab_info')
     <form action="{{route('member.change-password.store')}}" method="post">
         @csrf
         <div class="card shadow-sm">
-            <div class="card-header">修改密码</div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label>原密码</label>
                             <input type="password" name="original_password" class="form-control" required

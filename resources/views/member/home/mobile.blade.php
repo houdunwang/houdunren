@@ -32,9 +32,6 @@
         </div>
     </div>
     <div class="card mt-0 mt-sm-2 shadow-sm border-bottom-0">
-        <div class="card-header">
-            资料修改
-        </div>
         <div class="card-body p-0">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
@@ -50,28 +47,7 @@
                     <a href="{{route('member.mail.index')}}" class="d-block">绑定邮箱</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="" class="d-block">修改手机</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="card mt-0">
-        <div class="card-header">
-            资料修改
-        </div>
-        <div class="card-body p-0">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <a href="">修改密码</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="">设置头像</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="">绑定邮箱</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="">修改手机</a>
+                    <a href="{{module_link('member.mobile.index')}}" class="d-block">修改手机</a>
                 </li>
             </ul>
         </div>

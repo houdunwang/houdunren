@@ -9,8 +9,8 @@
                     <div class="media text-muted pt-1">
                         <div class="media-body pb-3 mb-0 small lh-125 pl-3">
                             <h6 class="float-left">
-                                <a href="{{$activity->subject->getLink()}}">
-                                    {{$activity->subject->getTitle()}}
+                                <a href="{{$activity->subject->getActivityLink()}}">
+                                    {{$activity->subject->getActivityTitle()}}
                                 </a>
                             </h6>
                             <div class="small font-weight-light float-right">
