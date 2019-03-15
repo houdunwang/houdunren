@@ -1,0 +1,38 @@
+<?php return array (
+  'build' => 1552666805,
+  'total' => 23,
+  'logs' => 
+  array (
+    0 => '用户间点赞关注功能',
+    1 => '修复后台管理员操作错误',
+    2 => '增加个人空间',
+    3 => '增加个人空间',
+    4 => '增加验证用户头像middleware',
+  ),
+  'files' => 
+  array (
+    'app/Http/Controllers/Member/FavourController.php' => 'M',
+    'app/Http/Controllers/Member/FollowController.php' => 'M',
+    'app/Http/Controllers/Site/UserController.php' => 'M',
+    'app/Http/Controllers/User/HomeController.php' => 'M',
+    'app/Http/Middleware/FrontMiddleware.php' => 'M',
+    'app/Models/Favorite.php' => 'M',
+    'app/Models/Favour.php' => 'M',
+    'app/Models/SiteUser.php' => 'M',
+    'app/Repositories/UserRepository.php' => 'M',
+    'app/User.php' => 'M',
+    'resources/views/components/header.blade.php' => 'M',
+    'resources/views/components/user.blade.php' => 'M',
+    'resources/views/components/user_square.blade.php' => 'M',
+    'resources/views/layouts/member/pc.blade.php' => 'M',
+    'resources/views/site/config/_user.blade.php' => 'M',
+    'resources/views/site/user/index.blade.php' => 'M',
+    'resources/views/user/layouts/master.blade.php' => 'M',
+    'resources/views/user/layouts/menu.blade.php' => 'M',
+    'resources/views/user/layouts/mobile.blade.php' => 'M',
+    'resources/views/user/layouts/pc.blade.php' => 'M',
+    'resources/views/user/show.blade.php' => 'M',
+    'routes/web.php' => 'M',
+    'routes/web/user.php' => 'M',
+  ),
+);
