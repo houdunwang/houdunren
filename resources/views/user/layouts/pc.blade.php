@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="col-sm-3 col-12 p-0 pl-sm-2">
-            @include('user.layouts.user',['user'=>$user])
+            @include('components.user',['user'=>$user])
             @include('user.layouts.menu',['user'=>$user])
         </div>
     </div>

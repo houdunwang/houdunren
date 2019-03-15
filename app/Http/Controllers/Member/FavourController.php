@@ -13,7 +13,6 @@ use App\Http\Controllers\Controller;
  */
 class FavourController extends Controller
 {
-
     /**
      * 点赞操作
      * @param $model
@@ -33,7 +32,6 @@ class FavourController extends Controller
             ];
             $favour = $model->favour()->where($params)->first();
             $favour ? $favour->delete() : $model->favour()->create($params);
-
             call_user_func([$model, 'favourUpdate']);
             if (\request()->expectsJson()) {
                 return response()->json($favour ?

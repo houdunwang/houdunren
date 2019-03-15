@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Traits\ActivityRecord;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * 点赞管理
@@ -13,9 +15,6 @@ use Illuminate\Database\Eloquent\Model;
 class Favour extends Model
 {
     protected $fillable = ['site_id', 'user_id', 'module_id'];
-
-    //全站动态
-    protected static $logName = 'favour';
 
     public function user()
     {

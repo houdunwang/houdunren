@@ -1,38 +1,48 @@
-<div class="card shadow-sm border-0 rounded">
-    <a href="{{route('member.icon.index')}}" class="d-block">
-        <img src="{{$user['avatar']}}" class="card-img-top rounded">
-    </a>
-    <div class="card-body">
-        <a class="card-title text-secondary" href="{{route('member.info.index')}}">
-            <h5>{{$user['name']}}</h5>
+<div class="card rounded mb-2 shadow-sm">
+    <div class="card-header bg-white text-center border-0">
+        <a href="{{route('user.home',$user)}}">
+            <img src="{{asset($user['avatar'])}}" class="img-thumbnail rounded-circle"
+                 style="width: 100px;height:100px;">
         </a>
-        <div class="dropdown-divider"></div>
-        <div class="text-left">
-            @if ($user['email'])
-                <a class="mb-0 mr-2" href="mailto:{{$user['email']}}">
-                    <i class="fa fa-envelope text-info"></i>
-                </a>
-            @endif
-            @if ($user['weibo'])
-                <a class="mb-0 mr-2" href="{{$user['home']}}">
-                    <i class="fa fa-home text-info"></i>
-                </a>
-            @endif
-            @if ($user['weibo'])
-                <a class="mb-0 mr-2" href="{{$user['weibo']}}">
-                    <i class="fa fa-weibo text-info"></i>
-                </a>
-            @endif
-            @if ($user['github'])
-                <a class="mb-0 mr-2" href="{{$user['github']}}">
-                    <i class="fa fa-github text-info"></i>
-                </a>
-            @endif
-            @if ($user['qq'])
-                <a class="mb-0 mr-2" href="{{$user['qq']}}">
-                    <i class="fa fa-qq text-info"></i>
-                </a>
-            @endif
-        </div>
+    </div>
+    <div class="card-header bg-white text-center">
+        {{$user['name']}}
+    </div>
+    <div class="card-body text-center">
+        <a class="mb-0 mr-2" href="{{route('member.mail.index')}}">
+            <i class="fa fa-envelope {{active_class($user['email'],'text-info')}}"></i>
+        </a>
+        <a class="mb-0 mr-2" href="{{route('member.info.index')}}">
+            <i class="fa fa-weibo {{active_class($user['weibo'],'text-info')}}"></i>
+        </a>
+        <a class="mb-0 mr-2" href="{{route('member.info.index')}}">
+            <i class="fa fa-github {{active_class($user['github'],'text-info')}}"></i>
+        </a>
+        <a class="mb-0 mr-2" href="{{route('member.info.index')}}">
+            <i class="fa fa-qq {{active_class($user['qq'],'text-info')}}"></i>
+        </a>
+    </div>
+    <div class="text-center pb-3">
+        @if ($user->hasFans(auth()->user()))
+            <a href="{{route('member.follow.make',$user)}}" class="btn btn-outline-success btn-sm">
+                <i class="fa fa-plus"></i> 关注 TA
+            </a>
+        @else
+            <a href="{{route('member.follow.make',$user)}}" class="btn btn-success btn-sm">
+                <i class="fa fa-plus"></i> 已关注
+            </a>
+        @endif
+        @if (auth()->user()->isFavour())
+            <a href="{{route('member.favour.make',['model'=>'App-User','id'=>$user['id']])}}"
+               class="btn btn-info btn-sm">
+                <i class="fa fa-heart"></i> 感谢点赞
+            </a>
+        @else
+            <a href="{{route('member.favour.make',['model'=>'App-User','id'=>$user['id']])}}"
+               class="btn btn-outline-info btn-sm">
+                <i class="fa fa-heart-o"></i> 点个赞呗
+            </a>
+        @endif
+
     </div>
 </div>

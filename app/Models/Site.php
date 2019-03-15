@@ -26,15 +26,6 @@ class Site extends Model
             ->as('role')->withTimestamps();
     }
 
-//    /**
-//     * 后台管理员
-//     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-//     */
-//    public function manages()
-//    {
-//        return $this->user()->wherePivotIn('role', ['admin', 'operator']);
-//    }
-
     /**
      * 网站管理员与操作员
      * @return \Illuminate\Database\Eloquent\Collection

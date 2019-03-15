@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Traits\ActivityRecord;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * 收藏
