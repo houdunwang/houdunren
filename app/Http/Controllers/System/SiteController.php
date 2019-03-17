@@ -11,6 +11,7 @@ namespace App\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SiteRequest;
 use App\Models\Site;
+use App\Models\SiteUser;
 use App\Repositories\ModuleRepository;
 use App\Repositories\SiteRepository;
 

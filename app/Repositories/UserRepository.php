@@ -60,8 +60,6 @@ class UserRepository extends Repository
             ['site_id', $site['id']],
             ['user_id', $user['id']],
         ];
-        //防止多条记录对用户处理
-        SiteUser::where($where)->offset(1)->delete();
         $has = SiteUser::where($where)->first();
         if (!$has) {
             return $user->sites()->save($site, ['role' => $role]);
