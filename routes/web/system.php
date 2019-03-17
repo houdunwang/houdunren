@@ -56,7 +56,7 @@ Route::group(['middleware' => ['system'], 'prefix' => 'update', 'as' => 'update.
     });
 
 //系统安装
-Route::group(['as' => 'install.', 'prefix' => 'install','middleware'=>'install'], function () {
+Route::group(['as' => 'install.', 'prefix' => 'install'], function () {
     Route::get('/', 'InstallController@index')->name('home');
     Route::get('database', 'InstallController@database')->name('database');
     Route::post('connect', 'InstallController@connect')->name('connect');

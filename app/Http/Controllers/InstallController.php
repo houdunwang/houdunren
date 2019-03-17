@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
  */
 class InstallController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('install', ['except' => ['complete']]);
+    }
+
     /**
      * 欢迎页面
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
