@@ -15,8 +15,11 @@ class InstallMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!is_file(base_path('install.lock')) && !if_route_pattern('install/*')) {
+        if (!is_file(base_path('install.lock')) && !if_route_pattern('install*')) {
             return redirect(route('install.home'));
+        }
+        if (is_file(base_path('install.lock')) && if_route_pattern('install*')){
+            return redirect('/admin');
         }
         return $next($request);
     }
