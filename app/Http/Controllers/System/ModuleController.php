@@ -15,7 +15,6 @@ use App\Http\Requests\ModuleRequest;
 use App\Models\Module;
 use App\Repositories\ModuleRepository;
 use App\Repositories\SiteRepository;
-use Illuminate\Http\Request;
 
 /**
  * 模块管理
@@ -31,7 +30,6 @@ class ModuleController extends Controller
     public function index(ModuleRepository $repository)
     {
         $modules = $repository->all();
-
         return view('system.module.index', compact('modules'));
     }
 
