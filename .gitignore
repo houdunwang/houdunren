@@ -15,3 +15,4 @@ database.php
 !/.gitignore
 hdcms.zip
 /public/modules
+install.lock
