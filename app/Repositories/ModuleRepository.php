@@ -81,6 +81,7 @@ class ModuleRepository extends Repository
         $attributes = array_merge(array_except($this->package, ['name']), $attributes);
         $this->package = array_merge(include $this->configPath($model['name']) . 'package.php', $attributes);
         $this->permissions = include $this->configPath() . 'permissions.php';
+        $this->business = include $this->configPath() . 'business.php';
         $this->fitThumb();
         $this->writeConfig();
         \Artisan::call('module:migrate', ['module' => $model['name']]);
@@ -121,6 +122,7 @@ class ModuleRepository extends Repository
         return collect([
             'package.php' => $this->package,
             'permissions.php' => $this->permissions,
+            'business.php' => $this->business,
         ])->each(function ($data, $file) {
             put_contents_file($this->configPath() . $file, $data);
         });

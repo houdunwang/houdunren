@@ -18,7 +18,7 @@
         <div class="form-group">
             <label>会员组</label>
             <input type="text" name="name" class="form-control col-sm-6" required placeholder="请输入用户组中文名称"
-            value="{{$group['name']??''}}">
+                   value="{{$group['name']??''}}">
         </div>
         <div class="form-group">
             <label>站点数量</label>
@@ -26,14 +26,14 @@
             <small class="text-muted">可创建的站点数量</small>
         </div>
         {{--<div class="form-group">--}}
-            {{--<label>有效期限</label>--}}
-            {{--<div class="input-group mb-3">--}}
-                {{--<input type="text" class="form-control col-sm-6" name="days" value="{{$group['days']??30}}" required>--}}
-                {{--<div class="input-group-append">--}}
-                    {{--<span class="input-group-text">天</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<small class="text-muted">设置用户组的有效期限, 到期后该用户组的将不能使用任何服务</small>--}}
+        {{--<label>有效期限</label>--}}
+        {{--<div class="input-group mb-3">--}}
+        {{--<input type="text" class="form-control col-sm-6" name="days" value="{{$group['days']??30}}" required>--}}
+        {{--<div class="input-group-append">--}}
+        {{--<span class="input-group-text">天</span>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        {{--<small class="text-muted">设置用户组的有效期限, 到期后该用户组的将不能使用任何服务</small>--}}
         {{--</div>--}}
     </div>
 </div>
@@ -52,7 +52,6 @@
                 </th>
                 <th scope="col">名称</th>
                 <th scope="col">可用模块</th>
-                <th scope="col">可用模板</th>
             </tr>
             </thead>
             <tbody>
@@ -60,14 +59,13 @@
                 <tr>
                     <td>
                         <input type="checkbox" name="packages[]" value="{{$package['id']}}"
-                        {{active_class($groupPackages->contains($package),'checked')}}>
+                                {{active_class($groupPackages->contains($package),'checked')}}>
                     </td>
                     <td>{{$package['name']}}</td>
                     <td>
-                        <span class="badge badge-info">sdf</span>
-                    </td>
-                    <td>
-                        <span class="badge badge-success">sdf</span>
+                        @foreach($package->module as $module)
+                            <span class="badge badge-info">{{$module['title']}}</span>
+                        @endforeach
                     </td>
                 </tr>
             @endforeach
