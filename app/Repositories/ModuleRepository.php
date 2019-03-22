@@ -138,6 +138,7 @@ class ModuleRepository extends Repository
             \Artisan::call('module:migrate-reset', ['module' => $model['name']]);
             if (!$model['local']) {
                 $storage->deleteDirectory($model['name']);
+                \Storage::drive('base')->deleteDirectory("public/modules/" . strtolower($model['name']));
             }
         }
         return parent::delete($model);

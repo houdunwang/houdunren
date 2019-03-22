@@ -152,9 +152,11 @@ class ModuleController extends Controller
         $names = Module::pluck('name') ?? collect();
         $modules = [];
         foreach (array_diff($dirs, $names->toArray()) as $dir) {
-            $package = include \Storage::drive('module')->path($dir . '/Config/package.php');
-            if ($package['local']) {
-                $modules[] = $package;
+            $file = \Storage::drive('module')->path($dir . '/Config/package.php');
+            if (is_file($file) && ($package = include $file)) {
+                if ($package['local']) {
+                    $modules[] = $package;
+                }
             }
         }
         return view('system.module.local', compact('modules'));

@@ -27,7 +27,7 @@ class ModuleRequest extends FormRequest
                 'sometimes',
                 'required',
                 'max:10',
-                //Rule::notIn(['app', 'system', 'shop', 'edu', 'article', 'admin', 'news', 'community']),
+//                Rule::notIn(['app', 'system', 'shop', 'edu', 'article', 'admin', 'news', 'community']),
                 'regex:/^[a-z]+$/i',
                 'unique:modules,name,' . request('module')['id'],
             ],
