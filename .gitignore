@@ -16,3 +16,4 @@ database.php
 hdcms.zip
 /public/modules
 install.lock
+.DS_Store
