@@ -11,7 +11,7 @@ config = {
         domReady: 'domReady',
         vue: 'package/vue.min',
         scrollTo: 'package/jquery.scrollTo.min',
-        semantic:'https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min',
+        semantic: 'https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min',
         Aliplayer: 'package/aliplayer-min',
         //微信JSSDK
         jweixin: 'http://res.wx.qq.com/open/js/jweixin-1.2.0',
@@ -57,19 +57,42 @@ config = {
         tuiEditor: 'https://uicdn.toast.com/tui-editor/latest/tui-editor-Editor',
         //
         bootstrapTable: 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/locale/bootstrap-table-zh-CN.min',
-        sortablejs:'https://cdn.bootcss.com/Sortable/1.8.3/Sortable.min',
-        vuedraggable:'https://cdn.bootcss.com/Vue.Draggable/15.0.0/vuedraggable.min',
+        sortablejs: 'https://cdn.bootcss.com/Sortable/1.8.3/Sortable.min',
+        vuedraggable: 'https://cdn.bootcss.com/Vue.Draggable/15.0.0/vuedraggable.min',
+
+        nestedSortable: 'https://cdn.bootcss.com/nestedSortable/2.0.0/jquery.mjs.nestedSortable',
+        jqueryUi: 'https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min',
+        jqueryUiSortable: 'https://cdn.bootcss.com/jqueryui/1.10.4/jquery.ui.sortable.min',
+        jquerySortable: 'https://cdn.bootcss.com/jquery-sortable/0.9.13/jquery-sortable'
     },
     shim: {
-        vuedraggable:{
-          deps:[
-              'sortablejs'
-          ]
+        jquerySortable: {
+            deps: ['jquery']
         },
-        semantic:{
-          deps:[
-              'jquery'
-          ]
+        nestedSortable: {
+            deps: [
+                'jqueryUiSortable'
+            ]
+        },
+        jqueryUiSortable: {
+            deps: [
+                'jqueryUi'
+            ]
+        },
+        jqueryUi: {
+            deps: [
+                'jquery'
+            ]
+        },
+        vuedraggable: {
+            deps: [
+                'sortablejs'
+            ]
+        },
+        semantic: {
+            deps: [
+                'jquery'
+            ]
         },
         bootstrapTable: {
             deps: [

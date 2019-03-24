@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs mb-2">
     <li class="nav-item">
-        <a class="nav-link {{active_class(if_route('member.info.index'),'active')}}"
+        <a class="nav-link {{active_class(if_route('member.info.index') || if_route('member'),'active')}}"
            href="{{module_link('member.info.index')}}">
             资料修改
         </a>

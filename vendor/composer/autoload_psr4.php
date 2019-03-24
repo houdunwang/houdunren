@@ -79,6 +79,7 @@ return array(
     'Http\\Client\\' => array($vendorDir . '/php-http/httplug/src'),
     'Http\\Adapter\\Guzzle6\\' => array($vendorDir . '/php-http/guzzle6-adapter/src'),
     'Houdunwang\\WeChat\\' => array($baseDir . '/package/wechat/src'),
+    'Houdunwang\\Arr\\' => array($baseDir . '/package/arr/src'),
     'Houdunwang\\Aliyun\\' => array($baseDir . '/package/aliyun/src'),
     'Houdunwang\\AliPay\\' => array($baseDir . '/package/alipay/src'),
     'HieuLe\\Active\\' => array($vendorDir . '/hieu-le/active/src'),

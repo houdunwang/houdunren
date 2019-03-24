@@ -82,6 +82,7 @@ class ModuleRepository extends Repository
         $this->package = array_merge(include $this->configPath($model['name']) . 'package.php', $attributes);
         $this->permissions = include $this->configPath() . 'permissions.php';
         $this->business = include $this->configPath() . 'business.php';
+        $this->menus = include $this->configPath() . 'menus.php';
         $this->fitThumb();
         $this->writeConfig();
         \Artisan::call('module:migrate', ['module' => $model['name']]);
@@ -123,6 +124,7 @@ class ModuleRepository extends Repository
             'package.php' => $this->package,
             'permissions.php' => $this->permissions,
             'business.php' => $this->business,
+            'menus.php' => $this->menus,
         ])->each(function ($data, $file) {
             put_contents_file($this->configPath() . $file, $data);
         });
