@@ -44,7 +44,7 @@ class Arr
      * @param string $fieldPri 唯一键名，如果是表则是表的主键
      * @param string $fieldPid 父ID键名
      * @param int $level 不需要传参数（执行时调用）
-     *
+     * @param bool $indexUsePri 使用主键做为索引
      * @return array
      */
     public function channelLevel(
@@ -53,6 +53,7 @@ class Arr
         $html = "&nbsp;",
         $fieldPri = 'cid',
         $fieldPid = 'pid',
+        $indexUsePri = true,
         $level = 1
     ) {
         if (empty($data)) {
@@ -61,17 +62,27 @@ class Arr
         $arr = [];
         foreach ($data as $v) {
             if ($v[$fieldPid] == $pid) {
-                $arr[$v[$fieldPri]] = $v;
-                $arr[$v[$fieldPri]]['_level'] = $level;
-                $arr[$v[$fieldPri]]['_html'] = str_repeat($html, $level - 1);
-                $arr[$v[$fieldPri]]["_data"] = $this->channelLevel(
-                    $data,
-                    $v[$fieldPri],
-                    $html,
-                    $fieldPri,
-                    $fieldPid,
-                    $level + 1
+                $v['_level'] = $level;
+                $v['_html'] = str_repeat($html, $level - 1);
+                $v["_data"] = $this->channelLevel(
+                    $data, $v[$fieldPri], $html, $fieldPri, $fieldPid, $indexUsePri, $level + 1
                 );
+                if ($indexUsePri) {
+                    $arr[$v[$fieldPri]] = $v;
+                } else {
+                    $arr[] = $v;
+                }
+//                $arr[$v[$fieldPri]] = $v;
+//                $arr[$v[$fieldPri]]['_level'] = $level;
+//                $arr[$v[$fieldPri]]['_html'] = str_repeat($html, $level - 1);
+//                $arr[$v[$fieldPri]]["_data"] = $this->channelLevel(
+//                    $data,
+//                    $v[$fieldPri],
+//                    $html,
+//                    $fieldPri,
+//                    $fieldPid,
+//                    $level + 1
+//                );
             }
         }
 

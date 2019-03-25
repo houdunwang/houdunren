@@ -115,13 +115,14 @@ level                 	等级（不需要传参数，系统运行时使用 )
 #### 获得多级目录列表（多维数组）
 
 ```
-(new \houdunwang\arr\Arr())->channelLevel($data, $pid = 0, $html = "&nbsp;", $fieldPri = 'cid', $fieldPid = 'pid') 
-参数                          	说明
+(new \houdunwang\arr\Arr())->channelLevel($data, $pid = 0, $html = "&nbsp;", $fieldPri = 'cid', $fieldPid = 'pid',$indexUsePri=true)
+参数                         说明
 data                      	操作的数组
 pid                      	父级栏目的 id 值
 html                     	栏目名称前缀，用于在视图中显示层次感的栏目列表
 fieldPri                 	唯一键名，如果是表则是表的主键
 fieldPid                  	父 ID 键名
+$indexUsePri                true:使用主键做为索引 false:顺序索引
 ```
 
 #### 获得所有父级栏目

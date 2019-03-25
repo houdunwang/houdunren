@@ -239,3 +239,13 @@ function redirect_route(string $route, string $message, int $code = 200)
         ? response()->json(['message' => $message], $code)
         : redirect(module_link($route))->with('info', $message);
 }
+
+/**
+ * 模块安装检测
+ * @param string $name 模块标识
+ * @return bool
+ */
+function module_exists(string $name): bool
+{
+    return (bool)\App\Models\Module::where('name', $name)->first();
+}

@@ -21,3 +21,4 @@
 <script src="{{asset('js/hdjs/config.js')}}"></script>
 <script src="{{mix('js/util.js')}}"></script>
 @stack('css')
+<script> require(['bootstrap']); </script>

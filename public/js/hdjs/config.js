@@ -60,6 +60,7 @@ config = {
         sortablejs: 'https://cdn.bootcss.com/Sortable/1.8.3/Sortable.min',
         vuedraggable: 'https://cdn.bootcss.com/Vue.Draggable/15.0.0/vuedraggable.min',
 
+        contextMenu: 'https://cdn.bootcss.com/jquery-contextmenu/3.0.0-beta.2/jquery.contextMenu.min',
         nestedSortable: 'https://cdn.bootcss.com/nestedSortable/2.0.0/jquery.mjs.nestedSortable',
         jqueryUi: 'https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min',
         jqueryUiSortable: 'https://cdn.bootcss.com/jqueryui/1.10.4/jquery.ui.sortable.min',
@@ -177,8 +178,9 @@ if (hdjs.requireJs) {
 require.config(config);
 require([
     'jquery',
+    'hdjs',
     'axios'
-], function ($, axios) {
+], function ($, hdjs, axios) {
     window.$ = window.jQuery = $
     //全局错误定义
     $.ajaxSetup({
@@ -206,6 +208,19 @@ require([
             headers: {
                 'X-CSRF-TOKEN': token.content
             }
+        });
+        axios.interceptors.response.use(function (response) {
+            return response;
+        }, function (error) {
+            if (error.response.data.message) {
+                // hdjs.info(error.response.data.message);
+                hdjs.swal({
+                    text: error.response.data.message,
+                    button:false,
+                    icon:'info'
+                });
+            }
+            return Promise.reject(error);
         });
     }
 });
