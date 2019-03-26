@@ -22,12 +22,16 @@
 @if ($avatar??false)
     <div class="favour-list text-center pt-3 w-75 m-auto">
         @foreach($model->favour as $favour)
-            <a href="#" class="avatar rounded-circle favour-{{$favour->user['id']}}"
-               style="background-image: url('{{asset($favour->user->avatar)}}')"></a>
+            <a href="{{route('user.home',$favour->user)}}" class="favour-{{$favour->user['id']}}">
+                <img src="{{asset($favour->user->avatar)}}" class="rounded-circle avatar"
+                     style="width: 50px;height:50px;" alt="{{auth()->user()['name']}}">
+            </a>
         @endforeach
         @if (auth()->check())
-            <a href="#" class="avatar rounded-circle d-none favour-current-{{auth()->id()}}"
-               style="background-image: url('{{asset(auth()->user()['avatar'])}}')"></a>
+            <a href="{{route('user.home',auth()->user())}}" class="d-none favour-current-{{auth()->id()}}">
+                <img src="{{asset(auth()->user()->avatar)}}" class="rounded-circle avatar" alt="{{auth()->user()['name']}}"
+                     style="width: 50px;height:50px;">
+            </a>
         @endif
     </div>
 @endif

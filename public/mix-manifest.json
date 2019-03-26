@@ -1,5 +1,9 @@
 {
     "/js/app.js": "/js/app.js?id=e5d978dcf05baa3564de",
     "/css/app.css": "/css/app.css?id=c85976e222706ffe8696",
-    "/js/util.js": "/js/util.js?id=8612e310d74b70ff37e0"
+    "/js/util.js": "/js/util.js?id=8612e310d74b70ff37e0",
+    "/modules/edu/js/app.js": "/modules/edu/js/app.js",
+    "/modules/edu/css/app.css": "/modules/edu/css/app.css",
+    "/modules/document/js/app.js": "/modules/document/js/app.js",
+    "/modules/document/css/app.css": "/modules/document/css/app.css"
 }
