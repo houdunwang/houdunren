@@ -141,7 +141,7 @@ define(["hdjs", "jquery"], function (hdjs, $) {
                                     }else{
                                         hdjs.message(ret.message)
                                     }
-                                });
+                                },'json');
                             };
                             var url = reader.readAsDataURL(blob);
                         }
