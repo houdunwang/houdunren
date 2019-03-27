@@ -202,6 +202,11 @@ body {
 
 .markdown {
   color: #636b6f !important;
+  line-height: 1.8em;
+}
+
+.markdown img {
+  max-width: 100%;
 }
 
 .markdown h1,
@@ -239,12 +244,13 @@ body {
 
 .markdown pre {
   word-break: break-word;
-  background-color: #282c34;
+  background-color: #363f52;
 }
 
 .markdown pre code {
   word-break: break-word;
   white-space: pre-wrap;
+  background-color: #363f52;
   line-height: 2em;
 }
 

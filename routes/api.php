@@ -8,7 +8,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::any('{site}/chat/{chat}', 'Api\ChatController@processor')->name('api.chat');
 
-Route::group(['prefix' => 'token', 'middleware' => ['front']], function () {
+Route::group(['prefix' => 'token', 'middleware' => []], function () {
     //获取token
     Route::post('/', function (\App\Servers\HttpServer $httpServer) {
         return $httpServer->token(\request()->only(['username', 'password']));

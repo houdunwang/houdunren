@@ -1,5 +1,10 @@
 .markdown {
   color: #636b6f !important;
+  line-height: 1.8em;
+
+  img {
+    max-width: 100%;
+  }
 
   h1, h2 {
     font-size: 1.3em;
@@ -33,11 +38,12 @@
 
   pre {
     word-break: break-word;
-    background-color: #282c34;
+    background-color: #363f52;
+
     code {
       word-break: break-word;
       white-space: pre-wrap;
-
+      background-color: #363f52;
       line-height: 2em;
     }
   }

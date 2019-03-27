@@ -5,6 +5,7 @@ namespace App\Http;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\FrontMiddleware;
 use App\Http\Middleware\InstallMiddleware;
+use App\Http\Middleware\LoadSiteAndModuleMiddleware;
 use App\Http\Middleware\MemberMiddleware;
 use App\Http\Middleware\ModuleMiddleware;
 use App\Http\Middleware\SiteMiddleware;
@@ -47,6 +48,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+            LoadSiteAndModuleMiddleware::class,
         ],
         //系统
         'system' => [
