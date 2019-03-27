@@ -171,3 +171,21 @@ function ajax_get_request(action, data) {
         })
     });
 }
+
+/**
+ * 提取markdown菜单
+ * @param el 内容元素
+ * @param container 放菜单容器
+ */
+function markdown_toc(el, container) {
+    require(['jquery'], function ($) {
+        $(el).find("h1,h2,h3").each(function (i) {
+            $(this).attr('id', 'id' + i);
+        });
+        $(el).find("h1,h2,h3").each(function (i) {
+            let num = $(this)[0].tagName.substr(1, 1);
+            let li = "<li><a href='#id" + i + "' class='h" + num + "'>" + $(this).text() + "</a></li>";
+            $(container).append(li);
+        });
+    })
+}

@@ -64,9 +64,17 @@ config = {
         nestedSortable: 'https://cdn.bootcss.com/nestedSortable/2.0.0/jquery.mjs.nestedSortable',
         jqueryUi: 'https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min',
         jqueryUiSortable: 'https://cdn.bootcss.com/jqueryui/1.10.4/jquery.ui.sortable.min',
-        jquerySortable: 'https://cdn.bootcss.com/jquery-sortable/0.9.13/jquery-sortable'
+        jquerySortable: 'https://cdn.bootcss.com/jquery-sortable/0.9.13/jquery-sortable',
+        jqueryPin: 'https://cdn.bootcss.com/jquery.pin/1.0.1/jquery.pin.min',
+        jquerySticky:'https://cdn.bootcss.com/jquery.sticky/1.0.4/jquery.sticky.min'
     },
     shim: {
+        jquerySticky: {
+            deps: ['jquery']
+        },
+        jqueryPin: {
+            deps: ['jquery']
+        },
         jquerySortable: {
             deps: ['jquery']
         },
@@ -216,8 +224,8 @@ require([
                 // hdjs.info(error.response.data.message);
                 hdjs.swal({
                     text: error.response.data.message,
-                    button:false,
-                    icon:'info'
+                    button: false,
+                    icon: 'info'
                 });
             }
             return Promise.reject(error);

@@ -20,5 +20,5 @@
 <script src="{{asset('js/hdjs/require.js')}}"></script>
 <script src="{{asset('js/hdjs/config.js')}}"></script>
 <script src="{{mix('js/util.js')}}"></script>
-@stack('css')
 <script> require(['bootstrap']); </script>
+@stack('css')

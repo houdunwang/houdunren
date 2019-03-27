@@ -29,8 +29,8 @@
         @endforeach
         @if (auth()->check())
             <a href="{{route('user.home',auth()->user())}}" class="d-none favour-current-{{auth()->id()}}">
-                <img src="{{asset(auth()->user()->avatar)}}" class="rounded-circle avatar" alt="{{auth()->user()['name']}}"
-                     style="width: 50px;height:50px;">
+                <img src="{{asset(auth()->user()->avatar)}}" class="rounded-circle avatar"
+                     alt="{{auth()->user()['name']}}" style="width: 50px;height:50px;">
             </a>
         @endif
     </div>

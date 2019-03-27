@@ -35,8 +35,14 @@ define(['jquery', 'lodash'], function ($, _) {
             })
         },
         editormd: function (el, options) {
-            require(['component/editormd'], function (editor) {
-                editor.markdown(el, options);
+            require(['component/editormd'], function (editorMd) {
+                editorMd.markdown(el, options);
+            })
+        },
+        //Markdown编辑器前台转为HTML
+        markdownToHTML: function (el, options) {
+            require(['component/editormd'], function (editorMd) {
+                editorMd.markdownToHTML(el, options);
             })
         },
         simplemdeMarkdownEditor: (el,options,callback) => {
@@ -47,12 +53,6 @@ define(['jquery', 'lodash'], function ($, _) {
         tuiEditor: (el,options,callback) => {
             require(['component/tuiEditor'], function (editormd) {
                 editormd.handle(el, options,callback);
-            })
-        },
-        //Markdown编辑器前台转为HTML
-        markdownToHTML: function (el, options) {
-            require(['component/editormd'], function (editormd) {
-                editormd.markdownToHTML(el, options);
             })
         },
         //SweetAlert

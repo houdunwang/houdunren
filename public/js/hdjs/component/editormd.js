@@ -2,7 +2,7 @@ define(["hdjs", "jquery"], function (hdjs, $) {
     return {
         markdown: function (elem, options) {
             //图片上传地址
-            serverUrl= options.server?options.server:window.hdjs.uploader;
+            serverUrl = options.server ? options.server : window.hdjs.uploader;
             require([
                 "editormd",
                 "package/editor.md/languages/zh-tw",
@@ -138,10 +138,10 @@ define(["hdjs", "jquery"], function (hdjs, $) {
                                     if (ret.code === 0) {
                                         //新一行的图片显示
                                         md.insertValue("\n![aa](" + ret.file + ")");
-                                    }else{
+                                    } else {
                                         hdjs.message(ret.message)
                                     }
-                                },'json');
+                                }, 'json');
                             };
                             var url = reader.readAsDataURL(blob);
                         }
@@ -151,23 +151,19 @@ define(["hdjs", "jquery"], function (hdjs, $) {
             })
         },
         markdownToHTML: function (elem, options) {
-            require(['editormd'], function (editormd) {
+            require(["editormd"], function (editormd) {
                 options = $.extend({
-                    htmlDecode: "style,script,iframe",  // you can filter tags decode
+                    path: window.hdjs.base + "/package/editor.md/lib/",
+                    htmlDecode: "style,script,iframe",// you can filter tags decode
                     emoji: true,
                     taskList: true,
                     tex: true,  // 默认不解析
                     flowChart: true,  // 默认不解析
                     sequenceDiagram: true,  // 默认不解析
                 }, options);
-                return editormd.markdownToHTML(elem, {
-                    htmlDecode: "style,script,iframe",  // you can filter tags decode
-                    emoji: true,
-                    taskList: true,
-                    tex: true,  // 默认不解析
-                    flowChart: true,  // 默认不解析
-                    sequenceDiagram: true,  // 默认不解析
-                });
+                // console.log(elem);
+                // console.log(options);
+                return editormd.markdownToHTML(elem, options);
             })
         }
     }
