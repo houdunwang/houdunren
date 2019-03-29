@@ -6,8 +6,6 @@ use App\Models\Attachment;
 use App\Models\Group;
 use App\Models\Pay;
 use App\Models\Site;
-use App\Traits\ActivityRecord;
-use App\Traits\Favorite;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,11 +13,10 @@ use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Passport\HasApiTokens;
-use App\Traits\Favour;
-
+use App\Traits\Site as SiteTrait;
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles, HasApiTokens, Favour, Favorite, LogsActivity, ActivityRecord;
+    use SiteTrait, Notifiable, HasRoles, HasApiTokens, LogsActivity;
     protected static $recordEvents = ['created'];
     protected static $logName = 'user';
 
