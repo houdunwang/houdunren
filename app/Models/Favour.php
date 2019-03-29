@@ -14,6 +14,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class Favour extends Model
 {
+    use LogsActivity, ActivityRecord;
+
+    protected static $logName = 'favour';
+    protected static $recordEvents = ['created'];
     protected $fillable = ['site_id', 'user_id', 'module_id'];
 
     public function user()

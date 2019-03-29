@@ -35,12 +35,14 @@ trait Favorite
     }
 
     /**
-     * 更新收藏
+     * 收藏动作后执行这个方法
      * @return bool
      */
     public function favoriteUpdate()
     {
-        return true;
+        \DB::table($this->getTable())->where('id',$this['id'])->update([
+            'favorite_num'=> $this->favoriteCount()
+        ]);
     }
 
     /**

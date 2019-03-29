@@ -15,7 +15,8 @@
         function modelFavorite() {
             if (user_login()) {
                 require(['hdjs', 'axios'], function (hdjs, axios) {
-                    let url = "{{route('member.favorite.make',[str_replace('\\','-',get_class($model)),$model['id']])}}";
+                    let url =
+                        "{{route('member.favorite.make',[str_replace('\\','-',get_class($model)),$model['id']])}}";
                     axios.get(url).then(function (response) {
                         $(".favoriteCount").html(response.data.total);
                         $(".favorite").each(function () {
