@@ -18,10 +18,5 @@ use Spatie\Activitylog\Models\Activity;
  */
 trait ActivityRecord
 {
-    public function tapActivity(Activity $activity, string $eventName)
-    {
-        $activity->site_id = \site()['id'];
-        $activity->module_id = \module()['id'];
-        $activity->module = \module()['name'];
-    }
+
 }
