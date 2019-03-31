@@ -227,9 +227,9 @@ class Arr
      */
     public function tree($data, $title, $fieldPri = 'cid', $fieldPid = 'pid')
     {
-        if (!is_array($data) || empty($data)) {
-            return [];
-        }
+//        if (!is_array($data) || empty($data)) {
+//            return [];
+//        }
         $arr = $this->channelList($data, 0, '', $fieldPri, $fieldPid);
         foreach ($arr as $k => $v) {
             $str = "";
@@ -254,7 +254,6 @@ class Arr
         //设置主键为$fieldPri
         $data = [];
         foreach ($arr as $d) {
-            //            $data[$d[$fieldPri]] = $d;
             $data[] = $d;
         }
 
