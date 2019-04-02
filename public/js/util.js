@@ -23,7 +23,7 @@ function site_user(callback, id) {
  * 依赖 comments/login.blade.php
  * @returns {boolean}
  */
-function user_login() {
+function user_login(reload) {
     if (!window.user_id) {
         require(['hdjs', 'axios', 'bootstrap'], function (hdjs, axios) {
             $('#loginModal').modal('show');
@@ -32,6 +32,9 @@ function user_login() {
                     window.user_id = response.data.user_id;
                     $('#loginModal').modal('hide');
                     hdjs.swal({text: "登录成功", button: false, icon: 'success', 'timer': 1000});
+                    if(reload){
+                        location.reload(true);
+                    }
                 }).catch(function (error) {
                     hdjs.swal({
                         text: error.response.data.message, button: false, icon: 'error', timer: 1000

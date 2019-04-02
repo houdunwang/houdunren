@@ -12,10 +12,11 @@ class UserNotification extends Notification
     use Queueable;
 
     protected $content;
+
     /**
-     * Create a new notification instance.
-     *
-     * @return void
+     * 站内通知
+     * UserNotification constructor.
+     * @param array $content
      */
     public function __construct(array $content)
     {
