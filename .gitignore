@@ -15,5 +15,6 @@ database.php
 !/.gitignore
 hdcms.zip
 /public/modules
+/public/zips
 install.lock
 .DS_Store
