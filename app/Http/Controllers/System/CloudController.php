@@ -37,10 +37,10 @@ class CloudController extends Controller
      */
     public function store(Request $request, HttpServer $httpServer)
     {
-        Cloud::find(1)->update(['api_host'=>$request->input('api_host')]);
+        Cloud::find(1)->update(['api_host' => $request->input('api_host')]);
         try {
             $response = $httpServer->request('POST', 'api/token',
-                ['form_params' => $request->only(['username', 'password'])]);
+                ['verify' => false, 'form_params' => $request->only(['username', 'password'])]);
             $data = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
             Cloud::find(1)->update($data);
             return back()->with('success', '服务器帐号绑定成功');
