@@ -89,6 +89,7 @@ class HttpServer
     public function request($method, $uri = '', array $options = [])
     {
         try {
+            $options['verify'] = false;
             return $this->client($uri)->request($method, $uri, $options);
         } catch (\Exception $e) {
             throw new \Exception('远程服务器请求失败,请重新绑定云帐号');
@@ -108,6 +109,7 @@ class HttpServer
         $accessToken = Cloud::first()['access_token'] ?? '';
         $client = $this->client($uri);
         try {
+            $options['verify'] = false;
             return $client->request($method, $uri,
                 array_merge([
                     'headers' => ['Accept' => 'application/json', 'Authorization' => 'Bearer ' . $accessToken,],
