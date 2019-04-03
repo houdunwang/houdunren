@@ -10,4 +10,5 @@ git checkout master
 git merge dev
 git push
 git checkout dev
-git archive --format zip --output public/hdcms$(date "+%Y-%m-%d %H:%M:%S").zip master
+time=$(date "+%Y%m%d%H")
+git archive --format zip --output public/zips/hdcms${time}.zip master
