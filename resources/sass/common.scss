@@ -1,6 +1,7 @@
 html {
   font-size: 15px;
-  body{
+  font-family: Maven Pro, Microsoft YaHei, Helvetica,sans-serif ;
+  body {
     color: #636b6f;
   }
 }
@@ -29,6 +30,7 @@ a {
   .nav-link {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+
     &.active {
       //background: #e4eaec !important;
       border-color: #dee2e6 #dee2e6 #dee2e6;

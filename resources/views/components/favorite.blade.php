@@ -1,7 +1,7 @@
 {{--收藏--}}
 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
     <button onclick="modelFavorite()"
-            class="btn btn-outline-info btn-sm float-right small p-0 pl-2 pr-2 favorite {{active_class(!$model->isFavorite(),'d-none')}}">
+            class="btn btn-outline-danger btn-sm float-right small p-0 pl-2 pr-2 favorite {{active_class(!$model->isFavorite(),'d-none')}}">
         <i class="fa fa-heart"></i> 已收藏
     </button>
     <button onclick="modelFavorite()"
