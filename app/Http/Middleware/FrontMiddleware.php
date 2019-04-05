@@ -5,18 +5,12 @@ namespace App\Http\Middleware;
 use Closure;
 
 /**
- * 会员前台
+ * 前台
  * Class FrontMiddleware
  * @package App\Http\Middleware
  */
 class FrontMiddleware
 {
-    /**
-     * @param $request
-     * @param Closure $next
-     * @return mixed
-     * @throws \App\Exceptions\ResponseHttpException
-     */
     public function handle($request, Closure $next)
     {
         if (!\site(null, true)) {
@@ -40,6 +34,18 @@ class FrontMiddleware
         if (auth()->check()) {
             auth()->user()->touch();
         }
+        $this->loadConfig();
         return $next($request);
+    }
+
+    protected function loadConfig()
+    {
+        //搜索配置
+        $id = config_get('search.algolia_id', '', 'site');
+        $secret = config_get('search.algolia_secret', '', 'site');
+        config([
+            'scout.algolia.id' => $id,
+            'scout.algolia.secret' => $secret,
+        ]);
     }
 }

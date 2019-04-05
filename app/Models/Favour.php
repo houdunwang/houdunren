@@ -29,4 +29,14 @@ class Favour extends Model
     {
         return $this->morphTo('favour');
     }
+
+    public function getTitle()
+    {
+        return $this->belongModel->getTitle();
+    }
+
+    public function getLink()
+    {
+        return $this->belongModel->getLink();
+    }
 }

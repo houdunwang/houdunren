@@ -8,4 +8,4 @@
     </div>
 @endsection
 
-@section('message', $exception->getMessage()?:'对不起，您要找的页面找不到。')
+@section('message', '对不起，您要找的页面找不到。')

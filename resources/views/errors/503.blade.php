@@ -8,4 +8,4 @@
     </div>
 @endsection
 
-@section('message', $exception->getMessage()?:'对不起，我们正在维修。请稍后再来'))
+@section('message', '服务器忙碌，请稍后再试')

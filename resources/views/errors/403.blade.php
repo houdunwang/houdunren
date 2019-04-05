@@ -9,4 +9,4 @@
     </div>
 @endsection
 
-@section('message', $exception->getMessage() ?: '对不起，您被禁止访问此页面。'))
+@section('message', '对不起，您被禁止访问此页面。')

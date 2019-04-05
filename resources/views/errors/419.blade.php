@@ -8,4 +8,4 @@
     </div>
 @endsection
 
-@section('message',$exception->getMessage()?: '对不起，您的会话已过期。请刷新并重试。')
+@section('message','对不起，您的会话已过期。请刷新并重试。')

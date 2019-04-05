@@ -14,7 +14,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class Favorite extends Model
 {
-    use LogsActivity,ActivityRecord;
+    use LogsActivity, ActivityRecord;
 
     protected static $logName = 'favorite';
     protected static $recordEvents = ['created'];
@@ -29,5 +29,15 @@ class Favorite extends Model
     public function belongModel()
     {
         return $this->morphTo('favorite');
+    }
+
+    public function getTitle()
+    {
+        return $this->belongModel->getTitle();
+    }
+
+    public function getLink()
+    {
+        return $this->belongModel->getLink();
     }
 }

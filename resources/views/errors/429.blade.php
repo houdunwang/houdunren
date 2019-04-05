@@ -8,4 +8,4 @@
     </div>
 @endsection
 
-@section('message',$exception->getMessage()?:'对不起，你向我们的服务器发出了太多的请求。')
+@section('message','对不起，你向我们的服务器发出了太多的请求。')
