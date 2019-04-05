@@ -28,9 +28,9 @@ class UserMemberRequest extends FormRequest
         return [
             'name' => 'sometimes|required|min:3|max:30|unique:users,name,' . auth()->id(),
             'icon' => 'sometimes|required',
-            'home' => 'sometimes|url',
-            'weibo' => 'sometimes|url',
-            'github' => 'sometimes|url',
+            'home' => 'nullable|url',
+            'weibo' => 'nullable|url',
+            'github' => 'nullable|url',
             'email' => 'sometimes|email|unique:users,email,' . auth()->id(),
             'mobile' => 'sometimes|regex:/^1\d{10}$/|unique:users,mobile,' . auth()->id(),
             'code' => [
