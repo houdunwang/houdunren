@@ -9,14 +9,14 @@
 <body class="member">
 @include('layouts.message')
 @include('components.header')
-<div class="container mt-sm-3 mb-5">
+<div class="container mt-3 mb-5 p-0 p-sm-1">
     <div class="row">
-        <div class="col-12 col-sm-9 p-0">
-            <div class="bg-white p-sm-3 p-3 rounded shadow-sm border border-gary shadow-sm">
+        <div class="col-12 col-sm-9">
+            <div class="bg-white border rounded p-3 shadow-sm">
                 @yield('content')
             </div>
         </div>
-        <div class="col-sm-3 col-12 p-0 pl-sm-2">
+        <div class="col-sm-3 col-12 p-0 pt-2 p-sm-0">
             @include('components.user',['user'=>$user])
             @include('user.layouts.menu',['user'=>$user])
         </div>
