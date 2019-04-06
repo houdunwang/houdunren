@@ -56,7 +56,7 @@ function upload_image(name) {
     require(['hdjs'], function (hdjs) {
         hdjs.image(function (images) {
             $("[name=" + name + "]").val(images[0]);
-            $("[name=" + name + "]").parent().parent().find('img').attr('src', '/' + images[0]);
+            $("[name=" + name + "]").parent().parent().find('img').attr('src',  images[0]);
         })
     });
 }

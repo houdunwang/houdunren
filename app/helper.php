@@ -152,16 +152,25 @@ function host()
  * @param \App\Models\Module|null|array $module
  * @return string
  */
-function module_link(
-    string $route,
-    $params = '',
-    $site = null,
-    $module = null
-): string {
+function module_link(string $route, $params = '', $site = null, $module = null): string
+{
     $params = is_array($params) ? $params : [$params];
     $site = $site ?? \site();
     $module = $module ?? \module();
     return route($route, array_merge($params, ['sid' => $site['id'], 'mid' => $module['id']]));
+}
+
+/**
+ * 模块跳转
+ * @param string $route 路由
+ * @param string $params 路由参数
+ * @param null $site
+ * @param null $module
+ * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+ */
+function module_redirect(string $route, $params = '', $site = null, $module = null)
+{
+    return redirect(module_link($route, $params, $site, $module));
 }
 
 /**
