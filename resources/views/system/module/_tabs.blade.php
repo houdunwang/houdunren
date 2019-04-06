@@ -23,7 +23,7 @@
     </li>
     <li class="nav-item">
         <a class="nav-link {{active_class(if_route('update.module.index'),'active')}}" href="{{route('update.module.index')}}">
-            已购模块
+            模块更新
         </a>
     </li>
     @if (if_route('update.module.show'))

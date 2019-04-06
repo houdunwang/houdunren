@@ -80,12 +80,14 @@ trait Site
     }
 
     /**
-     * 收藏检测
+     * 点赞检测
+     * @param User|null $user
      * @return bool
      */
-    public function isFavour(): bool
+    public function isFavour(?User $user = null): bool
     {
-        return $this->favour()->where('user_id', auth()->id())->first() ? true : false;
+        $user = $user ?? auth()->user();
+        return $this->favour()->where('user_id', $user['id'])->first() ? true : false;
     }
 
     /**
@@ -112,8 +114,8 @@ trait Site
      */
     public function favoriteUpdate()
     {
-        \DB::table($this->getTable())->where('id',$this['id'])->update([
-            'favorite_num'=> $this->favoriteCount()
+        \DB::table($this->getTable())->where('id', $this['id'])->update([
+            'favorite_num' => $this->favoriteCount(),
         ]);
     }
 

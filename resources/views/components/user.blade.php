@@ -22,7 +22,7 @@
                     <i class="fa fa-plus"></i> 关注 TA {{$user->fans->count()}}
                 </a>
             @endif
-            @if (auth()->user()->isFavour())
+            @if ($user->isFavour())
                 <a href="{{route('member.favour.make',['model'=>'App-User','id'=>$user['id']])}}"
                    class="btn btn-info btn-sm">
                     <i class="fa fa-heart"></i> 感谢点赞  {{$user->favour_count}}
