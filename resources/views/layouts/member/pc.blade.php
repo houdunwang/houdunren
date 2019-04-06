@@ -47,25 +47,30 @@
             <div class="card mt-0 mt-sm-2 shadow-sm border-bottom-0">
                 <div class="card-body p-0">
                     <div class="list-group list-group-flush">
-                        <a class="list-group-item list-group-item-action text-secondary"
+                        <a class="list-group-item list-group-item-action text-secondary
+{{active_class(if_route('member.info.index'),'bg-light')}}"
                            href="{{route('member.info.index')}}">
                             资料修改
                         </a>
-                        <a class="list-group-item list-group-item-action text-secondary"
+                        <a class="list-group-item list-group-item-action text-secondary
+{{active_class(if_route('member.notify.index'),'bg-light')}}"
                            href="{{route('member.notify.index')}}">
                             站内消息
                         </a>
-                        <a class="list-group-item list-group-item-action text-secondary"
+                        <a class="list-group-item list-group-item-action text-secondary
+                        {{active_class(if_route('member.order.index'),'bg-light')}}"
                            href="{{route('member.order.index')}}">
                             我的定单
                         </a>
-                        <a class="list-group-item list-group-item-action text-secondary"
-                           href="{{route('member.order.index')}}">
-                            我的粉丝
-                        </a>
-                        <a class="list-group-item list-group-item-action text-secondary"
-                           href="{{route('member.order.index')}}">
+                        <a class="list-group-item list-group-item-action text-secondary
+                        {{active_class(if_route('user.follower'),'bg-light')}}"
+                           href="{{route('user.follower',auth()->id())}}">
                             我的关注
+                        </a>
+                        <a class="list-group-item list-group-item-action text-secondary
+{{active_class(if_route('user.fans'),'bg-light')}}"
+                           href="{{route('user.fans',auth()->id())}}">
+                            我的粉丝
                         </a>
                     </div>
                 </div>
@@ -76,8 +81,9 @@
                         @foreach($MenuRepository->get(site(),'member_pc') as $moduleTitle=>$menus)
                             @if (count($menus['menus']))
                                 @foreach($menus['menus'] as $menu)
-                                    <a class="list-group-item list-group-item-action text-secondary"
-                                       href="{{$menu['url']}}?sid={{\site()['id']}}&mid={{$menus['module']['id']}}">
+                                    <a class="list-group-item list-group-item-action text-secondary
+{{active_class(strpos(host().$_SERVER['REQUEST_URI'],$menu['url'])!==false,'bg-light')}}"
+                                       href="{{$menu['url']}}?sid={{\site()['id']}}&mid={{$menus['module']['id']}}&uid={{auth()->id()}}">
                                         {{$menu['title']}}
                                     </a>
                                 @endforeach

@@ -15,9 +15,9 @@
                         TA 的粉丝
                     </a>
                     @foreach($menus['menus'] as $menu)
-                        <a href="{{$menu['url']}}&uid={{$user['id']}}"
+                        <a href="{{$menu['url']}}?sid={{\site()['id']}}&mid={{$menus['module']['id']}}&uid={{auth()->id()}}"
                            class="list-group-item list-group-item-action text-secondary
-{{active_class(strpos($menu['url'].'&uid='.$user['id'],$_SERVER['REQUEST_URI']),'bg-light')}}">
+{{active_class(strpos(host().$_SERVER['REQUEST_URI'],$menu['url'])!==false,'bg-light')}}">
                             {!! $menu['title'] !!}
                         </a>
                     @endforeach
