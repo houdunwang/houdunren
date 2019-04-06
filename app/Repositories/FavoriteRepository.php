@@ -25,12 +25,16 @@ class FavoriteRepository extends Repository
      * 收藏列表
      * @param User $user
      * @param int $row
+     * @param null $model
      * @return mixed
      */
-    public function lists(User $user, $row = 16, $model = '')
+    public function lists(User $user, $row = 16, $model = null)
     {
-        $this->instance->where('site_id', \site()['id'])->where('user', $user['id']);
-        return parent::paginate($row);
+        return $this->instance->where(function ($query) use ($user) {
+            $query->where('site_id', site()['id'])->where('user_id', $user['id']);
+        })->when($model, function ($query, $model) {
+            $query->where('favorite_type', $model);
+        })->latest('id')->paginate($row);
     }
 
 }

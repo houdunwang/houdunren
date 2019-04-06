@@ -16,7 +16,6 @@
                 <i class="fa fa-info-circle"></i> 哈哈... TA比较含蓄，还没有关注任何人哟
             </div>
         @endif
-
     </div>
     <div class="pt-3">
         {{$users->appends(['uid'=>$user['id']])->links()}}
