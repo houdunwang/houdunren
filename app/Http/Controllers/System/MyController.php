@@ -14,7 +14,6 @@ use App\Http\Controllers\Controller;
  */
 class MyController extends Controller
 {
-
     public function edit(GroupRepository $groupRepository)
     {
         $groups = $groupRepository->all();
