@@ -17,13 +17,13 @@ class HomeController extends Controller
 {
     public function follower(User $user)
     {
-        $users = $user->followers()->paginate(10);
+        $users = $user->followers()->paginate(12);
         return view('user.follower', compact('user', 'users'));
     }
 
     public function fans(User $user)
     {
-        $users = $user->fans()->paginate(10);
+        $users = $user->fans()->paginate(12);
         return view('user.fans', compact('user', 'users'));
     }
 }

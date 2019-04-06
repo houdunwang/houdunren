@@ -1,7 +1,7 @@
 @extends('user.layouts.master')
 @section('content')
     <h5>
-        <i class="fa fa-video-camera"></i> TA的关注
+        <i class="fa fa-user-circle-o"></i> TA的关注
     </h5>
     <hr>
     <div class="row follower">
