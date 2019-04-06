@@ -16,7 +16,6 @@
 <div class="container">
     <div class="d-flex align-items-center justify-content-center w-100  mx-0" style=" height: 70vh">
         <div class="col-md-6 col-12 px-0">
-
             <div class="mt-5 border-top border-info">
                 <div class="card shadow-lg">
                     <div class="card-header">
