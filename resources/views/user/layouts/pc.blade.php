@@ -23,7 +23,14 @@
     </div>
 </div>
 <script>
-    require(['bootstrap'])
+    require(['bootstrap'], function () {
+        $(function () {
+            $('[data-toggle="popover"]').popover({
+                // trigger: 'hover'
+            })
+        });
+    });
 </script>
+@stack('js')
 </body>
 </html>

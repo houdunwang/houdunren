@@ -48,5 +48,6 @@
 <script>
     require(['bootstrap'])
 </script>
+@stack('js')
 </body>
 </html>
