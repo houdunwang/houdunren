@@ -14,11 +14,12 @@
             </a>
         </li>
     </ul>
-    <table class="table table-bordered bg-light table-striped border">
+    <table class="table table-bordered bg-light table-striped">
         <thead class="">
         <tr>
-            <th>消息</th>
-            <th></th>
+            <th>消息内容</th>
+            <th width="180">发送时间</th>
+            <th width="120" class="text-left">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -27,7 +28,10 @@
                 <td scope="row">
                     {!!  $notification->data['message']!!}
                 </td>
-                <td class="text-right">
+                <td>
+                    {{$notification->created_at->diffForHumans()}}
+                </td>
+                <td class="text-left">
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                         @if ($notification->data['url'])
                             <a href="{{route('member.notify.show',$notification['id'])}}"
