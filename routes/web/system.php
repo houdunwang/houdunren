@@ -30,6 +30,7 @@ Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.
         Route::get('install/module/{name}', 'ModuleController@install')->name('module.install');
         //用户管理
         Route::resource('user', 'UserController');
+        Route::resource('my/user', 'MyController')->names('my.user');
         //锁定解锁用户
         Route::get('lock/{user}/{state}', 'UserController@lock')->name('user.lock');
         //云帐号

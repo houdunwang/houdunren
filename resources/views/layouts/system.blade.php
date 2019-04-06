@@ -83,7 +83,9 @@
                             <i class="fa fa-w fa-user"></i> {{auth()->user()['name']}}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{route('member')}}">修改资料</a>
+                            @if (is_super_admin())
+                                <a class="dropdown-item" href="{{route('system.my.user.edit',auth()->id())}}">修改资料</a>
+                            @endif
                             <a class="dropdown-item" href="{{route('system.logout')}}">退出登录</a>
                         </div>
                     </li>
