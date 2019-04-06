@@ -8,7 +8,7 @@
  * '-------------------------------------------------------------------*/
 //个人中心
 Route::group(['middleware' => 'front', 'prefix' => 'user', 'namespace' => 'User', 'as' => "user."], function () {
-    Route::get('/{user}', 'HomeController@follower')->name('home');
+    Route::get('/{user}', 'HomeController@fans')->name('home');
     Route::get('/{user}/follower', 'HomeController@follower')->name('follower');
     Route::get('/{user}/fans', 'HomeController@fans')->name('fans');
 });
