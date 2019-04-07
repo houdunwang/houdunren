@@ -78,3 +78,24 @@
         </div>
     </div>
 </div>
+<div class="card mt-2">
+    <div class="card-header">
+        界面设置
+    </div>
+    <div class="card-body">
+<div class="form-group">
+                <label>登录与注册背景图片</label>
+                <div class="input-group mb-1">
+                    <input type="text" class="form-control" name="loginImage"
+                           value="{{old('loginImage',$config['loginImage']??'')}}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" onclick="upload_image('loginImage')" type="button">
+                            选择文件
+                        </button>
+                    </div>
+                </div>
+                <img class="img-thumbnail d-block mt-1" id="qr"
+                     src="{{old('loginImage',$config['loginImage']??asset('images/system/nopic.jpg'))}}" style="width: 150px;">
+            </div>
+    </div>
+</div>

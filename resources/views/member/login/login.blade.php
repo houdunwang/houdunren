@@ -13,13 +13,16 @@
 </head>
 <body>
 @include('layouts.message')
-<div class="container">
-    <div class="d-flex align-items-center justify-content-center w-100  mx-0" style=" height: 70vh">
-        <div class="col-md-6 col-12 px-0">
-            <div class="mt-5 border-top border-info">
-                <div class="card shadow-lg">
-                    <div class="card-header">
-                        <h4 class="text-secondary"><i class="fa fa-user"></i> 用户登录</h4>
+<div class="border-top border-info" style="border-width: 5px !important;"></div>
+<div class="container mt-sm-5">
+    <div class="d-none d-sm-block" style="margin-top: 200px;">
+    </div>
+    <div class="mt-5">
+        <div class="row">
+            <div class="col-sm-8 m-auto col-12">
+                <div class="card shadow-lg bg-light">
+                    <div class="card-header bg-info text-light">
+                        <h5 class="m-0"><i class="fa fa-user"></i> 用户登录</h5>
                     </div>
                     <div class="card-body">
                         @include('member.login._form')
@@ -27,11 +30,11 @@
                     <div class="card-footer text-muted">
                         <a href="/" class="mr-2"><i class="fa fa-home"></i> 网站首页 </a>
                         <a href="{{route('register.index')}}" class="mr-2"><i class="fa fa-user-plus"></i> 注册帐号</a>
-                        <a href="{{route('findPassword.index')}}" class="mr-2"><i class="fa fa-archive"></i> 找回密码</a>
+                        <a href="{{route('findPassword.index')}}" class="mr-2"><i class="fa fa-archive"></i>
+                            找回密码</a>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

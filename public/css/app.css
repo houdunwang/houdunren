@@ -39,6 +39,27 @@ a {
   border-color: #dee2e6 #dee2e6 #dee2e6;
 }
 
+.border-danger {
+  border-color: #f4645f;
+}
+
+.btn-outline-danger {
+  color: #F46463;
+  border-color: #f4645f;
+}
+
+.bg-red {
+  background-color: #f4645f !important;
+}
+
+.bg-teal-darker {
+  background-color: #009689;
+}
+
+.text-red {
+  color: #f4645f;
+}
+
 .login h1.big-title {
   font-size: 35px;
   font-weight: 700;
