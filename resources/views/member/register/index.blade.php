@@ -9,8 +9,7 @@
 @include('layouts.message')
 <div class="border-top border-info" style="border-width: 5px !important;"></div>
 <div class="container mt-sm-5">
-    <div class="d-none d-sm-block" style="margin-top: 200px;">
-    </div>
+    <div class="d-none d-sm-block" style="margin-top: 200px;"></div>
     <div class="mt-5">
         <div class="row">
             <div class="col-sm-8 col-12 m-auto">

@@ -2,21 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>会员注册</title>
+    <title>找回密码</title>
     @include('layouts.hdjs')
 </head>
 <body class="">
 @include('layouts.message')
+<div class="border-top border-danger" style="border-width: 5px !important;"></div>
 <div class="container">
-    <div class="d-flex align-items-center justify-content-center w-100  mx-0" style=" height: 70vh">
-        <div class="col-md-6 col-12 px-0">
+    <div class="d-none d-sm-block" style="margin-top: 200px;"></div>
+    <div class="row">
+        <div class="col-md-8 col-12 m-auto">
             <form action="{{route('findPassword.store')}}" method="post">
                 @csrf
                 <input type="hidden" name="site_id" value="{{\site()['id']}}">
-                <div class="mt-5 border-top border-info">
+                <div class="mt-5">
                     <div class="card shadow-lg">
-                        <div class="card-header">
-                            <h4 class="text-secondary"><i class="fa fa-user"></i> 找回密码</h4>
+                        <div class="card-header bg-red text-light">
+                            <h5 class="p-0 m-0"><i class="fa fa-user"></i> 找回密码</h5>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
@@ -52,7 +54,7 @@
                                     </script>
                                 </div>
                             @endif
-                            <button class="btn btn-success btn-sm">更新密码</button>
+                            <button class="btn btn-secondary btn-sm">更新密码</button>
                         </div>
                         <div class="card-footer text-muted">
                             <a href="/" class="mr-2"><i class="fa fa-home"></i> 网站首页 </a>
