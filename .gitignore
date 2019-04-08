@@ -2,6 +2,8 @@ node_modules
 /public/hot
 /public/attachments
 /public/storage
+/public/uploads
+/public/index.html*
 /storage/*.key
 .env
 .phpunit.result.cache
