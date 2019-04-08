@@ -29,6 +29,10 @@ return [
             'AutoFormat.AutoParagraph' => true,
             'AutoFormat.RemoveEmpty' => true,
         ],
+        'bilibli'=>[
+            "HTML.SafeIframe" => 'true',
+            "URI.SafeIframeRegexp" => "%^(http://|https://|//)\w+\.bilibili.com.*%",
+        ],
         'test' => [
             'Attr.EnableID' => 'true',
         ],
