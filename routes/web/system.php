@@ -22,12 +22,6 @@ Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.
         Route::resource('group', 'GroupController');
         //套餐
         Route::resource('package', 'PackageController');
-        //模块管理
-        Route::resource('module', 'ModuleController');
-        Route::post('module/delete/{name}', 'ModuleController@delete')->name('module.delete');
-        Route::get('refresh/module/{module}', 'ModuleController@refresh')->name('module.refresh');
-        Route::get('local/module', 'ModuleController@local')->name('module.local');
-        Route::get('install/module/{name}', 'ModuleController@install')->name('module.install');
         //用户管理
         Route::resource('user', 'UserController');
         Route::resource('my/user', 'MyController')->names('my.user');
@@ -38,7 +32,16 @@ Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.
         //模块打包
         Route::get('zip/{name}', 'ZipController@module')->name('zip.module');
     });
-
+Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.', 'namespace' => 'System'],
+    function () {
+        //模块管理
+        Route::resource('module', 'ModuleController');
+        Route::post('module/delete/{name}', 'ModuleController@delete')->name('module.delete');
+        Route::get('refresh/module/{module}', 'ModuleController@refresh')->name('module.refresh');
+        Route::get('local/module', 'ModuleController@local')->name('module.local');
+        Route::get('install/module/{name}', 'ModuleController@install')->name('module.install');
+        Route::resource('{module}/develop', 'DevelopController');
+    });
 //更新管理
 Route::group(['middleware' => ['system'], 'prefix' => 'update', 'as' => 'update.', 'namespace' => 'Update',],
     function () {

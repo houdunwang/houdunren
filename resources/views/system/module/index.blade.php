@@ -23,6 +23,11 @@
                         </div>
                         <div class="col-xs-4 col-md-6 text-right mt-3">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <a class="btn btn-outline-info" href="{{route('system.develop.create',$module)}}"
+                                   data-container="body" data-toggle="popover"
+                                   data-placement="top" data-content="构建模块功能">
+                                    功能开发
+                                </a>
                                 @if ($module['local'])
                                     <a class="btn btn-outline-success" href="{{route('system.module.edit',$module)}}"
                                        data-container="body" data-toggle="popover"
