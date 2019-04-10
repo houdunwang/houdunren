@@ -9,14 +9,20 @@
 
 namespace App\Servers\Model;
 
-
+/**
+ * 创建模型迁移文件
+ * Trait Migration
+ * @package App\Servers\Model
+ */
 trait Migration
 {
-    public function createMigration()
+    protected function createMigration()
     {
         $file = date('Y_m_d_His') . "_create_{$this->config['table']}_table.php";
         $file = \Storage::drive('module')->path("{$this->module['name']}/Database/Migrations/" . $file);
-        file_put_contents($file, $this->replaceMigrationVar());
+        if (!is_file($file)) {
+            file_put_contents($file, $this->replaceMigrationVar());
+        }
     }
 
     /**

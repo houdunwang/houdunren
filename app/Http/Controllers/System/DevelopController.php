@@ -24,7 +24,7 @@ class DevelopController extends Controller
     {
         $post = $request->except('_token', 'field');
         $post['fields'] = \GuzzleHttp\json_decode($request->input('fields'), true);
-        $modelServer->recordConfig($module, $post);
+        $modelServer->make($module, $post);
     }
 
     public function show(Develop $develop)
