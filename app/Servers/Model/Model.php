@@ -26,7 +26,7 @@ trait Model
 
     protected function replaceModelVars()
     {
-        $fillable = [];
+        $fillable = ['site_id'];
         foreach ($this->config['fields'] as $field) {
             $fillable[] = "'{$field['name']}'";
         }

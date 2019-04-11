@@ -1,8 +1,11 @@
 <div id="develop">
     <div class="alert alert-light border shadow-sm" role="alert">
         <i class="fa fa-info-circle"></i>
-        <span class="text-secondary">后台只提供模型创建功能，如果编辑或删除请手动处理文件，目录说明如下：</span>
-        <hr>
+        <span class="text-secondary">
+            建立查看 <a href="https://www.houdunren.com/document/front/content/198?sid=1" target="_blank" class="text-primary">在线文档</a> 了解具体使用细节。
+        </span>
+{{-- <span class="text-secondary">后台只提供模型创建功能，如果编辑或删除请手动处理文件，目录说明如下：</span>--}}
+{{--<hr>--}}
         {{--        <div class="card mt-2 border-0 bg-light">--}}
         {{--            <div class="card-header p-1 bg-light">--}}
         {{--                <h6>目录说明</h6>--}}
@@ -27,13 +30,13 @@
         {{--                </div>--}}
         {{--            </div>--}}
         {{--        </div>--}}
-        <ul class="pl-4 small">
-            <li>Config/Fields 字段配置目录</li>
-            <li>Database 迁移文件目录</li>
-            <li>Entities 模型目录</li>
-            <li>Http/Controllers/Admin 后台控制器目录</li>
-            <li>Http/Controllers/Front 前台控制器目录</li>
-        </ul>
+{{--        <ul class="pl-4 small">--}}
+{{--            <li>Config/Fields 字段配置目录</li>--}}
+{{--            <li>Database 迁移文件目录</li>--}}
+{{--            <li>Entities 模型目录</li>--}}
+{{--            <li>Http/Controllers/Admin 后台控制器目录</li>--}}
+{{--            <li>Resources/views/admin/article 视图目录</li>--}}
+{{--        </ul>--}}
     </div>
     <div class="card shadow-sm">
         <div class="card-body pb-1 pl-3">
