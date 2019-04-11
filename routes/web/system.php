@@ -40,7 +40,6 @@ Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.
         Route::get('refresh/module/{module}', 'ModuleController@refresh')->name('module.refresh');
         Route::get('local/module', 'ModuleController@local')->name('module.local');
         Route::get('install/module/{name}', 'ModuleController@install')->name('module.install');
-        Route::resource('{module}/develop', 'DevelopController');
     });
 //更新管理
 Route::group(['middleware' => ['system'], 'prefix' => 'update', 'as' => 'update.', 'namespace' => 'Update',],

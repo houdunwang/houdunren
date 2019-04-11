@@ -23,7 +23,7 @@
                         </div>
                         <div class="col-xs-4 col-md-6 text-right mt-3">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <a class="btn btn-outline-info" href="{{route('system.develop.create',$module)}}"
+                                <a class="btn btn-outline-info" href="{{route('develop.model.create',$module)}}"
                                    data-container="body" data-toggle="popover"
                                    data-placement="top" data-content="构建模块功能">
                                     功能开发

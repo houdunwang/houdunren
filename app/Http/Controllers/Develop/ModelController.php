@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\System;
+namespace App\Http\Controllers\Develop;
 
 use App\Models\Develop;
 use App\Models\Module;
@@ -8,16 +8,15 @@ use App\Servers\ModelServer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DevelopController extends Controller
+class ModelController extends Controller
 {
-
     public function index()
     {
     }
 
     public function create(Module $module)
     {
-        return view('system.develop.create', compact('module'));
+        return view('develop.model.create', compact('module'));
     }
 
     public function store(Request $request, Module $module, ModelServer $modelServer)

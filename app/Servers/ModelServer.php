@@ -38,11 +38,23 @@ class ModelServer
         $config['table'] = str_plural(snake_case($config['model']));
         $this->module = $module;
         $this->config = $config;
-        $this->createConfig();
-        $this->createMigration();
-        $this->createModel();
-        $this->createController();
-        $this->createRepository();
+        if (!$this->isCreate()) {
+            $this->createConfig();
+            $this->createMigration();
+            $this->createModel();
+            $this->createController();
+            $this->createRepository();
+        }
+    }
+
+    /**
+     * 安装检测
+     * @return bool
+     */
+    protected function isCreate(): bool
+    {
+        return \Storage::drive('module')
+            ->has($this->module['name'] . '/Config/Fields/' . $this->config['model'] . '.php');
     }
 
     /**
@@ -60,6 +72,9 @@ class ModelServer
         }
     }
 
+    /**
+     * 配置字段设置
+     */
     protected function formatField()
     {
         foreach ($this->config['fields'] as $key => $field) {

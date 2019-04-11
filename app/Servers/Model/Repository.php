@@ -24,8 +24,6 @@ trait Repository
         if (!is_file($file)) {
             file_put_contents($file, $this->replaceRepositoryVars());
         }
-        dump($this->module->toArray());
-        dd($this->config);
     }
 
     protected function createRepositoryDir()
