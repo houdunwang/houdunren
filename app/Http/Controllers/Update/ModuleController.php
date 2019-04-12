@@ -113,27 +113,9 @@ class ModuleController extends Controller
                 }
             }
             $this->move($name);
-            $this->install($name, $moduleRepository);
             return ['code' => 0, 'message' => '模块下载成功'];
         } catch (\Exception $exception) {
             throw new ResponseHttpException($exception->getMessage());
-        }
-    }
-
-    /**
-     * 下载模块后执行安装或更新
-     * @param string $name
-     * @param ModuleRepository $moduleRepository
-     * @throws ResponseHttpException
-     */
-    protected function install(string $name, ModuleRepository $moduleRepository)
-    {
-        $module = Module::where('name', $name)->first();
-        if ($module) {
-            $config = $moduleRepository->loadConfig($name);
-            $moduleRepository->update($module, $config);
-        } else {
-            $moduleRepository->install($name);
         }
     }
 
@@ -159,6 +141,23 @@ class ModuleController extends Controller
         }
         Storage::delete("temp/{$name}.zip");
         Storage::deleteDirectory("temp/{$name}");
+    }
+
+    /**
+     * 下载模块后执行安装或更新
+     * @param string $name
+     * @param ModuleRepository $moduleRepository
+     * @throws ResponseHttpException
+     */
+    public function install(string $name, ModuleRepository $moduleRepository)
+    {
+        $module = Module::where('name', $name)->first();
+        if ($module) {
+            $config = $moduleRepository->loadConfig($name);
+            $moduleRepository->update($module, $config);
+        } else {
+            $moduleRepository->install($name);
+        }
     }
 
     /**

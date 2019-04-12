@@ -41,6 +41,7 @@ Route::group(['middleware' => ['system'], 'prefix' => 'system', 'as' => 'system.
         Route::get('local/module', 'ModuleController@local')->name('module.local');
         Route::get('install/module/{name}', 'ModuleController@install')->name('module.install');
     });
+
 //更新管理
 Route::group(['middleware' => ['system'], 'prefix' => 'update', 'as' => 'update.', 'namespace' => 'Update',],
     function () {
@@ -56,6 +57,7 @@ Route::group(['middleware' => ['system'], 'prefix' => 'update', 'as' => 'update.
         Route::get('module/{name}/show', 'ModuleController@show')->name('module.show');
         Route::get('module/{name}/update', 'ModuleController@update')->name('module.update');
         Route::get('module/{name}/download', 'ModuleController@download')->name('module.download');
+        Route::get('module/{name}/install', 'ModuleController@install')->name('module.install');
     });
 
 //系统安装
