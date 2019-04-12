@@ -3,7 +3,7 @@
 if (!is_file(__DIR__ . '/../install.lock')) {
     try {
         if (!is_file(__DIR__ . '/../.env')) {
-            copy(__DIR__ . '/../.env.example', __DIR__ . '/../.env');
+            copy(__DIR__ . '/../env.example', __DIR__ . '/../.env');
             put_contents_file(__DIR__ . '/../database.php', []);
         }
     } catch (Exception $exception) {
