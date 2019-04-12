@@ -40,21 +40,21 @@
                             <div class="col-8 m-auto">
                                 <div class="form-group">
                                     <label class="font-weight-bold">数据库</label>
-                                    <input type="text" name="database" value="live_hdcms_com" required
+                                    <input type="text" name="database" value="" required
                                            class="form-control form-control-lg shadow-sm">
                                 </div>
                             </div>
                             <div class="col-8 m-auto">
                                 <div class="form-group">
                                     <label class="font-weight-bold">帐号</label>
-                                    <input type="text" name="username" value="live_hdcms_com" required
+                                    <input type="text" name="username" value="" required
                                            class="form-control form-control-lg shadow-sm">
                                 </div>
                             </div>
                             <div class="col-8 m-auto">
                                 <div class="form-group">
                                     <label class="font-weight-bold">密码</label>
-                                    <input type="password" name="password" value="admin888"
+                                    <input type="password" name="password" value=""
                                            class="form-control form-control-lg shadow-sm">
                                 </div>
                             </div>

@@ -14,3 +14,4 @@ git push gitee
 git checkout dev
 time=$(date "+%Y%m%d%H%M")
 git archive --format zip --output public/zips/HDCMS-${time}.zip master
+cp public/zips/HDCMS-${time}.zip /Users/xj/online/public/zips/HDCMS-${time}.zip
