@@ -15,5 +15,4 @@ git checkout dev
 time=$(date "+%Y%m%d%H%M")
 rm -rf /Users/xj/online/public/zips
 mkdir /Users/xj/online/public/zips
-git archive --format zip --output /Users/xj/online/public/zips/HDCMS-${time}.zip master
-cp public/zips/HDCMS-${time}.zip /Users/xj/online/public/zips/HDCMS-${time}.zip
+git archive --format zip --output ../online/public/zips/HDCMS-${time}.zip master
