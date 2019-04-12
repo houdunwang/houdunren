@@ -333,4 +333,14 @@ class ModuleRepository extends Repository
     {
         return Module::where(['name' => $name])->first() || is_dir(base_path("modules/{$name}"));
     }
+
+    /**
+     * 检测模块是否已经安装入库
+     * @param string $name
+     * @return bool
+     */
+    public function isInstall(string $name): bool
+    {
+        return (bool)Module::where(['name' => $name])->first();
+    }
 }

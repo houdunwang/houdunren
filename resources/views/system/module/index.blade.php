@@ -38,14 +38,14 @@
                                        data-container="body" data-toggle="popover"
                                        data-placement="top" data-content="修改本地模块配置项后需要执行这个动作">更新模块配置</a>
                                 @endif
+                                <form action="{{route('system.module.destroy',$module)}}" method="post">
+                                    @csrf @method('DELETE')
+                                </form>
                                 <button type="button" class="btn btn-outline-danger" onclick="destroy(this)"
                                         data-container="body" data-toggle="popover" data-placement="top"
                                         data-content="本地模块只删除数据，远程模块同时删除数据与文件">
                                     卸载模块
                                 </button>
-                                <form action="{{route('system.module.destroy',$module)}}" method="post">
-                                    @csrf @method('DELETE')
-                                </form>
                                 @if ($module['local'])
                                     <a class="btn btn-outline-secondary"
                                        href="{{route('system.zip.module',['name'=>$module['name']])}}"
@@ -71,14 +71,6 @@
 @endsection
 @push('js')
     <script>
-        function destroy(bt) {
-            require(['hdjs'], function (hdjs) {
-                hdjs.confirm('确定删除模块吗？', function () {
-                    $(bt).next('form').submit();
-                });
-            })
-        }
-
         require(['bootstrap'], function () {
             $(function () {
                 $('[data-toggle="popover"]').popover({

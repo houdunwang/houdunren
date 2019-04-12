@@ -28,6 +28,7 @@ class ModuleController extends Controller
     /**
      * 已购模块列表
      * @param HttpServer $httpServer
+     * @param ModuleRepository $moduleRepository
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws ResponseHttpException
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -40,7 +41,7 @@ class ModuleController extends Controller
             //模块检测
             $modules['data'] = array_map(function ($module) use ($moduleRepository) {
                 $module['has_update'] = $module['local'] = false;
-                $module['installed'] = $moduleRepository->has($module['name']);
+                $module['installed'] = $moduleRepository->isInstall($module['name']);
                 if ($module['installed']) {
                     $config = $moduleRepository->loadConfig($module['name']);
                     $module['has_update'] = $module['version'] > $config['version'];
@@ -139,8 +140,6 @@ class ModuleController extends Controller
                 Storage::drive('base')->move($from, $to);
             }
         }
-        Storage::delete("temp/{$name}.zip");
-        Storage::deleteDirectory("temp/{$name}");
     }
 
     /**
