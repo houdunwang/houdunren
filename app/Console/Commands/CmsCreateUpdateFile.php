@@ -20,9 +20,8 @@ class CmsCreateUpdateFile extends Command
         exec('git log dev ^master --pretty=format:"%s"', $logs);
         \Storage::disk('base')->makeDirectory('updateLists');
         $files = $this->format($files);
-        dd($files);
         if (!empty($files)) {
-            $build = time();dd($build);
+            $build = time();
             put_contents_file('version.php', ['build' => $build]);
             put_contents_file("updateLists/{$build}.php", [
                 'build' => $build,
