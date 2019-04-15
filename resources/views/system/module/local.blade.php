@@ -8,7 +8,7 @@
                 @foreach($modules as $module)
                     <div class="row">
                         <div class="col-xs-4 col-md-1 text-dark">
-                            <img src="{{asset($module['thumb'])}}" class="img-thumbnail">
+                            <img src="{{asset('modules/'.strtolower($module['name']).'/thumb.jpeg')}}" class="img-thumbnail">
                         </div>
                         <div class="col-xs-4 col-md-5 text-dark">
                             <strong class="title text-dark d-block">

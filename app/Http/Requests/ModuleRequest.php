@@ -27,11 +27,10 @@ class ModuleRequest extends FormRequest
                 'sometimes',
                 'required',
                 'max:10',
-//                Rule::notIn(['app', 'system', 'shop', 'edu', 'article', 'admin', 'news', 'community']),
                 'regex:/^[a-z]+$/i',
                 'unique:modules,name,' . request('module')['id'],
             ],
-            'thumb' => 'required',
+            'thumb' => 'nullable|file|mimes:jpeg|dimensions:width=960,height=600',
         ];
     }
 
@@ -41,6 +40,10 @@ class ModuleRequest extends FormRequest
             'title.required' => '模块名称不能为空',
             'title.max' => '模块名称最多为10个字符',
             'title.unique' => '模块名称已经存在',
+            'thumb.required' => '图片不能为空',
+            'thumb.file' => '文件上传失败',
+            'thumb.mimes'=>'图片类型必须为jpeg',
+            'thumb.dimensions' => '模块图片尺寸错误',
             'name.required' => '模块标识不能为空',
             'name.not_in' => '模块标识已经存在',
             'name.unique' => '模块标识已经存在',

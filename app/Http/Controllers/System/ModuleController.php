@@ -157,6 +157,7 @@ class ModuleController extends Controller
                 }
             }
         }
+
         return view('system.module.local', compact('modules'));
     }
 

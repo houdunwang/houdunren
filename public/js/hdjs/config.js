@@ -66,9 +66,13 @@ config = {
         jqueryUiSortable: 'https://cdn.bootcss.com/jqueryui/1.10.4/jquery.ui.sortable.min',
         jquerySortable: 'https://cdn.bootcss.com/jquery-sortable/0.9.13/jquery-sortable',
         jqueryPin: 'https://cdn.bootcss.com/jquery.pin/1.0.1/jquery.pin.min',
-        jquerySticky:'https://cdn.bootcss.com/jquery.sticky/1.0.4/jquery.sticky.min'
+        jquerySticky: 'https://cdn.bootcss.com/jquery.sticky/1.0.4/jquery.sticky.min',
+        bootstrapFileStyle: 'https://cdn.bootcss.com/bootstrap-filestyle/2.1.0/bootstrap-filestyle.min'
     },
     shim: {
+        bootstrapFileStyle: {
+            deps: ['jquery']
+        },
         jquerySticky: {
             deps: ['jquery']
         },

@@ -10,7 +10,8 @@
         @if (if_route('system.module.create'))
             <div class="form-group">
                 <label>模块英文标识</label>
-                <input type="text" name="name" class="form-control" value="{{old('name',$module['name']??'')}}"
+                <input type="text" name="name" class="form-control"
+                       value="{{old('name',$module['name']??'')}}"
                        required>
                 <small class="text-muted">请输入模块英文标识，用于创建模块目录使用</small>
             </div>
@@ -18,29 +19,20 @@
         <div class="form-group">
             <label>预览图</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" name="thumb"
-                       value="{{old('thumb',$module['package']['thumb']??'')}}" readonly>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" onclick="uploadThumb(this)" type="button">
-                        选择图片
-                    </button>
+                <div class="custom-file">
+                    <input type="file" class="filestyle custom-file-input" id="validatedCustomFile"
+                           name="thumb" {{if_route('system.module.create','required')}}
+                           data-dragdrop="false">
+                    <label class="custom-file-label" for="validatedCustomFile">
+                        请上传960X600的模块预览图片，图片类型要求为jpeg
+                    </label>
+                    <div class="invalid-feedback">Example invalid custom file feedback</div>
                 </div>
             </div>
-            <img class="img-thumbnail d-block"
-                 src="{{old('thumb',asset($module['package']['thumb']??'images/system/nopic.jpg'))}}">
-            <span class="text-muted">请上传200x200的模块预览图片，图片类型要求为jpeg，系统会自动进行尺寸裁切处理。</span>
-            @push('js')
-                <script>
-                    function uploadThumb(obj) {
-                        require(['hdjs'], function (hdjs) {
-                            hdjs.image(function (images) {
-                                $("[name=thumb]").val(images[0]);
-                                $(".img-thumbnail").attr('src', images[0]);
-                            })
-                        });
-                    }
-                </script>
-            @endpush
+            @isset($module)
+                <img class="img-thumbnail d-block"
+                     src="{{asset('modules/'.strtolower($module['name']).'/thumb.jpeg')}}">
+            @endisset
         </div>
         <div class="form-group">
             <label>系统菜单</label>

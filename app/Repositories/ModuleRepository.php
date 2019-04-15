@@ -96,21 +96,15 @@ class ModuleRepository extends Repository
     protected function fitThumb(): bool
     {
         try {
-            Image::load(public_path($this->package['thumb']))
-                ->fit(Manipulations::FIT_CROP, 500, 300)->save();
-            $imageContent = file_get_contents(public_path($this->package['thumb']));
-            $lowerName = strtolower($this->package['name']);
-            $this->package['thumb'] = "modules/{$lowerName}/thumb.jpeg";
-            $thumb = \Storage::drive('module')->path($this->package['name']) . '/thumb.jpeg';
-            if (file_put_contents($thumb, $imageContent)) {
-                $storage = \Storage::drive('base');
-                $storage->makeDirectory("public/modules/{$lowerName}/images");
-                Image::load($thumb)->fit(Manipulations::FIT_CROP, 500,
-                    300)->save(public_path("modules/{$lowerName}/thumb.jpeg"));
+            if (request()->thumb) {
+                $lowerName = strtolower($this->package['name']);
+                request()->thumb->storeAs("{$this->package['name']}", 'thumb.jpeg', 'module');
+                request()->thumb->storeAs("public/modules/{$lowerName}", 'thumb.jpeg', 'base');
+                $this->package['thumb'] = 'thumb.jpeg';
             }
             return true;
         } catch (\Exception $exception) {
-            throw  new ResponseHttpException('缩略图创建失败');
+            throw  new ResponseHttpException('缩略图创建失败' . $exception->getMessage());
         }
     }
 
