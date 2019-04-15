@@ -21,7 +21,7 @@ class CmsCreateUpdateFile extends Command
         \Storage::disk('base')->makeDirectory('updateLists');
         $files = $this->format($files);
         if (!empty($files)) {
-            $build = time();
+            $build = time();dd($build);
             put_contents_file('version.php', ['build' => $build]);
             put_contents_file("updateLists/{$build}.php", [
                 'build' => $build,
