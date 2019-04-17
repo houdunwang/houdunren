@@ -10,8 +10,10 @@ use App\Http\Controllers\Controller;
 
 class ModelController extends Controller
 {
-    public function index()
+    public function index(Module $module, ModelServer $modelServer)
     {
+        $models = $modelServer->lists($module);
+        return view('develop.model.index', compact('module', 'models'));
     }
 
     public function create(Module $module)
@@ -24,6 +26,7 @@ class ModelController extends Controller
         $post = $request->except('_token', 'field');
         $post['fields'] = \GuzzleHttp\json_decode($request->input('fields'), true);
         $modelServer->make($module, $post);
+        return redirect(route('develop.model.create', $module))->with('success', '添加成功');
     }
 
     public function show(Develop $develop)

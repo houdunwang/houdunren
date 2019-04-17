@@ -9,10 +9,6 @@ use Modules\{MODULE_NAME}\Repositories\{NAME}Repository;
 
 class {NAME}Controller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
     public function index({NAME}Repository $repository)
     {
         $data = $repository->paginate(10);

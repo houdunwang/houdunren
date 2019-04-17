@@ -18,7 +18,8 @@ trait Migration
 {
     protected function createMigration()
     {
-        $file = date('Y_m_d_His') . "_create_{$this->config['table']}_table.php";
+        $table = "_create_{$this->config['table']}_table";
+        $file = date('Y_m_d_His') . "{$table}.php";
         $file = \Storage::drive('module')->path("{$this->module['name']}/Database/Migrations/" . $file);
         if (!is_file($file)) {
             file_put_contents($file, $this->replaceMigrationVar());

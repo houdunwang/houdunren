@@ -31,12 +31,14 @@ a {
   .nav-link {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    border-right-color: #e9edf1;
+    border-top-color: #e9edf1;
 
     &.active {
-      //background: #e4eaec !important;
       border-color: #dee2e6 #dee2e6 #dee2e6;
     }
   }
+
 }
 
 .border-danger {
