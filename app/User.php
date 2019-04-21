@@ -14,6 +14,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Passport\HasApiTokens;
 use App\Traits\Site as SiteTrait;
+
 class User extends Authenticatable
 {
     use SiteTrait, Notifiable, HasRoles, HasApiTokens, LogsActivity;
@@ -69,6 +70,11 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function scopeName($query, $name)
+    {
+        return $this->where('name', $name)->first();
+    }
 
     /**
      * 返回当前模型的链接
