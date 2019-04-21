@@ -71,9 +71,15 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function scopeName($query, $name)
+    /**
+     * 按用户名查找
+     * @param $query
+     * @param string $name
+     * @return mixed
+     */
+    public function scopeName($query, string $name)
     {
-        return $this->where('name', $name)->first();
+        return $query->where('name', $name);
     }
 
     /**
