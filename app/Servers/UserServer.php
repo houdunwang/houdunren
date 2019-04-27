@@ -72,7 +72,7 @@ class UserServer
     }
 
     /**
-     * 替换字符串中的"@用户昵称"为用户空间链接
+     * 将字符串中的"@用户昵称"替换为用户空间链接
      * @param string $content 替换内容
      * @return string
      */

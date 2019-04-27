@@ -22,3 +22,12 @@
 <script src="{{mix('js/util.js')}}"></script>
 <script> require(['bootstrap']); </script>
 @stack('css')
+<script>
+    require(['bootstrap'], function () {
+        $(function () {
+            $('[data-toggle="popover"]').popover({
+                trigger: 'hover'
+            })
+        });
+    });
+</script>
