@@ -7,12 +7,12 @@
  * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
-namespace Modules\{MODULE_NAME}\Repositories;
+namespace Modules\{UPPER_MODULE}\Repositories;
 
 use App\Repositories\Repository;
-use Modules\{MODULE_NAME}\Entities\{MODEL};
+use Modules\{UPPER_MODULE}\Entities\{MODEL};
 
-class {NAME}Repository extends Repository
+class {UPPER_NAME}Repository extends Repository
 {
     protected $model = {MODEL}::class;
 }

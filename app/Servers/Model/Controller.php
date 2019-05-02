@@ -22,7 +22,7 @@ trait Controller
         $file = \Storage::drive('module')
             ->path("{$this->module['name']}/Http/Controllers/Admin/{$this->config['name']}Controller.php");
         if (!is_file($file)) {
-            file_put_contents($file, $this->replaceControllerVars());
+            file_put_contents($file, $this->replaceVars(__DIR__ . '/app/controller.tpl'));
         }
     }
 
@@ -30,21 +30,5 @@ trait Controller
     {
         $storage = \Storage::drive('module');
         $storage->makeDirectory($this->module['name'] . '/Http/Controllers/Admin');
-    }
-
-    protected function replaceControllerVars()
-    {
-        $vars = [
-            '{MODULE_NAME}' => $this->module['name'],
-            '{MODEL}' => $this->config['model'],
-            '{NAME}' => $this->config['name'],
-            '{NAME_LOWER}' => strtolower($this->config['name']),
-            '{MODULE_NAME_LOWER}' => strtolower($this->module['name']),
-        ];
-        $content = file_get_contents(__DIR__ . '/Tpls/controller.tpl');
-        foreach ($vars as $k => $v) {
-            $content = str_replace($k, $v, $content);
-        }
-        return $content;
     }
 }

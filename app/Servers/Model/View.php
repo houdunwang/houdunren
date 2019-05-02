@@ -9,19 +9,23 @@
 
 namespace App\Servers\Model;
 
+use Illuminate\Support\Facades\Storage;
+
 /**
- * 模型创建
- * Class Model
+ * 模板操作
+ * Trait View
  * @package App\Servers\Model
  */
-trait Model
+trait View
 {
-    protected function createModel()
+    protected function createView()
     {
-        $file = \Storage::drive('module')
-            ->path("{$this->module['name']}/Entities/{$this->config['model']}.php");
-        if (!is_file($file)) {
-            file_put_contents($file, $this->replaceVars(__DIR__ . '/app/model.tpl'));
+        foreach (glob(__DIR__ . '/views/*.php') as $file) {
+            $content = $this->replaceVars($file);
+            $file = \Storage::drive('module')
+                ->path("{$this->module['name']}/Resources/views/admin/"
+                    . strtolower($this->config['name']) . '/' . basename($file));
+            file_put_contents($file, $content);
         }
     }
 }

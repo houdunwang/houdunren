@@ -1,15 +1,15 @@
 <?php
-namespace Modules\{MODULE_NAME}\Entities;
+namespace Modules\{UPPER_MODULE}\Entities;
 
 use App\Traits\Site;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * {MODEL_TITLE}
- * Class {MODEL_CLASS}
+ * Class {MODEL}
  * @package Modules\Edu\Entities
  */
-class {MODEL_CLASS} extends Model
+class {MODEL} extends Model
 {
     use Site;
     protected $fillable = [{FILLABLE}];

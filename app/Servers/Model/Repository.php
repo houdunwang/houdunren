@@ -22,7 +22,7 @@ trait Repository
         $file = \Storage::drive('module')
             ->path("{$this->module['name']}/Repositories/{$this->config['name']}Repository.php");
         if (!is_file($file)) {
-            file_put_contents($file, $this->replaceRepositoryVars());
+            file_put_contents($file, $this->replaceVars(__DIR__ . '/app/repository.tpl'));
         }
     }
 
@@ -30,21 +30,5 @@ trait Repository
     {
         $storage = \Storage::drive('module');
         $storage->makeDirectory($this->module['name'] . '/Repositories');
-    }
-
-    protected function replaceRepositoryVars()
-    {
-        $vars = [
-            '{MODULE_NAME}' => $this->module['name'],
-            '{MODEL}' => $this->config['model'],
-            '{NAME}' => $this->config['name'],
-            '{NAME_LOWER}' => strtolower($this->config['name']),
-            '{MODULE_NAME_LOWER}' => strtolower($this->module['name']),
-        ];
-        $content = file_get_contents(__DIR__ . '/Tpls/repository.tpl');
-        foreach ($vars as $k => $v) {
-            $content = str_replace($k, $v, $content);
-        }
-        return $content;
     }
 }

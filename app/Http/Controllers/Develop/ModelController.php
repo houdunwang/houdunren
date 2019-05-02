@@ -28,20 +28,4 @@ class ModelController extends Controller
         $modelServer->make($module, $post);
         return redirect(route('develop.model.create', $module))->with('success', '添加成功');
     }
-
-    public function show(Develop $develop)
-    {
-    }
-
-    public function edit(Develop $develop)
-    {
-    }
-
-    public function update(Request $request, Develop $develop)
-    {
-    }
-
-    public function destroy(Develop $develop)
-    {
-    }
 }

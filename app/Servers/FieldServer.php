@@ -18,28 +18,36 @@ use Illuminate\Database\Eloquent\Model;
  */
 class FieldServer
 {
+    //模块
+    protected $module;
+    //Config/Fields中的模型字段配置文件名
+    protected $name;
+    //模块字段配置
+    protected $config;
+
     /**
      * 获取模块字段配置
      * @param Module $module 模块
      * @param string $name Config/Fields中的模型字段配置
      * @return array|null
      */
-    protected function getConfig(Module $module, string $name): ?array
+    public function init(Module $module, string $name): FieldServer
     {
+        $this->module = $module;
+        $this->name = $name;
         $file = \Storage::drive('module')->path($module['name'] . "/Config/Fields/{$name}.php");
-        return include($file);
+        $this->config = include($file);
+        return $this;
     }
 
     /**
      * 获取字段标题一般用于后台列表页显示
-     * @param Module $module 模块
-     * @param string $name Config/Fields中的模型字段配置
      * @return array
      */
-    public function getFieldTitles(Module $module, string $name): array
+    public function titles(): array
     {
         $fields = [];
-        foreach ($this->getConfig($module, $name)['fields'] as $field) {
+        foreach ($this->config['fields'] as $field) {
             if ($field['index_show']) {
                 $fields[] = $field['title'];
             }
@@ -49,15 +57,13 @@ class FieldServer
 
     /**
      * 获取字段值
-     * @param Module $module 模块
-     * @param string $name Config/Fields中的模型字段配置
      * @param $model
      * @return array
      */
-    public function getFieldValues(Module $module, string $name, $model): array
+    public function value($model): array
     {
         $values = [];
-        foreach ($this->getConfig($module, $name)['fields'] as $field) {
+        foreach ($this->config['fields'] as $field) {
             if ($field['index_show']) {
                 $values[] = $model[$field['name']];
             }
@@ -67,26 +73,23 @@ class FieldServer
 
     /**
      * 处理模块字段用于编辑和发表界面
-     * @param Module $module 模块
-     * @param string $name Config/Fields中的模型字段配置
      * @param Model $model 模型对象
      * @return array
      */
-    public function form(Module $module, string $name, Model $model): array
+    public function forma(Model $model): array
     {
-        return $this->fields($this->getConfig($module, $name)['fields'], $model);
+        return $this->fields($model, $this->config['fields']);
     }
 
     /**
      * 字段编辑视图
-     * @param array $fields 字段配置
      * @param Model $model 模型对象
      * @return array
      */
-    public function fields(array $fields, Model $model): array
+    public function forms(Model $model): array
     {
         $forms = [];
-        foreach ($fields as $field) {
+        foreach ($this->config['fields'] as $field) {
             if ($field['allow_edit']) {
                 $field['value'] = $model[$field['name']] ?? '';
                 $forms[] =

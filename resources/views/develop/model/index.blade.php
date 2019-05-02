@@ -4,10 +4,9 @@
     <table class="table table-striped table-bordered table-inverse">
         <thead class="thead-inverse">
         <tr>
-            <th>模型</th>
+            <th>描述</th>
             <th>模型</th>
             <th>数据表</th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -16,11 +15,6 @@
                 <td>{{$model['title']}}</td>
                 <td>{{$model['model']}}</td>
                 <td>{{$model['table']}}</td>
-                <td>
-                    <div class="btn-group btn-group-sm float-right">
-                        <a href="" class="btn btn-outline-info">预览</a>
-                    </div>
-                </td>
             </tr>
         @endforeach
         </tbody>

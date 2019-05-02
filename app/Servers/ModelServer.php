@@ -14,6 +14,8 @@ use App\Servers\Model\Controller;
 use App\Servers\Model\Migration;
 use App\Servers\Model\Model;
 use App\Servers\Model\Repository;
+use App\Servers\Model\Vars;
+use App\Servers\Model\View;
 
 /**
  * 模型构建
@@ -22,14 +24,12 @@ use App\Servers\Model\Repository;
  */
 class ModelServer
 {
-    use Migration, Model, Controller, Repository;
+    use Vars, View, Migration, Model, Controller, Repository;
 
-    //模块
     /**
      * @var
      */
     protected $module;
-    //字段配置
     /**
      * @var
      */
@@ -48,6 +48,7 @@ class ModelServer
         $config['table'] = str_plural(snake_case($config['model']));
         $this->module = $module;
         $this->config = $config;
+        $this->setVars();
         return $this;
     }
 
@@ -67,12 +68,13 @@ class ModelServer
     public function make(Module $module, array $config)
     {
         $this->init($module, $config);
-        $this->validate();
+        // $this->validate();
         $this->createConfig();
         $this->createMigration();
         $this->createModel();
         $this->createController();
         $this->createRepository();
+        $this->createView();
     }
 
     /**
@@ -112,8 +114,10 @@ class ModelServer
         $storage->makeDirectory($this->module['name'] . '/Config/Fields');
         $configFile = $storage->path($this->module['name'] . '/Config/Fields/' . $this->config['model'] . '.php');
         if (!$storage->has($configFile)) {
-            file_put_contents($configFile,
-                '<?php return ' . var_export($this->config, true) . ';');
+            file_put_contents(
+                $configFile,
+                '<?php return ' . var_export($this->config, true) . ';'
+            );
         }
     }
 

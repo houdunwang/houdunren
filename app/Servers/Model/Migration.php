@@ -19,35 +19,20 @@ trait Migration
     protected function createMigration()
     {
         $table = "_create_{$this->config['table']}_table";
-        $file = date('Y_m_d_His') . "{$table}.php";
-        $file = \Storage::drive('module')->path("{$this->module['name']}/Database/Migrations/" . $file);
-        if (!is_file($file)) {
-            file_put_contents($file, $this->replaceMigrationVar());
+        $has = false;
+        $files = \Storage::drive('module')->files("{$this->module['name']}/Database/Migrations");
+        foreach ($files as $file) {
+            if (strpos($file, $table) !== false) {
+                $has = true;
+            }
         }
-    }
-
-    /**
-     * 获取迁移文件内容
-     * @return false|mixed|string
-     */
-    protected function replaceMigrationVar()
-    {
-        $fields = '';
-        foreach ($this->config['fields'] as $field) {
-            $isNull = $field['is_null'] ? 'nullable()->' : '';
-            $fields .= <<<migration
-\$table->{$field['type']}('{$field['name']}')->{$isNull}comment('{$field['title']}');\n
-migration;
+        if ($has === false) {
+            $file = \Storage::drive('module')
+            ->path("{$this->module['name']}/Database/Migrations/".date('Y_m_d_His') . "{$table}.php");
+            file_put_contents(
+                $file,
+                $this->replaceVars(__DIR__ . '/app/migration.tpl')
+            );
         }
-        $vars = [
-            '{TABLE}' => $this->config['table'],
-            '{TABLE_CLASS}' => str_plural($this->config['model']),
-            '{FIELDS}' => $fields,
-        ];
-        $content = file_get_contents(__DIR__ . '/Tpls/migration.tpl');
-        foreach ($vars as $k => $v) {
-            $content = str_replace($k, $v, $content);
-        }
-        return $content;
     }
 }

@@ -4,14 +4,15 @@
             <div class="form-group">
                 <label>模型描述 <small>请输入中文模型描述</small></label>
                 <input type="text"
-                       class="form-control" name="title" placeholder="" required>
+                       class="form-control" name="title" placeholder="" required
+                value="{{old('title')}}">
             </div>
             <div class="form-group">
                 <label>模型名 <small>输入英文字母的模型目录名请</small></label>
                 <input type="text"
-                       class="form-control" name="model" placeholder="" required>
+                       class="form-control" name="model" placeholder="" required
+                value="{{old('model')}}">
             </div>
-
         </div>
     </div>
     <div class="card mt-2 border-0">
@@ -91,7 +92,7 @@
         new vue({
             el: "#develop",
             data: {
-                fields: []
+                fields: {!! old('fields','[]') !!}
             },
             computed: {},
             methods: {
