@@ -44,15 +44,15 @@ class FieldServer
      * 获取字段标题一般用于后台列表页显示
      * @return array
      */
-    public function titles(): array
+    public function titles(array $fields = null): array
     {
-        $fields = [];
-        foreach ($this->config['fields'] as $field) {
+        $data = [];
+        foreach ($fields ?? $this->config['fields'] as $field) {
             if ($field['index_show']) {
-                $fields[] = $field['title'];
+                $data[] = $field['title'];
             }
         }
-        return $fields;
+        return $data;
     }
 
     /**
@@ -60,10 +60,10 @@ class FieldServer
      * @param $model
      * @return array
      */
-    public function value($model): array
+    public function value($model, array $fields = null): array
     {
         $values = [];
-        foreach ($this->config['fields'] as $field) {
+        foreach ($fields ?? $this->config['fields'] as $field) {
             if ($field['index_show']) {
                 $values[] = $model[$field['name']];
             }
@@ -72,24 +72,14 @@ class FieldServer
     }
 
     /**
-     * 处理模块字段用于编辑和发表界面
-     * @param Model $model 模型对象
-     * @return array
-     */
-    public function forma(Model $model): array
-    {
-        return $this->fields($model, $this->config['fields']);
-    }
-
-    /**
      * 字段编辑视图
      * @param Model $model 模型对象
      * @return array
      */
-    public function forms(Model $model): array
+    public function forms(Model $model, array $fields = null): array
     {
         $forms = [];
-        foreach ($this->config['fields'] as $field) {
+        foreach ($fields ?? $this->config['fields'] as $field) {
             if ($field['allow_edit']) {
                 $field['value'] = $model[$field['name']] ?? '';
                 $forms[] =
