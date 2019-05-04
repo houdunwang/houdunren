@@ -56,7 +56,7 @@ class FieldServer
     }
 
     /**
-     * 获取字段值
+     * 获取字段值用于列表页显示
      * @param $model
      * @return array
      */
@@ -65,12 +65,18 @@ class FieldServer
         $values = [];
         foreach ($fields ?? $this->config['fields'] as $field) {
             if ($field['index_show']) {
-                $values[] = $model[$field['name']];
+                $values[] = $this->getValue($model, $field);
             }
         }
         return $values;
     }
-
+    protected function getValue($model, array $field)
+    {
+        if (in_array($field['form'], ['checkbox', 'radio', 'image'])) {
+            return view('servers.field.show.' . $field['form'], compact('field', 'model'))->render();
+        }
+        return mb_substr(strip_tags($model[$field['name']]), 0, 20, 'utf-8');
+    }
     /**
      * 字段编辑视图
      * @param Model $model 模型对象
@@ -83,9 +89,40 @@ class FieldServer
             if ($field['allow_edit']) {
                 $field['value'] = $model[$field['name']] ?? '';
                 $forms[] =
-                    \View::make('servers.field.' . $field['form'])->with('field', $field)->render();
+                    \View::make('servers.field.' . $field['form'])->with(['field' => $field, 'model' => $model])->render();
             }
         }
         return $forms;
+    }
+    /**
+     * 表单选项如 radio/checkbox
+     *
+     * @param string $field
+     * @return void
+     */
+    public function params($field)
+    {
+        $options = [];
+        $params = explode(',', $field['params']);
+        foreach ($params as $param) {
+            $info = explode(':', $param);
+            $options[] = ['value' => $info[0], 'title' => $info[1]];
+        }
+        return $options;
+    }
+    /**
+     * 获取表单选项的标题
+     *
+     * @param array $field 字段
+     * @param mixed $value 模型值 
+     * @return mixed
+     */
+    public function getTitleByValueFromParams($field, $value)
+    {
+        foreach ($this->params($field) as $param) {
+            if ($value == $param['value']) {
+                return $param['title'];
+            }
+        }
     }
 }

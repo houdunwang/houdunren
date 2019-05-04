@@ -83,7 +83,6 @@ function site(\App\Models\Site $site = null, $load = false): ?\App\Models\Site
         return $cache = $site;
     }
     return $cache;
-
 }
 
 /**

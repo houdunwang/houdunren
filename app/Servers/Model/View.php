@@ -22,9 +22,10 @@ trait View
     {
         foreach (glob(__DIR__ . '/views/*.php') as $file) {
             $content = $this->replaceVars($file);
-            $file = \Storage::drive('module')
-                ->path("{$this->module['name']}/Resources/views/admin/"
-                    . strtolower($this->config['name']) . '/' . basename($file));
+            $path = "{$this->module['name']}/Resources/views/admin/"
+                . strtolower($this->config['name']);
+            $file = \Storage::drive('module')->path($path . '/' . basename($file));
+            \Storage::drive('module')->makeDirectory($path);
             file_put_contents($file, $content);
         }
     }
