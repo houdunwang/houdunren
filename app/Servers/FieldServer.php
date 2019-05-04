@@ -24,7 +24,6 @@ class FieldServer
     protected $name;
     //模块字段配置
     protected $config;
-
     /**
      * 获取模块字段配置
      * @param Module $module 模块
@@ -39,7 +38,6 @@ class FieldServer
         $this->config = include($file);
         return $this;
     }
-
     /**
      * 获取字段标题一般用于后台列表页显示
      * @return array
@@ -54,7 +52,6 @@ class FieldServer
         }
         return $data;
     }
-
     /**
      * 获取字段值用于列表页显示
      * @param $model
@@ -70,6 +67,13 @@ class FieldServer
         }
         return $values;
     }
+    /**
+     * 获取表单值
+     *
+     * @param App\Model $model
+     * @param array $field
+     * @return mixed
+     */
     protected function getValue($model, array $field)
     {
         if (in_array($field['form'], ['checkbox', 'radio', 'image'])) {
@@ -103,12 +107,16 @@ class FieldServer
     public function params($field)
     {
         $options = [];
-        $params = explode(',', $field['params']);
-        foreach ($params as $param) {
-            $info = explode(':', $param);
-            $options[] = ['value' => $info[0], 'title' => $info[1]];
+        if ($field['params'] instanceof \Closure) {
+            return $field['params']();
+        } else {
+            $params = explode(',', $field['params']);
+            foreach ($params as $param) {
+                $info = explode(':', $param);
+                $options[] = ['value' => $info[0], 'title' => $info[1]];
+            }
+            return $options;
         }
-        return $options;
     }
     /**
      * 获取表单选项的标题

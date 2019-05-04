@@ -92,7 +92,7 @@
         new vue({
             el: "#develop",
             data: {
-                fields: <?php echo old('fields', '[]');?>
+                fields: < ? php echo old('fields', '[]'); ? >
             },
             computed: {
 
@@ -106,7 +106,9 @@
                         length: null,
                         is_null: false,
                         form: 'input',
-                        params: ''
+                        params: '',
+                        placeholder: '',
+                        required: ''
                     };
                     this.fields.push(field);
                 },
