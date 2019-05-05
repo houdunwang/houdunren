@@ -10,6 +10,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Repositories\UserRepository;
+use App\Servers\NotifyServer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
