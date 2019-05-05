@@ -25,13 +25,16 @@
     <script>
         require(['axios', 'hdjs'], function (axios, hdjs) {
             axios.get('{{route('update.module.download',$module['name'])}}').then(function (response) {
-                $("#message").html('<strong class="text-success">安装完成</strong>');
-                hdjs.message('模块安装成功', '', 'success', 10, {
-                    events: {
-                        'hidden.bs.modal': function () {
-                            location.href = '{{route("update.module.index")}}';
+                $("#message").html('<strong class="text-success">准备执行数据迁移...</strong>');
+                axios.get('{{route('update.module.install',$module['name'])}}').then(function (response) {
+                    $("#message").html('<strong class="text-success">安装完毕</strong>');
+                    hdjs.message('模块安装成功', '', 'success', 10, {
+                        events: {
+                            'hidden.bs.modal': function () {
+                                location.href = '{{route("system.module.index")}}';
+                            }
                         }
-                    }
+                    });
                 });
             }).catch(function (error) {
                 hdjs.info(error.response.data.message);

@@ -37,12 +37,19 @@ class ZipController extends Controller
             is_file($module . '.zip') && @unlink($module . '.zip');
             //打包
             $zipper = new \Chumper\Zipper\Zipper();
-            foreach ($storage->allFiles("modules/{$module}") as $file) {
-                $isNodeModule = strstr($file, "modules/{$module}/node_modules");
-                if ($isNodeModule === false) {
-                    $zipper->make(public_path($module . '.zip'))->folder(dirname($file))->add(base_path($file));
+            //模块子目录文件压缩
+            foreach ($storage->directories("modules/{$module}") as $dir) {
+                if (strstr($dir, "modules/{$module}/node_modules") === false) {
+                    foreach ($storage->allFiles($dir) as $file) {
+                        $zipper->make(public_path($module . '.zip'))->folder(dirname($file))->add(base_path($file));
+                    }
                 }
             }
+            //模块根文件列表
+            foreach ($storage->files("modules/{$module}") as $file) {
+                $zipper->make(public_path($module . '.zip'))->folder(dirname($file))->add(base_path($file));
+            }
+            //静态文件
             foreach ($storage->allFiles("public/modules/{$lowerName}") as $file) {
                 $zipper->make(public_path($module . '.zip'))->folder(dirname($file))->add(base_path($file));
             }
