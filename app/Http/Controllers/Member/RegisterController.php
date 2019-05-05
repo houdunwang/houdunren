@@ -61,9 +61,9 @@ class RegisterController extends Controller
             'password' => 'nullable|confirmed|min:5|max:20',
             'code' => [
                 'sometimes',
-                function ($attribute, $value, $fail) {
-                    $key = session()->getId() . 'code';
-                    if ($value != \Cache::get($key)) {
+                function ($attribute, $value, $fail) use ($data) {
+                    $check = app(NotifyServer::class)->validate($data['username'], $data['code']);
+                    if (!$check) {
                         $fail('验证码输入错误');
                     }
                 },

@@ -48,8 +48,10 @@ class DomainController extends Controller
      */
     public function store(DomainRequest $request)
     {
-        module()->domain()->updateOrCreate(['module_id' => module()['id'], 'site_id' => site()['id']],
-            ['name' => $request->input('name')]);
+        module()->domain()->updateOrCreate(
+            ['module_id' => module()['id'], 'site_id' => site()['id']],
+            ['name' => $request->input('name')]
+        );
         return back()->with('success', '模块域名设置成功');
     }
 }

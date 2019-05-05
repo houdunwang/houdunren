@@ -12,6 +12,7 @@ namespace App\Servers;
 use App\Events\NotificationEvent;
 use App\Exceptions\ResponseHttpException;
 use Cache;
+use App\Models\Validation;
 
 /**
  * 通知
@@ -44,7 +45,7 @@ class NotifyServer
             event(new NotificationEvent([
                 'subject' => '验证码',
                 'to' => $username,
-                'message' => '您的验证码是: ' . $code,
+                'message' => '您的验证码是: ' . $code . ',验证码在10分钟内有效',
                 //==========短信配置==========
                 //短信签名
                 'sign' => config_get('notify.sign', '', 'site'),
@@ -55,9 +56,31 @@ class NotifyServer
             ]));
             Cache::put($sessionId . 'code', $code, 30);
             Cache::put($sessionId . 'codeTimeout', 'code', now()->addSecond($timeout));
+            app(Validation::class)->create([
+                'account' => $username,
+                'code' => $code,
+            ]);
             return true;
         } catch (\Exception $e) {
             throw  new ResponseHttpException('系统配置荐错误，无法发送通知。', 500);
         }
+    }
+    /**
+     * 验证码检测
+     * 包括存在与过期检测
+     *
+     * @param string $account
+     * @param string $code
+     * @return void
+     */
+    public function validate(string $account, string $code)
+    {
+        $notify = app(Validation::class)->where(
+            [
+                ['account', $account],
+                ['code', $code]
+            ]
+        )->latest()->first();
+        return $notify && $notify->created_at > now()->subMinute(10);
     }
 }

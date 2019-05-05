@@ -6,6 +6,7 @@ use App\Servers\NotifyServer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Notifications\DatabaseNotification;
+use App\Models\Validation;
 
 /**
  * 用户通知
@@ -58,6 +59,7 @@ class NotifyController extends Controller
     public function code(Request $request, NotifyServer $notifyServer)
     {
         $notifyServer->code($request->input('username'), 4);
+
         return response()->json([
             'message' => '验证码已经发送到 ' . $request->input('username') . ' 请注意查收',
             'code' => 0,
