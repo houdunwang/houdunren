@@ -20,3 +20,4 @@ hdcms.zip
 /public/zips
 install.lock
 .DS_Store
+.vscode

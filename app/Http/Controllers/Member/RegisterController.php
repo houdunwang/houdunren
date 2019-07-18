@@ -50,7 +50,6 @@ class RegisterController extends Controller
     /**
      * 表单验证
      * @param array $data
-     * @throws \Illuminate\Validation\ValidationException
      */
     protected function validateFormField(array $data)
     {
@@ -65,7 +64,7 @@ class RegisterController extends Controller
                 function ($attribute, $value, $fail) use ($data) {
                     $check = app(NotifyServer::class)->validate($data['username'], $data['code']);
                     if (!$check) {
-                        $fail('验证码输入错误');
+                        $fail('邮箱或手机验证码错误');
                     }
                 },
             ],

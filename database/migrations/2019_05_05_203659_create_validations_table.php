@@ -17,6 +17,7 @@ class CreateValidationsTable extends Migration
             $table->increments('id');
             $table->char('account', 30)->index()->comment('帐号');
             $table->string('code', 20)->comment('验证码');
+            $table->char('ip',30)->comment('发送IP');
             $table->timestamps();
         });
     }

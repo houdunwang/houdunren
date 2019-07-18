@@ -14,10 +14,7 @@ use App\Models\Module;
 use App\Models\Site;
 use App\Repositories\Traits\ModuleTrait;
 use App\User;
-use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Image\Image;
-use Spatie\Image\Manipulations;
 
 /**
  * 模块管理

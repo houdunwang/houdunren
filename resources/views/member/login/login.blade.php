@@ -12,7 +12,6 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     @include('layouts.hdjs')
 </head>
-
 <body>
     @include('layouts.message')
     <div class="border-top border-info" style="border-width: 5px !important;"></div>

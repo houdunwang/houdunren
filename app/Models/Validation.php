@@ -14,5 +14,5 @@ class Validation extends Model
      *
      * @var array
      */
-    protected $fillable = ['account', 'code'];
+    protected $fillable = ['account', 'code','ip'];
 }

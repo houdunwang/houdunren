@@ -6,7 +6,6 @@
     <title>会员注册</title>
     @include('layouts.hdjs')
 </head>
-
 <body class="">
     @include('layouts.message')
     <div class="border-top border-info" style="border-width: 5px !important;"></div>
@@ -82,7 +81,5 @@
             </div>
         </div>
     </div>
-
 </body>
-
 </html>

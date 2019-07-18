@@ -24,11 +24,6 @@ class NotifyServer
     /**
      * 发送验证码
      * @param string $username
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \App\Exceptions\ResponseHttpException
-     */
-    /**
-     * @param string $username
      * @param int $len
      * @return bool
      * @throws ResponseHttpException
@@ -36,10 +31,14 @@ class NotifyServer
     public function code(string $username, int $len = 4)
     {
         $code = number_random($len);
-        $sessionId = session()->getId();
+        $ip = request()->ip();
         $timeout = config_get('notify.message_timeout', 60, 'site');
-        if (Cache::has($sessionId . 'codeTimeout')) {
+        if (Cache::has($ip . 'codeTimeout')) {
             throw new ResponseHttpException('发送过于频繁请稍后再试');
+        }
+        $sendCount = app(Validation::class)->where('ip',$ip)->whereDate('created_at', date('Y-m-d'))->count();
+        if($sendCount>10){
+            throw new ResponseHttpException('每日允许发送十条验证码');
         }
         try {
             event(new NotificationEvent([
@@ -54,15 +53,16 @@ class NotifyServer
                 //模板变量
                 'vars' => ["code" => $code, "product" => site()['name']],
             ]));
-            Cache::put($sessionId . 'code', $code, 30);
-            Cache::put($sessionId . 'codeTimeout', 'code', now()->addSecond($timeout));
+            Cache::put($ip . 'code', $code, 30);
+            Cache::put($ip . 'codeTimeout', 'code', now()->addSecond($timeout));
             app(Validation::class)->create([
                 'account' => $username,
                 'code' => $code,
+                'ip'=>$ip
             ]);
             return true;
         } catch (\Exception $e) {
-            throw  new ResponseHttpException('系统配置荐错误，无法发送通知。', 500);
+            throw  new ResponseHttpException('系统配置荐错误，无法发送通知。'.$e->getMessage(), 500);
         }
     }
     /**
@@ -71,7 +71,7 @@ class NotifyServer
      *
      * @param string $account
      * @param string $code
-     * @return void
+     * @return mixed
      */
     public function validate(string $account, string $code)
     {
