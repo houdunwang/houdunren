@@ -1,4 +1,0 @@
-2017-10-09 Version: 3.0.0
-1, 添加公钥(PublicKey)管理接口
-2, 添加ChangePassword接口
-

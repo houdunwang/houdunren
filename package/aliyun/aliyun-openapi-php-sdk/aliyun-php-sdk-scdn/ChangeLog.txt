@@ -1,3 +1,0 @@
-2018-06-08 Version: 1.0.0
-1, Add scdn interface，support scdn.
-
