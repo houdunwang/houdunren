@@ -18,7 +18,14 @@ class CreateSitesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('name')->unique()->comment('站点名称');
+            $table->string('keyword',100)->nullable()->comment('关键字');
             $table->string('description', 100)->nullable()->comment('站点描述');
+            $table->string('logo')->nullable()->comment('LOGO');
+            $table->string('icp',100)->nullable()->comment('ICP');
+            $table->string('tel',30)->nullable()->comment('电话');
+            $table->string('email')->nullable()->comment('邮箱');
+            $table->string('counter')->nullable()->comment('统计代码');
+
         });
     }
 

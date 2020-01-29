@@ -2,69 +2,43 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Http\Controllers\ApiController;
+use App\Http\Requests\SiteRequest;
+use App\Http\Resources\SiteResource;
 use App\Models\Site;
 use Illuminate\Http\Request;
 
-class SiteController extends Controller
+class SiteController extends ApiController
 {
     public function index()
     {
-
+        return $this->success('',SiteResource::collection(Site::all()));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(SiteRequest $request, Site $site)
     {
-        //
+        $site->name = $request->name;
+        $site->description = $request->description;
+        $site->save();
+        return $this->success('站点添加成功');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Site  $site
-     * @return \Illuminate\Http\Response
-     */
     public function show(Site $site)
     {
-        //
+        return $this->success('',new SiteResource($site));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Site  $site
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Site $site)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Site  $site
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Site $site)
     {
-        //
+        $site->fill($request->all())->save();
+        return $this->success('栏目修改成功');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Site  $site
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Site $site)
     {
-        //
+        $this->authorize('delete', $site);
+        $site->delete();
+        return $this->success('栏目删除成功');
     }
+
 }

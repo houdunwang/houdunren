@@ -1,14 +1,12 @@
 <?php
 
-use Illuminate\Http\Request;
-
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-
 Route::post('register', 'User\PassportController@register');
 Route::post('login', 'User\PassportController@login');
 
-Route::group(['namespace' => 'Site'], function () {
-    Route::resource('site', 'SiteController');
+Route::group(['middleware'=>'auth:api','namespace' => 'Site'], function () {
+    Route::resource('site', 'SiteController')->except(['edit','create']);
+});
+
+Route::group(['middleware'=>'auth:api','namespace'=>'System','prefix'=>'system'],function(){
+    Route::resource('package','PackageController')->except(['edit','create']);
 });
