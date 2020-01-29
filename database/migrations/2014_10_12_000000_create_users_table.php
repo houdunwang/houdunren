@@ -15,16 +15,18 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->comment('昵称');
-            $table->string('email')->unique();
-            $table->string('mobile')->unique();
-            $table->string('real_name', 20)->comment('真实姓名');
-            $table->string('password');
+            $table->string('name')->nullable()->comment('昵称');
+            $table->string('email')->nullable()->unique();
+            $table->string('mobile')->nullable()->unique();
+            $table->string('real_name', 20)->nullable()->comment('真实姓名');
+            $table->string('password')->nullable()->comment('密码');
+            $table->string('weixin_openid')->nullable()->comment('微信OPENID');
+            $table->string('weixin_unionid')->nullable()->comment('微信UNIONID');
             $table->string('home')->nullable()->comment('个人主页');
             $table->string('avatar')->nullable()->comment('头像');
             $table->string('token')->nullable()->comment('邮箱或手机验证码');
-            $table->string('weiBo')->nullable()->comment('微博');
-            $table->string('weChat')->nullable()->comment('微信');
+            $table->string('weibo')->nullable()->comment('微博地址');
+            $table->string('wechat')->nullable()->comment('微信号');
             $table->string('github')->nullable()->comment('GITHUB');
             $table->string('qq')->nullable()->comment('QQ');
             $table->timestamp('email_verified_at')->nullable()->comment('邮箱验证时间');
