@@ -1,78 +1,49 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# HDCMS 5.7 Beta
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+[![time tracker](assets/hdcms-20200109111946701.svg)](https://wakatime.com/badge/github/houdunwang/hdcms)
 
-## About Laravel
+基于Laravel 框架重构的PC、WAP、微信公众号、微信小程序多应用平台。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**100% 免费使用于任何项目，包括企业商业用途。**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+> 希望大家为本项目加个 Star，也是对我们小小的鼓励。
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 产品特点
 
-## Learning Laravel
+- 全新的产品设计、快速的产品创新、超出用户期待的产品价值，基于微信/桌面/移动三网通设计模式为企业提供开发、运营、培训、推广一体化解决方案，帮助企业实现线上线下互通（O2O），社会化客户关系管理（SCRM），移动电商，轻应用（lightapp）WMAPP等多个层面的业务开发。
+- 系统提供方便的二次开发机制，可根据自身业务需要快捷开发功能模块，并可将功能模块发布到应用商店进行二次获利。
+- 完全免费使用的同时HDCMS不定期发布版本更新，不断推出让使用者惊喜的新功能，新模块。企业或个人也可以使用HDCMS做成云服务，让其他用户入住云应用，进行网站搭建与模块使用，企业只需要配置好相应套餐即可轻松营利。
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 官方网站
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+[http://www.hdcms.com](http://www.hdcms.com/)
 
-## Laravel Sponsors
+## 获取帮助
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+官方提供了完善的帮助手册，便于开发者进行二次开发 [查看手册](http://doc.hdcms.com/)，或者登录 [http://www.hdcms.com](http://www.hdcms.com) 观看教学视频。
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+## 软件截图
 
-## Contributing
+![image-20190301115715970](https://user-images.githubusercontent.com/13848593/53615562-7e295e00-3c19-11e9-885b-77f63e1eae90.png)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 感谢
 
-## Code of Conduct
+下面是依赖的第三方库，鸣谢不分先后顺序。
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- <https://haubek.github.io/chosen/>
+- <https://github.com/zenorocha/clipboard.js.git>
+- <https://martinemmert.github.io/clockpicker-umd/>
+- <https://fontawesome.com/icons>
+- <https://github.com/xdan/datetimepicker>
+- <http://momentjs.com/>
+- <https://github.com/soldair/node-qrcode>
+- <https://select2.org/getting-started/basic-usage>
+- <https://farbelous.io/bootstrap-colorpicker/tutorial-Basics.html>
+- <https://github.com/chriso/validator.js>
+- <https://github.com/zeroclipboard/zeroclipboard>
+- <http://fex.baidu.com/webuploader/>
+- https://github.com/laravolt/avatar
+- http://docs.guzzlephp.org/en/stable/
+- https://getbootstrap.com/docs/4.3/content/tables/
+- http://www.fontawesome.com.cn/faicons/#new
+- https://github.com/axios/axios
