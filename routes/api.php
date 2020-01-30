@@ -16,4 +16,5 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => '
 
 Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
     Route::resource('group', 'GroupController')->except(['edit', 'create']);
+    Route::resource('module', 'ModuleController')->except(['edit', 'create']);
 });

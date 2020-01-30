@@ -6,7 +6,6 @@
         "framework",
         "laravel"
     ],
-
     "license": "MIT",
     "require": {
         "php": "^7.2",
@@ -16,7 +15,8 @@
         "guzzlehttp/guzzle": "^6.5",
         "laravel/framework": "^6.2",
         "laravel/passport": "^8.3",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "nwidart/laravel-modules": "^6.2"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
@@ -37,7 +37,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Modules\\": "Modules/"
         },
         "classmap": [
             "database/seeds",
