@@ -1,6 +1,6 @@
 <?php
 Route::get('/', function () {
-    (new \App\Servers\Access())->updateAllModulePermission(\App\Models\Site::first());
+    return 'houdunren';
 });
 Route::namespace('User')->group(function () {
     Route::resource('passport', 'PassportController');
