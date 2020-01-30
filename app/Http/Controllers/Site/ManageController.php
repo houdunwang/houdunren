@@ -7,7 +7,7 @@ use App\Http\Requests\SiteRequest;
 use App\Http\Resources\SiteResource;
 use App\Models\Site;
 
-class SiteController extends ApiController
+class ManageController extends ApiController
 {
     public function __construct()
     {

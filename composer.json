@@ -6,9 +6,11 @@
         "framework",
         "laravel"
     ],
+
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "ext-json": "*",
         "caouecs/laravel-lang": "~4.0",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.5",

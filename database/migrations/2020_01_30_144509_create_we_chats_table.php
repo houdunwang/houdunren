@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSiteUsersTable extends Migration
+class CreateWeChatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateSiteUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('site_users', function (Blueprint $table) {
+        Schema::create('we_chats', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             $table->unsignedBigInteger('site_id')->nullable()->comment('站点编号');
             $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
-            $table->unsignedBigInteger('user_id')->nullable()->comment('用户编号');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->text('config')->nullable()->comment('配置');
         });
     }
 
@@ -30,6 +29,6 @@ class CreateSiteUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('site_users');
+        Schema::dropIfExists('we_chats');
     }
 }

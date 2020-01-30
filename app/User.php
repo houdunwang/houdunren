@@ -22,7 +22,9 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'lock_to_time' => 'datetime'
     ];
+
     //passport帐号登录
     public function findForPassport($username)
     {
@@ -37,7 +39,8 @@ class User extends Authenticatable
      * 超级管理员
      * @return bool
      */
-    public function isSuperAdmin():bool {
-        return $this['id']===1;
+    public function isSuperAdmin(): bool
+    {
+        return $this['id'] === 1;
     }
 }

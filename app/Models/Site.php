@@ -11,6 +11,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Site extends Model
 {
-    //protected $fillable = ['*'];
-    protected  $guarded=[];
+    protected $guarded = [];
+
+    public function weChat()
+    {
+        return $this->hasMany(WeChat::class);
+    }
 }

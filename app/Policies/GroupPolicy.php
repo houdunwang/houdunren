@@ -15,8 +15,10 @@ use Illuminate\Auth\Access\Response;
 class GroupPolicy
 {
     use HandlesAuthorization;
-    public function before(User $user){
-        return $user->isSuperAdmin()?Response::allow():Response::deny('没有操作权限');
+
+    public function before(User $user)
+    {
+        return $user->isSuperAdmin() ? Response::allow() : Response::deny('没有操作权限');
     }
 
     public function viewAny(User $user)
@@ -27,8 +29,8 @@ class GroupPolicy
     /**
      * Determine whether the user can view the group.
      *
-     * @param  \App\User  $user
-     * @param  \App\Models\Group  $group
+     * @param \App\User $user
+     * @param \App\Models\Group $group
      * @return mixed
      */
     public function view(User $user, Group $group)
@@ -39,7 +41,7 @@ class GroupPolicy
     /**
      * Determine whether the user can create groups.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
      * @return mixed
      */
     public function create(User $user)
@@ -50,8 +52,8 @@ class GroupPolicy
     /**
      * Determine whether the user can update the group.
      *
-     * @param  \App\User  $user
-     * @param  \App\Models\Group  $group
+     * @param \App\User $user
+     * @param \App\Models\Group $group
      * @return mixed
      */
     public function update(User $user, Group $group)
@@ -62,8 +64,8 @@ class GroupPolicy
     /**
      * Determine whether the user can delete the group.
      *
-     * @param  \App\User  $user
-     * @param  \App\Models\Group  $group
+     * @param \App\User $user
+     * @param \App\Models\Group $group
      * @return mixed
      */
     public function delete(User $user, Group $group)
@@ -74,8 +76,8 @@ class GroupPolicy
     /**
      * Determine whether the user can restore the group.
      *
-     * @param  \App\User  $user
-     * @param  \App\Models\Group  $group
+     * @param \App\User $user
+     * @param \App\Models\Group $group
      * @return mixed
      */
     public function restore(User $user, Group $group)
@@ -86,8 +88,8 @@ class GroupPolicy
     /**
      * Determine whether the user can permanently delete the group.
      *
-     * @param  \App\User  $user
-     * @param  \App\Models\Group  $group
+     * @param \App\User $user
+     * @param \App\Models\Group $group
      * @return mixed
      */
     public function forceDelete(User $user, Group $group)
