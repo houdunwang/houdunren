@@ -11,6 +11,9 @@ class PackageSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $package = new \App\Models\Package();
+        $package->name = '系统套餐';
+        $package->system = true;
+        $package->save();
     }
 }

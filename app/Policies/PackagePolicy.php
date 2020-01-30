@@ -5,52 +5,32 @@ namespace App\Policies;
 use App\Models\Package;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
+/**
+ * 套餐
+ * Class PackagePolicy
+ * @package App\Policies
+ */
 class PackagePolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any packages.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
+    public function before(User $user){
+        return $user->isSuperAdmin()?Response::allow():Response::deny('没有操作权限');
+    }
     public function viewAny(User $user)
     {
-        //
     }
 
-    /**
-     * Determine whether the user can view the package.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Models\Package  $package
-     * @return mixed
-     */
     public function view(User $user, Package $package)
     {
-        //
     }
 
-    /**
-     * Determine whether the user can create packages.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
     public function create(User $user)
     {
-        //
     }
 
-    /**
-     * Determine whether the user can update the package.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Models\Package  $package
-     * @return mixed
-     */
     public function update(User $user, Package $package)
     {
         //

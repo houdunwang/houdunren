@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Site;
 
 class SiteSeeder extends Seeder
 {
@@ -11,6 +12,8 @@ class SiteSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $site = new Site;
+        $site->name = '后盾人';
+        $site->save();
     }
 }

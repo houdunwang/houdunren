@@ -4,13 +4,14 @@ namespace App\Policies;
 use App\Models\Site;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class SitePolicy
 {
     use HandlesAuthorization;
 
     public function before(User $user){
-       return $user->isSuperAdmin();
+       return $user->isSuperAdmin()?Response::allow():Response::deny('没有操作权限');
     }
 
     public function viewAny(User $user)

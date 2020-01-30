@@ -3,64 +3,45 @@
 namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\ApiController;
+use App\Http\Requests\PackageRequest;
+use App\Http\Resources\PackageResource;
 use App\Models\Package;
 use Illuminate\Http\Request;
 
 class PackageController extends ApiController
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Package::class, 'package');
+    }
 
     public function index()
     {
+        $packages = PackageResource::collection(Package::all());
+        return $this->success('',$packages);
     }
 
-
-    public function store(Request $request)
+    public function store(PackageRequest $request)
     {
-        $this->au
+        $package  = new Package();
+        $package->fill($request->all())->save();
+        return $this->success('套餐添加成功');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Package  $package
-     * @return \Illuminate\Http\Response
-     */
     public function show(Package $package)
     {
-        //
+        return $this->success('',$package);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Package  $package
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Package $package)
+    public function update(PackageRequest $request, Package $package)
     {
-        //
+        $package->fill($request->all())->save();
+        return $this->success('套餐修改成功',$package);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Package  $package
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Package $package)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Package  $package
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Package $package)
     {
-        //
+        $package->delete();
+        return $this->success('套餐删除成功');
     }
 }
