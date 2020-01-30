@@ -33,19 +33,10 @@ class PackagePolicy
 
     public function update(User $user, Package $package)
     {
-        //
     }
 
-    /**
-     * Determine whether the user can delete the package.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Models\Package  $package
-     * @return mixed
-     */
     public function delete(User $user, Package $package)
     {
-        //
     }
 
     /**
@@ -57,7 +48,6 @@ class PackagePolicy
      */
     public function restore(User $user, Package $package)
     {
-        //
     }
 
     /**

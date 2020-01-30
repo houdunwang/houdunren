@@ -10,3 +10,7 @@ Route::group(['middleware'=>'auth:api','namespace' => 'Site'], function () {
 Route::group(['middleware'=>'auth:api','namespace'=>'System','prefix'=>'system'],function(){
     Route::resource('package','PackageController')->except(['edit','create']);
 });
+
+Route::group(['middleware'=>'auth:api','namespace'=>'System','prefix'=>'system'],function(){
+    Route::resource('group','GroupController')->except(['edit','create']);
+});
