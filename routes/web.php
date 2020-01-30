@@ -1,6 +1,6 @@
 <?php
 Route::get('/', function () {
-    \App\Servers\Permission::updateAllModulePermission();
+    (new \App\Servers\Access())->updateAllModulePermission(\App\Models\Site::first());
     dd('');
 });
 Route::namespace('User')->group(function () {
