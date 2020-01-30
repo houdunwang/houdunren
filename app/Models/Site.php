@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Models\Permission;
 
 /**
  * 站点管理
@@ -16,5 +17,10 @@ class Site extends Model
     public function weChat()
     {
         return $this->hasMany(WeChat::class);
+    }
+
+    public function permissions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Permission::class);
     }
 }

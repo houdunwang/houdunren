@@ -7,10 +7,10 @@ return [
         /*
          * When using the "HasPermissions" trait from this package, we need to know which
          * Eloquent model should be used to retrieve your permissions. Of course, it
-         * is often just the "Access" model but you may use whatever you like.
+         * is often just the "Permission" model but you may use whatever you like.
          *
-         * The model you want to use as a Access model needs to implement the
-         * `Spatie\Access\Contracts\Access` contract.
+         * The model you want to use as a Permission model needs to implement the
+         * `Spatie\Permission\Contracts\Permission` contract.
          */
 
         'permission' => Spatie\Permission\Models\Permission::class,
@@ -21,7 +21,7 @@ return [
          * is often just the "Role" model but you may use whatever you like.
          *
          * The model you want to use as a Role model needs to implement the
-         * `Spatie\Access\Contracts\Role` contract.
+         * `Spatie\Permission\Contracts\Role` contract.
          */
 
         'role' => Spatie\Permission\Models\Role::class,
@@ -108,7 +108,7 @@ return [
         'key' => 'spatie.permission.cache',
 
         /*
-         * When checking for a permission against a model by passing a Access
+         * When checking for a permission against a model by passing a Permission
          * instance to the check, this key determines what attribute on the
          * Permissions model is used to cache against.
          *

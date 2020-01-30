@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
+/**
+ * 用户
+ * Class User
+ * @package App
+ */
 class User extends Authenticatable
 {
     use Notifiable, HasApiTokens, HasRoles;

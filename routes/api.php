@@ -6,6 +6,7 @@ Route::post('login', 'User\PassportController@login');
 Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'site'], function () {
     Route::resource('manage', 'ManageController')->except(['edit', 'create']);
     Route::resource('{site}/weChat', 'WeChatController')->except(['edit', 'create']);
+    Route::get('access/refresh','AccessController@refresh');
 });
 
 Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {

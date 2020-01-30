@@ -18,9 +18,13 @@ class CreatePermissionTables extends Migration
 
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->timestamps();
             $table->string('name');
             $table->string('guard_name');
-            $table->timestamps();
+            $table->string('module')->comment('模块标题');
+            $table->string('title')->comment('权限描述');
+            $table->unsignedBigInteger('site_id')->nullable()->comment('站点编号');
+            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
         });
 
         Schema::create($tableNames['roles'], function (Blueprint $table) {

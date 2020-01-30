@@ -13,36 +13,44 @@ use Spatie\Permission\Models\Permission as P;
 class Access
 {
     /**
+     * 更新所有站点权限
+     */
+    public function updateAllSitePermission(): void
+    {
+        foreach (Site::all() as $site) {
+            $this->updateSitePermission($site);
+        }
+    }
+
+    /**
      * 更新所有模块权限
      * @param Site $site
-     * @return bool
      */
-    public function updateAllModulePermission(Site $site): bool
+    public function updateSitePermission(Site $site): void
     {
+        $site->permissions()->delete();
         foreach (\Module::all() as $module) {
-            $this->updateModulePermission($module, $site);
+            $this->addModulePermission($module, $site);
         }
-        return true;
+        app()['cache']->forget('spatie.permission.cache');
     }
 
     /**
      * 更新模块权限
      * @param $module
      * @param Site $site
-     * @return bool
      */
-    protected function updateModulePermission($module, Site $site): bool
+    protected function addModulePermission($module, Site $site): void
     {
-        $permissions = include("{$module->path}/Config/permissions.php");
+        $permissions = include("{$module->getPath()}/Config/permissions.php");
         foreach ($permissions as $permission) {
             P::create([
-                'name' => $permission['name'],
+                'name' => "S{$site['id']}-" . $permission['name'],
                 'title' => $permission['title'],
                 'site_id' => $site['id'],
-                'module' => $module['name'],
+                'module' => $module->getName(),
                 'guard_name' => 'web'
             ]);
         }
-        return true;
     }
 }
