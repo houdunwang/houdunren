@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Policies;
+
 use App\Models\Site;
+use App\Servers\Access;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
@@ -10,8 +12,11 @@ class SitePolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user){
-       return $user->isSuperAdmin()?Response::allow():Response::deny('没有操作权限');
+    public function before(User $user)
+    {
+        $access = app(Access::class);
+        return $user->isSuperAdmin() || $access->isAdmin() ?
+            $this->allow() : Response::deny('没有操作权限');
     }
 
     public function viewAny(User $user)

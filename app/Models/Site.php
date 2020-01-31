@@ -23,4 +23,9 @@ class Site extends Model
     {
         return $this->hasMany(Permission::class);
     }
+
+    public function user()
+    {
+        return $this->hasMany(SiteUser::class);
+    }
 }

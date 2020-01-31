@@ -3,6 +3,7 @@
 namespace App\Servers;
 
 use App\Models\Site;
+use App\User;
 use Spatie\Permission\Models\Permission as P;
 
 /**
@@ -28,7 +29,6 @@ class Access
      */
     public function updateSitePermission(Site $site): void
     {
-        $site->permissions()->delete();
         foreach (\Module::all() as $module) {
             $this->addModulePermission($module, $site);
         }
@@ -42,6 +42,7 @@ class Access
      */
     protected function addModulePermission($module, Site $site): void
     {
+        $site->permissions()->delete();
         $permissions = include("{$module->getPath()}/Config/permissions.php");
         foreach ($permissions as $permission) {
             P::create([
@@ -52,5 +53,41 @@ class Access
                 'guard_name' => 'web'
             ]);
         }
+    }
+
+    /**
+     * 站长
+     * @param Site $site
+     * @param User $user
+     * @return bool
+     */
+    public function isAdmin(Site $site, User $user): bool
+    {
+        $siteUser = $site->user()->byUser($user);
+        return $siteUser && $siteUser['role'] === 'admin';
+    }
+
+    /**
+     * 站点操作员
+     * @param Site $site
+     * @param User $user
+     * @return bool
+     */
+    public function isOperator(Site $site, User $user): bool
+    {
+        $siteUser = $site->user()->byUser($user);
+        return $siteUser && $siteUser['role'] === 'operator';
+    }
+
+    /**
+     * 站点普通用户
+     * @param Site $site
+     * @param User $user
+     * @return bool
+     */
+    public function isUser(Site $site, User $user): bool
+    {
+        $siteUser = $site->user()->byUser($user);
+        return $siteUser && $siteUser['role'] === 'user';
     }
 }

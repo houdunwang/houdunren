@@ -20,6 +20,7 @@ class CreateSiteUsersTable extends Migration
             $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable()->comment('用户编号');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('role')->comment('角色类型:站长admin,操作员operator,用户user');
         });
     }
 
