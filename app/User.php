@@ -49,4 +49,13 @@ class User extends Authenticatable
     {
         return $this['id'] === 1;
     }
+
+    /**
+     * 用户组
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function group(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo($this['group_id']);
+    }
 }

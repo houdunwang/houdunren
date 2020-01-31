@@ -11,6 +11,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Package extends Model
 {
-//    protected $fillable=[];
     protected $guarded = [];
+    protected $casts = ['modules' => 'array', 'templates' => 'array'];
+
+    /**
+     * 套餐模块
+     * @return mixed
+     */
+    public function modules()
+    {
+        return Module::whereIn('id', $this['modules'])->get();
+    }
 }

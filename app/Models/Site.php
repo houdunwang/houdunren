@@ -28,4 +28,13 @@ class Site extends Model
     {
         return $this->hasMany(SiteUser::class);
     }
+
+    /**
+     * 站点管理员
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function admin(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->user()->where('role', 'admin');
+    }
 }
