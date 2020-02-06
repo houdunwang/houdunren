@@ -13,7 +13,6 @@ use Spatie\Permission\Models\Permission;
 class Site extends Model
 {
     protected $guarded = [];
-
     public function weChat()
     {
         return $this->hasMany(WeChat::class);

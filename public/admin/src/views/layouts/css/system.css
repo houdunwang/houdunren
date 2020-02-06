@@ -1,0 +1,16 @@
+.system {
+  display: flex;
+  background: url('../images/bg.jpg');
+  background-color: #EEF0F3;
+  background-size: contain;
+  width: 100vw;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.system .container {
+  width: 100vw;
+  margin: 0 auto;
+  flex: 1;
+  padding: 25px;
+}

@@ -13,6 +13,7 @@
         "laravel/framework": "^6.2",
         "laravel/passport": "^8.3",
         "laravel/tinker": "^2.0",
+        "laravel/ui": "^1.1",
         "nwidart/laravel-modules": "^6.2",
         "spatie/laravel-permission": "^3.6"
     },

@@ -1,6 +1,6 @@
 <?php
 Route::get('/', function () {
-    return 'houdunren';
+    return view('index');
 });
 Route::namespace('User')->group(function () {
     Route::resource('passport', 'PassportController');

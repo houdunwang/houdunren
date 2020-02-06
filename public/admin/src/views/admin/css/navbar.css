@@ -1,0 +1,45 @@
+.system .navbar {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  align-items: center;
+}
+.system .navbar .logo {
+  background-image: url("../images/logo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 80px;
+  opacity: 0.9;
+  flex: 1;
+}
+.system .navbar div {
+  display: flex;
+  justify-content: space-between;
+}
+.system .navbar div a {
+  cursor: pointer;
+  margin-left: 20px;
+  padding: 10px 30px;
+  background-color: #34495e;
+  opacity: 0.7;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80px;
+  font-weight: bold;
+  transition: 0.5s;
+}
+.system .navbar div a:hover {
+  color: #fff;
+  opacity: 0.9;
+}
+.system .navbar div a i {
+  font-size: 2em;
+  display: block;
+  margin-bottom: 10px;
+}
+.system .navbar div a p {
+  margin-bottom: 0;
+}

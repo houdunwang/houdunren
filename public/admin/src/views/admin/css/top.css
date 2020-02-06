@@ -1,0 +1,34 @@
+.admin-top {
+  height: 55px;
+  background-color: #021524;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.admin-top .container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+@media screen and (min-width: 1200px) {
+  .admin-top .container {
+    width: 1200px;
+  }
+}
+.admin-top .container .links a {
+  margin-right: 30px;
+  color: #999999;
+  font-weight: bold;
+}
+.admin-top .container .links a:hover {
+  color: #ccc;
+}
+.admin-top .user-menu {
+  color: #999999;
+  font-weight: bold;
+}
+.admin-top .user-menu a {
+  margin-bottom: 50px;
+  color: red;
+}
