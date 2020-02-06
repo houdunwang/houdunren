@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Form, Icon, Input, Button, Checkbox, Divider } from "antd";
+import { Form, Icon, Input, Button, Checkbox, Divider, Typography } from "antd";
 import Hoc from "./Hoc";
+const { Text } = Typography;
 class Login extends Component {
     render() {
         return (

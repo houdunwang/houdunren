@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Form, Icon, Input, Button, Divider } from "antd";
+import { Form, Icon, Input, Button, Divider, Typography } from "antd";
 import { Link } from "react-router-dom";
 import Hoc from "./Hoc";
+
+const { Text } = Typography;
 class Register extends Component {
     render() {
         return (
@@ -62,13 +64,17 @@ class Register extends Component {
                             size="large"
                             prefix={
                                 <Icon
-                                    type="lock"
+                                    type="safety-certificate"
                                     style={{ color: "rgba(0,0,0,.25)" }}
                                 />
                             }
                             type="text"
                             placeholder="请输入验证码"
-                            addonAfter={<Link to="/">发送验证码</Link>}
+                            addonAfter={
+                                <Link to="/">
+                                    <Icon type="rocket" /> 发送验证码
+                                </Link>
+                            }
                             defaultValue="mysite"
                         />
                     </Form.Item>
