@@ -34,6 +34,7 @@ ReactDOM.render(
                             key={config.pathname}
                             component={config.component}
                             path={config.pathname}
+                            render={config.render}
                         />
                     );
                 })}

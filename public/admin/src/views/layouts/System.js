@@ -9,8 +9,8 @@ export default WrappedComponent =>
             return (
                 <div className="system">
                     <Top />
-                    <div className="container">
-                        <Navbar />
+                    <Navbar />
+                    <div className="wrap">
                         <WrappedComponent {...this.props} />
                     </div>
                     <Footer />

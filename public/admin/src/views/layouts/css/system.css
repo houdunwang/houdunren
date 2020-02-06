@@ -8,9 +8,11 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.system .container {
-  width: 100vw;
+.system .wrap {
   margin: 0 auto;
   flex: 1;
   padding: 25px;
+  background-color: #fff;
+  margin: 20px;
+  border-radius: 5px;
 }

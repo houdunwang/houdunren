@@ -8,11 +8,13 @@ class Site extends Component {
         console.log(this.props);
         return (
             <div>
-                <Card>
-                    <Button type="primary" size="large">
-                        添加站点
-                    </Button>
-                </Card>
+                <Button
+                    type="primary"
+                    size="large"
+                    style={{ marginBottom: 20 }}
+                >
+                    添加站点
+                </Button>
                 {/* 站点元素 */}
                 <Item />
                 <Item />

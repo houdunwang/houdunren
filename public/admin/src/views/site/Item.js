@@ -6,10 +6,16 @@ const { Group: ButtonGroup } = Button;
 export default class Item extends Component {
     render() {
         return (
-            <div style={{ background: "#fff", padding: "10px 30px" }}>
+            <div style={{ background: "#fff", marginBottom: 15 }}>
                 <Card
                     title="套餐:"
-                    extra={<a href="/">管理站点</a>}
+                    extra={
+                        <a href="/">
+                            <Button type="dashed" icon="windows">
+                                管理站点
+                            </Button>
+                        </a>
+                    }
                     hoverable={true}
                     type="inner"
                 >

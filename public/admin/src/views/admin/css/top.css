@@ -6,15 +6,9 @@
   justify-content: center;
 }
 .admin-top .container {
-  width: 100%;
+  margin: 0 30px;
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
-}
-@media screen and (min-width: 1200px) {
-  .admin-top .container {
-    width: 1200px;
-  }
 }
 .admin-top .container .links a {
   margin-right: 30px;
