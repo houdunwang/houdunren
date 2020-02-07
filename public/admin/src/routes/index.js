@@ -1,55 +1,36 @@
 import React from "react";
-import { Setting, NotFound, Site, Login, Register } from "../views";
-//路由配置
-export default [
-    {
-        pathname: "/site",
-        component: Site,
-        exact: true,
-        render: props => {
-            return Login;
-        }
-    },
-    {
-        pathname: "/setting",
-        component: Setting,
-        exact: true,
-        render: props => {
-            return Setting;
-        }
-    },
-    {
-        pathname: "/404",
-        render: props => {
-            return NotFound;
-        }
-    },
-    {
-        pathname: "/login",
-        render: props => {
-            return (
-                <Login
-                    title="用户登录"
-                    action={{
-                        url: "/register",
-                        title: "会员注册"
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect
+} from "react-router-dom";
+import routerConfig from "./config";
+import App from "../App";
+export default () => {
+    return (
+        <Router>
+            <Switch>
+                <Route
+                    path="/"
+                    exact
+                    render={props => {
+                        return <App {...props} />;
                     }}
                 />
-            );
-        }
-    },
-    {
-        pathname: "/register",
-        render: props => {
-            return (
-                <Register
-                    title="用户注册"
-                    action={{
-                        url: "/login",
-                        title: "会员登录"
-                    }}
-                />
-            );
-        }
-    }
-];
+                {routerConfig.map(config => {
+                    console.log(config);
+                    return (
+                        <Route
+                            key={config.pathname}
+                            component={config.component}
+                            path={config.pathname}
+                            render={config.render}
+                        />
+                    );
+                })}
+                <Redirect to="/404" />
+            </Switch>
+        </Router>
+    );
+};
