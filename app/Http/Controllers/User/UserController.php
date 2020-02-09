@@ -22,18 +22,10 @@ class UserController extends Controller
     {
         $res = $client->request('post', config('app.url') . '/oauth/token', []);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
+    public function info()
     {
-        //
+        return auth()->user();
     }
-
     /**
      * Show the form for editing the specified resource.
      *

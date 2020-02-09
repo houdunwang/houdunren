@@ -16,7 +16,7 @@ abstract class ApiController extends Controller
     protected function success(string $message,  $data = [], int $code = 200)
     {
         return response()->json(array_filter([
-            'success' => true,
+            'status' => true,
             'message' => $message,
             'data' => $data
         ]), $code);
@@ -32,7 +32,7 @@ abstract class ApiController extends Controller
     protected function error(string $message, array $data = [], int $code = 500)
     {
         return response()->json(array_filter([
-            'success' => false,
+            'status' => false,
             'message' => $message,
             'data' => $data
         ]), $code);

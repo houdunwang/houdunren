@@ -1,7 +1,11 @@
 <?php
-
 Route::post('register', 'User\PassportController@register');
 Route::post('login', 'User\PassportController@login');
+
+Route::group(['middleware' => 'auth:api', 'namespace' => 'User', 'prefix' => 'user'], function () {
+    Route::resource('user', 'UserController')->except(['edit', 'create']);
+    Route::get('info', 'UserController@info');
+});
 
 Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'site'], function () {
     Route::resource('site', 'SiteController')->except(['edit', 'create']);

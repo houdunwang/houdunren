@@ -2,7 +2,6 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\ResponseHeader;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -39,7 +38,6 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            ResponseHeader::class,
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],

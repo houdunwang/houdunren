@@ -1,9 +1,18 @@
 <?php
 
 use Illuminate\Foundation\Inspiring;
-//Artisan::command('hd:module-create {name}', function () {
-//    $arguments = $this->arguments();
-//    Artisan::call('module:make '.$arguments['name']);
-//    $this->info('模块创建成功');
-//})->describe('创建模块');
 
+/*
+|--------------------------------------------------------------------------
+| Console Routes
+|--------------------------------------------------------------------------
+|
+| This file is where you may define all of your Closure based console
+| commands. Each Closure is bound to a command instance allowing a
+| simple approach to interacting with each command's IO methods.
+|
+*/
+
+Artisan::command('inspire', function () {
+    $this->comment(Inspiring::quote());
+})->describe('Display an inspiring quote');
