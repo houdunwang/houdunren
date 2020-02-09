@@ -1,8 +1,8 @@
-body {
-  background-image: url(/images/bg.jpg?6106e9af19cc086b8cd654f3bb5b6bf5);
+a {
+  text-decoration: none !important;
 }
 
-a {
-  text-decoration: none;
+button {
+  outline: none !important;
 }
 

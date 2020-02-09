@@ -1,15 +1,9 @@
 //用户
-import Login from "../components/user/Login.vue";
-import Register from "../components/user/Register.vue";
+import Edit from "../components/user/Edit.vue";
 export default [
     {
-        path: "/login",
-        name: "login",
-        component: Login
-    },
-    {
-        path: "/register",
-        name: "register",
-        component: Register
+        path: "user/edit",
+        name: "user/edit",
+        component: Edit
     }
 ];

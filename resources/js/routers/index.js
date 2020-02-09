@@ -1,13 +1,21 @@
 import VueRouter from "vue-router";
+import Account from "./account";
 import user from "./user";
 import NotFound from "../components/common/NotFound.vue";
-import Site from "../components/site/index.vue";
+// import Site from "../components/site/index.vue";
+import Admin from "../components/Admin.vue";
+import Site from "./site";
+
 const routes = [
-    ...user,
+    ...Account,
     {
         path: "/",
-        name: "home",
-        component: Site
+        redirect: "/admin"
+    },
+    {
+        path: "/admin",
+        component: Admin,
+        children: [...Site]
     },
     {
         path: "*",
@@ -16,7 +24,7 @@ const routes = [
 ];
 const router = new VueRouter({
     routes,
-    mode: "history"
+    mode: "hash"
 });
 
 export default router;

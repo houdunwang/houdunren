@@ -1,19 +1,21 @@
 <template>
-    <div class="row">
-        <div class="col-6 logo"></div>
-        <div class="col-6 text-right menu">
-            <a href="" class="tile d-block">
-                <i class="fas fa-sign-out-alt fa-2x d-block"></i>
-                <span class="block">
-                    退出
-                </span>
-            </a>
-            <a href="" class="tile">
-                <i class="fa fa-sitemap fa-2x d-block"></i>系统设置
-            </a>
-            <a href="" class="tile">
-                <i class="fa fa-sitemap fa-2x d-block"></i>网站管理
-            </a>
+    <div class="d-none d-sm-block">
+        <div class="row">
+            <div class="col-6 logo"></div>
+            <div class="col-6 text-right menu">
+                <a href="" class="tile d-block">
+                    <i class="fas fa-sign-out-alt fa-2x d-block"></i>
+                    <span class="block">
+                        退出
+                    </span>
+                </a>
+                <a href="" class="tile">
+                    <i class="fa fa-sitemap fa-2x d-block"></i>系统设置
+                </a>
+                <a href="" class="tile">
+                    <i class="fa fa-sitemap fa-2x d-block"></i>网站管理
+                </a>
+            </div>
         </div>
     </div>
 </template>

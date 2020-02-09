@@ -2,9 +2,9 @@
 // @import "variables";
 // Bootstrap
 // @import "~bootstrap/scss/bootstrap";
-body {
-    background-image: url("../images/bg.jpg");
-}
 a {
-    text-decoration: none;
+    text-decoration: none !important;
+}
+button {
+    outline: none !important;
 }

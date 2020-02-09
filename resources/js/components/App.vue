@@ -1,26 +1,12 @@
 <template>
-    <div class="hdcms">
-        <navigate />
-        <quick-menu class="m-3 mt-5" />
-        <div class="card m-2 mt-5 ">
-            <div class="card-body">
-                <router-view></router-view>
-            </div>
-        </div>
-        <copyright />
-    </div>
+    <transition name="fade">
+        <router-view></router-view>
+    </transition>
 </template>
 
 <script>
-import Navigate from "./common/Navigate";
-import Copyright from "./common/Copyright";
-import QuickMenu from "./common/QuickMenu";
 export default {
-    components: {
-        Navigate,
-        Copyright,
-        QuickMenu
-    },
+    components: {},
     mounted() {
         console.log("Component mounted.");
     }
