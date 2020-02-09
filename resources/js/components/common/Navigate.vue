@@ -26,7 +26,7 @@
                             v-for="(menu, index) in menus"
                         >
                             <a class="nav-link" href="#">
-                                <i :class="'fas ' + menu.icon"></i>
+                                <i :class="'fa ' + menu.icon"></i>
                                 {{ menu.title }}
                             </a>
                         </li>
@@ -43,7 +43,7 @@
                                     aria-haspopup="true"
                                     aria-expanded="false"
                                 >
-                                    <i class="fas fa-user"></i>
+                                    <i class="fa fa-user"></i>
                                     向军大叔
                                 </a>
                                 <div
@@ -71,11 +71,11 @@ export default {
     data() {
         return {
             menus: [
-                { title: "模块管理", icon: "fa-compact-disc" },
+                { title: "模块管理", icon: "fa-cubes" },
                 { title: "用户管理", icon: "fa-user" },
-                { title: "系统设置", icon: "fa-cog" },
-                { title: "更新缓存", icon: "fa-check-square" },
-                { title: "在线文档", icon: "fa-file-code" }
+                { title: "系统设置", icon: "fa-support" },
+                { title: "更新缓存", icon: "fa-bitbucket" },
+                { title: "在线文档", icon: "fa-file-code-o" }
             ]
         };
     },

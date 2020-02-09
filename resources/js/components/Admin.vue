@@ -23,7 +23,7 @@ export default {
         QuickMenu
     },
     mounted() {
-        console.log("Component mounted.");
+        console.log("Component mounted. admin.vue");
     }
 };
 </script>
