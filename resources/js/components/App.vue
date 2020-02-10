@@ -5,10 +5,18 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
     components: {},
     mounted() {
-        console.log("Component mounted.App.vue");
+        // this.get()
+        //     .then(user => {
+        //     })
+        //     .catch(_ => {
+        //     });
+    },
+    methods: {
+        ...mapActions("user", ["get"])
     }
 };
 </script>

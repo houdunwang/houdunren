@@ -1,4 +1,7 @@
 <?php
+
+use Laravel\Passport\Passport;
+
 Route::get('/admin{all}', function () {
     return view('home');
 })->where(['all' => '.*']);

@@ -72,10 +72,10 @@ dd {
         border-radius: 5px;
         display: block;
         width: 8em;
-        // opacity: 0.9;
         text-align: center;
         background: #eee;
-        color: #333;
+        color: #000;
+        border: solid 1px #ddd;
         i {
             font-size: 2em;
             display: block;
@@ -83,6 +83,7 @@ dd {
         }
         &:hover {
             opacity: 0.9;
+            box-shadow: 0 0 2px rgba($color: #b1adad, $alpha: 0.5);
         }
     }
 }

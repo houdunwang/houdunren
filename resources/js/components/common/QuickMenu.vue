@@ -3,15 +3,15 @@
         <div class="row">
             <div class="col-6 logo"></div>
             <div class="col-6 text-right menu">
+                <router-link to="/admin/site">
+                    <i class="fa fa-sitemap fa-2x d-block"></i>网站管理
+                </router-link>
+                <router-link to="/admin/setting">
+                    <i class="fa fa-support fa-2x d-block"></i>系统设置
+                </router-link>
                 <a href="" class="tile">
                     <i class="fa fa-sign-out fa-2x d-block"></i>
                     退出
-                </a>
-                <a href="" class="tile">
-                    <i class="fa fa-sitemap fa-2x d-block"></i>系统设置
-                </a>
-                <a href="" class="tile">
-                    <i class="fa fa-sitemap fa-2x d-block"></i>网站管理
                 </a>
             </div>
         </div>
@@ -31,11 +31,14 @@ export default {};
         background-repeat: no-repeat;
     }
     .menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
         a {
             margin-right: 10px;
             padding: 0.5em 1em 0.5em 1em;
             display: block;
-            float: right;
+            // float: right;
             width: 8em;
             text-align: center;
             text-decoration: none;
