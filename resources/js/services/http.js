@@ -1,5 +1,5 @@
 import axios from "axios";
-let token = window.localStorage.getItem("access_token") || "";
+let token = window.localStorage.getItem("token") || "";
 const http = axios.create({
     baseURL: "/api",
     timeout: 5000,

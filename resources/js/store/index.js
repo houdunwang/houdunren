@@ -6,11 +6,6 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     modules: {
         user
-    },
-    getters: {
-        show() {
-            return 3339999;
-        }
     }
 });
 

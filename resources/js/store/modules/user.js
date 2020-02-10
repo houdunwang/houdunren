@@ -12,21 +12,19 @@ export default {
     },
     actions: {
         login({ state, commit, rootState }, data) {
-            return http
-                .post("/login", data)
-                .then(response => {
-                    window.localStorage.setItem(
-                        "token",
-                        response.data.access_token
-                    );
-                    commit("update", response.data.user);
-                    return response;
-                })
-                .catch(error => {
-                    return Promise.reject(error);
-                });
+            return http.post("/login", data).then(response => {
+                window.localStorage.setItem(
+                    "token",
+                    response.data.access_token
+                );
+                commit("update", response.data.user);
+                return response;
+            });
         },
         get({ state, commit, rootState }) {
+            let user = state.user;
+            // return user
+            //     ? user:
             return http
                 .get("/user/info")
                 .then(response => {

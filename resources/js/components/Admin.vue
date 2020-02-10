@@ -16,28 +16,15 @@
 import Navigate from "./common/Navigate";
 import Copyright from "./common/Copyright";
 import QuickMenu from "./common/QuickMenu";
-import { mapActions, mapGetters, mapState, mapMutations } from "vuex";
 export default {
     components: {
         Navigate,
         Copyright,
         QuickMenu
     },
-    methods: {
-        ...mapActions("user", ["login"]),
-        ...mapMutations("user", ["update"])
-    },
-    computed: {
-        ...mapState("user", ["user"])
-    },
-    mounted() {
-        this.login({
-            username: "2300071698@qq.com",
-            password: "admin888"
-        }).then(() => {
-            console.log(this.isLogin);
-        });
-    }
+    methods: {},
+    computed: {},
+    mounted() {}
 };
 </script>
 <style lang="scss">
