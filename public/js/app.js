@@ -3942,6 +3942,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3964,7 +3981,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }]
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])("user", ["user"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])("user", ["data"])),
   mounted: function mounted() {},
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("user", ["logout"]))
 });
@@ -4122,6 +4139,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4146,7 +4181,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     getGroups: "get"
   }), {
     logoUpload: function logoUpload(res, file) {
-      this.data.base.logo.value = URL.createObjectURL(file.raw);
+      // this.data.base.logo.value = URL.createObjectURL(file.raw);
+      // console.log(res, file);
+      this.data.base.logo.value = res;
     }
   }),
   mounted: function mounted() {
@@ -10811,7 +10848,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.avatar-uploader .el-upload {\n  background: #f3f3f3 !important;\n  border: 1px dashed #d9d9d9;\n  border-radius: 6px;\n  cursor: pointer;\n  position: relative;\n  overflow: hidden;\n}\n.avatar-uploader .el-upload:hover {\n  border-color: #409eff;\n}\n.avatar-uploader-icon {\n  font-size: 28px;\n  color: #8c939d;\n  width: 178px;\n  height: 178px;\n  line-height: 178px;\n  text-align: center;\n}\n.avatar {\n  display: block;\n}\n", ""]);
+exports.push([module.i, "\n.avatar-uploader .el-upload {\n    background: #f3f3f3 !important;\n    border: 1px dashed #d9d9d9;\n    border-radius: 6px;\n    cursor: pointer;\n    position: relative;\n    overflow: hidden;\n}\n.avatar-uploader .el-upload:hover {\n    border-color: #409eff;\n}\n.avatar-uploader-icon {\n    font-size: 28px;\n    color: #8c939d;\n    width: 178px;\n    height: 178px;\n    line-height: 178px;\n    text-align: center;\n}\n.avatar {\n    display: block;\n}\n", ""]);
 
 // exports
 
@@ -104896,9 +104933,9 @@ var render = function() {
                         [
                           _c("i", { class: "fa " + menu.icon }),
                           _vm._v(
-                            "\n              " +
+                            "\n                            " +
                               _vm._s(menu.title) +
-                              "\n            "
+                              "\n                        "
                           )
                         ]
                       )
@@ -104927,9 +104964,9 @@ var render = function() {
                       [
                         _c("i", { staticClass: "fa fa-user" }),
                         _vm._v(
-                          "\n                " +
-                            _vm._s(this.user.name) +
-                            "\n              "
+                          "\n                                " +
+                            _vm._s(_vm.data.name) +
+                            "\n                            "
                         )
                       ]
                     ),
@@ -105242,7 +105279,9 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "el-upload__tip" }, [
-                            _vm._v("开启支付宝、阿里云表单的明文显示")
+                            _vm._v(
+                              "\n                            开启支付宝、阿里云表单的明文显示\n                        "
+                            )
                           ])
                         ],
                         1
@@ -123343,6 +123382,25 @@ Object(vee_validate__WEBPACK_IMPORTED_MODULE_0__["localize"])("zh", vee_validate
 
 /***/ }),
 
+/***/ "./resources/js/store/group/data.js":
+/*!******************************************!*\
+  !*** ./resources/js/store/group/data.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ([{
+  id: 1,
+  name: "JS"
+}, {
+  id: 2,
+  name: "PHP"
+}]);
+
+/***/ }),
+
 /***/ "./resources/js/store/group/index.js":
 /*!*******************************************!*\
   !*** ./resources/js/store/group/index.js ***!
@@ -123355,6 +123413,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _services_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/http */ "./resources/js/services/http.js");
+/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./data */ "./resources/js/store/group/data.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -123362,19 +123421,23 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
-    data: []
+    isLoad: false,
+    data: _data__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   mutations: {
     update: function update(state, data) {
+      state.isLoad = true;
       state.data = data;
     }
   },
   actions: {
     get: function get(_ref) {
-      var commit = _ref.commit;
+      var state = _ref.state,
+          commit = _ref.commit;
       return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -123383,15 +123446,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return _services_http__WEBPACK_IMPORTED_MODULE_1__["default"].get("/system/group");
+                if (!(state.isLoad === true)) {
+                  _context.next = 2;
+                  break;
+                }
+
+                return _context.abrupt("return", state);
 
               case 2:
+                _context.next = 4;
+                return _services_http__WEBPACK_IMPORTED_MODULE_1__["default"].get("/system/group");
+
+              case 4:
                 response = _context.sent;
                 commit("update", response.data.data);
                 return _context.abrupt("return", response);
 
-              case 5:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -123511,16 +123582,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
+    isLoad: false,
     data: _data__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   mutations: {
     update: function update(state, data) {
+      state.isLoad = true;
       state.data = data;
     }
   },
   actions: {
     get: function get(_ref) {
-      var commit = _ref.commit;
+      var state = _ref.state,
+          commit = _ref.commit;
       return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -123529,15 +123603,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return _services_http__WEBPACK_IMPORTED_MODULE_1__["default"].get("/system/config");
+                if (!(state.isLoad === true)) {
+                  _context.next = 2;
+                  break;
+                }
+
+                return _context.abrupt("return", state);
 
               case 2:
+                _context.next = 4;
+                return _services_http__WEBPACK_IMPORTED_MODULE_1__["default"].get("/system/config");
+
+              case 4:
                 response = _context.sent;
                 commit("update", response.data.data);
                 return _context.abrupt("return", response);
 
-              case 5:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -123621,10 +123703,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
+    isLoad: true,
     data: _data__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   mutations: {
     update: function update(state, data) {
+      state.isLoad = true;
       state.data = data;
     }
   },
@@ -123656,7 +123740,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    get: function get() {
+    get: function get(_ref2) {
+      var state = _ref2.state,
+          commit = _ref2.commit;
       return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
@@ -123665,15 +123751,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
-                return _services_http__WEBPACK_IMPORTED_MODULE_1__["default"].get("/user/info");
+                if (!(state.isLoad === true)) {
+                  _context2.next = 2;
+                  break;
+                }
+
+                return _context2.abrupt("return");
 
               case 2:
+                _context2.next = 4;
+                return _services_http__WEBPACK_IMPORTED_MODULE_1__["default"].get("/user/info");
+
+              case 4:
                 response = _context2.sent;
                 commit("update", response.data.data);
                 return _context2.abrupt("return", response);
 
-              case 5:
+              case 7:
               case "end":
                 return _context2.stop();
             }

@@ -4,9 +4,10 @@ import router from "../../routers/index";
 import data from "./data";
 export default {
     namespaced: true,
-    state: { data },
+    state: { isLoad: true, data },
     mutations: {
         update(state, data) {
+            state.isLoad = true;
             state.data = data;
         }
     },
@@ -17,7 +18,9 @@ export default {
             commit("update", response.data.user);
             return response;
         },
-        async get() {
+        async get({ state, commit }) {
+            if (state.isLoad === true) return;
+
             let response = await http.get("/user/info");
             commit("update", response.data.data);
             return response;

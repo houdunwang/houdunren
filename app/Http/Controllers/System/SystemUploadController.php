@@ -18,6 +18,6 @@ class SystemUploadController extends ApiController
         $path = $upload->local(current($request->file()));
         $systemUpload['path'] = $path;
         $systemUpload->save();
-        return $systemUpload;
+        return '/' . $path;
     }
 }

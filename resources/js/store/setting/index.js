@@ -3,14 +3,17 @@ import data from "./data";
 import { Message } from "element-ui";
 export default {
     namespaced: true,
-    state: { data },
+    state: { isLoad: false, data },
     mutations: {
         update(state, data) {
+            state.isLoad = true;
             state.data = data;
         }
     },
     actions: {
-        async get({ commit }) {
+        async get({ state, commit }) {
+            if (state.isLoad === true) return state;
+
             let response = await http.get("/system/config");
             commit("update", response.data.data);
             return response;
