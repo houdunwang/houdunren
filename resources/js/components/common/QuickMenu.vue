@@ -9,7 +9,7 @@
         <router-link to="/admin/setting">
           <i class="fa fa-support fa-2x d-block"></i>系统设置
         </router-link>
-        <a href class="tile">
+        <a href class="tile" @click.prevent="logout">
           <i class="fa fa-sign-out fa-2x d-block"></i>
           退出
         </a>
@@ -21,10 +21,9 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-  //   mounted() {},
-  //   computed: {
-  //     ...mapActions("user", "get")
-  //   }
+  methods: {
+    ...mapActions("user", ["logout"])
+  }
 };
 </script>
 

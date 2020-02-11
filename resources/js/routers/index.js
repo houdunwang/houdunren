@@ -6,17 +6,14 @@ import user from "./user";
 import setting from "./setting";
 import NotFound from "../components/common/NotFound.vue";
 import Admin from "../components/Admin.vue";
-import store from "../store/index";
-import token from "../services/token";
+import AccessToken from "../services/AccessToken";
 const routes = [
     ...Account,
     {
         path: "/admin",
-        name: "admin",
         component: Admin,
         children: [...site, ...user, ...setting]
     },
-
     {
         path: "*",
         component: NotFound
@@ -33,23 +30,15 @@ Vue.use(VueRouter);
 
 //使用next Promise跳转
 router.beforeEach((to, from, next) => {
-    store
-        .dispatch("user/get")
-        .then(() => {
-            if (["/login", "/register"].includes(to.path)) {
-                next("/admin");
-            } else {
-                next();
-            }
-        })
-        .catch(_ => {
-            token.del();
-            if (["/login", "/register"].includes(to.path)) {
-                next();
-            } else {
-                next("/login");
-            }
-        });
+    let accessToken = AccessToken.get();
+    let LoginRouter = ["/login", "/register"].includes(to.path);
+    if (LoginRouter && accessToken) {
+        next("/admin");
+    } else if (!LoginRouter && !accessToken) {
+        next("/login");
+    } else {
+        next();
+    }
 });
 
 export default router;

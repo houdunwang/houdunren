@@ -19,8 +19,11 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => '
     Route::resource('user', 'UserController')->except(['edit', 'create']);
     Route::post('user/lock', 'UserController@lock');
     Route::get('cache', 'CacheController@update');
+    Route::resource('upload', 'SystemUploadController')->except(['edit', 'create', 'show', 'index']);
 });
-
+Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
+    Route::resource('config', 'SystemConfigController')->except(['edit', 'create']);
+});
 Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
     Route::resource('group', 'GroupController')->except(['edit', 'create']);
     Route::resource('module', 'ModuleController')->except(['edit', 'create']);

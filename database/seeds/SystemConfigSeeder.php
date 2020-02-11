@@ -12,7 +12,7 @@ class SystemConfigSeeder extends Seeder
     public function run()
     {
         $model = \App\Models\SystemConfig::create([
-            'config'=>config('hd.system')
+            'config' => config('hd.system')
         ]);
     }
 }

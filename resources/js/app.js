@@ -8,8 +8,14 @@ require("./services/validation");
 require("./services/element");
 
 Vue.component("app", App);
-const app = new Vue({
-    el: "#app",
+new Vue({
+    router,
     store,
-    router
-});
+    render: h => h(App)
+}).$mount("#app");
+
+// const app = new Vue({
+//     el: "#app",
+//     router,
+//     store
+// });

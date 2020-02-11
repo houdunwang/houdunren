@@ -80,10 +80,10 @@ export default {
         password: this.user.password
       })
         .then(user => {
-          location.reload(true);
+          this.$router.push("/admin");
         })
         .catch(error => {
-          this.$message.error("帐号或密码错误");
+          if (status == 401) this.$message.error("帐号或密码错误");
         })
         .finally(_ => {
           this.isSubmit = false;

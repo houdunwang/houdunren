@@ -42,7 +42,7 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">修改资料</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">退出登录</a>
+                  <a class="dropdown-item" href="#" @click.prevent="logout">退出登录</a>
                 </div>
               </li>
             </ul>
@@ -53,7 +53,7 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -69,11 +69,9 @@ export default {
   computed: {
     ...mapState("user", ["user"])
   },
-  mounted() {
-    console.log(this.user.user);
-  },
+  mounted() {},
   methods: {
-    handleSelect(key, keyPath) {}
+    ...mapActions("user", ["logout"])
   }
 };
 </script>
