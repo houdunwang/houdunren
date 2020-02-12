@@ -124,7 +124,6 @@ export default {
         },
         async update() {
             await this.$store.dispatch("setting/update");
-            this.$message.success("修改成功");
         }
     }
 };

@@ -8,7 +8,7 @@
             <el-breadcrumb-item>设置站点信息</el-breadcrumb-item>
         </el-breadcrumb>
 
-        <el-form ref="form" label-width="100px" :model="field" label-position="right">
+        <el-form ref="form" label-width="100px" :rules="rules" :model="field" label-position="right">
             <el-card class="box-card mt-3">
                 <div slot="header" class="clearfix">
                     <span>设置站点信息</span>
@@ -16,12 +16,12 @@
                 <div class="text item">
                     <el-row :gutter="180">
                         <el-col :xs="24" :md="16">
-                            <el-form-item label="站点名称">
+                            <el-form-item label="站点名称" prop="name">
                                 <el-input
                                     v-model="field.name"
                                 ></el-input>
                             </el-form-item>
-                            <el-form-item label="站点介绍">
+                            <el-form-item label="站点介绍" prop="description">
                                 <el-input
                                     type="textarea"
                                     :rows="4"
@@ -64,7 +64,7 @@
                     <i class="el-icon-arrow-up"></i>
                 </el-divider>
                 <el-form-item>
-                    <el-button type="primary" @click="add">保存提交</el-button>
+                    <el-button type="primary" @click="submit('form')">保存提交</el-button>
                 </el-form-item>
             </el-card>
         </el-form>
@@ -90,6 +90,16 @@
                     tel: '',
                     email: '',
                     counter: ''
+                },
+                rules: {
+                    name: [
+                        {required: true, message: '站点名称不能为空', trigger: 'blur'},
+                        {min: 3, max: 25, message: '长度在 3 到 5 个字符', trigger: 'blur'}
+                    ],
+                    description: [
+                        {required: true, message: '请输入网站描述', trigger: 'change'},
+                        {min: 5, max: 100, message: '长度在 5 到 100 个字符', trigger: 'blur'}
+                    ],
                 }
             };
         },
@@ -107,11 +117,18 @@
             logoUpload(res, file) {
                 // this.setting.base.logo.value = res;
             },
-            async add() {
-                await this.$store.dispatch("site/add", this.field);
-                // this.$message.success("添加成功");
-                this.$router.push('/admin')
-            }
+            submit() {
+                this.$refs['form'].validate(async (valid) => {
+                    if (valid) {
+                        await this.$store.dispatch("site/add", this.field);
+                        this.$router.push('/admin')
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+
         }
     };
 </script>
