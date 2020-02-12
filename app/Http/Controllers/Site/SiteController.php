@@ -26,7 +26,7 @@ class SiteController extends ApiController
     public function index(SiteServer $siteServer): \Illuminate\Http\JsonResponse
     {
         $sites = auth()->user()->manageSites();
-        return $this->success('', SiteResource::collection($sites));
+        return $this->success('站点列表获取成功', SiteResource::collection($sites));
     }
 
     public function store(SiteRequest $request, Site $site)

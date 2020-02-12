@@ -2,7 +2,7 @@ export default {
     namespaced: true,
     state: {
         errors: {
-            name: "error..."
+            name: ""
         }
     },
     mutations: {

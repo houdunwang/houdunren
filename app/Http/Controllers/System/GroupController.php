@@ -22,7 +22,7 @@ class GroupController extends ApiController
 
     public function index()
     {
-        return $this->success('', GroupResource::collection(Group::all()));
+        return $this->success('用户组列表获取成功', GroupResource::collection(Group::all()));
     }
 
     public function store(Request $request)

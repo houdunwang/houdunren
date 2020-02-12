@@ -80,7 +80,7 @@
     export default {
         data() {
             return {
-                field:{
+                field: {
                     activeName: "base",
                     name: "",
                     keyword: "",
@@ -108,12 +108,9 @@
                 // this.setting.base.logo.value = res;
             },
             async add() {
-               try{
-                   await this.$store.dispatch("site/add",this.field);
-                   this.$message.success("添加成功");
-               }catch(error){
-
-               }
+                await this.$store.dispatch("site/add", this.field);
+                // this.$message.success("添加成功");
+                this.$router.push('/admin')
             }
         }
     };

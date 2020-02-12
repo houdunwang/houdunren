@@ -14,7 +14,7 @@ class SystemConfigController extends ApiController
     public function index(SystemConfig $systemConfig)
     {
         $config = $systemConfig->first()->config;
-        return  $this->success('', $config);
+        return  $this->success('系统配置获取成功', $config);
     }
 
     public function store(Request $request)

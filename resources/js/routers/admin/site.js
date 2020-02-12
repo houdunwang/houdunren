@@ -4,7 +4,7 @@ import add from "../../components/site/add.vue";
 export default [
     {
         path: "site",
-        name: "site",
+        name: "site.index",
         component: Site,
         alias: "/admin"
     },{
