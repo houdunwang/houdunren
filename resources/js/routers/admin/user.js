@@ -1,5 +1,5 @@
 //用户
-import Edit from "../components/user/Edit.vue";
+import Edit from "../../components/user/Edit.vue";
 export default [
     {
         path: "user/edit",

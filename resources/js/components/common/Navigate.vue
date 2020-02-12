@@ -44,7 +44,7 @@
                                     aria-expanded="false"
                                 >
                                     <i class="fa fa-user"></i>
-                                    {{ data.name }}
+                                    {{ user.name }}
                                 </a>
                                 <div
                                     class="dropdown-menu dropdown-menu-right"
@@ -71,6 +71,7 @@
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
+import store from "../../store/index";
 export default {
     data() {
         return {
@@ -84,7 +85,7 @@ export default {
         };
     },
     computed: {
-        ...mapState("user", ["data"])
+        ...mapState("user", ["user"])
     },
     mounted() {},
     methods: {

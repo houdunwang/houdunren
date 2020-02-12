@@ -1,5 +1,5 @@
 <template>
-    <el-form ref="form" label-width="100px" :model="data">
+    <el-form ref="form" label-width="100px" :model="setting">
         <el-tabs v-model="activeName">
             <el-tab-pane label="基本设置" name="base">
                 <el-row :gutter="20">
@@ -7,7 +7,7 @@
                         <el-form-item label="后台名称">
                             <el-input
                                 placeholder="用于在浏览器标签中显示的名称"
-                                v-model="data.base.name.value"
+                                v-model="setting.base.name.value"
                             ></el-input>
                         </el-form-item>
                         <el-form-item label="后台标志">
@@ -20,8 +20,8 @@
                                 :headers="headers"
                             >
                                 <img
-                                    v-if="data.base.logo.value"
-                                    :src="data.base.logo.value"
+                                    v-if="setting.base.logo.value"
+                                    :src="setting.base.logo.value"
                                     class="avatar"
                                 />
                                 <i
@@ -35,12 +35,14 @@
                             <el-input
                                 type="textarea"
                                 :rows="4"
-                                v-model="data.base.footer.value"
+                                v-model="setting.base.footer.value"
                                 placeholder="在后面底部显示的内容"
                             ></el-input>
                         </el-form-item>
                         <el-form-item label="明文显示">
-                            <el-radio-group v-model="data.base.plaintext.value">
+                            <el-radio-group
+                                v-model="setting.base.plaintext.value"
+                            >
                                 <el-radio :label="true">开启</el-radio>
                                 <el-radio :label="false">关闭</el-radio>
                             </el-radio-group>
@@ -58,7 +60,7 @@
                         <el-form-item label="体验天数">
                             <el-input
                                 placeholder="可使用后台管理权限的天数"
-                                v-model="data.register.days.value"
+                                v-model="setting.register.days.value"
                             >
                                 <template slot="append">天</template>
                             </el-input>
@@ -66,7 +68,7 @@
 
                         <el-form-item label="默认会员组">
                             <el-select
-                                v-model="data.register.group_id.value"
+                                v-model="setting.register.group_id.value"
                                 placeholder="请选择"
                             >
                                 <el-option
@@ -93,17 +95,29 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import AccessToken from "../../services/AccessToken";
+import store from "../../store/index";
+import { Message } from "element-ui";
 export default {
+    async beforeRouteEnter(to, from, next) {
+        try {
+            await Promise.all([
+                store.dispatch("setting/get"),
+                store.dispatch("group/get")
+            ]);
+            next();
+        } catch (error) {
+            Message.error(error);
+            next({ name: from.name });
+        }
+    },
     data() {
         return {
             activeName: "base"
         };
     },
     computed: {
-        ...mapState("setting", ["data"]),
-        ...mapState("group", {
-            groups: state => state.data
-        }),
+        ...mapState("setting", ["setting"]),
+        ...mapState("group", ["groups"]),
         //文件上传头信息
         headers() {
             return {
@@ -114,14 +128,10 @@ export default {
     methods: {
         ...mapActions("setting", ["update", "update"]),
         ...mapActions("group", { getGroups: "get" }),
+        //上传标志
         logoUpload(res, file) {
-            // this.data.base.logo.value = URL.createObjectURL(file.raw);
-            // console.log(res, file);
-            this.data.base.logo.value = res;
+            this.setting.base.logo.value = res;
         }
-    },
-    mounted() {
-        this.getGroups();
     }
 };
 </script>

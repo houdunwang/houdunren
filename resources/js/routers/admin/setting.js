@@ -1,5 +1,5 @@
-import Setting from "../components/setting/index.vue";
-import System from "../components/setting/System.vue";
+import Setting from "../../components/setting/index.vue";
+import System from "../../components/setting/System.vue";
 export default [
     {
         path: "setting",
@@ -8,7 +8,7 @@ export default [
     },
     {
         path: "setting/system",
-        name: "system",
+        name: "system.system",
         component: System
     }
 ];

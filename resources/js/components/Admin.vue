@@ -17,23 +17,22 @@ import Navigate from "./common/Navigate";
 import Copyright from "./common/Copyright";
 import QuickMenu from "./common/QuickMenu";
 import { mapActions } from "vuex";
+import store from "../store/index";
+import { Message } from "element-ui";
 export default {
+    async beforeRouteEnter(to, from, next) {
+        try {
+            await Promise.all([store.dispatch("user/get")]);
+            next();
+        } catch (error) {
+            Message.error(error);
+        }
+    },
     components: {
         Navigate,
         Copyright,
         QuickMenu
-    },
-    mounted() {
-        this.get();
-        this.getSetting();
-    },
-    methods: {
-        ...mapActions("user", ["get"]),
-        ...mapActions("setting", {
-            getSetting: "get"
-        })
-    },
-    computed: {}
+    }
 };
 </script>
 <style lang="scss">

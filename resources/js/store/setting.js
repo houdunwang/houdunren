@@ -1,18 +1,17 @@
-import http from "../../services/http";
-import data from "./data";
+import http from "../services/http";
 import { Message } from "element-ui";
 export default {
     namespaced: true,
-    state: { isLoad: false, data },
+    state: { setting: null },
+
     mutations: {
         update(state, data) {
-            state.isLoad = true;
-            state.data = data;
+            state.setting = data;
         }
     },
     actions: {
         async get({ state, commit }) {
-            if (state.isLoad === true) return state;
+            if (state.setting) return Promise.resolve(state.setting);
 
             let response = await http.get("/system/config");
             commit("update", response.data.data);
@@ -20,7 +19,7 @@ export default {
         },
         async update({ state, commit }) {
             let response = await http.post("/system/config", {
-                data: state.data
+                data: state.setting
             });
             Message.success(response.data.message);
             commit("update", response.data.data);

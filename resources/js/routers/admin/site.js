@@ -1,4 +1,4 @@
-import Site from "../components/site/index.vue";
+import Site from "../../components/site/index.vue";
 export default [
     {
         path: "site",
