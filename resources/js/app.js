@@ -6,6 +6,9 @@ import router from "./routers/index.js";
 import store from "./store/index";
 require("./services/validation");
 require("./services/element");
+import moment from 'moment'
+moment.locale('zh_CN');
+Vue.prototype.$moment=moment;
 
 Vue.component("app", App);
 new Vue({

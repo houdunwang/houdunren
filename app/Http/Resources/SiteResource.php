@@ -7,12 +7,19 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class SiteResource extends JsonResource
 {
     public $preserveKeys = true;
+
     public function toArray($request)
     {
-//        return [
-//            'name'=>$this->name,
-//            'description'=>$this->description
-//        ];
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'created_at' => $this->created_at,
+            'name' => $this->name,
+            'keyword' => $this->keyword,
+            'description' => $this->description,
+            'logo' => $this->logo,
+            'icp' => $this->icp,
+            'role' => $this->role,
+            'admin' => $this->user()->wherePivot('role', 'admin')->first()
+        ];
     }
 }

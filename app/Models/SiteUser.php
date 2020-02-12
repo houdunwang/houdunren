@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SiteUser extends Model
 {
+    protected $fillable=['user_id','role','site_id'];
+
     public function site()
     {
         return $this->belongsTo(Site::class);

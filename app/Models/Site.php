@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Models\Permission;
 
@@ -12,28 +13,63 @@ use Spatie\Permission\Models\Permission;
  */
 class Site extends Model
 {
-    protected $guarded = [];
-    public function weChat()
+    protected $fillable = ['name', 'description'];
+
+    /**
+     * 公众号关联
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function weChat(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(WeChat::class);
     }
 
+    /**
+     * 站点所有权限
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function permissions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Permission::class);
     }
-
-    public function user()
-    {
+    public function siteUser(){
         return $this->hasMany(SiteUser::class);
+    }
+    /**
+     * 站点用户关联
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(User::class,'site_users')
+            ->withPivot('role')->as('role');
     }
 
     /**
-     * 站点管理员
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * 获取管理员与操作员
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function admin(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function manage(): \Illuminate\Database\Eloquent\Collection
     {
-        return $this->user()->where('role', 'admin');
+        return $this->user()->wherePivotIn('role', ['admin', 'operator'])->get();
+    }
+
+    /**
+     * 是否是操作员或管理员
+     * @param User $user
+     * @return bool
+     */
+    public function isManage(User $user): bool
+    {
+        return $this->manage()->contains($user);
+    }
+
+    /**
+     * 获取站长
+     * @return mixed
+     */
+    public function admin()
+    {
+        return $this->user()->wherePivot('role', 'admin')->first();
     }
 }

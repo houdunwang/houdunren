@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Site;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -22,7 +23,7 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
-   protected $hidden = [
+    protected $hidden = [
         'password', 'remember_token',
     ];
 
@@ -31,7 +32,11 @@ class User extends Authenticatable
         'lock_to_time' => 'datetime'
     ];
 
-    //passport帐号登录
+    /**
+     * passport帐号登录
+     * @param $username
+     * @return mixed
+     */
     public function findForPassport($username)
     {
         $validate = [];
@@ -39,6 +44,27 @@ class User extends Authenticatable
             $this['mobile'] = $username;
 
         return $this->where($validate)->first();
+    }
+
+    /**
+     * 站点关联
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function site(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Site::class, 'site_users')
+            ->withPivot(['role', 'site_id'])->as('role');
+    }
+
+    /**
+     * 获取可管理站点
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function manageSites(): \Illuminate\Database\Eloquent\Collection
+    {
+        if ($this->isSuperAdmin())
+//            return Site::all();
+        return $this->site()->wherePivotIn('role', ['admin', 'operator'])->get();
     }
 
     /**

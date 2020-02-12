@@ -18,9 +18,8 @@ class Access
      */
     public function updateAllSitePermission(): void
     {
-        foreach (Site::all() as $site) {
+        foreach (Site::all() as $site)
             $this->updateSitePermission($site);
-        }
     }
 
     /**
@@ -29,9 +28,9 @@ class Access
      */
     public function updateSitePermission(Site $site): void
     {
-        foreach (\Module::all() as $module) {
+        foreach (\Module::all() as $module)
             $this->addModulePermission($module, $site);
-        }
+
         app()['cache']->forget('spatie.permission.cache');
     }
 
@@ -43,7 +42,7 @@ class Access
     protected function addModulePermission($module, Site $site): void
     {
         $site->permissions()->delete();
-        $permissions = include("{$module->getPath()}/Config/permissions.php");
+        $permissions = include("{$module->getPath()}/config/permissions.php");
         foreach ($permissions as $permission) {
             P::create([
                 'name' => "S{$site['id']}-" . $permission['name'],
@@ -53,6 +52,16 @@ class Access
                 'guard_name' => 'web'
             ]);
         }
+    }
+
+    /**
+     * 超级管理员
+     * @param User $user
+     * @return bool
+     */
+    public function isSuperAdmin(User $user): bool
+    {
+        return $user['id'] === 1;
     }
 
     /**

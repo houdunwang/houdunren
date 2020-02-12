@@ -3,6 +3,8 @@ import AccessToken from "./AccessToken";
 import router from "../routers/index";
 import httpStatus from "../services/httpStatus";
 import Loading from "./Loading";
+import store from "../store";
+
 const http = axios.create({
     baseURL: "/api",
     timeout: 5000
@@ -11,7 +13,7 @@ const http = axios.create({
 
 //请求拦截
 http.interceptors.request.use(
-    function(config) {
+    function (config) {
         Loading.show();
         let token = AccessToken.get();
         if (token) {
@@ -19,7 +21,7 @@ http.interceptors.request.use(
         }
         return config;
     },
-    function(error) {
+    function (error) {
         return Promise.reject(error);
     }
 );
@@ -36,11 +38,17 @@ http.interceptors.response.use(
         let message = httpStatus(error.response.status);
         if (error && error.response) {
             error.response.message = message;
-            if (status === 401) {
-                AccessToken.del();
-                return router.push("/login");
+            switch (status) {
+                case 401:
+                    AccessToken.del();
+                    return router.push("/login");
+                    break;
+                case 422:
+                    store.commit('error/set', error.response.data.errors);
+                    break;
+                default:
+                    router.app.$message.error(message);
             }
-            router.app.$message.error(message);
         }
 
         return Promise.reject(error.response);

@@ -1,11 +1,9 @@
 <template>
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-12 text-center small text-secondary">
-            <div class="text-dark">
-                {{ setting.base.footer.value }}
-            </div>
+            <div class="text-dark" v-html="setting.base.footer.value"></div>
             <div>
-                Powered by hdcms v5.7.0 © 2014-2019 www.hdcms.com
+                Powered by hdcms v6 © 2014-2019 www.hdcms.com
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@ export default {
     },
     actions: {
         async get({ state, commit }) {
-            if (state.group) return Promise.resolve(state.group);
+            if (state.groups) return Promise.resolve(state.groups);
 
             let response = await http.get("/system/group");
             commit("update", response.data.data);

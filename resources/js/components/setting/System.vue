@@ -39,17 +39,6 @@
                                 placeholder="在后面底部显示的内容"
                             ></el-input>
                         </el-form-item>
-                        <el-form-item label="明文显示">
-                            <el-radio-group
-                                v-model="setting.base.plaintext.value"
-                            >
-                                <el-radio :label="true">开启</el-radio>
-                                <el-radio :label="false">关闭</el-radio>
-                            </el-radio-group>
-                            <div class="el-upload__tip">
-                                开启支付宝、阿里云表单的明文显示
-                            </div>
-                        </el-form-item>
                     </el-col>
                 </el-row>
             </el-tab-pane>
@@ -97,6 +86,7 @@ import { mapActions, mapState } from "vuex";
 import AccessToken from "../../services/AccessToken";
 import store from "../../store/index";
 import { Message } from "element-ui";
+
 export default {
     async beforeRouteEnter(to, from, next) {
         try {
@@ -126,11 +116,15 @@ export default {
         }
     },
     methods: {
-        ...mapActions("setting", ["update", "update"]),
+        ...mapActions("setting", ["update"]),
         ...mapActions("group", { getGroups: "get" }),
         //上传标志
         logoUpload(res, file) {
             this.setting.base.logo.value = res;
+        },
+        async update() {
+            await this.$store.dispatch("setting/update");
+            this.$message.success("修改成功");
         }
     }
 };

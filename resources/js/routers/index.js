@@ -4,7 +4,6 @@ import NotFound from "../components/common/NotFound.vue";
 import adminRouter from "./admin/index";
 import accountRouter from "./account/index";
 
-console.log(accountRouter);
 const routes = [
     adminRouter,
     ...accountRouter,

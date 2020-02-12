@@ -6,25 +6,37 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\SiteRequest;
 use App\Http\Resources\SiteResource;
 use App\Models\Site;
+use App\Models\SiteUser;
 use App\Servers\Access;
+use App\Servers\SiteServer;
+use Illuminate\Http\Request;
 
 class SiteController extends ApiController
 {
     public function __construct()
     {
-        $this->authorizeResource(Site::class, 'site');
+//        $this->authorizeResource(Site::class, 'site');
     }
 
-    public function index()
+    /**
+     * 获取站点列表
+     * @param SiteServer $siteServer
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index(SiteServer $siteServer): \Illuminate\Http\JsonResponse
     {
-        return $this->success('', SiteResource::collection(Site::all()));
+        $sites = auth()->user()->manageSites();
+        return $this->success('', SiteResource::collection($sites));
     }
 
     public function store(SiteRequest $request, Site $site)
     {
-        $site->name = $request->name;
-        $site->description = $request->description;
+        $site->name = $request->input('name');
+        $site->description = $request->input('description');
         $site->save();
+
+        $site->user()->attach(auth()->user(),['role'=>'admin']);
+
         $this->flashAccessTable($site);
         return $this->success('站点添加成功');
     }

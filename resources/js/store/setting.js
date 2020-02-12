@@ -1,5 +1,4 @@
 import http from "../services/http";
-import { Message } from "element-ui";
 export default {
     namespaced: true,
     state: { setting: null },
@@ -21,7 +20,6 @@ export default {
             let response = await http.post("/system/config", {
                 data: state.setting
             });
-            Message.success(response.data.message);
             commit("update", response.data.data);
             return response;
         }
