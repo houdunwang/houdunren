@@ -47,7 +47,6 @@ class SiteController extends ApiController
 
     public function update(SiteRequest $request, Site $site)
     {
-        dd($request->all());
         $site->fill($request->all())->save();
         $this->flashAccessTable($site);
         return $this->success('栏目修改成功', $site);
