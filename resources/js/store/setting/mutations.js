@@ -1,7 +1,8 @@
-import {UPDATE} from './mutation-types';
+import {UPDATE_CONFIG} from './mutation-types';
+import config from './data/config'
 
 export default {
-    [UPDATE](state, {data}) {
-        state.data = data;
+    [UPDATE_CONFIG](state, {data}) {
+        state.data = {...config, ...data};
     },
 };

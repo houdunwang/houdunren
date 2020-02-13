@@ -15,7 +15,7 @@ abstract class ApiController extends Controller
      */
     protected function success(string $message,  $data = [], int $code = 200)
     {
-        return response()->json(array_filter([
+        return response()->json(([
             'status' => true,
             'message' => $message,
             'data' => $data

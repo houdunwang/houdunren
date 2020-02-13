@@ -1,19 +1,32 @@
-import {UPDATE} from './mutation-types';
+import {UPDATE_SITE_LIST, UPDATE_CONFIG} from './mutation-types';
 import http from "../../services/http";
-
 
 export async function all({state, commit}, force = false) {
     if (state.data && force === false)
         return Promise.resolve(state.data);
 
     let response = await http.get("/site/site");
-    commit(UPDATE, {data: response.data.data});
+    commit(UPDATE_SITE_LIST, {data: response.data.data});
     return response.data.data;
 }
 
-export async function edit({state, dispatch}, id) {
-    let response = await http.put(`/site/${id}/config`, state.config);
+export async function edit({state, dispatch}, site) {
+    let response = await http.put(`/site/site/${site.id}`, site);
     await dispatch("all", true);
+    return response;
+}
+
+export async function getConfig({state, commit, dispatch}, id) {
+    let response = await http.get(`/site/config/${id}`);
+    await commit(UPDATE_CONFIG, {data: response.data.data});
+    return response;
+}
+
+export async function updateConfig({state, dispatch}, id) {
+    let response = await http.put(`/site/config/${id}`, {
+        config: state.config
+    });
+    await dispatch("getConfig", id);
     return response;
 }
 

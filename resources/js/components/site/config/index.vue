@@ -59,8 +59,13 @@
     import Notification from './Notification'
     import Maintain from './Maintain'
     import {mapActions} from 'vuex'
+    import store from '../../../store/index'
 
     export default {
+        async beforeRouteEnter(to, from, next) {
+            await store.dispatch('site/getConfig', to.params.id);
+            next();
+        },
         data() {
             return {
                 activeName: 'email'
@@ -70,10 +75,10 @@
             Email, AliYun, AliPay, Upload, User, Notification, Maintain
         },
         methods: {
-            ...mapActions('site', ['edit']),
-           async submit() {
-               await  this.edit(this.$route.params.id);
-               this.$message.success('更新成功');
+            ...mapActions('site', ['updateConfig', 'getConfig']),
+            async submit() {
+                await this.updateConfig(this.$route.params.id);
+                this.$message.success('更新成功');
             }
         }
     }

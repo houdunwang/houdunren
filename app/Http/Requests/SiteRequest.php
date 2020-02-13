@@ -38,6 +38,7 @@ class SiteRequest extends FormRequest
             'name.min' => '站点名称不能少于5个字',
             'name.unique' => '站点名称已经存在',
             'email.email' => '邮箱格式错误',
+            'domain.required' => '域名不能为空',
             'domain.url' => '域名格式错误',
         ];
     }

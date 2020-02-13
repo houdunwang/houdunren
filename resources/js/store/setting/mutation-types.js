@@ -1,1 +1,1 @@
-export const UPDATE = 'setting/update-config';
+export const UPDATE_CONFIG = 'setting/update-config';

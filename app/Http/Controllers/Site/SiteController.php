@@ -6,10 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\SiteRequest;
 use App\Http\Resources\SiteResource;
 use App\Models\Site;
-use App\Models\SiteUser;
 use App\Servers\Access;
-use App\Servers\SiteServer;
-use App\User;
 use Illuminate\Http\Request;
 
 class SiteController extends ApiController
@@ -48,7 +45,7 @@ class SiteController extends ApiController
         $site->fill($request->all())->save();
         $this->flashAccessTable($site);
 
-        return $this->success('栏目修改成功', $site);
+        return $this->success('站点修改成功', $site);
     }
 
     public function destroy(Site $site): \Illuminate\Http\JsonResponse

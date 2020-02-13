@@ -21,6 +21,7 @@ class SiteResource extends JsonResource
             'tel' => $this->tel,
             'email' => $this->email,
             'counter' => $this->counter,
+            'domain' => $this->domain,
             'role' => $this->role,
             'admin' => $this->user()->wherePivot('role', 'admin')->first()
         ];

@@ -9,6 +9,8 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'User', 'prefix' => 'us
 
 Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'site'], function () {
     Route::resource('site', 'SiteController')->except(['edit', 'create']);
+    Route::put('config/{site}','ConfigController@update');
+    Route::get('config/{site}','ConfigController@show');
     Route::resource('{site}/weChat', 'WeChatController')->except(['edit', 'create']);
     Route::get('{site}/access/{user}', 'AccessController@index');
     Route::put('{site}/access/{user}', 'AccessController@update');
