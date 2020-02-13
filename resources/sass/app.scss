@@ -1,10 +1,44 @@
-@import "member";
-@import "module";
-@import "common";
-@import "login";
-@import "admin";
-@import "user";
-@import "site";
-@import "setting";
-@import "install";
-@import "markdown";
+// Variables
+// @import "variables";
+// Bootstrap
+// @import "~bootstrap/scss/bootstrap";
+a {
+    text-decoration: none !important;
+}
+button {
+    outline: none !important;
+}
+:root {
+    font-size: 15px;
+}
+
+.avatar-uploader {
+    .el-upload {
+        background: #f3f3f3 !important;
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+            border-color: #409eff;
+        }
+    }
+    .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 178px;
+        height: 178px;
+        line-height: 178px;
+        text-align: center;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+// .avatar {
+//     display: block;
+// }

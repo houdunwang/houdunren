@@ -1,20 +1,22 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军大叔 <www.aoxiangjun.com>
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
+
 use Illuminate\Database\Seeder;
+use App\Models\Site;
+use App\User;
 
 class SiteSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
     public function run()
     {
-        \App\Models\Site::create([
-            'name' => '后盾人',
-            'description' => '这是用来演示的测试站点，随时可以删除',
-        ]);
+        $site = new Site;
+        $site->name = '后盾人';
+        $site->description = '后盾人专注互联网开发';
+        $site->save();
+        $site->user()->attach(User::first(), ['role' => 'admin']);
     }
 }

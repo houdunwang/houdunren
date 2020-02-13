@@ -1,8 +1,11 @@
 <?php
 
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+
+use App\Site;
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\Site::class, function (Faker $faker) {
+$factory->define(Site::class, function (Faker $faker) {
     return [
         //
     ];

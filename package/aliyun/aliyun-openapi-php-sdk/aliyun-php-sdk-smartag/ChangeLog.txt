@@ -1,4 +1,0 @@
-2018-08-13 Version: 1.2.0
-1, Add cross domain support.
-2, Add parameter SerialNumber to interface RebootSmartAccessGateway.
-

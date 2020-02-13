@@ -37,19 +37,12 @@ return [
     | may even configure multiple disks of the same driver. Defaults have
     | been setup for each driver as an example of the required options.
     |
-    | Supported Drivers: "local", "ftp", "sftp", "s3", "rackspace"
+    | Supported Drivers: "local", "ftp", "sftp", "s3"
     |
     */
 
     'disks' => [
-        'base' => [
-            'driver' => 'local',
-            'root' => base_path('.'),
-        ],
-        'module' => [
-            'driver' => 'local',
-            'root' => base_path('modules'),
-        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

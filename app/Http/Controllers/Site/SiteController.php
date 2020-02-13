@@ -1,47 +1,70 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军大叔 <www.aoxiangjun.com>
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
 
 namespace App\Http\Controllers\Site;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
+use App\Http\Requests\SiteRequest;
+use App\Http\Resources\SiteResource;
 use App\Models\Site;
-use App\Repositories\ModuleRepository;
+use App\Models\SiteUser;
+use App\Servers\Access;
+use App\Servers\SiteServer;
+use App\User;
+use Illuminate\Http\Request;
 
-/**
- * 站点管理
- * Class SiteController
- * @package App\Http\Controllers
- */
-class SiteController extends Controller
+class SiteController extends ApiController
 {
-    /**
-     * 站点管理主页
-     * @param Site $site
-     * @param ModuleRepository $moduleRepository
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
-    public function show(Site $site, ModuleRepository $moduleRepository)
+    public function __construct()
     {
-        $this->authorize('view', $site);
-        $modules = $moduleRepository->getSiteModulesByUser($site, auth()->user());
-        if (!count($modules)) {
-            return redirect(route('system.site.index'))->with('error', '站点没有安装任何模块');
-        }
-        return view('site.site.show', compact('site', 'modules'));
+        $this->authorizeResource(Site::class, 'site');
     }
 
     /**
-     * 站点维护
+     * 获取站点列表
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function close()
+    public function index(): \Illuminate\Http\JsonResponse
     {
-        return view('site.site.close');
+        $sites = auth()->user()->manageSites();
+        return $this->success('站点列表获取成功', SiteResource::collection($sites));
+    }
+
+    public function store(SiteRequest $request, Site $site)
+    {
+
+        $site->fill($request->all())->save();
+
+        $site->user()->attach(auth()->user(), ['role' => 'admin']);
+
+        $this->flashAccessTable($site);
+        return $this->success('站点添加成功');
+    }
+
+    public function show(Site $site)
+    {
+        return $this->success('站点获取成功', new SiteResource($site));
+    }
+
+    public function update(SiteRequest $request, Site $site)
+    {
+        dd($request->all());
+        $site->fill($request->all())->save();
+        $this->flashAccessTable($site);
+        return $this->success('栏目修改成功', $site);
+    }
+
+    public function destroy(Site $site)
+    {
+        $site->delete();
+        return $this->success('栏目删除成功');
+    }
+
+    /**
+     * 刷新站点权限表
+     * @param Site $site
+     */
+    protected function flashAccessTable(Site $site): void
+    {
+        (new Access())->updateSitePermission($site);
     }
 }

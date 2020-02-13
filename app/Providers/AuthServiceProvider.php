@@ -2,19 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Chat;
-use App\Models\Group;
-use App\Models\Package;
-use App\Models\Site;
-use App\Policies\ChatPolicy;
-use App\Policies\GroupPolicy;
-use App\Policies\PackagePolicy;
-use App\Policies\SitePolicy;
-use App\Policies\UserPolicy;
-use App\Policies\WeChatPolicy;
-use App\User;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
@@ -25,12 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
-        User::class => UserPolicy::class,
-        Site::class => SitePolicy::class,
-        Group::class => GroupPolicy::class,
-        Package::class => PackagePolicy::class,
-        Chat::class => ChatPolicy::class,
+        // 'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
@@ -42,8 +26,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         Passport::routes();
-//        Gate::before(function () {
-//            return is_super_admin() ? true : null;
-//        });
+        Gate::guessPolicyNamesUsing(function ($modelClass) {
+            return 'App\Policies\\' . class_basename($modelClass) . 'Policy';
+        });
     }
 }

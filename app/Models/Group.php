@@ -11,15 +11,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Group extends Model
 {
-    protected $fillable = ['name', 'site_num'];
-    protected $casts = ['package' => 'array', 'system' => 'bool'];
+    protected $guarded = [];
+    protected $casts = ['site_num' => 'integer', 'system' => 'boolean', 'package_id' => 'array'];
 
     /**
-     * 组套餐
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * 获取套餐
+     * @return mixed
      */
     public function package()
     {
-        return $this->belongsToMany(Package::class)->withTimestamps();
+        return Package::whereIn('id', $this['package_id'])->get();
     }
 }

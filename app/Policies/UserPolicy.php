@@ -1,50 +1,81 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军大叔 <www.aoxiangjun.com>
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
 
 namespace App\Policies;
 
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class UserPolicy
 {
     use HandlesAuthorization;
 
-    public function index(User $user)
+    public function before(User $user)
     {
-        return is_super_admin();
+        if ($user->is_super_admin) {
+            return true;
+        }
     }
 
+    public function viewAny(User $user)
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     *
+     * @param \App\User $user
+     * @param \App\User $model
+     * @return mixed
+     */
     public function view(User $user, User $model)
     {
+        //
     }
 
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param \App\User $user
+     * @return mixed
+     */
     public function create(User $user)
     {
-        return is_super_admin();
+        //
     }
 
+    /**
+     * Determine whether the user can update the model.
+     *
+     * @param \App\User $user
+     * @param \App\User $model
+     * @return mixed
+     */
     public function update(User $user, User $model)
     {
-        return $user['id'] == $model['id'] || is_super_admin();
+        //
     }
 
-    public function lock(User $user, User $model)
-    {
-        return $model['id'] > 1 && is_super_admin();
-    }
-
+    /**
+     * Determine whether the user can delete the model.
+     *
+     * @param \App\User $user
+     * @param \App\User $model
+     * @return mixed
+     */
     public function delete(User $user, User $model)
     {
-        return $model['id'] > 1 && is_super_admin();
+        //
     }
 
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param \App\User $user
+     * @param \App\User $model
+     * @return mixed
+     */
     public function restore(User $user, User $model)
     {
         //
@@ -53,8 +84,8 @@ class UserPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\User $user
-     * @param  \App\App\User $model
+     * @param \App\User $user
+     * @param \App\User $model
      * @return mixed
      */
     public function forceDelete(User $user, User $model)

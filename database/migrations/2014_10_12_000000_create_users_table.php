@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
@@ -14,24 +14,26 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 30)->nullable()->comment('昵称');
-            $table->string('email')->unique()->nullable()->comment('邮箱');
-            $table->string('mobile')->unique()->nullable()->comment('手机');
+            $table->bigIncrements('id');
+            $table->string('name')->nullable()->comment('昵称');
+            $table->string('email')->nullable()->unique();
+            $table->string('mobile')->nullable()->unique();
             $table->string('real_name', 20)->nullable()->comment('真实姓名');
-            $table->string('password');
+            $table->string('password')->nullable()->comment('密码');
+            $table->string('weixin_openid')->nullable()->comment('微信OPENID');
+            $table->string('weixin_unionid')->nullable()->comment('微信UNIONID');
             $table->string('home')->nullable()->comment('个人主页');
-            $table->string('icon')->nullable()->comment('头像');
+            $table->string('avatar')->nullable()->comment('头像');
             $table->string('token')->nullable()->comment('邮箱或手机验证码');
-            $table->string('weibo')->nullable()->comment('微博帐号');
-            $table->string('wechat')->nullable()->comment('微信');
-            $table->string('github')->nullable()->comment('github地址');
-            $table->string('qq')->nullable()->comment('QQ号');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->timestamp('mobile_verified_at')->nullable();
-            $table->unsignedInteger('group_id')->comment('后台用户组');
-            $table->timestamp('admin_end')->nullable()->comment('后台结束时间');
-            $table->unsignedTinyInteger('lock')->comment('锁定后台操作权限');
+            $table->string('weibo')->nullable()->comment('微博地址');
+            $table->string('wechat')->nullable()->comment('微信号');
+            $table->string('github')->nullable()->comment('GITHUB');
+            $table->string('qq')->nullable()->comment('QQ');
+            $table->timestamp('email_verified_at')->nullable()->comment('邮箱验证时间');
+            $table->timestamp('mobile_verified_at')->nullable()->comment('手机验证时间');
+            $table->unsignedInteger('group_id')->nullable()->comment('管理员组');
+            $table->timestamp('admin_to_time')->nullable()->comment('后台结束时间');
+            $table->unsignedTinyInteger('lock_to_time')->nullable()->comment('用户锁定到期时间');
             $table->unsignedMediumInteger('favour_count')->default(0)->comment('点赞数');
             $table->unsignedInteger('credit1')->nullable();
             $table->unsignedInteger('credit2')->nullable();

@@ -1,4 +1,0 @@
-2017-10-09 Version: 3.0.0
-1, 添加GetCallerIdentity接口
-2, 添加GetSessionAccessKey接口
-

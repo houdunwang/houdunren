@@ -5,39 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 套餐
+ * 套餐管理
  * Class Package
  * @package App\Models
  */
 class Package extends Model
 {
-    protected $fillable = ['name', 'modules', 'templates'];
-    protected $casts = ['system' => 'bool', 'modules' => 'array', 'templates' => 'array'];
+    protected $guarded = [];
+    protected $casts = ['modules' => 'array', 'templates' => 'array'];
 
     /**
-     * 会员组
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * 套餐模块
+     * @return mixed
      */
-    public function group()
+    public function modules()
     {
-        return $this->belongsToMany(Group::class);
-    }
-
-    /**
-     * 模块
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function module()
-    {
-        return $this->belongsToMany(Module::class);
-    }
-
-    /**
-     * 模板
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function template()
-    {
-        return $this->belongsToMany(Template::class);
+        return Module::whereIn('id', $this['modules'])->get();
     }
 }

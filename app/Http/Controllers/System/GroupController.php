@@ -1,66 +1,51 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军大叔 <www.aoxiangjun.com>
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
+
 namespace App\Http\Controllers\System;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
 use App\Http\Requests\GroupRequest;
+use App\Http\Resources\GroupResource;
 use App\Models\Group;
-use App\Repositories\GroupRepository;
-use App\Repositories\PackageRepository;
+use Illuminate\Http\Request;
 
 /**
- * 系统会员组管理
+ * 用户组
  * Class GroupController
- * @package App\Http\Controllers
+ * @package App\Http\Controllers\System
  */
-class GroupController extends Controller
+class GroupController extends ApiController
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Group::class, 'group');
+    }
+
     public function index()
     {
-        $groups = Group::all();
-        return view('system.group.index', compact('groups'));
+        return $this->success('用户组列表获取成功', GroupResource::collection(Group::all()));
     }
 
-    public function create(PackageRepository $packageRepository, Group $group)
+    public function store(Request $request)
     {
-        $packages = $packageRepository->all();
-        $groupPackages = collect();
-        return view('system.group.create', compact('packages', 'group', 'groupPackages'));
-    }
-
-    public function store(GroupRequest $request, GroupRepository $groupRepository)
-    {
-        $groupRepository->create($request->input());
-        return redirect()->route('system.group.index')->with('success', '用户组添加成功');
+        $group = new Group();
+        $group->fill($request->all())->save();
+        return $this->success('', $group);
     }
 
     public function show(Group $group)
     {
+        return $this->success('', $group);
     }
 
-    public function edit(Group $group, PackageRepository $packageRepository)
+    public function update(GroupRequest $request, Group $group)
     {
-        $packages = $packageRepository->all();
-        $groupPackages = $group->package()->get();
-        return view('system.group.edit', compact('group', 'packages', 'groupPackages'));
-    }
-
-    public function update(GroupRequest $request, Group $group, GroupRepository $groupRepository)
-    {
-        $groupRepository->save($group, $request->input());
-        return redirect(route('system.group.index'))->with('success', '用户组更新成功');
+        $group->fill($request->all())->save();
+        return $this->success('修改成功', $group);
     }
 
     public function destroy(Group $group)
     {
-        $this->authorize('delete', $group);
         $group->delete();
-        return back()->with('success', '用户组删除成功');
+        return $this->success('删除成功');
     }
 }

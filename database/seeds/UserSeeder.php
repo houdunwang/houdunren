@@ -1,30 +1,33 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军大叔 <www.aoxiangjun.com>
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
 
+use App\User;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
     public function run()
     {
-        factory(\App\User::class, 1)->make()->each(function ($user) {
-            $user['group_id'] = 1;
-            $user['admin_end'] = (new \Carbon\Carbon())->addYear(1);
-            $user['lock'] = false;
-            $user->save();
-        });
-        $user = \App\User::find(1);
+        factory(User::class, 20)->create();
+        $user = User::find(1);
         $user->name = '向军大叔';
         $user->email = '2300071698@qq.com';
-        $user->mobile = null;
-        $user->icon = 'images/system/user.jpg';
+        $user->mobile = 18600000000;
         $user->save();
-        \App\Models\Site::find(1)->user()->save(\App\User::find(1), ['role' => 'admin']);
+        $user = User::find(2);
+        $user->name = 'xj';
+        $user->email = '931241005@qq.com';
+        $user->mobile = 19999999999;
+        $user->save();
+        $user->save();
+        $user = User::find(3);
+        $user->name = 'xy';
+        $user->email = '35288551@qq.com';
+        $user->mobile = 188888888888;
+        $user->save();
     }
 }

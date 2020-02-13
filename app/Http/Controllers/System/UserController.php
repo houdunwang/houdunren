@@ -1,85 +1,39 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军大叔 <www.aoxiangjun.com>
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
 
 namespace App\Http\Controllers\System;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequest;
-use App\Models\Site;
-use App\Repositories\GroupRepository;
-use App\Repositories\UserRepository;
-use App\Servers\UserServer;
+use App\Http\Controllers\ApiController;
 use App\User;
 use Illuminate\Http\Request;
 
 /**
- * 用户后台管理
+ * 后台用户管理
  * Class UserController
- * @package App\Http\Controllers
+ * @package App\Http\Controllers\System
  */
-class UserController extends Controller
+class UserController extends ApiController
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class,'user');
+    }
+
     public function index()
     {
-        $users = User::with(['group','sites'])->paginate(15);
-        return view('system.user.index', compact('users'));
+
     }
 
-    public function create(GroupRepository $groupRepository)
+    public function store(Request $request)
     {
-        $groups = $groupRepository->all();
-        return view('system.user.create', compact('groups'));
     }
 
-    public function store(UserRequest $request, UserRepository $repository)
+    public function update(Request $request, User $user)
     {
-        $this->validate($request, ['password' => 'required'], ['password.required' => '请输入用户密码']);
-        $repository->create($request->input());
-        return redirect(route('system.user.index'))->with('success', '用户添加成功');
-    }
-
-    public function show(User $user)
-    {
-        return view('system.user.show', compact('user'));
-    }
-
-    public function edit(User $user, GroupRepository $groupRepository)
-    {
-        $groups = $groupRepository->all();
-        return view('system.user.edit', compact('user', 'groups'));
-    }
-
-    public function update(UserRequest $request, User $user, UserRepository $repository)
-    {
-        $repository->update($user, $request->input());
-        return back()->with('success', '修改成功');
-    }
-
-    /**
-     * 锁定用户
-     * @param User $user
-     * @param $state
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
-    public function lock(User $user, $state)
-    {
-        $this->authorize('lock', $user);
-        $user['lock'] = $state == 'lock';
-        $user->save();
-        return back()->with('success', '锁定状态修改成功');
+        $user->fill($request->all())->save();
+        return $this->success('编辑用户成功',$user);
     }
 
     public function destroy(User $user)
     {
-        $this->authorize('delete', $user);
-        $user->delete();
-        return back()->with('success', '用户删除成功');
     }
 }

@@ -1,14 +1,8 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军大叔 <www.aoxiangjun.com>
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -18,6 +12,26 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SiteUser extends Model
 {
-    protected $table = 'site_user';
-    protected $fillable = ['site_id', 'user_id', 'role'];
+    protected $fillable = ['user_id', 'role', 'site_id'];
+
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * 根据用户获取
+     * @param $query
+     * @param $user
+     * @return mixed
+     */
+    public function scopeByUser($query, User $user)
+    {
+        return $query->where('user_id', $user['id']);
+    }
 }

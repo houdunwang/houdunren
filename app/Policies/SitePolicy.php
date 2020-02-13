@@ -1,76 +1,53 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军大叔 <www.aoxiangjun.com>
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
+
 namespace App\Policies;
 
-use App\User;
 use App\Models\Site;
+use App\Servers\Access;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class SitePolicy
 {
     use HandlesAuthorization;
 
-    public function before($user, $action)
+    public function before(User $user, $ability)
     {
-        return is_super_admin() ? true : null;
+        if ($user->is_super_admin) {
+            return true;
+        }
     }
 
-    /**
-     * 站点管理权限
-     * @param User $user
-     * @param Site $site
-     * @return bool
-     */
-    public function admin(User $user, Site $site)
+    public function viewAny(User $user)
     {
-        return $site['admin']['id'] == $user['id'] || is_super_admin();
+        return true;
     }
 
     public function view(User $user, Site $site)
     {
-        return $site->isManage($user);
     }
 
     public function create(User $user)
     {
+        return true;
     }
 
     public function update(User $user, Site $site)
     {
-        return ($site['admin']['id'] == $user['id']) || is_super_admin();
+        return app(Access::class)->isAdmin($site, $user);
     }
 
     public function delete(User $user, Site $site)
     {
-        return ($site['admin']['id'] == $user['id']) || is_super_admin();
+        return app(Access::class)->isAdmin($site, $user);
     }
 
-    /**
-     * Determine whether the user can restore the site.
-     *
-     * @param  \App\User $user
-     * @param  \App\Models\Site $site
-     * @return mixed
-     */
     public function restore(User $user, Site $site)
     {
     }
 
-    /**
-     * Determine whether the user can permanently delete the site.
-     *
-     * @param  \App\User $user
-     * @param  \App\Models\Site $site
-     * @return mixed
-     */
     public function forceDelete(User $user, Site $site)
     {
-        //
     }
 }

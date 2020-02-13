@@ -1,8 +1,15 @@
 <?php
-Route::group(['namespace' => 'Module', 'middleware' => 'front'], function () {
-    Route::get('/', 'DomainController@index')->name('home');
-    Route::get('home', 'DomainController@index')->name('home');
+
+
+Route::get('/', function () {
+    return asset('attachments/2020/02/bAw8MblITsu0KUQNLuNBSvPnUOcgEN25leqODcZs.png');
 });
-foreach (['common', 'member', 'module', 'site', 'system', 'user', 'develop'] as $route) {
-    include base_path("routes/web/{$route}.php");
-}
+Route::get('/admin{all}', function () {
+    return view('home');
+})->where(['all' => '.*']);
+Route::get('/login', function () {
+    return view('home');
+});
+Route::get('/register', function () {
+    return view('home');
+});

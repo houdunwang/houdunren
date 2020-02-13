@@ -1,21 +1,30 @@
 <?php
+Route::post('register', 'User\PassportController@register');
+Route::post('login', 'User\PassportController@login');
 
-use Illuminate\Http\Request;
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'auth:api', 'namespace' => 'User', 'prefix' => 'user'], function () {
+    Route::resource('user', 'UserController')->except(['edit', 'create']);
+    Route::get('info', 'UserController@info');
 });
 
-Route::any('{site}/chat/{chat}', 'Api\ChatController@processor')->name('api.chat');
+Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'site'], function () {
+    Route::resource('site', 'SiteController')->except(['edit', 'create']);
+    Route::resource('{site}/weChat', 'WeChatController')->except(['edit', 'create']);
+    Route::get('{site}/access/{user}', 'AccessController@index');
+    Route::put('{site}/access/{user}', 'AccessController@update');
+});
 
-Route::group(['prefix' => 'token', 'middleware' => []], function () {
-    //获取token
-    Route::post('/', function (\App\Servers\HttpServer $httpServer) {
-        return $httpServer->token(\request()->only(['username', 'password']));
-    });
-
-    //刷新TOKEN
-    Route::put('/', function (\App\Servers\HttpServer $httpServer) {
-        return $httpServer->refreshToken(\request()->input('refresh_token'));
-    });
+Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
+    Route::resource('package', 'PackageController')->except(['edit', 'create']);
+    Route::resource('user', 'UserController')->except(['edit', 'create']);
+    Route::post('user/lock', 'UserController@lock');
+    Route::get('cache', 'CacheController@update');
+    Route::resource('upload', 'SystemUploadController')->except(['edit', 'create', 'show', 'index']);
+});
+Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
+    Route::resource('config', 'SystemConfigController')->except(['edit', 'create']);
+});
+Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
+    Route::resource('group', 'GroupController')->except(['edit', 'create']);
+    Route::resource('module', 'ModuleController')->except(['edit', 'create']);
 });

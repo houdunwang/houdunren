@@ -7,32 +7,54 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Models\Permission;
 
 /**
- * 站点
+ * 站点管理
  * Class Site
  * @package App\Models
  */
 class Site extends Model
 {
-    protected $fillable = ['name', 'description'];
-
+    protected $fillable = ['name', 'keyword', 'description', 'logo', 'icp', 'tel', 'email', 'counter'];
+    // protected $guarded = [];
     /**
-     * 网站操作员
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * 公众号关联
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function user()
+    public function weChat(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->belongsToMany(User::class)
-            ->withPivot('role')
-            ->as('role')->withTimestamps();
+        return $this->hasMany(WeChat::class);
     }
 
     /**
-     * 网站管理员与操作员
+     * 站点所有权限
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function permissions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Permission::class);
+    }
+    public function siteUser()
+    {
+        return $this->hasMany(SiteUser::class);
+    }
+    /**
+     * 站点用户关联
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'site_users')
+            ->withTimestamps()
+            ->withPivot('role')->as('role');
+    }
+
+    /**
+     * 获取管理员与操作员
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getManageAttribute()
+    public function manage(): \Illuminate\Database\Eloquent\Collection
     {
-        return $this->user()->wherePivotIn('role', ['admin', 'operator'])->get();
+        return $this->user()
+            ->wherePivotIn('role', ['admin', 'operator'])->get();
     }
 
     /**
@@ -40,71 +62,17 @@ class Site extends Model
      * @param User $user
      * @return bool
      */
-    public function isManage(?User $user = null)
+    public function isManage(User $user): bool
     {
-        $user = $user ?? auth()->user();
-        return is_super_admin() || $this->getManageAttribute()->contains($user);
+        return $this->manage()->contains($user);
     }
 
     /**
-     * 网站站长
+     * 获取站长
      * @return mixed
      */
-    public function getAdminAttribute()
+    public function admin()
     {
         return $this->user()->wherePivot('role', 'admin')->first();
-    }
-
-    /**
-     * 站点的所有权限
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function permissions()
-    {
-        return $this->hasMany(Permission::class);
-    }
-
-    /**
-     * 公众号关联
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function chat()
-    {
-        return $this->hasMany(Chat::class, 'site_id');
-    }
-
-    /**
-     * 站点所有套餐
-     * @return mixed
-     */
-    public function packages()
-    {
-        return $this->user()->wherePivot('role', 'admin')->first()->group->package();
-    }
-
-    /**
-     * 模块集合
-     * @return \Illuminate\Support\Collection
-     */
-    public function getModulesAttribute()
-    {
-        $modules = collect();
-        foreach ($this->packages as $package) {
-            $modules = $modules->merge($package->module);
-        }
-        return $modules;
-    }
-
-    /**
-     * 模板集合
-     * @return \Illuminate\Support\Collection
-     */
-    public function getTemplatesAttribute()
-    {
-        $templates = collect();
-        foreach ($this->packages as $package) {
-            $templates = $templates->merge($package->template);
-        }
-        return $templates;
     }
 }

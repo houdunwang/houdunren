@@ -1,58 +1,47 @@
 <?php
-/** .-------------------------------------------------------------------
- * |  Software: [hdcms framework]
- * |      Site: www.hdcms.com
- * |-------------------------------------------------------------------
- * |    Author: 向军大叔 <www.aoxiangjun.com>
- * | Copyright (c) 2012-2019, www.houdunren.com. All Rights Reserved.
- * '-------------------------------------------------------------------*/
+
 namespace App\Http\Controllers\System;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
 use App\Http\Requests\PackageRequest;
+use App\Http\Resources\PackageResource;
 use App\Models\Package;
-use App\Repositories\ModuleRepository;
-use App\Repositories\PackageRepository;
+use Illuminate\Http\Request;
 
-class PackageController extends Controller
+class PackageController extends ApiController
 {
-    public function index(PackageRepository $repository)
+    public function __construct()
     {
-        $packages = $repository->all();
-        return view('system.package.index', compact('packages'));
+        $this->authorizeResource(Package::class, 'package');
     }
 
-    public function create(Package $package)
+    public function index()
     {
-        return view('system.package.create',compact('package'));
+        $packages = PackageResource::collection(Package::all());
+        return $this->success('',$packages);
     }
 
-    public function store(PackageRequest $request, PackageRepository $repository)
+    public function store(PackageRequest $request)
     {
-        $repository->create($request->input());
-        return redirect()->route('system.package.index')->with('success', '保存成功');
+        $package  = new Package();
+        $package->fill($request->all())->save();
+        return $this->success('套餐添加成功');
     }
 
     public function show(Package $package)
     {
+        return $this->success('',$package);
     }
 
-    public function edit(Package $package, ModuleRepository $moduleRepository)
+    public function update(PackageRequest $request, Package $package)
     {
-        $modules = $moduleRepository->all();
-        return view('system.package.edit', compact('package', 'modules'));
+        $package->fill($request->all())->save();
+        return $this->success('套餐修改成功',$package);
     }
 
-    public function update(PackageRequest $request, Package $package, PackageRepository $repository)
+    public function destroy(Package $package)
     {
-        $repository->update($package, $request->input());
-        return redirect(route('system.package.index'))->with('success', '更新成功');
-    }
-
-    public function destroy(Package $package, PackageRepository $repository)
-    {
-        $this->authorize('delete', $package);
-        $repository->delete($package);
-        return back()->with('success', '套餐删除成功');
+        $package->delete();
+        return $this->success('套餐删除成功');
     }
 }

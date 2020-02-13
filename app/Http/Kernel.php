@@ -2,14 +2,6 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\Authenticate;
-use App\Http\Middleware\FrontMiddleware;
-use App\Http\Middleware\InstallMiddleware;
-use App\Http\Middleware\LoadSiteAndModuleMiddleware;
-use App\Http\Middleware\MemberMiddleware;
-use App\Http\Middleware\ModuleMiddleware;
-use App\Http\Middleware\SiteMiddleware;
-use App\Http\Middleware\SystemMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -22,11 +14,12 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        \Fruitcake\Cors\HandleCors::class,
+        \App\Http\Middleware\TrustProxies::class,
         \App\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \App\Http\Middleware\TrustProxies::class,
     ];
 
     /**
@@ -47,34 +40,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             'throttle:60,1',
-            'bindings',
-            LoadSiteAndModuleMiddleware::class,
-        ],
-        //系统
-        'system' => [
-            InstallMiddleware::class,
-            SystemMiddleware::class,
-        ],
-        //站点
-        'site' => [
-            InstallMiddleware::class,
-            SiteMiddleware::class,
-        ],
-        //后台模块
-        'module' => [
-            InstallMiddleware::class,
-            ModuleMiddleware::class,
-        ],
-        //会员中心
-        'member' => [
-            InstallMiddleware::class,
-            Authenticate::class,
-            MemberMiddleware::class,
-        ],
-        //前台模块
-        'front' => [
-            InstallMiddleware::class,
-            FrontMiddleware::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
 
@@ -92,10 +58,10 @@ class Kernel extends HttpKernel
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'install' => InstallMiddleware::class,
     ];
 
     /**
@@ -109,6 +75,7 @@ class Kernel extends HttpKernel
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\Authenticate::class,
+        \Illuminate\Routing\Middleware\ThrottleRequests::class,
         \Illuminate\Session\Middleware\AuthenticateSession::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,
