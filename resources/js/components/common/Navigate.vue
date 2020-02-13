@@ -24,11 +24,12 @@
                             class="nav-item mr-4"
                             :key="index"
                             v-for="(menu, index) in menus"
+                            v-if="menu.check?user.is_super_admin:true"
                         >
-                            <a class="nav-link" href="#">
+                            <router-link class="nav-link" :to="menu.url">
                                 <i :class="'fa ' + menu.icon"></i>
                                 {{ menu.title }}
-                            </a>
+                            </router-link>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
@@ -51,14 +52,14 @@
                                     aria-labelledby="navbarDropdown"
                                 >
                                     <a class="dropdown-item" href="#"
-                                        >修改资料</a
+                                    >修改资料</a
                                     >
                                     <div class="dropdown-divider"></div>
                                     <a
                                         class="dropdown-item"
                                         href="#"
                                         @click.prevent="logout"
-                                        >退出登录</a
+                                    >退出登录</a
                                     >
                                 </div>
                             </li>
@@ -70,31 +71,32 @@
     </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
-import store from "../../store/index";
-export default {
-    data() {
-        return {
-            menus: [
-                { title: "模块管理", icon: "fa-cubes" },
-                { title: "用户管理", icon: "fa-user" },
-                { title: "系统设置", icon: "fa-support" },
-                { title: "更新缓存", icon: "fa-bitbucket" },
-                { title: "在线文档", icon: "fa-file-code-o" }
-            ]
-        };
-    },
-    computed: {
-        ...mapState("user", ["user"])
-    },
-    mounted() {},
-    methods: {
-        ...mapActions("user", ["logout"])
-    }
-};
+    import {mapState, mapActions} from "vuex";
+    import store from "../../store/index";
+
+    export default {
+        data() {
+            return {
+                menus: [
+                    {title: "站点管理", icon: "fa fa-sitemap", url: '/admin', check: false},
+                    {title: "模块管理", icon: "fa-cubes", url: '/admin', check: true},
+                    {title: "用户管理", icon: "fa-user", url: '/admin', check: true},
+                    {title: "系统设置", icon: "fa-support", url: '/admin/setting', check: true},
+                    {title: "更新缓存", icon: "fa-bitbucket", url: '/admin', check: true},
+                    {title: "在线文档", icon: "fa-file-code-o", url: '/admin', check: false}
+                ]
+            };
+        },
+        computed: {
+            ...mapState("user", {user: 'data'})
+        },
+        methods: {
+            ...mapActions("user", ["logout"])
+        }
+    };
 </script>
 <style lang="scss" scoped>
-.navigate {
-    background-color: #343a40;
-}
+    .navigate {
+        background-color: #343a40;
+    }
 </style>
