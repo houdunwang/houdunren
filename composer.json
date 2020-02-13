@@ -37,8 +37,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
-            "Modules\\": "Modules/"
+            "App\\": "app/"
         },
         "classmap": [
             "database/seeds",
@@ -47,7 +46,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "Modules\\": "Modules/"
         }
     },
     "minimum-stability": "dev",
