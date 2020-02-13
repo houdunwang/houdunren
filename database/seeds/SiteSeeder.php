@@ -16,6 +16,7 @@ class SiteSeeder extends Seeder
         $site = new Site;
         $site->name = '后盾人';
         $site->description = '后盾人专注互联网开发';
+        $site->domain = 'http://localhost';
         $site->save();
         $site->user()->attach(User::first(), ['role' => 'admin']);
     }

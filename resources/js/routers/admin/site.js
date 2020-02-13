@@ -21,7 +21,7 @@ export default [
         component: Edit
     },
     {
-        path: "site/config",
+        path: "site/config/:id",
         name: "site.config",
         component: Config
     }

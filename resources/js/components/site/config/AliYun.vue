@@ -21,8 +21,6 @@
             ></el-input>
         </el-form-item>
 
-
-
         <el-divider><i class="el-icon-mobile-phone"></i></el-divider>
 
         <el-form-item :label="field.aliyun.upload.endpoint.title">

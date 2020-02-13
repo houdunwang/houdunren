@@ -14,7 +14,11 @@ use Spatie\Permission\Models\Permission;
 class Site extends Model
 {
     protected $fillable = ['name', 'keyword', 'description', 'logo', 'icp', 'tel', 'email', 'counter','domain'];
-    // protected $guarded = [];
+
+    protected $casts = [
+        'config' => 'array'
+    ];
+
     /**
      * 公众号关联
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -32,10 +36,12 @@ class Site extends Model
     {
         return $this->hasMany(Permission::class);
     }
+
     public function siteUser()
     {
         return $this->hasMany(SiteUser::class);
     }
+
     /**
      * 站点用户关联
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

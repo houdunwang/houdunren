@@ -4,7 +4,7 @@
             <el-tabs v-model="activeName">
                 <el-tab-pane label="邮箱配置" name="email">
 
-                            <email/>
+                    <email/>
 
                 </el-tab-pane>
                 <el-tab-pane label="阿里云" name="aliYun">
@@ -58,19 +58,22 @@
     import User from './User'
     import Notification from './Notification'
     import Maintain from './Maintain'
+    import {mapActions} from 'vuex'
 
     export default {
         data() {
             return {
-                activeName: 'maintain'
+                activeName: 'email'
             }
         },
         components: {
             Email, AliYun, AliPay, Upload, User, Notification, Maintain
         },
         methods: {
-            submit() {
-
+            ...mapActions('site', ['edit']),
+           async submit() {
+               await  this.edit(this.$route.params.id);
+               this.$message.success('更新成功');
             }
         }
     }

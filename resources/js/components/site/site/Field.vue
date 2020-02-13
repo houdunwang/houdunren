@@ -22,11 +22,15 @@
                             </el-form-item>
 
                             <el-form-item label="网站域名" prop="domain">
-                                <el-input v-model="field.domain"></el-input>
+                                <el-input v-model="field.domain" placeholder="如: https://www.github.com"></el-input>
+                            </el-form-item>
+
+                            <el-form-item label="网站描述" prop="description">
+                                <el-input type="textarea" rows="3" v-model="field.description"></el-input>
                             </el-form-item>
 
                             <el-form-item label="关键词">
-                                <el-input v-model="field.domain"></el-input>
+                                <el-input v-model="field.keyword"></el-input>
                             </el-form-item>
 
                             <el-form-item label="站点标志">
@@ -41,10 +45,6 @@
                                     <img v-if="field.logo" :src="field.logo" class="avatar"/>
                                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                                 </el-upload>
-                            </el-form-item>
-
-                            <el-form-item label="关键词">
-                                <el-input v-model="field.keyword"></el-input>
                             </el-form-item>
 
                             <el-form-item label="ICP备案号">
@@ -105,15 +105,6 @@
                     ],
                     domain: [
                         {required: true, message: "域名不能为空", trigger: "blur"},
-                    ],
-                    description: [
-                        {required: true, message: "请输入网站描述", trigger: "change"},
-                        {
-                            min: 5,
-                            max: 100,
-                            message: "长度在 5 到 100 个字符",
-                            trigger: "blur"
-                        }
                     ]
                 }
             };

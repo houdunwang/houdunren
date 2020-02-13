@@ -11,8 +11,8 @@ export async function all({state, commit}, force = false) {
     return response.data.data;
 }
 
-export async function edit({dispatch}, data) {
-    let response = await http.put(`/site/site/${data.id}`, data);
+export async function edit({state, dispatch}, id) {
+    let response = await http.put(`/site/${id}/config`, state.config);
     await dispatch("all", true);
     return response;
 }

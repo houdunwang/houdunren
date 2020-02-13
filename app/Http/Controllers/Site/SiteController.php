@@ -29,30 +29,29 @@ class SiteController extends ApiController
         return $this->success('站点列表获取成功', SiteResource::collection($sites));
     }
 
-    public function store(SiteRequest $request, Site $site)
+    public function store(SiteRequest $request, Site $site): \Illuminate\Http\JsonResponse
     {
-
         $site->fill($request->all())->save();
-
         $site->user()->attach(auth()->user(), ['role' => 'admin']);
 
         $this->flashAccessTable($site);
         return $this->success('站点添加成功');
     }
 
-    public function show(Site $site)
+    public function show(Site $site): \Illuminate\Http\JsonResponse
     {
         return $this->success('站点获取成功', new SiteResource($site));
     }
 
-    public function update(SiteRequest $request, Site $site)
+    public function update(SiteRequest $request, Site $site): \Illuminate\Http\JsonResponse
     {
         $site->fill($request->all())->save();
         $this->flashAccessTable($site);
+
         return $this->success('栏目修改成功', $site);
     }
 
-    public function destroy(Site $site)
+    public function destroy(Site $site): \Illuminate\Http\JsonResponse
     {
         $site->delete();
         return $this->success('栏目删除成功');
