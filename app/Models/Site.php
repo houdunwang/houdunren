@@ -13,7 +13,7 @@ use Spatie\Permission\Models\Permission;
  */
 class Site extends Model
 {
-    protected $fillable = ['name', 'keyword', 'description', 'logo', 'icp', 'tel', 'email', 'counter'];
+    protected $fillable = ['name', 'keyword', 'description', 'logo', 'icp', 'tel', 'email', 'counter','domain'];
     // protected $guarded = [];
     /**
      * 公众号关联

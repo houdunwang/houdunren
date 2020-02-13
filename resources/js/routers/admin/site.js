@@ -1,6 +1,7 @@
 import Site from "../../components/site/index.vue";
-import Add from "../../components/site/Add.vue";
-import Edit from "../../components/site/Edit.vue";
+import Add from "../../components/site/site/Add.vue";
+import Edit from "../../components/site/site/Edit.vue";
+import Config from "../../components/site/config/index.vue";
 
 export default [
     {
@@ -18,5 +19,10 @@ export default [
         path: "site/edit/:id",
         name: "site.edit",
         component: Edit
+    },
+    {
+        path: "site/config",
+        name: "site.config",
+        component: Config
     }
 ];

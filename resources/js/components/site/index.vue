@@ -28,9 +28,10 @@
                     <div class="lin"></div>
 
                     <div class="small" v-if="isAdmin(site)">
-                        <a href class="text-muted mr-2">
+                        <router-link class="text-muted mr-2" :to="{name:'site.config'}">
                             <i class="fa fa-key"></i> 网站配置
-                        </a>
+                        </router-link>
+
                         <a href class="text-muted mr-2">
                             <i class="fa fa-key"></i> 站点模块
                         </a>

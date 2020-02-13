@@ -5,12 +5,15 @@
 [v-cloak] {
     display: none;
 }
+
 a {
     text-decoration: none !important;
 }
+
 button {
     outline: none !important;
 }
+
 :root {
     font-size: 15px;
 }
@@ -25,10 +28,12 @@ button {
         overflow: hidden;
         align-items: center;
         justify-content: center;
+
         &:hover {
             border-color: #409eff;
         }
     }
+
     .avatar-uploader-icon {
         font-size: 28px;
         color: #8c939d;
@@ -40,6 +45,15 @@ button {
         justify-content: center;
         align-items: center;
     }
+}
+
+.el-radio-group {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: baseline !important;
+}
+.el-form-item{
+    margin-bottom: 10px !important;
 }
 
 // .avatar {
