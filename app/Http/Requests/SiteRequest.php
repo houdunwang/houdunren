@@ -26,7 +26,7 @@ class SiteRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|unique:sites,name,' . request('id'),
-            'email' => 'email',
+            'email' => 'nullable|email',
             'description' => 'required|min:5'
         ];
     }
