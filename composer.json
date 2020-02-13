@@ -12,7 +12,7 @@
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
         "laravel/framework": "^6.2",
-        "laravel/passport": "^8.3",
+        "laravel/passport": "^8.4",
         "laravel/tinker": "^2.0",
         "nwidart/laravel-modules": "^6.2",
         "spatie/laravel-permission": "^3.6"

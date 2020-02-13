@@ -1,10 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import user from "./user";
-import setting from "./setting";
-import group from "./group";
-import site from "./site";
+import user from "./user/index";
+import setting from "./setting/index";
+import group from "./group/index";
+import site from "./site/index";
 import error from './error'
+
 Vue.use(Vuex);
 const store = new Vuex.Store({
     modules: {

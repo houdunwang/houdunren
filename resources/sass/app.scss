@@ -2,6 +2,9 @@
 // @import "variables";
 // Bootstrap
 // @import "~bootstrap/scss/bootstrap";
+[v-cloak] {
+    display: none;
+}
 a {
     text-decoration: none !important;
 }
