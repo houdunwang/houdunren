@@ -8,7 +8,7 @@ export default status => {
             message = "请求要求用户的身份认证(401)";
             break;
         case 403:
-            message = "拒绝访问(403)";
+            message = "没有访问权限(403)";
             break;
         case 404:
             message = "访问页面不存在(404)";

@@ -13,8 +13,8 @@ use Spatie\Permission\Models\Permission;
  */
 class Site extends Model
 {
-    protected $fillable = ['name', 'description'];
-
+    protected $fillable = ['name', 'keyword', 'description', 'logo', 'icp', 'tel', 'email', 'counter'];
+    // protected $guarded = [];
     /**
      * 公众号关联
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -32,7 +32,8 @@ class Site extends Model
     {
         return $this->hasMany(Permission::class);
     }
-    public function siteUser(){
+    public function siteUser()
+    {
         return $this->hasMany(SiteUser::class);
     }
     /**
@@ -41,7 +42,8 @@ class Site extends Model
      */
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(User::class,'site_users')
+        return $this->belongsToMany(User::class, 'site_users')
+            ->withTimestamps()
             ->withPivot('role')->as('role');
     }
 
@@ -51,7 +53,8 @@ class Site extends Model
      */
     public function manage(): \Illuminate\Database\Eloquent\Collection
     {
-        return $this->user()->wherePivotIn('role', ['admin', 'operator'])->get();
+        return $this->user()
+            ->wherePivotIn('role', ['admin', 'operator'])->get();
     }
 
     /**

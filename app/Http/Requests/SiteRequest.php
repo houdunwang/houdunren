@@ -25,7 +25,8 @@ class SiteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3|unique:sites,name',
+            'name' => 'required|min:3|unique:sites,name,' . request('id'),
+            'email' => 'email',
             'description' => 'required|min:5'
         ];
     }
@@ -36,6 +37,7 @@ class SiteRequest extends FormRequest
             'name.required' => '站点名称不能为空',
             'name.min' => '站点名称不能少于5个字',
             'name.unique' => '站点名称已经存在',
+            'email.email' => '邮箱格式错误',
             'description.required' => '描述不能为空',
             'description.min' => '站点介绍不能少于五个字'
         ];

@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('token')->nullable()->comment('邮箱或手机验证码');
             $table->string('weibo')->nullable()->comment('微博地址');
             $table->string('wechat')->nullable()->comment('微信号');
-        $table->string('github')->nullable()->comment('GITHUB');
+            $table->string('github')->nullable()->comment('GITHUB');
             $table->string('qq')->nullable()->comment('QQ');
             $table->timestamp('email_verified_at')->nullable()->comment('邮箱验证时间');
             $table->timestamp('mobile_verified_at')->nullable()->comment('手机验证时间');

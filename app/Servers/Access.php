@@ -3,6 +3,7 @@
 namespace App\Servers;
 
 use App\Models\Site;
+use App\Models\SiteUser;
 use App\User;
 use Spatie\Permission\Models\Permission as P;
 
@@ -55,16 +56,6 @@ class Access
     }
 
     /**
-     * 超级管理员
-     * @param User $user
-     * @return bool
-     */
-    public function isSuperAdmin(User $user): bool
-    {
-        return $user['id'] === 1;
-    }
-
-    /**
      * 站长
      * @param Site $site
      * @param User $user
@@ -72,7 +63,9 @@ class Access
      */
     public function isAdmin(Site $site, User $user): bool
     {
-        $siteUser = $site->user()->byUser($user);
+        $siteUser = SiteUser::where([
+            ['site_id', $site['id']], ['user_id', $user['id']]
+        ])->first();
         return $siteUser && $siteUser['role'] === 'admin';
     }
 

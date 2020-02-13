@@ -12,7 +12,9 @@ class UserPolicy
 
     public function before(User $user)
     {
-        return $user->isSuperAdmin() ? : $this->deny('你没有操作权限');
+        if ($user->is_super_admin) {
+            return true;
+        }
     }
 
     public function viewAny(User $user)

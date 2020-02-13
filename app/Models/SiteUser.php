@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SiteUser extends Model
 {
-    protected $fillable=['user_id','role','site_id'];
+    protected $fillable = ['user_id', 'role', 'site_id'];
 
     public function site()
     {

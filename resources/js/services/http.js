@@ -30,9 +30,8 @@ http.interceptors.request.use(
 http.interceptors.response.use(
     response => {
         Loading.close();
-        console.log(response.data)
-        if (response.data.message)
-            router.app.$message.success(response.data.message);
+        // if (response.data.message)
+        //     router.app.$message.success(response.data.message);
         return response;
     },
     error => {
@@ -42,7 +41,6 @@ http.interceptors.response.use(
         if (error && error.response) {
             error.response.message = message;
             switch (status) {
-
                 case 401:
                     AccessToken.del();
                     return router.push("/login");

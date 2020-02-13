@@ -1,5 +1,6 @@
 import Site from "../../components/site/index.vue";
-import add from "../../components/site/add.vue";
+import Add from "../../components/site/Add.vue";
+import Edit from "../../components/site/Edit.vue";
 
 export default [
     {
@@ -7,9 +8,15 @@ export default [
         name: "site.index",
         component: Site,
         alias: "/admin"
-    },{
+    },
+    {
         path: "site/add",
         name: "site.add",
-        component: add,
+        component: Add
+    },
+    {
+        path: "site/edit/:id",
+        name: "site.edit",
+        component: Edit
     }
 ];

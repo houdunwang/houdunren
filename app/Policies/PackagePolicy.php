@@ -16,8 +16,11 @@ class PackagePolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user){
-        return $user->isSuperAdmin()?Response::allow():Response::deny('没有操作权限');
+    public function before(User $user)
+    {
+        if ($user->is_super_admin) {
+            return true;
+        }
     }
     public function viewAny(User $user)
     {

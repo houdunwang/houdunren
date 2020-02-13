@@ -31,7 +31,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'lock_to_time' => 'datetime'
     ];
-
+    protected $appends = ['is_super_admin'];
     /**
      * passport帐号登录
      * @param $username
@@ -62,16 +62,17 @@ class User extends Authenticatable
      */
     public function manageSites(): \Illuminate\Database\Eloquent\Collection
     {
-        if ($this->isSuperAdmin())
-//            return Site::all();
-        return $this->site()->wherePivotIn('role', ['admin', 'operator'])->get();
+        if ($this->is_super_admin)
+            return Site::orderBy('id', 'desc')->get();
+        return $this->site()->wherePivotIn('role', ['admin', 'operator'])
+            ->orderBy('id', 'desc')->get();
     }
 
     /**
      * 超级管理员
      * @return bool
      */
-    public function isSuperAdmin(): bool
+    public function getIsSuperAdminAttribute(): bool
     {
         return $this['id'] === 1;
     }

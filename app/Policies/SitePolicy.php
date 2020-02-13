@@ -12,15 +12,16 @@ class SitePolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user)
+    public function before(User $user, $ability)
     {
-        $access = app(Access::class);
-        return $user->isSuperAdmin() || $access->isAdmin() ?
-            $this->allow() : Response::deny('没有操作权限');
+        if ($user->is_super_admin) {
+            return true;
+        }
     }
 
     public function viewAny(User $user)
     {
+        return true;
     }
 
     public function view(User $user, Site $site)
@@ -29,37 +30,24 @@ class SitePolicy
 
     public function create(User $user)
     {
+        return true;
     }
 
     public function update(User $user, Site $site)
     {
+        return app(Access::class)->isAdmin($site, $user);
     }
 
     public function delete(User $user, Site $site)
     {
-
+        return app(Access::class)->isAdmin($site, $user);
     }
 
-    /**
-     * Determine whether the user can restore the site.
-     *
-     * @param \App\User $user
-     * @param \App\Models\Site $site
-     * @return mixed
-     */
     public function restore(User $user, Site $site)
     {
     }
 
-    /**
-     * Determine whether the user can permanently delete the site.
-     *
-     * @param \App\User $user
-     * @param \App\Models\Site $site
-     * @return mixed
-     */
     public function forceDelete(User $user, Site $site)
     {
-        //
     }
 }
