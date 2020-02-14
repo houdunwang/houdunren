@@ -32,6 +32,7 @@ class User extends Authenticatable
         'lock_to_time' => 'datetime'
     ];
     protected $appends = ['is_super_admin'];
+
     /**
      * passport帐号登录
      * @param $username
@@ -54,18 +55,6 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Site::class, 'site_users')
             ->withPivot(['role', 'site_id'])->as('role');
-    }
-
-    /**
-     * 获取可管理站点
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function manageSites(): \Illuminate\Database\Eloquent\Collection
-    {
-        if ($this->is_super_admin)
-            return Site::orderBy('id', 'desc')->get();
-        return $this->site()->wherePivotIn('role', ['admin', 'operator'])
-            ->orderBy('id', 'desc')->get();
     }
 
     /**

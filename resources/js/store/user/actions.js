@@ -1,25 +1,35 @@
 import http from "../../services/http";
-import AccessToken from "../../services/AccessToken";
+import Token from "../../services/Token";
 import router from "../../routers";
 import {UPDATE} from './mutation-types'
 
-export async function login({commit}, data) {
-    let response = await http.post("/login", data);
+export async function userLogin({commit}, data) {
+    let response = await http.post("/user/login", data);
 
-    AccessToken.set(response.data.access_token);
-    commit(UPDATE, {data: response.data.user});
-    return response;
+    Token.set(response.data.access_token);
+    const user =response.data.data;
+    commit(UPDATE, {data: user});
+    return user;
+}
+
+export async function adminLogin({commit}, data) {
+    let response = await http.post("/admin/login", data);
+
+    Token.set(response.data.access_token);
+    const user =response.data.data;
+    commit(UPDATE, {data: user});
+    return user;
 }
 
 export async function get({state, commit}) {
     if (state.data) return Promise.resolve(state.data);
 
-    let response = await http.get("/user/info");
+    let response = await http.get("/user/get");
     commit(UPDATE, {data: response.data.data});
-    return response;
+    return response.data.data;
 }
 
 export function logout() {
-    AccessToken.del();
+    Token.del();
     router.push("/login");
 }

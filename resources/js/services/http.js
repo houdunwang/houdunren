@@ -1,21 +1,24 @@
 import axios from "axios";
-import AccessToken from "./AccessToken";
+import Token from "./Token";
 import router from "../routers/index";
 import httpStatus from "../services/httpStatus";
 import Loading from "./Loading";
 import store from "../store";
+import Vue from 'vue'
 
 const http = axios.create({
     baseURL: "/api",
     timeout: 5000
-    // headers: { Authorization: "Bearer " + AccessToken.get() }
+    // headers: { Authorization: "Bearer " + Token.get() }
 });
+
+Vue.prototype.$http = http;
 
 //请求拦截
 http.interceptors.request.use(
     function (config) {
         Loading.show();
-        let token = AccessToken.get();
+        let token = Token.get();
         if (token) {
             config.headers.Authorization = "Bearer " + token;
         }
@@ -37,18 +40,15 @@ http.interceptors.response.use(
     error => {
         Loading.close();
         let status = error.response.status;
-        let message = httpStatus(error.response.status);
         if (error && error.response) {
-            error.response.message = message;
             switch (status) {
-                case 401:
-                    AccessToken.del();
-                    return router.push("/login");
-                    break;
                 case 422:
+                    //表单验证错误信息处理
                     store.commit('error/set', error.response.data.errors);
                     break;
                 default:
+                    let message = error.response.data.message;
+                    message = message ? message : httpStatus(error.response.status);
                     router.app.$message.error(message);
             }
         }

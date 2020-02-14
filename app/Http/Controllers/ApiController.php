@@ -13,7 +13,7 @@ abstract class ApiController extends Controller
      * @param int $code
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function success(string $message,  $data = [], int $code = 200)
+    protected function success(string $message, $data = [], int $code = 200)
     {
         return response()->json(([
             'status' => true,
@@ -29,12 +29,12 @@ abstract class ApiController extends Controller
      * @param int $code
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function error(string $message, array $data = [], int $code = 500)
+    protected function error(string $message, array $data = [], int $code = 403)
     {
-        return response()->json(array_filter([
+        return response()->json([
             'status' => false,
             'message' => $message,
             'data' => $data
-        ]), $code);
+        ], $code);
     }
 }

@@ -1,9 +1,10 @@
 require("./bootstrap");
 window.Vue = require("vue");
 import Vue from "vue";
-import App from "./components/App.vue";
+import App from './app/App'
 import router from "./routers/index.js";
 import store from "./store/index";
+
 require("./services/validation");
 require("./services/element");
 require("./services/moment");
@@ -15,15 +16,6 @@ new Vue({
     store,
     render: h => h(App)
 }).$mount("#app");
-
-
-
-
-
-
-
-
-
 
 
 console.log(`

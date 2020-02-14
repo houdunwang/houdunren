@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 
 class SiteController extends ApiController
 {
-    public function __construct()
+    public function __construct(Request $request)
     {
-        $this->authorizeResource(Site::class, 'site');
+        //$this->authorizeResource(Site::class, 'site');
     }
 
     /**
@@ -22,7 +22,8 @@ class SiteController extends ApiController
      */
     public function index(): \Illuminate\Http\JsonResponse
     {
-        $sites = auth()->user()->manageSites();
+        $user = auth()->user();
+        $sites = $user['is_super_admin'] ? Site::all() : $user->site;
         return $this->success('站点列表获取成功', SiteResource::collection($sites));
     }
 

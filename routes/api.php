@@ -1,21 +1,33 @@
 <?php
-Route::post('register', 'User\PassportController@register');
-Route::post('login', 'User\PassportController@login');
 
-Route::group(['middleware' => 'auth:api', 'namespace' => 'User', 'prefix' => 'user'], function () {
-    Route::resource('user', 'UserController')->except(['edit', 'create']);
-    Route::get('info', 'UserController@info');
+//管理员登录
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+    Route::post('login', 'LoginController@login');
 });
 
+//会员登录注册
+Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
+    Route::post('register', 'Member\PassportController@register');
+    Route::post('login', 'Member\PassportController@login');
+});
+
+//用户资料管理
+Route::group(['middleware' => 'auth:api', 'namespace' => 'User', 'prefix' => 'user'], function () {
+    //获取个人资料
+    Route::get('get', 'UserController@get');
+});
+
+//站点管理
 Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'site'], function () {
     Route::resource('site', 'SiteController')->except(['edit', 'create']);
-    Route::put('config/{site}','ConfigController@update');
-    Route::get('config/{site}','ConfigController@show');
+    Route::put('config/{site}', 'ConfigController@update');
+    Route::get('config/{site}', 'ConfigController@show');
     Route::resource('{site}/weChat', 'WeChatController')->except(['edit', 'create']);
     Route::get('{site}/access/{user}', 'AccessController@index');
     Route::put('{site}/access/{user}', 'AccessController@update');
 });
 
+//系统管理
 Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
     Route::resource('package', 'PackageController')->except(['edit', 'create']);
     Route::resource('user', 'UserController')->except(['edit', 'create']);
@@ -24,10 +36,12 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => '
     Route::resource('upload', 'SystemUploadController')->except(['edit', 'create', 'show', 'index']);
 });
 
+//系统配置
 Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
     Route::resource('config', 'SystemConfigController')->except(['edit', 'create']);
 });
 
+//会员组
 Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
     Route::resource('group', 'GroupController')->except(['edit', 'create']);
     Route::resource('module', 'ModuleController')->except(['edit', 'create']);
