@@ -6,6 +6,10 @@ import common from "./common";
 import admin from './admin'
 
 const routes = [
+  {
+    path: '/admin',
+    redirect: '/site/index'
+  },
   admin, site, system, common
 ];
 

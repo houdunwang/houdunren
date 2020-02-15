@@ -1,5 +1,6 @@
-import Vue from 'vue'
 import token from '@/services/token'
+import store from '@/store/index'
+import router from '@/router/index'
 //用户
 export default {
   namespaced: true,
@@ -7,7 +8,7 @@ export default {
     data: null,
   },
   mutations: {
-    update(state, data) {
+    set(state, data) {
       state.data = data;
     }
   },
@@ -15,29 +16,27 @@ export default {
     async userLogin({commit}, data) {
       let response = await window.axios.post("/user/login", data);
 
-      token.set(response.data.access_token);
-      const user = response.data.data;
-      commit('update', {data: user});
-      return user;
+      token.set(response.data.token);
+      commit('set', response.data.data);
+      return response;
     },
     async adminLogin({commit}, data) {
       let response = await window.axios.post("/admin/login", data);
 
       token.set(response.data.token);
-      const user = response.data.data;
-      commit('update', {data: user});
-      return user;
+      commit('set', response.data.data);
+      return response;
     },
     async get({state, commit}) {
       if (state.data) return Promise.resolve(state.data);
 
       let response = await window.axios.get("/user/get");
-      commit('update', {data: response.data.data});
-      return response.data.data;
+      commit('set', response.data.data);
+      return response;
     },
     logout() {
-      Token.del();
-      router.push("/login");
+      token.del();
+      router.push("/admin/login");
     }
   },
 };

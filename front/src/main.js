@@ -1,5 +1,6 @@
 import '@babel/polyfill'
 import 'mutationobserver-shim'
+
 window.Vue = require("vue");
 import Vue from "vue";
 import './plugins/bootstrap-vue'
@@ -11,16 +12,14 @@ import store from "./store/index";
 import "./plugins/element.js";
 import "./services/filter";
 import './plugins/element.js'
-// require("./services/validation");
-// require("./services/element");
-// require("./services/moment");
 
+window.api = process.env.VUE_APP_API_URL;
 Vue.component("app", App);
 
 new Vue({
-    router,
-    store,
-    render: h => h(App)
+  router,
+  store,
+  render: h => h(App)
 }).$mount("#app");
 
 console.log(`

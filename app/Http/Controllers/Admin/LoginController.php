@@ -21,7 +21,7 @@ class LoginController extends ApiController
         if (auth()->attempt($credentials)) {
             $user = auth()->user();
             $token = $user->createToken('hdcms')->accessToken;
-            return response()->json(['access_token' => $token, 'data' => $user], 200);
+            return response()->json(['token' => $token, 'data' => $user], 200);
         } else {
             return $this->error('帐号或密码错误');
         }

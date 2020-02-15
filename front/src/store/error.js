@@ -5,13 +5,8 @@ export default {
     data: {},
   },
   mutations: {
-    update(state, {data}) {
+    set(state, data) {
       state.data = data;
     },
-  },
-  actions: {
-    set({commit}, data) {
-      commit(MUTATE, data);
-    }
-  },
+  }
 };

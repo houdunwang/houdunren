@@ -7,8 +7,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
 
 //会员登录注册
 Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
-    Route::post('register', 'Member\PassportController@register');
-    Route::post('login', 'Member\PassportController@login');
+    Route::post('register', 'LoginController@login');
+    Route::post('login', 'RegisterController@login');
 });
 
 //用户资料管理

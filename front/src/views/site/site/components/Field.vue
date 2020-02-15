@@ -1,11 +1,11 @@
 <template>
   <div>
     <el-breadcrumb separator-class="el-icon-arrow-right" class="pt-3 pb-2 pl-1">
-      <el-breadcrumb-item :to="{ path: '/admin' }">
+      <el-breadcrumb-item to="/admin">
         <i class="fa fa-home" aria-hidden="true"></i>
         首页
       </el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ name:'site.manage.index' }">站点管理</el-breadcrumb-item>
+      <el-breadcrumb-item to="/site/idnex">站点管理</el-breadcrumb-item>
       <el-breadcrumb-item>设置站点信息</el-breadcrumb-item>
     </el-breadcrumb>
     <el-form ref="form" label-width="100px" :rules="rules" :model="field" label-position="right">
@@ -35,7 +35,7 @@
               <el-form-item label="站点标志">
                 <el-upload
                   class="avatar-uploader"
-                  action="/api/system/upload"
+                  :action="uploadUrl"
                   accept="image/jpeg, image/png"
                   :show-file-list="false"
                   :on-success="logoUpload"
@@ -68,7 +68,7 @@
           <i class="el-icon-arrow-up"></i>
         </el-divider>
         <el-form-item>
-          <el-button type="primary" @click.prevent="submit">保存提交</el-button>
+          <el-button type="primary" @click.prevent="submit('form')">保存提交</el-button>
         </el-form-item>
       </el-card>
     </el-form>
@@ -76,10 +76,10 @@
 </template>
 
 <script>
-  import {mapActions} from "vuex";
   import token from "@/services/token";
 
   export default {
+    props: ['action'],
     data() {
       return {
         field: {
@@ -105,11 +105,14 @@
     },
     async created() {
       if (this.action === "edit") {
-        let site = await this.find(this.$route.params.id);
-        this.$set(this, "field", site);
+        let response = await this.axios.get(`/site/site/${this.$route.params.id}`)
+        this.$set(this, "field", response.data.data);
       }
     },
     computed: {
+      uploadUrl() {
+        return `${window.api}/system/upload`
+      },
       //文件上传头信息
       headers() {
         return {
@@ -118,7 +121,6 @@
       }
     },
     methods: {
-      ...mapActions("site", ["edit", "find", "add"]),
       //上传标志
       logoUpload(res, file) {
         this.field.logo = res;
@@ -128,14 +130,14 @@
           if (valid) {
             switch (this.action) {
               case "add":
-                await this.add(this.field);
+                await this.axios.post(`/site/site`,this.field);
                 this.$message.success("添加成功");
-                this.$router.push({name: "site.index"});
+                this.$router.push('/admin');
                 break;
               case "edit":
-                await this.edit(this.field);
+                await this.axios.put(`/site/site/${this.field.id}`,this.field);
                 this.$message.success("更新成功");
-                this.$router.push({name: "site.index"});
+                this.$router.push('/admin');
                 break;
             }
           } else {

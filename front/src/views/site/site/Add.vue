@@ -7,9 +7,6 @@
   export default {
     components: {
       Field
-    },
-    methods: {
-
     }
   };
 </script>

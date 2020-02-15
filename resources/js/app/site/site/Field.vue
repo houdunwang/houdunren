@@ -77,7 +77,7 @@
 </template>
 
 <script>
-    import {mapActions, mapState} from "vuex";
+    import {mapActions} from "vuex";
     import Token from "../../../services/Token";
 
     export default {

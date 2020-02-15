@@ -11,18 +11,22 @@ use Illuminate\Http\Request;
  */
 class SystemConfigController extends ApiController
 {
-    public function index(SystemConfig $systemConfig)
-    {
-        $config = $systemConfig->first()->config;
-        return  $this->success('系统配置获取成功', $config);
-    }
+  public function show(SystemConfig $config)
+  {
+    $data = array_merge(config('hd.system'), $config['config'] ?? []);
+    return $this->success('系统配置获取成功', $data);
+  }
 
-    public function store(Request $request)
-    {
-        $config = $request->input('data');
-        $model =  SystemConfig::first();
-        $model['config'] = $config;
-        $model->save();
-        return $this->success('更新成功', $model->config);
+  public function store(Request $request)
+  {
+    $config = $request->input('data');
+    if (!empty($config)) {
+      $model = SystemConfig::first();
+      $model['config'] = $config;
+      $model->save();
+
+      return $this->success('更新成功', $model->config);
     }
+    return $this->error('参数错误');
+  }
 }

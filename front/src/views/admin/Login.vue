@@ -55,7 +55,7 @@ export default {
       this.$refs[formName].validate(async valid => {
         if (valid) {
           await this.adminLogin(this.field);
-          this.$router.push({name:'site.manage.index'})
+          this.$router.push('/site/index')
         } else {
           return false;
         }
