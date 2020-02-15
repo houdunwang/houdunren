@@ -1,11 +1,16 @@
+import '@babel/polyfill'
+import 'mutationobserver-shim'
 window.Vue = require("vue");
 import Vue from "vue";
-import './plugins/axios'
+import './plugins/bootstrap-vue'
+import './assets/common.scss'
+import "./plugins/axios";
 import App from "./App";
 import router from "./router/index.js";
 import store from "./store/index";
+import "./plugins/element.js";
+import "./services/filter";
 import './plugins/element.js'
-import './services/filter'
 // require("./services/validation");
 // require("./services/element");
 // require("./services/moment");

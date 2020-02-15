@@ -4,20 +4,20 @@ import router from "../router/index";
 import httpStatus from "../services/httpStatus";
 import Loading from "./Loading";
 import store from "../store";
-import Vue from 'vue'
+import Vue from "vue";
 
 const http = axios.create({
     baseURL: `http://hdcms.test/api`,
+    // baseURL: process.env.baseURL,
     timeout: 5000
     // headers: { Authorization: "Bearer " + Token.get() }
 });
-
 
 Vue.prototype.$http = http;
 
 //请求拦截
 http.interceptors.request.use(
-    function (config) {
+    function(config) {
         Loading.show();
         let token = Token.get();
         if (token) {
@@ -25,7 +25,7 @@ http.interceptors.request.use(
         }
         return config;
     },
-    function (error) {
+    function(error) {
         return Promise.reject(error);
     }
 );
@@ -41,10 +41,9 @@ http.interceptors.response.use(
     error => {
         Loading.close();
         let status = error.response.status;
-        console.log(error.response)
         if (error && error.response) {
             if (status === 422) {
-                store.commit('error/set', error.response.data.errors);
+                store.commit("error/set", error.response.data.errors);
             } else {
                 let message = error.response.data.message;
                 message = message ? message : httpStatus(error.response.status);

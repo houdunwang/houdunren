@@ -1,19 +1,17 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import user from "./user/index";
-import setting from "./setting/index";
-import group from "./group/index";
-import site from "./site/index";
-import error from './error/index'
+import error from "./error";
+import group from "./group";
+import site from "./site";
+import siteConfig from "./siteConfig";
+import user from "./user";
+import systemConfig from "@/store/systemConfig";
 
 Vue.use(Vuex);
 
+//VUEX入口
 export default new Vuex.Store({
-    modules: {
-        setting,
-        user,
-        group,
-        site,
-        error
-    }
+  modules: {
+    systemConfig, error, group, site, siteConfig, user
+  }
 });

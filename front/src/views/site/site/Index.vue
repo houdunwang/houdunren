@@ -1,6 +1,9 @@
 <template>
     <div>
-        <router-link :to="{name:'site.manage.add'}" class="btn btn-info mb-3">
+        <router-link
+            :to="{ name: 'site.manage.add' }"
+            class="btn btn-info mb-3"
+        >
             <i class="fa fa-plus"></i> 添加网站
         </router-link>
 
@@ -18,16 +21,24 @@
                 <span class="h4">{{ site.name }}</span>
             </div>
             <div class="card-footer text-muted">
-                <div class="d-flex flex-md-row flex-column justify-content-between">
+                <div
+                    class="d-flex flex-md-row flex-column justify-content-between"
+                >
                     <div class="small">
-                        创建时间: {{ site.created_at | dateFormat }}
-                        站长 : {{ site.admin.name }}
+                        创建时间: {{ site.created_at | dateFormat }} 站长 :
+                        {{ site.admin.name }}
                     </div>
 
                     <div class="lin"></div>
 
                     <div class="small" v-if="isAdmin(site)">
-                        <router-link class="text-muted mr-2" :to="{name:'site.config.edit',params:{id:site.id}}">
+                        <router-link
+                            class="text-muted mr-2"
+                            :to="{
+                                name: 'site.config.edit',
+                                params: { id: site.id }
+                            }"
+                        >
                             <i class="fa fa-key"></i> 网站配置
                         </router-link>
 
@@ -40,10 +51,20 @@
                         <a href class="text-muted mr-2">
                             <i class="fa fa-user"></i> 操作员管理
                         </a>
-                        <router-link :to="{name:'site.manage.edit',params:{id:site.id}}" class="text-muted mr-2">
+                        <router-link
+                            :to="{
+                                name: 'site.manage.edit',
+                                params: { id: site.id }
+                            }"
+                            class="text-muted mr-2"
+                        >
                             <i class="fa fa-pencil-square-o"></i> 编辑
                         </router-link>
-                        <a href @click.prevent="delSite(site)" class="text-muted">
+                        <a
+                            href
+                            @click.prevent="delSite(site)"
+                            class="text-muted"
+                        >
                             <i class="fa fa-trash"></i> 删除
                         </a>
                     </div>
@@ -54,39 +75,38 @@
 </template>
 
 <script>
-    import {mapState, mapActions} from "vuex";
-    import store from '@/store/index'
-
-    export default {
-        async beforeRouteEnter(to, from, next) {
-            await Promise.all([
-                store.dispatch('site/all'),
-                store.dispatch('user/get')
-            ]);
-            next();
+import { mapState, mapActions } from "vuex";
+import store from "@/store/index";
+export default {
+    async beforeRouteEnter(to, from, next) {
+        await Promise.all([
+            store.dispatch("site/all"),
+            store.dispatch("user/get")
+        ]);
+        next();
+    },
+    computed: {
+        ...mapState("site", { sites: "data" }),
+        ...mapState("user", { user: "data" })
+    },
+    methods: {
+        ...mapActions("site", ["del"]),
+        isAdmin(site) {
+            return this.user.is_super_admin || site.admin.id === this.user.id;
         },
-        computed: {
-            ...mapState('site', {sites: 'data'}),
-            ...mapState("user", {user: 'data'}),
-        },
-        methods: {
-            ...mapActions("site", ["del"]),
-            isAdmin(site) {
-                return this.user.is_super_admin || site.admin.id === this.user.id;
-            },
-            delSite(site) {
-                this.$confirm('确定删除吗?', '温馨提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning',
-                }).then(async () => {
-                    await this.del(site.id);
-                    this.$message.success('删除成功')
-                })
-            }
-        },
-        async created() {
-            // await this.all()
-        },
-    };
+        delSite(site) {
+            this.$confirm("确定删除吗?", "温馨提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            }).then(async () => {
+                await this.del(site.id);
+                this.$message.success("删除成功");
+            });
+        }
+    },
+    async created() {
+        // await this.all()
+    }
+};
 </script>

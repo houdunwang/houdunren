@@ -1,16 +1,15 @@
 <template>
-    <field action="add"/>
+  <field action="add" />
 </template>
-
 <script>
-    import Field from "./components/Field";
+  import Field from "./components/Field";
 
-    export default {
-        components: {
-            Field
-        }
-    };
+  export default {
+    components: {
+      Field
+    },
+    methods: {
+
+    }
+  };
 </script>
-
-<style>
-</style>
