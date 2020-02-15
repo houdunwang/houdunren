@@ -3,10 +3,14 @@ export default {
   namespaced: true,
   state: {
     data: null,
+    config: null
   },
   mutations: {
-    update(state, data) {
+    set(state, data) {
       state.data = data;
+    },
+    config(state, data) {
+      state.config = data;
     }
   },
   actions: {

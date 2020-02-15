@@ -32,13 +32,8 @@
           <div class="lin"></div>
 
           <div class="small" v-if="isAdmin(site)">
-            <router-link
-              class="text-muted mr-2"
-              :to="{
-                                name: 'site.config.edit',
-                                params: { id: site.id }
-                            }"
-            >
+            <router-link class="text-muted mr-2"
+                         :to="{name:'site.config',params:{id:site.id}}">
               <i class="fa fa-key"></i> 网站配置
             </router-link>
 
@@ -91,13 +86,14 @@
         return this.user.is_super_admin || site.admin.id === this.user.id;
       },
       delSite(site) {
-        this.$confirm("确定删除吗?", "温馨提示", {
+        this.$confirm(`确定删除[${site.name}]吗?`, "温馨提示", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
         }).then(async () => {
-          await this.del(site.id);
+          await this.axios.delete(`/site/site/${site.id}`);
           this.$message.success("删除成功");
+          this.$router.go('/admin')
         });
       }
     },

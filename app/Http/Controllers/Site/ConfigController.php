@@ -14,15 +14,16 @@ use Illuminate\Http\Request;
  */
 class ConfigController extends ApiController
 {
-    public function show(Site $site)
-    {
-        return $this->success('', $site['config']??[]);
-    }
+  public function show(Site $site)
+  {
+    $config = array_merge(config('hd.site'), $site['config'] ?? []);
+    return $this->success('', $config);
+  }
 
-    public function update(Request $request, Site $site)
-    {
-        $site->config = $request->config;
-        $site->save();
-        return $this->success('配置成功更新', $site);
-    }
+  public function update(Request $request, Site $site)
+  {
+    $site['config'] = $request['data'];
+    $site->save();
+    return $this->success('配置成功更新', $site);
+  }
 }

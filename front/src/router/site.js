@@ -1,5 +1,5 @@
 import Admin from '@/views/Admin'
-import ConfigEdit from "@/views/site/config/Edit";
+import Config from "@/views/site/config/Edit";
 import Add from "@/views/site/site/Add.vue";
 import Edit from "@/views/site/site/Edit.vue";
 import Index from "@/views/site/site/Index";
@@ -31,7 +31,8 @@ export default {
     },
     {
       path: "config/:id",
-      component: ConfigEdit
+      name: 'site.config',
+      component: Config
     }
   ]
 };
