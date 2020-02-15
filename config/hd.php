@@ -60,8 +60,8 @@ return [
     ],
     'user' => [
       'drive' => ['value' => ['email'], 'title' => '注册类型', 'desc' => ''],
-      'captcha' => ['value' => '', 'title' => '登录注册验证码', 'desc' => ''],
-      'avatar' => ['value' => false, 'title' => '必须设置头像', 'desc' => '如果用户没设置头像将强制要求设置'],
+      'captcha' => ['value' => 0, 'title' => '登录注册验证码', 'desc' => ''],
+      'avatar' => ['value' => 0, 'title' => '必须设置头像', 'desc' => '如果用户没设置头像将强制要求设置'],
     ],
     'notification' => [
       'timeout' => ['value' => 60, 'title' => '短信/邮件发送间隔时间', 'desc' => ''],
@@ -77,7 +77,7 @@ return [
       'algolia_secret' => ['value' => '', 'title' => 'ALGOLIA_SECRET', 'desc' => ''],
     ],
     'maintain' => [
-      'close' => ['value' => false, 'title' => '暂停访问', 'desc' => '网站维护时只有系统超级管理员可以访问'],
+      'close' => ['value' => 0, 'title' => '暂停访问', 'desc' => '网站维护时只有系统超级管理员可以访问'],
       'message' => ['value' => '', 'title' => '提示信息', 'desc' => '网站临时关闭时提示给用户的友好信息'],
     ],
   ],
