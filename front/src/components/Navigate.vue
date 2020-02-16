@@ -75,7 +75,7 @@
           {
             title: "系统设置",
             icon: "fa-support",
-            url: "/admin/setting",
+            url: "/system/index",
             check: true
           },
           {title: "更新缓存", icon: "fa-bitbucket", url: "/admin", check: true},
@@ -100,5 +100,7 @@
   .navigate {
     background-color: #343a40;
     opacity: .95;
+    position: relative;
+    z-index: 1;
   }
 </style>

@@ -2,75 +2,41 @@
 
 namespace App\Http\Controllers\System;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
+use App\Http\Requests\ModuleRequest;
 use App\Models\Module;
+use App\Servers\ModuleServer;
 use Illuminate\Http\Request;
 
-class ModuleController extends Controller
+/**
+ * 模块管理
+ * Class ModuleController
+ * @package App\Http\Controllers\System
+ */
+class ModuleController extends ApiController
 {
-    public function index()
-    {
-        $this->authorizeResource(Module::class,'module');
-    }
+  public function __construct()
+  {
+    $this->authorizeResource(Module::class, 'module');
+  }
 
-    public function create()
-    {
-        //
-    }
+  public function index(ModuleServer $moduleServer): array
+  {
+    return $moduleServer->all();
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  public function install(ModuleRequest $moduleRequest, Module $module)
+  {
+    $module['name'] = $moduleRequest->name;
+    $module->save();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Module  $module
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Module $module)
-    {
-        //
-    }
+    return $this->success('模块安装成功');
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Module  $module
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Module $module)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Module  $module
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Module $module)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Module  $module
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Module $module)
-    {
-        //
-    }
+  public function uninstall(string $name)
+  {
+    $module = Module::where('name', $name)->firstOrFail();
+    $module->delete();
+    return $this->success('卸载成功');
+  }
 }

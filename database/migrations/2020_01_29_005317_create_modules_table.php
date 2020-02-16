@@ -16,7 +16,6 @@ class CreateModulesTable extends Migration
     Schema::create('modules', function (Blueprint $table) {
       $table->bigIncrements('id');
       $table->string('name')->unique()->comment('模块标识');
-      $table->boolean('open')->default(false)->comment('模块开启');
       $table->timestamps();
     });
   }

@@ -25,7 +25,7 @@
 
   export default {
     methods: {
-      ...mapActions("user", ["adminLogout"])
+      ...mapActions("user", ["adminLogout"]),
     },
     computed: {
       ...mapState("user", {user: 'data'})
@@ -55,11 +55,12 @@
         width: 8em;
         text-align: center;
         text-decoration: none;
-        background: #485658;
-        color: #eeeeee;
-        opacity: 0.8;
-        box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
+        background: #ddd;
+        color: #333;
+        opacity: 0.7;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
         border-radius: 5px;
+        transition: .5s;
 
         &:hover {
           opacity: 0.9;

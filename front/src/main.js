@@ -3,15 +3,16 @@ import 'mutationobserver-shim'
 
 window.Vue = require("vue");
 import Vue from "vue";
-import './plugins/bootstrap-vue'
-import './assets/common.scss'
-import "./plugins/axios";
 import App from "./App";
 import router from "./router/index.js";
 import store from "./store/index";
+import './plugins/bootstrap-vue'
+import './assets/common.scss'
+import "./plugins/axios";
 import "./plugins/element.js";
-import "./services/filter";
 import './plugins/element.js'
+import "./services/filter";
+
 
 window.api = process.env.VUE_APP_API_URL;
 Vue.component("app", App);

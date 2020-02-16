@@ -10,7 +10,7 @@ use Spatie\Permission\Models\Permission;
  * Class Access
  * @package App\Servers
  */
-class Access
+class AccessServer
 {
   /**
    * 更新所有站点权限

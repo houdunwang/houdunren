@@ -12,7 +12,9 @@
         <div class="row">
           <div class="col-6">套餐</div>
           <div class="col-6 text-right">
-            <i class="fa fa-cog"></i> 管理站点
+            <router-link to="/admin" class="text-secondary">
+              <i class="fa fa-cog"></i> 管理站点
+            </router-link>
           </div>
         </div>
       </div>
@@ -37,9 +39,11 @@
               <i class="fa fa-key"></i> 网站配置
             </router-link>
 
-            <a href class="text-muted mr-2">
+            <router-link class="text-muted mr-2"
+                         :to="{name:'site.module',params:{id:site.id}}">
               <i class="fa fa-key"></i> 站点模块
-            </a>
+            </router-link>
+
             <a href class="text-muted mr-2">
               <i class="fa fa-comment-o"></i> 微信公众号
             </a>

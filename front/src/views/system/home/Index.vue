@@ -24,7 +24,7 @@
           {
             title: "应用扩展",
             children: [
-              {title: "模块", icon: "fa fa-cubes", url: ""},
+              {title: "模块", icon: "fa fa-cubes", url: "/system/module/index"},
             ]
           },
           {

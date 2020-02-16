@@ -2,7 +2,7 @@
 
 import Vue from "vue";
 import axios from "axios";
-import Loading from "../services/Loading";
+import loading from "../services/loading";
 import token from "@/services/token";
 import store from "@/store";
 import httpStatus from "@/services/httpStatus";
@@ -24,7 +24,7 @@ const _axios = axios.create(config);
 
 _axios.interceptors.request.use(
   function (config) {
-    Loading.show();
+    loading.show();
     let accessToken = token.get();
     if (accessToken) {
       config.headers.Authorization = "Bearer " + accessToken;
@@ -39,11 +39,11 @@ _axios.interceptors.request.use(
 // Add a response interceptor
 _axios.interceptors.response.use(
   function (response) {
-    Loading.close();
+    loading.close();
     return response;
   },
   function (error) {
-    Loading.close();
+    loading.close();
     if (error && error.response) {
       let status = error.response.status;
       if (status === 422) {

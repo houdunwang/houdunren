@@ -6,7 +6,7 @@ use Illuminate\Http\UploadedFile;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Storage;
 
-class Upload
+class UploadServer
 {
     //本地文件上传
     public function local(UploadedFile $file)

@@ -1,9 +1,10 @@
+import store from "@/store";
+import router from '@/router'
 import Edit from '@/views/system/config/Edit'
 import Admin from '@/views/Admin'
 import Login from "@/views/admin/Login.vue";
 import Index from '@/views/system/home/Index'
-import store from "@/store";
-import router from '@/router'
+import ModuleIndex from '@/views/system/module/Index'
 //系统配置
 export default {
   path: '/system',
@@ -11,8 +12,8 @@ export default {
   async beforeEnter(to, from, next) {
     try {
       await store.dispatch('user/get');
-      await store.dispatch('systemConfig/get')
-      if (!store.state.user.is_super_admin) router.push('/admin');
+      await store.dispatch('systemConfig/get');
+      if (!store.state.user.data.is_super_admin) router.push('/site/index');
     } catch (e) {
       store.dispatch('user/adminLogout');
     }
@@ -30,6 +31,11 @@ export default {
     {
       path: "config",
       component: Edit
+    },
+    {
+      path: 'module/index',
+      name: 'system.module.index',
+      component: ModuleIndex
     }
   ]
 };

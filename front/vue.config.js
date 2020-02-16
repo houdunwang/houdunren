@@ -2,10 +2,9 @@ module.exports = {
   pluginOptions: {
     moment: {
       locales: [
-        'zh_cn'
+        'zh_CN',
       ]
     }
   },
-
   lintOnSave: false
 }
