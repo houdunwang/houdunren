@@ -3,7 +3,7 @@
     <nav class="nav nav-tabs mb-2">
       <a class="nav-link active" href="#">已安装模块</a>
     </nav>
-    <div class="card">
+    <div class="card shadow-sm">
       <div class="card-header"> 已安装模块列表</div>
       <div class="card-body" v-if="modules">
         <div class="row" :key="index" v-for="(module,index) in modules">
@@ -41,7 +41,7 @@
     },
     async created() {
       let response = await this.axios('/system/module');
-      this.modules = response.data;
+      this.modules = response.data.data;
     },
     methods: {
       preview(module) {

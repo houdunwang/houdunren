@@ -12,7 +12,7 @@ use App\Models\Module;
 class ModuleServer
 {
   /**
-   * 获取所有模块资料
+   * 所有模块包括未安装模块
    * @return array
    */
   public function all(): array
@@ -22,6 +22,18 @@ class ModuleServer
       $data[] = $this->getModuleInfo($module->getName());
     }
     return $data;
+  }
+
+  /**
+   * 所有已经安装的模块
+   * @return array
+   */
+  public function allInstalledModule(): array
+  {
+    $modules = $this->all();
+    return array_filter($modules, function ($module) {
+      return $module['installed'];
+    });
   }
 
   /**

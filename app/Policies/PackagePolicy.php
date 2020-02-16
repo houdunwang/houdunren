@@ -14,54 +14,53 @@ use Illuminate\Auth\Access\Response;
  */
 class PackagePolicy
 {
-    use HandlesAuthorization;
+  use HandlesAuthorization;
 
-    public function before(User $user)
-    {
-        if ($user->is_super_admin) {
-            return true;
-        }
-    }
-    public function viewAny(User $user)
-    {
-    }
+  public function before(User $user): bool
+  {
+    return (bool)$user['is_super_admin'];
+  }
 
-    public function view(User $user, Package $package)
-    {
-    }
+  public function viewAny(User $user)
+  {
+  }
 
-    public function create(User $user)
-    {
-    }
+  public function view(User $user, Package $package)
+  {
+  }
 
-    public function update(User $user, Package $package)
-    {
-    }
+  public function create(User $user)
+  {
+  }
 
-    public function delete(User $user, Package $package)
-    {
-    }
+  public function update(User $user, Package $package)
+  {
+  }
 
-    /**
-     * Determine whether the user can restore the package.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Models\Package  $package
-     * @return mixed
-     */
-    public function restore(User $user, Package $package)
-    {
-    }
+  public function delete(User $user, Package $package)
+  {
+  }
 
-    /**
-     * Determine whether the user can permanently delete the package.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Models\Package  $package
-     * @return mixed
-     */
-    public function forceDelete(User $user, Package $package)
-    {
-        //
-    }
+  /**
+   * Determine whether the user can restore the package.
+   *
+   * @param \App\User $user
+   * @param \App\Models\Package $package
+   * @return mixed
+   */
+  public function restore(User $user, Package $package)
+  {
+  }
+
+  /**
+   * Determine whether the user can permanently delete the package.
+   *
+   * @param \App\User $user
+   * @param \App\Models\Package $package
+   * @return mixed
+   */
+  public function forceDelete(User $user, Package $package)
+  {
+    //
+  }
 }

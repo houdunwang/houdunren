@@ -5,6 +5,10 @@ import Admin from '@/views/Admin'
 import Login from "@/views/admin/Login.vue";
 import Index from '@/views/system/home/Index'
 import ModuleIndex from '@/views/system/module/Index'
+import Package from '@/views/system/package/Index'
+import PackageAdd from '@/views/system/package/Add'
+import PackageEdit from '@/views/system/package/Edit'
+
 //系统配置
 export default {
   path: '/system',
@@ -20,22 +24,12 @@ export default {
     next();
   },
   children: [
-    {
-      path: "/admin/login",
-      component: Login
-    },
-    {
-      path: "index",
-      component: Index
-    },
-    {
-      path: "config",
-      component: Edit
-    },
-    {
-      path: 'module/index',
-      name: 'system.module.index',
-      component: ModuleIndex
-    }
+    {path: "/admin/login", component: Login},
+    {path: "index", component: Index},
+    {path: "config", component: Edit},
+    {path: 'module/index', name: 'system.module.index', component: ModuleIndex},
+    {path: 'package/index', name: 'system.package.index', component: Package},
+    {path: 'package/add', name: 'system.package.add', component: PackageAdd},
+    {path: 'package/edit', name: 'system.package.edit', component: PackageEdit}
   ]
 };

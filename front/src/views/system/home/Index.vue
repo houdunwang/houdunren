@@ -33,7 +33,7 @@
               {title: "我的帐户", icon: "fa-briefcase", url: ""},
               {title: "用户管理", icon: "fa-user", url: ""},
               {title: "用户组管理", icon: "fa-users", url: ""},
-              {title: "服务套餐", icon: "fa-comments-o", url: ""}
+              {title: "服务套餐", icon: "fa-comments-o", url: "/system/package/index"}
             ]
           },
           {

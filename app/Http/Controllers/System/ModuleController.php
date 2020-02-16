@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\ModuleRequest;
 use App\Models\Module;
 use App\Servers\ModuleServer;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
@@ -20,12 +21,24 @@ class ModuleController extends ApiController
     $this->authorizeResource(Module::class, 'module');
   }
 
-  public function index(ModuleServer $moduleServer): array
+  /**
+   * 获取所有模块包括未安装模块
+   * @param ModuleServer $moduleServer
+   * @return JsonResponse
+   */
+  public function index(ModuleServer $moduleServer): JsonResponse
   {
-    return $moduleServer->all();
+    $modules = $moduleServer->all();
+    return $this->success('模块获取成功', $modules);
   }
 
-  public function install(ModuleRequest $moduleRequest, Module $module)
+  /**
+   * 安装模块
+   * @param ModuleRequest $moduleRequest
+   * @param Module $module
+   * @return JsonResponse
+   */
+  public function install(ModuleRequest $moduleRequest, Module $module): JsonResponse
   {
     $module['name'] = $moduleRequest->name;
     $module->save();
@@ -33,10 +46,26 @@ class ModuleController extends ApiController
     return $this->success('模块安装成功');
   }
 
-  public function uninstall(string $name)
+  /**
+   * 卸载模块
+   * @param string $name
+   * @return JsonResponse
+   */
+  public function uninstall(string $name): JsonResponse
   {
     $module = Module::where('name', $name)->firstOrFail();
     $module->delete();
     return $this->success('卸载成功');
+  }
+
+  /**
+   * 所有已经安装模块
+   * @param ModuleServer $moduleServer
+   * @return JsonResponse
+   */
+  public function allInstalled(ModuleServer $moduleServer): JsonResponse
+  {
+    $modules = $moduleServer->allInstalledModule();
+    return $this->success('模块获取成功', $modules);
   }
 }

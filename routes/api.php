@@ -43,4 +43,5 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => '
   Route::get('module', 'ModuleController@index');
   Route::post('module', 'ModuleController@install');
   Route::delete('module/{name}', 'ModuleController@uninstall');
+  Route::get('module/installed', 'ModuleController@allInstalled');
 });
