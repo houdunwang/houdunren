@@ -26,12 +26,12 @@
         >
           <div class="small">
             创建时间: {{ site.created_at | dateFormat }} 站长 :
-            {{ site.admin.name }}
+            {{ site.user.name }}
           </div>
 
           <div class="lin"></div>
 
-          <div class="small" v-if="isAdmin(site)">
+          <div class="small">
             <router-link class="text-muted mr-2"
                          :to="{name:'site.config',params:{id:site.id}}">
               <i class="fa fa-key"></i> 网站配置
@@ -66,8 +66,6 @@
 </template>
 
 <script>
-  import {mapState} from "vuex";
-
   export default {
     data() {
       return {
@@ -75,16 +73,10 @@
       }
     },
     async created() {
-      let response = await this.axios.get('/site/site')
+      let response = await this.axios.get('/site/site');
       this.$set(this, 'data', response.data.data);
     },
-    computed: {
-      ...mapState("user", {user: "data"})
-    },
     methods: {
-      isAdmin(site) {
-        return this.user.is_super_admin || site.admin.id === this.user.id;
-      },
       delSite(site) {
         this.$confirm(`确定删除[${site.name}]吗?`, "温馨提示", {
           confirmButtonText: "确定",

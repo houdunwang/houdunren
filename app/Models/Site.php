@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use App\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Permission\Models\Permission;
 
 /**
@@ -13,7 +16,7 @@ use Spatie\Permission\Models\Permission;
  */
 class Site extends Model
 {
-    protected $fillable = ['name', 'keyword', 'description', 'logo', 'icp', 'tel', 'email', 'counter','domain'];
+    protected $fillable = ['name', 'keyword', 'description', 'logo', 'icp', 'tel', 'email', 'counter','domain','user_id'];
 
     protected $casts = [
         'config' => 'array'
@@ -21,64 +24,28 @@ class Site extends Model
 
     /**
      * 公众号关联
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function weChat(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function weChat(): HasMany
     {
         return $this->hasMany(WeChat::class);
     }
 
     /**
      * 站点所有权限
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function permissions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function permissions(): HasMany
     {
         return $this->hasMany(Permission::class);
     }
 
-    public function siteUser()
-    {
-        return $this->hasMany(SiteUser::class);
-    }
-
     /**
      * 站点用户关联
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsTo
      */
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function user(): BelongsTo
     {
-        return $this->belongsToMany(User::class, 'site_users')
-            ->withTimestamps()
-            ->withPivot('role')->as('role');
-    }
-
-    /**
-     * 获取管理员与操作员
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function manage(): \Illuminate\Database\Eloquent\Collection
-    {
-        return $this->user()
-            ->wherePivotIn('role', ['admin', 'operator'])->get();
-    }
-
-    /**
-     * 是否是操作员或管理员
-     * @param User $user
-     * @return bool
-     */
-    public function isManage(User $user): bool
-    {
-        return $this->manage()->contains($user);
-    }
-
-    /**
-     * 获取站长
-     * @return mixed
-     */
-    public function admin()
-    {
-        return $this->user()->wherePivot('role', 'admin')->first();
+      return $this->belongsTo(User::class);
     }
 }

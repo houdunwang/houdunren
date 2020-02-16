@@ -32,5 +32,6 @@
   .admin-container {
     background-image: url("../assets/bg.jpg");
     height: 100vh;
+    background-size: cover;
   }
 </style>

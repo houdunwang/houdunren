@@ -22,6 +22,12 @@
       return {
         menus: [
           {
+            title: "应用扩展",
+            children: [
+              {title: "模块", icon: "fa fa-cubes", url: ""},
+            ]
+          },
+          {
             title: "用户管理",
             children: [
               {title: "我的帐户", icon: "fa-briefcase", url: ""},
@@ -33,7 +39,7 @@
           {
             title: "系统管理",
             children: [
-              {title: "站点列表", icon: "fa-sitemap", url: ""},
+              {title: "站点列表", icon: "fa-sitemap", url: "/site/index"},
               {
                 title: "系统配置",
                 icon: "fa-tachometer",
@@ -92,7 +98,8 @@
 
       &:hover {
         opacity: 0.9;
-        box-shadow: 0 0 2px rgba($color: #b1adad, $alpha: 0.5);
+        background: #dedede;
+        border: solid 1px #ccc;
       }
     }
   }

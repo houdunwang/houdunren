@@ -10,7 +10,7 @@
           <router-link to="/system/index" v-if="user.is_super_admin">
             <i class="fa fa-support fa-2x d-block"></i>系统设置
           </router-link>
-          <a href class="tile" @click.prevent="logout">
+          <a href class="tile" @click.prevent="adminLogout">
             <i class="fa fa-sign-out fa-2x d-block"></i>
             退出
           </a>
@@ -25,10 +25,9 @@
 
   export default {
     methods: {
-      ...mapActions("user", ["logout"])
+      ...mapActions("user", ["adminLogout"])
     },
     computed: {
-      ...mapState("setting", ["setting"]),
       ...mapState("user", {user: 'data'})
     }
   };
@@ -41,6 +40,7 @@
       height: 60px;
       background-size: contain;
       background-repeat: no-repeat;
+      background-position: 20px 0;
     }
 
     .menu {
@@ -55,10 +55,11 @@
         width: 8em;
         text-align: center;
         text-decoration: none;
-        background: #006675;
+        background: #485658;
         color: #eeeeee;
         opacity: 0.8;
         box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
+        border-radius: 5px;
 
         &:hover {
           opacity: 0.9;

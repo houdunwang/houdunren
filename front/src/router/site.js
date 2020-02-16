@@ -9,10 +9,12 @@ export default {
   path: "/site",
   component: Admin,
   async beforeEnter(to, from, next) {
-    await Promise.all([
-      store.dispatch('user/get'),
-      store.dispatch('systemConfig/get')
-    ]);
+    try {
+      await store.dispatch('user/get');
+      await store.dispatch('systemConfig/get')
+    } catch (e) {
+      store.dispatch('user/adminLogout');
+    }
     next();
   },
   children: [

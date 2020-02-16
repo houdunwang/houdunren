@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\SiteRequest;
 use App\Http\Resources\SiteResource;
 use App\Models\Site;
-use App\Servers\Access;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class SiteController extends ApiController
@@ -18,50 +17,38 @@ class SiteController extends ApiController
 
   /**
    * 获取站点列表
-   * @return \Illuminate\Http\JsonResponse
+   * @return JsonResponse
    */
-  public function index(): \Illuminate\Http\JsonResponse
+  public function index(): JsonResponse
   {
     $user = auth()->user();
-    $sites = $user['is_super_admin'] ? Site::orderBy('id', 'desc')->get()
-      : $user->site()->order('id','desc');
+    $sites = $user['is_super_admin'] ? Site::get() : $user->site;
     return $this->success('站点列表获取成功', SiteResource::collection($sites));
   }
 
-  public function store(SiteRequest $request, Site $site): \Illuminate\Http\JsonResponse
+  public function store(SiteRequest $request, Site $site): JsonResponse
   {
-    $site->fill($request->all())->save();
-    $site->user()->attach(auth()->user(), ['role' => 'admin']);
+    $site->fill($request->all());
+    $site->user_id = auth()->id();
 
-    $this->flashAccessTable($site);
     return $this->success('站点添加成功');
   }
 
-  public function show(Site $site): \Illuminate\Http\JsonResponse
+  public function show(Site $site): JsonResponse
   {
     return $this->success('站点获取成功', new SiteResource($site));
   }
 
-  public function update(SiteRequest $request, Site $site): \Illuminate\Http\JsonResponse
+  public function update(SiteRequest $request, Site $site): JsonResponse
   {
     $site->fill($request->all())->save();
-    $this->flashAccessTable($site);
 
     return $this->success('站点修改成功', $site);
   }
 
-  public function destroy(Site $site): \Illuminate\Http\JsonResponse
+  public function destroy(Site $site): JsonResponse
   {
     $site->delete();
     return $this->success('栏目删除成功');
-  }
-
-  /**
-   * 刷新站点权限表
-   * @param Site $site
-   */
-  protected function flashAccessTable(Site $site): void
-  {
-    (new Access())->updateSitePermission($site);
   }
 }

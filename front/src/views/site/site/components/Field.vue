@@ -17,7 +17,7 @@
           <el-row :gutter="180">
             <el-col :xs="24" :md="16">
               <el-form-item label="站点名称" prop="name">
-                <el-input v-model="field.name"></el-input>
+                <el-input v-model="field.name" placeholder="请输入网站标题"></el-input>
               </el-form-item>
 
               <el-form-item label="网站域名" prop="domain">
@@ -25,11 +25,12 @@
               </el-form-item>
 
               <el-form-item label="网站描述" prop="description">
-                <el-input type="textarea" rows="3" v-model="field.description"></el-input>
+                <el-input type="textarea" rows="3" v-model="field.description"
+                placeholder="网站的简短介绍"></el-input>
               </el-form-item>
 
               <el-form-item label="关键词">
-                <el-input v-model="field.keyword"></el-input>
+                <el-input v-model="field.keyword" placeholder="请用半角逗号分隔"></el-input>
               </el-form-item>
 
               <el-form-item label="站点标志">

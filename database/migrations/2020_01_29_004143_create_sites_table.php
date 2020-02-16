@@ -6,37 +6,39 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateSitesTable extends Migration
 {
-    /**
-     * 站点
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('sites', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
-            $table->string('name')->unique()->comment('站点名称');
-            $table->string('domain')->unique()->comment('域名');
-            $table->string('keyword', 100)->nullable()->comment('关键字');
-            $table->string('description', 100)->nullable()->comment('站点描述');
-            $table->string('logo')->nullable()->comment('LOGO');
-            $table->string('icp', 100)->nullable()->comment('ICP');
-            $table->string('tel', 30)->nullable()->comment('电话');
-            $table->string('email')->nullable()->comment('邮箱');
-            $table->string('counter')->nullable()->comment('统计代码');
-            $table->mediumText('config')->nullable()->comment('配置');
-        });
-    }
+  /**
+   * 站点
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::create('sites', function (Blueprint $table) {
+      $table->bigIncrements('id');
+      $table->string('name')->unique()->comment('站点名称');
+      $table->string('domain')->unique()->comment('域名');
+      $table->unsignedBigInteger('user_id')->nullable()->comment('管理员');
+      $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+      $table->string('keyword', 100)->nullable()->comment('关键字');
+      $table->string('description', 100)->nullable()->comment('站点描述');
+      $table->string('logo')->nullable()->comment('LOGO');
+      $table->string('icp', 100)->nullable()->comment('ICP');
+      $table->string('tel', 30)->nullable()->comment('电话');
+      $table->string('email')->nullable()->comment('邮箱');
+      $table->string('counter')->nullable()->comment('统计代码');
+      $table->mediumText('config')->nullable()->comment('配置');
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('sites');
-    }
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('sites');
+  }
 }

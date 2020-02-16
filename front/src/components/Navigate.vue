@@ -99,5 +99,6 @@
 <style lang="scss" scoped>
   .navigate {
     background-color: #343a40;
+    opacity: .95;
   }
 </style>

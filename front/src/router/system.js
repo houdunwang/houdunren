@@ -3,15 +3,19 @@ import Admin from '@/views/Admin'
 import Login from "@/views/admin/Login.vue";
 import Index from '@/views/system/home/Index'
 import store from "@/store";
+import router from '@/router'
 //系统配置
 export default {
   path: '/system',
   component: Admin,
   async beforeEnter(to, from, next) {
-    await Promise.all([
-      store.dispatch('user/get'),
-      store.dispatch('systemConfig/get')
-    ]);
+    try {
+      await store.dispatch('user/get');
+      await store.dispatch('systemConfig/get')
+      if (!store.state.user.is_super_admin) router.push('/admin');
+    } catch (e) {
+      store.dispatch('user/adminLogout');
+    }
     next();
   },
   children: [

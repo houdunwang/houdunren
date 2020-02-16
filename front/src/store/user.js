@@ -34,7 +34,8 @@ export default {
       commit('set', response.data.data);
       return response;
     },
-    logout() {
+    adminLogout({commit}) {
+      commit('set', {});
       token.del();
       router.push("/admin/login");
     }

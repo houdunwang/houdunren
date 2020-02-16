@@ -27,53 +27,58 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+  import {mapActions} from "vuex";
+  import token from '@/services/token'
 
-export default {
-  data() {
-    return {
-      field: {
-        username: "2300071698@qq.com",
-        password: "admin888"
-      },
-      rules: {
-        username: [
-          {
-            type: "email",
-            required: true,
-            message: "请输入邮箱",
-            trigger: "blur"
-          }
-        ],
-        password: [{ required: true, message: "密码不能为空", trigger: "blur" }]
-      }
-    };
-  },
-  methods: {
-    ...mapActions("user", ["adminLogin"]),
-    submitForm(formName) {
-      this.$refs[formName].validate(async valid => {
-        if (valid) {
-          await this.adminLogin(this.field);
-          this.$router.push('/site/index')
-        } else {
-          return false;
+  export default {
+    data() {
+      return {
+        field: {
+          username: "2300071698@qq.com",
+          password: "admin888"
+        },
+        rules: {
+          username: [
+            {
+              type: "email",
+              required: true,
+              message: "请输入邮箱",
+              trigger: "blur"
+            }
+          ],
+          password: [{required: true, message: "密码不能为空", trigger: "blur"}]
         }
-      });
+      };
+    },
+    created() {
+      if (token.get())this.$router.push('/admin')
+    },
+    methods: {
+      ...mapActions("user", ["adminLogin"]),
+      submitForm(formName) {
+        this.$refs[formName].validate(async valid => {
+          if (valid) {
+            await this.adminLogin(this.field);
+            this.$router.push('/site/index')
+          } else {
+            return false;
+          }
+        });
+      }
     }
-  }
-};
+  };
 </script>
 
 <style lang="scss" scoped>
-.login {
-  padding: 10px;
-  height: 100vh;
-  background: #f3f3f3;
-  & > div {
-    @media screen and(min-width: 960px) {
-      margin-top: -150px;
+  .login {
+    padding: 10px;
+    height: 100vh;
+    background: #f3f3f3;
+
+    & > div {
+      @media screen and(min-width: 960px) {
+        margin-top: -150px;
+      }
     }
   }
-}
 </style>
