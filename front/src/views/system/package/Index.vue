@@ -25,8 +25,12 @@
             </td>
             <td class="text-right">
               <div class="btn-group btn-group-sm" role="group">
-                <button type="button" class="btn btn-outline-success">编辑</button>
-                <button type="button" class="btn btn-outline-danger">删除</button>
+                <router-link class="btn btn-outline-success" :to="{name:'system.package.edit',params:{id:p.id}}">
+                  编辑
+                </router-link>
+                <button type="button" class="btn btn-outline-danger" @click="del(p)">
+                  删除
+                </button>
               </div>
             </td>
           </tr>
@@ -50,9 +54,20 @@
     async created() {
       let response = await this.axios.get('/system/package');
       this.$set(this, 'packages', response.data.data);
-      // console.log(response.data.data);
     },
-    methods: {}
+    methods: {
+      async del(p) {
+        this.$confirm('确定删除吗？', '温馨提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          center: true
+        }).then(async () => {
+          await this.axios.delete(`/system/package/${p.id}`);
+          this.$message.success('删除成功');
+          this.$router.go(0)
+        });
+      }
+    }
   }
 </script>
 

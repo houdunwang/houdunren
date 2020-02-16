@@ -30,6 +30,6 @@ export default {
     {path: 'module/index', name: 'system.module.index', component: ModuleIndex},
     {path: 'package/index', name: 'system.package.index', component: Package},
     {path: 'package/add', name: 'system.package.add', component: PackageAdd},
-    {path: 'package/edit', name: 'system.package.edit', component: PackageEdit}
+    {path: 'package/edit/:id', name: 'system.package.edit', component: PackageEdit}
   ]
 };
