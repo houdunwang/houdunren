@@ -12,16 +12,21 @@ use App\Servers\Access;
  */
 class CacheController extends ApiController
 {
-    /**
-     * 更新缓存
-     * @param Access $access
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
-    public function update(Access $access): \Illuminate\Http\JsonResponse
-    {
-        $this->authorize('update', auth()->user());
-        $access->updateAllSitePermission();
-        return $this->success('缓存更新成功');
-    }
+  public function __construct()
+  {
+    $this->middleware('systemAuth');
+  }
+
+  /**
+   * 更新缓存
+   * @param Access $access
+   * @return \Illuminate\Http\JsonResponse
+   * @throws \Illuminate\Auth\Access\AuthorizationException
+   */
+  public function update(Access $access): \Illuminate\Http\JsonResponse
+  {
+    $this->authorize('update', auth()->user());
+    $access->updateAllSitePermission();
+    return $this->success('缓存更新成功');
+  }
 }

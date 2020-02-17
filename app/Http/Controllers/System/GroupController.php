@@ -17,6 +17,7 @@ class GroupController extends ApiController
 {
   public function __construct()
   {
+    $this->middleware('systemAuth');
     $this->authorizeResource(Group::class, 'group');
   }
 

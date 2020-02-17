@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
  */
 class SystemUploadController extends ApiController
 {
+  public function __construct()
+  {
+    $this->middleware('systemAuth');
+  }
+
   public function store(Request $request, SystemUpload $systemUpload, UploadServer $upload)
   {
     $path = $upload->local(current($request->file()));

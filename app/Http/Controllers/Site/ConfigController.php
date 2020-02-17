@@ -14,6 +14,11 @@ use Illuminate\Http\Request;
  */
 class ConfigController extends ApiController
 {
+  public function __construct()
+  {
+    $this->middleware('siteAuth')->except('index');
+  }
+
   public function show(Site $site)
   {
     $config = array_merge(config('hd.site'), $site['config'] ?? []);

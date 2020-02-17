@@ -8,10 +8,16 @@ use App\Models\Site;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * 站点管理
+ * Class SiteController
+ * @package App\Http\Controllers\Site
+ */
 class SiteController extends ApiController
 {
   public function __construct(Request $request)
   {
+    $this->middleware('siteAuth')->except(['index','store']);
     $this->authorizeResource(Site::class, 'site');
   }
 

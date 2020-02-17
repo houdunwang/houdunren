@@ -43,13 +43,13 @@
                          :to="{name:'site.module',params:{id:site.id}}">
               <i class="fa fa-key"></i> 站点模块
             </router-link>
-
             <a href class="text-muted mr-2">
               <i class="fa fa-comment-o"></i> 微信公众号
             </a>
-            <a href class="text-muted mr-2">
-              <i class="fa fa-user"></i> 操作员管理
-            </a>
+            <router-link class="text-muted mr-2"
+                         :to="{name:'site.user.index',params:{id:site.id}}">
+              <i class="fa fa-pencil-square-o"></i> 用户列表
+            </router-link>
             <router-link
               :to="{name:'site.edit',params:{id:site.id}}"
               class="text-muted mr-2">

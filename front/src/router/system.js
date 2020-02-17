@@ -12,6 +12,7 @@ import Group from '@/views/system/group/Index'
 import GroupAdd from '@/views/system/group/Add'
 import GroupEdit from '@/views/system/group/Edit'
 
+
 //系统配置
 export default {
   path: '/system',
@@ -36,6 +37,7 @@ export default {
     {path: 'package/edit/:id', name: 'system.package.edit', component: PackageEdit},
     {path: 'group/index', name: 'system.group.index', component: Group},
     {path: 'group/add', name: 'system.group.add', component: GroupAdd},
-    {path: 'group/edit/:id', name: 'system.group.edit', component: GroupEdit}
+    {path: 'group/edit/:id', name: 'system.group.edit', component: GroupEdit},
+
   ]
 };

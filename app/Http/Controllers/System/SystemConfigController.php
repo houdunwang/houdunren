@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
  */
 class SystemConfigController extends ApiController
 {
+  public function __construct()
+  {
+    $this->middleware('systemAuth')->except(['show']);
+  }
+
   public function show(SystemConfig $config)
   {
     $data = array_merge(config('hd.system'), $config['config'] ?? []);

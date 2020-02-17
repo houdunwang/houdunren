@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Group;
 use App\Models\Site;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,7 +23,8 @@ class User extends Authenticatable
   use Notifiable, HasApiTokens, HasRoles;
 
   protected $fillable = [
-    'name', 'email', 'password',
+    'name', 'email', 'mobile', 'real_name', 'password', 'home', 'avatar', 'weibo',
+    'wechat', 'github', 'qq'
   ];
 
   protected $hidden = [
@@ -73,6 +75,6 @@ class User extends Authenticatable
    */
   public function group(): BelongsTo
   {
-    return $this->belongsTo($this['group_id']);
+    return $this->belongsTo(Group::class);
   }
 }

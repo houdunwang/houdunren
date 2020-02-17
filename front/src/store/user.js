@@ -21,7 +21,7 @@ export default {
       return response;
     },
     async adminLogin({commit}, data) {
-      let response = await window.axios.post("/admin/login", data);
+      let response = await window.axios.post("/system/login", data);
 
       token.set(response.data.token);
       commit('set', response.data.data);

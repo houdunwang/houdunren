@@ -24,15 +24,12 @@ class CreateUsersTable extends Migration
       $table->string('weixin_unionid')->nullable()->comment('微信UNIONID');
       $table->string('home')->nullable()->comment('个人主页');
       $table->string('avatar')->nullable()->comment('头像');
-      $table->string('token')->nullable()->comment('邮箱或手机验证码');
       $table->string('weibo')->nullable()->comment('微博地址');
       $table->string('wechat')->nullable()->comment('微信号');
       $table->string('github')->nullable()->comment('GITHUB');
       $table->string('qq')->nullable()->comment('QQ');
       $table->unsignedInteger('group_id')->nullable()->comment('管理员组');
-      $table->timestamp('admin_to_time')->nullable()->comment('后台结束时间');
-      $table->unsignedTinyInteger('lock_to_time')->nullable()->comment('用户锁定到期时间');
-      $table->unsignedMediumInteger('favour_count')->default(0)->comment('点赞数');
+      $table->unsignedTinyInteger('lock')->nullable()->comment('用户锁定');
       $table->unsignedInteger('credit1')->nullable();
       $table->unsignedInteger('credit2')->nullable();
       $table->unsignedInteger('credit3')->nullable();

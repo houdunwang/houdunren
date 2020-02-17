@@ -1,7 +1,7 @@
 <?php
 
 //后台登录
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+Route::group(['namespace' => 'System', 'prefix' => 'system'], function () {
   Route::post('login', 'LoginController@login');
 });
 
