@@ -15,10 +15,10 @@
 
     <div class="card mt-3">
       <div class="card-header">
-        选择套餐使用的模块
+        套餐模块选择
       </div>
       <div class="card-body">
-        <table class="table">
+        <table class="table" v-if="moduleList.length>0">
           <thead>
           <tr class="text-secondary font-weight-normal">
             <th>操作</th>

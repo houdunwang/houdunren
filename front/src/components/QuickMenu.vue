@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-6 logo"></div>
         <div class="col-6 text-right menu">
-          <router-link to="/admin">
+          <router-link :to="{name:'site.index'}">
             <i class="fa fa-sitemap fa-2x d-block"></i>网站管理
           </router-link>
           <router-link to="/system/index" v-if="user.is_super_admin">
@@ -55,7 +55,7 @@
         width: 8em;
         text-align: center;
         text-decoration: none;
-        background: #ddd;
+        background: #fff;
         color: #333;
         opacity: 0.7;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);

@@ -1,18 +1,14 @@
 <template>
   <div>
-    <router-link
-      to="/site/add"
-      class="btn btn-info mb-3"
-    >
+    <router-link to="/site/add" class="btn btn-info mb-3">
       <i class="fa fa-plus"></i> 添加网站
     </router-link>
-
     <div class="card mb-3 shadow-sm" v-for="site in data" :key="site.id">
       <div class="card-header">
         <div class="row">
           <div class="col-6">套餐</div>
           <div class="col-6 text-right">
-            <router-link to="/admin" class="text-secondary">
+            <router-link :to="{name:'module.home',params:{id:site.id}}" class="text-secondary">
               <i class="fa fa-cog"></i> 管理站点
             </router-link>
           </div>
@@ -49,6 +45,11 @@
             <router-link class="text-muted mr-2"
                          :to="{name:'site.user.index',params:{id:site.id}}">
               <i class="fa fa-pencil-square-o"></i> 用户列表
+            </router-link>
+            <router-link
+              :to="{name:'site.admin.index',params:{id:site.id}}"
+              class="text-muted mr-2">
+              <i class="fa fa-pencil-square-o"></i> 管理员设置
             </router-link>
             <router-link
               :to="{name:'site.edit',params:{id:site.id}}"

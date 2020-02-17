@@ -2,20 +2,18 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import system from "./system";
 import site from "./site";
-import common from "./common";
-import admin from './admin'
+import NotFound from "@/views/common/NotFound";
+import module from './module'
 
 const routes = [
-  {
-    path: '/admin',
-    redirect: '/site/index'
-  },
-  admin, site, system, common
+  site, ...system, module,
+  {path: '/', redirect: '/site/index'},
+  {path: '*', component: NotFound}
 ];
 
 const router = new VueRouter({
   routes,
-  mode: "history"
+  mode: "hash"
 });
 
 //注册组件

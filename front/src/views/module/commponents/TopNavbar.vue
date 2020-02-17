@@ -1,5 +1,5 @@
 <template>
-  <div class="navigate shadow-lg">
+  <div class="navigate shadow-sm">
     <div class="container-fluid">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
         <a class="navbar-brand" href="#"></a>
@@ -64,12 +64,8 @@
     data() {
       return {
         menus: [
-          {title: "站点管理",icon: "fa fa-sitemap",url: "/site/index",check: false},
-          {title: "模块管理", icon: "fa-cubes", url: "/system/module/index", check: true},
-          {title: "服务套餐", icon: "fa-comments-o", url: "/system/package/index", check: true},
-          {title: "系统设置",icon: "fa-support", url: "/system/index", check: true},
-          {title: "更新缓存", icon: "fa-bitbucket", url: "/admin", check: true},
-          {title: "在线文档", icon: "fa-file-code-o", url: "/admin", check: false}
+          {title: "返回站点管理", icon: "fa fa-reply", url: "/site/index", check: false},
+          {title: "全部应用", icon: "fa fa-cubes", url: "/admin", check: false},
         ]
       };
     },
@@ -83,8 +79,7 @@
 </script>
 <style lang="scss" scoped>
   .navigate {
-    background: #293145;
-    /*background: linear-gradient(to left,#475470,#293145);*/
+    background-color: #293145;
     opacity: .95;
     position: relative;
     z-index: 1;

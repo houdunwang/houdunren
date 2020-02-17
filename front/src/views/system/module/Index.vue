@@ -45,15 +45,15 @@
     },
     methods: {
       preview(module) {
-        return process.env.VUE_APP_HOST + `/modules/${module.name}/preview.jpg`
+        return process.env.VUE_APP_HOST + `modules/${module.name}/preview.jpg`
       },
       async install(module) {
-        let response = await this.axios.post(`system/module`, {name: module.name});
+        await this.axios.post(`system/module`, {name: module.name});
         this.$message.success('安装成功');
         module.model = true;
       },
       async uninstall(module) {
-        let response = await this.axios.delete(`/system/module/${module.name}`);
+        await this.axios.delete(`/system/module/${module.name}`);
         this.$message.success('卸载成功');
         module.model = false;
       },

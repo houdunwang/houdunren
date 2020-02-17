@@ -3,7 +3,13 @@
     <div class="card shadow-sm">
       <div class="card-header">套餐列表</div>
       <div class="card-body">
-        <table class="table">
+        <div v-if="message">
+          <h6 class="text-center p-3 text-secondary">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            {{message}}
+          </h6>
+        </div>
+        <table class="table" v-if="packages.length>0">
           <thead>
           <tr>
             <th>名称</th>
@@ -52,12 +58,14 @@
     components: {Master},
     data() {
       return {
-        packages: []
+        packages: [],
+        message: ''
       }
     },
     async created() {
       let response = await this.axios.get('/system/package');
       this.$set(this, 'packages', response.data.data);
+      if(response.data.data.length===0) this.$set(this,'message','你还没有添加任何套餐')
     },
     methods: {
       async del(p) {

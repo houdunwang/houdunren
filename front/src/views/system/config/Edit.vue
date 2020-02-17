@@ -35,7 +35,7 @@
         </el-row>
       </el-tab-pane>
 
-      <el-tab-pane label="注册设置" name="register">
+      <el-tab-pane label="用户相关" name="register">
         <el-row :gutter="20">
           <el-col :xs="24" :md="12" v-if="setting.register">
             <el-form-item label="体验天数">
