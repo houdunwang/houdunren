@@ -16,12 +16,16 @@
           <tr v-for="p in packages">
             <td>{{p.name}}</td>
             <td>
-              <span class="badge badge-success" v-for="module in p.modules">
+              <span class="badge badge-success mr-1" v-for="module in p.modules">
                 {{module.name}}
               </span>
             </td>
             <td>
-              <span class="badge badge-info">会员组</span>
+              <span class="badge badge-info mr-1" v-for="g in p.group">
+                <router-link :to="{name:'system.group.edit',params:{id:g.id}}" class="text-white">
+                  {{g.name}}
+                </router-link>
+              </span>
             </td>
             <td class="text-right">
               <div class="btn-group btn-group-sm" role="group">

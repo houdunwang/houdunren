@@ -7,6 +7,10 @@
       <router-link :class="{'nav-link':true,active:routerName==='system.package.add'}"
                    :to="{name:'system.package.add'}">添加套餐
       </router-link>
+      <router-link :class="{'nav-link':true,active:routerName==='system.package.edit'}"
+                   :to="{name:'system.package.add'}"
+        v-if="routerName==='system.package.edit'">编辑套餐
+      </router-link>
     </nav>
     <slot></slot>
   </div>

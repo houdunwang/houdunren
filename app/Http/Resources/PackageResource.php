@@ -23,7 +23,8 @@ class PackageResource extends JsonResource
     return [
       'id' => $this['id'],
       'name' => $this['name'],
-      'modules' => Module::whereIn('name', $this->modules ?? [])->get()
+      'modules' => $this->module,
+      'group' => $this->group
     ];
   }
 }

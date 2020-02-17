@@ -32,7 +32,7 @@ class ModuleServer
   {
     $modules = $this->all();
     return array_filter($modules, function ($module) {
-      return $module['installed'];
+      return $module['model'];
     });
   }
 
@@ -53,7 +53,7 @@ class ModuleServer
         'admin' => include $module->getPath() . '/Menu/admin.php',
         'member' => include $module->getPath() . '/Menu/member.php',
       ],
-      'installed' => (bool)$model
+      'model' => $model
     ];
   }
 }

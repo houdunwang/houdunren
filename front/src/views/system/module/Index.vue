@@ -5,27 +5,27 @@
     </nav>
     <div class="card shadow-sm">
       <div class="card-header"> 已安装模块列表</div>
-      <div class="card-body" v-if="modules">
-        <div class="row" :key="index" v-for="(module,index) in modules">
+      <div class="card-body pt-1" v-if="modules">
+        <div class="row border-bottom pb-3 pt-3" :key="index" v-for="(module,index) in modules">
           <div class="col-4 col-md-1 pt-2">
-            <img :src="preview(module)" class="align-middle">
+            <img :src="preview(module)">
           </div>
           <div class="col-4 col-md-6">
             <strong class="d-block">{{module.package.title}}</strong>
             <small class="text-secondary">标识:{{module.name}}</small>
           </div>
-          <div class="col-4 col-md-5 text-right">
+          <div class="col-4 col-md-5 text-right pt-3">
             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-outline-success"
-                      v-if="!module.installed" @click.prevent="install(module)">安装
+                      v-if="!module.model" @click.prevent="install(module)">安装
               </button>
               <button type="button" class="btn btn-outline-primary"
-                      v-if="module.installed" @click.prevent="uninstall(module)">卸载
+                      v-if="module.model" @click.prevent="uninstall(module)">卸载
               </button>
             </div>
           </div>
+          <hr>
         </div>
-        <hr>
       </div>
     </div>
   </div>
@@ -50,12 +50,12 @@
       async install(module) {
         let response = await this.axios.post(`system/module`, {name: module.name});
         this.$message.success('安装成功');
-        module.installed = true;
+        module.model = true;
       },
       async uninstall(module) {
         let response = await this.axios.delete(`/system/module/${module.name}`);
         this.$message.success('卸载成功');
-        module.installed = false;
+        module.model = false;
       },
     }
   }

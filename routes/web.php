@@ -1,8 +1,8 @@
 <?php
 
-Route::get('{any}', function () {
-    return view('home');
-})->where(['any' => '.*']);
+//Route::get('{any}', function () {
+//    return view('home');
+//})->where(['any' => '.*']);
 
 //Route::get('/admin{all}', function () {
 //    return view('home');

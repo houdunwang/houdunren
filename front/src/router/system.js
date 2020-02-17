@@ -8,6 +8,9 @@ import ModuleIndex from '@/views/system/module/Index'
 import Package from '@/views/system/package/Index'
 import PackageAdd from '@/views/system/package/Add'
 import PackageEdit from '@/views/system/package/Edit'
+import Group from '@/views/system/group/Index'
+import GroupAdd from '@/views/system/group/Add'
+import GroupEdit from '@/views/system/group/Edit'
 
 //系统配置
 export default {
@@ -30,6 +33,9 @@ export default {
     {path: 'module/index', name: 'system.module.index', component: ModuleIndex},
     {path: 'package/index', name: 'system.package.index', component: Package},
     {path: 'package/add', name: 'system.package.add', component: PackageAdd},
-    {path: 'package/edit/:id', name: 'system.package.edit', component: PackageEdit}
+    {path: 'package/edit/:id', name: 'system.package.edit', component: PackageEdit},
+    {path: 'group/index', name: 'system.group.index', component: Group},
+    {path: 'group/add', name: 'system.group.add', component: GroupAdd},
+    {path: 'group/edit/:id', name: 'system.group.edit', component: GroupEdit}
   ]
 };

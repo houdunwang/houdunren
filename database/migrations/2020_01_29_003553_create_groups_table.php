@@ -16,10 +16,9 @@ class CreateGroupsTable extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->string('name')->comment('组名称');
+            $table->string('name')->unique()->comment('组名称');
             $table->unsignedSmallInteger('site_num')->comment('可创建的站点数量');
             $table->unsignedTinyInteger('system')->nullable()->comment('系统用户组');
-            $table->string('package_id')->nullable()->comment('套餐编号');
         });
     }
 

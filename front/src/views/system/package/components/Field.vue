@@ -24,15 +24,17 @@
             <th>操作</th>
             <th>模块名称</th>
             <th>模块标识</th>
+            <th>版本号</th>
           </tr>
           </thead>
           <tbody>
-          <tr v-for="(module,index) in modules" :key="index">
+          <tr v-for="(module,index) in moduleList" :key="index">
             <td>
-              <input type="checkbox" v-model="package.modules" :value="module.name">
+              <input type="checkbox" v-model="package.modules" :value="module.model.id">
             </td>
             <td>{{module.package.title}}</td>
             <td>{{module.name}}</td>
+            <td>{{module.package.version}}</td>
           </tr>
           </tbody>
         </table>
@@ -50,19 +52,21 @@
     data() {
       return {
         package: {
+          name: '',
           modules: []
         },
-        modules: []
+        moduleList: []
       }
     },
     components: {Master},
     async created() {
-      let response = await this.axios('/system/module');
-      this.$set(this, 'modules', response.data.data);
+      let response = await this.axios('/system/module/installed');
+      this.$set(this, 'moduleList', response.data.data);
       if (this.action === 'edit') {
         let id = this.$route.params.id;
         let response = await this.axios.get(`/system/package/${id}`);
-        this.$set(this, 'package', response.data.data)
+        this.$set(this.package, 'name', response.data.data.name);
+        this.$set(this.package, 'modules', response.data.data.modules.map(m=>m.id))
       }
     },
     methods: {
@@ -71,7 +75,7 @@
           case 'add':
             await this.axios.post('/system/package', this.package);
             this.$message.success('套餐添加成功');
-            this.$router.push({name: 'system.package.index'})
+            this.$router.push({name: 'system.package.index'});
             break;
           case 'edit':
             let id = this.$route.params.id;

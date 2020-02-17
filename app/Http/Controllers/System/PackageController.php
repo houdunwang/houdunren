@@ -24,17 +24,19 @@ class PackageController extends ApiController
   public function store(PackageRequest $request, Package $package)
   {
     $package->fill($request->all())->save();
+    $package->module()->sync($request->input('modules', []));
     return $this->success('套餐添加成功');
   }
 
   public function show(Package $package)
   {
-    return $this->success('', $package);
+    return $this->success('', new PackageResource($package) );
   }
 
   public function update(PackageRequest $request, Package $package)
   {
     $package->fill($request->all())->save();
+    $package->module()->sync($request->input('modules', []));
     return $this->success('套餐修改成功', $package);
   }
 

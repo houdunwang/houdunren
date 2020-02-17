@@ -13,8 +13,9 @@ class PackageRequest extends FormRequest
 
   public function rules()
   {
+    $id = request('package')['id'] ?? 0;
     return [
-      'name' => 'required|max:20|unique:packages,name,' . request('id')
+      'name' => 'required|max:20|unique:packages,name,' . $id
     ];
   }
 

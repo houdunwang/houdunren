@@ -1,0 +1,13 @@
+{
+    "name": "B",
+    "alias": "b",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\B\\Providers\\BServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
