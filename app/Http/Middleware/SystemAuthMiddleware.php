@@ -15,7 +15,7 @@ class SystemAuthMiddleware
    */
   public function handle($request, Closure $next)
   {
-    if (!auth()->check() || auth()->user()->is_super_admin) {
+    if (!auth()->check() || !isSuperAdmin()) {
       abort(403, '需要系统管理员身份');
     }
     return $next($request);

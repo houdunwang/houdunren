@@ -5,7 +5,7 @@
       <dd>
         <router-link
           :to="menu.url"
-          class="tile d-block"
+          class="tile d-block shadow-sm"
           :key="n"
           v-for="(menu, n) in menu.children"
         >
@@ -81,13 +81,17 @@
     a {
       margin-right: 10px;
       padding: 10px;
-      border-radius: 5px;
       display: block;
       width: 8em;
       text-align: center;
-      background: #eee;
       color: #000;
-      border: solid 1px #ddd;
+      flex-direction: column;
+      min-width: 0;
+      word-wrap: break-word;
+      background-color: #fff;
+      background-clip: border-box;
+      border: 1px solid #e7eaf3;
+      border-radius: 0.3125rem;
 
       i {
         font-size: 2em;
@@ -97,8 +101,7 @@
 
       &:hover {
         opacity: 0.9;
-        background: #dedede;
-        border: solid 1px #ccc;
+        border: solid 1px #ddd;
       }
     }
   }

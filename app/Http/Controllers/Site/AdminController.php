@@ -6,70 +6,39 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+/**
+ * 站点管理员
+ * Class AdminController
+ * @package App\Http\Controllers\Site
+ */
+class AdminController extends Controller
 {
-    public function index()
-    {
-    }
+  public function __construct()
+  {
+    $this->middleware('siteAuth');
+  }
 
-    public function create()
-    {
-        //
-    }
+  public function index()
+  {
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  public function store(Request $request)
+  {
+  }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
+  public function show(User $user)
+  {
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
-    }
+  public function edit(User $user)
+  {
+  }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
+  public function update(Request $request, User $user)
+  {
+  }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
-    }
+  public function destroy(User $user)
+  {
+  }
 }

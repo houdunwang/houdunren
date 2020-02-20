@@ -1,0 +1,28 @@
+{
+    "name": "test/edu",
+    "description": "",
+    "authors": [
+        {
+            "name": "houdunren.com",
+            "email": "user@houdunren.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Edu\\Providers\\EduServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Edu\\": ""
+        }
+    },
+    "require-dev": {
+        "laravel/ui": "^1.2"
+    }
+}

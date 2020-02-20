@@ -133,12 +133,12 @@
               case "add":
                 await this.axios.post(`/site/site`,this.field);
                 this.$message.success("添加成功");
-                this.$router.push('/admin');
+                this.$router.push('/site/index');
                 break;
               case "edit":
                 await this.axios.put(`/site/site/${this.field.id}`,this.field);
                 this.$message.success("更新成功");
-                this.$router.push('/admin');
+                this.$router.push('/site/index');
                 break;
             }
           } else {

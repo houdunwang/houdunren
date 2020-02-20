@@ -5,7 +5,7 @@ import Home from '@/views/module/home/Index'
 export default {
   path: "/module",
   component: Main,
-  alias: '/module/home',
+  redirect: '/site/index',
   async beforeEnter(to, from, next) {
     try {
       await store.dispatch('user/get');
@@ -16,6 +16,6 @@ export default {
     next();
   },
   children: [
-    {path: 'home/:id',name:'module.home', component: Home},
+    {path: 'home/:id', name: 'module.home', component: Home}
   ]
 };

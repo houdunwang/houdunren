@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\ApiController;
@@ -17,7 +18,7 @@ class SiteController extends ApiController
 {
   public function __construct(Request $request)
   {
-    $this->middleware('siteAuth')->except(['index','store']);
+    $this->middleware('siteAuth')->except(['index', 'store']);
     $this->authorizeResource(Site::class, 'site');
   }
 
@@ -28,7 +29,7 @@ class SiteController extends ApiController
   public function index(): JsonResponse
   {
     $user = auth()->user();
-    $sites = $user['is_super_admin'] ? Site::get() : $user->site;
+    $sites = isSuperAdmin() ? Site::get() : $user->site;
     return $this->success('站点列表获取成功', SiteResource::collection($sites));
   }
 
@@ -36,7 +37,7 @@ class SiteController extends ApiController
   {
     $site->fill($request->all());
     $site->user_id = auth()->id();
-
+    $site->save();
     return $this->success('站点添加成功');
   }
 

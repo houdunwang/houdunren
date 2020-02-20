@@ -5,6 +5,7 @@ namespace App\Http\Controllers\System;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\ModuleRequest;
 use App\Models\Module;
+use App\Models\Site;
 use App\Servers\ModuleServer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

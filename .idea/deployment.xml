@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="houdunwang.com" autoUploadExternalChanges="true">
+    <serverData>
+      <paths name="houdunwang.com">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/node_modules" />
+            <excludedPath local="true" path="$PROJECT_DIR$/front/node_modules" />
+            <excludedPath local="true" path="$PROJECT_DIR$/front" />
+            <excludedPath local="true" path="$PROJECT_DIR$/public/modules/Edu/front" />
+            <excludedPath local="true" path="$PROJECT_DIR$/public/modules/Edu/front/dist" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>

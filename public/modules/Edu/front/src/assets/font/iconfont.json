@@ -1,0 +1,58 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "721703",
+      "name": "用户",
+      "font_class": "ai-user",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "6858032",
+      "name": "h5",
+      "font_class": "h",
+      "unicode": "e745",
+      "unicode_decimal": 59205
+    },
+    {
+      "icon_id": "7674865",
+      "name": "模块",
+      "font_class": "cedaohang-mokuai",
+      "unicode": "e711",
+      "unicode_decimal": 59153
+    },
+    {
+      "icon_id": "8624925",
+      "name": "公众号",
+      "font_class": "gongzhonghao",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "9957057",
+      "name": "app",
+      "font_class": "app",
+      "unicode": "e501",
+      "unicode_decimal": 58625
+    },
+    {
+      "icon_id": "11877353",
+      "name": "小程序",
+      "font_class": "xiaochengxu",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "12463187",
+      "name": "app",
+      "font_class": "app1",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    }
+  ]
+}

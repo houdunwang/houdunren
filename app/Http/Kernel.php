@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\ModuleAuthMiddleware;
 use App\Http\Middleware\SiteAuthMiddleware;
 use App\Http\Middleware\SystemAuthMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -54,6 +55,7 @@ class Kernel extends HttpKernel
    * @var array
    */
   protected $routeMiddleware = [
+    'moduleAuth' => ModuleAuthMiddleware::class,
     'siteAuth' => SiteAuthMiddleware::class,
     'systemAuth' => SystemAuthMiddleware::class,
     'auth' => \App\Http\Middleware\Authenticate::class,

@@ -17,21 +17,22 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'User', 'prefix' => 'us
   Route::get('get', 'UserController@get');
 });
 
-//站点模块
+//站点
 Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'site'], function () {
   Route::resource('site', 'SiteController')->except(['edit', 'create']);
   Route::put('config/{site}', 'ConfigController@update');
   Route::get('config/{site}', 'ConfigController@show');
   Route::resource('{site}/weChat', 'WeChatController')->except(['edit', 'create']);
-  Route::get('{site}/access/{user}', 'AccessController@index');
-  Route::put('{site}/access/{user}', 'AccessController@update');
+//  Route::get('{site}/access/{user}', 'AccessController@index');
+//  Route::put('{site}/access/{user}', 'AccessController@update');
+  Route::get('{site}/admin', 'AdminController@index');
 });
 
-//系统模块
+//系统
 Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
   Route::resource('package', 'PackageController')->except(['edit', 'create']);
-  Route::resource('user', 'UserController')->except(['edit', 'create']);
-  Route::post('user/lock', 'UserController@lock');
+//  Route::resource('user', 'UserController')->except(['edit', 'create']);
+//  Route::post('user/lock', 'UserController@lock');
   Route::get('cache', 'CacheController@update');
   Route::resource('upload', 'SystemUploadController')->except(['edit', 'create', 'show', 'index']);
   Route::resource('config', 'SystemConfigController')->except(['edit', 'create']);
@@ -44,4 +45,9 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => '
   Route::post('module', 'ModuleController@install');
   Route::delete('module/{name}', 'ModuleController@uninstall');
   Route::get('module/installed', 'ModuleController@allInstalled');
+});
+
+//模块
+Route::group(['middleware' => ['auth:api','moduleAuth'], 'namespace' => 'Module', 'prefix' => 'module'], function () {
+  Route::resource('{site}/module', 'ModuleController')->except(['edit', 'show']);
 });

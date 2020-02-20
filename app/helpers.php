@@ -3,7 +3,7 @@
  * 超级管理员
  * @return bool
  */
-function isSuperAdmin()
+function isSuperAdmin(): bool
 {
   return auth()->check() && auth()->id() === 1;
 }
@@ -13,7 +13,7 @@ function isSuperAdmin()
  * @param \App\Models\Site|null $site
  * @return \App\Models\Site|null
  */
-function site(?\App\Models\Site $site)
+function site(\App\Models\Site $site = null)
 {
   static $cache = null;
   if ($site) $cache = $site;

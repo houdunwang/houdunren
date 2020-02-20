@@ -13,7 +13,6 @@ import "./plugins/element.js";
 import './plugins/element.js'
 import "./services/filter";
 
-
 window.api = process.env.VUE_APP_API_URL;
 Vue.component("app", App);
 

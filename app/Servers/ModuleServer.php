@@ -3,6 +3,8 @@
 namespace App\Servers;
 
 use App\Models\Module;
+use App\Models\Site;
+use Illuminate\Support\Collection;
 
 /**
  * 模块服务
@@ -55,5 +57,21 @@ class ModuleServer
       ],
       'model' => $model
     ];
+  }
+
+  /**
+   * 获取站点所有模块
+   * @param Site $site
+   * @return array
+   */
+  public function getSiteModule(Site $site): array
+  {
+    $modules = [];
+    foreach ($site->user->group->package as $package) {
+      foreach ($package->module as $module) {
+        $modules[] = $this->getModuleInfo($module['name']);
+      }
+    }
+    return $modules;
   }
 }

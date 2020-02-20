@@ -2,22 +2,17 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Site;
 use Closure;
 
 class SiteAuthMiddleware
 {
-  /**
-   * Handle an incoming request.
-   *
-   * @param \Illuminate\Http\Request $request
-   * @param \Closure $next
-   * @return mixed
-   */
   public function handle($request, Closure $next)
   {
-    $site = site(request('site'));
-    if (auth()->check() && $site) {
-      if ($site['user_id'] === auth()->id() || isSuperAdmin()) {
+    $site = request('site');
+    $model = site(is_numeric($site) ? Site::find($site) : $site);
+    if (auth()->check() && $model) {
+      if ($model['user_id'] === auth()->id() || isSuperAdmin()) {
         return $next($request);
       }
     }

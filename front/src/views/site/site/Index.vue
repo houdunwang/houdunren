@@ -23,8 +23,9 @@
           class="d-flex flex-md-row flex-column justify-content-between"
         >
           <div class="small">
-            创建时间: {{ site.created_at | dateFormat }} 站长 :
-            {{ site.user.name }}
+            <span class="mr-2">创建时间: {{ site.created_at | dateFormat }}</span>
+            <span class="mr-2">站长: {{ site.user.name }}</span>
+            <span class="mr-2">所属组: {{site.user.group.name}}</span>
           </div>
 
           <div class="lin"></div>
@@ -32,24 +33,23 @@
           <div class="small">
             <router-link class="text-muted mr-2"
                          :to="{name:'site.config',params:{id:site.id}}">
-              <i class="fa fa-key"></i> 网站配置
+              <i class="fa fa-life-ring"></i> 网站配置
             </router-link>
-
             <router-link class="text-muted mr-2"
                          :to="{name:'site.module',params:{id:site.id}}">
-              <i class="fa fa-key"></i> 站点模块
+              <i class="fa fa-sitemap"></i> 站点模块
             </router-link>
             <a href class="text-muted mr-2">
               <i class="fa fa-comment-o"></i> 微信公众号
             </a>
             <router-link class="text-muted mr-2"
                          :to="{name:'site.user.index',params:{id:site.id}}">
-              <i class="fa fa-pencil-square-o"></i> 用户列表
+              <i class="fa fa-user-o"></i> 用户列表
             </router-link>
             <router-link
               :to="{name:'site.admin.index',params:{id:site.id}}"
               class="text-muted mr-2">
-              <i class="fa fa-pencil-square-o"></i> 管理员设置
+              <i class="fa fa-user-circle-o"></i> 管理员设置
             </router-link>
             <router-link
               :to="{name:'site.edit',params:{id:site.id}}"

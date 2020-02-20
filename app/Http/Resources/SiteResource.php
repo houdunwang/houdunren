@@ -21,7 +21,7 @@ class SiteResource extends JsonResource
       'tel' => $this->tel,
       'email' => $this->email,
       'counter' => $this->counter,
-      'user' => $this->user,
+      'user' => $this->user()->with('group')->first(),
       'created_at' => $this->created_at
     ];
   }
