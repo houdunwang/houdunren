@@ -1,9 +1,9 @@
 <template>
-  <div id="knowledge">
-    <div class="container">
+  <div id="knowledge" class="pt-5 pb-5">
+    <div class="container pt-md-5">
       <h3 class="text-dark text-center mb-5">适应主流应用平台</h3>
       <div class="row">
-        <div class="col-sm-3 col-sm-12 col-md-3 mb-3 pl-0 pr-1" v-for="(app,index) in apps" :key="index">
+        <div class="col-sm-3 col-sm-12 col-md-3 mb-3 pr-md-0 pl-md-1" v-for="(app,index) in apps" :key="index">
           <div class="card shadow">
             <div class="card-body">
               <div class="icon mt-2">
@@ -11,7 +11,7 @@
                 <!--<i class="fa fa-3x text-primary" :class="app.icon" aria-hidden="true"></i>-->
               </div>
               <h5 class="pt-3">{{app.title}}</h5>
-              <p class="p-2 font-weight-lighter">
+              <p class="p-0 font-weight-lighter">
                 {{app.desc}}
               </p>
             </div>
@@ -51,8 +51,6 @@
 
 <style lang="scss" scoped>
   #knowledge {
-    padding-top: 5em;
-    padding-bottom: 5em;
     background: #F7F8F9;
 
     .iconfont {

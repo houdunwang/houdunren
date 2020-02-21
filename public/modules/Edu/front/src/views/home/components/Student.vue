@@ -1,6 +1,6 @@
 <template>
   <!--学员故事-->
-  <div id="student" class="shadow">
+  <div id="student" class="shadow pt-5 pb-5">
     <div class="container">
       <h3 class="text-center font-weight-lighter mb-5">学员有话说</h3>
       <div class="row">
@@ -19,7 +19,9 @@
           </div>
         </div>
         <div class="col-12 text-center">
-          <button class="btn btn-outline-primary btn-sm cursor" @click="showNums=1000">加载更多</button>
+          <button class="btn btn-outline-primary btn-sm cursor"
+                  v-show="showNums<=students.length"
+                  @click="showNums=1000">加载更多</button>
         </div>
       </div>
     </div>
@@ -37,7 +39,7 @@
         videoPath: '',
         students: [
           {
-            title: '钱毅然来到后盾人参加培训，毕业后改变了自己！',
+            title: '毅然来到后盾人参加培训，毕业后改变了自己！',
             pic: require('@/assets/student/1.jpg'),
             video: 'https://houdunren-test.oss-cn-hangzhou.aliyuncs.com/student/1.mp4'
           },
@@ -125,11 +127,7 @@
 
 <style lang="scss" scoped>
   #student {
-    margin-top: 5em;
     background: #F7F8F9;
-    padding-top: 5em;
-    padding-bottom: 5em;
-
     .row {
       .card {
         border-radius: 0;
@@ -141,7 +139,7 @@
         }
 
         .card-text {
-          height: 3em;
+          height: 4em;
         }
 
         .pic {

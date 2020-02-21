@@ -1,16 +1,18 @@
 <template>
-  <!--校园活动-->
-  <div id="contact">
-    <div class="container">
+  <div id="contact" class="mt-5 pt-5">
+    <div class="container pt-5 pb-5">
+      <h4 class="font-weight-light border-bottom pb-2">现在咨询</h4>
+      <p>
+        联系我们给你最详细的介绍，改变就从现在开始吧！
+      </p>
       <div class="row">
-        <div class="col-12 col-sm-9">
-          <p>我们的使命：传播互联网前沿技术，帮助更多的人实现梦想!</p>
-          <p>Copyright © 2010-2020 houdunwang.com All Rights Reserved</p>
-          <p>京ICP备12048441号-3</p>
-          <p>本项目基于 HDCMS 构建</p>
-        </div>
-        <div class="col-12 col-sm-3 wechat">
-          <img src="@/assets/wechat.jpg" alt="微信公众号">
+        <div class="col-12 col-md-4">
+          <h3>
+            <i class="fa fa-phone-square" aria-hidden="true"></i> 18611400072
+          </h3>
+          <div class="wechat">
+            <img src="@/assets/liumei.jpg" alt="加微信咨询">
+          </div>
         </div>
       </div>
     </div>
@@ -27,13 +29,10 @@
 
 <style lang="scss" scoped>
   #contact {
-    background: #1C1D1F;
-    padding: 5em;
-    margin-top: 5em;
-
+    background: #f3f3f3;
     .wechat {
       img {
-        width: 80%;
+        width: 70%;
       }
     }
   }

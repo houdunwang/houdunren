@@ -8,6 +8,7 @@
     <tutorial/>
     <Appraise/>
     <contact/>
+    <copyright/>
   </div>
 </template>
 
@@ -21,10 +22,11 @@
   import Contact from "./components/Contact";
   import Question from "./components/Question";
   import Appraise from "./components/Appraise";
+  import Copyright from "./components/Copyright";
 
   export default {
     components: {
-      Headers, Knowledge, Student, School, Tutorial, Contact, Question, Appraise
+      Headers, Knowledge, Student, School, Tutorial, Contact, Question, Appraise, Copyright
     }
   }
 </script>

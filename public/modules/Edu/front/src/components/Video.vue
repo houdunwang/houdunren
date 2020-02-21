@@ -1,15 +1,23 @@
 <template>
-  <div class="video" v-if="show">
-    <div class="play">
-      <video
-        :src="path"
-        autoplay="autoplay" controls="controls"
-        poster="http://www.houdunwang.com/theme/houdunwang//images/poster.jpg"></video>
-      <div class="close-video" @click="$emit('close')">
-        <i class="fa fa-window-close" aria-hidden="true"></i>
+  <div v-if="show">
+    <div class="play" @click="$emit('close')">
+      <div class="content">
+        <video
+          id="video"
+          :src="path"
+          class="shadow-lg"
+          autoplay="autoplay"
+          controls="controls"
+          poster="http://www.houdunwang.com/theme/houdunwang//images/poster.jpg"
+          webkit-playsinline="true" playsinline="true"
+          x5-playsinline="true"
+        ></video>
+        <div class="close-video" @click="$emit('close')">
+          <i class="fa fa-window-close" aria-hidden="true"></i>
+        </div>
       </div>
     </div>
-    <div class="bg"></div>
+    <div class="bg" @click="$emit('close')"></div>
   </div>
 </template>
 
@@ -20,70 +28,80 @@
     props: ['path', 'close'],
     data() {
       return {
-        show: true
+        show: true,
+        video: ''
       }
     },
-    methods: {
+    mounted() {
+      // document.querySelector('.play').addEventListener('click', () => {
+      //   this.$emit('close');
+      // })
     }
   }
 </script>
 
 <style lang="scss" scoped>
-  .video {
+  .play {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     @media screen and (max-width: 768px) {
-      .play {
+      .content {
         width: 100%;
-      }
-    }
-    @media screen and (min-width: 768px) {
-      .play {
-        width: 800px;
-      }
-    }
 
-    .play {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      position: relative;
-      z-index: 99;
-
-      video {
-        width: 100%;
-      }
-
-      .close-video {
-        z-index: 3;
-        position: absolute;
-        right: .3em;
-        top: .3em;
-        line-height: 0;
-        color: #fff;
-        font-size: 3em;
-
-        &:hover {
-          cursor: pointer;
+        .close-video {
+          display: none;
         }
       }
     }
-
-    .bg {
-      background: #000;
-      position: absolute;
-      left: 0;
-      right: 0;
-      margin: 0;
-      top: 0;
-      opacity: .8;
-      height: 100vh;
-      width: 100vw;
+    @media screen and (min-width: 768px) {
+      .content {
+        width: 600px;
+      }
     }
+
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+
+      video {
+        width: 100%;
+        /*object-fit: fill;*/
+        border: solid 1px #2c3e50;
+        z-index: 1;
+      }
+    }
+
+    .close-video {
+      z-index: 9999;
+      color: #666;
+      font-size: 1.5em;
+      line-height: 0;
+      position: relative;
+      right: 1.2em;
+      top: .2em;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .bg {
+    position: fixed;
+    z-index: 10;
+    background: #000;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    opacity: .3;
   }
 </style>

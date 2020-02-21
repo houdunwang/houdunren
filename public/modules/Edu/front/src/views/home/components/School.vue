@@ -1,12 +1,12 @@
 <template>
   <!--校园活动-->
-  <div id="school">
-    <div class="container">
+  <div id="school" class="pt-5 pb-5">
+    <div class="container pt-5">
       <h3 class="text-center mb-5">校园活动</h3>
       <div class="row">
         <div
           @click="playVideo(stu.video)"
-          class="col-12 col-sm-4 mb-3 pr-1 pl-1 pic" v-for="(stu,i) in students" :key="i" v-show="i+1<=showNums">
+          class="col-12 col-sm-4 mb-3 pr-md-1 pl-md-1 pic" v-for="(stu,i) in students" :key="i" v-show="i+1<=showNums">
           <div class="card">
             <div class="pic border-bottom">
               <img :src="stu.pic" class="card-img-top" :alt="stu.title">
@@ -19,7 +19,8 @@
           </div>
         </div>
         <div class="col-12 text-center">
-          <button class="btn btn-outline-primary btn-sm cursor" @click="showNums=1000">加载更多</button>
+          <button class="btn btn-outline-primary btn-sm cursor"
+                  v-show="showNums<students.length" @click="showNums=1000">加载更多</button>
         </div>
       </div>
     </div>
@@ -144,7 +145,6 @@
 
 <style lang="scss" scoped>
   #school {
-    margin-top: 5em;
 
     .row {
       background: #fff;
@@ -155,7 +155,7 @@
         transition: .5s;
 
         .card-text {
-          height: 3em;
+          height: 4em;
         }
 
         &:hover {

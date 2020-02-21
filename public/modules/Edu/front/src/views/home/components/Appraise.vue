@@ -8,7 +8,7 @@
         </dd>
       </dl>
       <div>
-        <div class="col-12 text-center">
+        <div class="col-12 text-center" v-show="bNum<87">
           <button class="btn btn-outline-primary btn-sm cursor" @click="bNum=87">加载更多</button>
         </div>
       </div>
@@ -22,7 +22,7 @@
         </dd>
       </dl>
       <div>
-        <div class="col-12 text-center">
+        <div class="col-12 text-center" v-show="tNum<39">
           <button class="btn btn-outline-primary btn-sm cursor" @click="tNum=87">加载更多</button>
         </div>
       </div>
@@ -43,5 +43,10 @@
 
 <style lang="scss" scoped>
   #appraise {
+    dd {
+      img {
+        max-width: 100%;
+      }
+    }
   }
 </style>

@@ -51,7 +51,7 @@
       };
     },
     created() {
-      if (token.get())this.$router.push('/admin')
+      if (token.get()) this.$router.push('/admin')
     },
     methods: {
       ...mapActions("user", ["adminLogin"]),

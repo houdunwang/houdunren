@@ -13,10 +13,15 @@ import {Message} from "element-ui";
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
+
+
+
+
+
 let config = {
   // baseURL: process.env.baseURL || process.env.apiUrl || ""
   baseURL: process.env.VUE_APP_API_URL,
-  timeout: 5 * 1000 // Timeout
+  timeout: 5 * 1000,
   // withCredentials: true, // Check cross-site Access-Control
 };
 
@@ -29,6 +34,7 @@ _axios.interceptors.request.use(
     if (accessToken) {
       config.headers.Authorization = "Bearer " + accessToken;
     }
+
     return config;
   },
   function (error) {

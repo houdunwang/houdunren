@@ -36,7 +36,7 @@
 <style lang="scss" scoped>
   .row {
     .logo {
-      background-image: url("../assets/logo.png");
+      background-image: url("../assets/training.png");
       height: 60px;
       background-size: contain;
       background-repeat: no-repeat;
