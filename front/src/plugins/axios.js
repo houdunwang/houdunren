@@ -7,28 +7,23 @@ import token from "@/services/token";
 import store from "@/store";
 import httpStatus from "@/services/httpStatus";
 import router from "@/router";
-import {Message} from "element-ui";
+import { Message } from "element-ui";
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-
-
-
-
-
 let config = {
   // baseURL: process.env.baseURL || process.env.apiUrl || ""
   baseURL: process.env.VUE_APP_API_URL,
-  timeout: 5 * 1000,
+  timeout: 5 * 1000
   // withCredentials: true, // Check cross-site Access-Control
 };
 
 const _axios = axios.create(config);
 
 _axios.interceptors.request.use(
-  function (config) {
+  function(config) {
     loading.show();
     let accessToken = token.get();
     if (accessToken) {
@@ -37,18 +32,18 @@ _axios.interceptors.request.use(
 
     return config;
   },
-  function (error) {
+  function(error) {
     return Promise.reject(error);
   }
 );
 
 // Add a response interceptor
 _axios.interceptors.response.use(
-  function (response) {
+  function(response) {
     loading.close();
     return response;
   },
-  function (error) {
+  function(error) {
     loading.close();
     if (error && error.response) {
       let status = error.response.status;
@@ -66,7 +61,7 @@ _axios.interceptors.response.use(
   }
 );
 
-Plugin.install = function (Vue) {
+Plugin.install = function(Vue) {
   Vue.axios = _axios;
   window.axios = _axios;
   Object.defineProperties(Vue.prototype, {

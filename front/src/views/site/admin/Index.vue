@@ -1,56 +1,129 @@
 <template>
-  <div class="card shadow-sm">
-    <div class="card-header">
-      用户列表
+  <div>
+    <nav class="nav nav-tabs mb-3">
+      <router-link class="nav-link" :to="{ name: 'site.index' }">
+        <i class="fa fa-home" aria-hidden="true"></i>
+      </router-link>
+      <a class="nav-link active" href="#">操作员管理</a>
+    </nav>
+    <div class="alert alert-info pt-3 pb-3 rounded-0">
+      <i class="fa fa-info-circle" aria-hidden="true"></i>
+      操作员不允许删除公众号和编辑公众号资料
     </div>
-    <div class="card-body">
-      <table class="table small">
-        <thead>
-        <tr>
-          <th>#编号</th>
-          <th>昵称</th>
-          <th>真实姓名</th>
-          <th>邮箱</th>
-          <th>手机号</th>
-          <th>会员组</th>
-          <th>所属站点</th>
-          <th>状态</th>
-          <th>注册时间</th>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td class="text-right">
-            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-outline-success">设置权限</button>
-              <button type="button" class="btn btn-outline-secondary">查看操作权限</button>
-              <button type="button" class="btn btn-outline-danger">删除操作员</button>
-            </div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="card-footer text-muted">
 
+    <div class="card shadow-sm rounded-0">
+      <div class="card-body">
+        <el-table
+          size="small"
+          :data="users"
+          ref="multipleTable"
+          @selection-change="handleSelectionChange"
+          tooltip-effect="dark"
+        >
+          <el-table-column type="selection" width="60"></el-table-column>
+          <el-table-column prop="id" label="编号" width="60"></el-table-column>
+          <el-table-column prop="name" label="昵称"></el-table-column>
+          <el-table-column prop="real_name" label="真实姓名"></el-table-column>
+          <el-table-column
+            prop="email"
+            label="邮箱"
+            min-width="180"
+          ></el-table-column>
+          <el-table-column prop="mobile" label="手机号"></el-table-column>
+          <el-table-column prop="group.name" label="会员组"></el-table-column>
+          <el-table-column label="注册时间">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
+          </el-table-column>
+          <el-table-column aligh="right" fixed="right" width="180">
+            <template slot-scope="scope">
+              <el-button-group>
+                <el-button
+                  size="mini"
+                  @click="
+                    $router.push({
+                      name: 'site.user.show',
+                      params: { uid: scope.row.id, sid: $route.params.sid }
+                    })
+                  "
+                  >设置权限</el-button
+                >
+                <el-button
+                  size="mini"
+                  @click="
+                    $router.push({
+                      name: 'site.user.show',
+                      params: { uid: scope.row.id, sid: $route.params.sid }
+                    })
+                  "
+                  >编辑用户</el-button
+                >
+              </el-button-group>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div class="card-footer text-muted">
+        <el-button size="small" @click="showSelectUserModel = true"
+          >设置操作员</el-button
+        >
+        <el-button size="small" @click="removeOperator">删除操作员</el-button>
+      </div>
     </div>
+    <el-dialog title="选择用户" :visible.sync="showSelectUserModel" width="60%">
+      <user-component
+        @confirm="setOperator"
+        @cancel="closeUserModal"
+      ></user-component>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-  export default {}
+import UserComponent from "@/components/User";
+export default {
+  components: { UserComponent },
+  data() {
+    return {
+      showSelectUserModel: false,
+      users: [],
+      multipleSelection: []
+    };
+  },
+  async created() {
+    this.loadAdmin();
+  },
+  methods: {
+    async loadAdmin() {
+      let response = await this.axios.get(
+        `site/${this.$route.params.sid}/admin`
+      );
+      this.users = response.data.data;
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
+    //删除操作员
+    async removeOperator() {
+      await this.axios.delete(`site/${this.$route.params.sid}/admin`, {
+        data: { users: this.multipleSelection.map(u => u.id) }
+      });
+      this.loadAdmin();
+    },
+    //设置操作员
+    async setOperator(users) {
+      await this.axios.post(`site/${this.$route.params.sid}/admin`, {
+        users: users.map(u => u.id)
+      });
+      this.showSelectUserModel = false;
+      this.loadAdmin();
+    },
+    closeUserModal() {
+      this.showSelectUserModel = false;
+    }
+  }
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

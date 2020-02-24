@@ -1,42 +1,51 @@
 <template>
-  <div class="card">
-    <div class="card-header">
-      用户列表
-    </div>
-    <div class="card-body">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>#编号</th>
-          <th>昵称</th>
-          <th>真实姓名</th>
-          <th>邮箱</th>
-          <th>手机号</th>
-          <th>会员组</th>
-          <th>所属站点</th>
-          <th>状态</th>
-          <th>注册时间</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="card-footer text-muted">
-
+  <div>
+    <nav class="nav nav-tabs mb-2">
+      <router-link class="nav-link" :to="{name:'site.index',params:{id:$route.params.sid}}">
+        <i class="fa fa-home" aria-hidden="true"></i>
+      </router-link>
+      <a class="nav-link active" href="#">用户列表</a>
+    </nav>
+    <div class="card">
+      <div class="card-body">
+        <el-table size="small" :data="users" fit>
+          <el-table-column prop="id" label="编号" width="60"></el-table-column>
+          <el-table-column prop="name" label="昵称"></el-table-column>
+          <el-table-column prop="real_name" label="真实姓名"></el-table-column>
+          <el-table-column prop="email" label="邮箱" min-width="180"></el-table-column>
+          <el-table-column prop="mobile" label="手机号"></el-table-column>
+          <el-table-column prop="group.name" label="会员组"></el-table-column>
+          <el-table-column label="注册时间">
+            <template slot-scope="scope">{{ scope.row.created_at | dateFormat }}</template>
+          </el-table-column>
+          <el-table-column aligh="right" fixed="right" width="80">
+            <template slot-scope="scope">
+              <el-button-group>
+                <el-button
+                  size="mini"
+                  @click="$router.push({name:'site.user.show',params:{uid:scope.row.id,sid:$route.params.sid}})"
+                >查看</el-button>
+              </el-button-group>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  export default {}
+export default {
+  data() {
+    return {
+      users: []
+    };
+  },
+  async created() {
+    let response = await this.axios.get(`site/${this.$route.params.sid}/user`);
+    this.users = response.data.data;
+  }
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

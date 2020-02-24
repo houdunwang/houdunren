@@ -1,18 +1,19 @@
-import '@babel/polyfill'
-import 'mutationobserver-shim'
+import "@babel/polyfill";
+import "mutationobserver-shim";
 
 window.Vue = require("vue");
 import Vue from "vue";
 import App from "./App";
 import router from "./router/index.js";
 import store from "./store/index";
-import './plugins/bootstrap-vue'
-import './assets/common.scss'
+import "./plugins/bootstrap-vue";
+import "./assets/common.scss";
 import "./plugins/axios";
 import "./plugins/element.js";
-import './plugins/element.js'
 import "./services/filter";
+import _ from "lodash";
 
+Vue.prototype.lodash = _;
 window.api = process.env.VUE_APP_API_URL;
 Vue.component("app", App);
 

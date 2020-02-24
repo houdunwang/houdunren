@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PackageSeeder::class);
         $this->call(SystemConfigSeeder::class);
         $this->call(WeChatSeeder::class);
+        $this->call(SiteUserSeeder::class);
     }
 }

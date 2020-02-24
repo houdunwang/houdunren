@@ -4,9 +4,11 @@
       <el-tab-pane label="基本设置" name="base">
         <el-row :gutter="20">
           <el-col :xs="24" :md="12" v-if="setting.base">
-
             <el-form-item label="后台名称">
-              <el-input placeholder="用于在浏览器标签中显示的名称" v-model="setting.base.name.value"></el-input>
+              <el-input
+                placeholder="用于在浏览器标签中显示的名称"
+                v-model="setting.base.name.value"
+              ></el-input>
             </el-form-item>
 
             <el-form-item label="后台标志">
@@ -18,7 +20,11 @@
                 :on-success="logoUpload"
                 :headers="headers"
               >
-                <img v-if="setting.base.logo.value" :src="setting.base.logo.value" class="avatar"/>
+                <img
+                  v-if="setting.base.logo.value"
+                  :src="setting.base.logo.value"
+                  class="avatar"
+                />
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
             </el-form-item>
@@ -39,13 +45,19 @@
         <el-row :gutter="20">
           <el-col :xs="24" :md="12" v-if="setting.register">
             <el-form-item label="体验天数">
-              <el-input placeholder="可使用后台管理权限的天数" v-model="setting.register.days.value">
+              <el-input
+                placeholder="可使用后台管理权限的天数"
+                v-model="setting.register.days.value"
+              >
                 <template slot="append">天</template>
               </el-input>
             </el-form-item>
 
             <el-form-item label="默认会员组">
-              <el-select v-model="setting.register.group_id.value" placeholder="请选择">
+              <el-select
+                v-model="setting.register.group_id.value"
+                placeholder="请选择"
+              >
                 <el-option
                   v-for="item in groups"
                   :key="item.id"
@@ -68,46 +80,45 @@
 </template>
 
 <script>
-  import Token from "@/services/token";
+import Token from "@/services/token";
 
-  export default {
-    data() {
+export default {
+  data() {
+    return {
+      activeName: "base",
+      setting: { base: null, register: null },
+      groups: []
+    };
+  },
+  async created() {
+    let response = await Promise.all([
+      this.axios.get("/system/group"),
+      this.axios.get("/system/config/1")
+    ]);
+    this.groups = response[0].data.data;
+    this.setting = response[1].data.data;
+  },
+  computed: {
+    uploadUrl() {
+      return `${window.api}/system/upload`;
+    },
+    headers() {
       return {
-        activeName: "base",
-        setting: {base: null, register: null},
-        groups: []
+        //文件上传头信息
+        Authorization: `Bearer ${Token.get()}`
       };
+    }
+  },
+  methods: {
+    logoUpload(res) {
+      //上传标志
+      this.setting.base.logo.value = res;
     },
-    async created() {
-      let response = await Promise.all([
-        this.axios.get('/system/group'),
-        this.axios.get('/system/config/1')
-      ]);
-      this.groups = response[0].data.data;
-      this.setting = response[1].data.data
-    },
-    computed: {
-      uploadUrl() {
-        return `${window.api}/system/upload`
-      },
-      headers() {
-        return {
-          //文件上传头信息
-          Authorization: `Bearer ${Token.get()}`
-        };
-      }
-    },
-    methods: {
-      logoUpload(res, file) {
-        //上传标志
-        this.setting.base.logo.value = res;
-      },
-      async update() {
-        await this.axios.post('/system/config', {data: this.setting});
-        await this.$store.dispatch('systemConfig/get')
-        this.$message.success('更新成功');
-      }
-    },
-
-  };
+    async update() {
+      await this.axios.post("/system/config", { data: this.setting });
+      await this.$store.dispatch("systemConfig/get");
+      this.$message.success("更新成功");
+    }
+  }
+};
 </script>

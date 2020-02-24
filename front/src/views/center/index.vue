@@ -1,13 +1,13 @@
 <template>
+  <div>
     <router-view></router-view>
+
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "main"
-    }
+export default {};
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
 </style>

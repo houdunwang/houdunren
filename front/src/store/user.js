@@ -1,11 +1,10 @@
-import token from '@/services/token'
-import store from '@/store/index'
-import router from '@/router/index'
+import token from "@/services/token";
+import router from "@/router/index";
 //用户
 export default {
   namespaced: true,
   state: {
-    data: null,
+    data: null
   },
   mutations: {
     set(state, data) {
@@ -13,31 +12,31 @@ export default {
     }
   },
   actions: {
-    async userLogin({commit}, data) {
-      let response = await window.axios.post("/user/login", data);
+    async userLogin({ commit }, data) {
+      let response = await window.axios.post("user/login", data);
 
       token.set(response.data.token);
-      commit('set', response.data.data);
+      commit("set", response.data.data);
       return response;
     },
-    async adminLogin({commit}, data) {
-      let response = await window.axios.post("/system/login", data);
+    async adminLogin({ commit }, data) {
+      let response = await window.axios.post("system/login", data);
 
       token.set(response.data.token);
-      commit('set', response.data.data);
+      commit("set", response.data.data);
       return response;
     },
-    async get({state, commit}) {
+    async get({ state, commit }) {
       if (state.data) return Promise.resolve(state.data);
 
-      let response = await window.axios.get("/user/get");
-      commit('set', response.data.data);
+      let response = await window.axios.get("user/get");
+      commit("set", response.data.data);
       return response;
     },
-    adminLogout({commit}) {
-      commit('set', {});
+    adminLogout({ commit }) {
+      commit("set", {});
       token.del();
       router.push("/admin/login");
     }
-  },
+  }
 };

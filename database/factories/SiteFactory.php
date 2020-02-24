@@ -11,5 +11,5 @@ $factory->define(Site::class, function (Faker $faker) {
     'name' => $faker->name(),
     'description' => $faker->sentence(),
     'domain' => 'http://' . $faker->domainName,
-    'user_id' => Arr::random([1, 2, 3])];
+  ];
 });

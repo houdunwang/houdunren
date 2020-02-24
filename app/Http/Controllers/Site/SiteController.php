@@ -36,8 +36,8 @@ class SiteController extends ApiController
   public function store(SiteRequest $request, Site $site): JsonResponse
   {
     $site->fill($request->all());
-    $site->user_id = auth()->id();
     $site->save();
+    $site->user()->attach(auth()->id(), ['role' => 'admin']);
     return $this->success('站点添加成功');
   }
 

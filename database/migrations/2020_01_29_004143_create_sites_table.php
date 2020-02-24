@@ -18,8 +18,6 @@ class CreateSitesTable extends Migration
       $table->bigIncrements('id');
       $table->string('name')->unique()->comment('站点名称');
       $table->string('domain')->unique()->comment('域名');
-      $table->unsignedBigInteger('user_id')->nullable()->comment('管理员');
-      $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
       $table->string('keyword', 100)->nullable()->comment('关键字');
       $table->string('description', 100)->nullable()->comment('站点描述');
       $table->string('logo')->nullable()->comment('LOGO');

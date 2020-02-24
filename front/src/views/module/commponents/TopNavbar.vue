@@ -21,7 +21,7 @@
               class="nav-item mr-4"
               :key="index"
               v-for="(menu, index) in menus"
-              v-if="menu.check?user.is_super_admin:true"
+              v-show="menu.check ? user.is_super_admin : true"
             >
               <router-link class="nav-link" :to="menu.url">
                 <i :class="'fa ' + menu.icon"></i>
@@ -29,7 +29,15 @@
               </router-link>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
                 Dropdown
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -55,10 +63,15 @@
                   <i class="fa fa-user"></i>
                   {{ user.name }}
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <div
+                  class="dropdown-menu dropdown-menu-right"
+                  aria-labelledby="navbarDropdown"
+                >
                   <a class="dropdown-item" href="#">修改资料</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#" @click.prevent="logout">退出登录</a>
+                  <a class="dropdown-item" href="#" @click.prevent="logout"
+                    >退出登录</a
+                  >
                 </div>
               </li>
             </ul>
@@ -69,30 +82,40 @@
   </div>
 </template>
 <script>
-  import {mapState, mapActions} from "vuex";
+import { mapState, mapActions } from "vuex";
 
-  export default {
-    data() {
-      return {
-        menus: [
-          {title: "返回站点管理", icon: "fa fa-reply", url: "/site/index", check: false},
-          {title: "全部应用", icon: "fa fa-cubes", url: `/module/home/${this.$route.params.id}`, check: false},
-        ]
-      };
-    },
-    computed: {
-      ...mapState("user", {user: "data"})
-    },
-    methods: {
-      ...mapActions("user", ["logout"])
-    }
-  };
+export default {
+  data() {
+    return {
+      menus: [
+        {
+          title: "返回站点管理",
+          icon: "fa fa-reply",
+          url: "/site/index",
+          check: false
+        },
+        {
+          title: "全部应用",
+          icon: "fa fa-cubes",
+          url: `/module/home/${this.$route.params.id}`,
+          check: false
+        }
+      ]
+    };
+  },
+  computed: {
+    ...mapState("user", { user: "data" })
+  },
+  methods: {
+    ...mapActions("user", ["logout"])
+  }
+};
 </script>
 <style lang="scss" scoped>
-  .navigate {
-    background-color: #293145;
-    opacity: .95;
-    position: relative;
-    z-index: 1;
-  }
+.navigate {
+  background-color: #293145;
+  opacity: 0.95;
+  position: relative;
+  z-index: 1;
+}
 </style>

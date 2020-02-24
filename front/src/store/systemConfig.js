@@ -10,10 +10,11 @@ export default {
     },
   },
   actions: {
-    async get({commit}) {
-      let response = await window.axios.get("/system/config/1");
+    async get({state, commit}) {
+      if (state.data) return Promise.resolve(state.data);
+      let response = await window.axios.get("system/config/1");
       commit('set', response.data.data);
-      return response;
+      return response.data.data;
     },
   }
 };

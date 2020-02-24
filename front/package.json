@@ -11,6 +11,8 @@
     "bootstrap-vue": "^2.1.0",
     "core-js": "^3.6.4",
     "element-ui": "^2.4.5",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",
     "vuex": "^3.1.2"
@@ -22,7 +24,6 @@
     "@vue/cli-plugin-router": "~4.2.0",
     "@vue/cli-plugin-vuex": "~4.2.0",
     "@vue/cli-service": "~4.2.0",
-    "axios": "^0.18.0",
     "babel-eslint": "^10.0.3",
     "bootstrap": "^4.3.1",
     "eslint": "^6.7.2",
@@ -30,12 +31,10 @@
     "mutationobserver-shim": "^0.3.3",
     "popper.js": "^1.16.0",
     "portal-vue": "^2.1.6",
-    "sass": "^1.19.0",
+    "sass": "^1.26.0",
     "sass-loader": "^8.0.0",
-    "vue-cli-plugin-axios": "^0.0.4",
     "vue-cli-plugin-bootstrap-vue": "^0.6.0",
     "vue-cli-plugin-element": "^1.0.1",
-    "vue-cli-plugin-moment": "^0.1.1",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -49,7 +48,8 @@
     ],
     "parserOptions": {
       "parser": "babel-eslint"
-    }
+    },
+    "rules": {}
   },
   "browserslist": [
     "> 1%",
