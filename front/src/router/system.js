@@ -18,7 +18,7 @@ export default [
   {
     path: '/system',
     component: Admin,
-    async beforeEnter(next) {
+    async beforeEnter(to, from, next) {
       try {
         await store.dispatch('user/get')
         await store.dispatch('systemConfig/get')

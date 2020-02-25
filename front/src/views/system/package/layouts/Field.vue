@@ -1,109 +1,120 @@
 <template>
   <master>
-    <div class="card">
-      <div class="card-header">
-        服务套餐管理
-      </div>
-      <div class="card-body">
-        <div class="form-group">
-          <label for="name">服务套餐名称</label>
-          <input
-            type="text"
-            v-model="name"
-            class="form-control"
-            id="name"
-            placeholder="请输入套餐中文名称"
-          />
+    <el-form :model="form" :rules="rules" ref="form" label-width="100px">
+      <div class="card">
+        <div class="card-header">
+          服务套餐管理
+        </div>
+        <div class="card-body">
+          <el-form-item label="套餐名称" prop="name">
+            <el-input v-model="form.name"></el-input>
+          </el-form-item>
         </div>
       </div>
-    </div>
 
-    <div class="card mt-3">
-      <div class="card-header">
-        套餐模块选择
+      <div class="card mt-3">
+        <div class="card-header">
+          套餐模块选择
+        </div>
+        <div class="card-body">
+          <el-table :data="moduleList" border stripe ref="multipleTable" @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="55"></el-table-column>
+            <el-table-column width="100" label="图标">
+              <template slot-scope="scope">
+                <el-avatar shape="square" :size="50" :src="scope.row.package.thumb"></el-avatar>
+              </template>
+            </el-table-column>
+            <el-table-column v-for="col in columns" :prop="col.prop" :key="col.name" :label="col.label" :width="col.width"> </el-table-column>
+          </el-table>
+        </div>
       </div>
-      <div class="card-body">
-        <table class="table" v-if="moduleList.length > 0">
-          <thead>
-            <tr class="text-secondary font-weight-normal">
-              <th>操作</th>
-              <th>模块名称</th>
-              <th>模块标识</th>
-              <th>版本号</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(module, index) in moduleList" :key="index">
-              <td>
-                <input
-                  type="checkbox"
-                  v-model="modules"
-                  :value="module.model.id"
-                />
-              </td>
-              <td>{{ module.package.title }}</td>
-              <td>{{ module.name }}</td>
-              <td>{{ module.package.version }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <button type="button" class="btn btn-success mt-3" @click="submit">
-      保存提交
-    </button>
+      <el-button class="mt-3" type="primary" @click="submit('form')">保存提交</el-button>
+    </el-form>
   </master>
 </template>
 
 <script>
-import Master from "./Master";
+import Master from './Master'
 
 export default {
-  props: ["action"],
+  props: ['action'],
   data() {
     return {
-      name: "",
-      modules: [],
-      moduleList: []
-    };
+      form: {
+        name: ''
+      },
+      //系统所有模块列表
+      moduleList: [],
+      //静音验证规则
+      rules: {
+        name: [
+          { required: true, message: '套餐名称不能为空', trigger: 'blur' },
+          { min: 3, message: '套餐名称不能少于3个字符', trigger: 'blur' }
+        ]
+      },
+      //模块表格字段
+      columns: [
+        { label: '模块名称', prop: 'package.title' },
+        { label: '版本号', prop: 'package.version' }
+      ],
+      //选中的模块
+      multipleSelection: []
+    }
   },
   components: { Master },
   async created() {
-    let response = await this.axios("/system/module/installed");
-    this.$set(this, "moduleList", response.data.data);
-    if (this.action === "edit") {
-      let id = this.$route.params.id;
-      let response = await this.axios.get(`/system/package/${id}`);
-      this.$set(this, "name", response.data.data.name);
-      this.$set(
-        this,
-        "modules",
-        response.data.data.modules.map(m => m.id)
-      );
+    //获取所有模块列表
+    let response = await this.axios('/system/module/installed')
+    this.$set(this, 'moduleList', response.data.data)
+
+    this.multipleSelection = response.data.data
+
+    //编辑时获取原数据
+    if (this.action === 'edit') {
+      let id = this.$route.params.id
+      let response = await this.axios.get(`/system/package/${id}`)
+      this.$set(this.form, 'name', response.data.data.name)
+      //设置模块的选中状态
+      this.moduleList.filter(m => {
+        let row = response.data.data.modules.find(module => module.id === m.model.id)
+        row && this.$refs.multipleTable.toggleRowSelection(m)
+      })
     }
   },
   methods: {
     async submit() {
-      let id = this.$route.params.id;
-      let data = {
-        name: this.name,
-        modules: this.modules
-      };
-      switch (this.action) {
-        case "add":
-          await this.axios.post("/system/package", data);
-          this.$message.success("套餐添加成功");
-          this.$router.push({ name: "system.package.index" });
-          break;
-        case "edit":
-          await this.axios.put(`/system/package/${id}`, data);
-          this.$message.success("套餐编辑成功");
-          this.$router.push({ name: "system.package.index" });
-          break;
-      }
+      //验证成功时提表单
+      this.$refs['form'].validate(async valid => {
+        if (valid) {
+          //发送的表单数据
+          let formData = {
+            name: this.form.name,
+            modules: this.multipleSelection.map(m => m.model.id)
+          }
+
+          switch (this.action) {
+            case 'add':
+              await this.axios.post('/system/package', formData)
+              this.$message.success('套餐添加成功')
+              this.$router.push({ name: 'system.package.index' })
+              break
+            case 'edit':
+              await this.axios.put(`/system/package/${this.$route.params.id}`, formData)
+              this.$message.success('套餐编辑成功')
+              this.$router.push({ name: 'system.package.index' })
+              break
+          }
+        } else {
+          return false
+        }
+      })
+    },
+    //多选模块时的处理
+    handleSelectionChange(modules) {
+      this.multipleSelection = modules
     }
   }
-};
+}
 </script>
 
 <style scoped></style>
