@@ -2,11 +2,11 @@
 export default {
   namespaced: true,
   state: {
-    data: {},
+    data: {}
   },
   mutations: {
     set(state, data) {
-      state.data = data;
-    },
+      state.data = data
+    }
   }
-};
+}

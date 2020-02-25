@@ -83,7 +83,7 @@ export default {
     },
     async update() {
       await this.axios.post('system/config', { data: this.setting })
-      await this.$store.dispatch('systemConfig/get')
+      await this.$store.dispatch('systemConfig/get', true)
       this.$message.success('更新成功')
     }
   }

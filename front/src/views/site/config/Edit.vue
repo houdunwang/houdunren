@@ -55,26 +55,26 @@
   </div>
 </template>
 <script>
-import AliPay from "./components/AliPay";
-import AliYun from "./components/AliYun";
-import Email from "./components/Email";
-import Maintain from "./components/Maintain";
-import Notification from "./components/Notification";
-import Upload from "./components/Upload";
-import User from "./components/User";
-import store from "@/store/index";
-import { mapState } from "vuex";
+import AliPay from './components/AliPay'
+import AliYun from './components/AliYun'
+import Email from './components/Email'
+import Maintain from './components/Maintain'
+import Notification from './components/Notification'
+import Upload from './components/Upload'
+import User from './components/User'
+import store from '@/store/index'
+import { mapState } from 'vuex'
 
 export default {
   async beforeRouteEnter(to, from, next) {
-    let response = await window.axios.get(`/site/config/${to.params.id}`);
-    await store.commit("site/config", response.data.data);
-    next();
+    let response = await window.axios.get(`/site/config/${to.params.id}`)
+    await store.commit('site/config', response.data.data)
+    next()
   },
   data() {
     return {
-      activeName: "email"
-    };
+      activeName: 'email'
+    }
   },
   components: {
     Email,
@@ -86,17 +86,17 @@ export default {
     User
   },
   computed: {
-    ...mapState("site", ["config"])
+    ...mapState('site', ['config'])
   },
   methods: {
     async submit() {
       await window.axios.put(`/site/config/${this.$route.params.id}`, {
         data: this.config
-      });
-      this.$message.success("更新成功");
-      this.$router.push("/admin");
+      })
+      this.$message.success('更新成功')
+      this.$router.push('/admin')
     }
   }
-};
+}
 </script>
 <style></style>
