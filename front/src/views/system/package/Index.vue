@@ -3,25 +3,25 @@
     <div class="card shadow-sm">
       <div class="card-header">套餐列表</div>
       <div class="card-body">
-        <el-table :data="packages" stripe empty-text=" ">
+        <el-table :data="packages" stripe empty-text="加载中...">
           <el-table-column prop="name" label="名称" width="100"> </el-table-column>
           <el-table-column label="可用模块">
             <template slot-scope="scope">
-              <el-tag v-for="m in scope.row.modules" :key="m.id">
-                {{ m.name }}
+              <el-tag type="info" size="mini" v-for="m in scope.row.modules" :key="m.id" class="m-1">
+                {{ m.package.title }}
               </el-tag>
             </template>
           </el-table-column>
           <el-table-column label="用户组">
             <template slot-scope="scope">
-              <el-tag v-for="g in scope.row.group" :key="g.id">
+              <el-tag size="mini" type="info" v-for="g in scope.row.group" :key="g.id" class="m-1">
                 {{ g.name }}
               </el-tag>
             </template>
           </el-table-column>
           <el-table-column label="系统套餐">
             <template slot-scope="scope">
-              <i class="el-icon-success text-success" v-if="scope.system"></i>
+              <i class="el-icon-success text-success" v-if="scope.row.system"></i>
             </template>
           </el-table-column>
           <el-table-column label="" width="150">

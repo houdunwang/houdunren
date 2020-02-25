@@ -1,90 +1,73 @@
 <template>
   <master>
     <div class="card shadow-sm">
-      <div class="card-header">套餐列表</div>
+      <div class="card-header">用户组列表</div>
       <div class="card-body">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>名称</th>
-              <th>可创建站点数量</th>
-              <th>套餐</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="g in groups" :key="g.id">
-              <td>{{ g.name }}</td>
-              <td>
-                <span class="badge badge-info">{{ g.site_num }}</span>
-              </td>
-              <td>
-                <span
-                  class="badge badge-success mr-2"
-                  v-for="p in g.packages"
-                  :key="p.id"
-                >
-                  <router-link
-                    :to="{ name: 'system.package.edit', params: { id: p.id } }"
-                    class="text-white"
-                  >
-                    {{ p.name }}
-                  </router-link>
-                </span>
-              </td>
-              <td class="text-right">
-                <div class="btn-group btn-group-sm" role="group">
-                  <router-link
-                    class="btn btn-outline-success"
-                    :to="{ name: 'system.group.edit', params: { id: g.id } }"
-                  >
-                    编辑
-                  </router-link>
-                  <button
-                    type="button"
-                    class="btn btn-outline-danger"
-                    @click="del(g)"
-                  >
-                    删除
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <el-table :data="groups" stripe :empty-text="tableMessage">
+          <el-table-column prop="id" label="编号" width="60"> </el-table-column>
+          <el-table-column prop="name" label="名称" width="120"> </el-table-column>
+          <el-table-column label="可创建站点数量" width="150">
+            <template slot-scope="scope">
+              <el-tag size="mini" type="info" class="m-1">{{ scope.row.site_num }}</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column label="套餐">
+            <template slot-scope="scope">
+              <el-tag size="mini" type="warning" v-for="p in scope.row.packages" :key="p.id" class="m-1">
+                <router-link class="text-secondary" :to="{ name: 'system.package.edit', params: { id: p.id } }">
+                  {{ p.name }}
+                </router-link>
+              </el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column label="默认组" width="150">
+            <template slot-scope="scope">
+              <i class="el-icon-success text-success" v-show="scope.row.default"></i>
+            </template>
+          </el-table-column>
+          <el-table-column label="" width="150">
+            <template slot-scope="scope">
+              <el-button-group>
+                <el-button type="mini" @click="$router.push({ name: 'system.group.edit', params: { id: scope.row.id } })">编辑</el-button>
+                <el-button type="mini" @click="del(scope.row)" v-if="!scope.row.default">删除</el-button>
+              </el-button-group>
+            </template>
+          </el-table-column>
+        </el-table>
       </div>
     </div>
   </master>
 </template>
 
 <script>
-import Master from "./components/Master";
+import Master from './layouts/Master'
 
 export default {
   components: { Master },
   data() {
     return {
-      groups: []
-    };
+      groups: [],
+      tableMessage: '加载中...'
+    }
   },
   async created() {
-    let response = await this.axios.get("/system/group");
-    this.$set(this, "groups", response.data.data);
+    let response = await this.axios.get('/system/group')
+    this.$set(this, 'groups', response.data.data)
   },
   methods: {
     async del(g) {
-      this.$confirm("确定删除吗？", "温馨提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+      this.$confirm('确定删除吗？', '温馨提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
         center: true
       }).then(async () => {
-        await this.axios.delete(`/system/group/${g.id}`);
-        this.$message.success("删除成功");
-        this.$router.go(0);
-      });
+        await this.axios.delete(`/system/group/${g.id}`)
+        this.$message.success('删除成功')
+        this.$router.go(0)
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped>

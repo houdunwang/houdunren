@@ -70,11 +70,10 @@ class User extends Authenticatable
   }
 
   /**
-   * 用户组
-   * @return BelongsTo
+   * 用户组多表关联
    */
-  public function group(): BelongsTo
+  public function group()
   {
-    return $this->belongsTo(Group::class);
+    return $this->belongsToMany(Group::class, 'user_group');
   }
 }

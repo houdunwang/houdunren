@@ -5,14 +5,11 @@ use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        factory(User::class, 20)->create();
+        factory(User::class, 20)->create()->each(function ($user) {
+            $user->group()->attach([1]);
+        });
         $user = User::find(1);
         $user->name = '向军大叔';
         $user->email = '2300071698@qq.com';

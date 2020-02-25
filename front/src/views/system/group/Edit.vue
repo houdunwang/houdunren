@@ -1,15 +1,13 @@
 <template>
-  <field action="edit"/>
+  <field action="edit" />
 </template>
 
 <script>
-  import Field from './components/Field'
+import Field from './layouts/Field'
 
-  export default {
-    components: {Field}
-  }
+export default {
+  components: { Field }
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

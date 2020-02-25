@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Module;
+use App\Servers\ModuleServer;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -12,20 +13,21 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class PackageResource extends JsonResource
 {
-  /**
-   * Transform the resource into an array.
-   *
-   * @param \Illuminate\Http\Request $request
-   * @return array
-   */
   public function toArray($request)
   {
     return [
       'id' => $this['id'],
       'name' => $this['name'],
       'system' => $this['system'],
-      'modules' => $this->module,
+      'modules' => $this->getModules(),
+      'a' => 33,
       'group' => $this->group
     ];
+  }
+  protected function getModules()
+  {
+    return $this->module->map(function ($module) {
+      return  app(ModuleServer::class)->getModuleInfo($module['name']);
+    });
   }
 }

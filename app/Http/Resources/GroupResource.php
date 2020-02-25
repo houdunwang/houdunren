@@ -18,7 +18,8 @@ class GroupResource extends JsonResource
       'id' => $this->id,
       'name' => $this->name,
       'site_num' => $this->site_num,
-      'packages' => $this->package()->with('module')->get()
+      'default' => $this->default,
+      'packages' => PackageResource::collection($this->package()->with('module')->get())
     ];
   }
 }

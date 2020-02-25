@@ -17,7 +17,7 @@
           套餐模块选择
         </div>
         <div class="card-body">
-          <el-table :data="moduleList" border stripe ref="multipleTable" @selection-change="handleSelectionChange">
+          <el-table :data="moduleList" border stripe ref="multipleTable" @selection-change="handleSelectionChange" empty-text="加载中">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column width="100" label="图标">
               <template slot-scope="scope">
@@ -64,21 +64,20 @@ export default {
   components: { Master },
   async created() {
     //获取所有模块列表
-    let response = await this.axios('/system/module/installed')
-    this.$set(this, 'moduleList', response.data.data)
-
-    this.multipleSelection = response.data.data
+    let modules = await this.axios('/system/module/installed').then(r => r.data.data)
+    this.$set(this, 'moduleList', modules)
 
     //编辑时获取原数据
     if (this.action === 'edit') {
       let id = this.$route.params.id
-      let response = await this.axios.get(`/system/package/${id}`)
-      this.$set(this.form, 'name', response.data.data.name)
+      let response = await this.axios.get(`/system/package/${id}`).then(r => r.data.data)
+      this.$set(this.form, 'name', response.name)
       //设置模块的选中状态
-      this.moduleList.filter(m => {
-        let row = response.data.data.modules.find(module => module.id === m.model.id)
-        row && this.$refs.multipleTable.toggleRowSelection(m)
-      })
+      this.moduleList.map(m =>
+        response.modules.map(pm => {
+          if (pm.id === m.id) this.$refs.multipleTable.toggleRowSelection(m)
+        })
+      )
     }
   },
   methods: {

@@ -28,7 +28,6 @@ class CreateUsersTable extends Migration
       $table->string('wechat')->nullable()->comment('微信号');
       $table->string('github')->nullable()->comment('GITHUB');
       $table->string('qq')->nullable()->comment('QQ');
-      $table->unsignedInteger('group_id')->nullable()->comment('管理员组');
       $table->unsignedTinyInteger('lock')->nullable()->comment('用户锁定');
       $table->unsignedInteger('credit1')->nullable();
       $table->unsignedInteger('credit2')->nullable();
