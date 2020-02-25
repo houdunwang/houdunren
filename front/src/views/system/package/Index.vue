@@ -26,22 +26,14 @@
                   class="badge badge-success mr-1"
                   v-for="module in p.modules"
                   :key="module.name"
-                >
-                  {{ module.name }}
-                </span>
+                >{{ module.name }}</span>
               </td>
               <td>
-                <span
-                  class="badge badge-info mr-1"
-                  v-for="g in p.group"
-                  :key="g.id"
-                >
+                <span class="badge badge-info mr-1" v-for="g in p.group" :key="g.id">
                   <router-link
                     :to="{ name: 'system.group.edit', params: { id: g.id } }"
                     class="text-white"
-                  >
-                    {{ g.name }}
-                  </router-link>
+                  >{{ g.name }}</router-link>
                 </span>
               </td>
               <td class="text-right">
@@ -49,16 +41,8 @@
                   <router-link
                     class="btn btn-outline-success"
                     :to="{ name: 'system.package.edit', params: { id: p.id } }"
-                  >
-                    编辑
-                  </router-link>
-                  <button
-                    type="button"
-                    class="btn btn-outline-danger"
-                    @click="del(p)"
-                  >
-                    删除
-                  </button>
+                  >编辑</router-link>
+                  <button type="button" class="btn btn-outline-danger" @click="del(p)">删除</button>
                 </div>
               </td>
             </tr>
@@ -70,7 +54,7 @@
 </template>
 
 <script>
-import Master from "./components/Master";
+import Master from "./layouts/Master";
 
 export default {
   components: { Master },

@@ -25,11 +25,9 @@
         <div class="card-footer text-muted">
           <div class="d-flex flex-md-row flex-column justify-content-between">
             <div class="small">
-              <span class="mr-2"
-                >创建时间: {{ site.created_at | dateFormat }}</span
-              >
-              <span class="mr-2">站长: {{ site.user.name }}</span>
-              <span class="mr-2">所属组: {{ site.user.group.name }}</span>
+              <span class="mr-2">创建时间: {{ site.created_at | dateFormat }}</span>
+              <span class="mr-2">站长: {{ site.admin.name }}</span>
+              <span class="mr-2">所属组: {{ site.admin.group.name }}</span>
             </div>
 
             <div class="lin"></div>
