@@ -3,13 +3,12 @@
 </template>
 
 <script>
-import Field from "./components/Field";
+import Field from './layouts/Field'
 export default {
   components: {
-      Field
+    Field
   }
-};
+}
 </script>
 
-<style>
-</style>
+<style></style>

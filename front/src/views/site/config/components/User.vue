@@ -24,15 +24,14 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
 
 export default {
-  name: "Base",
+  name: 'Base',
   computed: {
-    ...mapState("site", { field: "config" })
+    ...mapState('siteConfig', { field: 'data' })
   }
-};
+}
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

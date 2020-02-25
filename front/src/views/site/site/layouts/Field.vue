@@ -86,13 +86,13 @@ export default {
   },
   async created() {
     if (this.action === 'edit') {
-      let response = await this.axios.get(`/site/site/${this.$route.params.sid}`)
-      this.$set(this, 'field', response.data.data)
+      let response = await this.axios.get(`/site/site/${this.$route.params.sid}`).then(r => r.data.data)
+      this.$set(this, 'field', response)
     }
   },
   computed: {
     uploadUrl() {
-      return `${process.env.VUE_APP_API_URL}/system/upload`
+      return `${process.env.VUE_APP_API_URL}system/upload`
     },
     //文件上传头信息
     headers() {

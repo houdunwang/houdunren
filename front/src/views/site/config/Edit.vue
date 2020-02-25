@@ -68,7 +68,7 @@ import { mapState } from 'vuex'
 export default {
   async beforeRouteEnter(to, from, next) {
     let response = await window.axios.get(`/site/config/${to.params.id}`)
-    await store.commit('site/config', response.data.data)
+    await store.commit('siteConfig/set', response.data.data)
     next()
   },
   data() {
@@ -86,15 +86,14 @@ export default {
     User
   },
   computed: {
-    ...mapState('site', ['config'])
+    ...mapState('siteConfig', ['config'])
   },
   methods: {
     async submit() {
-      await window.axios.put(`/site/config/${this.$route.params.id}`, {
+      await window.axios.put(`site/config/${this.$route.params.id}`, {
         data: this.config
       })
       this.$message.success('更新成功')
-      this.$router.push('/admin')
     }
   }
 }

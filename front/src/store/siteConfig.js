@@ -2,16 +2,16 @@
 export default {
   namespaced: true,
   state: {
-    // data: null,
+    data: null
     // config: null
   },
   mutations: {
     // set(state, data) {
     //   state.data = data
     // },
-    // config(state, data) {
-    //   state.config = data
-    // }
+    set(state, data) {
+      state.data = data
+    }
   },
   actions: {
     // async get({ dispatch }, id) {
