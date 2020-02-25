@@ -65,7 +65,7 @@ class ModuleController extends ApiController
    * @param ModuleServer $moduleServer
    * @return JsonResponse
    */
-  public function allInstalled(ModuleServer $moduleServer): JsonResponse
+  public function installed(ModuleServer $moduleServer): JsonResponse
   {
     $modules = $moduleServer->allInstalledModule();
     return $this->success('模块获取成功', $modules);

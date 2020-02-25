@@ -47,9 +47,13 @@ class ModuleServer
   {
     $module = \Module::find($name);
     $model = Module::where('name', $name)->first();
+    $package = include $module->getPath() . '/package.php';
+    $package['name'] = $name;
+    $package['thumb'] = config('app.url') . "/modules/{$name}/preview.jpg";
+
     return [
       'name' => $name,
-      'package' => include $module->getPath() . '/package.php',
+      'package' => $package,
       'permissions' => include $module->getPath() . '/Config/permissions.php',
       'menus' => [
         'admin' => include $module->getPath() . '/Menu/admin.php',

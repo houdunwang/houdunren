@@ -3,87 +3,71 @@
     <div class="card shadow-sm">
       <div class="card-header">套餐列表</div>
       <div class="card-body">
-        <div v-if="message">
-          <h6 class="text-center p-3 text-secondary">
-            <i class="fa fa-info-circle" aria-hidden="true"></i>
-            {{ message }}
-          </h6>
-        </div>
-        <table class="table" v-if="packages.length > 0">
-          <thead>
-            <tr>
-              <th>名称</th>
-              <th>可用模块</th>
-              <th>用户组</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="p in packages" :key="p.id">
-              <td>{{ p.name }}</td>
-              <td>
-                <span
-                  class="badge badge-success mr-1"
-                  v-for="module in p.modules"
-                  :key="module.name"
-                >{{ module.name }}</span>
-              </td>
-              <td>
-                <span class="badge badge-info mr-1" v-for="g in p.group" :key="g.id">
-                  <router-link
-                    :to="{ name: 'system.group.edit', params: { id: g.id } }"
-                    class="text-white"
-                  >{{ g.name }}</router-link>
-                </span>
-              </td>
-              <td class="text-right">
-                <div class="btn-group btn-group-sm" role="group">
-                  <router-link
-                    class="btn btn-outline-success"
-                    :to="{ name: 'system.package.edit', params: { id: p.id } }"
-                  >编辑</router-link>
-                  <button type="button" class="btn btn-outline-danger" @click="del(p)">删除</button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <el-table :data="packages" stripe empty-text=" ">
+          <el-table-column prop="name" label="名称" width="100"> </el-table-column>
+          <el-table-column label="可用模块">
+            <template slot-scope="scope">
+              <el-tag v-for="m in scope.row.modules" :key="m.id">
+                {{ m.name }}
+              </el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column label="用户组">
+            <template slot-scope="scope">
+              <el-tag v-for="g in scope.row.group" :key="g.id">
+                {{ g.name }}
+              </el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column label="系统套餐">
+            <template slot-scope="scope">
+              <i class="el-icon-success text-success" v-if="scope.system"></i>
+            </template>
+          </el-table-column>
+          <el-table-column label="" width="150">
+            <template slot-scope="scope">
+              <el-button-group>
+                <el-button size="mini">
+                  <router-link :to="{ name: 'system.package.edit', params: { id: scope.row.id } }">编辑</router-link>
+                </el-button>
+                <el-button size="mini" @click="del(scope.row)">删除</el-button>
+              </el-button-group>
+            </template>
+          </el-table-column>
+        </el-table>
       </div>
     </div>
   </master>
 </template>
 
 <script>
-import Master from "./layouts/Master";
+import Master from './layouts/Master'
 
 export default {
   components: { Master },
   data() {
     return {
-      packages: [],
-      message: ""
-    };
+      packages: []
+    }
   },
   async created() {
-    let response = await this.axios.get("/system/package");
-    this.$set(this, "packages", response.data.data);
-    if (response.data.data.length === 0)
-      this.$set(this, "message", "你还没有添加任何套餐");
+    let response = await this.axios.get('/system/package')
+    this.$set(this, 'packages', response.data.data)
   },
   methods: {
     async del(p) {
-      this.$confirm("确定删除吗？", "温馨提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+      this.$confirm('确定删除吗？', '温馨提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
         center: true
       }).then(async () => {
-        await this.axios.delete(`/system/package/${p.id}`);
-        this.$message.success("删除成功");
-        this.$router.go(0);
-      });
+        await this.axios.delete(`/system/package/${p.id}`)
+        this.$message.success('删除成功')
+        this.$router.go(0)
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped>

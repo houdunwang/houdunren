@@ -20,12 +20,22 @@ class AdminController extends ApiController
   {
     $this->middleware('siteAuth');
   }
+
+  //根据关键词搜索用户
+  public function search(Request $request, Site $site, SiteServer $siteServer)
+  {
+    $users = $siteServer->getByKeyword($site, $request->input('content'), ['user']);
+    return $this->success('用户列表', UserResource::collection($users));
+  }
+
+  //获取操作员
   public function index(Site $site)
   {
     $users = $site->operator;
     return $this->success('操作员表获取成功', UserResource::collection($users));
   }
 
+  //添加操作员
   public function add(Request $request, Site $site)
   {
     array_map(function ($uid) use ($site) {
@@ -34,6 +44,8 @@ class AdminController extends ApiController
 
     return $this->success('设置成功');
   }
+
+  //移除操作员
   public function remove(Request $request, Site $site)
   {
     array_map(function ($uid) use ($site) {

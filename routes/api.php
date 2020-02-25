@@ -29,10 +29,10 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'si
   Route::get('{site}/admin', 'AdminController@index');
   Route::post('{site}/admin', 'AdminController@add');
   Route::delete('{site}/admin', 'AdminController@remove');
+  Route::post('{site}/admin/search', 'AdminController@search');
 
   Route::get('{site}/user', 'UserController@index');
   Route::get('{site}/user/{user}', 'UserController@get');
-  Route::post('{site}/user/search', 'UserController@search');
 });
 
 //系统
@@ -51,7 +51,7 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => '
   Route::get('module', 'ModuleController@index');
   Route::post('module', 'ModuleController@install');
   Route::delete('module/{name}', 'ModuleController@uninstall');
-  Route::get('module/installed', 'ModuleController@allInstalled');
+  Route::get('module/installed', 'ModuleController@installed');
 });
 
 //模块

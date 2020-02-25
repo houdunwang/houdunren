@@ -15,17 +15,19 @@ class SiteServer
     /**
      * 根据关键词获取用户
      */
-    public function getByKeyword(Site $site, ?string $content)
+    public function getByKeyword(Site $site, ?string $content, $role = ['admin', 'operator', 'user'])
     {
-        return $site->user()->where(function ($query) use ($content) {
-            array_map(
-                function ($field) use ($query, $content) {
-                    if ($content)
-                        $query->orWhere($field, 'like', "%{$content}%");
-                },
-                ['name', 'email', 'mobile', 'users.id'],
-            );
-        })->get();
+        return $site->user()
+            ->wherePivotIn('role', $role)
+            ->where(function ($query) use ($content) {
+                if ($content)
+                    array_map(
+                        function ($field) use ($query, $content) {
+                            $query->orWhere($field, 'like', "%{$content}%");
+                        },
+                        ['name', 'email', 'mobile', 'users.id'],
+                    );
+            })->get();
     }
     //是否为站长
     public function isAdmin(Site $site, User $user)

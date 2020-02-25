@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Package extends Model
 {
-  protected $fillable = ['name'];
-  protected $casts = ['modules' => 'array', 'templates' => 'array'];
+  protected $fillable = ['name', 'system'];
+  protected $casts = ['modules' => 'array', 'templates' => 'array', 'system' => 'boolean'];
 
   /**
    * 套餐模块

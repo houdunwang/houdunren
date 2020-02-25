@@ -8,6 +8,7 @@ class PackageSeeder extends Seeder
   {
     $package = new \App\Models\Package();
     $package->name = '体验套餐';
+    $package->system = true;
     $package->save();
   }
 }

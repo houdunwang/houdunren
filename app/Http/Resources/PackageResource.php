@@ -23,6 +23,7 @@ class PackageResource extends JsonResource
     return [
       'id' => $this['id'],
       'name' => $this['name'],
+      'system' => $this['system'],
       'modules' => $this->module,
       'group' => $this->group
     ];

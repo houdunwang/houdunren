@@ -31,7 +31,7 @@ class PackageController extends ApiController
 
   public function show(Package $package)
   {
-    return $this->success('', new PackageResource($package) );
+    return $this->success('', new PackageResource($package));
   }
 
   public function update(PackageRequest $request, Package $package)
@@ -43,6 +43,9 @@ class PackageController extends ApiController
 
   public function destroy(Package $package)
   {
+    if ($package->system) {
+      return $this->error("系统套餐不允许删除");
+    }
     $package->delete();
     return $this->success('套餐删除成功');
   }
