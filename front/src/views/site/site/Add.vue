@@ -2,11 +2,11 @@
   <field action="add" />
 </template>
 <script>
-  import Field from "./components/Field";
+import Field from './layouts/Field'
 
-  export default {
-    components: {
-      Field
-    }
-  };
+export default {
+  components: {
+    Field
+  }
+}
 </script>
