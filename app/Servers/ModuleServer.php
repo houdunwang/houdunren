@@ -66,14 +66,15 @@ class ModuleServer
   /**
    * 获取站点所有模块
    * @param Site $site
-   * @return array
    */
-  public function getSiteModule(Site $site): array
+  public function getSiteModule(Site $site)
   {
     $modules = [];
-    foreach ($site->user->group->package as $package) {
-      foreach ($package->module as $module) {
-        $modules[] = $this->getModuleInfo($module['name']);
+    foreach ($site->admin()->first()->group as $group) {
+      foreach ($group->package as $package) {
+        foreach ($package->module as $module) {
+          $modules[] = $this->getModuleInfo($module['name']);
+        }
       }
     }
     return $modules;

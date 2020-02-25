@@ -52,6 +52,7 @@ class Site extends Model
   {
     return $this->user()->wherePivotIn('role', ['admin']);
   }
+
   public function operator()
   {
     return $this->user()->wherePivotIn('role', ['operator']);

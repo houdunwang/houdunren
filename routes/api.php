@@ -1,6 +1,8 @@
 <?php
 
 //后台登录
+
+
 Route::group(['namespace' => 'System', 'prefix' => 'system'], function () {
   Route::post('login', 'LoginController@login');
 });
@@ -33,6 +35,8 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'si
 
   Route::get('{site}/user', 'UserController@index');
   Route::get('{site}/user/{user}', 'UserController@get');
+
+  Route::get('{site}/module', 'ModuleController@index');
 });
 
 //系统
