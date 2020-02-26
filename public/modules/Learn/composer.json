@@ -1,0 +1,25 @@
+{
+    "name": "test/learn",
+    "description": "",
+    "authors": [
+        {
+            "name": "houdunren.com",
+            "email": "user@houdunren.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Learn\\Providers\\LearnServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Learn\\": ""
+        }
+    }
+}

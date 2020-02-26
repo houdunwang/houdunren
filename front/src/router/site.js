@@ -8,7 +8,7 @@ import ModuleIndex from '@/views/site/module/Index'
 import User from '@/views/site/user/Index'
 import UserShow from '@/views/site/user/Show'
 import AdminIndex from '@/views/site/admin/Index'
-
+import AccessEdit from '@/views/site/access/Edit'
 //站点路由
 export default {
   path: '/site',
@@ -24,13 +24,19 @@ export default {
     next()
   },
   children: [
-    { name: 'site.index', path: 'index', component: Index },
+    { name: 'site', path: 'index', component: Index },
     { name: 'site.add', path: 'add', component: Add },
-    { name: 'site.edit', path: 'edit/:id', component: Edit },
-    { name: 'site.config', path: 'config/:id', component: Config },
+    { name: 'site.edit', path: ':sid/edit', component: Edit },
+    //站点配置
+    { name: 'site.config', path: ':sid/config', component: Config },
+    //站点模块
     { name: 'site.module', path: ':sid/module', component: ModuleIndex },
-    { name: 'site.user.index', path: ':sid/user', component: User },
+    //站点用户
+    { name: 'site.user', path: ':sid/user', component: User },
     { name: 'site.user.show', path: ':sid/user/:uid', component: UserShow },
-    { name: 'site.admin.index', path: 'admin/:sid', component: AdminIndex }
+    //操作员设置
+    { name: 'site.admin', path: ':sid/admin', component: AdminIndex },
+    //站点权限
+    { name: 'site.access', path: ':sid/access/:uid', component: AccessEdit }
   ]
 }

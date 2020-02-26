@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="nav nav-tabs mb-3">
-      <router-link class="nav-link" :to="{ name: 'site.index' }">
+      <router-link class="nav-link" :to="{ name: 'site' }">
         <i class="fa fa-home" aria-hidden="true"></i>
       </router-link>
       <a class="nav-link active" href="#">操作员管理</a>
@@ -11,13 +11,19 @@
 
     <div class="card shadow-sm rounded-0">
       <div class="card-body">
-        <el-table size="small" :data="users" ref="multipleTable" @selection-change="handleSelectionChange" tooltip-effect="dark">
+        <el-table
+          size="small"
+          :data="users"
+          ref="multipleTable"
+          @selection-change="handleSelectionChange"
+          tooltip-effect="dark"
+        >
           <el-table-column type="selection" width="60"></el-table-column>
           <el-table-column prop="id" label="编号" width="60"></el-table-column>
           <el-table-column prop="name" label="昵称"></el-table-column>
           <el-table-column prop="real_name" label="真实姓名"></el-table-column>
           <el-table-column prop="email" label="邮箱" min-width="180"></el-table-column>
-          <el-table-column prop="mobile" label="手机号"></el-table-column>
+          <el-table-column prop="mobile" label="手机号" width="150"></el-table-column>
           <el-table-column prop="group.name" label="会员组"></el-table-column>
           <el-table-column label="注册时间">
             <template slot-scope="scope">{{ scope.row.created_at | dateFormat }}</template>
@@ -26,7 +32,10 @@
           <el-table-column aligh="right" fixed="right" width="200">
             <template slot-scope="scope">
               <el-button-group>
-                <el-button size="mini" @click="$router.push({ name: 'site.user.show', params: { uid: scope.row.id, sid: $route.params.sid } })">设置权限</el-button>
+                <el-button
+                  size="mini"
+                  @click="$router.push({ name: 'site.access', params: { uid: scope.row.id, sid: $route.params.sid } })"
+                >设置权限</el-button>
                 <el-button size="mini" @click="delOperator(scope.row)">删除操作员</el-button>
               </el-button-group>
             </template>
@@ -39,7 +48,11 @@
       </div>
     </div>
     <el-dialog title="选择用户" :visible.sync="showSelectUserModel" width="60%">
-      <user-component @confirm="setOperator" @cancel="closeUserModal" :action="`site/${this.$route.params.sid}/admin/search`"></user-component>
+      <user-component
+        @confirm="setOperator"
+        @cancel="closeUserModal"
+        :action="`site/${this.$route.params.sid}/admin/search`"
+      ></user-component>
     </el-dialog>
   </div>
 </template>

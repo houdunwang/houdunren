@@ -8,7 +8,7 @@ class ModuleRequest extends FormRequest
 {
   public function authorize()
   {
-    return (bool)auth()->user()->is_super_admin;
+    return isSuperAdmin();
   }
 
   public function rules()

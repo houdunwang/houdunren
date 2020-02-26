@@ -4,12 +4,9 @@ namespace App;
 
 use App\Models\Group;
 use App\Models\Site;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -21,7 +18,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
   use Notifiable, HasApiTokens, HasRoles;
-
+  // protected $guard_name = 'web';
   protected $fillable = [
     'name', 'email', 'mobile', 'real_name', 'password', 'home', 'avatar', 'weibo',
     'wechat', 'github', 'qq'

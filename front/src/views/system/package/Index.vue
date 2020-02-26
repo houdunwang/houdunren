@@ -7,14 +7,14 @@
           <el-table-column prop="name" label="名称" width="100"> </el-table-column>
           <el-table-column label="可用模块">
             <template slot-scope="scope">
-              <el-tag type="info" size="mini" v-for="m in scope.row.modules" :key="m.id" class="m-1">
+              <el-tag type="info" size="mini" v-for="m in scope.row.modules" :key="m.id" class="mr-1">
                 {{ m.package.title }}
               </el-tag>
             </template>
           </el-table-column>
           <el-table-column label="用户组">
             <template slot-scope="scope">
-              <el-tag size="mini" type="info" v-for="g in scope.row.group" :key="g.id" class="m-1">
+              <el-tag size="mini" type="info" v-for="g in scope.row.group" :key="g.id" class="mr-1">
                 {{ g.name }}
               </el-tag>
             </template>

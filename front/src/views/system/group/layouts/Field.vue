@@ -30,20 +30,25 @@
       <div class="card mt-3">
         <div class="card-header">可使用的服务套餐</div>
         <div class="card-body">
-          <el-table :data="packages" ref="multipleTable" @selection-change="handleSelectionChange" empty-text="加载中..">
+          <el-table
+            :data="packages"
+            ref="multipleTable"
+            @selection-change="handleSelectionChange"
+            empty-text="加载中.."
+          >
             <el-table-column type="selection" width="55"> </el-table-column>
             <el-table-column label="编号" prop="id"></el-table-column>
             <el-table-column label="名称" prop="name"> </el-table-column>
             <el-table-column label="可用模块">
               <template slot-scope="scope">
-                <el-tag v-for="m in scope.row.modules" :key="m.id" class="mr-1 mb-1">
-                  {{ m.name }}
+                <el-tag size="mini" v-for="m in scope.row.modules" :key="m.id" class="mr-1 mb-1">
+                  {{ m.package.title }}
                 </el-tag>
               </template>
             </el-table-column>
             <el-table-column label="使用该套餐的用户组">
               <template slot-scope="scope">
-                <el-tag type="success" v-for="g in scope.row.gropu" :key="g.id">
+                <el-tag size="mini" type="success" v-for="g in scope.row.group" :key="g.id">
                   {{ g.name }}
                 </el-tag>
               </template>

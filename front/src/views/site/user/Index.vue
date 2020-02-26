@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="nav nav-tabs mb-2">
-      <router-link class="nav-link" :to="{name:'site.index',params:{id:$route.params.sid}}">
+      <router-link class="nav-link" :to="{ name: 'site', params: { id: $route.params.sid } }">
         <i class="fa fa-home" aria-hidden="true"></i>
       </router-link>
       <a class="nav-link active" href="#">用户列表</a>
@@ -23,8 +23,11 @@
               <el-button-group>
                 <el-button
                   size="mini"
-                  @click="$router.push({name:'site.user.show',params:{uid:scope.row.id,sid:$route.params.sid}})"
-                >查看</el-button>
+                  @click="
+                    $router.push({ name: 'site.user.show', params: { uid: scope.row.id, sid: $route.params.sid } })
+                  "
+                  >查看</el-button
+                >
               </el-button-group>
             </template>
           </el-table-column>
@@ -39,13 +42,13 @@ export default {
   data() {
     return {
       users: []
-    };
+    }
   },
   async created() {
-    let response = await this.axios.get(`site/${this.$route.params.sid}/user`);
-    this.users = response.data.data;
+    let response = await this.axios.get(`site/${this.$route.params.sid}/user`)
+    this.users = response.data.data
   }
-};
+}
 </script>
 
 <style scoped></style>

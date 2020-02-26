@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\ApiController;
-use App\Http\Controllers\Controller;
 use App\Models\Site;
 use App\Servers\ModuleServer;
-use Illuminate\Http\Request;
 
 class ModuleController extends ApiController
 {

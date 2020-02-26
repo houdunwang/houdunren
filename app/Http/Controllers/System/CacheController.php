@@ -26,7 +26,6 @@ class CacheController extends ApiController
   public function update(Access $access): \Illuminate\Http\JsonResponse
   {
     $this->authorize('update', auth()->user());
-    $access->updateAllSitePermission();
     return $this->success('缓存更新成功');
   }
 }

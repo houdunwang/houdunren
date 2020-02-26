@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "front"
+    },
+    {
+      "path": "public/modules"
+    }
+  ],
+  "settings": {}
+}

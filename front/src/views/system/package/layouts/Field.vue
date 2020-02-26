@@ -17,14 +17,28 @@
           套餐模块选择
         </div>
         <div class="card-body">
-          <el-table :data="moduleList" border stripe ref="multipleTable" @selection-change="handleSelectionChange" empty-text="加载中">
+          <el-table
+            :data="moduleList"
+            border
+            stripe
+            ref="multipleTable"
+            @selection-change="handleSelectionChange"
+            empty-text="加载中"
+          >
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column width="100" label="图标">
               <template slot-scope="scope">
                 <el-avatar shape="square" :size="50" :src="scope.row.package.thumb"></el-avatar>
               </template>
             </el-table-column>
-            <el-table-column v-for="col in columns" :prop="col.prop" :key="col.name" :label="col.label" :width="col.width"> </el-table-column>
+            <el-table-column
+              v-for="col in columns"
+              :prop="col.prop"
+              :key="col.name"
+              :label="col.label"
+              :width="col.width"
+            >
+            </el-table-column>
           </el-table>
         </div>
       </div>
@@ -75,7 +89,7 @@ export default {
       //设置模块的选中状态
       this.moduleList.map(m =>
         response.modules.map(pm => {
-          if (pm.id === m.id) this.$refs.multipleTable.toggleRowSelection(m)
+          if (pm.model.id === m.model.id) this.$refs.multipleTable.toggleRowSelection(m)
         })
       )
     }
@@ -90,7 +104,6 @@ export default {
             name: this.form.name,
             modules: this.multipleSelection.map(m => m.model.id)
           }
-
           switch (this.action) {
             case 'add':
               await this.axios.post('/system/package', formData)

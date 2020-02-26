@@ -2,7 +2,9 @@
 
 namespace App\Servers;
 
+use App\Models\Module;
 use App\Models\Site;
+use App\User;
 use Spatie\Permission\Models\Permission;
 
 /**
@@ -12,10 +14,20 @@ use Spatie\Permission\Models\Permission;
  */
 class AccessServer
 {
+  //获取站点权限列表
+  public function getSiteAccess(Site $site)
+  {
+    $permissions = Permission::where('site_id', $site['id'])->get();
+
+    return $permissions->map(function ($p) {
+      $p['module_name'] = Module::find($p['module_id'])['title'];
+      return $p;
+    })->groupBy('module_name');
+  }
   /**
    * 更新所有站点权限
    */
-  public function updateAllSitePermission(): void
+  public function updateAllSitePermission()
   {
     foreach (Site::all() as $site)
       $this->updateSitePermission($site);
@@ -25,31 +37,33 @@ class AccessServer
    * 更新所有模块权限
    * @param Site $site
    */
-  public function updateSitePermission(Site $site): void
+  public function updateSitePermission(Site $site)
   {
-    foreach (\Module::all() as $module)
-      $this->addModulePermission($module, $site);
+    foreach (Module::get() as $module) {
+      $this->addModulePermissionToSite($module, $site);
+    }
 
     app()['cache']->forget('spatie.permission.cache');
   }
 
   /**
-   * 更新模块权限
+   * 设置模块在网站的权限
    * @param $module
    * @param Site $site
    */
-  protected function addModulePermission($module, Site $site): void
+  protected function addModulePermissionToSite($module, Site $site)
   {
-    $site->permissions()->delete();
-    $permissions = include("{$module->getPath()}/config/permissions.php");
-    foreach ($permissions as $permission) {
-      Permission::create([
-        'name' => "S{$site['id']}-" . $permission['name'],
-        'title' => $permission['title'],
-        'site_id' => $site['id'],
-        'module' => $module->getName(),
-        'guard_name' => 'web'
-      ]);
+    $moduleConfig = app(ModuleServer::class)->getModuleInfo($module['name']);
+    foreach ($moduleConfig['permissions'] as $permission) {
+      $name = "S{$site['id']}-" . $permission['name'];
+      if (!Permission::where('name', $name)->first()) {
+        Permission::create([
+          'name' => $name,
+          'title' => $permission['title'],
+          'site_id' => $site['id'],
+          'module_id' => $module['id'],
+        ]);
+      }
     }
   }
 }

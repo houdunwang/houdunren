@@ -40,10 +40,10 @@ class ModuleController extends ApiController
    * @param Module $module
    * @return JsonResponse
    */
-  public function install(ModuleRequest $moduleRequest, Module $module): JsonResponse
+  public function install(ModuleRequest $moduleRequest, Module $module, ModuleServer $moduleServer)
   {
-    $module['name'] = $moduleRequest->name;
-    $module->save();
+    $info = $moduleServer->getModuleInfo($moduleRequest->name);
+    $module->fill($info['package'])->save();
 
     return $this->success('模块安装成功');
   }

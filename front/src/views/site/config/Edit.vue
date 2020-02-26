@@ -55,19 +55,19 @@
   </div>
 </template>
 <script>
-import AliPay from './components/AliPay'
-import AliYun from './components/AliYun'
-import Email from './components/Email'
-import Maintain from './components/Maintain'
-import Notification from './components/Notification'
-import Upload from './components/Upload'
-import User from './components/User'
+import AliPay from './layouts/AliPay'
+import AliYun from './layouts/AliYun'
+import Email from './layouts/Email'
+import Maintain from './layouts/Maintain'
+import Notification from './layouts/Notification'
+import Upload from './layouts/Upload'
+import User from './layouts/User'
 import store from '@/store/index'
 import { mapState } from 'vuex'
 
 export default {
   async beforeRouteEnter(to, from, next) {
-    let response = await window.axios.get(`/site/config/${to.params.id}`)
+    let response = await window.axios.get(`/site/config/${to.params.sid}`)
     await store.commit('siteConfig/set', response.data.data)
     next()
   },

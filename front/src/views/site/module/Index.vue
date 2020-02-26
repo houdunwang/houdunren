@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="nav nav-tabs">
-      <router-link :to="{ name: 'site.index' }" class="nav-link">
+      <router-link :to="{ name: 'site' }" class="nav-link">
         <i class="fa fa-home" aria-hidden="true"></i>
       </router-link>
       <a class="nav-link active" href="#">站点模块列表</a>

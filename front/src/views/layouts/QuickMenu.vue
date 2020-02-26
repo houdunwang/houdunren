@@ -4,9 +4,7 @@
       <div class="row">
         <div class="col-6 logo"></div>
         <div class="col-6 text-right menu">
-          <router-link :to="{name:'site.index'}">
-            <i class="fa fa-sitemap fa-2x d-block"></i>网站管理
-          </router-link>
+          <router-link :to="{ name: 'site' }"> <i class="fa fa-sitemap fa-2x d-block"></i>网站管理 </router-link>
           <router-link to="/system/index" v-if="user.is_super_admin">
             <i class="fa fa-support fa-2x d-block"></i>系统设置
           </router-link>
@@ -21,22 +19,22 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from 'vuex'
 
 export default {
   methods: {
-    ...mapActions("user", ["adminLogout"])
+    ...mapActions('user', ['adminLogout'])
   },
   computed: {
-    ...mapState("user", { user: "data" })
+    ...mapState('user', { user: 'data' })
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
 .row {
   .logo {
-    background-image: url("../../assets/training.png");
+    background-image: url('../../assets/training.png');
     height: 60px;
     background-size: contain;
     background-repeat: no-repeat;

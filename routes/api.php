@@ -1,8 +1,6 @@
 <?php
 
 //后台登录
-
-
 Route::group(['namespace' => 'System', 'prefix' => 'system'], function () {
   Route::post('login', 'LoginController@login');
 });
@@ -26,8 +24,7 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'si
   Route::put('config/{site}', 'ConfigController@update');
   Route::get('config/{site}', 'ConfigController@show');
   Route::resource('{site}/weChat', 'WeChatController')->except(['edit', 'create']);
-  //  Route::get('{site}/access/{user}', 'AccessController@index');
-  //  Route::put('{site}/access/{user}', 'AccessController@update');
+
   Route::get('{site}/admin', 'AdminController@index');
   Route::post('{site}/admin', 'AdminController@add');
   Route::delete('{site}/admin', 'AdminController@remove');
@@ -37,6 +34,10 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'si
   Route::get('{site}/user/{user}', 'UserController@get');
 
   Route::get('{site}/module', 'ModuleController@index');
+  //站点权限
+  Route::get('{site}/permission', 'AccessController@sitePermission');
+  Route::get('{site}/access/{user}', 'AccessController@userPermission');
+  Route::put('{site}/access/{user}', 'AccessController@update');
 });
 
 //系统

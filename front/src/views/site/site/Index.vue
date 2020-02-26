@@ -1,7 +1,9 @@
 <template>
   <transition name="slide">
     <div>
-      <router-link to="/site/add" class="btn btn-info mb-3"> <i class="fa fa-plus"></i> 添加网站 </router-link>
+      <router-link :to="{ name: 'site.add' }" class="btn btn-info mb-3">
+        <i class="fa fa-plus"></i> 添加网站
+      </router-link>
       <div class="card mb-3 shadow-sm" v-for="site in data" :key="site.id">
         <div class="card-header">
           <div class="row">
@@ -35,10 +37,10 @@
                 <i class="fa fa-sitemap"></i> 站点模块
               </router-link>
               <a href class="text-muted mr-2"> <i class="fa fa-comment-o"></i> 微信公众号 </a>
-              <router-link class="text-muted mr-2" :to="{ name: 'site.user.index', params: { sid: site.id } }">
+              <router-link class="text-muted mr-2" :to="{ name: 'site.user', params: { sid: site.id } }">
                 <i class="fa fa-user-o"></i> 用户列表
               </router-link>
-              <router-link :to="{ name: 'site.admin.index', params: { sid: site.id } }" class="text-muted mr-2">
+              <router-link :to="{ name: 'site.admin', params: { sid: site.id } }" class="text-muted mr-2">
                 <i class="fa fa-user-circle-o"></i> 操作员设置
               </router-link>
               <router-link :to="{ name: 'site.edit', params: { sid: site.id } }" class="text-muted mr-2">

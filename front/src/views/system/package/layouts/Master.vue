@@ -1,24 +1,27 @@
 <template>
   <div>
     <nav class="nav nav-tabs mb-2">
-      <router-link :class="{'nav-link': true}" :to="{ name: 'site.index' }">
+      <router-link :class="{ 'nav-link': true }" :to="{ name: 'site' }">
         <i class="fa fa-home" aria-hidden="true"></i>
       </router-link>
       <router-link
-        :class="{'nav-link': true,active: routerName === 'system.package.index'}"
+        :class="{ 'nav-link': true, active: routerName === 'system.package.index' }"
         :to="{ name: 'system.package.index' }"
-      >套餐列表</router-link>
+        >套餐列表</router-link
+      >
 
       <router-link
-        :class="{'nav-link': true,active: routerName === 'system.package.add'}"
+        :class="{ 'nav-link': true, active: routerName === 'system.package.add' }"
         :to="{ name: 'system.package.add' }"
-      >添加套餐</router-link>
+        >添加套餐</router-link
+      >
 
       <router-link
-        :class="{ 'nav-link': true,active: routerName === 'system.package.edit'}"
+        :class="{ 'nav-link': true, active: routerName === 'system.package.edit' }"
         :to="{ name: 'system.package.add' }"
         v-if="routerName === 'system.package.edit'"
-      >编辑套餐</router-link>
+        >编辑套餐</router-link
+      >
     </nav>
     <slot></slot>
   </div>
@@ -26,13 +29,13 @@
 
 <script>
 export default {
-  name: "Tab",
+  name: 'Tab',
   computed: {
     routerName() {
-      return this.$route.name;
+      return this.$route.name
     }
   }
-};
+}
 </script>
 
 <style scoped></style>
