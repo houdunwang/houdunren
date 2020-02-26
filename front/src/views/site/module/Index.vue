@@ -9,6 +9,10 @@
     <div class="card mt-3 shadow-sm">
       <div class="card-body">
         <div class="row mt-3">
+          <div class="col-12 text-center m-2" v-if="loadMessage">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            {{loadMessage}}
+          </div>
           <div class="col-12 col-md-3 mb-2" v-for="module in modules" :key="module.model.id">
             <router-link to="/">
               <div class="p-3 align-middle border shadow-sm">
@@ -27,13 +31,16 @@
 export default {
   data() {
     return {
-      modules: []
+      modules: [],
+      loadMessage: '模块加载中...'
     }
   },
   async created() {
     let response = await this.axios.get(`site/${this.$route.params.sid}/module`).then(r => r.data.data)
 
     this.$set(this, 'modules', response)
+
+    response.length && (this.loadMessage = '')
   },
   methods: {}
 }

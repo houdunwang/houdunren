@@ -4,13 +4,14 @@
       <router-link class="nav-link" :to="{ name: 'site' }">
         <i class="fa fa-home" aria-hidden="true"></i>
       </router-link>
-      <router-link class="nav-link active" :to="{ name: 'site.user', params: { sid: $route.params.sid } }">
-        用户列表
-      </router-link>
+      <router-link
+        class="nav-link active"
+        :to="{ name: 'site.user', params: { sid: $route.params.sid } }"
+      >用户列表</router-link>
     </nav>
     <div class="card">
       <div class="card-body">
-        <el-table size="small" :data="users" fit>
+        <el-table size="small" :data="users" fit :empty-text="loadMessage">
           <el-table-column prop="id" label="编号" width="60"></el-table-column>
           <el-table-column prop="name" label="昵称"></el-table-column>
           <el-table-column prop="real_name" label="真实姓名"></el-table-column>
@@ -28,8 +29,7 @@
                   @click="
                     $router.push({ name: 'site.user.show', params: { uid: scope.row.id, sid: $route.params.sid } })
                   "
-                  >查看</el-button
-                >
+                >查看</el-button>
               </el-button-group>
             </template>
           </el-table-column>
@@ -43,12 +43,14 @@
 export default {
   data() {
     return {
-      users: []
+      users: [],
+      loadMessage: '加载中...'
     }
   },
   async created() {
     let response = await this.axios.get(`site/${this.$route.params.sid}/user`)
     this.users = response.data.data
+    this.users.length == 0 && (this.loadMessage = '暂无用户')
   }
 }
 </script>
