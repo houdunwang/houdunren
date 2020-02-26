@@ -1,10 +1,12 @@
 <template>
   <div>
     <nav class="nav nav-tabs mb-2">
-      <router-link class="nav-link" :to="{ name: 'site', params: { id: $route.params.sid } }">
+      <router-link class="nav-link" :to="{ name: 'site' }">
         <i class="fa fa-home" aria-hidden="true"></i>
       </router-link>
-      <a class="nav-link active" href="#">用户列表</a>
+      <router-link class="nav-link active" :to="{ name: 'site.user', params: { sid: $route.params.sid } }">
+        用户列表
+      </router-link>
     </nav>
     <div class="card">
       <div class="card-body">

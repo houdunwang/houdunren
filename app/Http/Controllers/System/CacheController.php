@@ -4,6 +4,7 @@ namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\ApiController;
 use App\Servers\Access;
+use App\Servers\AccessServer;
 
 /**
  * 更新缓存
@@ -20,12 +21,13 @@ class CacheController extends ApiController
   /**
    * 更新缓存
    * @param Access $access
-   * @return \Illuminate\Http\JsonResponse
-   * @throws \Illuminate\Auth\Access\AuthorizationException
+   * 
+   * @return mixed
    */
-  public function update(Access $access): \Illuminate\Http\JsonResponse
+  public function update(AccessServer $accessServer)
   {
-    $this->authorize('update', auth()->user());
+    //更新站点权限
+    $accessServer->updateAllSitePermission();
     return $this->success('缓存更新成功');
   }
 }

@@ -28,7 +28,11 @@
           <el-table-column label="" width="150">
             <template slot-scope="scope">
               <el-button-group>
-                <el-button type="mini" @click="$router.push({ name: 'system.group.edit', params: { id: scope.row.id } })">编辑</el-button>
+                <el-button
+                  type="mini"
+                  @click="$router.push({ name: 'system.group.edit', params: { id: scope.row.id } })"
+                  >编辑</el-button
+                >
                 <el-button type="mini" @click="del(scope.row)" v-if="!scope.row.default">删除</el-button>
               </el-button-group>
             </template>

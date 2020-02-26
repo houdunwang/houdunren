@@ -1,5 +1,4 @@
 <?php
-
 //后台登录
 Route::group(['namespace' => 'System', 'prefix' => 'system'], function () {
   Route::post('login', 'LoginController@login');
@@ -49,6 +48,7 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => '
   Route::resource('upload', 'SystemUploadController')->except(['edit', 'create', 'show', 'index']);
   Route::resource('config', 'SystemConfigController')->except(['edit', 'create']);
   Route::resource('group', 'GroupController')->except(['edit', 'create']);
+  Route::get('cache', 'CacheController@update');
 });
 
 //系统模块

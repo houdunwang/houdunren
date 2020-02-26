@@ -4,9 +4,9 @@
       <router-link class="nav-link" :to="{ name: 'site' }">
         <i class="fa fa-home" aria-hidden="true"></i>
       </router-link>
-      <router-link class="nav-link" :to="{ name: 'site.user.index', params: { sid: $route.params.sid } }"
-        >用户列表</router-link
-      >
+      <router-link class="nav-link" :to="{ name: 'site.user', params: { sid: $route.params.sid } }">
+        用户列表
+      </router-link>
       <a class="nav-link active" href="#">用户资料</a>
     </nav>
     <el-form :model="form" ref="form" label-width="80px">

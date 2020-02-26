@@ -9,11 +9,13 @@
     <div class="card mt-3 shadow-sm">
       <div class="card-body">
         <div class="row mt-3">
-          <div class="col-3" v-for="module in modules" :key="module.model.id">
-            <div class="p-3 align-middle border shadow-sm">
-              <img :src="module.package.thumb" class="rounded-circle mr-3" />
-              <span>{{ module.package.title }}</span>
-            </div>
+          <div class="col-12 col-md-3 mb-2" v-for="module in modules" :key="module.model.id">
+            <router-link to="/">
+              <div class="p-3 align-middle border shadow-sm">
+                <img :src="module.package.thumb" class="rounded-circle mr-3" />
+                <span>{{ module.package.title }}</span>
+              </div>
+            </router-link>
           </div>
         </div>
       </div>

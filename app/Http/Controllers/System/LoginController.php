@@ -24,6 +24,7 @@ class LoginController extends ApiController
     $type = filter_var($request['username'], FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
     $credentials['password'] = $request['password'];
     $credentials[$type] = $request['username'];
+
     if (auth()->attempt($credentials)) {
       $user = auth()->user();
       $token = $user->createToken('hdcms')->accessToken;
