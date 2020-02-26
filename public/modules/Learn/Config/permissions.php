@@ -1,6 +1,8 @@
 <?php
 //权限配置
 return [
-    ['title' => '课程管理', 'name' => 'lesson-manage',],
-    ['title' => '订单管理', 'name' => 'order-manage',],
+    ['title' => '实战视频', 'name' => 'video-lesson',],
+    ['title' => '系统课程', 'name' => 'system-lesson',],
+    ['title' => '订阅管理', 'name' => 'subscribe-manage',],
+    ['title' => '直播配置', 'name' => 'live-config',]
 ];

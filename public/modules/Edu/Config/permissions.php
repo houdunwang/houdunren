@@ -1,5 +1,5 @@
 <?php
 //权限配置
 return [
-    ['title' => '用户管理', 'name' => 'user-manage',],
+    ['title' => '类别设置', 'name' => 'category-manage']
 ];

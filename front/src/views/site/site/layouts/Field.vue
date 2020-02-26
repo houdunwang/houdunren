@@ -26,14 +26,7 @@
           </el-form-item>
 
           <el-form-item label="站点标志">
-            <el-upload
-              class="avatar-uploader"
-              :action="uploadUrl"
-              accept="image/jpeg, image/png"
-              :show-file-list="false"
-              :on-success="logoUpload"
-              :headers="headers"
-            >
+            <el-upload class="avatar-uploader" :action="uploadUrl" accept="image/jpeg, image/png" :show-file-list="false" :on-success="logoUpload" :headers="headers">
               <img v-if="field.logo" :src="field.logo" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
@@ -123,7 +116,7 @@ export default {
               this.$router.push('/site/index')
               break
             case 'edit':
-              await this.axios.put(`/site/site/${this.field.sid}`, this.field)
+              await this.axios.put(`/site/site/${this.field.id}`, this.field)
               this.$message.success('更新成功')
               this.$router.push('/site/index')
               break
