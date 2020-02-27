@@ -18,47 +18,67 @@
             </div>
           </div>
         </div>
-        <div class="card-body text-dark d-flex align-items-center">
-          <i class="fa fa-rss fa-3x mr-3"></i>
-          <span class="h4">{{ site.name }}</span>
+        <div class="card-body">
+          <router-link
+            :to="{ name: 'site.module', params: { sid: site.id } }"
+            class="text-secondary text-dark d-flex align-items-center"
+          >
+            <i class="fa fa-rss fa-3x mr-3"></i>
+            <span class="h4">{{ site.name }}</span>
+          </router-link>
         </div>
         <div class="card-footer text-muted">
           <div class="d-flex flex-md-row flex-column justify-content-between">
             <div class="small">
               <span class="mr-2">创建时间: {{ site.created_at | dateFormat }}</span>
               <span class="mr-2">站长: {{ site.admin.name }}</span>
-              <span class="mr-2">所属组: {{ site.admin.group.name }}</span>
+              <span class="mr-2">
+                所属组:
+                <span v-for="group in site.admin.group" :key="group.id">{{group.name}}</span>
+              </span>
             </div>
 
-            <div class="small" v-if="site.admin.id ===user.id ">
+            <div class="small">
+              <a href class="text-muted mr-2" @click.prevent="updateSiteCache(site)">
+                <i class="fa fa-life-ring"></i> 更新缓存
+              </a>
               <router-link
+                v-if="site.admin.id ===user.id"
                 class="text-muted mr-2"
                 :to="{ name: 'site.config', params: { sid: site.id } }"
               >
                 <i class="fa fa-life-ring"></i> 网站配置
               </router-link>
-              <a href class="text-muted mr-2">
+              <a v-if="site.admin.id ===user.id" href class="text-muted mr-2">
                 <i class="fa fa-comment-o"></i> 微信公众号
               </a>
               <router-link
+                v-if="site.admin.id ===user.id"
                 class="text-muted mr-2"
                 :to="{ name: 'site.user', params: { sid: site.id } }"
               >
                 <i class="fa fa-user-o"></i> 用户列表
               </router-link>
               <router-link
+                v-if="site.admin.id ===user.id"
                 :to="{ name: 'site.admin', params: { sid: site.id } }"
                 class="text-muted mr-2"
               >
                 <i class="fa fa-user-circle-o"></i> 操作员设置
               </router-link>
               <router-link
+                v-if="site.admin.id ===user.id"
                 :to="{ name: 'site.edit', params: { sid: site.id } }"
                 class="text-muted mr-2"
               >
                 <i class="fa fa-pencil-square-o"></i> 编辑
               </router-link>
-              <a href @click.prevent="delSite(site)" class="text-muted">
+              <a
+                v-if="site.admin.id ===user.id"
+                href
+                @click.prevent="delSite(site)"
+                class="text-muted"
+              >
                 <i class="fa fa-trash"></i> 删除
               </a>
             </div>
@@ -95,6 +115,10 @@ export default {
         this.$message.success('删除成功')
         this.$router.go('/admin')
       })
+    },
+    async updateSiteCache(site) {
+      await this.axios.put(`site/${site.id}/cache`)
+      this.$message.success('站点缓存更新成功')
     }
   }
 }

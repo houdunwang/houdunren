@@ -13,7 +13,7 @@ class GroupRequest extends FormRequest
    */
   public function authorize()
   {
-    return auth()->user()->is_super_admin;
+    return isSuperAdmin();
   }
 
   /**

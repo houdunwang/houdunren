@@ -18,7 +18,7 @@ class AdminController extends ApiController
 {
   public function __construct()
   {
-    $this->middleware('siteAuth');
+    $this->middleware('siteAuth:admin');
   }
 
   //根据关键词搜索用户

@@ -20,7 +20,7 @@ class AccessController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('siteAuth');
+        $this->middleware('siteAuth:admin');
         $this->authorizeResource(Site::class, 'site');
     }
 
@@ -50,7 +50,6 @@ class AccessController extends ApiController
         return $this->success('用户拥有的站点权限', $user->permissions);
     }
 
-
     /**
      * 更新用户站点权限
      * @param Request $request
@@ -66,7 +65,7 @@ class AccessController extends ApiController
             ->delete();
 
         $user->givePermissionTo(
-            Permission::whereIn('id', [$request->input('access')])->pluck('name')
+            Permission::whereIn('id', $request->input('access'))->pluck('name')
         );
         return $this->success('权限更新成功');
     }

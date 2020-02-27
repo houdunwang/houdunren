@@ -12,6 +12,7 @@ class WeChatController extends ApiController
 {
     public function __construct()
     {
+        $this->middleware('siteAuth:admin');
         $this->authorizeResource(WeChat::class, 'weChat');
     }
 

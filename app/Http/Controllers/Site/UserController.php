@@ -12,7 +12,7 @@ class UserController extends ApiController
 {
   public function __construct()
   {
-    $this->middleware('siteAuth');
+    $this->middleware('siteAuth:admin');
   }
   public function index(Site $site)
   {

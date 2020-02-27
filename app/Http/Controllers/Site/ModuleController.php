@@ -10,10 +10,16 @@ class ModuleController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('siteAuth');
+        $this->middleware('siteAuth:admin,operator');
     }
 
-    //获取站点模块
+    /**
+     * 获取站点模块
+     * @param Site $site
+     * @param ModuleServer $moduleServer
+     * 
+     * @return mixed
+     */
     public function index(Site $site, ModuleServer $moduleServer)
     {
         $modules = $moduleServer->getModuleByUser($site, auth()->user());

@@ -10,5 +10,7 @@
       "path": "public/modules"
     }
   ],
-  "settings": {}
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "hdcms"
+  }
 }

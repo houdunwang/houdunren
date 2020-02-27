@@ -18,7 +18,7 @@ class PackagePolicy
 
   public function before(User $user): bool
   {
-    return (bool)$user['is_super_admin'];
+    return isSuperAdmin();
   }
 
   public function viewAny(User $user)

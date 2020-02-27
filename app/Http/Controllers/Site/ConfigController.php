@@ -16,7 +16,7 @@ class ConfigController extends ApiController
 {
   public function __construct()
   {
-    $this->middleware('siteAuth')->except('index');
+    $this->middleware('siteAuth:admin')->except('index');
   }
 
   public function show(Site $site)

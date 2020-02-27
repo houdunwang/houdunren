@@ -6,6 +6,8 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\SiteRequest;
 use App\Http\Resources\SiteResource;
 use App\Models\Site;
+use App\Servers\AccessServer;
+use App\Servers\UserServer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -18,7 +20,7 @@ class SiteController extends ApiController
 {
   public function __construct(Request $request)
   {
-    $this->middleware('siteAuth')->except(['index', 'store']);
+    $this->middleware('siteAuth:admin')->except(['index', 'store']);
     $this->authorizeResource(Site::class, 'site');
   }
 
@@ -26,10 +28,10 @@ class SiteController extends ApiController
    * 获取站点列表
    * @return JsonResponse
    */
-  public function index(): JsonResponse
+  public function index(UserServer $userServer)
   {
     $user = auth()->user();
-    $sites = isSuperAdmin() ? Site::get() : $user->site()->wherePivotIn('role', ['role', 'operator'])->get();
+    $sites = isSuperAdmin() ? Site::get() : $user->site()->wherePivotIn('role', ['admin', 'operator'])->get();
     return $this->success('站点列表获取成功', SiteResource::collection($sites));
   }
 

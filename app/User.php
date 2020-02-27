@@ -53,7 +53,7 @@ class User extends Authenticatable
    */
   public function site()
   {
-    return $this->belongsToMany(Site::class, 'site_users');
+    return $this->belongsToMany(Site::class, 'site_users')->withPivot('role');
   }
 
   /**

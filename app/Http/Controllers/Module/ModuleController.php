@@ -8,6 +8,10 @@ use App\Servers\ModuleServer;
 
 class ModuleController extends ApiController
 {
+  public function __construct()
+  {
+    $this->middleware('siteAuth')
+  }
   public function index(Site $site, ModuleServer $moduleServer)
   {
     $modules = $moduleServer->getSiteModule(\site(null));
