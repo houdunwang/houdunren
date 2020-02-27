@@ -28,25 +28,6 @@
                 {{ menu.title }}
               </router-link>
             </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav">
@@ -63,15 +44,10 @@
                   <i class="fa fa-user"></i>
                   {{ user.name }}
                 </a>
-                <div
-                  class="dropdown-menu dropdown-menu-right"
-                  aria-labelledby="navbarDropdown"
-                >
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">修改资料</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#" @click.prevent="logout"
-                    >退出登录</a
-                  >
+                  <a class="dropdown-item" href="#" @click.prevent="logout">退出登录</a>
                 </div>
               </li>
             </ul>
@@ -82,34 +58,34 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex'
 
 export default {
   data() {
     return {
       menus: [
         {
-          title: "返回站点管理",
-          icon: "fa fa-reply",
-          url: "/site/index",
+          title: '返回站点管理',
+          icon: 'fa fa-reply',
+          url: '/site/index',
           check: false
         },
         {
-          title: "全部应用",
-          icon: "fa fa-cubes",
-          url: `/module/home/${this.$route.params.id}`,
+          title: '全部应用',
+          icon: 'fa fa-cubes',
+          url: `/site/${this.$route.params.sid}/module`,
           check: false
         }
       ]
-    };
+    }
   },
   computed: {
-    ...mapState("user", { user: "data" })
+    ...mapState('user', { user: 'data' })
   },
   methods: {
-    ...mapActions("user", ["logout"])
+    ...mapActions('user', ['logout'])
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .navigate {

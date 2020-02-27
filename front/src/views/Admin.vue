@@ -2,9 +2,9 @@
   <div class="admin-container">
     <error />
     <navigate />
-    <div class="container-fluid">
-      <quick-menu class="m-3 mt-5" />
-      <div class="card mt-5">
+    <div class="container-fluid bg pt-2">
+      <quick-menu class="pt-5 pb-4" />
+      <div class="card">
         <div class="card-body">
           <transition name="slide">
             <router-view></router-view>
@@ -16,11 +16,11 @@
   </div>
 </template>
 <script>
-import Navigate from "./layouts/Navigate";
-import QuickMenu from "./layouts/QuickMenu";
-import Copyright from "./layouts/Copyright";
-import Error from "./layouts/Error";
-import "@/assets/animate.css";
+import Navigate from './layouts/Navigate'
+import QuickMenu from './layouts/QuickMenu'
+import Copyright from './layouts/Copyright'
+import Error from './layouts/Error'
+import '@/assets/animate.css'
 
 export default {
   components: {
@@ -29,11 +29,11 @@ export default {
     QuickMenu,
     Copyright
   }
-};
+}
 </script>
-<style lang="scss">
-body {
-  background-image: url("../assets/bg.jpg");
+<style lang="scss" scoped>
+.bg {
+  background-image: url('../assets/bg.jpg');
   height: 100vh;
   background-size: cover;
 }

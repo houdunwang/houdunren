@@ -29,7 +29,7 @@ class SiteController extends ApiController
   public function index(): JsonResponse
   {
     $user = auth()->user();
-    $sites = isSuperAdmin() ? Site::get() : $user->site;
+    $sites = isSuperAdmin() ? Site::get() : $user->site()->wherePivotIn('role', ['role', 'operator'])->get();
     return $this->success('站点列表获取成功', SiteResource::collection($sites));
   }
 

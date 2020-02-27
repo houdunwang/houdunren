@@ -50,11 +50,10 @@ class User extends Authenticatable
 
   /**
    * 站点关联
-   * @return HasMany
    */
-  public function site(): HasMany
+  public function site()
   {
-    return $this->hasMany(Site::class);
+    return $this->belongsToMany(Site::class, 'site_users');
   }
 
   /**

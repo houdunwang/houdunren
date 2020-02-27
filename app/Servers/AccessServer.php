@@ -65,7 +65,7 @@ class AccessServer
   protected function removeInvalidModulePermission(Module $module, Site $site)
   {
     $moduleConfig = app(ModuleServer::class)->getModuleInfo($module['name']);
-    $permissions = Permission::where('module_id', $moduleConfig['model']['id'])->get();
+    $permissions = $site->permissions()->where('module_id', $module['id'])->get();
 
     $permissions->map(function ($permission) use ($moduleConfig, $site, $module) {
       foreach ($moduleConfig['permissions'] as $p) {

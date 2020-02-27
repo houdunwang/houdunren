@@ -4,7 +4,7 @@
       <router-link :to="{ name: 'site' }" class="nav-link">
         <i class="fa fa-home" aria-hidden="true"></i>
       </router-link>
-      <a class="nav-link active" href="#">站点模块列表</a>
+      <a class="nav-link active" href="#">站点应用集</a>
     </nav>
     <div class="card mt-3 shadow-sm">
       <div class="card-body">
@@ -14,7 +14,7 @@
             {{loadMessage}}
           </div>
           <div class="col-12 col-md-3 mb-2" v-for="module in modules" :key="module.model.id">
-            <router-link to="/">
+            <router-link :to="{name:'module',params:{sid:$route.params.sid,mid:module.model.id}}">
               <div class="p-3 align-middle border shadow-sm">
                 <img :src="module.package.thumb" class="rounded-circle mr-3" />
                 <span>{{ module.package.title }}</span>
@@ -39,7 +39,6 @@ export default {
     let response = await this.axios.get(`site/${this.$route.params.sid}/module`).then(r => r.data.data)
 
     this.$set(this, 'modules', response)
-
     response.length && (this.loadMessage = '')
   },
   methods: {}

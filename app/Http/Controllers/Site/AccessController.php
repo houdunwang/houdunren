@@ -66,7 +66,7 @@ class AccessController extends ApiController
             ->delete();
 
         $user->givePermissionTo(
-            Permission::whereIn('id', $request->input('access'))->pluck('name')
+            Permission::whereIn('id', [$request->input('access')])->pluck('name')
         );
         return $this->success('权限更新成功');
     }

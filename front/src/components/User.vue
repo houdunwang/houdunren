@@ -23,7 +23,7 @@
         <el-table-column prop="group.name" label="会员组" width="70"></el-table-column>
       </el-table>
       <div class="card-footer text-muted">
-        <el-button size="small" type="primary" @click="$emit('confirm', users)">确定</el-button>
+        <el-button size="small" type="primary" @click="$emit('confirm', multipleSelection)">确定</el-button>
         <el-button size="small" @click="$emit('cancel')">取消</el-button>
       </div>
     </div>
@@ -39,22 +39,23 @@ export default {
   },
   data() {
     return {
-      searchWord: "",
-      users: []
-    };
+      searchWord: '',
+      users: [],
+      multipleSelection: []
+    }
   },
   methods: {
     async get() {
       let response = await this.axios.post(this.action, {
         content: this.searchWord
-      });
-      this.$set(this, "users", response.data.data);
+      })
+      this.$set(this, 'users', response.data.data)
     },
     handleSelectionChange(val) {
-      this.multipleSelection = val;
+      this.multipleSelection = val
     }
   }
-};
+}
 </script>
 
 <style></style>

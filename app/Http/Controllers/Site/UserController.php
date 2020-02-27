@@ -10,6 +10,10 @@ use App\User;
 
 class UserController extends ApiController
 {
+  public function __construct()
+  {
+    $this->middleware('siteAuth');
+  }
   public function index(Site $site)
   {
     $users = $site->user;

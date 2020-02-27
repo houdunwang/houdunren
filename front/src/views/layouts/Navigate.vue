@@ -58,53 +58,53 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex'
 
 export default {
   data() {
     return {
       menus: [
         {
-          title: "站点管理",
-          icon: "fa fa-sitemap",
-          url: "/site/index",
+          title: '站点管理',
+          icon: 'fa fa-sitemap',
+          url: '/site/index',
           check: false
         },
         {
-          title: "模块管理",
-          icon: "fa-cubes",
-          url: "/system/module/index",
+          title: '模块管理',
+          icon: 'fa-cubes',
+          url: '/system/module/index',
           check: true
         },
         {
-          title: "服务套餐",
-          icon: "fa-comments-o",
-          url: "/system/package/index",
+          title: '服务套餐',
+          icon: 'fa-comments-o',
+          url: '/system/package/index',
           check: true
         },
         {
-          title: "系统设置",
-          icon: "fa-support",
-          url: "/system/index",
+          title: '系统设置',
+          icon: 'fa-support',
+          url: '/system/index',
           check: true
         },
-        { title: "更新缓存", icon: "fa-bitbucket", url: "/admin", check: true },
         {
-          title: "在线文档",
-          icon: "fa-file-code-o",
-          url: "/admin",
-          check: false
-        }
+          title: '会员组',
+          icon: 'fa-users',
+          url: '/system/group/index',
+          check: true
+        },
+        { title: '更新缓存', icon: 'fa-bitbucket', url: '/system/cache/update', check: true }
       ]
-    };
+    }
   },
   computed: {
-    ...mapState("user", { user: "data" })
+    ...mapState('user', { user: 'data' })
   },
   methods: {
-    ...mapActions("user", ["logout"])
+    ...mapActions('user', ['logout'])
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .navigate {

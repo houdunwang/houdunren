@@ -4,7 +4,8 @@ namespace App\Servers;
 
 use App\Models\Module;
 use App\Models\Site;
-use Illuminate\Support\Collection;
+use App\User;
+use Spatie\Permission\Contracts\Permission;
 
 /**
  * 模块服务
@@ -78,5 +79,27 @@ class ModuleServer
       }
     }
     return $modules;
+  }
+
+
+  /**
+   * 获取用户在站点可使用的模块
+   * @param Site $site
+   * @param User $user
+   * 
+   * @return void
+   */
+  public function getModuleByUser(Site $site, User $user)
+  {
+    if (isSuperAdmin() || $site->admin[0]['id'] == $user['id']) {
+      $moduleIds = $site->permissions->pluck('module_id');
+    } else {
+      $moduleIds = $user->permissions()->pluck('module_id');
+    }
+
+    $modules =  Module::whereIn('id', $moduleIds->unique())->get();
+    return $modules->map(function ($module) {
+      return $this->getModuleInfo($module['name']);
+    });
   }
 }

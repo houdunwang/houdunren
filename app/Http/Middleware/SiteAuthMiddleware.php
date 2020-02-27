@@ -11,6 +11,7 @@ class SiteAuthMiddleware
   {
     $site = request('site');
     $model = site(is_numeric($site) ? Site::find($site) : $site);
+
     if (auth()->check() && $model) {
       if ($model['user_id'] === auth()->id() || isSuperAdmin()) {
         return $next($request);

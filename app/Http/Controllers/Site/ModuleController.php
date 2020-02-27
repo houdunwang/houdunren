@@ -16,7 +16,7 @@ class ModuleController extends ApiController
     //获取站点模块
     public function index(Site $site, ModuleServer $moduleServer)
     {
-        $modules = $moduleServer->getSiteModule($site);
+        $modules = $moduleServer->getModuleByUser($site, auth()->user());
         return $this->success('站点模块列表', $modules);
     }
 }
