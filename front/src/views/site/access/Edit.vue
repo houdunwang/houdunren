@@ -6,13 +6,15 @@
       </router-link>
       <a class="nav-link active" href="#">权限设置</a>
     </nav>
-    <div class="card mt-2" v-for="(permissions,moduleName) in permissions" :key="moduleName">
+    <div class="card mt-2" v-for="(menus, moduleName) in menus" :key="moduleName">
       <div class="card-header">{{ moduleName }}</div>
       <div class="card-body">
-        <el-checkbox-group v-model="access">
+        <el-checkbox-group v-model="permissions">
           <div class="row">
-            <div class="col-4 col-md-2" v-for="permission in permissions" :key="permission.id">
-              <el-checkbox :label="permission.id">{{ permission.title }}</el-checkbox>
+            <div class="col-6 col-md-2" v-for="menu in menus" :key="menu.permission">
+              <el-checkbox :label="menu.permission">
+                {{ menu.title }}
+              </el-checkbox>
             </div>
           </div>
         </el-checkbox-group>
@@ -26,21 +28,21 @@
 export default {
   data() {
     return {
-      permissions: [],
+      menus: [],
       //用户拥有的权限
-      access: []
+      permissions: []
     }
   },
   async created() {
     const params = this.$route.params
     let response = await Promise.all([
-      this.axios.get(`site/${params.sid}/permission`).then(r => r.data.data),
+      this.axios.get(`site/${params.sid}/permission-menu`).then(r => r.data.data),
       this.axios.get(`site/${params.sid}/access/${params.uid}`).then(r => r.data.data)
     ])
-    this.$set(this, 'permissions', response[0])
+    this.$set(this, 'menus', response[0])
     this.$set(
       this,
-      'access',
+      'permissions',
       response[1].map(access => access.id)
     )
   },
@@ -48,7 +50,7 @@ export default {
     async submit() {
       let params = this.$route.params
       await this.axios.put(`site/${params.sid}/access/${params.uid}`, {
-        access: this.access
+        permissions: this.permissions
       })
       this.$message.success('权限更新成功')
     }

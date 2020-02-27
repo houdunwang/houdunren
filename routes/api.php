@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'si
   //站点模块
   Route::get('{site}/module', 'ModuleController@index');
   //站点权限
-  Route::get('{site}/permission', 'AccessController@sitePermission');
+  Route::get('{site}/permission-menu', 'AccessController@permissonMenu');
   Route::get('{site}/access/{user}', 'AccessController@userPermission');
   Route::put('{site}/access/{user}', 'AccessController@update');
   //更新站点缓存
@@ -63,5 +63,5 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => '
 
 //模块
 Route::group(['middleware' => ['auth:api', 'moduleAuth'], 'namespace' => 'Module', 'prefix' => 'module'], function () {
-  Route::resource('{site}/module', 'ModuleController')->except(['edit', 'show']);
+  Route::resource('{site}/menu/{module}', 'MenuController')->except(['edit', 'show']);
 });

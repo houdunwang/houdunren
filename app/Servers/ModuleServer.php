@@ -5,7 +5,6 @@ namespace App\Servers;
 use App\Models\Module;
 use App\Models\Site;
 use App\User;
-use Spatie\Permission\Contracts\Permission;
 
 /**
  * 模块服务
@@ -47,20 +46,14 @@ class ModuleServer
   public function getModuleInfo(string $name): array
   {
     $module = \Module::find($name);
-    $model = Module::where('name', $name)->first();
-    $package = include $module->getPath() . '/package.php';
-    $package['name'] = $name;
-    $package['thumb'] = config('app.url') . "/modules/{$name}/preview.jpg";
+    $config = include $module->getPath() . '/Config/config.php';
+    $config['name'] = $name;
+    $config['thumb'] = config('app.url') . "/modules/{$name}/preview.jpg";
 
     return [
-      'name' => $name,
-      'package' => $package,
-      'permissions' => include $module->getPath() . '/Config/permissions.php',
-      'menus' => [
-        'admin' => include $module->getPath() . '/Menu/admin.php',
-        'member' => include $module->getPath() . '/Menu/member.php',
-      ],
-      'model' => $model
+      'config' => $config,
+      'menu' => include $module->getPath() . '/Config/menu.php',
+      'model' => Module::where('name', $name)->first()
     ];
   }
 
@@ -86,7 +79,7 @@ class ModuleServer
    * 获取用户在站点可使用的模块
    * @param Site $site
    * @param User $user
-   * 
+   *
    * @return void
    */
   public function getModuleByUser(Site $site, User $user)

@@ -16,18 +16,18 @@ class AccessServer
   /**
    * 获取站点权限列表
    * @param Site $site
-   * 
+   *
    * @return array
    */
-  public function getSiteAccess(Site $site)
-  {
-    $permissions = Permission::where('site_id', $site['id'])->get();
+  // public function getSiteAccess(Site $site)
+  // {
+  //   $permissions = Permission::where('site_id', $site['id'])->get();
 
-    return $permissions->map(function ($p) {
-      $p['module_name'] = Module::find($p['module_id'])['title'];
-      return $p;
-    })->groupBy('module_name');
-  }
+  //   return $permissions->map(function ($p) {
+  //     $p['module_name'] = Module::find($p['module_id'])['title'];
+  //     return $p;
+  //   })->groupBy('module_name');
+  // }
 
   /**
    * 更新所有站点权限
@@ -42,14 +42,15 @@ class AccessServer
   /**
    * 更新所有模块权限
    * @param Site $site
-   * 
+   *
    * @return void
    */
   public function updateSitePermission(Site $site)
   {
-    foreach (Module::get() as $module) {
+    $modules = app(ModuleServer::class)->getSiteModule($site);
+    foreach ($modules as $module) {
       $this->removeInvalidModulePermission($module, $site);
-      $this->addModulePermissionToSite($module, $site);
+      $this->addModulePermissionToSite($site, $module);
     }
 
     app()['cache']->forget('spatie.permission.cache');
@@ -57,20 +58,22 @@ class AccessServer
 
   /**
    * 移除无效的模块权限
-   * @param Module $module
+   * @param array $module
    * @param Site $site
-   * 
+   *
    * @return mixed
    */
-  protected function removeInvalidModulePermission(Module $module, Site $site)
+  protected function removeInvalidModulePermission($module, Site $site)
   {
-    $moduleConfig = app(ModuleServer::class)->getModuleInfo($module['name']);
-    $permissions = $site->permissions()->where('module_id', $module['id'])->get();
-
-    $permissions->map(function ($permission) use ($moduleConfig, $site, $module) {
-      foreach ($moduleConfig['permissions'] as $p) {
-        if ($permission['name'] == ($this->prefix($site, $module) . $p['name']))
-          return true;
+    $permissions = $site->permissions()->where('module_id', $module['model']['id'])->get();
+    //模块所有拥有权限的菜单
+    $original = app(MenuServer::class)->getHasPermissionMenus($site);
+    $permissions->map(function ($permission) use ($original) {
+      foreach ($original as $permissions) {
+        foreach ($permissions as $p) {
+          if ($permission['name'] ===  $p['permission'])
+            return true;
+        }
       }
       $permission->delete();
     });
@@ -78,41 +81,28 @@ class AccessServer
 
   /**
    * 设置模块在网站的权限
-   * @param Module $module
+   * @param array $module
    * @param Site $site
-   * 
+   *
    * @return void
    */
-  protected function addModulePermissionToSite(Module $module, Site $site)
+  protected function addModulePermissionToSite(Site $site, array $module)
   {
-    $moduleConfig = app(ModuleServer::class)->getModuleInfo($module['name']);
-
-    foreach ($moduleConfig['permissions'] as $permission) {
-      //如果权限标识已经存在时不添加
-      $name = $this->prefix($site, $module) . $permission['name'];
-      $hasPermission = $site->permissions()->where('name', $name)->first();
-
-      if (!$hasPermission) {
-        Permission::create([
-          'name' =>  $name,
-          'title' => $permission['title'],
-          'site_id' => $site['id'],
-          'module_id' => $module['id'],
-          'guard_name' => 'web'
-        ]);
+    //模块所有拥有权限的菜单
+    $original = app(MenuServer::class)->getHasPermissionMenus($site);
+    foreach ($original as $permissions) {
+      foreach ($permissions as $p) {
+        //如果权限标识已经存在时不添加
+        $hasPermission = $site->permissions()->where('name', $p['permission'])->first();
+        if (!$hasPermission)
+          Permission::create([
+            'name' =>  $p['permission'],
+            'title' => $p['title'],
+            'site_id' => $site['id'],
+            'module_id' => $module['model']['id'],
+            'guard_name' => 'web'
+          ]);
       }
     }
-  }
-
-  /**
-   * 权限标识前缀
-   * @param Site $site
-   * @param Module $module
-   * 
-   * @return string
-   */
-  protected function prefix(Site $site, Module $module)
-  {
-    return "S{$site['id']}-{$module['name']}-";
   }
 }
