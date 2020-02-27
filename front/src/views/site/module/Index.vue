@@ -39,7 +39,7 @@ export default {
     let response = await this.axios.get(`site/${this.$route.params.sid}/module`).then(r => r.data.data)
 
     this.$set(this, 'modules', response)
-    response.length && (this.loadMessage = '')
+    this.loadMessage = response.length ? '' : '暂无可用模块'
   },
   methods: {}
 }

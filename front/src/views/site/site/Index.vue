@@ -30,7 +30,7 @@
               <span class="mr-2">所属组: {{ site.admin.group.name }}</span>
             </div>
 
-            <div class="small">
+            <div class="small" v-if="site.admin.id ===user.id ">
               <router-link
                 class="text-muted mr-2"
                 :to="{ name: 'site.config', params: { sid: site.id } }"
@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -79,6 +80,9 @@ export default {
   async created() {
     let response = await this.axios.get('site/site')
     this.$set(this, 'data', response.data.data)
+  },
+  computed: {
+    ...mapState('user', { user: 'data' })
   },
   methods: {
     delSite(site) {

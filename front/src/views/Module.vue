@@ -27,10 +27,6 @@
               href="#"
               class="list-group-item list-group-item-action rounded-0"
             >Porta ac consectetur ac</a>
-            <a
-              href="#"
-              class="list-group-item list-group-item-action disabled rounded-0"
-            >Vestibulum at eros</a>
           </div>
         </div>
         <div class="col-12 col-md-9 mt-2 mt-md-0">
