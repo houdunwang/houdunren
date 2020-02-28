@@ -1,0 +1,25 @@
+{
+    "name": "test/a",
+    "description": "",
+    "authors": [
+        {
+            "name": "houdunren.com",
+            "email": "user@houdunren.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\A\\Providers\\AServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\A\\": ""
+        }
+    }
+}

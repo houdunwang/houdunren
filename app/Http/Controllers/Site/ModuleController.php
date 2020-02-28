@@ -17,7 +17,7 @@ class ModuleController extends ApiController
      * 获取站点模块
      * @param Site $site
      * @param ModuleServer $moduleServer
-     * 
+     *
      * @return mixed
      */
     public function index(Site $site, ModuleServer $moduleServer)

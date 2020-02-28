@@ -12,11 +12,11 @@
           </div>
           <div class="col-12 col-md-6 pt-1">
             <h6>
-              {{ module.package.title }}
-              <small class="text-secondary">{{ module.package.description }}</small>
+              {{ module.config.title }}
+              <small class="text-secondary">{{ module.config.description }}</small>
             </h6>
-            <small class="text-secondary mr-2">标识:{{ module.name }}</small>
-            <small class="text-secondary">V{{ module.package.version }}</small>
+            <small class="text-secondary mr-2">标识:{{ module.config.name }}</small>
+            <small class="text-secondary">V{{ module.config.version }}</small>
           </div>
           <div class="col-12 col-md-5 text-md-right pt-2 text-sm-left">
             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     preview(module) {
-      return process.env.VUE_APP_HOST + `/modules/${module.name}/preview.jpg`
+      return process.env.VUE_APP_HOST + `/modules/${module.config.name}/preview.jpg`
     },
     async install(module) {
       await this.axios.post(`system/module`, { name: module.name })

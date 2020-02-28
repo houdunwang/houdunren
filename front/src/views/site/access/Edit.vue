@@ -12,9 +12,7 @@
         <el-checkbox-group v-model="permissions">
           <div class="row">
             <div class="col-6 col-md-2" v-for="menu in menus" :key="menu.permission">
-              <el-checkbox :label="menu.permission">
-                {{ menu.title }}
-              </el-checkbox>
+              <el-checkbox :label="menu.permission">{{ menu.title }}</el-checkbox>
             </div>
           </div>
         </el-checkbox-group>
@@ -43,7 +41,7 @@ export default {
     this.$set(
       this,
       'permissions',
-      response[1].map(access => access.id)
+      response[1].map(access => access.name)
     )
   },
   methods: {

@@ -30,21 +30,21 @@ class moduleCreate extends Command
 
   protected function createInitFile()
   {
-    if (!is_dir($concurrentDirectory = $this->path . '/config') && !mkdir($concurrentDirectory, 0755, true)
-      && !is_dir($concurrentDirectory)) {
+    if (
+      !is_dir($concurrentDirectory = $this->path . '/config') && !mkdir($concurrentDirectory, 0755, true)
+      && !is_dir($concurrentDirectory)
+    ) {
       throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
     }
-    if (!is_dir($concurrentDirectory = $this->path . '/Menu') && !mkdir($concurrentDirectory, 0755, true)
-      && !is_dir($concurrentDirectory)) {
+    if (
+      !is_dir($concurrentDirectory = $this->path . '/Menu') && !mkdir($concurrentDirectory, 0755, true)
+      && !is_dir($concurrentDirectory)
+    ) {
       throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
     }
 
-    copy(__DIR__ . '/module/package.php', $this->path . '/package.php');
-    copy(__DIR__ . '/module/permissions.php', $this->path . '/config/permissions.php');
     copy(__DIR__ . '/module/config.php', $this->path . '/config/config.php');
-    copy(__DIR__ . '/module/menus/admin.php', $this->path . '/Menu/admin.php');
-    copy(__DIR__ . '/module/menus/member.php', $this->path . '/Menu/member.php');
+    copy(__DIR__ . '/module/menu.php', $this->path . '/config/menu.php');
     copy(__DIR__ . '/module/preview.jpg', $this->path . '/preview.jpg');
-
   }
 }

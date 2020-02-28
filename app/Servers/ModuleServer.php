@@ -5,6 +5,7 @@ namespace App\Servers;
 use App\Models\Module;
 use App\Models\Site;
 use App\User;
+use Illuminate\Support\Arr;
 
 /**
  * 模块服务
@@ -32,10 +33,11 @@ class ModuleServer
    */
   public function allInstalledModule(): array
   {
-    $modules = $this->all();
-    return array_filter($modules, function ($module) {
+    $modules =  array_filter($this->all(), function ($module) {
       return $module['model'];
     });
+    sort($modules);
+    return $modules;
   }
 
   /**
@@ -48,7 +50,7 @@ class ModuleServer
     $module = \Module::find($name);
     $config = include $module->getPath() . '/Config/config.php';
     $config['name'] = $name;
-    $config['thumb'] = config('app.url') . "/modules/{$name}/preview.jpg";
+    $config['preview'] = config('app.url') . "/modules/{$name}/preview.jpg";
 
     return [
       'config' => $config,
@@ -84,15 +86,19 @@ class ModuleServer
    */
   public function getModuleByUser(Site $site, User $user)
   {
+    //超管站长获取所有模块
     if (isSuperAdmin() || $site->admin[0]['id'] == $user['id']) {
-      $moduleIds = $site->permissions->pluck('module_id');
-    } else {
-      $moduleIds = $user->permissions()->pluck('module_id');
+      return $this->getSiteModule($site);
     }
 
-    $modules =  Module::whereIn('id', $moduleIds->unique())->get();
-    return $modules->map(function ($module) {
-      return $this->getModuleInfo($module['name']);
-    });
+    //操作员处理
+    $modules = [];
+    $moduleIds = $user->permissions()->where('site_id', $site['id'])->pluck('module_id');
+    foreach ($this->getSiteModule($site) as $module) {
+      if (in_array($module['model']['id'], $moduleIds->toArray())) {
+        $modules[] = $module;
+      }
+    }
+    return $modules;
   }
 }

@@ -9,10 +9,7 @@
           <div class="row">
             <div class="col-6">套餐</div>
             <div class="col-6 text-right">
-              <router-link
-                :to="{ name: 'site.module', params: { sid: site.id } }"
-                class="text-secondary"
-              >
+              <router-link :to="{ name: 'site.module', params: { sid: site.id } }" class="text-secondary">
                 <i class="fa fa-cog"></i> 应用扩展
               </router-link>
             </div>
@@ -34,7 +31,7 @@
               <span class="mr-2">站长: {{ site.admin.name }}</span>
               <span class="mr-2">
                 所属组:
-                <span v-for="group in site.admin.group" :key="group.id">{{group.name}}</span>
+                <span v-for="group in site.admin.group" :key="group.id">{{ group.name }}</span>
               </span>
             </div>
 
@@ -43,42 +40,35 @@
                 <i class="fa fa-life-ring"></i> 更新缓存
               </a>
               <router-link
-                v-if="site.admin.id ===user.id"
+                v-if="checkAdmin(site)"
                 class="text-muted mr-2"
                 :to="{ name: 'site.config', params: { sid: site.id } }"
               >
                 <i class="fa fa-life-ring"></i> 网站配置
               </router-link>
-              <a v-if="site.admin.id ===user.id" href class="text-muted mr-2">
-                <i class="fa fa-comment-o"></i> 微信公众号
-              </a>
+              <a v-if="checkAdmin(site)" href class="text-muted mr-2"> <i class="fa fa-comment-o"></i> 微信公众号 </a>
               <router-link
-                v-if="site.admin.id ===user.id"
+                v-if="checkAdmin"
                 class="text-muted mr-2"
                 :to="{ name: 'site.user', params: { sid: site.id } }"
               >
                 <i class="fa fa-user-o"></i> 用户列表
               </router-link>
               <router-link
-                v-if="site.admin.id ===user.id"
+                v-if="checkAdmin(site)"
                 :to="{ name: 'site.admin', params: { sid: site.id } }"
                 class="text-muted mr-2"
               >
                 <i class="fa fa-user-circle-o"></i> 操作员设置
               </router-link>
               <router-link
-                v-if="site.admin.id ===user.id"
+                v-if="checkAdmin(site)"
                 :to="{ name: 'site.edit', params: { sid: site.id } }"
                 class="text-muted mr-2"
               >
                 <i class="fa fa-pencil-square-o"></i> 编辑
               </router-link>
-              <a
-                v-if="site.admin.id ===user.id"
-                href
-                @click.prevent="delSite(site)"
-                class="text-muted"
-              >
+              <a v-if="checkAdmin(site)" href @click.prevent="delSite(site)" class="text-muted">
                 <i class="fa fa-trash"></i> 删除
               </a>
             </div>
@@ -105,6 +95,10 @@ export default {
     ...mapState('user', { user: 'data' })
   },
   methods: {
+    //站长或超级管理员验证
+    checkAdmin(site) {
+      return site.admin.id === this.user.id || this.user.id === 1
+    },
     delSite(site) {
       this.$confirm(`确定删除[${site.name}]吗?`, '温馨提示', {
         confirmButtonText: '确定',

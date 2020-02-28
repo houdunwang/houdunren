@@ -11,13 +11,13 @@
         <div class="row mt-3">
           <div class="col-12 text-center m-2" v-if="loadMessage">
             <i class="fa fa-info-circle" aria-hidden="true"></i>
-            {{loadMessage}}
+            {{ loadMessage }}
           </div>
           <div class="col-12 col-md-3 mb-2" v-for="module in modules" :key="module.model.id">
-            <router-link :to="{name:'module',params:{sid:$route.params.sid,mid:module.model.id}}">
+            <router-link :to="{ name: 'module', params: { sid: $route.params.sid, mid: module.model.id } }">
               <div class="p-3 align-middle border shadow-sm">
-                <img :src="module.package.thumb" class="rounded-circle mr-3" />
-                <span>{{ module.package.title }}</span>
+                <img :src="module.config.preview" class="rounded-circle mr-3" />
+                <span>{{ module.config.title }}</span>
               </div>
             </router-link>
           </div>

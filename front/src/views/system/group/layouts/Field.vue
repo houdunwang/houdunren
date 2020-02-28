@@ -42,7 +42,7 @@
             <el-table-column label="可用模块">
               <template slot-scope="scope">
                 <el-tag size="mini" v-for="m in scope.row.modules" :key="m.id" class="mr-1 mb-1">
-                  {{ m.package.title }}
+                  {{ m.config.title }}
                 </el-tag>
               </template>
             </el-table-column>
@@ -104,12 +104,12 @@ export default {
             case 'add':
               await this.axios.post('/system/group', this.form)
               this.$message.success('用户组添加成功')
-              this.$router.push({ name: 'system.group.index' })
+              this.$router.push({ name: 'system.group' })
               break
             case 'edit':
               await this.axios.put(`/system/group/${id}`, this.form)
               this.$message.success('用户组编辑成功')
-              this.$router.push({ name: 'system.group.index' })
+              this.$router.push({ name: 'system.group' })
               break
           }
         }

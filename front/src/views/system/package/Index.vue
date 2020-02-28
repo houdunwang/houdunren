@@ -8,7 +8,7 @@
           <el-table-column label="可用模块">
             <template slot-scope="scope">
               <el-tag type="info" size="mini" v-for="m in scope.row.modules" :key="m.id" class="mr-1">
-                {{ m.package.title }}
+                {{ m.config.title }}
               </el-tag>
             </template>
           </el-table-column>

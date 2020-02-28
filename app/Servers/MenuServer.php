@@ -13,7 +13,27 @@ use App\User;
 class MenuServer
 {
   /**
-   * 获取只拥有权限的菜单
+   * 根据用户模块菜单
+   * @param Module $module
+   *
+   * @return mixed
+   */
+  public function getUserMenu(Site $site, Module $module, User $user)
+  {
+    $filter = [];
+    foreach ($this->getHasPermissionMenus($site) as $title => $menus) {
+      $filter[$title] = [];
+      foreach ($menus as $key => $menu) {
+        if ($user->can($menu['permission'])) {
+          $filter[$title][$key] = $menu;
+        }
+      }
+    }
+    return $filter;
+  }
+
+  /**
+   * 获取拥有权限的菜单
    * @param Site $site
    *
    * @return array
@@ -29,19 +49,7 @@ class MenuServer
   }
 
   /**
-   * 根据用户权限模块菜单
-   * @param Module $module
-   *
-   * @return mixed
-   */
-  public function getUserMenu(Site $site, Module $module, User $user)
-  {
-    $names = $site->permissions()->where('module_id', $module['id'])->pluck('name');
-    return $user->getAllPermissions()->where('site_id', 1);
-  }
-
-  /**
-   * 获取拥有权限的模块菜单
+   * 获取权限的模块菜单
    * @param Site $site
    * @param array $module
    *
@@ -69,7 +77,7 @@ class MenuServer
   {
     $format = [];
     foreach ($menus as $menu) {
-      if (isset($menu['permission'])) {
+      if (isset($menu['permission']) && isset($menu['show']) && $menu['show']) {
         $menu['permission'] = $this->addPermissionPrefix($site, $module, $menu);
         $format[] = $menu;
       }

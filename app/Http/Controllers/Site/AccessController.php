@@ -34,8 +34,6 @@ class AccessController extends ApiController
    */
   public function permissonMenu(Site $site, AccessServer $accessServer, MenuServer $menuServer)
   {
-    //更新站点权限，用于新模块的权限添加
-    $accessServer->updateSitePermission($site);
     return $this->success('', $menuServer->getHasPermissionMenus($site));
   }
 

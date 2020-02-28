@@ -28,7 +28,7 @@
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column width="100" label="图标">
               <template slot-scope="scope">
-                <el-avatar shape="square" :size="50" :src="scope.row.package.thumb"></el-avatar>
+                <el-avatar shape="square" :size="50" :src="scope.row.config.preview"></el-avatar>
               </template>
             </el-table-column>
             <el-table-column
@@ -68,8 +68,8 @@ export default {
       },
       //模块表格字段
       columns: [
-        { label: '模块名称', prop: 'package.title' },
-        { label: '版本号', prop: 'package.version' }
+        { label: '模块名称', prop: 'config.title' },
+        { label: '版本号', prop: 'config.version' }
       ],
       //选中的模块
       multipleSelection: []
@@ -79,6 +79,7 @@ export default {
   async created() {
     //获取所有模块列表
     let modules = await this.axios('/system/module/installed').then(r => r.data.data)
+
     this.$set(this, 'moduleList', modules)
 
     //编辑时获取原数据
@@ -108,12 +109,12 @@ export default {
             case 'add':
               await this.axios.post('/system/package', formData)
               this.$message.success('套餐添加成功')
-              this.$router.push({ name: 'system.package.index' })
+              this.$router.push({ name: 'system.package' })
               break
             case 'edit':
               await this.axios.put(`/system/package/${this.$route.params.id}`, formData)
               this.$message.success('套餐编辑成功')
-              this.$router.push({ name: 'system.package.index' })
+              this.$router.push({ name: 'system.package' })
               break
           }
         } else {
