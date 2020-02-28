@@ -55,11 +55,7 @@ export default {
       this.axios.get(`site/${params.sid}/access/${params.uid}`).then(r => r.data.data)
     ])
     this.$set(this, 'modules', response[0])
-    this.$set(
-      this,
-      'permissions',
-      response[1].map(access => access.name)
-    )
+    this.$set(this, 'permissions', response[1])
   },
   methods: {
     async submit() {
