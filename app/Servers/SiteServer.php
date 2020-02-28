@@ -4,6 +4,7 @@ namespace App\Servers;
 
 use App\Models\Site;
 use App\User;
+use Exception;
 
 /**
  * 站点管理服务
@@ -12,32 +13,50 @@ use App\User;
  */
 class SiteServer
 {
-    /**
-     * 根据关键词获取用户
-     */
-    public function getByKeyword(Site $site, ?string $content, $role = ['admin', 'operator', 'user'])
-    {
-        return $site->user()
-            ->wherePivotIn('role', $role)
-            ->where(function ($query) use ($content) {
-                if ($content)
-                    array_map(
-                        function ($field) use ($query, $content) {
-                            $query->orWhere($field, 'like', "%{$content}%");
-                        },
-                        ['name', 'email', 'mobile', 'users.id'],
-                    );
-            })->get();
+  /**
+   * 获取或设置站点
+   * @param mixed $site
+   *
+   * @return Site
+   */
+  public function site($site = null): Site
+  {
+    static $cache = null;
+    if (is_null($site)) {
+      return $cache;
     }
-    //是否为站长
-    public function isAdmin(Site $site, User $user)
-    {
-        return $site->admin->contains($user);
-    }
+    $site = is_numeric($site) ? Site::find($site) : $site;
+    if ($site instanceof Site)
+      return $cache = $site;
 
-    //是否为操作员
-    public function isOperator(Site $site, User $user)
-    {
-        return $site->operator->contains($user);
-    }
+    abort(403, '站点不存在');
+  }
+  /**
+   * 根据关键词获取用户
+   */
+  public function getByKeyword(Site $site, ?string $content, $role = ['admin', 'operator', 'user'])
+  {
+    return $site->user()
+      ->wherePivotIn('role', $role)
+      ->where(function ($query) use ($content) {
+        if ($content)
+          array_map(
+            function ($field) use ($query, $content) {
+              $query->orWhere($field, 'like', "%{$content}%");
+            },
+            ['name', 'email', 'mobile', 'users.id'],
+          );
+      })->get();
+  }
+  //是否为站长
+  public function isAdmin(Site $site, User $user)
+  {
+    return $site->admin->contains($user);
+  }
+
+  //是否为操作员
+  public function isOperator(Site $site, User $user)
+  {
+    return $site->operator->contains($user);
+  }
 }

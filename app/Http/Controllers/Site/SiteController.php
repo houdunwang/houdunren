@@ -6,7 +6,6 @@ use App\Http\Controllers\ApiController;
 use App\Http\Requests\SiteRequest;
 use App\Http\Resources\SiteResource;
 use App\Models\Site;
-use App\Servers\AccessServer;
 use App\Servers\UserServer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

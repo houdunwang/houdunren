@@ -3,6 +3,7 @@
 namespace App\Servers;
 
 use App\Models\Site;
+use App\User;
 use Spatie\Permission\Models\Permission;
 
 /**
@@ -12,6 +13,19 @@ use Spatie\Permission\Models\Permission;
  */
 class AccessServer
 {
+  /**
+   * 检测当前用户模块访问权限
+   * @param string $permission 权限标识
+   * @return bool
+   */
+  public function check(string $permission, ?Site $site, ?User $user): bool
+  {
+    $user = $user ?? auth()->user();
+    $site = $site ?? site();
+    return app(UserServer::class)->isRole($site, $user, ['admin'])
+      || isSuperAdmin() || $user->can($permission);
+  }
+
   /**
    * 更新所有站点权限
    * @return void
@@ -90,12 +104,14 @@ class AccessServer
     $format = [];
     $modules = app(ModuleServer::class)->getSiteModule($site);
     foreach ($modules as $module) {
-      foreach ($module['menu']['admin'] as $menus) {
-        foreach ($menus as $menu) {
-          $format[$module['model']['id']][] = [
-            'title' => $menu['title'],
-            'permission' => "S{$site['id']}-{$module['config']['name']}-{$menu['permission']}"
-          ];
+      foreach ($module['menu']['admin'] as $category) {
+        foreach ($category['menus'] as $menu) {
+          foreach ($menu['items'] as $item) {
+            $format[$module['model']['id']][] = [
+              'title' => $item['title'],
+              'permission' => "S{$site['id']}-{$module['config']['name']}-{$item['permission']}"
+            ];
+          }
         }
       }
     }

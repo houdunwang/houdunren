@@ -32,9 +32,10 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'si
   Route::get('{site}/user', 'UserController@index');
   Route::get('{site}/user/{user}', 'UserController@get');
   //站点模块
-  Route::get('{site}/module', 'ModuleController@index');
+  Route::get('{site}/module/site', 'ModuleController@siteAllModule');
+  Route::get('{site}/module/user', 'ModuleController@getByUser');
   //站点权限
-  Route::get('{site}/permission-menu', 'AccessController@permissonMenu');
+  Route::get('{site}/access', 'AccessController@site');
   Route::get('{site}/access/{user}', 'AccessController@userPermission');
   Route::put('{site}/access/{user}', 'AccessController@update');
   //更新站点缓存

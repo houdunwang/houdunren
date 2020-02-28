@@ -1,11 +1,18 @@
 <?php
+
+use App\Models\Site;
+use App\Servers\AccessServer;
+use App\Servers\SiteServer;
+use App\Servers\UserServer;
+use App\User;
+
 /**
  * 超级管理员
  * @return bool
  */
 function isSuperAdmin(): bool
 {
-  return auth()->check() && auth()->id() === 1;
+  return app(UserServer::class)->isSuperAdmin();
 }
 
 /**
@@ -13,9 +20,17 @@ function isSuperAdmin(): bool
  * @param \App\Models\Site|null $site
  * @return \App\Models\Site|null
  */
-function site(\App\Models\Site $site = null)
+function site($site = null): Site
 {
-  static $cache = null;
-  if ($site) $cache = $site;
-  return $cache;
+  return app(SiteServer::class)->site($site);
+}
+
+/**
+ * 检测模块访问权限
+ * @param string $permission 权限标识
+ * @return bool
+ */
+function access(string $permission, ?Site $site, ?User $user): bool
+{
+  return app(AccessServer::class)->check($permission, $site, $user);
 }

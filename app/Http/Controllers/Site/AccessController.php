@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Models\Site;
 use App\Servers\AccessServer;
 use App\Servers\MenuServer;
+use App\Servers\ModuleServer;
 use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -28,13 +29,13 @@ class AccessController extends ApiController
   /**
    * 站点权限列表
    * @param Site $site
-   * @param AccessServer $accessServer
+   * @param ModuleServer $moduleServer
    *
    * @return mixed
    */
-  public function permissonMenu(Site $site, AccessServer $accessServer, MenuServer $menuServer)
+  public function site(Site $site, ModuleServer $moduleServer)
   {
-    return $this->success('', $menuServer->getHasPermissionMenus($site));
+    return $this->success('', $moduleServer->getSiteModule($site));
   }
 
   /**

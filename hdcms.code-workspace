@@ -8,6 +8,12 @@
     },
     {
       "path": "public/modules"
+    },
+    {
+      "path": "public/admin"
+    },
+    {
+      "path": "public/modules/Learn"
     }
   ],
   "settings": {

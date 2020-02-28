@@ -24,12 +24,12 @@ class MenuServer
     foreach ($this->getHasPermissionMenus($site) as $title => $menus) {
       $filter[$title] = [];
       foreach ($menus as $key => $menu) {
-        if ($user->can($menu['permission'])) {
+        if (access($menu['permission'])) {
           $filter[$title][$key] = $menu;
         }
       }
     }
-    return $filter;
+    return array_filter($filter);
   }
 
   /**
