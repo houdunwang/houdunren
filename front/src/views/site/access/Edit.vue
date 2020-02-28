@@ -4,6 +4,10 @@
       <router-link class="nav-link" :to="{ name: 'site' }">
         <i class="fa fa-home" aria-hidden="true"></i>
       </router-link>
+      <router-link
+        class="nav-link"
+        :to="{ name: 'site.admin',params:{sid:$route.params.sid} }"
+      >操作员管理</router-link>
       <a class="nav-link active" href="#">权限设置</a>
     </nav>
     <div class="card mt-2" v-for="(menus, moduleName) in menus" :key="moduleName">

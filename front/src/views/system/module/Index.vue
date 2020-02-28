@@ -25,17 +25,13 @@
                 class="btn btn-outline-success"
                 v-if="!module.model"
                 @click.prevent="install(module)"
-              >
-                安装
-              </button>
+              >安装</button>
               <button
                 type="button"
                 class="btn btn-outline-primary"
                 v-if="module.model"
                 @click.prevent="uninstall(module)"
-              >
-                卸载
-              </button>
+              >卸载</button>
             </div>
           </div>
           <hr />

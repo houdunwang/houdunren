@@ -7,13 +7,7 @@
       <a class="nav-link active" href="#">操作员管理</a>
     </nav>
 
-    <el-alert
-      class="mb-3"
-      title=" 操作员不允许删除公众号和编辑公众号资料"
-      show-icon
-      type="info"
-      :closable="true"
-    ></el-alert>
+    <el-alert class="mb-3" title=" 操作员不允许删除公众号和编辑公众号资料" show-icon type="info" :closable="true"></el-alert>
 
     <div class="card shadow-sm rounded-0">
       <div class="card-body">
@@ -29,9 +23,13 @@
           <el-table-column prop="id" label="编号" width="60"></el-table-column>
           <el-table-column prop="name" label="昵称"></el-table-column>
           <el-table-column prop="real_name" label="真实姓名"></el-table-column>
-          <el-table-column prop="email" label="邮箱" min-width="180"></el-table-column>
+          <el-table-column prop="email" label="邮箱" min-width="160"></el-table-column>
           <el-table-column prop="mobile" label="手机号" width="150"></el-table-column>
-          <el-table-column prop="group.name" label="会员组"></el-table-column>
+          <el-table-column label="会员组" width="150">
+            <template slot-scope="scope">
+              <span v-for="group in scope.row.group" :key="group.id">{{group.name}}</span>
+            </template>
+          </el-table-column>
           <el-table-column label="注册时间">
             <template slot-scope="scope">{{ scope.row.created_at | dateFormat }}</template>
           </el-table-column>
@@ -42,8 +40,7 @@
                 <el-button
                   size="mini"
                   @click="$router.push({ name: 'site.access', params: { uid: scope.row.id, sid: $route.params.sid } })"
-                  >设置权限</el-button
-                >
+                >设置权限</el-button>
                 <el-button size="mini" @click="delOperator(scope.row)">删除操作员</el-button>
               </el-button-group>
             </template>
