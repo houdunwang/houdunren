@@ -16,7 +16,8 @@ return [
           'group' => ['title' => '实战视频'],
           'items' => [
             ['title' => '课程列表', 'to' => '链接地址', 'permission' => 'list-video'],
-            ['title' => '发表课程', 'to' => '链接地址', 'permission' => 'create-video']
+            ['title' => '发表课程', 'to' => '链接地址', 'permission' => 'create-video'],
+            ['title' => '标签设置', 'to' => '链接地址', 'permission' => 'tag-list'],
           ]
         ],
         [
@@ -32,17 +33,12 @@ return [
       'category' => ['title' => '交易', 'icon' => ''],
       'menus' => [
         [
-          'group' => ['title' => '课程定价'],
+          'group' => ['title' => '订阅设置'],
           'items' => [
-            ['title' => '会员定价', 'to' => '链接地址', 'permission' => 'order-price']
+            ['title' => '会员定价', 'to' => '链接地址', 'permission' => 'order-price'],
+            ['title' => '交易定单', 'to' => '链接地址', 'permission' => 'order-list']
           ]
         ],
-        [
-          'group' => ['title' => '订单管理'],
-          'items' => [
-            ['title' => '定单列表', 'to' => '链接地址', 'permission' => 'order-list']
-          ]
-        ]
       ]
     ],
     [
@@ -51,7 +47,7 @@ return [
         [
           'group' => ['title' => '直播设置'],
           'items' => [
-            ['title' => '阿里云配置', 'to' => '链接地址', 'permission' => 'aliyun']
+            ['title' => '推流配置', 'to' => '链接地址', 'permission' => 'aliyun']
           ]
         ],
       ]

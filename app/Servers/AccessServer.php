@@ -45,8 +45,8 @@ class AccessServer
   public function updateSitePermission(Site $site)
   {
     app()['cache']->forget('spatie.permission.cache');
-    $this->removeInvalidModulePermission($site);
-    $this->addModulePermissionToSite($site);
+    $this->removeInvalidPermission($site);
+    $this->saveSitePermission($site);
   }
 
   /**
@@ -55,7 +55,7 @@ class AccessServer
    *
    * @return mixed
    */
-  protected function removeInvalidModulePermission(Site $site)
+  protected function removeInvalidPermission(Site $site)
   {
     $original = [];
     foreach ($this->format($site) as $menus) {
@@ -77,7 +77,7 @@ class AccessServer
    *
    * @return void
    */
-  protected function addModulePermissionToSite(Site $site)
+  protected function saveSitePermission(Site $site)
   {
     foreach ($this->format($site) as $moduleId => $menus) {
       foreach ($menus as $menu) {
@@ -94,7 +94,7 @@ class AccessServer
     }
   }
   /**
-   * 合并模块菜单
+   * 格式化模块权限数据
    * @param mixed $site
    *
    * @return array
@@ -109,7 +109,7 @@ class AccessServer
           foreach ($menu['items'] as $item) {
             $format[$module['model']['id']][] = [
               'title' => $item['title'],
-              'permission' => "S{$site['id']}-{$module['config']['name']}-{$item['permission']}"
+              'permission' => $item['permission']
             ];
           }
         }
@@ -117,5 +117,19 @@ class AccessServer
     }
 
     return $format;
+  }
+
+  /**
+   * 获取用户权限名称
+   * @param mixed $site
+   * @param mixed $user
+   *
+   * @return void
+   */
+  public function getUserPermissionNames($site, $user)
+  {
+    return $user->permissions->where('site_id', $site['id'])->map(function ($permission) {
+      return $permission->name;
+    });
   }
 }

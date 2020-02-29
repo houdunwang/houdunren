@@ -44,18 +44,17 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'si
 
 //系统
 Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
+  //套餐管理
   Route::resource('package', 'PackageController')->except(['edit', 'create']);
-  //  Route::resource('user', 'UserController')->except(['edit', 'create']);
-  //  Route::post('user/lock', 'UserController@lock');
-  Route::get('cache', 'CacheController@update');
+  //系统应用文件上传
   Route::resource('upload', 'SystemUploadController')->except(['edit', 'create', 'show', 'index']);
+  //系统配置
   Route::resource('config', 'SystemConfigController')->except(['edit', 'create']);
+  //会员组
   Route::resource('group', 'GroupController')->except(['edit', 'create']);
+  //缓存控制
   Route::get('cache', 'CacheController@update');
-});
-
-//系统模块
-Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
+  //模块管理
   Route::get('module', 'ModuleController@index');
   Route::post('module', 'ModuleController@install');
   Route::delete('module/{name}', 'ModuleController@uninstall');
@@ -64,5 +63,6 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => '
 
 //模块
 Route::group(['middleware' => ['auth:api', 'moduleAuth'], 'namespace' => 'Module', 'prefix' => 'module'], function () {
+  //模块菜单
   Route::resource('{site}/menu/{module}', 'MenuController')->except(['edit', 'show']);
 });

@@ -4,12 +4,6 @@
       "path": "."
     },
     {
-      "path": "front"
-    },
-    {
-      "path": "public/modules"
-    },
-    {
       "path": "public/admin"
     },
     {
@@ -17,6 +11,7 @@
     }
   ],
   "settings": {
-    "liveServer.settings.multiRootWorkspaceName": "hdcms"
+    "liveServer.settings.multiRootWorkspaceName": "hdcms",
+    "git.ignoreLimitWarning": true
   }
 }

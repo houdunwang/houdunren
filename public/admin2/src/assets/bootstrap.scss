@@ -1,0 +1,31 @@
+
+.bg-dark {
+  background-color: #293145 !important;
+}
+
+.bg-light {
+  background: #fff;
+}
+
+.shadow-sm {
+  box-shadow: 0 0.375rem 1.5rem 0 rgba(140, 152, 164, 0.125) !important;
+}
+
+.card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #e7eaf3;
+  border-radius: 0.3125rem;
+
+  .card-header {
+    margin-bottom: 0;
+    background: #fff;
+  }
+}

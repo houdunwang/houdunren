@@ -33,8 +33,9 @@ class AccessController extends ApiController
    *
    * @return mixed
    */
-  public function site(Site $site, ModuleServer $moduleServer)
+  public function site(Site $site, ModuleServer $moduleServer, AccessServer $accessServer)
   {
+    $accessServer->updateSitePermission($site);
     return $this->success('', $moduleServer->getSiteModule($site));
   }
 
@@ -45,9 +46,10 @@ class AccessController extends ApiController
    *
    * @return JsonResponse
    */
-  public function userPermission(Site $site, User $user)
+  public function userPermission(Site $site, User $user, AccessServer $accessServer)
   {
-    return $this->success('用户拥有的站点权限', $user->permissions);
+    $permissions = $accessServer->getUserPermissionNames($site, $user);
+    return $this->success('用户拥有的站点权限', $permissions);
   }
 
   /**

@@ -5,7 +5,6 @@ namespace App\Servers;
 use App\Models\Module;
 use App\Models\Site;
 use App\User;
-use Illuminate\Support\Arr;
 
 /**
  * 模块服务
@@ -51,10 +50,10 @@ class ModuleServer
     $config = include $module->getPath() . '/Config/config.php';
     $config['name'] = $name;
     $config['preview'] = config('app.url') . "/modules/{$name}/preview.jpg";
-
+    $menu = include $module->getPath() . '/Config/menu.php';
     return [
       'config' => $config,
-      'menu' => include $module->getPath() . '/Config/menu.php',
+      'menu' => $menu,
       'model' => Module::where('name', $name)->first()
     ];
   }
@@ -68,14 +67,33 @@ class ModuleServer
     $modules = [];
     foreach ($site->admin()->first()->group as $group) {
       foreach ($group->package as $package) {
-        foreach ($package->module as $module) {
-          $modules[] = $this->getModuleInfo($module['name']);
+        foreach ($package->module as $moduleModel) {
+          $module = $this->getModuleInfo($moduleModel['name']);
+          $modules[] = $this->addSiteModulePermissionPrefix($site, $module);
         }
       }
     }
     return $modules;
   }
 
+  /**
+   * 为模块权限添加前缀
+   * @param mixed $site
+   *
+   * @return void
+   */
+  protected function addSiteModulePermissionPrefix(Site $site, $module)
+  {
+    foreach ($module['menu']['admin'] as $k => $category) {
+      foreach ($category['menus'] as $n => $menu) {
+        foreach ($menu['items'] as $m => $item) {
+          $module['menu']['admin'][$k]['menus'][$n]['items'][$m]['permission']
+            = "S{$site['id']}-{$module['config']['name']}-{$item['permission']}";
+        }
+      }
+    }
+    return $module;
+  }
 
   /**
    * 获取用户在站点可使用的模块

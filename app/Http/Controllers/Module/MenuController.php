@@ -7,6 +7,10 @@ use App\Models\Module;
 use App\Models\Site;
 use App\Servers\MenuServer;
 
+/**
+ * 模块菜单
+ * Class MenuController
+ */
 class MenuController extends ApiController
 {
   public function index(Site $site, Module $module, MenuServer $menuServer)

@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
  */
 class LoginController extends ApiController
 {
+  public function show()
+  {
+    return view('admin/login');
+  }
   /**
    * 后台登录
    * @param Request $request
