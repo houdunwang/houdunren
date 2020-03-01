@@ -5,14 +5,12 @@ import site from './site'
 import NotFound from '@/views/common/NotFound'
 import module from './module'
 
-const routes = [site, ...system, module, { path: '/', redirect: '/site/index' }, { path: '*', component: NotFound }]
-
-const router = new VueRouter({
-  routes,
-  mode: 'history'
-})
-
 //注册组件
 Vue.use(VueRouter)
 
-export default router
+const routes = [site, system, module, { path: '*', redirect: '/admin/site/index' }]
+
+export default new VueRouter({
+  routes,
+  mode: 'history'
+})

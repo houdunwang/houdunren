@@ -46,7 +46,7 @@
 
 <script>
 import token from '@/services/token'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   data() {
     return {
@@ -60,13 +60,14 @@ export default {
     ...mapState('systemConfig', { systemConfig: 'data' })
   },
   methods: {
+    ...mapActions('systemConfig', { getConfig: 'get' }),
     logoUpload(res) {
       //上传标志
       this.setting.base.logo.value = res
     },
     async update() {
       await this.axios.post('system/config', { data: this.setting })
-      await this.$store.dispatch('systemConfig/get', true)
+      await this.getConfig()
       this.$message.success('更新成功')
     }
   }

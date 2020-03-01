@@ -21,7 +21,7 @@
               class="nav-item mr-4"
               :key="index"
               v-for="(menu, index) in menus"
-              v-show="menu.check?user.is_super_admin:true"
+              v-show="menu.check ? user.is_super_admin : true"
             >
               <router-link class="nav-link" :to="menu.url">
                 <i :class="'fa ' + menu.icon"></i>
@@ -79,7 +79,7 @@ export default {
         {
           title: '服务套餐',
           icon: 'fa-comments-o',
-          url: { name: 'package' },
+          url: { name: 'system.package' },
           check: true
         },
         {

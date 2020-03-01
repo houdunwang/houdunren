@@ -10,8 +10,7 @@ export default {
     }
   },
   actions: {
-    async get({ state, commit }, force = false) {
-      if (state.data && force === false) return Promise.resolve(state.data)
+    async get({ state, commit }) {
       let response = await window.axios.get('system/config/1').then(r => r.data.data)
       commit('set', response)
       return response
