@@ -11,13 +11,13 @@ Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
 });
 
 //前台用户
-Route::group(['middleware' => 'auth:api', 'namespace' => 'User', 'prefix' => 'user'], function () {
+Route::group(['middleware' => ['auth:api'], 'namespace' => 'User', 'prefix' => 'user'], function () {
   //获取个人资料
   Route::get('get', 'UserController@get');
 });
 
 //站点
-Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'site'], function () {
+Route::group(['middleware' => ['auth:api'], 'namespace' => 'Site', 'prefix' => 'site'], function () {
   Route::resource('site', 'SiteController')->except(['edit', 'create']);
   //站点配置
   Route::put('config/{site}', 'ConfigController@update');
@@ -43,7 +43,7 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'si
 });
 
 //系统
-Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
+Route::group(['middleware' => ['auth:api'], 'namespace' => 'System', 'prefix' => 'system'], function () {
   //套餐管理
   Route::resource('package', 'PackageController')->except(['edit', 'create']);
   //系统应用文件上传

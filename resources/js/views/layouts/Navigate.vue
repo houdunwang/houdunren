@@ -67,34 +67,34 @@ export default {
         {
           title: '站点管理',
           icon: 'fa fa-sitemap',
-          url: '/site/index',
+          url: { name: 'site' },
           check: false
         },
         {
           title: '模块管理',
           icon: 'fa-cubes',
-          url: '/system/module/index',
+          url: { name: 'system.module' },
           check: true
         },
         {
           title: '服务套餐',
           icon: 'fa-comments-o',
-          url: '/system/package/index',
+          url: { name: 'package' },
           check: true
         },
         {
           title: '系统设置',
           icon: 'fa-support',
-          url: '/system/index',
+          url: { name: 'system' },
           check: true
         },
         {
           title: '会员组',
           icon: 'fa-users',
-          url: '/system/group/index',
+          url: { name: 'system.group' },
           check: true
         },
-        { title: '更新缓存', icon: 'fa-bitbucket', url: '/system/cache/update', check: true }
+        { title: '更新缓存', icon: 'fa-bitbucket', url: { name: 'system.cache.update' }, check: true }
       ]
     }
   },

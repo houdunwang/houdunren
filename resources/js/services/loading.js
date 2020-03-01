@@ -1,18 +1,17 @@
-// 统一页面加载UI
+// 统一页面加载动画
 import { Loading } from 'element-ui'
 
-let loading
 export default {
+  instance: null,
   show(text = '') {
-    loading = Loading.service({
+    this.instance = Loading.service({
       lock: true,
       text: text,
-      // spinner: "el-icon-loading",
       fullscreen: true,
       background: 'rgba(255, 255, 255, 0.1)'
     })
   },
   close() {
-    loading.close()
+    this.instance.close()
   }
 }

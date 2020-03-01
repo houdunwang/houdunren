@@ -11,19 +11,19 @@ import AdminIndex from '@/views/site/admin/Index'
 import AccessEdit from '@/views/site/access/Edit'
 //站点路由
 export default {
-  path: '/site',
+  path: '/admin/site',
   component: Admin,
-  alias: '/site/index',
   async beforeEnter(to, from, next) {
     try {
       await store.dispatch('user/get')
       await store.dispatch('systemConfig/get')
+      next()
     } catch (e) {
       store.dispatch('user/adminLogout')
     }
-    next()
   },
   children: [
+    //站点管理
     { name: 'site', path: 'index', component: Index },
     { name: 'site.add', path: 'add', component: Add },
     { name: 'site.edit', path: ':sid/edit', component: Edit },

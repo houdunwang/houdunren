@@ -20,14 +20,14 @@ export default {
       menus: [
         {
           title: '应用扩展',
-          children: [{ title: '模块', icon: 'fa fa-cubes', url: '/system/module/index' }]
+          children: [{ title: '模块', icon: 'fa fa-cubes', url: { name: 'system.module' } }]
         },
         {
           title: '用户管理',
           children: [
             { title: '我的帐户', icon: 'fa-briefcase', url: '' },
-            { title: '用户组管理', icon: 'fa-users', url: '/system/group/index' },
-            { title: '服务套餐', icon: 'fa-comments-o', url: '/system/package/index' }
+            { title: '用户组管理', icon: 'fa-users', url: { name: 'system.group' } },
+            { title: '服务套餐', icon: 'fa-comments-o', url: { name: 'system.package' } }
           ]
         },
         {
@@ -37,12 +37,12 @@ export default {
             {
               title: '系统配置',
               icon: 'fa-tachometer',
-              url: '/system/config'
+              url: { name: 'system.config' }
             },
             {
               title: '更新缓存',
               icon: 'fa-refresh',
-              url: '/system/cache/update'
+              url: { name: 'system.cache.update' }
             }
           ]
         }

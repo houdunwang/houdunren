@@ -1,8 +1,10 @@
-import Vue from "vue";
-import moment from "moment";
-moment.locale("zh-cn");
+//全局过滤器
 
-Vue.filter("dateFormat", value => {
-  if (!value) return "";
-  return moment(value).fromNow();
-});
+import Vue from 'vue'
+import moment from 'moment'
+moment.locale('zh-cn')
+
+Vue.filter('dateFormat', value => {
+  if (!value) return ''
+  return moment(value).fromNow()
+})

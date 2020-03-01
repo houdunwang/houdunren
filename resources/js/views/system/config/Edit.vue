@@ -16,11 +16,11 @@
           <el-form-item label="后台标志">
             <el-upload
               class="avatar-uploader"
-              :action="uploadUrl"
+              action="/api/system/upload"
               accept="image/jpeg, image/png"
               :show-file-list="false"
               :on-success="logoUpload"
-              :headers="headers"
+              :with-credentials="true"
             >
               <img v-if="setting.base.logo.value" :src="setting.base.logo.value" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -57,16 +57,7 @@ export default {
     this.setting = this.systemConfig
   },
   computed: {
-    ...mapState('systemConfig', { systemConfig: 'data' }),
-    uploadUrl() {
-      return `${process.env.VUE_APP_API_URL}system/upload`
-    },
-    headers() {
-      return {
-        //文件上传头信息
-        Authorization: `Bearer ${token.get()}`
-      }
-    }
+    ...mapState('systemConfig', { systemConfig: 'data' })
   },
   methods: {
     logoUpload(res) {

@@ -8,27 +8,27 @@ use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * The policy mappings for the application.
-     *
-     * @var array
-     */
-    protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
-    ];
+  /**
+   * The policy mappings for the application.
+   *
+   * @var array
+   */
+  protected $policies = [
+    // 'App\Model' => 'App\Policies\ModelPolicy',
+  ];
 
-    /**
-     * Register any authentication / authorization services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this->registerPolicies();
-        Passport::routes();
-        Passport::cookie('token-cookie');
-        Gate::guessPolicyNamesUsing(function ($modelClass) {
-            return 'App\Policies\\' . class_basename($modelClass) . 'Policy';
-        });
-    }
+  /**
+   * Register any authentication / authorization services.
+   *
+   * @return void
+   */
+  public function boot()
+  {
+    $this->registerPolicies();
+    Gate::guessPolicyNamesUsing(function ($modelClass) {
+      return 'App\Policies\\' . class_basename($modelClass) . 'Policy';
+    });
+    Passport::routes();
+    Passport::cookie('token_cookie');
+  }
 }

@@ -8,7 +8,13 @@
     </nav>
     <div class="card">
       <div class="card-body">
-        <el-form ref="form" label-width="100px" :rules="rules" :model="field" label-position="right">
+        <el-form
+          ref="form"
+          label-width="100px"
+          :rules="rules"
+          :model="field"
+          label-position="right"
+        >
           <el-form-item label="站点名称" prop="name">
             <el-input v-model="field.name" placeholder="请输入网站标题"></el-input>
           </el-form-item>
@@ -26,7 +32,14 @@
           </el-form-item>
 
           <el-form-item label="站点标志">
-            <el-upload class="avatar-uploader" :action="uploadUrl" accept="image/jpeg, image/png" :show-file-list="false" :on-success="logoUpload" :headers="headers">
+            <el-upload
+              class="avatar-uploader"
+              action="/api/system/upload"
+              accept="image/jpeg, image/png"
+              :show-file-list="false"
+              :on-success="logoUpload"
+              :with-credentials="true"
+            >
               <img v-if="field.logo" :src="field.logo" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
@@ -92,12 +105,12 @@ export default {
   },
   computed: {
     uploadUrl() {
-      return `${process.env.VUE_APP_API_URL}system/upload`
+      return `/api/system/upload`
     },
     //文件上传头信息
     headers() {
       return {
-        Authorization: `Bearer ${token.get()}`
+        // Authorization: `Bearer ${token.get()}`
       }
     }
   },

@@ -2,7 +2,7 @@ import store from '@/store'
 import router from '@/router'
 import Edit from '@/views/system/config/Edit'
 import Admin from '@/views/Admin'
-import Login from '@/views/system/user/Login.vue'
+// import Login from '@/views/system/user/Login.vue'
 import Index from '@/views/system/home/Index'
 import ModuleIndex from '@/views/system/module/Index'
 import Package from '@/views/system/package/Index'
@@ -14,9 +14,9 @@ import GroupEdit from '@/views/system/group/Edit'
 import UpdateSystemCache from '@/views/system/cache/Update'
 //系统配置
 export default [
-  { path: '/admin/login', component: Login },
+  // { path: '/admin/login', component: Login },
   {
-    path: '/system',
+    path: '/admin/system',
     component: Admin,
     async beforeEnter(to, from, next) {
       try {
@@ -29,7 +29,7 @@ export default [
       next()
     },
     children: [
-      { name: 'admin.login', path: '/admin/login', component: Login },
+      // { name: 'admin.login', path: '/admin/login', component: Login },
       { name: 'system', path: 'index', component: Index },
       { name: 'system.config', path: 'config', component: Edit },
       { name: 'system.module', path: 'module/index', component: ModuleIndex },

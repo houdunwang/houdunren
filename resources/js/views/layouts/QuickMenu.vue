@@ -7,7 +7,7 @@
           <router-link :to="{ name: 'site' }">
             <i class="fa fa-sitemap fa-2x d-block"></i>网站管理
           </router-link>
-          <router-link to="/system/index" v-if="user.is_super_admin">
+          <router-link :to="{name:'system'}" v-if="user.is_super_admin">
             <i class="fa fa-support fa-2x d-block"></i>系统设置
           </router-link>
           <a href class="tile" @click.prevent="adminLogout">
