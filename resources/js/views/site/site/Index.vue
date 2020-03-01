@@ -5,11 +5,21 @@
         <i class="fa fa-plus"></i> 添加网站
       </router-link>
       <div class="card mb-3 shadow-sm" v-for="site in data" :key="site.id">
-        <div class="card-header">
+        <div class="card-header small">
           <div class="row">
-            <div class="col-6">套餐</div>
+            <div class="col-6">
+              <span class="text-dark small mr-1">套餐:</span>
+              <span v-for="group in site.admin.group" :key="group.id">
+                <span class="text-secondary mr-1 border p-1 bg-light rounded" v-for="p in group.packages" :key="p.id">
+                  {{ p.name }}
+                </span>
+              </span>
+            </div>
             <div class="col-6 text-right">
-              <router-link :to="{ name: 'site.module', params: { sid: site.id } }" class="text-secondary">
+              <router-link
+                :to="{ name: 'site.module', params: { sid: site.id } }"
+                class="text-secondary font-weight-bold"
+              >
                 <i class="fa fa-cog"></i> 应用扩展
               </router-link>
             </div>

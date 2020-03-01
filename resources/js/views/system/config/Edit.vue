@@ -19,14 +19,12 @@
               action="/api/system/upload"
               accept="image/jpeg, image/png"
               :show-file-list="false"
-              :on-success="logoUpload"
-              :with-credentials="true"
+              :http-request="upload"
             >
               <img v-if="setting.base.logo.value" :src="setting.base.logo.value" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
-
           <el-form-item label="后台页脚">
             <el-input
               type="textarea"
@@ -36,7 +34,7 @@
             ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="update">保存提交</el-button>
+            <el-button type="primary" @click="submit">保存提交</el-button>
           </el-form-item>
         </div>
       </div>
@@ -46,25 +44,20 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import { system as systemUpload } from '@/services/upload'
 export default {
-  data() {
-    return {
-      setting: { name: '', base: '', register: '' }
-    }
-  },
-  async created() {
-    this.setting = this.systemConfig
-  },
   computed: {
-    ...mapState('systemConfig', { systemConfig: 'data' })
+    ...mapState('systemConfig', { setting: 'data' })
   },
   methods: {
     ...mapActions('systemConfig', { getConfig: 'get' }),
-    logoUpload(res) {
-      //上传标志
-      this.setting.base.logo.value = res
+    //标志上传
+    upload(param) {
+      systemUpload(param.file).then(response => {
+        this.$set(this.setting.base.logo, 'value', response.data)
+      })
     },
-    async update() {
+    async submit() {
       await this.axios.post('system/config', { data: this.setting })
       await this.getConfig()
       this.$message.success('更新成功')

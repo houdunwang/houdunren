@@ -59,7 +59,6 @@ _axios.interceptors.response.use(
       switch (status) {
         case 401:
           //未登录用户跳转到登录页面
-          Message.error('请登录后操作')
           location.href = '/admin/login'
           break
         case 422:

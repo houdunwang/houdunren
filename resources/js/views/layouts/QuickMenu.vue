@@ -2,16 +2,14 @@
   <div>
     <div class="d-none d-sm-block">
       <div class="row">
-        <div class="col-6 logo"></div>
-        <div class="col-6 text-right menu">
-          <router-link :to="{ name: 'site' }">
-            <i class="fa fa-sitemap fa-2x d-block"></i>网站管理
+        <div class="col-6 logo" :style="{ color: 'red', backgroundImage: `url(${logo})` }"></div>
+        <div class="col-6 menu">
+          <router-link :to="{ name: 'site' }"> <i class="fa fa-sitemap fa-2x"></i>网站管理 </router-link>
+          <router-link :to="{ name: 'system' }" v-if="user.is_super_admin">
+            <i class="fa fa-support fa-2x"></i>系统设置
           </router-link>
-          <router-link :to="{name:'system'}" v-if="user.is_super_admin">
-            <i class="fa fa-support fa-2x d-block"></i>系统设置
-          </router-link>
-          <a href class="tile" @click.prevent="adminLogout">
-            <i class="fa fa-sign-out fa-2x d-block"></i>
+          <a href="/admin/logout">
+            <i class="fa fa-sign-out fa-2x"></i>
             退出
           </a>
         </div>
@@ -22,13 +20,14 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-
+import _ from 'lodash'
 export default {
-  methods: {
-    ...mapActions('user', ['adminLogout'])
-  },
   computed: {
-    ...mapState('user', { user: 'data' })
+    ...mapState('user', { user: 'data' }),
+    ...mapState('systemConfig', { config: 'data' }),
+    logo() {
+      return _.get(this.config, 'base.logo.value', require('@/assets/images/training.png'))
+    }
   }
 }
 </script>
@@ -36,7 +35,7 @@ export default {
 <style lang="scss" scoped>
 .row {
   .logo {
-    background-image: url('../../assets/training.png');
+    // background-image: url('');
     height: 60px;
     background-size: contain;
     background-repeat: no-repeat;
@@ -50,11 +49,12 @@ export default {
 
     a {
       margin-right: 10px;
-      padding: 0.5em 1em 0.5em 1em;
-      display: block;
-      width: 8em;
-      text-align: center;
-      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 7.5rem;
+      height: 5rem;
       background: #fff;
       color: #333;
       opacity: 0.7;

@@ -69,10 +69,11 @@ class ModuleServer
       foreach ($group->package as $package) {
         foreach ($package->module as $moduleModel) {
           $module = $this->getModuleInfo($moduleModel['name']);
-          $modules[] = $this->addSiteModulePermissionPrefix($site, $module);
+          $modules[$moduleModel['id']] = $this->addSiteModulePermissionPrefix($site, $module);
         }
       }
     }
+    sort($modules);
     return $modules;
   }
 

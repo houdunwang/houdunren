@@ -33,6 +33,10 @@
           <label for="password">密码</label>
           <input type="password" class="form-control" required name="password" id="password" placeholder="后台登录密码">
         </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" name="remember" id="remember">
+          <label class="form-check-label" for="remember">记住我</label>
+        </div>
       </div>
       <div class="card-footer text-muted">
         <button type="submit" class="btn btn-primary">登录后台</but>

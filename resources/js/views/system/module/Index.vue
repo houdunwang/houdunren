@@ -8,7 +8,7 @@
       <div class="card-body pt-1" v-if="modules">
         <div class="row border-bottom pb-3 pt-3" :key="index" v-for="(module, index) in modules">
           <div class="col-12 col-md-1 mb-md-0 mb-2">
-            <img :src="preview(module)" class="shadow-sm" />
+            <img :src="module.config.preview" class="shadow-sm" />
           </div>
           <div class="col-12 col-md-6 pt-1">
             <h6>
@@ -25,13 +25,17 @@
                 class="btn btn-outline-success"
                 v-if="!module.model"
                 @click.prevent="install(module)"
-              >安装</button>
+              >
+                安装
+              </button>
               <button
                 type="button"
                 class="btn btn-outline-primary"
                 v-if="module.model"
                 @click.prevent="uninstall(module)"
-              >卸载</button>
+              >
+                卸载
+              </button>
             </div>
           </div>
           <hr />
@@ -43,7 +47,6 @@
 
 <script>
 export default {
-  name: 'Installed',
   data() {
     return {
       modules: []
@@ -54,18 +57,13 @@ export default {
     this.modules = response.data.data
   },
   methods: {
-    preview(module) {
-      return process.env.VUE_APP_HOST + `/modules/${module.config.name}/preview.jpg`
-    },
     async install(module) {
       await this.axios.post(`system/module`, { name: module.name })
       this.$message.success('安装成功')
       module.model = true
     },
     async uninstall(module) {
-      this.$confirm(`确定卸载模块吗`, {
-        type: 'warning'
-      })
+      this.$confirm(`确定卸载模块吗`, { type: 'warning' })
         .then(async () => {
           await this.axios.delete(`/system/module/${module.name}`)
           this.$message.success('卸载成功')

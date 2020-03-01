@@ -13,6 +13,13 @@ class ModuleController extends ApiController
     $this->middleware('siteAuth:admin,operator');
   }
 
+  /**
+   * 站点所有模块
+   * @param Site $site
+   * @param ModuleServer $moduleServer
+   *
+   * @return void
+   */
   public function siteAllModule(Site $site, ModuleServer $moduleServer)
   {
     $modules = $moduleServer->getSiteModule($site);

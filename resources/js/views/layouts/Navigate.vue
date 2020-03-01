@@ -1,7 +1,7 @@
 <template>
-  <div class="navigate shadow-lg">
+  <div class="bg-dark">
     <div class="container-fluid">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#"></a>
         <button
           class="navbar-toggler"
@@ -106,12 +106,4 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.navigate {
-  background: #293145;
-  /*background: linear-gradient(to left,#475470,#293145);*/
-  opacity: 0.95;
-  position: relative;
-  z-index: 1;
-}
-</style>
+<style lang="scss" scoped></style>

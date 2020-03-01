@@ -15,13 +15,16 @@ class LoginController extends Controller
   {
     $this->middleware('guest', ['only' => ['show', 'login'], 'except' => 'logout']);
   }
+
   /**
    * 登录界面
+   * @return string
    */
   public function show()
   {
     return view('admin/login');
   }
+
   /**
    * 后台登录
    * @param Request $request
@@ -33,7 +36,7 @@ class LoginController extends Controller
     $credentials['password'] = $request['password'];
     $credentials[$type] = $request['username'];
 
-    if (auth()->attempt($credentials)) {
+    if (auth()->attempt($credentials, $request->input('remember'))) {
       return redirect('/admin');
     } else {
       return back()->withInput()->with('error', '帐号或密码错误');
@@ -42,11 +45,11 @@ class LoginController extends Controller
 
   /**
    * 退出登录
-   * @return void
+   * @return string
    */
   public function logout()
   {
     auth()->logout();
-    return redirect(route('admin.login'));
+    return redirect('admin/login');
   }
 }

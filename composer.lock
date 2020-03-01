@@ -551,16 +551,16 @@
         },
         {
             "name": "fruitcake/laravel-cors",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruitcake/laravel-cors.git",
-                "reference": "4b1f95aeaef2c8c201519833ad212bcbf909f15e"
+                "reference": "138ad34ba5f578283e94c5614f6c48a10bc3ac6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruitcake/laravel-cors/zipball/4b1f95aeaef2c8c201519833ad212bcbf909f15e",
-                "reference": "4b1f95aeaef2c8c201519833ad212bcbf909f15e",
+                "url": "https://api.github.com/repos/fruitcake/laravel-cors/zipball/138ad34ba5f578283e94c5614f6c48a10bc3ac6a",
+                "reference": "138ad34ba5f578283e94c5614f6c48a10bc3ac6a",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -571,14 +571,15 @@
             },
             "require": {
                 "asm89/stack-cors": "^1.3",
-                "illuminate/support": "^5.5|^6.0|^7.0",
+                "illuminate/contracts": "^5.5|^6.0|^7.0|^8.0",
+                "illuminate/support": "^5.5|^6.0|^7.0|^8.0",
                 "php": ">=7",
-                "symfony/http-foundation": "^3.3|^4|^5.0",
-                "symfony/http-kernel": "^3.3|^4|^5.0"
+                "symfony/http-foundation": "^3.3|^4.0|^5.0",
+                "symfony/http-kernel": "^3.3|^4.0|^5.0"
             },
             "require-dev": {
-                "laravel/framework": "^5.5|^6.0|^7.0",
-                "orchestra/testbench": "^3.5|^4.0|^5.0",
+                "laravel/framework": "^5.5|^6.0|^7.0|^8.0",
+                "orchestra/testbench": "^3.5|^4.0|^5.0|^6.0",
                 "phpro/grumphp": "^0.16|^0.17",
                 "phpunit/phpunit": "^6.0|^7.0|^8.0",
                 "squizlabs/php_codesniffer": "^3.5"
@@ -620,7 +621,7 @@
                 "crossdomain",
                 "laravel"
             ],
-            "time": "2019-12-31T17:28:15+00:00"
+            "time": "2020-02-21T13:24:15+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

@@ -19,6 +19,14 @@ class SystemUploadController extends ApiController
     $this->middleware('systemAuth');
   }
 
+  /**
+   * 系统应用文件上传
+   * @param Request $request
+   * @param SystemUpload $systemUpload
+   * @param UploadServer $upload
+   *
+   * @return string
+   */
   public function store(Request $request, SystemUpload $systemUpload, UploadServer $upload)
   {
     $path = $upload->local(current($request->file()));

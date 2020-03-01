@@ -14,10 +14,8 @@
             {{ loadMessage }}
           </div>
           <div class="col-12 col-md-3 mb-2" v-for="module in modules" :key="module.model.id">
-            <router-link
-              :to="{ name: 'module', params: { sid: $route.params.sid, mid: module.model.id } }"
-            >
-              <div class="p-3 align-middle border shadow-sm">
+            <router-link :to="{ name: 'module', params: { sid: $route.params.sid, mid: module.model.id } }">
+              <div class="p-3 align-middle border shadow-sm rounded">
                 <img :src="module.config.preview" class="rounded-circle mr-3" />
                 <span>{{ module.config.title }}</span>
               </div>

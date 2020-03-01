@@ -3,7 +3,7 @@
     <div class="card-body">
       <el-form ref="form" label-width="120px">
         <el-form-item :label="field.upload.drive.title">
-          <el-radio-group v-model="field.upload.drive.value">
+          <el-radio-group v-model="field.upload.drive.value" class="align-baseline">
             <el-radio label="local">本地上传</el-radio>
             <el-radio label="oss">阿里云OSS</el-radio>
           </el-radio-group>
