@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import token from '@/services/token'
 import { mapState, mapActions } from 'vuex'
 export default {
   data() {

@@ -8,13 +8,7 @@
     </nav>
     <div class="card">
       <div class="card-body">
-        <el-form
-          ref="form"
-          label-width="100px"
-          :rules="rules"
-          :model="field"
-          label-position="right"
-        >
+        <el-form ref="form" label-width="100px" :rules="rules" :model="field" label-position="right">
           <el-form-item label="站点名称" prop="name">
             <el-input v-model="field.name" placeholder="请输入网站标题"></el-input>
           </el-form-item>
@@ -70,8 +64,6 @@
 </template>
 
 <script>
-import token from '@/services/token'
-
 export default {
   props: ['action'],
   data() {
@@ -101,17 +93,6 @@ export default {
     if (this.action === 'edit') {
       let response = await this.axios.get(`/site/site/${this.$route.params.sid}`).then(r => r.data.data)
       this.$set(this, 'field', response)
-    }
-  },
-  computed: {
-    uploadUrl() {
-      return `/api/system/upload`
-    },
-    //文件上传头信息
-    headers() {
-      return {
-        // Authorization: `Bearer ${token.get()}`
-      }
     }
   },
   methods: {
