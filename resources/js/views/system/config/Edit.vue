@@ -24,6 +24,7 @@
               <img v-if="setting.base.logo.value" :src="setting.base.logo.value" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
+            <small class="text-secondary">请上传尺寸为 860x105 的PNG图片</small>
           </el-form-item>
           <el-form-item label="后台页脚">
             <el-input

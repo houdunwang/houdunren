@@ -10,15 +10,11 @@
 return [
   'admin' => [
     [
-      'category' => ['title' => '课程', 'icon' => ''],
-      'menus' => [
-        [
-          'group' => ['title' => '实战视频'],
-          'items' => [
-            ['title' => '课程列表', 'to' => '链接地址', 'permission' => 'list-video'],
-            ['title' => '发表课程', 'to' => '链接地址', 'permission' => 'create-video']
-          ]
-        ],
+      'group' => ['title' => '实战视频', 'icon' => ''],
+      'items' => [
+        ['title' => '课程列表', 'to' => '链接地址', 'permission' => 'video'],
+        ['title' => '发表课程', 'to' => '链接地址', 'permission' => 'create-video'],
+        ['title' => '系统课程', 'to' => '链接地址', 'permission' => 'system']
       ]
     ]
   ],

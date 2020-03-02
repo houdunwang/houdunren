@@ -104,14 +104,12 @@ class AccessServer
     $format = [];
     $modules = app(ModuleServer::class)->getSiteModule($site);
     foreach ($modules as $module) {
-      foreach ($module['menu']['admin'] as $category) {
-        foreach ($category['menus'] as $menu) {
-          foreach ($menu['items'] as $item) {
-            $format[$module['model']['id']][] = [
-              'title' => $item['title'],
-              'permission' => $item['permission']
-            ];
-          }
+      foreach ($module['menu']['admin'] as $menu) {
+        foreach ($menu['items'] as $item) {
+          $format[$module['model']['id']][] = [
+            'title' => $item['title'],
+            'permission' => $item['permission']
+          ];
         }
       }
     }

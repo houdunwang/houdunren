@@ -18,6 +18,9 @@ mix.webpackConfig({
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').sass('resources/sass/app.scss', 'public/css')
+mix
+  .js('resources/js/app.js', 'public/js')
+  .sass('resources/sass/app.scss', 'public/css')
+  .extract(['vue', 'element-ui', 'moment'])
 
 mix.browserSync('hdcms.test')

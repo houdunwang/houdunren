@@ -85,12 +85,10 @@ class ModuleServer
    */
   protected function addSiteModulePermissionPrefix(Site $site, $module)
   {
-    foreach ($module['menu']['admin'] as $k => $category) {
-      foreach ($category['menus'] as $n => $menu) {
-        foreach ($menu['items'] as $m => $item) {
-          $module['menu']['admin'][$k]['menus'][$n]['items'][$m]['permission']
-            = "S{$site['id']}-{$module['config']['name']}-{$item['permission']}";
-        }
+    foreach ($module['menu']['admin'] as $m => $menu) {
+      foreach ($menu['items'] as $i => $item) {
+        $module['menu']['admin'][$m]['items'][$i]['permission']
+          = "S{$site['id']}-{$module['config']['name']}-{$item['permission']}";
       }
     }
     return $module;
