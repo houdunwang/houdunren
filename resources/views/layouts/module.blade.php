@@ -13,8 +13,8 @@
 </head>
 
 <body>
-  <div id="hdApp">
-    <router-view></router-view>
+  <div id="app">
+    <module />
   </div>
   <script src="{{ mix('/js/manifest.js') }}"></script>
   <script src="{{ mix('/js/vendor.js') }}"></script>

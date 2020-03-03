@@ -7,7 +7,10 @@
         </el-form-item>
 
         <el-form-item :label="field.aliyun.accessKeyId.title">
-          <el-input v-model="field.aliyun.accessKeyId.value" :placeholder="field.aliyun.accessKeyId.desc"></el-input>
+          <el-input
+            v-model="field.aliyun.accessKeyId.value"
+            :placeholder="field.aliyun.accessKeyId.desc"
+          ></el-input>
         </el-form-item>
 
         <el-form-item :label="field.aliyun.accessKeySecret.title">
@@ -17,16 +20,22 @@
           ></el-input>
         </el-form-item>
 
-        <el-divider><i class="el-icon-mobile-phone"></i></el-divider>
+        <el-divider>
+          <i class="el-icon-mobile-phone"></i>
+        </el-divider>
 
         <el-form-item :label="field.aliyun.upload.endpoint.title">
-          <el-input v-model="field.aliyun.upload.endpoint.value" :placeholder="field.aliyun.upload.endpoint.desc">
-          </el-input>
+          <el-input
+            v-model="field.aliyun.upload.endpoint.value"
+            :placeholder="field.aliyun.upload.endpoint.desc"
+          ></el-input>
         </el-form-item>
 
         <el-form-item :label="field.aliyun.upload.bucket.title">
-          <el-input v-model="field.aliyun.upload.bucket.value" :placeholder="field.aliyun.upload.bucket.desc">
-          </el-input>
+          <el-input
+            v-model="field.aliyun.upload.bucket.value"
+            :placeholder="field.aliyun.upload.bucket.desc"
+          ></el-input>
         </el-form-item>
       </el-form>
     </div>
@@ -37,7 +46,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'Base',
   computed: {
     ...mapState('siteConfig', { field: 'data' })
   }

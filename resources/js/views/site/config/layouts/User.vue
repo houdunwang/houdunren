@@ -31,7 +31,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'Base',
   computed: {
     ...mapState('siteConfig', { field: 'data' })
   }

@@ -9,10 +9,12 @@ import './plugins/axios'
 import './plugins/element.js'
 import './services/filter'
 import './assets/css/common.scss'
+import Module from './components/Module'
+Vue.component('Module', Module)
 const app = new Vue({
   router,
   store,
-  el: '#app'
+  el: '#hdApp'
 })
 
 console.log(`

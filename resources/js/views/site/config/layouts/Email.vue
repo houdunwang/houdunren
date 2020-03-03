@@ -33,14 +33,12 @@
     </div>
 
     <div class="card mt-3">
-      <div class="card-header">
-        测试
-      </div>
+      <div class="card-header">测试</div>
       <div class="card-body">
         <el-form-item :label="field.email.test.mail.title">
           <el-input v-model="field.email.test.mail.value" :placeholder="field.email.test.mail.desc">
             <template slot="append">
-              <a href="">发送测试邮件</a>
+              <a href>发送测试邮件</a>
             </template>
           </el-input>
         </el-form-item>
@@ -53,7 +51,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'Base',
   computed: {
     ...mapState('siteConfig', { field: 'data' })
   }

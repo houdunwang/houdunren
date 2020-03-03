@@ -76,15 +76,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h6 {
-  cursor: pointer;
-  &::before {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 12px;
-    background: #666;
-    margin-right: 5px;
+.el-checkbox-group {
+  font-size: inherit;
+  h6 {
+    cursor: pointer;
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 12px;
+      background: #666;
+      margin-right: 5px;
+    }
   }
 }
 </style>

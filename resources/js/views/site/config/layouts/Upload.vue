@@ -10,7 +10,10 @@
         </el-form-item>
 
         <el-form-item :label="field.upload.file_size.title">
-          <el-input v-model="field.upload.file_size.value" :placeholder="field.upload.file_size.desc"></el-input>
+          <el-input
+            v-model="field.upload.file_size.value"
+            :placeholder="field.upload.file_size.desc"
+          ></el-input>
         </el-form-item>
 
         <el-form-item :label="field.upload.type.title">
@@ -25,7 +28,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'Base',
   computed: {
     ...mapState('siteConfig', { field: 'data' })
   }

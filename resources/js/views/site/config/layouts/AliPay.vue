@@ -11,11 +11,17 @@
         </el-form-item>
 
         <el-form-item :label="field.alipay.sign_type.title">
-          <el-input v-model="field.alipay.sign_type.value" :placeholder="field.alipay.sign_type.desc"></el-input>
+          <el-input
+            v-model="field.alipay.sign_type.value"
+            :placeholder="field.alipay.sign_type.desc"
+          ></el-input>
         </el-form-item>
 
         <el-form-item :label="field.alipay.gatewayUrl.title">
-          <el-input v-model="field.alipay.gatewayUrl.value" :placeholder="field.alipay.gatewayUrl.desc"></el-input>
+          <el-input
+            v-model="field.alipay.gatewayUrl.value"
+            :placeholder="field.alipay.gatewayUrl.desc"
+          ></el-input>
         </el-form-item>
 
         <el-form-item :label="field.alipay.merchant_private_key.title">
@@ -44,7 +50,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'Base',
   computed: {
     ...mapState('siteConfig', { field: 'data' })
   }

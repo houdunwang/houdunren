@@ -3,8 +3,8 @@
     <nav>
       <div class="nav nav-tabs mb-2" id="nav-tab" role="tablist">
         <router-link class="nav-link" :to="{ name: 'site' }">
-          <i class="fa fa-home" aria-hidden="true"></i
-        ></router-link>
+          <i class="fa fa-home" aria-hidden="true"></i>
+        </router-link>
         <a
           class="nav-item nav-link active"
           id="nav-home-tab"
@@ -13,8 +13,7 @@
           role="tab"
           aria-controls="email"
           aria-selected="true"
-          >邮箱配置</a
-        >
+        >邮箱配置</a>
         <a
           class="nav-item nav-link"
           id="nav-profile-tab"
@@ -23,8 +22,7 @@
           role="tab"
           aria-controls="aliyun"
           aria-selected="false"
-          >阿里云</a
-        >
+        >阿里云</a>
         <a
           class="nav-item nav-link"
           id="nav-contact-tab"
@@ -33,8 +31,7 @@
           role="tab"
           aria-controls="alipay"
           aria-selected="false"
-          >支付宝</a
-        >
+        >支付宝</a>
         <a
           class="nav-item nav-link"
           id="nav-contact-tab"
@@ -43,8 +40,7 @@
           role="tab"
           aria-controls="upload"
           aria-selected="false"
-          >上传配置</a
-        >
+        >上传配置</a>
         <a
           class="nav-item nav-link"
           id="nav-contact-tab"
@@ -53,8 +49,7 @@
           role="tab"
           aria-controls="user"
           aria-selected="false"
-          >用户相关</a
-        >
+        >用户相关</a>
         <a
           class="nav-item nav-link"
           id="nav-contact-tab"
@@ -63,9 +58,7 @@
           role="tab"
           aria-controls="notification"
           aria-selected="false"
-        >
-          通知设置
-        </a>
+        >通知设置</a>
         <a
           class="nav-item nav-link"
           id="nav-contact-tab"
@@ -74,18 +67,36 @@
           role="tab"
           aria-controls="maintain"
           aria-selected="false"
-        >
-          临时维护
-        </a>
+        >临时维护</a>
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="email" role="tabpanel" aria-labelledby="nav-home-tab"><email /></div>
-      <div class="tab-pane fade" id="aliyun" role="tabpanel" aria-labelledby="nav-profile-tab"><ali-yun /></div>
-      <div class="tab-pane fade" id="alipay" role="tabpanel" aria-labelledby="nav-contact-tab"><ali-pay /></div>
-      <div class="tab-pane fade" id="upload" role="tabpanel" aria-labelledby="nav-contact-tab"><upload /></div>
-      <div class="tab-pane fade" id="user" role="tabpanel" aria-labelledby="nav-contact-tab"><user /></div>
-      <div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="nav-contact-tab">
+      <div
+        class="tab-pane fade show active"
+        id="email"
+        role="tabpanel"
+        aria-labelledby="nav-home-tab"
+      >
+        <email />
+      </div>
+      <div class="tab-pane fade" id="aliyun" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <ali-yun />
+      </div>
+      <div class="tab-pane fade" id="alipay" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <ali-pay />
+      </div>
+      <div class="tab-pane fade" id="upload" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <upload />
+      </div>
+      <div class="tab-pane fade" id="user" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <user />
+      </div>
+      <div
+        class="tab-pane fade"
+        id="notification"
+        role="tabpanel"
+        aria-labelledby="nav-contact-tab"
+      >
         <notification />
       </div>
       <div class="tab-pane fade" id="maintain" role="tabpanel" aria-labelledby="nav-contact-tab">

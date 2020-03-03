@@ -14,12 +14,12 @@
             {{ loadMessage }}
           </div>
           <div class="col-12 col-md-3 mb-2" v-for="module in modules" :key="module.model.id">
-            <router-link :to="{ name: 'module', params: { sid: $route.params.sid, mid: module.model.id } }">
+            <a :href="moduleLink(module)" target="_blank">
               <div class="p-3 align-middle border shadow-sm rounded">
                 <img :src="module.config.preview" class="rounded-circle mr-3" />
                 <span>{{ module.config.title }}</span>
               </div>
-            </router-link>
+            </a>
           </div>
         </div>
       </div>
@@ -41,7 +41,12 @@ export default {
     this.$set(this, 'modules', response)
     this.loadMessage = response.length ? '' : '暂无可用模块'
   },
-  methods: {}
+  methods: {
+    moduleLink(module) {
+      let name = module.config.name.toLowerCase()
+      return `/${name}/admin`
+    }
+  }
 }
 </script>
 

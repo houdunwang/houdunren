@@ -3,7 +3,10 @@
     <div class="card">
       <div class="card-body">
         <el-form-item :label="field.notification.timeout.title">
-          <el-input v-model="field.notification.timeout.value" :placeholder="field.notification.timeout.desc">
+          <el-input
+            v-model="field.notification.timeout.value"
+            :placeholder="field.notification.timeout.desc"
+          >
             <template slot="append">秒</template>
           </el-input>
         </el-form-item>
@@ -11,9 +14,7 @@
     </div>
 
     <div class="card mt-3">
-      <div class="card-header">
-        阿里云设置
-      </div>
+      <div class="card-header">阿里云设置</div>
       <div class="card-body">
         <el-form-item :label="field.notification.aliyun.sign.title">
           <el-input
@@ -55,7 +56,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'Base',
   computed: {
     ...mapState('siteConfig', { field: 'data' })
   }
