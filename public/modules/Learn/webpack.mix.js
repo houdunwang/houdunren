@@ -1,12 +1,21 @@
 const mix = require('laravel-mix')
 require('laravel-mix-merge-manifest')
 
-mix.setPublicPath('../../public').mergeManifest()
+mix.setPublicPath('../../').mergeManifest()
 
-mix
-  .js(__dirname + '/Resources/assets/js/app.js', 'js/learn.js')
-  .sass(__dirname + '/Resources/assets/sass/app.scss', 'css/learn.css')
+mix.webpackConfig({
+  resolve: {
+    extensions: ['.js', '.vue'],
+    alias: {
+      '@': __dirname + '/app'
+    }
+  }
+})
+
+mix.js(__dirname + '/app/app.js', 'js/learn.js')
 
 if (mix.inProduction()) {
   mix.version()
 }
+
+mix.browserSync('hdcms.test')

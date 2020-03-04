@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\ApiController;
-use App\Http\Resources\SiteResource;
 use App\Http\Resources\UserResource;
 use App\Models\Site;
 use App\User;

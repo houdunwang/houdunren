@@ -14,7 +14,7 @@
             {{ loadMessage }}
           </div>
           <div class="col-12 col-md-3 mb-2" v-for="module in modules" :key="module.model.id">
-            <a :href="moduleLink(module)" target="_blank">
+            <a :href="moduleLink(module)">
               <div class="p-3 align-middle border shadow-sm rounded">
                 <img :src="module.config.preview" class="rounded-circle mr-3" />
                 <span>{{ module.config.title }}</span>
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     moduleLink(module) {
-      let name = module.config.name.toLowerCase()
+      const name = module.config.name.toLowerCase()
       return `/${name}/admin`
     }
   }

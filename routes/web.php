@@ -14,5 +14,5 @@ Route::group(['namespace' => 'Web\Admin'], function () {
 
 //前端
 Route::get('/admin{any}', function () {
-  return view('admin.home');
+  return view('admin');
 })->where('any', '.*');

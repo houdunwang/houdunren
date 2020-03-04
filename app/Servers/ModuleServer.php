@@ -14,6 +14,16 @@ use App\User;
 class ModuleServer
 {
   /**
+   * 根据请求地址获取模块
+   * @return mixex
+   */
+  public function getByUrl()
+  {
+    $referer = \Request::server('REQUEST_URI');
+    preg_match('/\/(\w+)/', $referer, $matchs);
+    return Module::where('name', $matchs[1])->firstOrFail();
+  }
+  /**
    * 所有模块包括未安装模块
    * @return array
    */
@@ -103,19 +113,21 @@ class ModuleServer
    */
   public function getModuleByUser(Site $site, User $user)
   {
+    $userServer = app(UserServer::class);
     //超管站长获取所有模块
-    if (isSuperAdmin() || $site->admin[0]['id'] == $user['id']) {
+    $isAdmin = $userServer->isRole($site, $user, ['admin']);
+    if (isSuperAdmin() || $isAdmin)
       return $this->getSiteModule($site);
-    }
 
-    //操作员处理
-    $modules = [];
-    $moduleIds = $user->permissions()->where('site_id', $site['id'])->pluck('module_id');
-    foreach ($this->getSiteModule($site) as $module) {
-      if (in_array($module['model']['id'], $moduleIds->toArray())) {
-        $modules[] = $module;
+    //操作员权限
+    $isOperator = $userServer->isRole($site, $user, ['operator']);
+    if (!$isOperator) return [];
+    $mids = $user->permissions()->where('site_id', $site['id'])->pluck('module_id');
+    return array_filter(
+      $this->getSiteModule($site),
+      function ($module) use ($mids) {
+        return in_array($module['model']['id'], $mids->toArray());
       }
-    }
-    return $modules;
+    );
   }
 }

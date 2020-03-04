@@ -11,6 +11,7 @@ import Group from '@/views/system/group/Index'
 import GroupAdd from '@/views/system/group/Add'
 import GroupEdit from '@/views/system/group/Edit'
 import UpdateSystemCache from '@/views/system/cache/Update'
+
 //系统配置
 export default {
   path: '/admin/system',

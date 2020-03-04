@@ -62,7 +62,7 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'System', 'prefix' =>
 });
 
 //模块
-Route::group(['middleware' => ['auth:api', 'moduleAuth'], 'namespace' => 'Module', 'prefix' => 'module'], function () {
+Route::group(['middleware' => ['auth:api'], 'namespace' => 'Module', 'prefix' => 'module'], function () {
   //模块菜单
   Route::resource('{site}/menu/{module}', 'MenuController')->except(['edit', 'show']);
 });

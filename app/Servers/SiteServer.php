@@ -4,7 +4,6 @@ namespace App\Servers;
 
 use App\Models\Site;
 use App\User;
-use Exception;
 
 /**
  * 站点管理服务
@@ -31,6 +30,17 @@ class SiteServer
 
     abort(403, '站点不存在');
   }
+
+  /**
+   * 根据网址获取站点
+   * @return void
+   */
+  public function getByUrl()
+  {
+    $host = \Request::server('HTTP_HOST');
+    return  Site::where('domain', 'like', "%{$host}%")->firstOrFail();
+  }
+
   /**
    * 根据关键词获取用户
    */

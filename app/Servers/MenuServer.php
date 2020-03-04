@@ -18,83 +18,34 @@ class MenuServer
    *
    * @return mixed
    */
-  public function getUserMenu(Site $site, Module $module, User $user)
+  public function getByUser(Site $site, Module $module, User $user)
   {
-    $filter = [];
-    foreach ($this->getHasPermissionMenus($site) as $title => $menus) {
-      $filter[$title] = [];
-      foreach ($menus as $key => $menu) {
-        if (access($menu['permission'])) {
-          $filter[$title][$key] = $menu;
-        }
-      }
+    $modules =  app(ModuleServer::class)->getModuleByUser($site, $user);
+    foreach ($modules as $m => $module) {
+      $modules[$m]['menu']['admin'] =
+        $this->removeInvalidMenu($site, $module['menu']['admin'], $user);
     }
-    return array_filter($filter);
+    return $modules;
   }
 
   /**
-   * 获取拥有权限的菜单
-   * @param Site $site
+   * 移除无效菜单
+   * @param mixed $site
+   * @param mixed $menus
+   * @param mixed $user
    *
-   * @return array
+   * @return collection
    */
-  public function getHasPermissionMenus(Site $site)
+  protected function removeInvalidMenu($site, $menus, $user)
   {
-    $modules = app(ModuleServer::class)->getSiteModule($site);
-    $menus = [];
-    foreach ($modules as $module) {
-      $menus[$module['config']['title']] = $this->getHasPermissionModuleMenu($site, $module);
+    foreach ($menus as $m => $menu) {
+      $menus[$m]['items'] =
+        array_filter($menu['items'], function ($menu) use ($site, $user) {
+          return access($menu['permission'], $site, $user);
+        });
     }
-    return $menus;
-  }
-
-  /**
-   * 获取权限的模块菜单
-   * @param Site $site
-   * @param array $module
-   *
-   * @return array
-   */
-  public function getHasPermissionModuleMenu(Site $site, array $module)
-  {
-    $info = app(ModuleServer::class)->getModuleInfo($module['config']['name']);
-    $admin = [];
-    foreach ($info['menu']['admin'] as $menus) {
-      $admin = array_merge($admin, $this->formatMenu($site, $module, $menus));
-    }
-    return $admin;
-  }
-
-  /**
-   * 过滤没有权限的菜单并加菜单前缀
-   * @param Site $site
-   * @param array $module
-   * @param array $menus
-   *
-   * @return array
-   */
-  protected function formatMenu(Site $site, array $module, array $menus)
-  {
-    $format = [];
-    foreach ($menus as $menu) {
-      if (isset($menu['permission']) && isset($menu['show']) && $menu['show']) {
-        $menu['permission'] = $this->addPermissionPrefix($site, $module, $menu);
-        $format[] = $menu;
-      }
-    }
-    return $format;
-  }
-
-  /**
-   * 添加权限前缀
-   * @param Site $site
-   * @param array $module
-   * @param array $menu
-   *
-   * @return string
-   */
-  protected function addPermissionPrefix(Site $site, array $module, array $menu)
-  {
-    return "S{$site['id']}-{$module['config']['name']}-{$menu['permission']}";
+    return array_filter($menus, function ($menu) {
+      return count($menu['items']);
+    });
   }
 }

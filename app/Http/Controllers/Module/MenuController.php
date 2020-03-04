@@ -15,7 +15,7 @@ class MenuController extends ApiController
 {
   public function index(Site $site, Module $module, MenuServer $menuServer)
   {
-    $menus = $menuServer->getUserMenu($site, $module, auth()->user());
+    $menus = $menuServer->getByUser($site, $module, auth()->user());
     return $this->success('用户菜单', $menus);
   }
 }

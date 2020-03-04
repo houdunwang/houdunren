@@ -25,7 +25,7 @@ class UserServer
   public function isRole(Site $site, User $user, array $role = [])
   {
     $role = $role ? $role : ['admin', 'operator'];
-    return $user->site()->wherePivotIn('role', $role)
+    return $user && $user->site()->wherePivotIn('role', $role)
       ->where('site_id', $site['id'])->first() ? true : false;
   }
 }
