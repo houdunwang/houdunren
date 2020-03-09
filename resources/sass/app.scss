@@ -1,8 +1,30 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
-
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+a {
+  text-decoration: none !important;
+}
+
+.module {
+  height: 100vh;
+  .navbar {
+    .avatar {
+      width: 20px;
+    }
+  }
+  .menus {
+    .list-group {
+      strong {
+        &.list-group-item {
+          border-left: solid 3px #f15a24 !important;
+          background: #fafafa;
+        }
+      }
+      .list-group-item {
+        word-break: keep-all;
+      }
+    }
+  }
+}

@@ -1,85 +1,90 @@
+@inject('menuServer', 'App\Services\MenuServer')
+@inject('moduleServer', 'App\Services\ModuleServer')
 <!doctype html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <title>Hello, world!</title>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>{{$moduleServer->getByUrl()['title']}}</title>
+  <link rel="stylesheet" href="{{mix('css/app.css')}}">
+  @stack('css')
 </head>
 
-<body class="d-flex flex-column small">
-  <nav class="navbar navbar-expand-sm navbar-light">
+<body class="d-flex flex-column small module bg-light">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow">
     <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
       aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
+        <li class="nav-item pr-2">
+          <strong class="nav-link pl-1" href="#">
+            <i class="fa fa-diamond" aria-hidden="true"></i>
+            {{ module()['title'] }}
+          </strong>
+        </li>
+        <li class="nav-item pr-2">
           <a href="/admin/site/index" class="nav-link" href="#">
             <i class="fa fa-sitemap" aria-hidden="true"></i>
             站点列表
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item pr-2">
           <a href="/admin/site/{{site()['id']}}/module" class="nav-link" href="#">
-            <i class="fa fa-apple" aria-hidden="true"></i>
+            <i class="fa fa-life-ring" aria-hidden="true"></i>
             所有应用
+          </a>
+        </li>
+        <li class="nav-item pr-2">
+          <a href="/admin/site/{{site()['id']}}/module" class="nav-link" href="#" target="_blank">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            会员中心
+          </a>
+        </li>
+        <li class="nav-item pr-2">
+          <a href="/admin/site/{{site()['id']}}/module" class="nav-link" href="#" target="_blank">
+            <i class="fa fa-home" aria-hidden="true"></i>
+            网站首页
           </a>
         </li>
       </ul>
       <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-user"></i>
-            {{ auth()->user()['name'] }}
+        <li class="nav-item">
+          <a href="" class="text-secondary d-flex align-items-center">
+            <img src="{{auth()->user()->avatar}}" class="rounded-circle avatar mr-1">
+            {{ auth()->user()->name }}
           </a>
-          <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
-            <a class="dropdown-item small" href="#" @click.prevent="logout">退出登录</a>
-          </div>
         </li>
       </ul>
     </div>
   </nav>
-
-  <div class="d-flex hd flex-fill flex-column flex-md-row">
-    <div class="border-right border-top menu shadow-sm">
-      <ul class="list-group list-group-flush">
-        <a href="" class="list-group-item list-group-item-warning">在线教程</a>
-        <a href="" class="list-group-item list-group-item-light">在线教程</a>
-        <a href="" class="list-group-item text-secondary">在线教程好学习</a>
-        <a href="" class="list-group-item text-secondary">在线教程</a>
-        <a href="" class="list-group-item text-secondary">在线教程</a>
+  <div class="d-flex flex-fill flex-column flex-md-row">
+    <div class="menus border-right border-top-0 shadow bg-white">
+      @foreach ($menuServer
+      ->getByUser(site(),module(),auth()->user())['menu']['admin'] as $menu)
+      <ul class="list-group list-group-flush text-left">
+        <strong class="list-group-item list-group-item-light d-flex align-items-center text-dark justify-content-start">
+          <i class="fa fa-bars {{ $menu['group']['icon']??'fa-bars' }} mr-1" aria-hidden="true"></i>
+          {{ $menu['group']['title'] }}
+        </strong>
+        @foreach ($menu['items'] as $item)
+        <a href="{{ $item['to'] }}" class="list-group-item list-group-item-action">
+          {{$item['title']}}
+        </a>
+        @endforeach
       </ul>
+      @endforeach
     </div>
-    <div class="flex-fill ml-2">
-      <div class="card rounded-0">
-        <div class="card-body rounded-0">
-          @yield('content')
-        </div>
-      </div>
+    <div class="flex-fill ml-md-3 pb-5 pt-3 shadow bg-light p-3 border-left">
+      @yield('content')
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-  </script>
+  @stack('scripts')
   <style>
-    body {
-      height: 100vh;
-    }
 
-    .hd .menu a {
-      text-decoration: none;
-    }
   </style>
 </body>
 

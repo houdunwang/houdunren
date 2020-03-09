@@ -25,17 +25,13 @@
                 class="btn btn-outline-success"
                 v-if="!module.model"
                 @click.prevent="install(module)"
-              >
-                安装
-              </button>
+              >安装</button>
               <button
                 type="button"
                 class="btn btn-outline-primary"
                 v-if="module.model"
                 @click.prevent="uninstall(module)"
-              >
-                卸载
-              </button>
+              >卸载</button>
             </div>
           </div>
           <hr />
@@ -58,14 +54,14 @@ export default {
   },
   methods: {
     async install(module) {
-      await this.axios.post(`system/module`, { name: module.name })
+      await this.axios.post(`system/module`, { name: module.config.name })
       this.$message.success('安装成功')
       module.model = true
     },
     async uninstall(module) {
       this.$confirm(`确定卸载模块吗`, { type: 'warning' })
         .then(async () => {
-          await this.axios.delete(`/system/module/${module.name}`)
+          await this.axios.delete(`/system/module/${module.config.name}`)
           this.$message.success('卸载成功')
           module.model = false
         })

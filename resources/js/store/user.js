@@ -11,7 +11,7 @@ export default {
   },
   actions: {
     async get({ state, commit }) {
-      let response = await window.axios.get('user/get')
+      let response = await window.axios.get('member/user')
       commit('set', response.data.data)
       return response
     },

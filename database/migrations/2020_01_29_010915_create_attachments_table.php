@@ -6,31 +6,31 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAttachmentsTable extends Migration
 {
-    /**
-     * 上传文件
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('attachments', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
-            $table->string('filename')->comment('原文件名');
-            $table->string('path')->comment('文件地址');
-            $table->unsignedBigInteger('user_id')->nullable()->comment('用户编号');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
-    }
+  /**
+   * 上传文件
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::create('attachments', function (Blueprint $table) {
+      $table->bigIncrements('id');
+      $table->string('name')->comment('原文件名');
+      $table->string('path')->comment('文件地址');
+      table_foreign($table, 'sites', 'site_id');
+      table_foreign($table, 'users', 'user_id');
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('attachments');
-    }
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('attachments');
+  }
 }

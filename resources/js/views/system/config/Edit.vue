@@ -16,10 +16,11 @@
           <el-form-item label="后台标志">
             <el-upload
               class="avatar-uploader"
-              action="/api/system/upload"
+              action="/system/upload"
               accept="image/jpeg, image/png"
+              :on-success="upload"
+              :on-error="uploadError"
               :show-file-list="false"
-              :http-request="upload"
             >
               <img v-if="setting.base.logo.value" :src="setting.base.logo.value" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -53,10 +54,11 @@ export default {
   methods: {
     ...mapActions('systemConfig', { getConfig: 'get' }),
     //标志上传
-    upload(param) {
-      systemUpload(param.file).then(response => {
-        this.$set(this.setting.base.logo, 'value', response.data)
-      })
+    upload(response) {
+      this.$set(this.setting.base.logo, 'value', response.path)
+    },
+    uploadError() {
+      this.$message.error('文件过大或类型不匹配')
     },
     async submit() {
       await this.axios.post('system/config', { data: this.setting })

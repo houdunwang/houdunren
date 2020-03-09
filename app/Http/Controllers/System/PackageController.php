@@ -11,7 +11,7 @@ class PackageController extends ApiController
 {
   public function __construct()
   {
-    $this->middleware('systemAuth');
+    $this->middleware('system');
     $this->authorizeResource(Package::class, 'package');
   }
 

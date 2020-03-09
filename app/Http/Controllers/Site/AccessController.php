@@ -4,14 +4,12 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\ApiController;
 use App\Models\Site;
-use App\Servers\AccessServer;
-use App\Servers\MenuServer;
-use App\Servers\ModuleServer;
+use App\Services\AccessServer;
+use App\Services\ModuleServer;
 use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Permission;
 
 /**
  * 站长权限设置
@@ -22,7 +20,7 @@ class AccessController extends ApiController
 {
   public function __construct()
   {
-    $this->middleware('siteAuth:admin');
+    $this->middleware('site:admin');
     $this->authorizeResource(Site::class, 'site');
   }
 

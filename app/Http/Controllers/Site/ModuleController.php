@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\ApiController;
 use App\Models\Site;
-use App\Servers\ModuleServer;
+use App\Services\ModuleServer;
 
 class ModuleController extends ApiController
 {
   public function __construct()
   {
-    $this->middleware('siteAuth:admin,operator');
+    $this->middleware('site:admin,operator');
   }
 
   /**
@@ -20,7 +20,7 @@ class ModuleController extends ApiController
    *
    * @return void
    */
-  public function siteAllModule(Site $site, ModuleServer $moduleServer)
+  public function site(Site $site, ModuleServer $moduleServer)
   {
     $modules = $moduleServer->getSiteModule($site);
     return $this->success('站点所有模块', $modules);
@@ -33,7 +33,7 @@ class ModuleController extends ApiController
    *
    * @return mixed
    */
-  public function getByUser(Site $site, ModuleServer $moduleServer)
+  public function user(Site $site, ModuleServer $moduleServer)
   {
     $modules = $moduleServer->getModuleByUser($site, auth()->user());
     return $this->success('当前用户可使用模块列表', $modules);

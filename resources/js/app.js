@@ -9,6 +9,7 @@ import './plugins/axios'
 import './plugins/element.js'
 import './services/filter'
 import './assets/css/common.scss'
+import 'animate.css'
 const app = new Vue({
   router,
   store,

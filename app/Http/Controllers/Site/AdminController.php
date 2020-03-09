@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\ApiController;
 use App\Http\Resources\UserResource;
 use App\Models\Site;
-use App\Servers\SiteServer;
+use App\Services\SiteServer;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -18,7 +18,7 @@ class AdminController extends ApiController
 {
   public function __construct()
   {
-    $this->middleware('siteAuth:admin');
+    $this->middleware('site:admin');
   }
 
   //根据关键词搜索用户

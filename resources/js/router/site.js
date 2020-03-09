@@ -15,8 +15,7 @@ export default {
   component: Admin,
   async beforeEnter(to, from, next) {
     try {
-      await store.dispatch('user/get')
-      await store.dispatch('systemConfig/get')
+      await Promise.all([store.dispatch('user/get'), store.dispatch('systemConfig/get')])
       next()
     } catch (e) {
       store.dispatch('user/adminLogout')

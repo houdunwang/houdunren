@@ -2,9 +2,9 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\ModuleAuthMiddleware;
-use App\Http\Middleware\SiteAuthMiddleware;
-use App\Http\Middleware\SystemAuthMiddleware;
+use App\Http\Middleware\ModuleMiddleware;
+use App\Http\Middleware\SiteMiddleware;
+use App\Http\Middleware\SystemMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -57,9 +57,9 @@ class Kernel extends HttpKernel
    * @var array
    */
   protected $routeMiddleware = [
-    'moduleAuth' => ModuleAuthMiddleware::class,
-    'siteAuth' => SiteAuthMiddleware::class,
-    'systemAuth' => SystemAuthMiddleware::class,
+    'module' => ModuleMiddleware::class,
+    'site' => SiteMiddleware::class,
+    'system' => SystemMiddleware::class,
     'auth' => \App\Http\Middleware\Authenticate::class,
     'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
     'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,

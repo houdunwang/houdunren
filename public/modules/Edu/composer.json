@@ -1,10 +1,10 @@
 {
-    "name": "test/edu",
+    "name": "nwidart/edu",
     "description": "",
     "authors": [
         {
-            "name": "houdunren.com",
-            "email": "user@houdunren.com"
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
         }
     ],
     "extra": {
@@ -21,8 +21,5 @@
         "psr-4": {
             "Modules\\Edu\\": ""
         }
-    },
-    "require-dev": {
-        "laravel/ui": "^1.2"
     }
 }

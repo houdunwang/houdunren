@@ -35,6 +35,14 @@ class User extends Authenticatable
   protected $appends = ['is_super_admin'];
 
   /**
+   * 用户头像
+   * @return string
+   */
+  public function getAvatarAttribute()
+  {
+    return $this->avatar ?? '/images/avatar.jpg';
+  }
+  /**
    * passport帐号登录
    * @param $username
    * @return mixed

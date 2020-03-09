@@ -18,8 +18,7 @@ export default {
   component: Admin,
   async beforeEnter(to, from, next) {
     try {
-      await store.dispatch('user/get')
-      await store.dispatch('systemConfig/get')
+      await Promise.all([store.dispatch('user/get'), store.dispatch('systemConfig/get')])
       if (!store.state.user.data.is_super_admin) router.push('/site/index')
     } catch (e) {
       store.dispatch('user/adminLogout')

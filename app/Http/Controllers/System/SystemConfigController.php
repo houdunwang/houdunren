@@ -13,7 +13,7 @@ class SystemConfigController extends ApiController
 {
   public function __construct()
   {
-    $this->middleware('systemAuth')->except(['show']);
+    $this->middleware('system')->except(['show']);
   }
 
   public function show(SystemConfig $config)
@@ -24,7 +24,7 @@ class SystemConfigController extends ApiController
 
   public function store(Request $request)
   {
-    $config = $request->input('data');
+    $config = $request->input();
     if (!empty($config)) {
       $model = SystemConfig::first();
       $model['config'] = $config;

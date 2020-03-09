@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\ApiController;
-use App\Servers\Access;
-use App\Servers\AccessServer;
+use App\Services\Access;
+use App\Services\AccessServer;
 
 /**
  * 更新缓存
@@ -15,13 +15,13 @@ class CacheController extends ApiController
 {
   public function __construct()
   {
-    $this->middleware('systemAuth');
+    $this->middleware('system');
   }
 
   /**
    * 更新缓存
    * @param Access $access
-   * 
+   *
    * @return mixed
    */
   public function update(AccessServer $accessServer)

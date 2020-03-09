@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class moduleCreate extends Command
 {
-  protected $signature = 'hd:module-create {name}';
+  protected $signature = 'hdcms:make {name}';
   protected $description = '创建模块';
   protected $name;
   protected $path;

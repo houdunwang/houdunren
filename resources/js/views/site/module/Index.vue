@@ -37,14 +37,14 @@ export default {
   },
   async created() {
     let response = await this.axios.get(`site/${this.$route.params.sid}/module/user`).then(r => r.data.data)
-
     this.$set(this, 'modules', response)
     this.loadMessage = response.length ? '' : '暂无可用模块'
   },
   methods: {
     moduleLink(module) {
       const name = module.config.name.toLowerCase()
-      return `/${name}/admin`
+
+      return `/${name}/admin?sid=${this.$route.params.sid}`
     }
   }
 }

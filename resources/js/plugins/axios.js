@@ -54,6 +54,7 @@ _axios.interceptors.response.use(
   },
   function(error) {
     loading.close()
+
     if (error && error.response) {
       let status = error.response.status
       switch (status) {

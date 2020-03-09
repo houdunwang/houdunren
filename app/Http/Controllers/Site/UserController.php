@@ -11,7 +11,7 @@ class UserController extends ApiController
 {
   public function __construct()
   {
-    $this->middleware('siteAuth:admin');
+    $this->middleware('site:admin');
   }
   public function index(Site $site)
   {

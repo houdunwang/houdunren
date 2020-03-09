@@ -10,13 +10,33 @@
 return [
   'admin' => [
     [
-      'group' => ['title' => '实战视频', 'icon' => ''],
+      'group' => ['title' => '实战视频', 'icon' => 'fa-life-ring'],
       'items' => [
-        ['title' => '课程列表', 'to' => '链接地址', 'permission' => 'video'],
-        ['title' => '发表课程', 'to' => '链接地址', 'permission' => 'create-video'],
-        ['title' => '系统课程', 'to' => '链接地址', 'permission' => 'system']
+        ['title' => '视频课程列表', 'to' => '/edu/admin/lesson', 'permission' => 'video'],
+        ['title' => '发表视频课程', 'to' => '/edu/admin/lesson/create', 'permission' => 'create-video'],
+        ['title' => '课程标签设置', 'to' => '/edu/admin/tag', 'permission' => 'tag'],
       ]
-    ]
+    ],
+    [
+      'group' => ['title' => '系统课程', 'icon' => 'fa-graduation-cap'],
+      'items' => [
+        ['title' => '系统课程列表', 'to' => '/edu/admin/system', 'permission' => 'system'],
+        ['title' => '发布系统课程', 'to' => '/edu/admin/system/create', 'permission' => 'create-system'],
+      ]
+    ],
+    [
+      'group' => ['title' => '订阅设置', 'icon' => 'fa-shopping-bag'],
+      'items' => [
+        ['title' => '会员周期定价', 'to' => '链接地址', 'permission' => 'member-price'],
+        ['title' => '支付定单管理', 'to' => '链接地址', 'permission' => 'order']
+      ]
+    ],
+    [
+      'group' => ['title' => '直播设置', 'icon' => 'fa-video-camera'],
+      'items' => [
+        ['title' => '直播推流配置', 'to' => '链接地址', 'permission' => 'aliyun']
+      ]
+    ],
   ],
   //会员中心
   'member' => [

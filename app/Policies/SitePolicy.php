@@ -3,11 +3,9 @@
 namespace App\Policies;
 
 use App\Models\Site;
-use App\Servers\Access;
-use App\Servers\UserServer;
+use App\Services\UserService;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 
 class SitePolicy
 {
@@ -27,7 +25,7 @@ class SitePolicy
 
   public function view(User $user, Site $site)
   {
-    return  app(UserServer::class)->isRole(site(), $user);
+    return  app(UserService::class)->isRole(site(), $user);
   }
 
   public function create(User $user)
@@ -37,12 +35,12 @@ class SitePolicy
 
   public function update(User $user, Site $site)
   {
-    return app(UserServer::class)->isRole(site(), $user, ['admin']);
+    return app(UserService::class)->isRole(site(), $user, ['admin']);
   }
 
   public function delete(User $user, Site $site)
   {
-    return app(UserServer::class)->isRole(site(), $user, ['admin']);
+    return app(UserService::class)->isRole(site(), $user, ['admin']);
   }
 
   public function restore(User $user, Site $site)

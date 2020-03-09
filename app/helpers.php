@@ -1,9 +1,10 @@
 <?php
 
 use App\Models\Site;
-use App\Servers\AccessServer;
-use App\Servers\SiteServer;
-use App\Servers\UserServer;
+use App\Services\AccessServer;
+use App\Services\ModuleServer;
+use App\Services\SiteServer;
+use App\Services\UserService;
 use App\User;
 
 /**
@@ -12,7 +13,7 @@ use App\User;
  */
 function isSuperAdmin(): bool
 {
-  return app(UserServer::class)->isSuperAdmin();
+  return app(UserService::class)->isSuperAdmin();
 }
 
 /**
@@ -24,7 +25,14 @@ function site($site = null): Site
 {
   return app(SiteServer::class)->site($site);
 }
-
+/**
+ * 根据访问网址获取模块
+ * @return \App\Models\Module
+ */
+function module()
+{
+  return app(ModuleServer::class)->getByUrl();
+}
 /**
  * 检测模块访问权限
  * @param string $permission 权限标识
@@ -33,4 +41,34 @@ function site($site = null): Site
 function access(string $permission, ?Site $site, ?User $user): bool
 {
   return app(AccessServer::class)->check($permission, $site, $user);
+}
+
+/**
+ * 表外键关联约束
+ * @param \Illuminate\Database\Schema\Blueprint $table 迁移对象
+ * @param string $tableName 关联表
+ * @param string $foreignKey 关联字段
+ */
+function table_foreign(\Illuminate\Database\Schema\Blueprint $table, string $tableName, string $foreignKey): void
+{
+  $table->unsignedBigInteger($foreignKey)->nullable();
+  $table->foreign($foreignKey)->references('id')->on($tableName)->onDelete('cascade');
+}
+
+/**
+ * 站点表关联
+ * @param \Illuminate\Database\Schema\Blueprint $table 迁移对象
+ */
+function table_foreign_site(\Illuminate\Database\Schema\Blueprint $table)
+{
+  return table_foreign($table, 'sites', 'site_id');
+}
+
+/**
+ * 用户表关联
+ * @param \Illuminate\Database\Schema\Blueprint $table 迁移对象
+ */
+function table_foreign_user(\Illuminate\Database\Schema\Blueprint $table)
+{
+  return table_foreign($table, 'users', 'user_id');
 }

@@ -5,10 +5,8 @@ namespace App\Http\Controllers\System;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\ModuleRequest;
 use App\Models\Module;
-use App\Models\Site;
-use App\Servers\ModuleServer;
+use App\Services\ModuleServer;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 /**
  * 模块管理
@@ -19,7 +17,7 @@ class ModuleController extends ApiController
 {
   public function __construct()
   {
-    $this->middleware('systemAuth');
+    $this->middleware('system');
     $this->authorizeResource(Module::class, 'module');
   }
 
@@ -43,8 +41,7 @@ class ModuleController extends ApiController
   public function install(ModuleRequest $moduleRequest, Module $module, ModuleServer $moduleServer)
   {
     $info = $moduleServer->getModuleInfo($moduleRequest->name);
-    $module->fill($info['package'])->save();
-
+    $module->fill($info['config'])->save();
     return $this->success('模块安装成功');
   }
 

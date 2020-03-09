@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Module;
-use App\Servers\ModuleServer;
+use App\Services\ModuleServer;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**

@@ -11,6 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Module extends Model
 {
-    protected $fillable = ['title', 'name', 'version'];
-    protected $casts = ['subscribe' => 'boolean'];
+  protected $fillable = ['title', 'name', 'version'];
+  protected $casts = ['subscribe' => 'boolean'];
 }

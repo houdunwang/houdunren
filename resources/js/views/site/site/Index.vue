@@ -2,7 +2,8 @@
   <transition name="slide">
     <div>
       <router-link :to="{ name: 'site.add' }" class="btn btn-info mb-3">
-        <i class="fa fa-plus"></i> 添加网站
+        <i class="fa fa-plus"></i>
+        添加网站
       </router-link>
       <div class="card mb-3 shadow-sm" v-for="site in data" :key="site.id">
         <div class="card-header small">
@@ -20,7 +21,8 @@
                 :to="{ name: 'site.module', params: { sid: site.id } }"
                 class="text-secondary font-weight-bold"
               >
-                <i class="fa fa-cog"></i> 应用扩展
+                <i class="fa fa-cog"></i>
+                应用扩展
               </router-link>
             </div>
           </div>
@@ -47,39 +49,68 @@
 
             <div class="small">
               <a href class="text-muted mr-2" @click.prevent="updateSiteCache(site)">
-                <i class="fa fa-life-ring"></i> 更新缓存
+                <i class="fa fa-life-ring"></i>
+                更新缓存
               </a>
               <router-link
                 v-if="checkAdmin(site)"
                 class="text-muted mr-2"
-                :to="{ name: 'site.config', params: { sid: site.id } }"
+                :to="{
+                  name: 'site.config',
+                  params: {
+                    sid: site.id
+                  }
+                }"
               >
-                <i class="fa fa-life-ring"></i> 网站配置
+                <i class="fa fa-life-ring"></i>
+                网站配置
               </router-link>
-              <a v-if="checkAdmin(site)" href class="text-muted mr-2"> <i class="fa fa-comment-o"></i> 微信公众号 </a>
+              <a v-if="checkAdmin(site)" href class="text-muted mr-2">
+                <i class="fa fa-comment-o"></i>
+                微信公众号
+              </a>
               <router-link
                 v-if="checkAdmin"
                 class="text-muted mr-2"
-                :to="{ name: 'site.user', params: { sid: site.id } }"
+                :to="{
+                  name: 'site.user',
+                  params: {
+                    sid: site.id
+                  }
+                }"
               >
-                <i class="fa fa-user-o"></i> 用户列表
+                <i class="fa fa-user-o"></i>
+                用户列表
               </router-link>
               <router-link
                 v-if="checkAdmin(site)"
-                :to="{ name: 'site.admin', params: { sid: site.id } }"
+                :to="{
+                  name: 'site.admin',
+                  params: {
+                    sid: site.id
+                  }
+                }"
                 class="text-muted mr-2"
               >
-                <i class="fa fa-user-circle-o"></i> 操作员设置
+                <i class="fa fa-user-circle-o"></i>
+                操作员设置
               </router-link>
               <router-link
                 v-if="checkAdmin(site)"
-                :to="{ name: 'site.edit', params: { sid: site.id } }"
+                :to="{
+                  name: 'site.edit',
+                  params: {
+                    sid: site.id
+                  }
+                }"
                 class="text-muted mr-2"
               >
-                <i class="fa fa-pencil-square-o"></i> 编辑
+                <i class="fa fa-pencil-square-o"></i>
+                编辑
               </router-link>
               <a v-if="checkAdmin(site)" href @click.prevent="delSite(site)" class="text-muted">
-                <i class="fa fa-trash"></i> 删除
+                <i class="fa fa-trash"></i>
+                删除
               </a>
             </div>
           </div>
@@ -99,8 +130,6 @@ export default {
   },
   async created() {
     let response = await this.axios.get('site/site').then(r => r.data.data)
-    console.log(response)
-
     this.$set(this, 'data', response)
   },
   computed: {
