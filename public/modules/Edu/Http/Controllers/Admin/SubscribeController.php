@@ -2,78 +2,41 @@
 
 namespace Modules\Edu\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\ApiController;
+use Modules\Edu\Entities\Subscribe;
+use Modules\Edu\Http\Requests\SubscribeRequest;
+use Modules\Edu\Services\SubscribeService;
 
-class SubscribeController extends Controller
+class SubscribeController extends ApiController
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-    public function index()
-    {
-        return view('edu::index');
-    }
+  public function __construct()
+  {
+  }
+  public function index(SubscribeService $subscribeService)
+  {
+    return $this->json($subscribeService->get());
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('edu::create');
-    }
+  public function store(SubscribeRequest $request, Subscribe $subscribe)
+  {
+    $subscribe->fill($request->all())->save();
+    return $this->success('添加成功');
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  public function edit(Subscribe $subscribe)
+  {
+    return $this->json($subscribe);
+  }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('edu::show');
-    }
+  public function update(SubscribeRequest $request, Subscribe $subscribe)
+  {
+    $subscribe->fill($request->all())->save();
+    return $this->success('更新成功');
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return view('edu::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+  public function destroy(Subscribe $subscribe)
+  {
+    $subscribe->delete();
+    return $this->success('删除成功');
+  }
 }

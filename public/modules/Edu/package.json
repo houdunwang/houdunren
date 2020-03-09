@@ -10,7 +10,6 @@
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
-    "laravel-mix-merge-manifest": "^0.1.2",
     "axios": "^0.19",
     "bootstrap": "^4.0.0",
     "browser-sync": "^2.26.7",
@@ -18,6 +17,7 @@
     "cross-env": "^7.0",
     "jquery": "^3.2",
     "laravel-mix": "^5.0.1",
+    "laravel-mix-merge-manifest": "^0.1.2",
     "lodash": "^4.17.13",
     "popper.js": "^1.12",
     "resolve-url-loader": "^2.3.1",

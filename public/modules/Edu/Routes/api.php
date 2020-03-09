@@ -4,4 +4,5 @@ Route::group(['middleware' => ['auth:api', 'module'], 'namespace' => 'Admin', 'p
   Route::post('lesson/search', 'LessonController@search');
   Route::resource('tag', 'TagController')->only(['index', 'store', 'update', 'destroy']);
   Route::resource('system', 'SystemController')->except(['show', 'create']);
+  Route::resource('subscribe', 'SubscribeController')->except(['show', 'create']);
 });

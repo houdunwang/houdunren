@@ -48,6 +48,7 @@ function access(string $permission, ?Site $site, ?User $user): bool
  * @param \Illuminate\Database\Schema\Blueprint $table 迁移对象
  * @param string $tableName 关联表
  * @param string $foreignKey 关联字段
+ * @return void
  */
 function table_foreign(\Illuminate\Database\Schema\Blueprint $table, string $tableName, string $foreignKey): void
 {
@@ -58,17 +59,21 @@ function table_foreign(\Illuminate\Database\Schema\Blueprint $table, string $tab
 /**
  * 站点表关联
  * @param \Illuminate\Database\Schema\Blueprint $table 迁移对象
+ * @return void
  */
 function table_foreign_site(\Illuminate\Database\Schema\Blueprint $table)
 {
-  return table_foreign($table, 'sites', 'site_id');
+  $table->unsignedBigInteger('site_id');
+  $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
 }
 
 /**
  * 用户表关联
  * @param \Illuminate\Database\Schema\Blueprint $table 迁移对象
+ * @return void
  */
 function table_foreign_user(\Illuminate\Database\Schema\Blueprint $table)
 {
-  return table_foreign($table, 'users', 'user_id');
+  $table->unsignedBigInteger('user_id');
+  $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 }

@@ -27,8 +27,8 @@ return [
     [
       'group' => ['title' => '订阅设置', 'icon' => 'fa-shopping-bag'],
       'items' => [
-        ['title' => '会员周期定价', 'to' => '链接地址', 'permission' => 'member-price'],
-        ['title' => '支付定单管理', 'to' => '链接地址', 'permission' => 'order']
+        ['title' => '会员周期定价', 'to' => '/edu/admin/subscribe', 'permission' => 'subscribe'],
+        ['title' => '订阅定单管理', 'to' => '链接地址', 'permission' => 'order']
       ]
     ],
     [

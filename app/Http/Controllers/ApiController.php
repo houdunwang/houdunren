@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 abstract class ApiController extends Controller
 {
   /**
+   * 直播响应JSON数据
+   * @param array $data
+   * @param int $code
+   * @return \Illuminate\Http\JsonResponse
+   */
+  protected function json($data = [], int $code = 200)
+  {
+    return response()->json($data, $code);
+  }
+  /**
    * 成功响应
    * @param string $message
    * @param array $data

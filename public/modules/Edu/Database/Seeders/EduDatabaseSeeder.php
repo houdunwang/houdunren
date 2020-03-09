@@ -17,6 +17,7 @@ class EduDatabaseSeeder extends Seeder
     Model::unguard();
     $this->call(LessonSeederTableSeeder::class);
     $this->call(SystemSeederTableSeeder::class);
+    $this->call(SubscribeSeederTableSeeder::class);
     // $this->call("OthersTableSeeder");
   }
 }
