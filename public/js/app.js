@@ -6763,6 +6763,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -52549,13 +52559,7 @@ var render = function() {
                             staticClass: "mr-1",
                             attrs: { type: "info", size: "mini" }
                           },
-                          [
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(m.config.title) +
-                                "\n            "
-                            )
-                          ]
+                          [_vm._v(_vm._s(m.config.title))]
                         )
                       })
                     }
@@ -52577,13 +52581,7 @@ var render = function() {
                             staticClass: "mr-1",
                             attrs: { size: "mini", type: "info" }
                           },
-                          [
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(g.name) +
-                                "\n            "
-                            )
-                          ]
+                          [_vm._v(_vm._s(g.name))]
                         )
                       })
                     }

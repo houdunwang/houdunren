@@ -10,11 +10,17 @@
 return [
   'admin' => [
     [
+      'group' => ['title' => '基本设置', 'icon' => ''],
+      'items' => [
+        ['title' => '内容标签设置', 'to' => '/edu/admin/tag', 'permission' => 'tag'],
+        ['title' => '直播推流配置', 'to' => '链接地址', 'permission' => 'aliyun']
+      ]
+    ],
+    [
       'group' => ['title' => '实战视频', 'icon' => 'fa-life-ring'],
       'items' => [
         ['title' => '视频课程列表', 'to' => '/edu/admin/lesson', 'permission' => 'video'],
         ['title' => '发表视频课程', 'to' => '/edu/admin/lesson/create', 'permission' => 'create-video'],
-        ['title' => '课程标签设置', 'to' => '/edu/admin/tag', 'permission' => 'tag'],
       ]
     ],
     [
@@ -32,11 +38,12 @@ return [
       ]
     ],
     [
-      'group' => ['title' => '直播设置', 'icon' => 'fa-video-camera'],
+      'group' => ['title' => '话题管理', 'icon' => 'fa-video-camera'],
       'items' => [
-        ['title' => '直播推流配置', 'to' => '链接地址', 'permission' => 'aliyun']
+        ['title' => '话题分类管理', 'to' => '链接地址', 'permission' => 'topic'],
+        ['title' => '用户贴子列表', 'to' => '链接地址', 'permission' => 'topic']
       ]
-    ],
+    ]
   ],
   //会员中心
   'member' => [

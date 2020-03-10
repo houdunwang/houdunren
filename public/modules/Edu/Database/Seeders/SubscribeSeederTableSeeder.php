@@ -21,7 +21,7 @@ class SubscribeSeederTableSeeder extends Seeder
       ['site_id' => 1, 'title' => '两年付', 'ad' => '成为技术大牛', 'icon' => 'fa fa-empire', 'month' => '24', 'price' => '1210'],
     ];
     collect($data)->map(function ($s) {
-      Subscribe::create($s);
+      Subscribe::updateOrCreate($s, $s);
     });
   }
 }

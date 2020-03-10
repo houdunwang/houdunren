@@ -18,6 +18,7 @@ class EduDatabaseSeeder extends Seeder
     $this->call(LessonSeederTableSeeder::class);
     $this->call(SystemSeederTableSeeder::class);
     $this->call(SubscribeSeederTableSeeder::class);
+    $this->call(TagSeederTableSeeder::class);
     // $this->call("OthersTableSeeder");
   }
 }

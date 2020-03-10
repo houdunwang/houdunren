@@ -1,9 +1,4 @@
 <?php
-//后台登录
-Route::group(['namespace' => 'System', 'prefix' => 'system'], function () {
-  Route::post('login', 'LoginController@login');
-});
-
 //站点
 Route::group(['middleware' => ['auth:api'], 'namespace' => 'Site', 'prefix' => 'site'], function () {
   Route::resource('site', 'SiteController')->except(['edit', 'create']);

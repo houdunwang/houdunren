@@ -2,7 +2,7 @@ import Admin from '@/views/admin/Admin'
 import Lesson from '@/views/admin/lesson/Index'
 import LessonCreate from '@/views/admin/lesson/Create'
 import EditCreate from '@/views/admin/lesson/Edit'
-import TagIndex from '@/views/admin/tag/Index'
+import Tag from '@/views/admin/tag/Index'
 import System from '@/views/admin/system/Index'
 import SystemCreate from '@/views/admin/system/Create'
 import SystemEdit from '@/views/admin/system/Edit'
@@ -18,7 +18,7 @@ export default {
     { name: 'admin.lesson', path: 'lesson', component: Lesson, alias: '/edu/admin' },
     { name: 'admin.lesson.create', path: 'lesson/create', component: LessonCreate },
     { name: 'admin.lesson.edit', path: 'lesson/:id/edit', component: EditCreate },
-    { name: 'admin.tag', path: 'tag', component: TagIndex },
+    { name: 'admin.tag', path: 'tag', component: Tag },
     { name: 'admin.system', path: 'system', component: System },
     { name: 'admin.system.create', path: 'system/create', component: SystemCreate },
     { name: 'admin.system.edit', path: 'system/:id/edit', component: SystemEdit },

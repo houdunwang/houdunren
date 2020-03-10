@@ -14,35 +14,24 @@ use Modules\Edu\Services\TagService;
  */
 class TagController extends ApiController
 {
-  /**
-   * 获取所有标签
-   * @return void
-   */
-  public function index(Request $request)
+  public function __construct()
   {
-    $group = $request->query('group');
-    $tags = Tag::When($group, function ($query, $group) {
-      return $query->where('group', $group);
-    })->get();
-
-    return $this->success('', $tags);
   }
 
-  /**
-   * 按组名获取
-   * @param mixed $name
-   *
-   * @return void
-   */
-  public function byName($name)
+  public function index(TagService $tagService)
   {
-    return $this->success('', Tag::where('group', $name)->get());
+    return $this->json($tagService->get());
   }
 
   public function store(TagRequest $request, TagService $tagService)
   {
     $tag = $tagService->create($request->all());
     return $this->success('', $tag);
+  }
+
+  public function edit(Tag $tag)
+  {
+    return $this->json($tag);
   }
 
   public function update(TagRequest $request, Tag $tag, TagService $tagService)

@@ -4,19 +4,27 @@
       <div class="card-header">套餐列表</div>
       <div class="card-body">
         <el-table :data="packages" stripe empty-text="加载中...">
-          <el-table-column prop="name" label="名称" width="100"> </el-table-column>
+          <el-table-column prop="name" label="名称" width="100"></el-table-column>
           <el-table-column label="可用模块">
             <template slot-scope="scope">
-              <el-tag type="info" size="mini" v-for="m in scope.row.modules" :key="m.id" class="mr-1">
-                {{ m.config.title }}
-              </el-tag>
+              <el-tag
+                type="info"
+                size="mini"
+                v-for="m in scope.row.modules"
+                :key="m.id"
+                class="mr-1"
+              >{{ m.config.title }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column label="用户组">
             <template slot-scope="scope">
-              <el-tag size="mini" type="info" v-for="g in scope.row.group" :key="g.id" class="mr-1">
-                {{ g.name }}
-              </el-tag>
+              <el-tag
+                size="mini"
+                type="info"
+                v-for="g in scope.row.group"
+                :key="g.id"
+                class="mr-1"
+              >{{ g.name }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column label="系统套餐">
@@ -24,11 +32,13 @@
               <i class="el-icon-success text-success" v-if="scope.row.system"></i>
             </template>
           </el-table-column>
-          <el-table-column label="" width="150">
+          <el-table-column label width="150">
             <template slot-scope="scope">
               <el-button-group>
                 <el-button size="mini">
-                  <router-link :to="{ name: 'system.package.edit', params: { id: scope.row.id } }">编辑</router-link>
+                  <router-link
+                    :to="{ name: 'system.package.edit', params: { id: scope.row.id } }"
+                  >编辑</router-link>
                 </el-button>
                 <el-button size="mini" @click="del(scope.row)">删除</el-button>
               </el-button-group>

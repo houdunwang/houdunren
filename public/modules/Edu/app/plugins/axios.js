@@ -5,7 +5,7 @@ import axios from 'axios'
 import loading from '../services/loading'
 import store from '@/store'
 import httpStatus from '@/services/httpStatus'
-import { Message } from 'element-ui'
+import { Message, MessageBox } from 'element-ui'
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
@@ -54,28 +54,22 @@ _axios.interceptors.response.use(
   },
   function(error) {
     loading.close()
-    console.dir(error.response)
-    if (error && error.response) {
-      let status = error.response.status
-      switch (status) {
-        case 401:
-          //未登录用户跳转到登录页面
-          location.href = '/admin/login'
-          break
-        case 422:
-          //表单验证错误，错误消息记录到VUEX中
-          store.commit('error/set', error.response.data.errors)
-          break
-        default:
-          //其它错误消息直接显示错误信息
-          let message = error.response.data.message
-          message = message ? message : httpStatus(error.response.status)
-          Message.error(message)
-      }
-      return Promise.reject(error)
+    let status = error.response.status
+    switch (status) {
+      case 401:
+        //未登录用户跳转到登录页面
+        location.href = '/admin/login'
+        break
+      case 422:
+        //表单验证错误，错误消息记录到VUEX中
+        store.commit('error/set', error.response.data.errors)
+        break
+      default:
+        //其它错误消息直接显示错误信息
+        let message = error.response.data.message
+        message = message ? message : httpStatus(error.response.status)
+        MessageBox.alert(message, '错误提示', { type: 'error', center: true })
     }
-    //未正确返回状态码的错误处理
-    Message.error('网络超时')
     return Promise.reject(error)
   }
 )
