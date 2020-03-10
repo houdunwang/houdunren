@@ -37,13 +37,6 @@ return [
         ['title' => '订阅定单管理', 'to' => '链接地址', 'permission' => 'order']
       ]
     ],
-    [
-      'group' => ['title' => '话题管理', 'icon' => 'fa-video-camera'],
-      'items' => [
-        ['title' => '话题分类管理', 'to' => '链接地址', 'permission' => 'topic'],
-        ['title' => '用户贴子列表', 'to' => '链接地址', 'permission' => 'topic']
-      ]
-    ]
   ],
   //会员中心
   'member' => [

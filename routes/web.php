@@ -27,3 +27,8 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Module', 'prefix' => 'modu
 Route::get('/admin{any}', function () {
   return view('admin');
 })->where('any', '.*');
+
+//系统后台管理
+Route::get('/member{any}', function () {
+  return view('member');
+})->where('any', '.*');
