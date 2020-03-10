@@ -38,9 +38,13 @@
             <el-input type="textarea" v-model="field.description"></el-input>
           </el-form-item>
           <el-form-item label="标签">
-            <el-checkbox v-for="t in tags" :key="t.id" :label="t.id" v-model="field.tags">{{t.name}}</el-checkbox>
+            <el-checkbox
+              v-for="tag in tags"
+              :key="tag.id"
+              :label="tag.id"
+              v-model="field.tags"
+            >{{tag.title}}</el-checkbox>
           </el-form-item>
-
           <el-form-item label="上架">
             <el-switch v-model="field.status"></el-switch>
           </el-form-item>
@@ -139,7 +143,7 @@ export default {
     }
   },
   async created() {
-    let response = await this.axios.get(`edu/admin/tag?group=lesson`).then(r => r.data)
+    let response = await this.axios.get(`edu/admin/tag`)
     this.$set(this, 'tags', response.data)
   },
   methods: {
