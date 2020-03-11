@@ -1,4 +1,5 @@
 //用户
+import token from '@/services/token'
 export default {
   namespaced: true,
   state: {
@@ -10,14 +11,16 @@ export default {
     }
   },
   actions: {
-    async get({ state, commit }) {
+    async get({ commit }) {
       let response = await window.axios.get('member/user')
-      commit('set', response.data.data)
+      commit('set', response.data)
       return response
-    },
-    adminLogout({ commit }) {
-      commit('set', {})
-      location.href = '/admin/login'
     }
+    // async systemLogin({ state, commit, dispatch }, form) {
+    //   let response = await window.axios.post('system/login', form)
+    //   token.set(response.data.token)
+    //   dispatch('get')
+    //   return response
+    // }
   }
 }

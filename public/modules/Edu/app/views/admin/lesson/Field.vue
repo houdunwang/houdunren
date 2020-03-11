@@ -2,16 +2,12 @@
   <div>
     <nav class="nav nav-tabs mb-2">
       <router-link class="nav-link" :to="{ name: 'admin.lesson' }">课程列表</router-link>
-      <router-link
-        class="nav-link"
-        :class="{ active: !field.id }"
-        :to="{ name: 'admin.lesson.create' }"
-      >发表课程</router-link>
-      <router-link
-        class="nav-link active"
-        v-show="field.id"
-        :to="{ name: 'admin.lesson.create' }"
-      >编辑课程</router-link>
+      <router-link class="nav-link" :class="{ active: !field.id }" :to="{ name: 'admin.lesson.create' }"
+        >发表课程</router-link
+      >
+      <router-link class="nav-link active" v-show="field.id" :to="{ name: 'admin.lesson.create' }"
+        >编辑课程</router-link
+      >
     </nav>
 
     <div class="alert alert-info">设置「售价」后免费观看数量才有必要设置</div>
@@ -19,42 +15,21 @@
       <div class="card">
         <div class="card-header">课程资料</div>
         <div class="card-body">
-          <el-form-item
-            label="课程名称"
-            prop="title"
-            :rules="[
-              { required: true, message: '请输入课程标题' },
-            ]"
-          >
+          <el-form-item label="课程名称" prop="title" :rules="[{ required: true, message: '请输入课程标题' }]">
             <el-input v-model="field.title"></el-input>
           </el-form-item>
-          <el-form-item
-            prop="description"
-            label="简单介绍"
-            :rules="[
-              { required: true, message: '请输入课程介绍' },
-            ]"
-          >
+          <el-form-item prop="description" label="简单介绍" :rules="[{ required: true, message: '请输入课程介绍' }]">
             <el-input type="textarea" v-model="field.description"></el-input>
           </el-form-item>
           <el-form-item label="标签">
-            <el-checkbox
-              v-for="tag in tags"
-              :key="tag.id"
-              :label="tag.id"
-              v-model="field.tags"
-            >{{tag.title}}</el-checkbox>
+            <el-checkbox v-for="tag in tags" :key="tag.id" :label="tag.id" v-model="field.tags">{{
+              tag.title
+            }}</el-checkbox>
           </el-form-item>
           <el-form-item label="上架">
             <el-switch v-model="field.status"></el-switch>
           </el-form-item>
-          <el-form-item
-            label="预览图"
-            prop="thumb"
-            :rules="[
-              { required: true, message: '请上传课程图片' },
-            ]"
-          >
+          <el-form-item label="预览图" prop="thumb" :rules="[{ required: true, message: '请上传课程图片' }]">
             <el-upload
               class="avatar-uploader"
               action="/system/upload"
@@ -88,7 +63,7 @@
     </el-form>
     <div class="card mt-3">
       <div class="card-header">视频编辑</div>
-      <div class="card-body" v-if="showVideoList">
+      <div class="card-body">
         <div class="card mt-2" v-for="(video, index) in field.videos" :key="index">
           <div class="card-body">
             <el-form :model="video" label-width="100px">
@@ -105,27 +80,16 @@
           </div>
           <div class="card-footer text-muted">
             <div class="btn-group" role="group" aria-label>
-              <button
-                type="button"
-                class="btn btn-outline-secondary btn-sm"
-                @click="delVideo(index)"
-              >删除</button>
-              <button
-                type="button"
-                class="btn btn-outline-secondary btn-sm"
-                @click="insertVideo(index)"
-              >插入视频</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" @click="delVideo(index)">删除</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" @click="insertVideo(index)">
+                插入视频
+              </button>
             </div>
           </div>
         </div>
       </div>
       <div class="card-footer">
         <button type="button" class="btn btn-secondary btn-sm" @click="addVideo">添加视频</button>
-        <button
-          type="button"
-          class="btn btn-secondary btn-sm"
-          @click="showVideoList = !showVideoList"
-        >隐藏视频列表</button>
       </div>
     </div>
     <button type="button" class="btn btn-primary mt-2" @click="onSubmit">保存提交</button>
@@ -138,8 +102,7 @@ export default {
   props: { field: Object, submit: Function },
   data() {
     return {
-      tags: [],
-      showVideoList: true
+      tags: []
     }
   },
   async created() {

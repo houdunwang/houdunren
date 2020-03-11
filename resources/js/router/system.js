@@ -1,7 +1,7 @@
 import store from '@/store'
 import router from '@/router'
 import Edit from '@/views/system/config/Edit'
-import Admin from '@/views/Admin'
+import Admin from '@/views/system/Admin'
 import Index from '@/views/system/home/Index'
 import ModuleIndex from '@/views/system/module/Index'
 import Package from '@/views/system/package/Index'
@@ -16,15 +16,6 @@ import UpdateSystemCache from '@/views/system/cache/Update'
 export default {
   path: '/admin/system',
   component: Admin,
-  async beforeEnter(to, from, next) {
-    try {
-      await Promise.all([store.dispatch('user/get'), store.dispatch('systemConfig/get')])
-      if (!store.state.user.data.is_super_admin) router.push('/site/index')
-    } catch (e) {
-      store.dispatch('user/adminLogout')
-    }
-    next()
-  },
   children: [
     { name: 'system', path: 'index', component: Index },
     { name: 'system.config', path: 'config', component: Edit },

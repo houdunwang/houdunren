@@ -21,6 +21,7 @@ class VerifyCsrfToken extends Middleware
   protected $except = [
     //
     '/system/upload',
-    '/module/upload'
+    '/module/upload',
+    '/common/upload'
   ];
 }

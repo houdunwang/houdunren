@@ -11,9 +11,12 @@
     "php": "^7.2",
     "fideloper/proxy": "^4.0",
     "fruitcake/laravel-cors": "^1.0",
+    "gregwar/captcha": "^1.1",
+    "intervention/image": "^2.5",
     "laravel/framework": "^6.2",
     "laravel/passport": "^8.4",
     "laravel/tinker": "^2.0",
+    "mews/captcha": "^3.0",
     "nwidart/laravel-modules": "^6.2",
     "spatie/laravel-permission": "^3.6"
   },

@@ -38,9 +38,9 @@ class User extends Authenticatable
    * 用户头像
    * @return string
    */
-  public function getAvatarAttribute()
+  public function getAvatarAttribute($value)
   {
-    return $this->avatar ?? '/images/avatar.jpg';
+    return $value ?? '/images/avatar.jpg';
   }
   /**
    * passport帐号登录

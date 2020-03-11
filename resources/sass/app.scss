@@ -2,7 +2,8 @@
 @import 'variables';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
+//会员中心
+@import 'member.scss';
 a {
   text-decoration: none !important;
 }

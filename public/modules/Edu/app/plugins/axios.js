@@ -54,22 +54,27 @@ _axios.interceptors.response.use(
   },
   function(error) {
     loading.close()
-    let status = error.response.status
-    switch (status) {
-      case 401:
-        //未登录用户跳转到登录页面
-        location.href = '/admin/login'
-        break
-      case 422:
-        //表单验证错误，错误消息记录到VUEX中
-        store.commit('error/set', error.response.data.errors)
-        break
-      default:
-        //其它错误消息直接显示错误信息
-        let message = error.response.data.message
-        message = message ? message : httpStatus(error.response.status)
-        MessageBox.alert(message, '错误提示', { type: 'error', center: true })
+    if (error && error.response) {
+      let status = error.response.status
+      switch (status) {
+        case 401:
+          //未登录用户跳转到登录页面
+          location.href = '/user/admin'
+          break
+        case 422:
+          //表单验证错误，错误消息记录到VUEX中
+          store.commit('error/set', error.response.data.errors)
+          break
+        default:
+          //其它错误消息直接显示错误信息
+          let message = error.response.data.message
+          message = message ? message : httpStatus(error.response.status)
+          MessageBox.alert(message, '错误提示', { type: 'error', center: true })
+      }
+      return Promise.reject(error)
     }
+    //未正确返回状态码的错误处理
+    Message.error('网络超时')
     return Promise.reject(error)
   }
 )

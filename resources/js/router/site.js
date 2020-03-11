@@ -1,5 +1,5 @@
 import store from '@/store'
-import Admin from '@/views/Admin'
+import Admin from '@/views/system/Admin'
 import Config from '@/views/site/config/Edit'
 import Add from '@/views/site/site/Add.vue'
 import Edit from '@/views/site/site/Edit.vue'
@@ -13,17 +13,9 @@ import AccessEdit from '@/views/site/access/Edit'
 export default {
   path: '/admin/site',
   component: Admin,
-  async beforeEnter(to, from, next) {
-    try {
-      await Promise.all([store.dispatch('user/get'), store.dispatch('systemConfig/get')])
-      next()
-    } catch (e) {
-      store.dispatch('user/adminLogout')
-    }
-  },
   children: [
     //站点管理
-    { name: 'site', path: 'index', component: Index },
+    { name: 'site', path: 'index', component: Index, alias: '/admin' },
     { name: 'site.add', path: 'add', component: Add },
     { name: 'site.edit', path: ':sid/edit', component: Edit },
     //站点配置

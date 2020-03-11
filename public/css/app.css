@@ -10882,6 +10882,25 @@ a.text-dark:focus {
   }
 }
 
+body.member {
+  background: #fefefe;
+}
+
+body.member .member-top {
+  border-top: solid 4px #f15a57;
+  background: #f7f8f9;
+}
+
+body.member .menu .icon img {
+  width: 200px;
+}
+
+@media screen and (max-width: 768px) {
+  body.member .menu .icon img {
+    width: 100%;
+  }
+}
+
 a {
   text-decoration: none !important;
 }

@@ -1,4 +1,9 @@
 <?php
+//公共
+Route::group(['prefix' => 'common', 'namespace' => 'Common'], function () {
+  Route::get('captcha', 'CaptchaController@make');
+});
+
 //站点
 Route::group(['middleware' => ['auth:api'], 'namespace' => 'Site', 'prefix' => 'site'], function () {
   Route::resource('site', 'SiteController')->except(['edit', 'create']);
@@ -26,10 +31,8 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'Site', 'prefix' => '
   Route::put('{site}/cache', 'CacheController@update');
 });
 
-//登录系统
-Route::post('admin/login', 'System\LoginController@login');
 //系统管理
-Route::group(['middleware' => ['auth:api'], 'namespace' => 'System', 'prefix' => 'system'], function () {
+Route::group(['namespace' => 'System', 'prefix' => 'system'], function () {
   //套餐管理
   Route::resource('package', 'PackageController')->except(['edit', 'create']);
   //系统配置
@@ -45,6 +48,7 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'System', 'prefix' =>
   Route::get('module/installed', 'ModuleController@installed');
 });
 
-Route::group(['middleware' => ['auth:api'], 'namespace' => 'Member', 'prefix' => 'member'], function () {
-  Route::get('user', 'UserController@me');
+Route::group(['middleware' => ['auth:api', 'module'], 'namespace' => 'Member', 'prefix' => 'member'], function () {
+  Route::get('user', 'UserController@show');
+  Route::put('user', 'UserController@update');
 });

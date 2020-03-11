@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Web\Admin;
+namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 /**
@@ -29,14 +30,13 @@ class LoginController extends Controller
    * 后台登录
    * @param Request $request
    */
-  public function login(Request $request)
+  public function login(Request $request, UserService $userService)
   {
-    $credentials = [];
-    $type = filter_var($request['username'], FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
-    $credentials['password'] = $request['password'];
-    $credentials[$type] = $request['username'];
-
-    if (auth()->attempt($credentials, $request->input('remember'))) {
+    $request->validate(
+      ['code' => 'required|captcha', 'username' => 'required', 'password' => 'required'],
+      ['code.required' => '验证码不能为空', 'code.captcha' => '验证码输入错误', 'username.required' => '帐号不能为空', 'password.required' => '密码不能为空']
+    );
+    if ($userService->login($request->all())) {
       return redirect('/admin');
     } else {
       return back()->withInput()->with('error', '帐号或密码错误');
@@ -50,6 +50,6 @@ class LoginController extends Controller
   public function logout()
   {
     auth()->logout();
-    return redirect('admin/login');
+    return redirect('member/login');
   }
 }

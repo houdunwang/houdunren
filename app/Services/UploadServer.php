@@ -9,7 +9,9 @@ use Illuminate\Http\UploadedFile;
 
 class UploadServer
 {
-
+  public function image(UploadedFile $file, int $user_id, int $site_id = null, $width = null, $height = null)
+  {
+  }
   /**
    * 本地文件上传
    * @param UploadedFile $file
