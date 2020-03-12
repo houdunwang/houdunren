@@ -3,11 +3,10 @@ import VueRouter from 'vue-router'
 import system from './system'
 import site from './site'
 import member from './member'
-import user from './user'
 //注册组件
 Vue.use(VueRouter)
 
-const routes = [site, system, member, user]
+const routes = [site, system, member]
 
 export default new VueRouter({
   routes,

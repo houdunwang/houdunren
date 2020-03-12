@@ -8,13 +8,15 @@
   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css
 ">
   <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{{mix('css/app.css')}}">
+
 </head>
 
-<body>
+<body class="animated fadeInDownBig system-login">
   <form action="{{route('system.login')}}" method="post"
     class="d-flex flex-column justify-content-center align-items-center">
     @csrf
-    <div class="card shadow">
+    <div class="card">
       <div class="card-header">
         登录后台
       </div>
@@ -50,29 +52,6 @@
       </div>
     </div>
   </form>
-  <style>
-    body {
-      background-image: url('/images/system-login-bg.jpg');
-      background-size: cover;
-      height: 100vh;
-    }
-
-    .d-flex {
-      height: 90vh
-    }
-
-    @media screen and (max-width:768px) {
-      .card {
-        width: 90%
-      }
-    }
-
-    @media screen and (min-width:768px) {
-      .card {
-        width: 500px;
-      }
-    }
-  </style>
 </body>
 
 </html>

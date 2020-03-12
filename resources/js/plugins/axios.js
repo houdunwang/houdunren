@@ -39,10 +39,10 @@ _axios.interceptors.request.use(
   function(config) {
     //显示加载动画
     loading.show()
-    let accessToken = token.get()
-    if (accessToken) {
-      // config.headers.Authorization = 'Bearer ' + accessToken
-    }
+    // let accessToken = token.get()
+    // if (accessToken) {
+    //   config.headers.Authorization = 'Bearer ' + accessToken
+    // }
     return config
   },
   function(error) {
@@ -65,7 +65,7 @@ _axios.interceptors.response.use(
       switch (status) {
         case 401:
           //未登录用户跳转到登录页面
-          // location.href = '/user/admin'
+          location.href = '/admin/login'
           return
           break
         case 422:

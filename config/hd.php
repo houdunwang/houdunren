@@ -71,11 +71,7 @@ return [
     'search' => [
       'algolia_id' => ['value' => '', 'title' => 'Application ID ', 'desc' => ''],
       'algolia_secret' => ['value' => '', 'title' => 'ALGOLIA_SECRET', 'desc' => ''],
-    ],
-    'maintain' => [
-      'close' => ['value' => 0, 'title' => '暂停访问', 'desc' => '网站维护时只有系统超级管理员可以访问'],
-      'message' => ['value' => '', 'title' => '提示信息', 'desc' => '网站临时关闭时提示给用户的友好信息'],
-    ],
+    ]
   ],
   //微信公众号
   'weChat' => [

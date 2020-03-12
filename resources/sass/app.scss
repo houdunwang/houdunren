@@ -2,8 +2,10 @@
 @import 'variables';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-//会员中心
+@import '~animate.css';
+//会员中j心
 @import 'member.scss';
+@import 'user.scss';
 a {
   text-decoration: none !important;
 }

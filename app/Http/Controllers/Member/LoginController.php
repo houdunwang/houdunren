@@ -37,7 +37,7 @@ class LoginController extends Controller
       ['code.required' => '验证码不能为空', 'code.captcha' => '验证码输入错误', 'username.required' => '帐号不能为空', 'password.required' => '密码不能为空']
     );
     if ($userService->login($request->all())) {
-      return redirect('/admin');
+      return redirect()->intended('/');
     } else {
       return back()->withInput()->with('error', '帐号或密码错误');
     }

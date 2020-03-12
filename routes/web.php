@@ -41,9 +41,4 @@ Route::get('/admin{any}', function () {
 //系统后台管理
 Route::get('/member{any}', function () {
   return view('member');
-})->where('any', '.*');
-
-//登录注册
-Route::get('/user{any}', function () {
-  return view('user');
-})->where('any', '.*');
+})->where('any', '.*')->middleware('module');

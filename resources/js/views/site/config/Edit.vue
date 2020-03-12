@@ -13,7 +13,8 @@
           role="tab"
           aria-controls="email"
           aria-selected="true"
-        >邮箱配置</a>
+          >邮箱配置</a
+        >
         <a
           class="nav-item nav-link"
           id="nav-profile-tab"
@@ -22,7 +23,8 @@
           role="tab"
           aria-controls="aliyun"
           aria-selected="false"
-        >阿里云</a>
+          >阿里云</a
+        >
         <a
           class="nav-item nav-link"
           id="nav-contact-tab"
@@ -31,7 +33,8 @@
           role="tab"
           aria-controls="alipay"
           aria-selected="false"
-        >支付宝</a>
+          >支付宝</a
+        >
         <a
           class="nav-item nav-link"
           id="nav-contact-tab"
@@ -40,7 +43,8 @@
           role="tab"
           aria-controls="upload"
           aria-selected="false"
-        >上传配置</a>
+          >上传配置</a
+        >
         <a
           class="nav-item nav-link"
           id="nav-contact-tab"
@@ -49,7 +53,8 @@
           role="tab"
           aria-controls="user"
           aria-selected="false"
-        >用户相关</a>
+          >用户相关</a
+        >
         <a
           class="nav-item nav-link"
           id="nav-contact-tab"
@@ -58,25 +63,12 @@
           role="tab"
           aria-controls="notification"
           aria-selected="false"
-        >通知设置</a>
-        <a
-          class="nav-item nav-link"
-          id="nav-contact-tab"
-          data-toggle="tab"
-          href="#maintain"
-          role="tab"
-          aria-controls="maintain"
-          aria-selected="false"
-        >临时维护</a>
+          >通知设置</a
+        >
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
-      <div
-        class="tab-pane fade show active"
-        id="email"
-        role="tabpanel"
-        aria-labelledby="nav-home-tab"
-      >
+      <div class="tab-pane fade show active" id="email" role="tabpanel" aria-labelledby="nav-home-tab">
         <email />
       </div>
       <div class="tab-pane fade" id="aliyun" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -91,16 +83,8 @@
       <div class="tab-pane fade" id="user" role="tabpanel" aria-labelledby="nav-contact-tab">
         <user />
       </div>
-      <div
-        class="tab-pane fade"
-        id="notification"
-        role="tabpanel"
-        aria-labelledby="nav-contact-tab"
-      >
+      <div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="nav-contact-tab">
         <notification />
-      </div>
-      <div class="tab-pane fade" id="maintain" role="tabpanel" aria-labelledby="nav-contact-tab">
-        <maintain />
       </div>
     </div>
 
@@ -111,7 +95,6 @@
 import AliPay from './layouts/AliPay'
 import AliYun from './layouts/AliYun'
 import Email from './layouts/Email'
-import Maintain from './layouts/Maintain'
 import Notification from './layouts/Notification'
 import Upload from './layouts/Upload'
 import User from './layouts/User'
@@ -133,7 +116,6 @@ export default {
     Email,
     AliPay,
     AliYun,
-    Maintain,
     Notification,
     Upload,
     User
