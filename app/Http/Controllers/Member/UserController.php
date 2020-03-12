@@ -16,6 +16,7 @@ class UserController extends ApiController
 {
   public function __construct()
   {
+    $this->middleware('front');
   }
 
   public function show()

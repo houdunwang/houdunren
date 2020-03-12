@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\SiteServer;
+use App\Services\SiteService;
 use App\Services\UserService;
 use Closure;
 use Illuminate\Support\Facades\Cache;
@@ -21,6 +21,7 @@ class ModuleMiddleware
     }
 
     if ($this->checkRole(site($sid), $access)) {
+      config(['site' => site()['config']]);
       return $next($request);
     }
 
@@ -55,6 +56,7 @@ class ModuleMiddleware
     ) {
       return true;
     }
+
     if ($access && access($access, $site, auth()->user())) {
       return true;
     }

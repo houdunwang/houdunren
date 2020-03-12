@@ -3,7 +3,7 @@
 use App\Models\Site;
 use App\Services\AccessServer;
 use App\Services\ModuleServer;
-use App\Services\SiteServer;
+use App\Services\SiteService;
 use App\Services\UserService;
 use App\User;
 
@@ -23,7 +23,7 @@ function isSuperAdmin(): bool
  */
 function site($site = null): Site
 {
-  return app(SiteServer::class)->site($site);
+  return app(SiteService::class)->site($site);
 }
 /**
  * 根据访问网址获取模块

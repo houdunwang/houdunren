@@ -21,13 +21,13 @@ class ConfigController extends ApiController
   public function show(Site $site)
   {
     $config = array_merge(config('hd.site'), $site['config'] ?? []);
-    return $this->success('', $config);
+    return $this->json($config);
   }
 
   public function update(Request $request, Site $site)
   {
-    $site['config'] = $request['data'];
+    $site['config'] = $request->all();
     $site->save();
-    return $this->success('配置成功更新', $site);
+    return $this->json($site);
   }
 }

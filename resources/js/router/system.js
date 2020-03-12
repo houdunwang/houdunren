@@ -1,9 +1,7 @@
-import store from '@/store'
-import router from '@/router'
+import Admin from '@/views/Admin'
 import Edit from '@/views/system/config/Edit'
-import Admin from '@/views/system/Admin'
 import Index from '@/views/system/home/Index'
-import ModuleIndex from '@/views/system/module/Index'
+import Module from '@/views/system/module/Index'
 import Package from '@/views/system/package/Index'
 import PackageAdd from '@/views/system/package/Add'
 import PackageEdit from '@/views/system/package/Edit'
@@ -14,16 +12,16 @@ import UpdateSystemCache from '@/views/system/cache/Update'
 
 //系统配置
 export default {
-  path: '/admin/system',
+  path: '/system',
   component: Admin,
   children: [
     { name: 'system', path: 'index', component: Index },
     { name: 'system.config', path: 'config', component: Edit },
-    { name: 'system.module', path: 'module/index', component: ModuleIndex },
-    { name: 'system.package', path: 'package/index', component: Package },
+    { name: 'system.module', path: 'module', component: Module },
+    { name: 'system.package', path: 'package', component: Package },
     { name: 'system.package.add', path: 'package/add', component: PackageAdd },
     { name: 'system.package.edit', path: 'package/edit/:id', component: PackageEdit },
-    { name: 'system.group', path: 'group/index', component: Group },
+    { name: 'system.group', path: 'group', component: Group },
     { name: 'system.group.add', path: 'group/add', component: GroupAdd },
     { name: 'system.group.edit', path: 'group/edit/:id', component: GroupEdit },
     { name: 'system.cache.update', path: 'cache/update', component: UpdateSystemCache }

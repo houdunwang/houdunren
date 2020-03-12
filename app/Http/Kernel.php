@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\FrontMiddleware;
 use App\Http\Middleware\ModuleMiddleware;
 use App\Http\Middleware\SiteMiddleware;
 use App\Http\Middleware\SystemMiddleware;
@@ -57,6 +58,7 @@ class Kernel extends HttpKernel
    * @var array
    */
   protected $routeMiddleware = [
+    'front' => FrontMiddleware::class,
     'module' => ModuleMiddleware::class,
     'site' => SiteMiddleware::class,
     'system' => SystemMiddleware::class,

@@ -100,4 +100,8 @@ export default {
   }
 }
 </script>
-<style></style>
+<style lang="scss" scoped>
+.eeeee {
+  background: url('../../../assets/images/abcdef.jpg');
+}
+</style>

@@ -16,13 +16,30 @@ class UserService
    */
   public function login(array $data)
   {
-    $credentials = [];
-    $type = filter_var($data['username'], FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
+    $credentials = $this->credentials($data['username']);
     $credentials['password'] = $data['password'];
-    $credentials[$type] = $data['username'];
-
     return auth()->attempt($credentials, $data['remember'] ?? false);
   }
+
+  /**
+   * 帐号类型
+   * @param string $username
+   *
+   * @return array
+   */
+  public function credentials(string $username)
+  {
+    $credentials = [];
+    if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
+      $credentials['email'] = $username;
+    } else if (preg_match('/^[a-z]+$/i', $username)) {
+      $credentials['name'] = $username;
+    } else {
+      $credentials['mobile'] = $username;
+    }
+    return $credentials;
+  }
+
   /**
    * 超级管理员检测
    * @return bool

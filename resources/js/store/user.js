@@ -1,5 +1,3 @@
-//用户
-import token from '@/services/token'
 export default {
   namespaced: true,
   state: {
@@ -11,16 +9,11 @@ export default {
     }
   },
   actions: {
-    async get({ commit }) {
-      let response = await window.axios.get('member/user')
+    async get({ state, commit }) {
+      let response = await window.axios.get(`admin/user`)
+
       commit('set', response.data)
-      return response
+      return response.data
     }
-    // async systemLogin({ state, commit, dispatch }, form) {
-    //   let response = await window.axios.post('system/login', form)
-    //   token.set(response.data.token)
-    //   dispatch('get')
-    //   return response
-    // }
   }
 }

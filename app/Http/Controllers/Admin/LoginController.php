@@ -7,14 +7,14 @@ use App\Services\UserService;
 use Illuminate\Http\Request;
 
 /**
- * 用记登录后台系统
+ * 用户相关
  * Class LoginController
  */
 class LoginController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('guest', ['only' => ['show', 'login'], 'except' => 'logout']);
+    // $this->middleware('guest', ['only' => ['show', 'login'], 'except' => 'logout']);
   }
 
   /**
@@ -23,6 +23,9 @@ class LoginController extends Controller
    */
   public function show()
   {
+    if (auth()->check()) {
+      return redirect('/admin');
+    }
     return view('admin/login');
   }
 
@@ -32,8 +35,12 @@ class LoginController extends Controller
    */
   public function login(Request $request, UserService $userService)
   {
+    $request->validate(
+      ['code' => 'sometimes|captcha', 'username' => 'required', 'password' => 'required'],
+      ['code.captcha' => '验证码输入错误', 'username.required' => '帐号不能为空', 'password.required' => '密码不能为空']
+    );
     if ($userService->login($request->all())) {
-      return redirect('/admin');
+      return redirect('/site');
     } else {
       return back()->withInput()->with('error', '帐号或密码错误');
     }

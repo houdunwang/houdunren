@@ -3,10 +3,6 @@
 namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
-use App\Services\CaptchaService;
-use Illuminate\Http\Request;
-use Mews\Captcha\Facades\Captcha;
-use Gregwar\Captcha\CaptchaBuilder;
 
 /**
  * 验证码
@@ -14,9 +10,12 @@ use Gregwar\Captcha\CaptchaBuilder;
  */
 class CaptchaController extends Controller
 {
-  public function make(CaptchaService $captchaService)
+  /**
+   * 验证码
+   * @return void
+   */
+  public function make()
   {
     return captcha();
-    // return $captchaService->make();
   }
 }

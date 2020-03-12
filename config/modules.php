@@ -125,7 +125,6 @@ return [
       'emails' => ['path' => 'Emails', 'generate' => false],
       'notifications' => ['path' => 'Notifications', 'generate' => false],
       'resource' => ['path' => 'Transformers', 'generate' => false],
-      'services' => ['path' => 'Services', 'generate' => true],
     ],
   ],
   /*
@@ -154,10 +153,10 @@ return [
     */
 
   'composer' => [
-    'vendor' => 'nwidart',
+    'vendor' => 'happy',
     'author' => [
-      'name' => 'Nicolas Widart',
-      'email' => 'n.widart@gmail.com',
+      'name' => 'happy',
+      'email' => 'happy@gmail.com',
     ],
   ],
   /*

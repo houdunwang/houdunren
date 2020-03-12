@@ -14,7 +14,7 @@ use Spatie\Permission\Models\Permission;
  */
 class Site extends Model
 {
-  protected $fillable = ['name', 'keyword', 'description', 'logo', 'icp', 'tel', 'email', 'counter', 'domain'];
+  protected $fillable = ['name', 'keyword', 'config', 'description', 'logo', 'icp', 'tel', 'email', 'counter', 'domain'];
 
   protected $casts = [
     'config' => 'array'

@@ -34,7 +34,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">向军大叔</a>
               <div class="dropdown-menu" aria-labelledby="dropdownId">
-                <a class="dropdown-item" href="">退出登录</a>
+                <a class="dropdown-item" href="{{route('member.logout')}}">退出登录</a>
               </div>
             </div>
           </form>

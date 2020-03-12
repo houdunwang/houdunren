@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\ApiController;
 use App\Http\Resources\UserResource;
 use App\Models\Site;
-use App\Services\SiteServer;
+use App\Services\SiteService;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -22,9 +22,9 @@ class AdminController extends ApiController
   }
 
   //根据关键词搜索用户
-  public function search(Request $request, Site $site, SiteServer $siteServer)
+  public function search(Request $request, Site $site, SiteService $siteService)
   {
-    $users = $siteServer->getByKeyword($site, $request->input('content'), ['user']);
+    $users = $siteService->getByKeyword($site, $request->input('content'), ['user']);
     return $this->success('用户列表', UserResource::collection($users));
   }
 
@@ -49,7 +49,7 @@ class AdminController extends ApiController
   public function remove(Request $request, Site $site)
   {
     array_map(function ($uid) use ($site) {
-      $isAdmin =  app(SiteServer::class)->isAdmin($site, User::find($uid));
+      $isAdmin =  app(SiteService::class)->isAdmin($site, User::find($uid));
       if (!$isAdmin)
         $site->user()->updateExistingPivot($uid, ['role' => 'user']);
     }, $request->input('users'));

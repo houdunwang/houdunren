@@ -28,13 +28,12 @@
           </div>
         </div>
         <div class="card-body">
-          <router-link
-            :to="{ name: 'site.module', params: { sid: site.id } }"
-            class="text-secondary text-dark d-flex align-items-center"
-          >
+          <div class="text-secondary text-dark d-flex align-items-center">
             <i class="fa fa-rss fa-3x mr-3"></i>
-            <span class="h4">{{ site.name }}</span>
-          </router-link>
+            <router-link :to="{ name: 'site.module', params: { sid: site.id } }">
+              <span class="h4">{{ site.name }}</span>
+            </router-link>
+          </div>
         </div>
         <div class="card-footer text-muted">
           <div class="d-flex flex-md-row flex-column justify-content-between">
@@ -129,8 +128,8 @@ export default {
     }
   },
   async created() {
-    let response = await this.axios.get('site/site').then(r => r.data.data)
-    this.$set(this, 'data', response)
+    let response = await this.axios.get('site/site')
+    this.$set(this, 'data', response.data)
   },
   computed: {
     ...mapState('user', { user: 'data' })

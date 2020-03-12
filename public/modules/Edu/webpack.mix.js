@@ -1,7 +1,7 @@
 const mix = require('laravel-mix')
 require('laravel-mix-merge-manifest')
 
-mix.setPublicPath('./dist/').mergeManifest()
+mix.setPublicPath('./dist').mergeManifest()
 
 mix.webpackConfig({
   resolve: {

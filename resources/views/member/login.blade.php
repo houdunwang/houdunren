@@ -12,8 +12,7 @@
 </head>
 
 <body class="animated fadeInDownBig member-login">
-  <form action="{{route('member.login')}}" method="post"
-    class="d-flex flex-column justify-content-center align-items-center">
+  <form action="{{route('login')}}" method="post" class="d-flex flex-column justify-content-center align-items-center">
     @csrf
     <div class="card bg-white">
       <div class="card-header">

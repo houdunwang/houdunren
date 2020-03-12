@@ -7,7 +7,7 @@ use App\Services\UserService;
 use Illuminate\Http\Request;
 
 /**
- * 用记登录后台系统
+ * 用户登录
  * Class LoginController
  */
 class LoginController extends Controller
@@ -23,12 +23,30 @@ class LoginController extends Controller
    */
   public function show()
   {
-    return view('member/login');
+    return view('front/user_login');
   }
 
   /**
-   * 后台登录
+   * 接口登录
    * @param Request $request
+   */
+  public function apiLogin(Request $request, UserService $userService)
+  {
+    if ($userService->login($request->all())) {
+      $user = auth()->user();
+      $token  = $user->createToken('Token Name')->accessToken;
+      return response()->json(['token' => $token, 'data' => $user], 200);
+    } else {
+      return $this->error('帐号或密码错误');
+    }
+  }
+
+  /**
+   * 登录
+   * @param Request $request
+   * @param UserService $userService
+   *
+   * @return void
    */
   public function login(Request $request, UserService $userService)
   {
@@ -42,7 +60,6 @@ class LoginController extends Controller
       return back()->withInput()->with('error', '帐号或密码错误');
     }
   }
-
   /**
    * 退出登录
    * @return string
@@ -50,6 +67,6 @@ class LoginController extends Controller
   public function logout()
   {
     auth()->logout();
-    return redirect('member/login');
+    return redirect('/member/login');
   }
 }

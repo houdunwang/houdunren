@@ -7,6 +7,10 @@ use App\Http\Resources\UserResource;
 use App\Models\Site;
 use App\User;
 
+/**
+ * 站点用户
+ * Class UserController
+ */
 class UserController extends ApiController
 {
   public function __construct()

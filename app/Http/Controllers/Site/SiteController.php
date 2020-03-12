@@ -31,7 +31,7 @@ class SiteController extends ApiController
   {
     $user = auth()->user();
     $sites = isSuperAdmin() ? Site::get() : $user->site()->wherePivotIn('role', ['admin', 'operator'])->get();
-    return $this->success('站点列表获取成功', SiteResource::collection($sites));
+    return $this->json(SiteResource::collection($sites));
   }
 
   public function store(SiteRequest $request, Site $site): JsonResponse

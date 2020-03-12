@@ -1,11 +1,30 @@
 <?php
-//公共
-Route::group(['prefix' => 'common', 'namespace' => 'Common'], function () {
-  Route::get('captcha', 'CaptchaController@make');
+//后台管理
+Route::group(['middleware' => 'auth:api', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+  Route::resource('user', 'UserController');
+});
+
+//系统
+Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
+  //用户相关
+  Route::get('user', 'UserController@show');
+  //套餐管理
+  Route::resource('package', 'PackageController')->except(['edit', 'create']);
+  //系统配置
+  Route::resource('config', 'SystemConfigController')->except(['edit', 'create']);
+  //会员组
+  Route::resource('group', 'GroupController')->except(['edit', 'create']);
+  //缓存控制
+  Route::get('cache', 'CacheController@update');
+  //模块管理
+  Route::get('module', 'ModuleController@index');
+  Route::post('module', 'ModuleController@install');
+  Route::delete('module/{name}', 'ModuleController@uninstall');
+  Route::get('module/installed', 'ModuleController@installed');
 });
 
 //站点
-Route::group(['middleware' => ['auth:api'], 'namespace' => 'Site', 'prefix' => 'site'], function () {
+Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'site'], function () {
   Route::resource('site', 'SiteController')->except(['edit', 'create']);
   //站点配置
   Route::put('config/{site}', 'ConfigController@update');
@@ -31,24 +50,11 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'Site', 'prefix' => '
   Route::put('{site}/cache', 'CacheController@update');
 });
 
-//系统管理
-Route::group(['namespace' => 'System', 'prefix' => 'system'], function () {
-  //套餐管理
-  Route::resource('package', 'PackageController')->except(['edit', 'create']);
-  //系统配置
-  Route::resource('config', 'SystemConfigController')->except(['edit', 'create']);
-  //会员组
-  Route::resource('group', 'GroupController')->except(['edit', 'create']);
-  //缓存控制
-  Route::get('cache', 'CacheController@update');
-  //模块管理
-  Route::get('module', 'ModuleController@index');
-  Route::post('module', 'ModuleController@install');
-  Route::delete('module/{name}', 'ModuleController@uninstall');
-  Route::get('module/installed', 'ModuleController@installed');
+//会员中心
+Route::group(['namespace' => 'Member', 'prefix' => 'member'], function () {
+  Route::post('login', 'LoginController@apiLogin');
 });
-
-Route::group(['middleware' => ['auth:api', 'module'], 'namespace' => 'Member', 'prefix' => 'member'], function () {
+Route::group(['middleware' => 'auth:api', 'namespace' => 'Member', 'prefix' => 'member'], function () {
   Route::get('user', 'UserController@show');
   Route::put('user', 'UserController@update');
 });

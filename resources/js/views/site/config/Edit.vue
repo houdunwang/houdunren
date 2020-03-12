@@ -67,24 +67,24 @@
         >
       </div>
     </nav>
-    <div class="tab-content" id="nav-tabContent">
+    <div class="tab-content" id="nav-tabContent" v-if="form.email">
       <div class="tab-pane fade show active" id="email" role="tabpanel" aria-labelledby="nav-home-tab">
-        <email />
+        <email :form.sync="form" @submit="submit" />
       </div>
       <div class="tab-pane fade" id="aliyun" role="tabpanel" aria-labelledby="nav-profile-tab">
-        <ali-yun />
+        <ali-yun :form.sync="form" @submit="submit" />
       </div>
       <div class="tab-pane fade" id="alipay" role="tabpanel" aria-labelledby="nav-contact-tab">
-        <ali-pay />
+        <ali-pay :form.sync="form" @submit="submit" />
       </div>
       <div class="tab-pane fade" id="upload" role="tabpanel" aria-labelledby="nav-contact-tab">
-        <upload />
+        <upload :form.sync="form" @submit="submit" />
       </div>
       <div class="tab-pane fade" id="user" role="tabpanel" aria-labelledby="nav-contact-tab">
-        <user />
+        <user :form.sync="form" @submit="submit" />
       </div>
       <div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="nav-contact-tab">
-        <notification />
+        <notification :form.sync="form" @submit="submit" />
       </div>
     </div>
 
@@ -102,16 +102,6 @@ import store from '@/store/index'
 import { mapState } from 'vuex'
 
 export default {
-  async beforeRouteEnter(to, from, next) {
-    let response = await window.axios.get(`/site/config/${to.params.sid}`)
-    await store.commit('siteConfig/set', response.data.data)
-    next()
-  },
-  data() {
-    return {
-      activeName: 'email'
-    }
-  },
   components: {
     Email,
     AliPay,
@@ -120,14 +110,20 @@ export default {
     Upload,
     User
   },
-  computed: {
-    ...mapState('siteConfig', ['config'])
+  data() {
+    return {
+      form: {},
+      activeName: 'email'
+    }
+  },
+  async created() {
+    let response = await this.axios.get(`site/config/${this.$route.params.sid}`)
+    this.$set(this, 'form', response.data)
+    console.log(response)
   },
   methods: {
     async submit() {
-      await window.axios.put(`site/config/${this.$route.params.sid}`, {
-        data: this.config
-      })
+      await window.axios.put(`site/config/${this.$route.params.sid}`, this.form)
       this.$message.success('更新成功')
     }
   }
