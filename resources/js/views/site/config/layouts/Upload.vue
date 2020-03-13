@@ -8,11 +8,9 @@
             <el-radio label="oss">阿里云OSS</el-radio>
           </el-radio-group>
         </el-form-item>
-
         <el-form-item :label="form.upload.file_size.title">
           <el-input v-model="form.upload.file_size.value" :placeholder="form.upload.file_size.desc"></el-input>
         </el-form-item>
-
         <el-form-item :label="form.upload.type.title">
           <el-input v-model="form.upload.type.value" :placeholder="form.upload.type.desc"></el-input>
         </el-form-item>

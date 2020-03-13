@@ -4,7 +4,6 @@ namespace App;
 
 use App\Models\Group;
 use App\Models\Site;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -20,7 +19,7 @@ class User extends Authenticatable
   use Notifiable, HasApiTokens, HasRoles;
   // protected $guard_name = 'web';
   protected $fillable = [
-    'name', 'email', 'mobile', 'real_name', 'password', 'home', 'avatar', 'weibo',
+    'name', 'nickname', 'email', 'mobile', 'real_name', 'password', 'home', 'avatar', 'weibo',
     'wechat', 'github', 'qq'
   ];
 

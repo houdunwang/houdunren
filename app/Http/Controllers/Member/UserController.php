@@ -16,7 +16,7 @@ class UserController extends ApiController
 {
   public function __construct()
   {
-    $this->middleware('front');
+    $this->middleware(['auth:api', 'front']);
   }
 
   public function show()

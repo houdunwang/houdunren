@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Resources\UserResource;
 use App\Models\Site;
 use App\Services\SiteService;
+use App\Services\UserService;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -22,9 +23,9 @@ class AdminController extends ApiController
   }
 
   //根据关键词搜索用户
-  public function search(Request $request, Site $site, SiteService $siteService)
+  public function search(Request $request, Site $site, UserService $userService)
   {
-    $users = $siteService->getByKeyword($site, $request->input('content'), ['user']);
+    $users = $userService->getByKeyword($site, $request->input('content'), ['user']);
     return $this->success('用户列表', UserResource::collection($users));
   }
 

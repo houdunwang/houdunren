@@ -7,22 +7,22 @@
       <router-link class="nav-link active" :to="{ name: 'system.package' }">系统配置</router-link>
     </nav>
 
-    <el-form ref="form" label-width="100px" :model="setting">
+    <el-form ref="form" label-width="100px" :model="form">
       <div class="card">
         <div class="card-body">
           <el-form-item label="后台名称">
-            <el-input placeholder="用于在浏览器标签中显示的名称" v-model="setting.base.name.value"></el-input>
+            <el-input placeholder="用于在浏览器标签中显示的名称" v-model="form.base.name.value"></el-input>
           </el-form-item>
           <el-form-item label="后台标志">
             <el-upload
               class="avatar-uploader"
-              action="/system/upload"
+              action="/common/upload"
               accept="image/jpeg, image/png"
               :on-success="upload"
               :on-error="uploadError"
               :show-file-list="false"
             >
-              <img v-if="setting.base.logo.value" :src="setting.base.logo.value" class="avatar" />
+              <img v-if="form.base.logo.value" :src="form.base.logo.value" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
             <small class="text-secondary">请上传尺寸为 860x105 的PNG图片</small>
@@ -31,7 +31,7 @@
             <el-input
               type="textarea"
               :rows="4"
-              v-model="setting.base.footer.value"
+              v-model="form.base.footer.value"
               placeholder="在后面底部显示的内容"
             ></el-input>
           </el-form-item>
@@ -49,20 +49,21 @@ import { mapState, mapActions } from 'vuex'
 import { system as systemUpload } from '@/services/upload'
 export default {
   computed: {
-    ...mapState('systemConfig', { setting: 'data' })
+    ...mapState('systemConfig', { form: 'data' })
   },
   methods: {
     ...mapActions('systemConfig', { getConfig: 'get' }),
     //标志上传
     upload(response) {
-      this.$set(this.setting.base.logo, 'value', response.path)
+      this.$set(this.form.base.logo, 'value', response.path)
     },
     uploadError() {
       this.$message.error('文件过大或类型不匹配')
     },
     async submit() {
-      await this.axios.post('system/config', { data: this.setting })
+      await this.axios.post('system/config', this.form)
       await this.getConfig()
+      document.title = this.form.base.name.value
       this.$message.success('更新成功')
     }
   }

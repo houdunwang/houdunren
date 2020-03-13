@@ -1,17 +1,13 @@
 <?php
-//后台管理
-Route::group(['middleware' => 'auth:api', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
-  Route::resource('user', 'UserController');
-});
+
+use Illuminate\Support\Facades\Route;
 
 //系统
 Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
-  //用户相关
-  Route::get('user', 'UserController@show');
   //套餐管理
   Route::resource('package', 'PackageController')->except(['edit', 'create']);
   //系统配置
-  Route::resource('config', 'SystemConfigController')->except(['edit', 'create']);
+  Route::resource('config', 'ConfigController')->except(['edit', 'create']);
   //会员组
   Route::resource('group', 'GroupController')->except(['edit', 'create']);
   //缓存控制
@@ -21,6 +17,8 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => '
   Route::post('module', 'ModuleController@install');
   Route::delete('module/{name}', 'ModuleController@uninstall');
   Route::get('module/installed', 'ModuleController@installed');
+  //管理员
+  Route::get('user', 'UserController@get');
 });
 
 //站点
@@ -51,9 +49,7 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'si
 });
 
 //会员中心
-Route::group(['namespace' => 'Member', 'prefix' => 'member'], function () {
-  Route::post('login', 'LoginController@apiLogin');
-});
+Route::post('login', 'LoginController@apiLogin');
 Route::group(['middleware' => 'auth:api', 'namespace' => 'Member', 'prefix' => 'member'], function () {
   Route::get('user', 'UserController@show');
   Route::put('user', 'UserController@update');

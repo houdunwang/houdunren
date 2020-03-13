@@ -17,7 +17,7 @@ class ModuleController extends ApiController
 {
   public function __construct()
   {
-    $this->middleware('system');
+    $this->middleware(['system']);
     $this->authorizeResource(Module::class, 'module');
   }
 

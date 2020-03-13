@@ -83,9 +83,6 @@
     </div>
   </div>
   @stack('scripts')
-  <style>
-
-  </style>
 </body>
 
 </html>

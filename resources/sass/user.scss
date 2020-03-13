@@ -1,51 +1,47 @@
 // 会员登录
-.member-login {
+.user-member-login {
   background-image: url('/images/member-login.jpg');
   background-size: cover;
   height: 100vh;
   perspective: 800px;
-  form {
-    .card {
-      filter: sepia(10%) blur(0px);
-      transition: 1s;
-      transform: rotateY(0deg) scale(1);
-      @media screen and (max-width: 768px) {
-        width: 90%;
-      }
-      @media screen and (min-width: 768px) {
-        width: 500px;
-      }
-      .card:hover {
-        filter: sepia(20%);
-        transform: rotateY(0deg) scale(1);
-      }
+  .card {
+    filter: sepia(10%) blur(0px);
+    transition: 1s;
+    transform: rotateY(0deg) scale(1);
+    @media screen and (max-width: 768px) {
+      width: 90%;
     }
-    height: 90vh;
+    @media screen and (min-width: 768px) {
+      width: 500px;
+    }
+    .card:hover {
+      filter: sepia(20%);
+      transform: rotateY(0deg) scale(1);
+    }
   }
+  height: 90vh;
 }
 
 //后台登录
-.system-login {
+.user-admin-login {
   background-image: url('/images/system-login.jpg');
   background-size: cover;
   height: 100vh;
   perspective: 800px;
-  form {
-    .card {
-      filter: sepia(10%) blur(0px);
-      transition: 1s;
-      transform: rotateY(0deg) scale(1);
-      @media screen and (max-width: 768px) {
-        width: 90%;
-      }
-      @media screen and (min-width: 768px) {
-        width: 500px;
-      }
-      .card:hover {
-        filter: sepia(20%);
-        transform: rotateY(0deg) scale(1);
-      }
+  .card {
+    filter: sepia(10%) blur(0px);
+    transition: 1s;
+    transform: rotateY(0deg) scale(1);
+    @media screen and (max-width: 768px) {
+      width: 90%;
     }
-    height: 90vh;
+    @media screen and (min-width: 768px) {
+      width: 500px;
+    }
+    .card:hover {
+      filter: sepia(20%);
+      transform: rotateY(0deg) scale(1);
+    }
   }
+  height: 90vh;
 }

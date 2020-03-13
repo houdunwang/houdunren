@@ -4781,12 +4781,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _layouts_AliPay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layouts/AliPay */ "./resources/js/views/site/config/layouts/AliPay.vue");
 /* harmony import */ var _layouts_AliYun__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./layouts/AliYun */ "./resources/js/views/site/config/layouts/AliYun.vue");
-/* harmony import */ var _layouts_Email__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layouts/Email */ "./resources/js/views/site/config/layouts/Email.vue");
-/* harmony import */ var _layouts_Notification__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./layouts/Notification */ "./resources/js/views/site/config/layouts/Notification.vue");
-/* harmony import */ var _layouts_Upload__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./layouts/Upload */ "./resources/js/views/site/config/layouts/Upload.vue");
-/* harmony import */ var _layouts_User__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./layouts/User */ "./resources/js/views/site/config/layouts/User.vue");
-/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/store/index */ "./resources/js/store/index.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _layouts_WePay__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layouts/WePay */ "./resources/js/views/site/config/layouts/WePay.vue");
+/* harmony import */ var _layouts_Email__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./layouts/Email */ "./resources/js/views/site/config/layouts/Email.vue");
+/* harmony import */ var _layouts_Sms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./layouts/Sms */ "./resources/js/views/site/config/layouts/Sms.vue");
+/* harmony import */ var _layouts_Upload__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./layouts/Upload */ "./resources/js/views/site/config/layouts/Upload.vue");
+/* harmony import */ var _layouts_User__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./layouts/User */ "./resources/js/views/site/config/layouts/User.vue");
+/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/store/index */ "./resources/js/store/index.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -4886,6 +4887,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -4896,17 +4910,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Email: _layouts_Email__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Email: _layouts_Email__WEBPACK_IMPORTED_MODULE_4__["default"],
     AliPay: _layouts_AliPay__WEBPACK_IMPORTED_MODULE_1__["default"],
+    WePay: _layouts_WePay__WEBPACK_IMPORTED_MODULE_3__["default"],
     AliYun: _layouts_AliYun__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Notification: _layouts_Notification__WEBPACK_IMPORTED_MODULE_4__["default"],
-    Upload: _layouts_Upload__WEBPACK_IMPORTED_MODULE_5__["default"],
-    User: _layouts_User__WEBPACK_IMPORTED_MODULE_6__["default"]
+    Sms: _layouts_Sms__WEBPACK_IMPORTED_MODULE_5__["default"],
+    Upload: _layouts_Upload__WEBPACK_IMPORTED_MODULE_6__["default"],
+    User: _layouts_User__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   data: function data() {
     return {
       form: {},
-      activeName: 'email'
+      activeName: 'user'
     };
   },
   created: function created() {
@@ -5013,8 +5028,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     form: Object
@@ -5032,6 +5045,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -5130,12 +5144,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     form: Object
@@ -5144,34 +5152,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/site/config/layouts/Notification.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/site/config/layouts/Notification.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/site/config/layouts/Sms.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/site/config/layouts/Sms.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -5242,8 +5231,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     form: Object
@@ -5261,6 +5248,50 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    form: Object
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/site/config/layouts/WePay.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/site/config/layouts/WePay.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -5459,6 +5490,16 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6235,14 +6276,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('systemConfig', {
-    setting: 'data'
+    form: 'data'
   })),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('systemConfig', {
     getConfig: 'get'
   }), {
     //标志上传
     upload: function upload(response) {
-      this.$set(this.setting.base.logo, 'value', response.path);
+      this.$set(this.form.base.logo, 'value', response.path);
     },
     uploadError: function uploadError() {
       this.$message.error('文件过大或类型不匹配');
@@ -6256,18 +6297,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this.axios.post('system/config', {
-                  data: _this.setting
-                });
+                return _this.axios.post('system/config', _this.form);
 
               case 2:
                 _context.next = 4;
                 return _this.getConfig();
 
               case 4:
+                document.title = _this.form.base.name.value;
+
                 _this.$message.success('更新成功');
 
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -50230,15 +50271,15 @@ var render = function() {
               {
                 staticClass: "nav-item nav-link active",
                 attrs: {
-                  id: "nav-home-tab",
+                  id: "nav-contact-tab",
                   "data-toggle": "tab",
-                  href: "#email",
+                  href: "#user",
                   role: "tab",
-                  "aria-controls": "email",
-                  "aria-selected": "true"
+                  "aria-controls": "user",
+                  "aria-selected": "false"
                 }
               },
-              [_vm._v("邮箱配置")]
+              [_vm._v("用户相关")]
             ),
             _vm._v(" "),
             _c(
@@ -50280,6 +50321,22 @@ var render = function() {
                 attrs: {
                   id: "nav-contact-tab",
                   "data-toggle": "tab",
+                  href: "#wepay",
+                  role: "tab",
+                  "aria-controls": "wepay",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("微信支付")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "nav-item nav-link",
+                attrs: {
+                  id: "nav-contact-tab",
+                  "data-toggle": "tab",
                   href: "#upload",
                   role: "tab",
                   "aria-controls": "upload",
@@ -50294,15 +50351,15 @@ var render = function() {
               {
                 staticClass: "nav-item nav-link",
                 attrs: {
-                  id: "nav-contact-tab",
+                  id: "nav-home-tab",
                   "data-toggle": "tab",
-                  href: "#user",
+                  href: "#email",
                   role: "tab",
-                  "aria-controls": "user",
-                  "aria-selected": "false"
+                  "aria-controls": "email",
+                  "aria-selected": "true"
                 }
               },
-              [_vm._v("用户相关")]
+              [_vm._v("邮箱配置")]
             ),
             _vm._v(" "),
             _c(
@@ -50312,20 +50369,20 @@ var render = function() {
                 attrs: {
                   id: "nav-contact-tab",
                   "data-toggle": "tab",
-                  href: "#notification",
+                  href: "#sms",
                   role: "tab",
-                  "aria-controls": "notification",
+                  "aria-controls": "sms",
                   "aria-selected": "false"
                 }
               },
-              [_vm._v("通知设置")]
+              [_vm._v("短信设置")]
             )
           ],
           1
         )
       ]),
       _vm._v(" "),
-      _vm.form.email
+      _vm.form.user
         ? _c(
             "div",
             { staticClass: "tab-content", attrs: { id: "nav-tabContent" } },
@@ -50335,13 +50392,13 @@ var render = function() {
                 {
                   staticClass: "tab-pane fade show active",
                   attrs: {
-                    id: "email",
+                    id: "user",
                     role: "tabpanel",
-                    "aria-labelledby": "nav-home-tab"
+                    "aria-labelledby": "nav-contact-tab"
                   }
                 },
                 [
-                  _c("email", {
+                  _c("user", {
                     attrs: { form: _vm.form },
                     on: {
                       "update:form": function($event) {
@@ -50385,11 +50442,35 @@ var render = function() {
                   attrs: {
                     id: "alipay",
                     role: "tabpanel",
+                    "aria-labelledby": "nav-profile-tab"
+                  }
+                },
+                [
+                  _c("ali-yun", {
+                    attrs: { form: _vm.form },
+                    on: {
+                      "update:form": function($event) {
+                        _vm.form = $event
+                      },
+                      submit: _vm.submit
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "tab-pane fade",
+                  attrs: {
+                    id: "wepay",
+                    role: "tabpanel",
                     "aria-labelledby": "nav-contact-tab"
                   }
                 },
                 [
-                  _c("ali-pay", {
+                  _c("we-pay", {
                     attrs: { form: _vm.form },
                     on: {
                       "update:form": function($event) {
@@ -50429,15 +50510,15 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "tab-pane fade",
+                  staticClass: "tab-pane fade show",
                   attrs: {
-                    id: "user",
+                    id: "email",
                     role: "tabpanel",
-                    "aria-labelledby": "nav-contact-tab"
+                    "aria-labelledby": "nav-home-tab"
                   }
                 },
                 [
-                  _c("user", {
+                  _c("email", {
                     attrs: { form: _vm.form },
                     on: {
                       "update:form": function($event) {
@@ -50455,13 +50536,13 @@ var render = function() {
                 {
                   staticClass: "tab-pane fade",
                   attrs: {
-                    id: "notification",
+                    id: "sms",
                     role: "tabpanel",
                     "aria-labelledby": "nav-contact-tab"
                   }
                 },
                 [
-                  _c("notification", {
+                  _c("sms", {
                     attrs: { form: _vm.form },
                     on: {
                       "update:form": function($event) {
@@ -50995,10 +51076,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/site/config/layouts/Notification.vue?vue&type=template&id=523fd0b5&scoped=true&":
-/*!******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/site/config/layouts/Notification.vue?vue&type=template&id=523fd0b5&scoped=true& ***!
-  \******************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/site/config/layouts/Sms.vue?vue&type=template&id=29e02f02&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/site/config/layouts/Sms.vue?vue&type=template&id=29e02f02&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -51010,63 +51091,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "el-form",
-    { ref: "form", attrs: { model: _vm.form, "label-width": "120px" } },
-    [
-      _c("div", { staticClass: "card" }, [
+  return _c("div", { staticClass: "card mt-3" }, [
+    _c("div", { staticClass: "card-header" }, [_vm._v("阿里云设置")]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "card-body" },
+      [
         _c(
-          "div",
-          { staticClass: "card-body" },
+          "el-form",
+          { ref: "form", attrs: { model: _vm.form, "label-width": "120px" } },
           [
             _c(
               "el-form-item",
-              { attrs: { label: _vm.form.notification.timeout.title } },
-              [
-                _c(
-                  "el-input",
-                  {
-                    attrs: { placeholder: _vm.form.notification.timeout.desc },
-                    model: {
-                      value: _vm.form.notification.timeout.value,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form.notification.timeout, "value", $$v)
-                      },
-                      expression: "form.notification.timeout.value"
-                    }
-                  },
-                  [_c("template", { slot: "append" }, [_vm._v("秒")])],
-                  2
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card mt-3" }, [
-        _c("div", { staticClass: "card-header" }, [_vm._v("阿里云设置")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "card-body" },
-          [
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.notification.aliyun.sign.title } },
+              { attrs: { label: _vm.form.sms.aliyun.sign.title } },
               [
                 _c("el-input", {
-                  attrs: {
-                    placeholder: _vm.form.notification.aliyun.sign.desc
-                  },
+                  attrs: { placeholder: _vm.form.sms.aliyun.sign.desc },
                   model: {
-                    value: _vm.form.notification.aliyun.sign.value,
+                    value: _vm.form.sms.aliyun.sign.value,
                     callback: function($$v) {
-                      _vm.$set(_vm.form.notification.aliyun.sign, "value", $$v)
+                      _vm.$set(_vm.form.sms.aliyun.sign, "value", $$v)
                     },
-                    expression: "form.notification.aliyun.sign.value"
+                    expression: "form.sms.aliyun.sign.value"
                   }
                 })
               ],
@@ -51075,22 +51122,16 @@ var render = function() {
             _vm._v(" "),
             _c(
               "el-form-item",
-              { attrs: { label: _vm.form.notification.aliyun.template.title } },
+              { attrs: { label: _vm.form.sms.aliyun.template.title } },
               [
                 _c("el-input", {
-                  attrs: {
-                    placeholder: _vm.form.notification.aliyun.template.desc
-                  },
+                  attrs: { placeholder: _vm.form.sms.aliyun.template.desc },
                   model: {
-                    value: _vm.form.notification.aliyun.template.value,
+                    value: _vm.form.sms.aliyun.template.value,
                     callback: function($$v) {
-                      _vm.$set(
-                        _vm.form.notification.aliyun.template,
-                        "value",
-                        $$v
-                      )
+                      _vm.$set(_vm.form.sms.aliyun.template, "value", $$v)
                     },
-                    expression: "form.notification.aliyun.template.value"
+                    expression: "form.sms.aliyun.template.value"
                   }
                 })
               ],
@@ -51099,18 +51140,16 @@ var render = function() {
             _vm._v(" "),
             _c(
               "el-form-item",
-              { attrs: { label: _vm.form.notification.aliyun.vars.title } },
+              { attrs: { label: _vm.form.sms.aliyun.vars.title } },
               [
                 _c("el-input", {
-                  attrs: {
-                    placeholder: _vm.form.notification.aliyun.vars.desc
-                  },
+                  attrs: { placeholder: _vm.form.sms.aliyun.vars.desc },
                   model: {
-                    value: _vm.form.notification.aliyun.vars.value,
+                    value: _vm.form.sms.aliyun.vars.value,
                     callback: function($$v) {
-                      _vm.$set(_vm.form.notification.aliyun.vars, "value", $$v)
+                      _vm.$set(_vm.form.sms.aliyun.vars, "value", $$v)
                     },
-                    expression: "form.notification.aliyun.vars.value"
+                    expression: "form.sms.aliyun.vars.value"
                   }
                 })
               ],
@@ -51119,26 +51158,20 @@ var render = function() {
             _vm._v(" "),
             _c(
               "el-form-item",
-              {
-                attrs: { label: _vm.form.notification.aliyun.test_mobile.title }
-              },
+              { attrs: { label: _vm.form.sms.aliyun.test_mobile.title } },
               [
                 _c(
                   "el-input",
                   {
                     attrs: {
-                      placeholder: _vm.form.notification.aliyun.test_mobile.desc
+                      placeholder: _vm.form.sms.aliyun.test_mobile.desc
                     },
                     model: {
-                      value: _vm.form.notification.aliyun.test_mobile.value,
+                      value: _vm.form.sms.aliyun.test_mobile.value,
                       callback: function($$v) {
-                        _vm.$set(
-                          _vm.form.notification.aliyun.test_mobile,
-                          "value",
-                          $$v
-                        )
+                        _vm.$set(_vm.form.sms.aliyun.test_mobile, "value", $$v)
                       },
-                      expression: "form.notification.aliyun.test_mobile.value"
+                      expression: "form.sms.aliyun.test_mobile.value"
                     }
                   },
                   [
@@ -51154,9 +51187,10 @@ var render = function() {
           ],
           1
         )
-      ])
-    ]
-  )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -51296,53 +51330,27 @@ var render = function() {
           [
             _c(
               "el-form-item",
-              { attrs: { label: _vm.form.user.drive.title } },
+              { attrs: { label: _vm.form.user.bind.title } },
               [
                 _c(
                   "el-checkbox-group",
                   {
                     model: {
-                      value: _vm.form.user.drive.value,
+                      value: _vm.form.user.bind.value,
                       callback: function($$v) {
-                        _vm.$set(_vm.form.user.drive, "value", $$v)
+                        _vm.$set(_vm.form.user.bind, "value", $$v)
                       },
-                      expression: "form.user.drive.value"
+                      expression: "form.user.bind.value"
                     }
                   },
                   [
                     _c("el-checkbox", { attrs: { label: "email" } }, [
-                      _vm._v("邮箱注册")
+                      _vm._v("邮箱")
                     ]),
                     _vm._v(" "),
                     _c("el-checkbox", { attrs: { label: "mobile" } }, [
-                      _vm._v("手机号注册")
+                      _vm._v("手机号")
                     ])
-                  ],
-                  1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.user.captcha.title } },
-              [
-                _c(
-                  "el-radio-group",
-                  {
-                    model: {
-                      value: _vm.form.user.captcha.value,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form.user.captcha, "value", $$v)
-                      },
-                      expression: "form.user.captcha.value"
-                    }
-                  },
-                  [
-                    _c("el-radio", { attrs: { label: "1" } }, [_vm._v("开启")]),
-                    _vm._v(" "),
-                    _c("el-radio", { attrs: { label: "0" } }, [_vm._v("关闭")])
                   ],
                   1
                 )
@@ -51357,6 +51365,7 @@ var render = function() {
                 _c(
                   "el-radio-group",
                   {
+                    staticClass: "align-baseline",
                     model: {
                       value: _vm.form.user.avatar.value,
                       callback: function($$v) {
@@ -51372,6 +51381,160 @@ var render = function() {
                   ],
                   1
                 )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "el-form-item",
+              {
+                staticClass: "col-12 col-md-5",
+                attrs: { label: _vm.form.user.timeout.title }
+              },
+              [
+                _c(
+                  "el-input",
+                  {
+                    attrs: { placeholder: _vm.form.user.timeout.desc },
+                    model: {
+                      value: _vm.form.user.timeout.value,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form.user.timeout, "value", $$v)
+                      },
+                      expression: "form.user.timeout.value"
+                    }
+                  },
+                  [_c("template", { slot: "append" }, [_vm._v("秒")])],
+                  2
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/site/config/layouts/WePay.vue?vue&type=template&id=d75113c0&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/site/config/layouts/WePay.vue?vue&type=template&id=d75113c0&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card" }, [
+    _c(
+      "div",
+      { staticClass: "card-body" },
+      [
+        _c(
+          "el-form",
+          { attrs: { model: _vm.form, "label-width": "120px" } },
+          [
+            _c(
+              "el-form-item",
+              { attrs: { label: _vm.form.wepay.mch_id.title } },
+              [
+                _c("el-input", {
+                  attrs: { placeholder: _vm.form.wepay.mch_id.desc },
+                  model: {
+                    value: _vm.form.wepay.mch_id.value,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form.wepay.mch_id, "value", $$v)
+                    },
+                    expression: "form.wepay.mch_id.value"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "el-form-item",
+              { attrs: { label: _vm.form.wepay.key.title } },
+              [
+                _c("el-input", {
+                  attrs: { placeholder: _vm.form.wepay.key.desc },
+                  model: {
+                    value: _vm.form.wepay.key.value,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form.wepay.key, "value", $$v)
+                    },
+                    expression: "form.wepay.key.value"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "el-form-item",
+              { attrs: { label: _vm.form.wepay.apiclient_cert.title } },
+              [
+                _c("el-input", {
+                  attrs: { placeholder: _vm.form.wepay.apiclient_cert.desc },
+                  model: {
+                    value: _vm.form.wepay.apiclient_cert.value,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form.wepay.apiclient_cert, "value", $$v)
+                    },
+                    expression: "form.wepay.apiclient_cert.value"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "el-form-item",
+              { attrs: { label: _vm.form.wepay.apiclient_key.title } },
+              [
+                _c("el-input", {
+                  attrs: { placeholder: _vm.form.wepay.apiclient_key.desc },
+                  model: {
+                    value: _vm.form.wepay.apiclient_key.value,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form.wepay.apiclient_key, "value", $$v)
+                    },
+                    expression: "form.wepay.apiclient_key.value"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "el-form-item",
+              { attrs: { label: _vm.form.wepay.rootca.title } },
+              [
+                _c("el-input", {
+                  attrs: { placeholder: _vm.form.wepay.rootca.desc },
+                  model: {
+                    value: _vm.form.wepay.rootca.value,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form.wepay.rootca, "value", $$v)
+                    },
+                    expression: "form.wepay.rootca.value"
+                  }
+                })
               ],
               1
             )
@@ -51590,7 +51753,13 @@ var render = function() {
                                 staticClass:
                                   "text-secondary mr-1 border p-1 bg-light rounded"
                               },
-                              [_vm._v(_vm._s(p.name))]
+                              [
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(p.name) +
+                                    "\n              "
+                                )
+                              ]
                             )
                           }),
                           0
@@ -51697,6 +51866,21 @@ var render = function() {
                           "a",
                           {
                             staticClass: "text-muted mr-2",
+                            attrs: { href: site.domain, target: "_blank" }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fa fa-home",
+                              attrs: { "aria-hidden": "true" }
+                            }),
+                            _vm._v("\n              访问首页\n            ")
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "text-muted mr-2",
                             attrs: { href: "" },
                             on: {
                               click: function($event) {
@@ -51726,7 +51910,10 @@ var render = function() {
                                 }
                               },
                               [
-                                _c("i", { staticClass: "fa fa-life-ring" }),
+                                _c("i", {
+                                  staticClass: "fa fa-check-circle-o",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
                                 _vm._v("\n              网站配置\n            ")
                               ]
                             )
@@ -52634,7 +52821,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "el-form",
-        { ref: "form", attrs: { "label-width": "100px", model: _vm.setting } },
+        { ref: "form", attrs: { "label-width": "100px", model: _vm.form } },
         [
           _c("div", { staticClass: "card" }, [
             _c(
@@ -52648,11 +52835,11 @@ var render = function() {
                     _c("el-input", {
                       attrs: { placeholder: "用于在浏览器标签中显示的名称" },
                       model: {
-                        value: _vm.setting.base.name.value,
+                        value: _vm.form.base.name.value,
                         callback: function($$v) {
-                          _vm.$set(_vm.setting.base.name, "value", $$v)
+                          _vm.$set(_vm.form.base.name, "value", $$v)
                         },
-                        expression: "setting.base.name.value"
+                        expression: "form.base.name.value"
                       }
                     })
                   ],
@@ -52668,7 +52855,7 @@ var render = function() {
                       {
                         staticClass: "avatar-uploader",
                         attrs: {
-                          action: "/system/upload",
+                          action: "/common/upload",
                           accept: "image/jpeg, image/png",
                           "on-success": _vm.upload,
                           "on-error": _vm.uploadError,
@@ -52676,10 +52863,10 @@ var render = function() {
                         }
                       },
                       [
-                        _vm.setting.base.logo.value
+                        _vm.form.base.logo.value
                           ? _c("img", {
                               staticClass: "avatar",
-                              attrs: { src: _vm.setting.base.logo.value }
+                              attrs: { src: _vm.form.base.logo.value }
                             })
                           : _c("i", {
                               staticClass: "el-icon-plus avatar-uploader-icon"
@@ -52705,11 +52892,11 @@ var render = function() {
                         placeholder: "在后面底部显示的内容"
                       },
                       model: {
-                        value: _vm.setting.base.footer.value,
+                        value: _vm.form.base.footer.value,
                         callback: function($$v) {
-                          _vm.$set(_vm.setting.base.footer, "value", $$v)
+                          _vm.$set(_vm.form.base.footer, "value", $$v)
                         },
-                        expression: "setting.base.footer.value"
+                        expression: "form.base.footer.value"
                       }
                     })
                   ],
@@ -58459,8 +58646,7 @@ _axios.interceptors.response.use(function (response) {
     switch (status) {
       case 401:
         //未登录用户跳转到登录页面
-        location.href = '/system/login';
-        return;
+        location.href = '/admin/login';
         break;
 
       case 422:
@@ -58685,7 +58871,8 @@ __webpack_require__.r(__webpack_exports__);
   children: [{
     name: 'system',
     path: 'index',
-    component: _views_system_home_Index__WEBPACK_IMPORTED_MODULE_2__["default"]
+    component: _views_system_home_Index__WEBPACK_IMPORTED_MODULE_2__["default"],
+    alias: '/system'
   }, {
     name: 'system.config',
     path: 'config',
@@ -59033,14 +59220,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return window.axios.get('system/config/1').then(function (r) {
-                  return r.data.data;
-                });
+                return window.axios.get('system/config/1');
 
               case 2:
                 response = _context.sent;
-                commit('set', response);
-                return _context.abrupt("return", response);
+                commit('set', response.data);
+                return _context.abrupt("return", response.data);
 
               case 5:
               case "end":
@@ -59093,7 +59278,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return window.axios.get("admin/user");
+                return window.axios.get("system/user");
 
               case 2:
                 response = _context.sent;
@@ -60358,17 +60543,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/views/site/config/layouts/Notification.vue":
-/*!*****************************************************************!*\
-  !*** ./resources/js/views/site/config/layouts/Notification.vue ***!
-  \*****************************************************************/
+/***/ "./resources/js/views/site/config/layouts/Sms.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/views/site/config/layouts/Sms.vue ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Notification_vue_vue_type_template_id_523fd0b5_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Notification.vue?vue&type=template&id=523fd0b5&scoped=true& */ "./resources/js/views/site/config/layouts/Notification.vue?vue&type=template&id=523fd0b5&scoped=true&");
-/* harmony import */ var _Notification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Notification.vue?vue&type=script&lang=js& */ "./resources/js/views/site/config/layouts/Notification.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Sms_vue_vue_type_template_id_29e02f02_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Sms.vue?vue&type=template&id=29e02f02&scoped=true& */ "./resources/js/views/site/config/layouts/Sms.vue?vue&type=template&id=29e02f02&scoped=true&");
+/* harmony import */ var _Sms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Sms.vue?vue&type=script&lang=js& */ "./resources/js/views/site/config/layouts/Sms.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -60378,50 +60563,50 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Notification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Notification_vue_vue_type_template_id_523fd0b5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Notification_vue_vue_type_template_id_523fd0b5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Sms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Sms_vue_vue_type_template_id_29e02f02_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Sms_vue_vue_type_template_id_29e02f02_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "523fd0b5",
+  "29e02f02",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/views/site/config/layouts/Notification.vue"
+component.options.__file = "resources/js/views/site/config/layouts/Sms.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/views/site/config/layouts/Notification.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/views/site/config/layouts/Notification.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/views/site/config/layouts/Sms.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/views/site/config/layouts/Sms.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Notification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Notification.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/site/config/layouts/Notification.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Notification_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Sms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Sms.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/site/config/layouts/Sms.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Sms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/views/site/config/layouts/Notification.vue?vue&type=template&id=523fd0b5&scoped=true&":
-/*!************************************************************************************************************!*\
-  !*** ./resources/js/views/site/config/layouts/Notification.vue?vue&type=template&id=523fd0b5&scoped=true& ***!
-  \************************************************************************************************************/
+/***/ "./resources/js/views/site/config/layouts/Sms.vue?vue&type=template&id=29e02f02&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/views/site/config/layouts/Sms.vue?vue&type=template&id=29e02f02&scoped=true& ***!
+  \***************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Notification_vue_vue_type_template_id_523fd0b5_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Notification.vue?vue&type=template&id=523fd0b5&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/site/config/layouts/Notification.vue?vue&type=template&id=523fd0b5&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Notification_vue_vue_type_template_id_523fd0b5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sms_vue_vue_type_template_id_29e02f02_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Sms.vue?vue&type=template&id=29e02f02&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/site/config/layouts/Sms.vue?vue&type=template&id=29e02f02&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sms_vue_vue_type_template_id_29e02f02_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Notification_vue_vue_type_template_id_523fd0b5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sms_vue_vue_type_template_id_29e02f02_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -60560,6 +60745,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_User_vue_vue_type_template_id_6fce9595_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_User_vue_vue_type_template_id_6fce9595_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/site/config/layouts/WePay.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/views/site/config/layouts/WePay.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _WePay_vue_vue_type_template_id_d75113c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./WePay.vue?vue&type=template&id=d75113c0&scoped=true& */ "./resources/js/views/site/config/layouts/WePay.vue?vue&type=template&id=d75113c0&scoped=true&");
+/* harmony import */ var _WePay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WePay.vue?vue&type=script&lang=js& */ "./resources/js/views/site/config/layouts/WePay.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _WePay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _WePay_vue_vue_type_template_id_d75113c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _WePay_vue_vue_type_template_id_d75113c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "d75113c0",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/site/config/layouts/WePay.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/site/config/layouts/WePay.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/views/site/config/layouts/WePay.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WePay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./WePay.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/site/config/layouts/WePay.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WePay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/site/config/layouts/WePay.vue?vue&type=template&id=d75113c0&scoped=true&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/views/site/config/layouts/WePay.vue?vue&type=template&id=d75113c0&scoped=true& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WePay_vue_vue_type_template_id_d75113c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./WePay.vue?vue&type=template&id=d75113c0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/site/config/layouts/WePay.vue?vue&type=template&id=d75113c0&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WePay_vue_vue_type_template_id_d75113c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WePay_vue_vue_type_template_id_d75113c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

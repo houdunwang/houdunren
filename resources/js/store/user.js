@@ -10,7 +10,7 @@ export default {
   },
   actions: {
     async get({ state, commit }) {
-      let response = await window.axios.get(`admin/user`)
+      let response = await window.axios.get(`system/user`)
 
       commit('set', response.data)
       return response.data

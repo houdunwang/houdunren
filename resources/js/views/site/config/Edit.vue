@@ -7,14 +7,14 @@
         </router-link>
         <a
           class="nav-item nav-link active"
-          id="nav-home-tab"
+          id="nav-contact-tab"
           data-toggle="tab"
-          href="#email"
+          href="#user"
           role="tab"
-          aria-controls="email"
-          aria-selected="true"
-          >邮箱配置</a
-        >
+          aria-controls="user"
+          aria-selected="false"
+        >用户相关</a>
+
         <a
           class="nav-item nav-link"
           id="nav-profile-tab"
@@ -23,8 +23,7 @@
           role="tab"
           aria-controls="aliyun"
           aria-selected="false"
-          >阿里云</a
-        >
+        >阿里云</a>
         <a
           class="nav-item nav-link"
           id="nav-contact-tab"
@@ -33,8 +32,16 @@
           role="tab"
           aria-controls="alipay"
           aria-selected="false"
-          >支付宝</a
-        >
+        >支付宝</a>
+        <a
+          class="nav-item nav-link"
+          id="nav-contact-tab"
+          data-toggle="tab"
+          href="#wepay"
+          role="tab"
+          aria-controls="wepay"
+          aria-selected="false"
+        >微信支付</a>
         <a
           class="nav-item nav-link"
           id="nav-contact-tab"
@@ -43,48 +50,53 @@
           role="tab"
           aria-controls="upload"
           aria-selected="false"
-          >上传配置</a
-        >
+        >上传配置</a>
+        <a
+          class="nav-item nav-link"
+          id="nav-home-tab"
+          data-toggle="tab"
+          href="#email"
+          role="tab"
+          aria-controls="email"
+          aria-selected="true"
+        >邮箱配置</a>
         <a
           class="nav-item nav-link"
           id="nav-contact-tab"
           data-toggle="tab"
-          href="#user"
+          href="#sms"
           role="tab"
-          aria-controls="user"
+          aria-controls="sms"
           aria-selected="false"
-          >用户相关</a
-        >
-        <a
-          class="nav-item nav-link"
-          id="nav-contact-tab"
-          data-toggle="tab"
-          href="#notification"
-          role="tab"
-          aria-controls="notification"
-          aria-selected="false"
-          >通知设置</a
-        >
+        >短信设置</a>
       </div>
     </nav>
-    <div class="tab-content" id="nav-tabContent" v-if="form.email">
-      <div class="tab-pane fade show active" id="email" role="tabpanel" aria-labelledby="nav-home-tab">
-        <email :form.sync="form" @submit="submit" />
+    <div class="tab-content" id="nav-tabContent" v-if="form.user">
+      <div
+        class="tab-pane fade show active"
+        id="user"
+        role="tabpanel"
+        aria-labelledby="nav-contact-tab"
+      >
+        <user :form.sync="form" @submit="submit" />
       </div>
       <div class="tab-pane fade" id="aliyun" role="tabpanel" aria-labelledby="nav-profile-tab">
         <ali-yun :form.sync="form" @submit="submit" />
       </div>
-      <div class="tab-pane fade" id="alipay" role="tabpanel" aria-labelledby="nav-contact-tab">
-        <ali-pay :form.sync="form" @submit="submit" />
+      <div class="tab-pane fade" id="alipay" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <ali-yun :form.sync="form" @submit="submit" />
+      </div>
+      <div class="tab-pane fade" id="wepay" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <we-pay :form.sync="form" @submit="submit" />
       </div>
       <div class="tab-pane fade" id="upload" role="tabpanel" aria-labelledby="nav-contact-tab">
         <upload :form.sync="form" @submit="submit" />
       </div>
-      <div class="tab-pane fade" id="user" role="tabpanel" aria-labelledby="nav-contact-tab">
-        <user :form.sync="form" @submit="submit" />
+      <div class="tab-pane fade show" id="email" role="tabpanel" aria-labelledby="nav-home-tab">
+        <email :form.sync="form" @submit="submit" />
       </div>
-      <div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="nav-contact-tab">
-        <notification :form.sync="form" @submit="submit" />
+      <div class="tab-pane fade" id="sms" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <sms :form.sync="form" @submit="submit" />
       </div>
     </div>
 
@@ -94,8 +106,9 @@
 <script>
 import AliPay from './layouts/AliPay'
 import AliYun from './layouts/AliYun'
+import WePay from './layouts/WePay'
 import Email from './layouts/Email'
-import Notification from './layouts/Notification'
+import Sms from './layouts/Sms'
 import Upload from './layouts/Upload'
 import User from './layouts/User'
 import store from '@/store/index'
@@ -105,15 +118,16 @@ export default {
   components: {
     Email,
     AliPay,
+    WePay,
     AliYun,
-    Notification,
+    Sms,
     Upload,
     User
   },
   data() {
     return {
       form: {},
-      activeName: 'email'
+      activeName: 'user'
     }
   },
   async created() {

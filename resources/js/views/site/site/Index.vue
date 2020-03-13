@@ -11,9 +11,15 @@
             <div class="col-6">
               <span class="text-dark small mr-1">套餐:</span>
               <span v-for="group in site.admin.group" :key="group.id">
-                <span class="text-secondary mr-1 border p-1 bg-light rounded" v-for="p in group.packages" :key="p.id">{{
+                <span
+                  class="text-secondary mr-1 border p-1 bg-light rounded"
+                  v-for="p in group.packages"
+                  :key="p.id"
+                >
+                  {{
                   p.name
-                }}</span>
+                  }}
+                </span>
               </span>
             </div>
             <div class="col-6 text-right">
@@ -47,6 +53,10 @@
             </div>
 
             <div class="small">
+              <a class="text-muted mr-2" :href="site.domain" target="_blank">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                访问首页
+              </a>
               <a href class="text-muted mr-2" @click.prevent="updateSiteCache(site)">
                 <i class="fa fa-life-ring"></i>
                 更新缓存
@@ -61,7 +71,7 @@
                   }
                 }"
               >
-                <i class="fa fa-life-ring"></i>
+                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
                 网站配置
               </router-link>
               <a v-if="checkAdmin(site)" href class="text-muted mr-2">

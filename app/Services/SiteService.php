@@ -6,7 +6,7 @@ use App\Models\Site;
 use App\User;
 
 /**
- * 站点管理服务
+ * 站点服务
  * Class SiteService
  * @package App\Services
  */
@@ -39,36 +39,30 @@ class SiteService
   {
     $site = Site::where('domain', 'like', "%{$_SERVER['HTTP_HOST']}%")->first();
     if ($site == false) {
-      abort(403, '站点不存在33');
+      abort(403, '域名不属于任何站点');
     }
     return $this->site($site);
   }
 
   /**
-   * 根据关键词获取用户
+   * 是否为站长
+   * @param Site $site
+   * @param User $user
+   *
+   * @return bool
    */
-  public function getByKeyword(Site $site, ?string $content, $role = ['admin', 'operator', 'user'])
-  {
-    return $site->user()
-      ->wherePivotIn('role', $role)
-      ->where(function ($query) use ($content) {
-        if ($content)
-          array_map(
-            function ($field) use ($query, $content) {
-              $query->orWhere($field, 'like', "%{$content}%");
-            },
-            ['name', 'email', 'mobile', 'users.id'],
-          );
-      })->get();
-  }
-
-  //是否为站长
   public function isAdmin(Site $site, User $user)
   {
     return $site->admin->contains($user);
   }
 
-  //是否为操作员
+  /**
+   * 是否为操作员
+   * @param Site $site
+   * @param User $user
+   *
+   * @return bool
+   */
   public function isOperator(Site $site, User $user)
   {
     return $site->operator->contains($user);

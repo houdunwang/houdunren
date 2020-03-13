@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\SystemConfig;
 use Closure;
 
 /**
@@ -22,6 +23,11 @@ class SystemMiddleware
     if (!auth()->check() || !isSuperAdmin()) {
       abort(403, '需要系统管理员身份');
     }
+    $this->config();
     return $next($request);
+  }
+  protected function config()
+  {
+    config(['system' => SystemConfig::first()->config]);
   }
 }

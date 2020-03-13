@@ -3,34 +3,17 @@ return [
   //系统配置
   'system' => [
     'base' => [
-      'name' => ['value' => '后盾人管理系统', 'title' => '后台名称', 'desc' => '用于游览器标签中显示的名称'],
+      'name' => ['value' => '后台管理', 'title' => '后台名称', 'desc' => '用于游览器标签中显示的名称'],
       'logo' => ['value' => '/images/logo.png', 'title' => '后台标志', 'desc' => '后台系统管理界面的标志，尺寸600X100像素'],
       'footer' => ['value' => '后盾人 人人做后盾 <br/> Powered by hdcms v6 © 2014-2019 www.hdcms.com', 'title' => '后台页脚', 'desc' => '后台页面底部信息支持HTML'],
     ]
   ],
   //站点配置
   'site' => [
-    'base' => [
-      'name' => ['value' => '', 'title' => '网站名称', 'desc' => ''],
-      'logo' => ['value' => '', 'title' => '网站标志', 'desc' => ''],
-      'keyword' => ['value' => '', 'title' => '网站关键字', 'desc' => ''],
-      'description' => ['value' => '', 'title' => '网站关键字', 'desc' => ''],
-      'icp' => ['value' => '', 'title' => '备案号', 'desc' => ''],
-      'tel' => ['value' => '', 'title' => '联系电话', 'desc' => ''],
-      'email' => ['value' => '', 'title' => '联系邮箱', 'desc' => ''],
-      'counter' => ['value' => '', 'title' => '统计代码', 'desc' => ''],
-    ],
-    'email' => [
-      'driver' => ['value' => '', 'title' => '邮箱驱动', 'desc' => 'smtp、sendmail、mailgun、mandrill、ses、sparkpost、log'],
-      'host' => ['value' => '', 'title' => '服务器地址', 'desc' => '指定SMTP服务器的地址 阿里邮箱 腾讯邮箱'],
-      'port' => ['value' => '', 'title' => '端口', 'desc' => '指定SMTP服务器的地址, 如: 126邮箱为25'],
-      'username' => ['value' => '', 'title' => '邮箱帐号', 'desc' => '发送邮箱登录帐号,一般情况下设置与发送邮箱一样'],
-      'password' => ['value' => '', 'title' => '邮箱密码', 'desc' => ''],
-      'name' => ['value' => '', 'title' => '发件人名称', 'desc' => '发件人的中文名称'],
-      'address' => ['value' => '', 'title' => '发送邮箱', 'desc' => '收件方回复使用的邮箱，一般设置成和邮箱帐号一至'],
-      'test' => [
-        'mail' => ['value' => '', 'title' => '测试邮箱', 'desc' => '检测邮箱配置的测试邮箱，需要先保存配置后再测试'],
-      ]
+    'user' => [
+      'bind' => ['value' => [], 'title' => '用户必须绑定', 'desc' => ''],
+      'avatar' => ['value' => 0, 'title' => '必须设置头像', 'desc' => '如果用户没设置头像将强制要求设置'],
+      'timeout' => ['value' => 60, 'title' => '验证码间隔时间', 'desc' => ''],
     ],
     'aliyun' => [
       'regionId' => ['value' => 'cn-hangzhou', 'title' => 'regionId', 'desc' => '根据服务器所在区域进行选择 | https://help.aliyun.com/document_detail/40654.html?spm=5176.7114037.1996646101.1.OCtdEo'],
@@ -54,19 +37,32 @@ return [
       'file_size' => ['value' => 200000000, 'title' => '文件大小', 'desc' => '允许上传的文件大小'],
       'type' => ['value' => 'jpg,jpeg,gif,png,doc,txt,pem,json', 'title' => '上传类型', 'desc' => '请用英文半角逗号分隔文件类型'],
     ],
-    'user' => [
-      'drive' => ['value' => ['email'], 'title' => '注册类型', 'desc' => ''],
-      'captcha' => ['value' => 0, 'title' => '登录注册验证码', 'desc' => ''],
-      'avatar' => ['value' => 0, 'title' => '必须设置头像', 'desc' => '如果用户没设置头像将强制要求设置'],
+    'email' => [
+      'driver' => ['value' => '', 'title' => '邮箱驱动', 'desc' => 'smtp、sendmail、mailgun、mandrill、ses、sparkpost、log'],
+      'host' => ['value' => '', 'title' => '服务器地址', 'desc' => '指定SMTP服务器的地址 阿里邮箱 腾讯邮箱'],
+      'port' => ['value' => '', 'title' => '端口', 'desc' => '指定SMTP服务器的地址, 如: 126邮箱为25'],
+      'username' => ['value' => '', 'title' => '邮箱帐号', 'desc' => '发送邮箱登录帐号,一般情况下设置与发送邮箱一样'],
+      'password' => ['value' => '', 'title' => '邮箱密码', 'desc' => ''],
+      'name' => ['value' => '', 'title' => '发件人名称', 'desc' => '发件人的中文名称'],
+      'address' => ['value' => '', 'title' => '发送邮箱', 'desc' => '收件方回复使用的邮箱，一般设置成和邮箱帐号一至'],
+      'test' => [
+        'mail' => ['value' => '', 'title' => '测试邮箱', 'desc' => '检测邮箱配置的测试邮箱，需要先保存配置后再测试'],
+      ]
     ],
-    'notification' => [
-      'timeout' => ['value' => 60, 'title' => '短信/邮件发送间隔时间', 'desc' => ''],
+    'sms' => [
       'aliyun' => [
         'sign' => ['value' => '', 'title' => '短信签名', 'desc' => ''],
         'template' => ['value' => '', 'title' => '短信模板', 'desc' => ''],
         'vars' => ['value' => '', 'title' => '模板变量', 'desc' => '如: "code:2019,product:商城"，如果使用 `SMS_12840367` 时不需要设置模板变量'],
         'test_mobile' => ['value' => '', 'title' => '短信发送测试', 'desc' => '检测配置的测试手机号，需要先保存配置后再测试'],
       ],
+    ],
+    'wepay' => [
+      'mch_id' => ['value' => '', 'title' => '微信支付商户号', 'desc' => '公众号支付请求中用于加密的密钥Key'],
+      'key' => ['value' => '', 'title' => '商户支付密钥', 'desc' => '此值需要手动在腾讯商户后台API密钥保持一致。查看设置教程'],
+      'apiclient_cert' => ['value' => '', 'title' => '证书格式', 'desc' => ''],
+      'apiclient_key' => ['value' => '', 'title' => '证书密钥格式', 'desc' => ''],
+      'rootca' => ['value' => '', 'title' => 'CA证书', 'desc' => ''],
     ],
     'search' => [
       'algolia_id' => ['value' => '', 'title' => 'Application ID ', 'desc' => ''],
@@ -90,12 +86,6 @@ return [
       'default' => ['value' => '您的消息我们已经收到', 'title' => '默认消息', 'desc' => '公众号没有匹配内容时的默认回复消息，支持微信关键词'],
       'welcome' => ['value' => '感谢您的关注', 'title' => '欢迎消息', 'desc' => '粉丝关注公众号时回复的消息，支持微信关键词']
     ],
-    'pay' => [
-      'mch_id' => ['value' => '', 'title' => '微信支付商户号', 'desc' => '公众号支付请求中用于加密的密钥Key'],
-      'key' => ['value' => '', 'title' => '商户支付密钥', 'desc' => '此值需要手动在腾讯商户后台API密钥保持一致。查看设置教程'],
-      'apiclient_cert' => ['value' => '', 'title' => '证书格式', 'desc' => ''],
-      'apiclient_key' => ['value' => '', 'title' => '证书密钥格式', 'desc' => ''],
-      'rootca' => ['value' => '', 'title' => 'CA证书', 'desc' => ''],
-    ]
+
   ]
 ];

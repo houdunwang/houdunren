@@ -18,6 +18,7 @@ class SiteMiddleware
         return $next($request);
       }
     }
+    config(['site' => site()['config']]);
     abort(403, '你不是站点管理员或超级管理员');
   }
 

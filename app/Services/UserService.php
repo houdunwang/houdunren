@@ -61,4 +61,29 @@ class UserService
     return $user && $user->site()->wherePivotIn('role', $role)
       ->where('site_id', $site['id'])->first() ? true : false;
   }
+
+  /**
+   * 根据关键词获取用户
+   * @param Site $site
+   * @param ?string $content
+   * @param undefined $role
+   * @param mixed 'operator'
+   * @param mixed 'user']
+   *
+   * @return App\Model\User
+   */
+  public function getByKeyword(Site $site, ?string $content, $role = ['admin', 'operator', 'user'])
+  {
+    return $site->user()
+      ->wherePivotIn('role', $role)
+      ->where(function ($query) use ($content) {
+        if ($content)
+          array_map(
+            function ($field) use ($query, $content) {
+              $query->orWhere($field, 'like', "%{$content}%");
+            },
+            ['name', 'email', 'mobile', 'users.id'],
+          );
+      })->get();
+  }
 }

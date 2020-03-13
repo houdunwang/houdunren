@@ -6,6 +6,7 @@ use App\Services\ModuleServer;
 use App\Services\SiteService;
 use App\Services\UserService;
 use App\User;
+use Illuminate\Support\Facades\Route;
 
 /**
  * 超级管理员
@@ -14,6 +15,15 @@ use App\User;
 function isSuperAdmin(): bool
 {
   return app(UserService::class)->isSuperAdmin();
+}
+
+/**
+ * 根据路由生成类样式名
+ * @return string|null
+ */
+function route_class()
+{
+  return str_replace('.', '-', Route::currentRouteName());
 }
 
 /**
