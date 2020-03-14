@@ -2,7 +2,7 @@
 
 use App\Models\Site;
 use App\Services\AccessServer;
-use App\Services\ModuleServer;
+use App\Services\ModuleService;
 use App\Services\SiteService;
 use App\Services\UserService;
 use App\User;
@@ -41,7 +41,7 @@ function site($site = null): Site
  */
 function module()
 {
-  return app(ModuleServer::class)->getByUrl();
+  return app(ModuleService::class)->getModuleByUrl();
 }
 /**
  * 检测模块访问权限

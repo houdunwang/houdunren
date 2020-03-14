@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Member;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
-use App\Services\UploadServer;
+use App\Services\UploadService;
 use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * 个人资料
@@ -19,39 +20,25 @@ class UserController extends ApiController
     $this->middleware(['auth:api', 'front']);
   }
 
-  public function show()
+  public function get()
   {
     return $this->json(new UserResource(auth()->user()));
   }
 
   public function update(UserRequest $request)
   {
-    $data = $this->password($request->all());
-    $user = auth()->user();
-    $user->fill($data)->save();
+    auth()->user()->fill($request->all())->save();
     return $this->success('修改成功');
   }
 
-  protected function password($data)
+  public function password(UserRequest $request)
   {
-    if (isset($data['password'])) {
-      $data['password'] = bcrypt($data['password']);
+    $user = auth()->user();
+    if (!Hash::check($request->origin_password, $user->password)) {
+      return $this->error('原密码错误');
     }
-    return $data;
-  }
-
-  /**
-   * 头像上传
-   * @param UploadServer $uploadServer
-   * @param Request $request
-   *
-   * @return Model
-   */
-  public function avatar(UploadServer $uploadServer, Request $request)
-  {
-    if ($file = $request->file('file')) {
-      $model = $uploadServer->local($file, auth()->id(), site()['id']);
-      return $this->json($model);
-    }
+    $user->password = Hash::make($request->password);
+    $user->save();
+    return $this->success('修改成功');
   }
 }

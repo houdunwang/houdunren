@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css
   ">
   <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+  @stack('css')
 </head>
 
 <body class="member">
@@ -34,7 +35,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">向军大叔</a>
               <div class="dropdown-menu" aria-labelledby="dropdownId">
-                <a class="dropdown-item" href="{{route('member.logout')}}">退出登录</a>
+                <a class="dropdown-item" href="{{route('logout')}}">退出登录</a>
               </div>
             </div>
           </form>
@@ -45,19 +46,18 @@
   <div class="container d-flex flex-column flex-md-row mt-3 mb-3 justify-content-between">
     <div class="menu">
       <div class="icon bg-white shadow-sm border">
-        <a href="/member/info/icon">
-          <img src="http://hdcms.test/attachments/2020/03/15839192471583919247.8036.JPG">
-
+        <a href="/member/info/avatar">
+          <img src="{{auth()->user()->avatar}}">
         </a>
         <div class="pt-0 p-3">
-          <h6 class="text-muted">向军大叔</h6>
+          <h6 class="text-muted">{{auth()->user()->nickname}}</h6>
           <hr>
           <div class="d-flex justify-content-between text-muted">
-            <i class="fa fa-envelope" aria-hidden="true"></i>
-            <i class="fa fa-phone" aria-hidden="true"></i>
-            <i class="fa fa-weibo" aria-hidden="true"></i>
-            <i class="fa fa-weixin" aria-hidden="true"></i>
-            <i class="fa fa-github" aria-hidden="true"></i>
+            <i class="fa fa-envelope {{auth()->user()->email?'text-primary':''}}" aria-hidden="true"></i>
+            <i class="fa fa-phone {{auth()->user()->mobile?'text-primary':''}}" aria-hidden="true"></i>
+            <i class="fa fa-weibo {{auth()->user()->weibo?'text-primary':''}}" aria-hidden="true"></i>
+            <i class="fa fa-weixin {{auth()->user()->weixin?'text-primary':''}}" aria-hidden="true"></i>
+            <i class="fa fa-github {{auth()->user()->github?'text-primary':''}}" aria-hidden="true"></i>
             <i class="fa fa-qq" aria-hidden="true"></i>
           </div>
         </div>
@@ -79,7 +79,7 @@
           <a class="list-group-item" href="/member/info/phone">
             手机验证
           </a>
-          <a class="list-group-item" href="/member/info/icon">
+          <a class="list-group-item" href="/member/info/avatar">
             修改头像
           </a>
         </div>
@@ -89,9 +89,7 @@
       <router-view></router-view>
     </div>
   </div>
-  <script src="/js/manifest.js"></script>
-  <script src="/js/vendor.js"></script>
-  <script src="/js/app.js"></script>
+  @stack('scripts')
 </body>
 
 </html>

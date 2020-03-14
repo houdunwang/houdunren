@@ -8,9 +8,9 @@ use App\User;
 
 /**
  * 模块菜单服务
- * Class ModuleMenuServer
+ * Class MenuService
  */
-class MenuServer
+class MenuService
 {
   /**
    * 根据用户模块菜单
@@ -20,7 +20,7 @@ class MenuServer
    */
   public function getByUser(Site $site, Module $module, User $user)
   {
-    $modules =  app(ModuleServer::class)->getModuleByUser($site, $user);
+    $modules =  app(ModuleService::class)->getModuleByUser($site, $user);
     foreach ($modules as $k => $m) {
       $modules[$k]['menu']['admin'] =
         $this->removeInvalidMenu($site, $m['menu']['admin'], $user);

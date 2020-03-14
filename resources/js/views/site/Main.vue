@@ -21,7 +21,10 @@ import Error from '@/components/Error'
 import store from '@/store'
 export default {
   async beforeRouteEnter(to, from, next) {
-    await Promise.all([store.dispatch(`user/get`), store.dispatch('systemConfig/get')])
+    await Promise.all([
+      store.dispatch(`user/get`),
+      store.dispatch('systemConfig/get')
+    ])
     next()
   },
   components: {
@@ -34,7 +37,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .bg {
-  background-image: url('../assets/images/bg.jpg');
+  background-image: url('../../assets/images/bg.jpg');
   height: 100vh;
   background-size: cover;
 }

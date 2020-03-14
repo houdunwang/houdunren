@@ -26,7 +26,7 @@ class BindMobileMiddleware
     $user = auth()->user();
     foreach (['mobile', 'email'] as $field) {
       if ($user && $this->checkBindField($field) && !$user[$field]) {
-        return route("member.{$field}.create");
+        return route("{$field}.create");
       }
     }
   }

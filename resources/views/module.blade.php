@@ -1,5 +1,5 @@
-@inject('menuServer', 'App\Services\MenuServer')
-@inject('moduleServer', 'App\Services\ModuleServer')
+@inject('MenuService', 'App\Services\MenuService')
+@inject('ModuleService', 'App\Services\ModuleService')
 <!doctype html>
 <html lang="en">
 
@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
-  <title>{{$moduleServer->getByUrl()['title']}}</title>
+  <title>{{$ModuleService->getModuleByUrl()['title']}}</title>
   <link rel="stylesheet" href="{{mix('css/app.css')}}">
   @stack('css')
 </head>
@@ -63,7 +63,7 @@
   </nav>
   <div class="d-flex flex-fill flex-column flex-md-row">
     <div class="menus border-right border-top-0 shadow bg-white">
-      @foreach ($menuServer
+      @foreach ($MenuService
       ->getByUser(site(),module(),auth()->user())['menu']['admin'] as $menu)
       <ul class="list-group list-group-flush text-left">
         <strong class="list-group-item list-group-item-light d-flex align-items-center text-dark justify-content-start">

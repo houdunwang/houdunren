@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{{mix('css/app.css')}}">
 </head>
 
-<body class="animated fadeInDownBig member-login">
+<body class="login animated fadeInDownBig d-flex flex-column justify-content-center align-items-center ">
   <form action="{{route('register')}}" method="post"
     class="d-flex flex-column justify-content-center align-items-center">
     @csrf
@@ -52,7 +52,7 @@
           </div>
         </div>
         <div class="text-muted">
-          已有账号，<a href=" {{route('member.login')}}">去登录 </a>
+          已有账号，<a href=" {{route('login')}}">去登录 </a>
         </div>
       </div>
       <div class="card-footer text-muted">

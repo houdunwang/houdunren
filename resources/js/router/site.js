@@ -1,4 +1,4 @@
-import Admin from '@/views/Admin'
+import Main from '@/views/system/Main'
 import Config from '@/views/site/config/Edit'
 import Add from '@/views/site/site/Add.vue'
 import Edit from '@/views/site/site/Edit.vue'
@@ -11,10 +11,10 @@ import AccessEdit from '@/views/site/access/Edit'
 //站点路由
 export default {
   path: '/site',
-  component: Admin,
+  component: Main,
   children: [
     //站点管理
-    { name: 'site', path: 'index', component: Index, alias: '/site' },
+    { name: 'site', path: 'index', component: Index, alias: '/admin' },
     { name: 'site.add', path: 'add', component: Add },
     { name: 'site.edit', path: ':sid/edit', component: Edit },
     //站点配置

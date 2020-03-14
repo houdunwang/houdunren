@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\ApiController;
+use App\Http\Requests\UserRequest;
 use App\Models\Site;
-use App\Services\UploadServer;
+use App\Services\UploadService;
 use Illuminate\Http\Request;
 
 /**
@@ -21,14 +22,29 @@ class UploadController extends ApiController
   /**
    * 系统应用文件上传
    * @param Request $request
-   * @param UploadServer $upload
+   * @param UploadService $upload
    *
    * @return string
    */
-  public function store(Request $request,  UploadServer $uploadServer, Site $site = null)
+  public function store(Request $request,  UploadService $uploadService, Site $site = null)
   {
     $file = $request->file('file');
-    $action = $site ? 'site' : 'system';
-    return $uploadServer->$action($file, auth()->user(), $site);
+    $action = $site ? 'site' : 'local';
+    return $uploadService->$action($file, auth()->user(), $site);
+  }
+
+  /**
+   * 头像上传
+   * @param UploadService $uploadService
+   * @param Request $request
+   *
+   * @return Model
+   */
+  public function avatar(UploadService $uploadService, Request $request)
+  {
+    if ($file = $request->file('file')) {
+      $model = $uploadService->image($file, auth()->user(), 200, 200);
+      return $this->json($model);
+    }
   }
 }

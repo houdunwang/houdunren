@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\ApiController;
+use App\Services\SiteService;
 use App\Services\UserService;
 use App\User;
 use Illuminate\Contracts\View\Factory;
@@ -20,18 +21,21 @@ use Illuminate\View\View;
  */
 class LoginController extends ApiController
 {
+  protected $site;
+
   public function __construct()
   {
     $this->middleware('guest')->except('logout');
+    $this->site = app(SiteService::class)->getSiteByDomain();
   }
 
   /**
    * 登录界面
    * @return string
    */
-  public function show()
+  public function show(SiteService $siteService)
   {
-    return view('user/member-login');
+    return view('member/login', ['site' => $this->site]);
   }
 
   /**
@@ -76,7 +80,7 @@ class LoginController extends ApiController
   public function logout()
   {
     auth()->logout();
-    return redirect('/member/login');
+    return redirect($this->site ? '/' : '/login');
   }
 
   /**
@@ -100,16 +104,16 @@ class LoginController extends ApiController
   public function store(Request $request, User $user)
   {
     $request->validate([
-      'name' => 'required|between:3,20|unique:users|regex:/^[a-z]{3,20}$/i',
+      'name' => 'required|between:3,20|unique:users|regex:/^\w{3,20}$/i',
       'nickname' => 'required',
       'password' => 'required|min:5,20|confirmed',
       'code' => 'captcha'
     ], [
-      'name.required' => '帐号不能为空', 'name.between' => '用户名长度为3~20', 'name.unique' => '用户名已经存在', 'name.regex' => '用户名必须为字母', 'nickname.required' => '昵称不能为空', 'password.required' => '密码不能为空', 'password.min' => '密码长度为5~20', 'password.confirmed' => '两次密码输入不一致', 'code.captcha' => '验证码输入错误'
+      'name.required' => '帐号不能为空', 'name.between' => '用户名长度为3~20', 'name.unique' => '用户名已经存在', 'name.regex' => '用户名必须为字母/数字构成', 'nickname.required' => '昵称不能为空', 'password.required' => '密码不能为空', 'password.min' => '密码长度为5~20', 'password.confirmed' => '两次密码输入不一致', 'code.captcha' => '验证码输入错误'
     ]);
 
     $user->fill($request->all())->save();
     Auth::login($user);
-    return redirect('/');
+    return redirect()->intended('/');
   }
 }

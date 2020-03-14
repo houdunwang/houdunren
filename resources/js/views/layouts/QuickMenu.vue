@@ -2,13 +2,18 @@
   <div>
     <div class="d-none d-sm-block">
       <div class="row">
-        <div class="col-6 logo" :style="{ color: 'red', backgroundImage: `url(${logo})` }"></div>
+        <div
+          class="col-6 logo"
+          :style="{ color: 'red', backgroundImage: `url(${logo})` }"
+        ></div>
         <div class="col-6 menu">
-          <router-link :to="{ name: 'site' }"> <i class="fa fa-sitemap fa-2x"></i>网站管理 </router-link>
+          <router-link :to="{ name: 'site' }">
+            <i class="fa fa-sitemap fa-2x"></i>网站管理
+          </router-link>
           <router-link :to="{ name: 'system' }" v-if="user.is_super_admin">
             <i class="fa fa-support fa-2x"></i>系统设置
           </router-link>
-          <a href="/admin/logout">
+          <a href="/logout">
             <i class="fa fa-sign-out fa-2x"></i>
             退出
           </a>
@@ -26,7 +31,11 @@ export default {
     ...mapState('user', { user: 'data' }),
     ...mapState('systemConfig', { config: 'data' }),
     logo() {
-      return _.get(this.config, 'base.logo.value', require('@/assets/images/training.png'))
+      return _.get(
+        this.config,
+        'base.logo.value',
+        require('@/assets/images/training.png')
+      )
     }
   }
 }

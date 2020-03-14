@@ -14,8 +14,9 @@ use Symfony\Component\HttpFoundation\File\Exception\NoFileException;
 use Symfony\Component\HttpFoundation\File\Exception\CannotWriteFileException;
 use Symfony\Component\HttpFoundation\File\Exception\NoTmpDirFileException;
 use Symfony\Component\HttpFoundation\File\Exception\ExtensionFileException;
+use Intervention\Image\Facades\Image;
 
-class UploadServer
+class UploadService
 {
   /**
    * 站点上传
@@ -26,25 +27,7 @@ class UploadServer
    */
   public function site(UploadedFile $file, User $user, Site $site)
   {
-  }
-
-  /**
-   * 系统上传
-   * @param UploadedFile $file
-   * @param User $user
-   * @return void
-   * @throws FileException
-   * @throws IniSizeFileException
-   * @throws FormSizeFileException
-   * @throws PartialFileException
-   * @throws NoFileException
-   * @throws CannotWriteFileException
-   * @throws NoTmpDirFileException
-   * @throws ExtensionFileException
-   */
-  public function system(UploadedFile $file, User $user)
-  {
-    return $this->local($file, $user);
+    return $this->local($file, $user, $site);
   }
 
   /**
@@ -57,14 +40,49 @@ class UploadServer
    */
   public function local(UploadedFile $file, User $user)
   {
-    $dir = 'attachments/' . date('Y/m');
-    $name =  time() . microtime(true) . '.' . $file->getClientOriginalExtension();
-    $file->move($dir, $name);
-    $path = config('app.url') . '/' . $dir . '/' . $name;
-    $user_id = $user['id'];
-    return $this->save(compact('name', 'path', 'user_id'));
+    $path = $this->localPath($file);
+    $file->move(dirname($path), basename($path));
+
+    return $this->save(
+      [
+        'name' => basename($path),
+        'path' => config('app.url') . '/' . $path,
+        'user_id' => $user->id
+      ]
+    );
   }
 
+  /**
+   * 头像上传
+   * @param UploadedFile $file
+   * @param User $user
+   * @return void
+   */
+  public function image(UploadedFile $file, User $user, int $width = null, int $height = null)
+  {
+    //图片缩放
+    if ($width && $height) {
+      $path = $this->localPath($file);
+      $imageService  = new ImageService;
+      $img = $imageService->resize($file->getPathname(), 200, 200);
+      $img->save($path);
+      return $this->save(
+        [
+          'name' => basename($path),
+          'path' => config('app.url') . '/' . $path,
+          'user_id' => $user->id
+        ]
+      );
+    }
+    return $this->local($file, $user);
+  }
+
+  protected function localPath(UploadedFile $file)
+  {
+    $dir = 'attachments/' . date('Y/m');
+    $name =  time() . microtime(true) . '.' . $file->getClientOriginalExtension();
+    return $dir . '/' . $name;
+  }
   /**
    * 保存入库
    * @param array $data

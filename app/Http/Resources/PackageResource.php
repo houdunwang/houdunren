@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Module;
-use App\Services\ModuleServer;
+use App\Services\ModuleService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -27,7 +27,7 @@ class PackageResource extends JsonResource
   protected function getModules()
   {
     return $this->module->map(function ($module) {
-      return  app(ModuleServer::class)->getModuleInfo($module['name']);
+      return  app(ModuleService::class)->getModuleInfo($module['name']);
     });
   }
 }

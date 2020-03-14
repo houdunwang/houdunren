@@ -1,5 +1,5 @@
 // 会员登录
-.user-member-login {
+.login {
   background-image: url('/images/member-login.jpg');
   background-size: cover;
   height: 100vh;
@@ -19,11 +19,9 @@
       transform: rotateY(0deg) scale(1);
     }
   }
-  height: 90vh;
 }
 
-//后台登录
-.user-admin-login {
+.system-login {
   background-image: url('/images/system-login.jpg');
   background-size: cover;
   height: 100vh;
@@ -43,5 +41,4 @@
       transform: rotateY(0deg) scale(1);
     }
   }
-  height: 90vh;
 }

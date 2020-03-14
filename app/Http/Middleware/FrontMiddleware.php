@@ -13,8 +13,11 @@ class FrontMiddleware
 {
   public function handle($request, Closure $next)
   {
-    app(SiteService::class)->getByDomain();
-    config(['site' => site()['config']]);
+    $site = app(SiteService::class)->getSiteByDomain();
+    if (!$site) {
+      dd('域名不属于任何站点');
+    }
+    config(['site' => site($site)['config']]);
     return $next($request);
   }
 }

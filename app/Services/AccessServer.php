@@ -100,7 +100,7 @@ class AccessServer
   protected function format($site)
   {
     $format = [];
-    $modules = app(ModuleServer::class)->getSiteModule($site);
+    $modules = app(ModuleService::class)->getSiteModule($site);
     foreach ($modules as $module) {
       foreach ($module['menu']['admin'] as $menu) {
         foreach ($menu['items'] as $item) {

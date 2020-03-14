@@ -11,9 +11,8 @@
   <link rel="stylesheet" href="{{mix('css/app.css')}}">
 </head>
 
-<body
-  class="animated fadeInDownBig {{ route_class() }} d-flex flex-column justify-content-center align-items-center login">
-  <form action="{{route('member.login')}}" method="post">
+<body class="login animated fadeInDownBig d-flex flex-column justify-content-center align-items-center">
+  <form action="{{route('login')}}" method="post">
     @csrf
     <div class="card bg-white animated fadeInDownBig" id="app">
       <div class="card-header">登录帐号</div>
@@ -42,8 +41,10 @@
           <input type="checkbox" class="form-check-input" name="remember" id="remember" />
           <label class="form-check-label" for="remember">记住我</label>
           <div class="d-inline">
-            <a href="">注册</a>
+            <a href="{{route('register')}}">注册</a>
+            @if ($site)
             <a href="">忘记密码</a>
+            @endif
           </div>
         </div>
       </div>
@@ -52,26 +53,6 @@
       </div>
     </div>
   </form>
-  {{-- <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js'></script>
-  <!-- 引入样式 -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-  <!-- 引入组件库 -->
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <script>
-    new Vue({
-      el:"#app",
-      data:{
-        form:{name:'',password:'',captcha:''}
-      },
-      methods:{
-        async submit(){
-          let response = await axios.post(`{{route('user.member.login')}}`)
-  console.log(response);
-  }
-  }
-  })
-  </script> --}}
 </body>
 
 </html>

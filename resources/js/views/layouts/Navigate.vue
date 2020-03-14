@@ -44,10 +44,13 @@
                   <i class="fa fa-user"></i>
                   {{ user.name }}
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <div
+                  class="dropdown-menu dropdown-menu-right"
+                  aria-labelledby="navbarDropdown"
+                >
                   <a class="dropdown-item" href="#">修改资料</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/admin/logout">退出登录</a>
+                  <a class="dropdown-item" href="/logout">退出登录</a>
                 </div>
               </li>
             </ul>
@@ -93,7 +96,12 @@ export default {
           url: { name: 'system.group' },
           check: true
         },
-        { title: '更新缓存', icon: 'fa-bitbucket', url: { name: 'system.cache.update' }, check: true }
+        {
+          title: '更新缓存',
+          icon: 'fa-bitbucket',
+          url: { name: 'system.cache.update' },
+          check: true
+        }
       ]
     }
   },

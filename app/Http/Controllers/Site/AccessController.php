@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\ApiController;
 use App\Models\Site;
 use App\Services\AccessServer;
-use App\Services\ModuleServer;
+use App\Services\ModuleService;
 use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -27,14 +27,14 @@ class AccessController extends ApiController
   /**
    * 站点权限列表
    * @param Site $site
-   * @param ModuleServer $moduleServer
+   * @param ModuleService $ModuleService
    *
    * @return mixed
    */
-  public function site(Site $site, ModuleServer $moduleServer, AccessServer $accessServer)
+  public function site(Site $site, ModuleService $ModuleService, AccessServer $accessServer)
   {
     $accessServer->updateSitePermission($site);
-    return $this->success('', $moduleServer->getSiteModule($site));
+    return $this->success('', $ModuleService->getSiteModule($site));
   }
 
   /**

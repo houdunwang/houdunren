@@ -5,7 +5,7 @@ namespace App\Http\Controllers\System;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\ModuleRequest;
 use App\Models\Module;
-use App\Services\ModuleServer;
+use App\Services\ModuleService;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -23,12 +23,12 @@ class ModuleController extends ApiController
 
   /**
    * 获取所有模块包括未安装模块
-   * @param ModuleServer $moduleServer
+   * @param ModuleService $ModuleService
    * @return JsonResponse
    */
-  public function index(ModuleServer $moduleServer): JsonResponse
+  public function index(ModuleService $ModuleService): JsonResponse
   {
-    $modules = $moduleServer->all();
+    $modules = $ModuleService->all();
     return $this->success('模块获取成功', $modules);
   }
 
@@ -38,9 +38,9 @@ class ModuleController extends ApiController
    * @param Module $module
    * @return JsonResponse
    */
-  public function install(ModuleRequest $moduleRequest, Module $module, ModuleServer $moduleServer)
+  public function install(ModuleRequest $moduleRequest, Module $module, ModuleService $moduleService)
   {
-    $info = $moduleServer->getModuleInfo($moduleRequest->name);
+    $info = $moduleService->getModuleInfo($moduleRequest->name);
     $module->fill($info['config'])->save();
     return $this->success('模块安装成功');
   }
@@ -59,12 +59,12 @@ class ModuleController extends ApiController
 
   /**
    * 所有已经安装模块
-   * @param ModuleServer $moduleServer
+   * @param ModuleService $ModuleService
    * @return JsonResponse
    */
-  public function installed(ModuleServer $moduleServer): JsonResponse
+  public function installed(ModuleService $ModuleService): JsonResponse
   {
-    $modules = $moduleServer->allInstalledModule();
+    $modules = $ModuleService->allInstalledModule();
     return $this->success('模块获取成功', $modules);
   }
 }

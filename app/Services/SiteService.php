@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Site;
 use App\User;
+use Illuminate\Support\Facades\Route;
 
 /**
  * 站点服务
@@ -35,13 +36,9 @@ class SiteService
    * 根据域名获取站点
    * @return App\Models\Site
    */
-  public function getByDomain()
+  public function getSiteByDomain()
   {
-    $site = Site::where('domain', 'like', "%{$_SERVER['HTTP_HOST']}%")->first();
-    if ($site == false) {
-      abort(403, '域名不属于任何站点');
-    }
-    return $this->site($site);
+    return Site::where('domain', $_SERVER['HTTP_HOST'])->first();
   }
 
   /**

@@ -8,27 +8,43 @@
     </nav>
     <div class="card">
       <div class="card-body">
-        <el-form ref="form" label-width="100px" :rules="rules" :model="field" label-position="right">
+        <el-form
+          ref="form"
+          label-width="100px"
+          :rules="rules"
+          :model="field"
+          label-position="right"
+        >
           <el-form-item label="站点名称" prop="name">
-            <el-input v-model="field.name" placeholder="请输入网站标题"></el-input>
+            <el-input
+              v-model="field.name"
+              placeholder="请输入网站标题"
+            ></el-input>
           </el-form-item>
-
           <el-form-item label="网站域名" prop="domain">
-            <el-input v-model="field.domain" placeholder="如: https://www.github.com"></el-input>
+            <el-input
+              v-model="field.domain"
+              placeholder="如: https://www.github.com"
+            ></el-input>
           </el-form-item>
-
           <el-form-item label="网站描述" prop="description">
-            <el-input type="textarea" rows="3" v-model="field.description" placeholder="网站的简短介绍"></el-input>
+            <el-input
+              type="textarea"
+              rows="3"
+              v-model="field.description"
+              placeholder="网站的简短介绍"
+            ></el-input>
           </el-form-item>
-
           <el-form-item label="关键词">
-            <el-input v-model="field.keyword" placeholder="请用半角逗号分隔"></el-input>
+            <el-input
+              v-model="field.keyword"
+              placeholder="请用半角逗号分隔"
+            ></el-input>
           </el-form-item>
-
           <el-form-item label="站点标志">
             <el-upload
               class="avatar-uploader"
-              action="/api/system/upload"
+              :action="`/common/upload/${$route.params.sid}`"
               accept="image/jpeg, image/png"
               :show-file-list="false"
               :on-success="logoUpload"
@@ -38,24 +54,27 @@
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
-
           <el-form-item label="ICP备案号">
             <el-input v-model="field.icp"></el-input>
           </el-form-item>
-
           <el-form-item label="电话">
             <el-input v-model="field.tel"></el-input>
           </el-form-item>
-
           <el-form-item label="邮箱">
             <el-input v-model="field.email"></el-input>
           </el-form-item>
-
           <el-form-item label="统计代码">
-            <el-input type="textarea" :rows="4" v-model="field.counter" placeholder></el-input>
+            <el-input
+              type="textarea"
+              :rows="4"
+              v-model="field.counter"
+              placeholder
+            ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click.prevent="submit('form')">保存提交</el-button>
+            <el-button type="primary" @click.prevent="submit('form')"
+              >保存提交</el-button
+            >
           </el-form-item>
         </el-form>
       </div>
@@ -91,14 +110,16 @@ export default {
   },
   async created() {
     if (this.action === 'edit') {
-      let response = await this.axios.get(`/site/site/${this.$route.params.sid}`).then(r => r.data.data)
+      let response = await this.axios
+        .get(`/site/site/${this.$route.params.sid}`)
+        .then(r => r.data.data)
       this.$set(this, 'field', response)
     }
   },
   methods: {
     //上传标志
-    logoUpload(res) {
-      this.field.logo = res
+    logoUpload(file) {
+      this.field.logo = file.path
     },
     submit(ref) {
       this.$refs[ref].validate(async valid => {

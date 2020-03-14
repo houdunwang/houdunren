@@ -14054,15 +14054,14 @@ body.member .menu .icon img {
   }
 }
 
-.user-member-login {
+.login {
   background-image: url("/images/member-login.jpg");
   background-size: cover;
   height: 100vh;
   perspective: 800px;
-  height: 90vh;
 }
 
-.user-member-login .card {
+.login .card {
   -webkit-filter: sepia(10%) blur(0px);
           filter: sepia(10%) blur(0px);
   transition: 1s;
@@ -14070,32 +14069,31 @@ body.member .menu .icon img {
 }
 
 @media screen and (max-width: 768px) {
-  .user-member-login .card {
+  .login .card {
     width: 90%;
   }
 }
 
 @media screen and (min-width: 768px) {
-  .user-member-login .card {
+  .login .card {
     width: 500px;
   }
 }
 
-.user-member-login .card .card:hover {
+.login .card .card:hover {
   -webkit-filter: sepia(20%);
           filter: sepia(20%);
   transform: rotateY(0deg) scale(1);
 }
 
-.user-admin-login {
+.system-login {
   background-image: url("/images/system-login.jpg");
   background-size: cover;
   height: 100vh;
   perspective: 800px;
-  height: 90vh;
 }
 
-.user-admin-login .card {
+.system-login .card {
   -webkit-filter: sepia(10%) blur(0px);
           filter: sepia(10%) blur(0px);
   transition: 1s;
@@ -14103,18 +14101,18 @@ body.member .menu .icon img {
 }
 
 @media screen and (max-width: 768px) {
-  .user-admin-login .card {
+  .system-login .card {
     width: 90%;
   }
 }
 
 @media screen and (min-width: 768px) {
-  .user-admin-login .card {
+  .system-login .card {
     width: 500px;
   }
 }
 
-.user-admin-login .card .card:hover {
+.system-login .card .card:hover {
   -webkit-filter: sepia(20%);
           filter: sepia(20%);
   transform: rotateY(0deg) scale(1);

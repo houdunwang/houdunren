@@ -8,10 +8,10 @@
         <el-form :model="form" ref="form" label-width="80px">
           <el-form-item
             label="昵称"
-            prop="name"
+            prop="nickname"
             :rules="[{ required: true, message: '昵称不能为空', trigger: 'blur' }]"
           >
-            <el-input v-model="form.name"></el-input>
+            <el-input v-model="form.nickname"></el-input>
           </el-form-item>
           <el-form-item label="真实姓名">
             <el-input v-model="form.real_name"></el-input>
@@ -41,14 +41,26 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
+import _ from 'lodash'
 export default {
-  props: { form: Object },
+  data() {
+    return {
+      form: {}
+    }
+  },
+  async created() {
+    let response = await this.axios
+      .get(`member/get`)
+      .then(r => _.pick(r.data, ['nickname', 'realname', 'home', 'weibo', 'wechat', 'github', 'qq']))
+    this.$set(this, 'form', response)
+  },
   methods: {
     onSubmit() {
-      this.$refs['form'].validate(valid => {
+      this.$refs['form'].validate(async valid => {
         if (valid) {
-          this.$emit('submit', ['name', 'home', 'webo', 'wechat', 'github', 'qq'])
+          await this.axios.put(`member/user`, this.form)
+          this.$message.success('修改成功')
         }
       })
     }

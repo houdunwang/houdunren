@@ -8,21 +8,21 @@ use App\User;
 
 /**
  * 模块服务
- * Class ModuleServer
+ * Class ModuleService
  * @package App\Services
  */
-class ModuleServer
+class ModuleService
 {
   /**
    * 根据请求地址获取模块
    * @return mixex
    */
-  public function getByUrl()
+  public function getModuleByUrl()
   {
     static $cache = null;
     if (is_null($cache)) {
       preg_match('/^(\w+)\//', request()->path(), $matchs);
-      $cache =  Module::where('name', $matchs[1])->firstOrFail();
+      $cache =  Module::where('name', $matchs[1] ?? '')->first();
     }
     return $cache;
   }

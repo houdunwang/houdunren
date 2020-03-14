@@ -1,4 +1,4 @@
-import Admin from '@/views/Admin'
+import Main from '@/views/system/Main'
 import Edit from '@/views/system/config/Edit'
 import Index from '@/views/system/home/Index'
 import Module from '@/views/system/module/Index'
@@ -13,7 +13,7 @@ import UpdateSystemCache from '@/views/system/cache/Update'
 //系统配置
 export default {
   path: '/system',
-  component: Admin,
+  component: Main,
   children: [
     { name: 'system', path: 'index', component: Index, alias: '/system' },
     { name: 'system.config', path: 'config', component: Edit },

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\ApiController;
 use App\Models\Site;
-use App\Services\ModuleServer;
+use App\Services\ModuleService;
 
 class ModuleController extends ApiController
 {
@@ -16,26 +16,26 @@ class ModuleController extends ApiController
   /**
    * 站点所有模块
    * @param Site $site
-   * @param ModuleServer $moduleServer
+   * @param ModuleService $ModuleService
    *
    * @return void
    */
-  public function site(Site $site, ModuleServer $moduleServer)
+  public function site(Site $site, ModuleService $ModuleService)
   {
-    $modules = $moduleServer->getSiteModule($site);
+    $modules = $ModuleService->getSiteModule($site);
     return $this->success('站点所有模块', $modules);
   }
 
   /**
    * 当前用户使用的模块
    * @param Site $site
-   * @param ModuleServer $moduleServer
+   * @param ModuleService $ModuleService
    *
    * @return mixed
    */
-  public function user(Site $site, ModuleServer $moduleServer)
+  public function user(Site $site, ModuleService $ModuleService)
   {
-    $modules = $moduleServer->getModuleByUser($site, auth()->user());
+    $modules = $ModuleService->getModuleByUser($site, auth()->user());
     return $this->success('当前用户可使用模块列表', $modules);
   }
 }

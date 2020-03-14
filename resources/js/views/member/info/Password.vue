@@ -37,13 +37,19 @@
 </template>
 
 <script>
+import _ from 'lodash'
 export default {
-  props: { form: Object },
+  data() {
+    return {
+      form: {}
+    }
+  },
   methods: {
     onSubmit() {
-      this.$refs['form'].validate(valid => {
+      this.$refs['form'].validate(async valid => {
         if (valid) {
-          this.$emit('submit', ['password', 'origin_password', 'password_confirmation'])
+          await this.axios.put(`member/password`, this.form)
+          this.$message.success('密码修改成功')
         }
       })
     }

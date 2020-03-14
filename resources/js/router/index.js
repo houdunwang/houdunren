@@ -6,7 +6,7 @@ import member from './member'
 //注册组件
 Vue.use(VueRouter)
 
-const routes = [site, system, member]
+const routes = [system, site, member]
 
 export default new VueRouter({
   routes,
