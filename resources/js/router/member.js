@@ -11,7 +11,8 @@ export default {
     {
       name: 'info.base',
       path: 'info/base',
-      component: Base
+      component: Base,
+      alias: '/member'
     },
     {
       name: 'info.password',

@@ -6,12 +6,10 @@ use AlibabaCloud\Client\Exception\ClientException;
 use AlibabaCloud\Client\Exception\ServerException;
 use App\Http\Controllers\ApiController;
 use App\Models\Site;
-use App\Notifications\MailNotification;
+use App\Services\MailService;
 use App\Services\SmsService;
-use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
 
 /**
  * 站点配置
@@ -63,7 +61,7 @@ class ConfigController extends ApiController
    * @throws ClientException
    * @throws ServerException
    */
-  public function email(Request $request)
+  public function email(Request $request, MailService $mailService)
   {
     $user = auth()->user();
     $user['email'] = $request->email;
@@ -73,7 +71,7 @@ class ConfigController extends ApiController
       'content' => '这是一封测试邮件',
       'salutation' => 'Copyright © 2010-2020 houdunren.com',
     ];
-    Notification::send($user, new MailNotification($message));
+    $mailService->send($user, $message);
     return $this->success('测试邮件发送发送成功');
   }
 }

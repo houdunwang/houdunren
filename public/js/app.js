@@ -58744,7 +58744,8 @@ __webpack_require__.r(__webpack_exports__);
   children: [{
     name: 'info.base',
     path: 'info/base',
-    component: _views_member_info_Base__WEBPACK_IMPORTED_MODULE_1__["default"]
+    component: _views_member_info_Base__WEBPACK_IMPORTED_MODULE_1__["default"],
+    alias: '/member'
   }, {
     name: 'info.password',
     path: 'info/password',
