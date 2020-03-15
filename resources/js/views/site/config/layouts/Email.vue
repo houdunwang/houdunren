@@ -17,22 +17,21 @@
         <el-form-item :label="form.email.password.title">
           <el-input v-model="form.email.password.value" :placeholder="form.email.password.desc"></el-input>
         </el-form-item>
-        <el-form-item :label="form.email.name.title">
-          <el-input v-model="form.email.name.value" :placeholder="form.email.name.desc"></el-input>
-        </el-form-item>
-        <el-form-item :label="form.email.address.title">
-          <el-input v-model="form.email.address.value" :placeholder="form.email.address.desc"></el-input>
+        <el-form-item :label="form.email.encryption.title">
+          <el-radio-group v-model="form.email.encryption.value">
+            <el-radio label="tls"></el-radio>
+            <el-radio label="ssl"></el-radio>
+          </el-radio-group>
         </el-form-item>
       </div>
     </div>
-
     <div class="card mt-3">
       <div class="card-header">测试</div>
       <div class="card-body">
-        <el-form-item :label="form.email.test.mail.title">
-          <el-input v-model="form.email.test.mail.value" :placeholder="form.email.test.mail.desc">
+        <el-form-item :label="form.email.test_mail.title">
+          <el-input v-model="form.email.test_mail.value" :placeholder="form.email.test_mail.desc">
             <template slot="append">
-              <a href>发送测试邮件</a>
+              <a href="#" @click.prevent="send">发送测试邮件</a>
             </template>
           </el-input>
         </el-form-item>
@@ -40,10 +39,17 @@
     </div>
   </el-form>
 </template>
-
 <script>
 export default {
-  props: { form: Object }
+  props: { form: Object },
+  methods: {
+    async send() {
+      await this.axios.post(`site/config/email/${this.$route.params.sid}`, {
+        phone: this.form.email.test_mail.value
+      })
+      this.$message.success('测试邮件发送成功')
+    }
+  }
 }
 </script>
 

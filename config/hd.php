@@ -38,22 +38,18 @@ return [
       'type' => ['value' => 'jpg,jpeg,gif,png,doc,txt,pem,json', 'title' => '上传类型', 'desc' => '请用英文半角逗号分隔文件类型'],
     ],
     'email' => [
-      'driver' => ['value' => '', 'title' => '邮箱驱动', 'desc' => 'smtp、sendmail、mailgun、mandrill、ses、sparkpost、log'],
-      'host' => ['value' => '', 'title' => '服务器地址', 'desc' => '指定SMTP服务器的地址 阿里邮箱 腾讯邮箱'],
-      'port' => ['value' => '', 'title' => '端口', 'desc' => '指定SMTP服务器的地址, 如: 126邮箱为25'],
+      'driver' => ['value' => 'smtp', 'title' => '邮箱驱动', 'desc' => 'smtp、sendmail、mailgun、mandrill、ses、sparkpost、log'],
+      'host' => ['value' => 'smtpdm.aliyun.com', 'title' => '服务器地址', 'desc' => '指定SMTP服务器的地址 阿里邮箱 腾讯邮箱'],
+      'port' => ['value' => '465', 'title' => '端口', 'desc' => '指定SMTP服务器的地址, 如: 126邮箱为25'],
       'username' => ['value' => '', 'title' => '邮箱帐号', 'desc' => '发送邮箱登录帐号,一般情况下设置与发送邮箱一样'],
       'password' => ['value' => '', 'title' => '邮箱密码', 'desc' => ''],
-      'name' => ['value' => '', 'title' => '发件人名称', 'desc' => '发件人的中文名称'],
-      'address' => ['value' => '', 'title' => '发送邮箱', 'desc' => '收件方回复使用的邮箱，一般设置成和邮箱帐号一至'],
-      'test' => [
-        'mail' => ['value' => '', 'title' => '测试邮箱', 'desc' => '检测邮箱配置的测试邮箱，需要先保存配置后再测试'],
-      ]
+      'encryption' => ['value' => 'ssl', 'title' => '发送邮箱', 'desc' => '加密方式'],
+      'test_mail' => ['value' => '', 'title' => '测试邮箱', 'desc' => '检测邮箱配置的测试邮箱，需要先保存配置后再测试'],
     ],
     'sms' => [
       'aliyun' => [
         'sign' => ['value' => '', 'title' => '短信签名', 'desc' => ''],
-        'template' => ['value' => '', 'title' => '短信模板', 'desc' => ''],
-        'vars' => ['value' => '', 'title' => '模板变量', 'desc' => '如: "code:2019,product:商城"，如果使用 `SMS_12840367` 时不需要设置模板变量'],
+        'template' => ['value' => '', 'title' => '验证码模板', 'desc' => ''],
         'test_mobile' => ['value' => '', 'title' => '短信发送测试', 'desc' => '检测配置的测试手机号，需要先保存配置后再测试'],
       ],
     ],
@@ -86,6 +82,5 @@ return [
       'default' => ['value' => '您的消息我们已经收到', 'title' => '默认消息', 'desc' => '公众号没有匹配内容时的默认回复消息，支持微信关键词'],
       'welcome' => ['value' => '感谢您的关注', 'title' => '欢迎消息', 'desc' => '粉丝关注公众号时回复的消息，支持微信关键词']
     ],
-
   ]
 ];

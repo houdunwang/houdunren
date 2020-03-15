@@ -133,7 +133,6 @@ export default {
   async created() {
     let response = await this.axios.get(`site/config/${this.$route.params.sid}`)
     this.$set(this, 'form', response.data)
-    console.log(response)
   },
   methods: {
     async submit() {

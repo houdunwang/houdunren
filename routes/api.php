@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::group(['middleware' => ['auth:api'], 'namespace' => 'Common', 'prefix' => 'common'], function () {
+  Route::post('code/phone', 'CodeController@phone');
+});
 //系统
 Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
   //套餐管理
@@ -27,6 +30,9 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'si
   //站点配置
   Route::put('config/{site}', 'ConfigController@update');
   Route::get('config/{site}', 'ConfigController@show');
+  Route::post('config/sms/{site}', 'ConfigController@sms');
+  Route::post('config/email/{site}', 'ConfigController@email');
+  //公众号
   Route::resource('{site}/weChat', 'WeChatController')->except(['edit', 'create']);
   //操作员
   Route::get('{site}/admin', 'AdminController@index');
@@ -49,7 +55,7 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'si
 });
 
 //会员中心
-Route::post('login', 'LoginController@apiLogin');
+Route::post('login', 'Member\LoginController@apiLogin');
 Route::group(['middleware' => 'auth:api', 'namespace' => 'Member', 'prefix' => 'member'], function () {
   Route::get('get', 'UserController@get');
   Route::put('user', 'UserController@update');

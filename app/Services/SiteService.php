@@ -22,12 +22,13 @@ class SiteService
   public function site($site = null): Site
   {
     static $cache = null;
-    if (!is_null($cache)) {
-      return $cache;
+    if (is_null($cache)) {
+      $model = is_numeric($site) ? Site::find($site) : $site;
+      if ($model instanceof Site) $cache = $model;
     }
-    $model = is_numeric($site) ? Site::find($site) : $site;
-    if ($model instanceof Site) {
-      return $cache = $model;
+    if ($cache) {
+      $this->config($cache);
+      return $cache;
     }
     abort(403, '站点不存在');
   }
@@ -38,9 +39,33 @@ class SiteService
    */
   public function getSiteByDomain()
   {
-    return Site::where('domain', $_SERVER['HTTP_HOST'])->first();
+    $regexp = "^https?:\/\/{$_SERVER['HTTP_HOST']}";
+    return  Site::where('domain', 'REGEXP', $regexp)->first();
   }
 
+  /**
+   * 设置站点配置
+   * @param Site $site
+   * @return void
+   */
+  protected function config(Site $site)
+  {
+    config(['site' => $site['config']]);
+    config(['app.name' => $site['name']]);
+    config(['app.url' => $site['domain']]);
+    config(['mail' => [
+      'driver' => config('site.email.driver.value'),
+      'host' => config('site.email.host.value'),
+      'port' => config('site.email.port.value'),
+      'from' => [
+        'address' =>  config('site.email.username.value'),
+        'name' =>  config('app.name'),
+      ],
+      'encryption' =>  config('site.email.encryption.value'),
+      'username' =>  config('site.email.username.value'),
+      'password' =>  config('site.email.password.value'),
+    ]]);
+  }
   /**
    * 是否为站长
    * @param Site $site

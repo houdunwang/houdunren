@@ -9,6 +9,7 @@
   "license": "MIT",
   "require": {
     "php": "^7.2",
+    "alibabacloud/client": "^1.5",
     "fideloper/proxy": "^4.0",
     "fruitcake/laravel-cors": "^1.0",
     "gregwar/captcha": "^1.1",

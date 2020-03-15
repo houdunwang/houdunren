@@ -4083,9 +4083,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-// import { mapState } from 'vuex'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4104,7 +4101,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _context.next = 2;
               return _this.axios.get("member/get").then(function (r) {
-                return lodash__WEBPACK_IMPORTED_MODULE_1___default.a.pick(r.data, ['nickname', 'realname', 'home', 'weibo', 'wechat', 'github', 'qq']);
+                return lodash__WEBPACK_IMPORTED_MODULE_1___default.a.pick(r.data, ['nickname', 'real_name', 'home', 'weibo', 'wechat', 'github', 'qq']);
               });
 
             case 2:
@@ -4131,7 +4128,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               switch (_context2.prev = _context2.next) {
                 case 0:
                   if (!valid) {
-                    _context2.next = 4;
+                    _context2.next = 5;
                     break;
                   }
 
@@ -4141,7 +4138,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 case 3:
                   _this2.$message.success('修改成功');
 
-                case 4:
+                  window.location.reload();
+
+                case 5:
                 case "end":
                   return _context2.stop();
               }
@@ -4218,6 +4217,101 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      form: {}
+    };
+  },
+  methods: {
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      this.$refs['form'].validate( /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(valid) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  if (!valid) {
+                    _context.next = 4;
+                    break;
+                  }
+
+                  _context.next = 3;
+                  return _this.axios.put("member/password", _this.form);
+
+                case 3:
+                  _this.$message.success('密码修改成功');
+
+                case 4:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        return function (_x) {
+          return _ref.apply(this, arguments);
+        };
+      }());
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/member/info/Phone.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/member/info/Phone.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_PhoneValidate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/PhoneValidate */ "./resources/js/components/PhoneValidate.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    PhoneValidate: _components_PhoneValidate__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
   data: function data() {
     return {
       form: {}
@@ -4842,9 +4936,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               _this.$set(_this, 'form', response.data);
 
-              console.log(response);
-
-            case 5:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -5002,8 +5094,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -5048,6 +5146,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     form: Object
+  },
+  methods: {
+    send: function send() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.axios.post("site/config/email/".concat(_this.$route.params.sid), {
+                  phone: _this.form.email.test_mail.value
+                });
+
+              case 2:
+                _this.$message.success('测试邮件发送成功');
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
   }
 });
 
@@ -5094,9 +5218,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     form: Object
+  },
+  methods: {
+    sendTestSms: function sendTestSms() {
+      this.axios.post("site/config/sms/".concat(this.$route.params.sid), {
+        phone: this.form.sms.aliyun.test_mobile.value
+      });
+      this.$message.success('验证码发送成功');
+    }
   }
 });
 
@@ -48669,6 +48804,24 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PhoneValidate.vue?vue&type=template&id=459c9649&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PhoneValidate.vue?vue&type=template&id=459c9649& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {}
+var staticRenderFns = []
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/User.vue?vue&type=template&id=d884f594&":
 /*!*******************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/User.vue?vue&type=template&id=d884f594& ***!
@@ -49178,9 +49331,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-header bg-white" }, [
-        _vm._v("\n      我的资料\n    ")
-      ]),
+      _c("div", { staticClass: "card-header bg-white" }, [_vm._v("我的资料")]),
       _vm._v(" "),
       _c(
         "div",
@@ -49462,6 +49613,94 @@ var render = function() {
                 ],
                 1
               ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                [
+                  _c(
+                    "el-button",
+                    { attrs: { type: "primary" }, on: { click: _vm.onSubmit } },
+                    [_vm._v("保存提交")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/member/info/Phone.vue?vue&type=template&id=000eb15a&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/member/info/Phone.vue?vue&type=template&id=000eb15a& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header bg-white" }, [
+        _vm._v("\n      修改手机号\n    ")
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c(
+            "el-form",
+            { ref: "form", attrs: { model: _vm.form, "label-width": "80px" } },
+            [
+              _c(
+                "el-form-item",
+                {
+                  attrs: {
+                    label: "手机号",
+                    prop: "phone",
+                    rules: [
+                      {
+                        required: true,
+                        message: "请输入手机号",
+                        trigger: "blur"
+                      }
+                    ]
+                  }
+                },
+                [
+                  _c("el-input", {
+                    attrs: { type: "phone" },
+                    model: {
+                      value: _vm.form.phone,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "phone", $$v)
+                      },
+                      expression: "form.phone"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("PhoneValidate"),
               _vm._v(" "),
               _c(
                 "el-form-item",
@@ -50630,36 +50869,26 @@ var render = function() {
             _vm._v(" "),
             _c(
               "el-form-item",
-              { attrs: { label: _vm.form.email.name.title } },
+              { attrs: { label: _vm.form.email.encryption.title } },
               [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.email.name.desc },
-                  model: {
-                    value: _vm.form.email.name.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.email.name, "value", $$v)
-                    },
-                    expression: "form.email.name.value"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.email.address.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.email.address.desc },
-                  model: {
-                    value: _vm.form.email.address.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.email.address, "value", $$v)
-                    },
-                    expression: "form.email.address.value"
-                  }
-                })
+                _c(
+                  "el-radio-group",
+                  {
+                    model: {
+                      value: _vm.form.email.encryption.value,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form.email.encryption, "value", $$v)
+                      },
+                      expression: "form.email.encryption.value"
+                    }
+                  },
+                  [
+                    _c("el-radio", { attrs: { label: "tls" } }),
+                    _vm._v(" "),
+                    _c("el-radio", { attrs: { label: "ssl" } })
+                  ],
+                  1
+                )
               ],
               1
             )
@@ -50677,23 +50906,35 @@ var render = function() {
           [
             _c(
               "el-form-item",
-              { attrs: { label: _vm.form.email.test.mail.title } },
+              { attrs: { label: _vm.form.email.test_mail.title } },
               [
                 _c(
                   "el-input",
                   {
-                    attrs: { placeholder: _vm.form.email.test.mail.desc },
+                    attrs: { placeholder: _vm.form.email.test_mail.desc },
                     model: {
-                      value: _vm.form.email.test.mail.value,
+                      value: _vm.form.email.test_mail.value,
                       callback: function($$v) {
-                        _vm.$set(_vm.form.email.test.mail, "value", $$v)
+                        _vm.$set(_vm.form.email.test_mail, "value", $$v)
                       },
-                      expression: "form.email.test.mail.value"
+                      expression: "form.email.test_mail.value"
                     }
                   },
                   [
                     _c("template", { slot: "append" }, [
-                      _c("a", { attrs: { href: "" } }, [_vm._v("发送测试邮件")])
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.send($event)
+                            }
+                          }
+                        },
+                        [_vm._v("发送测试邮件")]
+                      )
                     ])
                   ],
                   2
@@ -50730,108 +50971,121 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card mt-3" }, [
-    _c("div", { staticClass: "card-header" }, [_vm._v("阿里云设置")]),
+  return _c("div", [
+    _vm._m(0),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "card-body" },
-      [
-        _c(
-          "el-form",
-          { ref: "form", attrs: { model: _vm.form, "label-width": "120px" } },
-          [
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.sms.aliyun.sign.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.sms.aliyun.sign.desc },
-                  model: {
-                    value: _vm.form.sms.aliyun.sign.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.sms.aliyun.sign, "value", $$v)
-                    },
-                    expression: "form.sms.aliyun.sign.value"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.sms.aliyun.template.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.sms.aliyun.template.desc },
-                  model: {
-                    value: _vm.form.sms.aliyun.template.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.sms.aliyun.template, "value", $$v)
-                    },
-                    expression: "form.sms.aliyun.template.value"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.sms.aliyun.vars.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.sms.aliyun.vars.desc },
-                  model: {
-                    value: _vm.form.sms.aliyun.vars.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.sms.aliyun.vars, "value", $$v)
-                    },
-                    expression: "form.sms.aliyun.vars.value"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.sms.aliyun.test_mobile.title } },
-              [
-                _c(
-                  "el-input",
-                  {
-                    attrs: {
-                      placeholder: _vm.form.sms.aliyun.test_mobile.desc
-                    },
+    _c("div", { staticClass: "card mt-3" }, [
+      _c("div", { staticClass: "card-header" }, [_vm._v("阿里云设置")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c(
+            "el-form",
+            { ref: "form", attrs: { model: _vm.form, "label-width": "120px" } },
+            [
+              _c(
+                "el-form-item",
+                { attrs: { label: _vm.form.sms.aliyun.sign.title } },
+                [
+                  _c("el-input", {
+                    attrs: { placeholder: _vm.form.sms.aliyun.sign.desc },
                     model: {
-                      value: _vm.form.sms.aliyun.test_mobile.value,
+                      value: _vm.form.sms.aliyun.sign.value,
                       callback: function($$v) {
-                        _vm.$set(_vm.form.sms.aliyun.test_mobile, "value", $$v)
+                        _vm.$set(_vm.form.sms.aliyun.sign, "value", $$v)
                       },
-                      expression: "form.sms.aliyun.test_mobile.value"
+                      expression: "form.sms.aliyun.sign.value"
                     }
-                  },
-                  [
-                    _c("template", { slot: "append" }, [
-                      _c("a", { attrs: { href: "" } }, [_vm._v("发送测试短信")])
-                    ])
-                  ],
-                  2
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ],
-      1
-    )
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: _vm.form.sms.aliyun.template.title } },
+                [
+                  _c("el-input", {
+                    attrs: { placeholder: _vm.form.sms.aliyun.template.desc },
+                    model: {
+                      value: _vm.form.sms.aliyun.template.value,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form.sms.aliyun.template, "value", $$v)
+                      },
+                      expression: "form.sms.aliyun.template.value"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: _vm.form.sms.aliyun.test_mobile.title } },
+                [
+                  _c(
+                    "el-input",
+                    {
+                      attrs: {
+                        placeholder: _vm.form.sms.aliyun.test_mobile.desc
+                      },
+                      model: {
+                        value: _vm.form.sms.aliyun.test_mobile.value,
+                        callback: function($$v) {
+                          _vm.$set(
+                            _vm.form.sms.aliyun.test_mobile,
+                            "value",
+                            $$v
+                          )
+                        },
+                        expression: "form.sms.aliyun.test_mobile.value"
+                      }
+                    },
+                    [
+                      _c("template", { slot: "append" }, [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#", type: "button" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.sendTestSms($event)
+                              }
+                            }
+                          },
+                          [_vm._v("发送测试短信")]
+                        )
+                      ])
+                    ],
+                    2
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "alert alert-warning" }, [
+      _vm._v("\n    需要先将阿里云配置正确\n    "),
+      _c("br"),
+      _vm._v("短信模板必须包括 code 与 product 字段\n  ")
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -58179,6 +58433,59 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/PhoneValidate.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/PhoneValidate.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PhoneValidate_vue_vue_type_template_id_459c9649___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PhoneValidate.vue?vue&type=template&id=459c9649& */ "./resources/js/components/PhoneValidate.vue?vue&type=template&id=459c9649&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _PhoneValidate_vue_vue_type_template_id_459c9649___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PhoneValidate_vue_vue_type_template_id_459c9649___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PhoneValidate.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/PhoneValidate.vue?vue&type=template&id=459c9649&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/PhoneValidate.vue?vue&type=template&id=459c9649& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PhoneValidate_vue_vue_type_template_id_459c9649___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PhoneValidate.vue?vue&type=template&id=459c9649& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PhoneValidate.vue?vue&type=template&id=459c9649&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PhoneValidate_vue_vue_type_template_id_459c9649___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PhoneValidate_vue_vue_type_template_id_459c9649___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/User.vue":
 /*!******************************************!*\
   !*** ./resources/js/components/User.vue ***!
@@ -58425,6 +58732,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_member_info_Base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/views/member/info/Base */ "./resources/js/views/member/info/Base.vue");
 /* harmony import */ var _views_member_info_Password__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/views/member/info/Password */ "./resources/js/views/member/info/Password.vue");
 /* harmony import */ var _views_member_info_Avatar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/views/member/info/Avatar */ "./resources/js/views/member/info/Avatar.vue");
+/* harmony import */ var _views_member_info_Phone__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/views/member/info/Phone */ "./resources/js/views/member/info/Phone.vue");
+
 
 
 
@@ -58444,6 +58753,10 @@ __webpack_require__.r(__webpack_exports__);
     name: 'info.avatar',
     path: 'info/avatar',
     component: _views_member_info_Avatar__WEBPACK_IMPORTED_MODULE_3__["default"]
+  }, {
+    name: 'info.phone',
+    path: 'info/phone',
+    component: _views_member_info_Phone__WEBPACK_IMPORTED_MODULE_4__["default"]
   }]
 });
 
@@ -59509,6 +59822,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Password_vue_vue_type_template_id_01c2ca46___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Password_vue_vue_type_template_id_01c2ca46___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/member/info/Phone.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/views/member/info/Phone.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Phone_vue_vue_type_template_id_000eb15a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Phone.vue?vue&type=template&id=000eb15a& */ "./resources/js/views/member/info/Phone.vue?vue&type=template&id=000eb15a&");
+/* harmony import */ var _Phone_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Phone.vue?vue&type=script&lang=js& */ "./resources/js/views/member/info/Phone.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Phone_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Phone_vue_vue_type_template_id_000eb15a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Phone_vue_vue_type_template_id_000eb15a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/member/info/Phone.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/member/info/Phone.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/views/member/info/Phone.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Phone_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Phone.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/member/info/Phone.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Phone_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/member/info/Phone.vue?vue&type=template&id=000eb15a&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/views/member/info/Phone.vue?vue&type=template&id=000eb15a& ***!
+  \*********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Phone_vue_vue_type_template_id_000eb15a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Phone.vue?vue&type=template&id=000eb15a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/member/info/Phone.vue?vue&type=template&id=000eb15a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Phone_vue_vue_type_template_id_000eb15a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Phone_vue_vue_type_template_id_000eb15a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

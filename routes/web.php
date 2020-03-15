@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 //前台
-Route::group(['middleware' => ['front', 'bindMobile'], 'namespace' => 'Home'], function () {
+Route::group(['middleware' => ['front'], 'namespace' => 'Home'], function () {
   Route::get('/', 'IndexController@home');
   Route::get('home', 'IndexController@home');
 });

@@ -1,9 +1,7 @@
 <template>
   <div>
     <div class="card">
-      <div class="card-header bg-white">
-        我的资料
-      </div>
+      <div class="card-header bg-white">我的资料</div>
       <div class="card-body">
         <el-form :model="form" ref="form" label-width="80px">
           <el-form-item
@@ -41,7 +39,6 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex'
 import _ from 'lodash'
 export default {
   data() {
@@ -52,7 +49,7 @@ export default {
   async created() {
     let response = await this.axios
       .get(`member/get`)
-      .then(r => _.pick(r.data, ['nickname', 'realname', 'home', 'weibo', 'wechat', 'github', 'qq']))
+      .then(r => _.pick(r.data, ['nickname', 'real_name', 'home', 'weibo', 'wechat', 'github', 'qq']))
     this.$set(this, 'form', response)
   },
   methods: {
@@ -61,6 +58,7 @@ export default {
         if (valid) {
           await this.axios.put(`member/user`, this.form)
           this.$message.success('修改成功')
+          window.location.reload()
         }
       })
     }

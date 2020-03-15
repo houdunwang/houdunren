@@ -21,7 +21,7 @@ class SiteRequest extends FormRequest
   {
     return [
       'name' => 'required|min:3|unique:sites,name,' . request('id'),
-      'domain' => 'required|not_regex:/^https?:\/\//|unique:sites,domain,' . request('id'),
+      'domain' => 'required|url|unique:sites,domain,' . request('id'),
       'email' => 'nullable|email',
     ];
   }
@@ -36,7 +36,6 @@ class SiteRequest extends FormRequest
       'domain.required' => '域名不能为空',
       'domain.unique' => '域名已经存在',
       'domain.url' => '域名格式错误',
-      'domain.regex' => '域名不需要协议前缀'
     ];
   }
 }

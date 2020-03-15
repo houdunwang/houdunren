@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Services\UserService;
+use App\Models\Site;
 use Closure;
 
 /**
@@ -13,12 +14,13 @@ class SiteMiddleware
 {
   public function handle($request, Closure $next, ...$role)
   {
+    $site = site(request('site'));
+    config(['site' => site()['config']]);
     if (auth()->check()) {
-      if ($this->checkRole($role) || isSuperAdmin()) {
+      if ($this->checkRole($role, $site) || isSuperAdmin()) {
         return $next($request);
       }
     }
-    config(['site' => site()['config']]);
     abort(403, '你不是站点管理员或超级管理员');
   }
 
@@ -28,9 +30,8 @@ class SiteMiddleware
    *
    * @return bool
    */
-  protected function checkRole(array $role): bool
+  protected function checkRole(array $role, Site $site): bool
   {
-    $site = site(request('site'));
     $user = auth()->user();
     return isSuperAdmin() ||
       app(UserService::class)->isRole($site, $user, $role);

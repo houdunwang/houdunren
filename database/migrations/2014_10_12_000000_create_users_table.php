@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
       $table->string('name')->unique()->nullable()->comment('帐号');
       $table->string('nickname')->nullable()->comment('昵称');
       $table->string('email')->nullable()->unique();
-      $table->string('mobile')->nullable()->unique();
+      $table->string('phone')->nullable()->unique();
       $table->string('real_name', 20)->nullable()->comment('真实姓名');
       $table->string('password')->nullable()->comment('密码');
       $table->string('weixin_openid')->nullable()->comment('微信OPENID');

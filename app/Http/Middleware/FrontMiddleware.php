@@ -17,7 +17,6 @@ class FrontMiddleware
     if (!$site) {
       dd('域名不属于任何站点');
     }
-    config(['site' => site($site)['config']]);
     return $next($request);
   }
 }
