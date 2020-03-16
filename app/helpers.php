@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Site;
-use App\Services\AccessServer;
+use App\Services\AccessService;
 use App\Services\ModuleService;
 use App\Services\SiteService;
 use App\Services\UserService;
@@ -50,7 +50,7 @@ function module()
  */
 function access(string $permission, ?Site $site, ?User $user): bool
 {
-  return app(AccessServer::class)->check($permission, $site, $user);
+  return app(AccessService::class)->check($permission, $site, $user);
 }
 
 /**

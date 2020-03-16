@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\ApiController;
 use App\Models\Site;
-use App\Services\AccessServer;
+use App\Services\AccessService;
 use App\Services\ModuleService;
 use App\User;
 use Illuminate\Http\JsonResponse;
@@ -31,9 +31,9 @@ class AccessController extends ApiController
    *
    * @return mixed
    */
-  public function site(Site $site, ModuleService $ModuleService, AccessServer $accessServer)
+  public function site(Site $site, ModuleService $ModuleService, AccessService $AccessService)
   {
-    $accessServer->updateSitePermission($site);
+    $AccessService->updateSitePermission($site);
     return $this->success('', $ModuleService->getSiteModule($site));
   }
 
@@ -44,9 +44,9 @@ class AccessController extends ApiController
    *
    * @return JsonResponse
    */
-  public function userPermission(Site $site, User $user, AccessServer $accessServer)
+  public function userPermission(Site $site, User $user, AccessService $AccessService)
   {
-    $permissions = $accessServer->getUserPermissionNames($site, $user);
+    $permissions = $AccessService->getUserPermissionNames($site, $user);
     return $this->success('用户拥有的站点权限', $permissions);
   }
 

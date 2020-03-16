@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       form: {
-        email: '2300071698@qq.com',
+        email: '',
         code: ''
       }
     }

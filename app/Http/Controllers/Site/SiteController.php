@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\SiteRequest;
 use App\Http\Resources\SiteResource;
+use App\Models\Module;
 use App\Models\Site;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
@@ -58,5 +59,18 @@ class SiteController extends ApiController
   {
     $site->delete();
     return $this->success('栏目删除成功');
+  }
+
+  /**
+   * 设置默认模块
+   * @param Site $site
+   * @param int $mid
+   * @return JsonResponse
+   */
+  public function module(Site $site, int $mid)
+  {
+    $site['module_id'] = $mid;
+    $site->save();
+    return $this->success('默认模块设置成功');
   }
 }

@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       form: {
-        phone: 18600276067,
+        phone: '',
         code: ''
       }
     }

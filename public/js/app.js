@@ -4322,7 +4322,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       form: {
-        email: '2300071698@qq.com',
+        email: '',
         code: ''
       }
     };
@@ -4521,7 +4521,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       form: {
-        phone: 18600276067,
+        phone: '',
         code: ''
       }
     };
@@ -5633,9 +5633,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      site: {},
       modules: [],
       loadMessage: '模块加载中...'
     };
@@ -5650,18 +5669,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _this.axios.get("site/".concat(_this.$route.params.sid, "/module/user")).then(function (r) {
-                return r.data.data;
-              });
+              return Promise.all([_this.axios.get("site/site/".concat(_this.$route.params.sid)), _this.axios.get("site/".concat(_this.$route.params.sid, "/module/user"))]);
 
             case 2:
               response = _context.sent;
 
-              _this.$set(_this, 'modules', response);
+              _this.$set(_this, 'site', response[0].data.data);
+
+              _this.$set(_this, 'modules', response[1].data.data);
 
               _this.loadMessage = response.length ? '' : '暂无可用模块';
 
-            case 5:
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -5673,6 +5692,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     moduleLink: function moduleLink(module) {
       var name = module.config.name.toLowerCase();
       return "/".concat(name, "/admin?sid=").concat(this.$route.params.sid);
+    },
+    setDefaultModule: function setDefaultModule(mid) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return _this2.axios.get("site/site/".concat(_this2.$route.params.sid, "/").concat(mid));
+
+              case 2:
+                _this2.$set(_this2.site, 'module_id', mid);
+
+                _this2.$message.success('默认模块设置成功');
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   }
 });
@@ -49795,7 +49838,7 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "card-header bg-white" }, [
-        _vm._v("\n      修改头像2\n    ")
+        _vm._v("\n      修改头像\n    ")
       ]),
       _vm._v(" "),
       _c(
@@ -52176,19 +52219,85 @@ var render = function() {
                 "div",
                 { key: module.model.id, staticClass: "col-12 col-md-3 mb-2" },
                 [
-                  _c("a", { attrs: { href: _vm.moduleLink(module) } }, [
+                  _c("div", { staticClass: "card" }, [
                     _c(
                       "div",
                       {
-                        staticClass: "p-3 align-middle border shadow-sm rounded"
+                        staticClass:
+                          "card-body pt-3 pb-3 align-middle rounded d-flex justify-content-center"
                       },
                       [
-                        _c("img", {
-                          staticClass: "rounded-circle mr-3",
-                          attrs: { src: module.config.preview }
-                        }),
-                        _vm._v(" "),
-                        _c("span", [_vm._v(_vm._s(module.config.title))])
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "d-flex flex-column justify-content-center align-items-center",
+                            attrs: { href: _vm.moduleLink(module) }
+                          },
+                          [
+                            _c("img", {
+                              staticClass: "rounded-circle mb-2",
+                              attrs: { src: module.config.preview }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "text-muted" }, [
+                              _vm._v(_vm._s(module.config.title))
+                            ])
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "card-footer text-muted d-flex justify-content-center"
+                      },
+                      [
+                        _c("div", { staticClass: "btn-group btn-group-sm" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "btn-group btn-group-sm",
+                              attrs: {
+                                role: "group",
+                                "aria-label": "Basic example"
+                              }
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  class:
+                                    _vm.site.module_id == module.model.id
+                                      ? "btn-info"
+                                      : "btn-outline-info",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.setDefaultModule(
+                                        module.model.id
+                                      )
+                                    }
+                                  }
+                                },
+                                [_vm._v("默认模块")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-outline-success",
+                                  attrs: { href: _vm.moduleLink(module) }
+                                },
+                                [_vm._v("管理模块")]
+                              )
+                            ]
+                          )
+                        ])
                       ]
                     )
                   ])

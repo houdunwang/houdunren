@@ -18,7 +18,7 @@ class MenuService
    *
    * @return mixed
    */
-  public function getByUser(Site $site, Module $module, User $user)
+  public function admin(Site $site, Module $module, User $user)
   {
     $modules =  app(ModuleService::class)->getModuleByUser($site, $user);
     foreach ($modules as $k => $m) {
@@ -49,5 +49,16 @@ class MenuService
     return array_filter($menus, function ($menu) {
       return count($menu['items']);
     });
+  }
+
+  /**
+   * 获取会员中心菜单
+   * @param Site $site
+   * @return array
+   */
+  public function member(Site $site)
+  {
+    $moduleService = new ModuleService;
+    return $moduleService->getSiteModule($site);
   }
 }

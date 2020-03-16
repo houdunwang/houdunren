@@ -7,10 +7,7 @@ import Field from './Field'
 export default {
   data() {
     return {
-      field: {
-        tags: [],
-        videos: []
-      }
+      field: { free_num: 1, tags: [], videos: [] }
     }
   },
   components: {

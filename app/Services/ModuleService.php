@@ -62,7 +62,7 @@ class ModuleService
     $module = \Module::find($name);
     $config = include $module->getPath() . '/Config/config.php';
     $config['name'] = $name;
-    $config['preview'] = config('app.url') . "/modules/{$name}/preview.jpg";
+    $config['preview'] = "/modules/{$name}/preview.jpg";
     $menu = include $module->getPath() . '/Config/menu.php';
     return [
       'config' => $config,

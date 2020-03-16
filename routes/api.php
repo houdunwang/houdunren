@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['auth:api'], 'namespace' => 'Common', 'prefix' => 'common'], function () {
   Route::post('code', 'CodeController@send');
 });
+
 //系统
 Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
   //套餐管理
@@ -27,6 +28,7 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => '
 //站点
 Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'site'], function () {
   Route::resource('site', 'SiteController')->except(['edit', 'create']);
+  Route::get('site/{site}/{mid}', 'SiteController@module');
   //站点配置
   Route::put('config/{site}', 'ConfigController@update');
   Route::get('config/{site}', 'ConfigController@show');

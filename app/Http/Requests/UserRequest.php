@@ -52,8 +52,8 @@ class UserRequest extends FormRequest
       'password.confirmed' => '两次输入密码不一致',
       'home.required' => '主页不能为空',
       'home.url' => '主页网址格式错误',
-      'weibo.url' => '微博地址不合法',
-      'github.url' => 'github地址错误',
+      'weibo.regex' => '微博地址不合法',
+      'github.regex' => 'github地址错误',
       'qq.numeric' => 'QQ号错误',
       'avatar.required' => '头像不能为空',
       'captcha.captcha' => '验证码错误'

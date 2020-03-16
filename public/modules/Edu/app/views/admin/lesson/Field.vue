@@ -2,12 +2,16 @@
   <div>
     <nav class="nav nav-tabs mb-2">
       <router-link class="nav-link" :to="{ name: 'admin.lesson' }">课程列表</router-link>
-      <router-link class="nav-link" :class="{ active: !field.id }" :to="{ name: 'admin.lesson.create' }"
-        >发表课程</router-link
-      >
-      <router-link class="nav-link active" v-show="field.id" :to="{ name: 'admin.lesson.create' }"
-        >编辑课程</router-link
-      >
+      <router-link
+        class="nav-link"
+        :class="{ active: !field.id }"
+        :to="{ name: 'admin.lesson.create' }"
+      >发表课程</router-link>
+      <router-link
+        class="nav-link active"
+        v-show="field.id"
+        :to="{ name: 'admin.lesson.create' }"
+      >编辑课程</router-link>
     </nav>
 
     <div class="alert alert-info">设置「售价」后免费观看数量才有必要设置</div>
@@ -18,13 +22,20 @@
           <el-form-item label="课程名称" prop="title" :rules="[{ required: true, message: '请输入课程标题' }]">
             <el-input v-model="field.title"></el-input>
           </el-form-item>
-          <el-form-item prop="description" label="简单介绍" :rules="[{ required: true, message: '请输入课程介绍' }]">
+          <el-form-item
+            prop="description"
+            label="简单介绍"
+            :rules="[{ required: true, message: '请输入课程介绍' }]"
+          >
             <el-input type="textarea" v-model="field.description"></el-input>
           </el-form-item>
           <el-form-item label="标签">
-            <el-checkbox v-for="tag in tags" :key="tag.id" :label="tag.id" v-model="field.tags">{{
-              tag.title
-            }}</el-checkbox>
+            <el-checkbox
+              v-for="tag in tags"
+              :key="tag.id"
+              :label="tag.id"
+              v-model="field.tags"
+            >{{tag.title}}</el-checkbox>
           </el-form-item>
           <el-form-item label="上架">
             <el-switch v-model="field.status"></el-switch>
@@ -32,13 +43,18 @@
           <el-form-item label="预览图" prop="thumb" :rules="[{ required: true, message: '请上传课程图片' }]">
             <el-upload
               class="avatar-uploader"
-              action="/system/upload"
+              action="/common/upload"
               accept="image/jpeg, image/png"
               :on-success="upload"
               :on-error="uploadError"
               :show-file-list="false"
             >
-              <img v-if="field.thumb" :src="field.thumb" class="avatar" />
+              <img
+                v-if="field.thumb"
+                :src="field.thumb"
+                class="avatar"
+                :style="{maxHeight:'200px'}"
+              />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
             <small class="text-secondary">请上传尺寸为 860x105 的图片</small>
@@ -80,10 +96,16 @@
           </div>
           <div class="card-footer text-muted">
             <div class="btn-group" role="group" aria-label>
-              <button type="button" class="btn btn-outline-secondary btn-sm" @click="delVideo(index)">删除</button>
-              <button type="button" class="btn btn-outline-secondary btn-sm" @click="insertVideo(index)">
-                插入视频
-              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary btn-sm"
+                @click="delVideo(index)"
+              >删除</button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary btn-sm"
+                @click="insertVideo(index)"
+              >插入视频</button>
             </div>
           </div>
         </div>

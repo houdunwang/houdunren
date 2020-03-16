@@ -2,7 +2,7 @@
   <div>
     <div class="card">
       <div class="card-header bg-white">
-        修改头像2
+        修改头像
       </div>
       <div class="card-body">
         <el-form :model="form" ref="form" label-width="80px" label-position="top">

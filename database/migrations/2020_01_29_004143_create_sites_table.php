@@ -16,6 +16,7 @@ class CreateSitesTable extends Migration
   {
     Schema::create('sites', function (Blueprint $table) {
       $table->bigIncrements('id');
+      table_foreign($table, 'modules', 'module_id');
       $table->string('name')->unique()->comment('站点名称');
       $table->string('domain')->unique()->comment('域名');
       $table->string('keyword', 100)->nullable()->comment('关键字');

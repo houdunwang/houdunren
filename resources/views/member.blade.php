@@ -1,3 +1,4 @@
+@inject('menuService', 'App\Services\MenuService')
 <!doctype html>
 <html lang="zh">
 
@@ -54,11 +55,11 @@
           <hr>
           <div class="d-flex justify-content-between text-muted">
             <i class="fa fa-envelope {{auth()->user()->email?'text-primary':''}}" aria-hidden="true"></i>
-            <i class="fa fa-phone {{auth()->user()->mobile?'text-primary':''}}" aria-hidden="true"></i>
+            <i class="fa fa-phone {{auth()->user()->phone?'text-primary':''}}" aria-hidden="true"></i>
             <i class="fa fa-weibo {{auth()->user()->weibo?'text-primary':''}}" aria-hidden="true"></i>
-            <i class="fa fa-weixin {{auth()->user()->weixin?'text-primary':''}}" aria-hidden="true"></i>
+            <i class="fa fa-weixin {{auth()->user()->wechat?'text-primary':''}}" aria-hidden="true"></i>
             <i class="fa fa-github {{auth()->user()->github?'text-primary':''}}" aria-hidden="true"></i>
-            <i class="fa fa-qq" aria-hidden="true"></i>
+            <i class="fa fa-qq {{auth()->user()->qq?'text-primary':''}}" aria-hidden="true"></i>
           </div>
         </div>
       </div>
@@ -83,6 +84,18 @@
             修改头像
           </a>
         </div>
+        @foreach ($menuService->member(site()) as $module)
+        <div class="list-group list-group-flush menus">
+          <a class="list-group-item disabled bg-light">
+            {{ $module['config']['title'] }}
+          </a>
+          @foreach ($module['menu']['member'] as $menu)
+          <a class="list-group-item" href="{{$menu['to']}}">
+            {{ $menu['title'] }}
+          </a>
+          @endforeach
+        </div>
+        @endforeach
       </div>
     </div>
     <div class="flex-fill ml-md-3 mt-2 mt-md-0 " id="app">

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\ApiController;
 use App\Models\Site;
-use App\Services\AccessServer;
+use App\Services\AccessService;
 
 /**
  * 站点缓存维护
@@ -19,13 +19,13 @@ class CacheController extends ApiController
   /**
    * 更新站点缓存
    * @param Site $site
-   * @param AccessServer $accessServer
+   * @param AccessService $AccessService
    *
    * @return void
    */
-  public function update(Site $site, AccessServer $accessServer)
+  public function update(Site $site, AccessService $AccessService)
   {
-    $accessServer->updateSitePermission($site);
+    $AccessService->updateSitePermission($site);
     return $this->success('站点缓存更新成功');
   }
 }

@@ -11,7 +11,7 @@ use Spatie\Permission\Models\Permission;
  * Class Access
  * @package App\Services
  */
-class AccessServer
+class AccessService
 {
   /**
    * 检测当前用户模块访问权限

@@ -64,7 +64,7 @@
   <div class="d-flex flex-fill flex-column flex-md-row">
     <div class="menus border-right border-top-0 shadow bg-white">
       @foreach ($MenuService
-      ->getByUser(site(),module(),auth()->user())['menu']['admin'] as $menu)
+      ->admin(site(),module(),auth()->user())['menu']['admin'] as $menu)
       <ul class="list-group list-group-flush text-left">
         <strong class="list-group-item list-group-item-light d-flex align-items-center text-dark justify-content-start">
           <i class="fa fa-bars {{ $menu['group']['icon']??'fa-bars' }} mr-1" aria-hidden="true"></i>

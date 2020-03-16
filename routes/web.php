@@ -1,17 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
+
 //前台
 Route::group(['middleware' => ['front'], 'namespace' => 'Home'], function () {
-  Route::get('/', function () {
-    dd(Cache::get('validate_code'));
-  });
-  // Route::get('/', 'IndexController@home');
+  Route::get('/', 'IndexController@home');
   Route::get('home', 'IndexController@home');
 });
 
-//公共
 Route::group(['namespace' => 'Common', 'prefix' => 'common'], function () {
   Route::get('captcha', 'CaptchaController@make')->name('common.captcha');
   Route::post('upload/avatar', 'UploadController@avatar')->middleware('auth');
@@ -27,9 +23,7 @@ Route::group(['namespace' => 'Member'], function () {
   Route::resource('mobile', 'MobileController');
 });
 
-// Route::view('admin{any}', 'admin')->where('any', '.*')->middleware('auth');
-// Route::view('site{any}', 'admin')->where('any', '.*')->middleware('auth');
-// Route::view('system{any}', 'admin')->where('any', '.*')->middleware('auth');
-
-Route::view('member{any}', 'member/index')->where('any', '.*')->middleware('auth');
-Route::view('{any}', 'main')->where('any', '.*')->middleware('auth');
+Route::view('member{any}', 'member/index')->where('any', '.*')->middleware(['auth', 'front']);
+Route::view('site{any}', 'main')->where('any', '.*')->middleware('auth');
+Route::view('system{any}', 'main')->where('any', '.*')->middleware('auth');
+Route::view('admin', 'main')->where('any', '.*')->middleware('auth');

@@ -32,7 +32,7 @@
           >
             <el-upload
               class="avatar-uploader"
-              action="/module/upload"
+              action="/common/upload"
               accept="image/jpeg, image/png"
               :show-file-list="false"
               :on-success="upload"

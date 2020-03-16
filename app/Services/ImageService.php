@@ -24,11 +24,15 @@ class ImageService
   public function resize(string $file, int $width = null, int $height)
   {
     $img = Image::make($file);
-    //图像缩小
-    $img->resize($width, null, function ($constraint) {
+    //等比例缩放，以最小边为主
+    $w = $img->width() <= $img->height() ? $width : null;
+    $h = $img->height() <= $img->width() ? $height : null;
+    //绽放图片
+    $img->resize($w, $h, function ($constraint) {
       $constraint->aspectRatio();
+      $constraint->upsize();
     });
-    //裁切画布
-    return $img->resizeCanvas($width, $height);
+    //裁切掉额外的内容，设置为参数宽高
+    return $img->crop($width, $height);
   }
 }
