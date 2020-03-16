@@ -84,7 +84,7 @@
         <ali-yun :form.sync="form" @submit="submit" />
       </div>
       <div class="tab-pane fade" id="alipay" role="tabpanel" aria-labelledby="nav-profile-tab">
-        <ali-yun :form.sync="form" @submit="submit" />
+        <ali-pay :form.sync="form" @submit="submit" />
       </div>
       <div class="tab-pane fade" id="wepay" role="tabpanel" aria-labelledby="nav-contact-tab">
         <we-pay :form.sync="form" @submit="submit" />

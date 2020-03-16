@@ -14,11 +14,13 @@ class MailService
 {
   /**
    * 发送验证码
-   * @param User $user
+   * @param string $email
    * @return void
    */
-  public function code(User $user)
+  public function code(string $email)
   {
+    $user = new User();
+    $user->email = $email;
     $message = [
       'greeting' => 'Hi',
       'subject' => '验证码',

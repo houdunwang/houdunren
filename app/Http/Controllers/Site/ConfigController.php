@@ -50,7 +50,7 @@ class ConfigController extends ApiController
   public function sms(Request $request, SmsService $smsService)
   {
     $smsService->code($request->phone);
-    return $this->success('验证码发送成功');
+    return $this->success('测试短信发送成功');
   }
 
   /**
@@ -69,9 +69,8 @@ class ConfigController extends ApiController
       'greeting' => 'Hi',
       'subject' => '测试邮件',
       'content' => '这是一封测试邮件',
-      'salutation' => 'Copyright © 2010-2020 houdunren.com',
     ];
     $mailService->send($user, $message);
-    return $this->success('测试邮件发送发送成功');
+    return $this->success('测试邮件发送成功');
   }
 }

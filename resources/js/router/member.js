@@ -3,7 +3,7 @@ import Base from '@/views/member/info/Base'
 import Password from '@/views/member/info/Password'
 import Avatar from '@/views/member/info/Avatar'
 import Phone from '@/views/member/info/Phone'
-
+import Email from '@/views/member/info/Email'
 export default {
   path: '/member',
   component: Main,
@@ -28,6 +28,11 @@ export default {
       name: 'info.phone',
       path: 'info/phone',
       component: Phone
+    },
+    {
+      name: 'info.email',
+      path: 'info/email',
+      component: Email
     }
   ]
 }

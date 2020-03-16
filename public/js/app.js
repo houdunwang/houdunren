@@ -3529,6 +3529,122 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SendCode.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SendCode.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var store2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! store2 */ "./node_modules/store2/dist/store2.js");
+/* harmony import */ var store2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(store2__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['type', 'account', 'code'],
+  data: function data() {
+    return {
+      //上次发送的时间间隔
+      sendtime: 0,
+      //每次发送的时间间隔
+      timeout: 120,
+      title: this.type === 'sms' ? '手机号' : '邮箱'
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    setInterval(function () {
+      var preSend = store2__WEBPACK_IMPORTED_MODULE_1___default.a.get('sendtime') || 0;
+      _this.sendtime = moment__WEBPACK_IMPORTED_MODULE_2___default()().diff(preSend, 'second');
+    }, 1000);
+  },
+  computed: {
+    //按钮文本
+    message: function message() {
+      return this.sendtime > this.timeout ? '发送验证码' : this.timeout - this.sendtime + ' 秒后发送';
+    },
+    codeNum: {
+      get: function get() {
+        return this.code;
+      },
+      set: function set(value) {
+        this.$emit('update:code', value);
+      }
+    }
+  },
+  methods: {
+    //发送验证码
+    send: function send() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!(_this2.check() === true)) {
+                  _context.next = 5;
+                  break;
+                }
+
+                _context.next = 3;
+                return _this2.axios.post("common/code", {
+                  type: _this2.type,
+                  account: _this2.account
+                });
+
+              case 3:
+                _this2.$message.success('验证码发送成功，请在30分钟内使用');
+
+                store2__WEBPACK_IMPORTED_MODULE_1___default.a.set('sendtime', moment__WEBPACK_IMPORTED_MODULE_2___default()());
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    //业务验证
+    check: function check() {
+      if (Boolean(this.account) === false) {
+        this.$message.error(this.title + '不能为空');
+        return false;
+      }
+
+      return this.sendtime > this.timeout;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/User.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/User.vue?vue&type=script&lang=js& ***!
@@ -4158,6 +4274,98 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/member/info/Email.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/member/info/Email.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_SendCode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/SendCode */ "./resources/js/components/SendCode.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    SendCode: _components_SendCode__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    return {
+      form: {
+        email: '2300071698@qq.com',
+        code: ''
+      }
+    };
+  },
+  methods: {
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      this.$refs['form'].validate( /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(valid) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  if (!valid) {
+                    _context.next = 4;
+                    break;
+                  }
+
+                  _context.next = 3;
+                  return _this.axios.put("member/email", _this.form);
+
+                case 3:
+                  _this.$message.success('邮箱绑定成功');
+
+                case 4:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        return function (_x) {
+          return _ref.apply(this, arguments);
+        };
+      }());
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/member/info/Password.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/member/info/Password.vue?vue&type=script&lang=js& ***!
@@ -4274,7 +4482,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_PhoneValidate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/PhoneValidate */ "./resources/js/components/PhoneValidate.vue");
+/* harmony import */ var _components_SendCode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/SendCode */ "./resources/js/components/SendCode.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -4304,17 +4512,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    PhoneValidate: _components_PhoneValidate__WEBPACK_IMPORTED_MODULE_2__["default"]
+    SendCode: _components_SendCode__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
-      form: {}
+      form: {
+        phone: 18600276067,
+        code: ''
+      }
     };
   },
   methods: {
@@ -4333,10 +4542,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
 
                   _context.next = 3;
-                  return _this.axios.put("member/password", _this.form);
+                  return _this.axios.put("member/phone", _this.form);
 
                 case 3:
-                  _this.$message.success('密码修改成功');
+                  _this.$message.success('手机号修改成功');
 
                 case 4:
                 case "end":
@@ -5077,6 +5286,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     form: Object
@@ -5102,6 +5314,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -5246,6 +5462,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -47774,6 +47996,279 @@ var index = (function () {
 
 /***/ }),
 
+/***/ "./node_modules/store2/dist/store2.js":
+/*!********************************************!*\
+  !*** ./node_modules/store2/dist/store2.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*! store2 - v2.10.0 - 2019-09-27
+* Copyright (c) 2019 Nathan Bubna; Licensed (MIT OR GPL-3.0) */
+;(function(window, define) {
+    var _ = {
+        version: "2.10.0",
+        areas: {},
+        apis: {},
+
+        // utilities
+        inherit: function(api, o) {
+            for (var p in api) {
+                if (!o.hasOwnProperty(p)) {
+                    Object.defineProperty(o, p, Object.getOwnPropertyDescriptor(api, p));
+                }
+            }
+            return o;
+        },
+        stringify: function(d) {
+            return d === undefined || typeof d === "function" ? d+'' : JSON.stringify(d);
+        },
+        parse: function(s) {
+            // if it doesn't parse, return as is
+            try{ return JSON.parse(s); }catch(e){ return s; }
+        },
+
+        // extension hooks
+        fn: function(name, fn) {
+            _.storeAPI[name] = fn;
+            for (var api in _.apis) {
+                _.apis[api][name] = fn;
+            }
+        },
+        get: function(area, key){ return area.getItem(key); },
+        set: function(area, key, string){ area.setItem(key, string); },
+        remove: function(area, key){ area.removeItem(key); },
+        key: function(area, i){ return area.key(i); },
+        length: function(area){ return area.length; },
+        clear: function(area){ area.clear(); },
+
+        // core functions
+        Store: function(id, area, namespace) {
+            var store = _.inherit(_.storeAPI, function(key, data, overwrite) {
+                if (arguments.length === 0){ return store.getAll(); }
+                if (typeof data === "function"){ return store.transact(key, data, overwrite); }// fn=data, alt=overwrite
+                if (data !== undefined){ return store.set(key, data, overwrite); }
+                if (typeof key === "string" || typeof key === "number"){ return store.get(key); }
+                if (typeof key === "function"){ return store.each(key); }
+                if (!key){ return store.clear(); }
+                return store.setAll(key, data);// overwrite=data, data=key
+            });
+            store._id = id;
+            try {
+                var testKey = '_-bad-_';
+                area.setItem(testKey, 'wolf');
+                store._area = area;
+                area.removeItem(testKey);
+            } catch (e) {}
+            if (!store._area) {
+                store._area = _.storage('fake');
+            }
+            store._ns = namespace || '';
+            if (!_.areas[id]) {
+                _.areas[id] = store._area;
+            }
+            if (!_.apis[store._ns+store._id]) {
+                _.apis[store._ns+store._id] = store;
+            }
+            return store;
+        },
+        storeAPI: {
+            // admin functions
+            area: function(id, area) {
+                var store = this[id];
+                if (!store || !store.area) {
+                    store = _.Store(id, area, this._ns);//new area-specific api in this namespace
+                    if (!this[id]){ this[id] = store; }
+                }
+                return store;
+            },
+            namespace: function(namespace, singleArea) {
+                if (!namespace){
+                    return this._ns ? this._ns.substring(0,this._ns.length-1) : '';
+                }
+                var ns = namespace, store = this[ns];
+                if (!store || !store.namespace) {
+                    store = _.Store(this._id, this._area, this._ns+ns+'.');//new namespaced api
+                    if (!this[ns]){ this[ns] = store; }
+                    if (!singleArea) {
+                        for (var name in _.areas) {
+                            store.area(name, _.areas[name]);
+                        }
+                    }
+                }
+                return store;
+            },
+            isFake: function(){ return this._area.name === 'fake'; },
+            toString: function() {
+                return 'store'+(this._ns?'.'+this.namespace():'')+'['+this._id+']';
+            },
+
+            // storage functions
+            has: function(key) {
+                if (this._area.has) {
+                    return this._area.has(this._in(key));//extension hook
+                }
+                return !!(this._in(key) in this._area);
+            },
+            size: function(){ return this.keys().length; },
+            each: function(fn, fill) {// fill is used by keys(fillList) and getAll(fillList))
+                for (var i=0, m=_.length(this._area); i<m; i++) {
+                    var key = this._out(_.key(this._area, i));
+                    if (key !== undefined) {
+                        if (fn.call(this, key, this.get(key), fill) === false) {
+                            break;
+                        }
+                    }
+                    if (m > _.length(this._area)) { m--; i--; }// in case of removeItem
+                }
+                return fill || this;
+            },
+            keys: function(fillList) {
+                return this.each(function(k, v, list){ list.push(k); }, fillList || []);
+            },
+            get: function(key, alt) {
+                var s = _.get(this._area, this._in(key));
+                return s !== null ? _.parse(s) : alt || s;// support alt for easy default mgmt
+            },
+            getAll: function(fillObj) {
+                return this.each(function(k, v, all){ all[k] = v; }, fillObj || {});
+            },
+            transact: function(key, fn, alt) {
+                var val = this.get(key, alt),
+                    ret = fn(val);
+                this.set(key, ret === undefined ? val : ret);
+                return this;
+            },
+            set: function(key, data, overwrite) {
+                var d = this.get(key);
+                if (d != null && overwrite === false) {
+                    return data;
+                }
+                return _.set(this._area, this._in(key), _.stringify(data), overwrite) || d;
+            },
+            setAll: function(data, overwrite) {
+                var changed, val;
+                for (var key in data) {
+                    val = data[key];
+                    if (this.set(key, val, overwrite) !== val) {
+                        changed = true;
+                    }
+                }
+                return changed;
+            },
+            add: function(key, data) {
+                var d = this.get(key);
+                if (d instanceof Array) {
+                    data = d.concat(data);
+                } else if (d !== null) {
+                    var type = typeof d;
+                    if (type === typeof data && type === 'object') {
+                        for (var k in data) {
+                            d[k] = data[k];
+                        }
+                        data = d;
+                    } else {
+                        data = d + data;
+                    }
+                }
+                _.set(this._area, this._in(key), _.stringify(data));
+                return data;
+            },
+            remove: function(key, alt) {
+                var d = this.get(key, alt);
+                _.remove(this._area, this._in(key));
+                return d;
+            },
+            clear: function() {
+                if (!this._ns) {
+                    _.clear(this._area);
+                } else {
+                    this.each(function(k){ _.remove(this._area, this._in(k)); }, 1);
+                }
+                return this;
+            },
+            clearAll: function() {
+                var area = this._area;
+                for (var id in _.areas) {
+                    if (_.areas.hasOwnProperty(id)) {
+                        this._area = _.areas[id];
+                        this.clear();
+                    }
+                }
+                this._area = area;
+                return this;
+            },
+
+            // internal use functions
+            _in: function(k) {
+                if (typeof k !== "string"){ k = _.stringify(k); }
+                return this._ns ? this._ns + k : k;
+            },
+            _out: function(k) {
+                return this._ns ?
+                    k && k.indexOf(this._ns) === 0 ?
+                        k.substring(this._ns.length) :
+                        undefined : // so each() knows to skip it
+                    k;
+            }
+        },// end _.storeAPI
+        storage: function(name) {
+            return _.inherit(_.storageAPI, { items: {}, name: name });
+        },
+        storageAPI: {
+            length: 0,
+            has: function(k){ return this.items.hasOwnProperty(k); },
+            key: function(i) {
+                var c = 0;
+                for (var k in this.items){
+                    if (this.has(k) && i === c++) {
+                        return k;
+                    }
+                }
+            },
+            setItem: function(k, v) {
+                if (!this.has(k)) {
+                    this.length++;
+                }
+                this.items[k] = v;
+            },
+            removeItem: function(k) {
+                if (this.has(k)) {
+                    delete this.items[k];
+                    this.length--;
+                }
+            },
+            getItem: function(k){ return this.has(k) ? this.items[k] : null; },
+            clear: function(){ for (var k in this.items){ this.removeItem(k); } }
+        }// end _.storageAPI
+    };
+
+    var store =
+        // safely set this up (throws error in IE10/32bit mode for local files)
+        _.Store("local", (function(){try{ return localStorage; }catch(e){}})());
+    store.local = store;// for completeness
+    store._ = _;// for extenders and debuggers...
+    // safely setup store.session (throws exception in FF for file:/// urls)
+    store.area("session", (function(){try{ return sessionStorage; }catch(e){}})());
+    store.area("page", _.storage("page"));
+
+    if (typeof define === 'function' && define.amd !== undefined) {
+        define('store2', [], function () {
+            return store;
+        });
+    } else if ( true && module.exports) {
+        module.exports = store;
+    } else {
+        // expose the primary store fn to the global object and save conflicts
+        if (window.store){ _.conflict = window.store; }
+        window.store = store;
+    }
+
+})(this, this && this.define);
+
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/layouts/QuickMenu.vue?vue&type=style&index=0&id=bafb2252&lang=scss&scoped=true&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/layouts/QuickMenu.vue?vue&type=style&index=0&id=bafb2252&lang=scss&scoped=true& ***!
@@ -48804,10 +49299,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PhoneValidate.vue?vue&type=template&id=459c9649&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PhoneValidate.vue?vue&type=template&id=459c9649& ***!
-  \****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SendCode.vue?vue&type=template&id=00c19f00&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SendCode.vue?vue&type=template&id=00c19f00& ***!
+  \***********************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -48815,8 +49310,58 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "el-form-item",
+        { attrs: { label: "验证码" } },
+        [
+          _c(
+            "el-input",
+            {
+              attrs: { placeholder: "请输入验证码" },
+              model: {
+                value: _vm.codeNum,
+                callback: function($$v) {
+                  _vm.codeNum = $$v
+                },
+                expression: "codeNum"
+              }
+            },
+            [
+              _c("template", { slot: "append" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "disabled",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.send($event)
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.message))]
+                )
+              ])
+            ],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 
@@ -49499,6 +50044,99 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/member/info/Email.vue?vue&type=template&id=889e22fe&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/member/info/Email.vue?vue&type=template&id=889e22fe& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header bg-white" }, [_vm._v("绑定邮箱")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c(
+            "el-form",
+            { ref: "form", attrs: { model: _vm.form, "label-width": "80px" } },
+            [
+              _c(
+                "el-form-item",
+                {
+                  attrs: {
+                    label: "邮箱",
+                    prop: "email",
+                    rules: [
+                      { required: true, message: "请输入邮箱", trigger: "blur" }
+                    ]
+                  }
+                },
+                [
+                  _c("el-input", {
+                    attrs: { type: "email" },
+                    model: {
+                      value: _vm.form.email,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "email", $$v)
+                      },
+                      expression: "form.email"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("send-code", {
+                attrs: {
+                  type: "email",
+                  account: _vm.form.email,
+                  code: _vm.form.code
+                },
+                on: {
+                  "update:code": function($event) {
+                    return _vm.$set(_vm.form, "code", $event)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                [
+                  _c(
+                    "el-button",
+                    { attrs: { type: "primary" }, on: { click: _vm.onSubmit } },
+                    [_vm._v("保存提交")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/member/info/Password.vue?vue&type=template&id=01c2ca46&":
 /*!******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/member/info/Password.vue?vue&type=template&id=01c2ca46& ***!
@@ -49658,9 +50296,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-header bg-white" }, [
-        _vm._v("\n      修改手机号\n    ")
-      ]),
+      _c("div", { staticClass: "card-header bg-white" }, [_vm._v("绑定手机")]),
       _vm._v(" "),
       _c(
         "div",
@@ -49700,7 +50336,18 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("PhoneValidate"),
+              _c("send-code", {
+                attrs: {
+                  type: "sms",
+                  account: _vm.form.phone,
+                  code: _vm.form.code
+                },
+                on: {
+                  "update:code": function($event) {
+                    return _vm.$set(_vm.form, "code", $event)
+                  }
+                }
+              }),
               _vm._v(" "),
               _c(
                 "el-form-item",
@@ -50324,7 +50971,7 @@ var render = function() {
                   }
                 },
                 [
-                  _c("ali-yun", {
+                  _c("ali-pay", {
                     attrs: { form: _vm.form },
                     on: {
                       "update:form": function($event) {
@@ -50629,114 +51276,118 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
-    _c(
-      "div",
-      { staticClass: "card-body" },
-      [
-        _c(
-          "el-form",
-          { attrs: { model: _vm.form, "label-width": "120px" } },
-          [
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.aliyun.regionId.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.aliyun.regionId.desc },
-                  model: {
-                    value: _vm.form.aliyun.regionId.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.aliyun.regionId, "value", $$v)
-                    },
-                    expression: "form.aliyun.regionId.value"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.aliyun.accessKeyId.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.aliyun.accessKeyId.desc },
-                  model: {
-                    value: _vm.form.aliyun.accessKeyId.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.aliyun.accessKeyId, "value", $$v)
-                    },
-                    expression: "form.aliyun.accessKeyId.value"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.aliyun.accessKeySecret.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.aliyun.accessKeySecret.desc },
-                  model: {
-                    value: _vm.form.aliyun.accessKeySecret.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.aliyun.accessKeySecret, "value", $$v)
-                    },
-                    expression: "form.aliyun.accessKeySecret.value"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("el-divider", [
-              _c("i", { staticClass: "el-icon-mobile-phone" })
-            ]),
-            _vm._v(" "),
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.aliyun.upload.endpoint.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.aliyun.upload.endpoint.desc },
-                  model: {
-                    value: _vm.form.aliyun.upload.endpoint.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.aliyun.upload.endpoint, "value", $$v)
-                    },
-                    expression: "form.aliyun.upload.endpoint.value"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.aliyun.upload.bucket.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.aliyun.upload.bucket.desc },
-                  model: {
-                    value: _vm.form.aliyun.upload.bucket.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.aliyun.upload.bucket, "value", $$v)
-                    },
-                    expression: "form.aliyun.upload.bucket.value"
-                  }
-                })
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ],
-      1
-    )
+  return _c("el-form", { attrs: { model: _vm.form, "label-width": "120px" } }, [
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header" }, [_vm._v("访问令牌")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { label: _vm.form.aliyun.regionId.title } },
+            [
+              _c("el-input", {
+                attrs: { placeholder: _vm.form.aliyun.regionId.desc },
+                model: {
+                  value: _vm.form.aliyun.regionId.value,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form.aliyun.regionId, "value", $$v)
+                  },
+                  expression: "form.aliyun.regionId.value"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: _vm.form.aliyun.accessKeyId.title } },
+            [
+              _c("el-input", {
+                attrs: { placeholder: _vm.form.aliyun.accessKeyId.desc },
+                model: {
+                  value: _vm.form.aliyun.accessKeyId.value,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form.aliyun.accessKeyId, "value", $$v)
+                  },
+                  expression: "form.aliyun.accessKeyId.value"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: _vm.form.aliyun.accessKeySecret.title } },
+            [
+              _c("el-input", {
+                attrs: { placeholder: _vm.form.aliyun.accessKeySecret.desc },
+                model: {
+                  value: _vm.form.aliyun.accessKeySecret.value,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form.aliyun.accessKeySecret, "value", $$v)
+                  },
+                  expression: "form.aliyun.accessKeySecret.value"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card mt-2" }, [
+      _c("div", { staticClass: "card-header" }, [_vm._v("OSS")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { label: _vm.form.aliyun.upload.endpoint.title } },
+            [
+              _c("el-input", {
+                attrs: { placeholder: _vm.form.aliyun.upload.endpoint.desc },
+                model: {
+                  value: _vm.form.aliyun.upload.endpoint.value,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form.aliyun.upload.endpoint, "value", $$v)
+                  },
+                  expression: "form.aliyun.upload.endpoint.value"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: _vm.form.aliyun.upload.bucket.title } },
+            [
+              _c("el-input", {
+                attrs: { placeholder: _vm.form.aliyun.upload.bucket.desc },
+                model: {
+                  value: _vm.form.aliyun.upload.bucket.value,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form.aliyun.upload.bucket, "value", $$v)
+                  },
+                  expression: "form.aliyun.upload.bucket.value"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -50762,191 +51413,203 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "el-form",
-    {
-      ref: "form",
-      attrs: {
-        model: _vm.form,
-        "label-width": "120px",
-        "label-position": "left"
-      }
-    },
+    "div",
     [
-      _c("div", { staticClass: "card" }, [
-        _c(
-          "div",
-          { staticClass: "card-body" },
-          [
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.email.driver.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.email.driver.desc },
-                  model: {
-                    value: _vm.form.email.driver.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.email.driver, "value", $$v)
-                    },
-                    expression: "form.email.driver.value"
-                  }
-                })
-              ],
-              1
-            ),
+      _c("div", { staticClass: "alert alert-warning" }, [
+        _vm._v("使用阿里云邮件服务需要先先配置阿里云")
+      ]),
+      _vm._v(" "),
+      _c(
+        "el-form",
+        {
+          ref: "form",
+          attrs: {
+            model: _vm.form,
+            "label-width": "120px",
+            "label-position": "left"
+          }
+        },
+        [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-header" }, [_vm._v("邮箱配置")]),
             _vm._v(" "),
             _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.email.host.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.email.host.desc },
-                  model: {
-                    value: _vm.form.email.host.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.email.host, "value", $$v)
-                    },
-                    expression: "form.email.host.value"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.email.port.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.email.port.desc },
-                  model: {
-                    value: _vm.form.email.port.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.email.port, "value", $$v)
-                    },
-                    expression: "form.email.port.value"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.email.username.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.email.username.desc },
-                  model: {
-                    value: _vm.form.email.username.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.email.username, "value", $$v)
-                    },
-                    expression: "form.email.username.value"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.email.password.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.email.password.desc },
-                  model: {
-                    value: _vm.form.email.password.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.email.password, "value", $$v)
-                    },
-                    expression: "form.email.password.value"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.email.encryption.title } },
+              "div",
+              { staticClass: "card-body" },
               [
                 _c(
-                  "el-radio-group",
-                  {
-                    model: {
-                      value: _vm.form.email.encryption.value,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form.email.encryption, "value", $$v)
-                      },
-                      expression: "form.email.encryption.value"
-                    }
-                  },
+                  "el-form-item",
+                  { attrs: { label: _vm.form.email.driver.title } },
                   [
-                    _c("el-radio", { attrs: { label: "tls" } }),
-                    _vm._v(" "),
-                    _c("el-radio", { attrs: { label: "ssl" } })
+                    _c("el-input", {
+                      attrs: { placeholder: _vm.form.email.driver.desc },
+                      model: {
+                        value: _vm.form.email.driver.value,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form.email.driver, "value", $$v)
+                        },
+                        expression: "form.email.driver.value"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "el-form-item",
+                  { attrs: { label: _vm.form.email.host.title } },
+                  [
+                    _c("el-input", {
+                      attrs: { placeholder: _vm.form.email.host.desc },
+                      model: {
+                        value: _vm.form.email.host.value,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form.email.host, "value", $$v)
+                        },
+                        expression: "form.email.host.value"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "el-form-item",
+                  { attrs: { label: _vm.form.email.port.title } },
+                  [
+                    _c("el-input", {
+                      attrs: { placeholder: _vm.form.email.port.desc },
+                      model: {
+                        value: _vm.form.email.port.value,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form.email.port, "value", $$v)
+                        },
+                        expression: "form.email.port.value"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "el-form-item",
+                  { attrs: { label: _vm.form.email.username.title } },
+                  [
+                    _c("el-input", {
+                      attrs: { placeholder: _vm.form.email.username.desc },
+                      model: {
+                        value: _vm.form.email.username.value,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form.email.username, "value", $$v)
+                        },
+                        expression: "form.email.username.value"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "el-form-item",
+                  { attrs: { label: _vm.form.email.password.title } },
+                  [
+                    _c("el-input", {
+                      attrs: { placeholder: _vm.form.email.password.desc },
+                      model: {
+                        value: _vm.form.email.password.value,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form.email.password, "value", $$v)
+                        },
+                        expression: "form.email.password.value"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "el-form-item",
+                  { attrs: { label: _vm.form.email.encryption.title } },
+                  [
+                    _c(
+                      "el-radio-group",
+                      {
+                        model: {
+                          value: _vm.form.email.encryption.value,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form.email.encryption, "value", $$v)
+                          },
+                          expression: "form.email.encryption.value"
+                        }
+                      },
+                      [
+                        _c("el-radio", { attrs: { label: "tls" } }),
+                        _vm._v(" "),
+                        _c("el-radio", { attrs: { label: "ssl" } })
+                      ],
+                      1
+                    )
                   ],
                   1
                 )
               ],
               1
             )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card mt-3" }, [
-        _c("div", { staticClass: "card-header" }, [_vm._v("测试")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "card-body" },
-          [
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card mt-3" }, [
+            _c("div", { staticClass: "card-header" }, [_vm._v("测试")]),
+            _vm._v(" "),
             _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.email.test_mail.title } },
+              "div",
+              { staticClass: "card-body" },
               [
                 _c(
-                  "el-input",
-                  {
-                    attrs: { placeholder: _vm.form.email.test_mail.desc },
-                    model: {
-                      value: _vm.form.email.test_mail.value,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form.email.test_mail, "value", $$v)
-                      },
-                      expression: "form.email.test_mail.value"
-                    }
-                  },
+                  "el-form-item",
+                  { attrs: { label: _vm.form.email.test_mail.title } },
                   [
-                    _c("template", { slot: "append" }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.send($event)
-                            }
-                          }
-                        },
-                        [_vm._v("发送测试邮件")]
-                      )
-                    ])
+                    _c(
+                      "el-input",
+                      {
+                        attrs: { placeholder: _vm.form.email.test_mail.desc },
+                        model: {
+                          value: _vm.form.email.test_mail.value,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form.email.test_mail, "value", $$v)
+                          },
+                          expression: "form.email.test_mail.value"
+                        }
+                      },
+                      [
+                        _c("template", { slot: "append" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.send($event)
+                                }
+                              }
+                            },
+                            [_vm._v("发送测试邮件")]
+                          )
+                        ])
+                      ],
+                      2
+                    )
                   ],
-                  2
+                  1
                 )
               ],
               1
             )
-          ],
-          1
-        )
-      ])
-    ]
+          ])
+        ]
+      )
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -51107,87 +51770,93 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
-    _c(
-      "div",
-      { staticClass: "card-body" },
-      [
-        _c(
-          "el-form",
-          { ref: "form", attrs: { model: _vm.form, "label-width": "120px" } },
-          [
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.upload.drive.title } },
-              [
-                _c(
-                  "el-radio-group",
-                  {
-                    staticClass: "align-baseline",
+  return _c("div", [
+    _c("div", { staticClass: "alert alert-warning" }, [
+      _vm._v("使用OSS上传需要先设置阿里云")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card" }, [
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c(
+            "el-form",
+            { ref: "form", attrs: { model: _vm.form, "label-width": "120px" } },
+            [
+              _c(
+                "el-form-item",
+                { attrs: { label: _vm.form.upload.drive.title } },
+                [
+                  _c(
+                    "el-radio-group",
+                    {
+                      staticClass: "align-baseline",
+                      model: {
+                        value: _vm.form.upload.drive.value,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form.upload.drive, "value", $$v)
+                        },
+                        expression: "form.upload.drive.value"
+                      }
+                    },
+                    [
+                      _c("el-radio", { attrs: { label: "local" } }, [
+                        _vm._v("本地上传")
+                      ]),
+                      _vm._v(" "),
+                      _c("el-radio", { attrs: { label: "oss" } }, [
+                        _vm._v("阿里云OSS")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: _vm.form.upload.file_size.title } },
+                [
+                  _c("el-input", {
+                    attrs: { placeholder: _vm.form.upload.file_size.desc },
                     model: {
-                      value: _vm.form.upload.drive.value,
+                      value: _vm.form.upload.file_size.value,
                       callback: function($$v) {
-                        _vm.$set(_vm.form.upload.drive, "value", $$v)
+                        _vm.$set(_vm.form.upload.file_size, "value", $$v)
                       },
-                      expression: "form.upload.drive.value"
+                      expression: "form.upload.file_size.value"
                     }
-                  },
-                  [
-                    _c("el-radio", { attrs: { label: "local" } }, [
-                      _vm._v("本地上传")
-                    ]),
-                    _vm._v(" "),
-                    _c("el-radio", { attrs: { label: "oss" } }, [
-                      _vm._v("阿里云OSS")
-                    ])
-                  ],
-                  1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.upload.file_size.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.upload.file_size.desc },
-                  model: {
-                    value: _vm.form.upload.file_size.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.upload.file_size, "value", $$v)
-                    },
-                    expression: "form.upload.file_size.value"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-form-item",
-              { attrs: { label: _vm.form.upload.type.title } },
-              [
-                _c("el-input", {
-                  attrs: { placeholder: _vm.form.upload.type.desc },
-                  model: {
-                    value: _vm.form.upload.type.value,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form.upload.type, "value", $$v)
-                    },
-                    expression: "form.upload.type.value"
-                  }
-                })
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ],
-      1
-    )
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: _vm.form.upload.type.title } },
+                [
+                  _c("el-input", {
+                    attrs: { placeholder: _vm.form.upload.type.desc },
+                    model: {
+                      value: _vm.form.upload.type.value,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form.upload.type, "value", $$v)
+                      },
+                      expression: "form.upload.type.value"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -58433,27 +59102,29 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/PhoneValidate.vue":
-/*!***************************************************!*\
-  !*** ./resources/js/components/PhoneValidate.vue ***!
-  \***************************************************/
+/***/ "./resources/js/components/SendCode.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/SendCode.vue ***!
+  \**********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PhoneValidate_vue_vue_type_template_id_459c9649___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PhoneValidate.vue?vue&type=template&id=459c9649& */ "./resources/js/components/PhoneValidate.vue?vue&type=template&id=459c9649&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _SendCode_vue_vue_type_template_id_00c19f00___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SendCode.vue?vue&type=template&id=00c19f00& */ "./resources/js/components/SendCode.vue?vue&type=template&id=00c19f00&");
+/* harmony import */ var _SendCode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SendCode.vue?vue&type=script&lang=js& */ "./resources/js/components/SendCode.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _PhoneValidate_vue_vue_type_template_id_459c9649___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PhoneValidate_vue_vue_type_template_id_459c9649___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SendCode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SendCode_vue_vue_type_template_id_00c19f00___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SendCode_vue_vue_type_template_id_00c19f00___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -58463,24 +59134,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/PhoneValidate.vue"
+component.options.__file = "resources/js/components/SendCode.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/PhoneValidate.vue?vue&type=template&id=459c9649&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/PhoneValidate.vue?vue&type=template&id=459c9649& ***!
-  \**********************************************************************************/
+/***/ "./resources/js/components/SendCode.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/SendCode.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SendCode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SendCode.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SendCode.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SendCode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/SendCode.vue?vue&type=template&id=00c19f00&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/SendCode.vue?vue&type=template&id=00c19f00& ***!
+  \*****************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PhoneValidate_vue_vue_type_template_id_459c9649___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PhoneValidate.vue?vue&type=template&id=459c9649& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PhoneValidate.vue?vue&type=template&id=459c9649&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PhoneValidate_vue_vue_type_template_id_459c9649___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SendCode_vue_vue_type_template_id_00c19f00___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./SendCode.vue?vue&type=template&id=00c19f00& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SendCode.vue?vue&type=template&id=00c19f00&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SendCode_vue_vue_type_template_id_00c19f00___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PhoneValidate_vue_vue_type_template_id_459c9649___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SendCode_vue_vue_type_template_id_00c19f00___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -58733,6 +59418,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_member_info_Password__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/views/member/info/Password */ "./resources/js/views/member/info/Password.vue");
 /* harmony import */ var _views_member_info_Avatar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/views/member/info/Avatar */ "./resources/js/views/member/info/Avatar.vue");
 /* harmony import */ var _views_member_info_Phone__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/views/member/info/Phone */ "./resources/js/views/member/info/Phone.vue");
+/* harmony import */ var _views_member_info_Email__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/views/member/info/Email */ "./resources/js/views/member/info/Email.vue");
+
 
 
 
@@ -58758,6 +59445,10 @@ __webpack_require__.r(__webpack_exports__);
     name: 'info.phone',
     path: 'info/phone',
     component: _views_member_info_Phone__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }, {
+    name: 'info.email',
+    path: 'info/email',
+    component: _views_member_info_Email__WEBPACK_IMPORTED_MODULE_5__["default"]
   }]
 });
 
@@ -59754,6 +60445,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Base_vue_vue_type_template_id_34bf6608___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Base_vue_vue_type_template_id_34bf6608___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/member/info/Email.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/views/member/info/Email.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Email_vue_vue_type_template_id_889e22fe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Email.vue?vue&type=template&id=889e22fe& */ "./resources/js/views/member/info/Email.vue?vue&type=template&id=889e22fe&");
+/* harmony import */ var _Email_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Email.vue?vue&type=script&lang=js& */ "./resources/js/views/member/info/Email.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Email_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Email_vue_vue_type_template_id_889e22fe___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Email_vue_vue_type_template_id_889e22fe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/member/info/Email.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/member/info/Email.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/views/member/info/Email.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Email_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Email.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/member/info/Email.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Email_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/member/info/Email.vue?vue&type=template&id=889e22fe&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/views/member/info/Email.vue?vue&type=template&id=889e22fe& ***!
+  \*********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Email_vue_vue_type_template_id_889e22fe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Email.vue?vue&type=template&id=889e22fe& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/member/info/Email.vue?vue&type=template&id=889e22fe&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Email_vue_vue_type_template_id_889e22fe___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Email_vue_vue_type_template_id_889e22fe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

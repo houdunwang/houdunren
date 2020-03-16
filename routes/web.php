@@ -1,9 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 //前台
 Route::group(['middleware' => ['front'], 'namespace' => 'Home'], function () {
-  Route::get('/', 'IndexController@home');
+  Route::get('/', function () {
+    dd(Cache::get('validate_code'));
+  });
+  // Route::get('/', 'IndexController@home');
   Route::get('home', 'IndexController@home');
 });
 

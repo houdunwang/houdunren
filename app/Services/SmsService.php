@@ -5,6 +5,8 @@ namespace App\Services;
 use AlibabaCloud\Client\AlibabaCloud;
 use AlibabaCloud\Client\Exception\ClientException;
 use AlibabaCloud\Client\Exception\ServerException;
+use Exception;
+use PhpParser\Node\Stmt\TryCatch;
 
 /**
  * 短信发送服务
@@ -29,7 +31,7 @@ class SmsService
    * @param mixed $phone 手机号
    * @return void
    */
-  public function code($phone)
+  public function code(int $phone)
   {
     $webname = site()['name'];
     return $this->send([
@@ -59,15 +61,19 @@ class SmsService
       ->regionId('cn-hangzhou')
       ->asDefaultClient();
 
-    return AlibabaCloud::rpc()
-      ->product('Dysmsapi')
-      ->version('2017-05-25')
-      ->action('SendSms')
-      ->method('POST')
-      ->host('dysmsapi.aliyuncs.com')
-      ->options([
-        'query' => $query,
-      ])
-      ->request();
+    try {
+      return AlibabaCloud::rpc()
+        ->product('Dysmsapi')
+        ->version('2017-05-25')
+        ->action('SendSms')
+        ->method('POST')
+        ->host('dysmsapi.aliyuncs.com')
+        ->options([
+          'query' => $query,
+        ])
+        ->request();
+    } catch (Exception $e) {
+      throw new Exception('短信接口配置错误');
+    }
   }
 }

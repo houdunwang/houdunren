@@ -17,6 +17,7 @@ class FrontMiddleware
     if (!$site) {
       dd('域名不属于任何站点');
     }
+    site($site);
     return $next($request);
   }
 }

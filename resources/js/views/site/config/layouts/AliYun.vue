@@ -1,7 +1,8 @@
 <template>
-  <div class="card">
-    <div class="card-body">
-      <el-form :model="form" label-width="120px">
+  <el-form :model="form" label-width="120px">
+    <div class="card">
+      <div class="card-header">访问令牌</div>
+      <div class="card-body">
         <el-form-item :label="form.aliyun.regionId.title">
           <el-input v-model="form.aliyun.regionId.value" :placeholder="form.aliyun.regionId.desc"></el-input>
         </el-form-item>
@@ -17,9 +18,11 @@
             :placeholder="form.aliyun.accessKeySecret.desc"
           ></el-input>
         </el-form-item>
-        <el-divider>
-          <i class="el-icon-mobile-phone"></i>
-        </el-divider>
+      </div>
+    </div>
+    <div class="card mt-2">
+      <div class="card-header">OSS</div>
+      <div class="card-body">
         <el-form-item :label="form.aliyun.upload.endpoint.title">
           <el-input
             v-model="form.aliyun.upload.endpoint.value"
@@ -32,9 +35,9 @@
             :placeholder="form.aliyun.upload.bucket.desc"
           ></el-input>
         </el-form-item>
-      </el-form>
+      </div>
     </div>
-  </div>
+  </el-form>
 </template>
 
 <script>

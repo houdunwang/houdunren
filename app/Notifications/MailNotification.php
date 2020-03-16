@@ -41,13 +41,12 @@ class MailNotification extends Notification implements ShouldQueue
   public function toMail($notifiable)
   {
     $mail =  (new MailMessage)->subject($this->message['subject'])
-      ->line($this->message['content']);
+      ->greeting($this->message['greeting'] ?? ' ');
 
-    if (isset($this->message['greeting']))
-      $mail->greeting($this->message['greeting']);
+    if (isset($this->message['content']))
+      $mail->line($this->message['content']);
 
-    if (isset($this->message['salutation']))
-      $mail->salutation('Copyright © 2010-2020 houdunren.com');
+    $mail->salutation($this->message['salutation'] ?? config('app.name'));
 
     if (isset($this->message['action']))
       $mail->action($this->message['action']['title'], url($this->message['action']['url']));

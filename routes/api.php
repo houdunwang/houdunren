@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth:api'], 'namespace' => 'Common', 'prefix' => 'common'], function () {
-  Route::post('code/phone', 'CodeController@phone');
+  Route::post('code', 'CodeController@send');
 });
 //系统
 Route::group(['middleware' => 'auth:api', 'namespace' => 'System', 'prefix' => 'system'], function () {
@@ -60,4 +60,6 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Member', 'prefix' => '
   Route::get('get', 'UserController@get');
   Route::put('user', 'UserController@update');
   Route::put('password', 'UserController@password');
+  Route::put('phone', 'UserController@phone');
+  Route::put('email', 'UserController@email');
 });

@@ -1,17 +1,13 @@
 <template>
   <div>
     <div class="card">
-      <div class="card-header bg-white">绑定手机</div>
+      <div class="card-header bg-white">绑定邮箱</div>
       <div class="card-body">
         <el-form :model="form" ref="form" label-width="80px">
-          <el-form-item
-            label="手机号"
-            prop="phone"
-            :rules="[{ required: true, message: '请输入手机号', trigger: 'blur' }]"
-          >
-            <el-input type="phone" v-model="form.phone"></el-input>
+          <el-form-item label="邮箱" prop="email" :rules="[{ required: true, message: '请输入邮箱', trigger: 'blur' }]">
+            <el-input type="email" v-model="form.email"></el-input>
           </el-form-item>
-          <send-code type="sms" :account="form.phone" :code.sync="form.code" />
+          <send-code type="email" :account="form.email" :code.sync="form.code" />
           <el-form-item>
             <el-button type="primary" @click="onSubmit">保存提交</el-button>
           </el-form-item>
@@ -29,7 +25,7 @@ export default {
   data() {
     return {
       form: {
-        phone: 18600276067,
+        email: '2300071698@qq.com',
         code: ''
       }
     }
@@ -38,8 +34,8 @@ export default {
     onSubmit() {
       this.$refs['form'].validate(async valid => {
         if (valid) {
-          await this.axios.put(`member/phone`, this.form)
-          this.$message.success('手机号修改成功')
+          await this.axios.put(`member/email`, this.form)
+          this.$message.success('邮箱绑定成功')
         }
       })
     }
