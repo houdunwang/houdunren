@@ -15,6 +15,7 @@ class VideoResource extends Resource
   public function toArray($request)
   {
     $resource =  parent::toArray($request);
+
     return $resource;
   }
 }

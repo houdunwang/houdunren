@@ -44,10 +44,23 @@
                 </button>
               </div>
               <div class="btn-group btn-group-sm ml-md-auto mt-1">
-                <button class="btn btn-outline-secondary" type="button" aria-label>
-                  <i class="fa fa-heart-o" aria-hidden="true"></i> 收藏
+                <button
+                  class="btn btn-outline-secondary"
+                  :class="{ 'btn-outline-info': field.is_favour }"
+                  type="button"
+                  aria-label
+                  @click.prevent="favour"
+                >
+                  <i class="fa fa-heart-o" aria-hidden="true"></i> 点赞
                 </button>
-                <button class="btn btn-outline-secondary" type="button" aria-label>91</button>
+                <button
+                  class="btn btn-outline-secondary"
+                  :class="{ 'btn-outline-info': field.is_favour }"
+                  type="button"
+                  aria-label
+                >
+                  {{ field.favour_count }}
+                </button>
               </div>
             </div>
           </div>
@@ -126,6 +139,12 @@ export default {
       ])
       this.$set(this, 'lesson', response[0])
       this.$set(this, 'field', response[1])
+    },
+    async favour() {
+      let response = await this.axios.get(`edu/front/video/favour/${this.field.id}`)
+      console.log(response.data)
+
+      this.$set(this, 'field', response.data)
     }
   }
 }

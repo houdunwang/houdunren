@@ -22,10 +22,10 @@ class CreateEduVideosTable extends Migration
       $table->text('path')->nullable()->comment('视频文件');
       $table->text('external_address')->nullable()->comment('外部播放地址');
       $table->unsignedSmallInteger('rank')->default(0)->comment('排序');
-      $table->unsignedBigInteger('read_num')->default(0)->comment('查看次数');
-      $table->unsignedBigInteger('zan_num')->default(0)->comment('点赞数');
-      $table->unsignedBigInteger('favorite_num')->default(0)->comment('收藏数');
-      $table->unsignedBigInteger('comment_num')->default(0)->comment('评论数');
+      $table->unsignedBigInteger('read_count')->default(0)->comment('查看次数');
+      $table->unsignedBigInteger('favour_count')->default(0)->comment('支持数');
+      $table->unsignedBigInteger('favorite_count')->default(0)->comment('收藏数');
+      $table->unsignedBigInteger('comment_count')->default(0)->comment('评论数');
       $table->timestamps();
     });
   }

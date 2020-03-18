@@ -6,7 +6,8 @@ use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\Edu\Entities\Lesson;
+use Illuminate\Support\Facades\Auth;
+use Modules\Edu\Entities\User;
 use Modules\Edu\Entities\Video;
 use Modules\Edu\Transformers\Front\VideoResource;
 
@@ -27,14 +28,13 @@ class VideoController extends ApiController
     return $this->json(new VideoResource($video));
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   * @param int $id
-   * @return Response
-   */
-  public function edit($id)
+  public function favour(Video $video)
   {
-    return view('edu::edit');
+    $user = User::instance(Auth::user());
+    $user->videos()->toggle([$video['id']]);
+    $video['favour_count'] =  $video->favour->count();
+    $video->save();
+    return $this->json(new VideoResource($video));
   }
 
   /**
