@@ -39,6 +39,7 @@ class SiteService
    */
   public function getSiteByDomain()
   {
+    // dd($_SERVER);
     $regexp = "^https?:\/\/{$_SERVER['HTTP_HOST']}";
     return  Site::where('domain', 'REGEXP', $regexp)->first();
   }
@@ -65,28 +66,5 @@ class SiteService
       'username' =>  config('site.email.username.value'),
       'password' =>  config('site.email.password.value'),
     ]]);
-  }
-  /**
-   * 是否为站长
-   * @param Site $site
-   * @param User $user
-   *
-   * @return bool
-   */
-  public function isAdmin(Site $site, User $user)
-  {
-    return $site->admin->contains($user);
-  }
-
-  /**
-   * 是否为操作员
-   * @param Site $site
-   * @param User $user
-   *
-   * @return bool
-   */
-  public function isOperator(Site $site, User $user)
-  {
-    return $site->operator->contains($user);
   }
 }

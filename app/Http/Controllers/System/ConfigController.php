@@ -13,7 +13,7 @@ class ConfigController extends ApiController
 {
   public function __construct()
   {
-    $this->middleware(['system'])->except(['show']);
+    $this->middleware('system')->except(['show']);
   }
 
   public function show(SystemConfig $config)

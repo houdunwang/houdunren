@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'si
 
 //会员中心
 Route::post('login', 'Member\LoginController@apiLogin');
-Route::group(['middleware' => 'auth:api', 'namespace' => 'Member', 'prefix' => 'member'], function () {
+Route::group(['middleware' => ['auth:api', 'member'], 'namespace' => 'Member', 'prefix' => 'member'], function () {
   Route::get('get', 'UserController@get');
   Route::put('user', 'UserController@update');
   Route::put('password', 'UserController@password');

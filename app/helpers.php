@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Module;
 use App\Models\Site;
 use App\Services\AccessService;
 use App\Services\ModuleService;
@@ -37,11 +38,14 @@ function site($site = null): Site
 }
 /**
  * 根据访问网址获取模块
+ * 主要用于后台模块管理
  * @return \App\Models\Module
  */
-function module()
+function module(Module $module = null)
 {
-  return app(ModuleService::class)->getModuleByUrl();
+  static $cache = null;
+  if (is_null($cache) && $module) $cache = $module;
+  return $cache;
 }
 /**
  * 检测模块访问权限

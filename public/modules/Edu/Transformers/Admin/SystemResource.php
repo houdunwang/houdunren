@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Edu\Transformers;
+namespace Modules\Edu\Transformers\Admin;
 
 use Illuminate\Http\Resources\Json\Resource;
 

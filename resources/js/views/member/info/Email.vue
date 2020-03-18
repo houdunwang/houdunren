@@ -30,6 +30,10 @@ export default {
       }
     }
   },
+  async created() {
+    let response = await this.axios.get(`member/get`)
+    this.$set(this, 'form', response.data)
+  },
   methods: {
     onSubmit() {
       this.$refs['form'].validate(async valid => {

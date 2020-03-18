@@ -3,7 +3,6 @@
 namespace Modules\Edu\Http\Controllers\Admin;
 
 use App\Http\Controllers\ApiController;
-use Illuminate\Http\Request;
 use Modules\Edu\Entities\Tag;
 use Modules\Edu\Http\Requests\TagRequest;
 use Modules\Edu\Services\TagService;

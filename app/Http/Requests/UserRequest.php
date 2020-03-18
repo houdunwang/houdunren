@@ -28,7 +28,7 @@ class UserRequest extends FormRequest
       'nickname' => 'sometimes|required',
       'email' => 'nullable|email',
       'mobile' => 'sometimes|required',
-      'real_name' => 'sometimes|required',
+      'real_name' => 'sometimes|nullable',
       'password' => 'sometimes|between:3,20|confirmed',
       'home' => 'sometimes|nullable|url',
       'weibo' => 'sometimes|nullable|regex:/^https:\/\/weibo.com/',

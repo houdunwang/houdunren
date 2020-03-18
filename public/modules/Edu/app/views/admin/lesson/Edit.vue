@@ -12,9 +12,9 @@ export default {
     }
   },
   async created() {
-    let response = await this.axios.get(`edu/admin/lesson/${this.$route.params.id}/edit`).then(r => r.data.data)
-    response.tags = response.tags.map(t => t.id)
-    this.$set(this, 'field', response)
+    let response = await this.axios.get(`edu/admin/lesson/${this.$route.params.id}/edit`)
+    response.data.tags = response.data.tags.map(t => t.id)
+    this.$set(this, 'field', response.data)
   },
   methods: {
     async submit(lesson) {

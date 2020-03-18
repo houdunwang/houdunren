@@ -11,14 +11,8 @@
             <div class="col-6">
               <span class="text-dark small mr-1">套餐:</span>
               <span v-for="group in site.admin.group" :key="group.id">
-                <span
-                  class="text-secondary mr-1 border p-1 bg-light rounded"
-                  v-for="p in group.packages"
-                  :key="p.id"
-                >
-                  {{
-                  p.name
-                  }}
+                <span class="text-secondary mr-1 border p-1 bg-light rounded" v-for="p in group.packages" :key="p.id">
+                  {{ p.name }}
                 </span>
               </span>
             </div>

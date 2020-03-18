@@ -1,5 +1,4 @@
 @inject('MenuService', 'App\Services\MenuService')
-@inject('ModuleService', 'App\Services\ModuleService')
 <!doctype html>
 <html lang="en">
 
@@ -7,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
-  <title>{{$ModuleService->getModuleByUrl()['title']}}</title>
+  <title>{{module()['title']}}</title>
   <link rel="stylesheet" href="{{mix('css/app.css')}}">
   @stack('css')
 </head>
@@ -27,7 +26,7 @@
           </strong>
         </li>
         <li class="nav-item pr-2">
-          <a href="/admin/site/index" class="nav-link" href="#">
+          <a href="/site/index" class="nav-link" href="#">
             <i class="fa fa-sitemap" aria-hidden="true"></i>
             站点列表
           </a>

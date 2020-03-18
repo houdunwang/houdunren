@@ -15,7 +15,7 @@
 </head>
 
 <body class="member">
-  <div class="member-top border-bottom shadow-sm">
+  <div class="member-top shadow-sm">
     <div class="container">
       <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
@@ -35,8 +35,14 @@
             <div class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">向军大叔</a>
-              <div class="dropdown-menu" aria-labelledby="dropdownId">
-                <a class="dropdown-item" href="{{route('logout')}}">退出登录</a>
+              <div class="dropdown-menu" aria-labelledby="dropdownId" style="min-width:0px;">
+                <a class="dropdown-item mb-2 mt-2" href="/member/info/base">修改资料</a>
+                <a class="dropdown-item mb-2" href="/member/info/phone">绑定手机</a>
+                <a class="dropdown-item mb-2" href="/member/info/avatar">头像设置</a>
+                <a class="dropdown-item mb-2" href="/member/info/base">修改密码</a>
+                <a class="dropdown-item mb-2" href="/member/info/email">绑定邮箱</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item mb-2" href="{{route('logout')}}">退出登录</a>
               </div>
             </div>
           </form>
@@ -54,12 +60,12 @@
           <h6 class="text-muted">{{auth()->user()->nickname}}</h6>
           <hr>
           <div class="d-flex justify-content-between text-muted">
-            <i class="fa fa-envelope {{auth()->user()->email?'text-primary':''}}" aria-hidden="true"></i>
-            <i class="fa fa-phone {{auth()->user()->phone?'text-primary':''}}" aria-hidden="true"></i>
-            <i class="fa fa-weibo {{auth()->user()->weibo?'text-primary':''}}" aria-hidden="true"></i>
-            <i class="fa fa-weixin {{auth()->user()->wechat?'text-primary':''}}" aria-hidden="true"></i>
-            <i class="fa fa-github {{auth()->user()->github?'text-primary':''}}" aria-hidden="true"></i>
-            <i class="fa fa-qq {{auth()->user()->qq?'text-primary':''}}" aria-hidden="true"></i>
+            <i class="fa fa-envelope {{auth()->user()->email?'text-info':''}}" aria-hidden="true"></i>
+            <i class="fa fa-phone {{auth()->user()->phone?'text-info':''}}" aria-hidden="true"></i>
+            <i class="fa fa-weibo {{auth()->user()->weibo?'text-info':''}}" aria-hidden="true"></i>
+            <i class="fa fa-weixin {{auth()->user()->wechat?'text-info':''}}" aria-hidden="true"></i>
+            <i class="fa fa-github {{auth()->user()->github?'text-info':''}}" aria-hidden="true"></i>
+            <i class="fa fa-qq {{auth()->user()->qq?'text-info':''}}" aria-hidden="true"></i>
           </div>
         </div>
       </div>

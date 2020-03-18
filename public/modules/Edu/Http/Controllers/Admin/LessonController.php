@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Modules\Edu\Entities\Lesson;
 use Modules\Edu\Http\Requests\LessonRequest;
 use Modules\Edu\Services\LessonService;
-use Modules\Edu\Transformers\LessonResource;
+use Modules\Edu\Transformers\Admin\LessonResource;
 
 class LessonController extends ApiController
 {
@@ -17,7 +17,7 @@ class LessonController extends ApiController
 
   public function index()
   {
-    $lessons = Lesson::orderBy('id', 'desc')->where('site_id', site()['id'])->paginate(10);
+    $lessons = Lesson::latest('id')->where('site_id', site()['id'])->paginate(10);
     return LessonResource::collection($lessons);
   }
 
@@ -51,7 +51,7 @@ class LessonController extends ApiController
 
   public function edit(Lesson $lesson)
   {
-    return $this->success('获取课程', new LessonResource($lesson));
+    return $this->json(new LessonResource($lesson));
   }
 
   public function update(LessonRequest $request, Lesson $lesson, LessonService $lessonService)

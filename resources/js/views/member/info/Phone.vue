@@ -20,7 +20,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import _ from 'lodash'
 import SendCode from '@/components/SendCode'
@@ -33,6 +32,10 @@ export default {
         code: ''
       }
     }
+  },
+  async created() {
+    let response = await this.axios.get(`member/get`)
+    this.$set(this, 'form', response.data)
   },
   methods: {
     onSubmit() {

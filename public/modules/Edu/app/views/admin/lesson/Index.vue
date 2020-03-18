@@ -11,11 +11,7 @@
           <el-table-column label="#编号" prop="id" width="60"></el-table-column>
           <el-table-column label="封面图" width="80">
             <template slot-scope="scope">
-              <img
-                :style="{ width: '30px', height: '30px' }"
-                :src="scope.row.thumb"
-                class="rounded"
-              />
+              <img :style="{ width: '30px', height: '30px' }" :src="scope.row.thumb" class="rounded" />
             </template>
           </el-table-column>
           <el-table-column
@@ -28,11 +24,7 @@
           ></el-table-column>
           <el-table-column label="上架" width="60">
             <template slot-scope="scope">
-              <i
-                class="fa fa-check-circle-o text-success"
-                aria-hidden="true"
-                v-if="scope.row.status"
-              ></i>
+              <i class="fa fa-check-circle-o text-success" aria-hidden="true" v-if="scope.row.status"></i>
               <i class="fa fa-times-circle-o text-danger" aria-hidden="true" v-else></i>
             </template>
           </el-table-column>
@@ -42,7 +34,8 @@
                 <router-link
                   :to="{ name: 'admin.lesson.edit', params: { id: scope.row.id } }"
                   class="btn btn-outline-success"
-                >编辑</router-link>
+                  >编辑</router-link
+                >
                 <a class="btn btn-outline-secondary" @click="del(scope.row)">删除</a>
               </div>
             </template>

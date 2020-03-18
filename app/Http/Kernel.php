@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\BindMobileMiddleware;
 use App\Http\Middleware\FrontMiddleware;
+use App\Http\Middleware\MemberMiddleware;
 use App\Http\Middleware\ModuleMiddleware;
 use App\Http\Middleware\SiteMiddleware;
 use App\Http\Middleware\SystemMiddleware;
@@ -61,6 +62,7 @@ class Kernel extends HttpKernel
   protected $routeMiddleware = [
     'bindMobile' => BindMobileMiddleware::class,
     'front' => FrontMiddleware::class,
+    'member' => MemberMiddleware::class,
     'module' => ModuleMiddleware::class,
     'site' => SiteMiddleware::class,
     'system' => SystemMiddleware::class,

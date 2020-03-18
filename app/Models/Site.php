@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Permission\Models\Permission;
 
@@ -14,7 +16,7 @@ use Spatie\Permission\Models\Permission;
  */
 class Site extends Model
 {
-  protected $fillable = ['name', 'keyword', 'config', 'description', 'logo', 'icp', 'tel', 'email', 'counter', 'domain'];
+  protected $fillable = ['name', 'user_id', 'keyword', 'config', 'description', 'logo', 'icp', 'tel', 'email', 'counter', 'domain'];
 
   protected $casts = [
     'config' => 'array'
@@ -48,13 +50,30 @@ class Site extends Model
       ->withPivot('role')->as('site_user');
   }
 
+  /**
+   * 管理员
+   * @return BelongsToMany
+   */
   public function admin()
   {
     return $this->user()->wherePivotIn('role', ['admin']);
   }
 
+  /**
+   * 操作员
+   * @return BelongsToMany
+   */
   public function operator()
   {
     return $this->user()->wherePivotIn('role', ['operator']);
+  }
+
+  /**
+   * 默认模块
+   * @return BelongsTo
+   */
+  public function module()
+  {
+    return $this->belongsTo(Module::class);
   }
 }

@@ -53,6 +53,7 @@
 
 <script>
 export default {
+  name: '选择课程',
   props: { lessons: Array },
   data() {
     return {

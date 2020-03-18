@@ -26,6 +26,11 @@ class SystemMiddleware
     $this->config();
     return $next($request);
   }
+
+  /**
+   * 加载系统配置项
+   * @return void
+   */
   protected function config()
   {
     config(['system' => SystemConfig::first()->config]);

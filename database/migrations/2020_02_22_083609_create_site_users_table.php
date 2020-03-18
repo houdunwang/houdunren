@@ -10,10 +10,8 @@ class CreateSiteUsersTable extends Migration
   {
     Schema::create('site_users', function (Blueprint $table) {
       $table->bigIncrements('id');
-      $table->unsignedBigInteger('user_id')->comment('管理员');
-      $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-      $table->unsignedBigInteger('site_id')->comment('站点编号');
-      $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
+      table_foreign_user($table);
+      table_foreign_site($table);
       $table->char('role', 10)->default('user')->comment('角色名称:admin/operator/user');
     });
   }

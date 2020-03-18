@@ -14040,8 +14040,14 @@ body.member {
 }
 
 body.member .member-top {
-  border-top: solid 4px #f15a57;
   background: #f7f8f9;
+}
+
+body.member .member-top::after {
+  content: "";
+  height: 4px;
+  display: block;
+  background-image: linear-gradient(45deg, #60b5b3, #43a8a6);
 }
 
 body.member .menu .icon img {
@@ -14116,6 +14122,11 @@ body.member .menu .icon img {
   -webkit-filter: sepia(20%);
           filter: sepia(20%);
   transform: rotateY(0deg) scale(1);
+}
+
+*:focus {
+  border: none;
+  outline: none;
 }
 
 a {

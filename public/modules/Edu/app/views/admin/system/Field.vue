@@ -90,7 +90,7 @@
 
 <script>
 import Tab from './Tab'
-import Lesson from '@/views/components/Lesson'
+import Lesson from '@/views/admin/components/Lesson'
 export default {
   components: { Tab, Lesson },
   props: { form: Object },

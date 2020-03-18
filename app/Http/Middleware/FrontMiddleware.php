@@ -17,7 +17,11 @@ class FrontMiddleware
     if (!$site) {
       dd('域名不属于任何站点');
     }
+    if (!$site->module) {
+      dd('站点没有设置默认模块');
+    }
     site($site);
+    module(site()->module);
     return $next($request);
   }
 }

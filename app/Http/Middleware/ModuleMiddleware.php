@@ -2,9 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\ModuleService;
 use App\Services\SiteService;
 use App\Services\UserService;
 use Closure;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -19,7 +21,7 @@ class ModuleMiddleware
     if (!$sid) {
       abort('404', '站点不存在');
     }
-
+    $this->cacheModule();
     if ($this->checkRole(site($sid), $access)) {
       config(['site' => site()['config']]);
       return $next($request);
@@ -28,6 +30,16 @@ class ModuleMiddleware
     abort(403, '你没有管理站点的权限');
   }
 
+  /**
+   * 缓存模块
+   * @return void
+   * @throws BindingResolutionException
+   */
+  protected function cacheModule()
+  {
+    $module = app(ModuleService::class)->getModuleByUrl();
+    module($module);
+  }
   /**
    * 获取当前用户缓存的站点编号
    * @return void

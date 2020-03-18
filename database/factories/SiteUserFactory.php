@@ -7,5 +7,5 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Arr;
 
 $factory->define(SiteUser::class, function (Faker $faker) {
-    return [];
+  return [];
 });

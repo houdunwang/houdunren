@@ -20,7 +20,6 @@ class PackageResource extends JsonResource
       'name' => $this['name'],
       'system' => $this['system'],
       'modules' => $this->getModules(),
-      'a' => 33,
       'group' => $this->group
     ];
   }

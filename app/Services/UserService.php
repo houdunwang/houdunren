@@ -63,6 +63,30 @@ class UserService
   }
 
   /**
+   * 是否为站长
+   * @param Site $site
+   * @param User $user
+   *
+   * @return bool
+   */
+  public function isAdmin(Site $site, User $user)
+  {
+    return $site->admin->contains($user);
+  }
+
+  /**
+   * 是否为操作员
+   * @param Site $site
+   * @param User $user
+   *
+   * @return bool
+   */
+  public function isOperator(Site $site, User $user)
+  {
+    return $site->operator->contains($user);
+  }
+
+  /**
    * 根据关键词获取用户
    * @param Site $site
    * @param ?string $content

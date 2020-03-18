@@ -6,7 +6,7 @@ use App\Http\Controllers\ApiController;
 use Modules\Edu\Entities\System;
 use Modules\Edu\Http\Requests\SystemRequest;
 use Modules\Edu\Services\SystemService;
-use Modules\Edu\Transformers\SystemResource;
+use Modules\Edu\Transformers\Admin\SystemResource;
 
 /**
  * 系统课程

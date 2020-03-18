@@ -21,10 +21,7 @@ import Error from '@/components/Error'
 import store from '@/store'
 export default {
   async beforeRouteEnter(to, from, next) {
-    await Promise.all([
-      store.dispatch(`user/get`),
-      store.dispatch('systemConfig/get')
-    ])
+    await Promise.all([store.dispatch(`user/get`), store.dispatch('systemConfig/get')])
     next()
   },
   components: {

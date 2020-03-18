@@ -2,6 +2,13 @@
 :root {
   font-size: 15px;
 }
+
+input,
+button,
+input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
 body {
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC,
     Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
@@ -9,11 +16,4 @@ body {
 a {
   text-decoration: none !important;
   color: #495057;
-}
-
-button {
-  outline: none !important;
-}
-.aaaaa {
-  background: url('../images/abcdef.jpg');
 }

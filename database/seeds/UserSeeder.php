@@ -14,7 +14,6 @@ class UserSeeder extends Seeder
       1 => ['name' => 'admin', 'nickname' => '超管',],
       2 => ['name' => 'houdunren', 'nickname' => '后盾人',],
       3 => ['name' => 'hdcms', 'nickname' => 'HDCMS开源软件'],
-
     ];
     collect([1, 2, 3])->map(function ($id) use ($users) {
       $user = User::find($id);

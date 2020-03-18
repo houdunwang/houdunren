@@ -30,12 +30,7 @@
       <div class="card mt-3">
         <div class="card-header">可使用的服务套餐</div>
         <div class="card-body">
-          <el-table
-            :data="packages"
-            ref="multipleTable"
-            @selection-change="handleSelectionChange"
-            empty-text="加载中.."
-          >
+          <el-table :data="packages" ref="multipleTable" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"> </el-table-column>
             <el-table-column label="编号" prop="id"></el-table-column>
             <el-table-column label="名称" prop="name"> </el-table-column>

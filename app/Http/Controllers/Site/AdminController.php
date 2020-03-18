@@ -50,7 +50,7 @@ class AdminController extends ApiController
   public function remove(Request $request, Site $site)
   {
     array_map(function ($uid) use ($site) {
-      $isAdmin =  app(SiteService::class)->isAdmin($site, User::find($uid));
+      $isAdmin =  app(UserService::class)->isAdmin($site, User::find($uid));
       if (!$isAdmin)
         $site->user()->updateExistingPivot($uid, ['role' => 'user']);
     }, $request->input('users'));

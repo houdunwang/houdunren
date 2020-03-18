@@ -11,20 +11,12 @@
           </el-form-item>
         </div>
       </div>
-
       <div class="card mt-3">
         <div class="card-header">
           套餐模块选择
         </div>
         <div class="card-body">
-          <el-table
-            :data="moduleList"
-            border
-            stripe
-            ref="multipleTable"
-            @selection-change="handleSelectionChange"
-            empty-text="加载中"
-          >
+          <el-table :data="moduleList" border stripe ref="multipleTable" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column width="100" label="图标">
               <template slot-scope="scope">
@@ -49,7 +41,6 @@
 
 <script>
 import Master from './Master'
-
 export default {
   props: ['action'],
   data() {

@@ -4,6 +4,7 @@
 
 use Faker\Generator as Faker;
 use App\Models\Site;
+use Illuminate\Support\Arr;
 
 $factory->define(Site::class, function (Faker $faker) {
   return [
