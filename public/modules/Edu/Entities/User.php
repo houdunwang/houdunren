@@ -10,6 +10,8 @@ class User extends Model
 {
   protected $fillable = [];
 
+  protected $hidden = ['remember_token', 'password'];
+
   public static function instance(UserModel $user)
   {
     return User::find($user['id']);
@@ -31,5 +33,14 @@ class User extends Model
   public function videFavorite()
   {
     return $this->morphedByMany(Video::class, 'favorite', 'edu_favorite')->withTimestamps();
+  }
+
+  /**
+   * 视频评论
+   * @return MorphToMany
+   */
+  public function videoComment()
+  {
+    return $this->morphedByMany(Video::class, 'comment', 'edu_comment');
   }
 }

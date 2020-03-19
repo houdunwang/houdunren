@@ -36,4 +36,10 @@ class Video extends Model
   {
     return $this->morphToMany(User::class, 'favorite', 'edu_favorite');
   }
+
+  public function comment()
+  {
+    return $this->morphToMany(User::class, 'comment', 'edu_comment')
+      ->withPivot(['user_id', 'reply_user_id', 'content'])->withTimestamps();
+  }
 }

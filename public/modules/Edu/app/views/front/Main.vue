@@ -3,14 +3,16 @@
     <headers />
     <router-view></router-view>
     <el-backtop> </el-backtop>
+    <error />
   </div>
 </template>
 
 <script>
 import Headers from './components/Header'
 import store from '../../store'
+import Error from '../components/Error'
 export default {
-  components: { Headers },
+  components: { Headers, Error },
   async beforeRouteEnter(to, from, next) {
     await store.dispatch('user/get')
     next()

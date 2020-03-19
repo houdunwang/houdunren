@@ -15,4 +15,6 @@ Route::group(['middleware' => ['front'], 'namespace' => 'Front', 'prefix' => 'ed
   Route::resource('video', 'VideoController')->only(['index', 'show'])->middleware('auth:api');
   Route::get('video/favour/{video}', 'VideoController@favour')->middleware('auth:api');
   Route::get('video/favorite/{video}', 'VideoController@favorite')->middleware('auth:api');
+  Route::post('video/comment/{video}', 'VideoController@comment')->middleware('auth:api');
+  Route::get('video/comment/{video}', 'VideoController@componentList')->middleware('auth:api');
 });

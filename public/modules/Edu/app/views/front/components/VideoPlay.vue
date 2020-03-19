@@ -59,7 +59,6 @@ export default {
 .video-js {
   width: 100%;
   height: auto !important;
-  min-height: 300px;
   position: relative;
   background: none !important;
   line-height: 0;

@@ -8,8 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Modules\Edu\Entities\Traits\Comment;
 use Modules\Edu\Entities\User;
 use Modules\Edu\Entities\Video;
+use Modules\Edu\Http\Requests\CommentRequest;
+use Modules\Edu\Transformers\Front\CommentResource;
 use Modules\Edu\Transformers\Front\VideoResource;
 
 class VideoController extends ApiController
@@ -56,24 +59,28 @@ class VideoController extends ApiController
     $video->save();
     return $this->json(new VideoResource($video));
   }
-  /**
-   * Update the specified resource in storage.
-   * @param Request $request
-   * @param int $id
-   * @return Response
-   */
-  public function update(Request $request, $id)
-  {
-    //
-  }
 
   /**
-   * Remove the specified resource from storage.
-   * @param int $id
-   * @return Response
+   * 发表评论
+   * @param Request $request
+   * @param Video $video
+   * @return JsonResponse
    */
-  public function destroy($id)
+  public function comment(CommentRequest $request, Video $video)
   {
-    //
+    $video->comment()->attach($video['id'], [
+      'site_id' => site()['id'],
+      'user_id' => Auth::id(),
+      'content' => $request->content,
+    ]);
+    $video->comment_count = $video->comment()->count();
+    $video->save();
+
+    return $this->success('发表成功');
+  }
+
+  public function componentList(Video $video)
+  {
+    return $this->json(CommentResource::collection($video->comment));
   }
 }
