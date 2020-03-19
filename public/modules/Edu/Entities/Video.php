@@ -3,6 +3,7 @@
 namespace Modules\Edu\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * 课程视频
@@ -18,8 +19,21 @@ class Video extends Model
     return $this->belongsTo(Lesson::class, 'lesson_id');
   }
 
+  /**
+   * 点赞
+   * @return MorphToMany
+   */
   public function favour()
   {
     return $this->morphToMany(User::class, 'favour', 'edu_favour');
+  }
+
+  /**
+   * 收藏
+   * @return void
+   */
+  public function favorite()
+  {
+    return $this->morphToMany(User::class, 'favorite', 'edu_favorite');
   }
 }

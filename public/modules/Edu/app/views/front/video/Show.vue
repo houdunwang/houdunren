@@ -8,7 +8,7 @@
     <div class="container mt-3 mb-2">
       <div class="card">
         <div class="card-body row">
-          <div class="col-12 col-md-9">
+          <div class="col-12 col-md-6">
             <h5 class="text-secondary">{{ field.title }}</h5>
             <router-link
               :to="{ name: 'lesson.show', params: { id: lesson.id } }"
@@ -18,50 +18,57 @@
               {{ lesson.title }}
             </router-link>
           </div>
-          <div class="col-12 col-md-3 mt-2 mt-md-0">
-            <div class="d-flex flex-column">
-              <div class="btn-group btn-group-sm ml-md-auto">
-                <button
-                  class="btn btn-outline-secondary"
-                  type="button"
-                  aria-label
-                  v-if="prev"
-                  @click.prevent="load(prev.id)"
-                >
-                  上集
-                </button>
-                <button
-                  class="btn btn-outline-secondary"
-                  type="button"
-                  aria-label
-                  v-if="next"
-                  @click.prevent="load(next.id)"
-                >
-                  下集
-                </button>
-                <button class="btn btn-outline-secondary" type="button" aria-label>
-                  下载高清版
-                </button>
-              </div>
-              <div class="btn-group btn-group-sm ml-md-auto mt-1">
-                <button
-                  class="btn btn-outline-secondary"
-                  :class="{ 'btn-outline-info': field.is_favour }"
-                  type="button"
-                  aria-label
-                  @click.prevent="favour"
-                >
-                  <i class="fa fa-heart-o" aria-hidden="true"></i> 点赞
-                </button>
-                <button
-                  class="btn btn-outline-secondary"
-                  :class="{ 'btn-outline-info': field.is_favour }"
-                  type="button"
-                  aria-label
-                >
-                  {{ field.favour_count }}
-                </button>
-              </div>
+          <div
+            class="col-12 col-md-6 mt-2 mt-md-0 d-flex justify-content-md-end justify-content-start flex-wrap"
+          >
+            <div class="btn-group btn-group-sm align-items-center mr-1">
+              <button
+                class="btn btn-outline-success"
+                type="button"
+                aria-label
+                v-if="prev"
+                @click.prevent="load(prev.id)"
+              >上集</button>
+              <button
+                class="btn btn-outline-success"
+                type="button"
+                aria-label
+                v-if="next"
+                @click.prevent="load(next.id)"
+              >下集</button>
+              <button class="btn btn-outline-success" type="button" aria-label>下载高清版</button>
+            </div>
+            <div class="btn-group btn-group-sm align-items-center mt-1 mt-md-0">
+              <button
+                class="btn btn-outline-secondary"
+                :class="{ 'btn-outline-info': field.is_favorite }"
+                type="button"
+                aria-label
+                @click.prevent="favorite"
+              >
+                <i class="fa fa-heart-o" aria-hidden="true"></i> 收藏
+              </button>
+              <button
+                class="btn btn-outline-secondary"
+                :class="{ 'btn-outline-info': field.is_favorite }"
+                type="button"
+                aria-label
+              >{{ field.favorite_count }}</button>
+              <button
+                class="btn btn-outline-secondary"
+                :class="{ 'btn-outline-danger': field.is_favour }"
+                type="button"
+                aria-label
+                @click.prevent="favour"
+              >
+                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 点赞
+              </button>
+              <button
+                class="btn btn-outline-secondary"
+                :class="{ 'btn-outline-danger': field.is_favour }"
+                type="button"
+                aria-label
+              >{{ field.favour_count }}</button>
             </div>
           </div>
         </div>
@@ -88,8 +95,7 @@
                 class="list-group-item text-secondary"
                 v-for="video in lesson.videos"
                 :key="video.id"
-                >{{ video.title }}</router-link
-              >
+              >{{ video.title }}</router-link>
             </ul>
           </div>
         </div>
@@ -142,8 +148,10 @@ export default {
     },
     async favour() {
       let response = await this.axios.get(`edu/front/video/favour/${this.field.id}`)
-      console.log(response.data)
-
+      this.$set(this, 'field', response.data)
+    },
+    async favorite() {
+      let response = await this.axios.get(`edu/front/video/favorite/${this.field.id}`)
       this.$set(this, 'field', response.data)
     }
   }

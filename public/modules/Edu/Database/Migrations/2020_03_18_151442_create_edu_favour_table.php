@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * 点赞
+ * @package
+ */
 class CreateEduFavourTable extends Migration
 {
   /**
