@@ -82,7 +82,6 @@ class VideoController extends ApiController
     ]);
     $video->comment_count = $video->comment()->count();
     $video->save();
-
     return $video->comment()->latest('id')->with(['user', 'reply'])->first();
   }
 

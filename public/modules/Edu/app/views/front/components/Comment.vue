@@ -2,10 +2,7 @@
   <div>
     <div class="card shadow-sm mb-2" v-for="(comment, index) in comments" :key="index">
       <div class="card-header bg-white d-flex justify-content-start">
-        <img
-          :src="comment.user.avatar || `/images/avatar.jpg`"
-          class="avatar rounded img-thumbnail mr-3"
-        />
+        <img :src="comment.user.avatar || `/images/avatar.jpg`" class="avatar rounded img-thumbnail mr-3" />
         <div class="flex-fill">
           <div class="text-secondary">{{ comment.user.nickname }}</div>
           <span class="small text-black-50">
@@ -15,21 +12,27 @@
         </div>
       </div>
       <div class="card-body text-secondary pb-5">
-        <a href="#" class v-if="comment.reply">@{{comment.reply.nickname}}</a>
+        <a href="#" class v-if="comment.reply">@{{ comment.reply.nickname }}</a>
         <p v-html="comment.content" class="d-inline-block"></p>
       </div>
       <div class="card-footer text-muted bg-white small">
         # {{ index }}
         <div class="d-inline-block ml-2 mr-2" v-if="comment.id">0个赞</div>
-        <a href="#" class="d-inline-block mr-1" v-if="comment.id" @click.prevent="reply(comment)">
+        <a
+          href="#"
+          class="d-inline-block mr-1"
+          v-scroll-to="'.reply-editor'"
+          v-if="comment.id"
+          @click.prevent="reply(comment)"
+        >
           <i class="fa fa-reply" aria-hidden="true"></i> 回复
         </a>
       </div>
     </div>
-    <div class="card mt-2 border-0 bg-white shadow-sm">
+    <div class="card mt-2 border-0 bg-white shadow-sm reply-editor">
       <div class="p-3 bg-white border small text-secondary border-bottom-0" v-if="replyComment">
         回复: {{ replyComment.user.nickname }}
-        <a href="#" @click.prevent="replyComment=null">
+        <a href="#" @click.prevent="replyComment = null">
           <i class="fa fa-window-close" aria-hidden="true"></i>
         </a>
       </div>
