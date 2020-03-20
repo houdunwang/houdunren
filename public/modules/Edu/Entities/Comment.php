@@ -32,4 +32,9 @@ class Comment extends Model
   {
     return $this->belongsTo(User::class, 'reply_user_id');
   }
+
+  public function favour()
+  {
+    return $this->morphToMany(User::class, 'favour', 'edu_favour');
+  }
 }

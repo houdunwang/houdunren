@@ -2,12 +2,11 @@
 
 namespace Modules\Edu\Http\Controllers\Front;
 
-use Egulias\EmailValidator\Warning\Comment;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\ApiController;
+use Illuminate\Support\Facades\Auth;
+use Modules\Edu\Entities\Comment;
 
-class CommentController extends Controller
+class CommentController extends ApiController
 {
   public function index()
   {
@@ -16,9 +15,9 @@ class CommentController extends Controller
 
   public function favour(Comment $comment)
   {
-    $comment->favour()->toggle($comment['id']);
+    $comment->favour()->toggle(Auth::id());
     $comment['favour_count'] = $comment->favour->count();
     $comment->save();
-    return $this->success('点赞成功');
+    return $this->json($comment);
   }
 }

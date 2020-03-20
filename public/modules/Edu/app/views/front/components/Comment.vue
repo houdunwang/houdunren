@@ -2,7 +2,10 @@
   <div>
     <div class="card shadow-sm mb-2" v-for="(comment, index) in comments" :key="index">
       <div class="card-header bg-white d-flex justify-content-start">
-        <img :src="comment.user.avatar || `/images/avatar.jpg`" class="avatar rounded img-thumbnail mr-3" />
+        <img
+          :src="comment.user.avatar || `/images/avatar.jpg`"
+          class="avatar rounded img-thumbnail mr-3"
+        />
         <div class="flex-fill">
           <div class="text-secondary">{{ comment.user.nickname }}</div>
           <span class="small text-black-50">
@@ -16,8 +19,14 @@
         <p v-html="comment.content" class="d-inline-block"></p>
       </div>
       <div class="card-footer text-muted bg-white small">
-        # {{ index }}
-        <div class="d-inline-block ml-2 mr-2" v-if="comment.id">0个赞</div>
+        # {{ index+1 }}
+        <a
+          href="#"
+          class="ml-2 mr-2"
+          v-if="comment.id"
+          @click.prevent="favour(comment)"
+        >{{ comment.favour_count }}个赞</a>
+
         <a
           href="#"
           class="d-inline-block mr-1"
@@ -88,6 +97,10 @@ export default {
     reply(comment) {
       this.replyComment = comment
       this.form.reply_user_id = comment.user.id
+    },
+    async favour(comment) {
+      const response = await this.axios.get(`edu/front/comment/favour/${comment.id}`).then(r => r.data)
+      comment.favour_count = response.favour_count
     }
   }
 }

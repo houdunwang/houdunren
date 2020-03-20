@@ -21,12 +21,15 @@
 
               <!-- 视频列表 -->
               <ul class="list-group list-group-flush mt-5">
-                <li class="list-group-item pl-0 mb-1 pb-3" v-for="video in field.videos" :key="video.id">
+                <li
+                  class="list-group-item pl-0 mb-1 pb-3"
+                  v-for="video in field.videos"
+                  :key="video.id"
+                >
                   <router-link
                     :to="{ name: 'video.show', params: { sid: field.id, id: video.id } }"
                     class="text-muted"
-                    >{{ video.title }}</router-link
-                  >
+                  >{{ video.title }}</router-link>
                 </li>
               </ul>
             </div>

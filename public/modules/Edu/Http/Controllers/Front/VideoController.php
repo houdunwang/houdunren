@@ -38,12 +38,8 @@ class VideoController extends ApiController
    */
   public function favour(Video $video)
   {
-    $action = $video->isFavour(Auth::user()) ?  'detach' : 'attach';
-    $video->favour()->$action(Auth::id(), [
-      'site_id' => site()['id'],
-      'user_id' => Auth::id()
-    ]);
-    $video['favour_count'] =  $video->favour->count();
+    $video->favour()->toggle(Auth::id());
+    $video['favour_count'] =  $video->favour()->count();
     $video->save();
     return $this->json(new VideoResource($video));
   }
@@ -55,11 +51,7 @@ class VideoController extends ApiController
    */
   public function favorite(Video $video)
   {
-    $action = $video->isFavorite(Auth::user()) ? 'detach' : 'attach';
-    $video->favorite()->$action(Auth::id(), [
-      'site_id' => site()['id'],
-      'user_id' => Auth::id()
-    ]);
+    $video->favorite()->toggle(Auth::id());
     $video->favorite_count = $video->favorite()->count();
     $video->save();
     return $this->json(new VideoResource($video));
@@ -73,7 +65,6 @@ class VideoController extends ApiController
    */
   public function comment(CommentRequest $request, Video $video)
   {
-    // dd($request->all());
     $video->comment()->create([
       'site_id' => site()['id'],
       'user_id' => Auth::id(),

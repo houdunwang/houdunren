@@ -20,6 +20,7 @@ class VideoResource extends Resource
   public function toArray($request)
   {
     $resource =  parent::toArray($request);
+    // $request['favour_count']=
     $resource['is_favour'] = $this->when(Auth::user(), $this->isFavour(Auth::user()));
     $resource['is_favorite'] = $this->when(Auth::user(), $this->isFavorite(Auth::user()));
     return $resource;

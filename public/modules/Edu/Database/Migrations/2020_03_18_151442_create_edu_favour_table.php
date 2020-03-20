@@ -19,7 +19,6 @@ class CreateEduFavourTable extends Migration
   {
     Schema::create('edu_favour', function (Blueprint $table) {
       $table->bigIncrements('id');
-      table_foreign_site($table);
       table_foreign_user($table);
       $table->unsignedBigInteger('favour_id');
       $table->string('favour_type');
