@@ -2,8 +2,12 @@
 
 namespace Modules\Edu\Entities;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Modules\Edu\Entities\Comment;
 
 /**
  * 课程视频
@@ -14,6 +18,10 @@ class Video extends Model
   protected $table = "edu_videos";
   protected $fillable = ['site_id', 'title', 'path', 'external_address', 'favour_count'];
 
+  /**
+   * 课程关联
+   * @return BelongsTo
+   */
   public function lesson()
   {
     return $this->belongsTo(Lesson::class, 'lesson_id');
@@ -29,6 +37,16 @@ class Video extends Model
   }
 
   /**
+   * 收藏检测
+   * @param User $user
+   * @return bool
+   */
+  public function isFavour(User $user)
+  {
+    return (bool) $this->favour()->where('user_id', $user['id'])->first();
+  }
+
+  /**
    * 收藏
    * @return void
    */
@@ -37,9 +55,23 @@ class Video extends Model
     return $this->morphToMany(User::class, 'favorite', 'edu_favorite');
   }
 
+  /**
+   * 收藏检测
+   * @param User $User
+   * @return void
+   */
+  public function isFavorite(User $user)
+  {
+    return (bool) $this->favorite()->where('user_id', $user['id'])->first();
+  }
+
+  /**
+   * 视频评论
+   * 用于获取视频评论列表
+   * @return MorphMany
+   */
   public function comment()
   {
-    return $this->morphToMany(User::class, 'comment', 'edu_comment')
-      ->withPivot(['user_id', 'reply_user_id', 'content'])->withTimestamps();
+    return $this->morphMany(Comment::class, 'comment');
   }
 }

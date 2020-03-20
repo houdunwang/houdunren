@@ -29,6 +29,9 @@
           <el-form-item label="QQ">
             <el-input v-model="form.qq"></el-input>
           </el-form-item>
+          <el-form-item label="WakaTime">
+            <el-input v-model="form.wakatime"></el-input>
+          </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">保存提交</el-button>
           </el-form-item>

@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\Front\HomeController;
 use Illuminate\Support\Facades\Route;
-
-
+use Modules\Edu\Entities\Video;
 
 Route::group(['namespace' => 'Common', 'prefix' => 'common'], function () {
   Route::get('captcha', 'CaptchaController@make')->name('common.captcha');

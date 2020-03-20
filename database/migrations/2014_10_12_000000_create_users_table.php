@@ -21,14 +21,13 @@ class CreateUsersTable extends Migration
       $table->string('phone')->nullable()->unique();
       $table->string('real_name', 20)->nullable()->comment('真实姓名');
       $table->string('password')->nullable()->comment('密码');
-      $table->string('weixin_openid')->nullable()->comment('微信OPENID');
-      $table->string('weixin_unionid')->nullable()->comment('微信UNIONID');
       $table->string('home')->nullable()->comment('个人主页');
       $table->string('avatar')->nullable()->comment('头像');
       $table->string('weibo')->nullable()->comment('微博地址');
       $table->string('wechat')->nullable()->comment('微信号');
       $table->string('github')->nullable()->comment('GITHUB');
       $table->string('qq')->nullable()->comment('QQ');
+      $table->string('wakatime')->nullable()->comment('wakatime');
       $table->unsignedTinyInteger('lock')->nullable()->comment('用户锁定');
       $table->unsignedInteger('credit1')->nullable();
       $table->unsignedInteger('credit2')->nullable();

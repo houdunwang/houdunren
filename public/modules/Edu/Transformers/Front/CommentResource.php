@@ -16,8 +16,6 @@ class CommentResource extends Resource
   public function toArray($request)
   {
     $comment =  parent::toArray($request);
-    $comment['user'] = User::find($comment['pivot']['user_id']);
-    $comment['reply_user'] = User::find($comment['pivot']['reply_user_id']);
     return $comment;
   }
 }

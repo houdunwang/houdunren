@@ -62,9 +62,10 @@ function access(string $permission, ?Site $site, ?User $user): bool
  * @param \Illuminate\Database\Schema\Blueprint $table 迁移对象
  * @param string $tableName 关联表
  * @param string $foreignKey 关联字段
+ * @param string $comment 说明
  * @return void
  */
-function table_foreign(\Illuminate\Database\Schema\Blueprint $table, string $tableName, string $foreignKey): void
+function table_foreign(\Illuminate\Database\Schema\Blueprint $table, string $tableName, string $foreignKey, string $comment = ''): void
 {
   $table->unsignedBigInteger($foreignKey)->nullable();
   $table->foreign($foreignKey)->references('id')->on($tableName)->onDelete('cascade');
@@ -77,7 +78,7 @@ function table_foreign(\Illuminate\Database\Schema\Blueprint $table, string $tab
  */
 function table_foreign_site(\Illuminate\Database\Schema\Blueprint $table)
 {
-  $table->unsignedBigInteger('site_id');
+  $table->unsignedBigInteger('site_id')->comment('站点编号');
   $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
 }
 
@@ -88,6 +89,6 @@ function table_foreign_site(\Illuminate\Database\Schema\Blueprint $table)
  */
 function table_foreign_user(\Illuminate\Database\Schema\Blueprint $table)
 {
-  $table->unsignedBigInteger('user_id');
+  $table->unsignedBigInteger('user_id')->comment('用户编号');
   $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 }

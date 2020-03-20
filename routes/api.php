@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth:api'], 'namespace' => 'Common', 'prefix' => 'common'], function () {
   Route::post('code', 'CodeController@send');
+  Route::post('upload/{site?}', 'UploadController@store');
 });
 
 //系统
