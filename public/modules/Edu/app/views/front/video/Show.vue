@@ -124,8 +124,11 @@ export default {
       comments: []
     }
   },
-  created() {
-    this.load(this.$route.params.id)
+  async created() {
+    await this.load(this.$route.params.id)
+  },
+  updated() {
+    this.$scrollTo('body')
   },
   computed: {
     next() {
@@ -141,8 +144,8 @@ export default {
     async load(id) {
       let response = await Promise.all([
         await this.axios.get(`edu/front/lesson/${this.$route.params.sid}`).then(r => r.data),
-        await this.axios.get(`edu/front/video/${this.$route.params.id}`).then(r => r.data),
-        await this.axios.get(`edu/front/video/comment/${this.$route.params.id}`).then(r => r.data)
+        await this.axios.get(`edu/front/video/${id}`).then(r => r.data),
+        await this.axios.get(`edu/front/video/comment/${id}`).then(r => r.data)
       ])
       this.$set(this, 'lesson', response[0])
       this.$set(this, 'field', response[1])
