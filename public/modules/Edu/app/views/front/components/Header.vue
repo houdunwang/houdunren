@@ -26,7 +26,7 @@
               <router-link :to="{ name: 'lesson' }" class="nav-link">实战课程</router-link>
             </li>
             <li class="nav-item pr-2">
-              <a class="nav-link" href="#">最近更新</a>
+              <router-link :to="{name:'video.index'}" class="nav-link">最近更新</router-link>
             </li>
             <li class="nav-item pr-2">
               <a class="nav-link" href="#">话题讨论</a>
@@ -55,7 +55,8 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <img :src="user.avatar" class="icon rounded mr-1" /> {{ user.nickname }}
+                <img :src="user.avatar" class="icon rounded mr-1" />
+                {{ user.nickname }}
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownId">
                 <a class="dropdown-item mb-2 mt-2" href="/member/info/base">修改资料</a>

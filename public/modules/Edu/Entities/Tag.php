@@ -2,10 +2,12 @@
 
 namespace Modules\Edu\Entities;
 
+use App\Traits\Module;
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
+  use Module;
   protected $table = "edu_tag";
   protected $fillable = ['title', 'site_id'];
 

@@ -14,6 +14,18 @@ use App\User;
 class ModuleService
 {
   /**
+   * 缓存当前访问模块
+   * @param mixed $module
+   * @return null|mixed
+   */
+  public function module($module)
+  {
+    static $cache = null;
+    if (is_null($cache) && $module) $cache = $module;
+    return $cache;
+  }
+
+  /**
    * 根据请求地址获取模块
    * @return mixex
    */

@@ -3,10 +3,9 @@
 namespace App\Http\Middleware;
 
 use App\Services\ModuleService;
-use App\Services\SiteService;
 use App\Services\UserService;
 use Closure;
-use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -17,41 +16,27 @@ class ModuleMiddleware
 {
   public function handle($request, Closure $next, string $access = null)
   {
-    $sid = $this->getCacheSiteId();
-    if (!$sid) {
-      abort('404', '站点不存在');
-    }
-    $this->cacheModule();
-    if ($this->checkRole(site($sid), $access)) {
-      config(['site' => site()['config']]);
+    $this->loadSiteAndModule();
+    if ($this->checkRole($access)) {
       return $next($request);
     }
-
     abort(403, '你没有管理站点的权限');
   }
 
   /**
-   * 缓存模块
+   * 获取当前用户缓存的站点编号获取站点
+   * 并加载模块
    * @return void
-   * @throws BindingResolutionException
    */
-  protected function cacheModule()
+  protected function loadSiteAndModule()
   {
+    $name = Auth::id() . '-sid';
+    $sid =  request()->query('sid', Cache::get($name));
+    if (site($sid)) Cache::put($name, $sid);
+
+    //本次请求模块
     $module = app(ModuleService::class)->getModuleByUrl();
     module($module);
-  }
-  /**
-   * 获取当前用户缓存的站点编号
-   * @return void
-   */
-  protected function getCacheSiteId()
-  {
-    $name = auth()->id() . '-sid';
-    $sid =  request()->query('sid', Cache::get($name));
-    if ($sid) {
-      Cache::put($name, $sid);
-    }
-    return $sid;
   }
 
   /**
@@ -60,18 +45,12 @@ class ModuleMiddleware
    *
    * @return bool
    */
-  protected function checkRole($site, $access)
+  protected function checkRole($access)
   {
-    if (
-      isSuperAdmin() ||
-      app(UserService::class)->isRole($site, auth()->user(), ['admin'])
-    ) {
+    $isAdmin = app(UserService::class)->isRole(site(), auth()->user(), ['admin']);
+    if (isSuperAdmin() || $isAdmin)
       return true;
-    }
 
-    if ($access && access($access, $site, auth()->user())) {
-      return true;
-    }
-    return false;
+    return $access && access($access, site(), auth()->user());
   }
 }

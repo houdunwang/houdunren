@@ -2,6 +2,7 @@
 
 namespace Modules\Edu\Entities;
 
+use App\Traits\Module;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\User;
@@ -12,6 +13,7 @@ use App\User;
  */
 class Comment extends Model
 {
+  use Module;
   protected $table = "edu_comment";
   protected $fillable = ['site_id', 'user_id', 'content', 'reply_user_id', 'favour_count'];
 

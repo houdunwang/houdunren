@@ -11,10 +11,6 @@ use Modules\Edu\Transformers\Admin\LessonResource;
 
 class LessonController extends ApiController
 {
-  public function __construct()
-  {
-  }
-
   public function index()
   {
     $lessons = Lesson::latest('id')->where('site_id', site()['id'])->paginate(10);

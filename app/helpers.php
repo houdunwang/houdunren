@@ -37,15 +37,13 @@ function site($site = null): Site
   return app(SiteService::class)->site($site);
 }
 /**
- * 根据访问网址获取模块
+ * 缓存模块
  * 主要用于后台模块管理
  * @return \App\Models\Module
  */
 function module(Module $module = null)
 {
-  static $cache = null;
-  if (is_null($cache) && $module) $cache = $module;
-  return $cache;
+  return app(ModuleService::class)->module($module);
 }
 /**
  * 检测模块访问权限

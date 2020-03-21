@@ -27,7 +27,7 @@ class ConfigController extends ApiController
   {
     $config = $site['config'] ?? [];
     foreach (config('hd.site') as $k => $v) {
-      $config[$k] = array_merge($v, $config[$k]);
+      $config[$k] = array_merge($v, $config[$k] ?? []);
     }
     return $this->json($config);
   }

@@ -8,6 +8,10 @@ use Illuminate\Http\Response;
 use Modules\Edu\Entities\Lesson;
 use Modules\Edu\Transformers\Front\LessonResource;
 
+/**
+ * 前台课程
+ * @package Modules\Edu\Http\Controllers\Front
+ */
 class LessonController extends ApiController
 {
   public function index()

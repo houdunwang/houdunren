@@ -2,6 +2,7 @@
 
 namespace Modules\Edu\Entities;
 
+use App\Traits\Module;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class System extends Model
 {
+  use Module;
   protected $table = 'edu_system';
   protected $fillable = ['title', 'description', 'preview', 'site_id', 'user_id'];
 

@@ -2,6 +2,8 @@
 
 namespace Modules\Edu\Entities;
 
+use App\Scopes\SiteScope;
+use App\Traits\Module;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +17,7 @@ use Modules\Edu\Entities\Comment;
  */
 class Video extends Model
 {
+  use Module;
   protected $table = "edu_videos";
   protected $fillable = ['site_id', 'title', 'path', 'external_address', 'favour_count'];
 

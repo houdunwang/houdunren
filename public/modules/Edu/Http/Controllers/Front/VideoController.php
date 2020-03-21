@@ -3,9 +3,11 @@
 namespace Modules\Edu\Http\Controllers\Front;
 
 use App\Http\Controllers\ApiController;
+use App\Scopes\SiteScope;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Modules\Edu\Entities\Video;
 use Modules\Edu\Http\Requests\CommentRequest;
 use Modules\Edu\Transformers\Front\CommentResource;
@@ -19,6 +21,8 @@ class VideoController extends ApiController
 {
   public function index()
   {
+    $videos = Video::latest('id')->paginate(15);
+    return VideoResource::collection($videos);
   }
 
   /**
@@ -66,7 +70,7 @@ class VideoController extends ApiController
   public function comment(CommentRequest $request, Video $video)
   {
     $video->comment()->create([
-      'site_id' => site()['id'],
+      'site_id' => SITEID,
       'user_id' => Auth::id(),
       'reply_user_id' => $request->reply_user_id ?: null,
       'content' => $request->content,
