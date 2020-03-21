@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class System extends Model
 {
-  // use Module;
+  use Module;
 
   protected $table = 'edu_system';
   protected $fillable = ['title', 'description', 'preview', 'site_id', 'user_id'];
