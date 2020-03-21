@@ -2,7 +2,7 @@
   <div>
     <headers />
     <router-view></router-view>
-    <el-backtop> </el-backtop>
+    <el-backtop></el-backtop>
     <error />
   </div>
 </template>

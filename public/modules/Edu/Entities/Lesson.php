@@ -2,6 +2,7 @@
 
 namespace Modules\Edu\Entities;
 
+use App\Scopes\SiteScope;
 use App\Traits\Module;
 use Illuminate\Database\Eloquent\Model;
 

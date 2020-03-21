@@ -2,7 +2,7 @@
   <div class="header shadow border-bottom bg-light">
     <div class="container">
       <nav class="navbar navbar-expand-sm navbar-light bg-light pt-3 pb-3 pl-md-0 pr-md-0">
-        <router-link class="navbar-brand text-muted font-weight-bold" to="/">
+        <router-link class="navbar-brand text-muted font-weight-bold" :to="{name:'home'}">
           <i class="fa fa-code text-info font-weight-bolder" aria-hidden="true"></i>
           houdunren.com
         </router-link>
@@ -20,13 +20,13 @@
         <div class="collapse navbar-collapse" id="collapsibleNavId">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0 font-weight-bold">
             <li class="nav-item pr-2">
-              <a class="nav-link" href="#">系统学习</a>
+              <router-link class="nav-link" :to="{name:'system'}">系统学习</router-link>
             </li>
             <li class="nav-item pr-2">
               <router-link :to="{ name: 'lesson' }" class="nav-link">实战课程</router-link>
             </li>
             <li class="nav-item pr-2">
-              <router-link :to="{name:'video.index'}" class="nav-link">最近更新</router-link>
+              <router-link :to="{name:'video'}" class="nav-link">最近更新</router-link>
             </li>
             <li class="nav-item pr-2">
               <a class="nav-link" href="#">话题讨论</a>

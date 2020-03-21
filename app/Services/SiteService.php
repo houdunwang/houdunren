@@ -3,10 +3,7 @@
 namespace App\Services;
 
 use App\Models\Site;
-use App\User;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Route;
 
 /**
  * 站点服务
@@ -18,10 +15,9 @@ class SiteService
   /**
    * 缓存当前访问站点
    * @param mixed|null $site
-   * @return Site
-   * @throws HttpResponseException
+   * @return null|Site|void
    */
-  public function site($site = null): Site
+  public function site($site = null)
   {
     static $cache = null;
     if ($cache) return $cache;
@@ -30,10 +26,8 @@ class SiteService
     if ($model instanceof Site) {
       $this->config($cache = $model);
       define('SITEID', $model['id']);
-      return $model;
     };
-
-    abort(404, '站点不存在');
+    return $cache;
   }
 
   /**

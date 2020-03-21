@@ -13,7 +13,7 @@ import { Message, MessageBox } from 'element-ui'
 // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 //基本地址与超时时间
-let config = { baseURL: '/api', timeout: 5 * 1000 }
+let config = { baseURL: '/api', timeout: 3 * 1000 }
 const _axios = axios.create(config)
 
 //访问方式

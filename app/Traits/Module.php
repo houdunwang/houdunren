@@ -9,8 +9,9 @@ use App\Scopes\SiteScope;
  */
 trait Module
 {
-  protected static function booted()
+  protected static function boot()
   {
+    parent::boot();
     static::addGlobalScope(new SiteScope);
   }
 }

@@ -23,7 +23,7 @@ class UserController extends ApiController
 
   public function get()
   {
-    return $this->json(new UserResource(auth()->user()));
+    return new UserResource(auth()->user());
   }
 
   public function update(UserRequest $request)

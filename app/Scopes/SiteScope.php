@@ -2,6 +2,7 @@
 
 namespace App\Scopes;
 
+use App\Services\SiteService;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,7 @@ class SiteScope implements Scope
 {
   public function apply(Builder $builder, Model $model)
   {
-    $builder->where('site_id', site()['id']);
+    if (site())
+      $builder->where('site_id', site()['id']);
   }
 }

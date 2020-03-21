@@ -7,6 +7,7 @@ use App\Services\ModuleService;
 use App\Services\SiteService;
 use App\Services\UserService;
 use App\User;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -29,10 +30,11 @@ function route_class()
 
 /**
  * 缓存或获取站点模型
- * @param \App\Models\Site|null $site
- * @return \App\Models\Site|null
+ * @param mixed|null $site
+ * @return mixed
+ * @throws BindingResolutionException
  */
-function site($site = null): Site
+function site($site = null)
 {
   return app(SiteService::class)->site($site);
 }

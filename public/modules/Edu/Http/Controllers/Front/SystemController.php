@@ -2,23 +2,20 @@
 
 namespace Modules\Edu\Http\Controllers\Front;
 
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use Modules\Edu\Entities\System;
 
 /**
  * 系统课程
  * @package Modules\Edu\Http\Controllers\Front
  */
-class SystemController extends Controller
+class SystemController extends ApiController
 {
-  /**
-   * Display a listing of the resource.
-   * @return Response
-   */
   public function index()
   {
-    return view('edu::index');
+    System::dd();
   }
 
   /**
