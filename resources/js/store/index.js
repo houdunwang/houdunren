@@ -11,6 +11,7 @@ export default new Vuex.Store({
   modules: {
     error,
     user,
-    systemConfig
+    systemConfig,
+    user
   }
 })

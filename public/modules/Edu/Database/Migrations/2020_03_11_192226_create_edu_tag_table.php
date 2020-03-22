@@ -15,8 +15,8 @@ class CreateEduTagTable extends Migration
   {
     Schema::create('edu_tag', function (Blueprint $table) {
       $table->bigIncrements('id');
+      table_foreign_site($table);
       $table->char('title', 20)->unique()->comment('标签名');
-      table_foreign($table, 'sites', 'site_id');
       $table->timestamps();
     });
   }

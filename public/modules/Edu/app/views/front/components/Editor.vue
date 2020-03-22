@@ -1,5 +1,5 @@
 <template>
-  <div id="editor"></div>
+  <div id="hdEditor"></div>
 </template>
 
 <script>
@@ -8,22 +8,17 @@ import '@toast-ui/editor/dist/toastui-editor.css' // Editor's Style
 import Editor from '@toast-ui/editor'
 export default {
   props: {
-    action: { type: String },
+    //后台上传地址
+    action: { type: String, default: `common/upload` },
+    //默认内容
+    initialValue: { type: String, default: '' },
     //通知父组件事件
     contentChange: { type: Function },
-    height: {
-      type: String,
-      default: '300px'
-    },
-    previewStyle: {
-      type: String,
-      default: 'vertical'
-    },
-    initialEditType: {
-      type: String,
-      default: 'markdown'
-    },
-    initialValue: { type: String, default: '' }
+    //编辑器高度
+    height: { type: String, default: '300px' },
+    //显示方式
+    previewStyle: { type: String, default: 'vertical' },
+    initialEditType: { type: String, default: 'markdown' }
   },
   data() {
     return {
@@ -38,7 +33,7 @@ export default {
     initEditor() {
       const Vue = this
       const editor = new Editor({
-        el: document.querySelector('#editor'),
+        el: document.querySelector('#hdEditor'),
         previewStyle: this.previewStyle,
         initialEditType: this.initialEditType,
         height: this.height,
@@ -58,7 +53,7 @@ export default {
             //添加post数据
             formData.append('file', blob, blob.name)
             //上传图片
-            let response = await window.axios.post(`common/upload`, formData)
+            let response = await window.axios.post(Vue.action, formData)
             //更改编辑器内容
             callback(response.data.path, blob.name)
             return false
@@ -136,7 +131,8 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss" >
+// 事件按钮需要使用类所以不能加scoped
 .fullScreen {
   position: fixed;
   z-index: 999;

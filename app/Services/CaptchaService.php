@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
+use Illuminate\Support\Facades\Request;
 
 /**
  * 验证码服务
@@ -23,14 +23,13 @@ class CaptchaService
     $phraseBuilder = new PhraseBuilder(4);
     $captcha = (new CaptchaBuilder(null, $phraseBuilder))->build();
 
-    $uuid = $this->uuid();
-    Cache::put($uuid, $captcha->getPhrase(), now()->addMinutes(2));
-    return ['uuid' => $uuid, 'base64' => $captcha->inline()];
+    Cache::put($this->name(), $captcha->getPhrase(), now()->addMinutes(10));
+    return $captcha->inline();
   }
 
-  protected function uuid()
+  protected function name()
   {
-    return (string) Str::uuid();
+    return request()->getClientIp() . 'captcha';
   }
 
   /**
@@ -40,8 +39,9 @@ class CaptchaService
    *
    * @return void
    */
-  public function validate(string $uuid, string $captcha)
+  public function validate(string $value)
   {
-    return strtoupper(Cache::get($uuid)) === strtoupper($captcha);
+    $captcha =  Cache::get($this->name(), '');
+    return strtoupper($captcha) === strtoupper($value);
   }
 }

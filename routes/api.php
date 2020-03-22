@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => ['auth:api'], 'namespace' => 'Common', 'prefix' => 'common'], function () {
-  Route::post('code', 'CodeController@send');
-  Route::post('upload/{site?}', 'UploadController@store');
+Route::group(['namespace' => 'Common', 'prefix' => 'common'], function () {
+  Route::post('code', 'CodeController@send')->middleware('auth:api');
+  Route::post('upload/{site?}', 'UploadController@store')->middleware('auth:api');
+  Route::get('captcha', 'CaptchaController@text');
 });
 
 //系统
@@ -57,8 +58,14 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'si
   Route::put('{site}/cache', 'CacheController@update');
 });
 
+//登录注册
+Route::group(['namespace' => 'Member'], function () {
+  Route::post('login', 'AccountController@login');
+  Route::get('logout', 'AccountController@logout');
+  Route::post('register', 'AccountController@register');
+});
+
 //会员中心
-Route::post('login', 'Member\LoginController@apiLogin');
 Route::group(['middleware' => ['auth:api', 'member'], 'namespace' => 'Member', 'prefix' => 'member'], function () {
   Route::get('get', 'UserController@get');
   Route::put('user', 'UserController@update');

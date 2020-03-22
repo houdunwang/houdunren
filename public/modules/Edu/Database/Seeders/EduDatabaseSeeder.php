@@ -20,5 +20,6 @@ class EduDatabaseSeeder extends Seeder
     $this->call(SubscribeSeederTableSeeder::class);
     $this->call(TagSeederTableSeeder::class);
     $this->call(VideoSeederTableSeeder::class);
+    $this->call(TopicSeederTableSeeder::class);
   }
 }

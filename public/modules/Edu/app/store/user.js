@@ -19,6 +19,5 @@ export default {
         commit('set', response.data)
       } catch (error) {}
     }
-  },
-  getters: {}
+  }
 }

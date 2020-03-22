@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
+use App\Services\CaptchaService;
+use Intervention\Image\ImageManager;
 
 /**
  * 验证码
@@ -11,10 +13,19 @@ use App\Http\Controllers\Controller;
 class CaptchaController extends Controller
 {
   /**
-   * 验证码
+   * BASE64验证码
    * @return void
    */
-  public function make()
+  public function text(CaptchaService $captchaService)
+  {
+    return $captchaService->make();
+  }
+
+  /**
+   * 图片验证码
+   * @return array|ImageManager|mixed
+   */
+  public function image()
   {
     return captcha();
   }

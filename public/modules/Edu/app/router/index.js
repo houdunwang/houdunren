@@ -9,5 +9,5 @@ const routes = [admin, front]
 
 export default new VueRouter({
   routes,
-  mode: 'history'
+  mode: 'hash'
 })

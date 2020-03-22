@@ -12,6 +12,8 @@ import { Message, MessageBox } from 'element-ui'
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
+// axios.defaults.headers.common['Authorization'] = 'Bearer ' + window.localStorage.getItem('access_token')
+
 //基本地址与超时时间
 let config = { baseURL: '/api', timeout: 3 * 1000 }
 const _axios = axios.create(config)

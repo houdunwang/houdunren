@@ -65,7 +65,7 @@ _axios.interceptors.response.use(
       switch (status) {
         case 401:
           //未登录用户跳转到登录页面
-          location.href = '/login'
+          location.href = '/user/login'
           break
         case 422:
           //表单验证错误，错误消息记录到VUEX中

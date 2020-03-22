@@ -29,7 +29,7 @@
               <router-link :to="{name:'video'}" class="nav-link">最近更新</router-link>
             </li>
             <li class="nav-item pr-2">
-              <a class="nav-link" href="#">话题讨论</a>
+              <router-link :to="{name:'topic'}" class="nav-link">话题讨论</router-link>
             </li>
             <li class="nav-item pr-2">
               <a class="nav-link" href="#">签到打卡</a>

@@ -2,24 +2,23 @@
 
 use App\Http\Controllers\Front\HomeController;
 use Illuminate\Support\Facades\Route;
-use Modules\Edu\Entities\Video;
 
 Route::group(['namespace' => 'Common', 'prefix' => 'common'], function () {
-  Route::get('captcha', 'CaptchaController@make')->name('common.captcha');
+  Route::get('captcha', 'CaptchaController@image')->name('common.captcha');
   Route::post('upload/avatar', 'UploadController@avatar')->middleware('auth');
   Route::post('upload/{site?}', 'UploadController@store')->middleware('auth');
 });
 
 Route::group(['namespace' => 'Member'], function () {
-  Route::get('login', 'LoginController@show')->name('login');
-  Route::post('login', 'LoginController@login')->name('login');
-  Route::get('logout', 'LoginController@logout')->name('logout');
-  Route::get('register', 'LoginController@register')->name('register');
-  Route::post('register', 'LoginController@store')->name('register');
-  Route::resource('mobile', 'MobileController');
+  Route::get('login', 'AccountController@show')->name('login');
+  Route::post('login', 'AccountController@login')->name('login');
+  Route::get('logout', 'AccountController@logout')->name('logout');
+  Route::get('register', 'AccountController@register')->name('register');
+  Route::post('register', 'AccountController@store')->name('register');
 });
 
-Route::view('member{any}', 'member/index')->where('any', '.*')->middleware(['auth', 'member']);
+Route::view('user{any}', 'account')->where('any', '.*');
+Route::view('member{any}', 'member/index')->where('any', '.*')->middleware(['member']);
 Route::view('site{any}', 'main')->where('any', '.*')->middleware('auth');
 Route::view('system{any}', 'main')->where('any', '.*')->middleware('auth');
 Route::view('admin', 'main')->where('any', '.*')->middleware('auth');

@@ -35,7 +35,7 @@ class UserService
     } else if (preg_match('/^[a-z]+$/i', $username)) {
       $credentials['name'] = $username;
     } else {
-      $credentials['mobile'] = $username;
+      $credentials['phone'] = $username;
     }
     return $credentials;
   }

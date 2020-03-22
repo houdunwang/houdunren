@@ -36,7 +36,7 @@ class Video extends Model
    */
   public function favour()
   {
-    return $this->morphToMany(User::class, 'favour', 'edu_favour');
+    return $this->morphToMany(User::class, 'favour', 'edu_favour')->withTimestamps();
   }
 
   /**
@@ -55,7 +55,7 @@ class Video extends Model
    */
   public function favorite()
   {
-    return $this->morphToMany(User::class, 'favorite', 'edu_favorite');
+    return $this->morphToMany(User::class, 'favorite', 'edu_favorite')->withTimestamps();
   }
 
   /**
