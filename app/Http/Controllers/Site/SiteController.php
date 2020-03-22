@@ -28,7 +28,7 @@ class SiteController extends ApiController
    * 获取站点列表
    * @return JsonResponse
    */
-  public function index(UserService $UserService)
+  public function index()
   {
     $user = auth()->user();
     $sites = isSuperAdmin() ? Site::get() : $user->site()->wherePivotIn('role', ['admin', 'operator'])->get();

@@ -11,6 +11,7 @@ import TopicShow from '@/views/front/topic/Show'
 import TopicCreate from '@/views/front/topic/Create'
 import TopicUpdate from '@/views/front/topic/Update'
 import Sign from '@/views/front/sign/Index'
+import Subscribe from '@/views/front/subscribe/Index'
 export default {
   path: '/',
   component: Main,
@@ -27,6 +28,7 @@ export default {
     { name: 'topic.update', component: TopicUpdate, path: 'topic/update/:id', meta: { auth: true } },
     { name: 'topic.show', component: TopicShow, path: 'topic/show/:id', meta: { auth: true } },
     { name: 'sign', component: Sign, path: 'sign' },
+    { name: 'subscribe', component: Subscribe, path: 'subscribe' },
     { path: '*', redirect: '/' }
   ]
 }

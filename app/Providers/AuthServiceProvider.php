@@ -26,7 +26,9 @@ class AuthServiceProvider extends ServiceProvider
   {
     $this->registerPolicies();
     Gate::guessPolicyNamesUsing(function ($modelClass) {
-      return 'App\Policies\\' . class_basename($modelClass) . 'Policy';
+      //模块与主应用统一处理
+      $class = str_replace(['Entities', 'Models'], 'Policies', $modelClass) . 'Policy';
+      return $class;
     });
     Passport::routes();
     Passport::cookie('token_cookie');

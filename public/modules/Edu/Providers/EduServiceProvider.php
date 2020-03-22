@@ -29,9 +29,10 @@ class EduServiceProvider extends ServiceProvider
     Comment::observe(CommentObserver::class);
     Sign::observe(SignObserver::class);
 
-    Gate::guessPolicyNamesUsing(function ($modelClass) {
-      return 'Modules\Edu\Policies\\' . class_basename($modelClass) . 'Policy';
-    });
+    // Gate::guessPolicyNamesUsing(function ($modelClass) {
+    //   dd($modelClass);
+    //   return 'Modules\Edu\Policies\\' . class_basename($modelClass) . 'Policy';
+    // });
   }
 
   /**
