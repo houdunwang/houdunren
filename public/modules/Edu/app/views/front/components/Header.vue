@@ -32,7 +32,7 @@
               <router-link :to="{name:'topic'}" class="nav-link">话题讨论</router-link>
             </li>
             <li class="nav-item pr-2">
-              <a class="nav-link" href="#">签到打卡</a>
+              <router-link :to="{name:'sign'}" class="nav-link">签到打卡</router-link>
             </li>
             <li class="nav-item pr-2">
               <a class="nav-link" href="http://doc.houdunren.com">在线文档</a>
@@ -41,11 +41,11 @@
               <a class="nav-link" href="http://doc.houdunren.com">订阅会员</a>
             </li>
           </ul>
-          <div class="form-inline my-2 my-lg-0" v-if="!user">
+          <div class="form-inline my-2 my-lg-0" v-if="!isLogin">
             <a href="/login" type="button" class="btn btn-success mr-1 btn-sm">登录</a>
             <a href="/register" type="button" class="btn btn-outline-info btn-sm">注册</a>
           </div>
-          <div class="form-inline my-2 my-lg-0" v-if="user">
+          <div class="form-inline my-2 my-lg-0" v-if="isLogin">
             <div class="nav-item pr-2 dropdown">
               <a
                 class="nav-link dropdown-toggle d-flex align-items-center"
@@ -76,10 +76,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 export default {
   computed: {
-    ...mapState('user', { user: 'data' })
+    ...mapGetters('user', ['isLogin']),
+    ...mapState('user', ['user'])
   }
 }
 </script>

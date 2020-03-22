@@ -31,6 +31,7 @@ class User extends Authenticatable
     'email_verified_at' => 'datetime',
     'lock_to_time' => 'datetime'
   ];
+
   protected $appends = ['is_super_admin'];
 
   /**

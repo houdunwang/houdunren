@@ -17,6 +17,7 @@ class Comment extends Model
   // use Module;
   protected $table = "edu_comment";
   protected $fillable = ['site_id', 'user_id', 'content', 'reply_user_id', 'favour_count'];
+
   protected static function boot()
   {
     parent::boot();

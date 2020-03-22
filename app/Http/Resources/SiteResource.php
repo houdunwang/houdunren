@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Member\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SiteResource extends JsonResource
@@ -22,7 +23,7 @@ class SiteResource extends JsonResource
       'tel' => $this->tel,
       'email' => $this->email,
       'counter' => $this->counter,
-      'admin' => new UserResource($this->admin()->with('group')->first()),
+      'admin' => $this->admin()->with('group')->first(),
       'created_at' => $this->created_at
     ];
   }

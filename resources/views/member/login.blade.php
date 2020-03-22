@@ -12,7 +12,7 @@
 </head>
 
 <body class="login animated fadeInDownBig d-flex flex-column justify-content-center align-items-center">
-  <form action="{{route('login')}}" method="post">
+  <form action="{{route('login')}}?redirect={{ request()->query('redirect') }}" method="post">
     @csrf
     <div class="card bg-white animated fadeInDownBig" id="app">
       <div class="card-header">登录帐号</div>

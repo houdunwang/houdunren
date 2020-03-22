@@ -4,7 +4,7 @@ use App\Http\Controllers\Front\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Common', 'prefix' => 'common'], function () {
-  Route::get('captcha', 'CaptchaController@image')->name('common.captcha');
+  Route::get('captcha', 'CaptchaController@make')->name('common.captcha');
   Route::post('upload/avatar', 'UploadController@avatar')->middleware('auth');
   Route::post('upload/{site?}', 'UploadController@store')->middleware('auth');
 });
@@ -18,7 +18,7 @@ Route::group(['namespace' => 'Member'], function () {
 });
 
 Route::view('user{any}', 'account')->where('any', '.*');
-Route::view('member{any}', 'member/index')->where('any', '.*')->middleware(['member']);
+Route::view('member{any}', 'member/index')->where('any', '.*')->middleware(['front']);
 Route::view('site{any}', 'main')->where('any', '.*')->middleware('auth');
 Route::view('system{any}', 'main')->where('any', '.*')->middleware('auth');
 Route::view('admin', 'main')->where('any', '.*')->middleware('auth');

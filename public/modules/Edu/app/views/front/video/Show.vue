@@ -87,14 +87,15 @@
         <div class="col-md-3 pl-md-0 order-0 order-md-1">
           <div class="card text-secondary">
             <div class="card-header bg-white">课程列表</div>
-            <ul class="list-group list-group-flush">
-              <router-link
-                :to="{ name: 'video.show', params: { id: video.id } }"
+            <div class="list-group list-group-flush">
+              <a
+                href="#"
+                @click="load(video.id)"
                 class="list-group-item text-secondary"
                 v-for="video in lesson.videos"
                 :key="video.id"
-              >{{ video.title }}</router-link>
-            </ul>
+              >{{ video.title }}</a>
+            </div>
           </div>
         </div>
       </div>
@@ -127,9 +128,6 @@ export default {
   async created() {
     await this.load(this.$route.params.id)
   },
-  updated() {
-    this.$scrollTo('body')
-  },
   computed: {
     next() {
       let index = this.lesson.videos.findIndex(v => v.id === this.field.id)
@@ -150,6 +148,7 @@ export default {
       this.$set(this, 'lesson', response[0])
       this.$set(this, 'field', response[1])
       this.$set(this, 'comments', response[2])
+      this.$scrollTo('body')
     },
     async favour() {
       let response = await this.axios.get(`edu/front/video/favour/${this.field.id}`)

@@ -6,6 +6,7 @@ import loading from '../services/loading'
 import store from '@/store'
 import httpStatus from '@/services/httpStatus'
 import { Message, MessageBox } from 'element-ui'
+import router from '../router'
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
@@ -15,7 +16,7 @@ import { Message, MessageBox } from 'element-ui'
 // axios.defaults.headers.common['Authorization'] = 'Bearer ' + window.localStorage.getItem('access_token')
 
 //基本地址与超时时间
-let config = { baseURL: '/api', timeout: 3 * 1000 }
+let config = { baseURL: '/api', timeout: 5 * 1000 }
 const _axios = axios.create(config)
 
 //访问方式
@@ -61,7 +62,7 @@ _axios.interceptors.response.use(
       switch (status) {
         case 401:
           //未登录用户跳转到登录页面
-          // location.href = '/user/admin'
+          // location.href = '/login'
           break
         case 422:
           //表单验证错误，错误消息记录到VUEX中
@@ -71,7 +72,7 @@ _axios.interceptors.response.use(
           //其它错误消息直接显示错误信息
           let message = error.response.data.message
           message = message ? message : httpStatus(error.response.status)
-          MessageBox.alert(message, '错误提示', { type: 'error', center: true })
+          MessageBox.alert(message, '错误提示', { type: 'warning', center: true })
       }
       return Promise.reject(error)
     }

@@ -58,15 +58,13 @@ Route::group(['middleware' => 'auth:api', 'namespace' => 'Site', 'prefix' => 'si
   Route::put('{site}/cache', 'CacheController@update');
 });
 
-//登录注册
-Route::group(['namespace' => 'Member'], function () {
+//会员中心
+Route::group(['middleware' => ['front'], 'namespace' => 'Member', 'prefix' => 'member'], function () {
+  //登录注册
   Route::post('login', 'AccountController@login');
   Route::get('logout', 'AccountController@logout');
   Route::post('register', 'AccountController@register');
-});
-
-//会员中心
-Route::group(['middleware' => ['auth:api', 'member'], 'namespace' => 'Member', 'prefix' => 'member'], function () {
+  //修改资料
   Route::get('get', 'UserController@get');
   Route::put('user', 'UserController@update');
   Route::put('password', 'UserController@password');

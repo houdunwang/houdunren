@@ -69,7 +69,7 @@ export default {
       await this.load(page)
     },
     async load(page = 1) {
-      let response = await this.axios.post(`edu/front/search?page=${page}`, {
+      let response = await this.axios.post(`edu/front/topic/search?page=${page}`, {
         keyword: this.keyword
       })
       this.$set(this, 'field', response.data)

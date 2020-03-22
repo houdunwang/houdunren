@@ -1,11 +1,17 @@
 export default {
   namespaced: true,
   state: {
-    data: null
+    user: {}
+  },
+  getters: {
+    //登录检测
+    isLogin(state) {
+      return Boolean(state.user.id)
+    }
   },
   mutations: {
-    set(state, data) {
-      state.data = data
+    set(state, user) {
+      state.user = user
     }
   },
   actions: {
@@ -13,11 +19,10 @@ export default {
      * 获取用户资料
      * @param {*} param0
      */
-    async get({ commit }) {
-      try {
-        let response = await window.axios.get(`member/get`)
-        commit('set', response.data)
-      } catch (error) {}
+    get({ commit }) {
+      return window.axios.get(`member/get`).then(response => {
+        commit('set', response.data.data)
+      })
     }
   }
 }

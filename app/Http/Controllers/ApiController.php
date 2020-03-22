@@ -41,10 +41,12 @@ abstract class ApiController extends Controller
    */
   protected function error(string $message, array $data = [], int $code = 403)
   {
-    return response()->json([
-      'status' => false,
-      'message' => $message,
-      'data' => $data
-    ], $code);
+    return request()->expectsJson() ?
+      response()->json([
+        'status' => false,
+        'message' => $message,
+        'data' => $data
+      ], $code) :
+      back()->withInput()->with('error', $message);
   }
 }

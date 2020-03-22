@@ -20,5 +20,6 @@ Route::group(['middleware' => ['front'], 'namespace' => 'Front', 'prefix' => 'ed
   Route::get('video/comment/{video}', 'VideoController@commentList')->middleware('auth:api');
   Route::get('comment/favour/{comment}', 'CommentController@favour')->middleware('auth:api');
   Route::resource('topic', 'TopicController')->middleware("auth:api");
-  Route::any('search', 'TopicController@index')->middleware("auth:api");
+  Route::any('topic/search', 'TopicController@index');
+  Route::resource('sign', 'SignController')->middleware('auth:api');
 });

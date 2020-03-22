@@ -809,16 +809,16 @@
         },
         {
             "name": "fruitcake/laravel-cors",
-            "version": "v1.0.4",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruitcake/laravel-cors.git",
-                "reference": "138ad34ba5f578283e94c5614f6c48a10bc3ac6a"
+                "reference": "0e0500133dbb6325266133dd72f040617c9cdbd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruitcake/laravel-cors/zipball/138ad34ba5f578283e94c5614f6c48a10bc3ac6a",
-                "reference": "138ad34ba5f578283e94c5614f6c48a10bc3ac6a",
+                "url": "https://api.github.com/repos/fruitcake/laravel-cors/zipball/0e0500133dbb6325266133dd72f040617c9cdbd0",
+                "reference": "0e0500133dbb6325266133dd72f040617c9cdbd0",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -879,7 +879,13 @@
                 "crossdomain",
                 "laravel"
             ],
-            "time": "2020-02-21T13:24:15+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/barryvdh",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-03-11T21:05:07+00:00"
         },
         {
             "name": "gregwar/captcha",
@@ -1473,16 +1479,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v6.18.1",
+            "version": "v6.18.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "367c2c8dfdfe83cb2ddbc029c0222174098d093a"
+                "reference": "9425a2f410d05d5bba493f62cff03854a8b19559"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/367c2c8dfdfe83cb2ddbc029c0222174098d093a",
-                "reference": "367c2c8dfdfe83cb2ddbc029c0222174098d093a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/9425a2f410d05d5bba493f62cff03854a8b19559",
+                "reference": "9425a2f410d05d5bba493f62cff03854a8b19559",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1573,7 +1579,7 @@
                 "ext-memcached": "Required to use the memcache cache driver.",
                 "ext-pcntl": "Required to use all features of the queue worker.",
                 "ext-posix": "Required to use all features of the queue worker.",
-                "ext-redis": "Required to use the Redis cache and queue drivers.",
+                "ext-redis": "Required to use the Redis cache and queue drivers (^4.0|^5.0).",
                 "filp/whoops": "Required for friendly error pages in development (^2.4).",
                 "fzaninotto/faker": "Required to use the eloquent factory builder (^1.9.1).",
                 "guzzlehttp/guzzle": "Required to use the Mailgun mail driver and the ping methods on schedules (^6.0|^7.0).",
@@ -1621,7 +1627,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-03-10T14:11:04+00:00"
+            "time": "2020-03-17T17:08:02+00:00"
         },
         {
             "name": "laravel/passport",
@@ -1704,16 +1710,16 @@
         },
         {
             "name": "laravel/tinker",
-            "version": "v2.2.0",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/tinker.git",
-                "reference": "37579c93271ec30ef099dd633ec7c2de5e5fb112"
+                "reference": "5271893ec90ad9f8d3e34792ac6b72cad3b84cc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/tinker/zipball/37579c93271ec30ef099dd633ec7c2de5e5fb112",
-                "reference": "37579c93271ec30ef099dd633ec7c2de5e5fb112",
+                "url": "https://api.github.com/repos/laravel/tinker/zipball/5271893ec90ad9f8d3e34792ac6b72cad3b84cc2",
+                "reference": "5271893ec90ad9f8d3e34792ac6b72cad3b84cc2",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1723,11 +1729,11 @@
                 ]
             },
             "require": {
-                "illuminate/console": "^6.0|^7.0",
-                "illuminate/contracts": "^6.0|^7.0",
-                "illuminate/support": "^6.0|^7.0",
+                "illuminate/console": "^6.0|^7.0|^8.0",
+                "illuminate/contracts": "^6.0|^7.0|^8.0",
+                "illuminate/support": "^6.0|^7.0|^8.0",
                 "php": "^7.2",
-                "psy/psysh": "^0.9",
+                "psy/psysh": "^0.9|^0.10",
                 "symfony/var-dumper": "^4.0|^5.0"
             },
             "require-dev": {
@@ -1735,7 +1741,7 @@
                 "phpunit/phpunit": "^8.0|^9.0"
             },
             "suggest": {
-                "illuminate/database": "The Illuminate Database package (^6.0|^7.0)."
+                "illuminate/database": "The Illuminate Database package (^6.0|^7.0|^8.0)."
             },
             "type": "library",
             "extra": {
@@ -1770,7 +1776,7 @@
                 "laravel",
                 "psysh"
             ],
-            "time": "2020-02-05T15:00:44+00:00"
+            "time": "2020-03-17T15:34:59+00:00"
         },
         {
             "name": "lcobucci/jwt",
@@ -1971,16 +1977,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.65",
+            "version": "1.0.66",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "8f17b3ba67097aafb8318cd5c553b1acf7c891c8"
+                "reference": "021569195e15f8209b1c4bebb78bd66aa4f08c21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/8f17b3ba67097aafb8318cd5c553b1acf7c891c8",
-                "reference": "8f17b3ba67097aafb8318cd5c553b1acf7c891c8",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/021569195e15f8209b1c4bebb78bd66aa4f08c21",
+                "reference": "021569195e15f8209b1c4bebb78bd66aa4f08c21",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2057,7 +2063,13 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2020-03-08T18:53:20+00:00"
+            "funding": [
+                {
+                    "url": "https://offset.earth/frankdejonge",
+                    "type": "other"
+                }
+            ],
+            "time": "2020-03-17T18:58:12+00:00"
         },
         {
             "name": "league/oauth2-server",
@@ -2144,16 +2156,16 @@
         },
         {
             "name": "mews/captcha",
-            "version": "3.0.2",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mewebstudio/captcha.git",
-                "reference": "0fa11e098549ceb8f99f93dcf24719622d8c8078"
+                "reference": "cc4d745c4f7506be0b73ac70324f71408c7e3a80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mewebstudio/captcha/zipball/0fa11e098549ceb8f99f93dcf24719622d8c8078",
-                "reference": "0fa11e098549ceb8f99f93dcf24719622d8c8078",
+                "url": "https://api.github.com/repos/mewebstudio/captcha/zipball/cc4d745c4f7506be0b73ac70324f71408c7e3a80",
+                "reference": "cc4d745c4f7506be0b73ac70324f71408c7e3a80",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2164,17 +2176,17 @@
             },
             "require": {
                 "ext-gd": "*",
-                "illuminate/config": "~5.0|^6.0",
-                "illuminate/filesystem": "~5.0|^6.0",
-                "illuminate/hashing": "~5.0|^6.0",
-                "illuminate/session": "~5.0|^6.0",
-                "illuminate/support": "~5.0|^6.0",
+                "illuminate/config": "~5.0|^6.0|^7.0",
+                "illuminate/filesystem": "~5.0|^6.0|^7.0",
+                "illuminate/hashing": "~5.0|^6.0|^7.0",
+                "illuminate/session": "~5.0|^6.0|^7.0",
+                "illuminate/support": "~5.0|^6.0|^7.0",
                 "intervention/image": "~2.5",
                 "php": "^7.2"
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
-                "phpunit/phpunit": "^8.0"
+                "phpunit/phpunit": "^8.5"
             },
             "type": "package",
             "extra": {
@@ -2215,7 +2227,7 @@
                 "laravel6 Captcha",
                 "laravel6 Security"
             ],
-            "time": "2019-12-05T11:15:51+00:00"
+            "time": "2020-03-21T08:52:58+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2822,16 +2834,16 @@
         },
         {
             "name": "phpoption/phpoption",
-            "version": "1.7.2",
+            "version": "1.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/php-option.git",
-                "reference": "77f7c4d2e65413aff5b5a8cc8b3caf7a28d81959"
+                "reference": "4acfd6a4b33a509d8c88f50e5222f734b6aeebae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/77f7c4d2e65413aff5b5a8cc8b3caf7a28d81959",
-                "reference": "77f7c4d2e65413aff5b5a8cc8b3caf7a28d81959",
+                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/4acfd6a4b33a509d8c88f50e5222f734b6aeebae",
+                "reference": "4acfd6a4b33a509d8c88f50e5222f734b6aeebae",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2841,7 +2853,7 @@
                 ]
             },
             "require": {
-                "php": "^5.5.9 || ^7.0"
+                "php": "^5.5.9 || ^7.0 || ^8.0"
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.3",
@@ -2879,7 +2891,7 @@
                 "php",
                 "type"
             ],
-            "time": "2019-12-15T19:35:24+00:00"
+            "time": "2020-03-21T18:07:53+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -3257,16 +3269,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.9.12",
+            "version": "v0.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "90da7f37568aee36b116a030c5f99c915267edd4"
+                "reference": "573c2362c3cdebe846b4adae4b630eecb350afd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/90da7f37568aee36b116a030c5f99c915267edd4",
-                "reference": "90da7f37568aee36b116a030c5f99c915267edd4",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/573c2362c3cdebe846b4adae4b630eecb350afd8",
+                "reference": "573c2362c3cdebe846b4adae4b630eecb350afd8",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -3279,16 +3291,15 @@
                 "dnoegel/php-xdg-base-dir": "0.1.*",
                 "ext-json": "*",
                 "ext-tokenizer": "*",
-                "jakub-onderka/php-console-highlighter": "0.3.*|0.4.*",
-                "nikic/php-parser": "~1.3|~2.0|~3.0|~4.0",
-                "php": ">=5.4.0",
-                "symfony/console": "~2.3.10|^2.4.2|~3.0|~4.0|~5.0",
-                "symfony/var-dumper": "~2.7|~3.0|~4.0|~5.0"
+                "jakub-onderka/php-console-highlighter": "0.4.*|0.3.*",
+                "nikic/php-parser": "~4.0|~3.0|~2.0|~1.3",
+                "php": "^8.0 || ^7.0 || ^5.5.9",
+                "symfony/console": "~5.0|~4.0|~3.0|^2.4.2|~2.3.10",
+                "symfony/var-dumper": "~5.0|~4.0|~3.0|~2.7"
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.2",
-                "hoa/console": "~2.15|~3.16",
-                "phpunit/phpunit": "~4.8.35|~5.0|~6.0|~7.0"
+                "hoa/console": "~3.16|~2.15"
             },
             "suggest": {
                 "ext-pcntl": "Enabling the PCNTL extension makes PsySH a lot happier :)",
@@ -3303,7 +3314,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "0.9.x-dev"
+                    "dev-master": "0.10.x-dev"
                 }
             },
             "autoload": {
@@ -3333,7 +3344,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2019-12-06T14:19:43+00:00"
+            "time": "2020-03-21T06:55:27+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -5243,16 +5254,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v3.6.0",
+            "version": "v3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "1bdf24f065975594f6a117f0f1f6cabf1333b156"
+                "reference": "8f7961f7b9deb3b432452c18093cf16f88205902"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/1bdf24f065975594f6a117f0f1f6cabf1333b156",
-                "reference": "1bdf24f065975594f6a117f0f1f6cabf1333b156",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/8f7961f7b9deb3b432452c18093cf16f88205902",
+                "reference": "8f7961f7b9deb3b432452c18093cf16f88205902",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5267,7 +5278,11 @@
                 "symfony/polyfill-ctype": "^1.9"
             },
             "require-dev": {
+                "ext-filter": "*",
                 "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0 || ^7.0"
+            },
+            "suggest": {
+                "ext-filter": "Required to use the boolean validator."
             },
             "type": "library",
             "extra": {
@@ -5302,7 +5317,13 @@
                 "env",
                 "environment"
             ],
-            "time": "2019-09-10T21:37:39+00:00"
+            "funding": [
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/vlucas/phpdotenv",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-03-12T13:44:00+00:00"
         }
     ],
     "packages-dev": [

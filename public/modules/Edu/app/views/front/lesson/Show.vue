@@ -1,5 +1,5 @@
 <template>
-  <div v-if="field">
+  <div v-if="field.id">
     <div class="container mt-3 mt-md-5 mb-5" v-if="field">
       <div class="row">
         <div class="col-12 col-md-9">
@@ -40,6 +40,7 @@
         </div>
       </div>
     </div>
+
     <footers />
   </div>
 </template>
@@ -47,19 +48,17 @@
 <script>
 import Tips from '../components/Tips'
 import Footers from '../components/Footer'
-
 export default {
   components: { Tips, Footers },
   data() {
     return {
-      field: null
+      field: {}
     }
   },
   async created() {
     let response = await this.axios.get(`edu/front/lesson/${this.$route.params.id}`)
     this.$set(this, 'field', response.data)
-  },
-  methods: {}
+  }
 }
 </script>
 

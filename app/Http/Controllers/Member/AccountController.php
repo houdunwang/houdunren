@@ -24,6 +24,7 @@ class AccountController extends ApiController
 
   public function __construct()
   {
+    $this->middleware('front');
     $this->middleware('guest')->except('logout');
   }
 
@@ -31,7 +32,7 @@ class AccountController extends ApiController
    * 登录界面
    * @return string
    */
-  public function show(SiteService $siteService)
+  public function show()
   {
     return view('member.login', ['site' => $this->site]);
   }
@@ -53,7 +54,7 @@ class AccountController extends ApiController
       $token  = $user->createToken('token')->accessToken;
       return $request->expectsJson() ?
         response()->json(['token' => $token, 'user' => $user]) :
-        redirect()->intended('/');
+        redirect()->intended($request->query('redirect', '/'));
     } else {
       return $this->error('帐号或密码错误');
     }

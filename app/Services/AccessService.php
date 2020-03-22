@@ -122,7 +122,7 @@ class AccessService
    *
    * @return void
    */
-  public function getUserPermissionNames($site, $user)
+  public function getUserPermissionNames($site, User $user)
   {
     return $user->permissions->where('site_id', $site['id'])->map(function ($permission) {
       return preg_replace('/^S\d+\-/', '', $permission->name);

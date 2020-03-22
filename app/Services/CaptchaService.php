@@ -24,7 +24,7 @@ class CaptchaService
     $captcha = (new CaptchaBuilder(null, $phraseBuilder))->build();
 
     Cache::put($this->name(), $captcha->getPhrase(), now()->addMinutes(10));
-    return $captcha->inline();
+    return $captcha->output();
   }
 
   protected function name()
