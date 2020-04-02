@@ -18,9 +18,7 @@ class GroupPolicy
 
     public function before(User $user)
     {
-        if ($user->is_super_admin) {
-            return true;
-        }
+        return isSuperAdmin();
     }
 
     public function viewAny(User $user)

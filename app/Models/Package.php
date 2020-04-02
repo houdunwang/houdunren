@@ -11,15 +11,20 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Package extends Model
 {
-    protected $guarded = [];
-    protected $casts = ['modules' => 'array', 'templates' => 'array'];
+  protected $fillable = ['name', 'system'];
+  protected $casts = ['modules' => 'array', 'templates' => 'array', 'system' => 'boolean'];
 
-    /**
-     * 套餐模块
-     * @return mixed
-     */
-    public function modules()
-    {
-        return Module::whereIn('id', $this['modules'])->get();
-    }
+  /**
+   * 套餐模块
+   * @return mixed
+   */
+  public function module()
+  {
+    return $this->belongsToMany(Module::class, 'module_package');
+  }
+
+  public function group()
+  {
+    return $this->belongsToMany(Group::class, 'group_package');
+  }
 }

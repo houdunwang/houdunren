@@ -6,25 +6,25 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class PackageRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
+  public function authorize()
+  {
+    return auth()->user()->is_super_admin;
+  }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            'name'=>'required|min:2'
-        ];
-    }
+  public function rules()
+  {
+    $id = request('package')['id'] ?? 0;
+    return [
+      'name' => 'required|max:20|unique:packages,name,' . $id
+    ];
+  }
+
+  public function messages()
+  {
+    return [
+      'name.required' => '套餐名称不能为空',
+      'name.max' => '套餐名称不能超过20个字符',
+      'name.unique' => '套餐名称已经存在'
+    ];
+  }
 }

@@ -1,47 +1,37 @@
 // Variables
-// @import "variables";
+@import 'variables';
 // Bootstrap
-// @import "~bootstrap/scss/bootstrap";
-[v-cloak] {
-    display: none;
+@import '~bootstrap/scss/bootstrap';
+@import '~animate.css';
+//会员中j心
+@import 'member.scss';
+@import 'user.scss';
+*:focus {
+  border: none;
+  outline: none;
 }
 a {
-    text-decoration: none !important;
-}
-button {
-    outline: none !important;
-}
-:root {
-    font-size: 15px;
+  text-decoration: none !important;
 }
 
-.avatar-uploader {
-    .el-upload {
-        background: #f3f3f3 !important;
-        border: 1px dashed #d9d9d9;
-        border-radius: 6px;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-        align-items: center;
-        justify-content: center;
-        &:hover {
-            border-color: #409eff;
+.module {
+  height: 100vh;
+  .navbar {
+    .avatar {
+      width: 20px;
+    }
+  }
+  .menus {
+    .list-group {
+      strong {
+        &.list-group-item {
+          border-left: solid 3px #f15a24 !important;
+          background: #fafafa;
         }
+      }
+      .list-group-item {
+        word-break: keep-all;
+      }
     }
-    .avatar-uploader-icon {
-        font-size: 28px;
-        color: #8c939d;
-        width: 178px;
-        height: 178px;
-        line-height: 178px;
-        text-align: center;
-        display: flex !important;
-        justify-content: center;
-        align-items: center;
-    }
+  }
 }
-
-// .avatar {
-//     display: block;
-// }

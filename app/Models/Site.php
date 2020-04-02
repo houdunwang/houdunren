@@ -4,6 +4,9 @@ namespace App\Models;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Permission\Models\Permission;
 
 /**
@@ -13,66 +16,64 @@ use Spatie\Permission\Models\Permission;
  */
 class Site extends Model
 {
-    protected $fillable = ['name', 'keyword', 'description', 'logo', 'icp', 'tel', 'email', 'counter'];
-    // protected $guarded = [];
-    /**
-     * 公众号关联
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function weChat(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(WeChat::class);
-    }
+  protected $fillable = ['name', 'user_id', 'keyword', 'config', 'description', 'logo', 'icp', 'tel', 'email', 'counter', 'domain'];
 
-    /**
-     * 站点所有权限
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function permissions(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Permission::class);
-    }
-    public function siteUser()
-    {
-        return $this->hasMany(SiteUser::class);
-    }
-    /**
-     * 站点用户关联
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(User::class, 'site_users')
-            ->withTimestamps()
-            ->withPivot('role')->as('role');
-    }
+  protected $casts = [
+    'config' => 'array'
+  ];
 
-    /**
-     * 获取管理员与操作员
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function manage(): \Illuminate\Database\Eloquent\Collection
-    {
-        return $this->user()
-            ->wherePivotIn('role', ['admin', 'operator'])->get();
-    }
+  /**
+   * 公众号关联
+   * @return HasMany
+   */
+  public function weChat(): HasMany
+  {
+    return $this->hasMany(WeChat::class);
+  }
 
-    /**
-     * 是否是操作员或管理员
-     * @param User $user
-     * @return bool
-     */
-    public function isManage(User $user): bool
-    {
-        return $this->manage()->contains($user);
-    }
+  /**
+   * 站点所有权限
+   * @return HasMany
+   */
+  public function permissions(): HasMany
+  {
+    return $this->hasMany(Permission::class);
+  }
 
-    /**
-     * 获取站长
-     * @return mixed
-     */
-    public function admin()
-    {
-        return $this->user()->wherePivot('role', 'admin')->first();
-    }
+  /**
+   * 站点用户关联
+   * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+   */
+  public function user()
+  {
+    return $this->belongsToMany(User::class, 'site_users')
+      ->withPivot('role')->as('site_user');
+  }
+
+  /**
+   * 管理员
+   * @return BelongsToMany
+   */
+  public function admin()
+  {
+    return $this->user()->wherePivotIn('role', ['admin']);
+  }
+
+  /**
+   * 操作员
+   * @return BelongsToMany
+   */
+  public function operator()
+  {
+    return $this->user()->wherePivotIn('role', ['operator']);
+  }
+
+  /**
+   * 默认模块
+   * @return BelongsTo
+   */
+  public function module()
+  {
+    return $this->belongsTo(Module::class);
+  }
 }

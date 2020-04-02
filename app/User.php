@@ -2,11 +2,10 @@
 
 namespace App;
 
+use App\Models\Group;
 use App\Models\Site;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -17,72 +16,68 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens, HasRoles;
+  use Notifiable, HasApiTokens, HasRoles;
+  // protected $guard_name = 'web';
+  protected $fillable = [
+    'name', 'nickname', 'email', 'mobile', 'real_name', 'password', 'home', 'avatar', 'weibo',
+    'wechat', 'github', 'qq'
+  ];
 
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+  protected $hidden = [
+    'password', 'remember_token',
+  ];
 
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+  protected $casts = [
+    'email_verified_at' => 'datetime',
+    'lock_to_time' => 'datetime'
+  ];
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'lock_to_time' => 'datetime'
-    ];
-    protected $appends = ['is_super_admin'];
-    /**
-     * passport帐号登录
-     * @param $username
-     * @return mixed
-     */
-    public function findForPassport($username)
-    {
-        $validate = [];
-        filter_var($username, FILTER_VALIDATE_EMAIL) ? $validate['email'] = $username :
-            $this['mobile'] = $username;
+  protected $appends = ['is_super_admin'];
 
-        return $this->where($validate)->first();
-    }
+  /**
+   * 用户头像
+   * @return string
+   */
+  public function getAvatarAttribute($value)
+  {
+    return $value ?? '/images/avatar.jpg';
+  }
+  /**
+   * passport帐号登录
+   * @param $username
+   * @return mixed
+   */
+  public function findForPassport($username)
+  {
+    $validate = [];
+    filter_var($username, FILTER_VALIDATE_EMAIL) ? $validate['email'] = $username :
+      $this['mobile'] = $username;
 
-    /**
-     * 站点关联
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function site(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Site::class, 'site_users')
-            ->withPivot(['role', 'site_id'])->as('role');
-    }
+    return $this->where($validate)->first();
+  }
 
-    /**
-     * 获取可管理站点
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function manageSites(): \Illuminate\Database\Eloquent\Collection
-    {
-        if ($this->is_super_admin)
-            return Site::orderBy('id', 'desc')->get();
-        return $this->site()->wherePivotIn('role', ['admin', 'operator'])
-            ->orderBy('id', 'desc')->get();
-    }
+  /**
+   * 站点关联
+   */
+  public function site()
+  {
+    return $this->belongsToMany(Site::class, 'site_users')->withPivot('role');
+  }
 
-    /**
-     * 超级管理员
-     * @return bool
-     */
-    public function getIsSuperAdminAttribute(): bool
-    {
-        return $this['id'] === 1;
-    }
+  /**
+   * 超级管理员
+   * @return bool
+   */
+  public function getIsSuperAdminAttribute(): bool
+  {
+    return $this['id'] === 1;
+  }
 
-    /**
-     * 用户组
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function group(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo($this['group_id']);
-    }
+  /**
+   * 用户组多表关联
+   */
+  public function group()
+  {
+    return $this->belongsToMany(Group::class, 'user_group');
+  }
 }

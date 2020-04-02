@@ -5,29 +5,19 @@ use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        factory(User::class, 20)->create();
-        $user = User::find(1);
-        $user->name = '向军大叔';
-        $user->email = '2300071698@qq.com';
-        $user->mobile = 18600000000;
-        $user->save();
-        $user = User::find(2);
-        $user->name = 'xj';
-        $user->email = '931241005@qq.com';
-        $user->mobile = 19999999999;
-        $user->save();
-        $user->save();
-        $user = User::find(3);
-        $user->name = 'xy';
-        $user->email = '35288551@qq.com';
-        $user->mobile = 188888888888;
-        $user->save();
-    }
+  public function run()
+  {
+    factory(User::class, 20)->create()->each(function ($user) {
+      $user->group()->attach([1]);
+    });
+    $users = [
+      1 => ['name' => 'admin', 'nickname' => '超管',],
+      2 => ['name' => 'houdunren', 'nickname' => '后盾人',],
+      3 => ['name' => 'hdcms', 'nickname' => 'HDCMS开源软件'],
+    ];
+    collect([1, 2, 3])->map(function ($id) use ($users) {
+      $user = User::find($id);
+      $user->fill($users[$id])->save();
+    });
+  }
 }

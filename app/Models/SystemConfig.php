@@ -11,6 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SystemConfig extends Model
 {
-    protected $guarded = [];
-    protected $casts = ['config' => 'array'];
+  protected $guarded = [];
+  protected $casts = ['config' => 'array'];
 }

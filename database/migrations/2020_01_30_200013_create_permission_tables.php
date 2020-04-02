@@ -21,8 +21,9 @@ class CreatePermissionTables extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('guard_name');
-            $table->string('module')->comment('模块标题');
             $table->string('title')->comment('权限描述');
+            $table->unsignedBigInteger('module_id')->nullable()->comment('模块编号');
+            $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
             $table->unsignedBigInteger('site_id')->nullable()->comment('站点编号');
             $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
         });
@@ -46,8 +47,10 @@ class CreatePermissionTables extends Migration
                 ->on($tableNames['permissions'])
                 ->onDelete('cascade');
 
-            $table->primary(['permission_id', $columnNames['model_morph_key'], 'model_type'],
-                    'model_has_permissions_permission_model_type_primary');
+            $table->primary(
+                ['permission_id', $columnNames['model_morph_key'], 'model_type'],
+                'model_has_permissions_permission_model_type_primary'
+            );
         });
 
         Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $columnNames) {
@@ -62,8 +65,10 @@ class CreatePermissionTables extends Migration
                 ->on($tableNames['roles'])
                 ->onDelete('cascade');
 
-            $table->primary(['role_id', $columnNames['model_morph_key'], 'model_type'],
-                    'model_has_roles_role_model_type_primary');
+            $table->primary(
+                ['role_id', $columnNames['model_morph_key'], 'model_type'],
+                'model_has_roles_role_model_type_primary'
+            );
         });
 
         Schema::create($tableNames['role_has_permissions'], function (Blueprint $table) use ($tableNames) {
