@@ -18,7 +18,7 @@ export default {
   children: [
     { name: 'home', component: Index, path: '/', alias: '/home' },
     { name: 'lesson', component: LessonIndex, path: 'lesson/你的汗水，终将得到回报' },
-    { name: 'lesson.show', component: LessonShow, path: 'lesson/:id/晚八点直播哟' },
+    { name: 'lesson.show', component: LessonShow, path: 'lesson/:id' },
     { name: 'video.show', component: Video, path: 'video/:sid/:id', meta: { auth: true } },
     { name: 'video', component: VideoIndex, path: 'video/编程秘籍->干就完了！' },
     { name: 'system', component: System, path: 'systems/系统课程非常适合新手快速掌握开发语言' },
@@ -28,7 +28,7 @@ export default {
     { name: 'topic.update', component: TopicUpdate, path: 'topic/update/:id', meta: { auth: true } },
     { name: 'topic.show', component: TopicShow, path: 'topic/show/:id', meta: { auth: true } },
     { name: 'sign', component: Sign, path: 'sign' },
-    { name: 'subscribe', component: Subscribe, path: 'subscribe' },
-    { path: '*', redirect: '/' }
+    { name: 'subscribe', component: Subscribe, path: 'subscribe' }
+    // { path: '*', redirect: '/' }
   ]
 }

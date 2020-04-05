@@ -5,14 +5,20 @@
         <i class="fa fa-plus"></i>
         添加网站
       </router-link>
-      <div class="card mb-3 shadow-sm" v-for="site in data" :key="site.id">
+      <div class="card mb-3 shadow-sm rounded-0" v-for="site in data" :key="site.id">
         <div class="card-header small">
           <div class="row">
             <div class="col-6">
               <span class="text-dark small mr-1">套餐:</span>
               <span v-for="group in site.admin.group" :key="group.id">
-                <span class="text-secondary mr-1 border p-1 bg-light rounded" v-for="p in group.packages" :key="p.id">
-                  {{ p.name }}
+                <span
+                  class="text-secondary mr-1 border p-1 bg-light rounded"
+                  v-for="p in group.packages"
+                  :key="p.id"
+                >
+                  {{
+                  p.name
+                  }}
                 </span>
               </span>
             </div>
@@ -156,7 +162,7 @@ export default {
     },
     async updateSiteCache(site) {
       await this.axios.put(`site/${site.id}/cache`)
-      this.$message.success('站点缓存更新成功')
+      this.$message.success('站点缓存更新成功', 100)
     }
   }
 }

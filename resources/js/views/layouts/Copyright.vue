@@ -7,19 +7,19 @@
 </template>
 
 <script>
-  import {mapState} from "vuex";
+import { mapState } from 'vuex'
 
-  export default {
-    computed: {
-      ...mapState("systemConfig", {setting: 'data'})
-    }
-  };
+export default {
+  computed: {
+    ...mapState('system', { setting: 'config' })
+  }
+}
 </script>
 
 <style>
-  .copyright {
-    line-height: 2em;
-    font-weight: bold;
-    text-shadow: 2px 2px 1px #fff;
-  }
+.copyright {
+  line-height: 2em;
+  font-weight: bold;
+  text-shadow: 2px 2px 1px #fff;
+}
 </style>

@@ -30,10 +30,15 @@
                     <button
                       type="button"
                       class="btn"
-                      :class="site.module_id==module.model.id?'btn-info':'btn-outline-info'"
+                      :class="isDefault(module)?'btn-info':'btn-outline-info'"
                       @click.prevent="setDefaultModule(module.model.id)"
-                    >默认模块</button>
-                    <a :href="moduleLink(module)" class="btn btn-outline-success">管理模块</a>
+                    >{{ isDefault(module)?'默认模块':'设为默认' }}</button>
+                    <a
+                      :href="site.domain"
+                      target="_blank"
+                      v-if="isDefault(module)"
+                      class="btn btn-outline-success"
+                    >访问首页</a>
                   </div>
                 </div>
               </div>
@@ -73,6 +78,10 @@ export default {
       await this.axios.get(`site/site/${this.$route.params.sid}/${mid}`)
       this.$set(this.site, 'module_id', mid)
       this.$message.success('默认模块设置成功')
+    },
+    //默认模块
+    isDefault(module) {
+      return this.site.module_id == module.model.id
     }
   }
 }

@@ -1,4 +1,4 @@
-# HDCMS 6.0
+# HDCMS 7.0
 
 基于 Laravel 框架重构的 PC、WAP、微信公众号、微信小程序多应用平台。
 

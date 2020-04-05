@@ -6,7 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 
-class Config extends ApiController
+class ConfigController extends ApiController
 {
   public function site()
   {

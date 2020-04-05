@@ -56,7 +56,7 @@
         </div>
       </div>
       <div class="card-footer text-muted">
-        <button type="submit" class="btn btn-primary">登录后台</button>
+        <button type="submit" class="btn btn-primary">登录</button>
       </div>
     </div>
   </form>

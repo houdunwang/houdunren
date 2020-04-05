@@ -8,7 +8,11 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-12 col-md-4 mb-3" v-for="(subscribe) in subscribes" :key="subscribe.id">
+          <div
+            class="col-12 col-md-4 col-lg-4 mt-3"
+            v-for="(subscribe) in subscribes"
+            :key="subscribe.id"
+          >
             <div class="card">
               <div class="card-header text-center p-2">{{subscribe.ad}}</div>
               <div class="card-body d-flex flex-column justify-content-center align-items-center">

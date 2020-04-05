@@ -14124,13 +14124,12 @@ body.member .menu .icon img {
   transform: rotateY(0deg) scale(1);
 }
 
-*:focus {
-  border: none;
-  outline: none;
-}
-
 a {
   text-decoration: none !important;
+}
+
+svg {
+  vertical-align: inherit;
 }
 
 .module {

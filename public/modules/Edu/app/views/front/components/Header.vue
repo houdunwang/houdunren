@@ -64,6 +64,7 @@
                 <a class="dropdown-item mb-2" href="/member/info/avatar">头像设置</a>
                 <a class="dropdown-item mb-2" href="/member/info/base">修改密码</a>
                 <a class="dropdown-item mb-2" href="/member/info/email">绑定邮箱</a>
+                <a class="dropdown-item mb-2" href="/edu/member/order">我的定单</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item mb-2" href="/logout">退出登录</a>
               </div>

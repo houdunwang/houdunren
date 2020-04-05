@@ -1,21 +1,30 @@
 <template>
-  <div class="container mt-5">
-    <div class="card shadow-sm">
-      <div class="card-header bg-white">每日签到</div>
-      <div class="card-body" v-if="isLogin">
-        <input type="text" class="form-control" v-model="form.content" placeholder="你今天的心情或最想说的话" />
-        <div class="mood mt-3">
-          <a href v-for="(icon, index) in icons" :key="index" @click.prevent="form.mood = icon">
-            <img :src="`/modules/Edu/app/assets/icon/${icon}.gif`" :class="{ active: icon == form.mood }" />
-          </a>
+  <div class="container mt-5" v-if="isLoad">
+    <div class="card shadow-sm" v-if="isLogin && !todayIsCheck">
+      <div class="card-header bg-white">每日签到 {{ todayIsCheck ? 1 : 0 }}</div>
+      <div class="card-body">
+        <div>
+          <input type="text" class="form-control" v-model="form.content" placeholder="你今天的心情或最想说的话" />
+          <div class="mood mt-3">
+            <a href v-for="(icon, index) in icons" :key="index" @click.prevent="form.mood = icon">
+              <img :src="`/modules/Edu/app/assets/icon/${icon}.gif`" :class="{ active: icon == form.mood }" />
+            </a>
+          </div>
         </div>
       </div>
-      <div class="card-body text-center" v-if="!isLogin">
+      <div class="card-footer text-muted">
+        <button type="button" class="btn btn-success" @click="submit">开始签到</button>
+      </div>
+    </div>
+    <!-- <div class="card" v-if="isLogin && todayIsCheck">
+      <div class="card-header">每日签到</div>
+      <div class="card-body">今日已经签到</div>
+    </div>-->
+    <div class="card" v-if="!isLogin">
+      <div class="card-header">每日签到</div>
+      <div class="card-body text-center">
         <h5 class="text-secondary text-center mt-3 mb-3">天天签到，天天进步</h5>
         <a href="/login?redirect=/sign" class="btn btn-success">马上登录过行签到</a>
-      </div>
-      <div class="card-footer text-muted" v-if="isLogin">
-        <button type="button" class="btn btn-success" @click="submit">开始签到</button>
       </div>
     </div>
     <div class="card mt-3 shadow-sm">
@@ -69,6 +78,7 @@ export default {
         content: '',
         mood: ''
       },
+      isLoad: false,
       signs: [],
       icons: ['ch', 'fd', 'kx', 'ng', 'nu', 'shuai', 'wl', 'yl', 'ym']
     }
@@ -78,12 +88,18 @@ export default {
   },
   computed: {
     ...mapState('user', ['user']),
-    ...mapGetters('user', ['isLogin'])
+    ...mapGetters('user', ['isLogin']),
+    todayIsCheck() {
+      return this.signs.some(sign => {
+        return sign.user_id === this.user.id
+      })
+    }
   },
   methods: {
     async load() {
       let response = await this.axios.get(`edu/front/sign`)
       this.$set(this, 'signs', response.data.data)
+      this.isLoad = true
     },
     async submit() {
       if (_.trim(this.form.content) == '') {

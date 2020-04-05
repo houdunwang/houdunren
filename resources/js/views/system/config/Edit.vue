@@ -1,16 +1,41 @@
 <template>
   <div>
-    <nav class="nav nav-tabs mb-2">
-      <router-link class="nav-link" :to="{ name: 'system' }">
-        <i class="fa fa-home" aria-hidden="true"></i>
-      </router-link>
-      <router-link class="nav-link active" :to="{ name: 'system.package' }">系统配置</router-link>
-    </nav>
-
-    <el-form ref="form" label-width="100px" :model="form">
+    <div>
+      <a-tabs defaultActiveKey="1">
+        <a-tab-pane tab="系统配置" key="1">
+          <a-form v-model="form" labelAlign="right" :label-col="{span:2}" :wrapper-col="{span:10}">
+            <a-form-item :label="form.base.name.title">
+              <a-input v-model="form.base.name.value"></a-input>
+            </a-form-item>
+            <a-form-item :label="form.base.logo.title">
+              <a-upload
+                name="file"
+                listType="picture-card"
+                class="avatar-uploader"
+                :showUploadList="false"
+                action="/api/common/upload"
+                @change="handleChange"
+              >
+                <img v-if="form.base.logo.value" :src="form.base.logo.value" alt="avatar" />
+                <div v-else>
+                  <div class="ant-upload-text">选择图片</div>
+                </div>
+              </a-upload>
+            </a-form-item>
+            <a-form-item :label="form.base.footer.title">
+              <a-input type="textarea" rows="3" v-model="form.base.footer.value"></a-input>
+            </a-form-item>
+            <a-form-model-item :wrapper-col="{ span: 10, offset: 2 }">
+              <a-button type="primary" @click="onSubmit">保存提交</a-button>
+            </a-form-model-item>
+          </a-form>
+        </a-tab-pane>
+      </a-tabs>
+    </div>
+    <!-- <el-form ref="form" label-width="100px" :model="form">
       <div class="card">
         <div class="card-body">
-          <el-form-item label="后台名称">
+          <el-form <el-form-item label="后台名称">
             <el-input placeholder="用于在浏览器标签中显示的名称" v-model="form.base.name.value"></el-input>
           </el-form-item>
           <el-form-item label="后台标志">
@@ -40,7 +65,7 @@
           </el-form-item>
         </div>
       </div>
-    </el-form>
+    </el-form>-->
   </div>
 </template>
 
@@ -49,22 +74,26 @@ import { mapState, mapActions } from 'vuex'
 import { system as systemUpload } from '@/services/upload'
 export default {
   computed: {
-    ...mapState('systemConfig', { form: 'data' })
+    ...mapState('system', { form: 'config' })
   },
   methods: {
-    ...mapActions('systemConfig', { getConfig: 'get' }),
+    ...mapActions('system', { getConfig: 'getConfig' }),
     //标志上传
-    upload(response) {
-      this.$set(this.form.base.logo, 'value', response.path)
+    handleChange(info) {
+      const status = info.file.status
+      if (status === 'done') {
+        this.$set(this.form.base.logo, 'value', info.file.response.path)
+      }
     },
-    uploadError() {
-      this.$message.error('文件过大或类型不匹配')
-    },
-    async submit() {
+    async onSubmit() {
       await this.axios.post('system/config', this.form)
       await this.getConfig()
       document.title = this.form.base.name.value
-      this.$message.success('更新成功')
+      this.$success({
+        title: '温馨提示',
+        content: '修改成功',
+        maskClosable: true
+      })
     }
   }
 }

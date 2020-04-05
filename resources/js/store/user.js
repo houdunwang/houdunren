@@ -2,23 +2,28 @@ import Token from '@/services/token'
 export default {
   namespaced: true,
   state: {
-    data: null
+    data: {},
   },
   mutations: {
     set(state, data) {
       state.data = data
-    }
+    },
+  },
+  getters: {
+    isLogin() {
+      return Token.get() ? true : false
+    },
   },
   actions: {
-    async get({ state, commit }) {
-      let response = await window.axios.get(`system/user`)
+    async get({ commit }) {
+      let response = await window.axios.get(`user/get`)
       commit('set', response.data)
       return response.data
     },
-    async login({ commit }, form) {
+    async login({}, form) {
       let response = await window.axios.post(`user/login`, form)
-      commit('set', response.data.user)
       Token.set(response.data.token)
-    }
-  }
+      return true
+    },
+  },
 }

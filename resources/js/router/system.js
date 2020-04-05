@@ -14,6 +14,7 @@ import UpdateSystemCache from '@/views/system/cache/Update'
 export default {
   path: '/system',
   component: Main,
+  meta: { auth: true },
   children: [
     { name: 'system', path: 'index', component: Index, alias: '/system' },
     { name: 'system.config', path: 'config', component: Edit },

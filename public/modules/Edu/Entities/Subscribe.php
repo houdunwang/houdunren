@@ -6,7 +6,7 @@ use App\Traits\Module;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 套餐
+ * 会员订阅
  * Class subscribe
  */
 class Subscribe extends Model

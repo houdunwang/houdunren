@@ -1,63 +1,32 @@
 <template>
   <div class="bg-dark">
-    <div class="container-fluid">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#"></a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li
-              class="nav-item mr-4"
-              :key="index"
-              v-for="(menu, index) in menus"
-              v-show="menu.check ? user.is_super_admin : true"
-            >
-              <router-link class="nav-link" :to="menu.url">
-                <i :class="'fa ' + menu.icon"></i>
-                {{ menu.title }}
-              </router-link>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <ul class="navbar-nav">
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fa fa-user"></i>
-                  {{ user.name }}
-                </a>
-                <div
-                  class="dropdown-menu dropdown-menu-right"
-                  aria-labelledby="navbarDropdown"
-                >
-                  <a class="dropdown-item" href="#">修改资料</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/logout">退出登录</a>
-                </div>
-              </li>
-            </ul>
-          </form>
-        </div>
-      </nav>
-    </div>
+    <a-layout id="components-layout-demo-top-side">
+      <a-layout-header class="header">
+        <a-menu theme="dark" mode="horizontal" :style="{ lineHeight: '55px' }">
+          <a-menu-item
+            :key="index"
+            v-for="(menu, index) in menus"
+            v-show="menu.check ? user.is_super_admin : true"
+          >
+            <router-link :to="menu.url">
+              <i :class="'fa ' + menu.icon"></i>
+              {{ menu.title }}
+            </router-link>
+          </a-menu-item>
+        </a-menu>
+        <a-dropdown placement="bottomRight">
+          <a class="ant-dropdown-link" @click="e => e.preventDefault()">
+            {{ user.name }}
+            <a-icon type="down" />
+          </a>
+          <a-menu slot="overlay">
+            <a-menu-item>
+              <a class="dropdown-item" href="/logout">退出登录</a>
+            </a-menu-item>
+          </a-menu>
+        </a-dropdown>
+      </a-layout-header>
+    </a-layout>
   </div>
 </template>
 <script>
@@ -111,4 +80,20 @@ export default {
   methods: {}
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+header {
+  height: 55px;
+  padding: 0 10px;
+  line-height: 55px;
+}
+.ant-dropdown-link {
+  position: absolute;
+  right: 20px;
+  top: 0px;
+  color: #fff;
+  opacity: 0.6;
+  &:hover {
+    color: #fff;
+  }
+}
+</style>

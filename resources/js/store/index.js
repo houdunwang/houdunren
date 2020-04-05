@@ -2,16 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import error from './error'
 import user from './user'
-import systemConfig from '@/store/systemConfig'
-
+import system from './system'
+import loading from './loading'
+let store = { error, user, system, user, loading }
 Vue.use(Vuex)
-
-//VUEX入口
 export default new Vuex.Store({
-  modules: {
-    error,
-    user,
-    systemConfig,
-    user
-  }
+  modules: store
 })

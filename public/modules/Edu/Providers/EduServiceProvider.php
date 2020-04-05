@@ -5,11 +5,9 @@ namespace Modules\Edu\Providers;
 use Modules\Edu\Entities\Comment;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-use Illuminate\Support\Facades\Gate;
 use Modules\Edu\Entities\Sign;
 use Modules\Edu\Observers\CommentObserver;
 use Modules\Edu\Observers\SignObserver;
-use Modules\Edu\Policies\SignPolicy;
 
 class EduServiceProvider extends ServiceProvider
 {
@@ -28,11 +26,6 @@ class EduServiceProvider extends ServiceProvider
 
     Comment::observe(CommentObserver::class);
     Sign::observe(SignObserver::class);
-
-    // Gate::guessPolicyNamesUsing(function ($modelClass) {
-    //   dd($modelClass);
-    //   return 'Modules\Edu\Policies\\' . class_basename($modelClass) . 'Policy';
-    // });
   }
 
   /**

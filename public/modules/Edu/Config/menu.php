@@ -40,7 +40,8 @@ return [
   ],
   //会员中心
   'member' => [
-    ['title' => '我的定单', 'to' => '链接地址'],
+    ['title' => '我的定单', 'to' => '/edu/member/order'],
+    ['title' => '会员到期时间', 'to' => '/edu/member/order?t=2'],
   ],
   //个人空间
   'center' => [

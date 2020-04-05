@@ -17,6 +17,7 @@ return [
   ],
   'member' => [
     ['title' => '我的定单', 'url' => '链接地址',  'show' => true],
+    ['title' => '会员到期时间', 'url' => '链接地址',  'show' => true],
   ],
   'center' => [
     ['title' => 'TA的签到', 'url' => '链接地址',  'show' => true],

@@ -17,6 +17,10 @@ use Modules\Edu\Transformers\Front\VideoResource;
  */
 class VideoController extends ApiController
 {
+  public function __construct()
+  {
+    $this->middleware('auth:api')->except('index');
+  }
   public function index()
   {
     $videos = Video::latest('id')->paginate(15);

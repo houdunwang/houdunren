@@ -17,7 +17,7 @@ export default {
   actions: {
     /**
      * 获取用户资料
-     * @param {*} param0
+     * @param {*} param
      */
     get({ commit }) {
       return window.axios.get(`member/get`).then(response => {

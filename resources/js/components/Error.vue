@@ -15,13 +15,17 @@ export default {
           messages = messages.concat(errors[key])
         }
       }
-      this.$alert(messages.join('<br/>'), '温馨提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        dangerouslyUseHTMLString: true,
-        type: 'warning',
-        center: true
+      this.$warning({
+        title: '温馨提示',
+        content: messages.join('<br/>')
       })
+      //   this.$alert(messages.join('<br/>'), '温馨提示', {
+      //     confirmButtonText: '确定',
+      //     cancelButtonText: '取消',
+      //     dangerouslyUseHTMLString: true,
+      //     type: 'warning',
+      //     center: true
+      //   })
     }
   }
 }

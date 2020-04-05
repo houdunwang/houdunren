@@ -6,14 +6,16 @@
 //会员中j心
 @import 'member.scss';
 @import 'user.scss';
-*:focus {
-  border: none;
-  outline: none;
-}
+// *:focus {
+//   border: none;
+//   outline: none;
+// }
 a {
   text-decoration: none !important;
 }
-
+svg {
+  vertical-align: inherit;
+}
 .module {
   height: 100vh;
   .navbar {

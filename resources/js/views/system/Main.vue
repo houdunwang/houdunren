@@ -20,9 +20,14 @@ import Copyright from '@/views/layouts/Copyright'
 import Error from '@/components/Error'
 import store from '@/store'
 export default {
-  async beforeRouteEnter(to, from, next) {
-    await Promise.all([store.dispatch(`user/get`), store.dispatch('systemConfig/get')])
-    next()
+  beforeRouteEnter(to, from, next) {
+    let isLogin = store.getters['user/isLogin']
+    if (!isLogin) {
+      next({ path: 'login', query: { redirect: '/admin' } })
+    }
+    Promise.all([store.dispatch('user/get'), store.dispatch('system/getConfig')]).then(_ => {
+      next()
+    })
   },
   components: {
     Error,

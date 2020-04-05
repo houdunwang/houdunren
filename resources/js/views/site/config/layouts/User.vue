@@ -1,27 +1,23 @@
 <template>
-  <div class="card">
-    <div class="card-body">
-      <el-form :model="form" ref="form" label-width="120px">
-        <el-form-item :label="form.user.bind.title">
-          <el-checkbox-group v-model="form.user.bind.value">
-            <el-checkbox label="email">邮箱</el-checkbox>
-            <el-checkbox label="mobile">手机号</el-checkbox>
-          </el-checkbox-group>
-        </el-form-item>
-        <el-form-item :label="form.user.avatar.title">
-          <el-radio-group v-model="form.user.avatar.value" class="align-baseline">
-            <el-radio label="1">开启</el-radio>
-            <el-radio label="0">关闭</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item :label="form.user.timeout.title" class="col-12 col-md-5">
-          <el-input v-model="form.user.timeout.value" :placeholder="form.user.timeout.desc">
-            <template slot="append">秒</template>
-          </el-input>
-        </el-form-item>
-      </el-form>
-    </div>
-  </div>
+  <a-form-model :model="form" :label-col="{ span: 3 }" :wrapper-col="{ span: 8 }">
+    <a-card title="用户相关配置" size="small" hoverable>
+      <a-form-model-item :label="form.user.bind.title">
+        <a-checkbox-group v-model="form.user.bind.value">
+          <a-checkbox value="email" name="email">邮箱</a-checkbox>
+          <a-checkbox value="mobile" name="mobile">手机号</a-checkbox>
+        </a-checkbox-group>
+      </a-form-model-item>
+      <a-form-model-item :label="form.user.avatar.title">
+        <a-radio-group v-model="form.user.avatar.value">
+          <a-radio value="1">是</a-radio>
+          <a-radio value="0">否</a-radio>
+        </a-radio-group>
+      </a-form-model-item>
+      <a-form-model-item :label="form.user.timeout.title">
+        <a-input suffix="秒" v-model="form.user.timeout.value" />
+      </a-form-model-item>
+    </a-card>
+  </a-form-model>
 </template>
 
 <script>

@@ -16,7 +16,7 @@ class SiteMiddleware
   {
     $site = site(request('site'));
 
-    if ($this->checkRole($role, $site) || isSuperAdmin()) {
+    if ($this->checkRole($role, $site)) {
       return $next($request);
     }
 

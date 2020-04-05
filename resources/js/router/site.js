@@ -8,13 +8,17 @@ import User from '@/views/site/user/Index'
 import UserShow from '@/views/site/user/Show'
 import AdminIndex from '@/views/site/admin/Index'
 import AccessEdit from '@/views/site/access/Edit'
+
 //站点路由
 export default {
   path: '/site',
   component: Main,
+  alias: '/admin',
+  redirect: '/site/index',
+  meta: { auth: true },
   children: [
     //站点管理
-    { name: 'site', path: 'index', component: Index, alias: '/admin' },
+    { name: 'site', path: 'index', component: Index, meta: { auth: true } },
     { name: 'site.add', path: 'add', component: Add },
     { name: 'site.edit', path: ':sid/edit', component: Edit },
     //站点配置
@@ -27,6 +31,6 @@ export default {
     //操作员设置
     { name: 'site.admin', path: ':sid/admin', component: AdminIndex },
     //站点权限
-    { name: 'site.access', path: ':sid/access/:uid', component: AccessEdit }
-  ]
+    { name: 'site.access', path: ':sid/access/:uid', component: AccessEdit },
+  ],
 }

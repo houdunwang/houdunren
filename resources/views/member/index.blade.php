@@ -1,4 +1,4 @@
-@extends('member')
+@extends('layouts/member')
 @push('scripts')
 <script src="/js/manifest.js"></script>
 <script src="/js/vendor.js"></script>

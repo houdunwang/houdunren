@@ -2,10 +2,7 @@
   <div>
     <div class="d-none d-sm-block">
       <div class="row">
-        <div
-          class="col-6 logo"
-          :style="{ color: 'red', backgroundImage: `url(${logo})` }"
-        ></div>
+        <div class="col-6 logo" :style="{ color: 'red', backgroundImage: `url(${logo})` }"></div>
         <div class="col-6 menu">
           <router-link :to="{ name: 'site' }">
             <i class="fa fa-sitemap fa-2x"></i>网站管理
@@ -29,13 +26,9 @@ import _ from 'lodash'
 export default {
   computed: {
     ...mapState('user', { user: 'data' }),
-    ...mapState('systemConfig', { config: 'data' }),
+    ...mapState('system', { config: 'config' }),
     logo() {
-      return _.get(
-        this.config,
-        'base.logo.value',
-        require('@/assets/images/training.png')
-      )
+      return _.get(this.config, 'base.logo.value', require('@/assets/images/training.png'))
     }
   }
 }

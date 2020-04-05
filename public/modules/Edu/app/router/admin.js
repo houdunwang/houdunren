@@ -1,4 +1,4 @@
-import Admin from '@/views/admin/Admin'
+import Main from '@/views/admin/Main'
 import Lesson from '@/views/admin/lesson/Index'
 import LessonCreate from '@/views/admin/lesson/Create'
 import EditCreate from '@/views/admin/lesson/Edit'
@@ -13,7 +13,7 @@ import SubscribeEdit from '@/views/admin/subscribe/Edit'
 //后台路由
 export default {
   path: '/edu/admin',
-  component: Admin,
+  component: Main,
   children: [
     { name: 'admin.lesson', path: 'lesson', component: Lesson, alias: '/edu/admin' },
     { name: 'admin.lesson.create', path: 'lesson/create', component: LessonCreate },

@@ -1,4 +1,4 @@
-@extends('module')
+@extends('layouts.admin')
 @section('content')
 <div id="app">
   <router-view></router-view>

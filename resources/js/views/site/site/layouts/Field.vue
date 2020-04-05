@@ -8,75 +8,62 @@
     </nav>
     <div class="card">
       <div class="card-body">
-        <el-form
-          ref="form"
-          label-width="100px"
-          :rules="rules"
+        <a-form-model
           :model="field"
-          label-position="right"
+          :label-col="{ span: 3 }"
+          :wrapper-col="{ span: 10 }"
+          :rules="rules"
+          ref="form"
         >
-          <el-form-item label="站点名称" prop="name">
-            <el-input
-              v-model="field.name"
-              placeholder="请输入网站标题"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="网站域名" prop="domain">
-            <el-input
-              v-model="field.domain"
-              placeholder="如: https://www.github.com"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="网站描述" prop="description">
-            <el-input
-              type="textarea"
-              rows="3"
-              v-model="field.description"
-              placeholder="网站的简短介绍"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="关键词">
-            <el-input
-              v-model="field.keyword"
-              placeholder="请用半角逗号分隔"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="站点标志">
-            <el-upload
+          <a-form-model-item label="站点名称" prop="name">
+            <a-input v-model="field.name" placeholder="请输入网站标题" />
+          </a-form-model-item>
+          <a-form-model-item label="网站域名" prop="domain">
+            <a-input v-model="field.domain" placeholder="如: https://www.github.com" />
+          </a-form-model-item>
+          <a-form-model-item label="网站描述">
+            <a-input type="textarea" v-model="field.description" placeholder="网站的简短介绍" />
+          </a-form-model-item>
+          <a-form-model-item label="关键词">
+            <a-input v-model="field.logo" placeholder="请用半角逗号分隔" />
+          </a-form-model-item>
+          <a-form-model-item label="网站标志">
+            <a-upload
+              name="file"
+              listType="picture-card"
               class="avatar-uploader"
+              :showUploadList="false"
               :action="`/common/upload/${$route.params.sid}`"
-              accept="image/jpeg, image/png"
-              :show-file-list="false"
-              :on-success="logoUpload"
-              :with-credentials="true"
+              @change="logoUpload"
             >
-              <img v-if="field.logo" :src="field.logo" class="avatar" />
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-            </el-upload>
-          </el-form-item>
-          <el-form-item label="ICP备案号">
-            <el-input v-model="field.icp"></el-input>
-          </el-form-item>
-          <el-form-item label="电话">
-            <el-input v-model="field.tel"></el-input>
-          </el-form-item>
-          <el-form-item label="邮箱">
-            <el-input v-model="field.email"></el-input>
-          </el-form-item>
-          <el-form-item label="统计代码">
-            <el-input
-              type="textarea"
-              :rows="4"
-              v-model="field.counter"
-              placeholder
-            ></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click.prevent="submit('form')"
-              >保存提交</el-button
-            >
-          </el-form-item>
-        </el-form>
+              <img v-if="field.logo" :src="field.logo" alt="avatar" />
+              <div v-else>
+                <!-- <a-icon :type="loading ? 'loading' : 'plus'" /> -->
+                <div class="ant-upload-text">
+                  <i class="fa fa-file-image-o fa-4x" aria-hidden="true"></i>
+                </div>
+              </div>
+            </a-upload>
+          </a-form-model-item>
+          <a-form-model-item label="ICP备案号">
+            <a-input v-model="field.icp" />
+          </a-form-model-item>
+          <a-form-model-item label="电话">
+            <a-input v-model="field.tel" />
+          </a-form-model-item>
+          <a-form-model-item label="邮箱">
+            <a-input v-model="field.email" />
+          </a-form-model-item>
+          <a-form-model-item label="统计代码">
+            <a-input type="textarea" v-model="field.counter" />
+          </a-form-model-item>
+          <a-form-model-item label="统计代码">
+            <a-input type="textarea" v-model="field.counter" />
+          </a-form-model-item>
+          <a-form-model-item :wrapper-col="{ span: 3, offset: 3 }">
+            <a-button type="primary" @click="onSubmit">保存提交</a-button>
+          </a-form-model-item>
+        </a-form-model>
       </div>
     </div>
   </div>
@@ -110,19 +97,19 @@ export default {
   },
   async created() {
     if (this.action === 'edit') {
-      let response = await this.axios
-        .get(`/site/site/${this.$route.params.sid}`)
-        .then(r => r.data.data)
+      let response = await this.axios.get(`/site/site/${this.$route.params.sid}`).then(r => r.data.data)
       this.$set(this, 'field', response)
     }
   },
   methods: {
     //上传标志
-    logoUpload(file) {
-      this.field.logo = file.path
+    logoUpload(response) {
+      if (response.file.status === 'done') {
+        this.field.logo = response.file.response.path
+      }
     },
-    submit(ref) {
-      this.$refs[ref].validate(async valid => {
+    onSubmit(ref) {
+      this.$refs.form.validate(async valid => {
         if (valid) {
           switch (this.action) {
             case 'add':
