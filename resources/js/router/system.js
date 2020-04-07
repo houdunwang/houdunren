@@ -19,7 +19,7 @@ export default {
     { name: 'system', path: 'index', component: Index, alias: '/system' },
     { name: 'system.config', path: 'config', component: Edit },
     { name: 'system.module', path: 'module', component: Module },
-    { name: 'system.package', path: 'package', component: Package },
+    { name: 'system.package', path: 'package/:action', component: Package },
     { name: 'system.package.add', path: 'package/add', component: PackageAdd },
     {
       name: 'system.package.edit',

@@ -1,121 +1,75 @@
 <template>
-  <master>
-    <el-form :model="form" :rules="rules" ref="form" label-width="100px">
-      <div class="card">
-        <div class="card-header">
-          服务套餐管理
-        </div>
-        <div class="card-body">
-          <el-form-item label="套餐名称" prop="name">
-            <el-input v-model="form.name"></el-input>
-          </el-form-item>
-        </div>
-      </div>
-      <div class="card mt-3">
-        <div class="card-header">
-          套餐模块选择
-        </div>
-        <div class="card-body">
-          <el-table :data="moduleList" border stripe ref="multipleTable" @selection-change="handleSelectionChange">
-            <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column width="100" label="图标">
-              <template slot-scope="scope">
-                <el-avatar shape="square" :size="50" :src="scope.row.config.preview"></el-avatar>
-              </template>
-            </el-table-column>
-            <el-table-column
-              v-for="col in columns"
-              :prop="col.prop"
-              :key="col.name"
-              :label="col.label"
-              :width="col.width"
-            >
-            </el-table-column>
-          </el-table>
-        </div>
-      </div>
-      <el-button class="mt-3" type="primary" @click="submit('form')">保存提交</el-button>
-    </el-form>
-  </master>
+  <div>
+    <a-form-model
+      ref="form"
+      :model="form"
+      :rules="rules"
+      :label-col="{ span: 2 }"
+      :wrapper-col="{ span: 8 }"
+    >
+      <a-card size="small" hoverable title="服务套餐管理">
+        <a-form-model-item label="套餐名称" prop="name" ref="name">
+          <a-input v-model="form.name"></a-input>
+        </a-form-model-item>
+      </a-card>
+      <a-card size="small" title="模块选择" bordered hoverable class="mt-2">
+        <a-table
+          size="middle"
+          :pagination="false"
+          :rowKey="(_) => _.model.id"
+          bordered
+          :columns="columns"
+          :dataSource="moduleList"
+          :rowSelection="{selectedRowKeys: moduleIds, onChange: onSelectChange}"
+        ></a-table>
+      </a-card>
+      <a-form-model-item class="mt-2">
+        <a-button type="primary" @click="submit">保存提交</a-button>
+      </a-form-model-item>
+    </a-form-model>
+  </div>
 </template>
 
 <script>
-import Master from './Master'
 export default {
-  props: ['action'],
+  props: {
+    form: {
+      type: Object,
+      default: () => ({ name: '' })
+    },
+    moduleIds: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     return {
-      form: {
-        name: ''
-      },
-      //系统所有模块列表
+      //系统所有模块
       moduleList: [],
-      //静音验证规则
-      rules: {
-        name: [
-          { required: true, message: '套餐名称不能为空', trigger: 'blur' },
-          { min: 3, message: '套餐名称不能少于3个字符', trigger: 'blur' }
-        ]
-      },
-      //模块表格字段
       columns: [
-        { label: '模块名称', prop: 'config.title' },
-        { label: '版本号', prop: 'config.version' }
+        { title: '编号', dataIndex: 'model.id', key: 'model.id', width: 60 },
+        { title: '模块名称', dataIndex: 'config.title', key: 'config.title' },
+        { title: '标识', dataIndex: 'config.name', key: 'config.name' },
+        { title: '版本号', dataIndex: 'config.version', key: 'config.version' }
       ],
-      //选中的模块
-      multipleSelection: []
+      rules: {
+        name: [{ required: true, message: '套餐名称不能为空', trigger: 'blur' }]
+      }
     }
   },
-  components: { Master },
   async created() {
-    //获取所有模块列表
-    let modules = await this.axios('/system/module/installed').then(r => r.data.data)
-
-    this.$set(this, 'moduleList', modules)
-
-    //编辑时获取原数据
-    if (this.action === 'edit') {
-      let id = this.$route.params.id
-      let response = await this.axios.get(`/system/package/${id}`).then(r => r.data.data)
-      this.$set(this.form, 'name', response.name)
-      //设置模块的选中状态
-      this.moduleList.map(m =>
-        response.modules.map(pm => {
-          if (pm.model.id === m.model.id) this.$refs.multipleTable.toggleRowSelection(m)
-        })
-      )
-    }
+    //获取所有模块
+    let response = await this.axios('/system/module/installed')
+    this.$set(this, 'moduleList', response.data)
   },
   methods: {
-    async submit() {
-      //验证成功时提表单
-      this.$refs['form'].validate(async valid => {
-        if (valid) {
-          //发送的表单数据
-          let formData = {
-            name: this.form.name,
-            modules: this.multipleSelection.map(m => m.model.id)
-          }
-          switch (this.action) {
-            case 'add':
-              await this.axios.post('/system/package', formData)
-              this.$message.success('套餐添加成功')
-              this.$router.push({ name: 'system.package' })
-              break
-            case 'edit':
-              await this.axios.put(`/system/package/${this.$route.params.id}`, formData)
-              this.$message.success('套餐编辑成功')
-              this.$router.push({ name: 'system.package' })
-              break
-          }
-        } else {
-          return false
-        }
+    submit() {
+      this.$refs.form.validate(valid => {
+        this.$emit('submit', { ...this.form, modules: this.moduleIds })
       })
     },
-    //多选模块时的处理
-    handleSelectionChange(modules) {
-      this.multipleSelection = modules
+    onSelectChange(selectedRowKeys, selectedRows) {
+      this.$emit('update:moduleIds', selectedRowKeys)
     }
   }
 }

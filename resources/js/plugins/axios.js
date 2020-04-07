@@ -15,7 +15,7 @@ import { message as mm, Modal } from 'ant-design-vue'
 // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 // axios.defaults.withCredentials = true
 //基本地址与超时时间
-let config = { baseURL: '/api/', timeout: 5 * 1000 }
+let config = { baseURL: '/api/', timeout: 10000 }
 const _axios = axios.create(config)
 
 //访问方式
@@ -26,18 +26,18 @@ Object.defineProperties(Vue.prototype, {
   axios: {
     get() {
       return _axios
-    },
+    }
   },
   $axios: {
     get() {
       return _axios
-    },
-  },
+    }
+  }
 })
 
 //请求拦截器
 _axios.interceptors.request.use(
-  function (config) {
+  function(config) {
     //显示加载动画
     loading.show()
     let accessToken = token.get()
@@ -46,19 +46,19 @@ _axios.interceptors.request.use(
     }
     return config
   },
-  function (error) {
+  function(error) {
     return Promise.reject(error)
   }
 )
 
 // 响应拦截器
 _axios.interceptors.response.use(
-  function (response) {
+  function(response) {
     //关闭加载动画
     loading.close()
     return response
   },
-  function (error) {
+  function(error) {
     loading.close()
     if (error && error.response) {
       let status = error.response.status
@@ -66,7 +66,7 @@ _axios.interceptors.response.use(
         case 401:
           //未登录用户跳转到登录页面
           token.del()
-          location.href = '/login'
+          //   location.href = '/login'
           break
         case 422:
           //表单验证错误，错误消息记录到VUEX中
@@ -80,6 +80,7 @@ _axios.interceptors.response.use(
           Modal.warning({
             title: '温馨提示',
             content: message,
+            maskClosable: true
           })
 
         // MessageBox.alert(message, '错误提示', { type: 'error', center: true })
@@ -90,6 +91,7 @@ _axios.interceptors.response.use(
     Modal.warning({
       title: '温馨提示',
       content: '网络超时',
+      maskClosable: true
     })
     return Promise.reject(error)
   }

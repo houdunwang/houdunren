@@ -1,12 +1,26 @@
 <template>
-  <field action="add" />
+  <field @submit="submit" :form="form" :moduleIds.sync="moduleIds" />
 </template>
 
 <script>
 import Field from './layouts/Field'
-
 export default {
-  components: { Field }
+  components: { Field },
+  data() {
+    return {
+      form: { name: '' },
+      moduleIds: []
+    }
+  },
+  methods: {
+    async submit(form) {
+      await this.axios.post(`system/package`, form)
+      this.$success({ title: '温馨提示', content: '添加成功', maskClosable: true })
+      this.form.name = ''
+      this.moduleIds = []
+      this.$emit('load')
+    }
+  }
 }
 </script>
 

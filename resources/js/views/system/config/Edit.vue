@@ -3,7 +3,7 @@
     <div>
       <a-tabs defaultActiveKey="1">
         <a-tab-pane tab="系统配置" key="1">
-          <a-form v-model="form" labelAlign="right" :label-col="{span:2}" :wrapper-col="{span:10}">
+          <a-form v-model="form" labelAlign="right" :label-col="{ span: 2 }" :wrapper-col="{ span: 8 }">
             <a-form-item :label="form.base.name.title">
               <a-input v-model="form.base.name.value"></a-input>
             </a-form-item>
@@ -74,7 +74,7 @@ import { mapState, mapActions } from 'vuex'
 import { system as systemUpload } from '@/services/upload'
 export default {
   computed: {
-    ...mapState('system', { form: 'config' })
+    ...mapState('system', { form: 'config' }),
   },
   methods: {
     ...mapActions('system', { getConfig: 'getConfig' }),
@@ -92,9 +92,9 @@ export default {
       this.$success({
         title: '温馨提示',
         content: '修改成功',
-        maskClosable: true
+        maskClosable: true,
       })
-    }
-  }
+    },
+  },
 }
 </script>

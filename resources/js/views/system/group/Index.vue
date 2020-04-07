@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       groups: [],
-      tableMessage: '加载中...'
+      tableMessage: '加载中...',
     }
   },
   async created() {
@@ -63,14 +63,14 @@ export default {
       this.$confirm('确定删除吗？', '温馨提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        center: true
+        center: true,
       }).then(async () => {
         await this.axios.delete(`/system/group/${g.id}`)
         this.$message.success('删除成功')
         this.$router.go(0)
       })
-    }
-  }
+    },
+  },
 }
 </script>
 

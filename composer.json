@@ -46,7 +46,7 @@
     ],
     "psr-4": {
       "App\\": "app/",
-      "Modules\\": "modules/"
+      "Modules\\": "public/modules/"
     },
     "classmap": [
       "database/seeds",

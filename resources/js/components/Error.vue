@@ -17,15 +17,9 @@ export default {
       }
       this.$warning({
         title: '温馨提示',
-        content: messages.join('<br/>')
+        content: messages.join('<br/>'),
+        maskClosable: true
       })
-      //   this.$alert(messages.join('<br/>'), '温馨提示', {
-      //     confirmButtonText: '确定',
-      //     cancelButtonText: '取消',
-      //     dangerouslyUseHTMLString: true,
-      //     type: 'warning',
-      //     center: true
-      //   })
     }
   }
 }

@@ -1,32 +1,49 @@
 <template>
   <div class="bg-dark">
-    <a-layout id="components-layout-demo-top-side">
-      <a-layout-header class="header">
-        <a-menu theme="dark" mode="horizontal" :style="{ lineHeight: '55px' }">
-          <a-menu-item
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+      <button
+        class="navbar-toggler d-lg-none"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapsibleNavId"
+        aria-controls="collapsibleNavId"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li
+            class="nav-item mr-3"
             :key="index"
             v-for="(menu, index) in menus"
             v-show="menu.check ? user.is_super_admin : true"
           >
-            <router-link :to="menu.url">
+            <router-link class="nav-link font-weight-light" :to="menu.url">
               <i :class="'fa ' + menu.icon"></i>
               {{ menu.title }}
             </router-link>
-          </a-menu-item>
-        </a-menu>
-        <a-dropdown placement="bottomRight">
-          <a class="ant-dropdown-link" @click="e => e.preventDefault()">
+          </li>
+        </ul>
+        <div class="form-inline my-2 my-lg-0 dropdown">
+          <a
+            class="dropdown-toggle text-white"
+            href="#"
+            id="dropdownId"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
             {{ user.name }}
-            <a-icon type="down" />
           </a>
-          <a-menu slot="overlay">
-            <a-menu-item>
-              <a class="dropdown-item" href="/logout">退出登录</a>
-            </a-menu-item>
-          </a-menu>
-        </a-dropdown>
-      </a-layout-header>
-    </a-layout>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownId">
+            <a class="dropdown-item" href="#">退出登录</a>
+          </div>
+        </div>
+      </div>
+    </nav>
   </div>
 </template>
 <script>
@@ -39,45 +56,45 @@ export default {
           title: '站点管理',
           icon: 'fa fa-sitemap',
           url: { name: 'site' },
-          check: false
+          check: false,
         },
         {
           title: '模块管理',
           icon: 'fa-cubes',
           url: { name: 'system.module' },
-          check: true
+          check: true,
         },
         {
           title: '服务套餐',
           icon: 'fa-comments-o',
           url: { name: 'system.package' },
-          check: true
+          check: true,
         },
         {
           title: '系统设置',
           icon: 'fa-support',
           url: { name: 'system' },
-          check: true
+          check: true,
         },
         {
           title: '会员组',
           icon: 'fa-users',
           url: { name: 'system.group' },
-          check: true
+          check: true,
         },
         {
           title: '更新缓存',
           icon: 'fa-bitbucket',
           url: { name: 'system.cache.update' },
-          check: true
-        }
-      ]
+          check: true,
+        },
+      ],
     }
   },
   computed: {
-    ...mapState('user', { user: 'data' })
+    ...mapState('user', { user: 'data' }),
   },
-  methods: {}
+  methods: {},
 }
 </script>
 <style lang="scss" scoped>

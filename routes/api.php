@@ -10,7 +10,7 @@ Route::group(['namespace' => 'Common', 'prefix' => 'common'], function () {
 });
 
 //系统
-Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'System', 'prefix' => 'system'], function () {
+Route::group(['middleware' => ['auth:sanctum', 'system'], 'namespace' => 'System', 'prefix' => 'system'], function () {
     //套餐管理
     Route::resource('package', 'PackageController')->except(['edit', 'create']);
     //系统配置
@@ -24,8 +24,6 @@ Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'System', 'prefix' 
     Route::post('module', 'ModuleController@install');
     Route::delete('module/{name}', 'ModuleController@uninstall');
     Route::get('module/installed', 'ModuleController@installed');
-    //管理员
-    Route::get('user', 'UserController@get');
 });
 
 //站点

@@ -10,7 +10,7 @@
           <router-link :to="{ name: 'system' }" v-if="user.is_super_admin">
             <i class="fa fa-support fa-2x"></i>系统设置
           </router-link>
-          <a href="/logout">
+          <a href="#" @click.prevent="logout">
             <i class="fa fa-sign-out fa-2x"></i>
             退出
           </a>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import _ from 'lodash'
 export default {
   computed: {
@@ -30,6 +30,9 @@ export default {
     logo() {
       return _.get(this.config, 'base.logo.value', require('@/assets/images/training.png'))
     }
+  },
+  methods: {
+    ...mapActions('user', ['logout'])
   }
 }
 </script>

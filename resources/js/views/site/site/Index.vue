@@ -11,14 +11,8 @@
             <div class="col-6">
               <span class="text-dark small mr-1">套餐:</span>
               <span v-for="group in site.admin.group" :key="group.id">
-                <span
-                  class="text-secondary mr-1 border p-1 bg-light rounded"
-                  v-for="p in group.packages"
-                  :key="p.id"
-                >
-                  {{
-                  p.name
-                  }}
+                <span class="text-secondary mr-1 border p-1 bg-light rounded" v-for="p in group.packages" :key="p.id">
+                  {{ p.name }}
                 </span>
               </span>
             </div>
@@ -36,7 +30,7 @@
         <div class="card-body">
           <div class="text-secondary text-dark d-flex align-items-center">
             <i class="fa fa-rss fa-3x mr-3"></i>
-            <router-link :to="{ name: 'site.module', params: { sid: site.id } }">
+            <router-link :to="{ name: 'site.module', params: { sid: site.id } }" class="text-dark">
               <span class="h4">{{ site.name }}</span>
             </router-link>
           </div>
@@ -67,8 +61,8 @@
                 :to="{
                   name: 'site.config',
                   params: {
-                    sid: site.id
-                  }
+                    sid: site.id,
+                  },
                 }"
               >
                 <i class="fa fa-check-circle-o" aria-hidden="true"></i>
@@ -84,8 +78,8 @@
                 :to="{
                   name: 'site.user',
                   params: {
-                    sid: site.id
-                  }
+                    sid: site.id,
+                  },
                 }"
               >
                 <i class="fa fa-user-o"></i>
@@ -96,8 +90,8 @@
                 :to="{
                   name: 'site.admin',
                   params: {
-                    sid: site.id
-                  }
+                    sid: site.id,
+                  },
                 }"
                 class="text-muted mr-2"
               >
@@ -109,8 +103,8 @@
                 :to="{
                   name: 'site.edit',
                   params: {
-                    sid: site.id
-                  }
+                    sid: site.id,
+                  },
                 }"
                 class="text-muted mr-2"
               >
@@ -134,7 +128,7 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      data: []
+      data: [],
     }
   },
   async created() {
@@ -142,7 +136,7 @@ export default {
     this.$set(this, 'data', response.data)
   },
   computed: {
-    ...mapState('user', { user: 'data' })
+    ...mapState('user', { user: 'data' }),
   },
   methods: {
     //站长或超级管理员验证
@@ -153,7 +147,7 @@ export default {
       this.$confirm(`确定删除[${site.name}]吗?`, '温馨提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        type: 'warning'
+        type: 'warning',
       }).then(async () => {
         await this.axios.delete(`/site/site/${site.id}`)
         this.$message.success('删除成功')
@@ -163,7 +157,7 @@ export default {
     async updateSiteCache(site) {
       await this.axios.put(`site/${site.id}/cache`)
       this.$message.success('站点缓存更新成功', 100)
-    }
-  }
+    },
+  },
 }
 </script>

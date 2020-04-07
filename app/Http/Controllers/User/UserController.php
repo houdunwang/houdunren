@@ -21,7 +21,7 @@ class UserController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except(['login']);
+        $this->middleware('auth:sanctum')->except('login');
     }
     /**
      * 获取用户资料
@@ -45,7 +45,7 @@ class UserController extends ApiController
         if ($userService->login($request->all())) {
             $user = auth()->user();
             $token  = $user->createToken('token');
-            return response()->json(['token' => $token->plainTextToken, 'user' => $user]);
+            return response()->json(['token' => $token->plainTextToken]);
         } else {
             return $this->error('帐号或密码错误');
         }
@@ -57,7 +57,7 @@ class UserController extends ApiController
      */
     public function logout()
     {
-        auth()->logout();
+        Auth::user()->tokens()->delete();
         return $this->success('退出成功');
     }
 

@@ -31,6 +31,6 @@ export default {
     //操作员设置
     { name: 'site.admin', path: ':sid/admin', component: AdminIndex },
     //站点权限
-    { name: 'site.access', path: ':sid/access/:uid', component: AccessEdit },
-  ],
+    { name: 'site.access', path: ':sid/access/:uid', component: AccessEdit }
+  ]
 }

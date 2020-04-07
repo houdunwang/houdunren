@@ -5,7 +5,7 @@
         <a-input v-model="form.username" placeholder="请输入帐号|邮箱|手机号" />
       </a-form-model-item>
       <a-form-model-item label="密码" prop="password">
-        <a-input type="text" v-model="form.password" placeholder="请输入登录密码" />
+        <a-input type="password" v-model="form.password" placeholder="请输入登录密码" />
       </a-form-model-item>
       <a-form-model-item label="验证码" prop="captcha" class="captcha">
         <a-input placeholder="请输入图形验证码" v-model="form.captcha">
@@ -42,9 +42,9 @@ export default {
         captcha: [{ required: true, message: '验证码不能为空' }]
       },
       form: {
-        username: 'admin',
-        password: 'admin888',
-        captcha: 'eee'
+        username: '',
+        password: '',
+        captcha: ''
       }
     }
   },
