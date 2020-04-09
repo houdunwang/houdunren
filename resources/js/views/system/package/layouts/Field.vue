@@ -4,8 +4,8 @@
       ref="form"
       :model="form"
       :rules="rules"
-      :label-col="{ span: 2 }"
-      :wrapper-col="{ span: 8 }"
+      :label-col="{ span: 3 }"
+      :wrapper-col="{ span: 10 }"
     >
       <a-card size="small" hoverable title="服务套餐管理">
         <a-form-model-item label="套餐名称" prop="name" ref="name">
@@ -14,13 +14,13 @@
       </a-card>
       <a-card size="small" title="模块选择" bordered hoverable class="mt-2">
         <a-table
+          bordered
           size="middle"
           :pagination="false"
-          :rowKey="(_) => _.model.id"
-          bordered
+          :rowKey="_ => _.model.id"
           :columns="columns"
           :dataSource="moduleList"
-          :rowSelection="{selectedRowKeys: moduleIds, onChange: onSelectChange}"
+          :rowSelection="{ selectedRowKeys: form.modules, onChange: onSelectChange }"
         ></a-table>
       </a-card>
       <a-form-model-item class="mt-2">
@@ -31,15 +31,17 @@
 </template>
 
 <script>
+const form = {
+  name: '',
+  modules: []
+}
 export default {
   props: {
+    action: String,
+    method: { type: String, default: 'post' },
     form: {
       type: Object,
-      default: () => ({ name: '' })
-    },
-    moduleIds: {
-      type: Array,
-      default: () => []
+      default: () => form
     }
   },
   data() {
@@ -59,20 +61,22 @@ export default {
   },
   async created() {
     //获取所有模块
-    let response = await this.axios('/system/module/installed')
+    let response = await this.axios(`/system/module/installed`)
     this.$set(this, 'moduleList', response.data)
   },
   methods: {
     submit() {
-      this.$refs.form.validate(valid => {
-        this.$emit('submit', { ...this.form, modules: this.moduleIds })
+      this.$refs.form.validate(async valid => {
+        if (valid) {
+          await this.axios[this.method](this.action, this.form)
+          this.$message.success('保存成功')
+          this.$router.push({ name: 'system.package' })
+        }
       })
     },
     onSelectChange(selectedRowKeys, selectedRows) {
-      this.$emit('update:moduleIds', selectedRowKeys)
+      this.$set(this.form, 'modules', selectedRowKeys)
     }
   }
 }
 </script>
-
-<style scoped></style>

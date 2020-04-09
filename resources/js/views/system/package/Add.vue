@@ -1,11 +1,15 @@
 <template>
-  <field @submit="submit" :form="form" :moduleIds.sync="moduleIds" />
+  <master>
+    <field action="system/package" />
+  </master>
+  <!-- <field @submit="submit" :form="form" :moduleIds.sync="moduleIds" /> -->
 </template>
 
 <script>
 import Field from './layouts/Field'
+import Master from './layouts/Master'
 export default {
-  components: { Field },
+  components: { Field, Master },
   data() {
     return {
       form: { name: '' },

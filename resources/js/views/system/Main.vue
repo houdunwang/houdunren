@@ -21,9 +21,7 @@ import Error from '@/components/Error'
 import store from '@/store'
 export default {
   beforeRouteEnter(to, from, next) {
-    Promise.all([store.dispatch('user/get'), store.dispatch('system/getConfig')])
-      .then(_ => next())
-      .catch(() => next({ path: 'login', query: { redirect: to.path } }))
+    store.dispatch('system/getConfig').then(_ => next())
   },
   components: {
     Error,

@@ -1,6 +1,5 @@
 <template>
   <div class="loading" v-if="loading">
-    {{ loading ?'true':'false'}}33
     <a-spin size="large" />
     <div class="bg"></div>
   </div>

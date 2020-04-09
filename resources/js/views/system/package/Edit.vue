@@ -1,41 +1,24 @@
 <template>
-  <div>
-    <field @submit="submit" :form.sync="form" :moduleIds.sync="moduleIds" v-if="form.name" />
-  </div>
+  <master>
+    <field v-if="form.id" :action="`system/package/${form.id}`" :form="form" method="put" />
+  </master>
 </template>
 
 <script>
 import Field from './layouts/Field'
-
+import Master from './layouts/Master'
 export default {
-  props: {
-    id: {
-      type: Number,
-      default: 0
-    }
-  },
-  components: { Field },
+  components: { Field, Master },
   data() {
     return {
-      form: { name: '' },
+      form: {},
       moduleIds: []
     }
   },
   async created() {
-    let response = await this.axios.get(`system/package/${this.id}`)
-    this.$set(
-      this,
-      'moduleIds',
-      response.data.data.modules.map(m => m.model.id)
-    )
-    this.$set(this, 'form', response.data.data)
-  },
-  methods: {
-    async submit(form) {
-      await this.axios.put(`system/package/${this.id}`, form)
-      this.$emit('update:id', 0)
-      this.$emit('load')
-    }
+    let response = await this.axios.get(`system/package/${this.$route.params.id}`)
+    response.data.modules = response.data.modules.map(m => m.model.id)
+    this.$set(this, 'form', response.data)
   }
 }
 </script>

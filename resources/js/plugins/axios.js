@@ -82,8 +82,6 @@ _axios.interceptors.response.use(
             content: message,
             maskClosable: true
           })
-
-        // MessageBox.alert(message, '错误提示', { type: 'error', center: true })
       }
       return Promise.reject(error)
     }

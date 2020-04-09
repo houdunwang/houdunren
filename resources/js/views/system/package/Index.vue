@@ -1,41 +1,82 @@
 <template>
-  <div>
-    <a-tabs type="card" defaultActiveKey="index" v-model="activeKey">
-      <a-tab-pane tab="套餐列表" key="index">
-        <list :key="loadList" :id.sync="id" />
-      </a-tab-pane>
-      <a-tab-pane tab="添加套餐" key="add">
-        <add @load="load" />
-      </a-tab-pane>
-      <a-tab-pane tab="编辑套餐" key="edit" v-if="id">
-        <edit :id.sync="id" @load="load" />
-      </a-tab-pane>
-    </a-tabs>
-  </div>
+  <master>
+    <a-table
+      :dataSource="packages"
+      :pagination="false"
+      :columns="columns"
+      rowKey="id"
+      size="middle"
+      :loading="loading"
+      bordered
+      :locale="{emptyText:'加载中'}"
+    >
+      <div slot="modules" slot-scope="scope">
+        <span
+          class="badge badge-info mr-1"
+          v-for="m in scope.modules"
+          :key="m.model.id"
+        >{{ m.model.title }}</span>
+      </div>
+      <div slot="group" slot-scope="scope">
+        <span class="badge badge-success" v-for="g in scope.group" :key="g.id">{{ g.name }}</span>
+      </div>
+      <div slot="manage" slot-scope="scope">
+        <div class="btn-group btn-group-sm">
+          <router-link
+            :to="{name:'system.package.edit',params:{id:scope.id}}"
+            class="btn btn-outline-info"
+          >编辑</router-link>
+          <button
+            class="btn btn-outline-success"
+            v-if="!scope.system"
+            @click.prevent="del(scope)"
+          >删除</button>
+        </div>
+      </div>
+    </a-table>
+  </master>
 </template>
-
 <script>
-import Add from './Add'
-import List from './List'
-import Edit from './Edit'
 import Master from './layouts/Master'
+const columns = [
+  { title: '编号', dataIndex: 'id', key: 'id' },
+  { title: '套餐名称', dataIndex: 'name', key: 'name' },
+  { title: '模块', scopedSlots: { customRender: 'modules' } },
+  { title: '会员组', scopedSlots: { customRender: 'group' } },
+  { title: '操作', width: 120, scopedSlots: { customRender: 'manage' } }
+]
 export default {
-  components: { Add, List, Edit, Master },
+  components: { Master },
   data() {
     return {
-      loadList: 1,
-      id: 0,
-      activeKey: 'index'
+      packages: [],
+      columns,
+      loading: true
     }
   },
-  watch: {
-    id(id) {
-      this.activeKey = id ? 'edit' : 'index'
-    }
+  async created() {
+    this.load()
   },
   methods: {
-    load() {
-      this.loadList++
+    async load() {
+      let response = await this.axios.get(`system/package`)
+      this.$set(this, 'packages', response.data.data)
+      this.loading = false
+    },
+    del(model) {
+      this.$confirm({
+        content: '确定删除吗?',
+        onOk: () => {
+          return this.axios
+            .delete(`system/package/${model.id}`)
+            .then(() => {
+              this.$message.success('删除成功')
+              this.load()
+            })
+            .catch(() => {})
+        },
+        onCancel() {}
+      })
     }
   }
 }
