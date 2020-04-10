@@ -6,6 +6,14 @@ use App\Http\Controllers\ApiController;
 use App\Models\Site;
 use App\Services\UploadService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\Exception\IniSizeFileException;
+use Symfony\Component\HttpFoundation\File\Exception\FormSizeFileException;
+use Symfony\Component\HttpFoundation\File\Exception\PartialFileException;
+use Symfony\Component\HttpFoundation\File\Exception\NoFileException;
+use Symfony\Component\HttpFoundation\File\Exception\CannotWriteFileException;
+use Symfony\Component\HttpFoundation\File\Exception\NoTmpDirFileException;
+use Symfony\Component\HttpFoundation\File\Exception\ExtensionFileException;
 
 /**
  * 系统模块文件上传
@@ -15,19 +23,44 @@ use Illuminate\Http\Request;
 class UploadController extends ApiController
 {
     /**
-     * 系统应用文件上传
+     * 后台系统上传
      * @param Request $request
-     * @param UploadService $upload
-     *
-     * @return string
+     * @param UploadService $uploadService
+     * @return void
+     * @throws FileException
+     * @throws IniSizeFileException
+     * @throws FormSizeFileException
+     * @throws PartialFileException
+     * @throws NoFileException
+     * @throws CannotWriteFileException
+     * @throws NoTmpDirFileException
+     * @throws ExtensionFileException
      */
-    public function store(Request $request,  UploadService $uploadService, Site $site = null)
+    public function system(Request $request,  UploadService $uploadService)
     {
         $file = $request->file('file');
-        $action = $site ? 'site' : 'local';
-        return $uploadService->$action($file, auth()->user(), $site);
+        return $uploadService->local($file, auth()->user());
     }
-
+    /**
+     * 站点文件上传
+     * @param Request $request
+     * @param UploadService $uploadService
+     * @param Site $site
+     * @return void
+     * @throws FileException
+     * @throws IniSizeFileException
+     * @throws FormSizeFileException
+     * @throws PartialFileException
+     * @throws NoFileException
+     * @throws CannotWriteFileException
+     * @throws NoTmpDirFileException
+     * @throws ExtensionFileException
+     */
+    public function site(Request $request,  UploadService $uploadService, Site $site)
+    {
+        $file = $request->file('file');
+        return $uploadService->site($file, auth()->user(), $site);
+    }
     /**
      * 头像上传
      * @param UploadService $uploadService

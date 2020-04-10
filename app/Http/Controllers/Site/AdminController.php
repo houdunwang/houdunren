@@ -33,7 +33,7 @@ class AdminController extends ApiController
     public function search(Request $request, Site $site, UserService $userService)
     {
         $users = $userService->getByKeyword($site, $request->input('content'), ['user']);
-        return $this->json(UserResource::collection($users));
+        return UserResource::collection($users);
     }
 
     /**

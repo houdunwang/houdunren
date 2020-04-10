@@ -1,6 +1,6 @@
 <template>
   <div v-if="form.user">
-    <a-tabs defaultActiveKey="7" type="card">
+    <a-tabs defaultActiveKey="1" type="card">
       <a-tab-pane key="1" tab="用户相关">
         <user :form.sync="form" />
       </a-tab-pane>
@@ -23,8 +23,7 @@
         <sms :form.sync="form" />
       </a-tab-pane>
     </a-tabs>
-
-    <a-form-item :wrapper-col="{ span: 1, offset: 3 }" class="mt-3">
+    <a-form-item class="mt-3">
       <a-button type="primary" @click="submit">保存提交</a-button>
     </a-form-item>
   </div>

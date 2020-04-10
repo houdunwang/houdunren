@@ -10,6 +10,9 @@ return [
     ],
     //站点配置
     'site' => [
+        'base' => [
+            'logo' => ['value' => [], 'title' => '网站标志', 'desc' => ''],
+        ],
         'user' => [
             'bind' => ['value' => [], 'title' => '用户必须绑定', 'desc' => ''],
             'avatar' => ['value' => 0, 'title' => '必须设置头像', 'desc' => '如果用户没设置头像将强制要求设置'],

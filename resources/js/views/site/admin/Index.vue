@@ -7,7 +7,9 @@
       <a class="nav-link active" href="#">操作员管理</a>
     </nav>
 
-    <div class="alert alert-info" role="alert">操作员不允许删除公众号和编辑公众号资料</div>
+    <div class="alert alert-info" role="alert">
+      操作员不允许删除公众号和编辑公众号资料， 只能对站点模块进行管理
+    </div>
     <a-table
       :dataSource="users"
       :pagination="false"
@@ -15,7 +17,7 @@
       :columns="columns"
       rowKey="id"
       size="middle"
-      :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
+      :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
     >
       <div slot="avatar" slot-scope="user">
         <a-avatar :src="user.avatar" />
@@ -26,7 +28,8 @@
           <router-link
             :to="{ name: 'site.access', params: { uid: user.id, sid: $route.params.sid } }"
             class="btn btn-outline-success"
-          >设置权限</router-link>
+            >设置权限</router-link
+          >
           <button @click="delOperator(user)" class="btn btn-outline-info" type="button">删除操作员</button>
         </div>
       </div>
@@ -81,13 +84,13 @@ export default {
       this.$set(this, 'selectedRowKeys', selectedRowKeys)
     },
     //删除操作员
-    async delOperator(user) {
+    delOperator(user) {
       this.$confirm({
         content: `确定删除操作员吗？`,
-        onOk: () => {
-          this.axios.delete(`site/${this.$route.params.sid}/admin`, { data: { users: [user.id] } })
-          this.load()
+        onOk: async () => {
+          await this.axios.delete(`site/${this.$route.params.sid}/admin`, { data: { users: [user.id] } })
           this.$message.success('操作员删除成功')
+          this.load()
         }
       })
     },

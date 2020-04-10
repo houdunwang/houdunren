@@ -30,12 +30,12 @@ class GroupController extends ApiController
     {
         $group->fill($request->all())->save();
         $group->package()->sync($request->input('package_id', []));
-        return $this->success('', $group);
+        return $this->json($group);
     }
 
     public function show(Group $group)
     {
-        return $this->success('', new GroupResource($group));
+        return $this->json(new GroupResource($group));
     }
 
     public function update(GroupRequest $request, Group $group)

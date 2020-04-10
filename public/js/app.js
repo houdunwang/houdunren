@@ -7450,18 +7450,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var columns = [{
   title: '编号',
   dataIndex: 'id',
@@ -7504,29 +7492,31 @@ var columns = [{
     };
   },
   created: function created() {
-    this.get();
+    this.load({});
   },
   methods: {
-    get: function get() {
+    load: function load(_ref) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response;
+        var _ref$current, current, response;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return _this.axios.post(_this.action, {
+                _ref$current = _ref.current, current = _ref$current === void 0 ? 1 : _ref$current;
+                _context.next = 3;
+                return _this.axios.post("".concat(_this.action, "?page=").concat(current), {
                   content: _this.searchWord
                 });
 
-              case 2:
+              case 3:
                 response = _context.sent;
 
                 _this.$set(_this, 'users', response.data);
 
-              case 4:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -8736,6 +8726,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 var columns = [{
   title: '编号',
@@ -8838,33 +8831,41 @@ var columns = [{
     delOperator: function delOperator(user) {
       var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _this3.$confirm({
-                  content: "\u786E\u5B9A\u5220\u9664\u64CD\u4F5C\u5458\u5417\uFF1F",
-                  onOk: function onOk() {
-                    _this3.axios["delete"]("site/".concat(_this3.$route.params.sid, "/admin"), {
+      this.$confirm({
+        content: "\u786E\u5B9A\u5220\u9664\u64CD\u4F5C\u5458\u5417\uFF1F",
+        onOk: function () {
+          var _onOk = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+              while (1) {
+                switch (_context3.prev = _context3.next) {
+                  case 0:
+                    _context3.next = 2;
+                    return _this3.axios["delete"]("site/".concat(_this3.$route.params.sid, "/admin"), {
                       data: {
                         users: [user.id]
                       }
                     });
 
+                  case 2:
+                    _this3.$message.success('操作员删除成功');
+
                     _this3.load();
 
-                    _this3.$message.success('操作员删除成功');
-                  }
-                });
+                  case 4:
+                  case "end":
+                    return _context3.stop();
+                }
+              }
+            }, _callee3);
+          }));
 
-              case 1:
-              case "end":
-                return _context3.stop();
-            }
+          function onOk() {
+            return _onOk.apply(this, arguments);
           }
-        }, _callee3);
-      }))();
+
+          return onOk;
+        }()
+      });
     },
     //批量删除操作员
     removeAllOperator: function removeAllOperator() {
@@ -8970,7 +8971,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
 //
 //
 //
@@ -9812,7 +9812,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -9824,20 +9823,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return _this.axios.get('site/site');
+              _this.load();
 
-            case 2:
-              response = _context.sent;
-
-              _this.$set(_this, 'data', response.data);
-
-            case 4:
+            case 1:
             case "end":
               return _context.stop();
           }
@@ -9849,29 +9841,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     user: 'data'
   })),
   methods: {
-    //站长或超级管理员验证
-    checkAdmin: function checkAdmin(site) {
-      return site.admin.id === this.user.id || this.user.id === 1;
-    },
-    delSite: function delSite(site) {
+    load: function load() {
       var _this2 = this;
 
-      this.$confirm("\u786E\u5B9A\u5220\u9664[".concat(site.name, "]\u5417?"), '温馨提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this2.axios["delete"]("/site/site/".concat(site.id));
+                return _this2.axios.get('site/site');
 
               case 2:
-                _this2.$message.success('删除成功');
+                response = _context2.sent;
 
-                _this2.$router.go('/admin');
+                _this2.$set(_this2, 'data', response.data);
 
               case 4:
               case "end":
@@ -9879,29 +9864,78 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2);
-      })));
+      }))();
     },
-    updateSiteCache: function updateSiteCache(site) {
+    //站长或超级管理员验证
+    checkAdmin: function checkAdmin(site) {
+      return site.admin.id === this.user.id || this.user.id === 1;
+    },
+    delSite: function delSite(site) {
       var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      this.$confirm({
+        content: "\u786E\u5B9A\u5220\u9664[".concat(site.name, "]\u5417?"),
+        onOk: function () {
+          var _onOk = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+              while (1) {
+                switch (_context3.prev = _context3.next) {
+                  case 0:
+                    _context3.next = 2;
+                    return _this3.axios["delete"]("/site/site/".concat(site.id));
+
+                  case 2:
+                    _this3.$message.success('删除成功');
+
+                    _this3.load();
+
+                  case 4:
+                  case "end":
+                    return _context3.stop();
+                }
+              }
+            }, _callee3);
+          }));
+
+          function onOk() {
+            return _onOk.apply(this, arguments);
+          }
+
+          return onOk;
+        }()
+      });
+    },
+    updateSiteCache: function updateSiteCache(site) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                _context3.next = 2;
-                return _this3.axios.put("site/".concat(site.id, "/cache"));
+                _context4.next = 2;
+                return _this4.axios.put("site/".concat(site.id, "/cache"));
 
               case 2:
-                _this3.$message.success('站点缓存更新成功', 100);
+                _this4.$message.success('站点缓存更新成功', 100);
 
               case 3:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }))();
+    },
+    //站点套餐
+    packages: function packages(site) {
+      var packages = [];
+      site.admin.group.map(function (g) {
+        return g["package"].map(function (p) {
+          return packages.push(p.name);
+        });
+      });
+      return Array.from(new Set(packages));
     }
   }
 });
@@ -9993,15 +10027,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['action'],
+  props: {
+    action: String,
+    method: {
+      type: String,
+      "default": 'post'
+    }
+  },
   data: function data() {
     return {
-      field: {
-        activeName: 'base',
+      form: {
         name: '',
         keyword: '',
         description: '',
@@ -10053,7 +10089,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 3:
               response = _context.sent;
 
-              _this.$set(_this, 'field', response);
+              _this.$set(_this, 'form', response);
 
             case 5:
             case "end":
@@ -10067,7 +10103,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     //上传标志
     logoUpload: function logoUpload(response) {
       if (response.file.status === 'done') {
-        this.field.logo = response.file.response.path;
+        this.form.logo = response.file.response.path;
       }
     },
     onSubmit: function onSubmit(ref) {
@@ -10080,7 +10116,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               switch (_context2.prev = _context2.next) {
                 case 0:
                   if (!valid) {
-                    _context2.next = 16;
+                    _context2.next = 14;
                     break;
                   }
 
@@ -10090,7 +10126,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 case 4:
                   _context2.next = 6;
-                  return _this2.axios.post("/site/site", _this2.field);
+                  return _this2.axios.post("/site/site", _this2.form);
 
                 case 6:
                   _this2.$message.success('添加成功');
@@ -10101,7 +10137,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 case 9:
                   _context2.next = 11;
-                  return _this2.axios.put("/site/site/".concat(_this2.field.id), _this2.field);
+                  return _this2.axios.put("/site/site/".concat(_this2.form.id), _this2.form);
 
                 case 11:
                   _this2.$message.success('更新成功');
@@ -10111,13 +10147,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   return _context2.abrupt("break", 14);
 
                 case 14:
-                  _context2.next = 17;
-                  break;
-
-                case 16:
-                  return _context2.abrupt("return", false);
-
-                case 17:
                 case "end":
                   return _context2.stop();
               }
@@ -10473,7 +10502,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _services_upload__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/services/upload */ "./resources/js/services/upload.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -10528,36 +10556,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('system', {
@@ -10643,7 +10641,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _layouts_Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layouts/Field */ "./resources/js/views/system/group/layouts/Field.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _layouts_Field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layouts/Field */ "./resources/js/views/system/group/layouts/Field.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -10651,7 +10657,42 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Field: _layouts_Field__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Field: _layouts_Field__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      form: {}
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var group;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.axios.get("system/group/".concat(_this.$route.params.id)).then(function (r) {
+                return r.data;
+              });
+
+            case 2:
+              group = _context.sent;
+              group.package_id = group.packages.map(function (p) {
+                return p.id;
+              });
+
+              _this.$set(_this, 'form', group);
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   }
 });
 
@@ -10818,39 +10859,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -65698,7 +65706,7 @@ var render = function() {
               placeholder: "请输入用户名、手机号或用户编号进行搜索",
               enterButton: ""
             },
-            on: { search: _vm.get },
+            on: { search: _vm.load },
             model: {
               value: _vm.searchWord,
               callback: function($$v) {
@@ -65711,43 +65719,59 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("a-table", {
-        attrs: {
-          dataSource: _vm.users,
-          size: "middle",
-          bordered: "",
-          rowKey: "id",
-          pagination: false,
-          columns: _vm.columns,
-          rowSelection: {
-            selectedRowKeys: _vm.selectedRowKeys,
-            onChange: _vm.onSelectChange
-          }
-        },
-        scopedSlots: _vm._u([
-          {
-            key: "avatar",
-            fn: function(user) {
-              return _c(
-                "div",
-                {},
-                [
-                  _c("a-avatar", { attrs: { size: "small", src: user.avatar } })
-                ],
-                1
-              )
-            }
-          },
-          {
-            key: "created_at",
-            fn: function(user) {
-              return _c("div", {}, [
-                _vm._v(_vm._s(_vm._f("dateFormat")(user.created_at, "now")))
-              ])
-            }
-          }
-        ])
-      }),
+      _vm.users.data
+        ? _c("a-table", {
+            attrs: {
+              dataSource: _vm.users.data,
+              size: "middle",
+              bordered: "",
+              pagination: {
+                total: _vm.users.meta.total,
+                current: _vm.users.meta.current_page,
+                hideOnSinglePage: true
+              },
+              rowKey: "id",
+              columns: _vm.columns,
+              rowSelection: {
+                selectedRowKeys: _vm.selectedRowKeys,
+                onChange: _vm.onSelectChange
+              }
+            },
+            on: { change: _vm.load },
+            scopedSlots: _vm._u(
+              [
+                {
+                  key: "avatar",
+                  fn: function(user) {
+                    return _c(
+                      "div",
+                      {},
+                      [
+                        _c("a-avatar", {
+                          attrs: { size: "small", src: user.avatar }
+                        })
+                      ],
+                      1
+                    )
+                  }
+                },
+                {
+                  key: "created_at",
+                  fn: function(user) {
+                    return _c("div", {}, [
+                      _vm._v(
+                        _vm._s(_vm._f("dateFormat")(user.created_at, "now"))
+                      )
+                    ])
+                  }
+                }
+              ],
+              null,
+              false,
+              2282681831
+            )
+          })
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "mt-3 text-right" }, [
         _c(
@@ -67030,7 +67054,9 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "alert alert-info", attrs: { role: "alert" } }, [
-        _vm._v("操作员不允许删除公众号和编辑公众号资料")
+        _vm._v(
+          "\n    操作员不允许删除公众号和编辑公众号资料， 只能对站点模块进行管理\n  "
+        )
       ]),
       _vm._v(" "),
       _c("a-table", {
@@ -67193,7 +67219,7 @@ var render = function() {
         [
           _c(
             "a-tabs",
-            { attrs: { defaultActiveKey: "7", type: "card" } },
+            { attrs: { defaultActiveKey: "1", type: "card" } },
             [
               _c(
                 "a-tab-pane",
@@ -67312,10 +67338,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "a-form-item",
-            {
-              staticClass: "mt-3",
-              attrs: { "wrapper-col": { span: 1, offset: 3 } }
-            },
+            { staticClass: "mt-3" },
             [
               _c(
                 "a-button",
@@ -68593,22 +68616,21 @@ var render = function() {
                         _vm._v("套餐:")
                       ]),
                       _vm._v(" "),
-                      _vm._l(site.admin.group, function(group) {
+                      _vm._l(_vm.packages(site), function(p, i) {
                         return _c(
                           "span",
-                          { key: group.id },
-                          _vm._l(group.packages, function(p) {
-                            return _c(
-                              "span",
-                              {
-                                key: p.id,
-                                staticClass:
-                                  "text-secondary mr-1 border p-1 bg-light rounded"
-                              },
-                              [_vm._v(_vm._s(p.name))]
+                          {
+                            key: i,
+                            staticClass:
+                              "text-secondary mr-1 border p-1 bg-light rounded"
+                          },
+                          [
+                            _vm._v(
+                              "\n              " +
+                                _vm._s(p) +
+                                "\n              "
                             )
-                          }),
-                          0
+                          ]
                         )
                       })
                     ],
@@ -68937,7 +68959,7 @@ var render = function() {
             {
               ref: "form",
               attrs: {
-                model: _vm.field,
+                model: _vm.form,
                 "label-col": { span: 3 },
                 "wrapper-col": { span: 10 },
                 rules: _vm.rules
@@ -68951,11 +68973,11 @@ var render = function() {
                   _c("a-input", {
                     attrs: { placeholder: "请输入网站标题" },
                     model: {
-                      value: _vm.field.name,
+                      value: _vm.form.name,
                       callback: function($$v) {
-                        _vm.$set(_vm.field, "name", $$v)
+                        _vm.$set(_vm.form, "name", $$v)
                       },
-                      expression: "field.name"
+                      expression: "form.name"
                     }
                   })
                 ],
@@ -68969,11 +68991,11 @@ var render = function() {
                   _c("a-input", {
                     attrs: { placeholder: "如: https://www.github.com" },
                     model: {
-                      value: _vm.field.domain,
+                      value: _vm.form.domain,
                       callback: function($$v) {
-                        _vm.$set(_vm.field, "domain", $$v)
+                        _vm.$set(_vm.form, "domain", $$v)
                       },
-                      expression: "field.domain"
+                      expression: "form.domain"
                     }
                   })
                 ],
@@ -68987,11 +69009,11 @@ var render = function() {
                   _c("a-input", {
                     attrs: { type: "textarea", placeholder: "网站的简短介绍" },
                     model: {
-                      value: _vm.field.description,
+                      value: _vm.form.description,
                       callback: function($$v) {
-                        _vm.$set(_vm.field, "description", $$v)
+                        _vm.$set(_vm.form, "description", $$v)
                       },
-                      expression: "field.description"
+                      expression: "form.description"
                     }
                   })
                 ],
@@ -69005,11 +69027,11 @@ var render = function() {
                   _c("a-input", {
                     attrs: { placeholder: "请用半角逗号分隔" },
                     model: {
-                      value: _vm.field.logo,
+                      value: _vm.form.keyword,
                       callback: function($$v) {
-                        _vm.$set(_vm.field, "logo", $$v)
+                        _vm.$set(_vm.form, "keyword", $$v)
                       },
-                      expression: "field.logo"
+                      expression: "form.keyword"
                     }
                   })
                 ],
@@ -69028,14 +69050,14 @@ var render = function() {
                         name: "file",
                         listType: "picture-card",
                         showUploadList: false,
-                        action: "/common/upload/" + _vm.$route.params.sid
+                        action: "/api/common/upload/system"
                       },
                       on: { change: _vm.logoUpload }
                     },
                     [
-                      _vm.field.logo
+                      _vm.form.logo
                         ? _c("img", {
-                            attrs: { src: _vm.field.logo, alt: "avatar" }
+                            attrs: { src: _vm.form.logo, alt: "avatar" }
                           })
                         : _c("div", [
                             _c("div", { staticClass: "ant-upload-text" }, [
@@ -69057,11 +69079,11 @@ var render = function() {
                 [
                   _c("a-input", {
                     model: {
-                      value: _vm.field.icp,
+                      value: _vm.form.icp,
                       callback: function($$v) {
-                        _vm.$set(_vm.field, "icp", $$v)
+                        _vm.$set(_vm.form, "icp", $$v)
                       },
-                      expression: "field.icp"
+                      expression: "form.icp"
                     }
                   })
                 ],
@@ -69074,11 +69096,11 @@ var render = function() {
                 [
                   _c("a-input", {
                     model: {
-                      value: _vm.field.tel,
+                      value: _vm.form.tel,
                       callback: function($$v) {
-                        _vm.$set(_vm.field, "tel", $$v)
+                        _vm.$set(_vm.form, "tel", $$v)
                       },
-                      expression: "field.tel"
+                      expression: "form.tel"
                     }
                   })
                 ],
@@ -69091,11 +69113,11 @@ var render = function() {
                 [
                   _c("a-input", {
                     model: {
-                      value: _vm.field.email,
+                      value: _vm.form.email,
                       callback: function($$v) {
-                        _vm.$set(_vm.field, "email", $$v)
+                        _vm.$set(_vm.form, "email", $$v)
                       },
-                      expression: "field.email"
+                      expression: "form.email"
                     }
                   })
                 ],
@@ -69109,29 +69131,11 @@ var render = function() {
                   _c("a-input", {
                     attrs: { type: "textarea" },
                     model: {
-                      value: _vm.field.counter,
+                      value: _vm.form.counter,
                       callback: function($$v) {
-                        _vm.$set(_vm.field, "counter", $$v)
+                        _vm.$set(_vm.form, "counter", $$v)
                       },
-                      expression: "field.counter"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "a-form-model-item",
-                { attrs: { label: "统计代码" } },
-                [
-                  _c("a-input", {
-                    attrs: { type: "textarea" },
-                    model: {
-                      value: _vm.field.counter,
-                      callback: function($$v) {
-                        _vm.$set(_vm.field, "counter", $$v)
-                      },
-                      expression: "field.counter"
+                      expression: "form.counter"
                     }
                   })
                 ],
@@ -69695,7 +69699,7 @@ var render = function() {
                               name: "file",
                               listType: "picture-card",
                               showUploadList: false,
-                              action: "/api/common/upload"
+                              action: "/api/common/upload/system"
                             },
                             on: { change: _vm.handleChange }
                           },
@@ -69813,7 +69817,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("field", { attrs: { action: "edit" } })
+  return _vm.form.id
+    ? _c("field", {
+        attrs: {
+          action: "system/group/" + _vm.$route.params.id,
+          method: "put",
+          form: _vm.form
+        }
+      })
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -70496,7 +70508,7 @@ var render = function() {
                 _vm._l(scope.group, function(g) {
                   return _c(
                     "span",
-                    { key: g.id, staticClass: "badge badge-success" },
+                    { key: g.id, staticClass: "badge badge-success mr-1" },
                     [_vm._v(_vm._s(g.name))]
                   )
                 }),
@@ -72176,72 +72188,6 @@ __webpack_require__.r(__webpack_exports__);
     window.localStorage.removeItem('access_token');
   }
 });
-
-/***/ }),
-
-/***/ "./resources/js/services/upload.js":
-/*!*****************************************!*\
-  !*** ./resources/js/services/upload.js ***!
-  \*****************************************/
-/*! exports provided: system, upload, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "system", function() { return system; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "upload", function() { return upload; });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//上传统一处理
-function handle(_x, _x2) {
-  return _handle.apply(this, arguments);
-} //系统应用上传
-
-
-function _handle() {
-  _handle = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(url, file) {
-    var form;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            form = new FormData();
-            form.append('file', file);
-            _context.next = 4;
-            return window.axios.post(url, form, {
-              'Content-Type': 'multipart/form-data'
-            });
-
-          case 4:
-            return _context.abrupt("return", _context.sent);
-
-          case 5:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-  return _handle.apply(this, arguments);
-}
-
-function system(file) {
-  return handle("/system/upload", file);
-} //站点上传
-
-
-function upload(file) {
-  return handle("/site/upload", file);
-}
-
-
-/* harmony default export */ __webpack_exports__["default"] = (upload);
 
 /***/ }),
 

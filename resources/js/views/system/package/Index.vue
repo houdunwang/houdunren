@@ -18,7 +18,7 @@
         >{{ m.model.title }}</span>
       </div>
       <div slot="group" slot-scope="scope">
-        <span class="badge badge-success" v-for="g in scope.group" :key="g.id">{{ g.name }}</span>
+        <span class="badge badge-success mr-1" v-for="g in scope.group" :key="g.id">{{ g.name }}</span>
       </div>
       <div slot="manage" slot-scope="scope">
         <div class="btn-group btn-group-sm">

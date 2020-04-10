@@ -17,10 +17,10 @@ class CaptchaController extends Controller
      * BASE64验证码
      * @return void
      */
-    public function make(CaptchaService $captchaService)
-    {
-        return $captchaService->make();
-    }
+    // public function make(CaptchaService $captchaService)
+    // {
+    //     return $captchaService->make();
+    // }
     /**
      * 图片验证码
      * @return array|ImageManager|mixed

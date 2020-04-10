@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Common', 'prefix' => 'common'], function () {
-    Route::post('code', 'CodeController@send')->middleware('auth:api');
-    Route::post('upload/{site?}', 'UploadController@store')->middleware('auth:sanctum');
+    Route::post('code', 'CodeController@send')->middleware('auth:sanctum');
+    Route::post('upload/system', 'UploadController@system')->middleware('auth:sanctum');
+    Route::post('upload/site/{site}', 'UploadController@site')->middleware('auth:sanctum');
     Route::get('captcha', 'CaptchaController@make')->middleware('auth:sanctum');
     Route::get('captcha-image', 'CaptchaController@image');
 });

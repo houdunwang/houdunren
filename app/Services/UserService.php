@@ -96,7 +96,7 @@ class UserService
      *
      * @return App\Model\User
      */
-    public function getByKeyword(Site $site, ?string $content, $role = ['admin', 'operator', 'user'])
+    public function getByKeyword(Site $site, ?string $content, $role = ['admin', 'operator', 'user'], $row = 10)
     {
         return $site->user()
             ->wherePivotIn('role', $role)
@@ -108,6 +108,6 @@ class UserService
                         },
                         ['name', 'email', 'phone', 'users.id'],
                     );
-            })->get();
+            })->paginate($row);
     }
 }

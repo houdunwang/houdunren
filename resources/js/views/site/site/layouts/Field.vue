@@ -9,23 +9,23 @@
     <div class="card">
       <div class="card-body">
         <a-form-model
-          :model="field"
+          :model="form"
           :label-col="{ span: 3 }"
           :wrapper-col="{ span: 10 }"
           :rules="rules"
           ref="form"
         >
           <a-form-model-item label="站点名称" prop="name">
-            <a-input v-model="field.name" placeholder="请输入网站标题" />
+            <a-input v-model="form.name" placeholder="请输入网站标题" />
           </a-form-model-item>
           <a-form-model-item label="网站域名" prop="domain">
-            <a-input v-model="field.domain" placeholder="如: https://www.github.com" />
+            <a-input v-model="form.domain" placeholder="如: https://www.github.com" />
           </a-form-model-item>
           <a-form-model-item label="网站描述">
-            <a-input type="textarea" v-model="field.description" placeholder="网站的简短介绍" />
+            <a-input type="textarea" v-model="form.description" placeholder="网站的简短介绍" />
           </a-form-model-item>
           <a-form-model-item label="关键词">
-            <a-input v-model="field.logo" placeholder="请用半角逗号分隔" />
+            <a-input v-model="form.keyword" placeholder="请用半角逗号分隔" />
           </a-form-model-item>
           <a-form-model-item label="网站标志">
             <a-upload
@@ -33,10 +33,10 @@
               listType="picture-card"
               class="avatar-uploader"
               :showUploadList="false"
-              :action="`/common/upload/${$route.params.sid}`"
+              :action="`/api/common/upload/system`"
               @change="logoUpload"
             >
-              <img v-if="field.logo" :src="field.logo" alt="avatar" />
+              <img v-if="form.logo" :src="form.logo" alt="avatar" />
               <div v-else>
                 <!-- <a-icon :type="loading ? 'loading' : 'plus'" /> -->
                 <div class="ant-upload-text">
@@ -46,19 +46,16 @@
             </a-upload>
           </a-form-model-item>
           <a-form-model-item label="ICP备案号">
-            <a-input v-model="field.icp" />
+            <a-input v-model="form.icp" />
           </a-form-model-item>
           <a-form-model-item label="电话">
-            <a-input v-model="field.tel" />
+            <a-input v-model="form.tel" />
           </a-form-model-item>
           <a-form-model-item label="邮箱">
-            <a-input v-model="field.email" />
+            <a-input v-model="form.email" />
           </a-form-model-item>
           <a-form-model-item label="统计代码">
-            <a-input type="textarea" v-model="field.counter" />
-          </a-form-model-item>
-          <a-form-model-item label="统计代码">
-            <a-input type="textarea" v-model="field.counter" />
+            <a-input type="textarea" v-model="form.counter" />
           </a-form-model-item>
           <a-form-model-item :wrapper-col="{ span: 3, offset: 3 }">
             <a-button type="primary" @click="onSubmit">保存提交</a-button>
@@ -71,11 +68,10 @@
 
 <script>
 export default {
-  props: ['action'],
+  props: { action: String, method: { type: String, default: 'post' } },
   data() {
     return {
-      field: {
-        activeName: 'base',
+      form: {
         name: '',
         keyword: '',
         description: '',
@@ -98,14 +94,14 @@ export default {
   async created() {
     if (this.action === 'edit') {
       let response = await this.axios.get(`/site/site/${this.$route.params.sid}`).then(r => r.data.data)
-      this.$set(this, 'field', response)
+      this.$set(this, 'form', response)
     }
   },
   methods: {
     //上传标志
     logoUpload(response) {
       if (response.file.status === 'done') {
-        this.field.logo = response.file.response.path
+        this.form.logo = response.file.response.path
       }
     },
     onSubmit(ref) {
@@ -113,18 +109,16 @@ export default {
         if (valid) {
           switch (this.action) {
             case 'add':
-              await this.axios.post(`/site/site`, this.field)
+              await this.axios.post(`/site/site`, this.form)
               this.$message.success('添加成功')
               this.$router.push('/site/index')
               break
             case 'edit':
-              await this.axios.put(`/site/site/${this.field.id}`, this.field)
+              await this.axios.put(`/site/site/${this.form.id}`, this.form)
               this.$message.success('更新成功')
               this.$router.push('/site/index')
               break
           }
-        } else {
-          return false
         }
       })
     }

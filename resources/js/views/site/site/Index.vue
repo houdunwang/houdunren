@@ -10,12 +10,11 @@
           <div class="row">
             <div class="col-6">
               <span class="text-dark small mr-1">套餐:</span>
-              <span v-for="group in site.admin.group" :key="group.id">
-                <span
-                  class="text-secondary mr-1 border p-1 bg-light rounded"
-                  v-for="p in group.packages"
-                  :key="p.id"
-                >{{ p.name }}</span>
+              <span v-for="(p, i) in packages(site)" :key="i" class="text-secondary mr-1 border p-1 bg-light rounded">
+                {{ p }}
+                <!-- <span class="text-secondary mr-1 border p-1 bg-light rounded" v-for="p in group.package" :key="p.id">{{
+                  p.name
+                }}</span> -->
               </span>
             </div>
             <div class="col-6 text-right">
@@ -63,8 +62,8 @@
                 :to="{
                   name: 'site.config',
                   params: {
-                    sid: site.id,
-                  },
+                    sid: site.id
+                  }
                 }"
               >
                 <i class="fa fa-check-circle-o" aria-hidden="true"></i>
@@ -80,8 +79,8 @@
                 :to="{
                   name: 'site.user',
                   params: {
-                    sid: site.id,
-                  },
+                    sid: site.id
+                  }
                 }"
               >
                 <i class="fa fa-user-o"></i>
@@ -92,8 +91,8 @@
                 :to="{
                   name: 'site.admin',
                   params: {
-                    sid: site.id,
-                  },
+                    sid: site.id
+                  }
                 }"
                 class="text-muted mr-2"
               >
@@ -105,8 +104,8 @@
                 :to="{
                   name: 'site.edit',
                   params: {
-                    sid: site.id,
-                  },
+                    sid: site.id
+                  }
                 }"
                 class="text-muted mr-2"
               >
@@ -134,31 +133,39 @@ export default {
     }
   },
   async created() {
-    let response = await this.axios.get('site/site')
-    this.$set(this, 'data', response.data)
+    this.load()
   },
   computed: {
     ...mapState('user', { user: 'data' })
   },
   methods: {
+    async load() {
+      let response = await this.axios.get('site/site')
+      this.$set(this, 'data', response.data)
+    },
     //站长或超级管理员验证
     checkAdmin(site) {
       return site.admin.id === this.user.id || this.user.id === 1
     },
     delSite(site) {
-      this.$confirm(`确定删除[${site.name}]吗?`, '温馨提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(async () => {
-        await this.axios.delete(`/site/site/${site.id}`)
-        this.$message.success('删除成功')
-        this.$router.go('/admin')
+      this.$confirm({
+        content: `确定删除[${site.name}]吗?`,
+        onOk: async () => {
+          await this.axios.delete(`/site/site/${site.id}`)
+          this.$message.success('删除成功')
+          this.load()
+        }
       })
     },
     async updateSiteCache(site) {
       await this.axios.put(`site/${site.id}/cache`)
       this.$message.success('站点缓存更新成功', 100)
+    },
+    //站点套餐
+    packages(site) {
+      let packages = []
+      site.admin.group.map(g => g.package.map(p => packages.push(p.name)))
+      return Array.from(new Set(packages))
     }
   }
 }

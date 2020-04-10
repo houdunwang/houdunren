@@ -18,53 +18,53 @@ use Illuminate\Support\Facades\DB;
  */
 class AccessController extends ApiController
 {
-  public function __construct()
-  {
-    $this->middleware('site:admin');
-    $this->authorizeResource(Site::class, 'site');
-  }
+    public function __construct()
+    {
+        $this->middleware('site:admin');
+        $this->authorizeResource(Site::class, 'site');
+    }
 
-  /**
-   * 站点权限列表
-   * @param Site $site
-   * @param ModuleService $ModuleService
-   *
-   * @return mixed
-   */
-  public function site(Site $site, ModuleService $ModuleService, AccessService $AccessService)
-  {
-    $AccessService->updateSitePermission($site);
-    return $this->success('', $ModuleService->getSiteModule($site));
-  }
+    /**
+     * 站点权限列表
+     * @param Site $site
+     * @param ModuleService $ModuleService
+     *
+     * @return mixed
+     */
+    public function site(Site $site, ModuleService $ModuleService, AccessService $AccessService)
+    {
+        $AccessService->updateSitePermission($site);
+        return $this->json($ModuleService->getSiteModule($site));
+    }
 
-  /**
-   * 获取用户站点权限
-   * @param Site $site
-   * @param User $user
-   *
-   * @return JsonResponse
-   */
-  public function userPermission(Site $site, User $user, AccessService $AccessService)
-  {
-    $permissions = $AccessService->getUserPermissionNames($site, $user);
-    return $this->success('用户拥有的站点权限', $permissions);
-  }
+    /**
+     * 获取用户站点权限
+     * @param Site $site
+     * @param User $user
+     *
+     * @return JsonResponse
+     */
+    public function userPermission(Site $site, User $user, AccessService $AccessService)
+    {
+        $permissions = $AccessService->getUserPermissionNames($site, $user);
+        return $this->json($permissions);
+    }
 
-  /**
-   * 更新用户站点权限
-   * @param Request $request
-   * @param Site $site
-   * @param User $user
-   *
-   * @return JsonResponse
-   */
-  public function update(Request $request, Site $site, User $user)
-  {
-    DB::table('model_has_permissions')->where('model_id', $user['id'])
-      ->whereIn('permission_id', $site->permissions->pluck('id'))
-      ->delete();
+    /**
+     * 更新用户站点权限
+     * @param Request $request
+     * @param Site $site
+     * @param User $user
+     *
+     * @return JsonResponse
+     */
+    public function update(Request $request, Site $site, User $user)
+    {
+        DB::table('model_has_permissions')->where('model_id', $user['id'])
+            ->whereIn('permission_id', $site->permissions->pluck('id'))
+            ->delete();
 
-    $user->givePermissionTo($request->input('permissions'));
-    return $this->success('权限更新成功');
-  }
+        $user->givePermissionTo($request->input('permissions'));
+        return $this->success('权限更新成功');
+    }
 }
