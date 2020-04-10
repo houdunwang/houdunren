@@ -11,9 +11,11 @@
             <div class="col-6">
               <span class="text-dark small mr-1">套餐:</span>
               <span v-for="group in site.admin.group" :key="group.id">
-                <span class="text-secondary mr-1 border p-1 bg-light rounded" v-for="p in group.packages" :key="p.id">
-                  {{ p.name }}
-                </span>
+                <span
+                  class="text-secondary mr-1 border p-1 bg-light rounded"
+                  v-for="p in group.packages"
+                  :key="p.id"
+                >{{ p.name }}</span>
               </span>
             </div>
             <div class="col-6 text-right">
@@ -128,7 +130,7 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      data: [],
+      data: []
     }
   },
   async created() {
@@ -136,7 +138,7 @@ export default {
     this.$set(this, 'data', response.data)
   },
   computed: {
-    ...mapState('user', { user: 'data' }),
+    ...mapState('user', { user: 'data' })
   },
   methods: {
     //站长或超级管理员验证
@@ -147,7 +149,7 @@ export default {
       this.$confirm(`确定删除[${site.name}]吗?`, '温馨提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        type: 'warning',
+        type: 'warning'
       }).then(async () => {
         await this.axios.delete(`/site/site/${site.id}`)
         this.$message.success('删除成功')
@@ -157,7 +159,7 @@ export default {
     async updateSiteCache(site) {
       await this.axios.put(`site/${site.id}/cache`)
       this.$message.success('站点缓存更新成功', 100)
-    },
-  },
+    }
+  }
 }
 </script>

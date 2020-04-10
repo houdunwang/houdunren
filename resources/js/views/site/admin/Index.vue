@@ -7,111 +7,107 @@
       <a class="nav-link active" href="#">操作员管理</a>
     </nav>
 
-    <el-alert class="mb-3" title=" 操作员不允许删除公众号和编辑公众号资料" show-icon type="info" :closable="true"></el-alert>
-
-    <div class="card shadow-sm rounded-0">
-      <div class="card-body">
-        <el-table
-          size="small"
-          :data="users"
-          ref="multipleTable"
-          @selection-change="handleSelectionChange"
-          tooltip-effect="dark"
-          :empty-text="loadMessage"
-        >
-          <el-table-column type="selection" width="60"></el-table-column>
-          <el-table-column prop="id" label="编号" width="60"></el-table-column>
-          <el-table-column prop="name" label="昵称"></el-table-column>
-          <el-table-column prop="real_name" label="真实姓名"></el-table-column>
-          <el-table-column prop="email" label="邮箱" min-width="160"></el-table-column>
-          <el-table-column prop="mobile" label="手机号" width="150"></el-table-column>
-          <el-table-column label="会员组" width="150">
-            <template slot-scope="scope">
-              <span v-for="group in scope.row.group" :key="group.id">{{group.name}}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="注册时间">
-            <template slot-scope="scope">{{ scope.row.created_at | dateFormat }}</template>
-          </el-table-column>
-
-          <el-table-column aligh="right" fixed="right" width="200">
-            <template slot-scope="scope">
-              <el-button-group>
-                <el-button
-                  size="mini"
-                  @click="$router.push({ name: 'site.access', params: { uid: scope.row.id, sid: $route.params.sid } })"
-                >设置权限</el-button>
-                <el-button size="mini" @click="delOperator(scope.row)">删除操作员</el-button>
-              </el-button-group>
-            </template>
-          </el-table-column>
-        </el-table>
+    <div class="alert alert-info" role="alert">操作员不允许删除公众号和编辑公众号资料</div>
+    <a-table
+      :dataSource="users"
+      :pagination="false"
+      bordered
+      :columns="columns"
+      rowKey="id"
+      size="middle"
+      :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
+    >
+      <div slot="avatar" slot-scope="user">
+        <a-avatar :src="user.avatar" />
       </div>
-      <div class="card-footer text-muted">
-        <el-button size="small" @click="showSelectUserModel = true">设置操作员</el-button>
-        <el-button size="small" @click="removeAllOperator">批量删除操作员</el-button>
+      <div slot="created_at" slot-scope="user">{{ user.created_at | dateFormat('now') }}</div>
+      <div slot="manage" slot-scope="user">
+        <div class="btn-group btn-group-sm">
+          <router-link
+            :to="{ name: 'site.access', params: { uid: user.id, sid: $route.params.sid } }"
+            class="btn btn-outline-success"
+          >设置权限</router-link>
+          <button @click="delOperator(user)" class="btn btn-outline-info" type="button">删除操作员</button>
+        </div>
       </div>
+    </a-table>
+
+    <div class="mt-3">
+      <button @click="showSelectUserModel = true" class="btn btn-sm btn-success">设置操作员</button>
+      <button @click.prevent="removeAllOperator" class="btn btn-sm btn-danger">批量删除操作员</button>
     </div>
-    <el-dialog title="选择用户" :visible.sync="showSelectUserModel" width="60%">
+    <a-modal title="选择用户" v-model="showSelectUserModel" :footer="null" width="80%">
       <user-component
         @confirm="setOperator"
         @cancel="closeUserModal"
         :action="`site/${this.$route.params.sid}/admin/search`"
       ></user-component>
-    </el-dialog>
+    </a-modal>
   </div>
 </template>
 
 <script>
 import UserComponent from '@/components/User'
+const columns = [
+  { title: '编号', width: 80, dataIndex: 'id', key: 'id' },
+  { title: '头像', width: 80, scopedSlots: { customRender: 'avatar' } },
+  { title: '用户名', dataIndex: 'name', key: 'name' },
+  { title: '电话', dataIndex: 'phone', key: 'phone' },
+  { title: '邮箱', dataIndex: 'email', key: 'email' },
+  { title: '注册时间', width: 80, scopedSlots: { customRender: 'created_at' } },
+  { title: '', width: 160, scopedSlots: { customRender: 'manage' } }
+]
 export default {
   components: { UserComponent },
   data() {
-    return { showSelectUserModel: false, users: [], multipleSelection: [], loadMessage: '加载中...' }
+    return {
+      users: [],
+      columns,
+      selectedRowKeys: [],
+      showSelectUserModel: false
+    }
   },
   async created() {
-    this.loadAdmin()
+    this.load()
   },
   methods: {
-    //加载操盘员
-    async loadAdmin() {
+    //加载操作员
+    async load() {
       let response = await this.axios.get(`site/${this.$route.params.sid}/admin`)
-      this.users = response.data.data
-      this.users.length || (this.loadMessage = ' 暂无操作员')
+      this.$set(this, 'users', response.data)
     },
     //多选择用户
-    handleSelectionChange(val) {
-      this.multipleSelection = val
+    onSelectChange(selectedRowKeys) {
+      this.$set(this, 'selectedRowKeys', selectedRowKeys)
     },
     //删除操作员
     async delOperator(user) {
-      this.$confirm(`确定删除操作员吗？`, { type: 'warning' })
-        .then(async () => {
-          await this.axios.delete(`site/${this.$route.params.sid}/admin`, {
-            data: { users: [user.id] }
-          })
-          this.loadAdmin()
-        })
-        .catch(() => {})
+      this.$confirm({
+        content: `确定删除操作员吗？`,
+        onOk: () => {
+          this.axios.delete(`site/${this.$route.params.sid}/admin`, { data: { users: [user.id] } })
+          this.load()
+          this.$message.success('操作员删除成功')
+        }
+      })
     },
     //批量删除操作员
     async removeAllOperator() {
-      if (this.multipleSelection.length == 0) {
-        this.$message({ message: '你没有选择任何操作员', type: 'warning' })
+      if (this.selectedRowKeys.length == 0) {
+        this.$message.warning({ content: '你没有选择任何操作员' })
       } else {
-        await this.axios.delete(`site/${this.$route.params.sid}/admin`, {
-          data: { users: this.multipleSelection.map(u => u.id) }
-        })
-        this.loadAdmin()
+        await this.axios.delete(`site/${this.$route.params.sid}/admin`, { data: { users: this.selectedRowKeys } })
+        this.$message.success('操作员删除成功')
+        this.load()
       }
     },
     //设置操作员
     async setOperator(users) {
       await this.axios.post(`site/${this.$route.params.sid}/admin`, {
-        users: users.map(u => u.id)
+        users
       })
       this.showSelectUserModel = false
-      this.loadAdmin()
+      this.load()
     },
     //子组件关闭用户选择模态框时的事件
     closeUserModal() {
@@ -120,5 +116,4 @@ export default {
   }
 }
 </script>
-
 <style scoped></style>

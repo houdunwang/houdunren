@@ -1,5 +1,5 @@
 <template>
-  <field action="add" />
+  <field action="system/group" />
 </template>
 
 <script>
@@ -9,5 +9,3 @@ export default {
   components: { Field }
 }
 </script>
-
-<style scoped></style>

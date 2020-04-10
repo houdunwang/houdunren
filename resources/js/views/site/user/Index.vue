@@ -1,56 +1,44 @@
 <template>
   <div>
-    <nav class="nav nav-tabs mb-2">
-      <router-link class="nav-link" :to="{ name: 'site' }">
+    <nav class="nav nav-tabs nav-stacked mb-3">
+      <router-link :to="{name:'site'}" class="nav-link">
         <i class="fa fa-home" aria-hidden="true"></i>
       </router-link>
       <router-link
+        :to="{name:'site.user',params:{sid:$route.params.sid}}"
         class="nav-link active"
-        :to="{ name: 'site.user', params: { sid: $route.params.sid } }"
+        href="#"
+        active
       >用户列表</router-link>
     </nav>
-    <div class="card">
-      <div class="card-body">
-        <el-table size="small" :data="users" fit :empty-text="loadMessage">
-          <el-table-column prop="id" label="编号" width="60"></el-table-column>
-          <el-table-column prop="name" label="昵称"></el-table-column>
-          <el-table-column prop="real_name" label="真实姓名"></el-table-column>
-          <el-table-column prop="email" label="邮箱" min-width="180"></el-table-column>
-          <el-table-column prop="mobile" label="手机号"></el-table-column>
-          <el-table-column prop="group.name" label="会员组"></el-table-column>
-          <el-table-column label="注册时间">
-            <template slot-scope="scope">{{ scope.row.created_at | dateFormat }}</template>
-          </el-table-column>
-          <el-table-column aligh="right" fixed="right" width="80">
-            <template slot-scope="scope">
-              <el-button-group>
-                <el-button
-                  size="mini"
-                  @click="
-                    $router.push({ name: 'site.user.show', params: { uid: scope.row.id, sid: $route.params.sid } })
-                  "
-                >查看</el-button>
-              </el-button-group>
-            </template>
-          </el-table-column>
-        </el-table>
+    <a-table :pagination="false" :dataSource="users" :columns="columns" rowKey="id">
+      <div slot="avatar" slot-scope="user">
+        <a-avatar size="small" :src="user.avatar" />
       </div>
-    </div>
+      <div slot="created_at" slot-scope="user">{{ user.created_at |dateFormat('Y/M/D') }}</div>
+    </a-table>
   </div>
 </template>
 
 <script>
+const columns = [
+  { title: '编号', width: 80, dataIndex: 'id', key: 'id' },
+  { title: '头像', width: 80, scopedSlots: { customRender: 'avatar' } },
+  { title: '昵称', dataIndex: 'name', key: 'name' },
+  { title: '邮箱', dataIndex: 'email', key: 'email' },
+  { title: '手机号', dataIndex: 'phone', key: 'phone' },
+  { title: '注册时间', scopedSlots: { customRender: 'created_at' } }
+]
 export default {
   data() {
     return {
       users: [],
-      loadMessage: '加载中...'
+      columns
     }
   },
   async created() {
     let response = await this.axios.get(`site/${this.$route.params.sid}/user`)
-    this.users = response.data.data
-    this.users.length == 0 && (this.loadMessage = '暂无用户')
+    this.$set(this, 'users', response.data)
   }
 }
 </script>

@@ -7445,6 +7445,50 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var columns = [{
+  title: '编号',
+  dataIndex: 'id',
+  key: 'id'
+}, {
+  title: '头像',
+  scopedSlots: {
+    customRender: 'avatar'
+  }
+}, {
+  title: '用户名',
+  dataIndex: 'name',
+  key: 'name'
+}, {
+  title: '邮箱',
+  dataIndex: 'email',
+  key: 'email'
+}, {
+  title: '手机号',
+  dataIndex: 'phone',
+  key: 'phone'
+}, {
+  title: '注册时间',
+  scopedSlots: {
+    customRender: 'created_at'
+  }
+}];
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     action: String,
@@ -7455,8 +7499,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       searchWord: '',
       users: [],
-      multipleSelection: []
+      selectedRowKeys: [],
+      columns: columns
     };
+  },
+  created: function created() {
+    this.get();
   },
   methods: {
     get: function get() {
@@ -7476,7 +7524,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context.sent;
 
-                _this.$set(_this, 'users', response.data.data);
+                _this.$set(_this, 'users', response.data);
 
               case 4:
               case "end":
@@ -7486,8 +7534,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    handleSelectionChange: function handleSelectionChange(val) {
-      this.multipleSelection = val;
+    onSelectChange: function onSelectChange(selectedRowKeys) {
+      this.selectedRowKeys = selectedRowKeys;
     }
   }
 });
@@ -8688,33 +8736,53 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
+var columns = [{
+  title: '编号',
+  width: 80,
+  dataIndex: 'id',
+  key: 'id'
+}, {
+  title: '头像',
+  width: 80,
+  scopedSlots: {
+    customRender: 'avatar'
+  }
+}, {
+  title: '用户名',
+  dataIndex: 'name',
+  key: 'name'
+}, {
+  title: '电话',
+  dataIndex: 'phone',
+  key: 'phone'
+}, {
+  title: '邮箱',
+  dataIndex: 'email',
+  key: 'email'
+}, {
+  title: '注册时间',
+  width: 80,
+  scopedSlots: {
+    customRender: 'created_at'
+  }
+}, {
+  title: '',
+  width: 160,
+  scopedSlots: {
+    customRender: 'manage'
+  }
+}];
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     UserComponent: _components_User__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
-      showSelectUserModel: false,
       users: [],
-      multipleSelection: [],
-      loadMessage: '加载中...'
+      columns: columns,
+      selectedRowKeys: [],
+      showSelectUserModel: false
     };
   },
   created: function created() {
@@ -8725,7 +8793,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _this.loadAdmin();
+              _this.load();
 
             case 1:
             case "end":
@@ -8736,8 +8804,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
-    //加载操盘员
-    loadAdmin: function loadAdmin() {
+    //加载操作员
+    load: function load() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
@@ -8751,10 +8819,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context2.sent;
-                _this2.users = response.data.data;
-                _this2.users.length || (_this2.loadMessage = ' 暂无操作员');
 
-              case 5:
+                _this2.$set(_this2, 'users', response.data);
+
+              case 4:
               case "end":
                 return _context2.stop();
             }
@@ -8763,44 +8831,76 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     //多选择用户
-    handleSelectionChange: function handleSelectionChange(val) {
-      this.multipleSelection = val;
+    onSelectChange: function onSelectChange(selectedRowKeys) {
+      this.$set(this, 'selectedRowKeys', selectedRowKeys);
     },
     //删除操作员
     delOperator: function delOperator(user) {
       var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _this3.$confirm({
+                  content: "\u786E\u5B9A\u5220\u9664\u64CD\u4F5C\u5458\u5417\uFF1F",
+                  onOk: function onOk() {
+                    _this3.axios["delete"]("site/".concat(_this3.$route.params.sid, "/admin"), {
+                      data: {
+                        users: [user.id]
+                      }
+                    });
+
+                    _this3.load();
+
+                    _this3.$message.success('操作员删除成功');
+                  }
+                });
+
+              case 1:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    //批量删除操作员
+    removeAllOperator: function removeAllOperator() {
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _this3.$confirm("\u786E\u5B9A\u5220\u9664\u64CD\u4F5C\u5458\u5417\uFF1F", {
-                  type: 'warning'
-                }).then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-                    while (1) {
-                      switch (_context3.prev = _context3.next) {
-                        case 0:
-                          _context3.next = 2;
-                          return _this3.axios["delete"]("site/".concat(_this3.$route.params.sid, "/admin"), {
-                            data: {
-                              users: [user.id]
-                            }
-                          });
+                if (!(_this4.selectedRowKeys.length == 0)) {
+                  _context4.next = 4;
+                  break;
+                }
 
-                        case 2:
-                          _this3.loadAdmin();
+                _this4.$message.warning({
+                  content: '你没有选择任何操作员'
+                });
 
-                        case 3:
-                        case "end":
-                          return _context3.stop();
-                      }
-                    }
-                  }, _callee3);
-                })))["catch"](function () {});
+                _context4.next = 8;
+                break;
 
-              case 1:
+              case 4:
+                _context4.next = 6;
+                return _this4.axios["delete"]("site/".concat(_this4.$route.params.sid, "/admin"), {
+                  data: {
+                    users: _this4.selectedRowKeys
+                  }
+                });
+
+              case 6:
+                _this4.$message.success('操作员删除成功');
+
+                _this4.load();
+
+              case 8:
               case "end":
                 return _context4.stop();
             }
@@ -8808,76 +8908,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee4);
       }))();
     },
-    //批量删除操作员
-    removeAllOperator: function removeAllOperator() {
-      var _this4 = this;
+    //设置操作员
+    setOperator: function setOperator(users) {
+      var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                if (!(_this4.multipleSelection.length == 0)) {
-                  _context5.next = 4;
-                  break;
-                }
-
-                _this4.$message({
-                  message: '你没有选择任何操作员',
-                  type: 'warning'
-                });
-
-                _context5.next = 7;
-                break;
-
-              case 4:
-                _context5.next = 6;
-                return _this4.axios["delete"]("site/".concat(_this4.$route.params.sid, "/admin"), {
-                  data: {
-                    users: _this4.multipleSelection.map(function (u) {
-                      return u.id;
-                    })
-                  }
-                });
-
-              case 6:
-                _this4.loadAdmin();
-
-              case 7:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5);
-      }))();
-    },
-    //设置操作员
-    setOperator: function setOperator(users) {
-      var _this5 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
-          while (1) {
-            switch (_context6.prev = _context6.next) {
-              case 0:
-                _context6.next = 2;
+                _context5.next = 2;
                 return _this5.axios.post("site/".concat(_this5.$route.params.sid, "/admin"), {
-                  users: users.map(function (u) {
-                    return u.id;
-                  })
+                  users: users
                 });
 
               case 2:
                 _this5.showSelectUserModel = false;
 
-                _this5.loadAdmin();
+                _this5.load();
 
               case 4:
               case "end":
-                return _context6.stop();
+                return _context5.stop();
             }
           }
-        }, _callee6);
+        }, _callee5);
       }))();
     },
     //子组件关闭用户选择模态框时的事件
@@ -9756,6 +9811,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -10117,30 +10174,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+var columns = [{
+  title: '编号',
+  width: 80,
+  dataIndex: 'id',
+  key: 'id'
+}, {
+  title: '头像',
+  width: 80,
+  scopedSlots: {
+    customRender: 'avatar'
+  }
+}, {
+  title: '昵称',
+  dataIndex: 'name',
+  key: 'name'
+}, {
+  title: '邮箱',
+  dataIndex: 'email',
+  key: 'email'
+}, {
+  title: '手机号',
+  dataIndex: 'phone',
+  key: 'phone'
+}, {
+  title: '注册时间',
+  scopedSlots: {
+    customRender: 'created_at'
+  }
+}];
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       users: [],
-      loadMessage: '加载中...'
+      columns: columns
     };
   },
   created: function created() {
@@ -10157,10 +10224,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
             case 2:
               response = _context.sent;
-              _this.users = response.data.data;
-              _this.users.length == 0 && (_this.loadMessage = '暂无用户');
 
-            case 5:
+              _this.$set(_this, 'users', response.data);
+
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -10636,24 +10703,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
+var columns = [{
+  title: '编号',
+  dataIndex: 'id',
+  key: 'id'
+}, {
+  title: '会员组',
+  dataIndex: 'name',
+  key: 'name'
+}, {
+  title: '站点数量',
+  dataIndex: 'site_num',
+  key: 'site_num'
+}, {
+  title: '拥有套餐',
+  scopedSlots: {
+    customRender: 'package'
+  }
+}, {
+  title: '操作',
+  width: 120,
+  scopedSlots: {
+    customRender: 'manage'
+  }
+}];
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Master: _layouts_Master__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -10661,74 +10735,64 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       groups: [],
+      columns: columns,
       tableMessage: '加载中...'
     };
   },
   created: function created() {
-    var _this = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _this.axios.get('/system/group');
-
-            case 2:
-              response = _context.sent;
-
-              _this.$set(_this, 'groups', response.data.data);
-
-            case 4:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
+    this.load();
   },
   methods: {
-    del: function del(g) {
+    load: function load() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.axios.get("system/group");
+
+              case 2:
+                response = _context.sent;
+
+                _this.$set(_this, 'groups', response.data);
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    del: function del(group) {
       var _this2 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _this2.$confirm('确定删除吗？', '温馨提示', {
-                  confirmButtonText: '确定',
-                  cancelButtonText: '取消',
-                  center: true
-                }).then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-                    while (1) {
-                      switch (_context2.prev = _context2.next) {
-                        case 0:
-                          _context2.next = 2;
-                          return _this2.axios["delete"]("/system/group/".concat(g.id));
+                _this2.$confirm({
+                  content: '确定删除吗？',
+                  onOk: function onOk() {
+                    return _this2.axios["delete"]("system/group/".concat(group.id)).then(function () {
+                      _this2.load();
 
-                        case 2:
-                          _this2.$message.success('删除成功');
-
-                          _this2.$router.go(0);
-
-                        case 4:
-                        case "end":
-                          return _context2.stop();
-                      }
-                    }
-                  }, _callee2);
-                })));
+                      _this2.$message.success('删除成功');
+                    });
+                  }
+                });
 
               case 1:
               case "end":
-                return _context3.stop();
+                return _context2.stop();
             }
           }
-        }, _callee3);
+        }, _callee2);
       }))();
     }
   }
@@ -10812,29 +10876,98 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['action'],
-  data: function data() {
+var form = {
+  type: Object,
+  "default": function _default() {
     return {
-      form: {
-        name: '',
-        site_num: 3,
-        package_id: []
-      },
-      packages: [],
-      //套餐多选
-      multipleSelection: []
+      name: '',
+      site_num: 3,
+      package_id: []
     };
-  },
+  }
+};
+var rules = {
+  name: [{
+    required: true,
+    message: '用户组名不能为空',
+    trigger: 'blur'
+  }],
+  site_num: [{
+    required: true,
+    message: '站点数量不能为空',
+    trigger: 'blur'
+  }, {
+    pattern: /^\d+$/,
+    message: '站点数量只能为数字'
+  }]
+};
+var packageColumns = [{
+  title: '编号',
+  dataIndex: 'id',
+  key: 'id'
+}, {
+  title: '套餐',
+  dataIndex: 'name',
+  key: 'name'
+}, {
+  title: '模块',
+  scopedSlots: {
+    customRender: 'modules'
+  }
+}, {
+  title: '会员组',
+  scopedSlots: {
+    customRender: 'group'
+  }
+}];
+/* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Master: _Master__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  props: {
+    action: String,
+    method: {
+      type: String,
+      "default": 'post'
+    },
+    form: form
+  },
+  data: function data() {
+    return {
+      packages: [],
+      rules: rules,
+      packageColumns: packageColumns
+    };
   },
   created: function created() {
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var response, id, data;
+      var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -10845,31 +10978,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 2:
               response = _context.sent;
 
-              _this.$set(_this, 'packages', response.data.data);
+              _this.$set(_this, 'packages', response.data);
 
-              if (!(_this.action === 'edit')) {
-                _context.next = 11;
-                break;
-              }
-
-              id = _this.$route.params.id;
-              _context.next = 8;
-              return _this.axios.get("/system/group/".concat(id)).then(function (r) {
-                return r.data.data;
-              });
-
-            case 8:
-              data = _context.sent;
-
-              _this.$set(_this, 'form', data);
-
-              _this.packages.map(function (p) {
-                _this.form.packages.map(function (gp) {
-                  if (p.id === gp.id) _this.$refs.multipleTable.toggleRowSelection(p);
-                });
-              });
-
-            case 11:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -10881,80 +10992,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     submit: function submit() {
       var _this2 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _this2.$refs['form'].validate( /*#__PURE__*/function () {
-                  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(state) {
-                    var id;
-                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-                      while (1) {
-                        switch (_context2.prev = _context2.next) {
-                          case 0:
-                            if (!state) {
-                              _context2.next = 16;
-                              break;
-                            }
+      this.$refs.form.validate(function (valid) {
+        if (valid) {
+          _this2.axios[_this2.method](_this2.action, _this2.form).then(function (_) {
+            _this2.$message.success('保存成功');
 
-                            id = _this2.$route.params.id;
-                            _this2.form.package_id = _this2.multipleSelection.map(function (p) {
-                              return p.id;
-                            });
-                            _context2.t0 = _this2.action;
-                            _context2.next = _context2.t0 === 'add' ? 6 : _context2.t0 === 'edit' ? 11 : 16;
-                            break;
-
-                          case 6:
-                            _context2.next = 8;
-                            return _this2.axios.post('/system/group', _this2.form);
-
-                          case 8:
-                            _this2.$message.success('用户组添加成功');
-
-                            _this2.$router.push({
-                              name: 'system.group'
-                            });
-
-                            return _context2.abrupt("break", 16);
-
-                          case 11:
-                            _context2.next = 13;
-                            return _this2.axios.put("/system/group/".concat(id), _this2.form);
-
-                          case 13:
-                            _this2.$message.success('用户组编辑成功');
-
-                            _this2.$router.push({
-                              name: 'system.group'
-                            });
-
-                            return _context2.abrupt("break", 16);
-
-                          case 16:
-                          case "end":
-                            return _context2.stop();
-                        }
-                      }
-                    }, _callee2);
-                  }));
-
-                  return function (_x) {
-                    return _ref.apply(this, arguments);
-                  };
-                }());
-
-              case 1:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }))();
+            _this2.$router.push({
+              name: 'system.group'
+            });
+          });
+        }
+      });
     },
-    handleSelectionChange: function handleSelectionChange(val) {
-      this.multipleSelection = val;
+    onSelectPackageChange: function onSelectPackageChange(selectedRowKeys) {
+      this.$set(this.form, 'package_id', selectedRowKeys);
     }
   }
 });
@@ -10970,7 +11021,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -11517,7 +11567,7 @@ var columns = [{
               case 2:
                 response = _context2.sent;
 
-                _this2.$set(_this2, 'packages', response.data.data);
+                _this2.$set(_this2, 'packages', response.data);
 
                 _this2.loading = false;
 
@@ -65636,15 +65686,19 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "mb-3" },
-      [
-        _c(
-          "el-input",
-          {
-            attrs: { clplaceholder: "请输入用户名、手机号或用户编号进行搜索" },
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        { staticClass: "mb-3 mb-2" },
+        [
+          _c("a-input-search", {
+            attrs: {
+              placeholder: "请输入用户名、手机号或用户编号进行搜索",
+              enterButton: ""
+            },
+            on: { search: _vm.get },
             model: {
               value: _vm.searchWord,
               callback: function($$v) {
@@ -65652,100 +65706,81 @@ var render = function() {
               },
               expression: "searchWord"
             }
-          },
-          [
-            _c(
-              "template",
-              { slot: "append" },
-              [
-                _c(
-                  "el-button",
-                  { attrs: { type: "primary" }, on: { click: _vm.get } },
-                  [_vm._v("搜索")]
-                )
-              ],
-              1
-            )
-          ],
-          2
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "card rounded-0" },
-      [
-        _c(
-          "el-table",
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("a-table", {
+        attrs: {
+          dataSource: _vm.users,
+          size: "middle",
+          bordered: "",
+          rowKey: "id",
+          pagination: false,
+          columns: _vm.columns,
+          rowSelection: {
+            selectedRowKeys: _vm.selectedRowKeys,
+            onChange: _vm.onSelectChange
+          }
+        },
+        scopedSlots: _vm._u([
           {
-            ref: "multipleTable",
-            attrs: { size: "small", data: _vm.users, "tooltip-effect": "dark" },
-            on: { "selection-change": _vm.handleSelectionChange }
+            key: "avatar",
+            fn: function(user) {
+              return _c(
+                "div",
+                {},
+                [
+                  _c("a-avatar", { attrs: { size: "small", src: user.avatar } })
+                ],
+                1
+              )
+            }
           },
-          [
-            _c("el-table-column", {
-              attrs: { type: "selection", width: "50" }
-            }),
-            _vm._v(" "),
-            _c("el-table-column", {
-              attrs: { prop: "id", label: "编号", width: "60" }
-            }),
-            _vm._v(" "),
-            _c("el-table-column", { attrs: { prop: "name", label: "昵称" } }),
-            _vm._v(" "),
-            _c("el-table-column", {
-              attrs: { prop: "email", label: "邮箱", width: "180" }
-            }),
-            _vm._v(" "),
-            _c("el-table-column", {
-              attrs: { prop: "mobile", label: "手机号" }
-            }),
-            _vm._v(" "),
-            _c("el-table-column", {
-              attrs: { prop: "group.name", label: "会员组", width: "70" }
-            })
-          ],
-          1
+          {
+            key: "created_at",
+            fn: function(user) {
+              return _c("div", {}, [
+                _vm._v(_vm._s(_vm._f("dateFormat")(user.created_at, "now")))
+              ])
+            }
+          }
+        ])
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "mt-3 text-right" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-secondary btn-sm",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.$emit("cancel")
+              }
+            }
+          },
+          [_vm._v("取消")]
         ),
         _vm._v(" "),
         _c(
-          "div",
-          { staticClass: "card-footer text-muted" },
-          [
-            _c(
-              "el-button",
-              {
-                attrs: { size: "small", type: "primary" },
-                on: {
-                  click: function($event) {
-                    return _vm.$emit("confirm", _vm.multipleSelection)
-                  }
-                }
-              },
-              [_vm._v("确定")]
-            ),
-            _vm._v(" "),
-            _c(
-              "el-button",
-              {
-                attrs: { size: "small" },
-                on: {
-                  click: function($event) {
-                    return _vm.$emit("cancel")
-                  }
-                }
-              },
-              [_vm._v("取消")]
-            )
-          ],
-          1
+          "button",
+          {
+            staticClass: "btn btn-primary btn-sm mr-1",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.$emit("confirm", _vm.selectedRowKeys)
+              }
+            }
+          },
+          [_vm._v("确定")]
         )
-      ],
-      1
-    )
-  ])
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -66994,188 +67029,126 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("el-alert", {
-        staticClass: "mb-3",
+      _c("div", { staticClass: "alert alert-info", attrs: { role: "alert" } }, [
+        _vm._v("操作员不允许删除公众号和编辑公众号资料")
+      ]),
+      _vm._v(" "),
+      _c("a-table", {
         attrs: {
-          title: " 操作员不允许删除公众号和编辑公众号资料",
-          "show-icon": "",
-          type: "info",
-          closable: true
-        }
+          dataSource: _vm.users,
+          pagination: false,
+          bordered: "",
+          columns: _vm.columns,
+          rowKey: "id",
+          size: "middle",
+          rowSelection: {
+            selectedRowKeys: _vm.selectedRowKeys,
+            onChange: _vm.onSelectChange
+          }
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "avatar",
+            fn: function(user) {
+              return _c(
+                "div",
+                {},
+                [_c("a-avatar", { attrs: { src: user.avatar } })],
+                1
+              )
+            }
+          },
+          {
+            key: "created_at",
+            fn: function(user) {
+              return _c("div", {}, [
+                _vm._v(_vm._s(_vm._f("dateFormat")(user.created_at, "now")))
+              ])
+            }
+          },
+          {
+            key: "manage",
+            fn: function(user) {
+              return _c("div", {}, [
+                _c(
+                  "div",
+                  { staticClass: "btn-group btn-group-sm" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-outline-success",
+                        attrs: {
+                          to: {
+                            name: "site.access",
+                            params: { uid: user.id, sid: _vm.$route.params.sid }
+                          }
+                        }
+                      },
+                      [_vm._v("设置权限")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-info",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.delOperator(user)
+                          }
+                        }
+                      },
+                      [_vm._v("删除操作员")]
+                    )
+                  ],
+                  1
+                )
+              ])
+            }
+          }
+        ])
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "card shadow-sm rounded-0" }, [
+      _c("div", { staticClass: "mt-3" }, [
         _c(
-          "div",
-          { staticClass: "card-body" },
-          [
-            _c(
-              "el-table",
-              {
-                ref: "multipleTable",
-                attrs: {
-                  size: "small",
-                  data: _vm.users,
-                  "tooltip-effect": "dark",
-                  "empty-text": _vm.loadMessage
-                },
-                on: { "selection-change": _vm.handleSelectionChange }
-              },
-              [
-                _c("el-table-column", {
-                  attrs: { type: "selection", width: "60" }
-                }),
-                _vm._v(" "),
-                _c("el-table-column", {
-                  attrs: { prop: "id", label: "编号", width: "60" }
-                }),
-                _vm._v(" "),
-                _c("el-table-column", {
-                  attrs: { prop: "name", label: "昵称" }
-                }),
-                _vm._v(" "),
-                _c("el-table-column", {
-                  attrs: { prop: "real_name", label: "真实姓名" }
-                }),
-                _vm._v(" "),
-                _c("el-table-column", {
-                  attrs: { prop: "email", label: "邮箱", "min-width": "160" }
-                }),
-                _vm._v(" "),
-                _c("el-table-column", {
-                  attrs: { prop: "mobile", label: "手机号", width: "150" }
-                }),
-                _vm._v(" "),
-                _c("el-table-column", {
-                  attrs: { label: "会员组", width: "150" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(scope) {
-                        return _vm._l(scope.row.group, function(group) {
-                          return _c("span", { key: group.id }, [
-                            _vm._v(_vm._s(group.name))
-                          ])
-                        })
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("el-table-column", {
-                  attrs: { label: "注册时间" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(scope) {
-                        return [
-                          _vm._v(
-                            _vm._s(_vm._f("dateFormat")(scope.row.created_at))
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("el-table-column", {
-                  attrs: { aligh: "right", fixed: "right", width: "200" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(scope) {
-                        return [
-                          _c(
-                            "el-button-group",
-                            [
-                              _c(
-                                "el-button",
-                                {
-                                  attrs: { size: "mini" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.$router.push({
-                                        name: "site.access",
-                                        params: {
-                                          uid: scope.row.id,
-                                          sid: _vm.$route.params.sid
-                                        }
-                                      })
-                                    }
-                                  }
-                                },
-                                [_vm._v("设置权限")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "el-button",
-                                {
-                                  attrs: { size: "mini" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.delOperator(scope.row)
-                                    }
-                                  }
-                                },
-                                [_vm._v("删除操作员")]
-                              )
-                            ],
-                            1
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                })
-              ],
-              1
-            )
-          ],
-          1
+          "button",
+          {
+            staticClass: "btn btn-sm btn-success",
+            on: {
+              click: function($event) {
+                _vm.showSelectUserModel = true
+              }
+            }
+          },
+          [_vm._v("设置操作员")]
         ),
         _vm._v(" "),
         _c(
-          "div",
-          { staticClass: "card-footer text-muted" },
-          [
-            _c(
-              "el-button",
-              {
-                attrs: { size: "small" },
-                on: {
-                  click: function($event) {
-                    _vm.showSelectUserModel = true
-                  }
-                }
-              },
-              [_vm._v("设置操作员")]
-            ),
-            _vm._v(" "),
-            _c(
-              "el-button",
-              {
-                attrs: { size: "small" },
-                on: { click: _vm.removeAllOperator }
-              },
-              [_vm._v("批量删除操作员")]
-            )
-          ],
-          1
+          "button",
+          {
+            staticClass: "btn btn-sm btn-danger",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.removeAllOperator($event)
+              }
+            }
+          },
+          [_vm._v("批量删除操作员")]
         )
       ]),
       _vm._v(" "),
       _c(
-        "el-dialog",
+        "a-modal",
         {
-          attrs: {
-            title: "选择用户",
-            visible: _vm.showSelectUserModel,
-            width: "60%"
-          },
-          on: {
-            "update:visible": function($event) {
-              _vm.showSelectUserModel = $event
-            }
+          attrs: { title: "选择用户", footer: null, width: "80%" },
+          model: {
+            value: _vm.showSelectUserModel,
+            callback: function($$v) {
+              _vm.showSelectUserModel = $$v
+            },
+            expression: "showSelectUserModel"
           }
         },
         [
@@ -68632,13 +68605,7 @@ var render = function() {
                                 staticClass:
                                   "text-secondary mr-1 border p-1 bg-light rounded"
                               },
-                              [
-                                _vm._v(
-                                  "\n                " +
-                                    _vm._s(p.name) +
-                                    "\n              "
-                                )
-                              ]
+                              [_vm._v(_vm._s(p.name))]
                             )
                           }),
                           0
@@ -69214,134 +69181,77 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "nav",
-      { staticClass: "nav nav-tabs mb-2" },
-      [
-        _c(
-          "router-link",
-          { staticClass: "nav-link", attrs: { to: { name: "site" } } },
-          [
-            _c("i", {
-              staticClass: "fa fa-home",
-              attrs: { "aria-hidden": "true" }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "router-link",
-          {
-            staticClass: "nav-link active",
-            attrs: {
-              to: { name: "site.user", params: { sid: _vm.$route.params.sid } }
-            }
-          },
-          [_vm._v("用户列表")]
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "card" }, [
+  return _c(
+    "div",
+    [
       _c(
-        "div",
-        { staticClass: "card-body" },
+        "nav",
+        { staticClass: "nav nav-tabs nav-stacked mb-3" },
         [
           _c(
-            "el-table",
+            "router-link",
+            { staticClass: "nav-link", attrs: { to: { name: "site" } } },
+            [
+              _c("i", {
+                staticClass: "fa fa-home",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "router-link",
             {
+              staticClass: "nav-link active",
               attrs: {
-                size: "small",
-                data: _vm.users,
-                fit: "",
-                "empty-text": _vm.loadMessage
+                to: {
+                  name: "site.user",
+                  params: { sid: _vm.$route.params.sid }
+                },
+                href: "#",
+                active: ""
               }
             },
-            [
-              _c("el-table-column", {
-                attrs: { prop: "id", label: "编号", width: "60" }
-              }),
-              _vm._v(" "),
-              _c("el-table-column", { attrs: { prop: "name", label: "昵称" } }),
-              _vm._v(" "),
-              _c("el-table-column", {
-                attrs: { prop: "real_name", label: "真实姓名" }
-              }),
-              _vm._v(" "),
-              _c("el-table-column", {
-                attrs: { prop: "email", label: "邮箱", "min-width": "180" }
-              }),
-              _vm._v(" "),
-              _c("el-table-column", {
-                attrs: { prop: "mobile", label: "手机号" }
-              }),
-              _vm._v(" "),
-              _c("el-table-column", {
-                attrs: { prop: "group.name", label: "会员组" }
-              }),
-              _vm._v(" "),
-              _c("el-table-column", {
-                attrs: { label: "注册时间" },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(scope) {
-                      return [
-                        _vm._v(
-                          _vm._s(_vm._f("dateFormat")(scope.row.created_at))
-                        )
-                      ]
-                    }
-                  }
-                ])
-              }),
-              _vm._v(" "),
-              _c("el-table-column", {
-                attrs: { aligh: "right", fixed: "right", width: "80" },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(scope) {
-                      return [
-                        _c(
-                          "el-button-group",
-                          [
-                            _c(
-                              "el-button",
-                              {
-                                attrs: { size: "mini" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.$router.push({
-                                      name: "site.user.show",
-                                      params: {
-                                        uid: scope.row.id,
-                                        sid: _vm.$route.params.sid
-                                      }
-                                    })
-                                  }
-                                }
-                              },
-                              [_vm._v("查看")]
-                            )
-                          ],
-                          1
-                        )
-                      ]
-                    }
-                  }
-                ])
-              })
-            ],
-            1
+            [_vm._v("用户列表")]
           )
         ],
         1
-      )
-    ])
-  ])
+      ),
+      _vm._v(" "),
+      _c("a-table", {
+        attrs: {
+          pagination: false,
+          dataSource: _vm.users,
+          columns: _vm.columns,
+          rowKey: "id"
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "avatar",
+            fn: function(user) {
+              return _c(
+                "div",
+                {},
+                [
+                  _c("a-avatar", { attrs: { size: "small", src: user.avatar } })
+                ],
+                1
+              )
+            }
+          },
+          {
+            key: "created_at",
+            fn: function(user) {
+              return _c("div", {}, [
+                _vm._v(_vm._s(_vm._f("dateFormat")(user.created_at, "Y/M/D")))
+              ])
+            }
+          }
+        ])
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -69864,10 +69774,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/system/group/Add.vue?vue&type=template&id=5b8ded90&scoped=true&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/system/group/Add.vue?vue&type=template&id=5b8ded90&scoped=true& ***!
-  \**************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/system/group/Add.vue?vue&type=template&id=5b8ded90&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/system/group/Add.vue?vue&type=template&id=5b8ded90& ***!
+  \**************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -69879,7 +69789,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("field", { attrs: { action: "add" } })
+  return _c("field", { attrs: { action: "system/group" } })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -69927,176 +69837,84 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("master", [
-    _c("div", { staticClass: "card shadow-sm" }, [
-      _c("div", { staticClass: "card-header" }, [_vm._v("用户组列表")]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "card-body" },
-        [
-          _c(
-            "el-table",
-            {
-              attrs: {
-                data: _vm.groups,
-                stripe: "",
-                "empty-text": _vm.tableMessage
-              }
-            },
-            [
-              _c("el-table-column", {
-                attrs: { prop: "id", label: "编号", width: "60" }
-              }),
-              _vm._v(" "),
-              _c("el-table-column", {
-                attrs: { prop: "name", label: "名称", width: "120" }
-              }),
-              _vm._v(" "),
-              _c("el-table-column", {
-                attrs: { label: "可创建站点数量", width: "150" },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(scope) {
-                      return [
-                        _c(
-                          "el-tag",
-                          {
-                            staticClass: "m-1",
-                            attrs: { size: "mini", type: "info" }
+  return _c(
+    "master",
+    [
+      _c("a-table", {
+        attrs: {
+          size: "middle",
+          bordered: "",
+          dataSource: _vm.groups,
+          columns: _vm.columns,
+          rowKey: "id",
+          pagination: false
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "package",
+            fn: function(g) {
+              return _c(
+                "div",
+                {},
+                _vm._l(g.packages, function(p) {
+                  return _c(
+                    "span",
+                    { key: p.id, staticClass: "badge badge-info mr-1" },
+                    [_vm._v(_vm._s(p.name))]
+                  )
+                }),
+                0
+              )
+            }
+          },
+          {
+            key: "manage",
+            fn: function(group) {
+              return _c("div", {}, [
+                _c(
+                  "div",
+                  { staticClass: "btn-group btn-group-sm" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-outline-secondary",
+                        attrs: {
+                          to: {
+                            name: "system.group.edit",
+                            params: { id: group.id }
                           },
-                          [_vm._v(_vm._s(scope.row.site_num))]
-                        )
-                      ]
-                    }
-                  }
-                ])
-              }),
-              _vm._v(" "),
-              _c("el-table-column", {
-                attrs: { label: "套餐" },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(scope) {
-                      return _vm._l(scope.row.packages, function(p) {
-                        return _c(
-                          "el-tag",
-                          {
-                            key: p.id,
-                            staticClass: "m-1",
-                            attrs: { size: "mini", type: "warning" }
-                          },
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                staticClass: "text-secondary",
-                                attrs: {
-                                  to: {
-                                    name: "system.package.edit",
-                                    params: { id: p.id }
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                " +
-                                    _vm._s(p.name) +
-                                    "\n              "
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      })
-                    }
-                  }
-                ])
-              }),
-              _vm._v(" "),
-              _c("el-table-column", {
-                attrs: { label: "默认组", width: "150" },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(scope) {
-                      return [
-                        _c("i", {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: scope.row.default,
-                              expression: "scope.row.default"
-                            }
-                          ],
-                          staticClass: "el-icon-success text-success"
-                        })
-                      ]
-                    }
-                  }
-                ])
-              }),
-              _vm._v(" "),
-              _c("el-table-column", {
-                attrs: { label: "", width: "150" },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(scope) {
-                      return [
-                        _c(
-                          "el-button-group",
-                          [
-                            _c(
-                              "el-button",
-                              {
-                                attrs: { type: "mini" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.$router.push({
-                                      name: "system.group.edit",
-                                      params: { id: scope.row.id }
-                                    })
-                                  }
-                                }
-                              },
-                              [_vm._v("编辑")]
-                            ),
-                            _vm._v(" "),
-                            !scope.row.default
-                              ? _c(
-                                  "el-button",
-                                  {
-                                    attrs: { type: "mini" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.del(scope.row)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("删除")]
-                                )
-                              : _vm._e()
-                          ],
-                          1
-                        )
-                      ]
-                    }
-                  }
-                ])
-              })
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ])
-  ])
+                          type: "button",
+                          "aria-label": ""
+                        }
+                      },
+                      [_vm._v("编辑")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-danger",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.del(group)
+                          }
+                        }
+                      },
+                      [_vm._v("删除")]
+                    )
+                  ],
+                  1
+                )
+              ])
+            }
+          }
+        ])
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -70124,184 +69942,143 @@ var render = function() {
     "master",
     [
       _c(
-        "el-form",
-        { ref: "form", attrs: { model: _vm.form, "label-width": "100px" } },
+        "a-form-model",
+        {
+          ref: "form",
+          attrs: {
+            model: _vm.form,
+            rules: _vm.rules,
+            "label-col": { span: 2 },
+            "wrapper-col": { span: 8 }
+          }
+        },
         [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [_vm._v("用户组设置")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "card-body" },
-              [
-                _c(
-                  "el-form-item",
-                  {
-                    attrs: {
-                      label: "会员组名称",
-                      prop: "name",
-                      rules: [
-                        {
-                          required: true,
-                          message: "会员组名称不能为空",
-                          trigger: "blur"
-                        },
-                        {
-                          min: 3,
-                          message: "会员组名称不能少于 3 位",
-                          trigger: "blur"
-                        }
-                      ]
+          _c(
+            "a-card",
+            { attrs: { title: "用户组设置", size: "small" } },
+            [
+              _c(
+                "a-form-model-item",
+                { attrs: { label: "会员组名称", prop: "name" } },
+                [
+                  _c("a-input", {
+                    model: {
+                      value: _vm.form.name,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "name", $$v)
+                      },
+                      expression: "form.name"
                     }
-                  },
-                  [
-                    _c("el-input", {
-                      attrs: { placeholder: "会员组名称可以输入中文名称" },
-                      model: {
-                        value: _vm.form.name,
-                        callback: function($$v) {
-                          _vm.$set(_vm.form, "name", $$v)
-                        },
-                        expression: "form.name"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  {
-                    attrs: {
-                      label: "站点数量",
-                      prop: "site_num",
-                      rules: [
-                        {
-                          required: true,
-                          message: "会员组可创建站点数量不能为空"
-                        },
-                        { type: "number", message: "站点数量必须为数字值" }
-                      ]
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "a-form-model-item",
+                { attrs: { label: "站点数量", prop: "site_num" } },
+                [
+                  _c("a-input", {
+                    attrs: { type: "number" },
+                    model: {
+                      value: _vm.form.site_num,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "site_num", $$v)
+                      },
+                      expression: "form.site_num"
                     }
-                  },
-                  [
-                    _c("el-input", {
-                      attrs: { placeholder: "会员组用户可创建的站点数量" },
-                      model: {
-                        value: _vm.form.site_num,
-                        callback: function($$v) {
-                          _vm.$set(_vm.form, "site_num", $$v)
-                        },
-                        expression: "form.site_num"
-                      }
-                    })
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card mt-3" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("可使用的服务套餐")
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "card-body" },
-              [
-                _c(
-                  "el-table",
-                  {
-                    ref: "multipleTable",
-                    attrs: { data: _vm.packages },
-                    on: { "selection-change": _vm.handleSelectionChange }
-                  },
-                  [
-                    _c("el-table-column", {
-                      attrs: { type: "selection", width: "55" }
-                    }),
-                    _vm._v(" "),
-                    _c("el-table-column", {
-                      attrs: { label: "编号", prop: "id" }
-                    }),
-                    _vm._v(" "),
-                    _c("el-table-column", {
-                      attrs: { label: "名称", prop: "name" }
-                    }),
-                    _vm._v(" "),
-                    _c("el-table-column", {
-                      attrs: { label: "可用模块" },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function(scope) {
-                            return _vm._l(scope.row.modules, function(m) {
-                              return _c(
-                                "el-tag",
-                                {
-                                  key: m.id,
-                                  staticClass: "mr-1 mb-1",
-                                  attrs: { size: "mini" }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(m.config.title) +
-                                      "\n              "
-                                  )
-                                ]
-                              )
-                            })
-                          }
-                        }
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _c("el-table-column", {
-                      attrs: { label: "使用该套餐的用户组" },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function(scope) {
-                            return _vm._l(scope.row.group, function(g) {
-                              return _c(
-                                "el-tag",
-                                {
-                                  key: g.id,
-                                  attrs: { size: "mini", type: "success" }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(g.name) +
-                                      "\n              "
-                                  )
-                                ]
-                              )
-                            })
-                          }
-                        }
-                      ])
-                    })
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ]),
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
-            "el-button",
+            "a-card",
             {
               staticClass: "mt-3",
-              attrs: { type: "primary" },
-              on: { click: _vm.submit }
+              attrs: { title: "可使用的服务套餐", size: "small" }
             },
-            [_vm._v("确定提交")]
+            [
+              _c("a-table", {
+                attrs: {
+                  dataSource: _vm.packages,
+                  bordered: "",
+                  size: "middle",
+                  rowKey: "id",
+                  pagination: false,
+                  columns: _vm.packageColumns,
+                  "label-col": { span: 2 },
+                  "wrapper-col": { span: 8 },
+                  rowSelection: {
+                    selectedRowKeys: _vm.form.package_id,
+                    onChange: _vm.onSelectPackageChange
+                  }
+                },
+                scopedSlots: _vm._u([
+                  {
+                    key: "modules",
+                    fn: function(p) {
+                      return _c(
+                        "div",
+                        {},
+                        _vm._l(p.modules, function(m) {
+                          return _c(
+                            "span",
+                            { key: m.id, staticClass: "badge badge-info mr-1" },
+                            [_vm._v(_vm._s(m.model.title))]
+                          )
+                        }),
+                        0
+                      )
+                    }
+                  },
+                  {
+                    key: "group",
+                    fn: function(p) {
+                      return _c(
+                        "div",
+                        {},
+                        _vm._l(p.group, function(g) {
+                          return _c(
+                            "span",
+                            {
+                              key: g.id,
+                              staticClass: "badge badge-success mr-1"
+                            },
+                            [_vm._v(_vm._s(g.name))]
+                          )
+                        }),
+                        0
+                      )
+                    }
+                  }
+                ])
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "a-form-item",
+            [
+              _c(
+                "a-button",
+                {
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.submit($event)
+                    }
+                  }
+                },
+                [_vm._v("保存提交")]
+              )
+            ],
+            1
           )
         ],
         1
@@ -70317,10 +70094,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/system/group/layouts/Master.vue?vue&type=template&id=11db67ee&scoped=true&":
-/*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/system/group/layouts/Master.vue?vue&type=template&id=11db67ee&scoped=true& ***!
-  \*************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/system/group/layouts/Master.vue?vue&type=template&id=11db67ee&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/system/group/layouts/Master.vue?vue&type=template&id=11db67ee& ***!
+  \*************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -70359,7 +70136,7 @@ var render = function() {
               },
               attrs: { to: { name: "system.group" } }
             },
-            [_vm._v("用户组列表\n    ")]
+            [_vm._v("用户组列表")]
           ),
           _vm._v(" "),
           _c(
@@ -70371,7 +70148,7 @@ var render = function() {
               },
               attrs: { to: { name: "system.group.add" } }
             },
-            [_vm._v("添加用户组\n    ")]
+            [_vm._v("添加用户组")]
           ),
           _vm._v(" "),
           _vm.$route.name === "system.group.edit"
@@ -70384,7 +70161,7 @@ var render = function() {
                   },
                   attrs: { to: { name: "system.group.add" } }
                 },
-                [_vm._v("编辑用户组\n    ")]
+                [_vm._v("编辑用户组")]
               )
             : _vm._e()
         ],
@@ -72266,7 +72043,7 @@ __webpack_require__.r(__webpack_exports__);
 
 moment__WEBPACK_IMPORTED_MODULE_1___default.a.locale('zh-cn');
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('dateFormat', function (value) {
-  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'nowa';
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Y-M-D';
   if (!value) return '';
 
   switch (type) {
@@ -72275,7 +72052,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('dateFormat', function (value)
       return moment__WEBPACK_IMPORTED_MODULE_1___default()(value).fromNow();
 
     default:
-      return moment__WEBPACK_IMPORTED_MODULE_1___default()(value).format('Y-M-D');
+      return moment__WEBPACK_IMPORTED_MODULE_1___default()(value).format(type);
   }
 });
 
@@ -75029,7 +74806,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Add_vue_vue_type_template_id_5b8ded90_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Add.vue?vue&type=template&id=5b8ded90&scoped=true& */ "./resources/js/views/system/group/Add.vue?vue&type=template&id=5b8ded90&scoped=true&");
+/* harmony import */ var _Add_vue_vue_type_template_id_5b8ded90___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Add.vue?vue&type=template&id=5b8ded90& */ "./resources/js/views/system/group/Add.vue?vue&type=template&id=5b8ded90&");
 /* harmony import */ var _Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Add.vue?vue&type=script&lang=js& */ "./resources/js/views/system/group/Add.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -75041,11 +74818,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Add_vue_vue_type_template_id_5b8ded90_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Add_vue_vue_type_template_id_5b8ded90_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Add_vue_vue_type_template_id_5b8ded90___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Add_vue_vue_type_template_id_5b8ded90___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "5b8ded90",
+  null,
   null
   
 )
@@ -75071,19 +74848,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/views/system/group/Add.vue?vue&type=template&id=5b8ded90&scoped=true&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/views/system/group/Add.vue?vue&type=template&id=5b8ded90&scoped=true& ***!
-  \********************************************************************************************/
+/***/ "./resources/js/views/system/group/Add.vue?vue&type=template&id=5b8ded90&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/views/system/group/Add.vue?vue&type=template&id=5b8ded90& ***!
+  \********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_5b8ded90_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=template&id=5b8ded90&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/system/group/Add.vue?vue&type=template&id=5b8ded90&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_5b8ded90_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_5b8ded90___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=template&id=5b8ded90& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/system/group/Add.vue?vue&type=template&id=5b8ded90&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_5b8ded90___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_5b8ded90_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_5b8ded90___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -75323,7 +75100,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Master_vue_vue_type_template_id_11db67ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Master.vue?vue&type=template&id=11db67ee&scoped=true& */ "./resources/js/views/system/group/layouts/Master.vue?vue&type=template&id=11db67ee&scoped=true&");
+/* harmony import */ var _Master_vue_vue_type_template_id_11db67ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Master.vue?vue&type=template&id=11db67ee& */ "./resources/js/views/system/group/layouts/Master.vue?vue&type=template&id=11db67ee&");
 /* harmony import */ var _Master_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Master.vue?vue&type=script&lang=js& */ "./resources/js/views/system/group/layouts/Master.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -75335,11 +75112,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Master_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Master_vue_vue_type_template_id_11db67ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Master_vue_vue_type_template_id_11db67ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Master_vue_vue_type_template_id_11db67ee___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Master_vue_vue_type_template_id_11db67ee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "11db67ee",
+  null,
   null
   
 )
@@ -75365,19 +75142,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/views/system/group/layouts/Master.vue?vue&type=template&id=11db67ee&scoped=true&":
-/*!*******************************************************************************************************!*\
-  !*** ./resources/js/views/system/group/layouts/Master.vue?vue&type=template&id=11db67ee&scoped=true& ***!
-  \*******************************************************************************************************/
+/***/ "./resources/js/views/system/group/layouts/Master.vue?vue&type=template&id=11db67ee&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/views/system/group/layouts/Master.vue?vue&type=template&id=11db67ee& ***!
+  \*******************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Master_vue_vue_type_template_id_11db67ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Master.vue?vue&type=template&id=11db67ee&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/system/group/layouts/Master.vue?vue&type=template&id=11db67ee&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Master_vue_vue_type_template_id_11db67ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Master_vue_vue_type_template_id_11db67ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Master.vue?vue&type=template&id=11db67ee& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/system/group/layouts/Master.vue?vue&type=template&id=11db67ee&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Master_vue_vue_type_template_id_11db67ee___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Master_vue_vue_type_template_id_11db67ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Master_vue_vue_type_template_id_11db67ee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

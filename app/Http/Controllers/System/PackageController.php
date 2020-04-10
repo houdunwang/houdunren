@@ -21,7 +21,7 @@ class PackageController extends ApiController
 
     public function index()
     {
-        return PackageResource::collection(Package::latest()->get());
+        return $this->json(PackageResource::collection(Package::latest()->get()));
     }
 
     public function store(PackageRequest $request, Package $package)

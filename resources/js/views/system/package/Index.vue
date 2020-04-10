@@ -60,7 +60,7 @@ export default {
   methods: {
     async load() {
       let response = await this.axios.get(`system/package`)
-      this.$set(this, 'packages', response.data.data)
+      this.$set(this, 'packages', response.data)
       this.loading = false
     },
     del(model) {
