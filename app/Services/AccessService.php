@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\Site;
 use App\User;
+use Illuminate\Support\Facades\DB;
+use InvalidArgumentException;
 use Spatie\Permission\Models\Permission;
 
 /**
@@ -122,10 +124,25 @@ class AccessService
      *
      * @return void
      */
-    public function getUserPermissionNames($site, User $user)
+    public function getUserPermissionNames(Site $site, User $user)
     {
-        return $user->permissions->where('site_id', $site['id'])->map(function ($permission) {
-            return preg_replace('/^S\d+\-/', '', $permission->name);
-        });
+        return $user->permissions->where('site_id', $site['id'])->pluck('name');
+    }
+
+    /**
+     * 设置用户站点权限
+     * @param User $user 用户
+     * @param Site $site 网站
+     * @param array $permissions 权限
+     * @return User
+     * @throws InvalidArgumentException
+     */
+    public function setUserSiteAccess(User $user, Site $site, array $permissions)
+    {
+        DB::table('model_has_permissions')->where('model_id', $user['id'])
+            ->whereIn('permission_id', $site->permissions->pluck('id'))
+            ->delete();
+
+        return $user->givePermissionTo($permissions);
     }
 }

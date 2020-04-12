@@ -10,11 +10,15 @@
           <div class="row">
             <div class="col-6">
               <span class="text-dark small mr-1">套餐:</span>
-              <span v-for="(p, i) in packages(site)" :key="i" class="text-secondary mr-1 border p-1 bg-light rounded">
+              <span
+                v-for="(p, i) in packages(site)"
+                :key="i"
+                class="text-secondary mr-1 border p-1 bg-light rounded"
+              >
                 {{ p }}
                 <!-- <span class="text-secondary mr-1 border p-1 bg-light rounded" v-for="p in group.package" :key="p.id">{{
                   p.name
-                }}</span> -->
+                }}</span>-->
               </span>
             </div>
             <div class="col-6 text-right">

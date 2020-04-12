@@ -53,7 +53,7 @@ Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'Site', 'prefix' =>
     //站点权限
     Route::get('{site}/access', 'AccessController@site');
     Route::get('{site}/access/{user}', 'AccessController@userPermission');
-    Route::put('{site}/access/{user}', 'AccessController@update');
+    Route::put('{site}/access/{user}', 'AccessController@updateUserAccess');
     //更新站点缓存
     Route::put('{site}/cache', 'CacheController@update');
 });

@@ -31,11 +31,11 @@ class AccessController extends ApiController
      *
      * @return mixed
      */
-    public function site(Site $site, ModuleService $ModuleService, AccessService $AccessService)
-    {
-        $AccessService->updateSitePermission($site);
-        return $this->json($ModuleService->getSiteModule($site));
-    }
+    // public function site(Site $site, ModuleService $ModuleService, AccessService $AccessService)
+    // {
+    //     $AccessService->updateSitePermission($site);
+    //     return $this->json($ModuleService->getSiteModule($site));
+    // }
 
     /**
      * 获取用户站点权限
@@ -51,20 +51,16 @@ class AccessController extends ApiController
     }
 
     /**
-     * 更新用户站点权限
+     * 更新操作员站点权限
      * @param Request $request
      * @param Site $site
      * @param User $user
      *
      * @return JsonResponse
      */
-    public function update(Request $request, Site $site, User $user)
+    public function updateUserAccess(Request $request, Site $site, User $user, AccessService $accessService)
     {
-        DB::table('model_has_permissions')->where('model_id', $user['id'])
-            ->whereIn('permission_id', $site->permissions->pluck('id'))
-            ->delete();
-
-        $user->givePermissionTo($request->input('permissions'));
+        $accessService->setUserSiteAccess($user, $site, $request->input('permissions'));
         return $this->success('权限更新成功');
     }
 }

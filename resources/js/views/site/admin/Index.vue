@@ -7,9 +7,7 @@
       <a class="nav-link active" href="#">操作员管理</a>
     </nav>
 
-    <div class="alert alert-info" role="alert">
-      操作员不允许删除公众号和编辑公众号资料， 只能对站点模块进行管理
-    </div>
+    <div class="alert alert-info" role="alert">操作员不允许删除公众号和编辑公众号资料， 只能对站点模块进行管理</div>
     <a-table
       :dataSource="users"
       :pagination="false"
@@ -28,8 +26,7 @@
           <router-link
             :to="{ name: 'site.access', params: { uid: user.id, sid: $route.params.sid } }"
             class="btn btn-outline-success"
-            >设置权限</router-link
-          >
+          >设置权限</router-link>
           <button @click="delOperator(user)" class="btn btn-outline-info" type="button">删除操作员</button>
         </div>
       </div>
@@ -40,11 +37,26 @@
       <button @click.prevent="removeAllOperator" class="btn btn-sm btn-danger">批量删除操作员</button>
     </div>
     <a-modal title="选择用户" v-model="showSelectUserModel" :footer="null" width="80%">
-      <user-component
-        @confirm="setOperator"
-        @cancel="closeUserModal"
-        :action="`site/${this.$route.params.sid}/admin/search`"
-      ></user-component>
+      <user-component width="100" :action="`site/${this.$route.params.sid}/admin/search`">
+        <template v-slot:manage="{ user }">
+          <div class="d-flex justify-content-end">
+            <button
+              @click.prevent="setOperator([user.id])"
+              class="btn btn-sm btn-outline-info"
+            >设置操作员</button>
+          </div>
+        </template>
+        <template v-slot:batch="{ ids }">
+          <div class="mt-3">
+            <button
+              @click="showSelectUserModel = false"
+              class="btn btn-secondary btn-sm"
+              type="button"
+            >取消</button>
+            <button @click="setOperator(ids)" class="btn btn-primary btn-sm mr-1" type="button">批量设置</button>
+          </div>
+        </template>
+      </user-component>
     </a-modal>
   </div>
 </template>
@@ -106,13 +118,17 @@ export default {
     },
     //设置操作员
     async setOperator(users) {
-      await this.axios.post(`site/${this.$route.params.sid}/admin`, {
-        users
-      })
-      this.showSelectUserModel = false
-      this.load()
+      if (users.length == 0) {
+        this.$message.warning('请选择操作员')
+      } else {
+        await this.axios.post(`site/${this.$route.params.sid}/admin`, {
+          users
+        })
+        this.showSelectUserModel = false
+        this.load()
+      }
     },
-    //子组件关闭用户选择模态框时的事件
+    //关闭用户选择模态框
     closeUserModal() {
       this.showSelectUserModel = false
     }

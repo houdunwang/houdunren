@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="admin">
     <error />
     <navigate />
     <div class="container-fluid bg pt-2">
@@ -31,10 +31,11 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.bg {
-  background-image: url('../../assets/images/bg.jpg');
+<style lang="scss" >
+body {
   height: 100vh;
+  width: 100vw;
+  background-image: url('../../assets/images/bg.jpg');
   background-size: cover;
 }
 </style>
