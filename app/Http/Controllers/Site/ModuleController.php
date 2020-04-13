@@ -38,4 +38,17 @@ class ModuleController extends ApiController
         $modules = $ModuleService->getModuleByUser($site, auth()->user());
         return $this->json($modules);
     }
+
+    /**
+     * 设置默认模块
+     * @param Site $site
+     * @param int $mid
+     * @return JsonResponse
+     */
+    public function setDefault(Site $site, int $mid)
+    {
+        $site['module_id'] = $mid;
+        $site->save();
+        return $this->success('默认模块设置成功');
+    }
 }

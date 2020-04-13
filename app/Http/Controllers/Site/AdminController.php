@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\ApiController;
 use App\Http\Resources\UserResource;
 use App\Models\Site;
-use App\Services\SiteService;
 use App\Services\UserService;
 use App\User;
 use Illuminate\Http\JsonResponse;

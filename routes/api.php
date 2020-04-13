@@ -11,13 +11,13 @@ Route::group(['namespace' => 'Common', 'prefix' => 'common'], function () {
 });
 
 //系统
-Route::group(['middleware' => ['auth:sanctum', 'system'], 'namespace' => 'System', 'prefix' => 'system'], function () {
+Route::group(['middleware' => ['auth:sanctum'], 'namespace' => 'System', 'prefix' => 'system'], function () {
     //套餐管理
-    Route::resource('package', 'PackageController')->except(['edit', 'create']);
+    Route::apiResource('package', 'PackageController');
     //系统配置
-    Route::resource('config', 'ConfigController')->except(['edit', 'create']);
+    Route::apiResource('config', 'ConfigController');
     //会员组
-    Route::resource('group', 'GroupController')->except(['edit', 'create']);
+    Route::apiResource('group', 'GroupController');
     //缓存控制
     Route::get('cache', 'CacheController@update');
     //模块管理
@@ -29,15 +29,14 @@ Route::group(['middleware' => ['auth:sanctum', 'system'], 'namespace' => 'System
 
 //站点
 Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'Site', 'prefix' => 'site'], function () {
-    Route::resource('site', 'SiteController')->except(['edit', 'create']);
-    Route::get('site/{site}/{mid}', 'SiteController@module');
+    Route::apiResource('site', 'SiteController');
     //站点配置
     Route::put('config/{site}', 'ConfigController@update');
     Route::get('config/{site}', 'ConfigController@show');
     Route::post('config/sms/{site}', 'ConfigController@sms');
     Route::post('config/email/{site}', 'ConfigController@email');
     //公众号
-    Route::resource('{site}/weChat', 'WeChatController')->except(['edit', 'create']);
+    Route::apiResource('{site}/weChat', 'WeChatController');
     //操作员
     Route::get('{site}/admin', 'AdminController@index');
     Route::post('{site}/admin', 'AdminController@add');
@@ -50,6 +49,8 @@ Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'Site', 'prefix' =>
     Route::get('{site}/module/site', 'ModuleController@site');
     //用户可使用的模块
     Route::get('{site}/module/user', 'ModuleController@user');
+    //设置默认模块
+    Route::get('{site}/module/{mid}', 'ModuleController@setDefault');
     //站点权限
     Route::get('{site}/access', 'AccessController@site');
     Route::get('{site}/access/{user}', 'AccessController@userPermission');

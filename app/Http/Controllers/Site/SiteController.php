@@ -7,9 +7,13 @@ use App\Http\Requests\SiteRequest;
 use App\Http\Resources\SiteResource;
 use App\Models\Module;
 use App\Models\Site;
+use App\Services\SiteService;
 use App\Services\UserService;
+use Illuminate\Database\Eloquent\JsonEncodingException;
+use Illuminate\Database\Eloquent\MassAssignmentException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * 站点管理
@@ -28,10 +32,9 @@ class SiteController extends ApiController
      * 获取站点列表
      * @return JsonResponse
      */
-    public function index()
+    public function index(SiteService $siteService)
     {
-        $user = auth()->user();
-        $sites = isSuperAdmin() ? Site::latest()->get() : $user->site()->wherePivotIn('role', ['admin', 'operator'])->get();
+        $sites = $siteService->getUserAllSite(Auth::user());
         return $this->json(SiteResource::collection($sites));
     }
 
@@ -43,34 +46,33 @@ class SiteController extends ApiController
         return $this->success('站点添加成功');
     }
 
-    public function show(Site $site): JsonResponse
+    /**
+     * 获取站点
+     * @param Site $site
+     * @return SiteResource
+     */
+    public function show(Site $site)
     {
-        return $this->success('站点获取成功', new SiteResource($site));
+        return $this->json(new SiteResource($site));
     }
 
+    /**
+     * 更新站点
+     * @param SiteRequest $request
+     * @param Site $site
+     * @return JsonResponse
+     * @throws JsonEncodingException
+     * @throws MassAssignmentException
+     */
     public function update(SiteRequest $request, Site $site): JsonResponse
     {
         $site->fill($request->all())->save();
-
-        return $this->success('站点修改成功', $site);
+        return $this->success('站点修改成功');
     }
 
     public function destroy(Site $site): JsonResponse
     {
         $site->delete();
         return $this->success('栏目删除成功');
-    }
-
-    /**
-     * 设置默认模块
-     * @param Site $site
-     * @param int $mid
-     * @return JsonResponse
-     */
-    public function module(Site $site, int $mid)
-    {
-        $site['module_id'] = $mid;
-        $site->save();
-        return $this->success('默认模块设置成功');
     }
 }

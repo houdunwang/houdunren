@@ -1,0 +1,23 @@
+body.member {
+  background: #fefefe;
+  .member-top {
+    // border-bottom: solid 4px #f15a57;
+    background: #f7f8f9;
+    &::after {
+      content: '';
+      height: 4px;
+      display: block;
+      background-image: linear-gradient(45deg, #60b5b3, #43a8a6);
+    }
+  }
+  .menu {
+    .icon {
+      img {
+        width: 200px;
+        @media screen and (max-width: 768px) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

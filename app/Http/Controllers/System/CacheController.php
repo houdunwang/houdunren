@@ -13,21 +13,21 @@ use App\Services\AccessService;
  */
 class CacheController extends ApiController
 {
-  public function __construct()
-  {
-    $this->middleware('system');
-  }
+    public function __construct()
+    {
+        $this->middleware('system');
+    }
 
-  /**
-   * 更新缓存
-   * @param Access $access
-   *
-   * @return mixed
-   */
-  public function update(AccessService $AccessService)
-  {
-    //更新站点权限
-    $AccessService->updateAllSitePermission();
-    return $this->success('缓存更新成功');
-  }
+    /**
+     * 更新缓存
+     * @param Access $access
+     *
+     * @return mixed
+     */
+    public function update(AccessService $AccessService)
+    {
+        //更新站点权限
+        $AccessService->updateAllSitePermission();
+        return $this->success('缓存更新成功');
+    }
 }

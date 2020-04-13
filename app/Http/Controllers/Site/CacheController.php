@@ -11,21 +11,21 @@ use App\Services\AccessService;
  */
 class CacheController extends ApiController
 {
-  public function __construct()
-  {
-    $this->middleware('site');
-  }
+    public function __construct()
+    {
+        $this->middleware('site');
+    }
 
-  /**
-   * 更新站点缓存
-   * @param Site $site
-   * @param AccessService $AccessService
-   *
-   * @return void
-   */
-  public function update(Site $site, AccessService $AccessService)
-  {
-    $AccessService->updateSitePermission($site);
-    return $this->success('站点缓存更新成功');
-  }
+    /**
+     * 更新站点缓存
+     * @param Site $site
+     * @param AccessService $AccessService
+     *
+     * @return void
+     */
+    public function update(Site $site, AccessService $AccessService)
+    {
+        $AccessService->updateSitePermission($site);
+        return $this->success('站点缓存更新成功');
+    }
 }

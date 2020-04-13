@@ -30,7 +30,8 @@ class UserResource extends JsonResource
      */
     protected function access()
     {
-        return app(AccessService::class)->getUserPermissionNames(site(), $this->resource);
+        if (site())
+            return app(AccessService::class)->getUserPermissionNames(site(), $this->resource);
     }
 
     /**
@@ -40,6 +41,7 @@ class UserResource extends JsonResource
      */
     protected function isAdmin()
     {
-        return app(UserService::class)->isAdmin(site(), $this->resource);
+        if (site())
+            return app(UserService::class)->isAdmin(site(), $this->resource);
     }
 }

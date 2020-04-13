@@ -7,17 +7,17 @@ mix.webpackConfig({
   resolve: {
     extensions: ['.js', '.vue'],
     alias: {
-      '@': __dirname + '/app'
+      '@': __dirname + '/web'
     }
   }
 })
+// mix.setPublicPath('../../public').mergeManifest();
 
-mix
-  .js(__dirname + '/Resources/assets/js/app.js', 'js/app.js')
-  .sass(__dirname + '/Resources/assets/sass/app.scss', 'css/app.css')
-
+// mix
+//   .js(__dirname + '/Resources/assets/js/app.js', 'js/edu.js')
+//   .sass(__dirname + '/Resources/assets/sass/app.scss', 'css/edu.css')
 //前后端分离的编译文件
-mix.js(__dirname + '/app/app.js', 'js/app-vue.js')
+mix.js(__dirname + '/web/app.js', 'js/app.js')
 
 if (mix.inProduction()) {
   mix.version()

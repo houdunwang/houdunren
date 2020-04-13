@@ -1,0 +1,17 @@
+:root {
+  font-size: 15px;
+}
+*:focus {
+  outline: none !important;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC,
+    Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+}
+svg {
+  vertical-align: inherit;
+}
+a {
+  text-decoration: none !important;
+  color: #495057;
+}

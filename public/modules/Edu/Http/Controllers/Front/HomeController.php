@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-  public function index()
-  {
-    return view('edu::front');
-  }
+    public function index()
+    {
+        return view('edu::front');
+    }
 }
