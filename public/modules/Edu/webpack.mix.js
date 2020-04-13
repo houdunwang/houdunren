@@ -11,13 +11,14 @@ mix.webpackConfig({
     }
   }
 })
-// mix.setPublicPath('../../public').mergeManifest();
-
 // mix
 //   .js(__dirname + '/Resources/assets/js/app.js', 'js/edu.js')
 //   .sass(__dirname + '/Resources/assets/sass/app.scss', 'css/edu.css')
 //前后端分离的编译文件
-mix.js(__dirname + '/web/app.js', 'js/app.js')
+mix
+  .js(__dirname + '/web/app.js', 'js')
+  .sass(__dirname + '/web/assets/css/app.scss', 'css')
+  .extract(['vue', 'vue-router', 'vuex', 'vue-video-player', 'moment', 'ant-design-vue'])
 
 if (mix.inProduction()) {
   mix.version()

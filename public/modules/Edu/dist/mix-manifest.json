@@ -1,5 +1,6 @@
 {
-    "/js/app-vue.js": "/js/app-vue.js",
-    "/js/edu.js": "/js/edu.js",
-    "/css/edu.css": "/css/edu.css"
+    "/js/app.js": "/js/app.js",
+    "/js/manifest.js": "/js/manifest.js",
+    "/js/vendor.js": "/js/vendor.js",
+    "/css/app.css": "/css/app.css"
 }

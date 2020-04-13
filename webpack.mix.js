@@ -9,8 +9,8 @@ mix.webpackConfig({
   }
 })
 mix
-  .js('web/app.js', 'public/js')
-  .sass('web/assets/css/app.scss', 'public/css')
+  .js(__dirname + '/web/app.js', 'public/js')
+  .sass(__dirname + '/web/assets/css/app.scss', 'public/css')
   .extract(['vue', 'vue-router', 'vuex', 'vue-video-player', 'moment', 'ant-design-vue'])
 
 mix.browserSync('hdcms.test')
