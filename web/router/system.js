@@ -9,7 +9,7 @@ import Group from '@/views/system/group/Index'
 import GroupAdd from '@/views/system/group/Add'
 import GroupEdit from '@/views/system/group/Edit'
 import UpdateSystemCache from '@/views/system/cache/Update'
-
+import User from '@/views/system/user/Edit'
 //系统配置
 export default {
   path: '/system',
@@ -33,6 +33,7 @@ export default {
       name: 'system.cache.update',
       path: 'cache/update',
       component: UpdateSystemCache
-    }
+    },
+    { name: 'system.user', path: 'user', component: User }
   ]
 }

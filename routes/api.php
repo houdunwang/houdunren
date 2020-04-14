@@ -25,6 +25,8 @@ Route::group(['middleware' => ['auth:sanctum'], 'namespace' => 'System', 'prefix
     Route::post('module', 'ModuleController@install');
     Route::delete('module/{name}', 'ModuleController@uninstall');
     Route::get('module/installed', 'ModuleController@installed');
+    //我的资料
+    Route::apiResource('user', 'UserController');
 });
 
 //站点

@@ -36,6 +36,7 @@
             aria-expanded="false"
           >{{ user.name }}</a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownId">
+            <router-link :to="{name:'system.user'}" class="dropdown-item" href="#">修改资料</router-link>
             <a class="dropdown-item" href="#">退出登录</a>
           </div>
         </div>

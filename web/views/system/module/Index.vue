@@ -59,13 +59,14 @@ export default {
       module.model = true
     },
     async uninstall(module) {
-      this.$confirm(`确定卸载模块吗`, { type: 'warning' })
-        .then(async () => {
+      this.$confirm({
+        content: `确定卸载模块吗`,
+        onOk: async () => {
           await this.axios.delete(`/system/module/${module.config.name}`)
           this.$message.success('卸载成功')
           module.model = false
-        })
-        .catch(() => {})
+        }
+      })
     }
   }
 }
