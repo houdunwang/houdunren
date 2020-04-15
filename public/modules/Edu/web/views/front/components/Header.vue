@@ -60,7 +60,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownId">
                 <a class="dropdown-item mb-2 mt-2" href="/member/info/base">修改资料</a>
-                <a class="dropdown-item mb-2" href="/member/info/phone">绑定手机</a>
+                <a class="dropdown-item mb-2" href="/member/info/mobile">绑定手机</a>
                 <a class="dropdown-item mb-2" href="/member/info/avatar">头像设置</a>
                 <a class="dropdown-item mb-2" href="/member/info/base">修改密码</a>
                 <a class="dropdown-item mb-2" href="/member/info/email">绑定邮箱</a>

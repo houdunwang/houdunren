@@ -1,8 +1,8 @@
 <template>
-  <a-card title="会员登录" class="account shadow-sm">
+  <a-card title="会员登录" class="account shadow-sm animated fadeInDown">
     <a-form-model layout="vertical" :model="form" :rules="rules" ref="form">
-      <a-form-model-item label="用户名" prop="username">
-        <a-input v-model="form.username" placeholder="请输入帐号|邮箱|手机号" />
+      <a-form-model-item label="帐号" prop="account">
+        <a-input v-model="form.account" placeholder="请输入邮箱或手机号" />
       </a-form-model-item>
       <a-form-model-item label="密码" prop="password">
         <a-input type="password" v-model="form.password" placeholder="请输入登录密码" />
@@ -10,17 +10,17 @@
       <a-form-model-item label="验证码" prop="captcha" class="captcha">
         <a-input placeholder="请输入图形验证码" v-model="form.captcha">
           <a-tooltip slot="suffix">
-            <img src="/api/common/captcha-image" onclick="this.src=this.src+`?${Math.random()}`" />
+            <img src="/api/common/captcha/image" onclick="this.src=this.src+`?${Math.random()}`" />
           </a-tooltip>
         </a-input>
       </a-form-model-item>
       <a-form-model-item type="flex">
         <a-row type="flex" justify="space-between" align="middle">
           <div>
-            <a-button type="primary" @click="onSubmit">登录</a-button>
-            <a-button style="margin-left: 10px;">注册</a-button>
+            <a-button type="primary" @click="onSubmit">提交登录</a-button>
           </div>
           <div>
+            <router-link :to="{name:'register'}" class="text-secondary mr-1">注册</router-link>
             <a href class="text-secondary">忘记密码</a>
           </div>
         </a-row>
@@ -37,12 +37,12 @@ export default {
   data() {
     return {
       rules: {
-        username: [{ required: true, message: '帐号不能为空', trigger: 'blur' }],
+        account: [{ required: true, message: '帐号不能为空', trigger: 'blur' }],
         password: [{ required: true, message: '密码不能为空', trigger: 'blur' }],
         captcha: [{ required: true, message: '验证码不能为空' }]
       },
       form: {
-        username: '',
+        account: 'admin@houdunren.com',
         password: '',
         captcha: ''
       }
@@ -64,7 +64,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" >
 .account {
   width: 450px;
   @media screen and (max-width: 768px) {

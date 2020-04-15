@@ -12,27 +12,25 @@ use Closure;
  */
 class SiteMiddleware
 {
-  public function handle($request, Closure $next, ...$role)
-  {
-    $site = site(request('site'));
-
-    if ($this->checkRole($role, $site)) {
-      return $next($request);
+    public function handle($request, Closure $next, ...$role)
+    {
+        $site = site(request('site'));
+        if ($this->checkRole($role, $site)) {
+            return $next($request);
+        }
+        abort(403, '你不是站点管理员或超级管理员');
     }
 
-    abort(403, '你不是站点管理员或超级管理员');
-  }
-
-  /**
-   * 站点角色检测
-   * @param array $role
-   *
-   * @return bool
-   */
-  protected function checkRole(array $role, Site $site): bool
-  {
-    $user = auth()->user();
-    return isSuperAdmin() ||
-      app(UserService::class)->isRole($site, $user, $role);
-  }
+    /**
+     * 站点角色检测
+     * @param array $role
+     *
+     * @return bool
+     */
+    protected function checkRole(array $role, Site $site): bool
+    {
+        $user = auth()->user();
+        return isSuperAdmin() ||
+            app(UserService::class)->isRole($site, $user, $role);
+    }
 }

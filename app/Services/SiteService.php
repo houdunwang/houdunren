@@ -26,6 +26,7 @@ class SiteService
         if ($model instanceof Site) {
             $this->config($cache = $model);
             define('SITEID', $model['id']);
+            config('app.name', $model['name']);
         };
         return $cache;
     }
@@ -37,6 +38,8 @@ class SiteService
     public function getSiteByDomain()
     {
         $regexp = "^https?:\/\/{$_SERVER['HTTP_HOST']}";
+        // dd($regexp);
+        // dd(Site::where('domain', 'REGEXP', $regexp)->first());
         return Site::where('domain', 'REGEXP', $regexp)->first();
     }
 

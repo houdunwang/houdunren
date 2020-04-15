@@ -48,7 +48,7 @@
         </div>
       </div>
     </el-form>
-  </div> -->
+  </div>-->
 </template>
 <script>
 export default {
@@ -56,7 +56,7 @@ export default {
   methods: {
     async send() {
       await this.axios.post(`site/config/email/${this.$route.params.sid}`, {
-        phone: this.form.email.test_mail.value
+        mobile: this.form.email.test_mail.value
       })
       this.$message.success('测试邮件发送成功')
     }

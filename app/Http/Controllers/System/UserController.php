@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends ApiController
 {
-    public function __construct()
-    {
-        $this->middleware('system');
-    }
-
     public function update(UserRequest $request, User $user)
     {
         $data = $request->all();

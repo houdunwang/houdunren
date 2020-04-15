@@ -45,18 +45,18 @@ class UserController extends ApiController
      * @param CodeService $codeService
      * @return JsonResponse
      */
-    public function phone(Request $request, CodeService $codeService)
+    public function mobile(Request $request, CodeService $codeService)
     {
         $request->validate([
-            'phone' => 'required|regex:/^1[3-9]\d{9}$/',
+            'mobile' => 'required|regex:/^1[3-9]\d{9}$/',
             'code' => 'required'
-        ], ['phone.required' => '手机号不能为空', 'phone.regex' => '手机号错误', 'code.required' => '验证码不能为空']);
+        ], ['mobile.required' => '手机号不能为空', 'mobile.regex' => '手机号错误', 'code.required' => '验证码不能为空']);
 
         if ($codeService->check($request->code) === false) {
             return $this->error('验证码错误');
         }
         $user = auth()->user();
-        $user->phone = $request->phone;
+        $user->mobile = $request->mobile;
         $user->save();
         return $this->success('手机号绑定成功');
     }

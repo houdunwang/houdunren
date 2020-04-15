@@ -9,6 +9,7 @@
 
     <div class="alert alert-info" role="alert">操作员不允许删除公众号和编辑公众号资料， 只能对站点模块进行管理</div>
     <a-table
+      v-if="users"
       :dataSource="users"
       :pagination="false"
       bordered
@@ -67,7 +68,7 @@ const columns = [
   { title: '编号', width: 80, dataIndex: 'id', key: 'id' },
   { title: '头像', width: 80, scopedSlots: { customRender: 'avatar' } },
   { title: '用户名', dataIndex: 'name', key: 'name' },
-  { title: '电话', dataIndex: 'phone', key: 'phone' },
+  { title: '电话', dataIndex: 'mobile', key: 'mobile' },
   { title: '邮箱', dataIndex: 'email', key: 'email' },
   { title: '注册时间', width: 80, scopedSlots: { customRender: 'created_at' } },
   { title: '', width: 160, scopedSlots: { customRender: 'manage' } }

@@ -16,14 +16,14 @@
       <div class="card mt-2">
         <div class="card-header bg-white">我的资料</div>
         <div class="card-body">
-          <a-form-model-item label="昵称" prop="nickname">
-            <a-input v-model="form.nickname"></a-input>
+          <a-form-model-item label="昵称" prop="name">
+            <a-input v-model="form.name"></a-input>
           </a-form-model-item>
           <a-form-model-item label="邮箱">
             <a-input v-model="form.email"></a-input>
           </a-form-model-item>
           <a-form-model-item label="手机号">
-            <a-input v-model="form.phone"></a-input>
+            <a-input v-model="form.mobile"></a-input>
           </a-form-model-item>
           <a-form-model-item label="真实姓名">
             <a-input v-model="form.real_name"></a-input>
@@ -63,7 +63,7 @@
 import _ from 'lodash'
 import { mapState } from 'vuex'
 const rules = {
-  nickname: [{ required: true, message: '昵称不能为空' }],
+  name: [{ required: true, message: '昵称不能为空' }],
   password: [{ required: true, message: '密码不能为空' }],
   password_confirmation: [{ required: true, message: '确认密码能为空' }]
 }

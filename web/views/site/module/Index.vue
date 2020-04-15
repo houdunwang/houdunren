@@ -32,7 +32,7 @@
                       class="btn"
                       :class="isDefault(module)?'btn-info':'btn-outline-info'"
                       @click.prevent="setDefaultModule(module.model.id)"
-                      v-if="user.id == site.admin.id"
+                      v-if="user.id == site.admin.id || user.is_super_admin"
                     >{{ isDefault(module)?'默认模块':'设为默认' }}</button>
                     <a
                       :href="site.domain"

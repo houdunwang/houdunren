@@ -23,14 +23,7 @@
 
 <script>
 import User from '@/components/User'
-// const columns = [
-//   { title: '编号', width: 80, dataIndex: 'id', key: 'id' },
-//   { title: '头像', width: 80, scopedSlots: { customRender: 'avatar' } },
-//   { title: '昵称', dataIndex: 'name', key: 'name' },
-//   { title: '邮箱', dataIndex: 'email', key: 'email' },
-//   { title: '手机号', dataIndex: 'phone', key: 'phone' },
-//   { title: '注册时间', scopedSlots: { customRender: 'created_at' } }
-// ]
+
 export default {
   components: { User },
   data() {

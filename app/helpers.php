@@ -8,6 +8,7 @@ use App\Services\SiteService;
 use App\Services\UserService;
 use App\User;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
  */
 function isSuperAdmin(): bool
 {
-  return app(UserService::class)->isSuperAdmin();
+    return app(UserService::class)->isSuperAdmin(Auth::user());
 }
 
 /**
@@ -25,7 +26,7 @@ function isSuperAdmin(): bool
  */
 function route_class()
 {
-  return str_replace('.', '-', Route::currentRouteName());
+    return str_replace('.', '-', Route::currentRouteName());
 }
 
 /**
@@ -36,7 +37,7 @@ function route_class()
  */
 function site($site = null)
 {
-  return app(SiteService::class)->site($site);
+    return app(SiteService::class)->site($site);
 }
 /**
  * 缓存模块
@@ -45,7 +46,7 @@ function site($site = null)
  */
 function module(Module $module = null)
 {
-  return app(ModuleService::class)->module($module);
+    return app(ModuleService::class)->module($module);
 }
 /**
  * 检测模块访问权限
@@ -54,7 +55,7 @@ function module(Module $module = null)
  */
 function access(string $permission, ?Site $site, ?User $user): bool
 {
-  return app(AccessService::class)->check($permission, $site, $user);
+    return app(AccessService::class)->check($permission, $site, $user);
 }
 
 /**
@@ -67,8 +68,8 @@ function access(string $permission, ?Site $site, ?User $user): bool
  */
 function table_foreign(\Illuminate\Database\Schema\Blueprint $table, string $tableName, string $foreignKey, string $comment = ''): void
 {
-  $table->unsignedBigInteger($foreignKey)->nullable();
-  $table->foreign($foreignKey)->references('id')->on($tableName)->onDelete('cascade');
+    $table->unsignedBigInteger($foreignKey)->nullable();
+    $table->foreign($foreignKey)->references('id')->on($tableName)->onDelete('cascade');
 }
 
 /**
@@ -78,8 +79,8 @@ function table_foreign(\Illuminate\Database\Schema\Blueprint $table, string $tab
  */
 function table_foreign_site(\Illuminate\Database\Schema\Blueprint $table)
 {
-  $table->unsignedBigInteger('site_id')->comment('站点编号');
-  $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
+    $table->unsignedBigInteger('site_id')->comment('站点编号');
+    $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
 }
 
 /**
@@ -89,6 +90,6 @@ function table_foreign_site(\Illuminate\Database\Schema\Blueprint $table)
  */
 function table_foreign_user(\Illuminate\Database\Schema\Blueprint $table)
 {
-  $table->unsignedBigInteger('user_id')->comment('用户编号');
-  $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+    $table->unsignedBigInteger('user_id')->comment('用户编号');
+    $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 }

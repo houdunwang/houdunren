@@ -2,7 +2,7 @@ import Main from '@/views/member/Main'
 import Base from '@/views/member/info/Base'
 import Password from '@/views/member/info/Password'
 import Avatar from '@/views/member/info/Avatar'
-import Phone from '@/views/member/info/Phone'
+import Mobile from '@/views/member/info/Mobile'
 import Email from '@/views/member/info/Email'
 export default {
   path: '/member',
@@ -25,9 +25,9 @@ export default {
       component: Avatar
     },
     {
-      name: 'info.phone',
-      path: 'info/phone',
-      component: Phone
+      name: 'info.mobile',
+      path: 'info/mobile',
+      component: Mobile
     },
     {
       name: 'info.email',

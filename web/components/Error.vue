@@ -17,7 +17,7 @@ export default {
       }
       this.$warning({
         title: '温馨提示',
-        content: messages.join('<br/>'),
+        content: messages.join(','),
         maskClosable: true
       })
     }

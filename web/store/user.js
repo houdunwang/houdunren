@@ -20,18 +20,23 @@ export default {
   actions: {
     async get({ commit }) {
       if (Token.get()) {
-        let response = await window.axios.get(`user/get`)
+        let response = await window.axios.get(`account/get`)
         commit('set', response.data)
         return response.data
       }
     },
     async login({}, form) {
-      let response = await window.axios.post(`user/login`, form)
+      let response = await window.axios.post(`account/login`, form)
+      Token.set(response.data.token)
+      return true
+    },
+    async register({}, form) {
+      let response = await window.axios.post(`account/register`, form)
       Token.set(response.data.token)
       return true
     },
     async logout({}) {
-      await window.axios.get(`user/logout`)
+      await window.axios.get(`account/logout`)
       Token.del()
       location.href = '/'
     }

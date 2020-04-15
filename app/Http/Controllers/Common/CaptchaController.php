@@ -17,7 +17,7 @@ class CaptchaController extends Controller
      * BASE64验证码
      * @return void
      */
-    // public function make(CaptchaService $captchaService)
+    // public function text(CaptchaService $captchaService)
     // {
     //     return $captchaService->make();
     // }

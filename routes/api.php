@@ -3,11 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Common', 'prefix' => 'common'], function () {
-    Route::post('code', 'CodeController@send')->middleware('auth:sanctum');
+    Route::post('code/send', 'CodeController@send')->middleware(['front', 'throttle:111,2']);
     Route::post('upload/system', 'UploadController@system')->middleware('auth:sanctum');
-    Route::post('upload/site/{site}', 'UploadController@site')->middleware('auth:sanctum');
-    Route::get('captcha', 'CaptchaController@make')->middleware('auth:sanctum');
-    Route::get('captcha-image', 'CaptchaController@image');
+    Route::post('upload/site', 'UploadController@site')->middleware('auth:sanctum');
+    Route::get('captcha/text', 'CaptchaController@make');
+    Route::get('captcha/image', 'CaptchaController@image');
 });
 
 //系统
@@ -43,7 +43,7 @@ Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'Site', 'prefix' =>
     Route::get('{site}/admin', 'AdminController@index');
     Route::post('{site}/admin', 'AdminController@add');
     Route::delete('{site}/admin', 'AdminController@remove');
-    Route::post('{site}/admin/search', 'AdminController@search');
+    Route::get('{site}/admin/search', 'AdminController@search');
     //站点用户
     Route::get('{site}/user', 'UserController@index');
     Route::get('{site}/user/{user}', 'UserController@get');
@@ -62,11 +62,11 @@ Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'Site', 'prefix' =>
 });
 
 //登录注册
-Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
+Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
     //登录注册
     Route::post('login', 'UserController@login');
     Route::get('logout', 'UserController@logout');
-    Route::post('register', 'UserController@register');
+    Route::post('register', 'UserController@register')->middleware('front');
     Route::get('get', 'UserController@get');
 });
 
@@ -76,6 +76,6 @@ Route::group(['middleware' => ['auth:sanctum'], 'namespace' => 'Member', 'prefix
     Route::get('get', 'UserController@get');
     Route::put('user', 'UserController@update');
     Route::put('password', 'UserController@password');
-    Route::put('phone', 'UserController@phone');
+    Route::put('mobile', 'UserController@mobile');
     Route::put('email', 'UserController@email');
 });

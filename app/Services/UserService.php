@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Site;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserService
 {
@@ -16,11 +17,26 @@ class UserService
      */
     public function login(array $data)
     {
-        $credentials = $this->credentials($data['username']);
+        $credentials = $this->credentials($data['account']);
         $credentials['password'] = $data['password'];
-        return auth()->attempt($credentials, $data['remember'] ?? false);
+        if (auth()->attempt($credentials)) {
+            return Auth::user()->createToken('token')->plainTextToken;
+        }
+        return false;
     }
-
+    /**
+     * 注册
+     * @param array $data
+     * @return mixed
+     */
+    public function register(array $data)
+    {
+        $data = array_merge($data, $this->credentials($data['account']));
+        $data['password'] = bcrypt($data['password']);
+        $user = new User();
+        $user->fill($data)->save();
+        return $user->createToken('token')->plainTextToken;
+    }
     /**
      * 帐号类型
      * @param string $username
@@ -32,10 +48,8 @@ class UserService
         $credentials = [];
         if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
             $credentials['email'] = $username;
-        } else if (preg_match('/^[a-z]+$/i', $username)) {
-            $credentials['name'] = $username;
         } else {
-            $credentials['phone'] = $username;
+            $credentials['mobile'] = $username;
         }
         return $credentials;
     }
@@ -44,9 +58,9 @@ class UserService
      * 超级管理员检测
      * @return bool
      */
-    public function isSuperAdmin(): bool
+    public function isSuperAdmin(User $user): bool
     {
-        return auth()->check() && auth()->id() === 1;
+        return $user['id'] === 1;
     }
     /**
      * 判断用户是否为站点的指定角色
@@ -58,7 +72,7 @@ class UserService
     public function isRole(Site $site, User $user, array $role = [])
     {
         $role = $role ? $role : ['admin', 'operator'];
-        return $user && $user->site()->wherePivotIn('role', $role)
+        return $this->isSuperAdmin($user) || $user->site()->wherePivotIn('role', $role)
             ->where('site_id', $site['id'])->first() ? true : false;
     }
 
@@ -106,7 +120,7 @@ class UserService
                         function ($field) use ($query, $content) {
                             $query->orWhere($field, 'like', "%{$content}%");
                         },
-                        ['name', 'email', 'phone', 'users.id'],
+                        ['name', 'email', 'mobile', 'users.id'],
                     );
             })->paginate($row);
     }

@@ -11,9 +11,9 @@ class UserSeeder extends Seeder
             $user->group()->attach([1]);
         });
         $users = [
-            1 => ['name' => 'admin', 'nickname' => '超管',],
-            2 => ['name' => 'houdunren', 'nickname' => '后盾人',],
-            3 => ['name' => 'hdcms', 'nickname' => 'HDCMS开源软件'],
+            1 => ['name' => '超管', 'email' => 'admin@houdunren.com'],
+            2 => ['name' => '后盾人', 'email' => 'houdunren@houdunren.com'],
+            3 => ['name' => 'HDCMS', 'email' => 'hdcms@houdunren.com'],
         ];
         collect([1, 2, 3])->map(function ($id) use ($users) {
             $user = User::find($id);

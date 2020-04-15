@@ -56,10 +56,10 @@ class UploadController extends ApiController
      * @throws NoTmpDirFileException
      * @throws ExtensionFileException
      */
-    public function site(Request $request,  UploadService $uploadService, Site $site)
+    public function site(Request $request,  UploadService $uploadService)
     {
         $file = $request->file('file');
-        return $uploadService->site($file, auth()->user(), $site);
+        return $uploadService->site($file, auth()->user(), site());
     }
     /**
      * 头像上传

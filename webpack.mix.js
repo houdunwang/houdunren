@@ -13,4 +13,4 @@ mix
   .sass(__dirname + '/web/assets/css/app.scss', 'public/css')
   .extract(['vue', 'vue-router', 'vuex', 'vue-video-player', 'moment', 'ant-design-vue'])
 
-mix.browserSync('hdcms.test')
+// mix.browserSync('hdcms.test')
