@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\ApiController;
+use App\Rules\CodeRule;
 use App\Services\CodeService;
 use App\Services\UserService;
 use App\User;
@@ -10,6 +11,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Database\Eloquent\MassAssignmentException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +24,7 @@ class UserController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except('login', 'register');
+        $this->middleware('auth:sanctum')->except('login', 'register', 'has', 'findPassword');
     }
     /**
      * 获取用户资料
@@ -83,16 +85,39 @@ class UserController extends ApiController
             'name.required' => '昵称不能为空', 'password.required' => '密码不能为空', 'password.min' => '密码长度为5~20', 'password.confirmed' => '两次密码输入不一致', 'captcha.captcha' => '图形验证码输入错误'
         ]);
         if (!$codeService->check($request->account, $request->code)) {
-            return $this->error("验证码输入错误");
+            return abort(422, '验证码输入错误');
         }
 
         $token = $userService->register($request->all());
         return response()->json(['token' => $token]);
     }
-    public function checkAccount(Request $request)
+    /**
+     * 检测帐号是否存在
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function has(Request $request)
     {
         $column = filter_var($request->account, FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
         $has = (bool) User::where($column, $request->account)->first();
-        return $this->json(['is_register' => !$has]);
+        return $this->json(['state' => $has]);
+    }
+
+    public function findPassword(Request $request,  CodeService $codeService, UserService $userService)
+    {
+        $request->validate([
+            'account' => "required",
+            'code' => ['required', new CodeRule($request->account)],
+            'password' => 'required|confirmed|min:5,20',
+            'captcha' => 'captcha'
+        ], [
+            'account.required' => '帐号不能为空', 'code' => '验证码不能为空', 'password' => '请输入密码', 'password.confirmed' => '确认密码输入错误', 'password.min' => "请输入长度为5~20位的密码",
+            "captcha.captcha" => "图形验证码输入错误"
+        ]);
+        if ($codeService->check($request->account, $request->code) === false) {
+            return abort(422, '验证码输入错误');
+        }
+        $userService->changePassword($request->account, $request->password);
+        return $this->success('密码修改成功');
     }
 }

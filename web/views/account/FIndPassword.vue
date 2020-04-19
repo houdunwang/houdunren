@@ -1,19 +1,13 @@
 <template>
-  <a-card title="会员注册" class="account shadow-sm animated fadeInDown">
+  <a-card title="找回密码" class="account shadow-sm animated fadeInDown">
     <a-form-model layout="vertical" :model="form" :rules="rules" ref="form">
       <a-form-model-item label="帐号" prop="account">
         <a-input v-model="form.account" placeholder="请输入邮箱或手机号" @blur="checkAccount" />
       </a-form-model-item>
       <a-form-model-item label="验证码" prop="code">
-        <send-code :code.sync="form.code" :account.sync="form.account" :state="can_register" />
+        <send-code :code.sync="form.code" :account.sync="form.account" :state="has" />
       </a-form-model-item>
-      <a-divider>
-        <i class="fa fa-user-circle text-secondary" aria-hidden="true"></i>
-      </a-divider>
-      <a-form-model-item label="昵称" prop="name">
-        <a-input v-model="form.name" placeholder="起一个特别的昵称吧" />
-      </a-form-model-item>
-      <a-form-model-item label="密码" prop="password">
+      <a-form-model-item label="新密码" prop="password">
         <a-input type="password" v-model="form.password" placeholder="请输入登录密码" />
       </a-form-model-item>
       <a-form-model-item label="确认密码" prop="password_confirmation">
@@ -29,7 +23,7 @@
       <a-form-model-item type="flex">
         <a-row type="flex" justify="space-between" align="middle">
           <div>
-            <a-button type="primary" @click="onSubmit" style="margin-left: 10px;">提交注册</a-button>
+            <a-button type="primary" @click="onSubmit" style="margin-left: 10px;">修改密码</a-button>
           </div>
           <div>
             <router-link :to="{ name: 'login' }" class="text-secondary mr-1">登录</router-link>
@@ -49,7 +43,6 @@ import SendCode from '@/components/SendCode'
 const rules = {
   account: [{ required: true, message: '帐号不能为空', trigger: 'blur' }],
   code: [{ required: true, message: '验证码输入错误', trigger: 'blur' }],
-  name: [{ required: true, message: '昵称不能为空', trigger: 'blur' }],
   password: [{ required: true, message: '密码不能为空', trigger: 'blur' }],
   password_confirmation: [{ required: true, message: '确认密码不能为空', trigger: 'blur' }],
   captcha: [{ required: true, message: '验证码不能为空' }]
@@ -57,8 +50,6 @@ const rules = {
 const form = {
   account: '18600276067',
   code: '',
-  name: '',
-  password: '',
   captcha: '',
   password: '',
   password_confirmation: ''
@@ -70,7 +61,7 @@ export default {
       rules,
       form,
       site: null,
-      can_register: false
+      has: false
     }
   },
   computed: {
@@ -78,20 +69,18 @@ export default {
   },
   methods: {
     async checkAccount() {
-      let response = await this.$axios.post(`account/checkAccount`, this.form)
-
-      this.$set(this, 'can_register', response.data.is_register)
-      console.log(this.is_register)
-
-      if (this.can_register === false) {
-        this.$message.warning('帐号错误或已经注册')
+      let response = await this.$axios.post(`account/has`, this.form)
+      this.$set(this, 'has', response.data.state)
+      if (this.has === false) {
+        this.$message.warning('帐号不存在')
       }
     },
     onSubmit() {
       this.$refs.form.validate(valid => {
         if (valid) {
-          store.dispatch('user/register', this.form).then(response => {
-            location.href = this.$route.query.redirect || '/'
+          this.$axios.post('account/findPassword', this.form).then(response => {
+            this.$message.success('密码修改成功')
+            this.$router.push({ name: 'login' })
           })
         }
       })

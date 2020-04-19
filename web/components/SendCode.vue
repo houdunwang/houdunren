@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ state }}
     <a-input
       placeholder="请输入邮箱或手机号收到的验证码"
       v-model="codeText"

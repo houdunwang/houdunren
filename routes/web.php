@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('login', 'hd')->name('login');
 Route::view('{any}', 'hd')->where(
     'any',
-    '^(login|logout|register|admin|site|system|member).*'
+    '^(account|admin|site|system|member).*'
 );
 
 //前台

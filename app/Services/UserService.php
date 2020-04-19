@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\Site;
 use App\User;
+use Exception;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
 
 class UserService
@@ -36,6 +38,23 @@ class UserService
         $user = new User();
         $user->fill($data)->save();
         return $user->createToken('token')->plainTextToken;
+    }
+    /**
+     * 修改密码
+     * @param mixed $account  邮箱或手机号
+     * @param mixed $password
+     * @return mixed
+     * @throws HttpResponseException
+     */
+    public function changePassword($account, $password)
+    {
+        $user = User::where('email', $account)->orWhere('mobile', $account)->first();
+        if (!$user) {
+            // throw new Exception('帐号不存在');
+            abort(422, '帐号不存在');
+        }
+        $user['password'] = bcrypt($password);
+        return $user->save();
     }
     /**
      * 帐号类型

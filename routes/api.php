@@ -67,8 +67,9 @@ Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
     Route::post('login', 'UserController@login');
     Route::get('logout', 'UserController@logout');
     Route::post('register', 'UserController@register')->middleware('front');
-    Route::post('checkAccount', 'UserController@checkAccount')->middleware('front');
     Route::get('get', 'UserController@get');
+    Route::post('has', 'UserController@has')->middleware('front');
+    Route::post('findPassword', 'UserController@findPassword')->middleware('front');
 });
 
 //会员中心
