@@ -7239,9 +7239,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       }
 
+      var h = this.$createElement;
       this.$warning({
         title: '温馨提示',
-        content: messages.join(','),
+        content: h('div', {}, messages.map(function (m) {
+          return h('p', {
+            style: {
+              marginBottom: '.5em'
+            }
+          }, m);
+        })),
         maskClosable: true
       });
     }
@@ -7297,6 +7304,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
 
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -7313,85 +7322,109 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['type', 'account', 'code'],
+  props: {
+    code: {
+      type: String
+    },
+    account: {
+      type: String
+    },
+    state: {
+      type: Boolean
+    }
+  },
   data: function data() {
     return {
-      //上次发送的时间间隔
-      sendtime: 0,
-      //每次发送的时间间隔
-      timeout: 120,
-      title: this.type === 'sms' ? '手机号' : '邮箱'
+      diffTime: 5,
+      message: '',
+      codeText: ''
     };
   },
   created: function created() {
     var _this = this;
 
     setInterval(function () {
-      var preSend = store2__WEBPACK_IMPORTED_MODULE_1___default.a.get('sendtime') || 0;
-      _this.sendtime = moment__WEBPACK_IMPORTED_MODULE_2___default()().diff(preSend, 'second');
+      var sendtime = store2__WEBPACK_IMPORTED_MODULE_1___default.a.get('code-timeout', 0);
+      var time = parseInt(_this.diffTime - (moment__WEBPACK_IMPORTED_MODULE_2___default.a.now() - sendtime) / 1000);
+      var message = moment__WEBPACK_IMPORTED_MODULE_2___default.a.now() - sendtime > _this.diffTime * 1000 ? '发送验证码' : "\u8BF7".concat(time, "\u79D2\u540E\u64CD\u4F5C");
+
+      _this.$set(_this, 'message', message);
     }, 1000);
   },
-  computed: {
-    //按钮文本
-    message: function message() {
-      return this.sendtime > this.timeout ? '发送验证码' : this.timeout - this.sendtime + ' 秒后发送';
-    },
-    codeNum: {
-      get: function get() {
-        return this.code;
-      },
-      set: function set(value) {
-        this.$emit('update:code', value);
-      }
-    }
-  },
-  methods: {
+  methods: _defineProperty({
     //发送验证码
     send: function send() {
-      var _this2 = this;
+      alert(this.state);
+      return;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!(_this2.check() === true)) {
-                  _context.next = 5;
-                  break;
-                }
+      if (this.state) {
+        var sendtime = store2__WEBPACK_IMPORTED_MODULE_1___default.a.get('code-timeout', 0);
 
-                _context.next = 3;
-                return _this2.axios.post("common/code", {
-                  type: _this2.type,
-                  account: _this2.account
-                });
-
-              case 3:
-                _this2.$message.success('验证码发送成功，请在30分钟内使用');
-
-                store2__WEBPACK_IMPORTED_MODULE_1___default.a.set('sendtime', moment__WEBPACK_IMPORTED_MODULE_2___default()());
-
-              case 5:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    //业务验证
-    check: function check() {
-      if (Boolean(this.account) === false) {
-        this.$message.error(this.title + '不能为空');
-        return false;
+        if ((moment__WEBPACK_IMPORTED_MODULE_2___default.a.now() - sendtime) / 1000 > this.diffTime) {
+          store2__WEBPACK_IMPORTED_MODULE_1___default.a.set('code-timeout', moment__WEBPACK_IMPORTED_MODULE_2___default.a.now());
+        }
+      } else {
+        this.$message.warning('请检查帐号后发送');
       }
-
-      return this.sendtime > this.timeout;
     }
-  }
+  }, "send", function send() {
+    var _this2 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var sendtime;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              if (_this2.state) {
+                _context.next = 2;
+                break;
+              }
+
+              return _context.abrupt("return", _this2.$message.warning('请检查帐号后发送'));
+
+            case 2:
+              if (!(_this2.account == '')) {
+                _context.next = 4;
+                break;
+              }
+
+              return _context.abrupt("return", _this2.$message.error('帐号不能为空'));
+
+            case 4:
+              sendtime = store2__WEBPACK_IMPORTED_MODULE_1___default.a.get('code-timeout', 0);
+
+              if (!((moment__WEBPACK_IMPORTED_MODULE_2___default.a.now() - sendtime) / 1000 > _this2.diffTime)) {
+                _context.next = 8;
+                break;
+              }
+
+              _context.next = 8;
+              return _this2.axios.post("common/code/send", {
+                account: _this2.account
+              }).then(function (r) {
+                store2__WEBPACK_IMPORTED_MODULE_1___default.a.set('code-timeout', moment__WEBPACK_IMPORTED_MODULE_2___default.a.now());
+
+                _this2.$message.success('验证码发送成功');
+              });
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  })
 });
 
 /***/ }),
@@ -7679,8 +7712,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/store */ "./web/store/index.js");
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/router */ "./web/router/index.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_SendCode__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/SendCode */ "./web/components/SendCode.vue");
 
 
 var _form;
@@ -7695,13 +7727,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -7788,58 +7813,60 @@ var form = (_form = {
   captcha: ''
 }, _defineProperty(_form, "password", ''), _defineProperty(_form, "password_confirmation", ''), _form);
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    SendCode: _components_SendCode__WEBPACK_IMPORTED_MODULE_4__["default"]
+  },
   data: function data() {
     return {
       rules: rules,
       form: form,
-      site: null
+      site: null,
+      can_register: false
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('user', ['isLogin'])),
   methods: {
-    onSubmit: function onSubmit() {
+    checkAccount: function checkAccount() {
       var _this = this;
 
-      this.$refs.form.validate(function (valid) {
-        if (valid) {
-          _store__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch('user/register', _this.form).then(function (response) {
-            location.href = _this.$route.query.redirect || '/';
-          });
-        }
-      });
-    },
-    send: function send() {
-      var _this2 = this;
-
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(_this2.form.account == '')) {
-                  _context.next = 4;
-                  break;
+                _context.next = 2;
+                return _this.$axios.post("account/checkAccount", _this.form);
+
+              case 2:
+                response = _context.sent;
+
+                _this.$set(_this, 'can_register', response.data.is_register);
+
+                console.log(_this.is_register);
+
+                if (_this.can_register === false) {
+                  _this.$message.warning('帐号错误或已经注册');
                 }
 
-                _this2.$message.error('帐号不能为空');
-
-                _context.next = 7;
-                break;
-
-              case 4:
-                _context.next = 6;
-                return _this2.axios.post("common/code/send", _this2.form);
-
               case 6:
-                _this2.$message.success('验证码发送成功');
-
-              case 7:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    },
+    onSubmit: function onSubmit() {
+      var _this2 = this;
+
+      this.$refs.form.validate(function (valid) {
+        if (valid) {
+          _store__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch('user/register', _this2.form).then(function (response) {
+            location.href = _this2.$route.query.redirect || '/';
+          });
+        }
+      });
     }
   }
 });
@@ -11267,7 +11294,9 @@ __webpack_require__.r(__webpack_exports__);
         children: [{
           title: '我的帐户',
           icon: 'fa-briefcase',
-          url: ''
+          url: {
+            name: 'system.user'
+          }
         }, {
           title: '用户组管理',
           icon: 'fa-users',
@@ -66038,44 +66067,36 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm._v("\n  " + _vm._s(_vm.state) + "\n  "),
       _c(
-        "el-form-item",
-        { attrs: { label: "验证码" } },
+        "a-input",
+        {
+          attrs: { placeholder: "请输入邮箱或手机号收到的验证码" },
+          on: {
+            keyup: function($event) {
+              return _vm.$emit("update:code", _vm.codeText)
+            }
+          },
+          model: {
+            value: _vm.codeText,
+            callback: function($$v) {
+              _vm.codeText = $$v
+            },
+            expression: "codeText"
+          }
+        },
         [
           _c(
-            "el-input",
+            "span",
             {
-              attrs: { placeholder: "请输入验证码" },
-              model: {
-                value: _vm.codeNum,
-                callback: function($$v) {
-                  _vm.codeNum = $$v
-                },
-                expression: "codeNum"
-              }
+              staticStyle: { width: "80px", cursor: "pointer" },
+              attrs: { slot: "addonAfter", defaultValue: "发送验证码" },
+              on: { click: _vm.send },
+              slot: "addonAfter"
             },
-            [
-              _c("template", { slot: "append" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "disabled",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.send($event)
-                      }
-                    }
-                  },
-                  [_vm._v(_vm._s(_vm.message))]
-                )
-              ])
-            ],
-            2
+            [_vm._v(_vm._s(_vm.message))]
           )
-        ],
-        1
+        ]
       )
     ],
     1
@@ -66446,6 +66467,7 @@ var render = function() {
             [
               _c("a-input", {
                 attrs: { placeholder: "请输入邮箱或手机号" },
+                on: { blur: _vm.checkAccount },
                 model: {
                   value: _vm.form.account,
                   callback: function($$v) {
@@ -66462,31 +66484,21 @@ var render = function() {
             "a-form-model-item",
             { attrs: { label: "验证码", prop: "code" } },
             [
-              _c(
-                "a-input",
-                {
-                  attrs: { placeholder: "请输入邮箱或手机号收到的验证码" },
-                  model: {
-                    value: _vm.form.code,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form, "code", $$v)
-                    },
-                    expression: "form.code"
-                  }
+              _c("send-code", {
+                attrs: {
+                  code: _vm.form.code,
+                  account: _vm.form.account,
+                  state: _vm.can_register
                 },
-                [
-                  _c(
-                    "span",
-                    {
-                      staticStyle: { width: "80px", cursor: "pointer" },
-                      attrs: { slot: "addonAfter", defaultValue: "发送验证码" },
-                      on: { click: _vm.send },
-                      slot: "addonAfter"
-                    },
-                    [_vm._v("发送验证码")]
-                  )
-                ]
-              )
+                on: {
+                  "update:code": function($event) {
+                    return _vm.$set(_vm.form, "code", $event)
+                  },
+                  "update:account": function($event) {
+                    return _vm.$set(_vm.form, "account", $event)
+                  }
+                }
+              })
             ],
             1
           ),
@@ -72567,8 +72579,7 @@ _axios.interceptors.response.use(function (response) {
     switch (status) {
       case 401:
         //未登录用户跳转到登录页面
-        _services_token__WEBPACK_IMPORTED_MODULE_5__["default"].del(); //   location.href = '/login'
-
+        _services_token__WEBPACK_IMPORTED_MODULE_5__["default"].del();
         break;
 
       case 422:
@@ -72578,6 +72589,7 @@ _axios.interceptors.response.use(function (response) {
 
       case 429:
         error.response.data.message = '请求频繁，请稍候再试';
+        break;
 
       default:
         //其它错误消息直接显示错误信息

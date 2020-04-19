@@ -15,9 +15,14 @@ export default {
           messages = messages.concat(errors[key])
         }
       }
+      const h = this.$createElement
       this.$warning({
         title: '温馨提示',
-        content: messages.join(','),
+        content: h(
+          'div',
+          {},
+          messages.map(m => h('p', { style: { marginBottom: '.5em' } }, m))
+        ),
         maskClosable: true
       })
     }

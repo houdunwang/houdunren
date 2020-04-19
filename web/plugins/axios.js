@@ -66,7 +66,6 @@ _axios.interceptors.response.use(
         case 401:
           //未登录用户跳转到登录页面
           token.del()
-          //   location.href = '/login'
           break
         case 422:
           //表单验证错误，错误消息记录到VUEX中
@@ -74,6 +73,7 @@ _axios.interceptors.response.use(
           break
         case 429:
           error.response.data.message = '请求频繁，请稍候再试'
+          break
         default:
           //其它错误消息直接显示错误信息
           let message = error.response.data.message

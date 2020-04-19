@@ -6,7 +6,6 @@ use AlibabaCloud\Client\Exception\ClientException;
 use App\User;
 use Exception;
 use Illuminate\Support\Facades\Cache;
-use InvalidArgumentException;
 
 /**
  * 验证码服务

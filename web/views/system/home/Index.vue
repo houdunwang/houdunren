@@ -25,7 +25,7 @@ export default {
         {
           title: '用户管理',
           children: [
-            { title: '我的帐户', icon: 'fa-briefcase', url: '' },
+            { title: '我的帐户', icon: 'fa-briefcase', url: { name: 'system.user' } },
             { title: '用户组管理', icon: 'fa-users', url: { name: 'system.group' } },
             { title: '服务套餐', icon: 'fa-comments-o', url: { name: 'system.package' } }
           ]

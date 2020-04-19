@@ -70,14 +70,16 @@ class UserController extends ApiController
      */
     public function register(Request $request, User $user, UserService $userService, CodeService $codeService)
     {
+        $column = filter_var($request->account, FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
         $request->validate([
-            'account' => 'required',
+            'account' => "required|unique:users,{$column}",
             'code' => 'required',
             'name' => 'required',
             'password' => 'required|min:5,20|confirmed',
             'captcha' => 'captcha'
         ], [
-            'account.required' => '帐号不能为空',  'code.required' => '验证码不能为空',
+            'account.required' => '帐号不能为空', 'account.unique' => '帐号已经注册过',
+            'code.required' => '验证码不能为空',
             'name.required' => '昵称不能为空', 'password.required' => '密码不能为空', 'password.min' => '密码长度为5~20', 'password.confirmed' => '两次密码输入不一致', 'captcha.captcha' => '图形验证码输入错误'
         ]);
         if (!$codeService->check($request->account, $request->code)) {
@@ -86,5 +88,11 @@ class UserController extends ApiController
 
         $token = $userService->register($request->all());
         return response()->json(['token' => $token]);
+    }
+    public function checkAccount(Request $request)
+    {
+        $column = filter_var($request->account, FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
+        $has = (bool) User::where($column, $request->account)->first();
+        return $this->json(['is_register' => !$has]);
     }
 }

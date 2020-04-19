@@ -7,5 +7,7 @@
 		"path": "public/modules/Edu"
 	}
 ],
-  "settings": {}
+"settings": {
+	"liveServer.settings.multiRootWorkspaceName": "hdcms"
+}
 }

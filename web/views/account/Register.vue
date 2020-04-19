@@ -2,17 +2,10 @@
   <a-card title="会员注册" class="account shadow-sm animated fadeInDown">
     <a-form-model layout="vertical" :model="form" :rules="rules" ref="form">
       <a-form-model-item label="帐号" prop="account">
-        <a-input v-model="form.account" placeholder="请输入邮箱或手机号" />
+        <a-input v-model="form.account" placeholder="请输入邮箱或手机号" @blur="checkAccount" />
       </a-form-model-item>
       <a-form-model-item label="验证码" prop="code">
-        <a-input placeholder="请输入邮箱或手机号收到的验证码" v-model="form.code">
-          <span
-            slot="addonAfter"
-            @click="send"
-            defaultValue="发送验证码"
-            style="width: 80px;cursor:pointer"
-          >发送验证码</span>
-        </a-input>
+        <send-code :code.sync="form.code" :account.sync="form.account" :state="can_register" />
       </a-form-model-item>
       <a-divider>
         <i class="fa fa-user-circle text-secondary" aria-hidden="true"></i>
@@ -39,7 +32,7 @@
             <a-button type="primary" @click="onSubmit" style="margin-left: 10px;">提交注册</a-button>
           </div>
           <div>
-            <router-link :to="{name:'login'}" class="text-secondary mr-1">登录</router-link>
+            <router-link :to="{ name: 'login' }" class="text-secondary mr-1">登录</router-link>
             <a href class="text-secondary">忘记密码</a>
           </div>
         </a-row>
@@ -52,7 +45,7 @@
 import { mapGetters } from 'vuex'
 import store from '@/store'
 import router from '@/router'
-import vue from 'vue'
+import SendCode from '@/components/SendCode'
 const rules = {
   account: [{ required: true, message: '帐号不能为空', trigger: 'blur' }],
   code: [{ required: true, message: '验证码输入错误', trigger: 'blur' }],
@@ -71,17 +64,29 @@ const form = {
   password_confirmation: ''
 }
 export default {
+  components: { SendCode },
   data() {
     return {
       rules,
       form,
-      site: null
+      site: null,
+      can_register: false
     }
   },
   computed: {
     ...mapGetters('user', ['isLogin'])
   },
   methods: {
+    async checkAccount() {
+      let response = await this.$axios.post(`account/checkAccount`, this.form)
+
+      this.$set(this, 'can_register', response.data.is_register)
+      console.log(this.is_register)
+
+      if (this.can_register === false) {
+        this.$message.warning('帐号错误或已经注册')
+      }
+    },
     onSubmit() {
       this.$refs.form.validate(valid => {
         if (valid) {
@@ -90,19 +95,11 @@ export default {
           })
         }
       })
-    },
-    async send() {
-      if (this.form.account == '') {
-        this.$message.error('帐号不能为空')
-      } else {
-        await this.axios.post(`common/code/send`, this.form)
-        this.$message.success('验证码发送成功')
-      }
     }
   }
 }
 </script>
-<style lang="scss" >
+<style lang="scss">
 .account {
   width: 450px;
   @media screen and (max-width: 768px) {

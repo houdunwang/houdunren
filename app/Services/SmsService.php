@@ -30,6 +30,9 @@ class SmsService
      */
     public function code($mobile, $code = null)
     {
+        if (!$mobile) {
+            abort(500, '手机号格式错误');
+        }
         $code = $code ?: rand(1000, 9999);
         $webname = site()['name'];
         return $this->send([
@@ -69,7 +72,7 @@ class SmsService
                 ])
                 ->request();
         } catch (Exception $e) {
-            throw new Exception('短信接口配置错误');
+            throw new Exception('短信接口配置错误' . $e->getMessage());
         }
     }
 }
