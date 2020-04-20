@@ -1,47 +1,41 @@
 <template>
-  <div>
-    <div class="card">
-      <div class="card-header bg-white">绑定手机</div>
-      <div class="card-body">
-        <el-form :model="form" ref="form" label-width="80px">
-          <el-form-item
-            label="手机号"
-            prop="mobile"
-            :rules="[{ required: true, message: '请输入手机号', trigger: 'blur' }]"
-          >
-            <el-input type="text" v-model="form.mobile"></el-input>
-          </el-form-item>
-          <send-code type="sms" :account="form.mobile" :code.sync="form.code" />
-          <el-form-item>
-            <el-button type="primary" @click="onSubmit">保存提交</el-button>
-          </el-form-item>
-        </el-form>
-      </div>
-    </div>
-  </div>
+  <a-card title="绑定手机" size="small">
+    <a-form-model :model="user" ref="user" :label-col="{span:3}" :wrapper-col="{span:10}">
+      <a-form-model-item label="手机号">
+        <a-input v-model="user.mobile"></a-input>
+      </a-form-model-item>
+      <a-form-model-item label="验证码">
+        <send-code :state="user.mobile!=''" :account.sync="user.mobile" :code.sync="code" />
+      </a-form-model-item>
+      <a-form-model-item :wrapper-col="{ span: 14, offset: 3 }">
+        <a-button type="primary" @click="onSubmit">保存提交</a-button>
+      </a-form-model-item>
+    </a-form-model>
+  </a-card>
 </template>
 <script>
 import _ from 'lodash'
 import SendCode from '@/components/SendCode'
+import { mapState } from 'vuex'
 export default {
   components: { SendCode },
   data() {
     return {
-      form: {
-        mobile: '',
-        code: ''
-      }
+      code: ''
     }
   },
-  async created() {
-    let response = await this.axios.get(`member/get`)
-    this.$set(this, 'form', response.data)
+  //   async created() {
+  //     let response = await this.axios.get(`member/get`)
+  //     this.$set(this, 'form', response.data)
+  //   },
+  computed: {
+    ...mapState('user', { user: 'data' })
   },
   methods: {
     onSubmit() {
-      this.$refs['form'].validate(async valid => {
+      this.$refs['user'].validate(async valid => {
         if (valid) {
-          await this.axios.put(`member/mobile`, this.form)
+          await this.axios.put(`member/mobile`, { ...this.user, code: this.code })
           this.$message.success('手机号修改成功')
         }
       })

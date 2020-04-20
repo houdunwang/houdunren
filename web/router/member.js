@@ -9,29 +9,30 @@ export default {
   component: Main,
   children: [
     {
-      name: 'info.base',
-      path: 'info/base',
+      meta: { auth: true },
+      name: 'member.base',
+      path: 'base',
       component: Base,
       alias: '/member'
     },
     {
-      name: 'info.password',
-      path: 'info/password',
+      name: 'member.password',
+      path: 'password',
       component: Password
     },
     {
-      name: 'info.avatar',
-      path: 'info/avatar',
+      name: 'member.avatar',
+      path: 'avatar',
       component: Avatar
     },
     {
-      name: 'info.mobile',
-      path: 'info/mobile',
+      name: 'member.mobile',
+      path: 'mobile',
       component: Mobile
     },
     {
-      name: 'info.email',
-      path: 'info/email',
+      name: 'member.email',
+      path: 'email',
       component: Email
     }
   ]

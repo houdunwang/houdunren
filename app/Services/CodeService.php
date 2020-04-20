@@ -50,7 +50,7 @@ class CodeService
      * @param mixed $account
      * @return void
      */
-    protected function email($account)
+    public function email($account)
     {
         $user = new User();
         $user->email = $account;

@@ -41,7 +41,7 @@ return [
             'type' => ['value' => 'jpg,jpeg,gif,png,doc,txt,pem,json', 'title' => '上传类型', 'desc' => '请用英文半角逗号分隔文件类型'],
         ],
         'email' => [
-            'driver' => ['value' => 'smtp', 'title' => '邮箱驱动', 'desc' => 'smtp、sendmail、mailgun、mandrill、ses、sparkpost、log'],
+            'transport' => ['value' => 'smtp', 'title' => '邮箱驱动', 'desc' => 'smtp、sendmail、mailgun、mandrill、ses、sparkpost、log'],
             'host' => ['value' => 'smtpdm.aliyun.com', 'title' => '服务器地址', 'desc' => '指定SMTP服务器的地址 阿里邮箱 腾讯邮箱'],
             'port' => ['value' => '465', 'title' => '端口', 'desc' => '指定SMTP服务器的地址, 如: 126邮箱为25'],
             'username' => ['value' => '', 'title' => '邮箱帐号', 'desc' => '发送邮箱登录帐号,一般情况下设置与发送邮箱一样'],

@@ -75,7 +75,7 @@ class UserController extends ApiController
         $column = filter_var($request->account, FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
         $request->validate([
             'account' => "required|unique:users,{$column}",
-            'code' => 'required',
+            'code' => ['required', new CodeRule($request->account)],
             'name' => 'required',
             'password' => 'required|min:5,20|confirmed',
             'captcha' => 'captcha'

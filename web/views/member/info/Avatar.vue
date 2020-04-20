@@ -1,53 +1,43 @@
 <template>
-  <div>
-    <div class="card">
-      <div class="card-header bg-white">
-        修改头像
-      </div>
-      <div class="card-body">
-        <el-form :model="form" ref="form" label-width="80px" label-position="top">
-          <el-form-item label="">
-            <el-upload
-              class="avatar-uploader"
-              action="/common/upload/avatar"
-              :show-file-list="false"
-              accept="image/jpeg, image/png"
-              :on-success="uploadSuccess"
-              :on-error="uploadError"
-            >
-              <img v-if="form.avatar" :src="form.avatar" class="avatar" />
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-            </el-upload>
-          </el-form-item>
-        </el-form>
-      </div>
-    </div>
-  </div>
+  <a-card title="修改头像" size="small">
+    <a-upload
+      name="file"
+      listType="picture-card"
+      class="upload"
+      :showUploadList="false"
+      :withCredentials="true"
+      :action="`/api/common/upload/site`"
+      @change="upload"
+    >
+      <img :src="user.avatar" alt="用户头像" />
+    </a-upload>
+    <a-form-model>
+      <a-form-model-item label></a-form-model-item>
+    </a-form-model>
+  </a-card>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  data() {
-    return {
-      form: {}
-    }
-  },
-  async created() {
-    let response = await this.axios.get(`member/get`)
-    this.$set(this.form, 'avatar', response.data.avatar)
+  computed: {
+    ...mapState('user', { user: 'data' })
   },
   methods: {
-    async uploadSuccess(response) {
-      await this.$set(this.form, 'avatar', response.path)
-      await this.axios.put(`member/user`, this.form)
-      this.$message.success('修改成功')
-      window.location.reload(true)
-    },
-    uploadError() {
-      this.$message.error('文件过大或类型不匹配')
+    async upload(response) {
+      if (response.file.status === 'done') {
+        this.$set(this.user, 'avatar', response.file.response.path)
+        await this.axios.put(`member/user`, { avatar: this.user.avatar })
+        this.$message.success('修改成功')
+      }
     }
   }
 }
 </script>
-
-<style></style>
+<style lang="scss" scoped>
+.ant-upload {
+  img {
+    height: 200px;
+  }
+}
+</style>

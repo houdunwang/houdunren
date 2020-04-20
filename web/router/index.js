@@ -19,7 +19,7 @@ router.beforeEach(async (to, from, next) => {
   let isLogin = store.getters['user/isLogin']
   if (to.matched.some(record => record.meta.auth)) {
     if (!isLogin) {
-      next({ path: '/login', query: { redirect: to.fullPath } })
+      next({ name: 'login', query: { redirect: to.fullPath } })
     }
   }
   if (to.matched.some(record => record.meta.guest)) {

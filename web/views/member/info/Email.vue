@@ -1,20 +1,17 @@
 <template>
-  <div>
-    <div class="card">
-      <div class="card-header bg-white">绑定邮箱</div>
-      <div class="card-body">
-        <el-form :model="form" ref="form" label-width="80px">
-          <el-form-item label="邮箱" prop="email" :rules="[{ required: true, message: '请输入邮箱', trigger: 'blur' }]">
-            <el-input type="email" v-model="form.email"></el-input>
-          </el-form-item>
-          <send-code type="email" :account="form.email" :code.sync="form.code" />
-          <el-form-item>
-            <el-button type="primary" @click="onSubmit">保存提交</el-button>
-          </el-form-item>
-        </el-form>
-      </div>
-    </div>
-  </div>
+  <a-card title="绑定邮箱" size="small">
+    <a-form-model :model="form" ref="form" :label-col="{span:3}" :wrapper-col="{span:10}">
+      <a-form-model-item label="邮箱">
+        <a-input v-model="form.email"></a-input>
+      </a-form-model-item>
+      <a-form-model-item label="验证码">
+        <send-code :state="form.email!=''" :account.sync="form.email" :code.sync="form.code" />
+      </a-form-model-item>
+    </a-form-model>
+    <a-form-model-item :wrapper-col="{ span: 14, offset: 3 }">
+      <a-button type="primary" @click="onSubmit">保存提交</a-button>
+    </a-form-model-item>
+  </a-card>
 </template>
 
 <script>

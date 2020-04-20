@@ -38,8 +38,6 @@ class SiteService
     public function getSiteByDomain()
     {
         $regexp = "^https?:\/\/{$_SERVER['HTTP_HOST']}";
-        // dd($regexp);
-        // dd(Site::where('domain', 'REGEXP', $regexp)->first());
         return Site::where('domain', 'REGEXP', $regexp)->first();
     }
 
@@ -62,17 +60,17 @@ class SiteService
         config(['site' => $site['config']]);
         config(['app.name' => $site['name']]);
         config(['app.url' => $site['domain']]);
-        config(['mail' => [
-            'driver' => config('site.email.driver.value'),
+        config(['mail.mailers.smtp' => [
+            'transport' => config('site.email.transport.value'),
             'host' => config('site.email.host.value'),
             'port' => config('site.email.port.value'),
-            'from' => [
-                'address' =>  config('site.email.username.value'),
-                'name' =>  config('app.name'),
-            ],
             'encryption' =>  config('site.email.encryption.value'),
             'username' =>  config('site.email.username.value'),
             'password' =>  config('site.email.password.value'),
+        ]]);
+        config(['mail.from' => [
+            'address' =>  config('site.email.username.value'),
+            'name' =>  config('app.name'),
         ]]);
     }
 }

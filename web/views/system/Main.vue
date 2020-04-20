@@ -31,8 +31,8 @@ export default {
   }
 }
 </script>
-<style lang="scss" >
-body {
+<style lang="scss" scoped>
+.admin {
   height: 100vh;
   width: 100vw;
   background-image: url('../../assets/images/bg.jpg');

@@ -5,7 +5,7 @@
         <a-input v-model="form.account" placeholder="请输入邮箱或手机号" @blur="checkAccount" />
       </a-form-model-item>
       <a-form-model-item label="验证码" prop="code">
-        <send-code :code.sync="form.code" :account.sync="form.account" :state="can_register" />
+        <send-code :code.sync="form.code" :account.sync="form.account" :state="!has" />
       </a-form-model-item>
       <a-divider>
         <i class="fa fa-user-circle text-secondary" aria-hidden="true"></i>
@@ -70,7 +70,7 @@ export default {
       rules,
       form,
       site: null,
-      can_register: false
+      has: false
     }
   },
   computed: {
@@ -78,12 +78,10 @@ export default {
   },
   methods: {
     async checkAccount() {
-      let response = await this.$axios.post(`account/checkAccount`, this.form)
+      let response = await this.$axios.post(`account/has`, this.form)
 
-      this.$set(this, 'can_register', response.data.is_register)
-      console.log(this.is_register)
-
-      if (this.can_register === false) {
+      this.$set(this, 'has', response.data.state)
+      if (this.has === true) {
         this.$message.warning('帐号错误或已经注册')
       }
     },

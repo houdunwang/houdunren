@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Common', 'prefix' => 'common'], function () {
-    Route::post('code/send', 'CodeController@send')->middleware(['front', 'throttle:111,2']);
+    Route::post('code/send', 'CodeController@send')->middleware(['front', 'throttle:10,2']);
     Route::post('upload/system', 'UploadController@system')->middleware('auth:sanctum');
-    Route::post('upload/site', 'UploadController@site')->middleware('auth:sanctum');
+    Route::post('upload/site', 'UploadController@site')->middleware(['front', 'auth:sanctum']);
     Route::get('captcha/text', 'CaptchaController@make');
     Route::get('captcha/image', 'CaptchaController@image');
 });
@@ -73,7 +73,7 @@ Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
 });
 
 //会员中心
-Route::group(['middleware' => ['auth:sanctum'], 'namespace' => 'Member', 'prefix' => 'member'], function () {
+Route::group(['middleware' => ['auth:sanctum', 'front'], 'namespace' => 'Member', 'prefix' => 'member'], function () {
     //修改资料
     Route::get('get', 'UserController@get');
     Route::put('user', 'UserController@update');

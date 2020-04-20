@@ -27,7 +27,7 @@
           </div>
           <div>
             <router-link :to="{ name: 'login' }" class="text-secondary mr-1">登录</router-link>
-            <router-link :to="{name:'find-password'}" href class="text-secondary">忘记密码</router-link>
+            <router-link :to="{name:'register'}" href class="text-secondary">注册</router-link>
           </div>
         </a-row>
       </a-form-model-item>
