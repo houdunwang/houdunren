@@ -3,13 +3,13 @@
     <nav class="nav nav-tabs">
       <router-link
         class="nav-link"
-        :class="{ active: $route.name === 'admin.system' }"
-        :to="{ name: 'admin.system' }"
+        :class="{ active: $route.name === 'admin.system.index' }"
+        :to="{ name: 'admin.system',query:{sid:site.id} }"
       >系统课程列表</router-link>
       <router-link
         class="nav-link"
         :class="{ active: $route.name === 'admin.system.create' }"
-        :to="{ name: 'admin.system.create' }"
+        :to="{ name: 'admin.system.create',query:{sid:site.id} }"
       >发表课程</router-link>
       <router-link
         class="nav-link active"
@@ -21,8 +21,11 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  created() {}
+  computed: {
+    ...mapState('site', ['site'])
+  }
 }
 </script>
 

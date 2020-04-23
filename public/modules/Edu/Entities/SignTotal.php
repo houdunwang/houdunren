@@ -2,6 +2,7 @@
 
 namespace Modules\Edu\Entities;
 
+use App\Scopes\SiteScope;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -10,6 +11,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SignTotal extends Model
 {
-  protected $table = "edu_sign_total";
-  protected $fillable = ['site_id', 'user_id', 'total', 'month'];
+    protected $table = "edu_sign_total";
+    protected $fillable = ['site_id', 'user_id', 'total', 'month'];
+    protected static function booted()
+    {
+        static::addGlobalScope(new SiteScope);
+    }
 }

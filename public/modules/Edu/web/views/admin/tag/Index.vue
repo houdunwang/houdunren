@@ -1,23 +1,18 @@
 <template>
   <div>
-    <tab />
+    <nav class="nav nav-tabs nav-stacked mb-2">
+      <a class="nav-link active" href="#">标签管理</a>
+    </nav>
     <div class="card">
       <div class="card-header d-flex justify-content-between">
-        标签管理
+        标签列表
         <button class="btn btn-outline-info btn-sm" @click="showDialog=true;form={}">添加标签</button>
       </div>
       <div class="card-body">
         <div class="row">
           <div class="col-6 col-md-3" v-for="tag in tags" :key="tag.id">
             <div class="input-group mb-3">
-              <input
-                type="text"
-                class="form-control"
-                aria-label="Recipient's username"
-                aria-describedby="basic-addon2"
-                v-model="tag.title"
-                @keyup.enter="update(tag)"
-              />
+              <input type="text" class="form-control" v-model="tag.title" @change="update(tag)" />
               <div class="input-group-append">
                 <button
                   type="button"
@@ -33,24 +28,19 @@
     </div>
 
     <!-- 添加标签组 -->
-    <el-dialog title="添加标签组" :visible.sync="showDialog" width="50%">
-      <el-form :model="form" ref="form" label-width="80px">
-        <el-form-item label="标签名称">
-          <el-input v-model="form.title"></el-input>
-        </el-form-item>
-      </el-form>
-      <span slot="footer">
-        <el-button @click="showDialog= false">取 消</el-button>
-        <el-button type="primary" @click="add">确 定</el-button>
-      </span>
-    </el-dialog>
+    <a-modal title="添加标签组" v-model="showDialog" @ok="add">
+      <a-form-model>
+        <a-form-model-item label="标签名称">
+          <a-input v-model="form.title"></a-input>
+        </a-form-model-item>
+      </a-form-model>
+    </a-modal>
   </div>
 </template>
 
 <script>
-import Tab from './Tab'
+import { mapState } from 'vuex'
 export default {
-  components: { Tab },
   data() {
     return {
       showDialog: false,
@@ -58,34 +48,34 @@ export default {
       form: {}
     }
   },
+  computed: {
+    ...mapState('site', ['site'])
+  },
   created() {
     this.load()
   },
   methods: {
     async load() {
-      let response = await this.axios.get(`edu/admin/tag`)
+      let response = await this.axios.get(`edu/admin/tag?sid=${this.site.id}`)
       this.$set(this, `tags`, response.data)
     },
     del(tag) {
-      this.$confirm('确定删除吗？', '温馨提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(async () => {
-          await this.axios.delete(`edu/admin/tag/${tag.id}`)
+      this.$confirm({
+        content: '确定删除吗？',
+        onOk: async () => {
+          await this.axios.delete(`edu/admin/tag/${tag.id}?sid=${this.site.id}`)
           this.load()
-        })
-        .catch(() => {})
+        }
+      })
     },
     async update(tag) {
-      await this.axios.put(`edu/admin/tag/${tag.id}`, tag)
+      await this.axios.put(`edu/admin/tag/${tag.id}?sid=${this.site.id}`, tag)
       this.load()
       this.showDialog = false
       this.$message.success('修改成功')
     },
     async add() {
-      await this.axios.post(`edu/admin/tag`, this.form)
+      await this.axios.post(`edu/admin/tag?sid=${this.site.id}`, this.form)
       this.load()
       this.showDialog = false
     }

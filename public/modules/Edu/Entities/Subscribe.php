@@ -2,7 +2,7 @@
 
 namespace Modules\Edu\Entities;
 
-use App\Traits\Module;
+use App\Scopes\SiteScope;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -11,7 +11,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Subscribe extends Model
 {
-  use Module;
-  protected $table = 'edu_subscribe';
-  protected $fillable = ['title', 'site_id', 'ad', 'icon', 'month', 'price'];
+    protected $table = 'edu_subscribe';
+    protected $fillable = ['title', 'site_id', 'ad', 'icon', 'month', 'price'];
+    protected static function booted()
+    {
+        static::addGlobalScope(new SiteScope);
+    }
 }

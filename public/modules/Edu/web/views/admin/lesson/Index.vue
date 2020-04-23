@@ -2,16 +2,45 @@
   <div>
     <nav class="nav nav-tabs mb-2">
       <a class="nav-link active" href="#">课程列表</a>
-      <router-link class="nav-link" :to="{ name: 'admin.lesson.create' }">发表列表</router-link>
+      <router-link class="nav-link" :to="{ name: 'admin.lesson.create',query:{sid:site.id} }">发表列表</router-link>
     </nav>
-    <div class="card">
+    <a-card title="课程列表" size="small">
+      <a-table
+        :columns="columns"
+        :dataSource="lesson.data"
+        rowKey="id"
+        size="middle"
+        bordered
+        v-if="lesson.data"
+        :pagination="{
+        total: lesson.meta.total,
+        current: lesson.meta.current_page,
+        hideOnSinglePage: true
+      }"
+      >
+        <div slot="action" slot-scope="scope">
+          <div class="btn-group btn-group-sm" role="group">
+            <router-link
+              :to="{ name: 'admin.lesson.edit', params: { id: scope.id },query:{sid:site.id} }"
+              class="btn btn-outline-success"
+            >编辑</router-link>
+            <a class="btn btn-outline-secondary" @click="del(scope)">删除</a>
+          </div>
+        </div>
+      </a-table>
+    </a-card>
+    <!-- <div class="card">
       <div class="card-header bg-light">课程列表</div>
       <div class="card-body">
         <el-table :data="lesson.data" border style="width: 100%" empty-text=" ">
           <el-table-column label="#编号" prop="id" width="60"></el-table-column>
           <el-table-column label="封面图" width="80">
             <template slot-scope="scope">
-              <img :style="{ width: '30px', height: '30px' }" :src="scope.row.thumb" class="rounded" />
+              <img
+                :style="{ width: '30px', height: '30px' }"
+                :src="scope.row.thumb"
+                class="rounded"
+              />
             </template>
           </el-table-column>
           <el-table-column
@@ -24,7 +53,11 @@
           ></el-table-column>
           <el-table-column label="上架" width="60">
             <template slot-scope="scope">
-              <i class="fa fa-check-circle-o text-success" aria-hidden="true" v-if="scope.row.status"></i>
+              <i
+                class="fa fa-check-circle-o text-success"
+                aria-hidden="true"
+                v-if="scope.row.status"
+              ></i>
               <i class="fa fa-times-circle-o text-danger" aria-hidden="true" v-else></i>
             </template>
           </el-table-column>
@@ -34,8 +67,7 @@
                 <router-link
                   :to="{ name: 'admin.lesson.edit', params: { id: scope.row.id } }"
                   class="btn btn-outline-success"
-                  >编辑</router-link
-                >
+                >编辑</router-link>
                 <a class="btn btn-outline-secondary" @click="del(scope.row)">删除</a>
               </div>
             </template>
@@ -50,31 +82,38 @@
           @current-change="load"
         ></el-pagination>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+const columns = [
+  { key: 'id', dataIndex: 'id', title: '编号', width: 80 },
+  { key: 'title', dataIndex: 'title', title: '课程名称' },
+  { key: 'read_num', dataIndex: 'read_num', title: '游览量', width: 80 },
+  { key: 'favorite_num', dataIndex: 'favorite_num', title: '收藏数', width: 80 },
+  { key: 'comment_num', dataIndex: 'comment_num', title: '评论数', width: 80 },
+  { key: 'video_num', dataIndex: 'video_num', title: '视频数量', width: 120 },
+  { key: 'price', dataIndex: 'price', title: '售价', width: 100 },
+  { title: '', width: 120, scopedSlots: { customRender: 'action' } }
+]
 export default {
   data() {
     return {
-      lesson: { meta: { total: 0 } },
-      columns: [
-        { id: 'title', prop: 'title', label: '课程名称' },
-        { id: 'read_num', prop: 'read_num', label: '游览量', width: 80 },
-        { id: 'favorite_num', prop: 'favorite_num', label: '收藏数', width: 80 },
-        { id: 'comment_num', prop: 'comment_num', label: '评论数', width: 80 },
-        { id: 'video_num', prop: 'video_num', label: '视频数量', width: 80 },
-        { id: 'price', prop: 'price', label: '售价', width: 100 }
-      ]
+      lesson: [],
+      columns
     }
   },
   created() {
     this.load(1)
   },
+  computed: {
+    ...mapState('site', ['site'])
+  },
   methods: {
     async load(page) {
-      let response = await this.axios.get(`edu/admin/lesson?page=${page}`).then(r => r.data)
+      let response = await this.axios.get(`edu/admin/lesson?sid=${this.site.id}&page=${page}`).then(r => r.data)
       this.$set(this, 'lesson', response)
     },
     async del(lesson) {
@@ -94,7 +133,4 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.eeeee {
-  background: url('../../../assets/images/abcdef.jpg');
-}
 </style>

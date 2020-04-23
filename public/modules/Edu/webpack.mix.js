@@ -11,9 +11,7 @@ mix.webpackConfig({
     }
   }
 })
-// mix
-//   .js(__dirname + '/Resources/assets/js/app.js', 'js/edu.js')
-//   .sass(__dirname + '/Resources/assets/sass/app.scss', 'css/edu.css')
+
 //前后端分离的编译文件
 mix
   .js(__dirname + '/web/app.js', 'js')
@@ -24,4 +22,4 @@ if (mix.inProduction()) {
   mix.version()
 }
 
-mix.browserSync('hdcms.test')
+// mix.browserSync('hdcms.test')

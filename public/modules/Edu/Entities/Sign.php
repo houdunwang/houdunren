@@ -2,7 +2,7 @@
 
 namespace Modules\Edu\Entities;
 
-use App\Traits\Module;
+use App\Scopes\SiteScope;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,22 +12,24 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Sign extends Model
 {
-  use Module;
-  protected $table = "edu_sign";
-  protected $fillable = ['content', 'mood', 'site_id', 'user_id'];
+    protected $table = "edu_sign";
+    protected $fillable = ['content', 'mood', 'site_id', 'user_id'];
+    protected static function booted()
+    {
+        static::addGlobalScope(new SiteScope);
+    }
+    /**
+     * 用户今日是否签到
+     * @param User $user
+     * @return bool
+     */
+    public static function todayIsSign(User $user)
+    {
+        return (bool) self::whereDate('created_at', now())->where('user_id', $user['id'])->first();
+    }
 
-  /**
-   * 用户今日是否签到
-   * @param User $user
-   * @return bool
-   */
-  public static function todayIsSign(User $user)
-  {
-    return (bool) self::whereDate('created_at', now())->where('user_id', $user['id'])->first();
-  }
-
-  public function user()
-  {
-    return $this->belongsTo(User::class);
-  }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

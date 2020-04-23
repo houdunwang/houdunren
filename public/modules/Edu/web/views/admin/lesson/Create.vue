@@ -1,25 +1,16 @@
 <template>
-  <field @submit="submit" :field="field" />
+  <field :action="`edu/admin/lesson?sid=${site.id}`" method="post" />
 </template>
 
 <script>
 import Field from './Field'
+import { mapState } from 'vuex'
 export default {
-  data() {
-    return {
-      field: { free_num: 1, tags: [], videos: [] }
-    }
-  },
   components: {
     Field
   },
-  methods: {
-    async submit(lesson) {
-      let response = await this.axios.post(`edu/admin/lesson`, this.field).then(r => r.data)
-      this.$router.push({ name: 'admin.lesson' })
-    }
+  computed: {
+    ...mapState('site', ['site'])
   }
 }
 </script>
-
-<style></style>

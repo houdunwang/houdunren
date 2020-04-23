@@ -2,6 +2,7 @@
 
 namespace Modules\Edu\Entities;
 
+use App\Scopes\SiteScope;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -10,11 +11,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Duration extends Model
 {
-  protected $table = 'edu_duration';
-  protected $fillable = ['site_id', 'user_id', 'begin_time', 'end_time'];
+    protected $table = 'edu_duration';
+    protected $fillable = ['site_id', 'user_id', 'begin_time', 'end_time'];
 
-  protected $casts = [
-    'begin_time' => 'datetime',
-    'end_time' => 'datetime',
-  ];
+    protected $casts = [
+        'begin_time' => 'datetime',
+        'end_time' => 'datetime',
+    ];
+    protected static function booted()
+    {
+        static::addGlobalScope(new SiteScope);
+    }
 }

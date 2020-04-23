@@ -4,7 +4,10 @@
     <div class="card">
       <div class="card-header">课程列表</div>
       <div class="card-body">
-        <el-table :data="lessons.data" border stripe style="width: 100%">
+        <a-table :columns="columns" :dataSource="lessons.data" bordered>
+          <a slot="name" slot-scope="text">{{ text }}</a>
+        </a-table>
+        <!-- <el-table :data="lessons.data" border stripe style="width: 100%">
           <el-table-column
             v-for="col in columns"
             :prop="col.id"
@@ -44,7 +47,7 @@
           layout="prev, pager, next"
           :total="lessons.meta.total"
           @current-change="load"
-        ></el-pagination>
+        ></el-pagination>-->
       </div>
     </div>
   </div>
@@ -52,20 +55,24 @@
 
 <script>
 import Tab from './Tab'
+import { mapState } from 'vuex'
 export default {
   components: { Tab },
   data() {
     return {
       lessons: { meta: { total: 0 } },
       columns: [
-        { id: 'id', prop: 'id', label: '编号', width: 60 },
-        { id: 'title', prop: 'title', label: '课程名称' },
-        { id: 'description', prop: 'description', label: '课程介绍', width: 250 }
+        { key: 'id', dataIndex: 'id', title: '编号', width: 60 },
+        { key: 'title', dataIndex: 'title', title: '课程名称' },
+        { key: 'description', dataIndex: 'description', title: '课程介绍', width: 250 }
       ]
     }
   },
   created() {
     this.load()
+  },
+  computed: {
+    ...mapState('site', ['site'])
   },
   methods: {
     async del(lesson) {
@@ -75,13 +82,13 @@ export default {
         type: 'warning'
       })
         .then(async () => {
-          await this.axios.delete('edu/admin/system/${lesson.id}')
+          await this.axios.delete('edu/admin/system/${lesson.id}?sid=${this.site.id}')
           this.lessons.splice(this.lessons.indexOf(lesson), 1)
         })
         .catch(() => {})
     },
     async load(page = 1) {
-      let response = await this.axios.get(`edu/admin/system?page=${page}`).then(r => r.data)
+      let response = await this.axios.get(`edu/admin/system?page=${page}&sid=${this.site.id}`).then(r => r.data)
       this.$set(this, 'lessons', response)
     }
   }

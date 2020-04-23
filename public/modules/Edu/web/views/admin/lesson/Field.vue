@@ -1,129 +1,166 @@
 <template>
   <div>
     <nav class="nav nav-tabs mb-2">
-      <router-link class="nav-link" :to="{ name: 'admin.lesson' }">课程列表</router-link>
-      <router-link class="nav-link" :class="{ active: !field.id }" :to="{ name: 'admin.lesson.create' }"
-        >发表课程</router-link
-      >
-      <router-link class="nav-link active" v-show="field.id" :to="{ name: 'admin.lesson.create' }"
-        >编辑课程</router-link
-      >
+      <router-link class="nav-link" :to="{ name: 'admin.lesson.index',query:{sid:site.id} }">课程列表</router-link>
+      <router-link
+        class="nav-link"
+        :class="{ active: !form.id }"
+        :to="{ name: 'admin.lesson.create' }"
+      >发表课程</router-link>
+      <router-link
+        class="nav-link active"
+        v-show="form.id"
+        :to="{ name: 'admin.lesson.create',query:{sid:site.id} }"
+      >编辑课程</router-link>
     </nav>
-
-    <div class="alert alert-info">设置「售价」后免费观看数量才有必要设置</div>
-    <el-form ref="form" :model="field" label-width="100px">
-      <div class="card">
-        <div class="card-header">课程资料</div>
-        <div class="card-body">
-          <el-form-item label="课程名称" prop="title" :rules="[{ required: true, message: '请输入课程标题' }]">
-            <el-input v-model="field.title"></el-input>
-          </el-form-item>
-          <el-form-item prop="description" label="简单介绍" :rules="[{ required: true, message: '请输入课程介绍' }]">
-            <el-input type="textarea" v-model="field.description"></el-input>
-          </el-form-item>
-          <el-form-item label="标签">
-            <el-checkbox v-for="tag in tags" :key="tag.id" :label="tag.id" v-model="field.tags">{{
-              tag.title
-            }}</el-checkbox>
-          </el-form-item>
-          <el-form-item label="上架">
-            <el-switch v-model="field.status"></el-switch>
-          </el-form-item>
-          <el-form-item label="预览图" prop="thumb" :rules="[{ required: true, message: '请上传课程图片' }]">
-            <el-upload
-              class="avatar-uploader"
-              action="/common/upload"
-              accept="image/jpeg, image/png"
-              :on-success="upload"
-              :on-error="uploadError"
-              :show-file-list="false"
-            >
-              <img v-if="field.thumb" :src="field.thumb" class="avatar" :style="{ maxHeight: '200px' }" />
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-            </el-upload>
-            <small class="text-secondary">请上传尺寸为 860x105 的图片</small>
-          </el-form-item>
-          <el-form-item label="推荐">
-            <el-radio-group v-model="field.is_commend" class="align-baseline">
-              <el-radio :label="true">是</el-radio>
-              <el-radio :label="false">否</el-radio>
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="免费观看数量">
-            <el-input type="number" v-model="field.free_num"></el-input>
-          </el-form-item>
-          <el-form-item label="售价">
-            <el-input type="number" v-model="field.price"></el-input>
-          </el-form-item>
-          <el-form-item label="高清下载地址">
-            <el-input v-model="field.download_address"></el-input>
-          </el-form-item>
-        </div>
-      </div>
-    </el-form>
-    <div class="card mt-3">
-      <div class="card-header">视频编辑</div>
-      <div class="card-body">
-        <div class="card mt-2" v-for="(video, index) in field.videos" :key="index">
+    <a-alert message="设置「售价」后免费观看数量才有效" type="success"></a-alert>
+    <a-form-model
+      :model="form"
+      ref="form"
+      :rules="rules"
+      :label-col="{span:3}"
+      :wrapper-col="{span:10}"
+      class="mt-2"
+    >
+      <a-card title="课程资料" size="small" hoverable>
+        <a-form-model-item label="课程名称" prop="title">
+          <a-input v-model="form.title"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="简单介绍" prop="description">
+          <a-input type="textarea" :rows="3" v-model="form.description"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="上架">
+          <a-checkbox v-model="form.status"></a-checkbox>
+        </a-form-model-item>
+        <a-form-model-item label="网站标志">
+          <a-upload
+            name="file"
+            listType="picture-card"
+            class="avatar-uploader"
+            :showUploadList="false"
+            :action="`/api/common/upload/site?sid=${site.id}`"
+            @change="uploadThumb"
+          >
+            <img v-if="form.thumb" :src="form.thumb" alt="avatar" />
+            <div v-else>
+              <div class="ant-upload-text">
+                <i class="fa fa-file-image-o fa-4x" aria-hidden="true"></i>
+              </div>
+            </div>
+          </a-upload>
+        </a-form-model-item>
+        <a-form-model-item label="推荐">
+          <a-radio-group v-model="form.is_commend" buttonStyle="solid">
+            <a-radio-button :value="true">是</a-radio-button>
+            <a-radio-button :value="false">否</a-radio-button>
+          </a-radio-group>
+        </a-form-model-item>
+      </a-card>
+      <a-card title="销售" size="small" class="mt-2" hoverable>
+        <a-form-model-item label="免费观看数量">
+          <a-input type="number" v-model="form.free_num"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="售价">
+          <a-input type="number" v-model="form.price"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="高清下载地址">
+          <a-input type="textarea" :row="3" v-model="form.download_address"></a-input>
+        </a-form-model-item>
+      </a-card>
+      <a-card title="标签" size="small" hoverable class="mt-2">
+        <a-checkbox-group :options="tags" v-model="form.tags"></a-checkbox-group>
+      </a-card>
+      <a-card title="视频编辑" size="small" hoverable class="mt-2">
+        <div class="card mt-2" v-for="(video, index) in form.videos" :key="index">
           <div class="card-body">
-            <el-form :model="video" label-width="100px">
-              <el-form-item label="视频名称" prop="title">
-                <el-input v-model="video.title" required></el-input>
-              </el-form-item>
-              <el-form-item label="视频地址" prop="path">
-                <el-input v-model="video.path"></el-input>
-              </el-form-item>
-              <el-form-item label="外部播放地址" class="mb-0">
-                <el-input v-model="video.external_address"></el-input>
-              </el-form-item>
-            </el-form>
+            <a-form-model-item label="视频名称" class="mb-0">
+              <a-input v-model="video.title" required></a-input>
+            </a-form-model-item>
+            <a-form-model-item label="视频地址" class="mb-0">
+              <a-input v-model="video.path"></a-input>
+            </a-form-model-item>
+            <a-form-model-item label="外部播放地址" class="mb-0">
+              <a-input v-model="video.external_address"></a-input>
+            </a-form-model-item>
           </div>
           <div class="card-footer text-muted">
             <div class="btn-group" role="group" aria-label>
-              <button type="button" class="btn btn-outline-secondary btn-sm" @click="delVideo(index)">删除</button>
-              <button type="button" class="btn btn-outline-secondary btn-sm" @click="insertVideo(index)">
-                插入视频
-              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary btn-sm"
+                @click="delVideo(index)"
+              >删除</button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary btn-sm"
+                @click="insertVideo(index)"
+              >插入视频</button>
             </div>
           </div>
         </div>
-      </div>
-      <div class="card-footer">
-        <button type="button" class="btn btn-secondary btn-sm" @click="addVideo">添加视频</button>
-      </div>
-    </div>
+        <div class="card mt-3">
+          <div class="card-footer">
+            <button type="button" class="btn btn-secondary btn-sm" @click="addVideo">添加视频</button>
+          </div>
+        </div>
+      </a-card>
+    </a-form-model>
     <button type="button" class="btn btn-primary mt-2" @click="onSubmit">保存提交</button>
   </div>
 </template>
 
 <script>
 import systemUpload from '@/services/upload'
+import { mapState } from 'vuex'
+const rules = {
+  title: [{ required: true, message: '课程名称不能为空', trigger: 'change' }],
+  description: [{ required: true, message: '课程介绍不能为空', trigger: 'change' }]
+}
 export default {
-  props: { field: Object, submit: Function },
+  props: {
+    action: String,
+    method: { type: String, default: 'post' },
+    form: {
+      type: Object,
+      default: () => {
+        return { status: true, is_commend: false, thumb: '', free_num: 1, tags: [], videos: [] }
+      }
+    }
+  },
   data() {
     return {
+      rules,
       tags: []
     }
   },
+  computed: {
+    ...mapState('site', ['site'])
+  },
   async created() {
-    let response = await this.axios.get(`edu/admin/tag`)
-    this.$set(this, 'tags', response.data)
+    let response = await this.axios.get(`edu/admin/tag?sid=${this.site.id}`)
+    this.$set(
+      this,
+      'tags',
+      response.data.map(tag => {
+        return { label: tag.title, value: tag.id }
+      })
+    )
   },
   methods: {
     onSubmit() {
-      this.$refs['form'].validate(valid => {
+      this.$refs['form'].validate(async valid => {
         if (valid) {
-          this.$emit('submit')
-        } else {
-          return false
+          let response = await this.axios[this.method](this.action, this.form)
+          this.$message.success('发表成功')
+          this.$router.push({ name: 'admin.lesson.index', query: { sid: this.site.id } })
         }
       })
     },
-    upload(response) {
-      this.$set(this.field, 'thumb', response.path)
-    },
-    uploadError() {
-      this.$message.error('文件过大或类型不匹配')
+    //上传预览图
+    uploadThumb(response) {
+      if (response.file.status === 'done') {
+        this.$set(this.form, 'thumb', response.file.response.path)
+      }
     },
     delVideo(index) {
       this.$confirm('确定删除吗？', '温馨提示', {
@@ -132,15 +169,15 @@ export default {
         type: 'warning'
       })
         .then(() => {
-          this.field.videos.splice(index, 1)
+          this.form.videos.splice(index, 1)
         })
         .catch(() => {})
     },
     addVideo() {
-      this.field.videos.push({ title: '', path: '' })
+      this.form.videos.push({ title: '', path: '' })
     },
     insertVideo(index) {
-      this.field.videos.splice(index + 1, 0, { title: '', path: '' })
+      this.form.videos.splice(index + 1, 0, { title: '', path: '' })
     }
   }
 }

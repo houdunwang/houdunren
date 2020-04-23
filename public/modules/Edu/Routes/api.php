@@ -3,29 +3,29 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth:sanctum', 'admin'], 'namespace' => 'Admin', 'prefix' => 'edu/admin'], function () {
-    Route::resource('lesson', 'LessonController')->except(['create', 'show']);
+    Route::apiResource('lesson', 'LessonController');
     Route::post('lesson/search', 'LessonController@search');
-    Route::resource('tag', 'TagController')->only(['index', 'edit', 'store', 'update', 'destroy']);
-    Route::resource('system', 'SystemController')->except(['show', 'create']);
-    Route::resource('subscribe', 'SubscribeController')->except(['show', 'create']);
+    Route::apiResource('tag', 'TagController');
+    Route::apiResource('system', 'SystemController');
+    Route::apiResource('subscribe', 'SubscribeController');
 });
 
-Route::group(['middleware' => ['front'], 'namespace' => 'Front', 'prefix' => 'edu/front'], function () {
-    Route::resource('lesson', 'LessonController')->only(['index', 'show']);
-    Route::resource('system', 'SystemController')->only(['index', 'show']);
-    Route::resource('video', 'VideoController')->only(['index', 'show']);
-    Route::get('video/favour/{video}', 'VideoController@favour')->middleware('auth:api');
-    Route::get('video/favorite/{video}', 'VideoController@favorite')->middleware('auth:api');
-    Route::post('video/comment/{video}', 'VideoController@comment')->middleware('auth:api');
-    Route::get('video/comment/{video}', 'VideoController@commentList')->middleware('auth:api');
-    Route::get('comment/favour/{comment}', 'CommentController@favour')->middleware('auth:api');
-    Route::resource('topic', 'TopicController')->middleware("auth:api");
-    Route::any('topic/search', 'TopicController@index');
-    Route::resource('sign', 'SignController');
-    Route::resource('subscribe', 'SubscribeController');
-});
+// Route::group(['middleware' => ['front'], 'namespace' => 'Front', 'prefix' => 'edu/front'], function () {
+//     Route::resource('lesson', 'LessonController')->only(['index', 'show']);
+//     Route::resource('system', 'SystemController')->only(['index', 'show']);
+//     Route::resource('video', 'VideoController')->only(['index', 'show']);
+//     Route::get('video/favour/{video}', 'VideoController@favour')->middleware('auth:api');
+//     Route::get('video/favorite/{video}', 'VideoController@favorite')->middleware('auth:api');
+//     Route::post('video/comment/{video}', 'VideoController@comment')->middleware('auth:api');
+//     Route::get('video/comment/{video}', 'VideoController@commentList')->middleware('auth:api');
+//     Route::get('comment/favour/{comment}', 'CommentController@favour')->middleware('auth:api');
+//     Route::resource('topic', 'TopicController')->middleware("auth:api");
+//     Route::any('topic/search', 'TopicController@index');
+//     Route::resource('sign', 'SignController');
+//     Route::resource('subscribe', 'SubscribeController');
+// });
 
-Route::group(['middleware' => ['auth:sanctum', 'front'], 'namespace' => 'Member', 'prefix' => 'edu/member'], function () {
-    Route::resource('order', 'OrderController');
-    Route::get('duration', 'DurationController@get');
-});
+// Route::group(['middleware' => ['auth:sanctum', 'front'], 'namespace' => 'Member', 'prefix' => 'edu/member'], function () {
+//     Route::resource('order', 'OrderController');
+//     Route::get('duration', 'DurationController@get');
+// });

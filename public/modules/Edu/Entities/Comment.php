@@ -3,7 +3,6 @@
 namespace Modules\Edu\Entities;
 
 use App\Scopes\SiteScope;
-use App\Traits\Module;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\User;
@@ -14,35 +13,32 @@ use App\User;
  */
 class Comment extends Model
 {
-  // use Module;
-  protected $table = "edu_comment";
-  protected $fillable = ['site_id', 'user_id', 'content', 'reply_user_id', 'favour_count'];
+    protected $table = "edu_comment";
+    protected $fillable = ['site_id', 'user_id', 'content', 'reply_user_id', 'favour_count'];
+    protected static function booted()
+    {
+        static::addGlobalScope(new SiteScope);
+    }
+    /**
+     * 评论用户
+     * @return BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
-  protected static function boot()
-  {
-    parent::boot();
-    static::addGlobalScope(new SiteScope);
-  }
-  /**
-   * 评论用户
-   * @return BelongsTo
-   */
-  public function user()
-  {
-    return $this->belongsTo(User::class, 'user_id');
-  }
+    /**
+     * 回复用户
+     * @return BelongsTo
+     */
+    public function reply()
+    {
+        return $this->belongsTo(User::class, 'reply_user_id');
+    }
 
-  /**
-   * 回复用户
-   * @return BelongsTo
-   */
-  public function reply()
-  {
-    return $this->belongsTo(User::class, 'reply_user_id');
-  }
-
-  public function favour()
-  {
-    return $this->morphToMany(User::class, 'favour', 'edu_favour');
-  }
+    public function favour()
+    {
+        return $this->morphToMany(User::class, 'favour', 'edu_favour');
+    }
 }

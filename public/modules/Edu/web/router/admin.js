@@ -9,20 +9,21 @@ import SystemEdit from '@/views/admin/system/Edit'
 import Subscribe from '@/views/admin/subscribe/Index'
 import SubscribeCreate from '@/views/admin/subscribe/Create'
 import SubscribeEdit from '@/views/admin/subscribe/Edit'
-
 //后台路由
 export default {
   path: '/edu/admin',
+  redirect: '/edu/admin/lesson',
+  meta: { auth: true },
   component: Main,
   children: [
-    { name: 'admin.lesson', path: 'lesson', component: Lesson, alias: '/edu/admin' },
+    { name: 'admin.lesson.index', path: 'lesson', component: Lesson },
     { name: 'admin.lesson.create', path: 'lesson/create', component: LessonCreate },
     { name: 'admin.lesson.edit', path: 'lesson/:id/edit', component: EditCreate },
-    { name: 'admin.tag', path: 'tag', component: Tag },
-    { name: 'admin.system', path: 'system', component: System },
+    { name: 'admin.tag.index', path: 'tag', component: Tag },
+    { name: 'admin.system.index', path: 'system', component: System },
     { name: 'admin.system.create', path: 'system/create', component: SystemCreate },
     { name: 'admin.system.edit', path: 'system/:id/edit', component: SystemEdit },
-    { name: 'admin.subscribe', path: 'subscribe', component: Subscribe },
+    { name: 'admin.subscribe.index', path: 'subscribe', component: Subscribe },
     { name: 'admin.subscribe.create', path: 'subscribe/create', component: SubscribeCreate },
     { name: 'admin.subscribe.edit', path: 'subscribe/:id/edit', component: SubscribeEdit }
   ]

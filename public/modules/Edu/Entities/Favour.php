@@ -2,7 +2,7 @@
 
 namespace Modules\Edu\Entities;
 
-use App\Traits\Module;
+use App\Scopes\SiteScope;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -11,7 +11,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Favour extends Model
 {
-  use Module;
-  protected $table = 'edu_favour';
-  protected $fillable = ['site_id', 'user_id'];
+    protected $table = 'edu_favour';
+    protected $fillable = ['site_id', 'user_id'];
+    protected static function booted()
+    {
+        static::addGlobalScope(new SiteScope);
+    }
 }

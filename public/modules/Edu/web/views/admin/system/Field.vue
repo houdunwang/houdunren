@@ -4,142 +4,120 @@
     <div class="card">
       <div class="card-header">课程资料</div>
       <div class="card-body">
-        <el-form ref="form" :model="form" label-width="80px">
-          <el-form-item
-            label="课程标题"
-            prop="title"
-            :rules="[
-              { required: true, message: '课程标题不能为空' },
-            ]"
-          >
-            <el-input v-model="form.title"></el-input>
-          </el-form-item>
-          <el-form-item
-            label="课程介绍"
-            prop="description"
-            :rules="[
-              { required: true, message: '课程介绍不能为空' },
-            ]"
-          >
-            <el-input type="textarea" v-model="form.description"></el-input>
-          </el-form-item>
-          <el-form-item
-            label="课程图片"
-            prop="preview"
-            :rules="[
-              { required: true, message: '请上传预览图' },
-            ]"
-          >
-            <el-upload
+        <a-form-model :model="form" ref="form" :label-col="{span:3}" :wrapper-col="{span:10}">
+          <a-form-model-item label="课程标题">
+            <a-input v-model="form.title"></a-input>
+          </a-form-model-item>
+          <a-form-model-item label="课程介绍">
+            <a-input v-model="form.description"></a-input>
+          </a-form-model-item>
+          <a-form-model-item label="课程图片">
+            <a-upload
+              name="file"
+              listType="picture-card"
               class="avatar-uploader"
-              action="/common/upload"
-              accept="image/jpeg, image/png"
-              :show-file-list="false"
-              :on-success="upload"
-              :on-error="uploadError"
+              :showUploadList="false"
+              :action="`/api/common/upload/site?sid=${site.id}`"
+              @change="uploadPreview"
             >
-              <img
-                v-if="form.preview"
-                :src="form.preview"
-                class="avatar"
-                :style="{maxHeight:'200px'}"
-              />
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-            </el-upload>
-          </el-form-item>
-        </el-form>
+              <img v-if="form.preview" :src="form.preview" alt="avatar" />
+              <div v-else>
+                <div class="ant-upload-text">
+                  <i class="fa fa-file-image-o fa-4x" aria-hidden="true"></i>
+                </div>
+              </div>
+            </a-upload>
+          </a-form-model-item>
+        </a-form-model>
       </div>
     </div>
     <div class="card mt-2">
       <div class="card-header">课程列表</div>
       <div class="card-body">
-        <el-table :data="form.lessons" border stripe>
-          <el-table-column
-            v-for="col in lessonColumns"
-            :prop="col.id"
-            :key="col.id"
-            :label="col.label"
-            :width="col.width"
-          ></el-table-column>
-          <el-table-column label="操作" width="80">
-            <template slot-scope="scope">
-              <div class="btn-group btn-group-sm">
-                <button
-                  class="btn btn-outline-secondary"
-                  type="button"
-                  aria-label
-                  @click="delLesson(scope.row)"
-                >删除</button>
-              </div>
-            </template>
-          </el-table-column>
-        </el-table>
+        <a-table
+          bordered
+          :columns="lessonColumns"
+          :dataSource="form.lessons"
+          rowKey="id"
+          :pagination="false"
+        >
+          <template slot="action" slot-scope="scope">
+            <button class="btn btn-outline-danger btn-sm" type="button" @click="delLesson(scope)">删除</button>
+          </template>
+        </a-table>
       </div>
       <div class="card-footer text-muted">
         <button class="btn btn-outline-secondary btn-sm" @click="selectLessonDialog=true">选择课程</button>
       </div>
     </div>
     <button class="btn btn-primary mt-2" type="button" @click="submit">保存提交</button>
-
     <!-- 选择课程 -->
-    <el-dialog title="选择课程" :visible.sync="selectLessonDialog" width="60%">
+    <a-modal title="选择课程" v-model="selectLessonDialog" width="60%" :footer="false">
       <lesson :lessons.sync="form.lessons" />
-    </el-dialog>
+    </a-modal>
   </div>
 </template>
 
 <script>
 import Tab from './Tab'
 import Lesson from '@/views/admin/components/Lesson'
+import { mapState } from 'vuex'
+const lessonColumns = [
+  { key: 'id', dataIndex: 'id', title: '编号', width: 80 },
+  { key: 'title', dataIndex: 'title', title: '课程标题' },
+  { key: 'read_num', dataIndex: 'read_num', title: '游览量', width: 80 },
+  { key: 'favorite_num', dataIndex: 'favorite_num', title: '收藏数', width: 80 },
+  { key: 'comment_num', dataIndex: 'comment_num', title: '评论数', width: 80 },
+  { key: 'video_num', dataIndex: 'video_num', title: '视频数量', width: 150 },
+  { scopedSlots: { customRender: 'action' }, width: 80 }
+]
 export default {
   components: { Tab, Lesson },
-  props: { form: Object },
+  props: {
+    form: {
+      type: Object,
+      default: () => {
+        return { lessons: [] }
+      }
+    },
+    method: { type: String, default: 'post' },
+    action: { type: String }
+  },
   data() {
     return {
-      lessonColumns: [
-        { id: 'id', prop: 'id', label: '编号', width: 80 },
-        { id: 'title', prop: 'title', label: '课程标题' },
-        { id: 'read_num', prop: 'read_num', label: '游览量', width: 80 },
-        { id: 'favorite_num', prop: 'favorite_num', label: '收藏数', width: 80 },
-        { id: 'comment_num', prop: 'comment_num', label: '评论数', width: 80 },
-        { id: 'video_num', prop: 'video_num', label: '视频数量', width: 80 }
-      ],
+      lessonColumns,
       selectLessonDialog: false
     }
   },
+  computed: {
+    ...mapState('site', ['site'])
+  },
   methods: {
-    upload(file) {
-      this.$set(this.form, 'preview', file.path)
-    },
-    uploadError() {
-      this.$message.error('文件过大或类型不匹配')
+    //上传课程预览图
+    uploadPreview(response) {
+      if (response.file.status === 'done') {
+        this.$set(this.form, 'preview', response.file.response.path)
+      }
     },
     async submit() {
-      this.$refs['form'].validate(valid => {
+      this.$refs['form'].validate(async valid => {
         if (valid) {
           const lessons = this.form.lessons.map(l => l.id)
-          this.$emit('submit', {
-            ...this.form,
-            lessons
-          })
+          await this.axios[this.method](`${this.action}?sid=${this.site.id}`, { ...this.form, lessons })
+          this.$message.success('添加成功')
+          this.$router.push({ name: 'admin.system.index' })
         }
       })
     },
     delLesson(lesson) {
-      this.$confirm('确定删除吗？', '温馨提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(() => {
+      this.$confirm({
+        content: `确定删除吗？`,
+        onOk: () => {
           let index = this.form.lessons.indexOf(lesson)
           this.form.lessons.splice(index, 1)
-        })
-        .catch(() => {})
+        }
+      })
     }
   }
 }
 </script>
-
-<style>
-</style>
