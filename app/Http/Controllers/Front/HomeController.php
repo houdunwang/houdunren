@@ -10,15 +10,15 @@ use App\Http\Controllers\Controller;
  */
 class HomeController extends Controller
 {
-  /**
-   * 网站首页访问
-   * 转向到模块主页控制器
-   * @return mixed
-   */
-  public function index()
-  {
-    $module = module();
-    $class = "Modules\\{$module['name']}\Http\Controllers\Front\HomeController";;
-    return app($class)->index();
-  }
+    /**
+     * 网站首页访问
+     * 转向到模块主页控制器
+     * @return mixed
+     */
+    public function index()
+    {
+        $module = module();
+        $class = "Modules\\{$module['name']}\Http\Controllers\Front\HomeController";;
+        return app($class)->index();
+    }
 }

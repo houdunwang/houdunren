@@ -18,7 +18,7 @@ class SiteMiddleware
         if ($this->checkRole($role, $site)) {
             return $next($request);
         }
-        abort(403, '你不是站点管理员或超级管理员');
+        abort(403, '你不是站点管理员或操作员');
     }
 
     /**

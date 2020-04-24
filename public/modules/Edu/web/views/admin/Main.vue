@@ -90,9 +90,9 @@ import { mapState } from 'vuex'
 export default {
   beforeRouteEnter: async (to, from, next) => {
     let response = await Promise.all([
-      axios.get(`admin/site?sid=${to.query.sid}`),
-      axios.get(`admin/module/Edu?sid=${to.query.sid}`),
-      axios.get(`admin/menu/Edu?sid=${to.query.sid}`)
+      axios.get(`module/${to.query.sid}/site`),
+      axios.get(`module/${to.query.sid}/Edu`),
+      axios.get(`module/${to.query.sid}/menu/Edu`)
     ])
     store.commit('site/set', response[0].data)
     store.commit('module/set', response[1].data)

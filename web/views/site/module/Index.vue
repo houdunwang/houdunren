@@ -53,6 +53,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import store2 from 'store2'
 export default {
   data() {
     return {
@@ -62,6 +63,7 @@ export default {
     }
   },
   async created() {
+    // store2('sid', parseInt(this.$route.params.sid))
     let response = await Promise.all([
       this.axios.get(`site/site/${this.$route.params.sid}`),
       this.axios.get(`site/${this.$route.params.sid}/module/user`)

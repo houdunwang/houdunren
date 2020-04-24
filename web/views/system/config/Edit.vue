@@ -20,6 +20,7 @@
                 :showUploadList="false"
                 action="/api/common/upload/system"
                 @change="handleChange"
+                :headers="headers"
               >
                 <img v-if="form.base.logo.value" :src="form.base.logo.value" alt="avatar" />
                 <div v-else>
@@ -41,10 +42,16 @@
 </template>
 
 <script>
+import token from '@/services/token'
 import { mapState, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapState('system', { form: 'config' })
+  },
+  data() {
+    return {
+      headers: token.headers()
+    }
   },
   methods: {
     ...mapActions('system', { getConfig: 'getConfig' }),

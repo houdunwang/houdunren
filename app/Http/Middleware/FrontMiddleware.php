@@ -14,7 +14,7 @@ class FrontMiddleware
 {
     public function handle($request, Closure $next)
     {
-        $site = app(SiteService::class)->getSiteByDomain();
+        $site = $this->getSiteModel();
         if (!$site || !$site->module) {
             $message = '域名不属于任何站点或站点没有设置默认模块';
             if ($request->expectsJson()) {
@@ -26,5 +26,11 @@ class FrontMiddleware
         app(SiteService::class)->site($site);
         app(ModuleService::class)->module(site()['module']);
         return $next($request);
+    }
+
+    protected function getSiteModel()
+    {
+        $sid = request()->query('sid');
+        return $sid ? site($sid) : app(SiteService::class)->getSiteByDomain();
     }
 }

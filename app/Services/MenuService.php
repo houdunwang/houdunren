@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Module;
 use App\Models\Site;
 use App\User;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
  * 模块菜单服务
@@ -18,16 +19,17 @@ class MenuService
      *
      * @return mixed
      */
-    public function admin(Site $site, Module $module, User $user)
+    public function module(Site $site, string $name, User $user)
     {
-        $modules =  app(ModuleService::class)->getModuleByUser($site, $user);
+        $modules = app(ModuleService::class)->getModuleByUser($site, $user);
         foreach ($modules as $k => $m) {
             $modules[$k]['menu']['admin'] =
                 $this->removeInvalidMenu($site, $m['menu']['admin'], $user);
         }
-        return collect($modules)->first(function ($m) use ($module) {
-            return $m['config']['name'] == $module['name'];
+        $module =  collect($modules)->first(function ($m) use ($name) {
+            return $m['config']['name'] == $name;
         });
+        return $module ? $module['menu']['admin'] : [];
     }
 
     /**
@@ -52,13 +54,32 @@ class MenuService
     }
 
     /**
-     * 获取会员中心菜单
+     * 获取模块会员中心菜单
      * @param Site $site
      * @return array
      */
-    public function member(Site $site)
+    public function member(Site $site, string $name)
     {
-        $moduleService = new ModuleService;
-        return $moduleService->getSiteModule($site);
+        $modules = app(ModuleService::class)->getSiteModule($site);
+        $module = collect($modules)->first(function ($m) use ($name) {
+            return $m['config']['name'] == $name;
+        });
+        return $module ? $module['menu']['member'] : [];
+    }
+
+    /**
+     * 模块个人中心菜单
+     * @param Site $site
+     * @param string $name
+     * @return mixed|array
+     * @throws BindingResolutionException
+     */
+    public function center(Site $site, string $name)
+    {
+        $modules = app(ModuleService::class)->getSiteModule($site);
+        $module = collect($modules)->first(function ($m) use ($name) {
+            return $m['config']['name'] == $name;
+        });
+        return $module ? $module['menu']['center'] : [];
     }
 }

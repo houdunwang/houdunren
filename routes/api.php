@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+//公共服务
 Route::group(['namespace' => 'Common', 'prefix' => 'common'], function () {
     Route::post('code/send', 'CodeController@send')->middleware(['front', 'throttle:10,2']);
     Route::post('upload/system', 'UploadController@system')->middleware('auth:sanctum');
@@ -9,8 +10,26 @@ Route::group(['namespace' => 'Common', 'prefix' => 'common'], function () {
     Route::get('captcha/text', 'CaptchaController@make');
     Route::get('captcha/image', 'CaptchaController@image');
 });
-
-//系统
+//登录注册
+Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
+    //登录注册
+    Route::post('login', 'UserController@login');
+    Route::get('logout', 'UserController@logout');
+    Route::post('register', 'UserController@register')->middleware('front');
+    Route::get('get', 'UserController@get');
+    Route::post('has', 'UserController@has')->middleware('front');
+    Route::post('findPassword', 'UserController@findPassword')->middleware('front');
+});
+//会员中心
+Route::group(['middleware' => ['auth:sanctum', 'front'], 'namespace' => 'Member', 'prefix' => 'member'], function () {
+    //修改资料
+    Route::get('get', 'UserController@get');
+    Route::put('user', 'UserController@update');
+    Route::put('password', 'UserController@password');
+    Route::put('mobile', 'UserController@mobile');
+    Route::put('email', 'UserController@email');
+});
+//系统服务
 Route::group(['middleware' => ['auth:sanctum'], 'namespace' => 'System', 'prefix' => 'system'], function () {
     //套餐管理
     Route::apiResource('package', 'PackageController');
@@ -28,8 +47,7 @@ Route::group(['middleware' => ['auth:sanctum'], 'namespace' => 'System', 'prefix
     //我的资料
     Route::apiResource('user', 'UserController');
 });
-
-//站点
+//站点服务
 Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'Site', 'prefix' => 'site'], function () {
     Route::apiResource('site', 'SiteController');
     //站点配置
@@ -60,24 +78,16 @@ Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'Site', 'prefix' =>
     //更新站点缓存
     Route::put('{site}/cache', 'CacheController@update');
 });
-
-//登录注册
-Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
-    //登录注册
-    Route::post('login', 'UserController@login');
-    Route::get('logout', 'UserController@logout');
-    Route::post('register', 'UserController@register')->middleware('front');
-    Route::get('get', 'UserController@get');
-    Route::post('has', 'UserController@has')->middleware('front');
-    Route::post('findPassword', 'UserController@findPassword')->middleware('front');
+//前台服务
+Route::group(['middleware' => ['front'], 'namespace' => 'Front', 'prefix' => 'front'], function () {
+    Route::get('menu/member/{module}', 'MenuController@member');
+    Route::get('menu/center/{module}', 'MenuController@center');
+    Route::get('site', 'SiteController@get');
+    Route::get('module', 'ModuleController@get');
 });
-
-//会员中心
-Route::group(['middleware' => ['auth:sanctum', 'front'], 'namespace' => 'Member', 'prefix' => 'member'], function () {
-    //修改资料
-    Route::get('get', 'UserController@get');
-    Route::put('user', 'UserController@update');
-    Route::put('password', 'UserController@password');
-    Route::put('mobile', 'UserController@mobile');
-    Route::put('email', 'UserController@email');
+//后台模块服务
+Route::group(['middleware' => ['auth:sanctum', 'site'], 'namespace' => 'Module', 'prefix' => 'module'], function () {
+    Route::get('{site}/site', 'SiteController@get');
+    Route::get('{site}/menu/{name}', 'MenuController@admin');
+    Route::get('{site}/{name}', 'ModuleController@get');
 });

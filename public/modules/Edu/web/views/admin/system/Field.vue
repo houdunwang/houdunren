@@ -18,6 +18,7 @@
               class="avatar-uploader"
               :showUploadList="false"
               :action="`/api/common/upload/site?sid=${site.id}`"
+              :headers="headers"
               @change="uploadPreview"
             >
               <img v-if="form.preview" :src="form.preview" alt="avatar" />
@@ -59,6 +60,7 @@
 </template>
 
 <script>
+import token from '@/services/token'
 import Tab from './Tab'
 import Lesson from '@/views/admin/components/Lesson'
 import { mapState } from 'vuex'
@@ -85,6 +87,7 @@ export default {
   },
   data() {
     return {
+      headers: token.headers(),
       lessonColumns,
       selectLessonDialog: false
     }

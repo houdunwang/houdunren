@@ -34,7 +34,7 @@ class ModuleService
     {
         static $cache = null;
         if (is_null($cache)) {
-            preg_match('/^(\w+)\//', request()->path(), $matchs);
+            preg_match('/^(?:api\/)?(\w+)\//i', request()->path(), $matchs);
             $cache =  Module::where('name', $matchs[1] ?? '')->first();
         }
         return $cache;

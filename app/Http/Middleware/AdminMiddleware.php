@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Services\ModuleService;
 use App\Services\UserService;
 use Closure;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
@@ -30,13 +31,11 @@ class AdminMiddleware
      */
     protected function loadSiteAndModule()
     {
-        $name = Auth::id() . '-sid';
-        $sid =  request()->query('sid', Cache::get($name));
-        if (site($sid)) Cache::put($name, $sid);
-
-        //本次请求模块
-        $module = app(ModuleService::class)->getModuleByUrl();
-        module($module);
+        site(request()->query('sid'));
+        module(app(ModuleService::class)->getModuleByUrl());
+        if (!site() || !module()) {
+            throw new Exception('站点或模块不存在');
+        }
     }
 
     /**

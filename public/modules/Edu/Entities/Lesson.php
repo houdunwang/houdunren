@@ -9,14 +9,14 @@ use Illuminate\Database\Eloquent\Model;
 class Lesson extends Model
 {
     protected $table = 'edu_lessons';
-
     protected $fillable = ['site_id', 'user_id', 'title', 'description', 'thumb', 'type', 'status', 'free_num', 'price', 'is_commend', 'video_num', 'download_address'];
-
     protected $casts = ['is_commend' => 'boolean', 'status' => 'boolean'];
+
     protected static function booted()
     {
         static::addGlobalScope(new SiteScope);
     }
+
     public function video()
     {
         return $this->hasMany(Video::class, 'lesson_id');

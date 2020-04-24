@@ -33,8 +33,9 @@
               listType="picture-card"
               class="avatar-uploader"
               :showUploadList="false"
-              :action="`/api/common/upload/system`"
+              :action="`/api/common/upload/site?sid=${$route.params.sid}`"
               @change="logoUpload"
+              :headers="headers"
             >
               <img v-if="form.logo" :src="form.logo" alt="avatar" />
               <div v-else>
@@ -66,6 +67,8 @@
 </template>
 
 <script>
+import token from '@/services/token'
+
 export default {
   props: {
     action: String,
@@ -89,6 +92,7 @@ export default {
   },
   data() {
     return {
+      headers: token.headers(),
       rules: {
         name: [
           { required: true, message: '站点名称不能为空', trigger: 'blur' },

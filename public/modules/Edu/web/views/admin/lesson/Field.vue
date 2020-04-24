@@ -40,6 +40,7 @@
             :showUploadList="false"
             :action="`/api/common/upload/site?sid=${site.id}`"
             @change="uploadThumb"
+            :headers="headers"
           >
             <img v-if="form.thumb" :src="form.thumb" alt="avatar" />
             <div v-else>
@@ -112,6 +113,7 @@
 <script>
 import systemUpload from '@/services/upload'
 import { mapState } from 'vuex'
+import token from '@/services/token'
 const rules = {
   title: [{ required: true, message: '课程名称不能为空', trigger: 'change' }],
   description: [{ required: true, message: '课程介绍不能为空', trigger: 'change' }]
@@ -129,6 +131,7 @@ export default {
   },
   data() {
     return {
+      headers: { Authorization: 'Bearer ' + token.get() },
       rules,
       tags: []
     }
