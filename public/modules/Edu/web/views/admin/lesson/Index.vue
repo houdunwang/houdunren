@@ -2,33 +2,36 @@
   <div>
     <nav class="nav nav-tabs mb-2">
       <a class="nav-link active" href="#">课程列表</a>
-      <router-link class="nav-link" :to="{ name: 'admin.lesson.create',query:{sid:site.id} }">发表列表</router-link>
+      <router-link
+        class="nav-link"
+        :to="{ name: 'admin.lesson.create', query: { sid: site.id } }"
+      >发表列表</router-link>
     </nav>
-    <a-card title="课程列表" size="small">
-      <a-table
-        :columns="columns"
-        :dataSource="lesson.data"
-        rowKey="id"
-        size="middle"
-        bordered
-        v-if="lesson.data"
-        :pagination="{
+    <a-table
+      v-if="lesson.data"
+      rowKey="id"
+      size="middle"
+      bordered
+      :columns="columns"
+      :dataSource="lesson.data"
+      :pagination="{
         total: lesson.meta.total,
         current: lesson.meta.current_page,
+        defaultPageSize:10,
         hideOnSinglePage: true
       }"
-      >
-        <div slot="action" slot-scope="scope">
-          <div class="btn-group btn-group-sm" role="group">
-            <router-link
-              :to="{ name: 'admin.lesson.edit', params: { id: scope.id },query:{sid:site.id} }"
-              class="btn btn-outline-success"
-            >编辑</router-link>
-            <a class="btn btn-outline-secondary" @click="del(scope)">删除</a>
-          </div>
+      @change="load"
+    >
+      <div slot="action" slot-scope="scope">
+        <div class="btn-group btn-group-sm" role="group">
+          <router-link
+            :to="{ name: 'admin.lesson.edit', params: { id: scope.id }, query: { sid: site.id } }"
+            class="btn btn-outline-success"
+          >编辑</router-link>
+          <a class="btn btn-outline-secondary" @click="del(scope)">删除</a>
         </div>
-      </a-table>
-    </a-card>
+      </div>
+    </a-table>
     <!-- <div class="card">
       <div class="card-header bg-light">课程列表</div>
       <div class="card-body">
@@ -106,14 +109,15 @@ export default {
     }
   },
   created() {
-    this.load(1)
+    this.load({ current: 1 })
   },
   computed: {
     ...mapState('site', ['site'])
   },
   methods: {
-    async load(page) {
-      let response = await this.axios.get(`edu/admin/lesson?sid=${this.site.id}&page=${page}`).then(r => r.data)
+    async load({ current = 1 }) {
+      let response = await this.axios.get(`edu/admin/lesson?sid=${this.site.id}&page=${current}`).then(r => r.data)
+
       this.$set(this, 'lesson', response)
     },
     async del(lesson) {
@@ -132,5 +136,4 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

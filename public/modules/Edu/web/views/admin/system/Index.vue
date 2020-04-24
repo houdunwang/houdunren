@@ -1,13 +1,31 @@
 <template>
   <div>
     <tab />
-    <div class="card">
-      <div class="card-header">课程列表</div>
-      <div class="card-body">
-        <a-table :columns="columns" :dataSource="lessons.data" bordered>
-          <a slot="name" slot-scope="text">{{ text }}</a>
-        </a-table>
-        <!-- <el-table :data="lessons.data" border stripe style="width: 100%">
+    <a-table
+      v-if="lessons.data"
+      bordered
+      rowKey="id"
+      size="middle"
+      :columns="columns"
+      :dataSource="lessons.data"
+      :pagination="{
+        total: lessons.meta.total,
+        current: lessons.meta.current_page,
+        defaultPageSize:10,
+        hideOnSinglePage: true
+      }"
+      @change="load"
+    >
+      <div class="btn-group btn-group-sm" role="group" slot="action" slot-scope="scope">
+        <router-link
+          :to="{ name: 'admin.system.edit', params: { id: scope.id },query:{sid:site.id} }"
+          class="btn btn-outline-success"
+        >编辑</router-link>
+        <a class="btn btn-outline-secondary" @click="del(scope)">删除</a>
+      </div>
+    </a-table>
+
+    <!-- <el-table :data="lessons.data" border stripe style="width: 100%">
           <el-table-column
             v-for="col in columns"
             :prop="col.id"
@@ -39,7 +57,6 @@
             </template>
           </el-table-column>
         </el-table>
-
         <el-pagination
           class="mt-3"
           :hide-on-single-page="true"
@@ -47,9 +64,7 @@
           layout="prev, pager, next"
           :total="lessons.meta.total"
           @current-change="load"
-        ></el-pagination>-->
-      </div>
-    </div>
+    ></el-pagination>-->
   </div>
 </template>
 
@@ -64,31 +79,29 @@ export default {
       columns: [
         { key: 'id', dataIndex: 'id', title: '编号', width: 60 },
         { key: 'title', dataIndex: 'title', title: '课程名称' },
-        { key: 'description', dataIndex: 'description', title: '课程介绍', width: 250 }
+        { key: 'description', dataIndex: 'description', title: '课程介绍', width: 250 },
+        { title: '', width: 120, scopedSlots: { customRender: 'action' } }
       ]
     }
   },
   created() {
-    this.load()
+    this.load({})
   },
   computed: {
     ...mapState('site', ['site'])
   },
   methods: {
     async del(lesson) {
-      this.$confirm('确定删除课程吗？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+      this.$confirm({
+        content: '确定删除课程吗？',
+        onOk: async () => {
+          await this.axios.delete(`edu/admin/system/${lesson.id}?sid=${this.site.id}`)
+          this.load()
+        }
       })
-        .then(async () => {
-          await this.axios.delete('edu/admin/system/${lesson.id}?sid=${this.site.id}')
-          this.lessons.splice(this.lessons.indexOf(lesson), 1)
-        })
-        .catch(() => {})
     },
-    async load(page = 1) {
-      let response = await this.axios.get(`edu/admin/system?page=${page}&sid=${this.site.id}`).then(r => r.data)
+    async load({ current = 1 }) {
+      let response = await this.axios.get(`edu/admin/system?page=${current}&sid=${this.site.id}`).then(r => r.data)
       this.$set(this, 'lessons', response)
     }
   }

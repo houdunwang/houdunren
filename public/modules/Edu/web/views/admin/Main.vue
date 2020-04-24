@@ -77,7 +77,7 @@
           >{{ menu.title }}</router-link>
         </ul>
       </div>
-      <div class="flex-fill ml-md-0 pb-5 pt-3 shadow-sm bg-light p-3 border-left1 border-silver">
+      <div class="flex-fill ml-md-1 pb-5 pt-3 shadow-sm bg-white p-3 border-left border-silver">
         <router-view></router-view>
       </div>
     </div>
@@ -89,6 +89,9 @@ import store from '@/store'
 import { mapState } from 'vuex'
 export default {
   beforeRouteEnter: async (to, from, next) => {
+    if (!to.query.sid) {
+      return next(from)
+    }
     let response = await Promise.all([
       axios.get(`module/${to.query.sid}/site`),
       axios.get(`module/${to.query.sid}/Edu`),
@@ -97,6 +100,7 @@ export default {
     store.commit('site/set', response[0].data)
     store.commit('module/set', response[1].data)
     store.commit('module/setMenus', response[2].data)
+
     next()
   },
   components: { Error },
@@ -104,6 +108,11 @@ export default {
     ...mapState('user', ['user']),
     ...mapState('site', ['site']),
     ...mapState('module', ['module', 'menus'])
+  },
+  provide() {
+    return {
+      sid: this.$route.query.sid
+    }
   },
   methods: {}
 }

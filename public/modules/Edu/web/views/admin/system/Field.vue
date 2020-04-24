@@ -1,56 +1,50 @@
 <template>
   <div>
     <tab />
-    <div class="card">
-      <div class="card-header">课程资料</div>
-      <div class="card-body">
-        <a-form-model :model="form" ref="form" :label-col="{span:3}" :wrapper-col="{span:10}">
-          <a-form-model-item label="课程标题">
-            <a-input v-model="form.title"></a-input>
-          </a-form-model-item>
-          <a-form-model-item label="课程介绍">
-            <a-input v-model="form.description"></a-input>
-          </a-form-model-item>
-          <a-form-model-item label="课程图片">
-            <a-upload
-              name="file"
-              listType="picture-card"
-              class="avatar-uploader"
-              :showUploadList="false"
-              :action="`/api/common/upload/site?sid=${site.id}`"
-              :headers="headers"
-              @change="uploadPreview"
-            >
-              <img v-if="form.preview" :src="form.preview" alt="avatar" />
-              <div v-else>
-                <div class="ant-upload-text">
-                  <i class="fa fa-file-image-o fa-4x" aria-hidden="true"></i>
-                </div>
+    <a-card title="课程资料" size="small" hoverable class="mb-2">
+      <a-form-model :model="form" ref="form" :label-col="{span:3}" :wrapper-col="{span:10}">
+        <a-form-model-item label="课程标题">
+          <a-input v-model="form.title"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="课程介绍">
+          <a-input v-model="form.description"></a-input>
+        </a-form-model-item>
+        <a-form-model-item label="课程图片">
+          <a-upload
+            name="file"
+            listType="picture-card"
+            class="avatar-uploader"
+            :showUploadList="false"
+            :action="`/api/common/upload/site?sid=${site.id}`"
+            :headers="headers"
+            @change="uploadPreview"
+          >
+            <img v-if="form.preview" :src="form.preview" alt="avatar" />
+            <div v-else>
+              <div class="ant-upload-text">
+                <i class="fa fa-file-image-o fa-4x" aria-hidden="true"></i>
               </div>
-            </a-upload>
-          </a-form-model-item>
-        </a-form-model>
-      </div>
-    </div>
-    <div class="card mt-2">
-      <div class="card-header">课程列表</div>
-      <div class="card-body">
-        <a-table
-          bordered
-          :columns="lessonColumns"
-          :dataSource="form.lessons"
-          rowKey="id"
-          :pagination="false"
-        >
-          <template slot="action" slot-scope="scope">
-            <button class="btn btn-outline-danger btn-sm" type="button" @click="delLesson(scope)">删除</button>
-          </template>
-        </a-table>
-      </div>
-      <div class="card-footer text-muted">
-        <button class="btn btn-outline-secondary btn-sm" @click="selectLessonDialog=true">选择课程</button>
-      </div>
-    </div>
+            </div>
+          </a-upload>
+        </a-form-model-item>
+      </a-form-model>
+    </a-card>
+
+    <a-card title="课程列表" hoverable size="small">
+      <a-table
+        bordered
+        :columns="lessonColumns"
+        :dataSource="form.lessons"
+        rowKey="id"
+        :pagination="false"
+        size="middle"
+      >
+        <template slot="action" slot-scope="scope">
+          <button class="btn btn-outline-danger btn-sm" type="button" @click="delLesson(scope)">删除</button>
+        </template>
+      </a-table>
+      <button class="btn btn-outline-secondary btn-sm mt-2" @click="selectLessonDialog=true">选择课程</button>
+    </a-card>
     <button class="btn btn-primary mt-2" type="button" @click="submit">保存提交</button>
     <!-- 选择课程 -->
     <a-modal title="选择课程" v-model="selectLessonDialog" width="60%" :footer="false">

@@ -1,28 +1,20 @@
 <template>
-  <div>
-    <field :form.sync="form" @submit="submit" />
-  </div>
+  <field v-if="form.id" :action="`edu/admin/system/${form.id}`" method="put" :form="form" />
 </template>
 
 <script>
 import Field from './Field'
 export default {
   components: { Field },
+  inject: ['sid'],
   data() {
     return {
-      form: { lessons: [] }
+      form: {}
     }
   },
   async created() {
-    let response = await this.axios.get(`edu/admin/system/${this.$route.params.id}/edit`).then(r => r.data.data)
+    let response = await this.axios.get(`edu/admin/system/${this.$route.params.id}?sid=${this.sid}`).then(r => r.data)
     this.$set(this, 'form', response)
-  },
-  methods: {
-    async submit(data) {
-      await this.axios.put(`edu/admin/system/${this.form.id}`, data)
-      this.$message.success('修改成功')
-      this.$router.push({ name: 'admin.system' })
-    }
   }
 }
 </script>

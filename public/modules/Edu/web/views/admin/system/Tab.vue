@@ -4,7 +4,7 @@
       <router-link
         class="nav-link"
         :class="{ active: $route.name === 'admin.system.index' }"
-        :to="{ name: 'admin.system',query:{sid:site.id} }"
+        :to="{ name: 'admin.system.index',query:{sid:site.id} }"
       >系统课程列表</router-link>
       <router-link
         class="nav-link"

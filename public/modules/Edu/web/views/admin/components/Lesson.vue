@@ -15,7 +15,7 @@
         <button type="button" class="input-group-text" id="basic-addon2" @click="search">搜索课程</button>
       </div>
     </div>
-    <a-table :columns="columns" :dataSource="data" bordered rowKey="id">
+    <a-table :columns="columns" :dataSource="data" bordered rowKey="id" size="middle">
       <div slot="action" slot-scope="lesson">
         <div class="btn-group btn-group-sm">
           <button

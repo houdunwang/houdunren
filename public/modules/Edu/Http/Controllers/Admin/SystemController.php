@@ -30,9 +30,9 @@ class SystemController extends ApiController
         return $this->success('添加成功');
     }
 
-    public function edit(System $system)
+    public function show(System $system)
     {
-        return $this->success('获取单条系统课程', new SystemResource($system));
+        return $this->json(new SystemResource($system));
     }
 
     public function update(SystemRequest $request, System $system)
@@ -42,7 +42,9 @@ class SystemController extends ApiController
         return $this->success('修改成功');
     }
 
-    public function destroy($id)
+    public function destroy(System $system)
     {
+        $system->delete();
+        return $this->success('删除成功');
     }
 }
