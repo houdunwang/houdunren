@@ -3,9 +3,12 @@
 namespace Modules\Edu\Http\Controllers\Front;
 
 use App\Http\Controllers\ApiController;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Edu\Entities\Lesson;
+use Modules\Edu\Entities\Tag;
+use Modules\Edu\Entities\TagRelation;
 use Modules\Edu\Transformers\Front\LessonResource;
 
 /**
@@ -14,45 +17,53 @@ use Modules\Edu\Transformers\Front\LessonResource;
  */
 class LessonController extends ApiController
 {
-  public function index()
-  {
-    $lessons = Lesson::latest('id')->paginate(9);
-    return LessonResource::collection($lessons);
-  }
+    public function index(Request $request)
+    {
+        $tag = $request->query('tag');
+        $searchWord = $request->query('w');
+        if ($searchWord) {
+            $lessons = Lesson::where('title', 'like', "%{$searchWord}%")->paginate(9);
+        } else if ($tag) {
+            $lessons = Tag::find($tag)->lesson()->paginate(9);
+        } else {
+            $lessons = Lesson::latest('id')->paginate(9);
+        }
+        return LessonResource::collection($lessons);
+    }
 
-  public function show(Lesson $lesson)
-  {
-    return response()->json(new LessonResource($lesson));
-  }
+    public function show(Lesson $lesson)
+    {
+        return response()->json(new LessonResource($lesson));
+    }
 
-  /**
-   * Show the form for editing the specified resource.
-   * @param int $id
-   * @return Response
-   */
-  public function edit($id)
-  {
-    return view('edu::edit');
-  }
+    /**
+     * Show the form for editing the specified resource.
+     * @param int $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        return view('edu::edit');
+    }
 
-  /**
-   * Update the specified resource in storage.
-   * @param Request $request
-   * @param int $id
-   * @return Response
-   */
-  public function update(Request $request, $id)
-  {
-    //
-  }
+    /**
+     * Update the specified resource in storage.
+     * @param Request $request
+     * @param int $id
+     * @return Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
 
-  /**
-   * Remove the specified resource from storage.
-   * @param int $id
-   * @return Response
-   */
-  public function destroy($id)
-  {
-    //
-  }
+    /**
+     * Remove the specified resource from storage.
+     * @param int $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }

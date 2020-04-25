@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Services\UserService;
 use App\Models\Site;
+use App\Services\SiteService;
 use Closure;
 
 /**
@@ -14,7 +15,11 @@ class SiteMiddleware
 {
     public function handle($request, Closure $next, ...$role)
     {
-        $site = site(request('site'));
+        $site = app(SiteService::class)->site(request('site'));
+        if (!$site) {
+            abort('404', '站点不存在');
+            dd();
+        }
         if ($this->checkRole($role, $site)) {
             return $next($request);
         }

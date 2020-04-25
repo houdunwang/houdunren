@@ -13,22 +13,26 @@ import TopicUpdate from '@/views/front/topic/Update'
 import Sign from '@/views/front/sign/Index'
 import Subscribe from '@/views/front/subscribe/Index'
 export default {
-  path: '/',
+  path: '/edu',
   component: Main,
   children: [
-    { name: 'home', component: Index, path: '/', alias: '/home' },
-    { name: 'lesson', component: LessonIndex, path: 'lesson/你的汗水，终将得到回报' },
-    { name: 'lesson.show', component: LessonShow, path: 'lesson/:id' },
+    { name: 'home', component: Index, path: 'home', meta: { keepAlive: true } },
+    { name: 'lesson.index', component: LessonIndex, path: 'lesson/你的汗水，终将得到回报', meta: { keepAlive: true } },
+    { name: 'lesson.show', component: LessonShow, path: 'lesson/:id', meta: { keepAlive: true } },
     { name: 'video.show', component: Video, path: 'video/:sid/:id', meta: { auth: true } },
-    { name: 'video', component: VideoIndex, path: 'video/编程秘籍->干就完了！' },
-    { name: 'system', component: System, path: 'systems/系统课程非常适合新手快速掌握开发语言' },
-    { name: 'system.show', component: SystemShow, path: 'systems/:id' },
-    { name: 'topic', component: Topic, path: 'topic' },
+    { name: 'video.index', component: VideoIndex, path: 'video/编程秘籍->干就完了！', meta: { keepAlive: true } },
+    {
+      name: 'system.index',
+      component: System,
+      path: 'systems/系统课程非常适合新手快速掌握开发语言',
+      meta: { keepAlive: true }
+    },
+    { name: 'system.show', component: SystemShow, path: 'systems/:id', meta: { keepAlive: true } },
+    { name: 'topic.index', component: Topic, path: 'topic', meta: { keepAlive: true } },
     { name: 'topic.create', component: TopicCreate, path: 'topic/create', meta: { auth: true } },
     { name: 'topic.update', component: TopicUpdate, path: 'topic/update/:id', meta: { auth: true } },
     { name: 'topic.show', component: TopicShow, path: 'topic/show/:id', meta: { auth: true } },
-    { name: 'sign', component: Sign, path: 'sign' },
-    { name: 'subscribe', component: Subscribe, path: 'subscribe' }
-    // { path: '*', redirect: '/' }
+    { name: 'sign.index', component: Sign, path: 'sign', meta: { keepAlive: true } },
+    { name: 'subscribe', component: Subscribe, path: 'subscribe', meta: { keepAlive: true } }
   ]
 }

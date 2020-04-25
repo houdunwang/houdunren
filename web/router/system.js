@@ -16,8 +16,8 @@ export default {
   component: Main,
   meta: { auth: true },
   children: [
-    { name: 'system', path: 'index', component: Index, alias: '/system' },
-    { name: 'system.config', path: 'config', component: Edit },
+    { name: 'system', path: 'index', component: Index, alias: '/system', meta: { keepAlive: true } },
+    { name: 'system.config', path: 'config', component: Edit, meta: { keepAlive: true } },
     { name: 'system.module', path: 'module', component: Module },
     { name: 'system.package', path: 'package', component: Package },
     { name: 'system.package.add', path: 'package/add', component: PackageAdd },
@@ -32,7 +32,8 @@ export default {
     {
       name: 'system.cache.update',
       path: 'cache/update',
-      component: UpdateSystemCache
+      component: UpdateSystemCache,
+      meta: { keepAlive: true }
     },
     { name: 'system.user', path: 'user', component: User }
   ]

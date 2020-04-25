@@ -10,22 +10,23 @@ Route::group(['middleware' => ['auth:sanctum', 'admin'], 'namespace' => 'Admin',
     Route::apiResource('subscribe', 'SubscribeController');
 });
 
-// Route::group(['middleware' => ['front'], 'namespace' => 'Front', 'prefix' => 'edu/front'], function () {
-//     Route::resource('lesson', 'LessonController')->only(['index', 'show']);
-//     Route::resource('system', 'SystemController')->only(['index', 'show']);
-//     Route::resource('video', 'VideoController')->only(['index', 'show']);
-//     Route::get('video/favour/{video}', 'VideoController@favour')->middleware('auth:api');
-//     Route::get('video/favorite/{video}', 'VideoController@favorite')->middleware('auth:api');
-//     Route::post('video/comment/{video}', 'VideoController@comment')->middleware('auth:api');
-//     Route::get('video/comment/{video}', 'VideoController@commentList')->middleware('auth:api');
-//     Route::get('comment/favour/{comment}', 'CommentController@favour')->middleware('auth:api');
-//     Route::resource('topic', 'TopicController')->middleware("auth:api");
-//     Route::any('topic/search', 'TopicController@index');
-//     Route::resource('sign', 'SignController');
-//     Route::resource('subscribe', 'SubscribeController');
-// });
+Route::group(['middleware' => ['front'], 'namespace' => 'Front', 'prefix' => 'edu/front'], function () {
+    Route::apiResource('lesson', 'LessonController');
+    Route::apiResource('system', 'SystemController');
+    Route::apiResource('video', 'VideoController');
+    Route::apiResource('tag', 'TagController');
+    Route::get('video/favour/{video}', 'VideoController@favour')->middleware('auth:sanctum');
+    Route::get('video/favorite/{video}', 'VideoController@favorite')->middleware('auth:sanctum');
+    Route::post('video/comment/{video}', 'VideoController@comment')->middleware('auth:sanctum');
+    Route::get('video/comment/{video}', 'VideoController@commentList')->middleware('auth:sanctum');
+    Route::get('comment/favour/{comment}', 'CommentController@favour')->middleware('auth:sanctum');
+    Route::apiResource('topic', 'TopicController')->middleware("auth:sanctum");
+    Route::any('topic/search', 'TopicController@index');
+    Route::resource('sign', 'SignController');
+    Route::resource('subscribe', 'SubscribeController');
+});
 
-// Route::group(['middleware' => ['auth:sanctum', 'front'], 'namespace' => 'Member', 'prefix' => 'edu/member'], function () {
-//     Route::resource('order', 'OrderController');
-//     Route::get('duration', 'DurationController@get');
-// });
+Route::group(['middleware' => ['auth:sanctum', 'front'], 'namespace' => 'Member', 'prefix' => 'edu/member'], function () {
+    Route::apiResource('order', 'OrderController');
+    Route::get('duration', 'DurationController@get');
+});

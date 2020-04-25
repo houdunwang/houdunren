@@ -4,6 +4,10 @@ namespace Modules\Edu\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Edu\Entities\Comment;
+use Modules\Edu\Entities\Sign;
+use Modules\Edu\Observers\CommentObserver;
+use Modules\Edu\Observers\SignObserver;
 
 class EduServiceProvider extends ServiceProvider
 {
@@ -29,6 +33,9 @@ class EduServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+
+        Comment::observe(CommentObserver::class);
+        Sign::observe(SignObserver::class);
     }
 
     /**
@@ -52,7 +59,8 @@ class EduServiceProvider extends ServiceProvider
             module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
+            module_path($this->moduleName, 'Config/config.php'),
+            $this->moduleNameLower
         );
     }
 
@@ -97,7 +105,7 @@ class EduServiceProvider extends ServiceProvider
      */
     public function registerFactories()
     {
-        if (! app()->environment('production') && $this->app->runningInConsole()) {
+        if (!app()->environment('production') && $this->app->runningInConsole()) {
             app(Factory::class)->load(module_path($this->moduleName, 'Database/factories'));
         }
     }

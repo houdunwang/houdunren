@@ -5,7 +5,17 @@
         <i class="fa fa-plus"></i>
         添加网站
       </router-link>
-      <div class="card mb-3 shadow-sm rounded-0" v-for="site in data" :key="site.id">
+      <div v-if="data == null">
+        <a-skeleton />
+        <a-skeleton />
+        <a-skeleton />
+      </div>
+      <div
+        class="card mb-3 shadow-sm rounded-0"
+        v-for="site in data"
+        :key="site.id"
+        v-if="data!=null"
+      >
         <div class="card-header small">
           <div class="row">
             <div class="col-6">
@@ -133,7 +143,7 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      data: []
+      data: null
     }
   },
   async created() {

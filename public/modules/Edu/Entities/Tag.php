@@ -15,11 +15,6 @@ class Tag extends Model
     }
     public function lesson()
     {
-        return $this->morphedByMany(Lesson::class, 'relation');
-    }
-
-    public function group()
-    {
-        return $this->belongsTo(TagGroup::class, 'edu_tag_group');
+        return $this->morphedByMany(Lesson::class, 'relation', 'edu_tag_relation');
     }
 }

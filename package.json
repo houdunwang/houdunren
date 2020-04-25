@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "animate.css": "^3.7.2",
-    "ant-design-vue": "^1.5.0",
+    "ant-design-vue": "^1.5.3",
     "element-ui": "^2.13.0",
     "moment": "^2.24.0",
     "store2": "^2.11.0",

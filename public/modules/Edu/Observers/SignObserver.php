@@ -12,11 +12,11 @@ use Modules\Edu\Entities\SignTotal;
  */
 class SignObserver
 {
-  public function created(Sign $sign)
-  {
-    $data = [];
-    $data['total'] = Sign::where('user_id', $sign['user_id'])->count();
-    $data['month'] = Sign::where('user_id', $sign['user_id'])->whereMonth('created_at', now())->count();
-    SignTotal::updateOrCreate(['user_id' => Auth::id(), 'site_id' => SITEID], $data);
-  }
+    public function created(Sign $sign)
+    {
+        $data = [];
+        $data['total'] = Sign::where('user_id', $sign['user_id'])->count();
+        $data['month'] = Sign::where('user_id', $sign['user_id'])->whereMonth('created_at', now())->count();
+        SignTotal::updateOrCreate(['user_id' => Auth::id(), 'site_id' => SITEID], $data);
+    }
 }

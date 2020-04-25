@@ -2,27 +2,27 @@
 
 namespace Modules\Edu\Transformers\Front;
 
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class SystemResource extends Resource
+class SystemResource extends JsonResource
 {
-  /**
-   * Transform the resource into an array.
-   *
-   * @param  \Illuminate\Http\Request
-   * @return array
-   */
-  public function toArray($request)
-  {
-    return parent::toArray($request);
-  }
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request
+     * @return array
+     */
+    public function toArray($request)
+    {
+        return parent::toArray($request);
+    }
 
-  public function with($request)
-  {
-    return [
-      'meta' => [
-        'lessons' =>  $this->lesson()->with('video')->get(),
-      ]
-    ];
-  }
+    public function with($request)
+    {
+        return [
+            'meta' => [
+                'lessons' =>  $this->lesson()->with('video')->get(),
+            ]
+        ];
+    }
 }

@@ -1,31 +1,37 @@
 <template>
   <div>
-    <headers />
-    <router-view></router-view>
-    <el-backtop></el-backtop>
     <error />
+    <loading />
+
+    <keep-alive>
+      <headers />
+    </keep-alive>
+    <transition name="fade">
+      <!-- <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive"></router-view> -->
+      <router-view></router-view>
+    </transition>
+    <footers />
   </div>
 </template>
 
 <script>
 import Headers from './components/Header'
 import store from '../../store'
-import Error from '../components/Error'
+import Error from '@/components/Error'
+import Loading from '@/components/Loading'
+import Footers from './components/Footer'
+
 export default {
-  components: { Headers, Error }
-  // async beforeRouteEnter(to, from, next) {
-  //   await store.dispatch('user/get')
-  //   next()
-  // }
+  components: { Headers, Error, Loading, Footers }
 }
 </script>
 
 <style>
 body {
   background: #f7f7f7;
-}
-.container {
-  /* max-width: 1160px; */
 }
 .card-header {
   display: flex;

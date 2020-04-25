@@ -35,7 +35,7 @@ export default {
       Token.set(response.data.token)
       return true
     },
-    async logout({}) {
+    async logout({ state }) {
       await window.axios.get(`account/logout`)
       Token.del()
       location.href = '/'

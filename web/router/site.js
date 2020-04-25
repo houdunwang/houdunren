@@ -18,7 +18,7 @@ export default {
   meta: { auth: true },
   children: [
     //站点管理
-    { name: 'site.index', path: 'index', component: Index, meta: { auth: true } },
+    { name: 'site.index', path: 'index', component: Index },
     { name: 'site.add', path: 'add', component: Add },
     { name: 'site.edit', path: ':sid/edit', component: Edit },
     //站点配置

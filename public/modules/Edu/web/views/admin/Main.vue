@@ -58,11 +58,7 @@
     </nav>
     <div class="d-flex flex-fill flex-column flex-md-row">
       <div class="menus border-right border-top-0 shadow bg-white">
-        <ul
-          class="list-group list-group-flush text-left"
-          v-for="(menu,index) in menus"
-          :key="index"
-        >
+        <ul class="list-group list-group-flush text-left" v-for="(menu, index) in menus" :key="index">
           <strong
             class="list-group-item list-group-item-light d-flex align-items-center text-dark justify-content-start"
           >
@@ -72,9 +68,10 @@
           <router-link
             :to="`${menu.to}?sid=${site.id}`"
             class="list-group-item list-group-item-action"
-            v-for="(menu,key) in menu.items"
+            v-for="(menu, key) in menu.items"
             :key="key"
-          >{{ menu.title }}</router-link>
+            >{{ menu.title }}</router-link
+          >
         </ul>
       </div>
       <div class="flex-fill ml-md-1 pb-5 pt-3 shadow-sm bg-white p-3 border-left border-silver">
@@ -84,7 +81,7 @@
   </div>
 </template>
 <script>
-import Error from '../components/Error'
+import Error from '@/components/Error'
 import store from '@/store'
 import { mapState } from 'vuex'
 export default {
@@ -100,7 +97,6 @@ export default {
     store.commit('site/set', response[0].data)
     store.commit('module/set', response[1].data)
     store.commit('module/setMenus', response[2].data)
-
     next()
   },
   components: { Error },

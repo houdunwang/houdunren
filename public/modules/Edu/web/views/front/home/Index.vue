@@ -13,7 +13,7 @@
                 <avatar
                   class="mr-3"
                   src="https://i2.wp.com/wp.laravel-news.com/wp-content/uploads/2019/12/laracon-viii-is-coming.jpg?fit=2220%2C1125&ssl=1?resize=1400%2C709"
-                  :to="{name:'home'}"
+                  :to="{ name: 'home' }"
                 />
                 <div class="flex-fill d-flex flex-column">
                   <a href="#" class="mb-3 text-muted">《新人请走进这个小屋来，有点事要和你说》</a>
@@ -28,19 +28,17 @@
         </div>
       </div>
     </div>
-    <footers />
   </div>
 </template>
 
 <script>
 import Tip from '../components/Tips'
-import Footers from '../components/Footer'
 import Avatar from '../components/Avatar'
 export default {
-  components: { Tip, Footers, Avatar }
+  name: 'home',
+  components: { Tip, Avatar }
 }
 </script>
-
 <style lang="scss" scoped>
 .dynamic {
   img {

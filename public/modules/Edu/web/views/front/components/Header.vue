@@ -20,19 +20,19 @@
         <div class="collapse navbar-collapse" id="collapsibleNavId">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0 font-weight-bold">
             <li class="nav-item pr-2">
-              <router-link class="nav-link" :to="{ name: 'system' }">系统学习</router-link>
+              <router-link class="nav-link" :to="{ name: 'system.index' }">系统学习</router-link>
             </li>
             <li class="nav-item pr-2">
-              <router-link :to="{ name: 'lesson' }" class="nav-link">实战课程</router-link>
+              <router-link :to="{ name: 'lesson.index' }" class="nav-link">实战课程</router-link>
             </li>
             <li class="nav-item pr-2">
-              <router-link :to="{ name: 'video' }" class="nav-link">最近更新</router-link>
+              <router-link :to="{ name: 'video.index' }" class="nav-link">最近更新</router-link>
             </li>
             <li class="nav-item pr-2">
-              <router-link :to="{ name: 'topic' }" class="nav-link">话题讨论</router-link>
+              <router-link :to="{ name: 'topic.index' }" class="nav-link">话题讨论</router-link>
             </li>
             <li class="nav-item pr-2">
-              <router-link :to="{ name: 'sign' }" class="nav-link">签到打卡</router-link>
+              <router-link :to="{ name: 'sign.index' }" class="nav-link">签到打卡</router-link>
             </li>
             <li class="nav-item pr-2">
               <a class="nav-link" href="http://doc.houdunren.com">在线文档</a>
@@ -66,7 +66,7 @@
                 <a class="dropdown-item mb-2" href="/member/info/email">绑定邮箱</a>
                 <a class="dropdown-item mb-2" href="/edu/member/order">我的定单</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item mb-2" href="/logout">退出登录</a>
+                <a class="dropdown-item mb-2" @click.prevent="logout">退出登录</a>
               </div>
             </div>
           </div>
@@ -77,11 +77,14 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapState, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters('user', ['isLogin']),
     ...mapState('user', ['user'])
+  },
+  methods: {
+    ...mapActions('user', ['logout'])
   }
 }
 </script>

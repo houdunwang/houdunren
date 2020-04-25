@@ -7,7 +7,10 @@
           <input type="text" class="form-control" v-model="form.content" placeholder="你今天的心情或最想说的话" />
           <div class="mood mt-3">
             <a href v-for="(icon, index) in icons" :key="index" @click.prevent="form.mood = icon">
-              <img :src="`/modules/Edu/app/assets/icon/${icon}.gif`" :class="{ active: icon == form.mood }" />
+              <img
+                :src="`/modules/Edu/web/assets/icon/${icon}.gif`"
+                :class="{ active: icon == form.mood }"
+              />
             </a>
           </div>
         </div>
@@ -16,15 +19,11 @@
         <button type="button" class="btn btn-success" @click="submit">开始签到</button>
       </div>
     </div>
-    <!-- <div class="card" v-if="isLogin && todayIsCheck">
-      <div class="card-header">每日签到</div>
-      <div class="card-body">今日已经签到</div>
-    </div>-->
     <div class="card" v-if="!isLogin">
       <div class="card-header">每日签到</div>
       <div class="card-body text-center">
         <h5 class="text-secondary text-center mt-3 mb-3">天天签到，天天进步</h5>
-        <a href="/login?redirect=/sign" class="btn btn-success">马上登录过行签到</a>
+        <a href="/login?redirect=/edu/sign" class="btn btn-success">马上登录过行签到</a>
       </div>
     </div>
     <div class="card mt-3 shadow-sm">
@@ -50,15 +49,13 @@
               <td width="120">{{ sign.total.total }}</td>
               <td width="120">{{ sign.total.month }}</td>
               <td>
-                <img :src="`/modules/Edu/app/assets/icon/${sign.mood}.gif`" />
+                <img :src="`/modules/Edu/web/assets/icon/${sign.mood}.gif`" />
                 {{ sign.content }}
                 <button
                   class="btn btn-sm btn-outline-secondary"
                   v-if="isLogin && user.id == sign.user_id"
                   @click="del(sign)"
-                >
-                  删除
-                </button>
+                >删除</button>
               </td>
             </tr>
           </tbody>
@@ -115,16 +112,14 @@ export default {
       this.load()
     },
     async del(sign) {
-      this.$confirm('确定删除吗？', '温馨提示', {
-        confirmButtonText: '确定',
-        type: 'warning'
-      })
-        .then(async () => {
+      this.$confirm({
+        content: '确定删除吗？',
+        onOk: async () => {
           await this.axios.delete(`edu/front/sign/${sign.id}`)
           this.$message.success('签到删除成功')
           this.load()
-        })
-        .catch(() => {})
+        }
+      })
     }
   }
 }

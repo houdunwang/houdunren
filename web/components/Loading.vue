@@ -1,6 +1,6 @@
 <template>
-  <div class="loading" v-if="loading">
-    <a-spin size="large" />
+  <div class="loading" v-if="status">
+    <a-spin />
     <div class="bg"></div>
   </div>
 </template>
@@ -9,12 +9,12 @@
 import { mapState } from 'vuex'
 export default {
   computed: {
-    ...mapState('loading', ['loading'])
+    ...mapState('loading', ['status'])
   }
 }
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 .loading {
   position: fixed;
   top: 0;
