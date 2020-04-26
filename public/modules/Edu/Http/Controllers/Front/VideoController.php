@@ -6,8 +6,11 @@ use App\Http\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Modules\Edu\Entities\Video;
 use Modules\Edu\Http\Requests\CommentRequest;
+use Modules\Edu\Services\CommentService;
+use Modules\Edu\Services\VideoService;
 use Modules\Edu\Transformers\Front\CommentResource;
 use Modules\Edu\Transformers\Front\VideoResource;
 
@@ -26,14 +29,21 @@ class VideoController extends ApiController
         $videos = Video::latest('id')->paginate(15);
         return VideoResource::collection($videos);
     }
+    public function check()
+    {
+    }
 
     /**
      * 视频数据
      * @param Video $video
      * @return JsonResponse
      */
-    public function show(Video $video)
+    public function show(Video $video, VideoService $videoService)
     {
+        $canPlay = $videoService->playCheck($video, Auth::user());
+        if ($canPlay === false) {
+            return $this->error('你没有订阅会员或未购买课程');
+        }
         return $this->json(new VideoResource($video));
     }
 
@@ -44,10 +54,7 @@ class VideoController extends ApiController
      */
     public function favour(Video $video)
     {
-        $action = $video->isFavour(Auth::user()) ? 'detach' : 'attach';
-        $video->favour()->$action(Auth::id(), [
-            'site_id' => SITEID
-        ]);
+        $video->favour()->toggle(Auth::id());
         $video['favour_count'] =  $video->favour()->count();
         $video->save();
         return $this->json(new VideoResource($video));
@@ -60,10 +67,7 @@ class VideoController extends ApiController
      */
     public function favorite(Video $video)
     {
-        $action = $video->isFavorite(Auth::user()) ? 'detach' : 'attach';
-        $video->favorite()->$action(Auth::id(), [
-            'site_id' => SITEID
-        ]);
+        $video->favorite()->toggle(Auth::id());
         $video->favorite_count = $video->favorite()->count();
         $video->save();
         return $this->json(new VideoResource($video));
@@ -75,8 +79,11 @@ class VideoController extends ApiController
      * @param Video $video
      * @return JsonResponse
      */
-    public function comment(CommentRequest $request, Video $video)
+    public function comment(CommentRequest $request, Video $video, CommentService $commentService)
     {
+        if ($commentService->checkTime() === false) {
+            return $this->error('请等待20秒后操作');
+        }
         $video->comment()->create([
             'site_id' => SITEID,
             'user_id' => Auth::id(),
@@ -85,6 +92,7 @@ class VideoController extends ApiController
         ]);
         $video->comment_count = $video->comment()->count();
         $video->save();
+        $commentService->record();
         return $video->comment()->latest('id')->with(['user', 'reply'])->first();
     }
 

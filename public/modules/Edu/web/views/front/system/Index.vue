@@ -6,7 +6,12 @@
         <p class="text-secondary">通过系统课程全面掌握一门语言或软件的使用，尤其适合刚入门的新手系统牢固的掌握知识。</p>
       </div>
       <div class="card-body">
-        <div class="row">
+        <div class="row" v-if="!lessons">
+          <div class="col-12 col-md-4 mb-2" v-for="k in 6" :key="k">
+            <a-skeleton avatar active :paragraph="{ rows: 4 }" />
+          </div>
+        </div>
+        <div class="row" v-if="lessons">
           <div class="col-12 col-md-4 mb-2" v-for="lesson in lessons" :key="lesson.id">
             <router-link :to="{ name: 'system.show', params: { id: lesson.id } }">
               <div class="card">

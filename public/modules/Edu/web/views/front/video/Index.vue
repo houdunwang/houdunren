@@ -1,37 +1,43 @@
 <template>
-  <div v-if="videos">
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-12 col-md-9">
-          <div class="card">
-            <div class="card-header bg-white">最近更新</div>
-            <div class="card-body">
-              <ul class="list-group list-group-flush">
-                <li
-                  class="list-group-item pl-0 d-flex justify-content-between"
-                  v-for="video in videos.data"
-                  :key="video.id"
-                >
-                  <router-link
-                    :to="{name:'video.show',params:{sid:video.lesson_id,id:video.id}}"
-                  >{{ video.title }}</router-link>
-                  <span class="small text-secondary">{{ video.updated_at | dateFormat }}</span>
-                </li>
-              </ul>
-            </div>
-            <div class="card-footer text-muted bg-white">
-              <el-pagination
-                @current-change="currentChange"
-                :page-size="15"
+  <div class="container mt-5 mb-5">
+    <div class="row">
+      <div class="col-12 col-md-9">
+        <div class="card">
+          <div class="card-header bg-white">最近更新</div>
+          <div class="card-body" v-if="!videos">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item pl-0 mb-2 pb-2" v-for="k in 8" :key="k">
+                <a-skeleton active :title="false" :paragraph="{ rows: 2, width: '100%' }" />
+              </li>
+            </ul>
+          </div>
+          <div class="card-body" v-if="videos">
+            <ul class="list-group list-group-flush">
+              <li
+                class="list-group-item pl-0 d-flex justify-content-between"
+                v-for="video in videos.data"
+                :key="video.id"
+              >
+                <router-link :to="{ name: 'video.show', params: { sid: video.lesson_id, id: video.id } }">
+                  {{ video.title }}
+                </router-link>
+                <span class="small text-secondary">{{ video.updated_at | dateFormat }}</span>
+              </li>
+            </ul>
+            <div class="mt-2">
+              <a-pagination
+                v-model="videos.meta.current_page"
                 :total="videos.meta.total"
-                background
-              ></el-pagination>
+                showLessItems
+                @change="load"
+                :hideOnSinglePage="true"
+              />
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-3 pl-md-0">
-          <tips />
-        </div>
+      </div>
+      <div class="col-12 col-md-3 pl-md-0">
+        <tips />
       </div>
     </div>
   </div>
@@ -60,5 +66,4 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

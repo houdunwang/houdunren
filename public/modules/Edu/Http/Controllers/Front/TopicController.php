@@ -10,65 +10,49 @@ use Modules\Edu\Entities\Topic;
 use Modules\Edu\Http\Requests\Front\TopicRequest;
 use Modules\Edu\Transformers\Front\TopicResource;
 
+/**
+ * 贴子管理
+ * @package Modules\Edu\Http\Controllers\Front
+ */
 class TopicController extends ApiController
 {
-  public function index(Request $request)
-  {
-    $keyword = $request->input('keyword');
-    $topics = Topic::latest('id')->when($keyword, function ($query, $keyword) {
-      $query->where('title', 'like', "%{$keyword}%");
-    })->paginate(15);
-    return TopicResource::collection($topics);
-  }
+    public function __construct()
+    {
+        $this->middleware("auth:sanctum")->except(['index', 'show']);
+    }
+    public function index(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $topics = Topic::latest('id')->when($keyword, function ($query, $keyword) {
+            $query->where('title', 'like', "%{$keyword}%");
+        })->paginate(15);
+        return TopicResource::collection($topics);
+    }
 
-  public function store(TopicRequest $request, Topic $topic)
-  {
-    $topic['site_id'] = SITEID;
-    $topic['title'] = $request->input('title');
-    $topic['content'] = $request->input('content');
-    $topic['user_id'] = Auth::id();
-    $topic->save();
-    return $this->success('发表成功');
-  }
+    public function store(TopicRequest $request, Topic $topic)
+    {
+        $topic['site_id'] = SITEID;
+        $topic['title'] = $request->input('title');
+        $topic['content'] = $request->input('content');
+        $topic['user_id'] = Auth::id();
+        $topic->save();
+        $topic->tags()->sync($request->tags);
+        return $this->success('发表成功');
+    }
 
-  /**
-   * Show the specified resource.
-   * @param int $id
-   * @return Response
-   */
-  public function show($id)
-  {
-    return view('edu::show');
-  }
+    public function show(Topic $topic)
+    {
+        return $this->json(new TopicResource($topic));
+    }
 
-  /**
-   * Show the form for editing the specified resource.
-   * @param int $id
-   * @return Response
-   */
-  public function edit($id)
-  {
-    return view('edu::edit');
-  }
+    public function update(Request $request, $id)
+    {
+    }
 
-  /**
-   * Update the specified resource in storage.
-   * @param Request $request
-   * @param int $id
-   * @return Response
-   */
-  public function update(Request $request, $id)
-  {
-    //
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   * @param int $id
-   * @return Response
-   */
-  public function destroy($id)
-  {
-    //
-  }
+    public function destroy(Topic $topic)
+    {
+        $this->authorize('delete', $topic);
+        $topic->delete();
+        return $this->success('删除成功');
+    }
 }

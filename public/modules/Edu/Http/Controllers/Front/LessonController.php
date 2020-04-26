@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Modules\Edu\Entities\Lesson;
 use Modules\Edu\Entities\Tag;
 use Modules\Edu\Entities\TagRelation;
@@ -35,35 +36,28 @@ class LessonController extends ApiController
     {
         return response()->json(new LessonResource($lesson));
     }
-
     /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
+     * 点赞
+     * @param Video $video
+     * @return JsonResponse
      */
-    public function edit($id)
+    public function favour(Lesson $lesson)
     {
-        return view('edu::edit');
+        $lesson->favour()->toggle(Auth::id());
+        $lesson['favour_count'] =  $lesson->favour()->count();
+        $lesson->save();
+        return $this->json(new LessonResource($lesson));
     }
-
     /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
+     * 收藏
+     * @param Video $video
+     * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function favorite(Lesson $lesson)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        $lesson->favorite()->toggle(Auth::id());
+        $lesson->favorite_count = $lesson->favorite()->count();
+        $lesson->save();
+        return $this->json(new LessonResource($lesson));
     }
 }

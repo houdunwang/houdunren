@@ -17,7 +17,7 @@ use Modules\Edu\Entities\Comment;
 class Video extends Model
 {
     protected $table = "edu_videos";
-    protected $fillable = ['site_id', 'title', 'path', 'external_address', 'favour_count'];
+    protected $fillable = ['site_id', 'title', 'rank', 'path', 'external_address', 'favour_count'];
     protected static function booted()
     {
         static::addGlobalScope(new SiteScope);

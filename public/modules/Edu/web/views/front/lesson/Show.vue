@@ -1,35 +1,49 @@
 <template>
-  <div v-if="field.id">
-    <div class="container mt-3 mt-md-5 mb-5" v-if="field">
+  <div>
+    <div class="container mt-3 mt-md-5 mb-5">
       <div class="row">
         <div class="col-12 col-md-9">
           <div class="card">
-            <div class="card-body p-5">
+            <div class="card-body p-5" v-if="!field">
+              <a-skeleton active v-for="k in 5" :key="k" />
+            </div>
+            <div class="card-body p-5" v-if="field">
               <h4 class="text-black-50 mb-4">{{ field.title }}</h4>
               <div class="btn-group btn-group-sm" role="group" aria-label>
-                <button type="button" class="btn btn-outline-secondary">
+                <button
+                  type="button"
+                  class="btn "
+                  @click.prevent="favorite"
+                  :class="{ 'btn-info': field.is_favorite, 'btn-outline-secondary': !field.is_favorite }"
+                >
                   <i class="fa fa-heart-o" aria-hidden="true"></i> 收藏
                 </button>
-                <button type="button" class="btn btn-outline-secondary">12</button>
+                <button type="button" class="btn btn-outline-secondary">
+                  {{ field.favorite_count ? field.favorite_count : 0 }}
+                </button>
               </div>
               <div class="btn-group btn-group-sm" role="group" aria-label>
-                <button type="button" class="btn btn-outline-success">
+                <button
+                  type="button"
+                  class="btn"
+                  @click.prevent="favour"
+                  :class="{ 'btn-success': field.is_favour, 'btn-outline-secondary': !field.is_favour }"
+                >
                   <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 点赞
                 </button>
-                <button type="button" class="btn btn-outline-success">12</button>
+                <button type="button" class="btn btn-outline-success">
+                  {{ field.favour_count ? field.favour_count : 0 }}
+                </button>
               </div>
 
               <!-- 视频列表 -->
               <ul class="list-group list-group-flush mt-5">
-                <li
-                  class="list-group-item pl-0 mb-1 pb-3"
-                  v-for="video in field.videos"
-                  :key="video.id"
-                >
+                <li class="list-group-item pl-0 mb-1 pb-3" v-for="video in field.videos" :key="video.id">
                   <router-link
                     :to="{ name: 'video.show', params: { sid: field.id, id: video.id } }"
                     class="text-muted"
-                  >{{ video.title }}</router-link>
+                    >{{ video.title }}</router-link
+                  >
                 </li>
               </ul>
             </div>
@@ -40,24 +54,34 @@
         </div>
       </div>
     </div>
-
-    <footers />
   </div>
 </template>
 
 <script>
 import Tips from '../components/Tips'
-import Footers from '../components/Footer'
 export default {
-  components: { Tips, Footers },
+  components: { Tips },
   data() {
     return {
-      field: {}
+      field: null
     }
   },
   async created() {
-    let response = await this.axios.get(`edu/front/lesson/${this.$route.params.id}`)
-    this.$set(this, 'field', response.data)
+    this.load()
+  },
+  methods: {
+    async load() {
+      let response = await this.axios.get(`edu/front/lesson/${this.$route.params.id}`)
+      this.$set(this, 'field', response.data)
+    },
+    async favour() {
+      let response = await this.axios.get(`edu/front/lesson/favour/${this.field.id}`)
+      this.$set(this, 'field', response.data)
+    },
+    async favorite() {
+      let response = await this.axios.get(`edu/front/lesson/favorite/${this.field.id}`)
+      this.$set(this, 'field', response.data)
+    }
   }
 }
 </script>

@@ -1,11 +1,20 @@
 <template>
-  <div class="subscribe" v-if="subscribes.length">
+  <div class="subscribe">
     <div class="header">
       <h1 class="text-white text-center">投资学习会得到加倍的回报</h1>
       <h2 class>订阅会员免费观看网站所有视频</h2>
     </div>
     <div class="container items">
-      <div class="row">
+      <div class="row" v-if="!subscribes">
+        <div class="col-12 col-md-4 mt-3" v-for="k in 3" :key="k">
+          <div class="card shadow-lg item">
+            <div class="card-body text-center pb-4 pt-5 shadow">
+              <a-skeleton avatar active :paragraph="{ rows: 4 }" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" v-if="subscribes">
         <div class="col-12 col-md-4 mt-3" v-for="subscribe in subscribes" :key="subscribe.id">
           <div class="card shadow-lg item">
             <div class="card-body text-center pb-4 pt-5 shadow">
@@ -31,17 +40,14 @@
         祝你学有所成，加油！
       </p>
     </div>
-    <footers />
   </div>
 </template>
 <script>
-import Footers from '../components/Footer'
 import { mapGetters } from 'vuex'
 export default {
-  components: { Footers },
   data() {
     return {
-      subscribes: []
+      subscribes: null
     }
   },
   computed: {

@@ -10,8 +10,8 @@ export default {
     }
   },
   getters: {
-    isLogin(state) {
-      return state.user.id ? true : false
+    isLogin() {
+      return Token.get() ? true : false
     },
     isSuperAdmin(state) {
       return state.user.is_super_admin ? true : false

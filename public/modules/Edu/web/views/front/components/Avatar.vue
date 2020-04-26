@@ -1,6 +1,6 @@
 <template>
   <router-link to="/">
-    <img src="http://localhost:3000/images/member-login.jpg" class="rounded" />
+    <img :src="src" class="rounded" />
   </router-link>
 </template>
 

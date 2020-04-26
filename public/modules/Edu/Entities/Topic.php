@@ -22,4 +22,13 @@ class Topic extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'relation', 'edu_tag_relation');
+    }
+
+    public function comment()
+    {
+        return $this->morphMany(Comment::class, 'comment');
+    }
 }

@@ -10,12 +10,12 @@ use Modules\Edu\Entities\Comment;
  */
 class CommentObserver
 {
-  /**
-   * 评论发送成功时发送通知
-   * @param Comment $comment
-   * @return void
-   */
-  public function created(Comment $comment)
-  {
-  }
+    /**
+     * 评论发送成功时发送通知
+     * @param Comment $comment
+     * @return void
+     */
+    public function created(Comment $comment)
+    {
+    }
 }

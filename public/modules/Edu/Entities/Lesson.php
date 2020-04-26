@@ -4,7 +4,9 @@ namespace Modules\Edu\Entities;
 
 use App\Scopes\SiteScope;
 use App\Traits\Module;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Lesson extends Model
 {
@@ -25,5 +27,31 @@ class Lesson extends Model
     public function tag()
     {
         return $this->morphToMany(Tag::class, 'relation', 'edu_tag_relation');
+    }
+    /**
+     * 点赞
+     * @return MorphToMany
+     */
+    public function favour()
+    {
+        return $this->morphToMany(User::class, 'favour', 'edu_favour')->withTimestamps();
+    }
+
+    public function isFavour(User $user)
+    {
+        return (bool) $this->favour()->where('user_id', $user['id'])->first();
+    }
+    /**
+     * 收藏
+     * @return MorphToMany
+     */
+    public function favorite()
+    {
+        return $this->morphToMany(User::class, 'favorite', 'edu_favorite')->withTimestamps();
+    }
+
+    public function isFavorite(User $user)
+    {
+        return (bool) $this->favorite()->where('user_id', $user['id'])->first();
     }
 }

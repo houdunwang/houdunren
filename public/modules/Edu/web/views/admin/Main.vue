@@ -58,7 +58,11 @@
     </nav>
     <div class="d-flex flex-fill flex-column flex-md-row">
       <div class="menus border-right border-top-0 shadow bg-white">
-        <ul class="list-group list-group-flush text-left" v-for="(menu, index) in menus" :key="index">
+        <ul
+          class="list-group list-group-flush text-left"
+          v-for="(menu, index) in menus"
+          :key="index"
+        >
           <strong
             class="list-group-item list-group-item-light d-flex align-items-center text-dark justify-content-start"
           >
@@ -70,18 +74,20 @@
             class="list-group-item list-group-item-action"
             v-for="(menu, key) in menu.items"
             :key="key"
-            >{{ menu.title }}</router-link
-          >
+          >{{ menu.title }}</router-link>
         </ul>
       </div>
       <div class="flex-fill ml-md-1 pb-5 pt-3 shadow-sm bg-white p-3 border-left border-silver">
-        <router-view></router-view>
+        <a-locale-provider :locale="locale">
+          <router-view></router-view>
+        </a-locale-provider>
       </div>
     </div>
   </div>
 </template>
 <script>
 import Error from '@/components/Error'
+import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
 import store from '@/store'
 import { mapState } from 'vuex'
 export default {
@@ -100,6 +106,11 @@ export default {
     next()
   },
   components: { Error },
+  data() {
+    return {
+      locale: zhCN
+    }
+  },
   computed: {
     ...mapState('user', ['user']),
     ...mapState('site', ['site']),

@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5" v-if="field">
+  <div class="container mt-5 mb-5">
     <div class="row">
       <div class="col-12 col-md-9">
         <div class="card">
@@ -8,38 +8,38 @@
             <div class="input-group input-group-sm">
               <input type="text" class="form-control" ref="searchInput" @keyup.enter="search" />
               <div class="input-group-append">
-                <a
-                  href="#"
-                  type="button"
-                  class="btn btn-outline-secondary"
-                  @click.prevent="search"
-                >搜索</a>
-                <router-link :to="{name:'topic.create'}" class="btn btn-outline-secondary">发表</router-link>
+                <a href="#" type="button" class="btn btn-outline-secondary" @click.prevent="search">搜索</a>
+                <router-link :to="{ name: 'topic.create' }" class="btn btn-outline-secondary">发表</router-link>
               </div>
             </div>
           </div>
-          <div class="card-body">
-            <div class="d-flex pt-3 pb-3 border-top" v-for="topic in field.data" :key="topic.id">
-              <avatar src="http://localhost:3000/images/member-login.jpg" class="mr-3" />
+          <div class="card-body" v-if="!topics">
+            <div class="d-flex pt-3 pb-3 border-top" v-for="k in 10" :key="k">
+              <a-skeleton avatar active :paragraph="{ rows: 1 }" />
+            </div>
+          </div>
+          <div class="card-body" v-if="topics">
+            <div class="d-flex pt-3 pb-3 border-top" v-for="topic in topics.data" :key="topic.id">
+              <avatar :src="topic.user.avatar" class="mr-3" />
               <div class="d-flex flex-column justify-content-between">
-                <router-link
-                  :to="{name:'topic.show',params:{id:topic.id}}"
-                  class="text-secondary"
-                >{{ topic.title }}</router-link>
+                <router-link :to="{ name: 'topic.show', params: { id: topic.id } }" class="text-secondary">{{
+                  topic.title
+                }}</router-link>
                 <span class="small text-black-50">
-                  {{ topic.user.nickname }} .
-                  发表于{{ topic.created_at | dateFormat('now')}} . 0条评论
+                  {{ topic.user.name }} . 发表于{{ topic.created_at | dateFormat('now') }} .
+                  {{ topic.comment_count }}条评论
                 </span>
               </div>
             </div>
-          </div>
-          <div class="card-footer text-muted">
-            <el-pagination
-              @current-change="currentChange"
-              :page-size="15"
-              :total="field.meta.total"
-              background
-            ></el-pagination>
+            <div class="mt-2">
+              <a-pagination
+                v-model="topics.meta.current_page"
+                :total="topics.meta.total"
+                showLessItems
+                @change="load"
+                :hideOnSinglePage="true"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@ export default {
   components: { Tips, Avatar },
   data() {
     return {
-      field: null,
+      topics: null,
       keyword: ''
     }
   },
@@ -72,7 +72,7 @@ export default {
       let response = await this.axios.post(`edu/front/topic/search?page=${page}`, {
         keyword: this.keyword
       })
-      this.$set(this, 'field', response.data)
+      this.$set(this, 'topics', response.data)
     },
     async search(e) {
       this.keyword = this.$refs['searchInput'].value
@@ -83,6 +83,4 @@ export default {
 }
 </script>
 
-
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

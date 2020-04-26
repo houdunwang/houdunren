@@ -6,16 +6,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class TopicResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request
-     * @return array
-     */
     public function toArray($request)
     {
         $topic =  parent::toArray($request);
         $topic['user'] = $this->user;
+        $topic['comment'] = $this->comment()->count();
         return $topic;
     }
 }

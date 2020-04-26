@@ -7,11 +7,12 @@ export default {
     set(state, data) {
       state.site = data
     }
+  },
+  actions: {
+    async get({ commit }) {
+      let response = await window.axios.get(`edu/front/site`)
+      commit('set', response.data)
+      return response
+    }
   }
-  //   actions: {
-  //     async get({ commit }, sid) {
-  //       let response = await window.axios.get(`module/site/admin?sid=${sid}`)
-  //       commit('set', response.data)
-  //     }
-  //   }
 }

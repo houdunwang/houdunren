@@ -12,21 +12,33 @@ Route::group(['middleware' => ['auth:sanctum', 'admin'], 'namespace' => 'Admin',
 
 Route::group(['middleware' => ['front'], 'namespace' => 'Front', 'prefix' => 'edu/front'], function () {
     Route::apiResource('lesson', 'LessonController');
+    Route::get('lesson/favour/{lesson}', 'LessonController@favour');
+    Route::get('lesson/favorite/{lesson}', 'LessonController@favorite');
     Route::apiResource('system', 'SystemController');
     Route::apiResource('video', 'VideoController');
     Route::apiResource('tag', 'TagController');
-    Route::get('video/favour/{video}', 'VideoController@favour')->middleware('auth:sanctum');
-    Route::get('video/favorite/{video}', 'VideoController@favorite')->middleware('auth:sanctum');
-    Route::post('video/comment/{video}', 'VideoController@comment')->middleware('auth:sanctum');
-    Route::get('video/comment/{video}', 'VideoController@commentList')->middleware('auth:sanctum');
-    Route::get('comment/favour/{comment}', 'CommentController@favour')->middleware('auth:sanctum');
-    Route::apiResource('topic', 'TopicController')->middleware("auth:sanctum");
+    Route::get('site', 'SiteController@get');
+    Route::get('video/favour/{video}', 'VideoController@favour');
+    Route::get('video/favorite/{video}', 'VideoController@favorite');
+    Route::post('video/comment/{video}', 'VideoController@comment');
+    Route::get('video/comment/{video}', 'VideoController@commentList');
+    Route::get('comment/favour/{comment}', 'CommentController@favour');
+    Route::apiResource('topic', 'TopicController');
     Route::any('topic/search', 'TopicController@index');
     Route::resource('sign', 'SignController');
-    Route::resource('subscribe', 'SubscribeController');
+    Route::apiResource('subscribe', 'SubscribeController');
+    Route::apiResource('user', 'UserController');
+    Route::get('user/follower/{user}', 'UserController@follower');
+    Route::get('user/favour/{user}', 'UserController@favour');
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'front'], 'namespace' => 'Member', 'prefix' => 'edu/member'], function () {
     Route::apiResource('order', 'OrderController');
     Route::get('duration', 'DurationController@get');
+    Route::get('lesson', 'LessonController@index');
+    Route::get('video', 'VideoController@index');
+});
+
+Route::group(['middleware' => ['front'], 'namespace' => 'Center', 'prefix' => 'edu/center'], function () {
+    Route::apiResource('user', 'UserController');
 });

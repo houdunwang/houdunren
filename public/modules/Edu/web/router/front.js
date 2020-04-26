@@ -31,7 +31,7 @@ export default {
     { name: 'topic.index', component: Topic, path: 'topic', meta: { keepAlive: true } },
     { name: 'topic.create', component: TopicCreate, path: 'topic/create', meta: { auth: true } },
     { name: 'topic.update', component: TopicUpdate, path: 'topic/update/:id', meta: { auth: true } },
-    { name: 'topic.show', component: TopicShow, path: 'topic/show/:id', meta: { auth: true } },
+    { name: 'topic.show', component: TopicShow, path: 'topic/show/:id', meta: { auth: false } },
     { name: 'sign.index', component: Sign, path: 'sign', meta: { keepAlive: true } },
     { name: 'subscribe', component: Subscribe, path: 'subscribe', meta: { keepAlive: true } }
   ]

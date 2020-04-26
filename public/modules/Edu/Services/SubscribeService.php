@@ -2,16 +2,17 @@
 
 namespace Modules\Edu\Services;
 
+use App\User;
 use Modules\Edu\Entities\Subscribe;
 
 /**
- * 服务套餐
+ * 会员订阅服务
  * Class SubscribeService
  */
 class SubscribeService
 {
-  public function get()
-  {
-    return Subscribe::get();
-  }
+    public function all()
+    {
+        return Subscribe::get();
+    }
 }

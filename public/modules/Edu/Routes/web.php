@@ -8,10 +8,3 @@ Route::group(['middleware' => ['front'], 'prefix' => 'edu', 'namespace' => 'Pay'
     Route::get('subscribe/alipay/{subscribe}', 'SubscribeController@alipay')->middleware('auth');
 });
 Route::view('edu/{any}', 'edu::edu')->where('any', '.*');
-// Route::get('edu/admin{any}', function () {
-//     return view('admin');
-// })->where('any', '.*')->middleware(['auth:sanctum', 'admin']);
-
-// Route::get('edu/member{any}', function () {
-//     return view('edu::member');
-// })->where('any', '.*')->middleware(['auth:sanctum', 'front']);

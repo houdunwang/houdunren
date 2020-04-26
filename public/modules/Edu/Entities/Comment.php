@@ -39,6 +39,6 @@ class Comment extends Model
 
     public function favour()
     {
-        return $this->morphToMany(User::class, 'favour', 'edu_favour');
+        return $this->morphToMany(User::class, 'favour', 'edu_favour')->withTimestamps();
     }
 }

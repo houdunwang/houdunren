@@ -1,7 +1,7 @@
 <template>
   <div>
-    <a-tabs :defaultActiveKey="$route.query.t || 1">
-      <a-tab-pane tab="我的定单" key="1">
+    <a-tabs defaultActiveKey="order">
+      <a-tab-pane tab="我的定单" key="order">
         <a-table
           :bordered="true"
           :columns="columns"
@@ -10,7 +10,7 @@
           @change="load"
           rowKey="id"
         >
-          <span slot="price" slot-scope="price"> {{ price }} 元 </span>
+          <span slot="price" slot-scope="price">{{ price }} 元</span>
           <span slot="status" slot-scope="status">
             <i class="fa fa-check-circle-o text-success" aria-hidden="true" v-show="status"></i>
             <i class="fa fa-times-circle-o" aria-hidden="true" v-show="status == false"></i>
@@ -20,11 +20,9 @@
           </span>
         </a-table>
       </a-tab-pane>
-      <a-tab-pane tab="会员到期时间" key="2">
+      <a-tab-pane tab="会员到期时间" key="time">
         <div class="card">
-          <div class="card-header bg-white">
-            会员到期时间
-          </div>
+          <div class="card-header bg-white">会员到期时间</div>
           <div class="card-body">
             <h6 class="text-secondary font-weight-light">
               你的会员在将在

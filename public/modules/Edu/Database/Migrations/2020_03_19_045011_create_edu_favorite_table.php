@@ -10,30 +10,29 @@ use Illuminate\Database\Migrations\Migration;
  */
 class CreateEduFavoriteTable extends Migration
 {
-  /**
-   * Run the migrations.
-   *
-   * @return void
-   */
-  public function up()
-  {
-    Schema::create('edu_favorite', function (Blueprint $table) {
-      $table->bigIncrements('id');
-      table_foreign_site($table);
-      table_foreign_user($table);
-      $table->unsignedBigInteger('favorite_id');
-      $table->string('favorite_type');
-      $table->timestamps();
-    });
-  }
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('edu_favorite', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            table_foreign_user($table);
+            $table->unsignedBigInteger('favorite_id');
+            $table->string('favorite_type');
+            $table->timestamps();
+        });
+    }
 
-  /**
-   * Reverse the migrations.
-   *
-   * @return void
-   */
-  public function down()
-  {
-    Schema::dropIfExists('edu_favorite');
-  }
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('edu_favorite');
+    }
 }

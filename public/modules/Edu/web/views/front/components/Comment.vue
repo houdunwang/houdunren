@@ -7,7 +7,7 @@
           class="avatar rounded img-thumbnail mr-3"
         />
         <div class="flex-fill">
-          <div class="text-secondary">{{ comment.user.nickname }}</div>
+          <div class="text-secondary">{{ comment.user.name }}</div>
           <span class="small text-black-50">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
             {{ comment.created_at | dateFormat }}
@@ -15,17 +15,17 @@
         </div>
       </div>
       <div class="card-body text-secondary pb-5">
-        <a href="#" class v-if="comment.reply">@{{ comment.reply.nickname }}</a>
+        <a href="#" class v-if="comment.reply">@{{ comment.reply.name }}</a>
         <p v-html="comment.content" class="d-inline-block"></p>
       </div>
       <div class="card-footer text-muted bg-white small">
-        # {{ index+1 }}
+        # {{ index + 1 }}
         <a
           href="#"
           class="ml-2 mr-2"
           v-if="comment.id"
           @click.prevent="favour(comment)"
-        >{{ comment.favour_count }}个赞</a>
+        >{{ comment.favour_count ? comment.favour_count : 0 }}个赞</a>
 
         <a
           href="#"
@@ -40,7 +40,8 @@
     </div>
     <div class="card mt-2 border-0 bg-white shadow-sm reply-editor">
       <div class="p-3 bg-white border small text-secondary border-bottom-0" v-if="replyComment">
-        回复: {{ replyComment.user.nickname }}
+        回复:
+        <span class="text-success">{{ replyComment.user.name }}</span>
         <a href="#" @click.prevent="replyComment = null">
           <i class="fa fa-window-close" aria-hidden="true"></i>
         </a>
@@ -50,7 +51,7 @@
         initialEditType="wysiwyg"
         ref="editor"
         :initialValue="form.content"
-        @contentChange="editorChangeContent"
+        :field.sync="form.content"
       />
       <div class="card-footer text-muted border-top-0 border-left border-right border-bottom">
         <button class="btn btn-success btn-sm mr-2" @click="submit">发表评论</button>
@@ -61,7 +62,7 @@
 </template>
 
 <script>
-import Editor from './Editor'
+import Editor from '@/components/Editor'
 import { mapState } from 'vuex'
 export default {
   components: { Editor },

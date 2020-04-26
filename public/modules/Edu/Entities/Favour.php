@@ -12,7 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 class Favour extends Model
 {
     protected $table = 'edu_favour';
-    protected $fillable = ['site_id', 'user_id'];
+    protected $fillable = ['user_id'];
+
     protected static function booted()
     {
         static::addGlobalScope(new SiteScope);

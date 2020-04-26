@@ -9,12 +9,9 @@ use Modules\Edu\Services\SubscribeService;
 
 class SubscribeController extends ApiController
 {
-    public function __construct()
-    {
-    }
     public function index(SubscribeService $subscribeService)
     {
-        return $this->json($subscribeService->get());
+        return $this->json($subscribeService->all());
     }
 
     public function store(SubscribeRequest $request, Subscribe $subscribe)

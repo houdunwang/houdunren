@@ -1,8 +1,7 @@
 const mix = require('laravel-mix')
-require('laravel-mix-merge-manifest')
-
-mix.setPublicPath('./dist').mergeManifest()
-
+// require('laravel-mix-merge-manifest')
+// mix.setPublicPath('./dist').mergeManifest()
+mix.setPublicPath('./dist')
 mix.webpackConfig({
   resolve: {
     extensions: ['.js', '.vue'],

@@ -3,10 +3,9 @@
 namespace Modules\Edu\Http\Controllers\Member;
 
 use App\Http\Controllers\ApiController;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Modules\Edu\Entities\Order;
+use Modules\Edu\Entities\User;
 
 /**
  * 定单管理
@@ -14,14 +13,14 @@ use Modules\Edu\Entities\Order;
  */
 class OrderController extends ApiController
 {
-  public function index()
-  {
-    return Order::where('user_id', Auth::id())->paginate(10);
-  }
-  public function destroy(Order $order)
-  {
-    $this->authorize('delete', $order);
-    $order->delete();
-    return $this->success('删除成功');
-  }
+    public function index()
+    {
+        return Order::where('user_id', Auth::id())->paginate(10);
+    }
+    public function destroy(Order $order)
+    {
+        $this->authorize('delete', $order);
+        $order->delete();
+        return $this->success('删除成功');
+    }
 }

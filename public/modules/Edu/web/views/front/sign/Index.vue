@@ -1,65 +1,69 @@
 <template>
-  <div class="container mt-5" v-if="isLoad">
-    <div class="card shadow-sm" v-if="isLogin && !todayIsCheck">
-      <div class="card-header bg-white">每日签到 {{ todayIsCheck ? 1 : 0 }}</div>
-      <div class="card-body">
-        <div>
-          <input type="text" class="form-control" v-model="form.content" placeholder="你今天的心情或最想说的话" />
-          <div class="mood mt-3">
-            <a href v-for="(icon, index) in icons" :key="index" @click.prevent="form.mood = icon">
-              <img
-                :src="`/modules/Edu/web/assets/icon/${icon}.gif`"
-                :class="{ active: icon == form.mood }"
-              />
-            </a>
+  <div>
+    <div class="container mt-5 mb-5" v-if="!isLoad">
+      <a-skeleton active v-for="k in 3" :key="k" />
+    </div>
+    <div class="container mt-5 mb-5" v-if="isLoad">
+      <div class="card shadow-sm" v-if="isLogin && !todayIsCheck">
+        <div class="card-header bg-white">每日签到</div>
+        <div class="card-body">
+          <div>
+            <input type="text" class="form-control" v-model="form.content" placeholder="你今天的心情或最想说的话" />
+            <div class="mood mt-3">
+              <a href v-for="(icon, index) in icons" :key="index" @click.prevent="form.mood = icon">
+                <img :src="`/modules/Edu/web/assets/icon/${icon}.gif`" :class="{ active: icon == form.mood }" />
+              </a>
+            </div>
           </div>
         </div>
+        <div class="card-footer text-muted">
+          <button type="button" class="btn btn-success" @click="submit">开始签到</button>
+        </div>
       </div>
-      <div class="card-footer text-muted">
-        <button type="button" class="btn btn-success" @click="submit">开始签到</button>
+      <div class="card" v-if="!isLogin">
+        <div class="card-header">每日签到</div>
+        <div class="card-body text-center">
+          <h5 class="text-secondary text-center mt-3 mb-3">天天签到，天天进步</h5>
+          <a href="/login?redirect=/edu/sign" class="btn btn-success">马上登录过行签到</a>
+        </div>
       </div>
-    </div>
-    <div class="card" v-if="!isLogin">
-      <div class="card-header">每日签到</div>
-      <div class="card-body text-center">
-        <h5 class="text-secondary text-center mt-3 mb-3">天天签到，天天进步</h5>
-        <a href="/login?redirect=/edu/sign" class="btn btn-success">马上登录过行签到</a>
-      </div>
-    </div>
-    <div class="card mt-3 shadow-sm">
-      <div class="card-header bg-white">今日签到排行</div>
-      <div class="card-body">
-        <table class="table table-bordered text-secondary">
-          <thead>
-            <tr>
-              <th>会员</th>
-              <th>今日签到时间</th>
-              <th>总签到天数</th>
-              <th>月签到天数</th>
-              <th>签到心情</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="sign in signs" :key="sign.id" class="sign">
-              <td width="150">
-                <img :src="sign.user.avatar" class="rounded mt-1 align-middle" />
-                {{ sign.user.nickname }}
-              </td>
-              <td width="120">{{ sign.created_at | dateFormat('time') }}</td>
-              <td width="120">{{ sign.total.total }}</td>
-              <td width="120">{{ sign.total.month }}</td>
-              <td>
-                <img :src="`/modules/Edu/web/assets/icon/${sign.mood}.gif`" />
-                {{ sign.content }}
-                <button
-                  class="btn btn-sm btn-outline-secondary"
-                  v-if="isLogin && user.id == sign.user_id"
-                  @click="del(sign)"
-                >删除</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="card mt-3 shadow-sm">
+        <div class="card-header bg-white">今日签到排行</div>
+        <div class="card-body">
+          <table class="table table-bordered text-secondary">
+            <thead>
+              <tr>
+                <th>会员</th>
+                <th>今日签到时间</th>
+                <th>总签到天数</th>
+                <th>月签到天数</th>
+                <th>签到心情</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="sign in signs" :key="sign.id" class="sign">
+                <td width="150">
+                  <img :src="sign.user.avatar" class="rounded mt-1 align-middle" />
+                  {{ sign.user.nickname }}
+                </td>
+                <td width="120">{{ sign.created_at | dateFormat('time') }}</td>
+                <td width="120">{{ sign.total.total }}</td>
+                <td width="120">{{ sign.total.month }}</td>
+                <td>
+                  <img :src="`/modules/Edu/web/assets/icon/${sign.mood}.gif`" />
+                  {{ sign.content }}
+                  <button
+                    class="btn btn-sm btn-outline-secondary"
+                    v-if="isLogin && user.id == sign.user_id"
+                    @click="del(sign)"
+                  >
+                    删除
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

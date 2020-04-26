@@ -3,7 +3,7 @@ import Vue from 'vue'
 import moment from 'moment'
 moment.locale('zh-cn')
 
-Vue.filter('dateFormat', (value, type = 'nowa') => {
+Vue.filter('dateFormat', (value, type = 'now') => {
   if (!value) return ''
   switch (type) {
     case 'now':
