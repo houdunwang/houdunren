@@ -9,7 +9,7 @@ import SystemShow from '@/views/front/system/Show'
 import Topic from '@/views/front/topic/Index'
 import TopicShow from '@/views/front/topic/Show'
 import TopicCreate from '@/views/front/topic/Create'
-import TopicUpdate from '@/views/front/topic/Update'
+import TopicEdit from '@/views/front/topic/Edit'
 import Sign from '@/views/front/sign/Index'
 import Subscribe from '@/views/front/subscribe/Index'
 export default {
@@ -30,7 +30,7 @@ export default {
     { name: 'system.show', component: SystemShow, path: 'systems/:id', meta: { keepAlive: true } },
     { name: 'topic.index', component: Topic, path: 'topic', meta: { keepAlive: true } },
     { name: 'topic.create', component: TopicCreate, path: 'topic/create', meta: { auth: true } },
-    { name: 'topic.update', component: TopicUpdate, path: 'topic/update/:id', meta: { auth: true } },
+    { name: 'topic.edit', component: TopicEdit, path: 'topic/edit/:id', meta: { auth: true } },
     { name: 'topic.show', component: TopicShow, path: 'topic/show/:id', meta: { auth: false } },
     { name: 'sign.index', component: Sign, path: 'sign', meta: { keepAlive: true } },
     { name: 'subscribe', component: Subscribe, path: 'subscribe', meta: { keepAlive: true } }

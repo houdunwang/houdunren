@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        '/api/common/upload*'
+        '/api/common/upload*',
+        '*/alipay/*',
     ];
 }

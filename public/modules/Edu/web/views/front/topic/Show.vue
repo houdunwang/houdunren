@@ -2,16 +2,20 @@
   <div class="container mt-5 mb-5">
     <div class="row">
       <div class="col-12 col-md-9" v-if="!topic">
-        <div class="bg-white rounded shadow-sm border border-gary shadow-sm  p-md-5 p-3">
+        <div class="bg-white rounded shadow-sm border border-gary shadow-sm p-md-5 p-3">
           <a-skeleton :avatar="false" active :paragraph="{ rows: 20 }" />
         </div>
       </div>
       <div class="col-12 col-md-9" v-if="topic">
-        <div class="bg-white rounded shadow-sm border border-gary shadow-sm  p-md-5 p-3">
+        <div class="bg-white rounded shadow-sm border border-gary shadow-sm p-md-5 p-3">
           <div class="border-bottom mb-5 pb-3">
             <h4 class="pb-1 pt-3 mb-3 text-monospace text-black-50">{{ topic.title }}</h4>
             <div class="small text-secondary clearfix">
               <div class="float-left pt-2">
+                <router-link
+                  :to="`/edu/center/topic/${topic.user.id}`"
+                  class="text-success"
+                >{{ topic.user.name }}</router-link>
                 创建于{{ topic.created_at | dateFormat }}
                 <span class="pr-2 pl-2">/</span>
                 评论数{{ topic.comment_count }}
@@ -24,69 +28,78 @@
               </div>
               <div class="float-right">
                 <div class="btn-group btn-group-sm">
-                  <a href="https://www.houdunren.com/edu/front/topic-recommend/1759" class="btn btn-outline-secondary"
-                    >推荐</a
-                  >
+                  <a href="#" class="btn btn-outline-secondary" v-if="access.isAdmin()">推荐</a>
                   <router-link
                     :to="{ name: 'topic.edit', params: { id: topic.id } }"
-                    v-if="topic.user.id === user.id"
+                    v-if="topic.user.id === user.id || access.isAdmin()"
                     class="btn btn-outline-success"
-                    >编辑</router-link
-                  >
+                  >编辑</router-link>
                   <a
                     href="#"
-                    v-if="topic.user.id === user.id"
+                    v-if="topic.user.id === user.id || access.isAdmin()"
                     class="btn btn-outline-danger"
                     @click.prevent="del(topic)"
-                  >
-                    删除
-                  </a>
+                  >删除</a>
                 </div>
-                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                <div class="btn-group btn-group-sm align-items-center mt-1 mt-md-0">
                   <button
-                    onclick="modelFavorite()"
-                    class="btn btn-outline-danger btn-sm float-right small p-0 pl-2 pr-2 favorite d-none"
+                    class="btn btn-outline-secondary"
+                    :class="{ 'btn-outline-info': topic.is_favorite }"
+                    type="button"
+                    aria-label
+                    @click.prevent="favorite"
                   >
-                    <i class="fa fa-heart"></i> 已收藏
+                    <i class="fa fa-heart-o" aria-hidden="true"></i> 收藏
                   </button>
                   <button
-                    onclick="modelFavorite()"
-                    class="btn btn-outline-secondary rounded-left btn-sm float-right small p-0 pl-2 pr-2 favorite"
-                  >
-                    <i class="fa fa-heart-o"></i> 收藏
-                  </button>
-                  <button type="button" class="btn btn-outline-secondary favoriteCount">0</button>
+                    class="btn btn-outline-secondary"
+                    :class="{ 'btn-outline-info': topic.is_favorite }"
+                    type="button"
+                    aria-label
+                  >{{ topic.favorite_count }}</button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="text-black-50 topic-content markdown bg-white" v-html="topic.content" v-highlight></div>
+          <div
+            class="text-black-50 topic-content markdown bg-white"
+            v-html="topic.content"
+            v-highlight
+          ></div>
           <div class="mt-5 text-center border-top border-gary pt-5">
-            <div class="favour btn-group mr-2 d-none" role="group" aria-label="First group">
-              <button class="btn btn-success" onclick="modelFavour()"><i class="fa fa-thumbs-o-up"></i> 已赞</button>
-              <button type="button" onclick="modelFavour()" class="btn btn-outline-secondary border-left-0 favourCount">
-                0
-              </button>
-            </div>
             <div class="favour btn-group mr-2" role="group" aria-label="First group">
-              <button class="btn btn-outline-secondary" onclick="modelFavour()">
+              <button
+                class="btn"
+                :class="{ 'btn-success': topic.is_favour ,'btn-outline-secondary':! topic.is_favour}"
+                @click.prevent="favour"
+              >
                 <i class="fa fa-thumbs-o-up"></i> 点个赞呗
               </button>
-              <button type="button" onclick="modelFavour()" class="btn btn-outline-secondary border-left-0 favourCount">
-                0
-              </button>
+              <button
+                type="button"
+                @click.prevent="favour"
+                class="btn"
+                :class="{ 'btn-success': topic.is_favour ,'btn-outline-secondary':! topic.is_favour}"
+              >{{topic.favour_count}}</button>
             </div>
           </div>
           <div class="favour-list text-center pt-3 w-75 m-auto">
-            <a href="https://www.houdunren.com/user/1" class="d-none favour-current-1">
-              <img
-                src="https://houdunren-image.oss-cn-qingdao.aliyuncs.com/11552521685.png"
-                class="rounded-circle avatar"
-                alt="向军大叔"
-                style="width: 50px;height:50px;"
-              />
-            </a>
+            <router-link
+              :to="`/edu/center/topic/${user.id}`"
+              v-for="user in topic.favour_users"
+              :key="user.id"
+            >
+              <a-avatar :src="user.avatar" size="large"></a-avatar>
+            </router-link>
           </div>
+        </div>
+        <div class="mt-3">
+          <comment
+            v-if="comments"
+            height="300px"
+            :action="`edu/front/topic/comment/${topic.id}`"
+            :comments="comments"
+          />
         </div>
       </div>
       <div class="col-12 col-md-3 p-0">
@@ -100,12 +113,16 @@
 <script>
 import User from '@/components/User'
 import Tips from '../components/Tips'
+import access from '@/services/access'
+import Comment from '../components/Comment'
 import { mapState } from 'vuex'
 export default {
-  components: { Tips, User },
+  components: { Tips, User, Comment },
   data() {
     return {
-      topic: null
+      topic: null,
+      access,
+      comments: null
     }
   },
   computed: {
@@ -126,13 +143,31 @@ export default {
   },
   methods: {
     async load() {
-      let response = await this.axios.get(`edu/front/topic/${this.$route.params.id}`)
-      this.$set(this, 'topic', response.data)
+      let id = this.$route.params.id
+      let response = await Promise.all([
+        this.axios.get(`edu/front/topic/${id}`),
+        this.axios.get(`edu/front/topic/comment/${id}`)
+      ])
+      this.$set(this, 'topic', response[0].data)
+      this.$set(this, 'comments', response[1].data)
     },
     async del(topic) {
-      let response = await this.axios.delete(`edu/front/topic/${topic.id}`)
-      this.$message.success('删除成功')
-      this.$router.push({ name: 'topic.index' })
+      this.$confirm({
+        content: '确定删除吗？',
+        onOk: async () => {
+          let response = await this.axios.delete(`edu/front/topic/${topic.id}`)
+          this.$message.success('删除成功')
+          this.$router.push({ name: 'topic.index' })
+        }
+      })
+    },
+    async favour() {
+      let response = await this.axios.get(`edu/front/topic/favour/${this.topic.id}`)
+      this.$set(this, 'topic', response.data)
+    },
+    async favorite() {
+      let response = await this.axios.get(`edu/front/topic/favorite/${this.topic.id}`)
+      this.$set(this, 'topic', response.data)
     }
   }
 }

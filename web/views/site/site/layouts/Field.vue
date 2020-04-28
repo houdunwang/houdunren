@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="nav nav-tabs mb-3">
-      <router-link class="nav-link" :to="{ name: 'site' }">
+      <router-link class="nav-link" :to="{ name: 'site.index' }">
         <i class="fa fa-home" aria-hidden="true"></i>
       </router-link>
       <a class="nav-link active" href="#">编辑站点</a>

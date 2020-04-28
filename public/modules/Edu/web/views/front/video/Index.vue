@@ -18,9 +18,9 @@
                 v-for="video in videos.data"
                 :key="video.id"
               >
-                <router-link :to="{ name: 'video.show', params: { sid: video.lesson_id, id: video.id } }">
-                  {{ video.title }}
-                </router-link>
+                <router-link
+                  :to="{ name: 'video.show', params: { sid: video.lesson_id, id: video.id } }"
+                >{{ video.title }}</router-link>
                 <span class="small text-secondary">{{ video.updated_at | dateFormat }}</span>
               </li>
             </ul>

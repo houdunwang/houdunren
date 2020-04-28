@@ -10,11 +10,10 @@
         <!-- <keep-alive>
         <router-view v-if="$route.meta.keepAlive"></router-view>
       </keep-alive>
-      <router-view v-if="!$route.meta.keepAlive"></router-view> -->
+        <router-view v-if="!$route.meta.keepAlive"></router-view>-->
         <router-view></router-view>
       </transition>
     </a-locale-provider>
-
     <footers />
   </div>
 </template>
@@ -30,9 +29,8 @@ import store from '@/store'
 import { mapState } from 'vuex'
 export default {
   async beforeRouteEnter(to, from, next) {
-    store.dispatch('site/get').then(response => {
-      document.querySelector('title').innerText = response.data.name
-    })
+    let response = await Promise.all([store.dispatch('site/get'), store.dispatch('access/get')])
+    document.querySelector('title').innerText = response[0].data.name
     next()
   },
   components: { Headers, Error, Loading, Footers },
@@ -43,8 +41,7 @@ export default {
   },
   computed: {
     ...mapState('site', ['site'])
-  },
-  async created() {}
+  }
 }
 </script>
 

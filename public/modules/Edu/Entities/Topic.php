@@ -5,6 +5,7 @@ namespace Modules\Edu\Entities;
 use App\Scopes\SiteScope;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Edu\Entities\Traits\Common;
 
 /**
  * 贴子
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Topic extends Model
 {
+    use Common;
     protected $table = "edu_topic";
     protected $fillable = ['user_id', 'title', 'content', 'user_id'];
     protected static function booted()
@@ -25,10 +27,5 @@ class Topic extends Model
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'relation', 'edu_tag_relation');
-    }
-
-    public function comment()
-    {
-        return $this->morphMany(Comment::class, 'comment');
     }
 }

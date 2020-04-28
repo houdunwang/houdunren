@@ -7,8 +7,10 @@
       <a class="nav-link active" href="#">更新缓存</a>
     </nav>
 
-    <div class="alert alert-info mt-3" role="alert">刷新所有站点的模块权限</div>
-    <el-button type="success" @click="updateCache">执行更新</el-button>
+    <div class="mt-3 mb-3">
+      <a-alert message="刷新所有站点的模块权限"></a-alert>
+    </div>
+    <a-button type @click="updateCache">执行更新</a-button>
   </div>
 </template>
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\GroupRequest;
-use App\Http\Resources\GroupResource;
+use App\Http\Resources\System\GroupResource;
 use App\Models\Group;
 use Illuminate\Http\Request;
 

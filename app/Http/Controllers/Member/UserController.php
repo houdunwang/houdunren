@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\UserRequest;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\Member\UserResource;
 use App\Rules\CodeRule;
+use App\Services\AccessService;
 use App\Services\CodeService;
+use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -79,5 +81,17 @@ class UserController extends ApiController
         $user->email = $request->email;
         $user->save();
         return $this->success('邮箱绑定成功');
+    }
+    /**
+     * 用户权限
+     * @return JsonResponse
+     * @throws BindingResolutionException
+     */
+    public function access()
+    {
+        return $this->json([
+            'is_admin' => app(UserService::class)->isAdmin(site(), Auth::user()),
+            'access' => app(AccessService::class)->getUserPermissionNames(site(), Auth::user()),
+        ]);
     }
 }

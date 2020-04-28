@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function index()
     {
         $module = module();
-        $class = "Modules\\{$module['name']}\Http\Controllers\Front\HomeController";;
+        $class = "Modules\\{$module['name']}\Http\Controllers\Front\HomeController";
         return app($class)->index();
     }
 }

@@ -5,7 +5,8 @@ import user from './user'
 import site from './site'
 import module from './module'
 import loading from './loading'
+import access from './access'
 Vue.use(Vuex)
-let modules = { error, user, site, module, loading }
+let modules = { error, user, site, module, loading, access }
 //VUEX入口
 export default new Vuex.Store({ modules })

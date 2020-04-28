@@ -3,6 +3,7 @@
 namespace Modules\Edu\Transformers\Front;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class TopicResource extends JsonResource
 {
@@ -10,7 +11,9 @@ class TopicResource extends JsonResource
     {
         $topic =  parent::toArray($request);
         $topic['user'] = $this->user;
-        $topic['comment'] = $this->comment()->count();
+        $topic['is_favour'] = Auth::check() ? $this->isFavour(Auth::user()) : false;
+        $topic['is_favorite'] = Auth::check() ? $this->isFavorite(Auth::user()) : false;
+        $topic['favour_users'] = $this->favour()->select(['users.id', 'avatar', 'name'])->limit(50)->get();
         return $topic;
     }
 }

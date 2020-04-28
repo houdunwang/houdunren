@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\SiteRequest;
-use App\Http\Resources\SiteResource;
+use App\Http\Resources\System\SiteResource;
 use App\Models\Module;
 use App\Models\Site;
 use App\Services\SiteService;

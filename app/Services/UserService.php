@@ -104,7 +104,7 @@ class UserService
      */
     public function isAdmin(Site $site, User $user)
     {
-        return $site->admin->contains($user);
+        return $site->admin->contains($user) || $user->is_super_admin;
     }
 
     /**

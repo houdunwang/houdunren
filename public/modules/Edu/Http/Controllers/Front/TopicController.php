@@ -3,11 +3,15 @@
 namespace Modules\Edu\Http\Controllers\Front;
 
 use App\Http\Controllers\ApiController;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Modules\Edu\Entities\Topic;
+use Modules\Edu\Http\Requests\CommentRequest;
 use Modules\Edu\Http\Requests\Front\TopicRequest;
+use Modules\Edu\Services\CommentService;
+use Modules\Edu\Transformers\Front\CommentResource;
 use Modules\Edu\Transformers\Front\TopicResource;
 
 /**
@@ -20,6 +24,33 @@ class TopicController extends ApiController
     {
         $this->middleware("auth:sanctum")->except(['index', 'show']);
     }
+
+    /**
+     * 收藏
+     * @param Topic $topic
+     * @return JsonResponse
+     */
+    public function favorite(Topic $topic)
+    {
+        $topic->favorite()->toggle(Auth::id());
+        $topic->favorite_count = $topic->favorite()->count();
+        $topic->save();
+        return $this->json(new TopicResource($topic));
+    }
+
+    /**
+     * 点赞
+     * @param Topic $topic
+     * @return JsonResponse
+     */
+    public function favour(Topic $topic)
+    {
+        $topic->favour()->toggle(Auth::id());
+        $topic['favour_count'] =  $topic->favour()->count();
+        $topic->save();
+        return $this->json(new TopicResource($topic));
+    }
+
     public function index(Request $request)
     {
         $keyword = $request->input('keyword');
@@ -54,5 +85,40 @@ class TopicController extends ApiController
         $this->authorize('delete', $topic);
         $topic->delete();
         return $this->success('删除成功');
+    }
+
+    /**
+     * 发表评论
+     * @param CommentRequest $request
+     * @param Topic $topic
+     * @param CommentService $commentService
+     * @return JsonResponse|mixed
+     */
+    public function comment(CommentRequest $request, Topic $topic, CommentService $commentService)
+    {
+        if ($commentService->checkTime() === false) {
+            return $this->error('请等待20秒后操作');
+        }
+        $topic->comment()->create([
+            'site_id' => SITEID,
+            'user_id' => Auth::id(),
+            'reply_user_id' => $request->reply_user_id ?: null,
+            'content' => $request->content,
+        ]);
+        $topic->comment_count = $topic->comment()->count();
+        $topic->save();
+        $commentService->record();
+        return $topic->comment()->latest('id')->with(['user', 'reply'])->first();
+    }
+
+    /**
+     * 评论列表
+     * @param Topic $topic
+     * @return JsonResponse
+     */
+    public function commentList(Topic $topic)
+    {
+        $comments = $topic->comment()->with(['user', 'reply'])->get();
+        return $this->json(CommentResource::collection($comments));
     }
 }

@@ -9,7 +9,6 @@ use App\Services\ModuleService;
 use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 /**
  * 站长权限设置

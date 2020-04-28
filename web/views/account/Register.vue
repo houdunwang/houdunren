@@ -33,7 +33,8 @@
           </div>
           <div>
             <router-link :to="{ name: 'login' }" class="text-secondary mr-1">登录</router-link>
-            <router-link :to="{name:'find-password'}" href class="text-secondary">忘记密码</router-link>
+            <router-link :to="{ name: 'find-password' }" href class="text-secondary">忘记密码</router-link>
+            <a href="/" class="text-secondary">首页</a>
           </div>
         </a-row>
       </a-form-model-item>

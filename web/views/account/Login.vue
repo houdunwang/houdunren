@@ -20,8 +20,9 @@
             <a-button type="primary" @click="onSubmit">提交登录</a-button>
           </div>
           <div>
-            <router-link :to="{name:'register'}" class="text-secondary mr-1">注册</router-link>
-            <router-link :to="{name:'find-password'}" href class="text-secondary">忘记密码</router-link>
+            <router-link :to="{ name: 'register' }" class="text-secondary mr-1">注册</router-link>
+            <router-link :to="{ name: 'find-password' }" href class="text-secondary">忘记密码</router-link>
+            <a href="/" class="text-secondary">首页</a>
           </div>
         </a-row>
       </a-form-model-item>
@@ -64,7 +65,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" >
+<style lang="scss">
 .account {
   width: 450px;
   @media screen and (max-width: 768px) {
