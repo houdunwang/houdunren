@@ -38,7 +38,10 @@
         </a>
       </div>
     </div>
-    <div class="card mt-2 border-0 bg-white shadow-sm reply-editor">
+    <div class="mt-2 bg-white shadow-sm border p-5 d-flex justify-content-center" v-if="!isLogin">
+      <a :href="`/login?redirect=${$route.fullPath}`" class="btn btn-success">登录后发表评论</a>
+    </div>
+    <div class="card mt-2 border-0 bg-white shadow-sm reply-editor" v-if="isLogin">
       <div class="p-3 bg-white border small text-secondary border-bottom-0" v-if="replyComment">
         回复:
         <span class="text-success">{{ replyComment.user.name }}</span>
@@ -63,7 +66,7 @@
 
 <script>
 import Editor from '@/components/Editor'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 export default {
   components: { Editor },
   props: {
@@ -80,7 +83,8 @@ export default {
     }
   },
   computed: {
-    ...mapState('user', ['user'])
+    ...mapState('user', ['user']),
+    ...mapGetters('user', ['isLogin'])
   },
   methods: {
     async submit() {

@@ -35,6 +35,7 @@ class UserController extends ApiController
         $user->favour()->toggle(Auth::id());
         return $this->json(new UserResource($user));
     }
+
     public function show(User $user, Request $request)
     {
         $auth = User::find($request->query('id', 0));

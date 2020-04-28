@@ -45,5 +45,8 @@ Route::group(['middleware' => ['auth:sanctum', 'front'], 'namespace' => 'Member'
 });
 
 Route::group(['middleware' => ['front'], 'namespace' => 'Center', 'prefix' => 'edu/center'], function () {
-    Route::apiResource('user', 'UserController');
+    Route::get('user/{user}', 'UserController@show');
+    Route::get('follower/{user}', 'UserController@follower');
+    Route::get('fans/{user}', 'UserController@fans');
+    Route::get('{user}/topic', 'TopicController@index');
 });

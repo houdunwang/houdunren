@@ -7,6 +7,7 @@ export default {
   path: '/edu/center',
   component: Main,
   children: [
+    { name: 'center', path: 'topic/:id', component: Topic },
     { name: 'center.topic', path: 'topic/:id', component: Topic },
     { name: 'center.follower', path: 'follower/:id', component: Follower },
     { name: 'center.fans', path: 'fans/:id', component: Fans },

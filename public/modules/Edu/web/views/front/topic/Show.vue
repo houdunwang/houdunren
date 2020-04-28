@@ -88,6 +88,7 @@
               :to="`/edu/center/topic/${user.id}`"
               v-for="user in topic.favour_users"
               :key="user.id"
+              class="m-1"
             >
               <a-avatar :src="user.avatar" size="large"></a-avatar>
             </router-link>

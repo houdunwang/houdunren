@@ -8,7 +8,12 @@
             <div class="input-group input-group-sm">
               <input type="text" class="form-control" ref="searchInput" @keyup.enter="search" />
               <div class="input-group-append">
-                <a href="#" type="button" class="btn btn-outline-secondary" @click.prevent="search">搜索</a>
+                <a
+                  href="#"
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  @click.prevent="search"
+                >搜索</a>
                 <router-link :to="{ name: 'topic.create' }" class="btn btn-outline-secondary">发表</router-link>
               </div>
             </div>
@@ -19,17 +24,8 @@
             </div>
           </div>
           <div class="card-body" v-if="topics">
-            <div class="d-flex pt-3 pb-3 border-top" v-for="topic in topics.data" :key="topic.id">
-              <avatar :src="topic.user.avatar" class="mr-3" />
-              <div class="d-flex flex-column justify-content-between">
-                <router-link :to="{ name: 'topic.show', params: { id: topic.id } }" class="text-secondary">{{
-                  topic.title
-                }}</router-link>
-                <span class="small text-black-50">
-                  {{ topic.user.name }} . 发表于{{ topic.created_at | dateFormat('now') }} .
-                  {{ topic.comment_count }}条评论
-                </span>
-              </div>
+            <div v-for="topic in topics.data" :key="topic.id">
+              <topic :topic="topic" />
             </div>
             <div class="mt-2">
               <a-pagination
@@ -53,8 +49,9 @@
 <script>
 import Tips from '../components/Tips'
 import Avatar from '../components/Avatar'
+import Topic from '@/components/Topic'
 export default {
-  components: { Tips, Avatar },
+  components: { Tips, Avatar, Topic },
   data() {
     return {
       topics: null,

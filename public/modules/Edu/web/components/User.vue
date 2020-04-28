@@ -1,8 +1,12 @@
 <template>
   <div class="card rounded shadow-sm">
     <div class="card-header bg-white border-0 p-1 d-flex justify-content-center auto-height">
-      <router-link :to="{ name: 'center.topic', params: { id: user.id } }" class="mt-3">
-        <a-avatar :src="user.avatar" :size="90" />
+      <router-link
+        :to="{ name: 'center.topic', params: { id: user.id } }"
+        class="mt-3 d-flex flex-column align-items-center"
+      >
+        <a-avatar :src="user.avatar" :size="90" shape="shape" class="border" />
+        <span class="text-secondary mt-2">{{user.name}}</span>
       </router-link>
     </div>
     <div class="card-body text-center">
@@ -29,14 +33,13 @@
     </div>
     <div class="text-center pb-3" v-if="fansBtn">
       <a
-        href="https://www.houdunren.com/member/follow/make/27911"
+        href="#"
         class="btn btn-sm"
         :class="user.is_follower ? 'btn-success' : 'btn-outline-success'"
         data-container="body"
         data-toggle="popover"
         data-placement="top"
         data-trigger="hover"
-        data-content="共有 0 个粉丝"
         data-original-title
         title
         @click.prevent="follower"
@@ -45,7 +48,7 @@
         关注 TA
       </a>
       <a
-        href="https://www.houdunren.com/member/favour/make/App-User/27911"
+        href="#"
         class="btn btn-sm"
         :class="user.is_favour ? 'btn-info' : 'btn-outline-info'"
         data-container="body"
@@ -66,7 +69,8 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  props: { id: [Number, String], fansBtn: { type: Boolean, default: true } },
+  //id || user 二选一
+  props: { id: [Number, String], user: { type: Object }, fansBtn: { type: Boolean, default: true } },
   data() {
     return {
       user: {}
@@ -76,9 +80,11 @@ export default {
     ...mapState('user', { auth: 'user' })
   },
   async created() {
-    let idParams = this.auth.id ? `id=${this.auth.id}` : ''
-    let response = await this.axios.get(`edu/front/user/${this.id}?${idParams}`)
-    this.$set(this, 'user', response.data)
+    if (!this.user) {
+      let idParams = this.auth.id ? `id=${this.auth.id}` : ''
+      let response = await this.axios.get(`edu/front/user/${this.id}?${idParams}`)
+      this.$set(this, 'user', response.data)
+    }
   },
   methods: {
     async follower() {

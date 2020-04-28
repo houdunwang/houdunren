@@ -11,10 +11,11 @@ export default {
     }
   },
   actions: {
-    async get({ commit }) {
-      let response = await window.axios.get(`member/access`)
-      commit('set', response.data)
-      return response.data
+    async get({ commit, rootGetters }) {
+      if (rootGetters['user/isLogin']) {
+        let response = await window.axios.get(`member/access`)
+        commit('set', response.data)
+      }
     }
   }
 }

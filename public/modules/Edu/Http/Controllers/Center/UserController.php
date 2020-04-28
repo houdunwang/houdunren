@@ -12,4 +12,15 @@ class UserController extends ApiController
     {
         return $this->json(new UserResource($user));
     }
+
+    public function follower(User $user)
+    {
+        $followers = $user->followers()->paginate();
+        return UserResource::collection($followers);
+    }
+    public function fans(User $user)
+    {
+        $fans = $user->fans()->paginate();
+        return UserResource::collection($fans);
+    }
 }

@@ -12,15 +12,16 @@
               <div class="btn-group btn-group-sm" role="group" aria-label>
                 <button
                   type="button"
-                  class="btn "
+                  class="btn"
                   @click.prevent="favorite"
                   :class="{ 'btn-info': field.is_favorite, 'btn-outline-secondary': !field.is_favorite }"
                 >
                   <i class="fa fa-heart-o" aria-hidden="true"></i> 收藏
                 </button>
-                <button type="button" class="btn btn-outline-secondary">
-                  {{ field.favorite_count ? field.favorite_count : 0 }}
-                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                >{{ field.favorite_count ? field.favorite_count : 0 }}</button>
               </div>
               <div class="btn-group btn-group-sm" role="group" aria-label>
                 <button
@@ -31,19 +32,23 @@
                 >
                   <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 点赞
                 </button>
-                <button type="button" class="btn btn-outline-success">
-                  {{ field.favour_count ? field.favour_count : 0 }}
-                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-success"
+                >{{ field.favour_count ? field.favour_count : 0 }}</button>
               </div>
 
               <!-- 视频列表 -->
               <ul class="list-group list-group-flush mt-5">
-                <li class="list-group-item pl-0 mb-1 pb-3" v-for="video in field.videos" :key="video.id">
+                <li
+                  class="list-group-item pl-0 mb-1 pb-3"
+                  v-for="video in field.videos"
+                  :key="video.id"
+                >
                   <router-link
                     :to="{ name: 'video.show', params: { sid: field.id, id: video.id } }"
                     class="text-muted"
-                    >{{ video.title }}</router-link
-                  >
+                  >{{ video.title }}</router-link>
                 </li>
               </ul>
             </div>
@@ -59,6 +64,8 @@
 
 <script>
 import Tips from '../components/Tips'
+import { mapGetters } from 'vuex'
+
 export default {
   components: { Tips },
   data() {
@@ -69,16 +76,25 @@ export default {
   async created() {
     this.load()
   },
+  computed: {
+    ...mapGetters('user', ['isLogin'])
+  },
   methods: {
     async load() {
       let response = await this.axios.get(`edu/front/lesson/${this.$route.params.id}`)
       this.$set(this, 'field', response.data)
     },
     async favour() {
+      if (!this.isLogin) {
+        return this.$message.warning('请登录后操作')
+      }
       let response = await this.axios.get(`edu/front/lesson/favour/${this.field.id}`)
       this.$set(this, 'field', response.data)
     },
     async favorite() {
+      if (!this.isLogin) {
+        return this.$message.warning('请登录后操作')
+      }
       let response = await this.axios.get(`edu/front/lesson/favorite/${this.field.id}`)
       this.$set(this, 'field', response.data)
     }

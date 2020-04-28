@@ -44,4 +44,8 @@ class User extends AppUser
     {
         return (bool) $this->favour()->where('edu_favour.user_id', $user['id'])->first();
     }
+    public function topics()
+    {
+        return $this->hasMany(Topic::class, 'user_id');
+    }
 }
