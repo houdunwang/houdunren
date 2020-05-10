@@ -6,20 +6,13 @@
           <div class="card">
             <div class="card-header bg-white d-flex justify-content-between">
               社区动态
-              <a href class="btn btn-outline-secondary btn-sm">发表</a>
+              <router-link
+                :to="{ name: 'topic.create' }"
+                class="btn btn-outline-secondary btn-sm"
+              >发表</router-link>
             </div>
-            <div class="card-body">
-              <div class="d-flex dynamic pt-3 pb-4 border-bottom">
-                <avatar
-                  class="mr-3"
-                  src="https://i2.wp.com/wp.laravel-news.com/wp-content/uploads/2019/12/laracon-viii-is-coming.jpg?fit=2220%2C1125&ssl=1?resize=1400%2C709"
-                  :to="{ name: 'home' }"
-                />
-                <div class="flex-fill d-flex flex-column">
-                  <a href="#" class="mb-3 text-muted">《新人请走进这个小屋来，有点事要和你说》</a>
-                  <span class="small font-weight-light text-muted">于 1个月前 . 评论 45 . 点赞 573</span>
-                </div>
-              </div>
+            <div class="card-body" v-if="activity.data">
+              <activity :field="field" v-for="field in activity.data" :key="field.id" />
             </div>
           </div>
         </div>
@@ -33,10 +26,24 @@
 
 <script>
 import Tip from '../components/Tips'
-import Avatar from '../components/Avatar'
+import Activity from '@/components/Activity'
 export default {
   name: 'home',
-  components: { Tip, Avatar }
+  components: { Tip, Activity },
+  data() {
+    return {
+      activity: {}
+    }
+  },
+  created() {
+    this.load()
+  },
+  methods: {
+    async load(page = 1) {
+      const response = await this.axios.get(`edu/front/activity?page=${page}`)
+      this.$set(this, 'activity', response.data)
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

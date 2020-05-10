@@ -19,6 +19,10 @@ class TopicPolicy
             return true;
         }
     }
+    public function update(User $user, Topic $topic)
+    {
+        return $topic->user->id === $user->id;
+    }
 
     public function delete(User $user, Topic $topic)
     {

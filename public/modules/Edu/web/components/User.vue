@@ -5,7 +5,7 @@
         :to="{ name: 'center.topic', params: { id: user.id } }"
         class="mt-3 d-flex flex-column align-items-center"
       >
-        <a-avatar :src="user.avatar" :size="90" shape="shape" class="border" />
+        <a-avatar :src="user.avatar" :size="90" class="border" />
         <span class="text-secondary mt-2">{{user.name}}</span>
       </router-link>
     </div>
@@ -70,7 +70,7 @@
 import { mapState } from 'vuex'
 export default {
   //id || user 二选一
-  props: { id: [Number, String], user: { type: Object }, fansBtn: { type: Boolean, default: true } },
+  props: { id: [Number, String], fansBtn: { type: Boolean, default: true } },
   data() {
     return {
       user: {}
@@ -80,11 +80,9 @@ export default {
     ...mapState('user', { auth: 'user' })
   },
   async created() {
-    if (!this.user) {
-      let idParams = this.auth.id ? `id=${this.auth.id}` : ''
-      let response = await this.axios.get(`edu/front/user/${this.id}?${idParams}`)
-      this.$set(this, 'user', response.data)
-    }
+    let idParams = this.auth.id ? `id=${this.auth.id}` : ''
+    let response = await this.axios.get(`edu/front/user/${this.id}?${idParams}`)
+    this.$set(this, 'user', response.data)
   },
   methods: {
     async follower() {

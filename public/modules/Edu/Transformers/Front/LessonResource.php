@@ -7,12 +7,6 @@ use Illuminate\Support\Facades\Auth;
 
 class LessonResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request
-     * @return array
-     */
     public function toArray($request)
     {
         $lesson = parent::toArray($request);

@@ -42,7 +42,6 @@ export default {
   methods: {
     async load(page = 1) {
       let response = await this.axios.get(`edu/center/${this.$route.params.id}/topic`)
-      console.log(response.data)
       this.$set(this, 'topics', response.data)
     }
   }

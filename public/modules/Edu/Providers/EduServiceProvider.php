@@ -2,12 +2,16 @@
 
 namespace Modules\Edu\Providers;
 
+use Modules\Edu\Observers\LessonObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\Edu\Entities\Comment;
+use Modules\Edu\Entities\Lesson;
 use Modules\Edu\Entities\Sign;
+use Modules\Edu\Entities\Topic;
 use Modules\Edu\Observers\CommentObserver;
 use Modules\Edu\Observers\SignObserver;
+use Modules\Edu\Observers\TopicObserver;
 
 class EduServiceProvider extends ServiceProvider
 {
@@ -36,6 +40,8 @@ class EduServiceProvider extends ServiceProvider
 
         Comment::observe(CommentObserver::class);
         Sign::observe(SignObserver::class);
+        Topic::observe(TopicObserver::class);
+        Lesson::observe(LessonObserver::class);
     }
 
     /**

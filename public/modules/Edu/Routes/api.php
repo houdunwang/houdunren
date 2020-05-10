@@ -28,13 +28,14 @@ Route::group(['middleware' => ['front'], 'namespace' => 'Front', 'prefix' => 'ed
     Route::get('topic/favour/{topic}', 'TopicController@favour');
     Route::get('topic/favorite/{topic}', 'TopicController@favorite');
     Route::post('topic/comment/{topic}', 'TopicController@comment');
-    Route::get('topic/comment/{video}', 'TopicController@commentList');
+    Route::get('topic/comment/{topic}', 'TopicController@commentList');
 
     Route::resource('sign', 'SignController');
     Route::apiResource('subscribe', 'SubscribeController');
     Route::apiResource('user', 'UserController');
     Route::get('user/follower/{user}', 'UserController@follower');
     Route::get('user/favour/{user}', 'UserController@favour');
+    Route::apiResource('activity', 'ActivityController');
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'front'], 'namespace' => 'Member', 'prefix' => 'edu/member'], function () {
@@ -49,4 +50,5 @@ Route::group(['middleware' => ['front'], 'namespace' => 'Center', 'prefix' => 'e
     Route::get('follower/{user}', 'UserController@follower');
     Route::get('fans/{user}', 'UserController@fans');
     Route::get('{user}/topic', 'TopicController@index');
+    Route::get('{user}/activity', 'ActivityController@index');
 });

@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="col-sm-2 col-12 p-0 pt-2 p-sm-0">
-          <user :user="user" class="mb-2" :fansBtn="false" />
+          <user :id="user.id" class="mb-2" :fansBtn="false" />
           <div class="card rounded shadow-sm bg-white">
             <div class="card-body p-0">
               <div class="list-group list-group-flush">

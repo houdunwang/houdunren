@@ -2,6 +2,7 @@
 
 namespace Modules\Edu\Observers;
 
+use App\Services\ActivityService;
 use Illuminate\Support\Facades\Auth;
 use Modules\Edu\Entities\Sign;
 use Modules\Edu\Entities\SignTotal;
@@ -18,5 +19,8 @@ class SignObserver
         $data['total'] = Sign::where('user_id', $sign['user_id'])->count();
         $data['month'] = Sign::where('user_id', $sign['user_id'])->whereMonth('created_at', now())->count();
         SignTotal::updateOrCreate(['user_id' => Auth::id(), 'site_id' => SITEID], $data);
+
+        //动态
+        app(ActivityService::class)->save('sign', 'created', $sign, ['title' => $sign['content']]);
     }
 }

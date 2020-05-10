@@ -2,6 +2,7 @@
 
 namespace Modules\Edu\Observers;
 
+use App\Services\ActivityService;
 use Modules\Edu\Entities\Comment;
 
 /**
@@ -17,5 +18,9 @@ class CommentObserver
      */
     public function created(Comment $comment)
     {
+        app(ActivityService::class)->save('comment', 'created', $comment, [
+            'title' => $comment['content'],
+            'type' => $comment['comment_type']
+        ]);
     }
 }

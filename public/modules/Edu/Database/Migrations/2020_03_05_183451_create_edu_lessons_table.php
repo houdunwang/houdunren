@@ -29,8 +29,6 @@ class CreateEduLessonsTable extends Migration
             $table->string('video_num')->default(0)->comment('视频数量');
             $table->string('download_address')->nullable()->comment('下载地址');
             $table->unsignedBigInteger('read_num')->default(0)->comment('查看次数');
-            $table->unsignedBigInteger('zan_num')->default(0)->comment('点赞数');
-            $table->unsignedBigInteger('favorite_num')->default(0)->comment('收藏数');
             $table->unsignedBigInteger('comment_num')->default(0)->comment('评论数');
             $table->unsignedBigInteger('favour_count')->default(0)->comment('支持数');
             $table->unsignedBigInteger('favorite_count')->default(0)->comment('收藏数');

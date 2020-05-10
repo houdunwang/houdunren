@@ -135,7 +135,7 @@ return [
     */
 
     'providers' => [
-        Mews\Captcha\CaptchaServiceProvider::class,
+        // Mews\Captcha\CaptchaServiceProvider::class,
         /*
          * Laravel Framework Service Providers...
          */

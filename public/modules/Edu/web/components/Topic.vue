@@ -1,16 +1,17 @@
 <template>
-  <div class="d-flex pt-3 pb-3 border-top align-items-center">
-    <router-link :to="{name:'center',params:{id:topic.user.id}}">
-      <a-avatar :src="topic.user.avatar" class="mr-3" shape="square" />
+  <div class="d-flex pt-3 pb-3 border-bottom align-items-center mb-2">
+    <router-link :to="{ name: 'center', params: { id: topic.user.id } }">
+      <a-avatar :src="topic.user.avatar" size="large" class="mr-3" shape="square" />
     </router-link>
     <div class="d-flex flex-column justify-content-between">
-      <router-link
-        :to="{ name: 'topic.show', params: { id: topic.id } }"
-        class="text-secondary"
-      >{{topic.title}}</router-link>
+      <router-link :to="{ name: 'topic.show', params: { id: topic.id } }" class="text-secondary h5">
+        {{ topic.title }}
+      </router-link>
       <span class="small text-black-50">
-        {{ topic.user.name }} . 发表于{{ topic.created_at | dateFormat('now') }} .
-        {{ topic.comment_count }}条评论
+        {{ topic.user.name }} . 发表于{{ topic.created_at | dateFormat('now') }}
+        <span>. 评论 {{ topic.comment_count }}</span>
+        <span>. 点赞 {{ topic.favour_count }}</span>
+        <span>. 收藏 {{ topic.favorite_count }}</span>
       </span>
     </div>
   </div>
@@ -22,5 +23,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

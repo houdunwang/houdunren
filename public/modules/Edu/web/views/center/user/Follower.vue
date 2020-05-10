@@ -3,7 +3,7 @@
     <a-tab-pane key="1" tab="TA 的关注">
       <div class="row" v-if="users">
         <div class="col-3" v-for="user in users.data" :key="user.id">
-          <user :user="user" :fansBtn="false" />
+          <user :user="user" />
         </div>
       </div>
     </a-tab-pane>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import User from '@/components/User'
+import User from '../components/User'
 export default {
   components: { User },
   data() {

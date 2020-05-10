@@ -76,8 +76,11 @@ class TopicController extends ApiController
         return $this->json(new TopicResource($topic));
     }
 
-    public function update(Request $request, $id)
+    public function update(TopicRequest $request, Topic $topic)
     {
+        $this->authorize('update', $topic);
+        $topic->fill($request->all())->save();
+        return $this->success('修改成功');
     }
 
     public function destroy(Topic $topic)

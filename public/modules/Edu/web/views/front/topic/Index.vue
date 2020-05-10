@@ -8,12 +8,7 @@
             <div class="input-group input-group-sm">
               <input type="text" class="form-control" ref="searchInput" @keyup.enter="search" />
               <div class="input-group-append">
-                <a
-                  href="#"
-                  type="button"
-                  class="btn btn-outline-secondary"
-                  @click.prevent="search"
-                >搜索</a>
+                <a href="#" type="button" class="btn btn-outline-secondary" @click.prevent="search">搜索</a>
                 <router-link :to="{ name: 'topic.create' }" class="btn btn-outline-secondary">发表</router-link>
               </div>
             </div>
