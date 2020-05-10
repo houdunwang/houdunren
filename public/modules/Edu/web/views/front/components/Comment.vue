@@ -11,7 +11,7 @@
           </span>
         </div>
       </div>
-      <div class="card-body text-secondary pb-5">
+      <div class="card-body text-secondary pb-5 markdown">
         <a href="#" class v-if="comment.reply">@{{ comment.reply.name }}</a>
         <p v-html="comment.content" class="d-inline-block"></p>
       </div>

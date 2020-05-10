@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('credit4')->nullable();
             $table->unsignedInteger('credit5')->nullable();
             $table->unsignedInteger('credit6')->nullable();
+            $table->unsignedTinyInteger('is_super_admin')->nullable()->index()->comment('超级管理员');
             $table->timestamp('email_verified_at')->nullable()->comment('邮箱验证时间');
             $table->timestamp('mobile_verified_at')->nullable()->comment('手机验证时间');
             $table->rememberToken();

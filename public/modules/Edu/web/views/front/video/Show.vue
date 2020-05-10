@@ -22,9 +22,7 @@
                 {{ lesson.title }}
               </router-link>
             </div>
-            <div
-              class="col-12 col-md-5 mt-2 mt-md-0 d-flex justify-content-md-end justify-content-start flex-wrap"
-            >
+            <div class="col-12 col-md-5 mt-2 mt-md-0 d-flex justify-content-md-end justify-content-start flex-wrap">
               <div class="btn-group btn-group-sm align-items-center mr-1">
                 <button
                   class="btn btn-outline-success"
@@ -32,15 +30,30 @@
                   aria-label
                   v-if="prev"
                   @click.prevent="load(prev.id)"
-                >上集</button>
+                >
+                  上集
+                </button>
                 <button
                   class="btn btn-outline-success"
                   type="button"
                   aria-label
                   v-if="next"
                   @click.prevent="load(next.id)"
-                >下集</button>
-                <button class="btn btn-outline-success" type="button" aria-label>下载高清版</button>
+                >
+                  下集
+                </button>
+                <button
+                  class="btn btn-outline-success"
+                  type="button"
+                  aria-label
+                  v-if="lesson.download_address"
+                  @click="downloadModal = true"
+                >
+                  下载高清版
+                </button>
+                <a-modal v-model="downloadModal" title="下载高清版" :footer="null">
+                  {{ lesson.download_address }}
+                </a-modal>
               </div>
               <div class="btn-group btn-group-sm align-items-center mt-1 mt-md-0">
                 <button
@@ -57,7 +70,9 @@
                   :class="{ 'btn-outline-info': field.is_favorite }"
                   type="button"
                   aria-label
-                >{{ field.favorite_count }}</button>
+                >
+                  {{ field.favorite_count }}
+                </button>
                 <button
                   class="btn btn-outline-secondary"
                   :class="{ 'btn-outline-danger': field.is_favour }"
@@ -72,7 +87,9 @@
                   :class="{ 'btn-outline-danger': field.is_favour }"
                   type="button"
                   aria-label
-                >{{ field.favour_count }}</button>
+                >
+                  {{ field.favour_count }}
+                </button>
               </div>
             </div>
           </div>
@@ -82,11 +99,7 @@
       <div class="container mb-5">
         <div class="row">
           <div class="col-md-9 order-1 mt-2 mt-md-0 order-md-0">
-            <comment
-              height="300px"
-              :action="`edu/front/video/comment/${field.id}`"
-              :comments="comments"
-            />
+            <comment height="300px" :action="`edu/front/video/comment/${field.id}`" :comments="comments" />
           </div>
           <div class="col-md-3 pl-md-0 order-0 order-md-1">
             <div class="card text-secondary">
@@ -98,7 +111,8 @@
                   class="list-group-item text-secondary"
                   v-for="video in lesson.videos"
                   :key="video.id"
-                >{{ video.title }}</a>
+                  >{{ video.title }}</a
+                >
               </div>
             </div>
           </div>
@@ -124,7 +138,8 @@ export default {
     return {
       field: {},
       lesson: {},
-      comments: []
+      comments: [],
+      downloadModal: false
     }
   },
   async created() {
@@ -132,25 +147,24 @@ export default {
   },
   computed: {
     next() {
-      let index = this.lesson.videos.findIndex(v => v.id === this.field.id)
-      return this.lesson.videos[index + 1]
+      let index = this.lesson.video.findIndex(v => v.id === this.field.id)
+      return index < this.lesson.video.length ? this.lesson.video[index + 1] : false
     },
     prev() {
-      let index = this.lesson.videos.findIndex(v => v.id === this.field.id)
-      return this.lesson.videos[index - 1]
+      let index = this.lesson.video.findIndex(v => v.id === this.field.id)
+      return index != 0 ? this.lesson.video[index - 1] : false
     }
   },
   methods: {
     async load(id) {
       Promise.all([
-        this.axios.get(`edu/front/lesson/${this.$route.params.sid}`).then(r => r.data),
         this.axios.get(`edu/front/video/${id}`).then(r => r.data),
         this.axios.get(`edu/front/video/comment/${id}`).then(r => r.data)
       ])
         .then(response => {
-          this.$set(this, 'lesson', response[0])
-          this.$set(this, 'field', response[1])
-          this.$set(this, 'comments', response[2])
+          this.$set(this, 'lesson', response[0].lesson)
+          this.$set(this, 'field', response[0])
+          this.$set(this, 'comments', response[1])
           this.$scrollTo('body')
         })
         .catch(error => {

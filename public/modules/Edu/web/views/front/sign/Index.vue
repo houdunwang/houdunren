@@ -20,6 +20,14 @@
           <button type="button" class="btn btn-success" @click="submit">开始签到</button>
         </div>
       </div>
+      <div class="card shadow-sm" v-if="isLogin && todayIsCheck">
+        <div class="card-header bg-white">签到快乐，再接再厉</div>
+        <div class="card-body h6 font-weight-normal" style="line-height:1.5em;">
+          您上次签到时间: <span class="text-danger">{{ current.updated_at }}</span> <br />
+          您的总签到天数: <span class="text-danger">{{ current.total }}</span> 天 <br />
+          您本月签到天数:: <span class="text-danger">{{ current.month }}</span> 天
+        </div>
+      </div>
       <div class="card" v-if="!isLogin">
         <div class="card-header">每日签到</div>
         <div class="card-body text-center">
@@ -91,9 +99,10 @@ export default {
     ...mapState('user', ['user']),
     ...mapGetters('user', ['isLogin']),
     todayIsCheck() {
-      return this.signs.some(sign => {
-        return sign.user_id === this.user.id
-      })
+      return this.signs.some(sign => sign.user_id === this.user.id)
+    },
+    current() {
+      return this.signs.filter(sign => sign.user_id === this.user.id)[0].total
     }
   },
   methods: {

@@ -29,6 +29,8 @@ Route::group(['middleware' => ['front'], 'namespace' => 'Front', 'prefix' => 'ed
     Route::get('topic/favorite/{topic}', 'TopicController@favorite');
     Route::post('topic/comment/{topic}', 'TopicController@comment');
     Route::get('topic/comment/{topic}', 'TopicController@commentList');
+    Route::get('topic/commend/{topic}', 'TopicController@commend');
+    Route::get('recommend/topic', 'TopicController@recommendList');
 
     Route::resource('sign', 'SignController');
     Route::apiResource('subscribe', 'SubscribeController');

@@ -6,13 +6,20 @@
           <div class="card">
             <div class="card-header bg-white d-flex justify-content-between">
               社区动态
-              <router-link
-                :to="{ name: 'topic.create' }"
-                class="btn btn-outline-secondary btn-sm"
-              >发表</router-link>
+              <router-link :to="{ name: 'topic.create' }" class="btn btn-outline-secondary btn-sm">发表</router-link>
+            </div>
+            <div class="card-body" v-if="activity.data">
+              <topic :topic="topic" v-for="topic in topics" :key="topic.id" />
             </div>
             <div class="card-body" v-if="activity.data">
               <activity :field="field" v-for="field in activity.data" :key="field.id" />
+              <a-pagination
+                v-model="activity.meta.current_page"
+                :total="activity.meta.total"
+                showLessItems
+                @change="load"
+                :hideOnSinglePage="true"
+              />
             </div>
           </div>
         </div>
@@ -27,21 +34,28 @@
 <script>
 import Tip from '../components/Tips'
 import Activity from '@/components/Activity'
+import Topic from '@/components/Topic'
 export default {
   name: 'home',
-  components: { Tip, Activity },
+  components: { Tip, Activity, Topic },
   data() {
     return {
-      activity: {}
+      activity: {},
+      topics: []
     }
   },
   created() {
     this.load()
+    this.recommend()
   },
   methods: {
     async load(page = 1) {
       const response = await this.axios.get(`edu/front/activity?page=${page}`)
       this.$set(this, 'activity', response.data)
+    },
+    async recommend() {
+      const response = await this.axios.get(`edu/front/recommend/topic`)
+      this.$set(this, 'topics', response.data)
     }
   }
 }

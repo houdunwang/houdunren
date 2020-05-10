@@ -23,7 +23,7 @@ class SignController extends ApiController
      */
     public function index()
     {
-        $signs = Sign::whereDay('created_at', now())->get();
+        $signs = Sign::whereDate('created_at', now())->oldest()->get();
         return SignResource::collection($signs);
     }
 

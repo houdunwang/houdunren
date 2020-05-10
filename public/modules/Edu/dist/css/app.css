@@ -14035,3 +14035,57 @@ a.text-dark:focus {
   }
 }
 
+.markdown {
+  color: #636b6f !important;
+  line-height: 1.8em;
+}
+
+.markdown img {
+  max-width: 100%;
+}
+
+.markdown h1,
+.markdown h2 {
+  font-size: 1.3em;
+  border-bottom: solid 1px #dddddd;
+  padding-bottom: 15px !important;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.markdown table {
+  width: 100%;
+}
+
+.markdown table th {
+  background: #f3f3f3;
+}
+
+.markdown table td,
+.markdown table th {
+  border: solid 1px #ddd;
+  padding: 10px;
+}
+
+.markdown pre {
+  word-break: break-word;
+  background-color: #363f52;
+}
+
+.markdown pre code {
+  word-break: break-word;
+  white-space: pre-wrap;
+  background-color: #363f52;
+  line-height: 2em;
+}
+

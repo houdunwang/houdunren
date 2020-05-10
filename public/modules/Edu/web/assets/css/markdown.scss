@@ -1,0 +1,50 @@
+.markdown {
+  color: #636b6f !important;
+  line-height: 1.8em;
+
+  img {
+    max-width: 100%;
+  }
+
+  h1, h2 {
+    font-size: 1.3em;
+    border-bottom: solid 1px #dddddd;
+    padding-bottom: 15px !important;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  h3, h4, h5, h6 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  table {
+    width: 100%;
+
+    th {
+      background: #f3f3f3;
+    }
+
+    td, th {
+      border: solid 1px #ddd;
+      padding: 10px;
+    }
+
+  }
+
+
+  pre {
+    word-break: break-word;
+    background-color: #363f52;
+
+    code {
+      word-break: break-word;
+      white-space: pre-wrap;
+      background-color: #363f52;
+      line-height: 2em;
+    }
+  }
+}

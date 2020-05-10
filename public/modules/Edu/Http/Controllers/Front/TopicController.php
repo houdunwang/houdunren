@@ -3,9 +3,9 @@
 namespace Modules\Edu\Http\Controllers\Front;
 
 use App\Http\Controllers\ApiController;
+use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Modules\Edu\Entities\Topic;
 use Modules\Edu\Http\Requests\CommentRequest;
@@ -123,5 +123,28 @@ class TopicController extends ApiController
     {
         $comments = $topic->comment()->with(['user', 'reply'])->get();
         return $this->json(CommentResource::collection($comments));
+    }
+    /**
+     * 推荐设置
+     * @param Topic $topic
+     * @return JsonResponse
+     */
+    public function commend(Topic $topic, UserService $userService)
+    {
+        if (!$userService->isAdmin(site(), Auth::user())) {
+            return $this->error('你没有操作权限');
+        }
+        $topic['recommend'] = !$topic['recommend'];
+        $topic->save();
+        return $this->json(new TopicResource($topic));
+    }
+    /**
+     * 推荐列表
+     * @return JsonResponse
+     */
+    public function recommendList()
+    {
+        $topics = Topic::where('recommend', 1)->get();
+        return $this->json(TopicResource::collection($topics));
     }
 }

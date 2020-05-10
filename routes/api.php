@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth:sanctum', 'front'], 'namespace' => 'Member'
     Route::put('password', 'UserController@password');
     Route::put('mobile', 'UserController@mobile');
     Route::put('email', 'UserController@email');
-    Route::get('access', 'UserController@access');
+    Route::get('access', 'AccessController@get');
 });
 //系统服务
 Route::group(['middleware' => ['auth:sanctum'], 'namespace' => 'System', 'prefix' => 'system'], function () {

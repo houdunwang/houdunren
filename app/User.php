@@ -30,11 +30,9 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'lock_to_time' => 'datetime'
+        'lock_to_time' => 'datetime',
+        'is_super_admin' => 'boolean'
     ];
-
-    protected $appends = ['is_super_admin'];
-
     /**
      * 用户头像
      * @return string

@@ -5,7 +5,6 @@ namespace Modules\Edu\Http\Controllers\Member;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Auth;
 use Modules\Edu\Entities\Order;
-use Modules\Edu\Entities\User;
 
 /**
  * 定单管理
@@ -15,7 +14,7 @@ class OrderController extends ApiController
 {
     public function index()
     {
-        return Order::where('user_id', Auth::id())->paginate(10);
+        return Order::where('user_id', Auth::id())->where('status', 1)->paginate(10);
     }
     public function destroy(Order $order)
     {

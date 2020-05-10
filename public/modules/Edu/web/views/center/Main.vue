@@ -14,26 +14,30 @@
           </div>
         </div>
         <div class="col-sm-2 col-12 p-0 pt-2 p-sm-0">
-          <user :id="$route.params.id" class="mb-2" />
+          <user :id="$route.params.id" class="mb-2" :key="$route.params.id" />
           <div class="card rounded shadow-sm bg-white">
             <div class="card-body p-0">
               <div class="list-group list-group-flush">
                 <router-link
                   :to="{ name: 'center.topic', params: { id: $route.params.id } }"
                   class="list-group-item list-group-item-action text-secondary"
-                >TA 的帖子</router-link>
+                  >TA 的帖子</router-link
+                >
                 <router-link
                   :to="{ name: 'center.follower', params: { id: $route.params.id } }"
                   class="list-group-item list-group-item-action text-secondary"
-                >TA 的关注</router-link>
+                  >TA 的关注</router-link
+                >
                 <router-link
                   :to="{ name: 'center.fans', params: { id: $route.params.id } }"
                   class="list-group-item list-group-item-action text-secondary"
-                >TA 的粉丝</router-link>
+                  >TA 的粉丝</router-link
+                >
                 <router-link
                   :to="{ name: 'center.log', params: { id: $route.params.id } }"
                   class="list-group-item list-group-item-action text-secondary"
-                >TA 的动态</router-link>
+                  >TA 的动态</router-link
+                >
               </div>
             </div>
           </div>

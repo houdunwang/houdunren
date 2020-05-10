@@ -5,8 +5,8 @@ use App\Models\Site;
 
 class SiteSeeder extends Seeder
 {
-  public function run()
-  {
-    factory(Site::class, 3)->create();
-  }
+    public function run()
+    {
+        factory(Site::class, 1)->create();
+    }
 }

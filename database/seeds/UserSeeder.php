@@ -11,7 +11,7 @@ class UserSeeder extends Seeder
             $user->group()->attach([1]);
         });
         $users = [
-            1 => ['name' => '超管', 'email' => 'admin@houdunren.com'],
+            1 => ['name' => '超管', 'email' => 'admin@houdunren.com', 'is_super_admin' => true],
             2 => ['name' => '后盾人', 'email' => 'houdunren@houdunren.com'],
             3 => ['name' => 'HDCMS', 'email' => 'hdcms@houdunren.com'],
         ];

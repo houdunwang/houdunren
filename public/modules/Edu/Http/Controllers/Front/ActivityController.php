@@ -17,7 +17,7 @@ class ActivityController extends ApiController
 {
     public function index()
     {
-        $activities = Activity::latest()->paginate();
+        $activities = Activity::latest()->paginate(10);
         return ActivityResource::collection($activities);
     }
 }

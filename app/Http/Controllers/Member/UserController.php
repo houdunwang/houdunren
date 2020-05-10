@@ -82,16 +82,4 @@ class UserController extends ApiController
         $user->save();
         return $this->success('邮箱绑定成功');
     }
-    /**
-     * 用户权限
-     * @return JsonResponse
-     * @throws BindingResolutionException
-     */
-    public function access()
-    {
-        return $this->json([
-            'is_admin' => app(UserService::class)->isAdmin(site(), Auth::user()),
-            'access' => app(AccessService::class)->getUserPermissionNames(site(), Auth::user()),
-        ]);
-    }
 }

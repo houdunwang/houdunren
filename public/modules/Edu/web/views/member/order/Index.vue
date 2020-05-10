@@ -11,10 +11,12 @@
           rowKey="id"
         >
           <span slot="price" slot-scope="price">{{ price }} 元</span>
-          <span slot="status" slot-scope="status">
-            <i class="fa fa-check-circle-o text-success" aria-hidden="true" v-show="status"></i>
-            <i class="fa fa-times-circle-o" aria-hidden="true" v-show="status == false"></i>
-          </span>
+          <div slot="status" slot-scope="status">
+            <span class="text-success" v-show="status">支付成功</span>
+            <span class="text-secondary" v-show="!status">失效</span>
+            <!-- <i class="fa fa-check-circle-o text-success" aria-hidden="true" v-show="status"></i> -->
+            <!-- <i class="fa fa-times-circle-o" aria-hidden="true" v-show="status == false"></i> -->
+          </div>
           <span slot="action" slot-scope="order">
             <a-button size="small" @click="del(order)" :disabled="order.status">删除</a-button>
           </span>

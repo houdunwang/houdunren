@@ -2,7 +2,7 @@
   <a-tabs>
     <a-tab-pane key="1" tab="TA 的粉丝">
       <div class="row" v-if="users">
-        <div class="col-3" v-for="user in users.data" :key="user.id">
+        <div class="col-3 mb-2" v-for="user in users.data" :key="user.id">
           <user :user="user" />
         </div>
       </div>
@@ -12,6 +12,7 @@
 
 <script>
 import User from '../components/User'
+
 export default {
   components: { User },
   data() {

@@ -12,8 +12,8 @@ class WeChatSeeder extends Seeder
     public function run()
     {
         \App\Models\WeChat::create([
-            'site_id'=>1,
-            'config'=>config('hd.weChat')
+            'site_id' => 1,
+            'config' => config('hd.weChat')
         ]);
     }
 }

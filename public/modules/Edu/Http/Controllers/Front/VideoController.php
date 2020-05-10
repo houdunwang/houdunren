@@ -6,7 +6,6 @@ use App\Http\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 use Modules\Edu\Entities\Video;
 use Modules\Edu\Http\Requests\CommentRequest;
 use Modules\Edu\Services\CommentService;

@@ -42,7 +42,11 @@ export default {
         case 'comment':
           const index = field.subject.comment_type.lastIndexOf('\\')
           const type = field.subject.comment_type.substr(index + 1).toLowerCase()
-          return `${type}/show/${field.subject.comment_id}?comment=${field.subject_id}`
+          return {
+            name: `${type}.show`,
+            params: { id: field.subject.comment_id },
+            query: { comment: field.subject_id }
+          }
         case 'sign':
           return { name: 'sign.index' }
         case 'lesson':
