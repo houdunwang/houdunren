@@ -2,7 +2,7 @@
   <div>
     <div class="container mt-3 mt-md-5 mb-5">
       <div class="search bg-white mt-3 mb-3 shadow-sm p-4 border">
-        <div class="input-group input-group">
+        <div class="input-group ">
           <input
             type="text"
             class="form-control"
@@ -22,7 +22,7 @@
         <div class="d-flex justify-content-start flex-wrap mt-3 tags" v-if="tags">
           <a
             href="#"
-            class="btn btn-outline-secondary btn-sm mr-3 mb-2 border-0"
+            class="btn btn-outline-secondary btn-sm mr-3 mb-2"
             @click="
               currentTag = 0
               load()
@@ -37,8 +37,8 @@
               currentTag = tag.id
               load()
             "
-            class="btn  btn-sm mr-3 mb-2 border-0"
-            :class="currentTag == tag.id ? 'btn-secondary' : 'btn-outline-secondary'"
+            class="btn btn-sm mr-3 mb-2 "
+            :class="currentTag == tag.id ? 'btn-success' : 'btn-outline-secondary'"
           >
             {{ tag.title }}
           </a>

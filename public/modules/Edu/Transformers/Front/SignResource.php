@@ -18,7 +18,7 @@ class SignResource extends JsonResource
     public function toArray($request)
     {
         $sign =  parent::toArray($request);
-        $sign['user'] = $this->user()->select(['avatar', 'id'])->first();
+        $sign['user'] = $this->user()->select(['avatar', 'id', 'name'])->first();
         $sign['total'] = SignTotal::where('user_id', $this->user_id)->where('site_id', SITEID)->first();
         return $sign;
     }

@@ -34,6 +34,7 @@ Route::group(['middleware' => ['front'], 'namespace' => 'Front', 'prefix' => 'ed
 
     Route::resource('sign', 'SignController');
     Route::apiResource('subscribe', 'SubscribeController');
+    Route::get('user/learn_history', 'UserController@learnHistory');
     Route::apiResource('user', 'UserController');
     Route::get('user/follower/{user}', 'UserController@follower');
     Route::get('user/favour/{user}', 'UserController@favour');

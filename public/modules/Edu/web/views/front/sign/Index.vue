@@ -52,7 +52,7 @@
               <tr v-for="sign in signs" :key="sign.id" class="sign">
                 <td width="150">
                   <img :src="sign.user.avatar" class="rounded mt-1 align-middle" />
-                  {{ sign.user.nickname }}
+                  {{ sign.user.name }}
                 </td>
                 <td width="120">{{ sign.created_at | dateFormat('time') }}</td>
                 <td width="120">{{ sign.total.total }}</td>

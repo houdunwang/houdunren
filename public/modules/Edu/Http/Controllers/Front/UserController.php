@@ -3,17 +3,18 @@
 namespace Modules\Edu\Http\Controllers\Front;
 
 use App\Http\Controllers\ApiController;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Modules\Edu\Entities\User;
+use Modules\Edu\Entities\UserVideo;
 use Modules\Edu\Transformers\Front\UserResource;
 
 class UserController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except(['show']);
+        $this->middleware('auth:sanctum')->except(['show', 'learnHistory']);
     }
 
     /**
@@ -41,5 +42,14 @@ class UserController extends ApiController
         $auth = User::find($request->query('id', 0));
         if ($auth) Auth::login($auth);
         return $this->json(new UserResource($user));
+    }
+    /**
+     * 获取用户学习记录
+     * @return JsonResponse
+     */
+    public function learnHistory()
+    {
+        $logs = UserVideo::limit(10)->with(['user:id,avatar,name', 'video'])->get();
+        return $this->json($logs);
     }
 }

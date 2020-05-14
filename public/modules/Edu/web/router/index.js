@@ -7,7 +7,7 @@ import center from './center'
 import store from '../store'
 //注册组件
 Vue.use(VueRouter)
-const routes = [admin, front, member, center, { path: '*', redirect: '/edu/home' }]
+const routes = [admin, front, member, center, { path: '*', redirect: '/' }]
 const router = new VueRouter({
   routes,
   mode: 'history'

@@ -22,7 +22,7 @@ class TopicController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware("auth:sanctum")->except(['index', 'show', 'commentList']);
+        $this->middleware("auth:sanctum")->except(['index', 'show', 'commentList', 'recommendList']);
     }
 
     /**
@@ -56,7 +56,7 @@ class TopicController extends ApiController
         $keyword = $request->input('keyword');
         $topics = Topic::latest('id')->when($keyword, function ($query, $keyword) {
             $query->where('title', 'like', "%{$keyword}%");
-        })->paginate(15);
+        })->paginate(10);
         return TopicResource::collection($topics);
     }
 

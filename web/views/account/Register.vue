@@ -56,7 +56,7 @@ const rules = {
   captcha: [{ required: true, message: '验证码不能为空' }]
 }
 const form = {
-  account: '18600276067',
+  account: '',
   code: '',
   name: '',
   password: '',

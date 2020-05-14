@@ -16,9 +16,10 @@ mix
   .js(__dirname + '/web/app.js', 'js')
   .sass(__dirname + '/web/assets/css/app.scss', 'css')
   .extract(['vue', 'vue-router', 'vuex', 'vue-video-player', 'moment', 'ant-design-vue'])
+  .version()
 
-if (mix.inProduction()) {
-  mix.version()
-}
+// if (mix.inProduction()) {
+//   mix.version()
+// }
 
 // mix.browserSync('hdcms.test')

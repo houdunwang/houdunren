@@ -13,7 +13,7 @@ import { message as mm, Modal } from 'ant-design-vue'
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-// axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true
 //基本地址与超时时间
 let config = { baseURL: '/api/', timeout: 10000 }
 const _axios = axios.create(config)
@@ -42,7 +42,7 @@ _axios.interceptors.request.use(
     loading.show()
     let accessToken = token.get()
     if (accessToken) {
-      config.headers.Authorization = 'Bearer ' + accessToken
+      //  config.headers.Authorization = 'Bearer ' + accessToken
     }
     return config
   },
@@ -66,7 +66,7 @@ _axios.interceptors.response.use(
         case 401:
           //未登录用户跳转到登录页面
           token.del()
-          //   location.href = '/login'
+          location.href = '/login'
           break
         case 422:
           //表单验证错误，错误消息记录到VUEX中

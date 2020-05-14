@@ -5,6 +5,7 @@ namespace Modules\Edu\Entities;
 use App\Scopes\SiteScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Modules\Edu\Entities\Traits\Common;
 
 /**
@@ -27,5 +28,13 @@ class Video extends Model
     public function lesson()
     {
         return $this->belongsTo(Lesson::class, 'lesson_id');
+    }
+    /**
+     * 用户学习记录
+     * @return BelongsToMany
+     */
+    public function user()
+    {
+        return $this->belongsToMany(User::class, 'edu_user_video', 'video_id', 'user_id')->withTimestamps();
     }
 }

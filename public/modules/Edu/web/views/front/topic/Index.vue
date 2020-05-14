@@ -5,7 +5,7 @@
         <div class="card">
           <div class="card-header bg-white justify-content-between">话题讨论</div>
           <div class="card-body pb-0 pt-2">
-            <div class="input-group input-group-sm">
+            <div class="input-group">
               <input type="text" class="form-control" ref="searchInput" @keyup.enter="search" />
               <div class="input-group-append">
                 <a href="#" type="button" class="btn btn-outline-secondary" @click.prevent="search">搜索</a>

@@ -21,7 +21,7 @@ class UserService
     {
         $credentials = $this->credentials($data['account']);
         $credentials['password'] = $data['password'];
-        if (auth()->attempt($credentials)) {
+        if (auth()->attempt($credentials, true)) {
             return Auth::user()->createToken('token')->plainTextToken;
         }
         return false;

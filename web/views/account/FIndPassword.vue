@@ -27,7 +27,7 @@
           </div>
           <div>
             <router-link :to="{ name: 'login' }" class="text-secondary mr-1">登录</router-link>
-            <router-link :to="{name:'register'}" href class="text-secondary">注册</router-link>
+            <router-link :to="{ name: 'register' }" href class="text-secondary">注册</router-link>
           </div>
         </a-row>
       </a-form-model-item>
@@ -48,7 +48,7 @@ const rules = {
   captcha: [{ required: true, message: '验证码不能为空' }]
 }
 const form = {
-  account: '18600276067',
+  account: '',
   code: '',
   captcha: '',
   password: '',

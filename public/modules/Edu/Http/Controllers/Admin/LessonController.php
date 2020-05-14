@@ -13,7 +13,7 @@ class LessonController extends ApiController
 {
     public function index()
     {
-        $lessons = Lesson::latest('id')->where('site_id', site()['id'])->paginate();
+        $lessons = Lesson::latest('id')->where('site_id', site()['id'])->paginate(10);
         return LessonResource::collection($lessons);
     }
 

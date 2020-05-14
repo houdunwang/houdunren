@@ -6,12 +6,13 @@
           <div class="card">
             <div class="card-header bg-white d-flex justify-content-between">
               社区动态
-              <router-link :to="{ name: 'topic.create' }" class="btn btn-outline-secondary btn-sm">发表</router-link>
+              <router-link
+                :to="{ name: 'topic.create' }"
+                class="btn btn-outline-secondary btn-sm"
+              >发表</router-link>
             </div>
-            <div class="card-body" v-if="activity.data">
+            <div class="card-body" v-if="activity.data && topics">
               <topic :topic="topic" v-for="topic in topics" :key="topic.id" />
-            </div>
-            <div class="card-body" v-if="activity.data">
               <activity :field="field" v-for="field in activity.data" :key="field.id" />
               <a-pagination
                 v-model="activity.meta.current_page"
@@ -25,6 +26,7 @@
         </div>
         <div class="col-12 col-sm-3 mt-2 pl-0">
           <tip />
+          <learn-history />
         </div>
       </div>
     </div>
@@ -35,9 +37,10 @@
 import Tip from '../components/Tips'
 import Activity from '@/components/Activity'
 import Topic from '@/components/Topic'
+import LearnHistory from '@/components/LearnHistory'
 export default {
   name: 'home',
-  components: { Tip, Activity, Topic },
+  components: { Tip, Activity, Topic, LearnHistory },
   data() {
     return {
       activity: {},

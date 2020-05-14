@@ -1,10 +1,20 @@
 <template>
   <div>
-    <div class="card shadow-sm mb-2" v-for="(comment, index) in comments" :key="index" :id="`comment-${comment.id}`">
+    <div
+      class="card shadow-sm mb-2"
+      v-for="(comment, index) in comments"
+      :key="index"
+      :id="`comment-${comment.id}`"
+    >
       <div class="card-header bg-white d-flex justify-content-start">
-        <img :src="comment.user.avatar || `/images/avatar.jpg`" class="avatar rounded img-thumbnail mr-3" />
+        <img
+          :src="comment.user.avatar || `/images/avatar.jpg`"
+          class="avatar rounded img-thumbnail mr-3"
+        />
         <div class="flex-fill">
-          <div class="text-secondary">{{ comment.user.name }}</div>
+          <div class="text-secondary">
+            <router-link :to="{name:'center',params:{id:comment.user.id}}">{{ comment.user.name }}</router-link>
+          </div>
           <span class="small text-black-50">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
             {{ comment.created_at | dateFormat }}
@@ -17,9 +27,12 @@
       </div>
       <div class="card-footer text-muted bg-white small">
         # {{ index + 1 }}
-        <a href="#" class="ml-2 mr-2" v-if="comment.id" @click.prevent="favour(comment)"
-          >{{ comment.favour_count ? comment.favour_count : 0 }}个赞</a
-        >
+        <a
+          href="#"
+          class="ml-2 mr-2"
+          v-if="comment.id"
+          @click.prevent="favour(comment)"
+        >{{ comment.favour_count ? comment.favour_count : 0 }}个赞</a>
 
         <a
           href="#"

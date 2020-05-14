@@ -5,11 +5,14 @@
       <div class="flex-fill d-flex flex-column">
         <router-link :to="link(field)" class="mb-2 text-muted h5">{{ field.properties.title }}</router-link>
         <span class="small font-weight-light text-muted">
-          <small class="badge font-weight-light" :class="category[field.log_name].class">{{
-            category[field.log_name].title
-          }}</small>
+          <small
+            class="badge font-weight-light"
+            :class="category[field.log_name].class"
+          >{{category[field.log_name].title}}</small>
           发表于{{ field.updated_at | dateFormat }}
-          <span v-if="field.subject.comment_count">. 评论 {{ field.subject.comment_count }}</span>
+          <span
+            v-if="field.subject.comment_count"
+          >. 评论 {{ field.subject.comment_count }}</span>
           <span v-if="field.subject.favour_count">. 点赞 {{ field.subject.favour_count }}</span>
           <span v-if="field.subject.favorite_count">. 收藏 {{ field.subject.favorite_count }}</span>
         </span>

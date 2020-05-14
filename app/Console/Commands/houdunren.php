@@ -41,7 +41,7 @@ class houdunren extends Command
         // $this->user();
         // $this->site_user();
         // $this->attachments();
-        $this->comments();
+        // $this->comments();
         // $this->edu_sign();
         // $this->edu_sign_total();
         // $this->edu_tag();
@@ -56,6 +56,23 @@ class houdunren extends Command
         // $this->edu_favour();
         // $this->edu_order();
         // $this->edu_duration();
+        $this->edu_subscribe();
+    }
+    protected function edu_subscribe()
+    {
+        $this->old->table('edu_subscribes')->get()->map(function ($a) {
+            $this->hdcms->table('edu_subscribe')->insert([
+                'id' => $a->id,
+                'site_id' => $a->site_id,
+                'title' => $a->title,
+                'ad' => $a->ad,
+                'icon' => $a->icon,
+                'price' => $a->price,
+                'month' => $a->month,
+                'created_at' => $a->created_at,
+                'updated_at' => $a->updated_at,
+            ]);
+        });
     }
     protected function edu_duration()
     {

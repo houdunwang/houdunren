@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Modules\Edu\Entities\User;
 use Modules\Edu\Entities\Video;
 use Modules\Edu\Http\Requests\CommentRequest;
 use Modules\Edu\Services\CommentService;
@@ -28,9 +29,6 @@ class VideoController extends ApiController
         $videos = Video::latest('id')->paginate(15);
         return VideoResource::collection($videos);
     }
-    public function check()
-    {
-    }
 
     /**
      * 视频数据
@@ -39,11 +37,23 @@ class VideoController extends ApiController
      */
     public function show(Video $video, VideoService $videoService)
     {
+        $this->saveUserRecord($video);
         $canPlay = $videoService->playCheck($video, Auth::user());
         if ($canPlay === false) {
             return $this->error('你没有订阅会员或未购买课程');
         }
         return $this->json(new VideoResource($video));
+    }
+    /**
+     * 记录观看记录
+     * @param Video $video
+     * @return void
+     */
+    protected function saveUserRecord(Video $video)
+    {
+        if (Auth::check()) {
+            $video->user()->syncWithoutDetaching([Auth::id()]);
+        }
     }
 
     /**

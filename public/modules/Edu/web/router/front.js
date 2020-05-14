@@ -13,10 +13,10 @@ import TopicEdit from '@/views/front/topic/Edit'
 import Sign from '@/views/front/sign/Index'
 import Subscribe from '@/views/front/subscribe/Index'
 export default {
-  path: '/edu',
+  path: '/',
   component: Main,
   children: [
-    { name: 'home', component: Index, path: 'home', meta: { keepAlive: true } },
+    { name: 'home', component: Index, path: '/', meta: { keepAlive: true } },
     { name: 'lesson.index', component: LessonIndex, path: 'lesson/你的汗水，终将得到回报', meta: { keepAlive: true } },
     { name: 'lesson.show', component: LessonShow, path: 'lesson/:id', meta: { keepAlive: true } },
     { name: 'video.show', component: Video, path: 'video/:id', meta: { auth: true } },
@@ -31,7 +31,7 @@ export default {
     { name: 'topic.index', component: Topic, path: 'topic', meta: { keepAlive: true } },
     { name: 'topic.create', component: TopicCreate, path: 'topic/create', meta: { auth: true } },
     { name: 'topic.edit', component: TopicEdit, path: 'topic/edit/:id', meta: { auth: true } },
-    { name: 'topic.show', component: TopicShow, path: 'topic/:id', meta: { auth: false } },
+    { name: 'topic.show', component: TopicShow, path: 'topic/:id' },
     { name: 'sign.index', component: Sign, path: 'sign', meta: { keepAlive: true } },
     { name: 'subscribe', component: Subscribe, path: 'subscribe', meta: { keepAlive: true } }
   ]

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
-use App\Services\CaptchaService;
 use Intervention\Image\ImageManager;
-use Mews\Captcha\Facades\Captcha;
 
 /**
  * 验证码

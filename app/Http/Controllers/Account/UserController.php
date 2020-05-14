@@ -44,7 +44,7 @@ class UserController extends ApiController
             'account' => "required",
             'password' => 'required',
             'captcha' => ['sometimes', 'required', 'captcha']
-        ], ['account.required' => '用户名不能为空', 'password.required' => "密码不能为空", "captcha.required" => '验证码不能为空', 'captcha.captcha' => '验证码输入错误']);
+        ], ['account.required' => '用户名不能为空', 'password.required' => "密码不能为空", "captcha.required" => '验证码不能为空', 'captcha.captcha' => '图形验证码错误']);
         if ($token = $userService->login($request->all())) {
             return response()->json(['token' => $token]);
         } else {

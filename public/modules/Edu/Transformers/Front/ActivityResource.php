@@ -17,6 +17,7 @@ class ActivityResource extends JsonResource
     {
         $activity = parent::toArray($request);
         $activity['subject'] = $this->subject;
+        $activity['properties']['title'] = strip_tags($activity['properties']['title']);
         $activity['user'] = new UserResource($this->causer);
         return $activity;
     }

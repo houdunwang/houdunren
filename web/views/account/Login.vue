@@ -43,7 +43,7 @@ export default {
         captcha: [{ required: true, message: '验证码不能为空' }]
       },
       form: {
-        account: 'admin@houdunren.com',
+        account: '',
         password: '',
         captcha: ''
       }
