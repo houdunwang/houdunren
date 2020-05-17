@@ -9,6 +9,8 @@ class LessonObserver
 {
     public function created(Lesson $lesson)
     {
-        app(ActivityService::class)->save('lesson', 'created', $lesson, ['title' => $lesson['title']]);
+        $content = strip_tags($lesson['title']);
+        if ($content)
+            app(ActivityService::class)->save('lesson', 'created', $lesson, ['title' => $content]);
     }
 }

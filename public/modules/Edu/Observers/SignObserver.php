@@ -21,6 +21,8 @@ class SignObserver
         SignTotal::updateOrCreate(['user_id' => Auth::id(), 'site_id' => SITEID], $data);
 
         //动态
-        app(ActivityService::class)->save('sign', 'created', $sign, ['title' => $sign['content']]);
+        $content = strip_tags($sign['content']);
+        if ($content)
+            app(ActivityService::class)->save('sign', 'created', $sign, ['title' => $content]);
     }
 }

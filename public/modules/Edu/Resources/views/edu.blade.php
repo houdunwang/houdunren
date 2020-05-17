@@ -16,9 +16,9 @@
         <router-view></router-view>
     </div>
     <script src="https://cdn.bootcss.com/highlight.js/10.0.0/highlight.min.js"></script>
-    <script src="/modules/Edu/dist/js/manifest.js"></script>
-    <script src="/modules/Edu/dist/js/vendor.js"></script>
-    <script src="/modules/Edu/dist/js/app.js"></script>
+    <script src="/modules/Edu/dist/js/manifest.js?v={{ module()['version']}}"></script>
+    <script src="/modules/Edu/dist/js/vendor.js?v={{ module()['version'] }}"></script>
+    <script src="/modules/Edu/dist/js/app.js?v={{ module()['version'] }}"></script>
 </body>
 
 </html>

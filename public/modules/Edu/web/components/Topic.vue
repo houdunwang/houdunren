@@ -4,12 +4,11 @@
       <a-avatar :src="topic.user.avatar" :size="45" class="mr-3" shape="square" />
     </router-link>
     <div class="d-flex flex-column justify-content-between">
-      <router-link
-        :to="{ name: 'topic.show', params: { id: topic.id } }"
-        class="text-secondary h5"
-      >{{ topic.title }}</router-link>
+      <router-link :to="{ name: 'topic.show', params: { id: topic.id } }" class="text-secondary h5">{{
+        topic.title
+      }}</router-link>
       <span class="small text-black-50">
-        <router-link :to="{name:'center',params:{id:topic.user.id}}">{{ topic.user.name }}</router-link>
+        <router-link :to="{ name: 'center', params: { id: topic.user.id } }">{{ topic.user.name }}</router-link>
         . 发表于{{ topic.created_at | dateFormat('now') }}
         <span>. 评论 {{ topic.comment_count }}</span>
         <span>. 点赞 {{ topic.favour_count }}</span>

@@ -12,10 +12,9 @@
             <h4 class="pb-1 pt-3 mb-3 text-monospace text-black-50">{{ topic.title }}</h4>
             <div class="small text-secondary clearfix">
               <div class="float-left pt-2">
-                <router-link
-                  :to="`/edu/center/topic/${topic.user.id}`"
-                  class="text-success"
-                >{{ topic.user.name }}</router-link>
+                <router-link :to="`/edu/center/topic/${topic.user.id}`" class="text-success">{{
+                  topic.user.name
+                }}</router-link>
                 创建于{{ topic.created_at | dateFormat }}
                 <span class="pr-2 pl-2">/</span>
                 评论数{{ topic.comment_count }}
@@ -34,18 +33,22 @@
                     :class="{ 'btn-outline-info': topic.recommend }"
                     v-if="access.isAdmin()"
                     @click.prevent="commend"
-                  >推荐</button>
+                  >
+                    推荐
+                  </button>
                   <router-link
                     :to="{ name: 'topic.edit', params: { id: topic.id } }"
                     v-if="topic.user.id === user.id || access.isAdmin()"
                     class="btn btn-outline-success"
-                  >编辑</router-link>
+                    >编辑</router-link
+                  >
                   <a
                     href="#"
                     v-if="topic.user.id === user.id || access.isAdmin()"
                     class="btn btn-outline-danger"
                     @click.prevent="del(topic)"
-                  >删除</a>
+                    >删除</a
+                  >
                 </div>
                 <div class="btn-group btn-group-sm align-items-center mt-1 mt-md-0">
                   <button
@@ -62,15 +65,15 @@
                     :class="{ 'btn-outline-info': topic.is_favorite }"
                     type="button"
                     aria-label
-                  >{{ topic.favorite_count }}</button>
+                  >
+                    {{ topic.favorite_count }}
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-          <div
-            class="text-black-50 topic-content markdown bg-white"
-            v-html="content('.topic-content')"
-          ></div>
+          <div class="text-black-50 topic-content markdown bg-white" v-html="content('.topic-content')"></div>
+          <preview-image el=".topic-content" />
           <div class="mt-5 text-center border-top border-gary pt-5">
             <div class="favour btn-group mr-2" role="group" aria-label="First group">
               <button
@@ -85,7 +88,9 @@
                 @click.prevent="favour"
                 class="btn"
                 :class="{ 'btn-success': topic.is_favour, 'btn-outline-secondary': !topic.is_favour }"
-              >{{ topic.favour_count }}</button>
+              >
+                {{ topic.favour_count }}
+              </button>
             </div>
           </div>
           <div class="favour-list text-center pt-3 w-75 m-auto">
@@ -123,9 +128,9 @@ import access from '@/services/access'
 import Comment from '../components/Comment'
 import { mapState } from 'vuex'
 import Editor from '@toast-ui/editor'
-// import marked from 'marked'
+import PreviewImage from '@/components/PreviewImage'
 export default {
-  components: { Tips, User, Comment },
+  components: { Tips, User, Comment, PreviewImage },
   data() {
     return {
       topic: null,
@@ -150,6 +155,7 @@ export default {
     }
   },
   methods: {
+    //预览MARKDOWN内容
     content(el) {
       setTimeout(() => {
         const viewer = new Editor.factory({
@@ -157,6 +163,7 @@ export default {
           viewer: true,
           initialValue: this.topic.content
         })
+        this.previewImg()
       })
     },
     load() {

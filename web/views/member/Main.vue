@@ -33,7 +33,7 @@
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
-                  >向军大叔</a
+                  >{{ member.name }}</a
                 >
                 <div class="dropdown-menu" aria-labelledby="dropdownId" style="min-width:0px;">
                   <router-link class="dropdown-item mb-2 mt-2" :to="{ name: 'member.password' }">密码修改</router-link>

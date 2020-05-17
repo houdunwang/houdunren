@@ -9,6 +9,8 @@ class TopicObserver
 {
     public function created(Topic $topic)
     {
-        app(ActivityService::class)->save('topic', 'created', $topic, ['title' => $topic['title']]);
+        $content = strip_tags($topic['title']);
+        if ($content)
+            app(ActivityService::class)->save('topic', 'created', $topic, ['title' => $content]);
     }
 }

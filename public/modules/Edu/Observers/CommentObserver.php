@@ -4,6 +4,7 @@ namespace Modules\Edu\Observers;
 
 use App\Services\ActivityService;
 use Modules\Edu\Entities\Comment;
+use Parsedown;
 
 /**
  * 评论观察者
@@ -18,9 +19,13 @@ class CommentObserver
      */
     public function created(Comment $comment)
     {
-        app(ActivityService::class)->save('comment', 'created', $comment, [
-            'title' => $comment['content'],
-            'type' => $comment['comment_type']
-        ]);
+        $Parsedown = new Parsedown();
+        $content = strip_tags($Parsedown->text($comment['content']));
+        if ($content) {
+            app(ActivityService::class)->save('comment', 'created', $comment, [
+                'title' => $content,
+                'type' => $comment['comment_type']
+            ]);
+        }
     }
 }

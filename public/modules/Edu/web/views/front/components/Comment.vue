@@ -1,19 +1,11 @@
 <template>
-  <div>
-    <div
-      class="card shadow-sm mb-2"
-      v-for="(comment, index) in comments"
-      :key="index"
-      :id="`comment-${comment.id}`"
-    >
+  <div class="comment-list">
+    <div class="card shadow-sm mb-2" v-for="(comment, index) in comments" :key="index" :id="`comment-${comment.id}`">
       <div class="card-header bg-white d-flex justify-content-start">
-        <img
-          :src="comment.user.avatar || `/images/avatar.jpg`"
-          class="avatar rounded img-thumbnail mr-3"
-        />
+        <img :src="comment.user.avatar || `/images/avatar.jpg`" class="avatar rounded img-thumbnail mr-3" />
         <div class="flex-fill">
           <div class="text-secondary">
-            <router-link :to="{name:'center',params:{id:comment.user.id}}">{{ comment.user.name }}</router-link>
+            <router-link :to="{ name: 'center', params: { id: comment.user.id } }">{{ comment.user.name }}</router-link>
           </div>
           <span class="small text-black-50">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -23,20 +15,15 @@
       </div>
       <div class="card-body text-secondary pb-5 markdown">
         <a href="#" class v-if="comment.reply">@{{ comment.reply.name }}</a>
-        <p
-          class="d-inline-block"
-          v-html="content(`#c${comment.id}`,comment.content)"
-          :id="`c${comment.id}`"
-        >{{comment.content}}</p>
+        <p class="d-inline-block" v-html="content(`#c${comment.id}`, comment.content)" :id="`c${comment.id}`">
+          {{ comment.content }}
+        </p>
       </div>
       <div class="card-footer text-muted bg-white small">
         # {{ index + 1 }}
-        <a
-          href="#"
-          class="ml-2 mr-2"
-          v-if="comment.id"
-          @click.prevent="favour(comment)"
-        >{{ comment.favour_count ? comment.favour_count : 0 }}个赞</a>
+        <a href="#" class="ml-2 mr-2" v-if="comment.id" @click.prevent="favour(comment)"
+          >{{ comment.favour_count ? comment.favour_count : 0 }}个赞</a
+        >
 
         <a
           href="#"
@@ -72,6 +59,7 @@
         <span class="small text-secondary">评论发布时间间隔 20 秒</span>
       </div>
     </div>
+    <preview-image el=".comment-list" />
   </div>
 </template>
 
@@ -79,8 +67,10 @@
 import Editor from '@/components/Editor'
 import ToastEditor from '@toast-ui/editor'
 import { mapState, mapGetters } from 'vuex'
+import PreviewImage from '@/components/PreviewImage'
+
 export default {
-  components: { Editor },
+  components: { Editor, PreviewImage },
   props: {
     action: String,
     comments: Array
