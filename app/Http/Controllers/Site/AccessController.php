@@ -24,19 +24,6 @@ class AccessController extends ApiController
     }
 
     /**
-     * 站点权限列表
-     * @param Site $site
-     * @param ModuleService $ModuleService
-     *
-     * @return mixed
-     */
-    // public function site(Site $site, ModuleService $ModuleService, AccessService $AccessService)
-    // {
-    //     $AccessService->updateSitePermission($site);
-    //     return $this->json($ModuleService->getSiteModule($site));
-    // }
-
-    /**
      * 获取用户站点权限
      * @param Site $site
      * @param User $user

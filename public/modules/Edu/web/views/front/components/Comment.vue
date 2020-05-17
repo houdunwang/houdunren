@@ -23,7 +23,11 @@
       </div>
       <div class="card-body text-secondary pb-5 markdown">
         <a href="#" class v-if="comment.reply">@{{ comment.reply.name }}</a>
-        <p v-html="comment.content" class="d-inline-block"></p>
+        <p
+          class="d-inline-block"
+          v-html="content(`#c${comment.id}`,comment.content)"
+          :id="`c${comment.id}`"
+        >{{comment.content}}</p>
       </div>
       <div class="card-footer text-muted bg-white small">
         # {{ index + 1 }}
@@ -73,6 +77,7 @@
 
 <script>
 import Editor from '@/components/Editor'
+import ToastEditor from '@toast-ui/editor'
 import { mapState, mapGetters } from 'vuex'
 export default {
   components: { Editor },
@@ -97,6 +102,16 @@ export default {
     this.scrollToComment()
   },
   methods: {
+    //显示内容
+    content(el, content) {
+      setTimeout(() => {
+        const viewer = new ToastEditor.factory({
+          el: document.querySelector(el),
+          viewer: true,
+          initialValue: content
+        })
+      })
+    },
     //滚动到评论
     scrollToComment() {
       const el = `#comment-${this.$route.query.comment}`

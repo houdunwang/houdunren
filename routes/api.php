@@ -10,6 +10,7 @@ Route::group(['namespace' => 'Common', 'prefix' => 'common'], function () {
     Route::get('captcha/text', 'CaptchaController@make');
     Route::get('captcha/image', 'CaptchaController@image');
 });
+
 //登录注册
 Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
     //登录注册
@@ -20,6 +21,7 @@ Route::group(['namespace' => 'Account', 'prefix' => 'account'], function () {
     Route::post('has', 'UserController@has')->middleware('front');
     Route::post('findPassword', 'UserController@findPassword')->middleware('front');
 });
+
 //会员中心
 Route::group(['middleware' => ['auth:sanctum', 'front'], 'namespace' => 'Member', 'prefix' => 'member'], function () {
     //修改资料
@@ -30,6 +32,7 @@ Route::group(['middleware' => ['auth:sanctum', 'front'], 'namespace' => 'Member'
     Route::put('email', 'UserController@email');
     Route::get('access', 'AccessController@get');
 });
+
 //系统服务
 Route::group(['middleware' => ['auth:sanctum'], 'namespace' => 'System', 'prefix' => 'system'], function () {
     //套餐管理
@@ -47,7 +50,10 @@ Route::group(['middleware' => ['auth:sanctum'], 'namespace' => 'System', 'prefix
     Route::get('module/installed', 'ModuleController@installed');
     //我的资料
     Route::apiResource('user', 'UserController');
+    //更新系统
+    Route::get('update', 'UpdateController@make');
 });
+
 //站点服务
 Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'Site', 'prefix' => 'site'], function () {
     Route::apiResource('site', 'SiteController');
@@ -79,6 +85,7 @@ Route::group(['middleware' => 'auth:sanctum', 'namespace' => 'Site', 'prefix' =>
     //更新站点缓存
     Route::put('{site}/cache', 'CacheController@update');
 });
+
 //前台服务
 Route::group(['middleware' => ['front'], 'namespace' => 'Front', 'prefix' => 'front'], function () {
     Route::get('menu/member/{module}', 'MenuController@member');
@@ -86,6 +93,7 @@ Route::group(['middleware' => ['front'], 'namespace' => 'Front', 'prefix' => 'fr
     Route::get('site', 'SiteController@get');
     Route::get('module', 'ModuleController@get');
 });
+
 //后台模块服务
 Route::group(['middleware' => ['auth:sanctum', 'site'], 'namespace' => 'Module', 'prefix' => 'module'], function () {
     Route::get('{site}/site', 'SiteController@get');

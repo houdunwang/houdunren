@@ -76,7 +76,6 @@ _axios.interceptors.response.use(
           //其它错误消息直接显示错误信息
           let message = error.response.data.message
           message = message ? message : httpStatus(error.response.status)
-
           Modal.warning({
             title: '温馨提示',
             content: message,

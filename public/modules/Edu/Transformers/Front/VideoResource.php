@@ -22,7 +22,9 @@ class VideoResource extends JsonResource
         $resource =  parent::toArray($request);
         $resource['is_favour'] = Auth::check() ? $this->isFavour(Auth::user()) : false;
         $resource['is_favorite'] = Auth::check() ? $this->isFavorite(Auth::user()) : false;
-        $resource['lesson'] = $this->lesson()->with('video')->first();
+        $resource['lesson'] = $this->lesson()->with(['video' => function ($query) {
+            $query->select('id', 'title', 'lesson_id')->orderBy('rank', 'asc');
+        }])->first();
         return $resource;
     }
 }

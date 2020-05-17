@@ -47,11 +47,11 @@
                   v-if="lesson.download_address"
                   @click="downloadModal = true"
                 >下载高清版</button>
-                <a-modal
-                  v-model="downloadModal"
-                  title="下载高清版"
-                  :footer="null"
-                >{{ lesson.download_address }}</a-modal>
+                <a-modal v-model="downloadModal" title="下载高清版" :footer="null">
+                  {{
+                  lesson.download_address
+                  }}
+                </a-modal>
               </div>
               <div class="btn-group btn-group-sm align-items-center mt-1 mt-md-0">
                 <button
@@ -153,20 +153,20 @@ export default {
     }
   },
   methods: {
-    async load(id) {
-      Promise.all([
-        this.axios.get(`edu/front/video/${id}`).then(r => r.data),
-        this.axios.get(`edu/front/video/comment/${id}`).then(r => r.data)
-      ])
+    load(id) {
+      this.axios
+        .get(`edu/front/video/${id}`)
         .then(response => {
-          this.$set(this, 'lesson', response[0].lesson)
-          this.$set(this, 'field', response[0])
-          this.$set(this, 'comments', response[1])
-          this.$scrollTo('body')
+          this.$set(this, 'lesson', response.data.lesson)
+          this.$set(this, 'field', response.data)
         })
         .catch(error => {
-          this.$router.push({ name: `subscribe` })
+          if (error.response.status == 403) this.$router.push({ name: `subscribe` })
         })
+      this.axios.get(`edu/front/video/comment/${id}`).then(response => {
+        this.$set(this, 'comments', response.data)
+        this.$scrollTo('body')
+      })
     },
     async favour() {
       let response = await this.axios.get(`edu/front/video/favour/${this.field.id}`)

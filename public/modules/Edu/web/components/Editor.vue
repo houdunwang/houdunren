@@ -42,12 +42,12 @@ export default {
         initialValue: this.initialValue,
         language: 'zh',
         plugins: [Editor.codeSyntaxHighlight],
-        placeholder: '支持托放与粘贴上传图片',
+        placeholder: '',
         events: {
           //监听编辑器输入
           change: function() {
             // Vue.$emit('contentChange', editor.getHtml())
-            Vue.$emit('update:field', editor.getHtml())
+            Vue.$emit('update:field', editor.getMarkdown())
           }
         },
         hooks: {

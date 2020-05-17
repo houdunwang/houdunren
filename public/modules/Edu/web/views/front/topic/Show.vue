@@ -69,8 +69,7 @@
           </div>
           <div
             class="text-black-50 topic-content markdown bg-white"
-            v-html="topic.content"
-            v-highlight
+            v-html="content('.topic-content')"
           ></div>
           <div class="mt-5 text-center border-top border-gary pt-5">
             <div class="favour btn-group mr-2" role="group" aria-label="First group">
@@ -123,6 +122,8 @@ import Tips from '../components/Tips'
 import access from '@/services/access'
 import Comment from '../components/Comment'
 import { mapState } from 'vuex'
+import Editor from '@toast-ui/editor'
+// import marked from 'marked'
 export default {
   components: { Tips, User, Comment },
   data() {
@@ -149,14 +150,23 @@ export default {
     }
   },
   methods: {
-    async load() {
+    content(el) {
+      setTimeout(() => {
+        const viewer = new Editor.factory({
+          el: document.querySelector(el),
+          viewer: true,
+          initialValue: this.topic.content
+        })
+      })
+    },
+    load() {
       let id = this.$route.params.id
-      let response = await Promise.all([
-        this.axios.get(`edu/front/topic/${id}`),
-        this.axios.get(`edu/front/topic/comment/${id}`)
-      ])
-      this.$set(this, 'topic', response[0].data)
-      this.$set(this, 'comments', response[1].data)
+      this.axios.get(`edu/front/topic/${id}`).then(response => {
+        this.$set(this, 'topic', response.data)
+      })
+      this.axios.get(`edu/front/topic/comment/${id}`).then(response => {
+        this.$set(this, 'comments', response.data)
+      })
     },
     async del(topic) {
       this.$confirm({

@@ -49,7 +49,7 @@ class UserController extends ApiController
      */
     public function learnHistory()
     {
-        $logs = UserVideo::limit(10)->with(['user:id,avatar,name', 'video'])->get();
+        $logs = UserVideo::limit(10)->with(['user:id,avatar,name', 'video:id,title'])->latest()->get();
         return $this->json($logs);
     }
 }
