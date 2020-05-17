@@ -33,8 +33,8 @@ export default {
           .querySelectorAll('img')
           .forEach(img => {
             img.addEventListener('click', () => {
-              if (document.documentElement.clientWidth > 1000) {
-                this.preview.width = '60%'
+              if (document.documentElement.clientWidth > 800) {
+                this.preview.width = Math.min(img.naturalWidth, document.documentElement.clientWidth * 0.8)
               }
               if (img.naturalWidth > img.width) {
                 this.preview.show = true
@@ -42,7 +42,7 @@ export default {
               }
             })
           })
-      })
+      }, 1000)
     }
   }
 }

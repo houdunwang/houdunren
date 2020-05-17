@@ -14035,54 +14035,69 @@ a.text-dark:focus {
   }
 }
 
-.markdown {
-  color: #636b6f !important;
+.tui-editor-contents {
+  font-size: 15px !important;
   line-height: 1.8em;
 }
 
-.markdown img {
+.tui-editor-contents img {
   max-width: 100%;
 }
 
-.markdown h1,
-.markdown h2 {
-  font-size: 1.3em;
-  border-bottom: solid 1px #dddddd;
+.tui-editor-contents h1,
+.tui-editor-contents h2 {
+  color: #636b6f !important;
+  border-bottom: solid 1px #dddddd !important;
   padding-bottom: 15px !important;
   margin-top: 40px;
   margin-bottom: 20px;
 }
 
-.markdown h3,
-.markdown h4,
-.markdown h5,
-.markdown h6 {
-  font-size: 1.2em;
+.tui-editor-contents h1 {
+  font-size: 1.5em !important;
+}
+
+.tui-editor-contents h2 {
+  font-size: 1.3em !important;
+}
+
+.tui-editor-contents h3,
+.tui-editor-contents h4,
+.tui-editor-contents h5,
+.tui-editor-contents h6 {
+  font-size: 1.2em !important;
   font-weight: bold;
   margin-top: 20px;
   margin-bottom: 20px;
+  color: #636b6f !important;
 }
 
-.markdown table {
+.tui-editor-contents p {
+  color: #636b6f !important;
+  font-size: 1em !important;
+}
+
+.tui-editor-contents table {
   width: 100%;
 }
 
-.markdown table th {
-  background: #f3f3f3;
+.tui-editor-contents table th {
+  background-color: #f3f3f3 !important;
+  color: #636b6f !important;
 }
 
-.markdown table td,
-.markdown table th {
-  border: solid 1px #ddd;
+.tui-editor-contents table td,
+.tui-editor-contents table th {
+  border: solid 1px #ddd !important;
   padding: 10px;
 }
 
-.markdown pre {
+.tui-editor-contents pre {
   word-break: break-word;
   background-color: #363f52;
 }
 
-.markdown pre code {
+.tui-editor-contents pre code {
   word-break: break-word;
   white-space: pre-wrap;
   background-color: #363f52;

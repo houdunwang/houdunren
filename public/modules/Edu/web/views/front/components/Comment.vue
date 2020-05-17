@@ -100,6 +100,7 @@ export default {
           viewer: true,
           initialValue: content
         })
+        // document.querySelector('.tui-editor-contents').classList.remove('tui-editor-contents')
       })
     },
     //滚动到评论

@@ -163,7 +163,7 @@ export default {
           viewer: true,
           initialValue: this.topic.content
         })
-        this.previewImg()
+        // document.querySelector('.tui-editor-contents').classList.remove('tui-editor-contents')
       })
     },
     load() {
