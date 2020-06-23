@@ -5,7 +5,6 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
-
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -25,10 +24,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Gate::guessPolicyNamesUsing(function ($modelClass) {
-            //模块与主应用统一处理
-            $class = str_replace(['Entities', 'Models'], 'Policies', $modelClass) . 'Policy';
-            return $class;
-        });
+
+        //
     }
 }

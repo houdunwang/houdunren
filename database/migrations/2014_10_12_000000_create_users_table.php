@@ -6,15 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id('id');
             $table->string('name')->nullable()->comment('昵称');
             $table->string('email')->nullable()->unique();
             $table->string('mobile')->nullable()->unique();
@@ -27,14 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('github')->nullable()->comment('GITHUB');
             $table->string('qq')->nullable()->comment('QQ');
             $table->string('wakatime')->nullable()->comment('wakatime');
-            $table->unsignedTinyInteger('lock')->nullable()->comment('用户锁定');
-            $table->unsignedInteger('credit1')->nullable();
-            $table->unsignedInteger('credit2')->nullable();
-            $table->unsignedInteger('credit3')->nullable();
-            $table->unsignedInteger('credit4')->nullable();
-            $table->unsignedInteger('credit5')->nullable();
-            $table->unsignedInteger('credit6')->nullable();
-            $table->unsignedTinyInteger('is_super_admin')->nullable()->index()->comment('超级管理员');
             $table->timestamp('email_verified_at')->nullable()->comment('邮箱验证时间');
             $table->timestamp('mobile_verified_at')->nullable()->comment('手机验证时间');
             $table->rememberToken();

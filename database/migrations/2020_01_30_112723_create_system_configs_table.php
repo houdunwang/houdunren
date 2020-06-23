@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateSystemConfigsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * 系统配置
      *
      * @return void
      */

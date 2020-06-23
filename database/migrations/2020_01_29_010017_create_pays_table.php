@@ -6,22 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePaysTable extends Migration
 {
-    /**
-     * 支付
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('pays', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id('id');
             $table->timestamps();
-            $table->unsignedInteger('user_id')->index();
-            $table->unsignedBigInteger('site_id')->nullable()->comment('站点编号');
-            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
-            $table->unsignedBigInteger('module_id')->nullable()->comment('模块编号');
-            $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('site_id')->constrained();
+            $table->foreignId('module_id')->constrained();
             $table->tinyInteger('status')->default(0)->comment('定单状态');
             $table->string('trade_no')->nullable()->comment('交易号');
             $table->string('sn')->comment('商户定单号');

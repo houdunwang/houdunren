@@ -3,27 +3,11 @@
 namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
-use Intervention\Image\ImageManager;
+use Illuminate\Http\Request;
 
-/**
- * 验证码
- * Class CaptchaController
- */
 class CaptchaController extends Controller
 {
-    /**
-     * BASE64验证码
-     * @return void
-     */
-    // public function text(CaptchaService $captchaService)
-    // {
-    //     return $captchaService->make();
-    // }
-    /**
-     * 图片验证码
-     * @return array|ImageManager|mixed
-     */
-    public function image()
+    public function make()
     {
         return captcha();
     }

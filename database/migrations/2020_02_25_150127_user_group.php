@@ -4,20 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * 用户套餐组表
+ * @package
+ */
 class UserGroup extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('user_group', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->nullable()->comment('用户编号');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('group_id')->nullable()->comment('组编号');
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('group_id')->constrained();
         });
     }
 

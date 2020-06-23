@@ -1,20 +1,15 @@
 <?php
 
-use App\Http\Controllers\Front\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('login', 'hd')->name('login');
-Route::view('{any}', 'hd')->where(
-    'any',
-    '^(account|register|login|logout|member|admin|site|system).*'
-);
+Route::get('/', function () {
+    return 'home';
+});
 
-//前台
-Route::group(['middleware' => ['front'], 'namespace' => 'Front'], function () {
-    Route::get('/', 'HomeController@index');
-    Route::get('home', 'HomeController@index');
-    // //没有匹配路由时最后执行，主要是提升模块路由优先级
-    Route::fallback(function () {
-        return app(HomeController::class)->index();
-    });
+Route::group(['namespace' => 'Common', 'prefix' => "common"], function () {
+    Route::get('captcha', 'CaptchaController@make');
+});
+
+Route::group(['namespace' => 'Account'], function () {
+    Route::resource('login', 'LoginController');
 });

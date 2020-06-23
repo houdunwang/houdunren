@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateWeChatsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * 微信帐户
      *
      * @return void
      */
@@ -16,8 +16,7 @@ class CreateWeChatsTable extends Migration
         Schema::create('we_chats', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->unsignedBigInteger('site_id')->nullable()->comment('站点编号');
-            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
+            $table->foreignId('site_id')->constrained();
             $table->text('config')->nullable()->comment('配置');
         });
     }

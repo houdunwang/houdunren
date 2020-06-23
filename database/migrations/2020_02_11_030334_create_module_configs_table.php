@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateModuleConfigsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * 模块配置
      *
      * @return void
      */
@@ -17,10 +17,8 @@ class CreateModuleConfigsTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->text('config')->nullable()->comment('配置');
-            $table->unsignedBigInteger('site_id')->nullable()->comment('站点编号');
-            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
-            $table->unsignedBigInteger('module_id')->nullable()->comment('模块编号');
-            $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
+            $table->foreignId('site_id')->constrained();
+            $table->foreignId('module_id')->constrained();
         });
     }
 
