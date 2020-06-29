@@ -6,8 +6,7 @@ return [
         'length' => 4,
         'width' => 120,
         'height' => 36,
-        'quality' => 100,
-        'math' => false,
+        'quality' => 90,
     ],
     'math' => [
         'length' => 9,
@@ -15,6 +14,9 @@ return [
         'height' => 36,
         'quality' => 90,
         'math' => true,
+        'sensitive' => true,
+        'angle' => 42,
+        'sharpen' => 10,
     ],
 
     'flat' => [

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\System;
 
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Controller;
 use App\Package;
 use Illuminate\Http\Request;
 
-class PackageController extends ApiController
+class PackageController extends Controller
 {
     public function index()
     {

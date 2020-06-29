@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    </head>
+    <body>
+        <tempalte id="hd"> </tempalte>
+
+        <div id="app">
+            {{ form.name }}
+            <hd :form.sync="form"></hd>
+        </div>
+    </body>
+    <script>
+        let f = {
+            tempalte: "<div></div>",
+            methods: {
+                show() {
+                    alert(33);
+                }
+            }
+        };
+        Vue.component("hd", {
+            props: ["form"],
+            extends: f,
+            computed: {
+                age: {
+                    get() {
+                        return this.form.name;
+                    },
+                    set(val) {
+                        this.$emit("update:form.name", val);
+                    }
+                }
+            },
+            template: `
+            <div>
+                <input v-model="age"/>
+                <button type="button" @click="show">whow</button>
+            </div>
+            `
+        });
+
+        new Vue({
+            el: "#app",
+            data: {
+                form: {
+                    name: "33"
+                }
+            }
+        });
+    </script>
+</html>

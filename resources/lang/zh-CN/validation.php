@@ -117,6 +117,7 @@ return [
     'url'         => ':attribute 格式不正确。',
     'uuid'        => ':attribute 必须是有效的 UUID。',
     'captcha'     => ':attribute 输入错误',
+    'mobile'     => ':attribute 输入错误',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -147,8 +148,9 @@ return [
     */
 
     'attributes' => [
+        'code'                  => '验证码',
         'captcha'               => '图形验证码',
-        'account' => '帐号',
+        'account'               => '帐号',
         //系统
         'name'                  => '名称',
         'username'              => '用户名',

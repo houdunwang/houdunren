@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,6 +51,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof ThrottleRequestsException) {
+            return response()->json(['message' => '请求次数过多'], 429)->withHeaders($exception->getHeaders());
+        }
+
         return parent::render($request, $exception);
     }
 }
