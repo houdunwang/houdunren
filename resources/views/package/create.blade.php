@@ -10,7 +10,7 @@
             套餐设置
         </div>
         <div class="card-body">
-            <x-input title="套餐名称" name="title" required class="col-12 col-md-8"></x-input>
+            <x-form title="套餐名称" name="title" required class="col-12 col-md-8"></x-form>
         </div>
     </div>
 

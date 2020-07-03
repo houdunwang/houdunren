@@ -5,7 +5,6 @@ import store from '../store'
 import el from 'element-ui'
 import httpStatus from '../plugins/httpStatus'
 // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-
 let config = { baseURL: '/', timeout: '5*1000' }
 const _axios = axios.create(config)
 

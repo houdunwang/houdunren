@@ -2,6 +2,7 @@
     <a class="nav-link" href="{{ route('admin.setting') }}">
         <i class="fa fa-home" aria-hidden="true"></i>
     </a>
+
     <a class="nav-link {{ active_class(if_route('admin.package.index'))}}" href="{{ route('admin.package.index') }}">
         套餐列表
     </a>

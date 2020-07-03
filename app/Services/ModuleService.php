@@ -29,6 +29,7 @@ class ModuleService
         return $config + [
             'id' => $model['id'] ?? 0,
             'name' => $name,
+            'preview' => "/modules/{$name}/static/preview.jpg",
             'installed' => (bool) $model,
             'module' => $module
         ];

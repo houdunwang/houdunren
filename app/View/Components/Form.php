@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class input extends Component
+class Form extends Component
 {
     protected $theme;
 
@@ -15,6 +15,6 @@ class input extends Component
 
     public function render()
     {
-        return view('components.' . $this->theme);
+        return view('components.form.' . $this->theme);
     }
 }

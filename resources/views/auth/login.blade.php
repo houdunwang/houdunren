@@ -8,9 +8,9 @@
             会员登录
         </div>
         <div class="card-body">
-            <x-input name="mobile" title="手机号" placeholder="请输入手机号码" required></x-input>
-            <x-input type="password" name="password" title="密码" placeholder="登录密码"></x-input>
-            <x-input-captcha></x-input-captcha>
+            <x-form name="mobile" title="手机号" placeholder="请输入手机号码" required></x-form>
+            <x-form type="password" name="password" title="密码" placeholder="登录密码"></x-form>
+            <x-form theme="captcha"></x-form>
 
             <div class="form-check">
                 <label class="form-check-label">

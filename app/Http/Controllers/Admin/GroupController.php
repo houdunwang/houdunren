@@ -2,85 +2,49 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Group;
+use App\Models\Group;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GroupRequest;
+use App\Models\Package;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return view('group.index', ['groups' => Group::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('group.create', ['packages' => Package::all()]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(GroupRequest $request)
     {
-        //
+        Group::create($request->input());
+        return redirect()->route('admin.group.index')->with('succes', '会员组添加成功');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Group  $group
-     * @return \Illuminate\Http\Response
-     */
     public function show(Group $group)
     {
-        //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Group  $group
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Group $group)
     {
-        //
+        return view('group.edit', ['packages' => Package::all(), 'group' => $group]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Group  $group
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Group $group)
     {
-        //
+        $group->fill($request->input())->save();
+        $group->packages()->sync($request->packages);
+        return redirect()->route('admin.group.index')->with('success', '会员组修改成功');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Group  $group
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Group $group)
     {
-        //
+        $group->delete();
+        return response()->json(['success' => '会员组删除成功']);
     }
 }

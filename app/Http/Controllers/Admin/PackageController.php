@@ -40,9 +40,11 @@ class PackageController extends Controller
     public function update(PackageRequest $request, Package $package)
     {
         $package->fill($request->input())->save();
+        $package->modules()->sync($request->input('modules'));
 
         return redirect()->route('admin.package.index')->with('success', '套餐修改成功');
     }
+
     public function destroy(Package $package)
     {
         if ($package->id == 1) {

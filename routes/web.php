@@ -23,5 +23,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'],  'namespace' => 'Ad
     Route::get('module/install/{name}', 'ModuleController@install')->name('module.install');
     Route::delete('module/uninstall/{module:name}', 'ModuleController@uninstall')->name('module.uninstall');
 
-    Route::resource('package', 'PackageController');
+    Route::resource('package', 'PackageController')->except(['show']);
+    Route::get('config/edit', 'ConfigController@edit')->name('config.edit');
+    Route::put('config/edit', 'ConfigController@update')->name('config.update');
+    Route::any('config/upload', 'ConfigController@upload')->name('config.upload');
+
+    Route::resource('group', 'GroupController');
 });
