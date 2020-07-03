@@ -4,7 +4,7 @@ import Loading from './loading'
 import store from '../store'
 import el from 'element-ui'
 import httpStatus from '../plugins/httpStatus'
-axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+// axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 let config = { baseURL: '/', timeout: '5*1000' }
 const _axios = axios.create(config)
@@ -16,33 +16,33 @@ Object.defineProperties(Vue.prototype, {
     get() {
       return _axios
     },
-    set(v) {}
-  }
+    set(v) {},
+  },
 })
 
 _axios.interceptors.request.use(
-  function(config) {
+  function (config) {
     Loading.open()
 
     return config
   },
-  function(error) {
+  function (error) {
     return Promise.reject(error)
   }
 )
 
 _axios.interceptors.response.use(
-  function(response) {
+  function (response) {
     Loading.close()
     if (response.data.message) {
       el.Message({
         message: response.data.message,
-        type: 'success'
+        type: 'success',
       })
     }
     return response.data
   },
-  function(error) {
+  function (error) {
     Loading.close()
     let status = error.response.status
     let data = error.response.data
@@ -55,15 +55,15 @@ _axios.interceptors.response.use(
         el.MessageBox.confirm(data.message, '温馨提示', {
           showCancelButton: false,
           confirmButtonText: '关闭',
-          type: 'warning'
+          type: 'warning',
         })
         break
       default:
         let message = data.message
-        el.MessageBox.confirm(message ? message : httpStatus(status), '温馨提示', {
+        el.MessageBox.confirm(httpStatus(status) || message, '温馨提示', {
           showCancelButton: false,
           confirmButtonText: '关闭',
-          type: 'warning'
+          type: 'warning',
         })
         break
     }

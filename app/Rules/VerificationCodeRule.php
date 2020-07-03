@@ -7,15 +7,15 @@ use Illuminate\Contracts\Validation\Rule;
 
 class VerificationCodeRule implements Rule
 {
-    protected $account;
+    protected $mobile;
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct($account)
+    public function __construct($mobile)
     {
-        $this->account = $account;
+        $this->mobile = $mobile;
     }
 
     /**
@@ -27,7 +27,7 @@ class VerificationCodeRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return app(CodeService::class)->check($this->account, $value);
+        return app(CodeService::class)->check($this->mobile, $value);
     }
 
     /**

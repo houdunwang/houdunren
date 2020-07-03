@@ -1,0 +1,64 @@
+body {
+  background: #fafafa;
+}
+.admin {
+  min-height: 100vh;
+  background: url('/images/admin-bg.jpg');
+  background-size: cover;
+  .admin-header {
+    .bg-dark {
+      background: #353738 !important;
+    }
+  }
+  .quick-menu {
+    .logo {
+      img {
+        max-width: 400px;
+      }
+    }
+    .menu-items {
+      a {
+        color: #333;
+        background: #fff;
+        padding: 10px 20px;
+        border-radius: 6px;
+        opacity: 0.7;
+        width: 8rem;
+        &:hover {
+          opacity: 0.9;
+        }
+        i {
+          font-size: 30px;
+          margin-bottom: 5px;
+        }
+        span {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  //系统菜单页面
+  .admin-setting {
+    h6 {
+      border-left: solid 5px #333;
+    }
+    .system-menu {
+      width: 8rem;
+    }
+  }
+
+  //模块列表
+  .admin-module-index {
+    section {
+      img {
+        width: 50px;
+      }
+      &:last-child {
+        border-bottom: none !important;
+        // margin-bottom: 0 !important;
+        // padding-bottom: 0 !important;
+      }
+    }
+  }
+}

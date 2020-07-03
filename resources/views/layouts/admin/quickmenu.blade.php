@@ -1,0 +1,22 @@
+<div class="d-none d-md-block">
+    <div class="quick-menu pt-5 m-3 d-flex justify-content-between">
+        <div class="logo">
+            <img src="/images/logo.png" alt="">
+        </div>
+        <div class="menu-items d-flex justify-content-between align-items-center">
+            <a href="{{ route('admin.index') }}" class="shadow d-flex flex-column align-items-center ml-3">
+                <i class="fa fa-sitemap fa-2x" aria-hidden="true"></i>
+                <span>网站管理</span>
+            </a>
+            <a href="{{ route('admin.setting') }}" class="shadow d-flex flex-column align-items-center ml-3">
+                <i class="fa fa-support fa-2x" aria-hidden="true"></i>
+                <span>系统设置</span>
+            </a>
+            <a href="{{ route('logout') }}" class="shadow d-flex flex-column align-items-center ml-3">
+                <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>
+                <span>退出</span>
+            </a>
+        </div>
+    </div>
+
+</div>

@@ -2,7 +2,7 @@
     <div>
         <div class="form-group">
             <label for="account">帐号</label>
-            <input type="text" class="form-control @error('account')is-invalid @enderror" name="account" id="account"
+            <input type="text" class="form-control  @error('account')is-invalid @enderror" name="account" id="account"
                 placeholder="请输入邮箱或手机" v-model="account">
             @error( 'account' )
             <strong class="form-text text-danger invalid-feedback">{{ $message }}</strong>

@@ -1,4 +1,4 @@
-export default status => {
+export default (status) => {
   let message = ''
   switch (status) {
     case 400:
@@ -11,7 +11,7 @@ export default status => {
       message = '没有访问权限(403)'
       break
     case 404:
-      message = '访问页面不存在(404)'
+      message = '请求资源不存在(404)'
       break
     case 408:
       message = '请求超时(408)'

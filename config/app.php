@@ -106,7 +106,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'zh_CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -135,6 +135,7 @@ return [
     */
 
     'providers' => [
+        HieuLe\Active\ActiveServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         /*
@@ -191,7 +192,8 @@ return [
     */
 
     'aliases' => [
-
+        'Active' => HieuLe\Active\Facades\Active::class,
+        //
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
