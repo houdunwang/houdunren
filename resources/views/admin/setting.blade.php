@@ -16,7 +16,7 @@
     <h6 class="mb-3 pl-3 bl-5">用户管理</h6>
     <section class="d-flex flex-wrap">
 
-        <a href=""
+        <a href="{{ route('admin.my.edit') }}"
             class="text-dark system-menu d-flex flex-column justify-content-center align-items-center bg-white shadow-sm rounded border p-3 mr-3 mb-2">
             <i class="fa fa-2x d-block fa-briefcase" aria-hidden="true"></i>
             我的帐户

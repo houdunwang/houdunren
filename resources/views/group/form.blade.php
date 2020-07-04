@@ -37,7 +37,7 @@
                         @endif
 
                     </td>
-                    <td> {{ $package->id }}</td>
+                    <td>{{ $package->id }}</td>
                     <td>{{ $package->title }}</td>
                     <td>
                         @foreach($package->modules as $module)

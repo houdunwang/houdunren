@@ -11,6 +11,7 @@
                 <th width="80">编号</th>
                 <th width="300">会员组</th>
                 <th>可用套餐</th>
+                <th>可用模块</th>
                 <th>可创建站目点数量</th>
                 <th width="120">操作</th>
             </tr>
@@ -22,7 +23,13 @@
                 <td> {{ $group->title }}</td>
                 <td>
                     @foreach ($group->packages as $package)
-                    <span class="badge badge-success mr-2">{{ $package->title }}</span>
+                    <a href="{{ route('admin.package.edit',$package) }}"
+                        class="badge badge-success mr-2">{{ $package->title }}</a>
+                    @endforeach
+                </td>
+                <td>
+                    @foreach ($group->modules as $module)
+                    <a href="{{ route('admin.module') }}" class="badge badge-info mr-2">{{ $module->title }}</a>
                     @endforeach
                 </td>
                 <td> {{ $group->site_num }}</td>

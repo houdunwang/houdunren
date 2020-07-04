@@ -9,7 +9,7 @@
         系统配置
     </a>
 </nav>
-<form action="{{ route('admin.config.update') }}">
+<form action="{{ route('admin.config.update') }}" method="post">
     @csrf
     @method('PUT')
 
@@ -18,14 +18,14 @@
             系统配置
         </div>
         <div class="card-body">
-            <x-form type="text" name="title" title="后台名称" class="col-12 col-sm-6"></x-form>
+            <x-form type="text" name="title" title="后台名称" class="col-12 col-sm-6" value="{{ config('admin.title') }}">
+            </x-form>
 
-            <x-form theme="image-single" action="{{ route('admin.config.upload') }}" title="后台标志" name="logo"
-                class="col-12 col-sm-6"></x-form>
+            <x-form theme="image" action="{{ route('admin.config.upload') }}" title="后台标志" name="logo"
+                class="col-12 col-sm-6" value="{{ config('admin.logo') }}"></x-form>
 
-            <x-form theme="textarea" type="text" name="title" title="后台页脚" class="col-12 col-sm-6">
-                后盾人 人人做后盾 <br /> Powered by hdcms v6 © 2014-2020 www.hdcms.com
-                {{ config('app.name') }}
+            <x-form theme="textarea" type="text" name="copyright" title="后台页脚" class="col-12 col-sm-6">
+                {{ config('admin.copyright') }}
             </x-form>
         </div>
         <div class="card-footer text-muted">

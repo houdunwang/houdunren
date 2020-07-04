@@ -12,6 +12,7 @@ class GroupController extends Controller
 {
     public function index()
     {
+        // dd(Group::find(2)->modules->toArray());
         return view('group.index', ['groups' => Group::all()]);
     }
 

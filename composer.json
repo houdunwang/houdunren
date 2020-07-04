@@ -24,6 +24,7 @@
     "spatie/laravel-permission": "^3.13"
   },
   "require-dev": {
+    "barryvdh/laravel-debugbar": "^3.3",
     "barryvdh/laravel-ide-helper": "^2.7",
     "facade/ignition": "^2.0",
     "fzaninotto/faker": "^1.9.1",

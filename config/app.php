@@ -135,6 +135,7 @@ return [
     */
 
     'providers' => [
+        Barryvdh\Debugbar\ServiceProvider::class,
         HieuLe\Active\ActiveServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
@@ -192,6 +193,7 @@ return [
     */
 
     'aliases' => [
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Active' => HieuLe\Active\Facades\Active::class,
         //
         'App' => Illuminate\Support\Facades\App::class,

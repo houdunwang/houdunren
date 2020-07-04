@@ -10,7 +10,7 @@
         @foreach ($modules as $module)
         <section class="border-bottom row align-items-center pb-3 pt-3">
             <div class="col-sm-1 pb-3 pb-sm-0">
-                <img src="/modules/{{ $module['name'] }}/static/preview.jpg" class="rounded-circle">
+                <img src="/modules/{{ $module['name'] }}/static/preview.jpg" class="rounded">
             </div>
             <div class="col-sm-10 small text-secondary pb-3 pb-sm-0">
                 <strong> {{ $module['title'] }} </strong> {{ $module['description'] }}
