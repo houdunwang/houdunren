@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Group;
+use App\Models\Site;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,29 +12,12 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password', 'mobile',
-    ];
+    protected $guarded = [];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -43,9 +27,18 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
-    public function group()
+    public function getIsSuperAdminAttribute()
     {
-        $this->belongsTo(Group::class);
+        return $this->id == 1;
     }
 
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
+
+    public function sites()
+    {
+        return $this->hasMany(Site::class);
+    }
 }

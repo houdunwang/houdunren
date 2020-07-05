@@ -12,7 +12,6 @@ class GroupController extends Controller
 {
     public function index()
     {
-        // dd(Group::find(2)->modules->toArray());
         return view('group.index', ['groups' => Group::all()]);
     }
 
@@ -46,6 +45,6 @@ class GroupController extends Controller
     public function destroy(Group $group)
     {
         $group->delete();
-        return response()->json(['success' => '会员组删除成功']);
+        // return response()->json(['success' => '会员组删除成功']);
     }
 }

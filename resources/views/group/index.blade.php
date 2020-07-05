@@ -29,7 +29,7 @@
                 </td>
                 <td>
                     @foreach ($group->modules as $module)
-                    <a href="{{ route('admin.module') }}" class="badge badge-info mr-2">{{ $module->title }}</a>
+                    <a href="{{ route('admin.module.index') }}" class="badge badge-info mr-2">{{ $module->title }}</a>
                     @endforeach
                 </td>
                 <td> {{ $group->site_num }}</td>

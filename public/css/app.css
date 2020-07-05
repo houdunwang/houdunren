@@ -10930,6 +10930,7 @@ a.text-dark:focus {
 
 a {
   text-decoration: none !important;
+  color: #999;
 }
 
 :root {
@@ -10938,6 +10939,26 @@ a {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif !important;
+}
+
+.nav-tabs .nav-link {
+  background: #fafafa;
+  border-left: solid 1px #ddd;
+  border-right: solid 1px #ddd;
+  border-top: solid 1px #ddd;
+  border-bottom: solid 1px #ddd !important;
+  margin-right: 0.3rem;
+  margin-bottom: -1px;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #1890ff;
+}
+
+.nav-tabs .nav-link.active {
+  border-bottom: none !important;
+  color: #1890ff;
+  font-weight: bold;
 }
 
 .account {
@@ -11006,11 +11027,11 @@ body {
   width: 8rem;
 }
 
-.admin .admin-module section img {
+.admin .admin-module-index section img {
   width: 45px;
 }
 
-.admin .admin-module section:last-child {
+.admin .admin-module-index section:last-child {
   border-bottom: none !important;
 }
 

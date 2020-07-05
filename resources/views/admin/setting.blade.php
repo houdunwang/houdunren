@@ -4,7 +4,7 @@
 <div class="mb-5 mt-3">
     <h6 class="mb-3 pl-3 bl-5">应用扩展</h6>
     <section class="d-flex">
-        <a href="{{ route('admin.module') }}"
+        <a href="{{ route('admin.module.index') }}"
             class="text-dark system-menu d-flex flex-column justify-content-center align-items-center bg-white shadow-sm rounded border p-3  mr-3 mb-2">
             <i class="fa fa-2x d-block fa fa-cubes" aria-hidden="true"></i>
             模块

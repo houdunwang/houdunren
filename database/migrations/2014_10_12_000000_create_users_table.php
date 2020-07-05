@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('github')->nullable()->comment('GITHUB');
             $table->string('qq')->nullable()->comment('QQ');
             $table->string('wakatime')->nullable()->comment('wakatime');
-            $table->foreignId('group_id')->nullable()->constrained()->onDelete('set null')->comment('默认系统会员组');
+            $table->foreignId('group_id')->nullable()->comment('默认系统会员组');
             $table->timestamp('email_verified_at')->nullable()->comment('邮箱验证时间');
             $table->timestamp('mobile_verified_at')->nullable()->comment('手机验证时间');
             $table->rememberToken();

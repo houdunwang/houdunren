@@ -9,6 +9,7 @@
     <title>{{ config('app.name', 'hdcms') }}</title>
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    @stack('styles')
 </head>
 
 <body>
@@ -27,11 +28,11 @@
             <span>Powered by hdcms v6 © 2014-2020 www.hdcms.com</span>
         </div>
     </div>
-
-    @stack('js')
+    @stack('vue')
     <script src="{{ mix('/js/manifest.js') }}"></script>
     <script src="{{ mix('/js/vendor.js') }}"></script>
     <script src="{{ mix('/js/app.js') }}"></script>
+    @stack('scripts')
 </body>
 
 </html>

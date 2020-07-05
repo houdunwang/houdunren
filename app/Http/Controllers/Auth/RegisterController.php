@@ -17,12 +17,12 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function index(Request $request)
+    public function show(Request $request)
     {
         return view('auth.register');
     }
 
-    public function store(Request $request, User $user)
+    public function register(Request $request, User $user)
     {
         $request->validate([
             'mobile' => ['required', Rule::unique('users'), 'regex:/^1\d{10}$/'],

@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Http\Controllers\Site;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\SiteRequest;
+use App\Models\Site;
+use App\Services\ModuleService;
+use Illuminate\Http\Request;
+
+class SiteController extends Controller
+{
+    public function create(ModuleService $moduleService)
+    {
+        $modules = $moduleService->allInstalled();
+        return view('site.create', compact('modules'));
+    }
+
+    public function store(SiteRequest $request, Site $site)
+    {
+        $site->user_id = auth()->id();
+        $site->config = [];
+        $site->fill($request->input())->save();
+
+        return redirect()->route('admin.index')->with('success', '站点添加成功');
+    }
+
+    public function edit(Site $site, ModuleService $moduleService)
+    {
+        $modules = $moduleService->allInstalled();
+        return view('site.edit', compact('modules', 'site'));
+    }
+
+    public function update(SiteRequest $request, Site $site)
+    {
+        $site->user_id = auth()->id();
+        $site->fill($request->input())->save();
+
+        return redirect()->route('admin.index')->with('success', '站点修改成功');
+    }
+
+    public function destroy(Site $site)
+    {
+    }
+}

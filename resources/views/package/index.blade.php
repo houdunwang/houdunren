@@ -21,7 +21,8 @@
                 <td width="300"> {{ $package->title }}</td>
                 <td>
                     @foreach ($package->modules as $module)
-                    <a href="{{ route("admin.module") }}" class="badge badge-success mr-2">{{ $module->title }}</a>
+                    <a href="{{ route("admin.module.index") }}"
+                        class="badge badge-success mr-2">{{ $module->title }}</a>
                     @endforeach
                 </td>
                 <td class="" width="120">

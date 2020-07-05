@@ -14,21 +14,20 @@ class LoginController extends Controller
         $this->middleware('auth')->only('logout');
     }
 
-    public function index()
+    public function show()
     {
         return view('auth/login');
     }
 
-    public function store(Request $request)
+    public function login(Request $request)
     {
-
         $request->validate([
             'mobile' => ['required', 'regex:/^1\d{10}$/'],
             'password' => ['required'],
             'captcha' => ['required', 'captcha'],
         ]);
 
-        $isLogin = Auth::attempt($request->only('mobile', 'password'), $request->remember);
+        $isLogin = Auth::attempt($request->only('mobile', 'password'), $request->has('remember'));
 
         if ($isLogin) {
             return redirect()->intended('/')->with('message', '登录成功');
