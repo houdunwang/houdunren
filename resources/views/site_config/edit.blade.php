@@ -31,7 +31,7 @@
             aria-controls="nav-sms" aria-selected="false">短信设置</a>
     </div>
 </nav>
-<form action="{{ route('site.config.update',site()) }}" method="post">
+<form action="{{ route('site.config.update',$site) }}" method="post">
     @csrf
     @method('PUT')
 

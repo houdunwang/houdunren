@@ -46,14 +46,20 @@
                     <i class="fa fa-user-o"></i> 用户列表
                 </a>
                 <a href="" class="text-muted mr-2">
+                    <i class="fa fa-life-ring"></i> 更新缓存
+                </a>
+                <a href="" class="text-muted mr-2">
                     <i class="fa fa-user-circle-o"></i> 操作员设置
+                </a>
+                <a href="{{ route('site.role.index',$site) }}" class="text-muted mr-2">
+                    <i class="fa fa-user-secret" aria-hidden="true"></i> 角色管理
                 </a>
                 <a href="{{ route('site.site.edit',$site) }}" class="text-muted mr-2">
                     <i class="fa fa-pencil-square-o"></i> 编辑
                 </a>
-                <a href="" class="text-muted">
-                    <i class="fa fa-trash"></i> 删除
-                </a>
+                <btn-del action="{{ route('site.site.destroy',$site) }}" class-name="text-muted mr-2">
+                    <i class="fa fa-trash"></i> 编辑
+                </btn-del>
             </div>
         </div>
     </div>

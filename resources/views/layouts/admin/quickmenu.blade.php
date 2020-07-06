@@ -1,7 +1,9 @@
 <div class="d-none d-md-block">
     <div class="quick-menu pt-5 m-3 d-flex justify-content-between">
         <div class="logo">
-            <img src="/images/logo.png" alt="">
+            <a href="{{ route('admin.index') }}">
+                <img src="{{ config('admin.logo') }}" alt="">
+            </a>
         </div>
         <div class="menu-items d-flex justify-content-between align-items-center">
             <a href="{{ route('admin.index') }}" class="shadow d-flex flex-column align-items-center ml-3">

@@ -148,6 +148,7 @@ return [
     */
 
     'attributes' => [
+        'domain' => '域名',
         'code'                  => '验证码',
         'captcha'               => '图形验证码',
         'account'               => '帐号',

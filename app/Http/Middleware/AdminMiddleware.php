@@ -3,12 +3,12 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
-class SiteMiddleware
+use App\Models\Config;
+class AdminMiddleware
 {
   public function handle($request, Closure $next)
   {
-    config(['site' => site()->config]);
+    config(['admin' => Config::find(1)->config]);
 
     return $next($request);
   }

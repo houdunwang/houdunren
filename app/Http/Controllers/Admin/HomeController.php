@@ -10,9 +10,16 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $sites = user()->isSuperAdmin ? Site::all() : auth()->user()->sites;
+        return view('admin.index', ['sites' => $this->sites()]);
+    }
 
-        return view('admin.index', compact('sites'));
+    protected function sites()
+    {
+        if (user()->isSuperAdmin) {
+            return Site::all();
+        } else {
+            auth()->user()->sites;
+        }
     }
 
     public function setting()

@@ -10,8 +10,11 @@ class CreateModulesTable extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
-            $table->char('title', 30)->unique()->comment('模块名称');
-            $table->string('name', 100)->unique()->comment('模块标识');
+            $table->string('title', 50)->unique()->comment('模块名称');
+            $table->char('name', 50)->unique()->comment('模块标识');
+            $table->string('description', 100)->comment('模块描述');
+            $table->string('preview', 300)->comment('预览图');
+            $table->string('version', 100)->comment('版本号');
             $table->timestamps();
         });
     }

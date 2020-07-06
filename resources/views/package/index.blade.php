@@ -25,7 +25,7 @@
                         class="badge badge-success mr-2">{{ $module->title }}</a>
                     @endforeach
                 </td>
-                <td class="" width="120">
+                <td width="120">
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                         <a href="{{ route('admin.package.edit',$package['id']) }}" class="btn btn-info">编辑</a>
                         @if($package->id>1)

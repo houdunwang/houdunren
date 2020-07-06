@@ -3,12 +3,11 @@
         <i class="fa fa-home" aria-hidden="true"></i>
     </a>
 
-    <a class="nav-link {{ active_class(if_route('site.site.create'))}}" href="{{ route('site.site.create') }}">
-        添加站点
+    <a class="nav-link" href="{{ route('site.role.index',site()) }}">
+        角色列表
     </a>
-    @if(if_route('site.site.edit'))
+
     <a class="nav-link active" href="#">
-        编辑站点
+        权限设置
     </a>
-    @endif
 </nav>

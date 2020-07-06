@@ -8,15 +8,22 @@ use Illuminate\Http\Request;
 
 class ConfigController extends Controller
 {
-    public function edit()
-    {
-        return view('site_config.edit');
-    }
+  public function __construct()
+  {
+    $this->middleware('site');
+  }
 
-    public function update(Request $request, Site $site)
-    {
-        $site->config = $request->except(['_token', '_method']);
-        $site->save();
-        return back()->with('success', '配置设置成功');
-    }
+  public function edit(Site $site)
+  {
+    return view('site_config.edit', compact('site'));
+  }
+
+  public function update(Request $request, Site $site)
+  {
+    $site->config = $request->except(['_token', '_method']);
+    $site->save();
+    return redirect()
+      ->route('admin.index')
+      ->with('success', '站点配置保存成功');
+  }
 }
