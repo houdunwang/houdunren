@@ -42,14 +42,11 @@
                 <a href="" class="text-muted mr-2">
                     <i class="fa fa-comment-o"></i> 微信公众号
                 </a>
-                <a href="" class="text-muted mr-2">
-                    <i class="fa fa-user-o"></i> 用户列表
-                </a>
-                <a href="" class="text-muted mr-2">
+                {{-- <a href="" class="text-muted mr-2">
                     <i class="fa fa-life-ring"></i> 更新缓存
-                </a>
+                </a> --}}
                 <a href="" class="text-muted mr-2">
-                    <i class="fa fa-user-circle-o"></i> 操作员设置
+                    <i class="fa fa-user-circle-o"></i> 管理员设置
                 </a>
                 <a href="{{ route('site.role.index',$site) }}" class="text-muted mr-2">
                     <i class="fa fa-user-secret" aria-hidden="true"></i> 角色管理
