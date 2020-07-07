@@ -57,25 +57,23 @@ class ModuleService
 
             collect($module['menus'])->map(function ($menu) use ($module, $site) {
                 foreach ($menu['items'] as $item) {
-                    $name = 's' . $site['id'] . '-' . $module['name'] . '-' . $item['permission'];
+                    $name = $site['id'] . $module['name'] . '-' .  $item['permission'];
                     Permission::updateOrCreate(['name' => $name], ['name' => $name, 'title' => $item['title'], 'module_id' => $module['id']]);
                 }
             });
         });
+
+        //同步系统权限
+        foreach (config('access') as $item) {
+            $name = $site['id']  . $item['permission'];
+            Permission::updateOrCreate(['name' => $name], ['name' => $name, 'title' => $item['title']]);
+        }
     }
 
     public function getSiteModules(Site $site)
     {
-        return $site->user->group->modules->map(function ($model) use ($site) {
-            $module = $this->find($model['name']);
-
-            foreach ($module['menus'] as $m => $menu) {
-                foreach ($menu['items'] as $i => $item) {
-                    $name = 's' . $site['id'] . '-' . $module['name'] . '-' . $item['permission'];
-                    $module['menus'][$m]['items'][$i]['permission'] = $name;
-                }
-            }
-            return $module;
-        })->toArray();
+        return $site->user->group->modules->map(function ($model) {
+            return $this->find($model['name']);
+        });
     }
 }

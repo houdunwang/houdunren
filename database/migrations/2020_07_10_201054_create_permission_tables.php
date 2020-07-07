@@ -27,6 +27,7 @@ class CreatePermissionTables extends Migration
             $table->string('guard_name');
             $table
                 ->foreignId('module_id')
+                ->nullable()
                 ->constrained()
                 ->onDelete('cascade');
             $table->timestamps();

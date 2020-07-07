@@ -25,8 +25,9 @@
 
                     <label class="col-6 col-sm-4 col-md-3 col-lg-2">
 
-                        <input type="checkbox" name="permissions[]" value="{{ $item['permission'] }}"
-                            {{ $role->hasPermissionTo($item['permission']) ?'checked':''}}>
+                        <input type="checkbox" name="permissions[]"
+                            value="{{$site['id'].$module['name'].'-'. $item['permission'] }}"
+                            {{ $role->hasPermissionTo($site['id'].$module['name'].'-'. $item['permission']) ?'checked':''}}>
 
                         {{ $item['title'] }}
 
@@ -43,8 +44,37 @@
             @endforeach
         </div>
     </div>
+    @endforeach
+    {{-- 系统权限 --}}
+    <div class="card mt-3">
+        <div class="card-header">
+            站点管理
+        </div>
+        <div class="card-body">
+            <div class="mb-2 shadow-sm border p-3 rounded">
+                <div class="row">
+                    @foreach (config('access') as $item)
 
+                    <label class="col-6 col-sm-4 col-md-3 col-lg-2">
+
+                        <input type="checkbox" name="permissions[]" value="{{ $site['id'].$item['permission'] }}"
+                            {{ $role->hasPermissionTo($site['id'].$item['permission']) ?'checked':''}}>
+
+                        {{ $item['title'] }}
+
+                        <span class="small text-secondary">
+                            {{ preg_replace('/^\d+\-/is','',$item['permission']) }}
+                        </span>
+
+                    </label>
+
+                    @endforeach
+                </div>
+
+            </div>
+        </div>
+    </div>
     <button class="btn btn-primary mt-3">保存</button>
 </form>
-@endforeach
+
 @endsection
