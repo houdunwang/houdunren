@@ -1,77 +1,74 @@
 @extends('layouts.admin')
 
 @section('content')
-<div>
-    <a href="{{ route('site.site.create') }}" class="btn btn-info mb-3">
-        <i class="fa fa-plus" aria-hidden="true"></i> 添加网站
-    </a>
-    @foreach($sites as $site)
-    <div class="card mb-3 shadow-sm">
-        <div class="card-header d-flex justify-content-between">
-            <div>
-                套餐:
-            </div>
-            <div>
-                <i class="fa fa-cog" aria-hidden="true"></i> 应用扩展
-            </div>
-        </div>
-        <div class="card-body">
-            <i class="fa fa-rss fa-3x mr-3" aria-hidden="true"></i>
-            <span class="h3">{{ $site['title'] }}</span>
-        </div>
-        <div class="card-footer text-muted d-flex flex-column flex-sm-row justify-content-between align-items-center">
-            <div class="small">
-                <span class="mr-2">创建时间: {{ $site['created_at'] }}</span>
-                <span class="mr-2">站长: {{ $site->user->name }}</span>
-                <span class="mr-2">所属组: {{ $site->user->group->title }}</span>
+@include('admin.nav')
 
-                @if($site->module)
-                <span class="mr-2">默认模块: {{ $site->module->title }}</span>
-                @endif
 
-            </div>
-            <div class="small">
-                @if($site->module)
-                <a href="{{ $site->domain }}" target="_blank" class="text-muted mr-2">
-                    <i aria-hidden="true" class="fa fa-home"></i> 访问首页
-                </a>
-                @endif
-                <a href="{{ route('site.config.edit',$site) }}" class="text-muted mr-2">
-                    <i aria-hidden="true" class="fa fa-check-circle-o"></i> 网站配置
-                </a>
-                <a href="" class="text-muted mr-2">
-                    <i class="fa fa-comment-o"></i> 微信公众号
-                </a>
-                {{-- <a href="" class="text-muted mr-2">
-                    <i class="fa fa-life-ring"></i> 更新缓存
-                </a> --}}
-                <a href="" class="text-muted mr-2">
-                    <i class="fa fa-user-circle-o"></i> 管理员设置
-                </a>
-                <a href="{{ route('site.role.index',$site) }}" class="text-muted mr-2">
-                    <i class="fa fa-user-secret" aria-hidden="true"></i> 角色管理
-                </a>
-                <a href="{{ route('site.site.edit',$site) }}" class="text-muted mr-2">
-                    <i class="fa fa-pencil-square-o"></i> 编辑
-                </a>
-                <btn-del action="{{ route('site.site.destroy',$site) }}" class-name="text-muted mr-2">
-                    <i class="fa fa-trash"></i> 编辑
-                </btn-del>
-            </div>
-        </div>
-    </div>
-    @endforeach
-
-    @unless ($sites->count())
-    <div class="card">
-
-        <div class="card-body">
-            <strong>
-                <i class="fa fa-info-circle" aria-hidden="true"></i> 暂无站点
-            </strong>
-        </div>
-
-    </div>
-    @endunless
+<div class="table table-striped mt-3">
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="80">编号</th>
+                <th>昵称</th>
+                <th>邮箱</th>
+                <th>手机号</th>
+                <th>角色</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($users as $user)
+            <tr>
+                <td class="align-middle">{{$user['id'] }}</td>
+                <td class="align-middle">
+                    <img src="{{ $user['avatar'] }}" class="rounded mr-3" style="width:30px;" />
+                    {{ $user['name'] }}
+                </td>
+                <td class="align-middle">{{ $user['email'] }}</td>
+                <td class="align-middle">{{ $user['mobile'] }}</td>
+                <td>
+                    @foreach($user->roles as $role)
+                    <span class="badge badge-success mr-2">{{ $role['title'] }}</span>
+                    @endforeach
+                </td>
+                <td class="text-right align-middle">
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a href="{{ route('site.admin.role',[$site,$user]) }}" class="btn btn-info">设置角色</a>
+                        <btn-del action="{{ route('site.admin.destroy',[$site,$user]) }}" class="btn-secondary btn-sm">
+                            移除
+                        </btn-del>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
+
+<button class="btn btn-info" @click.prevent="dialogVisible = true">添加管理员</button>
+<el-dialog title="提示" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
+    <user-search action="{{ route('site.admin.search',$site) }}" v-slot="{user}" class="mt-3">
+        <user-search-btn>
+            <div class="btn-group btn-group-sm">
+                <a :href="'/site/{{ $site['id'] }}/admin/store/'+user.id" class="btn btn-info btn-sm">设为管理员</a>
+            </div>
+        </user-search-btn>
+    </user-search>
+</el-dialog>
+
 @endsection
+
+@push("vue")
+<script>
+    window.vue={
+        data:{
+            dialogVisible: false
+        },
+        methods: {
+            handleClose(done) {
+                done();
+            }
+        }
+    }
+</script>
+@endpush

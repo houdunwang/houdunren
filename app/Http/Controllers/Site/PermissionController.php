@@ -11,20 +11,13 @@ use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('site');
-    }
 
     public function edit(Site $site, Role $role, ModuleService $moduleService)
     {
-        $moduleService->syncSitePermissions($site);
+        $moduleService->saveSitePermissions($site);
 
-        $modules = $site->user->group->modules->map(function ($module) use ($moduleService, $site) {
-            return $moduleService->setSitePrefixToPermission($site, $moduleService->find($module['name']));
-        });
+        $modules = $moduleService->getSiteModules($site);
 
-        // dd($modules);
         return view('permission.edit', compact('site', 'role', 'modules'));
     }
 

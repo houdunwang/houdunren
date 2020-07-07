@@ -3,7 +3,7 @@
         <i class="fa fa-home" aria-hidden="true"></i>
     </a>
 
-    <a class="nav-link" href="{{ route('site.role.index',site()) }}">
+    <a class="nav-link" href="{{ route('site.role.index',$site) }}">
         角色列表
     </a>
 

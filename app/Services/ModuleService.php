@@ -35,7 +35,8 @@ class ModuleService
             'description' => $config['description'],
             'version' => $config['version'],
             'preview' => "/modules/{$name}/static/preview.jpg",
-            'permissions' => $this->config($name, 'permissions'),
+            'menus' => $this->config($name, 'menus'),
+            // 'permissions' => $this->config($name, 'permissions'),
             'installed' => (bool) $model,
             'module' => $module,
         ];
@@ -49,31 +50,32 @@ class ModuleService
         return is_file($file) ? include $file : [];
     }
 
-    public function syncSitePermissions(Site $site)
+    public function saveSitePermissions(Site $site)
     {
         $site->user->group->modules->map(function ($model) use ($site) {
             $module = $this->find($model['name']);
-            foreach ($module['permissions'] as $permissions) {
-                foreach ($permissions['permissions'] as $name => $title) {
-                    $name = 's' . $site['id'] . '-' . $module['name'] . '-' . $name;
-                    Permission::updateOrCreate(['name' => $name], ['name' => $name, 'title' => $title, 'module_id' => $module['id']]);
+
+            collect($module['menus'])->map(function ($menu) use ($module, $site) {
+                foreach ($menu['items'] as $item) {
+                    $name = 's' . $site['id'] . '-' . $module['name'] . '-' . $item['permission'];
+                    Permission::updateOrCreate(['name' => $name], ['name' => $name, 'title' => $item['title'], 'module_id' => $module['id']]);
                 }
-            }
+            });
         });
     }
 
-    public function setSitePrefixToPermission(Site $site, $module)
+    public function getSiteModules(Site $site)
     {
-        $module['premission'] = collect($module['permissions'])->map(function ($permission) use ($site, $module) {
+        return $site->user->group->modules->map(function ($model) use ($site) {
+            $module = $this->find($model['name']);
 
-            $sitePermission =  collect($permission['permissions'])->mapWithKeys(function ($title, $name) use ($site, $module) {
-                $name = 's' . $site['id'] . '-' . $module['name'] . '-' . $name;
-                return [$name => $title];
-            })->toArray();
-
-            return ['title' => $permission['title'], 'permissions' => $sitePermission];
+            foreach ($module['menus'] as $m => $menu) {
+                foreach ($menu['items'] as $i => $item) {
+                    $name = 's' . $site['id'] . '-' . $module['name'] . '-' . $item['permission'];
+                    $module['menus'][$m]['items'][$i]['permission'] = $name;
+                }
+            }
+            return $module;
         })->toArray();
-
-        return $module;
     }
 }

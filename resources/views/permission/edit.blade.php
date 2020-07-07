@@ -14,26 +14,31 @@
             {{ $module['title'] }}
         </div>
         <div class="card-body">
-            @foreach($module['premission'] as $permission)
+            @foreach($module['menus'] as $menu)
 
             <div class="mb-2 shadow-sm border p-3 rounded">
-                <h6>{{ $permission['title'] }}</h6>
+
+                <h6>{{ $menu['title'] }}</h6>
 
                 <div class="row">
-                    @foreach ($permission['permissions'] as $name=>$title)
+                    @foreach ($menu['items'] as $item)
 
                     <label class="col-6 col-sm-4 col-md-3 col-lg-2">
 
-                        <input type="checkbox" name="permissions[]" value="{{ $name }}"
-                            {{ $role->hasPermissionTo($name) ?'checked':''}}>
+                        <input type="checkbox" name="permissions[]" value="{{ $item['permission'] }}"
+                            {{ $role->hasPermissionTo($item['permission']) ?'checked':''}}>
 
-                        <span class="small text-secondary">{{ preg_replace('/^s\d+\-/is','',$name) }}</span>
+                        {{ $item['title'] }}
+
+                        <span class="small text-secondary">
+                            {{ preg_replace('/^s\d+\-/is','',$item['permission']) }}
+                        </span>
 
                     </label>
 
                     @endforeach
-
                 </div>
+
             </div>
             @endforeach
         </div>

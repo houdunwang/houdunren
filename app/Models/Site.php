@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Spatie\Permission\Models\Role;
 
 class Site extends Model
 {
@@ -21,5 +22,15 @@ class Site extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function admins()
+    {
+        return $this->belongsToMany(User::class, 'admin_site');
+    }
+
+    public function roles()
+    {
+        return $this->hasMany(Role::class);
     }
 }

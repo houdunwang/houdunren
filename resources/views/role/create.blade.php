@@ -3,7 +3,7 @@
 @section('content')
 @include('role.nav')
 
-<form action="{{ route("site.role.store",site()) }}" method="post">
+<form action="{{ route("site.role.store",$site) }}" method="post">
     @csrf
     <div class="card mt-3 shadow-sm">
         <div class="card-header">

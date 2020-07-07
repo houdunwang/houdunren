@@ -6,38 +6,34 @@ use Illuminate\Support\Facades\Route;
 
 function route_class()
 {
-  return str_replace('.', '-', Route::currentRouteName());
+    return str_replace('.', '-', Route::currentRouteName());
 }
 
 function user($key = '')
 {
-  $user = Auth::user();
-  if ($user) {
-    return $key ? $user[$key] : $user;
-  }
+    $user = Auth::user();
+    if ($user) {
+        return $key ? $user[$key] : $user;
+    }
 }
 
 function site(Site $site = null): ?Site
 {
-  static $cache = null;
+    static $cache = null;
 
-  if ($cache) {
+    if ($cache) {
+        return $cache;
+    }
+
+    if ($site instanceof Site) {
+        $cache = $site;
+    }
+
+    if (is_numeric($site)) {
+        $cache = Site::findOrFail($site);
+    }
+    if (!($cache instanceof Site)) {
+        abort(404, '站点不存在');
+    }
     return $cache;
-  }
-
-  $site = $site ?? request()->site;
-
-  if ($site instanceof Site) {
-    $cache = $site;
-  }
-
-  if (is_numeric($site)) {
-    $cache = Site::findOrFail($site);
-  }
-  return $cache;
-}
-
-function permission_name(Site $site, $module, $name)
-{
-  return 's' . $site['id'] . '-' . $module['name'] . '-' . $name;
 }

@@ -10,34 +10,35 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-  /**
-   * Register any application services.
-   *
-   * @return void
-   */
-  public function register()
-  {
-    //
-  }
-
-  /**
-   * Bootstrap any application services.
-   *
-   * @return void
-   */
-  public function boot()
-  {
-    if ($this->app->environment() !== 'production') {
-      $this->app->register(TelescopeServiceProvider::class);
-
-      $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
     }
 
-    $this->registerObServer();
-  }
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        if ($this->app->environment() !== 'production') {
+            $this->app->register(TelescopeServiceProvider::class);
 
-  protected function registerObServer()
-  {
-    Group::observe(GroupObserver::class);
-  }
+            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        }
+
+        $this->registerObServer();
+
+        config(['admin' => Config::find(1)->config]);
+    }
+
+    protected function registerObServer()
+    {
+        Group::observe(GroupObserver::class);
+    }
 }

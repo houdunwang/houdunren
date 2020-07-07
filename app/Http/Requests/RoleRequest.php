@@ -6,16 +6,16 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RoleRequest extends FormRequest
 {
-  public function authorize()
-  {
-    return true;
-  }
+    public function authorize()
+    {
+        return true;
+    }
 
-  public function rules()
-  {
-    return [
-      'title' => ['required', 'min:3', 'max:20'],
-      'name' => ['required', 'regex:/^[a-z]+$/', 'min:5'],
-    ];
-  }
+    public function rules()
+    {
+        return [
+            'title' => ['required', 'min:2', 'max:20'],
+            'name' => ['required', 'regex:/^[a-z]+$/', 'min:3'],
+        ];
+    }
 }

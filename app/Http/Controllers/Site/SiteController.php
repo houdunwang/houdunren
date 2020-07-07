@@ -10,47 +10,43 @@ use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
-  public function __construct()
-  {
-    $this->middleware('site')->except(['create', 'store']);
-  }
 
-  public function create(ModuleService $moduleService)
-  {
-    $modules = $moduleService->allInstalled();
-    return view('site.create', compact('modules'));
-  }
+    public function create(ModuleService $moduleService)
+    {
+        $modules = $moduleService->allInstalled();
+        return view('site.create', compact('modules'));
+    }
 
-  public function store(SiteRequest $request, Site $site)
-  {
-    $site->user_id = auth()->id();
-    $site->config = [];
-    $site->fill($request->input())->save();
+    public function store(SiteRequest $request, Site $site)
+    {
+        $site->user_id = auth()->id();
+        $site->config = [];
+        $site->fill($request->input())->save();
 
-    return redirect()
-      ->route('admin.index')
-      ->with('success', '站点添加成功');
-  }
+        return redirect()
+            ->route('admin.index')
+            ->with('success', '站点添加成功');
+    }
 
-  public function edit(Site $site, ModuleService $moduleService)
-  {
-    $modules = $moduleService->allInstalled();
-    return view('site.edit', compact('modules', 'site'));
-  }
+    public function edit(Site $site, ModuleService $moduleService)
+    {
+        $modules = $moduleService->allInstalled();
+        return view('site.edit', compact('modules', 'site'));
+    }
 
-  public function update(SiteRequest $request, Site $site)
-  {
-    $site->user_id = auth()->id();
-    $site->fill($request->input())->save();
+    public function update(SiteRequest $request, Site $site)
+    {
+        $site->user_id = auth()->id();
+        $site->fill($request->input())->save();
 
-    return redirect()
-      ->route('admin.index')
-      ->with('success', '站点修改成功');
-  }
+        return redirect()
+            ->route('admin.index')
+            ->with('success', '站点修改成功');
+    }
 
-  public function destroy(Site $site)
-  {
-    $site->delete();
-    return response()->json(['message' => '删除成功']);
-  }
+    public function destroy(Site $site)
+    {
+        $site->delete();
+        return response()->json(['message' => '删除成功']);
+    }
 }
