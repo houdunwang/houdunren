@@ -25,14 +25,13 @@
 
                     <label class="col-6 col-sm-4 col-md-3 col-lg-2">
 
-                        <input type="checkbox" name="permissions[]"
-                            value="{{$site['id'].$module['name'].'-'. $item['permission'] }}"
-                            {{ $role->hasPermissionTo($site['id'].$module['name'].'-'. $item['permission']) ?'checked':''}}>
+                        <input type="checkbox" name="permissions[]" value="{{$item['permission']}}"
+                            {{ $role->hasPermissionTo($item['permission'] ) ?'checked':''}}>
 
                         {{ $item['title'] }}
 
                         <span class="small text-secondary">
-                            {{ preg_replace('/^s\d+\-/is','',$item['permission']) }}
+                            {{ preg_replace('/^s\d+\-/is','',$item['permission'] ) }}
                         </span>
 
                     </label>
@@ -53,17 +52,16 @@
         <div class="card-body">
             <div class="mb-2 shadow-sm border p-3 rounded">
                 <div class="row">
-                    @foreach (config('access') as $item)
+                    @foreach ($systemMenus as $item)
 
                     <label class="col-6 col-sm-4 col-md-3 col-lg-2">
 
-                        <input type="checkbox" name="permissions[]" value="{{ $site['id'].$item['permission'] }}"
-                            {{ $role->hasPermissionTo($site['id'].$item['permission']) ?'checked':''}}>
+                        <input type="checkbox" name="permissions[]" value="{{$item['permission'] }}"
+                            {{ $role->hasPermissionTo($item['permission']) ?'checked':''}}>
 
                         {{ $item['title'] }}
-
                         <span class="small text-secondary">
-                            {{ preg_replace('/^\d+\-/is','',$item['permission']) }}
+                            {{ preg_replace('/^s\d+\-/is','',$item['permission']) }}
                         </span>
 
                     </label>

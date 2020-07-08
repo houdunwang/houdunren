@@ -2,9 +2,14 @@ a {
   text-decoration: none !important;
 }
 :root {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif !important;
+}
+
+.card-header,
+.card-footer {
+  background: rgba(0, 0, 0, 0.01);
 }

@@ -13,9 +13,8 @@ mix.js(__dirname + '/Resources/js/app.js', 'modules/edu/app.js').sass(__dirname 
 mix.copyDirectory(__dirname + '/Resources/static', '../../public/modules/edu/static')
 
 if (mix.inProduction()) {
-  mix
-    .webpackConfig({
-      plugins: [new BundleAnalyzerPlugin()]
-    })
-    .version()
+  mix.webpackConfig({
+    plugins: [new BundleAnalyzerPlugin()],
+  })
+  // .version()
 }

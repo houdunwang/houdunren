@@ -7,6 +7,14 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+                @if ($module = session('module'))
+                <li class="nav-item mr-3">
+                    <a class="nav-link" href="/{{ module()['name'] }}/admin">
+                        <i class="fa fa-reply-all" aria-hidden="true"></i>
+                        继续管理{{ $module['title'] }}模块
+                    </a>
+                </li>
+                @endif
 
                 <li class="nav-item mr-3">
                     <a class="nav-link" href="{{ route('admin.index') }}">
@@ -43,9 +51,10 @@
                 <div class="dropdown">
                     <div class="dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
+                        <img src="{{ user()->avatar }}" class="rounded mr-1" style="width: 25px;" />
                         {{ user('name') }}
                     </div>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <div class=" dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#">个人中心</a>
                         <a class="dropdown-item" href="{{ route('admin.my.edit') }}">修改密码</a>
                         <a class="dropdown-item" href="{{ route('logout') }}">退出登录</a>

@@ -44,13 +44,10 @@ Route::group(['prefix' => 'site', 'namespace' => 'Site', 'as' => 'site.', 'middl
 
     Route::resource('{site}/admin', 'AdminController')->only(['index', 'destroy']);
     Route::get('{site}/admin/store/{admin}', 'AdminController@store')->name('admin.store');
-
     Route::post('{site}/admin/search', 'AdminController@search')->name('admin.search');
-    // Route::get('{site}/admin', 'AdminController@index')->name('admin.index');
-    // Route::post('{site}/admin/search', 'AdminController@search')->name('admin.search');
-    // Route::get('{site}/admin/store/{user}', 'AdminController@store')->name('admin.store');
-    // Route::delete('{site}/admin/{user}', 'AdminController@destroy')->name('admin.destroy');
-
     Route::get('{site}/admin/role/{user}', 'AdminController@role')->name('admin.role');
     Route::put('{site}/admin/role/{user}', 'AdminController@updateRole')->name('admin.role.update');
+
+    Route::get('{site}/module', 'ModuleController@index')->name('module.index');
+    Route::get('{site}/module/{module}', 'ModuleController@show')->name('module.show');
 });

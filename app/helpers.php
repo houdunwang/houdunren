@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Module;
 use App\Models\Site;
+use App\Services\ModuleService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,21 +21,34 @@ function user($key = '')
 
 function site(Site $site = null): ?Site
 {
-    static $cache = null;
-
-    if ($cache) {
-        return $cache;
-    }
-
     if ($site instanceof Site) {
-        $cache = $site;
+        session(['site' => $site]);
     }
 
-    if (is_numeric($site)) {
-        $cache = Site::findOrFail($site);
+    if (is_null($site)) {
+        $site =  session('site');
     }
-    if (!($cache instanceof Site)) {
+
+    if (!($site instanceof Site)) {
         abort(404, '站点不存在');
     }
-    return $cache;
+
+    return $site;
+}
+
+function module(array $module = null)
+{
+    if (!is_null($module)) {
+        session(['module' => $module]);
+    }
+
+    if (is_null($module)) {
+        $module = session('module');
+    }
+
+    if (empty($module)) {
+        abort(404, '模块不存在');
+    }
+
+    return $module;
 }

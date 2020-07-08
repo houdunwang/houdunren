@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Services\ModuleService;
+use App\Services\PermissionService;
 use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
@@ -12,4 +14,11 @@ class Module extends Model
     {
         return $this->belongsToMany(Package::class);
     }
+
+    // public function permissions(Site $site)
+    // {
+    //     $service = app(ModuleService::class);
+    //     $module = $service->find($this->name);
+    //     return app(PermissionService::class)->addModulePermissionPrefix($site, $module);
+    // }
 }

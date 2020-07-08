@@ -14,16 +14,25 @@ class Site extends Model
         'config' => 'array',
     ];
 
+    //默认模块
     public function module()
     {
         return $this->belongsTo(Module::class);
     }
 
-    public function user()
+    //站点可使用的所有模块
+    public function getModulesAttribute()
     {
-        return $this->belongsTo(User::class);
+        return $this->master->group->modules;
     }
 
+    //站长
+    public function master()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    //管理员
     public function admins()
     {
         return $this->belongsToMany(User::class, 'admin_site');
