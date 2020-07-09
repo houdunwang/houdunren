@@ -1,6 +1,6 @@
 <nav class="nav nav-tabs">
     <a class="nav-link" href="{{ route('admin.setting') }}">
-        <i class="fa fa-home" aria-hidden="true"></i>
+        <i class="fas fa-home    "></i>
     </a>
 
     <a class="nav-link {{ active_class(if_route('admin.package.index'))}}" href="{{ route('admin.package.index') }}">

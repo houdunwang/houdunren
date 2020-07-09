@@ -13,10 +13,9 @@ use Spatie\Permission\Models\Role;
 class PermissionController extends Controller
 {
 
-    public function edit(Site $site, Role $role, ModuleService $moduleService, PermissionService $permissionService, MenuService $menuService)
+    public function edit(Site $site, Role $role, ModuleService $moduleService,  MenuService $menuService)
     {
-        $permissionService->saveSiteModulePermissions($site);
-        $permissionService->saveSiteSystemPermissions($site);
+        $this->savePermissions($site);
 
         $modules = $moduleService->getSiteModules($site);
 
@@ -24,6 +23,12 @@ class PermissionController extends Controller
         return view('permission.edit', compact('site', 'role', 'modules', 'systemMenus'));
     }
 
+    protected function savePermissions($site)
+    {
+        $permissionService = app(PermissionService::class);
+        $permissionService->saveSiteModulePermissions($site);
+        $permissionService->saveSiteSystemPermissions($site);
+    }
     public function update(Request $request, Site $site, Role $role)
     {
         $role->syncPermissions($request->input('permissions'));

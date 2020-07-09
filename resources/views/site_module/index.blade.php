@@ -17,7 +17,7 @@
     </div>
     <div class="card-body">
         <div class="row p-3">
-            @foreach ($site->modules as $module)
+            @foreach ($modules as $module)
             <div class="col-6 col-sm-2">
                 <div class="card shadow">
                     <div class="card-body text-center">
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-muted text-center">
-                        <a href="{{ route('site.module.show',[$site,$module]) }}" class="btn btn-info">管理模块</a>
+                        <a href="{{ route('site.module.show',[$site,$module['id']]) }}" class="btn btn-info">管理模块</a>
                     </div>
                 </div>
             </div>

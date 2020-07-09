@@ -57,9 +57,8 @@ class ModuleService
 
     public function getSiteModules(Site $site)
     {
-        return $site->master->group->modules->map(function ($model) use ($site) {
-            $module = $this->find($model['name']);
-            return app(PermissionService::class)->addModulePermissionPrefix($site, $module);
+        return $site->master->group->modules->map(function ($module) use ($site) {
+            return $this->findBySite($site, $module['name']);
         });
     }
 }

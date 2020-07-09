@@ -1,4 +1,4 @@
-@extends('module')
+@extends('layouts.module')
 
 @section('content')
 <div class="card shadow-sm">

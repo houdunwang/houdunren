@@ -1,6 +1,6 @@
 <nav class="nav nav-tabs">
     <a class="nav-link {{ active_class(if_route('admin.index'))}}" href="{{ route('admin.index') }}">
-        <i class="fa fa-home" aria-hidden="true"></i>
+        <i class="fas fa-home    "></i>
     </a>
 
     <a class="nav-link {{ active_class(if_route('site.role.index'))}}" href="{{ route('site.role.index',$site) }}">

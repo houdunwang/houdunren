@@ -3,7 +3,9 @@
 @section('content')
 @include('admin.nav')
 
-
+<div class="alert alert-info mt-3" role="alert">
+    <i class="fa fa-info-circle" aria-hidden="true"></i> 站长不受权限控制，所以对站长的任何操作均无意义
+</div>
 <div class="table table-striped mt-3">
     <table class="table">
         <thead>
@@ -27,6 +29,10 @@
                 <td class="align-middle">{{ $user['email'] }}</td>
                 <td class="align-middle">{{ $user['mobile'] }}</td>
                 <td>
+                    @if ($user->id==$site->master->id)
+                    <span class="badge badge-danger mr-2">站长</span>
+                    @endif
+
                     @foreach($user->roles as $role)
                     <span class="badge badge-success mr-2">{{ $role['title'] }}</span>
                     @endforeach

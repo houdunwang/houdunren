@@ -148,6 +148,8 @@ return [
     */
 
     'attributes' => [
+        'price' => '售价',
+        'thumb' => '缩略图',
         'domain' => '域名',
         'code'                  => '验证码',
         'captcha'               => '图形验证码',

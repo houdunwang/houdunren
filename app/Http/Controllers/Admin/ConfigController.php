@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Config;
-use App\Services\UplaodService;
+use App\Services\UploadService;
 use Illuminate\Http\Request;
 
 class ConfigController extends Controller
@@ -21,10 +21,10 @@ class ConfigController extends Controller
         return back()->with('success', '修改成功');
     }
 
-    public function upload(Request $request, UplaodService $uplaodService)
+    public function upload(Request $request, UploadService $UploadService)
     {
         $request->validate(['file' => ['required', 'mimes:jpeg', 'max:1000']]);
 
-        return $uplaodService->image($request->file);
+        return $UploadService->image($request->file);
     }
 }

@@ -10,28 +10,16 @@ use App\Services\PermissionService;
 
 class ModuleController extends Controller
 {
-    public function index(Site $site)
+    public function index(Site $site, ModuleService $moduleService)
     {
-        return view('site_module.index', compact('site'));
+        $modules = $moduleService->getSiteModules($site);
+        return view('site_module.index', compact('site', 'modules'));
     }
 
     public function show(Site $site, Module $module, PermissionService $permissionService)
     {
-        $this->cache($site, $module);
-
-        $status = $permissionService->checkModulePermission(module());
-        if ($status === false) {
-            return back()->with('danger', '你没有管理模块的权限');
-        }
-
-        return redirect(url($module['name'] . '/admin'));
-    }
-
-    protected function cache($site, $module)
-    {
         site($site);
-        $module = app(ModuleService::class)->findBySite($site, $module['name']);
-        unset($module['model']);
-        module($module);
+        module(['name' => $module['name'], 'title' => $module['title']]);
+        return redirect(url($module['name'] . '/admin'));
     }
 }

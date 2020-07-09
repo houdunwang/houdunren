@@ -5,7 +5,7 @@ return [
         'icon' => 'fas fa-fw fa-table',
         'show' => true,
         'items' => [
-            ['title' => '内容标签设置', 'permission' => 'tag'],
+            ['title' => '内容标签管理', 'permission' => 'tag', 'route' => 'Edu.admin.tag.edit'],
             ['title' => '直播推流配置', 'permission' => 'live'],
         ],
     ],
@@ -14,8 +14,8 @@ return [
         'icon' => 'fas fa-fw fa-table',
         'show' => true,
         'items' => [
-            ['title' => '视频课程列表', 'permission' => 'lesson-index'],
-            ['title' => '发表视频课程', 'permission' => 'lesson-add'],
+            ['title' => '课程列表', 'permission' => 'lesson-index', 'route' => 'Edu.admin.lesson.index'],
+            ['title' => '发布课程', 'permission' => 'lesson-add', 'route' => 'Edu.admin.lesson.create'],
         ],
     ],
     [

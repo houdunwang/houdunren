@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "Modules/Edu"
+    }
+  ],
+  "settings": {
+    "git.ignoreLimitWarning": true
+  }
+}

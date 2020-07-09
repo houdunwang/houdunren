@@ -1,8 +1,7 @@
 <div class="form-group {{ $attributes['class']??'' }}">
 
-    <label for="{{ $attributes['name'] }}">{{ $attributes['title'] }}</label>
-
-    <div class="input-group @error($attributes['name'])is-invalid @enderror">
+    <label for="{{ $attributes['name'] }} col-sm-2 col-form-label">{{ $attributes['title'] }}</label>
+    <div class="input-group  @error($attributes['name'])is-invalid @enderror">
         @foreach ($attributes['options'] as $value=>$title)
         <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" value="{{ $value }}" id="{{ $attributes['name'].$value }}"

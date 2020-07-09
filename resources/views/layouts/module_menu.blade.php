@@ -17,7 +17,9 @@
         <div class="bg-white py-2 collapse-inner rounded">
             @foreach ($menu['items'] as $item)
             @can($item['permission'])
-            <a class="collapse-item" href="buttons.html">{{ $item['title'] }}</a>
+            <a class="collapse-item" href="{{ isset($item['route'])?route($item['route']):'' }}">
+                {{ $item['title'] }}
+            </a>
             @endcan
             @endforeach
         </div>
