@@ -1,12 +1,14 @@
 a {
   text-decoration: none !important;
+  color: #999;
 }
 :root {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif !important;
+  font-size: 0.9rem;
 }
 
 .card-header,
@@ -14,22 +16,22 @@ body {
   background: rgba(0, 0, 0, 0.01);
 }
 
-// .nav-tabs {
-//   .nav-link {
-//     background: #fafafa;
-//     border-left: solid 1px #ddd;
-//     border-right: solid 1px #ddd;
-//     border-top: solid 1px #ddd;
-//     border-bottom: solid 1px #ddd !important;
-//     margin-right: 0.3rem;
-//     margin-bottom: -1px;
-//     &:hover {
-//       color: #1890ff;
-//     }
-//     &.active {
-//       border-bottom: none !important;
-//       color: #1890ff;
-//       font-weight: bold;
-//     }
-//   }
-// }
+.nav-tabs {
+  .nav-link {
+    background: #fafafa;
+    border-left: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+    border-top: solid 1px #ddd;
+    border-bottom: solid 1px #ddd !important;
+    margin-right: 0.3rem;
+    margin-bottom: -1px;
+    &:hover {
+      color: #1890ff;
+    }
+    &.active {
+      border-bottom: none !important;
+      color: #1890ff;
+      font-weight: bold;
+    }
+  }
+}

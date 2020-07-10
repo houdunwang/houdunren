@@ -1,7 +1,7 @@
-@inject('permissionService', 'App\Services\permissionService')
+@inject('permissionService', 'App\Services\PermissionService')
+@inject('menuService', 'App\Services\MenuService')
 
 @foreach (module()['menus'] as $index=>$menu)
-
 @if ($permissionService->checkModuleMenuPermission($menu))
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo{{ $index }}"
@@ -13,7 +13,8 @@
         @endif
         <span>{{ $menu['title'] }}</span>
     </a>
-    <div id="collapseTwo{{ $index }}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div id="collapseTwo{{ $index }}" class="collapse {{ $menuService->isMenuGroup($menu)?'show':'' }}"
+        aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             @foreach ($menu['items'] as $item)
             @can($item['permission'])

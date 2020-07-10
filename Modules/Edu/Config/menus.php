@@ -6,7 +6,7 @@ return [
         'show' => true,
         'items' => [
             ['title' => '内容标签管理', 'permission' => 'tag', 'route' => 'Edu.admin.tag.edit'],
-            ['title' => '直播推流配置', 'permission' => 'live'],
+            // ['title' => '直播推流配置', 'permission' => 'live'],
         ],
     ],
     [
@@ -22,8 +22,8 @@ return [
         'title' => '系统课程',
         'show' => true,
         'items' => [
-            ['title' => '系统课程列表', 'permission' => 'system-lesson'],
-            ['title' => '发布系统课程', 'permission' => 'system-lesson-add'],
+            ['title' => '系统课程列表', 'permission' => 'system-lesson', 'route' => 'Edu.admin.system.index'],
+            ['title' => '发布系统课程', 'permission' => 'system-lesson-add', 'route' => 'Edu.admin.system.create'],
         ],
     ],
     [

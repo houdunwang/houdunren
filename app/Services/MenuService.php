@@ -15,4 +15,12 @@ class MenuService
         }
         return $menus;
     }
+
+    //当前路由是否在模块菜单组中
+    public function isMenuGroup($menu)
+    {
+        return (bool) collect($menu['items'])->filter(function ($menu) {
+            return isset($menu['route']) &&  if_route($menu['route']);
+        })->count();
+    }
 }

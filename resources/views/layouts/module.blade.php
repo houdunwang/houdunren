@@ -117,7 +117,6 @@
                     @include('layouts.message')
                     @yield('content')
                 </div>
-
             </div>
             <!-- End of Main Content -->
 
