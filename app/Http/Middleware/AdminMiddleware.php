@@ -18,6 +18,7 @@ class AdminMiddleware
     public function handle($request, Closure $next)
     {
         $this->cacheModule();
+
         $status = app(PermissionService::class)->checkModulePermission(module());
 
         if ($status === false) {
@@ -30,6 +31,7 @@ class AdminMiddleware
     public function cacheModule()
     {
         $module = app(ModuleService::class)->findBySite(site(), module()['name']);
+
         unset($module['model']);
         module($module);
     }

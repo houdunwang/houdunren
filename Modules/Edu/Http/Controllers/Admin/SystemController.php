@@ -5,71 +5,61 @@ namespace Modules\Edu\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Edu\Entities\System;
+use Modules\Edu\Http\Requests\SystemRequest;
 
 class SystemController extends Controller
 {
     public function index()
     {
-        return view('edu::system.index');
+        $lessons = System::latest()->paginate();
+        return view('edu::system.index', compact('lessons'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
+    public function create(System $system)
     {
-        return view('edu::create');
+        return view('edu::system.create', compact('system'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
+    public function store(SystemRequest $request, System $system)
     {
-        //
+        $system->fill($request->input());
+        $system->user_id = user("id");
+        $system->site_id = site()['id'];
+        $system->save();
+
+        $this->updateLesson($system, $request);
+
+        return redirect()->route('Edu.admin.system.index')->with('success', '课程保存成功');
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
+    public function edit(System $system)
     {
-        return view('edu::show');
+        return view('edu::system.edit', compact('system'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
+    public function update(SystemRequest $request, System $system)
     {
-        return view('edu::edit');
+        $system->fill($request->input())->save();
+
+        $this->updateLesson($system, $request);
+
+        return redirect()->route('Edu.admin.system.index')->with('success', '课程保存成功');
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
+    protected function updateLesson($system, $request)
     {
-        //
+        $system->lessons()->detach();
+        $lessons = json_decode($request->lessons, true);
+
+        foreach ($lessons as $rank => $lesson) {
+            $system->lessons()->attach([$lesson['id'] => ['rank' => $rank]]);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
+    public function destroy(System $system)
     {
-        //
+        $system->delete();
+        return response()->json(['message' => '课程删除成功']);
     }
 }

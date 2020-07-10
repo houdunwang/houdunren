@@ -12,6 +12,7 @@ class CreateEduSystemLessonTable extends Migration
         Schema::create('edu_system_lesson', function (Blueprint $table) {
             $table->foreignId('lesson_id')->constrained('edu_lessons')->onDelete('cascade');
             $table->foreignId('system_id')->constrained('edu_system')->onDelete('cascade');
+            $table->unsignedSmallInteger('rank')->default(0)->comment('排序');
         });
     }
 

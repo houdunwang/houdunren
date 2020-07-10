@@ -59,12 +59,13 @@ class LessonController extends Controller
 
         $lesson->videos()->whereNotIn('id', collect($videos)->pluck('id'))->delete();
 
-        foreach ($videos as $video) {
+        foreach ($videos as $rank => $video) {
             if ($video['title'] && $video['path']) {
-                Video::updateOrCreate(['id' => $video['id']], $video + [
+                Video::updateOrCreate(['id' => $video['id']], array_merge($video, [
                     'site_id' => site()['id'],
                     'lesson_id' => $lesson['id'],
-                ]);
+                    'rank' => $rank
+                ]));
             }
         }
     }
@@ -80,5 +81,15 @@ class LessonController extends Controller
         $request->validate(['file' => ['required', 'mimes:jpeg', 'max:1000']]);
 
         return $UploadService->image($request->file);
+    }
+
+    public function search(Request $request)
+    {
+        if ($title = $request->title) {
+            $lessons = Lesson::where('title', 'like', "%{$title}%")->paginate();
+        } else {
+            $lessons = Lesson::paginate();
+        }
+        return $lessons;
     }
 }

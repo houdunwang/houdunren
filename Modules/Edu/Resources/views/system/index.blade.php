@@ -8,19 +8,26 @@
     <table class="table table-bordered mt-3 ">
         <thead>
             <tr>
-                <th width="80">编号</th>
+                <th width="60">编号</th>
                 <th>课程名称</th>
-                <th>视频数量</th>
-                <th>浏览量</th>
-                <th>点赞数</th>
-                <th>收藏数</th>
-                <th>评论数</th>
-                <th>售价</th>
+                <th>课程介绍</th>
                 <th width="120"></th>
             </tr>
         </thead>
         <tbody>
-
+            @foreach ($lessons as $lesson)
+            <tr>
+                <td>{{ $lesson['id'] }}</td>
+                <td>{{ $lesson['title'] }}</td>
+                <td>{{ $lesson['description'] }}</td>
+                <td class="text-right">
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a href="{{ route('Edu.admin.system.edit',$lesson['id']) }}" class="btn btn-info">编辑</a>
+                        <btn-del action="{{ route('Edu.admin.system.destroy',$lesson['id']) }}"></btn-del>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
