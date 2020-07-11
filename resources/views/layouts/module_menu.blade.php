@@ -13,12 +13,12 @@
         @endif
         <span>{{ $menu['title'] }}</span>
     </a>
-    <div id="collapseTwo{{ $index }}" class="collapse {{ $menuService->isMenuGroup($menu)?'show':'' }}"
+    <div id="collapseTwo{{ $index }}" class="collapse {{ $menuService->isCurrentMenuGroup($index)?'show':'' }}"
         aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            @foreach ($menu['items'] as $item)
+            @foreach ($menu['items'] as $i=>$item)
             @can($item['permission'])
-            <a class="collapse-item" href="{{ isset($item['route'])?route($item['route']):'' }}">
+            <a class="collapse-item" href="{{ route('site.menu.show',[site(),$index.'-'.$i]) }}">
                 {{ $item['title'] }}
             </a>
             @endcan

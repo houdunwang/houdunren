@@ -42,4 +42,9 @@ class Site extends Model
     {
         return $this->hasMany(Role::class);
     }
+
+    public function isAdmin(User $user)
+    {
+        return $this->admins->contains($user);
+    }
 }

@@ -1,6 +1,6 @@
 <nav class="nav nav-tabs">
     <a class="nav-link {{ active_class(if_route('admin.index'))}}" href="{{ route('admin.index') }}">
-        <i class="fas fa-home    "></i>
+        <i class="fa fa-home" aria-hidden="true"></i>
     </a>
 
     <a class="nav-link {{ active_class(if_route('site.role.index'))}}" href="{{ route('site.role.index',$site) }}">
@@ -17,3 +17,7 @@
     </a>
     @endif
 </nav>
+
+<div class="alert alert-info mt-2" role="alert">
+    你正在管理站点「{{ $site->title }}」的角色
+</div>

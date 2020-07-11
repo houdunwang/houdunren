@@ -26,7 +26,7 @@ function site(Site $site = null): ?Site
     }
 
     if (is_null($site)) {
-        $site =  session('site');
+        $site = session('site');
     }
 
     if (!($site instanceof Site)) {

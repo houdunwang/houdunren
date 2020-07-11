@@ -4,7 +4,8 @@
 @include('admin.nav')
 
 <div class="alert alert-info mt-3" role="alert">
-    <i class="fa fa-info-circle" aria-hidden="true"></i> 站长不受权限控制，所以对站长的任何操作均无意义
+    <i class="fa fa-info-circle" aria-hidden="true"></i>
+    站长「{{ $site->master->name }}」拥有对<strong>{{ $site->title }}</strong>站点管理的全部权限
 </div>
 <div class="table table-striped mt-3">
     <table class="table">
@@ -34,7 +35,8 @@
                     @endif
 
                     @foreach($user->roles as $role)
-                    <span class="badge badge-success mr-2">{{ $role['title'] }}</span>
+                    <a href="{{ route('site.role.edit',[$site,$role]) }}"
+                        class="badge badge-success mr-2">{{ $role['title'] }}</a>
                     @endforeach
                 </td>
                 <td class="text-right align-middle">
@@ -51,30 +53,9 @@
     </table>
 </div>
 
-<button class="btn btn-info" @click.prevent="dialogVisible = true">添加管理员</button>
-<el-dialog title="提示" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
-    <user-search action="{{ route('site.admin.search',$site) }}" v-slot="{user}" class="mt-3">
-        <user-search-btn>
-            <div class="btn-group btn-group-sm">
-                <a :href="'/site/{{ $site['id'] }}/admin/store/'+user.id" class="btn btn-info btn-sm">设为管理员</a>
-            </div>
-        </user-search-btn>
-    </user-search>
-</el-dialog>
-
+<user-search action="{{ route('site.admin.search',$site) }}" v-slot="{user}" class="mt-3">
+    <div class="btn-group btn-group-sm">
+        <a :href="'/site/{{ $site['id'] }}/admin/store/'+user.id" class="btn btn-info btn-sm">设为管理员</a>
+    </div>
+</user-search>
 @endsection
-
-@push("vue")
-<script>
-    window.vue={
-        data:{
-            dialogVisible: false
-        },
-        methods: {
-            handleClose(done) {
-                done();
-            }
-        }
-    }
-</script>
-@endpush

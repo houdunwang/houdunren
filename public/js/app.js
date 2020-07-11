@@ -157,6 +157,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     uploadName: {
@@ -192,7 +202,9 @@ __webpack_require__.r(__webpack_exports__);
       this.imageUrl = res.path;
     },
     beforeAvatarUpload: function beforeAvatarUpload(file) {
-      var isJPG = file.type === 'image/jpeg';
+      var isJPG = ['image/jpeg', 'image/png'].some(function (mime) {
+        return mime == file.type;
+      });
       var isLt2M = file.size / 1024 / 1024 < 2;
 
       if (!isJPG) {
@@ -203,6 +215,7 @@ __webpack_require__.r(__webpack_exports__);
         this.$message.error('上传头像图片大小不能超过 2MB!');
       }
 
+      this.$refs['image'].classList.remove('is-invalid');
       return isJPG && isLt2M;
     },
     error: function error(err) {
@@ -510,6 +523,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     action: {
@@ -521,7 +544,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      dialogVisible: true,
+      dialogVisible: false,
       name: '',
       users: []
     };
@@ -2419,7 +2442,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.avatar-uploader .el-upload {\n  border: 1px dashed #d9d9d9;\n  border-radius: 6px;\n  cursor: pointer;\n  position: relative;\n  overflow: hidden;\n}\n.avatar-uploader .el-upload:hover {\n  border-color: #409eff;\n}\n.avatar-uploader-icon {\n  font-size: 28px;\n  color: #8c939d;\n  width: 178px;\n  height: 178px;\n  line-height: 178px;\n  text-align: center;\n}\n.avatar {\n  width: 178px;\n  height: 178px;\n  display: block;\n}\n", ""]);
+exports.push([module.i, "\n.avatar-uploader .el-upload {\n  border: 1px dashed #d9d9d9;\n  border-radius: 6px;\n  cursor: pointer;\n  position: relative;\n  overflow: hidden;\n}\n.avatar-uploader .el-upload:hover {\n  border-color: #409eff;\n}\n.avatar-uploader-icon {\n  font-size: 28px;\n  color: #8c939d;\n  width: 178px;\n  height: 178px;\n  line-height: 178px;\n  text-align: center;\n}\n.avatar {\n  height: 100px;\n  display: block;\n}\n", ""]);
 
 // exports
 
@@ -8724,6 +8747,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { ref: "image" },
     [
       _c(
         "el-upload",
@@ -8742,7 +8766,11 @@ var render = function () {
         },
         [
           _vm.imageUrl
-            ? _c("img", { staticClass: "avatar", attrs: { src: _vm.imageUrl } })
+            ? _c("img", {
+                staticClass: "avatar",
+                staticStyle: { background: "#f3f3f3" },
+                attrs: { src: _vm.imageUrl },
+              })
             : _c("i", { staticClass: "el-icon-plus avatar-uploader-icon" }),
         ]
       ),
@@ -9145,122 +9173,159 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "card-header" }, [
-      _c("div", { staticClass: "input-group mb-3" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.name,
-              expression: "name",
-            },
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "请输入邮箱、手机或用户编号" },
-          domProps: { value: _vm.name },
+  return _c(
+    "div",
+    [
+      _c(
+        "el-dialog",
+        {
+          attrs: {
+            title: "提示",
+            visible: _vm.dialogVisible,
+            width: "50%",
+            "before-close": _vm.handleClose,
+          },
           on: {
-            keyup: function ($event) {
-              if (
-                !$event.type.indexOf("key") &&
-                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-              ) {
-                return null
-              }
-              return _vm.get($event)
-            },
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.name = $event.target.value
+            "update:visible": function ($event) {
+              _vm.dialogVisible = $event
             },
           },
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-group-append" }, [
-          _c(
-            "a",
-            {
-              staticClass: "input-group-text",
-              attrs: { href: "javascript:;", id: "basic-addon2" },
-              on: {
-                click: function ($event) {
-                  $event.preventDefault()
-                  return _vm.get($event)
-                },
-              },
-            },
-            [_vm._v("搜索")]
-          ),
-        ]),
-      ]),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
-      _c("table", { staticClass: "table" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.users, function (user) {
-            return _c("tr", { key: user.id }, [
-              _c("td", { staticClass: "align-middle" }, [
-                _vm._v(_vm._s(user.id)),
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "align-middle" }, [
-                _c("img", {
-                  staticClass: "rounded mr-3",
-                  staticStyle: { width: "30px" },
-                  attrs: { src: user.avatar },
+        },
+        [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _c("div", { staticClass: "input-group mb-3" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.name,
+                      expression: "name",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: "请输入邮箱、手机或用户编号",
+                  },
+                  domProps: { value: _vm.name },
+                  on: {
+                    keyup: function ($event) {
+                      if (
+                        !$event.type.indexOf("key") &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.get($event)
+                    },
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.name = $event.target.value
+                    },
+                  },
                 }),
-                _vm._v("\n            " + _vm._s(user.name) + "\n          "),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group-append" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "input-group-text",
+                      attrs: { href: "javascript:;", id: "basic-addon2" },
+                      on: {
+                        click: function ($event) {
+                          $event.preventDefault()
+                          return _vm.get($event)
+                        },
+                      },
+                    },
+                    [_vm._v("搜索")]
+                  ),
+                ]),
               ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "align-middle" }, [
-                _vm._v(_vm._s(user.email)),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("table", { staticClass: "table" }, [
+                _c("thead", [
+                  _c("tr", [
+                    _c("th", { attrs: { width: "80" } }, [_vm._v("编号")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("昵称")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("邮箱")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("手机号")]),
+                    _vm._v(" "),
+                    _c("th"),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.users, function (user) {
+                    return _c("tr", { key: user.id }, [
+                      _c("td", { staticClass: "align-middle" }, [
+                        _vm._v(_vm._s(user.id)),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "align-middle" }, [
+                        _c("img", {
+                          staticClass: "rounded mr-3",
+                          staticStyle: { width: "30px" },
+                          attrs: { src: user.avatar },
+                        }),
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(user.name) +
+                            "\n              "
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "align-middle" }, [
+                        _vm._v(_vm._s(user.email)),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "align-middle" }, [
+                        _vm._v(_vm._s(user.mobile)),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "text-right align-middle" },
+                        [_vm._t("default", null, { user: user })],
+                        2
+                      ),
+                    ])
+                  }),
+                  0
+                ),
               ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "align-middle" }, [
-                _vm._v(_vm._s(user.mobile)),
-              ]),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "text-right align-middle" },
-                [_vm._t("default", null, { user: user })],
-                2
-              ),
-            ])
-          }),
-          0
-        ),
-      ]),
-    ]),
-  ])
+            ]),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-info btn-sm",
+          on: {
+            click: function ($event) {
+              _vm.dialogVisible = true
+            },
+          },
+        },
+        [_vm._v(_vm._s(_vm.title))]
+      ),
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { width: "80" } }, [_vm._v("编号")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("昵称")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("邮箱")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("手机号")]),
-        _vm._v(" "),
-        _c("th"),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

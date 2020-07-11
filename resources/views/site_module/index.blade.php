@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@inject('permissionService', 'App\Services\PermissionService')
 @section('content')
 <nav class="nav nav-tabs">
     <a class="nav-link {{ active_class(if_route('admin.index'))}}" href="{{ route('admin.index') }}">
@@ -17,7 +17,7 @@
     </div>
     <div class="card-body">
         <div class="row p-3">
-            @foreach ($modules as $module)
+            @forelse ($modules as $module)
             <div class="col-6 col-sm-2">
                 <div class="card shadow">
                     <div class="card-body text-center">
@@ -34,7 +34,12 @@
                     </div>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <div class="text-center p-3 col-12 text-secondary font-weight-bold">
+                <i class="fa fa-info-circle" aria-hidden="true"></i> 你没有可以管理的模块，请联系站点管理员「{{ $site->master->name }}」授权
+            </div>
+            @endforelse
+
         </div>
     </div>
 

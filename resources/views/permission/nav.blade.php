@@ -11,3 +11,6 @@
         权限设置
     </a>
 </nav>
+<div class="alert alert-info mt-2" role="alert">
+    你正在设置「{{ $site->title }}」站点的「{{ $role->title }}」角色的权限
+</div>

@@ -16,11 +16,20 @@ class MenuService
         return $menus;
     }
 
-    //当前路由是否在模块菜单组中
-    public function isMenuGroup($menu)
+    public function currentActiveMenu($menu)
     {
-        return (bool) collect($menu['items'])->filter(function ($menu) {
-            return isset($menu['route']) &&  if_route($menu['route']);
-        })->count();
+        session(['module_menu' => $menu]);
+    }
+
+    public function currentActiveMenuRoute($module)
+    {
+        $group = session('module_menu.0');
+        $item = session('module_menu.1');
+        return $module['menus'][$group]['items'][$item]['route'];
+    }
+
+    public function isCurrentMenuGroup($index)
+    {
+        return $index == session('module_menu.0');
     }
 }

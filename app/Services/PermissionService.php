@@ -61,7 +61,7 @@ class PermissionService
     {
         return (bool) collect($module['menus'])->filter(function ($menu) {
             return collect($menu['items'])->filter(function ($item) {
-                return user()->can($item['permission'], 333);
+                return user()->can($item['permission']);
             })->count();
         })->count();
     }

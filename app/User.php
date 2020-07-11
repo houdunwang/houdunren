@@ -44,9 +44,21 @@ class User extends Authenticatable
         return $this->belongsToMany(Site::class, 'admin_site')->withTimestamps();
     }
 
-    public function scopeSearch($query, string $name)
+    public function masterSites()
     {
+        return $this->hasMany(Site::class, 'user_id');
+    }
+
+    public function getallSitesAttribute()
+    {
+        return $this->sites->merge($this->masterSites);
+    }
+
+    public function scopeSearch($query, $name)
+    {
+        if (empty($name)) return $query;
+
         $name = "%{$name}%";
-        return $query->orWhere('id', 'like', $name)->orWhere('email', 'like', $name)->orWhere('mobile', 'like', $name);
+        return $query->orWhere('name', 'like', $name)->orWhere('id', 'like', $name)->orWhere('email', 'like', $name)->orWhere('mobile', 'like', $name);
     }
 }

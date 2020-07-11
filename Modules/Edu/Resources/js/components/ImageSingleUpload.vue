@@ -11,7 +11,7 @@
       :with-credentials="true"
       :on-error="error"
     >
-      <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+      <img v-if="imageUrl" :src="imageUrl" class="avatar" style="background:#f3f3f3" />
       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
 
@@ -45,7 +45,7 @@ export default {
       this.imageUrl = res.path
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg'
+      const isJPG = ['image/jpeg','image/png'].some(mime=>mime ==file.type)
       const isLt2M = file.size / 1024 / 1024 < 2
 
       if (!isJPG) {
@@ -85,8 +85,7 @@ export default {
   text-align: center;
 }
 .avatar {
-  width: 178px;
-  height: 178px;
+  height: 100px;
   display: block;
 }
 </style>

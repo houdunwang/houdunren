@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
-use App\Models\Admin;
 use App\Models\Site;
 use App\User;
 use Illuminate\Http\Request;
@@ -25,7 +23,10 @@ class AdminController extends Controller
 
     public function search(Request $request, Site $site)
     {
-        $users = User::search($request->input('name'))->limit(10)->get();
+        $admins = $site->admins->pluck('id')->toArray();
+        array_push($admins, $site->master->id);
+
+        $users = User::search($request->input('name'))->whereNotIn('id', $admins)->limit(10)->get();
 
         return $users;
     }

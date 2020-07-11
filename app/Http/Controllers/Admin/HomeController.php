@@ -15,10 +15,11 @@ class HomeController extends Controller
 
     protected function sites()
     {
+
         if (user()->isSuperAdmin) {
             return Site::all();
         } else {
-            return user()->sites;
+            return user()->allSites;
         }
     }
 

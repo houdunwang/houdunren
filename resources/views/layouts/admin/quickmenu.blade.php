@@ -1,5 +1,5 @@
 <div class="d-none d-md-block">
-    <div class="quick-menu pt-5 m-3 d-flex justify-content-between">
+    <div class="quick-menu pt-5 m-3 d-flex justify-content-between align-items-end">
         <div class="logo">
             <a href="{{ route('admin.index') }}">
                 <img src="{{ config('admin.logo') }}" alt="">

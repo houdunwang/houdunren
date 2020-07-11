@@ -8,31 +8,17 @@ use Closure;
 
 class AdminMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
     public function handle($request, Closure $next)
     {
-        $this->cacheModule();
+        if (site()->isAdmin(user()) === false) {
+            return redirect()->route('admin.index')->with('danger', '您不是站点管理员');
+        }
 
         $status = app(PermissionService::class)->checkModulePermission(module());
-
         if ($status === false) {
-            return redirect()->route('admin')->with('danger', '你没有管理模块的权限');
+            return redirect()->route('site.module.index', site())->with('danger', '你没有管理模块的权限，请联系站长给予权限');
         }
 
         return $next($request);
-    }
-
-    public function cacheModule()
-    {
-        $module = app(ModuleService::class)->findBySite(site(), module()['name']);
-
-        unset($module['model']);
-        module($module);
     }
 }

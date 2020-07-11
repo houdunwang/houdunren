@@ -50,4 +50,6 @@ Route::group(['prefix' => 'site', 'namespace' => 'Site', 'as' => 'site.', 'middl
 
     Route::get('{site}/module', 'ModuleController@index')->name('module.index');
     Route::get('{site}/module/{module}', 'ModuleController@show')->name('module.show');
+
+    Route::get('{site}/menu/{menu}', 'MenuController@show')->name('menu.show');
 });
