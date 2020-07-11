@@ -52,3 +52,21 @@ function module(array $module = null)
 
     return $module;
 }
+
+function permission_name($permission, Site $site, $module)
+{
+    return 's' . $site->id . '-' . $module['name'] . '-' . $permission;
+}
+
+//只在模块应用使用
+function access($permission, $site = null, $module = null)
+{
+    $site = $site ?? site();
+    $module = $module ?? module();
+
+    if (user()->isSuperAdmin || $site->user_id == user('id')) {
+        return true;
+    }
+
+    return user()->can(permission_name($permission, $site, $module));
+}

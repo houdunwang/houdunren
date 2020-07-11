@@ -50,13 +50,6 @@ _axios.interceptors.response.use(
       case 422:
         store.commit('setError', data.errors)
         break
-      case 403:
-        el.MessageBox.confirm(data.message, '温馨提示', {
-          showCancelButton: false,
-          confirmButtonText: '关闭',
-          type: 'warning',
-        })
-        break
       default:
         let message = data.message
         el.MessageBox.confirm(httpStatus(status) || message, '温馨提示', {

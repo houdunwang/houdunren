@@ -17,7 +17,7 @@
                 @endif
 
                 <li class="nav-item mr-3">
-                    <a class="nav-link" href="{{ route('admin.index') }}">
+                    <a class="nav-link" href="{{ route('admin') }}">
                         <i class="fa fa-sitemap" aria-hidden="true"></i> 站点管理
                     </a>
                 </li>

@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div class="admin">
+    <div class="system">
         @include('layouts.admin.header')
         @include('layouts.admin.quickmenu')
 

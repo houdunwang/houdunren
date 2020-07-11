@@ -1,5 +1,5 @@
 <nav class="nav nav-tabs">
-    <a class="nav-link {{ active_class(if_route('admin.index'))}}" href="{{ route('admin.index') }}">
+    <a class="nav-link " href="{{ route('admin') }}">
         <i class="fa fa-home" aria-hidden="true"></i>
     </a>
 

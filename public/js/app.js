@@ -10138,14 +10138,6 @@ _axios.interceptors.response.use(function (response) {
       _store__WEBPACK_IMPORTED_MODULE_3__["default"].commit('setError', data.errors);
       break;
 
-    case 403:
-      element_ui__WEBPACK_IMPORTED_MODULE_4___default.a.MessageBox.confirm(data.message, '温馨提示', {
-        showCancelButton: false,
-        confirmButtonText: '关闭',
-        type: 'warning'
-      });
-      break;
-
     default:
       var message = data.message;
       element_ui__WEBPACK_IMPORTED_MODULE_4___default.a.MessageBox.confirm(Object(_plugins_httpStatus__WEBPACK_IMPORTED_MODULE_5__["default"])(status) || message, '温馨提示', {

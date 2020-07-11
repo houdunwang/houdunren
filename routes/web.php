@@ -15,8 +15,9 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::post('register/code', 'RegisterController@code')->middleware(['throttle:1000:2']);
 });
 
+Route::get('admin', 'Site\SiteController@index')->name('admin');
+
 Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Admin', 'as' => 'admin.'], function () {
-    Route::get('/', 'HomeController@index')->name('index');
     Route::get('system', 'HomeController@setting')->name('setting');
 
     Route::get('module', 'ModuleController@index')->name('module.index');

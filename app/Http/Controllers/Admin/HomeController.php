@@ -10,19 +10,14 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('system.index', ['sites' => $this->sites()]);
-    }
-
-    protected function sites()
-    {
-
         if (user()->isSuperAdmin) {
-            return Site::all();
+            $sites = Site::all();
         } else {
-            return user()->allSites;
+            $sites = user()->allSites;
         }
-    }
 
+        return view('system.index', compact('sites'));
+    }
     public function setting()
     {
         return view('system.setting');

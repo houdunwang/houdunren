@@ -41,12 +41,6 @@ class ModuleService
         ];
     }
 
-    public function findBySite(Site $site, string $name)
-    {
-        $module = $this->find($name);
-        return app(PermissionService::class)->addModulePermissionPrefix($site, $module);
-    }
-
     protected function config(string $name, string $fileName)
     {
         $module = Module::findOrFail($name);
@@ -58,7 +52,7 @@ class ModuleService
     public function getSiteModules(Site $site)
     {
         return $site->master->group->modules->map(function ($module) use ($site) {
-            return $this->findBySite($site, $module['name']);
+            return $this->find($module['name']);
         });
     }
 }

@@ -10967,21 +10967,21 @@ body {
   background: #fafafa;
 }
 
-.admin {
+.system {
   min-height: 100vh;
   background: url("/images/admin-bg.jpg");
   background-size: cover;
 }
 
-.admin .admin-header .bg-dark {
+.system .admin-header .bg-dark {
   background: #353738 !important;
 }
 
-.admin .quick-menu .logo img {
+.system .quick-menu .logo img {
   max-width: 350px;
 }
 
-.admin .quick-menu .menu-items a {
+.system .quick-menu .menu-items a {
   color: #333;
   background: #fff;
   padding: 10px 20px;
@@ -10990,32 +10990,32 @@ body {
   width: 8rem;
 }
 
-.admin .quick-menu .menu-items a:hover {
+.system .quick-menu .menu-items a:hover {
   opacity: 0.9;
 }
 
-.admin .quick-menu .menu-items a i {
+.system .quick-menu .menu-items a i {
   font-size: 30px;
   margin-bottom: 5px;
 }
 
-.admin .quick-menu .menu-items a span {
+.system .quick-menu .menu-items a span {
   font-size: 14px;
 }
 
-.admin .admin-setting h6 {
+.system .admin-setting h6 {
   border-left: solid 5px #333;
 }
 
-.admin .admin-setting .system-menu {
+.system .admin-setting .system-menu {
   width: 8rem;
 }
 
-.admin .admin-module-index section img {
+.system .admin-module-index section img {
   width: 45px;
 }
 
-.admin .admin-module-index section:last-child {
+.system .admin-module-index section:last-child {
   border-bottom: none !important;
 }
 

@@ -3,7 +3,7 @@
 @section('content')
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link " href="{{ route('admin.index') }}">
+        <a class="nav-item nav-link " href="{{ route('admin') }}">
             <i class="fa fa-home" aria-hidden="true"></i>
         </a>
         <a class="nav-item nav-link active" id="nav-base-tab" data-toggle="tab" href="#nav-base" role="tab"

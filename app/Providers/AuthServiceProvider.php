@@ -26,10 +26,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::before(function ($user, $ability) {
-            preg_match('/s(\d+?)-/', $ability, $matchs);
-            $site = Site::find($matchs[1]);
-            return $user->isSuperAdmin || $site->master->id == auth()->id();
+        Gate::guessPolicyNamesUsing(function ($modelClass) {
+            return str_replace(['Models'], 'Policies', $modelClass) . 'Policy';
         });
     }
 }

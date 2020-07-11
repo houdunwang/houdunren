@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Site::class, 'site');
+    }
+
     public function index(Site $site)
     {
         $users = $site->admins;
@@ -44,12 +49,16 @@ class AdminController extends Controller
 
     public function role(Site $site, User $user)
     {
+        $this->authorize('update', $site);
+
         $roles = $site->roles;
         return view('admin.role', compact('site', 'user', 'roles'));
     }
 
     public function updateRole(Site $site, User $user, Request $request)
     {
+        $this->authorize('update', $site);
+
         $user->syncRoles($request->input('roles'));
         return redirect()->route('site.admin.index', [$site])->with('success', '角色设置成功');
     }

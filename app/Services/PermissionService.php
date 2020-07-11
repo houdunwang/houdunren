@@ -13,55 +13,30 @@ class PermissionService
 
             $module = app(ModuleService::class)->find($model['name']);
 
-            $module = $this->addModulePermissionPrefix($site, $module);
-
-            collect($module['menus'])->map(function ($menu) use ($module) {
+            collect($module['menus'])->map(function ($menu) use ($module, $site) {
                 foreach ($menu['items'] as $item) {
+                    $name = permission_name($item['permission'], $site, $module);
                     Permission::updateOrCreate(
-                        ['name' => $item['permission']],
-                        ['name' => $item['permission'], 'title' => $item['title'], 'module_id' => $module['id']]
+                        ['name' => $name],
+                        ['name' => $name, 'title' => $item['title'], 'module_id' => $module['id']]
                     );
                 }
             });
         });
     }
 
-    //同步系统权限
-    public function saveSiteSystemPermissions(Site $site)
-    {
-        $menus = app(MenuService::class)->getSiteSystemMenus($site);
-
-        foreach ($menus as $item) {
-            Permission::updateOrCreate(
-                ['name' => $item['permission']],
-                ['name' => $item['permission'], 'title' => $item['title']]
-            );
-        }
-    }
-
-    public function addModulePermissionPrefix(Site $site, array $module)
-    {
-        foreach ($module['menus'] as $n => $menu) {
-            foreach ($menu['items'] as $k => $item) {
-                $module['menus'][$n]['items'][$k]['permission'] =
-                    "s{$site['id']}-{$module['name']}-{$item['permission']}";
-            }
-        }
-        return $module;
-    }
-
     public function checkModuleMenuPermission(array $menu)
     {
         return (bool) array_filter($menu['items'], function ($m) {
-            return user()->can($m['permission']);
+            return access($m['permission']);
         });
     }
 
-    public function checkModulePermission($module)
+    public function checkModulePermission(Site $site, $module)
     {
-        return (bool) collect($module['menus'])->filter(function ($menu) {
-            return collect($menu['items'])->filter(function ($item) {
-                return user()->can($item['permission']);
+        return (bool) collect($module['menus'])->filter(function ($menu) use ($site, $module) {
+            return collect($menu['items'])->filter(function ($item) use ($site, $module) {
+                return access($item['permission'], $site, $module);
             })->count();
         })->count();
     }

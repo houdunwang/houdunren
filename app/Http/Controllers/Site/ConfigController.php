@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class ConfigController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Site::class, 'site');
+    }
+
     public function edit(Site $site)
     {
         config(['site' => $site->config]);
@@ -19,7 +24,7 @@ class ConfigController extends Controller
         $site->config = $request->except(['_token', '_method']);
         $site->save();
         return redirect()
-            ->route('admin.index')
+            ->route('admin')
             ->with('success', '站点配置保存成功');
     }
 }
