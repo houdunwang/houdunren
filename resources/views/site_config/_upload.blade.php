@@ -6,7 +6,6 @@
         <x-form theme="radio" title="上传驱动" name="upload[drive]" :options="['local'=>'本地上传','oss'=>'阿里云OSS']"
             value="{{ config('site.upload.drive','local') }}" placeholder="">
         </x-form>
-        ß
         <x-form title="文件大小" name="upload[file_size]" value="{{ config('site.upload.file_size','200000000') }}"
             placeholder="允许上传的文件大小"></x-form>
 

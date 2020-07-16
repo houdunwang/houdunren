@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+use App\Models\User;
 use Spatie\Permission\Models\Role;
 
 class Site extends Model

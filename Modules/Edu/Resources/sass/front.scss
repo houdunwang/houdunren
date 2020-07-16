@@ -1,0 +1,98 @@
+.front {
+  .header {
+    border-bottom: solid 4px #41a8a5;
+
+    .navbar-nav {
+      font-size: 1.05rem;
+    }
+  }
+
+  .content {
+    .w45 {
+      width: 45px;
+    }
+    .w35 {
+      width: 35px;
+    }
+    .h5 {
+      font-size: 1.125rem;
+    }
+  }
+  .Edu-front-topic-show {
+    .topic-content {
+      font-size: 1rem;
+      line-height: 2rem;
+      color: #555;
+    }
+  }
+}
+
+.Edu-front-video-show {
+  .video {
+    background: #262b36;
+    video {
+      width: 100%;
+      height: auto;
+      outline: none;
+    }
+  }
+}
+
+.Edu-front-system-index {
+  img {
+    width: 100%;
+  }
+}
+
+.Edu-front-sign-index {
+  form {
+    input:checked + img {
+      border: solid 5px #f15a57;
+    }
+    img {
+      float: left;
+      border: solid 5px #eae8e8;
+      margin-right: 10px;
+      padding: 5px 6px 2px;
+      cursor: pointer;
+      border-radius: 10px;
+      background-color: #f3f3f3;
+      transition: 0.5s;
+    }
+  }
+}
+
+.Edu-front-subscribe-index {
+  .subscribe {
+    background: #f1f1ed;
+    padding-bottom: 5rem;
+    .header {
+      background-image: linear-gradient(150deg, #2d1582 0%, #19a0ff 100%);
+      background-repeat: repeat-x;
+      padding: 20px 20px 120px;
+      h1 {
+        font-size: 4rem;
+        margin-top: 6rem;
+      }
+      h2 {
+        font-weight: 200;
+        opacity: 0.6;
+        margin-top: 2rem;
+        color: #fff;
+        text-align: center;
+      }
+    }
+    .items {
+      margin-top: -5rem;
+      padding-bottom: 3rem;
+      .price {
+        font-weight: normal;
+        font-size: 3rem;
+        text-shadow: 0 0 3px #aaa;
+      }
+      .card-footer {
+        background: #f1f2ec;
+      }
+    }
+  }
+}

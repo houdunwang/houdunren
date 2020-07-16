@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
         <x-form type="password" title="应用ID" name="alipay[app_id]" value="{{ config('site.alipay.app_id') }}"
-            placeholder="根据服务器所在区域进行选择 | https://help.alipay.com/document_detail/40654.html?spm=5176.7114037.1996646101.1.OCtdEo">
+            placeholder="请登录支付定应用中心查看  https://open.alipay.com/platform/developerIndex.htm">
         </x-form>
 
         <x-form title="编码格式" name="alipay[charset]" value="{{ config('site.alipay.charset','UTF-8') }}"

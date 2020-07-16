@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::group(['namespace' => 'Auth'], function () {
     Route::get('login', 'LoginController@show')->name('login');
@@ -12,12 +10,20 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::get('logout', 'LoginController@logout')->name('logout');
     Route::get('register', 'RegisterController@show')->name('register');
     Route::post('register', 'RegisterController@register')->name('register');
-    Route::post('register/code', 'RegisterController@code')->middleware(['throttle:1000:2']);
+    Route::post('register/code', 'RegisterController@code')->middleware(['throttle:1000:2', 'front'])->name('register.code');
 });
 
-Route::get('admin', 'Site\SiteController@index')->name('admin');
+Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware('auth');
+Route::group(['prefix' => 'common', 'middleware' => ['auth'], 'namespace' => 'Common', 'as' => 'common.'], function () {
+    Route::post('upload', 'UploadController@upload')->name('upload');
+    Route::get('favorite/{model}/{id}/{module?}', 'FavoriteController@make')->name('favorite')->middleware('auth');
+    Route::get('favour/{model}/{id}/{module?}', 'FavourController@make')->name('favour')->middleware('auth');
+    Route::get('follower/{user}', 'FollowerController@make')->name('follower')->middleware('auth');
+    Route::post('code/email', 'CodeController@email')->name('code.email')->middleware('auth');
+    Route::post('code/mobile', 'CodeController@mobile')->name('code.mobile')->middleware('auth');
+});
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Admin', 'as' => 'admin.'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'system'], 'namespace' => 'Admin', 'as' => 'admin.'], function () {
     Route::get('system', 'HomeController@setting')->name('setting');
 
     Route::get('module', 'ModuleController@index')->name('module.index');
@@ -53,4 +59,13 @@ Route::group(['prefix' => 'site', 'namespace' => 'Site', 'as' => 'site.', 'middl
     Route::get('{site}/module/{module}', 'ModuleController@show')->name('module.show');
 
     Route::get('{site}/menu/{menu}', 'MenuController@show')->name('menu.show');
+});
+
+Route::group(['prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.', 'middleware' => ['auth', 'front']], function () {
+    Route::resource('base', 'BaseController')->only(['index', 'store']);
+    Route::resource('password', 'PasswordController')->only(['index', 'store']);
+    Route::resource('avatar', 'AvatarController')->only(['index', 'store']);
+    Route::post('avatar/upload', 'AvatarController@upload')->name('avatar.upload');
+    Route::resource('email', 'EmailController')->only(['index', 'store']);
+    Route::resource('mobile', 'MobileController')->only(['index', 'store']);
 });

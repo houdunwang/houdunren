@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Site;
+use App\Services\ModuleService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function __construct()
+    public function index(Request $request)
     {
-        $this->middleware('auth');
-    }
+        $site = get_site_by_domain();
 
-    public function index()
-    {
-        return view('home');
+        if ($site->module === null) {
+            abort(404, '站点没有默认模块');
+        }
+
+        module($site->module['name']);
+        $class = 'Modules\\' . $site->module['name'] . '\Http\Controllers\HomeController';
+        return app($class)->index($request);
     }
 }

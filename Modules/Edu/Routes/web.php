@@ -9,4 +9,23 @@ Route::group(['prefix' => 'Edu/admin', 'middleware' => ['auth', 'admin'], 'names
     Route::post('search/lesson', 'LessonController@search')->name('lesson.search');
     Route::resource("lesson", 'LessonController');
     Route::resource("system", 'SystemController');
+
+    Route::resource('subscribe', 'SubscribeController');
+});
+
+Route::group(['prefix' => 'Edu', 'middleware' => ['front'], 'namespace' => 'Front', 'as' => 'Edu.front.'], function () {
+    Route::resource('topic', 'TopicController');
+    Route::get('recommend/{topic}', 'TopicController@recommend')->name('topic.recommend');
+
+    Route::resource('lesson', 'LessonController');
+    Route::resource('video', 'VideoController');
+    Route::resource('system', 'SystemController');
+    Route::resource('sign', 'SignController');
+    Route::resource('subscribe', 'SubscribeController');
+});
+
+Route::group(['prefix' => 'pay', 'namespace' => 'Pay', 'as' => 'Edu.pay.'], function () {
+    Route::get('subscribe/alipay/return', 'SubscribeController@alipayReturn')->name('subscribe.alipay.return');
+    Route::post('subscribe/alipay/notify', 'SubscribeController@alipayNotify')->name('subscribe.alipay.notify');
+    Route::get('subscribe/alipay/{subscribe}', 'SubscribeController@alipay')->name('subscribe.alipay');
 });

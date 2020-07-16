@@ -3,7 +3,9 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\FrontMiddleware;
 use App\Http\Middleware\SiteMiddleware;
+use App\Http\Middleware\SystemMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -52,7 +54,9 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'system' => SystemMiddleware::class,
         'admin' => AdminMiddleware::class,
+        'front' => FrontMiddleware::class,
         //
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

@@ -6,5 +6,6 @@ import store from './store'
 
 new Vue({
   el: '#app',
-  store
+  mixins: [window.vue || {}],
+  store,
 })

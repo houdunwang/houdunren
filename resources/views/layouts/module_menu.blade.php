@@ -2,14 +2,15 @@
 @inject('menuService', 'App\Services\MenuService')
 
 @foreach (module()['menus'] as $index=>$menu)
-@if ($permissionService->checkModuleMenuPermission($menu))
+@if ($permissionService->checkModuleMenuPermission(site(),module(),$menu))
+
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo{{ $index }}"
         aria-expanded="true" aria-controls="collapseTwo{{ $index }}">
         @if (isset($menu['icon']))
         <i class="{{ $menu['icon'] }}"></i>
         @else
-        <i class="fas fa-fw fa-folder"></i>
+        <i class="fa fa-folder-o"></i>
         @endif
         <span>{{ $menu['title'] }}</span>
     </a>
@@ -26,6 +27,7 @@
         </div>
     </div>
 </li>
+
 @endif
 @endforeach
 
@@ -45,7 +47,7 @@
 
 <!-- Nav Item - Charts -->
 <li class="nav-item">
-    <a class="nav-link" href="charts.html">
+    <a class="nav-link" href="/" target="_blank">
         <i class="fas fa-fw fa-chart-area"></i>
-        <span>微信公众号</span></a>
+        <span>网站首页</span></a>
 </li>

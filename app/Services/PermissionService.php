@@ -25,10 +25,10 @@ class PermissionService
         });
     }
 
-    public function checkModuleMenuPermission(array $menu)
+    public function checkModuleMenuPermission(Site $site, $module, array $menu)
     {
-        return (bool) array_filter($menu['items'], function ($m) {
-            return access($m['permission']);
+        return (bool) array_filter($menu['items'], function ($item) use ($site, $module) {
+            return access($item['permission'], $site, $module);
         });
     }
 

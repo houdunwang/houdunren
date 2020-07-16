@@ -22,9 +22,8 @@ class ModuleController extends Controller
     public function show(Site $site, Module $module, PermissionService $permissionService)
     {
         site($site);
-        $module = app(ModuleService::class)->find($module['name']);
-        unset($module['model']);
-        module($module);
+
+        module($module['name']);
 
         return redirect(url($module['name'] . '/admin'));
     }

@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Group;
-use App\User;
+use App\Models\User;
 
 class GroupObserver
 {

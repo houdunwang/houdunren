@@ -28,7 +28,7 @@
             aria-controls="nav-email" aria-selected="false">邮箱配置</a>
 
         <a class="nav-item nav-link" id="nav-sms-tab" data-toggle="tab" href="#nav-sms" role="tab"
-            aria-controls="nav-sms" aria-selected="false">短信设置</a>
+            aria-controls="nav-sms" aria-selected="false">短信验证码</a>
     </div>
 </nav>
 <form action="{{ route('site.config.update',$site) }}" method="post">

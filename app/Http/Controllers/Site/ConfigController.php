@@ -23,8 +23,6 @@ class ConfigController extends Controller
     {
         $site->config = $request->except(['_token', '_method']);
         $site->save();
-        return redirect()
-            ->route('admin')
-            ->with('success', '站点配置保存成功');
+        return back()->with('success', '站点配置保存成功');
     }
 }

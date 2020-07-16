@@ -14,7 +14,6 @@
       <img v-if="imageUrl" :src="imageUrl" class="avatar" style="background:#f3f3f3" />
       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
-
     <input :name="name" :value="imageUrl" hidden />
   </div>
 </template>
@@ -59,7 +58,7 @@ export default {
       return isJPG && isLt2M
     },
     error(err) {
-      this.$message.error('表单类型或大小错误')
+       this.$message.error('图片过大或尺寸，类型错误')
     },
   },
 }
@@ -85,7 +84,8 @@ export default {
   text-align: center;
 }
 .avatar {
-  height: 100px;
+  min-height: 100px;
+  max-height: 200px;
   display: block;
 }
 </style>

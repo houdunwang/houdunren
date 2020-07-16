@@ -8,7 +8,7 @@ a {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif !important;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .card-header,
@@ -33,5 +33,16 @@ body {
       color: #1890ff;
       font-weight: bold;
     }
+  }
+}
+
+.page-link {
+  color: #999;
+}
+
+.lesson {
+  img {
+    width: 100%;
+    max-height: 218px;
   }
 }

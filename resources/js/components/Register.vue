@@ -3,19 +3,19 @@
     <div class="card-header">会员注册</div>
     <div class="card-body">
       <div class="form-group">
-        <label>手机号</label>
+        <label>手机或邮箱</label>
         <input
           type="text"
           class="form-control"
-          :class="{ 'is-invalid': errors.mobile }"
-          @change="errors.mobile = ''"
-          v-model="mobile"
-          placeholder="请输入手机号码"
+          :class="{ 'is-invalid': errors.account }"
+          @change="errors.account = ''"
+          v-model="account"
+          placeholder="请输入手机号或邮箱帐号"
         />
         <strong
           class="form-text text-danger invalid-feedback"
-          v-if="errors.mobile"
-        >{{ errors.mobile }}</strong>
+          v-if="errors.account"
+        >{{ errors.account }}</strong>
       </div>
 
       <div class="form-group captcha">
@@ -89,13 +89,14 @@
     </div>
   </div>
 </template>
+
 <script>
 import { mapState } from 'vuex'
 export default {
   data() {
     return {
       name: '',
-      mobile: '',
+      account: '',
       code: '',
       captcha: '',
       password: '',

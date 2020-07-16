@@ -13,9 +13,9 @@ class VerificationCodeRule implements Rule
      *
      * @return void
      */
-    public function __construct($mobile)
+    public function __construct($account)
     {
-        $this->mobile = $mobile;
+        $this->account = $account;
     }
 
     /**
@@ -27,7 +27,7 @@ class VerificationCodeRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return app(CodeService::class)->check($this->mobile, $value);
+        return app(CodeService::class)->check($this->account, $value);
     }
 
     /**

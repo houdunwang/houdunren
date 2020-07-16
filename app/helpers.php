@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Module;
 use App\Models\Site;
 use App\Services\ModuleService;
 use Illuminate\Support\Facades\Auth;
@@ -36,13 +35,16 @@ function site(Site $site = null): ?Site
     return $site;
 }
 
-function module(array $module = null)
+function module(string $name = null)
 {
-    if (!is_null($module)) {
+    $module = null;
+    if (!is_null($name)) {
+        $module = app(ModuleService::class)->find($name);
+        unset($module['model']);
         session(['module' => $module]);
     }
 
-    if (is_null($module)) {
+    if (is_null($name)) {
         $module = session('module');
     }
 
@@ -59,7 +61,7 @@ function permission_name($permission, Site $site, $module)
 }
 
 //只在模块应用使用
-function access($permission, $site = null, $module = null)
+function access($permission, Site $site = null, $module = null)
 {
     $site = $site ?? site();
     $module = $module ?? module();
@@ -69,4 +71,18 @@ function access($permission, $site = null, $module = null)
     }
 
     return user()->can(permission_name($permission, $site, $module));
+}
+
+function get_site_by_domain()
+{
+    $info = parse_url(request()->url());
+    return Site::where('domain', 'regexp', 'https?:\/\/' . $info['host'])->firstOrFail();
+}
+
+function is_master()
+{
+    if (Auth::check()) {
+        return user()['isSuperAdmin'] || user()->user_id == site()['user_id'];
+    }
+    return false;
 }

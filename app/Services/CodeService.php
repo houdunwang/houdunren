@@ -2,32 +2,71 @@
 
 namespace App\Services;
 
+use App\Notifications\VerificationCodeNotification;
+use App\Models\User;
 use Cache;
+use Overtrue\EasySms\EasySms;
 
 class CodeService
 {
-    protected $mobile;
-    protected $code;
-
-    public function send(string $mobile)
+    public function check($account, $value)
     {
-        $this->code = mt_rand(1000, 9999);
-        Cache::put($this->key($mobile), $this->code, now()->addMinute(30));
-        $this->mobile($mobile);
+        return Cache::get($account) == $value;
     }
 
-    protected function key($mobile)
+    public function email($account)
     {
-        return md5('verification-code-' . $mobile);
-    }
+        $code = mt_rand(1000, 9999);
 
+        Cache::put($account, $code, now()->addMinute(20));
+
+        return app(User::class)->fill(['email' => $account])->notify(new VerificationCodeNotification($code));
+    }
 
     public function mobile($mobile)
     {
+        $code = mt_rand(1000, 9999);
+
+        Cache::put($mobile, $code, now()->addMinute(20));
+        $this->aliyun($mobile, $code);
     }
 
-    public function check($mobile, $value)
+    protected function aliyun($mobile, $code)
     {
-        return Cache::get($this->key($mobile)) == $value;
+        $config = [
+            // HTTP 请求的超时时间（秒）
+            'timeout' => 5.0,
+            // 默认发送配置
+            'default' => [
+                // 网关调用策略，默认：顺序调用
+                'strategy' => \Overtrue\EasySms\Strategies\OrderStrategy::class,
+                // 默认可用的发送网关
+                'gateways' => [
+                    'aliyun',
+                ],
+            ],
+            // 可用的网关配置
+            'gateways' => [
+                'errorlog' => [
+                    'file' => './easy-sms.log',
+                ],
+                'aliyun' => [
+                    'access_key_id' => config('site.aliyun.accessKeyId'),
+                    'access_key_secret' => config('site.aliyun.accessKeySecret'),
+                    'sign_name' => config('site.sms.aliyun.sign'),
+                ],
+            ],
+        ];
+
+        $easySms = new EasySms($config);
+
+        $easySms->send($mobile, [
+            // 'content'  => '您的验证码为: ' . $code,
+            'template' => config('site.sms.aliyun.template'),
+            'data' => [
+                'code' => $code,
+                'product' => site()['name']
+            ],
+        ]);
     }
 }

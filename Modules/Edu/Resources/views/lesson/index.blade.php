@@ -43,5 +43,6 @@
         </tbody>
     </table>
 </div>
+
 {{ $lessons->links() }}
 @endsection

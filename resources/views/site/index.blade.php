@@ -40,7 +40,7 @@
                 </a>
                 @endif
 
-                {{-- @can('update', $site) --}}
+                @can('update', $site)
                 <a href="{{ route('site.config.edit',$site) }}" class="text-muted mr-2">
                     <i aria-hidden="true" class="fa fa-check-circle-o"></i> 网站配置
                 </a>
@@ -59,7 +59,7 @@
                 <btn-del action="{{ route('site.site.destroy',$site) }}" class-name="text-muted mr-2">
                     <i class="fa fa-trash"></i> 删除
                 </btn-del>
-                {{-- @endcan --}}
+                @endcan
 
             </div>
         </div>

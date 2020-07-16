@@ -9,9 +9,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(PackageSeeder::class);
         $this->call(GroupSeeder::class);
-        $this->call(UserSeeder::class);
+        // $this->call(UserSeeder::class);
         $this->call(ConfigSeeder::class);
-        $this->call(SiteSeeder::class);
-        $this->call(RoleSeeder::class);
+        // $this->call(SiteSeeder::class);
+        // $this->call(RoleSeeder::class);
     }
 }

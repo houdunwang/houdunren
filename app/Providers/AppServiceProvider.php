@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Config;
 use App\Models\Group;
 use App\Observers\GroupObserver;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->registerObServer();
 
-        config(['admin' => Config::find(1)->config]);
+        Carbon::setLocale('zh');
     }
 
     protected function registerObServer()

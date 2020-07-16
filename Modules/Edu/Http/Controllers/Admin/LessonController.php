@@ -16,6 +16,7 @@ class LessonController extends Controller
     public function index()
     {
         $lessons = Lesson::latest()->paginate();
+
         return view('edu::lesson.index', compact('lessons'));
     }
 

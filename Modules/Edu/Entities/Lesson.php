@@ -2,11 +2,16 @@
 
 namespace Modules\Edu\Entities;
 
+use App\Models\Traits\Favorite;
+use App\Models\Traits\Favour;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Edu\Entities\Tag;
 
 class Lesson extends Model
 {
+    use Favour, Favorite;
+
     protected $table = 'edu_lessons';
 
     protected $guarded = [];
@@ -23,5 +28,20 @@ class Lesson extends Model
     public function videos()
     {
         return $this->hasMany(Video::class)->orderBy('rank', 'asc');
+    }
+
+    public function scopeSearch($query, $w = null)
+    {
+        if (empty($w)) return $query;
+        return $query->where('title', 'like', "%{$w}%");
+    }
+
+    public function scopeSearchByTag($query, string $tag = null)
+    {
+        if (empty($tag)) return $query;
+
+        return $this->whereHas('tags', function (Builder $query) use ($tag) {
+            $query->where('title', 'like', "$tag%");
+        });
     }
 }
