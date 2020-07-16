@@ -1,29 +1,17 @@
 <div class="card rounded shadow-sm mb-2">
     <div class="card-header bg-white border-0 p-1 d-flex justify-content-center auto-height">
-        <a href="/edu/center/topic/18907" class="mt-3 d-flex flex-column align-items-center">
-            <img src="{{ $topic->user->avatar }}" class="rounded-circle border" style="width:80px;">
-            <span class="text-secondary mt-2">{{ $topic->user->name }}</span>
+        <a href="{{ route("Edu.space.topic",$user) }}" class="mt-3 d-flex flex-column align-items-center">
+            <img src="{{ $user->icon }}" class="rounded-circle border" style="width:150px;height:150px;">
+            <span class="text-secondary mt-2">{{ $user->name }}</span>
         </a>
     </div>
-    <div class="card-body text-center">
-        <i class="fa fa-envelope mr-2  text-secondary"></i>
-        <i class="fab fa-weibo  mr-2 text-secondary "></i>
-        <i class="fab fa-weixin   mr-2  text-secondary "></i>
-        <i class="fab fa-github   mr-2   text-secondary"></i>
-        <i class="fab fa-qq    mr-2  text-secondary"></i>
+    <div class="card-body text-center text-secondary ">
+        <i aria-hidden="true" class="fa fa-home mr-1 {{ $user['home']?'text-info':'' }}"></i>
+        <i aria-hidden="true" class="fa fa-envelope mr-1 {{ $user['email']?'text-info':'' }}"></i>
+        <i aria-hidden="true" class="fab fa-weibo mr-1 {{ $user['weibo']?'text-info':'' }}"></i>
+        <i aria-hidden="true" class="fab fa-weixin mr-1 {{  $user['wechat']?'text-info':'' }}"></i>
+        <i aria-hidden="true" class="fab fa-github mr-1 {{ $user['github']?'text-info':'' }}"></i>
+        <i aria-hidden="true" class="fab fa-qq mr-1 {{ $user['qq']?'text-info':'' }}"></i>
     </div>
-    <div class="text-center pb-3">
-        <a href="{{ route('common.follower',$user) }}" data-container="body" data-toggle="popover" data-placement="top"
-            data-trigger="hover" data-original-title="" title=""
-            class="btn btn-sm {{ user()->isFollower?'btn-success':'btn-outline-success' }}">
-            <i class="fa fa-plus"></i>
-            关注 TA
-        </a>
-        <a href="{{ route('common.favour',['User',user()]) }}" data-container="body" data-toggle="popover"
-            data-placement="top" data-trigger="hover" data-content="收到 0 个赞" data-original-title="" title=""
-            class="btn btn-sm {{ user()->isFavour?'btn-info':'btn-outline-info' }}">
-            <i class="fas fa-heart "></i>
-            点个赞呗
-        </a>
-    </div>
+    @include('edu::components.user_btns')
 </div>

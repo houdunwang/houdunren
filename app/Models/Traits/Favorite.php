@@ -7,22 +7,24 @@ use Auth;
 
 trait Favorite
 {
-    public function favorites()
-    {
-        return $this->morphToMany(User::class, 'favorite', 'edu_favorite');
-    }
+  public function favorites()
+  {
+    return $this->morphToMany(User::class, 'favorite', 'favorite');
+  }
 
-    public function getIsFavoriteAttribute()
-    {
-        return $this->favorites()->wherePivot('user_id', Auth::id())->exists();
-    }
+  public function getIsFavoriteAttribute()
+  {
+    return $this->favorites()
+      ->wherePivot('user_id', Auth::id())
+      ->exists();
+  }
 
-    public function favorite()
-    {
-        $this->favorites()->toggle(Auth::id());
-        $this->favorite_count = $this->favorites()->count();
-        $this->save();
+  public function favorite()
+  {
+    $this->favorites()->toggle(Auth::id());
+    $this->favorite_count = $this->favorites()->count();
+    $this->save();
 
-        return true;
-    }
+    return true;
+  }
 }

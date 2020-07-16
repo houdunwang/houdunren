@@ -31,6 +31,5 @@
             content:@json(old('content',$topic['content']))
         }
     }
-    // window.editor_content=
 </script>
 @endpush

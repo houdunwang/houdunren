@@ -2,7 +2,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-sm navbar-light bg-light pt-3 pb-3 pl-md-0 pr-md-0">
             <a href="/" class="navbar-brand text-muted font-weight-bold router-link-exact-active router-link-active">
-                <i aria-hidden="true" class="fa fa-code text-info font-weight-bolder"></i>
+                <i aria-hidden="true" class="fas fa-code text-info font-weight-bolder"></i>
                 houdunren
             </a>
             <button type="button" data-toggle="collapse" data-target="#collapsibleNavId"
@@ -37,20 +37,21 @@
                         <a href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                             class="nav-link dropdown-toggle d-flex align-items-center text-secondary">
                             <span class="mr-2 " style="width: 25px; height: 25px; line-height: 25px; font-size: 18px;">
-                                <img src="{{ user('avatar') }}" class="rounded-circle" style="width:25px;height: 25px;">
+                                <img src="{{ user('icon') }}" class="rounded-circle" style="width:25px;height: 25px;">
                             </span>
-                            {{ user('name')??'匿名' }}
+                            {{ user('name')??'盾友' }}
                         </a>
                         <div aria-labelledby="dropdownId" class="dropdown-menu">
                             <a href="{{ route('member.base.index') }}" class="dropdown-item mb-2 mt-2">修改资料</a>
                             <a href="{{ route('member.avatar.index') }}" class="dropdown-item mb-2">头像设置</a>
                             <a href="{{ route('member.password.index') }}" class="dropdown-item mb-2">修改密码</a>
                             <div class="dropdown-divider"></div>
-                            <a href="/edu/member/order" class="dropdown-item mb-2">我的定单</a>
-                            <a href="/edu/member/lesson" class="dropdown-item mb-2">课程收藏</a>
-                            <a href="/edu/member/video" class="dropdown-item mb-2">视频收藏</a>
+                            <a href="{{ route("Edu.member.topic",user()) }}" class="dropdown-item mb-2">我的贴子</a>
+                            <a href="{{ route('Edu.member.duration') }}" class="dropdown-item mb-2">会员周期</a>
+                            <a href="/edu/member/order" class="dropdown-item mb-2">站内消息</a>
+
                             <div class="dropdown-divider"></div>
-                            <a href="/edu/center/topic/1" class="dropdown-item mb-2">我的主页</a>
+                            <a href={{ route('Edu.space.topic',user('id')) }} class="dropdown-item mb-2">我的主页</a>
                             <div class="dropdown-divider"></div>
                             <a href="/logout" class="dropdown-item mb-2">退出登录</a>
                         </div>

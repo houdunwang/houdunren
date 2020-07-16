@@ -12,7 +12,7 @@ class SignController extends Controller
 {
     public function index()
     {
-        $signs = Sign::whereDate('created_at', now())->latest('id')->get();
+        $signs = Sign::whereDate('created_at', now())->latest('id')->with('user')->get();
 
         return view('edu::sign.index', compact('signs'));
     }

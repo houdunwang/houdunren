@@ -1,5 +1,5 @@
 @extends('edu::layouts.front')
-
+@section('title',$topic['title'])
 @section('content')
 <div class="container mt-5 mb-5">
     <div class="row">
@@ -42,23 +42,28 @@
                             @auth
                             <div class="btn-group btn-group-sm align-items-center mt-1 mt-md-0">
                                 <a href="{{ route('common.favorite',['topic',$topic,'Edu']) }}" type="button"
-                                    aria-label=""
-                                    class="btn  {{ $topic->isFavorite?'btn-info':'btn-outline-secondary'}}">
+                                    class="btn {{ $topic->isFavorite?'btn-info':'btn-outline-secondary'}}">
                                     <i aria-hidden="true" class="fa fa-heart-o"></i> 收藏
                                 </a>
-                                <button type="button" aria-label="" class="btn btn-outline-secondary">
+                                <button type="button" class="btn btn-outline-secondary">
                                     {{ $topic->favorite_count }}
                                 </button>
                             </div>
+                            @can('delete', $topic)
+                            <form action="{{ route('Edu.front.topic.destroy',$topic) }}" method="post"
+                                class="d-inline-block">
+                                @csrf @method('delete')
+                                <button class="btn btn-sm btn-outline-secondary" onclick="return confirm('确定删除吗')">
+                                    删除
+                                </button>
+                            </form>
+                            @endcan
                             @endauth
                         </div>
                     </div>
                 </div>
                 <div class="topic-content markdown bg-white text-monospace markdown">
                     {!! (new \Parsedown())->text($topic->content) !!}
-                </div>
-                <div>
-                    <!---->
                 </div>
                 <div class="mt-5 text-center border-top border-gary pt-5">
                     <div role="group" aria-label="First group" class="favour btn-group mr-2">

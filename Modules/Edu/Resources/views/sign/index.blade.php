@@ -1,5 +1,5 @@
 @extends('edu::layouts.front')
-
+@section('title','每日签到')
 @section('content')
 <div class="container mt-5">
     @auth
@@ -77,7 +77,7 @@
     @endauth
 </div>
 
-<div class="container sign-list mb-5">
+<div class="container sign-list mb-5" id="app">
     <div class="card mt-3 shadow-sm ">
         <div class="card-header bg-white">今日签到排行</div>
         <div class="card-body">

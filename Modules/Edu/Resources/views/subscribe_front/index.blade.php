@@ -1,5 +1,5 @@
 @extends('edu::layouts.front')
-
+@section('title','订阅会员提升技能')
 @section('content')
 <div class="subscribe">
     <div class="header">

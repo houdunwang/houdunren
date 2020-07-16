@@ -1,5 +1,5 @@
 @extends('edu::layouts.front')
-
+@section('title','实战课程')
 @section('content')
 <div class="container search bg-white mt-5 mb-3 shadow-sm p-4 border">
     <form action="{{ route('Edu.front.lesson.index') }}">

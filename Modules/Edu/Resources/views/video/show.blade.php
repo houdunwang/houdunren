@@ -1,5 +1,5 @@
 @extends('edu::layouts.front')
-
+@section('title',$video['title'])
 @section('content')
 
 <div class="video mb-2">

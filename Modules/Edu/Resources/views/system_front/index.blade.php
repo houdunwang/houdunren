@@ -1,5 +1,5 @@
 @extends('edu::layouts.front')
-
+@section('title','系统课程')
 @section('content')
 <div class="container mt-5 bg-white border shadow-sm pb-5 pt-4 mb-5">
     <div class="card bg-white border-0">

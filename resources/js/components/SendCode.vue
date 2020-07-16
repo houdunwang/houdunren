@@ -65,7 +65,7 @@ export default {
     },
   data() {
     return {
-        value:"",
+      value:"",
       code: '',
       captcha: '',
       captchaImage: '/captcha'

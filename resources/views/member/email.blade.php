@@ -8,7 +8,8 @@
             绑定邮箱
         </div>
         <div class="card-body">
-            <send-code title="邮箱" name="email" :code.sync="code" :email.sync="email">
+            <send-code title="邮箱" name="email" :code.sync="code" :email.sync="email"
+                action="{{ route('member.email.code') }}">
             </send-code>
         </div>
 
@@ -30,7 +31,7 @@
         methods:{
             submit(){
                 axios.post("{{ route('member.email.store') }}",this.$data).then(function(){
-
+                    location.reload(true);
                 })
             }
         }

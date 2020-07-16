@@ -1,5 +1,5 @@
 @extends('edu::layouts.front')
-
+@section('title','最近更新视频')
 @section('content')
 
 <div class="container mt-5 mb-5">

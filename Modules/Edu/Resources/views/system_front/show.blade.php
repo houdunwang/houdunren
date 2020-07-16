@@ -1,5 +1,5 @@
 @extends('edu::layouts.front')
-
+@section('title',$system->title)
 @section('content')
 <div class="container mt-5 border shadow-sm p-5 bg-white">
     <h4 class="text-secondary mb-3">{{ $system->title }}</h4>

@@ -4,15 +4,18 @@ namespace Modules\Edu\Entities;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-
+use Spatie\Activitylog\Traits\LogsActivity;
 class Sign extends Model
 {
-    protected $table = 'edu_sign';
+  use LogsActivity;
+  protected static $recordEvents = ['created'];
 
-    protected $fillable = ['content', 'mood'];
+  protected $table = 'edu_sign';
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+  protected $fillable = ['content', 'mood'];
+
+  public function user()
+  {
+    return $this->belongsTo(User::class);
+  }
 }

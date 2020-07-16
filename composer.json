@@ -9,7 +9,6 @@
   "license": "MIT",
   "require": {
     "php": "^7.2.5",
-    "alibabacloud/sdk": "^1.8",
     "caouecs/laravel-lang": "~6.0",
     "erusev/parsedown": "^1.7",
     "fideloper/proxy": "^4.2",
@@ -29,6 +28,7 @@
     "yansongda/pay": "^2.9"
   },
   "require-dev": {
+    "barryvdh/laravel-debugbar": "^3.3",
     "barryvdh/laravel-ide-helper": "^2.7",
     "facade/ignition": "^2.0",
     "fzaninotto/faker": "^1.9.1",

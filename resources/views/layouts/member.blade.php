@@ -9,7 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     @stack('styles')
 </head>
 
@@ -47,18 +46,18 @@
         <div class="menu">
             <div class="icon bg-white shadow-sm border">
                 <a href="{{ route('member.avatar.index') }}">
-                    <img src="{{ user('avatar') }}">
+                    <img src="{{ user('avatar') }}" style="width: 100%">
                 </a>
                 <div class="pt-0 p-3">
                     <h6 class="text-muted">{{ user('name') }}</h6>
                     <hr>
                     <div class="d-flex justify-content-between text-muted">
                         <i aria-hidden="true" class="fa fa-envelope {{ user('email')?'text-info':'' }}"></i>
-                        <i aria-hidden="true" class="fa fa-phone {{ user('mobile')?'text-info':'' }}"></i>
-                        <i aria-hidden="true" class="fa fa-weibo {{ user('weibo')?'text-info':'' }}"></i>
-                        <i aria-hidden="true" class="fa fa-weixin {{ user('weixin')?'text-info':'' }}"></i>
-                        <i aria-hidden="true" class="fa fa-github {{ user('github')?'text-info':'' }}"></i>
-                        <i aria-hidden="true" class="fa fa-qq {{ user('qq')?'text-info':'' }}"></i>
+                        <i aria-hidden="true" class="fas fa-phone-square {{ user('mobile')?'text-info':'' }}"></i>
+                        <i aria-hidden="true" class="fab fa-weibo {{ user('weibo')?'text-info':'' }}"></i>
+                        <i aria-hidden="true" class="fab fa-weixin {{ user('wechat')?'text-info':'' }}"></i>
+                        <i aria-hidden="true" class="fab fa-github {{ user('github')?'text-info':'' }}"></i>
+                        <i aria-hidden="true" class="fab fa-qq {{ user('qq')?'text-info':'' }}"></i>
                     </div>
                 </div>
             </div>

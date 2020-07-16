@@ -8,7 +8,8 @@
             手机绑定
         </div>
         <div class="card-body">
-            <send-code title="手机号" name="mobile" :code.sync="code" :mobile.sync="mobile">
+            <send-code title="手机号" name="mobile" :code.sync="code" :mobile.sync="mobile"
+                action="{{ route('member.mobile.code') }}">
             </send-code>
         </div>
 
@@ -30,7 +31,7 @@
         methods:{
             submit(){
                 axios.post("{{ route('member.mobile.store') }}",this.$data).then(function(){
-
+                    location.reload(true);
                 })
             }
         }

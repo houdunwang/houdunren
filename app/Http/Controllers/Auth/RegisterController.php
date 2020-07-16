@@ -27,7 +27,6 @@ class RegisterController extends Controller
     {
         $request->validate([
             'mobile' => ['required', 'regex:/1\d{10}/i', Rule::unique('users', $this->account())],
-            'captcha' => ['required'],
             'code' => ['required', new VerificationCodeRule($request->mobile)],
             'password' => ['required', 'confirmed'],
         ], ['code.required' => '验证码不能为空', 'mobile.regex' => '手机号格式错误']);
@@ -43,8 +42,8 @@ class RegisterController extends Controller
     public function code(Request $request, CodeService $codeService)
     {
         $request->validate([
-            // 'mobile' => ['required', 'regex:/^1\d{10}$/', Rule::unique('users', 'mobile')],
-            // 'captcha' => ['required', 'captcha'],
+            'mobile' => ['required', 'regex:/^1\d{10}$/', Rule::unique('users', 'mobile')],
+            'captcha' => ['required', 'captcha'],
         ], ['code.required' => '验证码不能为空', 'mobile.regex' => '手机格式错误', 'mobile.unique' => '手机号已经使用']);
 
         $codeService->mobile($request->mobile);
