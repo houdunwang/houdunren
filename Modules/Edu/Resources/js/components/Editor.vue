@@ -1,10 +1,8 @@
 <template>
   <div>
-    <div id="editor" @click="show_error = false" :class="{ 'is-invalid': error }" ref="editor"></div>
-    <strong class="form-text text-danger invalid-feedback" v-if="show_error">{{ error }}</strong>
-
-    <textarea hidden :name="name" v-model="form.markdown"></textarea>
-    <textarea hidden :name="name + 'html'" v-model="form.html"></textarea>
+    <div :id="name"></div>
+    <textarea hidden :name="name" v-model="form.markdown" v-if="name"></textarea>
+    <textarea hidden :name="name + '_html'" v-model="form.html" v-if="name"></textarea>
   </div>
 </template>
 
@@ -16,22 +14,20 @@ import Editor from '@toast-ui/editor'
 
 export default {
   props: {
-    error: { default: '' },
-    name: { required: true, type: String },
-    content:{required:true},
+    name: {required:true,type: String},
+    content: { default: '' },
     //后台上传地址
-    action: { type: String, default: `common/upload` },
+    action: {required:true, type: String },
     //编辑器高度
     height: { type: String, default: '300px' },
     //显示方式
     previewStyle: { type: String, default: 'vertical' },
-    initialEditType: { type: String, default: 'markdown' },
+    initialEditType: { type: String, default: 'wysiwyg' },
   },
   data() {
     return {
       editor: null,
       form: { markdown: '', html: '' },
-      show_error:true,
     }
   },
   mounted() {
@@ -42,20 +38,19 @@ export default {
     initEditor() {
       const Vue = this
       const editor = new Editor({
-        el: document.querySelector('#editor'),
+        el: document.querySelector('#'+this.name),
         previewStyle: this.previewStyle,
-        // initialValue: window.editor_content,
         initialValue: this.content,
         initialEditType: this.initialEditType,
         height: this.height,
         language: 'zh-CN',
         placeholder: '',
-        // plugins: [Editor.codeSyntaxHighlight],
         events: {
           //监听编辑器输入
           change: function () {
             Vue.$set(Vue.form, 'markdown', editor.getMarkdown())
-            Vue.$set(Vue.form, 'html', editor.getHtml())
+            Vue.$set(Vue.form, 'html', editor.getHtml());
+            Vue.$emit("update:content",Vue.form.markdown)
           },
         },
         hooks: {
@@ -74,18 +69,14 @@ export default {
       })
       this.editor = editor
     },
-    /**
-     * 添加工具条按钮
-     */
+    //添加工具条按钮
     createButton(className) {
       const button = document.createElement('button')
       button.className = className
       button.innerHTML = `<i class="fa fa-arrows-alt" style="color:#666;"></i>`
       return button
     },
-    /**
-     * 添加全屏按钮事件
-     */
+    //添加全屏按钮事件
     fullScreenEvent() {
       const toolbar = this.editor.getUI().getToolbar()
       const cm = this.editor.mdEditor.cm
@@ -103,9 +94,7 @@ export default {
         }
       })
     },
-    /**
-     * 自定义工具条
-     */
+    //自定义工具条
     toolbar() {
       return [
         {
@@ -145,12 +134,15 @@ export default {
 <style lang="scss">
 // 事件按钮需要使用类所以不能加scoped
 .fullScreen {
-  position: fixed;
+  position: fixed !important;
   z-index: 999;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: #fff;
+}
+.tui-editor-defaultUI {
+  border: none;
 }
 </style>

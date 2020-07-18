@@ -11,6 +11,9 @@
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
     @stack('styles')
     @stack('links')
+    <script>
+        const user = @json(['id'=>user('id'),'avatar'=>user('avatar'),'name'=>user('name')]);
+    </script>
 </head>
 
 <body>
@@ -25,11 +28,10 @@
         @include('edu::layouts.footer')
     </div>
 
-    @stack('scripts')
-    {{-- <script src="{{ mix('/modules/Edu/manifest.js') }}"></script> --}}
-    {{-- <script src="{{ mix('/modules/Edu/vendor.js') }}"></script> --}}
+    @stack('vue')
     <script src="/modules/Edu/app.js"></script>
-
+    @stack('scripts')
+    @stack('comment')
 </body>
 
 </html>

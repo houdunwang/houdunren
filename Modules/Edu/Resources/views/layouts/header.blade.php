@@ -1,4 +1,4 @@
-<div class="header shadow bg-light">
+<div class="header shadow-sm bg-light">
     <div class="container">
         <nav class="navbar navbar-expand-sm navbar-light bg-light pt-3 pb-3 pl-md-0 pr-md-0">
             <a href="/" class="navbar-brand text-muted font-weight-bold router-link-exact-active router-link-active">
@@ -31,13 +31,25 @@
                     <li class="nav-item pr-2">
                         <a href="{{ route('Edu.front.subscribe.index') }}" class="nav-link">订阅会员</a>
                     </li>
-                </ul>@auth
+                </ul>
+
+                @auth
+                <div class="form-inline my-lg-0" style="position: relative;top:5px;">
+                    <a href="{{ route('Edu.member.message') }}" class="small">
+                        <i class="far fa-envelope" style="font-size:20px;"></i>
+                        @if ($count = user()->unreadNotifications->where('site_id',site()['id'])->count())
+                        <span class="badge badge-info rounded" style="position: relative;top:-10px;left:-6px;">
+                            {{ $count }}
+                        </span>
+                        @endif
+                    </a>
+                </div>
                 <div class="form-inline my-2 my-lg-0">
                     <div class="nav-item pr-2 dropdown">
                         <a href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                             class="nav-link dropdown-toggle d-flex align-items-center text-secondary">
-                            <span class="mr-2 " style="width: 25px; height: 25px; line-height: 25px; font-size: 18px;">
-                                <img src="{{ user('icon') }}" class="rounded-circle" style="width:25px;height: 25px;">
+                            <span class="mr-2 avatar25" style="line-height: 25px; font-size: 18px;">
+                                <img src="{{ user('icon') }}" class="rounded" style="width:25px;height: 25px;">
                             </span>
                             {{ user('name')??'盾友' }}
                         </a>
@@ -57,10 +69,11 @@
                         </div>
                     </div>
                 </div>
+
                 @else
                 <div class="form-inline mr-3">
-                    <a href="/login" type="button" class="btn btn-info mr-1 btn-sm">登录</a>
-                    <a data-v-5c58d3ad="" href="/register" type="button" class="btn btn-outline-info btn-sm">注册</a>
+                    <a href="/login" class="btn btn-info mr-1 btn-sm">登录</a>
+                    <a href="/register" class="btn btn-outline-info btn-sm">注册</a>
                 </div>
                 @endauth
             </div>

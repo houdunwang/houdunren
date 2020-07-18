@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <div class="topic-content markdown bg-white text-monospace markdown">
-                    {!! (new \Parsedown())->text($topic->content) !!}
+                    {!! $topic->html !!}
                 </div>
                 <div class="mt-5 text-center border-top border-gary pt-5">
                     <div role="group" aria-label="First group" class="favour btn-group mr-2">
@@ -83,6 +83,10 @@
                     </a>
                     @endforeach
                 </div>
+            </div>
+
+            <div class="mt-3" id="app">
+                <comment model="Topic" :id="{{ $topic['id'] }}"></comment>
             </div>
 
         </div>

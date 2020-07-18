@@ -10,12 +10,12 @@ use Modules\Edu\Entities\User as EntitiesUser;
 
 class TopicController extends Controller
 {
-  public function index()
-  {
-    $topics = EntitiesUser::make(user('id'))
-      ->topics()
-      ->latest()
-      ->paginate();
-    return view('edu::member.topic', compact('topics'));
-  }
+    public function index()
+    {
+        $topics = EntitiesUser::make(user('id'))
+            ->topics()
+            ->latest()
+            ->paginate();
+        return view('edu::member.topic', compact('topics'));
+    }
 }

@@ -1,4 +1,4 @@
-export default status => {
+export default (status) => {
   let message = ''
   switch (status) {
     case 400:
@@ -15,6 +15,9 @@ export default status => {
       break
     case 408:
       message = '请求超时(408)'
+      break
+    case 413:
+      message = '请求数据过大(413)'
       break
     case 429:
       message = '请求次数过多(429)'

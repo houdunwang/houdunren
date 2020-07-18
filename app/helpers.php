@@ -65,7 +65,9 @@ function access($permission, Site $site = null, $module = null)
 {
     $site = $site ?? site();
     $module = $module ?? module();
-
+    if (Auth::check() === false) {
+        return false;
+    }
     if (user()->isSuperAdmin || $site->user_id == user('id')) {
         return true;
     }

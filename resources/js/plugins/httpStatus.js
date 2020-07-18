@@ -16,6 +16,9 @@ export default (status) => {
     case 408:
       message = '请求超时(408)'
       break
+    case 413:
+      message = '请求数据过大(413)'
+      break
     case 429:
       message = '请求次数过多(429)'
       break

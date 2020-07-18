@@ -14,6 +14,7 @@ Route::group(['namespace' => 'Auth'], function () {
 });
 
 Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware('auth');
+
 Route::group(['prefix' => 'common', 'middleware' => ['auth'], 'namespace' => 'Common', 'as' => 'common.'], function () {
     Route::post('upload', 'UploadController@upload')->name('upload');
     Route::get('favorite/{model}/{id}/{module?}', 'FavoriteController@make')->name('favorite')->middleware('auth');

@@ -28,6 +28,7 @@
   "dependencies": {
     "@toast-ui/editor": "^2.2.0",
     "element-ui": "^2.13.2",
+    "vue-scrollto": "^2.18.1",
     "vuedraggable": "^2.24.0",
     "vuex": "^3.4.0"
   }

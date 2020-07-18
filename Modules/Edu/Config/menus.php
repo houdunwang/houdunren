@@ -36,4 +36,11 @@ return [
             ['title' => '订阅订单管理', 'permission' => 'orders'],
         ],
     ],
+    [
+        'title' => '其他权限',
+        'show' => false,
+        'items' => [
+            ['title' => '评论管理', 'permission' => 'comment'],
+        ]
+    ]
 ];

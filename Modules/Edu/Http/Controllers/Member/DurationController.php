@@ -12,6 +12,7 @@ class DurationController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index()
     {
         return view('edu::member.duration');

@@ -11,6 +11,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $site = get_site_by_domain();
+        site($site);
 
         if ($site->module === null) {
             abort(404, '站点没有默认模块');

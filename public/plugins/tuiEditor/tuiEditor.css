@@ -1,0 +1,15 @@
+.CodeMirror-code {
+  font-size: 15px;
+}
+.tui-editor-contents {
+  font-size: 15px;
+}
+.tuiEditor-fullScreen {
+  position: fixed !important;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+}

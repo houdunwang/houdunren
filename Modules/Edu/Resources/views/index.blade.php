@@ -12,6 +12,9 @@
                         <a href="{{ route('Edu.front.topic.create') }}" class="btn btn-outline-secondary btn-sm">发表</a>
                     </div>
                     <div class="card-body">
+                        @foreach ($topics as $topic)
+                        @include('edu::components.topic',$topic)
+                        @endforeach
                         @foreach ($activities as $activity)
                         @if ($activity->subject)
                         @switch($activity->subject_type)

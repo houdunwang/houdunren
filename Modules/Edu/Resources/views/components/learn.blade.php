@@ -4,26 +4,30 @@
         学习动态
     </div>
     <div class="list-group list-group-flush">
+
+        @foreach (\Modules\Edu\Entities\DynamicLearn::limit(15)->get() as $learn)
         <div class="list-group-item">
-            <div class="row">
-                <div class="col-sm-3 col-3 pr-0">
-                    <a href="/edu/center/topic/33808">
-                        <span class="mr-3 ant-avatar ant-avatar-circle ant-avatar-image">
-                            <img src="http://hdcms.test/images/avatar.jpg" class="w45 rounded">
-                        </span>
+            <div class="d-flex align-items-start justify-content-start">
+                <div class="pt-1 mr-3">
+                    <a href="{{ route('Edu.space.topic',$learn->user) }}">
+                        <img src="{{ $learn->user->icon }}" class="avatar35 rounded">
                     </a>
                 </div>
-                <div class="col-sm-9 col-9 pl-0">
-                    <a href="/video/12782" class="d-flex justify-content-between d-block mb-1">6
-                        文本线条的控制技巧
+                <div class="pl-0">
+                    <a href="{{ route('Edu.front.video.show',$learn->video) }}"
+                        class="d-flex justify-content-between d-block mb-1">
+                        {{ $learn->video->title }}
                     </a>
                     <div class="small text-black-50">
-                        前端菜鸡
+                        <a href="{{ route('Edu.space.topic',$learn->user) }}">
+                            {{ $learn->user->name }}
+                        </a>
                         <i class="fa fa-clock-o"></i>
-                        几秒前
+                        {{ $learn->created_at->diffForHumans() }}
                     </div>
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
 </div>

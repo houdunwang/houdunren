@@ -13,7 +13,7 @@ class CreateEduCommentTable extends Migration
             $table->bigIncrements('id');
             $table->foreignId('site_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('reply_user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('reply_user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->text('content');
             $table->unsignedMediumInteger('favour_count')->nullable()->comment('点赞统计');
             $table->unsignedBigInteger('comment_id');
