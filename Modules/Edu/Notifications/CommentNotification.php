@@ -30,8 +30,16 @@ class CommentNotification extends Notification
     {
         return [
             'id' => $this->comment->id,
-            'title' => strip_tags($this->comment->content),
-            'link' => $this->comment->commentable->link().'#comment-'.$this->comment->id
+            'title' => $this->title(),
+            'link' => $this->comment->commentable->link() . '#comment-' . $this->comment->id
         ];
+    }
+
+    protected function title()
+    {
+        if ($this->comment->reply_user_id) {
+            return '回复了你的评论';
+        }
+        return '评论了你的贴子';
     }
 }

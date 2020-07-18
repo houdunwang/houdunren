@@ -6,10 +6,11 @@ use App\Models\Site;
 use App\Models\Traits\Favorite;
 use App\Models\Traits\Favour;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Edu\Entities\Traits\Comment;
 
 class Video extends Model
 {
-    use Favorite, Favour;
+    use Favorite, Favour, Comment;
 
     protected $table = 'edu_videos';
 
@@ -52,5 +53,15 @@ class Video extends Model
                 return $i;
             }
         }
+    }
+
+    public function user()
+    {
+        return $this->lesson->user();
+    }
+
+    public function link()
+    {
+        return route('Edu.front.video.show', $this);
     }
 }

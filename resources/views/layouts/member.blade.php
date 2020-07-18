@@ -21,9 +21,11 @@
                     class="navbar-toggler d-lg-none"><span class="navbar-toggler-icon"></span></button>
                 <div id="collapsibleNavId" class="collapse navbar-collapse">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item"><a href="/" class="nav-link"><i aria-hidden="true" class="fa fa-home"></i>
+                        <li class="nav-item">
+                            <a href="/" class="nav-link"><i aria-hidden="true" class="fa fa-home"></i>
                                 网站首页
-                            </a></li>
+                            </a>
+                        </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                         <div class="nav-item dropdown"><a href="#" id="dropdownId" data-toggle="dropdown"
@@ -90,3 +92,4 @@
 </body>
 
 </html>
+

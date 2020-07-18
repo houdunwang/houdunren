@@ -57,7 +57,9 @@
 <div class="container mb-5 mt-3">
     <div class="row">
         <div class="col-md-9 mt-2 mt-md-0 order-md-0">
-            评论区
+            <div id="app">
+                <comment model="Video" :id="{{ $video['id'] }}"></comment>
+            </div>
         </div>
         <div class="col-md-3 pl-md-0 order-0 order-md-1">
             <div class="card text-secondary">

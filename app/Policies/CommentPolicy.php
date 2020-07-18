@@ -12,9 +12,9 @@ class CommentPolicy
 
     public function before($user, $ability)
     {
-        if ($user->isSuperAdmin || site()['user_id'] == user("id")) {
-            return true;
-        }
+        // if ($user->isSuperAdmin || site()['user_id'] == user("id")) {
+        //     return true;
+        // }
     }
 
     public function viewAny(User $user)

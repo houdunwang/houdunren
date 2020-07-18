@@ -4,7 +4,7 @@
       :id="`comment-` + comment.id"
       class="card shadow-sm mb-2"
       v-for="(comment, index) in comments"
-      :key="comment.id"
+      :key="index"
     >
       <div class="card-header bg-white d-flex justify-content-start">
         <img :src="comment.user.avatar" class="rounded mr-3 w35 h35" />
@@ -57,11 +57,16 @@
         </div>
         <editor name="content" action :content.sync="content" :key="sendId"></editor>
         <div class="card-footer text-muted">
-          <button type="button" class="btn btn-primary btn-sm" @click="submit">保存</button>
+          <button type="button" class="btn btn-primary btn-sm d-inline-block" @click="submit">保存</button>
+          <strong
+            class="text-danger d-inline-block ml-3"
+            v-if="errors.content"
+            style="font-size:13px;"
+          >{{ errors.content }}</strong>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" v-if="!user.id">
         <div class="card-body text-center pt-5 pb-5">
           <a href="/login" class="btn btn-info btn-sm">登录后发表评论</a>
         </div>
@@ -72,6 +77,7 @@
 
 <script>
 import Editor from './Editor.vue'
+import { mapState } from 'vuex'
 export default {
   components: { Editor },
   props: {
@@ -88,6 +94,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['errors']),
     action() {
       return `/Edu/comment/${this.model}/${this.id}`
     },
@@ -111,7 +118,13 @@ export default {
       if (this.content == '') {
         return this.$message.error('评论内容不能为')
       }
-      let { data: comment } = await this.axios.post(this.action, { content: this.content })
+      if(this.content.trim().length<10){
+           return this.$message.error('评论内容过少')
+      }
+      let { data: comment } = await this.axios.post(this.action, {
+          content: this.content,
+          reply_user_id:this.reply_user?this.reply_user['id']:0
+          })
       this.comments.push(comment)
       this.content = ''
       this.sendId++

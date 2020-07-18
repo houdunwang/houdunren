@@ -1,5 +1,5 @@
 <div class="bg-white shadow-sm border">
-    <a href="{{ route('member.avatar.index') }}" style="height:200px; overflow: hidden;" class="d-block">
+    <a href="{{ route('Edu.space.topic',$user) }}" style="height:200px; overflow: hidden;" class="d-block">
         <img src="{{ $user->icon }}" />
     </a>
     <div class="pt-0 p-3">

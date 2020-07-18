@@ -10,5 +10,9 @@
         @include('edu::components.message')
         @endforeach
     </div>
+    <div class="card-footer">
+        {{ $notifications->links() }}
+    </div>
 </div>
+
 @endsection

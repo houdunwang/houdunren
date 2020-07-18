@@ -27,6 +27,9 @@
                         @case('Modules\Edu\Entities\Lesson')
                         @include('edu::components.activity.lesson',['lesson'=>$activity->subject])
                         @break
+                        @case('Modules\Edu\Entities\Comment')
+                        @include('edu::components.activity.comment',['comment'=>$activity->subject])
+                        @break
                         @endswitch
                         @endif
                         @endforeach

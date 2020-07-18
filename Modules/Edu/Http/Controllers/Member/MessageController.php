@@ -20,8 +20,9 @@ class MessageController extends Controller
         return view('edu::member.message', compact('notifications'));
     }
 
-    public function show(string $id){
-        $notification = user()->notifications()->where('id',$id)->first();
+    public function show(string $id)
+    {
+        $notification = user()->notifications()->where('id', $id)->first();
         $notification->markAsRead();
         return redirect($notification->data['link']);
     }

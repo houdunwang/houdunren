@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Edu\Entities\Comment;
+use Modules\Edu\Http\Requests\CommentRequest;
 use Modules\Edu\Notifications\CommentNotification;
 use Modules\Edu\Transformers\CommentCollection;
 use Modules\Edu\Transformers\CommentResource;
@@ -24,22 +25,21 @@ class CommentController extends Controller
         return new CommentCollection($comments);
     }
 
-    public function store(Request $request, $model, $id)
+    public function store(CommentRequest $request, $model, $id)
     {
         $key = user('id') . 'comment_timeout';
         if (Cache::has($key)) {
-             abort(403, '评论发送间隔为20秒');
+            abort(403, '评论发送间隔为10秒');
         }
 
         $model  = $this->model($model, $id);
-        $comment = $model->comments()->create([
-            'content' => $request->input('content'),
+
+        $comment = $model->comments()->create($request->input() + [
             'user_id' => user('id'),
             'site_id' => site()['id'],
         ]);
 
-        Cache::put($key, '', now()->addSecond(20));
-
+        Cache::put($key, '', now()->addSecond(10));
         $model->user->notify(new CommentNotification($comment));
 
         return response()->json(['message' => '评论发表成功', 'data' => new CommentResource($comment)]);

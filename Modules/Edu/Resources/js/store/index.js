@@ -9,13 +9,13 @@ export default new Vuex.Store({
   },
   mutations: {
     setError(state, errors) {
-      console.log(errors)
+      let temp = {}
       for (const key in errors) {
         if (errors.hasOwnProperty(key)) {
-          state.errors[key] = errors[key].pop()
+          temp[key] = errors[key].pop()
         }
       }
-      //state.errors = errors
+      state.errors = temp
     },
   },
 })

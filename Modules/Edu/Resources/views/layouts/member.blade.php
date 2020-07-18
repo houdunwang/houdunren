@@ -59,7 +59,7 @@
                                     class="list-group-item list-group-item-action text-secondary">
                                     我的贴子
                                 </a>
-                                <a href="/edu/member/video"
+                                <a href="{{ route('Edu.member.message') }}"
                                     class="list-group-item list-group-item-action text-secondary">
                                     站内消息
                                 </a>
