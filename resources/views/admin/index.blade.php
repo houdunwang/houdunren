@@ -24,7 +24,7 @@
             <tr>
                 <td class="align-middle">{{$user['id'] }}</td>
                 <td class="align-middle">
-                    <img src="{{ $user['avatar'] }}" class="rounded mr-3" style="width:30px;" />
+                    <img src="{{ $user['icon'] }}" class="rounded mr-3" style="width:30px;" />
                     {{ $user['name'] }}
                 </td>
                 <td class="align-middle">{{ $user['email'] }}</td>

@@ -17,6 +17,8 @@ class CreateFavoriteTable extends Migration
             $table->bigIncrements('id');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->morphs('favorite');
+            $table->foreignId('site_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('module_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

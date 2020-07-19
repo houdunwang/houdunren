@@ -16,7 +16,8 @@ class MessageController extends Controller
 
     public function index()
     {
-        $notifications = user()->unreadNotifications()->where('site_id', site()['id'])->paginate();
+        $notifications = user()->unreadNotifications()->where('site_id', site()['id'])->paginate(1);
+
         return view('edu::member.message', compact('notifications'));
     }
 

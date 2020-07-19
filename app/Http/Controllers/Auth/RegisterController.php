@@ -31,7 +31,7 @@ class RegisterController extends Controller
             'password' => ['required', 'confirmed'],
         ], ['code.required' => '验证码不能为空', 'mobile.regex' => '手机号格式错误']);
 
-        $user->password = $request->passsword;
+        $user->password = $request->password;
         $user->mobile = $request->mobile;
         $user->save();
 

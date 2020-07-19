@@ -5,15 +5,21 @@
     @auth
     <div class="card shadow-sm">
         <div class="card-header bg-white">签到快乐，再接再厉</div>
-        @if (user()->todaySign())
+        @if ($user->sign()->whereDate('created_at',now())->exists())
         <div class="card-body h6 font-weight-normal" style="line-height: 1.5rem;">
             您上次签到时间:
             <span class="text-danger">
-                {{ user()->todaySign()->created_at}}
+                {{ $user->sign()->latest()->first()->created_at}}
             </span>
             <br>
-            您的总签到天数: <span class="text-danger">{{ user()->signs->count() }}</span> 天 <br>
-            您本月签到天数:: <span class="text-danger">{{ user()->signs()->whereMonth('created_at',now())->count() }}</span> 天
+            您的总签到天数:
+            <span class="text-danger">
+                {{ $user->signInfo->total }}
+            </span>
+            天 <br>
+            您本月签到天数:: <span class="text-danger">
+                {{ $user->signinfo->month }}
+            </span> 天
         </div>
         @else
         <form action="{{ route('Edu.front.sign.store') }}" method="post">
@@ -94,20 +100,22 @@
                 <tbody>
                     @foreach ($signs as $sign)
                     <tr class="sign">
-                        <td width="150">
-                            <img src="{{ $sign->user->avatar }}" class="w35 rounded mr-2 align-middle">
+                        <td width="150" class="align-middle">
+                            <img src="{{ $sign->user->icon }}" class="w35 rounded mr-2 align-middle">
                             {{ $sign->user->name }}
                         </td>
-                        <td width="120">00:08</td>
-                        <td width="120">2</td>
-                        <td width="120">2</td>
-                        <td>
+                        <td width="120" class="align-middle">{{ $sign->created_at->format('H:i:s') }}</td>
+                        <td width="120" class="align-middle">{{ $sign->info->total }}</td>
+                        <td width="120" class="align-middle">{{ $sign->info->month }}</td>
+                        <td class="align-middle">
                             <img src="/modules/Edu/static/sign/{{ $sign->mood }}.gif" class="w35">
                             {{ $sign->content }}
-                            @if (is_master() ||$sign->user_id == user('id'))
-                            <btn-del action="{{ route('Edu.front.sign.destroy',$sign) }}"
-                                class="ml-3 btn-info btn-sm small">
+                            @if (is_master() || $sign->user_id == user('id'))
+
+                            <btn-del action="{{ route('Edu.front.sign.destroy',$sign) }}" class="ml-1 small">
+                                <i class="fas fa-times-circle"></i>删除
                             </btn-del>
+
                             @endif
                         </td>
                     </tr>

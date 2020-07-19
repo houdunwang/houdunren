@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ module()['title'] }}</title>
-    <link href="/modules/edu/app.css" rel="stylesheet">
+    <link href="/modules/Edu/app.css" rel="stylesheet">
     <link href="/admin2/sb-admin-2.min.css" rel="stylesheet">
     {{-- <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> --}}
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
@@ -134,7 +134,7 @@
         </div>
     </div>
     @stack('scripts')
-    <script src="{{ asset('modules/edu/app.js')  }}"></script>
+    <script src="{{ asset('modules/Edu/app.js')  }}"></script>
     <script src="/admin2/sb-admin-2.min.js"></script>
 </body>
 

@@ -48,10 +48,10 @@
         <div class="menu">
             <div class="icon bg-white shadow-sm border">
                 <a href="{{ route('member.avatar.index') }}">
-                    <img src="{{ user('avatar') }}" style="width: 100%">
+                    <img src="{{ user('icon') }}" style="width: 100%">
                 </a>
                 <div class="pt-0 p-3">
-                    <h6 class="text-muted">{{ user('name') }}</h6>
+                    <h6 class="text-muted">{{ user('nickname')}}</h6>
                     <hr>
                     <div class="d-flex justify-content-between text-muted">
                         <i aria-hidden="true" class="fa fa-envelope {{ user('email')?'text-info':'' }}"></i>
@@ -92,4 +92,3 @@
 </body>
 
 </html>
-

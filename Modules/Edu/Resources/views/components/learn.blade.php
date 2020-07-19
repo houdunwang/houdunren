@@ -5,7 +5,7 @@
     </div>
     <div class="list-group list-group-flush">
 
-        @foreach (\Modules\Edu\Entities\DynamicLearn::limit(15)->get() as $learn)
+        @foreach (\Modules\Edu\Entities\DynamicLearn::limit(15)->latest('id')->get() as $learn)
         <div class="list-group-item">
             <div class="d-flex align-items-start justify-content-start">
                 <div class="pt-1 mr-3">

@@ -78,8 +78,8 @@
                 </div>
                 <div class="favour-list text-center pt-3 w-75 m-auto">
                     @foreach ($topic->favours as $user)
-                    <a href="#" class="m-1">
-                        <img src="{{ $user->avatar }}" class="rounded-circle w35">
+                    <a href="#" class="m-2">
+                        <img src="{{ $user->icon }}" class="rounded-circle avatar35">
                     </a>
                     @endforeach
                 </div>
@@ -99,9 +99,5 @@
 @endsection
 
 @push('scripts')
-<link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.1/styles/zenburn.min.css" rel="stylesheet">
-<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-<script>
-    hljs.initHighlightingOnLoad();
-</script>
+
 @endpush

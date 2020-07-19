@@ -6,9 +6,9 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::group(['namespace' => 'Auth'], function () {
     Route::get('login', 'LoginController@show')->name('login');
-    Route::post('login', 'LoginController@login')->name('login');
+    Route::post('login', 'LoginController@login')->name('login.store');
     Route::get('logout', 'LoginController@logout')->name('logout');
-    Route::get('register', 'RegisterController@show')->name('register');
+    Route::get('register', 'RegisterController@show')->name('register.store');
     Route::post('register', 'RegisterController@register')->name('register');
     Route::post('register/code', 'RegisterController@code')->middleware(['throttle:1000:2', 'front'])->name('register.code');
 });

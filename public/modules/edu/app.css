@@ -11050,12 +11050,34 @@ body {
   border-bottom: none !important;
 }
 
+.front {
+  background: #fafafa;
+}
+
 .front .header {
   border-bottom: solid 4px #41a8a5;
 }
 
 .front .header .navbar-nav {
   font-size: 1.05rem;
+}
+
+@media screen and (min-width: 768px) {
+  .front .markdown pre {
+    position: relative;
+    left: -45px;
+    right: 100px;
+    width: 823px;
+  }
+
+  .front .markdown pre code {
+    padding: 30px;
+  }
+}
+
+.front .markdown pre code {
+  word-break: break-all;
+  white-space: break-spaces;
 }
 
 .front .w45 {
@@ -11098,6 +11120,10 @@ body {
   font-size: 1rem;
   line-height: 2rem;
   color: #555;
+}
+
+.front .Edu-front-topic-show .topic-content img {
+  max-width: 100%;
 }
 
 .Edu-front-video-show .video {

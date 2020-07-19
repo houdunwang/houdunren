@@ -26,4 +26,14 @@ class User extends ModelsUser
     {
         return $this->belongsToMany(Video::class, 'edu_user_video')->withTimestamps();
     }
+
+    public function sign()
+    {
+        return $this->hasMany(Sign::class);
+    }
+
+    public function signInfo()
+    {
+        return $this->hasOne(SignTotal::class, 'user_id');
+    }
 }

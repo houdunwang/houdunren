@@ -1,14 +1,13 @@
 <template>
-  <button type="button" :class="className" @click.prevent="del">
+  <a href="#" @click.prevent="del">
     <slot>删除</slot>
-  </button>
+  </a>
 </template>
 
 <script>
 export default {
   props: {
     action: { type: String, required: true },
-    className: { type: String, default: 'btn btn-secondary' },
     redirect: { type: String, default: '' },
   },
   methods: {

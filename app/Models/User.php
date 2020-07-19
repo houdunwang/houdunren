@@ -99,16 +99,9 @@ class User extends Authenticatable
             ->exists();
     }
 
-    public function signs()
+    public function getNicknameAttribute()
     {
-        return $this->hasMany(Sign::class);
-    }
-
-    public function todaySign()
-    {
-        return $this->signs()
-            ->whereDate('created_at', now())
-            ->first();
+        return $this->name ?? '小海豚';
     }
 
     public function duration()

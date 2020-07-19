@@ -3642,19 +3642,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -84387,7 +84374,7 @@ var render = function() {
                 ],
                 staticClass: "form-control",
                 class: { "is-invalid": _vm.errors.password },
-                attrs: { type: "text" },
+                attrs: { type: "password" },
                 domProps: { value: _vm.password },
                 on: {
                   focus: function($event) {
@@ -84425,7 +84412,7 @@ var render = function() {
                 ],
                 staticClass: "form-control",
                 class: { "is-invalid": _vm.errors.password_confirmation },
-                attrs: { type: "text" },
+                attrs: { type: "password" },
                 domProps: { value: _vm.password_confirmation },
                 on: {
                   focus: function($event) {
@@ -84470,11 +84457,7 @@ var staticRenderFns = [
           _vm._v("登录帐号")
         ]),
         _vm._v(" "),
-        _c("div", [
-          _c("a", { attrs: { href: "/login" } }, [_vm._v("登录")]),
-          _vm._v(" |\n        "),
-          _c("a", { attrs: { href: "" } }, [_vm._v("找回密码")])
-        ])
+        _c("div", [_c("a", { attrs: { href: "/login" } }, [_vm._v("登录")])])
       ]
     )
   }
@@ -99065,6 +99048,10 @@ __webpack_require__.r(__webpack_exports__);
 
     case 408:
       message = '请求超时(408)';
+      break;
+
+    case 413:
+      message = '请求数据过大(413)';
       break;
 
     case 429:

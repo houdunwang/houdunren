@@ -27,7 +27,11 @@ class LoginController extends Controller
             'captcha' => ['required', 'captcha'],
         ], ['account.regex' => '帐号格式错误']);
 
-        $isLogin =  Auth::attempt([$this->account() => $request->account, 'password' => $request->password], $request->has('remember'));
+        $isLogin = Auth::attempt([
+            $this->account() => $request->account,
+            'password' => $request->password
+        ], $request->has('remember'));
+
         if ($isLogin) {
             return redirect()->intended('/')->with('message', '登录成功');
         }

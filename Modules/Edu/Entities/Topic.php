@@ -2,23 +2,24 @@
 
 namespace Modules\Edu\Entities;
 
+use App\Models\Traits\Activity;
 use App\Models\Traits\Favorite;
 use App\Models\Traits\Favour;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Modules\Edu\Entities\Traits\Comment;
 
 class Topic extends Model
 {
-    use Favorite, Favour, LogsActivity, Comment;
+    use Favorite, Favour, Activity, Comment;
+
+    protected static $recordEvents = ['created'];
 
     protected $table = 'edu_topic';
 
     protected $fillable = ['title', 'content'];
-
-    protected static $recordEvents = ['created'];
 
     protected $casts = [
         'recommend' => 'boolean',
@@ -45,6 +46,9 @@ class Topic extends Model
 
     public function getHtmlAttribute()
     {
+        if ($this->created_at < Carbon::create(2020, 6, 1)) {
+            return $this->content;
+        }
         return Markdown::convertToHtml($this->content);
     }
 

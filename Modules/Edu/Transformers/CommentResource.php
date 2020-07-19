@@ -2,6 +2,7 @@
 
 namespace Modules\Edu\Transformers;
 
+use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CommentResource extends JsonResource
@@ -10,14 +11,9 @@ class CommentResource extends JsonResource
     {
         $comment =  parent::toArray($request);
         $comment['created_at'] = $this->created_at->diffForHumans();
-        $comment['user'] = $this->getUser();
+        $comment['user'] = new UserResource($this->user);
+        $comment['reply_user'] = new UserResource(User::firstOrNew(['id' => $this->reply_user_id]));
         $comment['html'] = $this->html;
         return $comment;
-    }
-
-    protected function getUser()
-    {
-        $user = $this->user;
-        return ['avatar' => $user->icon, 'id' => $user->id, 'name' => $user->name];
     }
 }

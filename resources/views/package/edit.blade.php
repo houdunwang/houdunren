@@ -27,7 +27,7 @@
     <button class="btn btn-primary mt-3">保存</button>
 </form>
 @endsection
-@push('scripts')
+@push('vue')
 <script>
     window.modules = @json($modules);
     window.selected = @json($package->modules);

@@ -2,6 +2,7 @@
 
 namespace Modules\Edu\Http\Controllers\Front;
 
+use Auth;
 use Cache;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -21,7 +22,7 @@ class CommentController extends Controller
 
     public function index($model, $id)
     {
-        $comments = $this->model($model, $id)->comments()->with('user:id,name,avatar')->get();
+        $comments = $this->model($model, $id)->comments()->latest()->with('user')->get();
         return new CommentCollection($comments);
     }
 
@@ -40,7 +41,9 @@ class CommentController extends Controller
         ]);
 
         Cache::put($key, '', now()->addSecond(10));
-        $model->user->notify(new CommentNotification($comment));
+        if ($comment->user->id !== Auth::id()) {
+            $model->user->notify(new CommentNotification($comment));
+        }
 
         return response()->json(['message' => '评论发表成功', 'data' => new CommentResource($comment)]);
     }

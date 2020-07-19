@@ -2,8 +2,8 @@
 
 <div class="d-flex pt-3 pb-3 border-bottom align-items-center mb-2">
     <a href="{{ $notification->data['link']}}" class="">
-        <span class="mr-3 ant-avatar ant-avatar-square ant-avatar-image">
-            <img src="{{ $notification->notifiable->avatar }}" class="avatar45 rounded">
+        <span class="mr-3 ">
+            <img src="{{ $notification->notifiable->icon }}" class="avatar45 rounded">
         </span>
     </a>
     <div class="d-flex flex-column justify-content-between">

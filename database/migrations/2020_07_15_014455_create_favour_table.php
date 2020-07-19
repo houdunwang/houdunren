@@ -6,17 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateFavourTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('favour', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->morphs('favour');
+            $table->foreignId('site_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('module_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

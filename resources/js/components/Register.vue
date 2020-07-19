@@ -14,7 +14,7 @@
         <div class="form-group">
           <label>密码</label>
           <input
-            type="text"
+            type="password"
             class="form-control"
             :class="{ 'is-invalid': errors.password }"
             @focus="errors.password = ''"
@@ -29,7 +29,7 @@
         <div class="form-group">
           <label>确认密码</label>
           <input
-            type="text"
+            type="password"
             class="form-control"
             :class="{ 'is-invalid': errors.password_confirmation }"
             @focus="errors.password_confirmation = ''"
@@ -44,8 +44,8 @@
       <div class="card-footer text-muted d-flex justify-content-between">
         <button class="btn btn-success btn-sm">登录帐号</button>
         <div>
-          <a href="/login">登录</a> |
-          <a href>找回密码</a>
+          <a href="/login">登录</a>
+          <!--  | <a href>找回密码</a> -->
         </div>
       </div>
     </div>

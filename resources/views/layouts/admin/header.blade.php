@@ -51,7 +51,7 @@
                 <div class="dropdown">
                     <div class="dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        <img src="{{ user()->avatar }}" class="rounded mr-1" style="width: 25px;" />
+                        <img src="{{ user()->icon }}" class="rounded mr-1" style="width: 25px;" />
                         {{ user('name') }}
                     </div>
                     <div class=" dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">

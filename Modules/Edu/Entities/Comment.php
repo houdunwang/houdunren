@@ -4,11 +4,11 @@ namespace Modules\Edu\Entities;
 
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
+use App\Models\Traits\Activity;
 
 class Comment extends Model
 {
-    use  LogsActivity;
+    use Activity;
 
     protected $table = "edu_comment";
 

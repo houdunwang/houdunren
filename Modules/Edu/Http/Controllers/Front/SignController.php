@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Edu\Entities\Sign;
+use Modules\Edu\Entities\User;
 
 class SignController extends Controller
 {
@@ -14,7 +15,7 @@ class SignController extends Controller
     {
         $signs = Sign::whereDate('created_at', now())->latest('id')->with('user')->get();
 
-        return view('edu::sign.index', compact('signs'));
+        return view('edu::sign.index', compact('signs'))->with('user', User::firstOrNew(['id' => Auth::id()]));
     }
 
     public function store(Request $request, Sign $sign)
@@ -28,6 +29,7 @@ class SignController extends Controller
         $sign->user_id = Auth::id();
         $sign->site_id = site()['id'];
         $sign->save();
+
         return back()->with('success', '签到成功');
     }
 

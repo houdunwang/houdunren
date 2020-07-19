@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ module()['title'] }}</title>
-    <link href="/modules/edu/app.css" rel="stylesheet">
+    <link href="/modules/Edu/app.css" rel="stylesheet">
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
     @stack('styles')
     @stack('links')
@@ -28,7 +28,7 @@
                 <div class="col-sm-2 col-12 p-0 pt-2 p-sm-0">
                     <div class="icon bg-white shadow-sm border">
                         <a href="{{ route('member.avatar.index') }}">
-                            <img src="{{ user('avatar') }}" style="width: 100%">
+                            <img src="{{ user('icon') }}" style="width: 100%">
                         </a>
                         <div class="pt-0 p-3">
                             <h6 class="text-muted">{{ user('name') }}</h6>

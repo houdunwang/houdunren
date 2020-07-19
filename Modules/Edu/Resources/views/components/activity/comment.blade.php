@@ -1,7 +1,7 @@
 <div class="d-flex pt-3 pb-3 border-bottom align-items-center mb-2">
     <a href="{{ route('Edu.space.topic',$comment->user) }}" class="">
-        <span class="mr-3 ant-avatar ant-avatar-square ant-avatar-image">
-            <img src="{{ $comment->user->avatar }}" class="w45 rounded">
+        <span class="mr-3 ">
+            <img src="{{ $comment->user->icon }}" class="w45 rounded">
         </span>
     </a>
     <div class="d-flex flex-column justify-content-between">

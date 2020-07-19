@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 @section('content')
 
-<form method="post" action="{{ route('login') }}">
+<form method="post" action="{{ route('login.store') }}">
     @csrf
     <div class="card shadow">
         <div class="card-header">
@@ -22,7 +22,8 @@
         <div class="card-footer text-muted d-flex justify-content-between">
             <button type="submit" class="btn btn-success btn-sm">登录帐号</button>
             <div>
-                <a href="{{ route('register') }}">注册</a> | <a href="">找回密码</a>
+                <a href="{{ route('register') }}">注册</a>
+                {{-- | <a href="">找回密码</a> --}}
             </div>
         </div>
     </div>

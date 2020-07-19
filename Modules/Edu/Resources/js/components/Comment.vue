@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="comment">
     <div
       :id="`comment-` + comment.id"
       class="card shadow-sm mb-2"
@@ -7,10 +7,10 @@
       :key="index"
     >
       <div class="card-header bg-white d-flex justify-content-start">
-        <img :src="comment.user.avatar" class="rounded mr-3 w35 h35" />
+        <img :src="comment.user.icon" class="rounded mr-3 w35 h35" />
         <div class="flex-fill">
           <div class="text-secondary">
-            <a :href="`/edu/space/${comment.user.id}/topic`" class>{{ comment.user.name }}</a>
+            <a :href="`/edu/space/${comment.user.id}/topic`">{{ comment.user.name }}</a>
           </div>
           <span class="small text-black-50">
             <i aria-hidden="true" class="fa fa-clock-o"></i>
@@ -18,9 +18,17 @@
           </span>
         </div>
       </div>
-      <div class="card-body text-secondary pb-5 markdown">
-        <div class="d-inline-block" v-html="comment.content"></div>
+
+      <div class="card-body text-secondary pb-5">
+        <a
+          :href="`/edu/space/${comment.reply_user.id}/topic`"
+          class="text-blue d-block mb-3"
+          v-if="comment.reply_user.id"
+        >@{{comment.reply_user.name}}</a>
+
+        <div v-html="comment.html" v-highlight="comment" class="markdown"></div>
       </div>
+
       <div class="card-footer text-muted bg-white small">
         # {{ index + 1 }}
         <!--        <a href="#" class="ml-2 mr-2">0个赞</a>-->
@@ -61,7 +69,7 @@
           <strong
             class="text-danger d-inline-block ml-3"
             v-if="errors.content"
-            style="font-size:13px;"
+            style="font-size: 13px;"
           >{{ errors.content }}</strong>
         </div>
       </div>
@@ -72,12 +80,18 @@
         </div>
       </div>
     </div>
+
+    <el-backtop></el-backtop>
+  </div>
+</template>
+
   </div>
 </template>
 
 <script>
 import Editor from './Editor.vue'
 import { mapState } from 'vuex'
+import ToastEditor from '@toast-ui/editor'
 export default {
   components: { Editor },
   props: {
@@ -99,8 +113,18 @@ export default {
       return `/Edu/comment/${this.model}/${this.id}`
     },
   },
+  directives: {
+    highlight: {
+      inserted: (el,binding) => {
+           el.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+      }
+    }
+  },
   mounted() {
     this.load()
+
   },
   methods: {
     async load() {
@@ -110,21 +134,23 @@ export default {
       } = await this.axios.get(this.action)
       this.comments = data
       this.user = user
-        this.$nextTick(()=>{
-            if(location.hash){this.$scrollTo(location.hash)}
-        })
+      this.$nextTick(() => {
+        if (location.hash) {
+          this.$scrollTo(location.hash)
+        }
+      })
     },
     async submit() {
       if (this.content == '') {
         return this.$message.error('评论内容不能为')
       }
-      if(this.content.trim().length<10){
-           return this.$message.error('评论内容过少')
+      if (this.content.trim().length < 10) {
+        return this.$message.error('评论内容过少')
       }
       let { data: comment } = await this.axios.post(this.action, {
-          content: this.content,
-          reply_user_id:this.reply_user?this.reply_user['id']:0
-          })
+        content: this.content,
+        reply_user_id: this.reply_user ? this.reply_user['id'] : 0,
+      })
       this.comments.push(comment)
       this.content = ''
       this.sendId++
@@ -143,4 +169,18 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss">
+.comment {
+  .text-blue {
+    color: #0081f0;
+  }
+  .markdown {
+    pre {
+      left: -19px;
+    }
+  }
+  img {
+    max-width: 100%;
+  }
+}
+</style>
