@@ -101,12 +101,14 @@
                     @foreach ($signs as $sign)
                     <tr class="sign">
                         <td width="150" class="align-middle">
-                            <img src="{{ $sign->user->icon }}" class="w35 rounded mr-2 align-middle">
-                            {{ $sign->user->name }}
+                            <a href="{{ route('Edu.space.topic',$sign->user) }}">
+                                <img src="{{ $sign->user->icon }}" class="w35 rounded mr-2 align-middle">
+                                {{ $sign->user->name }}
+                            </a>
                         </td>
                         <td width="120" class="align-middle">{{ $sign->created_at->format('H:i:s') }}</td>
-                        <td width="120" class="align-middle">{{ $sign->info->total }}</td>
-                        <td width="120" class="align-middle">{{ $sign->info->month }}</td>
+                        <td width="120" class="align-middle">{{ $sign->info->total??'' }}</td>
+                        <td width="120" class="align-middle">{{ $sign->info->month??'' }}</td>
                         <td class="align-middle">
                             <img src="/modules/Edu/static/sign/{{ $sign->mood }}.gif" class="w35">
                             {{ $sign->content }}

@@ -16,20 +16,25 @@
                         <a href="{{ route('Edu.front.system.index') }}" class="nav-link">系统学习</a>
                     </li>
                     <li class="nav-item pr-2">
-                        <a href="{{ route('Edu.front.lesson.index') }}" class="nav-link">实战课程</a></li>
+                        <a href="{{ route('Edu.front.lesson.index') }}" class="nav-link">实战课程</a>
+                    </li>
                     <li class="nav-item pr-2">
-                        <a href="{{ route('Edu.front.video.index') }}" class="nav-link">最近更新</a></li>
+                        <a href="{{ route('Edu.front.video.index') }}" class="nav-link">最近更新</a>
+                    </li>
                     <li class="nav-item pr-2">
-                        <a href="{{ route('Edu.front.topic.index') }}" class="nav-link">话题讨论</a></li>
+                        <a href="{{ route('Edu.front.topic.index') }}" class="nav-link">话题讨论</a>
+                    </li>
                     <li class="nav-item pr-2">
-                        <a href="{{ route('Edu.front.sign.index') }}" class="nav-link">签到打卡</a></li>
-                    <li class="nav-item pr-2">
-                        <a href="http://doc.houdunren.com" class="nav-link">在线文档</a></li>
-                    <li class="nav-item pr-2">
-                        <a href="https://www.houdunwang.com" target="_blank" class="nav-link">训练营</a>
+                        <a href="{{ route('Edu.front.sign.index') }}" class="nav-link">签到打卡</a>
                     </li>
                     <li class="nav-item pr-2">
                         <a href="{{ route('Edu.front.subscribe.index') }}" class="nav-link">订阅会员</a>
+                    </li>
+                    <li class="nav-item pr-2">
+                        <a href="http://doc.houdunren.com" class="nav-link">在线文档</a>
+                    </li>
+                    <li class="nav-item pr-2">
+                        <a href="https://www.houdunwang.com" target="_blank" class="nav-link">训练营</a>
                     </li>
                 </ul>
 

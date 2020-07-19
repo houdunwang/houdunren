@@ -6,12 +6,18 @@
         TA的贴子
     </div>
     <div class="card-body ">
-        @foreach ($topics as $topic)
+        @forelse ($topics as $topic)
         @include('edu::components.topic')
-        @endforeach
+        @empty
+        <div class="text-center col-12 p-3 text-secondary">
+            <i class="fas fa-info-circle"></i> TA 还没有时间发贴子，可能在忙着看视频
+        </div>
+        @endforelse
     </div>
+    @if ($topics->total()>1)
     <div class="card-footer">
         {{ $topics->links() }}
     </div>
+    @endif
 </div>
 @endsection
