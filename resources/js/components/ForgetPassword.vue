@@ -26,9 +26,24 @@
             v-if="errors.password"
           >{{ errors.password }}</strong>
         </div>
+
+        <div class="form-group">
+          <label>确认密码</label>
+          <input
+            type="password"
+            class="form-control"
+            :class="{ 'is-invalid': errors.password_confirmation }"
+            @focus="errors.password_confirmation = ''"
+            v-model="password_confirmation"
+          />
+          <strong
+            class="form-text text-danger invalid-feedback"
+            v-if="errors.password_confirmation"
+          >{{ errors.password_confirmation }}</strong>
+        </div>
       </div>
       <div class="card-footer text-muted d-flex justify-content-between">
-        <button class="btn btn-success btn-sm">登录帐号</button>
+        <button class="btn btn-success btn-sm">找回密码</button>
         <div>
           <a href="/login">登录</a>
           |
@@ -49,6 +64,7 @@ export default {
       account: '',
       code: '',
       password: '',
+      password_confirmation:''
     }
   },
   computed: {
@@ -58,7 +74,7 @@ export default {
     onSubmit() {
       this.$refs.sendCode.updateCaptcha()
       this.axios.post('/forget', this.$data).then((response) => {
-        // location.href = response.url
+        location.href = '/'
       })
     },
   },

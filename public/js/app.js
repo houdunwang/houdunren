@@ -3644,20 +3644,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       account: '',
       code: '',
-      password: ''
+      password: '',
+      password_confirmation: ''
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['errors'])),
   methods: {
     onSubmit: function onSubmit() {
       this.$refs.sendCode.updateCaptcha();
-      this.axios.post('/forget', this.$data).then(function (response) {// location.href = response.url
+      this.axios.post('/forget', this.$data).then(function (response) {
+        location.href = '/';
       });
     }
   }
@@ -3833,7 +3850,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       account: '',
       password: '',
-      captcha: ''
+      captcha: '',
+      remember: ''
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['errors'])),
@@ -84612,6 +84630,44 @@ var render = function() {
                     [_vm._v(_vm._s(_vm.errors.password))]
                   )
                 : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("确认密码")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.password_confirmation,
+                    expression: "password_confirmation"
+                  }
+                ],
+                staticClass: "form-control",
+                class: { "is-invalid": _vm.errors.password_confirmation },
+                attrs: { type: "password" },
+                domProps: { value: _vm.password_confirmation },
+                on: {
+                  focus: function($event) {
+                    _vm.errors.password_confirmation = ""
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.password_confirmation = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.password_confirmation
+                ? _c(
+                    "strong",
+                    { staticClass: "form-text text-danger invalid-feedback" },
+                    [_vm._v(_vm._s(_vm.errors.password_confirmation))]
+                  )
+                : _vm._e()
             ])
           ],
           1
@@ -84632,7 +84688,7 @@ var staticRenderFns = [
       { staticClass: "card-footer text-muted d-flex justify-content-between" },
       [
         _c("button", { staticClass: "btn btn-success btn-sm" }, [
-          _vm._v("登录帐号")
+          _vm._v("找回密码")
         ]),
         _vm._v(" "),
         _c("div", [
@@ -84830,31 +84886,59 @@ var render = function() {
               }
             }),
             _vm._v(" "),
-            _vm._m(0)
+            _c("div", { staticClass: "form-check" }, [
+              _c("label", { staticClass: "form-check-label" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.remember,
+                      expression: "remember"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", name: "remember" },
+                  domProps: {
+                    checked: Array.isArray(_vm.remember)
+                      ? _vm._i(_vm.remember, null) > -1
+                      : _vm.remember
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.remember,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.remember = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.remember = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.remember = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v("\n          记住我\n        ")
+              ])
+            ])
           ],
           1
         ),
         _vm._v(" "),
-        _vm._m(1)
+        _vm._m(0)
       ])
     ]
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-check" }, [
-      _c("label", { staticClass: "form-check-label" }, [
-        _c("input", {
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", name: "remember" }
-        }),
-        _vm._v("\n          记住我\n        ")
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

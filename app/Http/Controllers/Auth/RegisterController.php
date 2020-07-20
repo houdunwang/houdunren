@@ -28,7 +28,7 @@ class RegisterController extends Controller
         $request->validate([
             'mobile' => ['required', 'regex:/1\d{10}/i', Rule::unique('users', $this->account())],
             'code' => ['required', new VerificationCodeRule($request->mobile)],
-            'password' => ['required', 'confirmed'],
+            'password' => ['required', 'min:5', 'confirmed'],
         ], ['code.required' => '验证码不能为空', 'mobile.regex' => '手机号格式错误']);
 
         $user->password = $request->password;

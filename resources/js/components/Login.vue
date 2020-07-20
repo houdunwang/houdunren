@@ -37,7 +37,7 @@
         <captcha :captcha.sync="captcha"></captcha>
         <div class="form-check">
           <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" name="remember" />
+            <input type="checkbox" class="form-check-input" name="remember" v-model="remember" />
             记住我
           </label>
         </div>
@@ -64,6 +64,7 @@ export default {
       account: '',
       password: '',
       captcha: '',
+      remember:''
     }
   },
   computed: {

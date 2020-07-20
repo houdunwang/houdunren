@@ -2,6 +2,7 @@
 
 use App\Models\Site;
 use App\Services\ModuleService;
+use App\Services\SiteService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,8 @@ function site(Site $site = null): ?Site
         abort(404, '站点不存在');
     }
 
+    config(['site' => $site['config']]);
+    app(SiteService::class)->initConfig($site);
     return $site;
 }
 

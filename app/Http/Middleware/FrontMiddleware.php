@@ -18,9 +18,7 @@ class FrontMiddleware
     {
         $site = get_site_by_domain();
         site($site);
-
         module($site->module['name']);
-        config(['site' => site()['config']]);
         return $next($request);
     }
 }

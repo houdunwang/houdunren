@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Rules\VerificationCodeRule;
 use App\Services\CodeService;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -23,17 +25,18 @@ class ForgetController extends Controller
     {
         $request->validate([
             'account' => ['required'],
-            'password' => ['required', 'min:3'],
+            'code' => ['required', new VerificationCodeRule($request->account)],
+            'password' => ['required', 'min:5', 'confirmed'],
         ]);
 
         if ($request->account != session('account')) {
-            return response()->json(['message' => '帐号错误'], 404);
+            return response()->json(['message' => '帐号不存在'], 404);
         }
 
         $user = User::where($this->account(), $request->account)->firstOrFail();
         $user->password = $request->password;
         $user->save();
-
+        Auth::login($user);
         return response()->json(['message' => '密码重置成功']);
     }
 

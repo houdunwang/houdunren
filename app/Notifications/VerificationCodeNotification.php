@@ -27,10 +27,12 @@ class VerificationCodeNotification extends Notification
 
     public function toMail($notifiable)
     {
-        $webname = config('app.name');
+        $webname = site()['title'];
+
         return (new MailMessage)
-            ->greeting($webname  . "验证码")
-            ->line("你在「{$webname}」的验证码是：" . $this->code);
+            ->subject('验证码')
+            ->greeting("验证码")
+            ->line("您的验证码是：" . $this->code);
     }
 
 
