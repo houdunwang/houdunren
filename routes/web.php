@@ -10,7 +10,10 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::get('logout', 'LoginController@logout')->name('logout');
     Route::get('register', 'RegisterController@show')->name('register.store');
     Route::post('register', 'RegisterController@register')->name('register');
-    Route::post('register/code', 'RegisterController@code')->middleware(['throttle:1000:2', 'front'])->name('register.code');
+    Route::post('register/code', 'RegisterController@code')->middleware(['throttle:1:1', 'front'])->name('register.code');
+    Route::get('forget', 'ForgetController@show')->name('forget.show');
+    Route::post('forget', 'ForgetController@store')->name('forget.store');
+    Route::post('forget/code', 'ForgetController@code')->middleware(['throttle:1:1', 'front'])->name('forget.code');
 });
 
 Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware('auth');
@@ -68,7 +71,7 @@ Route::group(['prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.', 
     Route::resource('avatar', 'AvatarController')->only(['index', 'store']);
     Route::post('avatar/upload', 'AvatarController@upload')->name('avatar.upload');
     Route::resource('email', 'EmailController')->only(['index', 'store']);
-    Route::post('email/code', 'EmailController@code')->name('email.code');
+    Route::post('email/code', 'EmailController@code')->middleware(['throttle:1:1'])->name('email.code');
     Route::resource('mobile', 'MobileController')->only(['index', 'store']);
-    Route::post('mobile/code', 'MobileController@code')->name('mobile.code');
+    Route::post('mobile/code', 'MobileController@code')->middleware(['throttle:1:1'])->name('mobile.code');
 });

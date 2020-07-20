@@ -1,0 +1,24 @@
+.front {
+  .markdown {
+    pre {
+      @media screen and (min-width: 768px) {
+        position: relative;
+        left: -45px;
+        right: 100px;
+        width: 823px;
+        code {
+          padding: 30px;
+        }
+      }
+      code {
+        word-break: break-all;
+        white-space: break-spaces;
+      }
+    }
+  }
+  table,
+  tr,
+  td {
+    border: solid 1px #ddd;
+  }
+}

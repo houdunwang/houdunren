@@ -8,5 +8,5 @@ class SignTotal extends Model
 {
     protected $table = 'edu_sign_total';
 
-    protected $fillable = [];
+    protected $fillable = ['user_id', 'month', 'total'];
 }

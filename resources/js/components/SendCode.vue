@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="form-group">
-      <label>{{ title }}</label>
+      <label>帐号</label>
       <input
         type="text"
         class="form-control"
@@ -10,31 +10,12 @@
         @focus="errors[name] = ''"
         @keyup="$emit('update:'+name,value)"
         v-model="value"
-        :placeholder="'请输入'+title"
+        :placeholder="placeholder"
       />
       <strong class="form-text text-danger invalid-feedback" v-if="errors[name]">{{ errors[name] }}</strong>
     </div>
 
-    <div class="form-group captcha">
-      <label>图形验证码</label>
-      <div class="input-group" :class="{ 'is-invalid': errors.captcha }" @click="errors.captcha=''">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="请输入右侧图形验证码"
-          @change="errors.captcha = ''"
-          v-model="captcha"
-          @keyup="$emit('update:captcha',captcha)"
-        />
-        <div class="input-group-append border captcha-image" @click="updateCaptcha">
-          <img :src="captchaImage" />
-        </div>
-      </div>
-      <strong
-        class="form-text text-danger invalid-feedback"
-        v-if="errors.captcha"
-      >{{ errors.captcha }}</strong>
-    </div>
+    <captcha :captcha.sync="captcha" ref="captcha"></captcha>
 
     <div class="form-group send-form">
       <label>验证码</label>
@@ -42,7 +23,7 @@
         <input
           type="text"
           class="form-control"
-          placeholder="请输入手机验证码"
+          placeholder="请输入收到的验证码"
           v-model="code"
           @keyup="$emit('update:code',code)"
         />
@@ -60,7 +41,7 @@ import { mapState } from 'vuex'
 export default {
     props:{
         action:{type:String},
-        title:{required:true,type:String},
+        placeholder:{required:true,type:String},
         name:{required:true,type:String},
     },
   data() {
@@ -68,7 +49,6 @@ export default {
       value:"",
       code: '',
       captcha: '',
-      captchaImage: '/captcha'
     }
   },
   computed: {
@@ -80,10 +60,11 @@ export default {
     }
   },
   methods: {
-    updateCaptcha() {
-      return (this.captchaImage = '/captcha?' + Math.random())
-    },
+      updateCaptcha(){
+this.$refs['captcha'].updateCaptcha();
+      },
     send() {
+      this.updateCaptcha();
       this.axios.post(this.action, {
           [this.name]:this.value,
           captcha:this.captcha,

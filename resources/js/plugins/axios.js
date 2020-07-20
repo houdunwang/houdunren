@@ -52,7 +52,7 @@ _axios.interceptors.response.use(
         break
       default:
         let message = data.message
-        el.MessageBox.confirm(httpStatus(status) || message, '温馨提示', {
+        el.MessageBox.confirm(message || httpStatus(status), '温馨提示', {
           showCancelButton: false,
           confirmButtonText: '关闭',
           type: 'warning',

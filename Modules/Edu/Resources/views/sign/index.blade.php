@@ -5,20 +5,20 @@
     @auth
     <div class="card shadow-sm">
         <div class="card-header bg-white">签到快乐，再接再厉</div>
-        @if ($user->sign()->whereDate('created_at',now())->exists())
+        @if ($user->signs()->whereDate('created_at',now())->exists())
         <div class="card-body h6 font-weight-normal" style="line-height: 1.5rem;">
             您上次签到时间:
             <span class="text-danger">
-                {{ $user->sign()->latest()->first()->created_at}}
+                {{ $user->signs()->latest()->first()->created_at}}
             </span>
             <br>
             您的总签到天数:
             <span class="text-danger">
-                {{ $user->signInfo->total }}
+                {{ $user->signInfo->total??'' }}
             </span>
             天 <br>
             您本月签到天数:: <span class="text-danger">
-                {{ $user->signinfo->month }}
+                {{ $user->signinfo->month??'' }}
             </span> 天
         </div>
         @else

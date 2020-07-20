@@ -20,9 +20,11 @@ class CodeService
 
         Cache::put($account, $code, now()->addMinute(20));
 
-        return app(User::class)
+        app(User::class)
             ->fill(['email' => $account])
             ->notify(new VerificationCodeNotification($code));
+
+        return $code;
     }
 
     public function mobile($mobile)
@@ -31,6 +33,8 @@ class CodeService
 
         Cache::put($mobile, $code, now()->addMinute(20));
         $this->aliyun($mobile, $code);
+
+        return $code;
     }
 
     protected function aliyun($mobile, $code)

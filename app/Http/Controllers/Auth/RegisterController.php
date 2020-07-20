@@ -36,7 +36,8 @@ class RegisterController extends Controller
         $user->save();
 
         Auth::login($user);
-        return response()->json(['message' => '注册成功']);
+        $url = $request->session()->pull('url.intended', '/');
+        return response()->json(['message' => '注册成功', 'url' => $url]);
     }
 
     public function code(Request $request, CodeService $codeService)

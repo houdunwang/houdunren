@@ -33,15 +33,15 @@ class LoginController extends Controller
         ], $request->has('remember'));
 
         if ($isLogin) {
-            return redirect()->intended('/')->with('message', '登录成功');
+            return $request->session()->pull('url.intended', '/');
         }
 
-        return back()->with('danger', '帐号或密码错误')->withInput();
+        return response()->json(['message' => '帐号或密码错误'], 403);
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect()->intended('/')->with('message', '您已退出帐号');
+        return redirect('/')->with('message', '您已退出帐号');
     }
 }

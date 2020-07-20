@@ -1,0 +1,86 @@
+<template>
+  <form @submit.prevent="submit">
+    <div class="card shadow">
+      <div class="card-header">会员登录</div>
+      <div class="card-body">
+        <div class="form-group">
+          <label>手机或邮箱</label>
+          <input
+            type="text"
+            class="form-control"
+            :class="{ 'is-invalid': errors.account }"
+            @focus="errors.account = ''"
+            v-model="account"
+            placeholder="请输入登录帐号"
+          />
+          <strong
+            class="form-text text-danger invalid-feedback"
+            v-if="errors.password"
+          >{{ errors.password }}</strong>
+        </div>
+
+        <div class="form-group">
+          <label>密码</label>
+          <input
+            type="password"
+            class="form-control"
+            :class="{ 'is-invalid': errors.password }"
+            @focus="errors.password = ''"
+            v-model="password"
+            placeholder="请输入登录密码"
+          />
+          <strong
+            class="form-text text-danger invalid-feedback"
+            v-if="errors.password"
+          >{{ errors.password }}</strong>
+        </div>
+        <captcha :captcha.sync="captcha"></captcha>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" name="remember" />
+            记住我
+          </label>
+        </div>
+      </div>
+      <div class="card-footer text-muted d-flex justify-content-between">
+        <button type="submit" class="btn btn-success btn-sm">登录帐号</button>
+        <div>
+          <a href="/register">注册</a>
+          |
+          <a href="/forget">找回密码</a>
+          |
+          <a href="/">网站首页</a>
+        </div>
+      </div>
+    </div>
+  </form>
+</template>
+
+<script>
+import { mapState } from 'vuex'
+export default {
+  data() {
+    return {
+      account: '',
+      password: '',
+      captcha: '',
+    }
+  },
+  computed: {
+    ...mapState(['errors']),
+  },
+  methods: {
+    updateCaptcha() {
+      return (this.captchaImage = '/captcha?' + Math.random())
+    },
+    submit() {
+      this.axios.post('/login', this.$data).then((response) => {
+          this.updateCaptcha();
+        location.href= response;
+      })
+    },
+  },
+}
+</script>
+
+<style></style>
