@@ -14,16 +14,18 @@
                 </label>
                 @endforeach
             </div>
-            @push('comment')
-            <script>
-                window.content = @json( old('content',$topic['content']));
-            </script>
-            @endpush
-            <x-editor action="{{ route('common.upload') }}" name="content"></x-editor>
 
+            <x-editor action="{{ route('common.upload') }}" name="content"></x-editor>
+            {{-- <editor content="window.content" name="content"></editor> --}}
         </div>
         <div class="card-footer text-muted">
             <button class="btn btn-primary mt-3">保存</button>
         </div>
     </div>
 </div>
+
+@push('vue')
+<script>
+    window.content = @json( old('content',$topic['content']));
+</script>
+@endpush

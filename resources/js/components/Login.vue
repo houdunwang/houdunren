@@ -34,7 +34,7 @@
             v-if="errors.password"
           >{{ errors.password }}</strong>
         </div>
-        <captcha :captcha.sync="captcha"></captcha>
+        <captcha :captcha.sync="captcha" ref="captcha"></captcha>
         <div class="form-check">
           <label class="form-check-label">
             <input type="checkbox" class="form-check-input" name="remember" v-model="remember" />
@@ -76,8 +76,9 @@ export default {
     },
     submit() {
       this.axios.post('/login', this.$data).then((response) => {
-          this.updateCaptcha();
-        location.href= response;
+         location.href= response;
+      }).catch(()=>{
+        this.$refs['captcha'].updateCaptcha();
       })
     },
   },

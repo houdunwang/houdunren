@@ -5,6 +5,8 @@ namespace Modules\Edu\Entities;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\Activity;
+use App\Models\User;
+use Carbon\Carbon;
 
 class Comment extends Model
 {
@@ -21,9 +23,19 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function reply_user()
+    {
+        return $this->belongsTo(User::class, 'reply_user_id');
+    }
+
     public function getHtmlAttribute()
     {
-        return Markdown::convertToHtml($this->content);
+        if ($this->updated_at < Carbon::create(2020, 6, 1)) {
+            return $this->content;
+        }
+
+        $Parsedown = new \Parsedown();
+        return $Parsedown->setSafeMode(true)->text($this->content);
     }
 
     public function commentable()

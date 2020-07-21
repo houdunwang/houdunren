@@ -4,12 +4,12 @@
 <link rel="stylesheet" href="/plugins/tuiEditor/tuiEditor.css" />
 @endpush
 
-@push('comment')
+@push('scripts')
 <script src="https://cdn.staticfile.org/codemirror/5.55.0/codemirror.js"></script>
 <script src="/plugins/tuiEditor/dist/toastui-editor.js"></script>
 <script src="/plugins/tuiEditor/tuiEditor.js"></script>
 <script>
-    let editor =  hdEditor('#{{ $attributes['name'] }}',{
+    let editor = hdEditor('#{{ $attributes['name'] }}',{
         action:"{{  $attributes['action'] }}",
         initialValue:window.{{ $attributes['name'] }},
         events: {
@@ -27,14 +27,16 @@
         errorEl && errorEl.remove()
     })
 </script>
+
 @endpush
+
 <div id="{{ $attributes['name'] }}" class="tuiEditor"></div>
 @error( $attributes['name'] )
 <strong class="form-text text-danger small font-weight-bold error-{{ $attributes['name'] }}">{{ $message }}</strong>
 @enderror
 
 <div class="text-secondary  mt-2">
-    <i class="fas fa-info-circle    "></i> 你可以在编辑器底部切换为markdown模式，编辑器也支持托放上传图片。
+    <i class="fas fa-info-circle"></i> 你可以在编辑器底部切换为markdown模式，编辑器也支持托放上传图片。
 </div>
 
 <input type="hidden" name="{{ $attributes['name'] }}" />

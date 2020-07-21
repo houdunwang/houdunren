@@ -46,10 +46,12 @@ class Topic extends Model
 
     public function getHtmlAttribute()
     {
-        if ($this->created_at < Carbon::create(2020, 6, 1)) {
+        if ($this->updated_at < Carbon::create(2020, 6, 1)) {
             return $this->content;
         }
-        return Markdown::convertToHtml($this->content);
+        $Parsedown = new \Parsedown();
+        return $Parsedown->setSafeMode(true)->text($this->content);
+        // return Markdown::convertToHtml($this->content);
     }
 
     public function link()

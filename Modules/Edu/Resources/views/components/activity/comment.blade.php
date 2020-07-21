@@ -5,9 +5,17 @@
         </span>
     </a>
     <div class="d-flex flex-column justify-content-between">
-        <a href="{{$comment->link()}}" class="text-secondary h5">
-            {{ strip_tags($comment->content) }}
-        </a>
+        <div class="h5">
+            @if ($comment->reply_user_id)
+            回复了 <a href="{{ route("Edu.space.topic",$comment->reply_user) }}"
+                class="text-primary">{{ $comment->reply_user->name }}</a> 在
+            <a href="{{$comment->link()}}" class="text-secondary ">
+                《{{ $comment->commentable->title }}》
+            </a>发表的评论
+            @else
+            评论了 《{{ $comment->commentable->title }}》
+            @endif
+        </div>
         <div class="small text-black-50">
             <span class="badge badge-info">评论</span>
 

@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="favour-list text-center pt-3 w-75 m-auto">
-                    @foreach ($topic->favours as $user)
+                    @foreach ($topic->favours->take(65) as $user)
                     <a href="#" class="m-2">
                         <img src="{{ $user->icon }}" class="rounded-circle avatar35">
                     </a>
@@ -99,5 +99,7 @@
 @endsection
 
 @push('scripts')
-
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
 @endpush

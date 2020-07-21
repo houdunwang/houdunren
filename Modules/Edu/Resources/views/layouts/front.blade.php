@@ -11,7 +11,7 @@
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.1/styles/zenburn.min.css" rel="stylesheet">
     @stack('styles')
-    @stack('links')
+
     <script>
         const user = @json(['id'=>user('id'),'avatar'=>user('avatar'),'name'=>user('name')]);
     </script>
@@ -31,15 +31,8 @@
 
     @stack('vue')
     <script src="/modules/Edu/app.js"></script>
-    @stack('scripts')
-    @stack('comment')
-
     <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-    <script>
-        document.querySelectorAll('pre code').forEach((block) => {
-            hljs.highlightBlock(block);
-        });
-    </script>
+    @stack('scripts')
 </body>
 
 </html>

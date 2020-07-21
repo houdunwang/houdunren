@@ -83,7 +83,6 @@ export default {
   },
   computed: {
     ids() {
-      console.log(this.lessons.map((lesson) => lesson.id))
       return this.lessons.map((lesson) => lesson.id)
     },
   },

@@ -3863,9 +3863,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       this.axios.post('/login', this.$data).then(function (response) {
-        _this.updateCaptcha();
-
         location.href = response;
+      })["catch"](function () {
+        _this.$refs['captcha'].updateCaptcha();
       });
     }
   }
@@ -84878,6 +84878,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("captcha", {
+              ref: "captcha",
               attrs: { captcha: _vm.captcha },
               on: {
                 "update:captcha": function($event) {
