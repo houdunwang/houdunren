@@ -1,6 +1,6 @@
 <div class="bg-white shadow-sm border">
-    <a href="{{ route('Edu.space.topic',$user) }}" style="height:200px; overflow: hidden;" class="d-block">
-        <img src="{{ $user->icon }}" style="width:100%" />
+    <a href="{{ route('Edu.space.fans',$user) }}" style="height:180px; overflow: hidden;" class="d-block border-bottom">
+        <img src="{{ $user->icon }}" style="width:100%;" />
     </a>
     <div class="pt-0 p-3">
         <h6 class="text-muted">{{ $user->name }}</h6>

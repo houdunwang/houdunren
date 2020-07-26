@@ -28,20 +28,28 @@
                         @include('edu::components.activity.lesson',['lesson'=>$activity->subject])
                         @break
                         @case('Modules\Edu\Entities\Comment')
+                        @if ($activity->subject->commentable)
                         @include('edu::components.activity.comment',['comment'=>$activity->subject])
+                        @endif
                         @break
                         @endswitch
                         @endif
                         @endforeach
                         <div class="pt-3">
+                            @mobile
+                            {{$activities->onEachSide(0)->links() }}
+                            @endmobile
+
+                            @desktop
                             {{$activities->links() }}
+                            @enddesktop
                         </div>
                     </div>
 
                 </div>
 
             </div>
-            <div class="col-12 col-sm-3 mt-2 pl-0">
+            <div class="col-12 col-sm-3 mt-2">
                 @include('edu::components.tip')
                 @include('edu::components.learn')
             </div>

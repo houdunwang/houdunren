@@ -10,7 +10,7 @@
         </a>
         <div class="small text-black-50">
             <a href="{{ route('Edu.space.topic',$topic->user) }}" class="">{{ $topic->user->name }}</a>
-            . 发表于 {{ $topic->updated_at->diffForHumans() }}
+            . 更新于 {{ $topic->updated_at->diffForHumans() }}
             <span>. 评论 {{ $topic['comment_count'] }}</span>
             {{-- <span>. 点赞 {{ $topic['favour_count'] }}</span>
             <span>. 收藏 {{ $topic['favorite_count'] }}</span> --}}

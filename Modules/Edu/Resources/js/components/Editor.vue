@@ -1,8 +1,7 @@
 <template>
   <div>
     <div :id="name"></div>
-    <textarea hidden :name="name" v-model="form.markdown" v-if="name"></textarea>
-    <textarea hidden :name="name + '_html'" v-model="form.html" v-if="name"></textarea>
+    <div class="text-secondary mt-2 p-2 d-block mb-2"><i class="fas fa-info-circle"></i> 你可以在编辑器底部切换为markdown模式，编辑器也支持托放上传图片。</div>
   </div>
 </template>
 
@@ -14,10 +13,10 @@ import Editor from '@toast-ui/editor'
 
 export default {
   props: {
-    name: {required:true,type: String},
+    name: { required: true, type: String },
     content: { default: '' },
     //后台上传地址
-    action: {required:true, type: String },
+    action: { required: true, type: String },
     //编辑器高度
     height: { type: String, default: '300px' },
     //显示方式
@@ -27,7 +26,7 @@ export default {
   data() {
     return {
       editor: null,
-      form: { markdown: '', html: '' },
+      //   form: { markdown: '', html: '' },
     }
   },
   mounted() {
@@ -38,7 +37,7 @@ export default {
     initEditor() {
       const Vue = this
       const editor = new Editor({
-        el: document.querySelector('#'+this.name),
+        el: document.querySelector('#' + this.name),
         previewStyle: this.previewStyle,
         initialValue: this.content,
         initialEditType: this.initialEditType,
@@ -48,9 +47,10 @@ export default {
         events: {
           //监听编辑器输入
           change: function () {
-            Vue.$set(Vue.form, 'markdown', editor.getMarkdown())
-            Vue.$set(Vue.form, 'html', editor.getHtml());
-            Vue.$emit("update:content",Vue.form.markdown)
+            // console.log(editor)
+            // console.log(editor.isMarkdownMode()?editor.getMarkdown():editror)
+            // console.log(editor.getMarkdown())
+            Vue.$emit('update:content', editor.getMarkdown())
           },
         },
         hooks: {

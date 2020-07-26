@@ -4,10 +4,10 @@
 
 <div class="container mt-5 mb-5">
     <div class="row">
-        <div class="col-12 col-md-9">
+        <div class="col-12 col-md-9 mb-3">
             <div class="card">
                 <div class="card-body p-5">
-                    <h4 class="text-black-50 mb-4">第十八章 学习DOM看这个吧，JS编程必会技能</h4>
+                    <h4 class="text-black-50 mb-4">{{ $lesson['title'] }}</h4>
                     <div role="group" aria-label="" class="btn-group btn-group-sm">
                         <a href="{{ route('common.favorite',['Lesson',$lesson,'Edu']) }}"
                             class="btn {{ $lesson->isFavorite?'btn-info':'btn-outline-secondary' }}">
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-3 pl-0">
+        <div class="col-12 col-md-3">
             @include('edu::components.tip')
         </div>
     </div>

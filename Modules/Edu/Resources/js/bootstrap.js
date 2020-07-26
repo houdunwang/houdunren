@@ -10,6 +10,8 @@ try {
 require('./plugins/axios')
 require('./plugins/element')
 require('./plugins/autoload')
+require('./plugins/directive')
+require('./plugins/scrollTo')
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

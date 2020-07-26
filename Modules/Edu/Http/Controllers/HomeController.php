@@ -12,8 +12,13 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $topics = Topic::where('recommend', true)->with('user')->get();
-        $activities = Activity::latest()->with(['subject.user', 'causer'])->paginate();
+        $topics = Topic::where('recommend', true)
+            ->with('user')
+            ->get();
+
+        $activities = Activity::latest()
+            ->with(['subject.user', 'causer'])
+            ->paginate();
 
         return view('edu::index', compact('activities', 'topics'));
     }

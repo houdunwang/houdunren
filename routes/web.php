@@ -10,10 +10,10 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::get('logout', 'LoginController@logout')->name('logout');
     Route::get('register', 'RegisterController@show')->name('register.store');
     Route::post('register', 'RegisterController@register')->name('register');
-    Route::post('register/code', 'RegisterController@code')->middleware(['throttle:1:1', 'front'])->name('register.code');
+    Route::post('register/code', 'RegisterController@code')->middleware(['throttle:60,1', 'front'])->name('register.code');
     Route::get('forget', 'ForgetController@show')->name('forget.show');
     Route::post('forget', 'ForgetController@store')->name('forget.store');
-    Route::post('forget/code', 'ForgetController@code')->middleware(['throttle:1111:1', 'front'])->name('forget.code');
+    Route::post('forget/code', 'ForgetController@code')->middleware(['throttle:60,1', 'front'])->name('forget.code');
 });
 
 Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware('auth');

@@ -15,8 +15,7 @@
         <x-form title="邮箱帐号" name="email[username]" value="{{ config('site.email.username') }}" placeholder="发送邮箱帐号">
         </x-form>
 
-        <x-form type="password" title="邮箱密码" name="email[password]" value="{{ config('site.email.password') }}"
-            placeholder=""></x-form>
+        <x-form title="邮箱密码" name="email[password]" value="{{ config('site.email.password') }}" placeholder=""></x-form>
 
         <x-form title="加密方式" name="email[encryption]" value="{{ config('site.email.encryption','ssl') }}"
             placeholder=""></x-form>

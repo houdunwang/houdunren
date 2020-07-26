@@ -1,9 +1,9 @@
 <div class="header shadow-sm bg-light">
     <div class="container">
-        <nav class="navbar navbar-expand-sm navbar-light bg-light pt-3 pb-3 pl-md-0 pr-md-0">
-            <a href="/" class="navbar-brand text-muted font-weight-bold router-link-exact-active router-link-active">
-                <i aria-hidden="true" class="fas fa-code text-info font-weight-bolder"></i>
-                houdunren
+        <nav class="navbar navbar-expand-sm navbar-light bg-light pt-3 pb-3 pl-md-0 pr-md-0 align-items-center">
+            <a href="/" class="navbar-brand font-weight-bold router-link-exact-active router-link-active text-info ">
+                <i aria-hidden="true" class="fas fa-code font-weight-bolder"></i>
+                houdunren.com
             </a>
             <button type="button" data-toggle="collapse" data-target="#collapsibleNavId"
                 aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"
@@ -12,28 +12,28 @@
             </button>
             <div id="collapsibleNavId" class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0 font-weight-bold">
-                    <li class="nav-item pr-2">
+                    <li class="nav-item pr-1">
                         <a href="{{ route('Edu.front.system.index') }}" class="nav-link">系统学习</a>
                     </li>
-                    <li class="nav-item pr-2">
+                    <li class="nav-item pr-1">
                         <a href="{{ route('Edu.front.lesson.index') }}" class="nav-link">实战课程</a>
                     </li>
-                    <li class="nav-item pr-2">
+                    <li class="nav-item pr-1">
                         <a href="{{ route('Edu.front.video.index') }}" class="nav-link">最近更新</a>
                     </li>
-                    <li class="nav-item pr-2">
+                    <li class="nav-item pr-1">
                         <a href="{{ route('Edu.front.topic.index') }}" class="nav-link">话题讨论</a>
                     </li>
-                    <li class="nav-item pr-2">
+                    <li class="nav-item pr-1">
                         <a href="{{ route('Edu.front.sign.index') }}" class="nav-link">签到打卡</a>
                     </li>
-                    <li class="nav-item pr-2">
+                    <li class="nav-item pr-1">
                         <a href="{{ route('Edu.front.subscribe.index') }}" class="nav-link">订阅会员</a>
                     </li>
-                    <li class="nav-item pr-2">
+                    <li class="nav-item pr-1">
                         <a href="http://doc.houdunren.com" class="nav-link">在线文档</a>
                     </li>
-                    <li class="nav-item pr-2">
+                    <li class="nav-item pr-1">
                         <a href="https://www.houdunwang.com" target="_blank" class="nav-link">训练营</a>
                     </li>
                 </ul>

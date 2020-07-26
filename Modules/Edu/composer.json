@@ -1,10 +1,10 @@
 {
-  "name": "nwidart/edu",
-  "description": "",
+  "name": "houdunren/edu",
+  "description": "在线课堂",
   "authors": [
     {
-      "name": "Nicolas Widart",
-      "email": "n.widart@gmail.com"
+      "name": "houdunren",
+      "email": "2300071698@qq.com"
     }
   ],
   "extra": {
@@ -22,5 +22,6 @@
     "files": [
       "helpers.php"
     ]
-  }
+  },
+  "require": {}
 }

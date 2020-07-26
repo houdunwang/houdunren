@@ -8,6 +8,7 @@ use App\Services\CodeService;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Intervention\Image\Exception\NotFoundException;
 
 class ForgetController extends Controller
 {
@@ -27,10 +28,10 @@ class ForgetController extends Controller
             'account' => ['required'],
             'code' => ['required', new VerificationCodeRule($request->account)],
             'password' => ['required', 'min:5', 'confirmed'],
-        ]);
+        ], ['account.required' => '帐号不存在']);
 
         if ($request->account != session('account')) {
-            return response()->json(['message' => '帐号不存在'], 404);
+            return response()->json(['message' => '请先发送验证码'], 404);
         }
 
         $user = User::where($this->account(), $request->account)->firstOrFail();
@@ -42,23 +43,26 @@ class ForgetController extends Controller
 
     public function code(Request $request, CodeService $codeService)
     {
-        $account = $request->account;
-
         $request->validate([
             'captcha' => ['required', 'captcha'],
         ], ['code.required' => '图形验证码不能为空']);
 
+        $this->checkUserExists();
+
+        call_user_func([$codeService, $this->account()], $request->account);
+
+        session()->put('account', $request->account);
+
+        return response()->json(['message' => '验证码发送成功']);
+    }
+
+    protected function checkUserExists()
+    {
+        $account = request()->account;
         $hasUser = User::where('email', $account)->orWhere('mobile', $account)->exists();
 
         if (!$hasUser) {
-            return response()->json(['message' => '帐号不存在'], 430);
+            throw new NotFoundException('帐号不存在');
         }
-
-        $method = $this->account();
-        $codeService->$method($account);
-
-        session()->put('account', $account);
-
-        return response()->json(['message' => '验证码发送成功']);
     }
 }

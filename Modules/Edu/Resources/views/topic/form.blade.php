@@ -14,9 +14,10 @@
                 </label>
                 @endforeach
             </div>
-
-            <x-editor action="{{ route('common.upload') }}" name="content"></x-editor>
-            {{-- <editor content="window.content" name="content"></editor> --}}
+            <div class="v-cloak">
+                <editor :content.sync="content" action="{{ route('common.upload') }}" name="content"></editor>
+                <textarea hidden name="content" v-model="content"></textarea>
+            </div>
         </div>
         <div class="card-footer text-muted">
             <button class="btn btn-primary mt-3">保存</button>
@@ -26,6 +27,10 @@
 
 @push('vue')
 <script>
-    window.content = @json( old('content',$topic['content']));
+    window.vue={
+        data:{
+            content:@json(old('content',$topic['content']))
+        }
+    }
 </script>
 @endpush

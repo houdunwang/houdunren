@@ -14,7 +14,7 @@
         initialValue:window.{{ $attributes['name'] }},
         events: {
           //监听编辑器输入
-          change: function () {
+          change() {
             const input = document.querySelector(`[name='{{ $attributes['name'] }}']`)
             input.value = editor.getMarkdown()
           },
@@ -39,4 +39,4 @@
     <i class="fas fa-info-circle"></i> 你可以在编辑器底部切换为markdown模式，编辑器也支持托放上传图片。
 </div>
 
-<input type="hidden" name="{{ $attributes['name'] }}" />
+<input type="text" name="{{ $attributes['name'] }}" />

@@ -4,7 +4,7 @@
       <div class="card-header">找回密码</div>
       <div class="card-body">
         <send-code
-          name="account"
+          type="all"
           placeholder="请输入登录帐号"
           :code.sync="code"
           action="/forget/code"
@@ -64,7 +64,7 @@ export default {
       account: '',
       code: '',
       password: '',
-      password_confirmation:''
+      password_confirmation: '',
     }
   },
   computed: {
@@ -72,7 +72,6 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$refs.sendCode.updateCaptcha()
       this.axios.post('/forget', this.$data).then((response) => {
         location.href = '/'
       })

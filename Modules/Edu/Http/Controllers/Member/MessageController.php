@@ -5,7 +5,6 @@ namespace Modules\Edu\Http\Controllers\Member;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Notification;
 
 class MessageController extends Controller
 {
@@ -16,7 +15,7 @@ class MessageController extends Controller
 
     public function index()
     {
-        $notifications = user()->unreadNotifications()->where('site_id', site()['id'])->paginate(1);
+        $notifications = user()->unreadNotifications()->where('site_id', site()['id'])->paginate();
 
         return view('edu::member.message', compact('notifications'));
     }

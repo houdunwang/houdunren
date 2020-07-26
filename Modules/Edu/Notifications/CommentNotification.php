@@ -15,10 +15,11 @@ class CommentNotification extends Notification
     use Queueable;
 
     protected $comment;
-
-    public function __construct(Comment $comment)
+    protected $title;
+    public function __construct(Comment $comment, $title)
     {
         $this->comment = $comment;
+        $this->title = $title;
     }
 
     public function via($notifiable)
@@ -30,16 +31,11 @@ class CommentNotification extends Notification
     {
         return [
             'id' => $this->comment->id,
-            'title' => $this->title(),
-            'link' => $this->comment->commentable->link() . '#comment-' . $this->comment->id
+            'title' => $this->title,
+            'link' => $this->comment->commentable->link() . '#comment-' . $this->comment->id,
+            'nickname' => user()->nickname,
+            'icon' => user()->icon,
+            'user_id' => user()->id
         ];
-    }
-
-    protected function title()
-    {
-        if ($this->comment->reply_user_id) {
-            return '回复了你的评论';
-        }
-        return '评论了你的贴子';
     }
 }

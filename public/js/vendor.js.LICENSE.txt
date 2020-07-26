@@ -35,12 +35,6 @@
  * Date: 2020-05-04T22:49Z
  */
 
-/*!
- * vuex v3.4.0
- * (c) 2020 Evan You
- * @license MIT
- */
-
 /**
  * @license
  * Lodash <https://lodash.com/>

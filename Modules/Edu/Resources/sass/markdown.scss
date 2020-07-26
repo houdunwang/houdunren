@@ -2,20 +2,28 @@
   .markdown {
     color: #636b6f !important;
     line-height: 1.8em;
-
+    word-break: break-all;
+    a {
+      color: #3182ce;
+      &:hover {
+        color: #236eb4;
+      }
+    }
     img {
       max-width: 100%;
     }
-
-    h1, h2 {
+    h1,
+    h2 {
       font-size: 1.3em;
       border-bottom: solid 1px #dddddd;
       padding-bottom: 15px !important;
       margin-top: 40px;
       margin-bottom: 20px;
     }
-
-    h3, h4, h5, h6 {
+    h3,
+    h4,
+    h5,
+    h6 {
       font-size: 1.2em;
       font-weight: bold;
       margin-top: 20px;
@@ -24,23 +32,25 @@
 
     table {
       width: 100%;
-
+      word-break: break-all;
       th {
         background: #f3f3f3;
       }
-
-      td, th {
+      td,
+      th {
         border: solid 1px #ddd;
         padding: 10px;
       }
-
     }
-
-
     pre {
       word-break: break-word;
       background-color: #363f52;
-
+      @media screen and (min-width: 768px) {
+        position: relative;
+        left: -45px;
+        width: 823px;
+        padding: 1rem 3rem;
+      }
       code {
         word-break: break-word;
         white-space: pre-wrap;

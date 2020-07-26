@@ -10,7 +10,6 @@
     </div>
     @endif
 
-
     <div class="bg-light p-3 text-secondary">
         {{ $system->description }}
     </div>
@@ -18,7 +17,7 @@
 
 <div class="container bg-white border shadow-sm p-5 mt-2 mb-5">
     <h5 class="text-secondary mb-3">课程列表</h5>
-    @foreach ($system->lessons()->oldest('rank')->get() as $lesson)
+    @foreach ($system->lessons as $lesson)
     <div class="border-top pt-3 pb-2 mb-2 d-flex justify-content-between text-secondary">
         <a href="{{ route('Edu.front.lesson.show',$lesson) }}" class="">{{ $lesson->title }}</a>
         <div class="small text-secondary">

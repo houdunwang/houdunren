@@ -8,21 +8,21 @@ use App\Models\Traits\Activity;
 
 class Sign extends Model
 {
-    use Activity;
+  use Activity;
 
-    protected static $recordEvents = ['created'];
+  protected static $recordEvents = ['created'];
 
-    protected $table = 'edu_sign';
+  protected $table = 'edu_sign';
 
-    protected $fillable = ['content', 'mood'];
+  protected $fillable = ['content', 'mood'];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+  public function user()
+  {
+    return $this->belongsTo(User::class);
+  }
 
-    public function info()
-    {
-        return $this->hasOne(SignTotal::class, 'user_id', 'user_id');
-    }
+  public function info()
+  {
+    return $this->hasOne(SignTotal::class, 'user_id', 'user_id');
+  }
 }

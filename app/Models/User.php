@@ -10,8 +10,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Modules\Edu\Entities\Duration;
-use Modules\Edu\Entities\Sign;
-use Modules\Edu\Entities\Subscribe;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -101,7 +99,7 @@ class User extends Authenticatable
 
     public function getNicknameAttribute()
     {
-        return $this->name ?? '小海豚';
+        return empty($this->name) ? '小海豚' : $this->name;
     }
 
     public function duration()

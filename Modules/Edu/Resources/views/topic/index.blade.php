@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-5 mb-5">
     <div class="row">
-        <div class="col-12 col-md-9">
+        <div class="col-12 col-md-9 mb-3">
             <div class="card shadow-sm">
                 <div class="card-header bg-white justify-content-between">话题讨论</div>
                 <div class="card-body pb-0 pt-2">
@@ -24,11 +24,11 @@
                     @endforeach
                 </div>
                 <div class="card-footer">
-                    {{ $topics->withQueryString()->links() }}
+                    @include('edu::layouts.paginate',['data'=>$topics])
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-3 p-0">
+        <div class="col-12 col-md-3">
             @include('edu::components.tip')
         </div>
     </div>

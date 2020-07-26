@@ -3672,7 +3672,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['errors'])),
   methods: {
     onSubmit: function onSubmit() {
-      this.$refs.sendCode.updateCaptcha();
       this.axios.post('/forget', this.$data).then(function (response) {
         location.href = '/';
       });
@@ -3987,35 +3986,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      mobile: '',
+      account: '',
       code: '',
       password: '',
       password_confirmation: ''
@@ -4024,7 +3999,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['errors'])),
   methods: {
     onSubmit: function onSubmit() {
-      this.$refs.sendCode.updateCaptcha();
       this.axios.post('/register', this.$data).then(function (response) {
         location.href = response.url;
       });
@@ -4073,59 +4047,80 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
+    type: {
+      type: String,
+      "default": 'all'
+    },
     action: {
       type: String
     },
-    placeholder: {
-      required: true,
-      type: String
+    title: {
+      type: String,
+      "default": '帐号'
     },
-    name: {
+    placeholder: {
       required: true,
       type: String
     }
   },
   data: function data() {
     return {
-      value: "",
+      value: '',
       code: '',
       captcha: ''
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['errors'])), {}, {
-    url: function url() {
-      if (this.action) return this.action;
-      return '/common/code/' + this.name;
-    }
-  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['errors'])),
   methods: {
     updateCaptcha: function updateCaptcha() {
       this.$refs['captcha'].updateCaptcha();
     },
-    send: function send() {
-      var _this$axios$post;
+    checkAccount: function checkAccount() {
+      var msg = '';
 
-      this.updateCaptcha();
-      this.axios.post(this.action, (_this$axios$post = {}, _defineProperty(_this$axios$post, this.name, this.value), _defineProperty(_this$axios$post, "captcha", this.captcha), _defineProperty(_this$axios$post, "code", this.code), _this$axios$post));
-      this.updateCaptcha();
+      switch (this.type) {
+        case 'all':
+          var status = /.@./.test(this.value) || /^1\d{10}$/.test(this.value);
+
+          if (status === false) {
+            msg = '请输入正确的邮箱或手机号';
+          }
+
+          break;
+
+        case 'email':
+          if (/.@./.test(this.value) === false) {
+            msg = '邮箱格式错误';
+          }
+
+          break;
+
+        case 'mobile':
+          if (/^1\d{10}$/.test(this.value) === false) {
+            msg = '手机号错误';
+          }
+
+      }
+
+      if (msg != '') {
+        this.$message.error(msg);
+        return false;
+      }
+
+      return true;
+    },
+    send: function send() {
+      if (this.checkAccount() === true) {
+        this.updateCaptcha();
+        this.axios.post(this.action, {
+          account: this.value,
+          captcha: this.captcha,
+          code: this.code
+        });
+      }
     }
   }
 });
@@ -84576,7 +84571,7 @@ var render = function() {
             _c("send-code", {
               ref: "sendCode",
               attrs: {
-                name: "account",
+                type: "all",
                 placeholder: "请输入登录帐号",
                 code: _vm.code,
                 action: "/forget/code",
@@ -85092,15 +85087,17 @@ var render = function() {
             _c("send-code", {
               ref: "sendCode",
               attrs: {
-                name: "mobile",
-                mobile: _vm.mobile,
+                name: "account",
+                type: "mobile",
+                account: _vm.account,
                 code: _vm.code,
                 action: "/register/code",
+                title: "手机号",
                 placeholder: "请输入手机号码"
               },
               on: {
-                "update:mobile": function($event) {
-                  _vm.mobile = $event
+                "update:account": function($event) {
+                  _vm.account = $event
                 },
                 "update:code": function($event) {
                   _vm.code = $event
@@ -85243,7 +85240,7 @@ var render = function() {
     "div",
     [
       _c("div", { staticClass: "form-group" }, [
-        _c("label", [_vm._v("帐号")]),
+        _c("label", [_vm._v(_vm._s(_vm.title))]),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -85255,15 +85252,15 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          class: { "is-invalid": _vm.errors[_vm.name] },
-          attrs: { type: "text", name: _vm.name, placeholder: _vm.placeholder },
+          class: { "is-invalid": _vm.errors.account },
+          attrs: { type: "text", placeholder: _vm.placeholder },
           domProps: { value: _vm.value },
           on: {
             focus: function($event) {
-              _vm.errors[_vm.name] = ""
+              _vm.errors.account = ""
             },
             keyup: function($event) {
-              return _vm.$emit("update:" + _vm.name, _vm.value)
+              return _vm.$emit("update:account", _vm.value)
             },
             input: function($event) {
               if ($event.target.composing) {
@@ -85274,11 +85271,11 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _vm.errors[_vm.name]
+        _vm.errors.account
           ? _c(
               "strong",
               { staticClass: "form-text text-danger invalid-feedback" },
-              [_vm._v(_vm._s(_vm.errors[_vm.name]))]
+              [_vm._v(_vm._s(_vm.errors.account))]
             )
           : _vm._e()
       ]),

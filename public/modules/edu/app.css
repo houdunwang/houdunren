@@ -10937,9 +10937,21 @@ a {
   font-size: 15px;
 }
 
+[v-cloak] {
+  display: none;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif !important;
   font-size: 1rem;
+}
+
+.text-blue {
+  color: #3f81c7 !important;
+}
+
+.text-blue:hover {
+  color: #31557c !important;
 }
 
 .card-header,
@@ -11059,7 +11071,7 @@ body {
 }
 
 .front .header .navbar-nav {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
 }
 
 .front .w45 {
@@ -11179,6 +11191,15 @@ body {
 .front .markdown {
   color: #636b6f !important;
   line-height: 1.8em;
+  word-break: break-all;
+}
+
+.front .markdown a {
+  color: #3182ce;
+}
+
+.front .markdown a:hover {
+  color: #236eb4;
 }
 
 .front .markdown img {
@@ -11206,6 +11227,7 @@ body {
 
 .front .markdown table {
   width: 100%;
+  word-break: break-all;
 }
 
 .front .markdown table th {
@@ -11221,6 +11243,15 @@ body {
 .front .markdown pre {
   word-break: break-word;
   background-color: #363f52;
+}
+
+@media screen and (min-width: 768px) {
+  .front .markdown pre {
+    position: relative;
+    left: -45px;
+    width: 823px;
+    padding: 1rem 3rem;
+  }
 }
 
 .front .markdown pre code {

@@ -9,7 +9,7 @@
         <div class="row">
             @forelse ($followers as $follower)
             <div class="col-6 col-sm-3 mb-2">
-                @include('edu::components.user_rec',['user'=>$follower])
+                @include('edu::components.user_small',['user'=>$follower])
             </div>
             @empty
             <div class="text-center col-12 p-3 text-secondary">
@@ -20,7 +20,7 @@
     </div>
     @if ($followers->total()>1)
     <div class="card-footer">
-        {{ $followers->links() }}
+        @include('edu::layouts.paginate',['data'=>$followers])
     </div>
     @endif
 </div>

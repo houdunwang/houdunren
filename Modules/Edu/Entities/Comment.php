@@ -12,7 +12,7 @@ class Comment extends Model
 {
     use Activity;
 
-    protected $table = "edu_comment";
+    protected $table = 'edu_comment';
 
     protected $fillable = ['content', 'user_id', 'site_id', 'reply_user_id'];
 
@@ -34,8 +34,7 @@ class Comment extends Model
             return $this->content;
         }
 
-        $Parsedown = new \Parsedown();
-        return $Parsedown->setSafeMode(true)->text($this->content);
+        return (new \Parsedown())->text($this->content);
     }
 
     public function commentable()

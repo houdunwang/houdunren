@@ -5,36 +5,58 @@ namespace App\Services;
 use App\Notifications\VerificationCodeNotification;
 use App\Models\User;
 use Cache;
+use Dotenv\Exception\ValidationException;
+use Exception;
 use Overtrue\EasySms\EasySms;
 
 class CodeService
 {
-    public function check($account, $value)
+    //发送时间间隔单位分钟
+    public $minute = 1;
+
+    public function check($account, $value): bool
     {
-        return Cache::pull($account) == $value;
+        if ($data = Cache::get($account)) {
+            return $data['code'] == $value;
+        }
+        return false;
     }
 
-    public function email($account)
+    protected function cache($account, $code)
     {
+        Cache::put($account, ['code' => $code, 'time' => now()], now()->addMinute(30));
+    }
+
+    public function email($email)
+    {
+        $this->checkSend($email);
         $code = mt_rand(1000, 9999);
-
-        Cache::put($account, $code, now()->addMinute(20));
-
         app(User::class)
-            ->fill(['email' => $account])
+            ->fill(['email' => $email])
             ->notify(new VerificationCodeNotification($code));
-
-        return $code;
+        $this->cache($email, $code);
     }
 
     public function mobile($mobile)
     {
+        $this->checkSend($mobile);
         $code = mt_rand(1000, 9999);
+        try {
+            $this->aliyun($mobile, $code);
+            $this->cache($mobile, $code);
+        } catch (Exception $e) {
+            throw new ValidationException('发送失败，请稍候再试');
+        }
+    }
 
-        Cache::put($mobile, $code, now()->addMinute(20));
-        $this->aliyun($mobile, $code);
-
-        return $code;
+    public function checkSend($account)
+    {
+        if ($data = Cache::get($account)) {
+            $timeout = now()->diffInSeconds($data['time']->addMinute($this->minute), false);
+            if ($timeout > 0) {
+                abort(403, "请等待{$timeout}秒操作");
+            }
+        }
     }
 
     protected function aliyun($mobile, $code)
@@ -62,10 +84,8 @@ class CodeService
             ],
         ];
         $easySms = new EasySms($config);
-
         $easySms->send($mobile, [
-            // 'content'  => '您的验证码为: ' . $code,
-            'template' => 'SMS_12840367',
+            'template' => config('site.sms.aliyun.template'),
             'data' => [
                 'code' => $code,
                 'product' => site()['title'],

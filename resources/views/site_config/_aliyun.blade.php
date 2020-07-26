@@ -8,11 +8,10 @@
             placeholder="根据服务器所在区域进行选择 | https://help.aliyun.com/document_detail/40654.html?spm=5176.7114037.1996646101.1.OCtdEo">
         </x-form>
 
-        <x-form type="password" title="accessKeyId" name="aliyun[accessKeyId]"
-            value="{{ config('site.aliyun.accessKeyId') }}"
+        <x-form title="accessKeyId" name="aliyun[accessKeyId]" value="{{ config('site.aliyun.accessKeyId') }}"
             placeholder="如果使用主账号访问，登陆阿里云 AccessKey 管理页面创建、查看 | 如果使用子账号访问，请登录阿里云访问控制控制台查看"></x-form>
 
-        <x-form type="password" title="accessKeySecret" name="aliyun[accessKeySecret]"
+        <x-form title="accessKeySecret" name="aliyun[accessKeySecret]"
             value="{{ config('site.aliyun.accessKeySecret') }}"
             placeholder="如果使用主账号访问，登陆阿里云 AccessKey 管理页面创建、查看 | 如果使用子账号访问，请登录阿里云访问控制控制台查看"></x-form>
 

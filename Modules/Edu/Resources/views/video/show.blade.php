@@ -56,7 +56,7 @@
 
 <div class="container mb-5 mt-3">
     <div class="row">
-        <div class="col-md-9 mt-2 mt-md-0 order-md-0">
+        <div class="col-md-9 mt-2 mt-md-0 order-md-0 mb-3">
             <div id="app">
                 <comment model="Video" :id="{{ $video['id'] }}"></comment>
             </div>

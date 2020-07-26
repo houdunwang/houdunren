@@ -17,15 +17,14 @@
     <div class="front">
         @include('edu::layouts.header')
 
-
-        <div class="container mt-3 mb-5 p-0 p-sm-1">
+        <div class="container mt-3 mb-5 p-sm-1">
             <div class="row">
-                <div class="col-12 col-sm-10">
+                <div class="col-12 col-sm-9 mb-3">
                     @include('layouts.message')
                     @yield('content')
                 </div>
 
-                <div class="col-sm-2 col-12 p-0 pt-2 p-sm-0">
+                <div class="col-sm-3 col-12">
                     @include('edu::components.user_rec')
                     <div class="card rounded shadow-sm bg-white mt-2">
                         <div class="card-body p-0">
@@ -41,6 +40,10 @@
                                 <a href="{{ route('Edu.space.fans',$user) }}"
                                     class="list-group-item list-group-item-action text-secondary">
                                     TA的粉丝
+                                </a>
+                                <a href="{{ route('Edu.space.lesson',$user) }}"
+                                    class="list-group-item list-group-item-action text-secondary">
+                                    TA的收藏
                                 </a>
                             </div>
                         </div>

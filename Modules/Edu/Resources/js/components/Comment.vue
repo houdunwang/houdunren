@@ -10,7 +10,7 @@
         <img :src="comment.user.icon" class="rounded mr-3 w35 h35" />
         <div class="flex-fill">
           <div class="text-secondary">
-            <a :href="`/edu/space/${comment.user.id}/topic`">{{ comment.user.name }}</a>
+            <a :href="`/edu/space/${comment.user.id}/topic`">{{ comment.user.nickname }}</a>
           </div>
           <span class="small text-black-50">
             <i aria-hidden="true" class="fa fa-clock-o"></i>
@@ -24,14 +24,13 @@
           :href="`/edu/space/${comment.reply_user.id}/topic`"
           class="text-blue d-block mb-3"
           v-if="comment.reply_user.id"
-        >@{{comment.reply_user.name}}</a>
+        >@{{comment.reply_user.nickname}}</a>
 
-        <div v-html="comment.html" v-highlight="comment" class="markdown"></div>
+        <div v-highlight class="markdown" v-html="comment.html"></div>
       </div>
 
       <div class="card-footer text-muted bg-white small">
         # {{ index + 1 }}
-        <!--        <a href="#" class="ml-2 mr-2">0个赞</a>-->
         <a
           href="#"
           class="d-inline-block mr-2 ml-2"
@@ -51,17 +50,17 @@
         </a>
       </div>
     </div>
-
     <div id="commentForm">
       <div class="card" v-if="user.id">
         <div class="card-header">
-          <span v-if="reply_user.name">
-            回复：{{ reply_user.name }}
+          <span v-if="reply_user.id">
+            回复：
+            <span class="text-primary">{{ reply_user.nickname }}</span>
             <a href="#" @click.prevent="reply_user = {}">
               <i class="fa fa-window-close"></i>
             </a>
           </span>
-          <span v-if="!reply_user.name">发表评论</span>
+          <span v-if="!reply_user.id">发表评论</span>
         </div>
         <editor name="content" action :content.sync="content" :key="sendId"></editor>
         <div class="card-footer text-muted">
@@ -113,18 +112,8 @@ export default {
       return `/Edu/comment/${this.model}/${this.id}`
     },
   },
-  directives: {
-    highlight: {
-      inserted: (el,binding) => {
-           el.querySelectorAll('pre code').forEach((block) => {
-                hljs.highlightBlock(block);
-            });
-      }
-    }
-  },
   mounted() {
     this.load()
-
   },
   methods: {
     async load() {
@@ -153,6 +142,7 @@ export default {
       })
       this.comments.push(comment)
       this.content = ''
+      this.reply_user = {}
       this.sendId++
     },
     del(comment) {
@@ -177,6 +167,7 @@ export default {
   .markdown {
     pre {
       left: -19px;
+      padding: 1rem;
     }
   }
   img {

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-5 mb-5">
     <div class="row">
-        <div class="col-12 col-md-9">
+        <div class="col-12 col-md-9 mb-3">
             <div class="bg-white rounded shadow-sm border border-gary shadow-sm p-md-5 p-3">
                 <div class="border-bottom mb-5 pb-3">
                     <h5 class="pb-1 pt-3 mb-3 text-monospace text-black-50">
@@ -34,63 +34,44 @@
                                 @can('update', $topic)
                                 <a href="{{ route('Edu.front.topic.edit',$topic) }}"
                                     class="btn btn-outline-success">编辑</a>
-                                <btn-del action="{{ route('Edu.front.topic.destroy',$topic) }}"
-                                    class-name="btn btn-outline-danger" redirect="{{ route('Edu.front.topic.index') }}">
-                                </btn-del>
                                 @endcan
                             </div>
                             @auth
-                            <div class="btn-group btn-group-sm align-items-center mt-1 mt-md-0">
+                            <div class="btn-group btn-group-sm align-items-center">
                                 <a href="{{ route('common.favorite',['topic',$topic,'Edu']) }}" type="button"
                                     class="btn {{ $topic->isFavorite?'btn-info':'btn-outline-secondary'}}">
                                     <i aria-hidden="true" class="fa fa-heart-o"></i> 收藏
                                 </a>
+
                                 <button type="button" class="btn btn-outline-secondary">
                                     {{ $topic->favorite_count }}
                                 </button>
+                                @can('delete', $topic)
+                                <form action="{{ route('Edu.front.topic.destroy',$topic) }}" method="post"
+                                    class="d-inline-block ml-1">
+                                    @csrf @method('delete')
+                                    <button class="btn btn-sm btn-outline-secondary" onclick="return confirm('确定删除吗')">
+                                        删除
+                                    </button>
+                                </form>
+                                @endcan
                             </div>
-                            @can('delete', $topic)
-                            <form action="{{ route('Edu.front.topic.destroy',$topic) }}" method="post"
-                                class="d-inline-block">
-                                @csrf @method('delete')
-                                <button class="btn btn-sm btn-outline-secondary" onclick="return confirm('确定删除吗')">
-                                    删除
-                                </button>
-                            </form>
-                            @endcan
                             @endauth
                         </div>
                     </div>
                 </div>
-                <div class="topic-content markdown bg-white text-monospace markdown">
-                    {!! $topic->html !!}
+                <div class="topic-content markdown bg-white text-monospace">
+                    {!! clean($topic->html) !!}
                 </div>
-                <div class="mt-5 text-center border-top border-gary pt-5">
-                    <div role="group" aria-label="First group" class="favour btn-group mr-2">
-                        <a href="{{ route('common.favour',['topic',$topic,'Edu']) }}"
-                            class="btn {{ $topic->isFavour?'btn-success':'btn-outline-success' }}">
-                            <i class="fa fa-thumbs-o-up"></i> 点个赞呗
-                        </a>
-                        <button type="button" class="btn btn-outline-success">
-                            {{ $topic->favour_count }}
-                        </button>
-                    </div>
-                </div>
-                <div class="favour-list text-center pt-3 w-75 m-auto">
-                    @foreach ($topic->favours->take(65) as $user)
-                    <a href="#" class="m-2">
-                        <img src="{{ $user->icon }}" class="rounded-circle avatar35">
-                    </a>
-                    @endforeach
-                </div>
+
+                <livewire:favour :model="$topic">
             </div>
 
             <div class="mt-3" id="app">
                 <comment model="Topic" :id="{{ $topic['id'] }}"></comment>
             </div>
-
         </div>
-        <div class="col-12 col-md-3 p-0">
+        <div class="col-12 col-md-3">
             @include('edu::components.user',['user'=>$topic->user])
             @include('edu::components.tip')
         </div>

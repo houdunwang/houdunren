@@ -12,7 +12,6 @@ class SiteService
 
         config(['mail.default' => config('site.email.transport')]);
         config(['mail.mailers.smtp' =>  config('site.email')]);
-
         config(['mail.from' => [
             'address' => config('site.email.username'),
             'name' => $site['title']

@@ -14,7 +14,7 @@ class FollowerController extends Controller
   {
     $followers = EntitiesUser::make($user['id'])
       ->followers()
-      ->paginate();
+      ->paginate(16);
     return view('edu::space.follower', compact('followers', 'user'));
   }
 }
