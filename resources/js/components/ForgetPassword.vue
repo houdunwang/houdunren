@@ -3,43 +3,18 @@
     <div class="card shadow">
       <div class="card-header">找回密码</div>
       <div class="card-body">
-        <send-code
-          type="all"
-          placeholder="请输入登录帐号"
-          :code.sync="code"
-          action="/forget/code"
-          ref="sendCode"
-          :account.sync="account"
-        ></send-code>
+        <send-code type="all" placeholder="请输入登录帐号" :code.sync="code" action="/forget/code" ref="sendCode" :account.sync="account"></send-code>
         <hr />
         <div class="form-group">
           <label>密码</label>
-          <input
-            type="password"
-            class="form-control"
-            :class="{ 'is-invalid': errors.password }"
-            @focus="errors.password = ''"
-            v-model="password"
-          />
-          <strong
-            class="form-text text-danger invalid-feedback"
-            v-if="errors.password"
-          >{{ errors.password }}</strong>
+          <input type="password" class="form-control" :class="{ 'is-invalid': errors.password }" @focus="errors.password = ''" v-model="password" />
+          <strong class="form-text text-danger invalid-feedback" v-if="errors.password">{{ errors.password }}</strong>
         </div>
 
         <div class="form-group">
           <label>确认密码</label>
-          <input
-            type="password"
-            class="form-control"
-            :class="{ 'is-invalid': errors.password_confirmation }"
-            @focus="errors.password_confirmation = ''"
-            v-model="password_confirmation"
-          />
-          <strong
-            class="form-text text-danger invalid-feedback"
-            v-if="errors.password_confirmation"
-          >{{ errors.password_confirmation }}</strong>
+          <input type="password" class="form-control" :class="{ 'is-invalid': errors.password_confirmation }" @focus="errors.password_confirmation = ''" v-model="password_confirmation" />
+          <strong class="form-text text-danger invalid-feedback" v-if="errors.password_confirmation">{{ errors.password_confirmation }}</strong>
         </div>
       </div>
       <div class="card-footer text-muted d-flex justify-content-between">

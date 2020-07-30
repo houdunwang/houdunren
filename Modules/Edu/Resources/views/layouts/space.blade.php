@@ -45,6 +45,10 @@
                                     class="list-group-item list-group-item-action text-secondary">
                                     TA的收藏
                                 </a>
+                                <a href="{{ route('Edu.space.learn',$user) }}"
+                                    class="list-group-item list-group-item-action text-secondary">
+                                    TA学习历史
+                                </a>
                             </div>
                         </div>
                     </div>

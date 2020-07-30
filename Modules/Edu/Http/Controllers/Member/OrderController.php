@@ -11,7 +11,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = User::make()->orders;
+        $orders = User::make()->orders()->where('status', true)->paginate();
         return view('edu::member.order', compact('orders'));
     }
 }

@@ -43,7 +43,7 @@ return [
   'disks' => [
     'attacment' => [
       'driver' => 'local',
-      'root' => public_path('attacments'),
+      'root' => public_path('attachments'),
       'url' => env('APP_URL') . '/attachments',
       'visibility' => 'public',
     ],

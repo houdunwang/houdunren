@@ -24,23 +24,23 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-    props:{
-captcha:{required:true}
-    },
-data(){
-      return {
-          captchaValue:'',
-          captchaImage: '/captcha'
-      }
-},
-  computed: {
-    ...mapState(['errors'])
+  props: {
+    captcha: { required: true },
   },
- methods: {
-        updateCaptcha() {
-            return (this.captchaImage = '/captcha?' + Math.random())
-        },
- }
+  data() {
+    return {
+      captchaValue: '',
+      captchaImage: '/captcha',
+    }
+  },
+  computed: {
+    ...mapState(['errors']),
+  },
+  methods: {
+    updateCaptcha() {
+      this.captchaImage = '/captcha?v=' + Math.random()
+    },
+  },
 }
 </script>
 

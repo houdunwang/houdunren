@@ -28,6 +28,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="mt-3">
+            @include('edu::layouts.paginate',['data'=>$orders])
+        </div>
     </div>
 </div>
 @endsection

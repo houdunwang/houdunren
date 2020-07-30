@@ -1,17 +1,7 @@
 <template>
   <div ref="image">
-    <el-upload
-      class="avatar-uploader"
-      :action="action"
-      :name="uploadName"
-      :headers="headers"
-      :show-file-list="false"
-      :on-success="handleAvatarSuccess"
-      :before-upload="beforeAvatarUpload"
-      :with-credentials="true"
-      :on-error="error"
-    >
-      <img v-if="imageUrl" :src="imageUrl" class="avatar" style="background:#f3f3f3" />
+    <el-upload class="avatar-uploader" :action="action" :name="uploadName" :headers="headers" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :with-credentials="true" :on-error="error">
+      <img v-if="imageUrl" :src="imageUrl" class="avatar" style="background: #f3f3f3;" />
       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
     <input :name="name" :value="imageUrl" hidden />
@@ -44,7 +34,7 @@ export default {
       this.imageUrl = res.path
     },
     beforeAvatarUpload(file) {
-      const isJPG = ['image/jpeg','image/png'].some(mime=>mime ==file.type)
+      const isJPG = ['image/jpeg', 'image/png'].some((mime) => mime == file.type)
       const isLt2M = file.size / 1024 / 1024 < 2
 
       if (!isJPG) {
@@ -53,12 +43,12 @@ export default {
       if (!isLt2M) {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
-      this.$refs['image'].classList.remove('is-invalid');
+      this.$refs['image'].classList.remove('is-invalid')
 
       return isJPG && isLt2M
     },
     error(err) {
-       this.$message.error('图片过大或尺寸，类型错误')
+      this.$message.error('图片过大或尺寸，类型错误')
     },
   },
 }

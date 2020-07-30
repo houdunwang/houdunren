@@ -16,7 +16,7 @@
                             <span class="pr-2 pl-2">/</span>
                             评论数{{ $topic['comment_count'] }}
                             <span class="pr-2 pl-2">/</span>
-                            更新于{{ $topic->created_at->diffForHumans() }}
+                            更新于{{ $topic->updated_at->diffForHumans() }}
                             <span class="pr-2 pl-2">/</span>
                             收藏数{{ $topic['favorite_count'] }}
                             <span class="pr-2 pl-2">/</span>

@@ -3578,7 +3578,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['errors'])),
   methods: {
     updateCaptcha: function updateCaptcha() {
-      return this.captchaImage = '/captcha?' + Math.random();
+      this.captchaImage = '/captcha?v=' + Math.random();
     }
   }
 });
@@ -3601,31 +3601,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3690,16 +3665,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -4047,6 +4012,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -4075,9 +4057,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['errors'])),
   methods: {
-    updateCaptcha: function updateCaptcha() {
-      this.$refs['captcha'].updateCaptcha();
-    },
     checkAccount: function checkAccount() {
       var msg = '';
 
@@ -4112,13 +4091,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return true;
     },
+    updateCaptcha: function updateCaptcha() {
+      this.$refs['captcha'].updateCaptcha();
+    },
     send: function send() {
+      var _this = this;
+
       if (this.checkAccount() === true) {
-        this.updateCaptcha();
         this.axios.post(this.action, {
           account: this.value,
           captcha: this.captcha,
           code: this.code
+        })["finally"](function () {
+          _this.updateCaptcha();
         });
       }
     }

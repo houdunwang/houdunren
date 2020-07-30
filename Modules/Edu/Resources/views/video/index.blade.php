@@ -10,7 +10,11 @@
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
                         @foreach ($videos as $video)
-                        @include('edu::layouts.video')
+                        <li class="list-group-item pl-0 d-flex justify-content-between">
+                            <a href="{{ route('Edu.front.video.show',$video) }}">{{ $video['title'] }}</a>
+                            <span data-v-c6b61c04=""
+                                class="small text-secondary">{{ $video->created_at->diffForHumans() }}</span>
+                        </li>
                         @endforeach
                     </ul>
                     <div class="mt-2">

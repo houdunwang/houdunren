@@ -1,14 +1,16 @@
 {
-  "name": "laravel/laravel",
+  "name": "houdunwang/hdcms",
   "type": "project",
-  "description": "The Laravel Framework.",
+  "description": "模块化多应用平台系统.",
   "keywords": [
-    "framework",
-    "laravel"
+    "hdcms",
+    "houdunren",
+    "wechat"
   ],
   "license": "MIT",
   "require": {
     "php": "^7.2.5",
+    "alibabacloud/client": "^1.5",
     "caouecs/laravel-lang": "~6.0",
     "erusev/parsedown": "^1.7",
     "fideloper/proxy": "^4.2",

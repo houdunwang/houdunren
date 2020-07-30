@@ -2,6 +2,27 @@
 @section('title',site()['title'])
 
 @section('content')
+{{-- <script src="https://cdn.bootcdn.net/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js"></script>
+<video id="video" controls></video>
+<script>
+    let video = document.getElementById('video');
+    let videoSrc = 'http://live.houdunren.com/houdunren/xj.m3u8?auth_key=1596005401-0-0-dd01d8caf62de842ed41762305f9fb75';
+  if (Hls.isSupported()) {
+    let hls = new Hls();
+    hls.loadSource(videoSrc);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED, function() {
+      video.play();
+    });
+  }
+  else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = videoSrc;
+    video.addEventListener('loadedmetadata', function() {
+      video.play();
+    });
+  }
+</script>
+<h1>okkk</h1> --}}
 <div>
     <div class="container mt-3 mt-md-5 mb-5">
         <div class="row">
@@ -15,37 +36,21 @@
                         @foreach ($topics as $topic)
                         @include('edu::components.topic',$topic)
                         @endforeach
+
                         @foreach ($activities as $activity)
-                        @if ($activity->subject)
-                        @switch($activity->subject_type)
-                        @case('Modules\Edu\Entities\Topic')
-                        @include('edu::components.activity.topic',['topic'=>$activity->subject])
-                        @break
-                        @case('Modules\Edu\Entities\Sign')
-                        @include('edu::components.activity.sign',['sign'=>$activity->subject])
-                        @break
-                        @case('Modules\Edu\Entities\Lesson')
-                        @include('edu::components.activity.lesson',['lesson'=>$activity->subject])
-                        @break
-                        @case('Modules\Edu\Entities\Comment')
-                        @if ($activity->subject->commentable)
-                        @include('edu::components.activity.comment',['comment'=>$activity->subject])
+
+                        @if ($activity->subject && $activity->subject_type)
+                        @php
+                        $info = explode('\\',$activity->subject_type)
+                        @endphp
+                        @include('edu::components.activity.'.strtolower(array_pop($info)))
                         @endif
-                        @break
-                        @endswitch
-                        @endif
+
                         @endforeach
                         <div class="pt-3">
-                            @mobile
-                            {{$activities->onEachSide(0)->links() }}
-                            @endmobile
-
-                            @desktop
-                            {{$activities->links() }}
-                            @enddesktop
+                            @include('edu::layouts.paginate',['data'=>$activities])
                         </div>
                     </div>
-
                 </div>
 
             </div>

@@ -31,7 +31,7 @@
                     <a href="{{ route('Edu.front.video.show',$video->next) }}" class="btn btn-outline-success">下集</a>
                     @endif
                 </div>
-                <div class="btn-group btn-group-sm align-items-center mt-1 mt-md-0">
+                <div class="btn-group btn-group-sm align-items-center">
                     <a href="{{ route('common.favorite',['Video',$video,'Edu']) }}"
                         class="btn {{ $video->isFavorite?'btn-outline-info':'btn-outline-secondary' }}">
                         <i aria-hidden="true" class="fa fa-heart-o"></i> 收藏

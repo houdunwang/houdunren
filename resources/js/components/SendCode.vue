@@ -2,8 +2,19 @@
   <div>
     <div class="form-group">
       <label>{{ title }}</label>
-      <input type="text" class="form-control" :class="{ 'is-invalid': errors.account }" @focus="errors.account = ''" @keyup="$emit('update:account', value)" v-model="value" :placeholder="placeholder" />
-      <strong class="form-text text-danger invalid-feedback" v-if="errors.account">{{ errors.account }}</strong>
+      <input
+        type="text"
+        class="form-control"
+        :class="{ 'is-invalid': errors.account }"
+        @focus="errors.account = ''"
+        @keyup="$emit('update:account', value)"
+        v-model="value"
+        :placeholder="placeholder"
+      />
+      <strong
+        class="form-text text-danger invalid-feedback"
+        v-if="errors.account"
+      >{{ errors.account }}</strong>
     </div>
 
     <captcha :captcha.sync="captcha" ref="captcha"></captcha>
@@ -11,7 +22,13 @@
     <div class="form-group send-form">
       <label>验证码</label>
       <div class="input-group" :class="{ 'is-invalid': errors.code }" @click="errors.code = ''">
-        <input type="text" class="form-control" placeholder="请输入收到的验证码" v-model="code" @keyup="$emit('update:code', code)" />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="请输入收到的验证码"
+          v-model="code"
+          @keyup="$emit('update:code', code)"
+        />
         <a href="#" class="input-group-append" @click.prevent="send">
           <span class="input-group-text" id="basic-addon2">发送验证码</span>
         </a>
@@ -41,9 +58,6 @@ export default {
     ...mapState(['errors']),
   },
   methods: {
-    updateCaptcha() {
-      this.$refs['captcha'].updateCaptcha()
-    },
     checkAccount() {
       let msg = ''
       switch (this.type) {
@@ -70,14 +84,20 @@ export default {
       }
       return true
     },
+    updateCaptcha() {
+      this.$refs['captcha'].updateCaptcha()
+    },
     send() {
       if (this.checkAccount() === true) {
-        this.updateCaptcha()
-        this.axios.post(this.action, {
-          account: this.value,
-          captcha: this.captcha,
-          code: this.code,
-        })
+        this.axios
+          .post(this.action, {
+            account: this.value,
+            captcha: this.captcha,
+            code: this.code,
+          })
+          .finally(() => {
+            this.updateCaptcha()
+          })
       }
     },
   },

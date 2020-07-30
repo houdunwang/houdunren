@@ -16,6 +16,7 @@ class VideoController extends Controller
   {
     $this->middleware('auth')->except(['index']);
   }
+
   public function index()
   {
     $videos = Video::latest('id')->paginate();
@@ -30,9 +31,8 @@ class VideoController extends Controller
       ->syncWithoutDetaching($video);
 
     if ($videoService->check($video) === false) {
-      return back()->with('danger', '你没有查看权限');
+      return redirect()->route('Edu.front.subscribe.index');
     }
-    $video->with('lesson');
     return view('edu::video.show', compact('video'));
   }
 }

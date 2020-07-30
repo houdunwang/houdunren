@@ -24,11 +24,14 @@ class ForgetController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'account' => ['required'],
-            'code' => ['required', new VerificationCodeRule($request->account)],
-            'password' => ['required', 'min:5', 'confirmed'],
-        ], ['account.required' => '帐号不存在']);
+        $request->validate(
+            [
+                'account' => ['required'],
+                'code' => ['required', new VerificationCodeRule($request->account)],
+                'password' => ['required', 'min:5', 'confirmed'],
+            ],
+            ['account.required' => '帐号不能为空']
+        );
 
         if ($request->account != session('account')) {
             return response()->json(['message' => '请先发送验证码'], 404);
@@ -43,9 +46,13 @@ class ForgetController extends Controller
 
     public function code(Request $request, CodeService $codeService)
     {
-        $request->validate([
-            'captcha' => ['required', 'captcha'],
-        ], ['code.required' => '图形验证码不能为空']);
+        $request->validate(
+            ['captcha' => ['required', 'captcha']],
+            [
+                'code.required' => '图形验证码不能为空',
+                'captcha.captcha' => '验证码输入错误',
+            ]
+        );
 
         $this->checkUserExists();
 
@@ -59,10 +66,12 @@ class ForgetController extends Controller
     protected function checkUserExists()
     {
         $account = request()->account;
-        $hasUser = User::where('email', $account)->orWhere('mobile', $account)->exists();
+        $hasUser = User::where('email', $account)
+            ->orWhere('mobile', $account)
+            ->exists();
 
         if (!$hasUser) {
-            throw new NotFoundException('帐号不存在');
+            abort(404, '帐号不存在');
         }
     }
 }

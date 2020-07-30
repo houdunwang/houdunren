@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Site;
 use App\Services\ModuleService;
 use Illuminate\Http\Request;
 

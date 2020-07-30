@@ -24,7 +24,10 @@ class User extends ModelsUser
 
   public function videos()
   {
-    return $this->belongsToMany(Video::class, 'edu_user_video')->withTimestamps();
+    return $this->belongsToMany(Video::class, 'edu_user_video')
+      ->orderBy('edu_user_video.created_at', 'desc')
+      ->withPivot(['created_at', 'updated_at'])
+      ->withTimestamps();
   }
 
   public function signs()
@@ -50,5 +53,10 @@ class User extends ModelsUser
   public function FavoriteTopic()
   {
     return $this->morphedByMany(Topic::class, 'favorite', 'favorite');
+  }
+
+  public function duration()
+  {
+    return $this->hasOne(Duration::class);
   }
 }
