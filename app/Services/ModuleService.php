@@ -4,8 +4,8 @@ namespace App\Services;
 
 use App\Models\Module as Model;
 use App\Models\Site;
+use App\ModuleConfig;
 use Module;
-use Spatie\Permission\Models\Permission;
 
 class ModuleService
 {
@@ -35,10 +35,23 @@ class ModuleService
             'description' => $config['description'],
             'version' => $config['version'],
             'preview' => "/modules/{$name}/static/preview.jpg",
-            'menus' => $this->config($name, 'menus'),
+            'menus' => $this->menus($name),
             'installed' => (bool) $model,
             'model' => $model,
         ];
+    }
+
+    protected function menus($name)
+    {
+        $menus = $this->config($name, 'menus');
+        return [[
+            'title' => '基本功能',
+            'icon' => 'fab fa-windows',
+            'show' => true,
+            'items' => [
+                ['title' => '模块配置', 'permission' => 'config', 'route' => 'module.config.edit'],
+            ],
+        ]] + $menus;
     }
 
     protected function config(string $name, string $fileName)

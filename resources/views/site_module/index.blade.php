@@ -30,10 +30,9 @@
                         </div>
                     </div>
                     <div class="card-footer text-muted text-center">
-                        <a href="{{ route('site.module.show',[$site,$module['id']]) }}"
-                            class="btn btn-info btn-sm">管理模块</a>
-                        <a href="{{ route('site.module.show',[$site,$module['id']]) }}"
-                            class="btn btn-info btn-sm">模块配置</a>
+                        <a href="{{ route('site.module.show',[$site,$module['id']]) }}" class="btn btn-info btn-sm">
+                            管理模块
+                        </a>
                     </div>
                 </div>
             </div>

@@ -2,7 +2,7 @@
 @inject('menuService', 'App\Services\MenuService')
 
 @foreach (module()['menus'] as $index=>$menu)
-@if ($permissionService->checkModuleMenuPermission(site(),module(),$menu))
+@if (($menu['show']??true) && $permissionService->checkModuleMenuPermission(site(),module(),$menu))
 
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo{{ $index }}"

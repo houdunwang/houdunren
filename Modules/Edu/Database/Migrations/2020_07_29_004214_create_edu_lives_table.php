@@ -6,11 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateEduLivesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('edu_lives', function (Blueprint $table) {

@@ -65,6 +65,11 @@ Route::group(['prefix' => 'site', 'namespace' => 'Site', 'as' => 'site.', 'middl
     Route::get('{site}/menu/{menu}', 'MenuController@show')->name('menu.show');
 });
 
+Route::group(['prefix' => 'module', 'namespace' => 'Module', 'as' => 'module.', 'middleware' => ['auth', 'admin']], function () {
+    Route::get('config', 'ConfigController@edit')->name('config.edit');
+    Route::post('config', 'ConfigController@store')->name('config.store');
+});
+
 Route::group(['prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.', 'middleware' => ['auth', 'front']], function () {
     Route::resource('base', 'BaseController')->only(['index', 'store']);
     Route::resource('password', 'PasswordController')->only(['index', 'store']);

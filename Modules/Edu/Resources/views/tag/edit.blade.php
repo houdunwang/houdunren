@@ -2,9 +2,6 @@
 
 @section('content')
 <nav class="nav nav-tabs">
-    <a class="nav-link " href="{{ route('Edu.admin.index') }}">
-        <i class="fas fa-home"></i>
-    </a>
     <a class="nav-link active" href="#">
         标签管理
     </a>
