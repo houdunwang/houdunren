@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Module;
 
 use App\Http\Controllers\Controller;
 use App\ModuleConfig;
+use App\Services\ConfigService;
 use Illuminate\Http\Request;
 
 class ConfigController extends Controller
@@ -13,13 +14,10 @@ class ConfigController extends Controller
         return view('module_config.edit');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, ConfigService $configService)
     {
-        $model = ModuleConfig::firstOrNew([
-            'site_id' => site()['id'], 'module_id' => module()['id']
-        ]);
-        $model['config'] = $request->input() + ($model['config'] ?? []);
-        $model->save();
+        $configService->saveCurrentModuleConfig($request->input());
+
         return back()->with('success', '模块配置修改成功');
     }
 }

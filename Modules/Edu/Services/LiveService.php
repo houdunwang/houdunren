@@ -47,8 +47,8 @@ class LiveService
         //没有鉴权Key时
         if (is_null($key)) {
             $rtmp_play_url = 'rtmp://' . $domain . '/' . $app . '/' . $stream;
-            $flv_play_url = 'http://' . $domain . '/' . $app . '/' . $stream . '.flv';
-            $hls_play_url = 'http://' . $domain . '/' . $app . '/' . $stream . '.m3u8';
+            $flv_play_url = 'https://' . $domain . '/' . $app . '/' . $stream . '.flv';
+            $hls_play_url = 'https://' . $domain . '/' . $app . '/' . $stream . '.m3u8';
         } else {
             $timeStamp = time() + $expire;
             $rtmp_sstring = '/' . $app . '/' . $stream . '-' . $timeStamp . '-0-0-' . $key;
@@ -57,11 +57,11 @@ class LiveService
 
             $flv_sstring = '/' . $app . '/' . $stream . '.flv-' . $timeStamp . '-0-0-' . $key;
             $flv_md5hash = md5($flv_sstring);
-            $flv_play_url = 'http://' . $domain . '/' . $app . '/' . $stream . '.flv?auth_key=' . $timeStamp . '-0-0-' . $flv_md5hash;
+            $flv_play_url = 'https://' . $domain . '/' . $app . '/' . $stream . '.flv?auth_key=' . $timeStamp . '-0-0-' . $flv_md5hash;
 
             $hls_sstring = '/' . $app . '/' . $stream . '.m3u8-' . $timeStamp . '-0-0-' . $key;
             $hls_md5hash = md5($hls_sstring);
-            $hls_play_url = 'http://' . $domain . '/' . $app . '/' . $stream . '.m3u8?auth_key=' . $timeStamp . '-0-0-' . $hls_md5hash;
+            $hls_play_url = 'https://' . $domain . '/' . $app . '/' . $stream . '.m3u8?auth_key=' . $timeStamp . '-0-0-' . $hls_md5hash;
         }
 
         return [
@@ -85,27 +85,21 @@ class LiveService
             ->regionId('cn-hangzhou')
             ->asDefaultClient();
 
-        try {
-            $result = AlibabaCloud::rpc()
-                ->product('live')
-                // ->scheme('https') // https | http
-                ->version('2016-11-01')
-                ->action('SetLiveStreamsNotifyUrlConfig')
-                ->method('POST')
-                ->host('live.aliyuncs.com')
-                ->options([
-                    'query' => [
-                        'RegionId' => 'cn-hangzhou',
-                        'NotifyUrl' => $url,
-                        'DomainName' => $domain,
-                    ],
-                ])
-                ->request();
-            return $result->toArray();
-        } catch (ClientException $e) {
-            abort(500, $e->getErrorMessage());
-        } catch (ServerException $e) {
-            abort(500, $e->getErrorMessage());
-        }
+        $result = AlibabaCloud::rpc()
+            ->product('live')
+            // ->scheme('https') // https | http
+            ->version('2016-11-01')
+            ->action('SetLiveStreamsNotifyUrlConfig')
+            ->method('POST')
+            ->host('live.aliyuncs.com')
+            ->options([
+                'query' => [
+                    'RegionId' => 'cn-hangzhou',
+                    'NotifyUrl' => $url,
+                    'DomainName' => $domain,
+                ],
+            ])
+            ->request();
+        return $result->toArray();
     }
 }

@@ -36,6 +36,9 @@
                     <li class="nav-item pr-1">
                         <a href="https://www.houdunwang.com" target="_blank" class="nav-link">训练营</a>
                     </li>
+                    <li class="nav-item pr-1">
+                        <a href="{{ route('Edu.front.live.index') }}" class="nav-link">直播间</a>
+                    </li>
                 </ul>
 
                 @auth

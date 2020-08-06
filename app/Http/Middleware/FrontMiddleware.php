@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\ConfigService;
 use App\Services\ModuleService;
 use Closure;
 
@@ -19,6 +20,9 @@ class FrontMiddleware
         $site = get_site_by_domain();
         site($site);
         module($site->module['name']);
+
+        app(ConfigService::class)->loadCurrentModuleConfig();
+
         return $next($request);
     }
 }

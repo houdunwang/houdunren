@@ -25,7 +25,8 @@ Route::group(['prefix' => 'Edu', 'middleware' => ['front'], 'namespace' => 'Fron
     Route::get('comment/{model}/{id}', 'CommentController@index')->name('comment.index');
     Route::post('comment/{model}/{id}', 'CommentController@store')->name('comment.store');
     Route::delete('comment/{comment}', 'CommentController@destroy')->name('comment.destroy');
-    Route::get('live/create', 'LiveController@create')->name('live.create');
+    Route::get('live', 'LiveController@index')->name('live.index');
+    Route::get('live/push', 'LiveController@push')->name('live.push');
     Route::get('live/notify', 'LiveController@notify')->name('live.notify');
 });
 

@@ -8,14 +8,9 @@
 </nav>
 <form action="{{ route('module.config.store') }}" method="post">
     @csrf
-    <div class="card mt-3">
-        <div class="card-header">
-            课程资料
-        </div>
-        <div class="card-body">
-            @include('edu::hdcms.config.edit')
-        </div>
-    </div>
+
+    @include('edu::hdcms.config.edit')
+
     <div class="mt-3">
         <button class="btn btn-primary mt-3">保存提交</button>
     </div>

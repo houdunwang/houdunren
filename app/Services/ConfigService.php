@@ -21,4 +21,21 @@ class ConfigService
         $model = ModuleConfig::where('site_id', site()['id'])->where('module_id', module()['id'])->first();
         config(['module' => $model['config'] ?? []]);
     }
+
+    /**
+     * 保存模块配置
+     * @param array $config
+     * @return mixed
+     * @throws BindingResolutionException
+     * @throws HttpException
+     * @throws NotFoundHttpException
+     */
+    public function saveCurrentModuleConfig(array $config)
+    {
+        $model = ModuleConfig::firstOrNew([
+            'site_id' => site()['id'], 'module_id' => module()['id']
+        ]);
+        $model['config'] = $config + ($model['config'] ?? []);
+        return $model->save();
+    }
 }
