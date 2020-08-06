@@ -24,7 +24,8 @@
             <tr>
                 <td>{{ $lesson['id'] }}</td>
                 <td>
-                    <a href="" class="text-secondary">{{ $lesson['title'] }}</a>
+                    <a href="{{ route('Edu.front.lesson.show',$lesson) }}" target="_blank"
+                        class="text-secondary">{{ $lesson['title'] }}</a>
                 </td>
                 <td>{{ $lesson['video_num'] }}</td>
                 <td>{{ $lesson['read_num'] }}</td>
@@ -35,7 +36,8 @@
                 <td class="text-right">
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                         <a href="{{ route('Edu.admin.lesson.edit',$lesson['id']) }}" class="btn btn-info">编辑</a>
-                        <btn-del action="{{ route('Edu.admin.lesson.destroy',$lesson['id']) }}"></btn-del>
+                        <btn-del action="{{ route('Edu.admin.lesson.destroy',$lesson['id']) }}"
+                            class="btn btn-secondary">删除</btn-del>
                     </div>
                 </td>
             </tr>

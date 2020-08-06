@@ -18,12 +18,15 @@
             @foreach ($lessons as $lesson)
             <tr>
                 <td>{{ $lesson['id'] }}</td>
-                <td>{{ $lesson['title'] }}</td>
+                <td>
+                    <a href="{{ route('Edu.front.system.show',$lesson) }}" target="_blank">{{ $lesson['title'] }}</a>
+                </td>
                 <td>{{ $lesson['description'] }}</td>
                 <td class="text-right">
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                         <a href="{{ route('Edu.admin.system.edit',$lesson['id']) }}" class="btn btn-info">编辑</a>
-                        <btn-del action="{{ route('Edu.admin.system.destroy',$lesson['id']) }}"></btn-del>
+                        <btn-del action="{{ route('Edu.admin.system.destroy',$lesson['id']) }}"
+                            class="btn btn-secondary">删除</btn-del>
                     </div>
                 </td>
             </tr>

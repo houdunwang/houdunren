@@ -10,6 +10,15 @@
     <link href="/modules/{{ module()['name'] }}/app.css?v={{ config('app.version') }}" rel="stylesheet">
     <link href="/admin2/sb-admin-2.min.css" rel="stylesheet">
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <style>
+        html {
+            font-size: 14px !important;
+        }
+
+        .form-control {
+            font-size: .9rem;
+        }
+    </style>
 </head>
 
 <body id="page-top">

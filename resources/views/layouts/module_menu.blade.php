@@ -36,8 +36,13 @@
 
 <!-- Heading -->
 <div class="sidebar-heading">
-    站点配置
+    系统菜单
 </div>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('site.module.index',site()['id']) }}">
+        <i class="fas fa-fw fa-archive"></i>
+        <span>所有模块</span></a>
+</li>
 <!-- Nav Item - Tables -->
 <li class="nav-item">
     <a class="nav-link" href="{{ route('admin') }}">

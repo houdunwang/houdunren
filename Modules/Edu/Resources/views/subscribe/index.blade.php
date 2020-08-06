@@ -26,7 +26,8 @@
 
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                 <a href="{{ route('Edu.admin.subscribe.edit',$subscribe) }}" class="btn btn-info">编辑</a>
-                                <btn-del action="{{ route('Edu.admin.subscribe.destroy',$subscribe) }}">删除</btn-del>
+                                <btn-del action="{{ route('Edu.admin.subscribe.destroy',$subscribe) }}"
+                                    class="btn btn-secondary">删除</btn-del>
                             </div>
 
                         </div>

@@ -45,7 +45,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'system'], 'namespac
     Route::put('my/update', 'MyController@update')->name('my.update');
 });
 
-Route::group(['prefix' => 'site', 'namespace' => 'Site', 'as' => 'site.', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'site', 'namespace' => 'Site', 'as' => 'site.', 'middleware' => ['auth', 'system']], function () {
     Route::resource('site', 'SiteController');
     Route::get('{site}/config', 'ConfigController@edit')->name('config.edit');
     Route::put('{site}/config', 'ConfigController@update')->name('config.update');
