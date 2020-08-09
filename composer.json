@@ -31,6 +31,7 @@
     "spatie/image": "^1.7",
     "spatie/laravel-activitylog": "^3.14",
     "spatie/laravel-permission": "^3.13",
+    "workerman/gateway-worker": "^3.0",
     "yansongda/pay": "^2.9"
   },
   "require-dev": {
@@ -55,7 +56,8 @@
   "autoload": {
     "psr-4": {
       "App\\": "app/",
-      "Modules\\": "Modules/"
+      "Modules\\": "Modules/",
+      "Socket\\": "socket/"
     },
     "files": [
       "app/helpers.php"
