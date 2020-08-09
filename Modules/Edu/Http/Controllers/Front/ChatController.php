@@ -2,64 +2,41 @@
 
 namespace Modules\Edu\Http\Controllers\Front;
 
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use GatewayClient\Gateway;
 
 class ChatController extends Controller
 {
-    public function index()
+    public function __construct()
     {
-        return view('edu::index');
+        //设置socket地址
+        Gateway::$registerAddress = '127.0.0.1:1238';
     }
 
-    public function create()
+    public function init(Request $request)
     {
-        return view('edu::create');
+        Gateway::joinGroup($request->client_id, 'chat');
+        if (Auth::check()) {
+            $this->sendToAll('进入直播间');
+        }
+    }
+    public function send(Request $request)
+    {
+        if (Auth::check()) {
+            $this->sendToAll($request->input('content'));
+        }
     }
 
-    public function store(Request $request)
+    protected function sendToAll($content)
     {
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('edu::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return view('edu::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        // for ($i = 0; $i < 20; $i++)
+        Gateway::sendToAll(json_encode([
+            'user' => ['id' => user('id'), 'nickname' => user('nickname')],
+            'content' => $content,
+            'user_count' => Gateway::getClientIdCountByGroup('chat')
+        ]));
     }
 }

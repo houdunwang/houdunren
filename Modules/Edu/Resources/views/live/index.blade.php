@@ -25,28 +25,20 @@
 @section('content')
 
 {{-- @if (config('module.is_live')) --}}
-<div id="app" class="video" style="background: #262b36">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-8 pr-md-0 border-right border-right-dark">
-                <video id="video" width="100%" controls></video>
-            </div>
-            <div class="col-12 col-md-4 d-flex pl-md-0">
-                {{-- <live-chat></live-chat> --}}
+<div id="app">
+    <div class="video" style="background: #262b36">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-8 pr-md-0 border-right border-right-dark">
+                    <video id="video" width="100%" controls></video>
+                </div>
+                <div class="d-none d-sm-block flex-fill">
+                    <live-chat></live-chat>
+                </div>
             </div>
         </div>
     </div>
 </div>
-@push('scripts')
-<script>
-    let socket = new WebSocket("wss://dev.hdcms.com:8282");
-    socket.onmessage = function(response){
-        console.log(response);
-    }
-</script>
-@endpush
-{{-- @endif --}}
-
 <div class="container">
     <div class="row">
         <div class="col-12">

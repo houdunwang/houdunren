@@ -28,6 +28,8 @@ Route::group(['prefix' => 'Edu', 'middleware' => ['front'], 'namespace' => 'Fron
     Route::get('live', 'LiveController@index')->name('live.index');
     Route::get('live/push', 'LiveController@push')->name('live.push');
     Route::get('live/notify', 'LiveController@notify')->name('live.notify');
+    Route::post('chat/init', 'ChatController@init')->name("chat.init");
+    Route::post('chat/send', 'ChatController@send')->name("chat.send");
 });
 
 Route::group(['prefix' => 'edu/pay', 'middleware' => ['auth', 'front'], 'namespace' => 'Pay', 'as' => 'Edu.pay.'], function () {
