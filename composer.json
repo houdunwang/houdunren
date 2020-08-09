@@ -32,6 +32,7 @@
     "spatie/laravel-activitylog": "^3.14",
     "spatie/laravel-permission": "^3.13",
     "workerman/gateway-worker": "^3.0",
+    "workerman/gatewayclient": "^3.0",
     "yansongda/pay": "^2.9"
   },
   "require-dev": {

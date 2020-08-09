@@ -20,10 +20,19 @@ use \GatewayWorker\BusinessWorker;
 use \Workerman\Autoloader;
 
 // 自动加载类
-// require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
+$context = array(
+    'ssl' => array(
+        // 使用绝对路径
+        'local_cert'  => __DIR__ . '/../ssl/server.pem',
+        'local_pk'    => __DIR__ . '/../ssl/server.key',
+        'verify_peer' => false,
+        'allow_self_signed' => true
+    )
+);
 
-// gateway 进程，这里使用Text协议，可以用telnet测试
-$gateway = new Gateway("websocket://0.0.0.0:8282");
+$gateway = new Gateway("websocket://0.0.0.0:8282", $context);
+$gateway->transport = 'ssl';
 // gateway名称，status方便查看
 $gateway->name = 'houdunren';
 // gateway进程数
