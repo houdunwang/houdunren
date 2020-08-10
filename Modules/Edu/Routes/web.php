@@ -28,6 +28,7 @@ Route::group(['prefix' => 'Edu', 'middleware' => ['front'], 'namespace' => 'Fron
     Route::get('live', 'LiveController@index')->name('live.index');
     Route::get('live/push', 'LiveController@push')->name('live.push');
     Route::get('live/notify', 'LiveController@notify')->name('live.notify');
+    Route::get('live/close', 'LiveController@close')->name('live.close');
     Route::post('chat/init', 'ChatController@init')->name("chat.init");
     Route::post('chat/send', 'ChatController@send')->name("chat.send");
 });

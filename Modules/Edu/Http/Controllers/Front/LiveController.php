@@ -33,7 +33,7 @@ class LiveController extends Controller
 
         Log::info($info);
 
-        $configService->saveCurrentModuleConfig(['push' => $push, 'play' => $play]);
+        $configService->saveCurrentModuleConfig(['push' => $push, 'play' => $play, 'is_live' => true]);
 
         return back()->with('success', '推流成功');
     }
@@ -49,5 +49,11 @@ class LiveController extends Controller
                 $configService->saveCurrentModuleConfig(['is_live' => true]);
                 break;
         }
+    }
+
+    public function close(ConfigService $configService)
+    {
+        $configService->saveCurrentModuleConfig(['is_live' => false]);
+        return back();
     }
 }
