@@ -29,12 +29,14 @@
     <div class="video" style="background: #262b36">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-8 pr-md-0 border-right border-right-dark">
+                <div class="col-12 {{ config('module.live.show_chat')==1?'col-md-8 pr-md-0 ':'' }} ">
                     <video id="video" width="100%" controls></video>
                 </div>
+                @if (config('module.live.show_chat')==1)
                 <div class="d-none d-sm-block flex-fill">
                     <live-chat></live-chat>
                 </div>
+                @endif
             </div>
         </div>
     </div>

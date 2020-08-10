@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class>
-      <div class="form-group mb-0">
+      <div class="form-group mb-0" v-if="isLogin">
         <input
           type="text"
           class="form-control rounded-0 bg-light shadow-sm border-left-0 border-right-0"
@@ -17,6 +17,9 @@
           @keyup.enter="send"
           style="outline: none !important; box-shadow: none;border:solid 3px #333;"
         />
+      </div>
+      <div class="form-group mb-0 text-center pt-2 pb-2 border-top border-bottom" v-if="!isLogin">
+        <a href="/login" class="btn btn-sm btn-info">请登录后操作</a>
       </div>
     </div>
   </div>
@@ -29,6 +32,7 @@ export default {
       client_id: '',
       messages: [],
       content: '',
+      isLogin: !!window.user.id,
     }
   },
   mounted() {

@@ -3,12 +3,17 @@
         直播配置
     </div>
     <div class="card-body">
-        <x-form theme="textarea" name="live[other_path]" title="B站等第三方推流地址">{{ config('module.live.other_path') }}
+        <x-form theme="textarea" name="live[notice]" title="直播公告">{{ config('module.live.notice') }}</x-form>
+
+        <x-form theme="textarea" name="live[other_path]" title="斗鱼等第三方推流地址">{{ config('module.live.other_path') }}
         </x-form>
 
-        <x-form theme="textarea" name="live[notice]" title="直播公告">{{ config('module.live.notice') }}</x-form>
-    </div>
+        <x-form theme="radio" name="live[type]" title="直播类型" :options="['push'=>'站内推流','other'=>'站外直播地址']"
+            value="{{ config('module.live.type') }}"></x-form>
 
+        <x-form theme="radio" name="live[show_chat]" title="显示聊天室" :options="[1=>'显示',0=>'隐藏']"
+            value="{{ config('module.live.show_chat') }}"></x-form>
+    </div>
 </div>
 
 <div class="card mt-3">

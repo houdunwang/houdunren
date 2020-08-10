@@ -14,7 +14,7 @@
     @stack('styles')
 
     <script>
-        const user = @json(['id'=>user('id'),'avatar'=>user('avatar'),'name'=>user('name')]);
+        window.user = @json(['id'=>user('id'),'avatar'=>user('avatar'),'name'=>user('name')]);
     </script>
 </head>
 
