@@ -12,10 +12,11 @@ class ChatController extends Controller
 {
     public function __construct()
     {
-        //设置socket地址
+        //SOCKET地址
         Gateway::$registerAddress = '127.0.0.1:1238';
     }
 
+    //初次连接时显示欢迎信息
     public function init(Request $request)
     {
         Gateway::joinGroup($request->client_id, 'chat');
@@ -23,6 +24,8 @@ class ChatController extends Controller
             $this->sendToAll('进入直播间');
         }
     }
+
+    //发送聊天信息
     public function send(Request $request)
     {
         if (Auth::check()) {
@@ -30,9 +33,9 @@ class ChatController extends Controller
         }
     }
 
+    //通知所有在线用户
     protected function sendToAll($content)
     {
-        // for ($i = 0; $i < 20; $i++)
         Gateway::sendToAll(json_encode([
             'user' => ['id' => user('id'), 'nickname' => user('nickname')],
             'content' => $content,

@@ -34,16 +34,16 @@
 
                 <div class="mood mt-3 @error('mood')is-invalid @enderror">
                     <label>
+                        <input type="radio" hidden name="mood" value="kx" />
+                        <img src="/modules/Edu/static/sign/kx.gif" class="">
+                    </label>
+                    <label>
                         <input type="radio" hidden name="mood" value="ch" />
                         <img src="/modules/Edu/static/sign/ch.gif" class="">
                     </label>
                     <label>
                         <input type="radio" hidden name="mood" value="fd" />
                         <img src="/modules/Edu/static/sign/fd.gif" class="">
-                    </label>
-                    <label>
-                        <input type="radio" hidden name="mood" value="kx" />
-                        <img src="/modules/Edu/static/sign/kx.gif" class="">
                     </label>
                     <label>
                         <input type="radio" hidden name="mood" value="ng" />

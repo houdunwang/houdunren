@@ -33,7 +33,6 @@ function site(Site $site = null): ?Site
         abort(404, '站点不存在');
     }
 
-    config(['site' => $site['config']]);
     app(SiteService::class)->initConfig($site);
     return $site;
 }

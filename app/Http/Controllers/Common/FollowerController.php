@@ -8,6 +8,11 @@ use Illuminate\Routing\Controller;
 
 class FollowerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function make(User $user)
     {
         if ($user->isFans) {

@@ -34,9 +34,8 @@ Route::group(['prefix' => 'Edu', 'middleware' => ['front'], 'namespace' => 'Fron
 });
 
 Route::group(['prefix' => 'edu/pay', 'middleware' => ['auth', 'front'], 'namespace' => 'Pay', 'as' => 'Edu.pay.'], function () {
-    Route::get('subscribe/alipay/return', 'SubscribeController@alipayReturn')->name('subscribe.alipay.return');
-    Route::post('subscribe/alipay/notify', 'SubscribeController@alipayNotify')->name('subscribe.alipay.notify');
     Route::get('subscribe/alipay/{subscribe}', 'SubscribeController@alipay')->name('subscribe.alipay');
+    Route::get('subscribe/wepay/{subscribe}', 'SubscribeController@wepay')->name('subscribe.wepay');
 });
 
 Route::group(['prefix' => 'edu/member', 'middleware' => ['auth', 'front'], 'namespace' => 'Member', 'as' => 'Edu.member.'], function () {

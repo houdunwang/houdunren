@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateModuleConfigsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('module_configs', function (Blueprint $table) {
@@ -22,11 +17,6 @@ class CreateModuleConfigsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('module_configs');

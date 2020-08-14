@@ -9,6 +9,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ConfigService
 {
+    public function loadSiteConfig()
+    {
+        config(['site' => site()['config']]);
+    }
     /**
      * 加载模块配置
      * @return void

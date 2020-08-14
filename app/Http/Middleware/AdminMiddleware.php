@@ -12,6 +12,7 @@ class AdminMiddleware
     {
         module(module()['name']);
 
+        app(ConfigService::class)->loadSiteConfig();
         app(ConfigService::class)->loadCurrentModuleConfig();
 
         if (user()->isSuperAdmin || site()->master->user_id === user('id')) {

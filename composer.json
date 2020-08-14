@@ -12,6 +12,7 @@
     "php": "^7.2.5",
     "alibabacloud/client": "^1.5",
     "caouecs/laravel-lang": "~6.0",
+    "endroid/qr-code": "^3.9",
     "erusev/parsedown": "^1.7",
     "fideloper/proxy": "^4.2",
     "fruitcake/laravel-cors": "^2.0",

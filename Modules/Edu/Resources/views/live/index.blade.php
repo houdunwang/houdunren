@@ -71,25 +71,25 @@
                     </div>
                 </div>
 
-                <div class="card mt-3">
+                {{-- <div class="card mt-3">
                     <div class="card-header">
                         播放数据
                     </div>
                     <div class="card-body">
                         <x-form name="a" value="{{ config('module.play.flv') }}" title="flv地址"></x-form>
-                        <x-form name="b" value="{{ config('module.play.hls') }}" title="hls地址"></x-form>
-                        <x-form name="c" value="{{ config('module.play.rtmp') }}" title="rtmp地址"></x-form>
-                    </div>
-                </div>
-                @endif
-
-                <div class="mt-3">
-                    <a href="{{ route('Edu.front.live.push') }}" class="btn btn-info">推流</a>
-                    <a href="{{ route('Edu.front.live.close') }}" class="btn btn-secondary">关闭直播</a>
-                </div>
+                <x-form name="b" value="{{ config('module.play.hls') }}" title="hls地址"></x-form>
+                <x-form name="c" value="{{ config('module.play.rtmp') }}" title="rtmp地址"></x-form>
             </div>
+        </div> --}}
+        @endif
+
+        <div class="mt-3">
+            <a href="{{ route('Edu.front.live.push') }}" class="btn btn-info">推流</a>
+            <a href="{{ route('Edu.front.live.close') }}" class="btn btn-secondary">关闭直播</a>
         </div>
     </div>
+</div>
+</div>
 </div>
 @endif
 @endsection
