@@ -46,14 +46,22 @@ class SubscribeController extends Controller
         $order['body'] = $order['subject'];
         $order['total_fee'] = $order['price'] * 100;
 
-        $result = $payService->wepay($order)->scan([
-            'out_trade_no' => $order['sn'],
-            'body' => $order['subject'],
-            'total_fee' => $order['price'] * 100,
-        ]);
-
-        //显示支付二维码
-        $qrCode = new QrCode($result->code_url);
-        return response($qrCode->writeString(), 200, ['Content-Type' => $qrCode->getContentType()]);
+        $action = Browser::isMobile() ? 'wap' : 'scan';
+        if ($action == 'scan') {
+            $result = $payService->wepay($order)->scan([
+                'out_trade_no' => $order['sn'],
+                'body' => $order['subject'],
+                'total_fee' => $order['price'] * 100,
+            ]);
+            //显示支付二维码
+            $qrCode = new QrCode($result->code_url);
+            return response($qrCode->writeString(), 200, ['Content-Type' => $qrCode->getContentType()]);
+        } else {
+            return $payService->wepay($order)->wap([
+                'out_trade_no' => $order['sn'],
+                'body' => $order['subject'],
+                'total_fee' => $order['price'] * 100,
+            ]);
+        }
     }
 }

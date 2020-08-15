@@ -51,7 +51,7 @@ Route::group(['namespace' => 'Auth'], function () {
 Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware('auth');
 
 Route::group(['prefix' => 'common', 'namespace' => 'Common', 'as' => 'common.'], function () {
-    Route::post('upload', 'UploadController@upload')->name('upload');
+    Route::post('upload/image', 'UploadController@image')->name('upload.image');
     Route::get('favorite/{model}/{id}/{module?}', 'FavoriteController@make')->name('favorite')->middleware('auth');
     Route::get('favour/{model}/{id}/{module?}', 'FavourController@make')->name('favour')->middleware('auth');
     Route::get('follower/{user}', 'FollowerController@make')->name('follower')->middleware('auth');

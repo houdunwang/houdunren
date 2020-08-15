@@ -3,6 +3,7 @@ node_modules
 /public/hot
 /public/storage
 /public/attacments
+/public/attachments
 /storage/*.key
 /vendor
 .env
@@ -15,4 +16,4 @@ npm-debug.log
 yarn-error.log
 database.php
 .vscode/sftp.json
-/public/attachments
+

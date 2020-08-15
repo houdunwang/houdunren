@@ -102,8 +102,9 @@ class User extends Authenticatable
         return empty($this->name) ? '小海豚' : $this->name;
     }
 
-    public function duration()
+    public static function make(int $id = null)
     {
-        return $this->hasOne(Duration::class);
+        $class = 'Modules\\' . module()['name'] . '\Entities\User';
+        return $class::find($id ?? auth()->id());
     }
 }

@@ -49,7 +49,7 @@ class PayController extends Controller
     {
         $pay = Pay::wechat($payService->wepayConfig());
         $data = $pay->verify();
-        $this->notifyModule($module, $data, 'async');
+        $this->notifyModule($module, $data);
 
         return $pay->success();
     }

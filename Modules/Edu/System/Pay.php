@@ -11,14 +11,14 @@ class Pay
     public function notify(array $data)
     {
         $order = Order::where('sn', $data['out_trade_no'])->first();
-        Log::info($order);
+
         if ($order['status'] === false) {
             $this->changeDuration($order);
             $order['status'] = true;
             $order->save();
         }
 
-        return redirect('/')->with('success', '订阅成功了，开始学习吧');
+        return redirect()->route('Edu.member.duration')->with('success', '订阅成功了，开始学习吧');
     }
 
     protected function changeDuration($order)
@@ -29,7 +29,7 @@ class Pay
         ]);
 
         if (empty($duration['end_time']) || $duration['end_time'] < now()) {
-            $duration['end_time'] = now();
+            $duration['end_time'] = now()->addMonths($order['month']);
         } else {
             $duration['end_time'] = $duration['end_time']->addMonths($order['month']);
         }

@@ -13,7 +13,7 @@ class UploadController extends Controller
         $this->middleware('auth');
     }
 
-    public function upload(Request $request, UploadService $UploadService)
+    public function image(Request $request, UploadService $UploadService)
     {
         $request->validate(['file' => ['required', 'mimes:jpeg,png', 'max:1000']]);
 

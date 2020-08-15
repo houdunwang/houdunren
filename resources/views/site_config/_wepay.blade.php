@@ -11,7 +11,7 @@
             placeholder="请在 微信支付-安全中心-API安全 中设置或查看">
         </x-form>
 
-        <x-form title="运行模式" name="alipay[mode]" placeholder="沙箱模式需要设置值为dev" value="{{ config('site.alipay.mode') }}">
+        <x-form title="运行模式" name="wepay[mode]" placeholder="沙箱模式需要设置值为dev" value="{{ config('site.wepay.mode') }}">
         </x-form>
     </div>
 </div>

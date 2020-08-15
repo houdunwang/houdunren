@@ -62,7 +62,7 @@
           </span>
           <span v-if="!reply_user.id">发表评论</span>
         </div>
-        <editor name="content" action :content.sync="content" :key="sendId"></editor>
+        <editor name="content" action="/common/upload/image" :content.sync="content" :key="sendId"></editor>
         <div class="card-footer text-muted">
           <button type="button" class="btn btn-primary btn-sm d-inline-block" @click="submit">保存</button>
           <strong
