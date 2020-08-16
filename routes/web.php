@@ -46,6 +46,9 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::get('forget', 'ForgetController@show')->name('forget.show');
     Route::post('forget', 'ForgetController@store')->name('forget.store');
     Route::post('forget/code', 'ForgetController@code')->middleware(['throttle:60,1', 'front'])->name('forget.code');
+
+    Route::get('login/wechat', 'WeChatController@redirectToProvider');
+    Route::get('login/wechat/callback', 'WeChatController@handleProviderCallback');
 });
 
 Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware('auth');

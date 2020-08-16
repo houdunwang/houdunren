@@ -15,6 +15,12 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            // ... other providers
+            'SocialiteProviders\\WeixinWeb\\WeixinWebExtendSocialite@handle',
+            'SocialiteProviders\\Weixin\\WeixinExtendSocialite@handle',
+
+        ],
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],

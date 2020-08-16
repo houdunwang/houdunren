@@ -23,10 +23,9 @@
                         <h5 class="text-center mb-3 mt-2">{{ $subscribe['ad'] }}</h5>
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <a target="_blank" href="{{ route('Edu.pay.subscribe.alipay',$subscribe) }}"
-                                class="btn btn-success btn-sm">支付宝付款</a>
-
+                                class="btn btn-success btn-sm">支付宝付款(推荐)</a>
                             @desktop
-                            <button type="button" class="btn btn-info btn-sm border-left" data-toggle="modal"
+                            <button type="button" class="btn btn-outline-info btn-sm " data-toggle="modal"
                                 data-target="#exampleModal{{ $subscribe['id'] }}">
                                 微信支付
                             </button>
@@ -81,8 +80,8 @@
         </div>
     </div>
     <div class="container text-secondary instruct text-center">
-        <a href="{{ route('Edu.member.duration') }}" class="h5 mb-3 btn btn-sm btn-info shadow-sm">
-            支付成功查看会员周期
+        <a href="{{ route('Edu.member.duration') }}" class="mb-3 btn btn-sm btn-info shadow-sm">
+            <i class="fas fa-info-circle"></i> 支付成功后查看会员周期
         </a>
 
         <p> 视频属于虚拟物品，购买后不支持退款</p>

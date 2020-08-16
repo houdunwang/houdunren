@@ -16,7 +16,7 @@ class User extends Authenticatable
 {
     use Notifiable, HasRoles, Favour;
 
-    protected $fillable = ['name', 'email', 'mobile', 'real_name', 'home', 'avatar', 'qq', 'github', 'wakatime', 'group_id'];
+    protected $fillable = ['name', 'email', 'mobile', 'real_name', 'home', 'avatar', 'qq', 'github', 'wakatime', 'group_id', 'openid', 'unionid'];
 
     protected $hidden = ['password', 'remember_token'];
 
