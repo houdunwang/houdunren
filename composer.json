@@ -30,6 +30,7 @@
     "mews/purifier": "^3.2",
     "nwidart/laravel-modules": "^7.1",
     "overtrue/easy-sms": "^1.1",
+    "socialiteproviders/wechat-web": "^1.0",
     "socialiteproviders/weixin": "^4.0",
     "socialiteproviders/weixin-web": "^3.1",
     "spatie/image": "^1.7",

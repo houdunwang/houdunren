@@ -34,6 +34,7 @@ class CodeService
         app(User::class)
             ->fill(['email' => $email])
             ->notify(new VerificationCodeNotification($code));
+
         $this->cache($email, $code);
     }
 

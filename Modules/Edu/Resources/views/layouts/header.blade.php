@@ -73,15 +73,15 @@
                             <div class="dropdown-divider"></div>
                             <a href={{ route('Edu.space.topic',user('id')) }} class="dropdown-item mb-2">我的主页</a>
                             <div class="dropdown-divider"></div>
-                            <a href="/logout" class="dropdown-item mb-2">退出登录</a>
+                            <a href="{{ route('auth.logout') }}" class="dropdown-item mb-2">退出登录</a>
                         </div>
                     </div>
                 </div>
 
                 @else
                 <div class="form-inline mr-3">
-                    <a href="/login" class="btn btn-info mr-1 btn-sm">登录</a>
-                    <a href="/register" class="btn btn-outline-info btn-sm">注册</a>
+                    <a href="{{ route('auth.login') }}" class="btn btn-info mr-1 btn-sm">登录</a>
+                    <a href="{{route('auth.register')}}" class="btn btn-outline-info btn-sm">注册</a>
                 </div>
                 @endauth
             </div>

@@ -10,6 +10,11 @@ use Auth;
 
 class WeChatController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('front');
+    }
+
     /**
      * 将用户重定向到授权页面
      *
@@ -28,6 +33,7 @@ class WeChatController extends Controller
     public function handleProviderCallback()
     {
         $account = Socialite::driver('weixinweb')->user();
+
         $unionid = $account->unionid ?? null;
         if ($unionid) {
             $user = User::where('unionid', $account->unionid)->first();
@@ -41,8 +47,8 @@ class WeChatController extends Controller
                 'unionid' => $unionid,
                 'name' => $account['nickname']
             ]);
-            Auth::login($user);
         }
-        return redirect()->intended('/');
+        Auth::login($user);
+        return redirect()->intended('/')->with('success', '欢迎回来');
     }
 }

@@ -5,38 +5,7 @@ use Yansongda\Pay\Pay;
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('pay', function () {
-    $config = [
-        'app_id' => 'wxc47243ed572e273d', // 公众号 APPID
-        'mch_id' => '1283388801', //商户号，请查看开户邮件
-        'key' => 'ia94GS0kd6djls8BfEqC1io0NPeiqHqi',
-        'notify_url' => 'http://yanda.net.cn/notify.php',
-        // 'cert_client' => __DIR__ . '/../wx_cert/apiclient_cert.pem', // optional，退款等情况时用到
-        // 'cert_key' =>  __DIR__ . '/../wx_cert/apiclient_cert.pem', // optional，退款等情况时用到
-        'log' => [ // optional
-            'file' => './logs/wechat.log',
-            'level' => 'info', // 建议生产环境等级调整为 info，开发环境为 debug
-            'type' => 'single', // optional, 可选 daily.
-            'max_file' => 30, // optional, 当 type 为 daily 时有效，默认 30 天
-        ],
-        'http' => [ // optional
-            'timeout' => 5.0,
-            'connect_timeout' => 5.0,
-        ],
-        // 'mode' => 'dev', // optional, dev/hk;当为 `hk` 时，为香港 gateway。
-    ];
-    $order = [
-        'out_trade_no' => time(),
-        'total_fee' => 0.1 * 100,
-        'body' => 'test body - 测试',
-        // 'openid' => 'onkVf1FjWS5SBIixxxxxxx',
-    ];
-
-    $pay = Pay::wechat($config)->scan($order);
-    dump($pay->toArray());
-});
-
-Route::group(['namespace' => 'Auth'], function () {
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.', 'middleware' => ['front']], function () {
     Route::get('login', 'LoginController@show')->name('login');
     Route::post('login', 'LoginController@login')->name('login.store');
     Route::get('logout', 'LoginController@logout')->name('logout');
@@ -46,9 +15,8 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::get('forget', 'ForgetController@show')->name('forget.show');
     Route::post('forget', 'ForgetController@store')->name('forget.store');
     Route::post('forget/code', 'ForgetController@code')->middleware(['throttle:60,1', 'front'])->name('forget.code');
-
-    Route::get('login/wechat', 'WeChatController@redirectToProvider');
-    Route::get('login/wechat/callback', 'WeChatController@handleProviderCallback');
+    Route::get('login/wechat', 'WeChatController@redirectToProvider')->name('login.wechat');
+    Route::get('login/wechat/callback', 'WeChatController@handleProviderCallback')->name('login.wechat.callback');
 });
 
 Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware('auth');

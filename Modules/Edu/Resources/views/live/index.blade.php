@@ -1,7 +1,6 @@
 @extends('edu::layouts.front')
 @push('scripts')
 <script src="https://cdn.bootcdn.net/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js"></script>
-
 <script>
     let video = document.getElementById('video');
   let videoSrc = "{{ config('module.play.hls') }}";
@@ -48,7 +47,7 @@
     <div class="row">
         <div class="col-12">
             <div class="alert alert-light mt-3 p-5 shadow-sm h5 text-center border" role="alert">
-                <i class="fas fa-info-circle"></i> {{ config('module.live.notice') }}
+                <i class="fas fa-info-circle"></i> {!! config('module.live.notice') !!}
             </div>
         </div>
     </div>
@@ -61,6 +60,7 @@
         <div class="col-12">
             <div class="bg-white border p-3">
                 @if (config('module.is_live'))
+
                 <div class="card ">
                     <div class="card-header">
                         推流数据
@@ -70,7 +70,6 @@
                         <x-form name="push.key" value="{{ config('module.push.key') }}" title="串流密钥"></x-form>
                     </div>
                 </div>
-
                 {{-- <div class="card mt-3">
                     <div class="card-header">
                         播放数据
@@ -84,7 +83,7 @@
         @endif
 
         <div class="mt-3">
-            <a href="{{ route('Edu.front.live.push') }}" class="btn btn-info">推流</a>
+            <a href="{{ route('Edu.front.live.push') }}" class="btn btn-info">开始直播</a>
             <a href="{{ route('Edu.front.live.close') }}" class="btn btn-secondary">关闭直播</a>
         </div>
     </div>

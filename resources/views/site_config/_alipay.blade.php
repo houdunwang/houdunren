@@ -3,7 +3,7 @@
         支付宝配置
     </div>
     <div class="card-body">
-        <x-form type="password" title="应用ID" name="alipay[app_id]" value="{{ config('site.alipay.app_id') }}"
+        <x-form title="应用ID" name="alipay[app_id]" value="{{ config('site.alipay.app_id') }}"
             placeholder="请登录支付定应用中心查看  https://open.alipay.com/platform/developerIndex.htm">
         </x-form>
 
@@ -15,15 +15,10 @@
             placeholder="签名方式一般不需要更改">
         </x-form>
 
-        {{-- <x-form title="支付宝网关" name="alipay[gatewayUrl]"
-            value="{{ config('site.alipay.gatewayUrl','https://openapi.alipay.com/gateway.do') }}"
-        placeholder="支付宝网关一般这 https://openapi.alipay.com/gateway.do">
-        </x-form> --}}
-
-        <x-form type="password" title="商户私钥" name="alipay[private_key]" placeholder="使用支付宝提供的签名生成工具创建，注意不要有换行"
+        <x-form title="商户私钥" name="alipay[private_key]" placeholder="使用支付宝提供的签名生成工具创建，注意不要有换行"
             value="{{ config('site.alipay.private_key') }}"></x-form>
 
-        <x-form type="password" title="支付宝公钥" name="alipay[ali_public_key]" placeholder="使用支付宝提供的签名生成工具创建，注意不要有换行"
+        <x-form title="支付宝公钥" name="alipay[ali_public_key]" placeholder="使用支付宝提供的签名生成工具创建，注意不要有换行"
             value="{{ config('site.alipay.ali_public_key') }}">
         </x-form>
 

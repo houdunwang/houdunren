@@ -28,8 +28,7 @@
             placeholder="在阿里云后台中oss数据块中查看外网访问的EndPoint">
         </x-form>
 
-        <x-form type="password" title="bucket" name="aliyun[oss][bucket]"
-            value="{{ config('site.aliyun.oss.bucket') }}"></x-form>
+        <x-form title="bucket" name="aliyun[oss][bucket]" value="{{ config('site.aliyun.oss.bucket') }}"></x-form>
 
     </div>
 </div>

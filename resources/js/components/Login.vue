@@ -43,11 +43,14 @@
         </div>
       </div>
       <div class="card-footer text-muted d-flex justify-content-between">
-        <button type="submit" class="btn btn-success btn-sm">登录帐号</button>
         <div>
-          <a href="/register">注册</a>
+          <button type="submit" class="btn btn-success btn-sm">登录帐号</button>
+        </div>
+        <div>
+          <slot name="footer"></slot>
+          <a href="/auth/register">注册</a>
           |
-          <a href="/forget">找回密码</a>
+          <a href="/auth/forget">找回密码</a>
           |
           <a href="/">网站首页</a>
         </div>
@@ -64,7 +67,7 @@ export default {
       account: '',
       password: '',
       captcha: '',
-      remember:''
+      remember: '',
     }
   },
   computed: {
@@ -75,11 +78,14 @@ export default {
       return (this.captchaImage = '/captcha?' + Math.random())
     },
     submit() {
-      this.axios.post('/login', this.$data).then((response) => {
-         location.href= response;
-      }).catch(()=>{
-        this.$refs['captcha'].updateCaptcha();
-      })
+      this.axios
+        .post('/auth/login', this.$data)
+        .then((response) => {
+          location.href = response
+        })
+        .catch(() => {
+          this.$refs['captcha'].updateCaptcha()
+        })
     },
   },
 }

@@ -12,7 +12,15 @@ class ConfigService
     public function loadSiteConfig()
     {
         config(['site' => site()['config']]);
+
+        //微信登录
+        config(['services.weixinweb' => [
+            'client_id' => config('site.user.wechatweb_client_id'),
+            'client_secret' => config('site.user.wechatweb_client_secret'),
+            'redirect' => route('auth.login.wechat.callback'),
+        ]]);
     }
+
     /**
      * 加载模块配置
      * @return void

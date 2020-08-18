@@ -27,7 +27,7 @@
                 感谢 {{ $this->field->favour_count }}位朋友的喜欢
             </button>
             @endif
-            <a href="{{ route('login') }}" class="btn btn-success">
+            <a href="{{ route('auth.login') }}" class="btn btn-success">
                 登录系统点个赞呗
             </a>
         </div>

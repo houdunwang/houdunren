@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "38416eba005f9383b3c5425090546d84",
+    "content-hash": "d9df2868ae1b245cb1b6672bcd27a38b",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -4653,6 +4653,49 @@
             ],
             "description": "Easily add new or override built-in providers in Laravel Socialite.",
             "time": "2020-03-08T16:54:44+00:00"
+        },
+        {
+            "name": "socialiteproviders/wechat-web",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/WeChatWeb.git",
+                "reference": "e55cbd4f9c759e68eade8c31d2c020af859625d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/WeChatWeb/zipball/e55cbd4f9c759e68eade8c31d2c020af859625d5",
+                "reference": "e55cbd4f9c759e68eade8c31d2c020af859625d5",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "socialiteproviders/manager": "^3.3.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\WeChatWeb\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "sink",
+                    "email": "sinkcup@gmail.com"
+                }
+            ],
+            "description": "WeChat Web OAuth2 Provider for Laravel Socialite",
+            "time": "2019-04-26T10:45:25+00:00"
         },
         {
             "name": "socialiteproviders/weixin",

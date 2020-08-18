@@ -3,11 +3,11 @@
         微信支付
     </div>
     <div class="card-body">
-        <x-form type="password" title="微信支付商户号" name="wepay[mch_id]" value="{{ config('site.wepay.mch_id') }}"
+        <x-form title="微信支付商户号" name="wepay[mch_id]" value="{{ config('site.wepay.mch_id') }}"
             placeholder="公众号支付请求中用于加密的密钥Key">
         </x-form>
 
-        <x-form type="password" title="商户支付API密钥" name="wepay[key]" value="{{ config('site.wepay.key') }}"
+        <x-form title="商户支付API密钥" name="wepay[key]" value="{{ config('site.wepay.key') }}"
             placeholder="请在 微信支付-安全中心-API安全 中设置或查看">
         </x-form>
 
@@ -21,8 +21,7 @@
         应用APPID
     </div>
     <div class="card-body">
-        <x-form type="password" title="公众号APPID" name="wepay[app_id]" value="{{ config('site.wepay.app_id') }}"
-            placeholder="公众号 APPID">
+        <x-form title="公众号APPID" name="wepay[app_id]" value="{{ config('site.wepay.app_id') }}" placeholder="公众号 APPID">
         </x-form>
     </div>
 </div>

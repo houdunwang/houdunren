@@ -81,7 +81,7 @@
     </div>
     <div class="container text-secondary instruct text-center">
         <a href="{{ route('Edu.member.duration') }}" class="mb-3 btn btn-sm btn-info shadow-sm">
-            <i class="fas fa-info-circle"></i> 支付成功后查看会员周期
+            <i class="fas fa-info-circle"></i> 支付成功后无法跳转请点击这里
         </a>
 
         <p> 视频属于虚拟物品，购买后不支持退款</p>

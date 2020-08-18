@@ -19,7 +19,7 @@
         />
       </div>
       <div class="form-group mb-0 text-center pt-2 pb-2 border-top border-bottom" v-if="!isLogin">
-        <a href="/login" class="btn btn-sm btn-info">请登录后操作</a>
+        <a href="/auth/login" class="btn btn-sm btn-info">请登录后操作</a>
       </div>
     </div>
   </div>

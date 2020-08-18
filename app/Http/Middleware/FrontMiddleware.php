@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use App\Services\ConfigService;
-use App\Services\ModuleService;
 use Closure;
 
 class FrontMiddleware

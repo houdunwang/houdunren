@@ -14,7 +14,7 @@
                 <i class="fa fa-support fa-2x" aria-hidden="true"></i>
                 <span>系统设置</span>
             </a>
-            <a href="{{ route('logout') }}" class="shadow d-flex flex-column align-items-center ml-3">
+            <a href="{{ route('auth.logout') }}" class="shadow d-flex flex-column align-items-center ml-3">
                 <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>
                 <span>退出</span>
             </a>

@@ -75,7 +75,7 @@
 
       <div class="card" v-if="!user.id">
         <div class="card-body text-center pt-5 pb-5">
-          <a href="/login" class="btn btn-info btn-sm">登录后发表评论</a>
+          <a href="/auth/login" class="btn btn-info btn-sm">登录后发表评论</a>
         </div>
       </div>
     </div>
