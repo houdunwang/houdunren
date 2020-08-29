@@ -22,7 +22,7 @@ class CreateWeChatsTable extends Migration
             $table->string('appsecret');
             $table->string('welcome')->nullable()->comment('订阅时欢迎消息');
             $table->string('default_message')->nullable()->comment('默认回复消息');
-            $table->json('config')->nullable()->comment('微信配置如菜单');
+            $table->json('menus')->nullable()->comment('微信菜单');
             $table->timestamps();
         });
     }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\WeChat;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Site;
 use App\Models\WeChat;
+use Illuminate\Http\Request;
 
 class DefaultController extends Controller
 {

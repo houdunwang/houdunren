@@ -80,12 +80,13 @@ Route::group(['prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.', 
     Route::post('mobile/code', 'MobileController@code')->middleware(['throttle:1:1'])->name('mobile.code');
 });
 
-Route::group(['prefix' => 'wechat/{site}', 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'site']], function () {
+Route::any('wechat/bind/{site}/{wechat}', "WeChat\SubscribeController@handle")->name('houdunren.wechat')->middleware('front');
+
+Route::group(['prefix' => "wechat/{site}", 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'system']], function () {
     Route::resource('wechat', 'WeChatController');
     Route::get('wechat/default/{wechat}', 'DefaultController@edit')->name('wechat.default.edit');
     Route::put('wechat/default/{wechat}', 'DefaultController@update')->name('wechat.default.update');
     Route::get('wechat/menu/{wechat}', 'MenuController@edit')->name('wechat.menu.edit');
     Route::put('wechat/menu/{wechat}', 'MenuController@update')->name('wechat.menu.update');
+    Route::get('wechat/menu/push/{wechat}', 'MenuController@push')->name('wechat.menu.push');
 });
-
-Route::any('houdunren/wechat', 'WeChat\SubscribeController@handle')->name('houdunren.wechat');

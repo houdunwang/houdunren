@@ -9,6 +9,6 @@ class VerifyCsrfToken extends Middleware
 {
     protected $except = [
         'common/pay/*',
-        'houdunren/wechat'
+        'wechat/bind/*'
     ];
 }

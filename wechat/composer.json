@@ -1,22 +1,10 @@
 {
   "name": "houdunwang/wechat",
-  "description": "微信SDK",
-  "keywords": [
-    "wechat",
-    "houdunren"
-  ],
-  "license": "MIT",
   "authors": [
     {
       "name": "houdunren",
-      "email": "2300071698@qq.com",
-      "homepage": "https://www.houdunren.com"
+      "email": "2300071698@qq.com"
     }
   ],
-  "require": {},
-  "autoload": {
-    "psr-4": {
-      "Houdunwang\\WeChat\\": "src/"
-    }
-  }
+  "require": {}
 }
