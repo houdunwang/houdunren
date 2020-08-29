@@ -55,6 +55,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'system' => SystemMiddleware::class,
+        'site' => SiteMiddleware::class,
         'admin' => AdminMiddleware::class,
         'front' => FrontMiddleware::class,
         //

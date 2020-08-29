@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Yansongda\Pay\Pay;
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home')->middleware('front');
 
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.', 'middleware' => ['front']], function () {
     Route::get('login', 'LoginController@show')->name('login');
@@ -47,7 +47,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'system'], 'namespac
     Route::put('my/update', 'MyController@update')->name('my.update');
 });
 
-Route::group(['prefix' => 'site', 'namespace' => 'Site', 'as' => 'site.', 'middleware' => ['auth', 'system']], function () {
+Route::group(['prefix' => 'site', 'namespace' => 'Site', 'as' => 'site.', 'middleware' => ['auth', 'site']], function () {
     Route::resource('site', 'SiteController');
     Route::get('{site}/config', 'ConfigController@edit')->name('config.edit');
     Route::put('{site}/config', 'ConfigController@update')->name('config.update');
@@ -79,3 +79,13 @@ Route::group(['prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.', 
     Route::resource('mobile', 'MobileController')->only(['index', 'store']);
     Route::post('mobile/code', 'MobileController@code')->middleware(['throttle:1:1'])->name('mobile.code');
 });
+
+Route::group(['prefix' => 'wechat/{site}', 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'site']], function () {
+    Route::resource('wechat', 'WeChatController');
+    Route::get('wechat/default/{wechat}', 'DefaultController@edit')->name('wechat.default.edit');
+    Route::put('wechat/default/{wechat}', 'DefaultController@update')->name('wechat.default.update');
+    Route::get('wechat/menu/{wechat}', 'MenuController@edit')->name('wechat.menu.edit');
+    Route::put('wechat/menu/{wechat}', 'MenuController@update')->name('wechat.menu.update');
+});
+
+Route::any('houdunren/wechat', 'WeChat\SubscribeController@handle')->name('houdunren.wechat');

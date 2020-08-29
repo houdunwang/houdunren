@@ -44,7 +44,7 @@
                 <a href="{{ route('site.config.edit',$site) }}" class="text-muted mr-2">
                     <i aria-hidden="true" class="fa fa-check-circle-o"></i> 网站配置
                 </a>
-                <a href="" class="text-muted mr-2">
+                <a href="{{ route('wechat.wechat.index',$site) }}" class="text-muted mr-2">
                     <i class="fa fa-comment-o"></i> 微信公众号
                 </a>
                 <a href="{{ route('site.admin.index',$site) }}" class="text-muted mr-2">

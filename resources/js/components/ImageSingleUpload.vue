@@ -1,6 +1,16 @@
 <template>
   <div ref="image">
-    <el-upload class="avatar-uploader" :action="action" :name="uploadName" :headers="headers" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :with-credentials="true" :on-error="error">
+    <el-upload
+      class="avatar-uploader"
+      :action="action"
+      :name="uploadName"
+      :headers="headers"
+      :show-file-list="false"
+      :on-success="handleAvatarSuccess"
+      :before-upload="beforeAvatarUpload"
+      :with-credentials="true"
+      :on-error="error"
+    >
       <img v-if="imageUrl" :src="imageUrl" class="avatar" style="background: #f3f3f3;" />
       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
@@ -14,7 +24,7 @@ export default {
     uploadName: { default: 'file', type: String },
     name: { required: true, type: String },
     value: { default: '' },
-    action: { required: true },
+    action: { default: '/common/upload/image' },
   },
   data() {
     return {
@@ -53,6 +63,8 @@ export default {
   },
 }
 </script>
+
+
 
 <style>
 .avatar-uploader .el-upload {

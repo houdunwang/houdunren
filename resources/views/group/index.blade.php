@@ -12,7 +12,7 @@
                 <th width="300">会员组</th>
                 <th>可用套餐</th>
                 <th>可用模块</th>
-                <th>可创建站目点数量</th>
+                <th>可创建站目点数量</th>
                 <th width="120">操作</th>
             </tr>
         </thead>
@@ -39,7 +39,8 @@
                         <a href="{{ route('admin.group.edit',$group['id']) }}" class="btn btn-info">编辑</a>
 
                         @if($group->id>1)
-                        <btn-del action="{{ route('admin.group.destroy',$group['id']) }}"></btn-del>
+                        <btn-del action="{{ route('admin.group.destroy',$group['id']) }}" class="btn btn-secondary">
+                        </btn-del>
                         @endif
 
                     </div>

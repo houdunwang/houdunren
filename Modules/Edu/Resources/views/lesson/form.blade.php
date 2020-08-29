@@ -14,8 +14,7 @@
         </x-form>
 
 
-        <x-form theme="image" action="{{ route('Edu.admin.lesson.upload') }}" title="预览图" name="thumb"
-            value="{{ $lesson['thumb'] }}"></x-form>
+        <x-form theme="image" title="预览图" name="thumb" value="{{ $lesson['thumb'] }}"></x-form>
 
     </div>
 </div>

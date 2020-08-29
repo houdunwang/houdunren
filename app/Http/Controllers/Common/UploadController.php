@@ -17,6 +17,6 @@ class UploadController extends Controller
     {
         $request->validate(['file' => ['required', 'mimes:jpeg,png', 'max:1000']]);
 
-        return $UploadService->image($request->file);
+        return $UploadService->make($request->file);
     }
 }

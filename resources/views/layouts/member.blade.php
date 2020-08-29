@@ -35,7 +35,7 @@
                                 <a href="{{ route('member.base.index') }}" class="dropdown-item mb-2 mt-2">基本信息</a>
                                 <a href="{{ route('member.avatar.index') }}" class="dropdown-item mb-2 mt-2">修改头像</a>
                                 <div class="dropdown-divider"></div>
-                                <a href="{{ route('logout') }}" class="dropdown-item mb-2">退出登录</a>
+                                <a href="{{ route('auth.logout') }}" class="dropdown-item mb-2">退出登录</a>
                             </div>
                         </div>
                     </form>

@@ -9,15 +9,14 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $site = get_site_by_domain();
-        site($site);
-
-        if ($site->module === null) {
+        // $site = get_site_by_domain();
+        // site($site);
+        if (module() === null) {
             abort(404, '站点没有默认模块');
         }
 
-        module($site->module['name']);
-        $class = 'Modules\\' . $site->module['name'] . '\Http\Controllers\HomeController';
+        module(site()->module['name']);
+        $class = 'Modules\\' . site()->module['name'] . '\Http\Controllers\HomeController';
         return app($class)->index($request);
     }
 }

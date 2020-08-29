@@ -25,15 +25,15 @@ function site(Site $site = null): ?Site
         session(['site' => $site]);
     }
 
-    if (is_null($site)) {
+    if (is_null($site) && session('site')) {
         $site = session('site');
     }
 
-    if (!($site instanceof Site)) {
-        abort(404, '站点不存在');
-    }
+    // if (!($site instanceof Site)) {
+    //     abort(404, '站点不存在');
+    // }
 
-    app(SiteService::class)->initConfig($site);
+    // app(SiteService::class)->initConfig($site);
     return $site;
 }
 

@@ -11,6 +11,7 @@
   "require": {
     "php": "^7.2.5",
     "alibabacloud/client": "^1.5",
+    "aliyuncs/oss-sdk-php": "^2.3",
     "caouecs/laravel-lang": "~6.0",
     "endroid/qr-code": "^3.9",
     "erusev/parsedown": "^1.7",
@@ -63,7 +64,8 @@
     "psr-4": {
       "App\\": "app/",
       "Modules\\": "Modules/",
-      "Socket\\": "socket/"
+      "Socket\\": "socket/",
+      "Houdunwang\\WeChat\\": "wechat/src/"
     },
     "files": [
       "app/helpers.php"

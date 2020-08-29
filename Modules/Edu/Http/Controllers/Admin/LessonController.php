@@ -77,13 +77,6 @@ class LessonController extends Controller
         return response()->json(['message' => '课程删除成功']);
     }
 
-    public function upload(Request $request, UploadService $UploadService)
-    {
-        $request->validate(['file' => ['required', 'mimes:jpeg', 'max:1000']]);
-
-        return $UploadService->image($request->file);
-    }
-
     public function search(Request $request)
     {
         if ($title = $request->title) {

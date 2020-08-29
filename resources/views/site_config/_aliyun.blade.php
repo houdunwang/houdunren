@@ -23,7 +23,7 @@
         OSS
     </div>
     <div class="card-body">
-        <x-form title="regionId" name="aliyun[oss][endpoint]"
+        <x-form title="endpoint" name="aliyun[oss][endpoint]"
             value="{{ config('site.aliyun.oss.endpoint','https://oss-cn-qingdao.aliyuncs.com') }}"
             placeholder="在阿里云后台中oss数据块中查看外网访问的EndPoint">
         </x-form>
