@@ -8,70 +8,70 @@
       需要先保存菜单后，再进行微信菜单推送
     </div>
 
-    <div class="card">
-      <div class="card-header">微信菜单</div>
-      <div class="card-body wechat-menu">
-        <div class="view">
-          <header>
-            <img src="/images/wechat-header.jpg" />
-          </header>
-          <footer>
-            <dl v-for="(menu, index) in button" :key="index">
-              <dt @click="edit(menu)">
-                {{ menu.name }}
-                <i
-                  class="fa fa-times-circle text-secondary ml-1"
-                  @click="del(button, index)"
-                ></i>
-              </dt>
+    <div class="wechat-menu">
+      <div class="view">
+        <header>
+          <img src="/images/wechat-header.jpg" class="border shadow-sm" />
+        </header>
+        <footer>
+          <dl v-for="(m, index) in button" :key="index">
+            <dt @click="edit(m, index)" :class="{ current: menu == m }">{{ m.name }}</dt>
 
-              <dd @click="add(menu.sub_button, 2)" v-if="menu.sub_button.length<5">
-                <i class="fa fa-plus fa-1x" aria-hidden="true"></i>
-              </dd>
+            <dd @click="add(m.sub_button)" v-if="m.sub_button.length < 5" v-show="pid == index">
+              <i class="fa fa-plus fa-1x" aria-hidden="true"></i>
+            </dd>
 
-              <dd v-for="(smenu, i) in menu.sub_button" :key="i" @click="edit(smenu)">
-                {{ smenu.name }}
-                <i
-                  class="fa fa-times-circle text-secondary ml-1"
-                  @click="del(menu.sub_button, i)"
-                ></i>
-              </dd>
-            </dl>
-            <dl v-if="button.length<3">
-              <dt @click="add(button, 1)">
-                <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
-              </dt>
-            </dl>
-          </footer>
-        </div>
+            <dd
+              v-for="(sm, i) in m.sub_button"
+              :key="i"
+              @click="edit(sm, index)"
+              :class="{ current: menu === sm }"
+              v-show="pid == index"
+            >{{ sm.name }}</dd>
+          </dl>
 
-        <div class="card edit shadow-sm ml-3" v-if="menu.name">
-          <div class="card-header">菜单设置</div>
-          <div class="card-body">
-            <div class="form-group">
-              <label for>菜单名称</label>
-              <input type="text" class="form-control" v-model="menu.name" />
-            </div>
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">类型</label>
-              <select class="form-control" id="exampleFormControlSelect1" v-model="menu.type">
-                <option value="click">关键词</option>
-                <option value="view">链接</option>
-              </select>
-            </div>
-            <div class="form-group" v-if="menu.type == 'click'">
-              <label>关键词</label>
-              <input type="text" class="form-control" v-model="menu.key" />
-            </div>
-            <div class="form-group" v-if="menu.type == 'view'">
-              <label>链接</label>
-              <input type="text" class="form-control" v-model="menu.url" />
-            </div>
+          <dl v-if="button.length < 3">
+            <dt @click="add(button)">
+              <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
+            </dt>
+          </dl>
+        </footer>
+      </div>
+
+      <div class="card edit shadow-sm ml-3" v-if="menu.name">
+        <div class="card-header">菜单设置</div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for>菜单名称</label>
+            <input type="text" class="form-control" v-model="menu.name" />
           </div>
+          <div class="d-flex">
+            <label v-for="(v, k) in types" :key="k" class="d-flex align-items-center mr-2">
+              <input type="radio" :value="k" v-model="menu.type" class="mr-1" />
+              {{ v }}
+            </label>
+          </div>
+
+          <!-- <select class="form-control" id="exampleFormControlSelect1" v-model="menu.type">
+              <option value="click">关键词</option>
+              <option value="view">链接</option>
+          </select>-->
+          <div class="form-group" v-if="menu.type == 'click'">
+            <label>关键词</label>
+            <input type="text" class="form-control" v-model="menu.key" />
+          </div>
+          <div class="form-group" v-if="menu.type == 'view'">
+            <label>链接</label>
+            <input type="text" class="form-control" v-model="menu.url" />
+          </div>
+        </div>
+        <div class="card-footer text-muted">
+          <button class="btn btn-outline-danger btn-sm" @click="del">删除菜单</button>
         </div>
       </div>
     </div>
-    <div class="btn-group" role="group" aria-label="Basic example">
+
+    <div class="btn-group">
       <button class="btn btn-primary mt-3" @click="submit">保存菜单</button>
       <button class="btn btn-outline-success mt-3" @click="push">推送菜单到微信公众号</button>
     </div>
@@ -88,33 +88,38 @@ export default {
   data() {
     return {
       button: this.menus,
+      pid: 0,
       menu: {},
+      types: {
+        view: '链接',
+        click: '关键词',
+      },
     }
   },
   mounted() {
     if (this.button.length > 0) this.menu = this.button[0]
   },
   methods: {
-    edit(menu) {
+    edit(menu, pid) {
       this.menu = menu
+      this.pid = pid
     },
-    del(menus, index) {
-      menus.splice(index, 1)
-    },
-    add(menus, level) {
-      if (level == 1) {
-        if (menus.length == 3) {
-          this.$message.error('一级菜单只能添加三个')
-          return
-        }
-      }
+    del() {
+      this.$confirm('确定删除吗？', '温馨提示').then(() => {
+        this.button.map((m, i) => {
+          if (m === this.menu) {
+            this.button.splice(i, 1)
+          }
 
-      if (level == 2) {
-        if (menus.length == 5) {
-          this.$message.error('二级菜单只能添加五个')
-          return
-        }
-      }
+          m.sub_button.map((s, k) => {
+            if (s === this.menu) {
+              m.sub_button.splice(k, 1)
+            }
+          })
+        })
+      })
+    },
+    add(menus) {
       menus.push({
         type: 'view',
         name: '菜单名称',
@@ -161,7 +166,8 @@ export default {
         margin: 0;
         dt,
         dd {
-          padding: 15px 0px;
+          cursor: pointer;
+          padding: 0px;
           margin: 0;
           background: #fafafa;
           display: flex;
@@ -174,6 +180,13 @@ export default {
           color: #969696;
           font-weight: normal;
           height: 50px;
+          box-sizing: border-box;
+          &.current {
+            // border: 1px solid #44b549;
+            border: 1px solid #3aa5a2;
+            background: #3aa5a2;
+            color: #fff;
+          }
         }
         dd {
           background: #fff;

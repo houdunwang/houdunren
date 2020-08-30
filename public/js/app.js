@@ -3698,34 +3698,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       button: this.menus,
-      menu: {}
+      pid: 0,
+      menu: {},
+      types: {
+        view: '链接',
+        click: '关键词'
+      }
     };
   },
   mounted: function mounted() {
     if (this.button.length > 0) this.menu = this.button[0];
   },
   methods: {
-    edit: function edit(menu) {
+    edit: function edit(menu, pid) {
       this.menu = menu;
+      this.pid = pid;
     },
-    del: function del(menus, index) {
-      menus.splice(index, 1);
+    del: function del() {
+      var _this = this;
+
+      this.$confirm('确定删除吗？', '温馨提示').then(function () {
+        _this.button.map(function (m, i) {
+          if (m === _this.menu) {
+            _this.button.splice(i, 1);
+          }
+
+          m.sub_button.map(function (s, k) {
+            if (s === _this.menu) {
+              m.sub_button.splice(k, 1);
+            }
+          });
+        });
+      });
     },
-    add: function add(menus, level) {
-      if (level == 1) {
-        if (menus.length == 3) {
-          this.$message.error('一级菜单只能添加三个');
-          return;
-        }
-      }
-
-      if (level == 2) {
-        if (menus.length == 5) {
-          this.$message.error('二级菜单只能添加五个');
-          return;
-        }
-      }
-
+    add: function add(menus) {
       menus.push({
         type: 'view',
         name: '菜单名称',
@@ -3735,7 +3741,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     submit: function submit() {
-      var _this = this;
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var url;
@@ -3743,10 +3749,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                url = "wechat/".concat(_this.siteid, "/wechat/menu/").concat(_this.wechatid);
+                url = "wechat/".concat(_this2.siteid, "/wechat/menu/").concat(_this2.wechatid);
                 _context.next = 3;
-                return _this.axios.put(url, {
-                  button: _this.button
+                return _this2.axios.put(url, {
+                  button: _this2.button
                 });
 
               case 3:
@@ -3758,7 +3764,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     push: function push() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var url;
@@ -3766,9 +3772,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                url = "wechat/".concat(_this2.siteid, "/wechat/menu/push/").concat(_this2.wechatid);
+                url = "wechat/".concat(_this3.siteid, "/wechat/menu/push/").concat(_this3.wechatid);
                 _context2.next = 3;
-                return _this2.axios.get(url);
+                return _this3.axios.get(url);
 
               case 3:
               case "end":
@@ -10771,7 +10777,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/_css-lo
 
 
 // module
-exports.push([module.i, ".wechat-menu {\n  display: flex;\n}\n.wechat-menu .view {\n  width: 350px;\n  height: 550px;\n  border: solid 1px #ccc;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.wechat-menu .view header img {\n  width: 100%;\n}\n.wechat-menu .view footer {\n  display: flex;\n  justify-content: space-between;\n}\n.wechat-menu .view footer dl {\n  flex-grow: 1;\n  display: flex;\n  flex-direction: column-reverse;\n  padding: 0;\n  margin: 0;\n}\n.wechat-menu .view footer dl dt,\n.wechat-menu .view footer dl dd {\n  padding: 15px 0px;\n  margin: 0;\n  background: #fafafa;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 35px;\n  border-top: solid 1px #ddd;\n  border-right: solid 1px #ccc;\n  border-left: solid 1px #ccc;\n  color: #969696;\n  font-weight: normal;\n  height: 50px;\n}\n.wechat-menu .view footer dl dd {\n  background: #fff;\n}\n.wechat-menu .edit {\n  flex-grow: 1;\n}", ""]);
+exports.push([module.i, ".wechat-menu {\n  display: flex;\n}\n.wechat-menu .view {\n  width: 350px;\n  height: 550px;\n  border: solid 1px #ccc;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.wechat-menu .view header img {\n  width: 100%;\n}\n.wechat-menu .view footer {\n  display: flex;\n  justify-content: space-between;\n}\n.wechat-menu .view footer dl {\n  flex-grow: 1;\n  display: flex;\n  flex-direction: column-reverse;\n  padding: 0;\n  margin: 0;\n}\n.wechat-menu .view footer dl dt,\n.wechat-menu .view footer dl dd {\n  cursor: pointer;\n  padding: 0px;\n  margin: 0;\n  background: #fafafa;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 35px;\n  border-top: solid 1px #ddd;\n  border-right: solid 1px #ccc;\n  border-left: solid 1px #ccc;\n  color: #969696;\n  font-weight: normal;\n  height: 50px;\n  box-sizing: border-box;\n}\n.wechat-menu .view footer dl dt.current,\n.wechat-menu .view footer dl dd.current {\n  border: 1px solid #3aa5a2;\n  background: #3aa5a2;\n  color: #fff;\n}\n.wechat-menu .view footer dl dd {\n  background: #fff;\n}\n.wechat-menu .edit {\n  flex-grow: 1;\n}", ""]);
 
 // exports
 
@@ -84859,290 +84865,265 @@ var render = function() {
   return _c("div", {}, [
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-header" }, [_vm._v("微信菜单")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-body wechat-menu" }, [
-        _c("div", { staticClass: "view" }, [
-          _vm._m(1),
-          _vm._v(" "),
-          _c(
-            "footer",
-            [
-              _vm._l(_vm.button, function(menu, index) {
-                return _c(
-                  "dl",
-                  { key: index },
-                  [
-                    _c(
-                      "dt",
-                      {
-                        on: {
-                          click: function($event) {
-                            return _vm.edit(menu)
-                          }
+    _c("div", { staticClass: "wechat-menu" }, [
+      _c("div", { staticClass: "view" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "footer",
+          [
+            _vm._l(_vm.button, function(m, index) {
+              return _c(
+                "dl",
+                { key: index },
+                [
+                  _c(
+                    "dt",
+                    {
+                      class: { current: _vm.menu == m },
+                      on: {
+                        click: function($event) {
+                          return _vm.edit(m, index)
                         }
-                      },
-                      [
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(menu.name) +
-                            "\n              "
-                        ),
-                        _c("i", {
-                          staticClass: "fa fa-times-circle text-secondary ml-1",
-                          on: {
-                            click: function($event) {
-                              return _vm.del(_vm.button, index)
-                            }
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    menu.sub_button.length < 5
-                      ? _c(
-                          "dd",
-                          {
-                            on: {
-                              click: function($event) {
-                                return _vm.add(menu.sub_button, 2)
-                              }
-                            }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "fa fa-plus fa-1x",
-                              attrs: { "aria-hidden": "true" }
-                            })
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm._l(menu.sub_button, function(smenu, i) {
-                      return _c(
+                      }
+                    },
+                    [_vm._v(_vm._s(m.name))]
+                  ),
+                  _vm._v(" "),
+                  m.sub_button.length < 5
+                    ? _c(
                         "dd",
                         {
-                          key: i,
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.pid == index,
+                              expression: "pid == index"
+                            }
+                          ],
                           on: {
                             click: function($event) {
-                              return _vm.edit(smenu)
+                              return _vm.add(m.sub_button)
                             }
                           }
                         },
                         [
-                          _vm._v(
-                            "\n              " +
-                              _vm._s(smenu.name) +
-                              "\n              "
-                          ),
                           _c("i", {
-                            staticClass:
-                              "fa fa-times-circle text-secondary ml-1",
-                            on: {
-                              click: function($event) {
-                                return _vm.del(menu.sub_button, i)
-                              }
-                            }
+                            staticClass: "fa fa-plus fa-1x",
+                            attrs: { "aria-hidden": "true" }
                           })
                         ]
                       )
-                    })
-                  ],
-                  2
-                )
-              }),
-              _vm._v(" "),
-              _vm.button.length < 3
-                ? _c("dl", [
-                    _c(
-                      "dt",
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm._l(m.sub_button, function(sm, i) {
+                    return _c(
+                      "dd",
                       {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.pid == index,
+                            expression: "pid == index"
+                          }
+                        ],
+                        key: i,
+                        class: { current: _vm.menu === sm },
                         on: {
                           click: function($event) {
-                            return _vm.add(_vm.button, 1)
+                            return _vm.edit(sm, index)
                           }
                         }
                       },
-                      [
-                        _c("i", {
-                          staticClass: "fa fa-plus fa-2x",
-                          attrs: { "aria-hidden": "true" }
-                        })
-                      ]
+                      [_vm._v(_vm._s(sm.name))]
                     )
-                  ])
-                : _vm._e()
-            ],
-            2
-          )
-        ]),
-        _vm._v(" "),
-        _vm.menu.name
-          ? _c("div", { staticClass: "card edit shadow-sm ml-3" }, [
-              _c("div", { staticClass: "card-header" }, [_vm._v("菜单设置")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "" } }, [_vm._v("菜单名称")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.menu.name,
-                        expression: "menu.name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.menu.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.menu, "name", $event.target.value)
-                      }
-                    }
                   })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "exampleFormControlSelect1" } }, [
-                    _vm._v("类型")
-                  ]),
-                  _vm._v(" "),
+                ],
+                2
+              )
+            }),
+            _vm._v(" "),
+            _vm.button.length < 3
+              ? _c("dl", [
                   _c(
-                    "select",
+                    "dt",
                     {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.menu.type,
-                          expression: "menu.type"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { id: "exampleFormControlSelect1" },
                       on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.menu,
-                            "type",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
+                        click: function($event) {
+                          return _vm.add(_vm.button)
                         }
                       }
                     },
                     [
-                      _c("option", { attrs: { value: "click" } }, [
-                        _vm._v("关键词")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "view" } }, [
-                        _vm._v("链接")
-                      ])
+                      _c("i", {
+                        staticClass: "fa fa-plus fa-2x",
+                        attrs: { "aria-hidden": "true" }
+                      })
                     ]
                   )
-                ]),
+                ])
+              : _vm._e()
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _vm.menu.name
+        ? _c("div", { staticClass: "card edit shadow-sm ml-3" }, [
+            _c("div", { staticClass: "card-header" }, [_vm._v("菜单设置")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "" } }, [_vm._v("菜单名称")]),
                 _vm._v(" "),
-                _vm.menu.type == "click"
-                  ? _c("div", { staticClass: "form-group" }, [
-                      _c("label", [_vm._v("关键词")]),
-                      _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.menu.name,
+                      expression: "menu.name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.menu.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.menu, "name", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "d-flex" },
+                _vm._l(_vm.types, function(v, k) {
+                  return _c(
+                    "label",
+                    { key: k, staticClass: "d-flex align-items-center mr-2" },
+                    [
                       _c("input", {
                         directives: [
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.menu.key,
-                            expression: "menu.key"
+                            value: _vm.menu.type,
+                            expression: "menu.type"
                           }
                         ],
-                        staticClass: "form-control",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.menu.key },
+                        staticClass: "mr-1",
+                        attrs: { type: "radio" },
+                        domProps: {
+                          value: k,
+                          checked: _vm._q(_vm.menu.type, k)
+                        },
                         on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.menu, "key", $event.target.value)
+                          change: function($event) {
+                            return _vm.$set(_vm.menu, "type", k)
                           }
                         }
-                      })
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.menu.type == "view"
-                  ? _c("div", { staticClass: "form-group" }, [
-                      _c("label", [_vm._v("链接")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.menu.url,
-                            expression: "menu.url"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.menu.url },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.menu, "url", $event.target.value)
-                          }
+                      }),
+                      _vm._v("\n            " + _vm._s(v) + "\n          ")
+                    ]
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _vm.menu.type == "click"
+                ? _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("关键词")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.menu.key,
+                          expression: "menu.key"
                         }
-                      })
-                    ])
-                  : _vm._e()
-              ])
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.menu.key },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.menu, "key", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.menu.type == "view"
+                ? _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("链接")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.menu.url,
+                          expression: "menu.url"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.menu.url },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.menu, "url", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-footer text-muted" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-danger btn-sm",
+                  on: { click: _vm.del }
+                },
+                [_vm._v("删除菜单")]
+              )
             ])
-          : _vm._e()
-      ])
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "btn-group",
-        attrs: { role: "group", "aria-label": "Basic example" }
-      },
-      [
-        _c(
-          "button",
-          { staticClass: "btn btn-primary mt-3", on: { click: _vm.submit } },
-          [_vm._v("保存菜单")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-outline-success mt-3",
-            on: { click: _vm.push }
-          },
-          [_vm._v("推送菜单到微信公众号")]
-        )
-      ]
-    )
+    _c("div", { staticClass: "btn-group" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary mt-3", on: { click: _vm.submit } },
+        [_vm._v("保存菜单")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-success mt-3",
+          on: { click: _vm.push }
+        },
+        [_vm._v("推送菜单到微信公众号")]
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -85183,7 +85164,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("header", [
-      _c("img", { attrs: { src: "/images/wechat-header.jpg" } })
+      _c("img", {
+        staticClass: "border shadow-sm",
+        attrs: { src: "/images/wechat-header.jpg" }
+      })
     ])
   }
 ]
@@ -100589,7 +100573,7 @@ __webpack_require__.r(__webpack_exports__);
 var files = __webpack_require__("./resources/js/components sync recursive \\.vue$/");
 
 files.keys().map(function (key) {
-  return vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(key.split("/").pop().split(".")[0], files(key)["default"]);
+  vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(key.split('/').pop().split('.')[0], files(key)["default"]);
 });
 
 /***/ }),

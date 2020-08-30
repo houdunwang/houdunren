@@ -36,7 +36,7 @@
                     <a href="{{ route("wechat.wechat.edit",[$site,$wechat]) }}" class="btn btn-outline-info">编辑</a>
 
                     <btn-del action="{{ route('wechat.wechat.destroy',[$site,$wechat]) }}"
-                        class="btn btn-outline-secondary">
+                        class="btn btn-outline-secondary"> 删除
                     </btn-del>
                 </div>
             </td>
