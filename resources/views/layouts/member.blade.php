@@ -44,45 +44,48 @@
         </div>
     </div>
 
-    <div class="container d-flex flex-column flex-md-row mt-3 mb-3 justify-content-between">
-        <div class="menu">
-            <div class="icon bg-white shadow-sm border">
-                <a href="{{ route('member.avatar.index') }}">
-                    <img src="{{ user('icon') }}" style="width: 100%">
-                </a>
-                <div class="pt-0 p-3">
-                    <h6 class="text-muted">{{ user('nickname')}}</h6>
-                    <hr>
-                    <div class="d-flex justify-content-between text-muted">
-                        <i aria-hidden="true" class="fa fa-envelope {{ user('email')?'text-info':'' }}"></i>
-                        <i aria-hidden="true" class="fas fa-phone-square {{ user('mobile')?'text-info':'' }}"></i>
-                        <i aria-hidden="true" class="fab fa-weibo {{ user('weibo')?'text-info':'' }}"></i>
-                        <i aria-hidden="true" class="fab fa-weixin {{ user('wechat')?'text-info':'' }}"></i>
-                        <i aria-hidden="true" class="fab fa-github {{ user('github')?'text-info':'' }}"></i>
-                        <i aria-hidden="true" class="fab fa-qq {{ user('qq')?'text-info':'' }}"></i>
+    <div class="container mt-3 mb-3">
+        <div class="row">
+            <div class="menu col-12 col-sm-2">
+                <div class="icon bg-white shadow-sm border">
+                    <a href="{{ route('member.avatar.index') }}">
+                        <img src="{{ user('icon') }}" style="width: 100%">
+                    </a>
+                    <div class="pt-0 p-3">
+                        <h6 class="text-muted">{{ user('nickname')}}</h6>
+                        <hr>
+                        <div class="d-flex justify-content-between text-muted">
+                            <i aria-hidden="true" class="fa fa-envelope {{ user('email')?'text-info':'' }}"></i>
+                            <i aria-hidden="true" class="fas fa-phone-square {{ user('mobile')?'text-info':'' }}"></i>
+                            <i aria-hidden="true" class="fab fa-weibo {{ user('weibo')?'text-info':'' }}"></i>
+                            <i aria-hidden="true" class="fab fa-weixin {{ user('wechat')?'text-info':'' }}"></i>
+                            <i aria-hidden="true" class="fab fa-github {{ user('github')?'text-info':'' }}"></i>
+                            <i aria-hidden="true" class="fab fa-qq {{ user('qq')?'text-info':'' }}"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="list mt-2 shadow-sm border">
+                    <div class="list-group list-group-flush menus">
+                        <a class="list-group-item disabled bg-light">资料修改</a>
+                        <a href="{{ route('member.base.index') }}"
+                            class="list-group-item {{ active_class(if_route('member.base.index')) }}">基本信息</a>
+                        <a href="{{ route('member.password.index') }}"
+                            class="list-group-item {{ active_class(if_route('member.password.index')) }}">密码修改</a>
+                        <a href="{{ route('member.email.index') }}"
+                            class="list-group-item {{ active_class(if_route('member.email.index')) }}">邮箱绑定</a>
+                        <a href="{{ route('member.mobile.index') }}"
+                            class="list-group-item {{ active_class(if_route('member.mobile.index')) }}">手机验证</a>
+                        <a href="{{ route('member.avatar.index') }}"
+                            class="list-group-item  {{ active_class(if_route('member.avatar.index')) }}">修改头像</a>
                     </div>
                 </div>
             </div>
-            <div class="list mt-2 shadow-sm border">
-                <div class="list-group list-group-flush menus">
-                    <a class="list-group-item disabled bg-light">资料修改</a>
-                    <a href="{{ route('member.base.index') }}"
-                        class="list-group-item {{ active_class(if_route('member.base.index')) }}">基本信息</a>
-                    <a href="{{ route('member.password.index') }}"
-                        class="list-group-item {{ active_class(if_route('member.password.index')) }}">密码修改</a>
-                    <a href="{{ route('member.email.index') }}"
-                        class="list-group-item {{ active_class(if_route('member.email.index')) }}">邮箱绑定</a>
-                    <a href="{{ route('member.mobile.index') }}"
-                        class="list-group-item {{ active_class(if_route('member.mobile.index')) }}">手机验证</a>
-                    <a href="{{ route('member.avatar.index') }}"
-                        class="list-group-item  {{ active_class(if_route('member.avatar.index')) }}">修改头像</a>
-                </div>
+            <div class="col-12 col-sm-10 mt-2 mt-md-0" id="app">
+                @include('layouts.message')
+                @yield('content')
             </div>
         </div>
-        <div class="flex-fill ml-md-3 mt-2 mt-md-0" id="app">
-            @include('layouts.message')
-            @yield('content')
-        </div>
+
     </div>
 
     @stack('scripts')

@@ -17,7 +17,6 @@
     <div class="front">
         @include('edu::layouts.header')
 
-
         <div class="container mt-3 mb-5 p-0 p-sm-1">
             <div class="row">
                 <div class="col-12 col-sm-10">

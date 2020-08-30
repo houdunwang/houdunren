@@ -11,7 +11,7 @@
     <div class="wechat-menu">
       <div class="view">
         <header>
-          <img src="/images/wechat-header.jpg" class="border shadow-sm" />
+          <img src="/images/wechat-header.jpg" class="border-bottom shadow-sm" />
         </header>
         <footer>
           <dl v-for="(m, index) in button" :key="index">
@@ -173,17 +173,16 @@ export default {
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 35px;
           border-top: solid 1px #ddd;
           border-right: solid 1px #ccc;
           border-left: solid 1px #ccc;
           color: #969696;
           font-weight: normal;
-          height: 50px;
+          height: 40px;
           box-sizing: border-box;
           &.current {
-            // border: 1px solid #44b549;
             border: 1px solid #3aa5a2;
+            border-bottom: none;
             background: #3aa5a2;
             color: #fff;
           }

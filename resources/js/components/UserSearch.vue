@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog title="提示" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
+    <el-dialog title="用户选择" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
       <div class="card">
         <div class="card-header">
           <div class="input-group mb-3">
@@ -57,28 +57,30 @@
 
 <script>
 export default {
-    props:{action:{required:true},title:{default:'选择用户'}},
-    data() {
-      return {
-        dialogVisible: false,
-        name:'',
-        users:[]
-      };
-    },
-    methods: {
-      handleClose(done) {
-        done();
-      },
-      get(){
-          this.axios.post(this.action,{
-              name:this.name
-          }).then(response=>{
-              this.users = response;
-              this.name ='';
-          })
-      }
+  props: { action: { required: true }, title: { default: '选择用户' } },
+  data() {
+    return {
+      dialogVisible: false,
+      name: '',
+      users: [],
     }
-  };
+  },
+  methods: {
+    handleClose(done) {
+      done()
+    },
+    get() {
+      this.axios
+        .post(this.action, {
+          name: this.name,
+        })
+        .then((response) => {
+          this.users = response
+          this.name = ''
+        })
+    },
+  },
+}
 </script>
 
 <style>

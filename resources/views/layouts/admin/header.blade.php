@@ -55,7 +55,7 @@
                         {{ user('name') }}
                     </div>
                     <div class=" dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">个人中心</a>
+                        <a class="dropdown-item" href="{{ route('member.base.index') }}" target="_blank">个人中心</a>
                         <a class="dropdown-item" href="{{ route('admin.my.edit') }}">修改密码</a>
                         <a class="dropdown-item" href="{{ route('auth.logout') }}">退出登录</a>
                     </div>

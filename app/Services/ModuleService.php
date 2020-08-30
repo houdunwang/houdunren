@@ -49,7 +49,8 @@ class ModuleService
             'icon' => 'fab fa-windows',
             'show' => true,
             'items' => [
-                ['title' => '模块配置', 'permission' => 'config', 'route' => 'module.config.edit'],
+                ['title' => '模块配置', 'permission' => 'core.config', 'route' => 'module.config.edit'],
+                ['title' => '图文消息', 'permission' => 'core.wechat.news', 'route' => 'module.config.edit'],
             ],
         ]] + $menus;
     }

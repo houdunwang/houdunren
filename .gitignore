@@ -15,5 +15,4 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 database.php
-.vscode/sftp.json
 
