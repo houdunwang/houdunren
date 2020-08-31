@@ -46,12 +46,8 @@ function module(string $name = null)
         session(['module' => $module]);
     }
 
-    if (is_null($name)) {
+    if (is_null($name) && session('module')) {
         $module = session('module');
-    }
-
-    if (empty($module)) {
-        abort(404, '模块不存在');
     }
 
     return $module;

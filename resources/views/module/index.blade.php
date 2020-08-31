@@ -21,7 +21,8 @@
             <div class="col-sm-1 text-left text-sm-right ">
                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                     @if ($module['installed'])
-                    <btn-del action="{{ route('admin.module.uninstall',$module['name']) }}"></btn-del>
+                    <btn-del action="{{ route('admin.module.uninstall',$module['name']) }}" class="btn btn-secondary">删除
+                    </btn-del>
                     @else
                     <a href="{{ route('admin.module.install',$module['name']) }}" class="btn btn-outline-success">安装</a>
                     @endif

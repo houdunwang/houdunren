@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Yansongda\Pay\Pay;
 
 Route::get('/', 'HomeController@index')->name('home')->middleware('front');
 
@@ -19,7 +18,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.', 'middl
     Route::get('login/wechat/callback', 'WeChatController@handleProviderCallback')->name('login.wechat.callback');
 });
 
-Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware('auth');
+Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware(['auth', 'system']);
 
 Route::group(['prefix' => 'common', 'namespace' => 'Common', 'as' => 'common.'], function () {
     Route::post('upload/image', 'UploadController@image')->name('upload.image');
@@ -80,7 +79,7 @@ Route::group(['prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.', 
     Route::post('mobile/code', 'MobileController@code')->middleware(['throttle:1:1'])->name('mobile.code');
 });
 
-Route::any('wechat/bind/{site}/{wechat}', "WeChat\SubscribeController@handle")->name('houdunren.wechat')->middleware('front');
+Route::any('wechat/bind/{model}', "WeChat\SubscribeController@handle")->name('houdunren.wechat')->middleware('front');
 
 Route::group(['prefix' => "wechat/{site}", 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'system']], function () {
     Route::resource('wechat', 'WeChatController');

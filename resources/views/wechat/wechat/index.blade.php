@@ -22,7 +22,7 @@
             <td> {{ $wechat['title'] }}</td>
             <td> {{ $wechat['name'] }}</td>
             <td> {{ $wechat['type'] }}</td>
-            <td>{{ $site['domain'] }}/wechat/bind/{{ $site['id'] }}/{{ $wechat['id'] }}</td>
+            <td>{{ $site['domain'] }}/wechat/bind/{{ $wechat['id'] }}</td>
             <td>
                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                     <a href="{{ route("wechat.wechat.menu.edit",[$site,$wechat]) }}" class="btn btn-outline-info">

@@ -25,11 +25,14 @@
                         class="badge badge-success mr-2">{{ $module->title }}</a>
                     @endforeach
                 </td>
-                <td width="120">
+                <td width="100">
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                        <a href="{{ route('admin.package.edit',$package['id']) }}" class="btn btn-info">编辑</a>
+                        <a href="{{ route('admin.package.edit',$package['id']) }}" class="btn btn-outline-info">编辑</a>
                         @if($package->id>1)
-                        <btn-del action="{{ route('admin.package.destroy',$package['id']) }}"></btn-del>
+                        <btn-del action="{{ route('admin.package.destroy',$package['id']) }}"
+                            class="btn btn-outline-secondary">
+                            删除
+                        </btn-del>
                         @endif
                     </div>
                 </td>

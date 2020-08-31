@@ -54,20 +54,23 @@
 
 <script>
 export default {
-    data(){
-        return {
-            title:'',
-            lessons:[]
-        }
-    },
-    methods:{
-        async search(){
-            let response = await this.axios.post(`/Edu/admin/search/lesson`,{
-                title:this.title
-            });
-           this.lessons = response;
-        }
+  data() {
+    return {
+      title: '',
+      lessons: [],
     }
+  },
+  mounted() {
+    this.search()
+  },
+  methods: {
+    async search() {
+      let response = await this.axios.post(`/Edu/admin/search/lesson`, {
+        title: this.title,
+      })
+      this.lessons = response
+    },
+  },
 }
 </script>
 

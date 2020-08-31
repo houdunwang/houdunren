@@ -50,6 +50,7 @@ class ModuleService
             'show' => true,
             'items' => [
                 ['title' => '模块配置', 'permission' => 'core.config', 'route' => 'module.config.edit'],
+                ['title' => '文本消息', 'permission' => 'core.wechat.text', 'route' => 'module.config.edit'],
                 ['title' => '图文消息', 'permission' => 'core.wechat.news', 'route' => 'module.config.edit'],
             ],
         ]] + $menus;

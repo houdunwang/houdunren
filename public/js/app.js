@@ -4241,9 +4241,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     action: {
@@ -4259,6 +4256,9 @@ __webpack_require__.r(__webpack_exports__);
       name: '',
       users: []
     };
+  },
+  mounted: function mounted() {
+    this.get();
   },
   methods: {
     handleClose: function handleClose(done) {
@@ -85820,16 +85820,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "align-middle" }, [
-                        _c("img", {
-                          staticClass: "rounded mr-3",
-                          staticStyle: { width: "30px" },
-                          attrs: { src: user.avatar }
-                        }),
-                        _vm._v(
-                          "\n                " +
-                            _vm._s(user.name) +
-                            "\n              "
-                        )
+                        _vm._v(_vm._s(user.name))
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "align-middle" }, [

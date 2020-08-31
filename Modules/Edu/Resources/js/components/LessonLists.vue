@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog title="提示" :visible.sync="showSelectLessonModal" width="50%">
+    <el-dialog title="提示" :visible.sync="showSelectLessonModal" width="60%">
       <lesson-search @add="add"></lesson-search>
     </el-dialog>
 
@@ -91,9 +91,9 @@ export default {
       this.lessons.push(lesson)
       this.lessons = _.unionBy(this.lessons, (lesson) => lesson.id)
     },
-    remove(lesson){
-       this.lessons =  this.lessons.filter((l)=>l.id != lesson.id)
-    }
+    remove(lesson) {
+      this.lessons = this.lessons.filter((l) => l.id != lesson.id)
+    },
   },
 }
 </script>

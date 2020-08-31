@@ -84,11 +84,9 @@
   </div>
 </template>
 
-  </div>
-</template>
 
 <script>
-import Editor from './Editor.vue'
+import Editor from '../../../../../resources/js/components/Editor.vue'
 import { mapState } from 'vuex'
 import ToastEditor from '@toast-ui/editor'
 export default {

@@ -36,10 +36,7 @@
             <tbody>
               <tr v-for="user in users" :key="user.id">
                 <td class="align-middle">{{ user.id }}</td>
-                <td class="align-middle">
-                  <img :src="user.avatar" class="rounded mr-3" style="width:30px;" />
-                  {{ user.name }}
-                </td>
+                <td class="align-middle">{{ user.name }}</td>
                 <td class="align-middle">{{ user.email }}</td>
                 <td class="align-middle">{{ user.mobile }}</td>
                 <td class="text-right align-middle">
@@ -64,6 +61,9 @@ export default {
       name: '',
       users: [],
     }
+  },
+  mounted() {
+    this.get()
   },
   methods: {
     handleClose(done) {

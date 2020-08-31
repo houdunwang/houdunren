@@ -13,18 +13,16 @@ class WeChat
 {
     use Send, MessageType;
 
-    protected $message;
-
     protected $api = 'https://api.weixin.qq.com/cgi-bin';
 
     public function init()
     {
         $this->bind();
-        $this->getMessage();
+        $this->message();
         return $this;
     }
 
-    public function getMessage()
+    public function message()
     {
         $content = file_get_contents('php://input');
         if ($content) {
@@ -67,27 +65,9 @@ class WeChat
 
     public function __get($name)
     {
-        return $this->message->$name ?? null;
-    }
-
-    public function post($url, $postData = [])
-    {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-        if (curl_exec($ch) === false) {
-            throw new \Exception(curl_error($ch));
-            $data = '';
-        } else {
-            $data = curl_multi_getcontent($ch);
+        if ($name === 'message') {
+            return $this->message();
         }
-        curl_close($ch);
-
-        return $data;
+        return $this->message->$name ?? null;
     }
 }

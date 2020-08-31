@@ -19,9 +19,10 @@
                 <h6>{{ $menu['title'] }}</h6>
                 <div class="row">
                     @foreach ($menu['items'] as $item)
-                    <label class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <label class="col-6 col-sm-4 col-md-3 col-lg-2 align-items-center d-flex">
                         <input type="checkbox" name="permissions[]" value="{{$module['name'].'|'.$item['permission']}}"
-                            {{ $role->hasPermissionTo(permission_name($item['permission'],$site,$module) ) ?'checked':''}}>
+                            {{ $role->hasPermissionTo(permission_name($item['permission'],$site,$module) ) ?'checked':''}}
+                            class="mr-1">
                         {{ $item['title'] }}
 
                         <span class="small text-secondary">

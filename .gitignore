@@ -6,6 +6,7 @@ node_modules
 /public/attachments
 /storage/*.key
 /vendor
+.vscode
 .env
 .env.backup
 .DS_Store

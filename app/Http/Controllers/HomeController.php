@@ -9,10 +9,8 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        // $site = get_site_by_domain();
-        // site($site);
         if (module() === null) {
-            abort(404, '站点没有默认模块');
+            return view('home.404');
         }
 
         module(site()->module['name']);

@@ -20,8 +20,9 @@
         </div>
         <div class="card-body">
             <i class="fa fa-rss fa-3x mr-3" aria-hidden="true"></i>
-            <span class="h3">{{ $site['title'] }}</span>
+            <a href="{{ route('site.module.index',$site) }}" class="h3">{{ $site['title'] }}</a>
         </div>
+
         <div class="card-footer text-muted d-flex flex-column flex-sm-row justify-content-between align-items-center">
             <div class="small">
                 <span class="mr-2">创建时间: {{ $site['created_at'] }}</span>
