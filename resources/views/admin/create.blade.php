@@ -5,7 +5,6 @@
 
 <form action="{{ route('site.role.store',[$site]) }}" method="post">
     @csrf
-
     <user-search action="{{ route('site.role.search',$site) }}" v-slot="{user}" class="mt-3">
         <user-search-btn>
             <div class="btn-group btn-group-sm">

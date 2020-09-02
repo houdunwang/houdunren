@@ -38,7 +38,7 @@
         </footer>
       </div>
 
-      <div class="card edit shadow-sm ml-3" v-if="menu.name">
+      <div class="card edit shadow-sm ml-3" v-if="menu.type">
         <div class="card-header">菜单设置</div>
         <div class="card-body">
           <div class="form-group">

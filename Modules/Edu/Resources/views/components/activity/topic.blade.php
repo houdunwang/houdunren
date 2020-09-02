@@ -5,7 +5,7 @@
         </span>
     </a>
     <div class="d-flex flex-column justify-content-between">
-        <a href="{{ route('Edu.front.topic.show',$topic) }}" class="text-secondary h5">
+        <a href="{{ route('Edu.front.topic.show',$activity->subject) }}" class="text-secondary h5">
             {{ $activity->subject->title }}
         </a>
         <div class="small text-black-50">

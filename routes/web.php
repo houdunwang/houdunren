@@ -81,11 +81,17 @@ Route::group(['prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.', 
 
 Route::any('wechat/bind/{model}', "WeChat\SubscribeController@handle")->name('houdunren.wechat')->middleware('front');
 
-Route::group(['prefix' => "wechat/{site}", 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'system']], function () {
+Route::group(['prefix' => "site/wechat/{site}", 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'system']], function () {
     Route::resource('wechat', 'WeChatController');
     Route::get('wechat/default/{wechat}', 'DefaultController@edit')->name('wechat.default.edit');
     Route::put('wechat/default/{wechat}', 'DefaultController@update')->name('wechat.default.update');
     Route::get('wechat/menu/{wechat}', 'MenuController@edit')->name('wechat.menu.edit');
     Route::put('wechat/menu/{wechat}', 'MenuController@update')->name('wechat.menu.update');
     Route::get('wechat/menu/push/{wechat}', 'MenuController@push')->name('wechat.menu.push');
+});
+
+Route::group(['prefix' => "wechat", 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'admin']], function () {
+    Route::resource('text', 'TextController');
+    Route::resource('rule', 'RuleController')->only('show');
+    Route::post('rule/check-keyword', 'RuleController@checkKeyword')->name('rule.keyword.check');
 });

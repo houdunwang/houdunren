@@ -44,16 +44,7 @@ class ModuleService
     protected function menus($name)
     {
         $menus = $this->config($name, 'menus');
-        return [[
-            'title' => '基本功能',
-            'icon' => 'fab fa-windows',
-            'show' => true,
-            'items' => [
-                ['title' => '模块配置', 'permission' => 'core.config', 'route' => 'module.config.edit'],
-                ['title' => '文本消息', 'permission' => 'core.wechat.text', 'route' => 'module.config.edit'],
-                ['title' => '图文消息', 'permission' => 'core.wechat.news', 'route' => 'module.config.edit'],
-            ],
-        ]] + $menus;
+        return config('menus') + $menus;
     }
 
     protected function config(string $name, string $fileName)
