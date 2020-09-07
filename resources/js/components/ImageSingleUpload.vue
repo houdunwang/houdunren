@@ -1,20 +1,11 @@
 <template>
   <div ref="image">
-    <el-upload
-      class="avatar-uploader"
-      :action="action"
-      :name="uploadName"
-      :headers="headers"
-      :show-file-list="false"
-      :on-success="handleAvatarSuccess"
-      :before-upload="beforeAvatarUpload"
-      :with-credentials="true"
-      :on-error="error"
-    >
-      <img v-if="imageUrl" :src="imageUrl" class="avatar" style="background: #f3f3f3;" />
+    <el-upload class="avatar-uploader" :action="action" :name="uploadName" :headers="headers" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :with-credentials="true" :on-error="error">
+      <img v-if="url" :src="url" class="avatar" style="background: #f3f3f3" />
       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
-    <input :name="name" :value="imageUrl" hidden />
+
+    <input :name="name" :value="url" hidden />
   </div>
 </template>
 
@@ -22,14 +13,19 @@
 export default {
   props: {
     uploadName: { default: 'file', type: String },
-    name: { required: true, type: String },
-    value: { default: '' },
+    name: { type: String, default: 'file' },
+    value: { type: String, default: '' },
     action: { default: '/common/upload/image' },
   },
   data() {
     return {
-      imageUrl: this.value,
+      url: '',
     }
+  },
+  watch: {
+    value(v) {
+      this.url = v
+    },
   },
   computed: {
     headers() {
@@ -41,12 +37,12 @@ export default {
   },
   methods: {
     handleAvatarSuccess(res, file) {
-      this.imageUrl = res.path
+      this.url = res.path
+      this.$emit('update:value', this.url)
     },
     beforeAvatarUpload(file) {
       const isJPG = ['image/jpeg', 'image/png'].some((mime) => mime == file.type)
       const isLt2M = file.size / 1024 / 1024 < 2
-
       if (!isJPG) {
         this.$message.error('上传头像图片只能是 JPG 格式!')
       }
@@ -63,8 +59,6 @@ export default {
   },
 }
 </script>
-
-
 
 <style>
 .avatar-uploader .el-upload {

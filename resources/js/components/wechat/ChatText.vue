@@ -45,8 +45,8 @@ export default {
       this.text.contents.push('')
     },
     del(index) {
-      this.$confirm('确定删除吗？').then(() => {
-        this.contents.splice(index, 1)
+      this.$confirm('确定删除文本回复吗？').then(() => {
+        this.text.contents.splice(index, 1)
       })
     },
   },

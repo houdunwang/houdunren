@@ -21,13 +21,7 @@
               <i class="fa fa-plus fa-1x" aria-hidden="true"></i>
             </dd>
 
-            <dd
-              v-for="(sm, i) in m.sub_button"
-              :key="i"
-              @click="edit(sm, index)"
-              :class="{ current: menu === sm }"
-              v-show="pid == index"
-            >{{ sm.name }}</dd>
+            <dd v-for="(sm, i) in m.sub_button" :key="i" @click="edit(sm, index)" :class="{ current: menu === sm }" v-show="pid == index">{{ sm.name }}</dd>
           </dl>
 
           <dl v-if="button.length < 3">
@@ -129,11 +123,11 @@ export default {
       })
     },
     async submit() {
-      let url = `wechat/${this.siteid}/wechat/menu/${this.wechatid}`
+      let url = `site/wechat/${this.siteid}/wechat/menu/${this.wechatid}`
       await this.axios.put(url, { button: this.button })
     },
     async push() {
-      let url = `wechat/${this.siteid}/wechat/menu/push/${this.wechatid}`
+      let url = `site/wechat/${this.siteid}/wechat/menu/push/${this.wechatid}`
       await this.axios.get(url)
     },
   },

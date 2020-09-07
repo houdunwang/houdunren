@@ -12,8 +12,9 @@ return [
         'icon' => 'fab fa-weixin',
         'show' => true,
         'items' => [
-            ['title' => '文本消息', 'permission' => 'wechat.text.index', 'route' => 'wechat.text.index'],
-            ['title' => '图文消息', 'permission' => 'core.wechat.news', 'route' => 'module.config.edit'],
+            ['title' => '文本消息', 'permission' => 'wechat.text', 'route' => 'wechat.text.index'],
+            ['title' => '图文消息', 'permission' => 'wechat.news', 'route' => 'wechat.news.index'],
+
         ],
     ]
 ];

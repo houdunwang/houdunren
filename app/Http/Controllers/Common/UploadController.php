@@ -8,15 +8,15 @@ use Illuminate\Http\Request;
 
 class UploadController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
 
-    public function image(Request $request, UploadService $UploadService)
-    {
-        $request->validate(['file' => ['required', 'mimes:jpeg,png', 'max:1000']]);
+  public function image(Request $request, UploadService $UploadService)
+  {
+    $request->validate(['file' => ['required', 'mimes:jpeg,png', 'max:1000']]);
 
-        return $UploadService->make($request->file);
-    }
+    return $UploadService->make($request->file);
+  }
 }

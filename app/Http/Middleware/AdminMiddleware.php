@@ -10,6 +10,10 @@ class AdminMiddleware
 {
     public function handle($request, Closure $next)
     {
+        if (!site() || !module()) {
+            return redirect()->route('site.site.index');
+        }
+
         module(module()['name']);
 
         app(ConfigService::class)->loadSiteConfig();

@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class WeChatKeyword extends Model
 {
     protected $fillable = [
-        'site_id', 'module_id', 'wechat_id', 'word', 'title', 'regexp', 'rule_id'
+        'id', 'site_id', 'module_id', 'wechat_id', 'word', 'title', 'regexp', 'rule_id'
     ];
+
+    public function rule()
+    {
+        return $this->belongsTo(WeChatRule::class, 'rule_id');
+    }
 }

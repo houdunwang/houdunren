@@ -6,14 +6,17 @@ use App\Http\Controllers\Auth\Controller;
 use App\Http\Requests\WeChatRequest;
 use App\Models\Site;
 use App\Models\WeChat;
-use Houdunwang\WeChat\Button;
 use Illuminate\Http\Request;
 
 class WeChatController extends Controller
 {
-    public function index(Site $site)
+    public function index(Request $request, Site $site)
     {
         $wechats = WeChat::where('site_id', $site->id)->get();
+
+        if ($request->expectsJson()) {
+            return $wechats;
+        }
 
         return view('wechat.wechat.index', compact('site', 'wechats'));
     }

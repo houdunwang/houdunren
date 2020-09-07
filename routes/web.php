@@ -60,7 +60,7 @@ Route::group(['prefix' => 'site', 'namespace' => 'Site', 'as' => 'site.', 'middl
     Route::put('{site}/admin/role/{user}', 'AdminController@updateRole')->name('admin.role.update');
     Route::get('{site}/module', 'ModuleController@index')->name('module.index');
     Route::get('{site}/module/{module}', 'ModuleController@show')->name('module.show');
-    Route::get('{site}/menu/{menu}', 'MenuController@show')->name('menu.show');
+    Route::get('{site}/menu/{menu}', 'MenuController@show')->name('menu.show')->middleware('admin');
 });
 
 Route::group(['prefix' => 'module', 'namespace' => 'Module', 'as' => 'module.', 'middleware' => ['auth', 'admin']], function () {
@@ -92,6 +92,9 @@ Route::group(['prefix' => "site/wechat/{site}", 'namespace' => 'WeChat', 'as' =>
 
 Route::group(['prefix' => "wechat", 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'admin']], function () {
     Route::resource('text', 'TextController');
-    Route::resource('rule', 'RuleController')->only('show');
+    Route::resource('news', 'NewsController');
+    Route::get('rule/wechat', 'RuleController@wechat');
+
+    Route::resource('rule', 'RuleController')->only(['show', 'destroy']);
     Route::post('rule/check-keyword', 'RuleController@checkKeyword')->name('rule.keyword.check');
 });

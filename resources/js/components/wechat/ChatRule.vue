@@ -1,15 +1,33 @@
 <template>
   <div>
-    <div class="alert alert-info" role="alert">
-      <i class="fas fa-info-circle"></i>
-      添加系统中已经存在的关键词时，将会被忽略
-    </div>
     <div class="card">
       <div class="card-header">关键词设置</div>
       <div class="card-body">
         <div class="form-group">
+          <label for="exampleFormControlSelect1">微信公众号</label>
+          <select
+            class="form-control"
+            id="exampleFormControlSelect1"
+            v-model="rule.wechat_id"
+            size="3"
+          >
+            <option
+              v-for="(wechat,index) in wechats"
+              :key="index"
+              :value="wechat.id"
+            >{{ wechat.title }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label>规则名称</label>
-          <input type="text" class="form-control" placeholder v-model="rule.title" />
+          <input
+            type="text"
+            class="form-control"
+            placeholder
+            v-model="rule.title"
+            :required="required"
+          />
         </div>
 
         <div>
@@ -53,7 +71,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  :class="{'border-danger':keyword.has}"
+                  :class="{ 'border-danger': keyword.has }"
                   required
                   v-model="keywords[index].word"
                   @blur="checkKeyword(keywords[index])"
@@ -62,11 +80,8 @@
                   <span class="input-group-text">删除</span>
                 </a>
               </div>
-              <button
-                class="btn btn-outline-secondary btn-sm"
-                @click="add(false)"
-                type="button"
-              >添加完全匹配关键词</button>
+              <button class="btn btn-secondary btn-sm" @click="add(false)" type="button">添加完全匹配关键词</button>
+              <small>添加系统中已经存在的关键词时，将会被忽略</small>
             </div>
 
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -88,11 +103,8 @@
                 </a>
               </div>
 
-              <button
-                class="btn btn-outline-secondary btn-sm"
-                @click="add(true)"
-                type="button"
-              >添加模糊匹配关键词</button>
+              <button class="btn btn-secondary btn-sm" @click="add(true)" type="button">添加模糊匹配关键词</button>
+              <small>添加系统中已经存在的关键词时，将会被忽略</small>
             </div>
           </div>
         </div>
@@ -108,17 +120,21 @@
 export default {
   props: {
     rid: { type: Number, default: null },
+    required: { type: Boolean, default: true },
   },
   data() {
     return {
       rule: {
         id: 0,
+        wechat_id: 0,
         title: '',
       },
       keywords: [],
+      wechats: [],
     }
   },
   async mounted() {
+    this.getWechat()
     if (this.rid) {
       const response = await this.axios.get(`wechat/rule/${this.rid}`)
       this.rule = response.rule
@@ -126,6 +142,9 @@ export default {
     }
   },
   methods: {
+    async getWechat() {
+      this.wechats = await this.axios.get(`wechat/rule/wechat`)
+    },
     add(regexp = false) {
       this.keywords.push({
         id: 0,
@@ -134,19 +153,19 @@ export default {
       })
     },
     del(index) {
-      console.log(index)
-
       this.$confirm('确定删除关键词吗？', '温馨提示').then(() => {
         this.keywords.splice(index, 1)
       })
     },
     async checkKeyword(keyword) {
-      const response = await this.axios.post(`wechat/rule/check-keyword`, {
-        keyword,
-      })
-      this.$set(keyword, 'has', response.has)
-      if (response.has) {
-        this.$message.error('关键词已经存在')
+      if (keyword) {
+        const response = await this.axios.post(`wechat/rule/check-keyword`, {
+          keyword,
+        })
+        this.$set(keyword, 'has', response.has)
+        if (response.has) {
+          this.$message.error('关键词已经存在')
+        }
       }
     },
   },
