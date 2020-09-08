@@ -79,7 +79,7 @@ Route::group(['prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.', 
     Route::post('mobile/code', 'MobileController@code')->middleware(['throttle:1:1'])->name('mobile.code');
 });
 
-Route::any('wechat/bind/{model}', "WeChat\SubscribeController@handle")->name('houdunren.wechat')->middleware('front');
+Route::any('wechat/bind/{model}', "WeChatApi\ApiController@handle")->name('houdunren.wechat')->middleware('front');
 
 Route::group(['prefix' => "site/wechat/{site}", 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'system']], function () {
     Route::resource('wechat', 'WeChatController');

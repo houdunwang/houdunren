@@ -29,7 +29,7 @@ class ModuleService
         $config = $this->config($name, 'config');
         $model = Model::where('name', $name)->first();
 
-        return $config + [
+        return array_merge($config, [
             'id' => $model['id'] ?? 0,
             'name' => $name,
             'description' => $config['description'],
@@ -37,14 +37,14 @@ class ModuleService
             'preview' => "/modules/{$name}/static/preview.jpg",
             'menus' => $this->menus($name),
             'installed' => (bool) $model,
-            'model' => $model,
-        ];
+            'model' => $model
+        ]);
     }
 
     protected function menus($name)
     {
         $menus = $this->config($name, 'menus');
-        return config('menus') + $menus;
+        return array_merge(config('menus'), $menus);
     }
 
     protected function config(string $name, string $fileName)

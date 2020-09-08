@@ -48,7 +48,6 @@ xml;
         foreach ($data as $article) {
             $news .= sprintf($articleXml, $article['title'], $article['description'], $article['picurl'], $article['url']);
         }
-        Log::info(sprintf($xml, $this->FromUserName, $this->ToUserName, time(), count($data), $news));
         return  sprintf($xml, $this->FromUserName, $this->ToUserName, time(), count($data), $news);
     }
 }

@@ -13,6 +13,10 @@
                 @foreach (user()->group->packages as $package)
                 <span class="">{{ $package['title'] }}</span>
                 @endforeach
+
+                @if (auth()->id()==1)
+                你是超级管理员
+                @endif
             </div>
             <a href="{{ route('site.module.index',$site) }}" class="font-weight-bold text-secondary">
                 <i class=" fa fa-cog" aria-hidden="true"></i> 应用扩展

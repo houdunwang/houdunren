@@ -14,7 +14,14 @@ return [
         'items' => [
             ['title' => '文本消息', 'permission' => 'wechat.text', 'route' => 'wechat.text.index'],
             ['title' => '图文消息', 'permission' => 'wechat.news', 'route' => 'wechat.news.index'],
-
+        ],
+    ],
+    [
+        'title' => '微信素材管理',
+        'icon' => 'fas fa-video',
+        'show' => true,
+        'items' => [
+            ['title' => '永久图文素材', 'permission' => 'wechat.material.news', 'route' => 'wechat.material.news'],
         ],
     ]
 ];
