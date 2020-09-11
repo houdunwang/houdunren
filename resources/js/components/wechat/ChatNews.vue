@@ -123,9 +123,11 @@ export default {
   div.first {
     position: relative;
     padding: 0;
+    cursor: pointer;
     img {
       width: 100%;
       height: auto;
+      max-height: 200px;
     }
     h2 {
       position: absolute;

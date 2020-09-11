@@ -21,7 +21,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.', 'middl
 Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware(['auth', 'system']);
 
 Route::group(['prefix' => 'common', 'namespace' => 'Common', 'as' => 'common.'], function () {
-    Route::post('upload/image', 'UploadController@image')->name('upload.image');
+    Route::post('upload/make', 'UploadController@make')->name('upload.make');
     Route::get('favorite/{model}/{id}/{module?}', 'FavoriteController@make')->name('favorite')->middleware('auth');
     Route::get('favour/{model}/{id}/{module?}', 'FavourController@make')->name('favour')->middleware('auth');
     Route::get('follower/{user}', 'FollowerController@make')->name('follower')->middleware('auth');
@@ -93,8 +93,8 @@ Route::group(['prefix' => "site/wechat/{site}", 'namespace' => 'WeChat', 'as' =>
 Route::group(['prefix' => "wechat", 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'admin']], function () {
     Route::resource('text', 'TextController');
     Route::resource('news', 'NewsController');
+    Route::resource('material', 'MaterialController');
     Route::get('rule/wechat', 'RuleController@wechat');
-
     Route::resource('rule', 'RuleController')->only(['show', 'destroy']);
     Route::post('rule/check-keyword', 'RuleController@checkKeyword')->name('rule.keyword.check');
 });

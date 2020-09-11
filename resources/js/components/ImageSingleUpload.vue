@@ -15,7 +15,7 @@ export default {
     uploadName: { default: 'file', type: String },
     name: { type: String, default: 'file' },
     value: { type: String, default: '' },
-    action: { default: '/common/upload/image' },
+    action: { default: '/common/upload/make' },
   },
   data() {
     return {

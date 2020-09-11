@@ -10,15 +10,17 @@ use Log;
 
 trait Create
 {
-    public function create($button)
-    {
-        $url = $this->api . '/menu/create?access_token=' . $this->token();
+  public function create($button)
+  {
+    $url = $this->api . '/menu/create?access_token=' . $this->token();
 
-        $response = Http::send('POST', $url, ['body' => json_encode($button, JSON_UNESCAPED_UNICODE)])->throw()->json();
+    $response = Http::send('POST', $url, ['body' => json_encode($button, JSON_UNESCAPED_UNICODE)])
+      ->throw()
+      ->json();
 
-        if ($response['errmsg'] != 'ok') {
-            throw new Exception($response['errmsg']);
-        }
-        return true;
+    if ($response['errmsg'] != 'ok') {
+      throw new Exception($response['errmsg']);
     }
+    return true;
+  }
 }
