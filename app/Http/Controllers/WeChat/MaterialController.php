@@ -14,7 +14,7 @@ class MaterialController extends Controller
   {
     $type = $request->query('type', 'image');
 
-    $materials = WeChatMaterial::site()->get();
+    $materials = WeChatMaterial::site()->paginate(1);
 
     return view('wechat.material.index', compact('materials', 'type'));
   }
@@ -28,63 +28,53 @@ class MaterialController extends Controller
 
   public function store(Request $request, WeChatMaterial $weChatMaterial, Material $material, WeChatService $weChatService)
   {
-    $weChatService->config(1);
+    $weChatService->config($request->wechat_id);
+    $type = $request->query('type', 'image');
 
-    // dd($request->input('file'));
-    // $type = $request->query('type');
+    $image = $material->add('image', $request->input('content.pic'));
+    $weChatMaterial->wechat_id = $request->wechat_id;
+    $weChatMaterial->media_id = $image['media_id'];
+    $weChatMaterial->info = $image;
+    $weChatMaterial->type = $type;
+    $weChatMaterial->site_id = site()['id'];
+    $weChatMaterial->module_id = module()['id'];
+    $weChatMaterial->content = $request->content;
+    $weChatMaterial->save();
 
-    $image = $material->add('image', $request->input('file'));
-    dd($image);
-
-    // $weChatMaterial->type = $type;
-    // $weChatMaterial->content = $request->content;
-    // $weChatMaterial->save();
-
-    // return response()->json(['message' => '素材创建成功']);
+    return response()->json(['message' => '素材创建成功']);
   }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  \App\Models\WeChatMaterial  $weChatMaterial
-   * @return \Illuminate\Http\Response
-   */
-  public function show(WeChatMaterial $weChatMaterial)
+  public function show(WeChatMaterial $material)
   {
-    //
+    return $material;
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  \App\Models\WeChatMaterial  $weChatMaterial
-   * @return \Illuminate\Http\Response
-   */
-  public function edit(WeChatMaterial $weChatMaterial)
+  public function edit(Request $request, WeChatMaterial $material)
   {
-    //
+    $type = $request->query('type', 'image');
+    return view('wechat.material.edit', compact('type', 'material'));
   }
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  \App\Models\WeChatMaterial  $weChatMaterial
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, WeChatMaterial $weChatMaterial)
+  public function update(Request $request, WeChatMaterial $material, WeChatService $weChatService, Material $materialPackage)
   {
-    //
+    $weChatService->config($request->wechat_id);
+
+    $image = $materialPackage->add('image', $request->input('content.pic'));
+    $material->wechat_id = $request->wechat_id;
+    $material->media_id = $image['media_id'];
+    $material->info = $image;
+    $material->content = $request->content;
+    $material->save();
+
+    return response()->json(['message' => '素材修改成功']);
   }
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  \App\Models\WeChatMaterial  $weChatMaterial
-   * @return \Illuminate\Http\Response
-   */
-  public function destroy(WeChatMaterial $weChatMaterial)
+  public function destroy(WeChatMaterial $material, WeChatService $weChatService, Material $materialPackage)
   {
-    //
+    $weChatService->config($material->wechat_id);
+    $materialPackage->del($material['media_id']);
+    $material->delete();
+
+    return response()->json(['message' => '图文素材删除成功']);
   }
 }

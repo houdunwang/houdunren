@@ -80,7 +80,7 @@ class WeChat
 
   protected function return($response)
   {
-    if (isset($response['errcode'])) {
+    if (isset($response['errcode']) && $response['errcode'] != 0) {
       throw new Exception($response['errmsg']);
     }
     return $response;

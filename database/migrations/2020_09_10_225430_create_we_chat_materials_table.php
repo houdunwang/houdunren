@@ -25,8 +25,9 @@ class CreateWeChatMaterialsTable extends Migration
         ->constrained('we_chats')
         ->onDelete('cascade');
       $table->char('type', 30)->comment('素材类型');
+      $table->string('media_id')->comment('素材media_id');
       $table->json('info')->comment('微信服务器素材资料');
-      $table->json('contents')->comment('本站服务器内容');
+      $table->json('content')->comment('本站服务器内容');
       $table->timestamps();
     });
   }

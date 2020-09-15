@@ -47,8 +47,8 @@
 <lesson-video></lesson-video>
 <button class="btn btn-primary mt-3">保存</button>
 
-@push('scripts')
+@push('vue')
 <script>
-    window.videos = {!! old('videos',json_encode($lesson->videos->toArray())) !!}
+    window.videos = {!! old('videos',json_encode($lesson->videos->toArray()))!!}
 </script>
 @endpush

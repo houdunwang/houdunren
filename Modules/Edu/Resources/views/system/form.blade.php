@@ -19,7 +19,7 @@
 
 <button class="btn btn-primary mt-3">保存</button>
 
-@push('scripts')
+@push('vue')
 <script>
     window.lessons = @json($system->lessons->toArray());
 </script>

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Muli:200,300,400,700);@import url(https://fonts.googleapis.com/css?family=Oswald:200,300,400,700);@charset "UTF-8";
+@charset "UTF-8";
 
 /*!
  * Bootstrap v4.5.2 (https://getbootstrap.com/)
@@ -10983,11 +10983,6 @@ body {
   background: #fafafa;
 }
 
-.bg-gradient-primary {
-  background-color: #38527d;
-  background-image: linear-gradient(180deg, #38527d 10%, #233758 100%);
-}
-
 .admin {
   min-height: 100vh;
   background: url("/images/admin-bg.jpg");
@@ -19478,5 +19473,14 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+
+.wechat-material-index .image .card .pic {
+  height: 150px;
+  overflow: hidden;
+}
+
+.wechat-material-index .pagination {
+  margin-bottom: 0px !important;
 }
 

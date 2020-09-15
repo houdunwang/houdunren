@@ -10,21 +10,21 @@ use App\Services\PermissionService;
 
 class ModuleController extends Controller
 {
-    public function index(Site $site, ModuleService $moduleService, PermissionService $permissionService)
-    {
-        $modules = $moduleService->getSiteModules($site)->filter(function ($module) use ($site, $permissionService) {
-            return $permissionService->checkModulePermission($site, $module);
-        });
+  public function index(Site $site, ModuleService $moduleService, PermissionService $permissionService)
+  {
+    $modules = $moduleService->getSiteModules($site)->filter(function ($module) use ($site, $permissionService) {
+      return $permissionService->checkModulePermission($site, $module);
+    });
 
-        return view('site_module.index', compact('site', 'modules'));
-    }
+    return view('site_module.index', compact('site', 'modules'));
+  }
 
-    public function show(Site $site, Module $module, PermissionService $permissionService)
-    {
-        site($site);
+  public function show(Site $site, Module $module, PermissionService $permissionService)
+  {
+    site($site);
 
-        module($module['name']);
+    module($module['name']);
 
-        return redirect(url($module['name'] . '/admin'));
-    }
+    return redirect(url($module['name'] . '/admin'));
+  }
 }

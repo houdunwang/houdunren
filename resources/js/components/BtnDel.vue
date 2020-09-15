@@ -19,7 +19,7 @@ export default {
             location.reload()
           } else if (this.redirect === 'back') {
             window.history.go(-1)
-          } else {
+          } else if (this.redirect != 'no') {
             location.href = this.redirect
           }
         })

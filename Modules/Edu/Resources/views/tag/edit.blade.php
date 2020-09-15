@@ -23,7 +23,7 @@
 </form>
 @endsection
 
-@push('scripts')
+@push('vue')
 <script>
     window.tags  = @json($tags);
 </script>

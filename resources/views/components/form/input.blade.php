@@ -11,5 +11,4 @@
     @error( $attributes['name'] )
     <strong class="form-text text-danger invalid-feedback">{{ $message }}</strong>
     @enderror
-
 </div>

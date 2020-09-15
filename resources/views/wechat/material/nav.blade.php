@@ -1,5 +1,6 @@
 <nav class="nav nav-tabs mb-3">
-    <a class="nav-link {{ active_class($type=='image')}}" href="{{ route('wechat.material.index',['type'=>'image']) }}">
+    <a class="nav-link {{ active_class(if_route('wechat.material.create') &&$type=='image')}}"
+        href="{{ route('wechat.material.index',['type'=>'image']) }}">
         图片素材
     </a>
     <a class="nav-link {{ active_class(if_route('wechat.news.index'))}}"

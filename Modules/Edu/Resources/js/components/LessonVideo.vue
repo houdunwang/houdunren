@@ -2,7 +2,14 @@
   <div class="card mt-3">
     <div class="card-header">视频设置</div>
     <div class="card-body">
-      <draggable class="row" :list="videos" :disabled="!enabled" ghost-class="ghost" @start="dragging = true" @end="dragging = false">
+      <draggable
+        class="row"
+        :list="videos"
+        :disabled="!enabled"
+        ghost-class="ghost"
+        @start="dragging = true"
+        @end="dragging = false"
+      >
         <div v-for="(video, index) in videos" :key="index" class="col-12 col-sm-4 mb-3">
           <div class="card">
             <div class="card-body">

@@ -33,6 +33,12 @@ export default {
     this.loadChats()
   },
   watch: {
+    id: {
+      handler(n) {
+        this.wechat_id = n
+      },
+      immediate: true,
+    },
     wechat_id(id) {
       this.$emit('update:id', id)
     },
