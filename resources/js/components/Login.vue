@@ -18,7 +18,6 @@
             v-if="errors.password"
           >{{ errors.password }}</strong>
         </div>
-
         <div class="form-group">
           <label>密码</label>
           <input

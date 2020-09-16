@@ -5,7 +5,7 @@
       <div class="card-header">上传图片素材</div>
       <div class="card-body">
         <div class="form-group">
-          <label for>素材说明</label>
+          <label>素材说明</label>
           <input type="text" class="form-control" v-model="content.title" />
         </div>
         <image-single-upload :value.sync="content.pic"></image-single-upload>
@@ -35,7 +35,6 @@ export default {
       },
     }
   },
-  computed: {},
   mounted() {
     if (this.id) {
       this.get(this.id)

@@ -5,14 +5,14 @@
 
 <div class="alert alert-info mt-3" role="alert">
     <i class="fa fa-info-circle" aria-hidden="true"></i>
-    站长「{{ $site->master->name }}」拥有对<strong>{{ $site->title }}</strong>站点管理的全部权限
+    站长「{{ $site->master->name }}」拥有对 <strong>{{ $site->title }}</strong> 站点管理的全部权限
 </div>
 <div class="table table-striped mt-3">
     <table class="table">
         <thead>
             <tr>
-                <th width="80">编号</th>
-                <th>昵称</th>
+                <th width="100">编号</th>
+                <th width="200">昵称</th>
                 <th>邮箱</th>
                 <th>手机号</th>
                 <th>角色</th>
@@ -24,7 +24,7 @@
             <tr>
                 <td class="align-middle">{{$user['id'] }}</td>
                 <td class="align-middle">
-                    <img src="{{ $user['icon'] }}" class="rounded mr-3" style="width:30px;" />
+                    <img src="{{ $user['icon'] }}" class="rounded mr-3" style="width:30px;height:30px;" />
                     {{ $user['name'] }}
                 </td>
                 <td class="align-middle">{{ $user['email'] }}</td>
@@ -53,9 +53,9 @@
     </table>
 </div>
 
-<user-search action="{{ route('site.admin.search',$site) }}" v-slot="{user}" class="mt-3">
+<user :site_id="{{ $site['id'] }}" v-slot="{user}" class="mt-3">
     <div class="btn-group btn-group-sm">
         <a :href="'/site/{{ $site['id'] }}/admin/store/'+user.id" class="btn btn-info btn-sm">设为管理员</a>
     </div>
-</user-search>
+</user>
 @endsection
