@@ -7,5 +7,5 @@ use Houdunwang\WeChat\Material\Delete;
 
 class Material extends WeChat
 {
-  use Create, Delete;
+    use Create, Delete;
 }

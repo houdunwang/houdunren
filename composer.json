@@ -28,7 +28,7 @@
     "laravel/ui": "^2.0",
     "livewire/livewire": "^1.3",
     "mews/captcha": "^3.1",
-    "mews/purifier": "^3.2",
+    "mews/purifier": "^3.3",
     "nwidart/laravel-modules": "^7.1",
     "overtrue/easy-sms": "^1.1",
     "socialiteproviders/wechat-web": "^1.0",

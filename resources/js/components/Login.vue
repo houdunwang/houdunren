@@ -41,17 +41,19 @@
           </label>
         </div>
       </div>
-      <div class="card-footer text-muted d-flex justify-content-between">
-        <div>
-          <button type="submit" class="btn btn-success btn-sm">登录帐号</button>
-        </div>
-        <div>
-          <slot name="footer"></slot>
-          <a href="/auth/register">注册</a>
-          |
-          <a href="/auth/forget">找回密码</a>
-          |
-          <a href="/">网站首页</a>
+      <div class="card-footer text-muted">
+        <div class="d-flex justify-content-between">
+          <div>
+            <button type="submit" class="btn btn-success btn-sm">登录帐号</button>
+          </div>
+          <div class="smalla">
+            <slot name="footer"></slot>
+            <a href="/auth/register">注册</a>
+            |
+            <a href="/auth/forget">找回密码</a>
+            |
+            <a href="/">首页</a>
+          </div>
         </div>
       </div>
     </div>

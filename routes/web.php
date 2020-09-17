@@ -107,7 +107,7 @@ Route::any('wechat/bind/{model}', 'WeChatApi\ApiController@handle')
   ->name('houdunren.wechat')
   ->middleware('front');
 
-Route::group(['prefix' => 'site/wechat/{site}', 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'system']], function () {
+Route::group(['prefix' => 'site/wechat/{site}', 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth']], function () {
   Route::resource('wechat', 'WeChatController');
   Route::get('wechat/default/{wechat}', 'DefaultController@edit')->name('wechat.default.edit');
   Route::put('wechat/default/{wechat}', 'DefaultController@update')->name('wechat.default.update');

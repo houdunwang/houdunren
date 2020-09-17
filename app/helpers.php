@@ -86,3 +86,8 @@ function is_master()
     }
     return false;
 }
+
+function is_wechat()
+{
+    return isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false);
+}

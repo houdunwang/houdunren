@@ -3,10 +3,10 @@
 @section('content')
 @include('admin.nav')
 
+@if ($roles->count())
 <form action="{{ route('site.admin.role.update',[$site,$user]) }}" method="post">
     @csrf
     @method("PUT")
-
     <div class="card mt-3">
         <div class="card-header">
             角色设置
@@ -29,5 +29,12 @@
 
     <button class="btn btn-primary mt-3">保存</button>
 </form>
+@else
+<div class="p-3 border text-center mt-3 text-secondary">
+    <i class="fa fa-info-circle" aria-hidden="true"></i>
+    请先添加 <a href="{{ route('site.role.create',$site) }}" class="font-weight-bold">站点角色</a>
+</div>
+@endif
+
 
 @endsection

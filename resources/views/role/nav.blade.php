@@ -10,7 +10,9 @@
     <a class="nav-link {{ active_class(if_route('site.role.create'))}}" href="{{ route('site.role.create',$site) }}">
         添加角色
     </a>
-
+    <a class="nav-link" href="{{ route('site.admin.index',$site) }}">
+        设置管理员
+    </a>
     @if(if_route('site.role.edit'))
     <a class="nav-link active" href="#">
         编辑角色

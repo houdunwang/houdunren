@@ -4,19 +4,20 @@ namespace App\Http\Middleware;
 
 use Closure;
 use App\Models\Config;
+use Auth;
 
 class SystemMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next)
-    {
-        config(['admin' => Config::find(1)->config]);
-        return $next($request);
+  public function handle($request, Closure $next)
+  {
+    config(['admin' => Config::find(1)->config]);
+
+    if (Auth::id() != 1) {
+      return redirect()
+        ->route('site.site.index')
+        ->with('danger', '你没有操作权限');
     }
+
+    return $next($request);
+  }
 }

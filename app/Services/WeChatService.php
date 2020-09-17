@@ -9,6 +9,10 @@ use App\Models\WeChatRule;
 
 class WeChatService
 {
+  public function wechatWebLogin()
+  {
+  }
+
   public function config(int $id)
   {
     config(['houdunren.wechat' => WeChat::find($id)]);

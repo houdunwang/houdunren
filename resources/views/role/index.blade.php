@@ -3,6 +3,7 @@
 @section('content')
 
 @include('role.nav')
+
 @if($roles->count())
 <div class="table-responsive mt-3">
     <table class="table table-bordered shadow-sm">
@@ -29,13 +30,10 @@
                             class="btn btn-outline-danger">删除</btn-del>
                         <a href="{{ route('site.permission.edit',[$site->id,$role['id']]) }}"
                             class="btn btn-outline-primary">权限设置</a>
-
                     </div>
                 </td>
             </tr>
             @endforeach
-
-
         </tbody>
     </table>
 </div>

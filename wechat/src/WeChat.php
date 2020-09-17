@@ -16,24 +16,38 @@ class WeChat
 
   protected $api = 'https://api.weixin.qq.com/cgi-bin';
 
-  public function init()
+  protected static $config;
+
+  protected static $message;
+
+  public function init($config)
   {
+    $this->config($config);
     $this->bind();
     $this->message();
     return $this;
+  }
+
+  public function config($data)
+  {
+    if (is_string($data)) {
+      return self::$config[$data] ?? null;
+    } else {
+      self::$config = $data;
+    }
   }
 
   public function message()
   {
     $content = file_get_contents('php://input');
     if ($content) {
-      return $this->message = simplexml_load_string($content);
+      self::$message = simplexml_load_string($content);
     }
   }
 
   public function token()
   {
-    $url = $this->api . '/token?grant_type=client_credential&appid=' . config('houdunren.wechat.appID') . '&secret=' . config('houdunren.wechat.appsecret');
+    $url = $this->api . '/token?grant_type=client_credential&appid=' . $this->config('appID') . '&secret=' . $this->config('appsecret');
 
     $cacheName = 'wechat-token-' . md5($url);
 
@@ -58,7 +72,7 @@ class WeChat
       $timestamp = $_GET['timestamp'];
       $nonce = $_GET['nonce'];
 
-      $token = config('houdunren.wechat.token');
+      $token = $this->config('token');
       $tmpArr = [$token, $timestamp, $nonce];
       sort($tmpArr, SORT_STRING);
       $tmpStr = implode($tmpArr);
@@ -73,9 +87,9 @@ class WeChat
   public function __get($name)
   {
     if ($name === 'message') {
-      return $this->message();
+      return self::$message;
     }
-    return $this->message->$name ?? null;
+    return self::$message[$name] ?? null;
   }
 
   protected function return($response)
