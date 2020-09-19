@@ -42,7 +42,7 @@ class WeChat
     $content = file_get_contents('php://input');
 
     if ($content) {
-      self::$message = simplexml_load_string($content);
+      self::$message = @simplexml_load_string($content);
     }
   }
 
@@ -53,14 +53,11 @@ class WeChat
     $cacheName = 'wechat-token-' . md5($url);
 
     if (!Cache::has($cacheName)) {
-      $response = Http::get($url)
-        ->throw()
-        ->json();
-
-      if (isset($response['errcode'])) {
-        throw new Exception($response['errmsg']);
-      }
-
+      $response = $this->return(
+        Http::get($url)
+          ->throw()
+          ->json()
+      );
       Cache::put($cacheName, $response['access_token'], now()->addSecond($response['expires_in']));
     }
     return Cache::get($cacheName);
