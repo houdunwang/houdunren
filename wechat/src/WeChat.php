@@ -40,6 +40,7 @@ class WeChat
   public function message()
   {
     $content = file_get_contents('php://input');
+
     if ($content) {
       self::$message = simplexml_load_string($content);
     }
@@ -94,8 +95,9 @@ class WeChat
 
   protected function return($response)
   {
+    $errors = include __DIR__ . '/data/errors.php';
     if (isset($response['errcode']) && $response['errcode'] != 0) {
-      throw new Exception($response['errmsg']);
+      throw new Exception($errors[$response['errcode']] ?? $response['errmsg']);
     }
     return $response;
   }

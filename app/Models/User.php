@@ -110,6 +110,6 @@ class User extends Authenticatable
 
   public function wechatUser()
   {
-    return $this->hasOne(WeChatUser::class, 'user_id');
+    return $this->hasMany(WeChatUser::class, 'user_id');
   }
 }

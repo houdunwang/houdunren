@@ -9,13 +9,14 @@
                         <img src="{{ $image['content']['pic'] }}" class="card-img-top" />
                     </div>
                     <div class="card-body text-center">
-                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                            <a href="{{ route('wechat.material.edit',$image) }}" class="btn btn-outline-info">编辑</a>
-                            <a href="{{ route('wechat.material.edit',$image) }}" class="btn btn-primary">预览</a>
-                            <btn-del action="{{ route('wechat.material.destroy',$image) }}"
-                                class="btn btn-outline-secondary">删除
-                            </btn-del>
-                        </div>
+                        <a href="{{ route('wechat.material.edit',$image) }}" class="btn btn-outline-info btn-sm">编辑</a>
+                        <wechat-user title="预览" v-slot="{user}" class="d-inline">
+                            <a :href="`/wechat/material/preview/`+user.wechat_user[0].openid+'/'+{{ $image['id'] }}"
+                                class="btn btn-info btn-sm">发送预览</a>
+                        </wechat-user>
+                        <btn-del action="{{ route('wechat.material.destroy',$image) }}"
+                            class="btn btn-outline-secondary btn-sm">删除
+                        </btn-del>
                     </div>
                 </div>
             </div>

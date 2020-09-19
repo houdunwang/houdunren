@@ -19,4 +19,8 @@ class WeChatMaterial extends BaseModel
   {
     return $this->belongsTo(WeChatRule::class, 'rule_id');
   }
+  public function wechat()
+  {
+    return $this->belongsTo(WeChat::class, 'wechat_id');
+  }
 }

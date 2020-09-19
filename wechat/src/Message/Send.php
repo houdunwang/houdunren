@@ -6,9 +6,9 @@ use Log;
 
 trait Send
 {
-    public function text(string $content)
-    {
-        $xml = <<<php
+  public function text(string $content)
+  {
+    $xml = <<<php
         <xml>
   <ToUserName><![CDATA[%s]]></ToUserName>
   <FromUserName><![CDATA[%s]]></FromUserName>
@@ -18,12 +18,12 @@ trait Send
 </xml>
 php;
 
-        return sprintf($xml, $this->FromUserName, $this->ToUserName, time(), $content);
-    }
+    return sprintf($xml, $this->FromUserName, $this->ToUserName, time(), $content);
+  }
 
-    public function news(array $data)
-    {
-        $xml = <<<php
+  public function news(array $data)
+  {
+    $xml = <<<php
         <xml>
         <ToUserName><![CDATA[%s]]></ToUserName>
         <FromUserName><![CDATA[%s]]></FromUserName>
@@ -36,8 +36,8 @@ php;
       </xml>
 php;
 
-        $news = '';
-        $articleXml = <<<xml
+    $news = '';
+    $articleXml = <<<xml
         <item>
         <Title><![CDATA[%s]]></Title>
         <Description><![CDATA[%s]]></Description>
@@ -45,9 +45,9 @@ php;
         <Url><![CDATA[%s]]></Url>
       </item>
 xml;
-        foreach ($data as $article) {
-            $news .= sprintf($articleXml, $article['title'], $article['description'], $article['picurl'], $article['url']);
-        }
-        return  sprintf($xml, $this->FromUserName, $this->ToUserName, time(), count($data), $news);
+    foreach ($data as $article) {
+      $news .= sprintf($articleXml, $article['title'], $article['description'], $article['picurl'], $article['url']);
     }
+    return sprintf($xml, $this->FromUserName, $this->ToUserName, time(), count($data), $news);
+  }
 }

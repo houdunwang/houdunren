@@ -5,7 +5,10 @@ namespace App\Http\Controllers\WeChat;
 use App\Http\Controllers\Controller;
 use App\Models\WeChatMaterial;
 use App\Services\WeChatService;
+use Exception;
 use Houdunwang\WeChat\Material;
+use Houdunwang\WeChat\SendAll;
+use Houdunwang\WeChat\SendAllPreview;
 use Illuminate\Http\Request;
 
 class MaterialController extends Controller
@@ -14,7 +17,7 @@ class MaterialController extends Controller
   {
     $type = $request->query('type', 'image');
 
-    $materials = WeChatMaterial::site()->paginate(1);
+    $materials = WeChatMaterial::site()->paginate();
 
     return view('wechat.material.index', compact('materials', 'type'));
   }
@@ -76,5 +79,16 @@ class MaterialController extends Controller
     $material->delete();
 
     return response()->json(['message' => '图文素材删除成功']);
+  }
+
+  public function preview(Request $request, $openid, WeChatMaterial $material, SendAllPreview $sendAllPreview, WeChatService $weChatService)
+  {
+    $weChatService->config($material->wechat_id);
+    try {
+      call_user_func_array([$sendAllPreview, $material['type']], [$openid, $material['media_id']]);
+      return back()->with('success', '素材预览发送成功');
+    } catch (Exception $e) {
+      return back()->with('danger', $e->getMessage());
+    }
   }
 }

@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class WeChatUser extends Model
 {
-  protected $table = 'we_chat_users';
+    protected $table = 'we_chat_users';
 
-  protected $fillable = ['user_id', 'site_id', 'openid', 'unionid'];
+    protected $fillable = ['user_id', 'site_id', 'openid', 'unionid', 'type', 'wechat_id'];
 
-  public function user()
-  {
-    return $this->belongsTo(User::class, 'user_id');
-  }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
