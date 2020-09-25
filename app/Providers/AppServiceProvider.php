@@ -22,9 +22,10 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        if ($this->app->environment() !== 'production') {
-            $this->app->register(TelescopeServiceProvider::class);
 
+        if ($this->app->isLocal()) {
+            $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
+            $this->app->register(TelescopeServiceProvider::class);
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
 

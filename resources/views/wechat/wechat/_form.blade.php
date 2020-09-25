@@ -12,8 +12,23 @@
             value="{{ $wechat['type']??'subscribe' }}">
         </x-form>
         <x-form title="原始ID" name="wechat_id" value="{{ $wechat['wechat_id']??'' }}"></x-form>
-        <x-form title="appID" name="appID" value="{{ $wechat['appID']??'' }}"></x-form>
-        <x-form title="appsecret" name="appsecret" value="{{ $wechat['appsecret']??'' }}"></x-form>
+        <div class="form-group">
+            <label for="appID">appID</label>
+            <input type="text" class="form-control {{ $errors->has('appID')?'is-invalid':'' }}" name="appID"
+                value="{{ old('appID',$wechat['appID']??'') }}" {{  $wechat['appID']?'disabled':''}}>
+            @error('appID')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="appID">appsecret</label>
+            <input type="text" class="form-control {{ $errors->has('appsecret')?'is-invalid':'' }}" name="appsecret"
+                value="{{ old('appsecret',$wechat['appsecret']??'') }}" {{  $wechat['appsecret']?'disabled':''}}>
+            @error('appsecret')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
+        </div>
     </div>
 </div>
 

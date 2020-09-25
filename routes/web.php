@@ -30,6 +30,7 @@ Route::get('admin', 'Site\SiteController@index')
 
 Route::group(['prefix' => 'common', 'namespace' => 'Common', 'as' => 'common.'], function () {
   Route::post('upload/make', 'UploadController@make')->name('upload.make');
+  Route::post('upload/wangEditor', 'UploadController@wangEditor')->name('upload.wangEditor');
   Route::get('favorite/{model}/{id}/{module?}', 'FavoriteController@make')
     ->name('favorite')
     ->middleware('auth');

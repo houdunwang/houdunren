@@ -2,22 +2,18 @@
 
 @section('content')
 @include('wechat.material.nav')
-
-{{-- <form action="{{ route('wechat.material.store') }}" method="post"> --}}
+<wang-editor></wang-editor>
 @csrf
 @switch($type)
 
 @case('image')
 <chat-material-image></chat-material-image>
 @break
-@case(2)
-
+@case('voice')
+<chat-material-voice></chat-material-voice>
 @break
 @default
 
 @endswitch
-
-
-{{-- </form> --}}
 
 @endsection

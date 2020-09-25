@@ -16,6 +16,6 @@ return [
     'title' => '微信素材',
     'icon' => 'fab fa-weixin',
     'show' => true,
-    'items' => [['title' => '图片素材', 'permission' => 'wechat.material', 'url' => route('wechat.material.index', ['type' => 'image'])]],
+    'items' => [['title' => '图片素材', 'permission' => 'wechat.material', 'url' => route('wechat.material.index', ['type' => 'image'])], ['title' => '音频素材', 'permission' => 'wechat.material', 'url' => route('wechat.material.index', ['type' => 'voice'])]],
   ],
 ];

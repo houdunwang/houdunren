@@ -8,7 +8,8 @@
 @case('image')
 <chat-material-image :id="{{ $material['id'] }}"></chat-material-image>
 @break
-@case('article')
+@case('voice')
+<chat-material-voice :id="{{ $material['id'] }}"></chat-material-voice>
 @break
 @default
 @endswitch

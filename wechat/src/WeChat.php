@@ -35,6 +35,7 @@ class WeChat
     } else {
       self::$config = $data;
     }
+    return $this;
   }
 
   public function message()

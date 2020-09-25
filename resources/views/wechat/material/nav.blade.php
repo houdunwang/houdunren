@@ -1,10 +1,10 @@
 <nav class="nav nav-tabs mb-3">
-    <a class="nav-link {{ active_class(if_route('wechat.material.create') &&$type=='image')}}"
+    <a class="nav-link {{ active_class(if_route('wechat.material.index') && $type=='image')}}"
         href="{{ route('wechat.material.index',['type'=>'image']) }}">
         图片素材
     </a>
-    <a class="nav-link {{ active_class(if_route('wechat.news.index'))}}"
-        href="{{ route('wechat.material.index',['type'=>'music']) }}">
+    <a class="nav-link {{ active_class(if_route('wechat.material.index' && $type=='voice'))}}"
+        href="{{ route('wechat.material.index',['type'=>'voice']) }}">
         音频素材
     </a>
     <a class="nav-link {{ active_class(if_route('wechat.news.index'))}}"

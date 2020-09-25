@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\Controller;
 use App\Http\Requests\WeChatRequest;
 use App\Models\Site;
 use App\Models\WeChat;
+use Exception;
+use Houdunwang\WeChat\Message;
 use Illuminate\Http\Request;
 
 class WeChatController extends Controller
@@ -21,18 +23,25 @@ class WeChatController extends Controller
     return view('wechat.wechat.index', compact('site', 'wechats'));
   }
 
-  public function create(Site $site)
+  public function create(Site $site, WeChat $wechat)
   {
-    return view('wechat.wechat.create', compact('site'));
+    return view('wechat.wechat.create', compact('site', 'wechat'));
   }
 
-  public function store(WeChatRequest $request, Site $site, WeChat $weChat)
+  public function store(WeChatRequest $request, Site $site, WeChat $weChat, Message $message)
   {
+    // try {
+    $message->config($request->all())->token();
     $weChat->site_id = $site->id;
     $weChat->fill($request->all())->save();
     return redirect()
       ->route('wechat.wechat.index', $site)
       ->with('success', '公众号添加成功');
+    // } catch (Exception $e) {
+    //   return back()
+    //     ->withInput()
+    //     ->with('danger', 'appID或appsecret配置错误');
+    // }
   }
 
   public function edit(Site $site, WeChat $wechat)

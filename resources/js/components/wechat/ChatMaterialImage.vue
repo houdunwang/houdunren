@@ -8,7 +8,7 @@
           <label>素材说明</label>
           <input type="text" class="form-control" v-model="content.title" />
         </div>
-        <image-single-upload :value.sync="content.pic"></image-single-upload>
+        <image-single-upload :value.sync="content.url"></image-single-upload>
         <div class="btn-group mt-3" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-primary" @click.prevent="submit">保存提交</button>
           <a href="/wechat/material?type=image" class="btn btn-outline-secondary">返回图片素材列表</a>
@@ -31,7 +31,7 @@ export default {
     return {
       wechat_id: 0,
       content: {
-        pic: '',
+        url: '',
       },
     }
   },
@@ -54,7 +54,7 @@ export default {
       if (this.content.title.trim() == '') {
         msg = '素材说明不能为空'
       }
-      if (this.content.pic.trim() == '') {
+      if (this.content.url.trim() == '') {
         msg = '请选择图片'
       }
       if (msg) {

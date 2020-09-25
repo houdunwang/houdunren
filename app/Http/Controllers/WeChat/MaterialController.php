@@ -17,7 +17,9 @@ class MaterialController extends Controller
   {
     $type = $request->query('type', 'image');
 
-    $materials = WeChatMaterial::site()->paginate();
+    $materials = WeChatMaterial::site()
+      ->where('type', $type)
+      ->paginate();
 
     return view('wechat.material.index', compact('materials', 'type'));
   }
@@ -34,7 +36,7 @@ class MaterialController extends Controller
     $weChatService->config($request->wechat_id);
     $type = $request->query('type', 'image');
 
-    $image = $material->add('image', $request->input('content.pic'));
+    $image = $material->add('image', $request->input('content.url'));
     $weChatMaterial->wechat_id = $request->wechat_id;
     $weChatMaterial->media_id = $image['media_id'];
     $weChatMaterial->info = $image;
@@ -54,7 +56,7 @@ class MaterialController extends Controller
 
   public function edit(Request $request, WeChatMaterial $material)
   {
-    $type = $request->query('type', 'image');
+    $type = $material->type;
     return view('wechat.material.edit', compact('type', 'material'));
   }
 
@@ -62,7 +64,7 @@ class MaterialController extends Controller
   {
     $weChatService->config($request->wechat_id);
 
-    $image = $materialPackage->add('image', $request->input('content.pic'));
+    $image = $materialPackage->add('image', $request->input('content.url'));
     $material->wechat_id = $request->wechat_id;
     $material->media_id = $image['media_id'];
     $material->info = $image;
@@ -81,11 +83,11 @@ class MaterialController extends Controller
     return response()->json(['message' => '图文素材删除成功']);
   }
 
-  public function preview(Request $request, $openid, WeChatMaterial $material, SendAllPreview $sendAllPreview, WeChatService $weChatService)
+  public function preview(Request $request, $openid, WeChatMaterial $material, WeChatService $weChatService, Material $materialPackage)
   {
     $weChatService->config($material->wechat_id);
     try {
-      call_user_func_array([$sendAllPreview, $material['type']], [$openid, $material['media_id']]);
+      call_user_func_array([$materialPackage, $material['type']], [$openid, $material['media_id']]);
       return back()->with('success', '素材预览发送成功');
     } catch (Exception $e) {
       return back()->with('danger', $e->getMessage());
