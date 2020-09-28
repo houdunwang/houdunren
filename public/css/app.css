@@ -18472,6 +18472,10 @@ body {
   display: none;
 }
 
+audio {
+  outline: none;
+}
+
 .account {
   height: 100vh;
   width: 100vw;
@@ -18562,5 +18566,102 @@ body {
 
 .wechat-material-index .pagination {
   margin-bottom: 0px !important;
+}
+
+.wechat-news div {
+  box-sizing: border-box;
+  border: solid 4px transparent;
+}
+
+.wechat-news div.active {
+  border: solid 4px #16a085 !important;
+}
+
+.wechat-news div > h2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wechat-news div:first-of-type {
+  position: relative;
+  padding: 0;
+  cursor: pointer;
+}
+
+.wechat-news div:first-of-type img {
+  width: 100%;
+  height: auto;
+  max-height: 160px;
+}
+
+.wechat-news div:first-of-type h2 {
+  position: absolute;
+  bottom: 0px;
+  text-align: center;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 0;
+  right: 0;
+  font-size: 1rem;
+  padding: 10px 5px;
+  color: white;
+  margin-bottom: 0;
+}
+
+.wechat-news div:nth-of-type(n + 2) {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  padding: 6px 0;
+  cursor: pointer;
+  position: relative;
+  border-bottom: solid 1px #dcdcdc;
+}
+
+.wechat-news div:nth-of-type(n + 2) h2 {
+  flex-grow: 1;
+  padding: 5px;
+  font-size: 14px;
+  align-items: center;
+  text-indent: 1rem;
+  margin-bottom: 0;
+  color: #777;
+  font-weight: normal;
+  line-height: 1.5rem;
+}
+
+.wechat-news div:nth-of-type(n + 2) img {
+  width: 50px;
+  height: 50px;
+  margin-right: 5px;
+  border: solid 1px #ddd;
+}
+
+.module-admin .bg-gradient-primary {
+  background-color: #38527d !important;
+  background-image: linear-gradient(180deg, #38527d 10%, #233758 100%) !important;
+}
+
+.module-admin .nav-tabs .nav-link {
+  margin-right: 0.3rem;
+  margin-bottom: -1px;
+  color: #999;
+  font-weight: normal;
+  border: 1px solid #eaeaea !important;
+  border-top-left-radius: 0.35rem;
+  border-top-right-radius: 0.35rem;
+  font-size: 0.95rem;
+}
+
+.module-admin .nav-tabs .nav-link:hover {
+  color: #1890ff;
+}
+
+.module-admin .nav-tabs .nav-link.active {
+  border: 1px solid #eaeaea !important;
+  border-bottom: none !important;
+  color: #1890ff;
+  font-weight: bold;
 }
 

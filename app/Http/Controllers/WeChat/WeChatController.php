@@ -30,18 +30,18 @@ class WeChatController extends Controller
 
   public function store(WeChatRequest $request, Site $site, WeChat $weChat, Message $message)
   {
-    // try {
-    $message->config($request->all())->token();
-    $weChat->site_id = $site->id;
-    $weChat->fill($request->all())->save();
-    return redirect()
-      ->route('wechat.wechat.index', $site)
-      ->with('success', '公众号添加成功');
-    // } catch (Exception $e) {
-    //   return back()
-    //     ->withInput()
-    //     ->with('danger', 'appID或appsecret配置错误');
-    // }
+    try {
+      $message->config($request->all())->token();
+      $weChat->site_id = $site->id;
+      $weChat->fill($request->all())->save();
+      return redirect()
+        ->route('wechat.wechat.index', $site)
+        ->with('success', '公众号添加成功');
+    } catch (Exception $e) {
+      return back()
+        ->withInput()
+        ->with('danger', 'appID或appsecret配置错误');
+    }
   }
 
   public function edit(Site $site, WeChat $wechat)

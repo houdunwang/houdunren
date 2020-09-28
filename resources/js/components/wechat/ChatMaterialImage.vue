@@ -1,6 +1,6 @@
 <template>
   <div>
-    <chat-list :id.sync="wechat_id"></chat-list>
+    <chat-list :id.sync="wechat_id" v-if="!id"></chat-list>
     <div class="card" v-if="wechat_id">
       <div class="card-header">上传图片素材</div>
       <div class="card-body">
@@ -8,7 +8,7 @@
           <label>素材说明</label>
           <input type="text" class="form-control" v-model="content.title" />
         </div>
-        <image-single-upload :value.sync="content.url"></image-single-upload>
+        <image-upload :value.sync="content.url"></image-upload>
         <div class="btn-group mt-3" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-primary" @click.prevent="submit">保存提交</button>
           <a href="/wechat/material?type=image" class="btn btn-outline-secondary">返回图片素材列表</a>

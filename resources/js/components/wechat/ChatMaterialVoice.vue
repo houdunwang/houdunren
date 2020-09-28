@@ -1,6 +1,7 @@
 <template>
   <div>
-    <chat-list :id.sync="wechat_id"></chat-list>
+    <chat-list :id.sync="wechat_id" v-if="!id"></chat-list>
+
     <div class="card" v-if="wechat_id">
       <div class="card-header">上传音频素材</div>
       <div class="card-body">

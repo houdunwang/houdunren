@@ -13,7 +13,6 @@ class ConfigController extends Controller
     {
         return view('config.edit');
     }
-
     public function update(Request $request)
     {
         Config::updateOrCreate(['id' => 1], ['config' => $request->except(['_token', '_method'])]);
@@ -24,7 +23,6 @@ class ConfigController extends Controller
     public function upload(Request $request, UploadService $UploadService)
     {
         $request->validate(['file' => ['required', 'mimes:jpeg,png', 'max:1000']]);
-
         return $UploadService->image($request->file);
     }
 }

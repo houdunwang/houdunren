@@ -4,20 +4,9 @@
       <div class="card">
         <div class="card-header">
           <div class="input-group mb-3">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="请输入邮箱、手机或用户编号"
-              v-model="name"
-              @keyup.enter="get"
-            />
+            <input type="text" class="form-control" placeholder="请输入邮箱、手机或用户编号" v-model="name" @keyup.enter="get" />
             <div class="input-group-append">
-              <a
-                href="javascript:;"
-                class="input-group-text"
-                id="basic-addon2"
-                @click.prevent="get"
-              >搜索用户</a>
+              <a href="javascript:;" class="input-group-text" id="basic-addon2" @click.prevent="get">搜索用户</a>
             </div>
           </div>
         </div>
@@ -49,7 +38,7 @@
       </div>
     </el-dialog>
 
-    <button class="btn btn-info btn-sm" @click="get">{{title}}</button>
+    <button class="btn btn-info btn-sm" @click="get">{{ title }}</button>
   </div>
 </template>
 
@@ -57,6 +46,7 @@
 export default {
   props: {
     title: { default: '选择用户' },
+    id: { type: Number, required: true },
   },
   data() {
     return {
@@ -71,7 +61,7 @@ export default {
     },
     get() {
       this.axios
-        .post(`wechat/user/search`, {
+        .post(`wechat/user/search/${this.id}`, {
           name: this.name,
         })
         .then((response) => {

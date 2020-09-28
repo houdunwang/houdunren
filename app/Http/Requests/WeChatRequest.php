@@ -24,13 +24,14 @@ class WeChatRequest extends FormRequest
    */
   public function rules()
   {
+    // dd(request()->wechat->toArray());
     return [
       'title' => ['required'],
       'introduce' => ['required'],
       'token' => ['required'],
       'type' => ['required'],
-      'appID' => ['required', Rule::unique('we_chats')->ignore(request()->appID)],
-      'appsecret' => ['required', Rule::unique('we_chats')->ignore(request()->appsecret)],
+      'appID' => ['required', Rule::unique('we_chats')->ignore(request()->wechat)],
+      'appsecret' => ['required', Rule::unique('we_chats')->ignore(request()->wechat)],
     ];
   }
 }

@@ -11,3 +11,67 @@
     margin-bottom: 0px !important;
   }
 }
+
+.wechat-news {
+  div {
+    box-sizing: border-box;
+    border: solid 4px transparent;
+    &.active {
+      border: solid 4px #16a085 !important;
+    }
+    > h2 {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    &:first-of-type {
+      position: relative;
+      padding: 0;
+      cursor: pointer;
+      img {
+        width: 100%;
+        height: auto;
+        max-height: 160px;
+      }
+      h2 {
+        position: absolute;
+        bottom: 0px;
+        text-align: center;
+        display: block;
+        background-color: rgba(0, 0, 0, 0.5);
+        left: 0;
+        right: 0;
+        font-size: 1rem;
+        padding: 10px 5px;
+        color: white;
+        margin-bottom: 0;
+      }
+    }
+    &:nth-of-type(n + 2) {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      padding: 6px 0;
+      cursor: pointer;
+      position: relative;
+      border-bottom: solid 1px #dcdcdc;
+      h2 {
+        flex-grow: 1;
+        padding: 5px;
+        font-size: 14px;
+        align-items: center;
+        text-indent: 1rem;
+        margin-bottom: 0;
+        color: #777;
+        font-weight: normal;
+        line-height: 1.5rem;
+      }
+      img {
+        width: 50px;
+        height: 50px;
+        margin-right: 5px;
+        border: solid 1px #ddd;
+      }
+    }
+  }
+}

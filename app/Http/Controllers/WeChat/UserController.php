@@ -6,19 +6,21 @@ use App\Http\Controllers\Auth\Controller;
 use App\Models\WeChatUser;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\WeChat;
 
 class UserController extends Controller
 {
-  public function search(Request $request)
+  public function search(Request $request, WeChat $wechat)
   {
-    $users = User::whereHas('wechatUser', function ($query) use ($request) {
-      $query->where('site_id', site()['id'])->where('wechat_id', $request->input('wechat_id', 1));
+    $users = User::whereHas('wechatUser', function ($query) use ($wechat) {
+      $query->where('site_id', site()['id'])->where('wechat_id', $wechat['id']);
     })
       ->with('wechatUser')
       ->limit(10)
       ->get();
     return $users;
   }
+
   public function index()
   {
   }

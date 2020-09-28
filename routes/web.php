@@ -31,6 +31,7 @@ Route::get('admin', 'Site\SiteController@index')
 Route::group(['prefix' => 'common', 'namespace' => 'Common', 'as' => 'common.'], function () {
   Route::post('upload/make', 'UploadController@make')->name('upload.make');
   Route::post('upload/wangEditor', 'UploadController@wangEditor')->name('upload.wangEditor');
+  Route::post('upload/wangEditorMaterialNewsUpload/{wechat}', 'UploadController@wangEditorMaterialNewsUpload')->name('upload.wangEditorMaterialNewsUpload');
   Route::get('favorite/{model}/{id}/{module?}', 'FavoriteController@make')
     ->name('favorite')
     ->middleware('auth');
@@ -125,5 +126,5 @@ Route::group(['prefix' => 'wechat', 'namespace' => 'WeChat', 'as' => 'wechat.', 
   Route::get('rule/wechat', 'RuleController@wechat');
   Route::resource('rule', 'RuleController')->only(['show', 'destroy']);
   Route::post('rule/check-keyword', 'RuleController@checkKeyword')->name('rule.keyword.check');
-  Route::post('user/search', 'UserController@search')->name('user.search');
+  Route::post('user/search/{wechat}', 'UserController@search')->name('user.search');
 });

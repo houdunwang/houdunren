@@ -14,6 +14,7 @@
     "axios": "^0.19",
     "bootstrap": "^4.0.0",
     "cross-env": "^7.0",
+    "eslint": "^7.10.0",
     "jquery": "^3.2",
     "laravel-mix": "^5.0.1",
     "lodash": "^4.17.13",
@@ -35,5 +36,22 @@
     "vuedraggable": "^2.24.1",
     "vuex": "^3.4.0",
     "wangeditor": "^3.1.1"
-  }
+  },
+  "name": "hdcms",
+  "description": "基于 Laravel 框架重构的 PC、WAP、微信公众号、微信小程序多应用平台。",
+  "version": "7.0.0",
+  "main": "webpack.mix.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/houdunwang/hdcms.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/houdunwang/hdcms/issues"
+  },
+  "homepage": "https://github.com/houdunwang/hdcms#readme"
 }

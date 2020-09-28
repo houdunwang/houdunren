@@ -1,16 +1,28 @@
 <template>
   <div id="editor"></div>
 </template>
+
 <script>
 import wangEditor from 'wangEditor'
 export default {
   props: {
     uploadImgServer: { type: String, default: '/common/upload/wangEditor' },
+    value: { type: String, default: '' },
   },
+
   data() {
     return {
       editor: null,
     }
+  },
+  watch: {
+    value: {
+      handler(n) {
+        this.value = n
+        if (this.editor) this.editor.txt.html(n)
+      },
+      immediate: true,
+    },
   },
   mounted() {
     this.editor = new wangEditor('#editor')
@@ -21,6 +33,8 @@ export default {
     this.editor.customConfig.uploadImgHooks = this.uploadHandle
     this.editor.customConfig.showLinkImg = false
     this.editor.customConfig.debug = true
+    this.editor.customConfig.onchange = this.updateContent
+    this.editor.customConfig.zIndex = 100
     this.editor.customConfig.uploadImgHeaders = {
       'X-CSRF-TOKEN': document.querySelector("meta[name='csrf-token']").content,
       Accept: 'application/json',
@@ -50,6 +64,9 @@ export default {
     this.editor.create()
   },
   methods: {
+    updateContent(html) {
+      this.$emit('update:value', this.editor.txt.html())
+    },
     uploadHandle() {
       return {
         before: function (xhr, editor, files) {},
@@ -65,4 +82,5 @@ export default {
   },
 }
 </script>
+
 <style lang="scss"></style>

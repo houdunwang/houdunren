@@ -15,10 +15,13 @@ class CodeController extends Controller
 
     public function email(Request $request, CodeService $codeService)
     {
-        $request->validate([
-            'email' => ['required', 'email'],
-            'captcha' => ['required', 'captcha'],
-        ], ['code.required' => '验证码不能为空']);
+        $request->validate(
+        [
+        'email' => ['required', 'email'],
+        'captcha' => ['required', 'captcha'],
+      ],
+        ['code.required' => '验证码不能为空']
+    );
 
         $codeService->email($request->email);
 
@@ -27,10 +30,13 @@ class CodeController extends Controller
 
     public function mobile(Request $request, CodeService $codeService)
     {
-        $request->validate([
-            'mobile' => ['required', 'regex:/1\d{10}/'],
-            'captcha' => ['required', 'captcha'],
-        ], ['code.required' => '验证码不能为空', 'mobile.regex' => '手机号格式错误']);
+        $request->validate(
+        [
+        'mobile' => ['required', 'regex:/1\d{10}/'],
+        'captcha' => ['required', 'captcha'],
+      ],
+        ['code.required' => '验证码不能为空', 'mobile.regex' => '手机号格式错误']
+    );
 
         $codeService->mobile($request->mobile);
 

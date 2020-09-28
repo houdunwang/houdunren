@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
-use App\Services\UploadService;
+use App\Models\WeChat;
+use Houdunwang\WeChat\Material;
 use Illuminate\Http\Request;
+use App\Services\UploadService;
 
 class UploadController extends Controller
 {
@@ -28,6 +30,20 @@ class UploadController extends Controller
     return json_encode([
       'errno' => 0,
       'data' => [$file->path],
+    ]);
+  }
+
+  /**
+   * wangEditor编辑器上传微信图文消息图片
+   */
+  public function wangEditorMaterialNewsUpload(Request $request, WeChat $wechat, Material $material, UploadService $uploadService)
+  {
+    $file = $uploadService->make($request->file);
+    $image = $material->config($wechat)->uploadNewsImage($file->path);
+
+    return \json_encode([
+      'errno' => 0,
+      'data' => [$image['url']],
     ]);
   }
 }

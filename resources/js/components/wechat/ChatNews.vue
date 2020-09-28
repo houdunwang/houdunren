@@ -3,21 +3,10 @@
     <div class="d-flex mt-3">
       <div class="border">
         <div class="view">
-          <draggable v-model="news" group="people" @start="drag = true" @end="drag = false">
-            <div
-              v-for="(article, index) in news"
-              :key="index"
-              @click="current = article"
-              :class="{ active: current == article }"
-            >
-              <div class="first" v-show="index == 0">
-                <img :src="article.picurl" />
-                <h2>{{ article.title }}</h2>
-              </div>
-              <div class="item" v-show="index >= 1">
-                <h5>{{ article.title }}</h5>
-                <img :src="article.picurl" alt />
-              </div>
+          <draggable v-model="news" group="people" @start="drag = true" @end="drag = false" class="wechat-news">
+            <div v-for="(article, index) in news" :key="index" @click="current = article" :class="{ active: current == article }">
+              <img :src="article.picurl || (index == 0 ? '/images/nopic480x310.jpg' : '/images/nopic160x160.jpg')" />
+              <h2>{{ article.title || '图文消息标题' }}</h2>
             </div>
           </draggable>
         </div>
@@ -39,7 +28,7 @@
           </div>
         </div>
 
-        <div class>
+        <div>
           <button class="btn btn-outline-danger mt-3" type="button" @click.prevent="del">删除图文消息</button>
         </div>
       </div>
@@ -49,8 +38,13 @@
 </template>
 
 <script>
-import ImageSingleUpload from '../../../../resources/js/components/ImageSingleUpload'
 import draggable from 'vuedraggable'
+const field = {
+  title: '',
+  description: '',
+  picurl: '',
+  url: 'https://',
+}
 export default {
   components: {
     draggable,
@@ -60,8 +54,8 @@ export default {
   },
   data() {
     return {
-      news: [],
-      current: {},
+      news: [Object.assign({}, field)],
+      current: null,
     }
   },
   mounted() {
@@ -84,12 +78,7 @@ export default {
       }
     },
     add() {
-      this.news.push({
-        title: '',
-        description: '',
-        picurl: '/images/nopic.jpg',
-        url: 'https://',
-      })
+      this.news.push(Object.assign({}, field))
       this.current = this.news[this.news.length - 1]
     },
     del() {
@@ -112,57 +101,6 @@ export default {
 
 <style lang="scss">
 .view {
-  width: 400px;
-  div {
-    box-sizing: border-box;
-    border: solid 4px transparent;
-    &.active {
-      border: solid 4px #16a085;
-    }
-  }
-  div.first {
-    position: relative;
-    padding: 0;
-    cursor: pointer;
-    img {
-      width: 100%;
-      height: auto;
-      max-height: 200px;
-    }
-    h2 {
-      position: absolute;
-      bottom: 0px;
-      text-align: center;
-      display: block;
-      background-color: rgba(0, 0, 0, 0.5);
-      left: 0;
-      right: 0;
-      font-size: 1.2rem;
-      padding: 0.5rem 0;
-      color: white;
-    }
-  }
-  div.item {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    cursor: pointer;
-    position: relative;
-
-    h5 {
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      flex-grow: 1;
-      padding: 0 20px;
-    }
-    img {
-      width: 60px;
-      height: 60px;
-    }
-    &:nth-child(even) {
-      border-bottom: solid 1px #f3f3f3;
-    }
-  }
+  width: 350px;
 }
 </style>

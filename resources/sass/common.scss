@@ -12,23 +12,6 @@ body {
 [v-cloak] {
   display: none;
 }
-
-// .nav-tabs {
-//   .nav-link {
-//     background: #fafafa;
-//     border-left: solid 1px #ddd;
-//     border-right: solid 1px #ddd;
-//     border-top: solid 1px #ddd;
-//     border-bottom: solid 1px #ddd !important;
-//     margin-right: 0.3rem;
-//     margin-bottom: -1px;
-//     &:hover {
-//       color: #1890ff;
-//     }
-//     &.active {
-//       border-bottom: none !important;
-//       color: #1890ff;
-//       font-weight: bold;
-//     }
-//   }
-// }
+audio {
+  outline: none;
+}
