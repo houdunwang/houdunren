@@ -7,6 +7,8 @@ use App\Models\WeChatUser;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\WeChat;
+use App\Services\WeChatService;
+use Houdunwang\WeChat\User as HoudunwangWeChatUser;
 
 class UserController extends Controller
 {
@@ -18,34 +20,15 @@ class UserController extends Controller
       ->with('wechatUser')
       ->limit(10)
       ->get();
+
     return $users;
   }
 
-  public function index()
+  public function index(Request $request, WeChat $wechat = null, WechatUser $weChatUser)
   {
-  }
+    $wechat = $wechat ?? site()->wechats()->first();
 
-  public function create()
-  {
-  }
-
-  public function store(Request $request)
-  {
-  }
-
-  public function show(WeChatUser $weChatUser)
-  {
-  }
-
-  public function edit(WeChatUser $weChatUser)
-  {
-  }
-
-  public function update(Request $request, WeChatUser $weChatUser)
-  {
-  }
-
-  public function destroy(WeChatUser $weChatUser)
-  {
+    $users = WeChatUser::where('wechat_id', $wechat['id'])->paginate();
+    return view('wechat.user.index', compact('users', 'wechat'));
   }
 }

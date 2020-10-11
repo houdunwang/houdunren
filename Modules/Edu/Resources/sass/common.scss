@@ -1,28 +1,28 @@
-// a {
-//   text-decoration: none !important;
-//   color: #999;
-// }
-// :root {
-//   font-size: 15px;
-// }
-// [v-cloak] {
-//   display: none;
-// }
-// body {
-//   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif !important;
-//   font-size: 1rem;
-// }
-// .text-blue {
-//   color: #3f81c7 !important;
-//   &:hover {
-//     color: #31557c !important;
-//   }
-// }
-// .card-header,
-// .card-footer {
-//   background: rgba(0, 0, 0, 0.01);
-// }
+a {
+  text-decoration: none !important;
+  color: #999;
+}
+:root {
+  font-size: 15px;
+}
+[v-cloak] {
+  display: none;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif !important;
+  font-size: 1rem;
+}
+.text-blue {
+  color: #3f81c7 !important;
+  &:hover {
+    color: #31557c !important;
+  }
+}
+.card-header,
+.card-footer {
+  background: rgba(0, 0, 0, 0.01);
+}
 
-// .page-link {
-//   color: #999;
-// }
+.page-link {
+  color: #999;
+}

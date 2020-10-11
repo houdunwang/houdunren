@@ -36,6 +36,7 @@ export default {
       },
     }
   },
+
   mounted() {
     if (this.id) {
       this.get(this.id)

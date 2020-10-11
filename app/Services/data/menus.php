@@ -18,4 +18,10 @@ return [
     'show' => true,
     'items' => [['title' => '图片素材', 'permission' => 'wechat.material.image', 'url' => route('wechat.material.index', ['type' => 'image'])], ['title' => '音频素材', 'permission' => 'wechat.material.voice', 'url' => route('wechat.material.index', ['type' => 'voice'])], ['title' => '图文素材', 'permission' => 'wechat.material.news', 'url' => route('wechat.material.index', ['type' => 'news'])]],
   ],
+  [
+    'title' => '微信粉丝',
+    'icon' => 'fas fa-user',
+    'show' => true,
+    'items' => [['title' => '列表粉丝', 'permission' => 'wechat.user.index', 'url' => route('wechat.user.index')]],
+  ],
 ];

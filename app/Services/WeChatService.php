@@ -13,7 +13,13 @@ use Socialite;
 
 class WeChatService
 {
-  public function login(array $account)
+  public function login(array $account): void
+  {
+    $user = $this->saveUser($account)->user;
+    Auth::login($user);
+  }
+
+  public function saveUser(array $account): User
   {
     $unionid = $account['unionid'] ?? null;
     $openid = $account['openid'] ?? null;
@@ -36,9 +42,14 @@ class WeChatService
 
       $wechatUser = WeChatUser::create($data);
     }
+    return $wechatUser->user;
+  }
 
-    Auth::login($wechatUser->user);
-    return $wechatUser;
+  public function batchSaveUsers(array $users)
+  {
+    return collect($users)->map(function ($user) {
+      return $this->saveUser($user);
+    });
   }
 
   public function driver()
@@ -73,7 +84,7 @@ class WeChatService
     }
   }
 
-  public function save($type = 'text', array $options = [])
+  public function saveRule($type = 'text', array $options = [])
   {
     $rule = json_decode(request()->input('wechat.rule'), true);
     $rule['site_id'] = site()['id'];

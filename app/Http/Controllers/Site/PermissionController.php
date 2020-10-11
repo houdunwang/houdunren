@@ -12,28 +12,28 @@ use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Site::class, 'site');
-    }
+  public function __construct()
+  {
+    $this->authorizeResource(Site::class, 'site');
+  }
 
-    public function edit(Site $site, Role $role, ModuleService $moduleService,  MenuService $menuService, PermissionService $permissionService)
-    {
-        $permissionService->saveSiteModulePermissions($site);
+  public function edit(Site $site, Role $role, ModuleService $moduleService,  MenuService $menuService, PermissionService $permissionService)
+  {
+    $permissionService->saveSiteModulePermissions($site);
 
-        $modules = $moduleService->getSiteModules($site);
+    $modules = $moduleService->getSiteModules($site);
 
-        return view('permission.edit', compact('site', 'role', 'modules'));
-    }
+    return view('permission.edit', compact('site', 'role', 'modules'));
+  }
 
-    public function update(Request $request, Site $site, Role $role)
-    {
-        $role->syncPermissions(array_map(function ($permission) use ($site) {
-            //0 模块 1 权限标识
-            $info = explode('|', $permission);
-            return permission_name($info[1], $site, app(ModuleService::class)->find($info[0]));
-        }, $request->input('permissions')));
+  public function update(Request $request, Site $site, Role $role)
+  {
+    $role->syncPermissions(array_map(function ($permission) use ($site) {
+      //0 模块 1 权限标识
+      $info = explode('|', $permission);
+      return permission_name($info[1], $site, app(ModuleService::class)->find($info[0]));
+    }, $request->input('permissions')));
 
-        return back()->with('success', '权限设置成功');
-    }
+    return back()->with('success', '权限设置成功');
+  }
 }

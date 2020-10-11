@@ -6,10 +6,8 @@ use App\Models\Group;
 use App\Models\Site;
 use App\Models\Traits\Favour;
 use Auth;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Modules\Edu\Entities\Duration;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable

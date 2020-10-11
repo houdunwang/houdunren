@@ -41,6 +41,10 @@ return [
     */
 
   'disks' => [
+    'base' => [
+      'driver' => 'local',
+      'root' => base_path('.')
+    ],
     'attacment' => [
       'driver' => 'local',
       'root' => public_path('attachments'),

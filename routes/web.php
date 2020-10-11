@@ -111,11 +111,12 @@ Route::any('wechat/bind/{model}', 'WeChatApi\ApiController@handle')
 
 Route::group(['prefix' => 'site/wechat/{site}', 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth']], function () {
   Route::resource('wechat', 'WeChatController');
-  Route::get('wechat/default/{wechat}', 'DefaultController@edit')->name('wechat.default.edit');
-  Route::put('wechat/default/{wechat}', 'DefaultController@update')->name('wechat.default.update');
-  Route::get('wechat/menu/{wechat}', 'MenuController@edit')->name('wechat.menu.edit');
-  Route::put('wechat/menu/{wechat}', 'MenuController@update')->name('wechat.menu.update');
-  Route::get('wechat/menu/push/{wechat}', 'MenuController@push')->name('wechat.menu.push');
+  Route::get('wechat/default/{wechat}', 'DefaultController@edit')->name('default.edit');
+  Route::put('wechat/default/{wechat}', 'DefaultController@update')->name('default.update');
+  Route::get('wechat/menu/{wechat}', 'MenuController@edit')->name('menu.edit');
+  Route::put('wechat/menu/{wechat}', 'MenuController@update')->name('menu.update');
+  Route::get('wechat/menu/push/{wechat}', 'MenuController@push')->name('menu.push');
+  Route::get('user/sync/{wechat}/{openid?}', 'UserSyncController@sync')->name('user.sync');
 });
 
 Route::group(['prefix' => 'wechat', 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'admin']], function () {
@@ -127,4 +128,6 @@ Route::group(['prefix' => 'wechat', 'namespace' => 'WeChat', 'as' => 'wechat.', 
   Route::resource('rule', 'RuleController')->only(['show', 'destroy']);
   Route::post('rule/check-keyword', 'RuleController@checkKeyword')->name('rule.keyword.check');
   Route::post('user/search/{wechat}', 'UserController@search')->name('user.search');
+  Route::get('user/{wechat?}', 'UserController@index')->name('user.index');
+  // Route::get('user/sync/{wechat}', 'UserController@sync')->name('user.sync');
 });

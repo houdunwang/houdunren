@@ -3,17 +3,28 @@
 namespace Houdunwang\WeChat\User;
 
 use Houdunwang\WeChat\WeChat;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Log;
 use URL;
 
 trait Auth
 {
+  /**
+   * 获取基本资料
+   * @return mixed
+   * @throws RequestException
+   */
   public function snsapiBase()
   {
     return $this->request('snsapi_userinfo');
   }
 
+  /**
+   * 获取详细资料
+   * @return mixed
+   * @throws RequestException
+   */
   public function snsapiUserInfo()
   {
     $response = $this->request('snsapi_userinfo');
@@ -25,6 +36,12 @@ trait Auth
     }
   }
 
+  /**
+   * 发送请求
+   * @param string $type
+   * @return mixed
+   * @throws RequestException
+   */
   protected function request(string $type)
   {
     $status = isset($_GET['code']) && isset($_GET['state']) && $_GET['state'] == 'STATE';

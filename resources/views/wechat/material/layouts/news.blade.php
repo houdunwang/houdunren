@@ -1,5 +1,5 @@
 @foreach ($materials as $material)
-<div class="col-2">
+<div class="col-2 col-sm-3">
   <div class="card shadow-sm">
     <div class="wechat-news">
       @foreach ($material['content'] as $article)

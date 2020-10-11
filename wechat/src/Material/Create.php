@@ -43,6 +43,10 @@ trait Create
   {
     $news = [];
     foreach ($data as $article) {
+      if (empty($article['title']) || empty($article['picurl']) || empty($article['show_cover_pic']) || empty($article['content']) || empty($article['content_source_url'])) {
+        continue;
+      }
+
       $article['thumb_media_id'] = $this->add('image', $article['picurl'])['media_id'];
       $news[] = $article;
     }

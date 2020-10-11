@@ -3,9 +3,9 @@
 namespace Houdunwang\WeChat;
 
 use Houdunwang\WeChat\User\Auth;
-use Houdunwang\WeChat\User\Info;
+use Houdunwang\WeChat\User\Get;
 
 class User extends WeChat
 {
-  use Info, Auth;
+  use Get, Auth;
 }

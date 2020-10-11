@@ -20,7 +20,7 @@
             <label>标题</label>
             <input type="text" class="form-control" v-model="current.title" />
           </div>
-          <image-single-upload :value.sync="current.picurl"></image-single-upload>
+          <image-upload :value.sync="current.picurl"></image-upload>
 
           <div class="form-group">
             <label>链接</label>

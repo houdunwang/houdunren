@@ -1,5 +1,5 @@
 @foreach ($materials as $material)
-<div class="col-2">
+<div class="col-3">
   <div class="card shadow-sm">
     <div class="pic">
       <img src="{{ $material['content']['url'] }}" class="card-img-top" />

@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class WeChat extends BaseModel
 {
-    protected $fillable = ['site_id', 'title', 'name', 'introduce', 'qr', 'token', 'type', 'wechat_id', 'appID', 'appsecret', 'welcome', 'default_message'];
+  protected $fillable = ['site_id', 'title', 'name', 'introduce', 'qr', 'token', 'type', 'wechat_id', 'appID', 'appsecret', 'welcome', 'default_message'];
 
-    protected $casts = [
-        'menus' => 'array',
-    ];
+  protected $casts = [
+    'menus' => 'array',
+  ];
 }
