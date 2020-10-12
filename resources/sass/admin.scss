@@ -60,3 +60,13 @@ body {
     }
   }
 }
+
+.site-module-index {
+  .text-secondary {
+    height: 3rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}

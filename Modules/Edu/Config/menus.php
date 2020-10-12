@@ -6,7 +6,6 @@ return [
     'show' => true,
     'items' => [
       ['title' => '内容标签管理', 'permission' => 'tag', 'url' => route('Edu.admin.tag.edit')],
-      // ['title' => '直播推流配置', 'permission' => 'live'],
     ],
   ],
   [

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Artisan;
 use File;
 use Illuminate\Console\Command;
+use Module;
 use Storage;
 
 class MakeModule extends Command
@@ -26,6 +27,10 @@ class MakeModule extends Command
     $this->vars['lower_name'] = strtolower($this->name);
     $this->vars['title'] = $this->ask('模块中文名称');
 
+    if (Module::find($this->name)) {
+      return $this->error("{$this->name}模块已经存在");
+    }
+
     $this->bar = $this->output->createProgressBar(3);
     $this->bar->start();
 
@@ -35,7 +40,6 @@ class MakeModule extends Command
 
     $this->bar->finish();
 
-    // $this->info("\n 请进入Modules/{$this->name}目录");
     $this->info("\n");
     $this->table(['请执行以下步骤'], [["cd Modules/{$this->name}"], ["cnpm i"], ["npm run watch"]]);
   }

@@ -8,7 +8,6 @@ use App\Models\Traits\Favour;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use GrahamCampbell\Markdown\Facades\Markdown;
 use Modules\Edu\Entities\Traits\Comment;
 
 class Topic extends Model

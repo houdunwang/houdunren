@@ -18550,6 +18550,14 @@ body {
   border-bottom: none !important;
 }
 
+.site-module-index .text-secondary {
+  height: 3rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 .member-top {
   background: #f7f8f9;
   border-bottom: solid 4px #3aa5a2;

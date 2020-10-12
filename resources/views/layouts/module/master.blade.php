@@ -10,7 +10,6 @@
 
   @stack('css')
 
-
   <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
   <link href="/modules/{{ module()['name'] }}/app.css?v={{ config('app.version') }}" rel="stylesheet">
   <link href="/admin2/sb-admin-2.min.css" rel="stylesheet">
@@ -57,6 +56,19 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
+
+<div class="ml-3">
+  <a href="" class="mr-3 text-primary font-weight-bold">
+    <i class="fab fa-empire"></i> 基本功能
+  </a>
+  <a href=""  class="mr-3 text-secondary font-weight-bold">
+    <i class="fab fa-weixin"></i> 微信管理
+  </a>
+  <a href=""  class="mr-3 text-secondary font-weight-bold">
+    <i class="fas fa-boxes"></i> 文章系统
+  </a>
+</div>
+
           <ul class="navbar-nav ml-auto">
             <div class="topbar-divider d-none d-sm-block"></div>
             <li class="nav-item dropdown no-arrow">

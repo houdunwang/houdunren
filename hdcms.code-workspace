@@ -1,14 +1,14 @@
 {
   "folders": [
-	{
-		"path": "."
-	},
-	{
-		"path": "Modules/Edu"
-	}
-],
+    {
+      "path": "."
+    },
+    {
+      "path": "Modules/Article"
+    }
+  ],
   "settings": {
-	"git.ignoreLimitWarning": true,
-	"liveServer.settings.multiRootWorkspaceName": "hdcms"
+    "git.ignoreLimitWarning": true,
+    "liveServer.settings.multiRootWorkspaceName": "hdcms"
   }
 }
