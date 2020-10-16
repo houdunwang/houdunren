@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-  public function show(Site $site, $menu, MenuService $menuService)
+  public function show(Site $site, $type, $menu, MenuService $menuService)
   {
-    $menuService->currentActiveMenu(explode('-', $menu));
+    $menuService->currentActiveMenu($type, explode('-', $menu));
 
     return redirect($menuService->currentActiveMenuRoute(module()));
   }

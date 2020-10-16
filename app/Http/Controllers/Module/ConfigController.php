@@ -9,15 +9,15 @@ use Illuminate\Http\Request;
 
 class ConfigController extends Controller
 {
-    public function edit()
-    {
-        return view('module_config.edit');
-    }
+  public function edit()
+  {
+    return view('module_config.edit');
+  }
 
-    public function store(Request $request, ConfigService $configService)
-    {
-        $configService->saveCurrentModuleConfig($request->input());
+  public function store(Request $request, ConfigService $configService)
+  {
+    $configService->saveCurrentModuleConfig($request->input());
 
-        return back()->with('success', '模块配置修改成功');
-    }
+    return back()->with('success', '模块配置修改成功');
+  }
 }

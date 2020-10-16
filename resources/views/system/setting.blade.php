@@ -7,7 +7,12 @@
         <a href="{{ route('admin.module.index') }}"
             class="text-dark system-menu d-flex flex-column justify-content-center align-items-center bg-white shadow-sm rounded border p-3  mr-3 mb-2">
             <i class="fa fa-2x d-block fa fa-cubes" aria-hidden="true"></i>
-            模块
+            模块扩展
+        </a>
+        <a href="{{ route('admin.template.index') }}"
+            class="text-dark system-menu d-flex flex-column justify-content-center align-items-center bg-white shadow-sm rounded border p-3  mr-3 mb-2">
+            <i class="fa fa-life-ring fa-2x" aria-hidden="true"></i>
+            模板风格
         </a>
     </section>
 </div>

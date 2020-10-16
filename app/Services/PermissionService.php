@@ -35,20 +35,6 @@ class PermissionService
   }
 
   /**
-   * 验证菜单块是否显示
-   * @param Site $site
-   * @param mixed $module
-   * @param array $menu
-   * @return bool
-   */
-  public function checkModuleMenuPermission(Site $site, $module, array $menu)
-  {
-    return (bool) array_filter($menu['items'], function ($item) use ($site, $module) {
-      return access($item['permission'], $site, $module) && (isset($item['show']) ? $item['show'] : true);
-    });
-  }
-
-  /**
    * 验证是站点模块的权限
    * @param Site $site
    * @param mixed $module

@@ -67,7 +67,10 @@ class ModuleService
   protected function menus($name)
   {
     $menus = $this->config($name, 'menus');
-    return array_merge(include __DIR__ . '/data/menus.php', $menus);
+    return array_merge(include __DIR__ . '/data/menus.php', array_map(function ($menu) {
+      $menu['type'] = 'module';
+      return $menu;
+    }, $menus));
   }
 
   /**

@@ -22,9 +22,8 @@ class ModuleController extends Controller
   public function show(Site $site, Module $module, PermissionService $permissionService)
   {
     site($site);
-
     module($module['name']);
-
+    session(['module_menu.type' => 'module']);
     return redirect(url($module['name'] . '/admin'));
   }
 }

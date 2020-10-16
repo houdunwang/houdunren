@@ -58,13 +58,13 @@
           </button>
 
 <div class="ml-3">
-  <a href="" class="mr-3 text-primary font-weight-bold">
+  <a href="/site/1/menu/module/1-0" class="mr-3 font-weight-bold {{ session('module_menu.type')=='module'?'text-primary':'text-secondary' }}">
     <i class="fab fa-empire"></i> 基本功能
   </a>
-  <a href=""  class="mr-3 text-secondary font-weight-bold">
+  <a href="/site/1/menu/wechat/1-0" class="mr-3 font-weight-bold {{ session('module_menu.type')=='wechat'?'text-primary':'text-secondary' }}">
     <i class="fab fa-weixin"></i> 微信管理
   </a>
-  <a href=""  class="mr-3 text-secondary font-weight-bold">
+  <a href="/site/1/menu/article/1-0"  class="mr-3 font-weight-bold {{ session('module_menu.type')=='article'?'text-primary':'text-secondary' }}">
     <i class="fas fa-boxes"></i> 文章系统
   </a>
 </div>

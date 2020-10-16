@@ -35,9 +35,9 @@ class MenuService
    * @return void
    * @throws BindingResolutionException
    */
-  public function currentActiveMenu($menu)
+  public function currentActiveMenu(string $type, array $menu)
   {
-    session(['module_menu' => $menu]);
+    session(['module_menu' => ['type' => $type, 'menu' => $menu]]);
   }
 
   /**
@@ -48,8 +48,8 @@ class MenuService
    */
   public function currentActiveMenuRoute($module)
   {
-    $group = session('module_menu.0');
-    $item = session('module_menu.1');
+    $group = session('module_menu.menu.0');
+    $item = session('module_menu.menu.1');
 
     return $module['menus'][$group]['items'][$item]['url'];
   }
@@ -63,5 +63,20 @@ class MenuService
   public function isCurrentMenuGroup($index)
   {
     return $index == session('module_menu.0');
+  }
+
+  /**
+   * 验证菜单块是否显示
+   * @param Site $site
+   * @param mixed $module
+   * @param array $menu
+   * @return bool
+   */
+  public function showMenuGroup(Site $site, $module, array $menu): bool
+  {
+    if (session('module_menu.type') != ($menu['type'] ?? 'module')) return false;
+    return (bool) array_filter($menu['items'], function ($item) use ($site, $module) {
+      return access($item['permission'], $site, $module) && (isset($item['show']) ? $item['show'] : true);
+    });
   }
 }
