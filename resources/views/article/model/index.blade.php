@@ -25,7 +25,7 @@
           <a href="{{ route('article.model.edit',$model) }}" class="btn btn-outline-success">编辑</a>
           <btn-del action="{{ route('article.model.destroy',$model) }}" class="btn btn-outline-danger">
           </btn-del>
-          <a href="{{ route('article.field.index',$model) }}" class="btn btn-outline-secondary">字段管理</a>
+          <a href="{{ route('article.model.field.index',$model) }}" class="btn btn-outline-secondary">字段管理</a>
         </div>
       </td>
     </tr>

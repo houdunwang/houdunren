@@ -26,48 +26,16 @@ class FieldController extends Controller
     return response()->json(['message' => '字段添加成功']);
   }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  \App\Models\ArticleField  $articleField
-   * @return \Illuminate\Http\Response
-   */
-  public function show(ArticleField $articleField)
+  public function edit(ArticleField $field)
   {
-    //
+    return view('article.field.edit', compact('field'));
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  \App\Models\ArticleField  $articleField
-   * @return \Illuminate\Http\Response
-   */
-  public function edit(ArticleField $articleField)
+  public function update(FieldRequest $request, ArticleField $field)
   {
-    //
   }
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  \App\Models\ArticleField  $articleField
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, ArticleField $articleField)
+  public function destroy(ArticleField $field)
   {
-    //
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  \App\Models\ArticleField  $articleField
-   * @return \Illuminate\Http\Response
-   */
-  public function destroy(ArticleField $articleField)
-  {
-    //
   }
 }

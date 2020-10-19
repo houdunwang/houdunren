@@ -16,4 +16,9 @@ class ArticleField extends Model
     'required' => 'boolean',
     'options' => 'array'
   ];
+
+  public function model()
+  {
+    return $this->belongsTo(ArticleField::class, 'model_id');
+  }
 }

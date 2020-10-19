@@ -1,7 +1,8 @@
-@extends('layouts.module.system')
+<div class="card">
+  <div class="card-header">
+    Header
+  </div>
+  <div class="card-body">
 
-@section('content')
-@include('article.field._nav')
-
-
-@endsection
+  </div>
+</div>

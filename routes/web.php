@@ -111,5 +111,5 @@ Route::group(['prefix' => 'wechat', 'namespace' => 'WeChat', 'as' => 'wechat.', 
 
 Route::group(['prefix' => 'article', 'namespace' => 'Article', 'as' => 'article.', 'middleware' => ['site']], function () {
   Route::resource('model', 'ModelController')->except('show');
-  Route::resource('{model}/field', 'FieldController')->except('show');
+  Route::resource('model.field', 'FieldController')->except('show')->shallow();
 });

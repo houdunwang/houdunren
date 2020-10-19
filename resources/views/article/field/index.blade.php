@@ -31,8 +31,8 @@
       <td>{{ $field['updated_at']->format('Y-m-d') }}</td>
       <td>
         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-          <a href="{{ route('article.field.edit',[$model,$field]) }}" class="btn btn-outline-success">编辑</a>
-          <btn-del action="{{ route('article.field.destroy',[$model,$field]) }}" class="btn btn-outline-danger">
+          <a href="{{ route('article.field.edit',$field) }}" class="btn btn-outline-success">编辑</a>
+          <btn-del action="{{ route('article.field.destroy',$field) }}" class="btn btn-outline-danger">
           </btn-del>
         </div>
       </td>

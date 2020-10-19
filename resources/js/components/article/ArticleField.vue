@@ -60,8 +60,8 @@ import { mapState } from 'vuex'
 
 export default {
   props: {
-    model_id: { type: Number, required: true },
-    id: { type: Number, default: null },
+    model_id: { type: Number },
+    id: { type: Number },
   },
   data() {
     return {
@@ -79,11 +79,11 @@ export default {
   },
   methods: {
     async onSubmit() {
-      const api = `article/${this.model_id}/field`
+      const api = `article/model/${this.model_id}/field`
 
       await this.axios.post(api, this.field)
 
-      location.href = `/article/${this.model_id}/field`
+      location.href = `/article/model/${this.model_id}/field`
     },
   },
 }
