@@ -1,12 +1,12 @@
-@extends('layouts.module')
+@extends('layouts.module.admin')
 
 @section('content')
 
 @include('edu::system.nav')
 
 <form action="{{ route('Edu.admin.system.update',$system) }}" method="post">
-    @csrf
-    @method('PUT')
-    @include('edu::system.form')
+  @csrf
+  @method('PUT')
+  @include('edu::system.form')
 </form>
 @endsection

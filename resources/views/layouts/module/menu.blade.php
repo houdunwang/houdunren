@@ -3,7 +3,6 @@
 
 @foreach (module()['menus'] as $index=>$menu)
 @if (($menu['show']??true) && $menuService->showMenuGroup(site(),module(),$menu))
-
 <li class="nav-item">
   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo{{ $index }}"
     aria-expanded="true" aria-controls="collapseTwo{{ $index }}">
@@ -19,7 +18,7 @@
     <div class="bg-white py-2 collapse-inner rounded">
       @foreach ($menu['items'] as $i=>$item)
       @if(access($item['permission']))
-      <a class="collapse-item" href="{{ route('site.menu.show',[site(),$menu['type'],$index.'-'.$i]) }}">
+      <a class="collapse-item" href="{{ route('site.menu.show',[site(),$index.'-'.$i]) }}">
         {{ $item['title'] }}
       </a>
       @endif

@@ -1,3 +1,4 @@
+@inject('menuService', 'App\Services\MenuService')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,17 +58,20 @@
             <i class="fa fa-bars"></i>
           </button>
 
-<div class="ml-3">
-  <a href="/site/1/menu/module/1-0" class="mr-3 font-weight-bold {{ session('module_menu.type')=='module'?'text-primary':'text-secondary' }}">
-    <i class="fab fa-empire"></i> 基本功能
-  </a>
-  <a href="/site/1/menu/wechat/1-0" class="mr-3 font-weight-bold {{ session('module_menu.type')=='wechat'?'text-primary':'text-secondary' }}">
-    <i class="fab fa-weixin"></i> 微信管理
-  </a>
-  <a href="/site/1/menu/article/1-0"  class="mr-3 font-weight-bold {{ session('module_menu.type')=='article'?'text-primary':'text-secondary' }}">
-    <i class="fas fa-boxes"></i> 文章系统
-  </a>
-</div>
+          <div class="ml-3">
+            <a href="{{ route('site.menu.type',[site(),'module']) }}"
+              class="mr-3 font-weight-bold {{$menuService->type()=='module'?'text-primary':'text-secondary' }}">
+              <i class="fab fa-empire"></i> 基本功能
+            </a>
+            <a href="{{ route('site.menu.type',[site(),'wechat']) }}"
+              class="mr-3 font-weight-bold {{ $menuService->type()=='wechat'?'text-primary':'text-secondary' }}">
+              <i class="fab fa-weixin"></i> 微信管理{{ session('module.menu') }}
+            </a>
+            <a href="{{ route('site.menu.type',[site(),'article']) }}"
+              class="mr-3 font-weight-bold {{ $menuService->type()=='article'?'text-primary':'text-secondary' }}">
+              <i class="fas fa-boxes"></i> 文章系统
+            </a>
+          </div>
 
           <ul class="navbar-nav ml-auto">
             <div class="topbar-divider d-none d-sm-block"></div>

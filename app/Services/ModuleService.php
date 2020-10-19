@@ -66,11 +66,20 @@ class ModuleService
    */
   protected function menus($name)
   {
-    $menus = $this->config($name, 'menus');
-    return array_merge(include __DIR__ . '/data/menus.php', array_map(function ($menu) {
+    //系统菜单
+    $menus = collect(['wechat', 'article'])->map(
+      fn ($name) =>
+      collect(include __DIR__ . "/menus/{$name}.php")->map(function ($m, $k) use ($name) {
+        $m['type'] = $m['type'] ?? $name;
+        return $m;
+      })
+    )->reduce(fn ($data, $m) => $data->merge($m), collect())->toArray();
+
+    //模块菜单与系统菜单合并
+    return array_merge($menus, array_map(function ($menu) {
       $menu['type'] = 'module';
       return $menu;
-    }, $menus));
+    }, $this->config($name, 'menus')));
   }
 
   /**

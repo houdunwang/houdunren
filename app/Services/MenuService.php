@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Site;
 use Illuminate\Contracts\Container\BindingResolutionException;
-use LogicException;
 
 /**
  * 菜单管理服务
@@ -13,21 +12,17 @@ use LogicException;
 class MenuService
 {
   /**
-   * 获取站点系统菜单
-   * @param Site $site
+   * 模块菜单分类
+   * @param string|null $type
    * @return mixed
    * @throws BindingResolutionException
-   * @throws LogicException
    */
-  // public function getSiteSystemMenus(Site $site)
-  // {
-  //   $menus = config('menus');
-  //   foreach ($menus as $k => $item) {
-  //     $item['permission'] = "s{$site['id']}-{$item['permission']}";
-  //     $menus[$k] = $item;
-  //   }
-  //   return $menus;
-  // }
+  public function type(string $type = null)
+  {
+    if ($type) session(['menu.type' => $type]);
+
+    return session('menu.type', 'module');
+  }
 
   /**
    * 缓存当前菜单
@@ -35,9 +30,9 @@ class MenuService
    * @return void
    * @throws BindingResolutionException
    */
-  public function currentActiveMenu(string $type, array $menu)
+  public function currentActiveMenu(array $menu)
   {
-    session(['module_menu' => ['type' => $type, 'menu' => $menu]]);
+    session(['menu' => ['type' => $this->type(), 'groupIndex' => $menu[0], 'menuIndex' => $menu[1]]]);
   }
 
   /**
@@ -48,10 +43,10 @@ class MenuService
    */
   public function currentActiveMenuRoute($module)
   {
-    $group = session('module_menu.menu.0');
-    $item = session('module_menu.menu.1');
+    $groupIndex = session('menu.groupIndex');
+    $menuIndex = session('menu.menuIndex');
 
-    return $module['menus'][$group]['items'][$item]['url'];
+    return $module['menus'][$groupIndex]['items'][$menuIndex]['url'];
   }
 
   /**
@@ -62,7 +57,7 @@ class MenuService
    */
   public function isCurrentMenuGroup($index)
   {
-    return $index == session('module_menu.0');
+    return $index == session('menu.groupIndex');
   }
 
   /**
@@ -74,7 +69,7 @@ class MenuService
    */
   public function showMenuGroup(Site $site, $module, array $menu): bool
   {
-    if (session('module_menu.type') != ($menu['type'] ?? 'module')) return false;
+    if (session('menu.type', 'module') != ($menu['type'])) return false;
     return (bool) array_filter($menu['items'], function ($item) use ($site, $module) {
       return access($item['permission'], $site, $module) && (isset($item['show']) ? $item['show'] : true);
     });

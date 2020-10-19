@@ -23,7 +23,6 @@ class ModuleController extends Controller
   {
     site($site);
     module($module['name']);
-    session(['module_menu.type' => 'module']);
     return redirect(url($module['name'] . '/admin'));
   }
 }

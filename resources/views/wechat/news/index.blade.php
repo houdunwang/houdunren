@@ -1,4 +1,4 @@
-@extends('layouts.wechat')
+@extends('layouts.module.system')
 
 @section('content')
 @include('wechat.news.nav')

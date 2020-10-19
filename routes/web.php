@@ -66,7 +66,8 @@ Route::group(['prefix' => 'site', 'namespace' => 'Site', 'as' => 'site.', 'middl
   Route::put('{site}/admin/role/{user}', 'AdminController@updateRole')->name('admin.role.update');
   Route::get('{site}/module', 'ModuleController@index')->name('module.index');
   Route::get('{site}/module/{module}', 'ModuleController@show')->name('module.show');
-  Route::get('{site}/menu/{type}/{menu}', 'MenuController@show')->name('menu.show')->middleware('admin');
+  Route::get('{site}/menu/{menu}', 'MenuController@show')->name('menu.show')->middleware('admin');
+  Route::get('{site}/menu/type/{type}', 'MenuController@type')->name('menu.type')->middleware('admin');
 });
 
 Route::group(['prefix' => 'module', 'namespace' => 'Module', 'as' => 'module.', 'middleware' => ['auth', 'admin']], function () {
@@ -105,4 +106,10 @@ Route::group(['prefix' => 'wechat', 'namespace' => 'WeChat', 'as' => 'wechat.', 
   Route::post('rule/check-keyword', 'RuleController@checkKeyword')->name('rule.keyword.check');
   Route::post('user/search/{wechat}', 'UserController@search')->name('user.search');
   Route::get('user/{wechat?}', 'UserController@index')->name('user.index');
+});
+
+
+Route::group(['prefix' => 'article', 'namespace' => 'Article', 'as' => 'article.', 'middleware' => ['site']], function () {
+  Route::resource('model', 'ModelController')->except('show');
+  Route::resource('{model}/field', 'FieldController')->except('show');
 });

@@ -1,4 +1,4 @@
-@extends('layouts.module')
+@extends('layouts.module.admin')
 
 @section('content')
 <nav class="nav nav-tabs">
