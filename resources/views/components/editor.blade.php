@@ -9,7 +9,7 @@
 <script src="/plugins/tuiEditor/dist/toastui-editor.js"></script>
 <script src="/plugins/tuiEditor/tuiEditor.js"></script>
 <script>
-    let editor = hdEditor('#{{ $attributes['name'] }}',{
+  let editor = hdEditor('#{{ $attributes['name'] }}',{
         action:"{{  $attributes['action'] }}",
         initialValue:window.{{ $attributes['name'] }},
         events: {
@@ -36,7 +36,7 @@
 @enderror
 
 <div class="text-secondary  mt-2">
-    <i class="fas fa-info-circle"></i> 你可以在编辑器底部切换为markdown模式，编辑器也支持托放上传图片。
+  <i class="fas fa-info-circle"></i> 你可以在编辑器底部切换为markdown模式，编辑器也支持托放上传图片。
 </div>
 
 <input type="text" name="{{ $attributes['name'] }}" />

@@ -21,6 +21,7 @@
     "guzzlehttp/guzzle": "^6.3",
     "hieu-le/active": "^7.0",
     "hisorange/browser-detect": "^4.2",
+    "houdunwang/arr": "^2.0",
     "laravel/framework": "^7.0",
     "laravel/socialite": "^4.4",
     "laravel/telescope": "^3.5",

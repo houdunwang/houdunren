@@ -2,5 +2,5 @@
 
 @section('content')
 @include('article.field._nav',['model'=>$field['model']])
-<article-field :id="{{ $field['id'] }}"></article-field>
+<article-field :model_id="{{ $field['model_id'] }}" :id="{{ $field['id'] }}"></article-field>
 @endsection

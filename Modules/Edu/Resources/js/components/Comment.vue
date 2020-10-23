@@ -1,11 +1,6 @@
 <template>
   <div class="comment">
-    <div
-      :id="`comment-` + comment.id"
-      class="card shadow-sm mb-2"
-      v-for="(comment, index) in comments"
-      :key="index"
-    >
+    <div :id="`comment-` + comment.id" class="card shadow-sm mb-2" v-for="(comment, index) in comments" :key="index">
       <div class="card-header bg-white d-flex justify-content-start">
         <img :src="comment.user.icon" class="rounded mr-3 w35 h35" />
         <div class="flex-fill">
@@ -20,31 +15,15 @@
       </div>
 
       <div class="card-body text-secondary pb-5">
-        <a
-          :href="`/edu/space/${comment.reply_user.id}/topic`"
-          class="text-blue d-block mb-3"
-          v-if="comment.reply_user.id"
-        >@{{comment.reply_user.nickname}}</a>
+        <a :href="`/edu/space/${comment.reply_user.id}/topic`" class="text-blue d-block mb-3" v-if="comment.reply_user.id">@{{ comment.reply_user.nickname }}</a>
 
         <div v-highlight class="markdown" v-html="comment.html"></div>
       </div>
 
       <div class="card-footer text-muted bg-white small">
         # {{ index + 1 }}
-        <a
-          href="#"
-          class="d-inline-block mr-2 ml-2"
-          @click.prevent="reply_user = comment.user"
-          v-scroll-to="'#commentForm'"
-        >
-          <i aria-hidden="true" class="fa fa-reply"></i> 回复
-        </a>
-        <a
-          href="#"
-          class="d-inline-block"
-          v-if="user['admin'] || comment['user_id'] === user.id"
-          @click.prevent="del(comment)"
-        >
+        <a href="#" class="d-inline-block mr-2 ml-2" @click.prevent="reply_user = comment.user" v-scroll-to="'#commentForm'"> <i aria-hidden="true" class="fa fa-reply"></i> 回复 </a>
+        <a href="#" class="d-inline-block" v-if="user['admin'] || comment['user_id'] === user.id" @click.prevent="del(comment)">
           <i class="fas fa-times-circle"></i>
           删除
         </a>
@@ -65,11 +44,7 @@
         <editor name="content" action="/common/upload/image" :content.sync="content" :key="sendId"></editor>
         <div class="card-footer text-muted">
           <button type="button" class="btn btn-primary btn-sm d-inline-block" @click="submit">保存</button>
-          <strong
-            class="text-danger d-inline-block ml-3"
-            v-if="errors.content"
-            style="font-size: 13px;"
-          >{{ errors.content }}</strong>
+          <strong class="text-danger d-inline-block ml-3" v-if="errors.content" style="font-size: 13px">{{ errors.content }}</strong>
         </div>
       </div>
 

@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
           <label>字段标识</label>
-          <input type="text" class="form-control" :class="{ 'is-invalid': errors.name }" @focus="errors.name = ''" v-model="field.name" required placeholder="字段的英文标识" pattern="[a-z]{2,}" title="请输入英文字母" />
+          <input type="text" class="form-control" :class="{ 'is-invalid': errors.name }" @focus="errors.name = ''" v-model="field.name" required placeholder="字段的英文标识" pattern="[a-z|_]{2,}" title="请输入英文字母" />
           <strong class="form-text text-danger invalid-feedback" v-if="errors.name">{{ errors.name }}</strong>
         </div>
         <div class="form-group">
@@ -69,6 +69,9 @@ export default {
       field: Object.assign({}, field),
     }
   },
+  mounted() {
+    this.get()
+  },
   computed: {
     ...mapState(['errors']),
     optionComponent() {
@@ -78,11 +81,22 @@ export default {
     },
   },
   methods: {
+    async get() {
+      if (this.id) {
+        this.field = await this.axios.get(`article/field/${this.id}`)
+        if (this.field.options instanceof Array) {
+          this.field.options = {}
+        }
+      }
+    },
     async onSubmit() {
-      const api = `article/model/${this.model_id}/field`
-
-      await this.axios.post(api, this.field)
-
+      if (this.id) {
+        const api = `/article/field/${this.id}`
+        await this.axios.put(api, this.field)
+      } else {
+        const api = `article/model/${this.model_id}/field`
+        await this.axios.post(api, this.field)
+      }
       location.href = `/article/model/${this.model_id}/field`
     },
   },

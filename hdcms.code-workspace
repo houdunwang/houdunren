@@ -9,6 +9,7 @@
   ],
   "settings": {
     "git.ignoreLimitWarning": true,
-    "liveServer.settings.multiRootWorkspaceName": "hdcms"
+    "liveServer.settings.multiRootWorkspaceName": "hdcms",
+    "compile-hero.disable-compile-files-on-did-save-code": true
   }
 }

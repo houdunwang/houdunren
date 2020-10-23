@@ -9,7 +9,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ module()['title'] }}</title>
 
-  @stack('css')
+  @stack('styles')
 
   <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
   <link href="/modules/{{ module()['name'] }}/app.css?v={{ config('app.version') }}" rel="stylesheet">

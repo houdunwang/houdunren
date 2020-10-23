@@ -14,12 +14,15 @@ class FieldRequest extends FormRequest
 
   public function rules()
   {
+    $model_id = request()->field ? request()->field['model_id'] : request()->model['id'];
     return [
-      'title' => ['required', Rule::unique('article_fields')->ignore(request()->field)->where(function ($query) {
-        return $query->where('site_id', site()['id'])->where('model_id', request()->model['id']);
+      'title' => ['required', Rule::unique('article_fields')->ignore(request()->field)->where(function ($query) use ($model_id) {
+
+        return $query->where('site_id', site()['id'])->where('model_id', $model_id);
       })],
-      'name' => ['required', Rule::unique('article_fields')->ignore(request()->field)->where(function ($query) {
-        return $query->where('site_id', site()['id'])->where('model_id', request()->model['id']);
+
+      'name' => ['required', Rule::unique('article_fields')->ignore(request()->field)->where(function ($query) use ($model_id) {
+        return $query->where('site_id', site()['id'])->where('model_id', $model_id);
       })],
 
     ];

@@ -96,6 +96,7 @@ Route::group(['prefix' => 'site/wechat/{site}', 'namespace' => 'WeChat', 'as' =>
   Route::get('wechat/menu/push/{wechat}', 'MenuController@push')->name('menu.push');
   Route::get('user/sync/{wechat}/{openid?}', 'UserSyncController@sync')->name('user.sync');
 });
+
 Route::group(['prefix' => 'wechat', 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'admin']], function () {
   Route::resource('text', 'TextController');
   Route::resource('news', 'NewsController');
@@ -108,8 +109,9 @@ Route::group(['prefix' => 'wechat', 'namespace' => 'WeChat', 'as' => 'wechat.', 
   Route::get('user/{wechat?}', 'UserController@index')->name('user.index');
 });
 
-
-Route::group(['prefix' => 'article', 'namespace' => 'Article', 'as' => 'article.', 'middleware' => ['site']], function () {
+Route::group(['prefix' => 'article', 'namespace' => 'Article', 'as' => 'article.', 'middleware' => ['site', 'admin']], function () {
   Route::resource('model', 'ModelController')->except('show');
-  Route::resource('model.field', 'FieldController')->except('show')->shallow();
+  Route::resource('model.field', 'FieldController')->shallow();
+  Route::resource('category', 'CategoryController')->shallow();
+  Route::resource('content', 'ContentController')->except('show')->shallow();
 });

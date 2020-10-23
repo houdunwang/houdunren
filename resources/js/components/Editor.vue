@@ -1,9 +1,7 @@
 <template>
   <div>
     <div :id="name"></div>
-    <div class="text-secondary mt-2 p-2 d-block mb-2">
-      <i class="fas fa-info-circle"></i> 你可以在编辑器底部切换为markdown模式，编辑器也支持托放上传图片。
-    </div>
+    <div class="text-secondary mt-2 p-2 d-block mb-2"><i class="fas fa-info-circle"></i> 你可以在编辑器底部切换为markdown模式，编辑器也支持托放上传图片。</div>
   </div>
 </template>
 
@@ -28,7 +26,6 @@ export default {
   data() {
     return {
       editor: null,
-      //   form: { markdown: '', html: '' },
     }
   },
   mounted() {
@@ -49,9 +46,6 @@ export default {
         events: {
           //监听编辑器输入
           change: function () {
-            // console.log(editor)
-            // console.log(editor.isMarkdownMode()?editor.getMarkdown():editror)
-            // console.log(editor.getMarkdown())
             Vue.$emit('update:content', editor.getMarkdown())
           },
         },
