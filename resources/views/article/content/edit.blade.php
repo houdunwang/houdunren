@@ -1,14 +1,12 @@
 @extends('layouts.module.system')
 
 @section('content')
-@include('article.category._nav')
+@include('article.content._nav')
 
-<form action="{{ route('article.category.update',$category) }}" method="post">
+<form action="{{ route('article.content.update',$content) }}" method="post">
   @csrf
   @method('PUT')
-  @include('article.category._form')
-
-  <button class="btn btn-primary btn-sm mt-3">保存提交</button>
+  @include('article.content._form')
 </form>
 
 @endsection

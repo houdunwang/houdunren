@@ -3,9 +3,15 @@
 namespace App\Http\Controllers\Article;
 
 use App\Http\Controllers\Auth\Controller;
+use App\Http\Requests\Article\ContentRequest;
+use App\Models\ArticleCategory;
 use App\Models\ArticleContent;
 use Illuminate\Http\Request;
 
+/**
+ * 文章内容管理
+ * @package App\Http\Controllers\Article
+ */
 class ContentController extends Controller
 {
   public function index()
@@ -14,57 +20,35 @@ class ContentController extends Controller
     return view('article.content.index', compact('contents'));
   }
 
-  public function create()
+  public function category()
   {
-    return view('article.content.create');
+    $categories = ArticleCategory::allCategory();
+    return view('article.content.category', compact('categories'));
   }
 
-  public function store(Request $request)
+  public function create(ArticleCategory $category)
   {
+    return view('article.content.create', compact('category'));
   }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  \App\Models\ArticleContent  $articleContent
-   * @return \Illuminate\Http\Response
-   */
-  public function show(ArticleContent $articleContent)
+  public function store(ContentRequest $request, ArticleContent $content)
   {
-    //
+    $content->create(
+      $request->input() + ['site_id' => site()['id'], 'user_id' => user()['id']]
+    );
+
+    return redirect()->route('article.content.index')->with('success', '文章发表成功');
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  \App\Models\ArticleContent  $articleContent
-   * @return \Illuminate\Http\Response
-   */
-  public function edit(ArticleContent $articleContent)
+  public function update(Request $request, ArticleContent $content)
   {
-    //
+    $content->fill($request->input());
+    return redirect()->route('article.content.index')->with('success', '文章修改成功');
   }
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  \App\Models\ArticleContent  $articleContent
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, ArticleContent $articleContent)
+  public function destroy(ArticleContent $content)
   {
-    //
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  \App\Models\ArticleContent  $articleContent
-   * @return \Illuminate\Http\Response
-   */
-  public function destroy(ArticleContent $articleContent)
-  {
-    //
+    $content->delete();
+    return redirect()->back()->with("success", '文章删除成功');
   }
 }

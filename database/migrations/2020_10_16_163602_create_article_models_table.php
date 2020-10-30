@@ -14,6 +14,7 @@ class CreateArticleModelsTable extends Migration
       $table->string('title')->comment('模型名称');
       $table->foreignId('site_id')->constrained()->onDelete('cascade');
       $table->string('description')->comment('模型描述');
+      $table->json('content_fields')->nullable()->comment('需要隐藏的article_contents表字段');
       $table->timestamps();
     });
   }

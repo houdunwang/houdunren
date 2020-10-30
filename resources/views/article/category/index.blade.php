@@ -12,7 +12,7 @@
       <th>栏目描述</th>
       <th>类型</th>
       <th width="150">更新时间</th>
-      <th width="150"></th>
+      <th width="120"></th>
     </tr>
   </thead>
   <tbody>
@@ -25,6 +25,7 @@
       <td>{{ $category['typeTitle'] }}</td>
       <td>{{ $category['updated_at']->format('Y-m-d') }}</td>
       <td>
+
         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
           <a href="{{ route('article.category.edit',$category) }}" class="btn btn-outline-success">编辑</a>
           <btn-del action="{{ route('article.category.destroy',$category) }}" class="btn btn-outline-danger">

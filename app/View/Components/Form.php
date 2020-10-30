@@ -8,9 +8,20 @@ class Form extends Component
 {
   protected $theme;
 
-  public function __construct($theme = 'input')
+  public $title;
+  public $options;
+  public $type;
+  public $name;
+  public $value;
+
+  public function __construct($theme = 'input', $name, $title = '', $value = '', $type = 'text', $options = [])
   {
     $this->theme = $theme;
+    $this->type = $type;
+    $this->name = $name;
+    $this->title = $title;
+    $this->value = $value;
+    $this->options = $options;
   }
 
   public function render()

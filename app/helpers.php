@@ -1,8 +1,8 @@
 <?php
 
+use App\Models\Module;
 use App\Models\Site;
 use App\Services\ModuleService;
-use App\Services\SiteService;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -49,17 +49,19 @@ function site_id()
  * @return null|Site
  * @throws BindingResolutionException
  */
+
 function site(Site $site = null): ?Site
 {
+  $site_id = null;
+  if (is_null($site)) {
+    $site_id = session('site_id');
+  }
+
   if ($site instanceof Site) {
-    session(['site' => $site]);
+    session(['site_id' => $site['id']]);
   }
 
-  if (is_null($site) && session('site')) {
-    $site = session('site');
-  }
-
-  return $site;
+  return $site_id ? Site::find($site_id) : null;
 }
 
 /**
@@ -70,18 +72,22 @@ function site(Site $site = null): ?Site
  */
 function module(string $name = null)
 {
-  $module = null;
+  $module_name = null;
+
+  if (is_null($name)) {
+    $module_name = session('module_name');
+  }
+
   if (!is_null($name)) {
-    $module = app(ModuleService::class)->find($name);
-    unset($module['model']);
-    session(['module' => $module]);
+    $module_name = $name;
+    session(['module_name' => $name]);
   }
 
-  if (is_null($name) && session('module')) {
-    $module = session('module');
+  if (!Module::where('name', $module_name)->exists()) {
+    abort(404, '模块不存在');
   }
 
-  return $module;
+  return $module_name ? app(ModuleService::class)->find($module_name) : null;
 }
 
 /**
