@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Article;
 
 use App\Http\Controllers\Controller;
+use App\Models\ArticleConfig;
 use App\Models\Template;
 use Illuminate\Http\Request;
 

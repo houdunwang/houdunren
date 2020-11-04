@@ -11,31 +11,25 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
+  public function register()
+  {
+  }
+
+  public function boot()
+  {
+    if ($this->app->isLocal()) {
+      $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
+      $this->app->register(TelescopeServiceProvider::class);
+      $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
     }
 
-    public function boot()
-    {
+    $this->registerObServer();
 
-        if ($this->app->isLocal()) {
-            $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
-            $this->app->register(TelescopeServiceProvider::class);
-            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
-        }
+    Carbon::setLocale('zh');
+  }
 
-        $this->registerObServer();
-
-        Carbon::setLocale('zh');
-    }
-
-    protected function registerObServer()
-    {
-        Group::observe(GroupObserver::class);
-    }
+  protected function registerObServer()
+  {
+    Group::observe(GroupObserver::class);
+  }
 }

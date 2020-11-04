@@ -1,5 +1,7 @@
 <?php
 
+use Composer\Package\BasePackage;
+
 return [
 
   /*

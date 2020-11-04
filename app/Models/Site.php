@@ -9,15 +9,22 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Permission\Models\Role;
 
+/**
+ * 站点模型
+ * @package App\Models
+ */
 class Site extends Model
 {
-  protected $fillable = ['title', 'domain', 'module_id', 'user_id'];
+  protected $fillable = ['title', 'domain', 'module_id', 'user_id', 'template_id', 'domain_action'];
 
   protected $casts = [
     'config' => 'array',
   ];
 
-  //默认模块
+  /**
+   * 默认模块
+   * @return BelongsTo
+   */
   public function module()
   {
     return $this->belongsTo(Module::class);
@@ -32,6 +39,10 @@ class Site extends Model
     return $this->master->group->modules;
   }
 
+  public function template()
+  {
+    return $this->belongsTo(Template::class);
+  }
   /**
    * 模板列表
    * @return mixed

@@ -1,20 +1,16 @@
 <div class="form-group {{ $attributes['class']??'' }}">
-
-    <label for="{{ $attributes['name'] }}" class="">{{ $attributes['title'] }}</label>
-
-    <div class="input-group @error($attributes['name'])is-invalid @enderror">
-        @foreach ($attributes['options'] as $value=>$title)
-        <div class="custom-control custom-checkbox custom-control-inline">
-            <input type="checkbox" value="{{ $value }}" id="{{ $attributes['name'].$value }}"
-                name="{{ $attributes['name'] }}" class="custom-control-input"
-                {{ isset($attributes['value']) && in_array($value,$attributes['value'])?"checked":'' }}>
-            <label class="custom-control-label" for="{{ $attributes['name'].$value }}">{{ $title }}</label>
-        </div>
-        @endforeach
+  <label for="{{ $name }}" class="">{{ $title }}</label>
+  <div class="input-group @error($name)is-invalid @enderror">
+    @foreach ($options as $val=>$title)
+    <div class="custom-control custom-checkbox custom-control-inline">
+      <input type="checkbox" value="{{ $val }}" id="{{ $name.$val }}"
+             name="{{ $name }}" class="custom-control-input"
+             {{ isset($value) && in_array($val,$value)?"checked":'' }}>
+      <label class="custom-control-label" for="{{ $name.$val }}">{{ $title }}</label>
     </div>
-
-    @error( $attributes['name'] )
-    <strong class="form-text text-danger invalid-feedback">{{ $message }}</strong>
-    @enderror
-
+    @endforeach
+  </div>
+  @error( $name )
+  <strong class="form-text text-danger invalid-feedback">{{ $message }}</strong>
+  @enderror
 </div>

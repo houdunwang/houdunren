@@ -121,4 +121,6 @@ Route::group(['prefix' => 'article', 'namespace' => 'Article', 'as' => 'article.
   Route::put('{model}/system/field/update/{name}', 'SystemFieldController@update')->name('system.field.update');
   Route::resource('template', 'TemplateController')->only('index');
   Route::get('template/set/{template}', 'TemplateController@set')->name('template.set');
+  Route::get('config', 'ConfigController@edit')->name('config.edit');
+  Route::put('config', 'ConfigController@update')->name('config.update');
 });

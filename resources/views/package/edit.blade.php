@@ -1,9 +1,6 @@
 @extends('layouts.admin')
-
 @section('content')
-
 @include('package.nav')
-
 <form action="{{ route("admin.package.update",$package) }}" method="post">
   @csrf
   @method('PUT')
@@ -15,7 +12,6 @@
       <x-form title="套餐名称" name="title" value="{{ $package->title }}" required class="col-12 col-md-8"></x-form>
     </div>
   </div>
-
   <div class="card mt-3 shadow-sm bg-light">
     <div class="card-header">
       模块选择

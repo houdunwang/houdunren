@@ -8,6 +8,7 @@ use App\Models\Site;
 use App\Services\ModuleService;
 use Illuminate\Http\Request;
 use URL;
+
 class SiteController extends Controller
 {
   public function __construct()
@@ -29,13 +30,15 @@ class SiteController extends Controller
   public function create(ModuleService $moduleService)
   {
     $modules = $moduleService->allInstalled();
-    return view('site.create', compact('modules'));
+    $templates = user()->group->templates;
+    return view('site.create', compact('modules', 'templates'));
   }
 
   public function store(SiteRequest $request, Site $site)
   {
     $site->user_id = auth()->id();
     $site->config = [];
+
     $site->fill($request->input())->save();
 
     return redirect()
@@ -46,7 +49,8 @@ class SiteController extends Controller
   public function edit(Site $site, ModuleService $moduleService)
   {
     $modules = $moduleService->allInstalled();
-    return view('site.edit', compact('modules', 'site'));
+    $templates = user()->group->templates;
+    return view('site.edit', compact('modules', 'site', 'templates'));
   }
 
   public function update(SiteRequest $request, Site $site)

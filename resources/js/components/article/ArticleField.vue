@@ -21,9 +21,15 @@
           <strong class="form-text text-danger invalid-feedback" v-if="errors.name">{{ errors.name }}</strong>
         </div>
         <div class="form-group">
+          <label>默认值</label>
+          <input type="text" class="form-control" :class="{ 'is-invalid': errors.value }" @focus="errors.value = ''" v-model="field.value" required placeholder="字段的英文标识" title="表单默认值" />
+          <strong class="form-text text-danger invalid-feedback" v-if="errors.value">{{ errors.value }}</strong>
+        </div>
+        <div class="form-group">
           <label>提示信息</label>
           <input type="text" class="form-control" v-model="field.placeholder" />
         </div>
+
         <div class="form-group">
           <label>必须输入</label>
           <div class="form-check form-check-inline">
@@ -37,12 +43,27 @@
         </div>
       </div>
     </div>
+
     <div class="card mt-3">
-      <div class="card-header">字段选项</div>
+      <div class="card-header">表单验证</div>
       <div class="card-body">
-        <component :is="optionComponent" :data="field.options"></component>
+        <div class="form-group">
+          <label>验证规则</label>
+          <input type="text" class="form-control" :class="{ 'is-invalid': errors.regexp }" @focus="errors.regexp = ''" v-model="field.regexp" placeholder="字段的英文标识" title="请输入正则表达式" />
+          <strong class="form-text text-danger invalid-feedback" v-if="errors.regexp">{{ errors.regexp }}</strong>
+        </div>
+        <div class="form-group">
+          <label>错误信息</label>
+          <input type="text" class="form-control" :class="{ 'is-invalid': errors.error_message }" @focus="errors.示 = ''" v-model="field.error_message" placeholder="验证失败时的错误信息" />
+          <strong class="form-text text-danger invalid-feedback" v-if="errors.error_message">{{ errors.示 }}</strong>
+        </div>
       </div>
     </div>
+
+    <div class="mt-3">
+      <component :is="optionComponent" :field="field" />
+    </div>
+
     <button class="btn btn-primary mt-3">保存提交</button>
   </form>
 </template>
@@ -52,10 +73,10 @@ const types = [
   { title: '文本框', name: 'input' },
   { title: '多行文本', name: 'textarea' },
   { title: '单选框', name: 'radio' },
-  { title: '复文本编辑器', name: 'editor' },
+  { title: '复文本编辑器', name: 'wangEditor' },
 ]
 
-const field = { title: '', name: '', placeholder: '', required: false, type: 'input', options: {} }
+const field = { title: '', name: '', placeholder: '', value: '', required: 0, type: 'input', options: null }
 import { mapState } from 'vuex'
 
 export default {

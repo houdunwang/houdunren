@@ -5,6 +5,7 @@ return [
     'show' => true,
     'icon' => 'fas fa-briefcase',
     'items' => [
+      ['title' => '基本配置', 'url' => route('article.config.edit'), 'permission' => 'article.config.edit'],
       ['title' => '模板选择', 'url' => route('article.template.index'), 'permission' => 'site.template.manage'],
     ],
   ],
@@ -14,6 +15,7 @@ return [
     'show' => true,
     'items' => [
       ['title' => '文章列表', 'permission' => 'article.content', 'url' => route('article.content.index')],
+      ['title' => '发表文章', 'permission' => 'article.content.create', 'url' => route('article.content.category')],
     ],
   ],
   [

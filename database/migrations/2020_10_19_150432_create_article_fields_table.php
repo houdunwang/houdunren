@@ -17,7 +17,8 @@ class CreateArticleFieldsTable extends Migration
       $table->string('type')->comment('字段类型');
       $table->string('placeholder')->nullable()->comment('提示信息');
       $table->boolean('required')->default(false)->comment('必须输入');
-      $table->json('options')->nullable()->comment('字段其他选项');
+      $table->string('options')->nullable()->comment('字段选项');
+      $table->string('value')->nullable()->comment('默认值');
       $table->timestamps();
     });
   }
