@@ -9,6 +9,7 @@
       <th width="150">字段名称</th>
       <th width="150">字段标识</th>
       <th>提示信息</th>
+      <th>验证规则</th>
       <th width="80" class="text-center">必填项</th>
       <th width="150">更新时间</th>
       <th width="100"></th>
@@ -21,6 +22,7 @@
       <td>{{ $field['title'] }}</td>
       <td>{{ $field['name'] }}</td>
       <td>{{ $field['placeholder'] }}</td>
+      <td>{{ $field['rules'] }}</td>
       <td class="text-center">
         @if ($field['required'])
         <i class="fas fa-check-circle text-success "></i>

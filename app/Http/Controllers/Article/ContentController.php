@@ -26,9 +26,9 @@ class ContentController extends Controller
     return view('article.content.category', compact('categories'));
   }
 
-  public function create(ArticleCategory $category)
+  public function create(ArticleCategory $category, ArticleContent $content)
   {
-    return view('article.content.create', compact('category'));
+    return view('article.content.create', compact('category', 'content'));
   }
 
   public function store(ContentRequest $request, ArticleContent $content)
@@ -40,9 +40,15 @@ class ContentController extends Controller
     return redirect()->route('article.content.index')->with('success', '文章发表成功');
   }
 
-  public function update(Request $request, ArticleContent $content)
+  public function edit(ArticleContent $content)
   {
-    $content->fill($request->input());
+    $categories = ArticleCategory::allCategory();
+    return view('article.content.edit', compact('categories', 'content'));
+  }
+
+  public function update(ContentRequest $request, ArticleContent $content)
+  {
+    $content->fill($request->input())->save();
     return redirect()->route('article.content.index')->with('success', '文章修改成功');
   }
 

@@ -1,19 +1,15 @@
-<div class="form-group {{ $attributes['class']??'' }}">
-
-    <label for="{{ $attributes['name'] }}">{{ $attributes['title'] }}</label>
-
-    <div class="input-group @error($attributes['name'])is-invalid @enderror">
-        <input type="text" class="form-control" name="{{ $attributes['name'] }}" id="{{ $attributes['name'] }}"
-            placeholder="{{ $attributes['placeholder']??'' }}"
-            value="{{ old( $attributes['name'],$attributes['value']??'' ) }}"
-            onfocus="this.parentElement.classList.remove('is-invalid')">
-        <div class="input-group-append">
-            <span class="input-group-text" id="basic-addon2">{{ $attributes['text'] }}</span>
-        </div>
+<div class="form-group {{ $class }}">
+  <label for="{{ $name }}">{{ $title }}</label>
+  <div class="input-group @error($validateName($name))is-invalid @enderror">
+    <input type="text" class="form-control" name="{{ $name }}" id="{{ $name }}"
+           placeholder="{{ $placeholder }}"
+           value="{{ old( $name,$value ) }}"
+           onfocus="this.parentElement.classList.remove('is-invalid')">
+    <div class="input-group-append">
+      <span class="input-group-text" id="basic-addon2">{{ $attributes['text'] }}</span>
     </div>
-
-    @error( $attributes['name'] )
-    <strong class="form-text text-danger invalid-feedback">{{ $message }}</strong>
-    @enderror
-
+  </div>
+  @error( $validateName($name) )
+  <strong class="form-text text-danger invalid-feedback">{{ $message }}</strong>
+  @enderror
 </div>

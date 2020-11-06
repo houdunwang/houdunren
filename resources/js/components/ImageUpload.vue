@@ -4,7 +4,6 @@
       <img v-if="url" :src="url" class="avatar" style="background: #f3f3f3" />
       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
-
     <input :name="name" :value="url" hidden />
   </div>
 </template>

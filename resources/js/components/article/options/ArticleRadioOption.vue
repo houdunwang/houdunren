@@ -15,9 +15,6 @@ export default {
   props: {
     field: { type: Object, required: true, default: () => {} },
   },
-  mounted() {
-    if (this.field.options) this.field.options = ''
-  },
 }
 </script>
 

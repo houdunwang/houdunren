@@ -6,7 +6,6 @@
 
 <form action="{{ route('site.site.store') }}" method="post">
     @csrf
-
     @include('site.form')
 </form>
 @endsection

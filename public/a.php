@@ -1,10 +1,5 @@
 <?php
-class H
-{
-  public function __construct()
-  {
-    print_r(func_get_args());
-  }
-}
-
-new H(1, 2, 3, 4);
+$str = '张三';
+$reg = '/../u';
+preg_match($reg, $str, $match);
+print_r($match);

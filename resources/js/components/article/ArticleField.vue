@@ -22,7 +22,7 @@
         </div>
         <div class="form-group">
           <label>默认值</label>
-          <input type="text" class="form-control" :class="{ 'is-invalid': errors.value }" @focus="errors.value = ''" v-model="field.value" required placeholder="字段的英文标识" title="表单默认值" />
+          <input type="text" class="form-control" :class="{ 'is-invalid': errors.value }" @focus="errors.value = ''" v-model="field.value" placeholder="表单默认值" />
           <strong class="form-text text-danger invalid-feedback" v-if="errors.value">{{ errors.value }}</strong>
         </div>
         <div class="form-group">
@@ -31,13 +31,24 @@
         </div>
 
         <div class="form-group">
+          <label>显示字段</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" v-model="field.show" :value="true" id="show1" />
+            <label class="form-check-label" for="show1">是</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" v-model="field.show" :value="false" id="show0" />
+            <label class="form-check-label" for="show0">否</label>
+          </div>
+        </div>
+        <div class="form-group">
           <label>必须输入</label>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" v-model="field.required" value="1" id="required1" />
+            <input class="form-check-input" type="radio" v-model="field.required" :value="true" id="required1" />
             <label class="form-check-label" for="required1">是</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" v-model="field.required" value="0" id="required0" />
+            <input class="form-check-input" type="radio" v-model="field.required" :value="false" id="required0" />
             <label class="form-check-label" for="required0">否</label>
           </div>
         </div>
@@ -47,15 +58,20 @@
     <div class="card mt-3">
       <div class="card-header">表单验证</div>
       <div class="card-body">
+        <div class="alert alert-secondary small" role="alert">
+          验证规则兼容Laravel表单验证规则
+          <br />
+          不设置验证消息时系统将自动生成消息
+        </div>
         <div class="form-group">
           <label>验证规则</label>
-          <input type="text" class="form-control" :class="{ 'is-invalid': errors.regexp }" @focus="errors.regexp = ''" v-model="field.regexp" placeholder="字段的英文标识" title="请输入正则表达式" />
-          <strong class="form-text text-danger invalid-feedback" v-if="errors.regexp">{{ errors.regexp }}</strong>
+          <input type="text" class="form-control" :class="{ 'is-invalid': errors.rules }" @focus="errors.rules = ''" v-model="field.rules" placeholder="字段的英文标识" title="请输入正则表达式" />
+          <strong class="form-text text-danger invalid-feedback" v-if="errors.rules">{{ errors.rules }}</strong>
         </div>
         <div class="form-group">
           <label>错误信息</label>
-          <input type="text" class="form-control" :class="{ 'is-invalid': errors.error_message }" @focus="errors.示 = ''" v-model="field.error_message" placeholder="验证失败时的错误信息" />
-          <strong class="form-text text-danger invalid-feedback" v-if="errors.error_message">{{ errors.示 }}</strong>
+          <input type="text" class="form-control" :class="{ 'is-invalid': errors.errors }" @focus="errors.errors = ''" v-model="field.errors" placeholder="验证失败时的错误信息" />
+          <strong class="form-text text-danger invalid-feedback" v-if="errors.errors">{{ errors.errors }}</strong>
         </div>
       </div>
     </div>
@@ -76,7 +92,8 @@ const types = [
   { title: '复文本编辑器', name: 'wangEditor' },
 ]
 
-const field = { title: '', name: '', placeholder: '', value: '', required: 0, type: 'input', options: null }
+const field = { title: '', name: '', placeholder: '', value: '', required: false, type: 'input', options: '', rules: '', errors: '', show: true, ext: {} }
+
 import { mapState } from 'vuex'
 
 export default {
@@ -105,9 +122,6 @@ export default {
     async get() {
       if (this.id) {
         this.field = await this.axios.get(`article/field/${this.id}`)
-        if (this.field.options instanceof Array) {
-          this.field.options = {}
-        }
       }
     },
     async onSubmit() {
