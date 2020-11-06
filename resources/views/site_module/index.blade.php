@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-@inject('permissionService', 'App\Services\PermissionService')
 @section('content')
 <nav class="nav nav-tabs">
   <a class="nav-link" href="{{ route('admin') }}">
@@ -9,7 +8,6 @@
     应用管理
   </a>
 </nav>
-
 <div class="card mt-3 shadow-sm">
   <div class="card-header">
     应用列表
@@ -29,7 +27,7 @@
             </div>
           </div>
           <div class="card-footer text-muted text-center">
-            <a href="{{ route('site.module.show',[$site,$module['id']]) }}" class="btn btn-info btn-sm">
+            <a href="{{ route('site.module.admin',[$site,$module['id']]) }}" class="btn btn-info btn-sm">
               管理模块
             </a>
           </div>
@@ -40,7 +38,6 @@
         <i class="fa fa-info-circle" aria-hidden="true"></i> 你没有可以管理的模块，请联系站点管理员「{{ $site->master->name }}」授权
       </div>
       @endforelse
-
     </div>
   </div>
 

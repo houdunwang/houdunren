@@ -7,6 +7,10 @@ use App\ModuleConfig;
 use App\Services\ConfigService;
 use Illuminate\Http\Request;
 
+/**
+ * 模块配置管理
+ * @package App\Http\Controllers\Module
+ */
 class ConfigController extends Controller
 {
   public function edit()

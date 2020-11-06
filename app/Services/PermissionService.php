@@ -19,9 +19,7 @@ class PermissionService
   public function saveSiteModulePermissions(Site $site)
   {
     $site->master->group->modules->map(function ($model) use ($site) {
-
       $module = app(ModuleService::class)->find($model['name']);
-
       collect($module['menus'])->map(function ($menu) use ($module, $site) {
         foreach ($menu['items'] as $item) {
           $name = permission_name($item['permission'], $site, $module);

@@ -1,13 +1,6 @@
 <?php
 return [
   [
-    'title' => '基本功能',
-    'icon' => 'fab fa-windows',
-    'show' => true,
-    'type' => 'module',
-    'items' => [['title' => '模块配置', 'permission' => 'core.config', 'url' => route('module.config.edit')]],
-  ],
-  [
     'title' => '微信消息',
     'icon' => 'fab fa-weixin',
     'show' => true,

@@ -41,6 +41,18 @@ class TemplateService
   }
 
   /**
+   * 获取站点所有模板
+   * @param Site $site
+   * @return mixed
+   */
+  public function getSiteTemplates(Site $site)
+  {
+    return $site->master->group->templates->map(function ($module) {
+      return $this->find($module['name']);
+    });
+  }
+
+  /**
    * 安装模块
    * @param string $name
    * @return Template
@@ -100,17 +112,5 @@ class TemplateService
   protected function config(string $name, $fileName = 'config')
   {
     return include base_path("templates/{$name}/{$fileName}.php");
-  }
-
-  /**
-   * 获取站点所有模板
-   * @param Site $site
-   * @return mixed
-   */
-  public function getSiteModules(Site $site)
-  {
-    return $site->master->group->modules->map(function ($module) {
-      return $this->find($module['name']);
-    });
   }
 }

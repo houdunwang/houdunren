@@ -55,6 +55,6 @@ class ContentController extends Controller
   public function destroy(ArticleContent $content)
   {
     $content->delete();
-    return redirect()->back()->with("success", '文章删除成功');
+    return ['message' => '文章删除成功'];
   }
 }

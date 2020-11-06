@@ -37,6 +37,33 @@ class ModuleService
   }
 
   /**
+   * 获取站点所有模块
+   * @param Site $site
+   * @return mixed
+   */
+  public function getSiteModules(Site $site)
+  {
+    return $site->master->group->modules->map(function ($module) {
+      return $this->find($module['name']);
+    });
+  }
+
+  /**
+   * 获取当前用户可使用的所有模块
+   * @param Site $site
+   * @return mixed
+   * @throws BindingResolutionException
+   */
+  public function getSiteModulesByPermission(Site $site)
+  {
+    $permissionService = app(PermissionService::class);
+
+    return $this->getSiteModules($site)->filter(function ($module) use ($site, $permissionService) {
+      return $permissionService->checkModulePermission($site, $module);
+    });
+  }
+
+  /**
    * 根据模块标识获取模块
    * @param string $name
    * @return array
@@ -53,34 +80,13 @@ class ModuleService
       'description' => $config['description'],
       'version' => $config['version'],
       'preview' => "/modules/{$name}/static/preview.jpg",
-      'menus' => $this->menus($name),
+      'menus' => app(MenuService::class)->allMenus($name),
       'installed' => (bool) $model,
       'model' => $model,
     ]);
   }
 
-  /**
-   * 模块菜单数据
-   * @param mixed $name
-   * @return array
-   */
-  protected function menus($name)
-  {
-    //系统菜单
-    $menus = collect(['wechat', 'article'])->map(
-      fn ($name) =>
-      collect(include __DIR__ . "/menus/{$name}.php")->map(function ($m, $k) use ($name) {
-        $m['type'] = $m['type'] ?? $name;
-        return $m;
-      })
-    )->reduce(fn ($data, $m) => $data->merge($m), collect())->toArray();
 
-    //模块菜单与系统菜单合并
-    return array_merge($menus, array_map(function ($menu) {
-      $menu['type'] = 'module';
-      return $menu;
-    }, $this->config($name, 'menus')));
-  }
 
   /**
    * 模块配置
@@ -95,17 +101,5 @@ class ModuleService
     $file = $module->getPath() . '/Config/' . $fileName . '.php';
 
     return is_file($file) ? include $file : [];
-  }
-
-  /**
-   * 获取站点所有模块
-   * @param Site $site
-   * @return mixed
-   */
-  public function getSiteModules(Site $site)
-  {
-    return $site->master->group->modules->map(function ($module) {
-      return $this->find($module['name']);
-    });
   }
 }

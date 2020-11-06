@@ -11,18 +11,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
  */
 class MenuService
 {
-  /**
-   * 模块菜单分类
-   * @param string|null $type
-   * @return mixed
-   * @throws BindingResolutionException
-   */
-  public function type(string $type = null)
-  {
-    if ($type) session(['menu.type' => $type]);
-
-    return session('menu.type', 'module');
-  }
+  protected $system = ['article', 'wechat'];
 
   /**
    * 缓存当前菜单
@@ -30,48 +19,82 @@ class MenuService
    * @return void
    * @throws BindingResolutionException
    */
-  public function currentActiveMenu(array $menu)
+  public function currentActiveMenu(string $tag, array $path)
   {
-    session(['menu' => ['type' => $this->type(), 'groupIndex' => $menu[0], 'menuIndex' => $menu[1]]]);
+    session(['menu' => ['tag' => $tag, 'group' => $path[0], 'menu' => $path[1]]]);
   }
 
   /**
    * 当前操作菜单
-   * @param mixed $module
+   * @param mixed $module 模块数据
    * @return mixed
    * @throws BindingResolutionException
    */
-  public function currentActiveMenuRoute($module)
+  public function currentActiveMenuRoute(string $tag)
   {
-    $groupIndex = session('menu.groupIndex');
-    $menuIndex = session('menu.menuIndex');
+    $menus = in_array($tag, $this->system) ? $this->system($tag) : $this->module($tag);
 
-    return $module['menus'][$groupIndex]['items'][$menuIndex]['url'];
+    return $menus[session('menu.group')]['items'][session('menu.menu')]['url'];
   }
 
   /**
-   * 当前菜单块
-   * @param mixed $index
+   * 是否为当前菜单组
+   * @param mixed $index 菜单组编号
    * @return bool
    * @throws BindingResolutionException
    */
-  public function isCurrentMenuGroup($index)
+  public function isCurrentMenuGroup($tag, $index)
   {
-    return $index == session('menu.groupIndex');
+    return session('menu.tag') == $tag && $index == session('menu.group');
   }
 
   /**
-   * 验证菜单块是否显示
+   * 验证菜单组是否可用
    * @param Site $site
    * @param mixed $module
    * @param array $menu
    * @return bool
    */
-  public function showMenuGroup(Site $site, $module, array $menu): bool
+  public function checkMenuGroup(Site $site, $module, array $menu): bool
   {
-    if (session('menu.type', 'module') != ($menu['type'])) return false;
     return (bool) array_filter($menu['items'], function ($item) use ($site, $module) {
       return access($item['permission'], $site, $module) && (isset($item['show']) ? $item['show'] : true);
     });
+  }
+
+  /**
+   * 模块所有菜单包括系统菜单
+   * @param mixed $name
+   * @return array
+   * @throws BindingResolutionException
+   */
+  public function allMenus($name)
+  {
+    $menus = $this->module($name);
+    foreach (['article', 'wechat'] as $module) {
+      $menus = array_merge($menus, $this->system($module));
+    }
+    return $menus;
+  }
+
+  /**
+   * 系统菜单数据
+   * @param mixed $name
+   * @return array
+   */
+  public function system($name)
+  {
+    return include __DIR__ . "/menus/{$name}.php";
+  }
+
+  /**
+   * 模块菜单
+   * @param mixed $name
+   * @return mixed
+   * @throws BindingResolutionException
+   */
+  public function module($name)
+  {
+    return include module_path($name) . "/Config/menus.php";
   }
 }

@@ -30,9 +30,7 @@ class ModuleController extends Controller
    */
   public function index(Site $site, ModuleService $moduleService, PermissionService $permissionService)
   {
-    $modules = $moduleService->getSiteModules($site)->filter(function ($module) use ($site, $permissionService) {
-      return $permissionService->checkModulePermission($site, $module);
-    });
+    $modules = $moduleService->getSiteModulesByPermission($site);
 
     return view('site_module.index', compact('site', 'modules'));
   }
@@ -46,7 +44,7 @@ class ModuleController extends Controller
    * @throws BindingResolutionException
    * @throws LogicException
    */
-  public function show(Site $site, Module $module, PermissionService $permissionService)
+  public function admin(Site $site, Module $module, PermissionService $permissionService)
   {
     site($site);
     module($module['name']);

@@ -29,13 +29,11 @@
       <td>
         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
           <a href="{{ route('article.content.edit',$content) }}" class="btn btn-outline-success">编辑</a>
-          <btn-del action="{{ route('article.content.destroy',$content) }}" class="btn btn-outline-danger">
-          </btn-del>
+          <btn-del action="{{ route('article.content.destroy',$content) }}" class="btn btn-outline-danger"></btn-del>
         </div>
       </td>
     </tr>
     @endforeach
   </tbody>
 </table>
-
 @endsection
