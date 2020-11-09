@@ -14,12 +14,12 @@
 </div>
 <div class="card mt-3">
   <div class="card-header">
-    文章模块使用的模板
+    文章模块模板
   </div>
   <div class="card-body">
     <div class="row">
       @foreach ($templates as $template)
-      <div class="col-2">
+      <div class="col-12 col-sm-2 mb-2">
         <div class="card">
           <div class="card-body d-flex flex-column justify-content-center align-items-center">
             <img src="{{ $template->preview }}" class="rounded-circle mb-3 preview-image"
@@ -33,7 +33,7 @@
               <label>
                 <input type="radio" hidden name="template_id" value="{{ $template['id'] }}"
                        {{isset($site) && $template['id']==$site['template_id']?'checked':'' }}>
-                <span class="btn btn-secondary btn-sm">设置为默认</span>
+                <span class="btn btn-outline-secondary btn-sm">设置为默认</span>
               </label>
             </div>
           </div>
@@ -50,24 +50,30 @@
   </div>
   <div class="card-body">
     <div class="row">
-      @foreach($modules as $module)
-      <div class="col-2">
-        <div class="card">
-          <div class="card-body text-center">
-            <h5 class="card-title">
-              {{ $module['title'] }}
-            </h5>
-            <p class="card-text text-secondary">{{ $module['description'] }}</p>
-            <label>
-              <input type="radio" hidden name="module_id" value="{{ $module['id'] }}"
-                     {{isset($site) && $module['id']==$site['module_id']?'checked':'' }}>
-              <span class="btn btn-secondary btn-sm">设置为默认</span>
-            </label>
+      @foreach ($modules as $module)
+      <div class="col-12 col-sm-2 mb-2">
+        <div class="card shadow-sm">
+          <div class="card-body d-flex flex-column justify-content-center align-items-center">
+            <img src="{{ $module['preview'] }}" class="rounded-circle mb-3 preview-image"
+                 style="width: 60px;">
+            <h6>{{ $module['title']}}</h6>
+            <span class="text-secondary small text-center description">
+              {{ $module['description'] }}
+            </span>
+
+            <div class="mt-3">
+              <label>
+                <input type="radio" hidden name="module_id" value="{{ $module['id'] }}"
+                       {{isset($site) && $module['id']==$site['module_id']?'checked':'' }}>
+                <span class="btn btn-outline-secondary btn-sm">设置为默认</span>
+              </label>
+            </div>
           </div>
         </div>
       </div>
       @endforeach
     </div>
+
   </div>
 </div>
 <button class="btn btn-primary mt-3">保存</button>
@@ -76,6 +82,11 @@
 <style>
   input[type='radio']:checked+span {
     background-color: teal;
+    color: #fff;
+  }
+
+  span.description {
+    height: 35px;
   }
 </style>
 @endpush

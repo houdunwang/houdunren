@@ -42,8 +42,8 @@
       </li>
 
       @include('layouts.module.menu',['menus'=>$menuService->module(module()['name']),'title'=>'模块业务','tag'=>module()['name']])
-      @include('layouts.module.menu',['menus'=>$menuService->system('article'),'title'=>'普通文章','tag'=>'article'])
-      @include('layouts.module.menu',['menus'=>$menuService->system('wechat'),'title'=>'微信公众号','tag'=>'wechat'])
+      {{-- @include('layouts.module.menu',['menus'=>$menuService->system('article'),'title'=>'普通文章','tag'=>'article']) --}}
+      {{-- @include('layouts.module.menu',['menus'=>$menuService->system('wechat'),'title'=>'微信公众号','tag'=>'wechat']) --}}
 
       <hr class="sidebar-divider">
       <div class="sidebar-heading">
@@ -67,7 +67,6 @@
         </a>
       </li>
 
-
       <hr class="sidebar-divider d-none d-md-block">
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -83,7 +82,7 @@
           <div class="ml-3">
             @foreach ($moduleService->getSiteModulesByPermission(site()) as $module)
             <a href="{{ route('site.module.admin',[site(),$module['id']]) }}"
-               class="mr-3 font-weight-bold {{module()['name'] == $module['name']?'text-primary':'text-secondary' }}">
+               class="mr-4 font-weight-bold {{module()['name'] == $module['name']?'text-primary':'text-secondary' }}">
               <i class="{{ $module['icon']??'fas fa-pen-square' }}"></i> {{ $module['title'] }}
             </a>
             @endforeach

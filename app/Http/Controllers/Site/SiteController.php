@@ -50,6 +50,7 @@ class SiteController extends Controller
   {
     $modules = $moduleService->allInstalled();
     $templates = user()->group->templates;
+
     return view('site.edit', compact('modules', 'site', 'templates'));
   }
 

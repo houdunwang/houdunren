@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\WeChatKeyword;
 use App\Models\WeChatText;
 use App\Services\WeChatService;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
+use LogicException;
 
 class TextController extends Controller
 {
@@ -19,11 +21,6 @@ class TextController extends Controller
   public function create()
   {
     return view('wechat.text.create');
-  }
-
-  public function show(Request $request, WeChatText $text)
-  {
-    return $text;
   }
 
   public function store(Request $request, WeChatService $weChatService)
@@ -43,11 +40,22 @@ class TextController extends Controller
     return redirect()->route('wechat.text.index')->with('success', '文本消息修改成功');
   }
 
+  public function show(Request $request, WeChatText $text)
+  {
+    return $text;
+  }
+
+  /**
+   * 保存微信规则
+   * @return void
+   * @throws BindingResolutionException
+   * @throws LogicException
+   */
   protected function save()
   {
     $weChatService = app(WeChatService::class);
 
-    $rule = $weChatService->save();
+    $rule = $weChatService->saveRule();
 
     $text = json_decode(request()->text, true);
 
@@ -59,7 +67,10 @@ class TextController extends Controller
     ]);
   }
 
-  public function destroy(WeChatText $weChatText)
+  public function destroy(WeChatText $text)
   {
+    $text->rule->delete();
+    $text->delete();
+    return ['message' => '文本消息删除成功'];
   }
 }

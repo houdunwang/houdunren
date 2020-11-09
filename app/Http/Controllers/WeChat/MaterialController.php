@@ -8,8 +8,6 @@ use App\Models\WeChatMaterial;
 use App\Services\WeChatService;
 use Exception;
 use Houdunwang\WeChat\Material;
-use Houdunwang\WeChat\SendAll;
-use Houdunwang\WeChat\SendAllPreview;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
 

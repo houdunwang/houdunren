@@ -28,7 +28,7 @@
         <td class="text-right">
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
             <a href="{{ route('wechat.text.edit',$text) }}" class="btn btn-success">编辑</a>
-            <btn-del action="{{ route('wechat.rule.destroy',$text->rule_id) }}" class="btn btn-secondary">删除
+            <btn-del action="{{ route('wechat.text.destroy',$text) }}" class="btn btn-secondary">删除
             </btn-del>
           </div>
         </td>

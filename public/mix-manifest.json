@@ -4,5 +4,7 @@
     "/js/manifest.js": "/js/manifest.js?id=41f053ba9a94d81b39f8",
     "/js/vendor.js": "/js/vendor.js?id=df9b71a7a97679717a1f",
     "/modules/Article/app.js": "/modules/Article/app.js",
-    "/modules/Article/app.css": "/modules/Article/app.css"
+    "/modules/Article/app.css": "/modules/Article/app.css",
+    "/modules/Chat/app.js": "/modules/Chat/app.js",
+    "/modules/Chat/app.css": "/modules/Chat/app.css"
 }

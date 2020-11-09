@@ -84,6 +84,7 @@ class MenuService
    */
   public function system($name)
   {
+    return [];
     return include __DIR__ . "/menus/{$name}.php";
   }
 

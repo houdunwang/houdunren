@@ -1,0 +1,13 @@
+{
+    "name": "Article",
+    "alias": "article",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Article\\Providers\\ArticleServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

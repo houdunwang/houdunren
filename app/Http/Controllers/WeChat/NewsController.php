@@ -22,7 +22,7 @@ class NewsController extends Controller
 
   public function store(Request $request, WeChatService $weChatService, WeChatNews $weChatNews)
   {
-    $rule = $weChatService->save('news');
+    $rule = $weChatService->saveRule('news');
 
     $weChatNews->site_id = site()['id'];
     $weChatNews->module_id = module()['id'];
@@ -47,7 +47,7 @@ class NewsController extends Controller
 
   public function update(Request $request, WeChatNews $news, WeChatService $weChatService)
   {
-    $weChatService->save('news');
+    $weChatService->saveRule('news');
 
     $news->contents = json_decode($request->contents, true);
     $news->save();
@@ -57,7 +57,10 @@ class NewsController extends Controller
       ->with('success', '图文消息修改成功');
   }
 
-  public function destroy(WeChatNews $weChatNews)
+  public function destroy(WeChatNews $news)
   {
+    $news->rule->delete();
+    $news->delete();
+    return ['message' => '图文消息删除成功'];
   }
 }
