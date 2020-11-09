@@ -1,4 +1,4 @@
-@extends('layouts.module.system'))
+@extends('layouts.module.system')
 @section('content')
 @include('wechat.text.nav')
 <form action="{{ route('wechat.text.store') }}" method="post">

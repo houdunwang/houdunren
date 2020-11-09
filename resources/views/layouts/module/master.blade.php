@@ -52,7 +52,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ route('site.module.index',site()['id']) }}">
           <i class="fas fa-fw fa-archive"></i>
-          <span>所有模块</span></a>
+          <span>模块列表</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ route('admin') }}">
@@ -66,7 +66,12 @@
           <span>网站首页</span>
         </a>
       </li>
-
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('wechat.wechat.index',site()) }}" target="_blank">
+          <i class="fab fa-weixin    "></i>
+          <span>公众号配置</span>
+        </a>
+      </li>
       <hr class="sidebar-divider d-none d-md-block">
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
