@@ -19,10 +19,11 @@
 
 <div class="row">
   @foreach ($users as $user)
-  <div class="col-6 col-sm-3 mb-3">
+  <div class="col-12 col-sm-2 mb-3">
     <div class="card shadow-sm">
       <div class="card-body d-flex justify-content-center flex-column align-items-center">
-        <img src="{{$user->headimgurl}}" class="border rounded-sm shadow-sm mb-2" style="width: 80px;height:80px;">
+        <img src="{{$user->headimgurl}}" class="border mb-2 rounded-circle p-1"
+             style="width: 60px;height:60px;">
         <span>
           {{ $user->city }} / {{ $user->nickname }} / {{ $user->gender }}
         </span>
@@ -36,3 +37,4 @@
   @endforeach
 </div>
 @endsection
+

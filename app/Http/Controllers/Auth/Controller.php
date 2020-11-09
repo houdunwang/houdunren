@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller as BaseController;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 class Controller extends BaseController
 {
   /**
-   * 获取登录帐号类型（表字段）
+   * 登录字段
+   * @return string
+   * @throws BindingResolutionException
    */
   protected function account()
   {
@@ -17,6 +20,8 @@ class Controller extends BaseController
   /**
    * 帐号验证规则
    * 根据提交的帐号数据使用不同验证规则
+   * @return string
+   * @throws BindingResolutionException
    */
   protected function accountRule()
   {

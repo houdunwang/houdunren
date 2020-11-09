@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class WeChatUser extends Model
 {
@@ -19,10 +20,19 @@ class WeChatUser extends Model
     'wechat_id' => 'integer',
   ];
 
+  /**
+   * 用户信息
+   * @return BelongsTo
+   */
   public function user()
   {
     return $this->belongsTo(User::class, 'user_id');
   }
+
+  /**
+   * 性别属性
+   * @return string
+   */
   public function getGenderAttribute()
   {
     return ['男', '女', '保密'][$this->sex];

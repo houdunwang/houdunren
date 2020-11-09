@@ -7,5 +7,5 @@ use Houdunwang\WeChat\Button\MessageType;
 
 class Button extends WeChat
 {
-    use Create, MessageType;
+  use Create, MessageType;
 }

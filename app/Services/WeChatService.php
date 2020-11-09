@@ -12,6 +12,7 @@ use Houdunwang\WeChat\WeChat as WeChatWeChat;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
+use Log;
 use LogicException;
 use RuntimeException;
 use Socialite;
@@ -32,7 +33,7 @@ class WeChatService
    */
   public function login(array $account): void
   {
-    $user = $this->saveUser($account)->user;
+    $user = $this->saveUser($account);
     Auth::login($user);
   }
 
