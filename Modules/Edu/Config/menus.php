@@ -5,6 +5,7 @@ return [
     'icon' => 'fab fa-app-store-ios',
     'show' => true,
     'items' => [
+      ['title' => '模块配置', 'permission' => 'config', 'url' => route('module.config.edit')],
       ['title' => '内容标签管理', 'permission' => 'tag', 'url' => route('Edu.admin.tag.edit')],
     ],
   ],

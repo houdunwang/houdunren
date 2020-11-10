@@ -42,8 +42,6 @@
       </li>
 
       @include('layouts.module.menu',['menus'=>$menuService->module(module()['name']),'title'=>'模块业务','tag'=>module()['name']])
-      {{-- @include('layouts.module.menu',['menus'=>$menuService->system('article'),'title'=>'普通文章','tag'=>'article']) --}}
-      {{-- @include('layouts.module.menu',['menus'=>$menuService->system('wechat'),'title'=>'微信公众号','tag'=>'wechat']) --}}
 
       <hr class="sidebar-divider">
       <div class="sidebar-heading">
