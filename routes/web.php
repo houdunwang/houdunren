@@ -98,16 +98,8 @@ Route::group(['prefix' => 'site/wechat/{site}', 'namespace' => 'WeChat', 'as' =>
 });
 
 Route::group(['prefix' => 'wechat', 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'admin']], function () {
-  Route::resource('text', 'TextController');
-  Route::resource('news', 'NewsController');
-  Route::get('material/preview/{openid}/{material}', 'MaterialController@preview')->name('material.preview');
-  Route::resource('material', 'MaterialController');
   Route::get('rule/wechat', 'RuleController@wechat');
   Route::resource('rule', 'RuleController')->only(['show', 'destroy']);
   Route::post('rule/check-keyword', 'RuleController@checkKeyword')->name('rule.keyword.check');
   Route::post('user/search/{wechat}', 'UserController@search')->name('user.search');
-  Route::get('user/{wechat?}', 'UserController@index')->name('user.index');
-});
-
-Route::group(['prefix' => 'article', 'namespace' => 'Article', 'as' => 'article.', 'middleware' => ['site', 'admin']], function () {
 });

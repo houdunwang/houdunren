@@ -8,6 +8,9 @@
     },
     {
       "path": "Modules/Article"
+    },
+    {
+      "path": "Modules/WeChat"
     }
   ],
   "settings": {
