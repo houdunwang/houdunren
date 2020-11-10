@@ -7,12 +7,11 @@
   <thead>
     <tr>
       <th width="80">编号</th>
-      <th width="150">文章名称</th>
+      <th>文章名称</th>
       <th width="150">所属栏目</th>
       <th width="150">所属模型</th>
-      <th>文章描述</th>
-      <th width="150">创建时间</th>
-      <th width="150">更新时间</th>
+      <th width="100">创建时间</th>
+      <th width="100">更新时间</th>
       <th width="120"></th>
     </tr>
   </thead>
@@ -23,7 +22,6 @@
       <td>{{ $content['title'] }}</td>
       <td>{{ $content->category->title }}</td>
       <td>{{ $content->category->model->title }}</td>
-      <td>{{ $content['description'] }}</td>
       <td>{{ $content['created_at']->diffForHumans()}}</td>
       <td>{{ $content['updated_at']->diffForHumans()}}</td>
       <td>
@@ -37,4 +35,8 @@
     @endforeach
   </tbody>
 </table>
+
+<div>
+  {{ $contents->links() }}
+</div>
 @endsection

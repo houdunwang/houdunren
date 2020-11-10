@@ -9,7 +9,8 @@
       <th width="80">编号</th>
       <th width="150">模型名称</th>
       <th>模型描述</th>
-      <th width="150">更新时间</th>
+      <th width="100">创建时间</th>
+      <th width="100">更新时间</th>
       <th width="180"></th>
     </tr>
   </thead>
@@ -19,7 +20,8 @@
       <td scope="row">{{$model['id']}}</td>
       <td>{{ $model['title'] }}</td>
       <td>{{ $model['description'] }}</td>
-      <td>{{ $model['updated_at']->format('Y-m-d') }}</td>
+      <td>{{ $model['created_at']->diffForHumans() }}</td>
+      <td>{{ $model['updated_at']->diffForHumans() }}</td>
       <td>
         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
           <a href="{{ route('article.admin.model.edit',$model) }}" class="btn btn-outline-success">编辑</a>

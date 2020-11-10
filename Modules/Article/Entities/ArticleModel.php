@@ -21,7 +21,7 @@ class ArticleModel extends BaseModel
 
   public $fieldConfig = [
     'title' => ['title' => '文章标题', 'name' => 'title', 'required' => false, 'placeholder' => '请输入标题', 'show' => 1, 'type' => 'input', 'options' => [], 'rules' => 'required', 'errors' => '标题长度为10到100个字符之间'],
-    'thumb' => ['title' => '缩略图', 'name' => 'thumb', 'required' => false, 'placeholder' => '', 'show' => 1, 'type' => 'image', 'options' => [], 'rules' => '', 'errors' => ''],
+    'thumb' => ['title' => '缩略图', 'name' => 'thumb', 'required' => false, 'placeholder' => '请输入文章缩略图', 'show' => 1, 'type' => 'image', 'options' => [], 'rules' => '', 'errors' => ''],
     'description' => ['title' => '内容接要', 'name' => 'description', 'required' => 0, 'placeholder' => '文章内容接要', 'show' => 1, 'type' => 'textarea', 'options' => [], 'rules' => '', 'errors' => '内容介绍不能为10到100个字符之间'],
     'content' => ['title' => '文章内容', 'name' => 'content', 'required' => 0, 'placeholder' => '文章内容', 'show' => 1, 'type' => 'wangEditor', 'options' => [], 'rules' => 'required', 'errors' => ''],
     'url' => ['title' => '外部跳转链接', 'name' => 'url', 'required' => false, 'placeholder' => '内容跳转链接', 'show' => 1, 'type' => 'input', 'options' => [], 'rules' => '', 'errors' => '外部跳转链接错误'],

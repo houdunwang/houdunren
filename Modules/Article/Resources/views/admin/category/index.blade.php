@@ -10,8 +10,9 @@
       <th width="150">栏目名称</th>
       <th width="150">所属模型</th>
       <th>栏目描述</th>
-      <th>类型</th>
-      <th width="150">更新时间</th>
+      <th width="150">类型</th>
+      <th width="100">创建时间</th>
+      <th width="100">更新时间</th>
       <th width="120"></th>
     </tr>
   </thead>
@@ -23,7 +24,8 @@
       <td>{{ $category->model->title }}</td>
       <td>{{ $category['description'] }}</td>
       <td>{{ $category['typeTitle'] }}</td>
-      <td>{{ $category['updated_at']->format('Y-m-d') }}</td>
+      <td>{{ $category['created_at']->diffForHumans() }}</td>
+      <td>{{ $category['updated_at']->diffForHumans() }}</td>
       <td>
 
         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
