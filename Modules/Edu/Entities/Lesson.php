@@ -2,15 +2,19 @@
 
 namespace Modules\Edu\Entities;
 
+use App\Models\BaseModel;
 use App\Models\Traits\Favorite;
 use App\Models\Traits\Favour;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Modules\Edu\Entities\Tag;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Lesson extends Model
+/**
+ * 课程
+ * @package Modules\Edu\Entities
+ */
+class Lesson extends BaseModel
 {
   use Favour, Favorite, LogsActivity;
 

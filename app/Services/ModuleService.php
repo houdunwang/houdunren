@@ -70,11 +70,15 @@ class ModuleService
    */
   public function find(string $name)
   {
+    static $cache = [];
+    if (isset($cache[$name])) {
+      return $cache[$name];
+    }
     $model = Module::findOrFail($name);
     $config = $this->config($name, 'config');
     $model = Model::where('name', $name)->first();
 
-    return array_merge($config, [
+    return $cache[$name] = array_merge($config, [
       'id' => $model['id'] ?? 0,
       'name' => $name,
       'description' => $config['description'],

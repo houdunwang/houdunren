@@ -55,18 +55,17 @@ if (!function_exists('site')) {
    * @return null|Site
    * @throws BindingResolutionException
    */
-  function site(Site $site = null): ?Site
+  function site(?Site $site = null): ?Site
   {
-    $site_id = null;
     if (is_null($site)) {
-      $site_id = session('site_id');
+      $site = session('site');
     }
 
     if ($site instanceof Site) {
-      session(['site_id' => $site['id']]);
+      session(['site' => $site]);
     }
 
-    return $site_id ? Site::find($site_id) : null;
+    return $site;
   }
 }
 
@@ -79,22 +78,13 @@ if (!function_exists('module')) {
    */
   function module(string $name = null)
   {
-    $module_name = null;
+    static $cache = null;
+    if ($cache) return $cache;
 
-    if (is_null($name)) {
-      $module_name = session('module_name');
-    }
+    $name && session(['module_name' => $name]);
 
-    if (!is_null($name)) {
-      $module_name = $name;
-      session(['module_name' => $name]);
-    }
-
-    if (!Module::where('name', $module_name)->exists()) {
-      abort(404, '模块不存在');
-    }
-
-    return $module_name ? app(ModuleService::class)->find($module_name) : null;
+    if ($name = session('module_name'))
+      return $cache = app(ModuleService::class)->find($name);
   }
 }
 

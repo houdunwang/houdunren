@@ -2,13 +2,13 @@
 
 namespace Modules\Article\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
 /**
  * 模型字段
  * @package App\Models
  */
-class ArticleField extends Model
+class ArticleField extends BaseModel
 {
   protected $fillable = ['title', 'required', 'name', 'type', 'placeholder', 'options', 'site_id', 'model_id', 'value', 'rules', 'errors', 'show', 'ext'];
 

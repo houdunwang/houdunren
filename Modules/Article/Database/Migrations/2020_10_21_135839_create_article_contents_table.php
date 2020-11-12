@@ -21,6 +21,7 @@ class CreateArticleContentsTable extends Migration
       $table->string('source')->nullable()->comment('来源');
       $table->string('author')->nullable()->comment('作者');
       $table->json('fields')->nullable()->comment('扩展字段');
+      $table->unsignedInteger('click')->default(0)->comment('查看次数');
       $table->timestamps();
     });
   }
