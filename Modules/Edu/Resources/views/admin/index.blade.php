@@ -35,7 +35,7 @@
               视频
             </div>
             <div class="h5 mb-0 font-weight-bold text-gray-800">
-              <a href="{{ route('article.admin.category.index') }}" class="small text-secondary">
+              <a href="{{ route('Edu.admin.lesson.index') }}" class="small text-secondary">
                 共有<strong class="h5 font-weight-bold">{{ $video->site()->count() }}</strong>个视频
               </a>
             </div>
@@ -70,7 +70,7 @@
     </div>
   </div>
 </div>
-
+@include('layouts.module.system-menu')
 <div class="row">
   <div class="col-12 col-sm-6">
     <div class="card mt-3">
@@ -83,8 +83,10 @@
             <tr>
               <th width="60">编号</th>
               <th>标题</th>
-              <th width="100">创建</th>
-              <th width="100">更新</th>
+
+              <th width="100">创建时间</th>
+              <th width="100">更新时间</th>
+              <th width="70" class="text-right"></th>
             </tr>
           </thead>
           <tbody>
@@ -94,6 +96,11 @@
               <td>{{ $lesson->title }}</td>
               <td>{{ $lesson['created_at']->diffForHumans()}}</td>
               <td>{{ $lesson['updated_at']->diffForHumans()}}</td>
+              <td>
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                  <a href="{{ route('Edu.admin.lesson.edit',$lesson['id']) }}" class="btn btn-outline-secondary">编辑</a>
+                </div>
+              </td>
             </tr>
             @endforeach
           </tbody>
@@ -112,10 +119,10 @@
             <tr>
               <th width="60">编号</th>
               <th>标题</th>
-              <th width="100">栏目</th>
-              <th width="100">模型</th>
-              <th width="100">创建</th>
-              <th width="100">更新</th>
+              <th width="100">查看次数</th>
+              <th width="100">创建时间</th>
+              <th width="100">更新时间</th>
+              <th width="70" class="text-right"></th>
             </tr>
           </thead>
           <tbody>
@@ -123,8 +130,14 @@
             <tr>
               <td>{{ $lesson->id }}</td>
               <td>{{ $lesson->title }}</td>
+              <td>{{ $lesson->read_num }}</td>
               <td>{{ $lesson['created_at']->diffForHumans()}}</td>
               <td>{{ $lesson['updated_at']->diffForHumans()}}</td>
+              <td>
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                  <a href="{{ route('Edu.admin.lesson.edit',$lesson['id']) }}" class="btn btn-outline-secondary">编辑</a>
+                </div>
+              </td>
             </tr>
             @endforeach
           </tbody>

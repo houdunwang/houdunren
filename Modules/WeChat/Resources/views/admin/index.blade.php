@@ -1,12 +1,8 @@
-@inject('model', 'Modules\Article\Entities\ArticleModel')
-@inject('category', 'Modules\Article\Entities\ArticleCategory')
-@inject('content', 'Modules\Article\Entities\ArticleContent')
-
-
 @inject('text', 'Modules\WeChat\Entities\WeChatText')
 @inject('news', 'Modules\WeChat\Entities\WeChatNews')
 @inject('news', 'Modules\WeChat\Entities\WeChatNews')
 @inject('wechatUser', 'App\Models\WeChatUser')
+@inject('material', 'Modules\WeChat\Entities\WeChatMaterial')
 @extends('layouts.module.admin')
 @section('content')
 <div class="row">
@@ -20,9 +16,12 @@
             </div>
             <div class="h5 mb-0 d-flex">
               @foreach (site()->wechats as $wechat)
-              <a href="{{ route('article.admin.category.index') }}"
-                 class="small d-flex align-items-center mr-2 font-weight-bold text-info">
+              <a href="{{ route('wechat.wechat.index',site()) }}"
+                 class="small d-flex align-items-center mr-2 text-secondary">
                 {{ $wechat['title'] }}
+                @if (!$loop->last)
+                /
+                @endif
               </a>
               @endforeach
             </div>
@@ -43,14 +42,14 @@
             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
               微信消息
             </div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800 d-flex ">
-              <a href="{{ route('article.admin.category.index') }}"
-                 class="small d-flex align-items-center font-weight-bold">
-                文本消息 <strong class="">{{ $text->site()->count() }}条</strong>
+            <div class="h5 mb-0 text-gray-800 d-flex ">
+              <a href="{{ route('WeChat.admin.text.index') }}"
+                 class="small d-flex align-items-center text-secondary">
+                文本消息 <strong class="">{{ $text->site()->count() }}</strong>条
               </a> /
-              <a href="{{ route('article.admin.category.index') }}"
-                 class="small d-flex align-items-center font-weight-bold">
-                图文消息 <strong class="">{{ $news->site()->count() }}条</strong>
+              <a href="{{ route('WeChat.admin.news.index') }}"
+                 class="small d-flex align-items-center text-secondary">
+                图文消息 <strong class="">{{ $news->site()->count() }}</strong>条
               </a>
             </div>
           </div>
@@ -70,14 +69,18 @@
             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
               微信素材
             </div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800 d-flex ">
-              <a href="{{ route('article.admin.category.index') }}"
-                 class="small d-flex align-items-center font-weight-bold">
-                文本消息 <strong class="">{{ $text->site()->count() }}条</strong>
+            <div class="h5 mb-0 text-gray-800 d-flex ">
+              <a href="{{ route('WeChat.admin.material.index',['type'=>'image']) }}"
+                 class="small d-flex align-items-center text-secondary">
+                图片素材 <strong class="">{{$material->site()->where('type','image')->count()  }}</strong>条
               </a> /
               <a href="{{ route('article.admin.category.index') }}"
-                 class="small d-flex align-items-center font-weight-bold">
-                图文消息 <strong class="">{{ $news->site()->count() }}条</strong>
+                 class="small d-flex align-items-center text-secondary">
+                音频素材 <strong class="">{{$material->site()->where('type','voice')->count()  }}</strong>条
+              </a>
+              <a href="{{ route('article.admin.category.index') }}"
+                 class="small d-flex align-items-center text-secondary">
+                图文素材 <strong class="">{{$material->site()->where('type','news')->count()  }}</strong>条
               </a>
             </div>
           </div>
@@ -111,7 +114,7 @@
     </div>
   </div>
 </div>
-
+@include('layouts.module.system-menu')
 <div class="row">
   <div class="col-12 col-sm-12">
     <div class="card mt-3">
