@@ -57,15 +57,19 @@ if (!function_exists('site')) {
    */
   function site(?Site $site = null): ?Site
   {
-    if (is_null($site)) {
-      $site = session('site');
+    static $cache = null;
+
+    if ($cache) return $cache;
+
+    if ($site) {
+      session(['site_id' => $site['id']]);
     }
 
-    if ($site instanceof Site) {
-      session(['site' => $site]);
-    }
+    if ($id = session('site_id')) {
+      $cache = Site::find($id);
+    };
 
-    return $site;
+    return $cache;
   }
 }
 
@@ -79,12 +83,18 @@ if (!function_exists('module')) {
   function module(string $name = null)
   {
     static $cache = null;
+
     if ($cache) return $cache;
 
-    $name && session(['module_name' => $name]);
+    if ($name) {
+      session(['module_name' => $name]);
+    }
 
-    if ($name = session('module_name'))
-      return $cache = app(ModuleService::class)->find($name);
+    if ($name = session('module_name')) {
+      $cache = app(ModuleService::class)->find($name);
+    }
+
+    return $cache;
   }
 }
 

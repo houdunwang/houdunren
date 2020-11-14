@@ -4,6 +4,7 @@ namespace Modules\Article\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Template;
+use App\Services\TemplateService;
 use Illuminate\Http\Request;
 
 /**
@@ -12,9 +13,9 @@ use Illuminate\Http\Request;
  */
 class TemplateController extends Controller
 {
-  public function index()
+  public function index(TemplateService $templateService)
   {
-    $templates = site()->templates;
+    $templates = $templateService->getSiteTemplates(site());
     return view('article::admin.template.index', compact('templates'));
   }
 

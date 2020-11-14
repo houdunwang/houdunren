@@ -36,6 +36,11 @@
           </a>
         </li>
         <li class="nav-item mr-3">
+          <a class="nav-link" href="{{ route('admin.template.index') }}">
+            <i class="fa fa-archive" aria-hidden="true"></i> 模板管理
+          </a>
+        </li>
+        <li class="nav-item mr-3">
           <a class="nav-link" href="{{ route('admin.config.edit') }}">
             <i class="fa fa-camera" aria-hidden="true"></i> 系统设置
           </a>

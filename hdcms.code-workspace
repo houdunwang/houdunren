@@ -16,6 +16,10 @@
   "settings": {
     "git.ignoreLimitWarning": true,
     "liveServer.settings.multiRootWorkspaceName": "hdcms",
-    "compile-hero.disable-compile-files-on-did-save-code": false
+    "compile-hero.disable-compile-files-on-did-save-code": false,
+    "compile-hero.sass-output-toggle": false,
+    "compile-hero.scss-output-toggle": false,
+    "compile-hero.javascript-output-toggle": false,
+    "compile-hero.jade-output-toggle": false
   }
 }

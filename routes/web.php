@@ -87,6 +87,8 @@ Route::group(['prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.', 
 });
 
 Route::any('wechat/bind/{model}', 'WeChatApi\ApiController@handle')->name('houdunren.wechat')->middleware('front');
+
+//微信公众号
 Route::group(['prefix' => 'site/wechat/{site}', 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'site']], function () {
   Route::resource('wechat', 'WeChatController');
   Route::get('wechat/default/{wechat}', 'DefaultController@edit')->name('default.edit');
@@ -94,7 +96,7 @@ Route::group(['prefix' => 'site/wechat/{site}', 'namespace' => 'WeChat', 'as' =>
   Route::get('wechat/menu/{wechat}', 'MenuController@edit')->name('menu.edit');
   Route::put('wechat/menu/{wechat}', 'MenuController@update')->name('menu.update');
   Route::get('wechat/menu/push/{wechat}', 'MenuController@push')->name('menu.push');
-  Route::get('user/sync/{wechat}/{openid?}', 'UserSyncController@sync')->name('user.sync');
+  Route::get('user/sync/{wechat}/{openid?}', 'UserController@sync')->name('user.sync');
 });
 
 Route::group(['prefix' => 'wechat', 'namespace' => 'WeChat', 'as' => 'wechat.', 'middleware' => ['auth', 'admin']], function () {

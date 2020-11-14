@@ -1,23 +1,12 @@
 <template>
   <div>
-    <el-dialog title="用户选择" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
+    <el-dialog title="选择用户" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
       <div class="card">
         <div class="card-header">
           <div class="input-group mb-3">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="请输入邮箱、手机或用户编号"
-              v-model="name"
-              @keyup.enter="get"
-            />
+            <input type="text" class="form-control" placeholder="请输入邮箱、手机或用户编号" v-model="name" @keyup.enter="get" />
             <div class="input-group-append">
-              <a
-                href="javascript:;"
-                class="input-group-text"
-                id="basic-addon2"
-                @click.prevent="get"
-              >搜索用户</a>
+              <a href="javascript:;" class="input-group-text" id="basic-addon2" @click.prevent="get">搜索用户</a>
             </div>
           </div>
         </div>
@@ -49,7 +38,7 @@
       </div>
     </el-dialog>
 
-    <button class="btn btn-info btn-sm" @click="get">{{title}}</button>
+    <button class="btn btn-info btn-sm" @click="get">{{ title }}</button>
   </div>
 </template>
 

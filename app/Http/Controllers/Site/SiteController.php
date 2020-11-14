@@ -7,8 +7,11 @@ use App\Http\Requests\SiteRequest;
 use App\Models\Site;
 use App\Services\ModuleService;
 use Illuminate\Http\Request;
-use URL;
 
+/**
+ * 站点管理
+ * @package App\Http\Controllers\Site
+ */
 class SiteController extends Controller
 {
   public function __construct()

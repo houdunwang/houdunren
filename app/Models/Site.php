@@ -15,7 +15,8 @@ use Spatie\Permission\Models\Role;
  */
 class Site extends Model
 {
-  protected $fillable = ['title', 'domain', 'module_id', 'user_id', 'template_id', 'domain_action'];
+
+  protected $fillable = ['title', 'domain', 'module_id', 'user_id', 'template_id', 'domain_action', 'template_id'];
 
   protected $casts = [
     'config' => 'array',
@@ -39,10 +40,15 @@ class Site extends Model
     return $this->master->group->modules;
   }
 
+  /**
+   * 当前站点使用的模板
+   * @return BelongsTo
+   */
   public function template()
   {
-    return $this->belongsTo(Template::class);
+    return $this->belongsTo(Template::class, 'template_id');
   }
+
   /**
    * 模板列表
    * @return mixed

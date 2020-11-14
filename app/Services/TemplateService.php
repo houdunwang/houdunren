@@ -5,10 +5,12 @@ namespace App\Services;
 use App\Models\Module as Model;
 use App\Models\Site;
 use App\Models\Template;
+use Browser;
 use File;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Module;
 use Nwidart\Modules\Collection;
+use View;
 
 /**
  * 模板管理服务
@@ -62,6 +64,7 @@ class TemplateService
   {
     $template = $this->find($name);
     $model = Template::create($template);
+    $model['preview'] = $this->preview($name);
     $model->save();
     return $model;
   }
@@ -112,5 +115,23 @@ class TemplateService
   protected function config(string $name, $fileName = 'config')
   {
     return include base_path("templates/{$name}/{$fileName}.php");
+  }
+
+  /**
+   * 当前站点使用的视图路径
+   * @param Site $site
+   * @return exit
+   * @throws BindingResolutionException
+   */
+  public function template(Site $site)
+  {
+    $config = $this->config($site->template->name);
+    $type = $config['type'] ?? 1;
+    if ($type == 2) {
+      $path = base_path('templates/' . $site->template->name);
+    } else {
+      $path = base_path('templates/' . $site->template->name . '/' . (Browser::isDesktop() ? 'pc' : 'phone'));
+    }
+    View::addLocation($path);
   }
 }

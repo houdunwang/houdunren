@@ -5,8 +5,10 @@ namespace Modules\WeChat\Http\Controllers\Admin;
 use App\Http\Controllers\Auth\Controller;
 use App\Models\WeChatUser;
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\WeChat;
+use Illuminate\View\View;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
  * 粉丝管理
@@ -14,18 +16,15 @@ use App\Models\WeChat;
  */
 class UserController extends Controller
 {
-  public function search(Request $request, WeChat $wechat)
-  {
-    $users = User::whereHas('wechatUser', function ($query) use ($wechat) {
-      $query->where('site_id', site()['id'])->where('wechat_id', $wechat['id']);
-    })
-      ->with('wechatUser')
-      ->limit(10)
-      ->get();
 
-    return $users;
-  }
-
+  /**
+   * 粉丝列表
+   * @param Request $request
+   * @param WeChat|null $wechat
+   * @param WeChatUser $weChatUser
+   * @return View|Factory
+   * @throws BindingResolutionException
+   */
   public function index(Request $request, WeChat $wechat = null, WechatUser $weChatUser)
   {
     $wechat = $wechat ?? site()->wechats()->first();

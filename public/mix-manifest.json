@@ -1,12 +1,6 @@
 {
-    "/js/app.js": "/js/app.js?id=ec937810e0481818aa21",
-    "/css/app.css": "/css/app.css?id=db11da1999286d112631",
+    "/js/app.js": "/js/app.js?id=bca7103b71ae4bea24b8",
+    "/css/app.css": "/css/app.css?id=7384147edce07bb9716c",
     "/js/manifest.js": "/js/manifest.js?id=41f053ba9a94d81b39f8",
-    "/js/vendor.js": "/js/vendor.js?id=df9b71a7a97679717a1f",
-    "/modules/Article/app.js": "/modules/Article/app.js",
-    "/modules/Article/app.css": "/modules/Article/app.css",
-    "/modules/Chat/app.js": "/modules/Chat/app.js",
-    "/modules/Chat/app.css": "/modules/Chat/app.css",
-    "/modules/WeChat/app.js": "/modules/WeChat/app.js",
-    "/modules/WeChat/app.css": "/modules/WeChat/app.css"
+    "/js/vendor.js": "/js/vendor.js?id=df9b71a7a97679717a1f"
 }
