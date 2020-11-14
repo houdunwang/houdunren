@@ -13,6 +13,7 @@ Route::group(['prefix' => 'Edu/admin', 'middleware' => ['auth', 'admin'], 'names
 });
 
 Route::group(['prefix' => 'Edu', 'middleware' => ['front'], 'namespace' => 'Front', 'as' => 'Edu.front.'], function () {
+  Route::get('/', 'HomeController@index');
   Route::resource('topic', 'TopicController');
   Route::get('recommend/{topic}', 'TopicController@recommend')->name('topic.recommend');
   Route::get('comment/topic/{topic}', 'TopicController@comment')->name('topic.comment');

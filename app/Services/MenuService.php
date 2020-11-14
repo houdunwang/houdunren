@@ -11,7 +11,6 @@ use Illuminate\Contracts\Container\BindingResolutionException;
  */
 class MenuService
 {
-  protected $system = ['article', 'wechat'];
 
   /**
    * 缓存当前菜单
@@ -19,9 +18,9 @@ class MenuService
    * @return void
    * @throws BindingResolutionException
    */
-  public function currentActiveMenu(string $tag, array $path)
+  public function currentActiveMenu(array $path)
   {
-    session(['menu' => ['tag' => $tag, 'group' => $path[0], 'menu' => $path[1]]]);
+    session(['menu' => ['group' => $path[0], 'menu' => $path[1]]]);
   }
 
   /**
@@ -30,11 +29,9 @@ class MenuService
    * @return mixed
    * @throws BindingResolutionException
    */
-  public function currentActiveMenuRoute(string $tag)
+  public function currentActiveMenuRoute()
   {
-    $menus = in_array($tag, $this->system) ? $this->system($tag) : $this->module($tag);
-
-    return $menus[session('menu.group')]['items'][session('menu.menu')]['url'];
+    return $this->menus(module()['name'])[session('menu.group')]['items'][session('menu.menu')]['url'];
   }
 
   /**
@@ -43,9 +40,9 @@ class MenuService
    * @return bool
    * @throws BindingResolutionException
    */
-  public function isCurrentMenuGroup($tag, $index)
+  public function isCurrentMenuGroup($index)
   {
-    return session('menu.tag') == $tag && $index == session('menu.group');
+    return $index == session('menu.group');
   }
 
   /**
@@ -63,38 +60,12 @@ class MenuService
   }
 
   /**
-   * 模块所有菜单包括系统菜单
-   * @param mixed $name
-   * @return array
-   * @throws BindingResolutionException
-   */
-  public function allMenus($name)
-  {
-    $menus = $this->module($name);
-    foreach (['article', 'wechat'] as $module) {
-      $menus = array_merge($menus, $this->system($module));
-    }
-    return $menus;
-  }
-
-  /**
-   * 系统菜单数据
-   * @param mixed $name
-   * @return array
-   */
-  public function system($name)
-  {
-    return [];
-    return include __DIR__ . "/menus/{$name}.php";
-  }
-
-  /**
-   * 模块菜单
+   * 当前模块菜单
    * @param mixed $name
    * @return mixed
    * @throws BindingResolutionException
    */
-  public function module($name)
+  public function menus(string $name)
   {
     return include module_path($name) . "/Config/menus.php";
   }

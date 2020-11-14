@@ -41,7 +41,7 @@
           <span>仪表盘</span></a>
       </li>
 
-      @include('layouts.module.menu',['menus'=>$menuService->module(module()['name']),'title'=>'模块业务','tag'=>module()['name']])
+      @include('layouts.module.menu')
 
       <hr class="sidebar-divider">
       <div class="sidebar-heading">

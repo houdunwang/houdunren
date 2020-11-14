@@ -84,7 +84,7 @@ class ModuleService
       'description' => $config['description'],
       'version' => $config['version'],
       'preview' => "/modules/{$name}/static/preview.jpg",
-      'menus' => app(MenuService::class)->allMenus($name),
+      'menus' => app(MenuService::class)->menus($name),
       'installed' => (bool) $model,
       'model' => $model,
     ]);

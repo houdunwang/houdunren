@@ -2,33 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ModuleService;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
-use View;
 
+/**
+ * 模块前台主页入口
+ * @package App\Http\Controllers
+ */
 class HomeController extends Controller
 {
+  /**
+   * 模块前台首页
+   * @param Request $request
+   * @return mixed
+   * @throws BindingResolutionException
+   */
   public function index(Request $request)
-  {
-    if (site()['article']) {
-      return $this->article($request);
-    }
-    if ($content = $this->module($request)) {
-      return $this->module($request);
-    }
-    return view('home.404');
-  }
-
-  protected function article(Request $request)
-  {
-    return view('home');
-  }
-
-  protected function module(Request $request)
   {
     if (module()) {
       module(site()->module['name']);
-      $class = 'Modules\\' . site()->module['name'] . '\Http\Controllers\HomeController';
+      $class = 'Modules\\' . site()->module['name'] . '\Http\Controllers\Front\HomeController';
       return app($class)->index($request);
     }
   }

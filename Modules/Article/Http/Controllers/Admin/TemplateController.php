@@ -16,6 +16,7 @@ class TemplateController extends Controller
   public function index(TemplateService $templateService)
   {
     $templates = $templateService->getSiteTemplates(site());
+
     return view('article::admin.template.index', compact('templates'));
   }
 

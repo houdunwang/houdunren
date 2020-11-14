@@ -58,6 +58,9 @@
         <a href="{{ route('site.role.index',$site) }}" class="text-muted mr-2">
           <i class="fa fa-user-secret" aria-hidden="true"></i> 角色管理
         </a>
+        <a href="{{ route('site.menu.index',$site) }}" class="text-muted mr-2">
+          <i class="fa fa-file-text-o" aria-hidden="true"></i> 站点菜单
+        </a>
         <a href="{{ route('site.site.edit',$site) }}" class="text-muted mr-2">
           <i class="fa fa-pencil-square-o"></i> 编辑
         </a>

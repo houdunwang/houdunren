@@ -3,37 +3,30 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\Menu;
 use App\Models\Site;
-use App\Services\MenuService;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
 
-/**
- * 后台菜单
- * @package App\Http\Controllers\Site
- */
 class MenuController extends Controller
 {
-  public function show(Site $site, string $tag, string $path, MenuService $menuService)
+  public function index(Site $site)
   {
-    $menuService->currentActiveMenu($tag, explode('-', $path));
-
-    return redirect($menuService->currentActiveMenuRoute($tag));
+    return view('menu.index', compact('site'));
   }
 
-  /**
-   * 切换菜单模块
-   * @param Site $site
-   * @param string $module
-   * @param MenuService $menuService
-   * @return RedirectResponse
-   * @throws BindingResolutionException
-   */
-  // public function module(Site $site, string $module, MenuService $menuService)
-  // {
-  //   $menuService->module($module);
+  public function get(Site $site)
+  {
+    return $site->menus;
+  }
 
-  //   return back();
-  // }
+  public function store(Request $request, Site $site, Menu $menu)
+  {
+    Menu::where('site_id', $site['id'])->delete();
+    foreach ($request->menus as $menu) {
+      if ($menu['title'] && preg_match('/^http/i', $menu['url'])) {
+        Menu::create($menu + ['site_id' => $site['id']]);
+      }
+    }
+    return ['message' => '菜单修改成功'];
+  }
 }

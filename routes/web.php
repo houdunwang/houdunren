@@ -66,13 +66,15 @@ Route::group(['prefix' => 'site', 'namespace' => 'Site', 'as' => 'site.', 'middl
   Route::put('{site}/admin/role/{user}', 'AdminController@updateRole')->name('admin.role.update');
   Route::get('{site}/module', 'ModuleController@index')->name('module.index');
   Route::get('{site}/module/{module}', 'ModuleController@admin')->name('module.admin');
-  Route::get('{site}/menu/{tag}/{path}', 'MenuController@show')->name('menu.show')->middleware('admin');
-  Route::get('{site}/menu/module/{module}', 'MenuController@module')->name('menu.module')->middleware('admin');
+  Route::get('{site}/menu', 'MenuController@index')->name('menu.index');
+  Route::get('{site}/menu/get', 'MenuController@get')->name('menu.get');
+  Route::post('{site}/menu', 'MenuController@store')->name('menu.store');
 });
 
 Route::group(['prefix' => 'module', 'namespace' => 'Module', 'as' => 'module.', 'middleware' => ['auth', 'admin']], function () {
   Route::get('config', 'ConfigController@edit')->name('config.edit');
   Route::post('config', 'ConfigController@store')->name('config.store');
+  Route::get('menu/{path}', 'MenuController@show')->name('menu.show');
 });
 
 Route::group(['prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.', 'middleware' => ['auth', 'front']], function () {

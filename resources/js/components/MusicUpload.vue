@@ -5,7 +5,7 @@
         <audio controls>
           <source :src="url" type="audio/mp3" />
         </audio>
-        <button class="btn btn-sm btn-secondary">生新上传</button>
+        <button class="btn btn-sm btn-secondary">重新上传</button>
       </div>
       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>

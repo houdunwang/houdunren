@@ -24,8 +24,7 @@ class TemplateService
    */
   public function all()
   {
-    $templates = File::directories(base_path('templates'));
-
+    $templates = File::directories(public_path('templates'));
     return collect($templates)->map(function ($template) {
       return $this->find(basename($template));
     });
@@ -64,7 +63,7 @@ class TemplateService
   {
     $template = $this->find($name);
     $model = Template::create($template);
-    $model['preview'] = $this->preview($name);
+    // $model['preview'] = $this->preview($name);
     $model->save();
     return $model;
   }
@@ -72,18 +71,18 @@ class TemplateService
   /**
    * 模板预览图片
    */
-  protected function preview($name)
-  {
-    $dir = public_path("templates/{$name}");
-    $preview = "{$dir}/preview.jpg";
-    if (!is_dir($dir)) {
-      File::makeDirectory(public_path("templates/{$name}"), 0755, true);
-    }
-    if (!is_file($preview)) {
-      File::copy(base_path("templates/{$name}/preview.jpg"), $preview);
-    }
-    return $preview;
-  }
+  // protected function preview($name)
+  // {
+  //   $dir = public_path("templates/{$name}");
+  //   $preview = "{$dir}/preview.jpg";
+  //   if (!is_dir($dir)) {
+  //     File::makeDirectory(public_path("templates/{$name}"), 0755, true);
+  //   }
+  //   if (!is_file($preview)) {
+  //     File::copy(base_path("templates/{$name}/preview.jpg"), $preview);
+  //   }
+  //   return $preview;
+  // }
   /**
    * 根据模板标识获取模板
    * @param string $name
@@ -100,7 +99,7 @@ class TemplateService
       'description' => $config['description'],
       'version' => $config['version'],
       'installed' => $installed,
-      'preview' => $installed ? "/templates/{$name}/preview.jpg" : "/images/nopic160x160.jpg",
+      'preview' => url("templates/{$name}/preview.jpg"),
       'model' => $model,
     ]);
   }
@@ -114,7 +113,9 @@ class TemplateService
    */
   protected function config(string $name, $fileName = 'config')
   {
-    return include base_path("templates/{$name}/{$fileName}.php");
+    // dd(public_path("templates/{$name}/{$fileName}.json"));
+    $content = file_get_contents(public_path("templates/{$name}/{$fileName}.json"));
+    return json_decode($content, true);
   }
 
   /**
@@ -126,12 +127,13 @@ class TemplateService
   public function template(Site $site)
   {
     $config = $this->config($site->template->name);
-    $type = $config['type'] ?? 1;
+    $type = $config['type'] ?? 2;
     if ($type == 2) {
-      $path = base_path('templates/' . $site->template->name);
+      $path = public_path('templates/' . $site->template->name);
     } else {
-      $path = base_path('templates/' . $site->template->name . '/' . (Browser::isDesktop() ? 'pc' : 'phone'));
+      $path = public_path('templates/' . $site->template->name . '/' . (Browser::isDesktop() ? 'pc' : 'phone'));
     }
     View::addLocation($path);
+    View::addExtension('html', 'blade');
   }
 }

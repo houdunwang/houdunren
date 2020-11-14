@@ -7,11 +7,11 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        @if ($module = session('module'))
+        @if ($module = session('module_name'))
         <li class="nav-item mr-3">
           <a class="nav-link" href="/{{ module()['name'] }}/admin">
             <i class="fa fa-reply-all" aria-hidden="true"></i>
-            继续管理{{ $module['title'] }}模块
+            继续管理{{ module()['title'] }}模块
           </a>
         </li>
         @endif

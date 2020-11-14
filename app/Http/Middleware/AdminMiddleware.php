@@ -6,6 +6,10 @@ use App\Services\ConfigService;
 use App\Services\PermissionService;
 use Closure;
 
+/**
+ * 模块后台管理中间件
+ * @package App\Http\Middleware
+ */
 class AdminMiddleware
 {
   public function handle($request, Closure $next)

@@ -103,4 +103,13 @@ class Site extends Model
   {
     return $this->hasMany(WeChat::class, 'site_id');
   }
+
+  /**
+   * 站点菜单
+   * @return HasMany
+   */
+  public function menus()
+  {
+    return $this->hasMany(Menu::class);
+  }
 }
