@@ -47,27 +47,24 @@
       <div class="sidebar-heading">
         系统菜单
       </div>
+      @if (module()['front']??false)
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('site.module.index',site()['id']) }}">
-          <i class="fas fa-fw fa-archive"></i>
-          <span>模块列表</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin') }}">
-          <i class="fas fa-fw fa-table"></i>
-          <span>站点列表</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/" target="_blank">
+        <a class="nav-link" href="/{{ module()['name'] }}" target="_blank">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>网站首页</span>
+          <span>模块前台</span>
+        </a>
+      </li>
+      @endif
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('site.site.edit',site()) }}">
+          <i class="fas fa-fw fa-table"></i>
+          <span>编辑站点</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('wechat.wechat.index',site()) }}" target="_blank">
+        <a class="nav-link" href="{{ route('wechat.wechat.index',site()) }}">
           <i class="fab fa-weixin    "></i>
-          <span>公众号配置</span>
+          <span>公众号</span>
         </a>
       </li>
       <hr class="sidebar-divider d-none d-md-block">

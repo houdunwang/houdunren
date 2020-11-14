@@ -14,3 +14,7 @@ Route::group(['prefix' => 'Article/admin', 'middleware' => ['auth', 'admin'], 'n
   Route::resource('template', 'TemplateController')->only('index');
   Route::get('template/set/{template}', 'TemplateController@set')->name('template.set');
 });
+
+Route::group(['prefix' => 'Article', 'middleware' => ['front'], 'namespace' => 'Front', 'as' => 'Article.front.'], function () {
+  Route::get('/', 'HomeController@index');
+});
