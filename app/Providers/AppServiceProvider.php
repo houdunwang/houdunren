@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Config;
 use App\Models\Group;
 use App\Observers\GroupObserver;
+use App\Services\TagService;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;

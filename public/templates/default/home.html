@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet" />
-    <title>{{ site()['title'] }}</title>
-  </head>
-  <body>
-    <div class="container">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet" />
+  <title>{{ site()['title'] }}</title>
+</head>
+
+<body>
+  @menu
+  <a href="{{ $menu['url'] }}">
+    {{ $menu['title'] }}
+  </a>
+  @endmenu
+  <!-- <div class="container">
       <div class="row">
         <div class="col-12">
           <nav class="navbar navbar-expand-sm navbar-light bg-light border">
@@ -32,6 +39,7 @@
           </nav>
         </div>
       </div>
-    </div>
-  </body>
+    </div> -->
+</body>
+
 </html>

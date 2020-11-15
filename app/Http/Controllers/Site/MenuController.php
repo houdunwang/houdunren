@@ -23,7 +23,7 @@ class MenuController extends Controller
   {
     Menu::where('site_id', $site['id'])->delete();
     foreach ($request->menus as $menu) {
-      if ($menu['title'] && preg_match('/^http/i', $menu['url'])) {
+      if ($menu['title'] && $menu['url']) {
         Menu::create($menu + ['site_id' => $site['id']]);
       }
     }

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Site;
 use App\Services\ConfigService;
+use App\Services\TagService;
 use App\Services\TemplateService;
 use Closure;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -43,6 +44,7 @@ class FrontMiddleware
       //设置文章模块模板路径
       if (module()['name'] == 'Article') {
         app(TemplateService::class)->template(site());
+        app(TagService::class)->make();
       }
     }
   }
