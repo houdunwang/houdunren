@@ -34,7 +34,7 @@
       <td>
         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
           <a href="{{ route('article.admin.field.edit',$field) }}" class="btn btn-outline-success">编辑</a>
-          <btn-del action="{{ route('article.admin.field.destroy',$field) }}" class="btn btn-outline-danger" />
+          <hd-btn-del action="{{ route('article.admin.field.destroy',$field) }}" class="btn btn-outline-danger" />
         </div>
       </td>
     </tr>

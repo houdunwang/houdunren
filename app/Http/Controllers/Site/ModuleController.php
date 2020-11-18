@@ -15,7 +15,7 @@ use Illuminate\Contracts\View\Factory;
 use LogicException;
 
 /**
- * 站点模块管理
+ * 站点模块
  * @package App\Http\Controllers\Site
  */
 class ModuleController extends Controller
@@ -32,7 +32,7 @@ class ModuleController extends Controller
   {
     $modules = $moduleService->getSiteModulesByPermission($site);
 
-    return view('site_module.index', compact('site', 'modules'));
+    return view('site.module.index', compact('site', 'modules'));
   }
 
   /**

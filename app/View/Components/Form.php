@@ -4,6 +4,10 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
+/**
+ * 前台表单组件
+ * @package App\View\Components
+ */
 class Form extends Component
 {
   protected $theme;

@@ -16,7 +16,7 @@ use Spatie\Permission\Models\Role;
 class Site extends Model
 {
 
-  protected $fillable = ['title', 'domain', 'module_id', 'user_id', 'template_id', 'domain_action', 'template_id'];
+  protected $fillable = ['title', 'domain', 'module_id', 'user_id', 'template_id',];
 
   protected $casts = [
     'config' => 'array',

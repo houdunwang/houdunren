@@ -27,14 +27,14 @@ class SiteController extends Controller
       $sites = user()->allSites;
     }
 
-    return view('site.index', compact('sites'));
+    return view('site.site.index', compact('sites'));
   }
 
   public function create(ModuleService $moduleService)
   {
     $modules = $moduleService->allInstalled();
     $templates = user()->group->templates;
-    return view('site.create', compact('modules', 'templates'));
+    return view('site.site.create', compact('modules', 'templates'));
   }
 
   public function store(SiteRequest $request, Site $site)
@@ -54,7 +54,7 @@ class SiteController extends Controller
     $modules = $moduleService->allInstalled();
     $templates = user()->group->templates;
 
-    return view('site.edit', compact('modules', 'site', 'templates'));
+    return view('site.site.edit', compact('modules', 'site', 'templates'));
   }
 
   public function update(SiteRequest $request, Site $site)

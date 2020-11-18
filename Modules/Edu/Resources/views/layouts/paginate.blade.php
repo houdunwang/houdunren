@@ -1,5 +1,5 @@
 @mobile
-{{$data->withQueryString()->onEachSide(0)->links() }}
+{{$data->withQueryString()->onEachSide(1)->links() }}
 @endmobile
 
 @desktop

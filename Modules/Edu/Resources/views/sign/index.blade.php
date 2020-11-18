@@ -26,8 +26,8 @@
       <div class="card-body h6 font-weight-normal">
         @csrf
         <input type="text" name="content" value="{{ old('content') }}"
-          class="form-control form-control-lg @error('content')is-invalid @enderror" required
-          placeholder=" 你今天的心情或最想说的话">
+               class="form-control form-control-lg @error('content')is-invalid @enderror" required
+               placeholder=" 你今天的心情或最想说的话">
         @error( 'content')
         <strong class="form-text text-danger invalid-feedback">{{ $message }}</strong>
         @enderror
@@ -114,11 +114,11 @@
               {{ $sign->content }}
               @if (is_master() || $sign->user_id == user('id'))
 
-              <btn-del action="{{ route('Edu.front.sign.destroy',$sign) }}" class="ml-1 small">
+              <hd-btn-del action="{{ route('Edu.front.sign.destroy',$sign) }}" class="ml-1 small">
                 <i class="fas fa-times-circle"></i>删除
-              </btn-del>
+                </btn-del>
 
-              @endif
+                @endif
             </td>
           </tr>
           @endforeach

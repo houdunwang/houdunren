@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="alert alert-primary" role="alert">链接格式错误的菜单将会被忽略</div>
+    <div class="alert alert-info" role="alert"><i class="fa fa-info-circle" aria-hidden="true"></i> 链接格式错误的菜单将会被忽略</div>
     <table class="table table-bordered">
       <thead>
         <tr>

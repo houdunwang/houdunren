@@ -7,6 +7,10 @@ use App\Models\Site;
 use App\Models\WeChat;
 use Illuminate\Http\Request;
 
+/**
+ * 站点配置
+ * @package App\Http\Controllers\Site
+ */
 class ConfigController extends Controller
 {
   public function __construct()
@@ -18,7 +22,7 @@ class ConfigController extends Controller
   {
     config(['site' => $site->config]);
     $wechats = WeChat::where('site_id', $site['id'])->get();
-    return view('site_config.edit', compact('site', 'wechats'));
+    return view('site.config.edit', compact('site', 'wechats'));
   }
 
   public function update(Request $request, Site $site)

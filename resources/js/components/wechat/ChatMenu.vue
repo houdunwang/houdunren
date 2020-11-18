@@ -46,10 +46,6 @@
             </label>
           </div>
 
-          <!-- <select class="form-control" id="exampleFormControlSelect1" v-model="menu.type">
-              <option value="click">关键词</option>
-              <option value="view">链接</option>
-          </select>-->
           <div class="form-group" v-if="menu.type == 'click'">
             <label>关键词</label>
             <input type="text" class="form-control" v-model="menu.key" />
@@ -123,11 +119,11 @@ export default {
       })
     },
     async submit() {
-      let url = `site/wechat/${this.siteid}/wechat/menu/${this.wechatid}`
+      let url = `/wechat/${this.siteid}/menu/${this.wechatid}`
       await this.axios.put(url, { button: this.button })
     },
     async push() {
-      let url = `site/wechat/${this.siteid}/wechat/menu/push/${this.wechatid}`
+      let url = `/wechat/${this.siteid}/menu/push/${this.wechatid}`
       await this.axios.get(url)
     },
   },

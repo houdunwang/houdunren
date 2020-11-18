@@ -17,6 +17,7 @@ return [
     'items' => [
       ['title' => '文章列表', 'permission' => 'content.index', 'url' => route('article.admin.content.index')],
       ['title' => '发表文章', 'permission' => 'content.create', 'url' => route('article.admin.content.category')],
+      // ['title' => '幻灯片', 'permission' => 'slide.index', 'url' => route('article.admin.slide.index')],
     ],
   ],
   [

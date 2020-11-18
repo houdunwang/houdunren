@@ -96,7 +96,7 @@
                 <img class="img-profile rounded-circle" src="{{ user()->avatar }}">
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="{{ route('admin.my.edit') }}">
+                <a class="dropdown-item" href="{{ route('system.my.edit') }}">
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                   修改密码
                 </a>
@@ -110,7 +110,7 @@
           </ul>
         </nav>
         <div class="bg-white mt-4 m-3 p-4 shadow-sm rounded {{ route_class() }}" id="app">
-          @include('layouts.message')
+          @include('layouts.common._message')
           @yield('content')
         </div>
       </div>

@@ -22,8 +22,8 @@
 @push('scripts')
 <script>
   function change(){
-  location.href= `/article/admin/content/create/${document.getElementById('category').value}`
-}
+    location.href= `/Article/admin/content/create/${document.getElementById('category').value}`
+  }
 </script>
 @endpush
 

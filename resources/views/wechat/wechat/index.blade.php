@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('layouts.admin.master')
 @section('content')
-@include('wechat.nav')
+@include('wechat._nav')
 
 <table class="table table-bordered mt-3 shadow-sm">
   <thead>
@@ -10,7 +10,7 @@
       <th>微信号</th>
       <th>类型</th>
       <th>API</th>
-      <th width="250">操作</th>
+      <th width="300">操作</th>
     </tr>
   </thead>
   <tbody>
@@ -26,9 +26,6 @@
       <td>
         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
           <chat-user-sync :site_id="{{ $site['id'] }}" :wechat_id="{{ $wechat['id'] }}">同步粉丝</chat-user-sync>
-          {{-- <a href="{{ route("wechat.user.sync",[$site,$wechat]) }}" class="btn btn-outline-primary">
-          同步粉丝
-          </a> --}}
           <a href="{{ route("wechat.menu.edit",[$site,$wechat]) }}" class="btn btn-outline-info">
             微信菜单
           </a>
@@ -39,8 +36,9 @@
 
           <a href="{{ route("wechat.wechat.edit",[$site,$wechat]) }}" class="btn btn-outline-info">编辑</a>
 
-          <btn-del action="{{ route('wechat.wechat.destroy',[$site,$wechat]) }}" class="btn btn-outline-secondary"> 删除
-          </btn-del>
+          <hd-btn-del action="{{ route('wechat.wechat.destroy',[$site,$wechat]) }}" class="btn btn-outline-secondary">
+            删除
+          </hd-btn-del>
         </div>
       </td>
     </tr>

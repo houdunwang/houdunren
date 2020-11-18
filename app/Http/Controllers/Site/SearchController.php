@@ -7,6 +7,10 @@ use App\Models\Site;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+/**
+ * 搜索站点管理员
+ * @package App\Http\Controllers\Site
+ */
 class SearchController extends Controller
 {
   /**

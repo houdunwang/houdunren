@@ -41,7 +41,7 @@
           </span>
           <span v-if="!reply_user.id">发表评论</span>
         </div>
-        <editor name="content" action="/common/upload/image" :content.sync="content" :key="sendId"></editor>
+        <hd-totast-editor name="content" action="/common/upload/image" :content.sync="content" :key="sendId"></hd-totast-editor>
         <div class="card-footer text-muted">
           <button type="button" class="btn btn-primary btn-sm d-inline-block" @click="submit">保存</button>
           <strong class="text-danger d-inline-block ml-3" v-if="errors.content" style="font-size: 13px">{{ errors.content }}</strong>
@@ -61,7 +61,6 @@
 
 
 <script>
-import Editor from '../../../../../resources/js/components/Editor.vue'
 import { mapState } from 'vuex'
 import ToastEditor from '@toast-ui/editor'
 export default {

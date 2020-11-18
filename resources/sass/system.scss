@@ -1,0 +1,74 @@
+// 系统业务
+
+body {
+  background: #fafafa;
+}
+.system {
+  min-height: 100vh;
+  background: url('/images/admin-bg.jpg');
+  background-size: cover;
+  .admin-header {
+    .bg-dark {
+      background: #353738 !important;
+    }
+  }
+  .quick-menu {
+    .logo {
+      img {
+        max-width: 350px;
+      }
+    }
+    .menu-items {
+      a {
+        color: #333;
+        background: #fff;
+        padding: 10px 20px;
+        border-radius: 6px;
+        opacity: 0.7;
+        width: 8rem;
+        &:hover {
+          opacity: 0.9;
+        }
+        i {
+          font-size: 30px;
+          margin-bottom: 5px;
+        }
+        span {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  //系统菜单页面
+  .system-index {
+    h6 {
+      border-left: solid 5px #333;
+    }
+    .system-menu {
+      width: 8rem;
+    }
+  }
+
+  //模块列表
+  .system-module-index {
+    section {
+      img {
+        width: 45px;
+      }
+      &:last-child {
+        border-bottom: none !important;
+      }
+    }
+  }
+}
+
+.site-module-index {
+  .text-secondary {
+    height: 3rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}

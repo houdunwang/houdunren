@@ -18,9 +18,9 @@
       <div class="card-footer text-center">
         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
           <a href="{{ route('WeChat.admin.news.edit',$new) }}" class="btn btn-success">编辑</a>
-          <btn-del action="{{ route('WeChat.admin.news.destroy',$new) }}" class="btn btn-secondary">
+          <hd-btn-del action="{{ route('WeChat.admin.news.destroy',$new) }}" class="btn btn-secondary">
             删除
-          </btn-del>
+            </btn-del>
         </div>
       </div>
     </div>

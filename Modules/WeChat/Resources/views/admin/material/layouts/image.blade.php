@@ -10,9 +10,10 @@
         <a :href="`/WeChat/admin/material/preview/`+user.wechat_user[0].openid+'/'+{{ $material['id'] }}"
            class="btn btn-info btn-sm">发送预览</a>
       </chat-user>
-      <btn-del action="{{ route('WeChat.admin.material.destroy',$material) }}" class="btn btn-outline-secondary btn-sm">
+      <hd-btn-del action="{{ route('WeChat.admin.material.destroy',$material) }}"
+                  class="btn btn-outline-secondary btn-sm">
         删除
-      </btn-del>
+        </btn-del>
     </div>
   </div>
 </div>

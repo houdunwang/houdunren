@@ -6,27 +6,31 @@ use App\Models\User;
 use Auth;
 use Illuminate\Routing\Controller;
 
+/**
+ * 关注
+ * @package App\Http\Controllers\Common
+ */
 class FollowerController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
+  public function make(User $user)
+  {
+    if ($user->isFans) {
+      $user->fans()->detach(Auth::id(), [
+        'site_id' => site()['id'],
+        'module_id' => module()['id']
+      ]);
+    } else {
+      $user->fans()->attach(Auth::id(), [
+        'site_id' => site()['id'],
+        'module_id' => module()['id']
+      ]);
     }
 
-    public function make(User $user)
-    {
-        if ($user->isFans) {
-            $user->fans()->detach(Auth::id(), [
-                'site_id' => site()['id'],
-                'module_id' => module()['id']
-            ]);
-        } else {
-            $user->fans()->attach(Auth::id(), [
-                'site_id' => site()['id'],
-                'module_id' => module()['id']
-            ]);
-        }
-
-        return back();
-    }
+    return back();
+  }
 }

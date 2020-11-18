@@ -16,7 +16,7 @@ class ContentController extends Controller
 {
   public function index()
   {
-    $contents = ArticleContent::where('site_id', site()['id'])->paginate();
+    $contents = ArticleContent::where('site_id', site()['id'])->latest()->paginate();
     return view('article::admin.content.index', compact('contents'));
   }
 

@@ -27,7 +27,6 @@
         errorEl && errorEl.remove()
     })
 </script>
-
 @endpush
 
 <div id="{{ $attributes['name'] }}" class="tuiEditor"></div>

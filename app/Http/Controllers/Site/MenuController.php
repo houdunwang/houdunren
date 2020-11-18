@@ -7,13 +7,23 @@ use App\Models\Menu;
 use App\Models\Site;
 use Illuminate\Http\Request;
 
+/**
+ * 站点通用菜单
+ * 供前台模块使用
+ * @package App\Http\Controllers\Site
+ */
 class MenuController extends Controller
 {
   public function index(Site $site)
   {
-    return view('menu.index', compact('site'));
+    return view('site.menu.index', compact('site'));
   }
 
+  /**
+   * 获取所有菜单
+   * @param Site $site
+   * @return mixed
+   */
   public function get(Site $site)
   {
     return $site->menus;

@@ -25,8 +25,8 @@
         <td class="text-right">
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
             <a href="{{ route('Edu.admin.system.edit',$lesson['id']) }}" class="btn btn-info">编辑</a>
-            <btn-del action="{{ route('Edu.admin.system.destroy',$lesson['id']) }}" class="btn btn-secondary">删除
-            </btn-del>
+            <hd-btn-del action="{{ route('Edu.admin.system.destroy',$lesson['id']) }}" class="btn btn-secondary">删除
+              </btn-del>
           </div>
         </td>
       </tr>

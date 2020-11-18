@@ -14,7 +14,8 @@
         @endforeach
       </div>
       <div class="v-cloak">
-        <editor :content.sync="content" action="{{ route('common.upload.make') }}" name="content"></editor>
+        <hd-toast-editor :content.sync="content" action="{{ route('common.upload.make') }}" name="content">
+        </hd-toast-editor>
         <textarea hidden name="content" v-model="content"></textarea>
       </div>
     </div>

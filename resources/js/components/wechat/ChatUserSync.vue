@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     async get(next_openid = null) {
-      const response = await this.axios.get(`site/wechat/${this.site_id}/user/sync/${this.wechat_id}/${next_openid}`)
+      const response = await this.axios.get(`wechat/${this.site_id}/user/sync/${this.wechat_id}/${next_openid}`)
 
       if (response.state == 1) {
         return this.$message.info('微信粉丝同步完成')

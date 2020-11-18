@@ -26,7 +26,7 @@ class ConfigController extends Controller
    */
   public function edit()
   {
-    return view('module_config.edit');
+    return view('module.config.edit');
   }
 
   /**
