@@ -62,9 +62,9 @@
 
 <script>
 import { mapState } from 'vuex'
-import ToastEditor from '@toast-ui/editor'
+// import ToastEditor from '@toast-ui/editor'
 export default {
-  components: { Editor },
+  // components: { Editor },
   props: {
     model: { required: true, type: String },
     id: { required: true, type: Number },

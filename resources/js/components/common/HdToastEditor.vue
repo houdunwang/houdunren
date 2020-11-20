@@ -14,7 +14,7 @@ import Editor from '@toast-ui/editor'
 export default {
   props: {
     name: { required: true, type: String },
-    content: { default: '' },
+    value: { default: '' },
     //后台上传地址
     action: { required: true, type: String },
     //编辑器高度
@@ -38,7 +38,7 @@ export default {
       const editor = new Editor({
         el: document.querySelector('#' + this.name),
         previewStyle: this.previewStyle,
-        initialValue: this.content,
+        initialValue: this.value,
         initialEditType: this.initialEditType,
         height: this.height,
         language: 'zh-CN',
@@ -46,7 +46,7 @@ export default {
         events: {
           //监听编辑器输入
           change: function () {
-            Vue.$emit('update:content', editor.getMarkdown())
+            Vue.$emit('update:value', editor.getMarkdown())
           },
         },
         hooks: {

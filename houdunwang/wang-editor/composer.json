@@ -1,0 +1,15 @@
+{
+  "name": "houdunwang/wang-editor",
+  "authors": [
+    {
+      "name": "向军大叔",
+      "email": "2300071698@qq.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "houdunwang/wangEditor": "src"
+    }
+  }
+}

@@ -75,8 +75,8 @@
             <textarea class="form-control" v-model="current.digest" rows="3"></textarea>
           </div>
 
-          <hd-image-upload :value.sync="current.picurl"></image-upload>
-          <wang-editor :value.sync="current.content" :uploadImgServer="'/common/upload/wangEditorMaterialNewsUpload/' + wechat_id"></wang-editor>
+          <hd-image-upload :value.sync="current.picurl" />
+          <hd-wang-editor :value.sync="current.content" :uploadImgServer="'/common/upload/wangEditorMaterialNewsUpload/' + wechat_id"></hd-wang-editor>
         </div>
 
         <div class>

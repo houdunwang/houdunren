@@ -1,12 +1,6 @@
 {
-    "/js/app.js": "/js/app.js?id=1e01226c696a71b769b7",
+    "/js/app.js": "/js/app.js?id=243e69a3f0abd97b4bc5",
     "/css/app.css": "/css/app.css?id=7da67624eb42f3dc16ee",
     "/js/manifest.js": "/js/manifest.js?id=41f053ba9a94d81b39f8",
-    "/js/vendor.js": "/js/vendor.js?id=df9b71a7a97679717a1f",
-    "/modules/Article/app.js": "/modules/Article/app.js",
-    "/modules/Article/app.css": "/modules/Article/app.css",
-    "/modules/WeChat/app.js": "/modules/WeChat/app.js",
-    "/modules/WeChat/app.css": "/modules/WeChat/app.css",
-    "/modules/Edu/app.js": "/modules/Edu/app.js",
-    "/modules/Edu/app.css": "/modules/Edu/app.css"
+    "/js/vendor.js": "/js/vendor.js?id=df9b71a7a97679717a1f"
 }

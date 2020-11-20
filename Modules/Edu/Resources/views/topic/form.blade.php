@@ -14,9 +14,8 @@
         @endforeach
       </div>
       <div class="v-cloak">
-        <hd-toast-editor :content.sync="content" action="{{ route('common.upload.make') }}" name="content">
-        </hd-toast-editor>
-        <textarea hidden name="content" v-model="content"></textarea>
+        <x-editor theme="toast" name="content" value="默认值-后盾人" type="markdown" height="300"
+                  action="{{ route('common.upload.make') }}" />
       </div>
     </div>
     <div class="card-footer text-muted">
@@ -25,7 +24,7 @@
   </div>
 </div>
 
-@push('vue')
+{{-- @push('vue')
 <script>
   window.vue={
         data:{
@@ -33,4 +32,4 @@
         }
     }
 </script>
-@endpush
+@endpush --}}

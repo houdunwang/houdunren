@@ -23,7 +23,7 @@
     @include('edu::layouts.header')
     <div class="content {{ route_class() }}">
       <div class="container">
-        @include('layouts.message')
+        @include('layouts.common._message')
       </div>
       @yield('content')
     </div>

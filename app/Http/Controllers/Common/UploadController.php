@@ -52,9 +52,11 @@ class UploadController extends Controller
    */
   public function wangEditor(Request $request, UploadService $UploadService)
   {
-    $request->validate(['file' => ['required', 'mimes:jpeg,png', 'max:2500']]);
+    $name = key($request->all());
 
-    $file = $UploadService->make($request->file);
+    $request->validate([$name => ['required', 'mimes:jpeg,png', 'max:2500']]);
+
+    $file = $UploadService->make($request[$name]);
     return json_encode([
       'errno' => 0,
       'data' => [$file->path],

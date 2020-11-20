@@ -1,12 +1,16 @@
 <template>
-  <div id="editor"></div>
+  <div>
+    <div :id="name"></div>
+    <tex
+  </div>
 </template>
 
 <script>
 import wangEditor from 'wangEditor'
 export default {
   props: {
-    uploadImgServer: { type: String, default: '/common/upload/wangEditor' },
+    name: { type: String, default: 'editor' },
+    action: { type: String, default: '/common/upload/wangEditor' },
     value: { type: String, default: '' },
   },
 
@@ -26,7 +30,7 @@ export default {
   },
   mounted() {
     this.editor = new wangEditor('#editor')
-    this.editor.customConfig.uploadImgServer = this.uploadImgServer
+    this.editor.customConfig.uploadImgServer = this.action
     this.editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024
     this.editor.customConfig.uploadImgMaxLength = 5
     this.editor.customConfig.uploadFileName = 'file'
@@ -70,9 +74,7 @@ export default {
     uploadHandle() {
       return {
         before: function (xhr, editor, files) {},
-        success: function (xhr, editor, result) {
-          console.log(result)
-        },
+        success: function (xhr, editor, result) {},
         fail: function (xhr, editor, result) {},
         error: function (xhr, editor) {},
         timeout: function (xhr, editor) {},

@@ -46,7 +46,7 @@
             <div class="card-body p-0">
               <div class="list-group list-group-flush">
                 <a href="{{ route('Edu.member.duration') }}"
-                  class="list-group-item list-group-item-action text-secondary ">
+                   class="list-group-item list-group-item-action text-secondary ">
                   会员周期
                 </a>
                 <a href="{{ route('Edu.member.order') }}" class="list-group-item list-group-item-action text-secondary">
@@ -56,7 +56,7 @@
                   我的贴子
                 </a>
                 <a href="{{ route('Edu.member.message') }}"
-                  class="list-group-item list-group-item-action text-secondary">
+                   class="list-group-item list-group-item-action text-secondary">
                   站内消息
                 </a>
               </div>

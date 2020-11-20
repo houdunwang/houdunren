@@ -40,13 +40,13 @@ class Form extends Component
     $this->hidden = $hidden ? ' hidden ' : '';
   }
 
-  public function render()
-  {
-    return view('components.form.' . $this->theme);
-  }
-
   public function validateName($name)
   {
     return str_replace(['[', ']'], ['.', ''], $name);
+  }
+
+  public function render()
+  {
+    return view('components.form.' . $this->theme);
   }
 }
