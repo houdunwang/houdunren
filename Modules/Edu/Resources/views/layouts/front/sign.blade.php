@@ -5,16 +5,15 @@
     </span>
   </a>
   <div class="d-flex flex-column justify-content-between">
-    <a href="{{ route('Edu.front.topic.show',$activity->subject) }}" class="text-secondary h5">
-      {{ $activity->subject->title }}
+    <a href="{{ route('Edu.front.sign.index') }}" class="text-secondary h5">
+      {{ $activity->subject->content }}
     </a>
     <div class="small text-black-50">
-      <span class="badge badge-info">贴子</span>
-      <a href="{{ route('Edu.space.fans',$activity->subject->user) }}" class="">
+      <span class="badge badge-success">每日签到</span>
+      <a href="{{ route('Edu.space.fans',$activity->subject->user) }}">
         {{ $activity->subject->user->name }}
       </a>
-      . 更新于 {{ $activity->updated_at->diffForHumans() }}
-      <span>. 评论 {{ $topic['comment_count'] }}</span>
+      . 发表于 {{ $activity->updated_at->diffForHumans() }}
     </div>
   </div>
 </div>

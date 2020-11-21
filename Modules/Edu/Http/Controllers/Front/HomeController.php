@@ -24,6 +24,6 @@ class HomeController extends Controller
       ->with(['subject.user', 'causer'])
       ->paginate();
 
-    return view('edu::index', compact('activities', 'topics'));
+    return view('edu::front.home.index', compact('activities', 'topics'));
   }
 }
