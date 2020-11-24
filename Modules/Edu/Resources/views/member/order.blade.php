@@ -1,5 +1,4 @@
-@extends('edu::layouts.member')
-
+@extends('member.layouts.master')
 @section('content')
 <div class="card shadow-sm">
   <div class="card-header bg-white">
@@ -29,7 +28,7 @@
       </tbody>
     </table>
     <div class="mt-3">
-      @include('edu::layouts.paginate',['data'=>$orders])
+      @include('edu::layouts._paginate',['data'=>$orders])
     </div>
   </div>
 </div>

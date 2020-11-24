@@ -1,4 +1,4 @@
-@extends('layouts.admin.master')
+@extends('system.layouts.master'))
 @section('content')
 @include('site.role._nav')
 
@@ -24,10 +24,10 @@
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
             <a href="{{ route('site.role.edit',[$site->id,$role['id']]) }}"
                class="btn btn-outline-success">编辑</a>
-            <hd-btn-del action="{{ route('site.role.destroy',[$site->id,$role['id']]) }}"
-                        class="btn btn-outline-danger">删除</btn-del>
-              <a href="{{ route('site.permission.edit',[$site->id,$role['id']]) }}"
-                 class="btn btn-outline-primary">权限设置</a>
+            <btn-del action="{{ route('site.role.destroy',[$site->id,$role['id']]) }}"
+                     class="btn btn-outline-danger">删除</btn-del>
+            <a href="{{ route('site.permission.edit',[$site->id,$role['id']]) }}"
+               class="btn btn-outline-primary">权限设置</a>
           </div>
         </td>
       </tr>

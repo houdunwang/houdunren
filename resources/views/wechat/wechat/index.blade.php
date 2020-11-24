@@ -1,6 +1,6 @@
-@extends('layouts.admin.master')
+@extends('system.layouts.master'))
 @section('content')
-@include('wechat._nav')
+@include('wechat.layouts._nav')
 
 <table class="table table-bordered mt-3 shadow-sm">
   <thead>
@@ -36,9 +36,9 @@
 
           <a href="{{ route("wechat.wechat.edit",[$site,$wechat]) }}" class="btn btn-outline-info">编辑</a>
 
-          <hd-btn-del action="{{ route('wechat.wechat.destroy',[$site,$wechat]) }}" class="btn btn-outline-secondary">
+          <btn-del action="{{ route('wechat.wechat.destroy',[$site,$wechat]) }}" class="btn btn-outline-secondary">
             删除
-          </hd-btn-del>
+          </btn-del>
         </div>
       </td>
     </tr>

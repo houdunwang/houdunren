@@ -1,4 +1,4 @@
-@extends('layouts.module.admin')
+@extends('layouts.module.master')
 @section('content')
 @include('article::admin.content._nav')
 

@@ -1,4 +1,4 @@
-@extends('layouts.admin.master')
+@extends('system.layouts.master')
 
 @section('content')
 <div>
@@ -64,10 +64,10 @@
         <a href="{{ route('site.site.edit',$site) }}" class="text-muted mr-2">
           <i class="fa fa-pencil-square-o"></i> 编辑
         </a>
-        <hd-btn-del action="{{ route('site.site.destroy',$site) }}" class-name="text-muted mr-2">
+        <btn-del action="{{ route('site.site.destroy',$site) }}" class-name="text-muted mr-2">
           <i class="fa fa-trash"></i> 删除
-          </btn-del>
-          @endcan
+        </btn-del>
+        @endcan
 
       </div>
     </div>

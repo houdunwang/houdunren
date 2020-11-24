@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'HomeController@index')->name('home')->middleware('front');
+Route::get('/', 'Front\HomeController@index')->name('home')->middleware('front');
 
 Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware(['auth', 'system']);
 

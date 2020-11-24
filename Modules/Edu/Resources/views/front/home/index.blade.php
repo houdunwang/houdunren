@@ -1,5 +1,5 @@
-@extends('edu::layouts.front')
-@section('title')
+@extends('edu::front.layouts.master')
+@section('title',site()['title'])
 
 @section('content')
 <div>
@@ -13,28 +13,29 @@
           </div>
           <div class="card-body">
             @foreach ($topics as $topic)
-            @include('edu::layouts.front.topic',$topic)
+            @include('edu::layouts._topic',$topic)
             @endforeach
 
             @foreach ($activities as $activity)
+
             @if ($activity->subject && $activity->subject_type)
             @php
             $info = explode('\\',$activity->subject_type)
             @endphp
-            @include('edu::layouts.front.activity.'.strtolower(array_pop($info)))
+            @include('edu::layouts.activity.'.strtolower(array_pop($info)))
             @endif
 
             @endforeach
             <div class="pt-3">
-              @include('edu::layouts.front.paginate',['data'=>$activities])
+              @include('edu::layouts._paginate',['data'=>$activities])
             </div>
           </div>
         </div>
 
       </div>
       <div class="col-12 col-sm-3 mt-2">
-        @include('edu::components.tip')
-        @include('edu::components.learn')
+        @include('edu::layouts._tip')
+        @include('edu::layouts._learn')
       </div>
     </div>
   </div>

@@ -40,9 +40,7 @@
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>仪表盘</span></a>
       </li>
-
-      @include('layouts.module.menu')
-
+      @include('layouts.module._menu')
       <hr class="sidebar-divider">
       <div class="sidebar-heading">
         系统菜单
@@ -62,6 +60,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="{{ route('site.module.index',site()) }}">
+          <i class="fas fa-fw fa-table"></i>
+          <span>模块列表</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="{{ route('wechat.wechat.index',site()) }}">
           <i class="fab fa-weixin    "></i>
           <span>公众号</span>
@@ -78,10 +82,10 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-
           <div class="ml-3">
             @foreach ($moduleService->getSiteModulesByPermission(site()) as $module)
             <a href="{{ route('site.module.admin',[site(),$module['id']]) }}"
+               {{ module()['name'] }}333
                class="mr-4 font-weight-bold {{module()['name'] == $module['name']?'text-primary':'text-secondary' }}">
               <i class="{{ $module['icon']??'fas fa-pen-square' }}"></i> {{ $module['title'] }}
             </a>
@@ -110,7 +114,7 @@
           </ul>
         </nav>
         <div class="bg-white mt-4 m-3 p-4 shadow-sm rounded {{ route_class() }}" id="app">
-          @include('layouts.common._message')
+          @include('layouts._message')
           @yield('content')
         </div>
       </div>
@@ -135,7 +139,9 @@
     </div>
   </div>
 
-  @yield('scripts')
+  @stack('vue')
+  <script src="/modules/{{ module()['name'] }}/app.js?v={{ config('app.version') }}"></script>
+  @stack('scripts')
   <script src="/admin2/sb-admin-2.min.js"></script>
 </body>
 

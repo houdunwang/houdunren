@@ -1,4 +1,4 @@
-@extends('layouts.module.admin')
+@extends('layouts.module.master')
 @section('content')
 @include('article::admin.systemField._nav')
 <table class="table table-bordered">

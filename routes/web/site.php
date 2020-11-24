@@ -21,7 +21,7 @@ Route::group(['prefix' => 'site/{site}', 'namespace' => 'Site', 'as' => 'site.',
   Route::put('admin/role/{user}', 'AdminController@updateRole')->name('admin.role.update');
   //站点模块列表
   Route::get('module', 'ModuleController@index')->name('module.index');
-  Route::get('module/{module}', 'ModuleController@admin')->name('module.admin');
+  Route::get('module/admin/{module}', 'ModuleController@admin')->name('module.admin');
   //站点通用菜单供前台模块使用
   Route::get('menu', 'MenuController@index')->name('menu.index');
   Route::get('menu/get', 'MenuController@get')->name('menu.get');

@@ -1,7 +1,7 @@
 @inject('lesson', 'Modules\Edu\Entities\Lesson')
 @inject('video', 'Modules\Edu\Entities\Video')
 @inject('order', 'Modules\Edu\Entities\Order')
-@extends('layouts.module.admin')
+@extends('layouts.module.master')
 @section('content')
 <div class="row">
   <div class="col-xl-4 col-md-6 mb-4">
@@ -70,7 +70,7 @@
     </div>
   </div>
 </div>
-@include('layouts.module.system-menu')
+@include('layouts.module._system-menu')
 <div class="row">
   <div class="col-12 col-sm-6">
     <div class="card mt-3">

@@ -10,6 +10,10 @@ use Modules\Edu\Entities\Sign;
 use Modules\Edu\Entities\SignTotal;
 use Modules\Edu\Entities\User;
 
+/**
+ * 签到
+ * @package Modules\Edu\Http\Controllers\Front
+ */
 class SignController extends Controller
 {
   public function index()
@@ -19,7 +23,7 @@ class SignController extends Controller
       ->with('user')
       ->get();
 
-    return view('edu::sign.index', compact('signs'))->with('user', User::firstOrNew(['id' => Auth::id()]));
+    return view('edu::front.sign.index', compact('signs'))->with('user', User::firstOrNew(['id' => Auth::id()]));
   }
 
   public function store(Request $request, Sign $sign)

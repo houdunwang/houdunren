@@ -3,22 +3,25 @@
 namespace Modules\Edu\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Edu\Entities\System;
 use Modules\Edu\Http\Requests\SystemRequest;
 
+/**
+ * 系统课程管理
+ * @package Modules\Edu\Http\Controllers\Admin
+ */
 class SystemController extends Controller
 {
   public function index()
   {
     $lessons = System::latest()->paginate();
-    return view('edu::system.index', compact('lessons'));
+    return view('edu::admin.system.index', compact('lessons'));
   }
 
   public function create(System $system)
   {
-    return view('edu::system.create', compact('system'));
+    return view('edu::admin.system.create', compact('system'));
   }
 
   public function store(SystemRequest $request, System $system)
@@ -35,7 +38,7 @@ class SystemController extends Controller
 
   public function edit(System $system)
   {
-    return view('edu::system.edit', compact('system'));
+    return view('edu::admin.system.edit', compact('system'));
   }
 
   public function update(SystemRequest $request, System $system)

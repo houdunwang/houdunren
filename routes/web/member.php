@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 //会员中心
 Route::group(['prefix' => 'member', 'namespace' => 'Member', 'as' => 'member.', 'middleware' => ['auth', 'front']], function () {
+  Route::get('/', 'BaseController@index')->name('home');
   Route::resource('base', 'BaseController')->only(['index', 'store']);
   Route::resource('password', 'PasswordController')->only(['index', 'store']);
   Route::resource('avatar', 'AvatarController')->only(['index', 'store']);

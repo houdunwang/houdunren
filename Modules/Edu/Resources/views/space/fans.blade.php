@@ -1,4 +1,4 @@
-@extends('edu::layouts.space')
+@extends('edu::space.layouts.master')
 @section('title',$user->name.'粉丝列表')
 @section('content')
 <div class="card shadow-sm">
@@ -14,8 +14,8 @@
       @empty
       <div class="text-center col-12 p-3 text-secondary">
         <a href="{{ route('common.follower',$user) }}" data-container="body" data-toggle="popover" data-placement="top"
-          data-trigger="hover" data-original-title="" title=""
-          class="btn btn-sm {{ $user->isFans?'btn-success':'btn-outline-success' }}">
+           data-trigger="hover" data-original-title="" title=""
+           class="btn btn-sm {{ $user->isFans?'btn-success':'btn-outline-success' }}">
           <i class="fa fa-plus"></i>
           关注 TA 成为第一个粉丝
         </a>
@@ -25,7 +25,7 @@
   </div>
   @if ($followers->total()>1)
   <div class="card-footer">
-    @include('edu::layouts.paginate',['data'=>$followers])
+    @include('edu::layouts._paginate',['data'=>$followers])
   </div>
   @endif
 </div>

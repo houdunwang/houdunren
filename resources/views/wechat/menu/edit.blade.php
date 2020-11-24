@@ -1,6 +1,6 @@
-@extends('layouts.admin.master')
+@extends('system.layouts.master'))
 @section('content')
-@include('wechat._nav')
+@include('wechat.layouts._nav')
 
 <chat-menu :siteid="{{ $site->id }}" :wechatid="{{ $wechat->id }}" :menus='@json($wechat->menus??[])'>
 </chat-menu>

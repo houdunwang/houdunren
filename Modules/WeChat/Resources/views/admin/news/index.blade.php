@@ -1,4 +1,4 @@
-@extends('layouts.module.admin')
+@extends('layouts.module.master')
 @section('content')
 @include('wechat::admin.news.nav')
 <div class="row">
@@ -18,9 +18,9 @@
       <div class="card-footer text-center">
         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
           <a href="{{ route('WeChat.admin.news.edit',$new) }}" class="btn btn-success">编辑</a>
-          <hd-btn-del action="{{ route('WeChat.admin.news.destroy',$new) }}" class="btn btn-secondary">
+          <btn-del action="{{ route('WeChat.admin.news.destroy',$new) }}" class="btn btn-secondary">
             删除
-            </btn-del>
+          </btn-del>
         </div>
       </div>
     </div>

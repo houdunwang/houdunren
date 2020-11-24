@@ -10,6 +10,10 @@ use Modules\Edu\Entities\User;
 use Modules\Edu\Entities\Video;
 use Modules\Edu\Services\VideoService;
 
+/**
+ * 视频播放
+ * @package Modules\Edu\Http\Controllers\Front
+ */
 class VideoController extends Controller
 {
   public function __construct()
@@ -21,7 +25,7 @@ class VideoController extends Controller
   {
     $videos = Video::latest('id')->paginate();
 
-    return view('edu::video.index', compact('videos'));
+    return view('edu::front.video.index', compact('videos'));
   }
 
   public function show(Video $video, VideoService $videoService)
@@ -33,6 +37,6 @@ class VideoController extends Controller
     if ($videoService->check($video) === false) {
       return redirect()->route('Edu.front.subscribe.index');
     }
-    return view('edu::video.show', compact('video'));
+    return view('edu::front.video.show', compact('video'));
   }
 }

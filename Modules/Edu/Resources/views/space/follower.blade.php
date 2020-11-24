@@ -1,4 +1,4 @@
-@extends('edu::layouts.space')
+@extends('edu::space.layouts.master')
 @section('title',$user->name.'关注列表')
 @section('content')
 <div class="card shadow-sm">
@@ -20,7 +20,7 @@
   </div>
   @if ($followers->total()>1)
   <div class="card-footer">
-    @include('edu::layouts.paginate',['data'=>$followers])
+    @include('edu::layouts._paginate',['data'=>$followers])
   </div>
   @endif
 </div>

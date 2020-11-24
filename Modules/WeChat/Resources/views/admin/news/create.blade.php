@@ -1,4 +1,4 @@
-@extends('layouts.module.admin')
+@extends('layouts.module.master')
 @section('content')
 @include('wechat::admin.news.nav')
 <form action="{{ route('WeChat.admin.news.store') }}" method="post">

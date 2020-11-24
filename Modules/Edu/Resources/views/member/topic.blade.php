@@ -1,4 +1,4 @@
-@extends('edu::layouts.member')
+@extends('member.layouts.master')
 
 @section('content')
 <div class="card shadow-sm" id="app">
@@ -26,8 +26,8 @@
           <td>
             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
               <a href="{{ route('Edu.front.topic.edit',$topic) }}" class="btn btn-info">编辑</a>
-              <hd-btn-del action="{{ route('Edu.front.topic.destroy',$topic) }}" class="btn btn-secondary">删除
-                </btn-del>
+              <btn-del action="{{ route('Edu.front.topic.destroy',$topic) }}" class="btn btn-secondary">删除
+              </btn-del>
             </div>
           </td>
         </tr>

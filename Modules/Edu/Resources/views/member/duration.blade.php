@@ -1,5 +1,4 @@
-@extends('edu::layouts.member')
-
+@extends('edu::member.layouts.master')
 @section('content')
 <div class="card">
   <div class="card-header bg-white">
@@ -15,7 +14,6 @@
     @else
     您还没有加入会员，立刻<a href="{{ route("Edu.front.subscribe.index") }}" class="text-primary">加入会员</a>提升技能
     @endif
-
   </div>
 </div>
 @endsection

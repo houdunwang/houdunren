@@ -1,4 +1,4 @@
-@extends('layouts.admin.master')
+@extends('system.layouts.master')
 @section('content')
 <nav class="nav nav-tabs">
   <a class="nav-link" href="{{ route('admin') }}">

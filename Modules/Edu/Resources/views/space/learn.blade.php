@@ -1,4 +1,4 @@
-@extends('edu::layouts.space')
+@extends('edu::space.layouts.master')
 @section('title',$user->name.'粉丝列表')
 @section('content')
 
@@ -17,7 +17,7 @@
             @endforeach
         </ul>
         <div class="mt-2">
-            @include('edu::layouts.paginate',['data'=>$videos])
+            @include('edu::layouts._paginate',['data'=>$videos])
         </div>
     </div>
 </div>

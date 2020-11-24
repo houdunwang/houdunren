@@ -1,4 +1,4 @@
-@extends('edu::layouts.space')
+@extends('edu::space.layouts.master')
 @section('title',$user->name.'粉丝列表')
 @section('content')
 
@@ -11,7 +11,7 @@
 </div>
 
 <div class="mt-3">
-  @include('edu::layouts.paginate',['data'=>$topics])
+  @include('edu::layouts._paginate',['data'=>$topics])
 </div>
 
 @endsection

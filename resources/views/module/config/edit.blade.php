@@ -1,4 +1,4 @@
-@extends('layouts.module.admin')
+@extends('layouts.module.master')
 @section('content')
 <nav class="nav nav-tabs">
   <a class="nav-link active" href="#">

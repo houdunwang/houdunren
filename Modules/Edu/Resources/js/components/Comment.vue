@@ -13,13 +13,11 @@
           </span>
         </div>
       </div>
-
       <div class="card-body text-secondary pb-5">
         <a :href="`/edu/space/${comment.reply_user.id}/topic`" class="text-blue d-block mb-3" v-if="comment.reply_user.id">@{{ comment.reply_user.nickname }}</a>
 
         <div v-highlight class="markdown" v-html="comment.html"></div>
       </div>
-
       <div class="card-footer text-muted bg-white small">
         # {{ index + 1 }}
         <a href="#" class="d-inline-block mr-2 ml-2" @click.prevent="reply_user = comment.user" v-scroll-to="'#commentForm'"> <i aria-hidden="true" class="fa fa-reply"></i> 回复 </a>
@@ -54,17 +52,12 @@
         </div>
       </div>
     </div>
-
     <el-backtop></el-backtop>
   </div>
 </template>
-
-
 <script>
 import { mapState } from 'vuex'
-// import ToastEditor from '@toast-ui/editor'
 export default {
-  // components: { Editor },
   props: {
     model: { required: true, type: String },
     id: { required: true, type: Number },

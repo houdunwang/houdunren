@@ -1,4 +1,4 @@
-@extends('layouts.module.admin')
+@extends('layouts.module.master')
 @section('content')
 @include('wechat::admin.user.nav')
 <div class="alert alert-info" role="alert">

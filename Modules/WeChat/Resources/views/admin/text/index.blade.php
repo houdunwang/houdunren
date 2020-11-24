@@ -1,4 +1,4 @@
-@extends('layouts.module.admin')
+@extends('layouts.module.master')
 @section('content')
 @include('wechat::admin.text.nav')
 <div class="table-responsive">
@@ -26,8 +26,8 @@
         <td class="text-right">
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
             <a href="{{ route('WeChat.admin.text.edit',$text) }}" class="btn btn-success">编辑</a>
-            <hd-btn-del action="{{ route('WeChat.admin.text.destroy',$text) }}" class="btn btn-secondary">删除
-              </btn-del>
+            <btn-del action="{{ route('WeChat.admin.text.destroy',$text) }}" class="btn btn-secondary">删除
+            </btn-del>
           </div>
         </td>
       </tr>

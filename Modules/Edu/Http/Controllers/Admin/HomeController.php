@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
   public function index()
   {
-    return view('edu::admin.index');
+    return view('edu::admin.home.index');
   }
 
   public function create()

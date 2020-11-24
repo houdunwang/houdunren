@@ -3,7 +3,7 @@
 @inject('news', 'Modules\WeChat\Entities\WeChatNews')
 @inject('wechatUser', 'App\Models\WeChatUser')
 @inject('material', 'Modules\WeChat\Entities\WeChatMaterial')
-@extends('layouts.module.admin')
+@extends('layouts.module.master')
 @section('content')
 <div class="row">
   <div class="col-xl-3 col-md-6 mb-4">
@@ -114,7 +114,7 @@
     </div>
   </div>
 </div>
-@include('layouts.module.system-menu')
+@include('layouts.module._system-menu')
 <div class="row">
   <div class="col-12 col-sm-12">
     <div class="card mt-3">

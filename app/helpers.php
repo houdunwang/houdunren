@@ -83,17 +83,13 @@ if (!function_exists('module')) {
   function module(string $name = null)
   {
     static $cache = null;
-
     if ($cache) return $cache;
-
     if ($name) {
       session(['module_name' => $name]);
     }
-
     if ($name = session('module_name')) {
       $cache = app(ModuleService::class)->find($name);
     }
-
     return $cache;
   }
 }

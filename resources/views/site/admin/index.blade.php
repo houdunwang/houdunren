@@ -1,4 +1,4 @@
-@extends('layouts.admin.master')
+@extends('system.layouts.master'))
 
 @section('content')
 @include('site.admin._nav')
@@ -42,9 +42,9 @@
         <td class="text-right align-middle">
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
             <a href="{{ route('site.admin.role',[$site,$user]) }}" class="btn btn-info">设置角色</a>
-            <hd-btn-del action="{{ route('site.admin.destroy',[$site,$user]) }}" class="btn-secondary btn">
+            <btn-del action="{{ route('site.admin.destroy',[$site,$user]) }}" class="btn-secondary btn">
               移除
-            </hd-btn-del>
+            </btn-del>
           </div>
         </td>
       </tr>
@@ -53,9 +53,9 @@
   </table>
 </div>
 
-<hd-user :site_id="{{ $site['id'] }}" v-slot="{user}" class="mt-3">
+<user :site_id="{{ $site['id'] }}" v-slot="{user}" class="mt-3">
   <div class="btn-group btn-group-sm">
     <a :href="'/site/{{ $site['id'] }}/admin/store/'+user.id" class="btn btn-info btn-sm">设为管理员</a>
   </div>
-</hd-user>
+</user>
 @endsection

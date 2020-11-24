@@ -9,7 +9,6 @@ use Illuminate\Http\Response;
 use Modules\Edu\Entities\Tag;
 use Modules\Edu\Entities\Topic;
 use Modules\Edu\Http\Requests\TopicRequest;
-use Modules\Edu\Transformers\CommentCollection;
 use Modules\Edu\Transformers\CommentResource;
 
 class TopicController extends Controller
@@ -26,13 +25,13 @@ class TopicController extends Controller
       ->latest()
       ->with('user')
       ->paginate();
-    return view('edu::topic.index', compact('topics'));
+    return view('edu::front.topic.index', compact('topics'));
   }
 
   public function create(Topic $topic)
   {
     $tags = Tag::all();
-    return view('edu::topic.create', compact('tags', 'topic'));
+    return view('edu::front.topic.create', compact('tags', 'topic'));
   }
 
   public function store(TopicRequest $request, Topic $topic)
@@ -53,14 +52,14 @@ class TopicController extends Controller
   public function show(Topic $topic)
   {
     $tags = Tag::all();
-    return view('edu::topic.show', compact('topic', 'tags'));
+    return view('edu::front.topic.show', compact('topic', 'tags'));
   }
 
   public function edit(Topic $topic)
   {
     $this->authorize('update', $topic);
     $tags = Tag::all();
-    return view('edu::topic.edit', compact('tags', 'topic'));
+    return view('edu::front.topic.edit', compact('tags', 'topic'));
   }
 
   public function update(Request $request, Topic $topic)
