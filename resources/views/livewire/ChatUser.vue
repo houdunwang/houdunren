@@ -10,7 +10,6 @@
             </div>
           </div>
         </div>
-
         <div class="card-body">
           <table class="table">
             <thead>

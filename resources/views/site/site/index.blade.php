@@ -1,5 +1,4 @@
 @extends('system.layouts.master')
-
 @section('content')
 <div>
   <a href="{{ route('site.site.create') }}" class="btn btn-info mb-3">
