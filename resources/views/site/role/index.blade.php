@@ -1,4 +1,4 @@
-@extends('system.layouts.master'))
+@extends('system.layouts.master')
 @section('content')
 @include('site.role._nav')
 

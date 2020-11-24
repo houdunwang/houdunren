@@ -1,4 +1,4 @@
-@extends('system.layouts.master'))
+@extends('system.layouts.master')
 @section('content')
 @include('wechat.layouts._nav')
 <form action="{{ route('wechat.default.update',[$site,$wechat]) }}" method="post">

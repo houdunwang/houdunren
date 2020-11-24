@@ -1,4 +1,4 @@
-@extends('system.layouts.master'))
+@extends('system.layouts.master')
 
 @section('content')
 @include('system.package._nav')

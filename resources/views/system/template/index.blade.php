@@ -1,4 +1,4 @@
-@extends('system.layouts.master'))
+@extends('system.layouts.master')
 @section('content')
 <div class="card">
   <div class="card-header">

@@ -1,4 +1,4 @@
-@extends('system.layouts.master'))
+@extends('system.layouts.master')
 
 @section('content')
 <div class="mb-5 mt-3">

@@ -1,4 +1,4 @@
-@extends('system.layouts.master'))
+@extends('system.layouts.master')
 
 @section('content')
 <nav class="nav nav-tabs nav-stacked">
