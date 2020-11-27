@@ -25,8 +25,8 @@ class CreateActivityLogTable extends Migration
             $table->index('log_name');
             $table->index(['subject_id', 'subject_type'], 'subject');
             $table->index(['causer_id', 'causer_type'], 'causer');
-            $table->foreignId('site_id')->constrained()->onDelete('cascade');
-            $table->foreignId('module_id')->constrained()->onDelete('cascade');
+            $table->foreignId('site_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('module_id')->nullable()->constrained()->onDelete('cascade');
         });
     }
 

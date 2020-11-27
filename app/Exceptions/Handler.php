@@ -3,9 +3,6 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\Exceptions\ThrottleRequestsException;
-use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -24,29 +21,30 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontFlash = ['password', 'password_confirmation'];
+    protected $dontFlash = [
+        'password',
+        'password_confirmation',
+    ];
 
     /**
-     * Report or log an exception.
+     * Register the exception handling callbacks for the application.
      *
-     * @param  \Throwable  $exception
      * @return void
-     *
-     * @throws \Exception
      */
-    public function report(Throwable $exception)
+    public function register()
     {
-        parent::report($exception);
+        $this->reportable(function (Throwable $e) {
+            //
+        });
     }
 
     /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \Throwable
+     * 异步自定义响应
+     * @param Request $request
+     * @param Throwable $exception
+     * @return Response
+     * @throws BindingResolutionException
+     * @throws Throwable
      */
     public function render($request, Throwable $exception)
     {

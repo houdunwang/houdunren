@@ -1,10 +1,21 @@
 <?php
 
+use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
-Route::get('/', 'Front\HomeController@index')->name('home')->middleware('front');
+Route::get('a', function (Event $event) {
+    return Inertia::render('Event/Show', [
+        'user' => [
+            'name' => '李四',
+            'age' => 33
+        ]
+    ]);
+});
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('front');
 
-Route::get('admin', 'Site\SiteController@index')->name('admin')->middleware(['auth', 'system']);
+Route::get('admin', [SiteController::class, 'index'])->name('admin')->middleware(['auth', 'system']);
 
 $files = File::files(base_path('routes/web'));
 collect($files)->map(fn ($file) => include($file));

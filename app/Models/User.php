@@ -2,112 +2,126 @@
 
 namespace App\Models;
 
-use App\Models\Group;
-use App\Models\Site;
-use App\Models\Traits\Favour;
-use Auth;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Traits\Favour;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-  use Notifiable, HasRoles, Favour;
+    use HasFactory, Notifiable, Favour;
 
-  protected $fillable = ['name', 'email', 'mobile', 'real_name', 'home', 'avatar', 'qq', 'github', 'wakatime', 'group_id'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'email', 'mobile', 'real_name', 'home', 'avatar', 'qq', 'github', 'wakatime', 'group_id'];
 
-  protected $hidden = ['password', 'remember_token'];
+    /**
+     * The attributes that should be hidden for arrays.
+     *p
+     * @var array
+     */
+    protected $hidden = ['password', 'remember_token'];
 
-  protected $casts = [
-    'email_verified_at' => 'datetime',
-  ];
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 
-  public function setPasswordAttribute($password)
-  {
-    $this->attributes['password'] = bcrypt($password);
-  }
-
-  public function getIsSuperAdminAttribute()
-  {
-    return $this->id == 1;
-  }
-
-  public function getIconAttribute()
-  {
-    return empty($this->avatar) ? url('/images/avatar.jpg') : $this->avatar;
-  }
-
-  public function group()
-  {
-    return $this->belongsTo(Group::class);
-  }
-
-  public function sites()
-  {
-    return $this->belongsToMany(Site::class, 'admin_site')->withTimestamps();
-  }
-
-  public function masterSites()
-  {
-    return $this->hasMany(Site::class, 'user_id');
-  }
-
-  public function getallSitesAttribute()
-  {
-    return $this->sites->merge($this->masterSites);
-  }
-
-  public function scopeSearch($query, $name)
-  {
-    if (empty($name)) {
-      return $query;
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
     }
 
-    $name = "%{$name}%";
-    return $query
-      ->orWhere('name', 'like', $name)
-      ->orWhere('id', 'like', $name)
-      ->orWhere('email', 'like', $name)
-      ->orWhere('mobile', 'like', $name);
-  }
+    public function getIsSuperAdminAttribute()
+    {
+        return $this->id == 1;
+    }
 
-  public function followers()
-  {
-    return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
-  }
+    public function getIconAttribute()
+    {
+        return empty($this->avatar) ? url('/images/avatar.jpg') : $this->avatar;
+    }
 
-  public function fans()
-  {
-    return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
-  }
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 
-  public function getIsFollowerAttribute()
-  {
-    return $this->followers()
-      ->where('users.id', Auth::id())
-      ->exists();
-  }
+    public function sites()
+    {
+        return $this->belongsToMany(Site::class, 'admin_site')->withTimestamps();
+    }
 
-  public function getIsFansAttribute()
-  {
-    return $this->fans()
-      ->where('users.id', Auth::id())
-      ->exists();
-  }
+    public function masterSites()
+    {
+        return $this->hasMany(Site::class, 'user_id');
+    }
 
-  public function getNicknameAttribute()
-  {
-    return empty($this->name) ? '小海豚' : $this->name;
-  }
+    public function getallSitesAttribute()
+    {
+        return $this->sites->merge($this->masterSites);
+    }
 
-  public static function make(int $id = null)
-  {
-    $class = 'Modules\\' . module()['name'] . '\Entities\User';
-    return $class::find($id ?? auth()->id());
-  }
+    public function scopeSearch($query, $name)
+    {
+        if (empty($name)) {
+            return $query;
+        }
 
-  public function wechatUser()
-  {
-    return $this->hasMany(WeChatUser::class, 'user_id');
-  }
+        $name = "%{$name}%";
+        return $query
+            ->orWhere('name', 'like', $name)
+            ->orWhere('id', 'like', $name)
+            ->orWhere('email', 'like', $name)
+            ->orWhere('mobile', 'like', $name);
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
+    }
+
+    public function fans()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
+    }
+
+    public function getIsFollowerAttribute()
+    {
+        return $this->followers()
+            ->where('users.id', Auth::id())
+            ->exists();
+    }
+
+    public function getIsFansAttribute()
+    {
+        return $this->fans()
+            ->where('users.id', Auth::id())
+            ->exists();
+    }
+
+    public function getNicknameAttribute()
+    {
+        return empty($this->name) ? '小海豚' : $this->name;
+    }
+
+    public static function make(int $id = null)
+    {
+        $class = 'Modules\\' . module()['name'] . '\Entities\User';
+        return $class::find($id ?? auth()->id());
+    }
+
+    public function wechatUser()
+    {
+        return $this->hasMany(WeChatUser::class, 'user_id');
+    }
 }

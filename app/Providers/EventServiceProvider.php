@@ -15,12 +15,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-            'SocialiteProviders\\WeixinWeb\\WeixinWebExtendSocialite@handle', 'SocialiteProviders\\WeChatWeb\\WeChatWebExtendSocialite@handle',
-            'SocialiteProviders\\Weixin\\WeixinExtendSocialite@handle',
+        Registered::class => [
+            SendEmailVerificationNotification::class,
         ],
-
-        Registered::class => [SendEmailVerificationNotification::class],
     ];
 
     /**
@@ -30,8 +27,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        parent::boot();
-
         //
     }
 }
