@@ -1,27 +1,18 @@
 <template>
   <form @submit.prevent="handleSubmit">
-    <div class="bg-white rounded-md p-6">
-      <hd-card class="bg-white">
+    <div class="p-6 bg-white rounded-md">
+      <card class="bg-white">
         <template v-slot:header> 站点资料 </template>
         <template v-slot:default>
-          <div class="flex flex-col mb-5">
-            <hd-label class="mb-3">站点名称</hd-label>
-            <hd-input v-model="form.title" id="title" />
-            <hd-error name="title" />
-          </div>
-
-          <div class="flex flex-col mb-5">
-            <hd-label class="mb-3">访问域名</hd-label>
-            <hd-input v-model="form.domain" id="domain" />
-            <hd-error name="domain" />
-          </div>
+          <form-input title="站点名称" name="title" v-model="form.title" />
+          <form-input title="站点域名" name="domain" v-model="form.domain" />
         </template>
-      </hd-card>
+      </card>
 
-      <hd-card class="bg-white mt-5">
+      <card class="mt-5 bg-white">
         <template v-slot:header> 默认模块 </template>
         <template v-slot:default> </template>
-      </hd-card>
+      </card>
 
       <hd-button class="mt-5">保存提交</hd-button>
     </div>
@@ -31,6 +22,7 @@
 <script>
 const form = { title: "", domain: "" };
 export default {
+  props: ["modules"],
   data() {
     return {
       form,

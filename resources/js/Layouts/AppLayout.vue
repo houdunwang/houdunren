@@ -55,7 +55,7 @@
       <div class="flex justify-between">
         <a
           :href="menu.link"
-          class="bg-white border rounded-lg shadow-md w-32 h-20 px-4 py-3 flex flex-col justify-center items-center mr-4 opacity-50 duration-500 hover:opacity-100"
+          class="flex flex-col items-center justify-center w-32 h-20 px-4 py-3 mr-4 bg-white border rounded-lg shadow-md opacity-75 duration-500 hover:opacity-100"
           v-for="(menu, index) in quickMenus"
           :key="index"
         >
@@ -69,7 +69,7 @@
       <slot></slot>
     </div>
 
-    <div class="mt-5 flex justify-center py-8 text-sm text-gray-900">
+    <div class="flex justify-center py-8 mt-5 text-sm text-gray-900">
       <strong> 版权所有@houdunren.com </strong>
     </div>
   </div>

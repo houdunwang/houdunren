@@ -16,7 +16,7 @@ class SiteController extends Controller
 {
     public function __construct()
     {
-        // $this->authorizeResource(Site::class, 'site');
+        $this->authorizeResource(Site::class, 'site');
     }
 
     public function index()
@@ -26,15 +26,14 @@ class SiteController extends Controller
         } else {
             $sites = user()->allSites;
         }
-        return inertia()->render('Site/Site/Index');
-        // return view('site.site.index', compact('sites'));
+        return inertia()->render('Site/Site/Index', compact('sites'));
     }
 
     public function create(ModuleService $moduleService)
     {
         $modules = $moduleService->allInstalled();
         $templates = user()->group->templates;
-        return view('site.site.create', compact('modules', 'templates'));
+        return inertia()->render('Site/Site/Create', compact('modules'));
     }
 
     public function store(SiteRequest $request, Site $site)

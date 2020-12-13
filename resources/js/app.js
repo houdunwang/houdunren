@@ -21,8 +21,7 @@ files.keys().map(key => {
         .split("/")
         .pop()
         .split(".")[0];
-
-    Vue.component(`Hd${name}`, files(key).default);
+    Vue.component(name, files(key).default);
 });
 
 import Layout from "@/Layouts/AppLayout";

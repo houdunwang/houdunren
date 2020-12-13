@@ -1,7 +1,10 @@
+
 <template>
-  <label class="text-gray-900">
+  <label class="block text-sm font-medium text-gray-700">
     <span v-if="value">{{ value }}</span>
-    <span v-else><slot></slot></span>
+    <span v-else>
+      <slot></slot>
+    </span>
   </label>
 </template>
 
@@ -10,6 +13,3 @@ export default {
   props: ["value"],
 };
 </script>
-
-<style>
-</style>
