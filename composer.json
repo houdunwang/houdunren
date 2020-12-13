@@ -18,8 +18,8 @@
         "hieu-le/active": "^8.0",
         "hisorange/browser-detect": "^4.3",
         "houdunwang/arr": "^2.1",
-        "inertiajs/inertia-laravel": "^0.2.4",
-        "laravel-lang/lang": "^7.0",
+        "inertiajs/inertia-laravel": "^0.3.4",
+        "laravel-lang/lang": "~8.0",
         "laravel/framework": "^8.12",
         "laravel/jetstream": "^1.6",
         "laravel/sanctum": "^2.6",
@@ -59,7 +59,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

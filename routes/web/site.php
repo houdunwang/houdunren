@@ -4,7 +4,7 @@ use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
 
 //站点管理
-Route::group(['prefix' => 'site', 'namespace' => 'Site', 'as' => 'site.', 'middleware' => ['auth', 'site']], function () {
+Route::group(['prefix' => 'site', 'as' => 'site.', 'middleware' => ['auth', 'site']], function () {
     Route::resource('site', SiteController::class)->middleware(['auth', 'site']);
 });
 
