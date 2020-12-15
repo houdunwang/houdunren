@@ -1,6 +1,6 @@
 <template>
   <form class="flex-grow" @submit.prevent="handleSubmit">
-    <hd-card class="min-w-full shadow-xl">
+    <card class="min-w-full shadow-xl">
       <template v-slot:header> 用户登录 </template>
       <template v-slot:default>
         <div class="flex flex-col mb-5">
@@ -49,7 +49,7 @@
           </div>
         </div>
       </template>
-    </hd-card>
+    </card>
   </form>
 </template>
 

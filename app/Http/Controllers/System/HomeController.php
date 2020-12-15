@@ -12,19 +12,13 @@ use Illuminate\Http\Request;
  */
 class HomeController extends Controller
 {
-  // public function index()
-  // {
-  //   if (user()->isSuperAdmin) {
-  //     $sites = Site::all();
-  //   } else {
-  //     $sites = user()->allSites;
-  //   }
-
-  //   return view('system.index', compact('sites'));
-  // }
-
-  public function index()
-  {
-    return view('system.home.index');
-  }
+    /**
+     * 系统管理菜单列表页
+     *
+     * @return void
+     */
+    public function index()
+    {
+        return inertia()->render('System/Home/Index');
+    }
 }

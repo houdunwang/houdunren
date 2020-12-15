@@ -2,34 +2,35 @@
 
 namespace App\Services;
 
-use App\Attachment;
 use Auth;
 use Illuminate\Http\UploadedFile;
 use OSS\OssClient;
 use OSS\Core\OssException;
+use App\Models\Attachment;
 
+/**
+ * 文件上传
+ */
 class UploadService
 {
-    public function make(UploadedFile $file)
-    {
-        if (config('site.upload.drive') === 'oss') {
-            return $this->oss($file);
-        }
-        return $this->local($file);
-    }
-
+    /**
+     * 本地上传
+     *
+     * @return void
+     */
     public function local(UploadedFile $file)
     {
-        if (site()) {
-            $path = site()['domain'] . '/attachments/' . $file->store(date('Ym'), 'attacment');
-        } else {
-            $path = '/attachments/' . $file->store(date('Ym'), 'attacment');
-        }
-
+        $path = $file->store(date('Ym'));
         return $this->save($file, $path);
     }
 
-    public function oss(UploadedFile $file)
+    /**
+     * 云上传
+     *
+     * @param UploadedFile $file
+     * @return void
+     */
+    public function make(UploadedFile $file)
     {
         $object = user('id') . '-' . date('Ymdhis') . '.' . $file->extension();
         try {
@@ -42,6 +43,13 @@ class UploadService
         }
     }
 
+    /**
+     * 保存入库
+     *
+     * @param UploadedFile $file
+     * @param string $path
+     * @return void
+     */
     protected function save(UploadedFile $file, string $path)
     {
         return Attachment::create([

@@ -1,9 +1,7 @@
 <template>
-  <button
-    class="border px-3 py-2 flex items-center justify-center rounded-md font-sans bg-indigo-600 hover:bg-indigo-500 shadow-sm text-green-100"
-  >
-    <slot></slot>
-  </button>
+    <button class="btn">
+        <slot></slot>
+    </button>
 </template>
 
 <script>
@@ -11,4 +9,16 @@ export default {};
 </script>
 
 <style>
+.btn {
+    @apply border px-3 py-2 text-sm font-bold flex items-center justify-center rounded-md font-sans text-gray-100;
+}
+.primary {
+    @apply bg-indigo-600;
+}
+.success {
+    @apply bg-green-500;
+}
+.gray {
+    @apply bg-gray-500;
+}
 </style>
