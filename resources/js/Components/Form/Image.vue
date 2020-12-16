@@ -1,28 +1,37 @@
 <template>
-    <div>
-        <hd-label :value="title" />
-        <hd-image :value="value" @input="$emit('input', $event)" />
-        <hd-error :name="name" />
-    </div>
+    <el-upload
+        class="avatar-uploader"
+        :action="action"
+        :show-file-list="false"
+        :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload"
+        :headers="headers"
+    >
+        <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+    </el-upload>
 </template>
 
 <script>
 export default {
     props: {
-        title: { type: String },
-        name: { type: String },
         value: { type: String },
         action: { default: "/common/upload/local" }
     },
     data() {
         return {
-            imageUrl: this.value
+            imageUrl: this.value,
+            headers: {
+                "X-CSRF-TOKEN": document
+                    .querySelector('meta[name="csrf-token"]')
+                    .getAttribute("content")
+            }
         };
     },
     methods: {
         handleAvatarSuccess(res, file) {
-            const imageUrl = URL.createObjectURL(file.raw);
-            console.log(imageUrl);
+            this.imageUrl = URL.createObjectURL(file.raw);
+            this.$emit("input", this.imageUrl);
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === "image/jpeg";

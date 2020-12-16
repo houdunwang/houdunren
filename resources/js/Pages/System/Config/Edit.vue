@@ -1,27 +1,27 @@
 <template>
     <div>
         <hd-bread home="/" :menus="menus"></hd-bread>
-        <card>
+        <hd-card>
             <template v-slot:header>
                 系统配置
             </template>
             <template>
-                <form-input
+                <hd-form-input
                     title="后台名称"
                     v-model="form.title"
                     name="title"
                 />
-                <form-textarea
+                <hd-form-textarea
                     title="后台脚本"
                     v-model="form.copyright"
                     name="copyright"
                 />
-                <form-image title="后台标志" value="aa" name="avatar" />
+                <hd-form-image title="后台标志" value="" name="avatar" />
             </template>
             <template v-slot:footer>
                 <hd-button class="primary">保存提交</hd-button>
             </template>
-        </card>
+        </hd-card>
     </div>
 </template>
 

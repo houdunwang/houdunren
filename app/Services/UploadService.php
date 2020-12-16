@@ -7,6 +7,7 @@ use Illuminate\Http\UploadedFile;
 use OSS\OssClient;
 use OSS\Core\OssException;
 use App\Models\Attachment;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * 文件上传
@@ -20,8 +21,9 @@ class UploadService
      */
     public function local(UploadedFile $file)
     {
-        $path = $file->store(date('Ym'));
-        return $this->save($file, $path);
+        $path = $file->store(date('Ym'), 'attachment');
+
+        return $this->save($file, "attachments/{$path}");
     }
 
     /**

@@ -20,7 +20,8 @@ class ConfigController extends Controller
      */
     public function edit()
     {
-        return inertia()->render('System/Config/Edit');
+        $config = Config::first();
+        return inertia()->render('System/Config/Edit', compact('config'));
     }
 
     public function update(Request $request)

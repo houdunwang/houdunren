@@ -46,9 +46,9 @@ class UploadController extends Controller
      */
     public function local(Request $request, UploadService $UploadService)
     {
-        $request->validate(['file' => ['required', 'mimes:jpeg,png,mp3', 'max:2000']]);
+        $request->validate(['file' => ['required', 'mimes:jpeg,png,mp3,gif', 'max:2000']]);
 
-        return $UploadService->make($request->file);
+        return $UploadService->local($request->file);
     }
 
     /**
