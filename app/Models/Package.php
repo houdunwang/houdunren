@@ -11,23 +11,23 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Package extends Model
 {
-  protected $fillable = ['title'];
+    protected $fillable = ['title', 'days'];
 
-  /**
-   * 模块关联
-   * @return BelongsToMany
-   */
-  public function modules()
-  {
-    return $this->belongsToMany(Module::class)->withTimestamps();
-  }
+    /**
+     * 模块关联
+     * @return BelongsToMany
+     */
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class)->withTimestamps();
+    }
 
-  /**
-   * 模板风格关联
-   * @return BelongsToMany
-   */
-  public function templates()
-  {
-    return $this->belongsToMany(Template::class, 'template_package')->withTimestamps();
-  }
+    /**
+     * 模板风格关联
+     * @return BelongsToMany
+     */
+    public function templates()
+    {
+        return $this->belongsToMany(Template::class, 'template_package')->withTimestamps();
+    }
 }

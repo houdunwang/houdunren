@@ -1,45 +1,46 @@
 <template>
-    <form @submit.prevent="handleSubmit">
-        <card class="bg-white">
-            <template v-slot:header> 站点资料 </template>
-            <template v-slot:default>
-                <form-input
-                    title="站点名称"
-                    name="title"
-                    v-model="form.title"
-                />
-                <form-input
-                    title="站点域名"
-                    name="domain"
-                    v-model="form.domain"
-                />
-            </template>
-        </card>
+    <layout>
+        <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal">
+            <el-card shadow="always" :body-style="{ padding: '20px' }">
+                <div slot="header">
+                    <span>站点资料</span>
+                </div>
+                <!-- card body -->
+                <el-form-item label="站点名称">
+                    <el-input v-model="form.title" />
+                </el-form-item>
+                <el-form-item label="访问域名">
+                    <el-input v-model="form.domain" />
+                </el-form-item>
+            </el-card>
 
-        <card class="mt-5 bg-white">
-            <template v-slot:header> 默认模块 </template>
-            <template v-slot:default> </template>
-        </card>
-
-        <hd-button class="mt-5 primary">保存提交</hd-button>
-    </form>
+            <el-card shadow="always" :body-style="{ padding: '20px' }" class="mt-3">
+                <div slot="header">默认模块</div>
+                <!-- card body -->
+            </el-card>
+            <div class="mt-3">
+                <el-button type="primary" @click="onSubmit">立即创建</el-button>
+            </div>
+        </el-form>
+    </layout>
 </template>
 
 <script>
-const form = { title: "", domain: "" };
+const form = { title: '', domain: '' }
+import Layout from './Layout'
 export default {
-    props: ["modules"],
+    components: { Layout },
     data() {
         return {
             form
-        };
+        }
     },
     methods: {
-        handleSubmit() {
-            this.$inertia.post(route("site.site.store"), this.form);
+        onSubmit() {
+            this.$inertia.post(route('site.site.store'), this.form)
         }
     }
-};
+}
 </script>
 
 <style></style>

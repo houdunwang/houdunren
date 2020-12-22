@@ -1,16 +1,14 @@
 <template>
-  <div
-    class="max-w-screen-md h-screen flex items-center justify-center mx-auto px-20"
-  >
-    <div class="flex-grow">
-      <message class="mb-3" />
-      <slot></slot>
+    <div class="max-w-screen-md h-screen flex items-center justify-center mx-auto px-20">
+        <div class="flex-grow">
+            <hd-message class="mb-3" />
+            <slot></slot>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style>

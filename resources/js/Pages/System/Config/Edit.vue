@@ -1,47 +1,37 @@
 <template>
     <div>
-        <hd-bread home="/" :menus="menus"></hd-bread>
-        <hd-card>
-            <template v-slot:header>
-                系统配置
-            </template>
-            <template>
-                <hd-form-input
-                    title="后台名称"
-                    v-model="form.title"
-                    name="title"
-                />
-                <hd-form-textarea
-                    title="后台脚本"
-                    v-model="form.copyright"
-                    name="copyright"
-                />
-                <hd-form-image title="后台标志" value="" name="avatar" />
-            </template>
-            <template v-slot:footer>
-                <hd-button class="primary">保存提交</hd-button>
-            </template>
-        </hd-card>
+        <el-card shadow="always" :body-style="{ padding: '20px' }">
+            <div slot="header">
+                <span>系统配置</span>
+            </div>
+            <el-form :model="form" label-width="80px" :inline="false" size="normal">
+                <el-form-item label="系统名称">
+                    <el-input v-model="form.title"></el-input>
+                </el-form-item>
+                <el-form-item label="版权信息">
+                    <el-input v-model="form.copyright"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="onSubmit">立即创建</el-button>
+                </el-form-item>
+            </el-form>
+        </el-card>
     </div>
 </template>
 
 <script>
+const menus = [{ name: 'edit', title: '系统配置', link: route('system.config.edit') }]
+
 export default {
     data() {
-        return {
-            menus: [
-                {
-                    title: "系统设置",
-                    link: route("system.config.edit")
-                }
-            ],
-            form: {
-                title: "",
-                textarea: ""
-            }
-        };
+        return { menus, form: this.$page.system.config }
+    },
+    methods: {
+        onSubmit() {
+            this.$inertia.put(route('system.config.update'), this.form)
+        }
     }
-};
+}
 </script>
 
 <style></style>

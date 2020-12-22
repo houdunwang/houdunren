@@ -9,9 +9,10 @@ use App\Http\Controllers\System\ConfigController;
 use App\Http\Controllers\System\PackageController;
 use App\Http\Controllers\System\GroupController;
 use App\Http\Controllers\System\MyController;
+
 //系统核心功能
 Route::group(['prefix' => 'system', 'middleware' => ['auth', 'system'], 'as' => 'system.'], function () {
-    Route::get('/', [HomeController::class, 'index'])->name('index');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('module', [ModuleController::class, 'index'])->name('module.index');
     Route::get('module/install/{name}', [ModuleController::class, 'install'])->name('module.install');
     Route::delete('module/uninstall/{module:name}', [ModuleController::class, 'uninstall'])->name('module.uninstall');

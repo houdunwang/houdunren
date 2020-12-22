@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use App\Models\Config;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -38,9 +39,12 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'flash' => [
-                'message' => $request->session()->get('message'),
+                'success' => $request->session()->get('success'),
                 'error' => $request->session()->get('error'),
             ],
+            'system' => [
+                'config' => Config::first()->config
+            ]
         ]);
     }
 }

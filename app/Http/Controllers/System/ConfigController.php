@@ -24,6 +24,12 @@ class ConfigController extends Controller
         return inertia()->render('System/Config/Edit', compact('config'));
     }
 
+    /**
+     * 更新配置
+     *
+     * @param Request $request
+     * @return void
+     */
     public function update(Request $request)
     {
         Config::updateOrCreate(['id' => 1], ['config' => $request->except(['_token', '_method'])]);

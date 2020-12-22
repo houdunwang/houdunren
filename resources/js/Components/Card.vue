@@ -1,12 +1,12 @@
 <template>
-    <div class="border rounded shadow-md hover:shadow-lg">
-        <div class="px-5 py-3 border-b border-gray-300" v-if="$slots.header">
+    <div class="border shadow-md rounded-md">
+        <div class="px-4 py-3 border-b border-gray-300" v-if="$slots.header">
             <slot name="header"></slot>
         </div>
-        <div class="px-5 py-3">
+        <div class="px-4 py-3">
             <slot></slot>
         </div>
-        <div class="px-5 py-3 border-t border-gray-300" v-if="$slots.footer">
+        <div class="px-4 py-3 border-t border-gray-300" v-if="$slots.footer">
             <slot name="footer"></slot>
         </div>
     </div>
@@ -19,4 +19,5 @@ export default {
     }
 };
 </script>
+
 <style></style>
