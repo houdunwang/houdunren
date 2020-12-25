@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <hd-layout :tabs="[{ label: '系统配置', route: 'system.config.edit', name: 'edit' }]" home="/system">
         <el-card shadow="always" :body-style="{ padding: '20px' }">
             <div slot="header">
                 <span>系统配置</span>
@@ -16,7 +16,7 @@
                 </el-form-item>
             </el-form>
         </el-card>
-    </div>
+    </hd-layout>
 </template>
 
 <script>

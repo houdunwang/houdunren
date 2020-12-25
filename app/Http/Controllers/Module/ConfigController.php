@@ -19,29 +19,29 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class ConfigController extends Controller
 {
-  /**
-   * 模块配置
-   * @return View|Factory
-   * @throws BindingResolutionException
-   */
-  public function edit()
-  {
-    return view('module.config.edit');
-  }
+    /**
+     * 模块配置
+     * @return View|Factory
+     * @throws BindingResolutionException
+     */
+    public function edit()
+    {
+        return view('module.config.edit');
+    }
 
-  /**
-   * 保存配置
-   * @param Request $request
-   * @param ConfigService $configService
-   * @return RedirectResponse
-   * @throws BindingResolutionException
-   * @throws HttpException
-   * @throws NotFoundHttpException
-   */
-  public function store(Request $request, ConfigService $configService)
-  {
-    $configService->saveCurrentModuleConfig($request->input());
+    /**
+     * 保存配置
+     * @param Request $request
+     * @param ConfigService $configService
+     * @return RedirectResponse
+     * @throws BindingResolutionException
+     * @throws HttpException
+     * @throws NotFoundHttpException
+     */
+    public function store(Request $request, ConfigService $configService)
+    {
+        $configService->saveCurrentModuleConfig($request->input());
 
-    return back()->with('success', '模块配置修改成功');
-  }
+        return back()->with('success', '模块配置修改成功');
+    }
 }

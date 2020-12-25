@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Module\ConfigController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Site\ConfigController;
 use App\Http\Controllers\Module\MenuController;
 use App\Http\Controllers\Site\AdminController;
 use App\Http\Controllers\Site\ModuleController;

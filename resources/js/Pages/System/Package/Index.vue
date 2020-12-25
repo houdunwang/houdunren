@@ -1,5 +1,5 @@
 <template>
-    <hd-layout :tabs="tabs">
+    <hd-layout :tabs="tabs" home="system.home">
         <el-table :data="packages" border>
             <el-table-column prop="id" label="编号" width="180" />
             <el-table-column prop="title" label="套餐名称" />

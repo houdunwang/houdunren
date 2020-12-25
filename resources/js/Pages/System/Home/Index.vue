@@ -8,7 +8,7 @@
                     模块插件
                 </inertia-link>
                 <inertia-link href="">
-                    <i class="fa fa-2x  fa fa-futbol-o" aria-hidden="true"></i>
+                    <i class="fa fa-2x fa fa-futbol-o" aria-hidden="true"></i>
                     风格模板
                 </inertia-link>
             </section>
@@ -17,16 +17,16 @@
         <div>
             <h6>用户管理</h6>
             <section>
-                <inertia-link href="">
-                    <i class="fa fa-2x  fa-briefcase" aria-hidden="true"></i>
+                <inertia-link :href="route('system.my.edit')">
+                    <i class="fa fa-2x fa-briefcase" aria-hidden="true"></i>
                     我的帐户
                 </inertia-link>
                 <inertia-link :href="route('system.group.index')">
-                    <i class="fa fa-2x  fa-users" aria-hidden="true"></i>
+                    <i class="fa fa-2x fa-users" aria-hidden="true"></i>
                     用户组管理
                 </inertia-link>
                 <inertia-link :href="route('system.package.index')">
-                    <i class="fa fa-2x  fa-comments-o" aria-hidden="true"></i>
+                    <i class="fa fa-2x fa-comments-o" aria-hidden="true"></i>
                     服务套餐
                 </inertia-link>
             </section>
@@ -36,11 +36,11 @@
             <h6>系统管理</h6>
             <section>
                 <inertia-link :href="route('site.site.index')">
-                    <i class="fa fa-2x  fa-sitemap" aria-hidden="true"></i>
+                    <i class="fa fa-2x fa-sitemap" aria-hidden="true"></i>
                     站点列表
                 </inertia-link>
                 <inertia-link :href="route('system.config.edit')">
-                    <i class="fa fa-2x  fa-tachometer" aria-hidden="true"></i>
+                    <i class="fa fa-2x fa-tachometer" aria-hidden="true"></i>
                     系统配置
                 </inertia-link>
             </section>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style>

@@ -1,6 +1,7 @@
 <template>
-    <layout>
+    <hd-layout :tabs="tabs" home="system.home">
         <el-card shadow="always" :body-style="{ padding: '20px' }">
+            <template v-slot:header="">会员组资料</template>
             <el-form :model="form" ref="form" label-width="120px" :inline="false" size="normal">
                 <el-form-item label="会员组名称">
                     <el-input v-model="form.title"></el-input>
@@ -43,63 +44,65 @@
         <div class="mt-3">
             <el-button type="primary" @click="onSubmit">保存提交</el-button>
         </div>
-    </layout>
+    </hd-layout>
 </template>
 
 <script>
-import Layout from "./Layout";
-const form = { title: "", site_nums: 0, days: 365 };
+// import Layout from './Layout'
+import tabs from './tabs'
+const form = { title: '', site_nums: 0, days: 365 }
 export default {
-    components: { Layout },
-    props: ["packages"],
+    // components: { Layout },
+    props: ['packages'],
     data() {
         return {
             form: this.$inertia.form(this.$page.group || form),
             groupPackages: [],
-        };
+            tabs
+        }
     },
     mounted() {
         //编辑时让原套餐选中
         if (this.form.id) {
             //已经选择的套餐
-            const packages = this.packages.filter((p) => this.form._packages.includes(p.id));
+            const packages = this.packages.filter(p => this.form._packages.includes(p.id))
 
             //切换选中的checkbox 表单
-            packages.forEach((p) => {
-                this.$refs.multipleTable.toggleRowSelection(p);
-            });
+            packages.forEach(p => {
+                this.$refs.multipleTable.toggleRowSelection(p)
+            })
         }
     },
     methods: {
         onSubmit() {
-            const packages = this.groupPackages.map((p) => p.id);
+            const packages = this.groupPackages.map(p => p.id)
             if (this.form.id) {
                 //更新
-                let url = route("system.group.update", {
-                    id: this.form.id,
-                });
-                this.$inertia.put(url, { ...this.form, packages });
+                let url = route('system.group.update', {
+                    id: this.form.id
+                })
+                this.$inertia.put(url, { ...this.form, packages })
             } else {
                 //添加
-                let url = route("system.group.store");
-                this.$inertia.post(url, { ...this.form, packages });
+                let url = route('system.group.store')
+                this.$inertia.post(url, { ...this.form, packages })
             }
         },
         //切换选择
         toggleSelection(rows) {
             if (rows) {
-                rows.forEach((row) => {
-                    this.$refs.multipleTable.toggleRowSelection(row);
-                });
+                rows.forEach(row => {
+                    this.$refs.multipleTable.toggleRowSelection(row)
+                })
             } else {
-                this.$refs.multipleTable.clearSelection();
+                this.$refs.multipleTable.clearSelection()
             }
         },
         handleSelectionChange(val) {
-            this.groupPackages = val;
-        },
-    },
-};
+            this.groupPackages = val
+        }
+    }
+}
 </script>
 
 <style></style>

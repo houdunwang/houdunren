@@ -5577,14 +5577,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['tabs']
+  props: ['home', 'tabs']
 });
 
 /***/ }),
@@ -5604,11 +5598,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   updated: function updated() {
     var flash = this.$page.flash;
     var type = flash.success ? 'success' : 'error';
     var message = this.$page.flash[type];
+    console.log(this.$page);
 
     if (message) {
       this.$message({
@@ -5644,8 +5646,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
+    home: {
+      type: String,
+      "default": ''
+    },
     tabs: {
       type: Array,
       required: true
@@ -5660,12 +5672,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    //含有current属性只在当前链接时显示，所以不是当前链接时要移除该tab
     formatTabs: function formatTabs() {
       return this.tabs.filter(function (tab) {
         return !(tab.current && tab.route != route().current());
       });
     },
     change: function change(tab) {
+      console.log(tab);
       if (tab.current) return;
       if (tab.$attrs.route) this.$inertia.get(route(tab.$attrs.route));
     }
@@ -107600,27 +107614,11 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("hd-tab", { attrs: { tabs: _vm.tabs } }),
+      _c("hd-tab", { attrs: { home: _vm.home, tabs: _vm.tabs } }),
       _vm._v(" "),
-      _c(
-        "el-card",
-        { attrs: { shadow: "always", "body-style": { padding: "20px" } } },
-        [
-          _vm.$slots["header"]
-            ? _c(
-                "div",
-                { attrs: { slot: "header" }, slot: "header" },
-                [_vm._t("header")],
-                2
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm._t("default")
-        ],
-        2
-      )
+      _vm._t("default")
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -107651,11 +107649,34 @@ var render = function() {
         {
           name: "show",
           rawName: "v-show",
-          value: this.$page.flash.message || this.$page.flash.error,
-          expression: "this.$page.flash.message || this.$page.flash.error"
+          value: _vm.$page.flash.message || _vm.$page.flash.error,
+          expression: "$page.flash.message || $page.flash.error"
         }
       ]
-    })
+    }),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.$page.flash.message,
+            expression: "$page.flash.message"
+          }
+        ],
+        staticClass:
+          "border px-4 py-2 rounded-md shadow-sm bg-green-100 text-green-700 border-green-500"
+      },
+      [
+        _c("i", {
+          staticClass: "fa fa-info-circle",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" " + _vm._s(_vm.$page.flash.message) + "\n    ")
+      ]
+    )
   ])
 }
 var staticRenderFns = []
@@ -107696,13 +107717,26 @@ var render = function() {
             expression: "activeName"
           }
         },
-        _vm._l(_vm.tabsData, function(tab, index) {
-          return _c("el-tab-pane", {
-            key: index,
-            attrs: { route: tab.route, label: tab.label, name: tab.name }
+        [
+          _vm.home
+            ? _c("el-tab-pane", { attrs: { route: _vm.home } }, [
+                _c("span", { attrs: { slot: "label" }, slot: "label" }, [
+                  _c("i", {
+                    staticClass: "fa fa-home text-gray-500",
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.tabsData, function(tab, index) {
+            return _c("el-tab-pane", {
+              key: index,
+              attrs: { route: tab.route, label: tab.label, name: tab.name }
+            })
           })
-        }),
-        1
+        ],
+        2
       )
     ],
     1
@@ -121813,83 +121847,70 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./API/ApiTokenManager": [
 		"./resources/js/Pages/API/ApiTokenManager.vue",
-		9,
 		0,
 		1,
 		2
 	],
 	"./API/ApiTokenManager.vue": [
 		"./resources/js/Pages/API/ApiTokenManager.vue",
-		9,
 		0,
 		1,
 		2
 	],
 	"./API/Index": [
 		"./resources/js/Pages/API/Index.vue",
-		9,
 		0,
 		1,
 		2,
-		17
+		22
 	],
 	"./API/Index.vue": [
 		"./resources/js/Pages/API/Index.vue",
-		9,
 		0,
 		1,
 		2,
-		17
+		22
 	],
 	"./Auth/Login/Show": [
 		"./resources/js/Pages/Auth/Login/Show.vue",
-		9,
 		12
 	],
 	"./Auth/Login/Show.vue": [
 		"./resources/js/Pages/Auth/Login/Show.vue",
-		9,
 		12
 	],
 	"./Dashboard": [
 		"./resources/js/Pages/Dashboard.vue",
-		9,
 		9
 	],
 	"./Dashboard.vue": [
 		"./resources/js/Pages/Dashboard.vue",
-		9,
 		9
 	],
 	"./Profile/DeleteUserForm": [
 		"./resources/js/Pages/Profile/DeleteUserForm.vue",
-		9,
 		0,
 		11
 	],
 	"./Profile/DeleteUserForm.vue": [
 		"./resources/js/Pages/Profile/DeleteUserForm.vue",
-		9,
 		0,
 		11
 	],
 	"./Profile/LogoutOtherBrowserSessionsForm": [
 		"./resources/js/Pages/Profile/LogoutOtherBrowserSessionsForm.vue",
-		9,
 		0,
 		4,
 		10
 	],
 	"./Profile/LogoutOtherBrowserSessionsForm.vue": [
 		"./resources/js/Pages/Profile/LogoutOtherBrowserSessionsForm.vue",
-		9,
 		0,
 		4,
 		10
 	],
 	"./Profile/Show": [
 		"./resources/js/Pages/Profile/Show.vue",
-		9,
 		0,
 		1,
 		3,
@@ -121899,7 +121920,6 @@ var map = {
 	],
 	"./Profile/Show.vue": [
 		"./resources/js/Pages/Profile/Show.vue",
-		9,
 		0,
 		1,
 		3,
@@ -121909,163 +121929,221 @@ var map = {
 	],
 	"./Profile/TwoFactorAuthenticationForm": [
 		"./resources/js/Pages/Profile/TwoFactorAuthenticationForm.vue",
-		9,
 		0,
 		3,
-		16
+		21
 	],
 	"./Profile/TwoFactorAuthenticationForm.vue": [
 		"./resources/js/Pages/Profile/TwoFactorAuthenticationForm.vue",
-		9,
 		0,
 		3,
-		16
+		21
 	],
 	"./Profile/UpdatePasswordForm": [
 		"./resources/js/Pages/Profile/UpdatePasswordForm.vue",
-		9,
 		1,
 		7
 	],
 	"./Profile/UpdatePasswordForm.vue": [
 		"./resources/js/Pages/Profile/UpdatePasswordForm.vue",
-		9,
 		1,
 		7
 	],
 	"./Profile/UpdateProfileInformationForm": [
 		"./resources/js/Pages/Profile/UpdateProfileInformationForm.vue",
-		9,
 		1,
 		5,
 		6
 	],
 	"./Profile/UpdateProfileInformationForm.vue": [
 		"./resources/js/Pages/Profile/UpdateProfileInformationForm.vue",
-		9,
 		1,
 		5,
 		6
 	],
+	"./Site/Config/Components/Alipay": [
+		"./resources/js/Pages/Site/Config/Components/Alipay.vue",
+		29
+	],
+	"./Site/Config/Components/Alipay.vue": [
+		"./resources/js/Pages/Site/Config/Components/Alipay.vue",
+		29
+	],
+	"./Site/Config/Components/Aliyun": [
+		"./resources/js/Pages/Site/Config/Components/Aliyun.vue",
+		30
+	],
+	"./Site/Config/Components/Aliyun.vue": [
+		"./resources/js/Pages/Site/Config/Components/Aliyun.vue",
+		30
+	],
+	"./Site/Config/Components/Base": [
+		"./resources/js/Pages/Site/Config/Components/Base.vue",
+		31
+	],
+	"./Site/Config/Components/Base.vue": [
+		"./resources/js/Pages/Site/Config/Components/Base.vue",
+		31
+	],
+	"./Site/Config/Components/Email": [
+		"./resources/js/Pages/Site/Config/Components/Email.vue",
+		35
+	],
+	"./Site/Config/Components/Email.vue": [
+		"./resources/js/Pages/Site/Config/Components/Email.vue",
+		35
+	],
+	"./Site/Config/Components/Sms": [
+		"./resources/js/Pages/Site/Config/Components/Sms.vue",
+		38
+	],
+	"./Site/Config/Components/Sms.vue": [
+		"./resources/js/Pages/Site/Config/Components/Sms.vue",
+		38
+	],
+	"./Site/Config/Components/Upload": [
+		"./resources/js/Pages/Site/Config/Components/Upload.vue",
+		36
+	],
+	"./Site/Config/Components/Upload.vue": [
+		"./resources/js/Pages/Site/Config/Components/Upload.vue",
+		36
+	],
+	"./Site/Config/Components/User": [
+		"./resources/js/Pages/Site/Config/Components/User.vue",
+		32
+	],
+	"./Site/Config/Components/User.vue": [
+		"./resources/js/Pages/Site/Config/Components/User.vue",
+		32
+	],
+	"./Site/Config/Components/Wepay": [
+		"./resources/js/Pages/Site/Config/Components/Wepay.vue",
+		34
+	],
+	"./Site/Config/Components/Wepay.vue": [
+		"./resources/js/Pages/Site/Config/Components/Wepay.vue",
+		34
+	],
+	"./Site/Config/Edit": [
+		"./resources/js/Pages/Site/Config/Edit.vue",
+		28
+	],
+	"./Site/Config/Edit.vue": [
+		"./resources/js/Pages/Site/Config/Edit.vue",
+		28
+	],
+	"./Site/Config/config": [
+		"./resources/js/Pages/Site/Config/config.js",
+		33
+	],
+	"./Site/Config/config.js": [
+		"./resources/js/Pages/Site/Config/config.js",
+		33
+	],
 	"./Site/Site/Create": [
 		"./resources/js/Pages/Site/Site/Create.vue",
-		9,
-		18
+		13
 	],
 	"./Site/Site/Create.vue": [
 		"./resources/js/Pages/Site/Site/Create.vue",
-		9,
-		18
+		13
 	],
 	"./Site/Site/Index": [
 		"./resources/js/Pages/Site/Site/Index.vue",
-		9,
-		19
+		14
 	],
 	"./Site/Site/Index.vue": [
 		"./resources/js/Pages/Site/Site/Index.vue",
-		9,
-		19
+		14
 	],
 	"./Site/Site/Layout": [
 		"./resources/js/Pages/Site/Site/Layout.vue",
-		9,
-		21
+		23
 	],
 	"./Site/Site/Layout.vue": [
 		"./resources/js/Pages/Site/Site/Layout.vue",
-		9,
-		21
+		23
 	],
 	"./System/Config/Edit": [
 		"./resources/js/Pages/System/Config/Edit.vue",
-		9,
-		20
+		24
 	],
 	"./System/Config/Edit.vue": [
 		"./resources/js/Pages/System/Config/Edit.vue",
-		9,
-		20
+		24
 	],
 	"./System/Group/Form": [
 		"./resources/js/Pages/System/Group/Form.vue",
-		9,
-		24
+		16
 	],
 	"./System/Group/Form.vue": [
 		"./resources/js/Pages/System/Group/Form.vue",
-		9,
-		24
+		16
 	],
 	"./System/Group/Index": [
 		"./resources/js/Pages/System/Group/Index.vue",
-		9,
-		23
+		17
 	],
 	"./System/Group/Index.vue": [
 		"./resources/js/Pages/System/Group/Index.vue",
-		9,
-		23
+		17
 	],
-	"./System/Group/Layout": [
-		"./resources/js/Pages/System/Group/Layout.vue",
-		9,
+	"./System/Group/tabs": [
+		"./resources/js/Pages/System/Group/tabs.js",
 		25
 	],
-	"./System/Group/Layout.vue": [
-		"./resources/js/Pages/System/Group/Layout.vue",
-		9,
+	"./System/Group/tabs.js": [
+		"./resources/js/Pages/System/Group/tabs.js",
 		25
 	],
 	"./System/Home/Index": [
 		"./resources/js/Pages/System/Home/Index.vue",
-		9,
 		15
 	],
 	"./System/Home/Index.vue": [
 		"./resources/js/Pages/System/Home/Index.vue",
-		9,
 		15
+	],
+	"./System/My/Edit": [
+		"./resources/js/Pages/System/My/Edit.vue",
+		18
+	],
+	"./System/My/Edit.vue": [
+		"./resources/js/Pages/System/My/Edit.vue",
+		18
+	],
+	"./System/My/tabs": [
+		"./resources/js/Pages/System/My/tabs.js",
+		26
+	],
+	"./System/My/tabs.js": [
+		"./resources/js/Pages/System/My/tabs.js",
+		26
 	],
 	"./System/Package/Form": [
 		"./resources/js/Pages/System/Package/Form.vue",
-		9,
-		13
+		19
 	],
 	"./System/Package/Form.vue": [
 		"./resources/js/Pages/System/Package/Form.vue",
-		9,
-		13
+		19
 	],
 	"./System/Package/Index": [
 		"./resources/js/Pages/System/Package/Index.vue",
-		9,
-		14
+		20
 	],
 	"./System/Package/Index.vue": [
 		"./resources/js/Pages/System/Package/Index.vue",
-		9,
-		14
-	],
-	"./System/Package/Menu": [
-		"./resources/js/Pages/System/Package/Menu.js",
-		7,
-		22
-	],
-	"./System/Package/Menu.js": [
-		"./resources/js/Pages/System/Package/Menu.js",
-		7,
-		22
+		20
 	],
 	"./System/Package/tabs": [
 		"./resources/js/Pages/System/Package/tabs.js",
-		9,
-		26
+		27
 	],
 	"./System/Package/tabs.js": [
 		"./resources/js/Pages/System/Package/tabs.js",
-		9,
-		26
+		27
 	]
 };
 function webpackAsyncContext(req) {
@@ -122078,8 +122156,8 @@ function webpackAsyncContext(req) {
 	}
 
 	var ids = map[req], id = ids[0];
-	return Promise.all(ids.slice(2).map(__webpack_require__.e)).then(function() {
-		return __webpack_require__.t(id, ids[1])
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
+		return __webpack_require__(id);
 	});
 }
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
