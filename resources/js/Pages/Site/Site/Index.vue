@@ -28,38 +28,42 @@
             </div>
 
             <div class="flex justify-between text-sm text-gray-600 border-t border-gray-200 mt-3 pt-3">
-                <div class="small mb-2"># 1 创建时间: 2020-02-03 站长: 李四 所属组: vip 默认模块: 在线教育</div>
+                <div class="small mb-2">
+                    # {{ site.id }} 创建时间: {{ site.created_at | format }} 站长: {{ site.master.name }} 所属组:
+                    {{ site.master.group.title }}
+                    <span v-if="site.module"> 默认模块: {{ site.module.title }} </span>
+                </div>
                 <div class="small">
-                    <a href=" $site['domain'] " target="_blank" class="text-muted mr-2">
+                    <inertia-link :href="site.domain" target="_blank" class="mr-2">
                         <i aria-hidden="true" class="fa fa-home"></i>
                         访问首页
-                    </a>
-                    <a href="/site/1/config" class="text-muted mr-2">
+                    </inertia-link>
+                    <inertia-link :href="route('site.config.edit', site)" class="mr-2">
                         <i aria-hidden="true" class="fa fa-check-circle-o"></i>
                         网站配置
-                    </a>
-                    <a href=" route('wechat.wechat.index',$site) " class="text-muted mr-2"
-                        ><i class="fa fa-comment-o"></i>
+                    </inertia-link>
+                    <inertia-link :href="route('wechat.site.wechat.index', site)" class="mr-2">
+                        <i class="fa fa-comment-o"></i>
                         微信公众号
-                    </a>
-                    <a href=" route('site.admin.index',$site) " class="text-muted mr-2"
-                        ><i class="fa fa-user-circle-o"></i>
+                    </inertia-link>
+                    <a href=" route('site.admin.index',$site) " class="mr-2">
+                        <i class="fa fa-user-circle-o"></i>
                         管理员设置
                     </a>
-                    <a href=" route('site.role.index',$site) " class="text-muted mr-2">
+                    <a href=" route('site.role.index',$site) " class="mr-2">
                         <i class="fa fa-user-secret" aria-hidden="true"></i>
                         角色管理
                     </a>
-                    <a href=" route('site.site.menu.index',$site) " class="text-muted mr-2">
+                    <a href=" route('site.site.menu.index',$site) " class="mr-2">
                         <i class="fa fa-archive" aria-hidden="true"></i>
                         菜单设置
                     </a>
-                    <a href=" route('site.site.edit',$site) " class="text-muted mr-2">
+                    <a href=" route('site.site.edit',$site) " class="mr-2">
                         <i class="fa fa-pencil-square-o"></i>
                         编辑
                     </a>
 
-                    <a action=" route('site.site.destroy',$site) " class-name="text-muted">
+                    <a action="route('site.site.destroy',$site)">
                         <i class="fa fa-trash"></i>
                         删除
                     </a>
@@ -76,7 +80,4 @@ export default {
 </script>
 
 <style>
-body {
-    /* color: red !important; */
-}
 </style>

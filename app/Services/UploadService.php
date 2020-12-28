@@ -21,9 +21,9 @@ class UploadService
      */
     public function local(UploadedFile $file)
     {
-        $path = $file->store(date('Ym'), 'attachment');
+        $path =  $file->store(date('Ym'), 'attachment');
 
-        return $this->save($file, "attachments/{$path}");
+        return $this->save($file, "/attachments/{$path}");
     }
 
     /**

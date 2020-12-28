@@ -17,7 +17,6 @@ export default {
         const flash = this.$page.flash
         const type = flash.success ? 'success' : 'error'
         const message = this.$page.flash[type]
-        console.log(this.$page)
 
         if (message) {
             this.$message({ message: message, type: type })

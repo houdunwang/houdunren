@@ -14,10 +14,8 @@
 
 <script>
 export default {
-    mounted() {
-        console.log(this.$slots);
-    }
-};
+    mounted() {}
+}
 </script>
 
 <style></style>

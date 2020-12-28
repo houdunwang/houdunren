@@ -6,13 +6,13 @@
                 <inertia-link class="mr-4" href="">
                     <i class="fa fa-sitemap" aria-hidden="true"></i> 站点管理
                 </inertia-link>
-                <inertia-link class="mr-4" href="">
+                <inertia-link class="mr-4" href="" v-if="$page.user.isSuperAdmin">
                     <i class="fa fa-cubes" aria-hidden="true"></i> 模块管理
                 </inertia-link>
-                <inertia-link class="mr-4" :href="route('system.home')">
+                <inertia-link class="mr-4" :href="route('system.home')" v-if="$page.user.isSuperAdmin">
                     <i class="fa fa-comments-o" aria-hidden="true"></i> 系统设置
                 </inertia-link>
-                <inertia-link class="mr-4" href="">
+                <inertia-link class="mr-4" href="" v-if="$page.user.isSuperAdmin">
                     <i class="fa fa-users" aria-hidden="true"></i>
                     会员组
                 </inertia-link>
@@ -31,7 +31,7 @@
                 >
                     <inertia-link class="mb-3 mr-4" href="">会员中心</inertia-link>
                     <inertia-link class="mb-3 mr-4" href="">修改密码</inertia-link>
-                    <inertia-link class="mr-4" href="">退出登录</inertia-link>
+                    <inertia-link class="mr-4" :href="route('auth.logout')">退出登录</inertia-link>
                 </div>
             </div>
         </div>
@@ -45,15 +45,16 @@
                 </a>
             </div>
             <div class="flex justify-between">
-                <a
-                    :href="menu.link"
-                    class="bg-white border rounded-lg shadow-md w-32 h-20 px-4 py-3 flex flex-col justify-center items-center mr-4 opacity-75 duration-500 hover:opacity-100"
-                    v-for="(menu, index) in quickMenus"
-                    :key="index"
-                >
-                    <i class="fa-2x" :class="menu.icon" aria-hidden="true"></i>
-                    <span class="text-sm">{{ menu.title }}</span>
-                </a>
+                <div v-for="(menu, index) in quickMenus" :key="index">
+                    <a
+                        v-if="menu.show"
+                        :href="menu.link"
+                        class="bg-white border rounded-lg shadow-md w-32 h-20 px-4 py-3 flex flex-col justify-center items-center mr-4 opacity-75 duration-500 hover:opacity-100"
+                    >
+                        <i class="fa-2x" :class="menu.icon" aria-hidden="true"></i>
+                        <span class="text-sm">{{ menu.title }}</span>
+                    </a>
+                </div>
             </div>
         </div>
         <!-- 快速导航菜单 End-->
@@ -79,14 +80,16 @@ export default {
                 {
                     title: '网站管理',
                     link: route('site.site.index'),
-                    icon: 'fa fa-sitemap'
+                    icon: 'fa fa-sitemap',
+                    show: true
                 },
                 {
                     title: '系统设置',
                     link: route('system.home'),
-                    icon: 'fa fa-support'
+                    icon: 'fa fa-support',
+                    show: this.$page.user.isSuperAdmin
                 },
-                { title: '退出', link: '', icon: 'fa fa-sign-out' }
+                { title: '退出', link: route('auth.logout'), icon: 'fa fa-sign-out', show: true }
             ]
         }
     },

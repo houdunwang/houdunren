@@ -25,9 +25,8 @@
                             @click="$event.target.src = captcha + Math.random()"
                         />
                     </div>
-                    <hd-error name="captcha" class="mt-2" />
+                    <hd-error :message="form.error('captcha')" />
                 </div>
-
                 <hd-label> <hd-checkbox v-model="form.remember" /> 记住我 </hd-label>
             </template>
             <template v-slot:footer>
@@ -35,7 +34,8 @@
                     <hd-button>登录</hd-button>
                     <div class="text-xs text-gray-600">
                         <i class="fa fa-weixin text-green-500" aria-hidden="true"></i>
-                        微信登录 &middot; <a href="">注册</a> &middot; <a href="">找回密码</a> &middot;
+                        微信登录 &middot;
+                        <a href="">注册</a> &middot; <a href="">找回密码</a> &middot;
                         <a href="">网站首页</a>
                     </div>
                 </div>
@@ -50,7 +50,7 @@ export default {
     layout: Layout,
     data() {
         return {
-            form: { account: '', password: '', captcha: '', remember: false }
+            form: this.$inertia.form({ account: '', password: '', captcha: '', remember: false })
         }
     },
     computed: {

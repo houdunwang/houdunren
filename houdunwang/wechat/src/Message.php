@@ -12,5 +12,5 @@ use Log;
  */
 class Message extends WeChat
 {
-  use Send, MessageType;
+    use Send, MessageType;
 }

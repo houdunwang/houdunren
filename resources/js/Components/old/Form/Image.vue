@@ -8,45 +8,42 @@
         :headers="headers"
     >
         <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-        <i v-else class="el-icon-plus avatar-uploader-icon "></i>
+        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
 </template>
 
 <script>
 export default {
     props: {
-        action: { type: String, default: "/common/upload/local" },
+        action: { type: String, default: '/common/upload/local' },
         value: { type: String }
     },
     data() {
         return {
             imageUrl: this.value,
             headers: {
-                "X-CSRF-TOKEN": document.querySelector(
-                    'meta[name="csrf-token"]'
-                ).content
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
             }
-        };
+        }
     },
     methods: {
         handleAvatarSuccess(res, file) {
-            this.imageUrl = res.path;
-            this.$emit("input", this.imageUrl);
+            this.imageUrl = res.path
+            this.$emit('input', this.imageUrl)
         },
         beforeAvatarUpload(file) {
-            const isJPG =
-                file.type === "image/jpeg" || file.type === "image/png";
-            const isLt2M = file.size / 1024 / 1024 < 2;
+            const isJPG = file.type === 'image/jpeg' || file.type === 'image/png'
+            const isLt2M = file.size / 1024 / 1024 < 2
             if (!isJPG) {
-                this.$message.error("上传头像图片只能是 JPG 格式!");
+                this.$message.error('上传头像图片只能是 JPG 格式!')
             }
             if (!isLt2M) {
-                this.$message.error("上传头像图片大小不能超过 2MB!");
+                this.$message.error('上传头像图片大小不能超过 2MB!')
             }
-            return isJPG && isLt2M;
+            return isJPG && isLt2M
         }
     }
-};
+}
 </script>
 
 <style>

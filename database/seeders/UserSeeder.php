@@ -18,9 +18,15 @@ class UserSeeder extends Seeder
         $user->save();
 
         $user = User::find(2);
-        $user['name'] = 'HDCMS';
+        $user['name'] = '小海豚';
         $user['mobile'] = 18888888888;
         $user['email'] = 'user@houdunren.com';
+        $user->save();
+
+        $user = User::find(3);
+        $user['name'] = 'HDCMS';
+        $user['mobile'] = 16666666666;
+        $user['email'] = 'hdcms@houdunren.com';
         $user->save();
     }
 }

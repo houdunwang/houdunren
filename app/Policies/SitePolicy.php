@@ -32,7 +32,7 @@ class SitePolicy
 
     public function create(User $user)
     {
-        return false;
+        return true;
     }
 
     public function update(User $user, Site $site)

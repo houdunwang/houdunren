@@ -1,14 +1,12 @@
 <template>
     <div>
         <el-tabs v-model="activeName" type="card" @tab-click="change">
-            <el-tab-pane v-if="home" :route="home">
-                <span slot="label">
-                    <i class="fa fa-home text-gray-500" aria-hidden="true"></i>
-                </span>
+            <el-tab-pane v-if="home" :route="home" name="home">
+                <span slot="label"> <i class="fa fa-home text-gray-500" aria-hidden="true"></i> </span>
             </el-tab-pane>
-
             <el-tab-pane
                 :route="tab.route"
+                :params="tab.params"
                 :label="tab.label"
                 :name="tab.name"
                 v-for="(tab, index) in tabsData"
@@ -41,10 +39,10 @@ export default {
             })
         },
         change(tab) {
-            console.log(tab)
-
             if (tab.current) return
-            if (tab.$attrs.route) this.$inertia.get(route(tab.$attrs.route))
+            console.log(tab.$attrs)
+
+            if (tab.$attrs.route) this.$inertia.get(route(tab.$attrs.route, tab.$attrs.params || []))
         }
     }
 }

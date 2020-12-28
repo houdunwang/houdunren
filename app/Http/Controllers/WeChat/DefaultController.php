@@ -7,15 +7,32 @@ use App\Models\Site;
 use App\Models\WeChat;
 use Illuminate\Http\Request;
 
+/**
+ * 微信默认消息
+ */
 class DefaultController extends Controller
 {
-    public function edit(Site $site, WeChat $wechat)
+    /**
+     * 编辑消息
+     *
+     * @param WeChat $wechat
+     * @return void
+     */
+    public function edit(WeChat $wechat)
     {
-        return view('wechat.default.edit', compact('site', 'wechat'));
+        return inertia('Wechat/Default/Form', ['site' => $wechat->site, 'wechat' => $wechat]);
     }
 
-    public function update(Request $request, Site $site, WeChat $wechat)
+    /**
+     * 更新消息
+     */
+    public function update(Request $request, WeChat $wechat)
     {
+        $request->validate(['welcome' => ['required'], 'default_message' => ['required']], [
+            'welcome.required' => '关注欢迎消息不能为空',
+            'default_message.required' => '默认回复消息不能为空'
+        ]);
+
         $wechat->fill($request->all())->save();
         return back()->with('success', '默认回复设置成功');
     }

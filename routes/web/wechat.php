@@ -7,12 +7,13 @@ use App\Http\Controllers\WeChat\DefaultController;
 use App\Http\Controllers\WeChat\MenuController;
 use App\Http\Controllers\WeChat\UserController;
 use App\Http\Controllers\WeChat\RuleController;
+
 //微信服务器通信接口
 Route::any('wechat/api/{model}', [ProcessorController::class, 'handle'])->name('wechat.api')->middleware('front');
 
 //站点微信公众号配置
-Route::group(['prefix' => 'wechat/{site}', 'as' => 'wechat.', 'middleware' => ['auth', 'site']], function () {
-    Route::resource('wechat',  WeChatController::class);
+Route::group(['prefix' => 'wechat', 'as' => 'wechat.', 'middleware' => ['auth', 'site']], function () {
+    Route::resource('site.wechat',  WeChatController::class)->shallow();
     Route::get('default/{wechat}', [DefaultController::class, 'edit'])->name('default.edit');
     Route::put('default/{wechat}', [DefaultController::class, 'update'])->name('default.update');
     Route::get('menu/{wechat}', [MenuController::class, 'edit'])->name('menu.edit');

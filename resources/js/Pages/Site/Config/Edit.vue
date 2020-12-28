@@ -1,14 +1,6 @@
 <template>
     <el-form :model="form" ref="form" label-width="120px" :inline="false" size="normal" label-position="left">
         <el-tabs v-model="activeName" type="card">
-            <el-tab-pane>
-                <template v-slot:label>
-                    <inertia-link :href="route('site.site.index')">
-                        <i class="fa fa-home" aria-hidden="true"></i>
-                    </inertia-link>
-                </template>
-            </el-tab-pane>
-
             <el-tab-pane label="基本信息" name="base"> <base-config /> </el-tab-pane>
             <el-tab-pane label="用户相关" name="user"> <user /> </el-tab-pane>
             <el-tab-pane label="阿里云" name="aliyun"> <aliyun /> </el-tab-pane>
