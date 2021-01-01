@@ -7,11 +7,11 @@ use App\Models\WeChat;
 use Houdunwang\WeChat\User;
 use App\Services\WeChatService;
 use Illuminate\Http\Request;
-use App\Models\Site;
 use App\Models\User as ModelsUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Client\RequestException;
+use Illuminate\Support\Facades\Log;
 
 /**
  * 微信粉丝
@@ -23,7 +23,6 @@ class UserController extends Controller
     /**
      * 同步粉丝数据
      * @param Request $request
-     * @param Site $site
      * @param WeChat $wechat
      * @param string $openid
      * @param User $userPackage
@@ -32,23 +31,28 @@ class UserController extends Controller
      * @throws BindingResolutionException
      * @throws RequestException
      */
-    public function sync(Request $request, Site $site, WeChat $wechat, string $openid, User $userPackage, WeChatService $weChatService)
+    public function sync(Request $request, WeChat $wechat, User $userPackage, WeChatService $weChatService)
     {
-        $response = $userPackage->config($wechat)->getList($openid ?? null);
+        //获取用户列表。openid为上次获取的最后一个粉丝openid
+        $response = $userPackage->config($wechat)->getList(session('next_openid'));
         session(['next_openid' => $response['next_openid']]);
-        if (!isset($response['data'])) {
-            return response()->json(['state' => 1]);
-        }
-        $users = $userPackage->getByOpenids($response['data']['openid'])['user_info_list'];
 
+        if (!isset($response['data'])) {
+            session()->forget('next_openid');
+            return ['state' => true];
+        }
+        //获取粉丝资料
+        $users = $userPackage->getByOpenids($response['data']['openid'])['user_info_list'];
+        //同步到数据库
         $weChatService->batchSaveUsers(array_map(function ($v) use ($wechat) {
             $v['wechat_id'] = $wechat['id'];
+            $v['site_id'] = $wechat->site->id;
             return $v;
         }, $users));
 
-        return response()->json(array_filter($response, function ($k) {
+        return array_filter($response, function ($k) {
             return $k != 'data';
-        }, ARRAY_FILTER_USE_KEY) + ['state' => 0]);
+        }, ARRAY_FILTER_USE_KEY) + ['state' => false];
     }
 
     /**

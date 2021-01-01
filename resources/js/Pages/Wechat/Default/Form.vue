@@ -4,7 +4,6 @@
             <div slot="header">
                 <span>微信默认消息</span>
             </div>
-
             <el-form :model="form" ref="form" label-width="120px" :inline="false" size="normal">
                 <el-form-item label="关注欢迎消息">
                     <el-input v-model="form.welcome"></el-input>

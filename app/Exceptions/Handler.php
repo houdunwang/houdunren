@@ -7,6 +7,7 @@ use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Throwable;
+use Illuminate\Support\Facades\Log;
 
 class Handler extends ExceptionHandler
 {
@@ -43,11 +44,10 @@ class Handler extends ExceptionHandler
 
     /**
      * 异步自定义响应
-     * @param Request $request
+     *
+     * @param [type] $request
      * @param Throwable $exception
-     * @return Response
-     * @throws BindingResolutionException
-     * @throws Throwable
+     * @return void
      */
     public function render($request, Throwable $exception)
     {
@@ -55,11 +55,7 @@ class Handler extends ExceptionHandler
 
         // 访问限制
         if ($exception instanceof ThrottleRequestsException) {
-            if ($request->expectsJson()) {
-                return response()
-                    ->json(['message' => '请求过于频繁，请稍后再试'], 429)
-                    ->withHeaders($exception->getHeaders());
-            }
+            return back()->with('message', '请求过于频繁，请稍后再试');
         }
 
         //表单验证
@@ -72,15 +68,13 @@ class Handler extends ExceptionHandler
         // inertia错误拦截
         if (!app()->environment('local') && in_array($response->status(), [500, 503, 404])) {
             return Inertia::render('Error', ['status' => $response->status()])
-                ->toResponse($request)
-                ->setStatusCode($response->status());
+                ->toResponse($request)->setStatusCode($response->status());
         } else if ($response->status() === 419) {
-            return back()->with([
-                'message' => '页面访问过期，请重新刷新',
-            ]);
+            return back()->with('message', '页面访问过期，请重新刷新',);
         } else if ($response->status() === 403) {
-            return back()->with('error', '没有操作权限');
+            return back()->with('message', '你没有操作权限');
         }
+
         return $response;
     }
 }

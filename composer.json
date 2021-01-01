@@ -23,6 +23,7 @@
         "laravel/framework": "^8.12",
         "laravel/jetstream": "^1.6",
         "laravel/sanctum": "^2.6",
+        "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
         "mews/captcha": "^3.2",
         "mews/purifier": "^3.3",
@@ -31,7 +32,7 @@
         "socialiteproviders/weixin-web": "^4.0",
         "spatie/image": "^1.9",
         "spatie/laravel-activitylog": "^3.16",
-        "spatie/laravel-permission": "^3.17",
+        "spatie/laravel-permission": "^3.18",
         "tightenco/ziggy": "^0.9.4",
         "workerman/gateway-worker": "^3.0",
         "workerman/gatewayclient": "^3.0",
@@ -59,7 +60,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Houdunwang\\WeChat\\": "houdunwang/wechat/src/"
+            "Houdunwang\\WeChat\\": "houdunwang/wechat/src/",
+            "Modules\\": "Modules/"
         },
         "files": [
             "app/helpers.php"

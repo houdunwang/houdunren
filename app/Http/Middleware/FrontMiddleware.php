@@ -6,9 +6,10 @@ use App\Models\Site;
 use App\Services\ConfigService;
 use App\Services\TagService;
 use App\Services\TemplateService;
-use Closure;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
+
+use Closure;
 
 /**
  * 前台管理中间件
@@ -18,6 +19,7 @@ class FrontMiddleware
 {
     public function handle($request, Closure $next)
     {
+
         $this->init();
         return $next($request);
     }

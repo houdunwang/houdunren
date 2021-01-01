@@ -14,7 +14,6 @@
                     <hd-error :message="form.error('domain')" />
                 </el-form-item>
             </el-card>
-
             <el-card shadow="always" :body-style="{ padding: '20px' }" class="mt-3">
                 <div slot="header">默认模块</div>
             </el-card>

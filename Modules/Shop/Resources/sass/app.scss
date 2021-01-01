@@ -1,0 +1,13 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.el-card__header {
+    padding: 10px 20px !important;
+    border-bottom: 1px solid #ebeef5;
+    box-sizing: border-box;
+}
+
+.el-alert__description {
+    font-size: 0.9rem !important;
+}

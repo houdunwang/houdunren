@@ -14,47 +14,79 @@ use Spatie\Permission\Models\Role;
  */
 class RoleController extends Controller
 {
-  public function __construct()
-  {
-    $this->authorizeResource(Site::class, 'site');
-  }
+    /**
+     * 角色列表
+     *
+     * @param Site $site
+     * @return void
+     */
+    public function index(Site $site)
+    {
+        $this->authorize('update', $site);
+        $roles = $site->roles;
+        return inertia('Site/Role/Index', compact('roles', 'site'));
+    }
 
-  public function index(Site $site)
-  {
-    $roles = Role::where('site_id', $site->id)->get();
-    return view('site.role.index', compact('roles', 'site'));
-  }
+    /**
+     * 添加角色
+     *
+     * @param Site $site
+     * @return void
+     */
+    public function create(Site $site)
+    {
+        $this->authorize('update', $site);
+        return inertia('Site/Role/Form', compact('site'));
+    }
 
-  public function create(Site $site)
-  {
-    return view('site.role.create', compact('site'));
-  }
+    /**
+     * 保存角色
+     *
+     * @param RoleRequest $request
+     * @param Site $site
+     * @return void
+     */
+    public function store(RoleRequest $request, Site $site)
+    {
+        $this->authorize('update', $site);
+        Role::create($request->only(['title', 'name']) + ['site_id' => $site->id]);
 
-  public function store(RoleRequest $request, Site $site)
-  {
-    Role::create($request->only(['title', 'name']) + ['site_id' => $site->id]);
-    return redirect()
-      ->route('site.role.index', $site)
-      ->with('success', '角色添加成功');
-  }
+        return redirect()->route('site.role.index', $site)->with('success', '角色添加成功');
+    }
 
-  public function edit(Site $site, Role $role)
-  {
-    return view('site.role.edit', compact('role', 'site'));
-  }
+    /**
+     * 编辑角色
+     *
+     * @param Site $site
+     * @param Role $role
+     * @return void
+     */
+    public function edit(Site $site, Role $role)
+    {
+        $this->authorize('update', $site);
+        return inertia('Site/Role/Form', compact('role', 'site'));
+    }
 
-  public function update(Request $request, Site $site, Role $role)
-  {
-    $role->fill($request->input())->save();
-    return redirect()
-      ->route('site.role.index', $site)
-      ->with('success', '角色保存成功');
-  }
+    public function update(Request $request, Site $site, Role $role)
+    {
+        $this->authorize('update', $site);
+        $role->fill($request->input())->save();
+        return redirect()
+            ->route('site.role.index', $site)
+            ->with('success', '角色保存成功');
+    }
 
-  public function destroy(Site $site, Role $role)
-  {
-    $role->delete();
-
-    response()->json(['message' => '角色删除成功']);
-  }
+    /**
+     * 删除角色
+     *
+     * @param Site $site
+     * @param Role $role
+     * @return void
+     */
+    public function destroy(Site $site, Role $role)
+    {
+        $this->authorize('update', $site);
+        $role->delete();
+        return back()->with('succes', '角色删除成功');
+    }
 }

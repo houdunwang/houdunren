@@ -16,10 +16,12 @@ Route::group(['prefix' => 'wechat', 'as' => 'wechat.', 'middleware' => ['auth', 
     Route::resource('site.wechat',  WeChatController::class)->shallow();
     Route::get('default/{wechat}', [DefaultController::class, 'edit'])->name('default.edit');
     Route::put('default/{wechat}', [DefaultController::class, 'update'])->name('default.update');
+    //微信菜单
     Route::get('menu/{wechat}', [MenuController::class, 'edit'])->name('menu.edit');
     Route::put('menu/{wechat}', [MenuController::class, 'update'])->name('menu.update');
     Route::get('menu/push/{wechat}', [MenuController::class, 'push'])->name('menu.push');
-    Route::get('user/sync/{wechat}/{openid?}', [UserController::class, 'sync'])->name('user.sync');
+    //粉丝同步
+    Route::get('user/sync/{wechat}', [UserController::class, 'sync'])->name('user.sync');
     //微信登录
     Route::get('login/wechat', [WeChatController::class, 'redirectToProvider'])->name('login.wechat');
     Route::get('login/wechat/callback', [WeChatController::class, 'handleProviderCallback'])->name('login.wechat.callback');

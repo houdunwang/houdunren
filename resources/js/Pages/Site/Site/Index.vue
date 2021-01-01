@@ -1,17 +1,9 @@
 <template>
     <div>
         <inertia-link :href="route('site.site.create')" class="mb-3 block">
-            <el-button type="primary" size="medium" class="mb-3 block">
-                <i class="fa fa-plus" aria-hidden="true"></i> 添加网站</el-button
-            >
+            <el-button type="primary" size="medium" class="mb-3 block"> <i class="fa fa-plus" aria-hidden="true"></i> 添加网站</el-button>
         </inertia-link>
-        <el-card
-            shadow="always"
-            :body-style="{ padding: '20px' }"
-            v-for="site in sites"
-            :key="site.id"
-            class="mb-3 border border-gray-200"
-        >
+        <el-card shadow="always" :body-style="{ padding: '20px' }" v-for="site in sites" :key="site.id" class="mb-3 border border-gray-200">
             <div slot="header">
                 <div class="flex justify-between items-center">
                     <div class="text-sm text-gray-900">套餐: 至尊套餐</div>
@@ -46,14 +38,14 @@
                         <i class="fa fa-comment-o"></i>
                         微信公众号
                     </inertia-link>
-                    <a href=" route('site.admin.index',$site) " class="mr-2">
+                    <inertia-link :href="route('site.admin.index', site)" class="mr-2">
                         <i class="fa fa-user-circle-o"></i>
                         管理员设置
-                    </a>
-                    <a href=" route('site.role.index',$site) " class="mr-2">
+                    </inertia-link>
+                    <inertia-link :href="route('site.role.index', site)" class="mr-2">
                         <i class="fa fa-user-secret" aria-hidden="true"></i>
                         角色管理
-                    </a>
+                    </inertia-link>
                     <a href=" route('site.site.menu.index',$site) " class="mr-2">
                         <i class="fa fa-archive" aria-hidden="true"></i>
                         菜单设置
@@ -62,7 +54,6 @@
                         <i class="fa fa-pencil-square-o"></i>
                         编辑
                     </a>
-
                     <a action="route('site.site.destroy',$site)">
                         <i class="fa fa-trash"></i>
                         删除
@@ -79,5 +70,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

@@ -7,11 +7,7 @@
             <el-table-column label="操作" width="160" align="center">
                 <template slot-scope="scope">
                     <el-button-group>
-                        <el-button
-                            type="primary"
-                            size="small"
-                            @click="$inertia.get(route('system.package.edit', { id: scope.row.id }))"
-                        >
+                        <el-button type="primary" size="small" @click="$inertia.get(route('system.package.edit', { id: scope.row.id }))">
                             编辑
                         </el-button>
                         <el-button type="success" size="small" @click="del(scope.row.id)">删除</el-button>
@@ -44,5 +40,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

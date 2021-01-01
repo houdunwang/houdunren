@@ -7,7 +7,6 @@ use App\Http\Controllers\Site\AdminController;
 use App\Http\Controllers\Site\ModuleController;
 use App\Http\Controllers\Site\PermissionController;
 use App\Http\Controllers\Site\RoleController;
-use App\Http\Controllers\Site\SearchController;
 use App\Http\Controllers\Site\SiteController;
 
 //站点管理
@@ -17,14 +16,17 @@ Route::group(['prefix' => 'site', 'as' => 'site.', 'middleware' => ['auth', 'sit
 
 //其他站点相关业务
 Route::group(['prefix' => 'site/{site}', 'as' => 'site.', 'middleware' => ['auth', 'site']], function () {
+    //站点配置
     Route::get('config', [ConfigController::class, 'edit'])->name('config.edit');
     Route::put('config', [ConfigController::class, 'update'])->name('config.update');
+    //角色管理
     Route::resource('role',  RoleController::class);
     Route::get('permission/{role}', [PermissionController::class, 'edit'])->name('permission.edit');
     Route::put('permission/{role}', [PermissionController::class, 'update'])->name('permission.update');
-    Route::resource('admin',  AdminController::class)->only(['index', 'destroy']);
-    Route::get('admin/store/{admin}', [AdminController::class, 'store'])->name('admin.store');
-    Route::post('search/admin', [SearchController::class, 'admin'])->name('search.admin');
+    //管理员设置
+    Route::resource('admin', AdminController::class)->only(['index', 'store', 'destroy']);
+    //搜索管理员
+    Route::post('search/admin', [AdminController::class, 'search'])->name('admin.search');
     Route::get('admin/role/{user}', [AdminController::class, 'role'])->name('admin.role');
     Route::put('admin/role/{user}', [AdminController::class, 'updateRole'])->name('admin.role.update');
     //站点模块列表
