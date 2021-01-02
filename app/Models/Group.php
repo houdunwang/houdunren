@@ -13,7 +13,7 @@ class Group extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'site_num'];
+    protected $fillable = ['title', 'site_num', 'days'];
 
     /**
      * 套餐列表

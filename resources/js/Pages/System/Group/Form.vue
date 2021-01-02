@@ -2,45 +2,35 @@
     <hd-layout :tabs="tabs" home="system.home">
         <el-card shadow="always" :body-style="{ padding: '20px' }">
             <template v-slot:header="">会员组资料</template>
+
             <el-form :model="form" ref="form" label-width="120px" :inline="false" size="normal">
                 <el-form-item label="会员组名称">
-                    <el-input v-model="form.title"></el-input>
+                    <el-input type="text" v-model="form.title"></el-input>
                     <hd-error :message="form.error('title')" />
                 </el-form-item>
-
                 <el-form-item label="站点数量">
-                    <el-input v-model="form.site_nums"></el-input>
+                    <el-input type="number" v-model="form.site_num"></el-input>
                     <hd-error :message="form.error('site_nums')" />
                 </el-form-item>
-
                 <el-form-item label="可用天数">
                     <el-input v-model="form.days"></el-input>
                     <hd-error :message="form.error('days')" />
                 </el-form-item>
             </el-form>
         </el-card>
-
         <el-card shadow="always" :body-style="{ padding: '20px' }" class="mt-3">
             <div slot="header">
                 <span>套餐选择</span>
             </div>
-            <div>
-                <el-table
-                    ref="multipleTable"
-                    :data="packages"
-                    tooltip-effect="dark"
-                    @selection-change="handleSelectionChange"
-                >
-                    <el-table-column type="selection" width="55"> </el-table-column>
-                    <el-table-column label="编号" width="120">
-                        <template slot-scope="scope">{{ scope.row.id }}</template>
-                    </el-table-column>
-                    <el-table-column prop="title" label="套餐名称"> </el-table-column>
-                    <el-table-column label="可用模块" width="120"> 可用模块 </el-table-column>
-                </el-table>
-            </div>
+            <el-table ref="multipleTable" :data="packages" tooltip-effect="dark" @selection-change="handleSelectionPackageChange">
+                <el-table-column type="selection" width="55"> </el-table-column>
+                <el-table-column label="编号" width="120">
+                    <template slot-scope="scope">{{ scope.row.id }}</template>
+                </el-table-column>
+                <el-table-column prop="title" label="套餐名称"> </el-table-column>
+                <el-table-column label="可用模块" width="120"> 可用模块 </el-table-column>
+            </el-table>
         </el-card>
-
         <div class="mt-3">
             <el-button type="primary" @click="onSubmit">保存提交</el-button>
         </div>
@@ -48,11 +38,9 @@
 </template>
 
 <script>
-// import Layout from './Layout'
 import tabs from './tabs'
-const form = { title: '', site_nums: 0, days: 365 }
+const form = { title: '', site_nums: 0, days: 365, packages: [] }
 export default {
-    // components: { Layout },
     props: ['packages'],
     data() {
         return {
@@ -62,44 +50,23 @@ export default {
         }
     },
     mounted() {
-        //编辑时让原套餐选中
+        //编辑时让套餐选中
         if (this.form.id) {
-            //已经选择的套餐
-            const packages = this.packages.filter(p => this.form._packages.includes(p.id))
-
-            //切换选中的checkbox 表单
-            packages.forEach(p => {
-                this.$refs.multipleTable.toggleRowSelection(p)
+            this.form.packages = this.form.packages.map(p => {
+                p = this.packages.find(pa => pa.id == p.id)
+                if (p) this.$refs.multipleTable.toggleRowSelection(p)
+                return p.id
             })
         }
     },
     methods: {
         onSubmit() {
-            const packages = this.groupPackages.map(p => p.id)
-            if (this.form.id) {
-                //更新
-                let url = route('system.group.update', {
-                    id: this.form.id
-                })
-                this.$inertia.put(url, { ...this.form, packages })
-            } else {
-                //添加
-                let url = route('system.group.store')
-                this.$inertia.post(url, { ...this.form, packages })
-            }
+            const url = this.form.id ? route('system.group.update', this.form.id) : route('system.group.store')
+            this.form[this.form.id ? 'put' : 'post'](url)
         },
-        //切换选择
-        toggleSelection(rows) {
-            if (rows) {
-                rows.forEach(row => {
-                    this.$refs.multipleTable.toggleRowSelection(row)
-                })
-            } else {
-                this.$refs.multipleTable.clearSelection()
-            }
-        },
-        handleSelectionChange(val) {
-            this.groupPackages = val
+        //选择套餐
+        handleSelectionPackageChange(packages) {
+            this.form.packages = packages.map(p => p.id)
         }
     }
 }

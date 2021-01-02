@@ -34,7 +34,7 @@ export default {
     },
     methods: {
         del(role) {
-            this.$confirm('确定删除吗', '温馨提示').then(() => {
+            this.$confirm('确定删除角色吗', '温馨提示').then(() => {
                 this.$inertia.delete(route('site.role.destroy', [this.site, role]))
             })
         }

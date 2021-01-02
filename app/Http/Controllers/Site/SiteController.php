@@ -41,7 +41,7 @@ class SiteController extends Controller
     {
         $modules = $moduleService->allInstalled();
         $templates = user()->group->templates;
-        return inertia()->render('Site/Site/Form', compact('modules'));
+        return inertia()->render('Site/Site/Form', compact('modules', 'templates'));
     }
 
     /**

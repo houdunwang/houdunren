@@ -8,11 +8,7 @@
             <el-table-column prop="操作" label="" width="160" align="center">
                 <template slot-scope="scope">
                     <el-button-group>
-                        <el-button
-                            type="primary"
-                            size="small"
-                            @click="$inertia.get(route('system.group.edit', { id: scope.row.id }))"
-                        >
+                        <el-button type="primary" size="small" @click="$inertia.get(route('system.group.edit', { id: scope.row.id }))">
                             编辑
                         </el-button>
                         <el-button type="success" size="small" @click="del(scope.row)">删除</el-button>
@@ -34,11 +30,7 @@ export default {
     },
     methods: {
         del(p) {
-            this.$confirm('确定删除套餐吗？', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                type: 'warning'
-            }).then(() => {
+            this.$confirm('确定删除会员组吗？', '提示').then(() => {
                 this.$inertia.delete(route('system.group.destroy', { id: p.id }))
             })
         }
@@ -46,5 +38,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

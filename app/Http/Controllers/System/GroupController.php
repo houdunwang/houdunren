@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\GroupRequest;
 use App\Models\Package;
 use Illuminate\Http\Request;
+use App\Http\Resources\GroupResource;
+use App\Http\Resources\PackageResource;
 
 /**
  * 会员组
@@ -21,9 +23,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = Group::all();
+        $groups = GroupResource::collection(Group::all());
         return inertia('System/Group/Index', compact('groups'));
-        // return view('system.group.index', ['groups' => Group::all()]);
     }
 
     /**
@@ -33,9 +34,8 @@ class GroupController extends Controller
      */
     public function create()
     {
-        $packages = Package::all();
+        $packages = PackageResource::collection(Package::all());
         return inertia('System/Group/Form', compact('packages'));
-        // return view('system.group.create', ['packages' => Package::all()]);
     }
 
     /**
@@ -60,9 +60,9 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        $packages = Package::all();
+        $packages = PackageResource::collection(Package::all());
+        $group = new GroupResource($group);
         return inertia('System/Group/Form', compact('packages', 'group'));
-        // return view('system.group.edit', ['packages' => Package::all(), 'group' => $group]);
     }
 
     /**
