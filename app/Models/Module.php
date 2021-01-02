@@ -4,12 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 系统模块
+ */
 class Module extends Model
 {
-  protected $fillable = ['title', 'name', 'version', 'preview', 'description'];
+    protected $fillable = ['title', 'name', 'version', 'preview', 'description', 'author'];
 
-  public function packages()
-  {
-    return $this->belongsToMany(Package::class);
-  }
+    public function packages()
+    {
+        return $this->belongsToMany(Package::class);
+    }
 }

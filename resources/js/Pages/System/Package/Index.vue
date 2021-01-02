@@ -4,6 +4,11 @@
             <el-table-column prop="id" label="编号" width="180" />
             <el-table-column prop="title" label="套餐名称" />
             <el-table-column prop="days" label="可用天数" width="160" align="center" />
+            <el-table-column label="可用模块" v-slot="{ row: pack }">
+                <el-tag type="success" v-for="module in pack.modules" :key="module.id" class="mr-2 mb-2">
+                    {{ module.title }}
+                </el-tag>
+            </el-table-column>
             <el-table-column label="操作" width="160" align="center">
                 <template slot-scope="scope">
                     <el-button-group>

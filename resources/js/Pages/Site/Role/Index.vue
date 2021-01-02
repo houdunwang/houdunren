@@ -12,7 +12,11 @@
                         <inertia-link :href="route('site.role.edit', [site, role])">编辑</inertia-link>
                     </el-button>
                     <el-button type="danger" size="mini" @click="del(role)">删除</el-button>
-                    <el-button type="primary" size="mini">权限设置</el-button>
+                    <el-button type="primary" size="mini">
+                        <inertia-link :href="route('site.permission.edit', [site, role])">
+                            权限设置
+                        </inertia-link>
+                    </el-button>
                 </el-button-group>
             </el-table-column>
         </el-table>

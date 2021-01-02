@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Module;
 use App\Models\Site;
 use App\Services\ModuleService;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -58,17 +57,13 @@ if (!function_exists('site')) {
     function site(?Site $site = null): ?Site
     {
         static $cache = null;
-
         if ($cache) return $cache;
-
         if ($site) {
             session(['site_id' => $site['id']]);
         }
-
         if ($id = session('site_id')) {
             $cache = Site::find($id);
         };
-
         return $cache;
     }
 }

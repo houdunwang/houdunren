@@ -10,10 +10,9 @@ use Illuminate\Validation\Rule;
  */
 class PackageRequest extends FormRequest
 {
-
     public function authorize()
     {
-        return user()->isSuperAdmin();
+        return user()->isSuperAdmin;
     }
 
     public function rules()

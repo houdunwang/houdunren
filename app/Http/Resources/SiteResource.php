@@ -12,6 +12,7 @@ class SiteResource extends JsonResource
     public function toArray($request)
     {
         $data = parent::toArray($request);
+        $data['permissions'] = $this->permissions;
         $data['master'] = $this->master;
         $data['module'] = $this->module;
         return $data;

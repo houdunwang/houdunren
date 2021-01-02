@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * 站点模型
@@ -21,6 +22,22 @@ class Site extends Model
     protected $casts = [
         'config' => 'array',
     ];
+
+    // protected $appends = [
+    //     'permissions',
+    // ];
+
+    /**
+     * 模型权限
+     *
+     * @return void
+     */
+    public function getPermissionsAttribute()
+    {
+        return [
+            'edit' => Auth::user()->can('update', $this)
+        ];
+    }
 
     /**
      * 默认模块

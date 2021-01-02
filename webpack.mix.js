@@ -12,9 +12,14 @@ const mix = require('laravel-mix')
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/css/app.scss', 'public/css')
+    .sass('resources/sass/app.scss', 'public/css')
     .options({
         postCss: [require('postcss-css-variables')(), require('postcss-import'), require('tailwindcss')]
     })
     .webpackConfig(require('./webpack.config'))
-    .version()
+
+if (mix.inProduction()) {
+    mix.version()
+}
+//自动刷新
+// mix.browserSync('hdcms.test')

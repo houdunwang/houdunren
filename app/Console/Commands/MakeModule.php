@@ -15,7 +15,6 @@ class MakeModule extends Command
 {
     protected $signature = 'hd:make {name : 请输入模块英文字符标识，该标识也将做为模块目录使用}';
     protected $description = '创建模块应用';
-    protected $bar;
     protected $vars = [];
 
     public function handle()
@@ -34,6 +33,11 @@ class MakeModule extends Command
         $this->table(['请执行以下步骤'], [["cd Modules/{$this->name}"], ["cnpm i"], ["cnpm run watch"]]);
     }
 
+    /**
+     * 模块目录
+     *
+     * @return void
+     */
     protected function path()
     {
         return config('modules.paths.modules') . '/' . $this->name;
@@ -49,16 +53,15 @@ class MakeModule extends Command
         Artisan::call("module:make {$this->name}");
     }
 
+    /**
+     * 复制文件
+     *
+     * @return void
+     */
     protected function copyFiles()
     {
         File::deleteDirectory($this->path() . '/Resources/assets');
         File::copyDirectory(base_path('data/module'), $this->path());
-        // File::copyDirectory(base_path('data/MakeModule/Resources'), $this->path() . '/Resources');
-        // File::copyDirectory(base_path('data/MakeModule/Config'), $this->path() . '/Config');
-        // File::copyDirectory(base_path('data/MakeModule/Config'), $this->path() . '/Config');
-        // File::copyDirectory(base_path('data/MakeModule/Http'), $this->path() . '/Http');
-        // File::copyDirectory(base_path('data/MakeModule/Routes'), $this->path() . '/Routes');
-        // File::copy(base_path('data/MakeModule/webpack.mix.js'), $this->path() . '/webpack.mix.js');
     }
 
     /**
@@ -69,14 +72,15 @@ class MakeModule extends Command
     protected function replaceVars()
     {
         $files = [
-            $this->path() . '/webpack.mix.js',
-            $this->path() . '/Config/config.php',
-            $this->path() . '/Http/Controllers/Admin/HomeController.php',
-            $this->path() . '/Http/Controllers/HomeController.php',
-            $this->path() . '/Routes/web.php',
+            'webpack.mix.js',
+            'Config/config.php',
+            'Http/Controllers/Admin/HomeController.php',
+            'Http/Controllers/Front/HomeController.php',
+            'Routes/web.php',
         ];
 
         foreach ($files as $file) {
+            $file = $this->path() . "/{$file}";
             $content = file_get_contents($file);
             $content = str_replace([
                 '{MODULE_NAME}', '{MODULE_LOWER_NAME}', '{MODULE_TITLE}'

@@ -13,10 +13,14 @@ use App\Http\Controllers\System\MyController;
 //系统核心功能
 Route::group(['prefix' => 'system', 'middleware' => ['auth', 'system'], 'as' => 'system.'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    //模块管理
     Route::get('module', [ModuleController::class, 'index'])->name('module.index');
+    //所有已经安装的模块
+    Route::get('module/installed', [ModuleController::class, 'installed'])->name('module.installed');
     Route::get('module/install/{name}', [ModuleController::class, 'install'])->name('module.install');
     Route::delete('module/uninstall/{module:name}', [ModuleController::class, 'uninstall'])->name('module.uninstall');
-    Route::get('module/installed', [ModuleController::class, 'installed'])->name('module.installed');
+    Route::delete('module/del/{name}', [ModuleController::class, 'del'])->name('module.del');
+
     Route::get('template', [TemplateController::class, 'index'])->name('template.index');
     Route::get('template/install/{name}', [TemplateController::class, 'install'])->name('template.install');
     Route::delete('template/uninstall/{template:name}', [TemplateController::class, 'uninstall'])->name('template.uninstall');

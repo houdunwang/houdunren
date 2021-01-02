@@ -4,6 +4,7 @@ namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PackageRequest;
+use App\Http\Resources\PackageResource;
 use App\Models\Package;
 use App\Services\ModuleService;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class PackageController extends Controller
 {
     public function index()
     {
-        $packages  = Package::all();
+        $packages  = PackageResource::collection(Package::all());
         return inertia()->render('System/Package/Index', compact('packages'));
     }
 
@@ -27,7 +28,7 @@ class PackageController extends Controller
      */
     public function create(ModuleService $moduleService)
     {
-        $modules = $moduleService->allInstalled()->values();
+        $modules = $moduleService->allInstalled();
         return inertia('System/Package/Form', compact('modules'));
     }
 
@@ -43,9 +44,7 @@ class PackageController extends Controller
         $package->modules()->sync($request->input('modules'));
         $package->templates()->sync($request->input('templates'));
 
-        return redirect()
-            ->route('system.package.index')
-            ->with('success', '套餐添加成功');
+        return redirect()->route('system.package.index')->with('success', '套餐添加成功');
     }
 
     /**
@@ -57,8 +56,8 @@ class PackageController extends Controller
      */
     public function edit(Package $package, ModuleService $moduleService)
     {
-        // $modules = $moduleService->allInstalled()->values();
-        return inertia('System/Package/Form', compact('package'));
+        $modules = $moduleService->allInstalled();
+        return inertia('System/Package/Form', ['modules' => $modules, 'package' => new PackageResource($package)]);
     }
 
     /**
@@ -72,12 +71,9 @@ class PackageController extends Controller
     {
         $package->fill($request->input())->save();
         $package->modules()->sync($request->input('modules'));
-
         $package->templates()->sync($request->input('templates'));
 
-        return redirect()
-            ->route('system.package.index')
-            ->with('success', '套餐修改成功');
+        return redirect()->route('system.package.index')->with('success', '套餐修改成功');
     }
 
     /**
@@ -89,7 +85,7 @@ class PackageController extends Controller
     public function destroy(Package $package)
     {
         if ($package->id == 1) {
-            abort('403', '系统套餐不允许删除');
+            return back()->with('message', '系统套餐不允许删除');
         }
         $package->delete();
         return back()->with('success', '删除成功');

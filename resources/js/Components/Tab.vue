@@ -4,14 +4,7 @@
             <el-tab-pane v-if="home" :route="home" name="home">
                 <span slot="label"> <i class="fa fa-home text-gray-500" aria-hidden="true"></i> </span>
             </el-tab-pane>
-            <el-tab-pane
-                :route="tab.route"
-                :params="tab.params"
-                :label="tab.label"
-                :name="tab.name"
-                v-for="(tab, index) in tabsData"
-                :key="index"
-            />
+            <el-tab-pane :route="tab.route" :params="tab.params" :label="tab.label" :name="tab.name" v-for="(tab, index) in tabsData" :key="index" />
         </el-tabs>
     </div>
 </template>
@@ -27,8 +20,16 @@ export default {
     },
     data() {
         return {
-            activeName: this.tabs.find(tab => tab.route == route().current()).name,
             tabsData: this.formatTabs()
+        }
+    },
+    computed: {
+        activeName: {
+            get: function() {
+                const current = this.tabs.find(tab => tab.route == route().current())
+                return current ? current.name : ''
+            },
+            set(value) {}
         }
     },
     methods: {
@@ -40,13 +41,10 @@ export default {
         },
         change(tab) {
             if (tab.current) return
-            console.log(tab.$attrs)
-
             if (tab.$attrs.route) this.$inertia.get(route(tab.$attrs.route, tab.$attrs.params || []))
         }
     }
 }
 </script>
 
-<style>
-</style>
+<style></style>

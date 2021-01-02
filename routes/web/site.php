@@ -21,6 +21,7 @@ Route::group(['prefix' => 'site/{site}', 'as' => 'site.', 'middleware' => ['auth
     Route::put('config', [ConfigController::class, 'update'])->name('config.update');
     //角色管理
     Route::resource('role',  RoleController::class);
+    //站点模块权限配置
     Route::get('permission/{role}', [PermissionController::class, 'edit'])->name('permission.edit');
     Route::put('permission/{role}', [PermissionController::class, 'update'])->name('permission.update');
     //管理员设置

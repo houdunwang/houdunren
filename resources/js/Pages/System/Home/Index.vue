@@ -3,7 +3,7 @@
         <div>
             <h6>应用扩展</h6>
             <section class="flex">
-                <inertia-link href="">
+                <inertia-link :href="route('system.module.index')">
                     <i class="fa fa-2x fa fa-cubes mb-2" aria-hidden="true"></i>
                     模块插件
                 </inertia-link>

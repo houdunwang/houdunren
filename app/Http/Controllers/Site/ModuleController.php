@@ -20,34 +20,34 @@ use LogicException;
  */
 class ModuleController extends Controller
 {
-  /**
-   * 站点模块列表
-   * @param Site $site
-   * @param ModuleService $moduleService
-   * @param PermissionService $permissionService
-   * @return View|Factory
-   * @throws BindingResolutionException
-   */
-  public function index(Site $site, ModuleService $moduleService, PermissionService $permissionService)
-  {
-    $modules = $moduleService->getSiteModulesByPermission($site);
+    /**
+     * 站点模块列表
+     * @param Site $site
+     * @param ModuleService $moduleService
+     * @param PermissionService $permissionService
+     * @return View|Factory
+     * @throws BindingResolutionException
+     */
+    public function index(Site $site, ModuleService $moduleService, PermissionService $permissionService)
+    {
+        $modules = $moduleService->getSiteModulesByPermission($site);
 
-    return view('site.module.index', compact('site', 'modules'));
-  }
+        return view('site.module.index', compact('site', 'modules'));
+    }
 
-  /**
-   * 进入模块
-   * @param Site $site
-   * @param Module $module
-   * @param PermissionService $permissionService
-   * @return Redirector|RedirectResponse
-   * @throws BindingResolutionException
-   * @throws LogicException
-   */
-  public function admin(Site $site, Module $module, PermissionService $permissionService)
-  {
-    site($site);
-    module($module['name']);
-    return redirect(url($module['name'] . '/admin'));
-  }
+    /**
+     * 进入模块
+     * @param Site $site
+     * @param Module $module
+     * @param PermissionService $permissionService
+     * @return Redirector|RedirectResponse
+     * @throws BindingResolutionException
+     * @throws LogicException
+     */
+    public function admin(Site $site, Module $module, PermissionService $permissionService)
+    {
+        site($site);
+        module($module['name']);
+        return redirect(url($module['name'] . '/admin'));
+    }
 }

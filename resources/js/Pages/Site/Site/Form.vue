@@ -18,7 +18,7 @@
                 <div slot="header">默认模块</div>
             </el-card>
             <div class="mt-3">
-                <el-button type="primary" @click="onSubmit">立即创建</el-button>
+                <el-button type="primary" @click="onSubmit">保存提交</el-button>
             </div>
         </el-form>
     </hd-layout>
@@ -29,15 +29,17 @@ import tabs from './tabs'
 const form = { title: '', domain: '' }
 
 export default {
+    props: ['site'],
     data() {
         return {
             tabs,
-            form: this.$inertia.form(form)
+            form: this.$inertia.form(this.site || form)
         }
     },
     methods: {
         onSubmit() {
-            this.$inertia.post(route('site.site.store'), this.form)
+            const url = this.form.id ? route('site.site.update', this.site) : route('site.site.store')
+            this.form[this.form.id ? 'put' : 'post'](url)
         }
     }
 }

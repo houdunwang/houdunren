@@ -22,11 +22,10 @@ class PermissionController extends Controller
      * @param Site $site 站点
      * @param Role $role 角色
      * @param ModuleService $moduleService
-     * @param MenuService $menuService
      * @param PermissionService $permissionService
      * @return void
      */
-    public function edit(Site $site, Role $role, ModuleService $moduleService, MenuService $menuService, PermissionService $permissionService)
+    public function edit(Site $site, Role $role, ModuleService $moduleService, PermissionService $permissionService)
     {
         $permissionService->saveSiteModulePermissions($site);
         $modules = $moduleService->getSiteModules($site);

@@ -11,6 +11,7 @@ use Inertia\Response;
 use LogicException;
 use RuntimeException;
 use App\Http\Resources\SiteResource;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * 站点管理
@@ -18,12 +19,6 @@ use App\Http\Resources\SiteResource;
  */
 class SiteController extends Controller
 {
-    public function __construct()
-    {
-        //权限验证
-        $this->authorizeResource(Site::class, 'site');
-    }
-
     /**
      * 站点列表
      * @return Response
@@ -60,9 +55,7 @@ class SiteController extends Controller
     {
         $site->user_id = auth()->id();
         $site->config = [];
-
         $site->fill($request->input())->save();
-
         return redirect()->route('site.site.index')->with('success', '站点添加成功');
     }
 
@@ -91,8 +84,7 @@ class SiteController extends Controller
     {
         $site->user_id = auth()->id();
         $site->fill($request->input())->save();
-
-        return redirect()->route('site.index.site')->with('success', '站点修改成功');
+        return redirect()->route('site.site.index')->with('success', '站点修改成功');
     }
 
     /**

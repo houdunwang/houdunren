@@ -14,3 +14,5 @@ yarn-error.log
 *DS_Store
 /public/*.js
 .vscode
+
+node_modules
