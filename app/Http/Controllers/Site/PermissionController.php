@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\RoleResource;
 use App\Models\Site;
-use App\Services\MenuService;
 use App\Services\ModuleService;
 use App\Services\PermissionService;
 use Illuminate\Http\Request;
@@ -29,6 +27,7 @@ class PermissionController extends Controller
      */
     public function edit(Site $site, Role $role, ModuleService $moduleService, PermissionService $permissionService)
     {
+        $this->updateSitePermission($site);
         $modules = $moduleService->getSiteModules($site);
         $permissions = $role->permissions->map(fn ($p) => $p['name']);
         return inertia('Site/Permission/Form', compact('site', 'modules', 'role', 'permissions'));
@@ -47,7 +46,7 @@ class PermissionController extends Controller
         //根据权限名称获取权限表(permissions)的id用于同步角色权限使用
         $permissions = Permission::whereIn('name', $request->input('permissions'))->pluck('id');
         $role->syncPermissions($permissions);
-        return redirect()->route('site.permission.edit', [$site, $role])->with('success', '权限设置成功');
+        return redirect()->route('site.role.index', $site)->with('success', '权限设置成功');
     }
 
     /**
@@ -57,10 +56,23 @@ class PermissionController extends Controller
      * @param Site $site
      * @return void
      */
-    public function upgrade(Request $request, Site $site, PermissionService $permissionService)
+    public function upgrade(Request $request, Site $site)
     {
-        $permissionService->delInvalidSitePermission($site);
-        $permissionService->saveSiteModulePermissions($site);
+        $this->updateSitePermission($site);
         return back()->with('success', '站点权限表更新成功');
+    }
+
+    /**
+     * 更新站点权限
+     *
+     * @param Site $site
+     * @return void
+     */
+    protected function updateSitePermission(Site $site)
+    {
+        //删除无效的权限，即模块permissions.php已经移除的权限
+        app(PermissionService::class)->delInvalidSitePermission($site);
+        //同步模块权限到站点
+        app(PermissionService::class)->saveSiteModulePermissions($site);
     }
 }
