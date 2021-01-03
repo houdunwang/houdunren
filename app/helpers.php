@@ -92,15 +92,15 @@ if (!function_exists('module')) {
 if (!function_exists('permission_name')) {
     /**
      * 权限完成标识
-     * @param mixed $permission
+     * @param string $permission
      * @param Site $site
-     * @param mixed $module
+     * @param array $module
      * @return string
      */
-    function permission_name($permission, Site $site, $module)
-    {
-        return 's' . $site->id . '-' . $module['name'] . '-' . $permission;
-    }
+    // function permission_name(string $permission, Site $site, array $module)
+    // {
+    //     return "s{$site->id}-{$module['name']}-{$permission}";
+    // }
 }
 
 if (!function_exists('access')) {

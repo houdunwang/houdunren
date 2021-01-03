@@ -54,6 +54,10 @@
                             <i class="fa fa-user-secret" aria-hidden="true"></i>
                             角色管理
                         </inertia-link>
+                        <inertia-link :href="route('site.permission.upgrade', site)" class="mr-2">
+                            <i class="fa fa-life-ring" aria-hidden="true"></i>
+                            更新权限表
+                        </inertia-link>
                         <a href=" route('site.site.menu.index',$site) " class="mr-2">
                             <i class="fa fa-archive" aria-hidden="true"></i>
                             菜单设置

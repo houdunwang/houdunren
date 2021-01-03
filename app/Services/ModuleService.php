@@ -44,8 +44,9 @@ class ModuleService
      */
     public function getSiteModules(Site $site)
     {
-        return $site->master->group->modules->map(function ($module) {
-            return $this->find($module['name']);
+        $permissionService = app(PermissionService::class);
+        return $site->modules->map(function ($module) use ($site, $permissionService) {
+            return $permissionService->formatModulePermission($site, $this->find($module['name']));
         });
     }
 
@@ -86,6 +87,7 @@ class ModuleService
             'menus' => app(MenuService::class)->menus($name),
             'installed' => (bool) $model,
             'model' => $model,
+            'permissions' => $this->config($name, 'permissions')
         ]);
     }
 

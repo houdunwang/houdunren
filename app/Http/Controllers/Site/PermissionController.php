@@ -27,7 +27,6 @@ class PermissionController extends Controller
      */
     public function edit(Site $site, Role $role, ModuleService $moduleService, PermissionService $permissionService)
     {
-        $permissionService->saveSiteModulePermissions($site);
         $modules = $moduleService->getSiteModules($site);
         return inertia('Site/Permission/Form', compact('site', 'role', 'modules'));
     }
@@ -49,5 +48,19 @@ class PermissionController extends Controller
         }, $request->input('permissions', [])));
 
         return back()->with('success', '权限设置成功');
+    }
+
+    /**
+     * 更新权限信息
+     *
+     * @param Request $request
+     * @param Site $site
+     * @return void
+     */
+    public function upgrade(Request $request, Site $site, PermissionService $permissionService)
+    {
+        $permissionService->delInvalidSitePermission($site);
+        $permissionService->saveSiteModulePermissions($site);
+        return back()->with('success', '站点权限表更新成功');
     }
 }
