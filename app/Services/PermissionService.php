@@ -22,7 +22,7 @@ class PermissionService
         $this->getSitePermissionList($site)->each(function ($permission) {
             Permission::updateOrCreate(
                 ['name' => $permission['name']],
-                $permission
+                ['name' => $permission['permission_name']] + $permission
             );
         });
     }
@@ -67,7 +67,7 @@ class PermissionService
         $module['permissions'] = collect($module['permissions'])->map(function ($permission) use ($site, $module) {
             $permission['rules'] = collect($permission['rules'])->map(function ($rule) use ($site, $module) {
                 return  [
-                    'name' => $this->permissionName($site, $module, $rule['name']),
+                    'permission_name' => $this->permissionName($site, $module, $rule['name']),
                     'module_id' => $module['id'],
                     'site_id' => $site['id']
                 ] + $rule;

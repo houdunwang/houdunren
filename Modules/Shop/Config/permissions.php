@@ -5,14 +5,6 @@ return [
         'rules' => [
             ['title' => '商城配置', 'name' => 'config'],
             ['title' => '商品列表', 'name' => 'tag'],
-            ['title' => '商城配置', 'name' => 'config'],
-            ['title' => '商品列表', 'name' => 'tag'],
-            ['title' => '商城配置', 'name' => 'config'],
-            ['title' => '商品列表', 'name' => 'tag'],
-            ['title' => '商城配置', 'name' => 'config'],
-            ['title' => '商品列表', 'name' => 'tag'],
-            ['title' => '商城配置', 'name' => 'config'],
-            ['title' => '商品列表', 'name' => 'tag'],
         ]
     ],
 ];

@@ -10,23 +10,33 @@
                 </div>
                 <div class="grid grid-cols-4 text-sm">
                     <div v-for="(rule, i) in permission.rules" :key="i" class="py-2">
-                        <el-checkbox v-model="form.permissions" :value="rule.name">{{ rule.title }}</el-checkbox>
+                        <el-checkbox-group v-model="form.permissions">
+                            <el-checkbox :label="rule.permission_name">
+                                {{ rule.title }}
+                                <el-tag type="info" size="mini" class="opacity-75">{{ rule.name }}</el-tag>
+                            </el-checkbox>
+                        </el-checkbox-group>
                     </div>
                 </div>
             </div>
         </el-card>
+        <el-button type="primary" size="default" @click="onSubmit">保存提交</el-button>
     </hd-layout>
 </template>
 
 <script>
 import tabs from './tabs'
-const form = { permissions: [] }
 export default {
-    props: ['site', 'role', 'modules'],
+    props: ['site', 'role', 'modules', 'permissions'],
     data() {
         return {
             tabs: tabs(this.site),
-            form: this.$inertia.form(form)
+            form: { permissions: this.permissions }
+        }
+    },
+    methods: {
+        onSubmit() {
+            this.$inertia.put(route('site.permission.update', [this.site, this.role]), this.form)
         }
     }
 }

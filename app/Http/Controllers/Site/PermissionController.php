@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RoleResource;
 use App\Models\Site;
 use App\Services\MenuService;
 use App\Services\ModuleService;
 use App\Services\PermissionService;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 /**
  * 权限设置
@@ -28,7 +30,8 @@ class PermissionController extends Controller
     public function edit(Site $site, Role $role, ModuleService $moduleService, PermissionService $permissionService)
     {
         $modules = $moduleService->getSiteModules($site);
-        return inertia('Site/Permission/Form', compact('site', 'role', 'modules'));
+        $permissions = $role->permissions->map(fn ($p) => $p['name']);
+        return inertia('Site/Permission/Form', compact('site', 'modules', 'role', 'permissions'));
     }
 
     /**
@@ -41,13 +44,10 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Site $site, Role $role)
     {
-        $role->syncPermissions(array_map(function ($permission) use ($site) {
-            //0 模块 1 权限标识
-            $info = explode('|', $permission);
-            return permission_name($info[1], $site, app(ModuleService::class)->find($info[0]));
-        }, $request->input('permissions', [])));
-
-        return back()->with('success', '权限设置成功');
+        //根据权限名称获取权限表(permissions)的id用于同步角色权限使用
+        $permissions = Permission::whereIn('name', $request->input('permissions'))->pluck('id');
+        $role->syncPermissions($permissions);
+        return redirect()->route('site.permission.edit', [$site, $role])->with('success', '权限设置成功');
     }
 
     /**
