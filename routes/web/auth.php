@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 //用户帐号相关
 Route::get('login', [LoginController::class, 'show'])->name('login');
+
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.', 'middleware' => ['front']], function () {
     Route::post('login', [LoginController::class, 'login'])->name('login.store');
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');

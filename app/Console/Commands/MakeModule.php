@@ -25,10 +25,13 @@ class MakeModule extends Command
         if (Module::find($this->name)) {
             return $this->error("{$this->name}模块已经存在");
         }
-
+        //创建模块
         $this->createModule();
+        //复制初始文件
         $this->copyFiles();
+        //替换文件中变量
         $this->replaceVars();
+        //显示安装后的提示信息
         $this->info("\n");
         $this->table(['请执行以下步骤'], [["cd Modules/{$this->name}"], ["cnpm i"], ["cnpm run watch"]]);
     }

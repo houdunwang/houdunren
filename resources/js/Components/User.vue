@@ -1,7 +1,7 @@
 <template>
     <div>
-        <el-button class="mt-3" type="primary" @click="dialogVisible = true">选择用户</el-button>
-        <el-dialog :visible.sync="dialogVisible" v-bind="$attrs" :lock-scroll="true" :destroy-on-close="true" :center="true" top="5vh">
+        <el-button class="mt-3" type="primary" @click="dialogVisible = true">{{ title }}</el-button>
+        <el-dialog :visible.sync="dialogVisible" v-bind="$attrs" :lock-scroll="true" :destroy-on-close="true" :center="true" top="5vh" width="80%">
             <el-card shadow="never" :body-style="{ padding: '20px' }">
                 <template v-slot:header>
                     <div class="flex justify-between">
@@ -15,7 +15,7 @@
                     <el-table-column prop="email" label="邮箱"> </el-table-column>
                     <el-table-column prop="mobile" label="手机号"> </el-table-column>
                     <el-table-column width="120" #default="{row:user}" align="center">
-                        <el-button type="success" @click="change(user)" size="mini">设置管理员</el-button>
+                        <el-button type="success" @click="change(user)" size="mini">选择用户</el-button>
                     </el-table-column>
                 </el-table>
             </el-card>
@@ -26,7 +26,8 @@
 <script>
 export default {
     props: {
-        action: { type: String }
+        action: { type: String },
+        title: { type: String, default: '选择用户' }
     },
     data() {
         return {

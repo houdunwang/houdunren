@@ -1,22 +1,23 @@
 <template>
     <div>
-        <div v-show="$page.flash.message || $page.flash.error"></div>
-        <div v-show="$page.flash.message" class="border px-4 py-2 rounded-md shadow-sm bg-green-100 text-green-700 border-green-500">
-            <i class="fa fa-info-circle" aria-hidden="true"></i> {{ $page.flash.message }}
+        <div v-show="$page.props.flash.message || $page.props.flash.error"></div>
+        <div v-show="$page.props.flash.message" class="border px-4 py-2 rounded-md shadow-sm bg-green-100 text-green-700 border-green-500">
+            <i class="fa fa-info-circle" aria-hidden="true"></i> {{ $page.props.flash.message }}
         </div>
     </div>
 </template>
+
 <script>
 export default {
     updated() {
-        const flash = this.$page.flash
+        const flash = this.$page.props.flash
         const type = flash.success ? 'success' : 'error'
-        const message = this.$page.flash[type]
-
+        const message = this.$page.props.flash[type]
         if (message) {
             this.$message({ message: message, type: type })
         }
     }
 }
 </script>
+
 <style></style>

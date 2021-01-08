@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\Site;
+use App\Models\User;
 use App\Services\ModuleService;
+use App\Services\PermissionService;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -43,7 +45,7 @@ if (!function_exists('site_id')) {
      */
     function site_id()
     {
-        return site()['id'] ?? null;
+        return site() ? site()['id'] : null;
     }
 }
 
@@ -97,10 +99,10 @@ if (!function_exists('permission_name')) {
      * @param array $module
      * @return string
      */
-    // function permission_name(string $permission, Site $site, array $module)
-    // {
-    //     return "s{$site->id}-{$module['name']}-{$permission}";
-    // }
+    function permission_name(string $permission, Site $site, array $module)
+    {
+        return app(PermissionService::class)->permissionName($permission, $site, $module);
+    }
 }
 
 if (!function_exists('access')) {
@@ -113,20 +115,31 @@ if (!function_exists('access')) {
      * @throws BindingResolutionException
      * @throws LogicException
      */
-    function access($permission, Site $site = null, $module = null)
+    /**
+     * 权限验证
+     *
+     * @param string $permission
+     * @param User $user
+     * @param Site $site
+     * @param mixed $module
+     * @return void
+     */
+    function access(string $permission, User $user = null, Site $site = null, $module = null)
     {
+        $user = $user ?? Auth::user();
         $site = $site ?? site();
         $module = $module ?? module();
-        if (Auth::check() === false) {
+
+        if (!$user || !$site || !$module) {
             return false;
         }
-        if (user()->isSuperAdmin || $site->user_id == user('id')) {
+        if (is_super_admin($user) || is_master($user, $site)) {
             return true;
         }
-
         return user()->can(permission_name($permission, $site, $module));
     }
 }
+
 
 if (!function_exists('get_site_by_domain')) {
     /**
@@ -142,17 +155,37 @@ if (!function_exists('get_site_by_domain')) {
     }
 }
 
+if (!function_exists('is_super_admin')) {
+    /**
+     * 超级管理员检测
+     *
+     * @param User $user
+     * @return boolean
+     */
+    function is_super_admin(User $user = null)
+    {
+        $user = $user ?? Auth::user();
+        if ($user) {
+            return Auth()->check() && Auth::user()->isSuperAdmin;
+        }
+        return false;
+    }
+}
+
 if (!function_exists('is_master')) {
     /**
      * 站点管理员检测
-     * @return bool
-     * @throws LogicException
-     * @throws BindingResolutionException
+     *
+     * @param User $user
+     * @param Site $site
+     * @return boolean
      */
-    function is_master()
+    function is_master(User $user = null, Site $site = null)
     {
-        if (Auth::check()) {
-            return user()['isSuperAdmin'] || user()->user_id == site()['user_id'];
+        $site = $site ?? site();
+        $user = $user ?? Auth::user();
+        if ($user) {
+            return is_super_admin($user) || $user['id'] == $site['user_id'];
         }
         return false;
     }

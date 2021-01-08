@@ -14,7 +14,11 @@
 
 <script>
 export default {
-    mounted() {}
+    mounted() {
+        console.log(111)
+
+        console.log(this.$page)
+    }
 }
 </script>
 

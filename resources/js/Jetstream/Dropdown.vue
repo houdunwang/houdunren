@@ -20,7 +20,7 @@
                     :class="[widthClass, alignmentClasses]"
                     style="display: none;"
                     @click="open = false">
-                <div class="rounded-md shadow-xs" :class="contentClasses">
+                <div class="rounded-md ring-1 ring-black ring-opacity-5" :class="contentClasses">
                     <slot name="content"></slot>
                 </div>
             </div>
@@ -70,9 +70,9 @@
             },
 
             alignmentClasses() {
-                if (this.align == 'left') {
+                if (this.align === 'left') {
                     return 'origin-top-left left-0'
-                } else if (this.align == 'right') {
+                } else if (this.align === 'right') {
                     return 'origin-top-right right-0'
                 } else {
                     return 'origin-top'

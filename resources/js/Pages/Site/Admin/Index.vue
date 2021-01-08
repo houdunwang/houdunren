@@ -16,7 +16,9 @@
                 </el-button-group>
             </el-table-column>
         </el-table>
-        <hd-user title="选择管理员" :action="route('site.admin.search', site)" @change="setAdmin" />
+        <div class="mt-3">
+            <hd-user title="选择管理员" :action="route('site.admin.search', site)" @change="setAdmin" />
+        </div>
     </hd-layout>
 </template>
 <script>

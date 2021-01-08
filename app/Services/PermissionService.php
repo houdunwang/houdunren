@@ -38,6 +38,7 @@ class PermissionService
         $names = $this->getSitePermissionList($site)->map(fn ($p) => $p['name']);
         Permission::where('site_id', $site['id'])->whereNotIn('name', $names);
     }
+
     /**
      * 获取站点可用的模块权限配置列表
      *
@@ -55,6 +56,7 @@ class PermissionService
             return $collect;
         }, collect());
     }
+
     /**
      * 权限完成标识
      * @param string $permission
@@ -89,17 +91,18 @@ class PermissionService
     {
         return "s{$site->id}-{$module['name']}-{$name}";
     }
+
     /**
      * 验证站点模块的权限
      * @param Site $site
      * @param mixed $module
      * @return bool
      */
-    public function checkModulePermission(Site $site, $module)
+    public function checkModulePermission(Site $site, $module): bool
     {
-        return (bool) collect($module['menus'])->filter(function ($menu) use ($site, $module) {
-            return collect($menu['items'])->filter(function ($item) use ($site, $module) {
-                return access($item['permission'], $site, $module);
+        return (bool)collect($module['permissions'])->filter(function ($permisssion) use ($site, $module) {
+            return collect($permisssion['rules'])->filter(function ($rule) use ($site, $module) {
+                return access($rule['name'], null, $site, $module);
             })->count();
         })->count();
     }

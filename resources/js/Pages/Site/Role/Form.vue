@@ -7,11 +7,11 @@
                 </div>
                 <el-form-item label="角色名称">
                     <el-input v-model="form.title"></el-input>
-                    <hd-error :message="form.error('title')" />
+                    <hd-error :message="form.errors.title" />
                 </el-form-item>
                 <el-form-item label="角色标识">
                     <el-input v-model="form.name"></el-input>
-                    <hd-error :message="form.error('name')" />
+                    <hd-error :message="form.errors.name" />
                 </el-form-item>
                 <el-form-item class="mt-3">
                     <el-button type="primary" @click="onSubmit">立即创建</el-button>
@@ -37,8 +37,8 @@ export default {
     },
     methods: {
         onSubmit() {
-            console.log(this.form)
-            this.$inertia.post(route('site.role.store', this.site), this.form)
+            const url = this.role ? 'site.role.update' : 'site.role.store'
+            this.form[this.role ? 'put' : 'post'](route(url, [this.site, this.role]))
         }
     }
 }

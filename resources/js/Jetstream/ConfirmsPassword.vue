@@ -4,7 +4,7 @@
             <slot />
         </span>
 
-        <jet-dialog-modal :show="confirmingPassword" @close="confirmingPassword = false">
+        <jet-dialog-modal :show="confirmingPassword" @close="closeModal">
             <template #title>
                 {{ title }}
             </template>
@@ -23,7 +23,7 @@
             </template>
 
             <template #footer>
-                <jet-secondary-button @click.native="confirmingPassword = false">
+                <jet-secondary-button @click.native="closeModal">
                     Nevermind
                 </jet-secondary-button>
 
@@ -66,30 +66,22 @@
         data() {
             return {
                 confirmingPassword: false,
-
-                form: this.$inertia.form({
+                form: {
                     password: '',
                     error: '',
-                }, {
-                    bag: 'confirmPassword',
-                })
+                },
             }
         },
 
         methods: {
             startConfirmingPassword() {
-                this.form.error = '';
-
-                axios.get(route('password.confirmation').url()).then(response => {
+                axios.get(route('password.confirmation')).then(response => {
                     if (response.data.confirmed) {
                         this.$emit('confirmed');
                     } else {
                         this.confirmingPassword = true;
-                        this.form.password = '';
 
-                        setTimeout(() => {
-                            this.$refs.password.focus()
-                        }, 250)
+                        setTimeout(() => this.$refs.password.focus(), 250)
                     }
                 })
             },
@@ -97,20 +89,24 @@
             confirmPassword() {
                 this.form.processing = true;
 
-                axios.post(route('password.confirm').url(), {
+                axios.post(route('password.confirm'), {
                     password: this.form.password,
-                }).then(response => {
-                    this.confirmingPassword = false;
-                    this.form.password = '';
-                    this.form.error = '';
+                }).then(() => {
                     this.form.processing = false;
-
+                    this.closeModal()
                     this.$nextTick(() => this.$emit('confirmed'));
                 }).catch(error => {
                     this.form.processing = false;
                     this.form.error = error.response.data.errors.password[0];
+                    this.$refs.password.focus()
                 });
-            }
+            },
+
+            closeModal() {
+                this.confirmingPassword = false
+                this.form.password = '';
+                this.form.error = '';
+            },
         }
     }
 </script>

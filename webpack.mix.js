@@ -12,14 +12,10 @@ const mix = require('laravel-mix')
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .options({
-        postCss: [require('postcss-css-variables')(), require('postcss-import'), require('tailwindcss')]
-    })
+    .vue()
+    .postCss('resources/css/app.css', 'public/css', [require('postcss-import'), require('tailwindcss'), require('autoprefixer')])
     .webpackConfig(require('./webpack.config'))
 
 if (mix.inProduction()) {
     mix.version()
 }
-//自动刷新
-// mix.browserSync('hdcms.test')

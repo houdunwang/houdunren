@@ -1,68 +1,80 @@
 <template>
-    <div class="container">
-        <div>
-            <h6>应用扩展</h6>
-            <section class="flex">
-                <inertia-link :href="route('system.module.index')">
-                    <i class="fa fa-2x fa fa-cubes mb-2" aria-hidden="true"></i>
-                    模块插件
-                </inertia-link>
-                <inertia-link href="">
-                    <i class="fa fa-2x fa fa-futbol-o" aria-hidden="true"></i>
-                    风格模板
-                </inertia-link>
-            </section>
-        </div>
-
-        <div>
-            <h6>用户管理</h6>
-            <section>
-                <inertia-link :href="route('system.my.edit')">
-                    <i class="fa fa-2x fa-briefcase" aria-hidden="true"></i>
-                    我的帐户
-                </inertia-link>
-                <inertia-link :href="route('system.group.index')">
-                    <i class="fa fa-2x fa-users" aria-hidden="true"></i>
-                    用户组管理
-                </inertia-link>
-                <inertia-link :href="route('system.package.index')">
-                    <i class="fa fa-2x fa-comments-o" aria-hidden="true"></i>
-                    服务套餐
-                </inertia-link>
-            </section>
-        </div>
-
-        <div>
-            <h6>系统管理</h6>
-            <section>
-                <inertia-link :href="route('site.site.index')">
-                    <i class="fa fa-2x fa-sitemap" aria-hidden="true"></i>
-                    站点列表
-                </inertia-link>
-                <inertia-link :href="route('system.config.edit')">
-                    <i class="fa fa-2x fa-tachometer" aria-hidden="true"></i>
-                    系统配置
-                </inertia-link>
-            </section>
+    <div>
+        <div v-for="(menu, index) in menus" :key="index">
+            <div class="mb-5">
+                <h6 class="border-l-4 border-gray-600 pl-2 mb-3 text-sm">{{ menu.title }}</h6>
+                <section class="flex">
+                    <inertia-link
+                        :href="route('system.module.index')"
+                        v-for="(m, n) in menu.items"
+                        :key="n"
+                        class="flex flex-col justify-center items-center w-28 h-20 border rounded-md shadow-sm mr-3 text-gray-700 text-base"
+                    >
+                        <i class="text-gray-500 text-3xl " :class="m.icon" aria-hidden="true"></i>
+                        <span class="text-sm font-bold text-gray-600 mt-1">{{ m.title }}</span>
+                    </inertia-link>
+                </section>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {}
+const menus = [
+    {
+        title: '应用扩展',
+        items: [
+            { title: '模块插件', route: route('system.module.index'), icon: 'fa fa fa-cubes' },
+            { title: '风格模板', route: route('system.module.index'), icon: 'fas fa-basketball-ball' }
+        ]
+    },
+    {
+        title: '用户管理',
+        items: [
+            { title: '我的帐户', route: route('system.my.edit'), icon: 'fas fa-eraser' },
+            { title: '用户组管理', route: route('system.group.index'), icon: 'fas fa-drum-steelpan' },
+            { title: '服务套餐', route: route('system.package.index'), icon: 'fas fa-disease' }
+        ]
+    },
+    {
+        title: '系统管理',
+        items: [
+            { title: '站点列表', route: route('site.site.index'), icon: 'fas fa-cube' },
+            { title: '系统配置', route: route('system.config.edit'), icon: 'fas fa-clinic-medical' }
+        ]
+    }
+]
+export default {
+    data() {
+        return {
+            menus
+        }
+    }
+}
 </script>
 
-<style>
-.container > div > h6 {
-    @apply border-l-8 border-gray-600 pl-2 mb-3;
-}
-.container > div:nth-child(n + 2) > h6 {
-    @apply mt-8;
-}
-.container > div > section {
-    @apply flex;
-}
-.container > div > section > a {
-    @apply flex flex-col justify-center items-center w-32 h-24 border rounded-md shadow-sm mr-3 text-gray-700 text-base;
-}
+<style lang="scss">
+// .container {
+//     div {
+//         &:nth-child(n + 2) > h6 {
+//             @apply mt-8;
+//         }
+//         h6 {
+//             @apply border-l-8 border-gray-600 pl-2 mb-3;
+//         }
+
+//         section {
+//             @apply flex;
+//             a {
+//                 @apply flex flex-col justify-center items-center w-32 h-24 border rounded-md shadow-sm mr-3 text-gray-700 text-base;
+//                 i {
+//                     @apply text-gray-600;
+//                 }
+//                 span.title {
+//                     @apply text-sm;
+//                 }
+//             }
+//         }
+//     }
+// }
 </style>

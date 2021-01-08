@@ -1,6 +1,6 @@
 <template>
     <hd-layout :tabs="tabs" home="system.home">
-        <el-table :data="groups" border class="shadow-sm">
+        <el-table :data="groups" border class="shadow-sm" stripe>
             <el-table-column prop="id" label="编号" width="180"> </el-table-column>
             <el-table-column prop="title" label="会员组"> </el-table-column>
             <el-table-column prop="site_nums" label="可创建的站点数量"> </el-table-column>

@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', '') }}</title>
-    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    {{-- <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> --}}
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <!-- Scripts -->
     @routes
     <script src="{{ mix('js/app.js') }}" defer></script>
-    {{-- <script src="{{mix('js/manifest.js')}}"></script>
-    <script src="{{mix('js/vendor.js')}}"> </script>
-    <script src="{{ mix('js/app.js')}}"></script> --}}
 </head>
 
 <body class="font-sans antialiased">

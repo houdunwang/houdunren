@@ -67,7 +67,7 @@ class RoleController extends Controller
         return inertia('Site/Role/Form', compact('role', 'site'));
     }
 
-    public function update(Request $request, Site $site, Role $role)
+    public function update(RoleRequest $request, Site $site, Role $role)
     {
         $this->authorize('update', $site);
         $role->fill($request->input())->save();

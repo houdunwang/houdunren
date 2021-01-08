@@ -6,26 +6,22 @@
                 <div class="flex flex-col mb-5">
                     <hd-label class="mr-2 w-16 mb-2" value="用户名" />
                     <hd-input v-model="form.account" id="account"></hd-input>
-                    <hd-error name="account" class="mt-2" />
+                    <!-- <hd-error name="account" class="mt-2" /> -->
                 </div>
 
                 <div class="flex flex-col mb-5">
                     <hd-label class="mr-2 w-16 mb-2" value="密码" />
                     <hd-input v-model="form.password" type="password" id="password"></hd-input>
-                    <hd-error name="password" class="mt-2" />
+                    <!-- <hd-error name="password" class="mt-2" /> -->
                 </div>
 
                 <div class="flex flex-col mb-5">
                     <hd-label class="mr-2 w-16 mb-2" value="验证码" />
                     <div class="flex">
                         <hd-input v-model="form.captcha" id="captcha" class="rounded-r-none" />
-                        <img
-                            :src="captcha"
-                            class="cursor-pointer border"
-                            @click="$event.target.src = captcha + Math.random()"
-                        />
+                        <img :src="captcha" class="cursor-pointer border" @click="$event.target.src = captcha + Math.random()" />
                     </div>
-                    <hd-error :message="form.error('captcha')" />
+                    <!-- <hd-error :message="form.error('captcha')" /> -->
                 </div>
                 <hd-label> <hd-checkbox v-model="form.remember" /> 记住我 </hd-label>
             </template>
@@ -66,5 +62,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

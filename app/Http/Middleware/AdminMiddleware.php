@@ -4,7 +4,9 @@ namespace App\Http\Middleware;
 
 use App\Services\ConfigService;
 use App\Services\PermissionService;
+use Illuminate\Support\Facades\Auth;
 use Closure;
+use Inertia\Inertia;
 
 /**
  * 模块后台管理中间件
@@ -12,36 +14,55 @@ use Closure;
  */
 class AdminMiddleware
 {
-  public function handle($request, Closure $next)
-  {
-    if (!site() || !module()) {
-      return redirect()->route('site.site.index');
+    //错误提示信息
+    protected $error = '你没有管理模块的权限，请联系站长给予权限';
+
+    public function handle($request, Closure $next)
+    {
+        if ($this->verify() === false) {
+            return redirect()->route('admin')->with('message', $this->error);
+        }
+        $this->loadConfig();
+        $this->inertia();
+        return $next($request);
     }
 
-    module(module()['name']);
-
-    app(ConfigService::class)->loadSiteConfig();
-    app(ConfigService::class)->loadCurrentModuleConfig();
-
-    define('SITE_ID', site()['id']);
-
-    if (user()->isSuperAdmin || site()->master->user_id === user('id')) {
-      return $next($request);
+    /**
+     * Inertia初始化
+     *
+     * @return void
+     */
+    protected function inertia()
+    {
+        Inertia::setRootView('module');
+        //分配共享数据
+        Inertia::share('admin', [
+            'module' => module()
+        ]);
     }
 
-    if (site()->isAdmin(user()) === false) {
-      return redirect()
-        ->route('admin')
-        ->with('danger', '您不是站点管理员');
+    /**
+     * 权限检测
+     *
+     * @return boolean
+     */
+    protected function verify(): bool
+    {
+        //环境检测
+        if (!Auth::check() || !site() || !module()) return false;
+        //超级管理员与站站检测
+        if (is_super_admin() || is_master()) return true;
+        //管理员检测
+        return site()->isAdmin(user()) && app(PermissionService::class)->checkModulePermission(site(), module());
     }
-
-    $status = app(PermissionService::class)->checkModulePermission(site(), module());
-    if ($status === false) {
-      return redirect()
-        ->route('site.module.index', site())
-        ->with('danger', '你没有管理模块的权限，请联系站长给予权限');
+    /**
+     * 加载配置
+     *
+     * @return void
+     */
+    protected function loadConfig()
+    {
+        app(ConfigService::class)->loadSiteConfig();
+        app(ConfigService::class)->loadCurrentModuleConfig();
     }
-
-    return $next($request);
-  }
 }

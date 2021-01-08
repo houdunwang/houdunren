@@ -2,12 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
     important: true,
-    purge: [
-        './vendor/laravel/jetstream/**/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
-        './resources/js/**/*.vue'
-    ],
+    purge: ['./vendor/laravel/jetstream/**/*.blade.php', './storage/framework/views/*.php', './resources/views/**/*.blade.php', './resources/js/**/*.vue'],
 
     theme: {
         extend: {
@@ -18,8 +13,10 @@ module.exports = {
     },
 
     variants: {
-        opacity: ['responsive', 'hover', 'focus', 'disabled']
+        extend: {
+            opacity: ['disabled']
+        }
     },
 
-    plugins: [require('@tailwindcss/ui')]
+    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')]
 }
