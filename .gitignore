@@ -16,4 +16,5 @@ yarn-error.log
 /public/js
 /public/css
 /public/modules
+node_modules
 .DS_Store
