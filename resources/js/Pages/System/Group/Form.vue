@@ -6,15 +6,15 @@
             <el-form :model="form" ref="form" label-width="120px" :inline="false" size="normal">
                 <el-form-item label="会员组名称">
                     <el-input type="text" v-model="form.title"></el-input>
-                    <hd-error :message="form.error('title')" />
+                    <hd-error :message="form.errors.title" />
                 </el-form-item>
                 <el-form-item label="站点数量">
                     <el-input type="number" v-model="form.site_num"></el-input>
-                    <hd-error :message="form.error('site_nums')" />
+                    <hd-error :message="form.errors.site_nums" />
                 </el-form-item>
                 <el-form-item label="可用天数">
                     <el-input v-model="form.days"></el-input>
-                    <hd-error :message="form.error('days')" />
+                    <hd-error :message="form.errors.days" />
                 </el-form-item>
             </el-form>
         </el-card>
@@ -44,7 +44,7 @@ export default {
     props: ['packages'],
     data() {
         return {
-            form: this.$inertia.form(this.$page.group || form),
+            form: this.$inertia.form(this.$page.props.group || form),
             groupPackages: [],
             tabs
         }

@@ -28,7 +28,7 @@ export default {
     data() {
         return {
             tabs,
-            packages: this.$page.packages
+            packages: this.$page.props.packages
         }
     },
     methods: {

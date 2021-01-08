@@ -34,8 +34,8 @@ class MyController extends Controller
             'email' => ['email'],
             'password' => ['nullable', 'confirmed'],
         ]);
-
         $user = user()->fill($request->except('password'));
+
         if ($password = $request->password) {
             $user->password = Hash::make($password);
         }

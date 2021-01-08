@@ -1,5 +1,5 @@
 <template>
-    <hd-layout :tabs="[{ label: '系统配置', route: 'system.config.edit', name: 'edit' }]" home="/system">
+    <hd-layout :tabs="[{ label: '系统配置', route: 'system.config.edit', name: 'edit' }]" home="system.home">
         <el-card shadow="always" :body-style="{ padding: '20px' }">
             <div slot="header">
                 <span>系统配置</span>
@@ -24,7 +24,7 @@ const menus = [{ name: 'edit', title: '系统配置', link: route('system.config
 
 export default {
     data() {
-        return { menus, form: this.$page.system.config }
+        return { menus, form: this.$page.props.system.config }
     },
     methods: {
         onSubmit() {

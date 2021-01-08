@@ -6,11 +6,11 @@
 
                 <el-form-item label="套餐名称">
                     <el-input v-model="form.title"></el-input>
-                    <hd-error :message="form.error('title')" />
+                    <hd-error :message="form.errors.title" />
                 </el-form-item>
                 <el-form-item label="可用天数">
                     <el-input type="number" v-model="form.days"></el-input>
-                    <hd-error :message="form.error('days')" />
+                    <hd-error :message="form.errors.days" />
                 </el-form-item>
             </el-card>
 
@@ -46,7 +46,7 @@ export default {
         return {
             tabs,
             moduleData: Object.values(this.modules),
-            form: this.$inertia.form(this.$page.package || form)
+            form: this.$inertia.form(this.$page.props.package || form)
         }
     },
     mounted() {

@@ -1,13 +1,22 @@
 require('./bootstrap')
+
+// Import modules...
+import Vue from 'vue'
+import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue'
+import PortalVue from 'portal-vue'
+
+Vue.mixin({ methods: { route } })
+Vue.use(InertiaPlugin)
+Vue.use(PortalVue)
+
 import moment from 'moment'
 moment.locale('zh-cn')
 require('./Util/Filter')
 
-import Vue from 'vue'
+//进度条
+import { InertiaProgress } from '@inertiajs/progress'
+InertiaProgress.init()
 
-import { InertiaApp } from '@inertiajs/inertia-vue'
-import { InertiaForm } from 'laravel-jetstream'
-import PortalVue from 'portal-vue'
 // Element ui
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -23,11 +32,7 @@ files.keys().map(key => {
     Vue.component(`Hd${name}`, files(key).default)
 })
 
-Vue.mixin({ methods: { route } })
-Vue.use(InertiaApp)
-Vue.use(InertiaForm)
-Vue.use(PortalVue)
-
+import Layout from '@/Layouts/AppLayout'
 const app = document.getElementById('app')
 
 new Vue({
@@ -37,6 +42,7 @@ new Vue({
                 initialPage: JSON.parse(app.dataset.page),
                 resolveComponent: name =>
                     import(`./Pages/${name}`).then(({ default: page }) => {
+                        page.layout = page.layout === undefined ? Layout : page.layout
                         return page
                     })
             }

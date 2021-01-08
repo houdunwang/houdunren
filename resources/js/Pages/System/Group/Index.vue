@@ -25,7 +25,7 @@ export default {
     data() {
         return {
             tabs,
-            groups: this.$page.groups
+            groups: this.$page.props.groups
         }
     },
     methods: {

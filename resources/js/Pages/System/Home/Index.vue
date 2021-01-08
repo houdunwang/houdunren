@@ -5,7 +5,7 @@
                 <h6 class="border-l-4 border-gray-600 pl-2 mb-3 text-sm">{{ menu.title }}</h6>
                 <section class="flex">
                     <inertia-link
-                        :href="route('system.module.index')"
+                        :href="m.route"
                         v-for="(m, n) in menu.items"
                         :key="n"
                         class="flex flex-col justify-center items-center w-28 h-20 border rounded-md shadow-sm mr-3 text-gray-700 text-base"
