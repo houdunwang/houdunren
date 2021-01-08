@@ -4242,10 +4242,10 @@ klona@^2.0.4:
   resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.4.tgz#7bb1e3affb0cb8624547ef7e8f6708ea2e39dfc0"
   integrity sha512-ZRbnvdg/NxqzC7L9Uyqzf4psi1OM4Cuc+sJAkQPjO6XkQIJTNbfK2Rsmbw8fx1p2mkZdp2FZYo2+LwXYY/uwIA==
 
-laravel-mix-merge-manifest@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/laravel-mix-merge-manifest/-/laravel-mix-merge-manifest-1.0.1.tgz#84c633f8aebc6f0b3023089e6794da003dff7a6e"
-  integrity sha512-hK2sX+uqmWD/f5IhN+2cbwLLTrVVIR82dPuPp/y9IcFEJgyoFAHyn7SrkVIJy26XmFKQeE/cpJXDVPKyd5jKug==
+laravel-mix-merge-manifest@^2.0.0-beta.2:
+  version "2.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/laravel-mix-merge-manifest/-/laravel-mix-merge-manifest-2.0.0-beta.2.tgz#ab10fa72a6f58a7ccff5336a50f9a55464170dd4"
+  integrity sha512-WYCIH7z1NTgLnSfmfI0kF324fzbySCQgDyQobx1aTKCFMulBaxI3eGaCXXJaOrs6VSKa4bqr7rcjC4Y725RtlA==
   dependencies:
     lodash "^4.17.4"
 

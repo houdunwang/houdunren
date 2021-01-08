@@ -10,8 +10,10 @@ const mix = require('laravel-mix')
  | file for the application as well as bundling up all the JS files.
  |
  */
+require('laravel-mix-merge-manifest')
 
-mix.setPublicPath('../../public')
+mix.setPublicPath('../../public').mergeManifest()
+// mix.setPublicPath('../../public')
 
 mix.js('Resources/js/app.js', '../../public/modules/Edu/js')
     .vue()
