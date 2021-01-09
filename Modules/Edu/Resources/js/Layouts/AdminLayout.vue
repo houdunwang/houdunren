@@ -5,14 +5,14 @@
                 <inertia-link class="mr-4" href="">
                     <!-- <i class="fa fa-sitemap" aria-hidden="true"></i> -->
                     <!-- <img :src="$page.module.preview" style="width:50px;height:50px;" class="rounded-lg" /> -->
-                    {{ $page.admin.module.title }}
+                    {{ $page.props.admin.module.title }}
                 </inertia-link>
                 <inertia-link class="mr-4" href=""> <i class="fa fa-sitemap" aria-hidden="true"></i> 站点管理 </inertia-link>
-                <inertia-link class="mr-4" href="" v-if="$page.user.isSuperAdmin"> <i class="fa fa-cubes" aria-hidden="true"></i> 模块管理 </inertia-link>
-                <inertia-link class="mr-4" :href="route('system.home')" v-if="$page.user.isSuperAdmin">
+                <inertia-link class="mr-4" href="" v-if="$page.props.user.isSuperAdmin"> <i class="fa fa-cubes" aria-hidden="true"></i> 模块管理 </inertia-link>
+                <inertia-link class="mr-4" :href="route('system.home')" v-if="$page.props.user.isSuperAdmin">
                     系统设置
                 </inertia-link>
-                <inertia-link class="mr-4" href="" v-if="$page.user.isSuperAdmin">
+                <inertia-link class="mr-4" href="" v-if="$page.props.user.isSuperAdmin">
                     <i class="fa fa-users" aria-hidden="true"></i>
                     会员组
                 </inertia-link>
@@ -21,9 +21,9 @@
             <div class="relative" ref="topMenus">
                 <div class="flex items-center cursor-pointer">
                     <div class="w-8 h-8 mr-2" @click="showUserMenu = !showUserMenu">
-                        <img :src="$page.user.icon" class="w-8 h-8 mr-2 border rounded-full" />
+                        <img :src="$page.props.user.icon" class="w-8 h-8 mr-2 border rounded-full" />
                     </div>
-                    <span class="text-sm text-gray-200">{{ $page.user.name }}</span>
+                    <span class="text-sm text-gray-200">{{ $page.props.user.name }}</span>
                 </div>
                 <div
                     class="absolute right-0 flex flex-col w-40 px-4 py-3 text-gray-800 bg-gray-100 border rounded-sm shadow-sm"
@@ -42,23 +42,11 @@
                 class="md:left-0 md:block md:overflow-y-auto md:flex-row md:flex-no-wrap md:overflow-hidden shadow-xl flex flex-wrap items-center justify-between relative md:w-52 z-10 py-4 px-6 bg-white"
             >
                 <div class="md:flex-col md:items-stretch md:min-h-full md:flex-no-wrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
-                    <!-- <button
-                        class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
-                        type="button"
-                    >
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <a
-                        class="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
-                        href="/learning-lab/tailwind-starter-kit/presentation"
-                        >{{ $page.module.title }}</a
-                    > -->
-
                     <div
                         class="flex flex-col opacity-100 md:relative md:mt-4 absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded"
                     >
                         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
-                            <li class="items-center mb-1" v-for="menu in $page.admin.module.menus" :key="menu.id">
+                            <li class="items-center mb-1" v-for="menu in $page.props.admin.module.menus" :key="menu.id">
                                 <a class="text-pink-700 hover:text-pink-600 uppercase font-bold flex justify-between items-center text-sm" href="">
                                     <div>
                                         <i class="opacity-75 mr-2 text-sm" :class="menu.icon"></i>
@@ -136,7 +124,7 @@
             <!-- 顶部导航 End-->
             <!-- 快速导航菜单 End-->
             <div class="px-5 py-4 flex-1 overflow-y-auto bg-gray-100" style="height:1000px">
-                <hd-message class="mb-5" />
+                <hd-message />
                 <slot></slot>
             </div>
         </div>

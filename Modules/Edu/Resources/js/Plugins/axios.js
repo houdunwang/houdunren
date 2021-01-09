@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Vue from 'vue'
 import el from 'element-ui'
-import httpStatus from './httpStatus'
+import httpStatus from '../Util/httpStatus'
 
 const config = { baseURL: '/', timeout: 5000 }
 const _axios = axios.create(config)
