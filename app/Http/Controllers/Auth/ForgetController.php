@@ -8,16 +8,20 @@ use App\Services\CodeService;
 use Auth;
 use Illuminate\Http\Request;
 
+/**
+ * 找回密码
+ */
 class ForgetController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('front');
-    }
 
+    /**
+     * 界面显示
+     *
+     * @return void
+     */
     public function show()
     {
-        return view('auth.forget.show');
+        return inertia('Auth/Forget/Show');
     }
 
     public function store(Request $request)

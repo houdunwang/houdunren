@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Services\ConfigService;
+use App\Services\ModuleService;
 use App\Services\PermissionService;
 use Illuminate\Support\Facades\Auth;
 use Closure;
@@ -37,7 +38,9 @@ class AdminMiddleware
         Inertia::setRootView('module');
         //分配共享数据
         Inertia::share('admin', [
-            'module' => module()
+            'site' => site()->select('id', 'title', 'created_at')->first(),
+            'module' => module(),
+            'modules' => app(ModuleService::class)->getSiteModules(site())
         ]);
     }
 

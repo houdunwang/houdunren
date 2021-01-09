@@ -2,11 +2,8 @@
 
 namespace App\Services;
 
-use Illuminate\Contracts\Container\BindingResolutionException;
-use LogicException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Models\ModuleConfig;
+use App\Models\Site;
 
 /**
  * 配置管理服务
@@ -17,21 +14,28 @@ class ConfigService
 
     /**
      * 加载当前站点配置
+     *
+     * @param Site $site
      * @return void
-     * @throws BindingResolutionException
-     * @throws LogicException
      */
-    public function loadSiteConfig()
+    public function loadSiteConfig(Site $site = null)
     {
+        $site = $site ?? site();
         config(['site' => site()['config']]);
+        config('app.name', site()['title']);
+
+        config(['mail.default' => config('site.email.transport')]);
+        config(['mail.mailers.smtp' =>  config('site.email')]);
+        config(['mail.from' => [
+            'address' => config('site.email.username'),
+            'name' => site()['title']
+        ]]);
     }
 
     /**
      * 加载模块配置
+     *
      * @return void
-     * @throws BindingResolutionException
-     * @throws HttpException
-     * @throws NotFoundHttpException
      */
     public function loadCurrentModuleConfig()
     {
@@ -41,11 +45,9 @@ class ConfigService
 
     /**
      * 保存模块配置
+     *
      * @param array $config
-     * @return mixed
-     * @throws BindingResolutionException
-     * @throws HttpException
-     * @throws NotFoundHttpException
+     * @return void
      */
     public function saveCurrentModuleConfig(array $config)
     {

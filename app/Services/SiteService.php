@@ -4,17 +4,19 @@ namespace App\Services;
 
 use App\Models\Site;
 
+/**
+ * 站点服务
+ */
 class SiteService
 {
-  public function initConfig(Site $site)
-  {
-    config('app.name', $site['title']);
-
-    config(['mail.default' => config('site.email.transport')]);
-    config(['mail.mailers.smtp' =>  config('site.email')]);
-    config(['mail.from' => [
-      'address' => config('site.email.username'),
-      'name' => $site['title']
-    ]]);
-  }
+    /**
+     * 根据域名获取站点
+     *
+     * @return void
+     */
+    public function getByDomain()
+    {
+        $info = parse_url(request()->url());
+        return Site::where('domain', 'regexp', 'https?:\/\/' . $info['host'])->firstOrFail();
+    }
 }
