@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
+use App\Rules\AccountRule;
 use App\Services\CodeService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -12,6 +13,11 @@ use Illuminate\Http\Request;
  */
 class CodeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('front');
+    }
+
     /**
      * 发送验证码
      *
@@ -24,14 +30,16 @@ class CodeController extends Controller
     {
         $request->validate(
             [
-                'account' => ['required', $userService->accountValidateRule()],
-                // 'captcha.value' => ['required', $userService->captchaValidateRule()]
+                'account' => ['required', new AccountRule(request('account'))],
+                'captcha' => ['required', 'captcha']
             ],
-            ['account.required' => '帐号不能为空'] + $userService->accountValidateErrors() + $userService->captchaValidateErrors()
+            [
+                'account.required' => '帐号不能为空',
+                'captcha.required' => '图形验证码不能为空', 'captcha.captcha' => '验证码输入错误'
+            ]
         );
+        (new CodeService(request('account')))->send();
 
-        $codeService->send($request->account);
-
-        return response()->json(['message' => '验证码发送成功']);
+        return back()->with('success', '验证码发送成功');
     }
 }

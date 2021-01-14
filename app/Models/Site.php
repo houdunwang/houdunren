@@ -23,9 +23,9 @@ class Site extends Model
         'config' => 'array',
     ];
 
-    // protected $appends = [
-    //     'permissions',
-    // ];
+    protected $appends = [
+        'permissions',
+    ];
 
     /**
      * 模型权限
@@ -34,9 +34,11 @@ class Site extends Model
      */
     public function getPermissionsAttribute()
     {
-        return [
-            'edit' => Auth::user()->can('update', $this)
-        ];
+        if (Auth::check())
+            return [
+                'edit' => Auth::user()->can('update', $this),
+                'delete' => Auth::user()->can('delete', $this)
+            ];
     }
 
     /**

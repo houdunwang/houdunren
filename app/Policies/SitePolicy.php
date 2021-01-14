@@ -26,10 +26,6 @@ class SitePolicy
         return true;
     }
 
-    public function view(User $user, Site $site)
-    {
-    }
-
     public function create(User $user)
     {
         return true;
@@ -43,12 +39,5 @@ class SitePolicy
     public function delete(User $user, Site $site)
     {
         return $user['id'] == $site['user_id'];
-    }
-    public function restore(User $user, Site $site)
-    {
-    }
-
-    public function forceDelete(User $user, Site $site)
-    {
     }
 }

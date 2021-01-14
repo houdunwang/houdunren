@@ -9,15 +9,13 @@
                     {{ module.title }}
                 </el-tag>
             </el-table-column>
-            <el-table-column label="操作" width="160" align="center">
-                <template slot-scope="scope">
-                    <el-button-group>
-                        <el-button type="primary" size="small" @click="$inertia.get(route('system.package.edit', { id: scope.row.id }))">
-                            编辑
-                        </el-button>
-                        <el-button type="success" size="small" @click="del(scope.row.id)">删除</el-button>
-                    </el-button-group>
-                </template>
+            <el-table-column label="操作" width="160" align="center" #default="{row:p}">
+                <el-button-group>
+                    <el-button type="primary" size="small" @click="$inertia.get(route('system.package.edit', p))">
+                        编辑
+                    </el-button>
+                    <el-button type="success" size="small" @click="del(p)">删除</el-button>
+                </el-button-group>
             </el-table-column>
         </el-table>
     </hd-layout>
@@ -25,20 +23,18 @@
 <script>
 import tabs from './tabs'
 export default {
+    props: ['packages'],
     data() {
         return {
-            tabs,
-            packages: this.$page.props.packages
+            tabs
         }
     },
     methods: {
-        del(id) {
+        del(p) {
             this.$confirm('确定删除套餐吗？', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                this.$inertia.delete(route('system.package.destroy', { id }))
+                this.$inertia.delete(route('system.package.destroy', p))
             })
         }
     }

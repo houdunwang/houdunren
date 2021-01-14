@@ -66,15 +66,13 @@ class Handler extends ExceptionHandler
         };
 
         // inertia错误拦截
-        if (!app()->environment('local') && in_array($response->status(), [500, 503, 404])) {
-            return Inertia::render('Error', ['status' => $response->status()])
-                ->toResponse($request)->setStatusCode($response->status());
-        } else if ($response->status() === 419) {
-            return back()->with('message', '页面访问过期，请重新刷新',);
-        } else if ($response->status() === 403) {
-            return back()->with('message', '你没有操作权限');
+        if (!$request->expectsJson()) {
+            $messages = [404 => '你请求的页面不存在', 419 => '页面访问过期，请重新刷新', 403 => '你没有操作权限'];
+            if ($message = $messages[$response->status()] ?? null) {
+                return back()->with('error', $message);
+            }
+            // return back()->with('error', $exception->getmessage());
         }
-
         return $response;
     }
 }

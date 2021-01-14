@@ -81,10 +81,15 @@ class GroupController extends Controller
             ->with('success', '会员组修改成功');
     }
 
+    /**
+     * 删除会员组
+     *
+     * @param Group $group
+     * @return void
+     */
     public function destroy(Group $group)
     {
         $group->delete();
         return back()->with('success', '会员组删除成功');
-        // return response()->json(['success' => '会员组删除成功']);
     }
 }

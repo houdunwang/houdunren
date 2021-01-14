@@ -17,7 +17,7 @@
                                 <div class="w-full px-3 mb-5">
                                     <label for="" class="text-xs font-semibold px-1">帐号</label>
                                     <div class="flex flex-col">
-                                        <hd-code :mobile="form.mobile" v-model="form.code" class="flex-1 mb-2" placeholder="请输入登录手机号或邮箱" />
+                                        <hd-code v-model="form.account" class="flex-1 mb-2" placeholder="请输入手机号或邮箱" />
                                     </div>
                                 </div>
                             </div>
@@ -25,28 +25,25 @@
                                 <div class="w-full px-3 mb-5">
                                     <label for="" class="text-xs font-semibold px-1">验证码</label>
                                     <div class="flex flex-col">
-                                        <el-input placeholder="请输入收到的验证码" class="mr-1"> </el-input>
+                                        <el-input placeholder="请输入收到的验证码" class="mr-1" v-model="form.code"> </el-input>
+                                        <hd-error :message="form.errors.code" />
                                     </div>
                                 </div>
-                            </div>
-                            <hr />
-                            <div class="grid grid-cols-1 gap-3">
-                                <el-form-item label="昵称" class="flex-1">
-                                    <el-input v-model="form.name" placeholder="你的个性昵称"></el-input>
-                                </el-form-item>
                             </div>
                             <div class="grid grid-cols-2 gap-3">
                                 <el-form-item label="密码" class="flex-1">
                                     <el-input type="password" v-model="form.password" placeholder="请输入新密码"></el-input>
+                                    <hd-error :message="form.errors.password" />
                                 </el-form-item>
                                 <el-form-item label="确认密码" class="flex-1">
-                                    <el-input type="password" v-model="form.confirm_password" placeholder="请再输一次密码"></el-input>
+                                    <el-input type="password" v-model="form.password_confirmation" placeholder="请再输一次密码"></el-input>
                                 </el-form-item>
                             </div>
                             <div class="flex -mx-3">
                                 <div class="w-full px-3 mb-5">
                                     <button
                                         class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                                        @click.prevent="onSubmit"
                                     >
                                         注册
                                     </button>
@@ -69,19 +66,15 @@ export default {
     components: {
         HdFooter
     },
+    props: ['user'],
     data() {
         return {
-            form: this.$inertia.form({ mobile: '', code: '', password: '', captcha: '', remember: false }),
-            captcha: `/captcha`
+            form: this.$inertia.form({ account: '', code: '', password: '', password_confirmation: '', captcha: '', remember: false })
         }
     },
     methods: {
         onSubmit() {
-            this.form.post(route('auth.login.store'), {
-                onFinish: () => {
-                    this.captcha = `/captcha?` + Math.random()
-                }
-            })
+            this.form.post(route('auth.register'))
         }
     }
 }

@@ -5,11 +5,12 @@ namespace App\Rules;
 use App\Services\CodeService;
 use Illuminate\Contracts\Validation\Rule;
 
-class VerificationCodeRule implements Rule
+/**
+ * 表单验证码验证规则
+ */
+class CodeRule implements Rule
 {
-    protected $mobile;
-
-    public function __construct($account)
+    public function __construct(?string $account)
     {
         $this->account = $account;
     }

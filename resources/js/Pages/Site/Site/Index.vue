@@ -69,8 +69,8 @@
                         <i class="fas fa-pen    "></i>
                         编辑
                     </inertia-link>
-                    <a action="route('site.site.destroy',$site)" v-if="site.permissions.edit">
-                        <i class="fas fa-trash    "></i>
+                    <a href="#" @click.prevent="del(site)" v-if="site.permissions.edit">
+                        <i class="fas fa-trash"></i>
                         删除
                     </a>
                 </div>
@@ -81,7 +81,14 @@
 
 <script>
 export default {
-    props: ['sites']
+    props: ['sites'],
+    methods: {
+        del(site) {
+            this.$confirm('确定删除站点吗？', '提示').then(() => {
+                this.$inertia.delete(route('site.site.destroy', site))
+            })
+        }
+    }
 }
 </script>
 

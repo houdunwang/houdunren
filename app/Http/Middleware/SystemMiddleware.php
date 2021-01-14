@@ -13,9 +13,10 @@ class SystemMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (!user()->isSuperAdmin) {
+        if (Auth::check() && !user()->isSuperAdmin) {
             return back()->with('message', '你没有操作权限');
         }
+
         return $next($request);
     }
 }

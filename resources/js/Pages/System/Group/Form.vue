@@ -9,8 +9,8 @@
                     <hd-error :message="form.errors.title" />
                 </el-form-item>
                 <el-form-item label="站点数量">
-                    <el-input type="number" v-model="form.site_num"></el-input>
-                    <hd-error :message="form.errors.site_nums" />
+                    <el-input type="text" v-model="form.site_num"></el-input>
+                    <hd-error :message="form.errors.site_num" />
                 </el-form-item>
                 <el-form-item label="可用天数">
                     <el-input v-model="form.days"></el-input>
@@ -39,7 +39,7 @@
 
 <script>
 import tabs from './tabs'
-const form = { title: '', site_nums: 0, days: 365, packages: [] }
+const form = { title: '', site_num: 3, days: 365, packages: [] }
 export default {
     props: ['packages'],
     data() {

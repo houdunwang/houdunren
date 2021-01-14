@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Site;
 use App\Services\ConfigService;
+use App\Services\SiteService;
 use App\Services\TagService;
 use App\Services\TemplateService;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -19,7 +20,6 @@ class FrontMiddleware
 {
     public function handle($request, Closure $next)
     {
-
         $this->init();
         return $next($request);
     }
@@ -33,21 +33,18 @@ class FrontMiddleware
     protected function init()
     {
         //根据域名获取站点
-        $info = parse_url(request()->url());
-        $site = Site::where('domain', 'regexp', 'https?:\/\/' . $info['host'])->first();
+        $site = app(SiteService::class)->getByDomain();
 
         if ($site) {
             //加载站点配置
             app(ConfigService::class)->loadSiteConfig(site($site));
-
             //加载模块配置
             //app(ConfigService::class)->loadCurrentModuleConfig(module($site->module['name']));
-
             //设置文章模块模板路径
-            if (module() && module()['name'] == 'Article') {
-                app(TemplateService::class)->template(site());
-                app(TagService::class)->make();
-            }
+            // if (module() && module()['name'] == 'Article') {
+            //     app(TemplateService::class)->template(site());
+            //     app(TagService::class)->make();
+            // }
         }
     }
 }

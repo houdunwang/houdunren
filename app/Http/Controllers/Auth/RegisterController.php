@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Rules\VerificationCodeRule;
+use App\Rules\CodeRule;
 use App\Services\CodeService;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\Rules\AccountRule;
+use App\Services\UserService;
 
 /**
  * 会员登录
  */
 class RegisterController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['guest', 'front']);
-    }
-
     /**
      * 登录界面
      *
@@ -38,45 +35,27 @@ class RegisterController extends Controller
      * @param User $user
      * @return void
      */
-    public function register(Request $request, User $user)
+    public function register(Request $request, User $user, UserService $userService)
     {
         $request->validate(
             [
-                'account' => ['required', 'regex:/1\d{10}/i', Rule::unique('users', 'mobile')],
-                'code' => ['required', new VerificationCodeRule($request->account)],
-                'password' => ['required', 'min:5', 'confirmed'],
+                'account' => ['required', Rule::unique('users', 'mobile'), new AccountRule(request('account'))],
+                'code' => ['required', new CodeRule($request->account)],
+                'password' => ['required', 'between:5,20', 'confirmed'],
             ],
-            ['code.required' => '验证码不能为空', 'account.regex' => '手机号格式错误']
+            [
+                'account.required' => '帐号不能为空', 'account.unique' => '帐号已经存在',
+                'code.required' => '验证码不能为空',
+                'password.required' => '密码不能为空', 'password.between' => '密码长度为5～20个字符', 'password.confirmed' => '两次密码输入不一致'
+            ]
         );
 
         $user->password = $request->password;
-        $user->mobile = $request->account;
+        $user[$userService->account()] = $request->account;
         $user->save();
 
         Auth::login($user);
-        $url = $request->session()->pull('url.intended', '/');
-        return response()->json(['message' => '注册成功', 'url' => $url]);
-    }
 
-    /**
-     * 发送验证码
-     *
-     * @param Request $request
-     * @param CodeService $codeService
-     * @return void
-     */
-    public function code(Request $request, CodeService $codeService)
-    {
-        $request->validate(
-            [
-                'account' => ['required', 'regex:/^1\d{10}$/', Rule::unique('users', 'mobile')],
-                'captcha' => ['required', 'captcha'],
-            ],
-            ['code.required' => '验证码不能为空', 'mobile.regex' => '手机格式错误', 'mobile.unique' => '手机号已经使用']
-        );
-
-        $codeService->mobile($request->account);
-
-        return response()->json(['message' => '验证码发送成功']);
+        return inertia()->location('/')->with('success', '注册成功');
     }
 }

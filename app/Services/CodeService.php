@@ -2,58 +2,79 @@
 
 namespace App\Services;
 
-use App\Notifications\VerificationCodeNotification;
 use App\Models\User;
-use Dotenv\Exception\ValidationException;
 use Exception;
 use Overtrue\EasySms\EasySms;
-use Illuminate\Support\Facades\Cache;
 
 /**
  * 验证码服务
  */
 class CodeService
 {
-    public function send(string $account)
+    protected $account;
+
+    public function __construct($account = null)
     {
-        dd(site()->config);
+        $this->account = $account;
     }
 
-    public function action()
+    /**
+     * 发送验证码
+     *
+     * @return void
+     */
+    public function send()
+    {
+        $type = app(UserService::class)->account();
+        $this->$type();
+    }
+
+    /**
+     * 发送邮件验证码
+     *
+     * @return void
+     */
+    public function email()
     {
     }
 
-    protected function aliyun($mobile, $code)
+    /**
+     * 发送手机短信验证码
+     *
+     * @return void
+     */
+    public function mobile()
     {
-        $config = [
-            // HTTP 请求的超时时间（秒）
-            'timeout' => 5.0,
-            // 默认发送配置
-            'default' => [
-                // 网关调用策略，默认：顺序调用
-                'strategy' => \Overtrue\EasySms\Strategies\OrderStrategy::class,
-                // 默认可用的发送网关
-                'gateways' => ['aliyun'],
-            ],
-            // 可用的网关配置
-            'gateways' => [
-                'errorlog' => [
-                    'file' => './easy-sms.log',
-                ],
-                'aliyun' => [
-                    'access_key_id' => config('site.aliyun.accessKeyId'),
-                    'access_key_secret' => config('site.aliyun.accessKeySecret'),
-                    'sign_name' => config('site.sms.aliyun.sign'),
-                ],
-            ],
-        ];
-        $easySms = new EasySms($config);
-        $easySms->send($mobile, [
+        app(SmsService::class)->send($this->account, [
             'template' => config('site.sms.aliyun.template'),
             'data' => [
-                'code' => $code,
+                'code' => $this->code(),
                 'product' => site()['title'],
             ],
         ]);
+    }
+
+    /**
+     * 验证码校对
+     *
+     * @param string $account
+     * @param string $code
+     * @return void
+     */
+    public function check(string $account, string $code)
+    {
+        return cache($account) == $code;
+    }
+
+    /**
+     * 生成验证码
+     *
+     * @return void
+     */
+    protected function code()
+    {
+        $code = mt_rand(1000, 9999);
+        cache([$this->account => $code], now()->addMinutes(10));
+        return $code;
     }
 }

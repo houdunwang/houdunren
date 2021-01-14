@@ -11,7 +11,6 @@ use App\Models\Site;
  */
 class ConfigService
 {
-
     /**
      * 加载当前站点配置
      *

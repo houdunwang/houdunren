@@ -30,8 +30,8 @@
                                             class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded"
                                             @click="onSubmit"
                                         >
-                                            登录</el-button
-                                        >
+                                            登录
+                                        </el-button>
                                     </div>
                                 </form>
                                 <hd-footer> </hd-footer>
@@ -67,6 +67,10 @@ export default {
                 onFinish: () => {
                     //更新验证码
                     this.$refs.captcha.get()
+                    console.log('aaa')
+                },
+                onSuccess: page => {
+                    alert(3)
                 }
             })
         }

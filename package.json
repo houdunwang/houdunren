@@ -31,7 +31,9 @@
     },
     "dependencies": {
         "@inertiajs/progress": "^0.2.4",
+        "dayjs": "^1.10.3",
         "element-ui": "^2.14.1",
+        "install": "^0.13.0",
         "moment": "^2.29.1",
         "postcss-css-variables": "^0.17.0",
         "sass": "^1.32.2",

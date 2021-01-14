@@ -34,18 +34,15 @@ _axios.interceptors.response.use(
     },
     //错误消息拦截
     function(error) {
-        let {
-            status,
-            data: { message, errors }
-        } = error.response
+        let { status, data } = error.response
 
-        if (![422].some(s => s == status)) {
-            el.MessageBox.confirm(message || httpStatus(status), '温馨提示', {
-                showCancelButton: false,
-                confirmButtonText: '关闭',
-                type: 'warning'
-            })
-        }
+        // if (![422].some(s => s == status)) {
+        //     el.MessageBox.confirm(message || httpStatus(status), '温馨提示', {
+        //         showCancelButton: false,
+        //         confirmButtonText: '关闭',
+        //         type: 'warning'
+        //     })
+        // }
         return Promise.reject(error)
     }
 )

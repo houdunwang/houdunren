@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Rules\AccountRule;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,12 @@ class LoginController extends Controller
      */
     public function login(Request $request, UserService $userService)
     {
+        $request->validate([
+            'account' => [new AccountRule(request('account'))],
+            'password' => ['required'],
+            // 'captcha' => ['required', 'captcha']
+        ], ['password.required' => '密码不能为空', 'captcha.required' => '验证码不能为空', 'captcha.captcha' => '验证码输入错误']);
+
         $isLogin = Auth::attempt([
             $userService->account() => $request->account,
             'password' => $request->password

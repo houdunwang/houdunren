@@ -1,44 +1,60 @@
 <template>
     <div class="flex flex-col mt-4">
         <div class="flex">
-            <el-input :placeholder="$attrs.placeholder" v-model="account" class="mr-1"> </el-input>
-            <el-button type="danger" class="" size="default" @click="send">发送验证码</el-button>
+            <el-input :placeholder="$attrs.placeholder" v-model="form.account" class="mr-1"> </el-input>
+            <el-button native-type="button" type="danger" class="" size="default" @click="send" v-if="sendCodeDiff <= 0">发送验证码</el-button>
+            <el-button native-type="button" type="info" class="" size="default" v-if="sendCodeDiff > 0">{{ sendCodeDiff }}后操作</el-button>
         </div>
-        <hd-error :message="errors.account[0]" v-if="errors.account" />
-        <hd-captcha v-model="captcha" class="flex-1" />
-        <hd-error :message="errors['captcha.value'][0]" v-if="errors['captcha.value']" />
+        <hd-error :message="$page.props.errors.account" />
+        <hd-captcha v-model="form.captcha" class="flex-1" />
     </div>
 </template>
 
 <script>
+import dayjs from 'dayjs'
+
 export default {
-    props: ['mobile'],
     data() {
         return {
-            account: '18600276067',
-            captcha: {},
-            errors: {}
+            form: this.$inertia.form({
+                account: '',
+                captcha: ''
+            }),
+            //发送时间倒计时
+            sendCodeDiff: 0
         }
     },
+    mounted() {
+        this.sendTimeHandle()
+    },
     watch: {
-        content(n) {
+        'form.account'(n) {
             this.$emit('input', n)
         }
     },
     methods: {
-        send() {
-            const url = route('api.common.code.send')
-            this.axios
-                .post(url, {
-                    account: this.account,
-                    captcha: this.captcha
-                })
-                .catch(error => {
-                    if (error.response.status == 422) {
-                        this.errors = error.response.data.errors
-                        console.log(this.errors)
+        async send() {
+            const url = route('common.code.send')
+            if (this.sendCodeDiff < 0) {
+                this.form.post(url, {
+                    onSuccess: () => {
+                        window.localStorage.setItem('sendCodeTime', dayjs())
+                        this.sendTimeHandle()
                     }
                 })
+            }
+        },
+        //发送时间计算
+        sendTimeHandle() {
+            let tid = setInterval(() => {
+                let diff = dayjs(window.localStorage.getItem('sendCodeTime') || 0)
+                    .add(60, 'second')
+                    .diff(dayjs(), 'second')
+
+                if ((this.sendCodeDiff = Math.round(diff)) < 0) {
+                    clearInterval(tid)
+                }
+            }, 100)
         }
     }
 }
