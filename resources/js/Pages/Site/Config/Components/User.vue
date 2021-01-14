@@ -28,10 +28,10 @@
             </el-form-item>
             <div v-show="form.user.wechatweb_login">
                 <el-form-item label="AppID">
-                    <el-input v-model="form.user.wechatweb_client_id" placeholder="开放平台网站应用的APPID"></el-input>
+                    <el-input v-model="form.user.wechatweb_client_id" placeholder="开放平台网站应用的APPID" show-password></el-input>
                 </el-form-item>
                 <el-form-item label="AppSecret">
-                    <el-input v-model="form.user.wechatweb_client_secret" placeholder="开放平台网站应用的AppSecret"></el-input>
+                    <el-input v-model="form.user.wechatweb_client_secret" placeholder="开放平台网站应用的AppSecret" show-password></el-input>
                 </el-form-item>
             </div>
         </el-card>

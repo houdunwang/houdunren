@@ -15,7 +15,7 @@
                 </hd-tip>
             </el-form-item>
             <el-form-item label="accessKeyId">
-                <el-input v-model="form.aliyun.accessKeyId" placeholder=""></el-input>
+                <el-input v-model="form.aliyun.accessKeyId" placeholder="" show-password></el-input>
                 <hd-tip>
                     请登录阿里云访问控制控制台查看
                     <a href="https://ram.console.aliyun.com/users">
@@ -24,7 +24,7 @@
                 </hd-tip>
             </el-form-item>
             <el-form-item label="accessKeySecret">
-                <el-input v-model="form.aliyun.accessKeySecret" placeholder=""></el-input>
+                <el-input v-model="form.aliyun.accessKeySecret" placeholder="" show-password></el-input>
             </el-form-item>
         </el-card>
     </div>
