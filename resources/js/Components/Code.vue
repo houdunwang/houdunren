@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col mt-4">
         <div class="flex">
-            <el-input :placeholder="$attrs.placeholder" v-model="form.account" class="mr-1"> </el-input>
+            <el-input :placeholder="$attrs.placeholder" v-model.trim="form.account" class="mr-1"> </el-input>
             <el-button native-type="button" type="danger" class="" size="default" @click="send" v-if="sendCodeDiff <= 0">发送验证码</el-button>
             <el-button native-type="button" type="info" class="" size="default" v-if="sendCodeDiff > 0">{{ sendCodeDiff }}后操作</el-button>
         </div>
@@ -14,6 +14,10 @@
 import dayjs from 'dayjs'
 
 export default {
+    props: {
+        //验证码发送地址
+        action: { type: String, default: `/common/code/send` }
+    },
     data() {
         return {
             form: this.$inertia.form({
@@ -34,9 +38,16 @@ export default {
     },
     methods: {
         async send() {
-            const url = route('common.code.send')
             if (this.sendCodeDiff < 0) {
-                this.form.post(url, {
+                if (!this.form.account || !this.form.captcha) {
+                    return this.$message('帐号和图形验证码不能为空')
+                }
+
+                if (!/.+@.+|\d{11}/.test(this.form.account)) {
+                    return this.$message('帐号格式错误')
+                }
+
+                this.form.post(this.action, {
                     onSuccess: () => {
                         window.localStorage.setItem('sendCodeTime', dayjs())
                         this.sendTimeHandle()
@@ -48,7 +59,7 @@ export default {
         sendTimeHandle() {
             let tid = setInterval(() => {
                 let diff = dayjs(window.localStorage.getItem('sendCodeTime') || 0)
-                    .add(60, 'second')
+                    .add(1, 'second')
                     .diff(dayjs(), 'second')
 
                 if ((this.sendCodeDiff = Math.round(diff)) < 0) {

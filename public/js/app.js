@@ -4636,6 +4636,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    //验证码发送地址
+    action: {
+      type: String,
+      "default": "/common/code/send"
+    }
+  },
   data: function data() {
     return {
       form: this.$inertia.form({
@@ -4659,24 +4666,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var url;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                url = route('common.code.send');
-
-                if (_this.sendCodeDiff < 0) {
-                  _this.form.post(url, {
-                    onSuccess: function onSuccess() {
-                      window.localStorage.setItem('sendCodeTime', dayjs__WEBPACK_IMPORTED_MODULE_1___default()());
-
-                      _this.sendTimeHandle();
-                    }
-                  });
+                if (!(_this.sendCodeDiff < 0)) {
+                  _context.next = 6;
+                  break;
                 }
 
-              case 2:
+                if (!(!_this.form.account || !_this.form.captcha)) {
+                  _context.next = 3;
+                  break;
+                }
+
+                return _context.abrupt("return", _this.$message('帐号和图形验证码不能为空'));
+
+              case 3:
+                if (/.+@.+|\d{11}/.test(_this.form.account)) {
+                  _context.next = 5;
+                  break;
+                }
+
+                return _context.abrupt("return", _this.$message('帐号格式错误'));
+
+              case 5:
+                _this.form.post(_this.action, {
+                  onSuccess: function onSuccess() {
+                    window.localStorage.setItem('sendCodeTime', dayjs__WEBPACK_IMPORTED_MODULE_1___default()());
+
+                    _this.sendTimeHandle();
+                  }
+                });
+
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -4689,7 +4712,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       var tid = setInterval(function () {
-        var diff = dayjs__WEBPACK_IMPORTED_MODULE_1___default()(window.localStorage.getItem('sendCodeTime') || 0).add(60, 'second').diff(dayjs__WEBPACK_IMPORTED_MODULE_1___default()(), 'second');
+        var diff = dayjs__WEBPACK_IMPORTED_MODULE_1___default()(window.localStorage.getItem('sendCodeTime') || 0).add(1, 'second').diff(dayjs__WEBPACK_IMPORTED_MODULE_1___default()(), 'second');
 
         if ((_this2.sendCodeDiff = Math.round(diff)) < 0) {
           clearInterval(tid);
@@ -108948,7 +108971,7 @@ var render = function() {
             attrs: { placeholder: "请输入图形验证码", value: _vm.$attrs.value },
             on: {
               input: function($event) {
-                return _vm.$emit("input", $event)
+                _vm.$emit("input", $event.trim())
               }
             }
           }),
@@ -109005,7 +109028,11 @@ var render = function() {
             model: {
               value: _vm.form.account,
               callback: function($$v) {
-                _vm.$set(_vm.form, "account", $$v)
+                _vm.$set(
+                  _vm.form,
+                  "account",
+                  typeof $$v === "string" ? $$v.trim() : $$v
+                )
               },
               expression: "form.account"
             }

@@ -56,6 +56,35 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return inertia()->location('/')->with('success', '注册成功');
+        return inertia()->location('/');
+    }
+
+    /**
+     * 发送验证码
+     *
+     * @param Request $request
+     * @param UserService $userService
+     * @return void
+     */
+    public function code(Request $request, UserService $userService)
+    {
+        $userExists = (User::where($userService->account(), request('account')))->exists();
+        if ($userExists) {
+            return back()->with('error', '用户已经存在');
+        }
+
+        $request->validate(
+            [
+                'account' => ['required', new AccountRule(request('account'))],
+                'captcha' => ['required', 'captcha']
+            ],
+            [
+                'account.required' => '帐号不能为空',
+                'captcha.required' => '图形验证码不能为空', 'captcha.captcha' => '验证码输入错误'
+            ]
+        );
+        (new CodeService(request('account')))->send();
+
+        return back()->with('success', '验证码发送成功');
     }
 }

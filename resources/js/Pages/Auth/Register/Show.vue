@@ -17,13 +17,13 @@
                                 <div class="w-full px-3 mb-5">
                                     <label for="" class="text-xs font-semibold px-1">帐号</label>
                                     <div class="flex flex-col">
-                                        <hd-code v-model="form.account" class="flex-1 mb-2" placeholder="请输入手机号或邮箱" />
+                                        <hd-code v-model="form.account" class="flex-1 mb-2" placeholder="请输入手机号或邮箱" action="/auth/register/code" />
                                     </div>
                                 </div>
                             </div>
                             <div class="flex -mx-3">
                                 <div class="w-full px-3 mb-5">
-                                    <label for="" class="text-xs font-semibold px-1">验证码</label>
+                                    <label class="text-xs font-semibold px-1">验证码</label>
                                     <div class="flex flex-col">
                                         <el-input placeholder="请输入收到的验证码" class="mr-1" v-model="form.code"> </el-input>
                                         <hd-error :message="form.errors.code" />
