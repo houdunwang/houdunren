@@ -12,11 +12,6 @@
                             <h1 class="font-bold text-3xl text-gray-900">找回密码</h1>
                         </div>
                         <div>
-                            <div class="grid grid-cols-1 gap-3">
-                                <el-form-item label="登录帐号" class="flex-1">
-                                    <el-input v-model="form.mobile" placeholder="请输入登录帐号"></el-input>
-                                </el-form-item>
-                            </div>
                             <div class="flex -mx-3">
                                 <div class="w-full px-3 mb-5">
                                     <label for="" class="text-xs font-semibold px-1">图形验证码</label>
@@ -28,17 +23,18 @@
                             <div class="flex -mx-3">
                                 <div class="w-full px-3 mb-5">
                                     <label for="" class="text-xs font-semibold px-1">手机验证码</label>
-                                    <div class="flex">
-                                        <hd-code :mobile="form.mobile" v-model="form.code" class="flex-1" />
+                                    <div class="flex flex-col">
+                                        <hd-code :mobile="form.mobile" v-model="form.code" class="flex-1 mb-2" placeholder="请输入登录手机号或邮箱"/>
+                                        <el-input placeholder="请输入收到的验证码" class="mr-1"> </el-input>
                                     </div>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 gap-3">
                                 <el-form-item label="新密码" class="flex-1">
-                                    <el-input v-model="form.password" placeholder="请输入手机号"></el-input>
+                                    <el-input type="password" v-model="form.password" placeholder="请输入新密码"></el-input>
                                 </el-form-item>
                                 <el-form-item label="确认密码" class="flex-1">
-                                    <el-input v-model="form.confirm_password" placeholder="你的个性昵称"></el-input>
+                                    <el-input type="password" v-model="form.confirm_password" placeholder="请再输一次密码"></el-input>
                                 </el-form-item>
                             </div>
                             <div class="flex -mx-3">

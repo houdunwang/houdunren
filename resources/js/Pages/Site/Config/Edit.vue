@@ -11,7 +11,7 @@
             <el-tab-pane label="短信验证码" name="sms"> <sms /> </el-tab-pane>
         </el-tabs>
         <div class="mt-3">
-            <el-button type="primary" @click="onSubmit">立即创建</el-button>
+            <el-button type="primary" @click="onSubmit">保存提交</el-button>
         </div>
     </el-form>
 </template>
@@ -44,5 +44,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

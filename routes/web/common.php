@@ -16,6 +16,4 @@ Route::group(['prefix' => 'common', 'as' => 'common.'], function () {
     Route::get('favorite/{model}/{id}/{module?}', [FavoriteController::class, 'make'])->name('favorite')->middleware('auth');
     Route::get('favour/{model}/{id}/{module?}', [FavourController::class, 'make'])->name('favour')->middleware('auth');
     Route::get('follower/{user}', [FollowerController::class, 'make'])->name('follower')->middleware('auth');
-    Route::post('code/email', [CodeController::class, 'email'])->name('code.email')->middleware('auth');
-    Route::post('code/mobile', [CodeController::class, 'mobile'])->name('code.mobile')->middleware('auth');
 });

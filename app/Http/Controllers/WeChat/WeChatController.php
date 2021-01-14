@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\WeChat;
 
-use App\Http\Controllers\Auth\Controller;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\WeChatRequest;
 use App\Models\Site;
 use App\Models\WeChat;

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,24 +35,17 @@ class LoginController extends Controller
      * @param Request $request
      * @return void
      */
-    public function login(Request $request)
+    public function login(Request $request, UserService $userService)
     {
-        $request->validate([
-            'account' => ['required', $this->accountRule()],
-            'password' => ['required', 'min:3'],
-            'captcha' => ['required', 'captcha'],
-        ], ['account.regex' => '帐号格式错误', 'captcha.required' => '验证码不能为空', 'captcha.captcha' => '验证码输入错误']);
-
-
         $isLogin = Auth::attempt([
-            $this->account() => $request->account,
+            $userService->account() => $request->account,
             'password' => $request->password
         ], $request->has('remember'));
 
-        if (!$isLogin) {
-            return back()->with('error', '帐号或密码错误');
+        if ($isLogin) {
+            return inertia()->location('/');
         }
-        return inertia()->location('/');
+        return back()->with('error', '帐号或密码错误');
     }
 
     /**

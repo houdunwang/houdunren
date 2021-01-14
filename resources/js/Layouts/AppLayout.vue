@@ -1,5 +1,5 @@
 <template>
-    <div style="background-image: url(/images/admin.jpg)" class="min-h-screen bg-cover">
+    <div style="background-image: url(/images/admin2.jpg)" class="min-h-screen bg-cover">
         <!-- 顶部导航 -->
         <div class="flex flex-col md:flex-row md:items-center md:justify-between px-8 py-3 text-sm text-gray-300 bg-gray-900 relative z-10">
             <nav class="grid md:grid-cols-4 gap-5">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Rules\VerificationCodeRule;
 use App\Services\CodeService;
@@ -13,7 +14,6 @@ use Illuminate\Http\Request;
  */
 class ForgetController extends Controller
 {
-
     /**
      * 界面显示
      *

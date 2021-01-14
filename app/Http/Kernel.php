@@ -7,6 +7,7 @@ use App\Http\Middleware\FrontMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\SiteMiddleware;
 use App\Http\Middleware\SystemMiddleware;
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 class Kernel extends HttpKernel
 {
@@ -45,6 +46,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],

@@ -1,27 +1,62 @@
 export default {
-    base: {},
+    base: {
+        keywords: '',
+        description: '',
+        icp: '',
+        tel: '',
+        email: ''
+    },
     user: {
         bind: [],
-        wechatweb_login: false,
-        avatar: false
+        avatar: false,
+        wechatweb_login: false
     },
     aliyun: {
-        oss: {}
+        regionId: 'cn-hangzhou',
+        accessKeyId: '',
+        accessKeySecret: ''
     },
     alipay: {
-        charset: 'UTF-8'
+        app_id: '',
+        charset: 'UTF-8',
+        sign_type: '',
+        private_key: '',
+        ali_public_key: '',
+        mode: ''
     },
-    wepay: {},
+    wepay: {
+        mch_id: '',
+        key: '',
+        mode: '',
+        app_id: '',
+        cert_client: '',
+        cert_key: ''
+    },
     upload: {
+        driver: 'local',
         file_size: 200000000,
-        extensions: 'jpg,jpeg,gif,png,doc,txt,pem'
+        extensions: 'jpg,jpeg,gif,png,doc,txt,pem',
+        oss: {
+            endpoint: '',
+            bucket: ''
+        },
+        local: {
+            path: 'Y/m'
+        }
     },
     email: {
         transport: 'smtp',
+        host: '',
         port: 465,
+        username: '',
+        password: '',
         encryption: 'ssl'
     },
     sms: {
-        aliyun: {}
+        driver: 'aliyun',
+        aliyun: {
+            sign: '身份验证',
+            template: 'SMS_12840367'
+        }
     }
 }

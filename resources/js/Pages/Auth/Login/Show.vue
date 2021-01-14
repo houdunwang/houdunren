@@ -58,8 +58,7 @@ export default {
     },
     data() {
         return {
-            form: this.$inertia.form({ account: '', password: '', captcha: '', remember: false }),
-            captcha: `/captcha`
+            form: this.$inertia.form({ account: '', password: '', captcha: '', remember: false })
         }
     },
     methods: {
@@ -67,7 +66,7 @@ export default {
             this.form.post(route('auth.login.store'), {
                 onFinish: () => {
                     //更新验证码
-                    this.$refs.captcha.update()
+                    this.$refs.captcha.get()
                 }
             })
         }

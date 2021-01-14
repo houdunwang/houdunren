@@ -6,7 +6,7 @@
                 添加网站</el-button
             >
         </inertia-link>
-        <el-card shadow="always" :body-style="{ padding: '0 20px' }" v-for="site in sites" :key="site.id" class="mb-3 border border-gray-200">
+        <el-card shadow="always" :body-style="{ padding: '0 20px' }" v-for="site in sites" :key="site.id" class="mb-3 border border-gray-200 bg-opacity-50">
             <div slot="header">
                 <div class="flex justify-between items-center">
                     <div class="text-sm text-gray-500">

@@ -9,7 +9,7 @@
                     v-for="module in modules"
                     :key="module.id"
                     class="font-bold"
-                    :class="{ 'text-pink-300': module.id == $page.props.admin.module.id }"
+                    :class="{ 'text-gray-300': module.id == $page.props.admin.module.id }"
                 >
                     <i class="fa fa-cubes" aria-hidden="true"></i> {{ module.title }}
                 </a>

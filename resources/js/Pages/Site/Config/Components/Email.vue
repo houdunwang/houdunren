@@ -1,10 +1,7 @@
 <template>
     <el-card shadow="always" :body-style="{ padding: '20px' }">
         <el-form-item label="邮箱驱动">
-            <el-input
-                v-model="form.email.transport"
-                placeholder="smtp、sendmail、mailgun、mandrill、ses、sparkpost、log"
-            ></el-input>
+            <el-input v-model="form.email.transport" placeholder="smtp、sendmail、mailgun、mandrill、ses、sparkpost、log"></el-input>
         </el-form-item>
         <el-form-item label="服务器地址">
             <el-input v-model="form.email.host" placeholder="指定SMTP服务器的地址 阿里邮箱 腾讯邮箱"></el-input>
@@ -30,5 +27,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>
