@@ -110141,7 +110141,7 @@ var render = function() {
             "flex flex-col md:flex-row items-center justify-between px-4 md:py-10 py-3"
         },
         [
-          _c("div", { staticClass: "logo w-96 hidden md:block" }, [
+          _c("div", { staticClass: "logo hidden md:block md:w-96" }, [
             _c("a", { attrs: { href: "#" } }, [
               _c("img", { attrs: { src: _vm.$page.props.system.config.logo } })
             ])
@@ -110149,33 +110149,45 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            {
-              staticClass: "grid grid-cols-3 gap-2 w-full mt-3 md:mt-0 md:w-96"
-            },
+            { staticClass: "grid grid-flow-col gap-2 mt-3 md:mt-0" },
             _vm._l(_vm.quickMenus, function(menu, index) {
-              return _c("div", { key: index }, [
-                menu.show
-                  ? _c(
-                      "a",
-                      {
-                        staticClass:
-                          "bg-white border rounded-lg shadow-md box-border px-4 py-3 flex flex-col justify-center items-center opacity-75 duration-500 hover:opacity-100",
-                        attrs: { href: menu.link }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "fa-2x",
-                          class: menu.icon,
-                          attrs: { "aria-hidden": "true" }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "text-sm" }, [
-                          _vm._v(_vm._s(menu.title))
-                        ])
-                      ]
-                    )
-                  : _vm._e()
-              ])
+              return _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: menu.show,
+                      expression: "menu.show"
+                    }
+                  ],
+                  key: index
+                },
+                [
+                  menu.show
+                    ? _c(
+                        "a",
+                        {
+                          staticClass:
+                            "bg-white border rounded-lg shadow-md box-border px-4 py-3 flex flex-col justify-center items-center opacity-75 duration-500 hover:opacity-100 w-32",
+                          attrs: { href: menu.link }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa-2x",
+                            class: menu.icon,
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "text-sm" }, [
+                            _vm._v(_vm._s(menu.title))
+                          ])
+                        ]
+                      )
+                    : _vm._e()
+                ]
+              )
             }),
             0
           )

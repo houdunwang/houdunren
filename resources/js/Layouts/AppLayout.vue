@@ -38,17 +38,17 @@
 
         <!-- 快速导航菜单 -->
         <div class="flex flex-col md:flex-row items-center justify-between px-4 md:py-10 py-3">
-            <div class="logo w-96 hidden md:block">
+            <div class="logo hidden md:block md:w-96">
                 <a href="#">
                     <img :src="$page.props.system.config.logo" />
                 </a>
             </div>
-            <div class="grid grid-cols-3 gap-2 w-full mt-3 md:mt-0 md:w-96">
-                <div v-for="(menu, index) in quickMenus" :key="index">
+            <div class="grid grid-flow-col gap-2 mt-3 md:mt-0">
+                <div v-for="(menu, index) in quickMenus" :key="index" v-show="menu.show">
                     <a
                         v-if="menu.show"
                         :href="menu.link"
-                        class="bg-white border rounded-lg shadow-md box-border px-4 py-3 flex flex-col justify-center items-center opacity-75 duration-500 hover:opacity-100"
+                        class="bg-white border rounded-lg shadow-md box-border px-4 py-3 flex flex-col justify-center items-center opacity-75 duration-500 hover:opacity-100 w-32"
                     >
                         <i class="fa-2x" :class="menu.icon" aria-hidden="true"></i>
                         <span class="text-sm">{{ menu.title }}</span>
