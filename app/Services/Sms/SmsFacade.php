@@ -8,6 +8,6 @@ class SmsFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'sms';
+        return 'SmsService';
     }
 }

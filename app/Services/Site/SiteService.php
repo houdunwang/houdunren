@@ -9,11 +9,6 @@ use App\Models\Site;
  */
 class SiteService
 {
-    public function show()
-    {
-        dd(3);
-    }
-
     /**
      * 根据域名获取站点
      *

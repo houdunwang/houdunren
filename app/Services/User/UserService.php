@@ -5,7 +5,7 @@ namespace App\Services\User;
 use App\Models\Site;
 use App\Models\User;
 use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 /**
  * 用户服务
@@ -49,8 +49,27 @@ class UserService
     {
         $site = $site ?? site();
         $user = $user ?? Auth::user();
-        if ($user) {
-            return is_super_admin($user) || $user['id'] == $site['user_id'];
+
+        if ($site && $user) {
+            return $this->isSuperAdmin($user) || $user['id'] == $site['user_id'];
+        }
+        return false;
+    }
+
+    /**
+     * 是否为站点管理员
+     * 如果管理员没有配置权限将无法管理站点
+     * @param User $user
+     * @param Site $site
+     * @return boolean
+     */
+    public function isAdmin(User $user = null, Site $site = null): bool
+    {
+        $site = $site ?? site();
+        $user = $user ?? Auth::user();
+
+        if ($site && $user) {
+            return $site->isAdmin($user);
         }
         return false;
     }

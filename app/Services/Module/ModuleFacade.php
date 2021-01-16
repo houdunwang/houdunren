@@ -8,6 +8,6 @@ class ModuleFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'module';
+        return 'ModuleService';
     }
 }

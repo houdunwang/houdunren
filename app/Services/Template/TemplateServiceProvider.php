@@ -13,7 +13,7 @@ class TemplateServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('template', function () {
+        $this->app->singleton('TemplateService', function () {
             return new TemplateService();
         });
     }

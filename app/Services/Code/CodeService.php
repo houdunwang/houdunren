@@ -8,6 +8,7 @@ use Overtrue\EasySms\EasySms;
 
 /**
  * 验证码服务
+ * @package App\Services
  */
 class CodeService
 {

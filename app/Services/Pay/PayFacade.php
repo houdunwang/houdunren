@@ -8,6 +8,6 @@ class PayFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'pay';
+        return 'PayService';
     }
 }

@@ -10,6 +10,7 @@ use App\Models\Attachment;
 
 /**
  * 文件上传
+ * @package App\Services
  */
 class UploadService
 {

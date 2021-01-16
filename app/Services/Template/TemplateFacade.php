@@ -8,6 +8,6 @@ class TemplateFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'template';
+        return 'TemplateService';
     }
 }

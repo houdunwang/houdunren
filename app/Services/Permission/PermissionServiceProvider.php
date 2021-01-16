@@ -13,7 +13,7 @@ class PermissionServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('permission', function () {
+        $this->app->singleton('PermissionService', function () {
             return new PermissionService();
         });
     }

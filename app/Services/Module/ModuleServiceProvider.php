@@ -13,7 +13,7 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('module', function () {
+        $this->app->singleton('ModuleService', function () {
             return new ModuleService();
         });
     }

@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Models\Site;
 use App\Models\Module;
-use App\Services\ModuleService;
-use App\Services\PermissionService;
 use Inertia\Inertia;
 use SiteService;
+use ModuleService;
 
 /**
  * 站点模块展示
@@ -24,9 +23,9 @@ class ModuleController extends Controller
      * @param PermissionService $permissionService
      * @return void
      */
-    public function index(Site $site, ModuleService $moduleService, PermissionService $permissionService)
+    public function index(Site $site)
     {
-        $modules = $moduleService->getSiteModulesByPermission($site);
+        $modules = ModuleService::getSiteModulesByPermission($site);
         return inertia('Site/Module/Index', compact('site', 'modules'));
     }
 

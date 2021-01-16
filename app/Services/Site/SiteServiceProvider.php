@@ -14,7 +14,7 @@ class SiteServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('site', function () {
+        $this->app->singleton('SiteService', function () {
             return new SiteService();
         });
     }

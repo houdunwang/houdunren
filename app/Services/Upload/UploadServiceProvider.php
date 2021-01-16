@@ -13,7 +13,7 @@ class UploadServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('upload', function () {
+        $this->app->singleton('UploadService', function () {
             return new UploadService();
         });
     }

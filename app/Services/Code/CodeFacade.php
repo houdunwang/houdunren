@@ -8,6 +8,6 @@ class CodeFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'code';
+        return 'CodeService';
     }
 }

@@ -7,6 +7,7 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Collection;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use UserService;
 
 /**
  * 权限管理服务
@@ -32,10 +33,10 @@ class PermissionService
         if (!$user || !$site || !$module) {
             return false;
         }
-        if (is_super_admin($user) || is_master($user, $site)) {
+        if (UserService::isSuperAdmin($user) || UserService::isMaster($user, $site)) {
             return true;
         }
-        return user()->can($this->permissionName($permission, $site, $module));
+        return user()->can($this->permissionName($permission, $site, $module['name']));
     }
 
     /**
@@ -95,7 +96,7 @@ class PermissionService
         $module['permissions'] = collect($module['permissions'])->map(function ($permission) use ($site, $module) {
             $permission['rules'] = collect($permission['rules'])->map(function ($rule) use ($site, $module) {
                 return  [
-                    'permission_name' => $this->permissionName($site, $module, $rule['name']),
+                    'permission_name' => $this->permissionName($rule['name'], $site, $module),
                     'module_id' => $module['id'],
                     'site_id' => $site['id']
                 ] + $rule;
@@ -113,7 +114,7 @@ class PermissionService
      * @param string $name
      * @return string
      */
-    public function permissionName(Site $site, array $module, string $name): string
+    public function permissionName(string $name, Site $site = null, array $module = null): string
     {
         return "s{$site->id}-{$module['name']}-{$name}";
     }

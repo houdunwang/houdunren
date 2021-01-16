@@ -4,9 +4,10 @@ namespace App\Services\Module;
 
 use App\Models\Module as Model;
 use App\Models\Site;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Nwidart\Modules\Facades\Module;
-use Nwidart\Modules\Collection;
+use Illuminate\Support\Collection;
+use PermissionService;
+use MenuService;
 
 /**
  * 模块管理服务
@@ -47,9 +48,10 @@ class ModuleService
 
     /**
      * 所有已经安装的模块
-     * @return void
+     *
+     * @return Collection|null
      */
-    public function allInstalled()
+    public function allInstalled(): ?Collection
     {
         return $this->all()->filter(function ($module) {
             return $module['installed'];
@@ -58,38 +60,38 @@ class ModuleService
 
     /**
      * 获取站点所有模块
+     *
      * @param Site $site
-     * @return mixed
+     * @return Collection
      */
-    public function getSiteModules(Site $site)
+    public function getSiteModules(Site $site): Collection
     {
-        $permissionService = app(PermissionService::class);
-        return $site->modules->map(function ($module) use ($site, $permissionService) {
-            return $permissionService->formatModulePermission($site, $this->find($module['name']));
+        return $site->modules->map(function ($module) use ($site) {
+            //添加完整权限标识
+            return PermissionService::formatModulePermission($site, $this->find($module['name']));
         });
     }
 
     /**
      * 获取当前用户可使用的所有模块
+     *
      * @param Site $site
-     * @return mixed
-     * @throws BindingResolutionException
+     * @return Collection
      */
-    public function getSiteModulesByPermission(Site $site)
+    public function getSiteModulesByPermission(Site $site): Collection
     {
-        $permissionService = app(PermissionService::class);
-
-        return $this->getSiteModules($site)->filter(function ($module) use ($site, $permissionService) {
-            return $permissionService->checkModulePermission($site, $module);
+        return $this->getSiteModules($site)->filter(function ($module) use ($site) {
+            return PermissionService::checkModulePermission($site, $module);
         });
     }
 
     /**
      * 根据模块标识获取模块
-     * @param string $name 模块标识
+     *
+     * @param string $name
      * @return array
      */
-    public function find(string $name)
+    public function find(string $name): array
     {
         static $cache = [];
         if (isset($cache[$name])) {
@@ -103,23 +105,21 @@ class ModuleService
             'id' => $model['id'] ?? null,
             'name' => $name,
             'preview' => "/modules/{$name}/static/preview.jpg",
-            'menus' => app(MenuService::class)->menus($name),
+            'menus' => MenuService::menus($name),
             'installed' => (bool) $model,
             'model' => $model,
             'permissions' => $this->config($name, 'permissions')
         ]);
     }
 
-
-
     /**
-     * 模块配置
+     * 模块配置文件
+     * 在config目录下
      * @param string $name
      * @param string $fileName
-     * @return mixed
-     * @throws BindingResolutionException
+     * @return array
      */
-    protected function config(string $name, string $fileName)
+    protected function config(string $name, string $fileName): array
     {
         $module = Module::findOrFail($name);
         $file = $module->getPath() . '/Config/' . $fileName . '.php';

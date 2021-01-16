@@ -13,7 +13,7 @@ class PayServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('pay', function () {
+        $this->app->singleton('PayService', function () {
             return new PayService();
         });
     }

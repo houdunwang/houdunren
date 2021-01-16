@@ -8,6 +8,6 @@ class UserFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'user';
+        return 'UserService';
     }
 }

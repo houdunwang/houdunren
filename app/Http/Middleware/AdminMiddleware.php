@@ -2,12 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\ConfigService;
-use App\Services\ModuleService;
-use App\Services\PermissionService;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use Closure;
 use Inertia\Inertia;
+use UserService;
+use ConfigService;
+use ModuleService;
+use PermissionService;
 
 /**
  * 模块后台管理中间件
@@ -41,7 +42,7 @@ class AdminMiddleware
         Inertia::share('admin', [
             'site' => site()->select('id', 'title', 'created_at')->first(),
             'module' => module(),
-            'modules' => app(ModuleService::class)->getSiteModules(site())
+            'modules' => ModuleService::getSiteModules(site())
         ]);
     }
 
@@ -55,9 +56,9 @@ class AdminMiddleware
         //环境检测
         if (!Auth::check() || !site() || !module()) return false;
         //超级管理员与站站检测
-        if (is_super_admin() || is_master()) return true;
+        if (UserService::isSuperAdmin() || UserService::isMaster()) return true;
         //管理员检测
-        return site()->isAdmin(user()) && app(PermissionService::class)->checkModulePermission(site(), module());
+        return UserService::isAdmin(user()) && PermissionService::checkModulePermission(site(), module());
     }
     /**
      * 加载配置
@@ -66,7 +67,7 @@ class AdminMiddleware
      */
     protected function loadConfig()
     {
-        app(ConfigService::class)->loadSiteConfig();
-        app(ConfigService::class)->loadCurrentModuleConfig();
+        ConfigService::site();
+        ConfigService::module();
     }
 }

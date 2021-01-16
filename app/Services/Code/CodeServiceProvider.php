@@ -13,7 +13,7 @@ class CodeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('code', function () {
+        $this->app->singleton('CodeService', function () {
             return new CodeService();
         });
     }

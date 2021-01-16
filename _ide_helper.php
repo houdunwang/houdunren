@@ -11,50 +11,6 @@
  * @see https://github.com/barryvdh/laravel-ide-helper
  */
 
-    namespace App\Services\Site { 
-            /**
-     * 
-     *
-     */ 
-        class SiteFacade {
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function show()
-        {
-                        /** @var \App\Services\Site\SiteService $instance */
-                        return $instance->show();
-        }
-                    /**
-         * 根据域名获取站点
-         *
-         * @return string|null 
-         * @static 
-         */ 
-        public static function getByDomain()
-        {
-                        /** @var \App\Services\Site\SiteService $instance */
-                        return $instance->getByDomain();
-        }
-                    /**
-         * 缓存或读取当前站点数据
-         *
-         * @param \App\Services\Site\Site|null $site
-         * @return \App\Services\Site\Site|null 
-         * @static 
-         */ 
-        public static function site($site = null)
-        {
-                        /** @var \App\Services\Site\SiteService $instance */
-                        return $instance->site($site);
-        }
-         
-    }
-     
-}
-
     namespace Illuminate\Support\Facades { 
             /**
      * 
@@ -14605,7 +14561,765 @@
      
 }
 
-        namespace Facade\Ignition\Facades { 
+        namespace App\Services\Code { 
+            /**
+     * 
+     *
+     */ 
+        class CodeFacade {
+                    /**
+         * 发送验证码
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function send()
+        {
+                        /** @var \App\Services\Code\CodeService $instance */
+                        $instance->send();
+        }
+                    /**
+         * 发送邮件验证码
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function email()
+        {
+                        /** @var \App\Services\Code\CodeService $instance */
+                        $instance->email();
+        }
+                    /**
+         * 发送手机短信验证码
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function mobile()
+        {
+                        /** @var \App\Services\Code\CodeService $instance */
+                        $instance->mobile();
+        }
+                    /**
+         * 验证码校对
+         *
+         * @param string $account
+         * @param string $code
+         * @return void 
+         * @static 
+         */ 
+        public static function check($account, $code)
+        {
+                        /** @var \App\Services\Code\CodeService $instance */
+                        $instance->check($account, $code);
+        }
+         
+    }
+     
+}
+
+    namespace App\Services\Config { 
+            /**
+     * 
+     *
+     */ 
+        class ConfigFacade {
+                    /**
+         * 加载当前站点配置
+         *
+         * @param \App\Services\Config\Site $site
+         * @return void 
+         * @static 
+         */ 
+        public static function site($site = null)
+        {
+                        /** @var \App\Services\Config\ConfigService $instance */
+                        $instance->site($site);
+        }
+                    /**
+         * 加载模块配置
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function module()
+        {
+                        /** @var \App\Services\Config\ConfigService $instance */
+                        $instance->module();
+        }
+                    /**
+         * 保存模块配置
+         *
+         * @param array $config
+         * @return void 
+         * @static 
+         */ 
+        public static function saveModuleConfig($config)
+        {
+                        /** @var \App\Services\Config\ConfigService $instance */
+                        $instance->saveModuleConfig($config);
+        }
+         
+    }
+     
+}
+
+    namespace App\Services\Menu { 
+            /**
+     * 
+     *
+     */ 
+        class MenuFacade {
+                    /**
+         * 缓存当前菜单
+         *
+         * @param mixed $menu
+         * @return void 
+         * @throws BindingResolutionException
+         * @static 
+         */ 
+        public static function currentActiveMenu($path)
+        {
+                        /** @var \App\Services\Menu\MenuService $instance */
+                        $instance->currentActiveMenu($path);
+        }
+                    /**
+         * 当前操作菜单
+         *
+         * @param mixed $module 模块数据
+         * @return mixed 
+         * @throws BindingResolutionException
+         * @static 
+         */ 
+        public static function currentActiveMenuRoute()
+        {
+                        /** @var \App\Services\Menu\MenuService $instance */
+                        return $instance->currentActiveMenuRoute();
+        }
+                    /**
+         * 是否为当前菜单组
+         *
+         * @param mixed $index 菜单组编号
+         * @return bool 
+         * @throws BindingResolutionException
+         * @static 
+         */ 
+        public static function isCurrentMenuGroup($index)
+        {
+                        /** @var \App\Services\Menu\MenuService $instance */
+                        return $instance->isCurrentMenuGroup($index);
+        }
+                    /**
+         * 验证菜单组是否可用
+         *
+         * @param \App\Services\Menu\Site $site
+         * @param mixed $module
+         * @param array $menu
+         * @return bool 
+         * @static 
+         */ 
+        public static function checkMenuGroup($site, $module, $menu)
+        {
+                        /** @var \App\Services\Menu\MenuService $instance */
+                        return $instance->checkMenuGroup($site, $module, $menu);
+        }
+                    /**
+         * 当前模块菜单
+         *
+         * @param mixed $name
+         * @return mixed 
+         * @throws BindingResolutionException
+         * @static 
+         */ 
+        public static function menus($name)
+        {
+                        /** @var \App\Services\Menu\MenuService $instance */
+                        return $instance->menus($name);
+        }
+         
+    }
+     
+}
+
+    namespace App\Services\Module { 
+            /**
+     * 
+     *
+     */ 
+        class ModuleFacade {
+                    /**
+         * 缓存或读取当前模块数据
+         *
+         * @param string $name
+         * @return array|null 
+         * @static 
+         */ 
+        public static function module($name = null)
+        {
+                        /** @var \App\Services\Module\ModuleService $instance */
+                        return $instance->module($name);
+        }
+                    /**
+         * 所有存在的模块
+         * 包括安装与未安装的
+         *
+         * @return \App\Services\Module\Collection 
+         * @static 
+         */ 
+        public static function all()
+        {
+                        /** @var \App\Services\Module\ModuleService $instance */
+                        return $instance->all();
+        }
+                    /**
+         * 所有已经安装的模块
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function allInstalled()
+        {
+                        /** @var \App\Services\Module\ModuleService $instance */
+                        $instance->allInstalled();
+        }
+                    /**
+         * 获取站点所有模块
+         *
+         * @param \App\Services\Module\Site $site
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getSiteModules($site)
+        {
+                        /** @var \App\Services\Module\ModuleService $instance */
+                        return $instance->getSiteModules($site);
+        }
+                    /**
+         * 获取当前用户可使用的所有模块
+         *
+         * @param \App\Services\Module\Site $site
+         * @return mixed 
+         * @throws BindingResolutionException
+         * @static 
+         */ 
+        public static function getSiteModulesByPermission($site)
+        {
+                        /** @var \App\Services\Module\ModuleService $instance */
+                        return $instance->getSiteModulesByPermission($site);
+        }
+                    /**
+         * 根据模块标识获取模块
+         *
+         * @param string $name 模块标识
+         * @return array 
+         * @static 
+         */ 
+        public static function find($name)
+        {
+                        /** @var \App\Services\Module\ModuleService $instance */
+                        return $instance->find($name);
+        }
+         
+    }
+     
+}
+
+    namespace App\Services\Pay { 
+            /**
+     * 
+     *
+     */ 
+        class PayFacade {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function alipayConfig()
+        {
+                        /** @var \App\Services\Pay\PayService $instance */
+                        return $instance->alipayConfig();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function wepayConfig()
+        {
+                        /** @var \App\Services\Pay\PayService $instance */
+                        return $instance->wepayConfig();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function alipay($order)
+        {
+                        /** @var \App\Services\Pay\PayService $instance */
+                        return $instance->alipay($order);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function wepay($order)
+        {
+                        /** @var \App\Services\Pay\PayService $instance */
+                        return $instance->wepay($order);
+        }
+         
+    }
+     
+}
+
+    namespace App\Services\Permission { 
+            /**
+     * 
+     *
+     */ 
+        class PermissionFacade {
+                    /**
+         * 权限验证
+         *
+         * @param string $permission
+         * @param \App\Services\Permission\User $user
+         * @param \App\Services\Permission\Site $site
+         * @param array $module
+         * @return boolean 
+         * @static 
+         */ 
+        public static function access($permission, $user = null, $site = null, $module = null)
+        {
+                        /** @var \App\Services\Permission\PermissionService $instance */
+                        return $instance->access($permission, $user, $site, $module);
+        }
+                    /**
+         * 更新站点模块权限数据
+         *
+         * @param \App\Services\Permission\Site $site
+         * @return void 
+         * @static 
+         */ 
+        public static function saveSiteModulePermissions($site)
+        {
+                        /** @var \App\Services\Permission\PermissionService $instance */
+                        $instance->saveSiteModulePermissions($site);
+        }
+                    /**
+         * 删除模块已经不使用的权限信息
+         *
+         * @param \App\Services\Permission\Site $site
+         * @return void 
+         * @static 
+         */ 
+        public static function delInvalidSitePermission($site)
+        {
+                        /** @var \App\Services\Permission\PermissionService $instance */
+                        $instance->delInvalidSitePermission($site);
+        }
+                    /**
+         * 获取站点可用的模块权限配置列表
+         *
+         * @param \App\Services\Permission\Site $site
+         * @return \App\Services\Permission\Collection 
+         * @static 
+         */ 
+        public static function getSitePermissionList($site)
+        {
+                        /** @var \App\Services\Permission\PermissionService $instance */
+                        return $instance->getSitePermissionList($site);
+        }
+                    /**
+         * 权限完成标识
+         *
+         * @param string $permission
+         * @param \App\Services\Permission\Site $site
+         * @param array $module
+         * @return string 
+         * @static 
+         */ 
+        public static function formatModulePermission($site, $module)
+        {
+                        /** @var \App\Services\Permission\PermissionService $instance */
+                        return $instance->formatModulePermission($site, $module);
+        }
+                    /**
+         * 生成站点权限标识
+         *
+         * @param \App\Services\Permission\Site $site
+         * @param array $module
+         * @param string $name
+         * @return string 
+         * @static 
+         */ 
+        public static function permissionName($name, $site = null, $module = null)
+        {
+                        /** @var \App\Services\Permission\PermissionService $instance */
+                        return $instance->permissionName($name, $site, $module);
+        }
+                    /**
+         * 验证站点模块的权限
+         *
+         * @param \App\Services\Permission\Site $site
+         * @param mixed $module
+         * @return bool 
+         * @static 
+         */ 
+        public static function checkModulePermission($site, $module)
+        {
+                        /** @var \App\Services\Permission\PermissionService $instance */
+                        return $instance->checkModulePermission($site, $module);
+        }
+         
+    }
+     
+}
+
+    namespace App\Services\Site { 
+            /**
+     * 
+     *
+     */ 
+        class SiteFacade {
+                    /**
+         * 根据域名获取站点
+         *
+         * @return string|null 
+         * @static 
+         */ 
+        public static function getByDomain()
+        {
+                        /** @var \App\Services\Site\SiteService $instance */
+                        return $instance->getByDomain();
+        }
+                    /**
+         * 缓存或读取当前站点数据
+         *
+         * @param \App\Services\Site\Site|null $site
+         * @return \App\Services\Site\Site|null 
+         * @static 
+         */ 
+        public static function site($site = null)
+        {
+                        /** @var \App\Services\Site\SiteService $instance */
+                        return $instance->site($site);
+        }
+         
+    }
+     
+}
+
+    namespace App\Services\Sms { 
+            /**
+     * 
+     *
+     */ 
+        class SmsFacade {
+                    /**
+         * 发送短信
+         *
+         * @param string $mobile 手机号
+         * @param array $data 短信内容
+         * @return void 
+         * @static 
+         */ 
+        public static function send($mobile, $data)
+        {
+                        /** @var \App\Services\Sms\SmsService $instance */
+                        $instance->send($mobile, $data);
+        }
+         
+    }
+     
+}
+
+    namespace App\Services\Template { 
+            /**
+     * 
+     *
+     */ 
+        class TemplateFacade {
+                    /**
+         * 所有模板
+         *
+         * @return \App\Services\Template\Collection 
+         * @static 
+         */ 
+        public static function all()
+        {
+                        /** @var \App\Services\Template\TemplateService $instance */
+                        return $instance->all();
+        }
+                    /**
+         * 所有已经安装的模板
+         *
+         * @return \App\Services\Template\Collection 
+         * @static 
+         */ 
+        public static function allInstalled()
+        {
+                        /** @var \App\Services\Template\TemplateService $instance */
+                        return $instance->allInstalled();
+        }
+                    /**
+         * 获取站点所有模板
+         *
+         * @param \App\Services\Template\Site $site
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getSiteTemplates($site)
+        {
+                        /** @var \App\Services\Template\TemplateService $instance */
+                        return $instance->getSiteTemplates($site);
+        }
+                    /**
+         * 安装模块
+         *
+         * @param string $name
+         * @return \App\Services\Template\Template 
+         * @throws BindingResolutionException
+         * @static 
+         */ 
+        public static function install($name)
+        {
+                        /** @var \App\Services\Template\TemplateService $instance */
+                        return $instance->install($name);
+        }
+                    /**
+         * 根据模板标识获取模板
+         *
+         * @param string $name
+         * @return array 
+         * @static 
+         */ 
+        public static function find($name)
+        {
+                        /** @var \App\Services\Template\TemplateService $instance */
+                        return $instance->find($name);
+        }
+                    /**
+         * 当前站点使用的视图路径
+         *
+         * @param \App\Services\Template\Site $site
+         * @return \App\Services\Template\exit 
+         * @throws BindingResolutionException
+         * @static 
+         */ 
+        public static function template($site)
+        {
+                        /** @var \App\Services\Template\TemplateService $instance */
+                        return $instance->template($site);
+        }
+         
+    }
+     
+}
+
+    namespace App\Services\Upload { 
+            /**
+     * 
+     *
+     */ 
+        class UploadFacade {
+                    /**
+         * 本地上传
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function local($file)
+        {
+                        /** @var \App\Services\Upload\UploadService $instance */
+                        $instance->local($file);
+        }
+                    /**
+         * 云上传
+         *
+         * @param \App\Services\Upload\UploadedFile $file
+         * @return void 
+         * @static 
+         */ 
+        public static function make($file)
+        {
+                        /** @var \App\Services\Upload\UploadService $instance */
+                        $instance->make($file);
+        }
+         
+    }
+     
+}
+
+    namespace App\Services\User { 
+            /**
+     * 
+     *
+     */ 
+        class UserFacade {
+                    /**
+         * 登录字段
+         *
+         * @return string 
+         * @throws BindingResolutionException
+         * @static 
+         */ 
+        public static function account()
+        {
+                        /** @var \App\Services\User\UserService $instance */
+                        return $instance->account();
+        }
+                    /**
+         * 超级管理员检测
+         *
+         * @param \App\Services\User\User $user
+         * @return boolean 
+         * @static 
+         */ 
+        public static function isSuperAdmin($user = null)
+        {
+                        /** @var \App\Services\User\UserService $instance */
+                        return $instance->isSuperAdmin($user);
+        }
+                    /**
+         * 站点管理员检测
+         *
+         * @param \App\Services\User\User $user
+         * @param \App\Services\User\Site $site
+         * @return boolean 
+         * @static 
+         */ 
+        public static function isMaster($user = null, $site = null)
+        {
+                        /** @var \App\Services\User\UserService $instance */
+                        return $instance->isMaster($user, $site);
+        }
+         
+    }
+     
+}
+
+    namespace App\Services\WeChat { 
+            /**
+     * 
+     *
+     */ 
+        class WeChatFacade {
+                    /**
+         * 微信检测
+         *
+         * @return boolean 
+         * @static 
+         */ 
+        public static function isWechat()
+        {
+                        /** @var \App\Services\WeChat\WeChatService $instance */
+                        return $instance->isWechat();
+        }
+                    /**
+         * 微信登录
+         *
+         * @param array $account
+         * @return void 
+         * @static 
+         */ 
+        public static function login($account)
+        {
+                        /** @var \App\Services\WeChat\WeChatService $instance */
+                        $instance->login($account);
+        }
+                    /**
+         * 保存微信用户到数据表
+         *
+         * @param array $account
+         * @return \App\Services\WeChat\User 
+         * @static 
+         */ 
+        public static function saveUser($account)
+        {
+                        /** @var \App\Services\WeChat\WeChatService $instance */
+                        return $instance->saveUser($account);
+        }
+                    /**
+         * 批量保存用户
+         * 获取微信粉丝数据时使用
+         *
+         * @param array $users
+         * @return \App\Services\WeChat\Collection 
+         * @static 
+         */ 
+        public static function batchSaveUsers($users)
+        {
+                        /** @var \App\Services\WeChat\WeChatService $instance */
+                        return $instance->batchSaveUsers($users);
+        }
+                    /**
+         * 微信登录驱动
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function driver()
+        {
+                        /** @var \App\Services\WeChat\WeChatService $instance */
+                        $instance->driver();
+        }
+                    /**
+         * 微信SDK配置
+         *
+         * @param \App\Services\WeChat\[type] $wechat
+         * @return void 
+         * @static 
+         */ 
+        public static function config($wechat = null)
+        {
+                        /** @var \App\Services\WeChat\WeChatService $instance */
+                        $instance->config($wechat);
+        }
+                    /**
+         * 微信登录配置
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function loginConfig()
+        {
+                        /** @var \App\Services\WeChat\WeChatService $instance */
+                        $instance->loginConfig();
+        }
+                    /**
+         * 保存微信规则
+         *
+         * @param string $type
+         * @param array $options
+         * @return void 
+         * @static 
+         */ 
+        public static function saveRule($type = 'text', $options = [])
+        {
+                        /** @var \App\Services\WeChat\WeChatService $instance */
+                        $instance->saveRule($type, $options);
+        }
+                    /**
+         * 检测关键词是否存在
+         *
+         * @param array $keyword
+         * @return void 
+         * @static 
+         */ 
+        public static function keywordIsExists($keyword)
+        {
+                        /** @var \App\Services\WeChat\WeChatService $instance */
+                        $instance->keywordIsExists($keyword);
+        }
+         
+    }
+     
+}
+
+    namespace Facade\Ignition\Facades { 
             /**
      * Class Flare.
      *
@@ -16363,7 +17077,6 @@
 
 
 namespace  { 
-            class SiteService extends \App\Services\Site\SiteFacade {}
             class App extends \Illuminate\Support\Facades\App {}
             class Arr extends \Illuminate\Support\Arr {}
             class Artisan extends \Illuminate\Support\Facades\Artisan {}
@@ -19473,6 +20186,18 @@ namespace  {
             class URL extends \Illuminate\Support\Facades\URL {}
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
+            class CodeService extends \App\Services\Code\CodeFacade {}
+            class ConfigService extends \App\Services\Config\ConfigFacade {}
+            class MenuService extends \App\Services\Menu\MenuFacade {}
+            class ModuleService extends \App\Services\Module\ModuleFacade {}
+            class PayService extends \App\Services\Pay\PayFacade {}
+            class PermissionService extends \App\Services\Permission\PermissionFacade {}
+            class SiteServiceService extends \App\Services\Site\SiteFacade {}
+            class SmsService extends \App\Services\Sms\SmsFacade {}
+            class TempalteService extends \App\Services\Template\TemplateFacade {}
+            class UploadService extends \App\Services\Upload\UploadFacade {}
+            class UserService extends \App\Services\User\UserFacade {}
+            class WeChatService extends \App\Services\WeChat\WeChatFacade {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Browser extends \hisorange\BrowserDetect\Facade {}
             class Image extends \Intervention\Image\Facades\Image {}
