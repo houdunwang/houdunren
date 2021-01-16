@@ -40,7 +40,7 @@ class ConfigService
     public function module()
     {
         $model = ModuleConfig::where('site_id', site()->id)->where('module_id', module()['id'])->first();
-        config(['module' => $model['config'] ?? []]);
+        config(['module' => $model['config'] ?? null]);
     }
 
     /**

@@ -174,7 +174,8 @@
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
-                    <div class="container-fluid bg-white border ml-2 p-3 min-h-full border-gray-200">
+                    <div class="container-fluid bg-white border ml-2 p-5 min-h-full border-gray-200">
+                        <hd-message />
                         <slot />
                     </div>
                     <!-- /.container-fluid -->
