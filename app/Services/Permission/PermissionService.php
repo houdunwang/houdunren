@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Permission;
 
 use App\Models\Site;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Collection;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * 权限管理服务
@@ -12,6 +14,30 @@ use Illuminate\Support\Collection;
  */
 class PermissionService
 {
+    /**
+     * 权限验证
+     *
+     * @param string $permission
+     * @param User $user
+     * @param Site $site
+     * @param array $module
+     * @return boolean
+     */
+    public function access(string $permission, User $user = null, Site $site = null, array $module = null): bool
+    {
+        $user = $user ?? Auth::user();
+        $site = $site ?? site();
+        $module = $module ?? module();
+
+        if (!$user || !$site || !$module) {
+            return false;
+        }
+        if (is_super_admin($user) || is_master($user, $site)) {
+            return true;
+        }
+        return user()->can($this->permissionName($permission, $site, $module));
+    }
+
     /**
      * 更新站点模块权限数据
      * @param Site $site
@@ -84,10 +110,10 @@ class PermissionService
      *
      * @param Site $site
      * @param array $module
-     * @param [type] $name
-     * @return void
+     * @param string $name
+     * @return string
      */
-    public function permissionName(Site $site, array $module, $name)
+    public function permissionName(Site $site, array $module, string $name): string
     {
         return "s{$site->id}-{$module['name']}-{$name}";
     }
@@ -102,7 +128,7 @@ class PermissionService
     {
         return (bool)collect($module['permissions'])->filter(function ($permisssion) use ($site, $module) {
             return collect($permisssion['rules'])->filter(function ($rule) use ($site, $module) {
-                return access($rule['name'], null, $site, $module);
+                return $this->access($rule['name'], null, $site, $module);
             })->count();
         })->count();
     }

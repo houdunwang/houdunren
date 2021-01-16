@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Config;
 
 use App\Models\ModuleConfig;
 use App\Models\Site;
@@ -17,7 +17,7 @@ class ConfigService
      * @param Site $site
      * @return void
      */
-    public function loadSiteConfig(Site $site = null)
+    public function site(Site $site = null)
     {
         $site = $site ?? site();
         config(['site' => site()['config']]);
@@ -36,7 +36,7 @@ class ConfigService
      *
      * @return void
      */
-    public function loadCurrentModuleConfig()
+    public function module()
     {
         $model = ModuleConfig::where('site_id', site_id())->where('module_id', module()['id'])->first();
         config(['module' => $model['config'] ?? []]);
@@ -48,7 +48,7 @@ class ConfigService
      * @param array $config
      * @return void
      */
-    public function saveCurrentModuleConfig(array $config)
+    public function saveModuleConfig(array $config)
     {
         $model = ModuleConfig::firstOrNew([
             'site_id' => site()['id'],

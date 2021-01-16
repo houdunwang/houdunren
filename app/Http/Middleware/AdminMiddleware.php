@@ -23,6 +23,7 @@ class AdminMiddleware
         if ($this->verify() === false) {
             return redirect()->route('admin')->with('message', $this->error);
         }
+
         $this->loadConfig();
         $this->inertia();
         return $next($request);

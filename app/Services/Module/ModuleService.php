@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Module;
 
 use App\Models\Module as Model;
 use App\Models\Site;
@@ -14,6 +14,25 @@ use Nwidart\Modules\Collection;
  */
 class ModuleService
 {
+    /**
+     * 缓存或读取当前模块数据
+     *
+     * @param string $name
+     * @return array|null
+     */
+    public function module(string $name = null): ?array
+    {
+        static $cache = null;
+        if ($cache) return $cache;
+        if ($name) {
+            session(['module_name' => $name]);
+        }
+        if ($name = session('module_name')) {
+            $cache = app(ModuleService::class)->find($name);
+        }
+        return $cache;
+    }
+
     /**
      * 所有存在的模块
      * 包括安装与未安装的

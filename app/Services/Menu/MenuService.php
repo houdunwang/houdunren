@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Menu;
 
 use App\Models\Site;
 use Illuminate\Contracts\Container\BindingResolutionException;

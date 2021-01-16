@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Upload;
 
 use Auth;
 use Illuminate\Http\UploadedFile;
 use OSS\OssClient;
 use OSS\Core\OssException;
 use App\Models\Attachment;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * 文件上传

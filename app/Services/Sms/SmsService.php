@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Sms;
 
-use Exception;
 use Overtrue\EasySms\EasySms;
 
 /**

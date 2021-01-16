@@ -1,21 +1,16 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\WeChat;
 
 use App\Models\User;
 use App\Models\WeChat;
 use App\Models\WeChatKeyword;
 use App\Models\WeChatRule;
 use App\Models\WeChatUser;
-use Auth;
 use Houdunwang\WeChat\WeChat as WeChatWeChat;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Collection;
-use InvalidArgumentException;
-use Log;
-use LogicException;
-use RuntimeException;
 use Socialite;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * 微信管理服务
@@ -24,12 +19,19 @@ use Socialite;
 class WeChatService
 {
     /**
+     * 微信检测
+     *
+     * @return boolean
+     */
+    public function isWechat(): bool
+    {
+        return isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false;
+    }
+    /**
      * 微信登录
+     *
      * @param array $account
      * @return void
-     * @throws BindingResolutionException
-     * @throws LogicException
-     * @throws RuntimeException
      */
     public function login(array $account): void
     {
@@ -39,10 +41,9 @@ class WeChatService
 
     /**
      * 保存微信用户到数据表
-     * @param array $account 微信用户资料
+     *
+     * @param array $account
      * @return User
-     * @throws BindingResolutionException
-     * @throws LogicException
      */
     public function saveUser(array $account): User
     {
@@ -73,10 +74,11 @@ class WeChatService
     /**
      * 批量保存用户
      * 获取微信粉丝数据时使用
+     *
      * @param array $users
      * @return Collection
      */
-    public function batchSaveUsers(array $users)
+    public function batchSaveUsers(array $users): Collection
     {
         return collect($users)->map(function ($user) {
             return $this->saveUser($user);
@@ -85,11 +87,10 @@ class WeChatService
 
     /**
      * 微信登录驱动
-     * @return mixed
-     * @throws BindingResolutionException
-     * @throws InvalidArgumentException
+     *
+     * @return void
      */
-    public function driver()
+    public function driver(): ?string
     {
         $this->config();
         return Socialite::driver(is_wechat() ? 'weixin' : 'weixinweb');
@@ -97,9 +98,9 @@ class WeChatService
 
     /**
      * 微信SDK配置
-     * @param mixed|null $wechat
+     *
+     * @param [type] $wechat
      * @return void
-     * @throws BindingResolutionException
      */
     public function config($wechat = null)
     {
@@ -112,8 +113,8 @@ class WeChatService
 
     /**
      * 微信登录配置
+     *
      * @return void
-     * @throws BindingResolutionException
      */
     public function loginConfig()
     {
@@ -140,11 +141,10 @@ class WeChatService
 
     /**
      * 保存微信规则
+     *
      * @param string $type
      * @param array $options
-     * @return mixed
-     * @throws BindingResolutionException
-     * @throws LogicException
+     * @return void
      */
     public function saveRule($type = 'text', array $options = [])
     {
@@ -174,10 +174,9 @@ class WeChatService
 
     /**
      * 保存关键词
+     *
      * @param WeChatRule $weChatRule
      * @return void
-     * @throws BindingResolutionException
-     * @throws LogicException
      */
     protected function saveKeyword(WeChatRule $weChatRule)
     {
@@ -201,10 +200,9 @@ class WeChatService
 
     /**
      * 检测关键词是否存在
+     *
      * @param array $keyword
-     * @return mixed
-     * @throws BindingResolutionException
-     * @throws LogicException
+     * @return void
      */
     public function keywordIsExists(array $keyword)
     {

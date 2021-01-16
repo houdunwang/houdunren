@@ -8,6 +8,7 @@ use App\Models\Module;
 use App\Services\ModuleService;
 use App\Services\PermissionService;
 use Inertia\Inertia;
+use SiteService;
 
 /**
  * 站点模块展示
@@ -33,14 +34,15 @@ class ModuleController extends Controller
      * 进入模块
      *
      * @param Site $site
-     * @param Module $module
-     * @param PermissionService $permissionService
+     * @param string $module
      * @return void
      */
-    public function admin(Site $site, Module $module, PermissionService $permissionService)
+    public function admin(Site $site, string $module)
     {
-        site($site);
-        module($module['name']);
-        return Inertia::location(url($module['name'] . '/admin'));
+        $d = SiteService::show();
+        // dd($d);
+        // site($site);
+        // module($module);
+        // return Inertia::location(url($module . '/admin'));
     }
 }

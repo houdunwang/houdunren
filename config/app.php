@@ -1,5 +1,8 @@
 <?php
 
+use App\Services\Site\SiteFacade;
+use App\services\Site\SiteServiceProvider;
+
 return [
 
     /*
@@ -177,7 +180,19 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
-
+        // 项目自定义
+        App\Services\Code\CodeServiceProvider::class,
+        App\Services\Config\ConfigServiceProvider::class,
+        App\Services\Menu\MenuServiceProvider::class,
+        App\Services\Module\ModuleServiceProvider::class,
+        App\Services\Pay\PayServiceProvider::class,
+        App\Services\Permission\PermissionServiceProvider::class,
+        App\Services\Site\SiteServiceProvider::class,
+        App\Services\Sms\SmsServiceProvider::class,
+        App\Services\Template\TemplateServiceProvider::class,
+        App\Services\Upload\UploadServiceProvider::class,
+        App\Services\User\UserServiceProvider::class,
+        App\Services\WeChat\WeChatServiceProvider::class,
     ],
 
     /*
@@ -192,7 +207,6 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -229,7 +243,19 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        // 项目自定义
+        'Code' => App\Services\Code\CodeFacade::class,
+        'Conf' => App\Services\Config\ConfigFacade::class,
+        'Menu' => App\Services\Menu\MenuFacade::class,
+        'Module' => App\Services\Module\ModuleFacade::class,
+        'Pay' => App\Services\Pay\PayFacade::class,
+        'Permission' => App\Services\Permission\PermissionFacade::class,
+        'Site' => App\Services\Site\SiteFacade::class,
+        'Sms' => App\Services\Sms\SmsFacade::class,
+        'Tempalte' => App\Services\Template\TemplateFacade::class,
+        'Upload' => App\Services\Upload\UploadFacade::class,
+        'User' => App\Services\User\UserFacade::class,
+        'WeChat' => App\Services\WeChat\WeChatFacade::class,
     ],
 
 ];
