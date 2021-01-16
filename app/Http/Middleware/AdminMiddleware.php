@@ -2,13 +2,14 @@
 
 namespace App\Http\Middleware;
 
-use Auth;
 use Closure;
 use Inertia\Inertia;
 use UserService;
 use ConfigService;
 use ModuleService;
 use PermissionService;
+use Auth;
+use MenuService;
 
 /**
  * 模块后台管理中间件
@@ -37,12 +38,13 @@ class AdminMiddleware
      */
     protected function inertia()
     {
-        Inertia::setRootView('module');
+        Inertia::setRootView('admin');
         //分配共享数据
         Inertia::share('admin', [
             'site' => site()->select('id', 'title', 'created_at')->first(),
             'module' => module(),
-            'modules' => ModuleService::getSiteModules(site())
+            'modules' => ModuleService::getSiteModules(site()),
+            'menus' => MenuService::getUserAdminMenus()
         ]);
     }
 
@@ -58,8 +60,9 @@ class AdminMiddleware
         //超级管理员与站站检测
         if (UserService::isSuperAdmin() || UserService::isMaster()) return true;
         //管理员检测
-        return UserService::isAdmin(user()) && PermissionService::checkModulePermission(site(), module());
+        return UserService::isAdmin(Auth::user()) && PermissionService::checkModulePermission(site(), module());
     }
+
     /**
      * 加载配置
      *

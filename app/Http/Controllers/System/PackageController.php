@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PackageRequest;
 use App\Http\Resources\PackageResource;
 use App\Models\Package;
-use App\Services\ModuleService;
+use ModuleService;
 use Illuminate\Http\Request;
 
 /**
@@ -23,12 +23,11 @@ class PackageController extends Controller
     /**
      * 添加套餐
      *
-     * @param ModuleService $moduleService
      * @return void
      */
-    public function create(ModuleService $moduleService)
+    public function create()
     {
-        $modules = $moduleService->allInstalled();
+        $modules = ModuleService::allInstalled();
         return inertia('System/Package/Form', compact('modules'));
     }
 
@@ -51,12 +50,11 @@ class PackageController extends Controller
      * 编辑套餐
      *
      * @param Package $package
-     * @param ModuleService $moduleService
      * @return void
      */
-    public function edit(Package $package, ModuleService $moduleService)
+    public function edit(Package $package)
     {
-        $modules = $moduleService->allInstalled();
+        $modules = ModuleService::allInstalled();
         return inertia('System/Package/Form', ['modules' => $modules, 'package' => new PackageResource($package)]);
     }
 

@@ -2,10 +2,6 @@
 
 namespace App\Services\Code;
 
-use App\Models\User;
-use Exception;
-use Overtrue\EasySms\EasySms;
-
 /**
  * 验证码服务
  * @package App\Services
@@ -14,18 +10,15 @@ class CodeService
 {
     protected $account;
 
-    public function __construct($account = null)
-    {
-        $this->account = $account;
-    }
-
     /**
      * 发送验证码
      *
+     * @param [type] $account
      * @return void
      */
-    public function send()
+    public function send($account)
     {
+        $this->account = $account;
         $type = app(UserService::class)->account();
         $this->$type();
     }

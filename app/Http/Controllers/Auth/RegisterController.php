@@ -3,17 +3,19 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Rules\CodeRule;
-use App\Services\CodeService;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Rules\AccountRule;
-use App\Services\UserService;
+use UserService;
+use CodeService;
 
 /**
  * 会员登录
+ * @package App\Http\Controllers\Auth
  */
 class RegisterController extends Controller
 {
@@ -35,7 +37,7 @@ class RegisterController extends Controller
      * @param User $user
      * @return void
      */
-    public function register(Request $request, User $user, UserService $userService)
+    public function register(Request $request, User $user)
     {
         $request->validate(
             [
@@ -51,7 +53,7 @@ class RegisterController extends Controller
         );
 
         $user->password = $request->password;
-        $user[$userService->account()] = $request->account;
+        $user[UserService::account()] = $request->account;
         $user->save();
 
         Auth::login($user);
@@ -63,12 +65,11 @@ class RegisterController extends Controller
      * 发送验证码
      *
      * @param Request $request
-     * @param UserService $userService
      * @return void
      */
-    public function code(Request $request, UserService $userService)
+    public function code(Request $request)
     {
-        $userExists = (User::where($userService->account(), request('account')))->exists();
+        $userExists = (User::where(UserService::account(), request('account')))->exists();
         if ($userExists) {
             return back()->with('error', '用户已经存在');
         }
@@ -83,7 +84,7 @@ class RegisterController extends Controller
                 'captcha.required' => '图形验证码不能为空', 'captcha.captcha' => '验证码输入错误'
             ]
         );
-        (new CodeService(request('account')))->send();
+        CodeService::send(request('account'));
 
         return back()->with('success', '验证码发送成功');
     }

@@ -250,7 +250,7 @@ return [
         'ModuleService' => App\Services\Module\ModuleFacade::class,
         'PayService' => App\Services\Pay\PayFacade::class,
         'PermissionService' => App\Services\Permission\PermissionFacade::class,
-        'SiteServiceService' => App\Services\Site\SiteFacade::class,
+        'SiteService' => App\Services\Site\SiteFacade::class,
         'SmsService' => App\Services\Sms\SmsFacade::class,
         'TempalteService' => App\Services\Template\TemplateFacade::class,
         'UploadService' => App\Services\Upload\UploadFacade::class,

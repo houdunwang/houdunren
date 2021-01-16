@@ -4996,8 +4996,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var _yield$_this$axios$po, users;
-
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -5008,11 +5006,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 2:
-                _yield$_this$axios$po = _context.sent;
-                users = _yield$_this$axios$po.data;
-                _this.users = users;
+                _this.users = _context.sent;
 
-              case 5:
+              case 3:
               case "end":
                 return _context.stop();
             }

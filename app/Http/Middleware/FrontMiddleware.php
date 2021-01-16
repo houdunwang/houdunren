@@ -3,10 +3,10 @@
 namespace App\Http\Middleware;
 
 use App\Models\Site;
-use App\Services\ConfigService;
-use App\Services\SiteService;
-use App\Services\TagService;
-use App\Services\TemplateService;
+use ConfigService;
+use SiteService;
+use TagService;
+use TemplateService;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
 
@@ -33,11 +33,11 @@ class FrontMiddleware
     protected function init()
     {
         //根据域名获取站点
-        $site = app(SiteService::class)->getByDomain();
+        $site = SiteService::getByDomain();
 
         if ($site) {
             //加载站点配置
-            app(ConfigService::class)->loadSiteConfig(site($site));
+            ConfigService::site(site($site));
             //加载模块配置
             //app(ConfigService::class)->loadCurrentModuleConfig(module($site->module['name']));
             //设置文章模块模板路径

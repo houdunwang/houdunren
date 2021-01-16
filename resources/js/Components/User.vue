@@ -39,8 +39,7 @@ export default {
     methods: {
         //搜索用户
         async search() {
-            let { data: users } = await this.axios.post(this.action.valueOf(), { keyword: this.keyword })
-            this.users = users
+            this.users = await this.axios.post(this.action.valueOf(), { keyword: this.keyword })
         },
         //选择用户
         change(user) {

@@ -4,6 +4,8 @@ namespace App\Services\Config;
 
 use App\Models\ModuleConfig;
 use App\Models\Site;
+use SiteService;
+use ModuleService;
 
 /**
  * 配置管理服务
@@ -22,7 +24,6 @@ class ConfigService
         $site = $site ?? site();
         config(['site' => site()['config']]);
         config('app.name', site()['title']);
-
         config(['mail.default' => config('site.email.transport')]);
         config(['mail.mailers.smtp' =>  config('site.email')]);
         config(['mail.from' => [
@@ -38,7 +39,7 @@ class ConfigService
      */
     public function module()
     {
-        $model = ModuleConfig::where('site_id', site_id())->where('module_id', module()['id'])->first();
+        $model = ModuleConfig::where('site_id', site()->id)->where('module_id', module()['id'])->first();
         config(['module' => $model['config'] ?? []]);
     }
 

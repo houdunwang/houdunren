@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
 use App\Rules\AccountRule;
-use App\Services\CodeService;
-use App\Services\UserService;
 use Illuminate\Http\Request;
+use CodeService;
 
 /**
  * 发送验证码
+ * @package App\Http\Controllers\Common
  */
 class CodeController extends Controller
 {
@@ -22,11 +22,9 @@ class CodeController extends Controller
      * 发送验证码
      *
      * @param Request $request
-     * @param CodeService $codeService
-     * @param UserService $userService
      * @return void
      */
-    public function send(Request $request, CodeService $codeService, UserService $userService)
+    public function send(Request $request)
     {
         $request->validate(
             [
@@ -38,7 +36,7 @@ class CodeController extends Controller
                 'captcha.required' => '图形验证码不能为空', 'captcha.captcha' => '验证码输入错误'
             ]
         );
-        (new CodeService(request('account')))->send();
+        CodeService::send(request('account'));
 
         return back()->with('success', '验证码发送成功');
     }

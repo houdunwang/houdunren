@@ -5,13 +5,11 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SiteRequest;
 use App\Models\Site;
-use App\Services\ModuleService;
+use ModuleService;
 use Illuminate\Http\Request;
-use Inertia\Response;
-use LogicException;
-use RuntimeException;
 use App\Http\Resources\SiteResource;
-use Illuminate\Support\Facades\Auth;
+use Auth;
+use UserService;
 
 /**
  * 站点管理
@@ -21,26 +19,24 @@ class SiteController extends Controller
 {
     /**
      * 站点列表
-     * @return Response
-     * @throws LogicException
-     * @throws RuntimeException
+     *
+     * @return void
      */
     public function index()
     {
-        $sites = user()->isSuperAdmin ? Site::all() : user()->allSites;
+        $sites = UserService::isSuperAdmin() ? Site::all() : Auth::user()->allSites;
         return inertia()->render('Site/Site/Index', ['sites' => SiteResource::collection($sites)]);
     }
 
     /**
      * 创建站点
      *
-     * @param ModuleService $moduleService
      * @return void
      */
-    public function create(ModuleService $moduleService)
+    public function create()
     {
-        $modules = $moduleService->allInstalled();
-        $templates = user()->group->templates;
+        $modules = ModuleService::allInstalled();
+        $templates = Auth::user()->group->templates;
         return inertia()->render('Site/Site/Form', compact('modules', 'templates'));
     }
 
@@ -63,13 +59,12 @@ class SiteController extends Controller
      * 编辑站点
      *
      * @param Site $site
-     * @param ModuleService $moduleService
      * @return void
      */
-    public function edit(Site $site, ModuleService $moduleService)
+    public function edit(Site $site)
     {
-        $modules = $moduleService->allInstalled();
-        $templates = user()->group->templates;
+        $modules = ModuleService::allInstalled();
+        $templates = Auth::user()->group->templates;
         return inertia()->render('Site/Site/Form', compact('modules', 'templates', 'site'));
     }
 

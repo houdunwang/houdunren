@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Site;
-use App\Services\ModuleService;
-use App\Services\PermissionService;
+use ModuleService;
+use PermissionService;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -21,14 +21,12 @@ class PermissionController extends Controller
      *
      * @param Site $site 站点
      * @param Role $role 角色
-     * @param ModuleService $moduleService
-     * @param PermissionService $permissionService
      * @return void
      */
-    public function edit(Site $site, Role $role, ModuleService $moduleService, PermissionService $permissionService)
+    public function edit(Site $site, Role $role)
     {
         $this->updateSitePermission($site);
-        $modules = $moduleService->getSiteModules($site);
+        $modules = ModuleService::getSiteModules($site);
         $permissions = $role->permissions->map(fn ($p) => $p['name']);
         return inertia('Site/Permission/Form', compact('site', 'modules', 'role', 'permissions'));
     }
@@ -71,8 +69,8 @@ class PermissionController extends Controller
     protected function updateSitePermission(Site $site)
     {
         //删除无效的权限，即模块permissions.php已经移除的权限
-        app(PermissionService::class)->delInvalidSitePermission($site);
+        PermissionService::delInvalidSitePermission($site);
         //同步模块权限到站点
-        app(PermissionService::class)->saveSiteModulePermissions($site);
+        PermissionService::saveSiteModulePermissions($site);
     }
 }

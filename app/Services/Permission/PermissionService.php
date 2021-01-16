@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use UserService;
+use ModuleService;
 
 /**
  * 权限管理服务
@@ -36,7 +37,7 @@ class PermissionService
         if (UserService::isSuperAdmin($user) || UserService::isMaster($user, $site)) {
             return true;
         }
-        return user()->can($this->permissionName($permission, $site, $module['name']));
+        return $user->can($this->permissionName($permission, $site, $module['name']));
     }
 
     /**
@@ -74,7 +75,7 @@ class PermissionService
      */
     public function getSitePermissionList(Site $site): Collection
     {
-        $modules = app(ModuleService::class)->getSiteModules($site);
+        $modules = ModuleService::getSiteModules($site);
 
         return collect($modules)->reduce(function ($collect, $module) use ($site) {
             foreach ($module['permissions'] as $permission) {

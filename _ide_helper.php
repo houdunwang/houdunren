@@ -14743,8 +14743,9 @@
 
     namespace App\Services\Module { 
             /**
-     * 
+     * 模块Facade
      *
+     * @package App\Services\Module
      */ 
         class ModuleFacade {
                     /**
@@ -14774,19 +14775,19 @@
                     /**
          * 所有已经安装的模块
          *
-         * @return void 
+         * @return \App\Services\Module\Collection|null 
          * @static 
          */ 
         public static function allInstalled()
         {
                         /** @var \App\Services\Module\ModuleService $instance */
-                        $instance->allInstalled();
+                        return $instance->allInstalled();
         }
                     /**
          * 获取站点所有模块
          *
          * @param \App\Services\Module\Site $site
-         * @return mixed 
+         * @return \App\Services\Module\Collection 
          * @static 
          */ 
         public static function getSiteModules($site)
@@ -14798,8 +14799,7 @@
          * 获取当前用户可使用的所有模块
          *
          * @param \App\Services\Module\Site $site
-         * @return mixed 
-         * @throws BindingResolutionException
+         * @return \App\Services\Module\Collection 
          * @static 
          */ 
         public static function getSiteModulesByPermission($site)
@@ -14810,7 +14810,7 @@
                     /**
          * 根据模块标识获取模块
          *
-         * @param string $name 模块标识
+         * @param string $name
          * @return array 
          * @static 
          */ 
@@ -14987,7 +14987,7 @@
                     /**
          * 根据域名获取站点
          *
-         * @return string|null 
+         * @return \App\Services\Site\Site|null 
          * @static 
          */ 
         public static function getByDomain()
@@ -15195,6 +15195,20 @@
         {
                         /** @var \App\Services\User\UserService $instance */
                         return $instance->isMaster($user, $site);
+        }
+                    /**
+         * 是否为站点管理员
+         * 如果管理员没有配置权限将无法管理站点
+         *
+         * @param \App\Services\User\User $user
+         * @param \App\Services\User\Site $site
+         * @return boolean 
+         * @static 
+         */ 
+        public static function isAdmin($user = null, $site = null)
+        {
+                        /** @var \App\Services\User\UserService $instance */
+                        return $instance->isAdmin($user, $site);
         }
          
     }
@@ -20192,7 +20206,7 @@ namespace  {
             class ModuleService extends \App\Services\Module\ModuleFacade {}
             class PayService extends \App\Services\Pay\PayFacade {}
             class PermissionService extends \App\Services\Permission\PermissionFacade {}
-            class SiteServiceService extends \App\Services\Site\SiteFacade {}
+            class SiteService extends \App\Services\Site\SiteFacade {}
             class SmsService extends \App\Services\Sms\SmsFacade {}
             class TempalteService extends \App\Services\Template\TemplateFacade {}
             class UploadService extends \App\Services\Upload\UploadFacade {}

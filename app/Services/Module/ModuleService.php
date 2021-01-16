@@ -88,7 +88,7 @@ class ModuleService
     /**
      * 根据模块标识获取模块
      *
-     * @param string $name
+     * @param string $name 模块标识
      * @return array
      */
     public function find(string $name): array
@@ -105,7 +105,7 @@ class ModuleService
             'id' => $model['id'] ?? null,
             'name' => $name,
             'preview' => "/modules/{$name}/static/preview.jpg",
-            'menus' => MenuService::menus($name),
+            'menus' => $this->config($name, 'menus'),
             'installed' => (bool) $model,
             'model' => $model,
             'permissions' => $this->config($name, 'permissions')

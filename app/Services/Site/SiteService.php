@@ -12,9 +12,9 @@ class SiteService
     /**
      * 根据域名获取站点
      *
-     * @return string|null
+     * @return Site|null
      */
-    public function getByDomain(): ?string
+    public function getByDomain(): ?Site
     {
         $info = parse_url(request()->url());
         return Site::where('domain', 'regexp', 'https?:\/\/' . $info['host'])->firstOrFail();

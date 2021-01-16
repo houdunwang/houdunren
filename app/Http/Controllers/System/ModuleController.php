@@ -4,14 +4,9 @@ namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use App\Models\Module;
-use App\Services\ModuleService;
-use Illuminate\Http\JsonResponse;
-use Exception;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Nwidart\Modules\Collection;
-use Illuminate\Support\Facades\Storage;
+use File;
+use ModuleService;
 
 /**
  * 模块管理
@@ -21,47 +16,44 @@ class ModuleController extends Controller
 {
     /**
      * 所有模块列表
-     * @param ModuleService $moduleService
      * @return void
      */
-    public function index(ModuleService $moduleService)
+    public function index()
     {
-        $modules = $moduleService->all();
+        $modules = ModuleService::all();
         return inertia('System/Module/Index', compact('modules'));
     }
 
     /**
      * 获取所有已经安装模块
-     * @param ModuleService $moduleService
-     * @return Collection
+     *
+     * @return void
      */
-    public function installed(ModuleService $moduleService)
+    public function installed()
     {
-        $modules = $moduleService->allInstalled();
+        $modules = ModuleService::allInstalled();
         return inertia("System/Module/Index", compact('modules'));
     }
 
     /**
      * 安装模块
      *
-     * @param [type] $name
+     * @param string $name
      * @param Module $model
-     * @param ModuleService $moduleService
      * @return void
      */
-    public function install(string $name, Module $model, ModuleService $moduleService)
+    public function install(string $name, Module $model)
     {
-        $model->create($moduleService->find($name));
+        $model->create(ModuleService::find($name));
 
         return back()->with('success', '模块安装成功');
     }
 
     /**
      * 卸载模块
+     *
      * @param Module $module
-     * @return JsonResponse
-     * @throws Exception
-     * @throws BindingResolutionException
+     * @return void
      */
     public function uninstall(Module $module)
     {

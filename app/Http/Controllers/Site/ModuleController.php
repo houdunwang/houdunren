@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Site;
-use App\Models\Module;
 use Inertia\Inertia;
 use SiteService;
 use ModuleService;
@@ -38,10 +37,8 @@ class ModuleController extends Controller
      */
     public function admin(Site $site, string $module)
     {
-        $d = SiteService::show();
-        // dd($d);
-        // site($site);
-        // module($module);
-        // return Inertia::location(url($module . '/admin'));
+        SiteService::site($site);
+        ModuleService::module($module);
+        return Inertia::location(url($module . '/admin'));
     }
 }
