@@ -34,6 +34,7 @@
         "moment": "^2.29.1",
         "postcss-css-variables": "^0.17.0",
         "sass": "^1.32.2",
-        "sass-loader": "^10.1.0"
+        "sass-loader": "^10.1.0",
+        "vuedraggable": "^2.24.3"
     }
 }

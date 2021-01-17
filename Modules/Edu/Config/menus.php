@@ -6,7 +6,7 @@ return [
         'show' => true,
         'items' => [
             ['title' => '模块配置', 'permission' => 'config', 'route' => route('Edu.admin.config.edit')],
-            ['title' => '内容标签管理', 'permission' => 'tag', 'route' => route('Edu.admin.tag.edit')],
+            ['title' => '内容标签', 'permission' => 'tag', 'route' => route('Edu.admin.tag.edit')],
         ],
     ],
     [

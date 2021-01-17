@@ -5,8 +5,8 @@ namespace App\Services\Upload;
 use Auth;
 use Illuminate\Http\UploadedFile;
 use OSS\OssClient;
-use OSS\Core\OssException;
 use App\Models\Attachment;
+use Illuminate\Support\Collection;
 
 /**
  * 文件上传
@@ -30,19 +30,14 @@ class UploadService
      * 云上传
      *
      * @param UploadedFile $file
-     * @return void
+     * @return Attachment
      */
-    public function make(UploadedFile $file)
+    public function make(UploadedFile $file): Attachment
     {
-        $object = user('id') . '-' . date('Ymdhis') . '.' . $file->extension();
-        try {
-            $ossClient = new OssClient(config('site.aliyun.accessKeyId'), config('site.aliyun.accessKeySecret'), config('site.aliyun.oss.endpoint'));
-
-            $info = $ossClient->uploadFile(config('site.aliyun.oss.bucket'), $object, $file->path());
-            return $this->save($file, $info['oss-request-url']);
-        } catch (OssException $e) {
-            abort(400, 'OSS 配置错误');
-        }
+        $object = Auth::id() . '-' . date('Ymdhis') . '.' . $file->extension();
+        $ossClient = new OssClient(config('site.aliyun.accessKeyId'), config('site.aliyun.accessKeySecret'), config('site.aliyun.oss.endpoint'));
+        $info = $ossClient->uploadFile(config('site.aliyun.oss.bucket'), $object, $file->path());
+        return $this->save($file, $info['oss-request-url']);
     }
 
     /**
@@ -50,9 +45,9 @@ class UploadService
      *
      * @param UploadedFile $file
      * @param string $path
-     * @return void
+     * @return Attachment
      */
-    protected function save(UploadedFile $file, string $path)
+    protected function save(UploadedFile $file, string $path): Attachment
     {
         return Attachment::create([
             'path' => $path,

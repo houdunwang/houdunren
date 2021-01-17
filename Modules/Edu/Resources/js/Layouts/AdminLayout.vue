@@ -46,7 +46,13 @@
                         <i :class="menu.icon"></i>
                         <span>{{ menu.title }}</span>
                     </a>
-                    <div :id="`collapseTwo${index}`" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div
+                        :id="`collapseTwo${index}`"
+                        class="collapse"
+                        :class="{ show: isShow(menu) }"
+                        aria-labelledby="headingTwo"
+                        data-parent="#accordionSidebar"
+                    >
                         <div class="bg-white py-2 collapse-inner rounded">
                             <inertia-link class="collapse-item" :href="item.route" v-for="(item, n) in menu.items" :key="n">
                                 {{ item.title }}
@@ -213,7 +219,15 @@
 </template>
 
 <script>
-export default {}
+export default {
+    methods: {
+        isShow(menu) {
+            return menu.items.some(item => {
+                return location.href == item.route
+            })
+        }
+    }
+}
 </script>
 
 <style></style>

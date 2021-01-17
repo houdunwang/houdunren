@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Auth;
 
 /**
  * 基础模型
@@ -23,7 +24,7 @@ abstract class BaseModel extends Model
 
     public function scopeByUser($query, $user_id = null)
     {
-        return $query->where('user_id', $user_id ?? user()['id']);
+        return $query->where('user_id', $user_id ?? Auth::id());
     }
 
     /**

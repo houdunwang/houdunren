@@ -14,6 +14,9 @@ class SiteMiddleware
 {
     public function handle($request, Closure $next)
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
         if (!$this->checkAccess()) {
             return back()->with('message', '你没有操作权限');
         }

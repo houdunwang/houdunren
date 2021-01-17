@@ -22,6 +22,10 @@ class AdminMiddleware
 
     public function handle($request, Closure $next)
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
         if ($this->verify() === false) {
             return redirect()->route('admin')->with('message', $this->error);
         }

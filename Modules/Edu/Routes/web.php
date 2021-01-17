@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'Edu/admin', 'middleware' => ['auth', 'admin'], 'namespace' => 'Admin', 'as' => 'Edu.admin.'], function () {
+Route::group(['prefix' => 'Edu/admin', 'middleware' => ['admin'], 'namespace' => 'Admin', 'as' => 'Edu.admin.'], function () {
     Route::get('/', 'HomeController@index')->name('index');
     //模块配置
     Route::get('config/edit', 'ConfigController@edit')->name('config.edit');

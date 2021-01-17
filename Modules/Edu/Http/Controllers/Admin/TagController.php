@@ -5,6 +5,7 @@ namespace Modules\Edu\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Edu\Entities\Tag;
+use SiteService;
 
 /**
  * 标签管理
@@ -12,25 +13,31 @@ use Modules\Edu\Entities\Tag;
  */
 class TagController extends Controller
 {
-  public function edit()
-  {
-    $tags = Tag::all();
-    return view('edu::admin.tag.edit', compact('tags'));
-  }
-
-  public function update(Request $request)
-  {
-    Tag::whereNotIn('id', $request->ids)->delete();
-
-    foreach ($request->input('tags') as $index => $title) {
-      if ($title && !Tag::where('title', $title)->exists()) {
-        Tag::updateOrCreate(['id' => $request->ids[$index]], [
-          'title' => $title,
-          'site_id' => site()['id'],
-          'id' => $request->ids[$index]
-        ]);
-      }
+    /**
+     * 标签视图
+     *
+     * @return void
+     */
+    public function edit()
+    {
+        $tags = Tag::all();
+        return inertia('Admin/Tag/Form', compact('tags'));
     }
-    return back()->with('success', '标签保存成功');
-  }
+
+    /**
+     * 保存标签
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function update(Request $request)
+    {
+        Tag::deleteBySite(site());
+        collect($request->input('tags'))->filter(function ($tag) {
+            return trim($tag['title']) != '';
+        })->map(function ($tag) {
+            Tag::updateOrCreate(['id' => $tag['id'] ?? 0], $tag + ['site_id' => SiteService::site()['id']]);
+        });
+        return back()->with('success', '标签保存成功');
+    }
 }
