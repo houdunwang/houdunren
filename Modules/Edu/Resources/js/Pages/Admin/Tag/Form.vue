@@ -5,9 +5,15 @@
                 <div slot="header">
                     标签设置
                 </div>
-
                 <div>
-                    <el-tag :key="index" v-for="(tag, index) in form.tags" closable :disable-transitions="false" @close="delTag(tag)" class="mr-1">
+                    <el-tag
+                        :key="index"
+                        v-for="(tag, index) in form.tags"
+                        closable
+                        :disable-transitions="false"
+                        @close="delTag(tag)"
+                        class="mr-1 mb-2 inline-block"
+                    >
                         {{ tag.title }}
                     </el-tag>
                     <el-input
@@ -16,14 +22,12 @@
                         v-model="inputValue"
                         ref="saveTagInput"
                         size="small"
-                        @keyup.enter.native="handleInputConfirm"
-                        @blur="handleInputConfirm"
+                        @keyup.enter.native="onSubmit"
+                        @blur="onSubmit"
                     >
                     </el-input>
                     <el-button v-else class="button-new-tag" size="small" @click.prevent="showInput">+ 添加标签</el-button>
                 </div>
-
-                <el-button type="primary" @click="onSubmit" class="mt-3 block">保存提交</el-button>
             </el-card>
         </el-form>
     </hd-layout>
@@ -46,6 +50,7 @@ export default {
     methods: {
         delTag(tag) {
             this.form.tags.splice(this.form.tags.indexOf(tag), 1)
+            this.form.put(route('Edu.admin.tag.update'))
         },
         showInput() {
             this.inputVisible = true
@@ -53,18 +58,13 @@ export default {
                 this.$refs.saveTagInput.$refs.input.focus()
             })
         },
-        handleInputConfirm() {
+        onSubmit() {
             let inputValue = this.inputValue
             if (inputValue) {
                 this.form.tags.push({ title: inputValue })
             }
             this.inputVisible = false
             this.inputValue = ''
-        },
-        addTag() {
-            this.form.tags.push({ title: '' })
-        },
-        onSubmit() {
             this.form.put(route('Edu.admin.tag.update'))
         }
     }

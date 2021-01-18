@@ -11,7 +11,7 @@ use App\Http\Controllers\System\GroupController;
 use App\Http\Controllers\System\MyController;
 
 //系统核心功能
-Route::group(['prefix' => 'system', 'middleware' => ['auth', 'system'], 'as' => 'system.'], function () {
+Route::group(['prefix' => 'system', 'middleware' => ['system'], 'as' => 'system.'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     //模块管理
     Route::get('module', [ModuleController::class, 'index'])->name('module.index');
@@ -28,7 +28,7 @@ Route::group(['prefix' => 'system', 'middleware' => ['auth', 'system'], 'as' => 
     Route::resource('package',  PackageController::class)->except(['show']);
     Route::resource('group',  GroupController::class);
     //修改个人资料
-    Route::get('my/edit', [MyController::class, 'edit'])->name('my.edit');
+    Route::get('my', [MyController::class, 'edit'])->name('my.edit');
     Route::put('my/update', [MyController::class, 'update'])->name('my.update');
     //系统配置修改
     Route::get('config/edit', [ConfigController::class, 'edit'])->name('config.edit');

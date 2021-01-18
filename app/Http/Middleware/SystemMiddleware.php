@@ -3,11 +3,12 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use UserService;
 
 /**
  * 系统中间件
+ * @package App\Http\Middleware
  */
 class SystemMiddleware
 {
@@ -16,8 +17,7 @@ class SystemMiddleware
         if (!Auth::check()) {
             return redirect()->route('login');
         }
-
-        if (Auth::check() && UserService::isSuperAdmin()) {
+        if (!UserService::isSuperAdmin()) {
             return back()->with('message', '你没有操作权限');
         }
 
