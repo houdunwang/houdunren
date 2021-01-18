@@ -14,41 +14,78 @@ use Modules\Edu\Http\Requests\SubscribeRequest;
  */
 class SubscribeController extends Controller
 {
-  public function index()
-  {
-    $subscribes = Subscribe::all();
-    return view('edu::admin.subscribe.index', compact('subscribes'));
-  }
+    /**
+     * 会员套餐列表
+     *
+     * @return void
+     */
+    public function index()
+    {
+        $subscribes = Subscribe::all();
+        return inertia('Admin/Subscribe/Index', compact('subscribes'));
+    }
 
-  public function create(Subscribe $subscribe)
-  {
-    return view('edu::admin.subscribe.create', compact('subscribe'));
-  }
+    /**
+     * 添加界面
+     *
+     * @return void
+     */
+    public function create()
+    {
+        return inertia('Admin/Subscribe/Form');
+    }
 
-  public function store(SubscribeRequest $request, Subscribe $subscribe)
-  {
-    $subscribe->fill($request->input());
-    $subscribe['site_id'] = site()['id'];
-    $subscribe->save();
+    /**
+     * 保存套餐
+     *
+     * @param SubscribeRequest $request
+     * @param Subscribe $subscribe
+     * @return void
+     */
+    public function store(SubscribeRequest $request, Subscribe $subscribe)
+    {
+        $subscribe->fill($request->input() + [
+            'site_id' => site()['id']
+        ])->save();
 
-    return redirect()->route('Edu.admin.subscribe.index')->with('success', '套餐保存成功');
-  }
+        return redirect()->route('Edu.admin.subscribe.index')->with('success', '套餐保存成功');
+    }
 
-  public function edit(Request $request, Subscribe $subscribe)
-  {
-    return view('edu::admin.subscribe.edit', compact('subscribe'));
-  }
+    /**
+     * 编辑界面
+     *
+     * @param Request $request
+     * @param Subscribe $subscribe
+     * @return void
+     */
+    public function edit(Request $request, Subscribe $subscribe)
+    {
+        return inertia('Admin/Subscribe/Form', compact('subscribe'));
+    }
 
-  public function update(SubscribeRequest $request, Subscribe $subscribe)
-  {
-    $subscribe->fill($request->input());
-    $subscribe->save();
-    return redirect()->route('Edu.admin.subscribe.index')->with('success', '套餐保存成功');
-  }
+    /**
+     * 更新套餐
+     *
+     * @param SubscribeRequest $request
+     * @param Subscribe $subscribe
+     * @return void
+     */
+    public function update(SubscribeRequest $request, Subscribe $subscribe)
+    {
+        $subscribe->fill($request->input());
+        $subscribe->save();
+        return redirect()->route('Edu.admin.subscribe.index')->with('success', '套餐保存成功');
+    }
 
-  public function destroy(Subscribe $subscribe)
-  {
-    $subscribe->delete();
-    return response()->json(['message' => '套餐删除成功']);
-  }
+    /**
+     * 删除数据
+     *
+     * @param Subscribe $subscribe
+     * @return void
+     */
+    public function destroy(Subscribe $subscribe)
+    {
+        $subscribe->delete();
+        return back()->with('message', '套餐删除成功');
+    }
 }

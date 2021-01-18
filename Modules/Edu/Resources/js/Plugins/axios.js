@@ -3,9 +3,13 @@ import Vue from 'vue'
 import el from 'element-ui'
 import httpStatus from '../Util/httpStatus'
 
+axios.defaults.withCredentials = true
+
 const config = { baseURL: '/', timeout: 5000 }
 const _axios = axios.create(config)
+
 window.axios = Vue.axios = Vue.prototype.axios = _axios
+
 //请求拦截
 _axios.interceptors.request.use(
     function(config) {
@@ -26,25 +30,19 @@ _axios.interceptors.response.use(
                 type: 'success'
             })
         }
-        return response
+        return response.data
     },
     //错误消息拦截
     function(error) {
-        let {
-            status,
-            data: { message, errors }
-        } = error.response
-        switch (status) {
-            case 422:
-                //表单验证
-                message = errors.reduce((content, error) => error, '')
-                break
-        }
-        el.MessageBox.confirm(message || httpStatus(status), '温馨提示', {
-            showCancelButton: false,
-            confirmButtonText: '关闭',
-            type: 'warning'
-        })
+        let { status, data } = error.response
+
+        // if (![422].some(s => s == status)) {
+        //     el.MessageBox.confirm(message || httpStatus(status), '温馨提示', {
+        //         showCancelButton: false,
+        //         confirmButtonText: '关闭',
+        //         type: 'warning'
+        //     })
+        // }
         return Promise.reject(error)
     }
 )

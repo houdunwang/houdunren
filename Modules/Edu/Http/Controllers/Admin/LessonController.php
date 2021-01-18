@@ -133,11 +133,9 @@ class LessonController extends Controller
      */
     public function search(Request $request)
     {
-        if ($title = $request->title) {
-            $lessons = Lesson::where('title', 'like', "%{$title}%")->paginate();
-        } else {
-            $lessons = Lesson::paginate();
-        }
+        $lessons = Lesson::when($request->keyword, function ($query, $keyword) use ($request) {
+            return $query->where('title', 'like', "%{$keyword}%");
+        })->limit(10)->get();
         return $lessons;
     }
 }

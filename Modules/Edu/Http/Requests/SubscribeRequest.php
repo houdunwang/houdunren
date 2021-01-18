@@ -5,28 +5,29 @@ namespace Modules\Edu\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ * 套餐验证
+ * @package Modules\Edu\Http\Requests
+ */
 class SubscribeRequest extends FormRequest
 {
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            'title' => ['required', Rule::unique('edu_subscribe')->ignore(request()->subscribe)],
-            'month' => ['required', Rule::unique('edu_subscribe')->ignore(request()->subscribe)],
+            'title' => ['required', Rule::unique('edu_subscribe')->where(function ($query) {
+                return $query->where('site_id', site()['id'])->when(request()->subscribe, function ($query, $subscribe) {
+                    return $query->whereNotIn('id', [$subscribe['id']])->where('title', $subscribe['title']);
+                });
+            })],
+            'month' => ['required', 'between:1,250', 'numeric'],
+            'ad' => ['required'],
+            'icon' => ['required'],
+            'price' => ['required', 'numeric'],
         ];
     }
 
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    public function attributes()
     {
-        return true;
+        return ['title' => '套餐名称', 'month' => '订阅月数', 'ad' => '广告语', 'icon' => '图标', 'description' => '套餐介绍', 'price' => '套餐价格'];
     }
 }

@@ -8,11 +8,12 @@ Route::group(['prefix' => 'Edu/admin', 'middleware' => ['admin'], 'namespace' =>
     //标签
     Route::get('tag/edit', 'TagController@edit')->name('tag.edit');
     Route::put('tag/update', 'TagController@update')->name('tag.update');
-
-    Route::post('search/lesson', 'LessonController@search')->name('lesson.search');
+    //课程
     Route::resource('lesson', 'LessonController');
+    Route::post('search/lesson', 'LessonController@search')->name('lesson.search');
+    //系统课程
     Route::resource('system', 'SystemController');
-
+    //会员订阅套餐
     Route::resource('subscribe', 'SubscribeController');
 });
 
