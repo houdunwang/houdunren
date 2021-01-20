@@ -5558,9 +5558,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var menus = [{
+  title: '资料修改',
+  route: ''
+}, {
+  title: '基本信息',
+  route: ''
+}, {
+  title: '密码修改',
+  route: ''
+}, {
+  title: '邮箱修改',
+  route: ''
+}, {
+  title: '手机验证',
+  route: ''
+}, {
+  title: '修改头像',
+  route: ''
+}];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {};
+    return {
+      menus: menus
+    };
   },
   mounted: function mounted() {}
 });
@@ -110339,31 +110388,136 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "text-sm text-gray-800" }, [
+    _c("div", { staticClass: "border-b-4 border-dark-green shadow-sm py-4" }, [
+      _c("div", { staticClass: "w-1280 m-auto flex justify-between" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex items-center justify-center" }, [
+          _c("img", {
+            staticClass: "w-6 h-6 object-cover rounded-sm mr-1",
+            attrs: { src: _vm.$page.props.user.icon }
+          }),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "" } }, [_vm._v("退出")])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "w-1280 m-auto mt-3 flex" }, [
+      _c("div", { staticClass: "w-2/12" }, [
+        _c(
+          "div",
+          { staticClass: "icon object-cover border border-gray-300 shadow-sm" },
+          [
+            _c("img", {
+              staticClass: "object-cover w-full",
+              attrs: { src: _vm.$page.props.user.icon }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "text-gray-700 font-bold border-b border-gray-200 py-3 mx-3"
+              },
+              [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.$page.props.user.name) +
+                    "\n                "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _vm._m(1)
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "mt-3 border border-gray-200 shadow-sm" },
+          _vm._l(_vm.menus, function(menu, index) {
+            return _c(
+              "div",
+              {
+                key: index,
+                staticClass:
+                  "border-b border-gray-200 py-3 cursor-pointer pl-3 hover:bg-gray-100"
+              },
+              [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(menu.title) +
+                    "\n                "
+                )
+              ]
+            )
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "ml-2 w-10/12" },
+        [_c("hd-message"), _vm._v(" "), _vm._t("default")],
+        2
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "border-b-4 border-hd shadow-sm py-3" }, [
-        _c("div", { staticClass: "w-hd m-auto flex justify-between" }, [
-          _c("nav", [
-            _c("a", { attrs: { href: "" } }, [
-              _c("i", { staticClass: "fas fa-home text-gray-600" }),
-              _vm._v(" 首页 ")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex items-center justify-center" }, [
-            _c("img", { attrs: { src: "" } }),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "" } }, [_vm._v("退出")])
-          ])
-        ])
+    return _c("nav", [
+      _c("a", { attrs: { href: "" } }, [
+        _c("i", { staticClass: "fas fa-home text-gray-600" }),
+        _vm._v(" 首页 ")
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "mt-3 text-gray-500 px-4 flex justify-between pb-3" },
+      [
+        _c("i", {
+          staticClass: "fa fa-envelope text-info",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" "),
+        _c("i", {
+          staticClass: "fas fa-phone-square ",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" "),
+        _c("i", {
+          staticClass: "fab fa-weibo text-info",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" "),
+        _c("i", {
+          staticClass: "fab fa-weixin text-info",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" "),
+        _c("i", {
+          staticClass: "fab fa-github text-info",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" "),
+        _c("i", {
+          staticClass: "fab fa-qq text-info",
+          attrs: { "aria-hidden": "true" }
+        })
+      ]
+    )
   }
 ]
 render._withStripped = true

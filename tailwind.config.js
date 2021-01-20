@@ -9,10 +9,10 @@ module.exports = {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans]
             },
             colors: {
-                hd: '#3aa5a2'
+                'dark-green': '#3aa5a2'
             },
             width: {
-                hd: '1280px'
+                '1280': '1280px'
             }
         }
     },

@@ -14,11 +14,8 @@ class SiteMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
         if (!$this->checkAccess()) {
-            return back()->with('message', '你没有操作权限');
+            return redirect()->route('site.site.index')->with('message', '你没有操作权限');
         }
         config(['admin' => Config::find(1)->config]);
         return $next($request);
@@ -27,10 +24,12 @@ class SiteMiddleware
     /**
      * 站点权限检测
      *
-     * @return void
+     * @return boolean
      */
-    protected function checkAccess()
+    protected function checkAccess(): bool
     {
+        if (!Auth::check()) return false;
+
         $site = request()->site;
         return $site ? $this->isMaster($site) : true;
     }
@@ -40,7 +39,7 @@ class SiteMiddleware
      *
      * @return boolean
      */
-    protected function isMaster($site)
+    protected function isMaster($site): bool
     {
         return Auth::user()->isSuperAdmin || $site->master->id == Auth::id();
     }
