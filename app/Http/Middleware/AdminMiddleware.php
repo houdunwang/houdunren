@@ -2,11 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Site;
 use Closure;
 use Inertia\Inertia;
 use UserService;
 use ConfigService;
 use ModuleService;
+use SiteService;
 use PermissionService;
 use Auth;
 use MenuService;
@@ -22,15 +24,10 @@ class AdminMiddleware
 
     public function handle($request, Closure $next)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
-
-        if ($this->verify() === false) {
+        if ($this->init() && $this->verify() === false) {
             return redirect()->route('admin')->with('message', $this->error);
         }
 
-        $this->loadConfig();
         $this->inertia();
         return $next($request);
     }
@@ -68,13 +65,20 @@ class AdminMiddleware
     }
 
     /**
-     * 加载配置
+     * 初始化站点与模块
      *
-     * @return void
+     * @return boolean|null
      */
-    protected function loadConfig()
+    protected function init(): ?bool
     {
-        ConfigService::site();
-        ConfigService::module();
+        if (session('site_id') && session("module_name")) {
+            SiteService::site(Site::find(session('site_id')));
+            ModuleService::module(session('module_name'));
+
+            //加载配置
+            ConfigService::site();
+            ConfigService::module();
+            return true;
+        }
     }
 }

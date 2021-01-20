@@ -4,22 +4,6 @@ use App\Models\Site;
 use Facades\App\Services\Site\SiteService;
 use Facades\App\Services\Module\ModuleService;
 
-if (!function_exists('user')) {
-    /**
-     * 获取用户资料
-     *
-     * @param mixed $key
-     * @return mixed
-     */
-    // function user(mixed $key = null): mixed
-    // {
-    //     if (Auth::check()) {
-    //         if ($key) return Auth::user()[$key] ?? null;
-    //         return Auth::user();
-    //     }
-    // }
-}
-
 if (!function_exists('site')) {
     /**
      * 当前站点数据

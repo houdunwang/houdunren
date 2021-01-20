@@ -42,7 +42,7 @@ class LoginController extends Controller
         $request->validate([
             'account' => [new AccountRule(request('account'))],
             'password' => ['required'],
-            // 'captcha' => ['required', 'captcha']
+            'captcha' => ['required', 'captcha']
         ], ['password.required' => '密码不能为空', 'captcha.required' => '验证码不能为空', 'captcha.captcha' => '验证码输入错误']);
 
         $isLogin = Auth::attempt([

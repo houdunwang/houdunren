@@ -1,5 +1,4 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
-
 module.exports = {
     important: true,
     purge: ['./vendor/laravel/jetstream/**/*.blade.php', './storage/framework/views/*.php', './resources/views/**/*.blade.php', './resources/js/**/*.vue'],
@@ -8,6 +7,12 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans]
+            },
+            colors: {
+                hd: '#3aa5a2'
+            },
+            width: {
+                hd: '1280px'
             }
         }
     },

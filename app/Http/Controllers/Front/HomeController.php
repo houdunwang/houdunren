@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
+use ModuleService;
 
 /**
  * 模块前台主页入口
@@ -20,8 +21,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        dd(module());
         if (module()) {
-            module(site()->module['name']);
+            dd(site()->toArray());
             $class = 'Modules\\' . site()->module['name'] . '\Http\Controllers\Front\HomeController';
             return app($class)->index($request);
         }

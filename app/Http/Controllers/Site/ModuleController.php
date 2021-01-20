@@ -37,8 +37,9 @@ class ModuleController extends Controller
      */
     public function admin(Site $site, string $module)
     {
-        SiteService::site($site);
-        ModuleService::module($module);
+        session(['site_id' => $site['id']]);
+        session(['module_name' => $module]);
+
         return Inertia::location(url($module . '/admin'));
     }
 }

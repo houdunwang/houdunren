@@ -29,15 +29,14 @@ class SiteService
     public function site(?Site $site = null): ?Site
     {
         static $cache = null;
-
-        if ($cache) return $cache;
-
-        if ($site) {
-            session(['site_id' => $site['id']]);
-        }
-        if ($id = session('site_id')) {
-            $cache = Site::find($id);
-        };
+        if (is_null($site)) return $cache;
+        $cache = $site;
+        // if ($site) {
+        //     session(['site_id' => $site['id']]);
+        // }
+        // if ($id = session('site_id')) {
+        //     $cache = Site::find($id);
+        // };
         return $cache;
     }
 }

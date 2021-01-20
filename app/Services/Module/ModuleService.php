@@ -18,19 +18,20 @@ class ModuleService
     /**
      * 缓存或读取当前模块数据
      *
-     * @param string $name
+     * @param array $module
      * @return array|null
      */
-    public function module(string $name = null): ?array
+    public function module(string $module = null): ?array
     {
         static $cache = null;
-        if ($cache) return $cache;
-        if ($name) {
-            session(['module_name' => $name]);
-        }
-        if ($name = session('module_name')) {
-            $cache = app(ModuleService::class)->find($name);
-        }
+        if (is_null($module)) return $cache;
+        $cache = $this->find($module);
+        // if ($name) {
+        //     session(['module_name' => $name]);
+        // }
+        // if ($name = session('module_name')) {
+        //     $cache = app(ModuleService::class)->find($name);
+        // }
         return $cache;
     }
 

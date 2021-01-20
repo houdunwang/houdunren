@@ -13,7 +13,13 @@ Vue.use(PortalVue)
 import { InertiaProgress } from '@inertiajs/progress'
 InertiaProgress.init()
 
-import Layout from '@/Layouts/AppLayout'
+import Admin from '@/Layouts/AdminLayout'
+import Member from '@/Layouts/MemberLayout'
+
+const url = new URL(location.href)
+
+const Layout = /^\/member/i.test(url.pathname) ? Member : Admin
+
 const app = document.getElementById('app')
 
 new Vue({

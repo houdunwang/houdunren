@@ -10,12 +10,12 @@ use App\Http\Controllers\Site\RoleController;
 use App\Http\Controllers\Site\SiteController;
 
 //站点管理
-Route::group(['prefix' => 'site', 'as' => 'site.', 'middleware' => ['auth', 'site']], function () {
-    Route::resource('site', SiteController::class)->middleware(['auth', 'site']);
+Route::group(['prefix' => 'site', 'as' => 'site.', 'middleware' => ['site']], function () {
+    Route::resource('site', SiteController::class);
 });
 
 //其他站点相关业务
-Route::group(['prefix' => 'site/{site}', 'as' => 'site.', 'middleware' => ['auth', 'site']], function () {
+Route::group(['prefix' => 'site/{site}', 'as' => 'site.', 'middleware' => ['site']], function () {
     //站点配置
     Route::get('config', [ConfigController::class, 'edit'])->name('config.edit');
     Route::put('config', [ConfigController::class, 'update'])->name('config.update');

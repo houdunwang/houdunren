@@ -6,10 +6,11 @@ use App\Http\Controllers\Member\BaseController;
 use App\Http\Controllers\Member\EmailController;
 use App\Http\Controllers\Member\MobileController;
 use App\Http\Controllers\Member\PasswordController;
+use App\Http\Controllers\Member\HomeController;
 
 //会员中心
 Route::group(['prefix' => 'member',  'as' => 'member.', 'middleware' => ['auth', 'front']], function () {
-    Route::get('/', [BaseController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::resource('base', BaseController::class)->only(['index', 'store']);
     Route::resource('password',  PasswordController::class)->only(['index', 'store']);
     Route::resource('avatar',  AvatarController::class)->only(['index', 'store']);
