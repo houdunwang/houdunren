@@ -14,6 +14,10 @@ class SiteMiddleware
 {
     public function handle($request, Closure $next)
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
         if (!$this->checkAccess()) {
             return redirect()->route('site.site.index')->with('message', '你没有操作权限');
         }
@@ -28,7 +32,7 @@ class SiteMiddleware
      */
     protected function checkAccess(): bool
     {
-        if (!Auth::check()) return false;
+
 
         $site = request()->site;
         return $site ? $this->isMaster($site) : true;

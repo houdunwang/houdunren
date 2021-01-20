@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\ConfigController;
-use App\Http\Controllers\Module\MenuController;
+// use App\Http\Controllers\Module\MenuController;
 use App\Http\Controllers\Site\AdminController;
 use App\Http\Controllers\Site\ModuleController;
 use App\Http\Controllers\Site\PermissionController;
@@ -35,7 +35,7 @@ Route::group(['prefix' => 'site/{site}', 'as' => 'site.', 'middleware' => ['site
     Route::get('module', [ModuleController::class, 'index'])->name('module.index');
     Route::get('module/admin/{module}', [ModuleController::class, 'admin'])->name('module.admin');
     //站点通用菜单供前台模块使用
-    Route::get('menu', [MenuController::class, 'index'])->name('menu.index');
-    Route::get('menu/get', [MenuController::class, 'get'])->name('menu.get');
-    Route::post('menu', [MenuController::class, 'store'])->name('menu.store');
+    // Route::get('menu', [MenuController::class, 'index'])->name('menu.index');
+    // Route::get('menu/get', [MenuController::class, 'get'])->name('menu.get');
+    // Route::post('menu', [MenuController::class, 'store'])->name('menu.store');
 });

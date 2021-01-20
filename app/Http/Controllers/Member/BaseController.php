@@ -12,6 +12,10 @@ use Auth;
  */
 class BaseController extends Controller
 {
+    public function index()
+    {
+        return inertia('Member/Base/Form');
+    }
     /**
      * 修改基本资料
      *

@@ -10,8 +10,8 @@ use App\Http\Controllers\Member\HomeController;
 
 //会员中心
 Route::group(['prefix' => 'member',  'as' => 'member.', 'middleware' => ['auth', 'front']], function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
-    Route::resource('base', BaseController::class)->only(['index', 'store']);
+    // Route::get('/', [HomeController::class, 'Base'])->name('home');
+    Route::resource('/', BaseController::class)->only(['index', 'store']);
     Route::resource('password',  PasswordController::class)->only(['index', 'store']);
     Route::resource('avatar',  AvatarController::class)->only(['index', 'store']);
     Route::post('avatar/upload', [AvatarController::class, 'upload'])->name('avatar.upload');

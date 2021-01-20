@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\WeChat;
+namespace App\Api\WeChat;
 
 use App\Http\Controllers\Controller;
 use Houdunwang\WeChat\Message;

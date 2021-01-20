@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\WeChat\ProcessorController;
+use App\Api\WeChat\ProcessorController;
 use App\Http\Controllers\WeChat\WeChatController;
 use App\Http\Controllers\WeChat\DefaultController;
 use App\Http\Controllers\WeChat\MenuController;
