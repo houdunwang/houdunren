@@ -21,9 +21,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        dd(module());
         if (module()) {
-            dd(site()->toArray());
             $class = 'Modules\\' . site()->module['name'] . '\Http\Controllers\Front\HomeController';
             return app($class)->index($request);
         }

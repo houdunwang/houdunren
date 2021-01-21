@@ -1,8 +1,7 @@
 import axios from 'axios'
 import Vue from 'vue'
 import el from 'element-ui'
-import httpStatus from '../Util/httpStatus'
-
+import store from '@/store'
 axios.defaults.withCredentials = true
 
 const config = { baseURL: '/', timeout: 5000 }
@@ -36,13 +35,17 @@ _axios.interceptors.response.use(
     function(error) {
         let { status, data } = error.response
 
-        // if (![422].some(s => s == status)) {
-        //     el.MessageBox.confirm(message || httpStatus(status), '温馨提示', {
-        //         showCancelButton: false,
-        //         confirmButtonText: '关闭',
-        //         type: 'warning'
-        //     })
-        // }
+        switch (status) {
+            case 422:
+                store.commit('setErrors', data)
+                break
+            default:
+                el.MessageBox.confirm(data.message, '温馨提示', {
+                    showCancelButton: false,
+                    confirmButtonText: '关闭',
+                    type: 'warning'
+                })
+        }
         return Promise.reject(error)
     }
 )

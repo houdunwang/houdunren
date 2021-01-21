@@ -7,7 +7,8 @@ use App\Rules\AccountRule;
 use Illuminate\Http\Request;
 use Auth;
 use UserService;
-
+use Hash;
+use App\Models\User;
 
 /**
  * 用户登录
@@ -28,6 +29,9 @@ class LoginController extends Controller
      */
     public function show()
     {
+        // $user = User::find(1);
+        // $user['password'] = Hash::make('admin888');
+        // $user->save();
         return inertia('Auth/Login/Show');
     }
 

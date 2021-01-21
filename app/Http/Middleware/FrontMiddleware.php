@@ -33,11 +33,9 @@ class FrontMiddleware
             SiteService::site($site);
             //加载站点配置
             ConfigService::site($site);
-            // dd($site->toArray());
-            // dd($site->module);
             if ($module = $site->module) {
+                //加载站点与模块配置
                 ModuleService::module($module->name);
-                //加载模块配置
                 ConfigService::module($module);
             }
         }

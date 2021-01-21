@@ -7,7 +7,7 @@
                 </nav>
                 <div class="flex items-center justify-center">
                     <img :src="$page.props.user.icon" class="w-6 h-6 object-cover rounded-sm mr-1" />
-                    <a href="">退出</a>
+                    <a href="/logout">退出</a>
                 </div>
             </div>
         </div>
@@ -29,8 +29,10 @@
                     </div>
                 </div>
                 <div class="mt-3 border border-gray-200 shadow-sm">
-                    <div v-for="(menu, index) in menus" :key="index" class="border-b border-gray-200 py-3 cursor-pointer pl-3 hover:bg-gray-100">
-                        {{ menu.title }}
+                    <div v-for="(menu, index) in menus" :key="index" class="">
+                        <inertia-link :href="menu.route" class="block pl-3 py-3 border-b border-gray-200 cursor-pointer hover:bg-gray-100">
+                            {{ menu.title }}
+                        </inertia-link>
                     </div>
                 </div>
             </div>
@@ -43,12 +45,11 @@
 </template>
 <script>
 const menus = [
-    { title: '资料修改', route: '' },
-    { title: '基本信息', route: '' },
-    { title: '密码修改', route: '' },
-    { title: '邮箱修改', route: '' },
-    { title: '手机验证', route: '' },
-    { title: '修改头像', route: '' }
+    { title: '基本信息', route: route('member.info.base') },
+    { title: '密码修改', route: route('member.info.password') },
+    { title: '修改头像', route: route('member.info.avatar') },
+    { title: '邮箱修改', route: route('member.info.email') },
+    { title: '手机验证', route: route('member.info.mobile') }
 ]
 export default {
     data() {

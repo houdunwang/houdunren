@@ -12,7 +12,9 @@ Route::post('login', [LoginController::class, 'store']);
 Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'user'], function () {
     Route::get('info', [UserController::class, 'info']);
     Route::put('base', [UserController::class, 'base']);
+    Route::put('password', [UserController::class, 'password']);
+    Route::put('avatar', [UserController::class, 'avatar']);
 });
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

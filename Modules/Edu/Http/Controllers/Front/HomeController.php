@@ -14,16 +14,11 @@ use Spatie\Activitylog\Models\Activity;
  */
 class HomeController extends Controller
 {
-  public function index()
-  {
-    $topics = Topic::where('recommend', true)
-      ->with('user')
-      ->get();
+    public function index()
+    {
+        $topics = Topic::where('recommend', true)->with('user')->get();
+        $activities = Activity::latest()->with(['subject.user', 'causer'])->paginate();
 
-    $activities = Activity::latest()
-      ->with(['subject.user', 'causer'])
-      ->paginate();
-
-    return view('edu::front.home.index', compact('activities', 'topics'));
-  }
+        return view('edu::front.home.index', compact('activities', 'topics'));
+    }
 }

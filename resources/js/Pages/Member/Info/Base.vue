@@ -6,6 +6,7 @@
             </div>
             <el-form-item :label="field.label" v-for="(field, index) in fields" :key="index">
                 <el-input v-model="form[field.id]"></el-input>
+                <hd-error :message="errors(field.id)" />
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">保存提交</el-button>
@@ -15,6 +16,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 const fields = [
     { label: '昵称', id: 'name' },
     { label: 'GIBHUB', id: 'github' },
@@ -28,6 +30,9 @@ export default {
             form: this.$inertia.form(this.user),
             fields
         }
+    },
+    computed: {
+        ...mapGetters(['errors'])
     },
     methods: {
         onSubmit() {
