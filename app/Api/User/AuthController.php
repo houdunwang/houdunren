@@ -61,7 +61,6 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->mobile = $request->account;
         $user->save();
-        Auth::login($user);
         return ['message' => '注册成功', 'token' => $this->token($user)];
     }
 
@@ -85,10 +84,9 @@ class AuthController extends Controller
             'code' => ['required', new CodeRule(request('account'))]
         ], ['account.required' => '帐号不能为空', 'account.unique' => '手机号已经注册', 'password.required' => '密码不能为空', 'code.required' => '验证码不能为空']);
 
+        $user = User::where(UserService::account(), $request->account)->first();
         $user->password = Hash::make($request->password);
-        $user->mobile = $request->account;
         $user->save();
-        Auth::login($user);
-        return ['message' => '注册成功', 'token' => $this->token($user)];
+        return ['message' => '密码重置成功', 'token' => $this->token($user)];
     }
 }

@@ -84,7 +84,7 @@ export default {
     methods: {
         onSubmit() {
             this.axios.post(`/api/auth/register`, this.form).then(_ => {
-                location.reload()
+                location.href = '/login'
             })
         }
     }

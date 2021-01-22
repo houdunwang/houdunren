@@ -10,6 +10,7 @@ use App\Api\Common\CodeController;
 Route::group(['prefix' => 'common', 'as' => 'common.', 'middleware' => ['front', 'throttle:sendCode']], function () {
     //验证码
     Route::post('code/send', [CodeController::class, 'send']);
+    Route::post('code/accountExist', [CodeController::class, 'accountExist']);
     Route::post('code/mobile', [CodeController::class, 'mobile']);;
     Route::post('code/email', [CodeController::class, 'email']);
     Route::post('code/noExistMobile', [CodeController::class, 'noExistMobile']);;
@@ -20,6 +21,7 @@ Route::group(['prefix' => 'common', 'as' => 'common.', 'middleware' => ['front',
 Route::group(['middleware' => ['front'], 'prefix' => 'auth'], function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);
+    Route::post('forget', [AuthController::class, 'forget']);
 });
 
 //用户相关

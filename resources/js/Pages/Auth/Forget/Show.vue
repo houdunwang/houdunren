@@ -20,7 +20,7 @@
                                             v-model="form.account"
                                             class="flex-1 mb-2"
                                             placeholder="请输入手机号或邮箱"
-                                            action="/api/common/code/no_exist_mobile"
+                                            action="/api/common/code/accountExist"
                                         />
                                     </div>
                                 </div>
@@ -37,17 +37,19 @@
                             <div class="grid grid-cols-2 gap-3">
                                 <el-form-item label="新密码" class="flex-1">
                                     <el-input type="password" v-model="form.password" placeholder="请输入新密码"></el-input>
+                                     <hd-error :message="errors('password')" />
                                 </el-form-item>
                                 <el-form-item label="确认密码" class="flex-1">
-                                    <el-input type="password" v-model="form.confirm_password" placeholder="请再输一次密码"></el-input>
+                                    <el-input type="password" v-model="form.password_confirmation" placeholder="请再输一次密码"></el-input>
                                 </el-form-item>
                             </div>
                             <div class="flex -mx-3">
                                 <div class="w-full px-3 mb-5">
                                     <button
                                         class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                                         @click.prevent="onSubmit"
                                     >
-                                        注册
+提交
                                     </button>
                                 </div>
                             </div>
@@ -73,7 +75,7 @@ export default {
     },
     data() {
         return {
-            form: this.$inertia.form({ mobile: '', code: '', password: '', captcha: '', remember: false }),
+            form: this.$inertia.form({ account: '', code: '', password: '', captcha: '', remember: false }),
             captcha: `/captcha`
         }
     },
@@ -82,10 +84,8 @@ export default {
     },
     methods: {
         onSubmit() {
-            this.form.post(route('auth.login.store'), {
-                onFinish: () => {
-                    this.captcha = `/captcha?` + Math.random()
-                }
+            this.axios.post(`/api/auth/forget`,this.form).then(_=>{
+location.href='/login';
             })
         }
     }

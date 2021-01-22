@@ -14,7 +14,7 @@ class CodeRule implements Rule
 {
     protected $account;
 
-    public function __construct(string $account)
+    public function __construct($account)
     {
         $this->account = $account;
     }
