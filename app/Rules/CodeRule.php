@@ -2,22 +2,26 @@
 
 namespace App\Rules;
 
-use App\Services\CodeService;
+use CodeService;
 use Illuminate\Contracts\Validation\Rule;
 
 /**
- * 表单验证码验证规则
+ * 表单验证码校验
+ *
+ * @package App\Rules
  */
 class CodeRule implements Rule
 {
-    public function __construct(?string $account)
+    protected $account;
+
+    public function __construct(string $account)
     {
         $this->account = $account;
     }
 
     public function passes($attribute, $value)
     {
-        return app(CodeService::class)->check($this->account, $value);
+        return CodeService::check($this->account, $value);
     }
 
     public function message()

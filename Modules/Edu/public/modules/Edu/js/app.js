@@ -4962,7 +4962,7 @@ __webpack_require__.r(__webpack_exports__);
         show: this.$page.user.isSuperAdmin
       }, {
         title: '退出',
-        link: route('auth.logout'),
+        link: route('logout'),
         icon: 'fa fa-sign-out',
         show: true
       }]
@@ -105664,7 +105664,7 @@ var render = function() {
                   "inertia-link",
                   {
                     staticClass: "mr-4",
-                    attrs: { href: _vm.route("auth.logout") }
+                    attrs: { href: _vm.route("logout") }
                   },
                   [_vm._v("退出登录")]
                 )

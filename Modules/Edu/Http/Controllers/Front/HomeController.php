@@ -14,6 +14,11 @@ use Spatie\Activitylog\Models\Activity;
  */
 class HomeController extends Controller
 {
+    /**
+     * 前台首页
+     *
+     * @return void
+     */
     public function index()
     {
         $topics = Topic::where('recommend', true)->with('user')->get();

@@ -4,7 +4,7 @@
             <div slot="header">
                 修改头像
             </div>
-            <hd-image v-model="form.avatar" />
+            <hd-image-upload v-model="form.avatar" />
         </el-card>
     </el-form>
 </template>

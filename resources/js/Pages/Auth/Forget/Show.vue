@@ -14,18 +14,23 @@
                         <div>
                             <div class="flex -mx-3">
                                 <div class="w-full px-3 mb-5">
-                                    <label for="" class="text-xs font-semibold px-1">图形验证码</label>
-                                    <div class="flex">
-                                        <hd-captcha v-model="form.captcha" class="flex-1" />
+                                    <label for="" class="text-xs font-semibold px-1">帐号</label>
+                                    <div class="flex flex-col">
+                                        <hd-validate-code
+                                            v-model="form.account"
+                                            class="flex-1 mb-2"
+                                            placeholder="请输入手机号或邮箱"
+                                            action="/api/common/code/no_exist_mobile"
+                                        />
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex -mx-3">
+                             <div class="flex -mx-3">
                                 <div class="w-full px-3 mb-5">
-                                    <label for="" class="text-xs font-semibold px-1">手机验证码</label>
+                                    <label class="text-xs font-semibold px-1">验证码</label>
                                     <div class="flex flex-col">
-                                        <hd-code :mobile="form.mobile" v-model="form.code" class="flex-1 mb-2" placeholder="请输入登录手机号或邮箱"/>
-                                        <el-input placeholder="请输入收到的验证码" class="mr-1"> </el-input>
+                                        <el-input placeholder="请输入收到的验证码" class="mr-1" v-model="form.code"> </el-input>
+                                        <hd-error :message="errors('code')" />
                                     </div>
                                 </div>
                             </div>
@@ -60,6 +65,7 @@
 <script>
 import Layout from '@/Layouts/AuthLayout'
 import HdFooter from '../Footer'
+import {mapGetters} from 'vuex'
 export default {
     layout: Layout,
     components: {
@@ -70,6 +76,9 @@ export default {
             form: this.$inertia.form({ mobile: '', code: '', password: '', captcha: '', remember: false }),
             captcha: `/captcha`
         }
+    },
+    computed: {
+        ...mapGetters(['errors'])
     },
     methods: {
         onSubmit() {

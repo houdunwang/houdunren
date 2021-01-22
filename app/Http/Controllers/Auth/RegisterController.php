@@ -19,6 +19,11 @@ use CodeService;
  */
 class RegisterController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest')->only('show');
+    }
+
     /**
      * 登录界面
      *

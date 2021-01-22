@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\Route;
 //用户帐号相关
 Route::get('login', [LoginController::class, 'show'])->name('login');
 Route::get('register', [RegisterController::class, 'show'])->name('register');
-
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth.', 'middleware' => ['front']], function () {
     Route::post('login', [LoginController::class, 'login'])->name('login.store');
-    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
     Route::post('register', [RegisterController::class, 'register'])->name('register');
     Route::post('register/code', [RegisterController::class, 'code'])->name('register.code');
     Route::get('forget', [ForgetController::class, 'show'])->name('forget');

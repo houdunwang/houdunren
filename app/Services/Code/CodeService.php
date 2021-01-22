@@ -2,12 +2,19 @@
 
 namespace App\Services\Code;
 
+use App\Notifications\CodeNotification;
+use SmsService;
+use UserService;
+use Auth;
+use App\Models\User;
+
 /**
  * 验证码服务
  * @package App\Services
  */
 class CodeService
 {
+    //发送帐号
     protected $account;
 
     /**
@@ -18,9 +25,8 @@ class CodeService
      */
     public function send($account)
     {
-        $this->account = $account;
-        $type = app(UserService::class)->account();
-        $this->$type();
+        $type = UserService::account();
+        $this->$type($account);
     }
 
     /**
@@ -28,18 +34,28 @@ class CodeService
      *
      * @return void
      */
-    public function email()
+    public function email(string $account)
     {
+        $this->account = $account;
+        $user = new User();
+        $user->email = $account;
+        $user->notify(new CodeNotification($this->code()));
     }
 
     /**
-     * 发送手机短信验证码
      *
      * @return void
      */
-    public function mobile()
+    /**
+     * 发送手机短信验证码
+     *
+     * @param string $account
+     * @return void
+     */
+    public function mobile(string $account)
     {
-        app(SmsService::class)->send($this->account, [
+        $this->account = $account;
+        SmsService::send($this->account, [
             'template' => config('site.sms.aliyun.template'),
             'data' => [
                 'code' => $this->code(),

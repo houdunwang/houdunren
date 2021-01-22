@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 /**
  * 找回密码
+ * @package App\Http\Controllers\Auth
  */
 class ForgetController extends Controller
 {

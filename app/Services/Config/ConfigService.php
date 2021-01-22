@@ -19,16 +19,14 @@ class ConfigService
      * @param Site $site
      * @return void
      */
-    public function site(Site $site = null)
+    public function site(Site $site)
     {
-        $site = $site ?? site();
-        config(['site' => site()['config']]);
-        config('app.name', site()['title']);
+        config(['site' => $site['config']]);
+        config(['app.name' => $site['title']]);
         config(['mail.default' => config('site.email.transport')]);
         config(['mail.mailers.smtp' =>  config('site.email')]);
         config(['mail.from' => [
-            'address' => config('site.email.username'),
-            'name' => site()['title']
+            'address' => config('site.email.username'), 'name' => $site['title']
         ]]);
     }
 

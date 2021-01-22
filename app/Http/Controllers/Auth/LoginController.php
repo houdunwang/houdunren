@@ -29,35 +29,7 @@ class LoginController extends Controller
      */
     public function show()
     {
-        // $user = User::find(1);
-        // $user['password'] = Hash::make('admin888');
-        // $user->save();
         return inertia('Auth/Login/Show');
-    }
-
-    /**
-     * 用户登录
-     *
-     * @param Request $request
-     * @return void
-     */
-    public function login(Request $request)
-    {
-        $request->validate([
-            'account' => [new AccountRule(request('account'))],
-            'password' => ['required'],
-            'captcha' => ['required', 'captcha']
-        ], ['password.required' => '密码不能为空', 'captcha.required' => '验证码不能为空', 'captcha.captcha' => '验证码输入错误']);
-
-        $isLogin = Auth::attempt([
-            UserService::account() => $request->account,
-            'password' => $request->password
-        ], $request->has('remember'));
-
-        if ($isLogin) {
-            return inertia()->location('/');
-        }
-        return back()->with('error', '帐号或密码错误');
     }
 
     /**

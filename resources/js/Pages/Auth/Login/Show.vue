@@ -10,14 +10,15 @@
                                 <form class="form-horizontal w-3/4 mx-auto" method="POST" action="#">
                                     <div class="flex flex-col mt-4">
                                         <el-input v-model="form.account" placeholder="邮箱或手机号"></el-input>
-                                        <hd-error :message="form.errors.account" />
+                                        <hd-error :message="errors('account')" />
                                     </div>
                                     <div class="flex flex-col mt-4">
                                         <el-input v-model="form.password" placeholder="请输入登录密码" type="password"></el-input>
-                                        <hd-error :message="form.errors.password" />
+                                        <hd-error :message="errors('password')" />
                                     </div>
                                     <div class="flex flex-col mt-4">
                                         <hd-captcha v-model="form.captcha" ref="captcha" />
+                                        <hd-error :message="errors('captcha')" />
                                     </div>
                                     <div class="flex items-center mt-4">
                                         <input type="checkbox" name="remember" id="remember" class="mr-2" v-model="form.remember" />
@@ -51,6 +52,7 @@
 <script>
 import Layout from '@/Layouts/AuthLayout'
 import HdFooter from '../Footer'
+import { mapGetters } from 'vuex'
 export default {
     layout: Layout,
     components: {
@@ -58,20 +60,16 @@ export default {
     },
     data() {
         return {
-            form: this.$inertia.form({ account: '', password: '', captcha: '', remember: false })
+            form: { account: '', password: '', captcha: '', remember: false }
         }
     },
+    computed: {
+        ...mapGetters(['errors'])
+    },
     methods: {
-        onSubmit() {
-            this.form.post(route('auth.login.store'), {
-                onFinish: () => {
-                    //更新验证码
-                    this.$refs.captcha.get()
-                    console.log('aaa')
-                },
-                onSuccess: page => {
-                    alert(3)
-                }
+        async onSubmit() {
+            this.axios.post(`/api/auth/login`, this.form).then(_ => {
+                location.reload()
             })
         }
     }

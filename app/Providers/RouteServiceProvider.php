@@ -59,8 +59,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function rateLimiter()
     {
         //验证码发送限流
-        RateLimiter::for('send-code', function (Request $request) {
-            return Limit::perMinute(1);
+        RateLimiter::for('sendCode', function (Request $request) {
+            return Limit::perMinute(101);
         });
     }
 

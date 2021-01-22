@@ -30,7 +30,7 @@
                 >
                     <inertia-link class="mb-3 mr-4" href="">会员中心</inertia-link>
                     <inertia-link class="mb-3 mr-4" href="">修改密码</inertia-link>
-                    <inertia-link class="mr-4" :href="route('auth.logout')">退出登录</inertia-link>
+                    <inertia-link class="mr-4" :href="route('logout')">退出登录</inertia-link>
                 </div>
             </div>
         </div>
@@ -83,7 +83,7 @@ export default {
                     icon: 'far fa-life-ring',
                     show: this.$page.props.user.isSuperAdmin
                 },
-                { title: '退出', link: route('auth.logout'), icon: 'fas fa-sign-out-alt', show: true }
+                { title: '退出', link: route('logout'), icon: 'fas fa-sign-out-alt', show: true }
             ]
         }
     },
