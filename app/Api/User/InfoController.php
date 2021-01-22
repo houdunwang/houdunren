@@ -8,9 +8,7 @@ use Auth;
 use App\Http\Requests\UserRequest;
 use App\Rules\CodeRule;
 use Hash;
-use App\Rules\MobileNotExistRule;
-use App\Rules\EmailNotExitRule;
-use App\Models\User;
+use Illuminate\Validation\Rule;
 
 /**
  * 用户个人资料
@@ -87,9 +85,9 @@ class InfoController extends Controller
     public function mobile(Request $request)
     {
         $this->validate($request, [
-            'account' => ['required', 'regex:/^\d{11}$/', new MobileNotExistRule(request('account'))],
+            'account' => ['required', 'regex:/^\d{11}$/', Rule::unique('users', 'mobile')],
             'code' => ['required', new CodeRule(request('account'))]
-        ], ['account.required' => '手机号不能为空', 'account.regex' => '手机号格式错误', 'code.required' => '验证码不能为空']);
+        ], ['account.required' => '手机号不能为空', 'account.regex' => '手机号格式错误', 'account.unique' => '手机号已经存在', 'code.required' => '验证码不能为空']);
 
         $user = Auth::user();
         $user->mobile = $request->account;
@@ -106,9 +104,9 @@ class InfoController extends Controller
     public function email(Request $request)
     {
         $this->validate($request, [
-            'account' => ['required', 'email', new EmailNotExitRule(request('account'))],
+            'account' => ['required', 'email', Rule::unique('users', 'email')],
             'code' => ['required', new CodeRule(request('account'))]
-        ], ['account.required' => '邮箱不能为空', 'account.email' => '邮箱格式错误', 'code.required' => '验证码不能为空']);
+        ], ['account.required' => '邮箱不能为空', 'account.email' => '邮箱格式错误', 'account.unique' => '邮箱已经存在', 'code.required' => '验证码不能为空']);
 
         $user = Auth::user();
         $user->email = $request->account;
