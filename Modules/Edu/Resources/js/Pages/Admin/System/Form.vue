@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import LessonSelect from '@/Components/LessonSelect.vue'
+import LessonSelect from '@/components/LessonSelect.vue'
 import tabs from './tabs'
 const form = {
     title: '',

@@ -10,8 +10,8 @@ window._ = require('lodash')
 require('./plugins/axios')
 require('./plugins/element')
 require('./plugins/moment')
-require('./util/autoload')
-require('./util/filters')
+require('./utils/autoload')
+require('./utils/filters')
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

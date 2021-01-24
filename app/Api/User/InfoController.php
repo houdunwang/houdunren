@@ -4,11 +4,11 @@ namespace App\Api\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Auth;
 use App\Http\Requests\UserRequest;
+use Illuminate\Validation\Rule;
 use App\Rules\CodeRule;
 use Hash;
-use Illuminate\Validation\Rule;
+use Auth;
 
 /**
  * 用户个人资料

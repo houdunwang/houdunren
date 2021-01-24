@@ -7,6 +7,8 @@ use SiteService;
 use ModuleService;
 use Exception;
 use Closure;
+use App\Models\Site;
+use App\Models\Module;
 
 /**
  * 前台管理中间件
@@ -33,11 +35,30 @@ class FrontMiddleware
             SiteService::site($site);
             //加载站点配置
             ConfigService::site($site);
-            if ($module = $site->module) {
+            if ($module = $this->module($site)) {
                 //加载站点与模块配置
                 ModuleService::module($module);
                 ConfigService::module($site, $module);
             }
         }
+    }
+
+    /**
+     * 获取模块
+     *
+     * @param Site $site
+     * @return void
+     */
+    protected function module(Site $site)
+    {
+        $path = parse_url(url()->current())['path'] ?? '';
+        if ($path) {
+            preg_match('/^\/(\w+)\/?/', $path, $match);
+            $module = $match[1] ?? '';
+            if ($module) {
+                return Module::where('name', $module)->firstOrFail();
+            }
+        }
+        return $site->module;
     }
 }

@@ -19,9 +19,9 @@
     <script src="/admin2/js/sb-admin-2.min.js"></script>
     {{-- admin 2 END --}}
     <!-- Styles -->
-    <link rel="stylesheet" href="/modules/{{ module()['name'] }}/css/app.css">
+    <link rel="stylesheet" href="/modules/{{ module()['name'] }}/admin/app.css">
     @routes
-    <script src="/modules/{{ module()['name'] }}/js/app.js" defer></script>
+    <script src="/modules/{{ module()['name'] }}/admin/app.js" defer></script>
 </head>
 
 <body class="font-sans antialiased">

@@ -29,8 +29,15 @@ class AuthController extends Controller
         $request->validate([
             'account' => ['required', new AccountRule(request('account')), Rule::exists('users', UserService::account())],
             'password' => ['required'],
-            'captcha' => ['required', 'captcha']
-        ], ['account' => '帐号不能为空', 'account.exists' => '帐号不存在', 'password.required' => '密码不能为空', 'captcha.required' => '验证码不能为空', 'captcha.captcha' => '验证码输入错误']);
+            // 'captcha' => ['required', 'captcha_api:' . request('captcha_key')]
+        ], [
+            'account' => '帐号不能为空',
+            'account.exists' => '帐号不存在',
+            'password.required' => '密码不能为空',
+            'captcha.required' => '验证码不能为空',
+            'captcha.captcha' => '验证码输入错误'
+        ]);
+
         $isLogin = Auth::attempt([
             UserService::account() => $request->account,
             'password' => $request->password
@@ -63,11 +70,16 @@ class AuthController extends Controller
         return ['message' => '注册成功', 'token' => $this->token($user)];
     }
 
+    /**
+     * 获取令牌
+     *
+     * @param User $user
+     * @return void
+     */
     protected function token(User $user)
     {
         return $user->createToken('auth')->plainTextToken;
     }
-
 
     /**
      * 找回密码

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
-use ModuleService;
 
 /**
  * 模块前台主页入口
@@ -15,9 +13,9 @@ class HomeController extends Controller
 {
     /**
      * 模块前台首页
+     *
      * @param Request $request
-     * @return mixed
-     * @throws BindingResolutionException
+     * @return void
      */
     public function index(Request $request)
     {

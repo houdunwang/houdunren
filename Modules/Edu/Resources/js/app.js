@@ -1,6 +1,5 @@
 require('./bootstrap')
 
-// Import modules...
 import Vue from 'vue'
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue'
 import PortalVue from 'portal-vue'
@@ -13,16 +12,7 @@ Vue.use(PortalVue)
 import { InertiaProgress } from '@inertiajs/progress'
 InertiaProgress.init()
 
-import AdminLayout from '@/Layouts/AdminLayout'
-import FrontLayout from '@/Layouts/FrontLayout'
-
-const url = new URL(location.href)
-console.dir(url)
-
-const res = url.pathname.match(/^\/(.+)\/$/)
-console.log(res, 33)
-
-// const Layout = /^\/\w+?\/admin/.test(url.pathname) ? AdminLayout : FrontLayout
+import Layout from '@/Layouts/AdminLayout'
 const app = document.getElementById('app')
 
 new Vue({

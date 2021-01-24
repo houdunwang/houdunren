@@ -2,7 +2,7 @@ import axios from 'axios'
 import Vue from 'vue'
 import el from 'element-ui'
 import store from '@/store'
-import httpStatus from '@/util/httpStatus'
+import httpStatus from '@/utils/httpStatus'
 // axios.defaults.withCredentials = true
 const _axios = axios.create({ baseURL: '/', timeout: 5000 })
 Vue.axios = Vue.prototype.axios = _axios
@@ -32,7 +32,6 @@ _axios.interceptors.response.use(
     //错误拦截
     function(error) {
         let { status, data } = error.response
-
         switch (status) {
             case 422:
                 store.commit('setErrors', data)

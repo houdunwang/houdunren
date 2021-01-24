@@ -19,24 +19,24 @@ Route::group(['prefix' => 'Edu/admin', 'middleware' => ['admin'], 'namespace' =>
 
 //模块前台
 Route::group(['prefix' => 'Edu', 'middleware' => ['front'], 'namespace' => 'Front', 'as' => 'Edu.front.'], function () {
-    Route::get('/', 'HomeController@index');
-    Route::resource('topic', 'TopicController');
-    Route::get('recommend/{topic}', 'TopicController@recommend')->name('topic.recommend');
-    Route::get('comment/topic/{topic}', 'TopicController@comment')->name('topic.comment');
-    Route::resource('lesson', 'LessonController');
-    Route::resource('video', 'VideoController');
-    Route::resource('system', 'SystemController');
-    Route::resource('sign', 'SignController');
-    Route::resource('subscribe', 'SubscribeController');
-    Route::get('comment/{model}/{id}', 'CommentController@index')->name('comment.index');
-    Route::post('comment/{model}/{id}', 'CommentController@store')->name('comment.store');
-    Route::delete('comment/{comment}', 'CommentController@destroy')->name('comment.destroy');
-    Route::get('live', 'LiveController@index')->name('live.index');
-    Route::get('live/push', 'LiveController@push')->name('live.push');
-    Route::get('live/notify', 'LiveController@notify')->name('live.notify');
-    Route::get('live/close', 'LiveController@close')->name('live.close');
-    Route::post('chat/init', 'ChatController@init')->name("chat.init");
-    Route::post('chat/send', 'ChatController@send')->name("chat.send");
+    // Route::get('/', 'HomeController@index');
+    // Route::resource('topic', 'TopicController');
+    // Route::get('recommend/{topic}', 'TopicController@recommend')->name('topic.recommend');
+    // Route::get('comment/topic/{topic}', 'TopicController@comment')->name('topic.comment');
+    // Route::resource('lesson', 'LessonController');
+    // Route::resource('video', 'VideoController');
+    // Route::resource('system', 'SystemController');
+    // Route::resource('sign', 'SignController');
+    // Route::resource('subscribe', 'SubscribeController');
+    // Route::get('comment/{model}/{id}', 'CommentController@index')->name('comment.index');
+    // Route::post('comment/{model}/{id}', 'CommentController@store')->name('comment.store');
+    // Route::delete('comment/{comment}', 'CommentController@destroy')->name('comment.destroy');
+    // Route::get('live', 'LiveController@index')->name('live.index');
+    // Route::get('live/push', 'LiveController@push')->name('live.push');
+    // Route::get('live/notify', 'LiveController@notify')->name('live.notify');
+    // Route::get('live/close', 'LiveController@close')->name('live.close');
+    // Route::post('chat/init', 'ChatController@init')->name("chat.init");
+    // Route::post('chat/send', 'ChatController@send')->name("chat.send");
 });
 
 Route::group(['prefix' => 'edu/pay', 'middleware' => ['auth', 'front'], 'namespace' => 'Pay', 'as' => 'Edu.pay.'], function () {

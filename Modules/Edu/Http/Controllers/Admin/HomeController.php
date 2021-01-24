@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return inertia('Admin/Home/Index');
+        // return inertia('Admin/Home/Index');
         // return view('edu::admin.home.index');
     }
 

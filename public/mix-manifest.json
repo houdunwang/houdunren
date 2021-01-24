@@ -2,6 +2,11 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/modules/Edu/js/app.js": "/modules/Edu/js/app.js",
+    "/modules/Edu/vue/app.js": "/modules/Edu/vue/app.js",
     "/modules/Edu/css/app.css": "/modules/Edu/css/app.css",
-    "/modules/Edu/static/preview.jpg": "/modules/Edu/static/preview.jpg"
+    "/modules/Edu/static/preview.jpg": "/modules/Edu/static/preview.jpg",
+    "/modules/admin/js/app.js": "/modules/admin/js/app.js",
+    "/modules/Edu/admin/app.css": "/modules/Edu/admin/app.css",
+    "/modules/Edu/vue/app.css": "/modules/Edu/vue/app.css",
+    "/modules/Edu/admin/app.js": "/modules/Edu/admin/app.js"
 }

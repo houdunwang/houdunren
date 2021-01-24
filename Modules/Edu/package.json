@@ -35,6 +35,8 @@
         "postcss-css-variables": "^0.17.0",
         "sass": "^1.32.2",
         "sass-loader": "^10.1.0",
-        "vuedraggable": "^2.24.3"
+        "vue-router": "^3.4.9",
+        "vuedraggable": "^2.24.3",
+        "vuex": "^3.6.0"
     }
 }
