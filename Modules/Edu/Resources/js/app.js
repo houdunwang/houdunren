@@ -15,9 +15,14 @@ InertiaProgress.init()
 
 import AdminLayout from '@/Layouts/AdminLayout'
 import FrontLayout from '@/Layouts/FrontLayout'
-const url = new URL(location.href)
-const Layout = /^\/\w+?\/admin/.test(url.pathname) ? AdminLayout : FrontLayout
 
+const url = new URL(location.href)
+console.dir(url)
+
+const res = url.pathname.match(/^\/(.+)\/$/)
+console.log(res, 33)
+
+// const Layout = /^\/\w+?\/admin/.test(url.pathname) ? AdminLayout : FrontLayout
 const app = document.getElementById('app')
 
 new Vue({

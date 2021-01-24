@@ -16,7 +16,7 @@ class MenuService
      *
      * @return Collection
      */
-    public function getUserAdminMenus(): Collection
+    public function currentUserMenus(): Collection
     {
         $menus = module()['menus'];
         foreach ($menus as $k => $menu) {

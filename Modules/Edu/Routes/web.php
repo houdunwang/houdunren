@@ -17,6 +17,7 @@ Route::group(['prefix' => 'Edu/admin', 'middleware' => ['admin'], 'namespace' =>
     Route::resource('subscribe', 'SubscribeController');
 });
 
+//模块前台
 Route::group(['prefix' => 'Edu', 'middleware' => ['front'], 'namespace' => 'Front', 'as' => 'Edu.front.'], function () {
     Route::get('/', 'HomeController@index');
     Route::resource('topic', 'TopicController');

@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Models\Site;
 use Inertia\Inertia;
-use SiteService;
 use ModuleService;
+use App\Models\Module;
 
 /**
  * 站点模块展示
@@ -18,8 +18,6 @@ class ModuleController extends Controller
      * 站点模块列表
      *
      * @param Site $site
-     * @param ModuleService $moduleService
-     * @param PermissionService $permissionService
      * @return void
      */
     public function index(Site $site)
@@ -29,17 +27,16 @@ class ModuleController extends Controller
     }
 
     /**
-     * 进入模块
+     * 进入模块后台
      *
      * @param Site $site
-     * @param string $module
+     * @param Module $module
      * @return void
      */
-    public function admin(Site $site, string $module)
+    public function admin(Site $site, Module $module)
     {
         session(['site_id' => $site['id']]);
-        session(['module_name' => $module]);
-
-        return Inertia::location(url($module . '/admin'));
+        session(['module_id' => $module['id']]);
+        return redirect()->route('module.entry');
     }
 }

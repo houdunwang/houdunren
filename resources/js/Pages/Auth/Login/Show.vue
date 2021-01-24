@@ -68,9 +68,14 @@ export default {
     },
     methods: {
         async onSubmit() {
-            this.axios.post(`/api/auth/login`, this.form).then(_ => {
-                location.reload()
-            })
+            this.axios
+                .post(`/api/auth/login`, this.form)
+                .then(_ => {
+                    location.reload()
+                })
+                .finally(() => {
+                    this.$refs.captcha.get()
+                })
         }
     }
 }

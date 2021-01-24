@@ -12,6 +12,7 @@ use SiteService;
 use PermissionService;
 use Auth;
 use MenuService;
+use App\Models\Module;
 
 /**
  * 模块后台管理中间件
@@ -24,13 +25,48 @@ class AdminMiddleware
 
     public function handle($request, Closure $next)
     {
-        if ($this->init() && $this->verify() === false) {
-            return redirect()->route('admin')->with('message', $this->error);
+        if ($this->init() &&  $this->verify()) {
+            $this->inertia();
+            return $next($request);
         }
-
-        $this->inertia();
-        return $next($request);
+        return redirect()->route('admin')->with('message', $this->error);
     }
+
+    /**
+     * 初始化站点与模块
+     *
+     * @return boolean|null
+     */
+    protected function init(): bool
+    {
+        if (session('site_id') && session("module_id")) {
+            $site = Site::findOrFail(session('site_id'));
+            $module = Module::findOrFail(session('module_id'));
+            SiteService::site($site);
+            ModuleService::module($module);
+
+            //加载配置
+            ConfigService::site($site);
+            ConfigService::module($site, $module);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 权限检测
+     *
+     * @return boolean
+     */
+    protected function verify(): bool
+    {
+        if (!Auth::check()) return false;
+        //超级管理员与站站检测
+        if (UserService::isSuperAdmin() || UserService::isMaster()) return true;
+        //管理员检测
+        return UserService::isAdmin(Auth::user()) && PermissionService::checkModulePermission(site(), module());
+    }
+
 
     /**
      * Inertia初始化
@@ -45,40 +81,7 @@ class AdminMiddleware
             'site' => site()->select('id', 'title', 'created_at')->first(),
             'module' => module(),
             'modules' => ModuleService::getSiteModules(site()),
-            'menus' => MenuService::getUserAdminMenus()
+            'menus' => MenuService::currentUserMenus()
         ]);
-    }
-
-    /**
-     * 权限检测
-     *
-     * @return boolean
-     */
-    protected function verify(): bool
-    {
-        //环境检测
-        if (!Auth::check() || !site() || !module()) return false;
-        //超级管理员与站站检测
-        if (UserService::isSuperAdmin() || UserService::isMaster()) return true;
-        //管理员检测
-        return UserService::isAdmin(Auth::user()) && PermissionService::checkModulePermission(site(), module());
-    }
-
-    /**
-     * 初始化站点与模块
-     *
-     * @return boolean|null
-     */
-    protected function init(): ?bool
-    {
-        if (session('site_id') && session("module_name")) {
-            SiteService::site(Site::find(session('site_id')));
-            ModuleService::module(session('module_name'));
-
-            //加载配置
-            ConfigService::site();
-            ConfigService::module();
-            return true;
-        }
     }
 }

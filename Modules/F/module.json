@@ -1,0 +1,13 @@
+{
+    "name": "F",
+    "alias": "f",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\F\\Providers\\FServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

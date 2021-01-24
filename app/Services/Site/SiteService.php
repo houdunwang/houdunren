@@ -31,12 +31,6 @@ class SiteService
         static $cache = null;
         if (is_null($site)) return $cache;
         $cache = $site;
-        // if ($site) {
-        //     session(['site_id' => $site['id']]);
-        // }
-        // if ($id = session('site_id')) {
-        //     $cache = Site::find($id);
-        // };
         return $cache;
     }
 }

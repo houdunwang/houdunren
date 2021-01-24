@@ -6,6 +6,7 @@ use App\Models\ModuleConfig;
 use App\Models\Site;
 use SiteService;
 use ModuleService;
+use App\Models\Module;
 
 /**
  * 配置管理服务
@@ -33,11 +34,13 @@ class ConfigService
     /**
      * 加载模块配置
      *
+     * @param Site $site
+     * @param Module $module
      * @return void
      */
-    public function module()
+    public function module(Site $site, Module $module)
     {
-        $model = ModuleConfig::where('site_id', site()->id)->where('module_id', module()['id'])->first();
+        $model = ModuleConfig::where('site_id', $site['id'])->where('module_id', $module['id'])->first();
         config(['module' => $model['config'] ?? null]);
     }
 

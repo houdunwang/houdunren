@@ -21,17 +21,11 @@ class ModuleService
      * @param array $module
      * @return array|null
      */
-    public function module(string $module = null): ?array
+    public function module(Model $module = null): ?array
     {
         static $cache = null;
         if (is_null($module)) return $cache;
-        $cache = $this->find($module);
-        // if ($name) {
-        //     session(['module_name' => $name]);
-        // }
-        // if ($name = session('module_name')) {
-        //     $cache = app(ModuleService::class)->find($name);
-        // }
+        $cache = $this->find($module['name']);
         return $cache;
     }
 

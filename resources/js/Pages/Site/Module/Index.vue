@@ -21,7 +21,7 @@
                     </div>
                     <div class="border-t border-gray-200 w-full flex justify-center bg-gray-100 py-3">
                         <el-button type="primary" size="mini">
-                            <inertia-link :href="route('site.module.admin', [site, module.name])">
+                            <inertia-link :href="route('site.module.admin', [site, module])">
                                 管理模块
                             </inertia-link>
                         </el-button>

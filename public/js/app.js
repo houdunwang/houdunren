@@ -5466,25 +5466,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ // axios.defaults.withCredentials = true
 
-(axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.withCredentials) = true;
-var config = {
+var _axios = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
   baseURL: '/',
   timeout: 5000
-};
+});
 
-var _axios = axios__WEBPACK_IMPORTED_MODULE_0___default().create(config);
+vue__WEBPACK_IMPORTED_MODULE_4__.default.axios = vue__WEBPACK_IMPORTED_MODULE_4__.default.prototype.axios = _axios; //请求拦截
+// _axios.interceptors.request.use(
+//     function(config) {
+//         return config
+//     },
+//     function(error) {
+//         return Promise.reject(error)
+//     }
+// )
+//响应拦截
 
-window.axios = vue__WEBPACK_IMPORTED_MODULE_4__.default.axios = vue__WEBPACK_IMPORTED_MODULE_4__.default.prototype.axios = _axios; //请求拦截
-
-_axios.interceptors.request.use(function (config) {
-  return config;
-}, function (error) {
-  return Promise.reject(error);
-}); //响应拦截
-
-
-_axios.interceptors.response.use( //成功消息拦截
+_axios.interceptors.response.use( //成功拦截
 function (response) {
   var message = response.data.message;
 
@@ -5496,7 +5496,7 @@ function (response) {
   }
 
   return response.data;
-}, //错误消息拦截
+}, //错误拦截
 function (error) {
   var _error$response = error.response,
       status = _error$response.status,

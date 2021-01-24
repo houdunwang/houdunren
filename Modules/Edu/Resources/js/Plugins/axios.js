@@ -11,14 +11,14 @@ const _axios = axios.create(config)
 window.axios = Vue.axios = Vue.prototype.axios = _axios
 
 //请求拦截
-_axios.interceptors.request.use(
-    function(config) {
-        return config
-    },
-    function(error) {
-        return Promise.reject(error)
-    }
-)
+// _axios.interceptors.request.use(
+//     function(config) {
+//         return config
+//     },
+//     function(error) {
+//         return Promise.reject(error)
+//     }
+// )
 //响应拦截
 _axios.interceptors.response.use(
     //成功消息拦截
