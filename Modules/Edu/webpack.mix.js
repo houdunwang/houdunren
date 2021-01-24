@@ -11,11 +11,6 @@ mix.js('vue/app.js', '../../public/modules/Edu/vue')
     .postCss('vue/css/app.css', '../../public/modules/Edu/vue', [require('postcss-import'), require('tailwindcss'), require('autoprefixer')])
     .webpackConfig(require('./webpack.config'))
 
-// mix.js('vue/app.js', '../../public/modules/Edu/vue')
-//     .vue()
-//     .postCss('vue/css/app.css', '../../public/modules/Edu/', [require('postcss-import'), require('tailwindcss'), require('autoprefixer')])
-//     .webpackConfig(require('./vue/webpack.config'))
-
 mix.copyDirectory('Resources/static', '../../public/modules/Edu/static')
 
 if (mix.inProduction()) {

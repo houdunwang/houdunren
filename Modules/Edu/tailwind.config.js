@@ -8,6 +8,12 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans]
+            },
+            colors: {
+                'dark-green': '#3aa5a2'
+            },
+            width: {
+                '1280': '1280px'
             }
         }
     },

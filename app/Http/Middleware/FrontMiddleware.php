@@ -35,6 +35,7 @@ class FrontMiddleware
             SiteService::site($site);
             //加载站点配置
             ConfigService::site($site);
+
             if ($module = $this->module($site)) {
                 //加载站点与模块配置
                 ModuleService::module($module);
@@ -51,14 +52,14 @@ class FrontMiddleware
      */
     protected function module(Site $site)
     {
+        $module = '';
         $path = parse_url(url()->current())['path'] ?? '';
         if ($path) {
             preg_match('/^\/(\w+)\/?/', $path, $match);
-            $module = $match[1] ?? '';
-            if ($module) {
-                return Module::where('name', $module)->firstOrFail();
+            if ($name = $match[1] ?? '') {
+                $module = Module::where('name', $name)->first();
             }
         }
-        return $site->module;
+        return $module ?? $site->module;
     }
 }
