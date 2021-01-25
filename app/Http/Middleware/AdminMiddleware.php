@@ -42,8 +42,8 @@ class AdminMiddleware
         if (session('site_id') && session("module_id")) {
             $site = Site::findOrFail(session('site_id'));
             $module = Module::findOrFail(session('module_id'));
-            SiteService::site($site);
-            ModuleService::module($module);
+            SiteService::cache($site);
+            ModuleService::cache($module);
 
             //加载配置
             ConfigService::site($site);
@@ -80,8 +80,8 @@ class AdminMiddleware
         Inertia::share('admin', [
             'site' => site()->select('id', 'title', 'created_at')->first(),
             'module' => module(),
-            'modules' => ModuleService::getSiteModules(site()),
-            'menus' => MenuService::currentUserMenus()
+            'modules' => ModuleService::userSiteModules(site(), Auth::user()),
+            'menus' => MenuService::lists(site(), module(), Auth::user())
         ]);
     }
 }

@@ -4,7 +4,7 @@
 
 <script>
 export default {
-    meta: 'abccccccccccccccc'
+    meta: {}
 }
 </script>
 

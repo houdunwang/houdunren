@@ -16,11 +16,13 @@ class ModuleController extends Controller
 {
     /**
      * 所有模块列表
+     *
      * @return void
      */
     public function index()
     {
         $modules = ModuleService::all();
+
         return inertia('System/Module/Index', compact('modules'));
     }
 
@@ -44,7 +46,8 @@ class ModuleController extends Controller
      */
     public function install(string $name, Module $model)
     {
-        $model->create(ModuleService::find($name));
+        $data = ModuleService::config($name, 'config');
+        Module::create($data);
 
         return back()->with('success', '模块安装成功');
     }

@@ -17,15 +17,15 @@
                 </div>
                 <div class="grid justify-end col-span-3 items-center mr-5">
                     <el-button-group>
-                        <el-button type="primary" size="mini" v-if="!module.id">
+                        <el-button type="primary" size="mini" v-if="!module.isInstall">
                             <inertia-link :href="route('system.module.install', module.name)">
                                 安装模块
                             </inertia-link>
                         </el-button>
-                        <el-button type="warning" size="mini" v-if="module.id" @click="uninstall(module)">
+                        <el-button type="warning" size="mini" v-if="module.isInstall" @click="uninstall(module)">
                             删除
                         </el-button>
-                        <el-button type="danger" size="mini" v-if="!module.id" @click="del(module)">
+                        <el-button type="danger" size="mini" v-if="!module.isInstall" @click="del(module)">
                             删除模块和所有文件
                         </el-button>
                     </el-button-group>
@@ -37,6 +37,7 @@
 
 <script>
 import tabs from './tabs'
+
 export default {
     props: ['modules'],
     data() {

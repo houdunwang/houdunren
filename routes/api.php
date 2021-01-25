@@ -6,9 +6,9 @@ use App\Api\User\AuthController;
 use App\Api\User\InfoController;
 use App\Api\Common\CodeController;
 use App\Api\Common\CaptchaController;
-
+use App\Api\Common\SiteController;
 //验证码
-Route::group(['prefix' => 'common', 'as' => 'common.', 'middleware' => ['front', 'throttle:sendCode']], function () {
+Route::group(['prefix' => 'common', 'as' => 'common.', 'middleware' => ['front']], function () {
     //验证码
     Route::post('code/send', [CodeController::class, 'send']);
     Route::post('code/accountExist', [CodeController::class, 'accountExist']);
@@ -18,6 +18,7 @@ Route::group(['prefix' => 'common', 'as' => 'common.', 'middleware' => ['front',
     Route::post('code/noExistEmail', [CodeController::class, 'noExistEmail']);
     //图形验证码
     Route::get('captcha', [CaptchaController::class, 'make']);
+    Route::get('site', [SiteController::class, 'get']);
 });
 
 //登录注册
@@ -35,4 +36,7 @@ Route::group(['middleware' => ['auth:sanctum', 'front'], 'prefix' => 'user'], fu
     Route::put('avatar', [InfoController::class, 'avatar']);
     Route::put('mobile', [InfoController::class, 'mobile']);
     Route::put('email', [InfoController::class, 'email']);
+});
+
+Route::group(['middleware' => ['front']], function () {
 });

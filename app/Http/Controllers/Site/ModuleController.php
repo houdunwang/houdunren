@@ -7,6 +7,7 @@ use App\Models\Site;
 use Inertia\Inertia;
 use ModuleService;
 use App\Models\Module;
+use Auth;
 
 /**
  * 站点模块展示
@@ -22,7 +23,7 @@ class ModuleController extends Controller
      */
     public function index(Site $site)
     {
-        $modules = ModuleService::getSiteModulesByPermission($site);
+        $modules = ModuleService::userSiteModules($site, Auth::user());
         return inertia('Site/Module/Index', compact('site', 'modules'));
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Module;
 use App\Models\Site;
 use Facades\App\Services\Site\SiteService;
 use Facades\App\Services\Module\ModuleService;
@@ -13,7 +14,7 @@ if (!function_exists('site')) {
      */
     function site(?Site $site = null): ?Site
     {
-        return SiteService::site($site);
+        return SiteService::cache($site);
     }
 }
 
@@ -24,8 +25,21 @@ if (!function_exists('module')) {
      * @param string $name
      * @return array|null
      */
-    function module(string $name = null): ?array
+    function module(string $name = null): ?Module
     {
-        return ModuleService::module($name);
+        return ModuleService::cache($name);
+    }
+}
+
+if (function_exists('access')) {
+    /**
+     * 权限验证
+     *
+     * @param string $name
+     * @return boolean
+     */
+    function access(string $name): bool
+    {
+        return \PermissionService::access($name, Auth::user(), site(), module());
     }
 }

@@ -4,8 +4,6 @@ namespace App\Services\Config;
 
 use App\Models\ModuleConfig;
 use App\Models\Site;
-use SiteService;
-use ModuleService;
 use App\Models\Module;
 
 /**
@@ -15,7 +13,7 @@ use App\Models\Module;
 class ConfigService
 {
     /**
-     * 加载当前站点配置
+     * 加载站点配置
      *
      * @param Site $site
      * @return void

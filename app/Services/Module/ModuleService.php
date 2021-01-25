@@ -2,12 +2,12 @@
 
 namespace App\Services\Module;
 
-use App\Models\Module as Model;
+use App\Models\Module;
 use App\Models\Site;
-use Nwidart\Modules\Facades\Module;
+use Nwidart\Modules\Facades\Module as ModulePlugin;
 use Illuminate\Support\Collection;
 use PermissionService;
-use MenuService;
+use App\Models\User;
 
 /**
  * 模块管理服务
@@ -16,29 +16,27 @@ use MenuService;
 class ModuleService
 {
     /**
-     * 缓存或读取当前模块数据
+     * 缓存或读取当前模块
      *
-     * @param array $module
-     * @return array|null
+     * @param Module $module
+     * @return Module|null
      */
-    public function module(Model $module = null): ?array
+    public function cache(Module $module = null): ?Module
     {
         static $cache = null;
         if (is_null($module)) return $cache;
-        $cache = $this->find($module['name']);
-        return $cache;
+        return $cache = $module;
     }
 
     /**
-     * 所有存在的模块
+     * 系统中所有模块
      * 包括安装与未安装的
-     * @return Collection
+     *
+     * @return Collection|null
      */
-    public function all()
+    public function all(): ?Collection
     {
-        return Module::toCollection()->map(function ($module) {
-            return $this->find($module->getName());
-        });
+        return $this->format(ModulePlugin::toCollection());
     }
 
     /**
@@ -48,76 +46,55 @@ class ModuleService
      */
     public function allInstalled(): ?Collection
     {
-        return $this->all()->filter(function ($module) {
-            return $module['installed'];
+        $modules = ModulePlugin::toCollection()->filter(function ($module) {
+            return Module::where('name', $module->getName())->first();
         });
+        return $this->format($modules);
     }
 
     /**
-     * 获取站点所有模块
+     * 格式化模块数据
      *
-     * @param Site $site
+     * @param Collection $modules
      * @return Collection
      */
-    public function getSiteModules(Site $site): Collection
+    protected function format(Collection $modules): Collection
     {
-        return $site->modules->map(function ($module) use ($site) {
-            //添加完整权限标识
-            return PermissionService::formatModulePermission($site, $this->find($module['name']));
+        return collect($modules->toArray())->map(function ($module) {
+            $model = Module::where('name', $module['name'])->first();
+            return
+                $module + $this->config($module['name'], 'config')
+                + [
+                    'id' => $model['id'],
+                    'preview' => url("/modules/{$module['name']}/static/preview.jpg"),
+                    'isInstall' => $model
+                ];
         });
     }
-
     /**
-     * 获取当前用户可使用的所有模块
+     * 用户可用模块
      *
      * @param Site $site
+     * @param User $user
      * @return Collection
      */
-    public function getSiteModulesByPermission(Site $site): Collection
+    public function userSiteModules(Site $site, User $user): Collection
     {
-        return $this->getSiteModules($site)->filter(function ($module) use ($site) {
-            return PermissionService::checkModulePermission($site, $module);
+        return $site->modules->filter(function ($module) use ($site, $user) {
+            return PermissionService::checkModule($site, $module, $user);
         });
     }
 
     /**
-     * 根据模块标识获取模块
-     *
+     * 模块配置
      * @param string $name 模块标识
+     * @param string $filename 文件名
      * @return array
      */
-    public function find(string $name): array
+    public function config(string $name, string $filename): array
     {
-        static $cache = [];
-        if (isset($cache[$name])) {
-            return $cache[$name];
-        }
-        $model = Module::findOrFail($name);
-        $config = $this->config($name, 'config');
-        $model = Model::where('name', $name)->first();
-
-        return $cache[$name] = array_merge($config, [
-            'id' => $model['id'] ?? null,
-            'name' => $name,
-            'preview' => "/modules/{$name}/static/preview.jpg",
-            'menus' => $this->config($name, 'menus'),
-            'installed' => (bool) $model,
-            'model' => $model,
-            'permissions' => $this->config($name, 'permissions')
-        ]);
-    }
-
-    /**
-     * 模块配置文件
-     * 在config目录下
-     * @param string $name
-     * @param string $fileName
-     * @return array
-     */
-    protected function config(string $name, string $fileName): array
-    {
-        $module = Module::findOrFail($name);
-        $file = $module->getPath() . '/Config/' . $fileName . '.php';
+        $module = ModulePlugin::findOrFail($name);
+        $file = $module->getPath() . '/Config/' . $filename . '.php';
 
         return is_file($file) ? include $file : [];
     }

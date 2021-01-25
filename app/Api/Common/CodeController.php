@@ -15,6 +15,11 @@ use Illuminate\Validation\Rule;
  */
 class CodeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['throttle:sendCode']);
+    }
+
     /**
      * 发送邮箱或手机验证码
      *

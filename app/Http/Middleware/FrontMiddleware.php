@@ -38,7 +38,7 @@ class FrontMiddleware
 
             if ($module = $this->module($site)) {
                 //加载站点与模块配置
-                ModuleService::module($module);
+                ModuleService::cache($module);
                 ConfigService::module($site, $module);
             }
         }

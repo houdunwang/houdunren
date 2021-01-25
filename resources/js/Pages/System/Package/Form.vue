@@ -3,7 +3,6 @@
         <hd-layout :tabs="tabs" home="system.home">
             <el-card shadow="always" :body-style="{ padding: '20px' }">
                 <template v-slot:header>套餐资料</template>
-
                 <el-form-item label="套餐名称">
                     <el-input v-model="form.title"></el-input>
                     <hd-error :message="form.errors.title" />
