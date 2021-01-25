@@ -28,9 +28,6 @@ class PermissionService
      */
     public function access(Site $site, Module $module, User $user, string $permission): bool
     {
-        if (!$user || !$site || !$module) {
-            return false;
-        }
         if (UserService::isSuperAdmin($user) || UserService::isMaster($user, $site)) {
             return true;
         }
@@ -80,29 +77,6 @@ class PermissionService
             return $collect;
         }, collect());
     }
-
-    /**
-     * 权限完成标识
-     *
-     * @param Site $site
-     * @param Module $module
-     * @return array
-     */
-    // public function formatModulePermission(Site $site, Module $module): array
-    // {
-    //     $moduleData = ModuleService::find($module['name']);
-    //     $moduleData['permissions'] = collect($moduleData['permissions'])->map(function ($permission) use ($site, $module) {
-    //         $permission['rules'] = collect($permission['rules'])->map(function ($rule) use ($site, $module) {
-    //             return  [
-    //                 'permission_name' => $this->permissionName($site, $module, $rule['name']),
-    //                 'module_id' => $module['id'],
-    //                 'site_id' => $site['id']
-    //             ] + $rule;
-    //         });
-    //         return $permission;
-    //     });
-    //     return $moduleData['permissions'];
-    // }
 
     /**
      * 完整权限标识

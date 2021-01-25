@@ -1,11 +1,9 @@
 <template>
-    <div><i class="fas fa-info-circle"></i> {{ message }}</div>
+    <div class="text-xs mt-2 text-gray-700"><i class="fas fa-info-circle text-gray-500"></i> <slot /></div>
 </template>
 
 <script>
-export default {
-    props: ['message']
-}
+export default {}
 </script>
 
 <style></style>

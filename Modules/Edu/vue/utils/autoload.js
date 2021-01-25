@@ -11,7 +11,7 @@ coreFiles.keys().map(key => {
 })
 
 // 注册自定义全局组件
-const files = require.context('~/Components', true, /\.vue$/i)
+const files = require.context('~/components', true, /\.vue$/i)
 files.keys().map(key => {
     const name = key
         .split('/')

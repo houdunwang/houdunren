@@ -1,21 +1,26 @@
 <?php
 
-namespace App\Api\User;
+namespace App\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
 use App\Rules\CodeRule;
 use Hash;
 use Auth;
 
 /**
- * 用户个人资料
+ * 用户
  * @package App\Api\User
  */
 class InfoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth:sanctum']);
+    }
+
     /**
      * 获取当前用户资料
      *
@@ -94,6 +99,29 @@ class InfoController extends Controller
         $user->save();
         return ['message' => '手机号绑定成功'];
     }
+
+    /**
+     * 为存在的手机发送验证码
+     * @param Request $request
+     * @return void
+     */
+    public function mobileCode(Request $request)
+    {
+        $request->validate(
+            [
+                'account' => ['required', 'regex:/^\d{11}$/', Rule::exists('users', 'mobile')],
+                'captcha' => ['required', 'captcha']
+            ],
+            [
+                'account.required' => '帐号不能为空', 'account.regex' => '手机号格式错误', 'account.exists' => '手机号不存在',
+                'captcha.required' => '图形验证码不能为空', 'captcha.captcha' => '验证码输入错误'
+            ]
+        );
+
+        CodeService::mobile(request('account'));
+        return ['message' => '验证码发送成功'];
+    }
+
     /**
      *
      * 绑定邮箱
@@ -112,5 +140,27 @@ class InfoController extends Controller
         $user->email = $request->account;
         $user->save();
         return ['message' => '邮箱绑定成功'];
+    }
+
+    /**
+     * 为存在的邮箱发送验证码
+     * @param Request $request
+     * @return void
+     */
+    public function emailCode(Request $request)
+    {
+        $request->validate(
+            [
+                'account' => ['required', 'email', Rule::exists('users', 'email')],
+                'captcha' => ['required', 'captcha']
+            ],
+            [
+                'account.required' => '帐号不能为空', 'account.exists' => '邮箱不存在',
+                'captcha.required' => '图形验证码不能为空', 'captcha.captcha' => '验证码输入错误'
+            ]
+        );
+
+        CodeService::email(request('account'));
+        return ['message' => '验证码发送成功'];
     }
 }

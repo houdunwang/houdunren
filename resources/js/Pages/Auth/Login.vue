@@ -51,7 +51,7 @@
 
 <script>
 import Layout from '@/Layouts/AuthLayout'
-import HdFooter from '../Footer'
+import HdFooter from './Footer'
 import { mapGetters } from 'vuex'
 export default {
     layout: Layout,
@@ -69,9 +69,9 @@ export default {
     methods: {
         async onSubmit() {
             this.axios
-                .post(`/api/auth/login`, this.form)
+                .post(`/api/login`, this.form)
                 .then(_ => {
-                    location.reload()
+                    location.href = '/'
                 })
                 .finally(() => {
                     this.$refs.captcha.get()

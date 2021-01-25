@@ -19,6 +19,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('edu::app');
+        $site = site()->select('id', 'title')->first();
+        $module = module();
+        return view('edu::app', compact('site', 'module'));
     }
 }

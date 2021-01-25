@@ -32,10 +32,9 @@ class FrontMiddleware
         //根据域名获取站点
         $site = SiteService::getByDomain();
         if ($site) {
-            SiteService::site($site);
+            SiteService::cache($site);
             //加载站点配置
             ConfigService::site($site);
-
             if ($module = $this->module($site)) {
                 //加载站点与模块配置
                 ModuleService::cache($module);
@@ -52,7 +51,7 @@ class FrontMiddleware
      */
     protected function module(Site $site)
     {
-        $module = '';
+        $module = null;
         $path = parse_url(url()->current())['path'] ?? '';
         if ($path) {
             preg_match('/^\/(\w+)\/?/', $path, $match);

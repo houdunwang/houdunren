@@ -4861,9 +4861,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['message']
-});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
 
@@ -108364,10 +108362,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("i", { staticClass: "fas fa-info-circle" }),
-    _vm._v(" " + _vm._s(_vm.message))
-  ])
+  return _c(
+    "div",
+    { staticClass: "text-xs mt-2 text-gray-700" },
+    [
+      _c("i", { staticClass: "fas fa-info-circle text-gray-500" }),
+      _vm._v(" "),
+      _vm._t("default")
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -122497,29 +122501,29 @@ var map = {
 		"./resources/js/Pages/Auth/Footer.vue",
 		"resources_js_Pages_Auth_Footer_vue"
 	],
-	"./Auth/Forget/Show": [
-		"./resources/js/Pages/Auth/Forget/Show.vue",
-		"resources_js_Pages_Auth_Forget_Show_vue"
+	"./Auth/Forget": [
+		"./resources/js/Pages/Auth/Forget.vue",
+		"resources_js_Pages_Auth_Forget_vue"
 	],
-	"./Auth/Forget/Show.vue": [
-		"./resources/js/Pages/Auth/Forget/Show.vue",
-		"resources_js_Pages_Auth_Forget_Show_vue"
+	"./Auth/Forget.vue": [
+		"./resources/js/Pages/Auth/Forget.vue",
+		"resources_js_Pages_Auth_Forget_vue"
 	],
-	"./Auth/Login/Show": [
-		"./resources/js/Pages/Auth/Login/Show.vue",
-		"resources_js_Pages_Auth_Login_Show_vue"
+	"./Auth/Login": [
+		"./resources/js/Pages/Auth/Login.vue",
+		"resources_js_Pages_Auth_Login_vue"
 	],
-	"./Auth/Login/Show.vue": [
-		"./resources/js/Pages/Auth/Login/Show.vue",
-		"resources_js_Pages_Auth_Login_Show_vue"
+	"./Auth/Login.vue": [
+		"./resources/js/Pages/Auth/Login.vue",
+		"resources_js_Pages_Auth_Login_vue"
 	],
-	"./Auth/Register/Show": [
-		"./resources/js/Pages/Auth/Register/Show.vue",
-		"resources_js_Pages_Auth_Register_Show_vue"
+	"./Auth/Register": [
+		"./resources/js/Pages/Auth/Register.vue",
+		"resources_js_Pages_Auth_Register_vue"
 	],
-	"./Auth/Register/Show.vue": [
-		"./resources/js/Pages/Auth/Register/Show.vue",
-		"resources_js_Pages_Auth_Register_Show_vue"
+	"./Auth/Register.vue": [
+		"./resources/js/Pages/Auth/Register.vue",
+		"resources_js_Pages_Auth_Register_vue"
 	],
 	"./Member/Info/Avatar": [
 		"./resources/js/Pages/Member/Info/Avatar.vue",
@@ -122979,7 +122983,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_Pages_Auth_Footer_vue":1,"resources_js_Pages_Auth_Forget_Show_vue":1,"resources_js_Pages_Auth_Login_Show_vue":1,"resources_js_Pages_Auth_Register_Show_vue":1,"resources_js_Pages_Member_Info_Avatar_vue":1,"resources_js_Pages_Member_Info_Base_vue":1,"resources_js_Pages_Member_Info_Email_vue":1,"resources_js_Pages_Member_Info_Mobile_vue":1,"resources_js_Pages_Member_Info_Password_vue":1,"resources_js_Pages_Site_Admin_Index_vue":1,"resources_js_Pages_Site_Admin_tabs_js":1,"resources_js_Pages_Site_Config_Components_Alipay_vue":1,"resources_js_Pages_Site_Config_Components_Aliyun_vue":1,"resources_js_Pages_Site_Config_Components_Base_vue":1,"resources_js_Pages_Site_Config_Components_Email_vue":1,"resources_js_Pages_Site_Config_Components_Sms_vue":1,"resources_js_Pages_Site_Config_Components_Upload_vue":1,"resources_js_Pages_Site_Config_Components_User_vue":1,"resources_js_Pages_Site_Config_Components_Wepay_vue":1,"resources_js_Pages_Site_Config_Edit_vue":1,"resources_js_Pages_Site_Config_config_js":1,"resources_js_Pages_Site_Module_Index_vue":1,"resources_js_Pages_Site_Module_tabs_js":1,"resources_js_Pages_Site_Permission_Form_vue":1,"resources_js_Pages_Site_Permission_tabs_js":1,"resources_js_Pages_Site_Role_Form_vue":1,"resources_js_Pages_Site_Role_Index_vue":1,"resources_js_Pages_Site_Role_tabs_js":1,"resources_js_Pages_Site_Site_Form_vue":1,"resources_js_Pages_Site_Site_Index_vue":1,"resources_js_Pages_Site_Site_Layout_vue":1,"resources_js_Pages_Site_Site_tabs_js":1,"resources_js_Pages_System_Config_Edit_vue":1,"resources_js_Pages_System_Group_Form_vue":1,"resources_js_Pages_System_Group_Index_vue":1,"resources_js_Pages_System_Group_tabs_js":1,"resources_js_Pages_System_Home_Index_vue":1,"resources_js_Pages_System_Module_Index_vue":1,"resources_js_Pages_System_Module_tabs_js":1,"resources_js_Pages_System_My_Edit_vue":1,"resources_js_Pages_System_My_tabs_js":1,"resources_js_Pages_System_Package_Form_vue":1,"resources_js_Pages_System_Package_Index_vue":1,"resources_js_Pages_System_Package_tabs_js":1,"resources_js_Pages_Wechat_Default_Form_vue":1,"resources_js_Pages_Wechat_Menu_Edit_vue":1,"resources_js_Pages_Wechat_Wechat_Form_vue":1,"resources_js_Pages_Wechat_Wechat_Index_vue":1,"resources_js_Pages_Wechat_tabs_js":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_Pages_Auth_Footer_vue":1,"resources_js_Pages_Auth_Forget_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Register_vue":1,"resources_js_Pages_Member_Info_Avatar_vue":1,"resources_js_Pages_Member_Info_Base_vue":1,"resources_js_Pages_Member_Info_Email_vue":1,"resources_js_Pages_Member_Info_Mobile_vue":1,"resources_js_Pages_Member_Info_Password_vue":1,"resources_js_Pages_Site_Admin_Index_vue":1,"resources_js_Pages_Site_Admin_tabs_js":1,"resources_js_Pages_Site_Config_Components_Alipay_vue":1,"resources_js_Pages_Site_Config_Components_Aliyun_vue":1,"resources_js_Pages_Site_Config_Components_Base_vue":1,"resources_js_Pages_Site_Config_Components_Email_vue":1,"resources_js_Pages_Site_Config_Components_Sms_vue":1,"resources_js_Pages_Site_Config_Components_Upload_vue":1,"resources_js_Pages_Site_Config_Components_User_vue":1,"resources_js_Pages_Site_Config_Components_Wepay_vue":1,"resources_js_Pages_Site_Config_Edit_vue":1,"resources_js_Pages_Site_Config_config_js":1,"resources_js_Pages_Site_Module_Index_vue":1,"resources_js_Pages_Site_Module_tabs_js":1,"resources_js_Pages_Site_Permission_Form_vue":1,"resources_js_Pages_Site_Permission_tabs_js":1,"resources_js_Pages_Site_Role_Form_vue":1,"resources_js_Pages_Site_Role_Index_vue":1,"resources_js_Pages_Site_Role_tabs_js":1,"resources_js_Pages_Site_Site_Form_vue":1,"resources_js_Pages_Site_Site_Index_vue":1,"resources_js_Pages_Site_Site_Layout_vue":1,"resources_js_Pages_Site_Site_tabs_js":1,"resources_js_Pages_System_Config_Edit_vue":1,"resources_js_Pages_System_Group_Form_vue":1,"resources_js_Pages_System_Group_Index_vue":1,"resources_js_Pages_System_Group_tabs_js":1,"resources_js_Pages_System_Home_Index_vue":1,"resources_js_Pages_System_Module_Index_vue":1,"resources_js_Pages_System_Module_tabs_js":1,"resources_js_Pages_System_My_Edit_vue":1,"resources_js_Pages_System_My_tabs_js":1,"resources_js_Pages_System_Package_Form_vue":1,"resources_js_Pages_System_Package_Index_vue":1,"resources_js_Pages_System_Package_tabs_js":1,"resources_js_Pages_Wechat_Default_Form_vue":1,"resources_js_Pages_Wechat_Menu_Edit_vue":1,"resources_js_Pages_Wechat_Wechat_Form_vue":1,"resources_js_Pages_Wechat_Wechat_Index_vue":1,"resources_js_Pages_Wechat_tabs_js":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

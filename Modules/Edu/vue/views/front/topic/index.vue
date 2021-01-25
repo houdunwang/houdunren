@@ -1,12 +1,18 @@
 <template>
-    <div>
-        topic index333
-    </div>
+    <div></div>
 </template>
 
 <script>
 export default {
-    meta: 'abccccccccccccccc'
+    data() {
+        return {
+            topics: []
+        }
+    },
+    create() {
+        this.axios.get(``)
+    },
+    meta: { auth: false }
 }
 </script>
 

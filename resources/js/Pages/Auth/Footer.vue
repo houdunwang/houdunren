@@ -12,7 +12,7 @@
             登录 ·
         </inertia-link>
 
-        <inertia-link class="no-underline hover:text-gray-900 text-blue-dark text-xs" :href="route('auth.forget')" v-if="route().current() != 'auth.forget'">
+        <inertia-link class="no-underline hover:text-gray-900 text-blue-dark text-xs" :href="route('forget')" v-if="route().current() != 'auth.forget'">
             找回密码 ·
         </inertia-link>
 

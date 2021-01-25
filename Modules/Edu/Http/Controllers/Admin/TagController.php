@@ -36,7 +36,7 @@ class TagController extends Controller
         collect($request->input('tags'))->filter(function ($tag) {
             return trim($tag['title']) != '';
         })->map(function ($tag) {
-            Tag::updateOrCreate(['id' => $tag['id'] ?? 0], $tag + ['site_id' => SiteService::site()['id']]);
+            Tag::updateOrCreate(['id' => $tag['id'] ?? 0], $tag + ['site_id' => site()['id']]);
         });
         return back()->with('success', '标签保存成功');
     }
