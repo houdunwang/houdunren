@@ -1,8 +1,5 @@
 <?php
 
-use App\Services\Site\SiteFacade;
-use App\services\Site\SiteServiceProvider;
-
 return [
 
     /*
@@ -177,9 +174,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\TelescopeServiceProvider::class,
-        App\Providers\FortifyServiceProvider::class,
-        App\Providers\JetstreamServiceProvider::class,
         // 项目自定义
         App\Services\Code\CodeServiceProvider::class,
         App\Services\Config\ConfigServiceProvider::class,
@@ -193,6 +187,7 @@ return [
         App\Services\Upload\UploadServiceProvider::class,
         App\Services\User\UserServiceProvider::class,
         App\Services\WeChat\WeChatServiceProvider::class,
+
     ],
 
     /*
@@ -207,6 +202,7 @@ return [
     */
 
     'aliases' => [
+
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -256,6 +252,7 @@ return [
         'UploadService' => App\Services\Upload\UploadFacade::class,
         'UserService' => App\Services\User\UserFacade::class,
         'WeChatService' => App\Services\WeChat\WeChatFacade::class,
+
     ],
 
 ];

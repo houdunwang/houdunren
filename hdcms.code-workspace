@@ -4,10 +4,7 @@
 		"path": "."
 	},
 	{
-		"path": "Modules/Edu"
-	},
-	{
-		"path": "Modules/Edu/vue"
+		"path": "vue"
 	}
 ],
   "settings": {

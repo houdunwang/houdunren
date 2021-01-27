@@ -4,24 +4,22 @@ namespace App\Services\User;
 
 use App\Models\Site;
 use App\Models\User;
-use Illuminate\Contracts\Container\BindingResolutionException;
-use Auth;
 
 /**
  * 用户服务
+ * @package App\Services\User
  */
 class UserService
 {
     /**
      * 登录字段
+     *
      * @return string
-     * @throws BindingResolutionException
      */
-    public function account()
+    public function account(): string
     {
         return filter_var(request()->account, FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
     }
-
 
     /**
      * 超级管理员检测
@@ -29,48 +27,33 @@ class UserService
      * @param User $user
      * @return boolean
      */
-    public function isSuperAdmin(User $user = null): bool
+    public function isSuperAdmin(User $user): bool
     {
-        $user = $user ?? Auth::user();
-        if ($user) {
-            return Auth()->check() && Auth::user()->isSuperAdmin;
-        }
-        return false;
+        return $user->isSuperAdmin;
     }
 
     /**
      * 站点管理员检测
      *
-     * @param User $user
      * @param Site $site
+     * @param User $user
      * @return boolean
      */
-    public function isMaster(User $user = null, Site $site = null): bool
+    public function isMaster(Site $site, User $user): bool
     {
-        $site = $site ?? site();
-        $user = $user ?? Auth::user();
-
-        if ($site && $user) {
-            return $this->isSuperAdmin($user) || $user['id'] == $site['user_id'];
-        }
-        return false;
+        return $this->isSuperAdmin($user) || $user['id'] == $site['user_id'];
     }
 
     /**
      * 是否为站点管理员
      * 如果管理员没有配置权限将无法管理站点
+     *
      * @param User $user
      * @param Site $site
      * @return boolean
      */
-    public function isAdmin(User $user = null, Site $site = null): bool
+    public function isAdmin(Site $site, User $user): bool
     {
-        $site = $site ?? site();
-        $user = $user ?? Auth::user();
-
-        if ($site && $user) {
-            return $site->isAdmin($user);
-        }
-        return false;
+        return $site->isAdmin($user);
     }
 }

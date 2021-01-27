@@ -15,9 +15,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
-        if ($this->app->isLocal()) {
-            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
-        }
     }
 
     /**
@@ -27,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // 去掉资源的data包装
         JsonResource::withoutWrapping();
     }
 }

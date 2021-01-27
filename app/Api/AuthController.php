@@ -19,6 +19,10 @@ use Hash;
  */
 class AuthController extends Controller
 {
+    public function my()
+    {
+        return Auth::user();
+    }
     /**
      * 帐号登录
      *
@@ -30,7 +34,7 @@ class AuthController extends Controller
         $request->validate([
             'account' => ['required', Rule::exists('users', UserService::account()), new AccountRule(request('account'))],
             'password' => ['required'],
-            // 'captcha' => ['sometimes', 'captcha_api:' . request('captcha_key') . ',default']
+            // 'captcha' => ['required', 'captcha_api:' . request('captcha_key') . ',default']
         ], [
             'account' => '帐号不能为空',
             'account.exists' => '帐号不存在',

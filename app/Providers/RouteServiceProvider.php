@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/';
+    public const HOME = '/home';
 
     /**
      * The controller namespace for the application.
@@ -46,21 +46,6 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
-        });
-
-        $this->rateLimiter();
-    }
-
-    /**
-     * 限流配置
-     *
-     * @return void
-     */
-    protected function rateLimiter()
-    {
-        //验证码发送限流
-        RateLimiter::for('sendCode', function (Request $request) {
-            return Limit::perMinute(101);
         });
     }
 

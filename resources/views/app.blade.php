@@ -4,19 +4,28 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }}</title>
-    {{-- <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> --}}
-    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <!-- Scripts -->
-    @routes
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    {{-- tabler --}}
+    <link href="/tabler/dist/css/tabler.min.css?1611412966" rel="stylesheet" />
+    <link href="/tabler/dist/css/tabler-flags.min.css?1611412966" rel="stylesheet" />
+    <link href="/tabler/dist/css/tabler-payments.min.css?1611412966" rel="stylesheet" />
+    <link href="/tabler/dist/css/tabler-vendors.min.css?1611412966" rel="stylesheet" />
+    <link href="/tabler/dist/css/demo.min.css?1611412966" rel="stylesheet" />
+    {{-- tabler end --}}
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css" />
+    <script src="/js/app.js" defer></script>
 </head>
 
-<body class="font-sans antialiased">
-    @inertia
+<body>
+    <div id="app">
+
+    </div>
+    <!-- Libs JS -->
+    <script src="/tabler/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js?1611412966"></script>
+    <!-- Tabler Core -->
+    <script src="/tabler/dist/js/tabler.min.js?1611412966"></script>
 </body>
 
 </html>

@@ -11,10 +11,11 @@ class SiteResource extends JsonResource
 {
     public function toArray($request)
     {
-        $data = parent::toArray($request);
-        $data['permissions'] = $this->permissions;
-        $data['master'] = $this->master;
-        $data['module'] = $this->module;
+        $data = parent::toArray($request) + [
+            'master' => $this->master()->select('id', 'group_id')->with('group.packages')->first()
+        ];
+
+        unset($data['config']);
         return $data;
     }
 }
