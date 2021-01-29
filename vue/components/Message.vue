@@ -1,5 +1,7 @@
 <template>
-    <div v-show="false">{{ $page.props.flash.message }} {{ $page.props.flash.error }}</div>
+    <div v-show="false">
+        {{ $page.props.flash.message }} {{ $page.props.flash.error }}
+    </div>
 </template>
 
 <script>

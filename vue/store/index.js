@@ -17,6 +17,9 @@ export default new Vuex.Store({
         }
     },
     mutations: {
+        setErrors(state, errors) {
+            state.errors = errors
+        },
         setUser(state, user) {
             state.user = user
         }

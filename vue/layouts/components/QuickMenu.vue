@@ -1,0 +1,49 @@
+<template>
+    <div class="grid justify-items-stretch md:justify-between md:grid-cols-12 items-center px-4 md:py-10 mb-3">
+        <div class="logo hidden md:block md:w-96 col-span-10">
+            <a href="#">
+                <img src="" />
+            </a>
+        </div>
+        <div class="grid grid-flow-col auto-cols-fr gap-1 mt-3 md:mt-0 md:col-span-2">
+            <div v-for="(menu, index) in quickMenus" :key="index">
+                <router-link
+                    :to="menu.route"
+                    class="bg-white border rounded-lg shadow-md box-border px-4 py-2 flex flex-col justify-center items-center opacity-75 duration-500 hover:opacity-100"
+                >
+                    <i class="text-2xl" :class="menu.icon" aria-hidden="true"></i>
+                    <span class="text-sm">{{ menu.title }}</span>
+                </router-link>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { mapState } from 'vuex'
+const quickMenus = [
+    { title: '网站管理', route: '/admin', icon: 'fas fa-sitemap' },
+    { title: '系统设置', route: '', icon: 'far fa-life-ring' },
+    { title: '退出', route: '', icon: 'fas fa-sign-out-alt' }
+]
+export default {
+    route: { meta: { auth: true } },
+    data() {
+        return {
+            quickMenus
+        }
+    },
+    computed: {
+        ...mapState(['user'])
+    },
+    methods: {
+        logout() {
+            window.localStorage.removeItem('token')
+            location.reload(true)
+        }
+    }
+}
+</script>
+
+<style>
+</style>

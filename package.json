@@ -21,6 +21,7 @@
     "dependencies": {
         "dayjs": "^1.10.4",
         "element-ui": "^2.15.0",
+        "postcss-import": "^14.0.0",
         "vue": "^2.6.12",
         "vue-router": "^3.5.0",
         "vuex": "^3.6.2"

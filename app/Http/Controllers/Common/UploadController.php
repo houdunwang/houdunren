@@ -16,7 +16,7 @@ class UploadController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth:sanctum');
     }
 
     /**
@@ -39,6 +39,8 @@ class UploadController extends Controller
      */
     public function local(Request $request)
     {
+        dd(3);
+        dd($request->file);
         $request->validate(['file' => ['required', 'mimes:jpeg,png,mp3,gif', 'max:2000']]);
 
         return UploadService::local($request->file);

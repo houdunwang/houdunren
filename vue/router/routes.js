@@ -1,12 +1,6 @@
-import AdminLayout from '@/layouts/AdminLayout'
-import AuthLayout from '@/layouts/AuthLayout'
-const components = require.context('@/views', true, /\.vue$/i)
+import groups from './groups'
 
-//路由组
-const groups = {
-    auth: { path: '/auth', component: AuthLayout, children: [], ...AuthLayout.route },
-    site: { path: '/site', component: AdminLayout, children: [], ...AdminLayout.route }
-}
+const components = require.context('@/views', true, /\.vue$/i)
 
 components.keys().map(path => {
     const component = components(path).default

@@ -17,6 +17,11 @@ use Auth;
  */
 class SiteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['site', 'auth:sanctum']);
+    }
+
     /**
      * 站点列表
      *
@@ -57,19 +62,6 @@ class SiteController extends Controller
     }
 
     /**
-     * 编辑站点
-     *
-     * @param Site $site
-     * @return void
-     */
-    public function edit(Site $site)
-    {
-        $modules = ModuleService::allInstalled();
-        $templates = Auth::user()->group->templates;
-        return inertia()->render('Site/Site/Form', compact('modules', 'templates', 'site'));
-    }
-
-    /**
      * 更新站点
      *
      * @param SiteRequest $request
@@ -92,6 +84,6 @@ class SiteController extends Controller
     public function destroy(Site $site)
     {
         $site->delete();
-        return back()->with('success', '删除成功');
+        return ['message' => '删除成功'];
     }
 }

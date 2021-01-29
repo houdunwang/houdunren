@@ -39,15 +39,15 @@ class Handler extends ExceptionHandler
         });
     }
 
-    public function render($request, Throwable $exception)
-    {
-        $response = parent::render($request, $exception);
-        $code = $response->status();
-        if ($request->expectsJson()) {
-            if ($message = $this->messages[$code] ?? null) {
-                return response(['message' => $message, $code]);
-            }
-        }
-        return $response;
-    }
+    // public function render($request, Throwable $exception)
+    // {
+    //     $response = parent::render($request, $exception);
+    //     if ($request->expectsJson()) {
+    //         $code = $response->status();
+    //         if($message = $this->messages[$code] ?? ''){
+    //          return response(['message' => $message], $code);
+    //         }
+    //     }
+    //     return $response;
+    // }
 }

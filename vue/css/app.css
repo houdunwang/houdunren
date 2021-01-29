@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@tailwind screens;
 a {
     text-decoration: none !important;
     color: #555;
@@ -9,4 +9,5 @@ a {
 }
 a:hover {
     text-decoration: none !important;
+    color: inherit !important;
 }

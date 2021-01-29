@@ -1,12 +1,5 @@
 <template>
-    <el-upload
-        class="avatar-uploader"
-        :action="action"
-        :show-file-list="false"
-        :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload"
-        :headers="headers"
-    >
+    <el-upload class="avatar-uploader" :action="`/api/${action}`" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :headers="headers">
         <img v-if="imageUrl" :src="imageUrl" class="avatar" />
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
@@ -15,14 +8,14 @@
 <script>
 export default {
     props: {
-        action: { type: String, default: '/common/upload/local' },
+        action: { type: String, default: 'upload/local' },
         value: { type: String }
     },
     data() {
         return {
             imageUrl: this.value,
             headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                Authorization: `Bearer ${this.$store.getters.token}`
             }
         }
     },
@@ -66,6 +59,7 @@ export default {
     text-align: center;
 }
 .avatar {
+    width: auto;
     height: 178px;
     display: block;
     background: #f3f3f3;

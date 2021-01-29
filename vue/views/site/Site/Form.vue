@@ -1,5 +1,6 @@
 <template>
     <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal">
+        <hd-tab :tabs="tabs" />
         <el-card shadow="always" :body-style="{ padding: '20px' }">
             <div slot="header">
                 <span>站点资料</span>
@@ -42,19 +43,27 @@
 
 <script>
 import tabs from './tabs'
+const form = { title: '', domain: '', module_id: null }
 
 export default {
     route: false,
-    props: ['form'],
+    props: ['data'],
     data() {
         return {
+            form: this.data || Object.assign({}, form),
+            tabs,
             modules: []
         }
     },
+    created() {
+        console.log(1)
+    },
     methods: {
         async onSubmit() {
-            const url = this.form.id ? `site/site/${this.site.id}` : 'site/site/store'
+            const url = this.form.id ? `site/site/${this.site.id}` : 'site'
             await this.axios[this.form.id ? 'put' : 'post'](url, this.form)
+            // this.form = form
+            this.$router.push('/admin')
         }
     }
 }
