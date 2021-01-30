@@ -24,7 +24,6 @@ class SiteController extends Controller
 
     /**
      * 站点列表
-     *
      * @return void
      */
     public function index()
@@ -34,18 +33,11 @@ class SiteController extends Controller
         return SiteResource::collection($sites);
     }
 
-    /**
-     * 创建站点
-     *
-     * @return void
-     */
-    public function create()
+    public function show(Site $site)
     {
-        $modules = ModuleService::allInstalled();
-        $templates = Auth::user()->group->templates;
-        return ['message' => '添加成功'];
+        $this->authorize('view', $site);
+        return new SiteResource($site);
     }
-
     /**
      * 保存站点
      *
@@ -70,6 +62,7 @@ class SiteController extends Controller
      */
     public function update(SiteRequest $request, Site $site)
     {
+        $this->authorize('update', $site);
         $site->user_id = auth()->id();
         $site->fill($request->input())->save();
         return ['message' => '站点修改成功', 'site' => $site];

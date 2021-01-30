@@ -12,7 +12,7 @@ class GroupResource extends JsonResource
     public function toArray($request)
     {
         return parent::toArray($request) + [
-            'packages' => $this->packages
+            'packages' => PackageResource::collection($this->packages)
         ];
     }
 }

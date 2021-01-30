@@ -2,7 +2,7 @@
     <div class="grid justify-items-stretch md:justify-between md:grid-cols-12 items-center px-4 md:py-10 mb-3">
         <div class="logo hidden md:block md:w-96 col-span-10">
             <a href="#">
-                <img src="" />
+                <img :src="$store.state.config.logo" />
             </a>
         </div>
         <div class="grid grid-flow-col auto-cols-fr gap-1 mt-3 md:mt-0 md:col-span-2">
@@ -23,7 +23,7 @@
 import { mapState } from 'vuex'
 const quickMenus = [
     { title: '网站管理', route: '/admin', icon: 'fas fa-sitemap' },
-    { title: '系统设置', route: '', icon: 'far fa-life-ring' },
+    { title: '系统设置', route: '/system/index', icon: 'far fa-life-ring' },
     { title: '退出', route: '', icon: 'fas fa-sign-out-alt' }
 ]
 export default {
@@ -45,5 +45,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

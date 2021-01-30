@@ -3,6 +3,8 @@
 namespace App\Services\Site;
 
 use App\Models\Site;
+use App\Models\User;
+use UserService;
 
 /**
  * 站点服务
@@ -33,5 +35,17 @@ class SiteService
         static $cache = null;
         if (is_null($site)) return $cache;
         return $cache = $site;
+    }
+
+    /**
+     * 站点管理员
+     *
+     * @param Site $site
+     * @param User $user
+     * @return boolean
+     */
+    public function isMaster(Site $site, User $user)
+    {
+        return UserService::isSuperAdmin($user) || UserService::isMaster($user);
     }
 }

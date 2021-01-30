@@ -45,8 +45,8 @@ _axios.interceptors.response.use(
                 store.commit('setErrors', data)
                 break
             case 401:
-                store.getters.token.removeItem('token')
-                router.push('login')
+                window.localStorage.removeItem('token')
+                location.href = '/login'
                 break
             default:
                 el.MessageBox.confirm(data.message || httpStatus(status), '温馨提示', {

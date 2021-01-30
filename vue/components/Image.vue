@@ -1,6 +1,13 @@
 <template>
-    <el-upload class="avatar-uploader" :action="`/api/${action}`" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :headers="headers">
-        <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+    <el-upload
+        class="avatar-uploader"
+        :action="`/api/${action}`"
+        :show-file-list="false"
+        :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload"
+        :headers="headers"
+    >
+        <img v-if="value" :src="value" class="avatar" />
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
 </template>
@@ -13,7 +20,6 @@ export default {
     },
     data() {
         return {
-            imageUrl: this.value,
             headers: {
                 Authorization: `Bearer ${this.$store.getters.token}`
             }

@@ -33,7 +33,7 @@ const menus = [
         items: [
             { title: '我的帐户', to: '', icon: 'fas fa-eraser' },
             { title: '用户组管理', to: '', icon: 'fas fa-drum-steelpan' },
-            { title: '服务套餐', to: '', icon: 'fas fa-disease' }
+            { title: '服务套餐', to: '/system/package/index', icon: 'fas fa-disease' }
         ]
     },
     {
@@ -53,5 +53,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

@@ -9,11 +9,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        $this->call(PackageSeeder::class);
-        $this->call(GroupSeeder::class);
-        $this->call(UserSeeder::class);
-        $this->call(ConfigSeeder::class);
-        $this->call(SiteSeeder::class);
-        $this->call(RoleSeeder::class);
+        $this->call([
+            PackageSeeder::class,
+            GroupSeeder::class,
+            UserSeeder::class,
+            SiteSeeder::class,
+            RoleSeeder::class,
+            SystemConfigSeeder::class
+        ]);
     }
 }

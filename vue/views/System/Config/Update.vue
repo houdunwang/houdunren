@@ -1,5 +1,5 @@
 <template>
-    <el-card shadow="always" :body-style="{ padding: '20px' }">
+    <el-card shadow="always" :body-style="{ padding: '20px' }" v-loading="loading">
         <div slot="header">
             <span>系统配置</span>
         </div>
@@ -23,11 +23,16 @@
 <script>
 export default {
     data() {
-        return { form: { title: '', copyright: '', logo: '' } }
+        return { form: { title: '', copyright: '', logo: '' }, loading: true }
+    },
+    async created() {
+        this.form = await this.axios.get(`system/config/1`)
+        this.loading = false
     },
     methods: {
-        onSubmit() {
-            this.axios.put('/system/config/update', this.form)
+        async onSubmit() {
+            await this.axios.put('system/config/1', this.form)
+            this.$store.dispatch('getSystemConfig')
         }
     }
 }

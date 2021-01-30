@@ -6,6 +6,7 @@ use App\Models\Site;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
+use UserService;
 
 /**
  * 站点权限验证
@@ -21,9 +22,9 @@ class SitePolicy
         }
     }
 
-    public function viewAny(User $user)
+    public function view(User $user, Site $site)
     {
-        return true;
+        return UserService::isMaster($site, $user);
     }
 
     public function create(User $user)

@@ -1,13 +1,13 @@
 <template>
-    <div class="text-xs font-bold text-red-700 mt-2" v-if="message">
+    <div class="text-xs font-bold text-red-700 mt-2" v-if="errors(name)">
         <i class="fa fa-info-circle" aria-hidden="true"></i>
-        {{ message }}
+        {{ errors(name) }}
     </div>
 </template>
 
 <script>
 export default {
-    props: ['message']
+    props: ['name']
 }
 </script>
 

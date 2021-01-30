@@ -6,6 +6,8 @@ use App\Api\UserController;
 use App\Api\SiteController;
 use App\Api\CaptchaController;
 use App\Api\UploadController;
+use App\Api\SystemConfigController;
+use App\Api\PackageController;
 
 //验证码
 Route::get('captcha', [CaptchaController::class, 'create']);
@@ -25,5 +27,9 @@ Route::put('user/email', [UserController::class, 'email']);
 Route::apiResource('user', UserController::class);
 //文件上传
 Route::post('upload/local', [UploadController::class, 'local']);
+//系统配置
+Route::apiResource('system/config', SystemConfigController::class);
+//套餐
+Route::apiResource('package', PackageController::class);
 //站点管理
 Route::apiResource('site', SiteController::class);

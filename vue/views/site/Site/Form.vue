@@ -1,5 +1,5 @@
 <template>
-    <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal">
+    <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal" v-loading="loading">
         <hd-tab :tabs="tabs" />
         <el-card shadow="always" :body-style="{ padding: '20px' }">
             <div slot="header">
@@ -7,11 +7,11 @@
             </div>
             <el-form-item label="站点名称">
                 <el-input v-model="form.title" />
-                <hd-error :message="errors('title')" />
+                <hd-error name="title" />
             </el-form-item>
             <el-form-item label="访问域名">
                 <el-input v-model="form.domain" />
-                <hd-error :message="errors('domain')" />
+                <hd-error name="domain" />
             </el-form-item>
         </el-card>
         <el-card shadow="always" :body-style="{ padding: '20px' }" class="mt-3">
@@ -47,16 +47,18 @@ const form = { title: '', domain: '', module_id: null }
 
 export default {
     route: false,
-    props: ['data'],
+    props: ['id'],
     data() {
         return {
-            form: this.data || Object.assign({}, form),
+            form: Object.assign({}, form),
             tabs,
-            modules: []
+            modules: [],
+            loading: true
         }
     },
-    created() {
-        console.log(1)
+    async created() {
+        if (this.id) this.form = await this.axios.get(`site/${this.id}`)
+        this.loading = false
     },
     methods: {
         async onSubmit() {

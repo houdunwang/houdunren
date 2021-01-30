@@ -29,7 +29,7 @@ class UserService
      */
     public function isSuperAdmin(User $user): bool
     {
-        return $user->isSuperAdmin;
+        return $user && $user->isSuperAdmin;
     }
 
     /**

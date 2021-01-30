@@ -24,19 +24,19 @@ class Site extends Model
     ];
 
     protected $appends = [
-        'permissions',
+        'permission',
     ];
 
     /**
      * 模型权限
-     *
      * @return void
      */
-    public function getPermissionsAttribute()
+    public function getPermissionAttribute()
     {
         if (Auth::check())
             return [
-                'edit' => Auth::user()->can('update', $this),
+                'view' => Auth::user()->can('view', $this),
+                'update' => Auth::user()->can('update', $this),
                 'delete' => Auth::user()->can('delete', $this)
             ];
     }

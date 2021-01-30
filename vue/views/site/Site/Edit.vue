@@ -1,6 +1,6 @@
 <template>
     <div>
-        <XForm />
+        <XForm :id="$route.params.id" />
     </div>
 </template>
 
@@ -8,13 +8,7 @@
 import XForm from './Form'
 export default {
     route: { path: 'site/:id/edit' },
-    components: { XForm },
-    created() {
-        console.log(1)
-    },
-    data() {
-        return {}
-    }
+    components: { XForm }
 }
 </script>
 

@@ -56,6 +56,9 @@ export default {
             form: this.$inertia.form(this.site || form)
         }
     },
+    mounted() {
+        alert(3)
+    },
     methods: {
         onSubmit() {
             const url = this.form.id ? route('site.site.update', this.site) : route('site.site.store')

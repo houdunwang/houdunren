@@ -21,7 +21,6 @@ class SiteMiddleware
         if (!$this->checkAccess()) {
             return redirect()->route('site.site.index')->with('message', '你没有操作权限');
         }
-        config(['admin' => Config::find(1)->config]);
         return $next($request);
     }
 
