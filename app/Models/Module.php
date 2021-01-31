@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Module extends Model
 {
-    protected $fillable = ['title', 'name', 'version', 'preview', 'description', 'author'];
+    protected $fillable = ['title', 'name', 'version', 'description', 'author'];
 
     public function packages()
     {

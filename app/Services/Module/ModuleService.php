@@ -36,20 +36,16 @@ class ModuleService
      */
     public function all(): ?Collection
     {
-        return $this->format(ModulePlugin::toCollection());
+        return $this->format(ModulePlugin::toCollection())->values();
     }
 
     /**
      * 所有已经安装的模块
-     *
      * @return Collection|null
      */
     public function allInstalled(): ?Collection
     {
-        $modules = ModulePlugin::toCollection()->filter(function ($module) {
-            return Module::where('name', $module->getName())->first();
-        });
-        return $this->format($modules);
+        return $this->all()->filter(fn ($module) => $module['isInstall']);
     }
 
     /**
@@ -60,14 +56,15 @@ class ModuleService
      */
     protected function format(Collection $modules): Collection
     {
-        return collect($modules->toArray())->map(function ($module) {
-            $model = Module::where('name', $module['name'])->first();
+        return $modules->map(function ($module) {
+            $name = $module->getName();
+            $id = Module::where('name', $name)->value('id');
             return
-                $module + $this->config($module['name'], 'config')
+                $this->config($name, 'config')
                 + [
-                    'id' => $model['id'],
-                    'preview' => url("/modules/{$module['name']}/static/preview.jpg"),
-                    'isInstall' => $model
+                    'id' => $id,
+                    'preview' => url("/modules/{$name}/static/preview.jpg"),
+                    'isInstall' => (bool)$id
                 ];
         });
     }

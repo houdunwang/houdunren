@@ -4,6 +4,10 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * 会员组
+ * @package
+ */
 class CreateGroupsTable extends Migration
 {
     public function up()

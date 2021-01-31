@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Package extends Model
 {
-    protected $fillable = ['title', 'days'];
+    protected $fillable = ['title'];
 
     /**
      * 模块关联

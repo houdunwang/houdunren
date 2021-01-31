@@ -19,7 +19,8 @@ class SiteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['site', 'auth:sanctum']);
+        $this->middleware(['auth:sanctum']);
+        $this->middleware(['site'])->except('index');
     }
 
     /**

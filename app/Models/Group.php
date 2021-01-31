@@ -21,7 +21,7 @@ class Group extends Model
      */
     public function packages()
     {
-        return $this->belongsToMany(Package::class);
+        return $this->belongsToMany(Package::class)->withTimestamps();
     }
 
     /**

@@ -19,13 +19,16 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'github' => ['nullable', 'url'],
-            'weibo' => ['nullable', 'url'],
             'qq' => ['nullable', 'numeric'],
+            'email' => ['nullable', 'email'],
+            'home' => ['nullable', 'url'],
+            'weibo' => ['nullable', 'url'],
+            'github' => ['nullable', 'url'],
+            'wakatime' => ['nullable', 'url'],
         ];
     }
     public function attributes()
     {
-        return ['weibo' => '微博'];
+        return ['weibo' => '微博', 'home' => '个人网站', 'qq' => 'QQ号', 'github' => 'github'];
     }
 }

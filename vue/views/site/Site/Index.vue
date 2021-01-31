@@ -55,8 +55,7 @@ const menus = [
     { title: '微信公众号', to: '', icon: 'fas fa-comment-dollar' },
     { title: '管理员设置', to: '', icon: 'fas fa-user-alt' },
     { title: '角色管理', to: '', icon: 'fas fa-user-lock' },
-    { title: '更新权限表', to: '', icon: 'fas fa-life-ring' },
-    { title: '菜单设置', to: '', icon: 'fas fa-archive' }
+    { title: '更新权限表', to: '', icon: 'fas fa-life-ring' }
 ]
 export default {
     route: { path: '/admin' },

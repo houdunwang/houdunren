@@ -16,6 +16,12 @@ use App\Http\Resources\PackageResource;
  */
 class GroupController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->authorizeResource(Group::class, 'group');
+    }
+
     /**
      * 会员组列表
      *

@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('mobile')->nullable()->unique();
             $table->string('real_name', 20)->nullable()->comment('真实姓名');
             $table->string('password')->nullable()->comment('密码');
-            $table->string('home')->nullable()->comment('个人主页');
+            $table->string('home')->nullable()->comment('个人网站');
             $table->string('avatar')->nullable()->comment('头像');
             $table->string('weibo')->nullable()->comment('微博地址');
             $table->string('wechat')->nullable()->comment('微信号');

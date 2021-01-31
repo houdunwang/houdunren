@@ -3,11 +3,13 @@
 namespace App\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Http\Requests\UserRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Rules\CodeRule;
-use App\Http\Resources\UserResource;
+use App\Models\User;
+use App\Rules\OldPassword;
 use Hash;
 use Auth;
 
@@ -27,27 +29,49 @@ class UserController extends Controller
      *
      * @return void
      */
+    public function index(User $user)
+    {
+        return UserResource::collection(User::paginate());
+    }
+
+    /**
+     * 当前用户资料
+     *
+     * @return void
+     */
     public function info()
     {
         return new UserResource(Auth::user());
     }
-
     /**
-     * 修改个人资料
+     * 获取用户资料
      *
-     * @param Request $request
+     * @param User|null $user
      * @return void
      */
-    public function base(UserRequest $request)
+    public function show(?User $user)
     {
-        Auth::user()->fill($request->input())->save();
+        $user = $user ?? Auth::user();
+        $this->authorize('view', $user);
+        return new UserResource($user);
+    }
 
-        return ['message' => '修改成功'];
+    /**
+     * 更新资料
+     *
+     * @param UserRequest $request
+     * @param User $user
+     * @return void
+     */
+    public function update(UserRequest $request, User $user)
+    {
+        $this->authorize('update', $user);
+        $user->fill($request->input())->save();
+        return ['message' => '资料修改成功'];
     }
 
     /**
      * 密码修改
-     *
      * @param Request $request
      * @return void
      */
@@ -55,31 +79,14 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $this->validate($request, [
-            'old_password' => ['required'],
+            'old_password' => ['required', new OldPassword($user)],
             'password' => ['required', 'confirmed', 'between:5,20'],
         ], ['old_password.required' => '原密码不能为空']);
 
-        if (!Hash::check($request->old_password, $user->password)) {
-            return response(['message' => '原密码输入错误'], 403);
-        }
-
         $user['password'] = Hash::make($request->input('password'));
         $user->save();
-        return response(['message' => '密码修改成功']);
-    }
 
-    /**
-     * 修改头像
-     *
-     * @param Request $request
-     * @return void
-     */
-    public function avatar(Request $request)
-    {
-        $user = Auth::user();
-        $user->avatar = $request->avatar;
-        $user->save();
-        return ['message' => '头像修改成功'];
+        return ['message' => '密码修改成功'];
     }
 
     /**
@@ -124,7 +131,6 @@ class UserController extends Controller
     }
 
     /**
-     *
      * 绑定邮箱
      *
      * @param Request $request

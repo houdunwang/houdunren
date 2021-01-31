@@ -1,0 +1,85 @@
+<template>
+    <div v-loading="loading">
+        <hd-tab :tabs="tabs" />
+        <el-card shadow="always" :body-style="{ padding: '20px' }">
+            <template v-slot:header="">会员组资料</template>
+            <el-form :model="form" ref="form" label-width="120px" :inline="false" size="normal">
+                <el-form-item label="会员组名称">
+                    <el-input type="text" v-model="form.title"></el-input>
+                    <hd-error message="title" />
+                </el-form-item>
+                <el-form-item label="站点数量">
+                    <el-input type="text" v-model="form.site_num"></el-input>
+                    <hd-error message="site_num" />
+                </el-form-item>
+                <el-form-item label="可用天数">
+                    <el-input v-model="form.days"></el-input>
+                    <hd-error message="days" />
+                </el-form-item>
+            </el-form>
+        </el-card>
+        <el-card shadow="always" :body-style="{ padding: '20px' }" class="mt-3">
+            <div slot="header">
+                <span>套餐选择</span>
+            </div>
+            <el-table ref="multipleTable" :data="packages" tooltip-effect="dark" @selection-change="handleSelectionPackageChange">
+                <el-table-column type="selection" width="55"> </el-table-column>
+                <el-table-column label="编号" width="120" v-slot="{ row: p }">
+                    <template>{{ p.id }}</template>
+                </el-table-column>
+                <el-table-column prop="title" label="套餐名称"> </el-table-column>
+                <el-table-column prop="site_num" label="站点数量"> </el-table-column>
+                <el-table-column prop="days" label="可用天数"> </el-table-column>
+                <el-table-column label="可用模块" #default="{row:p}">
+                    {{ p.title }}
+                </el-table-column>
+            </el-table>
+        </el-card>
+        <div class="mt-3">
+            <el-button type="primary" @click="onSubmit">保存提交</el-button>
+        </div>
+    </div>
+</template>
+
+<script>
+import tabs from './tabs'
+const form = { title: '', site_num: 3, days: 365, packages: [] }
+export default {
+    route: false,
+    props: ['id'],
+    data() {
+        return {
+            form: Object.assign(form),
+            packages: [],
+            tabs,
+            loading: true
+        }
+    },
+    async created() {
+        this.packages = await this.axios.get(`package`)
+        //编辑时让套餐选中
+        if (this.id) {
+            this.form = await this.axios.get(`group/${this.id}`)
+            this.form.packages = this.form.packages.map(p => {
+                const sp = this.packages.find(fp => fp.id == p.id)
+                this.$refs.multipleTable.toggleRowSelection(sp)
+                return p.id
+            })
+        }
+        this.loading = false
+    },
+    methods: {
+        async onSubmit() {
+            const url = this.id ? `group/${this.id}` : `group`
+            await this.axios[this.id ? 'put' : 'post'](url, this.form)
+            this.$router.push(`/system/group/index`)
+        },
+        //选择套餐
+        handleSelectionPackageChange(packages) {
+            this.form.packages = packages.map(p => p.id)
+        }
+    }
+}
+</script>
+
+<style></style>

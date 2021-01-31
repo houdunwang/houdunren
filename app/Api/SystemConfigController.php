@@ -16,19 +16,29 @@ class SystemConfigController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
+        $this->middleware(['auth:sanctum', 'system']);
     }
 
+    /**
+     * 获取系统配置
+     *
+     * @param SystemConfig $config
+     * @return void
+     */
     public function show(SystemConfig $config)
     {
-        $this->authorize('view', $config);
         return new SystemConfigResource($config);
     }
 
-
+    /**
+     * 更新配置
+     *
+     * @param Request $request
+     * @param SystemConfig $config
+     * @return void
+     */
     public function update(Request $request, SystemConfig $config)
     {
-        // dd($request->all());
         $config['config'] = $request->input();
         $config->save();
         return ['message' => '系统配置修改成功'];

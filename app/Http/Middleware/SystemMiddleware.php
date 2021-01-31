@@ -14,11 +14,8 @@ class SystemMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
-        if (!UserService::isSuperAdmin()) {
-            return back()->with('message', '你没有操作权限');
+        if (!UserService::isSuperAdmin(Auth::user())) {
+            abort(403, '你不是超级管理员，没有操作权限');
         }
 
         return $next($request);

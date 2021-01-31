@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use App\Models\Config;
 use Illuminate\Support\Facades\Auth;
+use UserService;
 
 /**
  * 站点控制器
@@ -14,12 +15,8 @@ class SiteMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
-
         if (!$this->checkAccess()) {
-            return redirect()->route('site.site.index')->with('message', '你没有操作权限');
+            abort(403, '你没有操作权限');
         }
         return $next($request);
     }
@@ -31,19 +28,9 @@ class SiteMiddleware
      */
     protected function checkAccess(): bool
     {
-
-
-        $site = request()->site;
-        return $site ? $this->isMaster($site) : true;
-    }
-
-    /**
-     * 站长检测
-     *
-     * @return boolean
-     */
-    protected function isMaster($site): bool
-    {
-        return Auth::user()->isSuperAdmin || $site->master->id == Auth::id();
+        if ($site = request()->site) {
+            return  UserService::isMaster($site, Auth::user());
+        }
+        return false;
     }
 }

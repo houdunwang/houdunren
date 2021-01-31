@@ -7,26 +7,15 @@
                 <el-input v-model="form.title"></el-input>
                 <hd-error name="title" />
             </el-form-item>
-            <el-form-item label="可用天数">
-                <el-input type="number" v-model="form.days"></el-input>
-                <hd-error name="days" />
-            </el-form-item>
         </el-card>
         <el-card shadow="always" :body-style="{ padding: '20px' }" class="mt-3">
             <div slot="header">
                 <span>模块选择</span>
             </div>
-            <el-table :data="modules" style="width: 100%" border ref="moduleTable" @selection-change="handleSelectionModuleChange">
-                <el-table-column type="selection" width="55"> </el-table-column>
-                <el-table-column prop="id" label="编号" width="100"> </el-table-column>
-                <el-table-column label="预览图" width="100" v-slot="{ row: module }">
-                    <el-image style="width: 50px; height: 50px" :src="module.preview" fit="cover"></el-image>
-                </el-table-column>
-                <el-table-column prop="title" label="模块名称"> </el-table-column>
-                <el-table-column prop="name" label="模块标识" width="100"> </el-table-column>
-                <el-table-column prop="author" label="作者" width="100"> </el-table-column>
-                <el-table-column prop="version" label="版本号" width="100"> </el-table-column>
-            </el-table>
+            <hd-module-list :modules="modules" #default="{module}">
+                <el-button type="primary" size="mini" v-if="module.selected" @click="module.selected = false">取消选择</el-button>
+                <el-button type="info" size="mini" v-else @click="module.selected = true">选择模块</el-button>
+            </hd-module-list>
         </el-card>
         <el-button type="primary" @click="onSubmit" class="block mt-3">保存提交</el-button>
     </el-form>
@@ -34,7 +23,7 @@
 
 <script>
 import tabs from './tabs'
-const form = { title: '', days: 7, modules: [] }
+const form = { title: '', modules: [] }
 
 export default {
     props: ['id'],
@@ -47,10 +36,20 @@ export default {
     },
     async created() {
         if (this.id) this.form = await this.axios.get(`package/${this.id}`)
+
+        //模块列表中添加字面记录当前套餐模块
+        const modules = await this.axios.get(`module/installed`)
+        this.modules = modules.map(m => {
+            m.selected = this.form.modules.some(fm => fm.id == m.id)
+            return m
+        })
     },
     methods: {
         async onSubmit() {
             const url = this.id ? `package/${this.id}` : `package`
+            //从模块列表中提出id
+            this.form.modules = this.modules.filter(m => m.selected).map(m => m.id)
+
             await this.axios[this.id ? 'put' : 'post'](url, this.form)
             this.$router.push({ name: 'system.package.index' })
         },

@@ -17,8 +17,7 @@ class PackageController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum');
-        $this->authorizeResource(Package::class, 'package');
+        $this->middleware(['auth:sanctum', 'system']);
     }
 
     /**
@@ -51,7 +50,7 @@ class PackageController extends Controller
     public function store(PackageRequest $request)
     {
         $package = Package::create($request->input());
-        // $package->modules()->sync($request->input('modules'));
+        $package->modules()->sync($request->input('modules'));
         // $package->templates()->sync($request->input('templates'));
         return ['message' => '套餐添加成功'];
     }
@@ -68,7 +67,7 @@ class PackageController extends Controller
     public function update(PackageRequest $request, Package $package)
     {
         $package->fill($request->input())->save();
-        // $package->modules()->sync($request->input('modules'));
+        $package->modules()->sync($request->input('modules'));
         // $package->templates()->sync($request->input('templates'));
         return ['message' => '套餐修改成功'];
     }
@@ -82,9 +81,9 @@ class PackageController extends Controller
     public function destroy(Package $package)
     {
         if ($package->id == 1) {
-            return back()->with('message', '系统套餐不允许删除');
+            return response(['message' => '系统套餐不允许删除'], 403);
         }
         $package->delete();
-        return back()->with('success', '删除成功');
+        return ['message' => '套餐删除成功'];
     }
 }

@@ -3,23 +3,26 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use UserService;
+use Auth;
 
 /**
- * 会员组
+ * 会员组表单验证
+ * @package App\Http\Requests
  */
 class GroupRequest extends FormRequest
 {
     public function authorize()
     {
-        return user()->isSuperAdmin;
+        return UserService::isSuperAdmin(Auth::user());
     }
 
     public function rules()
     {
         return [
-            'title' => ['required', 'min:3'],
-            'site_num' => ['required', 'between:1,255'],
-            'days' => ['required', 'between:1,65535'],
+            'title' => ['required', 'between:3,30'],
+            'site_num' => ['required', 'integer', 'between:1,255'],
+            'days' => ['required', 'integer', 'between:1,65535'],
         ];
     }
 

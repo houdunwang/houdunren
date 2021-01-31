@@ -4,6 +4,8 @@ namespace App\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use UserService;
+use Auth;
 
 class UserPolicy
 {
@@ -29,7 +31,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        //
+        return $user['id'] == $model['id'];
     }
 
     /**
@@ -52,7 +54,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        //
+        return UserService::isSuperAdmin($user) ||  $user['id'] == $model['id'];
     }
 
     /**
