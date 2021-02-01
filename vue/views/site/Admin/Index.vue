@@ -12,13 +12,15 @@
             <el-table-column prop="mobile" label="角色" width="200"> </el-table-column>
             <el-table-column width="200" align="center" #default="{row:user}">
                 <el-button-group>
-                    <el-button type="danger" :user="user" size="small">设置角色</el-button>
+                    <el-button type="danger" :user="user" size="small" @click="$router.push({ name: 'site.admin.role', params: { sid, id: user.id } })">
+                        设置角色
+                    </el-button>
                     <el-button type="info" size="small" @click="remove(user)">移除</el-button>
                 </el-button-group>
             </el-table-column>
         </el-table>
         <div class="mt-3">
-            <!-- <hd-user title="选择管理员" :action="route('site.admin.search', site)" @change="setAdmin" /> -->
+            <hd-user-search title="选择管理员" @change="setAdmin" />
         </div>
     </div>
 </template>
@@ -27,20 +29,23 @@ import tabs from './tabs'
 export default {
     route: { path: `:sid/admin/index` },
     data() {
-        return { tabs: tabs({ sid: this.sid }), site: {}, users: [], sid: this.$route.params.sid }
+        return { tabs: tabs({ sid: this.$route.params.sid }), site: {}, users: [], sid: this.$route.params.sid }
     },
     async created() {
         this.site = await this.axios.get(`site/${this.sid}`)
+        this.users = await this.axios.get(`${this.sid}/admin`)
     },
     methods: {
         //设置管理员
         async setAdmin(user) {
-            this.$inertia.post(route('site.admin.store', this.site), { user })
+            await this.axios.put(`${this.sid}/admin/${user.id}`)
+            this.users.push(user)
         },
         //移除管理员
         async remove(user) {
-            this.$confirm('确定删除吗？', '温馨提示').then(() => {
-                this.$inertia.delete(route('site.admin.destroy', [this.site, user]))
+            this.$confirm('确定删除吗？', '温馨提示').then(async () => {
+                await this.axios.delete(`${this.sid}/admin/${user.id}`)
+                this.users.splice(this.users.indexOf(user), 1)
             })
         }
     }

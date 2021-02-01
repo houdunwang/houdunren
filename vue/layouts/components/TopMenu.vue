@@ -20,7 +20,9 @@
                 <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                     <ul class="navbar-nav">
                         <li class="nav-item" v-for="(menu, index) in menus" :key="index">
-                            <router-link :to="menu.route" class="nav-link"> <i :class="menu.icon" class="mr-1" aria-hidden="true"></i> {{ menu.title }} </router-link>
+                            <router-link :to="menu.route" class="nav-link">
+                                <i :class="menu.icon" class="mr-1" aria-hidden="true"></i> {{ menu.title }}
+                            </router-link>
                         </li>
                     </ul>
                 </div>
@@ -33,9 +35,9 @@
 import { mapState } from 'vuex'
 const menus = [
     { title: '站点管理', route: '/admin', icon: 'fa fa-sitemap' },
-    { title: '模块管理', route: '', icon: 'fa fa-cubes' },
+    { title: '模块管理', route: '/system/module/index', icon: 'fa fa-cubes' },
     { title: '系统设置', route: '/system/index', icon: 'fas fa-comment' },
-    { title: '会员组', route: '', icon: 'fa fa-users' }
+    { title: '会员组', route: '/system/group/index', icon: 'fa fa-users' }
 ]
 export default {
     route: { meta: { auth: true } },
@@ -64,5 +66,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

@@ -13,6 +13,8 @@ use App\Api\ModuleController;
 use App\Api\SiteConfigController;
 use App\Api\RoleController;
 use App\Api\PermissionController;
+use App\Api\AdminController;
+use App\Api\WeChatController;
 
 //验证码
 Route::get('captcha', [CaptchaController::class, 'create']);
@@ -52,3 +54,8 @@ Route::apiResource('{site}/role', RoleController::class);
 //权限管理
 Route::get('{site}/permission/sync', [PermissionController::class, 'syncSitePermissions']);
 Route::put('{site}/permission/{role}', [PermissionController::class, 'update']);
+//管理员
+Route::put('{site}/admin_role/{admin}', [AdminController::class, 'setRole']);
+Route::apiResource('{site}/admin', AdminController::class);
+//站点公众号
+Route::apiResource('{site}/wechat', WeChatController::class);

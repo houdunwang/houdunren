@@ -43,7 +43,7 @@ export default {
     },
     methods: {
         async onSubmit() {
-            await this.axios.put(`/config/site/${this.sid}`, this.form)
+            await this.axios.put(`/config/site/${this.$route.params.sid}`, this.form)
             this.$router.push(`/admin`)
         }
     }

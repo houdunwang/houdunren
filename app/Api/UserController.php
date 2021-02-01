@@ -29,9 +29,12 @@ class UserController extends Controller
      *
      * @return void
      */
-    public function index(User $user)
+    public function index()
     {
-        return UserResource::collection(User::paginate());
+        $users = User::when(request('keyword'), function ($query) {
+            return $query->search(request('keyword'));
+        })->paginate(10);
+        return UserResource::collection($users);
     }
 
     /**
@@ -45,13 +48,11 @@ class UserController extends Controller
     }
     /**
      * 获取用户资料
-     *
-     * @param User|null $user
+     * @param User $user
      * @return void
      */
-    public function show(?User $user)
+    public function show(User $user)
     {
-        $user = $user ?? Auth::user();
         $this->authorize('view', $user);
         return new UserResource($user);
     }

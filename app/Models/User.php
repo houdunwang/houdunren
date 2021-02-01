@@ -18,7 +18,8 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoles;
 
-    // protected $guard_name = 'sanctum';
+    protected $guard_name = ['sanctum'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -98,7 +99,7 @@ class User extends Authenticatable
     }
 
     /**
-     * 所有站长身份的站点
+     * 年有站长身份的站点集合
      *
      * @return void
      */
@@ -109,7 +110,6 @@ class User extends Authenticatable
 
     /**
      * 站点管理员身份的站点列表
-     * Undocumented function
      *
      * @return void
      */
