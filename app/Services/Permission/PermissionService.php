@@ -5,11 +5,10 @@ namespace App\Services\Permission;
 use App\Models\Site;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Collection;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use UserService;
-use ModuleService;
 use App\Models\Module;
+use App\Models\User;
+use ModuleService;
+use UserService;
 
 /**
  * 权限管理服务
@@ -35,16 +34,16 @@ class PermissionService
     }
 
     /**
-     * 更新站点权限
+     * 同步站点权限到权限表
      * @param Site $site
      * @return void
      */
-    public function saveSiteModulePermissions(Site $site)
+    public function syncSitePermissions(Site $site)
     {
-        $this->sitePermissions($site)->each(function ($permission) {
+        $this->sitePermissions($site)->each(function ($permission) use ($site) {
             Permission::updateOrCreate(
                 ['name' => $permission['name']],
-                ['name' => $permission['permission_name']] + $permission
+                ['site_id' => $site->id] + $permission
             );
         });
     }
@@ -70,8 +69,7 @@ class PermissionService
     public function sitePermissions(Site $site): Collection
     {
         return $site->modules->reduce(function ($collect, $module) {
-            $permissions = ModuleService::config($module['name'], 'permissions');
-            foreach ($permissions as $permission) {
+            foreach ($module['permissions'] as $permission) {
                 $collect->push(...$permission['rules']);
             }
             return $collect;
@@ -99,7 +97,7 @@ class PermissionService
      * @param User $user
      * @return boolean
      */
-    public function checkModule(Site $site, Module $module, User $user): bool
+    public function checkUserModuleAccess(Site $site, Module $module, User $user): bool
     {
         $permissions = ModuleService::config($module['name'], 'permissions');
         return (bool)collect($permissions)->filter(function ($permisssion) use ($site, $module, $user) {

@@ -174,6 +174,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
         // 项目自定义
         App\Services\Code\CodeServiceProvider::class,
         App\Services\Config\ConfigServiceProvider::class,

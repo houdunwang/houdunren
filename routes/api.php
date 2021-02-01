@@ -10,6 +10,10 @@ use App\Api\SystemConfigController;
 use App\Api\PackageController;
 use App\Api\GroupController;
 use App\Api\ModuleController;
+use App\Api\SiteConfigController;
+use App\Api\RoleController;
+use App\Api\PermissionController;
+
 //验证码
 Route::get('captcha', [CaptchaController::class, 'create']);
 //登录注册
@@ -32,6 +36,8 @@ Route::apiResource('system/config', SystemConfigController::class);
 Route::apiResource('package', PackageController::class);
 //会员组
 Route::apiResource('group', GroupController::class);
+//站点模块
+Route::get('site/modules/{site}', [SiteController::class, 'modules']);
 //站点管理
 Route::apiResource('site', SiteController::class);
 //模块
@@ -39,3 +45,10 @@ Route::apiResource('module', ModuleController::class)->only(['index']);
 Route::get('module/installed', [ModuleController::class, 'installed']);
 Route::post('module/{name}', [ModuleController::class, 'install']);
 Route::delete('module/{module:name}', [ModuleController::class, 'uninstall']);
+//站点配置
+Route::apiResource('config/site', SiteConfigController::class)->only(['show', 'update']);
+//站点角色
+Route::apiResource('{site}/role', RoleController::class);
+//权限管理
+Route::get('{site}/permission/sync', [PermissionController::class, 'syncSitePermissions']);
+Route::put('{site}/permission/{role}', [PermissionController::class, 'update']);

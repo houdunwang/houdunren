@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use UserService;
+use App\Models\Site;
 
 class User extends Authenticatable
 {
@@ -16,6 +18,7 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoles;
 
+    // protected $guard_name = 'sanctum';
     /**
      * The attributes that are mass assignable.
      *
@@ -95,17 +98,6 @@ class User extends Authenticatable
     }
 
     /**
-     * 站点管理员
-     * Undocumented function
-     *
-     * @return void
-     */
-    public function sites()
-    {
-        return $this->belongsToMany(Site::class, 'admin_site')->withTimestamps();
-    }
-
-    /**
      * 所有站长身份的站点
      *
      * @return void
@@ -116,6 +108,17 @@ class User extends Authenticatable
     }
 
     /**
+     * 站点管理员身份的站点列表
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function sites()
+    {
+        return $this->belongsToMany(Site::class, 'admin_site')->withTimestamps();
+    }
+
+    /**
      * 所有可管理的站点
      * 包括身份是管理员和站长
      *
@@ -123,7 +126,8 @@ class User extends Authenticatable
      */
     public function getAllSitesAttribute()
     {
-        return $this->sites->merge($this->masterSites);
+        return UserService::isSuperAdmin($this) ? Site::all() :
+            $this->sites->merge($this->masterSites);
     }
 
     /**

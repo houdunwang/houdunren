@@ -14,7 +14,6 @@ class DatabaseSeeder extends Seeder
             GroupSeeder::class,
             UserSeeder::class,
             SiteSeeder::class,
-            RoleSeeder::class,
             SystemConfigSeeder::class
         ]);
     }

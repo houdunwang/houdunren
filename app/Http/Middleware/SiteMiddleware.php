@@ -3,9 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\Config;
 use Illuminate\Support\Facades\Auth;
 use UserService;
+use SiteService;
 
 /**
  * 站点控制器
@@ -29,7 +29,8 @@ class SiteMiddleware
     protected function checkAccess(): bool
     {
         if ($site = request()->site) {
-            return  UserService::isMaster($site, Auth::user());
+            SiteService::cache($site);
+            return UserService::isMaster($site, Auth::user());
         }
         return false;
     }

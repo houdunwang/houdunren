@@ -14,7 +14,7 @@ class GroupRequest extends FormRequest
 {
     public function authorize()
     {
-        return UserService::isSuperAdmin(Auth::user());
+        return true;
     }
 
     public function rules()

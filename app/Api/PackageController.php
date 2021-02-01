@@ -22,7 +22,6 @@ class PackageController extends Controller
 
     /**
      * 套餐列表
-     *
      * @return void
      */
     public function index()

@@ -1,4 +1,4 @@
-export default site => [
-    { label: '角色列表', name: 'index', route: 'site.role.index', params: [site] },
-    { label: '权限设置', name: 'edit', route: 'site.permission.edit', current: true }
+export default params => [
+    { title: '角色列表', name: 'site.role.index', params },
+    { title: '权限设置', name: 'site.permission.edit', params, current: true }
 ]

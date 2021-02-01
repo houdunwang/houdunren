@@ -1,5 +1,6 @@
 <template>
-    <hd-layout :tabs="tabs" home="site.site.index">
+    <div>
+        <hd-tab :tabs="tabs" />
         <el-alert type="info">
             <i class="fa fa-info-circle" aria-hidden="true"></i> 站长拥有对 <span class="text-green-800">{{ site.title }}</span> 站点管理的全部权限
         </el-alert>
@@ -17,16 +18,19 @@
             </el-table-column>
         </el-table>
         <div class="mt-3">
-            <hd-user title="选择管理员" :action="route('site.admin.search', site)" @change="setAdmin" />
+            <!-- <hd-user title="选择管理员" :action="route('site.admin.search', site)" @change="setAdmin" /> -->
         </div>
-    </hd-layout>
+    </div>
 </template>
 <script>
 import tabs from './tabs'
 export default {
-    props: ['site', 'users'],
+    route: { path: `:sid/admin/index` },
     data() {
-        return { tabs }
+        return { tabs: tabs({ sid: this.sid }), site: {}, users: [], sid: this.$route.params.sid }
+    },
+    async created() {
+        this.site = await this.axios.get(`site/${this.sid}`)
     },
     methods: {
         //设置管理员

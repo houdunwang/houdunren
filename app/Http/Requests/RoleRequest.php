@@ -7,22 +7,20 @@ use Illuminate\Validation\Rule;
 
 /**
  * 站点角色
+ * @package App\Http\Requests
  */
 class RoleRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return auth()->check();
-    }
-
     public function rules()
     {
+        $rid = request('role')->id ?? 0;
+        $sid = request('site')->id ?? 0;
         return [
-            'title' => ['required', 'min:2', 'max:20', Rule::unique('roles')->ignore(request()->role)->where(function ($query) {
-                return $query->where('site_id', request()->site->id);
+            'title' => ['required', 'min:2', 'max:20', Rule::unique('roles')->where(function ($query) use ($sid, $rid) {
+                return $query->whereNotIn('id', [$rid])->where('site_id', $sid);
             })],
-            'name' => ['required', 'regex:/^[a-z]+$/', 'min:3', Rule::unique('roles')->ignore(request()->role)->where(function ($query) {
-                return $query->where('site_id', request()->site->id);
+            'name' => ['required', 'between:3,10', Rule::unique('roles')->where(function ($query) use ($sid, $rid) {
+                return $query->whereNotIn('id', [$rid])->where('site_id', $sid);
             })],
         ];
     }

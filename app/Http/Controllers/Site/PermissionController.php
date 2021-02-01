@@ -17,21 +17,6 @@ use Spatie\Permission\Models\Permission;
 class PermissionController extends Controller
 {
     /**
-     * 权限设置
-     *
-     * @param Site $site 站点
-     * @param Role $role 角色
-     * @return void
-     */
-    public function edit(Site $site, Role $role)
-    {
-        $this->updateSitePermission($site);
-        $modules = ModuleService::getSiteModules($site);
-        $permissions = $role->permissions->map(fn ($p) => $p['name']);
-        return inertia('Site/Permission/Form', compact('site', 'modules', 'role', 'permissions'));
-    }
-
-    /**
      * 保存权限
      *
      * @param Request $request

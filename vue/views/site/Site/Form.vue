@@ -62,9 +62,8 @@ export default {
     },
     methods: {
         async onSubmit() {
-            const url = this.form.id ? `site/site/${this.site.id}` : 'site'
-            await this.axios[this.form.id ? 'put' : 'post'](url, this.form)
-            // this.form = form
+            const url = this.id ? `site/${this.id}` : 'site'
+            await this.axios[this.id ? 'put' : 'post'](url, this.form)
             this.$router.push('/admin')
         }
     }

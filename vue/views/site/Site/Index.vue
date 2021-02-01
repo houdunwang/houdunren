@@ -30,10 +30,19 @@
                             <i class="fas fa-home"></i>
                             访问首页
                         </a>
-                        <router-link v-for="(menu, index) in menus" :key="index" :to="menu.to" class="mr-2 text-gray-500 text-sm">
+                        <router-link
+                            v-for="(menu, index) in menus"
+                            :key="index"
+                            :to="{ name: menu.name, params: { sid: site.id } }"
+                            class="mr-2 text-gray-500 text-sm"
+                        >
                             <i :class="menu.icon"></i>
                             {{ menu.title }}
                         </router-link>
+                        <a href="#" @click.prevent="syncPermission(site)" class="mr-2">
+                            <i class="fas fa-life-ring"></i>
+                            更新权限表
+                        </a>
                         <router-link :to="{ name: 'site.site.edit', params: { id: site.id } }">
                             <i class="fas fa-pen"></i>
                             编辑站点
@@ -51,11 +60,10 @@
 
 <script>
 const menus = [
-    { title: '网站配置', to: '', icon: 'fas fa-check-circle' },
-    { title: '微信公众号', to: '', icon: 'fas fa-comment-dollar' },
-    { title: '管理员设置', to: '', icon: 'fas fa-user-alt' },
-    { title: '角色管理', to: '', icon: 'fas fa-user-lock' },
-    { title: '更新权限表', to: '', icon: 'fas fa-life-ring' }
+    { title: '网站配置', name: `site.config.edit`, icon: 'fas fa-check-circle' },
+    { title: '微信公众号', name: `site.config.edit`, icon: 'fas fa-comment-dollar' },
+    { title: '管理员设置', name: `site.admin.index`, icon: 'fas fa-user-alt' },
+    { title: '角色管理', name: `site.role.index`, icon: 'fas fa-user-lock' }
 ]
 export default {
     route: { path: '/admin' },
@@ -74,6 +82,9 @@ export default {
                 await this.axios.delete(`site/${site.id}`, site)
                 this.get()
             } catch (e) {}
+        },
+        async syncPermission(site) {
+            await this.axios.get(`${site.id}/permission/sync`)
         }
     }
 }

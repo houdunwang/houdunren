@@ -36,38 +36,19 @@ class ModuleService
      */
     public function all(): ?Collection
     {
-        return $this->format(ModulePlugin::toCollection())->values();
-    }
-
-    /**
-     * 所有已经安装的模块
-     * @return Collection|null
-     */
-    public function allInstalled(): ?Collection
-    {
-        return $this->all()->filter(fn ($module) => $module['isInstall']);
-    }
-
-    /**
-     * 格式化模块数据
-     *
-     * @param Collection $modules
-     * @return Collection
-     */
-    protected function format(Collection $modules): Collection
-    {
-        return $modules->map(function ($module) {
+        return ModulePlugin::toCollection()->map(function ($module) {
             $name = $module->getName();
             $id = Module::where('name', $name)->value('id');
             return
                 $this->config($name, 'config')
                 + [
                     'id' => $id,
-                    'preview' => url("/modules/{$name}/static/preview.jpg"),
+                    'preview' => url("/modules/{$name}/static/preview.jpeg"),
                     'isInstall' => (bool)$id
                 ];
-        });
+        })->values();
     }
+
     /**
      * 用户可用模块
      *

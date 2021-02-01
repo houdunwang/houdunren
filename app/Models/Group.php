@@ -30,22 +30,6 @@ class Group extends Model
      */
     public function getModulesAttribute()
     {
-        return $this->packages()
-            ->with('modules')
-            ->get()
-            ->mapWithKeys(function ($package) {
-                return $package->modules;
-            });
-    }
-
-    /**
-     * 模板列表
-     * @return mixed
-     */
-    public function getTemplatesAttribute()
-    {
-        return $this->packages()->with('templates')->get()->mapWithKeys(function ($package) {
-            return $package->templates;
-        });
+        return $this->packages()->with('modules')->get()->mapWithKeys(fn ($p) => $p['modules'])->unique('id');
     }
 }

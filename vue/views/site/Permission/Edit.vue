@@ -1,5 +1,6 @@
 <template>
-    <hd-layout :tabs="tabs" home="site.site.index">
+    <div>
+        <hd-tab :tabs="tabs" />
         <el-alert type="info" class="mb-3"> 你正在设置「{{ site.title }}」站点的「{{ role.title }}」角色的权限 </el-alert>
 
         <el-card shadow="nerver" class="mb-5 shadow-sm" :body-style="{ padding: '20px' }" v-for="module in modules" :key="module.id">
@@ -11,7 +12,7 @@
                 <div class="grid grid-cols-4 text-sm">
                     <div v-for="(rule, i) in permission.rules" :key="i" class="py-2">
                         <el-checkbox-group v-model="form.permissions">
-                            <el-checkbox :label="rule.permission_name">
+                            <el-checkbox :label="rule.name">
                                 {{ rule.title }}
                                 <el-tag type="info" size="mini" class="opacity-75">{{ rule.name }}</el-tag>
                             </el-checkbox>
@@ -21,22 +22,33 @@
             </div>
         </el-card>
         <el-button type="primary" size="default" @click="onSubmit">保存提交</el-button>
-    </hd-layout>
+    </div>
 </template>
 
 <script>
 import tabs from './tabs'
 export default {
-    props: ['site', 'role', 'modules', 'permissions'],
+    route: { path: `:sid/permission/:rid/edit` },
     data() {
         return {
-            tabs: tabs(this.site),
-            form: { permissions: this.permissions }
+            tabs: tabs({ sid: this.$route.params.sid, rid: this.$route.params.id }),
+            form: { permissions: [] },
+            modules: [],
+            site: {},
+            role: {}
         }
     },
+    async created() {
+        this.site = await this.axios.get(`site/${this.$route.params.sid}`)
+        this.role = await this.axios.get(`${this.site.id}/role/${this.$route.params.sid}`)
+        this.modules = await this.axios.get(`site/modules/${this.site.id}`)
+        this.role.permissions.map(p => {
+            this.form.permissions.push(p.name)
+        })
+    },
     methods: {
-        onSubmit() {
-            this.$inertia.put(route('site.permission.update', [this.site, this.role]), this.form)
+        async onSubmit() {
+            await this.axios.put(`${this.site.id}/permission/${this.role.id}`, this.form)
         }
     }
 }

@@ -13,6 +13,11 @@ class Package extends Model
 {
     protected $fillable = ['title'];
 
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class)->withTimestamps();
+    }
+
     /**
      * 模块关联
      * @return BelongsToMany

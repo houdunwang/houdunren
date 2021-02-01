@@ -5,8 +5,9 @@ namespace App\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Module;
 use Illuminate\Http\Request;
-use File;
+use App\Models\Site;
 use ModuleService;
+use App\Http\Resources\ModuleResource;
 
 /**
  * 模块管理
@@ -36,7 +37,7 @@ class ModuleController extends Controller
      */
     public function installed()
     {
-        return ModuleService::allInstalled();
+        return ModuleResource::collection(Module::all());
     }
 
     /**
