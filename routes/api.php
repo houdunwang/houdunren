@@ -28,9 +28,8 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('register/code', [AuthController::class, 'mobileCode']);
 Route::post('forget', [AuthController::class, 'forget']);
 Route::post('forget/code', [AuthController::class, 'forgetCode']);
-//验证码 todo
-Route::post('code/mobile', [CodeController::class, 'mobile']);
-Route::post('code/email', [CodeController::class, 'email']);
+//验证码
+Route::post('code/send', [CodeController::class, 'send']);
 //用户相关
 Route::get('user/info', [UserController::class, 'info']);
 Route::put('user/password', [UserController::class, 'password']);

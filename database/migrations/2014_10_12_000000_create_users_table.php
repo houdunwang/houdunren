@@ -41,9 +41,6 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('credit4')->nullable();
             $table->unsignedInteger('credit5')->nullable();
             $table->unsignedInteger('credit6')->nullable();
-            $table->unsignedTinyInteger('is_super_admin')->nullable()->index()->comment('超级管理员');
-            $table->foreignId('current_team_id')->nullable();
-            $table->text('profile_photo_path')->nullable();
         });
     }
 

@@ -4578,6 +4578,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 var menus = [{
   title: '模块管理',
@@ -6014,6 +6019,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
 //
 //
 //
@@ -6067,7 +6084,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   route: false,
-  inject: ['form']
+  inject: ['form'],
+  methods: {
+    send: function send() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.axios.post("code/send");
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }
 });
 
 /***/ }),
@@ -6319,7 +6357,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   provide: function provide() {
     return {
-      form: this.form
+      form: this.site.config
     };
   },
   data: function data() {
@@ -6327,25 +6365,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       loading: true,
       activeName: 'base',
       wechats: {},
-      form: _config__WEBPACK_IMPORTED_MODULE_1__.default,
-      site: {}
+      site: {
+        config: _config__WEBPACK_IMPORTED_MODULE_1__.default
+      }
     };
   },
   created: function created() {
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var siteConfig;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _this.axios.get("config/site/".concat(_this.$route.params.sid));
+              return _this.axios.get("site/".concat(_this.$route.params.sid));
 
             case 2:
-              siteConfig = _context.sent;
-              _this.form = Object.assign(_this.form, siteConfig);
+              _this.site = _context.sent;
+              _this.site.config = Object.assign(_config__WEBPACK_IMPORTED_MODULE_1__.default, _this.site.config);
               _this.loading = false;
 
             case 5:
@@ -6366,12 +6404,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this2.axios.put("/config/site/".concat(_this2.$route.params.sid), _this2.form);
+                return _this2.axios.put("site/".concat(_this2.$route.params.sid), _this2.site);
 
               case 2:
-                _this2.$router.push("/admin");
-
-              case 3:
               case "end":
                 return _context2.stop();
             }
@@ -7325,7 +7360,6 @@ var menus = [{
   route: {
     path: '/admin'
   },
-  props: ['user'],
   data: function data() {
     return {
       sites: [],
@@ -95737,7 +95771,7 @@ var render = function() {
             "grid grid-flow-col auto-cols-fr gap-1 mt-3 md:mt-0 md:col-span-3"
         },
         [
-          _vm.user.isSuperAdmin
+          _vm.user.is_super_admin
             ? _c(
                 "router-link",
                 {
@@ -95827,11 +95861,23 @@ var render = function() {
                 }
               },
               [
-                _c("span", {
-                  staticClass: "avatar avatar-sm w-10 h-10",
-                  style: "background-image: url(" + _vm.user.icon + ")"
-                })
-              ]
+                _c("el-image", {
+                  staticClass: "w-8 h-8",
+                  attrs: { src: _vm.Auth.user().avatar, fit: "cover" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-none d-xl-block ps-2" }, [
+                  _c("div", [_vm._v(_vm._s(_vm.user.name))]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "mt-1 small text-muted" }, [
+                    _vm._v(
+                      "注册于" +
+                        _vm._s(_vm._f("fromNow")(_vm.Auth.user().created_at))
+                    )
+                  ])
+                ])
+              ],
+              1
             ),
             _vm._v(" "),
             _c(
@@ -95843,8 +95889,8 @@ var render = function() {
               [
                 _c(
                   "a",
-                  { staticClass: "dropdown-item", attrs: { href: "#" } },
-                  [_vm._v("个人中心")]
+                  { staticClass: "dropdown-item", attrs: { href: "/" } },
+                  [_vm._v("网站首页")]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "dropdown-divider" }),
@@ -95854,14 +95900,9 @@ var render = function() {
                   {
                     staticClass: "dropdown-item",
                     attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.logout($event)
-                      }
-                    }
+                    on: { click: _vm.logout }
                   },
-                  [_vm._v("退出登录")]
+                  [_vm._v("退出")]
                 )
               ]
             )
@@ -95913,8 +95954,8 @@ var render = function() {
                             {
                               name: "show",
                               rawName: "v-show",
-                              value: _vm.user.isSuperAdmin,
-                              expression: "user.isSuperAdmin"
+                              value: _vm.user.is_super_admin,
+                              expression: "user.is_super_admin"
                             }
                           ],
                           key: index,
@@ -98686,6 +98727,33 @@ var render = function() {
                   ])
                 ],
                 1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  staticClass: "mt-3",
+                  attrs: { type: "danger", size: "mini" },
+                  on: { click: _vm.send }
+                },
+                [_vm._v("发送测试短信")]
+              ),
+              _vm._v(" "),
+              _c(
+                "hd-tip",
+                [
+                  _vm._v("系统将向你的手机号发送验证码短信，你可以访问 "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "text-blue-700",
+                      attrs: { to: "/system/my/edit" }
+                    },
+                    [_vm._v("我的资料")]
+                  ),
+                  _vm._v(" 设置手机号\n        ")
+                ],
+                1
               )
             ],
             1
@@ -99382,7 +99450,6 @@ var render = function() {
       ],
       ref: "form",
       attrs: {
-        model: _vm.form,
         "label-width": "120px",
         inline: false,
         size: "normal",

@@ -71,7 +71,6 @@ const menus = [
 ]
 export default {
     route: { path: '/admin' },
-    props: ['user'],
     data() {
         return { sites: [], menus, loading: true }
     },

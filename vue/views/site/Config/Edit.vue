@@ -1,5 +1,5 @@
 <template>
-    <el-form :model="form" ref="form" label-width="120px" :inline="false" size="normal" label-position="left" v-loading="loading">
+    <el-form ref="form" label-width="120px" :inline="false" size="normal" label-position="left" v-loading="loading">
         <el-tabs v-model="activeName" type="card">
             <el-tab-pane label="基本信息" name="base"> <base-config /> </el-tab-pane>
             <el-tab-pane label="用户相关" name="user"> <user /> </el-tab-pane>
@@ -31,20 +31,19 @@ export default {
     route: { path: `site/config/:sid/edit` },
     components: { BaseConfig, User, Aliyun, Alipay, Wepay, Upload, Email, Sms },
     provide() {
-        return { form: this.form }
+        return { form: this.site.config }
     },
     data() {
-        return { loading: true, activeName: 'base', wechats: {}, form: config, site: {} }
+        return { loading: true, activeName: 'base', wechats: {}, site: { config } }
     },
     async created() {
-        const siteConfig = await this.axios.get(`config/site/${this.$route.params.sid}`)
-        this.form = Object.assign(this.form, siteConfig)
+        this.site = await this.axios.get(`site/${this.$route.params.sid}`)
+        this.site.config = Object.assign(config, this.site.config)
         this.loading = false
     },
     methods: {
         async onSubmit() {
-            await this.axios.put(`/config/site/${this.$route.params.sid}`, this.form)
-            this.$router.push(`/admin`)
+            await this.axios.put(`site/${this.$route.params.sid}`, this.site)
         }
     }
 }

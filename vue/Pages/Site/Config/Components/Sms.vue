@@ -52,7 +52,10 @@
 <script>
 export default {
     route: false,
-    inject: ['form']
+    inject: ['form'],
+    methods: {
+        send() {}
+    }
 }
 </script>
 
