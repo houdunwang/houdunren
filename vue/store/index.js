@@ -22,7 +22,7 @@ export default new Vuex.Store({
         }
     },
     mutations: {
-        setErrors(state, errors) {
+        setErrors(state, errors = {}) {
             state.errors = errors
         },
         setUser(state, user) {

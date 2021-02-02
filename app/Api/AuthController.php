@@ -89,7 +89,7 @@ class AuthController extends Controller
      * @param Request $request
      * @return void
      */
-    public function mobileCode(Request $request)
+    public function registerCode(Request $request)
     {
         $request->validate(
             [
@@ -143,7 +143,6 @@ class AuthController extends Controller
 
     /**
      * 找回密码验证码
-     *
      * @param Request $request
      * @return void
      */
@@ -152,11 +151,12 @@ class AuthController extends Controller
         $request->validate(
             [
                 'account' => ['required', new AccountRule(request('account')), Rule::exists('users', UserService::account())],
-                'captcha' => ['required', 'captcha']
+                'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
             ],
             [
                 'account.required' => '帐号不能为空', 'account.exists' => '帐号不存在',
-                'captcha.required' => '图形验证码不能为空', 'captcha.captcha' => '验证码输入错误'
+                'captcha.content.required' => '验证码不能为空',
+                'captcha.content.captcha_api' => '验证码输入错误'
             ]
         );
         CodeService::send(request('account'));

@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 const fields = [
     { label: '昵称', id: 'name' },
     { label: '微博', id: 'weibo' },
@@ -25,15 +24,12 @@ const fields = [
     { label: 'QQ', id: 'qq' }
 ]
 export default {
-    props: ['user'],
+    route: { path: '/member' },
     data() {
         return {
             form: this.$inertia.form(this.user),
             fields
         }
-    },
-    computed: {
-        ...mapGetters(['errors'])
     },
     methods: {
         onSubmit() {

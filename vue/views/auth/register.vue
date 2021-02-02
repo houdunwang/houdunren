@@ -1,6 +1,6 @@
 <template>
-    <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal" label-position="top" @submit.native.prevent>
-        <div class="min-w-screen min-h-screen bg-gray-900 flex items-center justify-center px-5 py-5">
+    <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal" label-position="top">
+        <div class="min-w-screen min-h-screen bg-gray-900 flex items-center justify-center px-5 py-5 auth">
             <div class="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden" style="max-width:1000px">
                 <div class="md:flex w-full">
                     <div class="hidden md:block w-1/2 bg-indigo-500 py-10 px-10 bg-cover" style="background-image:url('/images/register.jpeg')"></div>
@@ -10,30 +10,22 @@
                             <p>为了美好的生活，一起努力</p>
                         </div>
                         <div>
-                            <div class="flex -mx-3">
-                                <div class="w-full px-3 mb-5">
-                                    <label for="" class="text-xs font-semibold px-1">帐号</label>
-                                    <div class="flex flex-col">
-                                        <hd-validate-code
-                                            v-model="form.account"
-                                            type="mobile"
-                                            :timeout="3"
-                                            class="flex-1 mb-2"
-                                            placeholder="请输入手机号"
-                                            action="register/code"
-                                        />
-                                    </div>
+                            <div class="flex">
+                                <div class="w-full">
+                                    <el-form-item label="帐号" class="flex-1">
+                                        <hd-validate-code v-model="form.account" type="mobile" :timeout="3" placeholder="请输入手机号" action="register/code" />
+                                    </el-form-item>
                                 </div>
                             </div>
-                            <div class="flex -mx-3">
-                                <div class="w-full px-3 mb-5">
-                                    <label class="text-xs font-semibold px-1">验证码</label>
-                                    <div class="flex flex-col">
+                            <div class="flex">
+                                <div class="w-full">
+                                    <el-form-item label="验证码" class="flex-1">
                                         <el-input placeholder="请输入收到的手机验证码" class="mr-1" v-model="form.code"> </el-input>
                                         <hd-error name="code" />
-                                    </div>
+                                    </el-form-item>
                                 </div>
                             </div>
+                            <el-divider><i class="el-icon-mobile-phone"></i></el-divider>
                             <div class="grid grid-cols-2 gap-3">
                                 <el-form-item label="密码" class="flex-1">
                                     <el-input type="password" v-model="form.password" placeholder="请输入新密码"></el-input>
@@ -43,10 +35,10 @@
                                     <el-input type="password" v-model="form.password_confirmation" placeholder="请再输一次密码"></el-input>
                                 </el-form-item>
                             </div>
-                            <div class="flex -mx-3">
-                                <div class="w-full px-3 mb-5">
+                            <div class="flex mt-5">
+                                <div class="w-full">
                                     <button
-                                        class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                                        class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg py-3 font-semibold"
                                         @click.prevent="onSubmit"
                                     >
                                         注册
@@ -75,18 +67,21 @@ export default {
         }
     },
     methods: {
-        onSubmit() {
-            this.axios
-                .post(`register`, this.form)
-                .then(_ => this.$router.push({ name: 'auth.login' }))
-                .finally(_ => this.$store.commit('setErrors', {}))
+        async onSubmit() {
+            this.$store.commit('setErrors')
+            await this.axios.post(`register`, this.form).then(_ => this.$router.push({ name: 'auth.login' }))
         }
     }
 }
 </script>
 
-<style>
-.auth .el-input-group__append {
-    padding: 0 !important;
+<style lang="scss">
+.auth {
+    .el-form-item__label {
+        padding: 0 !important;
+    }
+    .el-divider__text {
+        background-color: #f1f2f5;
+    }
 }
 </style>

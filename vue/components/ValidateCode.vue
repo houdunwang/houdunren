@@ -1,11 +1,11 @@
 <template>
-    <div class="flex flex-col mt-4">
+    <div class="flex flex-col">
         <div class="flex">
             <el-input :placeholder="$attrs.placeholder" v-model.trim="form.account" class="mr-1"> </el-input>
             <el-button type="info" size="default" :disabled="true" v-if="times > 0">{{ times }}秒后操作</el-button>
             <el-button type="danger" size="default" @click="send" v-else>发送验证码</el-button>
         </div>
-        <hd-error name="account" />
+        <hd-error name="account" class="mb-2" />
         <hd-captcha v-model="form.captcha" class="flex-1" ref="captcha" />
     </div>
 </template>

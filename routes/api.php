@@ -25,7 +25,7 @@ Route::get('captcha', [CaptchaController::class, 'create']);
 //登录注册
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
-Route::post('register/code', [AuthController::class, 'mobileCode']);
+Route::post('register/code', [AuthController::class, 'registerCode']);
 Route::post('forget', [AuthController::class, 'forget']);
 Route::post('forget/code', [AuthController::class, 'forgetCode']);
 //验证码

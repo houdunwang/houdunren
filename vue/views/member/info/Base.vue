@@ -23,8 +23,8 @@ const fields = [
     { label: 'GIBHUB', id: 'github' },
     { label: 'QQ', id: 'qq' }
 ]
-const form = {}
 export default {
+    route: { path: '/member' },
     data() {
         return {
             form: this.$store.state.user,

@@ -1,5 +1,5 @@
 <template>
-    <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal" label-position="top">
+    <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal" label-position="top" class="auth">
         <div class="min-w-screen min-h-screen bg-gray-900 flex items-center justify-center px-5 py-5">
             <div class="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden" style="max-width:1000px">
                 <div class="md:flex w-full">
@@ -9,36 +9,35 @@
                             <h1 class="font-bold text-3xl text-gray-900">找回密码</h1>
                         </div>
                         <div>
-                            <div class="flex -mx-3">
-                                <div class="w-full px-3 mb-5">
-                                    <label for="" class="text-xs font-semibold px-1">帐号</label>
-                                    <div class="flex flex-col">
-                                        <hd-validate-code v-model="form.account" class="flex-1 mb-2" placeholder="请输入手机号或邮箱" action="/api/forget/code" />
-                                    </div>
+                            <div class="flex">
+                                <div class="w-full">
+                                    <el-form-item label="帐号" size="normal">
+                                        <hd-validate-code v-model="form.account" placeholder="请输入手机号或邮箱" action="forget/code" />
+                                    </el-form-item>
                                 </div>
                             </div>
-                            <div class="flex -mx-3">
-                                <div class="w-full px-3 mb-5">
-                                    <label class="text-xs font-semibold px-1">验证码</label>
-                                    <div class="flex flex-col">
+                            <div class="flex">
+                                <div class="w-full">
+                                    <el-form-item label="验证码" size="normal">
                                         <el-input placeholder="请输入收到的验证码" class="mr-1" v-model="form.code"> </el-input>
-                                        <hd-error :message="errors('code')" />
-                                    </div>
+                                        <hd-error name="code" />
+                                    </el-form-item>
                                 </div>
                             </div>
+                            <el-divider><i class="el-icon-mobile-phone"></i></el-divider>
                             <div class="grid grid-cols-2 gap-3">
                                 <el-form-item label="新密码" class="flex-1">
                                     <el-input type="password" v-model="form.password" placeholder="请输入新密码"></el-input>
-                                    <hd-error :message="errors('password')" />
+                                    <hd-error name="password" />
                                 </el-form-item>
                                 <el-form-item label="确认密码" class="flex-1">
                                     <el-input type="password" v-model="form.password_confirmation" placeholder="请再输一次密码"></el-input>
                                 </el-form-item>
                             </div>
-                            <div class="flex -mx-3">
-                                <div class="w-full px-3 mb-5">
+                            <div class="flex mt-5">
+                                <div class="w-full">
                                     <button
-                                        class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                                        class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg py-3 font-semibold"
                                         @click.prevent="onSubmit"
                                     >
                                         提交
@@ -56,7 +55,6 @@
 
 <script>
 import HdFooter from './Footer'
-import { mapGetters } from 'vuex'
 export default {
     route: { path: '/forget' },
     components: {
@@ -64,25 +62,32 @@ export default {
     },
     data() {
         return {
-            form: { account: '', code: '', password: '', captcha: '', remember: false },
-            captcha: `/captcha`
+            form: { account: '', code: '', password: '', captcha: {} }
         }
     },
-    computed: {
-        ...mapGetters(['errors'])
-    },
     methods: {
-        onSubmit() {
-            this.axios.post(`/api/forget`, this.form).then(_ => {
-                location.href = '/login'
-            })
+        async onSubmit() {
+            this.$store.commit('setErrors')
+            await this.axios.post(`forget`, this.form)
+            this.$router.push(`/login`)
         }
     }
 }
 </script>
 
-<style>
-.auth .el-input-group__append {
-    padding: 0 !important;
+<style lang="scss">
+.auth {
+    .el-input-group__append {
+        padding: 0 !important;
+    }
+    .el-form--label-top .el-form-item__label {
+        padding: 0 !important;
+    }
+    .el-form-item {
+        margin-bottom: 0 !important;
+    }
+    .el-divider--horizontal {
+        margin: 10px 0 !important;
+    }
 }
 </style>
