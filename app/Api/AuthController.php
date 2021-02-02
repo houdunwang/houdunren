@@ -19,6 +19,11 @@ use Hash;
  */
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['front'])->except('login');
+    }
+
     public function my()
     {
         return Auth::user();
@@ -34,13 +39,13 @@ class AuthController extends Controller
         $request->validate([
             'account' => ['required', Rule::exists('users', UserService::account()), new AccountRule(request('account'))],
             'password' => ['required'],
-            // 'captcha' => ['required', 'captcha_api:' . request('captcha_key') . ',default']
+            'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
         ], [
             'account' => '帐号不能为空',
             'account.exists' => '帐号不存在',
             'password.required' => '密码不能为空',
-            'captcha.required' => '验证码不能为空',
-            'captcha.captcha_api' => '验证码输入错误'
+            'captcha.content.required' => '验证码不能为空',
+            'captcha.content.captcha_api' => '验证码输入错误'
         ]);
 
         $isLogin = Auth::attempt([
@@ -64,38 +69,46 @@ class AuthController extends Controller
     public function register(Request $request, User $user)
     {
         $request->validate([
-            'account' => ['required', new AccountRule(request('account')), Rule::unique('users', 'mobile')],
+            'account' => ['required', 'regex:/^\d{11}$/', Rule::unique('users', 'mobile')],
             'password' => ['required', 'confirmed', 'between:5,20'],
             'code' => ['required', new CodeRule(request('account'))]
-        ], ['account.required' => '帐号不能为空', 'account.unique' => '手机号已经注册', 'password.required' => '密码不能为空', 'code.required' => '验证码不能为空']);
+        ], [
+            'account.required' => '帐号不能为空', 'account.regex' => '手机号格式错误',
+            'account.unique' => '手机号已经注册',
+            'password.required' => '密码不能为空', 'code.required' => '验证码不能为空'
+        ]);
 
         $user->password = Hash::make($request->password);
         $user->mobile = $request->account;
         $user->save();
-        return ['message' => '注册成功', 'token' => $this->token($user)];
+        return ['message' => '注册成功'];
     }
 
     /**
-     * 发送邮箱或手机验证码
-     *
+     * 发送验证码
      * @param Request $request
      * @return void
      */
-    public function registerCode(Request $request)
+    public function mobileCode(Request $request)
     {
         $request->validate(
             [
-                'account' => ['required', 'regex:/^\d{11}$/', new AccountRule(request('account')), Rule::unique('users', 'mobile')],
-                'captcha' => ['required', 'captcha']
+                'account' => ['required', 'regex:/^\d{11}$/', Rule::unique('users', 'mobile')],
+                'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
             ],
             [
-                'account.required' => '帐号不能为空',
-                'captcha.required' => '图形验证码不能为空', 'captcha.captcha' => '验证码输入错误'
+                'account.required' => '手机号不能为空',
+                'account.regex' => '手机号格式错误',
+                'account.unique' => '手机号已经绑定',
+                'captcha.content.required' => '验证码不能为空',
+                'captcha.content.captcha_api' => '验证码输入错误'
             ]
         );
-        CodeService::send(request('account'));
+
+        CodeService::mobile(request('account'));
         return ['message' => '验证码发送成功'];
     }
+
 
     /**
      * 获取令牌

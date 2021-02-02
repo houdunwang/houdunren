@@ -19,7 +19,10 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                     <ul class="navbar-nav">
-                        <li class="nav-item" v-for="(menu, index) in menus" :key="index">
+                        <li class="nav-item">
+                            <router-link to="/admin" class="nav-link"> <i class="fa fa-sitemap mr-1" aria-hidden="true"></i> 站点管理 </router-link>
+                        </li>
+                        <li class="nav-item" v-for="(menu, index) in menus" :key="index" v-show="user.isSuperAdmin">
                             <router-link :to="menu.route" class="nav-link">
                                 <i :class="menu.icon" class="mr-1" aria-hidden="true"></i> {{ menu.title }}
                             </router-link>
@@ -34,7 +37,6 @@
 <script>
 import { mapState } from 'vuex'
 const menus = [
-    { title: '站点管理', route: '/admin', icon: 'fa fa-sitemap' },
     { title: '模块管理', route: '/system/module/index', icon: 'fa fa-cubes' },
     { title: '系统设置', route: '/system/index', icon: 'fas fa-comment' },
     { title: '会员组', route: '/system/group/index', icon: 'fa fa-users' }

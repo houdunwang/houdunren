@@ -9,6 +9,9 @@ class Auth {
     check() {
         return Boolean(store.state.user.id)
     }
+    isSuperAdmin() {
+        return this.check() && this.user().is_super_admin
+    }
 }
 
 export default new Auth()

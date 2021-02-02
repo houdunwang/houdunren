@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Site;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\AdminResource;
 use Spatie\Permission\Models\Role;
 
 /**
@@ -27,7 +27,7 @@ class AdminController extends Controller
      */
     public function index(Site $site)
     {
-        return UserResource::collection($site->admins);
+        return AdminResource::collection($site->admins);
     }
 
     /**

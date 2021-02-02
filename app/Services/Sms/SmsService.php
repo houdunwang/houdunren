@@ -6,6 +6,7 @@ use Overtrue\EasySms\EasySms;
 
 /**
  * 短信服务
+ * @package App\Services\Sms
  */
 class SmsService
 {

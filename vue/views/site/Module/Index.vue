@@ -1,10 +1,11 @@
 <template>
-    <hd-layout :tabs="tabs" home="site.site.index">
+    <div v-loading="loading">
+        <hd-tab :tabs="tabs" />
         <el-card shadow="always" :body-style="{ padding: '20px' }">
             <div slot="header">
                 <span>站点 [{{ site.title }}] 模块列表</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-3 lg:grid-cols-6">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-3 lg:grid-cols-6" v-if="modules.length">
                 <div class="shadow-sm border-gray-200 border rounded-sm flex flex-col justify-between items-center" v-for="module in modules" :key="module.id">
                     <div class="flex-1 flex flex-col py-3 items-center">
                         <el-image
@@ -21,25 +22,34 @@
                     </div>
                     <div class="border-t border-gray-200 w-full flex justify-center bg-gray-100 py-3">
                         <el-button type="primary" size="mini">
-                            <inertia-link :href="route('site.module.admin', [site, module])">
+                            <a :href="`/${module.name}/admin`" class="text-white">
                                 管理模块
-                            </inertia-link>
+                            </a>
                         </el-button>
                     </div>
                 </div>
             </div>
+            <div v-else class="text-center text-gray-600"><i class="fas fa-info-circle    "></i> 暂无模块</div>
         </el-card>
-    </hd-layout>
+    </div>
 </template>
 
 <script>
 import tabs from './tabs'
 export default {
-    props: { modules: Array, site: Object },
+    route: { path: `:sid/module/index` },
     data() {
         return {
-            tabs
+            modules: [],
+            site: {},
+            tabs: tabs({ sid: this.$route.params.sid }),
+            loading: true
         }
+    },
+    async created() {
+        this.site = await this.axios.get(`site/${this.$route.params.sid}`)
+        this.modules = await this.axios.get(`module/site/${this.site.id}`)
+        this.loading = false
     }
 }
 </script>

@@ -4,12 +4,23 @@
         <el-alert type="info">
             <i class="fa fa-info-circle" aria-hidden="true"></i> 站长拥有对 <span class="text-green-800">{{ site.title }}</span> 站点管理的全部权限
         </el-alert>
-        <el-table :data="users" style="width: 100%" border class="mt-3" :stripe="true" :highlight-current-row="true">
+        <el-table :data="users" style="width: 100%" border class="mt-3" :stripe="true" :highlight-current-row="true" v-loading="loading">
             <el-table-column prop="id" label="编号" width="100"> </el-table-column>
             <el-table-column prop="name" label="昵称"> </el-table-column>
             <el-table-column prop="email" label="邮箱"> </el-table-column>
             <el-table-column prop="mobile" label="手机号" width="200"> </el-table-column>
-            <el-table-column prop="mobile" label="角色" width="200"> </el-table-column>
+            <el-table-column prop="mobile" label="角色" width="200" #default="{row:admin}">
+                <el-tag
+                    v-for="role in admin.roles"
+                    :key="role.id"
+                    effect="plain"
+                    type="mini"
+                    class="mr-2 cursor-pointer"
+                    @click="$router.push({ name: 'site.role.edit', params: { sid, id: role.id } })"
+                >
+                    {{ role.title }}
+                </el-tag>
+            </el-table-column>
             <el-table-column width="200" align="center" #default="{row:user}">
                 <el-button-group>
                     <el-button type="danger" :user="user" size="small" @click="$router.push({ name: 'site.admin.role', params: { sid, id: user.id } })">
@@ -29,11 +40,12 @@ import tabs from './tabs'
 export default {
     route: { path: `:sid/admin/index` },
     data() {
-        return { tabs: tabs({ sid: this.$route.params.sid }), site: {}, users: [], sid: this.$route.params.sid }
+        return { tabs: tabs({ sid: this.$route.params.sid }), site: {}, users: [], sid: this.$route.params.sid, loading: true }
     },
     async created() {
         this.site = await this.axios.get(`site/${this.sid}`)
         this.users = await this.axios.get(`${this.sid}/admin`)
+        this.loading = false
     },
     methods: {
         //设置管理员

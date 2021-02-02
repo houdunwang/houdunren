@@ -4,8 +4,9 @@ namespace App\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Site;
-use App\Models\WeChat;
 use Illuminate\Http\Request;
+use ConfigService;
+use CodeService;
 
 /**
  * 站点配置
@@ -41,5 +42,25 @@ class SiteConfigController extends Controller
         $site->config = $request->except(['_token', '_method']);
         $site->save();
         return ['message' => '站点配置保存成功'];
+    }
+
+    /**
+     * 测试短信
+     * @param Request $request
+     * @param Site $site
+     * @return void
+     */
+    public function sms(Request $request, Site $site)
+    {
+        ConfigService::site($site);
+        $data = [
+            'content'  => '您的验证码为: 6379',
+            'template' => 'SMS_001',
+            'data' => [
+                'code' => 6379
+            ]
+        ];
+        CodeService::mobile($request->mobile);
+        return $this->message('短信发送成功');
     }
 }

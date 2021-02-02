@@ -7,7 +7,6 @@ use App\Http\Resources\SiteResource;
 use App\Http\Requests\SiteRequest;
 use Illuminate\Http\Request;
 use App\Models\Site;
-use PermissionService;
 use Auth;
 
 /**
@@ -20,17 +19,6 @@ class SiteController extends Controller
     {
         $this->middleware(['auth:sanctum']);
         $this->middleware(['site'])->except(['index', 'store']);
-    }
-
-    /**
-     * 站点模块
-     *
-     * @param Site $site
-     * @return void
-     */
-    public function modules(Site $site)
-    {
-        return $site->modules;
     }
 
     /**
@@ -62,9 +50,11 @@ class SiteController extends Controller
      */
     public function store(SiteRequest $request, Site $site)
     {
+        $site->fill($request->input());
         $site->user_id = auth()->id();
         $site->config = [];
-        $site->fill($request->input())->save();
+        $site->module_id = request('module_id');
+        $site->save();
         return $this->message('添加成功');
     }
 
@@ -76,8 +66,9 @@ class SiteController extends Controller
      */
     public function update(SiteRequest $request, Site $site)
     {
-        $site->user_id = auth()->id();
-        $site->fill($request->input())->save();
+        $site->fill($request->input());
+        $site->module_id = request('module_id');
+        $site->save();
         return $this->message('站点修改成功');
     }
 

@@ -14,7 +14,6 @@ class ConfigService
 {
     /**
      * 加载站点配置
-     *
      * @param Site $site
      * @return void
      */

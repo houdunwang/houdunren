@@ -14,7 +14,7 @@ const isLogin = store.getters.token
 router.beforeEach(async (to, from, next) => {
     //用户经常被用到，所以登录用户在这里获取资料
     if (store.getters.token) {
-        await Promise.all([store.dispatch('getUser'), store.dispatch('getSystemConfig')])
+        await Promise.all([store.dispatch('getUser')])
     }
     //匹配的路由列表中是否有需要验证的
     if (to.matched.some(route => route.meta.auth)) {

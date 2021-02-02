@@ -43,7 +43,7 @@
 
 <script>
 import tabs from './tabs'
-const form = { title: '', domain: '', module_id: null }
+const form = { title: '', domain: '', module_id: null, modules: [] }
 
 export default {
     route: false,
@@ -58,13 +58,13 @@ export default {
     },
     async created() {
         if (this.id) this.form = await this.axios.get(`site/${this.id}`)
+        this.modules = await this.axios.get(`module/user/${this.Auth.id()}`)
         this.loading = false
     },
     methods: {
         async onSubmit() {
-            const url = this.form.id ? `site/site/${this.site.id}` : 'site'
-            await this.axios[this.form.id ? 'put' : 'post'](url, this.form)
-            // this.form = form
+            const url = this.id ? `site/${this.id}` : 'site'
+            await this.axios[this.id ? 'put' : 'post'](url, this.form)
             this.$router.push('/admin')
         }
     }

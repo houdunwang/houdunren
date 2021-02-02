@@ -1,5 +1,5 @@
 <template>
-    <el-form :model="form" ref="form" label-width="120px" :inline="false" size="normal" label-position="left">
+    <el-form :model="form" ref="form" label-width="120px" :inline="false" size="normal" label-position="left" v-loading="loading">
         <el-tabs v-model="activeName" type="card">
             <el-tab-pane label="基本信息" name="base"> <base-config /> </el-tab-pane>
             <el-tab-pane label="用户相关" name="user"> <user /> </el-tab-pane>
@@ -28,17 +28,23 @@ import Email from './Components/Email'
 import Sms from './Components/Sms'
 
 export default {
+    route: { path: `site/config/:sid/edit` },
     components: { BaseConfig, User, Aliyun, Alipay, Wepay, Upload, Email, Sms },
     provide() {
         return { form: this.form }
     },
-    props: ['site', 'wechats'],
     data() {
-        return { activeName: 'base', form: Object.assign(config, this.site.config) }
+        return { loading: true, activeName: 'base', wechats: {}, form: config, site: {} }
+    },
+    async created() {
+        const siteConfig = await this.axios.get(`config/site/${this.$route.params.sid}`)
+        this.form = Object.assign(this.form, siteConfig)
+        this.loading = false
     },
     methods: {
-        onSubmit() {
-            this.$inertia.put(route('site.config.update', this.site.id), this.form)
+        async onSubmit() {
+            await this.axios.put(`/config/site/${this.$route.params.sid}`, this.form)
+            this.$router.push(`/admin`)
         }
     }
 }

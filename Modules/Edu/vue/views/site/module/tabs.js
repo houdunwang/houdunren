@@ -1,1 +1,4 @@
-export default [{ label: '模块列表', name: 'edit', route: 'site.module.index', current: true }]
+export default params => [
+    { title: '站点列表', name: 'site.site.index', params },
+    { title: '模块列表', name: 'site.module.index', params }
+]

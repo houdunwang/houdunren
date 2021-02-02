@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\WeChat;
 use App\Models\Site;
 use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
  * 站点微信公众号
@@ -60,18 +61,20 @@ class WeChatController extends Controller
      * @param WeChat $wechat
      * @return void
      */
-    public function update(WeChatRequest $request,  WeChat $wechat)
+    public function update(WeChatRequest $request, Site $site, WeChat $wechat)
     {
         $wechat->fill($request->all())->save();
         return $this->message('公众号修改成功');
     }
 
     /**
-     * 删除成功
+     * 删除公众号
+     *
+     * @param Site $site
      * @param WeChat $wechat
      * @return void
      */
-    public function destroy(WeChat $wechat)
+    public function destroy(Site $site, WeChat $wechat)
     {
         $wechat->delete();
         return $this->message('公众号删除成功');

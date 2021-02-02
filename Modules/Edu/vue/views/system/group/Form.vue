@@ -1,5 +1,6 @@
 <template>
     <div v-loading="loading">
+        <hd-tab :tabs="tabs" />
         <el-card shadow="always" :body-style="{ padding: '20px' }">
             <template v-slot:header="">会员组资料</template>
             <el-form :model="form" ref="form" label-width="120px" :inline="false" size="normal">
@@ -16,6 +17,15 @@
                     <hd-error message="days" />
                 </el-form-item>
             </el-form>
+
+            <el-card shadow="never" :body-style="{ padding: '20px' }">
+                <div slot="header">
+                    可用的模块
+                </div>
+                <el-tag type="primary" effect="plain" size="mini" v-for="module in form.modules" :key="module.id" class="mr-2 mb-2 cursor-pointer">
+                    {{ module.title }}
+                </el-tag>
+            </el-card>
         </el-card>
         <el-card shadow="always" :body-style="{ padding: '20px' }" class="mt-3">
             <div slot="header">

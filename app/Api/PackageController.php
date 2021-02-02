@@ -50,7 +50,6 @@ class PackageController extends Controller
     {
         $package = Package::create($request->input());
         $package->modules()->sync($request->input('modules'));
-        // $package->templates()->sync($request->input('templates'));
         return ['message' => '套餐添加成功'];
     }
 
@@ -67,7 +66,6 @@ class PackageController extends Controller
     {
         $package->fill($request->input())->save();
         $package->modules()->sync($request->input('modules'));
-        // $package->templates()->sync($request->input('templates'));
         return ['message' => '套餐修改成功'];
     }
 

@@ -29,9 +29,7 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Site $site, Role $role)
     {
-        //根据权限名称获取权限表(permissions)的id用于同步角色权限使用
-        $permissions = Permission::whereIn('name', $request->input('permissions'))->pluck('name');
-        $role->guard(['sanctum'])->syncPermissions($permissions);
+        $role->syncPermissions($request->input('permissions'));
         return $this->message('权限设置成功');
     }
 

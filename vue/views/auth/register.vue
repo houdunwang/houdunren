@@ -14,7 +14,14 @@
                                 <div class="w-full px-3 mb-5">
                                     <label for="" class="text-xs font-semibold px-1">帐号</label>
                                     <div class="flex flex-col">
-                                        <hd-validate-code v-model="form.account" class="flex-1 mb-2" placeholder="请输入手机号" action="/api/register/code" />
+                                        <hd-validate-code
+                                            v-model="form.account"
+                                            type="mobile"
+                                            :timeout="3"
+                                            class="flex-1 mb-2"
+                                            placeholder="请输入手机号"
+                                            action="register/code"
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -23,14 +30,14 @@
                                     <label class="text-xs font-semibold px-1">验证码</label>
                                     <div class="flex flex-col">
                                         <el-input placeholder="请输入收到的手机验证码" class="mr-1" v-model="form.code"> </el-input>
-                                        <hd-error :message="errors('code')" />
+                                        <hd-error name="code" />
                                     </div>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 gap-3">
                                 <el-form-item label="密码" class="flex-1">
                                     <el-input type="password" v-model="form.password" placeholder="请输入新密码"></el-input>
-                                    <hd-error :message="errors('password')" />
+                                    <hd-error name="password" />
                                 </el-form-item>
                                 <el-form-item label="确认密码" class="flex-1">
                                     <el-input type="password" v-model="form.password_confirmation" placeholder="请再输一次密码"></el-input>
@@ -57,26 +64,22 @@
 
 <script>
 import HdFooter from './Footer'
-import { mapGetters } from 'vuex'
 export default {
     route: { path: '/register', meta: { guest: true } },
     components: {
         HdFooter
     },
-    computed: {
-        ...mapGetters(['errors'])
-    },
-    props: ['user'],
     data() {
         return {
-            form: { account: '', code: '', password: '', password_confirmation: '', captcha: '', remember: false }
+            form: { account: '', code: '', password: '', password_confirmation: '', captcha: {} }
         }
     },
     methods: {
         onSubmit() {
-            this.axios.post(`/api/register`, this.form).then(_ => {
-                location.href = '/login'
-            })
+            this.axios
+                .post(`register`, this.form)
+                .then(_ => this.$router.push({ name: 'auth.login' }))
+                .finally(_ => this.$store.commit('setErrors', {}))
         }
     }
 }

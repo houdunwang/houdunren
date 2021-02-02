@@ -4,11 +4,11 @@
             微信登录
         </router-link>
         ·
-        <router-link class="no-underline hover:text-gray-900 text-blue-dark text-xs" to="/register">
+        <router-link class="no-underline hover:text-gray-900 text-blue-dark text-xs" to="/register" v-if="$route.name != 'auth.register'">
             注册 ·
         </router-link>
 
-        <router-link class="no-underline hover:text-gray-900 text-blue-dark text-xs" to="/login">
+        <router-link class="no-underline hover:text-gray-900 text-blue-dark text-xs" to="/login" v-if="$route.name != 'auth.login'">
             登录 ·
         </router-link>
 

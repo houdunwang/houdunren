@@ -1,4 +1,4 @@
 export default [
-    { label: '所有套餐列表', name: 'index', route: 'system.module.index' },
-    { label: '已经安装的套餐', name: 'installed', route: 'system.module.installed' }
+    { title: '系统管理', name: 'system.index' },
+    { title: '模块列表', name: 'system.module.index' }
 ]

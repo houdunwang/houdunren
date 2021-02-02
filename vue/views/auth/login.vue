@@ -10,19 +10,14 @@
                                 <form class="form-horizontal w-3/4 mx-auto" method="POST" action="#">
                                     <div class="flex flex-col mt-4">
                                         <el-input v-model="form.account" placeholder="邮箱或手机号"></el-input>
-                                        <hd-error :message="errors('account')" />
+                                        <hd-error name="account" />
                                     </div>
                                     <div class="flex flex-col mt-4">
                                         <el-input v-model="form.password" placeholder="请输入登录密码" type="password"></el-input>
-                                        <hd-error :message="errors('password')" />
+                                        <hd-error name="password" />
                                     </div>
                                     <div class="flex flex-col mt-4">
-                                        <hd-captcha v-model="form.captcha" :key.sync="form.captcha_key" ref="captcha" />
-                                        <hd-error :message="errors('captcha')" />
-                                    </div>
-                                    <div class="flex items-center mt-4">
-                                        <input type="checkbox" name="remember" id="remember" class="mr-2" v-model="form.remember" />
-                                        <label for="remember" class="text-sm text-grey-dark">记住我</label>
+                                        <hd-captcha v-model="form.captcha" ref="captcha" />
                                     </div>
                                     <div class="flex flex-col mt-8">
                                         <el-button
@@ -51,22 +46,19 @@
 
 <script>
 import HdFooter from './Footer'
-import { mapGetters } from 'vuex'
 export default {
-    route: { path: '/login', meta: { guest: true }, name: 'login' },
+    route: { path: '/login', meta: { guest: true } },
     components: {
         HdFooter
     },
     data() {
         return {
-            form: { account: '', password: '', captcha: '', remember: false, captcha_key: '' }
+            form: { account: '', password: '', captcha: {}, remember: false }
         }
-    },
-    computed: {
-        ...mapGetters(['errors'])
     },
     methods: {
         async onSubmit() {
+            this.$store.commit('setErrors', {})
             this.axios
                 .post(`login`, this.form)
                 .then(({ token }) => {

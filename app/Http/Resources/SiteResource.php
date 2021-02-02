@@ -18,6 +18,7 @@ class SiteResource extends JsonResource
             'title' => $this->title,
             'domain' => $this->domain,
             'user_id' => $this->user_id,
+            'module_id' => $this->module_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'permission' => $this->permission,

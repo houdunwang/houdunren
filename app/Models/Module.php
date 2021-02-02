@@ -15,7 +15,7 @@ class Module extends Model
 {
     protected $fillable = ['title', 'name', 'version', 'description', 'author'];
 
-    // protected $appends = ['preview', 'config', 'permissions', 'menus'];
+    protected $appends = ['preview', 'config', 'permissions', 'menus'];
 
     public function getMenusAttribute()
     {

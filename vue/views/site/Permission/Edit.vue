@@ -1,8 +1,7 @@
 <template>
-    <div>
+    <div v-loading="loading">
         <hd-tab :tabs="tabs" />
         <el-alert type="info" class="mb-3"> 你正在设置「{{ site.title }}」站点的「{{ role.title }}」角色的权限 </el-alert>
-
         <el-card shadow="nerver" class="mb-5 shadow-sm" :body-style="{ padding: '20px' }" v-for="module in modules" :key="module.id">
             <div slot="header">{{ module.title }}</div>
             <div v-for="(permission, index) in module.permissions" :key="index">
@@ -35,7 +34,8 @@ export default {
             form: { permissions: [] },
             modules: [],
             site: {},
-            role: {}
+            role: {},
+            loading: true
         }
     },
     async created() {
@@ -45,10 +45,12 @@ export default {
         this.role.permissions.map(p => {
             this.form.permissions.push(p.name)
         })
+        this.loading = false
     },
     methods: {
         async onSubmit() {
             await this.axios.put(`${this.site.id}/permission/${this.role.id}`, this.form)
+            this.route(`site.role.index`, { sid: this.site.id })
         }
     }
 }

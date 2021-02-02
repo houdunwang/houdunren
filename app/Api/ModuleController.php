@@ -2,12 +2,13 @@
 
 namespace App\Api;
 
+use App\Http\Resources\ModuleResource;
 use App\Http\Controllers\Controller;
-use App\Models\Module;
 use Illuminate\Http\Request;
+use App\Models\Module;
+use App\Models\User;
 use App\Models\Site;
 use ModuleService;
-use App\Http\Resources\ModuleResource;
 
 /**
  * 模块管理
@@ -17,7 +18,8 @@ class ModuleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'system']);
+        $this->middleware(['auth:sanctum']);
+        $this->middleware(['system'])->except(['user', 'site']);
     }
 
     /**
@@ -28,6 +30,28 @@ class ModuleController extends Controller
     public function index()
     {
         return ModuleService::all();
+    }
+
+    /**
+     * 站点模块
+     *
+     * @param Site $site
+     * @return void
+     */
+    public function site(Site $site)
+    {
+        return $site->modules;
+    }
+
+    /**
+     * 用户所拥有的站点模块
+     *
+     * @param User $user
+     * @return void
+     */
+    public function user(User $user)
+    {
+        return ModuleResource::collection($user->group->modules);
     }
 
     /**

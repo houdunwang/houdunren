@@ -17,7 +17,6 @@ class ModuleService
 {
     /**
      * 缓存或读取当前模块
-     *
      * @param Module $module
      * @return Module|null
      */

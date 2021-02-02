@@ -21,10 +21,7 @@
 const menus = [
     {
         title: '应用扩展',
-        items: [
-            { title: '模块插件', to: '/system/module/index', icon: 'fa fa fa-cubes' },
-            { title: '风格模板', to: '', icon: 'fas fa-basketball-ball' }
-        ]
+        items: [{ title: '模块插件', to: '/system/module/index', icon: 'fa fa fa-cubes' }]
     },
     {
         title: '用户管理',

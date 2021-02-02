@@ -1,5 +1,6 @@
 <template>
-    <hd-layout :tabs="tabs" home="site.site.index">
+    <div>
+        <hd-tab :tabs="tabs" />
         <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal">
             <el-card shadow="always" :body-style="{ padding: '20px' }">
                 <div slot="header">
@@ -7,38 +8,41 @@
                 </div>
                 <el-form-item label="角色名称">
                     <el-input v-model="form.title"></el-input>
-                    <hd-error :message="form.errors.title" />
+                    <hd-error name="title" />
                 </el-form-item>
                 <el-form-item label="角色标识">
                     <el-input v-model="form.name"></el-input>
-                    <hd-error :message="form.errors.name" />
+                    <hd-error name="name" />
                 </el-form-item>
                 <el-form-item class="mt-3">
-                    <el-button type="primary" @click="onSubmit">立即创建</el-button>
+                    <el-button type="primary" @click="onSubmit">保存提交</el-button>
                 </el-form-item>
             </el-card>
         </el-form>
-    </hd-layout>
+    </div>
 </template>
 
 <script>
 import tabs from './tabs'
+const form = { title: '', name: '' }
 export default {
-    props: {
-        errors: Object,
-        site: Object,
-        role: Object
-    },
+    route: false,
+    props: ['id'],
     data() {
         return {
-            tabs: tabs(this.site),
-            form: this.$inertia.form(this.role || {})
+            tabs: tabs({ sid: this.$route.params.sid, id: this.$route.params.id }),
+            sid: this.$route.params.sid,
+            form: Object.assign({}, form)
         }
     },
+    async created() {
+        if (this.id) this.form = await this.axios.get(`${this.sid}/role/${this.id}`)
+    },
     methods: {
-        onSubmit() {
-            const url = this.role ? 'site.role.update' : 'site.role.store'
-            this.form[this.role ? 'put' : 'post'](route(url, [this.site, this.role]))
+        async onSubmit() {
+            const url = this.id ? `${this.sid}/role/${this.id}` : `${this.sid}/role`
+            await this.axios[this.id ? 'put' : 'post'](url, this.form)
+            this.$router.push(`/site/${this.sid}/role`)
         }
     }
 }

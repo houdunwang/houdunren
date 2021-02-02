@@ -59,5 +59,10 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
+
+        //短信验证码
+        RateLimiter::for('codeSend', function (Request $request) {
+            return Limit::perDay(10);
+        });
     }
 }

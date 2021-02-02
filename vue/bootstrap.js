@@ -12,6 +12,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 require('./plugins/element')
 require('./plugins/axios')
+require('./plugins/dayjs')
 require('./utils/autoload')
 require('./utils/filters')
 /**

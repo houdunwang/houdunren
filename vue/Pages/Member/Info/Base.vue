@@ -19,9 +19,10 @@
 import { mapGetters } from 'vuex'
 const fields = [
     { label: '昵称', id: 'name' },
+    { label: '微博', id: 'weibo' },
+    { label: '微信号', id: 'weixin' },
     { label: 'GIBHUB', id: 'github' },
-    { label: 'QQ', id: 'qq' },
-    { label: '微博', id: 'weibo' }
+    { label: 'QQ', id: 'qq' }
 ]
 export default {
     props: ['user'],

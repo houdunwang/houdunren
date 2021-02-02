@@ -28,7 +28,7 @@ class SiteMiddleware
      */
     protected function checkAccess(): bool
     {
-        if ($site = request()->site) {
+        if ($site = request('site')) {
             SiteService::cache($site);
             return UserService::isMaster($site, Auth::user());
         }

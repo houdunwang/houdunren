@@ -7,9 +7,10 @@ use App\Http\Resources\UserResource;
 use App\Http\Requests\UserRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use App\Rules\OldPassword;
 use App\Rules\CodeRule;
 use App\Models\User;
-use App\Rules\OldPassword;
+use CodeService;
 use Hash;
 use Auth;
 
@@ -22,6 +23,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware(['auth:sanctum']);
+        $this->middleware(['front'])->only(['mobileCode', 'emailCode']);
     }
 
     /**
@@ -46,6 +48,7 @@ class UserController extends Controller
     {
         return new UserResource(Auth::user());
     }
+
     /**
      * 获取用户资料
      * @param User $user
@@ -101,7 +104,10 @@ class UserController extends Controller
         $this->validate($request, [
             'account' => ['required', 'regex:/^\d{11}$/', Rule::unique('users', 'mobile')],
             'code' => ['required', new CodeRule(request('account'))]
-        ], ['account.required' => '手机号不能为空', 'account.regex' => '手机号格式错误', 'account.unique' => '手机号已经存在', 'code.required' => '验证码不能为空']);
+        ], [
+            'account.required' => '手机号不能为空', 'account.regex' => '手机号格式错误',
+            'account.unique' => '手机号已经绑定', 'code.required' => '验证码不能为空'
+        ]);
 
         $user = Auth::user();
         $user->mobile = $request->account;
@@ -110,7 +116,7 @@ class UserController extends Controller
     }
 
     /**
-     * 为存在的手机发送验证码
+     * 发送验证码
      * @param Request $request
      * @return void
      */
@@ -118,12 +124,15 @@ class UserController extends Controller
     {
         $request->validate(
             [
-                'account' => ['required', 'regex:/^\d{11}$/', Rule::exists('users', 'mobile')],
-                'captcha' => ['required', 'captcha']
+                'account' => ['required', 'regex:/^\d{11}$/', Rule::unique('users', 'mobile')],
+                'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
             ],
             [
-                'account.required' => '帐号不能为空', 'account.regex' => '手机号格式错误', 'account.exists' => '手机号不存在',
-                'captcha.required' => '图形验证码不能为空', 'captcha.captcha' => '验证码输入错误'
+                'account.required' => '帐号不能为空',
+                'account.regex' => '手机号格式错误',
+                'account.unique' => '手机号已经绑定',
+                'captcha.content.required' => '验证码不能为空',
+                'captcha.content.captcha_api' => '验证码输入错误'
             ]
         );
 
@@ -142,7 +151,10 @@ class UserController extends Controller
         $this->validate($request, [
             'account' => ['required', 'email', Rule::unique('users', 'email')],
             'code' => ['required', new CodeRule(request('account'))]
-        ], ['account.required' => '邮箱不能为空', 'account.email' => '邮箱格式错误', 'account.unique' => '邮箱已经存在', 'code.required' => '验证码不能为空']);
+        ], [
+            'account.required' => '邮箱不能为空', 'account.email' => '邮箱格式错误',
+            'account.unique' => '邮箱已经存在', 'code.required' => '验证码不能为空'
+        ]);
 
         $user = Auth::user();
         $user->email = $request->account;
@@ -159,12 +171,14 @@ class UserController extends Controller
     {
         $request->validate(
             [
-                'account' => ['required', 'email', Rule::exists('users', 'email')],
-                'captcha' => ['required', 'captcha']
+                'account' => ['required', 'email', Rule::unique('users', 'mobile')],
+                'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
             ],
             [
-                'account.required' => '帐号不能为空', 'account.exists' => '邮箱不存在',
-                'captcha.required' => '图形验证码不能为空', 'captcha.captcha' => '验证码输入错误'
+                'account.required' => '帐号不能为空',
+                'account.unique' => '邮箱已经被使用',
+                'captcha.content.required' => '验证码不能为空',
+                'captcha.content.captcha_api' => '验证码输入错误'
             ]
         );
 

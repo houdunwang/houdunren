@@ -2,13 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Module;
 use ConfigService;
 use SiteService;
 use ModuleService;
-use Exception;
 use Closure;
-use App\Models\Site;
-use App\Models\Module;
 
 /**
  * 前台管理中间件
@@ -18,47 +16,64 @@ class FrontMiddleware
 {
     public function handle($request, Closure $next)
     {
-        $this->init();
+        if ($this->siteInit() === false) {
+            abort(404, '站点不存在');
+        }
+        if ($this->moduleInit() === false) {
+            abort(501, '模块不存在，或站点没有默认模块');
+        }
         return $next($request);
     }
 
     /**
-     * 初始化站点与模块数据
+     * 站点初始化
      *
-     * @return void
+     * @return boolean
      */
-    protected function init()
+    protected function siteInit(): bool
     {
         //根据域名获取站点
         $site = SiteService::getByDomain();
-        if ($site) {
-            SiteService::cache($site);
-            //加载站点配置
-            ConfigService::site($site);
-            if ($module = $this->module($site)) {
-                //加载站点与模块配置
-                ModuleService::cache($module);
-                ConfigService::module($site, $module);
-            }
-        }
+        if (!$site) return false;
+        //加载站点配置
+        SiteService::cache($site);
+        ConfigService::site($site);
+        return true;
     }
 
     /**
-     * 获取模块
+     * 模块初始化
      *
-     * @param Site $site
+     * @return boolean
+     */
+    protected function moduleInit(): bool
+    {
+        if ($module = $this->getModule()) {
+            //缓存站点与模块
+            ModuleService::cache($module);
+            ConfigService::module(site(), $module);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 识别模块
+     *
      * @return void
      */
-    protected function module(Site $site)
+    protected function getModule()
     {
-        $module = null;
         $path = parse_url(url()->current())['path'] ?? '';
+        $module = null;
         if ($path) {
-            preg_match('/^\/(\w+)\/?/', $path, $match);
+            preg_match('/^\/api\/(\w+)\/?/i', $path, $match);
             if ($name = $match[1] ?? '') {
                 $module = Module::where('name', $name)->first();
             }
         }
-        return $module ?? $site->module;
+
+        //URL没有模块标识时，使用站点默认模块
+        return $module ?? site()->module;
     }
 }

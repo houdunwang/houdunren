@@ -1,4 +1,5 @@
 import groups from './groups'
+import NotFound from '@/views/common/NotFound'
 
 const components = require.context('@/views', true, /\.vue$/i)
 
@@ -27,5 +28,7 @@ components.keys().map(path => {
         groups[groupName].children.push(Object.assign(route, component.route || {}))
     }
 })
+const routes = Object.values(groups)
+routes.push({ path: '*', component: NotFound })
 
-export default Object.values(groups)
+export default routes

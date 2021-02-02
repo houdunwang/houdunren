@@ -8,14 +8,12 @@ use UserService;
 
 /**
  * 站点服务
- *
  * @package App\Services\Site
  */
 class SiteService
 {
     /**
      * 根据域名获取站点
-     *
      * @return Site|null
      */
     public function getByDomain(): ?Site
@@ -26,7 +24,6 @@ class SiteService
 
     /**
      * 缓存或读取当前站点
-     *
      * @param Site|null $site
      * @return Site|null
      */
