@@ -6,7 +6,7 @@
                     <div class="hidden md:block w-1/2 bg-indigo-500 py-10 px-10 bg-cover bg-center" style="background-image:url('/images/forget.jpeg')"></div>
                     <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
                         <div class="text-center mb-10">
-                            <h1 class="font-bold text-3xl text-gray-900">找回密码</h1>
+                            <h1 class="text-gray-900 text-4xl text-center font-thin">找回密码</h1>
                         </div>
                         <div>
                             <div class="flex">

@@ -96201,7 +96201,10 @@ var render = function() {
                     _c("div", { staticClass: "text-center mb-10" }, [
                       _c(
                         "h1",
-                        { staticClass: "font-bold text-3xl text-gray-900" },
+                        {
+                          staticClass:
+                            "text-gray-900 text-4xl text-center font-thin"
+                        },
                         [_vm._v("找回密码")]
                       )
                     ]),
@@ -96432,7 +96435,7 @@ var render = function() {
                     _c(
                       "div",
                       {
-                        staticClass: "flex flex-col flex-1 justify-center mb-8"
+                        staticClass: "flex flex-col flex-1 justify-center mb-10"
                       },
                       [
                         _c(
@@ -96636,11 +96639,12 @@ var render = function() {
                     _c("div", { staticClass: "text-center mb-10" }, [
                       _c(
                         "h1",
-                        { staticClass: "font-bold text-3xl text-gray-900" },
+                        {
+                          staticClass:
+                            "text-gray-900 text-4xl text-center font-thin"
+                        },
                         [_vm._v("注册")]
-                      ),
-                      _vm._v(" "),
-                      _c("p", [_vm._v("为了美好的生活，一起努力")])
+                      )
                     ]),
                     _vm._v(" "),
                     _c(
