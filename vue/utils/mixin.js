@@ -17,8 +17,12 @@ const mixin = {
         errors(name) {
             return store.getters.errors(name)
         },
-        removeToken() {
+        isLogin() {
+            return Boolean(window.localStorage.getItem('token'))
+        },
+        logout() {
             window.localStorage.removeItem('token')
+            location.href = '/'
         }
     }
 }

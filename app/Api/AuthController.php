@@ -12,6 +12,7 @@ use UserService;
 use CodeService;
 use Auth;
 use Hash;
+use Exception;
 
 /**
  * 帐号登录注册管理
@@ -24,10 +25,6 @@ class AuthController extends Controller
         $this->middleware(['front'])->except('login');
     }
 
-    public function my()
-    {
-        return Auth::user();
-    }
     /**
      * 帐号登录
      *
@@ -94,7 +91,7 @@ class AuthController extends Controller
         $request->validate(
             [
                 'account' => ['required', 'regex:/^\d{11}$/', Rule::unique('users', 'mobile')],
-                'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
+                // 'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
             ],
             [
                 'account.required' => '手机号不能为空',
@@ -104,9 +101,12 @@ class AuthController extends Controller
                 'captcha.content.captcha_api' => '验证码输入错误'
             ]
         );
-
-        CodeService::mobile(request('account'));
-        return ['message' => '验证码发送成功'];
+        try {
+            CodeService::mobile(request('account'));
+            return ['message' => '验证码发送成功'];
+        } catch (Exception $e) {
+            return $this->error('短信发送失败，请检查手机号或联系站长', 500);
+        }
     }
 
 

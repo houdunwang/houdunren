@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 const menus = [
     { title: '模块管理', route: '/system/module/index', icon: 'fa fa-cubes' },
     { title: '系统设置', route: '/system/index', icon: 'fas fa-comment' },
@@ -53,9 +52,6 @@ export default {
             menus
         }
     },
-    computed: {
-        ...mapState(['user'])
-    },
     mounted() {
         //点击文档区域时隐藏右侧顶部菜单
         window.document.addEventListener('click', e => {
@@ -63,12 +59,6 @@ export default {
                 this.showUserMenu = false
             }
         })
-    },
-    methods: {
-        logout() {
-            window.localStorage.removeItem('token')
-            location.reload(true)
-        }
     }
 }
 </script>

@@ -23,30 +23,25 @@
                 <i class="text-2xl" :class="menu.icon" aria-hidden="true"></i>
                 <span class="text-sm">{{ menu.title }}</span>
             </router-link>
+            <a
+                href="#"
+                class="bg-white border rounded-lg shadow-md box-border px-4 py-2 flex flex-col justify-center items-center opacity-75 duration-500 hover:opacity-100"
+                @click.prevent="logout"
+            >
+                <i class="text-2xl far fa-life-ring" aria-hidden="true"></i>
+                <span class="text-sm">退出</span>
+            </a>
         </div>
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-const quickMenus = [
-    { title: '网站管理', route: '/admin', icon: 'fas fa-sitemap' },
-    { title: '退出', route: '', icon: 'fas fa-sign-out-alt' }
-]
+const quickMenus = [{ title: '网站管理', route: '/admin', icon: 'fas fa-sitemap' }]
 export default {
     route: { meta: { auth: true } },
     data() {
         return {
             quickMenus
-        }
-    },
-    computed: {
-        ...mapState(['user'])
-    },
-    methods: {
-        logout() {
-            window.localStorage.removeItem('token')
-            location.reload(true)
         }
     }
 }

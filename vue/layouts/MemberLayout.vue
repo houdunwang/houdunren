@@ -102,12 +102,6 @@ export default {
     route: { meta: { auth: true } },
     data() {
         return { menus }
-    },
-    methods: {
-        logout() {
-            this.removeToken()
-            location.href = '/'
-        }
     }
 }
 </script>

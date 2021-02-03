@@ -47,6 +47,7 @@ Route::apiResource('package', PackageController::class);
 //会员组
 Route::apiResource('group', GroupController::class);;
 //站点管理
+Route::get('site/bydomain', [SiteController::class, 'getByDomain']);
 Route::apiResource('site', SiteController::class);
 //模块
 Route::get('module/installed', [ModuleController::class, 'installed']);

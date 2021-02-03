@@ -14,7 +14,12 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
+        if (!$request->expectsJson()) {
+            // $path = parse_url($request->fullUrl());
+            // preg_match('/^\/(.*)\/?/i', $path['path'], $match);
+            // if (in_array($match[1], ['admin', 'system', 'site'])) {
+            //     return route('hdcms');
+            // }
             return route('login');
         }
     }

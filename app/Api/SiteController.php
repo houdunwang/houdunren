@@ -8,6 +8,7 @@ use App\Http\Requests\SiteRequest;
 use Illuminate\Http\Request;
 use App\Models\Site;
 use Auth;
+use SiteService;
 
 /**
  * 站点管理
@@ -17,8 +18,8 @@ class SiteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
-        $this->middleware(['site'])->except(['index', 'store']);
+        $this->middleware(['auth:sanctum'])->except(['getByDomain']);
+        $this->middleware(['site'])->except(['index', 'store', 'getByDomain']);
     }
 
     /**
@@ -29,6 +30,15 @@ class SiteController extends Controller
     {
         $sites = Auth::user()->allSites;
         return SiteResource::collection($sites);
+    }
+
+    /**
+     * 根据域名获取站点
+     * @return void
+     */
+    public function getByDomain()
+    {
+        return new SiteResource(SiteService::getByDomain());
     }
 
     /**

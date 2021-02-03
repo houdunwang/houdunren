@@ -20,7 +20,7 @@ class FrontMiddleware
             abort(404, '站点不存在');
         }
         if ($this->moduleInit() === false) {
-            abort(501, '模块不存在，或站点没有默认模块');
+            abort(404, '模块不存在，或站点设置默认模块');
         }
         return $next($request);
     }
