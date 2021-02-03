@@ -26,13 +26,4 @@ class Package extends Model
     {
         return $this->belongsToMany(Module::class)->withTimestamps();
     }
-
-    /**
-     * 模板风格关联
-     * @return BelongsToMany
-     */
-    public function templates()
-    {
-        return $this->belongsToMany(Template::class, 'template_package')->withTimestamps();
-    }
 }

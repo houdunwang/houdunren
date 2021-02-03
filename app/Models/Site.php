@@ -16,13 +16,10 @@ use Illuminate\Support\Facades\Auth;
  */
 class Site extends Model
 {
-
-    protected $fillable = ['title', 'domain', 'module_id', 'user_id', 'template_id',];
-
+    protected $fillable = ['title', 'domain', 'config', 'module_id', 'user_id', 'template_id',];
     protected $casts = [
         'config' => 'array',
     ];
-
     protected $appends = [
         'permission',
     ];
@@ -51,33 +48,6 @@ class Site extends Model
     }
 
     /**
-     * 站点可使用的所有模块
-     * @return mixed
-     */
-    public function getModulesAttribute()
-    {
-        return $this->master->group->modules;
-    }
-
-    /**
-     * 当前站点使用的模板
-     * @return BelongsTo
-     */
-    public function template()
-    {
-        return $this->belongsTo(Template::class, 'template_id');
-    }
-
-    /**
-     * 模板列表
-     * @return mixed
-     */
-    public function getTemplatesAttribute()
-    {
-        return $this->master->group->templates;
-    }
-
-    /**
      * 站长
      * @return BelongsTo
      */
@@ -93,15 +63,6 @@ class Site extends Model
     public function admins()
     {
         return $this->belongsToMany(User::class, 'admin_site');
-    }
-
-    /**
-     * 菜色列表
-     * @return HasMany
-     */
-    public function roles()
-    {
-        return $this->hasMany(Role::class);
     }
 
     /**
@@ -121,14 +82,5 @@ class Site extends Model
     public function wechats()
     {
         return $this->hasMany(WeChat::class, 'site_id');
-    }
-
-    /**
-     * 站点菜单
-     * @return HasMany
-     */
-    public function menus()
-    {
-        return $this->hasMany(Menu::class);
     }
 }

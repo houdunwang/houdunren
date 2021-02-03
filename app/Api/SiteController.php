@@ -8,7 +8,6 @@ use App\Http\Requests\SiteRequest;
 use Illuminate\Http\Request;
 use App\Models\Site;
 use Auth;
-use SiteService;
 
 /**
  * 站点管理
@@ -18,8 +17,8 @@ class SiteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum'])->except(['getByDomain']);
-        $this->middleware(['site'])->except(['index', 'store', 'getByDomain']);
+        $this->middleware(['auth:sanctum']);
+        $this->authorizeResource(Site::class, 'site');
     }
 
     /**
@@ -30,15 +29,6 @@ class SiteController extends Controller
     {
         $sites = Auth::user()->allSites;
         return SiteResource::collection($sites);
-    }
-
-    /**
-     * 根据域名获取站点
-     * @return void
-     */
-    public function getByDomain()
-    {
-        return new SiteResource(SiteService::getByDomain());
     }
 
     /**
@@ -53,7 +43,6 @@ class SiteController extends Controller
 
     /**
      * 保存站点
-     *
      * @param SiteRequest $request
      * @param Site $site
      * @return void
@@ -76,6 +65,7 @@ class SiteController extends Controller
      */
     public function update(SiteRequest $request, Site $site)
     {
+        $this->authorize('update', $site);
         $site->fill($request->input());
         $site->module_id = request('module_id');
         $site->save();
@@ -84,13 +74,13 @@ class SiteController extends Controller
 
     /**
      * 删除站点
-     *
      * @param Site $site
      * @return void
      */
     public function destroy(Site $site)
     {
+        $this->authorize('delete', $site);
         $site->delete();
-        return ['message' => '删除成功'];
+        return $this->message('删除成功');
     }
 }

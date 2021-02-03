@@ -67,7 +67,7 @@ class FrontMiddleware
         $path = parse_url(url()->current())['path'] ?? '';
         $module = null;
         if ($path) {
-            preg_match('/^\/api\/(\w+)\/?/i', $path, $match);
+            preg_match('/^\/(\w+)\/?/i', $path, $match);
             if ($name = $match[1] ?? '') {
                 $module = Module::where('name', $name)->first();
             }

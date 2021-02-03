@@ -7,7 +7,6 @@ use App\Http\Requests\PackageRequest;
 use App\Http\Resources\PackageResource;
 use App\Models\Package;
 use Illuminate\Http\Request;
-use Auth;
 
 /**
  * 服务套餐
@@ -17,7 +16,8 @@ class PackageController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'system']);
+        $this->middleware(['auth:sanctum']);
+        $this->authorizeResource(Package::class, 'package');
     }
 
     /**
@@ -26,12 +26,12 @@ class PackageController extends Controller
      */
     public function index()
     {
-        return PackageResource::collection(Package::all());
+        $packages = Package::all();
+        return PackageResource::collection($packages);
     }
 
     /**
      * 获取套餐
-     *
      * @param Package $package
      * @return void
      */
@@ -53,8 +53,6 @@ class PackageController extends Controller
         return ['message' => '套餐添加成功'];
     }
 
-
-
     /**
      * 更新套餐
      *
@@ -71,7 +69,6 @@ class PackageController extends Controller
 
     /**
      * 删除套餐
-     *
      * @param Package $package
      * @return void
      */

@@ -1,6 +1,7 @@
-import store from '@/store'
-import Auth from '@/utils/Auth'
-import router from '@/router'
+import store from '../store'
+import Auth from '../utils/Auth'
+import router from '../router'
+import { MessageBox } from 'element-ui'
 const mixin = {
     computed: {
         user() {
@@ -11,6 +12,9 @@ const mixin = {
         }
     },
     methods: {
+        async confirm(message, promise) {
+            return MessageBox.confirm(message, '温馨提示').then(_ => this.submit(promise))
+        },
         route(name, params = {}) {
             router.push({ name, params })
         },

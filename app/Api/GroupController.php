@@ -5,10 +5,8 @@ namespace App\Api;
 use App\Models\Group;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GroupRequest;
-use App\Models\Package;
 use Illuminate\Http\Request;
 use App\Http\Resources\GroupResource;
-use App\Http\Resources\PackageResource;
 
 /**
  * 会员组
@@ -18,12 +16,12 @@ class GroupController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'system']);
+        $this->middleware(['auth:sanctum']);
+        $this->authorizeResource(Group::class, 'group');
     }
 
     /**
      * 会员组列表
-     *
      * @return void
      */
     public function index()
@@ -33,7 +31,6 @@ class GroupController extends Controller
 
     /**
      * 获取套餐
-     *
      * @param Group $group
      * @return void
      */
@@ -44,7 +41,6 @@ class GroupController extends Controller
 
     /**
      * 保存会员组
-     *
      * @param GroupRequest $request
      * @return void
      */
@@ -52,12 +48,11 @@ class GroupController extends Controller
     {
         $group = Group::create($request->input());
         $group->packages()->sync($request->packages);
-        return ['message' => '会员组添加成功'];
+        return $this->message('会员组添加成功');
     }
 
     /**
      * 更新会员组
-     *
      * @param Request $request
      * @param Group $group
      * @return void
@@ -66,18 +61,17 @@ class GroupController extends Controller
     {
         $group->fill($request->input())->save();
         $group->packages()->sync($request->packages);
-        return ['message' => '会员组修改成功'];
+        return $this->message('会员组修改成功');
     }
 
     /**
      * 删除会员组
-     *
      * @param Group $group
      * @return void
      */
     public function destroy(Group $group)
     {
         $group->delete();
-        return ['message' => '会员组删除成功'];
+        return $this->message('会员组删除成功');
     }
 }

@@ -6,9 +6,9 @@
 <script>
 export default {
     async beforeRouteEnter(to, from, next) {
-        if (to.name != 'auth.hdcms') {
-            await axios.get(`site/bydomain`)
-        }
+        // if (to.name != 'auth.hdcms') {
+        //     await axios.get(`site/bydomain`)
+        // }
         next()
     }
 }

@@ -22,7 +22,7 @@
                     </div>
                     <div class="border-t border-gray-200 w-full flex justify-center bg-gray-100 py-3">
                         <el-button type="primary" size="mini">
-                            <a :href="`/${module.name}/admin`" class="text-white">
+                            <a :href="`/module/${site.id}/admin/${module.id}`" class="text-white">
                                 管理模块
                             </a>
                         </el-button>
@@ -42,8 +42,7 @@ export default {
         return {
             modules: [],
             site: {},
-            tabs: tabs({ sid: this.$route.params.sid }),
-            loading: true
+            tabs: tabs({ sid: this.$route.params.sid })
         }
     },
     async created() {

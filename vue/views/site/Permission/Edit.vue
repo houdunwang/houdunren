@@ -11,7 +11,7 @@
                 <div class="grid grid-cols-4 text-sm">
                     <div v-for="(rule, i) in permission.rules" :key="i" class="py-2">
                         <el-checkbox-group v-model="form.permissions">
-                            <el-checkbox :label="rule.name">
+                            <el-checkbox :label="rule.permission_name">
                                 {{ rule.title }}
                                 <el-tag type="info" size="mini" class="opacity-75">{{ rule.name }}</el-tag>
                             </el-checkbox>
@@ -41,7 +41,7 @@ export default {
     async created() {
         this.site = await this.axios.get(`site/${this.$route.params.sid}`)
         this.role = await this.axios.get(`${this.site.id}/role/${this.$route.params.sid}`)
-        this.modules = await this.axios.get(`site/modules/${this.site.id}`)
+        this.modules = await this.axios.get(`module/site/${this.site.id}`)
         this.role.permissions.map(p => {
             this.form.permissions.push(p.name)
         })
@@ -50,7 +50,7 @@ export default {
     methods: {
         async onSubmit() {
             await this.axios.put(`${this.site.id}/permission/${this.role.id}`, this.form)
-            this.route(`site.role.index`, { sid: this.site.id })
+            // this.route(`site.role.index`, { sid: this.site.id })
         }
     }
 }

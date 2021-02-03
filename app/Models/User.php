@@ -41,7 +41,6 @@ class User extends Authenticatable
 
     /**
      * The attributes that should be cast to native types.
-     *
      * @var array
      */
     protected $casts = [
@@ -50,7 +49,6 @@ class User extends Authenticatable
 
     /**
      * 附加字段
-     *
      * @var array
      */
     protected $appends = [

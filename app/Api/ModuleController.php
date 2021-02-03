@@ -9,6 +9,7 @@ use App\Models\Module;
 use App\Models\User;
 use App\Models\Site;
 use ModuleService;
+use Auth;
 
 /**
  * 模块管理
@@ -18,13 +19,12 @@ class ModuleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
-        $this->middleware(['system'])->except(['user', 'site']);
+        $this->middleware(['auth:sanctum', 'system']);
+        $this->authorizeResource(Module::class, 'module');
     }
 
     /**
-     * 所有模块列表
-     *
+     * 模块列表
      * @return void
      */
     public function index()
@@ -33,35 +33,13 @@ class ModuleController extends Controller
     }
 
     /**
-     * 站点模块
-     *
-     * @param Site $site
+     * 获取模块
+     * @param Module $module
      * @return void
      */
-    public function site(Site $site)
+    public function show(Module $module)
     {
-        return $site->modules;
-    }
-
-    /**
-     * 用户所拥有的站点模块
-     *
-     * @param User $user
-     * @return void
-     */
-    public function user(User $user)
-    {
-        return ModuleResource::collection($user->group->modules);
-    }
-
-    /**
-     * 获取所有已经安装模块
-     *
-     * @return void
-     */
-    public function installed()
-    {
-        return ModuleResource::collection(Module::all());
+        return new ModuleResource($module);
     }
 
     /**
@@ -69,8 +47,10 @@ class ModuleController extends Controller
      * @param string $name
      * @return void
      */
-    public function install(string $name)
+    public function store(Request $request)
     {
+        sleep(3);
+        $name = $request->name;
         $data = ModuleService::config($name, 'config');
         Module::updateOrCreate(['name' => $name], $data);
         return ['message' => '模块安装成功'];
@@ -81,8 +61,10 @@ class ModuleController extends Controller
      * @param Module $module
      * @return void
      */
-    public function uninstall(Module $module)
+    public function destroy(Module $module)
     {
+        sleep(3);
+        $this->authorize('delete', $module);
         $module->delete();
         return ['message' => '模块卸载成功'];
     }

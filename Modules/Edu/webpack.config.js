@@ -3,8 +3,7 @@ const path = require('path')
 module.exports = {
     resolve: {
         alias: {
-            '@': path.resolve(__dirname, 'vue'),
-            '~': path.resolve(__dirname, 'vue')
+            Edu: path.resolve(__dirname, 'vue')
         }
     }
 }

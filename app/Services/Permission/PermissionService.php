@@ -90,8 +90,7 @@ class PermissionService
     }
 
     /**
-     * 用户是否可使用模块
-     *
+     * 用户是否可使用站点的模块
      * @param Site $site
      * @param Module $module
      * @param User $user

@@ -7,6 +7,8 @@ use App\Models\Site;
 use Illuminate\Http\Request;
 use ConfigService;
 use CodeService;
+use Exception;
+use Auth;
 
 /**
  * 站点配置
@@ -53,14 +55,11 @@ class SiteConfigController extends Controller
     public function sms(Request $request, Site $site)
     {
         ConfigService::site($site);
-        $data = [
-            'content'  => '您的验证码为: 6379',
-            'template' => 'SMS_001',
-            'data' => [
-                'code' => 6379
-            ]
-        ];
-        CodeService::mobile($request->mobile);
-        return $this->message('短信发送成功');
+        try {
+            CodeService::mobile(Auth::user()->mobile);
+            return ['message' => '验证码发送成功'];
+        } catch (Exception $e) {
+            return $this->error('短信发送失败，请检查手机号或联系站长!' . $e->getMessage(), 500);
+        }
     }
 }

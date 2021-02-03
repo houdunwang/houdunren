@@ -1,11 +1,9 @@
 <template>
     <div>
-        <router-link to="/site/site/create" class="mb-3 block">
-            <el-button type="primary" size="medium" class="mb-3 block">
-                <i class="fas fa-plus-circle"></i>
-                添加网站
-            </el-button>
-        </router-link>
+        <el-button type="primary" size="medium" class="mb-3 block" @click="$router.push({ name: 'site.site.create' })">
+            <i class="fas fa-plus-circle"></i>
+            添加网站
+        </el-button>
         <div style="min-height:100px;" v-loading="loading">
             <div v-if="sites.length">
                 <div class="card shadow-sm mb-3 text-gray-800" v-for="site in sites" :key="site.id">

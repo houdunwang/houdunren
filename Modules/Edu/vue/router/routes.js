@@ -1,7 +1,7 @@
 import groups from './groups'
-import NotFound from '@/views/common/NotFound'
+import NotFound from '../views/common/NotFound'
 
-const components = require.context('@/views', true, /\.vue$/i)
+const components = require.context('../views', true, /\.vue$/i)
 
 components.keys().map(path => {
     const component = components(path).default

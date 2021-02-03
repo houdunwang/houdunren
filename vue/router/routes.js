@@ -1,7 +1,7 @@
 import groups from './groups'
-import NotFound from '@/views/common/NotFound'
+import NotFound from '../views/errors/NotFound'
 
-const components = require.context('@/views', true, /\.vue$/i)
+const components = require.context('../views', true, /\.vue$/i)
 
 components.keys().map(path => {
     const component = components(path).default
@@ -29,6 +29,8 @@ components.keys().map(path => {
     }
 })
 const routes = Object.values(groups)
+console.log(routes)
+
 routes.push({ path: '*', component: NotFound })
 
 export default routes

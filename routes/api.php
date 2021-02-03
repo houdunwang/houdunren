@@ -19,6 +19,7 @@ use App\Api\WeChatDefaultController;
 use App\Api\WechatMenuController;
 use App\Api\WeChatUserController;
 use App\Api\CodeController;
+use App\Api\ModuleMenuController;
 
 //验证码
 Route::get('captcha', [CaptchaController::class, 'create']);
@@ -47,16 +48,9 @@ Route::apiResource('package', PackageController::class);
 //会员组
 Route::apiResource('group', GroupController::class);;
 //站点管理
-Route::get('site/bydomain', [SiteController::class, 'getByDomain']);
 Route::apiResource('site', SiteController::class);
 //模块
-Route::get('module/installed', [ModuleController::class, 'installed']);
-Route::post('module/{name}', [ModuleController::class, 'install']);
-Route::delete('module/{module:name}', [ModuleController::class, 'uninstall']);
-Route::apiResource('module', ModuleController::class)->only(['index']);
-Route::get('module/user/{user}', [ModuleController::class, 'user']);
-//站点模块
-Route::get('module/site/{site}', [ModuleController::class, 'site']);
+Route::apiResource('module', ModuleController::class);
 //站点配置
 Route::post('config/sms/{site}', [SiteConfigController::class, 'sms']);
 Route::apiResource('config/site', SiteConfigController::class)->only(['show', 'update']);

@@ -6,40 +6,42 @@
             </a>
         </div>
         <div class="grid grid-flow-col auto-cols-fr gap-1 mt-3 md:mt-0 md:col-span-3">
-            <div v-for="(menu, index) in quickMenus" :key="index">
-                <router-link
-                    :to="menu.route"
-                    class="bg-white border rounded-lg shadow-md box-border px-4 py-2 flex flex-col justify-center items-center opacity-75 duration-500 hover:opacity-100"
-                >
-                    <i class="text-2xl" :class="menu.icon" aria-hidden="true"></i>
-                    <span class="text-sm">{{ menu.title }}</span>
-                </router-link>
-            </div>
+            <router-link
+                to="/system/index"
+                class="bg-white border rounded-lg shadow-md box-border px-4 py-2 flex flex-col justify-center items-center opacity-75 duration-500 hover:opacity-100"
+                v-if="user.is_super_admin"
+            >
+                <i class="text-2xl far fa-life-ring" aria-hidden="true"></i>
+                <span class="text-sm">系统设置</span>
+            </router-link>
+            <router-link
+                v-for="(menu, index) in quickMenus"
+                :key="index"
+                :to="menu.route"
+                class="bg-white border rounded-lg shadow-md box-border px-4 py-2 flex flex-col justify-center items-center opacity-75 duration-500 hover:opacity-100"
+            >
+                <i class="text-2xl" :class="menu.icon" aria-hidden="true"></i>
+                <span class="text-sm">{{ menu.title }}</span>
+            </router-link>
+            <a
+                href="#"
+                class="bg-white border rounded-lg shadow-md box-border px-4 py-2 flex flex-col justify-center items-center opacity-75 duration-500 hover:opacity-100"
+                @click.prevent="logout"
+            >
+                <i class="text-2xl far fa-life-ring" aria-hidden="true"></i>
+                <span class="text-sm">退出</span>
+            </a>
         </div>
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-const quickMenus = [
-    { title: '网站管理', route: '/admin', icon: 'fas fa-sitemap' },
-    { title: '系统设置', route: '/system/index', icon: 'far fa-life-ring' },
-    { title: '退出', route: '', icon: 'fas fa-sign-out-alt' }
-]
+const quickMenus = [{ title: '网站管理', route: '/admin', icon: 'fas fa-sitemap' }]
 export default {
     route: { meta: { auth: true } },
     data() {
         return {
             quickMenus
-        }
-    },
-    computed: {
-        ...mapState(['user'])
-    },
-    methods: {
-        logout() {
-            window.localStorage.removeItem('token')
-            location.reload(true)
         }
     }
 }

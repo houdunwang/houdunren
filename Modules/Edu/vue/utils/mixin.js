@@ -1,8 +1,17 @@
-import store from '@/store'
-import Auth from '@/utils/Auth'
-import router from '@/router'
+import store from '../store'
+import Auth from '../utils/Auth'
+import router from '../router'
 const mixin = {
     computed: {
+        site() {
+            return store.state.site
+        },
+        module() {
+            return store.state.module
+        },
+        user() {
+            return Auth.user()
+        },
         Auth() {
             return Auth
         }
@@ -13,6 +22,13 @@ const mixin = {
         },
         errors(name) {
             return store.getters.errors(name)
+        },
+        isLogin() {
+            return Boolean(window.localStorage.getItem('token'))
+        },
+        logout() {
+            window.localStorage.removeItem('token')
+            location.href = '/'
         }
     }
 }

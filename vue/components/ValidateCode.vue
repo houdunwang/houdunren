@@ -11,12 +11,14 @@
 </template>
 
 <script>
-import Timer from '@/utils/timer'
+import Timer from '../utils/timer'
 export default {
     props: {
         type: { type: String, default: 'all' },
         timeout: { type: Number, default: 60 },
-        action: { type: String, default: '/api/common/code/send' }
+        action: { type: String, default: 'code/send' },
+        //记录发送时间的标识
+        ckey: { type: String, default: 'code-send' }
     },
     data() {
         return {
@@ -28,7 +30,7 @@ export default {
         }
     },
     mounted() {
-        this.intervalId = setInterval(() => (this.times = Timer.diffNow('code-send', this.timeout)), 20)
+        this.intervalId = setInterval(() => (this.times = Timer.diffNow(this.ckey, this.timeout)), 20)
     },
     beforeDestroy() {
         clearInterval(this.intervalId)
@@ -46,7 +48,7 @@ export default {
             if (error) return this.$message(error)
             this.axios
                 .post(this.action, this.form)
-                .then(_ => Timer.record('code-send'))
+                .then(_ => Timer.record(this.ckey))
                 .finally(_ => this.$refs['captcha'].get())
         },
         //表单验证

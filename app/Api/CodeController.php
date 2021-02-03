@@ -30,7 +30,7 @@ class CodeController extends Controller
     {
         $request->validate(
             [
-                // 'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
+                //'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
             ],
             [
                 'captcha.content.required' => '验证码不能为空',

@@ -1,5 +1,5 @@
 //定义路由组结构
-const components = require.context('@/layouts', false, /\.vue$/)
+const components = require.context('../layouts', false, /\.vue$/)
 const groups = {}
 
 components.keys().forEach(path => {

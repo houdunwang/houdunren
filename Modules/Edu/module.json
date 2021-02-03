@@ -4,9 +4,7 @@
     "description": "",
     "keywords": [],
     "priority": 0,
-    "providers": [
-        "Modules\\Edu\\Providers\\EduServiceProvider"
-    ],
+    "providers": ["Modules\\Edu\\Providers\\EduServiceProvider"],
     "aliases": {},
     "files": [],
     "requires": []

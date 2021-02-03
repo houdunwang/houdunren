@@ -59,7 +59,7 @@ export default {
     inject: ['form'],
     methods: {
         async send() {
-            await this.axios.post(`code/send`)
+            await this.axios.post(`config/sms/${this.$route.params.sid}`)
         }
     }
 }

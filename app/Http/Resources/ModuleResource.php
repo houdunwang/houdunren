@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use ModuleService;
 
 /**
  * 模块资源
@@ -14,7 +13,7 @@ class ModuleResource extends JsonResource
     public function toArray($request)
     {
         return parent::toArray($request) + [
-            'groups' => $this->groups
+            'groups' => $this->groups,
         ];
     }
 }

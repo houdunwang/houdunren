@@ -5,7 +5,6 @@ namespace App\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SystemConfigResource;
 use Illuminate\Http\Request;
-use Auth;
 use App\Models\SystemConfig;
 
 /**
@@ -21,7 +20,6 @@ class SystemConfigController extends Controller
 
     /**
      * 获取系统配置
-     *
      * @param SystemConfig $config
      * @return void
      */
@@ -32,7 +30,6 @@ class SystemConfigController extends Controller
 
     /**
      * 更新配置
-     *
      * @param Request $request
      * @param SystemConfig $config
      * @return void
@@ -41,6 +38,6 @@ class SystemConfigController extends Controller
     {
         $config['config'] = $request->input();
         $config->save();
-        return ['message' => '系统配置修改成功'];
+        return $this->message('系统配置修改成功');
     }
 }

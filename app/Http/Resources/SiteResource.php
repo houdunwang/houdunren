@@ -3,11 +3,11 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use UserService;
 use Auth;
 
 /**
  * 站点资源
+ * @package App\Http\Resources
  */
 class SiteResource extends JsonResource
 {
@@ -22,8 +22,7 @@ class SiteResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'permission' => $this->permission,
-            'config' => $this->when(UserService::isMaster($this->resource, Auth::user()), $this->config),
-            'master' => new UserResource($this->master),
+            'master' => $this->master()->with('group.packages.modules')->first()
         ];
     }
 }

@@ -11,6 +11,19 @@ use Overtrue\EasySms\EasySms;
 class SmsService
 {
     /**
+     * 发送短信
+     *
+     * @param string $mobile 手机号
+     * @param array $data 短信内容
+     * @return void
+     */
+    public function send(string $mobile, array $data)
+    {
+        $easySms = new EasySms($this->config());
+        return $easySms->send($mobile, $data);
+    }
+
+    /**
      * 网关配置
      *
      * @return array
@@ -39,18 +52,5 @@ class SmsService
                 ],
             ],
         ];
-    }
-
-    /**
-     * 发送短信
-     *
-     * @param string $mobile 手机号
-     * @param array $data 短信内容
-     * @return void
-     */
-    public function send(string $mobile, array $data)
-    {
-        $easySms = new EasySms($this->config());
-        return $easySms->send($mobile, $data);
     }
 }

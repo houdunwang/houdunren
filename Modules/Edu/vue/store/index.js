@@ -1,14 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
 Vue.use(Vuex)
-
 export default new Vuex.Store({
     state: {
         errors: {},
-        user: {},
-        //系统配置
-        config: {}
+        site: {},
+        module: {},
+        user: {}
     },
     getters: {
         errors: state => name => {
@@ -22,17 +20,26 @@ export default new Vuex.Store({
         }
     },
     mutations: {
-        setErrors(state, errors) {
+        setErrors(state, errors = {}) {
             state.errors = errors
+        },
+        setSite(state, site) {
+            state.site = site
+        },
+        setModule(state, module) {
+            state.module = module
         },
         setUser(state, user) {
             state.user = user
-        },
-        setConfig(state, config) {
-            state.config = config
         }
     },
     actions: {
+        async getSite({ commit }) {
+            commit('setSite', await axios.get(`site/${window.sid}`))
+        },
+        async getModule({ commit }) {
+            commit('setModule', await axios.get(`module/${window.mid}`))
+        },
         async getUser({ commit }) {
             commit('setUser', await axios.get(`user/info`))
         },

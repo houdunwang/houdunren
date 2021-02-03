@@ -1,4 +1,4 @@
-import store from '@/store'
+import store from '../store'
 class Auth {
     id() {
         return store.state.user.id

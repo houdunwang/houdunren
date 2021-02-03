@@ -17,23 +17,36 @@ class Module extends Model
 
     protected $appends = ['preview', 'config', 'permissions', 'menus'];
 
+    /**
+     * 模块菜单
+     * @return void
+     */
     public function getMenusAttribute()
     {
         return ModuleService::config($this->name, 'menus');
     }
 
+    /**
+     * 模块初始配置
+     * @return void
+     */
     public function getConfigAttribute()
     {
         return ModuleService::config($this->name, 'config');
     }
 
+    /**
+     * 模块权限
+     * @return void
+     */
     public function getPermissionsAttribute()
     {
-        $permissions = ModuleService::config($this->name, 'permissions');
+        $permissions = [];
         if ($site = SiteService::cache()) {
+            $permissions = ModuleService::config($this->name, 'permissions');
             foreach ($permissions as &$permission) {
                 foreach ($permission['rules'] as &$rule) {
-                    $rule['name'] = PermissionService::permissionName($site, $this, $rule['name']);
+                    $rule['permission_name'] = PermissionService::permissionName($site, $this, $rule['name']);
                     $rule['module_id'] = $this['id'];
                 }
             }

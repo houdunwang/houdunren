@@ -5,7 +5,7 @@
             <el-image :src="module.preview" fit="fill" :lazy="true" class="rounded w-12 h-12"></el-image>
         </el-table-column>
         <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label" :width="col.width"> </el-table-column>
-        <el-table-column :width="120" #default="{row:module}" align="center"> <slot :module="module" /> </el-table-column>
+        <el-table-column :width="150" #default="{row:module}" align="center"> <slot :module="module" /> </el-table-column>
     </el-table>
 </template>
 

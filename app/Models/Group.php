@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * 会员组
+ * @package App\Models
  */
 class Group extends Model
 {

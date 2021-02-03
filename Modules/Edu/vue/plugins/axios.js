@@ -1,13 +1,11 @@
-import httpStatus from '@/utils/httpStatus'
+import httpStatus from '../utils/httpStatus'
 import el from 'element-ui'
 import axios from 'axios'
 import Vue from 'vue'
-import store from '@/store'
-import router from '@/router'
-
-axios.defaults.withCredentials = true
-axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-
+import store from '../store'
+import router from '../router'
+// axios.defaults.withCredentials = true
+// axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 const _axios = axios.create({ baseURL: '/api', timeout: 5000 })
 window.axios = Vue.axios = Vue.prototype.axios = _axios
 

@@ -49,8 +49,7 @@ class ModuleService
     }
 
     /**
-     * 用户可用模块
-     *
+     * 用户可用的站点模块
      * @param Site $site
      * @param User $user
      * @return Collection
@@ -58,7 +57,7 @@ class ModuleService
     public function userSiteModules(Site $site, User $user): Collection
     {
         return $site->modules->filter(function ($module) use ($site, $user) {
-            return PermissionService::checkModule($site, $module, $user);
+            return PermissionService::checkUserModuleAccess($site, $module, $user);
         });
     }
 

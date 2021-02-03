@@ -43,10 +43,6 @@ class CodeService
     }
 
     /**
-     *
-     * @return void
-     */
-    /**
      * 发送手机短信验证码
      *
      * @param string $account
