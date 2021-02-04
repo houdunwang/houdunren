@@ -3961,7 +3961,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       dialogVisible: false,
       keyword: '',
-      user: {
+      users: {
         data: [],
         meta: {}
       }
@@ -3989,7 +3989,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 3:
-                _this.user = _context.sent;
+                _this.users = _context.sent;
 
               case 4:
               case "end":
@@ -5787,7 +5787,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 2:
               _this.site = _context.sent;
               _context.next = 5;
-              return _this.axios.get("".concat(_this.sid, "/admin"));
+              return _this.axios.get("site/".concat(_this.sid, "/admin"));
 
             case 5:
               _this.users = _context.sent;
@@ -5812,7 +5812,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this2.axios.put("".concat(_this2.sid, "/admin/").concat(user.id));
+                return _this2.axios.put("site/".concat(_this2.sid, "/admin/").concat(user.id));
 
               case 2:
                 _this2.users.push(user);
@@ -5902,9 +5902,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   route: {
@@ -5912,7 +5909,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      user: {},
+      admin: {},
       tabs: (0,_tabs__WEBPACK_IMPORTED_MODULE_1__.default)({
         sid: this.$route.params.sid
       }),
@@ -5920,7 +5917,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       id: this.$route.params.id,
       roles: [],
       form: {
-        role: ''
+        role: []
       },
       loading: true
     };
@@ -5937,9 +5934,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _this.axios.get("user/".concat(_this.id));
 
             case 2:
-              _this.user = _context.sent;
+              _this.admin = _context.sent;
               _context.next = 5;
-              return _this.axios.get("".concat(_this.sid, "/role"));
+              return _this.axios.get("site/".concat(_this.sid, "/role"));
 
             case 5:
               _this.roles = _context.sent;
@@ -5963,7 +5960,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this2.axios.put("".concat(_this2.sid, "/admin_role/").concat(_this2.id), _this2.form);
+                return _this2.axios.put("site/".concat(_this2.sid, "/admin/role/").concat(_this2.id), _this2.form);
 
               case 2:
                 _this2.$router.push({
@@ -6262,7 +6259,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this.axios.post("config/sms/".concat(_this.$route.params.sid));
+                return _this.axios.post("site/sms/".concat(_this.$route.params.sid));
 
               case 2:
               case "end":
@@ -6656,7 +6653,7 @@ var form = {};
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _this.axios.get("".concat(_this.sid, "/wechat/").concat(_this.id));
+              return _this.axios.get("site/".concat(_this.sid, "/wechat/").concat(_this.id));
 
             case 2:
               _this.form = _context.sent;
@@ -6672,13 +6669,31 @@ var form = {};
   },
   methods: {
     onSubmit: function onSubmit() {
-      this.axios.put("".concat(this.sid, "/wechat_default/").concat(this.id), this.form);
-      this.$router.push({
-        name: 'site.wechat.index',
-        params: {
-          sid: this.sid
-        }
-      });
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return _this2.axios.put("site/".concat(_this2.sid, "/wechat/").concat(_this2.id, "/message"), _this2.form);
+
+              case 2:
+                _this2.$router.push({
+                  name: 'site.wechat.index',
+                  params: {
+                    sid: _this2.sid
+                  }
+                });
+
+              case 3:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   }
 });
@@ -6844,12 +6859,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         sid: this.$route.params.sid,
         rid: this.$route.params.id
       }),
-      form: {
-        permissions: []
-      },
       modules: [],
       site: {},
       role: {},
+      form: {
+        permissions: []
+      },
       loading: true
     };
   },
@@ -6867,20 +6882,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 2:
               _this.site = _context.sent;
               _context.next = 5;
-              return _this.axios.get("".concat(_this.site.id, "/role/").concat(_this.$route.params.sid));
+              return _this.axios.get("site/module/".concat(_this.site.id));
 
             case 5:
-              _this.role = _context.sent;
+              _this.modules = _context.sent;
               _context.next = 8;
-              return _this.axios.get("module/site/".concat(_this.site.id));
+              return _this.axios.get("site/".concat(_this.site.id, "/role/").concat(_this.$route.params.rid));
 
             case 8:
-              _this.modules = _context.sent;
-
-              _this.role.permissions.map(function (p) {
-                _this.form.permissions.push(p.name);
+              _this.role = _context.sent;
+              //保存已经存在的权限
+              _this.form.permissions = _this.role.permissions.map(function (p) {
+                return p.name;
               });
-
               _this.loading = false;
 
             case 11:
@@ -6901,9 +6915,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this2.axios.put("".concat(_this2.site.id, "/permission/").concat(_this2.role.id), _this2.form);
+                return _this2.axios.put("permission/".concat(_this2.site.id, "/").concat(_this2.role.id), _this2.form);
 
               case 2:
+                _this2.route("site.role.index", {
+                  sid: _this2.site.id
+                });
+
+              case 3:
               case "end":
                 return _context2.stop();
             }
@@ -7048,7 +7067,7 @@ var form = {
               }
 
               _context.next = 3;
-              return _this.axios.get("".concat(_this.sid, "/role/").concat(_this.id));
+              return _this.axios.get("site/".concat(_this.sid, "/role/").concat(_this.id));
 
             case 3:
               _this.form = _context.sent;
@@ -7071,7 +7090,7 @@ var form = {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                url = _this2.id ? "".concat(_this2.sid, "/role/").concat(_this2.id) : "".concat(_this2.sid, "/role");
+                url = _this2.id ? "site/".concat(_this2.sid, "/role/").concat(_this2.id) : "site/".concat(_this2.sid, "/role");
                 _context2.next = 3;
                 return _this2.axios[_this2.id ? 'put' : 'post'](url, _this2.form);
 
@@ -7165,7 +7184,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 2:
               _this.site = _context.sent;
               _context.next = 5;
-              return _this.axios.get("".concat(_this.sid, "/role"));
+              return _this.axios.get("site/".concat(_this.sid, "/role"));
 
             case 5:
               _this.roles = _context.sent;
@@ -7338,16 +7357,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var form = {
   title: '',
   domain: '',
-  module_id: null,
-  modules: []
+  module_id: 0
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   route: false,
   props: ['id'],
   data: function data() {
     return {
-      form: Object.assign({}, form),
       tabs: _tabs__WEBPACK_IMPORTED_MODULE_1__.default,
+      form: Object.assign({}, form),
       modules: [],
       loading: true
     };
@@ -7373,7 +7391,7 @@ var form = {
 
             case 4:
               _context.next = 6;
-              return _this.axios.get("module/user/".concat(_this.Auth.id()));
+              return _this.axios.get("user/module/".concat(_this.user.id));
 
             case 6:
               _this.modules = _context.sent;
@@ -7567,7 +7585,7 @@ var menus = [{
                 return _this2.axios["delete"]("site/".concat(site.id), site);
 
               case 5:
-                _this2.get();
+                _this2.sites.splice(_this2.sites.indexOf(site), 1);
 
                 _context2.next = 10;
                 break;
@@ -7593,7 +7611,7 @@ var menus = [{
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return _this3.axios.get("".concat(site.id, "/permission/sync"));
+                return _this3.axios.get("permission/".concat(site.id, "/sync"));
 
               case 2:
               case "end":
@@ -7772,7 +7790,7 @@ var form = {
               }
 
               _context.next = 6;
-              return _this.axios.get("".concat(_this.site.id, "/wechat/").concat(_this.id));
+              return _this.axios.get("site/".concat(_this.site.id, "/wechat/").concat(_this.id));
 
             case 6:
               _this.form = _context.sent;
@@ -7798,7 +7816,7 @@ var form = {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                url = _this2.id ? "".concat(_this2.site.id, "/wechat/").concat(_this2.id) : "".concat(_this2.site.id, "/wechat");
+                url = _this2.id ? "site/".concat(_this2.site.id, "/wechat/").concat(_this2.id) : "".concat(_this2.site.id, "/wechat");
                 _context2.next = 3;
                 return _this2.axios[_this2.id ? 'put' : 'post'](url, _this2.form);
 
@@ -7916,7 +7934,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 2:
               _this.site = _context.sent;
               _context.next = 5;
-              return _this.axios.get("".concat(_this.site.id, "/wechat"));
+              return _this.axios.get("site/".concat(_this.site.id, "/wechat"));
 
             case 5:
               _this.wechats = _context.sent;
@@ -7940,7 +7958,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this2.axios["delete"]("".concat(_this2.site.id, "/wechat/").concat(wechat.id));
+                return _this2.axios["delete"]("site/".concat(_this2.site.id, "/wechat/").concat(wechat.id));
 
               case 2:
                 _this2.wechats.splice(_this2.wechats.indexOf(wechat), 1);
@@ -7967,7 +7985,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this3.$message('粉丝同步中...');
 
                 _context3.next = 4;
-                return _this3.axios.get("".concat(_this3.site.id, "/wechat_user/").concat(wechat.id, "/sync"));
+                return _this3.axios.get("site/".concat(_this3.site.id, "/wechat/").concat(wechat.id, "/user"));
 
               case 4:
                 response = _context3.sent;
@@ -8130,7 +8148,7 @@ var pid = 0;
             case 2:
               _this.site = _context.sent;
               _context.next = 5;
-              return _this.axios.get("".concat(_this.sid, "/wechat/").concat(_this.id));
+              return _this.axios.get("site/".concat(_this.sid, "/wechat/").concat(_this.id));
 
             case 5:
               _this.wechat = _context.sent;
@@ -8192,7 +8210,7 @@ var pid = 0;
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this3.axios.put("".concat(_this3.site.id, "/wechat_menu/").concat(_this3.wechat.id), {
+                return _this3.axios.put("site/".concat(_this3.site.id, "/wechat/").concat(_this3.wechat.id, "/menu"), {
                   menus: _this3.menus
                 });
 
@@ -8214,7 +8232,7 @@ var pid = 0;
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return _this4.axios.put("".concat(_this4.site.id, "/wechat_menu/").concat(_this4.wechat.id, "/push"));
+                return _this4.axios.post("site/".concat(_this4.site.id, "/wechat/").concat(_this4.wechat.id, "/menu"));
 
               case 2:
               case "end":
@@ -8365,6 +8383,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var _yield$_this$axios$ge, config;
+
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -8373,10 +8393,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _this.axios.get("system/config/1");
 
             case 2:
-              _this.form = _context.sent;
+              _yield$_this$axios$ge = _context.sent;
+              config = _yield$_this$axios$ge.config;
+              _this.form = config;
               _this.loading = false;
 
-            case 4:
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -8481,6 +8503,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tabs */ "./vue/views/system/group/tabs.js");
 
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -8555,10 +8583,23 @@ var form = {
       loading: true
     };
   },
+  computed: {
+    //当前可用模块
+    modules: function modules() {
+      var modules = [];
+      this.form.packages.forEach(function (p) {
+        p.modules.forEach(function (m) {
+          return modules.push(m);
+        });
+      });
+      return modules;
+    }
+  },
   created: function created() {
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var selectPackages;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -8570,7 +8611,7 @@ var form = {
               _this.packages = _context.sent;
 
               if (!_this.id) {
-                _context.next = 8;
+                _context.next = 10;
                 break;
               }
 
@@ -8579,20 +8620,24 @@ var form = {
 
             case 6:
               _this.form = _context.sent;
-              _this.form.packages = _this.form.packages.map(function (p) {
-                var sp = _this.packages.find(function (fp) {
-                  return fp.id == p.id;
-                });
+              selectPackages = [];
 
-                _this.$refs.multipleTable.toggleRowSelection(sp);
-
-                return p.id;
+              _this.packages.forEach(function (pac) {
+                if (_this.form.packages.some(function (p) {
+                  return p.id == pac.id;
+                })) {
+                  selectPackages.push(pac);
+                }
               });
 
-            case 8:
+              selectPackages.forEach(function (p) {
+                return _this.$refs.multipleTable.toggleRowSelection(p);
+              });
+
+            case 10:
               _this.loading = false;
 
-            case 9:
+            case 11:
             case "end":
               return _context.stop();
           }
@@ -8612,10 +8657,16 @@ var form = {
               case 0:
                 url = _this2.id ? "group/".concat(_this2.id) : "group";
                 _context2.next = 3;
-                return _this2.axios[_this2.id ? 'put' : 'post'](url, _this2.form);
+                return _this2.axios[_this2.id ? 'put' : 'post'](url, _objectSpread(_objectSpread({}, _this2.form), {}, {
+                  packages: _this2.form.packages.map(function (p) {
+                    return p.id;
+                  })
+                }));
 
               case 3:
-                _this2.$router.push("/system/group/index");
+                _this2.$router.push({
+                  name: 'system.package.index'
+                });
 
               case 4:
               case "end":
@@ -8627,9 +8678,7 @@ var form = {
     },
     //选择套餐
     handleSelectionPackageChange: function handleSelectionPackageChange(packages) {
-      this.form.packages = packages.map(function (p) {
-        return p.id;
-      });
+      this.form.packages = packages;
     }
   }
 });
@@ -8782,7 +8831,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
 //
 //
 //
@@ -9158,7 +9206,7 @@ var form = {
 
             case 4:
               _context.next = 6;
-              return _this.axios.get("module/installed");
+              return _this.axios.get("module?type=installed");
 
             case 6:
               modules = _context.sent;
@@ -9441,8 +9489,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // axios.defaults.withCredentials = true
-
-(axios__WEBPACK_IMPORTED_MODULE_2___default().defaults.headers.common["X-Requested-With"]) = 'XMLHttpRequest';
+// axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 var _axios = axios__WEBPACK_IMPORTED_MODULE_2___default().create({
   baseURL: '/api',
@@ -9493,7 +9540,7 @@ function (error) {
       break;
 
     default:
-      element_ui__WEBPACK_IMPORTED_MODULE_1___default().MessageBox.confirm((0,_utils_httpStatus__WEBPACK_IMPORTED_MODULE_0__.default)(status) || data.message, '温馨提示', {
+      element_ui__WEBPACK_IMPORTED_MODULE_1___default().MessageBox.confirm(data.message || (0,_utils_httpStatus__WEBPACK_IMPORTED_MODULE_0__.default)(status), '温馨提示', {
         showCancelButton: false,
         confirmButtonText: '关闭',
         type: 'warning'
@@ -9819,20 +9866,23 @@ vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vuex__WEBPACK_IMPORTED_MODULE_2__.d
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var _yield$axios$get, config;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.t0 = _this;
-                _context2.next = 3;
+                _context2.next = 2;
                 return axios.get("system/config/1");
 
-              case 3:
-                _context2.t1 = _context2.sent;
+              case 2:
+                _yield$axios$get = _context2.sent;
+                config = _yield$axios$get.config;
+                console.log(config);
 
-                _context2.t0.commit.call(_context2.t0, 'setConfig', _context2.t1);
+                _this.commit('setConfig', config);
 
-              case 5:
+              case 6:
               case "end":
                 return _context2.stop();
             }
@@ -95456,7 +95506,7 @@ var render = function() {
                 "el-table",
                 {
                   staticStyle: { width: "100%" },
-                  attrs: { data: _vm.user.data }
+                  attrs: { data: _vm.users.data }
                 },
                 [
                   _c("el-table-column", {
@@ -95508,7 +95558,7 @@ var render = function() {
                 staticClass: "mt-2",
                 attrs: {
                   background: "",
-                  total: _vm.user.meta.total,
+                  total: _vm.users.meta.total,
                   "hide-on-single-page": true
                 },
                 on: { "current-change": _vm.search }
@@ -98471,7 +98521,7 @@ var render = function() {
       _c(
         "el-alert",
         { attrs: { type: "info", effect: "light", closable: "" } },
-        [_vm._v(" 设置管理员【" + _vm._s(_vm.user.name) + "】的角色 ")]
+        [_vm._v(" 设置管理员【" + _vm._s(_vm.admin.name) + "】的角色 ")]
       ),
       _vm._v(" "),
       _c(
@@ -98482,11 +98532,11 @@ var render = function() {
         },
         [
           _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-            _vm._v("\n            角色设置\n        ")
+            _vm._v("角色设置")
           ]),
           _vm._v(" "),
           _c(
-            "el-radio-group",
+            "el-checkbox-group",
             {
               model: {
                 value: _vm.form.role,
@@ -98498,7 +98548,7 @@ var render = function() {
             },
             _vm._l(_vm.roles, function(role, index) {
               return _c(
-                "el-radio",
+                "el-checkbox",
                 { key: index, attrs: { label: role.name } },
                 [
                   _vm._v(
@@ -99374,7 +99424,9 @@ var render = function() {
               _c(
                 "hd-tip",
                 [
-                  _vm._v("系统将向你的手机号发送验证码短信，你可以访问 "),
+                  _vm._v(
+                    "\n            系统将向你的手机号发送验证码短信，你可以访问 "
+                  ),
                   _c(
                     "router-link",
                     {
@@ -101385,25 +101437,27 @@ var render = function() {
                                 ]
                               ),
                               _vm._v(" "),
-                              _c(
-                                "router-link",
-                                {
-                                  attrs: {
-                                    to: {
-                                      name: "site.site.edit",
-                                      params: { id: site.id }
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("i", { staticClass: "fas fa-pen" }),
-                                  _vm._v(
-                                    "\n                            编辑站点\n                        "
+                              site.permissions.update
+                                ? _c(
+                                    "router-link",
+                                    {
+                                      attrs: {
+                                        to: {
+                                          name: "site.site.edit",
+                                          params: { id: site.id }
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", { staticClass: "fas fa-pen" }),
+                                      _vm._v(
+                                        "\n                            编辑站点\n                        "
+                                      )
+                                    ]
                                   )
-                                ]
-                              ),
+                                : _vm._e(),
                               _vm._v(" "),
-                              site.permission.update
+                              site.permissions.delete
                                 ? _c(
                                     "a",
                                     {
@@ -102759,7 +102813,7 @@ var render = function() {
                 _vm._v("\n                可用的模块\n            ")
               ]),
               _vm._v(" "),
-              _vm._l(_vm.form.modules, function(module) {
+              _vm._l(_vm.modules, function(module) {
                 return _c(
                   "el-tag",
                   {
@@ -103091,7 +103145,7 @@ var render = function() {
     "div",
     [
       _c("hd-tab", { attrs: { tabs: _vm.tabs } }),
-      _vm._v("\n    " + _vm._s(_vm.isSubmit) + "\n    "),
+      _vm._v(" "),
       _c("hd-module-list", {
         directives: [
           {

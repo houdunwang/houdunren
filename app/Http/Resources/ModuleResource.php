@@ -13,7 +13,7 @@ class ModuleResource extends JsonResource
     public function toArray($request)
     {
         return parent::toArray($request) + [
-            'groups' => $this->groups,
+            'packages' => GroupResource::collection($this->whenLoaded('packages')),
         ];
     }
 }

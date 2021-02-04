@@ -42,8 +42,8 @@
                 </hd-tip>
             </el-form-item>
             <el-button type="danger" class="mt-3" size="mini" @click="send">发送测试短信</el-button>
-            <hd-tip
-                >系统将向你的手机号发送验证码短信，你可以访问 <router-link to="/system/my/edit" class="text-blue-700">我的资料</router-link> 设置手机号
+            <hd-tip>
+                系统将向你的手机号发送验证码短信，你可以访问 <router-link to="/system/my/edit" class="text-blue-700">我的资料</router-link> 设置手机号
             </hd-tip>
         </el-card>
         <el-card shadow="always" :body-style="{ padding: '20px' }" class="mt-3" v-if="form.sms.driver == 'tencent'">
@@ -59,7 +59,7 @@ export default {
     inject: ['form'],
     methods: {
         async send() {
-            await this.axios.post(`config/sms/${this.$route.params.sid}`)
+            await this.axios.post(`site/sms/${this.$route.params.sid}`)
         }
     }
 }

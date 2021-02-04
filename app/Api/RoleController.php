@@ -18,11 +18,11 @@ class RoleController extends Controller
     public function __construct()
     {
         $this->middleware(['auth:sanctum']);
+        $this->authorizeResource(Site::class, 'site');
     }
 
     /**
      * 角色列表
-     *
      * @param Site $site
      * @return void
      */
@@ -33,7 +33,6 @@ class RoleController extends Controller
 
     /**
      * 角色列表
-     *
      * @param Site $site
      * @param Role $role
      * @return void
@@ -45,7 +44,6 @@ class RoleController extends Controller
 
     /**
      * 保存角色
-     *
      * @param RoleRequest $request
      * @param Site $site
      * @return void
@@ -58,7 +56,6 @@ class RoleController extends Controller
 
     /**
      * 更新角色
-     *
      * @param RoleRequest $request
      * @param Site $site
      * @param Role $role
@@ -72,7 +69,6 @@ class RoleController extends Controller
 
     /**
      * 删除角色
-     *
      * @param Site $site
      * @param Role $role
      * @return void

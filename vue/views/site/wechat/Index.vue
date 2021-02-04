@@ -56,14 +56,14 @@ export default {
     },
     async created() {
         this.site = await this.axios.get(`site/${this.$route.params.sid}`)
-        this.wechats = await this.axios.get(`${this.site.id}/wechat`)
+        this.wechats = await this.axios.get(`site/${this.site.id}/wechat`)
         this.loading = false
     },
     methods: {
         del(wechat) {
             this.$confirm('确定删除吗？', '温馨提示')
                 .then(async () => {
-                    await this.axios.delete(`${this.site.id}/wechat/${wechat.id}`)
+                    await this.axios.delete(`site/${this.site.id}/wechat/${wechat.id}`)
                     this.wechats.splice(this.wechats.indexOf(wechat), 1)
                 })
                 .catch(() => {})
@@ -72,7 +72,7 @@ export default {
         async sync(wechat) {
             this.isSync = true
             this.$message('粉丝同步中...')
-            const response = await this.axios.get(`${this.site.id}/wechat_user/${wechat.id}/sync`)
+            const response = await this.axios.get(`site/${this.site.id}/wechat/${wechat.id}/user`)
             if (response.data.next_openid) {
                 this.sync(wechat)
             }

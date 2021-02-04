@@ -15,7 +15,7 @@ class Module extends Model
 {
     protected $fillable = ['title', 'name', 'version', 'description', 'author'];
 
-    protected $appends = ['preview', 'config', 'permissions', 'menus'];
+    protected $appends = ['preview', 'config', 'menus'];
 
     /**
      * 模块菜单
@@ -35,25 +35,12 @@ class Module extends Model
         return ModuleService::config($this->name, 'config');
     }
 
+
+
     /**
-     * 模块权限
+     * 预览图
      * @return void
      */
-    public function getPermissionsAttribute()
-    {
-        $permissions = [];
-        if ($site = SiteService::cache()) {
-            $permissions = ModuleService::config($this->name, 'permissions');
-            foreach ($permissions as &$permission) {
-                foreach ($permission['rules'] as &$rule) {
-                    $rule['permission_name'] = PermissionService::permissionName($site, $this, $rule['name']);
-                    $rule['module_id'] = $this['id'];
-                }
-            }
-        }
-        return $permissions;
-    }
-
     public function getPreviewAttribute()
     {
         return url("modules/{$this->name}/static/preview.jpeg");

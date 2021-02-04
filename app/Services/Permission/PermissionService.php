@@ -18,7 +18,6 @@ class PermissionService
 {
     /**
      * 权限验证
-     *
      * @param Site $site
      * @param Module $module
      * @param User $user
@@ -31,49 +30,6 @@ class PermissionService
             return true;
         }
         return $user->can($this->permissionName($site, $module, $permission));
-    }
-
-    /**
-     * 同步站点权限到权限表
-     * @param Site $site
-     * @return void
-     */
-    public function syncSitePermissions(Site $site)
-    {
-        $this->sitePermissions($site)->each(function ($permission) use ($site) {
-            Permission::updateOrCreate(
-                ['name' => $permission['name']],
-                ['site_id' => $site->id] + $permission
-            );
-        });
-    }
-
-    /**
-     * 删除站点无效的权限
-     *
-     * @param Site $site
-     * @return void
-     */
-    public function delInvalidSitePermissions(Site $site)
-    {
-        $names = $this->sitePermissions($site)->map(fn ($p) => $p['name']);
-        Permission::where('site_id', $site['id'])->whereNotIn('name', $names)->delete();
-    }
-
-    /**
-     * 站点权限列表
-     *
-     * @param Site $site
-     * @return Collection
-     */
-    public function sitePermissions(Site $site): Collection
-    {
-        return $site->modules->reduce(function ($collect, $module) {
-            foreach ($module['permissions'] as $permission) {
-                $collect->push(...$permission['rules']);
-            }
-            return $collect;
-        }, collect());
     }
 
     /**
@@ -104,5 +60,66 @@ class PermissionService
                 return $this->access($site, $module, $user, $rule['name']);
             })->count();
         })->count();
+    }
+
+    /**
+     * 站点权限列表
+     * @param Site $site
+     * @return Collection
+     */
+    public function sitePermissions(Site $site): Collection
+    {
+        return $site->master->group->modules->reduce(function ($collect, $module) use ($site) {
+            $permissions = $this->formatSiteModulePermissions($site, $module);
+            foreach ($permissions as $permission) {
+                $collect->push(...$permission['rules']);
+            }
+            return $collect;
+        }, collect());
+    }
+
+    /**
+     * 同步站点权限到权限表
+     * @param Site $site
+     * @return void
+     */
+    public function syncSitePermissions(Site $site)
+    {
+        $this->sitePermissions($site)->each(function ($permission) use ($site) {
+            Permission::updateOrCreate(
+                ['name' => $permission['permission_name']],
+                ['site_id' => $site->id, 'name' => $permission['permission_name']] + $permission
+            );
+        });
+    }
+
+    /**
+     * 删除站点无效的权限
+     * @param Site $site
+     * @return void
+     */
+    public function delInvalidSitePermissions(Site $site)
+    {
+        $names = $this->sitePermissions($site)->map(fn ($p) => $p['permission_name']);
+        Permission::where('site_id', $site['id'])->whereNotIn('name', $names)->delete();
+    }
+
+    /**
+     * 权限标识添加站点前缀
+     * @param Site $site
+     * @param Module $module
+     * @return array
+     */
+    public function formatSiteModulePermissions(Site $site, Module $module): array
+    {
+        $permissions = [];
+        $permissions = ModuleService::config($module->name, 'permissions');
+        foreach ($permissions as &$permission) {
+            foreach ($permission['rules'] as &$rule) {
+                $rule['permission_name'] = $this->permissionName($site, $module, $rule['name']);
+                $rule['module_id'] = $module['id'];
+            }
+        }
+        return $permissions;
     }
 }

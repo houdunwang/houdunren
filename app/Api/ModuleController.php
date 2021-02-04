@@ -6,10 +6,7 @@ use App\Http\Resources\ModuleResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Module;
-use App\Models\User;
-use App\Models\Site;
 use ModuleService;
-use Auth;
 
 /**
  * 模块管理
@@ -29,6 +26,9 @@ class ModuleController extends Controller
      */
     public function index()
     {
+        if (request('type') == 'installed') {
+            return ModuleResource::collection(Module::all());
+        }
         return ModuleService::all();
     }
 
@@ -49,11 +49,10 @@ class ModuleController extends Controller
      */
     public function store(Request $request)
     {
-        sleep(3);
         $name = $request->name;
         $data = ModuleService::config($name, 'config');
         Module::updateOrCreate(['name' => $name], $data);
-        return ['message' => '模块安装成功'];
+        return $this->message('模块安装成功');
     }
 
     /**
@@ -63,9 +62,8 @@ class ModuleController extends Controller
      */
     public function destroy(Module $module)
     {
-        sleep(3);
         $this->authorize('delete', $module);
         $module->delete();
-        return ['message' => '模块卸载成功'];
+        return $this->message('模块卸载成功');
     }
 }

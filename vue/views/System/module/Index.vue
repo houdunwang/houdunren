@@ -1,7 +1,6 @@
 <template>
     <div>
         <hd-tab :tabs="tabs" />
-        {{ isSubmit }}
         <hd-module-list :modules="modules" #default="{ module }" v-loading="loading">
             <el-button-group>
                 <el-button type="primary" size="mini" v-if="!module.id" @click="install(module)" :loading="submit">

@@ -26,7 +26,7 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $packages = Package::all();
+        $packages = Package::all()->load(['groups', 'modules']);
         return PackageResource::collection($packages);
     }
 
@@ -37,7 +37,7 @@ class PackageController extends Controller
      */
     public function show(Package $package)
     {
-        return new PackageResource($package);
+        return new PackageResource($package->load(['groups', 'modules']));
     }
 
     /**

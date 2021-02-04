@@ -26,11 +26,14 @@ class Group extends Model
     }
 
     /**
-     * 模块列表
-     * @return mixed
+     * 可使用模块
+     * @return void
      */
     public function getModulesAttribute()
     {
-        return $this->packages()->with('modules')->get()->mapWithKeys(fn ($p) => $p['modules'])->unique('id');
+        return $this->packages->load('modules')
+            ->mapWithKeys(function ($package) {
+                return $package->modules;
+            })->unique(fn ($module) => $module->id);
     }
 }

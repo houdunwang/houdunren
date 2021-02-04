@@ -2,6 +2,7 @@
 
 namespace App\Api;
 
+use App\Http\Resources\ModuleResource;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserRequest;
@@ -27,8 +28,19 @@ class UserController extends Controller
     }
 
     /**
-     * 获取当前用户资料
+     * 用户默认组可使用的模块
      *
+     * @param User $user
+     * @return void
+     */
+    public function module(User $user)
+    {
+        $modules = $user->group->modules;
+        return ModuleResource::collection($modules->load('packages'));
+    }
+
+    /**
+     * 用户列表
      * @return void
      */
     public function index()
@@ -40,8 +52,7 @@ class UserController extends Controller
     }
 
     /**
-     * 当前用户资料
-     *
+     * 当前登录用户
      * @return void
      */
     public function info()

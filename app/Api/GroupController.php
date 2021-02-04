@@ -26,7 +26,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-        return GroupResource::collection(Group::all());
+        $groups = Group::all()->load('packages');
+        return GroupResource::collection($groups);
     }
 
     /**
@@ -36,7 +37,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        return new GroupResource($group);
+        return new GroupResource($group->load('packages.modules'));
     }
 
     /**

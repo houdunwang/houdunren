@@ -25,7 +25,7 @@ class SystemConfigController extends Controller
      */
     public function show(SystemConfig $config)
     {
-        return new SystemConfigResource($config);
+        return $config;
     }
 
     /**

@@ -9,7 +9,7 @@
                         <el-button type="info" @click="search">搜索</el-button>
                     </div>
                 </template>
-                <el-table :data="user.data" style="width: 100%">
+                <el-table :data="users.data" style="width: 100%">
                     <el-table-column prop="id" label="编号" width="100"> </el-table-column>
                     <el-table-column prop="nickname" label="昵称"> </el-table-column>
                     <el-table-column prop="email" label="邮箱"> </el-table-column>
@@ -18,7 +18,7 @@
                         <el-button type="success" @click="change(user)" size="mini">选择用户</el-button>
                     </el-table-column>
                 </el-table>
-                <el-pagination background :total="user.meta.total" @current-change="search" class="mt-2" :hide-on-single-page="true"> </el-pagination>
+                <el-pagination background :total="users.meta.total" @current-change="search" class="mt-2" :hide-on-single-page="true"> </el-pagination>
             </el-card>
         </el-dialog>
     </div>
@@ -34,7 +34,7 @@ export default {
         return {
             dialogVisible: false,
             keyword: '',
-            user: { data: [], meta: {} }
+            users: { data: [], meta: {} }
         }
     },
     created() {
@@ -43,7 +43,7 @@ export default {
     methods: {
         //搜索用户
         async search(page = 1) {
-            this.user = await this.axios.get(this.action + `?page=${page}`, { keyword: this.keyword })
+            this.users = await this.axios.get(this.action + `?page=${page}`, { keyword: this.keyword })
         },
         //选择用户
         change(user) {

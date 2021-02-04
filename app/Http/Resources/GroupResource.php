@@ -17,8 +17,7 @@ class GroupResource extends JsonResource
             'title' => $this->title,
             'site_num' => $this->site_num,
             'days' => $this->days,
-            'modules' => $this->modules,
-            'packages' => $this->packages,
+            'packages' => PackageResource::collection($this->whenLoaded('packages')),
         ];
     }
 }

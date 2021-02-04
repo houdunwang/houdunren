@@ -43,11 +43,11 @@
                                 <i class="fas fa-life-ring"></i>
                                 更新权限表
                             </a>
-                            <router-link :to="{ name: 'site.site.edit', params: { id: site.id } }">
+                            <router-link :to="{ name: 'site.site.edit', params: { id: site.id } }" v-if="site.permissions.update">
                                 <i class="fas fa-pen"></i>
                                 编辑站点
                             </router-link>
-                            <a href="#" @click.prevent="del(site)" v-if="site.permission.update">
+                            <a href="#" @click.prevent="del(site)" v-if="site.permissions.delete">
                                 <i class="fas fa-trash"></i>
                                 删除
                             </a>
@@ -81,11 +81,11 @@ export default {
             try {
                 await this.$confirm('确定删除站点吗？', '提示')
                 await this.axios.delete(`site/${site.id}`, site)
-                this.get()
+                this.sites.splice(this.sites.indexOf(site), 1)
             } catch (e) {}
         },
         async syncPermission(site) {
-            await this.axios.get(`${site.id}/permission/sync`)
+            await this.axios.get(`permission/${site.id}/sync`)
         }
     }
 }

@@ -92,7 +92,7 @@ export default {
     },
     async created() {
         this.site = await this.axios.get(`site/${this.sid}`)
-        this.wechat = await this.axios.get(`${this.sid}/wechat/${this.id}`)
+        this.wechat = await this.axios.get(`site/${this.sid}/wechat/${this.id}`)
         this.menus = this.wechat.menus || []
     },
     mounted() {
@@ -130,11 +130,11 @@ export default {
         },
         //保存菜单
         async submit() {
-            await this.axios.put(`${this.site.id}/wechat_menu/${this.wechat.id}`, { menus: this.menus })
+            await this.axios.put(`site/${this.site.id}/wechat/${this.wechat.id}/menu`, { menus: this.menus })
         },
         //推送菜单
         async push() {
-            await this.axios.put(`${this.site.id}/wechat_menu/${this.wechat.id}/push`)
+            await this.axios.post(`site/${this.site.id}/wechat/${this.wechat.id}/menu`)
         }
     }
 }

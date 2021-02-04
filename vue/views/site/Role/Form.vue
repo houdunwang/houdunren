@@ -36,11 +36,11 @@ export default {
         }
     },
     async created() {
-        if (this.id) this.form = await this.axios.get(`${this.sid}/role/${this.id}`)
+        if (this.id) this.form = await this.axios.get(`site/${this.sid}/role/${this.id}`)
     },
     methods: {
         async onSubmit() {
-            const url = this.id ? `${this.sid}/role/${this.id}` : `${this.sid}/role`
+            const url = this.id ? `site/${this.sid}/role/${this.id}` : `site/${this.sid}/role`
             await this.axios[this.id ? 'put' : 'post'](url, this.form)
             this.$router.push(`/site/${this.sid}/role`)
         }

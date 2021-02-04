@@ -19,18 +19,18 @@ class WechatMenuController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'site']);
+        $this->middleware(['auth:sanctum']);
     }
 
     /**
      * 更新菜单
-     *
      * @param Request $request
      * @param WeChat $wechat
      * @return void
      */
     public function update(Request $request, Site $site, WeChat $wechat)
     {
+        $this->authorize('update', $site);
         $wechat->menus = $request->input('menus');
         $wechat->save();
         return $this->message('菜单保存成功');
@@ -38,13 +38,13 @@ class WechatMenuController extends Controller
 
     /**
      * 推送菜单到微信
-     *
      * @param WeChat $wechat
      * @param Button $button
      * @return void
      */
     public function push(Site $site, WeChat $wechat,  Button $button)
     {
+        $this->authorize('update', $site);
         $button->config($wechat)->create(['button' => $wechat->menus]);
         return $this->message('微信菜单推送成功，请取关并再次关注后查看效果');
     }

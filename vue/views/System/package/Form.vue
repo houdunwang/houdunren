@@ -56,7 +56,8 @@ export default {
         if (this.id) this.form = await this.axios.get(`package/${this.id}`)
 
         //模块列表中添加字段记录当前套餐是否拥有这个模块
-        const modules = await this.axios.get(`module/installed`)
+        const modules = await this.axios.get(`module?type=installed`)
+
         this.modules = modules.map(m => {
             m.selected = this.form.modules.some(fm => fm.id == m.id)
             return m

@@ -30,7 +30,8 @@ export default {
         return { form: { title: '', copyright: '', logo: '' }, loading: true, tabs }
     },
     async created() {
-        this.form = await this.axios.get(`system/config/1`)
+        const { config } = await this.axios.get(`system/config/1`)
+        this.form = config
         this.loading = false
     },
     methods: {

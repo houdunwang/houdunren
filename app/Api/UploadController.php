@@ -21,7 +21,6 @@ class UploadController extends Controller
 
     /**
      * 文件上传
-     *
      * @param Request $request
      * @return void
      */
@@ -33,29 +32,24 @@ class UploadController extends Controller
 
     /**
      * 本地上传
-     *
      * @param Request $request
      * @return void
      */
     public function local(Request $request)
     {
         $request->validate(['file' => ['required', 'mimes:jpeg,png,mp3,gif', 'max:2000']]);
-
         return UploadService::local($request->file);
     }
 
     /**
      * wangEditor编辑器上传图片
-     *
      * @param Request $request
      * @return void
      */
     public function wangEditor(Request $request)
     {
         $name = key($request->all());
-
         $request->validate([$name => ['required', 'mimes:jpeg,png', 'max:2500']]);
-
         $file = UploadService::make($request[$name]);
         return json_encode([
             'errno' => 0,
@@ -65,7 +59,6 @@ class UploadController extends Controller
 
     /**
      * wangEditor编辑器上传微信图文消息图片
-     *
      * @param Request $request
      * @param WeChat $wechat
      * @param Material $material

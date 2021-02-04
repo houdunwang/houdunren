@@ -13,9 +13,13 @@ use Illuminate\Http\Request;
  */
 class WeChatDefaultController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth:sanctum']);
+    }
+
     /**
      * 更新消息
-     *
      * @param Request $request
      * @param Site $site
      * @param WeChat $wechat
@@ -23,6 +27,8 @@ class WeChatDefaultController extends Controller
      */
     public function update(Request $request, Site $site, WeChat $wechat)
     {
+        $this->authorize('update', $site);
+
         $request->validate(['welcome' => ['required'], 'default_message' => ['required']], [
             'welcome.required' => '关注欢迎消息不能为空',
             'default_message.required' => '默认回复消息不能为空'

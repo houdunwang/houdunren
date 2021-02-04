@@ -2,11 +2,16 @@
 
 namespace App\Api;
 
+use App\Http\Resources\ModuleResource;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SiteResource;
 use App\Http\Requests\SiteRequest;
 use Illuminate\Http\Request;
 use App\Models\Site;
+use PermissionService;
+use ConfigService;
+use CodeService;
+use Exception;
 use Auth;
 
 /**
@@ -27,7 +32,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        $sites = Auth::user()->allSites;
+        $sites = Auth::user()->sites->load('master.group');
         return SiteResource::collection($sites);
     }
 
@@ -39,6 +44,21 @@ class SiteController extends Controller
     public function show(Site $site)
     {
         return new SiteResource($site);
+    }
+
+    /**
+     * 站点模块列表
+     * @param Site $site
+     * @return void
+     */
+    public function module(Site $site)
+    {
+        $modules = $site->master->group->modules->map(function ($module) use ($site) {
+            $module['permissions'] =
+                PermissionService::formatSiteModulePermissions($site, $module);
+            return $module;
+        });
+        return ModuleResource::collection($modules);
     }
 
     /**
@@ -70,6 +90,23 @@ class SiteController extends Controller
         $site->module_id = request('module_id');
         $site->save();
         return $this->message('站点修改成功');
+    }
+
+    /**
+     * 测试短信
+     * @param Request $request
+     * @param Site $site
+     * @return void
+     */
+    public function sms(Request $request, Site $site)
+    {
+        ConfigService::site($site);
+        try {
+            CodeService::mobile(Auth::user()->mobile);
+            return ['message' => '验证码发送成功'];
+        } catch (Exception $e) {
+            return $this->error('短信发送失败，请检查手机号或联系站长!', 500);
+        }
     }
 
     /**

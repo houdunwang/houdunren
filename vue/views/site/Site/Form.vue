@@ -43,22 +43,22 @@
 
 <script>
 import tabs from './tabs'
-const form = { title: '', domain: '', module_id: null, modules: [] }
+const form = { title: '', domain: '', module_id: 0 }
 
 export default {
     route: false,
     props: ['id'],
     data() {
         return {
-            form: Object.assign({}, form),
             tabs,
+            form: Object.assign({}, form),
             modules: [],
             loading: true
         }
     },
     async created() {
         if (this.id) this.form = await this.axios.get(`site/${this.id}`)
-        this.modules = await this.axios.get(`module/user/${this.Auth.id()}`)
+        this.modules = await this.axios.get(`user/module/${this.user.id}`)
         this.loading = false
     },
     methods: {

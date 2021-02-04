@@ -37,7 +37,7 @@ export default {
     },
     async created() {
         this.site = await this.axios.get(`site/${this.sid}`)
-        this.roles = await this.axios.get(`${this.sid}/role`)
+        this.roles = await this.axios.get(`site/${this.sid}/role`)
         this.loading = false
     },
     methods: {

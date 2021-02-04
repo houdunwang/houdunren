@@ -17,8 +17,9 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'is_super_admin' => $this->isSuperAdmin,
-            'name' => $this->nickname,
-            'avatar' => $this->icon,
+            'name' => $this->name ?: '盾友',
+            'avatar' => empty($this->avatar) ? url('/images/avatar.jpg') : $this->avatar,
+            'permissions' => $this->permissions,
             'qq' => $this->qq,
             'github' => $this->github,
             'wakatime' => $this->wakatime,
@@ -26,17 +27,19 @@ class UserResource extends JsonResource
             'wechat' => $this->wechat,
             'home' => $this->home,
             'group_id' => $this->group_id,
-            'mobile' => $this->when($this->check(), $this->mobile),
+            'mobile' => $this->when($this->eq(), $this->mobile),
             'email' => $this->email,
+            'group' => new GroupResource($this->whenLoaded('group')),
             'created_at' => $this->created_at,
-            'group' => new GroupResource($this->group),
+            'updated_at' => $this->updated_at,
+            'roles' => $this->whenLoaded('roles')
         ];
     }
 
-    public function check()
+    public function eq()
     {
         if (Auth::check()) {
-            return UserService::isSuperAdmin(Auth::user()) || Auth::id() == $this->resource->id;
+            return Auth::id() == $this->resource->id;
         }
     }
 }

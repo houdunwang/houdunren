@@ -38,12 +38,12 @@ export default {
         }
     },
     async created() {
-        this.form = await this.axios.get(`${this.sid}/wechat/${this.id}`)
+        this.form = await this.axios.get(`site/${this.sid}/wechat/${this.id}`)
         this.loading = false
     },
     methods: {
-        onSubmit() {
-            this.axios.put(`${this.sid}/wechat_default/${this.id}`, this.form)
+        async onSubmit() {
+            await this.axios.put(`site/${this.sid}/wechat/${this.id}/message`, this.form)
             this.$router.push({ name: 'site.wechat.index', params: { sid: this.sid } })
         }
     }

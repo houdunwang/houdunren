@@ -37,7 +37,10 @@ export default new Vuex.Store({
             commit('setUser', await axios.get(`user/info`))
         },
         async getSystemConfig() {
-            this.commit('setConfig', await axios.get(`system/config/1`))
+            const { config } = await axios.get(`system/config/1`)
+            console.log(config)
+
+            this.commit('setConfig', config)
         }
     }
 })

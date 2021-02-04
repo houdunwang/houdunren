@@ -22,7 +22,7 @@
                 <div slot="header">
                     可用的模块
                 </div>
-                <el-tag type="primary" effect="plain" size="mini" v-for="module in form.modules" :key="module.id" class="mr-2 mb-2 cursor-pointer">
+                <el-tag type="primary" effect="plain" size="mini" v-for="module in modules" :key="module.id" class="mr-2 mb-2 cursor-pointer">
                     {{ module.title }}
                 </el-tag>
             </el-card>
@@ -64,28 +64,40 @@ export default {
             loading: true
         }
     },
+    computed: {
+        //当前可用模块
+        modules() {
+            const modules = []
+            this.form.packages.forEach(p => {
+                p.modules.forEach(m => modules.push(m))
+            })
+            return modules
+        }
+    },
     async created() {
         this.packages = await this.axios.get(`package`)
         //编辑时让套餐选中
         if (this.id) {
             this.form = await this.axios.get(`group/${this.id}`)
-            this.form.packages = this.form.packages.map(p => {
-                const sp = this.packages.find(fp => fp.id == p.id)
-                this.$refs.multipleTable.toggleRowSelection(sp)
-                return p.id
+            const selectPackages = []
+            this.packages.forEach(pac => {
+                if (this.form.packages.some(p => p.id == pac.id)) {
+                    selectPackages.push(pac)
+                }
             })
+            selectPackages.forEach(p => this.$refs.multipleTable.toggleRowSelection(p))
         }
         this.loading = false
     },
     methods: {
         async onSubmit() {
             const url = this.id ? `group/${this.id}` : `group`
-            await this.axios[this.id ? 'put' : 'post'](url, this.form)
-            this.$router.push(`/system/group/index`)
+            await this.axios[this.id ? 'put' : 'post'](url, { ...this.form, packages: this.form.packages.map(p => p.id) })
+            this.$router.push({ name: 'system.package.index' })
         },
         //选择套餐
         handleSelectionPackageChange(packages) {
-            this.form.packages = packages.map(p => p.id)
+            this.form.packages = packages
         }
     }
 }

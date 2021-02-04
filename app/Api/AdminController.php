@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Site;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Resources\AdminResource;
-use Spatie\Permission\Models\Role;
+use App\Http\Resources\UserResource;
 
 /**
  * 站点管理员
@@ -17,7 +16,8 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'site']);
+        $this->middleware(['auth:sanctum']);
+        $this->authorizeResource(Site::class, 'site');
     }
 
     /**
@@ -27,18 +27,18 @@ class AdminController extends Controller
      */
     public function index(Site $site)
     {
-        return AdminResource::collection($site->admins);
+        return UserResource::collection($site->admins->load('roles'));
     }
 
     /**
-     * 保存管理员
+     * 设置管理员
      * @param Site $site
      * @param User $admin
      * @return void
      */
     public function update(Site $site, User $admin)
     {
-        $admin->sites()->syncWithoutDetaching([$site->id]);
+        $admin->adminSites()->syncWithoutDetaching([$site->id]);
         return $this->message('站点管理员设置成功');
     }
 
@@ -61,13 +61,13 @@ class AdminController extends Controller
 
     /**
      * 设置管理员角色
-     *
      * @param Site $site
      * @param User $user
      * @return void
      */
     public function setRole(Site $site, User $admin)
     {
+        $this->authorize('update', $site);
         $admin->assignRole(request('role'));
         return $this->message('角色设置成功');
     }

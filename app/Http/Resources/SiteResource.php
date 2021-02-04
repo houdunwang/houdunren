@@ -21,8 +21,8 @@ class SiteResource extends JsonResource
             'module_id' => $this->module_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'permission' => $this->permission,
-            'master' => $this->master()->with('group.packages.modules')->first()
+            'permissions' => $this->permissions,
+            'master' => new UserResource($this->whenLoaded('master'))
         ];
     }
 }

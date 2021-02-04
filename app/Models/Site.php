@@ -17,25 +17,26 @@ use Illuminate\Support\Facades\Auth;
 class Site extends Model
 {
     protected $fillable = ['title', 'domain', 'config', 'module_id', 'user_id', 'template_id',];
+
     protected $casts = [
         'config' => 'array',
     ];
+
     protected $appends = [
-        'permission',
+        'permissions',
     ];
 
     /**
      * 模型权限
      * @return void
      */
-    public function getPermissionAttribute()
+    public function getPermissionsAttribute()
     {
-        if (Auth::check())
-            return [
-                'view' => Auth::user()->can('view', $this),
-                'update' => Auth::user()->can('update', $this),
-                'delete' => Auth::user()->can('delete', $this)
-            ];
+        return [
+            'view' => Auth::user()->can('view', $this),
+            'update' => Auth::user()->can('update', $this),
+            'delete' => Auth::user()->can('delete', $this)
+        ];
     }
 
     /**
@@ -45,6 +46,16 @@ class Site extends Model
     public function module()
     {
         return $this->belongsTo(Module::class);
+    }
+
+    /**
+     * 站点角色
+     *
+     * @return void
+     */
+    public function roles()
+    {
+        return $this->hasMany(Role::class);
     }
 
     /**

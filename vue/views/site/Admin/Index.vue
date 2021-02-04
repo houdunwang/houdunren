@@ -44,13 +44,13 @@ export default {
     },
     async created() {
         this.site = await this.axios.get(`site/${this.sid}`)
-        this.users = await this.axios.get(`${this.sid}/admin`)
+        this.users = await this.axios.get(`site/${this.sid}/admin`)
         this.loading = false
     },
     methods: {
         //设置管理员
         async setAdmin(user) {
-            await this.axios.put(`${this.sid}/admin/${user.id}`)
+            await this.axios.put(`site/${this.sid}/admin/${user.id}`)
             this.users.push(user)
         },
         //移除管理员
