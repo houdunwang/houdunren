@@ -16,10 +16,13 @@ Route::get('module/{site}/admin/{module}', function (Site $site, Module $module)
 
 
 
+Route::get('{app}/{path?}', function () {
+    return view('app');
+})->where('app', 'login|register|forget|member')->where('path', '.*')->middleware('front');
+
 Route::fallback(function () {
     return view('app');
 });
-
 // Route::get('{app}/{path?}', function () {
 //     return view('app');
 // })->where('app', 'admin|site|system|member')->where('path', '.*')->middleware(['auth:sanctum']);

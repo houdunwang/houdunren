@@ -68,7 +68,6 @@ const menus = [
     { title: '角色管理', name: `site.role.index`, icon: 'fas fa-user-lock' }
 ]
 export default {
-    route: { path: '/admin' },
     data() {
         return { sites: [], menus, loading: true }
     },

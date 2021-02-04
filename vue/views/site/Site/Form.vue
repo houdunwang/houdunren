@@ -65,7 +65,7 @@ export default {
         async onSubmit() {
             const url = this.id ? `site/${this.id}` : 'site'
             await this.axios[this.id ? 'put' : 'post'](url, this.form)
-            this.$router.push('/admin')
+            this.$router.push({ name: 'site.site.index' })
         }
     }
 }

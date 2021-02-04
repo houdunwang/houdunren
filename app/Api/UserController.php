@@ -28,8 +28,7 @@ class UserController extends Controller
     }
 
     /**
-     * 用户默认组可使用的模块
-     *
+     * 用户默认组模块
      * @param User $user
      * @return void
      */

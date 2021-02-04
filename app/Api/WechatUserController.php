@@ -20,7 +20,6 @@ class WeChatUserController extends Controller
 {
     /**
      * 同步粉丝数据
-     *
      * @param Request $request
      * @param WeChat $wechat
      * @param UserPackage $userPackage

@@ -2,14 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Module;
-use ConfigService;
-use SiteService;
+use PermissionService;
 use ModuleService;
+use ConfigService;
+use UserService;
+use SiteService;
 use Closure;
 use Auth;
-use UserService;
-use PermissionService;
 
 /**
  * 模块后台管理中间件

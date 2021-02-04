@@ -16,7 +16,7 @@ class ModuleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'system']);
+        $this->middleware(['auth:sanctum']);
         $this->authorizeResource(Module::class, 'module');
     }
 

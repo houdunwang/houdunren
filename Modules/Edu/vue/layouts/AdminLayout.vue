@@ -132,7 +132,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/admin">
+                                <a class="nav-link" href="/site/site/index">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -218,7 +218,6 @@ export default {
         }
     },
     async created() {
-        // this.menus = await this.axios.get(`${this.site.id}/menu/module/${this.module.id}`)
         this.modules = await this.axios.get(`module/user/${this.site.id}/site/${this.user.id}`)
     }
 }

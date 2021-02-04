@@ -12,7 +12,7 @@
                     >
                         返回主页
                     </a>
-                     <a href="/hdcms"
+                     <a href="/admin"
                         class="hover:text-white px-4 inline py-2 text-sm font-medium leading-5 shadow text-white transition-colors duration-150 border border-transparent rounded-lg focus:outline-none focus:shadow-outline-blue bg-green-600 active:bg-blue-600 hover:bg-green-700"
                     >
                         登录后台

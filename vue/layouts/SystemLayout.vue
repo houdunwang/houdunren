@@ -14,7 +14,10 @@ import QuickMenu from './components/QuickMenu'
 import XFooter from './components/Footer'
 export default {
     route: { meta: { auth: true } },
-    components: { TopMenu, QuickMenu, XFooter }
+    components: { TopMenu, QuickMenu, XFooter },
+    created() {
+        this.$store.dispatch('getSystemConfig')
+    }
 }
 </script>
 

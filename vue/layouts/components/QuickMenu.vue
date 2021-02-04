@@ -36,7 +36,7 @@
 </template>
 
 <script>
-const quickMenus = [{ title: '网站管理', route: '/admin', icon: 'fas fa-sitemap' }]
+const quickMenus = [{ title: '网站管理', route: { name: 'site.site.index' }, icon: 'fas fa-sitemap' }]
 export default {
     route: { meta: { auth: true } },
     data() {

@@ -34,7 +34,7 @@ const menus = [
     {
         title: '系统管理',
         items: [
-            { title: '站点列表', to: '/admin', icon: 'fas fa-cube' },
+            { title: '站点列表', to: '/site/site/index', icon: 'fas fa-cube' },
             { title: '系统配置', to: '/system/config/edit', icon: 'fas fa-clinic-medical' }
         ]
     }

@@ -46,7 +46,7 @@
 <script>
 import HdFooter from './Footer'
 export default {
-    route: { path: '/hdcms' },
+    route: { path: '/admin' },
     components: {
         HdFooter
     },
@@ -57,7 +57,7 @@ export default {
     },
     created() {
         if (this.isLogin()) {
-            this.$router.push('/admin')
+            this.$router.push({ name: 'site.site.index' })
         } else {
             this.finish = true
         }

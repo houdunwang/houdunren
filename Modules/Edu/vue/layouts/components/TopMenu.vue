@@ -25,7 +25,7 @@
                 <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <router-link to="/admin" class="nav-link"> <i class="fa fa-sitemap mr-1" aria-hidden="true"></i> 站点管理 </router-link>
+                            <router-link to="/site/site/index" class="nav-link"> <i class="fa fa-sitemap mr-1" aria-hidden="true"></i> 站点管理 </router-link>
                         </li>
                         <li class="nav-item" v-for="(menu, index) in menus" :key="index" v-show="user.is_super_admin">
                             <router-link :to="menu.route" class="nav-link">

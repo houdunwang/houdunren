@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use App\Models\WeChat;
 use App\Models\Site;
 use Exception;
-use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
  * 站点微信公众号
@@ -19,7 +18,7 @@ class WeChatController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'site']);
+        $this->middleware(['auth:sanctum']);
     }
 
     public function index(Request $request, Site $site)

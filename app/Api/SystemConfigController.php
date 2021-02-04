@@ -25,6 +25,8 @@ class SystemConfigController extends Controller
      */
     public function show(SystemConfig $config)
     {
+        $config = $config->value('config');
+        $config['logo'] = $config['logo'] ?: url('images/logo.png');
         return $config;
     }
 

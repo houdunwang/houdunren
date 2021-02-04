@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use CodeService;
 use Auth;
 use Exception;
-use PhpParser\Node\Stmt\TryCatch;
 
 /**
  * 发送验证码
@@ -22,7 +21,6 @@ class CodeController extends Controller
 
     /**
      * 手机验证码
-     *
      * @param Request $request
      * @return void
      */
@@ -30,7 +28,7 @@ class CodeController extends Controller
     {
         $request->validate(
             [
-                //'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
+                'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
             ],
             [
                 'captcha.content.required' => '验证码不能为空',

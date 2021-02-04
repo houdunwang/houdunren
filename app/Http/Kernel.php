@@ -4,8 +4,6 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
-use App\Http\Middleware\SystemMiddleware;
-use App\Http\Middleware\SiteMiddleware;
 use App\Http\Middleware\FrontMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 
@@ -59,8 +57,6 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'system' => SystemMiddleware::class,
-        'site' => SiteMiddleware::class,
         'admin' => AdminMiddleware::class,
         'front' => FrontMiddleware::class,
         //
