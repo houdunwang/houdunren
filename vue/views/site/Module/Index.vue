@@ -1,7 +1,7 @@
 <template>
-    <div v-loading="loading">
+    <div>
         <hd-tab :tabs="tabs" />
-        <el-card shadow="always" :body-style="{ padding: '20px' }">
+        <el-card shadow="always" :body-style="{ padding: '20px' }" v-loading="loading">
             <div slot="header">
                 <span>站点 [{{ site.title }}] 模块列表</span>
             </div>
@@ -22,7 +22,7 @@
                     </div>
                     <div class="border-t border-gray-200 w-full flex justify-center bg-gray-100 py-3">
                         <el-button type="primary" size="mini">
-                            <a :href="`/site/${site.id}/module/${module.id}`" class="text-white">
+                            <a :href="`/${module.name}/${site.id}/admin`" class="text-white">
                                 管理模块
                             </a>
                         </el-button>
@@ -40,6 +40,7 @@ export default {
     route: { path: `:sid/module/index` },
     data() {
         return {
+            loading: true,
             modules: [],
             site: {},
             tabs: tabs({ sid: this.$route.params.sid })
@@ -48,6 +49,7 @@ export default {
     async created() {
         this.site = await this.axios.get(`site/${this.$route.params.sid}`)
         this.modules = await this.axios.get(`module/site/${this.site.id}/user/${this.user.id}`)
+        window.localStorage.setItem('site_id', this.site.id)
         this.loading = false
     }
 }

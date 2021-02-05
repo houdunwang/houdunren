@@ -11,7 +11,8 @@ const router = new VueRouter({
 
 const isLogin = store.getters.token
 router.beforeEach(async (to, from, next) => {
-    store.commit('setErrors')
+    store.commit('setErrors', {})
+    // store.dispatch('getSite')
     //用户经常被用到，所以登录用户在这里获取资料
     if (isLogin) {
         await Promise.all([store.dispatch('getUser')])

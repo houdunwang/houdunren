@@ -71,5 +71,5 @@ Route::post('site/{site}/wechat/{wechat}/menu', [WechatMenuController::class, 'p
 //公众号粉丝
 Route::get('site/{site}/wechat/{wechat}/user', [WeChatUserController::class, 'sync']);
 //模块后台
-Route::get('admin/module', [ModuleAdminController::class, 'module']);
-Route::get('admin/modules', [ModuleAdminController::class, 'modules']);
+// Route::get('admin/module', [ModuleAdminController::class, 'module']);
+// Route::get('admin/modules', [ModuleAdminController::class, 'modules']);

@@ -220,13 +220,13 @@ export default {
     data() {
         return {
             menus,
-            module: { menus: [] },
+            // module: this.$store.state.module,
             modules: []
         }
     },
     async created() {
-        this.module = await this.axios.get(`admin/module`)
-        this.modules = await this.axios.get(`admin/modules`)
+        // this.module = await this.axios.get(`/api/admin/module`)
+        this.modules = await this.axios.get(`/module/site/${this.site.id}/user/${this.user.id}`)
     }
 }
 </script>

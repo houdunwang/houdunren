@@ -3776,9 +3776,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       menus: _config_menus__WEBPACK_IMPORTED_MODULE_1__.default,
-      module: {
-        menus: []
-      },
+      // module: this.$store.state.module,
       modules: []
     };
   },
@@ -3791,17 +3789,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _this.axios.get("admin/module");
+              return _this.axios.get("/module/site/".concat(_this.site.id, "/user/").concat(_this.user.id));
 
             case 2:
-              _this.module = _context.sent;
-              _context.next = 5;
-              return _this.axios.get("admin/modules");
-
-            case 5:
               _this.modules = _context.sent;
 
-            case 6:
+            case 3:
             case "end":
               return _context.stop();
           }
@@ -4097,7 +4090,7 @@ var form = {
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   route: {
-    path: '/Edu/admin'
+    path: "/Edu/".concat(window.site.id, "/admin")
   },
   data: function data() {
     return {
@@ -4107,7 +4100,7 @@ var form = {
   },
   methods: {
     onSubmit: function onSubmit() {
-      this.axios.put('', this.form);
+      this.axios.put("config", this.form);
     }
   }
 });
@@ -4485,7 +4478,7 @@ __webpack_require__.r(__webpack_exports__);
 // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 var _axios = axios__WEBPACK_IMPORTED_MODULE_2___default().create({
-  baseURL: '/api',
+  baseURL: "/api/Edu/".concat(_store__WEBPACK_IMPORTED_MODULE_3__.default.state.site.id),
   timeout: 5000
 });
 
@@ -4493,6 +4486,7 @@ window.axios = vue__WEBPACK_IMPORTED_MODULE_5__.default.axios = vue__WEBPACK_IMP
 
 _axios.interceptors.request.use(function (config) {
   var token = _store__WEBPACK_IMPORTED_MODULE_3__.default.getters.token;
+  if (config.url[0] == '/') config.baseURL = '';
 
   if (token) {
     config.headers.Authorization = "Bearer ".concat(token);
@@ -4663,7 +4657,8 @@ router.beforeEach( /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _store__WEBPACK_IMPORTED_MODULE_2__.default.commit('setErrors'); //用户经常被用到，所以登录用户在这里获取资料
+            _store__WEBPACK_IMPORTED_MODULE_2__.default.commit('setErrors', {}); // store.dispatch('getSite')
+            //用户经常被用到，所以登录用户在这里获取资料
 
             if (!isLogin) {
               _context.next = 4;
@@ -4800,6 +4795,8 @@ vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vuex__WEBPACK_IMPORTED_MODULE_2__.d
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_2__.default.Store({
   state: {
     errors: {},
+    site: window.site,
+    module: window.module,
     user: {}
   },
   getters: {
@@ -4822,6 +4819,9 @@ vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vuex__WEBPACK_IMPORTED_MODULE_2__.d
     },
     setUser: function setUser(state, user) {
       state.user = user;
+    },
+    setSite: function setSite(state, site) {
+      state.site = site;
     }
   },
   actions: {
@@ -4835,7 +4835,7 @@ vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vuex__WEBPACK_IMPORTED_MODULE_2__.d
                 commit = _ref.commit;
                 _context.t0 = commit;
                 _context.next = 4;
-                return axios.get("user/info");
+                return axios.get("/api/user/info");
 
               case 4:
                 _context.t1 = _context.sent;
@@ -4847,6 +4847,30 @@ vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vuex__WEBPACK_IMPORTED_MODULE_2__.d
             }
           }
         }, _callee);
+      }))();
+    },
+    getSite: function getSite(_ref2) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var commit;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                commit = _ref2.commit;
+                _context2.t0 = commit;
+                _context2.next = 4;
+                return axios.get("/api/site/" + window.localStorage.getItem('site_id'));
+
+              case 4:
+                _context2.t1 = _context2.sent;
+                (0, _context2.t0)('setSite', _context2.t1);
+
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     }
   }
@@ -5054,6 +5078,12 @@ var mixin = {
   computed: {
     user: function user() {
       return _utils_Auth__WEBPACK_IMPORTED_MODULE_1__.default.user();
+    },
+    module: function module() {
+      return _store__WEBPACK_IMPORTED_MODULE_0__.default.state.module;
+    },
+    site: function site() {
+      return _store__WEBPACK_IMPORTED_MODULE_0__.default.state.site;
     },
     Auth: function Auth() {
       return _utils_Auth__WEBPACK_IMPORTED_MODULE_1__.default;

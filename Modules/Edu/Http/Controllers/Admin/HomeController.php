@@ -1,26 +1,19 @@
 <?php
 
-namespace Modules\Edu\Http\Controllers;
+namespace Modules\Edu\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
-class EduController extends Controller
+class HomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
     public function index()
     {
-        return view('edu::index');
+        // return inertia('Admin/Home/Index');
+        // return view('edu::admin.home.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
     public function create()
     {
         return view('edu::create');
@@ -29,7 +22,7 @@ class EduController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param Request $request
-     * @return Renderable
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -39,7 +32,7 @@ class EduController extends Controller
     /**
      * Show the specified resource.
      * @param int $id
-     * @return Renderable
+     * @return Response
      */
     public function show($id)
     {
@@ -49,7 +42,7 @@ class EduController extends Controller
     /**
      * Show the form for editing the specified resource.
      * @param int $id
-     * @return Renderable
+     * @return Response
      */
     public function edit($id)
     {
@@ -60,7 +53,7 @@ class EduController extends Controller
      * Update the specified resource in storage.
      * @param Request $request
      * @param int $id
-     * @return Renderable
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -70,7 +63,7 @@ class EduController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param int $id
-     * @return Renderable
+     * @return Response
      */
     public function destroy($id)
     {

@@ -71,7 +71,7 @@ const form = {
     }
 }
 export default {
-    route: { path: '/Edu/admin' },
+    route: { path: `/Edu/${window.site.id}/admin` },
     data() {
         return {
             tabs,
@@ -80,7 +80,7 @@ export default {
     },
     methods: {
         onSubmit() {
-            this.axios.put('', this.form)
+            this.axios.put(`config`, this.form)
         }
     }
 }

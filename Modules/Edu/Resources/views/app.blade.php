@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.15.2/css/all.min.css">
     <link rel="stylesheet" href="/modules/Edu/css/app.css" />
     <script>
-        window.sid= {{ site()['id'] }};
-        window.mid= {{ module()['id'] }};
+        window.site = @json($site);
+        window.module = @json($module);
     </script>
     <script src="/modules/Edu/js/app.js" defer></script>
 </head>

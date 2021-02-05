@@ -6,6 +6,12 @@ const mixin = {
         user() {
             return Auth.user()
         },
+        module() {
+            return store.state.module
+        },
+        site() {
+            return store.state.site
+        },
         Auth() {
             return Auth
         }

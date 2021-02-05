@@ -30,7 +30,6 @@ class ConfigService
 
     /**
      * 加载模块配置
-     *
      * @param Site $site
      * @param Module $module
      * @return void
@@ -43,7 +42,6 @@ class ConfigService
 
     /**
      * 保存模块配置
-     *
      * @param array $config
      * @return void
      */

@@ -36,7 +36,7 @@ class AuthController extends Controller
         $request->validate([
             'account' => ['required', Rule::exists('users', UserService::account()), new AccountRule(request('account'))],
             'password' => ['required'],
-            'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
+            'captcha.content' => ['sometimes', 'required', 'captcha_api:' . request('captcha.key') . ',default']
         ], [
             'account' => '帐号不能为空',
             'account.exists' => '帐号不存在',
@@ -48,7 +48,7 @@ class AuthController extends Controller
         $isLogin = Auth::attempt([
             UserService::account() => $request->account,
             'password' => $request->password
-        ], $request->remember);
+        ], $request->remember ?? true);
 
         if ($isLogin) {
             return ['message' => '登录成功', 'token' => $this->token(Auth::user())];

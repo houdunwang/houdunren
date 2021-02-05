@@ -33,13 +33,14 @@ class AdminMiddleware
     protected function init()
     {
         //站点
-        $id = request()->query('site', session('admin.site_id'));
-        $site = Site::findOrFail($id);
+        $site = request('site');
+        if (is_numeric($site)) {
+            $site = Site::findOrFail($site);
+        }
         SiteService::cache($site);
         ConfigService::site($site);
         //模块
-        $name = request()->query('module', session('admin.module_name'));
-        $module = Module::where('name', $name)->firstOrFail();
+        $module = ModuleService::getByDomain();
         ModuleService::cache($module);
         ConfigService::module($site, $module);
         return true;

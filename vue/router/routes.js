@@ -29,8 +29,6 @@ components.keys().map(path => {
     }
 })
 const routes = Object.values(groups)
-console.log(routes)
-
 routes.push({ path: '*', component: NotFound })
 
 export default routes

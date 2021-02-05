@@ -4,6 +4,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         errors: {},
+        site: window.site,
+        module: window.module,
         user: {}
     },
     getters: {
@@ -21,14 +23,19 @@ export default new Vuex.Store({
         setErrors(state, errors = {}) {
             state.errors = errors
         },
-
         setUser(state, user) {
             state.user = user
+        },
+        setSite(state, site) {
+            state.site = site
         }
     },
     actions: {
         async getUser({ commit }) {
-            commit('setUser', await axios.get(`user/info`))
+            commit('setUser', await axios.get(`/api/user/info`))
+        },
+        async getSite({ commit }) {
+            commit('setSite', await axios.get(`/api/site/` + window.localStorage.getItem('site_id')))
         }
     }
 })

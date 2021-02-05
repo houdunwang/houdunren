@@ -6772,6 +6772,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      loading: true,
       modules: [],
       site: {},
       tabs: (0,_tabs__WEBPACK_IMPORTED_MODULE_1__.default)({
@@ -6797,9 +6798,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
             case 5:
               _this.modules = _context.sent;
+              window.localStorage.setItem('site_id', _this.site.id);
               _this.loading = false;
 
-            case 7:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -9778,7 +9780,6 @@ components.keys().map(function (path) {
   }
 });
 var routes = Object.values(_groups__WEBPACK_IMPORTED_MODULE_0__.default);
-console.log(routes);
 routes.push({
   path: '*',
   component: _views_errors_NotFound__WEBPACK_IMPORTED_MODULE_1__.default
@@ -10120,11 +10121,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var mixin = {
-  data: function data() {
-    return {
-      loading: true
-    };
-  },
   computed: {
     user: function user() {
       return _utils_Auth__WEBPACK_IMPORTED_MODULE_2__.default.user();
@@ -100380,22 +100376,22 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      directives: [
-        {
-          name: "loading",
-          rawName: "v-loading",
-          value: _vm.loading,
-          expression: "loading"
-        }
-      ]
-    },
     [
       _c("hd-tab", { attrs: { tabs: _vm.tabs } }),
       _vm._v(" "),
       _c(
         "el-card",
-        { attrs: { shadow: "always", "body-style": { padding: "20px" } } },
+        {
+          directives: [
+            {
+              name: "loading",
+              rawName: "v-loading",
+              value: _vm.loading,
+              expression: "loading"
+            }
+          ],
+          attrs: { shadow: "always", "body-style": { padding: "20px" } }
+        },
         [
           _c("div", { attrs: { slot: "header" }, slot: "header" }, [
             _c("span", [
@@ -100476,10 +100472,11 @@ var render = function() {
                                   staticClass: "text-white",
                                   attrs: {
                                     href:
-                                      "/site/" +
+                                      "/" +
+                                      module.name +
+                                      "/" +
                                       _vm.site.id +
-                                      "/module/" +
-                                      module.id
+                                      "/admin"
                                   }
                                 },
                                 [
