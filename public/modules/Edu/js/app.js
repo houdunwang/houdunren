@@ -3766,17 +3766,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       menus: _config_menus__WEBPACK_IMPORTED_MODULE_1__.default,
-      // module: this.$store.state.module,
       modules: []
     };
   },
@@ -3789,7 +3783,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _this.axios.get("/module/site/".concat(_this.site.id, "/user/").concat(_this.user.id));
+              return _this.axios.get("/api/module/site/".concat(_this.site.id, "/user/").concat(_this.user.id));
 
             case 2:
               _this.modules = _context.sent;
@@ -85167,8 +85161,9 @@ var render = function() {
                                     href:
                                       "/" +
                                       module.name +
-                                      "/admin?module=" +
-                                      module.name
+                                      "/" +
+                                      _vm.site.id +
+                                      "/admin"
                                   }
                                 },
                                 [
