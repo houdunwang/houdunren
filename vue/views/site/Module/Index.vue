@@ -22,14 +22,14 @@
                     </div>
                     <div class="border-t border-gray-200 w-full flex justify-center bg-gray-100 py-3">
                         <el-button type="primary" size="mini">
-                            <a :href="`/module/${site.id}/admin/${module.id}`" class="text-white">
+                            <a :href="`/site/${site.id}/module/${module.id}`" class="text-white">
                                 管理模块
                             </a>
                         </el-button>
                     </div>
                 </div>
             </div>
-            <div v-else class="text-center text-gray-600"><i class="fas fa-info-circle    "></i> 暂无模块</div>
+            <div v-if="!loading && modules.length == 0" class="text-center text-gray-600"><i class="fas fa-info-circle"></i> 暂无模块</div>
         </el-card>
     </div>
 </template>
@@ -47,7 +47,7 @@ export default {
     },
     async created() {
         this.site = await this.axios.get(`site/${this.$route.params.sid}`)
-        this.modules = await this.axios.get(`module/site/${this.site.id}`)
+        this.modules = await this.axios.get(`module/site/${this.site.id}/user/${this.user.id}`)
         this.loading = false
     }
 }

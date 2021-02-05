@@ -5,8 +5,9 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <h1 class="navbar-brand navbar-brand-autodark">
+                <h1 class="navbar-brand navbar-brand-autodark flex justify-start mt-3 text-xl font-thin">
                     <a href=".">
+                        <i class="fas fa-burn mr-2"></i>
                         {{ module.title }}
                         <!-- <img src="" width="110" height="32" alt="Tabler" class="navbar-brand-image" /> -->
                     </a>
@@ -188,7 +189,12 @@
                                 <div class="dropdown-menu">
                                     <div class="dropdown-menu-columns">
                                         <div class="dropdown-menu-column grid grid-cols-2 w-80">
-                                            <a class="dropdown-item" :href="`/${module.name}/admin`" target="_blank" v-for="module in modules" :key="module.id">
+                                            <a
+                                                class="dropdown-item"
+                                                :href="`/${module.name}/admin?module=${module.name}`"
+                                                v-for="module in modules"
+                                                :key="module.id"
+                                            >
                                                 {{ module.title }}
                                             </a>
                                         </div>
@@ -214,11 +220,13 @@ export default {
     data() {
         return {
             menus,
+            module: { menus: [] },
             modules: []
         }
     },
     async created() {
-        this.modules = await this.axios.get(`module/user/${this.site.id}/site/${this.user.id}`)
+        this.module = await this.axios.get(`admin/module`)
+        this.modules = await this.axios.get(`admin/modules`)
     }
 }
 </script>

@@ -49,6 +49,20 @@ class ModuleService
     }
 
     /**
+     * 站点模块列表
+     * @param Site $site
+     * @return Collection
+     */
+    public function siteModules(Site $site): Collection
+    {
+        return $site->master->group->modules->map(function ($module) use ($site) {
+            $module['permissions'] =
+                PermissionService::formatSiteModulePermissions($site, $module);
+            return $module;
+        });
+    }
+
+    /**
      * 用户可用的站点模块
      * @param Site $site
      * @param User $user
@@ -56,7 +70,7 @@ class ModuleService
      */
     public function userSiteModules(Site $site, User $user): Collection
     {
-        return $site->modules->filter(function ($module) use ($site, $user) {
+        return $this->siteModules($site)->filter(function ($module) use ($site, $user) {
             return PermissionService::checkUserModuleAccess($site, $module, $user);
         });
     }

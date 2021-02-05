@@ -6268,7 +6268,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this.axios.post("site/sms/".concat(_this.$route.params.sid));
+                return _this.axios.post("site/".concat(_this.$route.params.sid, "/sms"));
 
               case 2:
               case "end":
@@ -6793,7 +6793,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 2:
               _this.site = _context.sent;
               _context.next = 5;
-              return _this.axios.get("module/site/".concat(_this.site.id));
+              return _this.axios.get("module/site/".concat(_this.site.id, "/user/").concat(_this.user.id));
 
             case 5:
               _this.modules = _context.sent;
@@ -7400,7 +7400,7 @@ var form = {
 
             case 4:
               _context.next = 6;
-              return _this.axios.get("user/module/".concat(_this.user.id));
+              return _this.axios.get("module/group/".concat(_this.user.group_id));
 
             case 6:
               _this.modules = _context.sent;
@@ -7465,6 +7465,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
 //
 //
 //
@@ -10118,6 +10120,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var mixin = {
+  data: function data() {
+    return {
+      loading: true
+    };
+  },
   computed: {
     user: function user() {
       return _utils_Auth__WEBPACK_IMPORTED_MODULE_2__.default.user();
@@ -100469,9 +100476,9 @@ var render = function() {
                                   staticClass: "text-white",
                                   attrs: {
                                     href:
-                                      "/module/" +
+                                      "/site/" +
                                       _vm.site.id +
-                                      "/admin/" +
+                                      "/module/" +
                                       module.id
                                   }
                                 },
@@ -100491,10 +100498,14 @@ var render = function() {
                 }),
                 0
               )
-            : _c("div", { staticClass: "text-center text-gray-600" }, [
-                _c("i", { staticClass: "fas fa-info-circle    " }),
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.loading && _vm.modules.length == 0
+            ? _c("div", { staticClass: "text-center text-gray-600" }, [
+                _c("i", { staticClass: "fas fa-info-circle" }),
                 _vm._v(" 暂无模块")
               ])
+            : _vm._e()
         ]
       )
     ],
@@ -101491,7 +101502,10 @@ var render = function() {
                 }),
                 0
               )
-            : _c(
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.loading && _vm.sites.length == 0
+            ? _c(
                 "div",
                 {
                   staticClass:
@@ -101499,9 +101513,10 @@ var render = function() {
                 },
                 [
                   _c("i", { staticClass: "fas fa-info-circle" }),
-                  _vm._v(" 先添加个站点吧")
+                  _vm._v(" 先添加个站点吧\n        ")
                 ]
               )
+            : _vm._e()
         ]
       )
     ],

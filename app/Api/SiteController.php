@@ -47,21 +47,6 @@ class SiteController extends Controller
     }
 
     /**
-     * 站点模块列表
-     * @param Site $site
-     * @return void
-     */
-    public function module(Site $site)
-    {
-        $modules = $site->master->group->modules->map(function ($module) use ($site) {
-            $module['permissions'] =
-                PermissionService::formatSiteModulePermissions($site, $module);
-            return $module;
-        });
-        return ModuleResource::collection($modules);
-    }
-
-    /**
      * 保存站点
      * @param SiteRequest $request
      * @param Site $site

@@ -58,7 +58,7 @@ export default {
     },
     async created() {
         if (this.id) this.form = await this.axios.get(`site/${this.id}`)
-        this.modules = await this.axios.get(`user/module/${this.user.id}`)
+        this.modules = await this.axios.get(`module/group/${this.user.group_id}`)
         this.loading = false
     },
     methods: {

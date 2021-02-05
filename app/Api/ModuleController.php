@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Module;
 use ModuleService;
+use App\Models\User;
+use App\Models\Site;
+use App\Models\Group;
 
 /**
  * 模块管理
@@ -18,6 +21,28 @@ class ModuleController extends Controller
     {
         $this->middleware(['auth:sanctum']);
         $this->authorizeResource(Module::class, 'module');
+    }
+
+    /**
+     * 用户组可使用模块
+     * @param Group $group
+     * @return void
+     */
+    public function group(Group $group)
+    {
+        $modules = $group->modules;
+        return ModuleResource::collection($modules->load('packages'));
+    }
+
+    /**
+     * 用户可使用的站点模块
+     * @param User $user
+     * @return void
+     */
+    public function userSiteModules(Site $site, User $user)
+    {
+        $modules = ModuleService::userSiteModules($site, $user);
+        return ModuleResource::collection($modules->load('packages'));
     }
 
     /**

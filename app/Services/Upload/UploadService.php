@@ -49,9 +49,11 @@ class UploadService
      */
     protected function save(UploadedFile $file, string $path): Attachment
     {
+        $realFile = $file->getRealPath();
         return Attachment::create([
             'path' => $path,
             'user_id' => Auth::id(),
+            'size' => filesize($realFile),
             'name' => $file->getClientOriginalName(),
             'extension' => $file->extension(),
         ]);

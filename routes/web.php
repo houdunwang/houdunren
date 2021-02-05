@@ -8,11 +8,10 @@ use Illuminate\Support\Facades\Cache;
 Route::get('/', fn () => '首页')->middleware(['front']);
 
 //模块后台
-Route::get('module/{site}/admin/{module}', function (Site $site, Module $module) {
-    $name = 'admin-' . Auth::id();
-    Cache::put($name, ['site' => $site, 'module' => $module]);
+Route::get('site/{site}/module/{module}', function (Site $site, Module $module) {
+    session(['admin' => ['site_id' => $site['id'], 'module_name' => $module['name']]]);
     return redirect("{$module['name']}/admin");
-})->middleware(['auth:sanctum']);
+})->where('module', '\d+')->middleware(['auth:sanctum']);
 
 
 

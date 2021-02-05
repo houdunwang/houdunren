@@ -55,7 +55,9 @@
                     </div>
                 </div>
             </div>
-            <div v-else class="text-center text-base text-gray-600 flex items-center justify-center"><i class="fas fa-info-circle"></i> 先添加个站点吧</div>
+            <div v-if="!loading && sites.length == 0" class="text-center text-base text-gray-600 flex items-center justify-center">
+                <i class="fas fa-info-circle"></i> 先添加个站点吧
+            </div>
         </div>
     </div>
 </template>

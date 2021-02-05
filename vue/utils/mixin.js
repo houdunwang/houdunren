@@ -3,6 +3,11 @@ import Auth from '../utils/Auth'
 import router from '../router'
 import { MessageBox } from 'element-ui'
 const mixin = {
+    data() {
+        return {
+            loading: true
+        }
+    },
     computed: {
         user() {
             return Auth.user()

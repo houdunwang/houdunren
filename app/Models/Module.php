@@ -35,8 +35,6 @@ class Module extends Model
         return ModuleService::config($this->name, 'config');
     }
 
-
-
     /**
      * 预览图
      * @return void

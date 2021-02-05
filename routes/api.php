@@ -18,6 +18,7 @@ use App\Api\WeChatDefaultController;
 use App\Api\WechatMenuController;
 use App\Api\WeChatUserController;
 use App\Api\CodeController;
+use App\Api\ModuleAdminController;
 
 //验证码
 Route::get('captcha', [CaptchaController::class, 'create']);
@@ -36,7 +37,6 @@ Route::put('user/mobile', [UserController::class, 'mobile']);
 Route::put('user/email', [UserController::class, 'email']);
 Route::post('user/code/mobile', [UserController::class, 'mobileCode']);
 Route::post('user/code/email', [UserController::class, 'emailCode']);
-Route::get('user/module/{user}', [UserController::class, 'module']);
 Route::apiResource('user', UserController::class);
 //上传
 Route::post('upload/local', [UploadController::class, 'local']);
@@ -47,10 +47,11 @@ Route::apiResource('package', PackageController::class);
 //会员组
 Route::apiResource('group', GroupController::class);;
 //站点
-Route::post('site/sms/{site}', [SiteController::class, 'sms']);
-Route::get('site/module/{site}', [SiteController::class, 'module']);
+Route::post('site/{site}/sms', [SiteController::class, 'sms']);
 Route::apiResource('site', SiteController::class);
 //模块
+Route::get('module/group/{group}', [ModuleController::class, 'group']);
+Route::get('module/site/{site}/user/{user}', [ModuleController::class, 'userSiteModules']);
 Route::apiResource('module', ModuleController::class);
 //角色
 Route::apiResource('site.role', RoleController::class);
@@ -69,3 +70,6 @@ Route::put('site/{site}/wechat/{wechat}/menu', [WechatMenuController::class, 'up
 Route::post('site/{site}/wechat/{wechat}/menu', [WechatMenuController::class, 'push']);
 //公众号粉丝
 Route::get('site/{site}/wechat/{wechat}/user', [WeChatUserController::class, 'sync']);
+//模块后台
+Route::get('admin/module', [ModuleAdminController::class, 'module']);
+Route::get('admin/modules', [ModuleAdminController::class, 'modules']);

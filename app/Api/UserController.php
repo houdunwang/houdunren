@@ -28,17 +28,6 @@ class UserController extends Controller
     }
 
     /**
-     * 用户默认组模块
-     * @param User $user
-     * @return void
-     */
-    public function module(User $user)
-    {
-        $modules = $user->group->modules;
-        return ModuleResource::collection($modules->load('packages'));
-    }
-
-    /**
      * 用户列表
      * @return void
      */

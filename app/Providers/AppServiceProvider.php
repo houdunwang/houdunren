@@ -34,5 +34,9 @@ class AppServiceProvider extends ServiceProvider
     {
         // 去掉资源的data包装
         JsonResource::withoutWrapping();
+
+        //添加sanctum域名
+        $host = parse_url(request()->url())['host'];
+        config(['sanctum.stateful' => array_merge(config('sanctum.stateful'), [$host])]);
     }
 }
