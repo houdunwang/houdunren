@@ -145,10 +145,11 @@
             <div class="container flex flex-col md:flex-row items-center justify-center px-5 text-gray-700">
                 <div class="max-w-md">
                     <div class="text-5xl font-dark font-bold mb-10">404</div>
-                    <p class="text-2xl md:text-3xl font-light leading-normal mb-3">对不起，我们找不到这个页面</p>
-                    {{-- <p class="mb-2">不过别担心，你可以在我们的主页上找到很多其他的东西。</p> --}}
-                    <p class="mb-8 text-pink-800"><i class="fas fa-info-circle    "></i> 有可能是站点域名配置错误，或站点没有默认模块。</p>
-
+                    <p class="text-2xl md:text-3xl font-light leading-normal mb-3">
+                        对不起，我们找不到这个页面
+                    </p>
+                    <p class="mb-8 text-pink-800"><i class="fas fa-info-circle"></i>
+                        有可能是站点域名配置错误，或站点没有默认模块。</p>
 
                     <a href="/"
                        class="mr-2 hover:text-white px-4 inline py-2 text-sm font-medium leading-5 shadow text-white transition-colors duration-150 border border-transparent rounded-lg focus:outline-none focus:shadow-outline-blue bg-blue-600 active:bg-blue-600 hover:bg-blue-700">

@@ -27,11 +27,15 @@ class ModuleService
         return $cache = $module;
     }
 
+    /**
+     * 根据域名获取模块
+     * @return void
+     */
     public function getByDomain()
     {
         $path = parse_url(request()->url())['path'];
         $path = preg_replace('/\/api/', '', $path);
-        preg_match('/^\/(.*)\/\d+/i', $path, $matches);
+        preg_match('/^\/(.*?)\/\d+/i', $path, $matches);
         return Module::where('name', $matches[1])->firstOrFail();
     }
 

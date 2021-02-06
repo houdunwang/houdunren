@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\GroupRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\GroupResource;
+use App\Models\User;
 
 /**
  * 会员组
@@ -72,6 +73,7 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
+        User::where('group_id', $group['id'])->update(['group_id' => 1]);
         $group->delete();
         return $this->message('会员组删除成功');
     }

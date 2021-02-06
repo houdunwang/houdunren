@@ -37,6 +37,6 @@ class GroupPolicy
 
     public function delete(User $user, Group $group)
     {
-        return UserService::isSuperAdmin($user);
+        return $group['id'] != 1 && UserService::isSuperAdmin($user);
     }
 }

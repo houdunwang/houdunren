@@ -50,7 +50,6 @@ class LessonController extends Controller
      */
     public function store(LessonRequest $request, Lesson $lesson)
     {
-
         DB::beginTransaction();
         $lesson->fill($request->except(['file', 'tags', 'videos']) + [
             'user_id' => Auth::id(),

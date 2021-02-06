@@ -37,6 +37,6 @@ class PackagePolicy
 
     public function delete(User $user, Package $package)
     {
-        return UserService::isSuperAdmin($user);
+        return $package['id'] != 1 && UserService::isSuperAdmin($user);
     }
 }

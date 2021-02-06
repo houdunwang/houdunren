@@ -202,7 +202,7 @@
             </div>
         </header>
         <div class="content">
-            <div class="p-5">
+            <div class="p-5 bg-white shadow-sm mx-5">
                 <router-view />
             </div>
         </div>

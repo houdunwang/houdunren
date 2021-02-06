@@ -1,10 +1,8 @@
 <template>
     <div>
+        <hd-tab :tabs="tabs" />
         <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal">
             <el-card shadow="always" :body-style="{ padding: '20px' }">
-                <div slot="header">
-                    模块配置
-                </div>
                 <el-form-item label="直播公告">
                     <el-input type="textarea" v-model="form.live.notice"></el-input>
                 </el-form-item>
@@ -19,7 +17,7 @@
                     </el-radio-group>
                 </el-form-item>
 
-                <el-card shadow="always" :body-style="{ padding: '20px' }" v-if="form.live.site_live == true">
+                <el-card shadow="never" :body-style="{ padding: '20px' }" v-if="form.live.site_live == true">
                     <div slot="header">
                         推流设置
                     </div>
@@ -37,7 +35,7 @@
                     </el-form-item>
                 </el-card>
 
-                <el-card shadow="always" :body-style="{ padding: '20px' }" v-if="form.live.site_live == false">
+                <el-card shadow="never" :body-style="{ padding: '20px' }" v-if="form.live.site_live == false">
                     <div slot="header">
                         推流设置
                     </div>

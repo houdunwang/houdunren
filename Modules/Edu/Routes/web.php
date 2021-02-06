@@ -1,14 +1,13 @@
 <?php
 
 use App\Models\Site;
-use ModuleService;
+use App\Models\Module;
 
 Route::get('Edu/{site}/admin/{path?}', function (Site $site) {
-    $module = ModuleService::getByDomain();
-    unset($site['config']);
+    $module = Module::where('name', 'Edu')->firstOrFail();
     return view('edu::app', compact('site', 'module'));
-})->where('path', '(.*)')->middleware(['auth:sanctum']);
+})->where('path', '(.*)')->middleware('module');
 
 Route::get('Edu/{path?}', function () {
     return view('edu::app');
-})->where('path', '(.*)')->middleware('front');
+})->where('path', '(.*)')->middleware('module');

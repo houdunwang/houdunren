@@ -27,7 +27,6 @@ class AuthController extends Controller
 
     /**
      * 帐号登录
-     *
      * @param Request $request
      * @return void
      */

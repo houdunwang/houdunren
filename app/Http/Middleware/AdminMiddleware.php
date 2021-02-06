@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use PermissionService;
-use App\Models\Module;
 use App\Models\Site;
 use ModuleService;
 use ConfigService;
@@ -12,11 +11,12 @@ use SiteService;
 use Closure;
 use Auth;
 
+
 /**
  * 模块后台管理中间件
  * @package App\Http\Middleware
  */
-class AdminMiddleware
+class ModuleMiddleware
 {
     public function handle($request, Closure $next)
     {
@@ -34,15 +34,18 @@ class AdminMiddleware
     {
         //站点
         $site = request('site');
-        if (is_numeric($site)) {
-            $site = Site::findOrFail($site);
-        }
+        if (is_numeric($site)) $site = Site::findOrFail($site);
         SiteService::cache($site);
         ConfigService::site($site);
+        define("SID", $site['id']);
         //模块
         $module = ModuleService::getByDomain();
         ModuleService::cache($module);
         ConfigService::module($site, $module);
+        //站点模块检测
+        $exist = ModuleService::siteModules($site)->contains('name', $module['name']);
+        if (!$exist) abort(404, '站点不存在模块');
+
         return true;
     }
 

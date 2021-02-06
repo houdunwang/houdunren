@@ -18,7 +18,6 @@ use App\Api\WeChatDefaultController;
 use App\Api\WechatMenuController;
 use App\Api\WeChatUserController;
 use App\Api\CodeController;
-use App\Api\ModuleAdminController;
 
 //验证码
 Route::get('captcha', [CaptchaController::class, 'create']);

@@ -51,9 +51,7 @@ export default {
         HdFooter
     },
     data() {
-        return {
-            form: { account: '', password: '', captcha: {}, remember: false, finish: false }
-        }
+        return { finish: false, form: { account: '', password: '', captcha: {}, remember: false } }
     },
     created() {
         if (this.isLogin()) {

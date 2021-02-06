@@ -37,7 +37,7 @@
                     <el-button type="primary" size="small" @click="$router.push({ name: 'system.group.edit', params: { id: group.id } })">
                         编辑
                     </el-button>
-                    <el-button type="danger" size="small" @click="del(group)">删除</el-button>
+                    <el-button :type="group.id == 1 ? 'info' : 'danger'" size="small" @click="del(group)" :disabled="group.id == 1">删除</el-button>
                 </el-button-group>
             </el-table-column>
         </el-table>

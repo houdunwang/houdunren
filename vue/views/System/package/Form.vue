@@ -12,7 +12,6 @@
                 <div slot="header">
                     使用该套餐的会员组
                 </div>
-                <!-- card body -->
                 <el-tag
                     type="primary"
                     effect="plain"

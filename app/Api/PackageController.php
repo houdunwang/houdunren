@@ -74,9 +74,6 @@ class PackageController extends Controller
      */
     public function destroy(Package $package)
     {
-        if ($package->id == 1) {
-            return response(['message' => '系统套餐不允许删除'], 403);
-        }
         $package->delete();
         return ['message' => '套餐删除成功'];
     }

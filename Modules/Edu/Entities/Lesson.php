@@ -17,9 +17,13 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Lesson extends BaseModel
 {
     use Favour, Favorite, LogsActivity;
+
     protected static $recordEvents = ['created'];
+
     protected $table = 'edu_lessons';
+
     protected $guarded = [];
+
     protected $casts = [
         'status' => 'boolean',
     ];
@@ -36,7 +40,6 @@ class Lesson extends BaseModel
 
     /**
      * 视频关联
-     *
      * @return mixed
      */
     public function videos()

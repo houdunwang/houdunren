@@ -21,6 +21,7 @@ class Site extends Model
     protected $casts = [
         'config' => 'array',
     ];
+    protected $hidden = ['config'];
 
     protected $appends = [
         'permissions',
@@ -33,9 +34,9 @@ class Site extends Model
     public function getPermissionsAttribute()
     {
         return [
-            'view' => Auth::user()->can('view', $this),
-            'update' => Auth::user()->can('update', $this),
-            'delete' => Auth::user()->can('delete', $this)
+            'view' => Auth::check() && Auth::user()->can('view', $this),
+            'update' => Auth::check() && Auth::user()->can('update', $this),
+            'delete' => Auth::check() && Auth::user()->can('delete', $this)
         ];
     }
 

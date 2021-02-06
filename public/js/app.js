@@ -4881,12 +4881,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      finish: false,
       form: {
         account: '',
         password: '',
         captcha: {},
-        remember: false,
-        finish: false
+        remember: false
       }
     };
   },
@@ -9137,7 +9137,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
 //
 //
 //
@@ -103110,7 +103109,11 @@ var render = function() {
                         _c(
                           "el-button",
                           {
-                            attrs: { type: "danger", size: "small" },
+                            attrs: {
+                              type: group.id == 1 ? "info" : "danger",
+                              size: "small",
+                              disabled: group.id == 1
+                            },
                             on: {
                               click: function($event) {
                                 return _vm.del(group)
@@ -103921,7 +103924,11 @@ var render = function() {
                         _c(
                           "el-button",
                           {
-                            attrs: { type: "danger", size: "small" },
+                            attrs: {
+                              type: p.id == 1 ? "info" : "danger",
+                              size: "small",
+                              disabled: p.id == 1
+                            },
                             on: {
                               click: function($event) {
                                 return _vm.del(p)

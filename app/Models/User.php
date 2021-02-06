@@ -42,8 +42,9 @@ class User extends Authenticatable
     public function getPermissionsAttribute()
     {
         return [
-            'view' =>  Auth::user()->can('view', $this),
-            'update' => Auth::user()->can('update', $this),
+            'view' => Auth::check() && Auth::user()->can('view', $this),
+            'update' => Auth::check() && Auth::user()->can('update', $this),
+            'delete' => Auth::check() && Auth::user()->can('delete', $this),
         ];
     }
 

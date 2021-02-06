@@ -4,8 +4,8 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
-use App\Http\Middleware\FrontMiddleware;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\ModuleMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -57,8 +57,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'module' => ModuleMiddleware::class,
         'admin' => AdminMiddleware::class,
-        'front' => FrontMiddleware::class,
         //
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

@@ -9,3 +9,8 @@ mix.js('vue/app.js', 'public/modules/Edu/js')
     .webpackConfig(require('./webpack.config'))
 
 mix.copyDirectory('vue/static', '../../public/modules/Edu/static')
+
+mix.browserSync({
+    proxy: 'hdcms.test',
+    files: 'vue/**'
+})

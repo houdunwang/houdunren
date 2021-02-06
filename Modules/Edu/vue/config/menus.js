@@ -11,16 +11,16 @@ const menus = [
         title: '课程管理',
         icon: 'fas fa-camera',
         items: [
-            { title: '课程列表', permission: 'lesson', route: {} },
-            { title: '发布课程', permission: 'lesson', route: {} }
+            { title: '课程列表', permission: 'lesson', route: { name: 'admin.lesson.index' } },
+            { title: '发布课程', permission: 'lesson', route: { name: 'admin.lesson.create' } }
         ]
     },
     {
         title: '系统课程',
         icon: 'fa fa-magnet',
         items: [
-            { title: '系统课程列表', permission: 'system-lesson', route: {} },
-            { title: '发布系统课程', permission: 'system-lesson', route: {} }
+            { title: '系统课程列表', permission: 'system-lesson', route: { name: 'admin.system.index' } },
+            { title: '发布系统课程', permission: 'system-lesson', route: { name: 'admin.system.create' } }
         ]
     },
     {

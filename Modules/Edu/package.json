@@ -30,6 +30,7 @@
         "sass-loader": "^10.1.1",
         "vue": "^2.6.12",
         "vue-router": "^3.5.0",
+        "vuedraggable": "^2.24.3",
         "vuex": "^3.6.2"
     }
 }

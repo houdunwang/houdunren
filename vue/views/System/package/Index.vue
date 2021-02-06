@@ -36,7 +36,7 @@
                     <el-button type="primary" size="small" @click="$router.push({ name: 'system.package.edit', params: { id: p.id } })">
                         编辑
                     </el-button>
-                    <el-button type="danger" size="small" @click="del(p)">删除</el-button>
+                    <el-button :type="p.id == 1 ? 'info' : 'danger'" size="small" @click="del(p)" :disabled="p.id == 1">删除</el-button>
                 </el-button-group>
             </el-table-column>
         </el-table>
