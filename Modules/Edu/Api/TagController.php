@@ -14,7 +14,8 @@ class TagController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'module']);
+        $this->middleware(['auth:sanctum']);
+        $this->middleware(['admin']);
     }
 
     /**

@@ -33,10 +33,12 @@ class ModuleService
      */
     public function getByDomain()
     {
-        $path = parse_url(request()->url())['path'];
+        $path = parse_url(request()->url())['path'] ?? '';
         $path = preg_replace('/\/api/', '', $path);
-        preg_match('/^\/(.*?)\/\d+/i', $path, $matches);
-        return Module::where('name', $matches[1])->firstOrFail();
+        if ($path) {
+            preg_match('/^\/(.*?)\/\d+/i', $path, $matches);
+            return Module::where('name', $matches[1])->first();
+        }
     }
 
     /**

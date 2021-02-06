@@ -2,17 +2,16 @@
 
 namespace Modules\Edu\Api;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Modules\Edu\Http\Requests\LessonRequest;
+use Modules\Edu\Transformers\LessonResource;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Controller;
 use Modules\Edu\Entities\Lesson;
-use Modules\Edu\Entities\Tag;
 use Modules\Edu\Entities\Video;
-use Modules\Edu\Http\Requests\LessonRequest;
-use Auth;
-use Illuminate\Support\Facades\DB;
-use Modules\Edu\Transformers\LessonResource;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use App\Models\Site;
+use Auth;
 
 /**
  * 课程管理
@@ -22,7 +21,8 @@ class LessonController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'module']);
+        $this->middleware(['auth:sanctum']);
+        $this->middleware(['admin']);
     }
 
     /**

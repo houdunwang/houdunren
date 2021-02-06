@@ -6,7 +6,7 @@ use App\Models\Module;
 
 Route::get('/', function () {
     return '首页';
-});
+})->middleware(['module']);
 
 //登录
 Route::get('{app}/{path?}', function () {

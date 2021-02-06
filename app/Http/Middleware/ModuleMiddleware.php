@@ -2,14 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use PermissionService;
+use App\Models\Module;
 use App\Models\Site;
 use ModuleService;
 use ConfigService;
-use UserService;
 use SiteService;
 use Closure;
-use Auth;
 
 
 /**
@@ -20,12 +18,10 @@ class ModuleMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if ($this->init()) {
-            return $next($request);
-        }
-        abort(403, '你没有操作权限');
+        $this->init();
+        $this->check();
+        return $next($request);
     }
-
     /**
      * 站点初始化
      * @return void
@@ -33,36 +29,53 @@ class ModuleMiddleware
     protected function init()
     {
         //站点
-        $site = request('site');
-        if (is_numeric($site)) $site = Site::findOrFail($site);
-        if (!$site) {
-            abort(404, '站点不存在');
-        }
-
+        $site = $this->site();
         SiteService::cache($site);
         ConfigService::site($site);
         define("SID", $site['id']);
         //模块
-        $module = ModuleService::getByDomain();
+        $module = $this->module($site);
         ModuleService::cache($module);
         ConfigService::module($site, $module);
-
-        //站点模块检测
-        $has = ModuleService::siteModules($site)->contains('name', $module['name']);
-        if (!$has) abort(404, '站点不存在模块');
 
         return true;
     }
 
     /**
-     * 权限检测
-     * @return boolean
+     * 站点
+     * @return void
      */
-    protected function verify(): bool
+    protected function site(): Site
     {
-        //超级管理员与站长检测
-        if (Auth::user()->isSuperAdmin || UserService::isMaster(site(), Auth::user())) return true;
-        //管理员检测
-        return UserService::isAdmin(site(), Auth::user()) && PermissionService::checkModulePermission(site(), module());
+        $site = request('site');
+        if (is_numeric($site)) {
+            $site = Site::findOrFail($site);
+        }
+        $site = $site ?: SiteService::getByDomain();
+        return $site ?: abort(404);
+    }
+
+    /**
+     * 模块
+     * @param Site $site
+     * @return Module
+     */
+    protected function module(Site $site): Module
+    {
+        $module = ModuleService::getByDomain();
+        if (!$module) {
+            $module = $site->module;
+        }
+        if (!$module) {
+            abort(404);
+        }
+        return $module;
+    }
+
+    protected function check()
+    {
+        //站点模块检测
+        $exist = ModuleService::siteModules(site())->contains('name', module()['name']);
+        if (!$exist) abort(404, '站点不存在模块');
     }
 }

@@ -18,8 +18,8 @@ class SiteService
      */
     public function getByDomain(): ?Site
     {
-        $info = parse_url(request()->url());
-        return Site::where('domain', 'regexp', 'https?:\/\/' . $info['host'])->firstOrFail();
+        $host = parse_url(request()->url())['host'];
+        return Site::where('domain', 'regexp', 'https?:\/\/' . $host)->firstOrFail();
     }
 
     /**
