@@ -8,7 +8,7 @@ use Modules\Edu\Api\LessonController;
 use Modules\Edu\Api\SystemController;
 
 Route::group(['prefix' => 'Edu/{site}'], function () {
-    //配置项
+    //配置
     Route::get('config', [ConfigController::class, 'show']);
     Route::put('config', [ConfigController::class, 'update']);
     //标签
@@ -19,7 +19,3 @@ Route::group(['prefix' => 'Edu/{site}'], function () {
     //系统课程
     Route::apiResource('system', SystemController::class);
 });
-
-// Route::middleware('auth:api')->get('/edu', function (Request $request) {
-//     return $request->user();
-// });
