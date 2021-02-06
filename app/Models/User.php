@@ -36,7 +36,8 @@ class User extends Authenticatable
 
     protected $appends = [
         'isSuperAdmin',
-        'permissions'
+        'permissions',
+        'icon', 'gender'
     ];
 
     public function getPermissionsAttribute()
@@ -46,6 +47,25 @@ class User extends Authenticatable
             'update' => Auth::check() && Auth::user()->can('update', $this),
             'delete' => Auth::check() && Auth::user()->can('delete', $this),
         ];
+    }
+
+    /**
+     * 性别
+     * @return void
+     */
+    public function getGenderAttribute()
+    {
+        return [1 => '男', 2 => '女'][$this->sex];
+    }
+
+    /**
+     * 头像
+     * @return void
+     */
+    public function getIconAttribute()
+    {
+        $sex = ($this->sex == 1 ? 'boy' : 'girl');
+        return $this->avatar ?: url("/images/{$sex}.png");
     }
 
     /**

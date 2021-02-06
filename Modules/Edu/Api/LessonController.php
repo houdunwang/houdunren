@@ -67,7 +67,6 @@ class LessonController extends Controller
 
     /**
      * 更新课程
-     *
      * @param LessonRequest $request
      * @param Lesson $lesson
      * @return void
@@ -117,13 +116,12 @@ class LessonController extends Controller
 
     /**
      * 搜索课程
-     *
      * @param Request $request
      * @return void
      */
     public function search(Request $request)
     {
-        $lessons = Lesson::when($request->keyword, function ($query, $keyword) use ($request) {
+        $lessons = Lesson::when($request->keyword, function ($query, $keyword) {
             return $query->where('title', 'like', "%{$keyword}%");
         })->limit(10)->get();
         return $lessons;

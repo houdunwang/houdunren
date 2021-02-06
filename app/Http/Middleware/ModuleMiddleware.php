@@ -35,6 +35,10 @@ class ModuleMiddleware
         //站点
         $site = request('site');
         if (is_numeric($site)) $site = Site::findOrFail($site);
+        if (!$site) {
+            abort(404, '站点不存在');
+        }
+
         SiteService::cache($site);
         ConfigService::site($site);
         define("SID", $site['id']);

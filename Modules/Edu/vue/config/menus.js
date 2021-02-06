@@ -27,7 +27,7 @@ const menus = [
         title: '订阅设置',
         icon: 'fa fa-tasks',
         items: [
-            { title: '会员周期定价', permission: 'subscribe', route: {} },
+            { title: '会员周期定价', permission: 'subscribe', route: { name: 'admin.subscribe.index' } },
             { title: '订阅订单管理', permission: 'orders', route: {} }
         ]
     }

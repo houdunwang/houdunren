@@ -26,7 +26,7 @@ export default {
     },
     methods: {
         async search() {
-            this.lessons = await this.axios.post(route('Edu.admin.lesson.search').valueOf(), { keyword: this.keyword })
+            this.lessons = await this.axios.get(`lesson/search?keyword=${this.keyword}`)
         }
     }
 }

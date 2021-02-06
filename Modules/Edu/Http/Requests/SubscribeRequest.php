@@ -14,11 +14,7 @@ class SubscribeRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', Rule::unique('edu_subscribe')->where(function ($query) {
-                return $query->where('site_id', site()['id'])->when(request()->subscribe, function ($query, $subscribe) {
-                    return $query->whereNotIn('id', [$subscribe['id']])->where('title', $subscribe['title']);
-                });
-            })],
+            'title' => ['required', 'between:3,20'],
             'month' => ['required', 'between:1,250', 'numeric'],
             'ad' => ['required'],
             'icon' => ['required'],

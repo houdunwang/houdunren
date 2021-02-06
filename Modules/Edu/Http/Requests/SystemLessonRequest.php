@@ -16,7 +16,7 @@ class SystemLessonRequest extends FormRequest
         return [
             'title' => ['required', 'min:5', Rule::unique('edu_system')->where(function ($query) {
                 if ($system = request("system")) {
-                    return $query->where('site_id', site()['id'])->whereNotIn('id', $system['id']);
+                    return $query->where('site_id', site()['id'])->whereNotIn('id', [$system['id']]);
                 }
             })],
             'description' => ['required', 'min:10'],

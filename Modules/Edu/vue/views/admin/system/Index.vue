@@ -1,5 +1,6 @@
 <template>
     <div>
+        <hd-tab :tabs="tabs" />
         <el-table :data="lessons.data" border stripe>
             <el-table-column v-for="col in columns" :prop="col.prop" :key="col.id" :label="col.label" :width="col.width" #default="{row:lesson}">
                 <el-image v-if="col.prop == 'preview'" :src="lesson.preview" fit="cover" :lazy="true"></el-image>
@@ -9,7 +10,7 @@
             </el-table-column>
             <el-table-column width="150" #default="{row:lesson}">
                 <el-button-group>
-                    <el-button type="primary" size="mini" @click="$inertia.get(route('Edu.admin.system.edit', lesson))">编辑</el-button>
+                    <el-button type="primary" size="mini" @click="route('admin.system.edit', { id: lesson.id })">编辑</el-button>
                     <el-button type="danger" size="mini" @click="del(lesson)">删除</el-button>
                 </el-button-group>
             </el-table-column>
@@ -32,19 +33,20 @@ export default {
         return {
             tabs,
             columns,
-            lessons: []
+            lessons: { data: [] }
         }
     },
-    async created() {
-        this.lessons = await this.load()
+    created() {
+        this.load()
     },
     methods: {
         async load(page = 1) {
-            await this.axios.get(`system?page=${page}`)
+            this.lessons = await this.axios.get(`system?page=${page}`)
         },
         del(lesson) {
-            this.$confirm('确定删除吗', '温馨提示').then(() => {
-                this.axios.delete('system/destroy', lesson)
+            this.$confirm('确定删除吗', '温馨提示').then(async () => {
+                await this.axios.delete(`system/${lesson.id}`)
+                this.lessons.splice(this.lessons.indexOf(lesson), 1)
             })
         }
     }

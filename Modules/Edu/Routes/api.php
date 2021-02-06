@@ -6,6 +6,7 @@ use Modules\Edu\Api\ConfigController;
 use Modules\Edu\Api\TagController;
 use Modules\Edu\Api\LessonController;
 use Modules\Edu\Api\SystemController;
+use Modules\Edu\Api\SubscribeController;
 
 Route::group(['prefix' => 'Edu/{site}'], function () {
     //配置
@@ -15,7 +16,10 @@ Route::group(['prefix' => 'Edu/{site}'], function () {
     Route::get('tag', [TagController::class, 'index']);
     Route::put('tag', [TagController::class, 'update']);
     //课程
+    Route::get('lesson/search', [LessonController::class, 'search']);
     Route::apiResource('lesson', LessonController::class);
     //系统课程
     Route::apiResource('system', SystemController::class);
+    //套餐
+    Route::apiResource('subscribe', SubscribeController::class);
 });

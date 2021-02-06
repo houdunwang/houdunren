@@ -1,5 +1,6 @@
 <template>
-    <hd-layout :tabs="tabs" home="Edu.admin.index">
+    <div>
+        <hd-tab :tabs="tabs" />
         <el-form :model="form" ref="form" label-width="100px" label-position="right" :inline="false" size="normal">
             <el-card shadow="always" :body-style="{ padding: '20px' }">
                 <div slot="header">
@@ -7,23 +8,22 @@
                 </div>
                 <el-form-item label="课程名称">
                     <el-input v-model="form.title"></el-input>
-                    <hd-error :message="form.errors.title" />
+                    <hd-error name="title" />
                 </el-form-item>
                 <el-form-item label="课程介绍" size="normal">
                     <el-input v-model="form.description" placeholder="" type="textarea" learable></el-input>
-                    <hd-error :message="form.errors.description" />
+                    <hd-error name="description" />
                 </el-form-item>
                 <el-form-item label="预览图片" size="normal">
                     <hd-image v-model="form.preview" />
-                    <hd-error :message="form.errors.preview" />
+                    <hd-error name="preview" />
                 </el-form-item>
             </el-card>
-
             <el-card shadow="always" :body-style="{ padding: '20px' }" class="mt-3">
                 <div slot="header">
                     课程列表
                 </div>
-                <lesson v-model="form.lessons" :width="100" #default="{lesson}">
+                <lesson :lessons.sync="form.lessons" :width="100" #default="{lesson}">
                     <el-button-group>
                         <el-button type="danger" size="mini" @click="delLesson(lesson)">删除</el-button>
                     </el-button-group>
@@ -32,7 +32,7 @@
             </el-card>
             <el-button type="primary" @click="onSubmit" class="block mt-3">保存提交</el-button>
         </el-form>
-    </hd-layout>
+    </div>
 </template>
 
 <script>
@@ -44,22 +44,18 @@ const form = {
     lessons: []
 }
 export default {
-    props: ['systemLesson'],
+    props: ['id'],
     data() {
         return {
             tabs,
-            form: this.$inertia.form(this.systemLesson || form)
+            form,
+            lessons: []
         }
     },
+    async created() {
+        if (this.id) this.form = await this.axios.get(`system/${this.id}`)
+    },
     methods: {
-        //提交表单
-        onSubmit() {
-            if (this.systemLesson) {
-                this.form.put(route('Edu.admin.system.update', this.systemLesson))
-            } else {
-                this.form.post(route('Edu.admin.system.store'))
-            }
-        },
         //删除课程
         delLesson(lesson) {
             this.$confirm('确定删除吗？', '提示').then(() => {
@@ -70,11 +66,16 @@ export default {
         addLesson(lesson) {
             const isExits = this.form.lessons.find(l => l.id == lesson.id)
             if (Boolean(isExits)) {
-                this.$message('课程已经存在')
-            } else {
-                this.form.lessons.push(lesson)
-                this.$message({ message: '课程添加成功', type: 'success' })
+                return this.$message('课程已经存在')
             }
+            this.form.lessons.push(lesson)
+            this.$message({ message: '课程添加成功', type: 'success' })
+        },
+        //提交表单
+        async onSubmit() {
+            const url = this.id ? `system/${this.id}` : `system`
+            await this.axios[this.id ? 'put' : 'post'](url, this.form)
+            this.$router.push({ name: 'admin.system.index' })
         }
     }
 }

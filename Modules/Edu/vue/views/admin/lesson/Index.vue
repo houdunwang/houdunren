@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import tabs from './tabs.js'
+import tabs from './tabs'
 export default {
     data() {
         return {

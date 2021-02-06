@@ -8,6 +8,7 @@ use Modules\Edu\Entities\System;
 use Modules\Edu\Http\Requests\SystemLessonRequest;
 use Auth;
 use Modules\Edu\Transformers\SystemLessonResource;
+use App\Models\Site;
 
 /**
  * 系统课程管理
@@ -29,8 +30,8 @@ class SystemController extends Controller
     public function store(SystemLessonRequest $request, System $system)
     {
         $system->fill($request->input() + [
+            'site_id' => site()->id,
             'user_id' => Auth::id(),
-            'site_id' => site()->id
         ])->save();
 
         $this->updateLesson($system, $request);
@@ -42,7 +43,7 @@ class SystemController extends Controller
      * @param System $system
      * @return void
      */
-    public function show(System $system)
+    public function show(Site $site, System $system)
     {
         return new SystemLessonResource($system);
     }
@@ -53,7 +54,7 @@ class SystemController extends Controller
      * @param System $system
      * @return void
      */
-    public function update(SystemLessonRequest $request, System $system)
+    public function update(SystemLessonRequest $request, Site $site, System $system)
     {
         $system->fill($request->input())->save();
         $this->updateLesson($system, $request);
@@ -69,14 +70,13 @@ class SystemController extends Controller
     protected function updateLesson(System $system, Request $request)
     {
         //使用id做为索引，并过滤掉无效字段用于system_lesson中间表
-        $lessons = collect($request->lessons)->map(
-            fn ($lesson, $key) => ['lesson_id' => $lesson['id'], 'rank' => $key]
-        )->keyBy('lesson_id');
-
+        $lessons = collect($request->lessons)
+            ->map(fn ($lesson, $key) => ['lesson_id' => $lesson['id'], 'rank' => $key])
+            ->keyBy('lesson_id');
         $system->lessons()->sync($lessons);
     }
 
-    public function destroy(System $system)
+    public function destroy(Site $site, System $system)
     {
         $system->delete();
         return ['message' => '课程删除成功'];

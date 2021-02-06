@@ -6,7 +6,6 @@ use App\Models\BaseModel;
 use App\Models\Traits\Favorite;
 use App\Models\Traits\Favour;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Edu\Entities\Tag;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -47,22 +46,27 @@ class Lesson extends BaseModel
         return $this->hasMany(Video::class)->orderBy('rank', 'asc');
     }
 
-    public function scopeSearch($query, $w = null)
+    /**
+     * 搜索关键字
+     * @param Builder $query
+     * @param string $keyword
+     * @return void
+     */
+    public function scopeSearch(Builder $query, string $keyword)
     {
-        if (empty($w)) {
-            return $query;
-        }
-        return $query->where('title', 'like', "%{$w}%");
+        return $query->where('title', 'like', "%{$keyword}%");
     }
 
-    public function scopeSearchByTag($query, string $tag = null)
-    {
-        if (empty($tag)) {
-            return $query;
-        }
-
-        return $this->whereHas('tags', function (Builder $query) use ($tag) {
-            $query->where('title', 'like', "$tag%");
-        });
-    }
+    /**
+     * 按标签搜索
+     * @param [type] $query
+     * @param string $tag
+     * @return void
+     */
+    // public function scopeSearchByTag($query, string $tag)
+    // {
+    //     return $this->whereHas('tags', function (Builder $query) use ($tag) {
+    //         $query->where('title', 'like', "$tag%");
+    //     });
+    // }
 }

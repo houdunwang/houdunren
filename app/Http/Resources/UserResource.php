@@ -18,7 +18,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'is_super_admin' => $this->isSuperAdmin,
             'name' => $this->name ?: '盾友',
-            'avatar' => empty($this->avatar) ? url('/images/avatar.jpg') : $this->avatar,
+            'avatar' => $this->icon,
             'permissions' => $this->permissions,
             'qq' => $this->qq,
             'github' => $this->github,
