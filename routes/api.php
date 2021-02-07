@@ -39,6 +39,7 @@ Route::post('user/code/email', [UserController::class, 'emailCode']);
 Route::apiResource('user', UserController::class);
 //上传
 Route::post('upload/local', [UploadController::class, 'local']);
+Route::post('upload/site/{site}', [UploadController::class, 'site']);
 //系统配置
 Route::apiResource('system/config', SystemConfigController::class);
 //套餐

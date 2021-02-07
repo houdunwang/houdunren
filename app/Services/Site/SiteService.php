@@ -4,6 +4,9 @@ namespace App\Services\Site;
 
 use App\Models\Site;
 use App\Models\User;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
+use Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException;
 use UserService;
 
 /**
@@ -14,12 +17,15 @@ class SiteService
 {
     /**
      * 根据域名获取站点
-     * @return Site|null
+     * @return null|Site
+     * @throws BindingResolutionException
+     * @throws SuspiciousOperationException
+     * @throws ConflictingHeadersException
      */
     public function getByDomain(): ?Site
     {
         $host = parse_url(request()->url())['host'];
-        return Site::where('domain', 'regexp', 'https?:\/\/' . $host)->firstOrFail();
+        return Site::where('domain', 'regexp', 'https?:\/\/' . $host)->first();
     }
 
     /**
@@ -43,6 +49,6 @@ class SiteService
      */
     public function isMaster(Site $site, User $user)
     {
-        return UserService::isSuperAdmin($user) || UserService::isMaster($user);
+        return UserService::isSuperAdmin($user) || UserService::isMaster($site, $user);
     }
 }

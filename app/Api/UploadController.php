@@ -7,6 +7,9 @@ use App\Models\WeChat;
 use Houdunwang\WeChat\Material;
 use Illuminate\Http\Request;
 use UploadService;
+use App\Models\Site;
+use ConfigService;
+use SiteService;
 
 /**
  * 上传处理
@@ -17,17 +20,21 @@ class UploadController extends Controller
     public function __construct()
     {
         $this->middleware(['auth:sanctum']);
+        $this->middleware(['module']);
     }
 
     /**
-     * 文件上传
+     * 站点文件上传
      * @param Request $request
      * @return void
      */
-    public function make(Request $request)
+    public function site(Request $request, Site $site)
     {
         $request->validate(['file' => ['required', 'mimes:jpeg,png,mp3', 'max:2000']]);
-        return UploadService::make($request->file);
+        SiteService::cache($site);
+        ConfigService::site($site);
+        $driver = config('site.upload.driver');
+        return UploadService::$driver($request->file);
     }
 
     /**

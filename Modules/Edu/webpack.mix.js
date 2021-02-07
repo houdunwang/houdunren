@@ -7,7 +7,6 @@ mix.js('vue/app.js', 'public/modules/Edu/js')
     .vue()
     .postCss('vue/css/app.css', '../../public/modules/Edu/css', [require('postcss-import'), require('tailwindcss'), require('autoprefixer')])
     .webpackConfig(require('./webpack.config'))
-
 mix.copyDirectory('vue/static', '../../public/modules/Edu/static')
 
 mix.browserSync({

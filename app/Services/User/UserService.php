@@ -41,7 +41,7 @@ class UserService
      */
     public function isMaster(Site $site, User $user): bool
     {
-        return $this->isSuperAdmin($user) || $user['id'] == $site['user_id'];
+        return  $this->isSuperAdmin($user) || $user['id'] == $site['user_id'];
     }
 
     /**
@@ -54,6 +54,6 @@ class UserService
      */
     public function isAdmin(Site $site, User $user): bool
     {
-        return $site->isAdmin($user);
+        return $this->isMaster($site, $user) || $site->isAdmin($user);
     }
 }

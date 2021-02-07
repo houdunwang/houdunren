@@ -13,12 +13,12 @@
     <link href="/tabler/dist/css/demo.min.css?1611412966" rel="stylesheet" />
     {{-- tabler end --}}
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.15.2/css/all.min.css">
-    <link rel="stylesheet" href="/modules/Edu/css/app.css" />
+    <link rel="stylesheet" href="/modules/Edu/css/app.css?v={{ module()['version'] }}" />
     <script>
         window.site = @json(site());
         window.module = @json(module());
     </script>
-    <script src="/modules/Edu/js/app.js" defer></script>
+    <script src="/modules/Edu/js/app.js?v={{ module()['version'] }}" defer></script>
 </head>
 
 <body>

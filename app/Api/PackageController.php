@@ -55,7 +55,6 @@ class PackageController extends Controller
 
     /**
      * 更新套餐
-     *
      * @param PackageRequest $request
      * @param Package $package
      * @return void

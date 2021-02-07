@@ -10,6 +10,8 @@ const router = new VueRouter({
 })
 
 const isLogin = store.getters.token
+console.log(isLogin)
+
 router.beforeEach(async (to, from, next) => {
     store.commit('setErrors', {})
     // store.dispatch('getSite')

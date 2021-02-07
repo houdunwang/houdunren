@@ -21,6 +21,7 @@ class Site extends Model
     protected $casts = [
         'config' => 'array',
     ];
+
     protected $hidden = ['config'];
 
     protected $appends = [

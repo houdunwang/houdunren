@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use PermissionService;
+use App\Models\Module;
 use App\Models\Site;
 use ModuleService;
 use ConfigService;
@@ -10,7 +11,9 @@ use UserService;
 use SiteService;
 use Closure;
 use Auth;
-
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * 模块后台管理中间件
@@ -21,32 +24,40 @@ class AdminMiddleware
     public function handle($request, Closure $next)
     {
         $this->init();
-        if ($this->check()) {
-            return $next($request);
-        }
-        abort(403, '你没有操作权限');
+        return $next($request);
     }
 
     /**
      * 站点初始化
      * @return void
+     * @throws BindingResolutionException
+     * @throws HttpException
+     * @throws NotFoundHttpException
      */
     protected function init()
     {
+        if (!Auth::check()) {
+            abort(401);
+        }
         //站点
         $site = $this->site();
         SiteService::cache($site);
         ConfigService::site($site);
         define("SID", $site['id']);
         //模块
-        $module = ModuleService::getByDomain() ?: abort(404);
+        $module = $this->module($site);
         ModuleService::cache($module);
         ConfigService::module($site, $module);
+        //权限检测
+        $this->check($site, $module);
     }
 
     /**
      * 站点
      * @return Site
+     * @throws BindingResolutionException
+     * @throws HttpException
+     * @throws NotFoundHttpException
      */
     protected function site(): Site
     {
@@ -54,25 +65,53 @@ class AdminMiddleware
         if (is_numeric($site)) {
             $site = Site::findOrFail($site);
         }
-        return $site ?: abort(404);
+        if ($site instanceof Site) {
+            return $site;
+        }
+        abort(404);
+    }
+
+    /**
+     * 模块
+     * @param Site $site
+     * @return Module
+     * @throws BindingResolutionException
+     * @throws HttpException
+     * @throws NotFoundHttpException
+     */
+    protected function module(Site $site): Module
+    {
+        $module = ModuleService::getByDomain();
+        //站点模块检测
+        $exist = $module ? ModuleService::siteModules($site)->contains('name', $module['name']) : null;
+        if (!$exist) {
+            abort(404, '站点不存在模块');
+        }
+        return $module;
     }
 
     /**
      * 权限检测
-     * @return boolean
+     * @param Site $site
+     * @param Module $module
+     * @return bool
+     * @throws HttpException
+     * @throws NotFoundHttpException
      */
-    protected function check(): bool
+    protected function check(Site $site, Module $module): bool
     {
         //站点模块检测
-        if (!ModuleService::siteModules(site())->contains('name', module()['name'])) {
-            return false;
+        if (ModuleService::siteHasModule($site, $module) === false) {
+            abort(404, '站点不存在模块');
         }
         //超级管理员与站长检测
-        if (Auth::user()->isSuperAdmin || UserService::isMaster(site(), Auth::user())) {
+        if (UserService::isMaster($site, Auth::user())) {
             return true;
         }
         //管理员检测
-        return UserService::isAdmin(site(), Auth::user())
-            && PermissionService::checkModulePermission(site(), module());
+        if (UserService::isAdmin($site, Auth::user()) && PermissionService::checkModulePermission($site, $module)) {
+            return true;
+        }
+        abort(403, '没有模块管理权限');
     }
 }

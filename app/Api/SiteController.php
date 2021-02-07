@@ -2,13 +2,11 @@
 
 namespace App\Api;
 
-use App\Http\Resources\ModuleResource;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SiteResource;
 use App\Http\Requests\SiteRequest;
 use Illuminate\Http\Request;
 use App\Models\Site;
-use PermissionService;
 use ConfigService;
 use CodeService;
 use Exception;

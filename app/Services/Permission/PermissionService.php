@@ -7,6 +7,9 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Collection;
 use App\Models\Module;
 use App\Models\User;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Eloquent\InvalidCastException;
+use LogicException;
 use ModuleService;
 use UserService;
 
@@ -22,7 +25,10 @@ class PermissionService
      * @param Module $module
      * @param User $user
      * @param string $permission
-     * @return boolean
+     * @return bool
+     * @throws InvalidCastException
+     * @throws LogicException
+     * @throws BindingResolutionException
      */
     public function access(Site $site, Module $module, User $user, string $permission): bool
     {
@@ -34,11 +40,12 @@ class PermissionService
 
     /**
      * 完整权限标识
-     *
      * @param Site $site
      * @param Module $module
      * @param string $name
      * @return string
+     * @throws InvalidCastException
+     * @throws LogicException
      */
     public function permissionName(Site $site, Module $module, string $name): string
     {
@@ -50,7 +57,9 @@ class PermissionService
      * @param Site $site
      * @param Module $module
      * @param User $user
-     * @return boolean
+     * @return bool
+     * @throws InvalidCastException
+     * @throws LogicException
      */
     public function checkUserModuleAccess(Site $site, Module $module, User $user): bool
     {
@@ -109,6 +118,8 @@ class PermissionService
      * @param Site $site
      * @param Module $module
      * @return array
+     * @throws InvalidCastException
+     * @throws LogicException
      */
     public function formatSiteModulePermissions(Site $site, Module $module): array
     {

@@ -8,7 +8,11 @@ use ModuleService;
 use ConfigService;
 use SiteService;
 use Closure;
-
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
+use Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * 模块后台管理中间件
@@ -19,12 +23,17 @@ class ModuleMiddleware
     public function handle($request, Closure $next)
     {
         $this->init();
-        $this->check();
         return $next($request);
     }
+
     /**
      * 站点初始化
      * @return void
+     * @throws BindingResolutionException
+     * @throws SuspiciousOperationException
+     * @throws ConflictingHeadersException
+     * @throws HttpException
+     * @throws NotFoundHttpException
      */
     protected function init()
     {
@@ -37,13 +46,16 @@ class ModuleMiddleware
         $module = $this->module($site);
         ModuleService::cache($module);
         ConfigService::module($site, $module);
-
-        return true;
     }
 
     /**
      * 站点
-     * @return void
+     * @return Site
+     * @throws BindingResolutionException
+     * @throws SuspiciousOperationException
+     * @throws ConflictingHeadersException
+     * @throws HttpException
+     * @throws NotFoundHttpException
      */
     protected function site(): Site
     {
@@ -51,31 +63,28 @@ class ModuleMiddleware
         if (is_numeric($site)) {
             $site = Site::findOrFail($site);
         }
-        $site = $site ?: SiteService::getByDomain();
-        return $site ?: abort(404);
+        $site = $site instanceof Site ? $site : SiteService::getByDomain();
+        if ($site instanceof Site) {
+            return $site;
+        }
+        abort(404, '站点不存在');
     }
 
     /**
      * 模块
      * @param Site $site
      * @return Module
+     * @throws BindingResolutionException
+     * @throws HttpException
+     * @throws NotFoundHttpException
      */
     protected function module(Site $site): Module
     {
-        $module = ModuleService::getByDomain();
-        if (!$module) {
-            $module = $site->module;
-        }
-        if (!$module) {
-            abort(404);
-        }
-        return $module;
-    }
-
-    protected function check()
-    {
+        $module = ModuleService::getByDomain() ?? $site->module;
         //站点模块检测
-        $exist = ModuleService::siteModules(site())->contains('name', module()['name']);
-        if (!$exist) abort(404, '站点不存在模块');
+        if (ModuleService::siteHasModule($site, $module)) {
+            return $module;
+        }
+        abort(404, '模块不存在');
     }
 }

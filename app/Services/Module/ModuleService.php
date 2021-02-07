@@ -29,16 +29,25 @@ class ModuleService
 
     /**
      * 根据域名获取模块
-     * @return void
+     * @return Module
      */
-    public function getByDomain()
+    public function getByDomain(): ?Module
     {
         $path = parse_url(request()->url())['path'] ?? '';
         $path = preg_replace('/\/api/', '', $path);
-        if ($path) {
-            preg_match('/^\/(.*?)\/\d+/i', $path, $matches);
-            return Module::where('name', $matches[1])->first();
-        }
+        preg_match('/^\/(.*?)\/\d+/i', $path, $matches);
+        return Module::where('name', $matches[1] ?? '')->first();
+    }
+
+    /**
+     * 站点模块检测
+     * @param Site $site
+     * @param Module $module
+     * @return boolean
+     */
+    public function siteHasModule(Site $site, Module $module): bool
+    {
+        return (bool)$this->siteModules($site)->contains('name', $module['name']);
     }
 
     /**
@@ -69,7 +78,8 @@ class ModuleService
      */
     public function siteModules(Site $site): Collection
     {
-        return $site->master->group->modules->map(function ($module) use ($site) {
+        $user = User::find($site->user_id);
+        return $user->group->modules->map(function ($module) use ($site) {
             $module['permissions'] =
                 PermissionService::formatSiteModulePermissions($site, $module);
             return $module;

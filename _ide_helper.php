@@ -14701,6 +14701,17 @@
                         return $instance->cache($module);
         }
                     /**
+         * 根据域名获取模块
+         *
+         * @return \Module 
+         * @static 
+         */ 
+        public static function getByDomain()
+        {
+                        /** @var \App\Services\Module\ModuleService $instance */
+                        return $instance->getByDomain();
+        }
+                    /**
          * 系统中所有模块
          * 包括安装与未安装的
          *
@@ -14713,7 +14724,19 @@
                         return $instance->all();
         }
                     /**
-         * 用户可用模块
+         * 站点模块列表
+         *
+         * @param \App\Services\Module\Site $site
+         * @return \App\Services\Module\Collection 
+         * @static 
+         */ 
+        public static function siteModules($site)
+        {
+                        /** @var \App\Services\Module\ModuleService $instance */
+                        return $instance->siteModules($site);
+        }
+                    /**
+         * 用户可用的站点模块
          *
          * @param \App\Services\Module\Site $site
          * @param \App\Services\Module\User $user
@@ -14816,6 +14839,46 @@
                         return $instance->access($site, $module, $user, $permission);
         }
                     /**
+         * 完整权限标识
+         *
+         * @param \App\Services\Permission\Site $site
+         * @param \Module $module
+         * @param string $name
+         * @return string 
+         * @static 
+         */ 
+        public static function permissionName($site, $module, $name)
+        {
+                        /** @var \App\Services\Permission\PermissionService $instance */
+                        return $instance->permissionName($site, $module, $name);
+        }
+                    /**
+         * 用户是否可使用站点的模块
+         *
+         * @param \App\Services\Permission\Site $site
+         * @param \Module $module
+         * @param \App\Services\Permission\User $user
+         * @return boolean 
+         * @static 
+         */ 
+        public static function checkUserModuleAccess($site, $module, $user)
+        {
+                        /** @var \App\Services\Permission\PermissionService $instance */
+                        return $instance->checkUserModuleAccess($site, $module, $user);
+        }
+                    /**
+         * 站点权限列表
+         *
+         * @param \App\Services\Permission\Site $site
+         * @return \App\Services\Permission\Collection 
+         * @static 
+         */ 
+        public static function sitePermissions($site)
+        {
+                        /** @var \App\Services\Permission\PermissionService $instance */
+                        return $instance->sitePermissions($site);
+        }
+                    /**
          * 同步站点权限到权限表
          *
          * @param \App\Services\Permission\Site $site
@@ -14840,44 +14903,17 @@
                         $instance->delInvalidSitePermissions($site);
         }
                     /**
-         * 站点权限列表
-         *
-         * @param \App\Services\Permission\Site $site
-         * @return \App\Services\Permission\Collection 
-         * @static 
-         */ 
-        public static function sitePermissions($site)
-        {
-                        /** @var \App\Services\Permission\PermissionService $instance */
-                        return $instance->sitePermissions($site);
-        }
-                    /**
-         * 完整权限标识
+         * 权限标识添加站点前缀
          *
          * @param \App\Services\Permission\Site $site
          * @param \Module $module
-         * @param string $name
-         * @return string 
+         * @return array 
          * @static 
          */ 
-        public static function permissionName($site, $module, $name)
+        public static function formatSiteModulePermissions($site, $module)
         {
                         /** @var \App\Services\Permission\PermissionService $instance */
-                        return $instance->permissionName($site, $module, $name);
-        }
-                    /**
-         * 用户是否可使用模块
-         *
-         * @param \App\Services\Permission\Site $site
-         * @param \Module $module
-         * @param \App\Services\Permission\User $user
-         * @return boolean 
-         * @static 
-         */ 
-        public static function checkUserModuleAccess($site, $module, $user)
-        {
-                        /** @var \App\Services\Permission\PermissionService $instance */
-                        return $instance->checkUserModuleAccess($site, $module, $user);
+                        return $instance->formatSiteModulePermissions($site, $module);
         }
          
     }
@@ -15056,16 +15092,16 @@
                         $instance->local($file);
         }
                     /**
-         * 云上传
+         * 阿里云OSS上传
          *
          * @param \App\Services\Upload\UploadedFile $file
          * @return \App\Services\Upload\Attachment 
          * @static 
          */ 
-        public static function make($file)
+        public static function oss($file)
         {
                         /** @var \App\Services\Upload\UploadService $instance */
-                        return $instance->make($file);
+                        return $instance->oss($file);
         }
          
     }
