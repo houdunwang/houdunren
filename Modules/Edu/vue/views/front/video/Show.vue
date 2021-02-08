@@ -68,7 +68,7 @@
 <script>
 import Player from 'xgplayer'
 export default {
-    route: { path: `video/:id/show` },
+    route: { path: `video/:id/show`, meta: { auth: true } },
     data() {
         return {
             loading: true,

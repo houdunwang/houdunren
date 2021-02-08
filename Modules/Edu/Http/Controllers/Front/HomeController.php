@@ -18,8 +18,8 @@ class HomeController extends Controller
      * 前台首页
      * @return void
      */
-    public function index(Site $site, Module $module)
+    public function index()
     {
-        return view('edu::app', compact('site', 'module'));
+        return view('edu::app');
     }
 }

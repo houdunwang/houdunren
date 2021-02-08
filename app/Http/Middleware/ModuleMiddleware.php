@@ -39,11 +39,12 @@ class ModuleMiddleware
     {
         //站点
         $site = $this->site();
+        defined("SID") or define("SID", $site['id']);
         SiteService::cache($site);
         ConfigService::site($site);
-        define("SID", $site['id']);
         //模块
         $module = $this->module($site);
+        defined("MID") or define("MID", $module['id']);
         ModuleService::cache($module);
         ConfigService::module($site, $module);
     }

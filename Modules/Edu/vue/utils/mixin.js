@@ -1,19 +1,15 @@
 import store from '../store'
-import Auth from '../utils/Auth'
 import router from '../router'
 const mixin = {
     computed: {
         user() {
-            return Auth.user()
+            return window.user
         },
         module() {
-            return store.state.module
+            return window.module
         },
         site() {
-            return store.state.site
-        },
-        Auth() {
-            return Auth
+            return window.module
         }
     },
     methods: {
@@ -24,7 +20,7 @@ const mixin = {
             return store.getters.errors(name)
         },
         isLogin() {
-            return Boolean(window.localStorage.getItem('token'))
+            return window.user.id
         },
         logout() {
             window.localStorage.removeItem('token')
