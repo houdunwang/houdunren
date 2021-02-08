@@ -20,6 +20,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('edu::app');
+        return view('edu::front');
     }
 }

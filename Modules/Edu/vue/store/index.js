@@ -6,7 +6,7 @@ export default new Vuex.Store({
         errors: {},
         site: window.site,
         module: window.module,
-        user: {}
+        user: window.user
     },
     getters: {
         errors: state => name => {

@@ -31,7 +31,7 @@
                         <el-image :src="user.avatar" fit="cover" class="w-8 h-8"></el-image>
                         <div class="d-none d-xl-block ps-2">
                             <div>{{ user.name }}</div>
-                            <div class="mt-1 small text-muted">注册于{{ Auth.user().created_at | fromNow }}</div>
+                            <div class="mt-1 small text-muted">注册于{{ user.created_at | fromNow }}</div>
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">

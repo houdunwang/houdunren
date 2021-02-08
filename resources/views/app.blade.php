@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- tabler --}}
     <link href="/tabler/dist/css/tabler.min.css?1611412966" rel="stylesheet" />
     <link href="/tabler/dist/css/tabler-flags.min.css?1611412966" rel="stylesheet" />

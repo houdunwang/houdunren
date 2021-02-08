@@ -13,12 +13,13 @@
 export default {
     data() {
         return {
-            form: this.$store.state.user
+            form: Object.assign({}, this.$store.state.user)
         }
     },
     watch: {
-        'form.avatar'(n) {
-            this.axios.put(`user/${this.form.id}`, this.form)
+        async 'form.avatar'(n) {
+            await this.axios.put(`user/${this.form.id}`, this.form)
+            this.$store.commit('setUser', this.form)
         }
     }
 }

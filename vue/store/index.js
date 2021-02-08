@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         errors: {},
-        user: {},
+        user: window.user,
         //系统配置
         config: {}
     },

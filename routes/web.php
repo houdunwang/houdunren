@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Module;
 use App\Models\Site;
@@ -17,12 +18,9 @@ Route::get("admin/{site}/{module}", function (Site $site, Module $module) {
     return redirect("/{$module['name']}/admin");
 })->middleware('auth:sanctum');
 
-//登录注册
-Route::get('{app}/{path?}', function () {
-    return view('app', ['site' => site(), 'module' => module()]);
-})->where('app', 'login|register|forget|member')->where('path', '.*')->middleware('module');
+//登录
+Route::post('login', [AuthController::class, 'login']);
 
-//系统业务
 Route::fallback(function () {
     return view('app');
-});
+})->middleware(['module']);

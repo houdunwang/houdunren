@@ -40,11 +40,10 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                            <el-image :src="Auth.user().avatar" fit="cover" class="w-8 h-8"></el-image>
-
+                            <el-image :src="user.avatar" fit="cover" class="w-8 h-8"></el-image>
                             <div class="d-none d-xl-block ps-2">
                                 <div>{{ user.name }}</div>
-                                <div class="mt-1 small text-muted">注册于{{ Auth.user().created_at | fromNow }}</div>
+                                <div class="mt-1 small text-muted">注册于{{ user.created_at | fromNow }}</div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -60,7 +59,7 @@
         <div class="container-xl mt-3 md:flex">
             <div class="md:w-2/12 mb-2">
                 <div class="border bg-white hidden md:block">
-                    <img :src="Auth.user().avatar" class="w-full object-cover cursor-pointer" @click="$router.push({ name: 'member.info.avatar' })" />
+                    <img :src="user.avatar" class="w-full object-cover cursor-pointer" @click="$router.push({ name: 'member.info.avatar' })" />
                     <div class="text-gray-800 mx-3 py-4  border-b border-gray-200">{{ user.name }}</div>
                     <div class="my-4 mx-3 flex justify-between text-gray-500">
                         <i class="fa fa-envelope" :class="{ 'text-info': user.email }"></i>
