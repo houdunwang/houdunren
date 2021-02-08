@@ -3,20 +3,19 @@ import el from 'element-ui'
 import axios from 'axios'
 import Vue from 'vue'
 import store from '../store'
-import router from '../router'
 // axios.defaults.withCredentials = true
 // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-const _axios = axios.create({ baseURL: `/api/${window.module.name}/${store.state.site.id}`, timeout: 5000 })
+const _axios = axios.create({ baseURL: '/api/Edu', timeout: 5000 })
 window.axios = Vue.axios = Vue.prototype.axios = _axios
 
 //请求拦截
 _axios.interceptors.request.use(
     function(config) {
-        const token = store.getters.token
         if (config.url[0] == '/') config.baseURL = ''
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`
-        }
+        // const token = store.getters.token
+        // if (token) {
+        //     config.headers.Authorization = `Bearer ${token}`
+        // }
         return config
     },
     function(error) {

@@ -29,6 +29,7 @@ class User extends Authenticatable
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
+        'credit1', 'credit2', 'credit3', 'credit4', 'credit5', 'credit6'
     ];
 
     protected $casts = [
@@ -56,7 +57,7 @@ class User extends Authenticatable
      */
     public function getGenderAttribute()
     {
-        return [1 => '男', 2 => '女'][$this->sex];
+        return [1 => '男', 2 => '女'][$this->sex ?? 1];
     }
 
     /**

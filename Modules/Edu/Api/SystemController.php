@@ -25,7 +25,7 @@ class SystemController extends Controller
     public function index()
     {
         $lessons = System::latest()->paginate(10);
-        return $lessons;
+        return SystemLessonResource::collection($lessons);
     }
 
     public function store(SystemLessonRequest $request, System $system)
@@ -44,9 +44,9 @@ class SystemController extends Controller
      * @param System $system
      * @return void
      */
-    public function show(Site $site, System $system)
+    public function show(System $system)
     {
-        return new SystemLessonResource($system);
+        return new SystemLessonResource($system->load('lessons'));
     }
 
     /**
@@ -55,7 +55,7 @@ class SystemController extends Controller
      * @param System $system
      * @return void
      */
-    public function update(SystemLessonRequest $request, Site $site, System $system)
+    public function update(SystemLessonRequest $request, System $system)
     {
         $system->fill($request->input())->save();
         $this->updateLesson($system, $request);

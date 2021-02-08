@@ -24,7 +24,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::where('site_id', site()['id'])->get();
+        $tags = Tag::where('site_id', SID)->get();
         return $tags;
     }
 

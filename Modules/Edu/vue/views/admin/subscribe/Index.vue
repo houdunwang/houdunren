@@ -10,7 +10,7 @@
             </el-table-column>
             <el-table-column width="150" #default="{row:subscribe}">
                 <el-button-group>
-                    <el-button type="primary" size="mini" @click="route('admin.subscribe.edit', { id: subscribe.id })">编辑</el-button>
+                    <el-button type="primary" size="mini" @click="router('admin.subscribe.edit', { id: subscribe.id })">编辑</el-button>
                     <el-button type="danger" size="mini" @click="del(subscribe)">删除</el-button>
                 </el-button-group>
             </el-table-column>

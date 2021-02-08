@@ -11,14 +11,14 @@
                     <hd-error name="title" />
                 </el-form-item>
                 <el-form-item label="课程上架">
-                    <el-radio-group v-model="form.status" size="mini">
+                    <!-- <el-radio-group v-model="form.status" size="mini">
                         <el-radio-button :label="true">
                             上架
                         </el-radio-button>
                         <el-radio-button :label="false">
                             下架
                         </el-radio-button>
-                    </el-radio-group>
+                    </el-radio-group> -->
                 </el-form-item>
                 <el-form-item label="推荐课程">
                     <el-checkbox v-model="form.is_commend" :label="true">推荐</el-checkbox>
@@ -55,7 +55,7 @@
                     标签选择
                 </div>
                 <el-checkbox-group v-model="form.tags" size="mini" :max="5">
-                    <el-checkbox-button v-for="tag in tags" :key="tag.id" :label="tag.id">
+                    <el-checkbox-button v-for="tag in tags" :key="tag.id" :label="tag.id" class="">
                         {{ tag.title }}
                     </el-checkbox-button>
                 </el-checkbox-group>
@@ -115,14 +115,14 @@ export default {
     props: ['id'],
     data() {
         return {
-            tags: [],
             tabs,
-            form
+            form,
+            tags: []
         }
     },
     async created() {
         this.tags = await this.axios.get(`tag`)
-        if (this.id) this.form = await this.axios.get(`lesson/${this.id}`)
+        if (this.id) this.form = Object.assign(form, await this.axios.get(`lesson/${this.id}`))
     },
     methods: {
         async onSubmit() {

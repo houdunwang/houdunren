@@ -22,7 +22,7 @@ const mixin = {
             return store.getters.errors(name)
         },
         isLogin() {
-            return Boolean(window.localStorage.getItem('token'))
+            return store.state.user.id
         },
         logout() {
             window.localStorage.removeItem('token')

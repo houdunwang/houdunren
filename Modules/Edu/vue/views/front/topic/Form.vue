@@ -1,0 +1,42 @@
+<template>
+    <div class="card">
+        <div class="card-header h-14">
+            {{ id ? '编辑贴子' : '发表贴子' }}
+        </div>
+        <div class="card-body">
+            <el-input v-model="form.title" placeholder="请输入贴子标题" size="normal" clearable></el-input>
+            <hd-error name="title" />
+            <tags v-model="form.tags" />
+            <hd-error name="tags" />
+            <hd-tui-editor v-model="form.content" initialEditType="markdown" class="border" :action="`/upload/site/${site.id}`" />
+            <hd-error name="content" />
+        </div>
+        <div class="card-footer text-muted">
+            <button class="btn btn-azure" @click="onSubmit">保存提交</button>
+        </div>
+    </div>
+</template>
+
+<script>
+const form = { title: '', content: '', tags: [] }
+export default {
+    route: false,
+    props: ['id'],
+    data() {
+        return {
+            form
+        }
+    },
+    methods: {
+        async onSubmit() {
+            if (this.form.tags.length == 0) {
+                return this.$message('选择一个标签吧')
+            }
+            await this.axios.post(`topic`, this.form)
+            this.router('front.topic.index')
+        }
+    }
+}
+</script>
+
+<style></style>

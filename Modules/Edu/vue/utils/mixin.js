@@ -17,7 +17,7 @@ const mixin = {
         }
     },
     methods: {
-        route(name, params = {}) {
+        router(name, params = {}) {
             router.push({ name, params })
         },
         errors(name) {

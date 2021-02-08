@@ -14,8 +14,7 @@ use SiteService;
 class Module extends Model
 {
     protected $fillable = ['title', 'name', 'version', 'description', 'author'];
-
-    protected $appends = ['preview', 'config', 'menus'];
+    protected $appends = ['preview'];
 
     /**
      * 模块菜单

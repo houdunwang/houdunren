@@ -31,7 +31,8 @@ class LessonController extends Controller
      */
     public function index()
     {
-        return Lesson::where('site_id', SID)->latest()->paginate(10);
+        $lessons = Lesson::where('site_id', SID)->latest()->paginate(12);
+        return LessonResource::collection($lessons);
     }
 
     /**
@@ -39,9 +40,9 @@ class LessonController extends Controller
      * @param Lesson $lesson
      * @return void
      */
-    public function show(Site $site, Lesson $lesson)
+    public function show(Lesson $lesson)
     {
-        return new LessonResource($lesson);
+        return new LessonResource($lesson->load('videos'));
     }
 
     /**
@@ -71,7 +72,7 @@ class LessonController extends Controller
      * @param Lesson $lesson
      * @return void
      */
-    public function update(LessonRequest $request, Site $site, Lesson $lesson)
+    public function update(LessonRequest $request, Lesson $lesson)
     {
         DB::beginTransaction();
         $lesson->fill($request->except(['file', 'tags', 'videos']))->save();

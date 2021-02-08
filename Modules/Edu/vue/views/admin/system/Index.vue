@@ -10,7 +10,7 @@
             </el-table-column>
             <el-table-column width="150" #default="{row:lesson}">
                 <el-button-group>
-                    <el-button type="primary" size="mini" @click="route('admin.system.edit', { id: lesson.id })">编辑</el-button>
+                    <el-button type="primary" size="mini" @click="router('admin.system.edit', { id: lesson.id })">编辑</el-button>
                     <el-button type="danger" size="mini" @click="del(lesson)">删除</el-button>
                 </el-button-group>
             </el-table-column>

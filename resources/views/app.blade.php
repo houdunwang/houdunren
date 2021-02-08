@@ -12,20 +12,17 @@
     <link href="/tabler/dist/css/tabler-vendors.min.css?1611412966" rel="stylesheet" />
     <link href="/tabler/dist/css/demo.min.css?1611412966" rel="stylesheet" />
     {{-- tabler end --}}
-    {{-- <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.15.2/css/all.min.css">
-
     <link rel="stylesheet" href="/css/app.css" />
+    <script>
+        window.uid = @json(Auth::id());
+    </script>
     <script src="/js/app.js" defer></script>
 </head>
 
 <body>
-    <div id="app">
-
-    </div>
-    <!-- Libs JS -->
+    <div id="app"></div>
     <script src="/tabler/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js?1611412966"></script>
-    <!-- Tabler Core -->
     <script src="/tabler/dist/js/tabler.min.js?1611412966"></script>
 </body>
 

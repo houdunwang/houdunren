@@ -7,7 +7,6 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Edu\Entities\Subscribe;
 use Modules\Edu\Http\Requests\SubscribeRequest;
-use App\Models\Site;
 
 /**
  * 会员订阅管理
@@ -36,7 +35,7 @@ class SubscribeController extends Controller
      * @param Subscribe $subscribe
      * @return void
      */
-    public function store(SubscribeRequest $request, Site $site, Subscribe $subscribe)
+    public function store(SubscribeRequest $request, Subscribe $subscribe)
     {
         $subscribe->fill($request->input() + [
             'site_id' => site()['id']
@@ -50,7 +49,7 @@ class SubscribeController extends Controller
      * @param Subscribe $subscribe
      * @return void
      */
-    public function show(Request $request, Site $site, Subscribe $subscribe)
+    public function show(Request $request,  Subscribe $subscribe)
     {
         return $subscribe;
     }
@@ -61,7 +60,7 @@ class SubscribeController extends Controller
      * @param Subscribe $subscribe
      * @return void
      */
-    public function update(SubscribeRequest $request, Site $site, Subscribe $subscribe)
+    public function update(SubscribeRequest $request, Subscribe $subscribe)
     {
         $subscribe->fill($request->input());
         $subscribe->save();
@@ -73,7 +72,7 @@ class SubscribeController extends Controller
      * @param Subscribe $subscribe
      * @return void
      */
-    public function destroy(Site $site, Subscribe $subscribe)
+    public function destroy(Subscribe $subscribe)
     {
         $subscribe->delete();
         return ['message' => '套餐删除成功'];

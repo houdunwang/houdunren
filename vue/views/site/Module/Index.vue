@@ -22,7 +22,7 @@
                     </div>
                     <div class="border-t border-gray-200 w-full flex justify-center bg-gray-100 py-3">
                         <el-button type="primary" size="mini">
-                            <a :href="`/${module.name}/${site.id}/admin`" class="text-white">
+                            <a :href="`/admin/${site.id}/${module.id}`" class="text-white">
                                 管理模块
                             </a>
                         </el-button>

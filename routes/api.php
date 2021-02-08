@@ -51,7 +51,7 @@ Route::post('site/{site}/sms', [SiteController::class, 'sms']);
 Route::apiResource('site', SiteController::class);
 //模块
 Route::get('module/group/{group}', [ModuleController::class, 'group']);
-Route::get('module/site/{site}/user/{user}', [ModuleController::class, 'userSiteModules']);
+Route::get('module/site/user', [ModuleController::class, 'userSiteModules']);
 Route::apiResource('module', ModuleController::class);
 //角色
 Route::apiResource('site.role', RoleController::class);

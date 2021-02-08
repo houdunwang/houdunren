@@ -31,7 +31,7 @@ class ConfigController extends Controller
      * @param Site $site
      * @return void
      */
-    public function update(Request $request, Site $site)
+    public function update(Request $request)
     {
         ConfigService::saveModuleConfig($request->input());
         return ['message' => '配置文件修改成功'];

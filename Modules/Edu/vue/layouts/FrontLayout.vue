@@ -1,9 +1,7 @@
 <template>
     <div class="page">
         <top-menu />
-        <div class="container-xl mt-16">
-            <router-view />
-        </div>
+        <router-view />
         <hd-footer />
     </div>
 </template>

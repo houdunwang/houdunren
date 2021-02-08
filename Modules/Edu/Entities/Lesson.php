@@ -21,7 +21,9 @@ class Lesson extends BaseModel
 
     protected $table = 'edu_lessons';
 
-    protected $guarded = [];
+    protected $fillable = [
+        'site_id', 'user_id', 'title', 'description', 'thumb', 'type', 'status', 'free_num', 'price', 'is_commend', 'video_num', 'download_address', 'read_num', 'comment_num', 'favour_count', 'favorite_count'
+    ];
 
     protected $casts = [
         'status' => 'boolean',
