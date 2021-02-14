@@ -46,7 +46,9 @@ export default {
         del(lesson) {
             this.$confirm('确定删除吗', '温馨提示').then(async () => {
                 await this.axios.delete(`system/${lesson.id}`)
-                this.lessons.splice(this.lessons.indexOf(lesson), 1)
+                console.log(this.lessons)
+
+                this.lessons.data.splice(this.lessons.data.indexOf(lesson), 1)
             })
         }
     }

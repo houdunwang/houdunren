@@ -22,7 +22,7 @@
                     </div>
                     <div class="border-t border-gray-200 w-full flex justify-center bg-gray-100 py-3">
                         <el-button type="primary" size="mini">
-                            <a :href="`/admin/${site.id}/${module.id}`" class="text-white">
+                            <a href="#" class="text-white" @click.prevent="admin(module)">
                                 管理模块
                             </a>
                         </el-button>
@@ -48,9 +48,15 @@ export default {
     },
     async created() {
         this.site = await this.axios.get(`site/${this.$route.params.sid}`)
-        this.modules = await this.axios.get(`module/site/${this.site.id}/user/${this.user.id}`)
-        window.localStorage.setItem('site_id', this.site.id)
+        this.modules = await this.axios.get(`module/site/${this.site.id}/user`)
         this.loading = false
+    },
+    methods: {
+        admin(module) {
+            window.localStorage.setItem('sid', this.site.id)
+            window.localStorage.setItem('mid', module.id)
+            location.href = `/admin/${this.site.id}/${module.id}`
+        }
     }
 }
 </script>

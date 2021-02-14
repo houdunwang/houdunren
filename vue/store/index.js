@@ -17,9 +17,6 @@ export default new Vuex.Store({
         user: state => {
             return state.user
         }
-        // token() {
-        //     return window.localStorage.getItem('token') || null
-        // }
     },
     mutations: {
         setErrors(state, errors = {}) {

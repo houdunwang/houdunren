@@ -12,14 +12,13 @@ use App\Models\Site;
 
 /**
  * 系统课程管理
- * @package Modules\Edu\Http\Controllers\Admin
+ * @package Modules\Edu\Http\Controllers
  */
 class SystemController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'admin'])->except(['index', 'show']);
-        $this->middleware(['module'])->only(['index', 'show']);
+        $this->middleware(['auth:sanctum', 'admin']);
     }
 
     public function index()

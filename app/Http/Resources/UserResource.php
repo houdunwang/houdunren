@@ -16,7 +16,7 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'is_super_admin' => $this->isSuperAdmin,
+            'isSuperAdmin' => $this->isSuperAdmin,
             'name' => $this->name ?: '盾友',
             'avatar' => $this->icon,
             'permissions' => $this->permissions,

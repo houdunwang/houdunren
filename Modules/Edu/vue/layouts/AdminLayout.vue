@@ -15,7 +15,7 @@
                 <div class="navbar-nav flex-row d-lg-none">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                            <el-image :src="Auth.user().avatar" fit="cover" class="w-8 h-8"></el-image>
+                            <el-image :src="user.avatar" fit="cover" class="w-8 h-8"></el-image>
                             <div class="d-none d-xl-block ps-2">
                                 <div>Paweł Kuna!!</div>
                                 <div class="mt-1 small text-muted">UI Designer</div>
@@ -64,10 +64,10 @@
                 <div class="navbar-nav flex-row order-md-last">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                            <el-image :src="Auth.user().avatar" fit="cover" class="w-8 h-8"></el-image>
+                            <el-image :src="user.avatar" fit="cover" class="w-8 h-8"></el-image>
                             <div class="d-none d-xl-block ps-2">
                                 <div>{{ user.name }}</div>
-                                <div class="mt-1 small text-muted">注册于{{ Auth.user().created_at | fromNow }}</div>
+                                <div class="mt-1 small text-muted">注册于{{ user.created_at | fromNow }}</div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -81,9 +81,9 @@
                     <div>
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="/">
-                                    <span class="nav-link-icon d-md-none d-lg-inline-block"
-                                        ><svg
+                                <a class="nav-link" href="/" target="_blank">
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             class="icon"
                                             width="24"
@@ -189,7 +189,7 @@
                                 <div class="dropdown-menu">
                                     <div class="dropdown-menu-columns">
                                         <div class="dropdown-menu-column grid grid-cols-2 w-80">
-                                            <a class="dropdown-item" :href="`/${module.name}/${site.id}/admin`" v-for="module in modules" :key="module.id">
+                                            <a class="dropdown-item" :href="`/admin/${site.id}/${module.id}`" v-for="module in modules" :key="module.id">
                                                 {{ module.title }}
                                             </a>
                                         </div>
@@ -219,7 +219,7 @@ export default {
         }
     },
     async created() {
-        this.modules = await this.axios.get(`/api/module/site/user`)
+        this.modules = await this.axios.get(`/api/module/site/${this.site.id}/user`)
     }
 }
 </script>

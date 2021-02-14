@@ -3,13 +3,16 @@ import router from '../router'
 const mixin = {
     computed: {
         user() {
-            return window.user
+            return store.state.user
         },
         module() {
-            return window.module
+            return store.state.module
         },
         site() {
-            return window.module
+            return store.state.site
+        },
+        isLogin() {
+            return window.localStorage.getItem('token')
         }
     },
     methods: {
@@ -19,12 +22,10 @@ const mixin = {
         errors(name) {
             return store.getters.errors(name)
         },
-        isLogin() {
-            return window.user.id
-        },
-        logout() {
+        async logout() {
+            await this.axios.get(`logout`)
             window.localStorage.removeItem('token')
-            location.href = '/'
+            location.href = '/admin'
         }
     }
 }

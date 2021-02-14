@@ -34,7 +34,7 @@ _axios.interceptors.response.use(
         let { status, data } = error.response
         switch (status) {
             case 422:
-                //     store.commit('setErrors', data)
+                // store.commit('setErrors', data)
                 break
             default:
                 el.MessageBox.confirm(data.message || httpStatus(status), '温馨提示', {

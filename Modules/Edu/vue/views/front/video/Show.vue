@@ -57,7 +57,7 @@
                         课程列表
                     </div>
                     <div class="card-body">
-                        <video-list :videos="lesson.videos" />
+                        <video-list :videos="lesson.videos" :id="$route.params.id" />
                     </div>
                 </div>
             </div>

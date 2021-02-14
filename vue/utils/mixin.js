@@ -1,15 +1,14 @@
 import store from '../store'
-// import Auth from '../utils/Auth'
 import router from '../router'
 import { MessageBox } from 'element-ui'
 const mixin = {
     computed: {
         user() {
             return store.state.user
+        },
+        isLogin() {
+            return store.state.user.id
         }
-        // Auth() {
-        //     return Auth
-        // }
     },
     methods: {
         async confirm(message, promise) {
@@ -21,12 +20,10 @@ const mixin = {
         errors(name) {
             return store.getters.errors(name)
         },
-        isLogin() {
-            return store.state.user.id
-        },
-        logout() {
-            // window.localStorage.removeItem('token')
-            location.href = '/'
+        async logout() {
+            await this.axios.get(`logout`)
+            window.localStorage.removeItem('token')
+            location.href = '/admin'
         }
     }
 }

@@ -21,7 +21,7 @@
                     <div class="card-footer text-muted bg-white flex flex-col md:flex-row justify-between">
                         <div class="text-sm text-gray-500">
                             # {{ site.id }} 创建时间: {{ site.created_at | format }} 站长: {{ site.master.name }} 所属组:
-                            <router-link :to="{ name: 'system.group.index' }" v-if="Auth.isSuperAdmin()"> {{ site.master.group.title }} </router-link>
+                            <router-link :to="{ name: 'system.group.index' }" v-if="user.isSuperAdmin"> {{ site.master.group.title }} </router-link>
                             <span v-else>{{ site.master.group.title }}</span>
                             <span v-if="site.module"> 默认模块: {{ site.module.title }} </span>
                         </div>

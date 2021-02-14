@@ -18,7 +18,7 @@
             <router-link
                 to="/system/index"
                 class="bg-white border rounded-lg shadow-md box-border px-4 py-2 flex flex-col justify-center items-center opacity-75 duration-500 hover:opacity-100"
-                v-if="user.is_super_admin"
+                v-if="user.isSuperAdmin"
             >
                 <i class="text-2xl far fa-life-ring" aria-hidden="true"></i>
                 <span class="text-sm">系统设置</span>

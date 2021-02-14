@@ -8,6 +8,9 @@
 	},
 	{
 		"path": "Modules/Edu"
+	},
+	{
+		"path": "Modules/Edu/vue"
 	}
 ],
   "settings": {

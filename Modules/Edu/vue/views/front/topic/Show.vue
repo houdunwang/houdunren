@@ -2,7 +2,7 @@
     <div class="container-xl mt-16">
         <div class="md:flex topic-show">
             <div class="card md:w-9/12 md:mr-5 mb-5" v-loading="loading">
-                <div class="card-header flex flex-col items-start px-14 py-14 leading-9 text-xl font-weight-lighter ">
+                <div class="card-header flex flex-col items-start px-14 py-10 leading-9 text-xl font-weight-lighter ">
                     {{ form.title }}
                     <div class="text-sm text-gray-500 mt-5 ">{{ form.user.name }} 更新于{{ form.updated_at | fromNow }}</div>
                 </div>

@@ -7,7 +7,7 @@
                 <el-button type="danger" size="mini" @click="del(lesson)">删除</el-button>
             </el-button-group>
         </lesson>
-        <el-pagination class="mt-3" :current-page="lessons.current_page" @current-change="currentChange" :total="lessons.total" background> </el-pagination>
+        <el-pagination class="mt-3" @current-change="currentChange" :page-size="12" :total="lessons.meta.total" background> </el-pagination>
     </div>
 </template>
 
@@ -21,10 +21,10 @@ export default {
         }
     },
     async created() {
-        this.lessons = await this.axios.get('lesson')
+        this.lessons = this.currentChange()
     },
     methods: {
-        async currentChange(page) {
+        async currentChange(page = 1) {
             this.lessons = await this.axios.get(`lesson?page=${page}`)
         },
         del(lesson) {

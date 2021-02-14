@@ -8,14 +8,13 @@ use Modules\Edu\Entities\Tag;
 
 /**
  * 标签管理
- * @package Modules\Edu\Http\Controllers\Admin
+ * @package Modules\Edu\Http\Controllers
  */
 class TagController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
-        $this->middleware(['admin']);
+        $this->middleware(['auth:sanctum', 'admin']);
     }
 
     /**

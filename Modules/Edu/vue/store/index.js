@@ -25,11 +25,23 @@ export default new Vuex.Store({
         },
         setUser(state, user) {
             state.user = user
+        },
+        setSite(state, site) {
+            state.site = site
+        },
+        setModule(state, module) {
+            state.module = module
         }
     },
     actions: {
         async getUser({ commit }) {
             commit('setUser', await axios.get(`/api/user/info`))
+        },
+        async getModule({ commit }) {
+            commit('setModule', await axios.get(`/api/module/${window.localStorage.getItem('mid')}`))
+        },
+        async getSite({ commit }) {
+            commit('setSite', await axios.get(`/api/site/${window.localStorage.getItem('sid')}`))
         }
     }
 })

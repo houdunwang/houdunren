@@ -9,6 +9,7 @@ use App\Models\Module;
 use App\Models\Group;
 use ModuleService;
 use Auth;
+use App\Models\Site;
 
 /**
  * 模块管理
@@ -18,7 +19,7 @@ class ModuleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'admin']);
+        $this->middleware(['auth:sanctum']);
         $this->authorizeResource(Module::class, 'module');
     }
 
@@ -37,9 +38,9 @@ class ModuleController extends Controller
      * 用户可使用的站点模块
      * @return void
      */
-    public function userSiteModules()
+    public function userSiteModules(Site $site)
     {
-        $modules = ModuleService::userSiteModules(site(), Auth::user());
+        $modules = ModuleService::userSiteModules($site, Auth::user());
         return ModuleResource::collection($modules->load('packages'));
     }
 

@@ -13,6 +13,8 @@ use CodeService;
 use Auth;
 use Hash;
 use Exception;
+use RuntimeException;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
  * 帐号登录注册管理
@@ -22,7 +24,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['front'])->except('login');
+        // $this->middleware(['front'])->except(['login', 'logout']);
     }
 
     /**
@@ -55,6 +57,18 @@ class AuthController extends Controller
         return response(['message' => '帐号或密码错误'], 405);
     }
 
+    /**
+     * 退出登录
+     * @return void
+     * @throws RuntimeException
+     * @throws Exception
+     * @throws BindingResolutionException
+     */
+    public function logout()
+    {
+        Auth::logout();
+        return $this->message('帐号退出成功');
+    }
 
     /**
      * 注册帐号

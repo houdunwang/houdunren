@@ -2,16 +2,16 @@
     <header class="navbar navbar-expand-md navbar-dark d-print-none">
         <div class="container-xl md:max-w-full">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-avatar"></span>
             </button>
             <div class="navbar-nav flex-row order-md-last">
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                        <el-image :src="Auth.user().avatar" fit="cover" class="w-8 h-8"></el-image>
+                        <el-image :src="user.avatar" fit="cover" class="w-8 h-8"></el-image>
 
                         <div class="d-none d-xl-block ps-2">
                             <div>{{ user.name }}</div>
-                            <div class="mt-1 small text-muted">注册于{{ Auth.user().created_at | fromNow }}</div>
+                            <div class="mt-1 small text-muted">注册于{{ user.created_at | fromNow }}</div>
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -33,7 +33,7 @@
                         </li>
                         <li class="nav-item" v-for="(menu, index) in menus" :key="index" v-show="user.is_super_admin">
                             <router-link :to="menu.route" class="nav-link">
-                                <i :class="menu.icon" class="mr-1" aria-hidden="true"></i> {{ menu.title }}
+                                <i :class="menu.avatar" class="mr-1" aria-hidden="true"></i> {{ menu.title }}
                             </router-link>
                         </li>
                     </ul>
@@ -45,9 +45,9 @@
 
 <script>
 const menus = [
-    { title: '模块管理', route: '/system/module/index', icon: 'fa fa-cubes' },
-    { title: '系统设置', route: '/system/index', icon: 'fas fa-comment' },
-    { title: '会员组', route: '/system/group/index', icon: 'fa fa-users' }
+    { title: '模块管理', route: '/system/module/index', avatar: 'fa fa-cubes' },
+    { title: '系统设置', route: '/system/index', avatar: 'fas fa-comment' },
+    { title: '会员组', route: '/system/group/index', avatar: 'fa fa-users' }
 ]
 export default {
     route: { meta: { auth: true } },

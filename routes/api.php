@@ -18,11 +18,13 @@ use App\Api\WeChatDefaultController;
 use App\Api\WechatMenuController;
 use App\Api\WeChatUserController;
 use App\Api\CodeController;
+use App\Api\ConfigController;
 
 //验证码
 Route::get('captcha', [CaptchaController::class, 'create']);
 //登录注册
 Route::post('login', [AuthController::class, 'login']);
+Route::get('logout', [AuthController::class, 'logout']);
 Route::post('register', [AuthController::class, 'register']);
 Route::post('register/code', [AuthController::class, 'registerCode']);
 Route::post('forget', [AuthController::class, 'forget']);
@@ -49,9 +51,11 @@ Route::apiResource('group', GroupController::class);;
 //站点
 Route::post('site/{site}/sms', [SiteController::class, 'sms']);
 Route::apiResource('site', SiteController::class);
+//配置
+Route::post('config/module', [ConfigController::class, 'module']);
 //模块
 Route::get('module/group/{group}', [ModuleController::class, 'group']);
-Route::get('module/site/user', [ModuleController::class, 'userSiteModules']);
+Route::get('module/site/{site}/user', [ModuleController::class, 'userSiteModules']);
 Route::apiResource('module', ModuleController::class);
 //角色
 Route::apiResource('site.role', RoleController::class);

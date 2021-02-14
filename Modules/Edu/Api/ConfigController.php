@@ -10,14 +10,13 @@ use App\Models\Site;
 
 /**
  * 模块配置
- * @package Modules\Edu\Http\Controllers\Admin
+ * @package Modules\Edu\Http\Controllers
  */
 class ConfigController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
-        $this->middleware(['admin']);
+        $this->middleware(['auth:sanctum', 'admin']);
     }
 
     public function show()

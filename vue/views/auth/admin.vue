@@ -54,7 +54,7 @@ export default {
         return { finish: false, form: { account: '', password: '', captcha: {}, remember: false } }
     },
     created() {
-        if (this.isLogin()) {
+        if (this.isLogin) {
             this.$router.push({ name: 'site.site.index' })
         } else {
             this.finish = true

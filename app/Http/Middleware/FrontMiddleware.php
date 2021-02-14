@@ -3,77 +3,91 @@
 namespace App\Http\Middleware;
 
 use App\Models\Module;
+use App\Models\Site;
+use ModuleService;
 use ConfigService;
 use SiteService;
-use ModuleService;
 use Closure;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
+use Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Exception;
 
 /**
- * 前台管理中间件
+ * 模块后台管理中间件
  * @package App\Http\Middleware
  */
 class FrontMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if ($this->siteInit() === false) {
-            abort(404, '站点不存在');
-        }
-        if ($this->moduleInit() === false) {
-            abort(404, '模块不存在，或站点设置默认模块');
-        }
+        $this->init();
         return $next($request);
     }
 
     /**
      * 站点初始化
-     *
-     * @return boolean
+     * @return void
+     * @throws BindingResolutionException
+     * @throws SuspiciousOperationException
+     * @throws ConflictingHeadersException
+     * @throws HttpException
+     * @throws NotFoundHttpException
      */
-    protected function siteInit(): bool
+    protected function init()
     {
-        //根据域名获取站点
-        $site = SiteService::getByDomain();
-        if (!$site) return false;
-        //加载站点配置
+        //站点
+        $site = $this->site();
+        defined("SID") or define("SID", $site['id']);
         SiteService::cache($site);
         ConfigService::site($site);
-        return true;
+        //模块
+        $module = $this->module($site);
+        defined("MID") or define("MID", $module['id']);
+        ModuleService::cache($module);
+        ConfigService::module($site, $module);
     }
 
     /**
-     * 模块初始化
-     *
-     * @return boolean
+     * 站点
+     * @return Site
+     * @throws BindingResolutionException
+     * @throws SuspiciousOperationException
+     * @throws ConflictingHeadersException
+     * @throws HttpException
+     * @throws NotFoundHttpException
      */
-    protected function moduleInit(): bool
+    protected function site(): Site
     {
-        if ($module = $this->getModule()) {
-            //缓存站点与模块
-            ModuleService::cache($module);
-            ConfigService::module(site(), $module);
-            return true;
+        $site = request('site');
+        $site = is_numeric($site) ? Site::findOrFail($site) : $site;
+        $site = $site instanceof Site ? $site : SiteService::getByDomain();
+        if ($site instanceof Site) {
+            return $site;
         }
-        return false;
+        abort(404, '站点不存在');
     }
 
     /**
-     * 识别模块
-     *
-     * @return void
+     * 模块
+     * @param Site $site
+     * @return Module
+     * @throws BindingResolutionException
+     * @throws HttpException
+     * @throws NotFoundHttpException
      */
-    protected function getModule()
+    protected function module(Site $site): Module
     {
-        $path = parse_url(url()->current())['path'] ?? '';
-        $module = null;
-        if ($path) {
-            preg_match('/^\/(\w+)\/?/i', $path, $match);
-            if ($name = $match[1] ?? '') {
-                $module = Module::where('name', $name)->first();
-            }
+        $module = ModuleService::getByDomain() ?? $site->module;
+        if (!($module instanceof Module)) {
+            abort(404, '模块不存在');
         }
-
-        //URL没有模块标识时，使用站点默认模块
-        return $module ?? site()->module;
+        //站点模块检测
+        if (ModuleService::siteHasModule($site, $module)) {
+            return $module;
+        }
+        abort(404, '模块不存在');
     }
 }

@@ -5,17 +5,19 @@ import Vue from 'vue'
 import store from '../store'
 // axios.defaults.withCredentials = true
 // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-const _axios = axios.create({ baseURL: '/api/Edu', timeout: 5000 })
+// const sid = window.localStorage.getItem('sid')
+// const mid = window.localStorage.getItem('mid')
+const _axios = axios.create({ baseURL: `/api/Edu`, timeout: 5000 })
 window.axios = Vue.axios = Vue.prototype.axios = _axios
 
 //请求拦截
 _axios.interceptors.request.use(
     function(config) {
         if (config.url[0] == '/') config.baseURL = ''
-        // const token = store.getters.token
-        // if (token) {
-        //     config.headers.Authorization = `Bearer ${token}`
-        // }
+        const token = store.getters.token
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`
+        }
         return config
     },
     function(error) {

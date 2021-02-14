@@ -41,8 +41,9 @@ export default {
     },
     methods: {
         del(lesson) {
-            this.$confirm('确定删除吗', '温馨提示').then(() => {
-                this.$inertia.delete(route('Edu.admin.subscribe.destroy', lesson))
+            this.$confirm('确定删除吗', '温馨提示').then(async () => {
+                await this.axios.delete(`subscribe/${lesson.id}`)
+                this.subscribes.splice(this.subscribes.indexOf(lesson), 1)
             })
         }
     }

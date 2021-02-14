@@ -10,14 +10,14 @@ use Modules\Edu\Http\Requests\SubscribeRequest;
 
 /**
  * 会员订阅管理
- * @package Modules\Edu\Http\Controllers\Admin
+ * @package Modules\Edu\Http\Controllers
  */
 class SubscribeController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['auth:sanctum', 'admin'])->except(['index']);
         $this->middleware(['auth:sanctum']);
-        $this->middleware(['admin']);
     }
 
     /**

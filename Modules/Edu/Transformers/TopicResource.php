@@ -11,7 +11,6 @@ use App\Http\Resources\UserResource;
  */
 class TopicResource extends JsonResource
 {
-
     public function toArray($request)
     {
         return parent::toArray($request) + [
