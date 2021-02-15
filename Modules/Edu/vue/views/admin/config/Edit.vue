@@ -49,6 +49,7 @@
             </el-card>
             <el-button type="primary" @click="onSubmit" class="mt-3 block">保存提交</el-button>
         </el-form>
+        {{ site }}
     </div>
 </template>
 
@@ -70,6 +71,7 @@ const form = {
 }
 export default {
     route: { path: `/Edu/admin` },
+    inject: ['module', 'site'],
     data() {
         return {
             tabs,

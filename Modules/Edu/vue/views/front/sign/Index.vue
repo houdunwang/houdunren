@@ -1,0 +1,140 @@
+<template>
+    <div class="container-xl mt-16" v-loading="loading">
+        <div v-if="isSign">
+            <div class="card shadow-sm" v-if="isLogin">
+                <div class="card-header bg-white">签到快乐，再接再厉</div>
+                <div class="card-body text-sm text-gray-700">
+                    您上次签到时间: {{ my.created_at | format }} <br />
+                    您的总签到天数: {{ my.total_days }}天 <br />
+                    您本月签到天数:: {{ my.month_days }} 天 <br />
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            <div class="card shadow-sm" v-if="isLogin">
+                <div class="card-header bg-white">签到快乐，再接再厉</div>
+                <div class="card-body h6 font-weight-normal">
+                    <input
+                        type="text"
+                        name="content"
+                        v-model="form.content"
+                        class="form-control form-control-lg "
+                        required=""
+                        placeholder="你今天的心情或最想说的话"
+                    />
+                    <div class="mt-6 flex flex-wrap">
+                        <label
+                            v-for="(icon, i) in icons"
+                            :key="i"
+                            class="w-16 h-16 bg-gray-50 cursor-pointer border-4 border-gray-200 mr-3 rounded-xl flex justify-center items-center hover:bg-yellow-400
+                        hover:border-yellow-200 duration-500 shadow-sm mb-2"
+                            :class="{ 'bg-yellow-400 border-yellow-200': form.mood == icon.name }"
+                        >
+                            <input type="radio" hidden="" v-model="form.mood" :value="icon.name" />
+                            <img :src="`/modules/Edu/static/sign/${icon.name}.gif`" class="w-3/4 h-3/4" />
+                        </label>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <button type="submit" class="btn btn-success" @click.prevent="onSubmit">开始签到</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-8 shadow-sm sign-list">
+            <div class="card-header bg-white text-base">今日签到排行</div>
+            <div class="card-body">
+                <el-table :data="signs" border stripe>
+                    <el-table-column label="会员" #default="{row:sign}" width="180">
+                        <a href="" class="flex justify-start items-center">
+                            <img :src="sign.user.avatar" class="w-12 h-12 rounded-lg object-contain border-2 border-gray-50 mr-2" />
+                            <span class="text-gray-600 text-sm">
+                                {{ sign.user.name }}
+                            </span>
+                        </a>
+                    </el-table-column>
+                    <el-table-column label="今日签到时间" #default="{row:sign}" width="150">{{ sign.created_at | format('hh:mm') }} </el-table-column>
+                    <el-table-column label="总签到天数" #default="{row:sign}" width="150">{{ sign.total_days }} </el-table-column>
+                    <el-table-column label="月签到天数" #default="{row:sign}" width="150">{{ sign.month_days }} </el-table-column>
+                    <el-table-column label="签到心情" #default="{row:sign}">
+                        <div class="flex justify-start items-center text-sm">
+                            <img :src="`/modules/Edu/static/sign/${sign.mood}.gif`" class="w-10 h-10 object-contain" />
+                            {{ sign.content }}
+                        </div>
+                        <button type="button" class="btn btn-sm" v-if="isLogin && user.id == sign.user.id" @click.prevent="del(sign)">删除</button>
+                    </el-table-column>
+                </el-table>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+const icons = [
+    { name: 'kx' },
+    { name: 'ch' },
+    { name: 'fd' },
+    { name: 'ng' },
+    { name: 'nu' },
+    { name: 'shuai' },
+    { name: 'wl' },
+    { name: 'yl' },
+    { name: 'ym' }
+]
+const signs = [
+    {
+        content: '学习，不负时光！',
+        count_days: 13,
+        month_days: 13,
+        created_at: '00:01:11',
+        mood: 'kx',
+
+        user: {
+            name: '向军老师',
+            avatar: 'https://houdunren-image.oss-cn-qingdao.aliyuncs.com/c37ec0dbe41f96908b2cccac1c2be45e1544263819.jpg'
+        }
+    }
+]
+export default {
+    data() {
+        return {
+            loading: true,
+            icons,
+            signs,
+            form: {
+                content: '',
+                mood: ''
+            }
+        }
+    },
+    computed: {
+        isSign() {
+            if (this.isLogin) {
+                return this.signs.some(s => s.user.id == this.user.id)
+            }
+        },
+        my() {
+            const sign = this.signs.find(s => s.user.id == this.user.id)
+            return sign
+        }
+    },
+    async created() {
+        this.signs = await axios.get(`sign`)
+        this.loading = false
+    },
+    methods: {
+        async del(sign) {
+            this.$confirm('确定删除吗?', '温馨提示').then(async _ => {
+                await axios.delete(`sign/${sign.id}`)
+                this.signs.splice(this.signs.indexOf(sign), 1)
+            })
+        },
+        async onSubmit() {
+            const { data: sign } = await axios.post(`sign`, this.form)
+            this.signs.push(sign)
+        }
+    }
+}
+</script>
+
+<style></style>

@@ -1,5 +1,5 @@
 <template>
-    <header class="navbar navbar-expand-md navbar-light d-print-none shadow border-t-4 border-hd">
+    <header class="navbar navbar-expand-md navbar-light d-print-none shadow border-t-4 border-hd sticky-top">
         <div class="container-xl flex items-center">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
                 <span class="navbar-toggler-icon"></span>
@@ -59,6 +59,33 @@
                                 </span>
                             </router-link>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a
+                                class="nav-link dropdown-toggle text-gray-500 font-semibold hover:text-hd"
+                                href="#navbar-layout"
+                                data-bs-toggle="dropdown"
+                                role="button"
+                                aria-expanded="false"
+                            >
+                                <span class="nav-link-title">
+                                    在线文档
+                                </span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-menu-columns">
+                                    <div class="dropdown-menu-column">
+                                        <a class="dropdown-item" :href="d.to" v-for="(d, i) in docs" :key="i" target="_blank" v-show="i % 2 == 0">
+                                            {{ d.title }}
+                                        </a>
+                                    </div>
+                                    <div class="dropdown-menu-column">
+                                        <a class="dropdown-item" :href="d.to" v-for="(d, i) in docs" :key="i" target="_blank" v-show="i % 2 != 0">
+                                            {{ d.title }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -72,13 +99,29 @@ const menus = [
     { title: '实战课程', name: 'front.lesson.index' },
     { title: '最近更新', name: 'front.lesson.latest' },
     { title: '话题讨论', name: 'front.topic.index' },
-    { title: '签到打卡', name: '' },
+    { title: '签到打卡', name: 'front.sign.index' },
     { title: '订阅会员', name: '' }
+]
+const docs = [
+    { title: 'CSS样式控制', to: `https://houdunren.gitee.io/note/css/1%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html` },
+    { title: 'JavaScript编程', to: `https://houdunren.gitee.io/note/js/1%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html` },
+    { title: 'Mysql数据库', to: `https://houdunren.gitee.io/note/mysql/1%20%E5%AD%A6%E5%89%8D%E5%87%86%E5%A4%87.html` },
+    { title: 'Git版本控制', to: `https://houdunren.gitee.io/note/git/git.html` },
+    {
+        title: 'Laravel 框架',
+        to: `https://houdunren.gitee.io/note/%E6%89%8B%E5%86%8C/laravel%208.x/1%20%E5%BA%8F%E5%B9%95/1%20%E5%8F%91%E8%A1%8C%E8%AF%B4%E6%98%8E.html`
+    },
+    { title: 'Homestead环境', to: `https://houdunren.gitee.io/note/homestead/1%20homestead.html` },
+    { title: 'Vscode编辑器', to: `https://houdunren.gitee.io/note/vscode/1%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html` },
+    { title: 'Vim使用', to: `https://houdunren.gitee.io/note/vim/1%20%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86` },
+    { title: 'HDCMS开源系统', to: `https://houdunren.gitee.io/note/hdcms/%E5%89%8D%E7%AB%AF/%E7%BC%96%E8%BE%91%E5%99%A8.html` },
+    { title: '查看更多文档...', to: `https://houdunren.gitee.io/note/` }
 ]
 export default {
     data() {
         return {
-            menus
+            menus,
+            docs
         }
     }
 }

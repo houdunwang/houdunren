@@ -19,8 +19,18 @@ class ModuleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
+        $this->middleware(['auth:sanctum'])->except(['current']);
+        $this->middleware(['front'])->only(['current']);
         $this->authorizeResource(Module::class, 'module');
+    }
+
+    /**
+     * 前台模块
+     * @return null
+     */
+    public function current()
+    {
+        return module();
     }
 
     /**

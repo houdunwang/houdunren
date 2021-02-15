@@ -9,6 +9,7 @@ components.keys().forEach(path => {
         const component = components(path).default
         groups[name] = {
             path: `/Edu/${name}`,
+            name,
             component,
             children: [],
             ...component.route

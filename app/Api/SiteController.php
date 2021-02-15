@@ -20,10 +20,15 @@ class SiteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
+        $this->middleware(['auth:sanctum'])->except(['current']);
+        $this->middleware(['front'])->only(['current']);
         $this->authorizeResource(Site::class, 'site');
     }
 
+    public function current()
+    {
+        return site();
+    }
     /**
      * 站点列表
      * @return void

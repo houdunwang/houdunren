@@ -49,11 +49,13 @@ Route::apiResource('package', PackageController::class);
 //会员组
 Route::apiResource('group', GroupController::class);;
 //站点
+Route::get('site/current', [SiteController::class, 'current']);
 Route::post('site/{site}/sms', [SiteController::class, 'sms']);
 Route::apiResource('site', SiteController::class);
 //配置
 Route::post('config/module', [ConfigController::class, 'module']);
 //模块
+Route::get('module/current', [ModuleController::class, 'current']);
 Route::get('module/group/{group}', [ModuleController::class, 'group']);
 Route::get('module/site/{site}/user', [ModuleController::class, 'userSiteModules']);
 Route::apiResource('module', ModuleController::class);

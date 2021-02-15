@@ -4,9 +4,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         errors: {},
-        site: window.site,
-        module: window.module,
-        user: window.user
+        site: {},
+        module: {},
+        user: {}
     },
     getters: {
         errors: state => name => {
@@ -37,11 +37,11 @@ export default new Vuex.Store({
         async getUser({ commit }) {
             commit('setUser', await axios.get(`/api/user/info`))
         },
-        async getModule({ commit }) {
-            commit('setModule', await axios.get(`/api/module/${window.localStorage.getItem('mid')}`))
+        async getModule({ commit }, url) {
+            commit('setModule', await axios.get(url))
         },
-        async getSite({ commit }) {
-            commit('setSite', await axios.get(`/api/site/${window.localStorage.getItem('sid')}`))
+        async getSite({ commit }, url) {
+            commit('setSite', await axios.get(url))
         }
     }
 })

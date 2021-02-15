@@ -9,8 +9,9 @@ use Modules\Edu\Api\SystemController;
 use Modules\Edu\Api\SubscribeController;
 use Modules\Edu\Api\TopicController;
 use Modules\Edu\Api\VideoController;
+use Modules\Edu\Api\SignController;
 
-Route::group(['prefix' => 'Edu', 'middleware' => ['auth:sanctum', 'admin']], function () {
+Route::group(['prefix' => 'Edu'], function () {
     //配置
     Route::get('config', [ConfigController::class, 'show']);
     Route::put('config', [ConfigController::class, 'update']);
@@ -28,6 +29,8 @@ Route::group(['prefix' => 'Edu', 'middleware' => ['auth:sanctum', 'admin']], fun
     Route::apiResource('topic', TopicController::class);
     //视频
     Route::apiResource('video', VideoController::class);
+    //签到
+    Route::apiResource('sign', SignController::class);
 });
 
 // Route::group(['prefix' => 'Edu', 'middleware' => ['front']], function () {
