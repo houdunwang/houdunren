@@ -1,9 +1,12 @@
 <template>
     <div class="container-xl mt-16">
         <div class="md:flex">
-            <div class="card md:w-9/12 md:mr-5 mb-5">
+            <div class="card md:w-9/12 md:mr-5 mb-5" v-loading="loading">
                 <div class="card-header flex flex-col items-start px-10 py-8 leading-9 text-xl font-weight-lighter ">
                     {{ form.title }}
+                    <p class="p-3 font-normal bg-gray-100 border border-gray-200 text-sm text-gray-500 mt-5 w-full" v-if="form.description">
+                        {{ form.description }}
+                    </p>
                 </div>
 
                 <div class="card-body px-10">
@@ -23,11 +26,13 @@ export default {
     route: { path: `lesson/:id/show` },
     data() {
         return {
+            loading: true,
             form: {}
         }
     },
     async created() {
-        this.form = await this.axios.get(`lesson/${this.$route.params.id}`)
+        this.form = await this.axios.get(`front/lesson/${this.$route.params.id}`)
+        this.loading = false
     }
 }
 </script>

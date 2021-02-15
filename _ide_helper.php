@@ -14712,6 +14712,19 @@
                         return $instance->getByDomain();
         }
                     /**
+         * 站点模块检测
+         *
+         * @param \App\Services\Module\Site $site
+         * @param \Module $module
+         * @return boolean 
+         * @static 
+         */ 
+        public static function siteHasModule($site, $module)
+        {
+                        /** @var \App\Services\Module\ModuleService $instance */
+                        return $instance->siteHasModule($site, $module);
+        }
+                    /**
          * 系统中所有模块
          * 包括安装与未安装的
          *
@@ -14830,7 +14843,10 @@
          * @param \Module $module
          * @param \App\Services\Permission\User $user
          * @param string $permission
-         * @return boolean 
+         * @return bool 
+         * @throws InvalidCastException
+         * @throws LogicException
+         * @throws BindingResolutionException
          * @static 
          */ 
         public static function access($site, $module, $user, $permission)
@@ -14845,6 +14861,8 @@
          * @param \Module $module
          * @param string $name
          * @return string 
+         * @throws InvalidCastException
+         * @throws LogicException
          * @static 
          */ 
         public static function permissionName($site, $module, $name)
@@ -14858,7 +14876,9 @@
          * @param \App\Services\Permission\Site $site
          * @param \Module $module
          * @param \App\Services\Permission\User $user
-         * @return boolean 
+         * @return bool 
+         * @throws InvalidCastException
+         * @throws LogicException
          * @static 
          */ 
         public static function checkUserModuleAccess($site, $module, $user)
@@ -14908,6 +14928,8 @@
          * @param \App\Services\Permission\Site $site
          * @param \Module $module
          * @return array 
+         * @throws InvalidCastException
+         * @throws LogicException
          * @static 
          */ 
         public static function formatSiteModulePermissions($site, $module)
@@ -14929,7 +14951,10 @@
                     /**
          * 根据域名获取站点
          *
-         * @return \App\Services\Site\Site|null 
+         * @return null|\App\Services\Site\Site 
+         * @throws BindingResolutionException
+         * @throws SuspiciousOperationException
+         * @throws ConflictingHeadersException
          * @static 
          */ 
         public static function getByDomain()

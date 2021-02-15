@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Modules\Edu\Entities\Traits\Comment;
+use Auth;
 
 /**
  * 贴子
@@ -25,6 +26,19 @@ class Topic extends Model
     protected $casts = [
         'recommend' => 'boolean',
     ];
+
+    protected $appends = [
+        'permissions'
+    ];
+
+    public function getPermissionsAttribute()
+    {
+        return [
+            'view' => Auth::check() && Auth::user()->can('view', $this),
+            'update' => Auth::check() && Auth::user()->can('update', $this),
+            'delete' => Auth::check() && Auth::user()->can('delete', $this)
+        ];
+    }
 
     /**
      * 用户

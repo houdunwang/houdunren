@@ -5,6 +5,7 @@ namespace Modules\Edu\Policies;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Models\User;
 use Modules\Edu\Entities\Topic;
+use SiteService;
 
 class TopicPolicy
 {
@@ -12,13 +13,9 @@ class TopicPolicy
 
     public function before($user, $ability)
     {
-        if ($user->isSuperAdmin || is_master()) {
+        if (SiteService::isMaster(site(), $user)) {
             return true;
         }
-    }
-    public function recommend(User $user, Topic $topic)
-    {
-        return false;
     }
 
     public function viewAny(User $user)

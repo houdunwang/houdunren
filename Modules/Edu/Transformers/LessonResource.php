@@ -25,6 +25,15 @@ class LessonResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'path' => $this->when(false, $this->path),
+            'tags' => $this->whenLoaded('tags'),
+            'status' => $this->status,
+            'is_commend' => $this->is_commend,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'price' => $this->price,
+            'read_num' => $this->read_num,
+            'comment_num' => $this->comment_num,
+            'description' => $this->description,
             'videos' => VideoResource::collection($this->whenLoaded('videos')),
         ];
     }

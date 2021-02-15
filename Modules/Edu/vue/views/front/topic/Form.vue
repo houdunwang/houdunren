@@ -32,7 +32,7 @@ export default {
             if (this.form.tags.length == 0) {
                 return this.$message('选择一个标签吧')
             }
-            await this.axios.post(`topic`, this.form)
+            await this.axios.post(`front/topic`, this.form)
             this.router('front.topic.index')
         }
     }

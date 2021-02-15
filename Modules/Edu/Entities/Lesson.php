@@ -7,7 +7,6 @@ use App\Models\Traits\Favorite;
 use App\Models\Traits\Favour;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Edu\Entities\Tag;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * 课程
@@ -15,9 +14,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class Lesson extends BaseModel
 {
-    use Favour, Favorite, LogsActivity;
-
-    protected static $recordEvents = ['created'];
+    use Favour, Favorite;
 
     protected $table = 'edu_lessons';
 

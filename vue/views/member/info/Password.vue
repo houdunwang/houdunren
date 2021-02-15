@@ -5,11 +5,11 @@
                 基本资料
             </div>
             <el-form-item :label="field.label" v-for="(field, index) in fields" :key="index">
-                <el-input v-model="form[field.id]" :placeholder="field.placeholder" required show-password></el-input>
+                <el-input v-model.trim="form[field.id]" :placeholder="field.placeholder" required show-password></el-input>
                 <hd-error :name="field.id" />
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit">保存提交</el-button>
+                <el-button type="primary" @click="onSubmit" :disabled="status">保存提交</el-button>
             </el-form-item>
         </el-card>
     </el-form>
@@ -26,6 +26,11 @@ export default {
         return {
             form: { old_password: '', password: '', password_confirmation: '' },
             fields
+        }
+    },
+    computed: {
+        status() {
+            return !this.form.old_password || !this.form.password || !this.form.password_confirmation
         }
     },
     methods: {

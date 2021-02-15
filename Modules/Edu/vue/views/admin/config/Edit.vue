@@ -71,7 +71,6 @@ const form = {
 }
 export default {
     route: { path: `/Edu/admin` },
-    inject: ['module', 'site'],
     data() {
         return {
             tabs,
@@ -80,7 +79,7 @@ export default {
     },
     methods: {
         onSubmit() {
-            this.axios.put(`config`, this.form)
+            this.axios.put(`admin/config`, this.form)
         }
     }
 }

@@ -11,7 +11,7 @@ use Modules\Edu\Api\TopicController;
 use Modules\Edu\Api\VideoController;
 use Modules\Edu\Api\SignController;
 
-Route::group(['prefix' => 'Edu'], function () {
+Route::group(['prefix' => 'Edu/admin', 'middleware' => ['auth:sanctum', 'admin']], function () {
     //配置
     Route::get('config', [ConfigController::class, 'show']);
     Route::put('config', [ConfigController::class, 'update']);
@@ -25,6 +25,16 @@ Route::group(['prefix' => 'Edu'], function () {
     Route::apiResource('system', SystemController::class);
     //套餐
     Route::apiResource('subscribe', SubscribeController::class);
+});
+
+Route::group(['prefix' => 'Edu/front', 'middleware' => ['front']], function () {
+    //标签
+    Route::get('tag', [TagController::class, 'index']);
+    //系统课程
+    Route::apiResource('system', SystemController::class);
+    //课程
+    Route::get('lesson/search', [LessonController::class, 'search']);
+    Route::apiResource('lesson', LessonController::class);
     //贴子
     Route::apiResource('topic', TopicController::class);
     //视频
@@ -32,9 +42,3 @@ Route::group(['prefix' => 'Edu'], function () {
     //签到
     Route::apiResource('sign', SignController::class);
 });
-
-// Route::group(['prefix' => 'Edu', 'middleware' => ['front']], function () {
-//     //课程
-//     Route::get('lesson/search', [LessonController::class, 'search']);
-//     Route::apiResource('lesson', LessonController::class);
-// });

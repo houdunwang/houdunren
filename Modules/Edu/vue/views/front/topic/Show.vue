@@ -4,7 +4,15 @@
             <div class="card md:w-9/12 md:mr-5 mb-5" v-loading="loading">
                 <div class="card-header flex flex-col items-start px-14 py-10 leading-9 text-xl font-weight-lighter ">
                     {{ form.title }}
-                    <div class="text-sm text-gray-500 mt-5 ">{{ form.user.name }} 更新于{{ form.updated_at | fromNow }}</div>
+                    <div class="w-full flex justify-between items-center mt-5">
+                        <div class="text-sm text-gray-500">{{ form.user.name }} 更新于{{ form.updated_at | fromNow }}</div>
+                        <div v-if="isLogin && form.permissions">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="">
+                                <button type="button" class="btn btn-outline-info" v-if="form.permissions.delete" @click.prevent="del">删除</button>
+                                <button type="button" class="btn btn-outline-success" v-if="form.permissions.update">编辑</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body leading-8 px-14 py-10 text-gray-700" style="min-height:100px;" v-html="form.content"></div>
             </div>
@@ -29,7 +37,7 @@ export default {
         }
     },
     async created() {
-        this.form = await this.axios.get(`topic/${this.$route.params.id}`)
+        this.form = await this.axios.get(`front/topic/${this.$route.params.id}`)
         const md = new MarkdownIt()
         this.form.content = md.render(this.form.content)
         this.$nextTick(() => {
@@ -39,6 +47,14 @@ export default {
             })
         })
         this.loading = false
+    },
+    methods: {
+        async del() {
+            this.$confirm('确定删除吗？', '温馨提示').then(async _ => {
+                await axios.delete(`front/topic/${this.form.id}`)
+                this.router('front.topic.index')
+            })
+        }
     }
 }
 </script>

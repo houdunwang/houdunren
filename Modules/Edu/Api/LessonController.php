@@ -19,10 +19,6 @@ use Auth;
  */
 class LessonController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth:sanctum', 'admin'])->only(['store', 'update', 'destroy']);
-    }
 
     /**
      * 课程列表
@@ -41,7 +37,7 @@ class LessonController extends Controller
      */
     public function show(Lesson $lesson)
     {
-        return new LessonResource($lesson->load('videos'));
+        return new LessonResource($lesson->load(['videos', 'tags']));
     }
 
     /**

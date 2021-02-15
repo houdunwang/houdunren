@@ -1,5 +1,5 @@
 <template>
-    <div v-loading="loading" style="min-height:300px">
+    <div v-loading="loading" :class="{ 'h-screen': loading }">
         <div class="bg-gray-900">
             <div class="container-xl">
                 <div id="mse"></div>
@@ -9,20 +9,20 @@
             <div class="card">
                 <div class="card-body row">
                     <div class="col-12 col-md-7">
-                        <h5 class="text-secondary">
+                        <h5 class="text-base pt-2 text-gray-500">
                             {{ form.title }}
                         </h5>
-                        <router-link :to="{ name: 'front.lesson.show', params: { id: lesson.id } }" class="text-sm pt-2 font-weight-light">
+                        <router-link :to="{ name: 'front.lesson.show', params: { id: lesson.id } }" class="text-sm font-weight-light pt-2 text-gray-500">
                             <i aria-hidden="true" class="fa fa-folder-o"></i>
-                            {{ lesson.title }}
+                            <i class="far fa-folder-open"></i> {{ lesson.title }}
                         </router-link>
                     </div>
                     <div class="col-12 col-md-5 mt-2 mt-md-0 d-flex justify-content-md-end justify-content-start flex-wrap">
-                        <div class="btn-group btn-group-sm align-items-center mr-1" v-if="prev">
-                            <router-link :to="{ name: 'front.video.show', params: { id: prev.id } }" class="btn btn-outline-info">上集</router-link>
-                        </div>
-                        <div class="btn-group btn-group-sm align-items-center mr-1" v-if="next">
-                            <router-link :to="{ name: 'front.video.show', params: { id: next.id } }" class="btn btn-outline-success">下集</router-link>
+                        <div class="btn-group align-items-center mr-1">
+                            <router-link :to="{ name: 'front.video.show', params: { id: prev.id } }" class="btn btn-outline-info" v-if="prev">上集</router-link>
+                            <router-link :to="{ name: 'front.video.show', params: { id: next.id } }" class="btn btn-outline-success" v-if="next">
+                                下集
+                            </router-link>
                         </div>
                         <!-- <div class="btn-group btn-group-sm align-items-center">
                             <a href="https://www.houdunren.com/common/favorite/Video/13021/Edu" class="btn btn-outline-secondary"
@@ -101,8 +101,8 @@ export default {
     },
     methods: {
         async init() {
-            this.form = await this.axios.get(`video/${this.$route.params.id}`)
-            this.lesson = await this.axios.get(`lesson/${this.form.lesson_id}`)
+            this.form = await this.axios.get(`front/video/${this.$route.params.id}`)
+            this.lesson = await this.axios.get(`front/lesson/${this.form.lesson_id}`)
             this.$nextTick(() => {
                 this.player = new Player({
                     id: 'mse',

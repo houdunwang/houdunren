@@ -7,7 +7,7 @@ const mixin = {
             return store.state.user
         },
         isLogin() {
-            return store.state.user.id
+            return this.user.id
         }
     },
     methods: {

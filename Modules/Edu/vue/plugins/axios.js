@@ -14,10 +14,10 @@ window.axios = Vue.axios = Vue.prototype.axios = _axios
 _axios.interceptors.request.use(
     function(config) {
         if (config.url[0] == '/') config.baseURL = ''
-        const token = store.getters.token
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`
-        }
+        // const token = store.getters.token
+        // if (token) {
+        //     config.headers.Authorization = `Bearer ${token}`
+        // }
         return config
     },
     function(error) {
@@ -45,7 +45,7 @@ _axios.interceptors.response.use(
                 store.commit('setErrors', data.errors)
                 break
             case 401:
-                window.localStorage.removeItem('token')
+                // window.localStorage.removeItem('token')
                 location.href = '/login'
                 break
             default:

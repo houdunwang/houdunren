@@ -17,7 +17,7 @@
                     <input
                         type="text"
                         name="content"
-                        v-model="form.content"
+                        v-model.trim="form.content"
                         class="form-control form-control-lg "
                         required=""
                         placeholder="你今天的心情或最想说的话"
@@ -43,7 +43,7 @@
 
         <div class="card mt-8 shadow-sm sign-list">
             <div class="card-header bg-white text-base">今日签到排行</div>
-            <div class="card-body">
+            <div class="card-body text-base font-bold text-gray-600">
                 <el-table :data="signs" border stripe>
                     <el-table-column label="会员" #default="{row:sign}" width="180">
                         <a href="" class="flex justify-start items-center">
@@ -59,9 +59,11 @@
                     <el-table-column label="签到心情" #default="{row:sign}">
                         <div class="flex justify-start items-center text-sm">
                             <img :src="`/modules/Edu/static/sign/${sign.mood}.gif`" class="w-10 h-10 object-contain" />
-                            {{ sign.content }}
+                            <span class="">
+                                {{ sign.content }}
+                            </span>
                         </div>
-                        <button type="button" class="btn btn-sm" v-if="isLogin && user.id == sign.user.id" @click.prevent="del(sign)">删除</button>
+                        <button type="button" class="btn btn-sm" v-if="sign.permissions.delete" @click.prevent="del(sign)">删除</button>
                     </el-table-column>
                 </el-table>
             </div>
@@ -81,20 +83,7 @@ const icons = [
     { name: 'yl' },
     { name: 'ym' }
 ]
-const signs = [
-    {
-        content: '学习，不负时光！',
-        count_days: 13,
-        month_days: 13,
-        created_at: '00:01:11',
-        mood: 'kx',
-
-        user: {
-            name: '向军老师',
-            avatar: 'https://houdunren-image.oss-cn-qingdao.aliyuncs.com/c37ec0dbe41f96908b2cccac1c2be45e1544263819.jpg'
-        }
-    }
-]
+const signs = []
 export default {
     data() {
         return {
@@ -119,18 +108,21 @@ export default {
         }
     },
     async created() {
-        this.signs = await axios.get(`sign`)
+        this.signs = await axios.get(`front/sign`)
         this.loading = false
     },
     methods: {
         async del(sign) {
             this.$confirm('确定删除吗?', '温馨提示').then(async _ => {
-                await axios.delete(`sign/${sign.id}`)
+                await axios.delete(`front/sign/${sign.id}`)
                 this.signs.splice(this.signs.indexOf(sign), 1)
             })
         },
         async onSubmit() {
-            const { data: sign } = await axios.post(`sign`, this.form)
+            if (!this.form.content || !this.form.mood) {
+                return this.$message.warning('签到内容和心情不能为空')
+            }
+            const { data: sign } = await axios.post(`front/sign`, this.form)
             this.signs.push(sign)
         }
     }

@@ -8,7 +8,7 @@
         </div>
         <div class="card-footer text-muted flex justify-center">
             <router-link :to="{ name: 'front.topic.create' }" class="btn btn-info mr-2">发贴交流</router-link>
-            <a class="btn btn-success">签到打卡</a>
+            <router-link :to="{ name: 'front.sign.index' }" class="btn btn-success">签到打卡</router-link>
         </div>
     </div>
 </template>

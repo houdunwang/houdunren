@@ -11,17 +11,17 @@
                     <hd-error name="title" />
                 </el-form-item>
                 <el-form-item label="课程上架">
-                    <!-- <el-radio-group v-model="form.status" size="mini">
+                    <el-radio-group v-model="form.status" size="mini">
                         <el-radio-button :label="true">
                             上架
                         </el-radio-button>
                         <el-radio-button :label="false">
                             下架
                         </el-radio-button>
-                    </el-radio-group> -->
+                    </el-radio-group>
                 </el-form-item>
                 <el-form-item label="推荐课程">
-                    <el-checkbox v-model="form.is_commend" :label="true">推荐</el-checkbox>
+                    <el-checkbox v-model="form.is_commend" :true-label="1" :false-label="0">推荐</el-checkbox>
                 </el-form-item>
                 <el-form-item label="课程介绍" size="normal">
                     <el-input v-model="form.description" placeholder="" type="textarea" learable></el-input>
@@ -54,11 +54,7 @@
                 <div slot="header">
                     标签选择
                 </div>
-                <el-checkbox-group v-model="form.tags" size="mini" :max="5">
-                    <el-checkbox-button v-for="tag in tags" :key="tag.id" :label="tag.id" class="">
-                        {{ tag.title }}
-                    </el-checkbox-button>
-                </el-checkbox-group>
+                <tags v-model="form.tags" action="front/tag" />
             </el-card>
             <el-card shadow="never" :body-style="{ padding: '20px' }" class="mt-3">
                 <div slot="header">
@@ -116,17 +112,18 @@ export default {
     data() {
         return {
             tabs,
-            form,
-            tags: []
+            form
         }
     },
     async created() {
-        this.tags = await this.axios.get(`tag`)
-        if (this.id) this.form = Object.assign(form, await this.axios.get(`lesson/${this.id}`))
+        if (this.id) {
+            this.form = Object.assign(form, await this.axios.get(`admin/lesson/${this.id}`))
+            this.form.tags = this.form.tags.map(t => t.id)
+        }
     },
     methods: {
         async onSubmit() {
-            const url = this.id ? `lesson/${this.id}` : 'lesson'
+            const url = this.id ? `admin/lesson/${this.id}` : 'admin/lesson'
             await this.axios[this.id ? 'put' : 'post'](url, this.form)
             this.$router.push({ name: 'admin.lesson.index' })
         }

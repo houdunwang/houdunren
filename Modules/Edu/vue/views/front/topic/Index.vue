@@ -14,7 +14,7 @@
                             <div class="col">
                                 <router-link
                                     :to="{ name: 'front.topic.show', params: { id: topic.id } }"
-                                    class="text-base font-medium text-gray-500 hover:text-gray-900"
+                                    class="text-base font-bold text-gray-500 hover:text-gray-900"
                                 >
                                     {{ topic['title'] | titleSubstr }}
                                 </router-link>
@@ -49,7 +49,7 @@ export default {
     },
     methods: {
         async load(page = 1) {
-            this.topics = await this.axios.get(`topic?page=${page}`)
+            this.topics = await this.axios.get(`front/topic?page=${page}`)
         }
     }
 }

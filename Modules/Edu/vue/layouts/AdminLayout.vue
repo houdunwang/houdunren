@@ -6,11 +6,8 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark flex justify-start mt-3 text-xl font-thin">
-                    <a href=".">
-                        <i class="fas fa-burn mr-2"></i>
-                        {{ module.title }}
-                        <!-- <img src="" width="110" height="32" alt="Tabler" class="navbar-brand-image" /> -->
-                    </a>
+                    <i class="fas fa-burn mr-2"></i>
+                    {{ module.title }}
                 </h1>
                 <div class="navbar-nav flex-row d-lg-none">
                     <div class="nav-item dropdown">
@@ -34,7 +31,7 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="navbar-nav pt-lg-3">
                         <li class="nav-item dropdown" v-for="(menu, index) in menus" :key="index">
-                            <a class="nav-link dropdown-toggle show" href="#navbar-base" data-bs-toggle="dropdown" role="button" aria-expanded="true">
+                            <a class="nav-link show" href="#navbar-base">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <i :class="menu.icon"></i>
                                 </span>

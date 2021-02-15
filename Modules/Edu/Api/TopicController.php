@@ -62,8 +62,7 @@ class TopicController extends Controller
         $topic->site_id = site()['id'];
         $topic->user_id = Auth::id();
         $topic->save();
-
-        // $topic->tags()->sync($request->tags);
+        $topic->tags()->sync($request->tags);
         return ['message' => '贴子发表成功'];
     }
 

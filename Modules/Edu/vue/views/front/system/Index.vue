@@ -1,18 +1,18 @@
 <template>
     <div class="container-xl mt-16">
         <div class="flex justify-center">
-            <div class="card mb-5 md:w-11/12">
+            <div class="card mb-5 w-full">
                 <div class="card-header h-14">
                     系统课程
                 </div>
-                <div class="card-body md:grid md:grid-cols-3 md:gap-3" v-loading="loading" style="min-height:100px;">
+                <div class="card-body md:grid md:grid-cols-3 md:gap-5" v-loading="loading" style="min-height:100px;">
                     <div v-for="lesson in lessons.data" :key="lesson.id" class="py-4">
                         <router-link :to="{ name: 'front.system.show', params: { id: lesson.id } }" class="card card-link">
                             <div class="text-center">
                                 <img :src="lesson.preview" />
                             </div>
-                            <div class="card-body text-center">
-                                <div class="card-title mb-1">
+                            <div class="card-body text-center pb-3 pt-0">
+                                <div class="card-title">
                                     {{ lesson.title | titleSubstr(20) }}
                                 </div>
                             </div>
@@ -52,7 +52,7 @@ export default {
     methods: {
         async load(page = 1) {
             this.loading = true
-            this.lessons = await this.axios.get(`system?page=${page}`)
+            this.lessons = await this.axios.get(`front/system?page=${page}`)
             this.loading = false
         }
     }

@@ -6,13 +6,13 @@ const mixin = {
             return store.state.user
         },
         module() {
-            return store.state.module
+            return window.module
         },
         site() {
-            return store.state.site
+            return window.site
         },
         isLogin() {
-            return window.localStorage.getItem('token')
+            return this.user.id
         }
     },
     methods: {
@@ -25,7 +25,7 @@ const mixin = {
         async logout() {
             await this.axios.get(`logout`)
             window.localStorage.removeItem('token')
-            location.href = '/admin'
+            location.href = '/login'
         }
     }
 }

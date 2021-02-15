@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="hdEditor"></div>
-        <div class="text-secondary mt-2 p-2 d-block mb-2">
+        <div class="text-secondary mt-2 p-2 d-block mb-2 text-sm">
             <i class="fas fa-info-circle"></i> 你可以在编辑器底部切换为markdown模式，编辑器也支持托放上传图片。
         </div>
     </div>

@@ -45,7 +45,7 @@ export default {
         }
     },
     async created() {
-        this.form.tags = await this.axios.get(`tag`)
+        this.form.tags = await this.axios.get(`admin/tag`)
     },
     methods: {
         delTag(tag) {
@@ -65,7 +65,7 @@ export default {
             }
             if (inputValue) {
                 this.form.tags.push({ title: inputValue })
-                this.axios.put(`tag`, this.form)
+                this.axios.put(`admin/tag`, this.form)
             }
             this.inputVisible = false
             this.inputValue = ''

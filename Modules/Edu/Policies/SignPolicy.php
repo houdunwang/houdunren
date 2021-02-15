@@ -6,6 +6,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 
 use App\Models\User;
 use Modules\Edu\Entities\Sign;
+use UserService;
 
 class SignPolicy
 {
@@ -24,6 +25,6 @@ class SignPolicy
 
     public function delete(User $user, Sign $sign)
     {
-        return $user->id == $sign->user_id;
+        return UserService::isMaster(site(), $user) || $user->id == $sign->user_id;
     }
 }

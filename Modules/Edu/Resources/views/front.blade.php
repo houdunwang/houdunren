@@ -23,7 +23,7 @@
     <script>
         window.site = @json(site(),JSON_FORCE_OBJECT);
         window.module = @json(module(),JSON_FORCE_OBJECT);
-        window.user = @json(Auth::user(),JSON_FORCE_OBJECT);
+        window.user = @json(Auth::user()??[],JSON_FORCE_OBJECT);
     </script>
 </body>
 

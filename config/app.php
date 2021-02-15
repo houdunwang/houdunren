@@ -188,6 +188,7 @@ return [
         App\Services\Upload\UploadServiceProvider::class,
         App\Services\User\UserServiceProvider::class,
         App\Services\WeChat\WeChatServiceProvider::class,
+        App\Services\Activity\ActivityServiceProvider::class,
 
     ],
 
@@ -253,6 +254,7 @@ return [
         'UploadService' => App\Services\Upload\UploadFacade::class,
         'UserService' => App\Services\User\UserFacade::class,
         'WeChatService' => App\Services\WeChat\WeChatFacade::class,
+        'ActivityService' => App\Services\Activity\ActivityFacade::class,
 
     ],
 

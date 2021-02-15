@@ -8,13 +8,13 @@
                 <div v-for="lesson in lessons.data" :key="lesson.id" class="py-4 border-b border-gray-200">
                     <router-link :to="{ name: 'front.lesson.show', params: { id: lesson.id } }" class="card card-link">
                         <div class="text-center">
-                            <img :src="lesson.thumb" />
+                            <img :src="lesson.thumb" class="h-36 w-full object-cover" />
                         </div>
                         <div class="card-body text-center">
-                            <div class="card-title mb-1">
-                                {{ lesson.title | titleSubstr(20) }}
+                            <div class="card-title mb-1 text-gray-600">
+                                {{ lesson.title | titleSubstr(15) }}
                             </div>
-                            <div class="text-muted">共有{{ lesson.video_num }}个视频</div>
+                            <div class="text-muted text-sm">共有{{ lesson.video_num }}个视频</div>
                         </div>
                     </router-link>
                 </div>
@@ -43,7 +43,7 @@ export default {
     methods: {
         async load(page = 1) {
             this.loading = true
-            this.lessons = await this.axios.get(`lesson?page=${page}`)
+            this.lessons = await this.axios.get(`front/lesson?page=${page}`)
             this.loading = false
         }
     }

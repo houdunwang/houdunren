@@ -30,7 +30,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::latest('id')->paginate();
+        $videos = Video::latest('id')->paginate(15);
         return $videos;
     }
 

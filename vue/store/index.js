@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         errors: {},
-        user: {},
+        user: window.user,
         //系统配置
         config: {}
     },
@@ -30,9 +30,9 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        async getUser({ commit }) {
-            commit('setUser', await axios.get(`user/info`))
-        },
+        // async getUser({ commit }) {
+        //     commit('setUser', await axios.get(`user/info`))
+        // },
         async getSystemConfig() {
             this.commit('setConfig', await axios.get(`system/config/1`))
         }
