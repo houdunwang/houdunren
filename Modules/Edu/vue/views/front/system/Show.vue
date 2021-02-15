@@ -1,7 +1,7 @@
 <template>
     <div class="container-xl mt-16">
         <div class="flex justify-center" v-loading="loading">
-            <div class="w-10/12">
+            <div class="w-full">
                 <div class="card">
                     <div class="card-header flex flex-col items-start px-14 py-14 leading-9 text-xl font-weight-lighter ">
                         {{ form.title }}

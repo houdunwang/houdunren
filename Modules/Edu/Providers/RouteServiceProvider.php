@@ -4,6 +4,9 @@ namespace Modules\Edu\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Http\Request;
+use Illuminate\Cache\RateLimiting\Limit;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -25,6 +28,15 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+        $this->configureRateLimiting();
+    }
+
+    /**
+     * 限流
+     * @return void
+     */
+    protected function configureRateLimiting()
+    {
     }
 
     /**

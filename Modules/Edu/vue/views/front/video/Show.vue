@@ -24,31 +24,14 @@
                                 下集
                             </router-link>
                         </div>
-                        <!-- <div class="btn-group btn-group-sm align-items-center">
-                            <a href="https://www.houdunren.com/common/favorite/Video/13021/Edu" class="btn btn-outline-secondary"
-                                ><i aria-hidden="true" class="fa fa-heart-o"></i> 收藏
-                            </a>
-                            <button type="button" class="btn btn-outline-secondary">
-                                8
-                            </button>
-                            <a href="https://www.houdunren.com/common/favour/Video/13021/Edu" class="btn btn-outline-secondary"
-                                ><i aria-hidden="true" class="fa fa-thumbs-o-up"></i> 点赞
-                            </a>
-                            <button type="button" class="btn btn-outline-secondary">
-                                12
-                            </button>
-                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="container-xl mt-3 md:flex">
-            <div class="card md:w-9/12 md:mr-5 mb-5">
-                <div class="card-header flex justify-between h-14">
-                    评论
-                </div>
-                <div class="card-body"></div>
+            <div class="md:w-9/12 md:mr-5 mb-5">
+                <comment-list :action-list="`front/video/${$route.params.id}/comments`" :action-post="`front/video/${$route.params.id}/comment`" />
             </div>
 
             <div class="md:w-3/12">

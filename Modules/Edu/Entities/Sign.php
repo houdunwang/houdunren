@@ -4,8 +4,9 @@ namespace Modules\Edu\Entities;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Traits\Activity;
 use Auth;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 签到
@@ -13,20 +14,24 @@ use Auth;
  */
 class Sign extends Model
 {
-    //   use Activity;
-
-    protected static $recordEvents = ['created'];
-
     protected $table = 'edu_sign';
-
     protected $fillable = ['content', 'mood'];
     protected $appends = ['permissions'];
 
+    /**
+     * 用户关联
+     * @return BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * 权限
+     * @return bool
+     * @throws BindingResolutionException
+     */
     public function getPermissionsAttribute()
     {
         return [
@@ -34,9 +39,4 @@ class Sign extends Model
             'delete' => Auth::check() && Auth::user()->can('delete', $this),
         ];
     }
-
-    // public function info()
-    // {
-    //     return $this->hasOne(SignTotal::class, 'user_id', 'user_id');
-    // }
 }

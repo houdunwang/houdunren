@@ -2,7 +2,6 @@
 
 namespace Modules\Edu\Api;
 
-use App\Http\Controllers\Controller;
 use Auth;
 use Exception;
 use Illuminate\Contracts\View\View;
@@ -14,11 +13,14 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
 use LogicException;
-use Modules\Edu\Entities\Tag;
 use Modules\Edu\Entities\Topic;
 use Modules\Edu\Http\Requests\TopicRequest;
-use App\Models\Site;
 use Modules\Edu\Transformers\TopicResource;
+use ActivityService;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Modules\Edu\Transformers\CommentResource;
+use Modules\Edu\Http\Requests\CommentRequest;
 
 /**
  * 贴子管理
@@ -28,8 +30,6 @@ class TopicController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum'])->except(['index', 'show']);
-        $this->middleware(['front']);
     }
 
     /**
@@ -50,33 +50,41 @@ class TopicController extends Controller
      * 保存
      * @param TopicRequest $request
      * @param Topic $topic
-     * @return string[]
+     * @return string
      * @throws InvalidCastException
      * @throws LogicException
      * @throws InvalidArgumentException
      * @throws MassAssignmentException
      */
-    public function store(TopicRequest $request, Site $site, Topic $topic)
+    public function store(TopicRequest $request, Topic $topic)
     {
         $topic->fill($request->input());
         $topic->site_id = site()['id'];
         $topic->user_id = Auth::id();
         $topic->save();
         $topic->tags()->sync($request->tags);
+        ActivityService::log($topic);
         return ['message' => '贴子发表成功'];
     }
 
     /**
-     * 单条
-     *
+     * 获取评论
      * @param Topic $topic
-     * @return void
+     * @return TopicResource
      */
     public function show(Topic $topic)
     {
         return new TopicResource($topic->load('user'));
     }
 
+    /**
+     * 更新贴子
+     * @param Request $request
+     * @param Topic $topic
+     * @return string[]
+     * @throws MassAssignmentException
+     * @throws InvalidArgumentException
+     */
     public function update(Request $request,  Topic $topic)
     {
         $topic->fill($request->input())->save();
@@ -109,5 +117,33 @@ class TopicController extends Controller
         $topic->recommend = !$topic->recommend;
         $topic->save();
         return ['message' => '推荐修改成功'];
+    }
+
+    /**
+     * 评论列表
+     * @param Topic $topic
+     * @return AnonymousResourceCollection
+     */
+    public function commentList(Topic $topic)
+    {
+        $comments = $topic->comments()->with(['user', 'replyUser'])->latest()->paginate(10);
+        return CommentResource::collection($comments);
+    }
+
+    /**
+     * 发表评论
+     * @param Request $request
+     * @param Topic $topic
+     * @return void
+     * @throws BindingResolutionException
+     */
+    public function comment(CommentRequest $request, Topic $topic)
+    {
+        $comment = $topic->comments()->create($request->input() + [
+            'site_id' => SID,
+            'user_id' => Auth::id()
+        ]);
+        ActivityService::log($comment);
+        return $this->message('评论发表成功', new CommentResource($comment->load(['user', 'replyUser'])));
     }
 }

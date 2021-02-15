@@ -3,10 +3,7 @@
 namespace Modules\Edu\Entities;
 
 use App\Models\Site;
-use App\Models\Traits\Favorite;
-use App\Models\Traits\Favour;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Edu\Entities\Traits\Comment;
 use Auth;
 
 /**
@@ -15,7 +12,6 @@ use Auth;
  */
 class Video extends Model
 {
-    use Favorite, Favour, Comment;
     protected $table = 'edu_videos';
     protected $guarded = [];
     protected $appends = ['Permissions'];
@@ -40,5 +36,14 @@ class Video extends Model
     public function user()
     {
         return $this->lesson->user();
+    }
+
+    /**
+     * 评论关联
+     * @return MorphMany
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'comment');
     }
 }

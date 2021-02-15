@@ -25,6 +25,7 @@ export default {
     },
     data() {
         return {
+            //编辑器对象
             editor: null
         }
     },
@@ -64,6 +65,10 @@ export default {
                 toolbarItems: this.toolbar()
             })
             this.editor = editor
+        },
+        //设置编辑器内容
+        setHtml(content = '') {
+            this.editor.setHtml(content)
         },
         //添加工具条按钮
         createButton(className) {

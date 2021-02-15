@@ -3,6 +3,7 @@
         <top-menu />
         <router-view />
         <hd-footer />
+        <el-backtop> </el-backtop>
     </div>
 </template>
 

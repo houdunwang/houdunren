@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 8.24.0.
+ * Generated for Laravel 8.27.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -198,6 +198,18 @@
                         return $instance->langPath();
         }
                     /**
+         * Set the language file directory.
+         *
+         * @param string $path
+         * @return \Illuminate\Foundation\Application 
+         * @static 
+         */ 
+        public static function useLangPath($path)
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        return $instance->useLangPath($path);
+        }
+                    /**
          * Get the path to the public / web directory.
          *
          * @return string 
@@ -313,7 +325,7 @@
                         return $instance->environment(...$environments);
         }
                     /**
-         * Determine if application is in local environment.
+         * Determine if the application is in the local environment.
          *
          * @return bool 
          * @static 
@@ -324,7 +336,7 @@
                         return $instance->isLocal();
         }
                     /**
-         * Determine if application is in production environment.
+         * Determine if the application is in the production environment.
          *
          * @return bool 
          * @static 
@@ -846,7 +858,7 @@
                         $instance->setFallbackLocale($fallbackLocale);
         }
                     /**
-         * Determine if application locale is the given locale.
+         * Determine if the application locale is the given locale.
          *
          * @param string $locale
          * @return bool 
@@ -2039,7 +2051,7 @@
                         return $instance->setRequest($request);
         }
                     /**
-         * Determine if current user is authenticated. If not, throw an exception.
+         * Determine if the current user is authenticated. If not, throw an exception.
          *
          * @return \App\Models\User 
          * @throws \Illuminate\Auth\AuthenticationException
@@ -6438,7 +6450,7 @@
                         $instance->assertSent($callback);
         }
                     /**
-         * Assert that the given request were sent in the given order.
+         * Assert that the given request was sent in the given order.
          *
          * @param array $callbacks
          * @return void 
@@ -7335,7 +7347,7 @@
                     /**
          * Send a new message using a view.
          *
-         * @param string|array $view
+         * @param \Illuminate\Contracts\Mail\Mailable|string|array $view
          * @param array $data
          * @param \Closure|string|null $callback
          * @return void 
@@ -8566,7 +8578,7 @@
                         return $instance->routeIs(...$patterns);
         }
                     /**
-         * Determine if the current request URL and query string matches a pattern.
+         * Determine if the current request URL and query string match a pattern.
          *
          * @param mixed $patterns
          * @return bool 
@@ -8589,7 +8601,7 @@
                         return $instance->ajax();
         }
                     /**
-         * Determine if the request is the result of an PJAX call.
+         * Determine if the request is the result of a PJAX call.
          *
          * @return bool 
          * @static 
@@ -8600,7 +8612,7 @@
                         return $instance->pjax();
         }
                     /**
-         * Determine if the request is the result of an prefetch call.
+         * Determine if the request is the result of a prefetch call.
          *
          * @return bool 
          * @static 
@@ -11537,6 +11549,30 @@
      */ 
         class Schema {
                     /**
+         * Create a database in the schema.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function createDatabase($name)
+        {
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        return $instance->createDatabase($name);
+        }
+                    /**
+         * Drop a database from the schema if the database exists.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function dropDatabaseIfExists($name)
+        {
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        return $instance->dropDatabaseIfExists($name);
+        }
+                    /**
          * Determine if the given table exists.
          *
          * @param string $table
@@ -14315,7 +14351,7 @@
                         return \Illuminate\View\Factory::parentPlaceholder($section);
         }
                     /**
-         * Check if section exists.
+         * Check if the section exists.
          *
          * @param string $name
          * @return bool 
@@ -15306,6 +15342,60 @@
         {
                         /** @var \App\Services\WeChat\WeChatService $instance */
                         $instance->keywordIsExists($keyword);
+        }
+         
+    }
+     
+}
+
+    namespace App\Services\Activity { 
+            /**
+     * 
+     *
+     */ 
+        class ActivityFacade {
+                    /**
+         * 记录活动
+         *
+         * @param \App\Services\Activity\User $user
+         * @param \App\Services\Activity\Model $model
+         * @param string $description
+         * @param array $properties
+         * @return void|\App\Services\Activity\Ac 
+         * @throws BindingResolutionException
+         * @throws InvalidArgumentException
+         * @throws CouldNotLogActivity
+         * @throws InvalidCastException
+         * @throws JsonEncodingException
+         * @static 
+         */ 
+        public static function log($model, $user = null, $description = '', $properties = [])
+        {
+                        /** @var \App\Services\Activity\ActivityService $instance */
+                        return $instance->log($model, $user, $description, $properties);
+        }
+                    /**
+         * 获取用户动态
+         *
+         * @param \App\Services\Activity\User $user
+         * @return mixed 
+         * @static 
+         */ 
+        public static function user($user = null)
+        {
+                        /** @var \App\Services\Activity\ActivityService $instance */
+                        return $instance->user($user);
+        }
+                    /**
+         * 所有动态
+         *
+         * @return mixed 
+         * @static 
+         */ 
+        public static function all()
+        {
+                        /** @var \App\Services\Activity\ActivityService $instance */
+                        return $instance->all();
         }
          
     }
@@ -17476,6 +17566,20 @@ namespace  {
             }
              
                 /**
+             * Run a map over each item while chunking.
+             *
+             * @param callable $callback
+             * @param int $count
+             * @return \Illuminate\Support\Collection 
+             * @static 
+             */ 
+            public static function chunkMap($callback, $count = 1000)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->chunkMap($callback, $count);
+            }
+             
+                /**
              * Execute a callback over each item while chunking.
              *
              * @param callable $callback
@@ -17740,7 +17844,7 @@ namespace  {
                 /**
              * Add a subquery join clause to the query.
              *
-             * @param \Closure|\Illuminate\Database\Query\Builder|string $query
+             * @param \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|string $query
              * @param string $as
              * @param \Closure|string $first
              * @param string|null $operator
@@ -17792,7 +17896,7 @@ namespace  {
                 /**
              * Add a subquery left join to the query.
              *
-             * @param \Closure|\Illuminate\Database\Query\Builder|string $query
+             * @param \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|string $query
              * @param string $as
              * @param \Closure|string $first
              * @param string|null $operator
@@ -17841,7 +17945,7 @@ namespace  {
                 /**
              * Add a subquery right join to the query.
              *
-             * @param \Closure|\Illuminate\Database\Query\Builder|string $query
+             * @param \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|string $query
              * @param string $as
              * @param \Closure|string $first
              * @param string|null $operator
@@ -19542,6 +19646,7 @@ namespace  {
             class UploadService extends \App\Services\Upload\UploadFacade {}
             class UserService extends \App\Services\User\UserFacade {}
             class WeChatService extends \App\Services\WeChat\WeChatFacade {}
+            class ActivityService extends \App\Services\Activity\ActivityFacade {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Image extends \Intervention\Image\Facades\Image {}
             class Socialite extends \Laravel\Socialite\Facades\Socialite {}

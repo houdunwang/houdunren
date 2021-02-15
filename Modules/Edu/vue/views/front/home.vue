@@ -5,19 +5,22 @@
                 社区动态
             </div>
             <div class="card-body">
-                <div class="divide-y-4">
-                    <div>
-                        <div class="row">
-                            <div class="col-auto">
-                                <span class="avatar">AA</span>
-                            </div>
-                            <div class="col">
-                                <div class="text-truncate"><strong>Arlie Armstead</strong> sent a Review Request to <strong>Amanda Blake</strong>.</div>
-                                <div class="text-muted">2 days ago</div>
-                            </div>
-                        </div>
-                    </div>
+                <div v-for="activity in activities.data" :key="activity.id">
+                    <component :is="`Activity${activity.type}`" :subject="activity.subject"></component>
                 </div>
+            </div>
+            <div class="card-footer">
+                <el-pagination
+                    :small="true"
+                    @current-change="load"
+                    v-if="activities.meta"
+                    :hide-on-single-page="true"
+                    :page-size="12"
+                    :total="activities.meta.total"
+                    background
+                    layout="prev, pager, next"
+                >
+                </el-pagination>
             </div>
         </div>
 
@@ -31,7 +34,20 @@
 import CommunityTip from '../../components/CommunityTip.vue'
 export default {
     components: { CommunityTip },
-    route: { path: '//' }
+    route: { path: '//' },
+    data() {
+        return {
+            activities: []
+        }
+    },
+    async created() {
+        this.load()
+    },
+    methods: {
+        async load(page = 1) {
+            this.activities = await this.axios.get(`front/activity?page=${page}`)
+        }
+    }
 }
 </script>
 

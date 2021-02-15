@@ -6,6 +6,7 @@
             <router-view />
         </div>
         <x-footer />
+        <el-backtop> </el-backtop>
     </div>
 </template>
 <script>

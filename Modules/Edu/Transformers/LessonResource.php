@@ -34,6 +34,7 @@ class LessonResource extends JsonResource
             'read_num' => $this->read_num,
             'comment_num' => $this->comment_num,
             'description' => $this->description,
+            'user' => $this->whenLoaded('user'),
             'videos' => VideoResource::collection($this->whenLoaded('videos')),
         ];
     }

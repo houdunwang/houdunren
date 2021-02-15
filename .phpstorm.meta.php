@@ -11,6 +11,7 @@ namespace PHPSTORM_META {
     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
+            'ActivityService' => \App\Services\Activity\ActivityService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'CodeService' => \App\Services\Code\CodeService::class,
             'ConfigService' => \App\Services\Config\ConfigService::class,
@@ -49,6 +50,7 @@ namespace PHPSTORM_META {
             'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
             'Illuminate\Routing\Contracts\ControllerDispatcher' => \Illuminate\Routing\ControllerDispatcher::class,
             'Illuminate\Session\Middleware\StartSession' => \Illuminate\Session\Middleware\StartSession::class,
+            'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
             'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
@@ -209,6 +211,7 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
         '' => '@',
+            'ActivityService' => \App\Services\Activity\ActivityService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'CodeService' => \App\Services\Code\CodeService::class,
             'ConfigService' => \App\Services\Config\ConfigService::class,
@@ -247,6 +250,7 @@ namespace PHPSTORM_META {
             'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
             'Illuminate\Routing\Contracts\ControllerDispatcher' => \Illuminate\Routing\ControllerDispatcher::class,
             'Illuminate\Session\Middleware\StartSession' => \Illuminate\Session\Middleware\StartSession::class,
+            'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
             'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
@@ -407,6 +411,7 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::get(0), map([
         '' => '@',
+            'ActivityService' => \App\Services\Activity\ActivityService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'CodeService' => \App\Services\Code\CodeService::class,
             'ConfigService' => \App\Services\Config\ConfigService::class,
@@ -445,6 +450,7 @@ namespace PHPSTORM_META {
             'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
             'Illuminate\Routing\Contracts\ControllerDispatcher' => \Illuminate\Routing\ControllerDispatcher::class,
             'Illuminate\Session\Middleware\StartSession' => \Illuminate\Session\Middleware\StartSession::class,
+            'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
             'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
@@ -605,6 +611,7 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
+            'ActivityService' => \App\Services\Activity\ActivityService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'CodeService' => \App\Services\Code\CodeService::class,
             'ConfigService' => \App\Services\Config\ConfigService::class,
@@ -643,6 +650,7 @@ namespace PHPSTORM_META {
             'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
             'Illuminate\Routing\Contracts\ControllerDispatcher' => \Illuminate\Routing\ControllerDispatcher::class,
             'Illuminate\Session\Middleware\StartSession' => \Illuminate\Session\Middleware\StartSession::class,
+            'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
             'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
@@ -803,6 +811,7 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
+            'ActivityService' => \App\Services\Activity\ActivityService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'CodeService' => \App\Services\Code\CodeService::class,
             'ConfigService' => \App\Services\Config\ConfigService::class,
@@ -841,6 +850,7 @@ namespace PHPSTORM_META {
             'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
             'Illuminate\Routing\Contracts\ControllerDispatcher' => \Illuminate\Routing\ControllerDispatcher::class,
             'Illuminate\Session\Middleware\StartSession' => \Illuminate\Session\Middleware\StartSession::class,
+            'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
             'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
@@ -1001,6 +1011,7 @@ namespace PHPSTORM_META {
         ]));
     override(\App::get(0), map([
         '' => '@',
+            'ActivityService' => \App\Services\Activity\ActivityService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'CodeService' => \App\Services\Code\CodeService::class,
             'ConfigService' => \App\Services\Config\ConfigService::class,
@@ -1039,6 +1050,7 @@ namespace PHPSTORM_META {
             'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
             'Illuminate\Routing\Contracts\ControllerDispatcher' => \Illuminate\Routing\ControllerDispatcher::class,
             'Illuminate\Session\Middleware\StartSession' => \Illuminate\Session\Middleware\StartSession::class,
+            'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
             'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
@@ -1199,6 +1211,7 @@ namespace PHPSTORM_META {
         ]));
     override(\App::make(0), map([
         '' => '@',
+            'ActivityService' => \App\Services\Activity\ActivityService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'CodeService' => \App\Services\Code\CodeService::class,
             'ConfigService' => \App\Services\Config\ConfigService::class,
@@ -1237,6 +1250,7 @@ namespace PHPSTORM_META {
             'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
             'Illuminate\Routing\Contracts\ControllerDispatcher' => \Illuminate\Routing\ControllerDispatcher::class,
             'Illuminate\Session\Middleware\StartSession' => \Illuminate\Session\Middleware\StartSession::class,
+            'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
             'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
@@ -1397,6 +1411,7 @@ namespace PHPSTORM_META {
         ]));
     override(\App::makeWith(0), map([
         '' => '@',
+            'ActivityService' => \App\Services\Activity\ActivityService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'CodeService' => \App\Services\Code\CodeService::class,
             'ConfigService' => \App\Services\Config\ConfigService::class,
@@ -1435,6 +1450,7 @@ namespace PHPSTORM_META {
             'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
             'Illuminate\Routing\Contracts\ControllerDispatcher' => \Illuminate\Routing\ControllerDispatcher::class,
             'Illuminate\Session\Middleware\StartSession' => \Illuminate\Session\Middleware\StartSession::class,
+            'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
             'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
@@ -1595,6 +1611,7 @@ namespace PHPSTORM_META {
         ]));
     override(\app(0), map([
         '' => '@',
+            'ActivityService' => \App\Services\Activity\ActivityService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'CodeService' => \App\Services\Code\CodeService::class,
             'ConfigService' => \App\Services\Config\ConfigService::class,
@@ -1633,6 +1650,7 @@ namespace PHPSTORM_META {
             'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
             'Illuminate\Routing\Contracts\ControllerDispatcher' => \Illuminate\Routing\ControllerDispatcher::class,
             'Illuminate\Session\Middleware\StartSession' => \Illuminate\Session\Middleware\StartSession::class,
+            'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
             'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
@@ -1793,6 +1811,7 @@ namespace PHPSTORM_META {
         ]));
     override(\resolve(0), map([
         '' => '@',
+            'ActivityService' => \App\Services\Activity\ActivityService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'CodeService' => \App\Services\Code\CodeService::class,
             'ConfigService' => \App\Services\Config\ConfigService::class,
@@ -1831,6 +1850,7 @@ namespace PHPSTORM_META {
             'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
             'Illuminate\Routing\Contracts\ControllerDispatcher' => \Illuminate\Routing\ControllerDispatcher::class,
             'Illuminate\Session\Middleware\StartSession' => \Illuminate\Session\Middleware\StartSession::class,
+            'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
             'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
@@ -1991,6 +2011,7 @@ namespace PHPSTORM_META {
         ]));
     override(\Psr\Container\ContainerInterface::get(0), map([
         '' => '@',
+            'ActivityService' => \App\Services\Activity\ActivityService::class,
             'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
             'CodeService' => \App\Services\Code\CodeService::class,
             'ConfigService' => \App\Services\Config\ConfigService::class,
@@ -2029,6 +2050,7 @@ namespace PHPSTORM_META {
             'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
             'Illuminate\Routing\Contracts\ControllerDispatcher' => \Illuminate\Routing\ControllerDispatcher::class,
             'Illuminate\Session\Middleware\StartSession' => \Illuminate\Session\Middleware\StartSession::class,
+            'Illuminate\Testing\ParallelTesting' => \Illuminate\Testing\ParallelTesting::class,
             'Laravel\Socialite\Contracts\Factory' => \Laravel\Socialite\SocialiteManager::class,
             'Laravel\Telescope\Contracts\ClearableRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,
             'Laravel\Telescope\Contracts\EntriesRepository' => \Laravel\Telescope\Storage\DatabaseEntriesRepository::class,

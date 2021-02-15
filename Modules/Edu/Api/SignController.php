@@ -9,6 +9,7 @@ use Modules\Edu\Entities\Sign;
 use Modules\Edu\Transformers\SignResource;
 use Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use ActivityService;
 
 /**
  * 签到
@@ -37,6 +38,7 @@ class SignController extends Controller
         $sign->site_id = SID;
         $sign->user_id = Auth::id();
         $sign->save();
+        ActivityService::log($sign);
         return $this->message('签到添加成功', new SignResource($sign));
     }
 

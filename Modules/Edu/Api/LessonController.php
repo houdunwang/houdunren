@@ -12,6 +12,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\Site;
 use Auth;
+use ActivityService;
 
 /**
  * 课程管理
@@ -58,6 +59,7 @@ class LessonController extends Controller
         $lesson->tags()->sync($request->tags);
         $this->updateVideos($lesson, $request);
         DB::commit();
+        ActivityService::log($lesson);
         return ['message' => '课程添加成功'];
     }
 
@@ -87,7 +89,7 @@ class LessonController extends Controller
     protected function updateVideos(Lesson $lesson, Request $request)
     {
         $lesson->videos()->whereNotIn('id', collect($request->videos)->pluck('id'))->delete();
-        foreach ($request->videos as $rank => $video) {
+        foreach ((array)$request->videos as $rank => $video) {
             if ($video['title']) {
                 Video::updateOrCreate(['id' => $video['id'] ?? 0], [
                     'site_id' => site()['id'],

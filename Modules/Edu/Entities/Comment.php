@@ -3,70 +3,60 @@
 namespace Modules\Edu\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Traits\Activity;
 use App\Models\User;
-use Carbon\Carbon;
 use Carbon\Exceptions\InvalidFormatException;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Auth;
 
 /**
- * 评论模型
+ * 评论
  * @package Modules\Edu\Entities
  */
 class Comment extends Model
 {
-  use Activity;
+    protected $table = 'edu_comment';
 
-  protected $table = 'edu_comment';
-
-  protected $fillable = ['content', 'user_id', 'site_id', 'reply_user_id'];
-
-  protected static $recordEvents = ['created'];
-
-  public function user()
-  {
-    return $this->belongsTo(User::class);
-  }
-
-  /**
-   * 回复用户
-   * @return BelongsTo
-   */
-  public function reply_user()
-  {
-    return $this->belongsTo(User::class, 'reply_user_id');
-  }
-
-  /**
-   * 获取HTML内容
-   * @return mixed
-   * @throws InvalidFormatException
-   */
-  public function getHtmlAttribute()
-  {
-    if ($this->updated_at < Carbon::create(2020, 6, 1)) {
-      return $this->content;
+    protected $fillable = ['content', 'user_id', 'site_id', 'reply_user_id'];
+    protected $appends = ['permissions'];
+    /**
+     * 模型权限
+     * @return void
+     */
+    public function getPermissionsAttribute()
+    {
+        return [
+            'view' => Auth::check() && Auth::user()->can('view', $this),
+            'update' => Auth::check() && Auth::user()->can('update', $this),
+            'delete' => Auth::check() && Auth::user()->can('delete', $this)
+        ];
     }
 
-    return (new \Parsedown())->setSafeMode(true)->text($this->content);
-  }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
-  /**
-   * 多态关联
-   * @return MorphTo
-   */
-  public function commentable()
-  {
-    return $this->morphTo('comment');
-  }
+    public function replyUser()
+    {
+        return $this->belongsTo(User::class, 'reply_user_id');
+    }
 
-  /**
-   * 评论链接
-   * @return string
-   */
-  public function link()
-  {
-    return $this->commentable->link() . '#comment-' . $this->id;
-  }
+    /**
+     * 回复用户
+     * @return BelongsTo
+     */
+    public function reply_user()
+    {
+        return $this->belongsTo(User::class, 'reply_user_id');
+    }
+
+    /**
+     * 多态关联
+     * @return MorphTo
+     */
+    public function commentable()
+    {
+        return $this->morphTo('comment');
+    }
 }

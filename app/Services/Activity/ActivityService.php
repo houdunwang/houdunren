@@ -11,6 +11,7 @@ use InvalidArgumentException;
 use Spatie\Activitylog\Exceptions\CouldNotLogActivity;
 use Illuminate\Database\Eloquent\InvalidCastException;
 use Illuminate\Database\Eloquent\JsonEncodingException;
+use Auth;
 
 /**
  * 用户活动
@@ -31,15 +32,16 @@ class ActivityService
      * @throws InvalidCastException
      * @throws JsonEncodingException
      */
-    public function log(User $user, Model $model, string $description = '', array $properties)
+    public function log(Model $model, User $user = null,  string $description = '', array $properties = [])
     {
+        $user = $user ?? Auth::user();
         return activity()
             ->causedBy($user)
             ->performedOn($model)
             ->withProperties($properties)
             ->tap(function (Ac $activity) {
                 $activity->site_id = SID;
-                $activity->model_id = MID;
+                $activity->module_id = MID;
             })
             ->log($description);
     }
@@ -49,8 +51,18 @@ class ActivityService
      * @param User $user
      * @return mixed
      */
-    public function user(User $user)
+    public function user(User $user = null)
     {
+        $user = $user ?? Auth::user();
         return Activity::where('site_id', SID)->where('module_id', MID)->get();
+    }
+
+    /**
+     * 所有动态
+     * @return mixed
+     */
+    public function all()
+    {
+        return Activity::has('subject')->where('site_id', SID)->where('module_id', MID)->latest()->paginate(10);
     }
 }

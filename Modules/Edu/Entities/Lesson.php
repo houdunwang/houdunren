@@ -3,8 +3,6 @@
 namespace Modules\Edu\Entities;
 
 use App\Models\BaseModel;
-use App\Models\Traits\Favorite;
-use App\Models\Traits\Favour;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Edu\Entities\Tag;
 
@@ -14,7 +12,6 @@ use Modules\Edu\Entities\Tag;
  */
 class Lesson extends BaseModel
 {
-    use Favour, Favorite;
 
     protected $table = 'edu_lessons';
 

@@ -33,3 +33,19 @@ a {
 a:hover {
     text-decoration: none !important;
 }
+
+.hd-code pre {
+    padding: 0 !important;
+    margin: 2rem -2.5rem !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0 !important;
+}
+.hd-code pre code {
+    line-height: 1.5rem;
+    padding: 2rem 3rem !important;
+}
+.hd-code .hljs {
+    font-weight: 600;
+    font-family: 'Jetbrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}

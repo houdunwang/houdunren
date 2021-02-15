@@ -2,16 +2,13 @@
 
 namespace Modules\Edu\Entities;
 
-use App\Models\Traits\Activity;
-use App\Models\Traits\Favorite;
-use App\Models\Traits\Favour;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Modules\Edu\Entities\Traits\Comment;
 use Auth;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Modules\Edu\Entities\Comment;
 
 /**
  * 贴子
@@ -71,5 +68,14 @@ class Topic extends Model
         }
 
         return $query->where('title', 'like', "%{$w}%");
+    }
+
+    /**
+     * 评论关联
+     * @return MorphMany
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'comment');
     }
 }
