@@ -19,8 +19,6 @@ class UploadController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
-        // $this->middleware(['admin']);
     }
 
     /**
@@ -28,8 +26,9 @@ class UploadController extends Controller
      * @param Request $request
      * @return void
      */
-    public function site(Request $request, Site $site)
+    public function site(Request $request)
     {
+        $site = site();
         $request->validate(['file' => ['required', 'mimes:jpeg,png,mp3', 'max:2000']]);
         SiteService::cache($site);
         ConfigService::site($site);

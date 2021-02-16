@@ -5,7 +5,8 @@
                 <div class="card-header h-14">
                     系统课程
                 </div>
-                <div class="card-body md:grid md:grid-cols-3 md:gap-5" v-loading="loading" style="min-height:100px;">
+                <hd-skeleton-card v-if="loading" :num="9" class=" md:grid md:grid-cols-3 md:gap-5 p-6" />
+                <div class="card-body md:grid md:grid-cols-3 md:gap-5" style="min-height:100px;" v-else>
                     <div v-for="lesson in lessons.data" :key="lesson.id" class="py-4">
                         <router-link :to="{ name: 'front.system.show', params: { id: lesson.id } }" class="card card-link">
                             <div class="text-center">

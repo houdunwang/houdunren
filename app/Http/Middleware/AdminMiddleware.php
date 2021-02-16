@@ -38,6 +38,7 @@ class AdminMiddleware
     {
         $site = session('sid', request('site'));
         $site = is_numeric($site) ? Site::findOrFail($site) : $site;
+        if (!($site instanceof Site)) abort(404);
         defined("SID") or define('SID', $site['id']);
         SiteService::cache($site);
         ConfigService::site($site);

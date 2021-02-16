@@ -36,14 +36,14 @@ export default {
         }
     },
     async created() {
-        this.site = await this.axios.get(`site/${this.sid}`)
+        this.site = await this.axios.get(`site/site/${this.sid}`)
         this.roles = await this.axios.get(`site/${this.sid}/role`)
         this.loading = false
     },
     methods: {
         async del(role) {
             await this.$confirm('确定删除角色吗', '温馨提示')
-            await this.axios.delete(`${this.sid}/role/${role.id}`)
+            await this.axios.delete(`site/${this.sid}/role/${role.id}`)
             this.roles.splice(this.roles.indexOf(role), 1)
         }
     }

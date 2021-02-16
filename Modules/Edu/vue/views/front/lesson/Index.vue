@@ -45,6 +45,7 @@ export default {
             this.loading = true
             this.lessons = await this.axios.get(`front/lesson?page=${page}`)
             this.loading = false
+            document.documentElement.scroll({ top: 30, behavior: 'smooth' })
         }
     }
 }

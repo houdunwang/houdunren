@@ -47,8 +47,8 @@ export default {
         }
     },
     async created() {
-        this.site = await this.axios.get(`site/${this.$route.params.sid}`)
-        this.modules = await this.axios.get(`module/site/${this.site.id}/user`)
+        const sid = this.$route.params.sid
+        ;[this.site, this.modules] = await Promise.all([axios.get(`site/site/${sid}`), axios.get(`site/${sid}/user/modules`)])
         this.loading = false
     },
     methods: {

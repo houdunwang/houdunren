@@ -45,11 +45,13 @@ export default {
     },
     async created() {
         await this.load()
-        this.loading = false
     },
     methods: {
         async load(page = 1) {
+            this.loading = true
             this.topics = await this.axios.get(`front/topic?page=${page}`)
+            this.loading = false
+            document.documentElement.scroll({ top: 30, behavior: 'smooth' })
         }
     }
 }

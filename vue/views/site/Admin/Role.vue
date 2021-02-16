@@ -30,7 +30,7 @@ export default {
         }
     },
     async created() {
-        this.admin = await this.axios.get(`user/${this.id}`)
+        this.admin = await this.axios.get(`member/user/${this.id}`)
         this.roles = await this.axios.get(`site/${this.sid}/role`)
         this.loading = false
     },

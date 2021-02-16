@@ -14,6 +14,8 @@ use App\Models\User;
 use CodeService;
 use Hash;
 use Auth;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
  * 用户
@@ -23,8 +25,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
-        $this->middleware(['front'])->only(['mobileCode', 'emailCode']);
+        $this->authorizeResource(User::class, 'user');
     }
 
     /**
@@ -33,19 +34,21 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::when(request('keyword'), function ($query) {
-            return $query->search(request('keyword'));
-        })->paginate(10);
+        $users = User::paginate(10);
         return UserResource::collection($users);
     }
 
     /**
-     * 当前登录用户
-     * @return void
+     * 搜索用户
+     * @return AnonymousResourceCollection
+     * @throws BindingResolutionException
      */
-    public function info()
+    public function search()
     {
-        return new UserResource(Auth::user());
+        $users = User::when(request('keyword'), function ($query) {
+            return $query->where('id', request('keyword'));
+        })->with('group')->paginate(10);
+        return UserResource::collection($users);
     }
 
     /**

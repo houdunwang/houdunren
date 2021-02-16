@@ -37,13 +37,13 @@ export default {
         return { loading: true, activeName: 'base', wechats: {}, site: { config } }
     },
     async created() {
-        this.site = await this.axios.get(`site/${this.$route.params.sid}`)
+        this.site = await this.axios.get(`site/site/${this.$route.params.sid}`)
         this.site.config = Object.assign(config, this.site.config)
         this.loading = false
     },
     methods: {
         async onSubmit() {
-            await this.axios.put(`site/${this.$route.params.sid}`, this.site)
+            await this.axios.put(`site/site/${this.$route.params.sid}`, this.site)
         }
     }
 }

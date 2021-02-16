@@ -71,10 +71,10 @@ export default {
     },
     methods: {
         async onSubmitBase() {
-            await this.axios.put(`user/${this.Auth.id()}`, this.formBase)
+            await this.axios.put(`member/user/${this.user.id}`, this.formBase)
         },
         onSubmitPassword() {
-            this.axios.put(`user/password`, this.formPassword)
+            this.axios.put(`member/user/password`, this.formPassword)
         }
     }
 }

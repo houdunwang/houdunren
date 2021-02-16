@@ -1,12 +1,13 @@
 <template>
     <div class="container-xl mt-16 md:flex">
-        <div class="md:w-9/12 md:mr-5 mb-5">
+        <hd-skeleton-list v-if="loading" :num="15" class="md:w-9/12 md:mr-5 mb-5" />
+        <div class="md:w-9/12 md:mr-5 mb-5" v-else>
             <div class="card ">
                 <div class="card-header flex justify-between h-14">
                     社区动态
                 </div>
-                <hd-skeleton-list v-if="loading" :num="15" />
-                <div class="card-body" v-else>
+
+                <div class="card-body">
                     <topic-recommend />
                     <div v-for="activity in activities.data" :key="activity.id">
                         <component :is="`Activity${activity.type}`" :subject="activity.subject"></component>
@@ -55,6 +56,7 @@ export default {
             this.loading = true
             this.activities = await this.axios.get(`front/activity?page=${page}`)
             this.loading = false
+            document.documentElement.scroll({ top: 30, behavior: 'smooth' })
         }
     }
 }

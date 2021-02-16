@@ -10,6 +10,7 @@ use App\Models\Group;
 use ModuleService;
 use Auth;
 use App\Models\Site;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * 模块管理
@@ -19,18 +20,29 @@ class ModuleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum'])->except(['current']);
-        $this->middleware(['front'])->only(['current']);
         $this->authorizeResource(Module::class, 'module');
     }
 
     /**
-     * 前台模块
-     * @return null
+     * 站点模块
+     * @param Site $site
+     * @return AnonymousResourceCollection
      */
-    public function current()
+    public function site(Site $site)
     {
-        return module();
+        $modules = ModuleService::siteModules($site);
+        return ModuleResource::collection($modules->load('packages'));
+    }
+
+    /**
+     * 用户站点模块
+     * @param Site $site
+     * @return AnonymousResourceCollection
+     */
+    public function userSiteModule(Site $site)
+    {
+        $modules = ModuleService::userSiteModules($site, Auth::user());
+        return ModuleResource::collection($modules->load('packages'));
     }
 
     /**
@@ -38,19 +50,9 @@ class ModuleController extends Controller
      * @param Group $group
      * @return void
      */
-    public function group(Group $group)
+    public function group()
     {
-        $modules = $group->modules;
-        return ModuleResource::collection($modules->load('packages'));
-    }
-
-    /**
-     * 用户可使用的站点模块
-     * @return void
-     */
-    public function userSiteModules(Site $site)
-    {
-        $modules = ModuleService::userSiteModules($site, Auth::user());
+        $modules = Auth::user()->group->modules;
         return ModuleResource::collection($modules->load('packages'));
     }
 

@@ -74,19 +74,19 @@ export default {
         return { sites: [], menus, loading: true }
     },
     async created() {
-        this.sites = await this.axios.get('site')
+        this.sites = await this.axios.get('site/site')
         this.loading = false
     },
     methods: {
         async del(site) {
             try {
                 await this.$confirm('确定删除站点吗？', '提示')
-                await this.axios.delete(`site/${site.id}`, site)
+                await this.axios.delete(`site/site/${site.id}`, site)
                 this.sites.splice(this.sites.indexOf(site), 1)
             } catch (e) {}
         },
         async syncPermission(site) {
-            await this.axios.get(`permission/${site.id}/sync`)
+            await this.axios.get(`site/permission/${site.id}/sync`)
         }
     }
 }

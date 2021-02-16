@@ -26,6 +26,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'mobile',
+        'email',
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
@@ -118,25 +119,6 @@ class User extends Authenticatable
     public function getSitesAttribute()
     {
         return $this->isSuperAdmin ? Site::all() : $this->masterSites->merge($this->adminSites);
-    }
-
-    /**
-     * 根据关键词搜索用户
-     * @param [type] $query
-     * @param string $name
-     * @return void
-     */
-    public function scopeSearch($query, string $name)
-    {
-        if (empty($name)) {
-            return $query;
-        }
-        $name = "%{$name}%";
-        return $query
-            ->orWhere('name', 'like', $name)
-            ->orWhere('id', 'like', $name)
-            ->orWhere('email', 'like', $name)
-            ->orWhere('mobile', 'like', $name);
     }
 
     /**

@@ -55,13 +55,13 @@ export default {
         }
     },
     async created() {
-        this.groups = await this.axios.get(`group`)
+        this.groups = await this.axios.get(`system/group`)
         this.loading = false
     },
     methods: {
         del(group) {
             this.$confirm('确定删除会员组吗？').then(async () => {
-                await this.axios.delete(`group/${group.id}`)
+                await this.axios.delete(`system/group/${group.id}`)
                 this.groups.splice(this.groups.indexOf(group), 1)
             })
         }

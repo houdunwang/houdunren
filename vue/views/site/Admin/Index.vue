@@ -31,7 +31,7 @@
             </el-table-column>
         </el-table>
         <div class="mt-3">
-            <hd-user-search title="选择管理员" @change="setAdmin" />
+            <hd-user-search title="选择管理员" @change="setAdmin" :action="`site/${this.sid}/user`" />
         </div>
     </div>
 </template>
@@ -43,7 +43,7 @@ export default {
         return { tabs: tabs({ sid: this.$route.params.sid }), site: {}, users: [], sid: this.$route.params.sid, loading: true }
     },
     async created() {
-        this.site = await this.axios.get(`site/${this.sid}`)
+        this.site = await this.axios.get(`site/site/${this.sid}`)
         this.users = await this.axios.get(`site/${this.sid}/admin`)
         this.loading = false
     },
@@ -56,7 +56,7 @@ export default {
         //移除管理员
         async remove(user) {
             this.$confirm('确定删除吗？', '温馨提示').then(async () => {
-                await this.axios.delete(`${this.sid}/admin/${user.id}`)
+                await this.axios.delete(`site/${this.sid}/admin/${user.id}`)
                 this.users.splice(this.users.indexOf(user), 1)
             })
         }

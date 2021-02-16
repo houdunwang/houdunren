@@ -39,8 +39,8 @@ export default {
         }
     },
     async created() {
-        this.site = await this.axios.get(`site/${this.$route.params.sid}`)
-        this.modules = await this.axios.get(`site/module/${this.site.id}`)
+        this.site = await this.axios.get(`site/site/${this.$route.params.sid}`)
+        this.modules = await this.axios.get(`site/${this.site.id}/modules`)
         this.role = await this.axios.get(`site/${this.site.id}/role/${this.$route.params.rid}`)
         //保存已经存在的权限
         this.form.permissions = this.role.permissions.map(p => p.name)
@@ -48,7 +48,7 @@ export default {
     },
     methods: {
         async onSubmit() {
-            await this.axios.put(`permission/${this.site.id}/${this.role.id}`, this.form)
+            await this.axios.put(`site/permission/${this.site.id}/${this.role.id}`, this.form)
             this.route(`site.role.index`, { sid: this.site.id })
         }
     }

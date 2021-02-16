@@ -91,7 +91,7 @@ export default {
         }
     },
     async created() {
-        this.site = await this.axios.get(`site/${this.sid}`)
+        this.site = await this.axios.get(`site/site/${this.sid}`)
         this.wechat = await this.axios.get(`site/${this.sid}/wechat/${this.id}`)
         this.menus = this.wechat.menus || []
     },

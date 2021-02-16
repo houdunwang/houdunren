@@ -57,13 +57,13 @@ export default {
         }
     },
     async created() {
-        if (this.id) this.form = await this.axios.get(`site/${this.id}`)
-        this.modules = await this.axios.get(`module/group/${this.user.group_id}`)
+        if (this.id) this.form = await this.axios.get(`site/site/${this.id}`)
+        this.modules = await this.axios.get(`site/module/group/${this.user.group_id}`)
         this.loading = false
     },
     methods: {
         async onSubmit() {
-            const url = this.id ? `site/${this.id}` : 'site'
+            const url = this.id ? `site/site/${this.id}` : 'site/site'
             await this.axios[this.id ? 'put' : 'post'](url, this.form)
             this.$router.push({ name: 'site.site.index' })
         }

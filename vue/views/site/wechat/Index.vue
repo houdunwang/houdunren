@@ -1,6 +1,8 @@
 <template>
     <div>
         <hd-tab :tabs="tabs" />
+        <el-alert effect="light" closable> 正在管理【{{ site.title }}】站点的公众号 </el-alert>
+
         <el-table :data="wechats" style="width: 100%" border v-loading="loading">
             <el-table-column prop="id" label="编号" width="100"> </el-table-column>
             <el-table-column prop="title" label="公众号名称"> </el-table-column>
@@ -55,8 +57,8 @@ export default {
         }
     },
     async created() {
-        this.site = await this.axios.get(`site/${this.$route.params.sid}`)
-        this.wechats = await this.axios.get(`site/${this.site.id}/wechat`)
+        const sid = this.$route.params.sid
+        ;[this.site, this.wechats] = await Promise.all([this.axios.get(`site/site/${sid}`), this.axios.get(`site/${sid}/wechat`)])
         this.loading = false
     },
     methods: {

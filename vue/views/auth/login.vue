@@ -60,9 +60,10 @@ export default {
         async onSubmit() {
             this.$store.commit('setErrors', {})
             this.axios
-                .post(`login`, this.form)
+                .post(`front/login`, this.form)
                 .then(({ token }) => {
-                    location.href = '/'
+                    const redirectUrl = window.sessionStorage.getItem('redirect_url')
+                    location.href = redirectUrl || '/'
                 })
                 .finally(() => {
                     this.$refs.captcha.get()

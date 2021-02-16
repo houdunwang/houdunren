@@ -75,10 +75,10 @@ export default {
         }
     },
     async created() {
-        this.packages = await this.axios.get(`package`)
+        this.packages = await this.axios.get(`system/package`)
         //编辑时让套餐选中
         if (this.id) {
-            this.form = await this.axios.get(`group/${this.id}`)
+            this.form = await this.axios.get(`system/group/${this.id}`)
             const selectPackages = []
             this.packages.forEach(pac => {
                 if (this.form.packages.some(p => p.id == pac.id)) {
@@ -91,7 +91,7 @@ export default {
     },
     methods: {
         async onSubmit() {
-            const url = this.id ? `group/${this.id}` : `group`
+            const url = this.id ? `system/group/${this.id}` : `system/group`
             await this.axios[this.id ? 'put' : 'post'](url, { ...this.form, packages: this.form.packages.map(p => p.id) })
             this.$router.push({ name: 'system.package.index' })
         },

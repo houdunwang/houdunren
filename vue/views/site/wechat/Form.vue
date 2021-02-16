@@ -67,13 +67,13 @@ export default {
         }
     },
     async created() {
-        this.site = await this.axios.get(`site/${this.$route.params.sid}`)
+        this.site = await this.axios.get(`site/site/${this.$route.params.sid}`)
         if (this.id) this.form = await this.axios.get(`site/${this.site.id}/wechat/${this.id}`)
         this.loading = false
     },
     methods: {
         async onSubmit() {
-            const url = this.id ? `site/${this.site.id}/wechat/${this.id}` : `${this.site.id}/wechat`
+            const url = this.id ? `site/${this.site.id}/wechat/${this.id}` : `site/${this.site.id}/wechat`
             await this.axios[this.id ? 'put' : 'post'](url, this.form)
             this.$router.push({ name: 'site.wechat.index', params: { sid: this.site.id } })
         }

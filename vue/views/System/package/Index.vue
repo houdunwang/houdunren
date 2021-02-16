@@ -53,13 +53,13 @@ export default {
         }
     },
     async created() {
-        this.packages = await this.axios.get(`package`)
+        this.packages = await this.axios.get(`system/package`)
         this.loading = false
     },
     methods: {
         del(p) {
             this.$confirm('确定删除套餐吗？', '提示').then(async () => {
-                await this.axios.delete(`package/${p.id}`)
+                await this.axios.delete(`system/package/${p.id}`)
                 this.$router.go(0)
             })
         }

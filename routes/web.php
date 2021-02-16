@@ -23,9 +23,6 @@ Route::get('site/{path?}', fn () => view('app'))->where('path', '.*')->middlewar
 //系统管理
 Route::get('system/{path?}', fn () => view('app'))->where('path', '.*')->middleware(['auth:sanctum', 'system']);
 
-
-
-
 //模块主页
 Route::get('/', function () {
     $name = module()['name'];

@@ -22,11 +22,6 @@ use Illuminate\Contracts\Container\BindingResolutionException;
  */
 class AuthController extends Controller
 {
-    public function __construct()
-    {
-        // $this->middleware(['front'])->except(['login', 'logout']);
-    }
-
     /**
      * 帐号登录
      * @param Request $request

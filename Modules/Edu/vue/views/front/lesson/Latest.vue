@@ -40,6 +40,7 @@ export default {
             this.loading = true
             this.videos = await this.axios.get(`front/video?page=${page}`)
             this.loading = false
+            document.documentElement.scroll({ top: 30, behavior: 'smooth' })
         }
     }
 }
