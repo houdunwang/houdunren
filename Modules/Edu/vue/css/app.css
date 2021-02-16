@@ -49,3 +49,7 @@ a:hover {
     font-weight: 600;
     font-family: 'Jetbrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
+
+.hljs {
+    background-color: #3c4b53 !important;
+}

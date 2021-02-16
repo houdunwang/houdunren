@@ -4,7 +4,8 @@
             <div class="card-header h-14">
                 实战课程
             </div>
-            <div class="card-body md:grid md:grid-cols-4 md:gap-3" v-loading="loading" style="min-height:100px;">
+            <hd-skeleton-card v-if="loading" :num="12" class="md:grid md:grid-cols-4 md:gap-3 p-6" />
+            <div class="card-body md:grid md:grid-cols-4 md:gap-3" style="min-height:100px;" v-else>
                 <div v-for="lesson in lessons.data" :key="lesson.id" class="py-4 border-b border-gray-200">
                     <router-link :to="{ name: 'front.lesson.show', params: { id: lesson.id } }" class="card card-link">
                         <div class="text-center">
@@ -19,7 +20,6 @@
                     </router-link>
                 </div>
             </div>
-
             <div class="card-footer text-muted flex justify-center">
                 <el-pagination :small="true" @current-change="load" :page-size="12" :total="lessons.meta.total" background layout="prev, pager, next">
                 </el-pagination>

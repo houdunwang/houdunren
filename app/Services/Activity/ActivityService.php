@@ -61,8 +61,8 @@ class ActivityService
      * 所有动态
      * @return mixed
      */
-    public function all()
+    public function all($row = 10)
     {
-        return Activity::has('subject')->where('site_id', SID)->where('module_id', MID)->latest()->paginate(10);
+        return Activity::has('subject')->where('site_id', SID)->where('module_id', MID)->latest()->paginate($row);
     }
 }

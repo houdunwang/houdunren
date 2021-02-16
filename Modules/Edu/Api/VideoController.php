@@ -16,6 +16,9 @@ use Modules\Edu\Transformers\CommentResource;
 use Modules\Edu\Http\Requests\CommentRequest;
 use Auth;
 use ActivityService;
+use Illuminate\Database\Eloquent\InvalidCastException;
+use LogicException;
+use Modules\Edu\Entities\User;
 
 /**
  * 视频播放
@@ -40,15 +43,14 @@ class VideoController extends Controller
 
     /**
      * 获取视频
-     * @param Site $site
      * @param Video $video
-     * @param VideoService $videoService
-     * @return RedirectResponse|Video
-     * @throws BindingResolutionException
-     * @throws RouteNotFoundException
+     * @return VideoResource
+     * @throws InvalidCastException
+     * @throws LogicException
      */
-    public function show(Video $video, VideoService $videoService)
+    public function show(Video $video)
     {
+        User::make()->videos()->syncWithPivotValues([$video['id']], ['site_id' => SID], false);
         return new VideoResource($video->load('lesson'));
     }
 

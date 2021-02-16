@@ -15,9 +15,9 @@
                     </span>
                 </div>
             </div>
-            <div class="card-body text-secondary pb-5">
+            <div class="card-body text-secondary pb-5 comment-content">
                 <!---->
-                <div class="markdown">{{ comment.content }}</div>
+                <div class="markdown" v-html="comment.content" v-markdown></div>
             </div>
             <div class="card-footer text-muted bg-white text-sm">
                 # {{ index + 1 }}
@@ -113,4 +113,14 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.comment-content pre {
+    padding: 0 !important;
+    margin: 0 -1rem !important;
+}
+.comment-content pre code {
+    font-size: 0.85rem !important;
+    padding: 2rem;
+    line-height: 1.5rem;
+}
+</style>

@@ -55,7 +55,7 @@ export default {
         admin(module) {
             window.localStorage.setItem('sid', this.site.id)
             window.localStorage.setItem('mid', module.id)
-            location.href = `/admin/${this.site.id}/${module.id}`
+            location.href = `/module/admin/${this.site.id}/${module.id}`
         }
     }
 }

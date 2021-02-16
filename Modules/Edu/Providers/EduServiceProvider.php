@@ -4,6 +4,8 @@ namespace Modules\Edu\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Edu\Entities\Topic;
+use Modules\Edu\Observers\TopicObserver;
 
 class EduServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,8 @@ class EduServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+
+        Topic::observe(TopicObserver::class);
     }
 
     /**
@@ -51,7 +55,8 @@ class EduServiceProvider extends ServiceProvider
             module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
+            module_path($this->moduleName, 'Config/config.php'),
+            $this->moduleNameLower
         );
     }
 

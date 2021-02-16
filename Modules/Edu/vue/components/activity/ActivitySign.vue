@@ -2,10 +2,10 @@
     <div class="py-4 border-b border-gray-200">
         <div class="row">
             <div class="col-auto">
-                <img :src="subject.user.avatar" class="w-12 h-12 rounded-lg" />
+                <img :src="subject.user.avatar" class="w-12 h-12 rounded-lg object-cover" />
             </div>
             <div class="col">
-                <router-link :to="{ name: 'front.sign.index' }" class="text-base text-gray-600 hover:text-gray-900 ">
+                <router-link :to="{ name: 'front.sign.index' }" class="text-base text-gray-700 hover:text-gray-900 ">
                     {{ subject['content'] | titleSubstr }}
                 </router-link>
 

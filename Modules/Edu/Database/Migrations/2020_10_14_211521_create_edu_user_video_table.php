@@ -12,6 +12,7 @@ class CreateEduUserVideoTable extends Migration
     {
         Schema::create('edu_user_video', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->foreignId('site_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('video_id')->constrained('edu_videos')->onDelete('cascade');
             $table->timestamps();

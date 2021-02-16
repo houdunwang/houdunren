@@ -17,7 +17,7 @@ class ActivityController extends Controller
 
     public function index(Request $request)
     {
-        $activities = ActivityService::all();
+        $activities = ActivityService::all(15);
         return ActivityResource::collection($activities);
     }
 }

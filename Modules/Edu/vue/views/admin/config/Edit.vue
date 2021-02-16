@@ -70,7 +70,7 @@ const form = {
     }
 }
 export default {
-    route: { path: `/Edu/admin` },
+    route: { path: `/admin` },
     data() {
         return {
             tabs,

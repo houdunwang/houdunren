@@ -2,11 +2,30 @@
 
 namespace Modules\Edu\Entities;
 
-use App\Models\User as ModelsUser;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\User as Model;
+use Illuminate\Database\Eloquent\InvalidCastException;
+use LogicException;
+use Auth;
 
-class User extends ModelsUser
+/**
+ * 用户
+ * @package Modules\Edu\Entities
+ */
+class User extends Model
 {
+    /**
+     * 实例化用户
+     * @param Model $user
+     * @return mixed
+     * @throws InvalidCastException
+     * @throws LogicException
+     */
+    public static function make(Model $user = null)
+    {
+        $user = $user ?? Auth::user();
+        return self::find($user['id']);
+    }
+
     public function orders()
     {
         return $this->hasMany(Order::class);
@@ -17,41 +36,15 @@ class User extends ModelsUser
         return $this->hasMany(Topic::class);
     }
 
+    /**
+     * 视频关联
+     * @return mixed
+     */
     public function videos()
     {
         return $this->belongsToMany(Video::class, 'edu_user_video')
             ->orderBy('edu_user_video.created_at', 'desc')
             ->withPivot(['created_at', 'updated_at'])
             ->withTimestamps();
-    }
-
-    public function signs()
-    {
-        return $this->hasMany(Sign::class);
-    }
-
-    public function signInfo()
-    {
-        return $this->hasOne(SignTotal::class, 'user_id');
-    }
-
-    public function FavoriteLessons()
-    {
-        return $this->morphedByMany(Lesson::class, 'favorite', 'favorite');
-    }
-
-    public function FavoriteVideos()
-    {
-        return $this->morphedByMany(Video::class, 'favorite', 'favorite');
-    }
-
-    public function FavoriteTopic()
-    {
-        return $this->morphedByMany(Topic::class, 'favorite', 'favorite');
-    }
-
-    public function duration()
-    {
-        return $this->hasOne(Duration::class);
     }
 }

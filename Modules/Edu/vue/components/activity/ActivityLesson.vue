@@ -2,7 +2,7 @@
     <div class="py-4 border-b border-gray-200">
         <div class="row">
             <div class="col-auto">
-                <img :src="subject.user.avatar" class="w-12 h-12 rounded-lg" />
+                <img :src="subject.user.avatar" class="w-12 h-12 rounded-lg object-cover" />
             </div>
             <div class="col">
                 <span class="badge bg-purple">课程</span>
