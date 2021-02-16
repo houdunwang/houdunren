@@ -1,15 +1,15 @@
 <template>
-    <div class="container-xl mt-16">
+    <div class="container-xl">
         <div class="md:flex">
             <div class="md:w-9/12 md:mr-5 mb-5">
-                <div class="card hd-code" v-loading="loading">
+                <div class="card topic" v-loading="loading">
                     <div class="card-header flex flex-col items-start px-10 pt-10 leading-9 text-xl font-weight-lighter ">
                         {{ form.title }}
                         <div class="w-full flex justify-between items-center mt-2">
                             <div class="text-sm text-gray-500">{{ form.user.name }} 更新于{{ form.updated_at | fromNow }}</div>
                             <div v-if="isLogin && form.permissions">
                                 <div class="btn-group btn-group-sm" role="group" aria-label="">
-                                    <button type="button" class="btn btn-outline-danger" v-if="form.permissions.delete" @click.prevent="del">删除</button>
+                                    <button type="button" class="btn btn-outline-danger" v-if="form.permissions.delete" @click.prevent="del(form)">删除</button>
                                     <router-link
                                         :to="{ name: 'front.topic.edit', params: { id: form.id } }"
                                         class="btn btn-outline-cyan"
@@ -72,9 +72,23 @@ export default {
         async recommend() {
             const { data: topic } = await axios.get(`front/topic/${this.form.id}/recommend`)
             this.form = topic
+        },
+        async del(topic) {
+            this.$confirm('确定删除吗?', '温馨提示').then(async _ => {
+                await axios.delete(`front/topic/${topic.id}`)
+                this.router('front.topic.index')
+            })
         }
     }
 }
 </script>
 
-<style></style>
+<style>
+.topic pre {
+    padding: 0 !important;
+    margin: 2rem -2.5rem !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0 !important;
+}
+</style>

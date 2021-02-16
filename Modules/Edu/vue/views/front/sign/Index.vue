@@ -92,6 +92,7 @@ const icons = [
 ]
 const signs = []
 export default {
+    route: { meta: { keepAlive: true } },
     data() {
         return {
             loading: true,

@@ -1,5 +1,5 @@
 <template>
-    <div class="container-xl mt-16">
+    <div class="container-xl">
         <div class="md:flex">
             <div class="card md:w-9/12 md:mr-5 mb-5" v-loading="loading">
                 <div class="card-header flex flex-col items-start px-10 py-8 leading-9 text-xl font-weight-lighter ">

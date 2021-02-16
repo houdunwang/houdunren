@@ -20,7 +20,7 @@
                                         class="btn btn-light text-gray-500"
                                         >编辑</router-link
                                     >
-                                    <button type="button" class="btn btn-light text-gray-500">删除</button>
+                                    <button type="button" class="btn btn-light text-gray-500" @click.prevent="del(topic)">删除</button>
                                 </div>
                             </div>
                         </div>
@@ -47,6 +47,7 @@
 
 <script>
 export default {
+    route: { meta: { keepAlive: true } },
     data() {
         return {
             loading: true,
@@ -62,6 +63,12 @@ export default {
             this.topics = await this.axios.get(`member/topic?page=${page}`)
             this.loading = false
             document.documentElement.scroll({ top: 0, behavior: 'smooth' })
+        },
+        async del(topic) {
+            this.$confirm('确定删除吗?', '温馨提示').then(async _ => {
+                await axios.delete(`front/topic/${topic.id}`)
+                this.topics.data.splice(this.topics.data.indexOf(topic), 1)
+            })
         }
     }
 }

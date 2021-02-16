@@ -21,6 +21,9 @@ class CommentResource extends JsonResource
             'user' => new UserResource($this->whenLoaded('user')),
             'permissions' => $this->permissions,
             'reply_user' => new UserResource($this->whenLoaded('replyUser')),
+            'comment_id' => $this->comment_id,
+            'comment_type' => $this->comment_type,
+            'commentable' => $this->commentable
         ];
     }
 }

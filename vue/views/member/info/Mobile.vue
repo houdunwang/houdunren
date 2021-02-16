@@ -14,6 +14,7 @@
 
 <script>
 export default {
+    route: { meta: { keepAlive: true } },
     data() {
         return {
             form: { account: '', code: '' }

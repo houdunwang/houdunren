@@ -84,7 +84,10 @@
                 </div>
             </div>
             <div class="md:w-10/12 md:ml-2 bg-white">
-                <router-view />
+                <keep-alive>
+                    <router-view v-if="$route.meta.keepAlive"></router-view>
+                </keep-alive>
+                <router-view v-if="!$route.meta.keepAlive"></router-view>
             </div>
         </div>
     </div>

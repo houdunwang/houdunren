@@ -118,9 +118,4 @@ export default {
     padding: 0 !important;
     margin: 0 -1rem !important;
 }
-.comment-content pre code {
-    font-size: 0.85rem !important;
-    padding: 2rem;
-    line-height: 1.5rem;
-}
 </style>

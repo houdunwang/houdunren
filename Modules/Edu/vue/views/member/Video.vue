@@ -41,7 +41,7 @@
 
 <script>
 export default {
-    route: { path: `/Edu/member` },
+    route: { path: `/Edu/member`, meta: { keepAlive: true } },
     data() {
         return {
             loading: true,

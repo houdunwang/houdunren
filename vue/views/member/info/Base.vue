@@ -24,7 +24,7 @@ const fields = [
     { label: 'QQ', id: 'qq' }
 ]
 export default {
-    route: { path: '/member' },
+    route: { path: '/member', meta: { keepAlive: true } },
     data() {
         return {
             form: this.$store.state.user,

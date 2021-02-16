@@ -7,7 +7,16 @@
                 <el-button type="danger" size="mini" @click="del(lesson)">删除</el-button>
             </el-button-group>
         </lesson>
-        <el-pagination v-if="lessons.meta" class="mt-3" @current-change="currentChange" :page-size="12" :total="lessons.meta.total" background> </el-pagination>
+        <el-pagination
+            v-if="lessons.meta"
+            class="mt-3"
+            :current-page="lessons.meta.current_page"
+            @current-change="currentChange"
+            :page-size="12"
+            :total="lessons.meta.total"
+            background
+        >
+        </el-pagination>
     </div>
 </template>
 

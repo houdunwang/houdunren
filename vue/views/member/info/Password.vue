@@ -22,6 +22,7 @@ const fields = [
     { label: '确定密码', id: 'password_confirmation', placeholder: '请再次输入密码' }
 ]
 export default {
+    route: { meta: { keepAlive: true } },
     data() {
         return {
             form: { old_password: '', password: '', password_confirmation: '' },

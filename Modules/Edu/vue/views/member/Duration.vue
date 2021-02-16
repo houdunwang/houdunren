@@ -12,6 +12,7 @@
 
 <script>
 export default {
+    route: { meta: { keepAlive: true } },
     data() {
         return {
             loading: true,

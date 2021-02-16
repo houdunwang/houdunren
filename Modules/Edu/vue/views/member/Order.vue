@@ -42,6 +42,7 @@ const columns = [
     { id: 'created_at', label: '创建时间', width: 150 }
 ]
 export default {
+    route: { meta: { keepAlive: true } },
     data() {
         return {
             columns,

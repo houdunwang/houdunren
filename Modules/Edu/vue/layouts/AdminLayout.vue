@@ -200,7 +200,10 @@
         </header>
         <div class="content">
             <div class="p-5 bg-white shadow-sm mx-5">
-                <router-view />
+                <keep-alive>
+                    <router-view v-if="$route.meta.keepAlive"></router-view>
+                </keep-alive>
+                <router-view v-if="!$route.meta.keepAlive"></router-view>
             </div>
         </div>
         <el-backtop> </el-backtop>

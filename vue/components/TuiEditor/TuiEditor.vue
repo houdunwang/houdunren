@@ -33,9 +33,9 @@ export default {
         this.init()
     },
     watch: {
-        '$attrs.value'(n) {
-            this.setHtml(n)
-        }
+        // '$attrs.value'(n) {
+        //     if (n != this.editor.getHtml()) this.init()
+        // }
     },
     methods: {
         init() {

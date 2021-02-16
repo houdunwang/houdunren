@@ -11,6 +11,7 @@
 
 <script>
 export default {
+    route: { meta: { keepAlive: true } },
     data() {
         return {
             form: Object.assign({}, this.$store.state.user)

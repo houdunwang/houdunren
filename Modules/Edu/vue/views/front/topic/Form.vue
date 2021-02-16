@@ -8,7 +8,7 @@
             <hd-error name="title" />
             <tags v-model="form.tags" />
             <hd-error name="tags" />
-            <hd-tui-editor v-model="form.content" initialEditType="markdown" class="border" :action="`/upload/site/${site.id}`" />
+            <hd-tui-editor v-model="form.content" v-if="!id || form.content" initialEditType="markdown" class="border" :action="`/upload/site/${site.id}`" />
             <hd-error name="content" />
         </div>
         <div class="card-footer text-muted">

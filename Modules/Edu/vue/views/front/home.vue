@@ -19,6 +19,7 @@
                         @current-change="load"
                         v-if="activities.meta"
                         :hide-on-single-page="true"
+                        :current-page="activities.meta.current_page"
                         :page-size="12"
                         :total="activities.meta.total"
                         background
@@ -41,7 +42,7 @@ import CommunityTip from '../../components/CommunityTip.vue'
 import TopicRecommend from '../../components/TopicRecommend.vue'
 export default {
     components: { CommunityTip, TopicRecommend },
-    route: { path: '//' },
+    route: { path: '//', meta: { keepAlive: true } },
     data() {
         return {
             loading: true,

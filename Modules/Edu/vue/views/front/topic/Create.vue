@@ -1,5 +1,5 @@
 <template>
-    <div class="container-xl mt-16">
+    <div class="container-xl">
         <x-form />
     </div>
 </template>
