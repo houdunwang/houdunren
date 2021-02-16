@@ -2,7 +2,8 @@
     <div class="flex flex-col items-center justify-center py-16">
         <img src="http://hdcms.test/images/boy.png" class="w-20 h-20 rounded-full" />
         <div class="text-center mt-3 text-base">
-            向军大叔 / 晚八点直播
+            本站由<span class="text-green-800">向军老师</span>开发 <br />
+            晚八点直播
         </div>
         <div class="text-center text-sm text-gray-600 leading-6 mt-3">
             我们的使命：传播互联网前沿技术，帮助更多的人实现梦想 <br />

@@ -220,7 +220,7 @@ export default {
         }
     },
     async created() {
-        this.modules = await this.axios.get(`/api/module/site/${this.site.id}/user`)
+        this.modules = await this.axios.get(`/api/site/${this.site.id}/user/modules`)
     }
 }
 </script>

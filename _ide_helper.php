@@ -14822,38 +14822,29 @@
      */ 
         class PayFacade {
                     /**
-         * 
+         * 支付宝
          *
+         * @param array $order
+         * @param array $config
+         * @return \App\Services\Pay\Alipay 
+         * @throws BindingResolutionException
+         * @throws InvalidCastException
+         * @throws LogicException
          * @static 
          */ 
-        public static function alipayConfig()
+        public static function alipay($order, $config = [])
         {
                         /** @var \App\Services\Pay\PayService $instance */
-                        return $instance->alipayConfig();
+                        return $instance->alipay($order, $config);
         }
                     /**
-         * 
+         * 微信支付
          *
-         * @static 
-         */ 
-        public static function wepayConfig()
-        {
-                        /** @var \App\Services\Pay\PayService $instance */
-                        return $instance->wepayConfig();
-        }
-                    /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function alipay($order)
-        {
-                        /** @var \App\Services\Pay\PayService $instance */
-                        return $instance->alipay($order);
-        }
-                    /**
-         * 
-         *
+         * @param array $order
+         * @return \App\Services\Pay\Wechat 
+         * @throws BindingResolutionException
+         * @throws InvalidCastException
+         * @throws LogicException
          * @static 
          */ 
         public static function wepay($order)
@@ -15392,10 +15383,10 @@
          * @return mixed 
          * @static 
          */ 
-        public static function all()
+        public static function all($row = 10)
         {
                         /** @var \App\Services\Activity\ActivityService $instance */
-                        return $instance->all();
+                        return $instance->all($row);
         }
          
     }

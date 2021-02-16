@@ -8,7 +8,7 @@ components.keys().forEach(path => {
     if (path.includes('Layout')) {
         const component = components(path).default
         groups[name] = {
-            path: `/Edu/${name}`,
+            path: `/${window.module.name}/${name}`,
             name,
             component,
             children: [],

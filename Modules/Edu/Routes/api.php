@@ -57,6 +57,8 @@ Route::group(['prefix' => 'Edu/front', 'middleware' => ['front']], function () {
     Route::apiResource('comment', CommentController::class);
     //用户视频
     Route::apiResource('user/video', UserVideoController::class);
+    //套餐
+    Route::apiResource('subscribe', SubscribeController::class)->only(['index']);
 });
 
 Route::group(['prefix' => 'Edu/member', 'middleware' => ['auth:sanctum', 'front']], function () {

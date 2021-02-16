@@ -104,7 +104,7 @@ const menus = [
     { title: '最近更新', name: 'front.lesson.latest' },
     { title: '话题讨论', name: 'front.topic.index' },
     { title: '签到打卡', name: 'front.sign.index' },
-    { title: '订阅会员', name: '' }
+    { title: '订阅会员', name: 'front.subscribe.index' }
 ]
 const docs = [
     { title: 'CSS样式控制', to: `https://houdunren.gitee.io/note/css/1%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html` },
