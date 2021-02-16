@@ -5,11 +5,12 @@
                 <img :src="subject.user.avatar" class="w-12 h-12 rounded-lg" />
             </div>
             <div class="col">
-                <span class="badge bg-purple">贴子</span>
                 <router-link :to="{ name: 'front.sign.index' }" class="text-base text-gray-600 hover:text-gray-900">
                     {{ subject['title'] | titleSubstr }}
                 </router-link>
-                <div class="text-xs text-gray-500 mt-2">{{ subject.user.name }} • {{ subject['created_at'] | fromNow }}</div>
+                <div class="text-xs text-gray-500 mt-2">
+                    <span class="badge bg-purple">贴子</span> {{ subject.user.name }} • 发表于{{ subject['created_at'] | fromNow }}
+                </div>
             </div>
         </div>
     </div>

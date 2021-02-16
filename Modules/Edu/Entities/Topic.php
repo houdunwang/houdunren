@@ -33,7 +33,8 @@ class Topic extends Model
         return [
             'view' => Auth::check() && Auth::user()->can('view', $this),
             'update' => Auth::check() && Auth::user()->can('update', $this),
-            'delete' => Auth::check() && Auth::user()->can('delete', $this)
+            'delete' => Auth::check() && Auth::user()->can('delete', $this),
+            'recommend' => Auth::check() && Auth::user()->can('recommend', $this)
         ];
     }
 

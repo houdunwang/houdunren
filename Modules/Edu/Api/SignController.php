@@ -10,6 +10,7 @@ use Modules\Edu\Transformers\SignResource;
 use Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use ActivityService;
+use Modules\Edu\Http\Requests\SignRequest;
 
 /**
  * 签到
@@ -32,7 +33,7 @@ class SignController extends Controller
         return SignResource::collection($signs);
     }
 
-    public function store(Request $request, Sign $sign)
+    public function store(SignRequest $request, Sign $sign)
     {
         $sign->fill($request->input());
         $sign->site_id = SID;

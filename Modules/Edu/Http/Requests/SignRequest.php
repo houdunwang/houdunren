@@ -18,15 +18,11 @@ class SignRequest extends FormRequest
             'mood' => ['required']
         ];
     }
-    public function messages()
+    public function attributes()
     {
-        return ['mood.required' => '请选择签到心情'];
+        return ['content' => '签到内容', 'mood' => '签到心情'];
     }
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
     public function authorize()
     {
         return true;

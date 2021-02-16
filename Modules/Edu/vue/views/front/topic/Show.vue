@@ -10,7 +10,16 @@
                             <div v-if="isLogin && form.permissions">
                                 <div class="btn-group btn-group-sm" role="group" aria-label="">
                                     <button type="button" class="btn btn-outline-info" v-if="form.permissions.delete" @click.prevent="del">删除</button>
-                                    <button type="button" class="btn btn-outline-success" v-if="form.permissions.update">编辑</button>
+                                    <button type="button" class="btn btn-outline-info" v-if="form.permissions.update">编辑</button>
+                                    <button
+                                        type="button"
+                                        class="btn "
+                                        v-if="form.permissions.recommend"
+                                        @click.prevent="recommend"
+                                        :class="{ 'btn-teal': form.recommend, 'btn-outline-secondary': !form.recommend }"
+                                    >
+                                        推荐
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -53,6 +62,10 @@ export default {
                 await axios.delete(`front/topic/${this.form.id}`)
                 this.router('front.topic.index')
             })
+        },
+        async recommend() {
+            const { data: topic } = await axios.get(`front/topic/${this.form.id}/recommend`)
+            this.form = topic
         }
     }
 }

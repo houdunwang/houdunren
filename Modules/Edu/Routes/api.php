@@ -40,6 +40,8 @@ Route::group(['prefix' => 'Edu/front', 'middleware' => ['front']], function () {
     //贴子
     Route::get('topic/{topic}/comments', [TopicController::class, 'commentList']);
     Route::post('topic/{topic}/comment', [TopicController::class, 'comment']);
+    Route::get('topic/{topic}/recommend', [TopicController::class, 'recommend']);
+    Route::get('topic/recommend', [TopicController::class, 'recommendList']);
     Route::apiResource('topic', TopicController::class);
     //视频
     Route::get('video/{video}/comments', [VideoController::class, 'commentList']);

@@ -5,11 +5,12 @@
                 <img :src="subject.user.avatar" class="w-12 h-12 rounded-lg" />
             </div>
             <div class="col">
-                <span class="badge bg-teal">评论</span>
                 <router-link :to="{ name: 'front.sign.index' }" class="text-base text-gray-600 hover:text-gray-900 ">
                     {{ subject.content.replace(/<\/?.+?>/g, '') | titleSubstr(45) }}
                 </router-link>
-                <div class="text-xs text-gray-500 mt-2">{{ subject.user.name }} • {{ subject['created_at'] | fromNow }}</div>
+                <div class="text-xs text-gray-500 mt-2">
+                    <span class="badge bg-orange">评论</span> {{ subject.user.name }} • 评论于{{ subject['created_at'] | fromNow }}
+                </div>
             </div>
         </div>
     </div>

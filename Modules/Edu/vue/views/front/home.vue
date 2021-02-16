@@ -5,6 +5,7 @@
                 社区动态
             </div>
             <div class="card-body">
+                <topic-recommend />
                 <div v-for="activity in activities.data" :key="activity.id">
                     <component :is="`Activity${activity.type}`" :subject="activity.subject"></component>
                 </div>
@@ -32,8 +33,9 @@
 
 <script>
 import CommunityTip from '../../components/CommunityTip.vue'
+import TopicRecommend from '../../components/TopicRecommend.vue'
 export default {
-    components: { CommunityTip },
+    components: { CommunityTip, TopicRecommend },
     route: { path: '//' },
     data() {
         return {

@@ -114,9 +114,20 @@ class TopicController extends Controller
      */
     public function recommend(Topic $topic)
     {
+        $this->authorize('recommend', $topic);
         $topic->recommend = !$topic->recommend;
         $topic->save();
-        return ['message' => '推荐修改成功'];
+        return $this->message('推荐修改成功', new TopicResource($topic->load('user')));
+    }
+
+    /**
+     * 推荐贴子列表
+     * @return AnonymousResourceCollection
+     */
+    public function recommendList()
+    {
+        $topics = Topic::where('site_id', SID)->where('recommend', 1)->with('user')->latest()->get();
+        return TopicResource::collection($topics);
     }
 
     /**
