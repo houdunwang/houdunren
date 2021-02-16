@@ -30,10 +30,18 @@ export default {
         }
     },
     mounted() {
-        this.initEditor()
-        this.fullScreenEvent()
+        this.init()
+    },
+    watch: {
+        '$attrs.value'(n) {
+            this.setHtml(n)
+        }
     },
     methods: {
+        init() {
+            this.initEditor()
+            this.fullScreenEvent()
+        },
         initEditor() {
             const Vue = this
             const editor = new Editor({

@@ -27,12 +27,20 @@ export default {
             form
         }
     },
+    async created() {
+        if (this.id) {
+            const topic = await axios.get(`front/topic/${this.id}`)
+            topic.tags = topic.tags.map(t => t.id)
+            this.form = topic
+        }
+    },
     methods: {
         async onSubmit() {
             if (this.form.tags.length == 0) {
                 return this.$message('选择一个标签吧')
             }
-            await this.axios.post(`front/topic`, this.form)
+            const url = this.id ? `front/topic/${this.id}` : `front/topic`
+            await axios[this.id ? 'put' : 'post'](url, this.form)
             this.router('front.topic.index')
         }
     }

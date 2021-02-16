@@ -1,5 +1,5 @@
 <template>
-    <header class="navbar navbar-expand-md navbar-light d-print-none shadow border-t-4 border-hd sticky-top">
+    <header class="navbar navbar-expand-md navbar-light d-print-none shadow border-t-4 border-hd sticky-top mb-10">
         <div class="container-xl flex items-center">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
                 <span class="navbar-toggler-icon"></span>
@@ -36,6 +36,10 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                         <a href="/member" class="dropdown-item">修改资料</a>
+                        <router-link :to="{ name: 'member.video' }" class="dropdown-item">学习历史</router-link>
+                        <router-link :to="{ name: 'member.topic' }" class="dropdown-item">我的贴子</router-link>
+                        <router-link :to="{ name: 'member.duration' }" class="dropdown-item">会员周期</router-link>
+                        <router-link :to="{ name: 'member.order' }" class="dropdown-item">订单列表</router-link>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item" @click="logout">退出</a>
                     </div>

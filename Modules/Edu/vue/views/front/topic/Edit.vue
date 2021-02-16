@@ -1,10 +1,14 @@
 <template>
-    <div class="container-xl mt-16"></div>
+    <div class="container-xl mt-16">
+        <x-form :id="$route.params.id" />
+    </div>
 </template>
 
 <script>
+import XForm from './Form'
 export default {
-    route: { meta: { auth: true } }
+    route: { path: `topic/:id/edit`, meta: { auth: true } },
+    components: { XForm }
 }
 </script>
 

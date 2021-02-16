@@ -46,7 +46,7 @@
 <script>
 import HdFooter from './Footer'
 export default {
-    route: { path: '/system' },
+    route: { path: '/admin' },
     components: {
         HdFooter
     },

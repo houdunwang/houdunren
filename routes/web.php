@@ -10,7 +10,7 @@ Route::get("module/admin/{site}/{module}", function (Site $site, Module $module)
     return redirect("/admin");
 })->middleware('auth:sanctum');
 //后台登录
-Route::get('system', function () {
+Route::get('admin', function () {
     if (Auth::check()) return redirect('/site/site/index');
     return view('app');
 });

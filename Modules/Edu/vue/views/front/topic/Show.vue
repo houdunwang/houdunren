@@ -10,7 +10,13 @@
                             <div v-if="isLogin && form.permissions">
                                 <div class="btn-group btn-group-sm" role="group" aria-label="">
                                     <button type="button" class="btn btn-outline-danger" v-if="form.permissions.delete" @click.prevent="del">删除</button>
-                                    <button type="button" class="btn btn-outline-cyan" v-if="form.permissions.update">编辑</button>
+                                    <router-link
+                                        :to="{ name: 'front.topic.edit', params: { id: form.id } }"
+                                        class="btn btn-outline-cyan"
+                                        v-if="form.permissions.update"
+                                    >
+                                        编辑
+                                    </router-link>
                                     <button
                                         type="button"
                                         class="btn "

@@ -12,6 +12,7 @@ use Modules\Edu\Api\VideoController;
 use Modules\Edu\Api\SignController;
 use Modules\Edu\Api\ActivityController;
 use Modules\Edu\Api\CommentController;
+use Modules\Edu\Api\MemberController;
 use Modules\Edu\Api\UserVideoController;
 
 Route::group(['prefix' => 'Edu/admin', 'middleware' => ['auth:sanctum', 'admin']], function () {
@@ -56,4 +57,11 @@ Route::group(['prefix' => 'Edu/front', 'middleware' => ['front']], function () {
     Route::apiResource('comment', CommentController::class);
     //用户视频
     Route::apiResource('user/video', UserVideoController::class);
+});
+
+Route::group(['prefix' => 'Edu/member', 'middleware' => ['auth:sanctum', 'front']], function () {
+    Route::get("video", [MemberController::class, 'video']);
+    Route::get("topic", [MemberController::class, 'topic']);
+    Route::get("order", [MemberController::class, 'order']);
+    Route::get("duration", [MemberController::class, 'duration']);
 });

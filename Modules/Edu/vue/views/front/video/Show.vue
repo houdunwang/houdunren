@@ -1,5 +1,5 @@
 <template>
-    <div v-loading="loading" :class="{ 'h-screen': loading }">
+    <div v-loading="loading" :class="{ 'h-screen': loading }" class="-mt-10">
         <div class="bg-gray-900">
             <div class="container-xl">
                 <div id="mse"></div>

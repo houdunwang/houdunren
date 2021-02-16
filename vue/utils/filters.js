@@ -11,6 +11,6 @@ Vue.filter('fromNow', function(value) {
 })
 
 //格式化日期
-Vue.filter('format', value => {
-    return dayjs(value).format('YYYY-MM-DD hh:mm')
+Vue.filter('format', (value, format = 'YYYY-MM-DD hh:mm') => {
+    return dayjs(value).format(format)
 })

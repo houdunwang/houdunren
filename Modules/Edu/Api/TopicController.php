@@ -74,7 +74,7 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        return new TopicResource($topic->load('user'));
+        return new TopicResource($topic->load(['user', 'tags']));
     }
 
     /**

@@ -1,5 +1,5 @@
 <template>
-    <div class="container-xl mt-16">
+    <div class="container-xl">
         <div class="card mb-5">
             <div class="card-header h-14">
                 实战课程
@@ -21,7 +21,15 @@
                 </div>
             </div>
             <div class="card-footer text-muted flex justify-center">
-                <el-pagination :small="true" @current-change="load" :page-size="12" :total="lessons.meta.total" background layout="prev, pager, next">
+                <el-pagination
+                    :small="true"
+                    @current-change="load"
+                    :current-page="lessons.meta.current_page"
+                    :page-size="12"
+                    :total="lessons.meta.total"
+                    background
+                    layout="prev, pager, next"
+                >
                 </el-pagination>
             </div>
         </div>
@@ -45,7 +53,7 @@ export default {
             this.loading = true
             this.lessons = await this.axios.get(`front/lesson?page=${page}`)
             this.loading = false
-            document.documentElement.scroll({ top: 30, behavior: 'smooth' })
+            document.documentElement.scroll({ top: 0, behavior: 'smooth' })
         }
     }
 }

@@ -38,7 +38,7 @@ class VideoController extends Controller
     public function index()
     {
         $videos = Video::latest('id')->paginate(15);
-        return $videos;
+        return VideoResource::collection($videos);
     }
 
     /**
