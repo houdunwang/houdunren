@@ -3,7 +3,6 @@
 namespace App\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\SystemConfigResource;
 use Illuminate\Http\Request;
 use App\Models\SystemConfig;
 
@@ -24,7 +23,9 @@ class SystemConfigController extends Controller
      */
     public function show()
     {
-        return SystemConfig::where('id', 1)->value('config');
+        $config = SystemConfig::where('id', 1)->value('config');
+        $config['logo'] = $config['logo'] ?: url("images/logo.png");
+        return $config;
     }
 
     /**

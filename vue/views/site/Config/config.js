@@ -54,6 +54,7 @@ export default {
     },
     sms: {
         driver: 'aliyun',
+        product: '',
         aliyun: {
             sign: '身份验证',
             template: 'SMS_12840367'

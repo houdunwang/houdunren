@@ -28,7 +28,7 @@
                 <!-- 通知 end-->
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                        <el-image :src="user.avatar" fit="cover" class="w-8 h-8"></el-image>
+                        <el-image :src="$store.state.user.avatar" fit="cover" class="w-8 h-8"></el-image>
                         <div class="d-none d-xl-block ps-2">
                             <div>{{ user.name }}</div>
                             <div class="mt-1 small text-muted">注册于{{ user.created_at | fromNow }}</div>
@@ -41,7 +41,7 @@
                         <router-link :to="{ name: 'member.duration' }" class="dropdown-item">会员周期</router-link>
                         <router-link :to="{ name: 'member.order' }" class="dropdown-item">订单列表</router-link>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item" @click="logout">退出</a>
+                        <a href="#" class="dropdown-item" @click.prevent="logout">退出</a>
                     </div>
                 </div>
             </div>

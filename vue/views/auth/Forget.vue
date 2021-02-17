@@ -12,7 +12,7 @@
                             <div class="flex">
                                 <div class="w-full">
                                     <el-form-item label="帐号" size="normal">
-                                        <hd-validate-code v-model="form.account" placeholder="请输入手机号或邮箱" action="forget/code" />
+                                        <hd-validate-code v-model="form.account" placeholder="请输入手机号或邮箱" action="front/forget/code" />
                                     </el-form-item>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@ export default {
     methods: {
         async onSubmit() {
             this.$store.commit('setErrors')
-            await this.axios.post(`forget`, this.form)
+            await this.axios.post(`front/forget`, this.form)
             this.$router.push(`/login`)
         }
     }

@@ -21,9 +21,9 @@ const mixin = {
             return store.getters.errors(name)
         },
         async logout() {
-            await this.axios.get(`logout`)
+            await this.axios.get(`front/logout`)
             window.localStorage.removeItem('token')
-            location.href = '/admin'
+            location.href = '/'
         }
     }
 }

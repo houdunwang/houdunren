@@ -99,7 +99,7 @@ class AuthController extends Controller
         $request->validate(
             [
                 'account' => ['required', 'regex:/^\d{11}$/', Rule::unique('users', 'mobile')],
-                // 'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
+                'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
             ],
             [
                 'account.required' => '手机号不能为空',

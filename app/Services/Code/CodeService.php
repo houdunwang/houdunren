@@ -55,7 +55,7 @@ class CodeService
             'template' => config('site.sms.aliyun.template'),
             'data' => [
                 'code' => $this->code(),
-                'product' => site()['title'],
+                'product' => config('site.sms.product'),
             ],
         ]);
     }

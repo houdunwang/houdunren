@@ -13,7 +13,13 @@
                             <div class="flex">
                                 <div class="w-full">
                                     <el-form-item label="帐号" class="flex-1">
-                                        <hd-validate-code v-model="form.account" type="mobile" :timeout="3" placeholder="请输入手机号" action="register/code" />
+                                        <hd-validate-code
+                                            v-model="form.account"
+                                            type="mobile"
+                                            :timeout="3"
+                                            placeholder="请输入手机号"
+                                            action="front/register/code"
+                                        />
                                     </el-form-item>
                                 </div>
                             </div>
@@ -69,7 +75,7 @@ export default {
     methods: {
         async onSubmit() {
             this.$store.commit('setErrors')
-            await this.axios.post(`register`, this.form)
+            await this.axios.post(`front/register`, this.form)
             this.$router.push({ name: 'auth.login' })
         }
     }

@@ -80,12 +80,27 @@ class SiteController extends Controller
      */
     public function sms(Request $request, Site $site)
     {
-        $this->authorize('delete', $site);
         try {
             CodeService::mobile(Auth::user()->mobile);
             return $this->message('验证码发送成功');
         } catch (Exception $e) {
-            return $this->error('短信发送失败，可能是手机号错误或发送频繁。', 500);
+            return $this->error('短信发送失败，可能是手机号错误或发送频繁。' . var_export($e->getExceptions(), true), 500);
+        }
+    }
+
+    /**
+     * 邮件发送测试
+     * @param Request $request
+     * @param Site $site
+     * @return void
+     */
+    public function email(Request $request, Site $site)
+    {
+        try {
+            CodeService::email(Auth::user()->email);
+            return $this->message('验证码发送成功');
+        } catch (Exception $e) {
+            return $this->error('邮件发送失败，可能是邮箱错误或发送频繁。' . $e->getMessage(), 500);
         }
     }
 

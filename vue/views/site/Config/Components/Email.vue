@@ -30,12 +30,25 @@
             <el-form-item label="加密方式">
                 <el-input v-model="form.email.encryption" placeholder=""></el-input>
             </el-form-item>
+            <el-button type="danger" class="mt-3" size="mini" @click="send">发送测试邮件</el-button>
+            <hd-tip>
+                系统将向你的邮箱发送验证码短信，你需要保证你的帐号已经设置邮箱。你可以访问
+                <router-link to="/system/my/edit" class="text-blue-700">我的资料</router-link> 设置邮箱
+            </hd-tip>
         </el-card>
     </div>
 </template>
 
 <script>
-export default { route: false, inject: ['form'] }
+export default {
+    route: false,
+    inject: ['form'],
+    methods: {
+        async send() {
+            await this.axios.post(`site/${this.$route.params.sid}/email`)
+        }
+    }
+}
 </script>
 
 <style></style>

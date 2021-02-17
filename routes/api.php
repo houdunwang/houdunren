@@ -47,6 +47,7 @@ Route::group(['prefix' => 'site', 'middleware' => ['auth:sanctum', 'site']], fun
     Route::get('system/config', [SystemConfigController::class, 'show']);
     //站点
     Route::post('{site}/sms', [SiteController::class, 'sms']);
+    Route::post('{site}/email', [SiteController::class, 'email']);
     Route::apiResource('site', SiteController::class);
     //用户搜索
     Route::get('{site}/user', [UserController::class, 'search']);

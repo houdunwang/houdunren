@@ -10,6 +10,9 @@
                     <el-radio label="tencent">腾讯云</el-radio>
                 </el-radio-group>
             </el-form-item>
+            <el-form-item label="发送人">
+                <el-input v-model="form.sms.product" placeholder="请输入短信发送者名称，请不要输入网址或邮箱" size="normal"></el-input>
+            </el-form-item>
         </el-card>
         <el-card shadow="always" :body-style="{ padding: '20px' }" class="mt-3" v-if="form.sms.driver == 'aliyun'">
             <template v-slot:header>阿里云</template>
@@ -43,7 +46,8 @@
             </el-form-item>
             <el-button type="danger" class="mt-3" size="mini" @click="send">发送测试短信</el-button>
             <hd-tip>
-                系统将向你的手机号发送验证码短信，你可以访问 <router-link to="/system/my/edit" class="text-blue-700">我的资料</router-link> 设置手机号
+                系统将向你的手机号发送验证码短信，，你需要保证你的帐号已经设置手机号。你可以访问
+                <router-link to="/system/my/edit" class="text-blue-700">我的资料</router-link> 设置手机号
             </hd-tip>
         </el-card>
         <el-card shadow="always" :body-style="{ padding: '20px' }" class="mt-3" v-if="form.sms.driver == 'tencent'">

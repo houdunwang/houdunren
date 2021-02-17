@@ -28,10 +28,7 @@ class UploadController extends Controller
      */
     public function site(Request $request)
     {
-        $site = site();
         $request->validate(['file' => ['required', 'mimes:jpeg,png,mp3', 'max:2000']]);
-        SiteService::cache($site);
-        ConfigService::site($site);
         $driver = config('site.upload.driver');
         return UploadService::$driver($request->file);
     }

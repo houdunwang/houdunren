@@ -20,7 +20,7 @@ export default {
     watch: {
         async 'form.avatar'() {
             await this.axios.put(`member/user/${this.user.id}`, this.form)
-            location.reload()
+            // location.reload()
         }
     }
 }
