@@ -20,7 +20,7 @@ class UserVideoController extends Controller
      */
     public function index()
     {
-        $videos = UserVideo::where('site_id', SID)->with(['user', 'video'])->limit(15)->get();
+        $videos = UserVideo::where('site_id', SID)->with(['user', 'video'])->limit(15)->latest()->get();
         return UserVideoResource::collection($videos);
     }
 }

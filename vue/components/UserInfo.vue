@@ -1,6 +1,6 @@
 <template>
     <div class="object-cover border border-gray-300 shadow-sm">
-        <img :src="user.icon" class="object-cover w-full" />
+        <img :src="user.avatar" class="object-cover w-full" />
         <div class="text-gray-700 font-bold border-b border-gray-200 py-3 mx-3">
             {{ user.name }}
         </div>

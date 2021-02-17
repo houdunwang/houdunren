@@ -4,7 +4,7 @@
             <div slot="header">
                 修改头像
             </div>
-            <hd-image v-model="form.avatar" />
+            <hd-image v-model="form.avatar" action="member/upload" />
         </el-card>
     </el-form>
 </template>
@@ -14,13 +14,13 @@ export default {
     route: { meta: { keepAlive: true } },
     data() {
         return {
-            form: Object.assign({}, this.$store.state.user)
+            form: this.$store.state.user
         }
     },
     watch: {
-        async 'form.avatar'(n) {
-            await this.axios.put(`user/${this.form.id}`, this.form)
-            this.$store.commit('setUser', this.form)
+        async 'form.avatar'() {
+            await this.axios.put(`member/user/${this.user.id}`, this.form)
+            location.reload()
         }
     }
 }

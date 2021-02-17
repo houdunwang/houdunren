@@ -24,22 +24,15 @@ class UserResource extends JsonResource
             'github' => $this->github,
             'wakatime' => $this->wakatime,
             'weibo' => $this->weibo,
-            'wechat' => $this->when($this->eq(), $this->wechat),
+            'wechat' => $this->when($this->permissions['update'], $this->wechat),
             'home' => $this->home,
             'group_id' => $this->group_id,
-            'mobile' => $this->when($this->eq(), $this->mobile),
-            'email' => $this->when($this->eq(), $this->email),
+            'mobile' => $this->when($this->permissions['update'], $this->mobile),
+            'email' => $this->when($this->permissions['update'], $this->email),
             'group' => new GroupResource($this->whenLoaded('group')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'roles' => $this->whenLoaded('roles')
         ];
-    }
-
-    public function eq()
-    {
-        if (Auth::check()) {
-            return Auth::id() == $this->resource->id;
-        }
     }
 }

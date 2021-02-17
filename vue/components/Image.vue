@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="relative">
         <el-upload
             class="avatar-uploader"
             :action="`/api/${action}`"
@@ -8,9 +8,10 @@
             :before-upload="beforeAvatarUpload"
             :headers="headers"
         >
-            <img v-if="value" :src="value" class="avatar" />
+            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
+        <i class="fas fa-window-close absolute fa-2x text-white top-2 left-2 cursor-pointer" @click="del"></i>
     </div>
 </template>
 
@@ -19,6 +20,16 @@ export default {
     props: {
         action: { type: String, default: 'upload/local' },
         value: { type: String }
+    },
+    data() {
+        return {
+            imageUrl: this.value
+        }
+    },
+    watch: {
+        value(n) {
+            this.imageUrl = n
+        }
     },
     computed: {
         headers() {
@@ -29,6 +40,9 @@ export default {
         }
     },
     methods: {
+        del() {
+            this.$emit('input', (this.imageUrl = ''))
+        },
         handleAvatarSuccess(res, file) {
             this.imageUrl = res.path
             this.$emit('input', this.imageUrl)

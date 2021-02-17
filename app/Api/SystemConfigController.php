@@ -22,11 +22,9 @@ class SystemConfigController extends Controller
      * @param SystemConfig $config
      * @return void
      */
-    public function show(SystemConfig $config)
+    public function show()
     {
-        $config = $config->value('config');
-        $config['logo'] = $config['logo'] ?: url('images/logo.png');
-        return $config;
+        return SystemConfig::where('id', 1)->value('config');
     }
 
     /**
@@ -35,8 +33,9 @@ class SystemConfigController extends Controller
      * @param SystemConfig $config
      * @return void
      */
-    public function update(Request $request, SystemConfig $config)
+    public function update(Request $request)
     {
+        $config = SystemConfig::find(1);
         $config['config'] = $request->input();
         $config->save();
         return $this->message('系统配置修改成功');

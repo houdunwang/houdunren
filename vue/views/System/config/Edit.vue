@@ -13,7 +13,7 @@
                     <el-input v-model="form.copyright"></el-input>
                 </el-form-item>
                 <el-form-item label="后台标志">
-                    <hd-image v-model="form.logo" />
+                    <hd-image v-model="form.logo" action="system/upload" />
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">立即创建</el-button>
@@ -25,18 +25,20 @@
 
 <script>
 import tabs from './tabs'
+const form = { title: '', copyright: '', logo: '' }
 export default {
     data() {
-        return { form: { title: '', copyright: '', logo: '' }, loading: true, tabs }
+        return { form, loading: true, tabs }
     },
     async created() {
-        this.form = await this.axios.get(`system/config/1`)
+        const config = await this.axios.get(`system/config`)
+        this.form = Object.assign(form, config || {})
         this.loading = false
     },
     methods: {
         async onSubmit() {
-            await this.axios.put('system/config/1', this.form)
-            this.$store.dispatch('getSystemConfig')
+            await this.axios.put('system/config', this.form)
+            this.$store.dispatch('getSystemConfig', `system/config`)
         }
     }
 }

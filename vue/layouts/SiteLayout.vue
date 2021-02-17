@@ -16,8 +16,8 @@ import XFooter from './components/Footer'
 export default {
     route: { meta: { auth: true } },
     components: { TopMenu, QuickMenu, XFooter },
-    created() {
-        this.$store.dispatch('getSystemConfig')
+    async created() {
+        this.$store.commit('setSystemConfig', await axios.get(`site/system/config`))
     }
 }
 </script>

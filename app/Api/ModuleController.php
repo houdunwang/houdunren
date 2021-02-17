@@ -46,11 +46,10 @@ class ModuleController extends Controller
     }
 
     /**
-     * 用户组可使用模块
-     * @param Group $group
+     * 当前用户可使用模块
      * @return void
      */
-    public function group()
+    public function user()
     {
         $modules = Auth::user()->group->modules;
         return ModuleResource::collection($modules->load('packages'));

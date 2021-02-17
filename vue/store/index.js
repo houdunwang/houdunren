@@ -6,16 +6,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         errors: {},
-        user: window.user,
+        user: {},
         //系统配置
-        config: {}
+        systemConfig: {}
     },
     getters: {
         errors: state => name => {
             return state.errors[name] && state.errors[name][0]
-        },
-        user: state => {
-            return state.user
         }
     },
     mutations: {
@@ -25,16 +22,13 @@ export default new Vuex.Store({
         setUser(state, user) {
             state.user = user
         },
-        setConfig(state, config) {
-            state.config = config
+        setSystemConfig(state, config) {
+            state.systemConfig = config
         }
     },
     actions: {
-        // async getUser({ commit }) {
-        //     commit('setUser', await axios.get(`user/info`))
-        // },
-        async getSystemConfig() {
-            this.commit('setConfig', await axios.get(`system/config/1`))
+        async getUser({ commit }) {
+            commit('setUser', await axios.get(`auth/user`))
         }
     }
 })

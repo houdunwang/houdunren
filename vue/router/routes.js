@@ -14,8 +14,6 @@ components.keys().map(path => {
         const url = path
             //去掉路由组名
             .slice(groupName.length)
-            //先将首字母大写转为 -小写 的形式
-            .replace(/(?<!\/)([A-Z])/g, (...args) => `-` + args[1].toLowerCase())
             //然后将全部转为小写
             .toLowerCase()
             .slice(1)

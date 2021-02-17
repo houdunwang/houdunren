@@ -7,7 +7,6 @@ use App\Http\Resources\SiteResource;
 use App\Http\Requests\SiteRequest;
 use Illuminate\Http\Request;
 use App\Models\Site;
-use ConfigService;
 use CodeService;
 use Exception;
 use Auth;
@@ -67,7 +66,6 @@ class SiteController extends Controller
      */
     public function update(SiteRequest $request, Site $site)
     {
-        $this->authorize('update', $site);
         $site->fill($request->input());
         $site->module_id = request('module_id');
         $site->save();
@@ -82,12 +80,12 @@ class SiteController extends Controller
      */
     public function sms(Request $request, Site $site)
     {
-        ConfigService::site($site);
+        $this->authorize('delete', $site);
         try {
             CodeService::mobile(Auth::user()->mobile);
-            return ['message' => '验证码发送成功'];
+            return $this->message('验证码发送成功');
         } catch (Exception $e) {
-            return $this->error('短信发送失败，请检查手机号或联系站长!', 500);
+            return $this->error('短信发送失败，可能是手机号错误或发送频繁。', 500);
         }
     }
 
@@ -98,7 +96,6 @@ class SiteController extends Controller
      */
     public function destroy(Site $site)
     {
-        $this->authorize('delete', $site);
         $site->delete();
         return $this->message('删除成功');
     }

@@ -29,6 +29,15 @@ class UserController extends Controller
     }
 
     /**
+     * 当前用户资料
+     * @return UserResource
+     */
+    public function my()
+    {
+        return new UserResource(Auth::user());
+    }
+
+    /**
      * 用户列表
      * @return void
      */
@@ -73,7 +82,7 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
         $user->fill($request->input())->save();
-        return ['message' => '资料修改成功'];
+        return $this->message('资料修改成功', $user);
     }
 
     /**
@@ -118,7 +127,8 @@ class UserController extends Controller
     }
 
     /**
-     * 发送验证码
+     * 绑定手机号
+     * 发送数据库不存在的手机号
      * @param Request $request
      * @return void
      */

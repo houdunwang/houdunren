@@ -6,10 +6,10 @@ const mixin = {
             return store.state.user
         },
         module() {
-            return window.module
+            return store.state.module
         },
         site() {
-            return window.site
+            return store.state.site
         },
         isLogin() {
             return this.user.id

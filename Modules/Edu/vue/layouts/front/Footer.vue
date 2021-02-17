@@ -1,8 +1,8 @@
 <template>
     <div class="flex flex-col items-center justify-center py-16">
-        <img src="http://hdcms.test/images/boy.png" class="w-20 h-20 rounded-full" />
+        <img src="/images/boy.png" class="w-20 h-20 rounded-full" />
         <div class="text-center mt-3 text-base">
-            本站由<span class="text-green-800">向军老师</span>开发 <br />
+            编码<span class="text-green-800">向军老师</span><br />
             晚八点直播
         </div>
         <div class="text-center text-sm text-gray-600 leading-6 mt-3">

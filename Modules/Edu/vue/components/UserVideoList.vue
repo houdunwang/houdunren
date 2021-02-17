@@ -15,7 +15,7 @@
                                 <img :src="video.user.avatar" class="w-10 h-10 object-cover rounded-md" />
                             </a>
                         </div>
-                        <div class="">
+                        <div class="flex-1">
                             <router-link
                                 :to="{ name: 'front.video.show', params: { id: video.video.id } }"
                                 class="block mb-1 text-gray-700 text-base hover:text-gray-800"

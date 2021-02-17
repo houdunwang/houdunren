@@ -4,9 +4,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         errors: {},
-        user: window.user
-        // site: window.site,
-        // module: window.module,
+        user: {},
+        site: window.site,
+        module: window.module
     },
     getters: {
         errors: state => name => {
@@ -22,10 +22,10 @@ export default new Vuex.Store({
     mutations: {
         setErrors(state, errors = {}) {
             state.errors = errors
+        },
+        setUser(state, user) {
+            state.user = user
         }
-        // setUser(state, user) {
-        //     state.user = user
-        // },
         // setSite(state, site) {
         //     state.site = site
         // },
@@ -34,9 +34,9 @@ export default new Vuex.Store({
         // }
     },
     actions: {
-        // async getUser({ commit }) {
-        //     commit('setUser', await axios.get(`/api/user/info`))
-        // }
+        async getUser({ commit }) {
+            commit('setUser', await axios.get(`/api/auth/user`))
+        }
         // async getModule({ commit }, url) {
         //     commit('setModule', await axios.get(url))
         // },

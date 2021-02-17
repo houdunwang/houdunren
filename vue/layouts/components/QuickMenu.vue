@@ -2,7 +2,7 @@
     <div class="grid justify-items-stretch md:justify-between md:grid-cols-12 items-center px-4 md:py-10 mb-3">
         <div class="logo hidden md:block md:w-96 md:col-span-9">
             <a href="#">
-                <img :src="$store.state.config.logo" />
+                <img :src="$store.state.systemConfig.logo" />
             </a>
         </div>
         <div class="grid grid-flow-col auto-cols-fr gap-1 mt-3 md:mt-0 md:col-span-3">

@@ -76,9 +76,6 @@ export default {
             this.init()
         }
     },
-    // updated() {
-    //     this.init()
-    // },
     async created() {
         this.init()
     },
@@ -94,7 +91,7 @@ export default {
                     poster: '/images/poster.jpeg',
                     playbackRate: [0.5, 0.75, 1, 1.5, 2],
                     miniplayer: true,
-                    autoplay: true,
+                    autoplay: false,
                     miniplayerConfig: {
                         bottom: 200,
                         right: 0,

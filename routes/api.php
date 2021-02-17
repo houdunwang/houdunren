@@ -23,17 +23,28 @@ use App\Api\ConfigController;
 //系统
 Route::group(['prefix' => 'system', 'middleware' => ['auth:sanctum', 'system']], function () {
     //系统配置
-    Route::apiResource('config', SystemConfigController::class);
+    Route::get('config', [SystemConfigController::class, 'show']);
+    Route::put('config', [SystemConfigController::class, 'update']);
     //套餐
     Route::apiResource('package', PackageController::class);
     //会员组
     Route::apiResource('group', GroupController::class);
     //模块
     Route::apiResource('module', ModuleController::class);
+    //上传
+    Route::post('upload', [UploadController::class, 'local']);
+    //当前用户
+    Route::get('user', [UserController::class, 'my']);
+    Route::put('user/password', [UserController::class, 'password']);
+    Route::put('user/{user}', [UserController::class, 'update']);
 });
 
 //站点
 Route::group(['prefix' => 'site', 'middleware' => ['auth:sanctum', 'site']], function () {
+    //用户可使用模块
+    Route::get('user/modules', [ModuleController::class, 'user']);
+    //系统配置
+    Route::get('system/config', [SystemConfigController::class, 'show']);
     //站点
     Route::post('{site}/sms', [SiteController::class, 'sms']);
     Route::apiResource('site', SiteController::class);
@@ -41,7 +52,7 @@ Route::group(['prefix' => 'site', 'middleware' => ['auth:sanctum', 'site']], fun
     Route::get('{site}/user', [UserController::class, 'search']);
     //模块
     Route::get('{site}/modules', [ModuleController::class, 'site']);
-    Route::get('{site}/user/modules', [ModuleController::class, 'site']);
+    Route::get('{site}/user/modules', [ModuleController::class, 'userSiteModule']);
     //角色
     Route::apiResource('{site}/role', RoleController::class);
     //权限
@@ -61,10 +72,16 @@ Route::group(['prefix' => 'site', 'middleware' => ['auth:sanctum', 'site']], fun
     Route::get('{site}/wechat/{wechat}/user', [WeChatUserController::class, 'sync']);
 });
 
+//模块后台
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum', 'admin']], function () {
+    //配置
+    Route::post('config/module', [ConfigController::class, 'module']);
+    //上传
+    Route::post('upload', [UploadController::class, 'site']);
+});
+
 //会员中心
 Route::group(['prefix' => 'member', 'middleware' => ['auth:sanctum', 'front']], function () {
-    //模块
-    Route::get('modules', [ModuleController::class, 'group']);
     //用户相关
     Route::put('user/password', [UserController::class, 'password']);
     Route::put('user/mobile', [UserController::class, 'mobile']);
@@ -76,22 +93,8 @@ Route::group(['prefix' => 'member', 'middleware' => ['auth:sanctum', 'front']], 
     Route::post('upload', [UploadController::class, 'site']);
 });
 
-//模块后台
-Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum', 'admin']], function () {
-    //配置
-    Route::post('config/module', [ConfigController::class, 'module']);
-    //上传
-    Route::post('upload', [UploadController::class, 'site']);
-});
-
 //前台
 Route::group(['prefix' => 'front', 'middleware' => ['front']], function () {
-    //上传
-    Route::post('upload', [UploadController::class, 'site']);
-    //验证码
-    Route::post('code/send', [CodeController::class, 'send'])->middleware(['throttle:codeSend']);
-    //图形验证码
-    Route::get('captcha', [CaptchaController::class, 'create']);
     //登录注册
     Route::post('login', [AuthController::class, 'login']);
     Route::get('logout', [AuthController::class, 'logout']);
@@ -99,4 +102,23 @@ Route::group(['prefix' => 'front', 'middleware' => ['front']], function () {
     Route::post('register/code', [AuthController::class, 'registerCode']);
     Route::post('forget', [AuthController::class, 'forget']);
     Route::post('forget/code', [AuthController::class, 'forgetCode']);
+    //上传
+    Route::post('upload', [UploadController::class, 'site']);
+    //验证码
+    Route::post('code/send', [CodeController::class, 'send'])->middleware(['throttle:codeSend']);
+});
+
+//全局公共
+Route::group(['prefix' => 'common'], function () {
+    //图形验证码
+    Route::get('captcha', [CaptchaController::class, 'create']);
+});
+
+Route::group(['prefix' => 'common'], function () {
+    //图形验证码
+    Route::get('captcha', [CaptchaController::class, 'create']);
+});
+
+Route::group(['prefix' => 'auth', 'middleware' => ['auth:sanctum']], function () {
+    Route::get('user', [UserController::class, 'my']);
 });

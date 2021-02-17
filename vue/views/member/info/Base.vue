@@ -27,14 +27,14 @@ export default {
     route: { path: '/member', meta: { keepAlive: true } },
     data() {
         return {
-            form: this.$store.state.user,
+            form: window.user,
             fields
         }
     },
     methods: {
         async onSubmit() {
-            await this.axios.put(`user/${this.user.id}`, this.form)
-            this.$store.dispatch('getUser')
+            await this.axios.put(`member/user/${this.user.id}`, this.form)
+            location.reload()
         }
     }
 }
