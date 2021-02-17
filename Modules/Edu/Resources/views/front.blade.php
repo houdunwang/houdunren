@@ -12,8 +12,8 @@
     <link href="/tabler/dist/css/tabler-vendors.min.css?1611412966" rel="stylesheet" />
     <link href="/tabler/dist/css/demo.min.css?1611412966" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.15.2/css/all.min.css">
-    <link rel="stylesheet" href="/modules/Edu/css/app.css?v={{ module()['version'] }}" />
-    <script src="/modules/Edu/js/app.js?v={{ module()['version'] }}" defer></script>
+    <link rel="stylesheet" href="/modules/Edu/css/app.css?v={{ module()['config']['version'] }}" />
+    <script src="/modules/Edu/js/app.js?v={{ module()['config']['version'] }}" defer></script>
 </head>
 
 <body>

@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use ModuleService;
-use PermissionService;
-use SiteService;
 
 /**
  * 系统模块
@@ -14,7 +12,7 @@ use SiteService;
 class Module extends Model
 {
     protected $fillable = ['title', 'name', 'version', 'description', 'author'];
-    protected $appends = ['preview'];
+    protected $appends = ['preview', 'config'];
 
     /**
      * 模块菜单
