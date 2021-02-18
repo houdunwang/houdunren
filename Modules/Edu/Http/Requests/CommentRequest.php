@@ -4,6 +4,7 @@ namespace Modules\Edu\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Modules\Edu\Rules\CommentRule;
+use Auth;
 
 /**
  * 评论验证
@@ -11,11 +12,6 @@ use Modules\Edu\Rules\CommentRule;
  */
 class CommentRequest extends FormRequest
 {
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
@@ -23,13 +19,8 @@ class CommentRequest extends FormRequest
         ];
     }
 
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
-        return true;
+        return Auth::check();
     }
 }

@@ -38,7 +38,12 @@
                         v-markdown
                     ></div>
                 </div>
-                <comment-list class="mt-5" :action-list="`front/topic/${$route.params.id}/comments`" :action-post="`front/topic/${$route.params.id}/comment`" />
+                <comment-list
+                    class="mt-5"
+                    :key="$route.params.id"
+                    :action-list="`front/comment/topic/${$route.params.id}`"
+                    :action-post="`front/comment/topic/${$route.params.id}`"
+                />
             </div>
             <div class="md:w-3/12">
                 <community-tip />
@@ -51,7 +56,7 @@
 import CommentList from '../../../components/CommentList.vue'
 export default {
     components: { CommentList },
-    route: { path: `topic/:id/show` },
+    route: { path: `topic/:id/show/:comment_id?` },
     data() {
         return {
             loading: true,
@@ -59,10 +64,19 @@ export default {
         }
     },
     async created() {
-        this.form = await this.axios.get(`front/topic/${this.$route.params.id}`)
-        this.loading = false
+        this.load()
+    },
+    watch: {
+        $route(to) {
+            this.load()
+        }
     },
     methods: {
+        async load() {
+            this.loading = true
+            this.form = await this.axios.get(`front/topic/${this.$route.params.id}`)
+            this.loading = false
+        },
         async del() {
             this.$confirm('确定删除吗？', '温馨提示').then(async _ => {
                 await axios.delete(`front/topic/${this.form.id}`)

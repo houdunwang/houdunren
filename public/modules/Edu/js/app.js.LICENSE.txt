@@ -46,8 +46,6 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! http://mths.be/fromcodepoint v0.2.1 by @mathias */
 
-/*! https://mths.be/punycode v1.4.1 by @mathias */
-
 /**
  * @license
  * Lodash <https://lodash.com/>

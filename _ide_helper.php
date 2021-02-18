@@ -14822,35 +14822,40 @@
      */ 
         class PayFacade {
                     /**
-         * 支付宝
+         * 
          *
-         * @param array $order
-         * @param array $config
-         * @return \App\Services\Pay\Alipay 
-         * @throws BindingResolutionException
-         * @throws InvalidCastException
-         * @throws LogicException
          * @static 
          */ 
-        public static function alipay($order, $config = [])
+        public static function sn()
         {
                         /** @var \App\Services\Pay\PayService $instance */
-                        return $instance->alipay($order, $config);
+                        return $instance->sn();
+        }
+                    /**
+         * 支付宝
+         *
+         * @param array $config ['return_url'=>'同步通知地址','notify_url'=>'异步通知地址']:
+         * @return \App\Services\Pay\Alipay 
+         * @throws BindingResolutionException
+         * @static 
+         */ 
+        public static function alipay($config)
+        {
+                        /** @var \App\Services\Pay\PayService $instance */
+                        return $instance->alipay($config);
         }
                     /**
          * 微信支付
          *
-         * @param array $order
+         * @param array $config $config['notify_url'] = 异步通知地址;
          * @return \App\Services\Pay\Wechat 
          * @throws BindingResolutionException
-         * @throws InvalidCastException
-         * @throws LogicException
          * @static 
          */ 
-        public static function wepay($order)
+        public static function wepay($config)
         {
                         /** @var \App\Services\Pay\PayService $instance */
-                        return $instance->wepay($order);
+                        return $instance->wepay($config);
         }
          
     }

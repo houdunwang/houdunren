@@ -61,7 +61,7 @@ class VideoController extends Controller
      */
     public function commentList(Video $video)
     {
-        $comments = $video->comments()->with(['user', 'replyUser'])->latest()->paginate(10);
+        $comments = $video->comments()->with(['replys'])->whereNull('reply_id')->latest()->paginate(10);
         return CommentResource::collection($comments);
     }
 
@@ -79,6 +79,6 @@ class VideoController extends Controller
             'user_id' => Auth::id()
         ]);
         ActivityService::log($comment);
-        return $this->message('评论发表成功', new CommentResource($comment->load(['user', 'replyUser'])));
+        return $this->message('评论发表成功', new CommentResource($comment));
     }
 }

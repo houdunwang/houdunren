@@ -13,6 +13,7 @@ use Modules\Edu\Api\SignController;
 use Modules\Edu\Api\ActivityController;
 use Modules\Edu\Api\CommentController;
 use Modules\Edu\Api\MemberController;
+use Modules\Edu\Api\MessageController;
 use Modules\Edu\Api\UserVideoController;
 
 Route::group(['prefix' => 'Edu/admin', 'middleware' => ['auth:sanctum', 'admin']], function () {
@@ -39,9 +40,14 @@ Route::group(['prefix' => 'Edu/front', 'middleware' => ['front']], function () {
     //课程
     Route::get('lesson/search', [LessonController::class, 'search']);
     Route::apiResource('lesson', LessonController::class);
+    //评论
+    Route::get('comment/topic/{topic}', [CommentController::class, 'topic']);
+    Route::post('comment/topic/{topic}', [CommentController::class, 'topicSend']);
+    Route::get('comment/page/{id}/{cid}', [CommentController::class, 'page']);
+    Route::delete('comment/{comment}', [CommentController::class, 'destroy']);
+    //站内消息
+    Route::apiResource('message', MessageController::class);
     //贴子
-    Route::get('topic/{topic}/comments', [TopicController::class, 'commentList']);
-    Route::post('topic/{topic}/comment', [TopicController::class, 'comment']);
     Route::get('topic/{topic}/recommend', [TopicController::class, 'recommend']);
     Route::get('topic/recommend', [TopicController::class, 'recommendList']);
     Route::apiResource('topic', TopicController::class);
@@ -53,8 +59,6 @@ Route::group(['prefix' => 'Edu/front', 'middleware' => ['front']], function () {
     Route::apiResource('sign', SignController::class);
     //动态
     Route::apiResource('activity', ActivityController::class);
-    //评论
-    Route::apiResource('comment', CommentController::class);
     //用户视频
     Route::apiResource('user/video', UserVideoController::class);
     //套餐

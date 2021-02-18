@@ -28,7 +28,7 @@
                 OSS
             </template>
             <el-form-item label="bucket">
-                <el-input v-model="form.upload.oss.bucket" placeholder="请访问阿里云获取"></el-input>
+                <el-input v-model="form.upload.oss.bucket" placeholder="请访问阿里云获取" show-password></el-input>
                 <hd-tip>
                     访问阿里云查看块
                     <a href="https://oss.console.aliyun.com/bucket">

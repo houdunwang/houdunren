@@ -22,13 +22,13 @@
                 <el-input v-model="form.email.port" placeholder="指定SMTP服务器的地址, 如: 126邮箱为25"></el-input>
             </el-form-item>
             <el-form-item label="邮箱帐号">
-                <el-input v-model="form.email.username" placeholder="发送邮箱帐号"></el-input>
+                <el-input v-model="form.email.username" placeholder="发送邮箱帐号" show-password></el-input>
             </el-form-item>
             <el-form-item label="邮箱密码">
                 <el-input v-model="form.email.password" placeholder="" show-password></el-input>
             </el-form-item>
             <el-form-item label="加密方式">
-                <el-input v-model="form.email.encryption" placeholder=""></el-input>
+                <el-input v-model="form.email.encryption" placeholder="端口为465时请设置为SSL"></el-input>
             </el-form-item>
             <el-button type="danger" class="mt-3" size="mini" @click="send">发送测试邮件</el-button>
             <hd-tip>

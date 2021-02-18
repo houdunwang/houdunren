@@ -47,10 +47,10 @@ export default {
     email: {
         transport: 'smtp',
         host: '',
-        port: 465,
+        port: 80,
         username: '',
         password: '',
-        encryption: 'ssl'
+        encryption: ''
     },
     sms: {
         driver: 'aliyun',

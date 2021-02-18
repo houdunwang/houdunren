@@ -14,8 +14,8 @@
     <link href="/tabler/dist/css/demo.min.css?1611412966" rel="stylesheet" />
     {{-- tabler end --}}
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.15.2/css/all.min.css">
-    <link rel="stylesheet" href="/css/app.css" />
-    <script src="/js/app.js" defer></script>
+    <link rel="stylesheet" href="/css/app.css?v={{ config('app.version') }}" />
+    <script src="/js/app.js?v={{ config('app.version') }}" defer></script>
 </head>
 
 <body>

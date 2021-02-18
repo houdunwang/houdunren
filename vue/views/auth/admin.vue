@@ -64,7 +64,7 @@ export default {
         async onSubmit() {
             this.$store.commit('setErrors', {})
             this.axios
-                .post(`login`, this.form)
+                .post(`front/login`, this.form)
                 .then(({ token }) => {
                     localStorage.setItem('token', token)
                     location.href = '/admin'

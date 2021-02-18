@@ -1,6 +1,6 @@
 <template>
     <div v-loading="loading">
-        <div id="comment-419" class="card shadow-sm mb-2" v-for="(comment, index) in comments.data" :key="comment.id">
+        <div :id="`comment-${comment.id}`" class="card shadow-sm mb-2" v-for="(comment, index) in comments.data" :key="comment.id">
             <div class="card-header bg-white d-flex justify-content-start">
                 <img :src="comment.user.avatar" class="w-10 h-10 rounded-lg object-cover mr-2" />
                 <div class="flex-fill">
@@ -16,11 +16,10 @@
                 </div>
             </div>
             <div class="card-body text-secondary pb-5 comment-content">
-                <!---->
                 <div class="markdown" v-html="comment.content" v-markdown></div>
             </div>
             <div class="card-footer text-muted bg-white text-sm">
-                # {{ index + 1 }}
+                # {{ index + 1 }}-- {{ comment.id }}
                 <a href="#" class="d-inline-block mr-2 ml-2 text-gray-500" @click.prevent="reply(comment.user)">
                     <i aria-hidden="true" class="fa fa-reply"></i> 回复
                 </a>
@@ -32,11 +31,13 @@
         </div>
         <div class="bg-white p-3 border border-gray-200 rounded-sm shadow-sm" v-if="comments.meta.total > 10">
             <el-pagination
+                v-if="comments.meta"
                 :small="true"
                 :hide-on-single-page="true"
-                @current-change="load"
-                v-if="comments.meta"
+                :current-page="comments.meta.current_page"
                 :total="comments.meta.total"
+                :page-size="10"
+                @current-change="load"
                 background
                 layout="prev, pager, next"
             >
@@ -73,14 +74,34 @@ export default {
             form
         }
     },
+    watch: {
+        $route() {
+            this.load()
+        }
+    },
     async created() {
         this.load()
     },
     methods: {
         //加载评论
-        async load(page = 1) {
+        async load() {
+            let page = 1
             this.loading = true
-            this.comments = await axios.get(`${this.actionList}?page=${page}`)
+            const commentId = this.$route.params.comment_id
+            if (commentId) {
+                page = await axios.get(`front/comment/page/${this.$route.params.id}/${commentId}`)
+                this.comments = await axios.get(`${this.actionList}?page=${page || 1}`)
+                this.$nextTick(_ => {
+                    const el = document.querySelector(`#comment-${commentId}`)
+                    if (el) {
+                        let y = document.querySelector(`#comment-${commentId}`).getBoundingClientRect().top + document.documentElement.scrollTop
+                        document.documentElement.scroll({ top: y - 80, behavior: 'smooth' })
+                    }
+                })
+            } else {
+                this.comments = await axios.get(`${this.actionList}?page=${page}`)
+            }
+
             this.loading = false
         },
         //发表评论

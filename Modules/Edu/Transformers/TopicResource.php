@@ -13,8 +13,9 @@ class TopicResource extends JsonResource
 {
     public function toArray($request)
     {
-        return parent::toArray($request) + [
-            'user' => new UserResource($this->whenLoaded('user'))
-        ];
+        return  [
+            'user' => new UserResource($this->whenLoaded('user')),
+            'content' => markdown($this->content)
+        ] + parent::toArray($request);
     }
 }

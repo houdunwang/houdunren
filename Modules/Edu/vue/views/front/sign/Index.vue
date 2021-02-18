@@ -13,7 +13,7 @@
                         </div>
                     </div>
                 </div>
-                <div>
+                <div v-else>
                     <div class="card shadow-sm" v-if="isLogin">
                         <div class="card-header bg-white">签到快乐，再接再厉</div>
                         <div class="card-body h6 font-weight-normal">
@@ -25,7 +25,8 @@
                                 required=""
                                 placeholder="你今天的心情或最想说的话"
                             />
-                            <div class="mt-6 flex flex-wrap">
+                            <hd-error name="content" />
+                            <div class="mt-2 flex flex-wrap">
                                 <label
                                     v-for="(icon, i) in icons"
                                     :key="i"

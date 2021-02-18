@@ -8,6 +8,7 @@ use Carbon\Exceptions\InvalidFormatException;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Auth;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * 评论
@@ -32,23 +33,28 @@ class Comment extends Model
         ];
     }
 
-    public function user()
+    public function getPageAttribute($page = 15)
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function replyUser()
-    {
-        return $this->belongsTo(User::class, 'reply_user_id');
+        $total = self::where('site', site()['id'])->latest()->where('id', '<', $this->id)->count();
+        return ceil($total / $page);
     }
 
     /**
-     * 回复用户
+     * 回复列表
+     * @return HasMany
+     */
+    public function replys()
+    {
+        return $this->hasMany(self::class, 'reply_id');
+    }
+
+    /**
+     * 发表用户
      * @return BelongsTo
      */
-    public function reply_user()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'reply_user_id');
+        return $this->belongsTo(User::class);
     }
 
     /**

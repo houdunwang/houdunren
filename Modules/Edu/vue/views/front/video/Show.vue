@@ -2,7 +2,7 @@
     <div v-loading="loading" :class="{ 'h-screen': loading }" class="-mt-10">
         <div class="bg-gray-900">
             <div class="container-xl">
-                <div id="mse"></div>
+                <div id="mse" class="" style="z-index:1000"></div>
             </div>
         </div>
         <div class="container-xl mt-3">
@@ -10,7 +10,7 @@
                 <div class="card-body row">
                     <div class="col-12 col-md-7">
                         <h5 class="text-base pt-2 text-gray-500">
-                            {{ form.title }}
+                            {{ video.title }}
                         </h5>
                         <router-link :to="{ name: 'front.lesson.show', params: { id: lesson.id } }" class="text-sm font-weight-light pt-2 text-gray-500">
                             <i aria-hidden="true" class="fa fa-folder-o"></i>
@@ -30,17 +30,28 @@
         </div>
 
         <div class="container-xl mt-3 md:flex">
-            <div class="md:w-9/12 md:mr-5 mb-5">
-                <comment-list :action-list="`front/video/${$route.params.id}/comments`" :action-post="`front/video/${$route.params.id}/comment`" />
+            <div class="md:w-9/12 md:mr-5 mb-5 order-2 md:order-1">
+                <comment-list
+                    :key="$route.params.id"
+                    :action-list="`front/video/${$route.params.id}/comments`"
+                    :action-post="`front/video/${$route.params.id}/comment`"
+                />
             </div>
-
-            <div class="md:w-3/12">
+            <div class="md:w-3/12 order-1 md:order-2">
                 <div class="card">
                     <div class="card-header h-14">
                         课程列表
                     </div>
                     <div class="card-body">
-                        <video-list :videos="lesson.videos" :id="$route.params.id" />
+                        <div v-for="v in lesson.videos" :key="v.id" class="py-4 border-b border-gray-200 flex justify-between">
+                            <router-link
+                                :to="{ name: 'front.video.show', params: { id: v.id } }"
+                                :class="{ 'text-blue-800 font-bold': video.id == v.id }"
+                                class="text-base text-gray-500 font-normal hover:text-gray-900"
+                            >
+                                {{ v['title'] | titleSubstr }}
+                            </router-link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,18 +62,18 @@
 <script>
 import Player from 'xgplayer'
 export default {
-    route: { path: `video/:id/show`, meta: { auth: true } },
+    route: { path: `video/:id/show/:comment_id?`, meta: { auth: true } },
     data() {
         return {
             loading: true,
             player: {},
-            form: {},
+            video: {},
             lesson: { videos: [] }
         }
     },
     computed: {
         currentIndex() {
-            return this.lesson.videos.findIndex(l => l.id == this.form.id)
+            return this.lesson.videos.findIndex(l => l.id == this.video.id)
         },
         next() {
             return this.lesson.videos[this.currentIndex + 1]
@@ -72,41 +83,28 @@ export default {
         }
     },
     watch: {
-        $route(to) {
-            this.init()
+        async $route(to) {
+            this.player.destroy(true)
+            await this.init(to.params.id, true)
+            document.documentElement.scroll({ top: 0, behavior: 'smooth' })
         }
     },
     async created() {
-        this.init()
+        await this.init(this.$route.params.id)
     },
     methods: {
-        async init() {
-            this.form = await this.axios.get(`front/video/${this.$route.params.id}`)
-            this.lesson = await this.axios.get(`front/lesson/${this.form.lesson_id}`)
-            this.$nextTick(() => {
-                this.player = new Player({
-                    id: 'mse',
-                    url: this.form.path,
-                    fluid: true,
-                    poster: '/images/poster.jpeg',
-                    playbackRate: [0.5, 0.75, 1, 1.5, 2],
-                    miniplayer: true,
-                    autoplay: false,
-                    miniplayerConfig: {
-                        bottom: 200,
-                        right: 0,
-                        width: 320,
-                        height: 180
-                    }
-                })
+        async init(id, autoplay = false) {
+            this.video = await this.axios.get(`front/video/${id}`)
+            this.lesson = await this.axios.get(`front/lesson/${this.video.lesson_id}`)
+            this.player = new Player({
+                id: 'mse',
+                url: this.video.path,
+                autoplay,
+                fluid: true,
+                poster: '/images/poster.jpeg',
+                playbackRate: [0.5, 0.75, 1, 1.5, 2]
             })
             this.loading = false
-        },
-        play() {
-            let player = new Player({
-                id: 'mse',
-                url: this.form.path
-            })
         }
     }
 }

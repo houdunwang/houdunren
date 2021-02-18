@@ -15,6 +15,10 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Auth;
 use Modules\Edu\Entities\Duration;
 
+/**
+ * 支付
+ * @package Modules\Edu\Http\Controllers
+ */
 class PayController extends Controller
 {
     /**

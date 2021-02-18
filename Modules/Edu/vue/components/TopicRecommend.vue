@@ -10,7 +10,7 @@
                         {{ topic['title'] | titleSubstr }}
                     </router-link>
                     <div class="text-xs text-gray-500 mt-2">
-                        <span class="badge bg-red">推荐</span> {{ topic.user.name }} • 发表于{{ topic['created_at'] | fromNow }}
+                        <span class="badge bg-red">推荐</span> {{ topic.user.name }} • 更新于{{ topic['updated_at'] | fromNow }}
                     </div>
                 </div>
             </div>

@@ -49,7 +49,6 @@
             </el-card>
             <el-button type="primary" @click="onSubmit" class="mt-3 block">保存提交</el-button>
         </el-form>
-        {{ site }}
     </div>
 </template>
 

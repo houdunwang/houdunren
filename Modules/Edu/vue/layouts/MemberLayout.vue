@@ -4,7 +4,9 @@
         <div class="container-xl md:flex">
             <div class="md:w-2/12 mb-2">
                 <div class="bg-white hidden md:block">
-                    <img :src="user.avatar" class="w-full object-cover cursor-pointer" @click="$router.push({ name: 'member.info.avatar' })" />
+                    <a href="/member/info/avatar">
+                        <img :src="user.avatar" class="w-full object-cover cursor-pointer" />
+                    </a>
                     <div class="text-gray-800 px-3 py-4  border-b border-gray-200">{{ user.name }}</div>
                 </div>
                 <div class="mt-0 bg-white">
@@ -33,7 +35,7 @@ const menus = [
     { title: '观看历史', to: { name: 'member.video' }, icon: 'fab fa-youtube' },
     { title: '我的贴子', to: { name: 'member.topic' }, icon: 'far fa-file-word' },
     { title: '我的订单', to: { name: 'member.order' }, icon: 'fas fa-shopping-cart' },
-    // { title: '站内消息', to: { name: 'member.info.mobile' }, icon: 'far fa-envelope' },
+    { title: '站内消息', to: { name: 'member.info.mobile' }, icon: 'far fa-envelope' },
     { title: '会员周期', to: { name: 'member.duration' }, icon: 'far fa-address-card' }
 ]
 export default {

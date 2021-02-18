@@ -12,19 +12,7 @@
             </h1>
             <div class="navbar-nav flex-row order-md-last" v-if="user.id">
                 <!-- 通知 -->
-                <!-- <div class="nav-item dropdown d-none d-md-flex me-3">
-                    <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications" aria-expanded="false">
-                        <span class="badge bg-red"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-card">
-                        <div class="card">
-                            <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad amet consectetur exercitationem fugiat in ipsa ipsum,
-                                natus odio quidem quod repudiandae sapiente. Amet debitis et magni maxime necessitatibus ullam.
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+                <message />
                 <!-- 通知 end-->
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">

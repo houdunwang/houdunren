@@ -21,6 +21,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Modules\Edu\Transformers\CommentResource;
 use Modules\Edu\Http\Requests\CommentRequest;
+use Modules\Edu\Notifications\CommentNotification;
 
 /**
  * 贴子管理
@@ -107,7 +108,7 @@ class TopicController extends Controller
     }
 
     /**
-     * 推荐
+     * 设置或取消推荐
      * @param Topic $topic
      * @return string[]
      * @throws InvalidArgumentException
@@ -128,33 +129,5 @@ class TopicController extends Controller
     {
         $topics = Topic::where('site_id', SID)->where('recommend', 1)->with('user')->latest()->get();
         return TopicResource::collection($topics);
-    }
-
-    /**
-     * 评论列表
-     * @param Topic $topic
-     * @return AnonymousResourceCollection
-     */
-    public function commentList(Topic $topic)
-    {
-        $comments = $topic->comments()->with(['user', 'replyUser'])->latest()->paginate(10);
-        return CommentResource::collection($comments);
-    }
-
-    /**
-     * 发表评论
-     * @param Request $request
-     * @param Topic $topic
-     * @return void
-     * @throws BindingResolutionException
-     */
-    public function comment(CommentRequest $request, Topic $topic)
-    {
-        $comment = $topic->comments()->create($request->input() + [
-            'site_id' => SID,
-            'user_id' => Auth::id()
-        ]);
-        ActivityService::log($comment);
-        return $this->message('评论发表成功', new CommentResource($comment->load(['user', 'replyUser'])));
     }
 }

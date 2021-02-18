@@ -14,7 +14,7 @@ class SignRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => ['required', 'between:6,100'],
+            'content' => ['required', 'between:10,100'],
             'mood' => ['required']
         ];
     }

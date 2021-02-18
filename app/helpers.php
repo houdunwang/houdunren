@@ -43,3 +43,17 @@ if (function_exists('access')) {
         return \PermissionService::access($name, Auth::user(), site(), module());
     }
 }
+
+
+if (!function_exists('markdown')) {
+    /**
+     * 转换markdown
+     * @param string $content
+     * @return mixed
+     */
+    function markdown(string $content)
+    {
+        $Parsedown = new \Parsedown();
+        return $Parsedown->text($content);
+    }
+}
