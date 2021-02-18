@@ -3,7 +3,6 @@
 namespace Modules\Edu\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\UserResource;
 
 /**
  * 评论资源
@@ -13,17 +12,20 @@ class CommentResource extends JsonResource
 {
     public function toArray($request)
     {
+        $content = markdown($this->content);
         return [
             'id' => $this->id,
-            'content' => $this->content,
+            'title' => mb_substr(strip_tags($content), 0, 100, 'UTF-8'),
+            'content' => $content,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'user' => new UserResource($this->whenLoaded('user')),
-            'permissions' => $this->permissions,
-            'reply_user' => new UserResource($this->whenLoaded('replyUser')),
             'comment_id' => $this->comment_id,
             'comment_type' => $this->comment_type,
-            'commentable' => $this->commentable
+            'commentable' => $this->commentable,
+            'user' => $this->user,
+            'permissions' => $this->permissions,
+            'replys' => self::collection($this->whenLoaded('replys')),
+            'page'=>
         ];
     }
 }
