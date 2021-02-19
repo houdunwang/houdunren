@@ -2,9 +2,9 @@
 
 namespace Modules\Edu\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Modules\Edu\Entities\Subscribe;
 use Modules\Edu\Http\Requests\SubscribeRequest;
 
@@ -16,6 +16,8 @@ class SubscribeController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['auth:sanctum'])->except(['index', 'show']);
+        $this->authorizeResource(Subscribe::class, 'subscribe');
     }
 
     /**

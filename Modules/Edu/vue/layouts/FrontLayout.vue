@@ -14,7 +14,10 @@
 import TopMenu from './front/TopMenu'
 import HdFooter from './front/Footer'
 export default {
-    components: { TopMenu, HdFooter }
+    components: { TopMenu, HdFooter },
+    created() {
+        this.$store.dispatch('message', 1)
+    }
 }
 </script>
 

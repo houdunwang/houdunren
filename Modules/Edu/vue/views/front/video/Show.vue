@@ -33,8 +33,8 @@
             <div class="md:w-9/12 md:mr-5 mb-5 order-2 md:order-1">
                 <comment-list
                     :key="$route.params.id"
-                    :action-list="`front/video/${$route.params.id}/comments`"
-                    :action-post="`front/video/${$route.params.id}/comment`"
+                    :action-list="`front/comment/video/${$route.params.id}`"
+                    :action-post="`front/comment/video/${$route.params.id}`"
                 />
             </div>
             <div class="md:w-3/12 order-1 md:order-2">

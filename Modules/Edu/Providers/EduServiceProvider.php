@@ -4,8 +4,12 @@ namespace Modules\Edu\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Edu\Entities\Comment;
 use Modules\Edu\Entities\Topic;
+use Modules\Edu\Entities\Video;
+use Modules\Edu\Observers\CommentObserver;
 use Modules\Edu\Observers\TopicObserver;
+use Modules\Edu\Observers\VideoObserver;
 
 class EduServiceProvider extends ServiceProvider
 {
@@ -26,12 +30,15 @@ class EduServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Topic::observe(TopicObserver::class);
+        Comment::observe(CommentObserver::class);
+        Video::observe(VideoObserver::class);
+
+        //
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
-
-        Topic::observe(TopicObserver::class);
     }
 
     /**

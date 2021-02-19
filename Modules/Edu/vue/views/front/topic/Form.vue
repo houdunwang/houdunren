@@ -40,8 +40,8 @@ export default {
                 return this.$message('选择一个标签吧')
             }
             const url = this.id ? `front/topic/${this.id}` : `front/topic`
-            await axios[this.id ? 'put' : 'post'](url, this.form)
-            this.router('front.topic.index')
+            const { data: form } = await axios[this.id ? 'put' : 'post'](url, this.form)
+            this.router('front.topic.show', { id: form.id })
         }
     }
 }

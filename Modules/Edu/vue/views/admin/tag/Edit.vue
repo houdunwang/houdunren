@@ -65,7 +65,7 @@ export default {
             }
             if (inputValue) {
                 this.form.tags.push({ title: inputValue })
-                this.axios.put(`admin/tag`, this.form)
+                this.axios.put(`tag`, this.form)
             }
             this.inputVisible = false
             this.inputValue = ''

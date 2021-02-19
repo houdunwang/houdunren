@@ -2,13 +2,15 @@
 
 namespace Modules\Edu\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Modules\Edu\Entities\System;
 use Modules\Edu\Http\Requests\SystemLessonRequest;
 use Auth;
 use Modules\Edu\Transformers\SystemLessonResource;
 use App\Models\Site;
+use Exception;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * 系统课程管理
@@ -18,8 +20,14 @@ class SystemController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['auth:sanctum'])->except(['index', 'show']);
+        $this->authorizeResource(System::class, 'system');
     }
 
+    /**
+     * 课程列表
+     * @return AnonymousResourceCollection
+     */
     public function index()
     {
         $lessons = System::latest()->paginate(10);
@@ -75,6 +83,13 @@ class SystemController extends Controller
         $system->lessons()->sync($lessons);
     }
 
+    /**
+     * 删除课程
+     * @param Site $site
+     * @param System $system
+     * @return string[]
+     * @throws Exception
+     */
     public function destroy(Site $site, System $system)
     {
         $system->delete();

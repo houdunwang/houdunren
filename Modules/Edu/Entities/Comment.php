@@ -18,7 +18,7 @@ class Comment extends Model
 {
     protected $table = 'edu_comment';
 
-    protected $fillable = ['content', 'user_id', 'site_id', 'reply_user_id'];
+    protected $fillable = ['content', 'user_id', 'site_id', 'reply_id'];
     protected $appends = ['permissions'];
     /**
      * 模型权限
@@ -33,19 +33,13 @@ class Comment extends Model
         ];
     }
 
-    public function getPageAttribute($page = 15)
-    {
-        $total = self::where('site', site()['id'])->latest()->where('id', '<', $this->id)->count();
-        return ceil($total / $page);
-    }
-
     /**
      * 回复列表
      * @return HasMany
      */
     public function replys()
     {
-        return $this->hasMany(self::class, 'reply_id');
+        return $this->hasMany(self::class, 'reply_id')->oldest();
     }
 
     /**

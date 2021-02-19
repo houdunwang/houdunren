@@ -17,14 +17,19 @@
                 <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path>
                 <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
             </svg>
-            <span class="badge bg-red" v-show="messages.data.length > 0"></span>
+            <span class="badge bg-red" v-show="messages.data && messages.data.length > 0"></span>
         </a>
-        <div class="dropdown-menu dropdown-menu-end dropdown-menu-card" v-show="messages.data.length > 0">
+        <div class="dropdown-menu dropdown-menu-end dropdown-menu-card" v-show="messages.data && messages.data.length > 0">
             <div class="card w-80">
                 <div class="card-body">
                     <div v-for="message in messages.data" :key="message.id" class="border-b border-gray-200 pb-2 mb-2">
                         <component :is="`Message${message.data.model}`" :message="message"></component>
                     </div>
+                </div>
+                <div class="card-footer">
+                    <router-link :to="{ name: 'member.sitemessage' }">
+                        查看更多...
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -32,19 +37,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
     data() {
-        return {
-            messages: { data: [] }
-        }
+        return {}
     },
-    watch: {
-        async $route(to) {
-            this.messages = await axios.get(`front/message`)
-        }
-    },
-    async created() {
-        this.messages = await axios.get(`front/message`)
+    computed: {
+        ...mapState(['messages'])
     }
 }
 </script>

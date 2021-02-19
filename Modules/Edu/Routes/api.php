@@ -16,7 +16,7 @@ use Modules\Edu\Api\MemberController;
 use Modules\Edu\Api\MessageController;
 use Modules\Edu\Api\UserVideoController;
 
-Route::group(['prefix' => 'Edu/admin', 'middleware' => ['auth:sanctum', 'admin']], function () {
+Route::group(['prefix' => 'Edu', 'middleware' => ['auth:sanctum', 'admin']], function () {
     //配置
     Route::get('config', [ConfigController::class, 'show']);
     Route::put('config', [ConfigController::class, 'update']);
@@ -43,6 +43,8 @@ Route::group(['prefix' => 'Edu/front', 'middleware' => ['front']], function () {
     //评论
     Route::get('comment/topic/{topic}', [CommentController::class, 'topic']);
     Route::post('comment/topic/{topic}', [CommentController::class, 'topicSend']);
+    Route::get('comment/video/{video}', [CommentController::class, 'video']);
+    Route::post('comment/video/{video}', [CommentController::class, 'videoSend']);
     Route::get('comment/page/{id}/{cid}', [CommentController::class, 'page']);
     Route::delete('comment/{comment}', [CommentController::class, 'destroy']);
     //站内消息

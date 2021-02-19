@@ -5,6 +5,7 @@ namespace Modules\Edu\Api;
 use App\Http\Controllers\Controller;
 use Auth;
 use Modules\Edu\Transformers\MessageResource;
+use DB;
 
 /**
  * 站内消息
@@ -23,8 +24,13 @@ class MessageController extends Controller
         return MessageResource::collection($notifications);
     }
 
+    /**
+     * 阅读消息
+     * @param mixed $message
+     * @return void
+     */
     public function destroy($message)
     {
-        Auth::user()->notifications->where('id', $message)->first()->markAsRead();
+        DB::table('notifications')->where('id', $message)->delete();
     }
 }

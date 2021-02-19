@@ -19,9 +19,7 @@ use Modules\Edu\Transformers\TopicResource;
 use ActivityService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Modules\Edu\Transformers\CommentResource;
-use Modules\Edu\Http\Requests\CommentRequest;
-use Modules\Edu\Notifications\CommentNotification;
+use DB;
 
 /**
  * 贴子管理
@@ -65,7 +63,7 @@ class TopicController extends Controller
         $topic->save();
         $topic->tags()->sync($request->tags);
         ActivityService::log($topic);
-        return ['message' => '贴子发表成功'];
+        return $this->message('贴子发表成功', $topic);
     }
 
     /**
@@ -90,7 +88,7 @@ class TopicController extends Controller
     {
         $topic->fill($request->input())->save();
         $topic->tags()->sync($request->input('tags'));
-        return ['message' => '贴子发表成功'];
+        return $this->message('贴子发表成功', $topic);
     }
 
     /**
@@ -103,7 +101,9 @@ class TopicController extends Controller
      */
     public function destroy(Request $request, Topic $topic)
     {
+        DB::beginTransaction();
         $topic->delete();
+        DB::commit();
         return response()->json(['message' => '贴子删除成功']);
     }
 

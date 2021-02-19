@@ -35,13 +35,21 @@ const menus = [
     { title: '观看历史', to: { name: 'member.video' }, icon: 'fab fa-youtube' },
     { title: '我的贴子', to: { name: 'member.topic' }, icon: 'far fa-file-word' },
     { title: '我的订单', to: { name: 'member.order' }, icon: 'fas fa-shopping-cart' },
-    { title: '站内消息', to: { name: 'member.info.mobile' }, icon: 'far fa-envelope' },
+    { title: '站内消息', to: { name: 'member.sitemessage' }, icon: 'far fa-envelope' },
     { title: '会员周期', to: { name: 'member.duration' }, icon: 'far fa-address-card' }
 ]
 export default {
     route: { meta: { auth: true } },
     data() {
         return { menus }
+    },
+    watch: {
+        async $route(to) {
+            this.messages = await axios.get(`front/message`)
+        }
+    },
+    created() {
+        this.$store.dispatch('message', 1)
     }
 }
 </script>

@@ -3,6 +3,7 @@
 namespace Modules\Edu\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Edu\Entities\Comment;
 
 /**
  * 评论资源
@@ -25,7 +26,7 @@ class CommentResource extends JsonResource
             'user' => $this->user,
             'permissions' => $this->permissions,
             'replys' => self::collection($this->whenLoaded('replys')),
-            'page'=>
+            'parent' => $this->when($this->reply_id, new self(Comment::find($this->reply_id)))
         ];
     }
 }

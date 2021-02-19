@@ -6,7 +6,8 @@ export default new Vuex.Store({
         errors: {},
         user: {},
         site: window.site,
-        module: window.module
+        module: window.module,
+        messages: {}
     },
     getters: {
         errors: state => name => {
@@ -25,10 +26,10 @@ export default new Vuex.Store({
         },
         setUser(state, user) {
             state.user = user
+        },
+        setMessage(state, message) {
+            state.messages = message
         }
-        // setSite(state, site) {
-        //     state.site = site
-        // },
         // setModule(state, module) {
         //     state.module = module
         // }
@@ -36,6 +37,9 @@ export default new Vuex.Store({
     actions: {
         async getUser({ commit }) {
             commit('setUser', await axios.get(`/api/auth/user`))
+        },
+        async message({ commit }, page = 1) {
+            commit('setMessage', await axios.get(`front/message?page=${page}`))
         }
         // async getModule({ commit }, url) {
         //     commit('setModule', await axios.get(url))

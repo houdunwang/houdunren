@@ -22,6 +22,15 @@ const mixin = {
         errors(name) {
             return store.getters.errors(name)
         },
+        scrollTo(el) {
+            setTimeout(() => {
+                const element = document.querySelector(el)
+                if (element) {
+                    const y = element.getBoundingClientRect().top + document.documentElement.scrollTop
+                    document.documentElement.scroll({ top: y, behavior: 'smooth' })
+                }
+            })
+        },
         async logout() {
             await this.axios.get(`/api/front/logout`)
             window.localStorage.removeItem('token')

@@ -41,11 +41,11 @@ export default {
     },
     methods: {
         async load(page = 1) {
-            this.lessons = await this.axios.get(`admin/system?page=${page}`)
+            this.lessons = await this.axios.get(`system?page=${page}`)
         },
         del(lesson) {
             this.$confirm('确定删除吗', '温馨提示').then(async () => {
-                await this.axios.delete(`admin/system/${lesson.id}`)
+                await this.axios.delete(`system/${lesson.id}`)
                 console.log(this.lessons)
 
                 this.lessons.data.splice(this.lessons.data.indexOf(lesson), 1)

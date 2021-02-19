@@ -4,8 +4,6 @@ namespace Modules\Edu\Api;
 
 use Modules\Edu\Http\Requests\LessonRequest;
 use Modules\Edu\Transformers\LessonResource;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Routing\Controller;
 use Modules\Edu\Entities\Lesson;
 use Modules\Edu\Entities\Video;
 use Illuminate\Http\Response;
@@ -13,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Models\Site;
 use Auth;
 use ActivityService;
+use App\Http\Controllers\Controller;
+use DB;
 
 /**
  * 课程管理
@@ -20,6 +20,11 @@ use ActivityService;
  */
 class LessonController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth:sanctum'])->except(['index', 'show']);
+        $this->authorizeResource(Lesson::class, 'lesson');
+    }
 
     /**
      * 课程列表
@@ -88,6 +93,7 @@ class LessonController extends Controller
      */
     protected function updateVideos(Lesson $lesson, Request $request)
     {
+        DB::beginTransaction();
         $lesson->videos()->whereNotIn('id', collect($request->videos)->pluck('id'))->delete();
         foreach ((array)$request->videos as $rank => $video) {
             if ($video['title']) {
@@ -98,6 +104,7 @@ class LessonController extends Controller
                 ] + $video);
             }
         }
+        DB::commit();
     }
 
     /**
@@ -108,8 +115,10 @@ class LessonController extends Controller
      */
     public function destroy(Lesson $lesson)
     {
+        DB::beginTransaction();
         $lesson->delete();
         return back()->with('success', '视频删除成功');
+        DB::commit();
     }
 
     /**
