@@ -28,7 +28,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        $sites = Auth::user()->sites->load('master.group');
+        $sites = Auth::user()->sites->load(['master.group.packages.modules']);
         return SiteResource::collection($sites);
     }
 
@@ -70,38 +70,6 @@ class SiteController extends Controller
         $site->module_id = request('module_id');
         $site->save();
         return $this->message('站点修改成功');
-    }
-
-    /**
-     * 测试短信
-     * @param Request $request
-     * @param Site $site
-     * @return void
-     */
-    public function sms(Request $request, Site $site)
-    {
-        try {
-            CodeService::mobile(Auth::user()->mobile);
-            return $this->message('验证码发送成功');
-        } catch (Exception $e) {
-            return $this->error('短信发送失败，可能是手机号错误或发送频繁。' . var_export($e->getExceptions(), true), 500);
-        }
-    }
-
-    /**
-     * 邮件发送测试
-     * @param Request $request
-     * @param Site $site
-     * @return void
-     */
-    public function email(Request $request, Site $site)
-    {
-        try {
-            CodeService::email(Auth::user()->email);
-            return $this->message('验证码发送成功');
-        } catch (Exception $e) {
-            return $this->error('邮件发送失败，可能是邮箱错误或发送频繁。' . $e->getMessage(), 500);
-        }
     }
 
     /**

@@ -6,7 +6,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-nav flex-row order-md-last">
-                    <div class="nav-item dropdown">
+                    <div class="nav-item dropdown text-sm">
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                             <el-image :src="user.avatar" fit="cover" class="w-8 h-8"></el-image>
                             <div class="d-none d-xl-block ps-2">
@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-menu">
-                    <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
+                    <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center text-sm">
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <router-link :to="{ name: 'site.site.index' }" class="nav-link">

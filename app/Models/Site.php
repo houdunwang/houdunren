@@ -47,6 +47,15 @@ class Site extends Model
     }
 
     /**
+     * 默认模块
+     * @return BelongsTo
+     */
+    public function modules()
+    {
+        return $this->master->group->modules;
+    }
+
+    /**
      * 站点角色
      *
      * @return void

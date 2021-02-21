@@ -7,9 +7,16 @@
         <div style="min-height:100px;" v-loading="loading">
             <div v-if="sites.length">
                 <div class="card shadow-sm mb-3 text-gray-800" v-for="site in sites" :key="site.id">
-                    <div class="card-header flex justify-between">
-                        <div>站点可用套餐:</div>
-                        <router-link :to="{ name: 'site.module.index', params: { sid: site.id } }" class="text-sm text-gray-900">
+                    <div class="card-header flex justify-between text-sm text-gray-600">
+                        <div>
+                            站点可用模块:
+                            <span v-for="p in site.master.group.packages" :key="p.id">
+                                <el-tag size="mini" v-for="module in p.modules" :key="module.id">
+                                    {{ module.title }}
+                                </el-tag>
+                            </span>
+                        </div>
+                        <router-link :to="{ name: 'site.module.index', params: { sid: site.id } }" class="text-gray-600 hover:text-gray-900">
                             <i class="fa fa-cog" aria-hidden="true"></i>
                             扩展模块
                         </router-link>
@@ -18,15 +25,17 @@
                         <i class="fa fa-rss fa-3x inline-block mr-2" aria-hidden="true"></i>
                         <router-link :to="{ name: 'site.module.index', params: { sid: site.id } }" class="text-3xl">{{ site.title }}</router-link>
                     </div>
-                    <div class="card-footer text-muted bg-white flex flex-col md:flex-row justify-between">
-                        <div class="text-sm text-gray-500">
+                    <div class="card-footer text-sm text-gray-500 bg-white flex flex-col md:flex-row justify-between">
+                        <div class="text-sm ">
                             # {{ site.id }} 创建时间: {{ site.created_at | format }} 站长: {{ site.master.name }} 所属组:
-                            <router-link :to="{ name: 'system.group.index' }" v-if="user.isSuperAdmin"> {{ site.master.group.title }} </router-link>
+                            <router-link :to="{ name: 'system.group.index' }" v-if="user.isSuperAdmin" class="hover:text-gray-900">
+                                {{ site.master.group.title }}
+                            </router-link>
                             <span v-else>{{ site.master.group.title }}</span>
                             <span v-if="site.module"> 默认模块: {{ site.module.title }} </span>
                         </div>
                         <div class="site-menu w-full md:w-auto grid md:block md:grid-cols-none grid-cols-2 items-center mt-3 md:mt-0">
-                            <a href="/" target="_blank">
+                            <a href="/" target="_blank" class="mr-2 hover:text-gray-900">
                                 <i class="fas fa-home"></i>
                                 访问首页
                             </a>
@@ -34,20 +43,24 @@
                                 v-for="(menu, index) in menus"
                                 :key="index"
                                 :to="{ name: menu.name, params: { sid: site.id } }"
-                                class="mr-2 text-gray-500 text-sm"
+                                class="mr-2 hover:text-gray-900"
                             >
                                 <i :class="menu.icon"></i>
                                 {{ menu.title }}
                             </router-link>
-                            <a href="#" @click.prevent="syncPermission(site)" class="mr-2">
+                            <a href="#" @click.prevent="syncPermission(site)" class="mr-2 hover:text-gray-900">
                                 <i class="fas fa-life-ring"></i>
                                 更新权限表
                             </a>
-                            <router-link :to="{ name: 'site.site.edit', params: { id: site.id } }" v-if="site.permissions.update">
+                            <router-link
+                                :to="{ name: 'site.site.edit', params: { id: site.id } }"
+                                v-if="site.permissions.update"
+                                class="mr-2 hover:text-gray-900"
+                            >
                                 <i class="fas fa-pen"></i>
                                 编辑站点
                             </router-link>
-                            <a href="#" @click.prevent="del(site)" v-if="site.permissions.delete">
+                            <a href="#" @click.prevent="del(site)" v-if="site.permissions.delete" class="mr-2 hover:text-gray-900">
                                 <i class="fas fa-trash"></i>
                                 删除
                             </a>
@@ -74,19 +87,18 @@ export default {
         return { sites: [], menus, loading: true }
     },
     async created() {
-        this.sites = await this.axios.get('site/site')
+        this.sites = await this.axios.get('site')
         this.loading = false
     },
     methods: {
         async del(site) {
-            try {
-                await this.$confirm('确定删除站点吗？', '提示')
-                await this.axios.delete(`site/site/${site.id}`, site)
+            this.$confirm('确定删除站点吗？', '提示').then(async _ => {
+                await this.axios.delete(`site/${site.id}`, site)
                 this.sites.splice(this.sites.indexOf(site), 1)
-            } catch (e) {}
+            })
         },
         async syncPermission(site) {
-            await this.axios.get(`site/permission/${site.id}/sync`)
+            await this.axios.get(`site/${site.id}/permission/sync`)
         }
     }
 }

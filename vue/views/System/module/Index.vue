@@ -25,21 +25,21 @@ export default {
         }
     },
     async created() {
-        this.modules = await this.axios.get(`system/module`)
+        this.modules = await this.axios.get(`module`)
         this.loading = false
     },
     methods: {
         async install(module) {
             this.submit = true
             this.$confirm(`确定安装【${module.title}】吗？`)
-                .then(_ => this.axios.post(`system/module?name=${module.name}`))
+                .then(_ => this.axios.post(`module?name=${module.name}`))
                 .then(_ => this.$router.go(0))
                 .catch(_ => (this.submit = false))
         },
         async uninstall(module) {
             this.submit = true
             this.$confirm(`确定卸载【${module.title}】吗？`)
-                .then(_ => this.axios.delete(`system/module/${module.id}`))
+                .then(_ => this.axios.delete(`module/${module.id}`))
                 .then(_ => this.$router.go(0))
                 .catch(_ => (this.submit = false))
         }

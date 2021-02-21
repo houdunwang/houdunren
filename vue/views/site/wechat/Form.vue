@@ -67,7 +67,7 @@ export default {
         }
     },
     async created() {
-        this.site = await this.axios.get(`site/site/${this.$route.params.sid}`)
+        this.site = await this.axios.get(`site/${this.$route.params.sid}`)
         if (this.id) this.form = await this.axios.get(`site/${this.site.id}/wechat/${this.id}`)
         this.loading = false
     },

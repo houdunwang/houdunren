@@ -29,7 +29,7 @@ export default {
     },
     methods: {
         async get() {
-            this.captcha = await this.axios.get(`common/captcha?_` + Math.random())
+            this.captcha = await this.axios.get(`captcha?_` + Math.random())
         }
     }
 }

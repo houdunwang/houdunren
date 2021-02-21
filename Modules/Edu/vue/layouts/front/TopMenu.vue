@@ -37,6 +37,7 @@
                 <a class="btn btn-danger mr-3" href="/login" role="button">登录</a>
                 <a class="btn btn-light " href="/register" role="button">注册</a>
             </div>
+            <!-- 菜单列表 -->
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                     <ul class="navbar-nav">
@@ -81,6 +82,7 @@
                     </ul>
                 </div>
             </div>
+            <!-- 菜单列表END -->
         </div>
     </header>
 </template>

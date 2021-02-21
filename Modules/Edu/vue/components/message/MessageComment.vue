@@ -28,8 +28,6 @@ export default {
                 .split('\\')
                 .pop()
                 .toLowerCase()
-            console.log({ name: `front.${type}.show`, params: { id: this.message.model.commentable.id, comment_id: this.message.model.id } })
-
             this.$router.push({ name: `front.${type}.show`, params: { id: this.message.model.commentable.id, comment_id: this.message.model.id } })
         },
         async del() {

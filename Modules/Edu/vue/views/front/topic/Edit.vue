@@ -1,7 +1,5 @@
 <template>
-    <div class="container-xl">
-        <x-form :id="$route.params.id" />
-    </div>
+    <x-form :id="$route.params.id" />
 </template>
 
 <script>

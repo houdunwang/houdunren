@@ -2,11 +2,11 @@
     <div>
         <div class="subscribe">
             <div class="header -mt-10 pt-28 pb-28">
-                <h1 class="text-white text-center text-6xl opacity-95">投资学习永远是最聪明的</h1>
+                <h1 class="text-white text-center text-6xl opacity-100 leading-snug">投资学习永远是最聪明的</h1>
                 <h2 class="text-3xl font-weight-light mt-10 text-white text-center opacity-60">订阅会员免费观看网站所有视频</h2>
             </div>
             <div class="container-xl">
-                <div class="-mt-20 w-10/12 m-auto">
+                <div class="-mt-20 md:w-10/12 m-auto">
                     <div class="row">
                         <div class="col-12 col-md-4 mt-3" v-for="subscribe in subscribes" :key="subscribe.id">
                             <div class="card shadow-lg item">

@@ -1,18 +1,20 @@
 <template>
-    <div class="card">
-        <div class="card-header h-14">
-            {{ id ? '编辑贴子' : '发表贴子' }}
-        </div>
-        <div class="card-body">
-            <el-input v-model="form.title" placeholder="请输入贴子标题" size="normal" clearable></el-input>
-            <hd-error name="title" />
-            <tags v-model="form.tags" />
-            <hd-error name="tags" />
-            <hd-tui-editor v-model="form.content" v-if="!id || form.content" initialEditType="markdown" class="border" :action="`/upload/site/${site.id}`" />
-            <hd-error name="content" />
-        </div>
-        <div class="card-footer text-muted">
-            <button class="btn btn-azure" @click="onSubmit">保存提交</button>
+    <div class="container-xl">
+        <div class="card">
+            <div class="card-header h-14">
+                {{ id ? '编辑贴子' : '发表贴子' }}
+            </div>
+            <div class="card-body">
+                <el-input v-model="form.title" placeholder="请输入贴子标题" size="normal" clearable></el-input>
+                <hd-error name="title" />
+                <tags v-model="form.tags" />
+                <hd-error name="tags" />
+                <hd-tui-editor v-model="form.content" v-if="!id || form.content" initialEditType="markdown" class="border" :action="`/api/front/upload`" />
+                <hd-error name="content" />
+            </div>
+            <div class="card-footer text-muted">
+                <button class="btn btn-azure" @click="onSubmit">保存提交</button>
+            </div>
         </div>
     </div>
 </template>

@@ -32,7 +32,7 @@ class UserController extends Controller
      * 当前用户资料
      * @return UserResource
      */
-    public function my()
+    public function info()
     {
         return new UserResource(Auth::user());
     }

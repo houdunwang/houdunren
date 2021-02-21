@@ -28,9 +28,9 @@ export default {
                 .pop()
                 .toLowerCase()
             if (type == 'topic') {
-                location.href = `/Edu/front/topic/${comment.comment_id}/show#${comment.id}`
+                this.$router.push({ name: `front.${type}.show`, params: { id: comment.comment_id, comment_id: comment.id } })
             } else {
-                location.href = `/Edu/front/video/${comment.comment_id}/show#${comment.id}`
+                this.$router.push({ name: `front.video.show`, params: { id: comment.comment_id, comment_id: comment.id } })
             }
         }
     }

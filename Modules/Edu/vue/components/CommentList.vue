@@ -2,7 +2,7 @@
     <div v-loading="loading" id="comment-list">
         <div :id="`comment-${comment.id}`" class="card shadow mb-5" v-for="comment in comments.data" :key="comment.id">
             <!-- 评论 -->
-            <div class="card-header bg-white d-flex justify-content-start">
+            <div class="card-header bg-white d-flex justify-content-start p-2 md:p-8">
                 <img :src="comment.user.avatar" class="w-8 h-8 rounded object-cover mr-2" />
                 <div class="flex flex-col ">
                     <a href="/edu/space/18832/topic" class="flex-fill text-secondary">
@@ -16,10 +16,9 @@
                     </div>
                 </div>
             </div>
-            <div class="text-secondary pb-5 comment-content pl-5 mt-5 reply-container">
+            <div class="text-secondary p-2 md:p-8 md:mt-5 comment-content reply-container">
                 <div class="markdown" v-html="comment.content" v-markdown></div>
             </div>
-            <!-- 评论END -->
             <!-- 回复 -->
             <div v-if="comment.replys && comment.replys.length > 0 && comment.form.show" class="text-secondary pb-5 pl-8 reply-container">
                 <div class="border-t border-dashed border-gray-200 py-3 flex" v-for="reply in comment.replys" :key="reply.id" :id="`comment-${reply.id}`">
@@ -63,7 +62,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="pr-5 ml-8">
+                <!-- 回复框 -->
+                <div class="pr-5 ml-8" v-if="isLogin">
                     <el-input
                         class="flex-1 rounded-none mr-1 mb-2"
                         type="textarea"
@@ -74,6 +74,7 @@
                     ></el-input>
                     <el-button type="primary" size="mini" @click.prevent="quickReply(comment)" class="flex-grow-0">发送</el-button>
                 </div>
+                <!-- 回复框END -->
             </div>
             <!-- 回复END -->
             <div class="card-footer text-muted bg-white text-sm">
@@ -94,6 +95,8 @@
                 </a>
             </div>
         </div>
+        <!-- 评论END -->
+        <!-- 分页 -->
         <div class="bg-white p-3 border border-gray-200 rounded-sm shadow-sm" v-if="comments.meta && comments.meta.total > 10">
             <el-pagination
                 v-if="comments.meta"
@@ -108,7 +111,9 @@
             >
             </el-pagination>
         </div>
-        <div class="card mt-5" id="comment-form">
+        <!-- 分页END -->
+        <!-- 评论框 -->
+        <div class="card mt-5" id="comment-form" v-if="isLogin">
             <div class="card-header h-14">
                 <div v-if="form.comment" class="text-sm">
                     回复：<span class="text-blue-700 font-bold">{{ form.comment.user.name }}</span>
@@ -117,18 +122,22 @@
                 <div v-else class="font-bold text-gray-600">发表评论</div>
             </div>
             <div class="card-body">
-                <hd-tui-editor v-model="form.content" initialEditType="markdown" class="border" :action="`/upload/site/${site.id}`" ref="editor" />
+                <hd-tui-editor v-model="form.content" initialEditType="markdown" class="border" :action="`/api/front/upload`" ref="editor" />
                 <hd-error name="content" />
             </div>
             <div class="card-footer text-muted">
                 <button class="btn btn-azure" @click="onSubmit">保存提交</button>
             </div>
         </div>
+        <!-- 评论框END -->
+        <image-preview />
     </div>
 </template>
 
 <script>
+import ImagePreview from './ImagePreview.vue'
 export default {
+    components: { ImagePreview },
     props: ['actionList', 'actionPost'],
     data() {
         return {

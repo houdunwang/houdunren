@@ -68,8 +68,11 @@ Route::group(['prefix' => 'Edu/front', 'middleware' => ['front']], function () {
 });
 
 Route::group(['prefix' => 'Edu/member', 'middleware' => ['auth:sanctum', 'front']], function () {
-    Route::get("video", [MemberController::class, 'video']);
-    Route::get("topic", [MemberController::class, 'topic']);
     Route::get("order", [MemberController::class, 'order']);
     Route::get("duration", [MemberController::class, 'duration']);
+});
+
+Route::group(['prefix' => 'Edu/space', 'middleware' => ['front']], function () {
+    Route::get("video/{user}", [MemberController::class, 'video']);
+    Route::get("topic/{user}", [MemberController::class, 'lists']);
 });

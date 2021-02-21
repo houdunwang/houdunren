@@ -36,7 +36,7 @@ export default new Vuex.Store({
     },
     actions: {
         async getUser({ commit }) {
-            commit('setUser', await axios.get(`/api/auth/user`))
+            commit('setUser', await axios.get(`/api/user/info`))
         },
         async message({ commit }, page = 1) {
             commit('setMessage', await axios.get(`front/message?page=${page}`))

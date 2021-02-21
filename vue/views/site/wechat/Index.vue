@@ -30,7 +30,7 @@
                     <el-button type="info" size="small" @click="route('site.wechatmenu.edit', { sid: site.id, id: wechat.id })">
                         微信菜单
                     </el-button>
-                    <el-button type="success" size="small" @click="route('site.default.edit', { sid: site.id, id: wechat.id })">
+                    <el-button type="success" size="small" @click="route('site.wechatdefault.edit', { sid: site.id, id: wechat.id })">
                         默认消息
                     </el-button>
                     <el-button type="primary" size="small" @click="$router.push({ name: 'site.wechat.edit', params: { sid: site.id, id: wechat.id } })">
@@ -58,14 +58,14 @@ export default {
     },
     async created() {
         const sid = this.$route.params.sid
-        ;[this.site, this.wechats] = await Promise.all([this.axios.get(`site/site/${sid}`), this.axios.get(`site/${sid}/wechat`)])
+        ;[this.site, this.wechats] = await Promise.all([axios.get(`site/${sid}`), axios.get(`site/${sid}/wechat`)])
         this.loading = false
     },
     methods: {
         del(wechat) {
             this.$confirm('确定删除吗？', '温馨提示')
                 .then(async () => {
-                    await this.axios.delete(`site/${this.site.id}/wechat/${wechat.id}`)
+                    await axios.delete(`site/${this.site.id}/wechat/${wechat.id}`)
                     this.wechats.splice(this.wechats.indexOf(wechat), 1)
                 })
                 .catch(() => {})
@@ -74,7 +74,7 @@ export default {
         async sync(wechat) {
             this.isSync = true
             this.$message('粉丝同步中...')
-            const response = await this.axios.get(`site/${this.site.id}/wechat/${wechat.id}/user`)
+            const response = await axios.get(`site/${this.site.id}/wechat/${wechat.id}/user/sync`)
             if (response.data.next_openid) {
                 this.sync(wechat)
             }

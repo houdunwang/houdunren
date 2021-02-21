@@ -32,7 +32,8 @@ _axios.interceptors.response.use(
         if (message) {
             el.Message({
                 message,
-                type: 'success'
+                type: 'success',
+                showClose: true
             })
         }
         return response.data
@@ -52,7 +53,8 @@ _axios.interceptors.response.use(
                 el.MessageBox.confirm(data.message || httpStatus(status), '温馨提示', {
                     showCancelButton: false,
                     confirmButtonText: '关闭',
-                    type: 'warning'
+                    type: 'warning',
+                    showClose: true
                 })
         }
         return Promise.reject(error)

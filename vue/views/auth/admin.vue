@@ -19,6 +19,9 @@
                                     <div class="flex flex-col mt-4">
                                         <hd-captcha v-model="form.captcha" ref="captcha" />
                                     </div>
+                                    <div class="flex flex-col mt-4">
+                                        <el-checkbox v-model="form.remember">记住我</el-checkbox>
+                                    </div>
                                     <div class="flex flex-col mt-8">
                                         <el-button
                                             type="primary"
@@ -64,7 +67,7 @@ export default {
         async onSubmit() {
             this.$store.commit('setErrors', {})
             this.axios
-                .post(`front/login`, this.form)
+                .post(`login`, this.form)
                 .then(({ token }) => {
                     localStorage.setItem('token', token)
                     location.href = '/admin'

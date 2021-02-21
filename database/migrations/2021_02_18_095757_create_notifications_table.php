@@ -16,8 +16,8 @@ class CreateNotificationsTable extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             Schema::create('notifications', function (Blueprint $table) {
                 $table->uuid('id')->primary();
-                $table->foreignId('site_id')->constrained()->onDelte('cascade');
-                $table->foreignId('module_id')->constrained()->onDelte('cascade');
+                $table->foreignId('site_id')->constrained()->onDelete('cascade');
+                $table->foreignId('module_id')->constrained()->onDelete('cascade');
                 $table->string('type');
                 $table->morphs('notifiable');
                 $table->text('data');

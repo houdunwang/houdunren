@@ -31,7 +31,7 @@
             </el-table-column>
         </el-table>
         <div class="mt-3">
-            <hd-user-search title="选择管理员" @change="setAdmin" :action="`site/${this.sid}/user`" />
+            <hd-user-search title="选择管理员" @change="setAdmin" :action="`site/${this.sid}/user/search`" />
         </div>
     </div>
 </template>
@@ -43,20 +43,20 @@ export default {
         return { tabs: tabs({ sid: this.$route.params.sid }), site: {}, users: [], sid: this.$route.params.sid, loading: true }
     },
     async created() {
-        this.site = await this.axios.get(`site/site/${this.sid}`)
-        this.users = await this.axios.get(`site/${this.sid}/admin`)
+        this.site = await axios.get(`site/${this.sid}`)
+        this.users = await axios.get(`site/${this.sid}/admin`)
         this.loading = false
     },
     methods: {
         //设置管理员
         async setAdmin(user) {
-            await this.axios.put(`site/${this.sid}/admin/${user.id}`)
+            await axios.put(`site/${this.sid}/admin/${user.id}`)
             this.users.push(user)
         },
         //移除管理员
         async remove(user) {
             this.$confirm('确定删除吗？', '温馨提示').then(async () => {
-                await this.axios.delete(`site/${this.sid}/admin/${user.id}`)
+                await axios.delete(`site/${this.sid}/admin/${user.id}`)
                 this.users.splice(this.users.indexOf(user), 1)
             })
         }

@@ -1,10 +1,13 @@
 <template>
     <div v-loading="loading" :class="{ 'h-screen': loading }" class="-mt-10">
+        <!-- 视频播放 -->
         <div class="bg-gray-900">
             <div class="container-xl">
                 <div id="mse" class="" style="z-index:1000"></div>
             </div>
         </div>
+        <!-- 视频播放END -->
+        <!-- 课程标题 -->
         <div class="container-xl mt-3">
             <div class="card">
                 <div class="card-body row">
@@ -28,7 +31,9 @@
                 </div>
             </div>
         </div>
+        <!-- 课程标题END -->
 
+        <!-- 评论与课程列表 -->
         <div class="container-xl mt-3 md:flex">
             <div class="md:w-9/12 md:mr-5 mb-5 order-2 md:order-1">
                 <comment-list
@@ -56,6 +61,7 @@
                 </div>
             </div>
         </div>
+        <!-- 评论与课程列表END -->
     </div>
 </template>
 

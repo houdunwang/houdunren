@@ -69,14 +69,14 @@ export default {
         }
     },
     async created() {
-        this.form = await axios.get(`system/user`)
+        this.form = this.$store.state.user
     },
     methods: {
         async onSubmitBase() {
-            await this.axios.put(`system/user/${this.form.id}`, this.form)
+            await this.axios.put(`user/${this.form.id}`, this.form)
         },
         onSubmitPassword() {
-            this.axios.put(`system/user/password`, this.form)
+            this.axios.put(`user/password`, this.form)
         }
     }
 }

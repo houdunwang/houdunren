@@ -52,10 +52,10 @@ export default {
         }
     },
     async created() {
-        if (this.id) this.form = await this.axios.get(`system/package/${this.id}`)
+        if (this.id) this.form = await axios.get(`package/${this.id}`)
 
         //模块列表中添加字段记录当前套餐是否拥有这个模块
-        const modules = await this.axios.get(`system/module?type=installed`)
+        const modules = await axios.get(`module?type=installed`)
         this.modules = modules.map(m => {
             m.selected = this.form.modules.some(fm => fm.id == m.id)
             return m
@@ -63,11 +63,11 @@ export default {
     },
     methods: {
         async onSubmit() {
-            const url = this.id ? `system/package/${this.id}` : `system/package`
+            const url = this.id ? `package/${this.id}` : `package`
             //从模块列表中提出id
             this.form.modules = this.modules.filter(m => m.selected).map(m => m.id)
 
-            await this.axios[this.id ? 'put' : 'post'](url, this.form)
+            await axios[this.id ? 'put' : 'post'](url, this.form)
             this.$router.push({ name: 'system.package.index' })
         },
         //模块选择

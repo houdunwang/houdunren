@@ -1,9 +1,10 @@
 <template>
-    <div class="container-xl">
+    <div class="container-xl topic-show">
         <div class="md:flex">
             <div class="md:w-9/12 md:mr-5 mb-5">
+                <!-- 贴子内容 -->
                 <div class="card topic" v-loading="loading">
-                    <div class="card-header flex flex-col items-start px-10 pt-10 leading-9 text-xl font-weight-lighter ">
+                    <div class="card-header flex flex-col items-start p-2 md:p-8 leading-9 text-xl font-weight-lighter ">
                         {{ form.title }}
                         <div class="w-full flex justify-between items-center mt-2">
                             <div class="text-sm text-gray-500">{{ form.user.name }} 更新于{{ form.updated_at | fromNow }}</div>
@@ -30,14 +31,17 @@
                             </div>
                         </div>
                     </div>
+                    <!-- 正文内容 -->
                     <div
-                        class="card-body leading-8 px-10 py-10 text-gray-700"
+                        class="card-body leading-8 p-3 md:p-8 text-gray-700"
                         v-if="form.content"
                         style="min-height:100px;"
                         v-html="form.content"
                         v-markdown
                     ></div>
+                    <!-- 正文内容END -->
                 </div>
+                <!-- 贴子内容END -->
                 <comment-list
                     class="mt-5"
                     :key="$route.params.id"
@@ -48,6 +52,7 @@
             <div class="md:w-3/12">
                 <community-tip />
             </div>
+            <image-preview />
         </div>
     </div>
 </template>
@@ -66,6 +71,7 @@ export default {
     async created() {
         this.load()
     },
+
     watch: {
         $route(to) {
             this.load()
@@ -100,9 +106,14 @@ export default {
 <style>
 .topic pre {
     padding: 0 !important;
-    margin: 2rem -2.5rem !important;
+    margin: 2rem -2rem !important;
     border-left: none !important;
     border-right: none !important;
     border-radius: 0 !important;
+}
+@media screen and (max-width: 768px) {
+    .topic pre {
+        margin: 2rem -0.75rem !important;
+    }
 }
 </style>

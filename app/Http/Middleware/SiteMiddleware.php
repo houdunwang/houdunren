@@ -10,7 +10,10 @@ use SiteService;
 use Closure;
 use Auth;
 
-
+/**
+ * 站点中间件
+ * @package App\Http\Middleware
+ */
 class SiteMiddleware
 {
     public function handle(Request $request, Closure $next)

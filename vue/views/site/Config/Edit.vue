@@ -1,19 +1,22 @@
 <template>
-    <el-form ref="form" label-width="120px" :inline="false" size="normal" label-position="left" v-loading="loading">
-        <el-tabs v-model="activeName" type="card">
-            <el-tab-pane label="基本信息" name="base"> <base-config /> </el-tab-pane>
-            <el-tab-pane label="用户相关" name="user"> <user /> </el-tab-pane>
-            <el-tab-pane label="阿里云" name="aliyun"> <aliyun /> </el-tab-pane>
-            <el-tab-pane label="支付宝" name="alipay"> <alipay /> </el-tab-pane>
-            <el-tab-pane label="微信支付" name="wepay"> <wepay /> </el-tab-pane>
-            <el-tab-pane label="上传配置" name="upload"> <upload /> </el-tab-pane>
-            <el-tab-pane label="邮箱配置" name="email"> <email /> </el-tab-pane>
-            <el-tab-pane label="短信验证码" name="sms"> <sms /> </el-tab-pane>
-        </el-tabs>
-        <div class="mt-3">
-            <el-button type="primary" @click="onSubmit">保存提交</el-button>
-        </div>
-    </el-form>
+    <div>
+        <hd-tab :tabs="tabs" />
+        <el-form ref="form" label-width="120px" :inline="false" size="normal" label-position="left" v-loading="loading">
+            <el-tabs v-model="activeName" type="card">
+                <el-tab-pane label="基本信息" name="base"> <base-config /> </el-tab-pane>
+                <el-tab-pane label="用户相关" name="user"> <user /> </el-tab-pane>
+                <el-tab-pane label="阿里云" name="aliyun"> <aliyun /> </el-tab-pane>
+                <el-tab-pane label="支付宝" name="alipay"> <alipay /> </el-tab-pane>
+                <el-tab-pane label="微信支付" name="wepay"> <wepay /> </el-tab-pane>
+                <el-tab-pane label="上传配置" name="upload"> <upload /> </el-tab-pane>
+                <el-tab-pane label="邮箱配置" name="email"> <email /> </el-tab-pane>
+                <el-tab-pane label="短信验证码" name="sms"> <sms /> </el-tab-pane>
+            </el-tabs>
+            <div class="mt-3">
+                <el-button type="primary" @click="onSubmit">保存提交</el-button>
+            </div>
+        </el-form>
+    </div>
 </template>
 
 <script>
@@ -26,7 +29,8 @@ import Wepay from './Components/Wepay'
 import Upload from './Components/Upload'
 import Email from './Components/Email'
 import Sms from './Components/Sms'
-
+import _ from 'lodash'
+import tabs from './tabs'
 export default {
     route: { path: `site/config/:sid/edit` },
     components: { BaseConfig, User, Aliyun, Alipay, Wepay, Upload, Email, Sms },
@@ -34,16 +38,17 @@ export default {
         return { form: this.site.config }
     },
     data() {
-        return { loading: true, activeName: 'base', wechats: {}, site: { config } }
+        return { loading: true, tabs, activeName: 'base', wechats: {}, site: { config } }
     },
     async created() {
-        this.site = await this.axios.get(`site/site/${this.$route.params.sid}`)
-        this.site.config = Object.assign(config, this.site.config)
+        this.site = await this.axios.get(`site/${this.$route.params.sid}`)
+        const setting = Object.assign(config, this.site.config)
+        this.site.config = _.merge(config, setting)
         this.loading = false
     },
     methods: {
         async onSubmit() {
-            await this.axios.put(`site/site/${this.$route.params.sid}`, this.site)
+            await this.axios.put(`site/${this.$route.params.sid}`, this.site)
         }
     }
 }

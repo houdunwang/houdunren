@@ -8,6 +8,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\FrontMiddleware;
 use App\Http\Middleware\SiteMiddleware;
 use App\Http\Middleware\SystemMiddleware;
+use App\Http\Middleware\ModuleMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -63,6 +64,7 @@ class Kernel extends HttpKernel
         'admin' => AdminMiddleware::class,
         'system' => SystemMiddleware::class,
         'site' => SiteMiddleware::class,
+        'module' => ModuleMiddleware::class,
         //
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

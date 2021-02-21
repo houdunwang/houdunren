@@ -34,7 +34,7 @@
 <script>
 export default {
     props: {
-        action: { type: String, default: `site/user` },
+        action: { type: String, required: true },
         title: { type: String, default: '选择用户' }
     },
     data() {
@@ -50,7 +50,7 @@ export default {
     methods: {
         //搜索用户
         async search(page = 1) {
-            this.users = await this.axios.get(this.action + `?page=${page}&keyword=${this.keyword}`)
+            this.users = await axios.get(this.action + `?page=${page}&keyword=${this.keyword}`)
         },
         //选择用户
         change(user) {

@@ -24,7 +24,7 @@ class SiteResource extends JsonResource
             'updated_at' => $this->updated_at,
             'permissions' => $this->permissions,
             'config' => $this->when($this->isMaster(), $this->config),
-            'master' => new UserResource($this->whenLoaded('master'))
+            'master' => new UserResource($this->whenLoaded('master')),
         ];
     }
 

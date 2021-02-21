@@ -11,6 +11,7 @@ use ModuleService;
 use Auth;
 use App\Models\Site;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use DB;
 
 /**
  * 模块管理
@@ -35,11 +36,11 @@ class ModuleController extends Controller
     }
 
     /**
-     * 用户站点模块
+     * 站点用户可用的模块
      * @param Site $site
      * @return AnonymousResourceCollection
      */
-    public function userSiteModule(Site $site)
+    public function siteUserModule(Site $site)
     {
         $modules = ModuleService::userSiteModules($site, Auth::user());
         return ModuleResource::collection($modules->load('packages'));
@@ -97,8 +98,10 @@ class ModuleController extends Controller
      */
     public function destroy(Module $module)
     {
+        DB::beginTransaction();
         $this->authorize('delete', $module);
         $module->delete();
+        DB::commit();
         return $this->message('模块卸载成功');
     }
 }

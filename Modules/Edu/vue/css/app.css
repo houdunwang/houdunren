@@ -10,7 +10,8 @@ html {
     /* font-family: 'Jetbrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; */
 }
 body {
-    font-size: inherit !important;
+    /* font-size: inherit !important; */
+    font-size: 1rem !important;
     background-color: #f3f3f3 !important;
 }
 
@@ -40,4 +41,9 @@ a:hover {
     font-size: 0.95rem !important;
     line-height: 1.5rem;
     padding: 1.5rem !important;
+}
+
+svg,
+img {
+    max-width: 100% !important;
 }

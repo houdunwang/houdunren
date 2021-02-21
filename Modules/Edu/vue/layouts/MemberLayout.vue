@@ -7,7 +7,7 @@
                     <a href="/member/info/avatar">
                         <img :src="user.avatar" class="w-full object-cover cursor-pointer" />
                     </a>
-                    <div class="text-gray-800 px-3 py-4  border-b border-gray-200">{{ user.name }}</div>
+                    <div class="text-gray-800 px-3 py-4  border-b border-gray-200">{{ user.name }}@@</div>
                 </div>
                 <div class="mt-0 bg-white">
                     <div v-for="(menu, index) in menus" :key="index" class="border-b border-gray-200">

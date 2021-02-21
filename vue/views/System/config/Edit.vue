@@ -16,7 +16,7 @@
                     <hd-image v-model="form.logo" action="system/upload" />
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="onSubmit">立即创建</el-button>
+                    <el-button type="primary" @click="onSubmit">保存提交</el-button>
                 </el-form-item>
             </el-form>
         </el-card>

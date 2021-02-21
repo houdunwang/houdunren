@@ -50,7 +50,7 @@ class AdminController extends Controller
     public function destroy(Site $site, User $admin)
     {
         //移除管理员
-        $admin->sites()->detach([$site->id]);
+        $admin->adminSites()->detach([$site->id]);
         //移除角色
         $admin->roles->map(function ($role) use ($admin) {
             $admin->removeRole($role['name']);

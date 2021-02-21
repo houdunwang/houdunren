@@ -17,7 +17,6 @@ export default {
     route: { meta: { auth: true } },
     components: { TopMenu, QuickMenu, XFooter },
     async created() {
-        // const config = await axios.get(`system/config`)
         this.$store.commit('setSystemConfig', await axios.get(`system/config`))
     }
 }

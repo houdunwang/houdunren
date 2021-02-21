@@ -45,7 +45,7 @@ export default {
     inject: ['form'],
     methods: {
         async send() {
-            await this.axios.post(`site/${this.$route.params.sid}/email`)
+            await this.axios.post(`site/${this.$route.params.sid}/code/email`)
         }
     }
 }

@@ -11,7 +11,12 @@ use Illuminate\Http\Request;
  */
 class CaptchaController extends Controller
 {
-    public function create(Request $request)
+    /**
+     * 生成API验证码
+     * @param Request $request
+     * @return mixed
+     */
+    public function make(Request $request)
     {
         return \Captcha::create('default', true);
     }

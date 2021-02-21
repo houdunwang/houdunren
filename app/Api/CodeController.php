@@ -16,7 +16,7 @@ class CodeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'front', 'throttle:codeSend']);
+        $this->middleware(['auth:sanctum',  'throttle:codeSend']);
     }
 
     /**
@@ -24,11 +24,11 @@ class CodeController extends Controller
      * @param Request $request
      * @return void
      */
-    public function send(Request $request)
+    public function mobile(Request $request)
     {
         $request->validate(
             [
-                'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
+                'captcha.content' => ['sometimes', 'required', 'captcha_api:' . request('captcha.key') . ',default']
             ],
             [
                 'captcha.content.required' => '验证码不能为空',
@@ -40,6 +40,32 @@ class CodeController extends Controller
             return ['message' => '验证码发送成功'];
         } catch (Exception $e) {
             return $this->error('短信发送失败，请检查手机号或联系站长', 500);
+        }
+    }
+
+    /**
+     * 邮件发送测试
+     * @param Request $request
+     * @param Site $site
+     * @return void
+     */
+    public function email(Request $request)
+    {
+        $request->validate(
+            [
+                'captcha.content' => ['sometimes', 'required', 'captcha_api:' . request('captcha.key') . ',default']
+            ],
+            [
+                'captcha.content.required' => '验证码不能为空',
+                'captcha.content.captcha_api' => '验证码输入错误'
+            ]
+        );
+
+        try {
+            CodeService::email(Auth::user()->email);
+            return $this->message('验证码发送成功');
+        } catch (Exception $e) {
+            return $this->error('邮件发送失败，可能是邮箱错误或发送频繁。' . $e->getMessage(), 500);
         }
     }
 }

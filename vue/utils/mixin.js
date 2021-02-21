@@ -11,9 +11,6 @@ const mixin = {
         }
     },
     methods: {
-        async confirm(message, promise) {
-            return MessageBox.confirm(message, '温馨提示').then(_ => this.submit(promise))
-        },
         route(name, params = {}) {
             router.push({ name, params })
         },

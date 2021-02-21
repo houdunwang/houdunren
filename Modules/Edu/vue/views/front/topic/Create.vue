@@ -1,7 +1,5 @@
 <template>
-    <div class="container-xl">
-        <x-form />
-    </div>
+    <x-form />
 </template>
 
 <script>

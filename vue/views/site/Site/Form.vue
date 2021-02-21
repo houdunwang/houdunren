@@ -36,7 +36,7 @@
             </el-card>
         </el-card>
         <div class="mt-3">
-            <el-button type="primary" @click="onSubmit">提交</el-button>
+            <el-button type="primary" @click="onSubmit">保存提交</el-button>
         </div>
     </el-form>
 </template>
@@ -57,13 +57,13 @@ export default {
         }
     },
     async created() {
-        if (this.id) this.form = await this.axios.get(`site/site/${this.id}`)
-        this.modules = await this.axios.get(`site/user/modules`)
+        if (this.id) this.form = await this.axios.get(`site/${this.id}`)
+        this.modules = await this.axios.get(`module/user`)
         this.loading = false
     },
     methods: {
         async onSubmit() {
-            const url = this.id ? `site/site/${this.id}` : 'site/site'
+            const url = this.id ? `site/${this.id}` : 'site'
             await this.axios[this.id ? 'put' : 'post'](url, this.form)
             this.$router.push({ name: 'site.site.index' })
         }

@@ -5,6 +5,9 @@
 [v-cloak] {
     display: none;
 }
+body {
+    font-size: 1rem !important;
+}
 .el-loading-spinner {
     top: 50%;
     margin-top: -21px;

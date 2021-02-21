@@ -2,14 +2,14 @@
     <div class="container-xl">
         <div class="md:flex">
             <div class="card md:w-9/12 md:mr-5 mb-5" v-loading="loading">
-                <div class="card-header flex flex-col items-start px-10 py-8 leading-9 text-xl font-weight-lighter ">
+                <div class="card-header flex flex-col items-start md:p-10 leading-9 text-xl font-weight-lighter ">
                     {{ form.title }}
                     <p class="p-3 font-normal bg-gray-100 border border-gray-200 text-sm text-gray-500 mt-5 w-full" v-if="form.description">
                         {{ form.description }}
                     </p>
                 </div>
 
-                <div class="card-body px-10">
+                <div class="card-body md:px-10">
                     <video-list :videos="form.videos" />
                 </div>
             </div>

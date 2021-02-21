@@ -28,7 +28,7 @@ export default new Vuex.Store({
     },
     actions: {
         async getUser({ commit }) {
-            commit('setUser', await axios.get(`auth/user`))
+            commit('setUser', await axios.get(`user/info`))
         }
     }
 })
