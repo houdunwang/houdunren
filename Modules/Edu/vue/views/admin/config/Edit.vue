@@ -54,6 +54,7 @@
 
 <script>
 import tabs from './tabs'
+import _ from 'lodash'
 const form = {
     live: {
         notice: '',
@@ -75,6 +76,9 @@ export default {
             tabs,
             form
         }
+    },
+    async created() {
+        this.form = _.merge(form, await axios.get(`config`))
     },
     methods: {
         onSubmit() {

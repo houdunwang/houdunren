@@ -7,6 +7,10 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 use UserService;
 use Auth;
 
+/**
+ * 用户
+ * @package App\Policies
+ */
 class UserPolicy
 {
     use HandlesAuthorization;

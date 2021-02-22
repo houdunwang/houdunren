@@ -65,7 +65,7 @@ export default {
     },
     methods: {
         async onSubmit() {
-            this.$store.commit('setErrors', {})
+            this.$store.commit('errors', {})
             this.axios
                 .post(`login`, this.form)
                 .then(({ token }) => {

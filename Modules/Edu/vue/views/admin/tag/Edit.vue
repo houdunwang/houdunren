@@ -45,7 +45,7 @@ export default {
         }
     },
     async created() {
-        this.form.tags = await this.axios.get(`admin/tag`)
+        this.form.tags = await this.axios.get(`tag`)
     },
     methods: {
         delTag(tag) {

@@ -7,45 +7,30 @@ export default new Vuex.Store({
         user: {},
         site: window.site,
         module: window.module,
-        messages: {}
+        siteMessage: {}
     },
     getters: {
         errors: state => name => {
             return state.errors[name] && state.errors[name][0]
         }
-        // user: state => {
-        //     return state.user
-        // }
-        // token() {
-        //     return window.localStorage.getItem('token') || null
-        // }
     },
     mutations: {
-        setErrors(state, errors = {}) {
+        errors(state, errors = {}) {
             state.errors = errors
         },
-        setUser(state, user) {
+        user(state, user) {
             state.user = user
         },
-        setMessage(state, message) {
+        siteMessage(state, message) {
             state.messages = message
         }
-        // setModule(state, module) {
-        //     state.module = module
-        // }
     },
     actions: {
-        async getUser({ commit }) {
-            commit('setUser', await axios.get(`/api/user/info`))
+        async user({ commit }) {
+            commit('user', await axios.get(`/api/user/info`))
         },
         async message({ commit }, page = 1) {
-            commit('setMessage', await axios.get(`front/message?page=${page}`))
+            commit('siteMessage', await axios.get(`message?page=${page}`))
         }
-        // async getModule({ commit }, url) {
-        //     commit('setModule', await axios.get(url))
-        // },
-        // async getSite({ commit }, url) {
-        //     commit('setSite', await axios.get(url))
-        // }
     }
 })

@@ -28,7 +28,7 @@
                     <hd-error name="description" />
                 </el-form-item>
                 <el-form-item label="预览图片" size="normal">
-                    <hd-image v-model="form.thumb" />
+                    <hd-image v-model="form.thumb" :action="`upload/site/${site.id}`" />
                     <hd-error name="thumb" />
                 </el-form-item>
                 <el-form-item label="高清下载地址" size="normal">
@@ -54,7 +54,7 @@
                 <div slot="header">
                     标签选择
                 </div>
-                <tags v-model="form.tags" action="front/tag" />
+                <tags v-model="form.tags" />
             </el-card>
             <el-card shadow="never" :body-style="{ padding: '20px' }" class="mt-3">
                 <div slot="header">
@@ -117,13 +117,13 @@ export default {
     },
     async created() {
         if (this.id) {
-            this.form = Object.assign(form, await this.axios.get(`admin/lesson/${this.id}`))
+            this.form = Object.assign(form, await this.axios.get(`lesson/${this.id}`))
             this.form.tags = this.form.tags.map(t => t.id)
         }
     },
     methods: {
         async onSubmit() {
-            const url = this.id ? `admin/lesson/${this.id}` : 'admin/lesson'
+            const url = this.id ? `lesson/${this.id}` : 'lesson'
             await this.axios[this.id ? 'put' : 'post'](url, this.form)
             this.$router.push({ name: 'admin.lesson.index' })
         }

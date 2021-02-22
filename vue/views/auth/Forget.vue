@@ -67,7 +67,7 @@ export default {
     },
     methods: {
         async onSubmit() {
-            this.$store.commit('setErrors')
+            this.$store.commit('errors')
             await this.axios.post(`front/forget`, this.form)
             this.$router.push(`/login`)
         }

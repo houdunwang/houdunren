@@ -41,7 +41,7 @@ class LessonController extends Controller
      * @param Lesson $lesson
      * @return void
      */
-    public function show(Lesson $lesson)
+    public function show(Site $site, Lesson $lesson)
     {
         return new LessonResource($lesson->load(['videos', 'tags']));
     }
@@ -53,7 +53,7 @@ class LessonController extends Controller
      * @param Lesson $lesson
      * @return void
      */
-    public function store(LessonRequest $request, Lesson $lesson)
+    public function store(LessonRequest $request, Site $site, Lesson $lesson)
     {
         DB::beginTransaction();
         $lesson->fill($request->except(['file', 'tags', 'videos']) + [
@@ -74,7 +74,7 @@ class LessonController extends Controller
      * @param Lesson $lesson
      * @return void
      */
-    public function update(LessonRequest $request, Lesson $lesson)
+    public function update(LessonRequest $request, Site $site, Lesson $lesson)
     {
         DB::beginTransaction();
         $lesson->fill($request->except(['file', 'tags', 'videos']))->save();
@@ -113,7 +113,7 @@ class LessonController extends Controller
      * @param Lesson $lesson
      * @return void
      */
-    public function destroy(Lesson $lesson)
+    public function destroy(Site $site, Lesson $lesson)
     {
         DB::beginTransaction();
         $lesson->delete();

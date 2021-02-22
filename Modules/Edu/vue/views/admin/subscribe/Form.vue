@@ -50,13 +50,13 @@ export default {
         }
     },
     async created() {
-        if (this.id) this.form = await this.axios.get(`admin/subscribe/${this.id}`)
+        if (this.id) this.form = await axios.get(`subscribe/${this.id}`)
     },
     methods: {
         //提交表单
         async onSubmit() {
-            const url = this.id ? `admin/subscribe/${this.id}` : 'admin/subscribe'
-            await this.axios[this.id ? 'put' : 'post'](url, this.form)
+            const url = this.id ? `subscribe/${this.id}` : 'subscribe'
+            await axios[this.id ? 'put' : 'post'](url, this.form)
             this.$router.push({ name: 'admin.subscribe.index' })
         }
     }

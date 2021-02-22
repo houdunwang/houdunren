@@ -52,7 +52,7 @@ class AuthController extends Controller
         ], $request->remember ?? true);
 
         if ($isLogin) {
-            return ['message' => '登录成功', 'token' => $this->token(Auth::user())];
+            return ['message' => '登录成功', 'token' => $this->token(Auth::user()), 'data' => Auth::user()];
         }
         return response(['message' => '帐号或密码错误'], 405);
     }

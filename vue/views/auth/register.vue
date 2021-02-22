@@ -74,7 +74,7 @@ export default {
     },
     methods: {
         async onSubmit() {
-            this.$store.commit('setErrors')
+            this.$store.commit('errors')
             await this.axios.post(`front/register`, this.form)
             this.$router.push({ name: 'auth.login' })
         }

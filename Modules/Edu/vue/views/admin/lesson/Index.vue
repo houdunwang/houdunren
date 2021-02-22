@@ -34,11 +34,11 @@ export default {
     },
     methods: {
         async currentChange(page = 1) {
-            this.lessons = await this.axios.get(`admin/lesson?page=${page}`)
+            this.lessons = await this.axios.get(`lesson?page=${page}`)
         },
         del(lesson) {
             this.$confirm('确定删除吗', '温馨提示').then(() => {
-                this.axios.delete('lesson/destroy', lesson)
+                this.axios.delete('destroy', lesson)
             })
         }
     }

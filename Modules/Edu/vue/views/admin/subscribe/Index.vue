@@ -37,12 +37,12 @@ export default {
         }
     },
     async created() {
-        this.subscribes = await this.axios.get('admin/subscribe')
+        this.subscribes = await axios.get('subscribe')
     },
     methods: {
         del(lesson) {
             this.$confirm('确定删除吗', '温馨提示').then(async () => {
-                await this.axios.delete(`admin/subscribe/${lesson.id}`)
+                await axios.delete(`subscribe/${lesson.id}`)
                 this.subscribes.splice(this.subscribes.indexOf(lesson), 1)
             })
         }

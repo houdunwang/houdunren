@@ -9,7 +9,7 @@
 <script>
 export default {
     props: {
-        action: { default: `front/tag` }
+        action: { default: `tag` }
     },
     data() {
         return {

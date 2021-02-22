@@ -2,8 +2,8 @@
 
 namespace Modules\Edu\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Modules\Edu\Entities\Tag;
 
 /**
@@ -14,7 +14,7 @@ class TagController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum', 'admin'])->except(['index']);
+        $this->middleware(['auth:sanctum']);
     }
 
     /**
@@ -23,6 +23,7 @@ class TagController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Tag::class);
         $tags = Tag::where('site_id', SID)->get();
         return $tags;
     }
@@ -34,12 +35,13 @@ class TagController extends Controller
      */
     public function update(Request $request)
     {
+        $this->authorize('batchUpdate', Tag::class);
         Tag::where('site_id', site()['id'])->delete();
         collect($request->input('tags'))->filter(function ($tag) {
             return trim($tag['title']) != '';
         })->map(function ($tag) {
             Tag::create($tag + ['site_id' => site()['id']]);
         });
-        return ['message' => '标签保存成功'];
+        return $this->message('标签保存成功');
     }
 }

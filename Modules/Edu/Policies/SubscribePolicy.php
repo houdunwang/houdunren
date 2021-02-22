@@ -6,8 +6,11 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 
 use App\Models\User;
 use Modules\Edu\Entities\Subscribe;
-use UserService;
 
+/**
+ * 订阅套餐
+ * @package Modules\Edu\Policies
+ */
 class SubscribePolicy
 {
     use HandlesAuthorization;
@@ -24,16 +27,16 @@ class SubscribePolicy
 
     public function create(User $user)
     {
-        return UserService::isMaster(site(), $user);
+        return access();
     }
 
     public function update(User $user, Subscribe $subscribe)
     {
-        return UserService::isMaster(site(), $user) || $user['id'] == $subscribe['user_id'];
+        return access();
     }
 
     public function delete(User $user, Subscribe $subscribe)
     {
-        return UserService::isMaster(site(), $user) || $user->id == $subscribe->user_id;
+        return access();
     }
 }

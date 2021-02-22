@@ -21,7 +21,6 @@ class SystemController extends Controller
     public function __construct()
     {
         $this->middleware(['auth:sanctum'])->except(['index', 'show']);
-        $this->authorizeResource(System::class, 'system');
     }
 
     /**
@@ -36,13 +35,14 @@ class SystemController extends Controller
 
     public function store(SystemLessonRequest $request, System $system)
     {
+        $this->authorize('create', $system);
         $system->fill($request->input() + [
             'site_id' => site()->id,
             'user_id' => Auth::id(),
         ])->save();
 
         $this->updateLesson($system, $request);
-        return ['message' => '课程保存成功'];
+        return $this->message('课程保存成功');
     }
 
     /**
@@ -50,7 +50,7 @@ class SystemController extends Controller
      * @param System $system
      * @return void
      */
-    public function show(System $system)
+    public function show(Site $site, System $system)
     {
         return new SystemLessonResource($system->load('lessons'));
     }
@@ -61,11 +61,12 @@ class SystemController extends Controller
      * @param System $system
      * @return void
      */
-    public function update(SystemLessonRequest $request, System $system)
+    public function update(SystemLessonRequest $request, Site $site, System $system)
     {
+        $this->authorize('update', $system);
         $system->fill($request->input())->save();
         $this->updateLesson($system, $request);
-        return ['message' => '课程保存成功'];
+        return $this->message('课程保存成功');
     }
 
     /**
@@ -92,7 +93,8 @@ class SystemController extends Controller
      */
     public function destroy(Site $site, System $system)
     {
+        $this->authorize('delete', $system);
         $system->delete();
-        return ['message' => '课程删除成功'];
+        return $this->message('课程删除成功');
     }
 }

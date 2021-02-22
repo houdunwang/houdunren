@@ -36,7 +36,7 @@ Route::get('/', function () {
     $name = module()['name'];
     $class  = "Modules\\{$name}\Http\Controllers\HomeController";
     return app($class)->index();
-})->middleware(['front']);
+})->middleware(['module']);
 
 
 Route::fallback(function () {

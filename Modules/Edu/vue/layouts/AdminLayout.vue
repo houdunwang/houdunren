@@ -186,7 +186,7 @@
                                 <div class="dropdown-menu">
                                     <div class="dropdown-menu-columns">
                                         <div class="dropdown-menu-column grid grid-cols-2 w-80">
-                                            <a class="dropdown-item" :href="`/admin/${site.id}/${module.id}`" v-for="module in modules" :key="module.id">
+                                            <a class="dropdown-item" :href="`/${module.name}/admin`" v-for="module in modules" :key="module.id">
                                                 {{ module.title }}
                                             </a>
                                         </div>
@@ -220,7 +220,7 @@ export default {
         }
     },
     async created() {
-        this.modules = await this.axios.get(`/api/site/${this.site.id}/user/modules`)
+        this.modules = await this.axios.get(`/api/module/site/${this.site.id}/user`)
     }
 }
 </script>

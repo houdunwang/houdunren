@@ -43,7 +43,7 @@ export default {
     },
     methods: {
         async send() {
-            this.$store.commit('setErrors', {})
+            this.$store.commit('errors', {})
             const error = this.checkFiels()
             if (error) return this.$message(error)
             this.axios

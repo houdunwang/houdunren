@@ -53,7 +53,7 @@ export default {
         }
     },
     async created() {
-        if (this.id) this.form = await this.axios.get(`admin/system/${this.id}`)
+        if (this.id) this.form = await axios.get(`system/${this.id}`)
     },
     methods: {
         //删除课程
@@ -73,8 +73,8 @@ export default {
         },
         //提交表单
         async onSubmit() {
-            const url = this.id ? `admin/system/${this.id}` : `admin/system`
-            await this.axios[this.id ? 'put' : 'post'](url, this.form)
+            const url = this.id ? `system/${this.id}` : `system`
+            await axios[this.id ? 'put' : 'post'](url, this.form)
             this.$router.push({ name: 'admin.system.index' })
         }
     }

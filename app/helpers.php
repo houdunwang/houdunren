@@ -44,7 +44,11 @@ if (!function_exists('access')) {
         if (UserService::isMaster(site(), Auth::user())) {
             return true;
         }
-        return $name ? \PermissionService::access($name, Auth::user(), site(), module()) : false;
+        //管理员检测
+        if ($name) {
+            return \PermissionService::access($name, Auth::user(), site(), module());
+        }
+        return false;
     }
 }
 

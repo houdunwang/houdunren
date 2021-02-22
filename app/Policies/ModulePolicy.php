@@ -40,6 +40,12 @@ class ModulePolicy
         return UserService::isSuperAdmin($user);
     }
 
+    /**
+     * 扩展模块里管理模块配置
+     * @param User $user
+     * @param Module $module
+     * @return bool
+     */
     public function config(User $user, Module $module)
     {
         return access();
