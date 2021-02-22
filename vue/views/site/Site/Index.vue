@@ -22,8 +22,10 @@
                         </router-link>
                     </div>
                     <div class="card-body text-gray-500 hover:text-gray-800 duration-300">
-                        <i class="fa fa-rss fa-3x inline-block mr-2" aria-hidden="true"></i>
-                        <router-link :to="{ name: 'site.module.index', params: { sid: site.id } }" class="text-3xl">{{ site.title }}</router-link>
+                        <router-link :to="{ name: 'site.module.index', params: { sid: site.id } }" class="text-3xl text-gray-600 hover:text-gray-800">
+                            <i class="fa fa-rss text-5xl inline-block mr-2" aria-hidden="true"></i>
+                            {{ site.title }}
+                        </router-link>
                     </div>
                     <div class="card-footer text-sm text-gray-500 bg-white flex flex-col md:flex-row justify-between">
                         <div class="text-sm ">
@@ -35,9 +37,13 @@
                             <span v-if="site.module"> 默认模块: {{ site.module.title }} </span>
                         </div>
                         <div class="site-menu w-full md:w-auto grid md:block md:grid-cols-none grid-cols-2 items-center mt-3 md:mt-0">
-                            <a href="/" target="_blank" class="mr-2 hover:text-gray-900">
+                            <a :href="site.domain" target="_blank" class="mr-2 hover:text-gray-900">
                                 <i class="fas fa-home"></i>
                                 访问首页
+                            </a>
+                            <a :href="`${site.domain}/member`" target="_blank" class="mr-2 hover:text-gray-900">
+                                <i class="fas fa-user-circle"></i>
+                                会员中心
                             </a>
                             <router-link
                                 v-for="(menu, index) in menus"

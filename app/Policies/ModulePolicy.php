@@ -39,4 +39,9 @@ class ModulePolicy
     {
         return UserService::isSuperAdmin($user);
     }
+
+    public function config(User $user, Module $module)
+    {
+        return access();
+    }
 }

@@ -12,6 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 class SystemConfig extends Model
 {
     use HasFactory;
-    protected $fillable = ['config'];
+    protected $fillable = ['config', 'copyright'];
     protected $casts = ['config' => 'array'];
 }

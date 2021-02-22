@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Site;
 use Auth;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Permission\Models\Role;
 
 class User extends Authenticatable
@@ -89,9 +90,13 @@ class User extends Authenticatable
         return $this->belongsTo(Group::class);
     }
 
+    /**
+     * 角色关联
+     * @return BelongsToMany
+     */
     public function roles()
     {
-        return $this->morphToMany(Role::class, 'model', 'model_has_roles');
+        return $this->morphToMany(Role::class, 'model', 'model_has_roles')->where('site_id', site()['id']);
     }
 
     /**

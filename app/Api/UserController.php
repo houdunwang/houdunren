@@ -16,6 +16,7 @@ use Hash;
 use Auth;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use App\Models\Site;
 
 /**
  * 用户
@@ -34,7 +35,7 @@ class UserController extends Controller
      */
     public function info()
     {
-        return new UserResource(Auth::user());
+        return  new UserResource(Auth::user());
     }
 
     /**
@@ -44,7 +45,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(10);
-        return UserResource::collection($users);
+        return  UserResource::collection($users);
     }
 
     /**
@@ -54,8 +55,11 @@ class UserController extends Controller
      */
     public function search()
     {
-        $users = User::when(request('keyword'), function ($query) {
-            return $query->where('id', request('keyword'));
+        $keyword = request('keyword');
+        $users = User::when($keyword, function ($query) use ($keyword) {
+            return $query->where('id', $keyword)
+                ->orWhere('email', 'like', "%{$keyword}%")
+                ->orWhere('mobile', 'like', "%{$keyword}%");
         })->with('group')->paginate(10);
         return UserResource::collection($users);
     }
@@ -65,7 +69,7 @@ class UserController extends Controller
      * @param User $user
      * @return void
      */
-    public function show(User $user)
+    public function show(Site $site, User $user)
     {
         $this->authorize('view', $user);
         return new UserResource($user);
@@ -78,7 +82,7 @@ class UserController extends Controller
      * @param User $user
      * @return void
      */
-    public function update(UserRequest $request, User $user)
+    public function update(UserRequest $request, Site $site, User $user)
     {
         $this->authorize('update', $user);
         $user->fill($request->input())->save();
@@ -114,7 +118,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'account' => ['required', 'regex:/^\d{11}$/', Rule::unique('users', 'mobile')],
-            'code' => ['required', new CodeRule(request('account'))]
+            'code' => ['sometimes', 'required', new CodeRule(request('account'))]
         ], [
             'account.required' => '手机号不能为空', 'account.regex' => '手机号格式错误',
             'account.unique' => '手机号已经绑定', 'code.required' => '验证码不能为空'
@@ -126,31 +130,7 @@ class UserController extends Controller
         return ['message' => '手机号绑定成功'];
     }
 
-    /**
-     * 绑定手机号
-     * 发送数据库不存在的手机号
-     * @param Request $request
-     * @return void
-     */
-    public function mobileCode(Request $request)
-    {
-        $request->validate(
-            [
-                'account' => ['required', 'regex:/^\d{11}$/', Rule::unique('users', 'mobile')],
-                'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
-            ],
-            [
-                'account.required' => '帐号不能为空',
-                'account.regex' => '手机号格式错误',
-                'account.unique' => '手机号已经绑定',
-                'captcha.content.required' => '验证码不能为空',
-                'captcha.content.captcha_api' => '验证码输入错误'
-            ]
-        );
 
-        CodeService::mobile(request('account'));
-        return ['message' => '验证码发送成功'];
-    }
 
     /**
      * 绑定邮箱
@@ -162,7 +142,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'account' => ['required', 'email', Rule::unique('users', 'email')],
-            'code' => ['required', new CodeRule(request('account'))]
+            'code' => ['sometimes', 'required', new CodeRule(request('account'))]
         ], [
             'account.required' => '邮箱不能为空', 'account.email' => '邮箱格式错误',
             'account.unique' => '邮箱已经存在', 'code.required' => '验证码不能为空'
@@ -172,29 +152,5 @@ class UserController extends Controller
         $user->email = $request->account;
         $user->save();
         return ['message' => '邮箱绑定成功'];
-    }
-
-    /**
-     * 为存在的邮箱发送验证码
-     * @param Request $request
-     * @return void
-     */
-    public function emailCode(Request $request)
-    {
-        $request->validate(
-            [
-                'account' => ['required', 'email', Rule::unique('users', 'mobile')],
-                'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
-            ],
-            [
-                'account.required' => '帐号不能为空',
-                'account.unique' => '邮箱已经被使用',
-                'captcha.content.required' => '验证码不能为空',
-                'captcha.content.captcha_api' => '验证码输入错误'
-            ]
-        );
-
-        CodeService::email(request('account'));
-        return ['message' => '验证码发送成功'];
     }
 }

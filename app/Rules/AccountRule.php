@@ -12,7 +12,7 @@ class AccountRule implements Rule
 {
     public function passes($attribute, $value)
     {
-        return preg_match('/^\w+@\w+|\d{11}$/i', $value);
+        return preg_match('/^(.+@.+|\d{11})$/i', $value);
     }
 
     public function message()

@@ -30,13 +30,13 @@ export default {
         }
     },
     async created() {
-        this.admin = await this.axios.get(`member/user/${this.id}`)
+        this.admin = await this.axios.get(`user/${this.id}`)
         this.roles = await this.axios.get(`site/${this.sid}/role`)
         this.loading = false
     },
     methods: {
         async onSubmit() {
-            await this.axios.put(`site/${this.sid}/admin/role/${this.id}`, this.form)
+            await this.axios.put(`site/${this.sid}/admin/${this.id}/role`, this.form)
             this.$router.push({ name: 'site.admin.index', params: { sid: this.sid } })
         }
     }

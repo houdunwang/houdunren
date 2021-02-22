@@ -18,7 +18,7 @@
 <script>
 export default {
     props: {
-        action: { type: String, default: 'upload/local' },
+        action: { type: String, required: true },
         value: { type: String }
     },
     data() {

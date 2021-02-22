@@ -37,7 +37,23 @@ class SiteService
     {
         static $cache = null;
         if (is_null($site)) return $cache;
+
+        $this->initConfig($site);
         return $cache = $site;
+    }
+
+    /**
+     * 加载站点配置
+     * @param Site $site
+     * @return void
+     */
+    public function initConfig(Site $site)
+    {
+        config(['site' => $site['config']]);
+        config(['app.name' => $site['title']]);
+        //邮件配置
+        config(['mail.mailers.smtp' =>  config('site.email')]);
+        config(['mail.from' => ['address' => config('site.email.username'), 'name' => $site['title']]]);
     }
 
     /**

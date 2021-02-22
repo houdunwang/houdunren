@@ -49,8 +49,8 @@ class RoleController extends Controller
      */
     public function store(Request $request, Site $site)
     {
-        Role::create($request->only(['title', 'name']) + ['site_id' => $site->id]);
-        return $this->message('角色添加成功');
+        $role = Role::create($request->only(['title', 'name']) + ['site_id' => $site->id]);
+        return $this->message('角色添加成功', $role);
     }
 
     /**

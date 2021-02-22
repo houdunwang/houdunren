@@ -78,7 +78,7 @@ export default {
     },
     methods: {
         onSubmit() {
-            this.axios.put(`admin/config`, this.form)
+            this.axios.put(`config`, this.form)
         }
     }
 }

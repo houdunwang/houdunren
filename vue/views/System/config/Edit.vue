@@ -13,7 +13,7 @@
                     <el-input v-model="form.copyright"></el-input>
                 </el-form-item>
                 <el-form-item label="后台标志">
-                    <hd-image v-model="form.logo" action="system/upload" />
+                    <hd-image v-model="form.logo" action="upload/local" />
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">保存提交</el-button>
@@ -38,7 +38,7 @@ export default {
     methods: {
         async onSubmit() {
             await this.axios.put('system/config', this.form)
-            this.$store.dispatch('getSystemConfig', `system/config`)
+            this.$store.dispatch('systemConfig')
         }
     }
 }

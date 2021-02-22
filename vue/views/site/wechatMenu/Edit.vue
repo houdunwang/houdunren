@@ -134,7 +134,7 @@ export default {
         },
         //推送菜单
         async push() {
-            await this.axios.post(`site/${this.site.id}/wechat/${this.wechat.id}/menu`)
+            await axios.get(`site/${this.site.id}/wechat/${this.wechat.id}/menu/push`)
         }
     }
 }

@@ -38,7 +38,7 @@ export default {
         }
     },
     async created() {
-        this.form = await this.axios.get(`site/${this.sid}/wechat/${this.id}`)
+        this.form = await axios.get(`site/${this.sid}/wechat/${this.id}`)
         this.loading = false
     },
     methods: {

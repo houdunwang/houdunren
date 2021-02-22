@@ -177,7 +177,6 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         // 项目自定义
         App\Services\Code\CodeServiceProvider::class,
-        App\Services\Config\ConfigServiceProvider::class,
         App\Services\Menu\MenuServiceProvider::class,
         App\Services\Module\ModuleServiceProvider::class,
         App\Services\Pay\PayServiceProvider::class,
@@ -243,7 +242,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         // 项目自定义
         'CodeService' => App\Services\Code\CodeFacade::class,
-        'ConfigService' => App\Services\Config\ConfigFacade::class,
         'MenuService' => App\Services\Menu\MenuFacade::class,
         'ModuleService' => App\Services\Module\ModuleFacade::class,
         'PayService' => App\Services\Pay\PayFacade::class,

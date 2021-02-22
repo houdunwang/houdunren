@@ -2,10 +2,10 @@
 
 namespace Modules\Edu\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
-use ConfigService;
+use ModuleService;
 use App\Models\Site;
 
 /**
@@ -16,10 +16,12 @@ class ConfigController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['auth:sanctum']);
     }
 
     public function show()
     {
+        $this->authorize('config', module());
         return config('module');
     }
 
@@ -31,7 +33,8 @@ class ConfigController extends Controller
      */
     public function update(Request $request)
     {
-        ConfigService::saveModuleConfig($request->input());
-        return ['message' => '配置文件修改成功'];
+        $this->authorize('config', module());
+        ModuleService::saveConfig($request->input());
+        return $this->message('配置文件修改成功');
     }
 }

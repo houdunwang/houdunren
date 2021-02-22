@@ -16,19 +16,22 @@ export default new Vuex.Store({
         }
     },
     mutations: {
-        setErrors(state, errors = {}) {
+        errors(state, errors = {}) {
             state.errors = errors
         },
-        setUser(state, user) {
+        user(state, user) {
             state.user = user
         },
-        setSystemConfig(state, config) {
+        systemConfig(state, config) {
             state.systemConfig = config
         }
     },
     actions: {
-        async getUser({ commit }) {
-            commit('setUser', await axios.get(`user/info`))
+        async user({ commit }) {
+            commit('user', await axios.get(`user/info`))
+        },
+        async systemConfig({ commit }) {
+            commit('systemConfig', await axios.get(`system/config`))
         }
     }
 })

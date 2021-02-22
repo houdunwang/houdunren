@@ -31,16 +31,20 @@ if (!function_exists('module')) {
     }
 }
 
-if (function_exists('access')) {
+if (!function_exists('access')) {
     /**
      * 权限验证
      *
      * @param string $name
      * @return boolean
      */
-    function access(string $name): bool
+    function access(string $name = null): bool
     {
-        return \PermissionService::access($name, Auth::user(), site(), module());
+        //超级管理员与站长检测
+        if (UserService::isMaster(site(), Auth::user())) {
+            return true;
+        }
+        return $name ? \PermissionService::access($name, Auth::user(), site(), module()) : false;
     }
 }
 

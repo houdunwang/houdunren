@@ -16,7 +16,7 @@ use Modules\Edu\Api\MemberController;
 use Modules\Edu\Api\MessageController;
 use Modules\Edu\Api\UserVideoController;
 
-Route::group(['prefix' => 'Edu', 'middleware' => ['auth:sanctum', 'admin']], function () {
+Route::group(['prefix' => 'Edu/site/{site}', 'middleware' => ['module']], function () {
     //配置
     Route::get('config', [ConfigController::class, 'show']);
     Route::put('config', [ConfigController::class, 'update']);

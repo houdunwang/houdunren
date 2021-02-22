@@ -46,7 +46,7 @@ class WeChatController extends Controller
             $message->config($request->all())->token();
             $wechat->site_id = $site->id;
             $wechat->fill($request->all())->save();
-            return $this->message('公众号添加成功');
+            return $this->message('公众号添加成功', $wechat);
         } catch (Exception $e) {
             return $this->error('appid或appsecret配置错误', 403);
         }

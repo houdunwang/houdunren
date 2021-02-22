@@ -2,17 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Module;
+use Illuminate\Http\Request;
 use App\Models\Site;
-use ModuleService;
-use ConfigService;
 use SiteService;
 use Closure;
-use Illuminate\Contracts\Container\BindingResolutionException;
-use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
-use Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use ModuleService;
+use App\Models\Module;
 
 /**
  * 模块中间件
@@ -20,33 +15,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class ModuleMiddleware
 {
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        $this->init();
+        $this->site();
+        $this->module();
         return $next($request);
-    }
-
-    /**
-     * 站点初始化
-     * @return void
-     * @throws BindingResolutionException
-     * @throws SuspiciousOperationException
-     * @throws ConflictingHeadersException
-     * @throws HttpException
-     * @throws NotFoundHttpException
-     */
-    protected function init()
-    {
-        //站点
-        $site = $this->site();
-        defined("SID") or define("SID", $site['id']);
-        SiteService::cache($site);
-        ConfigService::site($site);
-        //模块
-        $module = $this->module($site);
-        defined("MID") or define("MID", $module['id']);
-        ModuleService::cache($module);
-        ConfigService::module($site, $module);
     }
 
     /**
@@ -64,6 +37,8 @@ class ModuleMiddleware
         $site = is_numeric($site) ? Site::findOrFail($site) : $site;
         $site = $site instanceof Site ? $site : SiteService::getByDomain();
         if ($site instanceof Site) {
+            SiteService::cache($site);
+            defined("SID") or define("SID", $site['id']);
             return $site;
         }
         abort(404, '站点不存在');
@@ -71,20 +46,22 @@ class ModuleMiddleware
 
     /**
      * 模块
-     * @param Site $site
      * @return Module
      * @throws BindingResolutionException
      * @throws HttpException
      * @throws NotFoundHttpException
      */
-    protected function module(Site $site): Module
+    protected function module(): Module
     {
+        $site = site();
         $module = ModuleService::getByDomain() ?? $site->module;
         if (!($module instanceof Module)) {
             abort(404, '模块不存在');
         }
         //站点模块检测
         if (ModuleService::siteHasModule($site, $module)) {
+            ModuleService::cache($module);
+            defined("MID") or define("MID", $module['id']);
             return $module;
         }
         abort(404, '模块不存在');

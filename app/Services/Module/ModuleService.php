@@ -8,6 +8,7 @@ use Nwidart\Modules\Facades\Module as ModulePlugin;
 use Illuminate\Support\Collection;
 use PermissionService;
 use App\Models\User;
+use App\Models\ModuleConfig;
 
 /**
  * 模块管理服务
@@ -24,7 +25,36 @@ class ModuleService
     {
         static $cache = null;
         if (is_null($module)) return $cache;
+
+        $this->initConfig(site(), $module);
         return $cache = $module;
+    }
+
+    /**
+     * 加载模块配置
+     * @param Site $site
+     * @param Module $module
+     * @return void
+     */
+    public function initConfig(Site $site, Module $module)
+    {
+        $model = ModuleConfig::where('site_id', $site['id'])->where('module_id', $module['id'])->first();
+        config(['module' => $model['config'] ?? null]);
+    }
+
+    /**
+     * 保存模块配置
+     * @param array $config
+     * @return void
+     */
+    public function saveConfig(array $config)
+    {
+        $model = ModuleConfig::firstOrNew([
+            'site_id' => site()['id'],
+            'module_id' => module()['id'],
+        ]);
+        $model['config'] = $config + ($model['config'] ?? []);
+        return $model->save();
     }
 
     /**
@@ -35,8 +65,22 @@ class ModuleService
     {
         $path = parse_url(request()->url())['path'] ?? '';
         $path = preg_replace('/\/api/', '', $path);
-        preg_match('/^\/(.*?)\/\d+/i', $path, $matches);
+        preg_match('/^\/(.*?)\/.+?/i', $path, $matches);
         return Module::where('name', $matches[1] ?? '')->first();
+    }
+
+    /**
+     * 模块配置
+     * @param string $name 模块标识
+     * @param string $filename 文件名
+     * @return array
+     */
+    public function config(string $name, string $filename): array
+    {
+        $module = ModulePlugin::findOrFail($name);
+        $file = $module->getPath() . '/Config/' . $filename . '.php';
+
+        return is_file($file) ? include $file : [];
     }
 
     /**
@@ -78,8 +122,7 @@ class ModuleService
      */
     public function siteModules(Site $site): Collection
     {
-        $user = User::find($site->user_id);
-        return $user->group->modules->map(function ($module) use ($site) {
+        return $site->master->group->modules->map(function ($module) use ($site) {
             $module['permissions'] =
                 PermissionService::formatSiteModulePermissions($site, $module);
             return $module;
@@ -97,19 +140,5 @@ class ModuleService
         return $this->siteModules($site)->filter(function ($module) use ($site, $user) {
             return PermissionService::checkUserModuleAccess($site, $module, $user);
         });
-    }
-
-    /**
-     * 模块配置
-     * @param string $name 模块标识
-     * @param string $filename 文件名
-     * @return array
-     */
-    public function config(string $name, string $filename): array
-    {
-        $module = ModulePlugin::findOrFail($name);
-        $file = $module->getPath() . '/Config/' . $filename . '.php';
-
-        return is_file($file) ? include $file : [];
     }
 }

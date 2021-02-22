@@ -23,7 +23,7 @@
                     <hd-error name="name" />
                 </el-form-item>
                 <el-form-item label="二维码">
-                    <hd-image v-model="form.qr" />
+                    <hd-image v-model="form.qr" :action="`upload/site/${$route.params.sid}`" />
                     <hd-error name="qr" />
                 </el-form-item>
                 <el-form-item label="公众号类型">

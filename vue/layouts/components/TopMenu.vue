@@ -16,7 +16,6 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                             <a href="/system/my/edit" class="dropdown-item">我的帐户</a>
-                            <a href="/member" target="_blank" class="dropdown-item">会员中心</a>
                             <a href="/" target="_blank" class="dropdown-item">网站首页</a>
                             <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item" @click="logout">退出</a>

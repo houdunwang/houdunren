@@ -22,6 +22,11 @@ use Illuminate\Contracts\Container\BindingResolutionException;
  */
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['site']);
+    }
+
     /**
      * 帐号登录
      * @param Request $request
@@ -74,19 +79,19 @@ class AuthController extends Controller
     public function register(Request $request, User $user)
     {
         $request->validate([
-            'account' => ['required', 'regex:/^\d{11}$/', Rule::unique('users', 'mobile')],
+            'account' => ['required', new AccountRule(request('account')), Rule::unique('users', 'mobile')],
             'password' => ['required', 'confirmed', 'between:5,20'],
-            'code' => ['required', new CodeRule(request('account'))]
+            'code' => ['sometimes', 'required', new CodeRule(request('account'))]
         ], [
-            'account.required' => '帐号不能为空', 'account.regex' => '手机号格式错误',
-            'account.unique' => '手机号已经注册',
+            'account.required' => '帐号不能为空',
+            'account.unique' => '帐号已经被注册',
             'password.required' => '密码不能为空', 'code.required' => '验证码不能为空'
         ]);
 
         $user->password = Hash::make($request->password);
         $user->mobile = $request->account;
         $user->save();
-        return ['message' => '注册成功'];
+        return $this->message('注册成功');
     }
 
     /**
@@ -98,13 +103,12 @@ class AuthController extends Controller
     {
         $request->validate(
             [
-                'account' => ['required', 'regex:/^\d{11}$/', Rule::unique('users', 'mobile')],
+                'account' => ['required', new AccountRule(request('account')), Rule::unique('users', 'mobile')],
                 'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
             ],
             [
-                'account.required' => '手机号不能为空',
-                'account.regex' => '手机号格式错误',
-                'account.unique' => '手机号已经绑定',
+                'account.required' => '帐号不能为空',
+                'account.unique' => '帐号已经绑定',
                 'captcha.content.required' => '验证码不能为空',
                 'captcha.content.captcha_api' => '验证码输入错误'
             ]
@@ -140,8 +144,13 @@ class AuthController extends Controller
         $request->validate([
             'account' => ['required', new AccountRule(request('account')), Rule::exists('users', UserService::account())],
             'password' => ['required', 'confirmed', 'between:5,20'],
-            'code' => ['required', new CodeRule(request('account'))]
-        ], ['account.required' => '帐号不能为空', 'account.unique' => '帐号不存在', 'password.required' => '密码不能为空', 'code.required' => '验证码不能为空']);
+            'code' => ['sometimes', 'required', new CodeRule(request('account'))]
+        ], [
+            'account.required' => '帐号不能为空',
+            'account.exists' => '帐号不存在',
+            'password.required' => '密码不能为空',
+            'code.required' => '验证码不能为空'
+        ]);
 
         $user = User::where(UserService::account(), $request->account)->first();
         $user->password = Hash::make($request->password);
@@ -162,7 +171,8 @@ class AuthController extends Controller
                 'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
             ],
             [
-                'account.required' => '帐号不能为空', 'account.exists' => '帐号不存在',
+                'account.required' => '帐号不能为空',
+                'account.exists' => '帐号不存在',
                 'captcha.content.required' => '验证码不能为空',
                 'captcha.content.captcha_api' => '验证码输入错误'
             ]

@@ -21,7 +21,6 @@ class ModuleController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Module::class, 'module');
     }
 
     /**
@@ -36,36 +35,40 @@ class ModuleController extends Controller
     }
 
     /**
-     * 站点用户可用的模块
-     * @param Site $site
-     * @return AnonymousResourceCollection
+     * 用户可使用模块
+     * @return void
      */
-    public function siteUserModule(Site $site)
+    public function user(Site $site)
+    {
+        return ModuleResource::collection(Auth::user()->group->modules);
+    }
+
+    /**
+     * 用户站点模块
+     * @return void
+     */
+    public function userSiteModule(Site $site)
     {
         $modules = ModuleService::userSiteModules($site, Auth::user());
         return ModuleResource::collection($modules->load('packages'));
     }
 
     /**
-     * 当前用户可使用模块
-     * @return void
-     */
-    public function user()
-    {
-        $modules = Auth::user()->group->modules;
-        return ModuleResource::collection($modules->load('packages'));
-    }
-
-    /**
-     * 模块列表
+     * 所有模块列表
      * @return void
      */
     public function index()
     {
-        if (request('type') == 'installed') {
-            return ModuleResource::collection(Module::all());
-        }
         return ModuleService::all();
+    }
+
+    /**
+     * 已安装模块列表
+     * @return AnonymousResourceCollection
+     */
+    public function installed()
+    {
+        return ModuleResource::collection(Module::all());
     }
 
     /**
@@ -83,7 +86,7 @@ class ModuleController extends Controller
      * @param string $name
      * @return void
      */
-    public function store(Request $request)
+    public function install(Request $request)
     {
         $name = $request->name;
         $data = ModuleService::config($name, 'config');
@@ -96,7 +99,7 @@ class ModuleController extends Controller
      * @param Module $module
      * @return void
      */
-    public function destroy(Module $module)
+    public function uninstall(Module $module)
     {
         DB::beginTransaction();
         $this->authorize('delete', $module);

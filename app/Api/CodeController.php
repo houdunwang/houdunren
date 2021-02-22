@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use CodeService;
 use Auth;
 use Exception;
+use Illuminate\Validation\Rule;
 
 /**
  * 发送验证码
@@ -16,7 +17,6 @@ class CodeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum',  'throttle:codeSend']);
     }
 
     /**
@@ -41,6 +41,54 @@ class CodeController extends Controller
         } catch (Exception $e) {
             return $this->error('短信发送失败，请检查手机号或联系站长', 500);
         }
+    }
+
+    /**
+     * 发送数据库不存在的手机号验证码
+     * @param Request $request
+     * @return void
+     */
+    public function noExistMobile(Request $request)
+    {
+        $request->validate(
+            [
+                'account' => ['required', 'regex:/^\d{11}$/', Rule::unique('users', 'mobile')],
+                'captcha.content' => ['sometimes', 'required', 'captcha_api:' . request('captcha.key') . ',default']
+            ],
+            [
+                'account.required' => '帐号不能为空',
+                'account.regex' => '手机号格式错误',
+                'account.unique' => '手机号已经绑定',
+                'captcha.content.required' => '验证码不能为空',
+                'captcha.content.captcha_api' => '验证码输入错误'
+            ]
+        );
+        CodeService::mobile(request('account'));
+        return $this->message('验证码发送成功');
+    }
+
+    /**
+     * 为不存在的邮箱发送验证码
+     * @param Request $request
+     * @return void
+     */
+    public function emailNoExist(Request $request)
+    {
+        $request->validate(
+            [
+                'account' => ['required', 'email', Rule::unique('users', 'email')],
+                'captcha.content' => ['sometimes', 'required', 'captcha_api:' . request('captcha.key') . ',default']
+            ],
+            [
+                'account.required' => '帐号不能为空',
+                'account.unique' => '邮箱已经被使用',
+                'captcha.content.required' => '验证码不能为空',
+                'captcha.content.captcha_api' => '验证码输入错误'
+            ]
+        );
+
+        CodeService::email(request('account'));
+        return ['message' => '验证码发送成功'];
     }
 
     /**

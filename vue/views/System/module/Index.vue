@@ -32,16 +32,16 @@ export default {
         async install(module) {
             this.submit = true
             this.$confirm(`确定安装【${module.title}】吗？`)
-                .then(_ => this.axios.post(`module?name=${module.name}`))
-                .then(_ => this.$router.go(0))
-                .catch(_ => (this.submit = false))
+                .then(_ => this.axios.get(`module/install/${module.name}`))
+                .then(async _ => (this.modules = await this.axios.get(`module`)))
+                .finally(_ => (this.submit = false))
         },
         async uninstall(module) {
             this.submit = true
             this.$confirm(`确定卸载【${module.title}】吗？`)
-                .then(_ => this.axios.delete(`module/${module.id}`))
-                .then(_ => this.$router.go(0))
-                .catch(_ => (this.submit = false))
+                .then(_ => this.axios.delete(`module/uninstall/${module.name}`))
+                .then(async _ => (this.modules = await this.axios.get(`module`)))
+                .finally(_ => (this.submit = false))
         }
     }
 }

@@ -14644,54 +14644,6 @@
      
 }
 
-    namespace App\Services\Config { 
-            /**
-     * 
-     *
-     */ 
-        class ConfigFacade {
-                    /**
-         * 加载站点配置
-         *
-         * @param \App\Services\Config\Site $site
-         * @return void 
-         * @static 
-         */ 
-        public static function site($site)
-        {
-                        /** @var \App\Services\Config\ConfigService $instance */
-                        $instance->site($site);
-        }
-                    /**
-         * 加载模块配置
-         *
-         * @param \App\Services\Config\Site $site
-         * @param \Module $module
-         * @return void 
-         * @static 
-         */ 
-        public static function module($site, $module)
-        {
-                        /** @var \App\Services\Config\ConfigService $instance */
-                        $instance->module($site, $module);
-        }
-                    /**
-         * 保存模块配置
-         *
-         * @param array $config
-         * @return void 
-         * @static 
-         */ 
-        public static function saveModuleConfig($config)
-        {
-                        /** @var \App\Services\Config\ConfigService $instance */
-                        $instance->saveModuleConfig($config);
-        }
-         
-    }
-     
-}
-
     namespace App\Services\Menu { 
             /**
      * 
@@ -14737,6 +14689,31 @@
                         return $instance->cache($module);
         }
                     /**
+         * 加载模块配置
+         *
+         * @param \App\Services\Module\Site $site
+         * @param \Module $module
+         * @return void 
+         * @static 
+         */ 
+        public static function initConfig($site, $module)
+        {
+                        /** @var \App\Services\Module\ModuleService $instance */
+                        $instance->initConfig($site, $module);
+        }
+                    /**
+         * 保存模块配置
+         *
+         * @param array $config
+         * @return void 
+         * @static 
+         */ 
+        public static function saveConfig($config)
+        {
+                        /** @var \App\Services\Module\ModuleService $instance */
+                        $instance->saveConfig($config);
+        }
+                    /**
          * 根据域名获取模块
          *
          * @return \Module 
@@ -14746,6 +14723,19 @@
         {
                         /** @var \App\Services\Module\ModuleService $instance */
                         return $instance->getByDomain();
+        }
+                    /**
+         * 模块配置
+         *
+         * @param string $name 模块标识
+         * @param string $filename 文件名
+         * @return array 
+         * @static 
+         */ 
+        public static function config($name, $filename)
+        {
+                        /** @var \App\Services\Module\ModuleService $instance */
+                        return $instance->config($name, $filename);
         }
                     /**
          * 站点模块检测
@@ -14796,19 +14786,6 @@
         {
                         /** @var \App\Services\Module\ModuleService $instance */
                         return $instance->userSiteModules($site, $user);
-        }
-                    /**
-         * 模块配置
-         *
-         * @param string $name 模块标识
-         * @param string $filename 文件名
-         * @return array 
-         * @static 
-         */ 
-        public static function config($name, $filename)
-        {
-                        /** @var \App\Services\Module\ModuleService $instance */
-                        return $instance->config($name, $filename);
         }
          
     }
@@ -15005,6 +14982,18 @@
         {
                         /** @var \App\Services\Site\SiteService $instance */
                         return $instance->cache($site);
+        }
+                    /**
+         * 加载站点配置
+         *
+         * @param \App\Services\Site\Site $site
+         * @return void 
+         * @static 
+         */ 
+        public static function initConfig($site)
+        {
+                        /** @var \App\Services\Site\SiteService $instance */
+                        $instance->initConfig($site);
         }
                     /**
          * 站点管理员
@@ -19631,7 +19620,6 @@ namespace  {
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
             class CodeService extends \App\Services\Code\CodeFacade {}
-            class ConfigService extends \App\Services\Config\ConfigFacade {}
             class MenuService extends \App\Services\Menu\MenuFacade {}
             class ModuleService extends \App\Services\Module\ModuleFacade {}
             class PayService extends \App\Services\Pay\PayFacade {}

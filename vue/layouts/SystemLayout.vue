@@ -15,10 +15,7 @@ import QuickMenu from './components/QuickMenu'
 import XFooter from './components/Footer'
 export default {
     route: { meta: { auth: true } },
-    components: { TopMenu, QuickMenu, XFooter },
-    async created() {
-        this.$store.commit('setSystemConfig', await axios.get(`system/config`))
-    }
+    components: { TopMenu, QuickMenu, XFooter }
 }
 </script>
 

@@ -17,7 +17,7 @@ class SystemMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::id() != 1) {
+        if (!Auth::user()->isSuperAdmin) {
             abort(403, '你没有访问权限');
         }
         return $next($request);

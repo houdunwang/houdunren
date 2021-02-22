@@ -49,7 +49,7 @@ class GroupController extends Controller
     {
         $group = Group::create($request->input());
         $group->packages()->sync($request->packages);
-        return $this->message('会员组添加成功');
+        return $this->message('会员组添加成功', $group);
     }
 
     /**

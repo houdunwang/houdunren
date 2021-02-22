@@ -14,6 +14,7 @@ class SystemConfigController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['auth:sanctum']);
     }
 
     /**
@@ -36,9 +37,10 @@ class SystemConfigController extends Controller
      */
     public function update(Request $request)
     {
-        $config = SystemConfig::find(1);
-        $config['config'] = $request->input();
-        $config->save();
-        return $this->message('系统配置修改成功');
+        $systemConfig = SystemConfig::find(1);
+        $this->authorize('update', $systemConfig);
+        $systemConfig['config'] = $request->input();
+        $systemConfig->save();
+        return $this->message('系统配置修改成功', $systemConfig);
     }
 }

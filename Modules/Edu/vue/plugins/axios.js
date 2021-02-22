@@ -1,23 +1,18 @@
-import httpStatus from '../utils/httpStatus'
 import el from 'element-ui'
 import axios from 'axios'
 import Vue from 'vue'
 import store from '../store'
-// axios.defaults.withCredentials = true
-// axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-// const sid = window.localStorage.getItem('sid')
-// const mid = window.localStorage.getItem('mid')
-const _axios = axios.create({ baseURL: `/api/${window.module.name}`, timeout: 5000 })
+const _axios = axios.create({ baseURL: `/api/${window.module.name}/site/${window.site.id}`, timeout: 5000 })
 window.axios = Vue.axios = Vue.prototype.axios = _axios
 
 //请求拦截
 _axios.interceptors.request.use(
     function(config) {
         if (config.url[0] == '/') config.baseURL = ''
-        // const token = store.getters.token
-        // if (token) {
-        //     config.headers.Authorization = `Bearer ${token}`
-        // }
+        const token = store.getters.token
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`
+        }
         return config
     },
     function(error) {
@@ -43,14 +38,14 @@ _axios.interceptors.response.use(
         let { status, data } = error.response
         switch (status) {
             case 422:
-                store.commit('setErrors', data.errors)
+                store.commit('errors', data.errors)
                 break
             case 401:
-                // window.localStorage.removeItem('token')
+                window.localStorage.removeItem('token')
                 location.href = '/login'
                 break
             default:
-                el.MessageBox.confirm(data.message || httpStatus(status), '温馨提示', {
+                el.MessageBox.confirm(data.message, '温馨提示', {
                     showCancelButton: false,
                     confirmButtonText: '关闭',
                     type: 'warning',

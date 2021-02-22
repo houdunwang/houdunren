@@ -10,12 +10,16 @@ Route::group(['prefix' => 'Edu'], function () {
     Route::get('pay/subscribe/{subscribe}', [PayController::class, 'subscribe'])->middleware(['front']);
 });
 
-//后台
-Route::any('Edu/admin/{path?}', function () {
-    return view("edu::app");
-})->where('path', '.*')->middleware(['admin']);
+// //后台
+// Route::any('Edu/admin/{path?}', function () {
+//     return view("edu::app");
+// })->where('path', '.*')->middleware(['admin']);
 
-//前台
+// //前台
+// Route::any('Edu/{path?}', function () {
+//     return view("edu::app");
+// })->where('path', '.*')->middleware(['front']);
+
 Route::any('Edu/{path?}', function () {
-    return view("edu::app");
-})->where('path', '.*')->middleware(['front']);
+    return view('edu::app');
+})->where('path', '.*')->middleware(['module']);
