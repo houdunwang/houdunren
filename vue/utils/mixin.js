@@ -1,6 +1,5 @@
 import store from '../store'
 import router from '../router'
-import { MessageBox } from 'element-ui'
 const mixin = {
     computed: {
         user() {
@@ -18,7 +17,7 @@ const mixin = {
             return store.getters.errors(name)
         },
         async logout() {
-            await this.axios.get(`front/logout`)
+            await this.axios.get(`logout`)
             window.localStorage.removeItem('token')
             location.href = '/'
         }

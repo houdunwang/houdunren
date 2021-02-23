@@ -22,7 +22,7 @@ export default {
     },
 
     created() {
-        if (this.isLogin) this.$store.dispatch('message', 1)
+        if (this.isLogin) this.$store.dispatch('siteMessage', 1)
     },
     mounted() {}
 }

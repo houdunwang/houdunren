@@ -8,12 +8,10 @@
                         {{ form.description }}
                     </p>
                 </div>
-
                 <div class="card-body md:px-10">
                     <video-list :videos="form.videos" />
                 </div>
             </div>
-
             <div class="md:w-3/12">
                 <community-tip />
             </div>
@@ -31,7 +29,7 @@ export default {
         }
     },
     async created() {
-        this.form = await this.axios.get(`front/lesson/${this.$route.params.id}`)
+        this.form = await this.axios.get(`lesson/${this.$route.params.id}`)
         this.loading = false
     }
 }

@@ -52,7 +52,7 @@ export default {
     methods: {
         async load(page = 1) {
             this.loading = true
-            this.lessons = await this.axios.get(`front/lesson?page=${page}`)
+            this.lessons = await this.axios.get(`lesson?page=${page}`)
             this.loading = false
             document.documentElement.scroll({ top: 0, behavior: 'smooth' })
         }

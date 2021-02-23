@@ -15,6 +15,7 @@ class WeChatDefaultController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['auth:sanctum']);
     }
 
     /**
@@ -26,8 +27,7 @@ class WeChatDefaultController extends Controller
      */
     public function update(Request $request, Site $site, WeChat $wechat)
     {
-        $this->authorize('update', $site);
-
+        $this->authorize('update', $wechat);
         $request->validate(['welcome' => ['required'], 'default_message' => ['required']], [
             'welcome.required' => '关注欢迎消息不能为空',
             'default_message.required' => '默认回复消息不能为空'

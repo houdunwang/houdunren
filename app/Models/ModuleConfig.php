@@ -4,6 +4,7 @@ namespace App\Models;
 
 /**
  * 模块配置
+ * @package App\Models
  */
 class ModuleConfig extends BaseModel
 {

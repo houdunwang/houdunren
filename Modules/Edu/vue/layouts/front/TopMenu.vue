@@ -12,7 +12,7 @@
             </h1>
             <div class="navbar-nav flex-row order-md-last" v-if="user.id">
                 <!-- 通知 -->
-                <message />
+                <site-message />
                 <!-- 通知 end-->
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
@@ -91,7 +91,7 @@
 const menus = [
     { title: '系统学习', name: 'front.system.index' },
     { title: '实战课程', name: 'front.lesson.index' },
-    { title: '最近更新', name: 'front.lesson.latest' },
+    { title: '最近更新', name: 'front.video.index' },
     { title: '话题讨论', name: 'front.topic.index' },
     { title: '签到打卡', name: 'front.sign.index' },
     { title: '订阅会员', name: 'front.subscribe.index' }

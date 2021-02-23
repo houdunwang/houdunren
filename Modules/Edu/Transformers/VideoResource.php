@@ -4,6 +4,10 @@ namespace Modules\Edu\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * 课程视频
+ * @package Modules\Edu\Transformers
+ */
 class VideoResource extends JsonResource
 {
     public function toArray($request)
@@ -17,6 +21,7 @@ class VideoResource extends JsonResource
             'read_count' => $this->read_count,
             'rank' => $this->rank,
             'favorite_count' => $this->favorite_count,
+            'permissions' => $this->permissions,
             'comment_count' => $this->comment_count,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

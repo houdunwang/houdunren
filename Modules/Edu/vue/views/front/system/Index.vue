@@ -54,7 +54,7 @@ export default {
     methods: {
         async load(page = 1) {
             this.loading = true
-            this.lessons = await this.axios.get(`front/system?page=${page}`)
+            this.lessons = await this.axios.get(`system?page=${page}`)
             this.loading = false
         }
     }

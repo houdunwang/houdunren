@@ -50,4 +50,24 @@ class ModulePolicy
     {
         return access();
     }
+
+    /**
+     * 安装模块
+     * @param User $user
+     * @return mixed
+     */
+    public function install(User $user)
+    {
+        return $user->isSuperAdmin;
+    }
+
+    /**
+     * 卸载模块
+     * @param User $user
+     * @return mixed
+     */
+    public function unInstall(User $user)
+    {
+        return $user->isSuperAdmin;
+    }
 }

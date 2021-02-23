@@ -1,0 +1,1313 @@
+{
+	"info": {
+		"_postman_id": "7b1d19ec-89b3-41e3-8d6a-aae491df9f37",
+		"name": "在线教育",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "配置",
+			"item": [
+				{
+					"name": "获取配置",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{edu_host}}/config",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新配置",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"live\": {\n        \"aliyun\": {\n            \"play_key\": null,\n            \"play_url\": null,\n            \"push_key\": null,\n            \"push_url\": null\n        },\n        \"notice\": \"sdfsd\",\n        \"show_chat\": true,\n        \"site_live\": true,\n        \"other_path\": null\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{edu_host}}/config",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "标签",
+			"item": [
+				{
+					"name": "更新标签",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "eyJpdiI6IjRGMUU2U1JDZVlGS3cwZmRUNUpQbEE9PSIsInZhbHVlIjoiL05uVGNwVnFTUHU0Y2hFR3FhWnNqdXMzZHZUdzZLcFlTMFI4K3NMUWtOZHZzQm1IdE40OHRJaUlHRmcwbS9FblpZWThjbzFlRVZGK09CeXRGQWt3OGVPYndjZ2EwaS93d3RqVTBKaDlOaWpTMlprU1RBSCtpMFRtMFM4TDF3QlQiLCJtYWMiOiI4NWQxNWRkOTI4Y2JlNWU3YWU2ZjY3ODQ0NzNiYmY5NWU0MzE5NTc5YmVlNGRmZWNiNWI1YWJlY2EyOTQ5NWRhIn0%3D",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tags\": [{ \"id\": 1, \"title\": \"Yahoo\" }, { \"title\": \"Linux\" }]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{edu_host}}/tag",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"tag"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取标签",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{edu_host}}/tag",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"tag"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "课程",
+			"item": [
+				{
+					"name": "课程列表",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"lesson_id\", jsonData.data[0].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{edu_host}}/lesson",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"lesson"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "发表课程",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"lesson_id\", jsonData.data[0].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								},
+								{
+									"key": "thumb",
+									"value": "{{$randomImageUrl}}",
+									"type": "text"
+								},
+								{
+									"key": "free_num",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{edu_host}}/lesson",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"lesson"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取课程",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{edu_host}}/lesson/{{lesson_id}}",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"lesson",
+								"{{lesson_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "搜索课程",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{edu_host}}/lesson/search?keyword=a",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"lesson",
+								"search"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "a"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "系统课程",
+			"item": [
+				{
+					"name": "课程列表",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"system_id\", jsonData.data[0].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{edu_host}}/system",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"system"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取课程",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{edu_host}}/system/{{system_id}}",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"system",
+								"{{system_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "贴子",
+			"item": [
+				{
+					"name": "发表贴子",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "{{$randomWord}}",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{edu_host}}/front/topic",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"front",
+								"topic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "贴子列表",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"edu_topic_id\", jsonData['data'][0]['id']);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "{{$randomWord}}",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{edu_host}}/front/topic",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"front",
+								"topic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "推荐贴子",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"edu_topic_id\", jsonData['data'][0]['id']);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "{{$randomWord}}",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{edu_host}}/front/topic/recommend",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"front",
+								"topic",
+								"recommend"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "编辑贴子",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "{{$randomWord}}",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{edu_host}}/topic/{{edu_topic_id}}",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"topic",
+								"{{edu_topic_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查看贴子",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "{{$randomWord}}",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{edu_host}}/topic/{{edu_topic_id}}",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"topic",
+								"{{edu_topic_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除贴子",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{edu_host}}/topic/{{edu_topic_id}}",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"topic",
+								"{{edu_topic_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "视频",
+			"item": [
+				{
+					"name": "视频列表",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"edu_video_id\", jsonData['data'][0]['id']);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{edu_host}}/video",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"video"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取视频",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{edu_host}}/video/{{edu_video_id}}",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"video",
+								"{{edu_video_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "评论列表",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{edu_host}}/video/13409/comments",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"video",
+								"13409",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "发表评论",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "content",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{edu_host}}/video/13403/comment",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"video",
+								"13403",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "用户观看视频列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{edu_host}}/user/video",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"user",
+								"video"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "签到",
+			"item": [
+				{
+					"name": "签到列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{edu_host}}/sign",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"sign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加签到",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "content",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								},
+								{
+									"key": "mood",
+									"value": "kx",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{edu_host}}/sign",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"sign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除签到",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{edu_host}}/sign/19271",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"sign",
+								"19271"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "动态",
+			"item": [
+				{
+					"name": "动态列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{edu_host}}/activity",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"activity"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "订单",
+			"item": [
+				{
+					"name": "订单列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{edu_host}}/member/order",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"member",
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "评论",
+			"item": [
+				{
+					"name": "贴子评论列表",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"console.log(jsonData)",
+									"pm.environment.set(\"edu_comment_id\", jsonData.data[0]['id']);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{edu_host}}/front/comment/topic/2046",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"front",
+								"comment",
+								"topic",
+								"2046"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "发表贴子评论",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "content",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{edu_host}}/front/comment/topic/{{edu_topic_id}}",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"front",
+								"comment",
+								"topic",
+								"{{edu_topic_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "评论所在页码",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "content",
+									"value": "{{$randomWords}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{edu_host}}/front/comment/page/{{edu_topic_id}}/{{edu_comment_id}}",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"front",
+								"comment",
+								"page",
+								"{{edu_topic_id}}",
+								"{{edu_comment_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "站内消息",
+			"item": [
+				{
+					"name": "消息列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{edu_host}}/front/message",
+							"host": [
+								"{{edu_host}}"
+							],
+							"path": [
+								"front",
+								"message"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

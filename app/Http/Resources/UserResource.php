@@ -27,12 +27,12 @@ class UserResource extends JsonResource
             'wechat' => $this->when($this->permissions['update'], $this->wechat),
             'home' => $this->home,
             'group_id' => $this->group_id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'roles' => $this->whenLoaded('roles'),
             'mobile' => $this->when($this->permissions['update'], $this->mobile),
             'email' => $this->when($this->permissions['update'], $this->email),
             'group' => new GroupResource($this->whenLoaded('group')),
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'roles' => $this->whenLoaded('roles')
         ];
     }
 }

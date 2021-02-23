@@ -45,8 +45,8 @@
                 <comment-list
                     class="mt-5"
                     :key="$route.params.id"
-                    :action-list="`front/comment/topic/${$route.params.id}`"
-                    :action-post="`front/comment/topic/${$route.params.id}`"
+                    :action-list="`comment/topic/${$route.params.id}`"
+                    :action-post="`comment/topic/${$route.params.id}`"
                 />
             </div>
             <div class="md:w-3/12">
@@ -80,7 +80,7 @@ export default {
     methods: {
         async load() {
             this.loading = true
-            this.form = await this.axios.get(`front/topic/${this.$route.params.id}`)
+            this.form = await this.axios.get(`topic/${this.$route.params.id}`)
             this.loading = false
         },
         async del() {
@@ -89,13 +89,14 @@ export default {
                 this.router('front.topic.index')
             })
         },
+        //推荐设置
         async recommend() {
-            const { data: topic } = await axios.get(`front/topic/${this.form.id}/recommend`)
+            const { data: topic } = await axios.get(`topic/${this.form.id}/recommend`)
             this.form = topic
         },
         async del(topic) {
             this.$confirm('确定删除吗?', '温馨提示').then(async _ => {
-                await axios.delete(`front/topic/${topic.id}`)
+                await axios.delete(`topic/${topic.id}`)
                 this.router('front.topic.index')
             })
         }

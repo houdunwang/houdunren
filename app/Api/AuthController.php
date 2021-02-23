@@ -9,7 +9,6 @@ use App\Rules\AccountRule;
 use App\Rules\CodeRule;
 use App\Models\User;
 use UserService;
-use CodeService;
 use Auth;
 use Hash;
 use Exception;
@@ -24,7 +23,8 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['site']);
+        $this->middleware(['auth:sanctum'])->only(['logout']);
+        $this->middleware(['site'])->except(['login']);
     }
 
     /**
@@ -66,7 +66,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        Auth::logout();
+        Auth::user()->tokens()->delete();
         return $this->message('帐号退出成功');
     }
 
@@ -93,34 +93,6 @@ class AuthController extends Controller
         $user->save();
         return $this->message('注册成功');
     }
-
-    /**
-     * 发送验证码
-     * @param Request $request
-     * @return void
-     */
-    public function registerCode(Request $request)
-    {
-        $request->validate(
-            [
-                'account' => ['required', new AccountRule(request('account')), Rule::unique('users', 'mobile')],
-                'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
-            ],
-            [
-                'account.required' => '帐号不能为空',
-                'account.unique' => '帐号已经绑定',
-                'captcha.content.required' => '验证码不能为空',
-                'captcha.content.captcha_api' => '验证码输入错误'
-            ]
-        );
-        try {
-            CodeService::mobile(request('account'));
-            return ['message' => '验证码发送成功'];
-        } catch (Exception $e) {
-            return $this->error('短信发送失败，请检查手机号或联系站长', 500);
-        }
-    }
-
 
     /**
      * 获取令牌
@@ -156,28 +128,5 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
         return ['message' => '密码重置成功', 'token' => $this->token($user)];
-    }
-
-    /**
-     * 找回密码验证码
-     * @param Request $request
-     * @return void
-     */
-    public function forgetCode(Request $request)
-    {
-        $request->validate(
-            [
-                'account' => ['required', new AccountRule(request('account')), Rule::exists('users', UserService::account())],
-                'captcha.content' => ['required', 'captcha_api:' . request('captcha.key') . ',default']
-            ],
-            [
-                'account.required' => '帐号不能为空',
-                'account.exists' => '帐号不存在',
-                'captcha.content.required' => '验证码不能为空',
-                'captcha.content.captcha_api' => '验证码输入错误'
-            ]
-        );
-        CodeService::send(request('account'));
-        return ['message' => '验证码发送成功'];
     }
 }

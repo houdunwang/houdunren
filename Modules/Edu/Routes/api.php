@@ -13,7 +13,7 @@ use Modules\Edu\Api\SignController;
 use Modules\Edu\Api\ActivityController;
 use Modules\Edu\Api\CommentController;
 use Modules\Edu\Api\MemberController;
-use Modules\Edu\Api\MessageController;
+use Modules\Edu\Api\SiteMessageController;
 use Modules\Edu\Api\UserVideoController;
 
 Route::group(['prefix' => 'Edu/site/{site}', 'middleware' => ['module']], function () {
@@ -30,16 +30,10 @@ Route::group(['prefix' => 'Edu/site/{site}', 'middleware' => ['module']], functi
     Route::apiResource('system', SystemController::class);
     //套餐
     Route::apiResource('subscribe', SubscribeController::class);
-});
-
-Route::group(['prefix' => 'Edu/front', 'middleware' => ['front']], function () {
-    //标签
-    Route::get('tag', [TagController::class, 'index']);
-    //系统课程
-    Route::apiResource('system', SystemController::class);
-    //课程
-    Route::get('lesson/search', [LessonController::class, 'search']);
-    Route::apiResource('lesson', LessonController::class);
+    //视频
+    Route::get('video/{video}/comments', [VideoController::class, 'commentList']);
+    Route::post('video/{video}/comment', [VideoController::class, 'comment']);
+    Route::apiResource('video', VideoController::class);
     //评论
     Route::get('comment/topic/{topic}', [CommentController::class, 'topic']);
     Route::post('comment/topic/{topic}', [CommentController::class, 'topicSend']);
@@ -47,24 +41,32 @@ Route::group(['prefix' => 'Edu/front', 'middleware' => ['front']], function () {
     Route::post('comment/video/{video}', [CommentController::class, 'videoSend']);
     Route::get('comment/page/{id}/{cid}', [CommentController::class, 'page']);
     Route::delete('comment/{comment}', [CommentController::class, 'destroy']);
-    //站内消息
-    Route::apiResource('message', MessageController::class);
     //贴子
     Route::get('topic/{topic}/recommend', [TopicController::class, 'recommend']);
     Route::get('topic/recommend', [TopicController::class, 'recommendList']);
     Route::apiResource('topic', TopicController::class);
-    //视频
-    Route::get('video/{video}/comments', [VideoController::class, 'commentList']);
-    Route::post('video/{video}/comment', [VideoController::class, 'comment']);
-    Route::apiResource('video', VideoController::class);
     //签到
     Route::apiResource('sign', SignController::class);
     //动态
     Route::apiResource('activity', ActivityController::class);
+    //站内消息
+    Route::apiResource('message', SiteMessageController::class);
+});
+
+Route::group(['prefix' => 'Edu/front', 'middleware' => ['front']], function () {
+    //标签
+    // Route::get('tag', [TagController::class, 'index']);
+    //系统课程
+    // Route::apiResource('system', SystemController::class);
+    //课程
+    // Route::get('lesson/search', [LessonController::class, 'search']);
+    // Route::apiResource('lesson', LessonController::class);
+
+
     //用户视频
     Route::apiResource('user/video', UserVideoController::class);
     //套餐
-    Route::apiResource('subscribe', SubscribeController::class)->only(['index']);
+    // Route::apiResource('subscribe', SubscribeController::class)->only(['index']);
 });
 
 Route::group(['prefix' => 'Edu/member', 'middleware' => ['auth:sanctum', 'front']], function () {

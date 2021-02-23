@@ -16,7 +16,7 @@ import Editor from '@toast-ui/editor'
 export default {
     props: {
         //后台上传地址
-        action: { required: true, type: String },
+        action: { type: String, required: true },
         //编辑器高度
         height: { type: String, default: '300px' },
         //显示方式

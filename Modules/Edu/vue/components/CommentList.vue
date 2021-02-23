@@ -122,7 +122,7 @@
                 <div v-else class="font-bold text-gray-600">发表评论</div>
             </div>
             <div class="card-body">
-                <hd-tui-editor v-model="form.content" initialEditType="markdown" class="border" :action="`/api/front/upload`" ref="editor" />
+                <hd-tui-editor v-model="form.content" initialEditType="markdown" class="border" :action="`/api/upload/site/${site.id}`" ref="editor" />
                 <hd-error name="content" />
             </div>
             <div class="card-footer text-muted">
@@ -130,7 +130,7 @@
             </div>
         </div>
         <!-- 评论框END -->
-        <image-preview />
+        <image-preview :min-width="500" />
     </div>
 </template>
 
@@ -192,7 +192,7 @@ export default {
 
         async del(comments, comment) {
             this.$confirm('确定删除评论吗?', '温馨提示').then(async _ => {
-                await axios.delete(`front/comment/${comment.id}`)
+                await axios.delete(`comment/${comment.id}`)
                 comments.splice(comments.indexOf(comment), 1)
             })
         }

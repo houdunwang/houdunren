@@ -9,7 +9,13 @@
                 <hd-error name="title" />
                 <tags v-model="form.tags" />
                 <hd-error name="tags" />
-                <hd-tui-editor v-model="form.content" v-if="!id || form.content" initialEditType="markdown" class="border" :action="`/api/front/upload`" />
+                <hd-tui-editor
+                    v-model="form.content"
+                    v-if="!id || form.content"
+                    initialEditType="markdown"
+                    class="border"
+                    :action="`/api/upload/site/${site.id}`"
+                />
                 <hd-error name="content" />
             </div>
             <div class="card-footer text-muted">
@@ -31,7 +37,7 @@ export default {
     },
     async created() {
         if (this.id) {
-            const topic = await axios.get(`front/topic/${this.id}`)
+            const topic = await axios.get(`topic/${this.id}`)
             topic.tags = topic.tags.map(t => t.id)
             this.form = topic
         }
@@ -41,7 +47,7 @@ export default {
             if (this.form.tags.length == 0) {
                 return this.$message('选择一个标签吧')
             }
-            const url = this.id ? `front/topic/${this.id}` : `front/topic`
+            const url = this.id ? `topic/${this.id}` : `topic`
             const { data: form } = await axios[this.id ? 'put' : 'post'](url, this.form)
             this.router('front.topic.show', { id: form.id })
         }

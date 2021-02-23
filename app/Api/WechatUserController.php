@@ -6,10 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\WeChat;
 use Houdunwang\WeChat\User as UserPackage;
 use Illuminate\Http\Request;
-use App\Models\User as ModelsUser;
-use Illuminate\Http\JsonResponse;
-use WeChatService;
 use App\Models\Site;
+use App\Models\User;
+use WeChatService;
 use Cache;
 
 /**
@@ -18,6 +17,11 @@ use Cache;
  */
 class WeChatUserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth:sanctum']);
+    }
+
     /**
      * 站点粉丝列表
      * @param WeChat $wechat
@@ -25,7 +29,8 @@ class WeChatUserController extends Controller
      */
     public function search(Site $site, WeChat $wechat)
     {
-        $users = ModelsUser::whereHas('wechatUser', function ($query) use ($site, $wechat) {
+        $this->authorize('update', $wechat);
+        $users = User::whereHas('wechatUser', function ($query) use ($site, $wechat) {
             $query->where('site_id', $site['id'])->where('wechat_id', $wechat['id']);
         })
             ->with('wechatUser')
@@ -37,13 +42,13 @@ class WeChatUserController extends Controller
 
     /**
      * 同步粉丝数据
-     * @param Request $request
      * @param WeChat $wechat
      * @param UserPackage $userPackage
      * @return void
      */
-    public function sync(Request $request, Site $site, WeChat $wechat, UserPackage $userPackage)
+    public function sync(Site $site, WeChat $wechat, UserPackage $userPackage)
     {
+        $this->authorize('update', $wechat);
         $cacheName = $site['id'] . $wechat['id'] . 'next_openid';
         //获取用户列表。openid为上次获取的最后一个粉丝openid
         $response = $userPackage->config($wechat)->getList(Cache::get($cacheName));

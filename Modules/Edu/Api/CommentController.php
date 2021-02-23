@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\InvalidCastException;
 use LogicException;
 use Modules\Edu\Entities\Video;
 use DB;
+use App\Models\Site;
 
 /**
  * 评论
@@ -31,7 +32,7 @@ class CommentController extends Controller
      * @param Topic $topic
      * @return AnonymousResourceCollection
      */
-    public function topic(Topic $topic)
+    public function topic(Site $site, Topic $topic)
     {
         $comments = $topic->comments()->with(['replys.user', 'user', 'commentable'])->whereNull('reply_id')->latest('id')->paginate(15);
         return CommentResource::collection($comments);
@@ -44,15 +45,15 @@ class CommentController extends Controller
      * @return void
      * @throws BindingResolutionException
      */
-    public function topicSend(CommentRequest $request, Topic $topic)
+    public function topicSend(CommentRequest $request, Site $site, Topic $topic)
     {
         $comment = $topic->comments()->create($request->input() + [
             'site_id' => SID,
             'user_id' => Auth::id()
         ]);
-        if ($comment->user->id != Auth::id()) {
-            Auth::user()->notify(new CommentNotification($comment));
-        }
+        // if ($comment->user->id != Auth::id()) {
+        $topic->user->notify(new CommentNotification($comment));
+        // }
         ActivityService::log($comment);
         return $this->message('评论发表成功', new CommentResource($comment->load(['user'])));
     }
@@ -62,7 +63,7 @@ class CommentController extends Controller
      * @param Video $video
      * @return AnonymousResourceCollection
      */
-    public function video(Video $video)
+    public function video(Site $site, Video $video)
     {
         $comments = $video->comments()->with(['replys'])->whereNull('reply_id')->latest()->paginate();
         return CommentResource::collection($comments);
@@ -75,7 +76,7 @@ class CommentController extends Controller
      * @return void
      * @throws BindingResolutionException
      */
-    public function videoSend(CommentRequest $request, Video $video)
+    public function videoSend(CommentRequest $request, Site $site, Video $video)
     {
         $comment = $video->comments()->create($request->input() + [
             'site_id' => SID,
@@ -96,7 +97,7 @@ class CommentController extends Controller
      * @throws Exception
      * @throws BindingResolutionException
      */
-    public function destroy(Comment $comment)
+    public function destroy(Site $site, Comment $comment)
     {
         DB::beginTransaction();
         $this->authorize('delete', $comment);

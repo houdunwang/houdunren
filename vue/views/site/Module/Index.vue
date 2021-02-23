@@ -55,7 +55,7 @@ export default {
         //模块管理
         admin(module) {
             window.localStorage.setItem('sid', this.site.id)
-            location.href = `/${module.name}/admin`
+            location.href = `/${module.name}/site/${this.site.id}/admin`
         }
     }
 }

@@ -7,6 +7,7 @@ export default new Vuex.Store({
     state: {
         errors: {},
         user: {},
+        site: {},
         //系统配置
         systemConfig: {}
     },
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     mutations: {
         errors(state, errors = {}) {
             state.errors = errors
+        },
+        site(state, site) {
+            state.site = site
         },
         user(state, user) {
             state.user = user
@@ -32,6 +36,9 @@ export default new Vuex.Store({
         },
         async systemConfig({ commit }) {
             commit('systemConfig', await axios.get(`system/config`))
+        },
+        async site({ commit }) {
+            commit('site', await axios.get(`site/current`))
         }
     }
 })

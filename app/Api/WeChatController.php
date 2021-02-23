@@ -18,13 +18,28 @@ class WeChatController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['auth:sanctum', 'site']);
+        $this->authorizeResource(WeChat::class, 'wechat');
     }
 
+    /**
+     * 公众号列表
+     * @param Request $request
+     * @param Site $site
+     * @return mixed
+     */
     public function index(Request $request, Site $site)
     {
         return $site->wechats;
     }
 
+    /**
+     * 获取公众号
+     * @param Request $request
+     * @param Site $site
+     * @param WeChat $wechat
+     * @return WeChat
+     */
     public function show(Request $request, Site $site, WeChat $wechat)
     {
         return $wechat;

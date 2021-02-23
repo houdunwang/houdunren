@@ -2,24 +2,18 @@
 
 use Modules\Edu\Http\Controllers\PayController;
 use Modules\Edu\Http\Controllers\HomeController;
+//首页
+Route::get('/Edu', function () {
+    return view('edu::app');
+})->middleware(['module']);
+
 //支付
 Route::group(['prefix' => 'Edu'], function () {
-    Route::get('/', [HomeController::class, 'index'])->middleware(['front']);
-    Route::get('pay/return/{site}', [PayController::class, 'return'])->name('pay.return')->middleware(['front']);
-    Route::get('pay/notify/{site}', [PayController::class, 'notify'])->name('pay.notify')->middleware(['front']);
-    Route::get('pay/subscribe/{subscribe}', [PayController::class, 'subscribe'])->middleware(['front']);
+    Route::get('pay/return/{site}', [PayController::class, 'return'])->name('pay.return')->middleware(['module']);
+    Route::get('pay/notify/{site}', [PayController::class, 'notify'])->name('pay.notify')->middleware(['module']);
+    Route::get('pay/subscribe/{subscribe}', [PayController::class, 'subscribe'])->middleware(['auth:sanctum', 'module']);
 });
 
-// //后台
-// Route::any('Edu/admin/{path?}', function () {
-//     return view("edu::app");
-// })->where('path', '.*')->middleware(['admin']);
-
-// //前台
-// Route::any('Edu/{path?}', function () {
-//     return view("edu::app");
-// })->where('path', '.*')->middleware(['front']);
-
-Route::any('Edu/{path?}', function () {
+Route::any('Edu/site/{site}/{path?}', function () {
     return view('edu::app');
 })->where('path', '.*')->middleware(['module']);

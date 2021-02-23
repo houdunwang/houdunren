@@ -4,7 +4,7 @@
             <div slot="header">
                 修改头像
             </div>
-            <hd-image v-model="form.avatar" action="member/upload" />
+            <hd-image v-model="form.avatar" :action="`upload/site/${site.id}`" />
         </el-card>
     </el-form>
 </template>
@@ -19,7 +19,7 @@ export default {
     },
     watch: {
         async 'form.avatar'() {
-            await this.axios.put(`member/user/${this.user.id}`, this.form)
+            await this.axios.put(`user/${this.user.id}`, this.form)
             // location.reload()
         }
     }

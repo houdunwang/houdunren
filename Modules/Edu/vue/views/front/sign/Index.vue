@@ -117,13 +117,13 @@ export default {
         }
     },
     async created() {
-        this.signs = await axios.get(`front/sign`)
+        this.signs = await axios.get(`sign`)
         this.loading = false
     },
     methods: {
         async del(sign) {
             this.$confirm('确定删除吗?', '温馨提示').then(async _ => {
-                await axios.delete(`front/sign/${sign.id}`)
+                await axios.delete(`sign/${sign.id}`)
                 this.signs.splice(this.signs.indexOf(sign), 1)
             })
         },
@@ -131,7 +131,7 @@ export default {
             if (!this.form.content || !this.form.mood) {
                 return this.$message.warning('签到内容和心情不能为空')
             }
-            const { data: sign } = await axios.post(`front/sign`, this.form)
+            const { data: sign } = await axios.post(`sign`, this.form)
             this.signs.push(sign)
         }
     }

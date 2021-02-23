@@ -7,7 +7,6 @@
                     <div class="card-header flex justify-between h-14">
                         社区动态
                     </div>
-
                     <div class="card-body">
                         <topic-recommend />
                         <div v-for="activity in activities.data" :key="activity.id">
@@ -33,7 +32,7 @@
 
             <div class="md:w-3/12">
                 <community-tip />
-                <user-video-list class="mt-3" />
+                <!-- <user-video-list class="mt-3" /> -->
             </div>
         </div>
     </div>
@@ -57,9 +56,9 @@ export default {
     methods: {
         async load(page = 1) {
             this.loading = true
-            this.activities = await this.axios.get(`front/activity?page=${page}`)
+            this.activities = await this.axios.get(`activity?page=${page}`)
             this.loading = false
-            document.documentElement.scroll({ top: 30, behavior: 'smooth' })
+            document.documentElement.scroll({ top: 0, behavior: 'smooth' })
         }
     }
 }

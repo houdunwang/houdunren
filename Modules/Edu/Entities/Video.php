@@ -14,7 +14,7 @@ class Video extends Model
 {
     protected $table = 'edu_videos';
     protected $guarded = [];
-    protected $appends = ['Permissions'];
+    protected $appends = ['permissions'];
 
     protected function getPermissionsAttribute()
     {

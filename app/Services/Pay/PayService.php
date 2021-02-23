@@ -19,31 +19,10 @@ use Yansongda\Pay\Gateways\Wechat;
  */
 class PayService
 {
-    // public function alipayConfig()
-    // {
-    //     $config = config('site.alipay');
-    //     $config['return_url'] = route('common.pay.sync', [module()['id']]);
-    //     $config['notify_url'] = route('common.pay.async', [module()['id']]);
-    //     if (empty($config['mode'])) unset($config['mode']);
-
-    //     return $config;
-    // }
-
-    // public function wepayConfig()
-    // {
-    //     $config = config('site.wepay');
-    //     $config['notify_url'] = route('common.pay.wepay', module()['id']);
-    //     if (empty($config['mode'])) unset($config['mode']);
-    //     return $config;
-    // }
-
-    // protected function check($order)
-    // {
-    //     $vars = ['sn', 'price', 'subject'];
-    //     foreach ($vars as $v) {
-    //         if (!key_exists($v, $order)) throw new Exception('参数错误');
-    //     }
-    // }
+    /**
+     * 生成定单号
+     * @return string
+     */
     public function sn()
     {
         return 'U' . Auth::id() . '-' . date('Ymdhis');
@@ -73,21 +52,4 @@ class PayService
         if (empty($config['mode'])) unset($config['mode']);
         return Pay::wechat($config);
     }
-
-    /**
-     * 入库
-     * @param array $order
-     * @param string $type
-     * @return void
-     * @throws InvalidCastException
-     * @throws LogicException
-     */
-    // protected function save(array $order, string $type)
-    // {
-    //     $order['type'] = $type;
-    //     $order['site_id'] = site()['id'];
-    //     $order['module_id'] = module()['id'];
-    //     $order['user_id'] = Auth::id();
-    //     ModelsPay::create($order);
-    // }
 }

@@ -8,6 +8,10 @@ use App\Models\User;
 use Modules\Edu\Entities\Lesson;
 use UserService;
 
+/**
+ * 课程权限策略
+ * @package Modules\Edu\Policies
+ */
 class LessonPolicy
 {
     use HandlesAuthorization;

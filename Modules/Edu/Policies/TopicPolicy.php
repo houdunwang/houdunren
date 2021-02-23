@@ -12,13 +12,6 @@ class TopicPolicy
 {
     use HandlesAuthorization;
 
-    public function before($user, $ability)
-    {
-        if (SiteService::isMaster(site(), $user)) {
-            return true;
-        }
-    }
-
     public function viewAny(User $user)
     {
         return true;
@@ -44,6 +37,12 @@ class TopicPolicy
         return $user['id'] == $topic['user_id'];
     }
 
+    /**
+     * 推荐
+     * @param User $user
+     * @param Topic $topic
+     * @return bool
+     */
     public function recommend(User $user, Topic $topic)
     {
         return UserService::isMaster(site(), $user);

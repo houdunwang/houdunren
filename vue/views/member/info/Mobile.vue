@@ -4,7 +4,7 @@
             <div slot="header">
                 绑定手机号
             </div>
-            <hd-validate-code v-model="form.account" type="mobile" action="member/user/code/mobile" placeholder="请输入手机号" />
+            <hd-validate-code v-model="form.account" type="mobile" :action="`site/${site.id}/code/mobile/noexist`" placeholder="请输入手机号" />
             <el-input v-model.trim="form.code" placeholder="请输入收到的验证码" size="normal" class="block mt-3"></el-input>
             <hd-error name="code" />
             <el-button type="primary" size="default" @click="onSubmit" class="block mt-3" :disabled="!form.account || !form.code">绑定手机</el-button>
@@ -22,7 +22,7 @@ export default {
     },
     methods: {
         async onSubmit() {
-            await this.axios.put(`member/user/mobile`, this.form)
+            await axios.put(`user/mobile`, this.form)
         }
     }
 }

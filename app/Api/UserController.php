@@ -2,21 +2,19 @@
 
 namespace App\Api;
 
-use App\Http\Resources\ModuleResource;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use App\Http\Resources\UserResource;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Rules\OldPassword;
 use App\Rules\CodeRule;
 use App\Models\User;
-use CodeService;
+use App\Models\Site;
 use Hash;
 use Auth;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Contracts\Container\BindingResolutionException;
-use App\Models\Site;
 
 /**
  * 用户
@@ -36,7 +34,7 @@ class UserController extends Controller
      */
     public function info()
     {
-        return  new UserResource(Auth::user());
+        return new UserResource(Auth::user());
     }
 
     /**

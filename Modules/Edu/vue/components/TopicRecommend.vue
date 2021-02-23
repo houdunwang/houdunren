@@ -26,7 +26,7 @@ export default {
         }
     },
     async created() {
-        this.topics = await axios.get(`front/topic/recommend`)
+        this.topics = await axios.get(`topic/recommend`)
     }
 }
 </script>

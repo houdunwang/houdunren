@@ -26,19 +26,19 @@
                     </div>
                 </div>
                 <!-- 用户头像菜单END -->
-                <!-- 菜单列表 -->
+                <!-- 顶部模块列表 -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                         <ul class="navbar-nav">
                             <li class="nav-item" v-for="(module, index) in modules" :key="index">
-                                <a :href="`${module.name}`" class="nav-link text-base font-weight-lighter text-gray-700 hover:text-hd">
+                                <a :href="`/${module.name}`" class="nav-link text-base font-weight-lighter text-gray-700 hover:text-hd">
                                     {{ module.title }}
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <!-- 菜单列表END -->
+                <!-- 顶部模块列表END -->
             </div>
         </header>
 
@@ -62,7 +62,7 @@ export default {
         }
     },
     async created() {
-        this.modules = await axios.get(`site/${this.site.id}/modules`)
+        this.modules = await axios.get(`module/site/${this.site.id}`)
     }
 }
 </script>

@@ -47,15 +47,15 @@ class ModuleService
      * @param array $config
      * @return void
      */
-    public function saveConfig(array $config)
-    {
-        $model = ModuleConfig::firstOrNew([
-            'site_id' => site()['id'],
-            'module_id' => module()['id'],
-        ]);
-        $model['config'] = $config + ($model['config'] ?? []);
-        return $model->save();
-    }
+    // public function saveConfig(array $config)
+    // {
+    //     $model = ModuleConfig::firstOrNew([
+    //         'site_id' => site()['id'],
+    //         'module_id' => module()['id'],
+    //     ]);
+    //     $model['config'] = $config + ($model['config'] ?? []);
+    //     return $model->save();
+    // }
 
     /**
      * 根据域名获取模块

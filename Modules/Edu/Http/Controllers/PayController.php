@@ -21,6 +21,10 @@ use Modules\Edu\Entities\Duration;
  */
 class PayController extends Controller
 {
+    public function __construct()
+    {
+    }
+
     /**
      * 会员套餐订阅
      * @param Subscribe $subscribe

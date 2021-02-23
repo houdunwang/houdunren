@@ -3,13 +3,10 @@
 namespace App\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\WeChat;
 use Houdunwang\WeChat\Material;
 use Illuminate\Http\Request;
+use App\Models\WeChat;
 use UploadService;
-use App\Models\Site;
-use ConfigService;
-use SiteService;
 
 /**
  * 上传处理
@@ -19,6 +16,8 @@ class UploadController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['auth:sanctum']);
+        $this->middleware(['site'])->except(['local']);
     }
 
     /**

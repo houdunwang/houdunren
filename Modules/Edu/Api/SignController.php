@@ -11,6 +11,7 @@ use Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use ActivityService;
 use Modules\Edu\Http\Requests\SignRequest;
+use App\Models\Site;
 
 /**
  * 签到
@@ -23,7 +24,6 @@ class SignController extends Controller
     public function __construct()
     {
         $this->middleware(['auth:sanctum'])->except('index');
-        $this->middleware(['front']);
         $this->authorizeResource(Sign::class, 'sign');
     }
 
@@ -33,7 +33,7 @@ class SignController extends Controller
         return SignResource::collection($signs);
     }
 
-    public function store(SignRequest $request, Sign $sign)
+    public function store(SignRequest $request, Site $site, Sign $sign)
     {
         $sign->fill($request->input());
         $sign->site_id = SID;
@@ -43,7 +43,7 @@ class SignController extends Controller
         return $this->message('签到添加成功', new SignResource($sign));
     }
 
-    public function destroy(Request $request, Sign $sign)
+    public function destroy(Request $request, Site $site, Sign $sign)
     {
         $sign->delete();
         return ['message' => '签到删除成功'];

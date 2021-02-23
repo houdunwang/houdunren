@@ -32,7 +32,7 @@ const mixin = {
             })
         },
         async logout() {
-            await this.axios.get(`/api/front/logout`)
+            await axios.get(`/api/logout`)
             window.localStorage.removeItem('token')
             location.href = '/'
         }

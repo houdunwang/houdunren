@@ -48,9 +48,9 @@ class VideoController extends Controller
      * @throws InvalidCastException
      * @throws LogicException
      */
-    public function show(Video $video)
+    public function show(Site $site, Video $video)
     {
         User::make()->videos()->syncWithPivotValues([$video['id']], ['site_id' => SID], false);
-        return new VideoResource($video->load('lesson'));
+        return new VideoResource($video->load('lesson.videos'));
     }
 }

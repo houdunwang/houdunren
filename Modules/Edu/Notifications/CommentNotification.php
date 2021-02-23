@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
+/**
+ * 评论通知
+ * @package Modules\Edu\Notifications
+ */
 class CommentNotification extends Notification
 {
     use Queueable;

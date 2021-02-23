@@ -32,15 +32,10 @@
             </div>
         </div>
         <!-- 课程标题END -->
-
         <!-- 评论与课程列表 -->
         <div class="container-xl mt-3 md:flex">
             <div class="md:w-9/12 md:mr-5 mb-5 order-2 md:order-1">
-                <comment-list
-                    :key="$route.params.id"
-                    :action-list="`front/comment/video/${$route.params.id}`"
-                    :action-post="`front/comment/video/${$route.params.id}`"
-                />
+                <comment-list :key="$route.params.id" :action-list="`comment/video/${$route.params.id}`" :action-post="`comment/video/${$route.params.id}`" />
             </div>
             <div class="md:w-3/12 order-1 md:order-2">
                 <div class="card">
@@ -100,8 +95,8 @@ export default {
     },
     methods: {
         async init(id, autoplay = false) {
-            this.video = await this.axios.get(`front/video/${id}`)
-            this.lesson = await this.axios.get(`front/lesson/${this.video.lesson_id}`)
+            this.video = await this.axios.get(`video/${id}`)
+            this.lesson = this.video.lesson
             this.player = new Player({
                 id: 'mse',
                 url: this.video.path,

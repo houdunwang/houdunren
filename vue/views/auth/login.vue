@@ -63,8 +63,9 @@ export default {
         async onSubmit() {
             this.$store.commit('errors', {})
             this.axios
-                .post(`front/login`, this.form)
+                .post(`login`, this.form)
                 .then(({ token }) => {
+                    window.localStorage.setItem('token', token)
                     const redirectUrl = window.sessionStorage.getItem('redirect_url')
                     location.href = redirectUrl || '/'
                 })

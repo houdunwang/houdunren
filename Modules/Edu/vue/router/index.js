@@ -12,7 +12,7 @@ const router = new VueRouter({
     }
 })
 
-const isLogin = window.user.id
+const isLogin = window.localStorage.getItem('token')
 router.beforeEach(async (to, from, next) => {
     store.commit('errors')
     //用户经常被用到，所以登录用户在这里获取资料

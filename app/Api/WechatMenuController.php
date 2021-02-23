@@ -19,6 +19,7 @@ class WechatMenuController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['auth:sanctum']);
     }
 
     /**
@@ -29,7 +30,7 @@ class WechatMenuController extends Controller
      */
     public function update(Request $request, Site $site, WeChat $wechat)
     {
-        $this->authorize('update', $site);
+        $this->authorize('update', $wechat);
         $wechat->menus = $request->input('menus');
         $wechat->save();
         return $this->message('菜单保存成功');
@@ -43,7 +44,7 @@ class WechatMenuController extends Controller
      */
     public function push(Site $site, WeChat $wechat,  Button $button)
     {
-        $this->authorize('update', $site);
+        $this->authorize('update', $wechat);
         $button->config($wechat)->create(['button' => $wechat->menus]);
         return $this->message('微信菜单推送成功，请取关并再次关注后查看效果');
     }

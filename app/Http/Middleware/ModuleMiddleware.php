@@ -41,6 +41,7 @@ class ModuleMiddleware
             defined("SID") or define("SID", $site['id']);
             return $site;
         }
+
         abort(404, '站点不存在');
     }
 
@@ -53,8 +54,9 @@ class ModuleMiddleware
      */
     protected function module(): Module
     {
-        $site = site();
+        $site = Site::find(site()['id']);
         $module = ModuleService::getByDomain() ?? $site->module;
+
         if (!($module instanceof Module)) {
             abort(404, '模块不存在');
         }

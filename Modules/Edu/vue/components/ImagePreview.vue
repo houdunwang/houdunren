@@ -6,6 +6,9 @@
 
 <script>
 export default {
+    props: {
+        minWidth: { type: Number, default: 500 }
+    },
     data() {
         return {
             dialogVisible: false,
@@ -16,7 +19,7 @@ export default {
         this.$nextTick(_ => {
             this.$parent.$el.addEventListener('click', event => {
                 if (event.target.nodeName == 'IMG') {
-                    if (event.target.clientWidth > 500) {
+                    if (event.target.clientWidth > this.minWidth) {
                         const src = event.target.getAttribute('src')
                         this.dialogVisible = true
                         this.imagePreview = src

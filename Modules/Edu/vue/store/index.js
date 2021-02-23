@@ -7,6 +7,7 @@ export default new Vuex.Store({
         user: {},
         site: window.site,
         module: window.module,
+        //站内消息
         siteMessage: {}
     },
     getters: {
@@ -21,15 +22,16 @@ export default new Vuex.Store({
         user(state, user) {
             state.user = user
         },
-        siteMessage(state, message) {
-            state.messages = message
+        siteMessage(state, siteMessage) {
+            state.siteMessage = siteMessage
         }
     },
     actions: {
         async user({ commit }) {
             commit('user', await axios.get(`/api/user/info`))
         },
-        async message({ commit }, page = 1) {
+        //获取站内消息
+        async siteMessage({ commit }, page = 1) {
             commit('siteMessage', await axios.get(`message?page=${page}`))
         }
     }

@@ -7,7 +7,6 @@
                     <div class="card-header h-14">
                         话题讨论
                     </div>
-
                     <div class="card-body" v-loading="loading" style="min-height:100px;">
                         <div v-for="topic in topics.data" :key="topic.id" class="py-4 border-b border-gray-200">
                             <div class="row">
@@ -62,7 +61,7 @@ export default {
     methods: {
         async load(page = 1) {
             this.loading = true
-            this.topics = await this.axios.get(`front/topic?page=${page}`)
+            this.topics = await axios.get(`topic?page=${page}`)
             this.loading = false
             document.documentElement.scroll({ top: 0, behavior: 'smooth' })
         }

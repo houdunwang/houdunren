@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    route: { path: `system/:id/edit` },
+    route: { path: `system/:id` },
     data() {
         return {
             loading: true,
@@ -33,7 +33,7 @@ export default {
         }
     },
     async created() {
-        this.form = await this.axios.get(`front/system/${this.$route.params.id}`)
+        this.form = await this.axios.get(`system/${this.$route.params.id}`)
         this.loading = false
     }
 }

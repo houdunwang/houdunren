@@ -33,7 +33,7 @@ export default {
     },
     methods: {
         async onSubmit() {
-            await this.axios.put(`member/user/${this.user.id}`, this.form)
+            await this.axios.put(`user/${this.user.id}`, this.form)
             location.reload()
         }
     }

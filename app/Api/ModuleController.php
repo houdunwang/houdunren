@@ -21,6 +21,7 @@ class ModuleController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['auth:sanctum']);
     }
 
     /**
@@ -88,6 +89,7 @@ class ModuleController extends Controller
      */
     public function install(Request $request)
     {
+        $this->authorize('install', Module::class);
         $name = $request->name;
         $data = ModuleService::config($name, 'config');
         Module::updateOrCreate(['name' => $name], $data);
@@ -101,6 +103,7 @@ class ModuleController extends Controller
      */
     public function uninstall(Module $module)
     {
+        $this->authorize('install', $module);
         DB::beginTransaction();
         $this->authorize('delete', $module);
         $module->delete();

@@ -19,7 +19,19 @@ class SiteController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['auth:sanctum'])->except(['show', 'current']);
+        $this->middleware(['module'])->only(['current']);
         $this->authorizeResource(Site::class, 'site');
+    }
+
+    /**
+     * 当前站点
+     * @return null|Site
+     */
+    public function current()
+    {
+        return site();
+        return new SiteResource(site());
     }
 
     /**

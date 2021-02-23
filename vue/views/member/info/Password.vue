@@ -36,7 +36,7 @@ export default {
     },
     methods: {
         async onSubmit() {
-            await this.axios.put(`member/user/password`, this.form)
+            await this.axios.put(`user/password`, this.form)
         }
     }
 }

@@ -34,6 +34,6 @@ class SiteResource extends JsonResource
      */
     protected function isMaster(): bool
     {
-        return SiteService::isMaster($this->resource, Auth::user());
+        return Auth::check() && SiteService::isMaster($this->resource, Auth::user());
     }
 }

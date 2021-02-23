@@ -53,7 +53,7 @@ export default {
         }
     },
     async created() {
-        this.subscribes = await axios.get(`front/subscribe`)
+        this.subscribes = await axios.get(`subscribe`)
     }
 }
 </script>

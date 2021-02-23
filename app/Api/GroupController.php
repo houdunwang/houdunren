@@ -17,6 +17,7 @@ class GroupController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['auth:sanctum']);
         $this->authorizeResource(Group::class, 'group');
     }
 

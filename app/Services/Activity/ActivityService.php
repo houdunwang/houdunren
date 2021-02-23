@@ -32,7 +32,7 @@ class ActivityService
      * @throws InvalidCastException
      * @throws JsonEncodingException
      */
-    public function log(Model $model, User $user = null,  string $description = '', array $properties = [])
+    public function log(Model $model, string $description = '', array $properties = [], User $user = null)
     {
         $user = $user ?? Auth::user();
         return activity()

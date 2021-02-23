@@ -7,6 +7,10 @@ use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use UserService;
 
+/**
+ * 站点策略
+ * @package App\Policies
+ */
 class SitePolicy
 {
     use HandlesAuthorization;

@@ -20,6 +20,7 @@ use ActivityService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use DB;
+use App\Models\Site;
 
 /**
  * 贴子管理
@@ -29,6 +30,7 @@ class TopicController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['auth:sanctum'])->except(['index', 'show', 'recommendList']);
     }
 
     /**
@@ -61,7 +63,7 @@ class TopicController extends Controller
      * @throws InvalidArgumentException
      * @throws MassAssignmentException
      */
-    public function store(TopicRequest $request, Topic $topic)
+    public function store(TopicRequest $request, Site $site, Topic $topic)
     {
         $topic->fill($request->input());
         $topic->site_id = site()['id'];
@@ -77,7 +79,7 @@ class TopicController extends Controller
      * @param Topic $topic
      * @return TopicResource
      */
-    public function show(Topic $topic)
+    public function show(Site $site, Topic $topic)
     {
         return new TopicResource($topic->load(['user', 'tags']));
     }
@@ -90,8 +92,9 @@ class TopicController extends Controller
      * @throws MassAssignmentException
      * @throws InvalidArgumentException
      */
-    public function update(Request $request,  Topic $topic)
+    public function update(Request $request, Site $site, Topic $topic)
     {
+        $this->authorize('update', $topic);
         $topic->fill($request->input())->save();
         $topic->tags()->sync($request->input('tags'));
         return $this->message('贴子发表成功', $topic);
@@ -105,8 +108,9 @@ class TopicController extends Controller
      * @throws Exception
      * @throws BindingResolutionException
      */
-    public function destroy(Request $request, Topic $topic)
+    public function destroy(Request $request, Site $site, Topic $topic)
     {
+        $this->authorize('delete', $topic);
         DB::beginTransaction();
         $topic->delete();
         DB::commit();
@@ -119,7 +123,7 @@ class TopicController extends Controller
      * @return string[]
      * @throws InvalidArgumentException
      */
-    public function recommend(Topic $topic)
+    public function recommend(Site $site, Topic $topic)
     {
         $this->authorize('recommend', $topic);
         $topic->recommend = !$topic->recommend;
