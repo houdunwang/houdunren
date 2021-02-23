@@ -17,6 +17,7 @@ router.beforeEach(async (to, from, next) => {
     store.commit('errors')
     //用户经常被用到，所以登录用户在这里获取资料
     if (isLogin) await Promise.all([store.dispatch('user')])
+    // await Promise.all([store.dispatch('site'), store.dispatch('module')])
     //匹配的路由列表中是否有需要验证的
     if (to.matched.some(route => route.meta.auth)) {
         window.sessionStorage.setItem('redirect_url', to.fullPath)

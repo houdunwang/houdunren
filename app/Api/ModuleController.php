@@ -21,7 +21,17 @@ class ModuleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
+        $this->middleware(['auth:sanctum'])->except(['current']);
+        $this->middleware(['module'])->only('current');
+    }
+
+    /**
+     * 当前模块
+     * @return ModuleResource
+     */
+    public function current()
+    {
+        return new ModuleResource(module());
     }
 
     /**

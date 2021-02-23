@@ -52,6 +52,7 @@ Route::apiResource('package', PackageController::class);
 //会员组
 Route::apiResource('group', GroupController::class);
 //模块
+Route::get('module/current', [ModuleController::class, 'current']);
 Route::get('module/site/{site}', [ModuleController::class, 'site']);
 Route::get('module/site/{site}/user', [ModuleController::class, 'userSiteModule']);
 Route::get('module/user', [ModuleController::class, 'user']);
