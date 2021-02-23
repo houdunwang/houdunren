@@ -17,7 +17,6 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware(['auth:sanctum', 'site']);
-        $this->authorizeResource(Site::class, 'site');
     }
 
     /**
@@ -38,6 +37,7 @@ class AdminController extends Controller
      */
     public function update(Site $site, User $admin)
     {
+        $this->authorize('update', $site);
         $admin->adminSites()->syncWithoutDetaching([$site->id]);
         return $this->message('站点管理员设置成功');
     }
@@ -50,6 +50,7 @@ class AdminController extends Controller
      */
     public function destroy(Site $site, User $admin)
     {
+        $this->authorize('update', $site);
         //移除管理员
         $admin->adminSites()->detach([$site->id]);
         //移除角色

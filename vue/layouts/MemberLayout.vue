@@ -62,6 +62,11 @@ export default {
         }
     },
     async created() {
+        await this.$store.dispatch('site').finally(_ => {
+            if (!this.$store.state.site.id) {
+                this.$router.push({ name: 'errors.notfound' })
+            }
+        })
         this.modules = await axios.get(`module/site/${this.site.id}`)
     }
 }

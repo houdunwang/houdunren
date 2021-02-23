@@ -3,6 +3,7 @@
 namespace App\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\WeChatResource;
 use App\Http\Requests\WeChatRequest;
 use Houdunwang\WeChat\Message;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class WeChatController extends Controller
      */
     public function index(Request $request, Site $site)
     {
-        return $site->wechats;
+        return WeChatResource::collection($site->wechats);
     }
 
     /**
@@ -42,7 +43,7 @@ class WeChatController extends Controller
      */
     public function show(Request $request, Site $site, WeChat $wechat)
     {
-        return $wechat;
+        return new WeChatResource($wechat);
     }
 
     /**
@@ -61,7 +62,7 @@ class WeChatController extends Controller
             $message->config($request->all())->token();
             $wechat->site_id = $site->id;
             $wechat->fill($request->all())->save();
-            return $this->message('公众号添加成功', $wechat);
+            return $this->message('公众号添加成功', new WeChatResource($wechat));
         } catch (Exception $e) {
             return $this->error('appid或appsecret配置错误', 403);
         }
@@ -77,7 +78,7 @@ class WeChatController extends Controller
     public function update(WeChatRequest $request, Site $site, WeChat $wechat)
     {
         $wechat->fill($request->all())->save();
-        return $this->message('公众号修改成功');
+        return $this->message('公众号修改成功', new WeChatResource($wechat));
     }
 
     /**

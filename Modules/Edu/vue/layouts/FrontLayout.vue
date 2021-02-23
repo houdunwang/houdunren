@@ -17,14 +17,16 @@ import TopMenu from './front/TopMenu'
 import HdFooter from './front/Footer'
 export default {
     components: { TopMenu, HdFooter },
-    data() {
-        return {}
-    },
-
-    created() {
-        if (this.isLogin) this.$store.dispatch('siteMessage', 1)
-    },
-    mounted() {}
+    async created() {
+        //站点
+        await this.$store.dispatch('site').finally(_ => {
+            if (!this.$store.state.site.id) {
+                // this.$router.push({ name: 'errors.notfound' })
+            }
+        })
+        //站内消息
+        if (this.isLogin) this.$store.dispatch('siteMessage')
+    }
 }
 </script>
 

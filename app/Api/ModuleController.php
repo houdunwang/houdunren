@@ -103,7 +103,7 @@ class ModuleController extends Controller
      */
     public function uninstall(Module $module)
     {
-        $this->authorize('install', $module);
+        $this->authorize('unInstall', $module);
         DB::beginTransaction();
         $this->authorize('delete', $module);
         $module->delete();

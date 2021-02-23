@@ -29,7 +29,7 @@ class ModuleConfigController extends Controller
      */
     public function show(Site $site, Module $module)
     {
-        $this->authorize('config', $module);
+        $this->authorize('update', $module);
         $config = ModuleConfig::where('site_id', $site['id'])->where('module_id', $module['id'])->first();
         return $config['config'];
     }
@@ -47,7 +47,7 @@ class ModuleConfigController extends Controller
      */
     public function update(Request $request, Site $site, Module $module)
     {
-        $this->authorize('config', $module);
+        $this->authorize('update', $module);
         $config = ModuleConfig::where('site_id', $site['id'])->where('module_id', $module['id'])->first();
         $config['config'] = $request->config;
         $config->save();

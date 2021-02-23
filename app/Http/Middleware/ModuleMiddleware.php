@@ -19,6 +19,7 @@ class ModuleMiddleware
     {
         $this->site();
         $this->module();
+
         return $next($request);
     }
 

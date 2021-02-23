@@ -2,7 +2,7 @@
     <div v-loading="loading" id="comment-list">
         <div :id="`comment-${comment.id}`" class="card shadow mb-5" v-for="comment in comments.data" :key="comment.id">
             <!-- 评论 -->
-            <div class="card-header bg-white d-flex justify-content-start p-2 md:p-8">
+            <div class="card-header bg-white d-flex justify-content-start p-2 md:p-4">
                 <img :src="comment.user.avatar" class="w-8 h-8 rounded object-cover mr-2" />
                 <div class="flex flex-col ">
                     <a href="/edu/space/18832/topic" class="flex-fill text-secondary">
@@ -16,18 +16,18 @@
                     </div>
                 </div>
             </div>
-            <div class="text-secondary p-2 md:p-8 md:mt-5 comment-content reply-container">
+            <div class="text-secondary p-2 md:p-4 comment-content reply-container">
                 <div class="markdown" v-html="comment.content" v-markdown></div>
             </div>
             <!-- 回复 -->
             <div v-if="comment.replys && comment.replys.length > 0 && comment.form.show" class="text-secondary pb-5 pl-8 reply-container">
                 <div class="border-t border-dashed border-gray-200 py-3 flex" v-for="reply in comment.replys" :key="reply.id" :id="`comment-${reply.id}`">
                     <img :src="reply.user.avatar" class="w-6 h-6 object-cover mr-2 rounded" />
-                    <div class="flex flex-col">
+                    <div class="flex flex-col flex-1">
                         <div class="bg-white d-flex justify-content-start">
                             <div class="flex-fill flex items-center">
                                 <div class="text-secondary mr-2">
-                                    <a href="/edu/space/18832/topic" class="text-sm">
+                                    <a href="" class="text-sm">
                                         {{ reply.user.name }}
                                     </a>
                                 </div>
@@ -57,8 +57,8 @@
                             </div>
                         </div>
                         <div class="pt-3 text-secondary text-sm mr-5">
-                            <a href="#" v-if="reply.parent" class="underline"> @ {{ reply.parent.user.name }} </a>
-                            <div class="markdown inline-block" v-html="reply.content" v-markdown></div>
+                            <a href="#" v-if="reply.parent" class="text-blue-900 hover:underline"> @ {{ reply.parent.user.name }} </a>
+                            <div class="markdown" v-html="reply.content" v-markdown></div>
                         </div>
                     </div>
                 </div>
@@ -158,7 +158,7 @@ export default {
     },
     methods: {
         format(comments) {
-            comments.data.forEach(m => (m.form = { reply_id: m.id, content: `@${m.user.name} `, show: true, user: m.user }))
+            comments.data.forEach(m => (m.form = { reply_id: m.id, content: ``, show: true, user: m.user }))
             this.comments = comments
         },
         async loadByComment(commentId) {
@@ -205,7 +205,15 @@ export default {
     padding: 0 !important;
     margin: 0 -1rem !important;
 }
+@media (max-width: 768px) {
+    .comment-content pre {
+        margin: 0 -0.5rem !important;
+    }
+}
 .reply-container pre {
     padding: 0 !important;
+}
+.markdown pre code.hljs {
+    word-break: break-word !important;
 }
 </style>

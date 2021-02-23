@@ -12,7 +12,7 @@
                             <div class="flex">
                                 <div class="w-full">
                                     <el-form-item label="帐号" size="normal">
-                                        <hd-validate-code v-model="form.account" placeholder="请输入手机号或邮箱" action="front/forget/code" />
+                                        <hd-validate-code v-model="form.account" placeholder="请输入手机号或邮箱" :action="`site/${site.id}/code/send`" />
                                     </el-form-item>
                                 </div>
                             </div>
@@ -62,13 +62,20 @@ export default {
     },
     data() {
         return {
-            form: { account: '', code: '', password: '', captcha: {} }
+            form: { account: '', code: '', password: '', captcha: {} },
+            site: {}
         }
+    },
+    created() {
+        axios
+            .get(`site/current`)
+            .then(site => (this.site = site))
+            .catch(_ => this.$router.push({ name: 'errors.notfound' }))
     },
     methods: {
         async onSubmit() {
             this.$store.commit('errors')
-            await this.axios.post(`front/forget`, this.form)
+            await this.axios.post(`site/${this.site.id}/forget`, this.form)
             this.$router.push(`/login`)
         }
     }

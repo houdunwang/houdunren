@@ -17,38 +17,27 @@ class ModulePolicy
 
     public function viewAny(User $user)
     {
-        return UserService::isSuperAdmin($user);
+        return true;
     }
 
     public function view(User $user, Module $module)
     {
-        return UserService::isSuperAdmin($user);
+        return true;
     }
 
     public function create(User $user)
     {
-        return UserService::isSuperAdmin($user);
+        return true;
     }
 
     public function update(User $user, Module $module)
     {
-        return UserService::isSuperAdmin($user);
+        return true;
     }
 
     public function delete(User $user, Module $module)
     {
-        return UserService::isSuperAdmin($user);
-    }
-
-    /**
-     * 扩展模块里管理模块配置
-     * @param User $user
-     * @param Module $module
-     * @return bool
-     */
-    public function config(User $user, Module $module)
-    {
-        return access();
+        return true;
     }
 
     /**

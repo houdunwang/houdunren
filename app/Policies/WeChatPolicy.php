@@ -17,12 +17,12 @@ class WeChatPolicy
 
     public function viewAny(User $user)
     {
-        return UserService::isAdmin(site(), $user);
+        return true;
     }
 
     public function view(User $user, WeChat $weChat)
     {
-        return UserService::isAdmin(site(), $user);
+        return true;
     }
 
     public function create(User $user)

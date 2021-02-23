@@ -22,7 +22,7 @@ export default {
     },
     methods: {
         async onSubmit() {
-            await axios.put(`user/mobile`, this.form)
+            await axios.put(`site/${this.site.id}/user/mobile`, this.form)
         }
     }
 }

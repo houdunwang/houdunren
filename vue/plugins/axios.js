@@ -44,11 +44,12 @@ _axios.interceptors.response.use(
                 location.href = '/login'
                 break
             default:
-                el.MessageBox.confirm(data.message, '温馨提示', {
-                    showCancelButton: false,
-                    confirmButtonText: '关闭',
-                    type: 'warning'
-                })
+                el.Message.error(data.message)
+            // el.MessageBox.confirm(data.message, '温馨提示', {
+            //     showCancelButton: false,
+            //     confirmButtonText: '关闭',
+            //     type: 'warning'
+            // })
         }
         return Promise.reject(error)
     }

@@ -22,7 +22,7 @@ class UserPolicy
 
     public function view(User $user, User $model)
     {
-        return UserService::isSuperAdmin($user) || $user['id'] == $model['id'];
+        return true;
     }
 
     public function create(User $user)

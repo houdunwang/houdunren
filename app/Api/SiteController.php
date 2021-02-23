@@ -7,8 +7,6 @@ use App\Http\Resources\SiteResource;
 use App\Http\Requests\SiteRequest;
 use Illuminate\Http\Request;
 use App\Models\Site;
-use CodeService;
-use Exception;
 use Auth;
 
 /**
@@ -19,9 +17,8 @@ class SiteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum'])->except(['show', 'current']);
-        $this->middleware(['module'])->only(['current']);
-        $this->authorizeResource(Site::class, 'site');
+        $this->middleware(['auth:sanctum'])->except(['index', 'show', 'current']);
+        $this->middleware(['module'])->only(['current', 'show']);
     }
 
     /**
@@ -30,7 +27,6 @@ class SiteController extends Controller
      */
     public function current()
     {
-        return site();
         return new SiteResource(site());
     }
 
@@ -62,6 +58,7 @@ class SiteController extends Controller
      */
     public function store(SiteRequest $request, Site $site)
     {
+        $this->authorize('update', $site);
         $site->fill($request->input());
         $site->user_id = auth()->id();
         $site->config = [];
@@ -78,6 +75,7 @@ class SiteController extends Controller
      */
     public function update(SiteRequest $request, Site $site)
     {
+        $this->authorize('update', $site);
         $site->fill($request->input());
         $site->module_id = request('module_id');
         $site->save();
@@ -91,6 +89,7 @@ class SiteController extends Controller
      */
     public function destroy(Site $site)
     {
+        $this->authorize('update', $site);
         $site->delete();
         return $this->message('删除成功');
     }

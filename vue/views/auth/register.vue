@@ -1,5 +1,5 @@
 <template>
-    <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal" label-position="top">
+    <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal" label-position="top" v-if="site.id">
         <div class="min-w-screen min-h-screen bg-gray-900 flex items-center justify-center px-5 py-5 auth">
             <div class="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden" style="max-width:1000px">
                 <div class="md:flex w-full">
@@ -18,7 +18,7 @@
                                             type="mobile"
                                             :timeout="3"
                                             placeholder="请输入手机号"
-                                            action="front/register/code"
+                                            :action="`site/${site.id}/code/mobile/noexist`"
                                         />
                                     </el-form-item>
                                 </div>
@@ -69,13 +69,20 @@ export default {
     },
     data() {
         return {
-            form: { account: '', code: '', password: '', password_confirmation: '', captcha: {} }
+            form: { account: '', code: '', password: '', password_confirmation: '', captcha: {} },
+            site: {}
         }
+    },
+    async created() {
+        axios
+            .get(`site/current`)
+            .then(site => (this.site = site))
+            .catch(_ => this.$router.push({ name: 'errors.notfound' }))
     },
     methods: {
         async onSubmit() {
             this.$store.commit('errors')
-            await this.axios.post(`front/register`, this.form)
+            await this.axios.post(`site/${this.site.id}/register`, this.form)
             this.$router.push({ name: 'auth.login' })
         }
     }

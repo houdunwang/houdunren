@@ -3,6 +3,7 @@
 namespace App\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\WeChatResource;
 use App\Models\WeChat;
 use Illuminate\Http\Request;
 use App\Models\Site;
@@ -33,7 +34,7 @@ class WechatMenuController extends Controller
         $this->authorize('update', $wechat);
         $wechat->menus = $request->input('menus');
         $wechat->save();
-        return $this->message('菜单保存成功');
+        return $this->message('菜单保存成功', new WeChatResource($wechat));
     }
 
     /**

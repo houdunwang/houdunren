@@ -37,8 +37,8 @@ class SystemConfigController extends Controller
      */
     public function update(Request $request)
     {
+        $this->authorize('update', SystemConfig::class);
         $systemConfig = SystemConfig::find(1);
-        $this->authorize('update', $systemConfig);
         $systemConfig['config'] = $request->input();
         $systemConfig->save();
         return $this->message('系统配置修改成功', $systemConfig);

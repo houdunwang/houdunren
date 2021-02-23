@@ -5,6 +5,9 @@ const mixin = {
         user() {
             return store.state.user
         },
+        module() {
+            return store.state.module
+        },
         isLogin() {
             return this.user.id
         }

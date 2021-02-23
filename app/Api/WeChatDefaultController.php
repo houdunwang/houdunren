@@ -3,6 +3,7 @@
 namespace App\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\WeChatResource;
 use App\Models\Site;
 use App\Models\WeChat;
 use Illuminate\Http\Request;
@@ -34,6 +35,6 @@ class WeChatDefaultController extends Controller
         ]);
 
         $wechat->fill($request->all())->save();
-        return $this->message('默认回复设置成功');
+        return $this->message('默认回复设置成功', new WeChatResource($wechat));
     }
 }

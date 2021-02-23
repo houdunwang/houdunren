@@ -8,6 +8,7 @@ use CodeService;
 use Auth;
 use Exception;
 use Illuminate\Validation\Rule;
+use UserService;
 
 /**
  * 发送验证码
@@ -19,6 +20,32 @@ class CodeController extends Controller
     {
         $this->middleware(['auth:sanctum'])->only(['mobile', 'email']);
         $this->middleware(['site']);
+    }
+
+    /**
+     * 自动识别帐号类型发送验证码
+     * @param Request $request
+     * @return void
+     */
+    public function send(Request $request)
+    {
+        $type = UserService::account($request->account);
+        $request->validate(
+            [
+                'captcha.content' => ['sometimes', 'required', 'captcha_api:' . request('captcha.key') . ',default']
+            ],
+            [
+                'captcha.content.required' => '验证码不能为空',
+                'captcha.content.captcha_api' => '验证码输入错误'
+            ]
+        );
+        try {
+
+            CodeService::$type($request->account);
+            return $this->message('验证码发送成功');
+        } catch (Exception $e) {
+            return $this->error('短信发送失败，请检查手机号或联系站长', 500);
+        }
     }
 
     /**

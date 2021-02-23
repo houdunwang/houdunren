@@ -12,7 +12,7 @@ const mixin = {
             return store.state.site
         },
         isLogin() {
-            return this.user.id
+            return window.localStorage.getItem('token')
         }
     },
     methods: {

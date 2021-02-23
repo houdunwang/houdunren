@@ -5,8 +5,8 @@ export default new Vuex.Store({
     state: {
         errors: {},
         user: {},
-        site: window.site,
-        module: window.module,
+        site: {},
+        module: {},
         //站内消息
         siteMessage: {}
     },
@@ -22,6 +22,12 @@ export default new Vuex.Store({
         user(state, user) {
             state.user = user
         },
+        site(state, site) {
+            state.site = site
+        },
+        module(state, site) {
+            state.site = site
+        },
         siteMessage(state, siteMessage) {
             state.siteMessage = siteMessage
         }
@@ -29,6 +35,12 @@ export default new Vuex.Store({
     actions: {
         async user({ commit }) {
             commit('user', await axios.get(`/api/user/info`))
+        },
+        async site({ commit }) {
+            commit('site', await axios.get(`/api/site/current`))
+        },
+        async module({ commit }) {
+            commit('site', await axios.get(`/api/site/current`))
         },
         //获取站内消息
         async siteMessage({ commit }, page = 1) {

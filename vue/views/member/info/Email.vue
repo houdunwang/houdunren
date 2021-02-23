@@ -22,7 +22,7 @@ export default {
     },
     methods: {
         async onSubmit() {
-            await this.axios.put(`user/email`, this.form)
+            await this.axios.put(`site/${this.site.id}/user/email`, this.form)
         }
     }
 }

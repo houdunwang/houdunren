@@ -34,11 +34,11 @@ export default new Vuex.Store({
         async user({ commit }) {
             commit('user', await axios.get(`user/info`))
         },
-        async systemConfig({ commit }) {
-            commit('systemConfig', await axios.get(`system/config`))
-        },
         async site({ commit }) {
             commit('site', await axios.get(`site/current`))
+        },
+        async systemConfig({ commit }) {
+            commit('systemConfig', await axios.get(`system/config`))
         }
     }
 })
