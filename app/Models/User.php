@@ -26,6 +26,7 @@ class User extends Authenticatable
 
     protected $hidden = [
         'password',
+        'wechat',
         'mobile',
         'email',
         'remember_token',

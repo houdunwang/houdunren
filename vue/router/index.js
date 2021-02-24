@@ -9,16 +9,16 @@ const router = new VueRouter({
     mode: 'history'
 })
 
-const isLogin = window.localStorage.getItem('token')
+const isLogin = window.user.id
 router.beforeEach(async (to, from, next) => {
     store.commit('errors')
     //用户经常被用到，所以登录用户在这里获取资料
-    if (isLogin) await Promise.all([store.dispatch('user'), store.dispatch('systemConfig')])
+    // if (isLogin) await Promise.all([store.dispatch('user'), store.dispatch('systemConfig')])
     //匹配的路由列表中是否有需要验证的
     if (to.matched.some(route => route.meta.auth)) {
         isLogin ? next() : (location.href = '/login')
     } else if (to.matched.some(route => route.meta.guest)) {
-        //页面只能为游客访问时
+        //页面只能为游客访问时s
         isLogin ? (location.href = '/') : next()
     } else {
         next()

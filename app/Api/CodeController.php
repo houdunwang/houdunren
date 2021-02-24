@@ -3,6 +3,7 @@
 namespace App\Api;
 
 use App\Http\Controllers\Controller;
+use App\Rules\AccountRule;
 use Illuminate\Http\Request;
 use CodeService;
 use Auth;
@@ -49,6 +50,56 @@ class CodeController extends Controller
     }
 
     /**
+     * 发送数据库存在的帐号
+     * @param Request $request
+     * @return void
+     */
+    public function exist(Request $request)
+    {
+        $type = UserService::account($request->account);
+        $request->validate(
+            [
+                'account' => ['required', new AccountRule(request('account')), Rule::exists('users', $type)],
+                'captcha.content' => ['sometimes', 'required', 'captcha_api:' . request('captcha.key') . ',default']
+            ],
+            [
+                'account.required' => '帐号不能为空',
+                'account.regex' => '帐号格式错误',
+                'account.unique' => '帐号已经绑定',
+                'captcha.content.required' => '验证码不能为空',
+                'captcha.content.captcha_api' => '验证码输入错误'
+            ]
+        );
+        CodeService::$type(request('account'));
+        return $this->message('验证码发送成功');
+    }
+
+    /**
+     * 发送数据库不存在的帐号
+     * @param Request $request
+     * @return void
+     */
+    public function noExist(Request $request)
+    {
+        $type = UserService::account($request->account);
+        $request->validate(
+            [
+                'account' => ['required', new AccountRule(request('account')), Rule::unique('users', $type)],
+                'captcha.content' => ['sometimes', 'required', 'captcha_api:' . request('captcha.key') . ',default']
+            ],
+            [
+                'account.required' => '帐号不能为空',
+                'account.regex' => '帐号格式错误',
+                'account.unique' => '帐号已经绑定',
+                'captcha.content.required' => '验证码不能为空',
+                'captcha.content.captcha_api' => '验证码输入错误'
+            ]
+        );
+        CodeService::$type(request('account'));
+        return $this->message('验证码发送成功');
+    }
+
+    /**
      * 当前用户手机验证码
      * @param Request $request
      * @return void
@@ -56,13 +107,8 @@ class CodeController extends Controller
     public function mobile(Request $request)
     {
         $request->validate(
-            [
-                'captcha.content' => ['sometimes', 'required', 'captcha_api:' . request('captcha.key') . ',default']
-            ],
-            [
-                'captcha.content.required' => '验证码不能为空',
-                'captcha.content.captcha_api' => '验证码输入错误'
-            ]
+            ['captcha.content' => ['sometimes', 'required', 'captcha_api:' . request('captcha.key') . ',default']],
+            ['captcha.content.required' => '验证码不能为空', 'captcha.content.captcha_api' => '验证码输入错误']
         );
         try {
             CodeService::mobile(Auth::user()->mobile);

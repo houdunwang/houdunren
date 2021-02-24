@@ -25,6 +25,7 @@ const fields = [
 ]
 export default {
     route: { path: '/member', meta: { keepAlive: true } },
+    inject: ['site'],
     data() {
         return {
             form: this.$store.state.user,

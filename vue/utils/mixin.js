@@ -5,11 +5,8 @@ const mixin = {
         user() {
             return store.state.user
         },
-        module() {
-            return store.state.module
-        },
         isLogin() {
-            return this.user.id
+            return window.user.id
         }
     },
     methods: {
@@ -20,9 +17,7 @@ const mixin = {
             return store.getters.errors(name)
         },
         async logout() {
-            await this.axios.get(`logout`)
-            window.localStorage.removeItem('token')
-            location.href = '/'
+            location.href = '/logout'
         }
     }
 }

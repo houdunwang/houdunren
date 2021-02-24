@@ -2,17 +2,17 @@ import store from '../store'
 import router from '../router'
 const mixin = {
     computed: {
-        user() {
-            return store.state.user
+        site() {
+            return store.state.site
         },
         module() {
             return store.state.module
         },
-        site() {
-            return store.state.site
+        user() {
+            return store.state.user
         },
         isLogin() {
-            return window.localStorage.getItem('token')
+            return store.state.user.id
         }
     },
     methods: {
@@ -22,6 +22,7 @@ const mixin = {
         errors(name) {
             return store.getters.errors(name)
         },
+        //滚动到元素位置
         scrollTo(el) {
             setTimeout(() => {
                 const element = document.querySelector(el)
@@ -32,9 +33,9 @@ const mixin = {
             })
         },
         async logout() {
-            await axios.get(`/api/logout`)
-            window.localStorage.removeItem('token')
-            location.href = '/'
+            // await axios.get(`/api/logout`)
+            // window.localStorage.removeItem('token')
+            location.href = '/logout'
         }
     }
 }

@@ -12,7 +12,7 @@
                             <div class="flex">
                                 <div class="w-full">
                                     <el-form-item label="帐号" size="normal">
-                                        <hd-validate-code v-model="form.account" placeholder="请输入手机号或邮箱" :action="`site/${site.id}/code/send`" />
+                                        <hd-validate-code v-model="form.account" placeholder="请输入手机号或邮箱" :action="`site/${site.id}/code/exist`" />
                                     </el-form-item>
                                 </div>
                             </div>
@@ -55,6 +55,7 @@
 
 <script>
 import HdFooter from './Footer'
+import { mapState } from 'vuex'
 export default {
     route: { path: '/forget' },
     components: {
@@ -62,15 +63,11 @@ export default {
     },
     data() {
         return {
-            form: { account: '', code: '', password: '', captcha: {} },
-            site: {}
+            form: { account: '', code: '', password: '', captcha: {} }
         }
     },
-    created() {
-        axios
-            .get(`site/current`)
-            .then(site => (this.site = site))
-            .catch(_ => this.$router.push({ name: 'errors.notfound' }))
+    computed: {
+        ...mapState(['site'])
     },
     methods: {
         async onSubmit() {

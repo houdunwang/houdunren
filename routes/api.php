@@ -38,6 +38,8 @@ Route::put('user/password', [UserController::class, 'password']);
 Route::apiResource('user', UserController::class);
 //验证码
 Route::post('site/{site}/code/send', [CodeController::class, 'send']);
+Route::post('site/{site}/code/exist', [CodeController::class, 'exist']);
+Route::post('site/{site}/code/noexist', [CodeController::class, 'noExist']);
 Route::post('site/{site}/code/mobile', [CodeController::class, 'mobile']);
 Route::post('site/{site}/code/mobile/exist', [CodeController::class, 'existMobile']);
 Route::post('site/{site}/code/mobile/noexist', [CodeController::class, 'noExistMobile']);

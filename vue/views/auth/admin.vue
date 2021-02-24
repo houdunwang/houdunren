@@ -69,7 +69,7 @@ export default {
             this.axios
                 .post(`login`, this.form)
                 .then(({ token }) => {
-                    window.localStorage.setItem('token', token)
+                    // window.localStorage.setItem('token', token)
                     location.href = '/admin'
                 })
                 .finally(() => {

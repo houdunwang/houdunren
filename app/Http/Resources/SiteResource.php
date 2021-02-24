@@ -14,15 +14,7 @@ class SiteResource extends JsonResource
 {
     public function toArray($request)
     {
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'domain' => $this->domain,
-            'user_id' => $this->user_id,
-            'module_id' => $this->module_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'permissions' => $this->permissions,
+        return parent::toArray($request) + [
             'config' => $this->when($this->isMaster(), $this->config),
             'master' => new UserResource($this->whenLoaded('master')),
         ];

@@ -1,6 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+Route::get('a', function () {
+    dd(\Auth::user());
+});
+//退出登录
+Route::get('logout', function () {
+    Auth::logout();
+    return redirect('/');
+});
 
 //网站主页
 Route::get('/', function () {
@@ -8,10 +18,6 @@ Route::get('/', function () {
     $class  = "Modules\\{$name}\Http\Controllers\HomeController";
     return app($class)->index();
 })->middleware(['module']);
-
-Route::get('member/{path?}', function () {
-    return view('app');
-})->where('path', '(.*)')->middleware(['module']);
 
 //后备路由
 Route::fallback(function () {

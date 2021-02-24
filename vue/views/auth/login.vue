@@ -65,7 +65,7 @@ export default {
             this.axios
                 .post(`login`, this.form)
                 .then(({ token }) => {
-                    window.localStorage.setItem('token', token)
+                    // window.localStorage.setItem('token', token)
                     const redirectUrl = window.sessionStorage.getItem('redirect_url')
                     location.href = redirectUrl || '/'
                 })

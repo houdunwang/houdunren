@@ -54,6 +54,7 @@
     </div>
 </template>
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
     route: { meta: { auth: true } },
     data() {
@@ -61,12 +62,16 @@ export default {
             modules: []
         }
     },
-    async created() {
-        await this.$store.dispatch('site').finally(_ => {
-            if (!this.$store.state.site.id) {
-                this.$router.push({ name: 'errors.notfound' })
-            }
+    computed: {
+        ...mapState(['site'])
+    },
+    methods: {
+        ...mapActions({
+            getSite: 'site'
         })
+    },
+    async created() {
+        await this.getSite()
         this.modules = await axios.get(`module/site/${this.site.id}`)
     }
 }

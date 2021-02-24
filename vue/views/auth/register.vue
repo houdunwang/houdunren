@@ -62,6 +62,7 @@
 
 <script>
 import HdFooter from './Footer'
+import { mapState } from 'vuex'
 export default {
     route: { path: '/register', meta: { guest: true } },
     components: {
@@ -69,15 +70,11 @@ export default {
     },
     data() {
         return {
-            form: { account: '', code: '', password: '', password_confirmation: '', captcha: {} },
-            site: {}
+            form: { account: '', code: '', password: '', password_confirmation: '', captcha: {} }
         }
     },
-    async created() {
-        axios
-            .get(`site/current`)
-            .then(site => (this.site = site))
-            .catch(_ => this.$router.push({ name: 'errors.notfound' }))
+    computed: {
+        ...mapState(['site'])
     },
     methods: {
         async onSubmit() {

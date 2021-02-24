@@ -17,7 +17,7 @@ class SiteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum'])->except(['index', 'show', 'current']);
+        $this->middleware(['auth:sanctum'])->except(['show', 'current']);
         $this->middleware(['module'])->only(['current', 'show']);
     }
 
@@ -27,7 +27,9 @@ class SiteController extends Controller
      */
     public function current()
     {
-        return new SiteResource(site());
+        $site = site()->toArray();
+        $site['config'] = ['abc'];
+        return $site;
     }
 
     /**
@@ -36,7 +38,8 @@ class SiteController extends Controller
      */
     public function index()
     {
-        $sites = Auth::user()->sites->load(['master.group.packages.modules']);
+        $sites = Auth::user()->sites->load('master.group.packages.modules');
+        // return $sites;
         return SiteResource::collection($sites);
     }
 

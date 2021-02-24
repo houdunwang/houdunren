@@ -13,12 +13,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
     route: { meta: { keepAlive: true } },
     data() {
         return {
             form: { account: '', code: '' }
         }
+    },
+    computed: {
+        ...mapState(['site'])
     },
     methods: {
         async onSubmit() {
