@@ -21,7 +21,7 @@ export default {
     },
     async created() {
         this.loading = true
-        this.duration = await axios.get(`member/duration`)
+        this.duration = await axios.get(`user/duration`)
         this.loading = false
     }
 }

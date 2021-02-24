@@ -14,6 +14,6 @@ Route::group(['prefix' => 'Edu'], function () {
     Route::get('pay/subscribe/{subscribe}', [PayController::class, 'subscribe'])->middleware(['auth:sanctum', 'module']);
 });
 
-Route::any('Edu/site/{site}/{path?}', function () {
+Route::any('Edu/{path?}', function () {
     return view('edu::app');
 })->where('path', '.*')->middleware(['module']);

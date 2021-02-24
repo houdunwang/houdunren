@@ -25,8 +25,8 @@ class VideoResource extends JsonResource
             'comment_count' => $this->comment_count,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'external_address' => $this->external_address,
             'path' => $this->when($this->permissions['show'], $this->path),
-            'external_address' => $this->when($this->permissions['show'], $this->external_address),
             'lesson' => new LessonResource($this->whenLoaded('lesson'))
         ];
     }

@@ -3,7 +3,7 @@
         <hd-skeleton-list v-if="loading" :num="15" />
         <div class="card" v-else>
             <div class="card-header">
-                <h3 class="card-title">学习历史</h3>
+                <h3 class="card-title">贴子列表</h3>
             </div>
             <div class="list-group list-group-flush">
                 <div class="list-group-item" v-for="topic in topics.data" :key="topic.id">
@@ -60,13 +60,13 @@ export default {
     methods: {
         async load(page = 1) {
             this.loading = true
-            this.topics = await this.axios.get(`member/topic?page=${page}`)
+            this.topics = await this.axios.get(`user/topic?page=${page}`)
             this.loading = false
             document.documentElement.scroll({ top: 0, behavior: 'smooth' })
         },
         async del(topic) {
             this.$confirm('确定删除吗?', '温馨提示').then(async _ => {
-                await axios.delete(`front/topic/${topic.id}`)
+                await axios.delete(`topic/${topic.id}`)
                 this.topics.data.splice(this.topics.data.indexOf(topic), 1)
             })
         }

@@ -5,6 +5,7 @@ namespace Modules\Edu\Entities;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Edu\Entities\Tag;
+use Auth;
 
 /**
  * 课程
@@ -22,6 +23,20 @@ class Lesson extends BaseModel
     protected $casts = [
         'status' => 'boolean',
     ];
+
+    /**
+     * 模型权限
+     * @return void
+     */
+    public function getPermissionsAttribute()
+    {
+        return [
+            'view' => Auth::check() && Auth::user()->can('view', $this),
+            'update' => Auth::check() && Auth::user()->can('update', $this),
+            'delete' => Auth::check() && Auth::user()->can('delete', $this),
+            'play' => Auth::check() && Auth::user()->can('play', $this)
+        ];
+    }
 
     /**
      * 标签关联

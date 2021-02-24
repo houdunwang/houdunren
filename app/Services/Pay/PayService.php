@@ -2,16 +2,11 @@
 
 namespace App\Services\Pay;
 
-use App\Exceptions\InvalidRequestException;
-use App\Models\Pay as ModelsPay;
-use Yansongda\Pay\Pay;
-use Yansongda\Pay\Log;
-use Auth;
 use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Database\Eloquent\InvalidCastException;
-use LogicException;
 use Yansongda\Pay\Gateways\Alipay;
 use Yansongda\Pay\Gateways\Wechat;
+use Yansongda\Pay\Pay;
+use Auth;
 
 /**
  * 在线支付
@@ -27,6 +22,7 @@ class PayService
     {
         return 'U' . Auth::id() . '-' . date('Ymdhis');
     }
+
     /**
      * 支付宝
      * @param array $config ['return_url'=>'同步通知地址','notify_url'=>'异步通知地址']:

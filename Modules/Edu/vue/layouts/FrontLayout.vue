@@ -19,7 +19,9 @@ export default {
     components: { TopMenu, HdFooter },
     async created() {
         //站内消息
-        if (this.isLogin) this.$store.dispatch('siteMessage')
+        if (this.isLogin) {
+            this.$store.dispatch('siteMessage')
+        }
     }
 }
 </script>

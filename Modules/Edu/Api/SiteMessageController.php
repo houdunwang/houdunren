@@ -2,11 +2,11 @@
 
 namespace Modules\Edu\Api;
 
-use App\Http\Controllers\Controller;
-use Auth;
 use Modules\Edu\Transformers\SiteMessageResource;
-use DB;
+use App\Http\Controllers\Controller;
 use App\Models\Site;
+use Auth;
+use DB;
 
 /**
  * 站内消息

@@ -56,7 +56,7 @@ export default {
     methods: {
         async load(page = 1) {
             this.loading = true
-            this.orders = await this.axios.get(`member/order?page=${page}`)
+            this.orders = await this.axios.get(`user/order?page=${page}`)
             this.loading = false
             document.documentElement.scroll({ top: 0, behavior: 'smooth' })
         }

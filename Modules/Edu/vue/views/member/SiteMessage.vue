@@ -6,19 +6,24 @@
                 <h3 class="card-title">站内消息</h3>
             </div>
             <div class="card-body pt-0" v-loading="loading">
-                <div v-if="messages.data">
-                    <div v-for="message in messages.data" :key="message.id" class="border-b border-gray-200 py-3">
-                        <component :is="`Message${message.data.model}`" :message="message"></component>
+                <div v-if="siteMessage.data && siteMessage.data.length > 0">
+                    <div v-for="message in siteMessage.data" :key="message.id" class="border-b border-gray-200 py-3">
+                        <component :is="`SiteMessage${message.data.model}`" :message="message"></component>
+                    </div>
+                </div>
+                <div v-else>
+                    <div class="flex justify-center items-center py-5 text-gray-600 text-sm">
+                        暂无消息
                     </div>
                 </div>
             </div>
             <div class="card-footer">
                 <el-pagination
-                    v-if="messages.meta"
-                    :current-page="messages.meta.current_page"
+                    v-if="siteMessage.meta"
+                    :current-page="siteMessage.meta.current_page"
                     :hide-on-single-page="true"
                     :page-size="15"
-                    :total="messages.meta.total"
+                    :total="siteMessage.meta.total"
                     @current-change="load"
                     background
                 >
@@ -39,12 +44,12 @@ export default {
         }
     },
     computed: {
-        ...mapState(['messages'])
+        ...mapState(['siteMessage'])
     },
     methods: {
         load() {
             this.loading = true
-            this.$store.dispatch('message')
+            this.$store.dispatch('siteMessage')
             this.loading = false
         }
     }

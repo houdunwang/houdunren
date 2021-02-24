@@ -6,17 +6,13 @@
                 <h3 class="card-title">学习历史</h3>
             </div>
             <div class="list-group list-group-flush">
-                <div class="list-group-item" v-for="item in lists.data" :key="item.id">
+                <div class="list-group-item" v-for="video in videos.data" :key="video.id">
                     <div class="row align-items-center">
                         <div class="col text-truncate flex justify-between items-center">
-                            <router-link
-                                :to="{ name: 'front.video.show', params: { id: item.video.id } }"
-                                target="_blank"
-                                class="text-body d-block text-gray-700"
-                            >
-                                {{ item.video['title'] | titleSubstr }}
+                            <router-link :to="{ name: 'front.video.show', params: { id: video.id } }" target="_blank" class="text-body d-block text-gray-700">
+                                {{ video.title | titleSubstr }}
                             </router-link>
-                            <small class="d-block text-muted text-truncate mt-n1 text-sm"> {{ item.created_at | fromNow }} </small>
+                            <small class="d-block text-muted text-truncate mt-n1 text-sm"> {{ video.created_at | fromNow }} </small>
                         </div>
                     </div>
                 </div>
@@ -25,10 +21,10 @@
                 <el-pagination
                     :small="true"
                     :page-size="15"
-                    :current-page="lists.meta.current_page"
-                    v-if="lists.meta"
+                    :current-page="videos.meta.current_page"
+                    v-if="videos.meta"
                     @current-change="load"
-                    :total="lists.meta.total"
+                    :total="videos.meta.total"
                     :hide-on-single-page="true"
                     background
                     layout="prev, pager, next"
@@ -45,7 +41,7 @@ export default {
     data() {
         return {
             loading: true,
-            lists: []
+            videos: { data: [], meta: {} }
         }
     },
     async created() {
@@ -54,7 +50,7 @@ export default {
     methods: {
         async load(page = 1) {
             this.loading = true
-            this.lists = await this.axios.get(`member/video?page=${page}`)
+            this.videos = await this.axios.get(`user/video?page=${page}`)
             this.loading = false
             document.documentElement.scroll({ top: 0, behavior: 'smooth' })
         }

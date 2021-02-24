@@ -24,8 +24,6 @@ class LessonResource extends JsonResource
             'comment_count' => $this->comment_count,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'path' => $this->when(false, $this->path),
-            'tags' => $this->whenLoaded('tags'),
             'status' => $this->status,
             'is_commend' => $this->is_commend,
             'created_at' => $this->created_at,
@@ -35,6 +33,8 @@ class LessonResource extends JsonResource
             'comment_num' => $this->comment_num,
             'description' => $this->description,
             'user' => $this->whenLoaded('user'),
+            'tags' => $this->whenLoaded('tags'),
+            'path' => $this->when($this->permissions['play'], $this->path),
             'videos' => VideoResource::collection($this->whenLoaded('videos')),
         ];
     }

@@ -32,10 +32,8 @@ export default {
         },
         async del() {
             await axios.delete(`message/${this.message.id}`)
-            this.$confirm('确定删除吗？', '温馨提示').then(_ => {
-                this.$message('消息已经删除')
-                this.$store.dispatch('message')
-            })
+            this.$store.dispatch('siteMessage')
+            this.$message('消息已经删除')
         }
     }
 }

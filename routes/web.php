@@ -3,9 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('a', function () {
-    dd(\Auth::user());
-});
 //退出登录
 Route::get('logout', function () {
     Auth::logout();

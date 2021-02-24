@@ -21,10 +21,6 @@ use Modules\Edu\Entities\Duration;
  */
 class PayController extends Controller
 {
-    public function __construct()
-    {
-    }
-
     /**
      * 会员套餐订阅
      * @param Subscribe $subscribe
@@ -70,7 +66,7 @@ class PayController extends Controller
     {
         $data = PayService::alipay($this->url())->verify();
         $this->dealOrder($data['out_trade_no']);
-        return redirect('/Edu/member/order');
+        return redirect('/Edu/site/' . SID . '/member/order');
     }
 
     /**

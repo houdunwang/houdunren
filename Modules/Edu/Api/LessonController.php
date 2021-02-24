@@ -4,14 +4,14 @@ namespace Modules\Edu\Api;
 
 use Modules\Edu\Http\Requests\LessonRequest;
 use Modules\Edu\Transformers\LessonResource;
+use App\Http\Controllers\Controller;
 use Modules\Edu\Entities\Lesson;
 use Modules\Edu\Entities\Video;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\Site;
-use Auth;
 use ActivityService;
-use App\Http\Controllers\Controller;
+use Auth;
 use DB;
 
 /**

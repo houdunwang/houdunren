@@ -49,7 +49,7 @@ export default {
         }
     },
     created() {
-        this.$store.dispatch('message', 1)
+        this.$store.dispatch('siteMessage', 1)
     }
 }
 </script>

@@ -12,9 +12,8 @@ use Modules\Edu\Api\VideoController;
 use Modules\Edu\Api\SignController;
 use Modules\Edu\Api\ActivityController;
 use Modules\Edu\Api\CommentController;
-use Modules\Edu\Api\MemberController;
 use Modules\Edu\Api\SiteMessageController;
-use Modules\Edu\Api\UserVideoController;
+use Modules\Edu\Api\UserController;
 
 Route::group(['prefix' => 'Edu/site/{site}', 'middleware' => ['module']], function () {
     //配置
@@ -51,30 +50,9 @@ Route::group(['prefix' => 'Edu/site/{site}', 'middleware' => ['module']], functi
     Route::apiResource('activity', ActivityController::class);
     //站内消息
     Route::apiResource('message', SiteMessageController::class);
-});
-
-Route::group(['prefix' => 'Edu/front', 'middleware' => ['front']], function () {
-    //标签
-    // Route::get('tag', [TagController::class, 'index']);
-    //系统课程
-    // Route::apiResource('system', SystemController::class);
-    //课程
-    // Route::get('lesson/search', [LessonController::class, 'search']);
-    // Route::apiResource('lesson', LessonController::class);
-
-
     //用户视频
-    Route::apiResource('user/video', UserVideoController::class);
-    //套餐
-    // Route::apiResource('subscribe', SubscribeController::class)->only(['index']);
-});
-
-Route::group(['prefix' => 'Edu/member', 'middleware' => ['auth:sanctum', 'front']], function () {
-    Route::get("order", [MemberController::class, 'order']);
-    Route::get("duration", [MemberController::class, 'duration']);
-});
-
-Route::group(['prefix' => 'Edu/space', 'middleware' => ['front']], function () {
-    Route::get("video/{user}", [MemberController::class, 'video']);
-    Route::get("topic/{user}", [MemberController::class, 'lists']);
+    Route::get('user/video', [UserController::class, 'video']);
+    Route::get('user/topic', [UserController::class, 'topic']);
+    Route::get('user/order', [UserController::class, 'order']);
+    Route::get('user/duration', [UserController::class, 'duration']);
 });

@@ -26,14 +26,26 @@ class User extends Model
         return self::find($user['id']);
     }
 
+    /**
+     * 订单
+     * @return mixed
+     * @throws InvalidCastException
+     * @throws LogicException
+     */
     public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class)->where('site_id', site()['id']);
     }
 
+    /**
+     * 贴子
+     * @return mixed
+     * @throws InvalidCastException
+     * @throws LogicException
+     */
     public function topics()
     {
-        return $this->hasMany(Topic::class);
+        return $this->hasMany(Topic::class)->where('site_id', site()['id']);
     }
 
     /**
@@ -46,5 +58,16 @@ class User extends Model
             ->orderBy('edu_user_video.created_at', 'desc')
             ->withPivot(['created_at', 'updated_at'])
             ->withTimestamps();
+    }
+
+    /**
+     * 会员周期
+     * @return mixed
+     * @throws InvalidCastException
+     * @throws LogicException
+     */
+    public function duration()
+    {
+        return $this->hasOne(Duration::class)->where('site_id', site()['id']);
     }
 }
