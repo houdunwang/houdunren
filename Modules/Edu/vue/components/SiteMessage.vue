@@ -37,13 +37,30 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
     data() {
         return {}
     },
     computed: {
         ...mapState(['siteMessage'])
+    },
+    methods: {
+        ...mapActions({
+            loadSiteMessage: 'siteMessage'
+        })
+    },
+    async created() {
+        this.loadSiteMessage()
+        //站内消息
+        if (this.isLogin) {
+            const intervalId = setInterval(() => {
+                this.loadSiteMessage()
+            }, 10000)
+            this.$once('hook:beforeDestroy', () => {
+                clearInterval(intervalId)
+            })
+        }
     }
 }
 </script>

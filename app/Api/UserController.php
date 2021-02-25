@@ -24,7 +24,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
+        $this->middleware(['auth:sanctum'])->except(['show']);
         $this->authorizeResource(User::class, 'user');
     }
 
@@ -48,6 +48,16 @@ class UserController extends Controller
     }
 
     /**
+     * 获取用户资料
+     * @param User $user
+     * @return void
+     */
+    public function show(Site $site, User $user)
+    {
+        return new UserResource($user);
+    }
+
+    /**
      * 搜索用户
      * @return AnonymousResourceCollection
      * @throws BindingResolutionException
@@ -63,16 +73,7 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
-    /**
-     * 获取用户资料
-     * @param User $user
-     * @return void
-     */
-    public function show(Site $site, User $user)
-    {
-        $this->authorize('view', $user);
-        return new UserResource($user);
-    }
+
 
     /**
      * 更新资料

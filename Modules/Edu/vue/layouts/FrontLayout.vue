@@ -2,10 +2,11 @@
     <div class="page">
         <top-menu />
 
-        <keep-alive>
+        <!-- <keep-alive>
             <router-view v-if="$route.meta.keepAlive"></router-view>
         </keep-alive>
-        <router-view v-if="!$route.meta.keepAlive"></router-view>
+        <router-view v-if="!$route.meta.keepAlive"></router-view> -->
+        <router-view></router-view>
 
         <hd-footer />
         <el-backtop> </el-backtop>
@@ -17,10 +18,9 @@ import TopMenu from './front/TopMenu'
 import HdFooter from './front/Footer'
 export default {
     components: { TopMenu, HdFooter },
-    async created() {
-        //站内消息
-        if (this.isLogin) {
-            this.$store.dispatch('siteMessage')
+    data() {
+        return {
+            timeId: null
         }
     }
 }

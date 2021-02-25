@@ -3,29 +3,24 @@
         <hd-skeleton-list v-if="loading" :num="15" />
         <div class="card" v-else>
             <div class="card-header">
-                <h3 class="card-title">学习历史</h3>
+                <h3 class="card-title">TA的贴子</h3>
             </div>
-            <div class="list-group list-group-flush">
+            <div class="list-group list-group-flush" v-if="topics.data.length > 0">
                 <div class="list-group-item" v-for="topic in topics.data" :key="topic.id">
                     <div class="row align-topics-center">
                         <div class="col text-truncate flex justify-between topics-center">
                             <router-link :to="{ name: 'front.topic.show', params: { id: topic.id } }" target="_blank" class="text-body d-block">
                                 {{ topic['title'] | titleSubstr }}
                             </router-link>
-                            <div class="d-block text-muted text-truncate mt-n1">
-                                <div class="btn-group" role="group" aria-label="">
-                                    <router-link
-                                        :to="{ name: 'front.topic.edit', params: { id: topic.id } }"
-                                        target="_blank"
-                                        class="btn btn-light text-gray-500"
-                                        >编辑</router-link
-                                    >
-                                    <button type="button" class="btn btn-light text-gray-500" @click.prevent="del(topic)">删除</button>
-                                </div>
+                            <div class="text-gray-600 text-sm">
+                                {{ topic.updated_at | fromNow }}
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="list-group list-group-flush flex  justify-center items-center text-gray-700 py-6" v-else>
+                还没有发表贴子...
             </div>
             <div class="card-footer text-muted flex justify-center">
                 <el-pagination
@@ -47,7 +42,7 @@
 
 <script>
 export default {
-    route: { meta: { keepAlive: true } },
+    route: { path: `:id/topic`, meta: { keepAlive: true } },
     data() {
         return {
             loading: true,
@@ -60,15 +55,9 @@ export default {
     methods: {
         async load(page = 1) {
             this.loading = true
-            this.topics = await this.axios.get(`member/topic?page=${page}`)
+            this.topics = await this.axios.get(`user/topic/user/${this.$route.params.id}?page=${page}`)
             this.loading = false
             document.documentElement.scroll({ top: 0, behavior: 'smooth' })
-        },
-        async del(topic) {
-            this.$confirm('确定删除吗?', '温馨提示').then(async _ => {
-                await axios.delete(`front/topic/${topic.id}`)
-                this.topics.data.splice(this.topics.data.indexOf(topic), 1)
-            })
         }
     }
 }

@@ -7,6 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Site;
 use Auth;
 use DB;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use InvalidArgumentException;
+use RuntimeException;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
  * 站内消息
@@ -19,6 +23,13 @@ class SiteMessageController extends Controller
         $this->middleware(['auth:sanctum']);
     }
 
+    /**
+     * 获取通知
+     * @return AnonymousResourceCollection
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @throws BindingResolutionException
+     */
     public function index()
     {
         $notifications = Auth::user()->unreadNotifications()->paginate();

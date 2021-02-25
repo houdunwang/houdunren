@@ -2,6 +2,7 @@
 
 namespace Modules\Edu\Transformers;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Edu\Entities\Comment;
 
@@ -23,7 +24,7 @@ class CommentResource extends JsonResource
             'comment_id' => $this->comment_id,
             'comment_type' => $this->comment_type,
             'commentable' => $this->commentable,
-            'user' => $this->user,
+            'user' => new UserResource($this->user),
             'permissions' => $this->permissions,
             'replys' => self::collection($this->whenLoaded('replys')),
             'parent' => $this->when($this->reply_id, new self(Comment::find($this->reply_id)))

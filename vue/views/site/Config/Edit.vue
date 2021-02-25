@@ -42,8 +42,7 @@ export default {
     },
     async created() {
         this.site = await this.axios.get(`site/${this.$route.params.sid}`)
-        const setting = Object.assign(config, this.site.config)
-        this.site.config = _.merge(config, setting)
+        this.site.config = _.merge(config, this.site.config)
         this.loading = false
     },
     methods: {

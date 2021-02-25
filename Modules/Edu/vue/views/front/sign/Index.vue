@@ -53,7 +53,7 @@
                 <div class="card-body text-base font-bold text-gray-600">
                     <el-table :data="signs" border stripe>
                         <el-table-column label="会员" #default="{row:sign}" width="180">
-                            <a href="" class="flex justify-start items-center">
+                            <a href="#" @click.prevent="space(sign.user)" class="flex justify-start items-center">
                                 <img :src="sign.user.avatar" class="w-12 h-12 rounded-lg object-contain border-2 border-gray-50 mr-2" />
                                 <span class="text-gray-600 text-sm">
                                     {{ sign.user.name }}

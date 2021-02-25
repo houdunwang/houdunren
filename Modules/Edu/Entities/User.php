@@ -5,7 +5,6 @@ namespace Modules\Edu\Entities;
 use App\Models\User as Model;
 use Illuminate\Database\Eloquent\InvalidCastException;
 use LogicException;
-use Auth;
 
 /**
  * 用户
@@ -22,8 +21,11 @@ class User extends Model
      */
     public static function make(Model $user = null)
     {
-        $user = $user ?? Auth::user();
-        return self::find($user['id']);
+        if ($user) {
+            return self::find($user['id']);
+        } else {
+            return self::class;
+        }
     }
 
     /**

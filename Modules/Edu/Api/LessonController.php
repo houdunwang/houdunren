@@ -30,9 +30,9 @@ class LessonController extends Controller
      * 课程列表
      * @return void
      */
-    public function index()
+    public function index(Site $site)
     {
-        $lessons = Lesson::where('site_id', SID)->latest()->paginate(12);
+        $lessons = Lesson::where('site_id', $site->id)->latest()->paginate(12);
         return LessonResource::collection($lessons);
     }
 
@@ -100,8 +100,11 @@ class LessonController extends Controller
                 Video::updateOrCreate(['id' => $video['id'] ?? 0], [
                     'site_id' => site()['id'],
                     'lesson_id' => $lesson['id'],
-                    'rank' => $rank
-                ] + $video);
+                    'rank' => $rank,
+                    'title' => $video['title'],
+                    'path' => $video['path'],
+                    'external_address' => $video['external_address'],
+                ]);
             }
         }
         DB::commit();

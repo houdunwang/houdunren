@@ -9,8 +9,8 @@ Route::get('/Edu', function () {
 
 //支付
 Route::group(['prefix' => 'Edu'], function () {
-    Route::get('pay/return/{site}', [PayController::class, 'return'])->name('pay.return')->middleware(['module']);
-    Route::get('pay/notify/{site}', [PayController::class, 'notify'])->name('pay.notify')->middleware(['module']);
+    Route::get('pay/return/{site}', [PayController::class, 'return'])->middleware(['module']);
+    Route::get('pay/notify/{site}', [PayController::class, 'notify'])->middleware(['module']);
     Route::get('pay/subscribe/{subscribe}', [PayController::class, 'subscribe'])->middleware(['auth:sanctum', 'module']);
 });
 

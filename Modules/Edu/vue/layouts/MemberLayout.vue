@@ -47,9 +47,6 @@ export default {
         async $route(to) {
             this.messages = await axios.get(`front/message`)
         }
-    },
-    created() {
-        this.$store.dispatch('siteMessage', 1)
     }
 }
 </script>

@@ -33,7 +33,7 @@
                     </div>
                     <!-- 正文内容 -->
                     <div
-                        class="card-body leading-8 p-3 md:p-8 text-gray-700"
+                        class="card-body leading-8 p-3 md:p-8 text-gray-700 markdown"
                         v-if="form.content"
                         style="min-height:100px;"
                         v-html="form.content"

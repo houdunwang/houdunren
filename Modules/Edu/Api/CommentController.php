@@ -10,16 +10,15 @@ use Modules\Edu\Entities\Topic;
 use Modules\Edu\Http\Requests\CommentRequest;
 use Modules\Edu\Notifications\CommentNotification;
 use Modules\Edu\Transformers\CommentResource;
-use Modules\Edu\Transformers\TopicResource;
-use Auth;
 use Illuminate\Auth\Access\AuthorizationException;
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\InvalidCastException;
 use LogicException;
 use Modules\Edu\Entities\Video;
-use DB;
 use App\Models\Site;
+use Auth;
+use DB;
 
 /**
  * 评论
@@ -51,9 +50,9 @@ class CommentController extends Controller
             'site_id' => SID,
             'user_id' => Auth::id()
         ]);
-        // if ($comment->user->id != Auth::id()) {
-        $topic->user->notify(new CommentNotification($comment));
-        // }
+        if (Auth::id() != $topic->user->id) {
+            $topic->user->notify(new CommentNotification($comment));
+        }
         ActivityService::log($comment);
         return $this->message('评论发表成功', new CommentResource($comment->load(['user'])));
     }
@@ -65,7 +64,7 @@ class CommentController extends Controller
      */
     public function video(Site $site, Video $video)
     {
-        $comments = $video->comments()->with(['replys'])->whereNull('reply_id')->latest()->paginate();
+        $comments = $video->comments()->with(['replys'])->where('site_id', $site['id'])->whereNull('reply_id')->latest()->paginate();
         return CommentResource::collection($comments);
     }
 
@@ -82,8 +81,8 @@ class CommentController extends Controller
             'site_id' => SID,
             'user_id' => Auth::id()
         ]);
-        if ($comment->user->id != Auth::id()) {
-            Auth::user()->notify(new CommentNotification($comment));
+        if (Auth::id() != $video->lesson->user->id) {
+            $video->user->notify(new CommentNotification($comment));
         }
         ActivityService::log($comment);
         return $this->message('评论发表成功', new CommentResource($comment));

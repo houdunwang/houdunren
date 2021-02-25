@@ -16,6 +16,10 @@ const mixin = {
         }
     },
     methods: {
+        //访问用户空间
+        space(user) {
+            this.router('space.topic', { id: user.id })
+        },
         router(name, params = {}) {
             router.push({ name, params })
         },

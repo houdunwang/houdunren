@@ -2,6 +2,7 @@
 
 namespace Modules\Edu\Transformers;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -14,10 +15,10 @@ class ActivityResource extends JsonResource
     {
         $type = basename(str_replace('\\', '/', $this->subject_type));
         $resourceClass = 'Modules\Edu\Transformers\\' . $type . 'Resource';
-        return parent::toArray($request) + [
+        return [
             'type' => $type,
             'subject' => new $resourceClass($this->subject->load('user')),
-            'user' => $this->causer,
-        ];
+            'user' => new UserResource($this->causer),
+        ] + parent::toArray($request);
     }
 }

@@ -78,11 +78,11 @@ export default {
         }
     },
     async created() {
-        this.form = _.merge(form, await axios.get(`config`))
+        this.form = _.merge(form, await axios.get(`/api/module/config/site/${this.site.id}/module/${this.module.id}`))
     },
     methods: {
         onSubmit() {
-            this.axios.put(`config`, this.form)
+            this.axios.put(`/api/module/config/site/${this.site.id}/module/${this.module.id}`, this.form)
         }
     }
 }

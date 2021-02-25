@@ -60,7 +60,7 @@ export default {
     methods: {
         async load(page = 1) {
             this.loading = true
-            this.topics = await this.axios.get(`user/topic?page=${page}`)
+            this.topics = await this.axios.get(`user/topic/user/${this.user.id}?page=${page}`)
             this.loading = false
             document.documentElement.scroll({ top: 0, behavior: 'smooth' })
         },

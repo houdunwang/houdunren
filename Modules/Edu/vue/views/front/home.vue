@@ -9,30 +9,14 @@
                     </div>
                     <div class="card-body">
                         <topic-recommend />
-                        <div v-for="activity in activities.data" :key="activity.id">
-                            <component :is="`Activity${activity.type}`" :subject="activity.subject"></component>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <el-pagination
-                            :small="true"
-                            @current-change="load"
-                            v-if="activities.meta"
-                            :hide-on-single-page="true"
-                            :current-page="activities.meta.current_page"
-                            :page-size="12"
-                            :total="activities.meta.total"
-                            background
-                            layout="prev, pager, next"
-                        >
-                        </el-pagination>
+                        <activity-list :action="`activity`" />
                     </div>
                 </div>
             </div>
 
             <div class="md:w-3/12">
                 <community-tip />
-                <!-- <user-video-list class="mt-3" /> -->
+                <user-video-play-list class="mt-3" />
             </div>
         </div>
     </div>

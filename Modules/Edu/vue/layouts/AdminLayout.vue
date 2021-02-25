@@ -59,6 +59,9 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-nav flex-row order-md-last">
+                    <!-- 通知 -->
+                    <site-message />
+                    <!-- 通知 end-->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                             <el-image :src="user.avatar" fit="cover" class="w-8 h-8"></el-image>

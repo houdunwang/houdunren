@@ -49,7 +49,7 @@ class ModuleConfigController extends Controller
     {
         $this->authorize('update', $module);
         $config = ModuleConfig::where('site_id', $site['id'])->where('module_id', $module['id'])->first();
-        $config['config'] = $request->config;
+        $config['config'] = $request->input();
         $config->save();
         return $this->message('模块配置保存成功');
     }

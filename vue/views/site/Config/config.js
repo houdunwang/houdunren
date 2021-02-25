@@ -58,6 +58,13 @@ export default {
         aliyun: {
             sign: '身份验证',
             template: 'SMS_12840367'
-        }
+        },
+        abc: '3333'
+    },
+    game: {
+        name: 'wzry'
+    },
+    hd: {
+        name: 'hd'
     }
 }

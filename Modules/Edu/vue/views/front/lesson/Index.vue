@@ -10,6 +10,8 @@
                     <router-link :to="{ name: 'front.lesson.show', params: { id: lesson.id } }" class="card card-link">
                         <div class="text-center">
                             <img :src="lesson.thumb" class="h-36 w-full object-cover" />
+                            <span class="badge bg-orange absolute -top-2 -right-2" v-if="lesson.price <= 0">免费</span>
+                            <span class="badge bg-teal absolute -top-2 -right-2" v-else>会员</span>
                         </div>
                         <div class="card-body text-center">
                             <div class="card-title mb-1 text-gray-600">

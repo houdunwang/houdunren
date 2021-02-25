@@ -53,7 +53,6 @@ class User extends Authenticatable
             'delete' => Auth::check() && Auth::user()->can('delete', $this),
         ];
     }
-
     /**
      * 性别
      * @return void

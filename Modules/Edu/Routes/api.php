@@ -32,6 +32,7 @@ Route::group(['prefix' => 'Edu/site/{site}', 'middleware' => ['module']], functi
     //视频
     Route::get('video/{video}/comments', [VideoController::class, 'commentList']);
     Route::post('video/{video}/comment', [VideoController::class, 'comment']);
+    Route::get('video/play/list', [VideoController::class, 'PlayList']);
     Route::apiResource('video', VideoController::class);
     //评论
     Route::get('comment/topic/{topic}', [CommentController::class, 'topic']);
@@ -47,12 +48,13 @@ Route::group(['prefix' => 'Edu/site/{site}', 'middleware' => ['module']], functi
     //签到
     Route::apiResource('sign', SignController::class);
     //动态
-    Route::apiResource('activity', ActivityController::class);
+    Route::get('activity', [ActivityController::class, 'index']);
+    Route::get('activity/user/{user}', [ActivityController::class, 'user']);
     //站内消息
     Route::apiResource('message', SiteMessageController::class);
     //用户视频
     Route::get('user/video', [UserController::class, 'video']);
-    Route::get('user/topic', [UserController::class, 'topic']);
+    Route::get('user/topic/user/{user}', [UserController::class, 'topic']);
     Route::get('user/order', [UserController::class, 'order']);
     Route::get('user/duration', [UserController::class, 'duration']);
 });

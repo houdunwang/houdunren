@@ -24,11 +24,20 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                         <a href="/member" class="dropdown-item">修改资料</a>
+                        <a href="/member/info/avatar" class="dropdown-item">头像设置</a>
+                        <a href="/member/info/password" class="dropdown-item">密码修改</a>
+                        <a href="/member/info/mobile" class="dropdown-item">手机绑定</a>
+                        <a href="/member/info/email" class="dropdown-item">邮箱绑定</a>
+                        <div class="dropdown-divider"></div>
+                        <router-link :to="{ name: 'member.sitemessage' }" class="dropdown-item">站内消息</router-link>
                         <router-link :to="{ name: 'member.video' }" class="dropdown-item">学习历史</router-link>
                         <router-link :to="{ name: 'member.topic' }" class="dropdown-item">我的贴子</router-link>
                         <router-link :to="{ name: 'member.duration' }" class="dropdown-item">会员周期</router-link>
                         <router-link :to="{ name: 'member.order' }" class="dropdown-item">订单列表</router-link>
                         <div class="dropdown-divider"></div>
+                        <div @click="space(user)" class="dropdown-item cursor-pointer">个人主页</div>
+                        <div class="dropdown-divider"></div>
+
                         <a href="#" class="dropdown-item" @click.prevent="logout">退出</a>
                     </div>
                 </div>

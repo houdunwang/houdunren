@@ -20,7 +20,7 @@ class UserPolicy
         return true;
     }
 
-    public function view(User $user, User $model)
+    public function view(?User $user)
     {
         return true;
     }

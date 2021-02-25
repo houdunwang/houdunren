@@ -3,13 +3,13 @@
 namespace Modules\Edu\Api;
 
 use App\Http\Controllers\Controller;
-use Auth;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-use Modules\Edu\Entities\Topic;
 use Modules\Edu\Entities\User;
 use Modules\Edu\Transformers\OrderResource;
 use Modules\Edu\Transformers\TopicResource;
+use Auth;
+use App\Models\Site;
 
 /**
  * 用户相关
@@ -19,7 +19,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
+        $this->middleware(['auth:sanctum'])->except(['topic']);
     }
 
     /**
@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function video()
     {
-        return User::make()->videos()->paginate(12);
+        return User::make(Auth::user())->videos()->paginate(12);
     }
 
     /**
@@ -38,9 +38,9 @@ class UserController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function topic(Request $request)
+    public function topic(Request $request, Site $site, User $user)
     {
-        $topics = User::make()->topics()->latest()->paginate(15);
+        $topics = User::make($user)->topics()->latest()->paginate(15);
         return TopicResource::collection($topics);
     }
 
@@ -50,7 +50,7 @@ class UserController extends Controller
      */
     public function order()
     {
-        $orders = User::make()->orders()->latest()->paginate(15);
+        $orders = User::make(Auth::user())->orders()->latest()->paginate(15);
         return OrderResource::collection($orders);
     }
 
@@ -60,6 +60,6 @@ class UserController extends Controller
      */
     public function duration()
     {
-        return User::make()->duration;
+        return User::make(Auth::user())->duration;
     }
 }

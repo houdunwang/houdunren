@@ -51,10 +51,9 @@ class ActivityService
      * @param User $user
      * @return mixed
      */
-    public function user(User $user = null)
+    public function user(User $user, $row = 10)
     {
-        $user = $user ?? Auth::user();
-        return Activity::where('site_id', SID)->where('module_id', MID)->get();
+        return Activity::has('subject')->where('site_id', SID)->where('causer_id', $user['id'])->paginate($row);
     }
 
     /**
@@ -63,6 +62,6 @@ class ActivityService
      */
     public function all($row = 10)
     {
-        return Activity::has('subject')->where('site_id', SID)->where('module_id', MID)->latest()->paginate($row);
+        return Activity::has('subject')->where('site_id', SID)->latest('id')->paginate($row);
     }
 }

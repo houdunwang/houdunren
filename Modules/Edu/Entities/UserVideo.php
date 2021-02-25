@@ -5,7 +5,7 @@ namespace Modules\Edu\Entities;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 用户视频
+ * 用户观看视频
  * @package Modules\Edu\Entities
  */
 class UserVideo extends Model

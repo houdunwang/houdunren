@@ -13,9 +13,9 @@ class SiteMessageResource extends JsonResource
 {
     public function toArray($request)
     {
-        return parent::toArray($request) + [
+        return [
             'model' => $this->resource()
-        ];
+        ] + parent::toArray($request);
     }
 
     /**
