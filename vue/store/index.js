@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         errors: {},
-        user: window.user,
+        user: {},
         //前台站点/登录注册与会员中心使用
         site: {},
         //系统配置

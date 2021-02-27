@@ -2,7 +2,7 @@ import el from 'element-ui'
 import axios from 'axios'
 import Vue from 'vue'
 import store from '../store'
-const _axios = axios.create({ baseURL: `/api/${window.module.name}/site/${window.site.id}`, timeout: 5000 })
+const _axios = axios.create({ baseURL: `/api/${window.module.name}/site/${window.site.id}`, timeout: 10000 })
 window.axios = Vue.axios = Vue.prototype.axios = _axios
 
 //请求拦截

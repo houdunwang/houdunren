@@ -1,5 +1,5 @@
 <template>
-    <div class="container-xl">
+    <div class="container-xl mt-10">
         <div class="flex justify-center" v-loading="loading">
             <div class="w-full">
                 <div class="card">

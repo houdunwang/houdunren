@@ -12,9 +12,10 @@ const router = new VueRouter({
     }
 })
 
-const isLogin = window.user.id
+const isLogin = window.uid
 router.beforeEach(async (to, from, next) => {
     store.commit('errors')
+    if (isLogin) store.dispatch('user')
     //匹配的路由列表中是否有需要验证的
     if (to.matched.some(route => route.meta.auth)) {
         window.sessionStorage.setItem('redirect_url', to.fullPath)

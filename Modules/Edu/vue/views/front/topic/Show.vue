@@ -1,5 +1,5 @@
 <template>
-    <div class="container-xl topic-show">
+    <div class="container-xl topic-show mt-10">
         <div class="md:flex">
             <div class="md:w-9/12 md:mr-5 mb-5">
                 <!-- 贴子内容 -->

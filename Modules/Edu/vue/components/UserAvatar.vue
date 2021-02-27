@@ -1,5 +1,5 @@
 <template>
-    <img :src="$attrs.user.avatar" class="rounded-lg object-cover cursor-pointer" @click="space($attrs.user)" :class="classname" />
+    <img :src="$attrs.user.icon" class="rounded-lg object-cover cursor-pointer" @click="space($attrs.user)" :class="classname" />
 </template>
 
 <script>

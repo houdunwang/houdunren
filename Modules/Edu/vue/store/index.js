@@ -4,7 +4,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         errors: {},
-        user: window.user,
+        user: {},
         site: window.site,
         module: window.module,
         //站内消息

@@ -1,5 +1,5 @@
 <template>
-    <header class="navbar navbar-expand-md navbar-light d-print-none shadow border-t-4 border-hd mb-10">
+    <header class="navbar navbar-expand-md navbar-light d-print-none shadow border-t-4 border-hd">
         <div class="container-xl flex items-center">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
                 <span class="navbar-toggler-icon"></span>

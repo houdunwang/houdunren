@@ -1,5 +1,5 @@
 <template>
-    <div v-loading="loading" :class="{ 'h-screen': loading }" class="-mt-10">
+    <div v-loading="loading" :class="{ 'h-screen': loading }">
         <!-- 视频播放 -->
         <div class="bg-gray-900">
             <div class="container-xl">

@@ -10,6 +10,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Modules\Edu\Transformers\ActivityResource;
 use App\Models\Site;
 use App\Models\User;
+use Cache;
 
 /**
  * 用户活动
@@ -21,7 +22,7 @@ class ActivityController extends Controller
      * 动态列表
      * @return AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
         $activities = ActivityService::all(15);
         return ActivityResource::collection($activities);

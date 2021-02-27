@@ -65,6 +65,6 @@ class SiteService
      */
     public function isMaster(Site $site, User $user)
     {
-        return UserService::isSuperAdmin($user) || UserService::isMaster($site, $user);
+        return UserService::isMaster($site, $user);
     }
 }

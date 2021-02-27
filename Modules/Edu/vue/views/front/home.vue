@@ -1,8 +1,7 @@
 <template>
-    <div class="container-xl">
+    <div class="container-xl mt-10">
         <div class="md:flex">
-            <hd-skeleton-list v-if="loading" :num="15" class="md:w-9/12 md:mr-5 mb-5" />
-            <div class="md:w-9/12 md:mr-5 mb-5" v-else>
+            <div class="md:w-9/12 md:mr-5 mb-5">
                 <div class="card ">
                     <div class="card-header flex justify-between h-14">
                         社区动态
@@ -30,19 +29,7 @@ export default {
     route: { path: '//', meta: { keepAlive: true } },
     data() {
         return {
-            loading: true,
-            activities: []
-        }
-    },
-    async created() {
-        this.load()
-    },
-    methods: {
-        async load(page = 1) {
-            this.loading = true
-            this.activities = await this.axios.get(`activity?page=${page}`)
-            this.loading = false
-            document.documentElement.scroll({ top: 0, behavior: 'smooth' })
+            loading: true
         }
     }
 }

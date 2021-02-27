@@ -1,12 +1,12 @@
 <template>
     <div class="flex flex-col">
         <div class="flex">
-            <el-input :placeholder="$attrs.placeholder" v-model.trim="form.account" class="mr-1"> </el-input>
+            <el-input :placeholder="$attrs.placeholder" v-model.trim="form.account" class="mr-1" @focus="showCaptcha = true"> </el-input>
             <el-button type="info" size="default" :disabled="true" v-if="times > 0">{{ times }}秒后操作</el-button>
             <el-button type="danger" size="default" @click="send" v-else>发送验证码</el-button>
         </div>
         <hd-error name="account" class="mb-2" />
-        <hd-captcha v-model="form.captcha" class="flex-1" ref="captcha" />
+        <hd-captcha v-model="form.captcha" class="flex-1" ref="captcha" v-if="showCaptcha" />
     </div>
 </template>
 
@@ -26,7 +26,8 @@ export default {
             //按钮显示的倒计时秒数
             times: 0,
             //定时器
-            intervalId: 0
+            intervalId: 0,
+            showCaptcha: false
         }
     },
     mounted() {
@@ -39,6 +40,7 @@ export default {
         //手机号修改后通知父级组件
         'form.account'(n) {
             this.$emit('input', n)
+            this.showCaptcha = true
         }
     },
     methods: {
@@ -48,8 +50,13 @@ export default {
             if (error) return this.$message(error)
             this.axios
                 .post(this.action, this.form)
-                .then(_ => Timer.record(this.ckey))
-                .finally(_ => this.$refs['captcha'].get())
+                .then(_ => {
+                    Timer.record(this.ckey)
+                    this.showCaptcha = false
+                })
+                .finally(_ => {
+                    this.$refs['captcha'].get()
+                })
         },
         //表单验证
         checkFiels() {

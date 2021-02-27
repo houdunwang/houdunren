@@ -42,7 +42,8 @@ class User extends Authenticatable
     protected $appends = [
         'isSuperAdmin',
         'permissions',
-        'gender'
+        'gender',
+        'icon'
     ];
 
     public function getPermissionsAttribute()

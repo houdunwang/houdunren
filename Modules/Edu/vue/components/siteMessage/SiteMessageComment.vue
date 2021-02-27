@@ -9,7 +9,9 @@
                 <div v-else>评论已经删除无法查看</div>
                 <div class="text-xs text-gray-600">
                     <span class="badge bg-orange text-xs font-weight-lighter mr-1">评论</span>
-                    <a href="#" @click.prevent="space(message.model.user)" class="cursor-pointer text-blue-700">{{ message.model.user.name }}</a>
+                    <a href="#" @click.prevent="space(message.model.user)" class="cursor-pointer text-blue-700">
+                        {{ message.model.user.name }}
+                    </a>
                     / {{ message.created_at | fromNow }}
                 </div>
             </div>

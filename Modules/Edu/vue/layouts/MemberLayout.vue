@@ -1,7 +1,7 @@
 <template>
     <div>
         <top-menu />
-        <div class="container-xl md:flex">
+        <div class="container-xl md:flex mt-10">
             <div class="md:w-2/12 mb-2">
                 <div class="bg-white hidden md:block">
                     <a href="/member/info/avatar">

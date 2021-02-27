@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="py-4 border-b border-gray-200" v-for="topic in topics" :key="topic.id">
+        <hd-skeleton-list v-if="loading" :num="2" class="md:full border-0" />
+        <div class="py-4 border-b border-gray-200" v-else v-for="topic in topics" :key="topic.id">
             <div class="row flex items-center">
                 <div class="col-auto">
                     <user-avatar :user="topic.user" />
@@ -26,11 +27,14 @@ export default {
     components: { UserAvatar },
     data() {
         return {
+            loading: true,
             topics: []
         }
     },
     async created() {
+        this.loading = true
         this.topics = await axios.get(`topic/recommend`)
+        this.loading = false
     }
 }
 </script>

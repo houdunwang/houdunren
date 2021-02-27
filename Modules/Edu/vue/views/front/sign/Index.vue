@@ -1,5 +1,5 @@
 <template>
-    <div class="container-xl">
+    <div class="container-xl mt-10">
         <div>
             <hd-skeleton-card v-if="loading" :num="1" class="h-40 mb-10" />
             <div v-else>

@@ -29,7 +29,11 @@ class UserService
      */
     public function isSuperAdmin(User $user): bool
     {
-        return $user && $user->isSuperAdmin;
+        static $cache = [];
+        if (isset($cache[$user['id']])) {
+            return $cache[$user['id']];
+        }
+        return $cache[$user['id']] = $user && $user->isSuperAdmin;
     }
 
     /**
@@ -41,7 +45,12 @@ class UserService
      */
     public function isMaster(Site $site, User $user): bool
     {
-        return  $this->isSuperAdmin($user) || $user['id'] == $site['user_id'];
+        static $cache = [];
+        $name = $site['id'] . $user['id'];
+        if (isset($cache[$name])) {
+            return $cache[$name];
+        }
+        return $cache[$name] = $this->isSuperAdmin($user) || $user['id'] == $site['user_id'];
     }
 
     /**
@@ -54,6 +63,11 @@ class UserService
      */
     public function isAdmin(Site $site, User $user): bool
     {
-        return $this->isMaster($site, $user) || $site->isAdmin($user);
+        static $cache = [];
+        $name = $site['id'] . $user['id'];
+        if (isset($cache[$name])) {
+            return $cache[$name];
+        }
+        return $cache[$name] = $this->isMaster($site, $user) || $site->isAdmin($user);
     }
 }

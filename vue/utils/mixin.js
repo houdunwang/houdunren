@@ -6,7 +6,7 @@ const mixin = {
             return store.state.user
         },
         isLogin() {
-            return window.user.id
+            return store.state.user.id
         }
     },
     methods: {

@@ -1,5 +1,5 @@
 <template>
-    <div class="container-xl">
+    <div class="container-xl mt-10">
         <div class="card">
             <div class="card-header h-14">
                 {{ id ? '编辑贴子' : '发表贴子' }}

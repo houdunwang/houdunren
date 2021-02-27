@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 8.27.0.
+ * Generated for Laravel 8.29.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -254,6 +254,20 @@
         {
                         /** @var \Illuminate\Foundation\Application $instance */
                         return $instance->resourcePath($path);
+        }
+                    /**
+         * Get the path to the views directory.
+         * 
+         * This method returns the first configured path in the array of view paths.
+         *
+         * @param string $path
+         * @return string 
+         * @static 
+         */ 
+        public static function viewPath($path = '')
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        return $instance->viewPath($path);
         }
                     /**
          * Get the path to the environment file directory.
@@ -8148,7 +8162,7 @@
                     /**
          * Register a callback to be executed when creating job payloads.
          *
-         * @param callable $callback
+         * @param callable|null $callback
          * @return void 
          * @static 
          */ 
@@ -11184,6 +11198,17 @@
                         return $instance->pushMiddlewareToGroup($group, $middleware);
         }
                     /**
+         * Flush the router's middleware groups.
+         *
+         * @return \Illuminate\Routing\Router 
+         * @static 
+         */ 
+        public static function flushMiddlewareGroups()
+        {
+                        /** @var \Illuminate\Routing\Router $instance */
+                        return $instance->flushMiddlewareGroups();
+        }
+                    /**
          * Add a new route parameter binder.
          *
          * @param string $key
@@ -12489,6 +12514,33 @@
             /**
      * 
      *
+     * @method static \Illuminate\Contracts\Filesystem\Filesystem assertExists(string|array $path)
+     * @method static \Illuminate\Contracts\Filesystem\Filesystem assertMissing(string|array $path)
+     * @method static array allDirectories(string|null $directory = null)
+     * @method static array allFiles(string|null $directory = null)
+     * @method static array directories(string|null $directory = null, bool $recursive = false)
+     * @method static array files(string|null $directory = null, bool $recursive = false)
+     * @method static bool append(string $path, string $data)
+     * @method static bool copy(string $from, string $to)
+     * @method static bool delete(string|array $paths)
+     * @method static bool deleteDirectory(string $directory)
+     * @method static bool exists(string $path)
+     * @method static bool makeDirectory(string $path)
+     * @method static bool move(string $from, string $to)
+     * @method static string path(string $path)
+     * @method static bool prepend(string $path, string $data)
+     * @method static bool put(string $path, string|resource $contents, mixed $options = [])
+     * @method static string|false putFile(string $path, \Illuminate\Http\File|\Illuminate\Http\UploadedFile|string $file, mixed $options = [])
+     * @method static string|false putFileAs(string $path, \Illuminate\Http\File|\Illuminate\Http\UploadedFile|string $file, string $name, mixed $options = [])
+     * @method static bool setVisibility(string $path, string $visibility)
+     * @method static bool writeStream(string $path, resource $resource, array $options = [])
+     * @method static int lastModified(string $path)
+     * @method static int size(string $path)
+     * @method static resource|null readStream(string $path)
+     * @method static string get(string $path)
+     * @method static string getVisibility(string $path)
+     * @method static string temporaryUrl(string $path, \DateTimeInterface $expiration, array $options = [])
+     * @method static string url(string $path)
      * @see \Illuminate\Filesystem\FilesystemManager
      */ 
         class Storage {
@@ -12496,7 +12548,7 @@
          * Get a filesystem instance.
          *
          * @param string|null $name
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */ 
         public static function drive($name = null)
@@ -12508,7 +12560,7 @@
          * Get a filesystem instance.
          *
          * @param string|null $name
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */ 
         public static function disk($name = null)
@@ -12519,7 +12571,7 @@
                     /**
          * Get a default cloud filesystem instance.
          *
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */ 
         public static function cloud()
@@ -12531,7 +12583,7 @@
          * Create an instance of the local driver.
          *
          * @param array $config
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */ 
         public static function createLocalDriver($config)
@@ -12543,7 +12595,7 @@
          * Create an instance of the ftp driver.
          *
          * @param array $config
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */ 
         public static function createFtpDriver($config)
@@ -12555,7 +12607,7 @@
          * Create an instance of the sftp driver.
          *
          * @param array $config
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */ 
         public static function createSftpDriver($config)
@@ -12646,449 +12698,6 @@
         {
                         /** @var \Illuminate\Filesystem\FilesystemManager $instance */
                         return $instance->extend($driver, $callback);
-        }
-                    /**
-         * Assert that the given file exists.
-         *
-         * @param string|array $path
-         * @param string|null $content
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
-         * @static 
-         */ 
-        public static function assertExists($path, $content = null)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->assertExists($path, $content);
-        }
-                    /**
-         * Assert that the given file does not exist.
-         *
-         * @param string|array $path
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
-         * @static 
-         */ 
-        public static function assertMissing($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->assertMissing($path);
-        }
-                    /**
-         * Determine if a file exists.
-         *
-         * @param string $path
-         * @return bool 
-         * @static 
-         */ 
-        public static function exists($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->exists($path);
-        }
-                    /**
-         * Determine if a file or directory is missing.
-         *
-         * @param string $path
-         * @return bool 
-         * @static 
-         */ 
-        public static function missing($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->missing($path);
-        }
-                    /**
-         * Get the full path for the file at the given "short" path.
-         *
-         * @param string $path
-         * @return string 
-         * @static 
-         */ 
-        public static function path($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->path($path);
-        }
-                    /**
-         * Get the contents of a file.
-         *
-         * @param string $path
-         * @return string 
-         * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
-         * @static 
-         */ 
-        public static function get($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->get($path);
-        }
-                    /**
-         * Create a streamed response for a given file.
-         *
-         * @param string $path
-         * @param string|null $name
-         * @param array|null $headers
-         * @param string|null $disposition
-         * @return \Symfony\Component\HttpFoundation\StreamedResponse 
-         * @static 
-         */ 
-        public static function response($path, $name = null, $headers = [], $disposition = 'inline')
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->response($path, $name, $headers, $disposition);
-        }
-                    /**
-         * Create a streamed download response for a given file.
-         *
-         * @param string $path
-         * @param string|null $name
-         * @param array|null $headers
-         * @return \Symfony\Component\HttpFoundation\StreamedResponse 
-         * @static 
-         */ 
-        public static function download($path, $name = null, $headers = [])
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->download($path, $name, $headers);
-        }
-                    /**
-         * Write the contents of a file.
-         *
-         * @param string $path
-         * @param string|resource $contents
-         * @param mixed $options
-         * @return bool 
-         * @static 
-         */ 
-        public static function put($path, $contents, $options = [])
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->put($path, $contents, $options);
-        }
-                    /**
-         * Store the uploaded file on the disk.
-         *
-         * @param string $path
-         * @param \Illuminate\Http\File|\Illuminate\Http\UploadedFile|string $file
-         * @param mixed $options
-         * @return string|false 
-         * @static 
-         */ 
-        public static function putFile($path, $file, $options = [])
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->putFile($path, $file, $options);
-        }
-                    /**
-         * Store the uploaded file on the disk with a given name.
-         *
-         * @param string $path
-         * @param \Illuminate\Http\File|\Illuminate\Http\UploadedFile|string $file
-         * @param string $name
-         * @param mixed $options
-         * @return string|false 
-         * @static 
-         */ 
-        public static function putFileAs($path, $file, $name, $options = [])
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->putFileAs($path, $file, $name, $options);
-        }
-                    /**
-         * Get the visibility for the given path.
-         *
-         * @param string $path
-         * @return string 
-         * @static 
-         */ 
-        public static function getVisibility($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->getVisibility($path);
-        }
-                    /**
-         * Set the visibility for the given path.
-         *
-         * @param string $path
-         * @param string $visibility
-         * @return bool 
-         * @static 
-         */ 
-        public static function setVisibility($path, $visibility)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->setVisibility($path, $visibility);
-        }
-                    /**
-         * Prepend to a file.
-         *
-         * @param string $path
-         * @param string $data
-         * @param string $separator
-         * @return bool 
-         * @static 
-         */ 
-        public static function prepend($path, $data, $separator = '
-')
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->prepend($path, $data, $separator);
-        }
-                    /**
-         * Append to a file.
-         *
-         * @param string $path
-         * @param string $data
-         * @param string $separator
-         * @return bool 
-         * @static 
-         */ 
-        public static function append($path, $data, $separator = '
-')
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->append($path, $data, $separator);
-        }
-                    /**
-         * Delete the file at a given path.
-         *
-         * @param string|array $paths
-         * @return bool 
-         * @static 
-         */ 
-        public static function delete($paths)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->delete($paths);
-        }
-                    /**
-         * Copy a file to a new location.
-         *
-         * @param string $from
-         * @param string $to
-         * @return bool 
-         * @static 
-         */ 
-        public static function copy($from, $to)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->copy($from, $to);
-        }
-                    /**
-         * Move a file to a new location.
-         *
-         * @param string $from
-         * @param string $to
-         * @return bool 
-         * @static 
-         */ 
-        public static function move($from, $to)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->move($from, $to);
-        }
-                    /**
-         * Get the file size of a given file.
-         *
-         * @param string $path
-         * @return int 
-         * @static 
-         */ 
-        public static function size($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->size($path);
-        }
-                    /**
-         * Get the mime-type of a given file.
-         *
-         * @param string $path
-         * @return string|false 
-         * @static 
-         */ 
-        public static function mimeType($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->mimeType($path);
-        }
-                    /**
-         * Get the file's last modification time.
-         *
-         * @param string $path
-         * @return int 
-         * @static 
-         */ 
-        public static function lastModified($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->lastModified($path);
-        }
-                    /**
-         * Get the URL for the file at the given path.
-         *
-         * @param string $path
-         * @return string 
-         * @throws \RuntimeException
-         * @static 
-         */ 
-        public static function url($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->url($path);
-        }
-                    /**
-         * Get a resource to read the file.
-         *
-         * @param string $path
-         * @return resource|null The path resource or null on failure.
-         * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
-         * @static 
-         */ 
-        public static function readStream($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->readStream($path);
-        }
-                    /**
-         * Write a new file using a stream.
-         *
-         * @param string $path
-         * @param resource $resource
-         * @param array $options
-         * @return bool 
-         * @throws \InvalidArgumentException If $resource is not a file handle.
-         * @throws \Illuminate\Contracts\Filesystem\FileExistsException
-         * @static 
-         */ 
-        public static function writeStream($path, $resource, $options = [])
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->writeStream($path, $resource, $options);
-        }
-                    /**
-         * Get a temporary URL for the file at the given path.
-         *
-         * @param string $path
-         * @param \DateTimeInterface $expiration
-         * @param array $options
-         * @return string 
-         * @throws \RuntimeException
-         * @static 
-         */ 
-        public static function temporaryUrl($path, $expiration, $options = [])
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->temporaryUrl($path, $expiration, $options);
-        }
-                    /**
-         * Get a temporary URL for the file at the given path.
-         *
-         * @param \League\Flysystem\AwsS3v3\AwsS3Adapter $adapter
-         * @param string $path
-         * @param \DateTimeInterface $expiration
-         * @param array $options
-         * @return string 
-         * @static 
-         */ 
-        public static function getAwsTemporaryUrl($adapter, $path, $expiration, $options)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->getAwsTemporaryUrl($adapter, $path, $expiration, $options);
-        }
-                    /**
-         * Get an array of all files in a directory.
-         *
-         * @param string|null $directory
-         * @param bool $recursive
-         * @return array 
-         * @static 
-         */ 
-        public static function files($directory = null, $recursive = false)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->files($directory, $recursive);
-        }
-                    /**
-         * Get all of the files from the given directory (recursive).
-         *
-         * @param string|null $directory
-         * @return array 
-         * @static 
-         */ 
-        public static function allFiles($directory = null)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->allFiles($directory);
-        }
-                    /**
-         * Get all of the directories within a given directory.
-         *
-         * @param string|null $directory
-         * @param bool $recursive
-         * @return array 
-         * @static 
-         */ 
-        public static function directories($directory = null, $recursive = false)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->directories($directory, $recursive);
-        }
-                    /**
-         * Get all (recursive) of the directories within a given directory.
-         *
-         * @param string|null $directory
-         * @return array 
-         * @static 
-         */ 
-        public static function allDirectories($directory = null)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->allDirectories($directory);
-        }
-                    /**
-         * Create a directory.
-         *
-         * @param string $path
-         * @return bool 
-         * @static 
-         */ 
-        public static function makeDirectory($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->makeDirectory($path);
-        }
-                    /**
-         * Recursively delete a directory.
-         *
-         * @param string $directory
-         * @return bool 
-         * @static 
-         */ 
-        public static function deleteDirectory($directory)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->deleteDirectory($directory);
-        }
-                    /**
-         * Flush the Flysystem cache.
-         *
-         * @return void 
-         * @static 
-         */ 
-        public static function flushCache()
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        $instance->flushCache();
-        }
-                    /**
-         * Get the Flysystem driver.
-         *
-         * @return \League\Flysystem\FilesystemInterface 
-         * @static 
-         */ 
-        public static function getDriver()
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->getDriver();
         }
          
     }
@@ -14582,6 +14191,23 @@
         class Str {
          
     }
+            /**
+     * 
+     *
+     */ 
+        class Collection {
+                    /**
+         * 
+         *
+         * @see \Barryvdh\Debugbar\ServiceProvider::register()
+         * @static 
+         */ 
+        public static function debug()
+        {
+                        return \Illuminate\Support\Collection::debug();
+        }
+         
+    }
      
 }
 
@@ -14702,18 +14328,6 @@
                         $instance->initConfig($site, $module);
         }
                     /**
-         * 保存模块配置
-         *
-         * @param array $config
-         * @return void 
-         * @static 
-         */ 
-        public static function saveConfig($config)
-        {
-                        /** @var \App\Services\Module\ModuleService $instance */
-                        $instance->saveConfig($config);
-        }
-                    /**
          * 根据域名获取模块
          *
          * @return \Module 
@@ -14799,8 +14413,9 @@
      */ 
         class PayFacade {
                     /**
-         * 
+         * 生成定单号
          *
+         * @return string 
          * @static 
          */ 
         public static function sn()
@@ -15354,10 +14969,10 @@
          * @throws JsonEncodingException
          * @static 
          */ 
-        public static function log($model, $user = null, $description = '', $properties = [])
+        public static function log($model, $description = '', $properties = [], $user = null)
         {
                         /** @var \App\Services\Activity\ActivityService $instance */
-                        return $instance->log($model, $user, $description, $properties);
+                        return $instance->log($model, $description, $properties, $user);
         }
                     /**
          * 获取用户动态
@@ -15366,10 +14981,10 @@
          * @return mixed 
          * @static 
          */ 
-        public static function user($user = null)
+        public static function user($user, $row = 10)
         {
                         /** @var \App\Services\Activity\ActivityService $instance */
-                        return $instance->user($user);
+                        return $instance->user($user, $row);
         }
                     /**
          * 所有动态
@@ -15381,6 +14996,543 @@
         {
                         /** @var \App\Services\Activity\ActivityService $instance */
                         return $instance->all($row);
+        }
+         
+    }
+     
+}
+
+    namespace Barryvdh\Debugbar { 
+            /**
+     * 
+     *
+     * @method static void alert(mixed $message)
+     * @method static void critical(mixed $message)
+     * @method static void debug(mixed $message)
+     * @method static void emergency(mixed $message)
+     * @method static void error(mixed $message)
+     * @method static void info(mixed $message)
+     * @method static void log(mixed $message)
+     * @method static void notice(mixed $message)
+     * @method static void warning(mixed $message)
+     * @see \Barryvdh\Debugbar\LaravelDebugbar
+     */ 
+        class Facade {
+                    /**
+         * Enable the Debugbar and boot, if not already booted.
+         *
+         * @static 
+         */ 
+        public static function enable()
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->enable();
+        }
+                    /**
+         * Boot the debugbar (add collectors, renderer and listener)
+         *
+         * @static 
+         */ 
+        public static function boot()
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->boot();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function shouldCollect($name, $default = false)
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->shouldCollect($name, $default);
+        }
+                    /**
+         * Adds a data collector
+         *
+         * @param \Barryvdh\Debugbar\DataCollectorInterface $collector
+         * @throws DebugBarException
+         * @return \Barryvdh\Debugbar\LaravelDebugbar 
+         * @static 
+         */ 
+        public static function addCollector($collector)
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->addCollector($collector);
+        }
+                    /**
+         * Handle silenced errors
+         *
+         * @param $level
+         * @param $message
+         * @param string $file
+         * @param int $line
+         * @param array $context
+         * @throws \ErrorException
+         * @static 
+         */ 
+        public static function handleError($level, $message, $file = '', $line = 0, $context = [])
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->handleError($level, $message, $file, $line, $context);
+        }
+                    /**
+         * Starts a measure
+         *
+         * @param string $name Internal name, used to stop the measure
+         * @param string $label Public name
+         * @static 
+         */ 
+        public static function startMeasure($name, $label = null)
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->startMeasure($name, $label);
+        }
+                    /**
+         * Stops a measure
+         *
+         * @param string $name
+         * @static 
+         */ 
+        public static function stopMeasure($name)
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->stopMeasure($name);
+        }
+                    /**
+         * Adds an exception to be profiled in the debug bar
+         *
+         * @param \Exception $e
+         * @deprecated in favor of addThrowable
+         * @static 
+         */ 
+        public static function addException($e)
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->addException($e);
+        }
+                    /**
+         * Adds an exception to be profiled in the debug bar
+         *
+         * @param \Exception $e
+         * @static 
+         */ 
+        public static function addThrowable($e)
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->addThrowable($e);
+        }
+                    /**
+         * Returns a JavascriptRenderer for this instance
+         *
+         * @param string $baseUrl
+         * @param string $basePathng
+         * @return \Barryvdh\Debugbar\JavascriptRenderer 
+         * @static 
+         */ 
+        public static function getJavascriptRenderer($baseUrl = null, $basePath = null)
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->getJavascriptRenderer($baseUrl, $basePath);
+        }
+                    /**
+         * Modify the response and inject the debugbar (or data in headers)
+         *
+         * @param \Symfony\Component\HttpFoundation\Request $request
+         * @param \Symfony\Component\HttpFoundation\Response $response
+         * @return \Symfony\Component\HttpFoundation\Response 
+         * @static 
+         */ 
+        public static function modifyResponse($request, $response)
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->modifyResponse($request, $response);
+        }
+                    /**
+         * Check if the Debugbar is enabled
+         *
+         * @return boolean 
+         * @static 
+         */ 
+        public static function isEnabled()
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->isEnabled();
+        }
+                    /**
+         * Collects the data from the collectors
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function collect()
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->collect();
+        }
+                    /**
+         * Injects the web debug toolbar into the given Response.
+         *
+         * @param \Symfony\Component\HttpFoundation\Response $response A Response instance
+         * Based on https://github.com/symfony/WebProfilerBundle/blob/master/EventListener/WebDebugToolbarListener.php
+         * @static 
+         */ 
+        public static function injectDebugbar($response)
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->injectDebugbar($response);
+        }
+                    /**
+         * Disable the Debugbar
+         *
+         * @static 
+         */ 
+        public static function disable()
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->disable();
+        }
+                    /**
+         * Adds a measure
+         *
+         * @param string $label
+         * @param float $start
+         * @param float $end
+         * @static 
+         */ 
+        public static function addMeasure($label, $start, $end)
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->addMeasure($label, $start, $end);
+        }
+                    /**
+         * Utility function to measure the execution of a Closure
+         *
+         * @param string $label
+         * @param \Closure $closure
+         * @return mixed 
+         * @static 
+         */ 
+        public static function measure($label, $closure)
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->measure($label, $closure);
+        }
+                    /**
+         * Collect data in a CLI request
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function collectConsole()
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->collectConsole();
+        }
+                    /**
+         * Adds a message to the MessagesCollector
+         * 
+         * A message can be anything from an object to a string
+         *
+         * @param mixed $message
+         * @param string $label
+         * @static 
+         */ 
+        public static function addMessage($message, $label = 'info')
+        {
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->addMessage($message, $label);
+        }
+                    /**
+         * Checks if a data collector has been added
+         *
+         * @param string $name
+         * @return boolean 
+         * @static 
+         */ 
+        public static function hasCollector($name)
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->hasCollector($name);
+        }
+                    /**
+         * Returns a data collector
+         *
+         * @param string $name
+         * @return \DebugBar\DataCollectorInterface 
+         * @throws DebugBarException
+         * @static 
+         */ 
+        public static function getCollector($name)
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->getCollector($name);
+        }
+                    /**
+         * Returns an array of all data collectors
+         *
+         * @return \DebugBar\array[DataCollectorInterface] 
+         * @static 
+         */ 
+        public static function getCollectors()
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->getCollectors();
+        }
+                    /**
+         * Sets the request id generator
+         *
+         * @param \DebugBar\RequestIdGeneratorInterface $generator
+         * @return \Barryvdh\Debugbar\LaravelDebugbar 
+         * @static 
+         */ 
+        public static function setRequestIdGenerator($generator)
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->setRequestIdGenerator($generator);
+        }
+                    /**
+         * 
+         *
+         * @return \DebugBar\RequestIdGeneratorInterface 
+         * @static 
+         */ 
+        public static function getRequestIdGenerator()
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->getRequestIdGenerator();
+        }
+                    /**
+         * Returns the id of the current request
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getCurrentRequestId()
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->getCurrentRequestId();
+        }
+                    /**
+         * Sets the storage backend to use to store the collected data
+         *
+         * @param \DebugBar\StorageInterface $storage
+         * @return \Barryvdh\Debugbar\LaravelDebugbar 
+         * @static 
+         */ 
+        public static function setStorage($storage = null)
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->setStorage($storage);
+        }
+                    /**
+         * 
+         *
+         * @return \DebugBar\StorageInterface 
+         * @static 
+         */ 
+        public static function getStorage()
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->getStorage();
+        }
+                    /**
+         * Checks if the data will be persisted
+         *
+         * @return boolean 
+         * @static 
+         */ 
+        public static function isDataPersisted()
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->isDataPersisted();
+        }
+                    /**
+         * Sets the HTTP driver
+         *
+         * @param \DebugBar\HttpDriverInterface $driver
+         * @return \Barryvdh\Debugbar\LaravelDebugbar 
+         * @static 
+         */ 
+        public static function setHttpDriver($driver)
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->setHttpDriver($driver);
+        }
+                    /**
+         * Returns the HTTP driver
+         * 
+         * If no http driver where defined, a PhpHttpDriver is automatically created
+         *
+         * @return \DebugBar\HttpDriverInterface 
+         * @static 
+         */ 
+        public static function getHttpDriver()
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->getHttpDriver();
+        }
+                    /**
+         * Returns collected data
+         * 
+         * Will collect the data if none have been collected yet
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getData()
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->getData();
+        }
+                    /**
+         * Returns an array of HTTP headers containing the data
+         *
+         * @param string $headerName
+         * @param integer $maxHeaderLength
+         * @return array 
+         * @static 
+         */ 
+        public static function getDataAsHeaders($headerName = 'phpdebugbar', $maxHeaderLength = 4096, $maxTotalHeaderLength = 250000)
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->getDataAsHeaders($headerName, $maxHeaderLength, $maxTotalHeaderLength);
+        }
+                    /**
+         * Sends the data through the HTTP headers
+         *
+         * @param bool $useOpenHandler
+         * @param string $headerName
+         * @param integer $maxHeaderLength
+         * @return \Barryvdh\Debugbar\LaravelDebugbar 
+         * @static 
+         */ 
+        public static function sendDataInHeaders($useOpenHandler = null, $headerName = 'phpdebugbar', $maxHeaderLength = 4096)
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->sendDataInHeaders($useOpenHandler, $headerName, $maxHeaderLength);
+        }
+                    /**
+         * Stacks the data in the session for later rendering
+         *
+         * @static 
+         */ 
+        public static function stackData()
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->stackData();
+        }
+                    /**
+         * Checks if there is stacked data in the session
+         *
+         * @return boolean 
+         * @static 
+         */ 
+        public static function hasStackedData()
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->hasStackedData();
+        }
+                    /**
+         * Returns the data stacked in the session
+         *
+         * @param boolean $delete Whether to delete the data in the session
+         * @return array 
+         * @static 
+         */ 
+        public static function getStackedData($delete = true)
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->getStackedData($delete);
+        }
+                    /**
+         * Sets the key to use in the $_SESSION array
+         *
+         * @param string $ns
+         * @return \Barryvdh\Debugbar\LaravelDebugbar 
+         * @static 
+         */ 
+        public static function setStackDataSessionNamespace($ns)
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->setStackDataSessionNamespace($ns);
+        }
+                    /**
+         * Returns the key used in the $_SESSION array
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getStackDataSessionNamespace()
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->getStackDataSessionNamespace();
+        }
+                    /**
+         * Sets whether to only use the session to store stacked data even
+         * if a storage is enabled
+         *
+         * @param boolean $enabled
+         * @return \Barryvdh\Debugbar\LaravelDebugbar 
+         * @static 
+         */ 
+        public static function setStackAlwaysUseSessionStorage($enabled = true)
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->setStackAlwaysUseSessionStorage($enabled);
+        }
+                    /**
+         * Checks if the session is always used to store stacked data
+         * even if a storage is enabled
+         *
+         * @return boolean 
+         * @static 
+         */ 
+        public static function isStackAlwaysUseSessionStorage()
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->isStackAlwaysUseSessionStorage();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function offsetSet($key, $value)
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->offsetSet($key, $value);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function offsetGet($key)
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->offsetGet($key);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function offsetExists($key)
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->offsetExists($key);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function offsetUnset($key)
+        {            //Method inherited from \DebugBar\DebugBar         
+                        /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
+                        return $instance->offsetUnset($key);
         }
          
     }
@@ -19631,6 +19783,7 @@ namespace  {
             class UserService extends \App\Services\User\UserFacade {}
             class WeChatService extends \App\Services\WeChat\WeChatFacade {}
             class ActivityService extends \App\Services\Activity\ActivityFacade {}
+            class Debugbar extends \Barryvdh\Debugbar\Facade {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Image extends \Intervention\Image\Facades\Image {}
             class Socialite extends \Laravel\Socialite\Facades\Socialite {}

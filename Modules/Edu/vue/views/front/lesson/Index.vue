@@ -1,5 +1,5 @@
 <template>
-    <div class="container-xl">
+    <div class="container-xl mt-10">
         <div class="card mb-5">
             <div class="card-header h-14">
                 实战课程

@@ -32,7 +32,7 @@ class UserPolicy
 
     public function update(User $user, User $model)
     {
-        return UserService::isSuperAdmin($user) ||  $user['id'] == $model['id'];
+        return  $user['id'] == $model['id'];
     }
 
     public function delete(User $user, User $model)

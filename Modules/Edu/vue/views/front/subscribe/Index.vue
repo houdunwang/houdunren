@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mt-10">
         <div class="subscribe">
             <div class="header -mt-10 pt-28 pb-28">
                 <h1 class="text-white text-center text-6xl opacity-100 leading-snug">投资学习永远是最聪明的</h1>

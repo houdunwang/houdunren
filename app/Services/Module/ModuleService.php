@@ -43,21 +43,6 @@ class ModuleService
     }
 
     /**
-     * 保存模块配置
-     * @param array $config
-     * @return void
-     */
-    // public function saveConfig(array $config)
-    // {
-    //     $model = ModuleConfig::firstOrNew([
-    //         'site_id' => site()['id'],
-    //         'module_id' => module()['id'],
-    //     ]);
-    //     $model['config'] = $config + ($model['config'] ?? []);
-    //     return $model->save();
-    // }
-
-    /**
      * 根据域名获取模块
      * @return Module
      */
@@ -77,10 +62,16 @@ class ModuleService
      */
     public function config(string $name, string $filename): array
     {
+        static $cache = [];
+        $cacheName = $name . $filename;
+        if (isset($cache[$cacheName])) {
+            return $cache[$cacheName];
+        }
+
         $module = ModulePlugin::findOrFail($name);
         $file = $module->getPath() . '/Config/' . $filename . '.php';
 
-        return is_file($file) ? include $file : [];
+        return $cache[$cacheName] = is_file($file) ? include $file : [];
     }
 
     /**
@@ -91,7 +82,12 @@ class ModuleService
      */
     public function siteHasModule(Site $site, Module $module): bool
     {
-        return (bool)$this->siteModules($site)->contains('name', $module['name']);
+        static $cache = [];
+        $cacheName = $site['id'] . $module['id'];
+        if (isset($cache[$cacheName])) {
+            return $cache[$cacheName];
+        }
+        return $cache[$cacheName] = (bool)$this->siteModules($site)->contains('name', $module['name']);
     }
 
     /**
@@ -102,17 +98,21 @@ class ModuleService
      */
     public function all(): ?Collection
     {
-        return ModulePlugin::toCollection()->map(function ($module) {
-            $name = $module->getName();
-            $id = Module::where('name', $name)->value('id');
-            return
-                $this->config($name, 'config')
-                + [
-                    'id' => $id,
-                    'preview' => url("/modules/{$name}/static/preview.jpeg"),
-                    'isInstall' => (bool)$id
-                ];
-        })->values();
+        static $cache = null;
+        if (is_null($cache)) {
+            return $cache = ModulePlugin::toCollection()->map(function ($module) {
+                $name = $module->getName();
+                $id = Module::where('name', $name)->value('id');
+                return
+                    $this->config($name, 'config')
+                    + [
+                        'id' => $id,
+                        'preview' => url("/modules/{$name}/static/preview.jpeg"),
+                        'isInstall' => (bool)$id
+                    ];
+            })->values();
+        }
+        return $cache;
     }
 
     /**
@@ -122,7 +122,11 @@ class ModuleService
      */
     public function siteModules(Site $site): Collection
     {
-        return $site->master->group->modules->map(function ($module) use ($site) {
+        static $cache = [];
+        if (isset($cache[$site['id']])) {
+            return $cache[$site['id']];
+        }
+        return $cache[$site['id']] = $site->master->group->modules->map(function ($module) use ($site) {
             $module['permissions'] =
                 PermissionService::formatSiteModulePermissions($site, $module);
             return $module;
@@ -137,7 +141,12 @@ class ModuleService
      */
     public function userSiteModules(Site $site, User $user): Collection
     {
-        return $this->siteModules($site)->filter(function ($module) use ($site, $user) {
+        static $cache = [];
+        $cacheName = $site['id'] . $user['id'];
+        if (isset($cache[$cacheName])) {
+            return $cache[$cacheName];;
+        }
+        return $cache[$cacheName] = $this->siteModules($site)->filter(function ($module) use ($site, $user) {
             return PermissionService::checkUserModuleAccess($site, $module, $user);
         });
     }

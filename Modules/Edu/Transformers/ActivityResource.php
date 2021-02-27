@@ -14,11 +14,11 @@ class ActivityResource extends JsonResource
     public function toArray($request)
     {
         $type = basename(str_replace('\\', '/', $this->subject_type));
-        $resourceClass = 'Modules\Edu\Transformers\\' . $type . 'Resource';
+        // $resourceClass = 'Modules\Edu\Enities\\' . $type;
         return [
             'type' => $type,
-            'subject' => new $resourceClass($this->subject->load('user')),
-            'user' => new UserResource($this->causer),
+            'subject' => $this->subject,
+            'causer' => $this->causer,
         ] + parent::toArray($request);
     }
 }
