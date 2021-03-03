@@ -51,7 +51,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <hd-footer> </hd-footer>
+                            <hd-footer :site="site" />
                         </div>
                     </div>
                 </div>
@@ -61,10 +61,10 @@
 </template>
 
 <script>
-import HdFooter from './Footer'
-import { mapState } from 'vuex'
+import HdFooter from './components/Footer'
 export default {
     route: { path: '/register', meta: { guest: true } },
+    inject: ['site'],
     components: {
         HdFooter
     },
@@ -72,9 +72,6 @@ export default {
         return {
             form: { account: '', code: '', password: '', password_confirmation: '', captcha: {} }
         }
-    },
-    computed: {
-        ...mapState(['site'])
     },
     methods: {
         async onSubmit() {

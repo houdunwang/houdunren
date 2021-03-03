@@ -1,0 +1,2 @@
+2021-03-02T12:32:44.418199+08:00 > yansongda.pay.INFO > Wechat PreOrder Method Has Called ["",{"appid":"wxc47243ed572e273d","mch_id":"1601838786","nonce_str":"UF1J1wrBbZG6vO4Y","notify_url":"http://hdcms.test/Edu/pay/notify/1/wepay","spbill_create_ip":"192.168.10.1","out_trade_no":"U1-20210302123244","total_amount":"499.00","total_fee":499,"subject":"半年付","trade_type":"JSAPI","sign":"4856F455CFE6AF657ECA12B7B2CD7937"}] 
+

@@ -5,25 +5,27 @@
                 <!-- 贴子内容 -->
                 <div class="card topic" v-loading="loading">
                     <div class="card-header flex flex-col items-start p-2 md:p-8 leading-9 text-xl font-weight-lighter ">
-                        {{ form.title }}
+                        {{ topic.title }}
                         <div class="w-full flex justify-between items-center mt-2">
-                            <div class="text-sm text-gray-500">{{ form.user.name }} 更新于{{ form.updated_at | fromNow }}</div>
-                            <div v-if="isLogin && form.permissions">
+                            <div class="text-sm text-gray-500">{{ topic.user.name }} 更新于{{ topic.updated_at | fromNow }}</div>
+                            <div v-if="isLogin && topic.permissions">
                                 <div class="btn-group btn-group-sm" role="group" aria-label="">
-                                    <button type="button" class="btn btn-outline-danger" v-if="form.permissions.delete" @click.prevent="del(form)">删除</button>
+                                    <button type="button" class="btn btn-outline-danger" v-if="topic.permissions.delete" @click.prevent="del(topic)">
+                                        删除
+                                    </button>
                                     <router-link
-                                        :to="{ name: 'front.topic.edit', params: { id: form.id } }"
+                                        :to="{ name: 'front.topic.edit', params: { id: topic.id } }"
                                         class="btn btn-outline-cyan"
-                                        v-if="form.permissions.update"
+                                        v-if="topic.permissions.update"
                                     >
                                         编辑
                                     </router-link>
                                     <button
                                         type="button"
                                         class="btn "
-                                        v-if="form.permissions.recommend"
+                                        v-if="topic.permissions.recommend"
                                         @click.prevent="recommend"
-                                        :class="{ 'btn-teal': form.recommend, 'btn-outline-secondary': !form.recommend }"
+                                        :class="{ 'btn-teal': topic.recommend, 'btn-outline-secondary': !topic.recommend }"
                                     >
                                         推荐
                                     </button>
@@ -34,9 +36,9 @@
                     <!-- 正文内容 -->
                     <div
                         class="card-body leading-8 p-3 md:p-8 text-gray-700 markdown"
-                        v-if="form.content"
+                        v-if="topic.content"
                         style="min-height:100px;"
-                        v-html="form.content"
+                        v-html="topic.content"
                         v-markdown
                     ></div>
                     <!-- 正文内容END -->
@@ -50,6 +52,7 @@
                 />
             </div>
             <div class="md:w-3/12">
+                <user-card :member="topic.user" class="mb-5" />
                 <community-tip />
             </div>
             <image-preview />
@@ -65,7 +68,7 @@ export default {
     data() {
         return {
             loading: true,
-            form: { user: {} }
+            topic: { user: {} }
         }
     },
     async created() {
@@ -80,19 +83,19 @@ export default {
     methods: {
         async load() {
             this.loading = true
-            this.form = await this.axios.get(`topic/${this.$route.params.id}`)
+            this.topic = await this.axios.get(`topic/${this.$route.params.id}`)
             this.loading = false
         },
         async del() {
             this.$confirm('确定删除吗？', '温馨提示').then(async _ => {
-                await axios.delete(`front/topic/${this.form.id}`)
+                await axios.delete(`front/topic/${this.topic.id}`)
                 this.router('front.topic.index')
             })
         },
         //推荐设置
         async recommend() {
-            const { data: topic } = await axios.get(`topic/${this.form.id}/recommend`)
-            this.form = topic
+            const { data: topic } = await axios.get(`topic/${this.topic.id}/recommend`)
+            this.topic = topic
         },
         async del(topic) {
             this.$confirm('确定删除吗?', '温馨提示').then(async _ => {

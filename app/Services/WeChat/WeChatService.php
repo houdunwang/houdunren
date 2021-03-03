@@ -27,17 +27,6 @@ class WeChatService
     {
         return isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false;
     }
-    /**
-     * 微信登录
-     *
-     * @param array $account
-     * @return void
-     */
-    public function login(array $account): void
-    {
-        $user = $this->saveUser($account);
-        Auth::login($user);
-    }
 
     /**
      * 保存微信用户到数据表
@@ -47,26 +36,19 @@ class WeChatService
      */
     public function saveUser(array $account): User
     {
-        $unionid = $account['unionid'] ?? null;
-        $openid = $account['openid'] ?? null;
-
         //微信粉丝是否已经记录到表
-        if ($unionid) {
-            $wechatUser = WeChatUser::where('unionid', $unionid)->first();
+        if ($account['unionid']) {
+            $wechatUser = WeChatUser::where('unionid', $account['unionid'] ?? '')->first();
         } else {
-            $wechatUser = WeChatUser::where('openid', $openid)->first();
+            $wechatUser = WeChatUser::where('openid', $account['openid'] ?? '')->first();
         }
-
-        //如果原来没有记录时添加用户数据并记录公众号粉丝数据
+        //添加系统用户
         if (!$wechatUser) {
-            //添加系统用户
             $user = User::create([
                 'avatar' => $account['headimgurl'] ?? null,
                 'name' => $account['nickname'] ?? null,
-            ]);
-            // 记录微信粉丝数据
-            $data = $account + ['user_id' => $user['id']];
-            $wechatUser = WeChatUser::create($data);
+            ] + $account);
+            $wechatUser = WeChatUser::create($account + ['user_id' => $user['id'], 'site_id' => SID]);
         }
         return $wechatUser->user;
     }
@@ -83,60 +65,6 @@ class WeChatService
         return collect($users)->map(function ($user) {
             return $this->saveUser($user);
         });
-    }
-
-    /**
-     * 微信登录驱动
-     *
-     * @return void
-     */
-    public function driver(): ?string
-    {
-        $this->config();
-        return Socialite::driver(is_wechat() ? 'weixin' : 'weixinweb');
-    }
-
-    /**
-     * 微信SDK配置
-     *
-     * @param [type] $wechat
-     * @return void
-     */
-    public function config($wechat = null)
-    {
-        if (!is_null($wechat)) {
-            app(WeChatWeChat::class)->config(is_numeric($wechat) ? WeChat::find($wechat) : $wechat);
-        }
-
-        $this->loginConfig();
-    }
-
-    /**
-     * 微信登录配置
-     *
-     * @return void
-     */
-    public function loginConfig()
-    {
-        $wechat = WeChat::find(config('site.user.wechat_login_id'));
-
-        if (is_wechat()) {
-            config([
-                'services.weixin' => [
-                    'client_id' => $wechat['appID'],
-                    'client_secret' => $wechat['appsecret'],
-                    'redirect' => route('auth.login.wechat.callback'),
-                ],
-            ]);
-        } else {
-            config([
-                'services.weixinweb' => [
-                    'client_id' => config('site.user.wechatweb_client_id'),
-                    'client_secret' => config('site.user.wechatweb_client_secret'),
-                    'redirect' => route('auth.login.wechat.callback'),
-                ],
-            ]);
-        }
     }
 
     /**

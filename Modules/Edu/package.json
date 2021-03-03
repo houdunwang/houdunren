@@ -34,6 +34,8 @@
         "vue-router": "^3.5.0",
         "vuedraggable": "^2.24.3",
         "vuex": "^3.6.2",
-        "xgplayer": "^2.17.12"
+        "xgplayer": "^2.17.12",
+        "xgplayer-flv": "^2.4.7",
+        "xgplayer-flv.js": "^2.2.1"
     }
 }

@@ -12,7 +12,16 @@ use ModuleService;
 class Module extends Model
 {
     protected $fillable = ['title', 'name', 'version', 'description', 'author'];
-    protected $appends = ['preview', 'config'];
+    protected $appends = ['config', 'preview', 'version'];
+
+    /**
+     * 模块版本
+     * @return mixed
+     */
+    public function getVersionAttribute()
+    {
+        return $this->config['version'];
+    }
 
     /**
      * 模块菜单

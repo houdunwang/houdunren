@@ -3,7 +3,9 @@
         <div :id="`comment-${comment.id}`" class="card shadow mb-5" v-for="comment in comments.data" :key="comment.id">
             <!-- 评论 -->
             <div class="card-header bg-white d-flex justify-content-start p-2 md:p-4">
-                <img :src="comment.user.avatar" class="w-8 h-8 rounded object-cover mr-2" />
+                <router-link :to="{ name: 'space.follower', params: { id: comment.user.id } }">
+                    <img :src="comment.user.icon" class="w-8 h-8 rounded object-cover mr-2" />
+                </router-link>
                 <div class="flex flex-col ">
                     <a href="/edu/space/18832/topic" class="flex-fill text-secondary">
                         {{ comment.user.name }}
@@ -17,12 +19,14 @@
                 </div>
             </div>
             <div class="text-secondary p-2 md:p-4 comment-content reply-container">
-                <div class="markdown" v-html="comment.content" v-markdown></div>
+                <div class="markdown" v-html="comment.html" v-markdown></div>
             </div>
             <!-- 回复 -->
             <div v-if="comment.replys && comment.replys.length > 0 && comment.form.show" class="text-secondary pb-5 pl-8 reply-container">
                 <div class="border-t border-dashed border-gray-200 py-3 flex" v-for="reply in comment.replys" :key="reply.id" :id="`comment-${reply.id}`">
-                    <img :src="reply.user.avatar" class="w-6 h-6 object-cover mr-2 rounded" />
+                    <router-link :to="{ name: 'space.follower', params: { id: reply.user.id } }">
+                        <img :src="reply.user.icon" class="w-6 h-6 object-cover mr-2 rounded" />
+                    </router-link>
                     <div class="flex flex-col flex-1">
                         <div class="bg-white d-flex justify-content-start">
                             <div class="flex-fill flex items-center">
@@ -130,7 +134,7 @@
             </div>
         </div>
         <!-- 评论框END -->
-        <image-preview :min-width="500" />
+        <image-preview :min-width="300" />
     </div>
 </template>
 

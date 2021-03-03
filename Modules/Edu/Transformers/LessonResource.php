@@ -36,6 +36,7 @@ class LessonResource extends JsonResource
             'tags' => $this->whenLoaded('tags'),
             'path' => $this->when($this->permissions['play'], $this->path),
             'videos' => VideoResource::collection($this->whenLoaded('videos')),
+            'user' => $this->user,
         ];
     }
 }

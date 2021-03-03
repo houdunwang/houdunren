@@ -2,7 +2,7 @@
     <div class="py-4 border-b border-gray-200">
         <div class="row flex items-center">
             <div class="col-auto">
-                <user-avatar :user="subject.causer" />
+                <user-avatar :user="activity.causer" />
             </div>
             <div class="col">
                 <span class="badge bg-purple">课程</span>

@@ -10,16 +10,13 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 export default {
     route: { meta: { keepAlive: true } },
+    inject: ['site'],
     data() {
         return {
             form: this.$store.state.user
         }
-    },
-    computed: {
-        ...mapState(['site'])
     },
     watch: {
         async 'form.avatar'() {

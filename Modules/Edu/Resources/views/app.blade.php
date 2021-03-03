@@ -17,10 +17,12 @@
 </head>
 
 <body>
+    @include('message')
     <div id="app"></div>
     <script src="/tabler/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js?1611412966"></script>
     <script src="/tabler/dist/js/tabler.min.js?1611412966"></script>
     <script>
+        window.device=@json(['mobile'=>\Browser::isMobile(),'desktop'=>\Browser::isDesktop(),'wechat'=>\WeChatService::isWechat()]);
         window.uid=@json(Auth::id());window.site = @json(site(),JSON_FORCE_OBJECT);window.module = @json(module(),JSON_FORCE_OBJECT);
     </script>
 </body>

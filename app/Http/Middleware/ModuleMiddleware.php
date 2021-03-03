@@ -39,7 +39,6 @@ class ModuleMiddleware
         $site = $site instanceof Site ? $site : SiteService::getByDomain();
         if ($site instanceof Site) {
             SiteService::cache($site);
-            defined("SID") or define("SID", $site['id']);
             return $site;
         }
 
@@ -55,16 +54,17 @@ class ModuleMiddleware
      */
     protected function module(): Module
     {
-        $site = Site::find(site()['id']);
-        $module = ModuleService::getByDomain() ?? $site->module;
-
+        $module = request('module');
+        $module = is_numeric($module) ? Module::findOrFail($module) : $module;
+        if (!$module) {
+            $module = ModuleService::getByDomain() ?? site()->module;
+        }
         if (!($module instanceof Module)) {
             abort(404, '模块不存在');
         }
         //站点模块检测
-        if (ModuleService::siteHasModule($site, $module)) {
+        if (ModuleService::siteHasModule(site(), $module)) {
             ModuleService::cache($module);
-            defined("MID") or define("MID", $module['id']);
             return $module;
         }
         abort(404, '模块不存在');

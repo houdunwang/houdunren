@@ -42,7 +42,7 @@
 
 <script>
 export default {
-    route: { path: `:id/topic`, meta: { keepAlive: true } },
+    route: { path: `:id/topic` },
     data() {
         return {
             loading: true,

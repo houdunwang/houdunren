@@ -18,6 +18,7 @@ class CreateEduOrderTable extends Migration
             $table->decimal('price')->comment('价格');
             $table->string('subject', 100)->comment('商品名称');
             $table->string('sn', 100)->index()->comment('定单号');
+            $table->string('trade_no', 100)->index()->comment('支付定单号');
             $table->char('type', 20)->comment('类型:subscribe:订阅,lesson:课程');
             $table->tinyInteger('month')->nullable()->comment('订阅月数');
             $table->boolean('status')->default(false)->comment('支付状态');

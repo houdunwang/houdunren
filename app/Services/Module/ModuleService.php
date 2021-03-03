@@ -25,7 +25,7 @@ class ModuleService
     {
         static $cache = null;
         if (is_null($module)) return $cache;
-
+        defined("MID") or define("MID", $module['id']);
         $this->initConfig(site(), $module);
         return $cache = $module;
     }

@@ -19,7 +19,8 @@ use App\Api\WechatMenuController;
 use App\Api\WeChatUserController;
 use App\Api\CodeController;
 use App\Api\ModuleConfigController;
-use App\Models\ModuleConfig;
+use App\Api\FollowController;
+use App\Api\FansController;
 
 //登录注册与找回密码
 Route::post('login', [AuthController::class, 'login']);
@@ -31,11 +32,18 @@ Route::get('logout', [AuthController::class, 'logout']);
 //用户
 Route::get('user/info', [UserController::class, 'info']);
 Route::get('site/{site}/user/search/{keyword?}', [UserController::class, 'search']);
+Route::get('site/{site}/follow/user/{user}', [FollowController::class, 'index']);
+Route::post('site/{site}/follow/user/{user}', [FollowController::class, 'store']);
+Route::delete('site/{site}/follow/user/{user}', [FollowController::class, 'destroy']);
+Route::get('site/{site}/fans/user/{user}', [FansController::class, 'index']);
 //用户资料修改
 Route::put('site/{site}/user/mobile', [UserController::class, 'mobile']);
 Route::put('site/{site}/user/email', [UserController::class, 'email']);
+Route::get('site/{site}/user/wechat', [UserController::class, 'wechat']);
+Route::delete('site/{site}/user/wechat/unbind', [UserController::class, 'unBindWechat']);
 Route::put('user/password', [UserController::class, 'password']);
 Route::apiResource('user', UserController::class);
+
 //验证码
 Route::post('site/{site}/code/send', [CodeController::class, 'send']);
 Route::post('site/{site}/code/exist', [CodeController::class, 'exist']);

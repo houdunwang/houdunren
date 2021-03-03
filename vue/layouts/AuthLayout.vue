@@ -4,18 +4,10 @@
     </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
 export default {
-    computed: {
-        ...mapState(['site'])
-    },
-    methods: {
-        ...mapActions({
-            getSite: 'site'
-        })
-    },
-    async created() {
-        await this.getSite()
+    route: { meta: { guest: true } },
+    provide() {
+        return { site: window.site }
     }
 }
 </script>

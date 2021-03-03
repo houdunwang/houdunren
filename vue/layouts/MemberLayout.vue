@@ -44,7 +44,7 @@
 
         <div class="container-xl mt-3 md:flex">
             <member-menu />
-            <div class="md:w-10/12 md:ml-2 bg-white">
+            <div class="md:w-10/12 md:ml-2">
                 <keep-alive>
                     <router-view v-if="$route.meta.keepAlive"></router-view>
                 </keep-alive>
@@ -54,24 +54,20 @@
     </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
 export default {
     route: { meta: { auth: true } },
-    data() {
+    provide() {
         return {
-            modules: []
+            site: this.site
         }
     },
-    computed: {
-        ...mapState(['site'])
-    },
-    methods: {
-        ...mapActions({
-            getSite: 'site'
-        })
+    data() {
+        return {
+            modules: [],
+            site: window.site
+        }
     },
     async created() {
-        await this.getSite()
         this.modules = await axios.get(`module/site/${this.site.id}`)
     }
 }

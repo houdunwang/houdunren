@@ -15,9 +15,7 @@
 <script>
 export default {
     props: ['videos', 'id'],
-    updated() {
-        document.documentElement.scrollIntoView({ block: 'start', behavior: 'smooth' })
-    }
+    updated() {}
 }
 </script>
 

@@ -19,7 +19,7 @@ class WeChatUserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
+        $this->middleware(['auth:sanctum', 'site']);
     }
 
     /**

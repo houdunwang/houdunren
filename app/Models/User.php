@@ -129,7 +129,7 @@ class User extends Authenticatable
 
     /**
      * 关注列表
-     * @return void
+     * @return BelongsToMany
      */
     public function followers()
     {
@@ -137,8 +137,18 @@ class User extends Authenticatable
     }
 
     /**
+     * 是否关注检测
+     * @param User $user
+     * @return boolean
+     */
+    public function isFollow(User $user)
+    {
+        return $this->followers()->where('user_id', $user->id)->exists();
+    }
+
+    /**
      * 粉丝列表
-     * @return void
+     * @return BelongsToMany
      */
     public function fans()
     {
@@ -146,31 +156,30 @@ class User extends Authenticatable
     }
 
     /**
-     * 是否关注检测
-     * @param User $user
-     * @return boolean
-     */
-    public function isFollower(User $user)
-    {
-        return $this->followers()->where('users.id', $user)->exists();
-    }
-
-    /**
      * 是否为粉丝检测
      * @param User $user
      * @return void
      */
-    public function getIsFansAttribute(User $user)
+    public function isFans(User $user)
     {
-        return $this->fans()->where('users.id', $user)->exists();
+        return $this->fans()->where('follower_id', $user->id)->exists();
     }
 
     /**
      * 微信信息
      * @return void
      */
-    public function wechatUser()
+    public function wechatUsers()
     {
-        return $this->hasOne(WeChatUser::class, 'user_id');
+        return $this->hasMany(WeChatUser::class, 'user_id');
+    }
+
+    /**
+     * 站点微信号
+     * @return mixed
+     */
+    public function siteWechatUser()
+    {
+        return $this->hasOne(WeChatUser::class, 'user_id')->where('site_id', SID);
     }
 }

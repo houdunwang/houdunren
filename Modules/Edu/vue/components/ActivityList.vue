@@ -1,8 +1,8 @@
 <template>
     <div>
-        <hd-skeleton-list v-if="loading" :num="15" class="md:full mt-2 border-0" />
-        <div v-else>
-            <div v-for="activity in activities.data" :key="activity.id">
+        <!-- <hd-skeleton-list v-if="loading" :num="15" class="md:full mt-2 border-0" /> -->
+        <div>
+            <div v-for="activity in activities" :key="activity.id">
                 <component :is="`Activity${activity.type}`" :activity="activity"></component>
             </div>
             <div class="flex justify-center mt-3">
@@ -25,30 +25,20 @@
 
 <script>
 export default {
-    props: ['action'],
+    props: ['activities'],
     data() {
         return {
-            loading: true,
-            activities: [],
-            page: 1,
-            intervalId: null
+            // loading: true,
+            // intervalId: null
         }
     },
+
     created() {
-        this.load(1)
-        const intervalId = setInterval(_ => this.load(), 10000)
-        this.$once('hook:beforeDestroy', () => {
-            clearInterval(intervalId)
-        })
-    },
-    methods: {
-        async load(page) {
-            this.loading = true
-            this.page = page || this.page
-            this.activities = await this.axios.get(`${this.action}?page=${page}`)
-            this.loading = false
-            document.documentElement.scroll({ top: 0, behavior: 'smooth' })
-        }
+        // this.load(1)
+        // const intervalId = setInterval(_ => this.load(), 30000)
+        // this.$once('hook:beforeDestroy', () => {
+        //     clearInterval(intervalId)
+        // })
     }
 }
 </script>

@@ -1,9 +1,22 @@
 <template>
     <div v-loading="loading" :class="{ 'h-screen': loading }">
         <!-- 视频播放 -->
-        <div class="bg-gray-900">
-            <div class="container-xl">
-                <div id="mse" class="" style="z-index:1000"></div>
+        <div v-if="loading == false">
+            <div class="bg-gray-900" v-if="video.id && video.permissions.show">
+                <div class="container-xl" v-if="video.id && video.permissions.show">
+                    <div id="mse" style="z-index:1000"></div>
+                </div>
+            </div>
+            <div v-else style="background-image:linear-gradient(150deg, #2d1582, #19a0ff)">
+                <div class="container-xl py-28 flex flex-col items-center justify-center">
+                    <h1 class="text-white text-center text-6xl opacity-100 leading-snug">投资学习永远是最值得的</h1>
+                    <h2 class="text-3xl font-weight-light text-white text-center opacity-60 mt-5  mb-6">
+                        本课程为会员订制课程，请订阅会员或购买该课程
+                    </h2>
+                    <router-link :to="{ name: 'front.subscribe.index' }" class="btn btn-success btn-lg inline-block">
+                        订阅会员观看所有视频
+                    </router-link>
+                </div>
             </div>
         </div>
         <!-- 视频播放END -->
@@ -67,7 +80,7 @@ export default {
     data() {
         return {
             loading: true,
-            player: {},
+            player: null,
             video: {},
             lesson: { videos: [] }
         }
@@ -85,26 +98,33 @@ export default {
     },
     watch: {
         async $route(to) {
-            this.player.destroy(true)
-            await this.init(to.params.id, true)
-            document.documentElement.scroll({ top: 0, behavior: 'smooth' })
+            await this.load(to.params.id, true)
+        },
+        video(video) {
+            if (this.player) this.player.destroy(true)
+            setTimeout(() => {
+                this.player = new Player({
+                    id: 'mse',
+                    url: video.path,
+                    autoplay: this.player,
+                    fluid: true,
+                    poster: '/images/poster.jpeg',
+                    playbackRate: [0.5, 0.75, 1, 1.5, 2]
+                })
+                //没有评论参数时滚动顶部播放器位置
+                if (!this.$route.params.comment_id) {
+                    document.documentElement.scroll({ top: 0, behavior: 'smooth' })
+                }
+            })
         }
     },
     async created() {
-        await this.init(this.$route.params.id)
+        await this.load(this.$route.params.id)
     },
     methods: {
-        async init(id, autoplay = false) {
+        async load(id) {
             this.video = await this.axios.get(`video/${id}`)
             this.lesson = this.video.lesson
-            this.player = new Player({
-                id: 'mse',
-                url: this.video.path,
-                autoplay,
-                fluid: true,
-                poster: '/images/poster.jpeg',
-                playbackRate: [0.5, 0.75, 1, 1.5, 2]
-            })
             this.loading = false
         }
     }

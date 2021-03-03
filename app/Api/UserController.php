@@ -25,7 +25,33 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware(['auth:sanctum'])->except(['show']);
+        $this->middleware(['module'])->only(['wechat', 'follow', 'unBindWechat']);
         $this->authorizeResource(User::class, 'user');
+    }
+
+    /**
+     * 解除微信绑定
+     * @return mixed
+     * @throws BindingResolutionException
+     * @throws RouteNotFoundException
+     * @throws InvalidArgumentException
+     */
+    public function unBindWechat()
+    {
+        if (!Auth::user()->mobile) {
+            return $this->error('请先绑定手机后操作');
+        }
+        Auth::user()->siteWechatUser()->delete();
+        return $this->message('微信解绑成功');
+    }
+
+    /**
+     * 当前用户微信号
+     * @return mixed
+     */
+    public function wechat()
+    {
+        return Auth::user()->siteWechatUser;
     }
 
     /**
@@ -72,8 +98,6 @@ class UserController extends Controller
         })->with('group')->paginate(10);
         return UserResource::collection($users);
     }
-
-
 
     /**
      * 更新资料

@@ -11,6 +11,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use InvalidArgumentException;
 use RuntimeException;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Notifications\DatabaseNotification;
 
 /**
  * 站内消息
@@ -32,7 +33,7 @@ class SiteMessageController extends Controller
      */
     public function index()
     {
-        $notifications = Auth::user()->unreadNotifications()->paginate();
+        $notifications = Auth::user()->notifications()->paginate();
         return SiteMessageResource::collection($notifications);
     }
 
@@ -43,6 +44,6 @@ class SiteMessageController extends Controller
      */
     public function destroy(Site $site, $message)
     {
-        DB::table('notifications')->where('id', $message)->delete();
+        DatabaseNotification::where('id', $message)->delete();
     }
 }

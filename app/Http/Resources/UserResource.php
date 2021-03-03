@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Auth;
 
 /**
  * 用户资源
@@ -20,6 +21,7 @@ class UserResource extends JsonResource
             'email' => $this->when($this->permissions['update'], $this->email),
             'roles' => $this->whenLoaded('roles'),
             'group' => new GroupResource($this->whenLoaded('group')),
+            'is_following' => Auth::check() && Auth::user()->isFollow($this->resource),
         ] + parent::toArray($request);
     }
 }

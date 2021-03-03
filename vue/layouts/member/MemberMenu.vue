@@ -33,7 +33,8 @@ const menus = [
     { title: '修改头像', to: { name: 'member.info.avatar' }, icon: 'fas fa-camera-retro' },
     { title: '密码修改', to: { name: 'member.info.password' }, icon: 'fas fa-unlock-alt' },
     { title: '手机绑定', to: { name: 'member.info.mobile' }, icon: 'fas fa-phone-square-alt' },
-    { title: '绑定邮箱', to: { name: 'member.info.email' }, icon: 'fas fa-envelope' }
+    { title: '绑定邮箱', to: { name: 'member.info.email' }, icon: 'fas fa-envelope' },
+    { title: '微信绑定', to: { name: 'member.info.wechat' }, icon: 'fab fa-weixin' }
 ]
 export default {
     data() {

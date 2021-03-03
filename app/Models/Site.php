@@ -21,7 +21,7 @@ class Site extends Model
     protected $casts = ['config' => 'array',];
     protected $hidden = ['config'];
     protected $appends = [
-        'permissions',
+        'permissions', 'setting'
     ];
 
     /**
@@ -34,6 +34,17 @@ class Site extends Model
             'view' => Auth::check() && Auth::user()->can('view', $this),
             'update' => Auth::check() && Auth::user()->can('update', $this),
             'delete' => Auth::check() && Auth::user()->can('delete', $this)
+        ];
+    }
+
+    /**
+     * 站点配置项/供前台使用
+     * @return array
+     */
+    public function getSettingAttribute()
+    {
+        return [
+            'wechatweb_login' => $this->config['user']['wechatweb_login'] ?? false
         ];
     }
 
@@ -57,7 +68,6 @@ class Site extends Model
 
     /**
      * 站点角色
-     *
      * @return void
      */
     public function roles()

@@ -11,7 +11,7 @@
                         <div v-for="topic in topics.data" :key="topic.id" class="py-4 border-b border-gray-200">
                             <div class="row">
                                 <div class="col-auto">
-                                    <img :src="topic.user.avatar" class="w-12 h-12 rounded-lg" />
+                                    <user-avatar :user="topic.user" />
                                 </div>
                                 <div class="col">
                                     <router-link

@@ -7,8 +7,7 @@ export default new Vuex.Store({
     state: {
         errors: {},
         user: {},
-        //前台站点/登录注册与会员中心使用
-        site: {},
+        device: window.device,
         //系统配置
         systemConfig: {}
     },
@@ -21,9 +20,6 @@ export default new Vuex.Store({
         errors(state, errors = {}) {
             state.errors = errors
         },
-        site(state, site) {
-            state.site = site
-        },
         user(state, user) {
             state.user = user
         },
@@ -34,9 +30,6 @@ export default new Vuex.Store({
     actions: {
         async user({ commit }) {
             commit('user', await axios.get(`user/info`))
-        },
-        async site({ commit }) {
-            commit('site', await axios.get(`site/current`))
         },
         async systemConfig({ commit }) {
             commit('systemConfig', await axios.get(`system/config`))

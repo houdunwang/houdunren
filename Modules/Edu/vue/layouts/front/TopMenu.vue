@@ -12,7 +12,7 @@
             </h1>
             <div class="navbar-nav flex-row order-md-last" v-if="user.id">
                 <!-- 通知 -->
-                <site-message />
+                <site-message :title-len="10" />
                 <!-- 通知 end-->
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
@@ -103,7 +103,8 @@ const menus = [
     { title: '最近更新', name: 'front.video.index' },
     { title: '话题讨论', name: 'front.topic.index' },
     { title: '签到打卡', name: 'front.sign.index' },
-    { title: '订阅会员', name: 'front.subscribe.index' }
+    { title: '订阅会员', name: 'front.subscribe.index' },
+    { title: '直播中心', name: 'front.live.index' }
 ]
 const docs = [
     { title: 'CSS样式控制', to: `https://houdunren.gitee.io/note/css/1%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html` },

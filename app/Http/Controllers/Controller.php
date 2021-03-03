@@ -30,7 +30,7 @@ class Controller extends BaseController
      * @param integer $httpCode
      * @return void
      */
-    public function error(string $message, int $httpCode)
+    public function error(string $message, int $httpCode = 403)
     {
         return response(['message' => $message], $httpCode);
     }

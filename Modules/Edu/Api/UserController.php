@@ -50,7 +50,7 @@ class UserController extends Controller
      */
     public function order()
     {
-        $orders = User::make(Auth::user())->orders()->latest()->paginate(15);
+        $orders = User::make(Auth::user())->orders()->where('status', 1)->latest()->paginate(15);
         return OrderResource::collection($orders);
     }
 

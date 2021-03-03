@@ -14,7 +14,6 @@ class ActivityResource extends JsonResource
     public function toArray($request)
     {
         $type = basename(str_replace('\\', '/', $this->subject_type));
-        // $resourceClass = 'Modules\Edu\Enities\\' . $type;
         return [
             'type' => $type,
             'subject' => $this->subject,

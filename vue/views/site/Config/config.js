@@ -9,7 +9,13 @@ export default {
     user: {
         bind: [],
         avatar: false,
-        wechatweb_login: false
+        wechatweb_login: false,
+        //微信开发平台使用的登录信息
+        wechatweb_client_id: '',
+        wechatweb_client_secret: '',
+        //微信客户端登录使用的公众号
+        wechat_appid: '',
+        wechat_appsecret: ''
     },
     aliyun: {
         regionId: 'cn-hangzhou',
@@ -58,13 +64,6 @@ export default {
         aliyun: {
             sign: '身份验证',
             template: 'SMS_12840367'
-        },
-        abc: '3333'
-    },
-    game: {
-        name: 'wzry'
-    },
-    hd: {
-        name: 'hd'
+        }
     }
 }

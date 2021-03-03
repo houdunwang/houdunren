@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import HdFooter from '../auth/Footer'
+import HdFooter from '../auth/components/Footer'
 export default {
     route: { path: '/admin' },
     components: {

@@ -23,7 +23,7 @@
             <div class="card w-80">
                 <div class="card-body">
                     <div v-for="message in siteMessage.data" :key="message.id" class="border-b border-gray-200 pb-2 mb-2">
-                        <component :is="`SiteMessage${message.data.model}`" :message="message"></component>
+                        <component :is="`SiteMessage${message.data.model}`" :message="message" v-bind="$attrs"></component>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -56,7 +56,7 @@ export default {
         if (this.isLogin) {
             const intervalId = setInterval(() => {
                 this.loadSiteMessage()
-            }, 10000)
+            }, 60000)
             this.$once('hook:beforeDestroy', () => {
                 clearInterval(intervalId)
             })

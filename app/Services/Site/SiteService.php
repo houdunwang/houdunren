@@ -37,7 +37,7 @@ class SiteService
     {
         static $cache = null;
         if (is_null($site)) return $cache;
-
+        defined("SID") or define("SID", $site['id']);
         $this->initConfig($site);
         return $cache = $site;
     }
@@ -54,6 +54,21 @@ class SiteService
         //邮件配置
         config(['mail.mailers.smtp' =>  config('site.email')]);
         config(['mail.from' => ['address' => config('site.email.username'), 'name' => $site['title']]]);
+        //微信网页登录
+        config(['services.weixinweb' => [
+            'client_id' => config('site.user.wechatweb_client_id'),
+            'client_secret' => config('site.user.wechatweb_client_secret'),
+            'redirect' => route("wechat.login.callback"),
+        ]]);
+        //微信客户端登录
+        $wechat = $site->loginWechat;
+        if ($wechat) {
+            config(['services.weixin' => [
+                'client_id' => config('site.user.wechat_appid'),
+                'client_secret' => config('site.user.wechat_appsecret'),
+                'redirect' => route("wechat.login.callback"),
+            ]]);
+        }
     }
 
     /**

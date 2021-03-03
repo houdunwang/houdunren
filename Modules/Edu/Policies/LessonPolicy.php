@@ -40,9 +40,4 @@ class LessonPolicy
     {
         return UserService::isMaster(site(), $user) || $user->id == $lesson->user_id;
     }
-
-    public function play(User $user)
-    {
-        return true;
-    }
 }

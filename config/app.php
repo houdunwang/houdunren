@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'version' => '8.10',
+    'version' => '8.27',
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -135,7 +135,7 @@ return [
     */
 
     'providers' => [
-
+        \SocialiteProviders\Manager\ServiceProvider::class,
         /*
          * Laravel Framework Service Providers...
          */

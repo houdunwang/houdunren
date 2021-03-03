@@ -1,25 +1,13 @@
 <template>
     <div class="container-xl mt-10">
-        <div class="card mb-5">
+        <div class="card border-0">
             <div class="card-header h-14">
                 实战课程
             </div>
             <hd-skeleton-card v-if="loading" :num="12" class="md:grid md:grid-cols-4 md:gap-3 p-6" />
-            <div class="card-body md:grid md:grid-cols-4 md:gap-3" style="min-height:100px;" v-else>
-                <div v-for="lesson in lessons.data" :key="lesson.id" class="py-4 border-b border-gray-200">
-                    <router-link :to="{ name: 'front.lesson.show', params: { id: lesson.id } }" class="card card-link">
-                        <div class="text-center">
-                            <img :src="lesson.thumb" class="h-36 w-full object-cover" />
-                            <span class="badge bg-orange absolute -top-2 -right-2" v-if="lesson.price <= 0">免费</span>
-                            <span class="badge bg-teal absolute -top-2 -right-2" v-else>会员</span>
-                        </div>
-                        <div class="card-body text-center">
-                            <div class="card-title mb-1 text-gray-600">
-                                {{ lesson.title | titleSubstr(15) }}
-                            </div>
-                            <div class="text-muted text-sm">共有{{ lesson.video_num }}个视频</div>
-                        </div>
-                    </router-link>
+            <div class="card-body grid md:grid-cols-4 gap-5" style="min-height:100px;" v-else>
+                <div v-for="lesson in lessons.data" :key="lesson.id">
+                    <lesson-card :lesson="lesson" />
                 </div>
             </div>
             <div class="card-footer text-muted flex justify-center">

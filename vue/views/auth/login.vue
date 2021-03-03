@@ -33,7 +33,7 @@
                                         </el-button>
                                     </div>
                                 </form>
-                                <hd-footer> </hd-footer>
+                                <hd-footer :site="site" />
                             </div>
                         </div>
                     </div>
@@ -48,12 +48,13 @@
 </template>
 
 <script>
-import HdFooter from './Footer'
+import HdFooter from './components/Footer'
 export default {
     route: { path: '/login', meta: { guest: true } },
     components: {
         HdFooter
     },
+    inject: ['site'],
     data() {
         return {
             form: { account: '', password: '', captcha: {}, remember: false }
@@ -65,7 +66,6 @@ export default {
             this.axios
                 .post(`login`, this.form)
                 .then(({ token }) => {
-                    // window.localStorage.setItem('token', token)
                     const redirectUrl = window.sessionStorage.getItem('redirect_url')
                     location.href = redirectUrl || '/'
                 })

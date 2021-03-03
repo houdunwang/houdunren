@@ -43,7 +43,7 @@ export default {
     },
     async created() {
         this.load()
-        const intervalId = setInterval(_ => this.load(), 10000)
+        const intervalId = setInterval(_ => this.load(), 30000)
         this.$once('hook:beforeDestroy', () => {
             clearInterval(intervalId)
         })
