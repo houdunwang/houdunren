@@ -1,14 +1,17 @@
 <template>
     <div class="fields">
-        <el-alert :title="`正在管理【${model.title}模型】的字段`" type="success" class="mb-3"> </el-alert>
         <hd-tab :tabs="tabs" />
-
-        <table class="table table-responsive " v-if="model.id">
+        <ul class="alert alert-info text-sm text-gray-500 text-light leading-relaxed" role="alert">
+            <li class="text-red">正在管理【{{ model.title }}】模型字段</li>
+            <li>修改字段后需要点击保存提交才会生效</li>
+        </ul>
+        <table class="table table-bordered table-striped" v-if="model.id">
             <thead>
                 <tr>
                     <th>标题</th>
-                    <th>表单name</th>
+                    <th>字段名</th>
                     <th>显示</th>
+                    <th>系统字段</th>
                     <th>提示信息</th>
                     <th class="w-1"></th>
                 </tr>
@@ -25,18 +28,20 @@
                         <i class="far fa-check-square text-green-700" v-if="field.show"></i>
                     </td>
                     <td>
-                        {{ field.placeholder }}
+                        <i class="far fa-check-square text-green-700" v-if="field.system"></i>
                     </td>
                     <td>
-                        <div class="btn-group" role="group" aria-label="">
-                            <edit :field="field" @update="updateField" :model="model">编辑</edit>
-                            <button type="button" class="btn btn-primary" v-if="!field.system" @click="del(field)">删除</button>
-                        </div>
+                        {{ field.placeholder }}
+                    </td>
+                    <td width="120">
+                        <edit :field="field" @update="updateField" :model="model" class="inline-block">编辑</edit>
+                        <button type="button" class="btn btn-warning btn-sm" v-if="!field.system" @click="del(field)">删除</button>
                     </td>
                 </tr>
             </draggable>
         </table>
-        <edit @update="updateField" :model="model">添加字段</edit>
+        <button type="button" class="btn" @click="add">添加字段</button>
+        <button type="button" class="btn btn-info" @click="onSubmit">保存提交</button>
     </div>
 </template>
 
@@ -44,6 +49,19 @@
 import draggable from 'vuedraggable'
 import tabs from './tabs'
 import Edit from './components/Edit'
+//默认值用于添加字段
+const field = {
+    name: '',
+    title: '',
+    type: 'input',
+    placeholder: '请输入标题',
+    value: '',
+    options: {},
+    rank: 0,
+    show: true,
+    validate_rule: '',
+    validate_error: ''
+}
 export default {
     route: { path: 'field/:mid/index' },
     components: { Edit, draggable },
@@ -58,25 +76,22 @@ export default {
     },
 
     methods: {
-        //更新字段
-        updateField(field) {
-            let index = this.model.fields.findIndex(f => f.name == field.name)
-            if (index == -1) {
-                //新增
-                this.model.fields.push(field)
-            } else {
-                //修改
-                this.model.fields.splice(index, 1, field)
-            }
-            axios.put(`model/${this.model.id}`, this.model)
+        add() {
+            this.model.fields.push(field)
         },
         //删除非系统字段
         del(field) {
             this.$confirm(`确定删除【${field.title}】吗?`, '温馨提示').then(_ => {
                 let index = this.model.fields.findIndex(f => f.name == field.name)
                 this.model.fields.splice(index, 1)
-                axios.put(`model/${this.model.id}`, this.model)
             })
+        },
+        //保存
+        onSubmit() {
+            if (this.model.fields.some(f => f.name == '' || f.title == '')) {
+                return this.$message.error(`有字段数据不完整`)
+            }
+            axios.put(`model/${this.model.id}`, this.model)
         },
         //更新排序
         changeOrder() {
@@ -85,11 +100,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.fields .table thead th {
-    font-size: 1rem !important;
-    padding-top: 0.6rem;
-    padding-bottom: 0.6rem;
-}
-</style>

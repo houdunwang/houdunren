@@ -22,9 +22,9 @@
                     </div>
                     <div class="border-t border-gray-200 w-full flex justify-center bg-gray-100 py-3">
                         <el-button type="primary" size="mini">
-                            <button class="text-white" @click.prevent="admin(module)">
+                            <router-link :to="`/${module.name}/site/${site.id}/admin`" class="text-white" target="_blank">
                                 管理模块
-                            </button>
+                            </router-link>
                         </el-button>
                     </div>
                 </div>
@@ -50,13 +50,6 @@ export default {
         const sid = this.$route.params.sid
         ;[this.site, this.modules] = await Promise.all([axios.get(`site/${sid}`), axios.get(`module/site/${sid}`)])
         this.loading = false
-    },
-    methods: {
-        //模块管理
-        admin(module) {
-            window.localStorage.setItem('sid', this.site.id)
-            location.href = `/${module.name}/site/${this.site.id}/admin`
-        }
     }
 }
 </script>

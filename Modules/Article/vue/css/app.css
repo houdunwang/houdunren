@@ -51,3 +51,9 @@ img {
 .markdown table {
     border: solid 1px #ddd;
 }
+
+.table thead th,
+.table tbody td {
+    font-size: 0.9rem;
+    vertical-align: middle;
+}

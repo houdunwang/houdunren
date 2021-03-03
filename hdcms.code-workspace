@@ -7,7 +7,10 @@
 		"path": "Modules/Edu"
 	},
 	{
-		"path": "Modules/Edu/vue"
+		"path": "Modules/Article"
+	},
+	{
+		"path": "Modules/Article/vue"
 	}
 ],
   "settings": {

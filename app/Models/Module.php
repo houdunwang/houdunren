@@ -11,7 +11,7 @@ use ModuleService;
  */
 class Module extends Model
 {
-    protected $fillable = ['title', 'name', 'version', 'description', 'author'];
+    protected $fillable = ['title', 'name', 'description', 'author'];
     protected $appends = ['config', 'preview', 'version'];
 
     /**

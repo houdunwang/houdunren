@@ -6,5 +6,6 @@ use Modules\Edu\Http\Controllers\OrderController;
 Route::get('Edu/Order/subscribe/{subscribe}', [OrderController::class, 'subscribe'])->middleware(['auth:sanctum', 'module']);
 
 Route::any('Edu/{path?}', function () {
+
     return view('edu::app');
 })->where('path', '.*')->middleware(['module']);
