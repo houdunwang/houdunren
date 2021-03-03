@@ -9,7 +9,7 @@
                 <hd-error name="title" />
                 <tags v-model="form.tags" />
                 <hd-error name="tags" />
-                <hd-tui-editor
+                <tui-editor
                     v-model="form.content"
                     v-if="!id || form.content"
                     initialEditType="markdown"

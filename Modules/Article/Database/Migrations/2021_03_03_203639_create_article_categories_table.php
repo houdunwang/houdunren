@@ -15,11 +15,13 @@ class CreateArticleCategoriesTable extends Migration
         Schema::create('article_categories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('site_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('model_id')->nullable()->constrained('article_models')->onDelete('SET NULl');
             $table->tinyInteger('type')->default(1)->commit('1:普通栏目 2:封面栏目 3:单文章');
             $table->unsignedBigInteger('pid')->default(0)->comment('父级目录');
             $table->string('path')->index()->comment('多级目录路径');
             $table->string('title')->comment('栏目名称');
+            $table->string('preview')->nullable()->comment('缩略图');
             $table->string('keywords')->nullable()->comment('关键词');
             $table->string('description')->nullable()->comment('栏目描述');
             $table->string('url')->nullable()->comment('跳转链接');

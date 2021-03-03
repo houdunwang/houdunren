@@ -3,6 +3,7 @@
 namespace Modules\Edu\Api;
 
 use App\Http\Controllers\Controller;
+use Auth;
 use Illuminate\Http\Request;
 use Modules\Edu\Entities\Tag;
 
@@ -40,7 +41,7 @@ class TagController extends Controller
         collect($request->input('tags'))->filter(function ($tag) {
             return trim($tag['title']) != '';
         })->map(function ($tag) {
-            Tag::create($tag + ['site_id' => site()['id']]);
+            Tag::create($tag + ['site_id' => SID]);
         });
         return $this->message('标签保存成功');
     }

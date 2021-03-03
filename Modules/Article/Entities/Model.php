@@ -15,7 +15,7 @@ class Model extends BaseModel
 
     protected $table = 'article_models';
 
-    protected $fillable = ['title', 'fields', 'site_id'];
+    protected $fillable = ['title', 'fields', 'site_id', 'user_id'];
 
     protected $casts = [
         'fields' => 'array'

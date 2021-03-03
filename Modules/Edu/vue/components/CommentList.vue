@@ -126,7 +126,7 @@
                 <div v-else class="font-bold text-gray-600">发表评论</div>
             </div>
             <div class="card-body">
-                <hd-tui-editor v-model="form.content" initialEditType="markdown" class="border" :action="`/api/upload/site/${site.id}`" ref="editor" />
+                <tui-editor v-model="form.content" initialEditType="markdown" class="border" :action="`/api/upload/site/${site.id}`" ref="editor" />
                 <hd-error name="content" />
             </div>
             <div class="card-footer text-muted">

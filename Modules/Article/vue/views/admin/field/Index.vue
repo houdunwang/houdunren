@@ -16,7 +16,7 @@
                     <th class="w-1"></th>
                 </tr>
             </thead>
-            <draggable v-model="model.fields" tag="tbody" @change="changeOrder">
+            <draggable v-model="model.fields" tag="tbody">
                 <tr v-for="field in model.fields" :key="field.name" class="py-2 text-gray-700">
                     <td>
                         {{ field.title }}
@@ -91,10 +91,6 @@ export default {
             if (this.model.fields.some(f => f.name == '' || f.title == '')) {
                 return this.$message.error(`有字段数据不完整`)
             }
-            axios.put(`model/${this.model.id}`, this.model)
-        },
-        //更新排序
-        changeOrder() {
             axios.put(`model/${this.model.id}`, this.model)
         }
     }

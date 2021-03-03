@@ -15,6 +15,7 @@ class CreateArticleModelsTable extends Migration
         Schema::create('article_models', function (Blueprint $table) {
             $table->id();
             $table->foreignId('site_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->char('title', 100)->comment('模型名称');
             $table->json('fields')->nullable()->comment('扩展字段配置');
             $table->timestamps();

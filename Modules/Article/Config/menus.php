@@ -1,7 +1,7 @@
 <?php
 return [
     [
-        'title' => '基本设置',
+        'title' => '基础设置',
         'icon' => 'fab fa-app-store-ios',
         'show' => true,
         'items' => [

@@ -15,6 +15,8 @@ class CreateArticleTagsTable extends Migration
         Schema::create('article_tags', function (Blueprint $table) {
             $table->id();
             $table->foreignId('site_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('model_id')->constrained('article_models')->onDelete('cascade');
             $table->char('title', 20)->comment('标签名称');
             $table->timestamps();
         });

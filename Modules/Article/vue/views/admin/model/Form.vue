@@ -27,7 +27,7 @@ import fields from './fields'
 export default {
     props: ['id'],
     data() {
-        return { form, tabs }
+        return { form: Object.assign({}, form), tabs }
     },
     async created() {
         if (this.id) this.form = await axios.get(`model/${this.id}`)

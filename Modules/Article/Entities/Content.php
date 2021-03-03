@@ -16,7 +16,7 @@ class Content extends Model
 {
     use HasFactory;
     protected $table = 'article_contents';
-    protected $fillable = ['title', 'site_id',  'content', 'source', 'thumb', 'description'];
+    protected $fillable = ['title', 'site_id',  'content', 'source', 'preview', 'description', 'user_id'];
     protected $casts = [];
     protected $appends = ['permissions'];
 

@@ -31,13 +31,11 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="navbar-nav pt-lg-3">
                         <li class="nav-item dropdown" v-for="(menu, index) in menus" :key="index">
-                            <a class="nav-link show" href="#navbar-base">
+                            <a class="nav-link show flex items-baseline" href="#navbar-base">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <i :class="menu.icon"></i>
                                 </span>
-                                <span class="nav-link-title">
-                                    {{ menu.title }}
-                                </span>
+                                <span class="nav-link-title"> {{ menu.title }} </span>
                             </a>
                             <div class="dropdown-menu show">
                                 <div class="dropdown-menu-columns">
@@ -200,10 +198,7 @@
         </header>
         <div class="content">
             <div class="p-5 bg-white shadow-sm mx-5">
-                <keep-alive>
-                    <router-view v-if="$route.meta.keepAlive"></router-view>
-                </keep-alive>
-                <router-view v-if="!$route.meta.keepAlive"></router-view>
+                <router-view></router-view>
             </div>
         </div>
         <el-backtop> </el-backtop>
