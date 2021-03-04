@@ -14,7 +14,7 @@
                             </div>
                             <div class="card-body text-center pb-3 pt-0">
                                 <div class="card-title">
-                                    {{ lesson.title | titleSubstr(20) }}
+                                    {{ lesson.title | truncate(20) }}
                                 </div>
                             </div>
                         </router-link>

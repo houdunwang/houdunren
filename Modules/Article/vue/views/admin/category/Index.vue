@@ -2,13 +2,41 @@
     <div>
         <hd-tab :tabs="tabs" />
         <el-table :data="categories" border stripe>
-            <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label" :width="col.width"> </el-table-column>
+            <el-table-column prop="id" label="编号" width="100"> </el-table-column>
+            <el-table-column prop="title" label="栏目名称" #default="{row:category}">
+                {{ '-'.repeat(category.level * 5) }}
+                {{ category.title }}
+            </el-table-column>
+            <el-table-column prop="path" label="多级路径"> </el-table-column>
+            <el-table-column label="栏目介绍" #default="{row:category}">
+                {{ category.description | truncate }}
+            </el-table-column>
+            <el-table-column label="模型" #default="{row:category}">
+                <router-link :to="{ name: 'admin.model.edit', params: { id: category.model.id } }" class="text-gray-500 hover:text-gray-800">
+                    {{ category.model.title }}
+                </router-link>
+            </el-table-column>
+            <el-table-column label="类型" #default="{row:category}">
+                <el-tag size="mini">{{ category.typeTitle }}</el-tag>
+            </el-table-column>
+            <el-table-column label="" #default="{row:category}" width="180" align="right">
+                <el-button-group>
+                    <el-button type="success" size="mini" @click="router('admin.category.edit', { id: category.id })">编辑</el-button>
+                    <el-button type="danger" size="mini">删除</el-button>
+                </el-button-group>
+            </el-table-column>
         </el-table>
     </div>
 </template>
 
 <script>
 import tabs from './tabs'
+const columns = [
+    { label: '编号', id: 'id', width: 100 },
+    { label: '栏目名称', id: 'title', width: 100 },
+    { label: '编', id: 'id', width: 100 },
+    { label: '编号', id: 'id', width: 100 }
+]
 export default {
     route: { path: '' },
     data() {

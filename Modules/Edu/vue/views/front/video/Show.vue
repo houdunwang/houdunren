@@ -62,7 +62,7 @@
                                 :class="{ 'text-blue-800 font-bold': video.id == v.id }"
                                 class="text-base text-gray-500 font-normal hover:text-gray-900"
                             >
-                                {{ v['title'] | titleSubstr }}
+                                {{ v['title'] | truncate }}
                             </router-link>
                         </div>
                     </div>

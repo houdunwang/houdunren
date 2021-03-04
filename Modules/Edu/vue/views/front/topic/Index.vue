@@ -18,7 +18,7 @@
                                         :to="{ name: 'front.topic.show', params: { id: topic.id } }"
                                         class="text-base font-bold text-gray-500 hover:text-gray-900"
                                     >
-                                        {{ topic['title'] | titleSubstr }}
+                                        {{ topic['title'] | truncate }}
                                     </router-link>
                                     <div class="text-xs text-gray-500 mt-2">{{ user.name }} 更新于 {{ topic['created_at'] | fromNow }}</div>
                                 </div>

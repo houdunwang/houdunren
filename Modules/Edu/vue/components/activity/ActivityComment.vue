@@ -6,7 +6,7 @@
             </div>
             <div class="col">
                 <a href="#" @click.prevent="to(activity.subject)" class="text-base text-gray-600 hover:text-gray-900 ">
-                    {{ activity.subject.title | titleSubstr(45) }}
+                    {{ activity.subject.title | truncate(45) }}
                 </a>
                 <div class="text-xs text-gray-500 mt-2">
                     <span class="badge bg-orange">评论</span>

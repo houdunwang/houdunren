@@ -10,7 +10,7 @@
                     <div class="row align-items-center">
                         <div class="col text-truncate flex justify-between items-center">
                             <router-link :to="{ name: 'front.video.show', params: { id: video.id } }" target="_blank" class="text-body d-block text-gray-700">
-                                {{ video.title | titleSubstr }}
+                                {{ video.title | truncate }}
                             </router-link>
                             <small class="d-block text-muted text-truncate mt-n1 text-sm"> {{ video.created_at | fromNow }} </small>
                         </div>

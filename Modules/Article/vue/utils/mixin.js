@@ -23,6 +23,9 @@ export default {
         router(name, params = {}) {
             router.push({ name, params })
         },
+        errors(name) {
+            return store.getters.errors(name)
+        },
         logout() {
             location.href = '/logout'
         }

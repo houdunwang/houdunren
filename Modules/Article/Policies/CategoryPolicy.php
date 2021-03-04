@@ -3,7 +3,7 @@
 namespace Modules\Article\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Modules\Article\Entities\Content;
+use Modules\Article\Entities\Category;
 use App\Models\User;
 
 /**
@@ -14,17 +14,17 @@ class CategoryPolicy
 {
     use HandlesAuthorization;
 
-    public function create(User $user, Content $content)
+    public function create(User $user, Category $category)
     {
         return true;
     }
 
-    public function update(User $user, Content $content)
+    public function update(User $user, Category $category)
     {
         return true;
     }
 
-    public function delete(User $user, Content $content)
+    public function delete(User $user, Category $category)
     {
         return true;
     }

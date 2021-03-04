@@ -8,7 +8,7 @@
                 </div>
                 <div class="col">
                     <router-link :to="{ name: 'front.topic.show', params: { id: topic.id } }" class="text-base text-gray-600 hover:text-gray-900">
-                        {{ topic['title'] | titleSubstr }}
+                        {{ topic['title'] | truncate }}
                     </router-link>
                     <div class="text-xs text-gray-500 mt-2">
                         <span class="badge bg-red">推荐</span>

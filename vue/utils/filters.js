@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import dayjs from 'dayjs'
-//标题截断
-Vue.filter('titleSubstr', function(value, len = 10) {
-    return value.length > len ? value.substr(0, len) + '...' : value
+
+//内容截断
+Vue.filter('truncate', function(value, len = 55, ex = true) {
+    if (value) {
+        return value.length > len ? value.substr(0, len) + (ex ? ' ...' : '') : value
+    }
 })
 
 //显示几天前

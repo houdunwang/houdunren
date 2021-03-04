@@ -14,6 +14,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'type' => ['required'],
+            'model_id' => ['nullable', 'required'],
             'pid' => ['required'],
             'title' => ['required'],
             'url' => ['nullable', 'url'],
@@ -27,6 +28,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'type' => '栏目类型',
+            'model_id' => '模型',
             'pid' => '父级栏目',
             'title' => '栏目名称',
             'url' => '跳转链接',

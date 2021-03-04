@@ -7,7 +7,7 @@
             <div class="col">
                 <span class="badge bg-purple">课程</span>
                 <router-link :to="{ name: 'front.lesson.show', params: { id: activity.subject.id } }" class="text-base text-gray-600 hover:text-gray-900">
-                    {{ activity.subject.title | titleSubstr }}
+                    {{ activity.subject.title | truncate }}
                 </router-link>
                 <div class="text-xs text-gray-500 mt-2">
                     <a href="#" @click.prevent="space(activity.causer)">{{ activity.causer.name }}</a>

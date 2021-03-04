@@ -2,7 +2,7 @@
     <div class="relative">
         <el-upload
             class="avatar-uploader"
-            :action="`/api/${action}`"
+            :action="`${action}`"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"

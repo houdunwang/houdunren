@@ -6,7 +6,7 @@
             </div>
             <div class="col">
                 <router-link :to="{ name: 'front.sign.index' }" class="text-base text-gray-700 hover:text-gray-900 ">
-                    {{ activity.subject.content | titleSubstr }}
+                    {{ activity.subject.content | truncate }}
                 </router-link>
 
                 <div class="text-xs text-gray-500 mt-2">

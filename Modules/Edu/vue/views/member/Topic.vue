@@ -10,7 +10,7 @@
                     <div class="row align-topics-center">
                         <div class="col text-truncate flex justify-between topics-center">
                             <router-link :to="{ name: 'front.topic.show', params: { id: topic.id } }" target="_blank" class="text-body d-block">
-                                {{ topic['title'] | titleSubstr }}
+                                {{ topic['title'] | truncate }}
                             </router-link>
                             <div class="d-block text-muted text-truncate mt-n1">
                                 <div class="btn-group" role="group" aria-label="">

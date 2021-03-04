@@ -10,7 +10,7 @@
                     <div class="row align-topics-center">
                         <div class="col text-truncate flex justify-between topics-center">
                             <router-link :to="{ name: 'front.topic.show', params: { id: topic.id } }" target="_blank" class="text-body d-block">
-                                {{ topic['title'] | titleSubstr }}
+                                {{ topic['title'] | truncate }}
                             </router-link>
                             <div class="text-gray-600 text-sm">
                                 {{ topic.updated_at | fromNow }}

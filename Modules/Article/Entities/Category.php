@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Auth;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Modules\Article\Entities\Model as ArticleModel;
 
 /**
  * 栏目
@@ -21,10 +22,11 @@ class Category extends Model
         'url', 'content', 'index_template', 'list_template', 'content_template', 'user_id'
     ];
     protected $casts = [
-        'type' => 'boolean',
+        'pid' => 'integer',
     ];
+    protected $types = [1 => '普通栏目', 2 => '封面栏目', 3 => '单文章', 4 => '外部链接'];
 
-    protected $appends = ['permissions'];
+    protected $appends = ['permissions', 'typeTitle', 'level'];
 
     /**
      * 操作权限
@@ -40,12 +42,22 @@ class Category extends Model
         ];
     }
 
+    public function getTypeTitleAttribute()
+    {
+        return $this->types[$this->type];
+    }
+
+    public function getLevelAttribute()
+    {
+        return count(explode('-', $this->path)) - 1;
+    }
+
     /**
      * 标签的关联
      * @return BelongsToMany
      */
     public function model()
     {
-        return $this->belongsTo(Model::class);
+        return $this->belongsTo(ArticleModel::class);
     }
 }

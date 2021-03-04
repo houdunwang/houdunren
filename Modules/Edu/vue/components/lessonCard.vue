@@ -10,7 +10,7 @@
         </div>
         <div class="card-body border-0">
             <div class="mb-1 text-gray-600">
-                {{ lesson.title | titleSubstr(15) }}
+                {{ lesson.title | truncate(15) }}
             </div>
             <div class="text-sm flex justify-start items-center ">
                 <img :src="lesson.user.icon" class="w-6 h-6 rounded-full mr-2" />

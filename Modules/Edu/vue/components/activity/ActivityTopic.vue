@@ -6,7 +6,7 @@
             </div>
             <div class="col">
                 <router-link :to="{ name: 'front.topic.show', params: { id: activity.subject.id } }" class="text-base text-gray-600 hover:text-gray-900">
-                    {{ activity.subject.title | titleSubstr(50) }}
+                    {{ activity.subject.title | truncate(50) }}
                 </router-link>
                 <div class="text-xs text-gray-500 mt-2">
                     <span class="badge bg-purple">贴子</span>
