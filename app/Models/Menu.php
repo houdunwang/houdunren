@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
  * 站点菜单
  * @package App\Models
  */
-class Menu extends BaseModel
+class Menu extends Model
 {
-  protected $fillable = ['site_id', 'title', 'url'];
+    protected $fillable = ['site_id', 'title', 'url'];
 
-  public function site()
-  {
-    return $this->belongsTo(Site::class);
-  }
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
+    }
 }

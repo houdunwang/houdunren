@@ -3,6 +3,7 @@
 namespace Modules\Article\Observers;
 
 use Modules\Article\Entities\Content;
+use Modules\Article\Entities\Category;
 
 /**
  * 文章
@@ -15,6 +16,7 @@ class ContentObserver
         if (empty($content['description']) && isset($content['content'])) {
             $content['description'] = mb_substr(strip_tags($content['content']), 0, 100, 'utf-8');
         }
+        $content['model_id'] = $content->category->model_id;
     }
 
     /**
@@ -34,9 +36,12 @@ class ContentObserver
      * @param  \App\Models\Content  $content
      * @return void
      */
-    public function updated(Content $content)
+    public function updating(Content $content)
     {
-        //
+        if (empty($content['description']) && isset($content['content'])) {
+            $content['description'] = mb_substr(strip_tags($content['content']), 0, 100, 'utf-8');
+        }
+        $content['model_id'] = $content->category->model_id;
     }
 
     /**

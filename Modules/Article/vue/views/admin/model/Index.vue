@@ -10,6 +10,9 @@
                     {{ model[col.id] }}
                 </span>
             </el-table-column>
+            <el-table-column #default="{row:model}" label="创建者">
+                {{ model.user.name }}
+            </el-table-column>
 
             <el-table-column width="250" #default="{row:model}" align="center">
                 <el-button-group>

@@ -2,16 +2,16 @@
 
 namespace Modules\Edu\Entities;
 
-use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Edu\Entities\Tag;
 use Auth;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * 课程
  * @package Modules\Edu\Entities
  */
-class Lesson extends BaseModel
+class Lesson extends Model
 {
 
     protected $table = 'edu_lessons';

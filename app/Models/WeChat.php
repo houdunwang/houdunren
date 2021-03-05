@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * 微信公众号资料
  * @package App\Models
  */
-class WeChat extends BaseModel
+class WeChat extends Model
 {
     protected $fillable = ['site_id', 'title', 'name', 'introduce', 'qr', 'token', 'type', 'wechat_id', 'appid', 'appsecret', 'welcome', 'default_message'];
 

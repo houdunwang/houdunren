@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\User;
 
 /**
  * 文章
@@ -16,7 +18,7 @@ class Content extends Model
 {
     use HasFactory;
     protected $table = 'article_contents';
-    protected $fillable = ['title', 'site_id',  'content', 'source', 'preview', 'description', 'user_id'];
+    protected $guarded = ['thumb', 'permissions', 'tags'];
     protected $casts = [];
     protected $appends = ['permissions'];
 
@@ -35,11 +37,29 @@ class Content extends Model
     }
 
     /**
+     * 用户关联
+     * @return BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
      * 标签的关联
      * @return BelongsToMany
      */
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'article_tag_content')->withTimestamps();
+    }
+
+    /**
+     * 栏目关联
+     * @return BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

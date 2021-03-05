@@ -2,10 +2,13 @@
 
 namespace Modules\Edu\Entities;
 
-use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends BaseModel
+/**
+ * 订单
+ * @package Modules\Edu\Entities
+ */
+class Order extends Model
 {
     protected $table = 'edu_order';
     protected $types = ['subscribe' => '订阅会员', 'lesson' => '购买课程'];

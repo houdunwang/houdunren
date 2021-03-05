@@ -14829,19 +14829,6 @@
      */ 
         class PayFacade {
                     /**
-         * 发起支付
-         *
-         * @param string $gatway 支付网关
-         * @param array $order 定单
-         * @return void 
-         * @static 
-         */ 
-        public static function pay($gatway, $order = [])
-        {
-                        /** @var \App\Services\Pay\PayService $instance */
-                        $instance->pay($gatway, $order);
-        }
-                    /**
          * 生成定单号
          *
          * @return string 
@@ -14855,28 +14842,24 @@
                     /**
          * 支付宝
          *
-         * @param array $config ['return_url'=>'同步通知地址','notify_url'=>'异步通知地址']:
-         * @return \App\Services\Pay\Alipay 
-         * @throws BindingResolutionException
+         * @return \App\Services\Pay\AliPay 
          * @static 
          */ 
-        public static function alipay($order = [], $type = null)
+        public static function alipay()
         {
                         /** @var \App\Services\Pay\PayService $instance */
-                        return $instance->alipay($order, $type);
+                        return $instance->alipay();
         }
                     /**
          * 微信支付
          *
-         * @param array $config $config['notify_url'] = 异步通知地址;
-         * @return \App\Services\Pay\Wechat 
-         * @throws BindingResolutionException
+         * @return \App\Services\Pay\AliPay 
          * @static 
          */ 
-        public static function wepay($order, $type = 'scan')
+        public static function wepay()
         {
                         /** @var \App\Services\Pay\PayService $instance */
-                        return $instance->wepay($order, $type);
+                        return $instance->wepay();
         }
          
     }

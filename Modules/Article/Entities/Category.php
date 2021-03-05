@@ -9,6 +9,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Modules\Article\Entities\Model as ArticleModel;
+use App\Models\User;
 
 /**
  * 栏目
@@ -51,6 +52,11 @@ class Category extends Model
     public function getLevelAttribute()
     {
         return count(explode('-', $this->path)) - 2;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     /**

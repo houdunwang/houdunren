@@ -9,7 +9,8 @@
             <thead>
                 <tr>
                     <th>标题</th>
-                    <th>字段名</th>
+                    <th>表单名</th>
+                    <th>表单类型</th>
                     <th>显示</th>
                     <th>系统字段</th>
                     <th>提示信息</th>
@@ -17,24 +18,15 @@
                 </tr>
             </thead>
             <draggable v-model="model.fields" tag="tbody">
-                <tr v-for="field in model.fields" :key="field.name" class="py-2 text-gray-700">
-                    <td>
-                        {{ field.title }}
-                    </td>
-                    <td>
-                        {{ field.name }}
-                    </td>
-                    <td>
-                        <i class="far fa-check-square text-green-700" v-if="field.show"></i>
-                    </td>
-                    <td>
-                        <i class="far fa-check-square text-green-700" v-if="field.system"></i>
-                    </td>
-                    <td>
-                        {{ field.placeholder }}
-                    </td>
+                <tr v-for="(field, index) in model.fields" :key="index" class="py-2 text-gray-700 text-xs">
+                    <td>{{ field.title }}</td>
+                    <td>{{ field.name }}</td>
+                    <td>{{ type(field) }}</td>
+                    <td><i class="far fa-check-square text-green-700" v-if="field.show"></i></td>
+                    <td><i class="far fa-check-square text-green-700" v-if="field.system"></i></td>
+                    <td>{{ field.placeholder }}</td>
                     <td width="120">
-                        <edit :field="field" @update="updateField" :model="model" class="inline-block">编辑</edit>
+                        <edit :field="field" :model="model" class="inline-block">编辑</edit>
                         <button type="button" class="btn btn-warning btn-sm" v-if="!field.system" @click="del(field)">删除</button>
                     </td>
                 </tr>
@@ -49,14 +41,15 @@
 import draggable from 'vuedraggable'
 import tabs from './tabs'
 import Edit from './components/Edit'
+import types from './components/types'
 //默认值用于添加字段
 const field = {
-    name: '',
     title: '',
+    name: '',
     type: 'input',
-    placeholder: '请输入标题',
+    placeholder: '',
     value: '',
-    options: {},
+    options: '',
     rank: 0,
     show: true,
     validate_rule: '',
@@ -68,16 +61,21 @@ export default {
     data() {
         return {
             tabs,
+            types,
             model: {}
         }
     },
     async created() {
         this.model = await axios.get(`model/${this.$route.params.mid}`)
     },
-
     methods: {
+        //类型中文
+        type(field) {
+            return this.types.find(t => t.type == field.type).label
+        },
+        //添加字段
         add() {
-            this.model.fields.push(field)
+            this.model.fields.push(Object.assign({}, field))
         },
         //删除非系统字段
         del(field) {

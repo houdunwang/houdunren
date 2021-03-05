@@ -43,5 +43,6 @@ class CategoryObserver
 
     public function deleted(Category $category)
     {
+        $category->contents()->delete();
     }
 }

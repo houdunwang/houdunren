@@ -17,11 +17,12 @@ class CreateArticleContentsTable extends Migration
             $table->foreignId('site_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('model_id')->constrained('article_models')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('article_categories')->onDelete('cascade');
             $table->string('title', 100)->nullable()->comment('标题');
             $table->string('url')->nullable()->comment('跳转链接');
             $table->text('content')->nullable()->comment('内容');
             $table->string('source', 30)->nullable()->comment('来源');
-            $table->unsignedInteger('click')->default(0)->comment('点击数');
+            $table->unsignedInteger('click')->nullable()->comment('点击数');
             $table->string('preview')->nullable()->comment('缩略图');
             $table->string('description')->nullable()->comment('文章介绍');
             $table->json('fields')->nullable()->comment('扩展字段');

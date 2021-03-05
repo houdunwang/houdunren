@@ -25,7 +25,7 @@
                                 <el-option label="顶级栏目" :value="0"> </el-option>
                                 <el-option
                                     v-for="category in categories"
-                                    :disabled="canSelect(category)"
+                                    :disabled="disabled(category)"
                                     :key="category.id"
                                     :label="category.title"
                                     :value="category.id"
@@ -40,25 +40,26 @@
                             <el-input v-model="form.title" placeholder="" size="normal" clearable></el-input>
                             <hd-error name="title" />
                         </el-form-item>
-                        <el-form-item label="预览图">
-                            <hd-image v-model="form.preview" :action="`/api/upload/site/${site.id}`" />
-                            <hd-error name="preview" />
-                        </el-form-item>
-                        <el-form-item label="关键词">
+
+                        <el-form-item label="关键词" v-if="form.type != 4">
                             <el-input v-model="form.keywords" placeholder="" size="normal" clearable></el-input>
                             <hd-error name="keywords" />
                         </el-form-item>
-                        <el-form-item label="栏目简介">
+                        <el-form-item label="栏目简介" v-if="form.type != 4">
                             <el-input type="textarea" v-model="form.description" placeholder="" size="normal" clearable></el-input>
                             <hd-error name="description" />
-                        </el-form-item>
-                        <el-form-item label="文章内容" v-if="form.type == 3">
-                            <wang-editor v-model="form.content" />
-                            <hd-error name="content" />
                         </el-form-item>
                         <el-form-item label="跳转链接" v-if="form.type == 4">
                             <el-input v-model="form.url" placeholder="" size="normal" clearable></el-input>
                             <hd-error name="url" />
+                        </el-form-item>
+                        <el-form-item label="预览图">
+                            <hd-image v-model="form.preview" :action="`/api/upload/site/${site.id}`" />
+                            <hd-error name="preview" />
+                        </el-form-item>
+                        <el-form-item label="文章内容" v-if="form.type == 3">
+                            <wang-editor v-model="form.content" />
+                            <hd-error name="content" />
                         </el-form-item>
                     </el-card>
                 </el-tab-pane>
@@ -91,7 +92,6 @@ const form = {
     list_template: 'list.blade.php',
     content_template: 'content.blade.php'
 }
-// const categories = [{ title: '顶级栏目', id: 0, path: '' }]
 import tabs from './tabs'
 export default {
     props: ['id'],
@@ -100,8 +100,8 @@ export default {
     },
     async created() {
         this.models = await axios.get(`model`)
-        this.form.model_id = this.models.length && this.models[0].id
         this.categories = await axios.get(`category`)
+        this.form.model_id = this.models.length && this.models[0].id
         if (this.id) {
             this.form = await axios.get(`category/${this.id}`)
         }
@@ -115,8 +115,8 @@ export default {
             this.router('admin.category.index')
         },
         //栏目是否可以选择
-        canSelect(category) {
-            return this.form.id && category.path.includes(this.form.path)
+        disabled(category) {
+            return category.type >= 3 || (this.form.id && category.path.includes(this.form.path))
         }
     }
 }

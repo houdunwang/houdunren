@@ -11,11 +11,11 @@
                         {{ tag.title }}
                     </el-tag>
                 </div>
-                <div v-else-if="col.id == 'thumb'">
+                <div v-else-if="col.id == 'preview'">
                     <el-popover placement="top-start" width="200" height="200" trigger="hover">
-                        <img slot="reference" :src="content.thumb" class="w-8 h-8 object-cover" />
+                        <img slot="reference" :src="content.preview" class="w-8 h-8 object-cover" />
                         <div>
-                            <img :src="content.thumb" class="w-full h-20 object-cover" />
+                            <img :src="content.preview" class="w-full h-20 object-cover" />
                         </div>
                     </el-popover>
                 </div>
@@ -50,13 +50,12 @@ const columns = [
     { id: 'id', label: '编号', width: 80 },
     { id: 'title', label: '标题' },
     { id: 'tags', label: '标签' },
-    { id: 'thumb', label: '缩略图', width: 100 },
+    { id: 'preview', label: '缩略图', width: 100 },
     { id: 'created_at', label: '创建时间', width: 200 },
     { id: 'updated_at', label: '修改时间', width: 200 }
 ]
 import tabs from './tabs'
 export default {
-    route: { path: '' },
     data() {
         return { tabs, contents: [], columns }
     },
@@ -65,14 +64,12 @@ export default {
     },
     methods: {
         async load(page = 1) {
-            console.log(page)
-
             this.contents = await axios.get(`content?page=${page}`)
         },
         async del(content) {
             this.$confirm(`确定删除【${content.title}】吗？`, '温馨提示').then(async _ => {
                 await axios.delete(`content/${content.id}`)
-                this.contents.splice(this.contents.indexOf(content), 1)
+                this.contents.data.splice(this.contents.data.indexOf(content), 1)
             })
         }
     }

@@ -37,7 +37,7 @@ class ContentController extends Controller
     {
         DB::beginTransaction();
         $this->authorize('create', $content);
-        $content->fill($request->input());
+        $content->fill($request->except('tags'));
         $content->site_id = SID;
         $content->user_id = Auth::id();
         $content->save();
@@ -51,14 +51,17 @@ class ContentController extends Controller
     {
         DB::beginTransaction();
         $this->authorize('update', $content);
-        $content->fill($request->input())->save();
+        $content->fill($request->except('tags'));
+        $content->site_id = SID;
+        $content->user_id = Auth::id();
+        $content->save();
         //保存标签
         $content->tags()->sync($request->tags);
         DB::commit();
         return $this->message('文章更新成功', $content);
     }
 
-    public function destroy(ContentRequest $request, Site $site, Content $content)
+    public function destroy(Site $site, Content $content)
     {
         $this->authorize('delete', $content);
         $content->delete();

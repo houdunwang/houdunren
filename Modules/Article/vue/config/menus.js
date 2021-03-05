@@ -18,13 +18,6 @@ const menus = [
             { title: '模型管理', permission: 'system-lesson', route: { name: 'admin.model.index' } }
         ]
     },
-    // {
-    //     title: '系统模型',
-    //     icon: 'fas fa-sitemap',
-    //     items: [
-    //         { title: '新增模型 ', permission: 'system-lesson', route: { name: 'admin.model.create' } }
-    //     ]
-    // },
     {
         title: '微信公众号',
         icon: 'fab fa-weixin',

@@ -13,7 +13,10 @@ use DB;
 use Illuminate\Auth\Access\AuthorizationException;
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Eloquent\MassAssignmentException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Throwable;
+use InvalidArgumentException;
 
 /**
  * 栏目管理
@@ -27,17 +30,17 @@ class CategoryController extends Controller
     }
 
     /**
-     * 栏目列表
+     * 所有栏目
      * @return AnonymousResourceCollection
      */
     public function index()
     {
-        $categorys = Category::where('site_id', SID)->orderBy('path', 'asc')->get();
+        $categorys = Category::where('site_id', SID)->orderBy('path', 'asc')->with(['user', 'model'])->get();
         return CategoryResource::collection($categorys);
     }
 
     /**
-     * 获取栏目
+     * 单条
      * @param Site $site
      * @param Category $category
      * @return CategoryResource
@@ -48,26 +51,41 @@ class CategoryController extends Controller
     }
 
     /**
-     * 栏目多级路径
-     * @param mixed $pid 父栏目ID
-     * @return string
+     * 新增
+     * @param CategoryRequest $request
+     * @param Site $site
+     * @param Category $category
+     * @return void
+     * @throws AuthorizationException
+     * @throws Throwable
+     * @throws MassAssignmentException
+     * @throws InvalidArgumentException
+     * @throws BindingResolutionException
      */
-    // protected function path(int $pid)
-    // {
-    //     $category = Category::find($pid);
-    //     return $category ?  $category->path . '-' . $pid : 0;
-    // }
-
     public function store(CategoryRequest $request, Site $site, Category $category)
     {
         $this->authorize('create', $category);
+        DB::beginTransaction();
         $category->fill($request->input());
         $category->site_id = $site->id;
         $category->user_id = Auth::id();
         $category->save();
+        DB::commit();
         return $this->message('栏目添加成功', $category);
     }
 
+    /**
+     * 更新
+     * @param CategoryRequest $request
+     * @param Site $site
+     * @param Category $category
+     * @return void
+     * @throws AuthorizationException
+     * @throws Throwable
+     * @throws MassAssignmentException
+     * @throws InvalidArgumentException
+     * @throws BindingResolutionException
+     */
     public function update(CategoryRequest $request, Site $site, Category $category)
     {
         $this->authorize('update', $category);

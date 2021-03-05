@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * 微信粉丝
  * @package App\Models
  */
-class WeChatUser extends BaseModel
+class WeChatUser extends Model
 {
     protected $table = 'we_chat_users';
 

@@ -5,10 +5,35 @@ export default [
         type: 'input',
         placeholder: '请输入标题',
         value: '',
-        options: {},
+        options: '',
         rank: 0,
-        show: false,
-        system: true
+        show: true,
+        system: true,
+        validate_rule: ''
+    },
+    {
+        name: 'description',
+        title: '文章简介',
+        type: 'textarea',
+        placeholder: '',
+        value: '',
+        options: '',
+        rank: 0,
+        show: true,
+        system: false,
+        validate_rule: ''
+    },
+    {
+        name: 'preview',
+        title: '缩略图',
+        type: 'image',
+        placeholder: '',
+        value: '',
+        options: '',
+        rank: 0,
+        show: true,
+        system: false,
+        validate_rule: ''
     },
     {
         name: 'content',
@@ -16,32 +41,24 @@ export default [
         type: 'editor',
         placeholder: '',
         value: '',
-        options: {},
+        options: '',
         rank: 0,
-        show: false,
-        system: true
+        show: true,
+        system: true,
+        validate_rule: ''
     },
-    {
-        name: 'thumb',
-        title: '缩略图',
-        type: 'image',
-        placeholder: '',
-        value: '',
-        options: {},
-        rank: 0,
-        show: false,
-        system: true
-    },
+
     {
         name: 'url',
         title: '跳转链接',
         type: 'input',
         placeholder: '站点跳转链接',
         value: '',
-        options: {},
+        options: '',
         rank: 0,
-        show: false,
-        system: true
+        show: true,
+        system: true,
+        validate_rule: ''
     },
     {
         name: 'source',
@@ -49,10 +66,11 @@ export default [
         type: 'input',
         placeholder: '请输入文章来源',
         value: '',
-        options: {},
+        options: '',
         rank: 0,
-        show: false,
-        system: true
+        show: true,
+        system: false,
+        validate_rule: ''
     },
     {
         name: 'click',
@@ -60,20 +78,10 @@ export default [
         type: 'input',
         placeholder: '',
         value: '',
-        options: {},
+        options: '',
         rank: 0,
-        show: false,
-        system: true
-    },
-    {
-        name: 'description',
-        title: '文章简介',
-        type: 'input',
-        placeholder: '',
-        value: '',
-        options: {},
-        rank: 0,
-        show: false,
-        system: true
+        show: true,
+        system: false,
+        validate_rule: ''
     }
 ]

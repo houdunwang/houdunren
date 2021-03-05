@@ -1,9 +1,11 @@
 <template>
-    <el-input placeholder="" size="normal" clearable></el-input>
+    <el-input placeholder="" size="normal" clearable v-model="form[field.name]"></el-input>
 </template>
 
 <script>
-export default {}
+export default {
+    props: ['field', 'form']
+}
 </script>
 
 <style></style>

@@ -57,3 +57,7 @@ img {
     font-size: 0.9rem;
     vertical-align: middle;
 }
+
+.el-form-item {
+    margin-bottom: 10px !important;
+}

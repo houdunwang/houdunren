@@ -1,10 +1,10 @@
 <template>
-    <hd-wang-editor :name="field.name" />
+    <wang-editor :name="field.name" v-model="form[field.name]" />
 </template>
 
 <script>
 export default {
-    props: ['field']
+    props: ['field', 'form']
 }
 </script>
 
