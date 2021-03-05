@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\Article\Entities\Content;
 use Modules\Article\Observers\ContentObserver;
+use Modules\Article\Entities\Category;
+use Modules\Article\Observers\CategoryObserver;
 
 class ArticleServiceProvider extends ServiceProvider
 {
@@ -37,6 +39,7 @@ class ArticleServiceProvider extends ServiceProvider
     protected function observer()
     {
         Content::observe(ContentObserver::class);
+        Category::observe(CategoryObserver::class);
     }
 
     /**

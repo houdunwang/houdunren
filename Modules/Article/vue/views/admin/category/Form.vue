@@ -22,6 +22,7 @@
                         </el-form-item>
                         <el-form-item label="父级栏目" v-if="form.type <= 2">
                             <el-select v-model="form.pid" placeholder="请选择">
+                                <el-option label="顶级栏目" :value="0"> </el-option>
                                 <el-option
                                     v-for="category in categories"
                                     :disabled="canSelect(category)"
@@ -29,7 +30,7 @@
                                     :label="category.title"
                                     :value="category.id"
                                 >
-                                    {{ '-'.repeat(category.level * 5) }}
+                                    {{ '-'.repeat(category.level * 3) }}
                                     {{ category.title }}
                                 </el-option>
                             </el-select>
@@ -47,7 +48,7 @@
                             <el-input v-model="form.keywords" placeholder="" size="normal" clearable></el-input>
                             <hd-error name="keywords" />
                         </el-form-item>
-                        <el-form-item label="栏目描述">
+                        <el-form-item label="栏目简介">
                             <el-input type="textarea" v-model="form.description" placeholder="" size="normal" clearable></el-input>
                             <hd-error name="description" />
                         </el-form-item>
@@ -90,16 +91,17 @@ const form = {
     list_template: 'list.blade.php',
     content_template: 'content.blade.php'
 }
-const categories = [{ title: '顶级栏目', id: 0, path: '' }]
+// const categories = [{ title: '顶级栏目', id: 0, path: '' }]
 import tabs from './tabs'
 export default {
     props: ['id'],
     data() {
-        return { form: Object.assign({}, form), tabs, loading: true, models: [], categories }
+        return { form: Object.assign({}, form), tabs, loading: true, models: [], categories: [] }
     },
     async created() {
         this.models = await axios.get(`model`)
-        this.categories = [...categories, ...(await axios.get(`category`))]
+        this.form.model_id = this.models.length && this.models[0].id
+        this.categories = await axios.get(`category`)
         if (this.id) {
             this.form = await axios.get(`category/${this.id}`)
         }

@@ -19,7 +19,7 @@ class CreateArticleCategoriesTable extends Migration
             $table->foreignId('model_id')->nullable()->constrained('article_models')->onDelete('SET NULl');
             $table->tinyInteger('type')->default(1)->commit('1:普通栏目 2:封面栏目 3:单文章');
             $table->unsignedBigInteger('pid')->nullable()->comment('父级目录');
-            $table->string('path')->index()->comment('多级目录路径');
+            $table->string('path')->index()->nullable()->comment('多级目录路径');
             $table->string('title')->comment('栏目名称');
             $table->string('preview')->nullable()->comment('缩略图');
             $table->string('keywords')->nullable()->comment('关键词');

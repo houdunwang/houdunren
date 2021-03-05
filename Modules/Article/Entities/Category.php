@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Modules\Article\Entities\Model as ArticleModel;
 
@@ -49,7 +50,7 @@ class Category extends Model
 
     public function getLevelAttribute()
     {
-        return count(explode('-', $this->path)) - 1;
+        return count(explode('-', $this->path)) - 2;
     }
 
     /**
@@ -59,5 +60,23 @@ class Category extends Model
     public function model()
     {
         return $this->belongsTo(ArticleModel::class);
+    }
+
+    /**
+     * 父级栏目
+     * @return BelongsTo
+     */
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'pid');
+    }
+
+    /**
+     * 子栏目
+     * @return mixed
+     */
+    public function getChildrensAttribute()
+    {
+        return self::where('path', 'like', "%-{$this->id}-%")->get();
     }
 }

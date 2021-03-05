@@ -11,7 +11,7 @@
                         <div>
                             站点可用模块:
                             <span v-for="p in site.master.group.packages" :key="p.id">
-                                <el-tag size="mini" v-for="module in p.modules" :key="module.id">
+                                <el-tag size="mini" v-for="module in p.modules" :key="module.id" class="mr-1">
                                     {{ module.title }}
                                 </el-tag>
                             </span>
@@ -22,7 +22,10 @@
                         </router-link>
                     </div>
                     <div class="card-body text-gray-500 hover:text-gray-800 duration-300">
-                        <router-link :to="{ name: 'site.module.index', params: { sid: site.id } }" class="text-3xl text-gray-600 hover:text-gray-800">
+                        <router-link
+                            :to="{ name: 'site.module.index', params: { sid: site.id } }"
+                            class="text-3xl text-gray-500 duration-300 hover:text-gray-800"
+                        >
                             <i class="fa fa-rss text-5xl inline-block mr-2" aria-hidden="true"></i>
                             {{ site.title }}
                         </router-link>
@@ -30,18 +33,18 @@
                     <div class="card-footer text-sm text-gray-500 bg-white flex flex-col md:flex-row justify-between">
                         <div class="text-sm ">
                             # {{ site.id }} 创建时间: {{ site.created_at | format }} 站长: {{ site.master.name }} 所属组:
-                            <router-link :to="{ name: 'system.group.index' }" v-if="user.isSuperAdmin" class="hover:text-gray-900">
+                            <router-link :to="{ name: 'system.group.index' }" v-if="user.isSuperAdmin" class=" text-gray-500 duration-300 hover:text-gray-900">
                                 {{ site.master.group.title }}
                             </router-link>
                             <span v-else>{{ site.master.group.title }}</span>
                             <span v-if="site.module"> 默认模块: {{ site.module.title }} </span>
                         </div>
                         <div class="site-menu w-full md:w-auto grid md:block md:grid-cols-none grid-cols-2 items-center mt-3 md:mt-0">
-                            <a :href="site.domain" target="_blank" class="mr-2 hover:text-gray-900">
+                            <a :href="site.domain" target="_blank" class="mr-2 text-gray-500 duration-300 hover:text-gray-900">
                                 <i class="fas fa-home"></i>
                                 访问首页
                             </a>
-                            <a :href="`${site.domain}/member`" target="_blank" class="mr-2 hover:text-gray-900">
+                            <a :href="`${site.domain}/member`" target="_blank" class="mr-2 text-gray-500 duration-300 hover:text-gray-900">
                                 <i class="fas fa-user-circle"></i>
                                 会员中心
                             </a>
@@ -49,24 +52,24 @@
                                 v-for="(menu, index) in menus"
                                 :key="index"
                                 :to="{ name: menu.name, params: { sid: site.id } }"
-                                class="mr-2 hover:text-gray-900"
+                                class="mr-2 text-gray-500 duration-300 hover:text-gray-900"
                             >
                                 <i :class="menu.icon"></i>
                                 {{ menu.title }}
                             </router-link>
-                            <a href="#" @click.prevent="syncPermission(site)" class="mr-2 hover:text-gray-900">
+                            <a href="#" @click.prevent="syncPermission(site)" class="mr-2 text-gray-500 duration-300 hover:text-gray-900">
                                 <i class="fas fa-life-ring"></i>
                                 更新权限表
                             </a>
                             <router-link
                                 :to="{ name: 'site.site.edit', params: { id: site.id } }"
                                 v-if="site.permissions.update"
-                                class="mr-2 hover:text-gray-900"
+                                class="mr-2 text-gray-500 duration-300 hover:text-gray-900"
                             >
                                 <i class="fas fa-pen"></i>
                                 编辑站点
                             </router-link>
-                            <a href="#" @click.prevent="del(site)" v-if="site.permissions.delete" class="mr-2 hover:text-gray-900">
+                            <a href="#" @click.prevent="del(site)" v-if="site.permissions.delete" class="mr-2 text-gray-500 duration-300 hover:text-gray-900">
                                 <i class="fas fa-trash"></i>
                                 删除
                             </a>

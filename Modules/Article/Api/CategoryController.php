@@ -32,7 +32,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categorys = Category::where('site_id', SID)->orderByRaw("concat(path,'-',id) asc")->get();
+        $categorys = Category::where('site_id', SID)->orderBy('path', 'asc')->get();
         return CategoryResource::collection($categorys);
     }
 
@@ -52,17 +52,16 @@ class CategoryController extends Controller
      * @param mixed $pid 父栏目ID
      * @return string
      */
-    protected function path(int $pid)
-    {
-        $category = Category::find($pid);
-        return $category ?  $category->path . '-' . $pid : 0;
-    }
+    // protected function path(int $pid)
+    // {
+    //     $category = Category::find($pid);
+    //     return $category ?  $category->path . '-' . $pid : 0;
+    // }
 
     public function store(CategoryRequest $request, Site $site, Category $category)
     {
         $this->authorize('create', $category);
         $category->fill($request->input());
-        $category->path = $this->path($request->pid);
         $category->site_id = $site->id;
         $category->user_id = Auth::id();
         $category->save();
@@ -72,11 +71,11 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, Site $site, Category $category)
     {
         $this->authorize('update', $category);
+        DB::beginTransaction();
         $category->fill($request->input());
         $category->user_id = Auth::id();
-        $category->path = $this->path($request->pid);
         $category->save();
-
+        DB::commit();
         return $this->message('栏目更新成功', $category);
     }
 
