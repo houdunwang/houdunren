@@ -73,6 +73,8 @@ Route::delete('module/uninstall/{module:name}', [ModuleController::class, 'unins
 //模块配置
 Route::get('module/config/site/{site}/module/{module}', [ModuleConfigController::class, 'show']);
 Route::put('module/config/site/{site}/module/{module}', [ModuleConfigController::class, 'update']);
+//模块配置
+Route::put('module/config/{site}/{module}', [ModuleConfigController::class, 'update']);
 //站点
 Route::get('site/current', [SiteController::class, 'current']);
 Route::apiResource('site', SiteController::class);

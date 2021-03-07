@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\WeChatLoginController;
 use App\Http\Controllers\WeChatBindController;
 
+
 //支付通知
 Route::group(['prefix' => 'pay/{module}', 'middleware' => ['module']], function () {
     Route::any('alipay/return', [PayNotifyController::class, 'alipayReturn'])->name('pay.alipay.return');

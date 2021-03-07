@@ -4,7 +4,6 @@ namespace Modules\Article\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Site;
-use Illuminate\Http\Request;
 use Modules\Article\Entities\Content;
 use Modules\Article\Http\Requests\ContentRequest;
 use Auth;

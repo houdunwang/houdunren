@@ -4,7 +4,6 @@ namespace Modules\Article\Observers;
 
 use Modules\Article\Entities\Category;
 use DB;
-use Log;
 
 /**
  * 栏目
@@ -12,10 +11,6 @@ use Log;
  */
 class CategoryObserver
 {
-    public function creating(Category $category)
-    {
-    }
-
     public function created(Category $category)
     {
         $parent = $category->parent;
@@ -35,14 +30,5 @@ class CategoryObserver
                 'path' => preg_replace('/.+\-' . $category->id . '\-/', $category->path . '-', $child['path'])
             ]);
         });
-    }
-
-    public function updated(Category $category)
-    {
-    }
-
-    public function deleted(Category $category)
-    {
-        $category->contents()->delete();
     }
 }

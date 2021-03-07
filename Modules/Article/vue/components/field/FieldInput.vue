@@ -1,5 +1,5 @@
 <template>
-    <el-input placeholder="" size="normal" clearable v-model="form[field.name]"></el-input>
+    <el-input :placeholder="field.placeholder" size="normal" clearable v-model="form[field.name]"></el-input>
 </template>
 
 <script>

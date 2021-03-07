@@ -48,8 +48,10 @@ class ModuleConfigController extends Controller
     public function update(Request $request, Site $site, Module $module)
     {
         $this->authorize('update', $module);
-        $config = ModuleConfig::where('site_id', $site['id'])->where('module_id', $module['id'])->first();
-        $config['config'] = $request->input();
+        $config = ModuleConfig::where('site_id', $site['id'])->where('module_id', $module['id'])->firstOrNew();
+        $config['site_id'] = $site->id;
+        $config['module_id'] = $module->id;
+        $config['config'] = $request->input() + ($config['config'] ?? []);
         $config->save();
         return $this->message('模块配置保存成功');
     }

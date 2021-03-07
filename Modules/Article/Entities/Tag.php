@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\User;
 
 /**
  * 标签
@@ -31,5 +33,14 @@ class Tag extends Model
             'update' => Auth::check() && Auth::user()->can('update', $this),
             'delete' => Auth::check() && Auth::user()->can('delete', $this),
         ];
+    }
+
+    /**
+     * 用户关联
+     * @return BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

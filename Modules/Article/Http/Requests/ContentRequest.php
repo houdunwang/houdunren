@@ -41,15 +41,4 @@ class ContentRequest extends FormRequest
         }
         return $attributes;
     }
-
-    // public function messages()
-    // {
-    //     $messages = [];
-    //     foreach ($this->fields as $field) {
-    //         if ($field['validate_rule']) {
-    //             $messages[] = $field['validate_error'];
-    //         }
-    //     }
-    //     return $messages;
-    // }
 }

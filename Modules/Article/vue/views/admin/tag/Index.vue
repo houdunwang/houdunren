@@ -6,11 +6,13 @@
                 <span v-if="col.id == 'created_at' || col.id == 'updated_at'">
                     {{ tag[col.id] | dateFormat }}
                 </span>
+                <span v-else-if="col.id == 'user'">
+                    {{ tag.user.name }}
+                </span>
                 <span v-else>
                     {{ tag[col.id] }}
                 </span>
             </el-table-column>
-
             <el-table-column width="250" #default="{row:tag}" align="center">
                 <el-button-group>
                     <el-button type="success" size="mini" @click="router('admin.tag.edit', { id: tag.id })">编辑</el-button>
@@ -25,12 +27,12 @@
 const columns = [
     { id: 'id', label: '编号', width: 100 },
     { id: 'title', label: '标签名称' },
+    { id: 'user', label: '创建者', width: 100 },
     { id: 'created_at', label: '创建时间', width: 200 },
     { id: 'updated_at', label: '修改时间', width: 200 }
 ]
 import tabs from './tabs'
 export default {
-    route: { path: '' },
     data() {
         return { tabs, tags: [], columns }
     },

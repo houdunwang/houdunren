@@ -8,7 +8,14 @@
             <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal">
                 <el-form-item label="栏目选择">
                     <el-select v-model="form.category_id" placeholder="请选择">
-                        <el-option v-for="category in categories" :key="category.id" :label="category.title" :value="category.id"> </el-option>
+                        <el-option
+                            v-for="category in categories"
+                            :key="category.id"
+                            :label="category.title"
+                            :value="category.id"
+                            :disabled="disabled(category)"
+                        >
+                        </el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="标签" v-if="tags.length">
@@ -50,6 +57,7 @@ export default {
         this.loading = false
     },
     watch: {
+        //栏目的选择修改
         'form.category_id'() {
             this.model = this.categories.find(category => category.id == this.form.category_id).model
             if (!this.id) {
@@ -65,6 +73,10 @@ export default {
             const url = this.id ? `content/${this.id}` : 'content'
             await axios[this.id ? 'put' : 'post'](url, this.form)
             this.router('admin.content.index')
+        },
+        //栏目是否可以选择
+        disabled(category) {
+            return category.type >= 3
         }
     }
 }

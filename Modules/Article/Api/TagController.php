@@ -7,6 +7,7 @@ use App\Models\Site;
 use Auth;
 use Illuminate\Http\Request;
 use Modules\Article\Entities\Tag;
+use Modules\Article\Transformers\TagResource;
 
 /**
  * 标签
@@ -21,7 +22,8 @@ class TagController extends Controller
 
     public function index()
     {
-        return Tag::where('site_id', SID)->get();
+        $tags = Tag::where('site_id', SID)->with('user')->get();
+        return TagResource::collection($tags);
     }
 
     public function show(Site $site, Tag $tag)

@@ -51,7 +51,6 @@ const columns = [
     { label: '编号', id: 'id', width: 100 }
 ]
 export default {
-    route: { path: '' },
     data() {
         return { tabs, categories: [] }
     },

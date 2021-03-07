@@ -5,6 +5,9 @@ use Modules\Article\Api\ModelController;
 use Modules\Article\Api\TagController;
 use Modules\Article\Api\ContentController;
 use Modules\Article\Api\CategoryController;
+use Modules\Article\Api\SwiperController;
+use Modules\Article\Api\TemplateController;
+
 
 Route::group(['prefix' => 'Article/{site}', 'middleware' => ['module']], function () {
     //模型
@@ -15,4 +18,8 @@ Route::group(['prefix' => 'Article/{site}', 'middleware' => ['module']], functio
     Route::apiResource('content', ContentController::class);
     //栏目
     Route::apiResource('category', CategoryController::class);
+    //幻灯片
+    Route::apiResource('swiper', SwiperController::class);
+    //模板
+    Route::apiResource('template', TemplateController::class);
 });

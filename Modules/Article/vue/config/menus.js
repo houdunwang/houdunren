@@ -3,9 +3,9 @@ const menus = [
         title: '基本配置',
         icon: 'fab fa-windows',
         items: [
-            { title: '模块配置', permission: 'lesson', route: { name: 'admin.tag.index' } },
             { title: '内容标签', permission: 'lesson', route: { name: 'admin.tag.index' } },
-            { title: '风格模板', permission: 'lesson', route: { name: 'admin.tag.index' } }
+            { title: '幻灯片', permission: 'lesson', route: { name: 'admin.swiper.index' } },
+            { title: '风格模板', permission: 'lesson', route: { name: 'admin.template.index' } }
         ]
     },
     {
