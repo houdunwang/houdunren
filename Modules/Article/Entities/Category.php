@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Modules\Article\Entities\Model as ArticleModel;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Article\Database\factories\CategoryFactory;
 
 /**
  * 栏目
@@ -42,6 +45,15 @@ class Category extends Model
             'update' => Auth::check() && Auth::user()->can('update', $this),
             'delete' => Auth::check() && Auth::user()->can('delete', $this),
         ];
+    }
+
+    /**
+     * 声明工厂类
+     * @return Factory
+     */
+    protected static function newFactory()
+    {
+        return CategoryFactory::new();
     }
 
     public function getTypeTitleAttribute()
@@ -83,6 +95,15 @@ class Category extends Model
      */
     public function getChildrensAttribute()
     {
-        return self::where('path', 'like', "%-{$this->id}-%")->get();
+        return self::where('path', 'like', $this->path . "-%")->get();
+    }
+
+    /**
+     * 文章关联
+     * @return HasMany
+     */
+    public function contents()
+    {
+        return $this->hasMany(Content::class);
     }
 }

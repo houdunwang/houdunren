@@ -2,9 +2,11 @@
 
 namespace Modules\Edu\Entities;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Modules\Article\Database\factories\ContentFactory;
 
 /**
  * 标签管理
@@ -12,8 +14,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Tag extends Model
 {
+    use HasFactory;
     protected $table = 'edu_tag';
     protected $fillable = ['id', 'title', 'site_id'];
+
+    protected static function newFactory()
+    {
+        return ContentFactory::new();
+    }
 
     /**
      * 用户关联

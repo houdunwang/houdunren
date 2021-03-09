@@ -7,15 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class ArticleDatabaseSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        $this->call(
+            [
+                ModelTableSeeder::class,
+                TagTableSeeder::class,
+                CategoryTableSeeder::class,
+                // ContentTableSeeder::class,
+            ]
+        );
     }
 }

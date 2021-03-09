@@ -23,7 +23,9 @@
 </head>
 
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <router-view />
+    </div>
     {{-- tabler --}}
     <script src="/tabler/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/tabler/dist/js/tabler.min.js"></script>

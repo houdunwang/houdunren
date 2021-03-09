@@ -17,7 +17,7 @@ class Swiper extends Model
 {
     use HasFactory;
     protected $table = 'article_swipers';
-    protected $fillable = ['title', 'items', 'site_id', 'user_id'];
+    protected $fillable = ['title', 'items', 'site_id', 'user_id', 'width', 'height', 'delay'];
     protected $casts = ['items' => 'array'];
     protected $appends = ['permissions'];
 

@@ -8,6 +8,7 @@ use Auth;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\User;
+use Modules\Article\Database\factories\TagFactory;
 
 /**
  * 标签
@@ -33,6 +34,15 @@ class Tag extends Model
             'update' => Auth::check() && Auth::user()->can('update', $this),
             'delete' => Auth::check() && Auth::user()->can('delete', $this),
         ];
+    }
+
+    /**
+     * 声明工厂类
+     * @return Factory
+     */
+    protected static function newFactory()
+    {
+        return TagFactory::new();
     }
 
     /**

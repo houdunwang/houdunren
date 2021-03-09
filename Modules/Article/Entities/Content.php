@@ -9,6 +9,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\User;
+use Modules\Article\Database\factories\ContentFactory;
 
 /**
  * 文章
@@ -34,6 +35,15 @@ class Content extends Model
             'update' => Auth::check() && Auth::user()->can('update', $this),
             'delete' => Auth::check() && Auth::user()->can('delete', $this),
         ];
+    }
+
+    /**
+     * 声明工厂类
+     * @return Factory
+     */
+    protected static function newFactory()
+    {
+        return ContentFactory::new();
     }
 
     /**

@@ -42,6 +42,7 @@ import draggable from 'vuedraggable'
 import tabs from './tabs'
 import Edit from './components/Edit'
 import types from './components/types'
+import fields from './fields'
 //默认值用于添加字段
 const field = {
     title: '',
@@ -67,6 +68,7 @@ export default {
     },
     async created() {
         this.model = await axios.get(`model/${this.$route.params.mid}`)
+        this.$set(this.model, 'fields', fields)
     },
     methods: {
         //类型中文

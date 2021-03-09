@@ -8,7 +8,7 @@
             :before-upload="beforeAvatarUpload"
             :headers="headers"
         >
-            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <img v-if="imageUrl" :src="imageUrl" class="avatar object-cover" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
         <i class="fas fa-window-close absolute fa-2x text-white top-2 left-2 cursor-pointer" @click="del"></i>

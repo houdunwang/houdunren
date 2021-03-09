@@ -19,6 +19,10 @@ class ModuleMiddleware
     {
         $this->site();
         $this->module();
+        //共享数据
+        view()->share('site', site());
+        view()->share('module', module());
+
         return $next($request);
     }
 
@@ -65,6 +69,7 @@ class ModuleMiddleware
             ModuleService::cache($module);
             return $module;
         }
+
         abort(404, '模块不存在');
     }
 }

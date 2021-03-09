@@ -8,6 +8,8 @@ use Modules\Article\Entities\Content;
 use Modules\Article\Observers\ContentObserver;
 use Modules\Article\Entities\Category;
 use Modules\Article\Observers\CategoryObserver;
+use Modules\Article\services\BladeService;
+use RuntimeException;
 
 class ArticleServiceProvider extends ServiceProvider
 {
@@ -32,10 +34,17 @@ class ArticleServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
-
+        //注册观察者
         $this->observer();
+        //扩展Blade
+        app(BladeService::class)->register();
     }
 
+    /**
+     * 模型观察者
+     * @return void
+     * @throws RuntimeException
+     */
     protected function observer()
     {
         Content::observe(ContentObserver::class);
@@ -82,7 +91,6 @@ class ArticleServiceProvider extends ServiceProvider
         $this->publishes([
             $sourcePath => $viewPath
         ], ['views', $this->moduleNameLower . '-module-views']);
-
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
     }
 

@@ -64,15 +64,28 @@
                     </el-card>
                 </el-tab-pane>
                 <el-tab-pane label="模板设置" name="second">
-                    <el-form-item label="封面模板">
-                        <el-input v-model="form.index_template" placeholder="" size="normal" clearable></el-input>
-                    </el-form-item>
-                    <el-form-item label="列表模板">
-                        <el-input v-model="form.list_template" placeholder="" size="normal" clearable></el-input>
-                    </el-form-item>
-                    <el-form-item label="内容页">
-                        <el-input v-model="form.content_template" placeholder="" size="normal" clearable></el-input>
-                    </el-form-item>
+                    <el-card shadow="always" :body-style="{ padding: '20px' }" class="mb-5">
+                        <div slot="header">
+                            栏目模板
+                        </div>
+                        <el-form-item label="栏目内容">
+                            <el-input v-model="form.index_template" placeholder="" size="normal" clearable></el-input>
+                        </el-form-item>
+                    </el-card>
+                    <el-card shadow="always" :body-style="{ padding: '20px' }">
+                        <div slot="header">
+                            文章模板
+                        </div>
+                        <el-form-item label="封面模板">
+                            <el-input v-model="form.index_template" placeholder="" size="normal" clearable></el-input>
+                        </el-form-item>
+                        <el-form-item label="列表模板">
+                            <el-input v-model="form.list_template" placeholder="" size="normal" clearable></el-input>
+                        </el-form-item>
+                        <el-form-item label="内容页">
+                            <el-input v-model="form.content_template" placeholder="" size="normal" clearable></el-input>
+                        </el-form-item>
+                    </el-card>
                 </el-tab-pane>
             </el-tabs>
             <el-button type="primary" @click="onSubmit" class="mt-3 d-block">保存提交</el-button>

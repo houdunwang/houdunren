@@ -11,6 +11,6 @@ mix.copyDirectory('static', '../../public/modules/Article/static')
 mix.copyDirectory('template', '../../public/modules/Article/template')
 
 mix.browserSync({
-    proxy: 'hdcms.test',
+    proxy: 'e19.test',
     files: 'vue/**'
 })

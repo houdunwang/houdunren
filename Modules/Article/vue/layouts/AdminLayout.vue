@@ -1,12 +1,12 @@
 <template>
     <div class="page">
-        <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
+        <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark md:w-48 shadow-md">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <h1 class="navbar-brand navbar-brand-autodark flex justify-start mt-3 text-xl font-thin">
-                    <i class="fas fa-burn mr-2"></i>
+                <h1 class="navbar-brand navbar-brand-autodark flex justify-start mt-3 text-lg cursor-pointer font-thin">
+                    <i class="fas fa-burn mr-2 text-base"></i>
                     {{ module.title }}
                 </h1>
                 <div class="navbar-nav flex-row d-lg-none">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="navbar-nav pt-lg-3">
-                        <li class="nav-item dropdown" v-for="(menu, index) in menus" :key="index">
+                        <li class="nav-item dropdown border-b border-gray-700 pb-5 mb-3" v-for="(menu, index) in menus" :key="index">
                             <a class="nav-link show flex items-baseline" href="#navbar-base">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <i :class="menu.icon"></i>
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </aside>
-        <header class="navbar navbar-expand-md navbar-light d-none d-lg-flex d-print-none">
+        <header class="navbar navbar-expand-md navbar-light d-none d-lg-flex d-print-none md:ml-48 md:pl-3">
             <div class="container-xl" style="max-width:100%;">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
                     <span class="navbar-toggler-icon"></span>
@@ -196,7 +196,7 @@
                 </div>
             </div>
         </header>
-        <div class="content">
+        <div class="content md:ml-48">
             <div class="p-5 bg-white shadow-sm mx-5">
                 <router-view></router-view>
             </div>

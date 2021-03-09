@@ -15,6 +15,9 @@ class SwiperRequest extends FormRequest
     {
         return [
             'title' => ['required'],
+            'width' => ['required'],
+            'height' => ['required'],
+            'delay' => ['required'],
             'items' => ['required', 'between:1,10'],
         ];
     }

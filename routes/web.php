@@ -32,7 +32,7 @@ Route::get('logout', function () {
 Route::get('/', function () {
     $name = module()['name'];
     $class  = "Modules\\{$name}\Http\Controllers\HomeController";
-    return app($class)->index();
+    return app($class)->home();
 })->middleware(['module']);
 
 //会员中心

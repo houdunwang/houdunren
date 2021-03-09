@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as SystemModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\User;
+use Modules\Article\Database\factories\ModelFactory;
 
 /**
  * 文章模型
@@ -20,6 +21,15 @@ class Model extends SystemModel
     protected $casts = [
         'fields' => 'array'
     ];
+
+    /**
+     * 声明工厂类
+     * @return Factory
+     */
+    protected static function newFactory()
+    {
+        return ModelFactory::new();
+    }
 
     /**
      * 栏目关联

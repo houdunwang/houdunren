@@ -22,7 +22,7 @@
 const form = { title: '', fields: {} }
 import tabs from './tabs'
 import _ from 'lodash'
-import fields from './fields'
+import fields from '../field/fields'
 
 export default {
     props: ['id'],

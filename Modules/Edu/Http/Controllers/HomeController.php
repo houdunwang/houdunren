@@ -11,8 +11,9 @@ use Illuminate\Routing\Controller;
  */
 class HomeController extends Controller
 {
-    public function index()
+    public function home()
     {
+        dd(module());
         return view('edu::app');
     }
 }
