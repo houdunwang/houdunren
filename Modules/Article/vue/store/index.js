@@ -10,7 +10,9 @@ export default new Vuex.Store({
         //登录用户
         user: {},
         site: window.site,
-        module: window.module
+        module: window.module,
+        //历史菜单
+        historyMenus: []
     },
     getters: {
         //表单验证
@@ -27,6 +29,15 @@ export default new Vuex.Store({
         },
         site(state, site) {
             state.site = site
+        },
+        addHistoryMenus(state, menu) {
+            const has = state.historyMenus.some(m => m.route.name == menu.route.name)
+            if (!has) {
+                state.historyMenus.push(menu)
+                if (state.historyMenus.length > 10) {
+                    state.historyMenus.shift()
+                }
+            }
         }
     },
     //用来执行异步动作

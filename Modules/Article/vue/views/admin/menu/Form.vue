@@ -1,6 +1,6 @@
 <template>
     <div>
-        <hd-tab :tabs="tabs" />
+        <tab :tabs="tabs" />
         <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal">
             <el-tabs value="first" type="card">
                 <el-tab-pane label="基本信息" name="first">

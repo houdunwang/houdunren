@@ -1,6 +1,6 @@
 <template>
     <div>
-        <hd-tab :tabs="tabs" />
+        <tab :tabs="tabs" />
         <el-table :data="contents.data" border stripe v-if="contents.data">
             <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label" :width="col.width" #default="{row:content}">
                 <span v-if="col.id == 'created_at' || col.id == 'updated_at'">

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <hd-tab :tabs="tabs" />
+        <tab :tabs="tabs" />
         <ul role="alert" class="alert alert-info text-sm text-gray-500 text-light leading-relaxed">
             <li>链接优先级高于文章编号</li>
         </ul>

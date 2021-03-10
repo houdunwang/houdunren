@@ -247,7 +247,20 @@
             </div>
         </header>
         <div class="content md:ml-48">
-            <div class="p-5 bg-white shadow-sm mx-5 rounded-md">
+            <div class="mx-5 mb-2 bg-white shadow-sm p-2 rounded-sm" v-if="$store.state.historyMenus.length">
+                <el-button-group>
+                    <el-button
+                        size="mini"
+                        v-for="(menu, index) in $store.state.historyMenus"
+                        :key="index"
+                        :type="$route.name == menu.route.name ? 'primary' : 'default'"
+                        @click.prevent="$router.push(menu.route)"
+                    >
+                        {{ menu.title }}
+                    </el-button>
+                </el-button-group>
+            </div>
+            <div class="p-5 bg-white shadow-sm mx-5 rounded-sm">
                 <router-view></router-view>
             </div>
         </div>
@@ -268,20 +281,14 @@ export default {
     async created() {
         this.modules = await this.axios.get(`/api/module/site/${this.site.id}/user`)
     },
-    computed: {
-        // routeName: {
-        //     set(menu) {
-        //         window.localStorage.setItem('route_name', menu.route.name)
-        //     },
-        //     get() {
-        //         return window.localStorage.getItem('route_name')
-        //     }
-        // }
-    },
+
     methods: {
         go(menu) {
             window.localStorage.setItem('route_name', (this.routeName = menu.route.name))
-            this.$router.push(menu.route)
+            this.$store.commit('addHistoryMenus', menu)
+            if (this.$route.name != menu.route.name) {
+                this.$router.push(menu.route)
+            }
         }
     }
 }

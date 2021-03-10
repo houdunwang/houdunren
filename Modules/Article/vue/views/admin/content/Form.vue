@@ -1,6 +1,6 @@
 <template>
     <div>
-        <hd-tab :tabs="tabs" />
+        <tab :tabs="tabs" />
         <el-card shadow="never" :body-style="{ padding: '20px' }" v-loading="loading">
             <div slot="header">
                 文章管理

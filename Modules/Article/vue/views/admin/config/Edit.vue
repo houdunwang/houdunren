@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- <hd-tab :tabs="tabs" /> -->
         Edit...
     </div>
 </template>

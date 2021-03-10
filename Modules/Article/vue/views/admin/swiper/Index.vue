@@ -1,6 +1,6 @@
 <template>
     <div>
-        <hd-tab :tabs="tabs" />
+        <tab :tabs="tabs" />
         <div class="grid md:grid-cols-4 gap-5" v-if="swipers.length">
             <el-card shadow="nerver" :body-style="{ padding: '0px' }" v-for="swiper in swipers" :key="swiper.id">
                 <div class="py-3 text-center">{{ swiper.title }} / 编号:{{ swiper.id }}</div>

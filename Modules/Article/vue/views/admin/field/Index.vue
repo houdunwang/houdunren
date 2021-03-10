@@ -1,6 +1,6 @@
 <template>
     <div class="fields">
-        <hd-tab :tabs="tabs" />
+        <tab :tabs="tabs" />
         <ul class="alert alert-info text-sm text-gray-500 text-light leading-relaxed" role="alert">
             <li class="text-red">正在管理【{{ model.title }}】模型字段</li>
             <li>修改字段后需要点击保存提交才会生效</li>
