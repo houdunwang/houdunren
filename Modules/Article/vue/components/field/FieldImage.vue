@@ -1,5 +1,5 @@
 <template>
-    <hd-image :action="`/api/upload/site/${site.id}`" v-model="form[field.name]" />
+    <image-upload v-model="form[field.name]" />
 </template>
 
 <script>

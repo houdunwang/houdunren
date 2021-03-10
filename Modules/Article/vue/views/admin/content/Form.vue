@@ -27,7 +27,7 @@
                     <div v-for="(field, index) in model.fields" :key="index">
                         <el-form-item :label="field.title" v-if="field.show">
                             <component v-bind:is="`field-${field.type}`" :field="field" :form="form"></component>
-                            <hd-error :name="field.name" />
+                            <error :name="field.name" />
                         </el-form-item>
                     </div>
                 </div>

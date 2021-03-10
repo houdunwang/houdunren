@@ -1,11 +1,11 @@
 <template>
-    <div class="page">
+    <div class="page admin-layout">
         <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark md:w-48 shadow-md">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <h1 class="navbar-brand navbar-brand-autodark flex justify-start mt-3 text-lg cursor-pointer font-thin">
+                <h1 class="navbar-brand navbar-brand-autodark flex justify-start text-lg cursor-pointer font-thin">
                     <!-- <i class="fas fa-home   text-base mr-2 text-gray-400 "></i> -->
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="collapse navbar-collapse" id="navbar-menu">
+                <div class="collapse navbar-collapse pt-3" id="navbar-menu">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown border-b border-gray-700 pb-5 mb-3" v-for="(menu, index) in menus" :key="index">
                             <a class="nav-link show flex items-baseline" href="#navbar-base">
@@ -75,7 +75,7 @@
                 </div>
             </div>
         </aside>
-        <header class="navbar navbar-expand-md navbar-light d-none d-lg-flex d-print-none md:ml-48 md:pl-3">
+        <header class="navbar navbar-expand-md navbar-light d-none d-lg-flex d-print-none md:ml-48">
             <div class="container-xl" style="max-width:100%;">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
                     <span class="navbar-toggler-icon"></span>
@@ -83,7 +83,7 @@
                 <div class="navbar-nav flex-row order-md-last">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                            <el-image :src="user.avatar" fit="cover" class="w-8 h-8"></el-image>
+                            <el-image :src="user.icon" fit="cover" class="w-8 h-8"></el-image>
                             <div class="d-none d-xl-block ps-2">
                                 <div>{{ user.name }}</div>
                                 <div class="mt-1 small text-muted">注册于{{ user.created_at | fromNow }}</div>
@@ -260,9 +260,12 @@
                     </el-button>
                 </el-button-group>
             </div>
-            <div class="p-5 bg-white shadow-sm mx-5 rounded-sm">
+            <div class="p-5 bg-white shadow-sm mx-5 mb-10 rounded-sm">
                 <router-view></router-view>
             </div>
+            <!-- <div class="p-5 my-10 ">
+                <el-divider class="text-xs text-gray-600">编码 @ 向军老师</el-divider>
+            </div> -->
         </div>
         <el-backtop> </el-backtop>
     </div>
@@ -294,4 +297,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.admin-layout .el-divider__text {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    background-color: #f1f1f1 !important;
+}
+</style>

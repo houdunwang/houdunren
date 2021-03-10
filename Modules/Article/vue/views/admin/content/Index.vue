@@ -24,13 +24,16 @@
                 </span>
             </el-table-column>
 
-            <el-table-column width="220" #default="{row:content}" align="center">
+            <el-table-column width="280" #default="{row:content}" align="center">
                 <el-button-group>
                     <el-button type="primary" size="mini">
                         <a :href="`/Article/content/${content.id}.html`" target="_blank" class="text-white">预览</a>
                     </el-button>
                     <el-button type="success" size="mini" @click="router('admin.content.edit', { id: content.id })">编辑</el-button>
                     <el-button type="danger" size="mini" @click="del(content)">删除</el-button>
+                    <el-button type="warning" size="mini" class="copy" :data-clipboard-text="`/Article/content/${content.id}.html`">
+                        复制链接
+                    </el-button>
                 </el-button-group>
             </el-table-column>
         </el-table>
@@ -49,8 +52,9 @@
 </template>
 
 <script>
+import ClipboardJS from 'clipboard'
 const columns = [
-    { id: 'id', label: '编号', width: 80 },
+    { id: 'id', label: '编号', width: 60 },
     { id: 'title', label: '标题' },
     { id: 'tags', label: '标签' },
     { id: 'preview', label: '缩略图', width: 100 },
@@ -64,6 +68,9 @@ export default {
     },
     async created() {
         this.load()
+        this.$nextTick(_ => {
+            new ClipboardJS('.copy')
+        })
     },
     methods: {
         async load(page = 1) {

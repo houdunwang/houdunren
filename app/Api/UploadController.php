@@ -50,15 +50,19 @@ class UploadController extends Controller
      */
     public function wangEditor(Request $request)
     {
-        $name = key($request->all());
-        $request->validate([$name => ['required', 'mimes:jpeg,png', 'max:2500']]);
-        $file = UploadService::make($request[$name]);
-        return json_encode([
-            'errno' => 0,
-            'data' => [$file['path']],
+        $request->validate([
+            'file' => ['required', 'mimes:jpeg,jpg,bmp,png']
         ]);
-    }
+        $driver = config('site.upload.driver');
+        $file = UploadService::$driver($request->file);
 
+        return [
+            'errno' => 0,
+            'data' => [
+                ['url' => $file['path'], 'alt' => $file['name'], 'href' => $file['path']]
+            ]
+        ];
+    }
     /**
      * wangEditor编辑器上传微信图文消息图片
      * @param Request $request
@@ -70,7 +74,6 @@ class UploadController extends Controller
     {
         $file = UploadService::make($request->file);
         $image = $material->config($wechat)->uploadNewsImage($file['path']);
-
         return \json_encode([
             'errno' => 0,
             'data' => [$image['url']],

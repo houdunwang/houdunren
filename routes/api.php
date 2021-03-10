@@ -100,5 +100,6 @@ Route::get('site/{site}/wechat/{wechat}/user/sync', [WeChatUserController::class
 //上传
 Route::post('upload/local', [UploadController::class, 'local']);
 Route::post('upload/site/{site}', [UploadController::class, 'site']);
+Route::post('upload/site/{site}/wangeditor', [UploadController::class, 'wangEditor']);
 //图形验证码
 Route::get('captcha', [CaptchaController::class, 'make']);

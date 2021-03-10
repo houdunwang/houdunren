@@ -9,7 +9,6 @@ import wangEditor from 'wangEditor'
 export default {
     props: {
         name: { type: String, default: 'editor' },
-        uploadImgServer: { type: String, default: `` },
         value: { type: String, default: '' }
     },
 
@@ -21,15 +20,17 @@ export default {
     watch: {
         value: {
             handler(n) {
-                this.value = n
-                if (this.editor) this.editor.txt.html(n)
+                if (!this.value) {
+                    this.value = n
+                    this.editor.txt.html(n)
+                }
             },
             immediate: true
         }
     },
     mounted() {
         this.editor = new wangEditor('#' + this.name)
-        this.editor.config.uploadImgServer = this.uploadImgServer
+        this.editor.config.uploadImgServer = `/api/upload/site/${this.site.id}/wangeditor`
         this.editor.config.uploadImgMaxSize = 3 * 1024 * 1024
         this.editor.config.uploadImgMaxLength = 5
         this.editor.config.uploadFileName = 'file'

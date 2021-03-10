@@ -1,5 +1,5 @@
 <template>
-    <wang-editor :name="field.name" v-model="form[field.name]" :uploadImgServer="`/api/upload/site/${site.id}/wangeditor`" />
+    <wang-editor :name="field.name" v-model="form[field.name]" />
 </template>
 
 <script>

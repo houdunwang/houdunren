@@ -5,8 +5,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <h1 class="navbar-brand navbar-brand-autodark flex justify-start mt-3 text-lg cursor-pointer font-thin">
-                    <!-- <i class="fas fa-home   text-base mr-2 text-gray-400 "></i> -->
+                <h1 class="navbar-brand navbar-brand-autodark flex justify-start text-lg cursor-pointer font-thin">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

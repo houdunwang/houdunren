@@ -32,10 +32,13 @@
             <el-table-column label="类型" #default="{row:category}" width="150">
                 <el-tag size="mini" :type="category.type <= 2 ? 'success' : 'danger'">{{ category.typeTitle }}</el-tag>
             </el-table-column>
-            <el-table-column label="" #default="{row:category}" width="180" align="right">
+            <el-table-column label="" #default="{row:category}" width="220" align="right">
                 <el-button-group>
                     <el-button type="success" size="mini" @click="router('admin.category.edit', { id: category.id })">编辑</el-button>
                     <el-button type="danger" size="mini">删除</el-button>
+                    <el-button type="warning" size="mini" class="copy" :data-clipboard-text="`${site.domain}/Article/category/${category.id}.html`">
+                        复制链接
+                    </el-button>
                 </el-button-group>
             </el-table-column>
         </el-table>
@@ -44,6 +47,7 @@
 
 <script>
 import tabs from './tabs'
+import ClipboardJS from 'clipboard'
 const columns = [
     { label: '编号', id: 'id', width: 100 },
     { label: '栏目名称', id: 'title', width: 100 },
@@ -56,6 +60,9 @@ export default {
     },
     async created() {
         this.load()
+        this.$nextTick(_ => {
+            new ClipboardJS('.copy')
+        })
     },
     methods: {
         async load() {

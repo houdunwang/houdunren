@@ -43,7 +43,7 @@ export default new Vuex.Store({
     //用来执行异步动作
     actions: {
         async user({ commit }) {
-            commit('user', await axios.get(`user/info`))
+            commit('user', await axios.get(`/api/user/info`))
         },
         async site({ commit }) {
             commit('site', await axios.get(`site/current`))

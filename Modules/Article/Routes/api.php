@@ -7,7 +7,7 @@ use Modules\Article\Api\ContentController;
 use Modules\Article\Api\CategoryController;
 use Modules\Article\Api\SwiperController;
 use Modules\Article\Api\TemplateController;
-
+use Modules\Article\Api\MenuController;
 
 Route::group(['prefix' => 'Article/{site}', 'middleware' => ['module']], function () {
     //模型
@@ -22,4 +22,8 @@ Route::group(['prefix' => 'Article/{site}', 'middleware' => ['module']], functio
     Route::apiResource('swiper', SwiperController::class);
     //模板
     Route::apiResource('template', TemplateController::class);
+    //菜单
+    Route::get('menu', [MenuController::class, 'index']);
+    Route::put('menu', [MenuController::class, 'update']);
+    Route::delete('menu/{menu}', [MenuController::class, 'destroy']);
 });

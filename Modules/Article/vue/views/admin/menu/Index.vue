@@ -1,71 +1,68 @@
 <template>
     <div>
         <tab :tabs="tabs" />
-        <el-table :data="categories" border stripe>
-            <el-table-column prop="id" label="编号" width="80" />
-            <el-table-column prop="title" label="栏目名称" #default="{row:category}">
-                {{ '-'.repeat(category.level * 2) }}
-                {{ category.title }}
-            </el-table-column>
-            <!-- <el-table-column prop="path" label="多级路径" /> -->
-            <el-table-column #default="{row:model}" label="创建者">
-                {{ model.user.name }}
-            </el-table-column>
-            <el-table-column label="栏目介绍" #default="{row:category}" width="300">
-                {{ category.description | truncate }}
-            </el-table-column>
-            <el-table-column label="模型" #default="{row:category}" width="150">
-                <router-link :to="{ name: 'admin.model.edit', params: { id: category.model.id } }" class="text-gray-500 hover:text-gray-800">
-                    {{ category.model.title }}
-                </router-link>
-            </el-table-column>
-            <el-table-column label="预览图" #default="{row:category}" width="150">
-                <div v-if="category.preview">
-                    <el-popover placement="top-start" width="200" height="200" trigger="hover">
-                        <img slot="reference" :src="category.preview" class="w-16 h-8 object-cover" />
-                        <div>
-                            <img :src="category.preview" class="w-full h-20 object-cover" />
-                        </div>
-                    </el-popover>
-                </div>
-            </el-table-column>
-            <el-table-column label="类型" #default="{row:category}" width="150">
-                <el-tag size="mini" :type="category.type <= 2 ? 'success' : 'danger'">{{ category.typeTitle }}</el-tag>
-            </el-table-column>
-            <el-table-column label="" #default="{row:category}" width="180" align="right">
-                <el-button-group>
-                    <el-button type="success" size="mini" @click="router('admin.category.edit', { id: category.id })">编辑</el-button>
-                    <el-button type="danger" size="mini">删除</el-button>
-                </el-button-group>
-            </el-table-column>
-        </el-table>
+        <table class="table table-bordered table-striped" v-if="menus.length">
+            <thead>
+                <tr>
+                    <th>菜单名称</th>
+                    <th>链接地址</th>
+                    <th class="w-1"></th>
+                </tr>
+            </thead>
+            <draggable v-model="menus" tag="tbody">
+                <tr v-for="(menu, index) in menus" :key="index" class="py-2 text-gray-700 text-xs">
+                    <td>
+                        <el-input v-model="menu.title" placeholder="" size="normal" clearable></el-input>
+                    </td>
+                    <td>
+                        <el-input v-model="menu.url" placeholder="" size="normal" clearable></el-input>
+                    </td>
+                    <td width="80" align="center">
+                        <el-button type="danger" size="mini" @click.prevent="del(menu)">删除</el-button>
+                    </td>
+                </tr>
+            </draggable>
+        </table>
+        <div v-else class="py-5 text-center text-gray-600 text-sm border mt-5 ">
+            暂无菜单
+        </div>
+        <div class="mt-5">
+            <button type="button" class="btn" @click="add">添加菜单</button>
+            <button type="button" class="btn btn-info" @click="onSubmit">保存提交</button>
+        </div>
     </div>
 </template>
 
 <script>
 import tabs from './tabs'
-const columns = [
-    { label: '编号', id: 'id', width: 100 },
-    { label: '栏目名称', id: 'title', width: 100 },
-    { label: '编', id: 'id', width: 100 },
-    { label: '编号', id: 'id', width: 100 }
-]
+import draggable from 'vuedraggable'
 export default {
+    components: { draggable },
     data() {
-        return { tabs, categories: [] }
+        return { tabs, menus: [] }
     },
     async created() {
         this.load()
     },
     methods: {
-        async load() {
-            this.categories = await axios.get(`category`)
+        add() {
+            this.menus.push({ title: '', url: '' })
         },
-        async del(category) {
-            this.$confirm(`确定删除【${category.title}】吗？删除栏目将删除栏目下的所有文章`, '温馨提示').then(async _ => {
-                await axios.delete(`category/${category.id}`)
-                this.$router.go(0)
+        async load() {
+            this.menus = await axios.get(`menu`)
+        },
+        async del(menu) {
+            this.$confirm(`确定删除【${menu.title}】吗？`, '温馨提示').then(async _ => {
+                if (menu.id) {
+                    await axios.delete(`menu/${menu.id}`)
+                    this.load()
+                } else {
+                    this.menus.splice(this.menus.indexOf(menu), 1)
+                }
             })
+        },
+        async onSubmit() {
+            await axios.put(`menu`, { menus: this.menus })
         }
     }
 }

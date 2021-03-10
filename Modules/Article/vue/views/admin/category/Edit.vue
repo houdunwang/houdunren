@@ -5,7 +5,7 @@
 <script>
 import XForm from './Form'
 export default {
-    route: { path: 'content/:id/edit' },
+    route: { path: 'category/:id/edit' },
     components: { XForm }
 }
 </script>

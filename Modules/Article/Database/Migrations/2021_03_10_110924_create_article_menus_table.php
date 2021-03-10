@@ -18,6 +18,7 @@ class CreateArticleMenusTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title')->comment('菜单名称');
             $table->string('url')->comment('跳转地址');
+            $table->unsignedSmallInteger('rank')->default(0)->comment('排序');
             $table->timestamps();
         });
     }
