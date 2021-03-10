@@ -87,7 +87,7 @@
 <script>
 const menus = [
     { title: '网站配置', name: `site.config.edit`, icon: 'fas fa-check-circle' },
-    { title: '微信公众号', name: `site.wechat.index`, icon: 'fas fa-comment-dollar' },
+    { title: '微信公众号', name: `wechat.wechat.index`, icon: 'fas fa-comment-dollar' },
     { title: '管理员设置', name: `site.admin.index`, icon: 'fas fa-user-alt' },
     { title: '角色管理', name: `site.role.index`, icon: 'fas fa-user-lock' }
 ]

@@ -49,26 +49,20 @@ class WeChatUserController extends Controller
     public function sync(Site $site, WeChat $wechat, UserPackage $userPackage)
     {
         $this->authorize('update', $wechat);
-        $cacheName = $site['id'] . $wechat['id'] . 'next_openid';
-        //获取用户列表。openid为上次获取的最后一个粉丝openid
-        $response = $userPackage->config($wechat)->getList(Cache::get($cacheName));
-        if (empty($response['next_openid'])) {
-            Cache::forget($cacheName);
-        } else {
-            Cache::put($cacheName, $response['next_openid'], 600);
-        }
-
+        //获取粉丝
+        $response = $userPackage->config($wechat)->getList(request('next_openid'));
         if (isset($response['data'])) {
             //获取粉丝资料
             $users = $userPackage->getByOpenids($response['data']['openid'])['user_info_list'];
             //同步到数据库
-            WeChatService::batchSaveUsers(array_map(function ($v) use ($wechat) {
-                $v['wechat_id'] = $wechat['id'];
-                $v['site_id'] = $wechat->site->id;
-                return $v;
-            }, $users));
+            foreach ($users as $user) {
+                WeChatService::saveUser($user + ['wechat_id' => $wechat['id']],);
+            }
         }
-        $next_openid = Cache::get($cacheName);
-        return $this->message($next_openid ? '准备同步下一批粉丝...' : '粉丝同步完毕', ['next_openid' => $next_openid]);
+        // $next_openid = Cache::get($cacheName);
+        return $this->message(
+            $response['next_openid'] ? '准备同步下一批粉丝...' : '粉丝同步完毕',
+            ['next_openid' => $response['next_openid']]
+        );
     }
 }

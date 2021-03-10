@@ -69,7 +69,7 @@
                             栏目模板
                         </div>
                         <el-form-item label="栏目内容">
-                            <el-input v-model="form.index_template" placeholder="" size="normal" clearable></el-input>
+                            <el-input v-model="form.category_template" placeholder="" size="normal" clearable></el-input>
                         </el-form-item>
                     </el-card>
                     <el-card shadow="always" :body-style="{ padding: '20px' }">

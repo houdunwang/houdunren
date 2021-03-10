@@ -26,7 +26,7 @@ class CreateArticleCategoriesTable extends Migration
             $table->string('description')->nullable()->comment('栏目描述');
             $table->string('url')->nullable()->comment('跳转链接');
             $table->text('content')->nullable()->comment('单文章内容');
-            $table->string('category_template')->default('index.blade.php')->comment('栏目内容页模板');
+            $table->string('category_template')->default('category.blade.php')->comment('栏目内容页模板');
             $table->string('index_template')->default('index.blade.php')->comment('封面模板');
             $table->string('list_template')->default('list.blade.php')->comment('列表模板');
             $table->string('content_template')->default('content.blade.php')->comment('内容页模板');

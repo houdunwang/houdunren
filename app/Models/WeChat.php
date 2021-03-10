@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class WeChat extends Model
 {
-    protected $fillable = ['site_id', 'title', 'name', 'introduce', 'qr', 'token', 'type', 'wechat_id', 'appid', 'appsecret', 'welcome', 'default_message'];
+    protected $fillable = ['site_id', 'title', 'name', 'introduce', 'qr', 'token', 'wechat_id', 'appid', 'appsecret', 'welcome', 'default_message'];
 
     protected $casts = [
         'menus' => 'array',
@@ -24,5 +25,14 @@ class WeChat extends Model
     public function users()
     {
         return $this->hasMany(WeChatUser::class, 'wechat_id');
+    }
+
+    /**
+     * 站点关联
+     * @return BelongsTo
+     */
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
     }
 }

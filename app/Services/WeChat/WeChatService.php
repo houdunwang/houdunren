@@ -3,14 +3,11 @@
 namespace App\Services\WeChat;
 
 use App\Models\User;
-use App\Models\WeChat;
 use App\Models\WeChatKeyword;
 use App\Models\WeChatRule;
 use App\Models\WeChatUser;
 use Houdunwang\WeChat\WeChat as WeChatWeChat;
 use Illuminate\Support\Collection;
-use Socialite;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * 微信管理服务
@@ -20,7 +17,6 @@ class WeChatService
 {
     /**
      * 微信检测
-     *
      * @return boolean
      */
     public function isWechat(): bool
@@ -44,10 +40,12 @@ class WeChatService
         }
         //添加系统用户
         if (!$wechatUser) {
+            //用户表
             $user = User::create([
                 'avatar' => $account['headimgurl'] ?? null,
                 'name' => $account['nickname'] ?? null,
             ] + $account);
+            //微信粉丝表
             $wechatUser = WeChatUser::create($account + ['user_id' => $user['id'], 'site_id' => SID]);
         }
         return $wechatUser->user;
@@ -60,12 +58,12 @@ class WeChatService
      * @param array $users
      * @return Collection
      */
-    public function batchSaveUsers(array $users): Collection
-    {
-        return collect($users)->map(function ($user) {
-            return $this->saveUser($user);
-        });
-    }
+    // public function batchSaveUsers(array $users): Collection
+    // {
+    //     return collect($users)->map(function ($user) {
+    //         return $this->saveUser($user);
+    //     });
+    // }
 
     /**
      * 保存微信规则

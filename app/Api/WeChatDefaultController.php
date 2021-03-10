@@ -14,11 +14,6 @@ use Illuminate\Http\Request;
  */
 class WeChatDefaultController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth:sanctum']);
-    }
-
     /**
      * 更新消息
      * @param Request $request

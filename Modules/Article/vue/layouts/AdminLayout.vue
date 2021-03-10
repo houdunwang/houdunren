@@ -177,7 +177,7 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" href="/site/site/index">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg
@@ -203,7 +203,7 @@
                                         我的站点
                                     </span>
                                 </a>
-                            </li>
+                            </li> -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">

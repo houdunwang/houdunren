@@ -11,11 +11,10 @@ use App\Services\WeChatService;
 use Houdunwang\WeChat\User;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use InvalidArgumentException;
-use Illuminate\Support\Facades\Log;
 use App;
 
 /**
- * 微信API
+ * 微信通信
  * @package App\Http\Controllers\WeChatApi
  */
 class ProcessorController extends Controller

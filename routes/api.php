@@ -21,6 +21,7 @@ use App\Api\CodeController;
 use App\Api\ModuleConfigController;
 use App\Api\FollowController;
 use App\Api\FansController;
+use App\Api\WeChat\ProcessorController;
 
 //登录注册与找回密码
 Route::post('login', [AuthController::class, 'login']);
@@ -87,19 +88,24 @@ Route::apiResource('site/{site}/role', RoleController::class);
 Route::put('site/{site}/admin/{admin}/role', [AdminController::class, 'setRole']);
 Route::put('site/{site}/admin/{admin}', [AdminController::class, 'update']);
 Route::apiResource('site/{site}/admin', AdminController::class);
-//站点公众号
-Route::apiResource('site/{site}/wechat', WeChatController::class);
-//公众号默认消息
-Route::put("site/{site}/wechat/{wechat}/default/message", [WeChatDefaultController::class, 'update']);
-//微信菜单
-Route::put('site/{site}/wechat/{wechat}/menu', [WechatMenuController::class, 'update']);
-Route::get('site/{site}/wechat/{wechat}/menu/push', [WechatMenuController::class, 'push']);
-//公众号粉丝
-Route::get('site/{site}/wechat/{wechat}/user', [WeChatUserController::class, 'index']);
-Route::get('site/{site}/wechat/{wechat}/user/sync', [WeChatUserController::class, 'sync']);
 //上传
 Route::post('upload/local', [UploadController::class, 'local']);
 Route::post('upload/site/{site}', [UploadController::class, 'site']);
 Route::post('upload/site/{site}/wangeditor', [UploadController::class, 'wangEditor']);
 //图形验证码
 Route::get('captcha', [CaptchaController::class, 'make']);
+
+//微信公众号
+Route::apiResource('site/{site}/wechat', WeChatController::class);
+Route::group(['prefix' => 'site/{site}/wechat/{wechat}', 'middleware' => ['module', 'auth:sanctum']], function () {
+    //公众号默认消息
+    Route::put("default/message", [WeChatDefaultController::class, 'update']);
+    //微信菜单
+    Route::put('menu', [WechatMenuController::class, 'update']);
+    Route::get('menu/push', [WechatMenuController::class, 'push']);
+    //公众号粉丝
+    Route::get('user', [WeChatUserController::class, 'index']);
+    Route::get('user/sync', [WeChatUserController::class, 'sync']);
+    //与微信服务器通信接口
+    Route::get('api', [ProcessorController::class, 'handle']);
+});
