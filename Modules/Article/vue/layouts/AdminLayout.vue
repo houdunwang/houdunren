@@ -6,8 +6,25 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark flex justify-start mt-3 text-lg cursor-pointer font-thin">
-                    <i class="fas fa-burn mr-2 text-base"></i>
-                    {{ module.title }}
+                    <!-- <i class="fas fa-home   text-base mr-2 text-gray-400 "></i> -->
+                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="icon icon-tabler icon-tabler-brand-gitlab"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M21 14l-9 7l-9 -7l3 -11l3 7h6l3 -7z" />
+                        </svg>
+                    </span>
+                    <span class="text-gray-200 text-base">{{ module.title }}</span>
                 </h1>
                 <div class="navbar-nav flex-row d-lg-none">
                     <div class="nav-item dropdown">
@@ -29,20 +46,27 @@
                     </div>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-menu">
-                    <ul class="navbar-nav pt-lg-3">
+                    <ul class="navbar-nav">
                         <li class="nav-item dropdown border-b border-gray-700 pb-5 mb-3" v-for="(menu, index) in menus" :key="index">
                             <a class="nav-link show flex items-baseline" href="#navbar-base">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <i :class="menu.icon"></i>
                                 </span>
-                                <span class="nav-link-title"> {{ menu.title }} </span>
+                                <span class="nav-link-title font-bold"> {{ menu.title }} </span>
                             </a>
                             <div class="dropdown-menu show">
                                 <div class="dropdown-menu-columns">
                                     <div class="dropdown-menu-column">
-                                        <router-link :to="item.route" class="dropdown-item" v-for="(item, i) in menu.items" :key="i">
+                                        <a
+                                            href="#"
+                                            @click.prevent="go(item)"
+                                            class="dropdown-item hover:bg-green-600 hover:text-gray-100 font-bold"
+                                            v-for="(item, i) in menu.items"
+                                            :key="i"
+                                            :class="{ 'bg-green-600 text-gray-100': routeName == item.route.name }"
+                                        >
                                             {{ item.title }}
-                                        </router-link>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -76,6 +100,32 @@
                     <div>
                         <ul class="navbar-nav">
                             <li class="nav-item">
+                                <a class="nav-link" href="/site/site/index/" target="_blank">
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-arrow-big-left"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="2"
+                                            stroke="currentColor"
+                                            fill="none"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path
+                                                d="M20 15h-8v3.586a1 1 0 0 1 -1.707 .707l-6.586 -6.586a1 1 0 0 1 0 -1.414l6.586 -6.586a1 1 0 0 1 1.707 .707v3.586h8a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1z"
+                                            />
+                                        </svg>
+                                    </span>
+                                    <span class="nav-link-title">
+                                        返回站点列表
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="/" target="_blank">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg
@@ -102,7 +152,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/member">
+                                <a class="nav-link" href="/member" target="_blank">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -181,15 +231,15 @@
                                         模块集
                                     </span>
                                 </a>
-                                <!-- <div class="dropdown-menu">
+                                <div class="dropdown-menu">
                                     <div class="dropdown-menu-columns">
-                                        <div class="dropdown-menu-column grid grid-cols-2 w-80">
-                                            <a class="dropdown-item" :href="`/${module.name}/admin`" v-for="module in modules" :key="module.id">
+                                        <div class="dropdown-menu-column grid grid-cols-2 w-80 p-3">
+                                            <a class="dropdown-item" :href="`/${module.name}/site/${site.id}/admin`" v-for="module in modules" :key="module.id">
                                                 {{ module.title }}
                                             </a>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -197,7 +247,7 @@
             </div>
         </header>
         <div class="content md:ml-48">
-            <div class="p-5 bg-white shadow-sm mx-5">
+            <div class="p-5 bg-white shadow-sm mx-5 rounded-md">
                 <router-view></router-view>
             </div>
         </div>
@@ -211,11 +261,28 @@ export default {
     data() {
         return {
             menus,
-            modules: []
+            modules: [],
+            routeName: window.localStorage.getItem('route_name')
         }
     },
     async created() {
-        // this.modules = await this.axios.get(`/api/module/site/${this.site.id}/user`)
+        this.modules = await this.axios.get(`/api/module/site/${this.site.id}/user`)
+    },
+    computed: {
+        // routeName: {
+        //     set(menu) {
+        //         window.localStorage.setItem('route_name', menu.route.name)
+        //     },
+        //     get() {
+        //         return window.localStorage.getItem('route_name')
+        //     }
+        // }
+    },
+    methods: {
+        go(menu) {
+            window.localStorage.setItem('route_name', (this.routeName = menu.route.name))
+            this.$router.push(menu.route)
+        }
     }
 }
 </script>

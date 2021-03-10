@@ -24,13 +24,13 @@
                 </span>
             </el-table-column>
 
-            <el-table-column width="260" #default="{row:content}" align="center">
+            <el-table-column width="220" #default="{row:content}" align="center">
                 <el-button-group>
                     <el-button type="primary" size="mini">
                         <a :href="`/Article/content/${content.id}.html`" target="_blank" class="text-white">预览</a>
                     </el-button>
                     <el-button type="success" size="mini" @click="router('admin.content.edit', { id: content.id })">编辑</el-button>
-                    <el-button type="primary" size="mini" @click="del(content)">删除</el-button>
+                    <el-button type="danger" size="mini" @click="del(content)">删除</el-button>
                 </el-button-group>
             </el-table-column>
         </el-table>

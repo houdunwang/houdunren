@@ -4,8 +4,9 @@ const menus = [
         icon: 'fab fa-windows',
         items: [
             { title: '内容标签', permission: 'lesson', route: { name: 'admin.tag.index' } },
-            { title: '幻灯片', permission: 'lesson', route: { name: 'admin.swiper.index' } },
-            { title: '风格模板', permission: 'lesson', route: { name: 'admin.template.index' } }
+            { title: '图片轮换', permission: 'lesson', route: { name: 'admin.swiper.index' } },
+            { title: '风格模板', permission: 'lesson', route: { name: 'admin.template.index' } },
+            { title: '菜单管理', permission: 'lesson', route: { name: 'admin.menu.index' } }
         ]
     },
     {

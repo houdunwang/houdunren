@@ -1,7 +1,7 @@
 <template>
     <div>
         <hd-tab :tabs="tabs" />
-        <el-card shadow="always" :body-style="{ padding: '20px' }">
+        <el-card shadow="nerver" :body-style="{ padding: '20px' }">
             <div slot="header">
                 模型管理
             </div>

@@ -5,7 +5,7 @@
             <li>链接优先级高于文章编号</li>
         </ul>
         <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal">
-            <el-card shadow="hover" :body-style="{ padding: '20px' }" class="mb-3">
+            <el-card shadow="nerver" :body-style="{ padding: '20px' }" class="mb-3">
                 <div slot="header">
                     幻灯片配置
                 </div>
@@ -29,7 +29,7 @@
                 </div>
             </el-card>
 
-            <el-card shadow="hover" :body-style="{ padding: '20px' }">
+            <el-card shadow="nerver" :body-style="{ padding: '20px' }">
                 <div slot="header">
                     轮换图片
                 </div>

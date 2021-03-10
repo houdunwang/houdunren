@@ -1,7 +1,7 @@
 <template>
     <div>
         <hd-tab :tabs="tabs" />
-        <div class="grid grid-cols-6 gap-5">
+        <div class="grid md:grid-cols-6 gap-5">
             <div class="card d-flex flex-column" v-for="template in templates" :key="template.name">
                 <a href="#">
                     <img :src="template.preview" class="object-cover" />
@@ -23,19 +23,6 @@
                     <el-button v-else size="mini" @click="onSubmit(template)">选择模板</el-button>
                 </div>
             </div>
-            <!-- <img :src="template.preview" class="object-cover w-20 h-20" />
-                <div class="text-gray-800">
-                    {{ template.title }}
-                </div>
-                <div class="text-xs text-gray-500 text-center mt-2">
-                    {{ template.description }}
-                </div>
-                <div class="flex justify-center my-3">
-                    <el-button-group>
-                        <el-button v-if="template.selected" type="success" size="mini">选择模板</el-button>
-                        <el-button v-else size="mini" @click="onSubmit(template)">选择模板</el-button>
-                    </el-button-group>
-                </div> -->
         </div>
     </div>
 </template>
