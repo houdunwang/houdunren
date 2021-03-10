@@ -1,6 +1,6 @@
 <template>
     <div>
-        <hd-tab :tabs="tabs" />
+        <tab :tabs="tabs" />
         <el-table :data="lessons.data" border stripe>
             <el-table-column v-for="col in columns" :prop="col.prop" :key="col.id" :label="col.label" :width="col.width" #default="{row:lesson}">
                 <el-image v-if="col.prop == 'preview'" :src="lesson.preview" fit="cover" :lazy="true"></el-image>

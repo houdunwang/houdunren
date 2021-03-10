@@ -29,7 +29,7 @@ class SystemController extends Controller
      */
     public function index()
     {
-        $lessons = System::latest()->paginate(10);
+        $lessons = System::latest()->where('site_id', SID)->paginate(10);
         return SystemLessonResource::collection($lessons);
     }
 

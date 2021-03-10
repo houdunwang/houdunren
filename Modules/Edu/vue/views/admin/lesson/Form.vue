@@ -1,6 +1,6 @@
 <template>
     <div>
-        <hd-tab :tabs="tabs" />
+        <tab :tabs="tabs" />
         <el-form :model="form" ref="form" label-width="100px" label-position="right" :inline="false" size="normal">
             <el-card shadow="never" :body-style="{ padding: '20px' }">
                 <div slot="header">
@@ -28,7 +28,7 @@
                     <hd-error name="description" />
                 </el-form-item>
                 <el-form-item label="预览图片" size="normal">
-                    <hd-image v-model="form.thumb" :action="`upload/site/${site.id}`" />
+                    <image-upload v-model="form.thumb" />
                     <hd-error name="thumb" />
                 </el-form-item>
                 <el-form-item label="高清下载地址" size="normal">

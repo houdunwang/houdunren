@@ -20,10 +20,9 @@ export default {
     watch: {
         value: {
             handler(n) {
-                if (!this.value) {
-                    this.value = n
-                    this.editor.txt.html(n)
-                }
+                // if (!this.value) {
+                //     this.editor.txt.html(n)
+                // }
             },
             immediate: true
         }

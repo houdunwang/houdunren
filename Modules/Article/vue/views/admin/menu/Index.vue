@@ -1,7 +1,10 @@
 <template>
     <div>
         <tab :tabs="tabs" />
-        <table class="table table-bordered table-striped" v-if="menus.length">
+        <ul class="alert alert-info text-sm text-gray-500 text-light leading-relaxed" role="alert">
+            <li>缺少名称或链接的菜单将不会保存</li>
+        </ul>
+        <table class="table table-bordered " v-if="menus.length">
             <thead>
                 <tr>
                     <th>菜单名称</th>
@@ -12,10 +15,10 @@
             <draggable v-model="menus" tag="tbody">
                 <tr v-for="(menu, index) in menus" :key="index" class="py-2 text-gray-700 text-xs">
                     <td>
-                        <el-input v-model="menu.title" placeholder="" size="normal" clearable></el-input>
+                        <el-input v-model="menu.title" placeholder="" size="small" clearable></el-input>
                     </td>
                     <td>
-                        <el-input v-model="menu.url" placeholder="" size="normal" clearable></el-input>
+                        <el-input v-model="menu.url" placeholder="" size="small" clearable></el-input>
                     </td>
                     <td width="80" align="center">
                         <el-button type="danger" size="mini" @click.prevent="del(menu)">删除</el-button>

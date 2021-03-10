@@ -1,8 +1,8 @@
 <template>
     <div>
-        <hd-tab :tabs="tabs" />
+        <tab :tabs="tabs" />
         <el-form :model="form" ref="form" label-width="100px" label-position="right" :inline="false" size="normal">
-            <el-card shadow="always" :body-style="{ padding: '20px' }">
+            <el-card shadow="never" :body-style="{ padding: '20px' }">
                 <div slot="header">
                     基本资料
                 </div>

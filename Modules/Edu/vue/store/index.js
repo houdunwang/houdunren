@@ -7,6 +7,8 @@ export default new Vuex.Store({
         user: {},
         site: window.site,
         module: window.module,
+        //历史菜单
+        historyMenus: [],
         //站内消息
         siteMessage: {}
     },
@@ -24,6 +26,16 @@ export default new Vuex.Store({
         },
         site(state, site) {
             state.site = site
+        },
+        //添加历史菜单
+        addHistoryMenus(state, menu) {
+            const has = state.historyMenus.some(m => m.route.name == menu.route.name)
+            if (!has) {
+                state.historyMenus.push(menu)
+                if (state.historyMenus.length > 10) {
+                    state.historyMenus.shift()
+                }
+            }
         },
         module(state, module) {
             state.module = module

@@ -15,27 +15,35 @@ import Editor from '@toast-ui/editor'
 
 export default {
     props: {
-        //后台上传地址
-        action: { type: String, required: true },
         //编辑器高度
         height: { type: String, default: '300px' },
         //显示方式
         previewStyle: { type: String, default: 'vertical' },
-        initialEditType: { type: String, default: 'wysiwyg' }
+        initialEditType: { type: String, default: 'wysiwyg' },
+        value: { type: String, default: '' }
     },
     data() {
         return {
             //编辑器对象
-            editor: null
+            editor: null,
+            //更新状态，当异步设置编辑器值时
+            isUpdate: false
         }
     },
     mounted() {
         this.init()
     },
     watch: {
-        // '$attrs.value'(n) {
-        //     if (n != this.editor.getHtml()) this.init()
-        // }
+        value: {
+            handler(n) {
+                //异步更新组件数据时定义编辑器内容
+                if (!this.isUpdate && this.editor) {
+                    this.isUpdate = true
+                    this.editor.setHtml(n)
+                }
+            },
+            immediate: true
+        }
     },
     methods: {
         init() {
@@ -43,11 +51,11 @@ export default {
             this.fullScreenEvent()
         },
         initEditor() {
-            const Vue = this
+            const This = this
             const editor = new Editor({
                 el: document.querySelector('#hdEditor'),
                 previewStyle: this.previewStyle,
-                initialValue: Vue.$attrs.value,
+                initialValue: This.$attrs.value,
                 initialEditType: this.initialEditType,
                 height: this.height,
                 language: 'zh-CN',
@@ -55,7 +63,7 @@ export default {
                 events: {
                     //监听编辑器输入
                     change: function() {
-                        Vue.$emit('input', editor.getMarkdown())
+                        This.$emit('input', editor.getMarkdown())
                     }
                 },
                 hooks: {
@@ -64,7 +72,7 @@ export default {
                         //添加post数据
                         formData.append('file', blob, blob.name)
                         //上传图片
-                        let response = await Vue.axios.post(Vue.action, formData)
+                        let response = await axios.post(`/api/upload/site/${This.site.id}`, formData)
                         //更改编辑器内容
                         callback(response.path, blob.name)
                         return false
@@ -75,9 +83,9 @@ export default {
             this.editor = editor
         },
         //设置编辑器内容
-        setHtml(content = '') {
-            this.editor.setHtml(content)
-        },
+        // setHtml(content = '') {
+        //     this.editor.setHtml(content)
+        // },
         //添加工具条按钮
         createButton(className) {
             const button = document.createElement('button')

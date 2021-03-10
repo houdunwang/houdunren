@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-dialog title="课程选择" :visible.sync="dialogTableVisible" width="60%">
+        <el-dialog title="课程选择" :visible.sync="dialogTableVisible" width="80%">
             <div class="flex mb-3">
                 <el-input v-model="keyword" placeholder="" size="normal" clearable class="mr-2"></el-input>
                 <el-button type="primary" size="default" @click="search">搜索</el-button>

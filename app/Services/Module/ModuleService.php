@@ -50,7 +50,7 @@ class ModuleService
     {
         $path = parse_url(request()->url())['path'] ?? '';
         $path = preg_replace('/\/api/', '', $path);
-        preg_match('/^\/(.*?)\/.+?/i', $path, $matches);
+        preg_match('/^\/(\w+)\/?/i', $path, $matches);
         return Module::where('name', $matches[1] ?? '')->first();
     }
 

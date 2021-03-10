@@ -1,8 +1,8 @@
 <template>
     <div>
-        <hd-tab :tabs="tabs" />
+        <tab :tabs="tabs" />
         <el-form :model="form" ref="form" label-width="100px" label-position="right" :inline="false" size="normal">
-            <el-card shadow="always" :body-style="{ padding: '20px' }">
+            <el-card shadow="never" :body-style="{ padding: '20px' }">
                 <div slot="header">
                     基本资料
                 </div>
@@ -15,11 +15,11 @@
                     <hd-error name="description" />
                 </el-form-item>
                 <el-form-item label="预览图片" size="normal">
-                    <hd-image v-model="form.preview" />
+                    <image-upload v-model="form.preview" />
                     <hd-error name="preview" />
                 </el-form-item>
             </el-card>
-            <el-card shadow="always" :body-style="{ padding: '20px' }" class="mt-3">
+            <el-card shadow="never" :body-style="{ padding: '20px' }" class="mt-3">
                 <div slot="header">
                     课程列表
                 </div>

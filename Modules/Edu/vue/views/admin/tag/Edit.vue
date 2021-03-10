@@ -1,6 +1,6 @@
 <template>
     <div>
-        <hd-tab :tabs="tabs" />
+        <tab :tabs="tabs" />
         <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal" @submit.native.prevent>
             <el-card shadow="never" :body-style="{ padding: '20px' }">
                 <div>

@@ -30,6 +30,7 @@ export default new Vuex.Store({
         site(state, site) {
             state.site = site
         },
+        //添加历史菜单
         addHistoryMenus(state, menu) {
             const has = state.historyMenus.some(m => m.route.name == menu.route.name)
             if (!has) {

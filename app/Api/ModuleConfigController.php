@@ -31,7 +31,7 @@ class ModuleConfigController extends Controller
     {
         $this->authorize('update', $module);
         $config = ModuleConfig::where('site_id', $site['id'])->where('module_id', $module['id'])->first();
-        return $config['config'];
+        return $config['config'] ?? [];
     }
 
     /**

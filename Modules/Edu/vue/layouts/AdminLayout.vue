@@ -1,11 +1,12 @@
 <template>
-    <div class="page">
+    <div class="page admin-layout">
         <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark md:w-48 shadow-md">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark flex justify-start text-lg cursor-pointer font-thin">
+                    <!-- <i class="fas fa-home   text-base mr-2 text-gray-400 "></i> -->
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +24,7 @@
                             <path d="M21 14l-9 7l-9 -7l3 -11l3 7h6l3 -7z" />
                         </svg>
                     </span>
-                    <span class="text-gray-100 text-base">{{ module.title }}</span>
+                    <span class="text-gray-200 text-base">{{ module.title }}</span>
                 </h1>
                 <div class="navbar-nav flex-row d-lg-none">
                     <div class="nav-item dropdown">
@@ -44,8 +45,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="collapse navbar-collapse" id="navbar-menu">
-                    <ul class="navbar-nav pt-lg-3">
+                <div class="collapse navbar-collapse pt-3" id="navbar-menu">
+                    <ul class="navbar-nav">
                         <li class="nav-item dropdown border-b border-gray-700 pb-5 mb-3" v-for="(menu, index) in menus" :key="index">
                             <a class="nav-link show flex items-baseline" href="#navbar-base">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -56,14 +57,16 @@
                             <div class="dropdown-menu show">
                                 <div class="dropdown-menu-columns">
                                     <div class="dropdown-menu-column">
-                                        <router-link
-                                            :to="item.route"
-                                            class="dropdown-item hover:bg-gray-800 hover:text-gray-200 font-bold"
+                                        <a
+                                            href="#"
+                                            @click.prevent="go(item)"
+                                            class="dropdown-item hover:bg-green-600 hover:text-gray-100 font-bold"
                                             v-for="(item, i) in menu.items"
                                             :key="i"
+                                            :class="{ 'bg-green-600 text-gray-100': routeName == item.route.name }"
                                         >
                                             {{ item.title }}
-                                        </router-link>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +75,7 @@
                 </div>
             </div>
         </aside>
-        <header class="navbar navbar-expand-md navbar-light d-none d-lg-flex d-print-none md:ml-48 md:pl-3">
+        <header class="navbar navbar-expand-md navbar-light d-none d-lg-flex d-print-none md:ml-48">
             <div class="container-xl" style="max-width:100%;">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
                     <span class="navbar-toggler-icon"></span>
@@ -80,7 +83,7 @@
                 <div class="navbar-nav flex-row order-md-last">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                            <el-image :src="user.avatar" fit="cover" class="w-8 h-8"></el-image>
+                            <el-image :src="user.icon" fit="cover" class="w-8 h-8"></el-image>
                             <div class="d-none d-xl-block ps-2">
                                 <div>{{ user.name }}</div>
                                 <div class="mt-1 small text-muted">注册于{{ user.created_at | fromNow }}</div>
@@ -97,7 +100,7 @@
                     <div>
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="/" target="_blank">
+                                <a class="nav-link" href="/site/site/index/" target="_blank">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -244,9 +247,25 @@
             </div>
         </header>
         <div class="content md:ml-48">
-            <div class="p-5 bg-white shadow-sm mx-5 rounded-md">
+            <div class="mx-5 mb-2 bg-white shadow-sm p-2 rounded-sm" v-if="$store.state.historyMenus.length">
+                <el-button-group>
+                    <el-button
+                        size="mini"
+                        v-for="(menu, index) in $store.state.historyMenus"
+                        :key="index"
+                        :type="$route.name == menu.route.name ? 'primary' : 'default'"
+                        @click.prevent="$router.push(menu.route)"
+                    >
+                        {{ menu.title }}
+                    </el-button>
+                </el-button-group>
+            </div>
+            <div class="p-5 bg-white shadow-sm mx-5 mb-10 rounded-sm">
                 <router-view></router-view>
             </div>
+            <!-- <div class="p-5 my-10 ">
+                <el-divider class="text-xs text-gray-600">编码 @ 向军老师</el-divider>
+            </div> -->
         </div>
         <el-backtop> </el-backtop>
     </div>
@@ -258,13 +277,30 @@ export default {
     data() {
         return {
             menus,
-            modules: []
+            modules: [],
+            routeName: window.localStorage.getItem('route_name')
         }
     },
     async created() {
         this.modules = await this.axios.get(`/api/module/site/${this.site.id}/user`)
+    },
+
+    methods: {
+        go(menu) {
+            window.localStorage.setItem('route_name', (this.routeName = menu.route.name))
+            this.$store.commit('addHistoryMenus', menu)
+            if (this.$route.name != menu.route.name) {
+                this.$router.push(menu.route)
+            }
+        }
     }
 }
 </script>
 
-<style></style>
+<style>
+.admin-layout .el-divider__text {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    background-color: #f1f1f1 !important;
+}
+</style>

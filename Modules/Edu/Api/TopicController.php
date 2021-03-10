@@ -47,12 +47,6 @@ class TopicController extends Controller
         return TopicResource::collection($topics);
     }
 
-    // public function lists(Request $request)
-    // {
-    //     $topics = Topic::where('site_id', SID)->latest()->with('user')->paginate(10);
-    //     return TopicResource::collection($topics);
-    // }
-
     /**
      * 保存
      * @param TopicRequest $request

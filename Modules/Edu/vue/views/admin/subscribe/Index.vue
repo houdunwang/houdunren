@@ -1,6 +1,6 @@
 <template>
     <div>
-        <hd-tab :tabs="tabs" />
+        <tab :tabs="tabs" />
         <el-table :data="subscribes" border stripe>
             <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label" :width="col.width" #default="{row:subscribe}">
                 <i v-if="col.id == 'icon'" :class="subscribe[col.id]"></i>

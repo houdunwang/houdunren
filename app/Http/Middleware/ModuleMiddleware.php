@@ -44,6 +44,7 @@ class ModuleMiddleware
             SiteService::cache($site);
             return $site;
         }
+
         abort(404, '站点不存在');
     }
 
