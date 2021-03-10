@@ -15273,19 +15273,6 @@
                         return $instance->saveUser($account);
         }
                     /**
-         * 批量保存用户
-         * 获取微信粉丝数据时使用
-         *
-         * @param array $users
-         * @return \App\Services\WeChat\Collection 
-         * @static 
-         */ 
-        public static function batchSaveUsers($users)
-        {
-                        /** @var \App\Services\WeChat\WeChatService $instance */
-                        return $instance->batchSaveUsers($users);
-        }
-                    /**
          * 保存微信规则
          *
          * @param string $type

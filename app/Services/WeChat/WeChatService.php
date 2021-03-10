@@ -52,20 +52,6 @@ class WeChatService
     }
 
     /**
-     * 批量保存用户
-     * 获取微信粉丝数据时使用
-     *
-     * @param array $users
-     * @return Collection
-     */
-    // public function batchSaveUsers(array $users): Collection
-    // {
-    //     return collect($users)->map(function ($user) {
-    //         return $this->saveUser($user);
-    //     });
-    // }
-
-    /**
      * 保存微信规则
      *
      * @param string $type

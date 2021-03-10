@@ -6,11 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class WeChatServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     *
-     * @return void
-     */
     public function register()
     {
         $this->app->singleton('WechatService', function () {
@@ -18,13 +13,7 @@ class WeChatServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
     public function boot()
     {
-        //
     }
 }

@@ -24,17 +24,31 @@ class WeChat
     protected static $message;
 
     /**
+     * 初始化服务
+     * @param mixed $config
+     * @return void
+     */
+    public function init($config)
+    {
+        $this->config($config)->bind();
+        $this->message();
+    }
+
+    /**
      * 微信配置
      * @param mixed $data
      * @return mixed
      */
-    public function config($data)
+    protected function config($data = null)
     {
         if (is_string($data)) {
             return self::$config[$data] ?? null;
+        } else if (is_null($data)) {
+            return self::$config;
         } else {
             self::$config = $data;
         }
+
         return $this;
     }
 
@@ -42,7 +56,7 @@ class WeChat
      * 被动消息
      * @return $this
      */
-    public function message()
+    protected function message()
     {
         $content = file_get_contents('php://input');
 
@@ -58,12 +72,10 @@ class WeChat
      * @throws RequestException
      * @throws Exception
      */
-    public function token()
+    protected function token()
     {
         $url = $this->api . '/token?grant_type=client_credential&appid=' . $this->config('appid') . '&secret=' . $this->config('appsecret');
-
         $cacheName = 'wechat-token-' . md5($url);
-
         if (!Cache::has($cacheName)) {
             $response = $this->return(
                 Http::get($url)
@@ -79,13 +91,12 @@ class WeChat
      * 绑定公众号
      * @return $this
      */
-    public function bind()
+    protected function bind()
     {
         if (isset($_GET['signature']) && isset($_GET['timestamp']) && isset($_GET['nonce']) && isset($_GET['echostr'])) {
             $signature = $_GET['signature'];
             $timestamp = $_GET['timestamp'];
             $nonce = $_GET['nonce'];
-
             $token = $this->config('token');
             $tmpArr = [$token, $timestamp, $nonce];
             sort($tmpArr, SORT_STRING);

@@ -8,7 +8,7 @@ use Modules\Article\Entities\Content;
 use Modules\Article\Observers\ContentObserver;
 use Modules\Article\Entities\Category;
 use Modules\Article\Observers\CategoryObserver;
-use Modules\Article\services\BladeService;
+use Modules\Article\Services\BladeService;
 use RuntimeException;
 
 class ArticleServiceProvider extends ServiceProvider

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\WeChatLoginController;
 use App\Http\Controllers\WeChatBindController;
-
+use App\WeChat\ProcessorController;
 
 //支付通知
 Route::group(['prefix' => 'pay/{module}', 'middleware' => ['module']], function () {
@@ -21,6 +21,9 @@ Route::group(['prefix' => 'wechat'], function () {
     Route::get('bind', [WeChatBindController::class, 'bind']);
     Route::get('bind/callback', [WeChatBindController::class, 'bindCallback'])->name('wechat.bind.callback');
 });
+
+//与微信服务器通信接口
+Route::any('wechat/api/{site}/{model}', [ProcessorController::class, 'handle'])->middleware(['site']);
 
 //退出登录
 Route::get('logout', function () {

@@ -21,7 +21,7 @@
             </el-table-column>
 
             <el-table-column header-align="center" align="center" prop="prop" label="API" #default="{ row: wechat }">
-                {{ `${site.domain}/site/${site.id}/wechat/${wechat.id}/api` }}
+                {{ `${site.domain}/wechat/api/${site.id}/${wechat.id}` }}
             </el-table-column>
 
             <el-table-column align="center" width="400" #default="{ row: wechat }">
