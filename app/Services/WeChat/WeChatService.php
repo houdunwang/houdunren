@@ -19,7 +19,7 @@ class WeChatService
      * 微信检测
      * @return boolean
      */
-    public function isWechat(): bool
+    public function isWeChat(): bool
     {
         return isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false;
     }

@@ -8,7 +8,7 @@ class WeChatServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->singleton('WechatService', function () {
+        $this->app->singleton('WeChatService', function () {
             return new WeChatService();
         });
     }

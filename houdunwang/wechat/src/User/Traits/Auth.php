@@ -1,11 +1,11 @@
 <?php
 
-namespace Houdunwang\WeChat\User;
+namespace Houdunwang\WeChat\User\Traits;
 
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Log;
+use Log;
 
 /**
  * 获取用户资料

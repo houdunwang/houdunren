@@ -1,14 +1,13 @@
 <?php
 
-namespace Houdunwang\WeChat\User;
+namespace Houdunwang\WeChat\User\Traits;
 
-use Exception;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 /**
- * 获取粉丝
+ * 获取粉丝资料
  */
 trait Get
 {

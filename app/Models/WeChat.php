@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class WeChat extends Model
 {
-    protected $fillable = ['site_id', 'title', 'name', 'introduce', 'qr', 'token', 'wechat_id', 'appid', 'appsecret', 'welcome', 'default_message'];
+    protected $fillable = ['site_id', 'title', 'name', 'introduce', 'qr', 'token', 'type', 'wechat_id', 'appid', 'appsecret', 'welcome', 'default_message'];
 
     protected $casts = [
         'menus' => 'array',

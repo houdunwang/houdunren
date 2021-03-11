@@ -11,7 +11,7 @@ use Modules\Edu\Entities\video;
  * 视频策略
  * @package Modules\Edu\Policies
  */
-class videoPolicy
+class VideoPolicy
 {
     use HandlesAuthorization;
 

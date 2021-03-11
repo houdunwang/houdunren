@@ -15,6 +15,7 @@ class CreateWeChatsTable extends Migration
             $table->string('introduce')->comment('公众号介绍');
             $table->string('name')->nullable()->comment('微信号');
             $table->string('qr')->nullable()->comment('二维码');
+            $table->string('type')->comment('类型');
             $table->string('token')->comment('TOKEN');
             $table->string('wechat_id')->nullable()->unique()->comment('原始ID');
             $table->string('appid')->unique();

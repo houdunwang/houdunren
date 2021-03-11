@@ -3,26 +3,24 @@
 namespace Houdunwang\WeChat;
 
 use Exception;
-use Houdunwang\WeChat\Message\MessageType;
-use Houdunwang\WeChat\Message\Send;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use SimpleXMLElement;
+use Houdunwang\WeChat\MessageType\MessageType;
 
-class WeChat
+/**
+ * 微信处理基础类
+ * @package Houdunwang\WeChat
+ */
+class WeChat extends MessageType
 {
-    use Send, MessageType;
-
     protected $api = 'https://api.weixin.qq.com/cgi-bin';
-
     //微信配置
     protected static $config;
-
     //被动消息
     protected static $message;
-
     /**
      * 初始化服务
      * @param mixed $config

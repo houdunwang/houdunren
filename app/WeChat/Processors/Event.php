@@ -1,11 +1,9 @@
 <?php
 
-namespace App\WeChat\Message;
+namespace App\WeChat\Processors;
 
-use App\WeChat\Traits\Reply;
-use App\Models\WeChat;
-use Houdunwang\WeChat\Button;
-use Houdunwang\WeChat\Message;
+use App\WeChat\Processors\Processor;
+use Houdunwang\WeChat\Button\Button;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use InvalidArgumentException;
 use Log;
@@ -15,20 +13,13 @@ use LogicException;
  * 事件消息
  * @package App\WeChat\Message
  */
-class Event
+class Event extends Processor
 {
-    use Reply;
     //事件处理集
     protected $processes = ['button', 'subscribe'];
-    //公众号数据表模型
-    protected $model;
-    //微信消息处理服务
-    protected $message;
 
-    public function handle(WeChat $model, Message $message)
+    public function handle()
     {
-        $this->model = $model;
-        $this->message = $message;
         foreach ($this->processes as $action) {
             if ($content = $this->$action()) {
                 return $content;
@@ -46,8 +37,7 @@ class Event
     protected function button()
     {
         $button = app(Button::class);
-
-        if ($button->isClient()) {
+        if ($button->isClick()) {
             return $this->reply($this->message->EventKey);
         }
     }

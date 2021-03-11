@@ -2,13 +2,18 @@
 
 namespace Houdunwang\WeChat\Message;
 
+use Houdunwang\WeChat\WeChat;
 use Log;
 
-trait Send
+/**
+ * 发送消息
+ * @package Houdunwang\WeChat\Message
+ */
+class Message extends WeChat
 {
-  public function text(string $content)
-  {
-    $xml = <<<php
+    public function text(string $content)
+    {
+        $xml = <<<php
         <xml>
   <ToUserName><![CDATA[%s]]></ToUserName>
   <FromUserName><![CDATA[%s]]></FromUserName>
@@ -18,12 +23,12 @@ trait Send
 </xml>
 php;
 
-    return sprintf($xml, $this->FromUserName, $this->ToUserName, time(), $content);
-  }
+        return sprintf($xml, $this->FromUserName, $this->ToUserName, time(), $content);
+    }
 
-  public function news(array $data)
-  {
-    $xml = <<<php
+    public function news(array $data)
+    {
+        $xml = <<<php
         <xml>
         <ToUserName><![CDATA[%s]]></ToUserName>
         <FromUserName><![CDATA[%s]]></FromUserName>
@@ -36,8 +41,8 @@ php;
       </xml>
 php;
 
-    $news = '';
-    $articleXml = <<<xml
+        $news = '';
+        $articleXml = <<<xml
         <item>
         <Title><![CDATA[%s]]></Title>
         <Description><![CDATA[%s]]></Description>
@@ -45,9 +50,9 @@ php;
         <Url><![CDATA[%s]]></Url>
       </item>
 xml;
-    foreach ($data as $article) {
-      $news .= sprintf($articleXml, $article['title'], $article['description'], $article['picurl'], $article['url']);
+        foreach ($data as $article) {
+            $news .= sprintf($articleXml, $article['title'], $article['description'], $article['picurl'], $article['url']);
+        }
+        return sprintf($xml, $this->FromUserName, $this->ToUserName, time(), count($data), $news);
     }
-    return sprintf($xml, $this->FromUserName, $this->ToUserName, time(), count($data), $news);
-  }
 }

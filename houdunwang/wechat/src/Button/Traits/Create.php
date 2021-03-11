@@ -1,6 +1,6 @@
 <?php
 
-namespace Houdunwang\WeChat\Button;
+namespace Houdunwang\WeChat\Button\Traits;
 
 use Exception;
 use Houdunwang\WeChat\WeChat;

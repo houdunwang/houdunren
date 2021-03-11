@@ -1,6 +1,6 @@
 <?php
 
-namespace App\WeChat\Traits;
+namespace App\WeChat\Processors;
 
 use App\Models\WeChatKeyword;
 use Arr;
@@ -8,12 +8,27 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use InvalidArgumentException;
 use Log;
 use LogicException;
+use Houdunwang\WeChat\Message\Message;
+use App\Models\WeChat as Model;
 
 /**
  * 根据关键词内容回复
  */
-trait Reply
+abstract class Processor
 {
+    abstract protected function handle();
+
+    //公众号数据表模型
+    protected $model;
+    //微信消息处理服务
+    protected $message;
+
+    public function __construct(Model $model, Message $message)
+    {
+        $this->model = $model;
+        $this->message = $message;
+    }
+
     /**
      * 统一回复处理
      * @param null|string $keyword 关键词
@@ -43,7 +58,7 @@ trait Reply
      */
     final protected function getRule(?string $keyword)
     {
-        $keywords = WeChatKeyword::where('site_id', site()['id'])->where('wechat_id', request()->model->id)->get();
+        $keywords = WeChatKeyword::where('site_id', SID)->where('wechat_id', $this->model->id)->get();
 
         foreach ($keywords as $keyword) {
             if ($keyword['word'] == $keyword) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Article\services;
+namespace Modules\Article\Services;
 
 use Illuminate\Support\Facades\Blade;
 use InvalidArgumentException;
