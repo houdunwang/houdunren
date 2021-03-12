@@ -22,11 +22,7 @@ const menus = [
     {
         title: '微信公众号',
         icon: 'fab fa-weixin',
-        items: [
-            { title: '微信图文消息', permission: 'lesson', route: { name: 'admin.lesson.index' } },
-            { title: '微信普通文本', permission: 'lesson', route: { name: 'admin.lesson.create' } },
-            { title: '微信音频消息', permission: 'lesson', route: { name: 'admin.lesson.create' } }
-        ]
+        items: [{ title: '微信图文消息', permission: 'lesson', route: { name: 'admin.wechat.index' } }]
     }
 ]
 

@@ -18,9 +18,10 @@ use App\Api\ModuleConfigController;
 use App\Api\FollowController;
 use App\Api\FansController;
 use App\WeChat\WeChatController;
-use App\WeChat\DefaultController;
-use App\WeChat\MenuController;
-use App\WeChat\UserController as WeChatUser;
+use App\WeChat\WeChatDefaultController;
+use App\WeChat\WeChatMenuController;
+use App\WeChat\WeChatUserController;
+use App\WeChat\WeChatMessageController;
 
 //登录注册与找回密码
 Route::post('login', [AuthController::class, 'login']);
@@ -99,11 +100,13 @@ Route::apiResource('site/{site}/wechat', WeChatController::class);
 
 Route::group(['prefix' => 'site/{site}/wechat/{wechat}', 'middleware' => ['site', 'auth:sanctum']], function () {
     //公众号默认消息
-    Route::put("default/message", [DefaultController::class, 'update']);
+    Route::put("default/message", [WeChatDefaultController::class, 'update']);
     //微信菜单
-    Route::put('menu', [MenuController::class, 'update']);
-    Route::get('menu/push', [MenuController::class, 'push']);
+    Route::put('menu', [WeChatMenuController::class, 'update']);
+    Route::get('menu/push', [WeChatMenuController::class, 'push']);
     //公众号粉丝
-    Route::get('user', [WeChatUser::class, 'index']);
-    Route::get('user/sync', [WeChatUser::class, 'sync']);
+    Route::get('user', [WeChatUserController::class, 'index']);
+    Route::get('user/sync', [WeChatUserController::class, 'sync']);
+    //微信消息
+    Route::apiResource('message', WeChatMessageController::class);
 });

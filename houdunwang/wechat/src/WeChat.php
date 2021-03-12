@@ -2,13 +2,13 @@
 
 namespace Houdunwang\WeChat;
 
-use Exception;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
+use Houdunwang\WeChat\Types\MessageType;
 use SimpleXMLElement;
-use Houdunwang\WeChat\MessageType\MessageType;
+use Exception;
+use Log;
 
 /**
  * 微信处理基础类
@@ -21,6 +21,7 @@ class WeChat extends MessageType
     protected static $config;
     //被动消息
     protected static $message;
+
     /**
      * 初始化服务
      * @param mixed $config
@@ -30,6 +31,7 @@ class WeChat extends MessageType
     {
         $this->config($config)->bind();
         $this->message();
+        return $this;
     }
 
     /**
@@ -57,7 +59,6 @@ class WeChat extends MessageType
     protected function message()
     {
         $content = file_get_contents('php://input');
-
         if ($content) {
             self::$message = @simplexml_load_string($content);
         }
@@ -87,7 +88,7 @@ class WeChat extends MessageType
 
     /**
      * 绑定公众号
-     * @return $this
+     * @return void
      */
     protected function bind()
     {
@@ -105,7 +106,6 @@ class WeChat extends MessageType
                 die($_GET['echostr']);
             }
         }
-        return $this;
     }
 
     /**

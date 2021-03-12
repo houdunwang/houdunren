@@ -68,12 +68,8 @@ export default {
             this.$store.commit('errors', {})
             this.axios
                 .post(`login`, this.form)
-                .then(_ => {
-                    this.$router.push({ name: 'site.site.index' })
-                })
-                .finally(() => {
-                    this.$refs.captcha.get()
-                })
+                .then(_ => (location.href = `/site/site/index`))
+                .finally(() => this.$refs.captcha.get())
         }
     }
 }

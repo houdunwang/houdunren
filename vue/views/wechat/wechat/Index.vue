@@ -24,7 +24,7 @@
                 {{ `${site.domain}/wechat/api/${site.id}/${wechat.id}` }}
             </el-table-column>
 
-            <el-table-column align="center" width="400" #default="{ row: wechat }">
+            <el-table-column align="center" width="480" #default="{ row: wechat }">
                 <el-button-group size="small">
                     <el-button type="primary" size="small" @click="sync(wechat)" :disabled="isSync">同步粉丝</el-button>
                     <el-button type="info" size="small" @click="route('wechat.menu.edit', { sid: site.id, id: wechat.id })">
@@ -37,6 +37,18 @@
                         编辑
                     </el-button>
                     <el-button type="warning" size="small" @click="del(wechat)">删除</el-button>
+                    <el-dropdown size="small" split-button type="primary">
+                        消息管理
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.message.index', params: { sid: site.id, wid: wechat.id, type: 'text' } }">
+                                    文本消息
+                                </router-link>
+                            </el-dropdown-item>
+                            <el-dropdown-item>图文消息</el-dropdown-item>
+                            <el-dropdown-item>图片消息</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
                 </el-button-group>
             </el-table-column>
         </el-table>
