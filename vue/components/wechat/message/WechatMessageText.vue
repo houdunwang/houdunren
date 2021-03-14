@@ -14,6 +14,7 @@
                             @click="del(index)"
                         ></i>
                     </div>
+                    <hd-error name="content" />
                     <el-button size="mini" @click="add" class="mt-2">添加回复</el-button>
                 </el-card>
             </el-form>
@@ -22,12 +23,14 @@
                 <el-button type="primary" @click="onSubmit">保存提交</el-button>
             </span>
         </el-dialog>
-
-        <el-button-group v-if="message">
-            <el-button type="success" size="mini" @click="dialogShow = true">编辑</el-button>
-            <el-button type="primary" size="mini">删除</el-button>
+        <el-button-group>
+            <!-- 编辑按钮 -->
+            <el-button type="success" size="mini" @click="dialogShow = true" v-if="message">编辑</el-button>
+            <!-- 添加按钮 -->
+            <el-button type="danger" size="small" @click="dialogShow = true" v-else>添加消息</el-button>
+            <!-- 扩展按钮 -->
+            <slot />
         </el-button-group>
-        <el-button type="danger" size="small" @click="dialogShow = true" v-else>添加消息</el-button>
     </div>
 </template>
 

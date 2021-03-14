@@ -1,6 +1,5 @@
 <template>
     <div>
-        <el-button type="danger" size="small" @click="dialogShow = true">添加消息</el-button>
         <el-dialog title="图文消息设置" :visible.sync="dialogShow" width="90%" top="1rem">
             <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal">
                 <hd-wechat-message-rule :form="form" />
@@ -31,6 +30,14 @@
                 <el-button type="primary" @click="onSubmit">保存提交</el-button>
             </span>
         </el-dialog>
+         <el-button-group>
+            <!-- 编辑按钮 -->
+            <el-button type="success" size="mini" @click="dialogShow = true" v-if="message">编辑</el-button>
+            <!-- 添加按钮 -->
+            <el-button type="danger" size="small" @click="dialogShow = true" v-else>添加消息</el-button>
+            <!-- 扩展按钮 -->
+            <slot />
+        </el-button-group>
     </div>
 </template>
 
@@ -57,7 +64,8 @@ export default {
     },
     methods: {
         async onSubmit() {
-            await axios.post(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/message`, this.form)
+           const url = `site/${this.wechat.site_id}}/wechat/${this.wechat.id}}/message` + (this.message ? `/${this.message.id}` : ``)
+            await axios[this.message ? 'put' : 'post'](url, this.form)
            this.$router.go(0)
         }
     }

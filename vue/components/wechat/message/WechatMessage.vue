@@ -9,11 +9,15 @@
             </el-button>
         </el-button-group>
         <!-- 消息类型选择按钮 END-->
-
-        <el-table :data="message.data" border stripe class="mt-3">
+        <!-- 消息列表 -->
+        <el-table :data="message.data" border stripe class="mt-3" v-loading="loading">
             <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label" :width="col.width"> </el-table-column>
             <el-table-column width="150" #default="{row:message}">
-                <component :is="componentName" :wechat="wechat" :message="message" />
+                <el-button-group>
+                    <component :is="componentName" :wechat="wechat" :message="message" :key="message.id" class="inline-block">
+                        <el-button type="primary" size="mini" @click="del(message)">删除</el-button>
+                    </component>
+                </el-button-group>
             </el-table-column>
         </el-table>
         <!-- 添加消息 -->
@@ -33,8 +37,8 @@ const types = [
 const columns = [
     { label: '编号', id: 'id', width: 60 },
     { label: '规则描述', id: 'title' },
-    { label: '匹配方式', id: 'keywordTypeTitle', width: 200 },
-    { label: '关键词', id: 'keyword', width: 200 }
+    { label: '匹配方式', id: 'keywordTypeTitle' },
+    { label: '关键词', id: 'keyword' }
 ]
 export default {
     props: {
@@ -42,7 +46,8 @@ export default {
     },
     data() {
         return {
-            type: this.$route.query.type || 'text',
+            type: this.$route.query.type,
+            loading: true,
             message: [],
             types,
             columns
@@ -63,7 +68,9 @@ export default {
     },
     methods: {
         async load() {
+            this.loading = true
             this.message = await axios.get(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/message?type=${this.type}`)
+            this.loading = false
         },
         //删除
         del(message) {
