@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\WeChat;
+use App\Models\WeChatMessage;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use UserService;
 
@@ -20,7 +20,7 @@ class WeChatMessagePolicy
         return true;
     }
 
-    public function view(User $user, WeChat $weChat)
+    public function view(User $user, WeChatMessage $message)
     {
         return true;
     }
@@ -30,12 +30,12 @@ class WeChatMessagePolicy
         return UserService::isMaster(site(), $user);
     }
 
-    public function update(User $user, WeChat $weChat)
+    public function update(User $user, WeChatMessage $message)
     {
         return UserService::isMaster(site(), $user);
     }
 
-    public function delete(User $user, WeChat $weChat)
+    public function delete(User $user, WeChatMessage $message)
     {
         return UserService::isMaster(site(), $user);
     }

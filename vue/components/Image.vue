@@ -2,7 +2,7 @@
     <div class="relative">
         <el-upload
             class="avatar-uploader"
-            :action="`${action}`"
+            :action="action"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
@@ -18,7 +18,7 @@
 <script>
 export default {
     props: {
-        action: { type: String, required: true },
+        sid: { type: Number },
         value: { type: String }
     },
     data() {
@@ -32,6 +32,9 @@ export default {
         }
     },
     computed: {
+        action() {
+            return this.sid ? `/api/upload/site/${this.sid}` : `/api/upload/local`
+        },
         headers() {
             return {
                 // Authorization: `Bearer ${this.$store.getters.token}`,

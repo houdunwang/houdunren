@@ -12,20 +12,38 @@ use Illuminate\Database\Eloquent\Model;
 class WeChatMessage extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'site_id', 'module_id', 'wechat_id', 'keyword_type', 'type', 'keyword', 'title', 'content'
-    ];
+    // protected $fillable = [
+    //     'site_id', 'module_id', 'wechat_id', 'keyword_type', 'type', 'keyword', 'title', 'content'
+    // ];
+    protected $guarded = [];
     protected $casts = ['content' => 'array'];
-    protected $types = ['text' => '普通文本', 'news' => '图文消息', 'image' => "图片"];
-
-    protected $appends = ['TypeTitle'];
+    protected $types = ['all' => '完全匹配', 'regexp' => '正则匹配'];
+    protected $appends = ['keywordTypeTitle'];
 
     /**
-     * 类型中文
+     * 关键词类型中文描述
      * @return string
      */
-    protected function getTypeTitleAttribute()
+    protected function getKeywordTypeTitleAttribute()
     {
-        return $this->types[$this->type];
+        return $this->types[$this->keyword_type];
+    }
+
+    /**
+     * 站点关联
+     * @return BelongsTo
+     */
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
+    }
+
+    /**
+     * 公众号关联
+     * @return BelongsTo
+     */
+    public function wechat()
+    {
+        return $this->belongsTo(WeChat::class);
     }
 }

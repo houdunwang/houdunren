@@ -41,7 +41,7 @@
                         消息管理
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
-                                <router-link :to="{ name: 'wechat.message.index', params: { sid: site.id, wid: wechat.id, type: 'text' } }">
+                                <router-link :to="{ name: 'wechat.message.index', params: { sid: site.id, wid: wechat.id }, query: { type: 'text' } }">
                                     文本消息
                                 </router-link>
                             </el-dropdown-item>

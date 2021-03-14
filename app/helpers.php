@@ -65,3 +65,14 @@ if (!function_exists('markdown')) {
         return $Parsedown->text($content);
     }
 }
+
+if (!function_exists('is_master')) {
+    /**
+     * 站长检测
+     * @return boolean
+     */
+    function is_master(): bool
+    {
+        return \UserService::isMaster(site(), \Auth::user());
+    }
+}

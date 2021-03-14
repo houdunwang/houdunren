@@ -79,10 +79,9 @@ class WeChatMessageController extends Controller
      * @throws MassAssignmentException
      * @throws InvalidArgumentException
      */
-    public function update(WeChatMessageRequest $request, Site $site, WeChat $wechat, WeChatMessage $weChatMessage)
+    public function update(WeChatMessageRequest $request, Site $site, WeChat $wechat, WeChatMessage $message)
     {
-        $data = $request->input() + ['site_id' => $site['id'], 'wechat_id' => $wechat['id'], 'module_id' => request('module')];
-        $weChatMessage->fill($data)->save();
+        $message->fill($request->except(['keywordTypeTitle']))->save();
         return $this->message('消息修改成功');
     }
 
@@ -91,9 +90,9 @@ class WeChatMessageController extends Controller
      * @param WeChatMessage $weChatMessage
      * @return void
      */
-    public function destroy(WeChatMessage $weChatMessage)
+    public function destroy(Site $site, WeChat $wechat, WeChatMessage $message)
     {
-        $weChatMessage->delete();
+        $message->delete();
         return $this->message('消息删除成功');
     }
 }

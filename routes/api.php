@@ -95,10 +95,10 @@ Route::post('upload/site/{site}/wangeditor', [UploadController::class, 'wangEdit
 //图形验证码
 Route::get('captcha', [CaptchaController::class, 'make']);
 
-//微信公众号
-Route::apiResource('site/{site}/wechat', WeChatController::class);
-
-Route::group(['prefix' => 'site/{site}/wechat/{wechat}', 'middleware' => ['site', 'auth:sanctum']], function () {
+//站点公众号
+Route::group(['middleware' => ['site', 'auth:sanctum']], function () {
+    //微信公众号
+    Route::apiResource('site.wechat', WeChatController::class);
     //公众号默认消息
     Route::put("default/message", [WeChatDefaultController::class, 'update']);
     //微信菜单
@@ -108,5 +108,5 @@ Route::group(['prefix' => 'site/{site}/wechat/{wechat}', 'middleware' => ['site'
     Route::get('user', [WeChatUserController::class, 'index']);
     Route::get('user/sync', [WeChatUserController::class, 'sync']);
     //微信消息
-    Route::apiResource('message', WeChatMessageController::class);
+    Route::apiResource('site.wechat.message', WeChatMessageController::class);
 });
