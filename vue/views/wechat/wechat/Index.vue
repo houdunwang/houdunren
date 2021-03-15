@@ -25,24 +25,62 @@
             </el-table-column>
 
             <el-table-column align="center" width="480" #default="{ row: wechat }">
-                <el-button-group size="small">
-                    <el-button type="primary" size="small" @click="sync(wechat)" :disabled="isSync">同步粉丝</el-button>
-                    <el-button type="info" size="small" @click="route('wechat.menu.edit', { sid: site.id, id: wechat.id })">
-                        微信菜单
-                    </el-button>
-                    <el-button type="success" size="small" @click="route('wechat.default.edit', { sid: site.id, id: wechat.id })">
-                        默认消息
-                    </el-button>
-                    <el-button type="primary" size="small" @click="$router.push({ name: 'wechat.wechat.edit', params: { sid: site.id, id: wechat.id } })">
-                        编辑
-                    </el-button>
-                    <el-button type="warning" size="small" @click="del(wechat)">删除</el-button>
-                    <el-dropdown size="small" split-button type="primary">
-                        消息管理
+                <el-button-group size="small" class="flex">
+                    <el-dropdown>
+                        <el-button size="small" type="warning">微信菜单<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
+                        <el-dropdown-menu slot="dropdown" @click="route('wechat.menu.edit', { sid: site.id, id: wechat.id })">
+                            <el-dropdown-item>
+                                菜单设置
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                    <el-dropdown>
+                        <el-button size="small" type="primary">公众号管理<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
-                                <router-link :to="{ name: 'wechat.message.index', params: { sid: site.id, wid: wechat.id }, query: { type: 'text' } }">
+                                <router-link :to="{ name: 'wechat.wechat.edit', params: { sid: site.id, id: wechat.id } }" href="#" type="primary" size="small">
+                                    编辑
+                                </router-link>
+                            </el-dropdown-item>
+                            <el-dropdown-item>
+                                <a href="#" size="small" @click.prevent="del(wechat)">删除</a>
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                    <el-dropdown>
+                        <el-button size="small" type="success"> 粉丝<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item @click="sync(wechat)">
+                                同步粉丝
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                    <el-dropdown>
+                        <el-button size="small" type="warning"> 消息管理<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.message.index', query: { sid: site.id, wid: wechat.id, type: 'text' } }">
                                     文本消息
+                                </router-link>
+                            </el-dropdown-item>
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.message.index', query: { sid: site.id, wid: wechat.id, type: 'news' } }">
+                                    图文消息
+                                </router-link>
+                            </el-dropdown-item>
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.message.index', query: { sid: site.id, wid: wechat.id, type: 'image' } }">
+                                    图片消息
+                                </router-link>
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                    <el-dropdown>
+                        <el-button size="small" type="danger"> 素材管理<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.material.index', params: { wid: wechat.id }, query: { sid: site.id, type: 'image' } }">
+                                    图片素材
                                 </router-link>
                             </el-dropdown-item>
                             <el-dropdown-item>图文消息</el-dropdown-item>

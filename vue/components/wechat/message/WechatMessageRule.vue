@@ -1,6 +1,6 @@
 <template>
     <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal">
-        <el-card shadow="never" :body-style="{ padding: '20px' }">
+        <el-card shadow="never" :body-style="{ padding: '10px' }">
             <div slot="header">
                 关键词规则
             </div>

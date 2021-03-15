@@ -27,7 +27,7 @@
             <!-- 编辑按钮 -->
             <el-button type="success" size="mini" @click="dialogShow = true" v-if="message">编辑</el-button>
             <!-- 添加按钮 -->
-            <el-button type="danger" size="small" @click="dialogShow = true" v-else>添加消息</el-button>
+            <el-button type="danger" size="small" @click="dialogShow = true" v-else>添加文本消息</el-button>
             <!-- 扩展按钮 -->
             <slot />
         </el-button-group>

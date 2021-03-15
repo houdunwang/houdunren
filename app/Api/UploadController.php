@@ -16,31 +16,18 @@ class UploadController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
-        $this->middleware(['site'])->except(['local']);
+        $this->middleware(['auth:sanctum', 'site']);
     }
 
     /**
-     * 站点文件上传
+     * 文件上传
      * @param Request $request
      * @return void
      */
-    public function site(Request $request)
+    public function upload(Request $request)
     {
-        $request->validate(['file' => ['required', 'mimes:jpeg,png,mp3', 'max:2000']]);
-        $driver = config('site.upload.driver');
-        return UploadService::$driver($request->file);
-    }
-
-    /**
-     * 本地上传
-     * @param Request $request
-     * @return void
-     */
-    public function local(Request $request)
-    {
-        $request->validate(['file' => ['required', 'mimes:jpeg,png,mp3,gif', 'max:2000']]);
-        return UploadService::local($request->file);
+        $request->validate(['file' => ['required', 'mimes:jpeg,png,mp3,mp4', 'max:2000']]);
+        return UploadService::make($request->file);
     }
 
     /**
@@ -50,12 +37,8 @@ class UploadController extends Controller
      */
     public function wangEditor(Request $request)
     {
-        $request->validate([
-            'file' => ['required', 'mimes:jpeg,jpg,bmp,png']
-        ]);
-        $driver = config('site.upload.driver');
-        $file = UploadService::$driver($request->file);
-
+        $request->validate(['file' => ['required', 'mimes:jpeg,jpg,bmp,png']]);
+        $file = UploadService::make($request->file);
         return [
             'errno' => 0,
             'data' => [
@@ -63,15 +46,17 @@ class UploadController extends Controller
             ]
         ];
     }
+
     /**
      * wangEditor编辑器上传微信图文消息图片
      * @param Request $request
      * @param WeChat $wechat
-     * @param Material $material
-     * @return void
+     * @param Houdunwang\WeChat\Material $material
+     * @return string|false
      */
     public function wangEditorMaterialNewsUpload(Request $request, WeChat $wechat, Material $material)
     {
+        $request->validate(['file' => ['required', 'mimes:jpeg,jpg,bmp,png']]);
         $file = UploadService::make($request->file);
         $image = $material->config($wechat)->uploadNewsImage($file['path']);
         return \json_encode([

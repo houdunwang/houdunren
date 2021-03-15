@@ -4,6 +4,9 @@ namespace Houdunwang\WeChat\Material\Traits;
 
 use Http;
 
+/**
+ * 预览素材
+ */
 trait Preview
 {
     public function sendMaterialPreview(array $data)

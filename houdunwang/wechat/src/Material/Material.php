@@ -2,9 +2,11 @@
 
 namespace Houdunwang\WeChat\Material;
 
-use Houdunwang\WeChat\Material\Traits\Create;
+use Houdunwang\WeChat\Material\Traits\Upload;
 use Houdunwang\WeChat\Material\Traits\Delete;
 use Houdunwang\WeChat\Material\Traits\Preview;
+use Houdunwang\WeChat\Material\Traits\Get;
+use Houdunwang\WeChat\Material\Traits\Edit;
 use Houdunwang\WeChat\WeChat;
 
 /**
@@ -13,5 +15,5 @@ use Houdunwang\WeChat\WeChat;
  */
 class Material extends WeChat
 {
-    use Create, Delete, Preview;
+    use Upload, Get, Edit, Delete, Preview;
 }

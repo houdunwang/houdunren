@@ -2,10 +2,8 @@
     <div>
         <!-- 消息类型选择按钮 -->
         <el-button-group>
-            <el-button size="mini" v-for="(t, index) in types" :key="index" :type="type == t.value ? 'primary' : ''" @click="type = t.value">
-                <router-link :to="`${$route.path}?type=${t.value}`" :class="{ 'text-white': type == t.value }">
-                    {{ t.title }}
-                </router-link>
+            <el-button size="mini" v-for="(t, index) in types" :key="index" :type="messageType == t.type ? 'primary' : ''" @click="messageType = t.type">
+                {{ t.title }}
             </el-button>
         </el-button-group>
         <!-- 消息类型选择按钮 END-->
@@ -28,11 +26,11 @@
 <script>
 //消息类型
 const types = [
-    { title: '文本消息', value: 'text' },
-    { title: '图文消息', value: 'news' },
-    { title: '图片消息', value: 'image' },
-    { title: '音频消息', value: 'voice' },
-    { title: '视频消息', value: 'video' }
+    { title: '文本消息', type: 'text' },
+    { title: '图文消息', type: 'news' },
+    { title: '图片消息', type: 'image' },
+    { title: '音频消息', type: 'voice' },
+    { title: '视频消息', type: 'video' }
 ]
 const columns = [
     { label: '编号', id: 'id', width: 60 },
@@ -42,11 +40,12 @@ const columns = [
 ]
 export default {
     props: {
-        wechat: { required: true, type: Object }
+        wechat: { required: true, type: Object },
+        type: { type: String, default: 'text' }
     },
     data() {
         return {
-            type: this.$route.query.type,
+            messageType: this.type,
             loading: true,
             message: [],
             types,
@@ -54,13 +53,13 @@ export default {
         }
     },
     watch: {
-        type(n) {
+        messageType() {
             this.load()
         }
     },
     computed: {
         componentName() {
-            return `hdWechatMessage${_.upperFirst(this.type)}`
+            return `hdWechatMessage${_.upperFirst(this.messageType)}`
         }
     },
     async created() {
@@ -69,7 +68,7 @@ export default {
     methods: {
         async load() {
             this.loading = true
-            this.message = await axios.get(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/message?type=${this.type}`)
+            this.message = await axios.get(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/message?type=${this.messageType}`)
             this.loading = false
         },
         //删除

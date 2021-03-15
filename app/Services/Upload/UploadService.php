@@ -6,6 +6,8 @@ use Auth;
 use Illuminate\Http\UploadedFile;
 use OSS\OssClient;
 use App\Models\Attachment;
+use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
  * 文件上传
@@ -14,21 +16,36 @@ use App\Models\Attachment;
 class UploadService
 {
     /**
-     * 本地上传
-     * @return void
+     * 站点上传
+     * @param UploadedFile $file
+     * @return mixed
+     * @throws BindingResolutionException
      */
-    public function local(UploadedFile $file)
+    public function make(UploadedFile $file)
     {
-        $path =  $file->store(date('Ym'), 'attachment');
-        return $this->save($file, "/attachments/{$path}");
+        $driver = config('site.upload.driver', 'local');
+        return $this->$driver($file);
     }
 
     /**
-     * 阿里云OSS上传
+     * 本地上传
+     * @param UploadedFile $file
+     * @return Attachment
+     * @throws Exception
+     * @throws BindingResolutionException
+     */
+    protected function local(UploadedFile $file)
+    {
+        $path =  $file->store(date('Ym'), 'attachment');
+        return $this->save($file, url("/attachments/{$path}"));
+    }
+
+    /**
+     * 阿里云OSS
      * @param UploadedFile $file
      * @return Attachment
      */
-    public function oss(UploadedFile $file): Attachment
+    protected function oss(UploadedFile $file): Attachment
     {
         $object = Auth::id() . '-' . date('Ymdhis') . '.' . $file->extension();
         $ossClient = new OssClient(config('site.aliyun.accessKeyId'), config('site.aliyun.accessKeySecret'), config('site.upload.oss.endpoint'));
@@ -47,6 +64,7 @@ class UploadService
         $realFile = $file->getRealPath();
         return Attachment::create([
             'path' => $path,
+            'site_id' => site('id'),
             'user_id' => Auth::id(),
             'size' => filesize($realFile),
             'name' => $file->getClientOriginalName(),

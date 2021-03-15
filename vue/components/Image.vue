@@ -33,7 +33,7 @@ export default {
     },
     computed: {
         action() {
-            return this.sid ? `/api/upload/site/${this.sid}` : `/api/upload/local`
+            return this.sid ? `/api/upload?site=${this.sid}` : `/api/upload`
         },
         headers() {
             return {

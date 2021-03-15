@@ -15255,10 +15255,10 @@
          * @return boolean 
          * @static 
          */ 
-        public static function isWechat()
+        public static function isWeChat()
         {
                         /** @var \App\Services\WeChat\WeChatService $instance */
-                        return $instance->isWechat();
+                        return $instance->isWeChat();
         }
                     /**
          * 保存微信用户到数据表

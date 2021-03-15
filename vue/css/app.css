@@ -25,3 +25,11 @@ a:hover {
     text-decoration: none !important;
     color: inherit !important;
 }
+
+.el-form-item {
+    margin-bottom: 10px !important;
+}
+
+.el-dialog__body{
+    padding:10px 20px !important;
+}

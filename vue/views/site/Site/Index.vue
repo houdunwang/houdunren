@@ -51,7 +51,7 @@
                             <router-link
                                 v-for="(menu, index) in menus"
                                 :key="index"
-                                :to="{ name: menu.name, params: { sid: site.id } }"
+                                :to="{ name: menu.name, params: { sid: site.id }, query: { sid: site.id } }"
                                 class="mr-2 text-gray-500 duration-300 hover:text-gray-900"
                             >
                                 <i :class="menu.icon"></i>

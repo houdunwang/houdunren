@@ -18,10 +18,10 @@ use App\Api\ModuleConfigController;
 use App\Api\FollowController;
 use App\Api\FansController;
 use App\WeChat\WeChatController;
-use App\WeChat\WeChatDefaultController;
 use App\WeChat\WeChatMenuController;
 use App\WeChat\WeChatUserController;
 use App\WeChat\WeChatMessageController;
+use App\WeChat\WeChatMaterialController;
 
 //登录注册与找回密码
 Route::post('login', [AuthController::class, 'login']);
@@ -89,24 +89,23 @@ Route::put('site/{site}/admin/{admin}/role', [AdminController::class, 'setRole']
 Route::put('site/{site}/admin/{admin}', [AdminController::class, 'update']);
 Route::apiResource('site/{site}/admin', AdminController::class);
 //上传
-Route::post('upload/local', [UploadController::class, 'local']);
-Route::post('upload/site/{site}', [UploadController::class, 'site']);
-Route::post('upload/site/{site}/wangeditor', [UploadController::class, 'wangEditor']);
+Route::post('upload', [UploadController::class, 'upload']);
+Route::post('upload/wangeditor', [UploadController::class, 'wangEditor']);
 //图形验证码
 Route::get('captcha', [CaptchaController::class, 'make']);
 
 //站点公众号
 Route::group(['middleware' => ['site', 'auth:sanctum']], function () {
-    //微信公众号
+    //公众号
     Route::apiResource('site.wechat', WeChatController::class);
-    //公众号默认消息
-    Route::put("default/message", [WeChatDefaultController::class, 'update']);
-    //微信菜单
+    //菜单
     Route::put('menu', [WeChatMenuController::class, 'update']);
     Route::get('menu/push', [WeChatMenuController::class, 'push']);
-    //公众号粉丝
+    //粉丝
     Route::get('user', [WeChatUserController::class, 'index']);
     Route::get('user/sync', [WeChatUserController::class, 'sync']);
-    //微信消息
+    //消息
     Route::apiResource('site.wechat.message', WeChatMessageController::class);
+    //素材管理
+    Route::apiResource('wechat.material', WeChatMaterialController::class);
 });

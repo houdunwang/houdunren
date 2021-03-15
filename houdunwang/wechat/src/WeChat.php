@@ -30,7 +30,7 @@ class WeChat extends MessageType
     public function init($config)
     {
         $this->config($config)->bind();
-        $this->message();
+        $this->getMessage();
         return $this;
     }
 
@@ -56,7 +56,7 @@ class WeChat extends MessageType
      * 被动消息
      * @return $this
      */
-    protected function message()
+    protected function getMessage()
     {
         $content = file_get_contents('php://input');
         if ($content) {
@@ -115,7 +115,17 @@ class WeChat extends MessageType
      */
     public function __get($name)
     {
-        if ($name === 'message') {
+        return self::$message->$name ?? null;
+    }
+
+    /**
+     * 获取被动消息内容
+     * @param mixed|null $name
+     * @return mixed
+     */
+    public function message($name = null)
+    {
+        if (is_null($name)) {
             return self::$message;
         }
         return self::$message->$name ?? null;

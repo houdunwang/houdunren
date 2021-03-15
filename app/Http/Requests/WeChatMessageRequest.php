@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Auth;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
  * 微信规则
@@ -19,19 +20,38 @@ class WeChatMessageRequest extends FormRequest
 
     public function rules()
     {
-        return [
+        $rules = [
             'title' => ['required'],
             'keyword_type' => ['required'],
             'keyword' => ['required', Rule::unique('we_chat_messages')->ignore(request('message'))->where(function ($query) {
                 return $query->where('site_id', SID)->where('wechat_id', request('wechat')->id);
             })],
             'content' => ['required'],
-            'content.title' => ['sometimes', 'required'],
-            'content.pic' => ['sometimes', 'required'],
-            'content.url' => ['sometimes', 'required', 'url'],
-            'content.description' => ['sometimes', 'required'],
-            // 'content.content' => ['sometimes', 'required'],
         ];
+
+        return $rules + $this->typeRule();
+    }
+
+    /**
+     * 类型规则
+     * @return array
+     * @throws BindingResolutionException
+     */
+    protected function typeRule()
+    {
+        $rules = [];
+        switch (request('type')) {
+            case 'news':
+                //图文消息
+                $rules += [
+                    'content.title' => ['sometimes', 'required'],
+                    'content.pic' => ['sometimes', 'required'],
+                    'content.url' => ['sometimes', 'required', 'url'],
+                    'content.description' => ['sometimes', 'required'],
+                ];
+                break;
+        }
+        return $rules;
     }
 
     public function attributes()

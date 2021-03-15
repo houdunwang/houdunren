@@ -3,7 +3,7 @@
         <el-dialog title="图文消息设置" :visible.sync="dialogShow" width="90%" top="1rem">
             <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal">
                 <hd-wechat-message-rule :form="form" />
-                <el-card shadow="nerver" :body-style="{ padding: '20px' }" class="mt-3">
+                <el-card shadow="nerver" :body-style="{ padding: '10px' }" class="mt-3">
                     <div slot="header">
                         图文消息
                     </div>
@@ -34,7 +34,7 @@
             <!-- 编辑按钮 -->
             <el-button type="success" size="mini" @click="dialogShow = true" v-if="message">编辑</el-button>
             <!-- 添加按钮 -->
-            <el-button type="danger" size="small" @click="dialogShow = true" v-else>添加消息</el-button>
+            <el-button type="danger" size="small" @click="dialogShow = true" v-else>添加图文消息</el-button>
             <!-- 扩展按钮 -->
             <slot />
         </el-button-group>

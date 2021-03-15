@@ -7,27 +7,33 @@ use Facades\App\Services\Module\ModuleService;
 
 if (!function_exists('site')) {
     /**
-     * 当前站点数据
-     *
-     * @param Site|null $site
-     * @return Site|null
+     * 站点缓存与获取
+     * @param mixed|null $name
+     * @return mixed
      */
-    function site(?Site $site = null): ?Site
+    function site($name = null)
     {
-        return SiteService::cache($site);
+        if (is_string($name)) {
+            $site = SiteService::cache();
+            return $site[$name] ?? null;
+        }
+        return SiteService::cache();
     }
 }
 
 if (!function_exists('module')) {
     /**
-     * 当前模块数据
-     *
-     * @param string $name
-     * @return array|null
+     * 获取模块数据
+     * @param mixed|null $name
+     * @return mixed
      */
-    function module(string $name = null): ?Module
+    function module($name = null)
     {
-        return ModuleService::cache($name);
+        if (is_string($name)) {
+            $module = ModuleService::cache();
+            return $module[$name] ?? null;
+        }
+        return ModuleService::cache();
     }
 }
 

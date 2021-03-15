@@ -35,4 +35,13 @@ class WeChat extends Model
     {
         return $this->belongsTo(Site::class);
     }
+
+    /**
+     * 素材
+     * @return HasMany
+     */
+    public function materials()
+    {
+        return $this->hasMany(WeChatMaterial::class, 'wechat_id');
+    }
 }

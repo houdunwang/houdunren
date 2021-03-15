@@ -1,11 +1,11 @@
 <template>
     <div>
         <hd-tab :tabs="tabs" />
-        <el-card shadow="always" :body-style="{ padding: '20px' }" v-loading="loading">
-            <div slot="header">
-                <span>公众号资料</span>
-            </div>
-            <el-form :model="form" ref="form" label-width="120px" :inline="false" size="normal">
+        <el-form :model="form" ref="form" label-width="120px" :inline="false" size="normal">
+            <el-card shadow="always" :body-style="{ padding: '20px' }" v-loading="loading">
+                <div slot="header">
+                    <span>公众号资料</span>
+                </div>
                 <el-form-item label="公众号名称">
                     <el-input v-model="form.title"></el-input>
                     <hd-error name="title" />
@@ -45,17 +45,30 @@
                     <el-input v-model="form.appsecret" :disabled="!!id"></el-input>
                     <hd-error name="appsecret" />
                 </el-form-item>
+            </el-card>
+            <el-card shadow="always" :body-style="{ padding: '20px' }" class="mt-3">
+                <div slot="header">
+                    默认消息
+                </div>
+                <el-form-item label="关注欢迎消息">
+                    <el-input v-model="form.welcome"></el-input>
+                    <hd-error name="welcome" />
+                </el-form-item>
+                <el-form-item label="默认回复消息">
+                    <el-input v-model="form.default_message"></el-input>
+                    <hd-error name="default_message" />
+                </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">保存提交</el-button>
                 </el-form-item>
-            </el-form>
-        </el-card>
+            </el-card>
+        </el-form>
     </div>
 </template>
 
 <script>
 import tabs from './tabs'
-const form = { title: '' }
+const form = {}
 export default {
     props: ['id'],
     data() {
