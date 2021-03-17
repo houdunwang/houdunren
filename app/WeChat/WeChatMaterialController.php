@@ -56,7 +56,11 @@ class WeChatMaterialController extends Controller
      */
     public function store(WeChatMaterialRequest $request, WeChat $wechat, WeChatMaterial $material)
     {
-        $media = app(Material::class)->init($wechat)->add($request->type, $request->file, $request->duration);
+        $package = app(Material::class);
+        if ($request->type == 'news') {
+        } else {
+            $media = app(Material::class)->init($wechat)->add($request->type, $request->file, $request->duration);
+        }
         $wechat->materials()->create($request->input() + ['media' => $media]);
         return $this->message('素材添加成功', new WeChatMaterialResource($material));
     }

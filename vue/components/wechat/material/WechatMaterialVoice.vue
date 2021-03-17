@@ -1,7 +1,14 @@
 <template>
     <div>
         <!-- 表单 -->
-        <el-dialog title="语音素材设置" :visible.sync="dialogShow" width="40%" :close-on-click-modal="false" @close="$emit('update:show', false)">
+        <el-dialog
+            title="语音素材设置"
+            :visible.sync="dialogShow"
+            width="40%"
+            :append-to-body="true"
+            :close-on-click-modal="false"
+            @close="$emit('update:show', false)"
+        >
             <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal">
                 <el-card shadow="nerver" :body-style="{ padding: '20px' }">
                     <el-form-item label="素材描述">

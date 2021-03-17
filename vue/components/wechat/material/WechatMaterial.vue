@@ -1,16 +1,18 @@
 <template>
     <div>
-        <!-- 素材类型选择按钮 -->
-        <el-button-group>
-            <el-button size="mini" v-for="(t, index) in types" :key="index" :type="materialType == t.type ? 'primary' : ''" @click="materialType = t.type">
-                {{ t.title }}
-            </el-button>
-        </el-button-group>
-        <div class="mt-3 border-t pt-2">
-            <el-radio-group v-model="duration" size="mini" @click="load">
-                <el-radio-button label="short">临时素材</el-radio-button>
-                <el-radio-button label="long">永久素材</el-radio-button>
-            </el-radio-group>
+        <div v-if="showButton">
+            <!-- 素材类型选择按钮 -->
+            <el-button-group>
+                <el-button size="mini" v-for="(t, index) in types" :key="index" :type="materialType == t.type ? 'primary' : ''" @click="materialType = t.type">
+                    {{ t.title }}
+                </el-button>
+            </el-button-group>
+            <div class="mt-3 border-t pt-2">
+                <el-radio-group v-model="duration" size="mini" @click="load">
+                    <el-radio-button label="short">临时素材</el-radio-button>
+                    <el-radio-button label="long">永久素材</el-radio-button>
+                </el-radio-group>
+            </div>
         </div>
         <el-table :data="material.data" border stripe class="mt-3" v-loading="loading">
             <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label" :width="col.width"> </el-table-column>
@@ -36,7 +38,7 @@
                 {{ material.created_at | fromNow }}
             </el-table-column>
             <el-table-column width="160" #default="{ row: material }">
-                <slot>
+                <slot :material="material">
                     <el-button-group>
                         <el-button type="success" size="mini" @click="edit(material)">编辑</el-button>
                         <el-button type="primary" size="mini" @click="del(material)">删除</el-button>
@@ -57,7 +59,7 @@
             >
             </el-pagination>
         </div>
-        <el-button type="danger" size="mini" @click="edit()" class="mt-3">添加素材</el-button>
+        <el-button type="danger" size="mini" @click="edit()" class="mt-3" v-if="showAddButton">添加素材</el-button>
         <!-- 动态加载组件 -->
         <component :is="component" class="mt-3" :wechat="wechat" :material="form" :show.sync="showDialog" />
     </div>
@@ -79,16 +81,19 @@ const columns = [
 export default {
     props: {
         wechat: { required: true, type: Object },
-        type: { type: String, default: 'image' }
+        type: { type: String, default: 'image' },
+        durationType: { type: String, default: 'short' },
+        showButton: { type: Boolean, default: true },
+        showAddButton: { type: Boolean, default: true }
     },
     data() {
         return {
             //当前选择的类型
             materialType: this.type,
+            duration: this.durationType,
             //素材类型
             types,
             loading: true,
-            duration: 'short',
             //表格列表
             columns,
             //素材列表

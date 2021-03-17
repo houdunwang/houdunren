@@ -16,18 +16,15 @@ trait Upload
      * @param string $type 素材类型
      * @param string $file 文件
      * @param string $uploadType short临时素材，long永久素材
-     * @param array $data 永久视频素材需要传递的额外表单项
      * @return mixed
      * @throws Exception
      */
-    public function add(string $type, string $file, string $uploadType, array $data = [])
+    public function add(string $type, string $file, string $uploadType)
     {
         //临时或永久素材上传地址
         $url = $uploadType == 'short' ? 'media/upload' : 'material/add_material';
         $api = $this->api . "/{$url}?access_token=" . $this->token() . "&type=" . $type;
-        $response = Http::attach('media', file_get_contents($file), basename($file))
-            ->post($api, $data)
-            ->json();
+        $response = Http::attach('media', file_get_contents($file), basename($file))->post($api)->json();
         return $this->return($response);
     }
 

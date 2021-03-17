@@ -21,7 +21,7 @@
         </el-form>
         <span slot="footer">
             <el-button @click="dialogShow = false">关闭</el-button>
-            <el-button type="primary" @click="onSubmit" :disabled="loading">保存提交</el-button>
+            <el-button type="primary" @click="onSubmit" :disabled="isSubmit">保存提交</el-button>
         </span>
     </el-dialog>
 </template>

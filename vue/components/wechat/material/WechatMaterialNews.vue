@@ -41,8 +41,18 @@
                                 <el-input v-model="article.title"></el-input>
                             </el-form-item>
                             <el-form-item label="缩略图">
-                                <hd-wechat-material-select :wechat="wechat" />
-                                <!-- <hd-image v-model="article.pic" :sid="wechat.site_id" /> -->
+                                <hd-image v-model="article.pic" :sid="wechat.site_id" v-if="article.pic" />
+                                <div v-else>
+                                    <hd-wechat-material-select
+                                        :wechat="wechat"
+                                        type="thumb"
+                                        duration-type="long"
+                                        :show-button="false"
+                                        :show.sync="selectMaterialDialog"
+                                        @select="setMedia"
+                                    />
+                                    <el-button type="primary" size="mini" @click="selectMaterialDialog = true">选择素材</el-button>
+                                </div>
                             </el-form-item>
                             <el-form-item label="作者">
                                 <el-input v-model="article.author"></el-input>
@@ -92,10 +102,11 @@ import draggable from 'vuedraggable'
 // 文章
 const article = {
     title: '',
+    thumb_media_id: '',
     author: '',
     digest: '',
     show_cover_pic: 1,
-    pic: '/images/nopic480x310.jpg',
+    pic: '',
     content: '',
     content_source_url: '',
     need_open_comment: 1,
@@ -119,7 +130,8 @@ export default {
             isSubmit: false,
             form: _.merge({}, this.material || form),
             dialogShow: false,
-            article: {}
+            article: {},
+            selectMaterialDialog: false
         }
     },
     watch: {
@@ -136,6 +148,10 @@ export default {
         }
     },
     methods: {
+        setMedia(material) {
+            this.article.pic = material.file
+            this.article.thumb_media_id = material.media.thumb_media_id
+        },
         //添加文章
         add() {
             if (this.form.content.articles.length >= 5) {
