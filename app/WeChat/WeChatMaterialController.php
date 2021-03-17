@@ -10,6 +10,7 @@ use App\Models\WeChat;
 use Houdunwang\WeChat\Material\Material;
 use UploadService;
 use SiteService;
+use Illuminate\Http\Request;
 
 /**
  * 素材管理
@@ -28,9 +29,12 @@ class WeChatMaterialController extends Controller
      * @param WeChat $wechat
      * @return void
      */
-    public function index(WeChat $wechat)
+    public function index(Request $request, WeChat $wechat)
     {
-        return WeChatMaterialResource::collection($wechat->materials);
+        $materials = $wechat->materials()->where('type', $request->type)->when($request->duration, function ($query, $duration) {
+            return $query->where('duration', $duration);
+        })->paginate(10);
+        return WeChatMaterialResource::collection($materials);
     }
 
     /**
@@ -52,16 +56,8 @@ class WeChatMaterialController extends Controller
      */
     public function store(WeChatMaterialRequest $request, WeChat $wechat, WeChatMaterial $material)
     {
-        SiteService::cache($wechat->site);
-        //上传文件
-        $file = UploadService::make($request->file);
-        $media = app(Material::class)->init($wechat)->add($request->type, $file->path, request('duration'));
-        $wechat->materials()->create([
-            'type' => $request->type,
-            'duration' => $request->duration,
-            'content' => ['file' => $file],
-            'media' => $media
-        ]);
+        $media = app(Material::class)->init($wechat)->add($request->type, $request->file, $request->duration);
+        $wechat->materials()->create($request->input() + ['media' => $media]);
         return $this->message('素材添加成功', new WeChatMaterialResource($material));
     }
 
@@ -72,9 +68,13 @@ class WeChatMaterialController extends Controller
      * @param WeChatMaterial $material
      * @return void
      */
-    public function update(WeChatMaterialRequest $request, WeChatMaterial $material)
+    public function update(WeChatMaterialRequest $request, WeChat $wechat,  WeChatMaterial $material)
     {
-        $material->fill($request->input())->save();
+        if ($request->file != $material->file) {
+            $media = app(Material::class)->init($wechat)->add($request->type, $request->file, $request->duration);
+            $material->media = $media;
+        }
+        $material->fill($request->except(['media']))->save();
         return $this->message('素材修改成功', new WeChatMaterialResource($material));
     }
 
@@ -83,9 +83,12 @@ class WeChatMaterialController extends Controller
      * @param WeChatMaterial $material
      * @return void
      */
-    public function destroy(WeChatMaterial $material)
+    public function destroy(WeChat $wechat, WeChatMaterial $material)
     {
         $material->delete();
+        if ($material->duration == 'long') {
+            app(Material::class)->init($wechat)->del($material->media_id);
+        }
         return $this->message('素材删除成功');
     }
 }

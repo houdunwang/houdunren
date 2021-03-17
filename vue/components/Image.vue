@@ -19,7 +19,14 @@
 export default {
     props: {
         sid: { type: Number },
-        value: { type: String }
+        value: { type: String },
+        type: {
+            type: Array,
+            default() {
+                return ['image/jpeg', 'image/png']
+            }
+        },
+        size: { type: Number, default: 1024 * 1024 * 2 }
     },
     data() {
         return {
@@ -43,23 +50,26 @@ export default {
         }
     },
     methods: {
+        //移除上传文件
         del() {
-            this.$emit('input', (this.imageUrl = ''))
+            this.$confirm('确定删除吗?', '温馨提示').then(_ => {
+                this.$emit('input', (this.imageUrl = ''))
+            })
         },
         handleAvatarSuccess(res, file) {
             this.imageUrl = res.path
             this.$emit('input', this.imageUrl)
         },
         beforeAvatarUpload(file) {
-            const isJPG = file.type === 'image/jpeg' || file.type === 'image/png'
-            const isLt2M = file.size / 1024 / 1024 < 2
-            if (!isJPG) {
-                this.$message.error('上传头像图片只能是 JPG 格式!')
+            const isType = this.type.includes(file.type)
+            const isSize = file.size < this.size
+            if (!isType) {
+                this.$message.error('文件类型错误')
             }
-            if (!isLt2M) {
-                this.$message.error('上传头像图片大小不能超过 2MB!')
+            if (!isSize) {
+                this.$message.error(`上传文件不能超过${Math.round(this.size / 1024)}KB`)
             }
-            return isJPG && isLt2M
+            return isType && isSize
         }
     }
 }

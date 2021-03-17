@@ -1,7 +1,7 @@
 <template>
     <div>
         <tab :tabs="tabs" />
-        <lesson :lessons.sync="lessons.data" #default="{lesson}">
+        <lesson :lessons.sync="lessons.data" #default="{ lesson }">
             <el-button-group>
                 <el-button type="primary" size="mini" @click="$router.push({ name: 'admin.lesson.edit', params: { id: lesson.id } })">编辑</el-button>
                 <el-button type="danger" size="mini" @click="del(lesson)">删除</el-button>
@@ -14,6 +14,7 @@
             @current-change="currentChange"
             :page-size="12"
             :total="lessons.meta.total"
+            :hide-on-single-page="true"
             background
         >
         </el-pagination>

@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Auth;
 class Site extends Model
 {
     protected $fillable = ['title', 'domain', 'config', 'module_id', 'user_id', 'template_id',];
-
     protected $casts = ['config' => 'array',];
     protected $hidden = ['config'];
     protected $appends = [

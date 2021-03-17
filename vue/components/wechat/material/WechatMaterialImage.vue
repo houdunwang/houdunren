@@ -1,76 +1,71 @@
 <template>
     <div>
-        <el-dialog title="图文消息设置" :visible.sync="dialogShow" width="90%" top="1rem">
+        <el-dialog title="图片素材设置" :visible.sync="dialogShow" width="40%" :close-on-click-modal="false" @close="$emit('update:show', false)">
             <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal">
-                <hd-wechat-message-rule :form="form" />
-                <el-card shadow="nerver" :body-style="{ padding: '20px' }" class="mt-3">
-                    <div slot="header">
-                        图文消息
-                    </div>
-                    <el-form-item label="文章标题">
-                        <el-input v-model="form.content.title"></el-input>
-                        <hd-error name="content.title" />
+                <el-card shadow="nerver" :body-style="{ padding: '20px' }">
+                    <el-form-item label="素材描述">
+                        <el-input v-model="form.title"></el-input>
+                        <hd-error name="form.title" />
                     </el-form-item>
-                    <el-form-item label="消息简介">
-                        <el-input type="textarea" v-model="form.content.description"></el-input>
-                        <hd-error name="content.description" />
+                    <el-form-item label="素材类型">
+                        <el-radio-group v-model="form.duration" :disabled="!!form.id">
+                            <el-radio label="short">临时素材</el-radio>
+                            <el-radio label="long">永久素材</el-radio>
+                        </el-radio-group>
                     </el-form-item>
-                    <el-form-item label="消息图片">
-                        <hd-image v-model="form.content.pic" :sid="wechat.site_id" />
-                        <hd-error name="content.pic" />
-                    </el-form-item>
-                    <el-form-item label="跳转链接">
-                        <el-input v-model="form.content.url"></el-input>
-                        <hd-error name="content.url" />
+                    <el-form-item label="素材图片">
+                        <hd-image v-model="form.file" :sid="wechat.site_id" />
+                        <hd-error name="form.file" />
                     </el-form-item>
                 </el-card>
             </el-form>
             <span slot="footer">
                 <el-button @click="dialogShow = false">关闭</el-button>
-                <el-button type="primary" @click="onSubmit">保存提交</el-button>
+                <el-button type="primary" @click="onSubmit" :disabled="isSubmit">保存提交</el-button>
             </span>
         </el-dialog>
-         <el-button-group>
-            <!-- 编辑按钮 -->
-            <el-button type="success" size="mini" @click="dialogShow = true" v-if="message">编辑</el-button>
-            <!-- 添加按钮 -->
-            <el-button type="danger" size="small" @click="dialogShow = true" v-else>添加图片消息</el-button>
-            <!-- 扩展按钮 -->
-            <slot />
-        </el-button-group>
     </div>
 </template>
 
 <script>
 const form = {
     title: '',
-    type: 'news',
-    keyword_type: 'all',
-    keyword: '',
-    content: {
-        title: '',
-        pic:'',
-        url: '',
-        description: '',
-    }
+    duration: 'short',
+    type: 'image',
+    file: ''
 }
 export default {
-    props: ['wechat', 'message'],
+    props: ['wechat', 'material', 'show'],
     data() {
         return {
-            form: _.merge({}, this.message || form),
+            isSubmit: false,
+            form: _.merge({}, this.material || form),
             dialogShow: false
         }
     },
+    watch: {
+        //显示对话框
+        show(n) {
+            this.dialogShow = n
+        },
+        //编辑数据
+        material(material) {
+            this.form = _.merge({}, material || form)
+        }
+    },
     methods: {
-        async onSubmit() {
-           const url = `site/${this.wechat.site_id}}/wechat/${this.wechat.id}}/message` + (this.message ? `/${this.message.id}` : ``)
-            await axios[this.message ? 'put' : 'post'](url, this.form)
-           this.$router.go(0)
+        onSubmit() {
+            this.isSubmit = true
+            const url = `wechat/${this.wechat.id}/material` + (this.form.id ? `/${this.form.id}` : ``)
+            axios[this.form.id ? 'put' : 'post'](url, this.form)
+                .then(_ => this.$parent.load(1, this.form.type))
+                .finally(_ => {
+                    this.isSubmit = false
+                    this.dialogShow = false
+                })
         }
     }
 }
-</script>
 </script>
 
 <style></style>

@@ -79,7 +79,7 @@
                         <el-button size="small" type="danger"> 素材管理<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
-                                <router-link :to="{ name: 'wechat.material.index', params: { wid: wechat.id }, query: { sid: site.id, type: 'image' } }">
+                                <router-link :to="{ name: 'wechat.material.index', query: { sid: site.id, wid: wechat.id, type: 'image' } }">
                                     图片素材
                                 </router-link>
                             </el-dropdown-item>

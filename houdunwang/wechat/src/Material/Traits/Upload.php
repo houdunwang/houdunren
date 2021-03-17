@@ -53,7 +53,6 @@ trait Upload
     {
         $api = $this->api . '/media/uploadimg?access_token=' . $this->token();
         $response = Http::attach('media', file_get_contents($file), basename($file))->post($api)->json();
-
         return $this->return($response);
     }
 }

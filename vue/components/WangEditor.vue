@@ -10,16 +10,26 @@ export default {
     props: {
         sid: { type: Number },
         name: { type: String, default: 'editor' },
-        value: { type: String, default: '' }
+        value: { type: String, default: '' },
+        action: { type: String, default: '' }
     },
     data() {
         return {
             editor: null
         }
     },
+    computed: {
+        //图片上传地址
+        uploadAction() {
+            if (this.action) {
+                return this.action
+            }
+            return `/api/upload/wangeditor` + (this.sid ? `?site=${this.sid}` : '')
+        }
+    },
     mounted() {
         this.editor = new wangEditor('#' + this.name)
-        this.editor.config.uploadImgServer = `/api/upload/site/${this.sid}/wangeditor`
+        this.editor.config.uploadImgServer = this.uploadAction
         this.editor.config.uploadImgMaxSize = 3 * 1024 * 1024
         this.editor.config.uploadImgMaxLength = 5
         this.editor.config.uploadFileName = 'file'
@@ -63,12 +73,12 @@ export default {
         },
         uploadHandle() {
             return {
-                before: function(xhr, editor, files) {},
-                success: function(xhr, editor, result) {},
-                fail: function(xhr, editor, result) {},
-                error: function(xhr, editor) {},
-                timeout: function(xhr, editor) {},
-                customInsert: function(insertImg, result, editor) {}
+                before: function (xhr, editor, files) {},
+                success: function (xhr, editor, result) {},
+                fail: function (xhr, editor, result) {},
+                error: function (xhr, editor) {},
+                timeout: function (xhr, editor) {},
+                customInsert: function (insertImg, result, editor) {}
             }
         }
     }
