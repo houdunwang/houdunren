@@ -1,28 +1,27 @@
 <template>
-    <el-dialog title="图文素材设置" :visible.sync="dialogShow" width="95%" top="1rem" :close-on-click-modal="false" @close="$emit('update:show', false)">
+    <el-dialog title="图文素材设置" :visible.sync="dialogShow" width="70%" top="1rem" :append-to-body="true" :close-on-click-modal="false">
         <el-form :model="form" ref="form" label-width="100px" :inline="false" size="normal">
             <el-card shadow="nerver" :body-style="{ padding: '20px' }">
                 <el-form-item label="素材描述">
                     <el-input v-model="form.title"></el-input>
                     <hd-error name="form.title" />
                 </el-form-item>
-                <el-form-item label="素材类型">
-                    <el-radio-group v-model="form.duration" :disabled="form.id">
-                        <el-radio label="short">临时素材</el-radio>
-                        <el-radio label="long">永久素材</el-radio>
-                    </el-radio-group>
-                </el-form-item>
                 <div class="flex">
                     <div class="w-60 preview">
-                        <draggable v-model="form.content.articles">
+                        <draggable v-model="form.content">
                             <div
-                                v-for="(art, index) in form.content.articles"
+                                v-for="(art, index) in form.content"
                                 :key="index"
                                 class="border border-gray-200 mb-1 cursor-pointer flex"
                                 :class="{ ' p-2 items-start': index, 'border-green-600': article == art, 'flex-col': !index }"
                                 @click="edit(art)"
                             >
-                                <el-image :src="art.pic" fit="cover" :class="{ 'w-1/3 order-2': index }" class="border"></el-image>
+                                <el-image
+                                    :src="art.pic || `/images/nopic480x310.jpg`"
+                                    fit="cover"
+                                    :class="{ 'w-1/3 order-2': index }"
+                                    class="border"
+                                ></el-image>
                                 <div :class="{ 'w-2/3 flex-1 pr-2': index }">
                                     <div class="bg-gray-500 font-light p-1 text-white flex justify-center items-center text-sm" v-if="!index">
                                         {{ art.title }}
@@ -41,17 +40,20 @@
                                 <el-input v-model="article.title"></el-input>
                             </el-form-item>
                             <el-form-item label="缩略图">
-                                <hd-image v-model="article.pic" :sid="wechat.site_id" v-if="article.pic" />
-                                <div v-else>
-                                    <hd-wechat-material-select
-                                        :wechat="wechat"
-                                        type="thumb"
-                                        duration-type="long"
-                                        :show-button="false"
-                                        :show.sync="selectMaterialDialog"
-                                        @select="setMedia"
-                                    />
-                                    <el-button type="primary" size="mini" @click="selectMaterialDialog = true">选择素材</el-button>
+                                <div class="flex flex-col">
+                                    <el-image :src="article.pic" fit="fill" v-if="article.pic" class="w-36 h-auto"></el-image>
+                                    <div>
+                                        <hd-wechat-material-select
+                                            :wechat="wechat"
+                                            type="thumb"
+                                            duration-type="long"
+                                            :show-button="false"
+                                            :show.sync="selectMaterialDialog"
+                                            @select="selectMediaHandle"
+                                        />
+                                        <el-button type="primary" size="mini" @click="selectMaterialDialog = true">选择素材</el-button>
+                                        <hd-tip>只能选择永久缩略图素材</hd-tip>
+                                    </div>
                                 </div>
                             </el-form-item>
                             <el-form-item label="作者">
@@ -91,13 +93,14 @@
         </el-form>
         <span slot="footer">
             <el-button @click="dialogShow = false">关闭</el-button>
-            <el-button type="primary" @click="onSubmit" :disabled="isSubmit">保存提交</el-button>
+            <el-button type="primary" @click="onSubmit" :disabled="isSubmit" v-loading="isSubmit">保存提交</el-button>
         </span>
     </el-dialog>
 </template>
 
 <script>
 import draggable from 'vuedraggable'
+import Component from './mixins/Component'
 
 // 文章
 const article = {
@@ -115,15 +118,12 @@ const article = {
 }
 const form = {
     title: '',
-    duration: 'short',
     type: 'news',
-    content: {
-        articles: []
-    }
+    duration: 'long',
+    content: [{ ...article }]
 }
-
 export default {
-    props: ['wechat', 'material', 'show'],
+    mixins: [Component(form)],
     components: { draggable },
     data() {
         return {
@@ -134,32 +134,30 @@ export default {
             selectMaterialDialog: false
         }
     },
+    //编辑数据
     watch: {
-        //显示对话框
-        show(n) {
-            this.dialogShow = n
-        },
-        //编辑数据
-        material(material) {
-            if (material) {
-                this.form = material
-            }
-            this.add()
+        material: {
+            handler(material) {
+                this.form = _.merge({}, material || form)
+                this.article = this.form.content[0]
+            },
+            immediate: true
         }
     },
     methods: {
-        setMedia(material) {
+        //选择素材回调
+        selectMediaHandle(material) {
             this.article.pic = material.file
-            this.article.thumb_media_id = material.media.thumb_media_id
+            this.article.thumb_media_id = material.media.media_id
         },
-        //添加文章
+        //添加
         add() {
-            if (this.form.content.articles.length >= 5) {
+            if (this.form.content.length >= 5) {
                 return this.$message('图文消息只能添加5个')
             }
-            this.form.content.articles.push((this.article = _.merge({}, article)))
+            this.form.content.push((this.article = _.merge({}, article)))
         },
-        //编辑文章
+        //编辑
         edit(article) {
             this.article = article
         },
@@ -169,16 +167,6 @@ export default {
                 await axios.delete(`wechat/${this.wechat.id}/material/${material.id}`)
                 this.load()
             })
-        },
-        onSubmit() {
-            this.isSubmit = true
-            const url = `wechat/${this.wechat.id}/material` + (this.form.id ? `/${this.form.id}` : ``)
-            axios[this.form.id ? 'put' : 'post'](url, this.form)
-                .then(_ => this.$parent.load(1, this.form.type))
-                .finally(_ => {
-                    this.isSubmit = false
-                    this.dialogShow = false
-                })
         }
     }
 }

@@ -18,7 +18,7 @@ class CreateWeChatMaterialsTable extends Migration
             $table->char('type', 20)->comment('素材类型');
             $table->string('title')->comment('素材描述');
             $table->string('file')->nullable()->comment('本地文件');
-            $table->enum('duration', ['short', 'long'])->comment('保存时间 short临时long永久');
+            $table->enum('duration', ['short', 'long'])->nullable()->comment('保存时间 short临时long永久');
             $table->json('content')->nullable()->comment('内容数据');
             $table->json('media')->comment('微信返回的media数据');
             $table->timestamps();

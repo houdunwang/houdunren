@@ -2,7 +2,7 @@ import el from 'element-ui'
 import axios from 'axios'
 import Vue from 'vue'
 import store from '../store'
-const _axios = axios.create({ baseURL: `/api`, timeout: 5000 })
+const _axios = axios.create({ baseURL: `/api`, timeout: 20000 })
 window.axios = Vue.axios = Vue.prototype.axios = _axios
 
 //请求拦截
@@ -45,11 +45,6 @@ _axios.interceptors.response.use(
                 break
             default:
                 el.Message.error(data.message)
-            // el.MessageBox.confirm(data.message, '温馨提示', {
-            //     showCancelButton: false,
-            //     confirmButtonText: '关闭',
-            //     type: 'warning'
-            // })
         }
         return Promise.reject(error)
     }

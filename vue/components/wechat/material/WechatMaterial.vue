@@ -3,11 +3,11 @@
         <div v-if="showButton">
             <!-- 素材类型选择按钮 -->
             <el-button-group>
-                <el-button size="mini" v-for="(t, index) in types" :key="index" :type="materialType == t.type ? 'primary' : ''" @click="materialType = t.type">
+                <el-button size="mini" v-for="(t, index) in types" :key="index" :type="type == t.type ? 'primary' : ''" @click="type = t.type">
                     {{ t.title }}
                 </el-button>
             </el-button-group>
-            <div class="mt-3 border-t pt-2">
+            <div class="mt-3 border-t pt-2" v-if="type != 'news'">
                 <el-radio-group v-model="duration" size="mini" @click="load">
                     <el-radio-button label="short">临时素材</el-radio-button>
                     <el-radio-button label="long">永久素材</el-radio-button>
@@ -61,7 +61,7 @@
         </div>
         <el-button type="danger" size="mini" @click="edit()" class="mt-3" v-if="showAddButton">添加素材</el-button>
         <!-- 动态加载组件 -->
-        <component :is="component" class="mt-3" :wechat="wechat" :material="form" :show.sync="showDialog" />
+        <component :is="component" class="mt-3" :wechat="wechat" :material="form" :show.sync="showDialog" :duration-type="duration" />
     </div>
 </template>
 
@@ -81,15 +81,19 @@ const columns = [
 export default {
     props: {
         wechat: { required: true, type: Object },
-        type: { type: String, default: 'image' },
+        //素材类型
+        materialType: { type: String, default: 'image' },
+        //临时或永久
         durationType: { type: String, default: 'short' },
+        //是否显示按钮
         showButton: { type: Boolean, default: true },
+        //是否显示添加按钮
         showAddButton: { type: Boolean, default: true }
     },
     data() {
         return {
             //当前选择的类型
-            materialType: this.type,
+            type: this.materialType,
             duration: this.durationType,
             //素材类型
             types,
@@ -107,12 +111,12 @@ export default {
     computed: {
         //素材编辑组件
         component() {
-            return `hdWechatMaterial${_.upperFirst(this.materialType)}`
+            return `hdWechatMaterial${_.upperFirst(this.type)}`
         }
     },
     watch: {
         //类型更改后
-        materialType() {
+        type() {
             this.load()
         },
         //素材时间选择后
@@ -124,14 +128,20 @@ export default {
         this.load()
     },
     methods: {
+        //编辑素材
         edit(material) {
             this.form = material
             this.showDialog = true
         },
-        async load(page = 1, type) {
-            type = type || this.materialType
+        async del(material) {
+            this.$confirm(`确定删除【${material.title}】吗？`, '温馨提示').then(async _ => {
+                await axios.delete(`wechat/${this.wechat.id}/material/${material.id}`)
+                this.load()
+            })
+        },
+        async load(page = 1) {
             this.loading = true
-            this.material = await axios.get(`wechat/${this.wechat.id}/material?type=${type}&duration=${this.duration}&page=${page}`)
+            this.material = await axios.get(`wechat/${this.wechat.id}/material?type=${this.type}&duration=${this.duration}&page=${page}`)
             this.loading = false
         }
     }

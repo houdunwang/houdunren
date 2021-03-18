@@ -16,7 +16,7 @@ export default {
         }
     },
     async created() {
-        this.wechat = await axios.get(`site/${this.sid}}/wechat/${this.$route.query.wid}`)
+        this.wechat = await axios.get(`site/${this.sid}/wechat/${this.$route.query.wid}`)
     }
 }
 </script>
