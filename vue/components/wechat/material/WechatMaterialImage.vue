@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import Component from './mixins/Component'
+import Mixin from './Mixin'
 const form = {
     title: '',
     duration: 'short',
@@ -36,7 +36,7 @@ const form = {
     file: ''
 }
 export default {
-    mixins: [Component(form)]
+    mixins: [Mixin(form)]
 }
 </script>
 

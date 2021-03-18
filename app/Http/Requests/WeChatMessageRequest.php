@@ -22,9 +22,8 @@ class WeChatMessageRequest extends FormRequest
     {
         $rules = [
             'title' => ['required'],
-            'keyword_type' => ['required'],
             'keyword' => ['required', Rule::unique('we_chat_messages')->ignore(request('message'))->where(function ($query) {
-                return $query->where('site_id', SID)->where('wechat_id', request('wechat')->id);
+                return $query->where('wechat_id', request('wechat')->id);
             })],
             'content' => ['required'],
         ];
@@ -57,7 +56,7 @@ class WeChatMessageRequest extends FormRequest
     public function attributes()
     {
         return [
-            'title' => '消息描述', 'keyword_type' => '关键词类型', 'keyword' => '关键词', 'content' => '回复内容',
+            'title' => '消息描述',
             'content.title' => '文章标题',
             'content.pic' => '消息图片',
             'content.url' => '跳转链接',

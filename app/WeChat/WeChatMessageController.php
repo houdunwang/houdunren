@@ -34,34 +34,28 @@ class WeChatMessageController extends Controller
      * @throws InvalidCastException
      * @throws LogicException
      */
-    public function index(Site $site, WeChat $wechat)
+    public function index(WeChat $wechat)
     {
-        $module = request()->query('module');
-        $weChatMessages = WeChatMessage::where('site_id', $site['id'])
-            ->where('wechat_id', $wechat['id'])
-            ->where('type', request('type', 'text'))
-            ->when($module, function ($query, $module) {
-                return $query->where('module_id', $module);
-            })->paginate(15);
+        $weChatMessages = $wechat->messages()->where('type', request('type'))->when(request('module'), function ($query, $module) {
+            return $query->where('module_id', $module);
+        })->paginate(15);
         return WeChatMessageResource::collection($weChatMessages);
     }
 
     /**
      * 添加消息
      * @param WeChatMessageRequest $request
-     * @param Site $site
      * @param WeChat $wechat
      * @param WeChatMessage $weChatMessage
-     * @return void
      * @throws InvalidCastException
      * @throws LogicException
      * @throws BindingResolutionException
      * @throws MassAssignmentException
      * @throws InvalidArgumentException
      */
-    public function store(WeChatMessageRequest $request, Site $site, WeChat $wechat, WeChatMessage $message)
+    public function store(WeChatMessageRequest $request, WeChat $wechat, WeChatMessage $message)
     {
-        $data = $request->input() + ['site_id' => $site['id'], 'wechat_id' => $wechat['id'], 'module_id' => request('module')];
+        $data = $request->input() + ['wechat_id' => $wechat['id'], 'module_id' => request('module')];
         $message->fill($data)->save();
         return $this->message('消息添加成功');
     }
@@ -79,7 +73,7 @@ class WeChatMessageController extends Controller
      * @throws MassAssignmentException
      * @throws InvalidArgumentException
      */
-    public function update(WeChatMessageRequest $request, Site $site, WeChat $wechat, WeChatMessage $message)
+    public function update(WeChatMessageRequest $request,  WeChat $wechat, WeChatMessage $message)
     {
         $message->fill($request->except(['keywordTypeTitle']))->save();
         return $this->message('消息修改成功');
@@ -90,7 +84,7 @@ class WeChatMessageController extends Controller
      * @param WeChatMessage $weChatMessage
      * @return void
      */
-    public function destroy(Site $site, WeChat $wechat, WeChatMessage $message)
+    public function destroy(WeChat $wechat, WeChatMessage $message)
     {
         $message->delete();
         return $this->message('消息删除成功');

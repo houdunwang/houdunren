@@ -1,18 +1,16 @@
 <template>
     <div>
-        <div v-if="showButton">
-            <!-- 素材类型选择按钮 -->
-            <el-button-group>
-                <el-button size="mini" v-for="(t, index) in types" :key="index" :type="type == t.type ? 'primary' : ''" @click="type = t.type">
-                    {{ t.title }}
-                </el-button>
-            </el-button-group>
-            <div class="mt-3 border-t pt-2" v-if="type != 'news'">
-                <el-radio-group v-model="duration" size="mini" @click="load">
-                    <el-radio-button label="short">临时素材</el-radio-button>
-                    <el-radio-button label="long">永久素材</el-radio-button>
-                </el-radio-group>
-            </div>
+        <!-- 素材类型选择按钮 -->
+        <el-button-group v-if="showTypeButton">
+            <el-button size="mini" v-for="(t, index) in types" :key="index" :type="type == t.type ? 'primary' : ''" @click="type = t.type">
+                {{ t.title }}
+            </el-button>
+        </el-button-group>
+        <div class="mt-3 border-t pt-2" v-if="type != 'news' || showDurationButton">
+            <el-radio-group v-model="duration" size="mini" @click="load">
+                <el-radio-button label="short">临时素材</el-radio-button>
+                <el-radio-button label="long">永久素材</el-radio-button>
+            </el-radio-group>
         </div>
         <el-table :data="material.data" border stripe class="mt-3" v-loading="loading">
             <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label" :width="col.width"> </el-table-column>
@@ -86,7 +84,8 @@ export default {
         //临时或永久
         durationType: { type: String, default: 'short' },
         //是否显示按钮
-        showButton: { type: Boolean, default: true },
+        showTypeButton: { type: Boolean, default: true },
+        showDurationButton: { type: Boolean, default: true },
         //是否显示添加按钮
         showAddButton: { type: Boolean, default: true }
     },

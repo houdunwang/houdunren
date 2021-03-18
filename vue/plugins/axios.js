@@ -8,6 +8,10 @@ window.axios = Vue.axios = Vue.prototype.axios = _axios
 //请求拦截
 _axios.interceptors.request.use(
     function(config) {
+        //清除验证信息
+        if (config.method != 'get') {
+            store.commit('errors')
+        }
         if (config.url[0] == '/') config.baseURL = ''
         // const token = window.localStorage.getItem('token')
         // if (token) {

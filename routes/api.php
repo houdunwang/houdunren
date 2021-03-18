@@ -105,7 +105,7 @@ Route::group(['middleware' => ['site', 'auth:sanctum']], function () {
     Route::get('user', [WeChatUserController::class, 'index']);
     Route::get('user/sync', [WeChatUserController::class, 'sync']);
     //消息
-    Route::apiResource('site.wechat.message', WeChatMessageController::class);
+    Route::apiResource('wechat.message', WeChatMessageController::class);
     //素材管理
     Route::apiResource('wechat.material', WeChatMaterialController::class);
 });

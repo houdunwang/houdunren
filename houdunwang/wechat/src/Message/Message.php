@@ -26,6 +26,11 @@ php;
         return sprintf($xml, $this->FromUserName, $this->ToUserName, time(), $content);
     }
 
+    /**
+     * 图文消息
+     * @param array $data
+     * @return string
+     */
     public function news(array $data)
     {
         $xml = <<<php

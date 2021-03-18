@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\WeChatMessage;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use PHPUnit\Framework\Constraint\IsTrue;
 use UserService;
 
 /**
@@ -15,28 +16,28 @@ class WeChatMessagePolicy
 {
     use HandlesAuthorization;
 
+    public function before(User $user)
+    {
+        return UserService::isMaster(request('wechat')->site, $user);
+    }
+
     public function viewAny(User $user)
     {
-        return true;
     }
 
     public function view(User $user, WeChatMessage $message)
     {
-        return true;
     }
 
     public function create(User $user)
     {
-        return UserService::isMaster(site(), $user);
     }
 
     public function update(User $user, WeChatMessage $message)
     {
-        return UserService::isMaster(site(), $user);
     }
 
     public function delete(User $user, WeChatMessage $message)
     {
-        return UserService::isMaster(site(), $user);
     }
 }

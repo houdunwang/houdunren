@@ -100,7 +100,7 @@
 
 <script>
 import draggable from 'vuedraggable'
-import Component from './mixins/Component'
+import Mixin from './Mixin'
 
 // 文章
 const article = {
@@ -123,7 +123,7 @@ const form = {
     content: [{ ...article }]
 }
 export default {
-    mixins: [Component(form)],
+    mixins: [Mixin(form)],
     components: { draggable },
     data() {
         return {

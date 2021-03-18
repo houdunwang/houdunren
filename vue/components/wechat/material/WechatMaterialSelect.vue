@@ -8,7 +8,14 @@
             :close-on-click-modal="false"
             @close="$emit('update:show', false)"
         >
-            <hd-wechat-material :wechat="wechat" #default="{material}" :material-type="type" :show-button="$attrs['show-button']">
+            <hd-wechat-material
+                :wechat="wechat"
+                #default="{material}"
+                :material-type="type"
+                :duration-type="$attrs['duration-type']"
+                :show-type-button="$attrs['show-type-button']"
+                :show-duration-button="$attrs['show-duration-button']"
+            >
                 <el-button type="primary" size="mini" @click="select(material)">选择素材</el-button>
             </hd-wechat-material>
         </el-dialog>
@@ -27,12 +34,12 @@ export default {
     props: {
         wechat: { required: true, type: Object },
         show: { type: Boolean, default: false },
-        type: { type: String, default: 'image' },
-        durationType: { type: String, default: 'long' }
+        materialType: { type: String, default: 'image' }
     },
     data() {
         return {
             dialogShow: false,
+            type: this.materialType,
             types
         }
     },
@@ -42,8 +49,8 @@ export default {
         }
     },
     watch: {
-        show(n) {
-            this.dialogShow = n
+        show(state) {
+            this.dialogShow = state
         }
     },
     methods: {

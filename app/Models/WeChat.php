@@ -37,6 +37,15 @@ class WeChat extends Model
     }
 
     /**
+     * 消息
+     * @return HasMany
+     */
+    public function messages()
+    {
+        return $this->hasMany(WeChatMessage::class, 'wechat_id');
+    }
+
+    /**
      * 素材
      * @return HasMany
      */

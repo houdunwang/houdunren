@@ -35,9 +35,9 @@ const form = {
     type: 'video',
     file: ''
 }
-import Component from './mixins/Component'
+import Mixin from './Mixin'
 export default {
-    mixins: [Component(form)]
+    mixins: [Mixin(form)]
 }
 </script>
 
