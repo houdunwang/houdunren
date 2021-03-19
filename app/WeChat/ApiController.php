@@ -3,11 +3,11 @@
 namespace App\WeChat;
 
 use App\Http\Controllers\Controller;
-use Houdunwang\WeChat\Message\Message;
+use Houdunwang\WeChat\Message;
 use App\Models\WeChat as Model;
 use App\WeChat\Processors\Text;
 use App\WeChat\Processors\Event;
-use Houdunwang\WeChat\User\User;
+use Houdunwang\WeChat\User;
 use App\Models\Site;
 use InvalidArgumentException;
 use WeChatService;

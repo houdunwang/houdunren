@@ -7,7 +7,7 @@ use App\Http\Resources\WeChatMaterialResource;
 use App\Http\Requests\WeChatMaterialRequest;
 use App\Models\WeChatMaterial;
 use App\Models\WeChat;
-use Houdunwang\WeChat\Material\Material;
+use Houdunwang\WeChat\Material;
 use Illuminate\Http\Request;
 use App\Models\Site;
 

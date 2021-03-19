@@ -99,8 +99,8 @@ Route::group(['middleware' => ['site', 'auth:sanctum']], function () {
     //公众号
     Route::apiResource('site.wechat', WeChatController::class);
     //菜单
-    Route::put('menu', [WeChatMenuController::class, 'update']);
-    Route::get('menu/push', [WeChatMenuController::class, 'push']);
+    Route::put('site/{site}/wechat/{wechat}/menu', [WeChatMenuController::class, 'update']);
+    Route::get('site/{site}/wechat/{wechat}/menu/push', [WeChatMenuController::class, 'push']);
     //粉丝
     Route::get('user', [WeChatUserController::class, 'index']);
     Route::get('user/sync', [WeChatUserController::class, 'sync']);

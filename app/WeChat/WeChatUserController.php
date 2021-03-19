@@ -4,7 +4,7 @@ namespace App\WeChat;
 
 use App\Http\Controllers\Controller;
 use App\Models\WeChat;
-use Houdunwang\WeChat\User\User as WeChatUser;
+use Houdunwang\WeChat\User as WeChatUser;
 use App\Models\Site;
 use App\Models\User;
 use WeChatService;

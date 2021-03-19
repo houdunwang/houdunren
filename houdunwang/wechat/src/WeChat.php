@@ -5,7 +5,6 @@ namespace Houdunwang\WeChat;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
-use Houdunwang\WeChat\Types\MessageType;
 use SimpleXMLElement;
 use Exception;
 use Log;

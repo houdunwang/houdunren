@@ -3,12 +3,8 @@
         <el-form ref="form" label-width="80px">
             <el-alert type="info" class="mb-3">
                 <ul>
-                    <li>
-                        需要先保存菜单后，再进行微信菜单推送
-                    </li>
-                    <li>
-                        一级菜单最多4个汉字，二级菜单最多7个汉字
-                    </li>
+                    <li>需要先保存菜单后，再进行微信菜单推送</li>
+                    <li>一级菜单最多4个汉字，二级菜单最多7个汉字</li>
                 </ul>
             </el-alert>
             <div class="wechat-menu">
@@ -25,21 +21,24 @@
                                 <i class="fas fa-plus-circle fa-1x"></i>
                             </dd>
                             <!-- 子菜单列表 -->
-                            <dd
-                                v-for="(button, n) in menu.sub_button"
-                                :key="n"
-                                :class="{ current: form === button }"
-                                class="text-sm font-monospace"
-                                @click="edit(button, index)"
-                            >
-                                {{ button.name | truncate(7, '') }}
-                            </dd>
+                            <div>
+                                <draggable v-model="menu.sub_button">
+                                    <dd
+                                        v-for="(button, n) in menu.sub_button"
+                                        :key="n"
+                                        :class="{ current: form === button }"
+                                        class="text-sm font-monospace"
+                                        @click="edit(button, index)"
+                                    >
+                                        {{ button.name | truncate(7, '') }}
+                                    </dd>
+                                </draggable>
+                            </div>
                         </dl>
                         <!-- 添加一级菜单 -->
                         <dl v-if="menus.length < 3">
                             <dt @click="add(menus, menus.length)">
                                 <i class="fas fa-plus-circle fa-1x"></i>
-                                <!-- <i class="fa fa-plus fa-1x" aria-hidden="true"></i> -->
                             </dt>
                         </dl>
                     </footer>
@@ -50,14 +49,18 @@
                         <el-button-group>
                             <el-button
                                 size="mini"
-                                v-for="(title, name) in types"
+                                v-for="(type, name) in types"
                                 :key="name"
                                 :type="form.type == name ? 'primary' : ''"
                                 @click="form.type = name"
                             >
-                                {{ title }}
+                                {{ type.title }}
                             </el-button>
                         </el-button-group>
+                        <div class="my-3 p-3 text-sm text-gray-500 border rounded-sm">
+                            <i class="fas fa-info-circle    "></i>
+                            {{ types[form.type].description }}
+                        </div>
                         <div class="mt-3 border p-3 rounded-md">
                             <component :is="component" :form="form" />
                             <el-button class="mt-3 " size="small" type="danger" @click="del">删除菜单</el-button>
@@ -67,8 +70,8 @@
                 </div>
             </div>
             <el-button-group class="mt-3">
-                <el-button type="primary" size="small" @click="submit">保存菜单</el-button>
-                <el-button type="info" size="small" @click="push">推送菜单到微信公众号</el-button>
+                <el-button type="primary" size="default" @click="submit" :disabled="isSubmit" v-loading="isSubmit">保存菜单</el-button>
+                <el-button type="success" size="default" @click="push">推送菜单到微信公众号</el-button>
             </el-button-group>
         </el-form>
     </div>
@@ -77,8 +80,10 @@
 <script>
 import types from './types'
 import fields from './fields'
+import draggable from 'vuedraggable'
 export default {
     props: ['wechat'],
+    components: { draggable },
     data() {
         return {
             //按钮类型
@@ -88,7 +93,8 @@ export default {
             //一级菜单索引
             pid: 0,
             //当前编辑的菜单
-            form: {}
+            form: {},
+            isSubmit: false
         }
     },
     watch: {
@@ -113,7 +119,7 @@ export default {
     methods: {
         //添加菜单
         add(menus, pid) {
-            menus.push((this.form = _.cloneDeep(fields)))
+            menus.unshift((this.form = _.cloneDeep(fields)))
             this.pid = pid
         },
         //编辑菜单
@@ -141,12 +147,19 @@ export default {
             })
         },
         //保存菜单
-        async submit() {
-            await this.axios.put(`site/${this.site.id}/wechat/${this.wechat.id}/menu`, { menus: this.menus })
+        submit() {
+            this.isSubmit = true
+            const url = `site/${this.wechat.site_id}/wechat/${this.wechat.id}/menu`
+            axios
+                .put(url, { menus: this.menus })
+                .then(_ => {})
+                .finally(_ => {
+                    this.isSubmit = false
+                })
         },
         //推送菜单
         async push() {
-            await axios.get(`site/${this.site.id}/wechat/${this.wechat.id}/menu/push`)
+            await axios.get(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/menu/push`)
         }
     }
 }

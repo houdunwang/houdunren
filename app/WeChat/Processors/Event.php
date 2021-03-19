@@ -3,7 +3,7 @@
 namespace App\WeChat\Processors;
 
 use App\WeChat\Processors\Processor;
-use Houdunwang\WeChat\Button\Button;
+use Houdunwang\WeChat\Button;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use InvalidArgumentException;
 use Log;

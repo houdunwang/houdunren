@@ -5,8 +5,16 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\WeChatLoginController;
 use App\Http\Controllers\WeChatBindController;
+use App\Models\WeChat;
 use App\WeChat\ApiController;
 
+use Houdunwang\WeChat\Qr;
+
+Route::get('a', function () {
+    $wechat = WeChat::find(1);
+    $res = app(Qr::class)->init($wechat)->create('QR_SCENE', ['scene_str' => json_encode(['a' => 'dfdf'], JSON_UNESCAPED_UNICODE)]);
+    return $res;
+});
 //支付通知
 Route::group(['prefix' => 'pay/{module}', 'middleware' => ['module']], function () {
     Route::any('alipay/return', [PayNotifyController::class, 'alipayReturn'])->name('pay.alipay.return');

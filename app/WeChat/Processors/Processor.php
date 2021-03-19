@@ -8,7 +8,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use InvalidArgumentException;
 use Log;
 use LogicException;
-use Houdunwang\WeChat\Message\Message;
+use Houdunwang\WeChat\Message;
 use App\Models\WeChat as Model;
 
 /**

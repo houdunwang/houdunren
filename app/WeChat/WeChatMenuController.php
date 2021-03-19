@@ -4,10 +4,10 @@ namespace App\WeChat;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\WeChatResource;
-use App\Models\WeChat;
-use Illuminate\Http\Request;
-use App\Models\Site;
 use Houdunwang\WeChat\Button;
+use Illuminate\Http\Request;
+use App\Models\WeChat;
+use App\Models\Site;
 
 /**
  * 微信菜单
@@ -15,12 +15,6 @@ use Houdunwang\WeChat\Button;
  */
 class WeChatMenuController extends Controller
 {
-    public function __construct()
-    {
-
-        $this->middleware(['auth:sanctum']);
-    }
-
     /**
      * 更新菜单
      * @param Request $request
@@ -38,13 +32,12 @@ class WeChatMenuController extends Controller
     /**
      * 推送菜单到微信
      * @param WeChat $wechat
-     * @param Button $button
      * @return void
      */
-    public function push(Site $site, WeChat $wechat,  Button $button)
+    public function push(Site $site, WeChat $wechat)
     {
         $this->authorize('update', $wechat);
-        $button->config($wechat)->create(['button' => $wechat->menus]);
+        app(Button::class)->init($wechat)->create(['button' => $wechat->menus]);
         return $this->message('微信菜单推送成功，请取关并再次关注后查看效果');
     }
 }
