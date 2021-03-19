@@ -3,14 +3,14 @@ export default form => ({
     data() {
         return {
             isSubmit: false,
-            form: _.merge({}, this.message || form),
+            form: _.cloneDeep(this.message || form),
             dialogShow: this.show
         }
     },
     watch: {
         show(show) {
             this.dialogShow = show
-            this.form = _.merge({}, this.message || form)
+            this.form = _.cloneDeep(this.message || form)
         },
         dialogShow(state) {
             this.$emit('update:show', state)

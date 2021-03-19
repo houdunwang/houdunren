@@ -7,7 +7,7 @@
                     回复内容
                 </div>
                 <div>
-                    <el-image :src="form.content.pic" fit="cover" v-if="form.content.pic" class="w-60"></el-image>
+                    <el-image :src="form.file" fit="cover" v-if="form.file" class="w-60"></el-image>
                     <hd-wechat-material-select
                         :wechat="wechat"
                         material-type="image"
@@ -38,7 +38,7 @@ export default {
     },
     methods: {
         selectMaterial(material) {
-            this.form.content.pic = material.file
+            this.form.file = material.file
             this.form.content.media_id = material.media.media_id
         }
     }

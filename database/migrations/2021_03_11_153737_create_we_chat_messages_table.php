@@ -19,6 +19,7 @@ class CreateWeChatMessagesTable extends Migration
             $table->string('type')->nullable()->comment('消息类型')->comment('text:文本 news:文章 image:图片等');
             $table->string('title')->comment('规则名称');
             $table->string('keyword')->comment('关键词');
+            $table->string('file')->nullable()->comment('本地文件');
             $table->json('content')->nullable()->comment('回复内容');
             $table->timestamps();
         });

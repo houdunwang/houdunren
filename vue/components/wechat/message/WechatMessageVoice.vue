@@ -7,8 +7,8 @@
                     回复内容
                 </div>
                 <div>
-                    <audio controls preload="auto" class="relative outline-none w-60 h-10" v-if="form.content.file" style="background-color: #f3f3f3;">
-                        <source :src="form.content.file" type="audio/mp3" />
+                    <audio controls preload="auto" class="relative outline-none w-60 h-10" v-if="form.file" style="background-color: #f3f3f3;">
+                        <source :src="form.file" type="audio/mp3" />
                     </audio>
                     <hd-wechat-material-select
                         :wechat="wechat"
@@ -40,7 +40,7 @@ export default {
     },
     methods: {
         selectMaterial(material) {
-            this.form.content.file = material.file
+            this.form.file = material.file
             this.form.content.media_id = material.media.media_id
         }
     }

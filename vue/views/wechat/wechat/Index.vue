@@ -28,9 +28,11 @@
                 <el-button-group size="small" class="flex">
                     <el-dropdown>
                         <el-button size="small" type="warning">微信菜单<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
-                        <el-dropdown-menu slot="dropdown" @click="route('wechat.menu.edit', { sid: site.id, id: wechat.id })">
+                        <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
-                                菜单设置
+                                <router-link :to="{ name: 'wechat.menu.index', query: { sid: wechat.site_id, wid: wechat.id } }">
+                                    菜单设置
+                                </router-link>
                             </el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
@@ -73,6 +75,16 @@
                                     图片消息
                                 </router-link>
                             </el-dropdown-item>
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.message.index', query: { sid: site.id, wid: wechat.id, type: 'voice' } }">
+                                    语音消息
+                                </router-link>
+                            </el-dropdown-item>
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.message.index', query: { sid: site.id, wid: wechat.id, type: 'video' } }">
+                                    视频消息
+                                </router-link>
+                            </el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                     <el-dropdown>
@@ -83,8 +95,26 @@
                                     图片素材
                                 </router-link>
                             </el-dropdown-item>
-                            <el-dropdown-item>图文消息</el-dropdown-item>
-                            <el-dropdown-item>图片消息</el-dropdown-item>
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.material.index', query: { sid: site.id, wid: wechat.id, type: 'voice' } }">
+                                    语音素材
+                                </router-link>
+                            </el-dropdown-item>
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.material.index', query: { sid: site.id, wid: wechat.id, type: 'video' } }">
+                                    视频素材
+                                </router-link>
+                            </el-dropdown-item>
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.material.index', query: { sid: site.id, wid: wechat.id, type: 'news' } }">
+                                    图文素材
+                                </router-link>
+                            </el-dropdown-item>
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.material.index', query: { sid: site.id, wid: wechat.id, type: 'thumb' } }">
+                                    缩略图素材
+                                </router-link>
+                            </el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </el-button-group>
@@ -96,10 +126,10 @@
 <script>
 import tabs from './tabs'
 export default {
-    route: { path: `:sid/wechat` },
+    // route: { path: `:sid/wechat` },
     data() {
         return {
-            tabs: tabs({ sid: this.$route.params.sid }),
+            tabs,
             site: {},
             wechats: [],
             isSync: false,
@@ -107,7 +137,7 @@ export default {
         }
     },
     async created() {
-        const sid = this.$route.params.sid
+        const sid = this.$route.query.sid
         ;[this.site, this.wechats] = await Promise.all([axios.get(`site/${sid}`), axios.get(`site/${sid}/wechat`)])
         this.loading = false
     },

@@ -2,9 +2,9 @@ import Vue from 'vue'
 import dayjs from 'dayjs'
 
 //内容截断
-Vue.filter('truncate', function(value, len = 55, ex = true) {
+Vue.filter('truncate', function(value, len = 55, ex = '...') {
     if (value) {
-        return value.length > len ? value.substr(0, len) + (ex ? ' ...' : '') : value
+        return value.length > len ? value.substr(0, len) + ex : value
     }
 })
 

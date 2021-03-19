@@ -73,14 +73,14 @@ export default {
     props: ['id'],
     data() {
         return {
-            tabs: tabs({ sid: this.$route.params.sid }),
+            tabs,
             form: Object.assign({}, form),
             site: {},
             loading: true
         }
     },
     async created() {
-        this.site = await this.axios.get(`site/${this.$route.params.sid}`)
+        this.site = await this.axios.get(`site/${this.$route.query.sid}`)
         if (this.id) this.form = await this.axios.get(`site/${this.site.id}/wechat/${this.id}`)
         this.loading = false
     },
@@ -88,7 +88,7 @@ export default {
         async onSubmit() {
             const url = this.id ? `site/${this.site.id}/wechat/${this.id}` : `site/${this.site.id}/wechat`
             await this.axios[this.id ? 'put' : 'post'](url, this.form)
-            this.$router.push({ name: 'wechat.wechat.index', params: { sid: this.site.id } })
+            this.$router.push({ name: 'wechat.wechat.index', query: { sid: this.site.id } })
         }
     }
 }

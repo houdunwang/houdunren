@@ -19,7 +19,7 @@ export default form => ({
         //显示对话框
         show(show) {
             this.dialogShow = show
-            this.form = _.merge({}, this.material || form)
+            this.form = _.cloneDeep(this.material || form)
             this.form.duration = this.durationType
         },
         dialogShow(show) {

@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class WeChatMessage extends Model
 {
     use HasFactory;
-    protected $fillable = ['wechat_id', 'module_id', 'type', 'title', 'keyword', 'content'];
+    protected $fillable = ['wechat_id', 'module_id', 'type', 'file', 'title', 'keyword', 'content'];
     protected $casts = ['content' => 'array'];
 
     /**

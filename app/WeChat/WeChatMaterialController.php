@@ -8,9 +8,8 @@ use App\Http\Requests\WeChatMaterialRequest;
 use App\Models\WeChatMaterial;
 use App\Models\WeChat;
 use Houdunwang\WeChat\Material\Material;
-use UploadService;
-use SiteService;
 use Illuminate\Http\Request;
+use App\Models\Site;
 
 /**
  * 素材管理
@@ -20,7 +19,6 @@ class WeChatMaterialController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
         $this->authorizeResource(WeChatMaterial::class, 'material');
     }
 
@@ -29,7 +27,7 @@ class WeChatMaterialController extends Controller
      * @param WeChat $wechat
      * @return void
      */
-    public function index(Request $request, WeChat $wechat)
+    public function index(Request $request, Site $site, WeChat $wechat)
     {
         $materials = $wechat->materials()->where('type', $request->type)->when($request->duration, function ($query, $duration) {
             return $query->where('duration', $duration);
@@ -54,7 +52,7 @@ class WeChatMaterialController extends Controller
      * @param WeChat $wechat
      * @return void
      */
-    public function store(WeChatMaterialRequest $request, WeChat $wechat, WeChatMaterial $material)
+    public function store(WeChatMaterialRequest $request, Site $site, WeChat $wechat, WeChatMaterial $material)
     {
         $package = app(Material::class)->init($wechat);
         // return $request->input();
@@ -74,7 +72,7 @@ class WeChatMaterialController extends Controller
      * @param WeChatMaterial $material
      * @return void
      */
-    public function update(WeChatMaterialRequest $request, WeChat $wechat,  WeChatMaterial $material)
+    public function update(WeChatMaterialRequest $request, Site $site, WeChat $wechat,  WeChatMaterial $material)
     {
         if ($request->file != $material->file) {
             $media = app(Material::class)->init($wechat)->add($request->type, $request->file, $request->duration);
@@ -89,7 +87,7 @@ class WeChatMaterialController extends Controller
      * @param WeChatMaterial $material
      * @return void
      */
-    public function destroy(WeChat $wechat, WeChatMaterial $material)
+    public function destroy(Site $site, WeChat $wechat, WeChatMaterial $material)
     {
         $material->delete();
         if ($material->duration == 'long') {

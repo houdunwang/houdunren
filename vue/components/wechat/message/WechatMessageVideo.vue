@@ -7,8 +7,8 @@
                     回复内容
                 </div>
                 <div>
-                    <video muted controls width="100%" class="outline-none w-80" v-if="form.content.file">
-                        <source :src="form.content.file" type="video/mp4" />
+                    <video muted controls width="100%" class="outline-none w-80" v-if="form.file">
+                        <source :src="form.file" type="video/mp4" />
                     </video>
                     <hd-wechat-material-select
                         :wechat="wechat"
@@ -40,7 +40,7 @@ export default {
     },
     methods: {
         selectMaterial(material) {
-            this.form.content.file = material.file
+            this.form.file = material.file
             this.form.content.media_id = material.media.media_id
         }
     }
