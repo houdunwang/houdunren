@@ -1,5 +1,5 @@
 <template>
-    <x-form :id="$route.params.id" />
+    <x-form :id="$route.query.id" />
 </template>
 
 <script>

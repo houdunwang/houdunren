@@ -94,7 +94,7 @@ export default {
     methods: {
         async load() {
             this.loading = true
-            this.messageData = await axios.get(`wechat/${this.wechat.id}/message?type=${this.type}`)
+            this.messageData = await axios.get(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/message?type=${this.type}`)
             this.loading = false
         },
         //编辑数据
@@ -105,7 +105,7 @@ export default {
         //删除
         del(message) {
             this.$confirm('确定删除吗？', '温馨提示').then(async _ => {
-                await axios.delete(`wechat/${this.wechat.id}/message/${message.id}`)
+                await axios.delete(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/message/${message.id}`)
                 this.messageData.data.splice(this.messageData.data.indexOf(message), 1)
             })
         }

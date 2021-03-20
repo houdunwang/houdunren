@@ -29,7 +29,7 @@ export default form => ({
     methods: {
         onSubmit() {
             this.isSubmit = true
-            const url = `wechat/${this.wechat.id}/material` + (this.form.id ? `/${this.form.id}` : ``)
+            const url = `site/${this.wechat.site_id}/wechat/${this.wechat.id}/material` + (this.form.id ? `/${this.form.id}` : ``)
             axios[this.form.id ? 'put' : 'post'](url, this.form)
                 .then(_ => {
                     this.$parent.load(1, this.form.type)

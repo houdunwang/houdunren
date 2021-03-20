@@ -36,8 +36,7 @@ class Event extends Processor
      */
     protected function button()
     {
-        $button = app(Button::class);
-        if ($button->isClick()) {
+        if ($this->message->isButtonClick()) {
             return $this->reply($this->message->EventKey);
         }
     }
@@ -51,7 +50,7 @@ class Event extends Processor
      */
     protected function subscribe()
     {
-        if ($this->message->isSubscribe()) {
+        if ($this->message->isEventSubscribe()) {
             return $this->reply($this->model->welcome);
         }
     }

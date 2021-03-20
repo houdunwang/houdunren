@@ -15,23 +15,25 @@
                     <el-image slot="reference" style="width: 50px; height: 50px" :src="wechat.qr" fit="cover"></el-image>
                 </el-popover>
             </el-table-column>
-
             <el-table-column label="类型" #default="scope">
                 {{ scope.row.type == 'subscribe' ? '订阅号' : '服务号' }}
             </el-table-column>
-
-            <el-table-column header-align="center" align="center" prop="prop" label="API" #default="{ row: wechat }">
+            <el-table-column header-align="center" align="center" label="API" width="300" #default="{ row: wechat }">
                 {{ `${site.domain}/wechat/api/${site.id}/${wechat.id}` }}
             </el-table-column>
-
             <el-table-column align="center" width="480" #default="{ row: wechat }">
                 <el-button-group size="small" class="flex">
                     <el-dropdown>
-                        <el-button size="small" type="warning">微信菜单<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
+                        <el-button size="small" type="warning">基本功能<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
                                 <router-link :to="{ name: 'wechat.menu.index', query: { sid: wechat.site_id, wid: wechat.id } }">
                                     菜单设置
+                                </router-link>
+                            </el-dropdown-item>
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.qr.index', query: { sid: wechat.site_id, wid: wechat.id } }">
+                                    二维码
                                 </router-link>
                             </el-dropdown-item>
                         </el-dropdown-menu>
@@ -40,7 +42,7 @@
                         <el-button size="small" type="primary">公众号管理<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
-                                <router-link :to="{ name: 'wechat.wechat.edit', params: { sid: site.id, id: wechat.id } }" href="#" type="primary" size="small">
+                                <router-link :to="{ name: 'wechat.wechat.edit', query: { sid: site.id, id: wechat.id } }" href="#" type="primary" size="small">
                                     编辑
                                 </router-link>
                             </el-dropdown-item>
@@ -126,7 +128,6 @@
 <script>
 import tabs from './tabs'
 export default {
-    // route: { path: `:sid/wechat` },
     data() {
         return {
             tabs,

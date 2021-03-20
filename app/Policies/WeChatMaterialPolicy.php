@@ -17,7 +17,7 @@ class WeChatMaterialPolicy
 
     public function before(User $user)
     {
-        return true;
+        return UserService::isMaster(request('wechat')->site, $user);
     }
 
     public function viewAny(User $user)

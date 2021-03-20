@@ -7,11 +7,8 @@ use Houdunwang\WeChat\Message;
 use App\Models\WeChat as Model;
 use App\WeChat\Processors\Text;
 use App\WeChat\Processors\Event;
-use Houdunwang\WeChat\User;
 use App\Models\Site;
 use InvalidArgumentException;
-use WeChatService;
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Database\Eloquent\InvalidCastException;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Log;
@@ -39,23 +36,22 @@ class ApiController extends Controller
     {
         //初始化微信服务
         $message->init($model->toArray());
-        $this->login($model, $message);
         return $this->processor($model, $message);
     }
 
-    /**
-     * 粉丝登录
-     * @param Model $model
-     * @param Message $message
-     * @return void
-     * @throws BindingResolutionException
-     * @throws RequestException
-     */
-    protected function login(Model $model, Message $message)
-    {
-        $account = app(User::class)->getByOpenid($message->FromUserName);
-        app(WeChatService::class)->saveUser($account + ['site_id' => SID, 'wechat_id' => $model->id]);
-    }
+    // /**
+    //  * 粉丝登录
+    //  * @param Model $model
+    //  * @param Message $message
+    //  * @return void
+    //  * @throws BindingResolutionException
+    //  * @throws RequestException
+    //  */
+    // protected function login(Model $model, Message $message)
+    // {
+    //     $account = app(User::class)->getByOpenid($message->FromUserName);
+    //     app(WeChatService::class)->saveUser($account + ['site_id' => SID, 'wechat_id' => $model->id]);
+    // }
 
     /**
      * 处理消息

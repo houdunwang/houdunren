@@ -114,6 +114,9 @@ class WeChat extends MessageType
      */
     public function __get($name)
     {
+        if ($name == 'message') {
+            return self::$message;
+        }
         return self::$message->$name ?? null;
     }
 

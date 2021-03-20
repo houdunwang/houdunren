@@ -134,13 +134,15 @@ export default {
         },
         async del(material) {
             this.$confirm(`确定删除【${material.title}】吗？`, '温馨提示').then(async _ => {
-                await axios.delete(`wechat/${this.wechat.id}/material/${material.id}`)
+                await axios.delete(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/material/${material.id}`)
                 this.load()
             })
         },
         async load(page = 1) {
             this.loading = true
-            this.material = await axios.get(`wechat/${this.wechat.id}/material?type=${this.type}&duration=${this.duration}&page=${page}`)
+            this.material = await axios.get(
+                `site/${this.wechat.site_id}/wechat/${this.wechat.id}/material?type=${this.type}&duration=${this.duration}&page=${page}`
+            )
             this.loading = false
         }
     }

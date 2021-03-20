@@ -53,4 +53,13 @@ class WeChat extends Model
     {
         return $this->hasMany(WeChatMaterial::class, 'wechat_id');
     }
+
+    /**
+     * 微信二维码
+     * @return HasMany
+     */
+    public function qrs()
+    {
+        return $this->hasMany(WeChatQr::class, 'wechat_id');
+    }
 }

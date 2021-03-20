@@ -15,7 +15,7 @@ trait Button
      */
     public function isButtonClick()
     {
-        return $this->message->MsgType == 'event' && $this->message->Event == 'CLICK';
+        return $this->message->MsgType == 'event' && $this->message->Event == 'CLICK' && $this->message->EventKey;
     }
 
     /**
@@ -24,7 +24,7 @@ trait Button
      */
     public function isButtonView()
     {
-        return $this->message->MsgType == 'event' && $this->message->Event == 'VIEW';
+        return $this->message->MsgType == 'event' && $this->message->Event == 'VIEW' && $this->message->EventKey;
     }
 
     /**

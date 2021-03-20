@@ -2,7 +2,6 @@
 
 namespace App\WeChat\Processors;
 
-use App\Models\WeChatKeyword;
 use Arr;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use InvalidArgumentException;
@@ -10,6 +9,7 @@ use Log;
 use LogicException;
 use Houdunwang\WeChat\Message;
 use App\Models\WeChat as Model;
+use App\Models\WeChatMessage;
 
 /**
  * 根据关键词内容回复
@@ -39,14 +39,21 @@ abstract class Processor
      */
     final protected function reply(?string $keyword)
     {
-        if ($rule = $this->getRule($keyword)) {
-            switch ($rule->type) {
+        if ($message = $this->getReplyMessage($keyword)) {
+            switch ($message->type) {
                 case 'text':
-                    return $this->message->text(Arr::random($rule->text->contents));
+                    return $this->message->text(Arr::random($message->content));
+                case 'image':
+                    return $this->message->image($message->content);
+                case 'voice':
+                    return $this->message->voice($message->content);
+                case 'video':
+                    return $this->message->video($message->content);
                 case 'news':
-                    return $this->message->news($rule->news->contents);
+                    return $this->message->news($message->content);
             }
         }
+        return $this->defaultMessage();
     }
 
     /**
@@ -56,14 +63,20 @@ abstract class Processor
      * @throws BindingResolutionException
      * @throws LogicException
      */
-    final protected function getRule(?string $keyword)
+    final protected function getReplyMessage(?string $keyword)
     {
-        $keywords = WeChatKeyword::where('site_id', SID)->where('wechat_id', $this->model->id)->get();
+        return WeChatMessage::where('wechat_id', $this->model->id)->where('keyword', $keyword)->first();
+    }
 
-        foreach ($keywords as $keyword) {
-            if ($keyword['word'] == $keyword) {
-                return $keyword->rule;
-            }
-        }
+    /**
+     * 默认回复消息
+     * @return mixed
+     * @throws BindingResolutionException
+     * @throws InvalidArgumentException
+     */
+    final protected function defaultMessage()
+    {
+        $message  = $this->model['default_message'] ?? '您的消息我们已经收到';
+        return $this->message->text($message);
     }
 }

@@ -19,7 +19,7 @@ export default form => ({
     methods: {
         async onSubmit() {
             this.isSubmit = true
-            const url = `wechat/${this.wechat.id}/message` + (this.message ? `/${this.message.id}` : ``) + `?site=${this.wechat.site_id}`
+            const url = `site/${this.wechat.site_id}/wechat/${this.wechat.id}/message` + (this.message ? `/${this.message.id}` : ``)
             axios[this.message ? 'put' : 'post'](url, this.form)
                 .then(_ => {
                     this.$parent.load()

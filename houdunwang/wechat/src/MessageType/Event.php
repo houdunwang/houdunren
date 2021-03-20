@@ -55,22 +55,4 @@ trait Event
     {
         return $this->message->MsgType == 'event' && $this->message->Event == 'LOCATION';
     }
-
-    /**
-     * 点击菜单拉取消息时的事件推送
-     * @return bool
-     */
-    public function isEventButtonClick()
-    {
-        return $this->message->MsgType == 'event' && $this->message->Event == 'CLICK' && $this->message->EventKey;
-    }
-
-    /**
-     * 点击菜单拉取消息时的事件推送
-     * @return bool
-     */
-    public function isEventButtonView()
-    {
-        return $this->message->MsgType == 'event' && $this->message->Event == 'VIEW' && $this->message->EventKey;
-    }
 }

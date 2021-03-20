@@ -223,6 +223,7 @@ export default {
                     }
                 }
                 dt {
+                    background-color: #f3f3f3;
                 }
                 dd {
                     background: #fff;

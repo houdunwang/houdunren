@@ -22,6 +22,7 @@ use App\WeChat\WeChatMenuController;
 use App\WeChat\WeChatUserController;
 use App\WeChat\WeChatMessageController;
 use App\WeChat\WeChatMaterialController;
+use App\WeChat\WeChatQrController;
 
 //登录注册与找回密码
 Route::post('login', [AuthController::class, 'login']);
@@ -108,4 +109,6 @@ Route::group(['middleware' => ['site', 'auth:sanctum']], function () {
     Route::apiResource('site.wechat.message', WeChatMessageController::class);
     //素材管理
     Route::apiResource('site.wechat.material', WeChatMaterialController::class);
+    //二维码
+    Route::apiResource('site.wechat.qr', WeChatQrController::class);
 });
