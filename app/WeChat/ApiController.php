@@ -5,13 +5,12 @@ namespace App\WeChat;
 use App\Http\Controllers\Controller;
 use Houdunwang\WeChat\Message;
 use App\Models\WeChat as Model;
-use App\WeChat\Processors\Text;
-use App\WeChat\Processors\Event;
 use App\Models\Site;
 use InvalidArgumentException;
 use Illuminate\Database\Eloquent\InvalidCastException;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Log;
+
 
 /**
  * 微信通信
@@ -19,9 +18,6 @@ use Log;
  */
 class ApiController extends Controller
 {
-    //消息处理器
-    protected $processes = [Text::class, Event::class];
-
     /**
      * 被动消息接口
      * @param Site $site
@@ -54,6 +50,14 @@ class ApiController extends Controller
     // }
 
     /**
+     * 事件订阅处理
+     * @return void
+     */
+    protected function subscribe()
+    {
+    }
+
+    /**
      * 处理消息
      * @param Model $model
      * @param Message $message
@@ -61,7 +65,9 @@ class ApiController extends Controller
      */
     protected function processor(Model $model, Message $message)
     {
-        foreach ($this->processes as $class) {
+        $files = glob(__DIR__ . '/Processors/Handles/*.php');
+        foreach ($files as $file) {
+            $class = 'App\WeChat\Processors\Handles\\' . pathinfo($file)['filename'];
             $processor = new $class($model, $message);
             if ($content = $processor->handle()) {
                 return $content;

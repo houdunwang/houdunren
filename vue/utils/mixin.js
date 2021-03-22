@@ -16,7 +16,7 @@ const mixin = {
         errors(name) {
             return store.getters.errors(name)
         },
-        async logout() {
+        logout() {
             location.href = '/logout'
         }
     }

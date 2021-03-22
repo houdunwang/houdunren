@@ -10,19 +10,19 @@ use Log;
 trait Event
 {
     /**
-     * 订阅消息
+     * 关注事件
      * @return bool
      */
-    public function isEventSubscribe()
+    public function isSubscribeEvent()
     {
         return $this->message->MsgType == 'event' && $this->message->Event == 'subscribe';
     }
 
     /**
-     * 取消订阅
+     * 取消关注事件
      * @return bool
      */
-    public function isEventUnSubscribe()
+    public function isUnSubscribeEvent()
     {
         return $this->message->MsgType == 'event' && $this->message->Event == 'unsubscribe';
     }
@@ -32,7 +32,7 @@ trait Event
      * 用户未关注时，进行关注后的事件推送
      * @return bool
      */
-    public function isEventQrSubscribe()
+    public function isSubscribeScanEvent()
     {
         return $this->message->MsgType == 'event' && $this->message->Event == 'subscribe' && $this->message->Ticket;
     }
@@ -42,7 +42,7 @@ trait Event
      * 用户已关注时的事件推送
      * @return bool
      */
-    public function isEventQrScan()
+    public function isScanEvent()
     {
         return $this->message->MsgType == 'event' && $this->message->Event == 'SCAN';
     }
@@ -51,7 +51,7 @@ trait Event
      * 上报地理位置事件
      * @return bool
      */
-    public function isEventLocation()
+    public function isLocationEvent()
     {
         return $this->message->MsgType == 'event' && $this->message->Event == 'LOCATION';
     }

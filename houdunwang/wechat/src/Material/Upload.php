@@ -19,12 +19,14 @@ trait Upload
      * @return mixed
      * @throws Exception
      */
-    public function add(string $type, string $file, string $uploadType)
+    public function add(string $type, string $file, string $uploadType, array $data = [])
     {
         //临时或永久素材上传地址
         $url = $uploadType == 'short' ? 'media/upload' : 'material/add_material';
         $api = $this->api . "/{$url}?access_token=" . $this->token() . "&type=" . $type;
-        $response = Http::attach('media', file_get_contents($file), basename($file))->post($api)->json();
+        $response = Http::attach('media', file_get_contents($file), basename($file))->post($api, ['description' => json_encode($data, JSON_UNESCAPED_UNICODE)])->json();
+        // $response = Http::attach('media', file_get_contents($file), basename($file))
+        //     ->send('POST', $api, ['description' => json_encode($data, JSON_UNESCAPED_UNICODE)])->throw()->json();
         return $this->return($response);
     }
 

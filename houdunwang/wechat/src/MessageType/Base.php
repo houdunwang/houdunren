@@ -5,7 +5,7 @@ namespace Houdunwang\WeChat\MessageType;
 use Log;
 
 /**
- * 基本消息类型
+ * 普通消息类型
  */
 trait Base
 {
@@ -13,7 +13,7 @@ trait Base
      * 文本消息
      * @return bool
      */
-    public function isText()
+    public function isTextMessage()
     {
         return $this->message->MsgType == 'text';
     }
@@ -22,7 +22,7 @@ trait Base
      * 图片消息
      * @return bool
      */
-    public function isImage()
+    public function isImageMessage()
     {
         return $this->message->MsgType == 'image';
     }
@@ -31,7 +31,7 @@ trait Base
      * 语音消息
      * @return bool
      */
-    public function isVoice()
+    public function isVoiceMessage()
     {
         return $this->message->MsgType == 'voice';
     }
@@ -40,7 +40,7 @@ trait Base
      * 视频消息
      * @return bool
      */
-    public function isVideo()
+    public function isVideoMessage()
     {
         return $this->message->MsgType == 'video';
     }
@@ -49,7 +49,7 @@ trait Base
      * 小视频消息
      * @return bool
      */
-    public function isShortVideo()
+    public function isShortVideoMessage()
     {
         return $this->message->MsgType == 'shortvideo';
     }
@@ -58,16 +58,16 @@ trait Base
      * 地理位置消息
      * @return bool
      */
-    public function isLocation()
+    public function isLocationMessage()
     {
         return $this->message->MsgType == 'location';
     }
 
     /**
-     * 地理位置消息
+     * 链接消息
      * @return bool
      */
-    public function isLink()
+    public function isLinkMessage()
     {
         return $this->message->MsgType == 'link';
     }

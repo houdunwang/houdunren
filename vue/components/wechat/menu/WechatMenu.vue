@@ -5,6 +5,7 @@
                 <ul>
                     <li>需要先保存菜单后，再进行微信菜单推送</li>
                     <li>一级菜单最多4个汉字，二级菜单最多7个汉字</li>
+                    <li>推送菜单后需要等段时间者可以看到，你也可以取关再关注后立即看到效果</li>
                 </ul>
             </el-alert>
             <div class="wechat-menu">
@@ -13,27 +14,27 @@
                         <img src="/images/wechat-header.jpg" class="border-bottom shadow-sm" />
                     </header>
                     <footer class="shadow-2xl">
-                        <dl v-for="(menu, index) in menus" :key="index">
+                        <dl v-for="(menu, index) in menus" :key="index" class="">
                             <!-- 一级菜单列表 -->
-                            <dt @click="edit(menu, index)" :class="{ current: form == menu }" class="text-sm">{{ menu.name | truncate(4, '') }}</dt>
+                            <dt @click="edit(menu, index)" :class="{ current: form == menu }" class="text-sm">
+                                {{ menu.name | truncate(4, '') }}
+                            </dt>
                             <!-- 子菜单添加按钮 -->
                             <dd @click="add(menu.sub_button, index)" v-if="menu.sub_button.length < 5">
                                 <i class="fas fa-plus-circle fa-1x"></i>
                             </dd>
                             <!-- 子菜单列表 -->
-                            <div>
-                                <draggable v-model="menu.sub_button">
-                                    <dd
-                                        v-for="(button, n) in menu.sub_button"
-                                        :key="n"
-                                        :class="{ current: form === button }"
-                                        class="text-sm font-monospace"
-                                        @click="edit(button, index)"
-                                    >
-                                        {{ button.name | truncate(7, '') }}
-                                    </dd>
-                                </draggable>
-                            </div>
+                            <draggable v-model="menu.sub_button">
+                                <dd
+                                    v-for="(button, n) in menu.sub_button"
+                                    :key="n"
+                                    :class="{ current: form === button }"
+                                    class="text-sm font-monospace rounded-sm"
+                                    @click="edit(button, index)"
+                                >
+                                    {{ button.name | truncate(7, '') }}
+                                </dd>
+                            </draggable>
                         </dl>
                         <!-- 添加一级菜单 -->
                         <dl v-if="menus.length < 3">
@@ -62,7 +63,7 @@
                             {{ types[form.type].description }}
                         </div>
                         <div class="mt-3 border p-3 rounded-md">
-                            <component :is="component" :form="form" />
+                            <component :is="component" :form="form" :wechat="wechat" />
                             <el-button class="mt-3 " size="small" type="danger" @click="del">删除菜单</el-button>
                         </div>
                     </div>
@@ -82,7 +83,15 @@ import types from './types'
 import fields from './fields'
 import draggable from 'vuedraggable'
 export default {
-    props: ['wechat'],
+    props: {
+        wechat: { type: Object },
+        moduleId: {
+            type: Object,
+            default() {
+                return null
+            }
+        }
+    },
     components: { draggable },
     data() {
         return {
@@ -119,7 +128,8 @@ export default {
     methods: {
         //添加菜单
         add(menus, pid) {
-            menus.unshift((this.form = _.cloneDeep(fields)))
+            const form = { ...fields, module_id: this.moduleId }
+            menus.unshift((this.form = _.cloneDeep(form)))
             this.pid = pid
         },
         //编辑菜单

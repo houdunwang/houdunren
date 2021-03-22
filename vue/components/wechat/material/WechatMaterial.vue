@@ -36,12 +36,12 @@
                 {{ material.created_at | fromNow }}
             </el-table-column>
             <el-table-column width="160" #default="{ row: material }">
-                <slot :material="material">
-                    <el-button-group>
+                <el-button-group>
+                    <slot :material="material">
                         <el-button type="success" size="mini" @click="edit(material)">编辑</el-button>
                         <el-button type="primary" size="mini" @click="del(material)">删除</el-button>
-                    </el-button-group>
-                </slot>
+                    </slot>
+                </el-button-group>
             </el-table-column>
         </el-table>
         <div>

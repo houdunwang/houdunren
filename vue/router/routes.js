@@ -17,7 +17,6 @@ components.keys().map(path => {
             //然后将全部转为小写
             .toLowerCase()
             .slice(1)
-
         //路由组名
         const name = path.replace(/\//g, '.').toLowerCase()
         const route = { path: url, component, name }

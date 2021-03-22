@@ -23,7 +23,7 @@ class WeChatMessageController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(WeChatMessage::class, 'message');
+        // $this->authorizeResource(WeChatMessage::class, 'message');
     }
 
     /**
@@ -42,6 +42,18 @@ class WeChatMessageController extends Controller
         return WeChatMessageResource::collection($weChatMessages);
     }
 
+    /**
+     * 根据关键词获取消息
+     * @param Site $site
+     * @param WeChat $wechat
+     * @return WeChatMessageResource
+     * @throws BindingResolutionException
+     */
+    public function getByKeyword(Site $site, WeChat $wechat)
+    {
+        $message = $wechat->messages()->where('keyword', request('keyword'))->first();
+        return new WeChatMessageResource($message);
+    }
     /**
      * 添加消息
      * @param WeChatMessageRequest $request

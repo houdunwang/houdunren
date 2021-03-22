@@ -59,7 +59,7 @@ class WeChatMaterialController extends Controller
         if ($request->type == 'news') {
             $media = $package->addNews($request->content);
         } else {
-            $media = $package->add($request->type, $request->file, $request->duration);
+            $media = $package->add($request->type, $request->file, $request->duration, $request->content);
         }
         $wechat->materials()->create($request->input() + ['media' => $media]);
         return $this->message('素材添加成功', new WeChatMaterialResource($material));
@@ -89,10 +89,13 @@ class WeChatMaterialController extends Controller
      */
     public function destroy(Site $site, WeChat $wechat, WeChatMaterial $material)
     {
-        $material->delete();
-        if ($material->duration == 'long') {
-            app(Material::class)->init($wechat)->del($material->media_id);
+        try {
+            if ($material->duration == 'long') {
+                app(Material::class)->init($wechat)->del($material->media['media_id']);
+            }
+        } finally {
+            $material->delete();
+            return $this->message('素材删除成功');
         }
-        return $this->message('素材删除成功');
     }
 }

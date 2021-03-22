@@ -72,6 +72,31 @@ php;
     }
 
     /**
+     * 音乐消息
+     * @param array $content
+     * @return string
+     */
+    public function music(array $content)
+    {
+        $xml = <<<php
+        <xml>
+            <ToUserName><![CDATA[%s]]></ToUserName>
+            <FromUserName><![CDATA[%s]]></FromUserName>
+            <CreateTime>%s</CreateTime>
+            <MsgType><![CDATA[music]]></MsgType>
+            <Music>
+                <Title><![CDATA[%s]]></Title>
+                <Description><![CDATA[%s]]></Description>
+                <MusicUrl><![CDATA[%s]]></MusicUrl>
+                <HQMusicUrl><![CDATA[%s]]></HQMusicUrl>
+                <ThumbMediaId><![CDATA[%s]]></ThumbMediaId>
+            </Music>
+        </xml>
+php;
+        return sprintf($xml, $this->FromUserName, $this->ToUserName, time(), $content['title'], $content['description'], $content['musicurl'], $content['hqmusicurl'],  $content['media_id']);
+    }
+
+    /**
      * 视频消息
      * @param array $content
      * @return string

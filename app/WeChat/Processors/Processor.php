@@ -40,17 +40,15 @@ abstract class Processor
     final protected function reply(?string $keyword)
     {
         if ($message = $this->getReplyMessage($keyword)) {
-            switch ($message->type) {
+            $action = $message->type;
+            switch ($action) {
                 case 'text':
                     return $this->message->text(Arr::random($message->content));
                 case 'image':
-                    return $this->message->image($message->content);
                 case 'voice':
-                    return $this->message->voice($message->content);
                 case 'video':
-                    return $this->message->video($message->content);
                 case 'news':
-                    return $this->message->news($message->content);
+                    return $this->message->$action($message->content);
             }
         }
         return $this->defaultMessage();

@@ -75,12 +75,8 @@ class WeChat extends MessageType
         $url = $this->api . '/token?grant_type=client_credential&appid=' . $this->config('appid') . '&secret=' . $this->config('appsecret');
         $cacheName = 'wechat-token-' . md5($url);
         if (!Cache::has($cacheName)) {
-            $response = $this->return(
-                Http::get($url)
-                    ->throw()
-                    ->json()
-            );
-            Cache::put($cacheName, $response['access_token'], now()->addSecond($response['expires_in']));
+            $response = $this->return(Http::get($url)->throw()->json());
+            Cache::put($cacheName, $response['access_token'], $response['expires_in']);
         }
         return Cache::get($cacheName);
     }

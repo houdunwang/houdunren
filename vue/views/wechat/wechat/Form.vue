@@ -38,14 +38,15 @@
                     <hd-error name="wxid" />
                 </el-form-item>
                 <el-form-item label="appid">
-                    <el-input v-model="form.appid" :disabled="!!id"></el-input>
+                    <el-input v-model="form.appid"></el-input>
                     <hd-error name="appid" />
                 </el-form-item>
                 <el-form-item label="appsecret">
-                    <el-input v-model="form.appsecret" :disabled="!!id"></el-input>
+                    <el-input v-model="form.appsecret"></el-input>
                     <hd-error name="appsecret" />
                 </el-form-item>
             </el-card>
+
             <el-card shadow="always" :body-style="{ padding: '20px' }" class="mt-3">
                 <div slot="header">
                     默认消息

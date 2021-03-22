@@ -11,30 +11,26 @@ use Http;
 trait Get
 {
     /**
-     * 获取素材
+     * 获取临时素材
      * @param string $mediaId 素材编号
-     * @param string $type short临时素材 long永久素材 speex高清音频接口
      * @return mixed
      */
-    public function get(string $mediaId, string $type)
+    public function getShortMaterial(string $mediaId)
     {
-        //临时或永久素材上传地址
-        switch ($type) {
-            case 'short':
-                //临时素材
-                $url = 'media/get';
-                break;
-            case 'long':
-                //永久素材
-                $url = 'material/get_material';
-                break;
-            case 'speex':
-                //高清音频接口
-                $url = 'media/get/jssdk';
-                break;
-        }
-        $api = $this->api . "/{$url}?access_token=" . $this->token() . "&media_id=" . $mediaId;
+        $api = $this->api . "/media/get?access_token=" . $this->token() . "&media_id=" . $mediaId;
         $response = Http::get($api)->json();
+        return $this->return($response);
+    }
+
+    /**
+     * 获取永久素材
+     * @param string $mediaId 素材编号
+     * @return mixed
+     */
+    public function getLongMaterial(string $mediaId)
+    {
+        $api = $this->api . "/material/get_material?access_token=" . $this->token();
+        $response = Http::post($api, ["media_id" => $mediaId])->json();
         return $this->return($response);
     }
 

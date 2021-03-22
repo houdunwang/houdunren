@@ -11,33 +11,14 @@
         <el-table :data="messageData.data" border stripe class="mt-3" v-loading="loading">
             <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label" :width="col.width"> </el-table-column>
             <el-table-column label="回复内容" #default="{row:message}">
-                <div v-if="message.type == 'text' && message.content.length">
-                    {{ message.content.join() | truncate(50) }}
-                </div>
-                <div v-if="message.type == 'image'">
-                    <el-popover placement="top" width="300" trigger="hover">
-                        <el-image :src="message.content.pic" fit="cover"></el-image>
-                        <el-image slot="reference" :src="message.content.pic" fit="cover" class="w-10 h-10"></el-image>
-                    </el-popover>
-                </div>
-                <div v-if="message.type == 'voice'">
-                    <audio controls preload="auto" class="relative outline-none w-60 h-10" tyle="background-color: #f3f3f3;">
-                        <source :src="message.content.file" type="audio/mp3" />
-                    </audio>
-                </div>
-                <div v-if="message.type == 'video'">
-                    <el-popover placement="top" width="500" trigger="hover">
-                        <video muted controls width="100%" class="outline-none">
-                            <source :src="message.content.file" type="video/mp4" />
-                        </video>
-                        <i slot="reference" class="fas fa-video w-10 h-10 text-xl"></i>
-                    </el-popover>
-                </div>
+                <!-- 预览素材 -->
+                <hd-wechat-message-preview :message="message" class-name="w-10 h-10" />
             </el-table-column>
-            <el-table-column width="160" #default="{ row: message }">
+            <el-table-column width="200" #default="{ row: message }" align="center">
                 <el-button-group>
                     <el-button type="success" size="mini" @click="edit(message)">编辑</el-button>
-                    <el-button type="primary" size="mini" @click="del(message)">删除</el-button>
+                    <el-button type="danger" size="mini" @click="del(message)">删除</el-button>
+                    <slot :message="message"> </slot>
                 </el-button-group>
             </el-table-column>
         </el-table>
