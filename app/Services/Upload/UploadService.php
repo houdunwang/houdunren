@@ -66,6 +66,7 @@ class UploadService
             'path' => $path,
             'site_id' => site('id'),
             'user_id' => Auth::id(),
+            'module_id' => module('id'),
             'size' => filesize($realFile),
             'name' => $file->getClientOriginalName(),
             'extension' => $file->extension(),

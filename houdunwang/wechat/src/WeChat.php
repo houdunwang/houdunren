@@ -59,7 +59,7 @@ class WeChat extends MessageType
     {
         $content = file_get_contents('php://input');
         if ($content) {
-            self::$message = @simplexml_load_string($content);
+            self::$message = @simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA);
         }
         return $this;
     }
@@ -119,12 +119,13 @@ class WeChat extends MessageType
     /**
      * 获取被动消息内容
      * @param mixed|null $name
+     * @param bool $returnArray 以数组形式返回
      * @return mixed
      */
-    public function message($name = null)
+    public function message($name = null, bool $returnArray = false)
     {
         if (is_null($name)) {
-            return self::$message;
+            return $returnArray ? json_decode(json_encode(self::$message), true) : self::$message;
         }
         return self::$message->$name ?? null;
     }

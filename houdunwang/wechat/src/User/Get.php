@@ -20,8 +20,7 @@ trait Get
     public function getByOpenid($openid)
     {
         $response = Http::get($this->api . '/user/info?access_token=' . $this->token() . '&openid=' . $openid . '&lang=zh_CN')
-            ->throw()
-            ->json();
+            ->throw()->json();
         return $this->return($response);
     }
 

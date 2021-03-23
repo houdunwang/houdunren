@@ -15,7 +15,7 @@ use LogicException;
 class Base extends Processor
 {
     //事件处理集
-    protected $processes = ['isTextMessage'];
+    protected $processes = ['isTextMessage', 'isImageMessage'];
 
     public function handle()
     {
@@ -37,6 +37,15 @@ class Base extends Processor
     {
         if ($this->message->isTextMessage()) {
             return $this->reply($this->message->Content);
+        }
+    }
+
+
+    public function isImageMessage()
+    {
+        if ($this->message->isImageMessage()) {
+            Log::info(json_decode(json_encode($this->message->message()), true));
+            //     return $this->reply($this->message->Content);
         }
     }
 }

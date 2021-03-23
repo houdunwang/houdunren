@@ -15,7 +15,7 @@ class CreateWeChatMessagesTable extends Migration
         Schema::create('we_chat_messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('wechat_id')->constrained('we_chats')->onDelete('cascade');
-            $table->foreignId('module_id')->nullable()->constrained()->onDelete('cascade')->commit('有值时将交给模块处理');
+            $table->foreignId('module_id')->nullable()->constrained()->onDelete('cascade')->commit('模块');
             $table->string('type')->nullable()->comment('消息类型')->comment('text:文本 news:文章 image:图片等');
             $table->string('title')->comment('规则名称');
             $table->string('keyword')->comment('关键词');

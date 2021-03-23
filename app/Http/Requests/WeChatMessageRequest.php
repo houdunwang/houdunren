@@ -24,8 +24,7 @@ class WeChatMessageRequest extends FormRequest
             'title' => ['required'],
             'keyword' => ['required', Rule::unique('we_chat_messages')->ignore(request('message'))->where(function ($query) {
                 return $query->where('wechat_id', request('wechat')->id);
-            })],
-            'content' => ['required'],
+            })]
         ];
 
         return $rules + $this->typeRule();

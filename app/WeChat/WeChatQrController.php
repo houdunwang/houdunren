@@ -9,6 +9,7 @@ use App\Models\Site;
 use App\Models\WeChat;
 use App\Http\Resources\WeChatQrResource;
 use Houdunwang\WeChat\Qr;
+use App\Http\Requests\WeChatQrRequest;
 
 /**
  * 微信二维码
@@ -23,14 +24,14 @@ class WeChatQrController extends Controller
 
     public function index(Site $site, WeChat $wechat)
     {
-        $qrs = $wechat->qrs()->paginate(15);
+        $qrs = $wechat->qrs()->latest()->paginate(10);
         return WeChatQrResource::collection($qrs);
     }
 
-    public function store(Request $request, Site $site, WeChat $wechat, WeChatQr $qr)
+    public function store(WeChatQrRequest $request, Site $site, WeChat $wechat, WeChatQr $qr)
     {
-        $content = app(Qr::class)->init($wechat)->create($request->type, $request->scene_type, $request->scene_value, $request->expire_seconds);
-        $qr->fill($request->input() + ['content' => $content, 'wechat_id' => $wechat->id])->save();
+        $content = app(Qr::class)->init($wechat)->create($request->input());
+        $qr->fill($request->input() + ['content' => $content, 'wechat_id' => $wechat->id, 'module_id' => request('module')])->save();
         return $this->message('二维码添加成功', $qr);
     }
 

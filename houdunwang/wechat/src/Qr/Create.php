@@ -17,18 +17,28 @@ trait Create
      * @return mixed
      * @throws RequestException
      */
-    public function create(string $type, string $sceneType, string $sceneValue, int $expireSeconds = 3600)
+    public function create(array $qr)
     {
+
         $url = $this->api . "/qrcode/create?access_token=" . $this->token();
-        $data = [
-            "action_name" => $type,
-            "expire_seconds" => $expireSeconds,
-            "action_info" => [
-                "scene" => [
-                    "scene_{$sceneType}" => $sceneValue
-                ]
-            ]
-        ];
+        switch ($qr['type']) {
+            case 'QR_SCENE':
+                $actionName =  $qr['scene_type'] == 'scene_id' ? 'QR_SCENE' : 'QR_STR_SCENE';
+                $data = [
+                    "action_name" => $actionName,
+                    "expire_seconds" => $qr['expire_seconds'],
+                    "action_info" => ["scene" => [$qr['scene_type'] => $qr['scene_value']]]
+                ];
+                break;
+            case 'QR_LIMIT_SCENE':
+                $actionName =  $qr['scene_type'] == 'scene_id' ? 'QR_LIMIT_SCENE' : 'QR_LIMIT_STR_SCENE';
+                $data = [
+                    "action_name" => $actionName,
+                    "action_info" => ["scene" => [$qr['scene_type'] => $qr['scene_value']]]
+                ];
+                break;
+        }
+
         $response = Http::send('POST', $url, ['body' => json_encode($data, JSON_UNESCAPED_UNICODE)])->throw()->json();
         return $this->return($response);
     }

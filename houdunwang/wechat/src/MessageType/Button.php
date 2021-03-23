@@ -46,7 +46,7 @@ trait Button
     }
 
     /**
-     * 弹出系统拍照发图的事件推送
+     * 系统拍照发图的事件推送
      * @return bool
      */
     public function isButtonPicSysPhoto()
@@ -56,7 +56,7 @@ trait Button
 
 
     /**
-     * 弹出拍照或者相册发图的事件推送
+     * 拍照或者相册发图的事件推送
      * @return bool
      */
     public function isButtonPicPhotoOrAlbum()
@@ -65,7 +65,7 @@ trait Button
     }
 
     /**
-     * 弹出微信相册发图器的事件推送
+     * 微信相册发图的事件推送
      * @return bool
      */
     public function isButtonPicWeixin()
@@ -74,7 +74,7 @@ trait Button
     }
 
     /**
-     * 弹出微信相册发图器的事件推送
+     * 地理位置选择事件推送
      * @return bool
      */
     public function isButtonLocationSelect()

@@ -3,11 +3,7 @@
 namespace App\Services\WeChat;
 
 use App\Models\User;
-use App\Models\WeChatKeyword;
-use App\Models\WeChatRule;
 use App\Models\WeChatUser;
-use Houdunwang\WeChat\WeChat as WeChatWeChat;
-use Illuminate\Support\Collection;
 
 /**
  * 微信管理服务
@@ -26,7 +22,6 @@ class WeChatService
 
     /**
      * 保存微信用户到数据表
-     *
      * @param array $account
      * @return User
      */
@@ -49,78 +44,5 @@ class WeChatService
             $wechatUser = WeChatUser::create($account + ['user_id' => $user['id'], 'site_id' => SID]);
         }
         return $wechatUser->user;
-    }
-
-    /**
-     * 保存微信规则
-     *
-     * @param string $type
-     * @param array $options
-     * @return void
-     */
-    public function saveRule($type = 'text', array $options = [])
-    {
-        $rule = json_decode(request()->input('wechat.rule'), true);
-        $rule['site_id'] = site()['id'];
-        $rule['module_id'] = module()['id'];
-        $rule['title'] = $rule['title'];
-        $rule['type'] = $type;
-        $rule['options'] = $options;
-
-        $weChatRule = WeChatRule::updateOrCreate(
-            ['id' => $rule['id'] ?? 0],
-            [
-                'site_id' => site()['id'],
-                'module_id' => module()['id'],
-                'wechat_id' => $rule['wechat_id'],
-                'title' => $rule['title'],
-                'type' => $type,
-                'options' => $options,
-            ]
-        );
-
-        $this->saveKeyword($weChatRule);
-
-        return $weChatRule;
-    }
-
-    /**
-     * 保存关键词
-     *
-     * @param WeChatRule $weChatRule
-     * @return void
-     */
-    protected function saveKeyword(WeChatRule $weChatRule)
-    {
-        $keywords = json_decode(request()->input('wechat.keywords'), true);
-        $weChatRule->keywords()->delete();
-
-        foreach ($keywords as $keyword) {
-            if (!$this->keywordIsExists($keyword)) {
-                WeChatKeyword::updateOrCreate(
-                    ['id' => $keyword['id'] ?? 0],
-                    [
-                        'site_id' => site()['id'],
-                        'module_id' => module()['id'],
-                        'wechat_id' => 1,
-                        'rule_id' => $weChatRule['id'],
-                    ] + $keyword
-                );
-            }
-        }
-    }
-
-    /**
-     * 检测关键词是否存在
-     *
-     * @param array $keyword
-     * @return void
-     */
-    public function keywordIsExists(array $keyword)
-    {
-        return WeChatKeyword::where('word', $keyword['word'])
-            ->where('site_id', site()['id'])
-            ->whereNotIn('id', [$keyword['id'] ?? 0])
-            ->exists();
     }
 }

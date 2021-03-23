@@ -15,7 +15,7 @@ use LogicException;
 class Button extends Processor
 {
     //事件处理集
-    protected $processes = ['isButtonClick'];
+    protected $processes = ['isButtonClick', 'isButtonPicWeixin'];
 
     public function handle()
     {
@@ -37,6 +37,13 @@ class Button extends Processor
     {
         if ($this->message->isButtonClick()) {
             return $this->reply($this->message->EventKey);
+        }
+    }
+
+    protected function isButtonPicWeixin()
+    {
+        if ($this->message->isButtonPicWeixin()) {
+            return $this->message->text('isButtonPicWeixin');
         }
     }
 }

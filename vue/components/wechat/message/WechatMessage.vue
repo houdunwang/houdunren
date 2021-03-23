@@ -15,7 +15,7 @@
                 <hd-wechat-message-preview :message="message" class-name="w-10 h-10" />
             </el-table-column>
             <el-table-column width="200" #default="{ row: message }" align="center">
-                <el-button-group>
+                <el-button-group v-if="type != 'module'">
                     <el-button type="success" size="mini" @click="edit(message)">编辑</el-button>
                     <el-button type="danger" size="mini" @click="del(message)">删除</el-button>
                     <slot :message="message"> </slot>
@@ -24,7 +24,7 @@
         </el-table>
         <!-- 添加消息 -->
         <component :is="componentName" class="mt-3" :wechat="wechat" :message="message" :show.sync="showDialog" />
-        <el-button type="danger" size="mini" @click="edit()" class="mt-3">添加消息</el-button>
+        <el-button type="danger" size="mini" @click="edit()" class="mt-3" v-if="type != 'module'">添加消息</el-button>
     </div>
 </template>
 
@@ -35,7 +35,8 @@ const types = [
     { title: '图文消息', type: 'news' },
     { title: '图片消息', type: 'image' },
     { title: '音频消息', type: 'voice' },
-    { title: '视频消息', type: 'video' }
+    { title: '视频消息', type: 'video' },
+    { title: '模块处理', type: 'module' }
 ]
 const columns = [
     { label: '编号', id: 'id', width: 60 },
@@ -45,7 +46,11 @@ const columns = [
 export default {
     props: {
         wechat: { required: true, type: Object },
-        messageType: { type: String, default: 'text' }
+        messageType: { type: String, default: 'text' },
+        module: {
+            type: Object,
+            default: () => null
+        }
     },
     data() {
         return {

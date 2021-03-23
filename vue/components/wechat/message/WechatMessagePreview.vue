@@ -39,6 +39,7 @@
                 <el-image slot="reference" :src="message.content[0].picurl" fit="cover" class="w-10 h-10"></el-image>
             </el-popover>
         </div>
+        <div v-if="message.type == 'module'"><i class="fas fa-info-circle    "></i> 回复内容由模块处理</div>
     </div>
 </template>
 

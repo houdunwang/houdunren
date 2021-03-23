@@ -16,6 +16,7 @@ class CreateWeChatQrsTable extends Migration
         Schema::create('we_chat_qrs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('wechat_id')->constrained('we_chats')->onDelete('cascade');
+            $table->foreignId('module_id')->nullable()->constrained()->onDelete('cascade')->commit('模块');
             $table->string('title')->comment('二维码描述');
             $table->unsignedInteger('expire_seconds')->nullable()->comment('有效时间适用于临时二维码');
             $table->string('scene_type')->comment('场景类型');
