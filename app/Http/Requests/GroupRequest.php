@@ -3,39 +3,31 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use UserService;
+use Auth;
 
+/**
+ * 会员组表单验证
+ * @package App\Http\Requests
+ */
 class GroupRequest extends FormRequest
 {
-  /**
-   * Determine if the user is authorized to make this request.
-   *
-   * @return bool
-   */
-  public function authorize()
-  {
-    return isSuperAdmin();
-  }
+    public function authorize()
+    {
+        return true;
+    }
 
-  /**
-   * Get the validation rules that apply to the request.
-   *
-   * @return array
-   */
-  public function rules()
-  {
-    $id = request('group')['id'] ?? 0;
-    return [
-      'name' => 'required|unique:groups,name,' . $id,
-      'site_num' => 'required|numeric'
-    ];
-  }
+    public function rules()
+    {
+        return [
+            'title' => ['required', 'between:3,30'],
+            'site_num' => ['required', 'integer', 'between:1,255'],
+            'days' => ['required', 'integer', 'between:1,65535'],
+        ];
+    }
 
-  public function messages()
-  {
-    return [
-      'name.required' => '组名称不能为空',
-      'name.unique' => '用户组已经存在',
-      'site_num' => '请输入正确的站点数量'
-    ];
-  }
+    public function attributes()
+    {
+        return ['title' => '套餐名称', 'site_num' => '站点数量', 'days' => '可用天数'];
+    }
 }

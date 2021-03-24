@@ -1,8 +1,5 @@
 {
-    "A": true,
-    "B": true,
-    "Shop": true,
     "Edu": true,
-    "Learn": true,
-    "Migrate": true
+    "Fa": true,
+    "Article": true
 }

@@ -2,47 +2,41 @@
 
 namespace App\Policies;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
+use UserService;
+use Auth;
 
+/**
+ * 用户
+ * @package App\Policies
+ */
 class UserPolicy
 {
     use HandlesAuthorization;
-
-    public function before(User $user)
-    {
-        if ($user->is_super_admin) {
-            return true;
-        }
-    }
 
     public function viewAny(User $user)
     {
         return true;
     }
 
-    public function view(User $user, User $model)
+    public function view(?User $user)
     {
+        return true;
     }
 
     public function create(User $user)
     {
+        return true;
     }
 
     public function update(User $user, User $model)
     {
+        return  $user['id'] == $model['id'];
     }
 
     public function delete(User $user, User $model)
     {
-    }
-
-    public function restore(User $user, User $model)
-    {
-    }
-
-    public function forceDelete(User $user, User $model)
-    {
+        return UserService::isSuperAdmin($user);
     }
 }

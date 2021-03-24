@@ -2,93 +2,83 @@
 
 use App\Models\Module;
 use App\Models\Site;
-use App\Services\AccessService;
-use App\Services\ModuleService;
-use App\Services\SiteService;
-use App\Services\UserService;
-use App\User;
-use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Support\Facades\Route;
+use Facades\App\Services\Site\SiteService;
+use Facades\App\Services\Module\ModuleService;
 
-/**
- * 超级管理员
- * @return bool
- */
-function isSuperAdmin(): bool
-{
-  return app(UserService::class)->isSuperAdmin();
-}
-
-/**
- * 根据路由生成类样式名
- * @return string|null
- */
-function route_class()
-{
-  return str_replace('.', '-', Route::currentRouteName());
+if (!function_exists('site')) {
+    /**
+     * 站点缓存与获取
+     * @param mixed|null $name
+     * @return mixed
+     */
+    function site($name = null)
+    {
+        if (is_string($name)) {
+            $site = SiteService::cache();
+            return $site[$name] ?? null;
+        }
+        return SiteService::cache();
+    }
 }
 
-/**
- * 缓存或获取站点模型
- * @param mixed|null $site
- * @return mixed
- * @throws BindingResolutionException
- */
-function site($site = null)
-{
-  return app(SiteService::class)->site($site);
-}
-/**
- * 缓存模块
- * 主要用于后台模块管理
- * @return \App\Models\Module
- */
-function module(Module $module = null)
-{
-  return app(ModuleService::class)->module($module);
-}
-/**
- * 检测模块访问权限
- * @param string $permission 权限标识
- * @return bool
- */
-function access(string $permission, ?Site $site, ?User $user): bool
-{
-  return app(AccessService::class)->check($permission, $site, $user);
+if (!function_exists('module')) {
+    /**
+     * 获取模块数据
+     * @param mixed|null $name
+     * @return mixed
+     */
+    function module($name = null)
+    {
+        if (is_string($name)) {
+            $module = ModuleService::cache();
+            return $module[$name] ?? null;
+        }
+        return ModuleService::cache();
+    }
 }
 
-/**
- * 表外键关联约束
- * @param \Illuminate\Database\Schema\Blueprint $table 迁移对象
- * @param string $tableName 关联表
- * @param string $foreignKey 关联字段
- * @param string $comment 说明
- * @return void
- */
-function table_foreign(\Illuminate\Database\Schema\Blueprint $table, string $tableName, string $foreignKey, string $comment = ''): void
-{
-  $table->unsignedBigInteger($foreignKey)->nullable();
-  $table->foreign($foreignKey)->references('id')->on($tableName)->onDelete('cascade');
+if (!function_exists('access')) {
+    /**
+     * 权限验证
+     *
+     * @param string $name
+     * @return boolean
+     */
+    function access(string $name = null): bool
+    {
+        //超级管理员与站长检测
+        if (UserService::isMaster(site(), Auth::user())) {
+            return true;
+        }
+        //管理员检测
+        if ($name) {
+            return \PermissionService::access($name, Auth::user(), site(), module());
+        }
+        return false;
+    }
 }
 
-/**
- * 站点表关联
- * @param \Illuminate\Database\Schema\Blueprint $table 迁移对象
- * @return void
- */
-function table_foreign_site(\Illuminate\Database\Schema\Blueprint $table)
-{
-  $table->unsignedBigInteger('site_id')->comment('站点编号');
-  $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
+
+if (!function_exists('markdown')) {
+    /**
+     * 转换markdown
+     * @param string $content
+     * @return mixed
+     */
+    function markdown(string $content)
+    {
+        $Parsedown = new \Parsedown();
+        return $Parsedown->text($content);
+    }
 }
 
-/**
- * 用户表关联
- * @param \Illuminate\Database\Schema\Blueprint $table 迁移对象
- * @return void
- */
-function table_foreign_user(\Illuminate\Database\Schema\Blueprint $table)
-{
-  $table->unsignedBigInteger('user_id')->comment('用户编号');
-  $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+if (!function_exists('is_master')) {
+    /**
+     * 站长检测
+     * @return boolean
+     */
+    function is_master(): bool
+    {
+        return \UserService::isMaster(site(), \Auth::user());
+    }
 }

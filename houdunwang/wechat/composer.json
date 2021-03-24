@@ -1,0 +1,11 @@
+{
+    "name": "houdunwang/wechat",
+    "description": "微信公众号管理",
+    "authors": [
+        {
+            "name": "houdunren",
+            "email": "2300071698@qq.com"
+        }
+    ],
+    "require": {}
+}

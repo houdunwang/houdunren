@@ -2,31 +2,38 @@
 
 namespace App\Models;
 
-use App\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * 用户组
- * Class Group
+ * 会员组
  * @package App\Models
  */
 class Group extends Model
 {
-  protected $fillable = ['name', 'site_num', 'default'];
-  protected $casts = ['site_num' => 'integer', 'system' => 'boolean'];
+    use HasFactory;
 
-  /**
-   * 获取套餐
-   * @return mixed
-   */
-  public function package()
-  {
-    return $this->belongsToMany(Package::class, 'group_package');
-  }
+    protected $fillable = ['title', 'site_num', 'days'];
 
-  //用户多表关联
-  public function user()
-  {
-    return $this->belongsToMany(User::class, 'user_group');
-  }
+    /**
+     * 套餐列表
+     * @return BelongsToMany
+     */
+    public function packages()
+    {
+        return $this->belongsToMany(Package::class)->withTimestamps();
+    }
+
+    /**
+     * 可使用模块
+     * @return void
+     */
+    public function getModulesAttribute()
+    {
+        return $this->packages->load('modules')
+            ->mapWithKeys(function ($package) {
+                return $package->modules;
+            })->unique(fn ($module) => $module->id);
+    }
 }

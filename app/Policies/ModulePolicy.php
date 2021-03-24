@@ -3,68 +3,60 @@
 namespace App\Policies;
 
 use App\Models\Module;
-use App\User;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use UserService;
 
+/**
+ * 模块策略
+ * @package App\Policies
+ */
 class ModulePolicy
 {
-  use HandlesAuthorization;
+    use HandlesAuthorization;
 
-  public function before(User $user, $ability)
-  {
-    return (bool)$user->is_super_admin;
-  }
+    public function viewAny(User $user)
+    {
+        return true;
+    }
 
-  public function viewAny(User $user)
-  {
-  }
+    public function view(User $user, Module $module)
+    {
+        return true;
+    }
 
-  public function view(User $user, Module $module)
-  {
-  }
+    public function create(User $user)
+    {
+        return true;
+    }
 
-  public function create(User $user)
-  {
-  }
+    public function update(User $user, Module $module)
+    {
+        return true;
+    }
 
-  /**
-   * Determine whether the user can update the module.
-   *
-   * @param \App\User $user
-   * @param \App\Models\Module $module
-   * @return mixed
-   */
-  public function update(User $user, Module $module)
-  {
-    //
-  }
+    public function delete(User $user, Module $module)
+    {
+        return true;
+    }
 
-  public function delete(User $user, Module $module)
-  {
-    //
-  }
+    /**
+     * 安装模块
+     * @param User $user
+     * @return mixed
+     */
+    public function install(User $user)
+    {
+        return $user->isSuperAdmin;
+    }
 
-  /**
-   * Determine whether the user can restore the module.
-   *
-   * @param \App\User $user
-   * @param \App\Models\Module $module
-   * @return mixed
-   */
-  public function restore(User $user, Module $module)
-  {
-    //
-  }
-
-  /**
-   * Determine whether the user can permanently delete the module.
-   *
-   * @param \App\User $user
-   * @param \App\Models\Module $module
-   * @return mixed
-   */
-  public function forceDelete(User $user, Module $module)
-  {
-    //
-  }
+    /**
+     * 卸载模块
+     * @param User $user
+     * @return mixed
+     */
+    public function unInstall(User $user)
+    {
+        return $user->isSuperAdmin;
+    }
 }

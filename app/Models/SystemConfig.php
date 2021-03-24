@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * 系统配置
- * Class SystemConfig
  * @package App\Models
  */
 class SystemConfig extends Model
 {
-  protected $guarded = [];
-  protected $casts = ['config' => 'array'];
+    use HasFactory;
+    protected $fillable = ['config', 'copyright'];
+    protected $casts = ['config' => 'array'];
 }

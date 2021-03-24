@@ -4,23 +4,20 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-
+/**
+ * 会员组资源
+ * @package App\Http\Resources
+ */
 class GroupResource extends JsonResource
 {
-  /**
-   * Transform the resource into an array.
-   *
-   * @param \Illuminate\Http\Request $request
-   * @return array
-   */
-  public function toArray($request)
-  {
-    return [
-      'id' => $this->id,
-      'name' => $this->name,
-      'site_num' => $this->site_num,
-      'default' => $this->default,
-      'packages' => PackageResource::collection($this->package()->with('module')->get())
-    ];
-  }
+    public function toArray($request)
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'site_num' => $this->site_num,
+            'days' => $this->days,
+            'packages' => PackageResource::collection($this->whenLoaded('packages')),
+        ];
+    }
 }

@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 文件附件
- * Class Attachment
+ * 上传文件
+ * @package App\Models
  */
 class Attachment extends Model
 {
-  protected $fillable = ['site_id', 'user_id', 'path', 'name'];
+    protected $fillable = ['path', 'user_id', 'size', 'user_id', 'site_id', 'name', 'extension', 'type'];
+    protected $casts = ['site_id' => 'integer'];
 }

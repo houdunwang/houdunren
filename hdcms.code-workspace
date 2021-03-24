@@ -1,14 +1,24 @@
 {
   "folders": [
-    {
-      "path": "."
-    },
-    {
-      "path": "public/modules/Edu"
-    }
-  ],
+	{
+		"path": "."
+	},
+	{
+		"path": "houdunwang"
+	},
+	{
+		"path": "app/WeChat"
+	},
+	{
+		"path": "vue"
+	},
+	{
+		"path": "Modules/Article"
+	}
+],
   "settings": {
-    "liveServer.settings.multiRootWorkspaceName": "hdcms",
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+	"compile-hero.disable-compile-files-on-did-save-code": true,
+	"liveServer.settings.multiRootWorkspaceName": "hdcms"
   }
 }

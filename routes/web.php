@@ -1,34 +1,56 @@
 <?php
 
-use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\PayNotifyController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\WeChatLoginController;
+use App\Http\Controllers\WeChatBindController;
+use App\Models\WeChat;
+use App\WeChat\ApiController;
 
-Route::group(['namespace' => 'Common', 'prefix' => 'common'], function () {
-  Route::get('captcha', 'CaptchaController@make')->name('common.captcha');
-  Route::post('upload/avatar', 'UploadController@avatar')->middleware('auth');
-  Route::post('upload/{site?}', 'UploadController@store')->middleware('auth');
+use Houdunwang\WeChat\Qr;
+
+Route::get('a', function () {
+    // dd(\App\Models\Site::find(1)->modules->toArray());
+    return (new \Houdunwang\WeChat\WeChat)->getAllTypeCheckMethods();
+});
+//支付通知
+Route::group(['prefix' => 'pay/{module}', 'middleware' => ['module']], function () {
+    Route::any('alipay/return', [PayNotifyController::class, 'alipayReturn'])->name('pay.alipay.return');
+    Route::any('alipay/notify', [PayNotifyController::class, 'alipayNotify'])->name('pay.alipay.notify');
 });
 
-Route::group(['namespace' => 'Member'], function () {
-  Route::get('login', 'AccountController@show')->name('login');
-  Route::post('login', 'AccountController@login')->name('login');
-  Route::get('logout', 'AccountController@logout')->name('logout');
-  Route::get('register', 'AccountController@register')->name('register');
-  Route::post('register', 'AccountController@store')->name('register');
+//微信登录
+Route::group(['prefix' => 'wechat'], function () {
+    Route::get('login', [WeChatLoginController::class, 'login']);
+    Route::get('login/callback', [WeChatLoginController::class, 'loginCallback'])->name('wechat.login.callback');
+    //绑定微信
+    Route::get('bind', [WeChatBindController::class, 'bind']);
+    Route::get('bind/callback', [WeChatBindController::class, 'bindCallback'])->name('wechat.bind.callback');
 });
 
-Route::view('user{any}', 'account')->where('any', '.*');
-Route::view('member{any}', 'member/index')->where('any', '.*')->middleware(['front']);
-Route::view('site{any}', 'main')->where('any', '.*')->middleware('auth');
-Route::view('system{any}', 'main')->where('any', '.*')->middleware('auth');
-Route::view('admin', 'main')->where('any', '.*')->middleware('auth');
+//与微信服务器通信接口
+Route::any('wechat/api/{site}/{model}', [ApiController::class, 'handle'])->middleware(['site']);
 
-//前台
-Route::group(['middleware' => ['front'], 'namespace' => 'Front'], function () {
-  Route::get('/', 'HomeController@index');
-  Route::get('home', 'HomeController@index');
-  //没有匹配路由时最后执行，主要是提升模块路由优先级
-  Route::fallback(function () {
-    return app(HomeController::class)->index();
-  });
+//退出登录
+Route::get('logout', function () {
+    Auth::logout();
+    return redirect('/');
+});
+
+//网站主页
+Route::get('/', function () {
+    $name = module()['name'];
+    $class  = "Modules\\{$name}\Http\Controllers\HomeController";
+    return app($class)->home();
+})->middleware(['module']);
+
+//会员中心
+Route::get('{app}/{path?}', function () {
+    return view('app');
+})->where('app', "(member|login|register|forget)")->where('path', '(.*?)')->middleware(['module']);
+
+//后备路由
+Route::fallback(function () {
+    return view('app');
 });

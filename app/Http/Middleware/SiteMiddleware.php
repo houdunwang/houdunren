@@ -2,37 +2,26 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\UserService;
+use Illuminate\Http\Request;
 use App\Models\Site;
+use SiteService;
 use Closure;
 
 /**
- * 后台站点管理中间件
- * Class SiteMiddleware
+ * 站点中间件
+ * @package App\Http\Middleware
  */
 class SiteMiddleware
 {
-  public function handle($request, Closure $next, ...$role)
-  {
-    $site = site(request('site'));
-
-    if ($this->checkRole($role, $site) || isSuperAdmin()) {
-      return $next($request);
+    public function handle(Request $request, Closure $next)
+    {
+        if ($site = request('site')) {
+            $site = is_numeric($site) ? Site::find($site) : $site;
+            if (!($site instanceof Site)) {
+                abort(404, '站点不存在');
+            }
+            SiteService::cache($site);
+        }
+        return $next($request);
     }
-
-    abort(403, '你不是站点管理员或超级管理员');
-  }
-
-  /**
-   * 站点角色检测
-   * @param array $role
-   *
-   * @return bool
-   */
-  protected function checkRole(array $role, Site $site): bool
-  {
-    $user = auth()->user();
-    return isSuperAdmin() ||
-      app(UserService::class)->isRole($site, $user, $role);
-  }
 }

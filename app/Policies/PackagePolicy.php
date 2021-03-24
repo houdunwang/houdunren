@@ -3,64 +3,40 @@
 namespace App\Policies;
 
 use App\Models\Package;
-use App\User;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
+use UserService;
 
 /**
- * 套餐
- * Class PackagePolicy
+ * 套餐策略
  * @package App\Policies
  */
 class PackagePolicy
 {
-  use HandlesAuthorization;
+    use HandlesAuthorization;
 
-  public function before(User $user): bool
-  {
-    return isSuperAdmin();
-  }
+    public function viewAny(User $user)
+    {
+        return UserService::isSuperAdmin($user);
+    }
 
-  public function viewAny(User $user)
-  {
-  }
+    public function view(User $user, Package $package)
+    {
+        return UserService::isSuperAdmin($user);
+    }
 
-  public function view(User $user, Package $package)
-  {
-  }
+    public function create(User $user)
+    {
+        return UserService::isSuperAdmin($user);
+    }
 
-  public function create(User $user)
-  {
-  }
+    public function update(User $user, Package $package)
+    {
+        return UserService::isSuperAdmin($user);
+    }
 
-  public function update(User $user, Package $package)
-  {
-  }
-
-  public function delete(User $user, Package $package)
-  {
-  }
-
-  /**
-   * Determine whether the user can restore the package.
-   *
-   * @param \App\User $user
-   * @param \App\Models\Package $package
-   * @return mixed
-   */
-  public function restore(User $user, Package $package)
-  {
-  }
-
-  /**
-   * Determine whether the user can permanently delete the package.
-   *
-   * @param \App\User $user
-   * @param \App\Models\Package $package
-   * @return mixed
-   */
-  public function forceDelete(User $user, Package $package)
-  {
-    //
-  }
+    public function delete(User $user, Package $package)
+    {
+        return $package['id'] != 1 && UserService::isSuperAdmin($user);
+    }
 }

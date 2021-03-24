@@ -2,45 +2,26 @@
 
 namespace App\Http\Resources;
 
-use App\Services\AccessService;
-use App\Services\UserService;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 /**
- * 获取用户资源
+ * 用户资源
  * @package App\Http\Resources
  */
 class UserResource extends JsonResource
 {
-  public function toArray($request)
-  {
-    return array_merge(
-      parent::toArray($request),
-      [
-        'access' => $this->when(site(), $this->access()),
-        'is_admin' => $this->when(site(), $this->isAdmin())
-      ]
-    );
-  }
-  /**
-   * 站点权限列表
-   * @return mixed
-   * @throws BindingResolutionException
-   */
-  protected function access()
-  {
-    return app(AccessService::class)->getUserPermissionNames(site(), $this->resource);
-  }
-
-  /**
-   * 站点管理员检测
-   * @return mixed
-   * @throws BindingResolutionException
-   */
-  protected function isAdmin()
-  {
-    return app(UserService::class)->isAdmin(site(), $this->resource);
-  }
+    public function toArray($request)
+    {
+        return  [
+            'name' => $this->name ?? '盾友',
+            'avatar' => $this->icon,
+            'wechat' => $this->when($this->permissions['update'], $this->wechat),
+            'mobile' => $this->when($this->permissions['update'], $this->mobile),
+            'email' => $this->when($this->permissions['update'], $this->email),
+            'roles' => $this->whenLoaded('roles'),
+            'group' => new GroupResource($this->whenLoaded('group')),
+            'is_following' => Auth::check() && Auth::user()->isFollow($this->resource),
+        ] + parent::toArray($request);
+    }
 }

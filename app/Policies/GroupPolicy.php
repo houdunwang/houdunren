@@ -3,97 +3,40 @@
 namespace App\Policies;
 
 use App\Models\Group;
-use App\User;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
+use UserService;
 
 /**
- * 用户组
- * Class GroupPolicy
+ * 会员组策略
  * @package App\Policies
  */
 class GroupPolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user)
-    {
-        return isSuperAdmin();
-    }
-
     public function viewAny(User $user)
     {
-        //
+        return UserService::isSuperAdmin($user);
     }
 
-    /**
-     * Determine whether the user can view the group.
-     *
-     * @param \App\User $user
-     * @param \App\Models\Group $group
-     * @return mixed
-     */
     public function view(User $user, Group $group)
     {
-        //
+        return UserService::isSuperAdmin($user);
     }
 
-    /**
-     * Determine whether the user can create groups.
-     *
-     * @param \App\User $user
-     * @return mixed
-     */
     public function create(User $user)
     {
-        //
+        return UserService::isSuperAdmin($user);
     }
 
-    /**
-     * Determine whether the user can update the group.
-     *
-     * @param \App\User $user
-     * @param \App\Models\Group $group
-     * @return mixed
-     */
     public function update(User $user, Group $group)
     {
-        //
+        return UserService::isSuperAdmin($user);
     }
 
-    /**
-     * Determine whether the user can delete the group.
-     *
-     * @param \App\User $user
-     * @param \App\Models\Group $group
-     * @return mixed
-     */
     public function delete(User $user, Group $group)
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the group.
-     *
-     * @param \App\User $user
-     * @param \App\Models\Group $group
-     * @return mixed
-     */
-    public function restore(User $user, Group $group)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the group.
-     *
-     * @param \App\User $user
-     * @param \App\Models\Group $group
-     * @return mixed
-     */
-    public function forceDelete(User $user, Group $group)
-    {
-        //
+        return $group['id'] != 1 && UserService::isSuperAdmin($user);
     }
 }

@@ -3,28 +3,27 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * 套餐管理
- * Class Package
+ * 套餐模型
  * @package App\Models
  */
 class Package extends Model
 {
-  protected $fillable = ['name', 'system'];
-  protected $casts = ['modules' => 'array', 'templates' => 'array', 'system' => 'boolean'];
+    protected $fillable = ['title'];
 
-  /**
-   * 套餐模块
-   * @return mixed
-   */
-  public function module()
-  {
-    return $this->belongsToMany(Module::class, 'module_package');
-  }
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class)->withTimestamps();
+    }
 
-  public function group()
-  {
-    return $this->belongsToMany(Group::class, 'group_package');
-  }
+    /**
+     * 模块关联
+     * @return BelongsToMany
+     */
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class)->withTimestamps();
+    }
 }

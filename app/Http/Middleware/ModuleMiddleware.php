@@ -2,55 +2,75 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\ModuleService;
-use App\Services\UserService;
+use Illuminate\Http\Request;
+use App\Models\Site;
+use SiteService;
 use Closure;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
+use ModuleService;
+use App\Models\Module;
 
 /**
- * 模块后台中间件
- * Class ModuleAuthMiddleware
+ * 模块中间件
+ * @package App\Http\Middleware
  */
 class ModuleMiddleware
 {
-  public function handle($request, Closure $next, string $access = null)
-  {
-    $this->loadSiteAndModule();
-    if ($this->checkRole($access)) {
-      return $next($request);
+    public function handle(Request $request, Closure $next)
+    {
+        $this->site();
+        $this->module();
+        //共享数据
+        view()->share('site', site());
+        view()->share('module', module());
+
+        return $next($request);
     }
-    abort(403, '你没有管理站点的权限');
-  }
 
-  /**
-   * 获取当前用户缓存的站点编号获取站点
-   * 并加载模块
-   * @return void
-   */
-  protected function loadSiteAndModule()
-  {
-    $name = Auth::id() . '-sid';
-    $sid =  request()->query('sid', Cache::get($name));
-    if (site($sid)) Cache::put($name, $sid);
+    /**
+     * 站点
+     * @return Site
+     * @throws BindingResolutionException
+     * @throws SuspiciousOperationException
+     * @throws ConflictingHeadersException
+     * @throws HttpException
+     * @throws NotFoundHttpException
+     */
+    protected function site(): Site
+    {
+        $site = request('site');
+        $site = is_numeric($site) ? Site::findOrFail($site) : $site;
+        $site = $site instanceof Site ? $site : SiteService::getByDomain();
+        if ($site instanceof Site) {
+            SiteService::cache($site);
+            return $site;
+        }
 
-    //本次请求模块
-    $module = app(ModuleService::class)->getModuleByUrl();
-    module($module);
-  }
+        abort(404, '站点不存在');
+    }
 
-  /**
-   * 角色验证
-   * @param mixed $site
-   *
-   * @return bool
-   */
-  protected function checkRole($access)
-  {
-    $isAdmin = app(UserService::class)->isRole(site(), auth()->user(), ['admin']);
-    if (isSuperAdmin() || $isAdmin)
-      return true;
+    /**
+     * 模块
+     * @return Module
+     * @throws BindingResolutionException
+     * @throws HttpException
+     * @throws NotFoundHttpException
+     */
+    protected function module(): Module
+    {
+        $module = request('module');
+        $module = is_numeric($module) ? Module::findOrFail($module) : $module;
+        if (!$module) {
+            $module = ModuleService::getByDomain() ?? site()->module;
+        }
+        if (!($module instanceof Module)) {
+            abort(404, '模块不存在');
+        }
+        //站点模块检测
+        if (ModuleService::siteHasModule(site(), $module)) {
+            ModuleService::cache($module);
+            return $module;
+        }
 
-    return $access && access($access, site(), auth()->user());
-  }
+        abort(404, '模块不存在');
+    }
 }

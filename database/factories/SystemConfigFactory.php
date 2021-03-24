@@ -1,12 +1,28 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\SystemConfig;
-use Faker\Generator as Faker;
+use App\Models\SystemConfig;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(SystemConfig::class, function (Faker $faker) {
-    return [
-        //
-    ];
-});
+class SystemConfigFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = SystemConfig::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            //
+        ];
+    }
+}

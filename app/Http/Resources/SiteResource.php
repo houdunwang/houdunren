@@ -2,29 +2,30 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\Member\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Auth;
+use SiteService;
 
+/**
+ * 站点资源
+ * @package App\Http\Resources
+ */
 class SiteResource extends JsonResource
 {
-  public $preserveKeys = true;
+    public function toArray($request)
+    {
+        return parent::toArray($request) + [
+            'config' => $this->when($this->isMaster(), $this->config),
+            'master' => new UserResource($this->whenLoaded('master')),
+        ];
+    }
 
-  public function toArray($request)
-  {
-    return [
-      'id' => $this->id,
-      'module_id' => $this->module_id,
-      'name' => $this->name,
-      'domain' => $this->domain,
-      'keyword' => $this->keyword,
-      'description' => $this->description,
-      'logo' => $this->logo,
-      'icp' => $this->icp,
-      'tel' => $this->tel,
-      'email' => $this->email,
-      'counter' => $this->counter,
-      'admin' => $this->admin()->with('group')->first(),
-      'created_at' => $this->created_at
-    ];
-  }
+    /**
+     * 站长检测
+     * @return bool
+     */
+    protected function isMaster(): bool
+    {
+        return Auth::check() && SiteService::isMaster($this->resource, Auth::user());
+    }
 }

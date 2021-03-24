@@ -1,0 +1,1 @@
+retource index blade
