@@ -43,7 +43,8 @@ class Site extends Model
     public function getSettingAttribute()
     {
         return [
-            'wechatweb_login' => $this->config['user']['wechatweb_login'] ?? false
+            'wechatweb_login' => $this->config['user']['wechatweb_login'] ?? false,
+            'base' => $this->config['base'] ?? []
         ];
     }
 

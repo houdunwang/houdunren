@@ -56,7 +56,7 @@
                             </el-dropdown-item>
                             <el-dropdown-item>
                                 <router-link :to="{ name: 'wechat.user.index', query: { sid: wechat.site_id, wid: wechat.id } }">
-                                    粉丝用户
+                                    粉丝管理
                                 </router-link>
                             </el-dropdown-item>
                         </el-dropdown-menu>

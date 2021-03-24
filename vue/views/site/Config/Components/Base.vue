@@ -15,7 +15,7 @@
         <el-form-item label="邮箱">
             <el-input v-model="form.base.email"></el-input>
         </el-form-item>
-        <el-form-item label="统计代码">
+        <el-form-item label="版权信息">
             <el-input type="textarea" v-model="form.base.copyright" rows="3"></el-input>
         </el-form-item>
     </el-card>

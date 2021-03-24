@@ -13,5 +13,7 @@ npm-debug.log
 yarn-error.log
 /public/attacments
 /public/attachments
+/public/faker
+/public/logs
 node_modules
 .DS_Store

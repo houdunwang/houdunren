@@ -13,7 +13,6 @@ class HomeController extends Controller
 {
     public function home()
     {
-        dd(module());
         return view('edu::app');
     }
 }

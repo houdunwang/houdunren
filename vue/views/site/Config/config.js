@@ -2,6 +2,7 @@ export default {
     base: {
         keywords: '',
         description: '',
+        copyright: '',
         icp: '',
         tel: '',
         email: ''
