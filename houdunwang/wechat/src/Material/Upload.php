@@ -12,21 +12,17 @@ trait Upload
 {
     /**
      * 添加素材
-     * 图片（image）、语音（voice）、视频（video）和缩略图（thumb）
-     * @param string $type 素材类型
-     * @param string $file 文件
-     * @param string $uploadType short临时素材，long永久素材
+     * @param array $data
      * @return mixed
      * @throws Exception
      */
-    public function add(string $type, string $file, string $uploadType, array $data = [])
+    public function add(array $data)
     {
         //临时或永久素材上传地址
-        $url = $uploadType == 'short' ? 'media/upload' : 'material/add_material';
-        $api = $this->api . "/{$url}?access_token=" . $this->token() . "&type=" . $type;
-        $response = Http::attach('media', file_get_contents($file), basename($file))->post($api, ['description' => json_encode($data, JSON_UNESCAPED_UNICODE)])->json();
-        // $response = Http::attach('media', file_get_contents($file), basename($file))
-        //     ->send('POST', $api, ['description' => json_encode($data, JSON_UNESCAPED_UNICODE)])->throw()->json();
+        $url = $data['duration'] == 'short' ? 'media/upload' : 'material/add_material';
+        $api = $this->api . "/{$url}?access_token=" . $this->token() . "&type=" . $data['type'];
+        $response = Http::attach('media', file_get_contents($data['file']), basename($data['file']))
+            ->post($api, ['description' => json_encode($data['description'] ?? [], JSON_UNESCAPED_UNICODE)])->json();
         return $this->return($response);
     }
 

@@ -103,8 +103,12 @@ Route::group(['middleware' => ['site', 'auth:sanctum']], function () {
     Route::put('site/{site}/wechat/{wechat}/menu', [WeChatMenuController::class, 'update']);
     Route::get('site/{site}/wechat/{wechat}/menu/push', [WeChatMenuController::class, 'push']);
     //粉丝
-    Route::get('user', [WeChatUserController::class, 'index']);
-    Route::get('user/sync', [WeChatUserController::class, 'sync']);
+    Route::get('site/{site}/wechat/{wechat}/user/sync', [WeChatUserController::class, 'sync']);
+    Route::get('site/{site}/wechat/{wechat}/user', [WeChatUserController::class, 'index']);
+    Route::post('site/{site}/wechat/{wechat}/user/{user}/remark', [WeChatUserController::class, 'remark']);
+    Route::get('site/{site}/wechat/{wechat}/user/{user}/black', [WeChatUserController::class, 'black']);
+    Route::get('site/{site}/wechat/{wechat}/sync/black', [WeChatUserController::class, 'syncBlack']);
+    Route::get('site/{site}/wechat/{wechat}/user/{user}/remove/black', [WeChatUserController::class, 'removeBlack']);
     //消息
     Route::get('site/{site}/wechat/{wechat}/message/{keyword}', [WeChatMessageController::class, 'getByKeyword']);
     Route::apiResource('site.wechat.message', WeChatMessageController::class);

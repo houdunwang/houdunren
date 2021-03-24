@@ -15155,27 +15155,17 @@
      */ 
         class UploadFacade {
                     /**
-         * 本地上传
-         *
-         * @return void 
-         * @static 
-         */ 
-        public static function local($file)
-        {
-                        /** @var \App\Services\Upload\UploadService $instance */
-                        $instance->local($file);
-        }
-                    /**
-         * 阿里云OSS上传
+         * 站点上传
          *
          * @param \App\Services\Upload\UploadedFile $file
-         * @return \App\Services\Upload\Attachment 
+         * @return mixed 
+         * @throws BindingResolutionException
          * @static 
          */ 
-        public static function oss($file)
+        public static function make($file)
         {
                         /** @var \App\Services\Upload\UploadService $instance */
-                        return $instance->oss($file);
+                        return $instance->make($file);
         }
          
     }
@@ -15271,31 +15261,6 @@
         {
                         /** @var \App\Services\WeChat\WeChatService $instance */
                         return $instance->saveUser($account);
-        }
-                    /**
-         * 保存微信规则
-         *
-         * @param string $type
-         * @param array $options
-         * @return void 
-         * @static 
-         */ 
-        public static function saveRule($type = 'text', $options = [])
-        {
-                        /** @var \App\Services\WeChat\WeChatService $instance */
-                        $instance->saveRule($type, $options);
-        }
-                    /**
-         * 检测关键词是否存在
-         *
-         * @param array $keyword
-         * @return void 
-         * @static 
-         */ 
-        public static function keywordIsExists($keyword)
-        {
-                        /** @var \App\Services\WeChat\WeChatService $instance */
-                        $instance->keywordIsExists($keyword);
         }
          
     }

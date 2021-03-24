@@ -3,7 +3,9 @@
 namespace Houdunwang\WeChat;
 
 use Houdunwang\WeChat\User\Auth;
+use Houdunwang\WeChat\User\Black;
 use Houdunwang\WeChat\User\Get;
+use Houdunwang\WeChat\User\Remark;
 use Houdunwang\WeChat\WeChat;
 
 /**
@@ -12,5 +14,5 @@ use Houdunwang\WeChat\WeChat;
  */
 class User extends WeChat
 {
-    use Get, Auth;
+    use Get, Auth, Remark, Black;
 }

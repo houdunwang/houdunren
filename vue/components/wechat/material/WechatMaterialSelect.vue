@@ -16,7 +16,7 @@
                 :show-type-button="$attrs['show-type-button']"
                 :show-duration-button="$attrs['show-duration-button']"
             >
-                <el-button type="primary" size="mini" @click="select(material)">选择素材</el-button>
+                <el-button type="primary" size="mini" @click="select(material)">选择</el-button>
             </hd-wechat-material>
         </el-dialog>
     </div>

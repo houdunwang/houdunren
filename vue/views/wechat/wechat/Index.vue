@@ -21,10 +21,23 @@
             <el-table-column header-align="center" align="center" label="API" width="300" #default="{ row: wechat }">
                 {{ `${site.domain}/wechat/api/${site.id}/${wechat.id}` }}
             </el-table-column>
-            <el-table-column align="center" width="480" #default="{ row: wechat }">
+            <el-table-column align="center" width="420" #default="{ row: wechat }">
                 <el-button-group size="small" class="flex">
                     <el-dropdown>
-                        <el-button size="small" type="warning">基本功能<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
+                        <el-button size="small" type="success">公众号管理<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.wechat.edit', query: { sid: site.id, id: wechat.id } }" href="#" type="primary" size="small">
+                                    编辑
+                                </router-link>
+                            </el-dropdown-item>
+                            <el-dropdown-item>
+                                <a href="#" size="small" @click.prevent="del(wechat)">删除</a>
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                    <el-dropdown>
+                        <el-button size="small" type="primary">基本功能<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
                                 <router-link :to="{ name: 'wechat.default.index', query: { sid: wechat.site_id, wid: wechat.id } }">
@@ -41,26 +54,10 @@
                                     二维码
                                 </router-link>
                             </el-dropdown-item>
-                        </el-dropdown-menu>
-                    </el-dropdown>
-                    <el-dropdown>
-                        <el-button size="small" type="primary">公众号管理<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
-                        <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
-                                <router-link :to="{ name: 'wechat.wechat.edit', query: { sid: site.id, id: wechat.id } }" href="#" type="primary" size="small">
-                                    编辑
+                                <router-link :to="{ name: 'wechat.user.index', query: { sid: wechat.site_id, wid: wechat.id } }">
+                                    粉丝用户
                                 </router-link>
-                            </el-dropdown-item>
-                            <el-dropdown-item>
-                                <a href="#" size="small" @click.prevent="del(wechat)">删除</a>
-                            </el-dropdown-item>
-                        </el-dropdown-menu>
-                    </el-dropdown>
-                    <el-dropdown>
-                        <el-button size="small" type="success"> 粉丝<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
-                        <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item @click="sync(wechat)">
-                                同步粉丝
                             </el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
@@ -160,16 +157,6 @@ export default {
                     this.wechats.splice(this.wechats.indexOf(wechat), 1)
                 })
                 .catch(() => {})
-        },
-        //同步粉丝
-        async sync(wechat, nextOpenid = '') {
-            this.isSync = true
-            this.$message('粉丝同步中...')
-            const response = await axios.get(`site/${this.site.id}/wechat/${wechat.id}/user/sync?next_openid=${nextOpenid}`)
-            if (response.data.next_openid) {
-                this.sync(wechat, response.data.next_openid)
-            }
-            this.isSync = false
         }
     }
 }

@@ -19,7 +19,7 @@ class WeChat extends Model
     ];
 
     /**
-     * 粉丝
+     * 粉丝关联
      * @return HasMany
      */
     public function users()

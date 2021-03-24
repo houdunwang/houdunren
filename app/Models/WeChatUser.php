@@ -13,7 +13,7 @@ class WeChatUser extends Model
 {
     protected $table = 'we_chat_users';
 
-    protected $fillable = ['user_id', 'site_id', 'openid', 'unionid', 'type', 'wechat_id', 'nickname', 'sex', 'city', 'country', 'province', 'language', 'headimgurl', 'subscribe_time', 'remark', 'groupid', 'tagid_list', 'subscribe_scene', 'qr_scene', 'qr_scene_str'];
+    protected $fillable = ['user_id', 'site_id', 'openid', 'unionid', 'type', 'wechat_id', 'nickname', 'sex', 'city', 'country', 'province', 'language', 'headimgurl', 'subscribe_time', 'remark', 'groupid', 'tagid_list', 'subscribe_scene', 'qr_scene', 'qr_scene_str', 'black'];
 
     protected $casts = [
         'tagid_list' => 'array',
@@ -22,6 +22,7 @@ class WeChatUser extends Model
         'sex' => 'integer',
         'user_id' => 'integer',
         'wechat_id' => 'integer',
+        'black' => 'boolean',
     ];
 
     /**

@@ -10,6 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Attachment extends Model
 {
-    protected $fillable = ['path', 'user_id', 'size', 'user_id', 'site_id', 'name', 'extension'];
+    protected $fillable = ['path', 'user_id', 'size', 'user_id', 'site_id', 'name', 'extension', 'type'];
     protected $casts = ['site_id' => 'integer'];
 }

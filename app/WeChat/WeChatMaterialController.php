@@ -10,6 +10,9 @@ use App\Models\WeChat;
 use Houdunwang\WeChat\Material;
 use Illuminate\Http\Request;
 use App\Models\Site;
+use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use UploadService;
 
 /**
  * 素材管理
@@ -59,7 +62,7 @@ class WeChatMaterialController extends Controller
         if ($request->type == 'news') {
             $media = $package->addNews($request->content);
         } else {
-            $media = $package->add($request->type, $request->file, $request->duration, $request->content);
+            $media = $package->add($request->input());
         }
         $wechat->materials()->create($request->input() + ['media' => $media]);
         return $this->message('素材添加成功', new WeChatMaterialResource($material));
@@ -75,7 +78,7 @@ class WeChatMaterialController extends Controller
     public function update(WeChatMaterialRequest $request, Site $site, WeChat $wechat,  WeChatMaterial $material)
     {
         if ($request->file != $material->file) {
-            $media = app(Material::class)->init($wechat)->add($request->type, $request->file, $request->duration);
+            $media = app(Material::class)->init($wechat)->add($request->input());
             $material->media = $media;
         }
         $material->fill($request->except(['media']))->save();
@@ -84,16 +87,22 @@ class WeChatMaterialController extends Controller
 
     /**
      * 删除素材
+     * @param Site $site
+     * @param WeChat $wechat
      * @param WeChatMaterial $material
      * @return void
+     * @throws Exception
+     * @throws BindingResolutionException
      */
     public function destroy(Site $site, WeChat $wechat, WeChatMaterial $material)
     {
         try {
+            //持久素材删除
             if ($material->duration == 'long') {
                 app(Material::class)->init($wechat)->del($material->media['media_id']);
             }
         } finally {
+            UploadService::delete($material->file);
             $material->delete();
             return $this->message('素材删除成功');
         }

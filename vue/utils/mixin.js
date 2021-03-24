@@ -13,6 +13,12 @@ const mixin = {
         router(name, params = {}) {
             router.push({ name, params })
         },
+        route(name) {
+            return this.$route.params[name]
+        },
+        query(name) {
+            return this.$route.query[name]
+        },
         errors(name) {
             return store.getters.errors(name)
         },

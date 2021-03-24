@@ -37,7 +37,7 @@ class UploadService
     protected function local(UploadedFile $file)
     {
         $path =  $file->store(date('Ym'), 'attachment');
-        return $this->save($file, url("/attachments/{$path}"));
+        return $this->save($file, url("/attachments/{$path}"), 'local');
     }
 
     /**
@@ -50,7 +50,7 @@ class UploadService
         $object = Auth::id() . '-' . date('Ymdhis') . '.' . $file->extension();
         $ossClient = new OssClient(config('site.aliyun.accessKeyId'), config('site.aliyun.accessKeySecret'), config('site.upload.oss.endpoint'));
         $info = $ossClient->uploadFile(config('site.upload.oss.bucket'), $object, $file->path());
-        return $this->save($file, $info['oss-request-url']);
+        return $this->save($file, $info['oss-request-url'], 'oss');
     }
 
     /**
@@ -59,7 +59,7 @@ class UploadService
      * @param string $path
      * @return Attachment
      */
-    protected function save(UploadedFile $file, string $path): Attachment
+    protected function save(UploadedFile $file, string $path, string $type = null): Attachment
     {
         $realFile = $file->getRealPath();
         return Attachment::create([
@@ -68,8 +68,23 @@ class UploadService
             'user_id' => Auth::id(),
             'module_id' => module('id'),
             'size' => filesize($realFile),
+            'type' => $type,
             'name' => $file->getClientOriginalName(),
             'extension' => $file->extension(),
         ]);
+    }
+
+    /**
+     * 删除文章
+     * @param string $path
+     * @return void
+     */
+    public function delete(string $path)
+    {
+        $attachment = Attachment::where('path', $path)->first();
+        if ($attachment) {
+            //todo 删除oss
+            $attachment->delete();
+        }
     }
 }

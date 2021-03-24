@@ -16,11 +16,11 @@
                         <hd-error name="duration" />
                     </el-form-item>
                     <el-form-item label="视频标题">
-                        <el-input v-model="form.content.title"></el-input>
+                        <el-input v-model="form.description.title"></el-input>
                         <hd-error name="content.title" />
                     </el-form-item>
                     <el-form-item label="视频描述">
-                        <el-input v-model="form.content.introduction"></el-input>
+                        <el-input v-model="form.description.introduction"></el-input>
                         <hd-error name="title" />
                     </el-form-item>
                     <el-form-item label="视频文件">
@@ -43,7 +43,7 @@ const form = {
     duration: 'short',
     type: 'video',
     file: '',
-    content: {
+    description: {
         title: '',
         introduction: ''
     }
