@@ -23,7 +23,7 @@ class ContentController extends Controller
 
     public function index()
     {
-        $contents = Content::where('site_id', SID)->paginate(15);
+        $contents = Content::where('site_id', site('id'))->paginate(15);
         return ContentResource::collection($contents);
     }
 
@@ -37,7 +37,7 @@ class ContentController extends Controller
         DB::beginTransaction();
         $this->authorize('create', $content);
         $content->fill($request->except('tags'));
-        $content->site_id = SID;
+        $content->site_id = site('id');
         $content->user_id = Auth::id();
         $content->save();
         //保存标签
@@ -51,7 +51,7 @@ class ContentController extends Controller
         DB::beginTransaction();
         $this->authorize('update', $content);
         $content->fill($request->except('tags'));
-        $content->site_id = SID;
+        $content->site_id = site('id');
         $content->user_id = Auth::id();
         $content->save();
         //保存标签

@@ -3,7 +3,7 @@
         <hd-tab :tabs="tabs" />
         <el-alert effect="light" closable> 正在管理【{{ site.title }}】站点的公众号 </el-alert>
 
-        <el-table :data="wechats" style="width: 100%" border v-loading="loading">
+        <el-table :data="wechats" style="width: 100%" border v-loading="loading" class="mt-3">
             <el-table-column prop="id" label="编号" width="100"> </el-table-column>
             <el-table-column prop="title" label="公众号名称"> </el-table-column>
             <el-table-column prop="name" label="微信号"> </el-table-column>
@@ -26,6 +26,11 @@
                     <el-dropdown>
                         <el-button size="small" type="warning">基本功能<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
                         <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.default.index', query: { sid: wechat.site_id, wid: wechat.id } }">
+                                    默认消息
+                                </router-link>
+                            </el-dropdown-item>
                             <el-dropdown-item>
                                 <router-link :to="{ name: 'wechat.menu.index', query: { sid: wechat.site_id, wid: wechat.id } }">
                                     菜单设置
@@ -85,6 +90,11 @@
                             <el-dropdown-item>
                                 <router-link :to="{ name: 'wechat.message.index', query: { sid: site.id, wid: wechat.id, type: 'video' } }">
                                     视频消息
+                                </router-link>
+                            </el-dropdown-item>
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.message.index', query: { sid: site.id, wid: wechat.id, type: 'module' } }">
+                                    模块消息
                                 </router-link>
                             </el-dropdown-item>
                         </el-dropdown-menu>

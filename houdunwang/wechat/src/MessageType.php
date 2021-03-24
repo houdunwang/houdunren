@@ -14,4 +14,19 @@ use Log;
 class MessageType
 {
     use Base, Button, Event;
+
+    /**
+     * 获取所有类型检测方法
+     * @return array
+     */
+    final public function getAllTypeCheckMethods(): array
+    {
+        $methods = [];
+        foreach (get_class_methods(self::class) as $method) {
+            if (preg_match("/^is/", $method)) {
+                array_push($methods, $method);
+            }
+        }
+        return $methods;
+    }
 }

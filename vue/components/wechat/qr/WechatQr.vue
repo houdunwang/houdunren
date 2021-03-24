@@ -1,5 +1,10 @@
 <template>
     <div>
+        <el-alert type="info" class="mb-3">
+            <ul>
+                <li>因为微信服务器不允许删除素材，所以删除素材只是从网站数据库中删除</li>
+            </ul>
+        </el-alert>
         <el-table :data="qrs.data" border stripe v-loading="loading">
             <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label" :width="col.width"> </el-table-column>
             <el-table-column label="类型" #default="{row:qr}">
@@ -13,12 +18,12 @@
                         slot="reference"
                         :src="`https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${qr.content.ticket}`"
                         fit="cover"
-                        class="w-10 h-10"
+                        class="w-10 h-10 align-middle"
                     ></el-image>
                 </el-popover>
             </el-table-column>
             <el-table-column prop="scene_type" label="场景类型" #default="{row:qr}">
-                <span v-if="qr.scene_type == 'id'">整数</span>
+                <span v-if="qr.scene_type == 'scene_id'">整数</span>
                 <span v-else>字符串</span>
             </el-table-column>
             <el-table-column prop="scene_value" label="场景值"> </el-table-column>

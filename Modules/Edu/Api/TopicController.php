@@ -43,7 +43,7 @@ class TopicController extends Controller
      */
     public function index(Request $request)
     {
-        $topics = Topic::search($request->query('w'))->where('site_id', SID)->latest()->with('user')->paginate(10);
+        $topics = Topic::search($request->query('w'))->where('site_id', site('id'))->latest()->with('user')->paginate(10);
         return TopicResource::collection($topics);
     }
 
@@ -131,7 +131,7 @@ class TopicController extends Controller
      */
     public function recommendList()
     {
-        $topics = Topic::where('site_id', SID)->where('recommend', 1)->with('user')->latest()->get();
+        $topics = Topic::where('site_id', site('id'))->where('recommend', 1)->with('user')->latest()->get();
         return TopicResource::collection($topics);
     }
 }

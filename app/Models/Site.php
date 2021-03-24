@@ -60,7 +60,7 @@ class Site extends Model
      * 默认模块
      * @return BelongsTo
      */
-    public function modules()
+    public function getModulesAttribute()
     {
         return $this->master->group->modules;
     }

@@ -19,7 +19,7 @@ class CommentChannel extends DatabaseChannel
             'data' => $this->getData($notifiable, $notification),
             'read_at' => null,
             //自定义字段
-            'site_id' => SID,
+            'site_id' => site('id'),
             'module_id' => MID,
         ];
     }

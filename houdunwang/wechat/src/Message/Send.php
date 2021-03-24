@@ -14,7 +14,7 @@ trait Send
      * @param string $content
      * @return string
      */
-    public function text(string $content)
+    final public function text(string $content)
     {
         $xml = <<<php
         <xml>
@@ -34,7 +34,7 @@ php;
      * @param array $content
      * @return string
      */
-    public function image(array $content)
+    final public function image(array $content)
     {
         $xml = <<<php
         <xml>
@@ -55,7 +55,7 @@ php;
      * @param array $content
      * @return string
      */
-    public function voice(array $content)
+    final public function voice(array $content)
     {
         $xml = <<<php
         <xml>
@@ -76,7 +76,7 @@ php;
      * @param array $content
      * @return string
      */
-    public function music(array $content)
+    final public function music(array $content)
     {
         $xml = <<<php
         <xml>
@@ -101,7 +101,7 @@ php;
      * @param array $content
      * @return string
      */
-    public function video(array $content)
+    final public function video(array $content)
     {
         $xml = <<<php
         <xml>
@@ -126,7 +126,7 @@ php;
      * @param array $data
      * @return string
      */
-    public function news(array $data)
+    final public function news(array $data)
     {
         $xml = <<<php
         <xml>

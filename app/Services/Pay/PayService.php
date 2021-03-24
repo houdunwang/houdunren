@@ -16,7 +16,7 @@ class PayService
      */
     public function sn()
     {
-        return 'S' . SID . '-U' . Auth::id() . '-' . date('Ymdhis');
+        return 'S' . site('id') . '-U' . Auth::id() . '-' . date('Ymdhis');
     }
 
     /**

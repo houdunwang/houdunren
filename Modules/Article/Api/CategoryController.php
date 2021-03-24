@@ -35,7 +35,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categorys = Category::where('site_id', SID)->orderBy('path', 'asc')->with(['user', 'model'])->get();
+        $categorys = Category::where('site_id', site('id'))->orderBy('path', 'asc')->with(['user', 'model'])->get();
         return CategoryResource::collection($categorys);
     }
 

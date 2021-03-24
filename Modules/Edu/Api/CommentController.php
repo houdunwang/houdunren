@@ -47,7 +47,7 @@ class CommentController extends Controller
     public function topicSend(CommentRequest $request, Site $site, Topic $topic)
     {
         $comment = $topic->comments()->create($request->input() + [
-            'site_id' => SID,
+            'site_id' => site('id'),
             'user_id' => Auth::id()
         ]);
         if (Auth::id() != $topic->user->id) {
@@ -78,7 +78,7 @@ class CommentController extends Controller
     public function videoSend(CommentRequest $request, Site $site, Video $video)
     {
         $comment = $video->comments()->create($request->input() + [
-            'site_id' => SID,
+            'site_id' => site('id'),
             'user_id' => Auth::id()
         ]);
         if (Auth::id() != $video->lesson->user->id) {

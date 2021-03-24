@@ -38,8 +38,8 @@ class WePay
     public function init()
     {
         $config =  [
-            'cert_client' => base_path('Modules') . '/' . module()['name'] . '/cert/' . SID . '/apiclient_cert.pem', // optional，退款等情况时用到
-            'cert_key' => base_path('Modules') . '/' . module()['name'] . '/cert/' . SID . '/apiclient_key.pem', // optional，退款等情况时用到
+            'cert_client' => base_path('Modules') . '/' . module()['name'] . '/cert/' . site('id') . '/apiclient_cert.pem', // optional，退款等情况时用到
+            'cert_key' => base_path('Modules') . '/' . module()['name'] . '/cert/' . site('id') . '/apiclient_key.pem', // optional，退款等情况时用到
             'notify_url' => route('pay.notify.notify', [MID, 'wepay']),
         ] + config('site.wepay');
 

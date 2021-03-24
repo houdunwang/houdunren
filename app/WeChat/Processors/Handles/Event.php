@@ -17,7 +17,7 @@ use Log;
 class Event extends Processor
 {
     //事件处理集
-    protected $processes = ['isSubscribeEvent', 'isScanEvent'];
+    protected $processes = ['isSubscribeEvent'];
 
     public function handle()
     {
@@ -42,14 +42,6 @@ class Event extends Processor
             $account = app(User::class)->getByOpenid($this->message->FromUserName);
             //保存到网站数据库
             WeChatService::saveUser($account + ['wechat_id' => $this->model->id]);
-            return $this->message->text($this->model->welcome ?? '感谢您的关注');
-        }
-    }
-
-    protected function isScanEvent()
-    {
-        if ($this->message->isScanEvent()) {
-            Log::info($this->message->message(null, true));
             return $this->message->text($this->model->welcome ?? '感谢您的关注');
         }
     }

@@ -59,7 +59,7 @@ class SignController extends Controller
     public function store(SignRequest $request, Site $site, Sign $sign)
     {
         $sign->fill($request->input());
-        $sign->site_id = SID;
+        $sign->site_id = site('id');
         $sign->user_id = Auth::id();
         $sign->save();
         ActivityService::log($sign);

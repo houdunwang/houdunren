@@ -7,4 +7,13 @@ return [
     'author' => '向军老师',
     'icon' => 'fas fa-futbol',
     'front' => true,
+    'wechat' => [
+        'subscribe' => [
+            'isTextMessage',
+            'isSubscribeEvent',
+            'isScanEvent',
+            'isImageMessage',
+            'isButtonPicSysPhoto'
+        ]
+    ]
 ];

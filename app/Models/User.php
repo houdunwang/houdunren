@@ -180,6 +180,6 @@ class User extends Authenticatable
      */
     public function siteWechatUser()
     {
-        return $this->hasOne(WeChatUser::class, 'user_id')->where('site_id', SID);
+        return $this->hasOne(WeChatUser::class, 'user_id')->where('site_id', site('id'));
     }
 }

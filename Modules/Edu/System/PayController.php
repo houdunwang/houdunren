@@ -32,7 +32,7 @@ class PayController extends Controller
         if (!$order['status']) {
             //更改会员周期
             if ($order['type'] == 'subscribe') {
-                $duration = Duration::where('site_id', SID)->where('user_id', $order['user_id'])->first();
+                $duration = Duration::where('site_id', site('id'))->where('user_id', $order['user_id'])->first();
                 $time = max(now(), $duration['end_time']);
                 $duration['end_time'] = $time->addMonths($order['month']);
                 $duration->save();
@@ -42,6 +42,6 @@ class PayController extends Controller
             $order['trade_no'] = $tradeNo;
             $order->save();
         }
-        return redirect('/Edu/site/' . SID . '/member/order');
+        return redirect('/Edu/site/' . site('id') . '/member/order');
     }
 }

@@ -41,7 +41,7 @@ class WeChatService
                 'name' => $account['nickname'] ?? null,
             ] + $account);
             //微信粉丝表
-            $wechatUser = WeChatUser::create($account + ['user_id' => $user['id'], 'site_id' => SID]);
+            $wechatUser = WeChatUser::create($account + ['user_id' => $user['id'], 'site_id' => site('id')]);
         }
         return $wechatUser->user;
     }

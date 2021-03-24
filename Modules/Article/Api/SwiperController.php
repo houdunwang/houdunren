@@ -23,7 +23,7 @@ class SwiperController extends Controller
 
     public function index()
     {
-        $swipers = Swiper::where('site_id', SID)->with('user')->get();
+        $swipers = Swiper::where('site_id', site('id'))->with('user')->get();
         return SwiperResource::collection($swipers);
     }
 
@@ -36,7 +36,7 @@ class SwiperController extends Controller
     {
         $this->authorize('create', $swiper);
         $swiper->fill($request->input());
-        $swiper->site_id = SID;
+        $swiper->site_id = site('id');
         $swiper->user_id = Auth::id();
         $swiper->save();
         return $this->message('幻灯片添加成功', $swiper);
@@ -46,7 +46,7 @@ class SwiperController extends Controller
     {
         $this->authorize('update', $swiper);
         $swiper->fill($request->input());
-        $swiper->site_id = SID;
+        $swiper->site_id = site('id');
         $swiper->user_id = Auth::id();
         $swiper->save();
         return $this->message('幻灯片更新成功', $swiper);

@@ -24,7 +24,7 @@ class MenuController extends Controller
 
     public function index()
     {
-        $menus = Menu::where('site_id', SID)->orderBy('rank', 'asc')->get();
+        $menus = Menu::where('site_id', site('id'))->orderBy('rank', 'asc')->get();
         return MenuResource::collection($menus);
     }
 
@@ -33,7 +33,7 @@ class MenuController extends Controller
         $menus = $request->menus;
         foreach ($menus as $index => $menu) {
             if ($menu['title'] && $menu['url']) {
-                Menu::updateOrCreate(['id' => $menu['id'] ?? 0], ['site_id' => SID, 'user_id' => Auth::id(), 'rank' => $index] + $menu);
+                Menu::updateOrCreate(['id' => $menu['id'] ?? 0], ['site_id' => site('id'), 'user_id' => Auth::id(), 'rank' => $index] + $menu);
             }
         }
         return $this->message('菜单更新成功');

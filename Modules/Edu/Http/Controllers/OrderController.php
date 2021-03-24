@@ -30,7 +30,7 @@ class OrderController extends Controller
         $sn = PayService::sn();
         //定单记录
         $order = Order::create([
-            'site_id' => SID,
+            'site_id' => site('id'),
             'user_id' => Auth::id(),
             'price' => $subscribe['price'],
             'subject' => $subscribe['title'],
@@ -38,9 +38,9 @@ class OrderController extends Controller
             'type' => 'subscribe', 'month' => $subscribe['month'], 'status' => 0
         ]);
         //初始会员套餐记录
-        if (!Duration::where('site_id', SID)->where('user_id', Auth::id())->exists()) {
+        if (!Duration::where('site_id', site('id'))->where('user_id', Auth::id())->exists()) {
             Duration::create(
-                ['site_id' => SID, 'user_id' => Auth::id(), 'begin_time' => now(), 'end_time' => now()]
+                ['site_id' => site('id'), 'user_id' => Auth::id(), 'begin_time' => now(), 'end_time' => now()]
             );
         }
         return $this->alipay($order);

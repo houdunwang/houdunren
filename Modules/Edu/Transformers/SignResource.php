@@ -16,8 +16,8 @@ class SignResource extends JsonResource
     {
         return [
             'user' => new UserResource($this->whenLoaded('user')),
-            'total_days' => Sign::where('site_id', SID)->where('user_id', $this->user->id)->count(),
-            'month_days' => Sign::where('site_id', SID)->where('user_id', $this->user->id)->whereYear('created_at', now())->whereMonth('created_at', now())->count()
+            'total_days' => Sign::where('site_id', site('id'))->where('user_id', $this->user->id)->count(),
+            'month_days' => Sign::where('site_id', site('id'))->where('user_id', $this->user->id)->whereYear('created_at', now())->whereMonth('created_at', now())->count()
         ] + parent::toArray($request);
     }
 }

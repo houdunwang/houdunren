@@ -12,6 +12,9 @@ class WeChatResource extends JsonResource
 {
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return parent::toArray($request) + [
+            'welcomeMessage' => $this->messages()->where('keyword', $this->welcome)->first(),
+            'defaultMessage' => $this->messages()->where('keyword', $this->default_message)->first(),
+        ];
     }
 }

@@ -11,6 +11,9 @@
 	},
 	{
 		"path": "vue"
+	},
+	{
+		"path": "Modules/Article"
 	}
 ],
   "settings": {

@@ -37,7 +37,6 @@ class SiteService
     {
         static $cache = null;
         if (is_null($site)) return $cache;
-        defined("SID") or define("SID", $site['id']);
         config('app.url', $site->domain);
         $this->initConfig($site);
         return $cache = $site;

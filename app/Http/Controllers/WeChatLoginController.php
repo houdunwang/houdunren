@@ -50,7 +50,7 @@ class WeChatLoginController extends Controller
                 'avatar' => $info->user['headimgurl'],
                 'name' => $info->user['nickname'],
             ] + $info->user);
-            $wechatUser = WeChatUser::create($info->user + ['user_id' => $user->id, 'site_id' => SID]);
+            $wechatUser = WeChatUser::create($info->user + ['user_id' => $user->id, 'site_id' => site('id')]);
         }
         Auth::login($wechatUser->user);
         return redirect()->intended('/');

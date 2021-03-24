@@ -25,7 +25,7 @@ class TagController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Tag::class);
-        $tags = Tag::where('site_id', SID)->get();
+        $tags = Tag::where('site_id', site('id'))->get();
         return $tags;
     }
 
@@ -41,7 +41,7 @@ class TagController extends Controller
         collect($request->input('tags'))->filter(function ($tag) {
             return trim($tag['title']) != '';
         })->map(function ($tag) {
-            Tag::create($tag + ['site_id' => SID, 'user_id' => Auth::id()]);
+            Tag::create($tag + ['site_id' => site('id'), 'user_id' => Auth::id()]);
         });
         return $this->message('标签保存成功');
     }

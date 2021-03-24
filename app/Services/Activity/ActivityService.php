@@ -40,7 +40,7 @@ class ActivityService
             ->performedOn($model)
             ->withProperties($properties)
             ->tap(function (Ac $activity) {
-                $activity->site_id = SID;
+                $activity->site_id = site('id');
                 $activity->module_id = MID;
             })
             ->log($description);
@@ -53,7 +53,7 @@ class ActivityService
      */
     public function user(User $user, $row = 10)
     {
-        return Activity::has('subject')->where('site_id', SID)->where('causer_id', $user['id'])->paginate($row);
+        return Activity::has('subject')->where('site_id', site('id'))->where('causer_id', $user['id'])->paginate($row);
     }
 
     /**
@@ -62,6 +62,6 @@ class ActivityService
      */
     public function all($row = 10)
     {
-        return Activity::has('subject')->where('site_id', SID)->latest('id')->paginate($row);
+        return Activity::has('subject')->where('site_id', site('id'))->latest('id')->paginate($row);
     }
 }

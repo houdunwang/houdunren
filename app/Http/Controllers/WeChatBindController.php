@@ -51,7 +51,7 @@ class WeChatBindController extends Controller
             session()->flash('message', '该微信已经绑定过');
             return redirect('/member/info/wechat');
         }
-        WeChatUser::create($info->user + ['user_id' => Auth::id(), 'site_id' => SID]);
+        WeChatUser::create($info->user + ['user_id' => Auth::id(), 'site_id' => site('id')]);
         return redirect('/member/info/wechat');
     }
 }

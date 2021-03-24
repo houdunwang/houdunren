@@ -22,7 +22,7 @@ class TagController extends Controller
 
     public function index()
     {
-        $tags = Tag::where('site_id', SID)->with('user')->get();
+        $tags = Tag::where('site_id', site('id'))->with('user')->get();
         return TagResource::collection($tags);
     }
 

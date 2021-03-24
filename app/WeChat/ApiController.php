@@ -6,11 +6,9 @@ use App\Http\Controllers\Controller;
 use Houdunwang\WeChat\Message;
 use App\Models\WeChat as Model;
 use App\Models\Site;
-use InvalidArgumentException;
-use Illuminate\Database\Eloquent\InvalidCastException;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Log;
-
+use SiteService;
 
 /**
  * 微信通信
@@ -18,36 +16,27 @@ use Log;
  */
 class ApiController extends Controller
 {
+    //微信模型
+    protected $model;
+    //消息处理模块
+    protected $message;
+
     /**
-     * 被动消息接口
+     * 微信接口
      * @param Site $site
      * @param Model $model
-     * @param Message $message
      * @return mixed
-     * @throws InvalidCastException
      * @throws BindingResolutionException
-     * @throws InvalidArgumentException
      */
-    public function handle(Site $site, Model $model, Message $message)
+    public function handle(Site $site, Model $model)
     {
-        //初始化微信服务
-        $message->init($model->toArray());
-        return $this->processor($model, $message);
+        SiteService::cache($site);
+        $this->model = $model;
+        //初始化微信消息模块
+        $this->message = app(Message::class)->init($model);
+        $this->subscribe();
+        return $this->processor();
     }
-
-    // /**
-    //  * 粉丝登录
-    //  * @param Model $model
-    //  * @param Message $message
-    //  * @return void
-    //  * @throws BindingResolutionException
-    //  * @throws RequestException
-    //  */
-    // protected function login(Model $model, Message $message)
-    // {
-    //     $account = app(User::class)->getByOpenid($message->FromUserName);
-    //     app(WeChatService::class)->saveUser($account + ['site_id' => SID, 'wechat_id' => $model->id]);
-    // }
 
     /**
      * 事件订阅处理
@@ -55,20 +44,43 @@ class ApiController extends Controller
      */
     protected function subscribe()
     {
+        $methods = $this->message->getAllTypeCheckMethods();
+        foreach ($methods as $method) {
+            return $this->callModuleSubscribeMethod($method);
+        }
     }
 
     /**
-     * 处理消息
+     * 调用模块订阅方法
+     * @param mixed $method
+     * @return void
+     */
+    protected function callModuleSubscribeMethod($method)
+    {
+        foreach (site()->modules as $module) {
+            $class = "Modules\\{$module->name}\System\Subscribe";
+            $subscribes = $module->config['wechat']['subscribe'] ?? [];
+            if (in_array($method, $subscribes) && class_exists($class)) {
+                $obj = new $class;
+                if (method_exists($obj, $method)) {
+                    $obj->$method();
+                }
+            }
+        }
+    }
+
+    /**
+     * 关键词消息处理
      * @param Model $model
      * @param Message $message
      * @return mixed
      */
-    protected function processor(Model $model, Message $message)
+    protected function processor()
     {
         $files = glob(__DIR__ . '/Processors/Handles/*.php');
         foreach ($files as $file) {
             $class = 'App\WeChat\Processors\Handles\\' . pathinfo($file)['filename'];
-            $processor = new $class($model, $message);
+            $processor = new $class($this->model, $this->message);
             if ($content = $processor->handle()) {
                 return $content;
             }

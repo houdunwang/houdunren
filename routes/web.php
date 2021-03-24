@@ -11,9 +11,8 @@ use App\WeChat\ApiController;
 use Houdunwang\WeChat\Qr;
 
 Route::get('a', function () {
-    $wechat = WeChat::find(1);
-    $res = app(Qr::class)->init($wechat)->create('QR_SCENE', ['scene_str' => json_encode(['a' => 'dfdf'], JSON_UNESCAPED_UNICODE)]);
-    return $res;
+    // dd(\App\Models\Site::find(1)->modules->toArray());
+    return (new \Houdunwang\WeChat\WeChat)->getAllTypeCheckMethods();
 });
 //支付通知
 Route::group(['prefix' => 'pay/{module}', 'middleware' => ['module']], function () {

@@ -74,7 +74,7 @@ html;
             $args = $this->getArgs($expression);
             return <<<html
             <?php
-                \$swiper = \Modules\Article\Entities\Swiper::where('site_id', SID)->find({$args['id']});
+                \$swiper = \Modules\Article\Entities\Swiper::where('site_id', site('id'))->find({$args['id']});
                 echo view('article::directives.swiper', ['swiper'=>\$swiper]);
             ?>
 html;

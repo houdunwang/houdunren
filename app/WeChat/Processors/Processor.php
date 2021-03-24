@@ -39,7 +39,8 @@ abstract class Processor
      */
     final protected function reply(?string $keyword)
     {
-        if ($message = $this->getReplyMessage($keyword)) {
+        $message = $this->model->messages()->where('keyword', $keyword)->first();
+        if ($message) {
             $action = $message->type;
             switch ($action) {
                 case 'text':
@@ -49,32 +50,23 @@ abstract class Processor
                 case 'video':
                 case 'news':
                     return $this->message->$action($message->content);
+                case 'module':
+                    return $this->moduleReply($message);
             }
         }
-        return $this->defaultMessage();
+        //默认消息
+        return $this->message->text($this->model['default_message'] ?? '您的消息我们已经收到');
     }
 
     /**
-     * 获取回复规则
-     * @param null|string $keyword 关键词
+     * 模块自行处理返回消息内容
+     * @param WeChatMessage $message
      * @return mixed
      * @throws BindingResolutionException
-     * @throws LogicException
      */
-    final protected function getReplyMessage(?string $keyword)
+    final protected function moduleReply(WeChatMessage $message)
     {
-        return WeChatMessage::where('wechat_id', $this->model->id)->where('keyword', $keyword)->first();
-    }
-
-    /**
-     * 默认回复消息
-     * @return mixed
-     * @throws BindingResolutionException
-     * @throws InvalidArgumentException
-     */
-    final protected function defaultMessage()
-    {
-        $message  = $this->model['default_message'] ?? '您的消息我们已经收到';
-        return $this->message->text($message);
+        $class = "Modules\\{$message->module->name}\System\Processor";
+        return app($class)->handle($message);
     }
 }
