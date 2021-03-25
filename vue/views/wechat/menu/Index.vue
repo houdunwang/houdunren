@@ -10,7 +10,7 @@ import tabs from './tabs'
 export default {
     data() {
         return {
-            tabs: tabs({ sid: this.$route.query.sid }),
+            tabs,
             wechat: {}
         }
     },

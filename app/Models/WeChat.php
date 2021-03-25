@@ -62,4 +62,13 @@ class WeChat extends Model
     {
         return $this->hasMany(WeChatQr::class, 'wechat_id');
     }
+
+    /**
+     * 群发消息
+     * @return HasMany
+     */
+    public function sendAllMessages()
+    {
+        return $this->hasMany(WeChatSendAll::class, 'wechat_id');
+    }
 }

@@ -54,14 +54,16 @@ class ModuleMiddleware
      */
     protected function module()
     {
-        $module = request('module');
-        $module = is_numeric($module) ? Module::findOrFail($module) : $module;
-        if (!$module) {
-            $module = ModuleService::getByDomain() ?? site()->module;
-        }
-        //站点模块检测
-        if (ModuleService::siteHasModule(site(), $module)) {
-            ModuleService::cache($module);
+        if (site()) {
+            $module = request('module');
+            $module = is_numeric($module) ? Module::findOrFail($module) : $module;
+            if (!$module) {
+                $module = ModuleService::getByDomain() ?? site()->module;
+            }
+            //站点模块检测
+            if (ModuleService::siteHasModule(site(), $module)) {
+                ModuleService::cache($module);
+            }
         }
     }
 }

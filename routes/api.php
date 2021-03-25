@@ -116,7 +116,7 @@ Route::group(['middleware' => ['site', 'auth:sanctum']], function () {
     //二维码
     Route::apiResource('site.wechat.qr', WeChatQrController::class);
     //群发消息
-    Route::post('site/{site}/wechat/{wechat}/sendall', [WeChatSendAllController::class, 'sendAll']);
+    Route::apiResource('site/{site}/wechat/{wechat}/sendall/message', WeChatSendAllController::class);
     //公众号
     Route::apiResource('site.wechat', WeChatController::class);
 });

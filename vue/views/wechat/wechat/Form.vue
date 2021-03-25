@@ -11,7 +11,7 @@
                     <hd-form-error name="title" />
                 </el-form-item>
                 <el-form-item label="TOKEN">
-                    <el-input v-model="form.token"></el-input>
+                    <el-input v-model="form.token" show-password></el-input>
                     <hd-form-error name="token" />
                 </el-form-item>
                 <el-form-item label="公众号介绍">
@@ -19,7 +19,7 @@
                     <hd-form-error name="introduce" />
                 </el-form-item>
                 <el-form-item label="微信号">
-                    <el-input v-model="form.name"></el-input>
+                    <el-input v-model="form.name" show-password></el-input>
                     <hd-form-error name="name" />
                 </el-form-item>
                 <el-form-item label="二维码">
@@ -34,15 +34,15 @@
                     <hd-form-error name="type" />
                 </el-form-item>
                 <el-form-item label="原始ID">
-                    <el-input v-model="form.wxid"></el-input>
+                    <el-input v-model="form.wxid" show-password></el-input>
                     <hd-form-error name="wxid" />
                 </el-form-item>
                 <el-form-item label="appid">
-                    <el-input v-model="form.appid"></el-input>
+                    <el-input v-model="form.appid" show-password></el-input>
                     <hd-form-error name="appid" />
                 </el-form-item>
                 <el-form-item label="appsecret">
-                    <el-input v-model="form.appsecret"></el-input>
+                    <el-input v-model="form.appsecret" show-password></el-input>
                     <hd-form-error name="appsecret" />
                 </el-form-item>
                 <el-form-item>

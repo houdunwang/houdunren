@@ -81,12 +81,12 @@ export default {
     methods: {
         async load(page = 1) {
             this.loading = true
-            this.qrs = await axios.get(`site/${this.wechat.site_id}/wechat/${this.$route.query.wid}/qr?module=${this.module}&page=${page}`)
+            this.qrs = await axios.get(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/qr?module=${this.module}&page=${page}`)
             this.loading = false
         },
         del(qr) {
             this.$confirm('确定删除吗?', '温馨提示').then(async _ => {
-                await axios.delete(`site/${this.wechat.site_id}/wechat/${this.$route.query.wid}/qr/${qr.id}`)
+                await axios.delete(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/qr/${qr.id}`)
                 this.load()
             })
         }
