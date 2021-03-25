@@ -13,7 +13,7 @@
                         @click="del(index)"
                     ></i>
                 </div>
-                <hd-error name="content" />
+                <hd-form-error name="content" />
                 <el-button size="mini" @click="add" class="mt-2">添加回复</el-button>
             </el-card>
         </el-form>

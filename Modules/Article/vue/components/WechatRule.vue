@@ -40,7 +40,7 @@
                 <error name="title" />
             </el-form-item>
             <el-form-item label="图片">
-                <image-upload v-model="form.preview" />
+                <hd-upload-image v-model="form.preview" />
                 <error name="title" />
             </el-form-item>
             <el-form-item label="内容">

@@ -17,7 +17,11 @@
                             <span @click="showWelcomeMessageDialog = true" class="text-gray-500 cursor-pointer">选择消息</span>
                         </template>
                     </el-input>
-                    <hd-wechat-message-select :wechat="form" v-if="form.id" :show.sync="showWelcomeMessageDialog" @select="selectWelcomeMessage" />
+                    <el-dialog title="选择关注欢迎消息" :visible.sync="showWelcomeMessageDialog" width="60%" :append-to-body="true">
+                        <hd-wechat-message :wechat="form" material-type="image" #default="{message}">
+                            <el-button type="primary" size="mini" @click="selectWelcomeMessage(message)">选择</el-button>
+                        </hd-wechat-message>
+                    </el-dialog>
                 </el-form-item>
                 <el-form-item label="默认回复消息">
                     <hd-wechat-message-preview :message="defaultMessage" v-if="defaultMessage" class="mb-1" />
@@ -26,7 +30,11 @@
                             <span @click="showDefaultMessageDialog = true" class="text-gray-500 cursor-pointer">选择消息</span>
                         </template>
                     </el-input>
-                    <hd-wechat-message-select :wechat="form" v-if="form.id" :show.sync="showDefaultMessageDialog" @select="selectDefaultMessage" />
+                    <el-dialog title="选择消息" :visible.sync="showDefaultMessageDialog" width="60%" :append-to-body="true">
+                        <hd-wechat-message :wechat="form" material-type="image" #default="{message}">
+                            <el-button type="primary" size="mini" @click="selectDefaultMessage(message)">选择</el-button>
+                        </hd-wechat-message>
+                    </el-dialog>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit" :disabled="isSubmit" v-loading="isSubmit">保存提交</el-button>
@@ -64,11 +72,13 @@ export default {
         selectWelcomeMessage(message) {
             this.form.welcome = message.keyword
             this.welcomeMessage = message
+            this.showWelcomeMessageDialog = false
         },
         //默认消息
         selectDefaultMessage(message) {
             this.form.default_message = message.keyword
             this.defaultMessage = message
+            this.showDefaultMessageDialog = false
         }
     }
 }

@@ -13,10 +13,10 @@
             </el-table-column>
             <el-table-column label="二维码" #default="{row:qr}">
                 <el-popover placement="top" width="200" trigger="hover">
-                    <el-image :src="`https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${qr.content.ticket}`" fit="cover"></el-image>
+                    <el-image :src="`https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${qr.response.ticket}`" fit="cover"></el-image>
                     <el-image
                         slot="reference"
-                        :src="`https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${qr.content.ticket}`"
+                        :src="`https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${qr.response.ticket}`"
                         fit="cover"
                         class="w-10 h-10 align-middle"
                     ></el-image>

@@ -60,11 +60,11 @@ class WeChatMaterialController extends Controller
         $package = app(Material::class)->init($wechat);
         // return $request->input();
         if ($request->type == 'news') {
-            $media = $package->addNews($request->content);
+            $response = $package->addNews($request->content);
         } else {
-            $media = $package->add($request->input());
+            $response = $package->add($request->input());
         }
-        $wechat->materials()->create($request->input() + ['media' => $media]);
+        $wechat->materials()->create($request->input() + ['response' => $response]);
         return $this->message('素材添加成功', new WeChatMaterialResource($material));
     }
 
@@ -78,10 +78,9 @@ class WeChatMaterialController extends Controller
     public function update(WeChatMaterialRequest $request, Site $site, WeChat $wechat,  WeChatMaterial $material)
     {
         if ($request->file != $material->file) {
-            $media = app(Material::class)->init($wechat)->add($request->input());
-            $material->media = $media;
+            $material->response = app(Material::class)->init($wechat)->add($request->input());
         }
-        $material->fill($request->except(['media']))->save();
+        $material->fill($request->except(['response']))->save();
         return $this->message('素材修改成功', new WeChatMaterialResource($material));
     }
 

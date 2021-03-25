@@ -22,7 +22,7 @@
                 </el-button-group>
             </el-table-column>
         </el-table>
-        <remark :fans="remarkUser" :show.sync="remarkDialogShow" />
+        <hd-wechat-user-remark :fans="remarkUser" :show.sync="remarkDialogShow" />
     </div>
 </template>
 
@@ -36,9 +36,7 @@ const columns = [
     { label: '省份', id: 'province' },
     { label: '城市', id: 'city' }
 ]
-import Remark from '../Remark'
 export default {
-    components: { Remark },
     props: ['users'],
     data() {
         return {

@@ -12,19 +12,19 @@
                 <div class="grid grid-cols-4 gap-3">
                     <el-form-item label="标题">
                         <el-input v-model="form.title" placeholder="请输入幻灯片的描述"></el-input>
-                        <hd-error name="title" />
+                        <hd-form-error name="title" />
                     </el-form-item>
                     <el-form-item label="宽度">
                         <el-input v-model="form.width" placeholder="请输入幻灯片宽度"></el-input>
-                        <hd-error name="width" />
+                        <hd-form-error name="width" />
                     </el-form-item>
                     <el-form-item label="高度">
                         <el-input v-model="form.height" placeholder="请输入幻灯片高度"></el-input>
-                        <hd-error name="height" />
+                        <hd-form-error name="height" />
                     </el-form-item>
                     <el-form-item label="过渡时间">
                         <el-input v-model="form.delay" placeholder="请输入幻灯片过渡时间"></el-input>
-                        <hd-error name="delay" />
+                        <hd-form-error name="delay" />
                     </el-form-item>
                 </div>
             </el-card>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="grid grid-cols-3 gap-5 mt-5">
                     <div v-for="(item, index) in form.items" :key="index" class="relative shadow-md p-3 box-border flex rounded-sm border border-gray-100">
-                        <hd-image v-model="item.img" :action="`/api/upload/site/${site.id}`" class="w-1/2" />
+                        <hd-upload-image v-model="item.img" :sid="site.id" class="w-1/2" />
                         <div class="w-1/2">
                             <!-- <el-form-item label="标题" label-width="50px">
                                 <el-input v-model="item.title" placeholder="幻灯片文字"></el-input>

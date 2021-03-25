@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Modules\Edu\Entities\Tag;
 use Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\User;
 
 /**
  * 课程
@@ -69,15 +71,11 @@ class Lesson extends Model
     }
 
     /**
-     * 按标签搜索
-     * @param [type] $query
-     * @param string $tag
-     * @return void
+     * 用户关联
+     * @return BelongsTo
      */
-    // public function scopeSearchByTag($query, string $tag)
-    // {
-    //     return $this->whereHas('tags', function (Builder $query) use ($tag) {
-    //         $query->where('title', 'like', "$tag%");
-    //     });
-    // }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

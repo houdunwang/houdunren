@@ -6,11 +6,11 @@
             </div>
             <el-form-item label="规则描述">
                 <el-input v-model="form.title"></el-input>
-                <hd-error name="title" />
+                <hd-form-error name="title" />
             </el-form-item>
             <el-form-item label="关键词">
                 <el-input v-model="form.keyword"></el-input>
-                <hd-error name="keyword" />
+                <hd-form-error name="keyword" />
             </el-form-item>
         </el-card>
     </el-form>

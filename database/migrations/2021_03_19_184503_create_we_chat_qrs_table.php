@@ -4,6 +4,10 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * 微信二维码
+ * @package
+ */
 class CreateWeChatQrsTable extends Migration
 {
     /**
@@ -21,7 +25,7 @@ class CreateWeChatQrsTable extends Migration
             $table->unsignedInteger('expire_seconds')->nullable()->comment('有效时间适用于临时二维码');
             $table->string('scene_type')->comment('场景类型');
             $table->string('scene_value')->comment('场景值');
-            $table->json('content')->nullable()->comment('微信响应数据');
+            $table->json('response')->nullable()->comment('微信响应数据');
             $table->timestamps();
         });
     }

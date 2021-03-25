@@ -29,18 +29,11 @@ export default {
     mixins: [Mixin(form)],
     data() {
         return {
-            materialDialogShow: false,
             modules: []
         }
     },
     async created() {
         this.modules = await axios.get(`/api/module/site/${this.wechat.site_id}`)
-    },
-    methods: {
-        selectMaterial(material) {
-            this.form.file = material.file
-            this.form.content.media_id = material.media.media_id
-        }
     }
 }
 </script>

@@ -13,7 +13,7 @@
                     <el-input v-model="form.copyright"></el-input>
                 </el-form-item>
                 <el-form-item label="后台标志">
-                    <hd-image v-model="form.logo" action="upload/local" />
+                    <hd-upload-image v-model="form.logo" />
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">保存提交</el-button>

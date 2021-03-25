@@ -4,14 +4,19 @@ export default form => ({
         return {
             isSubmit: false,
             form: _.cloneDeep(this.message || form),
-            dialogShow: this.show
+            //消息编辑dialog
+            dialogShow: this.show,
+            //选择素材dialog
+            materialDialogShow: false
         }
     },
     watch: {
+        //父组件props
         show(show) {
             this.dialogShow = show
             this.form = _.cloneDeep(this.message || form)
         },
+        //同步父组件状态
         dialogShow(state) {
             this.$emit('update:show', state)
         }
@@ -28,6 +33,12 @@ export default form => ({
                 .finally(_ => {
                     this.isSubmit = false
                 })
+        },
+        //选择素材
+        selectMaterial(material) {
+            this.form.file = material.file
+            this.form.content.media_id = material.response.media_id
+            this.materialDialogShow = false
         }
     }
 })

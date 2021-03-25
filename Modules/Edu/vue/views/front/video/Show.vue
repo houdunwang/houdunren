@@ -3,7 +3,7 @@
         <!-- 视频播放 -->
         <div v-if="loading == false">
             <div class="bg-gray-900" v-if="video.id && video.permissions.show">
-                <div class="container-xl" v-if="video.id && video.permissions.show">
+                <div class="container-xl">
                     <div id="mse" style="z-index:1000"></div>
                 </div>
             </div>
@@ -77,6 +77,10 @@
 import Player from 'xgplayer'
 export default {
     route: { path: `video/:id/show/:comment_id?`, meta: { auth: true } },
+    beforeRouteLeave(to, from, next) {
+        this.player.destroy(true)
+        next()
+    },
     data() {
         return {
             loading: true,
@@ -97,15 +101,25 @@ export default {
         }
     },
     watch: {
-        async $route(to) {
-            await this.load(to.params.id, true)
-        },
-        video(video) {
+        $route(to) {
+            this.load(to.params.id, true)
+            console.log(333333)
+        }
+    },
+    created() {
+        this.load(this.$route.params.id)
+    },
+    methods: {
+        async load(id) {
+            this.video = await this.axios.get(`video/${id}`)
+            this.lesson = this.video.lesson
+            this.loading = false
+
             if (this.player) this.player.destroy(true)
             setTimeout(() => {
                 this.player = new Player({
                     id: 'mse',
-                    url: video.path,
+                    url: this.video.path,
                     autoplay: this.player,
                     fluid: true,
                     poster: '/images/poster.jpeg',
@@ -116,16 +130,6 @@ export default {
                     document.documentElement.scroll({ top: 0, behavior: 'smooth' })
                 }
             })
-        }
-    },
-    async created() {
-        await this.load(this.$route.params.id)
-    },
-    methods: {
-        async load(id) {
-            this.video = await this.axios.get(`video/${id}`)
-            this.lesson = this.video.lesson
-            this.loading = false
         }
     }
 }

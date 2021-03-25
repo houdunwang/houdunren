@@ -6,26 +6,26 @@
                 <el-card shadow="nerver" :body-style="{ padding: '20px' }">
                     <el-form-item label="素材描述">
                         <el-input v-model="form.title"></el-input>
-                        <hd-error name="title" />
+                        <hd-form-error name="title" />
                     </el-form-item>
                     <el-form-item label="素材类型">
                         <el-radio-group v-model="form.duration" :disabled="!!form.id">
                             <el-radio label="short">临时素材</el-radio>
                             <el-radio label="long">永久素材</el-radio>
                         </el-radio-group>
-                        <hd-error name="duration" />
+                        <hd-form-error name="duration" />
                     </el-form-item>
                     <el-form-item label="视频标题">
                         <el-input v-model="form.description.title"></el-input>
-                        <hd-error name="content.title" />
+                        <hd-form-error name="content.title" />
                     </el-form-item>
                     <el-form-item label="视频描述">
                         <el-input v-model="form.description.introduction"></el-input>
-                        <hd-error name="title" />
+                        <hd-form-error name="title" />
                     </el-form-item>
                     <el-form-item label="视频文件">
                         <hd-upload-video v-model="form.file" :sid="wechat.site_id" />
-                        <hd-error name="file" />
+                        <hd-form-error name="file" />
                     </el-form-item>
                 </el-card>
             </el-form>

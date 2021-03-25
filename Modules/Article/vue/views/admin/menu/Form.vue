@@ -12,13 +12,13 @@
                                 <el-radio-button label="3">单文章</el-radio-button>
                                 <el-radio-button label="4">外部链接</el-radio-button>
                             </el-radio-group>
-                            <hd-error name="type" />
+                            <hd-form-error name="type" />
                         </el-form-item>
                         <el-form-item label="模型选择" v-if="form.type <= 2">
                             <el-select v-model="form.model_id" placeholder="请选择">
                                 <el-option v-for="model in models" :key="model.id" :label="model.title" :value="model.id"> </el-option>
                             </el-select>
-                            <hd-error name="model_id" />
+                            <hd-form-error name="model_id" />
                         </el-form-item>
                         <el-form-item label="父级栏目" v-if="form.type <= 2">
                             <el-select v-model="form.pid" placeholder="请选择">
@@ -34,32 +34,32 @@
                                     {{ category.title }}
                                 </el-option>
                             </el-select>
-                            <hd-error name="pid" />
+                            <hd-form-error name="pid" />
                         </el-form-item>
                         <el-form-item label="栏目名称">
                             <el-input v-model="form.title" placeholder="" size="normal" clearable></el-input>
-                            <hd-error name="title" />
+                            <hd-form-error name="title" />
                         </el-form-item>
 
                         <el-form-item label="关键词" v-if="form.type != 4">
                             <el-input v-model="form.keywords" placeholder="" size="normal" clearable></el-input>
-                            <hd-error name="keywords" />
+                            <hd-form-error name="keywords" />
                         </el-form-item>
                         <el-form-item label="栏目简介" v-if="form.type != 4">
                             <el-input type="textarea" v-model="form.description" placeholder="" size="normal" clearable></el-input>
-                            <hd-error name="description" />
+                            <hd-form-error name="description" />
                         </el-form-item>
                         <el-form-item label="跳转链接" v-if="form.type == 4">
                             <el-input v-model="form.url" placeholder="" size="normal" clearable></el-input>
-                            <hd-error name="url" />
+                            <hd-form-error name="url" />
                         </el-form-item>
                         <el-form-item label="预览图">
-                            <hd-image v-model="form.preview" :action="`/api/upload/site/${site.id}`" />
-                            <hd-error name="preview" />
+                            <hd-upload-image v-model="form.preview" :sid="site.id" />
+                            <hd-form-error name="preview" />
                         </el-form-item>
                         <el-form-item label="文章内容" v-if="form.type == 3">
                             <wang-editor v-model="form.content" />
-                            <hd-error name="content" />
+                            <hd-form-error name="content" />
                         </el-form-item>
                     </el-card>
                 </el-tab-pane>

@@ -14,9 +14,8 @@
                 </div>
                 <el-form-item label="描述">
                     <el-input v-model="form.title" placeholder="二维码用途描述"></el-input>
-                    <hd-error name="title" />
+                    <hd-form-error name="title" />
                 </el-form-item>
-
                 <el-form-item label="类型">
                     <el-radio-group v-model="form.type">
                         <el-radio label="QR_SCENE">临时二维码 </el-radio>
@@ -24,7 +23,7 @@
                     <el-radio-group v-model="form.type">
                         <el-radio label="QR_LIMIT_SCENE">永久二维码 </el-radio>
                     </el-radio-group>
-                    <hd-error name="type" />
+                    <hd-form-error name="type" />
                 </el-form-item>
             </el-card>
 
@@ -39,25 +38,25 @@
                     <el-radio-group v-model="form.scene_type">
                         <el-radio label="scene_str">字符串 </el-radio>
                     </el-radio-group>
-                    <hd-error name="scene_type" />
+                    <hd-form-error name="scene_type" />
                 </el-form-item>
 
                 <el-form-item label="有效时间" v-if="form.scene_type == 'scene_id' && form.type == 'QR_SCENE'">
                     <el-input placeholder="请输入有效时间" v-model="form.expire_seconds">
                         <template slot="append">秒</template>
                     </el-input>
-                    <hd-error name="expire_seconds" />
+                    <hd-form-error name="expire_seconds" />
                 </el-form-item>
 
                 <el-form-item label="场景数值" v-if="form.scene_type == 'scene_id'">
                     <el-input type="number" v-model="form.scene_value"></el-input>
-                    <hd-error name="scene_value" />
+                    <hd-form-error name="scene_value" />
                     <hd-tip>临时二维码时为32位非0整型，永久二维码时最大值为100000</hd-tip>
                 </el-form-item>
 
                 <el-form-item label="场景字符串" v-if="form.scene_type == 'scene_str'">
                     <el-input v-model="form.scene_value"></el-input>
-                    <hd-error name="scene_value" />
+                    <hd-form-error name="scene_value" />
                     <hd-tip>字符串类型，长度限制为1到64</hd-tip>
                 </el-form-item>
             </el-card>

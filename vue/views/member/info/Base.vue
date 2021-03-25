@@ -6,7 +6,7 @@
             </div>
             <el-form-item :label="field.label" v-for="(field, index) in fields" :key="index">
                 <el-input v-model="form[field.id]"></el-input>
-                <hd-error :name="field.id" />
+                <hd-form-error :name="field.id" />
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">保存提交</el-button>

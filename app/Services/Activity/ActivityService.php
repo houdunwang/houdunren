@@ -41,7 +41,7 @@ class ActivityService
             ->withProperties($properties)
             ->tap(function (Ac $activity) {
                 $activity->site_id = site('id');
-                $activity->module_id = MID;
+                $activity->module_id = module('id');
             })
             ->log($description);
     }

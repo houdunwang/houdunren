@@ -8,14 +8,12 @@
                 </div>
                 <div>
                     <el-image :src="form.file" fit="cover" v-if="form.file" class="w-60"></el-image>
-                    <hd-wechat-material-select
-                        :wechat="wechat"
-                        material-type="image"
-                        @select="selectMaterial"
-                        :show.sync="materialDialogShow"
-                        :show-type-button="false"
-                    />
-                    <el-button type="primary" size="mini" @click="materialDialogShow = true" class="mt-3">选择素材</el-button>
+                    <el-dialog title="选择素材" :visible.sync="materialDialogShow" width="60%" :append-to-body="true">
+                        <hd-wechat-material :wechat="wechat" material-type="image" #default="{material}">
+                            <el-button type="primary" size="mini" @click="selectMaterial(material)">选择</el-button>
+                        </hd-wechat-material>
+                    </el-dialog>
+                    <el-button type="primary" size="mini" @click="materialDialogShow = true" class="mt-3 block">选择素材</el-button>
                 </div>
             </el-card>
         </el-form>
@@ -36,12 +34,7 @@ export default {
             materialDialogShow: false
         }
     },
-    methods: {
-        selectMaterial(material) {
-            this.form.file = material.file
-            this.form.content.media_id = material.media.media_id
-        }
-    }
+    methods: {}
 }
 </script>
 

@@ -25,7 +25,7 @@
                                 required=""
                                 placeholder="你今天的心情或最想说的话"
                             />
-                            <hd-error name="content" />
+                            <hd-form-error name="content" />
                             <div class="mt-2 flex flex-wrap">
                                 <label
                                     v-for="(icon, i) in icons"

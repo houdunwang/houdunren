@@ -10,14 +10,12 @@
                     <audio controls preload="auto" class="relative outline-none w-60 h-10" v-if="form.file" style="background-color: #f3f3f3;">
                         <source :src="form.file" type="audio/mp3" />
                     </audio>
-                    <hd-wechat-material-select
-                        :wechat="wechat"
-                        material-type="voice"
-                        @select="selectMaterial"
-                        :show.sync="materialDialogShow"
-                        :show-type-button="false"
-                    />
-                    <el-button type="primary" size="mini" @click="materialDialogShow = true" class="mt-3">选择素材</el-button>
+                    <el-dialog title="选择素材" :visible.sync="materialDialogShow" width="60%" :append-to-body="true">
+                        <hd-wechat-material :wechat="wechat" material-type="voice" #default="{material}">
+                            <el-button type="primary" size="mini" @click="selectMaterial(material)">选择</el-button>
+                        </hd-wechat-material>
+                    </el-dialog>
+                    <el-button type="primary" size="mini" @click="materialDialogShow = true" class="mt-3 block">选择素材</el-button>
                 </div>
             </el-card>
         </el-form>
@@ -32,18 +30,7 @@
 import Mixin from './Mixin'
 const form = { title: '', type: 'voice', keyword: '', content: { media_id: '', file: '' } }
 export default {
-    mixins: [Mixin(form)],
-    data() {
-        return {
-            materialDialogShow: false
-        }
-    },
-    methods: {
-        selectMaterial(material) {
-            this.form.file = material.file
-            this.form.content.media_id = material.media.media_id
-        }
-    }
+    mixins: [Mixin(form)]
 }
 </script>
 

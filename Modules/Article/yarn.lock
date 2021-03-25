@@ -796,15 +796,7 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/runtime-corejs3@^7.11.2":
-  version "7.13.9"
-  resolved "https://registry.npm.taobao.org/@babel/runtime-corejs3/download/@babel/runtime-corejs3-7.13.9.tgz?cache=0&sync_timestamp=1614636998424&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fruntime-corejs3%2Fdownload%2F%40babel%2Fruntime-corejs3-7.13.9.tgz#b2fa9a6e5690ef8d4c4f2d30cac3ec1a8bb633ce"
-  integrity sha1-svqablaQ741MTy0wysPsGou2M84=
-  dependencies:
-    core-js-pure "^3.0.0"
-    regenerator-runtime "^0.13.4"
-
-"@babel/runtime@^7.11.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.12.1", "@babel/runtime@^7.8.4":
   version "7.13.9"
   resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.13.9.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.13.9.tgz#97dbe2116e2630c489f22e0656decd60aaa1fcee"
   integrity sha1-l9viEW4mMMSJ8i4GVt7NYKqh/O4=
@@ -2384,11 +2376,6 @@ core-js-compat@^3.8.1, core-js-compat@^3.9.0:
   dependencies:
     browserslist "^4.16.3"
     semver "7.0.0"
-
-core-js-pure@^3.0.0:
-  version "3.9.1"
-  resolved "https://registry.npm.taobao.org/core-js-pure/download/core-js-pure-3.9.1.tgz?cache=0&sync_timestamp=1614537261976&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcore-js-pure%2Fdownload%2Fcore-js-pure-3.9.1.tgz#677b322267172bd490e4464696f790cbc355bec5"
-  integrity sha1-Z3syImcXK9SQ5EZGlveQy8NVvsU=
 
 core-js@^2.4.0:
   version "2.6.12"
@@ -7343,14 +7330,6 @@ vuex@^3.6.2:
   version "3.6.2"
   resolved "https://registry.npm.taobao.org/vuex/download/vuex-3.6.2.tgz?cache=0&sync_timestamp=1612277442796&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvuex%2Fdownload%2Fvuex-3.6.2.tgz#236bc086a870c3ae79946f107f16de59d5895e71"
   integrity sha1-I2vAhqhww655lG8QfxbeWdWJXnE=
-
-wangeditor@^4.6.7:
-  version "4.6.7"
-  resolved "https://registry.npm.taobao.org/wangeditor/download/wangeditor-4.6.7.tgz?cache=0&sync_timestamp=1614330684523&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fwangeditor%2Fdownload%2Fwangeditor-4.6.7.tgz#7b357044dca71542c50215f2b47a341cfa3bb384"
-  integrity sha1-ezVwRNynFULFAhXytHo0HPo7s4Q=
-  dependencies:
-    "@babel/runtime" "^7.11.2"
-    "@babel/runtime-corejs3" "^7.11.2"
 
 watchpack@^2.0.0:
   version "2.1.1"

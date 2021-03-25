@@ -59,6 +59,11 @@
                                     粉丝管理
                                 </router-link>
                             </el-dropdown-item>
+                            <el-dropdown-item>
+                                <router-link :to="{ name: 'wechat.sendall.index', query: { sid: wechat.site_id, wid: wechat.id } }">
+                                    群发消息
+                                </router-link>
+                            </el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                     <el-dropdown>

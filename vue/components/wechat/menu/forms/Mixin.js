@@ -2,7 +2,8 @@ export default {
     props: ['form', 'wechat'],
     data() {
         return {
-            showKeywordDialog: false,
+            //消息选择dialog
+            showMessageDialog: false,
             message: null
         }
     },
@@ -16,8 +17,10 @@ export default {
         }
     },
     methods: {
-        select(message) {
+        //选择消息回调
+        selectMessage(message) {
             this.form.key = message.keyword
+            this.showMessageDialog = false
         }
     }
 }

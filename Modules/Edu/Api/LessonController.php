@@ -32,7 +32,7 @@ class LessonController extends Controller
      */
     public function index(Site $site)
     {
-        $lessons = Lesson::where('site_id', $site->id)->latest()->paginate(12);
+        $lessons = Lesson::where('site_id', $site->id)->with('user')->latest()->paginate(12);
         return LessonResource::collection($lessons);
     }
 

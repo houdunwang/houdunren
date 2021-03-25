@@ -8,27 +8,27 @@
                 </div>
                 <el-form-item label="昵称">
                     <el-input v-model="form.name"></el-input>
-                    <hd-error name="name" />
+                    <hd-form-error name="name" />
                 </el-form-item>
                 <el-form-item label="邮箱">
                     <el-input v-model="form.email"></el-input>
-                    <hd-error name="email" />
+                    <hd-form-error name="email" />
                 </el-form-item>
                 <el-form-item label="QQ">
                     <el-input v-model="form.qq"></el-input>
-                    <hd-error name="qq" />
+                    <hd-form-error name="qq" />
                 </el-form-item>
                 <el-form-item label="手机号">
                     <el-input v-model="form.mobile"></el-input>
-                    <hd-error name="mobile" />
+                    <hd-form-error name="mobile" />
                 </el-form-item>
                 <el-form-item label="github">
                     <el-input v-model="form.github"></el-input>
-                    <hd-error name="github" />
+                    <hd-form-error name="github" />
                 </el-form-item>
                 <el-form-item label="微博">
                     <el-input v-model="form.weibo"></el-input>
-                    <hd-error name="weibo" />
+                    <hd-form-error name="weibo" />
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmitBase">保存提交</el-button>
@@ -42,11 +42,11 @@
                 </div>
                 <el-form-item label="原密码">
                     <el-input type="password" v-model="form.old_password"></el-input>
-                    <hd-error name="old_password" />
+                    <hd-form-error name="old_password" />
                 </el-form-item>
                 <el-form-item label="新密码">
                     <el-input type="password" v-model="form.password"></el-input>
-                    <hd-error name="password" />
+                    <hd-form-error name="password" />
                 </el-form-item>
                 <el-form-item label="确认密码">
                     <el-input type="password" v-model="form.password_confirmation"></el-input>

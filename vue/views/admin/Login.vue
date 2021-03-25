@@ -10,11 +10,11 @@
                                 <form class="form-horizontal w-3/4 mx-auto" method="POST" action="#">
                                     <div class="flex flex-col mt-4">
                                         <el-input v-model="form.account" placeholder="邮箱或手机号"></el-input>
-                                        <hd-error name="account" />
+                                        <hd-form-error name="account" />
                                     </div>
                                     <div class="flex flex-col mt-4">
                                         <el-input v-model="form.password" placeholder="请输入登录密码" type="password"></el-input>
-                                        <hd-error name="password" />
+                                        <hd-form-error name="password" />
                                     </div>
                                     <div class="flex flex-col mt-4">
                                         <hd-captcha v-model="form.captcha" ref="captcha" />

@@ -20,7 +20,7 @@
                                 <div class="w-full">
                                     <el-form-item label="验证码" size="normal">
                                         <el-input placeholder="请输入收到的验证码" class="mr-1" v-model="form.code"> </el-input>
-                                        <hd-error name="code" />
+                                        <hd-form-error name="code" />
                                     </el-form-item>
                                 </div>
                             </div>
@@ -28,7 +28,7 @@
                             <div class="grid grid-cols-2 gap-3">
                                 <el-form-item label="新密码" class="flex-1">
                                     <el-input type="password" v-model="form.password" placeholder="请输入新密码"></el-input>
-                                    <hd-error name="password" />
+                                    <hd-form-error name="password" />
                                 </el-form-item>
                                 <el-form-item label="确认密码" class="flex-1">
                                     <el-input type="password" v-model="form.password_confirmation" placeholder="请再输一次密码"></el-input>

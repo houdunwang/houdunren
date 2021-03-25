@@ -40,7 +40,7 @@ class WePay
         $config =  [
             'cert_client' => base_path('Modules') . '/' . module()['name'] . '/cert/' . site('id') . '/apiclient_cert.pem', // optional，退款等情况时用到
             'cert_key' => base_path('Modules') . '/' . module()['name'] . '/cert/' . site('id') . '/apiclient_key.pem', // optional，退款等情况时用到
-            'notify_url' => route('pay.notify.notify', [MID, 'wepay']),
+            'notify_url' => route('pay.notify.notify', [module('id'), 'wepay']),
         ] + config('site.wepay');
 
         if (empty($config['mode'])) unset($config['mode']);

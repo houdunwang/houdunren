@@ -47,7 +47,7 @@
                 </div>
                 <div class="collapse navbar-collapse pt-3" id="navbar-menu">
                     <ul class="navbar-nav">
-                        <li class="nav-item dropdown border-b border-gray-700 pb-5 mb-3" v-for="(menu, index) in menus" :key="index">
+                        <li class="nav-item dropdown border-b border-gray-700 pb-3 mb-3" v-for="(menu, index) in menus" :key="index">
                             <a class="nav-link show flex items-baseline" href="#navbar-base">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <i :class="menu.icon"></i>

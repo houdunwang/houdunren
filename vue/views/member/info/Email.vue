@@ -6,7 +6,7 @@
             </div>
             <hd-validate-code v-model="form.account" type="email" :action="`site/${site.id}/code/email/noexist`" placeholder="请输入邮箱" />
             <el-input v-model="form.code" placeholder="请输入收到的验证码" size="normal" class="block mt-3"></el-input>
-            <hd-error name="code" />
+            <hd-form-error name="code" />
             <el-button type="primary" size="default" @click="onSubmit" class="block mt-3" :disabled="!form.account && !form.code">提交</el-button>
         </el-card>
     </el-form>

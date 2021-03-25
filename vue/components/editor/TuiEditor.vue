@@ -15,11 +15,12 @@ import Editor from '@toast-ui/editor'
 
 export default {
     props: {
+        sid: { type: Number },
         //编辑器高度
         height: { type: String, default: '300px' },
         //显示方式
         previewStyle: { type: String, default: 'vertical' },
-        initialEditType: { type: String, default: 'wysiwyg' },
+        initialEditType: { type: String, default: 'markdown' },
         value: { type: String, default: '' }
     },
     data() {
@@ -30,19 +31,21 @@ export default {
             isUpdate: false
         }
     },
+    computed: {
+        //图片上传地址
+        uploadAction() {
+            return `/api/upload` + (this.sid ? `?site=${this.sid}` : '')
+        }
+    },
     mounted() {
         this.init()
     },
     watch: {
-        value: {
-            handler(n) {
-                //异步更新组件数据时定义编辑器内容
-                if (!this.isUpdate && this.editor) {
-                    this.isUpdate = true
-                    this.editor.setHtml(n)
-                }
-            },
-            immediate: true
+        value(n, o) {
+            //异步更新组件数据时定义编辑器内容
+            if (n != o) {
+                this.editor.setMarkdown(n)
+            }
         }
     },
     methods: {
@@ -72,7 +75,7 @@ export default {
                         //添加post数据
                         formData.append('file', blob, blob.name)
                         //上传图片
-                        let response = await axios.post(`/api/upload/site/${This.site.id}`, formData)
+                        let response = await axios.post(This.uploadAction, formData)
                         //更改编辑器内容
                         callback(response.path, blob.name)
                         return false
@@ -82,10 +85,6 @@ export default {
             })
             this.editor = editor
         },
-        //设置编辑器内容
-        // setHtml(content = '') {
-        //     this.editor.setHtml(content)
-        // },
         //添加工具条按钮
         createButton(className) {
             const button = document.createElement('button')
