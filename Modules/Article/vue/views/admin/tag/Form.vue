@@ -8,7 +8,7 @@
             <el-form :model="form" ref="form" label-width="80px" :inline="false" size="normal">
                 <el-form-item label="标签名称">
                     <el-input v-model="form.title"></el-input>
-                    <hd-error name="title" />
+                    <hd-form-error name="title" />
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">保存提交</el-button>

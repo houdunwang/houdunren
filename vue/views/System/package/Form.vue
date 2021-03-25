@@ -5,7 +5,7 @@
             <template v-slot:header>套餐资料</template>
             <el-form-item label="套餐名称">
                 <el-input v-model="form.title"></el-input>
-                <hd-error name="title" />
+                <hd-form-error name="title" />
             </el-form-item>
 
             <el-card shadow="never" :body-style="{ padding: '20px' }">

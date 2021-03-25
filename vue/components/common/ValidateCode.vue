@@ -5,13 +5,12 @@
             <el-button type="info" size="default" :disabled="true" v-if="times > 0">{{ times }}秒后操作</el-button>
             <el-button type="danger" size="default" @click="send" v-else>发送验证码</el-button>
         </div>
-        <hd-error name="account" class="mb-2" />
-        <hd-captcha v-model="form.captcha" class="flex-1" ref="captcha" v-if="showCaptcha" />
+        <hd-form-error name="account" class="mb-2" />
+        <hd-captcha v-model="form.captcha" class="flex-1 mt-2" ref="captcha" v-if="showCaptcha" />
     </div>
 </template>
-
 <script>
-import Timer from '../utils/timer'
+import Timer from '../../utils/timer'
 export default {
     props: {
         type: { type: String, default: 'all' },

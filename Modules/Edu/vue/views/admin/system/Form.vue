@@ -8,15 +8,15 @@
                 </div>
                 <el-form-item label="课程名称">
                     <el-input v-model="form.title"></el-input>
-                    <hd-error name="title" />
+                    <hd-form-error name="title" />
                 </el-form-item>
                 <el-form-item label="课程介绍" size="normal">
                     <el-input v-model="form.description" placeholder="" type="textarea" learable></el-input>
-                    <hd-error name="description" />
+                    <hd-form-error name="description" />
                 </el-form-item>
                 <el-form-item label="预览图片" size="normal">
-                    <image-upload v-model="form.preview" />
-                    <hd-error name="preview" />
+                    <hd-upload-image v-model="form.preview" />
+                    <hd-form-error name="preview" />
                 </el-form-item>
             </el-card>
             <el-card shadow="never" :body-style="{ padding: '20px' }" class="mt-3">

@@ -31,7 +31,7 @@
             </el-table-column>
         </el-table>
         <div class="mt-3">
-            <hd-user-search title="选择管理员" @change="setAdmin" :action="`site/${this.sid}/user/search`" />
+            <hd-user-search title="选择管理员" @change="setAdmin" />
         </div>
     </div>
 </template>

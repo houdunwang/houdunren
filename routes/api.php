@@ -23,6 +23,7 @@ use App\WeChat\WeChatUserController;
 use App\WeChat\WeChatMessageController;
 use App\WeChat\WeChatMaterialController;
 use App\WeChat\WeChatQrController;
+use App\WeChat\WeChatSendAllController;
 
 //登录注册与找回密码
 Route::post('login', [AuthController::class, 'login']);
@@ -33,7 +34,7 @@ Route::post('site/{site}/forget/code', [AuthController::class, 'forgetCode']);
 Route::get('logout', [AuthController::class, 'logout']);
 //用户
 Route::get('user/info', [UserController::class, 'info']);
-Route::get('site/{site}/user/search/{keyword?}', [UserController::class, 'search']);
+Route::get('user/search/{keyword?}', [UserController::class, 'search']);
 Route::get('site/{site}/follow/user/{user}', [FollowController::class, 'index']);
 Route::post('site/{site}/follow/user/{user}', [FollowController::class, 'store']);
 Route::delete('site/{site}/follow/user/{user}', [FollowController::class, 'destroy']);
@@ -97,8 +98,6 @@ Route::get('captcha', [CaptchaController::class, 'make']);
 
 //站点公众号
 Route::group(['middleware' => ['site', 'auth:sanctum']], function () {
-    //公众号
-    Route::apiResource('site.wechat', WeChatController::class);
     //菜单
     Route::put('site/{site}/wechat/{wechat}/menu', [WeChatMenuController::class, 'update']);
     Route::get('site/{site}/wechat/{wechat}/menu/push', [WeChatMenuController::class, 'push']);
@@ -116,4 +115,8 @@ Route::group(['middleware' => ['site', 'auth:sanctum']], function () {
     Route::apiResource('site.wechat.material', WeChatMaterialController::class);
     //二维码
     Route::apiResource('site.wechat.qr', WeChatQrController::class);
+    //群发消息
+    Route::apiResource('site/{site}/wechat/{wechat}/sendall/message', WeChatSendAllController::class);
+    //公众号
+    Route::apiResource('site.wechat', WeChatController::class);
 });

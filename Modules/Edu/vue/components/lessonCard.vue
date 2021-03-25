@@ -13,7 +13,7 @@
                 {{ lesson.title | truncate(15) }}
             </div>
             <div class="text-sm flex justify-start items-center ">
-                <img :src="lesson.user.icon" class="w-6 h-6 rounded-full mr-2" />
+                <!-- <img :src="lesson.user.icon" class="w-6 h-6 rounded-full mr-2" /> -->
                 <span class="font-light">共有{{ lesson.video_num }}个视频</span>
             </div>
         </div>

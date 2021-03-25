@@ -20,7 +20,7 @@ class CommentChannel extends DatabaseChannel
             'read_at' => null,
             //自定义字段
             'site_id' => site('id'),
-            'module_id' => MID,
+            'module_id' => module('id'),
         ];
     }
 }

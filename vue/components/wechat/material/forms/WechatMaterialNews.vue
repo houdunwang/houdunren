@@ -4,7 +4,7 @@
             <el-card shadow="nerver" :body-style="{ padding: '20px' }">
                 <el-form-item label="素材描述">
                     <el-input v-model="form.title"></el-input>
-                    <hd-error name="form.title" />
+                    <hd-form-error name="form.title" />
                 </el-form-item>
                 <div class="flex">
                     <div class="w-60 preview">

@@ -6,15 +6,15 @@
             <el-form :model="form" ref="form" label-width="120px" :inline="false" size="normal">
                 <el-form-item label="会员组名称">
                     <el-input type="text" v-model="form.title"></el-input>
-                    <hd-error message="title" />
+                    <hd-form-error message="title" />
                 </el-form-item>
                 <el-form-item label="站点数量">
                     <el-input type="text" v-model="form.site_num"></el-input>
-                    <hd-error message="site_num" />
+                    <hd-form-error message="site_num" />
                 </el-form-item>
                 <el-form-item label="可用天数">
                     <el-input v-model="form.days"></el-input>
-                    <hd-error message="days" />
+                    <hd-form-error message="days" />
                 </el-form-item>
             </el-form>
 

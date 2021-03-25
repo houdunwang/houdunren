@@ -6,11 +6,11 @@
             </div>
             <div class="card-body">
                 <el-input v-model="form.title" placeholder="请输入贴子标题" size="normal" clearable></el-input>
-                <hd-error name="title" />
-                <tags v-model="form.tags" />
-                <hd-error name="tags" />
-                <tui-editor v-model="form.content" initialEditType="markdown" class="border" />
-                <hd-error name="content" />
+                <hd-form-error name="title" />
+                <tags v-model="form.tags" class="mt-3" />
+                <hd-form-error name="tags" />
+                <hd-tui-editor v-model="form.content" class="border mt-3" :sid="site.id" />
+                <hd-form-error name="content" />
             </div>
             <div class="card-footer text-muted">
                 <button class="btn btn-azure" @click="onSubmit">保存提交</button>

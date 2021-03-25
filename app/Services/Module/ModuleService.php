@@ -26,6 +26,7 @@ class ModuleService
         static $cache = null;
         if (is_null($module)) return $cache;
         $this->initConfig(site(), $module);
+        config(['module_version' => config('app.version') . $module['config']['version']]);
         return $cache = $module;
     }
 

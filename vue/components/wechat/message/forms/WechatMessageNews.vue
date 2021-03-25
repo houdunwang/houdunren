@@ -41,7 +41,7 @@
                             </el-form-item>
                             <el-form-item label="缩略图">
                                 <div class="flex flex-col">
-                                    <hd-image v-model="article.picurl" fit="fill" class="w-36 h-auto"></hd-image>
+                                    <hd-upload-image v-model="article.picurl" fit="fill" class="w-36 h-auto" />
                                 </div>
                             </el-form-item>
                             <el-form-item label="跳转链接">

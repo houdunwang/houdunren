@@ -24,9 +24,8 @@ class UserController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['site']);
         $this->middleware(['auth:sanctum'])->except(['show']);
-        $this->middleware(['module'])->only(['wechat', 'follow', 'unBindWechat']);
-        $this->authorizeResource(User::class, 'user');
     }
 
     /**
@@ -92,8 +91,9 @@ class UserController extends Controller
     {
         $keyword = request('keyword');
         $users = User::when($keyword, function ($query) use ($keyword) {
-            return $query->where('id', $keyword)
+            return $query->orWhere('id', $keyword)
                 ->orWhere('email', 'like', "%{$keyword}%")
+                ->orWhere('name', 'like', "%{$keyword}%")
                 ->orWhere('mobile', 'like', "%{$keyword}%");
         })->with('group')->paginate(10);
         return UserResource::collection($users);
@@ -101,7 +101,6 @@ class UserController extends Controller
 
     /**
      * 更新资料
-     *
      * @param UserRequest $request
      * @param User $user
      * @return void
@@ -134,7 +133,6 @@ class UserController extends Controller
 
     /**
      * 绑定手机号
-     *
      * @param Request $request
      * @return void
      */
@@ -154,11 +152,8 @@ class UserController extends Controller
         return ['message' => '手机号绑定成功'];
     }
 
-
-
     /**
      * 绑定邮箱
-     *
      * @param Request $request
      * @return void
      */

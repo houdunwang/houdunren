@@ -13,8 +13,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class WeChatMaterial extends Model
 {
     use HasFactory;
-    protected $fillable = ['wechat_id', 'type', 'title', 'file', 'duration', 'content', 'media'];
-    protected $casts = ['content' => 'array', 'media' => 'array'];
+    protected $fillable = ['wechat_id', 'type', 'title', 'file', 'duration', 'content', 'response'];
+    protected $casts = ['content' => 'array', 'response' => 'array'];
 
     /**
      * 公众号关联

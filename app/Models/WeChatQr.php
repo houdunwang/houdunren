@@ -12,6 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 class WeChatQr extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'content', 'wechat_id', 'scene_type', 'scene_value', 'expire_seconds'];
-    protected $casts = ['content' => 'array', 'wechat_id' => 'integer', 'expire_seconds' => 'integer'];
+    protected $fillable = ['title', 'response', 'wechat_id', 'scene_type', 'scene_value', 'expire_seconds'];
+    protected $casts = ['response' => 'array', 'wechat_id' => 'integer', 'expire_seconds' => 'integer'];
 }

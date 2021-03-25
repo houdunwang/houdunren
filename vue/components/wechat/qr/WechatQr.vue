@@ -13,10 +13,10 @@
             </el-table-column>
             <el-table-column label="二维码" #default="{row:qr}">
                 <el-popover placement="top" width="200" trigger="hover">
-                    <el-image :src="`https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${qr.content.ticket}`" fit="cover"></el-image>
+                    <el-image :src="`https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${qr.response.ticket}`" fit="cover"></el-image>
                     <el-image
                         slot="reference"
-                        :src="`https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${qr.content.ticket}`"
+                        :src="`https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${qr.response.ticket}`"
                         fit="cover"
                         class="w-10 h-10 align-middle"
                     ></el-image>
@@ -81,12 +81,12 @@ export default {
     methods: {
         async load(page = 1) {
             this.loading = true
-            this.qrs = await axios.get(`site/${this.wechat.site_id}/wechat/${this.$route.query.wid}/qr?module=${this.module}&page=${page}`)
+            this.qrs = await axios.get(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/qr?module=${this.module}&page=${page}`)
             this.loading = false
         },
         del(qr) {
             this.$confirm('确定删除吗?', '温馨提示').then(async _ => {
-                await axios.delete(`site/${this.wechat.site_id}/wechat/${this.$route.query.wid}/qr/${qr.id}`)
+                await axios.delete(`site/${this.wechat.site_id}/wechat/${this.wechat.id}/qr/${qr.id}`)
                 this.load()
             })
         }

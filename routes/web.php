@@ -5,14 +5,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\WeChatLoginController;
 use App\Http\Controllers\WeChatBindController;
-use App\Models\WeChat;
+use App\Models\SystemConfig;
 use App\WeChat\ApiController;
 
-use Houdunwang\WeChat\Qr;
-
 Route::get('a', function () {
-    // dd(\App\Models\Site::find(1)->modules->toArray());
-    return (new \Houdunwang\WeChat\WeChat)->getAllTypeCheckMethods();
 });
 //支付通知
 Route::group(['prefix' => 'pay/{module}', 'middleware' => ['module']], function () {
@@ -40,9 +36,10 @@ Route::get('logout', function () {
 
 //网站主页
 Route::get('/', function () {
+    if (!module()) abort(404);
+    //调用模块主页
     $name = module()['name'];
-    $class  = "Modules\\{$name}\Http\Controllers\HomeController";
-    return app($class)->home();
+    return app("Modules\\{$name}\Http\Controllers\HomeController")->home();
 })->middleware(['module']);
 
 //会员中心
@@ -52,5 +49,7 @@ Route::get('{app}/{path?}', function () {
 
 //后备路由
 Route::fallback(function () {
+    $systemConfig = SystemConfig::where('id', 1)->value('config') ?? [];
+    config(['app.name' => $systemConfig['title'] ?? '']);
     return view('app');
 });

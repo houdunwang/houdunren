@@ -8,42 +8,42 @@
                 </div>
                 <el-form-item label="公众号名称">
                     <el-input v-model="form.title"></el-input>
-                    <hd-error name="title" />
+                    <hd-form-error name="title" />
                 </el-form-item>
                 <el-form-item label="TOKEN">
-                    <el-input v-model="form.token"></el-input>
-                    <hd-error name="token" />
+                    <el-input v-model="form.token" show-password></el-input>
+                    <hd-form-error name="token" />
                 </el-form-item>
                 <el-form-item label="公众号介绍">
                     <el-input type="textarea" v-model="form.introduce"></el-input>
-                    <hd-error name="introduce" />
+                    <hd-form-error name="introduce" />
                 </el-form-item>
                 <el-form-item label="微信号">
-                    <el-input v-model="form.name"></el-input>
-                    <hd-error name="name" />
+                    <el-input v-model="form.name" show-password></el-input>
+                    <hd-form-error name="name" />
                 </el-form-item>
                 <el-form-item label="二维码">
-                    <hd-image v-model="form.qr" :action="`/api/upload/site/${$route.params.sid}`" />
-                    <hd-error name="qr" />
+                    <hd-upload-image v-model="form.qr" :sid="$route.params.sid" />
+                    <hd-form-error name="qr" />
                 </el-form-item>
                 <el-form-item label="公众号类型">
                     <el-radio-group v-model="form.type">
                         <el-radio label="subscribe">订阅号</el-radio>
                         <el-radio label="service">服务号</el-radio>
                     </el-radio-group>
-                    <hd-error name="type" />
+                    <hd-form-error name="type" />
                 </el-form-item>
                 <el-form-item label="原始ID">
-                    <el-input v-model="form.wxid"></el-input>
-                    <hd-error name="wxid" />
+                    <el-input v-model="form.wxid" show-password></el-input>
+                    <hd-form-error name="wxid" />
                 </el-form-item>
                 <el-form-item label="appid">
-                    <el-input v-model="form.appid"></el-input>
-                    <hd-error name="appid" />
+                    <el-input v-model="form.appid" show-password></el-input>
+                    <hd-form-error name="appid" />
                 </el-form-item>
                 <el-form-item label="appsecret">
-                    <el-input v-model="form.appsecret"></el-input>
-                    <hd-error name="appsecret" />
+                    <el-input v-model="form.appsecret" show-password></el-input>
+                    <hd-form-error name="appsecret" />
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">保存提交</el-button>

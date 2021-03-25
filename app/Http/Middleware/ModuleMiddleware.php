@@ -35,17 +35,14 @@ class ModuleMiddleware
      * @throws HttpException
      * @throws NotFoundHttpException
      */
-    protected function site(): Site
+    protected function site()
     {
         $site = request('site');
         $site = is_numeric($site) ? Site::findOrFail($site) : $site;
         $site = $site instanceof Site ? $site : SiteService::getByDomain();
         if ($site instanceof Site) {
             SiteService::cache($site);
-            return $site;
         }
-
-        abort(404, '站点不存在');
     }
 
     /**
@@ -55,22 +52,18 @@ class ModuleMiddleware
      * @throws HttpException
      * @throws NotFoundHttpException
      */
-    protected function module(): Module
+    protected function module()
     {
-        $module = request('module');
-        $module = is_numeric($module) ? Module::findOrFail($module) : $module;
-        if (!$module) {
-            $module = ModuleService::getByDomain() ?? site()->module;
+        if (site()) {
+            $module = request('module');
+            $module = is_numeric($module) ? Module::findOrFail($module) : $module;
+            if (!$module) {
+                $module = ModuleService::getByDomain() ?? site()->module;
+            }
+            //站点模块检测
+            if (ModuleService::siteHasModule(site(), $module)) {
+                ModuleService::cache($module);
+            }
         }
-        if (!($module instanceof Module)) {
-            abort(404, '模块不存在');
-        }
-        //站点模块检测
-        if (ModuleService::siteHasModule(site(), $module)) {
-            ModuleService::cache($module);
-            return $module;
-        }
-
-        abort(404, '模块不存在');
     }
 }

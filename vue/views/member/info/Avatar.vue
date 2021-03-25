@@ -4,7 +4,7 @@
             <div slot="header">
                 修改头像
             </div>
-            <hd-image v-model="form.avatar" :action="`upload/site/${site.id}`" />
+            <hd-upload-image v-model="form.avatar" :sid="site.id" />
         </el-card>
     </el-form>
 </template>

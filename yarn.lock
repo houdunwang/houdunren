@@ -882,6 +882,14 @@
     "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
 
+"@toast-ui/editor@^2.5.1":
+  version "2.5.1"
+  resolved "https://registry.npm.taobao.org/@toast-ui/editor/download/@toast-ui/editor-2.5.1.tgz#42671c52ca4b97c84f684d09c2966711b36f41a7"
+  integrity sha1-QmccUspLl8hPaE0JwpZnEbNvQac=
+  dependencies:
+    "@types/codemirror" "0.0.71"
+    codemirror "^5.48.4"
+
 "@types/babel-core@^6.25.6":
   version "6.25.6"
   resolved "https://registry.npm.taobao.org/@types/babel-core/download/@types/babel-core-6.25.6.tgz?cache=0&sync_timestamp=1613379013748&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fbabel-core%2Fdownload%2F%40types%2Fbabel-core-6.25.6.tgz#9e4faefcb300fd3abf0d2c2d85c505071462c1e1"
@@ -944,6 +952,13 @@
   dependencies:
     "@types/node" "*"
     source-map "^0.6.0"
+
+"@types/codemirror@0.0.71":
+  version "0.0.71"
+  resolved "https://registry.npm.taobao.org/@types/codemirror/download/@types/codemirror-0.0.71.tgz#861f1bcb3100c0a064567c5400f2981cf4ae8ca7"
+  integrity sha1-hh8byzEAwKBkVnxUAPKYHPSujKc=
+  dependencies:
+    "@types/tern" "*"
 
 "@types/cssnano@^4.0.0":
   version "4.0.0"
@@ -1083,6 +1098,13 @@
   version "1.3.4"
   resolved "https://registry.npm.taobao.org/@types/svgo/download/@types/svgo-1.3.4.tgz#75d67b31ed3006c5014c4f810aa300162b68afc8"
   integrity sha1-ddZ7Me0wBsUBTE+BCqMAFitor8g=
+
+"@types/tern@*":
+  version "0.23.3"
+  resolved "https://registry.npm.taobao.org/@types/tern/download/@types/tern-0.23.3.tgz?cache=0&sync_timestamp=1613384976260&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Ftern%2Fdownload%2F%40types%2Ftern-0.23.3.tgz#4b54538f04a88c9ff79de1f6f94f575a7f339460"
+  integrity sha1-S1RTjwSojJ/3neH2+U9XWn8zlGA=
+  dependencies:
+    "@types/estree" "*"
 
 "@vue/component-compiler-utils@^3.1.0":
   version "3.2.0"
@@ -2184,6 +2206,11 @@ coa@^2.0.2:
     "@types/q" "^1.5.1"
     chalk "^2.4.1"
     q "^1.1.2"
+
+codemirror@^5.48.4:
+  version "5.60.0"
+  resolved "https://registry.npm.taobao.org/codemirror/download/codemirror-5.60.0.tgz#00a8cfd287d5d8737ceb73987f04aee2fe5860da"
+  integrity sha1-AKjP0ofV2HN863OYfwSu4v5YYNo=
 
 collect.js@^4.28.4:
   version "4.28.6"

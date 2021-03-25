@@ -8,7 +8,7 @@
                 </div>
                 <el-form-item label="课程名称">
                     <el-input v-model="form.title"></el-input>
-                    <hd-error name="title" />
+                    <hd-form-error name="title" />
                 </el-form-item>
                 <el-form-item label="课程上架">
                     <el-radio-group v-model="form.status" size="mini">
@@ -25,15 +25,15 @@
                 </el-form-item>
                 <el-form-item label="课程介绍" size="normal">
                     <el-input v-model="form.description" placeholder="" type="textarea" learable></el-input>
-                    <hd-error name="description" />
+                    <hd-form-error name="description" />
                 </el-form-item>
                 <el-form-item label="预览图片" size="normal">
-                    <image-upload v-model="form.thumb" />
-                    <hd-error name="thumb" />
+                    <hd-upload-image v-model="form.thumb" />
+                    <hd-form-error name="thumb" />
                 </el-form-item>
                 <el-form-item label="高清下载地址" size="normal">
                     <el-input v-model="form.download_address" placeholder="" size="normal" clearable></el-input>
-                    <hd-error name="download_address" />
+                    <hd-form-error name="download_address" />
                 </el-form-item>
             </el-card>
             <el-card shadow="never" :body-style="{ padding: '20px' }" class="mt-3">
@@ -42,11 +42,11 @@
                 </div>
                 <el-form-item label="免费观看数量" size="normal">
                     <el-input v-model="form.free_num" placeholder="" size="normal" clearable></el-input>
-                    <hd-error name="free_num" />
+                    <hd-form-error name="free_num" />
                 </el-form-item>
                 <el-form-item label="售价" size="normal">
                     <el-input v-model="form.price" placeholder="" size="normal" clearable></el-input>
-                    <hd-error name="price" />
+                    <hd-form-error name="price" />
                 </el-form-item>
             </el-card>
 

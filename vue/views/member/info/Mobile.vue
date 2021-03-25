@@ -6,7 +6,7 @@
             </div>
             <hd-validate-code v-model="form.account" type="mobile" :action="`site/${site.id}/code/mobile/noexist`" placeholder="请输入手机号" />
             <el-input v-model.trim="form.code" placeholder="请输入收到的验证码" size="normal" class="block mt-3"></el-input>
-            <hd-error name="code" />
+            <hd-form-error name="code" />
             <el-button type="primary" size="default" @click="onSubmit" class="block mt-3" :disabled="!form.account || !form.code">绑定手机</el-button>
         </el-card>
     </el-form>

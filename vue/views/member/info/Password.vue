@@ -6,7 +6,7 @@
             </div>
             <el-form-item :label="field.label" v-for="(field, index) in fields" :key="index">
                 <el-input v-model.trim="form[field.id]" :placeholder="field.placeholder" required show-password></el-input>
-                <hd-error :name="field.id" />
+                <hd-form-error :name="field.id" />
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit" :disabled="status">保存提交</el-button>

@@ -126,22 +126,20 @@
                 <div v-else class="font-bold text-gray-600">发表评论</div>
             </div>
             <div class="card-body">
-                <tui-editor v-model="form.content" initialEditType="markdown" class="border" :action="`/api/upload/site/${site.id}`" ref="editor" />
-                <hd-error name="content" />
+                <hd-tui-editor v-model="form.content" class="border" :sid="site.id" />
+                <hd-form-error name="content" />
             </div>
             <div class="card-footer text-muted">
                 <button class="btn btn-azure" @click="onSubmit">保存提交</button>
             </div>
         </div>
         <!-- 评论框END -->
-        <image-preview :min-width="300" />
+        <hd-image-preview :min-width="300" />
     </div>
 </template>
 
 <script>
-import ImagePreview from './ImagePreview.vue'
 export default {
-    components: { ImagePreview },
     props: ['actionList', 'actionPost'],
     data() {
         return {
@@ -184,7 +182,7 @@ export default {
         //发表评论
         async onSubmit() {
             const { data: comment } = await axios.post(`${this.actionPost}`, this.form)
-            this.$refs.editor.setHtml()
+            this.form.content = ''
             this.loadByComment(comment.id)
         },
         //快捷回复

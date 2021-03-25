@@ -30,8 +30,8 @@ class WeChatQrController extends Controller
 
     public function store(WeChatQrRequest $request, Site $site, WeChat $wechat, WeChatQr $qr)
     {
-        $content = app(Qr::class)->init($wechat)->create($request->input());
-        $qr->fill($request->input() + ['content' => $content, 'wechat_id' => $wechat->id, 'module_id' => request('module')])->save();
+        $response = app(Qr::class)->init($wechat)->create($request->input());
+        $qr->fill($request->input() + ['response' => $response, 'wechat_id' => $wechat->id, 'module_id' => request('module')])->save();
         return $this->message('二维码添加成功', $qr);
     }
 

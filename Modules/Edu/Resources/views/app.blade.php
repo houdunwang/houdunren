@@ -14,8 +14,8 @@
     <link href="/tabler/dist/css/tabler-vendors.min.css?1611412966" rel="stylesheet" />
     <link href="/tabler/dist/css/demo.min.css?1611412966" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.15.2/css/all.min.css">
-    <link rel="stylesheet" href="/modules/Edu/css/app.css?v={{ config('app.version') }}{{ module()['config']['version'] }}" />
-    <script src="/modules/Edu/js/app.js?v={{ config('app.version') }}{{ module()['config']['version'] }}" defer></script>
+    <link rel="stylesheet" href="/modules/Edu/css/app.css?v={{ config('module_version') }}" />
+    <script src="/modules/Edu/js/app.js?v={{ config('module_version') }}" defer></script>
 </head>
 
 <body>
@@ -28,14 +28,22 @@
         window.uid=@json(Auth::id());window.site = @json(site(),JSON_FORCE_OBJECT);window.module = @json(module(),JSON_FORCE_OBJECT);
     </script>
     <div class="text-center pb-16">
+        @if (site()['setting']['base']['copyright'])
         <div>{!! site()['setting']['base']['copyright'] !!}</div>
+        @endif
         <div>
+            @if (site()['setting']['base']['tel'])
             <span class="pr-2"> <i class="fas fa-phone-square-alt"></i> {{ site()['setting']['base']['tel'] }} </span>
+            @endif
+            @if (site()['setting']['base']['email'])
             <span class="pr-2"><i class="fas fa-envelope"></i> {{ site()['setting']['base']['email'] }}</span>
+            @endif
         </div>
+        @if (site()['setting']['base']['icp'])
         <a href="https://beian.miit.gov.cn/" target="_blank">
             ICP证: {{ site()['setting']['base']['icp'] }}
         </a>
+        @endif
     </div>
 </body>
 

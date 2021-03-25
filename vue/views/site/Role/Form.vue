@@ -8,11 +8,11 @@
                 </div>
                 <el-form-item label="角色名称">
                     <el-input v-model="form.title"></el-input>
-                    <hd-error name="title" />
+                    <hd-form-error name="title" />
                 </el-form-item>
                 <el-form-item label="角色标识">
                     <el-input v-model="form.name"></el-input>
-                    <hd-error name="name" />
+                    <hd-form-error name="name" />
                 </el-form-item>
                 <el-form-item class="mt-3">
                     <el-button type="primary" @click="onSubmit">保存提交</el-button>

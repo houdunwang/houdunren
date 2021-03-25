@@ -55,7 +55,7 @@
                 <user-card :member="topic.user" class="mb-5" />
                 <community-tip />
             </div>
-            <image-preview />
+            <hd-image-preview />
         </div>
     </div>
 </template>

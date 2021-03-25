@@ -28,8 +28,8 @@ class AliPay
     public function init()
     {
         $config =  [
-            'return_url' => route('pay.alipay.return', [MID]),
-            'notify_url' => route('pay.alipay.notify', [MID]),
+            'return_url' => route('pay.alipay.return', [module('id')]),
+            'notify_url' => route('pay.alipay.notify', [module('id')]),
         ] + config('site.alipay');
         if (empty($config['mode'])) unset($config['mode']);
         $this->pay = Pay::alipay($config);

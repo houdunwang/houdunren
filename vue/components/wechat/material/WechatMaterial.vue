@@ -6,7 +6,7 @@
                 {{ t.title }}
             </el-button>
         </el-button-group>
-        <div class="mt-3 border-t pt-2" v-if="type != 'news' || showDurationButton">
+        <div class="mt-2" v-if="type != 'news' || showDurationButton">
             <el-radio-group v-model="duration" size="mini" @click="load">
                 <el-radio-button label="short">临时素材</el-radio-button>
                 <el-radio-button label="long">永久素材</el-radio-button>
@@ -113,6 +113,9 @@ export default {
         }
     },
     watch: {
+        materialType(n) {
+            this.type = n
+        },
         //类型更改后
         type() {
             this.load()
