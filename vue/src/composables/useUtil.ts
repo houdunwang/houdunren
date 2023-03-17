@@ -8,9 +8,9 @@ export default () => {
    * @param fn
    * @returns
    */
-  function request(fn: (args: any) => Promise<any>) {
+  function request(fn: (args?: any) => Promise<any>) {
     let isSend = false
-    return (args: any) => {
+    return (args?: any) => {
       if (isSend) return
       isSend = true
       return fn(args).finally(() => (isSend = false))

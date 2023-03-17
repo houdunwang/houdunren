@@ -15,9 +15,9 @@ const tableData = ref([
 ])
 
 const columns = ref([
-  { id: 'name', label: '应用名称' },
-  { id: 'icon', label: '图标' },
-  { id: 'created_at', label: '安装时间' },
+  { id: 'name', label: '应用' },
+  { id: 'version', label: '版本' },
+  { id: 'author', label: '作者' },
 ])
 </script>
 

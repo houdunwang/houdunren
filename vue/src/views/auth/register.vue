@@ -11,8 +11,8 @@ const { login, form } = useAuth()
         <div>
           <h2 class="text-center text-gray-700 text-lg mt-3">会员注册</h2>
           <div class="mt-8">
-            <HdFormInput v-model="form.mobile" placeholder="请输入手机号" v-clearError="'account'" />
-            <HdError name="account" />
+            <HdFormInput v-model="form.email" placeholder="请输入邮箱" v-clearError="'email'" />
+            <HdError name="email" />
 
             <HdFormInput v-model="form.password" class="mt-3" type="password" placeholder="密码" />
             <HdError name="password" />

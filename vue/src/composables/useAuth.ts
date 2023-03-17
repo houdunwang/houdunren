@@ -1,15 +1,14 @@
-// import { userStore } from '@/store/hd/useUserStore'
-// import useStorage from '@/composables/hd/useStorage'
-// import { CacheKey } from '@/enum/CacheKey'
+import { http } from '@/plugins/axios'
 import router from '@/router'
-// import userStore from '@/store/useUserStore'
 const storage = useStorage()
 
 export default () => {
   const form = reactive({
-    mobile: '19999999999',
+    account: '2300071698@qq.com',
     password: 'admin888',
     password_confirmation: 'admin888',
+    captcha: '',
+    captcha_key: '',
   })
 
   //模型权限验证
@@ -30,9 +29,20 @@ export default () => {
 
   //登录
   const login = useUtil().request(async () => {
-    storage.set(CacheKey.TOKEN_NAME, 'houdunren.com')
-    const route = router.resolve({ name: RouteName.ADMIN })
-    location.href = route.fullPath
+    try {
+      const {
+        data: { token, user },
+      } = await http.request<ApiData<{ token: string; user: UserModel }>>({
+        url: 'auth/login',
+        method: 'POST',
+        data: form,
+      })
+      storage.set(CacheKey.TOKEN_NAME, token)
+      const route = router.resolve({ name: RouteName.ADMIN })
+      location.href = route.fullPath
+    } catch (error) {
+      useCaptcha().getCaptcha()
+    }
   })
 
   return { authorize, isLogin, logout, login, form }

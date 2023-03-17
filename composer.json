@@ -12,10 +12,17 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
-        "laravel/tinker": "^2.8"
+        "laravel/tinker": "^2.8",
+        "mews/captcha": "^3.3"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.13",
         "fakerphp/faker": "^1.9.1",
+        "laravel-lang/attributes": "^2.3",
+        "laravel-lang/common": "^3.1",
+        "laravel-lang/http-statuses": "^3.3",
+        "laravel-lang/lang": "^12.18",
+        "laravel-lang/publisher": "^14.6",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
@@ -28,7 +35,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/helper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -52,7 +62,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "barryvdh/laravel-ide-helper"
+            ]
         }
     },
     "config": {
@@ -65,13 +77,5 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "description": "阿里云镜像",
-            "type": "composer",
-            "url": "https://mirrors.aliyun.com/composer/",
-            "canonical": false
-        }
-    ]
+    "prefer-stable": true
 }

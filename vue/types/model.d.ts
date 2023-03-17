@@ -2,7 +2,7 @@ interface UserModel {
   id: number
   name: string
   email: string
-  mobile?: string
+  email?: string
   sex: number
   real_name?: any
   address?: any
