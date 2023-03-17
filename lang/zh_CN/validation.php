@@ -212,6 +212,7 @@ return [
         'updated_at'               => '更新于',
         'username'                 => '用户名',
         'year'                     => '年',
-        'captcha' => '验证码'
+        'captcha' => '验证码',
+        'account' => '帐号'
     ],
 ];

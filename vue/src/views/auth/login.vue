@@ -3,13 +3,10 @@ import { Wechat } from '@icon-park/vue-next'
 import Footer from './components/footer.vue'
 import Captcha from '@/components/captcha.vue'
 const { login, form } = useAuth()
-const onSubmit = () => {
-  login()
-}
 </script>
 
 <template>
-  <form class @submit.prevent="onSubmit">
+  <form class @submit.prevent="login">
     <div class="lg:w-[720px] bg-gray-50 md:grid grid-cols-2 rounded-md shadow-md overflow-hidden">
       <div class="p-6 flex flex-col justify-between">
         <div>

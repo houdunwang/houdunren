@@ -15,7 +15,7 @@ class CodeRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $code = Cache::get(request($attribute));
+        $code = Cache::get(request('account'));
         if ($code != $value) {
             $fail('验证码输入错误');
         }

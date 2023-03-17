@@ -9,6 +9,7 @@ export default () => {
     password_confirmation: 'admin888',
     captcha: '',
     captcha_key: '',
+    code: '',
   })
 
   //模型权限验证
@@ -25,6 +26,24 @@ export default () => {
   async function logout() {
     storage.remove(CacheKey.TOKEN_NAME)
     return (location.href = '/')
+  }
+
+  //找回密码
+  async function findPassword() {
+    try {
+      const {
+        data: { token },
+      } = await http.request<ApiData<{ token: string; user: UserModel }>>({
+        url: 'auth/find-password',
+        method: 'post',
+        data: form,
+      })
+      storage.set(CacheKey.TOKEN_NAME, token)
+      const route = router.resolve({ name: RouteName.ADMIN })
+      location.href = route.fullPath
+    } catch (error) {
+      useCaptcha().getCaptcha()
+    }
   }
 
   //登录
@@ -45,5 +64,5 @@ export default () => {
     }
   })
 
-  return { authorize, isLogin, logout, login, form }
+  return { authorize, isLogin, logout, login, form, findPassword }
 }

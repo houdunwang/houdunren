@@ -7,6 +7,7 @@ use App\Rules\CodeRule;
 use App\Rules\PhoneRule;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -26,21 +27,19 @@ class AuthController extends Controller
         $user = User::where($this->accountField(), $request->account)->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
-            Auth::guard('web')->login($user);
+            // Auth::guard('web')->login($user);
             return $this->success('登录成功', ['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
         }
 
         throw ValidationException::withMessages(['password' => "密码输入错误"]);
     }
 
-    //退出登录
     public function logout()
     {
         Auth::logout();
         return $this->success('退出成功');
     }
 
-    //帐号字段
     protected function accountField()
     {
         return filter_var(request('account'), FILTER_VALIDATE_EMAIL) ? "email" : "mobile";
@@ -50,15 +49,10 @@ class AuthController extends Controller
     public function findPassword(Request $request)
     {
         Validator::make($request->input(), [
-            "account" => [
-                "required",
-                $this->accountField() === 'email' ? 'email' : new PhoneRule(),
-                Rule::exists('users', $this->accountField() === 'email' ? 'email' : 'mobile')
-            ],
+            "account" => ["required", Rule::exists('users', $this->accountField())],
             "code" => ['required', new CodeRule()],
             "password" => ["required", "between:3,20", "confirmed"],
-
-        ])->validate();
+        ], ['code.required' => '验证码不能为空'])->validate();
 
         $user = User::where($this->accountField(), $request->account)->first();
         $user->password = Hash::make($request->password);
