@@ -1,0 +1,12 @@
+body {
+  @apply bg-[#F5F4F8] text-gray-700 font-sans text-base;
+
+  a {
+    &:hover {
+      @apply text-[#16a085] duration-300;
+    }
+  }
+}
+.el-form-item__error {
+  @apply hidden;
+}

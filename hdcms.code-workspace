@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "vue"
+		}
+	],
+	"settings": {
+		"explorer.fileNesting.expand": false
+	}
+}
