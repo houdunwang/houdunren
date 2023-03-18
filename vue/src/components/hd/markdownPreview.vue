@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import hljs from 'highlight.js'
-import '@/styles/highlightjs.scss'
-import '@/styles/markdown.scss'
+import '@/assets/highlightjs.scss'
+import '@/assets/markdown.scss'
 
 const { text } = defineProps<{ text: string }>()
 const html = ref<HTMLDivElement>()

@@ -1,7 +1,7 @@
 import directive from '@/directives'
 import plugin from '@/plugins'
 import router from '@/router'
-import '@/styles/global.scss'
+import '@/assets/global.scss'
 import { createPinia } from 'pinia'
 import { createApp } from 'vue'
 import App from './App.vue'

@@ -1,5 +1,6 @@
 import { RouteLocationNormalized, Router } from 'vue-router'
 import { useTitle } from '@vueuse/core'
+import kernel from '@/kernel'
 
 let isInit = false
 export default (router: Router) => {
@@ -26,5 +27,5 @@ async function beforeEach(to: RouteLocationNormalized, from: RouteLocationNormal
 async function init() {
   if (isInit === true) return
   isInit = true
-  await Promise.all([useUserStore().getCurrentUser(), useConfigStore().getConfig()])
+  await Promise.all(kernel.middleware.map((middleware) => middleware()))
 }
