@@ -2,15 +2,15 @@
 import navbar from './memberNavbar.vue'
 import menuData from './menuData'
 import UserBlock from './userBlock.vue'
-const userStore = useUserStore()
+const { user } = useUserStore()
 const active = ref('')
 </script>
 <template>
-  <main class="flex flex-col flex-1 justify-start">
+  <main class="flex flex-col flex-1 justify-start" v-if="user">
     <navbar />
-    <section class="2xl:w-page 2xl:mx-auto mt-5 flex flex-col md:flex-row md:items-start gap-5 p-2">
+    <section class="2xl:w-page 2xl:mx-auto mt-5 flex flex-col md:flex-row md:items-start gap-5 p-3">
       <div class="md:w-[160px] hidden md:block">
-        <UserBlock :user="userStore.user" />
+        <UserBlock :user="user" />
         <div class="menu">
           <router-link
             v-for="(menu, index) of menuData"

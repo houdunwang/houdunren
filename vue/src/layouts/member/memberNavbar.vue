@@ -6,11 +6,15 @@ const { open } = useUtil()
 </script>
 
 <template>
-  <main class="bg-white border-b-4 px-3 border-[#e66767]">
-    <section class="2xl:w-page 2xl:m-auto relative shadow-sm z-50 py-3 border-b-1 flex justify-between items-center">
+  <main class="bg-white border-b-4 border-[#e66767]">
+    <section class="2xl:w-page 2xl:m-auto py-3 px-3 border-b-1 flex justify-between items-center">
       <div class="flex items-center">
-        <home theme="outline" size="26" fill="#e66767" @click="open('/')" class="cursor-pointer hidden md:block" />
-
+        <home
+          theme="outline"
+          size="26"
+          fill="#e66767"
+          @click="$router.push({ name: 'home' })"
+          class="cursor-pointer hidden md:block" />
         <el-dropdown trigger="click" size="default" class="md:hidden">
           <AllApplication theme="outline" size="26" fill="#e66767" />
           <template #dropdown>
@@ -25,9 +29,7 @@ const { open } = useUtil()
           </template>
         </el-dropdown>
       </div>
-      <div class="flex justify-center items-center relative cursor-pointer">
-        <UserAvatarMenu />
-      </div>
+      <UserAvatarMenu />
     </section>
   </main>
 </template>

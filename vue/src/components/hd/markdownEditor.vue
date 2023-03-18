@@ -25,9 +25,9 @@ watch(
 const handleUploadImage = async (event: any, insertImage: any, files: any) => {
   const form = new FormData()
   form.append('file', files[0])
-  const { data } = await uploadImage(form)
+  const { url } = await uploadImage(form)
 
-  insertImage({ url: data.url })
+  insertImage({ url })
 }
 </script>
 

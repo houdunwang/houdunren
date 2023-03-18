@@ -78,6 +78,7 @@ export default () => {
     location.reload()
   }
 
+  //更新邮箱
   const updateEmail = async (data: any) => {
     await http.request({
       url: `user/email`,
