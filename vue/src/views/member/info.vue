@@ -8,7 +8,7 @@ const { update } = useUser()
   <main v-if="user">
     <el-tabs v-model="tab" type="card" tab-position="top">
       <el-tab-pane label="修改密码" name="password">
-        <el-form label-width="80px" :inline="false" size="large" class="border p-5 rounded-2xl">
+        <el-form label-width="80px" :inline="false" class="border p-5 rounded-2xl">
           <el-form-item label="昵称">
             <el-input v-model="user.name" placeholder="起个有个性的昵称吧"></el-input>
             <HdError name="name" />

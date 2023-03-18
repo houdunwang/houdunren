@@ -29,7 +29,6 @@ export default () => {
       data,
     })
     useUserStore().getCurrentUser()
-    ElMessage({ type: 'success', message: '修改成功' })
   }
 
   const updatePassword = async (data: any) => {
@@ -38,7 +37,6 @@ export default () => {
       method: 'PUT',
       data,
     })
-    ElMessage({ type: 'success', message: '密码修改成功' })
   }
 
   //注销帐号

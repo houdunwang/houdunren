@@ -41,7 +41,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $user->fill($request->input())->save();
-        return $this->respondWithSuccess($user->fresh());
+        return $this->respondOk('资料修改成功');
     }
 
     public function password(Request $request)

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import navbar from './memberNavbar.vue'
 import menuData from './menuData'
+import UserBlock from './userBlock.vue'
 const userStore = useUserStore()
 const active = ref('')
 </script>
@@ -8,9 +9,9 @@ const active = ref('')
   <main class="flex flex-col flex-1 justify-start">
     <navbar />
     <section class="2xl:w-page 2xl:mx-auto mt-5 flex flex-col md:flex-row md:items-start gap-5 p-2">
-      <div class="md:w-[200px] hidden md:block">
-        <UserBlock :user="userStore.user" />
-        <div class="menu lg:mt-5">
+      <div class="md:w-[160px] hidden md:block">
+        <UserBlock :user="userStore.user" class="rounded-md" />
+        <div class="menu lg:mt-3 rounded-md">
           <router-link
             v-for="(menu, index) of menuData"
             :key="index"
@@ -34,17 +35,16 @@ const active = ref('')
         </template>
       </RouterView>
     </section>
-    <!-- <Footer /> -->
   </main>
 </template>
 
 <style lang="scss" scoped>
 .menu {
-  @apply border flex flex-col rounded-lg overflow-hidden;
+  @apply flex flex-col overflow-hidden;
   a {
-    @apply bg-white flex py-3 px-5 border-b hover:bg-[#16a085] hover:text-white duration-300;
+    @apply bg-white flex py-3 text-sm px-5 border-b opacity-90 text-gray-700 duration-300;
     &.active {
-      @apply bg-[#16a085] text-white;
+      @apply bg-gray-200;
     }
   }
 }

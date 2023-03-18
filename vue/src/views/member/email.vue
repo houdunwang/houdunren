@@ -3,9 +3,6 @@ const { user } = useUserStore()
 const tab = ref('password')
 const { updateEmail } = useUser()
 const form = reactive({ account: '', code: '' })
-const onSubmit = async () => {
-  await updateEmail(form)
-}
 </script>
 
 <template>
@@ -24,7 +21,7 @@ const onSubmit = async () => {
 
         <el-form label-width="80px" :inline="false" size="large" class="border p-5 rounded-2xl">
           <el-form-item label="邮箱">
-            <el-input type="email" v-model="form.account"></el-input>
+            <el-input type="email" v-model="form.account" placeholder="请输入新邮箱"></el-input>
             <HdError name="account" />
           </el-form-item>
           <el-form-item label="验证码">
@@ -32,7 +29,7 @@ const onSubmit = async () => {
             <HdError name="code" />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onSubmit">确定修改</el-button>
+            <el-button type="primary" @click="updateEmail(form)">确定修改</el-button>
           </el-form-item>
         </el-form>
       </el-tab-pane>

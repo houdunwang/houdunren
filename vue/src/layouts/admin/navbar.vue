@@ -5,10 +5,10 @@ import { AllApplication } from '@icon-park/vue-next'
 
 <template>
   <div
-    class="bg-white relative shadow-sm z-50 py-3 border-b-1 px-5 flex justify-between items-center border-b-4 border-[#16a085]">
+    class="bg-white relative shadow-sm z-50 py-3 border-b-1 px-5 flex justify-between items-center border-b-4 border-[#574b90]">
     <div class="flex items-center">
       <el-dropdown trigger="click" size="default">
-        <all-application theme="outline" size="26" fill="#10ad57" />
+        <all-application theme="outline" size="26" fill="#574b90" />
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item> 系统配置 </el-dropdown-item>

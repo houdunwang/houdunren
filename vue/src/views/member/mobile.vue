@@ -23,7 +23,7 @@ const onSubmit = async () => {
         </div>
         <el-form label-width="80px" :inline="false" size="large" class="border p-5 rounded-2xl" label-position="top">
           <el-form-item label="手机">
-            <el-input v-model="form.account"></el-input>
+            <el-input v-model="form.account" placeholder="请输入手机号"></el-input>
             <HdError name="account" />
           </el-form-item>
           <el-form-item label="验证码">

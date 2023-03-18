@@ -1,16 +1,17 @@
 <script setup lang="ts">
-const { code, account, type } = defineProps<{
+const props = defineProps<{
   placeholder?: string
   code: string
   account: string
   type: 'exists' | 'no-exists'
 }>()
+const { code, account, type } = props
 defineEmits(['update:code', 'update:account'])
 
 const { sendCode } = useCode()
 const form = reactive({ account, code })
 watch(
-  () => account,
+  () => props.account,
   (n) => (form.account = n),
 )
 
