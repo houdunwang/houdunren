@@ -10,8 +10,8 @@ const active = ref('')
     <navbar />
     <section class="2xl:w-page 2xl:mx-auto mt-5 flex flex-col md:flex-row md:items-start gap-5 p-2">
       <div class="md:w-[160px] hidden md:block">
-        <UserBlock :user="userStore.user" class="rounded-md" />
-        <div class="menu lg:mt-3 rounded-md">
+        <UserBlock :user="userStore.user" />
+        <div class="menu">
           <router-link
             v-for="(menu, index) of menuData"
             :key="index"
@@ -26,10 +26,7 @@ const active = ref('')
         <template v-if="Component">
           <KeepAlive>
             <Suspense>
-              <component
-                :is="Component"
-                :key="route.fullPath"
-                class="bg-white p-5 border rounded-lg flex-1 shadow-sm" />
+              <component :is="Component" :key="route.fullPath" class="bg-white p-5 rounded-lg flex-1" />
             </Suspense>
           </KeepAlive>
         </template>
@@ -40,7 +37,7 @@ const active = ref('')
 
 <style lang="scss" scoped>
 .menu {
-  @apply flex flex-col overflow-hidden;
+  @apply flex flex-col overflow-hidden rounded-md lg:mt-3;
   a {
     @apply bg-white flex py-3 text-sm px-5 border-b opacity-90 text-gray-700 duration-300;
     &.active {

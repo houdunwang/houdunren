@@ -12,7 +12,9 @@ const loadQr = async () => {
 const time = setInterval(() => {
   scanLogin()
 }, 3000)
-onUnmounted(() => clearInterval(time))
+onBeforeRouteLeave(() => {
+  clearInterval(time)
+})
 </script>
 
 <template>

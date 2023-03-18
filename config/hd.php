@@ -2,7 +2,6 @@
 return  [
     "base" => [
         'name' => env('APP_NAME', '后盾人'),
-        'domain' => 'houdunren.com',
     ],
     "copyright" => [
         'ad' => '后盾人 人人做后盾',

@@ -28,7 +28,6 @@ interface UserModel {
 interface ConfigModel {
   base: {
     name: string
-    domain: string
   }
   copyright: {
     other: string

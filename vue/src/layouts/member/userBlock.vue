@@ -3,7 +3,7 @@ const { user } = defineProps<{ user: UserModel }>()
 </script>
 
 <template>
-  <main class="bg-white overflow-hidden">
+  <main class="bg-white overflow-hidden rounded-md">
     <el-image
       :src="user.avatar"
       fit="cover"

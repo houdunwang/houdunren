@@ -12,7 +12,9 @@ const time = setInterval(async () => {
     await bind()
   }
 }, 3000)
-onUnmounted(() => clearInterval(time))
+onBeforeRouteLeave(() => {
+  clearInterval(time)
+})
 </script>
 
 <template>

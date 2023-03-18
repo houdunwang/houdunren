@@ -7,9 +7,6 @@ const { config } = defineProps<{ config: ConfigModel }>()
     <el-form-item label="网站名称">
       <el-input v-model="config.base.name"></el-input>
     </el-form-item>
-    <el-form-item label="域名">
-      <el-input v-model="config.base.domain"></el-input>
-    </el-form-item>
   </el-form>
 </template>
 
