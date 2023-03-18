@@ -13,6 +13,9 @@ const { config } = defineProps<{ config: ConfigModel }>()
     <el-form-item label="联系邮箱">
       <el-input v-model="config.copyright.email"></el-input>
     </el-form-item>
+    <el-form-item label="其他信息">
+      <el-input v-model="config.copyright.other"></el-input>
+    </el-form-item>
     <el-form-item label="icp">
       <el-input v-model="config.copyright.icp"></el-input>
     </el-form-item>

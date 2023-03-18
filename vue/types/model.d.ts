@@ -31,7 +31,7 @@ interface ConfigModel {
     domain: string
   }
   copyright: {
-    domain: string
+    other: string
     ad: string
     weixin: string
     email: string

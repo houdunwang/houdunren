@@ -33,7 +33,7 @@ const { config } = useConfigStore()
           <span class="pr-2"> 微信: {{ config.copyright.weixin }} </span>
           <span class="pr-2"> 邮箱：{{ config.copyright.email }}</span>
         </div>
-        <div>Copyright © {{ config.copyright.domain }} All Rights Reserved</div>
+        <div>{{ config.copyright.other }}</div>
         <a href="https://beian.miit.gov.cn/" target="_blank"> ICP证: {{ config.copyright.icp }} </a>
       </div>
       <div class="footer-bg"></div>

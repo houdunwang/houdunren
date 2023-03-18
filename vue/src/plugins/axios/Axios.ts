@@ -66,9 +66,7 @@ export default class Axios {
             duration: 2000,
           })
         }
-        // if (response.data?.code) {
-        //   return Promise.reject(response.data)
-        // }
+
         this.options = { loading: true, message: true, clearValidateError: true }
         return response
       },

@@ -1,10 +1,12 @@
 {
-    "name": "laravel/laravel",
+    "name": "houdunwang/hdcms",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "多模块系统平台",
     "keywords": [
-        "framework",
-        "laravel"
+        "houdunren.com",
+        "hdcms",
+        "后盾人",
+        "向军大叔"
     ],
     "license": "MIT",
     "require": {
@@ -21,7 +23,9 @@
         "laravel/tinker": "^2.8",
         "mews/captcha": "^3.3",
         "mtownsend/xml-to-array": "^2.0",
-        "spatie/image": "^2.2"
+        "nwidart/laravel-modules": "^10.0",
+        "spatie/image": "^2.2",
+        "spatie/laravel-activitylog": "^4.7"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",
@@ -43,7 +47,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Houdunwang\\Wechat\\": "wechat/src"
+            "Houdunwang\\Wechat\\": "wechat/src",
+            "Modules\\": "Modules/"
         },
         "files": [
             "app/helper.php"
