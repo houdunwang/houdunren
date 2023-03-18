@@ -57,17 +57,18 @@ export default class Axios {
           this.loading.close()
           this.loading = undefined
         }
-        if (response.data?.message && this.options.message) {
+        const message = response.data?.success ?? response.data?.success
+        if (message && this.options.message) {
           ElMessage({
-            type: response.data?.code ? 'error' : 'success',
-            message: response.data.message,
+            type: 'success',
+            message,
             grouping: true,
             duration: 2000,
           })
         }
-        if (response.data?.code) {
-          return Promise.reject(response.data)
-        }
+        // if (response.data?.code) {
+        //   return Promise.reject(response.data)
+        // }
         this.options = { loading: true, message: true, clearValidateError: true }
         return response
       },
@@ -80,7 +81,7 @@ export default class Axios {
         const {
           response: { status, data },
         } = error
-        const { message } = data
+        const message = data.error ?? data.message
 
         switch (status) {
           case HttpStatus.UNAUTHORIZED:
@@ -88,7 +89,7 @@ export default class Axios {
             router.push({ name: RouteName.LOGIN })
             break
           case HttpStatus.UNPROCESSABLE_ENTITY:
-            useErrorStore().setErrors(error.response.data.errors)
+            useErrorStore().setErrors(error.response.data.errors ?? error.response.data)
             break
           case HttpStatus.FORBIDDEN:
             ElMessage({ type: 'error', message: message ?? '没有操作权限' })

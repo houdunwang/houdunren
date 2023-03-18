@@ -49,9 +49,7 @@ export default () => {
   //登录
   const login = useUtil().request(async () => {
     try {
-      const {
-        data: { token, user },
-      } = await http.request<ApiData<{ token: string; user: UserModel }>>({
+      const { token } = await http.request<{ token: string; user: UserModel }>({
         url: 'auth/login',
         method: 'POST',
         data: form,

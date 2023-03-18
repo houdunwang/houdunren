@@ -8,33 +8,23 @@ use App\Models\User;
 use App\Rules\CodeRule;
 use App\Rules\PhoneRule;
 use Auth;
-use Cache;
+use F9Web\ApiResponseHelpers;
 use Hash;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
-use Spatie\Activitylog\Models\Activity;
 use Validator;
 
 class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum'])->except(['show', 'accountsIsExists', 'current']);
+        $this->middleware(['auth:sanctum'])->except(['show', 'accountsIsExists']);
     }
 
+    //获取当前用户资料
     public function current()
     {
-        if (Auth::check())
-            return new UserResource(Auth::user()->makeVisible(['address', 'mobile', 'real_name', 'openid', 'unionid'])
-                ->load(['duration' => function ($query) {
-                    $query->where('end_time', '>', now());
-                }]));
-    }
-
-    public function info(User $user)
-    {
-        return new UserResource($user->makeVisible(['address', 'real_name', 'mobile']));
+        return new UserResource(Auth::user()->makeVisible(['address', 'mobile', 'real_name']));
     }
 
     public function index()
@@ -51,7 +41,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $user->fill($request->input())->save();
-        return $this->success('资料修改成功', $user->fresh());
+        return $this->respondWithSuccess($user->fresh());
     }
 
     public function password(Request $request)
@@ -63,7 +53,7 @@ class UserController extends Controller
         $user = Auth::user();
         $user->password = Hash::make($request->password);
         $user->save();
-        return $this->success('密码修改成功');
+        return $this->respondOk('密码修改成功');
     }
 
     public function email(Request $request)
@@ -80,7 +70,7 @@ class UserController extends Controller
         $user = Auth::user();
         $user->email = $request->account;
         $user->save();
-        return $this->success('邮箱绑定成功');
+        return $this->respondOk('邮箱绑定成功');
     }
 
     public function mobile(Request $request)
@@ -97,14 +87,7 @@ class UserController extends Controller
         $user = Auth::user();
         $user->mobile = $request->account;
         $user->save();
-        return $this->success('手机绑定成功');
-    }
-
-    public function accountsIsExists(Request $request)
-    {
-        $state = User::where('email', $request->account)->orWhere('mobile', $request->account)->exists();
-
-        return $this->success(data: $state);
+        return $this->respondOk('手机绑定成功');
     }
 
     //注销帐号
@@ -115,7 +98,7 @@ class UserController extends Controller
         }
         Auth::guard('web')->logout();
         Auth::user()->delete();
-        return $this->success('帐号注销成功');
+        return $this->respondOk('帐号注销成功');
     }
 
     //删除头像
@@ -124,14 +107,15 @@ class UserController extends Controller
         if (!isAdministrator()) return;
         $user->avatar = null;
         $user->save();
-        return $this->success('头像删除成功');
+        return $this->respondOk('头像删除成功');
     }
 
+    //锁定用户
     public function lockUser(User $user)
     {
         if (!isAdministrator()) return;
         $user->is_lock = true;
         $user->save();
-        return $this->success('用户锁定成功');
+        return $this->respondOk('用户锁定成功');
     }
 }

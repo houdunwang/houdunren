@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Rules\CodeRule;
 use App\Rules\PhoneRule;
 use Auth;
+use F9Web\ApiResponseHelpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Hash;
@@ -28,16 +29,16 @@ class AuthController extends Controller
 
         if ($user && Hash::check($request->password, $user->password)) {
             // Auth::guard('web')->login($user);
-            return $this->success('登录成功', ['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
+            return $this->respondWithSuccess(['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
+            // return $this->success('登录成功', ['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
         }
-
-        throw ValidationException::withMessages(['password' => "密码输入错误"]);
+        return $this->respondFailedValidation('密码输入错误', 'password');
     }
 
     public function logout()
     {
         Auth::logout();
-        return $this->success('退出成功');
+        return $this->respondOk('退出成功');
     }
 
     protected function accountField()
@@ -60,6 +61,6 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return $this->success('密码重置成功', ['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
+        return $this->respondWithSuccess(['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
     }
 }

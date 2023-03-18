@@ -6,7 +6,6 @@ use AlibabaCloud\SDK\Sts\V20150401\Sts;
 use \Exception;
 use AlibabaCloud\Tea\Exception\TeaError;
 use AlibabaCloud\Tea\Utils\Utils;
-
 use Darabonba\OpenApi\Models\Config;
 use AlibabaCloud\SDK\Sts\V20150401\Models\AssumeRoleRequest;
 use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
@@ -49,13 +48,11 @@ class AliyunStsService
         $runtime = new RuntimeOptions([]);
         try {
             // 复制代码运行请自行打印 API 的返回值
-            $a = $client->assumeRoleWithOptions($assumeRoleRequest, $runtime);
-            dd($a->body->credentials);
+            $client->assumeRoleWithOptions($assumeRoleRequest, $runtime);
         } catch (Exception $error) {
             if (!($error instanceof TeaError)) {
                 $error = new TeaError([], $error->getMessage(), $error->getCode(), $error);
             }
-            dd($error->message);
             // 如有需要，请打印 error
             Utils::assertAsString($error->message);
         }

@@ -21,7 +21,7 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'avatar' => url('fake/avatar/文件' . mt_rand(1, 10) . '.jpg'),
+            'avatar' => fake()->imageUrl('300x300'),
             'sex' => mt_rand(1, 2),
             'email_verified_at' => now(),
             'password' => Hash::make('admin888'),

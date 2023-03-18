@@ -47,5 +47,9 @@ return  [
         "original_price" => 745,
         "price_year" => env('SUBSCRIBE_PRICE_YEAR'),
         "price_permanent" => env('SUBSCRIBE_PRICE_PERMANENT'),
+    ],
+    "upload" => [
+        //上传方式 local|oss
+        "drive" => 'local'
     ]
 ];

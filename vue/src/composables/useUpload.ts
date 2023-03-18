@@ -1,5 +1,5 @@
 import { http } from '@/plugins/axios'
-type UploadResult = { data: { url: string } }
+type UploadResult = { url: string }
 
 export default () => {
   /**
@@ -7,9 +7,9 @@ export default () => {
    * @param data
    * @returns
    */
-  function uploadImage(data: FormData) {
+  function uploadImage(data: FormData, url = `upload/image`) {
     return http.request<UploadResult>({
-      url: `upload/image`,
+      url,
       method: 'post',
       data,
     })

@@ -23,11 +23,6 @@ const columns = ref([
 
 <template>
   <main class="">
-    <div class="flex justify-center py-3">
-      <el-button type="info" size="default" round>本地模块</el-button>
-      <el-button type="success" size="default" color="#626aef" round>在线模块</el-button>
-    </div>
-
     <el-input v-model="search" placeholder="" size="large" clearable>
       <template #append>
         <el-button type="primary" size="default" @click="">搜索</el-button>

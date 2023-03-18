@@ -18,9 +18,19 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        "mobile",
         'name',
         'email',
         'password',
+        'avatar',
+        'home',
+        'github',
+        'weibo',
+        'wechat',
+        'qq',
+        'openid',
+        'address',
+        'real_name'
     ];
 
     /**
@@ -30,7 +40,11 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
+        'remember_token', 'email_verified_at',
+        'real_name', 'mobile',
+        'unionid',  'openid',
+        'comment_num', 'fans_num', 'follower_num',
+        'address',
     ];
 
     /**
@@ -40,5 +54,11 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_lock' => 'bool'
     ];
+
+    public function uploads()
+    {
+        return $this->hasMany(Upload::class);
+    }
 }

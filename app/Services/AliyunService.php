@@ -42,7 +42,6 @@ class AliyunService
             "templateParam" => json_encode($params['params'])
         ]);
         $runtime = new RuntimeOptions([]);
-        // if (app()->environment('production'))
         $client->sendSmsWithOptions($sendSmsRequest, $runtime);
     }
 

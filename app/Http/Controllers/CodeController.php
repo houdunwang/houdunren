@@ -48,7 +48,7 @@ class CodeController extends Controller
             }
         );
 
-        return $this->success('验证码发送成功');
+        return $this->respondOk('验证码发送成功');
     }
 
     //已经存在的帐号发送验证码
@@ -79,6 +79,6 @@ class CodeController extends Controller
             }
         );
 
-        return $this->success('验证码发送成功');
+        return $this->respondOk('验证码发送成功');
     }
 }
