@@ -12,12 +12,8 @@ const onSubmit = async () => {
 </script>
 
 <template>
-  <main>
-    <el-tabs v-model="tab" type="card" tab-position="top" @tab-click="">
-      <el-tab-pane label="注销帐号" name="delete">
-        <el-button type="danger" @click="onSubmit">注销帐号</el-button>
-      </el-tab-pane>
-    </el-tabs>
+  <main class="border p-5 rounded-lg">
+    <el-button type="danger" @click="onSubmit">注销帐号</el-button>
   </main>
 </template>
 
