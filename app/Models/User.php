@@ -57,6 +57,12 @@ class User extends Authenticatable
         'is_lock' => 'bool'
     ];
 
+    //超级管理员
+    public function getIsAdministratorAttribute()
+    {
+        return $this->id == 1;
+    }
+
     public function uploads()
     {
         return $this->hasMany(Upload::class);

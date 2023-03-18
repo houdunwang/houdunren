@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CodeController;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WechatBindController;
@@ -54,3 +55,8 @@ Route::get('wechat/scanLoginQrImage/{ticket}', [WechatLoginController::class, 's
 //微信绑定
 Route::post('wechat/bind/{ticket?}', [WechatBindController::class, 'bind']);
 Route::post('wechat/unbind/{ticket?}', [WechatBindController::class, 'unbind']);
+
+//配置
+Route::get('config/base', [ConfigController::class, 'base']);
+Route::get('config/all', [ConfigController::class, 'all']);
+Route::put('config', [ConfigController::class, 'update']);

@@ -17,7 +17,7 @@ import { AllApplication } from '@icon-park/vue-next'
         </template>
       </el-dropdown>
 
-      <HdBreadcrumb class="hidden md:block" />
+      <!-- <HdBreadcrumb class="hidden md:block" /> -->
     </div>
     <div class="flex justify-center items-center relative cursor-pointer">
       <UserAvatarMenu />

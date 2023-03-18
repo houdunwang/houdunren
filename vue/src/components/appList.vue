@@ -33,11 +33,10 @@ const columns = ref([
     <section class="mt-3">
       <el-table :data="tableData" border stripe>
         <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label"> </el-table-column>
-        <el-table-column label="操作" :width="180" align="center">
+        <el-table-column label="操作" :width="120" align="center">
           <div class="flex gap-1 btn">
-            <el-button type="warning" size="small" plain @click="">卸载</el-button>
             <el-button type="success" size="small" plain @click="">管理</el-button>
-            <el-button type="primary" size="small" plain @click="">访问</el-button>
+            <el-button type="warning" size="small" plain @click="">卸载</el-button>
           </div>
         </el-table-column>
       </el-table>
