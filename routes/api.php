@@ -4,12 +4,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CodeController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WechatBindController;
+use App\Http\Controllers\WechatController;
+use App\Http\Controllers\WechatLoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 //登录注册
 Route::controller(AuthController::class)->prefix('auth')->group(function () {
@@ -43,3 +42,15 @@ Route::controller(UploadController::class)->prefix("upload")->group(function () 
     Route::post('image', 'image');
     Route::post('avatar', 'avatar');
 });
+
+//微信公众号通知
+Route::any('wechat', [WechatController::class, 'handle']);
+
+//微信登录
+Route::post('wechat/sancLogin/{ticket}', [WechatLoginController::class, 'sancLogin']);
+Route::post('wechat/scanloginQr', [WechatLoginController::class, 'scanloginQr']);
+Route::get('wechat/scanLoginQrImage/{ticket}', [WechatLoginController::class, 'scanLoginQrImage']);
+
+//微信绑定
+Route::post('wechat/bind/{ticket?}', [WechatBindController::class, 'bind']);
+Route::post('wechat/unbind/{ticket?}', [WechatBindController::class, 'unbind']);

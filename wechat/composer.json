@@ -1,0 +1,18 @@
+{
+    "name": "houdunwang/wechat",
+    "description": "微信SDK",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Houdunwang\\Wechat\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "houdunren",
+            "email": "2300071698@qq.com"
+        }
+    ],
+    "require": {}
+}
