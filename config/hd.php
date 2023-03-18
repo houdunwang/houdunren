@@ -3,12 +3,14 @@ return  [
     "base" => [
         'name' => env('APP_NAME', '后盾人'),
         'domain' => 'houdunren.com',
+    ],
+    "copyright" => [
+        'domain' => 'houdunren.com',
         'ad' => '后盾人 人人做后盾',
-        //禁用图形验证码
-        "captcha_disable" => env('CAPTCHA_DISABLE', true),
         "weixin" => 'houdunren2021',
         "email" => '2300071698@qq.com',
-        "icp" => env("ICP", '')
+        "icp" => env("ICP", ''),
+        "showXjAvatar" => false
     ],
     "aliyun" => [
         "aliyun_key" => env('ALIYUN_KEY'),

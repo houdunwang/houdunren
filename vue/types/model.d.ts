@@ -28,12 +28,15 @@ interface UserModel {
 interface ConfigModel {
   base: {
     name: string
-    captcha_disable: boolean
+    domain: string
+  }
+  copyright: {
     domain: string
     ad: string
     weixin: string
     email: string
     icp: string
+    showXjAvatar: boolean
   }
   aliyun: {
     aliyun_key: string

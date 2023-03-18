@@ -25,7 +25,7 @@ import Navbar from '@/layouts/admin/navbar.vue'
           系统设置
         </el-button>
       </div>
-      <div class="overflow-y-auto pb-32 xl:w-[800px] m-auto">
+      <div class="overflow-y-auto pb-32 xl:w-[800px] m-auto min-h-screen">
         <router-view #default="{ Component, route }">
           <component :is="Component" class="m-5" :key="route.fullPath" />
         </router-view>

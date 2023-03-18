@@ -19,6 +19,7 @@ class ConfigController extends Controller
     {
         return $this->respondWithSuccess(new ConfigResource([
             'base' => config('hd.base'),
+            'copyright' => config('hd.copyright'),
         ]));
     }
 
