@@ -3,27 +3,15 @@ const { config } = defineProps<{ config: ConfigModel }>()
 </script>
 
 <template>
-  <el-form label-width="80px" label-position="top">
-    <el-form-item label="aliyun_key">
-      <el-input v-model="config.aliyun.aliyun_key" />
+  <el-form label-position="top">
+    <el-form-item label="appid">
+      <el-input v-model="config.wechat.appid" />
     </el-form-item>
-    <el-form-item label="aliyun_secret">
-      <el-input v-model="config.aliyun.aliyun_secret" />
+    <el-form-item label="appsecret">
+      <el-input v-model="config.wechat.appsecret" />
     </el-form-item>
-    <el-form-item label="aliyun_oss_block">
-      <el-input v-model="config.aliyun.aliyun_oss_block" />
-    </el-form-item>
-    <el-form-item label="aliyun_oss_endpoint">
-      <el-input v-model="config.aliyun.aliyun_oss_endpoint" />
-    </el-form-item>
-    <el-form-item label="cdn_video_key">
-      <el-input v-model="config.aliyun.cdn_video_key" />
-    </el-form-item>
-    <el-form-item label="cdn_image_domain">
-      <el-input v-model="config.aliyun.cdn_image_domain" />
-    </el-form-item>
-    <el-form-item label="cdn_video_domain">
-      <el-input v-model="config.aliyun.cdn_video_domain" />
+    <el-form-item label="token">
+      <el-input v-model="config.wechat.token" />
     </el-form-item>
   </el-form>
 </template>

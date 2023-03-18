@@ -26,6 +26,5 @@ async function beforeEach(to: RouteLocationNormalized, from: RouteLocationNormal
 async function init() {
   if (isInit === true) return
   isInit = true
-  const userStore = useUserStore()
-  await Promise.all([userStore.getCurrentUser()])
+  await Promise.all([useUserStore().getCurrentUser(), useConfigStore().getConfig()])
 }

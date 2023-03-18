@@ -1,14 +1,14 @@
 <script setup lang="ts">
-// const configStore = useConfigStore()
+const { config } = useConfigStore()
 </script>
 
 <template>
-  <main>
+  <main v-if="config">
     <div class="front-footer mt-10 px-3 md:px-0">
       <div class="el-divider el-divider--horizontal">
         <div
           class="el-divider__text is-center rounded-lg bg-gradient-to-r from-sky-500 to-indigo-500 text-white py-1 opacity-100">
-          <!-- {{ configStore.config.base.ad }} -->
+          {{ config.base.ad }}
         </div>
       </div>
       <div class="flex flex-col items-center justify-center pt-10 mb-5">
@@ -25,16 +25,16 @@
     </div>
 
     <div
-      class="text-center text-sm py-10 px-3 md:px-0 leading-9 font-normal text-white relative overflow-hidden border-t-4 border-gray-800"
+      class="text-center text-sm py-10 px-3 md:px-0 leading-9 font-normal text-white relative overflow-hidden border-t-4 border-gray-800 bg-gray-800"
       id="footer">
-      <div class="">我们的使命：传播互联网前沿技术，帮助更多的人实现梦想 <br /></div>
+      <div>{{ config.base.ad }}</div>
       <div class="text-center">
         <div class="text-sm">
-          <!-- <span class="pr-2"> 微信: {{ configStore.config.base.weixin }} </span>
-          <span class="pr-2"> 邮箱：{{ configStore.config.base.email }}</span> -->
+          <span class="pr-2"> 微信: {{ config.base.weixin }} </span>
+          <span class="pr-2"> 邮箱：{{ config.base.email }}</span>
         </div>
         <div>Copyright © houdunren.com All Rights Reserved</div>
-        <a href="https://beian.miit.gov.cn/" target="_blank"> ICP证: {{ configStore.config.base.icp }} </a>
+        <a href="https://beian.miit.gov.cn/" target="_blank"> ICP证: {{ config.base.icp }} </a>
       </div>
       <div class="footer-bg"></div>
     </div>

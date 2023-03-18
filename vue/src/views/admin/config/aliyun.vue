@@ -3,27 +3,27 @@ const { config } = defineProps<{ config: ConfigModel }>()
 </script>
 
 <template>
-  <el-form label-width="120px" size="default" label-position="top">
-    <el-form-item label="网站名称">
-      <el-input v-model="config.base.name"></el-input>
+  <el-form label-position="top">
+    <el-form-item label="aliyun_key">
+      <el-input v-model="config.aliyun.aliyun_key" />
     </el-form-item>
-    <el-form-item label="菜单域名">
-      <el-input v-model="config.base.domain"></el-input>
+    <el-form-item label="aliyun_secret">
+      <el-input v-model="config.aliyun.aliyun_secret" />
     </el-form-item>
-    <el-form-item label="广告语">
-      <el-input v-model="config.base.ad"></el-input>
+    <el-form-item label="aliyun_oss_block">
+      <el-input v-model="config.aliyun.aliyun_oss_block" />
     </el-form-item>
-    <el-form-item label="联系微信">
-      <el-input v-model="config.base.weixin"></el-input>
+    <el-form-item label="aliyun_oss_endpoint">
+      <el-input v-model="config.aliyun.aliyun_oss_endpoint" />
     </el-form-item>
-    <el-form-item label="联系邮箱">
-      <el-input v-model="config.base.email"></el-input>
+    <el-form-item label="cdn_video_key">
+      <el-input v-model="config.aliyun.cdn_video_key" />
     </el-form-item>
-    <el-form-item label="icp">
-      <el-input v-model="config.base.icp"></el-input>
+    <el-form-item label="cdn_image_domain">
+      <el-input v-model="config.aliyun.cdn_image_domain" />
     </el-form-item>
-    <el-form-item label="图形验证码">
-      <el-checkbox v-model="config.base.captcha_disable" label="开启" :indeterminate="false"></el-checkbox>
+    <el-form-item label="cdn_video_domain">
+      <el-input v-model="config.aliyun.cdn_video_domain" />
     </el-form-item>
   </el-form>
 </template>

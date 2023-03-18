@@ -23,11 +23,11 @@ const columns = ref([
 
 <template>
   <main class="">
-    <el-input v-model="search" placeholder="" size="large" clearable>
+    <!-- <el-input v-model="search" placeholder="" size="large" clearable>
       <template #append>
         <el-button type="primary" size="default" @click="">搜索</el-button>
       </template>
-    </el-input>
+    </el-input> -->
 
     <!-- 应用列表 -->
     <section class="mt-3">

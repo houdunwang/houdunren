@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import FooterCopyright from '@/components/footerCopyright.vue'
 import Navbar from '@/layouts/admin/navbar.vue'
 </script>
 
@@ -30,5 +31,6 @@ import Navbar from '@/layouts/admin/navbar.vue'
         </router-view>
       </div>
     </section>
+    <FooterCopyright />
   </main>
 </template>
