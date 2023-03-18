@@ -93,10 +93,6 @@ class UserController extends Controller
     //注销帐号
     public function delete()
     {
-        if (Auth::user()->orders()->where('pay_state', 1)->exists()) {
-            return $this->error('有支付记录不允许删除');
-        }
-        Auth::guard('web')->logout();
         Auth::user()->delete();
         return $this->respondOk('帐号注销成功');
     }

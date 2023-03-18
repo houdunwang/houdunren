@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Wechat } from '@icon-park/vue-next'
 import Footer from './components/footer.vue'
 import Captcha from '@/components/captcha.vue'
+import WechatLogin from '@/components/wechatLogin.vue'
 const { login, form } = useAuth()
 </script>
 
@@ -25,11 +25,7 @@ const { login, form } = useAuth()
           </div>
           <HdFormButton class="w-full mt-3 primary">登录</HdFormButton>
           <div class="flex justify-center mt-3">
-            <wechat
-              theme="outline"
-              size="24"
-              fill="#fff"
-              class="fab fa-weixin bg-green-600 text-white rounded-full p-1 cursor-pointer" />
+            <WechatLogin />
           </div>
         </div>
         <Footer />

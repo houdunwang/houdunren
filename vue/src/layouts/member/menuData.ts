@@ -20,10 +20,6 @@ export default [
     title: '微信绑定',
   },
   {
-    routeName: 'notification.member.index',
-    title: '站内消息',
-  },
-  {
     routeName: 'member.delete',
     title: '注销帐号',
   },

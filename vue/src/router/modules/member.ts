@@ -35,15 +35,5 @@ export default {
       name: 'member.wechat',
       component: () => import('@/views/member/wechat.vue'),
     },
-    {
-      path: 'duration',
-      name: 'member.duration',
-      component: () => import('@/views/member/duration.vue'),
-    },
-    {
-      path: 'notification',
-      name: 'notification.member.index',
-      component: () => import('@/views/notification/member-notification.vue'),
-    },
   ],
 } as RouteRecordRaw
