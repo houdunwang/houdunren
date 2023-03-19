@@ -1,4 +1,3 @@
-// import useAuth from '@/composables/useAuth'
 import { http } from '@/plugins/axios'
 import { defineStore } from 'pinia'
 

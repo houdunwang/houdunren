@@ -23,7 +23,7 @@ const storeUser = useUserStore()
               <router-link :to="{ name: 'admin' }"> 后台管理 </router-link>
             </el-dropdown-item>
             <el-dropdown-item>
-              <router-link :to="{ name: 'member.info' }"> 会员中心 </router-link>
+              <router-link :to="{ name: 'member' }"> 会员中心 </router-link>
             </el-dropdown-item>
             <el-dropdown-item>
               <router-link :to="{ name: 'home' }"> 网站首页 </router-link>

@@ -1,27 +1,23 @@
-import login from '@/views/auth/login.vue'
-import password from '@/views/auth/password.vue'
-import register from '@/views/auth/register.vue'
 import { RouteRecordRaw } from 'vue-router'
-import Layout from '@/layouts/auth/index.vue'
 
 export default {
   path: '/auth',
-  component: Layout,
+  component: () => import('@/layouts/auth/index.vue'),
   children: [
     {
       path: '/login',
       name: 'login',
-      component: login,
+      component: () => import('@/views/auth/login.vue'),
     },
     {
       path: '/register',
       name: 'register',
-      component: register,
+      component: () => import('@/views/auth/register.vue'),
     },
     {
       path: '/password',
       name: 'password',
-      component: password,
+      component: () => import('@/views/auth/password.vue'),
     },
   ],
 } as RouteRecordRaw

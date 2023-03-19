@@ -1,6 +1,6 @@
 export default [
   {
-    routeName: 'member.info',
+    routeName: 'member',
     title: '基本资料',
   },
   {

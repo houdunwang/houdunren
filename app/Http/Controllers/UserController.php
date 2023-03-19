@@ -47,7 +47,8 @@ class UserController extends Controller
     public function password(Request $request)
     {
         Validator::make($request->input(), [
-            'password' => ['required', 'min:5', 'confirmed']
+            'password' => ['required', 'min:5', 'confirmed'],
+            'password_confirmation' => ['required', 'min:5'],
         ])->validate();
 
         $user = Auth::user();

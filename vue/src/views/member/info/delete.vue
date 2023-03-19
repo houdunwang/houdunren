@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ElMessageBox } from 'element-plus'
 const { deleteUser } = useUser()
-const tab = ref('delete')
 const onSubmit = async () => {
   await ElMessageBox.confirm('注销帐号，将删除该用户在网站的所有数据！！！', '重要提示')
   await ElMessageBox.confirm('你需要再考虑一下，真的删除吗？', '重要提示')

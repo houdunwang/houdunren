@@ -20,7 +20,6 @@ const onSubmit = async () => {
       </el-form-item>
       <el-form-item label="验证码">
         <CodeSend v-model:code="form.code" v-model:account="form.account" type="no-exists" class="w-full" />
-        <HdError name="code" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">确定修改</el-button>

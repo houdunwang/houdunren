@@ -213,6 +213,7 @@ return [
         'username'                 => '用户名',
         'year'                     => '年',
         'captcha' => '验证码',
-        'account' => '帐号'
+        'account' => '帐号',
+        'code' => '验证码'
     ],
 ];

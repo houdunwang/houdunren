@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const tab = ref('password')
 const { updatePassword } = useUser()
 const form = reactive({ password: '', password_confirmation: '' })
 const onSubmit = async () => {
@@ -16,6 +15,7 @@ const onSubmit = async () => {
       </el-form-item>
       <el-form-item label="确认密码">
         <el-input type="password" v-model="form.password_confirmation"></el-input>
+        <HdError name="password_confirmation" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">确定修改</el-button>
