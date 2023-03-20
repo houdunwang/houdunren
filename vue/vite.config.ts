@@ -1,4 +1,5 @@
 import vue from '@vitejs/plugin-vue'
+import { viteMockServe } from 'vite-plugin-mock'
 import path from 'path'
 import { defineConfig, loadEnv } from 'vite'
 import prismjs from 'vite-plugin-prismjs'
@@ -13,6 +14,10 @@ export default defineConfig(({ command, mode }) => {
     plugins: [
       ...autoImport,
       vue(),
+      viteMockServe({
+        mockPath: 'mock',
+        localEnabled: !isBuild && !env.VITE_API_URL,
+      }),
       prismjs({
         languages: 'all',
       }),

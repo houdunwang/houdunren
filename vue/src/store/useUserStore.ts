@@ -1,3 +1,4 @@
+import { ApiEnum } from '@/enum/ApiEnum'
 import { http } from '@/plugins/axios'
 import { defineStore } from 'pinia'
 
@@ -8,15 +9,11 @@ export default defineStore('user', {
     }
   },
   actions: {
-    setUser(data: UserModel) {
-      this.user = data
-    },
     async getCurrentUser() {
       if (useAuth().isLogin()) {
-        const { data } = await http.request<ApiData<UserModel>>({
-          url: 'user/current',
+        this.user = await http.request<UserModel>({
+          url: ApiEnum.CURRENT_USER,
         })
-        this.user = data
       }
     },
   },

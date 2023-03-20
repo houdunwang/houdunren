@@ -1,3 +1,4 @@
+import { ApiEnum } from '@/enum/ApiEnum'
 import { http } from '@/plugins/axios'
 import router from '@/plugins/router'
 const storage = useStorage()
@@ -25,7 +26,7 @@ export default () => {
   //退出登录
   async function logout() {
     storage.remove(CacheKey.TOKEN_NAME)
-    return (location.href = '/')
+    location.href = '/'
   }
 
   //找回密码
@@ -34,7 +35,7 @@ export default () => {
       const {
         data: { token },
       } = await http.request<ApiData<{ token: string; user: UserModel }>>({
-        url: 'auth/find-password',
+        url: ApiEnum.FORGOT_PASSWORD,
         method: 'post',
         data: form,
       })
@@ -50,7 +51,7 @@ export default () => {
   const login = useUtil().request(async () => {
     try {
       const { token } = await http.request<{ token: string; user: UserModel }>({
-        url: 'auth/login',
+        url: ApiEnum.LOGIN,
         method: 'POST',
         data: form,
       })

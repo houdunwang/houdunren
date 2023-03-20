@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(AuthController::class)->prefix('auth')->group(function () {
     Route::post('login', 'login');
     Route::post('logout', 'logout');
-    Route::post('find-password', 'findPassword');
+    Route::post('forgot-password', 'forgotPassword');
 });
 
 //发送验证码

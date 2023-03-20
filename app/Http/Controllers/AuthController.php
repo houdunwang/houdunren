@@ -4,15 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Rules\CodeRule;
-use App\Rules\PhoneRule;
 use Auth;
-use F9Web\ApiResponseHelpers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -47,7 +43,7 @@ class AuthController extends Controller
     }
 
     //找回密码
-    public function findPassword(Request $request)
+    public function forgotPassword(Request $request)
     {
         Validator::make($request->input(), [
             "account" => ["required", Rule::exists('users', $this->accountField())],

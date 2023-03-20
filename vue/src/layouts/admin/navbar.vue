@@ -8,8 +8,6 @@ import { Home } from '@icon-park/vue-next'
     class="bg-white relative shadow-sm z-50 py-3 border-b-1 px-5 flex justify-between items-center border-b-4 border-[#574b90]">
     <div class="flex items-center">
       <home theme="outline" size="26" fill="#574b90" @click="$router.push({ name: 'home' })" class="cursor-pointer" />
-      <!-- <all-application theme="outline" size="26" fill="#574b90" /> -->
-      <!-- <HdBreadcrumb class="hidden md:block" /> -->
     </div>
     <div class="flex justify-center items-center relative cursor-pointer">
       <UserAvatarMenu />

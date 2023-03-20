@@ -17,7 +17,6 @@ const form = reactive({ account: '', code: '' })
       </el-form-item>
       <el-form-item label="验证码">
         <HdCodeSend v-model:code="form.code" v-model:account="form.account" type="no-exists" class="mt-3 w-full" />
-        <HdError name="code" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="updateEmail(form)">确定修改</el-button>
