@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { user } = useUserStore()
-const tab = ref('password')
 const { updateEmail } = useUser()
 const form = reactive({ account: '', code: '' })
 </script>
@@ -17,7 +16,7 @@ const form = reactive({ account: '', code: '' })
         <HdError name="account" />
       </el-form-item>
       <el-form-item label="验证码">
-        <CodeSend v-model:code="form.code" v-model:account="form.account" type="no-exists" class="mt-3 w-full" />
+        <HdCodeSend v-model:code="form.code" v-model:account="form.account" type="no-exists" class="mt-3 w-full" />
         <HdError name="code" />
       </el-form-item>
       <el-form-item>

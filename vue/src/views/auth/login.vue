@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Footer from './components/footer.vue'
-import Captcha from '@/components/captcha.vue'
-import WechatLogin from '@/components/wechatLogin.vue'
+import Captcha from '@/components/hd/captcha.vue'
+import WechatLogin from '@/components/hd/wechatLogin.vue'
 const { login, form } = useAuth()
 </script>
 

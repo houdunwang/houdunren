@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import router from '@/router'
+import router from '@/plugins/router'
 
 const routes = ref<{ title: string; name: string }[]>([])
 router.beforeResolve(async (to) => {

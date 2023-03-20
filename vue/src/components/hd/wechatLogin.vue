@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import useWechatLogin from '@/composables/useWechatLogin'
 import { Wechat } from '@icon-park/vue-next'
 
 const { scanLogin, scanLoginQr, qr } = useWechatLogin()

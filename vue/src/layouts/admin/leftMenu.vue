@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import useMenuStore from '@/layouts/admin/useMenuStore'
-import router from '@/router'
+import router from '@/plugins/router'
 import { ApplicationOne } from '@icon-park/vue-next'
 import { RouteRecordRaw } from 'vue-router'
 const { open } = useUtil()

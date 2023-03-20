@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CodeSend from '@/components/codeSend.vue'
+import CodeSend from '@/components/hd/codeSend.vue'
 import { Wechat } from '@icon-park/vue-next'
 import Footer from './components/footer.vue'
 const { form, findPassword } = useAuth()

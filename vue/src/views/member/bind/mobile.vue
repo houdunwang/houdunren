@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const tab = ref('password')
 const { updateMobile } = useUser()
 const { user } = useUserStore()
 const form = reactive({ account: '', code: '' })
@@ -19,7 +18,7 @@ const onSubmit = async () => {
         <HdError name="account" />
       </el-form-item>
       <el-form-item label="验证码">
-        <CodeSend v-model:code="form.code" v-model:account="form.account" type="no-exists" class="w-full" />
+        <HdCodeSend v-model:code="form.code" v-model:account="form.account" type="no-exists" class="w-full" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">确定修改</el-button>
