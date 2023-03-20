@@ -21,8 +21,10 @@ VMdPreview.use(githubTheme, {
 VueMarkdownEditor.use(vuepressTheme, {
   Prism,
 })
-export default (app: App) => {
+
+const setup = (app: App) => {
   app.use(VueMarkdownEditor)
   app.use(VMdPreviewHtml)
   app.use(VMdPreview)
 }
+export { setup }

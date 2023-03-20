@@ -1,2 +1,5 @@
 import './tailwindcss.css'
-export default () => {}
+import { App } from 'vue'
+
+const setup = (app: App) => {}
+export { setup }

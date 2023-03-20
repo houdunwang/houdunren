@@ -4,5 +4,5 @@ const http = new Axios({
   baseURL: '/api',
   timeout: 10000,
 })
-export default () => {}
-export { http }
+const setup = () => {}
+export { http, setup }

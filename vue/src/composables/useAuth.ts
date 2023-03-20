@@ -1,5 +1,5 @@
 import { http } from '@/plugins/axios'
-import router from '@/router'
+import router from '@/plugins/router'
 const storage = useStorage()
 
 export default () => {

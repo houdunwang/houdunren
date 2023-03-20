@@ -1,15 +1,17 @@
 import { App } from 'vue'
-import animate from './animate'
-import axios from './axios'
-import dayjs from './dayjs'
-import elementui from './elementui'
-import iconpark from './iconpark'
-import markdown from './markdown'
-import tailwindcss from './tailwindcss'
-import validate from './validate'
+import { setup as animate } from './animate'
+import { setup as axios } from './axios'
+import { setup as dayjs } from './dayjs'
+import { setup as elementui } from './elementui'
+import { setup as iconpark } from './iconpark'
+import { setup as markdown } from './markdown'
+import { setup as tailwindcss } from './tailwindcss'
+import { setup as validate } from './validate'
+import { setup as router } from './router'
+import { setup as pinia } from './pinia'
 
-const modules = [animate, axios, dayjs, elementui, iconpark, markdown, tailwindcss, validate]
+const modules = [animate, axios, dayjs, elementui, iconpark, markdown, tailwindcss, validate, router, pinia]
 
 export default function register(app: App) {
-  modules.map((module) => module(app))
+  modules.map((setup) => setup(app))
 }

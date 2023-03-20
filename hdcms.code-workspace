@@ -1,19 +1,19 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "vue"
-		},
-		{
-			"path": "Modules/Edu"
-		},
-		{
-			"path": "Modules/Edu/Web"
-		}
-	],
-	"settings": {
-		"explorer.fileNesting.expand": false
-	}
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "vue"
+    },
+    {
+      "path": "Modules/Edu"
+    },
+    {
+      "path": "Modules/Edu/Web"
+    }
+  ],
+  "settings": {
+    "explorer.fileNesting.expand": false
+  }
 }

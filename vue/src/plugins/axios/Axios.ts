@@ -1,4 +1,4 @@
-import router from '@/router'
+import router from '@/plugins/router'
 import axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
 import { ElLoading, ElMessage } from 'element-plus'
 interface IOptions {

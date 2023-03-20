@@ -3,6 +3,7 @@ import { RouteRecordRaw } from 'vue-router'
 export default {
   path: '/auth',
   component: () => import('@/layouts/auth/index.vue'),
+  meta: { noPrefix: true },
   children: [
     {
       path: '/login',
@@ -15,9 +16,9 @@ export default {
       component: () => import('@/views/auth/register.vue'),
     },
     {
-      path: '/password',
-      name: 'password',
-      component: () => import('@/views/auth/password.vue'),
+      path: '/forgot_password',
+      name: 'forgot_password',
+      component: () => import('@/views/auth/forgot_password.vue'),
     },
   ],
 } as RouteRecordRaw

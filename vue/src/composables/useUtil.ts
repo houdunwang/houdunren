@@ -1,4 +1,4 @@
-import router from '@/router'
+import router from '@/plugins/router'
 import { ElMessageBox } from 'element-plus'
 import { onBeforeRouteLeave, RouteLocationRaw } from 'vue-router'
 

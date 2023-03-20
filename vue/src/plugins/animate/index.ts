@@ -1,3 +1,4 @@
 import 'animate.css'
 
-export default () => {}
+const setup = () => {}
+export { setup }

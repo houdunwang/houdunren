@@ -1,6 +1,8 @@
 <script setup lang="ts">
 // 用户头像菜单
 import dayjs from 'dayjs'
+import config from '@/config'
+
 const { logout } = useAuth()
 const storeUser = useUserStore()
 </script>
@@ -19,14 +21,8 @@ const storeUser = useUserStore()
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>
-              <router-link :to="{ name: 'admin' }"> 后台管理 </router-link>
-            </el-dropdown-item>
-            <el-dropdown-item>
-              <router-link :to="{ name: 'member' }"> 会员中心 </router-link>
-            </el-dropdown-item>
-            <el-dropdown-item>
-              <router-link :to="{ name: 'home' }"> 网站首页 </router-link>
+            <el-dropdown-item v-for="(menu, index) of config.user.avatarMenu" :key="index">
+              <router-link :to="{ name: menu.routeName }"> {{ menu.title }} </router-link>
             </el-dropdown-item>
             <el-dropdown-item divided @click="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
