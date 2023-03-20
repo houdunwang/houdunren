@@ -46,6 +46,8 @@ const { config } = useConfigStore()
   overflow: hidden;
   position: absolute;
   z-index: -1;
+  transform: scale(1.3);
+  filter: blur(2px);
   opacity: 1;
   @apply top-0 left-0 right-0 bottom-0;
 }

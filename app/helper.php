@@ -3,6 +3,13 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
+if (!function_exists('isDev')) {
+    function isDev()
+    {
+        return app()->isLocal();
+    }
+}
+
 if (!function_exists('isAdministrator')) {
     function isAdministrator()
     {
