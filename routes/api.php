@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CodeController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FavourController;
@@ -75,3 +76,6 @@ Route::controller(FavourController::class)->prefix('favour')->group(function () 
     Route::post('{module}/{model}/{id}', 'make');
     Route::get('{module}/{model}/{id}', 'show');
 });
+
+//评论
+Route::apiResource('comment', CommentController::class);
