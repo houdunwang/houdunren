@@ -23,7 +23,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::guessPolicyNamesUsing(function ($modelClass) {
-            return str_replace('Models', 'Policies', $modelClass) . 'Policy';
+            return str_replace(['Models', 'Entities'], 'Policies', $modelClass) . 'Policy';
         });
     }
 }

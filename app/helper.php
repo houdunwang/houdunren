@@ -20,19 +20,15 @@ if (!function_exists('isAdministrator')) {
 if (!function_exists('modelInstance')) {
     function modelInstance(): Model
     {
-        $class = '\App\Models\\' . ucfirst(request('type'));
-        if (!class_exists($class)) {
-            abort(404, '模型不存在');
-        }
-        return $class::findOrFail(request('mid'));
+        $class = modelClass();
+        return $class::findOrFail(request('id'));
     }
 }
 
 if (!function_exists('modelClass')) {
     function modelClass()
     {
-        $class = '\App\Models\\' . ucfirst(request('type'));
-
+        $class = 'Modules\\' . ucfirst(request('module')) . '\Entities\\' . ucfirst(request('model'));
         if (!class_exists($class)) abort(404, '模型不存在');
         return $class;
     }

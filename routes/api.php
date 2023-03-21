@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CodeController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\FavourController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WechatBindController;
@@ -60,3 +62,16 @@ Route::post('wechat/unbind/{ticket?}', [WechatBindController::class, 'unbind']);
 Route::get('config/base', [ConfigController::class, 'base']);
 Route::get('config/all', [ConfigController::class, 'all']);
 Route::put('config', [ConfigController::class, 'update']);
+
+//收藏资源
+Route::controller(FavoriteController::class)->prefix('favorite')->group(function () {
+    Route::get('userFavoriteList/{type}/{user}', 'getUserFavoriteList');
+    Route::post('{module}/{model}/{id}', 'toggleFavorite');
+    Route::get('{module}/{model}/{id}', 'modelFavoriteInfo');
+});
+
+//点赞操作
+Route::controller(FavourController::class)->prefix('favour')->group(function () {
+    Route::post('{module}/{model}/{id}', 'make');
+    Route::get('{module}/{model}/{id}', 'show');
+});
