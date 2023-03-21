@@ -71,3 +71,16 @@ if (!function_exists('isWechat')) {
         return strpos($user_agent, 'MicroMessenger');
     }
 }
+
+if (!function_exists('activityLog')) {
+    function activityLog(string $module, Model $model, string $title, $properties = [])
+    {
+        activity()
+            ->causedBy(Auth::user())
+            ->performedOn($model)
+            ->withProperties($properties)
+            ->event('created')
+            ->useLog($module)
+            ->log($title);
+    }
+}

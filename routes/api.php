@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CodeController;
 use App\Http\Controllers\CommentController;
@@ -79,3 +80,6 @@ Route::controller(FavourController::class)->prefix('favour')->group(function () 
 
 //评论
 Route::apiResource('comment', CommentController::class);
+
+//全站动态
+Route::apiResource('activity', ActivityController::class);

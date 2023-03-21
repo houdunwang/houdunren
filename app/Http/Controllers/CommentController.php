@@ -6,9 +6,7 @@ use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Http\Resources\CommentResource;
 use App\Models\Comment;
-use App\Models\Topic;
 use Auth;
-use Illuminate\Database\Eloquent\Model;
 use Request;
 
 class CommentController extends Controller
@@ -25,7 +23,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        if (request('type')) {
+        if (request('module')) {
             $model = modelInstance();
             return CommentResource::collection($model->comments()->whereNull('comment_id')->latest('updated_at')->get());
         }
