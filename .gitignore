@@ -24,3 +24,4 @@ yarn-error.log
 /public/*
 !/public/index.php
 !/public/robots.txt
+!/public/robots.txt
