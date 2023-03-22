@@ -61,9 +61,9 @@ class CommentNotification extends Notification
             'type' => 'comment',
             'module' => $info[1],
             'model' => $info[3],
-            'mid' => $this->comment->commentable_id,
+            'model_id' => $this->comment->commentable_id,
             'title' => $this->comment->user->name . ' 回复了你',
-            'comment_id' => $this->comment->id
+            'id' => $this->comment->id
         ];
     }
 }

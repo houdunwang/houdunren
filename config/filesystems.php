@@ -71,6 +71,8 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('Modules') => base_path('Modules'),
+        public_path('vue') => base_path('vue'),
     ],
 
 ];

@@ -1,12 +1,12 @@
 import { RouteRecordRaw } from 'vue-router'
 
 export default {
-  path: '/member',
+  path: '/detail',
   component: () => import('@/layouts/member/index.vue'),
   meta: { auth: true },
   children: [
     {
-      path: 'info',
+      path: '',
       name: 'member',
       component: () => import('@/views/member/info.vue'),
     },

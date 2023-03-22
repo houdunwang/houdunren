@@ -56,8 +56,7 @@ export default () => {
         data: form,
       })
       storage.set(CacheKey.TOKEN_NAME, token)
-      const route = router.resolve({ name: RouteName.ADMIN })
-      location.href = route.fullPath
+      location.href = storage.get(CacheKey.REDIRECT_ROUTE_NAME, '/')
     } catch (error) {
       useCaptcha().getCaptcha()
     }

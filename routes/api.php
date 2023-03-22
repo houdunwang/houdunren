@@ -1,17 +1,20 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\AlipayController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CodeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FavourController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WechatBindController;
 use App\Http\Controllers\WechatController;
 use App\Http\Controllers\WechatLoginController;
+use App\Http\Controllers\WepayController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -83,3 +86,20 @@ Route::apiResource('comment', CommentController::class);
 
 //全站动态
 Route::apiResource('activity', ActivityController::class);
+
+//站内通知
+Route::apiResource('notification', NotificationController::class);
+
+//支付宝
+Route::controller(AlipayController::class)->prefix("alipay")->group(function () {
+    Route::get('pay/{order}', 'pay');
+    Route::get('return', 'returnUrl');
+    Route::any('notify', 'notifyUrl');
+});
+
+//微信支付
+Route::controller(WepayController::class)->prefix("wepay")->group(function () {
+    Route::post('pay/{order}', 'pay');
+    Route::post('app/{order}', 'app');
+    Route::any('notify', 'notifyUrl');
+});

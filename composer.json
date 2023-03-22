@@ -25,7 +25,9 @@
         "mtownsend/xml-to-array": "^2.0",
         "nwidart/laravel-modules": "^10.0",
         "spatie/image": "^2.2",
-        "spatie/laravel-activitylog": "^4.7"
+        "spatie/laravel-activitylog": "^4.7",
+        "symfony/psr-http-message-bridge": "^2.1",
+        "yansongda/pay": "~3.2.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",

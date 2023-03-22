@@ -69,6 +69,12 @@ class User extends Authenticatable
         return $this->hasMany(Upload::class);
     }
 
+    //订单
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function model(string $model)
     {
         $class =  'Modules\\' . $model . '\Entities\\User';

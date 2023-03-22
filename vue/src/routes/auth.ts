@@ -6,17 +6,17 @@ export default {
   meta: { noPrefix: true },
   children: [
     {
-      path: '/login',
+      path: 'login',
       name: 'login',
       component: () => import('@/views/auth/login.vue'),
     },
     {
-      path: '/register',
+      path: 'register',
       name: 'register',
       component: () => import('@/views/auth/register.vue'),
     },
     {
-      path: '/forgot_password',
+      path: 'forgot_password',
       name: 'forgot_password',
       component: () => import('@/views/auth/forgot_password.vue'),
     },

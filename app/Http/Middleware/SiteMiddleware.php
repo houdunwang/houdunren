@@ -29,7 +29,5 @@ class SiteMiddleware
             config(['app.url' => URL::previous()]);
             config(['mail.mailers.smtp' => config('mail.mailers.smtp') + $data['email']]);
         }
-
-        config(['module' => include base_path() . '/Modules/Edu/Config/config.php']);
     }
 }

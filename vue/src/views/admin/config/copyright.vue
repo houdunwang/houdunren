@@ -19,9 +19,6 @@ const { config } = defineProps<{ config: ConfigModel }>()
     <el-form-item label="icp">
       <el-input v-model="config.copyright.icp"></el-input>
     </el-form-item>
-    <el-form-item label="大叔照片">
-      <el-checkbox v-model="config.copyright.showXjAvatar">显示</el-checkbox>
-    </el-form-item>
   </el-form>
 </template>
 
