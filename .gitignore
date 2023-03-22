@@ -21,3 +21,6 @@ yarn-error.log
 !/Modules/.gitkeep
 *.zip
 *.tar.gz
+/public/*
+!/public/index.php
+!/public/robots.txt
