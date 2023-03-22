@@ -18,7 +18,7 @@ class AuthController extends Controller
         Validator::make($request->input(), [
             "account" => ['required', Rule::exists('users', $this->accountField())],
             'password' => ['required'],
-            'captcha' => [isDev() ? 'nullable' : 'required', 'captcha_api:' . request('captcha_key') . ',math']
+            'captcha' => [app()->isLocal() ? 'nullable' : 'required', 'captcha_api:' . request('captcha_key') . ',math']
         ], ['captcha.captcha_api' => '验证码输入错误'])->validate();
 
         $user = User::where($this->accountField(), $request->account)->first();

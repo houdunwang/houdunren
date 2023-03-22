@@ -9,5 +9,3 @@ const { config } = defineProps<{ config: ConfigModel }>()
     </el-form-item>
   </el-form>
 </template>
-
-<style lang="scss"></style>

@@ -6,8 +6,8 @@ import email from './config/email.vue'
 import wechat from './config/wechat.vue'
 import copyright from './config/copyright.vue'
 
-const { config, get, update } = useConfig()
-await get()
+const { get, update } = useConfig()
+const config = ref(await get())
 const tab = ref('base')
 </script>
 
@@ -34,7 +34,7 @@ const tab = ref('base')
       </el-tab-pane>
     </el-tabs>
 
-    <el-button type="primary" size="default" @click="update" class="mt-3">保存提交</el-button>
+    <el-button type="primary" size="default" @click="update(config)" class="mt-3">保存提交</el-button>
   </main>
 </template>
 

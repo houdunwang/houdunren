@@ -3,13 +3,6 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-if (!function_exists('isDev')) {
-    function isDev()
-    {
-        return app()->isLocal();
-    }
-}
-
 if (!function_exists('isAdministrator')) {
     function isAdministrator()
     {
@@ -54,16 +47,6 @@ if (!function_exists('rateLimiter')) {
     }
 }
 
-if (!function_exists('isDuration')) {
-    function isDuration()
-    {
-        if (Auth::check()) {
-            $user = Auth::user();
-            return $user->duration && (now()->diffInMinutes($user->duration->end_time, false) > 0);
-        }
-    }
-}
-
 if (!function_exists('isWechat')) {
     function isWechat()
     {
@@ -73,7 +56,7 @@ if (!function_exists('isWechat')) {
 }
 
 if (!function_exists('activityLog')) {
-    function activityLog(string $module, Model $model, string $title, $properties = [])
+    function activityLog(string $module,  $model, string $title, $properties = [])
     {
         activity()
             ->causedBy(Auth::user())

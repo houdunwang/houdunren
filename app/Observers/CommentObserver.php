@@ -6,7 +6,6 @@ use App\Models\Activity;
 use App\Models\Comment;
 use App\Models\User;
 use App\Notifications\CommentNotification;
-use Auth;
 use Illuminate\Support\Facades\Notification;
 
 class CommentObserver
@@ -17,7 +16,7 @@ class CommentObserver
             request('module'),
             $comment,
             $comment->model->title,
-            ['module' => request('module'), 'model' => request('model'), 'id' => $comment->commentable_id]
+            ['module' => request('module'), 'model' => request('model'), 'model_id' => $comment->commentable_id]
         );
 
         //评论或视频作者通知

@@ -3,7 +3,7 @@ import { RouteRecordRaw } from 'vue-router'
 export default {
   path: '/admin',
   component: () => import('@/layouts/admin/index.vue'),
-  meta: { auth: true, menu: { title: 'Dashboard', icon: DashboardOne, order: 100 } },
+  meta: { auth: true, admin: true, menu: { title: 'Dashboard', icon: DashboardOne, order: 100 } },
   children: [
     {
       name: 'admin',

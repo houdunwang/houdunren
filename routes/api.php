@@ -61,7 +61,7 @@ Route::post('wechat/bind/{ticket?}', [WechatBindController::class, 'bind']);
 Route::post('wechat/unbind/{ticket?}', [WechatBindController::class, 'unbind']);
 
 //配置
-Route::get('config/base', [ConfigController::class, 'base']);
+Route::get('config/common', [ConfigController::class, 'common']);
 Route::get('config/all', [ConfigController::class, 'all']);
 Route::put('config', [ConfigController::class, 'update']);
 

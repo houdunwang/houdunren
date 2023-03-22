@@ -7,7 +7,7 @@ export default defineStore('config', () => {
 
   const getConfig = async () => {
     config.value = await http.request<ConfigModel>({
-      url: ApiEnum.BASE_CONFIG,
+      url: 'config/common',
     })
   }
   return { config, getConfig }

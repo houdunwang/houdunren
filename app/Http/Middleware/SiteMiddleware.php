@@ -6,15 +6,11 @@ use App\Models\Config;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
+use Route;
 use Symfony\Component\HttpFoundation\Response;
 
 class SiteMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
     public function handle(Request $request, Closure $next): Response
     {
         $this->load();
@@ -33,5 +29,7 @@ class SiteMiddleware
             config(['app.url' => URL::previous()]);
             config(['mail.mailers.smtp' => config('mail.mailers.smtp') + $data['email']]);
         }
+
+        config(['module' => include base_path() . '/Modules/Edu/Config/config.php']);
     }
 }

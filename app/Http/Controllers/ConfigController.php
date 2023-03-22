@@ -11,23 +11,27 @@ class ConfigController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum'])->except(['base']);
+        $this->middleware(['auth:sanctum'])->except(['common']);
     }
 
-    //前台获取配置项
-    public function base()
+    //管理员获取所有配置项
+    public function common()
     {
-        return $this->respondWithSuccess(new ConfigResource([
+        $config = [
             'base' => config('hd.base'),
             'copyright' => config('hd.copyright'),
-        ]));
+        ];
+        return $this->respondWithSuccess(new ConfigResource($config));
     }
 
     //管理员获取所有配置项
     public function all()
     {
-        $this->authorize('viewAny', Config::class);
-        return $this->respondWithSuccess(new ConfigResource(config('hd')));
+        $config = isAdministrator() ? config('hd') : [
+            'base' => config('hd.base'),
+            'copyright' => config('hd.copyright'),
+        ];
+        return $this->respondWithSuccess(new ConfigResource($config));
     }
 
 
