@@ -16,11 +16,6 @@ class CommentController extends Controller
         $this->middleware(['auth:sanctum'])->except(['index']);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         if (request('module')) {
@@ -30,12 +25,6 @@ class CommentController extends Controller
         return CommentResource::collection(Comment::paginate(20));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreCommentRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreCommentRequest $request)
     {
         return rateLimiter('comment-store' . Auth::id(), 3, function () use ($request) {
@@ -45,12 +34,6 @@ class CommentController extends Controller
         });
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
     public function show(Comment $comment)
     {
         $count = $comment->latest('id')->where('id', '<=', $comment->id)->count();

@@ -17,19 +17,6 @@ export default {
     ],
   },
   user: {
-    avatarMenu: [
-      {
-        routeName: RouteName.ADMIN,
-        title: '后台管理',
-      },
-      {
-        routeName: RouteName.MEMBER,
-        title: '会员中心',
-      },
-      {
-        routeName: RouteName.HOME,
-        title: '网站首页',
-      },
-    ],
+    avatarMenu: [],
   },
 }

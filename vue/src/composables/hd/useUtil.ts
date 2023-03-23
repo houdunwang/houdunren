@@ -72,6 +72,10 @@ export default () => {
     })
   }
 
+  //public目录图片加载
+  const publicImage = (url: string) => {
+    return new URL(url, import.meta.url).href
+  }
   return {
     routeQuery,
     open,
@@ -79,5 +83,6 @@ export default () => {
     isWechat,
     routeParams,
     routeLeaveConfirm,
+    publicImage,
   }
 }

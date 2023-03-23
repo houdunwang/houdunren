@@ -1,7 +1,7 @@
 <?php
 return  [
     "base" => [
-        'name' => env('APP_NAME', '后盾人'),
+        'name' => env('APP_NAME', 'houdunren.com'),
     ],
     "copyright" => [
         'ad' => '后盾人 人人做后盾',
@@ -51,6 +51,6 @@ return  [
     ],
     "upload" => [
         //上传方式 local|oss
-        "drive" => 'local'
+        "drive" => 'oss'
     ]
 ];

@@ -2,15 +2,19 @@
 // 用户头像菜单
 import dayjs from 'dayjs'
 import config from '@/config'
-
+const { open } = useUtil()
 const { logout } = useAuth()
 const storeUser = useUserStore()
 </script>
 
 <template>
   <main class="flex items-center">
-    <HdFullScreen class="hidden 2xl:flex mr-3 text-gray-600" />
     <section v-if="!!storeUser.user" class="flex items-center">
+      <icon-people
+        theme="outline"
+        size="25"
+        class="cursor-pointer text-gray-700 hover:text-gray-500 mr-2"
+        @click="open('/detail')" />
       <el-dropdown trigger="click">
         <span class="el-dropdown-link flex items-center">
           <ElImage :src="storeUser.user.avatar" fit="cover" class="w-8 h-8 rounded-md" />
@@ -21,8 +25,8 @@ const storeUser = useUserStore()
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item v-for="(menu, index) of config.user.avatarMenu" :key="index">
-              <router-link :to="{ name: menu.routeName }"> {{ menu.title }} </router-link>
+            <el-dropdown-item>
+              <a href="/"> 网站首页 </a>
             </el-dropdown-item>
             <el-dropdown-item divided @click="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>

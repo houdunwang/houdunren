@@ -14,7 +14,6 @@ class WepayController extends Controller
     public function __construct()
     {
         $this->middleware(['auth:sanctum'])->only('createOrder');
-
         $config = config('pay');
         $config['wechat']['default']['notify_url'] = url('/api/wepay/notify');
         Pay::config($config);
@@ -57,9 +56,7 @@ class WepayController extends Controller
     {
         $pay = Pay::wechat();
         $result = $pay->callback();
-
         $ciphertext = $result['resource']['ciphertext'];
-
         if ($ciphertext['trade_state'] == 'SUCCESS') {
             $order = app(OrderService::class)->completeOrder($ciphertext['out_trade_no'], $ciphertext['transaction_id']);
             $this->callModuleNotify($order);
@@ -68,9 +65,8 @@ class WepayController extends Controller
     }
 
     //模块异步通知
-    public function callModuleNotify($sn)
+    public function callModuleNotify(Order $order)
     {
-        $order = Order::where('sn', $sn)->firstOrFail();
         $class = 'Modules\\Edu\\Services\\PayService';
         return app($class)->notify($order);
     }

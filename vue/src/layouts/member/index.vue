@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import navbar from './memberNavbar.vue'
 import config from '@/config'
-import UserBlock from './userBlock.vue'
 const { user } = useUserStore()
 const active = ref('')
 </script>

@@ -11,16 +11,16 @@ import Navbar from '@/layouts/admin/navbar.vue'
           type="info"
           size="default"
           round
-          :color="$route.name == 'admin' ? '#626aef' : ''"
-          @click="$router.push({ name: 'admin' })">
+          :color="$route.name == 'hd' ? '#626aef' : ''"
+          @click="$router.push({ name: 'hd' })">
           应用模块
         </el-button>
         <el-button
           type="info"
           size="default"
-          :color="$route.name == 'admin.config' ? '#626aef' : ''"
+          :color="$route.name == 'hd.config' ? '#626aef' : ''"
           round
-          @click="$router.push({ name: 'admin.config' })">
+          @click="$router.push({ name: 'hd.config' })">
           系统设置
         </el-button>
       </div>

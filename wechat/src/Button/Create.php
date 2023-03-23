@@ -3,9 +3,7 @@
 namespace Houdunwang\Wechat\Button;
 
 use Exception;
-use Houdunwang\Wechat\Wechat;
 use Illuminate\Support\Facades\Http;
-use GuzzleHttp\Client;
 use Illuminate\Http\Client\RequestException;
 use Log;
 
