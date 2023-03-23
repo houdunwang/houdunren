@@ -20,5 +20,3 @@
     <a href="/" class="text-xs text-gray-700">网站首页</a>
   </div>
 </template>
-
-<style lang="scss"></style>

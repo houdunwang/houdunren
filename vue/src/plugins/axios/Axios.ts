@@ -84,7 +84,7 @@ export default class Axios {
         switch (status) {
           case HttpStatus.UNAUTHORIZED:
             storage.remove(CacheKey.TOKEN_NAME)
-            router.push({ name: RouteName.LOGIN })
+            location.href = '/login'
             break
           case HttpStatus.UNPROCESSABLE_ENTITY:
             useErrorStore().setErrors(error.response.data.errors ?? error.response.data)

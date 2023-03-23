@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from 'vue-router'
 
 export default {
-  path: '/auth',
+  path: '/',
   component: () => import('@/layouts/auth/index.vue'),
   meta: { noPrefix: true },
   children: [
