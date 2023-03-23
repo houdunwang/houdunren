@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Activity;
 use App\Models\User;
 use App\Rules\CodeRule;
 use App\Rules\PhoneRule;
@@ -34,7 +35,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return new UserResource($user);
+        return $this->respondWithSuccess(new UserResource($user));
     }
 
     public function update(UpdateUserRequest $request)
@@ -114,5 +115,16 @@ class UserController extends Controller
         $user->is_lock = true;
         $user->save();
         return $this->respondOk('用户锁定成功');
+    }
+
+    public function removeAllData(User $user)
+    {
+        if (!isAdministrator()) return;
+        $user->topics()->delete();
+        $user->signs()->delete();
+        Activity::where('causer_id', $user->id)->delete();
+        $user->is_lock = true;
+        $user->save();
+        return $this->success('数据清空完毕');
     }
 }

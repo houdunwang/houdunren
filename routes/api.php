@@ -41,7 +41,6 @@ Route::controller(UserController::class)->prefix('user')->group(function () {
     Route::delete('delete', 'delete');
     Route::delete('remove_avatar/{user}', 'removeAvatar');
     Route::post('lock_user/{user}', 'lockUser');
-    Route::post('removeAllData/{user}', 'removeAllData');
 });
 Route::apiResource('user', UserController::class);
 
@@ -70,7 +69,7 @@ Route::put('config', [ConfigController::class, 'update']);
 
 //收藏资源
 Route::controller(FavoriteController::class)->prefix('favorite')->group(function () {
-    Route::get('userFavoriteList/{type}/{user}', 'getUserFavoriteList');
+    Route::get('userFavoriteList/{module}/{model}/{user}', 'getUserFavoriteList');
     Route::post('{module}/{model}/{id}', 'toggleFavorite');
     Route::get('{module}/{model}/{id}', 'modelFavoriteInfo');
 });

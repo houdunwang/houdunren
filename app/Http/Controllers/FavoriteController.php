@@ -15,10 +15,10 @@ class FavoriteController extends Controller
     }
 
     //收藏列表
-    public function getUserFavoriteList(string $type, User $user)
+    public function getUserFavoriteList(string $module, string $model, User $user)
     {
         $collection = modelClass()::whereRelation('favorites', 'user_id', $user->id)->paginate(10);
-        $resourceClass = 'App\Http\Resources\\' . $type . "Resource";
+        $resourceClass = 'Modules\\' . $module . '\\Transformers\\' . $model . "Resource";
         return $resourceClass::collection($collection);
     }
 

@@ -11,7 +11,6 @@ class ActivityController extends Controller
 {
     public function index()
     {
-        //模块名
         $module = request('module');
         return ActivityResource::collection(Activity::where('log_name', $module)->latest('id')->paginate(15));
     }
