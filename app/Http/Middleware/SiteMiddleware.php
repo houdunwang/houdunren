@@ -24,7 +24,6 @@ class SiteMiddleware
             foreach (config('hd') as $name => $value) {
                 config(['hd.' . $name => ($data[$name] ?? []) + config('hd.' . $name)]);
             }
-
             config(['app.name' => $data['base']['name'] ?? config('app.name')]);
             config(['app.url' => URL::previous()]);
             config(['mail.mailers.smtp' => config('mail.mailers.smtp') + $data['email']]);

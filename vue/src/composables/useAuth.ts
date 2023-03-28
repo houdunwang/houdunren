@@ -26,6 +26,7 @@ export default () => {
   //退出登录
   async function logout() {
     storage.remove(CacheKey.TOKEN_NAME)
+    storage.remove(CacheKey.REDIRECT_ROUTE_NAME)
     location.href = '/'
   }
 
@@ -38,7 +39,9 @@ export default () => {
         data: form,
       })
       storage.set(CacheKey.TOKEN_NAME, token)
-      location.href = storage.get(CacheKey.REDIRECT_ROUTE_NAME, '/')
+      const redirectUrl = storage.get(CacheKey.REDIRECT_ROUTE_NAME, '/')
+      storage.remove(CacheKey.REDIRECT_ROUTE_NAME)
+      location.href = redirectUrl
     } catch (error) {
       useCaptcha().getCaptcha()
     }
@@ -53,7 +56,9 @@ export default () => {
         data: form,
       })
       storage.set(CacheKey.TOKEN_NAME, token)
-      location.href = storage.get(CacheKey.REDIRECT_ROUTE_NAME, '/')
+      const redirectUrl = storage.get(CacheKey.REDIRECT_ROUTE_NAME, '/')
+      storage.remove(CacheKey.REDIRECT_ROUTE_NAME)
+      location.href = redirectUrl
     } catch (error) {
       useCaptcha().getCaptcha()
     }

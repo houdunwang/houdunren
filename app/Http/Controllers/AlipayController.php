@@ -38,7 +38,6 @@ class AlipayController extends Controller
         $result = Pay::alipay()->callback();
         //修改订单状态，更改会员周期
         $order = app(OrderService::class)->completeOrder($result->out_trade_no, $result->trade_no);
-
         return $this->callModuleNotify($order);
     }
 
@@ -47,7 +46,6 @@ class AlipayController extends Controller
     {
         $pay = Pay::alipay();
         $result = $pay->callback();
-
         //修改订单状态，更改会员周期
         if ($result->out_trade_no) {
             $order = app(OrderService::class)->completeOrder($result->out_trade_no, $result->trade_no);
@@ -59,7 +57,7 @@ class AlipayController extends Controller
     //模块异步通知
     public function callModuleNotify(Order $order)
     {
-        $class = 'Modules\\Edu\\Services\\PayService';
+        $class = 'Modules\\' . $order->module . '\\Services\\PayService';
         return app($class)->notify($order);
     }
 }

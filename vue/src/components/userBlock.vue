@@ -4,6 +4,7 @@ const { user } = defineProps<{ user: UserModel }>()
 
 <template>
   <main class="bg-white overflow-hidden rounded-md">
+    <!-- <UserAvatar :user="user" fit="cover" class="w-full cursor-pointer" /> -->
     <el-image
       :src="user.avatar"
       fit="cover"

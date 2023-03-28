@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Console\Commands\ModuleModel;
 use App\Http\Requests\StoreModuleRequest;
 use App\Http\Requests\UpdateModuleRequest;
+use App\Models\Activity;
 use App\Models\Module as ModelsModule;
 use App\Services\ModuleService;
 use Artisan;
@@ -72,6 +73,7 @@ class ModuleController extends Controller
     {
         $module->delete();
         Artisan::call('module:migrate-reset ' . $module->name);
+        Activity::where('log_name', $module->name)->delete();
 
         return $this->respondOk('模块卸载成功');
     }

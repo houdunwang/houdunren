@@ -23,7 +23,7 @@ class ModuleMiddleware
         if ($data) {
             foreach (config('module') as $name => $value) {
                 if (is_string($value)) {
-                    config(['module' . $name => $data[$name] ?? $value]);
+                    config(['module.' . $name => $data[$name] ?? $value]);
                 } else {
                     config(['module.' . $name => ($data[$name] ?? []) + $value]);
                 }
