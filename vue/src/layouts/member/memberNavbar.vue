@@ -8,8 +8,10 @@ const { open } = useUtil()
 <template>
   <main class="bg-white border-b-4 border-[#e66767]">
     <section class="2xl:w-page 2xl:m-auto py-3 px-3 border-b-1 flex justify-between items-center">
-      <div class="flex items-center">
-        <home theme="outline" size="26" fill="#e66767" @click="open('/')" class="cursor-pointer hidden md:block" />
+      <home theme="outline" size="26" fill="#e66767" @click="open('/')" class="cursor-pointer" />
+
+      <div class="flex items-center gap-2">
+        <UserAvatarMenu />
         <el-dropdown trigger="click" size="default" class="md:hidden">
           <AllApplication theme="outline" size="26" fill="#e66767" class="md:hidden" />
           <template #dropdown>
@@ -24,7 +26,6 @@ const { open } = useUtil()
           </template>
         </el-dropdown>
       </div>
-      <UserAvatarMenu />
     </section>
   </main>
 </template>

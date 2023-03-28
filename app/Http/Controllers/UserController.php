@@ -125,6 +125,6 @@ class UserController extends Controller
         Activity::where('causer_id', $user->id)->delete();
         $user->is_lock = true;
         $user->save();
-        return $this->success('数据清空完毕');
+        return $this->respondOk('数据清空完毕');
     }
 }

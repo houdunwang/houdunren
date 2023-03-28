@@ -13,7 +13,7 @@ class WepayController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum'])->only('createOrder');
+        $this->middleware(['auth:sanctum'])->except(['notifyUrl']);
         $config = config('pay');
         $config['wechat']['default']['notify_url'] = url('/api/wepay/notify');
         Pay::config($config);
@@ -65,7 +65,7 @@ class WepayController extends Controller
     }
 
     //模块异步通知
-    public function callModuleNotify(Order $order)
+    protected function callModuleNotify(Order $order)
     {
         $class = 'Modules\\Edu\\Services\\PayService';
         return app($class)->notify($order);

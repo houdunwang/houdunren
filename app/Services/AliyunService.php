@@ -42,7 +42,10 @@ class AliyunService
             "templateParam" => json_encode($params['params'])
         ]);
         $runtime = new RuntimeOptions([]);
-        $client->sendSmsWithOptions($sendSmsRequest, $runtime);
+        $d =  $client->sendSmsWithOptions($sendSmsRequest, $runtime);
+        if ($d->body->code !== 'OK') {
+            abort(500, $d->body->message);
+        }
     }
 
     //CDN鉴权 URL

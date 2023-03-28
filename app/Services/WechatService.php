@@ -15,14 +15,12 @@ class WechatService
     {
         $userWechat = app(WechatUser::class)->config(config('hd.wechat'));
         $info = $userWechat->getByOpenid($openId);
-        // Log::info($info);
         if ($info) {
             $user = User::Where('unionid', $info['unionid'])->first();
             if (!$user) $user = new User();
             $user->openid = $info['openid'];
             $user->unionid = $info['unionid'];
             $user->name = $user->name ?: $info['nickname'];
-            // $user->avatar = $info['headimgurl'] ? $this->getHeadImageUrl($info['headimgurl']) : $user->avatar;
             $user->save();
             Auth::login($user);
             return $user;

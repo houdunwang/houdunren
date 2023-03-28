@@ -5,9 +5,9 @@ const storage = useStorage()
 
 export default () => {
   const form = reactive({
-    account: '2300071698@qq.com',
-    password: 'admin888',
-    password_confirmation: 'admin888',
+    account: '',
+    password: '',
+    password_confirmation: '',
     captcha: '',
     captcha_key: '',
     code: '',
@@ -32,16 +32,13 @@ export default () => {
   //找回密码
   async function findPassword() {
     try {
-      const {
-        data: { token },
-      } = await http.request<ApiData<{ token: string; user: UserModel }>>({
+      const { token } = await http.request<{ token: string; user: UserModel }>({
         url: ApiEnum.FORGOT_PASSWORD,
         method: 'post',
         data: form,
       })
       storage.set(CacheKey.TOKEN_NAME, token)
-      const route = router.resolve({ name: RouteName.ADMIN })
-      location.href = route.fullPath
+      location.href = storage.get(CacheKey.REDIRECT_ROUTE_NAME, '/')
     } catch (error) {
       useCaptcha().getCaptcha()
     }

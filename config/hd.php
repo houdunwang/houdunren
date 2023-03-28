@@ -51,6 +51,6 @@ return  [
     ],
     "upload" => [
         //上传方式 local|oss
-        "drive" => 'oss'
+        "drive" => 'local'
     ]
 ];

@@ -2,7 +2,6 @@ import { RouteLocationNormalized, Router } from 'vue-router'
 import { useTitle } from '@vueuse/core'
 import config from '@/config'
 import { ElMessage } from 'element-plus'
-
 let isInit = false
 export default (router: Router) => {
   router.beforeEach(beforeEach)

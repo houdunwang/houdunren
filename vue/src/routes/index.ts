@@ -1,7 +1,7 @@
 import auth from './auth'
 import front from './front'
-import admin from './admin'
+import hd from './hd'
 import error from './error'
 import member from './member'
 
-export default [admin, front, auth, error, member]
+export default [hd, front, auth, error, member]

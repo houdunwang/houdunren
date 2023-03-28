@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FavourController;
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
@@ -15,7 +16,6 @@ use App\Http\Controllers\WechatBindController;
 use App\Http\Controllers\WechatController;
 use App\Http\Controllers\WechatLoginController;
 use App\Http\Controllers\WepayController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 //登录注册
@@ -102,3 +102,5 @@ Route::controller(WepayController::class)->prefix("wepay")->group(function () {
     Route::post('app/{order}', 'app');
     Route::any('notify', 'notifyUrl');
 });
+
+Route::apiResource('module', ModuleController::class);

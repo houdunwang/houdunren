@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Cache;
 use Request;
 use Houdunwang\Wechat\User as WechatUser;
 use Houdunwang\Wechat\Qrcode;
+use Route;
+use URL;
 
 //微信登录
 class WechatLoginController extends Controller
@@ -50,7 +52,7 @@ class WechatLoginController extends Controller
     public function appLogin()
     {
         $info = app(WechatUser::class)->config(config('hd.wechat'))->snsapiUserInfo();
-        app(WechatService::class)->registerByOpenid($info['openid']);
-        return redirect('/');
+        $user = app(WechatService::class)->registerByOpenid($info['openid']);
+        return view('wechat-login-by-token', ['token' => $user->createToken('auth')->plainTextToken]);
     }
 }

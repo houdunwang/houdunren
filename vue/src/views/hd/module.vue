@@ -7,5 +7,3 @@ import AppList from '@/components/appList.vue'
     <AppList />
   </main>
 </template>
-
-<style lang="scss"></style>

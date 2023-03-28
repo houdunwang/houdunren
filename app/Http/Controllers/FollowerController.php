@@ -30,6 +30,6 @@ class FollowerController extends Controller
     public function make(User $user)
     {
         Auth::user()->followers()->toggle([$user->id]);
-        return $this->success('操作成功', Auth::user()->followers()->wherePivot('follower_id', $user->id)->exists());
+        return $this->respondWithSuccess(Auth::user()->followers()->wherePivot('follower_id', $user->id)->exists());
     }
 }

@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Models\User;
 use App\Notifications\EmailCodeNotification;
 use Cache;
+use Exception;
+use PhpParser\Node\Stmt\TryCatch;
 
 //发送短信或邮件验证码
 class CodeService
@@ -29,7 +31,7 @@ class CodeService
             'sign' => config('hd.sms.aliyun_code_sign'),
             'template' => config('hd.sms.aliyun_code_template'),
             'phone' => $mobile,
-            'params' => ["code" => $code, "product" => config('app.name')]
+            'params' => ["code" => $code, "product" => config('hd.sms.aliyun_code_sign')]
         ]);
     }
 

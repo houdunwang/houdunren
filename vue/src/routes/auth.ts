@@ -3,7 +3,7 @@ import { RouteRecordRaw } from 'vue-router'
 export default {
   path: '/',
   component: () => import('@/layouts/auth/index.vue'),
-  meta: { noPrefix: true },
+  meta: { noPrefix: true, guest: true },
   children: [
     {
       path: 'login',

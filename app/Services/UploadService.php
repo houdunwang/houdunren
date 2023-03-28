@@ -11,9 +11,10 @@ use Spatie\Image\Manipulations;
 class UploadService
 {
     //图片上传
-    public function image(UploadedFile $file, $width = 800, $height = 800, $fit = Manipulations::FIT_MAX, $objectPrefix = null)
+    public function image(UploadedFile $file, $width = 800, $height = 800, $fit = Manipulations::FIT_MAX)
     {
         $file = $this->local($file);
+
         Image::load($file)->fit($fit,  $width,  $height)->optimize()->save();
         $drive = config('hd.upload.drive');
         $url = url($file);
@@ -27,6 +28,7 @@ class UploadService
     public function local(UploadedFile $file)
     {
         $file = $file->store('public/' . date('Ym'));
+
         return preg_replace('/^public\//', 'storage/', $file);
     }
 

@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreModuleRequest;
 use App\Http\Requests\UpdateModuleRequest;
-use App\Models\Module;
+use App\Services\ModuleService;
+use Nwidart\Modules\Facades\Module;
+use Nwidart\Modules\Module as ModulesModule;
 
 class ModuleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $modules = app(ModuleService::class)->all();
+        return $modules;
     }
 
     /**

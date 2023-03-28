@@ -5,6 +5,7 @@ import sms from './config/sms.vue'
 import email from './config/email.vue'
 import wechat from './config/wechat.vue'
 import copyright from './config/copyright.vue'
+import upload from './config/upload.vue'
 
 const { get, update } = useConfig()
 const config = ref(await get())
@@ -31,6 +32,9 @@ const tab = ref('base')
       </el-tab-pane>
       <el-tab-pane label="微信" name="wechat">
         <wechat :config="config" />
+      </el-tab-pane>
+      <el-tab-pane label="上传" name="upload">
+        <upload :config="config" />
       </el-tab-pane>
     </el-tabs>
 

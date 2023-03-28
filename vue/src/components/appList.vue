@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { getAll, collections } = useModule()
+await getAll()
 const search = ref('')
 
 const tableData = ref([
@@ -23,16 +25,14 @@ const columns = ref([
 
 <template>
   <main class="">
-    <!-- <el-input v-model="search" placeholder="" size="large" clearable>
-      <template #append>
-        <el-button type="primary" size="default" @click="">搜索</el-button>
-      </template>
-    </el-input> -->
-
     <!-- 应用列表 -->
     <section class="mt-3">
-      <el-table :data="tableData" border stripe>
-        <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label"> </el-table-column>
+      <el-table :data="collections" border stripe>
+        <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label">
+          <template #default="{ row }">
+            {{ row.config[col.id] }}
+          </template>
+        </el-table-column>
         <el-table-column label="操作" :width="120" align="center">
           <div class="flex gap-1 btn">
             <el-button type="success" size="small" plain @click="">管理</el-button>

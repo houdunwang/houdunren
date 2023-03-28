@@ -27,11 +27,9 @@ class ConfigController extends Controller
     //管理员获取所有配置项
     public function all()
     {
-        $config = isAdministrator() ? config('hd') : [
-            'base' => config('hd.base'),
-            'copyright' => config('hd.copyright'),
-        ];
-        return $this->respondWithSuccess(new ConfigResource($config));
+        $this->authorize('all', Config::class);
+
+        return $this->respondWithSuccess(new ConfigResource(config('hd')));
     }
 
 

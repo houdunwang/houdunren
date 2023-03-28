@@ -22,11 +22,8 @@ class AuthController extends Controller
         ], ['captcha.captcha_api' => '验证码输入错误'])->validate();
 
         $user = User::where($this->accountField(), $request->account)->first();
-
         if ($user && Hash::check($request->password, $user->password)) {
-            // Auth::guard('web')->login($user);
             return $this->respondWithSuccess(['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
-            // return $this->success('登录成功', ['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
         }
         return $this->respondFailedValidation('密码输入错误', 'password');
     }
@@ -57,6 +54,6 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return $this->respondWithSuccess(['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
+        return $this->respondWithSuccess(['token' => $user->createToken('auth')->plainTextToken]);
     }
 }

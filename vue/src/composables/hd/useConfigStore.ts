@@ -1,4 +1,3 @@
-import { ApiEnum } from '@/enum/ApiEnum'
 import { http } from '@/plugins/axios'
 import { defineStore } from 'pinia'
 

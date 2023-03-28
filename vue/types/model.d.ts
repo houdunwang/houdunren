@@ -28,3 +28,7 @@ interface UserModel {
 interface ConfigModel {
   [key: string]: Record<string, any>
 }
+
+interface ModuleModel {
+  [key: string]: Record<string, any>
+}

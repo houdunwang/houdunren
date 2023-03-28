@@ -95,7 +95,9 @@ export default () => {
       data,
     })
   }
-
+  const isAdministrator = () => {
+    return useUserStore().user?.id == 1
+  }
   return {
     collection,
     findAll,
@@ -110,5 +112,6 @@ export default () => {
     removeAvatar,
     lockUser,
     removeAllData,
+    isAdministrator,
   }
 }
