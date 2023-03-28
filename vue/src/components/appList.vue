@@ -1,21 +1,8 @@
 <script setup lang="ts">
-const { getAll, collections } = useModule()
+const { getAll, collections, install, unInstall } = useModule()
 await getAll()
+const { open } = useUtil()
 const search = ref('')
-
-const tableData = ref([
-  {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-])
-
 const columns = ref([
   { id: 'name', label: '应用' },
   { id: 'version', label: '版本' },
@@ -33,10 +20,20 @@ const columns = ref([
             {{ row.config[col.id] }}
           </template>
         </el-table-column>
-        <el-table-column label="操作" :width="120" align="center">
+        <el-table-column label="操作" :width="120" align="center" #default="{ row }">
           <div class="flex gap-1 btn">
-            <el-button type="success" size="small" plain @click="">管理</el-button>
-            <el-button type="warning" size="small" plain @click="">卸载</el-button>
+            <el-button type="danger" size="small" plain @click="unInstall(row.name)" v-if="row.is_install">
+              卸载
+            </el-button>
+            <el-button type="info" size="small" plain @click="install(row.name)" v-else>安装</el-button>
+            <el-button
+              type="success"
+              size="small"
+              plain
+              @click="open(`/${row.name}/admin`)"
+              :disabled="!row.is_install">
+              管理
+            </el-button>
           </div>
         </el-table-column>
       </el-table>

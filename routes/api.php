@@ -103,4 +103,6 @@ Route::controller(WepayController::class)->prefix("wepay")->group(function () {
     Route::any('notify', 'notifyUrl');
 });
 
+Route::get('module/install/{name}', [ModuleController::class, 'install']);
+Route::delete('module/unInstall/{module:name}', [ModuleController::class, 'unInstall']);
 Route::apiResource('module', ModuleController::class);

@@ -30,5 +30,6 @@ interface ConfigModel {
 }
 
 interface ModuleModel {
+  is_install: boolean
   [key: string]: Record<string, any>
 }

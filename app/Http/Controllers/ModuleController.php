@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Console\Commands\ModuleModel;
 use App\Http\Requests\StoreModuleRequest;
 use App\Http\Requests\UpdateModuleRequest;
+use App\Models\Module as ModelsModule;
 use App\Services\ModuleService;
+use Artisan;
+use Illuminate\Http\Request;
 use Nwidart\Modules\Facades\Module;
-use Nwidart\Modules\Module as ModulesModule;
 
 class ModuleController extends Controller
 {
@@ -56,11 +59,20 @@ class ModuleController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Module $module)
+    public function install(string $name, ModelsModule $module)
     {
-        //
+        $module->name = $name;
+        $module->save();
+        Artisan::call('module:migrate ' . $name);
+
+        return $this->respondOk('模块安装成功');
+    }
+
+    public function unInstall(ModelsModule $module)
+    {
+        $module->delete();
+        Artisan::call('module:migrate-reset ' . $module->name);
+
+        return $this->respondOk('模块卸载成功');
     }
 }
