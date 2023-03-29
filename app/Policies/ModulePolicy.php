@@ -21,7 +21,7 @@ class ModulePolicy
      */
     public function view(User $user, Module $module): bool
     {
-        //
+        return isAdministrator();
     }
 
     /**
@@ -37,7 +37,7 @@ class ModulePolicy
      */
     public function update(User $user, Module $module): bool
     {
-        //
+        return isAdministrator();
     }
 
     /**

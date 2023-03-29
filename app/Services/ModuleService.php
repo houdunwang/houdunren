@@ -13,12 +13,12 @@ class ModuleService
     {
         $modules = [];
         Module::collections()->each(function ($module, $name) use (&$modules) {
-            // dd($config->getPath());
             $modules[] = [
                 'name' => $name,
                 'preview' => url("Modules/{$name}/preview.jpeg"),
                 'is_install' => ModelsModule::where('name', $name)->exists(),
-                'config' => include $module->getPath() . '/Config/config.php'
+                'config' => include $module->getPath() . '/Config/config.php',
+                'model' => ModelsModule::where('name', $name)->first()
             ];
         });
         return $modules;

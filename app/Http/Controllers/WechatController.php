@@ -62,7 +62,7 @@ class WechatController extends Controller
                     'title' => '签到成功',
                     'description' => '大叔祝你天天好心情',
                     'picurl' => url('/assets/xj.jpg'),
-                    'url' => url('/sign')
+                    'url' => url('/Edu/sign')
                 ]
             ]);
         }

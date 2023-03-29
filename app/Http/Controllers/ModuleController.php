@@ -14,50 +14,28 @@ use Nwidart\Modules\Facades\Module;
 
 class ModuleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth:sanctum']);
+    }
+
     public function index()
     {
         $modules = app(ModuleService::class)->all();
         return $modules;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show(ModelsModule $module)
     {
-        //
+        $this->authorize('view', $module);
+        return $this->respondWithSuccess($module);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreModuleRequest $request)
+    public function update(UpdateModuleRequest $request, ModelsModule $module)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Module $module)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Module $module)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateModuleRequest $request, Module $module)
-    {
-        //
+        $this->authorize('update', $module);
+        $module->fill($request->input())->save();
+        return $this->respondOk('模块更新成功');
     }
 
     public function install(string $name, ModelsModule $module)

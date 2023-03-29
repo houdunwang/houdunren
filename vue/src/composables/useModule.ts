@@ -1,12 +1,20 @@
 import { http } from '@/plugins/axios'
+import router from '@/plugins/router'
 import { ElMessageBox } from 'element-plus'
 
 export default () => {
   const collections = ref<ModuleModel[]>()
+  const model = ref<ModuleModel>()
 
   const getAll = async () => {
     collections.value = await http.request({
       url: `module`,
+    })
+  }
+
+  const find = async (id: any) => {
+    model.value = await http.request({
+      url: `module/${id}`,
     })
   }
 
@@ -26,5 +34,14 @@ export default () => {
     })
     location.reload()
   }
-  return { getAll, collections, install, unInstall }
+
+  const update = async () => {
+    await http.request({
+      url: `module/${model.value!.id}`,
+      method: 'PUT',
+      data: model.value,
+    })
+    location.href = router.resolve({ name: 'hd' }).fullPath
+  }
+  return { getAll, collections, install, unInstall, update, find, model }
 }

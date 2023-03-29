@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->char('name', 20)->comment('模块名称');
+            $table->string('domain', 200)->comment('域名');
             $table->timestamps();
         });
     }
