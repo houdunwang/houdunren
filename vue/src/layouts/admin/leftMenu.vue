@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useMenuStore from '@/layouts/admin/useMenuStore'
+import useMenuStore from './useMenuStore'
 import router from '@/plugins/router'
 import { ApplicationOne } from '@icon-park/vue-next'
 import { RouteRecordRaw } from 'vue-router'

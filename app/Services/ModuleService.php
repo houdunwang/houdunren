@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Module as ModelsModule;
 use App\Models\User;
+use Illuminate\Support\Facades\URL;
 use Nwidart\Modules\Facades\Module;
 
 class ModuleService
@@ -22,5 +23,19 @@ class ModuleService
             ];
         });
         return $modules;
+    }
+
+    //根据访问域名获取模块
+    public function getModuleByDomain()
+    {
+        $url = parse_url(URL::current());
+        $module = ModelsModule::where('domain', $url['host'])->first();
+        if ($module) return $module;
+    }
+
+    //获取模块配置文件
+    public function config(string $name)
+    {
+        return include base_path() . '/Modules/' . $name . '/Config/config.php';
     }
 }

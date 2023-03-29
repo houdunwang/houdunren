@@ -10,4 +10,6 @@ class Module extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'domain'];
+
+    protected $casts = ['process' => 'boolean'];
 }

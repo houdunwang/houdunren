@@ -3,7 +3,7 @@ export enum RouteName {
   LOGIN = 'login',
   REGISTER = 'register',
   FORGOT_PASSWORD = 'forgot_password',
-  ADMIN = 'hd',
+  ADMIN = 'admin',
   MEMBER = 'member',
   NOT_FOUND = 'error.404',
   FORBIDDEN = 'error.403',

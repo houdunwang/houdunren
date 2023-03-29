@@ -32,12 +32,12 @@ const storeUser = useUserStore()
     </section>
     <section v-else class="flex items-stretch gap-2">
       <a
-        href="/login"
+        href="/auth/login"
         class="px-3 py-1 flex text-sm items-center border shadow-sm rounded-md bg-slate-100 hover:bg-indigo-500 hover:!text-white duration-300">
         登录
       </a>
       <a
-        href="/register"
+        href="/auth/register"
         class="px-3 py-1 flex text-sm items-center border shadow-sm rounded-md bg-slate-100 hover:bg-indigo-500 hover:!text-white duration-300">
         注册
       </a>

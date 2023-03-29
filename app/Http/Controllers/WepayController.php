@@ -67,7 +67,7 @@ class WepayController extends Controller
     //模块异步通知
     protected function callModuleNotify(Order $order)
     {
-        $class = 'Modules\\' . $order->module . '\\Services\\PayService';
+        $class = 'Modules\\' . $order->module . '\\Core\\Pay';
         return app($class)->notify($order);
     }
 }

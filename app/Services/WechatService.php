@@ -15,16 +15,14 @@ class WechatService
     {
         $userWechat = app(WechatUser::class)->config(config('hd.wechat'));
         $info = $userWechat->getByOpenid($openId);
-        if ($info) {
-            $user = User::Where('unionid', $info['unionid'])->first();
-            if (!$user) $user = new User();
-            $user->openid = $info['openid'];
-            $user->unionid = $info['unionid'];
-            $user->name = $user->name ?: $info['nickname'];
-            $user->save();
-            Auth::login($user);
-            return $user;
-        }
+        $user = User::Where('unionid', $info['unionid'])->first();
+        if (!$user) $user = new User();
+        $user->openid = $info['openid'];
+        $user->unionid = $info['unionid'];
+        $user->name = $user->name ?: $info['nickname'];
+        $user->save();
+        Auth::login($user);
+        return $user;
     }
 
     //获取微信头像

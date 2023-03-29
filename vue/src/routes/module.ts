@@ -1,13 +1,13 @@
 import { DashboardOne } from '@icon-park/vue-next'
 import { RouteRecordRaw } from 'vue-router'
 export default {
-  path: '/hd/module',
-  component: () => import('@/layouts/hd/index.vue'),
+  path: '/admin/module',
+  component: () => import('@/layouts/admin/index.vue'),
   meta: { auth: true, admin: true, menu: { title: 'Dashboard', icon: DashboardOne, order: 100 } },
   children: [
     {
-      name: 'hd',
-      path: '',
+      name: 'admin',
+      path: '/admin',
       component: () => import('@/views/module/index.vue'),
       meta: { title: '应用模块' },
     },

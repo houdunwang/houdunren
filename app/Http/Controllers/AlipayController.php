@@ -57,7 +57,7 @@ class AlipayController extends Controller
     //模块异步通知
     public function callModuleNotify(Order $order)
     {
-        $class = 'Modules\\' . $order->module . '\\Services\\PayService';
+        $class = 'Modules\\' . $order->module . '\\Core\\Pay';
         return app($class)->notify($order);
     }
 }

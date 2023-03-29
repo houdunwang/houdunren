@@ -2,7 +2,6 @@
 const { getAll, collections, install, unInstall } = useModule()
 await getAll()
 const { open } = useUtil()
-const search = ref('')
 const columns = ref([
   { id: 'name', label: '应用' },
   { id: 'version', label: '版本' },
@@ -13,7 +12,6 @@ const columns = ref([
 
 <template>
   <main>
-    <!-- 应用列表 -->
     <section class="mt-3">
       <el-table :data="collections" border stripe>
         <el-table-column v-for="col in columns" :prop="col.id" :key="col.id" :label="col.label">
