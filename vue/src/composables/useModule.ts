@@ -4,7 +4,10 @@ import { ElMessageBox } from 'element-plus'
 
 export default () => {
   const collections = ref<ModuleModel[]>()
-  const model = ref<ModuleModel>()
+  const model = ref<ModuleModel>({
+    name: '',
+    domain: '',
+  })
 
   const getAll = async () => {
     collections.value = await http.request({
@@ -43,5 +46,13 @@ export default () => {
     })
     location.href = router.resolve({ name: 'hd' }).fullPath
   }
-  return { getAll, collections, install, unInstall, update, find, model }
+
+  const store = async () => {
+    await http.request({
+      url: `module`,
+      method: 'POST',
+      data: model.value,
+    })
+  }
+  return { getAll, collections, install, unInstall, update, find, model, store }
 }

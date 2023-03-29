@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Navbar from '@/layouts/admin/navbar.vue'
+import Navbar from '@/layouts/hd/navbar.vue'
 </script>
 
 <template>
@@ -8,20 +8,25 @@ import Navbar from '@/layouts/admin/navbar.vue'
       <Navbar />
       <div class="flex justify-center py-3 mt-10">
         <el-button
-          type="info"
+          :type="$route.name == 'hd' ? 'primary' : 'info'"
           size="default"
           round
-          :color="$route.name == 'hd' ? '#626aef' : ''"
           @click="$router.push({ name: 'hd' })">
           应用模块
         </el-button>
         <el-button
-          type="info"
+          :type="$route.name == 'hd.config' ? 'primary' : 'info'"
           size="default"
-          :color="$route.name == 'hd.config' ? '#626aef' : ''"
           round
           @click="$router.push({ name: 'hd.config' })">
           系统设置
+        </el-button>
+        <el-button
+          :type="$route.name == 'module.create' ? 'primary' : 'info'"
+          size="default"
+          round
+          @click="$router.push({ name: 'module.create' })">
+          模块设计
         </el-button>
       </div>
       <div class="overflow-y-auto pb-32 w-screen xl:w-[1000px] m-auto">
