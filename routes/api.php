@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FavourController;
+use App\Http\Controllers\ModuleConfigController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\UploadController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\WechatBindController;
 use App\Http\Controllers\WechatController;
 use App\Http\Controllers\WechatLoginController;
 use App\Http\Controllers\WepayController;
+use App\Models\ModuleConfig;
 use Illuminate\Support\Facades\Route;
 
 //登录注册
@@ -106,3 +108,8 @@ Route::controller(WepayController::class)->prefix("wepay")->group(function () {
 Route::get('module/install/{name}', [ModuleController::class, 'install']);
 Route::delete('module/unInstall/{module:name}', [ModuleController::class, 'unInstall']);
 Route::apiResource('module', ModuleController::class);
+
+//模块配置
+Route::get('module_config/all/{name}', [ModuleConfigController::class, 'all']);
+Route::get('module_config/common/{name}', [ModuleConfigController::class, 'common']);
+Route::put('module_config/{name}', [ModuleConfigController::class, 'update']);

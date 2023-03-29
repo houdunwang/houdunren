@@ -3,14 +3,6 @@ return  [
     "base" => [
         'name' => env('APP_NAME', 'houdunren.com'),
     ],
-    "copyright" => [
-        'ad' => '后盾人 人人做后盾',
-        "weixin" => 'houdunren2021',
-        "email" => '2300071698@qq.com',
-        "icp" => env("ICP", ''),
-        "showXjAvatar" => false,
-        "other" => "Copyright © houdunren.com All Rights Reserved"
-    ],
     "aliyun" => [
         "aliyun_key" => env('ALIYUN_KEY'),
         'aliyun_secret' => env('ALIYUN_SECEET'),

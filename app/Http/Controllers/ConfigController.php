@@ -14,7 +14,7 @@ class ConfigController extends Controller
         $this->middleware(['auth:sanctum'])->except(['common']);
     }
 
-    //管理员获取所有配置项
+    //公共配置项
     public function common()
     {
         $config = [

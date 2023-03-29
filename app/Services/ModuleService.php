@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Module as ModelsModule;
+use App\Models\ModuleConfig;
 use App\Models\User;
 use Illuminate\Support\Facades\URL;
 use Nwidart\Modules\Facades\Module;
@@ -36,6 +37,19 @@ class ModuleService
     //获取模块配置文件
     public function config(string $name)
     {
-        return include base_path() . '/Modules/' . $name . '/Config/config.php';
+        $config = include base_path() . '/Modules/' . $name . '/Config/config.php';
+
+        $data = ModuleConfig::where('module', $name)->value('data');
+        if ($data) {
+            foreach ($config as $name => $value) {
+                if (is_string($value)) {
+                    $config[$name] = $data[$name] ?? $value;
+                } else {
+                    $config[$name] = ($data[$name] ?? []) + $value;
+                }
+            }
+        }
+
+        return $config;
     }
 }

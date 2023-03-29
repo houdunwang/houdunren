@@ -5,7 +5,8 @@ use App\Services\ModuleService;
 use Illuminate\Support\Facades\Route;
 
 Route::fallback(function () {
-    if (isset($url['path']) && preg_match('/^(hd|auth|member|error)/', trim($url['path'], '/'))) {
+    $url = parse_url(URL::current());
+    if (preg_match('/^(admin|auth|member|error)/', trim($url['path'] ?? '', '/'))) {
         return file_get_contents(base_path('vue/dist/index.html'));
     }
 
