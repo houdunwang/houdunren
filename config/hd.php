@@ -1,8 +1,5 @@
 <?php
 return  [
-    "base" => [
-        'name' => env('APP_NAME', 'houdunren.com'),
-    ],
     "aliyun" => [
         "aliyun_key" => env('ALIYUN_KEY'),
         'aliyun_secret' => env('ALIYUN_SECEET'),
@@ -35,11 +32,6 @@ return  [
         "appid" => env('WECHAT_APPID'),
         "appsecret" => env('WECHAT_APPSECRET'),
         "token" => env('WECHAT_TOKEN'),
-    ],
-    "subscribe" => [
-        "original_price" => 745,
-        "price_year" => env('SUBSCRIBE_PRICE_YEAR'),
-        "price_permanent" => env('SUBSCRIBE_PRICE_PERMANENT'),
     ],
     "upload" => [
         //上传方式 local|oss

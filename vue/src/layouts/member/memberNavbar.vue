@@ -2,18 +2,16 @@
 import UserAvatarMenu from '@/components/hd/userAvatarMenu.vue'
 import { AllApplication, Home } from '@icon-park/vue-next'
 import config from '@/config'
-const { config: hd } = useConfigStore()
 const { open } = useUtil()
 </script>
 
 <template>
-  <main class="bg-white border-b-4 border-[#e66767]" v-if="hd">
+  <main class="bg-white border-b-4 border-[#e66767]">
     <section class="2xl:w-page 2xl:m-auto py-3 px-3 border-b-1 flex justify-between items-center">
       <div
         @click="open('/')"
         class="font-bold items-center justify-between text-xl flex mr-2 text-[#e66767] cursor-pointer">
         <home theme="outline" size="26" fill="#e66767" />
-        <span class="font-bold font-sans">{{ hd.base.name }} </span>
       </div>
       <div class="flex items-center gap-2">
         <UserAvatarMenu />

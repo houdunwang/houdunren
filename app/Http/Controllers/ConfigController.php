@@ -14,16 +14,6 @@ class ConfigController extends Controller
         $this->middleware(['auth:sanctum'])->except(['common']);
     }
 
-    //公共配置项
-    public function common()
-    {
-        $config = [
-            'base' => config('hd.base'),
-            'copyright' => config('hd.copyright'),
-        ];
-        return $this->respondWithSuccess(new ConfigResource($config));
-    }
-
     //管理员获取所有配置项
     public function all()
     {

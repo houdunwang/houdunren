@@ -20,7 +20,7 @@ const storeUser = useUserStore()
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item v-if="isAdministrator()">
-              <router-link :to="{ name: RouteName.ADMIN }"> 后台管理 </router-link>
+              <router-link :to="{ name: RouteName.ADMIN }"> 系统管理 </router-link>
             </el-dropdown-item>
             <el-dropdown-item v-for="(menu, index) of config.user.avatarMenu" :key="index">
               <router-link :to="{ name: menu.routeName }"> {{ menu.title }} </router-link>

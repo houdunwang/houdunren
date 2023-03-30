@@ -25,7 +25,9 @@ class ModuleConfigController extends Controller
     public function common(string $name)
     {
         $config = app(ModuleService::class)->config($name);
-        if (isset($config['private'])) unset($config['private']);
+        if (isset($config['private'])) {
+            unset($config['private']);
+        }
 
         return $config;
     }

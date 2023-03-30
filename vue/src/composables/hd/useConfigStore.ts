@@ -6,7 +6,7 @@ export default defineStore('config', () => {
 
   const getConfig = async () => {
     config.value = await http.request<ConfigModel>({
-      url: 'config/common',
+      url: 'config/all',
     })
   }
   return { config, getConfig }
