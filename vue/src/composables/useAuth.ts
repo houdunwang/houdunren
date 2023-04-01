@@ -1,6 +1,5 @@
 import { ApiEnum } from '@/enum/ApiEnum'
 import { http } from '@/plugins/axios'
-import router from '@/plugins/router'
 const storage = useStorage()
 
 export default () => {

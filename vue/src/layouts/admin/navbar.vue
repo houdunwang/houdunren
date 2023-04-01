@@ -11,6 +11,7 @@ const { open } = useUtil()
       @click="open('/')"
       class="font-bold flex items-center justify-between text-xl mr-2 text-[#574b90] cursor-pointer hover:opacity-90">
       <home theme="outline" size="26" />
+      系统管理
     </div>
     <div class="flex justify-center items-center relative cursor-pointer">
       <UserAvatarMenu />

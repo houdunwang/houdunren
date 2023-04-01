@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Module as ModelsModule;
 use App\Models\ModuleConfig;
 use App\Models\User;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
 use Nwidart\Modules\Facades\Module;
 
@@ -29,9 +30,7 @@ class ModuleService
     //根据访问域名获取模块
     public function getModuleByDomain()
     {
-        $url = parse_url(URL::current());
-        $module = ModelsModule::where('domain', $url['host'])->first();
-        if ($module) return $module;
+        return ModelsModule::where('domain', Request::getSchemeAndHttpHost())->first();
     }
 
     //获取模块配置文件

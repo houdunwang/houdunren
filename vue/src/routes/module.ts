@@ -6,8 +6,8 @@ export default {
   meta: { auth: true, admin: true, menu: { title: 'Dashboard', icon: DashboardOne, order: 100 } },
   children: [
     {
-      name: 'admin',
-      path: '/admin',
+      name: 'module',
+      path: '',
       component: () => import('@/views/module/index.vue'),
       meta: { title: '应用模块' },
     },

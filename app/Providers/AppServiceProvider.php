@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Carbon::setLocale('PRC');
         JsonResource::withoutWrapping();
+        config(['app.url' => Request::getSchemeAndHttpHost()]);
     }
 }

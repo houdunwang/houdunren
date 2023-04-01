@@ -24,8 +24,8 @@ const columns = ref([
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="操作" :width="180" align="center" #default="{ row }">
-          <div class="flex gap-1 btn">
+        <el-table-column label="操作" :width="230" align="center" #default="{ row }">
+          <div class="flex flex-2 items-center">
             <el-button type="danger" size="small" plain @click="unInstall(row.name)" v-if="row.is_install">
               卸载
             </el-button>
@@ -46,6 +46,14 @@ const columns = ref([
               :disabled="!row.is_install">
               配置
             </el-button>
+            <el-button
+              type="primary"
+              size="small"
+              plain
+              @click="open(row.model.domain, '_blank')"
+              :disabled="!row.is_install || !row.model.domain">
+              前台
+            </el-button>
           </div>
         </el-table-column>
       </el-table>
@@ -54,7 +62,7 @@ const columns = ref([
 </template>
 
 <style lang="scss" scoped>
-.btn :deep(.el-button + .el-button) {
-  margin-left: 0 !important;
+:deep(.el-button + .el-button) {
+  margin-left: 3px !important;
 }
 </style>
