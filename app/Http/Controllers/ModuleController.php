@@ -55,10 +55,14 @@ class ModuleController extends Controller
 
     public function install(string $name, ModelsModule $module)
     {
-        $module->name = $name;
-        $module->process = app(ModuleService::class)->config($module->name)['wechat']['process'] ?? false;
-        $module->save();
-        Artisan::call('module:migrate ' . $name);
+        // define('STDIN', fopen("php://stdin", "r"));
+        DB::transaction(function () use ($name, $module) {
+            $module->name = $name;
+            $module->process = app(ModuleService::class)->config($module->name)['wechat']['process'] ?? false;
+            $module->save();
+            Artisan::call('module:migrate ' . $name, ['force' => true]);
+        });
+
 
         return $this->respondOk('模块安装成功');
     }
@@ -67,9 +71,11 @@ class ModuleController extends Controller
     {
         DB::transaction(function () use ($module) {
             $module->delete();
-            Artisan::call('module:migrate-reset ' . $module->name);
             Activity::where('log_name', $module->name)->delete();
             Order::where('module', $module->name)->delete();
+            // if (is_dir(module_path($module->name))) {
+            Artisan::call('module:migrate-reset ' . $module->name);
+            // }
             // Storage::disk('module')->deleteDirectory($module->name);
         });
         return $this->respondOk('模块卸载成功');

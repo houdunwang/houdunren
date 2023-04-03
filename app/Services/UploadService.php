@@ -13,15 +13,15 @@ class UploadService
     //图片上传
     public function image(UploadedFile $file, $width = 800, $height = 800, $fit = Manipulations::FIT_MAX)
     {
-        $file = $this->local($file);
+        $localFile = $this->local($file);
 
-        Image::load($file)->fit($fit,  $width,  $height)->optimize()->save();
+        Image::load($localFile)->fit($fit,  $width,  $height)->optimize()->save();
         $drive = config('hd.upload.drive');
-        $url = url($file);
+        $url = url($localFile);
 
-        if ($drive === 'oss')  $url = $this->oss($file);
+        if ($drive === 'oss')  $url = $this->oss($localFile);
 
-        return $this->toTable($url);
+        return $this->toTable($url, $file);
     }
 
     //本地上传
@@ -43,9 +43,8 @@ class UploadService
     }
 
     //写入表
-    protected function toTable($url)
+    protected function toTable($url, UploadedFile $file)
     {
-        $file = request('file');
         $model = new Upload();
         $model->url = $url;
         $model->extension = $file->extension();

@@ -21,12 +21,13 @@ class UploadController extends Controller
     //上传图片
     public function image(Request $request)
     {
+        $field = request('name', 'file');
         Validator::make($request->all(), [
-            'file' => ['required', 'file', 'image', 'max:2048']
+            $field => ['required', 'file', 'image', 'max:2048']
         ])->validate();
 
-        return rateLimiter('upload-avatar' . Auth::id(), 3, function () use ($request) {
-            $file = app(UploadService::class)->image(request('file'));
+        return rateLimiter('upload-avatar' . Auth::id(), 3, function () use ($field) {
+            $file = app(UploadService::class)->image(request($field));
             return $this->respondWithSuccess($file);
         }, "图片上传频繁，");
     }
