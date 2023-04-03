@@ -19,7 +19,7 @@ class UploadService
         $drive = config('hd.upload.drive');
         $url = url($localFile);
 
-        if ($drive === 'oss')  $url = $this->oss($localFile);
+        if ($drive === 'oss' && !app()->isLocal())  $url = $this->oss($localFile);
 
         return $this->toTable($url, $file);
     }
