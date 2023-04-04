@@ -16,6 +16,7 @@ class ModuleController extends Controller
     public function __construct()
     {
         $this->middleware(['auth:sanctum']);
+        $this->authorizeResource(ModelsModule::class);
     }
 
     public function index()
@@ -33,6 +34,7 @@ class ModuleController extends Controller
     //模块设计
     public function store(Request $request)
     {
+        $this->authorize('create', ModelsModule::class);
         $name = $request->input('name');
         if (is_dir('Modules/' . $name)) {
             return $this->respondError('模块已经存在');
@@ -51,7 +53,7 @@ class ModuleController extends Controller
 
     public function install(string $name, ModelsModule $module)
     {
-
+        $this->authorize('install', $module);
         // DB::transaction(function () use ($name, $module) {
         $module->name = $name;
         $module->process = app(ModuleService::class)->config($module->name)['wechat']['process'] ?? false;
@@ -64,6 +66,7 @@ class ModuleController extends Controller
 
     public function unInstall(ModelsModule $module)
     {
+        $this->authorize('unInstall', $module);
         // DB::transaction(function () use ($module) {
         $module->delete();
         Activity::where('log_name', $module->name)->delete();

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
-use Log;
 use Yansongda\Pay\Pay;
 
 class AlipayController extends Controller

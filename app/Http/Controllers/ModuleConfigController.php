@@ -18,6 +18,7 @@ class ModuleConfigController extends Controller
     //所有配置项
     public function all(string $name)
     {
+        $this->authorize('all', ModuleConfig::class);
         return app(ModuleService::class)->config($name);
     }
 

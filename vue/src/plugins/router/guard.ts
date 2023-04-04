@@ -11,6 +11,7 @@ export default (router: Router) => {
 async function beforeEach(to: RouteLocationNormalized, from: RouteLocationNormalized) {
   await init()
   const { isLogin } = useAuth()
+  const { isAdministrator } = useUser()
   const storage = useStorage()
 
   if (to.meta.auth && !isLogin()) {
@@ -18,7 +19,14 @@ async function beforeEach(to: RouteLocationNormalized, from: RouteLocationNormal
     ElMessage.success('请登录后操作')
     location.href = '/auth/login'
   }
-
+  if (to.meta.admin && !isAdministrator()) {
+    ElMessage({
+      type: 'error',
+      grouping: true,
+      message: '没有访问权限',
+    })
+    return from
+  }
   if (to.meta.guest && isLogin()) return '/'
   if (to.meta.title) useTitle(to.meta.title)
 }

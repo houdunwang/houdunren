@@ -18,16 +18,13 @@ class ConfigController extends Controller
     public function all()
     {
         $this->authorize('all', Config::class);
-
         return $this->respondWithSuccess(new ConfigResource(config('hd')));
     }
-
 
     //更新配置
     public function update(UpdateConfigRequest $request, Config $config)
     {
         $this->authorize('update', $config);
-
         Config::updateOrCreate(['id' => 1], ['data' => $request->input()]);
         return $this->respondOk('配置项保存成功');
     }

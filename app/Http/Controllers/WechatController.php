@@ -68,8 +68,8 @@ class WechatController extends Controller
                 [
                     'title' => '本期【早起少年】活动礼品，等你拿',
                     'description' => '早睡早起，拥有好心情和好身体。家人开心，自己健康。',
-                    'picurl' => $morning->image,
-                    'url' => url('morning')
+                    'picurl' => url('/assets/xj.jpg'),
+                    'url' => url('Edu/morning')
                 ]
             ]);
         }
