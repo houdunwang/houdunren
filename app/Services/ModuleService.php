@@ -30,6 +30,12 @@ class ModuleService
     //根据访问域名获取模块
     public function getModuleByDomain()
     {
+        $path = trim(request()->path(), '/');
+
+        if ($path) {
+            $info = explode('/', $path);
+            return ModelsModule::where('name', $info[0])->first();
+        }
         return ModelsModule::where('domain', Request::getSchemeAndHttpHost())->first();
     }
 

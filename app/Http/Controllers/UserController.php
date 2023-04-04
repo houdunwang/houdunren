@@ -33,6 +33,12 @@ class UserController extends Controller
         return UserResource::collection(User::paginate(10));
     }
 
+    public function info(User $user)
+    {
+        $this->authorize('info', User::class);
+        return new UserResource($user->makeVisible(['address', 'real_name', 'mobile']));
+    }
+
     public function show(User $user)
     {
         return $this->respondWithSuccess(new UserResource($user));
@@ -40,6 +46,7 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request)
     {
+        $this->authorize('update', Auth::user());
         $user = Auth::user();
         $user->fill($request->input())->save();
         return $this->respondOk('资料修改成功');
@@ -102,7 +109,7 @@ class UserController extends Controller
     //删除头像
     public function removeAvatar(User $user)
     {
-        if (!isAdministrator()) return;
+        $this->authorize('removeAvatar', $user);
         $user->avatar = null;
         $user->save();
         return $this->respondOk('头像删除成功');
@@ -111,7 +118,7 @@ class UserController extends Controller
     //锁定用户
     public function lockUser(User $user)
     {
-        if (!isAdministrator()) return;
+        $this->authorize('lockUser', $user);
         $user->is_lock = true;
         $user->save();
         return $this->respondOk('用户锁定成功');
@@ -119,7 +126,8 @@ class UserController extends Controller
 
     public function removeAllData(User $user)
     {
-        if (!isAdministrator()) return;
+        $this->authorize('removeAllData', $user);
+
         $user->topics()->delete();
         $user->signs()->delete();
         Activity::where('causer_id', $user->id)->delete();
