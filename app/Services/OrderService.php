@@ -3,15 +3,16 @@
 namespace App\Services;
 
 use App\Models\Order;
+use App\Models\User;
 use Auth;
 
 //订单服务
 class OrderService
 {
     //创建定单
-    public function create(string $module,  string $subject, float $price, string $payType, array $data = [])
+    public function create(string $module,  string $subject, float $price, string $payType, array $data = [], User $user)
     {
-        $user = Auth::user();
+        $user = $user ?? Auth::user();
         $sn = "U" . $user->id . '-' . time();
         $order = $user->orders()->create([
             'module' => $module,
