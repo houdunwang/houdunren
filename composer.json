@@ -16,6 +16,7 @@
         "aliyuncs/oss-sdk-php": "^2.6",
         "endroid/qr-code": "^4.8",
         "f9webltd/laravel-api-response-helpers": "^1.5",
+        "fengkui/pay": "^1.3",
         "graham-campbell/markdown": "^15.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.0",

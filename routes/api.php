@@ -101,6 +101,7 @@ Route::controller(AlipayController::class)->prefix("alipay")->group(function () 
 //微信支付
 Route::controller(WepayController::class)->prefix("wepay")->group(function () {
     Route::post('pay/{order}', 'pay');
+    Route::get('app_pay', 'appPay');
     Route::post('app/{order}', 'app');
     Route::any('notify', 'notifyUrl');
 });

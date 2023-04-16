@@ -5,6 +5,10 @@ use App\Services\ModuleService;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
+Route::get('a', function () {
+    Log::info($_SERVER);
+});
+
 //微信客户端登录
 Route::get('wechat/appLogin', [WechatLoginController::class, 'appLogin']);
 
