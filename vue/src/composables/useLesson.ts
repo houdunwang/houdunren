@@ -8,7 +8,7 @@ import { useTitle } from '@vueuse/core'
 export default () => {
   const collection = ref<ApiPage<LessonModel>>() as unknown as Ref<ApiPage<LessonModel>>
   const model = ref<LessonModel>() as unknown as Ref<LessonModel>
-
+  const route = useRoute()
   const findAll = async (page: any, params = {}) => {
     collection.value = await http.request<ApiPage<LessonModel>>({
       url: `lesson?page=${page}&` + qs.stringify(params),
@@ -49,7 +49,11 @@ export default () => {
         url: `lesson/${id}`,
         method: 'DELETE',
       })
-      location.reload()
+      if (route.fullPath.includes('admin')) {
+        location.reload()
+      } else {
+        router.push({ name: 'lesson' })
+      }
     } catch (error) {}
   }
 

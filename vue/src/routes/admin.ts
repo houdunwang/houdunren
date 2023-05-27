@@ -36,7 +36,7 @@ export default [
   {
     path: '/admin/learn',
     component: () => import('@/layouts/admin/index.vue'),
-    meta: { order: 1, auth: true, menu: { title: '内容管理', icon: AllApplication } },
+    meta: { order: 1, admin: true, auth: true, menu: { title: '内容管理', icon: AllApplication } },
     children: [
       {
         path: 'system',

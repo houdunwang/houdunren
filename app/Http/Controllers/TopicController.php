@@ -27,7 +27,7 @@ class TopicController extends Controller
     //用户贴子列表
     public function user(User $user)
     {
-        $topics = $user->model('Edu')->topics()->with(['user'])->latest('updated_at')->paginate(10);
+        $topics = $user->topics()->with(['user'])->latest('updated_at')->paginate(10);
         return TopicResource::collection($topics);
     }
 

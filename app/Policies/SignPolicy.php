@@ -12,7 +12,7 @@ class SignPolicy
 
     public function create(User $user)
     {
-        $isSign = $user->model('Edu')->signs()->whereDate('created_at', now())->exists();
+        $isSign = $user->signs()->whereDate('created_at', now())->exists();
         if ($isSign) abort(403, '今天已经签到过了');
         return true;
     }

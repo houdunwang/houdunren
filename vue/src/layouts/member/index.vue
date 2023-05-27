@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import TopMenu from '../front/topMenu.vue'
 import memberNavbar from './memberNavbar.vue'
 import config from '@/config'
 const { user } = useUserStore()
@@ -6,7 +7,8 @@ const active = ref('')
 </script>
 <template>
   <main class="flex flex-col flex-1 justify-start">
-    <memberNavbar />
+    <!-- <memberNavbar /> -->
+    <TopMenu />
     <section class="2xl:w-page 2xl:mx-auto mt-5 flex flex-col md:flex-row md:items-start gap-5 p-2">
       <div class="md:w-[160px] hidden md:block">
         <UserBlock :user="user" />

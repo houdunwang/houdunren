@@ -4,6 +4,10 @@ import Pagination from '@/components/pagination.vue'
 const { findAll, collection } = useLesson()
 const route = useRoute()
 await findAll(route.query.page)
+
+onActivated(async () => {
+  await findAll(route.query.page)
+})
 </script>
 
 <template>

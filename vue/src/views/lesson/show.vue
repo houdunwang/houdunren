@@ -24,7 +24,7 @@ findOne(+route.params.id)
         <div class="flex items-center gap-2">
           <DownloadLesson :download_address="model?.system?.download_address" size="default" />
           <Favorite model="Lesson" :id="model.id" v-if="isLogin()" />
-          <router-link :to="{ name: 'lesson.edit', params: { id: model.id } }" v-if="isAdministrator()">
+          <router-link :to="{ name: 'lesson.edit', params: { id: model.id } }" target="_blank" v-if="isAdministrator()">
             <el-button type="success" size="small" plain> 编辑 </el-button>
           </router-link>
         </div>

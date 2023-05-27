@@ -6,7 +6,7 @@ const route = router.currentRoute
 <template>
   <main class="">
     <div class="flex items-center">
-      <router-link :to="{ name: 'home' }">首页</router-link>
+      <router-link :to="{ name: 'home' }" target="_blank">首页</router-link>
       <div class="flex items-center" v-for="(r, index) of route?.matched" :key="index" v-show="r.meta.title">
         <i class="py-2 box-border opacity-80">/</i>
         <router-link :to="{ path: r.path }">

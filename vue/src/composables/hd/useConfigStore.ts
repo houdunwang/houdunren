@@ -3,6 +3,10 @@ import { defineStore } from 'pinia'
 
 export default defineStore('config', () => {
   const config = ref<Record<string, any>>()
-  const { common: getConfig } = useConfig()
+  const { common } = useConfig()
+  const getConfig = async () => {
+    config.value = await common()
+  }
+
   return { config, getConfig }
 })

@@ -19,7 +19,10 @@ const { config } = useConfigStore()
           <span class="text-gray-800">订阅一年</span>
         </h2>
         <p class="text-lg">一年学习所有视频</p>
-        <div class="price text-4xl font-bold py-5">{{ config.subscribe.price_year }}元</div>
+        <div class="price text-4xl font-bold py-5">{{ config.subscribe.year.price }}元</div>
+        <div class="opacity-80">
+          原价: <span class="line-through">{{ config.subscribe.year.original }}</span>
+        </div>
         <div class="flex">
           <PayButton :price="config.subscribe.price_year" />
         </div>
@@ -31,7 +34,10 @@ const { config } = useConfigStore()
           <span class="text-[#fff]">钻石帐号</span>
         </h2>
         <p class="text-white">永久学习所有课程</p>
-        <div class="price text-4xl font-bold py-5 text-white">{{ config.subscribe.price_permanent }}元</div>
+        <div class="price text-4xl font-bold py-5 text-white">{{ config.subscribe.permanent.price }}元</div>
+        <div class="opacity-80 text-white">
+          原价: <span class="line-through">{{ config.subscribe.permanent.original }}</span>
+        </div>
         <div class="flex">
           <PayButton :price="config.subscribe.price_permanent" class="text-white" />
         </div>

@@ -34,7 +34,7 @@ const { item } = defineProps<{
       </div>
     </div>
     <div class="flex items-center justify-between gap-2 px-5 py-3 border-t" v-if="isAdministrator()">
-      <router-link :to="{ name: 'lesson.edit', params: { id: item.id } }">
+      <router-link :to="{ name: 'lesson.edit', params: { id: item.id } }" target="_blank">
         <el-button type="success" size="small"> 编辑 </el-button>
       </router-link>
       <el-button type="danger" size="small" @click="remove(item.id)">删除</el-button>

@@ -9,6 +9,16 @@ export default [
       {
         path: '',
         name: 'member',
+        component: () => import('@/views/member/info.vue'),
+      },
+      {
+        path: 'bind',
+        name: 'member.bind',
+        component: () => import('@/views/member/bind.vue'),
+      },
+      {
+        path: 'subscribe',
+        name: 'member.subscribe',
         component: () => import('@/views/member/subscribe.vue'),
       },
     ],

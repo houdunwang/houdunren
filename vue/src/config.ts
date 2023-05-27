@@ -23,6 +23,14 @@ export default {
     menu: [
       {
         routeName: 'member',
+        title: '修改资料',
+      },
+      {
+        routeName: 'member.bind',
+        title: '绑定帐号',
+      },
+      {
+        routeName: 'member.subscribe',
         title: '会员订阅',
       },
     ],
