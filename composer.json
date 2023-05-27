@@ -24,7 +24,6 @@
         "laravel/tinker": "^2.8",
         "mews/captcha": "^3.3",
         "mtownsend/xml-to-array": "^2.0",
-        "nwidart/laravel-modules": "^10.0",
         "spatie/image": "^2.2",
         "spatie/laravel-activitylog": "^4.7",
         "symfony/psr-http-message-bridge": "^2.1",
@@ -51,8 +50,7 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Houdunwang\\Wechat\\": "wechat/src",
-            "Modules\\": "Modules/"
+            "Houdunwang\\Wechat\\": "wechat/src"
         },
         "files": [
             "app/helper.php"

@@ -18,11 +18,8 @@ class CommentController extends Controller
 
     public function index()
     {
-        if (request('module')) {
-            $model = modelInstance();
-            return CommentResource::collection($model->comments()->whereNull('comment_id')->latest('updated_at')->get());
-        }
-        return CommentResource::collection(Comment::paginate(20));
+        $model = modelInstance();
+        return CommentResource::collection($model->comments()->whereNull('comment_id')->latest('updated_at')->get());
     }
 
     public function store(StoreCommentRequest $request)

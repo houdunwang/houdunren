@@ -5,6 +5,7 @@ const { url, urlList } = defineProps<{
   url: string
   urlList?: string[]
 }>()
+
 const player = ref<any>()
 const emit = defineEmits(['playNextVideo'])
 //视频列表，不包括当前视频
@@ -19,7 +20,7 @@ onMounted(() => {
     poster: '/assets/poster.jpg',
     playbackRate: [1, 1.25, 1.5, 2],
     keyShortcut: 'on',
-    rotateFullscreen: true,
+    // rotateFullscreen: true,
     cssFullscreen: true,
     airplay: true,
     playsinline: true,

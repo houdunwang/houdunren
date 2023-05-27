@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
 import config from '@/config'
-const { logout } = useAuth()
+const { logout, isLogin } = useAuth()
 const { isAdministrator } = useUser()
 const storeUser = useUserStore()
 </script>
@@ -19,13 +19,22 @@ const storeUser = useUserStore()
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item v-if="isAdministrator()">
-              <router-link :to="{ name: RouteName.ADMIN }"> 系统管理 </router-link>
+            <el-dropdown-item v-if="isLogin()">
+              <router-link :to="{ name: 'sign.space', query: { uid: storeUser.user.id } }"> 个人空间 </router-link>
             </el-dropdown-item>
             <el-dropdown-item v-for="(menu, index) of config.user.avatarMenu" :key="index">
               <router-link :to="{ name: menu.routeName }"> {{ menu.title }} </router-link>
             </el-dropdown-item>
-            <el-dropdown-item @click="logout" divided>退出登录</el-dropdown-item>
+            <el-dropdown-item>
+              <a href="/member"> 修改资料 </a>
+            </el-dropdown-item>
+            <el-dropdown-item divided v-if="isAdministrator()">
+              <router-link :to="{ name: RouteName.ADMIN }"> 模块后台 </router-link>
+            </el-dropdown-item>
+            <el-dropdown-item v-if="isAdministrator()">
+              <router-link to="/admin" target="_blank"> 系统管理 </router-link>
+            </el-dropdown-item>
+            <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>

@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Log;
 
 class CommentNotification extends Notification
 {
@@ -59,8 +60,7 @@ class CommentNotification extends Notification
         $info = explode('\\', $this->comment->commentable_type);
         return [
             'type' => 'comment',
-            'module' => $info[1],
-            'model' => $info[3],
+            'model' => $info[2],
             'model_id' => $this->comment->commentable_id,
             'title' => $this->comment->user->name . ' 回复了你',
             'id' => $this->comment->id

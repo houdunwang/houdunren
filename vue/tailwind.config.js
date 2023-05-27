@@ -5,10 +5,11 @@ module.exports = {
   theme: {
     extend: {
       width: {
-        page: '1350px',
+        page: '1450px',
       },
       colors: {
         'hd-blue': '#62569F',
+        'hd-origin': '#F33A2F',
       },
       screens: {},
     },

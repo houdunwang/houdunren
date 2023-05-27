@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -25,7 +26,7 @@ class AuthController extends Controller
         if ($user && Hash::check($request->password, $user->password)) {
             return $this->respondWithSuccess(['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
         }
-        return $this->respondFailedValidation('密码输入错误', 'password');
+        throw ValidationException::withMessages(['password' => '密码输入错误']);
     }
 
     public function logout()

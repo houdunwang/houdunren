@@ -2,12 +2,7 @@ import { http } from '@/plugins/axios'
 import { defineStore } from 'pinia'
 
 export default defineStore('config', () => {
-  const config = ref<ConfigModel>()
-
-  const getConfig = async () => {
-    config.value = await http.request<ConfigModel>({
-      url: 'config/all',
-    })
-  }
+  const config = ref<Record<string, any>>()
+  const { common: getConfig } = useConfig()
   return { config, getConfig }
 })

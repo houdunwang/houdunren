@@ -8,8 +8,6 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FavourController;
-use App\Http\Controllers\ModuleConfigController;
-use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
@@ -17,8 +15,12 @@ use App\Http\Controllers\WechatBindController;
 use App\Http\Controllers\WechatController;
 use App\Http\Controllers\WechatLoginController;
 use App\Http\Controllers\WepayController;
-use App\Models\ModuleConfig;
 use Illuminate\Support\Facades\Route;
+
+//配置
+Route::get('config/all', [ConfigController::class, 'all']);
+Route::get('config/common', [ConfigController::class, 'common']);
+Route::put('config', [ConfigController::class, 'update']);
 
 //登录注册
 Route::controller(AuthController::class)->prefix('auth')->group(function () {
@@ -65,21 +67,17 @@ Route::get('wechat/scanLoginQrImage/{ticket}', [WechatLoginController::class, 's
 Route::post('wechat/bind/{ticket?}', [WechatBindController::class, 'bind']);
 Route::post('wechat/unbind/{ticket?}', [WechatBindController::class, 'unbind']);
 
-//配置
-Route::get('config/all', [ConfigController::class, 'all']);
-Route::put('config', [ConfigController::class, 'update']);
-
 //收藏资源
 Route::controller(FavoriteController::class)->prefix('favorite')->group(function () {
-    Route::get('userFavoriteList/{module}/{model}/{user}', 'getUserFavoriteList');
-    Route::post('{module}/{model}/{id}', 'toggleFavorite');
-    Route::get('{module}/{model}/{id}', 'modelFavoriteInfo');
+    Route::get('userFavoriteList/{model}/{user}', 'getUserFavoriteList');
+    Route::post('{model}/{id}', 'toggleFavorite');
+    Route::get('{model}/{id}', 'modelFavoriteInfo');
 });
 
 //点赞操作
 Route::controller(FavourController::class)->prefix('favour')->group(function () {
-    Route::post('{module}/{model}/{id}', 'make');
-    Route::get('{module}/{model}/{id}', 'show');
+    Route::post('{model}/{id}', 'make');
+    Route::get('{model}/{id}', 'show');
 });
 
 //评论
@@ -106,11 +104,4 @@ Route::controller(WepayController::class)->prefix("wepay")->group(function () {
     Route::any('notify', 'notifyUrl');
 });
 
-Route::get('module/install/{name}', [ModuleController::class, 'install']);
-Route::delete('module/unInstall/{module:name}', [ModuleController::class, 'unInstall']);
-Route::apiResource('module', ModuleController::class);
-
-//模块配置
-Route::get('module_config/all/{name}', [ModuleConfigController::class, 'all']);
-Route::get('module_config/common/{name}', [ModuleConfigController::class, 'common']);
-Route::put('module_config/{name}', [ModuleConfigController::class, 'update']);
+include "edu.php";

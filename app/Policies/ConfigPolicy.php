@@ -18,7 +18,7 @@ class ConfigPolicy
         return isAdministrator();
     }
 
-    public function update(User $user, Config $config): bool
+    public function update(): bool
     {
         return isAdministrator();
     }

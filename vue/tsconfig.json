@@ -14,8 +14,7 @@
     "noEmit": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"],
-      "#/*": ["./types/*"]
+      "@/*": ["./src/*"]
     },
     "types": ["element-plus/global", "echarts", "lodash"]
   },

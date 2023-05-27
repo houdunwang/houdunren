@@ -75,9 +75,42 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-    public function model(string $model)
+    //视频观看历史
+    public function videos()
     {
-        $class =  'Modules\\' . $model . '\Entities\\User';
-        return $class::find($this->id);
+        return $this->belongsToMany(Video::class, 'video_play_histories', 'user_id', 'video_id')
+            ->withTimestamps();
+    }
+
+    public function topics()
+    {
+        return $this->hasMany(Topic::class);
+    }
+
+    //会员订阅
+    public function subscribe()
+    {
+        return $this->hasOne(Subscribe::class);
+    }
+
+    public function signs()
+    {
+        return $this->hasMany(Sign::class);
+    }
+
+    //学习课程历史
+    public function playLessons()
+    {
+        return $this->belongsToMany(Lesson::class, 'video_play_histories');
+    }
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
+
+    public function questionAnswer()
+    {
+        return $this->hasMany(QuestionAnswer::class);
     }
 }

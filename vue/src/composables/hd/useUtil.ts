@@ -18,8 +18,8 @@ export default () => {
   }
 
   /**
-   * 页面访问
-   * @param route 路由或URL
+   * 根据路由访问页面
+   * @param route 路由
    * @param target 跳转方式 _self当前页 _blank 新窗口
    */
   function open(url: RouteLocationRaw | string, target = '_self') {
@@ -72,6 +72,11 @@ export default () => {
     })
   }
 
+  //public目录图片加载
+  const publicImage = (url: string) => {
+    return new URL(url, import.meta.url).href
+  }
+
   return {
     routeQuery,
     open,
@@ -79,5 +84,6 @@ export default () => {
     isWechat,
     routeParams,
     routeLeaveConfirm,
+    publicImage,
   }
 }

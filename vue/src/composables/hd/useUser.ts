@@ -10,7 +10,7 @@ export default () => {
     collection.value = await http.request<ApiPage<UserModel>>({ url: `user` })
   }
 
-  const findOne = async (id: number) => {
+  const findOne = async (id: any) => {
     model.value = await http.request<UserModel>({
       url: `user/${id}`,
     })
@@ -72,7 +72,7 @@ export default () => {
   const removeAllData = async (uid: any) => {
     await ElMessageBox.confirm('确定所有数据吗？')
     await http.request<any>({
-      url: `user/removeAllData/${uid}`,
+      url: `edu/user/removeAllData/${uid}`,
       method: 'POST',
     })
     location.reload()
@@ -95,10 +95,13 @@ export default () => {
       data,
     })
   }
+
   const isAdministrator = () => {
     return useUserStore().user?.id == 1
   }
+
   return {
+    isAdministrator,
     collection,
     findAll,
     findOne,
@@ -112,6 +115,5 @@ export default () => {
     removeAvatar,
     lockUser,
     removeAllData,
-    isAdministrator,
   }
 }

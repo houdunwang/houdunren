@@ -108,6 +108,8 @@ npx houdunren-vue
 
 ![image-20220706223650063](./assets/image-20220706223650063.jpg)
 
+<img src="./assets/2023-03-18_03.03.43.jpeg" alt="image-20220706223650063" style="zoom:65%;" />
+
 ## 每晚直播
 
 向军大叔会在每晚八点进行直播，与大家交流技术与生活。

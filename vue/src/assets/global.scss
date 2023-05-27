@@ -1,12 +1,28 @@
 body {
-  @apply bg-gray-100 text-gray-700 font-sans text-base;
-
+  @apply bg-[#F5F4F8] text-slate-600 font-mono;
+  font-family: PingFangSC-Regular;
+  word-break: break-all;
   a {
+    @apply text-slate-600;
     &:hover {
-      @apply text-[#16a085] duration-300;
+      @apply text-[#ee5253] duration-200;
     }
   }
 }
 .el-form-item__error {
   @apply hidden;
+}
+
+.el-alert__content {
+  display: flex !important;
+  align-items: center !important;
+}
+
+table {
+  max-width: 100vw;
+  tr {
+    td {
+      word-break: break-all;
+    }
+  }
 }

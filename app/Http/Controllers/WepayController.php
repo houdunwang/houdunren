@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Services\DouyinService;
-use Illuminate\Http\Request;
 use Log;
 use Yansongda\Pay\Pay;
 use App\Services\OrderService;
@@ -35,26 +33,6 @@ class WepayController extends Controller
         $result = Pay::wechat()->scan($order);
         //生成支付二维码
         return Builder::create()->data($result['code_url'])->build()->getDataUri();
-    }
-
-    //APP支付
-    public function appPay(Order $order)
-    {
-        $bytedanceConfig = [
-            'app_id'        => 'ttb71fc1a22820f2a401', // App ID
-            'salt'          => 'sdfsdfdsfdsf', // 支付密钥值
-            'token'         => 'kldsiolkwilfkisdfllaowlfijlsdfijlwfsdfssf', // 回调验签的Token
-            'notify_url'    => 'aa', // 支付回调地址
-            'thirdparty_id' => '', // 第三方平台服务商 id，非服务商模式留空
-        ];
-
-        $s =  new Bytedance($bytedanceConfig);
-        $s->createOrder();
-        Log::info($s);
-        // return app(DouyinService::class)->pay([
-        //     "no" => "U1903903903",
-        //     "amount" => 1,
-        // ]);
     }
 
     //公众号支付

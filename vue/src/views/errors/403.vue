@@ -7,7 +7,6 @@
         <div class="border-t border-gray-200 text-center pt-8">
           <h1 class="text-9xl font-bold text-purple-400">403</h1>
           <h1 class="text-3xl font-medium py-8">你访问的页面不存在</h1>
-
           <a
             href="/"
             class="bg-gradient-to-r from-purple-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-3 rounded-md mr-6">

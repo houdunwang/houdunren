@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { captcha, captcha_key } = defineProps<{
+defineProps<{
   captcha: string
   captcha_key: string
 }>()

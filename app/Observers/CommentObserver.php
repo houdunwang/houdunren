@@ -13,10 +13,9 @@ class CommentObserver
     public function created(Comment $comment)
     {
         activityLog(
-            request('module'),
             $comment,
             $comment->model->title,
-            ['module' => request('module'), 'model' => request('model'), 'model_id' => $comment->commentable_id]
+            ['model' => request('model'), 'model_id' => $comment->commentable_id]
         );
 
         //评论或视频作者通知

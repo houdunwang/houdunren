@@ -1,41 +1,29 @@
 <script setup lang="ts">
-import aliyun from './config/aliyun.vue'
-import sms from './config/sms.vue'
-import email from './config/email.vue'
-import wechat from './config/wechat.vue'
-import upload from './config/upload.vue'
-
-const { get, update } = useConfig()
-const config = ref(await get())
-const tab = ref('sms')
+const { update } = useConfig()
+const { config } = useConfigStore()
+const tab = ref('subscribe')
 </script>
 
 <template>
-  <main v-if="config">
-    <el-tabs v-model="tab" type="border-card" tab-position="top">
-      <!-- <el-tab-pane label="基础配置" name="base">
-        <baseVue :config="config" />
-      </el-tab-pane> -->
-      <!-- <el-tab-pane label="版权信息" name="copyright">
-        <copyright :config="config" />
-      </el-tab-pane> -->
-      <el-tab-pane label="短信" name="sms">
-        <sms :config="config" />
-      </el-tab-pane>
-      <el-tab-pane label="阿里云" name="aliyun">
-        <aliyun :config="config" />
-      </el-tab-pane>
-      <el-tab-pane label="邮箱" name="email">
-        <email :config="config" />
-      </el-tab-pane>
-      <el-tab-pane label="微信" name="wechat">
-        <wechat :config="config" />
-      </el-tab-pane>
-      <el-tab-pane label="上传" name="upload">
-        <upload :config="config" />
-      </el-tab-pane>
-    </el-tabs>
+  <HdCard>
+    <template #header> 网站配置 </template>
+    <template #default>
+      <el-tabs v-model="tab" type="card" tab-position="top" class="p-5" v-if="config">
+        <el-tab-pane label="订阅" name="subscribe">
+          <el-form label-width="80px" :inline="false" size="large" label-position="top" class="border p-5">
+            <el-form-item label="年会员">
+              <el-input v-model="config.subscribe.price_year" />
+            </el-form-item>
+            <el-form-item label="永久会员">
+              <el-input v-model="config.subscribe.price_permanent" />
+            </el-form-item>
+          </el-form>
+        </el-tab-pane>
+      </el-tabs>
+    </template>
 
-    <el-button type="primary" size="default" @click="update(config)" class="mt-3">保存提交</el-button>
-  </main>
+    <template #footer>
+      <el-button type="primary" size="default" @click="update" class="mx-5 mb-5">保存提交</el-button>
+    </template>
+  </HdCard>
 </template>

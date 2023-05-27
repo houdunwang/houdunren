@@ -7,7 +7,7 @@ use App\Services\WechatService;
 use Cache;
 use Houdunwang\Wechat\Message;
 use Log;
-use Modules\Edu\Entities\Morning;
+use App\Models\Morning;
 
 //与微信服务器通信接口
 class WechatController extends Controller
@@ -69,7 +69,7 @@ class WechatController extends Controller
                     'title' => '本期【早起少年】活动礼品，等你拿',
                     'description' => '早睡早起，拥有好心情和好身体。家人开心，自己健康。',
                     'picurl' => url('/assets/xj.jpg'),
-                    'url' => url('Edu/morning')
+                    'url' => url('morning')
                 ]
             ]);
         }

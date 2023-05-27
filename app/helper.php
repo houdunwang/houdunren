@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,7 @@ if (!function_exists('modelInstance')) {
 if (!function_exists('modelClass')) {
     function modelClass()
     {
-        $class = 'Modules\\' . ucfirst(request('module')) . '\Entities\\' . ucfirst(request('model'));
+        $class = 'App\Models\\' . ucfirst(request('model'));
         if (!class_exists($class)) abort(404, '模型不存在');
         return $class;
     }
@@ -56,14 +57,23 @@ if (!function_exists('isWechat')) {
 }
 
 if (!function_exists('activityLog')) {
-    function activityLog(string $module,  $model, string $title, $properties = [])
+    function activityLog($model, string $title, $properties = [])
     {
         activity()
             ->causedBy(Auth::user())
             ->performedOn($model)
             ->withProperties($properties)
             ->event('created')
-            ->useLog($module)
             ->log($title);
+    }
+}
+
+if (!function_exists('isSubscribe')) {
+    function isSubscribe()
+    {
+        if (Auth::check()) {
+            $user = User::find(Auth::id());
+            return $user->subscribe && (now()->diffInMinutes($user->subscribe->end_time, false) > 0);
+        }
     }
 }

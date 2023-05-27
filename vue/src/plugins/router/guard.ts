@@ -1,7 +1,8 @@
-import { RouteLocationNormalized, Router } from 'vue-router'
-import { useTitle } from '@vueuse/core'
 import config from '@/config'
+import { useTitle } from '@vueuse/core'
 import { ElMessage } from 'element-plus'
+import { RouteLocationNormalized, Router } from 'vue-router'
+
 let isInit = false
 export default (router: Router) => {
   router.beforeEach(beforeEach)
@@ -20,11 +21,7 @@ async function beforeEach(to: RouteLocationNormalized, from: RouteLocationNormal
     location.href = '/auth/login'
   }
   if (to.meta.admin && !isAdministrator()) {
-    ElMessage({
-      type: 'error',
-      grouping: true,
-      message: '没有访问权限',
-    })
+    ElMessage({ type: 'error', grouping: true, message: '没有访问权限' })
     return from
   }
   if (to.meta.guest && isLogin()) return '/'
@@ -35,5 +32,5 @@ async function beforeEach(to: RouteLocationNormalized, from: RouteLocationNormal
 async function init() {
   if (isInit === true) return
   isInit = true
-  await Promise.all(config.middleware.map((middleware) => middleware()))
+  await Promise.all(config.middleware.map((middleware: any) => middleware()))
 }

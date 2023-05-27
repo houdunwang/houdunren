@@ -22,7 +22,7 @@ export default defineConfig(({ command, mode }) => {
         languages: 'all',
       }),
     ],
-    base: isBuild ? '/vue/dist' : '/',
+    base: isBuild ? '/dist' : '/',
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),

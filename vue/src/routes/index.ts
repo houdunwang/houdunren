@@ -1,9 +1,39 @@
-import auth from './auth'
 import front from './front'
-import config from './config'
-import module from './module'
 import error from './error'
-import member from './member'
+import system from './system'
+import topic from './topic'
+import lesson from './lesson'
+import video from './video'
+import sign from './sign'
 import admin from './admin'
+import config from './config'
+import live from './live'
+import morning from './morning'
+import question from './question'
+import shortVideo from './shortVideo'
+import shot from './shot'
+import subscribe from './subscribe'
+import member from './member'
+import wechat from './wechat'
+import auth from './auth'
 
-export default [config, module, front, auth, error, member, admin]
+export default [
+  auth,
+  ...admin,
+  ...config,
+  ...error,
+  ...front,
+  ...lesson,
+  ...live,
+  ...morning,
+  ...question,
+  ...shortVideo,
+  ...shot,
+  ...sign,
+  ...subscribe,
+  ...system,
+  ...topic,
+  ...member,
+  ...video,
+  ...wechat,
+]

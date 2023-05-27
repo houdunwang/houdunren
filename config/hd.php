@@ -1,5 +1,35 @@
 <?php
 return  [
+    "subscribe" => [
+        "year" => [
+            "price" => 375,
+            "original" => 745,
+            "state" => true
+        ],
+        "permanent" => [
+            "price" => 578,
+            "original" => 2450,
+            "state" => true
+
+        ],
+    ],
+    "base" => [
+        "name" => "houdunren",
+        "domain" => "houdunren.com",
+        "ad" => "后盾人 人人做后盾",
+        "captcha_disable" => true,
+        "weixin" => "houdunren2021",
+        "email" => "2300071698@qq.com",
+        "icp" => "\u4eacICP\u590712048441\u53f7-8"
+    ],
+    "copyright" => [
+        "ad" => "\u540e\u76fe\u4eba \u4eba\u4eba\u505a\u540e\u76fe",
+        "weixin" => "houdunren2021",
+        "email" => "2300071698@qq.com",
+        "icp" => "\u4eacICP\u590712048441\u53f7-8",
+        "showXjAvatar" => false,
+        "other" => "Copyright \u00a9 houdunren.com All Rights Reserved"
+    ],
     "aliyun" => [
         "aliyun_key" => env('ALIYUN_KEY'),
         'aliyun_secret' => env('ALIYUN_SECEET'),

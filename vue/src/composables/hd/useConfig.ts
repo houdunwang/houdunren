@@ -1,8 +1,14 @@
 import { http } from '@/plugins/axios'
 
 export default () => {
-  const get = async () => {
-    return await http.request<ConfigModel>({
+  const common = async () => {
+    return await http.request<any>({
+      url: `config/common`,
+    })
+  }
+
+  const all = async () => {
+    return await http.request<any>({
       url: `config/all`,
     })
   }
@@ -15,5 +21,5 @@ export default () => {
     })
   }
 
-  return { get, update }
+  return { update, all, common }
 }

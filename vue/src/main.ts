@@ -1,8 +1,8 @@
 import directive from '@/directives'
 import plugin from '@/plugins'
+import '@/assets/global.scss'
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@/assets/global.scss'
 
 function bootstrap() {
   const app = createApp(App)

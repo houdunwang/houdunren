@@ -11,7 +11,6 @@ class ActivityController extends Controller
 {
     public function index()
     {
-        $module = request('module');
-        return ActivityResource::collection(Activity::where('log_name', $module)->latest('id')->paginate(15));
+        return ActivityResource::collection(Activity::latest('id')->paginate(15));
     }
 }
