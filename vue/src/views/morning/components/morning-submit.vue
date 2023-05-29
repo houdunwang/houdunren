@@ -27,7 +27,7 @@ const drawPrize = async () => {
               :to="{ name: 'sign.space', query: { uid: user.id } }"
               target="_blank"
               class="text-green-700 font-bold">
-              {{ user.name }}
+              {{ user.nickname }}
             </router-link>
             获取活动礼品
           </div>

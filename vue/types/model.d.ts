@@ -1,6 +1,6 @@
 interface UserModel {
   id: number
-  name: string
+  nickname: string
   email: string
   mobile: string
   sex: number

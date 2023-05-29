@@ -13,7 +13,7 @@ const get = () => {
     <el-dialog title="用户资料" v-model="dialog" append-to-body>
       <el-form :model="model" ref="form" label-width="80px" :inline="false" size="default" v-if="model">
         <el-form-item label="昵称">
-          <el-input v-model="model.name"></el-input>
+          <el-input v-model="model.nickname"></el-input>
         </el-form-item>
         <el-form-item label="头像">
           <UserAvatar :user="model" />

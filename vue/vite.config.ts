@@ -22,7 +22,7 @@ export default defineConfig(({ command, mode }) => {
         languages: 'all',
       }),
     ],
-    base: isBuild ? '/dist' : '/',
+    base: isBuild ? '/vue/dist' : '/',
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),
@@ -45,6 +45,10 @@ export default defineConfig(({ command, mode }) => {
       host: true,
       proxy: {
         '/api': {
+          target: env.VITE_API_URL,
+          changeOrigin: true,
+        },
+        '/assets': {
           target: env.VITE_API_URL,
           changeOrigin: true,
         },

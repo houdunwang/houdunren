@@ -25,6 +25,7 @@ Route::put('config', [ConfigController::class, 'update']);
 //登录注册
 Route::controller(AuthController::class)->prefix('auth')->group(function () {
     Route::post('login', 'login');
+    Route::post('register', 'register');
     Route::post('logout', 'logout');
     Route::post('forgot-password', 'forgotPassword');
 });

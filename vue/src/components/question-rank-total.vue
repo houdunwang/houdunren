@@ -19,7 +19,7 @@ const answers = await getQuestionRankTotal()
           <UserAvatar :user="item.user" />
           <div class="flex flex-col justify-between">
             <router-link :to="{ name: 'sign.space', query: { uid: item.user?.id } }">
-              {{ item.user?.name }}
+              {{ item.user?.nickname }}
             </router-link>
             <span class="text-xs">注册于 {{ dayjs(item.user?.created_at).fromNow() }} </span>
           </div>

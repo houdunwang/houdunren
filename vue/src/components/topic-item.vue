@@ -24,7 +24,7 @@ const { item } = defineProps<{
           custom
           #default="{ href }"
           v-if="item.user">
-          <a :href="href">{{ item.user.name }}</a>
+          <a :href="href">{{ item.user.nickname }}</a>
         </router-link>
         <span class="hidden md:inline text-gray-500">更新于 {{ dayjs(item.updated_at).fromNow() }}</span>
       </div>

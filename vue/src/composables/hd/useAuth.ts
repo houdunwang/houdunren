@@ -63,5 +63,21 @@ export default () => {
     }
   })
 
-  return { authorize, isLogin, logout, login, form, findPassword }
+  const register = useUtil().request(async () => {
+    try {
+      const { token } = await http.request<{ token: string; user: UserModel }>({
+        url: 'auth/register',
+        method: 'POST',
+        data: form,
+      })
+      storage.set(CacheKey.TOKEN_NAME, token)
+      const redirectUrl = storage.get(CacheKey.REDIRECT_ROUTE_NAME, '/')
+      storage.remove(CacheKey.REDIRECT_ROUTE_NAME)
+      location.href = redirectUrl
+    } catch (error) {
+      useCaptcha().getCaptcha()
+    }
+  })
+
+  return { authorize, isLogin, logout, login, form, findPassword, register }
 }

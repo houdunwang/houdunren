@@ -20,7 +20,7 @@ onBeforeRouteLeave(() => clearInterval(timeId))
             </router-link>
             <small class="text-gray-800">
               <router-link :to="{ name: 'sign.space', query: { uid: item.user.id } }">
-                {{ item.user.name }}
+                {{ item.user.nickname }}
               </router-link>
               {{ dayjs(item.updated_at).fromNow() }}学习
             </small>

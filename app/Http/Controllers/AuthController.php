@@ -29,6 +29,22 @@ class AuthController extends Controller
         throw ValidationException::withMessages(['password' => '密码输入错误']);
     }
 
+    public function register(Request $request, User $user)
+    {
+        Validator::make($request->input(), [
+            'account' => ['required', Rule::unique('users', 'name')],
+            'password' => ['required', 'confirmed'],
+            'captcha' => ['required', 'captcha_api:' . request('captcha_key') . ',math']
+        ], [
+            'name.require' => '帐号不能为空',
+            'captcha.captcha_api' => '验证码输入错误'
+        ])->validate();
+        $user->name = request('account');
+        $user->password = Hash::make(request('password'));
+        $user->save();
+        return $this->respondWithSuccess(['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
+    }
+
     public function logout()
     {
         Auth::logout();

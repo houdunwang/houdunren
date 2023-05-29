@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
+            $table->string('name')->nullable()->unique()->comment('用户名');
+            $table->string('password')->nullable();
+            $table->string('nickname')->nullable()->comment("昵称");
             $table->string('email')->nullable()->unique();
             $table->string('mobile')->nullable()->uniqid();
-            $table->string('password')->nullable();
             $table->tinyInteger('sex')->default(1)->comment('性别');
             $table->unsignedInteger('comment_num')->default(0)->comment('评论数量');
             $table->unsignedInteger('fans_num')->default(0)->comment('粉丝数量');

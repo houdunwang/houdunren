@@ -11,7 +11,7 @@ class UserResource extends JsonResource
     {
         return [
             'avatar' => $this->avatar ?: url('assets/avatar/' . ($this->sex == 1 ? 'boy.jpeg' : 'girl.jpeg')),
-            'name' => $this->name ?: '盾友',
+            'nickname' => $this->nickname ?: '盾友',
         ] + parent::toArray($request);
     }
 }

@@ -1,6 +1,4 @@
-<script setup lang="ts">
-const imgUrl = new URL('../../public/wechat/xj-wechat-qr.jpg', import.meta.url).href
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <HdCard>
@@ -8,7 +6,7 @@ const imgUrl = new URL('../../public/wechat/xj-wechat-qr.jpg', import.meta.url).
     <template #default>
       <div class="font-normal text-base">如果你喜欢微信群里交流，加大叔微信</div>
       <div class="text-center">
-        <el-image :src="imgUrl" fit="cover" :lazy="true"></el-image>
+        <el-image src="/assets/wechat/xj-wechat-qr.jpg" fit="cover" :lazy="true" />
       </div>
     </template>
   </HdCard>

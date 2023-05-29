@@ -46,7 +46,7 @@ const url = computed(() => {
         <router-link
           :to="{ name: 'sign.space', query: { uid: item.user.id } }"
           class="text-indigo-800 font-bold opacity-70">
-          {{ item.user.name }}
+          {{ item.user.nickname }}
         </router-link>
         <span class="text-xs opacity-90">更新于 {{ dayjs(item.updated_at).fromNow() }}</span>
       </div>

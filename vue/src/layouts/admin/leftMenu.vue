@@ -43,7 +43,12 @@ const go = (route: RouteRecordRaw) => {
         <dl v-for="(route, index) of routes" :key="index">
           <dt>
             <section>
-              <component :is="route.meta.menu?.icon" size="15" fill="#dcdcdc" class="mr-2" />
+              <component
+                :is="route.meta.menu.icon"
+                size="15"
+                fill="#dcdcdc"
+                class="mr-2"
+                v-if="route.meta.menu?.icon" />
               <span class="text-md">{{ route.meta.menu?.title }}</span>
             </section>
           </dt>

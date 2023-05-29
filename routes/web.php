@@ -8,9 +8,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('wechat/appLogin', [WechatLoginController::class, 'appLogin']);
 
 Route::fallback(function () {
-    if (preg_match('/^(admin|auth|member|error)/', Request::path())) {
-        return file_get_contents(base_path('vue/dist/index.html'));
-    }
-
-    return redirect('/admin');
+    return file_get_contents(base_path('vue/dist/index.html'));
 });

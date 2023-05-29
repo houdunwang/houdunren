@@ -38,7 +38,7 @@ await Promise.all([getUserSignList(route.query.uid, route.query.page || 1)])
         </div>
         <div class="text-sm flex gap-3 font-light mt-1">
           <router-link :to="{ name: 'sign.space', query: { uid: item.user_id } }" class="opacity-70">
-            {{ item.user.name }}
+            {{ item.user.nickname }}
           </router-link>
           <span> {{ dayjs(item.created_at).fromNow() }} 签到</span>
         </div>

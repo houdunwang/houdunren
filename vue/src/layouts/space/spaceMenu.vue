@@ -18,7 +18,7 @@ findOne(route.query.uid)
           <!-- <el-image :src="user.avatar" fit="cover" class="w-52 h-52 rounded-full shadow-3xl" /> -->
         </div>
         <div class="flex flex-col items-center text-2xl mt-3 text-white opacity-80">
-          <div class="mb-2">{{ user.name }}</div>
+          <div class="mb-2">{{ user.nickname }}</div>
           <div class="text-sm flex flex-col items-center">
             <div class="flex items-center">
               <icon-time theme="outline" class="mr-1" /> 注册于 {{ dayjs(user.created_at).fromNow() }}

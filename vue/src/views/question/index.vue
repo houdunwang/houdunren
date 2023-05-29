@@ -64,7 +64,7 @@ const rankList = await getRankingList()
               <div class="flex justify-start gap-2 items-center">
                 <UserAvatar :user="row.user" />
                 <router-link :to="{ name: 'sign.space', params: { uid: row.user.id } }">
-                  {{ row.user.name }}
+                  {{ row.user.nickname }}
                 </router-link>
               </div>
             </el-table-column>

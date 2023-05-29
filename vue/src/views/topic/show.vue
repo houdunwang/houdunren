@@ -23,7 +23,7 @@ useTitle(model.value?.title)
         <UserAvatar :user="model.user" />
 
         <div class="flex flex-col justify-between flex-1">
-          <span class="font-bold">{{ model.user.name }}</span>
+          <span class="font-bold">{{ model.user.nickname }}</span>
           <div class="flex flex-col md:flex-row md:items-center gap-3 justify-between">
             <div class="flex items-center gap-3">
               <div class="md:flex items-center gap-1 hidden">

@@ -22,7 +22,7 @@ const onSubmit = request(async () => {
   if (!form.content.trim()) {
     return ElMessage.error('评论内容不能为空')
   }
-  const comment = await add(module, model, mid, form)
+  const comment = await add(model, mid, form)
   collection.find((c) => c.id == form.comment_id)?.replys.push(comment)
   showInput.value = false
   form.content = ''
@@ -59,12 +59,12 @@ const del = async (e: MouseEvent) => {
         <div class="flex flex-col justify-start">
           <div class="flex text-sm font-bold text-gray-500 mb-1">
             <router-link :to="{ name: 'sign.space', query: { uid: comment.user_id } }">
-              {{ comment.user.name }}
+              {{ comment.user.nickname }}
             </router-link>
             <div v-if="comment.comment_id" class="flex items-center">
               <icon-right theme="outline" />
               <router-link :to="{ name: 'sign.space', query: { uid: comment.reply_user_id } }">
-                {{ comment.reply_user.name }}
+                {{ comment.reply_user.nickname }}
               </router-link>
             </div>
           </div>

@@ -25,7 +25,7 @@ await findAll(page.value)
         <el-table-column label="获得礼品的朋友" #default="{ row }">
           <div class="flex items-center cursor-pointer" v-if="row.user">
             <UserInfoDialog :uid="row.user.id" #default="{ get }">
-              <span @click="get">{{ row.user.name }}</span>
+              <span @click="get">{{ row.user.nickname }}</span>
             </UserInfoDialog>
           </div>
         </el-table-column>

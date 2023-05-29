@@ -1,8 +1,4 @@
-<script setup lang="ts">
-const douyin = new URL(`../../../public/live-qr/douyin.png`, import.meta.url).href
-const bilibili = new URL(`../../../public/live-qr/bilibili.png`, import.meta.url).href
-const kuaisou = new URL(`../../../public/live-qr/kuaisou.png`, import.meta.url).href
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <HdCard class="mb-32">
@@ -13,10 +9,10 @@ const kuaisou = new URL(`../../../public/live-qr/kuaisou.png`, import.meta.url).
       </h2>
     </template>
     <template #default>
-      <div class="2xlp-5 flex flex-col lg:flex-row gap-2 lg:gap-6 2xl:gap-20 items-start">
-        <el-image :src="douyin" fit="fill" :lazy="true" class="border"></el-image>
-        <el-image :src="bilibili" fit="fill" :lazy="true" class="border"></el-image>
-        <el-image :src="kuaisou" fit="fill" :lazy="true" class="border"></el-image>
+      <div class="grid md:grid-cols-3 gap-2">
+        <el-image src="/assets/live-qr/douyin.png" fit="fill" :lazy="true" class="border"></el-image>
+        <el-image src="/assets/live-qr/bilibili.png" fit="fill" :lazy="true" class="border"></el-image>
+        <el-image src="/assets/live-qr/kuaisou.png" fit="fill" :lazy="true" class="border"></el-image>
       </div>
     </template>
   </HdCard>

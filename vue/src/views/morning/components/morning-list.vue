@@ -48,7 +48,7 @@ const stopPlay = () => {
               <div
                 @click="$router.push({ name: 'sign.space', query: { uid: row.user.id } })"
                 class="cursor-pointer ml-2">
-                {{ row.user.name }}
+                {{ row.user.nickname }}
               </div>
             </div>
           </el-table-column>

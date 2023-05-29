@@ -16,10 +16,6 @@ const onSubmit = async () => {
   add(form).then(() => location.reload())
   form.key++
 }
-
-const image = (sign: string) => {
-  return new URL(`../../../../public/sign/${sign}.gif`, import.meta.url).href
-}
 </script>
 
 <template>
@@ -45,7 +41,7 @@ const image = (sign: string) => {
             class="border-4 rounded-xl w-10 h-10 box-content p-1 cursor-pointer hover:border-red-500 duration-300"
             :class="{ 'border-red-500': sign == form.mood }"
             @click="form.mood = sign"
-            :src="image(sign)"
+            :src="`/assets/sign/${sign}.gif`"
             fit="cover"
             :lazy="true"
             v-for="(sign, index) of signs"
@@ -64,7 +60,7 @@ const image = (sign: string) => {
       </template>
     </HdCard>
     <section v-else class="bg-white shadow-sm rounded-lg mb-5 p-5">
-      <el-button type="primary" size="default" @click="open('/auth/login')">登录后签到</el-button>
+      <el-button type="primary" size="default" @click="open('/login')">登录后签到</el-button>
     </section>
   </main>
 </template>

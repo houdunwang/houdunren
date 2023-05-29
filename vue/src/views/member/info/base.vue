@@ -6,7 +6,7 @@ const { update } = useUser()
 <template>
   <el-form label-width="80px" :inline="false" class="border p-5 rounded-2xl" v-if="user">
     <el-form-item label="昵称">
-      <el-input v-model="user.name" placeholder="起个有个性的昵称吧"></el-input>
+      <el-input v-model="user.nickname" placeholder="起个有个性的昵称吧"></el-input>
       <HdError name="name" />
     </el-form-item>
     <el-form-item label="真实姓名">

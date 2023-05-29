@@ -5,12 +5,6 @@ import dayjs from 'dayjs'
 const { authorize } = useAuth()
 const { collection, getTodaySignList, todaySign, remove } = useSign()
 await getTodaySignList()
-
-const icon = (name: string) => {
-  return new URL(`../../../public/sign/${name}.gif`, import.meta.url).href
-}
-
-const wechatInput = new URL(`../../../public/wechat/input.jpg`, import.meta.url).href
 </script>
 
 <template>
@@ -31,7 +25,7 @@ const wechatInput = new URL(`../../../public/wechat/input.jpg`, import.meta.url)
         <!-- 扫码下方二维码或微信搜索【后盾云】添加公众号 <br /> -->
         <!-- <el-image src="/assets/wechat/qr.jpg" fit="fill" :lazy="true"></el-image> <br /> -->
         发送以『签到』开始的的内容。 <br />
-        <el-image :src="wechatInput" fit="fill" :lazy="true" class="w-full md:max-w-[400px]"></el-image>
+        <el-image src="/assets/wechat/input.jpg" fit="fill" :lazy="true" class="w-full md:max-w-[400px]" />
         <br />
         2022年10月18日前注册的老朋友，请先在电脑端绑定微信后再使用微信快签功能，否则使用微信公众号进行微信快签会创建一个新用户。
       </section>
@@ -63,7 +57,7 @@ const wechatInput = new URL(`../../../public/wechat/input.jpg`, import.meta.url)
             <div class="flex justify-start gap-2 items-center">
               <UserAvatar :user="row.user" />
               <router-link :to="{ name: 'sign.space', params: { uid: row.user.id } }">
-                {{ row.user.name }}
+                {{ row.user.nickname }}
               </router-link>
             </div>
           </el-table-column>
@@ -78,7 +72,11 @@ const wechatInput = new URL(`../../../public/wechat/input.jpg`, import.meta.url)
           </el-table-column>
           <el-table-column label="签到心情" #default="{ row }">
             <div class="flex items-center">
-              <el-image class="w-12 h-12 box-content p-1" :src="icon(row.mood)" fit="cover" :lazy="true" />
+              <el-image
+                class="w-12 h-12 box-content p-1"
+                :src="`/assets/sign/${row.mood}.gif`"
+                fit="cover"
+                :lazy="true" />
               {{ row.content }}
               <el-button
                 type="warning"
@@ -105,7 +103,7 @@ const wechatInput = new URL(`../../../public/wechat/input.jpg`, import.meta.url)
                 <router-link
                   :to="{ name: 'sign.space', query: { uid: item.user_id } }"
                   class="text-indigo-800 font-bold opacity-70">
-                  {{ item.user.name }}
+                  {{ item.user.nickname }}
                 </router-link>
                 <span>{{ dayjs(item.created_at).fromNow() }}</span>
                 <span class="align-top inline-block">.</span>

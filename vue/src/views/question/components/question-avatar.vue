@@ -11,7 +11,7 @@ const { question } = defineProps<{ question: QuestionModel }>()
       <UserAvatar :user="question.user!" class="w-10 h-10" />
       <div class="flex flex-col">
         <router-link :to="{ name: 'sign.space', query: { uid: question.user?.id } }" class="font-bold text-[#16a085]">
-          {{ question.user?.name }}
+          {{ question.user?.nickname }}
         </router-link>
         <span class="text-sm flex items-center gap-1 opacity-80">
           <icon-history theme="filled" fill="#333" />
