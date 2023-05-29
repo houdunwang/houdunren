@@ -57,10 +57,7 @@ export default {
       title: '碎片课程',
       route: { name: 'lesson' },
     },
-    {
-      title: '最新更新',
-      route: { name: 'video' },
-    },
+
     {
       title: '话题讨论',
       route: { name: 'topic' },
@@ -69,10 +66,7 @@ export default {
       title: '签到打卡',
       route: { name: 'sign' },
     },
-    {
-      title: '早起少年',
-      route: { name: 'morning' },
-    },
+
     {
       title: '订阅优惠',
       route: { name: 'subscribe' },
@@ -87,6 +81,10 @@ export default {
       icon: DocDetail,
     },
     {
+      title: '早起少年',
+      route: { name: 'morning' },
+    },
+    {
       title: '大叔作品',
       url: `https://www.hdcms.com`,
       icon: ApplicationOne,
@@ -94,6 +92,10 @@ export default {
     {
       title: '感谢陪伴',
       route: { name: 'shot.comment' },
+    },
+    {
+      title: '最新更新',
+      route: { name: 'video' },
     },
     {
       title: '金榜题名',

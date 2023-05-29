@@ -15,7 +15,7 @@ class PhoneRule implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (!preg_match("/^1\d{10}$/", $value)) {
-            $fail('手机号格式错误');
+            $fail('帐号格式错误');
         }
     }
 }

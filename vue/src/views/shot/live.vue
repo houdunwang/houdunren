@@ -6,9 +6,9 @@ const lives = ref(await getLiveList())
 
 <template>
   <Layout>
-    <section class="grid md:grid-cols-3 gap-10 grid-flow-dense rounded-xl">
+    <section class="lg:grid xl:grid-cols-2 grid-flow-row-dense rounded-xl px-3">
       <div v-for="(item, index) of lives" :key="index">
-        <el-image :src="item" fit="cover" :lazy="true" class="overflow-hidden rounded-3xl"></el-image>
+        <el-image :src="item" fit="cover" :lazy="true" class="w-full rounded-3xl" />
       </div>
     </section>
   </Layout>

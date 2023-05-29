@@ -7,7 +7,7 @@ export default () => {
   //PC 支付宝支付
   const alipay = async (price: number) => {
     const order = await createOrder('alipay', price)
-    location.href = `/api/alipay/pay/${order.id}`
+    window.open(`/api/alipay/pay/${order.id}`)
   }
 
   //微信 PC 支付

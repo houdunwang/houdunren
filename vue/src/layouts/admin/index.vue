@@ -15,7 +15,7 @@ import Navbar from '@/layouts/admin/navbar.vue'
       <div class="overflow-y-auto pb-32">
         <router-view #default="{ Component, route }">
           <!-- <KeepAlive> -->
-          <component :is="Component" class="m-5" :key="route.fullPath" />
+          <component :is="Component" class="m-5" />
           <!-- </KeepAlive> -->
         </router-view>
       </div>

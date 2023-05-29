@@ -9,7 +9,7 @@ const comments = ref(await getCommentList())
   <Layout>
     <section class="lg:grid xl:grid-cols-2 grid-flow-row-dense rounded-xl">
       <div v-for="(comment, index) of comments" :key="index">
-        <el-image :src="comment" fit="cover" :lazy="true" class="w-screen xl:w-auto"></el-image>
+        <el-image :src="comment" fit="cover" :lazy="true" class="w-full xl:w-auto" />
       </div>
     </section>
   </Layout>

@@ -3,7 +3,7 @@ import baseVue from './info/base.vue'
 import avatar from './info/avatar.vue'
 import deleteVue from './info/delete.vue'
 import password from './info/password.vue'
-const tab = ref('password')
+const tab = ref('base')
 </script>
 
 <template>

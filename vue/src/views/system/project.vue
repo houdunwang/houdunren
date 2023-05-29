@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SystemItem from '@/components/system-item.vue'
-const { collection, findAll } = useSystem()
+const { collection, findAll, remove } = useSystem()
 await findAll(1, { type: 'project' })
 </script>
 
@@ -12,7 +12,7 @@ await findAll(1, { type: 'project' })
         <div class="text-center xl:text-base mx-5 mb-3">以下是提高你编程能力的实战项目，希望能够帮助到你</div>
       </section>
       <section class="grid grid-flow-row md:grid-cols-3 gap-5 p-5">
-        <SystemItem v-for="item of collection" :key="item.id" :item="item" />
+        <SystemItem v-for="item of collection" :key="item.id" :item="item" @del="remove" />
       </section>
     </div>
   </main>

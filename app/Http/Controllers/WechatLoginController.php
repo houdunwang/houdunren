@@ -26,7 +26,7 @@ class WechatLoginController extends Controller
         $info = $this->qr->getQrTicket([
             "expire_seconds" => 600,
             "action_name" => "QR_STR_SCENE",
-            "action_info" => ["scene" => ["scene_str" => "bind"]]
+            "action_info" => ["scene" => ["scene_str" => "bind"]],
         ]);
 
         return $this->respondWithSuccess($info);

@@ -1,9 +1,12 @@
 <script setup lang="ts">
 const { isAdministrator } = useUser()
-const { remove } = useSystem()
 
 const { item } = defineProps<{
   item: SystemModel
+}>()
+
+const emit = defineEmits<{
+  del: [id: number]
 }>()
 </script>
 
@@ -37,7 +40,7 @@ const { item } = defineProps<{
       <router-link :to="{ name: 'system.edit', params: { id: item.id } }">
         <el-button type="success" size="small"> 编辑 </el-button>
       </router-link>
-      <el-button type="danger" size="small" class="!ml-0" @click="remove(item.id)">删除</el-button>
+      <el-button type="danger" size="small" class="!ml-0" @click="emit('del', item.id!)">删除</el-button>
     </div>
   </section>
 </template>

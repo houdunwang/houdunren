@@ -16,19 +16,14 @@ return  [
     "base" => [
         "name" => "houdunren",
         "domain" => "houdunren.com",
+        "tip" => "",
         "ad" => "后盾人 人人做后盾",
         "captcha_disable" => true,
         "weixin" => "houdunren2021",
         "email" => "2300071698@qq.com",
-        "icp" => "\u4eacICP\u590712048441\u53f7-8"
-    ],
-    "copyright" => [
-        "ad" => "\u540e\u76fe\u4eba \u4eba\u4eba\u505a\u540e\u76fe",
-        "weixin" => "houdunren2021",
-        "email" => "2300071698@qq.com",
-        "icp" => "\u4eacICP\u590712048441\u53f7-8",
-        "showXjAvatar" => false,
-        "other" => "Copyright \u00a9 houdunren.com All Rights Reserved"
+        "icp" => "",
+        "other" => "Copyright \u00a9 houdunren.com All Rights Reserved",
+        "footerXjAvatar" => true
     ],
     "aliyun" => [
         "aliyun_key" => env('ALIYUN_KEY'),

@@ -8,6 +8,9 @@ export default defineStore('user', {
       user: undefined as UserModel | undefined,
     }
   },
+  getters: {
+    wechatIsBind: (state) => state.user?.unionid || state.user?.openid,
+  },
   actions: {
     async getCurrentUser() {
       if (useAuth().isLogin()) {

@@ -46,7 +46,8 @@ export default () => {
         url: `system/${id}`,
         method: 'DELETE',
       })
-      location.reload()
+      const index = collection.value.findIndex((item) => item.id == id)
+      collection.value.splice(index, 1)
     } catch (error) {}
   }
 

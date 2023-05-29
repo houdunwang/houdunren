@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Houdunwang\Wechat\Button;
 use App\Http\Requests\StoreWechatMenuRequest;
+use Log;
 
 class WechatMenuController extends Controller
 {
@@ -12,6 +13,7 @@ class WechatMenuController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth:sanctum')->only(['store']);
         $this->button = app(Button::class)->config(config('hd.wechat'));
     }
 
@@ -23,7 +25,7 @@ class WechatMenuController extends Controller
             "button" => [
                 "type" => "view",
                 "name" => "在线学习",
-                "url" => url('/')
+                "url" => url('/', [], true)
             ]
         ]);
 

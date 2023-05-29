@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id")->constrained('users')->onDelete('cascade');
-            $table->char('module', 20)->comment('模块');
             $table->string('sn')->comment('定单号');
             $table->string('subject')->comment('订单描述');
             $table->decimal('price')->comment('价格');

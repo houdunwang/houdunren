@@ -8,6 +8,7 @@ use Houdunwang\Wechat\User as WechatUser;
 use Http;
 use Log;
 
+//微信服务
 class WechatService
 {
     //根据 OPENID 创建用户

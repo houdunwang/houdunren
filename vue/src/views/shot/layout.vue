@@ -3,7 +3,7 @@ const xjImg = new URL(`../../../public/images/xj.jpg`, import.meta.url).href
 </script>
 
 <template>
-  <main class="relative !p-0 !m-0 !w-full">
+  <main class="relative !p-0 !m-0 !w-full overflow-hidden">
     <section class="text-white overflow-hidden bg-[#2c3e50]">
       <div class="2xl:w-page 2xl:mx-auto flex flex-col items-center py-6 px-3">
         <img :src="xjImg" class="rounded-lg lg:h-36" />
@@ -18,7 +18,7 @@ const xjImg = new URL(`../../../public/images/xj.jpg`, import.meta.url).href
         <el-button type="success" size="large" @click="$router.push({ name: 'shot.comment' })">温暖的评论</el-button>
         <el-button type="danger" size="large" @click="$router.push({ name: 'shot.live' })">直播互动</el-button>
       </div>
-      <div class="w-page mx-auto">
+      <div class="2xl:w-page mx-auto">
         <slot />
       </div>
     </div>

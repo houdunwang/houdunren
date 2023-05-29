@@ -10,12 +10,11 @@ use Auth;
 class OrderService
 {
     //创建定单
-    public function create(string $module,  string $subject, float $price, string $payType, array $data = [], User $user)
+    public function create(string $subject, float $price, string $payType, array $data = [], User $user = null)
     {
         $user = $user ?? Auth::user();
         $sn = "U" . $user->id . '-' . time();
         $order = $user->orders()->create([
-            'module' => $module,
             'sn' => $sn,
             'subject' => $subject,
             'price' => $price,

@@ -2,11 +2,9 @@
   <main>
     <RouterView v-slot="{ Component, route }">
       <template v-if="Component">
-        <Suspense>
-          <div class="flex items-center justify-center w-screen h-screen bg-gray-700 overflow-y-auto">
-            <component :is="Component" :key="route.fullPath" />
-          </div>
-        </Suspense>
+        <div class="flex items-center justify-center h-screen bg-gray-700 px-5">
+          <component :is="Component" :key="route.fullPath" class="flex-1" />
+        </div>
       </template>
     </RouterView>
   </main>

@@ -15,7 +15,6 @@ findOne(route.query.uid)
       <div class="2xl:w-page m-auto">
         <div class="font-bold text-5xl flex items-center justify-center text-center">
           <UserAvatar :user="user" fit="cover" class="w-52 h-52 !rounded-full shadow-3xl" />
-          <!-- <el-image :src="user.avatar" fit="cover" class="w-52 h-52 rounded-full shadow-3xl" /> -->
         </div>
         <div class="flex flex-col items-center text-2xl mt-3 text-white opacity-80">
           <div class="mb-2">{{ user.nickname }}</div>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { updateMobile } = useUser()
-const { user } = useUserStore()
+const userStore = useUserStore()
 const form = reactive({ account: '', code: '' })
 const onSubmit = async () => {
   await updateMobile(form)
@@ -9,8 +9,14 @@ const onSubmit = async () => {
 
 <template>
   <main>
-    <div class="mb-2" v-if="user?.mobile">
-      <el-alert :title="`已绑定手机号 ${user.mobile}`" type="success" effect="light" show-icon closable class="mb-3" />
+    <div class="mb-2" v-if="userStore.user?.mobile">
+      <el-alert
+        :title="`已绑定手机号 ${userStore.user.mobile}`"
+        type="success"
+        effect="light"
+        show-icon
+        closable
+        class="mb-3" />
     </div>
     <el-form label-width="80px" :inline="false" size="large" class="border p-5 rounded-2xl">
       <el-form-item label="手机">

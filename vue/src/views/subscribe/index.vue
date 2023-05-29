@@ -3,7 +3,7 @@ import SubscribePay from './components/subscribe-pay.vue'
 </script>
 
 <template>
-  <main class="z-50 mb-10 !-mt-0 !w-full !p-0">
+  <main class="!-mt-0 !w-full !p-0">
     <subscribe-pay />
     <h2 class="text-center text-gray-600 text-lg mt-8 px-5">随着课程不断增加，订阅价格会有涨幅，越早订阅越划算</h2>
     <div class="py-5 px-5 text-center text-sm text-gray-700 md:w-3/4 m-auto leading-8 opacity-90 font-light">

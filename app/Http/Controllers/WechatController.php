@@ -8,6 +8,7 @@ use Cache;
 use Houdunwang\Wechat\Message;
 use Log;
 use App\Models\Morning;
+use App\Wechat\Process;
 
 //与微信服务器通信接口
 class WechatController extends Controller
@@ -25,7 +26,7 @@ class WechatController extends Controller
         if ($reply = $this->scanLogin()) return $reply;
         if ($content = $this->process()) return $content;
 
-        return $this->defaultMessage('没明白你的意思');
+        return $this->defaultMessage();
     }
 
     //订阅
@@ -46,17 +47,11 @@ class WechatController extends Controller
         }
     }
 
-    //模块微信被动消息服务
+    //被动消息服务
     protected function process()
     {
-        $modules = Module::whereNotNull('process')->get();
-        foreach ($modules as $module) {
-            $class = 'Modules\\' . $module->name . '\Core\Process';
-            if (!class_exists($class)) continue;
-
-            $instance = new $class;
-            return $instance->handle($this->msg);
-        }
+        $process = new Process();
+        return $process->handle($this->msg);
     }
 
     //默认消息

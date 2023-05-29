@@ -85,6 +85,7 @@ export default () => {
       method: 'PUT',
       data,
     })
+    useUserStore().getCurrentUser()
   }
 
   //修改手机号
@@ -94,6 +95,7 @@ export default () => {
       method: 'PUT',
       data,
     })
+    useUserStore().getCurrentUser()
   }
 
   const isAdministrator = () => {

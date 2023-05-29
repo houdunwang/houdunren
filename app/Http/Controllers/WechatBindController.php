@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Auth;
 use Cache;
-use Illuminate\Http\Request;
 use Log;
 use Houdunwang\Wechat\User as WechatUser;
 
@@ -24,7 +23,8 @@ class WechatBindController extends Controller
             Cache::forget($ticket);
             $userWechat = app(WechatUser::class)->config(config('hd.wechat'));
             $info = $userWechat->getByOpenid($info['FromUserName']);
-            $registerUser = User::orWhere('openid', $info['openid'])->orWhere('unionid', $info['unionid'] ?? "")->first();
+            $registerUser = User::orWhere('openid', $info['openid'])
+                ->orWhere('unionid', $info['unionid'] ?? "")->first();
             if ($registerUser) {
                 if ($registerUser->id == Auth::id()) return $this->respondError('你已经绑定了这个微信号');
                 return $this->respondError('微信已经被其他用户绑定');

@@ -25,11 +25,11 @@ const active = ref('')
       </div>
       <RouterView #default="{ Component, route }">
         <template v-if="Component">
-          <KeepAlive>
-            <Suspense>
-              <component :is="Component" :key="route.fullPath" class="bg-white p-5 rounded-lg flex-1" />
-            </Suspense>
-          </KeepAlive>
+          <!-- <KeepAlive> -->
+          <Suspense>
+            <component :is="Component" class="bg-white p-5 rounded-lg flex-1" />
+          </Suspense>
+          <!-- </KeepAlive> -->
         </template>
       </RouterView>
     </section>

@@ -17,7 +17,7 @@ await getCaptcha()
   <main>
     <section class="flex gap-1">
       <HdFormInput @input="$emit('update:captcha', $event.target.value)" placeholder="验证码" />
-      <el-image :src="captchaValue?.img" class="rounded-md w-[180px] border cursor-pointer" @click="getCaptcha" />
+      <el-image :src="captchaValue?.img" class="rounded-md md:w-[180px] border cursor-pointer" @click="getCaptcha" />
     </section>
 
     <HdError name="captcha" />

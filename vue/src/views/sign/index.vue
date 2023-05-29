@@ -37,7 +37,7 @@ await getTodaySignList()
         早上5:00~7.30签到， 并设置了
         <router-link to="/member" class="text-teal-700">收货地址</router-link>
         和
-        <router-link to="/member" class="text-teal-700">手机号</router-link>，即可参加
+        <router-link to="/member/bind" class="text-teal-700">手机号</router-link>，即可参加
         <router-link :to="{ name: 'morning' }" class="text-teal-700">【早起少年】</router-link>
         活动， 并有机会得到礼品。
       </section>
@@ -56,7 +56,7 @@ await getTodaySignList()
           <el-table-column label="签到的朋友" :width="200" #default="{ row }" align="left">
             <div class="flex justify-start gap-2 items-center">
               <UserAvatar :user="row.user" />
-              <router-link :to="{ name: 'sign.space', params: { uid: row.user.id } }">
+              <router-link :to="{ name: 'sign.space', query: { uid: row.user.id } }">
                 {{ row.user.nickname }}
               </router-link>
             </div>

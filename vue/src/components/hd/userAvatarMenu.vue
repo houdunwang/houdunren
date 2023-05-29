@@ -29,10 +29,7 @@ const storeUser = useUserStore()
               <a href="/member"> 修改资料 </a>
             </el-dropdown-item>
             <el-dropdown-item divided v-if="isAdministrator()">
-              <router-link :to="{ name: RouteName.ADMIN }"> 模块后台 </router-link>
-            </el-dropdown-item>
-            <el-dropdown-item v-if="isAdministrator()">
-              <router-link to="/admin" target="_blank"> 系统管理 </router-link>
+              <router-link :to="{ name: RouteName.ADMIN }" target="_blank"> 后台管理 </router-link>
             </el-dropdown-item>
             <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
@@ -40,16 +37,16 @@ const storeUser = useUserStore()
       </el-dropdown>
     </section>
     <section v-else class="flex items-stretch gap-2">
-      <a
-        href="/login"
+      <router-link
+        to="/login"
         class="px-3 py-1 flex text-sm items-center border shadow-sm rounded-md bg-slate-100 hover:bg-indigo-500 hover:!text-white duration-300">
         登录
-      </a>
-      <a
-        href="/register"
+      </router-link>
+      <router-link
+        to="/register"
         class="px-3 py-1 flex text-sm items-center border shadow-sm rounded-md bg-slate-100 hover:bg-indigo-500 hover:!text-white duration-300">
         注册
-      </a>
+      </router-link>
     </section>
   </main>
 </template>

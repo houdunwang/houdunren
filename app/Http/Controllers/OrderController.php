@@ -19,9 +19,8 @@ class OrderController extends Controller
     public function create()
     {
         $order = app(OrderService::class)->create(
-            'Edu',
             config('app.name'),
-            request('price') == config('module.subscribe.price_year') ?  config('module.subscribe.price_year') : config('module.subscribe.price_permanent'),
+            request('price') == config('hd.subscribe.year.price') ?  config('hd.subscribe.year.price') : config('hd.subscribe.permanent.price'),
             request('payType'),
         );
         return $this->respondWithSuccess($order);

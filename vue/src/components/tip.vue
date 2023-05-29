@@ -6,7 +6,7 @@ const { config } = useConfigStore()
   <HdCard v-if="config">
     <template #header> 社区小贴 </template>
     <template #default>
-      <div class="mb-3 font-normal text-center text-base opacity-90" v-html="config.base.tip"></div>
+      <div class="font-normal text-center text-base opacity-90" v-html="config.base.tip"></div>
     </template>
     <template #footer>
       <div class="flex items-center gap-2 justify-center">

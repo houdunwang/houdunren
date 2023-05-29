@@ -6,8 +6,8 @@ const { form, register } = useAuth()
 
 <template>
   <form @submit.prevent="register">
-    <div class="lg:w-[720px] bg-gray-50 md:grid grid-cols-2 rounded-md shadow-md overflow-hidden">
-      <div class="p-6 flex flex-col justify-between">
+    <div class="lg:w-[720px] md:grid md:grid-cols-2 rounded-md shadow-md overflow-hidden bg-gray-50">
+      <div class="p-5 flex flex-col justify-between">
         <div>
           <h2 class="text-center text-gray-700 text-lg mt-3">注册</h2>
           <div class="mt-8">
@@ -53,8 +53,4 @@ const { form, register } = useAuth()
   </form>
 </template>
 
-<style lang="scss" scoped>
-form {
-  @apply flex justify-center items-start md:items-center p-5;
-}
-</style>
+<style lang="scss" scoped></style>

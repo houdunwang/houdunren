@@ -45,7 +45,7 @@ findOne(+route.params.id)
   overflow: hidden;
   position: absolute;
   z-index: -1;
-  background-image: url('/images/space-top-bg.jpg');
+  background-image: url('/images/space.jpg');
   background-position: center;
   transform: scale(1.5);
   filter: blur(20px);

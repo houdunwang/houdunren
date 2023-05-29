@@ -5,7 +5,7 @@ const { user } = defineProps<{ user: UserModel }>()
 </script>
 
 <template>
-  <main class="borde shadow-md bg-white overflow-hidden rounded-lg">
+  <main class="borde bg-white overflow-hidden rounded-lg">
     <UserAvatar :user="user" fit="cover" class="w-full h-36 rounded-none" />
 
     <div class="flex flex-col items-center justify-center py-3 text-slate-700">

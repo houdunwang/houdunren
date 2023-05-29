@@ -23,6 +23,11 @@ class ConfigController extends Controller
     public function common()
     {
         return config('hd');
+        return [
+            'base' => config('hd.base'),
+            'copyright' => config('hd.copyright'),
+            'name' => config('hd.name')
+        ];
     }
 
     public function update(Request $request)

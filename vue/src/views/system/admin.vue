@@ -2,7 +2,7 @@
 import SystemItem from '@/components/system-item.vue'
 import draggable from 'vuedraggable'
 const route = useRoute()
-const { collection, findAll, order } = useSystem()
+const { collection, findAll, order, remove } = useSystem()
 const type = ref(route.query.type || 'project')
 await findAll(1, { type: type.value })
 </script>
@@ -37,7 +37,7 @@ await findAll(1, { type: type.value })
         item-key="id"
         class="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-3">
         <template #item="{ element }">
-          <SystemItem :item="element">
+          <SystemItem :item="element" @del="remove">
             <template #footer> </template>
           </SystemItem>
         </template>
