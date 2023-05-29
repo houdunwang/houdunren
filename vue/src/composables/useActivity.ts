@@ -6,7 +6,7 @@ export default () => {
 
   const findAll = async (page: any) => {
     collection.value = await http.request<ApiPage<ActivityModel>>({
-      url: `activity?module=Edu&page=${page}`,
+      url: `activity?page=${page}`,
     })
   }
 

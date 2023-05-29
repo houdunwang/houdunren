@@ -6,8 +6,8 @@ use App\Models\Order;
 use Log;
 use Yansongda\Pay\Pay;
 use App\Services\OrderService;
+use App\Services\PayService;
 use Endroid\QrCode\Builder\Builder;
-use fengkui\Pay\Bytedance;
 
 class WepayController extends Controller
 {
@@ -59,15 +59,8 @@ class WepayController extends Controller
         $ciphertext = $result['resource']['ciphertext'];
         if ($ciphertext['trade_state'] == 'SUCCESS') {
             $order = app(OrderService::class)->completeOrder($ciphertext['out_trade_no'], $ciphertext['transaction_id']);
-            $this->callModuleNotify($order);
+            app(PayService::class)->notify($order);
             return $pay->success();
         }
-    }
-
-    //模块异步通知
-    protected function callModuleNotify(Order $order)
-    {
-        $class = 'Modules\\' . $order->module . '\\Core\\Pay';
-        return app($class)->notify($order);
     }
 }
