@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import DownloadLesson from '@/components/download-lesson.vue'
 import LessonVideoList from '@/components/lesson-video-list.vue'
 import SystemLessonDropdown from '@/components/system-lesson-dropdown.vue'
 import useVideo from '@/composables/useVideo'
@@ -69,6 +70,8 @@ await findOne(route.params.id)
           <div class="flex gap-2">
             <!-- 章节课程列表 -->
             <SystemLessonDropdown :lessons="model.lesson.system?.lessons" v-if="model.lesson.system?.lessons?.length" />
+            <!-- 下载视频 -->
+            <DownloadLesson :download_address="model?.lesson.system?.download_address" size="small" />
             <!-- 收藏  -->
             <Favorite module="Edu" model="Video" :id="model.id" />
           </div>

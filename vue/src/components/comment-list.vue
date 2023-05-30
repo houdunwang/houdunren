@@ -47,7 +47,7 @@ onBeforeRouteLeave(() => {
       </div>
     </Teleport>
     <!-- 跳转到评论框的图标 END-->
-    <template #header> <slot name="header">评论</slot> </template>
+    <template #header> <slot name="header">讨论</slot> </template>
     <div v-if="collection">
       <CommentItem
         v-for="comment of collection"

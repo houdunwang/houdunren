@@ -13,15 +13,22 @@ const tabName = ref(route.query.commentId ? 'comment' : 'content')
       <h1 class="flex justify-between items-center text-lg font-bold">
         {{ model.title }}
         <div class="flex items-center">
-          <el-button type="primary" size="default" @click="open(model.download)" v-if="model.download">
+          <el-button type="primary" size="small" @click="open(model.download, '_blank')" v-if="model.download">
             下载软件
           </el-button>
           <el-button
             type="success"
-            size="default"
+            plain
+            size="small"
             v-if="authorize()"
             @click="open({ name: 'soft.edit', params: { id: model.id } }, '_blank')">
             编辑
+          </el-button>
+          <el-button type="primary" plain size="small" @click="open(model.github, '_blank')" v-if="model.github">
+            GitHub
+          </el-button>
+          <el-button type="warning" plain size="small" @click="open(model.gitee, '_blank')" v-if="model.gitee">
+            码云
           </el-button>
         </div>
       </h1>
@@ -31,7 +38,7 @@ const tabName = ref(route.query.commentId ? 'comment' : 'content')
         <el-tab-pane label="软件介绍" name="content">
           <v-md-preview :text="model.content" class="!p-0 !m-0"></v-md-preview>
         </el-tab-pane>
-        <el-tab-pane label="问题讨论" name="comment">
+        <el-tab-pane label="使用交流" name="comment">
           <CommentList model="Soft" :id="model.id" />
         </el-tab-pane>
       </el-tabs>

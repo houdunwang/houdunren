@@ -24,7 +24,10 @@ class UserController extends Controller
     //获取当前用户资料
     public function current()
     {
-        return $this->respondWithSuccess(new UserResource(Auth::user()->makeVisible(['address', 'mobile', 'real_name', 'openid', 'unionid'])));
+        $user = Auth::user()->makeVisible(['address', 'mobile', 'real_name', 'openid', 'unionid']);
+        $user->isSubscribe = $user->isSubscribe;
+        // $user->Subscribe
+        return $this->respondWithSuccess(new UserResource($user));
     }
 
     public function index()

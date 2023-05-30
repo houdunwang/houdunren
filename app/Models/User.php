@@ -94,6 +94,11 @@ class User extends Authenticatable
         return $this->hasOne(Subscribe::class);
     }
 
+    public function getIsSubscribeAttribute()
+    {
+        return $this->subscribe->end_time > now();
+    }
+
     public function signs()
     {
         return $this->hasMany(Sign::class);

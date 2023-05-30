@@ -21,7 +21,7 @@ onMounted(() => {
     poster: '/assets/poster.jpg',
     playbackRate: [1, 1.25, 1.5, 2],
     cssFullscreen: true,
-    mini: true,
+    mini: false,
     airplay: true,
     playsinline: true,
     defaultPlaybackRate: storage.get('playbackrateChange', 1),

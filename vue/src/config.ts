@@ -102,11 +102,11 @@ export default {
       route: { name: 'question' },
       icon: GoldMedal,
     },
-    {
-      title: '短视频',
-      route: { name: 'shortvideo.index' },
-      icon: VideoTwo,
-    },
+    // {
+    //   title: '短视频',
+    //   route: { name: 'shortvideo.index' },
+    //   icon: VideoTwo,
+    // },
     {
       title: '晚八点直播',
       route: { name: 'live' },

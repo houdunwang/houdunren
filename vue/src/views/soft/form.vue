@@ -32,12 +32,12 @@ if (route.params.id) {
         <HdMarkdownEditor v-model="model.content" :height="400" />
         <HdError name="content" />
       </el-form-item>
-      <!-- <el-form-item label="github">
+      <el-form-item label="github">
         <el-input v-model="model.github"></el-input>
       </el-form-item>
       <el-form-item label="gitee">
         <el-input v-model="model.gitee"></el-input>
-      </el-form-item> -->
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="$route.params.id ? update() : store()">保存提交</el-button>
       </el-form-item>

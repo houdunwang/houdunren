@@ -16,7 +16,7 @@ const emit = defineEmits<{
 <template>
   <main
     class="border cursor-pointer group hover:shadow-sm shadow-inner duration-300 flex flex-col bg-white rounded-xl overflow-hidden">
-    <section @click="open({ name: 'soft.show', params: { id: soft.id } }, '_blank')">
+    <section @click="open({ name: 'soft.show', params: { id: soft.id } })">
       <div class="overflow-hidden">
         <img
           :src="soft.preview"
@@ -29,9 +29,13 @@ const emit = defineEmits<{
       </div>
     </section>
     <div class="flex gap-1 justify-center py-3 border-t mt-2 flex-grow-0" v-if="showButton">
-      <el-button type="primary" size="small" plain @click="$router.push({ name: 'soft.edit', params: { id: soft.id } })"
-        >编辑</el-button
-      >
+      <el-button
+        type="primary"
+        size="small"
+        plain
+        @click="$router.push({ name: 'soft.edit', params: { id: soft.id } })">
+        编辑
+      </el-button>
       <el-button type="danger" size="small" plain @click="emit('del', +soft.id)" class="!ml-0">删除</el-button>
     </div>
   </main>

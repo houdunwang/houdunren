@@ -23,6 +23,7 @@ interface UserModel {
   updated_at: string
   todaySign: SignModel
   duration?: SubscribeModel
+  isSubscribe: boolean
 }
 
 interface ConfigModel {
@@ -214,6 +215,8 @@ interface SoftModel {
   content: string
   created_at: string
   updated_at: string
+  github: string
+  gitee: string
 }
 
 interface QuestionModel {
