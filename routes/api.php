@@ -83,7 +83,6 @@ Route::controller(FavourController::class)->prefix('favour')->group(function () 
 
 //评论
 Route::apiResource('comment', CommentController::class);
-
 //全站动态
 Route::apiResource('activity', ActivityController::class);
 
@@ -106,3 +105,4 @@ Route::controller(WepayController::class)->prefix("wepay")->group(function () {
 });
 
 include "edu.php";
+include "soft.php";

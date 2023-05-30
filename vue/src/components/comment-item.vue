@@ -6,8 +6,7 @@ const route = useRoute()
 const { request } = useUtil()
 const { authorize } = useAuth()
 const { add, remove } = useComment()
-const { collection, comment, module, model, mid } = defineProps<{
-  module: string
+const { collection, comment, model, mid } = defineProps<{
   model: string
   mid: number
   collection: CommentModel[]

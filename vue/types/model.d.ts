@@ -247,3 +247,16 @@ interface ShortVideoModel {
   created_at: string
   updated_at: string
 }
+
+interface SoftModel {
+  title: string
+  download: string
+  description: string
+  content: string
+  preview: string
+  updated_at: string
+  created_at: string
+  github: string
+  gitee: string
+  id: number
+}

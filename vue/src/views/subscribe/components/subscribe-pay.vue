@@ -16,7 +16,9 @@ const { config } = useConfigStore()
     <section class="flex flex-col md:flex-row justify-center gap-5 -mt-52 px-3">
       <div
         class="rounded-lg bg-white px-8 py-5 2xl:py-16 w-full lg:w-[500px] flex flex-col items-center justify-center shadow-inner">
-        <h2 class="font-bold text-gray-800 text-2xl py-6 flex flex-col items-center gap-1">
+        <h2
+          class="font-bold text-gray-800 text-2xl py-6 flex flex-col items-center gap-1"
+          v-if="config.subscribe.year.state">
           <icon-rocket-one theme="outline" size="100" :strokeWidth="3" fill="#e74c3c" />
           <span class="text-gray-800">订阅一年</span>
         </h2>
@@ -29,8 +31,10 @@ const { config } = useConfigStore()
           <PayButton :price="config.subscribe.year.price" />
         </div>
       </div>
+
       <div
-        class="rounded-lg px-8 py-5 2xl:py-16 w-full lg:w-[500px] flex flex-col items-center justify-center bg-[#ED4891] bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 shadow-inner">
+        class="rounded-lg px-8 py-5 2xl:py-16 w-full lg:w-[500px] flex flex-col items-center justify-center bg-[#ED4891] bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 shadow-inner"
+        v-if="config.subscribe.permanent.state">
         <h2 class="font-bold text-white text-2xl py-6 flex flex-col items-center gap-1">
           <icon-diamond theme="filled" size="100" :strokeWidth="3" fill="#fff" />
           <span class="text-[#fff]">钻石帐号</span>

@@ -13,8 +13,8 @@ export default () => {
   })
 
   //模型权限验证
-  function authorize(userId: undefined | number) {
-    return userId == useUserStore().user?.id
+  function authorize(userId: undefined | number = undefined) {
+    return userId == useUserStore().user?.id || useUserStore().user?.id == 1
   }
 
   //登录检测

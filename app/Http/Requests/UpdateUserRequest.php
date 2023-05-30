@@ -23,7 +23,7 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'between:1,8'],
+            'nickname' => ['required', 'between:1,8'],
             'home' => ['nullable', 'url'],
             'weibo' => ['nullable', 'url'],
             'github' => ['nullable', 'url'],
@@ -33,6 +33,6 @@ class UpdateUserRequest extends FormRequest
 
     public function attributes()
     {
-        return ['name' => '昵称', 'weibo' => '微博', 'home' => '个人网站', 'qq' => "QQ号"];
+        return ['nickname' => '昵称', 'weibo' => '微博', 'home' => '个人网站', 'qq' => "QQ号"];
     }
 }

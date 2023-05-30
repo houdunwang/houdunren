@@ -21,11 +21,11 @@ findOne(+route.params.id)
         <p class="mt-5 opacity-80 pb-10">
           {{ model.description }}
         </p>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1">
           <DownloadLesson :download_address="model?.system?.download_address" size="default" />
           <Favorite model="Lesson" :id="model.id" v-if="isLogin()" />
           <router-link :to="{ name: 'lesson.edit', params: { id: model.id } }" target="_blank" v-if="isAdministrator()">
-            <el-button type="success" size="small" plain> 编辑 </el-button>
+            <el-button type="info" size="default" plain> 编辑 </el-button>
           </router-link>
         </div>
       </div>

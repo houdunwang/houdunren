@@ -9,7 +9,7 @@ window.addEventListener('resize', () => {
   width.value = document.documentElement.clientWidth
 })
 const showLinkNumber = computed(() => {
-  return width.value >= 1280 ? 11 : width.value >= 1024 ? 6 : width.value >= 768 ? 3 : 1
+  return width.value >= 1536 ? 10 : width.value >= 1280 ? 9 : width.value >= 1024 ? 6 : width.value >= 768 ? 3 : 1
 })
 </script>
 

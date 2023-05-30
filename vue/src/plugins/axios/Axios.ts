@@ -83,8 +83,10 @@ export default class Axios {
 
         switch (status) {
           case HttpStatus.UNAUTHORIZED:
+            storage.set(CacheKey.REDIRECT_ROUTE_NAME, router.currentRoute.value.fullPath)
+            ElMessage.error('请登录后操作')
             storage.remove(CacheKey.TOKEN_NAME)
-            location.href = '/login'
+            router.push({ name: 'login' })
             break
           case HttpStatus.UNPROCESSABLE_ENTITY:
             useErrorStore().setErrors(error.response.data.errors ?? error.response.data)

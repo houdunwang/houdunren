@@ -10,7 +10,7 @@ import SpaceMenu from './spaceMenu.vue'
       <template v-if="Component">
         <KeepAlive>
           <Suspense>
-            <component :is="Component" :key="route.fullPath" class="p-2 2xl:w-page mx-auto" />
+            <component :is="Component" :key="route.fullPath" class="p-2 mx-auto 2xl:w-page w-full" />
           </Suspense>
         </KeepAlive>
       </template>

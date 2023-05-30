@@ -18,9 +18,9 @@ await getSignUsers(page.value)
         :to="{ name: 'sign.space', query: { uid: user.id } }"
         v-for="user of signUsers.data"
         :key="user.id"
-        class="flex flex-col justify-center gap-2 items-center border w-16">
-        <UserAvatar :user="user" fit="cover" :lazy="true" class="w-16 h-16 cursor-pointer flex-shrink-0" />
-        <span class="text-xs px-2 pb-2 truncate w-16 text-center block">{{ user.nickname }}</span>
+        class="flex flex-col justify-center items-center border w-16 rounded-md overflow-hidden">
+        <UserAvatar :user="user" fit="cover" :lazy="true" class="w-16 h-16 cursor-pointer flex-shrink-0 rounded-none" />
+        <span class="text-xs px-2 truncate w-16 py-1 text-center block">{{ user.nickname }}</span>
       </router-link>
     </div>
     <div class="p-3 text-center" v-else>还没有朋友达到2天签到的记录</div>

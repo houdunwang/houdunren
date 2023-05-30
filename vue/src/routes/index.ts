@@ -16,6 +16,7 @@ import subscribe from './subscribe'
 import member from './member'
 import wechat from './wechat'
 import auth from './auth'
+import soft from './soft'
 
 export default [
   auth,
@@ -36,4 +37,5 @@ export default [
   ...member,
   ...video,
   ...wechat,
+  ...soft,
 ]

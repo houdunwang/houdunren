@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DownloadLesson from '@/components/download-lesson.vue'
 import LessonVideoList from '@/components/lesson-video-list.vue'
 import SystemLessonDropdown from '@/components/system-lesson-dropdown.vue'
 import useVideo from '@/composables/useVideo'
@@ -7,7 +6,6 @@ const { open } = useUtil()
 const route = useRoute()
 const { findOne, model, nextVideo, preVideo } = useVideo()
 await findOne(route.params.id)
-// model.value!.path_cdn = '/video.mp4'
 </script>
 
 <template>
@@ -15,6 +13,7 @@ await findOne(route.params.id)
     <div class="bg-[#313848] -mt-1 relative" v-if="model.path_cdn">
       <div class="2xl:w-page mx-auto xl:w-[1300px] relative group">
         <HdVideoPlayer :url="model.path_cdn" />
+        <!-- <HdVideoPlayer url="/assets/houdunren.mp4" /> -->
         <icon-arrow-circle-left
           theme="filled"
           size="50"
@@ -70,8 +69,6 @@ await findOne(route.params.id)
           <div class="flex gap-2">
             <!-- 章节课程列表 -->
             <SystemLessonDropdown :lessons="model.lesson.system?.lessons" v-if="model.lesson.system?.lessons?.length" />
-            <!-- 下载视频 -->
-            <DownloadLesson :download_address="model?.lesson.system?.download_address" />
             <!-- 收藏  -->
             <Favorite module="Edu" model="Video" :id="model.id" />
           </div>

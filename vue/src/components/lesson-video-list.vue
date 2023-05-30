@@ -25,24 +25,17 @@ const video = (video: VideoModel) => learnVideos.value?.find((v: any) => v.id ==
       </template>
       <template #default>
         <section class="!-my-5">
-          <router-link
-            :to="{ name: 'video.show', params: { id: v.id } }"
-            v-for="v of videos"
-            :key="v.id"
-            custom
-            #default="{ href }">
-            <a :href="href" class="flex py-3 border-b text-base hover:text-[#3b907f] cursor-pointer">
-              <div class="flex items-baseline opacity-95">
-                <div class="flex items-center mr-2">
-                  <icon-play theme="outline" class="mr-2" />
-                  {{ v.title }}
-                </div>
-                <div class="flex items-center gap-2" v-if="video(v)">
-                  <icon-correct theme="filled" class="text-green-700 scale-90" />
-                  <span class="text-xs">{{ dayjs(video(v)?.pivot.created_at).fromNow() }} </span>
-                </div>
+          <router-link :to="{ name: 'video.show', params: { id: v.id } }" v-for="v of videos" :key="v.id">
+            <div class="flex py-3 border-b text-base hover:text-[#3b907f] cursor-pointer items-baseline opacity-95">
+              <div class="flex items-center mr-2">
+                <icon-play theme="outline" class="mr-2" />
+                {{ v.title }}
               </div>
-            </a>
+              <div class="flex items-center gap-2" v-if="video(v)">
+                <icon-correct theme="filled" class="text-green-700 scale-90" />
+                <span class="text-xs">{{ dayjs(video(v)?.pivot.created_at).fromNow() }} </span>
+              </div>
+            </div>
           </router-link>
         </section>
       </template>

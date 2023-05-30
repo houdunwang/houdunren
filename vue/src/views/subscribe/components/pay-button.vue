@@ -45,9 +45,9 @@ const wechatNative = async () => {
     <el-dialog title="" v-model="showWepayDialog" width="400px" :append-to-body="true">
       <div class="flex flex-col items-center justify-center rounded-lg">
         <el-image :src="wepayQr" fit="fill" :lazy="true" class="w-full" />
-        <div class="text-base font-bold">支付完成点击下面按钮查看订单状态</div>
+        <div class="text-base font-bold">支付完成点击下面按钮查看订阅状态</div>
         <a
-          href="/member"
+          href="/member/subscribe"
           class="bg-green-600 hover:text-white hover:bg-green-500 rounded-md flex justify-center items-center py-2 px-5 mt-3 text-white">
           查看订单信息
         </a>

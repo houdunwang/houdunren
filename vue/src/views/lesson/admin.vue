@@ -26,6 +26,6 @@ await findAll(route.query.page || 1, { row: 12 })
       v-if="collection"
       :per_page="collection.meta.per_page"
       :total="collection.meta.total"
-      @current-change="$router.push({ name: 'lesson.admin', query: { page: $event } })" />
+      @current-change="$router.push({ name: 'admin.lesson', query: { page: $event } })" />
   </main>
 </template>

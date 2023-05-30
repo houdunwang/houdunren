@@ -6,7 +6,7 @@ const { user } = useUserStore()
 
 <template>
   <main
-    class="grid grid-flow-col content-center justify-items-center justify-around bg-gray-100 border-t border-t-gray-300 py-3 z-10 fixed bottom-0 left-0 right-0 shadow-inner md:hidden">
+    class="grid grid-flow-col content-center justify-items-center justify-around bg-gray-100 border-t border-t-gray-300 py-4 z-10 fixed bottom-0 left-0 right-0 shadow-inner md:hidden">
     <div v-for="(navbar, index) of config.navbar" :key="index">
       <el-dropdown trigger="click" size="default" :hide-on-click="true">
         <component :is="navbar.icon" theme="outline" :fill="navbar.color" />

@@ -25,7 +25,7 @@ export default () => {
       method: 'POST',
       data,
     })
-    open({ name: 'shortvideo.admin' })
+    open({ name: 'admin.shortvideo' })
   }
 
   const update = async (data: any) => {
@@ -34,7 +34,7 @@ export default () => {
       method: 'PUT',
       data,
     })
-    router.push({ name: 'shortvideo.admin' })
+    router.push({ name: 'admin.shortvideo' })
   }
 
   const del = async (id: any) => {

@@ -10,7 +10,7 @@ use Log;
  * 被动消息
  * @package Houdunwang\Wechat
  */
-class Message extends WeChat
+class Message extends Wechat
 {
     use Send, MessageType;
 }

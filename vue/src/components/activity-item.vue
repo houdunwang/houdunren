@@ -16,6 +16,8 @@ const url = computed(() => {
       return `/sign`
     case 'App\\Models\\Topic':
       return `/topic/${item.subject_id}`
+    case 'App\\Models\\System':
+      return `/system/${item.subject_id}`
   }
 })
 </script>
@@ -42,6 +44,9 @@ const url = computed(() => {
         </el-tag>
         <el-tag type="success" size="small" effect="dark" v-if="item.subject_type == 'App\\Models\\Question'">
           考试题
+        </el-tag>
+        <el-tag type="danger" size="small" effect="dark" v-if="item.subject_type == 'App\\Models\\System'">
+          系统课程
         </el-tag>
         <router-link
           :to="{ name: 'sign.space', query: { uid: item.user.id } }"

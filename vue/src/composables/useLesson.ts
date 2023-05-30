@@ -29,7 +29,7 @@ export default () => {
       method: 'POST',
       data,
     })
-    router.push({ name: 'lesson.admin' })
+    router.push({ name: 'admin.lesson' })
   }
 
   const update = async (data: any) => {
@@ -39,7 +39,7 @@ export default () => {
       data,
     })
 
-    router.push({ name: 'lesson.admin' })
+    router.push({ name: 'admin.lesson' })
   }
 
   const remove = async (id: any) => {

@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import { RouteLocationRaw } from 'vue-router'
 const { user } = defineProps<{ user: UserModel }>()
-
-const errorAvatar = () => {
-  return new URL(`../../public/avatar/${user.sex == 1 ? 'boy' : 'girl'}.jpeg`, import.meta.url).href
-}
 </script>
 
 <template>
@@ -16,7 +11,7 @@ const errorAvatar = () => {
       class="w-10 h-10 rounded-md cursor-pointer flex-shrink-0"
       v-bind="$attrs">
       <template #error>
-        <img :src="errorAvatar()" />
+        <img :src="user.sex == 1 ? '/assets/avatar/boy.jpeg' : '/assets/avatar/girl.jpeg'" />
       </template>
     </el-image>
   </router-link>

@@ -20,7 +20,7 @@ await findOne(route.params.id)
         <div class="mt-3 flex items-center gap-2">
           <DownloadLesson :download_address="model?.download_address" size="large" />
           <router-link :to="{ name: 'system.edit', params: { id: model?.id } }" v-if="isAdministrator()">
-            <el-button type="info" size="small"> 编辑 </el-button>
+            <el-button type="info" size="default"> 编辑 </el-button>
           </router-link>
         </div>
       </div>

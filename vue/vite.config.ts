@@ -22,7 +22,7 @@ export default defineConfig(({ command, mode }) => {
         languages: 'all',
       }),
     ],
-    base: isBuild ? '/vue/dist' : '/',
+    base: isBuild ? '/dist' : '/',
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),
@@ -31,6 +31,7 @@ export default defineConfig(({ command, mode }) => {
     },
     build: {
       emptyOutDir: true,
+      outDir: '../dist',
       rollupOptions: {
         output: {
           manualChunks(id: string) {

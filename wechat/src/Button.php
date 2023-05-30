@@ -9,7 +9,7 @@ use Houdunwang\Wechat\Button\MessageType;
  * 微信菜单
  * @package Houdunwang\Wechat
  */
-class Button extends WeChat
+class Button extends Wechat
 {
-  use Create, MessageType;
+    use Create, MessageType;
 }

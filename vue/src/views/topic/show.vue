@@ -65,7 +65,7 @@ useTitle(model.value?.title)
       </section>
     </section>
 
-    <CommentList module="Edu" model="Topic" :id="model.id" />
+    <CommentList model="Topic" :id="model.id" />
   </main>
 </template>
 

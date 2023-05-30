@@ -57,7 +57,10 @@ export default {
       title: '碎片课程',
       route: { name: 'lesson' },
     },
-
+    {
+      title: '最新更新',
+      route: { name: 'video' },
+    },
     {
       title: '话题讨论',
       route: { name: 'topic' },
@@ -86,27 +89,24 @@ export default {
     },
     {
       title: '大叔作品',
-      url: `https://www.hdcms.com`,
+      route: { name: 'soft.index' },
       icon: ApplicationOne,
     },
     {
       title: '感谢陪伴',
       route: { name: 'shot.comment' },
     },
-    {
-      title: '最新更新',
-      route: { name: 'video' },
-    },
+
     {
       title: '金榜题名',
       route: { name: 'question' },
       icon: GoldMedal,
     },
-    // {
-    //   title: '短视频',
-    //   route: { name: 'shortvideo.index' },
-    //   icon: VideoTwo,
-    // },
+    {
+      title: '短视频',
+      route: { name: 'shortvideo.index' },
+      icon: VideoTwo,
+    },
     {
       title: '晚八点直播',
       route: { name: 'live' },

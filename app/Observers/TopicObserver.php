@@ -8,11 +8,11 @@ class TopicObserver
 {
     public function created(Topic $topic)
     {
-        activityLog(
-            $topic,
-            $topic->title,
-            ['model' => 'topic', 'id' => $topic->id]
-        );
+        // activityLog(
+        //     $topic,
+        //     $topic->title,
+        //     ['model' => 'topic', 'id' => $topic->id]
+        // );
     }
 
     public function deleted(Topic $topic)

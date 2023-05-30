@@ -13,14 +13,17 @@ const dialog = ref(false)
         {{ download_address }}
       </div>
       <div v-else class="text-lg">
-        <router-link :to="{ name: 'subscribe' }" target="_self" #default="{ href }" custom>
-          <a :href="href" target="_self" class="font-bold text-teal-700">订阅用户</a>
+        你不是
+        <router-link :to="{ name: 'subscribe' }" target="_self" #default="{ href }" class="font-bold text-teal-700">
+          订阅用户
         </router-link>
-        可以下载高清版视频，视频质量更清晰，可在电脑离线观看视频
+        或高清版本视频还没有上传
+        <!-- <br />
+        可以下载高清版视频，视频质量更清晰，可在电脑离线观看视频 -->
       </div>
     </el-dialog>
 
-    <el-button type="primary" @click="dialog = true" v-bind="$attrs" size="small">
+    <el-button type="primary" @click="dialog = true" v-bind="$attrs" size="default">
       <icon-download-one theme="outline" class="mr-1" />高清下载
     </el-button>
   </main>

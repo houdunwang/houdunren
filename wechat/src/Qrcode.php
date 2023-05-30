@@ -9,7 +9,7 @@ use Log;
  * 被动消息
  * @package Houdunwang\Wechat
  */
-class Qrcode extends WeChat
+class Qrcode extends Wechat
 {
     use Create;
 }

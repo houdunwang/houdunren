@@ -6,7 +6,7 @@ const { user } = useUserStore()
 const { isLogin } = useAuth()
 if (isLogin() && !user?.mobile) {
   ElMessage.success('请绑定手机号')
-  router.push({ name: RouteName.MEMBER })
+  router.push({ name: 'member.bind' })
 }
 </script>
 <template>

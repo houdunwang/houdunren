@@ -18,7 +18,7 @@ async function beforeEach(to: RouteLocationNormalized, from: RouteLocationNormal
   if (to.meta.auth && !isLogin()) {
     storage.set(CacheKey.REDIRECT_ROUTE_NAME, to.fullPath)
     ElMessage.success('请登录后操作')
-    location.href = '/login'
+    return { name: 'login' }
   }
   if (to.meta.admin && !isAdministrator()) {
     ElMessage({ type: 'error', grouping: true, message: '没有访问权限' })

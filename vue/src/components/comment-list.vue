@@ -5,7 +5,6 @@ const { request } = useUtil()
 const { isLogin } = useAuth()
 const { collection, findAll, add } = useComment()
 const { model, id } = defineProps<{
-  module: string
   model: string
   id: number
 }>()
@@ -56,7 +55,6 @@ onBeforeRouteLeave(() => {
         class="mb-3"
         :comment="comment"
         :collection="collection"
-        :module="module"
         :model="model"
         :mid="id"
         :id="`comment${comment.id}`">
@@ -66,7 +64,6 @@ onBeforeRouteLeave(() => {
             :key="reply.id"
             :comment="reply"
             :collection="collection"
-            :module="module"
             :model="model"
             :mid="id"
             :id="`comment${reply.id}`"

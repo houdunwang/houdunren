@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Rules\CodeRule;
 use Auth;
 use Closure;
-use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -40,15 +39,16 @@ class AuthController extends Controller
             "account" => ['required', function (string $attribute, mixed $value, Closure $fail) use ($user) {
                 if (!$user) $fail('用户不存在');
             }],
-            'password' => ['required'],
+            'password' => ['required', function (string $attribute, mixed $value, Closure $fail) use ($user, $request) {
+                if ($user && !Hash::check($request->password, $user->password)) {
+                    $fail('密码输入错误');
+                }
+            }],
             'captcha' => [app()->isLocal() ? 'nullable' : 'required', 'captcha_api:' . request('captcha_key') . ',math']
         ], ['captcha.captcha_api' => '验证码输入错误'])->validate();
 
-        $user->tokens()->delete();
-        if ($user && Hash::check($request->password, $user->password)) {
-            return $this->respondWithSuccess(['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
-        }
-        throw ValidationException::withMessages(['password' => '密码输入错误']);
+        // $user->tokens()->delete();
+        return $this->respondWithSuccess(['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
     }
 
     public function register(Request $request, User $user)

@@ -8,5 +8,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('wechat/appLogin', [WechatLoginController::class, 'appLogin']);
 
 Route::fallback(function () {
-    return file_get_contents(base_path('vue/dist/index.html'));
+    return file_get_contents(base_path('dist/index.html'));
 });

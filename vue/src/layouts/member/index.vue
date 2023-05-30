@@ -10,8 +10,8 @@ const active = ref('')
     <!-- <memberNavbar /> -->
     <TopMenu />
     <section class="2xl:w-page 2xl:mx-auto mt-5 flex flex-col md:flex-row md:items-start gap-5 p-2">
-      <div class="md:w-[160px] hidden md:block">
-        <UserBlock :user="user" />
+      <div class="md:w-[160px]">
+        <UserBlock :user="user" class="hidden md:block" />
         <div class="menu">
           <router-link
             v-for="(menu, index) of config.member.menu"
@@ -39,7 +39,7 @@ const active = ref('')
 
 <style lang="scss" scoped>
 .menu {
-  @apply flex flex-col overflow-hidden rounded-md lg:mt-3;
+  @apply flex flex-row md:flex-col overflow-hidden rounded-md lg:mt-3;
   a {
     @apply bg-white flex py-3 text-sm px-5 border-b opacity-90 text-gray-700 duration-300;
     &.active {

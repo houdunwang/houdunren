@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\Activity;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Sign;
 use App\Models\SignCount;
@@ -12,11 +13,11 @@ class SignObserver
     {
         $this->updateSignCount();
 
-        activityLog(
-            $sign,
-            $sign->content,
-            ['model' => 'sign', 'id' => $sign->id]
-        );
+        // activityLog(
+        //     $sign,
+        //     $sign->content,
+        //     ['model' => 'sign', 'id' => $sign->id]
+        // );
     }
 
     protected function updateSignCount()
@@ -27,5 +28,10 @@ class SignObserver
             'year' => $user->signs()->whereYear('created_at', now())->count(),
             'total' => $user->signs()->count(),
         ]);
+    }
+
+    public function deleted(Sign $sign): void
+    {
+        $sign->activities()->where('subject_id', $sign->id)->delete();
     }
 }

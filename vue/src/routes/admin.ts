@@ -58,9 +58,15 @@ export default [
       },
       {
         path: 'short_video',
-        name: 'shortvideo.admin',
+        name: 'admin.shortvideo',
         component: () => import('@/views/shortVideo/admin.vue'),
         meta: { title: '短视频', menu: { title: '短视频' } },
+      },
+      {
+        path: 'soft',
+        name: 'admin.soft',
+        component: () => import('@/views/soft/admin.vue'),
+        meta: { title: '软件管理', menu: { title: '软件管理' } },
       },
     ],
   },

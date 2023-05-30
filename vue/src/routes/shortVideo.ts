@@ -24,7 +24,7 @@ export default [
     children: [
       {
         path: '',
-        name: 'shortvideo.admin',
+        name: 'admin.shortvideo',
         component: () => import('@/views/shortVideo/admin.vue'),
         meta: { title: '短视频', menu: { title: '视频列表' } },
       },

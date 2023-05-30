@@ -4,7 +4,7 @@ const { uploadImage } = useUpload()
 
 const props = withDefaults(
   defineProps<{
-    modelValue: string
+    modelValue?: string
     url?: string
   }>(),
   { url: `upload/image` },

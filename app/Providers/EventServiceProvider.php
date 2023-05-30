@@ -3,10 +3,14 @@
 namespace App\Providers;
 
 use App\Models\Comment;
+use App\Models\Lesson;
 use App\Models\Sign;
+use App\Models\System;
 use App\Models\Topic;
 use App\Observers\CommentObserver;
+use App\Observers\LessonObserver;
 use App\Observers\SignObserver;
+use App\Observers\SystemObserver;
 use App\Observers\TopicObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -34,6 +38,8 @@ class EventServiceProvider extends ServiceProvider
         Comment::observe(CommentObserver::class);
         Topic::observe(TopicObserver::class);
         Sign::observe(SignObserver::class);
+        System::observe(SystemObserver::class);
+        Lesson::observe(LessonObserver::class);
     }
 
     /**

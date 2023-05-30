@@ -9,7 +9,7 @@ document.addEventListener('click', () => (showMenu.value = true))
 
 <template>
   <main
-    class="flex items-center h-[65px] border-t-4 border-hd-origin border-b border-b-gray-200 bg-white"
+    class="flex items-center h-[65px] border-t-4 border-hd-origin border-b border-b-gray-200 bg-white sticky top-0 z-10 shadow-sm"
     v-if="config">
     <div class="flex justify-between items-center px-3 w-full 2xl:w-page 2xl:m-auto">
       <section class="flex flex-col items-center md:flex-row xl:items-center md:mr-6 text-gray-600">

@@ -24,7 +24,7 @@ class FavourController extends Controller
         return [
             'total' => $model->favour_count,
             'state' => $model->favours()->wherePivot('user_id', Auth::id())->exists(),
-            'users' => $model->favours()->limit(20)->get()
+            'users' => UserResource::collection($model->favours()->limit(50)->select('users.id', 'name', 'avatar')->get())
         ];
     }
 

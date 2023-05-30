@@ -9,7 +9,7 @@ export default [
         path: '',
         name: 'subscribe',
         component: () => import('@/views/subscribe/index.vue'),
-        meta: { title: '订阅会员', auth: true },
+        meta: { title: '订阅会员' },
       },
     ],
   },

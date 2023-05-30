@@ -13,7 +13,6 @@ const onSubmit = async () => {
     <template #header> 增加系统课程</template>
     <template #default>
       <el-form label-width="80px" :inline="false" label-position="top" size="large" class="p-5">
-        {{ model.type }}
         <el-form-item label="课程标题" prop="title">
           <el-input v-model="model.title" placeholder="请输入课程标题"></el-input>
           <HdError name="title" />

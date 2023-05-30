@@ -1,4 +1,8 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
 
 dependencies:
   '@element-plus/icons-vue':
@@ -107,8 +111,8 @@ dependencies:
     specifier: ^2.0.1
     version: 2.0.1
   xgplayer:
-    specifier: ^2.32.2
-    version: 2.32.2(core-js@3.30.2)
+    specifier: ^3.0.2
+    version: 3.0.2(core-js@3.30.2)
   yup:
     specifier: ^1.2.0
     version: 1.2.0
@@ -2412,6 +2416,10 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: false
 
+  /delegate@3.2.0:
+    resolution: {integrity: sha512-IofjkYBZaZivn0V8nnsMJGBr4jVLxHDheKSW88PyxS5QC4Vo9ZbZVvhzlSxY87fVq3STR6r+4cGepyHkcWOQSw==}
+    dev: false
+
   /delegates@1.0.0:
     resolution: {integrity: sha512-bd2L678uiWATM6m5Z1VzNCErI3jiGzt6HGY8OVICs40JQq/HALfbyNJmp0UDakEY4pMMaN0Ly5om/B1VI/+xfQ==}
     dev: false
@@ -2448,13 +2456,6 @@ packages:
 
   /downloadjs@1.4.7:
     resolution: {integrity: sha512-LN1gO7+u9xjU5oEScGFKvXhYf7Y/empUIIEAGBs1LzUq/rg5duiDrkuH5A2lQGd5jfMOb9X9usDa2oVXwJ0U/Q==}
-    dev: false
-
-  /draggabilly@2.4.1:
-    resolution: {integrity: sha512-HHHLPEPZqRXIDQDFRFdK7RONZausNlJ4WkA73ST7Z6O2HPWttxFHVwHo8nccuDLzXWwiVKRVuc6fTkW+CQA++A==}
-    dependencies:
-      get-size: 2.0.3
-      unidragger: 2.4.0
     dev: false
 
   /echarts@5.4.2:
@@ -2830,10 +2831,6 @@ packages:
   /estree-walker@2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
 
-  /ev-emitter@1.1.1:
-    resolution: {integrity: sha512-ipiDYhdQSCZ4hSbX4rMW+XzNKMD1prg/sTvoVmSLkuQ1MVlwjJQQA+sW8tMYR3BLUr9KjodFV4pvzunvRhd33Q==}
-    dev: false
-
   /event-emitter@0.3.5:
     resolution: {integrity: sha512-D9rRn9y7kLPnJ+hMq7S/nhvoKwwvVJahBi2BPmx3bvbsEdK3W9ii8cBSGjP+72/LnM4n6fo3+dkCX5FeTQruXA==}
     dependencies:
@@ -3000,14 +2997,6 @@ packages:
       map-cache: 0.2.2
     dev: false
 
-  /fs-extra@5.0.0:
-    resolution: {integrity: sha512-66Pm4RYbjzdyeuqudYqhFiNBbCIuI9kgRqLPSHIlXHidW8NIQtVdkM1yeZ4lXwuhbTETv3EUGMNHAAw6hiundQ==}
-    dependencies:
-      graceful-fs: 4.2.11
-      jsonfile: 4.0.0
-      universalify: 0.1.2
-    dev: false
-
   /fs-extra@7.0.1:
     resolution: {integrity: sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==}
     engines: {node: '>=6 <7 || >=8'}
@@ -3075,10 +3064,6 @@ packages:
       has: 1.0.3
       has-proto: 1.0.1
       has-symbols: 1.0.3
-    dev: false
-
-  /get-size@2.0.3:
-    resolution: {integrity: sha512-lXNzT/h/dTjTxRbm9BXb+SGxxzkm97h/PCIKtlN/CBCxxmkkIVV21udumMS93MuVTDX583gqc94v3RjuHmI+2Q==}
     dev: false
 
   /get-stdin@4.0.1:
@@ -5372,12 +5357,6 @@ packages:
     resolution: {integrity: sha512-TrY6DsjTQQgyS3E3dBaOXf0TpPD8u9FVrVYmKVegJuFw51n/YB9XPt+U6ydzFG5ZIN7+DIjPbNmXoBj9esYhgQ==}
     dev: false
 
-  /unidragger@2.4.0:
-    resolution: {integrity: sha512-MueZK2oXuGE6OAlGKIrSXK2zCq+8yb1QUZgqyTDCSJzvwYL0g2Llrad+TtoQTYxtFnNyxxSw0IMnKNIgEMia1w==}
-    dependencies:
-      unipointer: 2.4.0
-    dev: false
-
   /unimport@3.0.7:
     resolution: {integrity: sha512-2dVQUxJEGcrSZ0U4qtwJVODrlfyGcwmIOoHVqbAFFUx7kPoEN5JWr1cZFhLwoAwTmZOvqAm3YIkzv1engIQocg==}
     dependencies:
@@ -5404,12 +5383,6 @@ packages:
       get-value: 2.0.6
       is-extendable: 0.1.1
       set-value: 2.0.1
-    dev: false
-
-  /unipointer@2.4.0:
-    resolution: {integrity: sha512-VjzDLPjGK7aYpQKH7bnDZS8X4axF5AFU/LQi+NQe1oyEHfaz6lWKhaQ7n4o7vJ1iJ4i2T0quCIfrQM139p05Sw==}
-    dependencies:
-      ev-emitter: 1.1.1
     dev: false
 
   /unique-filename@1.1.1:
@@ -5764,20 +5737,17 @@ packages:
       eventemitter3: 4.0.7
     dev: false
 
-  /xgplayer@2.32.2(core-js@3.30.2):
-    resolution: {integrity: sha512-VWK8Hp5K3Fs5YoHadpyCw2zwuiOimRjkPo2PSJZPYKj59VNnL9oLruZp6cy86LHoAgWELRIQj6Nmw5SkQNByWQ==}
-    hasBin: true
+  /xgplayer@3.0.2(core-js@3.30.2):
+    resolution: {integrity: sha512-vgSo5exPlyl7BxxxOWeYA1+x1nLmZDiWDjPJmaaxeW9jFghGBSf3XP+yLKSOJmKOlTw/LpmOcNAsJxqNhi6Bzw==}
+    peerDependencies:
+      core-js: '>=3.12.1'
     dependencies:
-      chalk: 2.4.2
-      commander: 2.20.3
+      core-js: 3.30.2
       danmu.js: 1.1.8
+      delegate: 3.2.0
       downloadjs: 1.4.7
-      draggabilly: 2.4.1
-      event-emitter: 0.3.5
-      fs-extra: 5.0.0
+      eventemitter3: 4.0.7
       xgplayer-subtitles: 1.1.1(core-js@3.30.2)
-    transitivePeerDependencies:
-      - core-js
     dev: false
 
   /xss@1.0.14:

@@ -61,7 +61,6 @@ export default () => {
       method: 'DELETE',
     })
     router.push({ name: 'topic' })
-    // open({ name: 'topic' })
   }
 
   //贴子推荐属性切换

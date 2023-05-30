@@ -26,7 +26,7 @@ const { form, register } = useAuth()
               type="password"
               placeholder="请再次输入密码"
               v-clearError="'password_confirmation'" />
-            <Captcha class="mt-2" v-model:captcha="form.captcha" v-model:captcha_key="form.captcha_key" />
+            <HdCaptcha class="mt-2" v-model:captcha="form.captcha" v-model:captcha_key="form.captcha_key" />
           </div>
           <HdFormButton class="w-full mt-3 primary">登录</HdFormButton>
           <div class="flex justify-center mt-3">

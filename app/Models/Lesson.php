@@ -10,9 +10,11 @@ use Spatie\Activitylog\LogOptions;
 class Lesson extends Model
 {
     use HasFactory, LogsActivity;
-    protected $table = 'lessons';
 
-    protected $fillable = ['title', 'description', 'preview', 'video', 'price', 'system_id', 'download_address',  'video_num', 'view_num', 'favorite_count'];
+    protected $fillable = [
+        'title', 'description', 'preview', 'video', 'price', 'system_id',
+        'download_address',  'video_num', 'view_num', 'favorite_count'
+    ];
 
     protected static $recordEvents = ['created'];
 

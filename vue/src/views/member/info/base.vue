@@ -5,13 +5,16 @@ const { update } = useUser()
 
 <template>
   <el-form label-width="80px" :inline="false" class="border p-5 rounded-2xl" v-if="user">
+    <el-form-item label="UID">
+      <el-input :value="user.id" :disabled="true"></el-input>
+    </el-form-item>
     <el-form-item label="昵称">
       <el-input v-model="user.nickname" placeholder="起个有个性的昵称吧"></el-input>
-      <HdError name="name" />
+      <HdError name="nickname" />
     </el-form-item>
     <el-form-item label="真实姓名">
       <el-input v-model="user.real_name" placeholder="用于活动邮寄礼品使用"></el-input>
-      <HdError name="name" />
+      <HdError name="real_name" />
     </el-form-item>
     <el-form-item label="地址">
       <el-input

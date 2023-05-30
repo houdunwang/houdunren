@@ -1,0 +1,1 @@
+import{h as s}from"./index-28f279b5.js";const b=()=>({getSubscribeInfo:async()=>await s.request({url:"subscribe/info"}),douyinSubscribe:async e=>{s.request({url:"subscribe/douyin",method:"POST",data:e})}});export{b as u};
