@@ -27,4 +27,4 @@ yarn-error.log
 !/public/robots.txt
 *.mp4
 .DS_Store
-
+dist
