@@ -50,22 +50,20 @@ const removeVideo = (video: any) => {
             <HdUploadSingleImage v-model="form.preview" />
             <HdError name="preview" />
           </el-form-item>
-          <!-- <el-form-item label="视频介绍">
-            <el-input v-model="form.video" placeholder="使用视频生动的介绍课程"></el-input>
-            <HdError name="video" />
-          </el-form-item> -->
           <el-form-item label="课程简介">
             <el-input type="textarea" v-model="form.description" placeholder="请输入课程的文字介绍"></el-input>
             <HdError name="description" />
           </el-form-item>
-          <!-- <el-form-item label="下载地址">
-            <el-input v-model="form.download_address" placeholder="高清视频地址"></el-input>
+          <el-form-item label="视频介绍">
+            <el-input v-model="form.video" placeholder="使用视频生动的介绍课程"></el-input>
+            <HdError name="video" />
+          </el-form-item>
+          <el-form-item label="网盘地址" prop="download_address">
+            <el-input
+              v-model="form.download_address"
+              placeholder="网盘下载地址，该课程是章节时，可以在系统课程设置即可"></el-input>
             <HdError name="download_address" />
           </el-form-item>
-          <el-form-item label="售价">
-            <el-input v-model="form.price" placeholder="单独购买课程时的价格"></el-input>
-            <HdError name="price" />
-          </el-form-item> -->
         </el-form>
       </template>
     </HdCard>

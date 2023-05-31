@@ -1,21 +1,31 @@
 <script setup lang="ts">
 const userStore = useUserStore()
-const { download_address = '', size = 'default' } = defineProps<{
-  download_address?: string
+const { isLogin } = useAuth()
+const {
+  id,
+  type,
+  size = 'default',
+} = defineProps<{
+  id: number
+  type: 'system' | 'lesson'
   size?: 'default' | 'small'
 }>()
 
 const dialog = ref(false)
+const downloadUrl = ref()
+if (isLogin()) {
+  downloadUrl.value = type == 'lesson' ? await useLesson().getDownloadUrl(id) : await useSystem().getDownloadUrl(id)
+}
 </script>
 
 <template>
-  <main>
+  <main v-if="isLogin()">
     <el-dialog title="下载高清视频" v-model="dialog">
-      <div v-if="download_address">
-        {{ download_address }}
+      <div v-if="downloadUrl">
+        {{ downloadUrl }}
       </div>
       <div v-else class="text-lg">
-        <div class="" v-if="userStore.user?.isSubscribe">高清版本视频还没有上传</div>
+        <div v-if="userStore.user?.isSubscribe">高清版本视频还没有上传</div>
         <div v-else>
           你不是
           <router-link :to="{ name: 'subscribe' }" target="_self" #default="{ href }" class="font-bold text-teal-700">

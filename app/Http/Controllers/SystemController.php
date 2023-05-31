@@ -16,7 +16,7 @@ class SystemController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum'])->except(['index']);
+        $this->middleware(['auth:sanctum'])->except(['index', 'show']);
     }
 
     public function index()
@@ -38,6 +38,14 @@ class SystemController extends Controller
         $this->authorize('create', System::class);
         $system->fill($request->input())->save();
         return $this->respondOk('添加成功');
+    }
+
+    //获取下载地址
+    public function downloadUrl(System $system)
+    {
+        if (isSubscribe()) {
+            return $system->download_address;
+        }
     }
 
     public function show(System $system)

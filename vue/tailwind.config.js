@@ -22,7 +22,6 @@ module.exports = {
         },
       })
     },
-    require('@tailwindcss/line-clamp'),
   ],
   variants: {
     lineClamp: ['responsive', 'hover'],

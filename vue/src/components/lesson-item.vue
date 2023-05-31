@@ -2,10 +2,31 @@
 defineEmits(['del'])
 const { isAdministrator } = useUser()
 const { remove } = useLesson()
+const configStore = useConfigStore()
 
-const { item } = defineProps<{
+const { item, showType = 'color' } = defineProps<{
   item: LessonModel
+  showType?: 'image' | 'color'
 }>()
+
+const colors = [
+  '#f69679',
+  '#f9ad81',
+  '#a3d39c',
+  '#82ca9c',
+  '#7da7d9',
+  '#8393ca',
+  '#8781bd',
+  '#a186be',
+  '#bd8cbf',
+  '#f5989d',
+  '#f49ac1',
+  '#fbaf5d',
+  '#acd373',
+]
+const index = Math.floor(Math.random() * colors.length)
+const color = colors[index]
+const formatTitle = item.title.replace(/第.*?章/, '')
 </script>
 
 <template>
@@ -13,7 +34,32 @@ const { item } = defineProps<{
     class="border border-gray-200 rounded-lg bg-white overflow-hidden hover:scale-105 duration-500 hover:border-indigo-200 flex flex-col">
     <div class="">
       <router-link :to="{ name: 'lesson.show', params: { id: item.id } }">
-        <el-image :src="item.preview" fit="cover" :lazy="true" class="aspect-video object-cover" />
+        <el-image
+          :src="item.preview"
+          fit="cover"
+          :lazy="true"
+          class="aspect-video object-cover"
+          v-if="showType == 'image'" />
+        <div class="aspect-video flex flex-col items-center py-5" :style="`background-color:${color}`" v-else>
+          <el-image src="/assets/xj.jpg" fit="cover" :lazy="true" class="w-16 h-16 object-cover rounded-full" />
+          <h2
+            class="text-2xl text-white outline-4 outline-gray-900 relative w-full flex justify-center mt-2 font-black h-10">
+            <div class="absolute text-white z-10">
+              {{ formatTitle }}
+            </div>
+            <div class="absolute" style="text-stroke: 5px #333">
+              {{ formatTitle }}
+            </div>
+          </h2>
+          <div
+            class="rounded-lg bg-[#333] text-white flex justify-center px-5 py-1 text-xs opacity-75 mt-2"
+            v-if="item.system?.title">
+            {{ item.system?.title }}
+          </div>
+          <div class="rounded-lg bg-[#333] text-white flex justify-center px-5 py-1 text-xs opacity-75 mt-2" v-else>
+            大叔晚八点直播
+          </div>
+        </div>
       </router-link>
     </div>
     <div class="mt-3 flex flex-col justify-start">

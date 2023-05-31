@@ -14,7 +14,7 @@ onActivated(async () => await findAll(route.query.page || 1))
       <HdCard>
         <template #header>
           <div class="flex items-center justify-between">
-            <span class="">交流讨论</span>
+            <span class="hidden md:block">交流讨论</span>
             <span class="text-base font-light flex items-center gap-1">
               <icon-emotion-happy theme="outline" size="24" class="text-green-700" />
               每次温暖的交流，都会让人身心愉悦

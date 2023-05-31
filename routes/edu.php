@@ -17,10 +17,6 @@ use App\Http\Controllers\TopicController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\WechatMenuController;
 
-//用户相关
-Route::controller(UserController::class)->prefix('user')->group(function () {
-    Route::post('removeAllData/{user}', 'removeAllData');
-});
 
 //贴子
 Route::put('topic/recommend/{topic}', [TopicController::class, 'recommend']);
@@ -30,9 +26,11 @@ Route::apiResource('topic', TopicController::class);
 
 //系统课程
 Route::put('system/order', [SystemController::class, 'order']);
+Route::get('system/downloadUrl/{system}', [SystemController::class, 'downloadUrl']);
 Route::apiResource('system', SystemController::class);
 
 //课程
+Route::get('lesson/downloadUrl/{lesson}', [LessonController::class, 'downloadUrl']);
 Route::apiResource('lesson', LessonController::class);
 
 //视频

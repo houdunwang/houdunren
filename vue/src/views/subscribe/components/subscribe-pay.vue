@@ -10,7 +10,7 @@ const { config } = useConfigStore()
         投资学习是值得的
       </h1>
       <h2 class="text-center text-white opacity-80 font-light text-base md:text-xl lg:text-2xl">
-        订阅后可以观看网站所有教程，并支持高清版下载
+        订阅后可以观看所有教程，并支持高清版下载学习
       </h2>
     </div>
     <section class="flex flex-col md:flex-row justify-center gap-5 -mt-52 px-3">

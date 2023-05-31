@@ -10,16 +10,18 @@ const page = ref(+(route.query.page || 1))
 const { collection: activityCollection, findAll } = useActivity()
 const { getRecommendList } = useTopic()
 const [recommendTopics] = await Promise.all([getRecommendList(), findAll(page.value)])
+const { config } = useConfigStore()
 </script>
 
 <template>
-  <div class="">
+  <div>
     <el-alert
-      title="新版网站更新了，如果发现问题请发个贴子说明，我会尽快修复"
+      :title="config?.base.notice"
       type="warning"
       show-icon
       :closable="false"
-      class="!mb-3"></el-alert>
+      class="!mb-3"
+      v-if="config?.base.notice" />
 
     <main class="lg:grid lg:grid-cols-12 grid-flow-row gap-3 items-start">
       <section class="lg:col-span-9">

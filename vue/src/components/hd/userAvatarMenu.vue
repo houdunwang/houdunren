@@ -19,15 +19,15 @@ const storeUser = useUserStore()
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item v-if="isLogin()">
-              <router-link :to="{ name: 'sign.space', query: { uid: storeUser.user.id } }"> 个人空间 </router-link>
-            </el-dropdown-item>
             <el-dropdown-item v-for="(menu, index) of config.user.avatarMenu" :key="index">
               <router-link :to="{ name: menu.routeName }"> {{ menu.title }} </router-link>
             </el-dropdown-item>
-            <el-dropdown-item>
-              <a href="/member"> 修改资料 </a>
+            <el-dropdown-item v-if="isLogin()">
+              <router-link :to="{ name: 'sign.space', query: { uid: storeUser.user.id } }"> 个人空间 </router-link>
             </el-dropdown-item>
+            <!-- <el-dropdown-item>
+              <a href="/member"> 修改资料 </a>
+            </el-dropdown-item> -->
             <el-dropdown-item divided v-if="isAdministrator()">
               <router-link :to="{ name: RouteName.ADMIN }" target="_blank"> 后台管理 </router-link>
             </el-dropdown-item>

@@ -2,9 +2,12 @@
 import dayjs from 'dayjs'
 const { lessonId, videos } = defineProps<{ lessonId: string | number; videos: VideoModel[] }>()
 const { lessonVideo } = useLearnHistory()
-const learnVideos = ref(await lessonVideo(lessonId))
-
+const { isLogin } = useAuth()
+const learnVideos = ref<VideoModel[]>([])
 const video = (video: VideoModel) => learnVideos.value?.find((v: any) => v.id == video.id)
+if (isLogin()) {
+  learnVideos.value = await lessonVideo(lessonId)
+}
 </script>
 <template>
   <main>

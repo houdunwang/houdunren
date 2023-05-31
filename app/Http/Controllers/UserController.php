@@ -5,10 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\Activity;
+use App\Models\Comment;
+use App\Models\Favorite;
+use App\Models\Favour;
+use App\Models\Morning;
+use App\Models\Notification;
+use App\Models\Question;
+use App\Models\QuestionAnswer;
+use App\Models\Sign;
+use App\Models\Topic;
 use App\Models\User;
+use App\Models\VideoPlayHistory;
 use App\Rules\CodeRule;
 use App\Rules\PhoneRule;
 use Auth;
+use DB;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -26,7 +37,6 @@ class UserController extends Controller
     {
         $user = Auth::user()->makeVisible(['address', 'mobile', 'real_name', 'openid', 'unionid']);
         $user->isSubscribe = $user->isSubscribe;
-        // $user->Subscribe
         return $this->respondWithSuccess(new UserResource($user));
     }
 
@@ -126,15 +136,25 @@ class UserController extends Controller
         return $this->respondOk('用户锁定成功');
     }
 
+    //清空用户数据
     public function removeAllData(User $user)
     {
+        //删除用户所有数据
         $this->authorize('removeAllData', $user);
-
-        $user->topics()->delete();
-        $user->signs()->delete();
+        Favorite::where('user_id', $user->id)->delete();
+        Favour::where('user_id', $user->id)->delete();
+        Morning::where('user_id', $user->id)->delete();
+        Notification::where('notifiable_id', $user->id)->delete();
+        Topic::where('user_id', $user->id)->delete();
+        Sign::where('user_id', $user->id)->delete();
+        Comment::where('user_id', $user->id)->delete();
+        Question::where('user_id', $user->id)->delete();
+        QuestionAnswer::where('user_id', $user->id)->delete();
+        VideoPlayHistory::where('user_id', $user->id)->delete();
         Activity::where('causer_id', $user->id)->delete();
+        //锁定用户
         $user->is_lock = true;
         $user->save();
-        return $this->respondOk('数据清空完毕');
+        return $this->respondOk('数据清空完毕，用户已经锁定');
     }
 }

@@ -1,17 +1,11 @@
 <script setup lang="ts">
-const channel = [
-  { title: 'Bilibili', url: 'https://space.bilibili.com/282190994' },
-  {
-    title: '抖音',
-    url: 'https://www.douyin.com/user/MS4wLjABAAAAz0TXiTnI3HAmxDEfBrHItlViAwC6rsxJL6_GIHFA2Ho',
-  },
-  { title: '西瓜视频', url: 'https://www.ixigua.com/home/94665151994/?list_entrance=search' },
-  { title: '快手', url: 'https://www.kuaishou.com/profile/3xapd3e55b3saia' },
-]
+const { collection, getAll } = useShortVideo()
+const route = useRoute()
+await getAll(route.query.page || 1)
 </script>
 
 <template>
-  <main>
+  <main v-if="collection">
     <HdCard>
       <template #header>
         <div class="flex items-center justify-between">
@@ -22,11 +16,14 @@ const channel = [
           </span>
         </div>
       </template>
-      <section class="grid grid-flow-col">
-        <div class="" v-for="(item, index) of channel" :key="index">
-          <a :href="item.url" class="text-lg font-bold" target="_blank">{{ item.title }}</a>
-        </div>
+      <section class="grid grid-cols-3 gap-3">
+        <shortVideoItem v-for="video of collection.data" :key="video.id" :video="video" />
       </section>
     </HdCard>
+
+    <Pagination
+      :per_page="collection.meta.per_page"
+      :total="collection.meta.total"
+      @current-change="$router.push({ name: 'shortvideo.index', query: { page: $event } })" />
   </main>
 </template>

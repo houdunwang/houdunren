@@ -33,6 +33,8 @@ class TopicController extends Controller
 
     public function store(StoreTopicRequest $request, Topic $topic)
     {
+        $this->authorize('create', Topic::class);
+
         rateLimiter('topic-store' . Auth::id(), 1, function () use ($topic, $request) {
             DB::beginTransaction();
             $topic->fill($request->input());

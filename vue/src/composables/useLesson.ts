@@ -57,5 +57,11 @@ export default () => {
     } catch (error) {}
   }
 
-  return { findAll, collection, findOne, model, update, remove, add }
+  const getDownloadUrl = async (id: number) => {
+    return http.request<string>({
+      url: `lesson/downloadUrl/${id}`,
+    })
+  }
+
+  return { findAll, collection, findOne, model, update, remove, add, getDownloadUrl }
 }

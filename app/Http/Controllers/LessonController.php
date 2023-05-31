@@ -19,7 +19,7 @@ class LessonController extends Controller
 
     public function index(Request $request)
     {
-        return LessonResource::collection(Lesson::latest('id')->paginate($request->query('row', 12)));
+        return LessonResource::collection(Lesson::latest('id')->with('system')->paginate($request->query('row', 12)));
     }
 
     public function store(StoreLessonRequest $request, Lesson $lesson)
@@ -40,6 +40,15 @@ class LessonController extends Controller
         }
 
         return $this->respondOk('课程添加成功');
+    }
+
+    //获取下载地址
+    public function downloadUrl(Lesson $lesson)
+    {
+        if (isSubscribe()) {
+            return $lesson->download_address ?? $lesson->system->download_address;
+        }
+        // return '';
     }
 
     public function show(Lesson $lesson)

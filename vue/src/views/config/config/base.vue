@@ -7,6 +7,9 @@ const { config } = defineProps<{ config: ConfigModel }>()
     <el-form-item label="网站名称">
       <el-input rows="5" v-model="config.base.name" placeholder="顶部导航等使用的网站名称" />
     </el-form-item>
+    <el-form-item label="站内通知">
+      <el-input type="textarea" rows="3" v-model="config.base.notice" />
+    </el-form-item>
     <el-form-item label="联系微信">
       <el-input v-model="config.base.weixin"></el-input>
     </el-form-item>

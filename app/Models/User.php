@@ -96,7 +96,7 @@ class User extends Authenticatable
 
     public function getIsSubscribeAttribute()
     {
-        return $this->subscribe->end_time > now();
+        return $this->subscribe && $this->subscribe->end_time > now();
     }
 
     public function signs()
@@ -118,5 +118,11 @@ class User extends Authenticatable
     public function questionAnswer()
     {
         return $this->hasMany(QuestionAnswer::class);
+    }
+
+    //评论列表
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'user_id');
     }
 }

@@ -24,6 +24,8 @@ class CommentController extends Controller
 
     public function store(StoreCommentRequest $request)
     {
+        $this->authorize('create', Comment::class);
+
         return rateLimiter('comment-store' . Auth::id(), 3, function () use ($request) {
             $model = modelInstance();
             $comment = $model->comments()->create($request->input() + ['user_id' => Auth::id()]);

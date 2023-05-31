@@ -12,9 +12,8 @@ class TopicPolicy
 
     public function before(User $user)
     {
-        if ($user->isAdministrator) {
-            return true;
-        }
+        if ($user->isAdministrator) return true;
+        if ($user->is_lock) return false;
     }
     /**
      * Determine whether the user can view any models.
@@ -45,7 +44,7 @@ class TopicPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**

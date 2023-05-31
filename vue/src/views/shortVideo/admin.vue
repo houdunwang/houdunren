@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import Pagination from '@/components/pagination.vue'
-import ShortVideoItem from '@/components/short-video-item.vue'
-const { findAll, collection } = useShortVideo()
+const { getAll, collection, del } = useShortVideo()
 const route = useRoute()
-await findAll(route.query.page, 10)
+await getAll(route.query.page, 10)
 </script>
 
 <template>
@@ -17,8 +16,8 @@ await findAll(route.query.page, 10)
           </el-button>
         </div>
       </template>
-      <section class="grid grid-flow-row md:grid-cols-5 lg:grid-cols-6 gap-5" v-if="collection">
-        <ShortVideoItem v-for="item of collection.data" :key="item.id" :item="item" />
+      <section class="grid grid-flow-row md:grid-cols-5 lg:grid-cols-4 gap-5" v-if="collection">
+        <ShortVideoItem v-for="item of collection.data" :key="item.id" :video="item" @del="del" />
       </section>
     </HdCard>
     <Pagination

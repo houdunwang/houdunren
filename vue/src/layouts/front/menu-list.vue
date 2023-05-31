@@ -49,6 +49,7 @@ const showLinkNumber = computed(() => {
                 {{ menu.title }}
               </router-link>
               <a :href="menu.url" target="_blank" v-else class="flex gap-2 items-center text-base text-gray-700">
+                <component :is="menu.icon" size="18" fill="#333" />
                 {{ menu.title }}
               </a>
             </el-dropdown-item>

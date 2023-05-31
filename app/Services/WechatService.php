@@ -20,7 +20,7 @@ class WechatService
         if (!$user) $user = new User();
         $user->openid = $info['openid'];
         $user->unionid = $info['unionid'];
-        $user->nickname = $user->name ?: $info['nickname'];
+        $user->nickname = $user->nickname ?: $info['nickname'];
         $user->save();
         Auth::login($user);
         return $user;

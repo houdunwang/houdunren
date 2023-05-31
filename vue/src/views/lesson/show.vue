@@ -6,12 +6,13 @@ import LessonVideoList from '@/components/lesson-video-list.vue'
 const { isAdministrator } = useUser()
 const { isLogin } = useAuth()
 const { findOne, model } = useLesson()
+const { open } = useUtil()
 const route = useRoute()
 findOne(+route.params.id)
 </script>
 
 <template>
-  <main class="!w-full !p-0 !-mt-1 relative z-10" v-if="model">
+  <main class="!w-full !p-0 !-mt-1 relative" v-if="model">
     <section class="bg py-5 xl:py-8 text-white relative overflow-hidden">
       <div class="2xl:w-page mx-auto p-2">
         <h1 class="font-bold text-3xl 2xl:text-4xl flex items-start gap-2">
@@ -22,7 +23,14 @@ findOne(+route.params.id)
           {{ model.description }}
         </p>
         <div class="flex items-center gap-1">
-          <DownloadLesson :download_address="model?.system?.download_address" />
+          <el-button
+            v-if="model?.system"
+            type="success"
+            size="default"
+            @click="open({ name: 'system.show', params: { id: model?.system.id } })">
+            <icon-list-one theme="outline" class="mr-1" />所有章节
+          </el-button>
+          <DownloadLesson :id="model.id" type="lesson" />
           <Favorite model="Lesson" :id="model.id" v-if="isLogin()" />
           <router-link :to="{ name: 'lesson.edit', params: { id: model.id } }" target="_blank" v-if="isAdministrator()">
             <el-button type="info" size="default" plain> 编辑 </el-button>

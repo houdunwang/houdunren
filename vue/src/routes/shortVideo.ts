@@ -2,23 +2,23 @@ import { RouteRecordRaw } from 'vue-router'
 
 export default [
   {
-    path: '/short_video',
+    path: '/shortvideo',
     component: () => import('@/layouts/front/index.vue'),
     children: [
       {
-        path: 'short_video/index',
+        path: '',
         name: 'shortvideo.index',
         component: () => import('@/views/shortVideo/index.vue'),
       },
       {
-        path: 'short_video/show/:id',
+        path: ':id',
         name: 'shortvideo.show',
         component: () => import('@/views/shortVideo/show.vue'),
       },
     ],
   },
   {
-    path: '/admin/short_video',
+    path: '/admin/shortvideo',
     component: () => import('@/layouts/admin/index.vue'),
     meta: { auth: true, admin: true },
     children: [

@@ -10,7 +10,7 @@ use App\Services\OrderService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Subscribe;
-use Modules\Edu\Services\SubscribeService;
+use App\Services\SubscribeService;
 use App\Http\Resources\SubscribeResource;
 
 class SubscribeController extends Controller
@@ -40,9 +40,11 @@ class SubscribeController extends Controller
         $user->mobile = $request->mobile;
         $user->password = Hash::make($request->mobile);
         $user->save();
-
-        app(OrderService::class)->create('Edu', config('app.name'), config('module.subscribe.price_permanent'), 'douyin', [], $user);
-        app(SubscribeService::class)->update($user, config('module.subscribe.price_permanent'));
+        if ($user->isSubscribe) {
+            return $this->respondError("已经开通过了");
+        }
+        app(OrderService::class)->create(config('app.name'), config('hd.subscribe.permanent.price'), 'douyin', [], $user);
+        app(SubscribeService::class)->update($user, config('hd.subscribe.permanent.price'));
 
         return $this->respondOk('添加成功');
     }

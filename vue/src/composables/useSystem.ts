@@ -59,5 +59,11 @@ export default () => {
     })
   }
 
-  return { findAll, collection, findOne, model, update, order, add, remove }
+  const getDownloadUrl = async (id: number) => {
+    return http.request<string>({
+      url: `system/downloadUrl/${id}`,
+    })
+  }
+
+  return { findAll, collection, findOne, model, update, order, add, remove, getDownloadUrl }
 }

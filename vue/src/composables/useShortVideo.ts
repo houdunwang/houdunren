@@ -1,19 +1,18 @@
 import { http } from '@/plugins/axios'
 import router from '@/plugins/router'
 import { ElMessageBox } from 'element-plus'
-const { open } = useUtil()
 
 export default () => {
   const collection = ref<ApiPage<ShortVideoModel>>()
-  const model = ref<ShortVideoModel>()
+  const model = ref<Partial<ShortVideoModel>>({})
 
-  const findAll = async (page: any = 1, row = 12) => {
+  const getAll = async (page: any = 1, row = 12) => {
     collection.value = await http.request<ApiPage<ShortVideoModel>>({
       url: `shortVideo?page=${page}&row=${row}`,
     })
   }
 
-  const find = async (id: any) => {
+  const find = async (id: number) => {
     model.value = await http.request<ShortVideoModel>({
       url: `shortVideo/${id}`,
     })
@@ -25,7 +24,7 @@ export default () => {
       method: 'POST',
       data,
     })
-    open({ name: 'admin.shortvideo' })
+    router.push({ name: 'admin.shortvideo' })
   }
 
   const update = async (data: any) => {
@@ -47,10 +46,11 @@ export default () => {
       location.reload()
     } catch (error) {}
   }
+
   return {
     model,
     find,
-    findAll,
+    getAll,
     collection,
     del,
     add,

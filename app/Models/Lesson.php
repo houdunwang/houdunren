@@ -16,6 +16,8 @@ class Lesson extends Model
         'download_address',  'video_num', 'view_num', 'favorite_count'
     ];
 
+    protected $hidden = ['download_address'];
+
     protected static $recordEvents = ['created'];
 
     public function getActivitylogOptions(): LogOptions

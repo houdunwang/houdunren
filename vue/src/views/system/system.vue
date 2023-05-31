@@ -8,7 +8,7 @@ await findAll()
   <main>
     <div class="bg-white rounded-lg">
       <section>
-        <h1 class="text-center xl:py-8 text-xl xl:text-2xl font-bold py-5 opacity-90">新手启航</h1>
+        <h1 class="text-center xl:py-8 text-xl xl:text-2xl font-bold py-5 opacity-90">系统课程</h1>
         <div class="text-center xl:text-base mx-5 mb-3">
           系统课程指从零开始学习一门编程语言，比如从零开始学习Javascript编程语言。
         </div>

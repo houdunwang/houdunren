@@ -1,8 +1,7 @@
 <script setup lang="ts">
 const { find, model: form, update } = useShortVideo()
 const route = useRoute()
-await find(route.params.id)
-console.log(form.value)
+await find(+route.params.id)
 </script>
 
 <template>

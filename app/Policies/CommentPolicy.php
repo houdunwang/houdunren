@@ -10,6 +10,12 @@ class CommentPolicy
 {
     use HandlesAuthorization;
 
+    public function before(User $user)
+    {
+        if ($user->isAdministrator) return true;
+        if ($user->is_lock) return false;
+    }
+
     /**
      * Determine whether the user can view any models.
      *
@@ -41,7 +47,7 @@ class CommentPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +71,7 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment)
     {
-        return $user->is_administrator || $comment->user_id == $user->id;
+        return $comment->user_id == $user->id;
     }
 
     /**

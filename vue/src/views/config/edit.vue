@@ -6,6 +6,7 @@ import sms from './config/sms.vue'
 import email from './config/email.vue'
 import wechat from './config/wechat.vue'
 import upload from './config/upload.vue'
+import content from './config/content.vue'
 const { update, all } = useConfig()
 const config = ref(await all())
 const tab = ref('base')
@@ -15,27 +16,32 @@ const tab = ref('base')
   <main class="bg-white p-5 rounded-lg" v-if="config">
     <el-form label-width="80px" label-position="top">
       <el-tabs v-model="tab" type="card" tab-position="top">
-        <el-tab-pane label="基本配置" name="base" class="border p-3 rounded-md">
-          <baseVue :config="config" />
-        </el-tab-pane>
-        <el-tab-pane label="订阅" name="subscribe">
-          <subscribe :config="config" />
-        </el-tab-pane>
-        <el-tab-pane label="短信" name="sms">
-          <sms :config="config" />
-        </el-tab-pane>
-        <el-tab-pane label="阿里云" name="aliyun">
-          <aliyun :config="config" />
-        </el-tab-pane>
-        <el-tab-pane label="邮箱" name="email">
-          <email :config="config" />
-        </el-tab-pane>
-        <el-tab-pane label="微信" name="wechat">
-          <wechat :config="config" />
-        </el-tab-pane>
-        <el-tab-pane label="上传" name="upload">
-          <upload :config="config" />
-        </el-tab-pane>
+        <div class="border p-3 rounded-md">
+          <el-tab-pane label="基本配置" name="base">
+            <baseVue :config="config" />
+          </el-tab-pane>
+          <el-tab-pane label="内容管理" name="content">
+            <content :config="config" />
+          </el-tab-pane>
+          <el-tab-pane label="订阅" name="subscribe">
+            <subscribe :config="config" />
+          </el-tab-pane>
+          <el-tab-pane label="短信" name="sms">
+            <sms :config="config" />
+          </el-tab-pane>
+          <el-tab-pane label="阿里云" name="aliyun">
+            <aliyun :config="config" />
+          </el-tab-pane>
+          <el-tab-pane label="邮箱" name="email">
+            <email :config="config" />
+          </el-tab-pane>
+          <el-tab-pane label="微信" name="wechat">
+            <wechat :config="config" />
+          </el-tab-pane>
+          <el-tab-pane label="上传" name="upload">
+            <upload :config="config" />
+          </el-tab-pane>
+        </div>
       </el-tabs>
 
       <el-button type="primary" size="default" @click="update(config!)" class="mt-3">保存提交</el-button>

@@ -22,11 +22,12 @@ class ConfigController extends Controller
 
     public function common()
     {
-        return config('hd');
         return [
             'base' => config('hd.base'),
             'copyright' => config('hd.copyright'),
-            'name' => config('hd.name')
+            'name' => config('hd.name'),
+            "subscribe" => config('hd.subscribe'),
+            'content' => config('hd.content')
         ];
     }
 

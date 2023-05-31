@@ -23,7 +23,12 @@ return  [
         "email" => "2300071698@qq.com",
         "icp" => "",
         "other" => "Copyright \u00a9 houdunren.com All Rights Reserved",
-        "footerXjAvatar" => true
+        "footerXjAvatar" => true,
+        "notice" => ""
+    ],
+    "content" => [
+        //前台列表显示方式 图片或颜色
+        "lesson_show_type" => "image"
     ],
     "aliyun" => [
         "aliyun_key" => env('ALIYUN_KEY'),

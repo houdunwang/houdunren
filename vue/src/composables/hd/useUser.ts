@@ -1,6 +1,7 @@
 import { ElMessageBox } from 'element-plus'
 import { http } from '@/plugins/axios'
 import { ref } from 'vue'
+import router from '@/plugins/router'
 
 export default () => {
   const collection = ref<ApiPage<UserModel>>()
@@ -72,7 +73,7 @@ export default () => {
   const removeAllData = async (uid: any) => {
     await ElMessageBox.confirm('确定所有数据吗？')
     await http.request<any>({
-      url: `edu/user/removeAllData/${uid}`,
+      url: `user/removeAllData/${uid}`,
       method: 'POST',
     })
     location.reload()

@@ -46,6 +46,7 @@ Route::controller(UserController::class)->prefix('user')->group(function () {
     Route::delete('delete', 'delete');
     Route::delete('remove_avatar/{user}', 'removeAvatar');
     Route::post('lock_user/{user}', 'lockUser');
+    Route::post('removeAllData/{user}', 'removeAllData');
     Route::get('info/{user}', 'info');
 });
 Route::apiResource('user', UserController::class);

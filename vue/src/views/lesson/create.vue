@@ -48,6 +48,16 @@ const form = reactive({
             <el-input type="textarea" v-model="form.description" placeholder="请输入课程的文字介绍"></el-input>
             <HdError name="description" />
           </el-form-item>
+          <el-form-item label="视频介绍">
+            <el-input v-model="form.video" placeholder="使用视频生动的介绍课程"></el-input>
+            <HdError name="video" />
+          </el-form-item>
+          <el-form-item label="网盘地址" prop="download_address">
+            <el-input
+              v-model="form.download_address"
+              placeholder="网盘下载地址，该课程是章节时，可以在系统课程设置即可"></el-input>
+            <HdError name="download_address" />
+          </el-form-item>
         </el-form>
       </template>
     </HdCard>

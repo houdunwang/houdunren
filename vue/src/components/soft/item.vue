@@ -16,7 +16,7 @@ const emit = defineEmits<{
 <template>
   <main
     class="border cursor-pointer group hover:shadow-sm shadow-inner duration-300 flex flex-col bg-white rounded-xl overflow-hidden">
-    <section @click="open({ name: 'soft.show', params: { id: soft.id } })">
+    <router-link :to="{ name: 'soft.show', params: { id: soft.id } }">
       <div class="overflow-hidden">
         <img
           :src="soft.preview"
@@ -27,7 +27,7 @@ const emit = defineEmits<{
       <div class="px-2 line-clamp-2 text-sm text-gray-700 opacity-80 flex-grow mx-2 mb-2">
         {{ soft.description }}
       </div>
-    </section>
+    </router-link>
     <div class="flex gap-1 justify-center py-3 border-t mt-2 flex-grow-0" v-if="showButton">
       <el-button
         type="primary"

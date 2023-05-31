@@ -57,11 +57,10 @@ class VideoController extends Controller
             }
             //权限判断
             $video = $video->load(['lesson.videos', 'lesson.system.lessons']);
-            $video->lesson->videos->each(fn ($video) => $video->makeVisible('path'));
             if (isSubscribe()) {
+                // $video->lesson->videos->each(fn ($video) => $video->makeVisible('path'));
                 $video->makeVisible(['path']);
                 $video['path_cdn'] = app(AliyunService::class)->videoCdnUrl($video->path);
-                // $video['path_cdn'] = $video->path;
             }
             return new VideoResource($video);
         } catch (AuthorizationException $e) {

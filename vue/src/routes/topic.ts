@@ -27,6 +27,7 @@ export default [
         path: ':id',
         name: 'topic.show',
         component: () => import('@/views/topic/show.vue'),
+        meta: { auth: true },
       },
     ],
   },

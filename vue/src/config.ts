@@ -46,7 +46,7 @@ export default {
   },
   topMenu: [
     {
-      title: '新手启航',
+      title: '系统课程',
       route: { name: 'system' },
     },
     {
@@ -66,10 +66,10 @@ export default {
       route: { name: 'topic' },
     },
     {
-      title: '签到打卡',
-      route: { name: 'sign' },
+      title: '大叔播客',
+      route: { name: 'shortvideo.index' },
+      icon: VideoTwo,
     },
-
     {
       title: '订阅优惠',
       route: { name: 'subscribe' },
@@ -79,9 +79,8 @@ export default {
       },
     },
     {
-      title: '在线文档',
-      url: `https://doc.houdunren.com`,
-      icon: DocDetail,
+      title: '签到打卡',
+      route: { name: 'sign' },
     },
     {
       title: '早起少年',
@@ -96,21 +95,20 @@ export default {
       title: '感谢陪伴',
       route: { name: 'shot.comment' },
     },
-
+    {
+      title: '晚八点直播',
+      route: { name: 'live' },
+      icon: Play,
+    },
     {
       title: '金榜题名',
       route: { name: 'question' },
       icon: GoldMedal,
     },
-    // {
-    //   title: '短视频',
-    //   route: { name: 'shortvideo.index' },
-    //   icon: VideoTwo,
-    // },
     {
-      title: '晚八点直播',
-      route: { name: 'live' },
-      icon: Play,
+      title: '在线文档',
+      url: `https://doc.houdunren.com`,
+      icon: DocDetail,
     },
   ],
   navbar: {
@@ -164,7 +162,7 @@ export default {
         },
         {
           title: '会员周期',
-          url: `/member`,
+          route: { name: 'member.subscribe' },
         },
       ],
     },
@@ -183,6 +181,10 @@ export default {
         {
           title: '感谢陪伴',
           route: { name: 'shot.comment' },
+        },
+        {
+          title: '大叔作品',
+          route: { name: 'soft.index' },
         },
       ],
     },

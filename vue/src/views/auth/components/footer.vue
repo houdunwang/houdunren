@@ -18,6 +18,5 @@
       找回密码
     </router-link>
     <router-link to="/" class="text-xs text-gray-700">网站首页</router-link>
-    <!-- <a href="/" class="text-xs text-gray-700">网站首页</a> -->
   </div>
 </template>
