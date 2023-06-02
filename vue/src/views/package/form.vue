@@ -7,24 +7,16 @@ if (route.params.id) {
 </script>
 
 <template>
-  <el-card shadow="always" :body-style="{ padding: '20px' }">
+  <el-card shadow="never" :body-style="{ padding: '20px' }">
     <template #header> {{ $route.params.id ? '编辑' : '添加' }}套餐 </template>
     <el-form label-width="80px" :inline="false" size="default">
-      <el-form-item label="名称">
-        <el-input v-model="model.title"></el-input>
-        <HdError name="title" />
-      </el-form-item>
       <el-form-item label="图标">
         <HdUploadSingleImage v-model="model.icon" />
         <HdError name="icon" />
       </el-form-item>
-      <el-form-item label="文字颜色">
-        <el-input v-model="model.text_color"></el-input>
-        <HdError name="text_color" />
-      </el-form-item>
-      <el-form-item label="背景颜色">
-        <el-input v-model="model.bg_color"></el-input>
-        <HdError name="bg_color" />
+      <el-form-item label="名称">
+        <el-input v-model="model.title"></el-input>
+        <HdError name="title" />
       </el-form-item>
       <el-form-item label="广告语">
         <el-input v-model="model.ad"></el-input>
@@ -38,7 +30,19 @@ if (route.params.id) {
         <el-input v-model="model.original_price"></el-input>
         <HdError name="original_price" />
       </el-form-item>
-
+      <el-form-item label="文字颜色">
+        <el-input v-model="model.text_color"></el-input>
+        {{ model.text_color }}
+        <HdError name="text_color" />
+      </el-form-item>
+      <el-form-item label="背景颜色">
+        <el-input v-model="model.bg_color"></el-input>
+        <HdError name="bg_color" />
+      </el-form-item>
+      <el-form-item label="月数">
+        <el-input v-model="model.months" placeholder="开通会员的月数"></el-input>
+        <HdError name="months" />
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="$route.params.id ? update() : store()">保存提交</el-button>
       </el-form-item>

@@ -6,7 +6,7 @@ use App\Models\Order;
 use Log;
 use Yansongda\Pay\Pay;
 use App\Services\OrderService;
-use App\Services\PayService;
+use App\Services\SubscribeService;
 use Endroid\QrCode\Builder\Builder;
 
 class WepayController extends Controller
@@ -59,7 +59,9 @@ class WepayController extends Controller
         $ciphertext = $result['resource']['ciphertext'];
         if ($ciphertext['trade_state'] == 'SUCCESS') {
             $order = app(OrderService::class)->completeOrder($ciphertext['out_trade_no'], $ciphertext['transaction_id']);
-            app(PayService::class)->notify($order);
+            if ($order) {
+                app(SubscribeService::class)->addMonthsByOrder($order);
+            }
             return $pay->success();
         }
     }

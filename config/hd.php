@@ -16,7 +16,7 @@ return  [
     "base" => [
         "name" => "houdunren",
         "domain" => "houdunren.com",
-        "tip" => "",
+        "tip" => "后盾人是一个主张友好、分享、自由的技术交流社区。",
         "ad" => "后盾人 人人做后盾",
         "captcha_disable" => true,
         "weixin" => "houdunren2021",

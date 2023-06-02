@@ -17,7 +17,12 @@ class PackageFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "title" => fake()->name(),
+            'ad' => fake()->sentence(3),
+            'price' => 200,
+            "original_price" => 999,
+            "months" => 12,
+            "icon" => fake()->imageUrl("100x100")
         ];
     }
 }

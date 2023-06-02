@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Package;
 use App\Services\OrderService;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -16,13 +14,9 @@ class OrderController extends Controller
     }
 
     //创建定单
-    public function create()
+    public function create(Package $package)
     {
-        $order = app(OrderService::class)->create(
-            config('app.name'),
-            request('price') == config('hd.subscribe.year.price') ?  config('hd.subscribe.year.price') : config('hd.subscribe.permanent.price'),
-            request('payType'),
-        );
+        $order = app(OrderService::class)->create(config('app.name'), $package, request('payType'));
         return $this->respondWithSuccess($order);
     }
 }

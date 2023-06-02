@@ -5,7 +5,7 @@ await getAll()
 
 <template>
   <main>
-    <el-card shadow="always" :body-style="{ padding: '20px' }">
+    <el-card shadow="never" :body-style="{ padding: '20px' }">
       <template #header>
         <div class="flex justify-between">
           套餐定义

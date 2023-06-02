@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->string('title', 50)->comment('标题');
-            $table->string('text_color', 20)->comment('文字颜色');
-            $table->string('bg_color', 20)->comment('文字颜色');
+            $table->string('text_color')->comment('文字颜色')->default('text-gray-700');
+            $table->string('bg_color')->comment('文字颜色')->default('bg-gray-50');
             $table->string('ad', 100)->comment('一句广告语');
             $table->decimal('price')->comment('价格');
+            $table->unsignedTinyInteger('months')->comment('会员月数');
             $table->decimal('original_price')->comment('原价格');
             $table->string('icon')->comment('图片');
             $table->timestamps();

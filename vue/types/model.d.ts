@@ -270,6 +270,7 @@ interface PackageModel {
   ad: string
   price: string
   original_price: string
+  months: number
   icon: string
   text_color: string
   bg_color: string

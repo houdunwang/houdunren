@@ -19,7 +19,7 @@ class SiteMiddleware
 
     protected function load()
     {
-        $data = Config::find(1)['data'];
+        $data = Config::where('id', 1)->value('data');
         if ($data) {
             foreach (config('hd') as $name => $value) {
                 config(['hd.' . $name => ($data[$name] ?? []) + config('hd.' . $name)]);

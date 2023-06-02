@@ -9,5 +9,10 @@ class Package extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'ad', 'price', 'icon', 'original_price', 'text_color', 'bg_color'];
+    protected $fillable = ['title', 'ad', 'price', 'icon', 'original_price', 'text_color', 'bg_color', 'months'];
+
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
 }

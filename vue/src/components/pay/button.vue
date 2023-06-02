@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import useUtil from '@/composables/hd/useUtil'
-const { price } = defineProps<{
-  price: any
+const { packageItem } = defineProps<{
+  packageItem: PackageModel
 }>()
 const { wechatNativePay, wepayQr, wechatMpPay, alipay } = usePay()
 const { isWechat } = useUtil()
 const showWepayDialog = ref(false)
 
 const wechatNative = async () => {
-  await wechatNativePay(price)
+  await wechatNativePay(packageItem)
   showWepayDialog.value = true
 }
 </script>
@@ -17,7 +17,7 @@ const wechatNative = async () => {
   <div class="flex justify-center gap-3 mt-5">
     <div v-if="isWechat()">
       <button
-        @click="wechatMpPay(price)"
+        @click="wechatMpPay(packageItem)"
         v-if="isWechat()"
         class="border border-yellow-500 bg-yellow-500 text-white rounded-md px-8 py-3 m-2 transition duration-500 ease select-none hover:bg-yellow-600 focus:outline-none focus:shadow-outline text-2xl">
         微信支付
@@ -27,7 +27,7 @@ const wechatNative = async () => {
       <div class="hidden md:block">
         <button
           type="button"
-          @click="alipay(price)"
+          @click="alipay(packageItem)"
           class="border border-green-500 bg-green-500 text-white rounded-md px-5 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline text-base">
           支付宝付款
         </button>

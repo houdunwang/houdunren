@@ -87,7 +87,7 @@ Route::controller(SubscribeController::class)->prefix("subscribe")->group(functi
 
 //订单
 Route::controller(OrderController::class)->prefix('order')->group(function () {
-    Route::post('create', 'create');
+    Route::post('create/{package}', 'create');
 });
 
 //直播评论截图

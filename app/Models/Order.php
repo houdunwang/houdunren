@@ -9,7 +9,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['sn', 'subject', 'price', 'trade_no', 'pay_type', 'pay_state', 'data'];
+    protected $fillable = ['sn', 'subject', 'price', 'trade_no', 'pay_type', 'pay_state', 'data', 'package_id'];
 
     protected $casts = [
         'data' => 'array',
@@ -18,5 +18,10 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
     }
 }

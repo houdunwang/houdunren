@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string('openid')->nullable()->unique();
             $table->string('unionid')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('secret')->nullable()->comment('软件密钥');
             $table->boolean('is_lock')->default(false);
             $table->rememberToken();
             $table->timestamps();

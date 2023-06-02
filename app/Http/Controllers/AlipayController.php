@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Services\OrderService;
-use App\Services\PayService;
+use App\Services\SubscribeService;
 use Illuminate\Http\Request;
 use Yansongda\Pay\Pay;
 
@@ -35,10 +35,8 @@ class AlipayController extends Controller
     public function returnUrl()
     {
         $result = Pay::alipay()->callback();
-        //修改订单状态，更改会员周期
-        $order = app(OrderService::class)->completeOrder($result->out_trade_no, $result->trade_no);
-        app(PayService::class)->notify($order);
-        return redirect('member');
+        $this->processOrder($result);
+        return redirect('member/subscribe');
     }
 
     //异步通知
@@ -46,11 +44,18 @@ class AlipayController extends Controller
     {
         $pay = Pay::alipay();
         $result = $pay->callback();
-        //修改订单状态，更改会员周期
-        if ($result->out_trade_no) {
-            $order = app(OrderService::class)->completeOrder($result->out_trade_no, $result->trade_no);
-            app(PayService::class)->notify($order);
-            return $pay->success();
+        $this->processOrder($result);
+        return $pay->success();
+    }
+
+    //处理订单
+    protected function processOrder($result)
+    {
+        if (!$result->out_trade_no) return;
+        $order = app(OrderService::class)->completeOrder($result->out_trade_no, $result->trade_no);
+
+        if ($order) {
+            app(SubscribeService::class)->addMonthsByOrder($order);
         }
     }
 }

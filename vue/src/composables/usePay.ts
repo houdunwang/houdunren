@@ -5,14 +5,14 @@ export default () => {
   const wepayQr = ref('')
 
   //PC 支付宝支付
-  const alipay = async (price: number) => {
-    const order = await createOrder('alipay', price)
+  const alipay = async (packageItem: PackageModel) => {
+    const order = await createOrder('alipay', packageItem)
     window.open(`/api/alipay/pay/${order.id}`)
   }
 
   //微信 PC 支付
-  const wechatNativePay = async (price: number) => {
-    const order = await createOrder('wepay', price)
+  const wechatNativePay = async (packageItem: PackageModel) => {
+    const order = await createOrder('wepay', packageItem)
     wepayQr.value = await http.request<string>({
       url: `wepay/pay/${order.id}`,
       method: 'POST',
@@ -21,8 +21,8 @@ export default () => {
 
   //公众号支付
   const wx = (window as any).wx as any
-  const wechatMpPay = async (price: number) => {
-    const order = await createOrder('wechatApp', price)
+  const wechatMpPay = async (packageItem: PackageModel) => {
+    const order = await createOrder('wechatApp', packageItem)
 
     const res = await http.request<any>({
       url: `wepay/app/${order.id}`,
