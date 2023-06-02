@@ -1,6 +1,8 @@
 <script setup lang="ts">
+const { getAll, collection } = usePackage()
 const { douyinSubscribe } = useSubscribe()
-const form = reactive({ mobile: '', trade_no: '' })
+const form = reactive({ mobile: '', trade_no: '', package_id: 0 })
+await getAll()
 </script>
 
 <template>
@@ -14,6 +16,14 @@ const form = reactive({ mobile: '', trade_no: '' })
       <el-form-item label="抖音定单号">
         <el-input v-model="form.trade_no"></el-input>
         <hdError name="trade_no" />
+      </el-form-item>
+      <el-form-item label="套餐类型">
+        <el-radio-group v-model="form.package_id">
+          <el-radio v-for="item in collection" :key="item.id" :label="item.id">
+            {{ item.title }}
+          </el-radio>
+        </el-radio-group>
+        <hdError name="package_id" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="douyinSubscribe(form)">立即创建</el-button>

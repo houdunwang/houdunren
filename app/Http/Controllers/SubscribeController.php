@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Subscribe;
 use App\Services\SubscribeService;
 use App\Http\Resources\SubscribeResource;
+use App\Models\Package;
 
 class SubscribeController extends Controller
 {
@@ -43,8 +44,9 @@ class SubscribeController extends Controller
         if ($user->isSubscribe) {
             return $this->respondError("已经开通过了");
         }
-        app(OrderService::class)->create(config('app.name'), config('hd.subscribe.permanent.price'), 'douyin', [], $user);
-        app(SubscribeService::class)->update($user, config('hd.subscribe.permanent.price'));
+        $package = Package::findOrFail($request->package_id);
+        $order = app(OrderService::class)->create(config('app.name'), $package, 'douyin', [], $user);
+        app(SubscribeService::class)->addMonthsByOrder($order);
 
         return $this->respondOk('添加成功');
     }

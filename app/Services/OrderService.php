@@ -10,7 +10,15 @@ use Auth;
 //订单服务
 class OrderService
 {
-    //创建定单
+    /**
+     * 创建定单
+     *
+     * @param string $subject 订单描述
+     * @param Package $package 套餐
+     * @param string $payType 支付方式
+     * @param array $data 额外数据
+     * @param User|null $user 用户
+     */
     public function create(string $subject, Package $package, string $payType, array $data = [], User $user = null)
     {
         $user = $user ?? Auth::user();
@@ -29,7 +37,12 @@ class OrderService
         return $order;
     }
 
-    //订单完成
+    /**
+     * 订单完成
+     *
+     * @param string $sn 商家订单号
+     * @param string $trade_no 支付平台订单号
+     */
     public function completeOrder(string $sn, string $trade_no)
     {
         $order = Order::where('sn', $sn)->firstOrFail();
