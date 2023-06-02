@@ -15,7 +15,7 @@ class WepayController extends Controller
     {
         $this->middleware(['auth:sanctum'])->except(['notifyUrl', 'appPay']);
         $config = config('pay');
-        $config['wechat']['default']['notify_url'] = url('/api/wepay/notify');
+        $config['wepay']['default']['notify_url'] = url('/api/wepay/notify');
         Pay::config($config);
     }
 

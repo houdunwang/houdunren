@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import NotificationItem from './notification-item.vue'
 const { collection, findAll } = useNotification()
 findAll(1, 'unread')
 

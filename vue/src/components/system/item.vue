@@ -12,9 +12,13 @@ const emit = defineEmits<{
 
 <template>
   <section
-    class="border border-gray-200 bg-white rounded-lg overflow-hidden hover:scale-105 duration-500 hover:border-indigo-200">
+    class="border border-gray-200 bg-white group rounded-lg overflow-hidden duration-500 hover:border-indigo-200">
     <router-link :to="{ name: 'system.show', params: { id: item.id } }">
-      <el-image :src="item.preview" fit="cover" :lazy="true" class="cursor-pointer aspect-video object-cover" />
+      <el-image
+        :src="item.preview"
+        fit="cover"
+        :lazy="true"
+        class="cursor-pointer aspect-video object-cover group-hover:scale-110 duration-500" />
     </router-link>
     <div class="mt-2">
       <router-link

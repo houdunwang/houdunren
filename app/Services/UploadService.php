@@ -11,7 +11,7 @@ use Spatie\Image\Manipulations;
 class UploadService
 {
     //图片上传
-    public function image(UploadedFile $file, $width = 800, $height = 800, $fit = Manipulations::FIT_MAX)
+    public function image(UploadedFile $file, $width = 1024, $height = 768, $fit = Manipulations::FIT_MAX)
     {
         $localFile = $this->local($file);
 

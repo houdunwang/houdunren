@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import UserAvatar from '@/components/userAvatar.vue'
-
 import dayjs from 'dayjs'
 const { question } = defineProps<{ question: QuestionModel }>()
 </script>

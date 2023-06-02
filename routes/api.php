@@ -9,12 +9,14 @@ use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FavourController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WechatBindController;
 use App\Http\Controllers\WechatController;
 use App\Http\Controllers\WechatLoginController;
 use App\Http\Controllers\WepayController;
+use App\Models\Package;
 use Illuminate\Support\Facades\Route;
 
 //配置
@@ -50,6 +52,9 @@ Route::controller(UserController::class)->prefix('user')->group(function () {
     Route::get('info/{user}', 'info');
 });
 Route::apiResource('user', UserController::class);
+
+//订阅套餐
+Route::apiResource('package', PackageController::class);
 
 //上传处理
 Route::controller(UploadController::class)->prefix("upload")->group(function () {

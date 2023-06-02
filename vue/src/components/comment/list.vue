@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onBeforeRouteLeave } from 'vue-router'
-import CommentItem from './comment-item.vue'
 const { request } = useUtil()
 const { isLogin } = useAuth()
 const { collection, findAll, add } = useComment()

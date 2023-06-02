@@ -15,16 +15,14 @@ onMounted(() => {
 <template>
   <main ref="main">
     <slot />
-    <el-dialog v-model="dialog" class="dialog" :append-to-body="true">
-      <div class="flex justify-center">
-        <el-image :src="img" :lazy="true" class="w-full" />
-      </div>
-    </el-dialog>
+    <!-- <el-dialog v-model="dialog" class="w-screen" :append-to-body="true" top="10px">
+      <el-image :src="img" :lazy="true" />
+    </el-dialog> -->
   </main>
 </template>
 
 <style lang="scss" scoped>
-:deep(.dialog) {
-  @apply w-11/12 xl:w-2/3 2xl:w-1/2;
+.dialog {
+  @apply w-11/12 xl:w-1/12 2xl:w-2/12;
 }
 </style>

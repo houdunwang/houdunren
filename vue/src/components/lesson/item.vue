@@ -31,33 +31,38 @@ const formatTitle = item.title.replace(/第.*?章/, '')
 
 <template>
   <section
-    class="border border-gray-200 rounded-lg bg-white overflow-hidden hover:scale-105 duration-500 hover:border-indigo-200 flex flex-col">
+    class="border border-gray-200 rounded-lg bg-white overflow-hidden group hover:border-indigo-200 flex flex-col">
     <div class="">
       <router-link :to="{ name: 'lesson.show', params: { id: item.id } }">
-        <el-image
-          :src="item.preview"
-          fit="cover"
-          :lazy="true"
-          class="aspect-video object-cover"
-          v-if="showType == 'image'" />
-        <div class="aspect-video flex flex-col items-center py-5" :style="`background-color:${color}`" v-else>
-          <el-image src="/assets/xj.jpg" fit="cover" :lazy="true" class="w-16 h-16 object-cover rounded-full" />
-          <h2
-            class="text-2xl text-white outline-4 outline-gray-900 relative w-full flex justify-center mt-2 font-black h-10">
-            <div class="absolute text-white z-10">
-              {{ formatTitle }}
-            </div>
-            <div class="absolute" style="text-stroke: 5px #333">
-              {{ formatTitle }}
-            </div>
-          </h2>
+        <div class="overflow-hidden flex aspect-video" v-if="showType == 'image'">
+          <el-image
+            :src="item.preview"
+            fit="cover"
+            :lazy="true"
+            class="aspect-video object-cover hover:scale-105 duration-500" />
+        </div>
+        <div class="overflow-hidden" v-else>
           <div
-            class="rounded-lg bg-[#333] text-white flex justify-center px-5 py-1 text-xs opacity-75 mt-2"
-            v-if="item.system?.title">
-            {{ item.system?.title }}
-          </div>
-          <div class="rounded-lg bg-[#333] text-white flex justify-center px-5 py-1 text-xs opacity-75 mt-2" v-else>
-            大叔晚八点直播
+            class="aspect-video flex flex-col items-center py-5 hover:scale-110 duration-500"
+            :style="`background-color:${color}`">
+            <el-image src="/assets/xj.jpg" fit="cover" :lazy="true" class="w-16 h-16 object-cover rounded-full" />
+            <h2
+              class="text-2xl text-white outline-4 outline-gray-900 relative w-full flex justify-center mt-2 font-black h-10">
+              <div class="absolute text-white z-10">
+                {{ formatTitle }}
+              </div>
+              <div class="absolute" style="text-stroke: 5px #333">
+                {{ formatTitle }}
+              </div>
+            </h2>
+            <div
+              class="rounded-lg bg-[#333] text-white flex justify-center px-5 py-1 text-xs opacity-75 mt-2"
+              v-if="item.system?.title">
+              {{ item.system?.title }}
+            </div>
+            <div class="rounded-lg bg-[#333] text-white flex justify-center px-5 py-1 text-xs opacity-75 mt-2" v-else>
+              大叔晚八点直播
+            </div>
           </div>
         </div>
       </router-link>

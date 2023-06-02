@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import LessonItem from '@/components/lesson-item.vue'
 const { isAdministrator } = useUser()
 const { findOne, model } = useSystem()
 const route = useRoute()

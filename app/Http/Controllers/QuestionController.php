@@ -26,7 +26,7 @@ class QuestionController extends Controller
     //用户出的考题列表
     public function userQuestionList(User $user)
     {
-        $collection = $user->model('Edu')->questions()->with(['user'])->latest()->paginate(5);
+        $collection = $user->questions()->with(['user'])->latest()->paginate(5);
         return QuestionResource::collection($collection);
     }
 

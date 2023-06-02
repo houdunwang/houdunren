@@ -17,10 +17,10 @@ const tab = ref('base')
     <el-form label-width="80px" label-position="top">
       <el-tabs v-model="tab" type="card" tab-position="top">
         <div class="border p-3 rounded-md">
-          <el-tab-pane label="基本配置" name="base">
+          <el-tab-pane label="基本" name="base">
             <baseVue :config="config" />
           </el-tab-pane>
-          <el-tab-pane label="内容管理" name="content">
+          <el-tab-pane label="内容" name="content">
             <content :config="config" />
           </el-tab-pane>
           <el-tab-pane label="订阅" name="subscribe">

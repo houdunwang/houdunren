@@ -32,12 +32,16 @@ const handleUploadImage = async (event: any, insertImage: any, files: any) => {
 </script>
 
 <template>
-  <VueMarkdownEditor
-    :value="modelValue"
-    v-model="text"
-    :disabled-menus="[]"
-    :height="height + 'px'"
-    @upload-image="handleUploadImage" />
+  <main class="">
+    <VueMarkdownEditor
+      :value="modelValue"
+      v-model="text"
+      :disabled-menus="[]"
+      :height="height + 'px'"
+      @upload-image="handleUploadImage"
+      v-bind="$attrs" />
+    <HdError name="file" />
+  </main>
 </template>
 
 <style lang="scss" scoped>

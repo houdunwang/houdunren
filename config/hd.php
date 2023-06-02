@@ -65,6 +65,7 @@ return  [
     ],
     "upload" => [
         //上传方式 local|oss
-        "drive" => 'local'
+        "drive" => 'local',
+        "image_size" => 8000
     ]
 ];

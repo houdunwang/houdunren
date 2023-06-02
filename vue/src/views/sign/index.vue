@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import SignSubmit from './components/sign-submit.vue'
-import UserAvatar from '@/components/userAvatar.vue'
 import dayjs from 'dayjs'
 const { authorize } = useAuth()
 const { collection, getTodaySignList, todaySign, remove } = useSign()

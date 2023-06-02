@@ -26,6 +26,12 @@ export default [
         meta: { title: '微信菜单', menu: { title: '微信菜单' } },
       },
       {
+        path: 'packge/admin',
+        name: 'package.admin',
+        component: () => import('@/views/package/admin.vue'),
+        meta: { title: '套餐定义', menu: { title: '套餐定义' } },
+      },
+      {
         path: 'subscribe/admin/douyin',
         name: 'subscribe.admin.douyin',
         component: () => import('@/views/subscribe/douyin.vue'),

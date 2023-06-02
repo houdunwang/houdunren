@@ -17,9 +17,11 @@ import member from './member'
 import wechat from './wechat'
 import auth from './auth'
 import soft from './soft'
+import packageRoutes from './package'
 
 export default [
   auth,
+  ...packageRoutes,
   ...admin,
   ...config,
   ...error,

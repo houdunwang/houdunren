@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import ActivityItem from '@/components/activity-item.vue'
 import Pagination from '@/components/pagination.vue'
 import Tip from '@/components/tip.vue'
-import TopicItem from '@/components/topic-item.vue'
-import WechatGroup from '@/components/wechat-group.vue'
 
 const route = useRoute()
 const page = ref(+(route.query.page || 1))
@@ -15,13 +12,13 @@ const { config } = useConfigStore()
 
 <template>
   <div>
-    <el-alert
-      :title="config?.base.notice"
-      type="warning"
-      show-icon
-      :closable="false"
-      class="!mb-3"
-      v-if="config?.base.notice" />
+    <div
+      class="mb-3 px-3 py-2 rounded-md bg-[#FDF6EC] text-sm text-[#E6A23C] flex items-center gap-2 site-notice"
+      v-if="config?.base.notice">
+      <icon-info theme="filled" size="15" />
+      <div v-html="config.base.notice"></div>
+    </div>
+    <!-- <el-alert :title="config?.base.notice" type="warning" show-icon :closable="false" class="!mb-3" /> -->
 
     <main class="lg:grid lg:grid-cols-12 grid-flow-row gap-3 items-start">
       <section class="lg:col-span-9">
@@ -52,3 +49,14 @@ const { config } = useConfigStore()
     </main>
   </div>
 </template>
+
+<style lang="scss" scoped>
+:deep(.site-notice) {
+  a {
+    color: #ff8066 !important;
+    &:hover {
+      color: #ff9671;
+    }
+  }
+}
+</style>

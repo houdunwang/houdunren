@@ -263,3 +263,16 @@ interface SoftModel {
   gitee: string
   id: number
 }
+
+interface PackageModel {
+  id: number
+  title: string
+  ad: string
+  price: string
+  original_price: string
+  icon: string
+  text_color: string
+  bg_color: string
+  created_at: string
+  updated_at: string
+}

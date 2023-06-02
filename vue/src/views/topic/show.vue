@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import CommentList from '@/components/comment-list.vue'
 import { useTitle } from '@vueuse/core'
 import dayjs from 'dayjs'
 

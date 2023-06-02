@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import LessonItem from '@/components/lesson-item.vue'
-import Pagination from '@/components/pagination.vue'
 import lesson from '@/routes/lesson'
 const { findAll, collection } = useLesson()
 const storage = useStorage()

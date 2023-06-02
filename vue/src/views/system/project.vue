@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import SystemItem from '@/components/system-item.vue'
 const { collection, findAll, remove } = useSystem()
 await findAll(1, { type: 'project' })
 </script>

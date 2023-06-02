@@ -23,8 +23,8 @@ class UploadController extends Controller
     {
         $field = request('name', 'file');
         Validator::make($request->all(), [
-            $field => ['required', 'file', 'image', 'max:2048']
-        ])->validate();
+            $field => ['required', 'file', 'image', 'max:' . config('hd.upload.image_size')]
+        ], ["{$field}.max" => '文件不能超过2MB', "{$field}.image" => "请选择图片"])->validate();
 
         return rateLimiter('upload-avatar' . Auth::id(), 3, function () use ($field) {
             $file = app(UploadService::class)->image(request($field));
@@ -36,7 +36,7 @@ class UploadController extends Controller
     public function avatar(Request $request)
     {
         Validator::make($request->all(), [
-            'file' => ['required', 'file', 'image', 'max:2048']
+            'file' => ['required', 'file', 'image', 'max:' . config('hd.upload.image_size')]
         ])->validate();
 
         return rateLimiter('upload-avatar' . Auth::id(), 3, function () use ($request) {

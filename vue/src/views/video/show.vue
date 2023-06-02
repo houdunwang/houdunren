@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import DownloadLesson from '@/components/download-lesson.vue'
-import LessonVideoList from '@/components/lesson-video-list.vue'
-import SystemLessonDropdown from '@/components/system-lesson-dropdown.vue'
 import useVideo from '@/composables/useVideo'
 import router from '@/plugins/router'
 import { ElMessage } from 'element-plus'

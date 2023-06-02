@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import LessonItem from '@/components/lesson-item.vue'
-import DownloadLesson from '@/components/download-lesson.vue'
-import Favorite from '@/components/favorite.vue'
-import LessonVideoList from '@/components/lesson-video-list.vue'
 const { isAdministrator } = useUser()
 const { isLogin } = useAuth()
 const { findOne, model } = useLesson()

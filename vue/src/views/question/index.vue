@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import QuestionRankTotal from '@/components/question-rank-total.vue'
 import useUtil from '@/composables/hd/useUtil'
 import dayjs from 'dayjs'
 import Layout from './layout.vue'
-import UserAvatar from '@/components/userAvatar.vue'
 
 const { open } = useUtil()
 const { getRankingList } = useQuestionAnswer()

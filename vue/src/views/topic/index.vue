@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Tip from '@/components/tip.vue'
-import TopicItem from '@/components/topic-item.vue'
 const route = useRoute()
 const { collection, findAll } = useTopic()
 await findAll(route.query.page || 1)
