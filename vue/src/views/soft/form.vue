@@ -14,6 +14,10 @@ if (route.params.id) {
         <el-input v-model="model.title"></el-input>
         <HdError name="title" />
       </el-form-item>
+      <el-form-item label="软件标识">
+        <el-input v-model="model.name"></el-input>
+        <HdError name="name" />
+      </el-form-item>
       <el-form-item label="简短介绍">
         <el-input v-model="model.description" type="textarea"></el-input>
         <HdError name="description" />

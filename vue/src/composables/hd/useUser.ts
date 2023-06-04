@@ -103,6 +103,15 @@ export default () => {
     return useUserStore().user?.id == 1
   }
 
+  //刷新软件密钥
+  const refreshSecret = async () => {
+    model.value = await http.request<UserModel>({
+      url: `user/refreshSecret`,
+      method: 'POST',
+    })
+    useUserStore().getCurrentUser()
+  }
+
   return {
     isAdministrator,
     collection,
@@ -118,5 +127,6 @@ export default () => {
     removeAvatar,
     lockUser,
     removeAllData,
+    refreshSecret,
   }
 }

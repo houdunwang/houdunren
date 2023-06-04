@@ -52,6 +52,7 @@ Route::controller(UserController::class)->prefix('user')->group(function () {
     Route::put('password', 'password');
     Route::put('email', 'email');
     Route::put('mobile', 'mobile');
+    Route::post('refreshSecret', 'refreshSecret');
     Route::delete('delete', 'delete');
     Route::delete('remove_avatar/{user}', 'removeAvatar');
     Route::post('lock_user/{user}', 'lockUser');

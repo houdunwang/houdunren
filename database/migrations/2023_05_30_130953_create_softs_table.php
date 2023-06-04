@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('softs', function (Blueprint $table) {
             $table->id();
             $table->string('title')->comment('软件名称');
-            $table->string('name')->comment('软件别名');
+            $table->char('name', 30)->comment('软件别名');
             $table->string('description')->comment('软件简介');
             $table->string('preview')->comment('封面截图');
             $table->string('tags')->nullable()->comment('软件标签');

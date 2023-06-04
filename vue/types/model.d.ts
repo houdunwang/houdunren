@@ -212,6 +212,7 @@ interface MorningModel {
 interface SoftModel {
   id: number
   title: string
+  name: string
   preview: string
   file: string
   content: string

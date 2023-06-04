@@ -46,6 +46,15 @@ class UserController extends Controller
         return $this->respondWithSuccess(new UserResource($user));
     }
 
+    //刷新软件密钥
+    public function refreshSecret()
+    {
+        $user = Auth::user();
+        $user->secret = md5($user->id . now());
+        $user->save();
+        return $this->respondOk('软件密钥刷新成功');
+    }
+
     public function index()
     {
         return UserResource::collection(User::paginate(10));
