@@ -11,13 +11,13 @@ use App\Http\Controllers\FavourController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\SecretController;
+use App\Http\Controllers\SoftTokenController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WechatBindController;
 use App\Http\Controllers\WechatController;
 use App\Http\Controllers\WechatLoginController;
 use App\Http\Controllers\WepayController;
-use App\Models\Package;
 use Illuminate\Support\Facades\Route;
 
 //配置
@@ -34,7 +34,9 @@ Route::controller(AuthController::class)->prefix('auth')->group(function () {
 });
 
 //软件密钥验证
-Route::post('secret/check', [SecretController::class, 'check']);
+Route::post('softToken/check/{softName}', [SoftTokenController::class, 'check']);
+Route::post('softToken/{softName}', [SoftTokenController::class, 'getSoftToken']);
+// Route::post('secret/get', [SecretController::class, 'get']);
 
 
 //发送验证码

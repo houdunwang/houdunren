@@ -42,11 +42,17 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token', 'email_verified_at',
-        'real_name', 'mobile',
-        'unionid',  'openid',
-        'comment_num', 'fans_num', 'follower_num',
+        'remember_token',
+        'email_verified_at',
+        'real_name',
+        'mobile',
+        'unionid',
+        'openid',
+        'comment_num',
+        'fans_num',
+        'follower_num',
         'address',
+        // 'secret'
     ];
 
     /**
@@ -124,5 +130,11 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class, 'user_id');
+    }
+
+    //软件密钥
+    public function softTokens()
+    {
+        return $this->hasMany(SoftToken::class);
     }
 }

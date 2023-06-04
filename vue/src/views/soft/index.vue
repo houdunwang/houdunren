@@ -14,7 +14,7 @@ await getAll()
         <div class="font-extralight text-lg">
             软件是视频教程的案例，
         <router-link :to="{ name: 'subscribe' }" class="font-extrabold text-green-600">订阅用户(不限类型)</router-link>
-        均只提供<span class="font-bold">一年</span>学习使用
+        均提供<span class="font-bold">一年</span>学习使用
         </div>
         <div class="text-sm bg-slate-500 opacity-50 mt-2 text-white px-3 py-1 rounded-md">由于操作系统五花八门，所以不保证能够正常运行</div>
       </p>
