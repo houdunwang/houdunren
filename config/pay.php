@@ -25,7 +25,7 @@ return [
             'mode' => Pay::MODE_NORMAL,
         ]
     ],
-    'wepay' => [
+    'wechat' => [
         'default' => [
             // 必填-商户号，服务商模式下为服务商商户号
             'mch_id' => env("WEPAY_MCH_ID"),

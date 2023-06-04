@@ -10,8 +10,8 @@ const { user } = useUserStore()
 <template>
   <main>
     <el-tabs v-model="tab" type="card" tab-position="top">
-      <el-tab-pane label="会员周期" name="subscribe">
-        <section class="text-gray-600 border p-5 rounded-md">
+      <el-tab-pane label="会员周期" name="subscribe" class="opacity-90">
+        <section class="text-gray-600 border p-5 rounded-md mb-3 bg-gray-100">
           <div>
             你的UID是: <span class="">{{ user?.id }}</span>
           </div>
@@ -31,6 +31,7 @@ const { user } = useUserStore()
             </el-button>
           </div>
         </section>
+        <section class="text-gray-600 border p-5 rounded-md bg-slate-100">软件密钥 : {{ user?.secret }}</section>
       </el-tab-pane>
     </el-tabs>
   </main>

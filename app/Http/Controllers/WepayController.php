@@ -15,7 +15,7 @@ class WepayController extends Controller
     {
         $this->middleware(['auth:sanctum'])->except(['notifyUrl', 'appPay']);
         $config = config('pay');
-        $config['wepay']['default']['notify_url'] = url('/api/wepay/notify');
+        $config['wechat']['default']['notify_url'] = url('/api/wepay/notify');
         Pay::config($config);
     }
 
@@ -29,7 +29,6 @@ class WepayController extends Controller
                 'total' =>  $order->price * 100,
             ],
         ];
-
         $result = Pay::wechat()->scan($order);
         //生成支付二维码
         return Builder::create()->data($result['code_url'])->build()->getDataUri();

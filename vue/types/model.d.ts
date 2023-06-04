@@ -23,7 +23,9 @@ interface UserModel {
   updated_at: string
   todaySign: SignModel
   duration?: SubscribeModel
+  secret?: string
   isSubscribe: boolean
+  subscribe?: SubscribeModel
 }
 
 interface ConfigModel {
@@ -274,6 +276,7 @@ interface PackageModel {
   icon: string
   text_color: string
   bg_color: string
+  state: boolean
   created_at: string
   updated_at: string
 }

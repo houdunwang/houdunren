@@ -10,6 +10,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FavourController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\SecretController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WechatBindController;
@@ -31,6 +32,10 @@ Route::controller(AuthController::class)->prefix('auth')->group(function () {
     Route::post('logout', 'logout');
     Route::post('forgot-password', 'forgotPassword');
 });
+
+//软件密钥验证
+Route::post('secret/check', [SecretController::class, 'check']);
+
 
 //发送验证码
 Route::controller(CodeController::class)->prefix('code')->group(function () {

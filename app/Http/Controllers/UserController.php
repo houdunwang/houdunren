@@ -35,8 +35,14 @@ class UserController extends Controller
     //获取当前用户资料
     public function current()
     {
-        $user = Auth::user()->makeVisible(['address', 'mobile', 'real_name', 'openid', 'unionid']);
+        $user = Auth::user()->makeVisible(['address', 'mobile', 'real_name', 'openid', 'unionid', 'secret'])->load('subscribe');
+        //软件密钥
+        if (!$user->isSubscribe) $user->secret = null;
+        elseif (!$user->secret) $user->secret = md5($user);
+        $user->save();
+
         $user->isSubscribe = $user->isSubscribe;
+
         return $this->respondWithSuccess(new UserResource($user));
     }
 
@@ -48,6 +54,7 @@ class UserController extends Controller
     public function info(User $user)
     {
         $this->authorize('info', User::class);
+
         return new UserResource($user->makeVisible(['address', 'real_name', 'mobile']));
     }
 

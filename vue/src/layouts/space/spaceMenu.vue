@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import UserIcon from '@/components/user-icon.vue'
 import dayjs from 'dayjs'
 const route = useRoute()
 const { findOne, model: user } = useUser()

@@ -49,7 +49,7 @@ const wechatNative = async () => {
         <a
           href="/member/subscribe"
           class="bg-green-600 hover:text-white hover:bg-green-500 rounded-md flex justify-center items-center py-2 px-5 mt-3 text-white">
-          查看订单信息
+          查看订阅信息
         </a>
       </div>
     </el-dialog>

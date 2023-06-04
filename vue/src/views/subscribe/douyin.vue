@@ -26,7 +26,7 @@ await getAll()
         <hdError name="package_id" />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="douyinSubscribe(form)">立即创建</el-button>
+        <el-button type="primary" @click="douyinSubscribe(form)">保存提交</el-button>
       </el-form-item>
     </el-form>
   </HdCard>

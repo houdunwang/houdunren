@@ -23,7 +23,7 @@ export default {
     menu: [
       {
         routeName: 'member',
-        title: '修改资料',
+        title: '资料管理',
       },
       {
         routeName: 'member.bind',
@@ -31,7 +31,7 @@ export default {
       },
       {
         routeName: 'member.subscribe',
-        title: '会员订阅',
+        title: '订阅信息',
       },
     ],
   },
@@ -86,11 +86,11 @@ export default {
       title: '早起少年',
       route: { name: 'morning' },
     },
-    {
-      title: '大叔作品',
-      route: { name: 'soft.index' },
-      icon: ApplicationOne,
-    },
+    // {
+    //   title: '大叔作品',
+    //   route: { name: 'soft.index' },
+    //   icon: ApplicationOne,
+    // },
     {
       title: '感谢陪伴',
       route: { name: 'shot.comment' },

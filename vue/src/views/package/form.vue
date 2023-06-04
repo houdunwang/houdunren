@@ -32,7 +32,6 @@ if (route.params.id) {
       </el-form-item>
       <el-form-item label="文字颜色">
         <el-input v-model="model.text_color"></el-input>
-        {{ model.text_color }}
         <HdError name="text_color" />
       </el-form-item>
       <el-form-item label="背景颜色">
@@ -42,6 +41,13 @@ if (route.params.id) {
       <el-form-item label="月数">
         <el-input v-model="model.months" placeholder="开通会员的月数"></el-input>
         <HdError name="months" />
+      </el-form-item>
+      <el-form-item label="状态">
+        <el-radio-group v-model="model.state" size="default">
+          <el-radio-button :label="true"> 开启 </el-radio-button>
+          <el-radio-button :label="false"> 关闭 </el-radio-button>
+        </el-radio-group>
+        <HdError name="state" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="$route.params.id ? update() : store()">保存提交</el-button>

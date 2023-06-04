@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import SystemItem from '@/components/system-item.vue'
 import draggable from 'vuedraggable'
 const route = useRoute()
 const { collection, findAll, order, remove } = useSystem()

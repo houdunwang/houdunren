@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// import SubscribePay from './components/subscribe-pay.vue'
 const { getAll, collection, destroy } = usePackage()
 await getAll()
 </script>
@@ -12,11 +11,24 @@ await getAll()
           投资学习是值得的
         </h1>
         <h2 class="text-center text-white opacity-80 font-light text-base md:text-xl lg:text-2xl">
-          订阅后可以观看所有教程，并支持高清版下载学习
+          订阅后可以观看所有教程，并支持高清版下载学习 <br />
         </h2>
+        <div class="text-base font-thin text-center text-white opacity-70 mt-2 font-sans">
+          提供一年
+          <router-link :to="{ name: 'soft.index' }" class="text-white hover:text-yellow-300 font-normal">
+            教程案例
+          </router-link>
+          的下载学习使用
+        </div>
       </div>
       <section class="flex flex-col md:flex-row justify-center gap-5 -mt-52 px-3">
-        <PackageItem v-for="item of collection" :key="item.id" :item="item" @del="destroy" class="2xl:px-20" />
+        <PackageItem
+          v-for="item of collection"
+          :key="item.id"
+          :item="item"
+          @del="destroy"
+          class="2xl:px-20"
+          v-show="item.state" />
       </section>
     </main>
     <h2 class="text-center text-gray-600 text-lg mt-8 px-5">随着课程不断增加，订阅价格会有涨幅，越早订阅越划算</h2>

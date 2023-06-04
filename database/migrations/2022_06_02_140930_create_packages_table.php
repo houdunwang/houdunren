@@ -18,9 +18,10 @@ return new class extends Migration
             $table->string('bg_color')->comment('文字颜色')->default('bg-gray-50');
             $table->string('ad', 100)->comment('一句广告语');
             $table->decimal('price')->comment('价格');
-            $table->unsignedTinyInteger('months')->comment('会员月数');
+            $table->unsignedSmallInteger('months')->comment('会员月数');
             $table->decimal('original_price')->comment('原价格');
             $table->string('icon')->comment('图片');
+            $table->boolean('state')->default(true)->comment('开关状态');
             $table->timestamps();
         });
     }
