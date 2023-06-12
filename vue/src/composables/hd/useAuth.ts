@@ -11,6 +11,10 @@ export default () => {
     captcha_key: '',
     code: '',
   })
+  //超管
+  const isAdministrator = () => {
+    return useUserStore().user?.id == 1
+  }
 
   //模型权限验证
   function authorize(userId: undefined | number = undefined) {
@@ -79,5 +83,5 @@ export default () => {
     }
   })
 
-  return { authorize, isLogin, logout, login, form, findPassword, register }
+  return { authorize, isLogin, logout, login, form, findPassword, register, isAdministrator }
 }

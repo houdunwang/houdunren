@@ -14,7 +14,7 @@ class Topic extends BaseModel
 
     protected $table = 'topics';
 
-    protected $fillable = ['title', 'content'];
+    protected $fillable = ['title', 'content', 'filename'];
 
     protected $with = ['user'];
 
@@ -28,6 +28,11 @@ class Topic extends BaseModel
 
     public function getHtmlAttribute()
     {
-        return Markdown::convert($this->content)->getContent();
+        $content = $this->content ?? '';
+
+        if ($this->filename && is_file(base_path('markdown/' . $this->filename))) {
+            $content = file_get_contents(base_path('markdown/' . $this->filename));
+        }
+        return Markdown::convert($content)->getContent();
     }
 }

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->string('title', 50)->comment('标题');
-            $table->string('text_color')->comment('文字颜色')->default('text-gray-700');
-            $table->string('bg_color')->comment('文字颜色')->default('bg-gray-50');
+            // $table->string('text_color')->comment('文字颜色')->default('text-gray-700');
+            $table->string('style', 1000)->comment('自定义样式')->default('color:#475569;background-color:#fff;');
             $table->string('ad', 100)->comment('一句广告语');
             $table->decimal('price')->comment('价格');
             $table->unsignedSmallInteger('months')->comment('会员月数');

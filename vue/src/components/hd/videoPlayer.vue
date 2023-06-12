@@ -33,9 +33,9 @@ onMounted(() => {
     storage.set('playbackrateChange', rate)
   })
 })
-// defineExpose({
-//   player,
-// })
+defineExpose({
+  player,
+})
 </script>
 
 <template>

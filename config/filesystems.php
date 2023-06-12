@@ -77,6 +77,7 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
         public_path('dist') => base_path('dist'),
+        public_path('markdown') => base_path('markdown'),
     ],
 
 ];

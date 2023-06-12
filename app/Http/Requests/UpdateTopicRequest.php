@@ -15,8 +15,21 @@ class UpdateTopicRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'between:5,100'],
-            'content' => ['required', 'min:10']
+            'title' => ['required', 'between:4,100'],
+            // 'content' => ['required', 'min:10']
+            'filename' => [function ($attribute, $value, $fail) {
+                $file = request()->input('filename');
+                if ($file && !is_file(base_path("markdown/{$file}"))) {
+                    $fail('文件不存在');
+                }
+            }],
+            'content' => [function ($attribute, $value, $fail) {
+                if (!request()->input('filename')) {
+                    if (mb_strlen($value, 'utf-8') < 20) {
+                        $fail('内容不能小于20个字');
+                    }
+                }
+            }],
         ];
     }
 

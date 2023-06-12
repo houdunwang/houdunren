@@ -21,6 +21,11 @@ export default [
         name: 'member.subscribe',
         component: () => import('@/views/member/subscribe.vue'),
       },
+      {
+        path: 'secret',
+        name: 'member.secret',
+        component: () => import('@/views/member/secret.vue'),
+      },
     ],
   },
 ] as RouteRecordRaw[]

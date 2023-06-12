@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Models\VideoPlayHistory;
 use App\Rules\CodeRule;
 use App\Rules\PhoneRule;
+use App\Services\SoftService;
 use Auth;
 use DB;
 use Hash;
@@ -37,23 +38,14 @@ class UserController extends Controller
     {
         $user = Auth::user()->makeVisible(['address', 'mobile', 'real_name', 'openid', 'unionid', 'secret'])->load('subscribe');
         //软件密钥
-        if (!$user->isSubscribe) $user->secret = null;
-        elseif (!$user->secret) $user->secret = md5($user);
-        $user->save();
+        app(SoftService::class)->refreshSecret($user);
 
         $user->isSubscribe = $user->isSubscribe;
 
-        return $this->respondWithSuccess(new UserResource($user));
+        return $this->respondWithSuccess(new UserResource($user->load('softSecret')));
     }
 
-    //刷新软件密钥
-    public function refreshSecret()
-    {
-        $user = Auth::user();
-        $user->secret = md5($user->id . now());
-        $user->save();
-        return $this->respondOk('软件密钥刷新成功');
-    }
+
 
     public function index()
     {

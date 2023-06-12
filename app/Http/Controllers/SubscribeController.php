@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Subscribe;
 use App\Services\SubscribeService;
 use App\Http\Resources\SubscribeResource;
+use App\Models\Order;
 use App\Models\Package;
 
 class SubscribeController extends Controller
@@ -35,17 +36,15 @@ class SubscribeController extends Controller
         $request->validate([
             'mobile' => ['required', 'regex:/^\d{11}$/'],
             'trade_no' => ['required', Rule::unique('orders', 'trade_no')]
-        ]);
+        ], ['trade_no.unique' => '商户订单号已经存在']);
 
         $user = User::where('mobile', $request->mobile)->first() ?? $newUser;
         $user->mobile = $request->mobile;
         $user->password = Hash::make($request->mobile);
         $user->save();
-        if ($user->isSubscribe) {
-            return $this->respondError("已经开通过了");
-        }
+        // if ($user->isSubscribe) abort(403, '已是订阅用户');
         $package = Package::findOrFail($request->package_id);
-        $order = app(OrderService::class)->create(config('app.name'), $package, 'douyin', [], $user);
+        $order = app(OrderService::class)->create(config('app.name'), $package, 'douyin', $request->trade_no, $user);
         app(SubscribeService::class)->addMonthsByOrder($order);
 
         return $this->respondOk('添加成功');

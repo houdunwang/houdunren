@@ -9,7 +9,7 @@ class Package extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'ad', 'price', 'icon', 'original_price', 'text_color', 'bg_color', 'months', 'state'];
+    protected $fillable = ['title', 'ad', 'price', 'icon', 'original_price', 'style', 'months', 'state'];
 
     protected $casts = ["state" => "boolean"];
 

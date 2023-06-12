@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
-
+const { open } = useUtil()
 const { video, showTime = true } = defineProps<{ video: VideoModel; showTime?: boolean }>()
 </script>
 
@@ -15,14 +15,19 @@ const { video, showTime = true } = defineProps<{ video: VideoModel; showTime?: b
           <slot name="title" :video="video">
             {{ video.title }}
           </slot>
-          <span class="flex items-center text-xs ml-2 text-gray-500" v-if="showTime">
+          <span class="flex items-center text-xs ml-2 text-slate-500 opacity-50" v-if="showTime">
             <icon-history theme="outline" class="mr-1" />
             {{ dayjs(video.created_at).fromNow() }}
           </span>
         </div>
       </router-link>
       <section class="text-xs font-light flex items-center gap-2">
-        <el-tag
+        <div
+          class="border text-xs text-slate-500 px-2 py-1 opacity-70 rounded-lg font-light scale-90 cursor-pointer hover:bg-slate-100 duration-300 hover:scale-100"
+          @click="open({ name: 'lesson.show', params: { id: video.lesson_id } }, '_blank')">
+          {{ video.lesson.title }}
+        </div>
+        <!-- <el-tag
           type="info"
           size="small"
           round
@@ -30,7 +35,7 @@ const { video, showTime = true } = defineProps<{ video: VideoModel; showTime?: b
           @click="$router.push({ name: 'lesson.show', params: { id: video.lesson_id } })"
           class="cursor-pointer">
           {{ video.lesson.title }}
-        </el-tag>
+        </el-tag> -->
       </section>
     </div>
   </div>

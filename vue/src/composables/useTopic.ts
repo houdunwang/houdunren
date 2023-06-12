@@ -7,7 +7,7 @@ const { open } = useUtil()
 
 export default () => {
   const collection = ref<ApiPage<TopicModel>>() as unknown as Ref<ApiPage<TopicModel>>
-  const model = ref<TopicModel>() as unknown as Ref<TopicModel>
+  const model = ref<Partial<TopicModel>>({ title: '', content: '', filename: '' })
 
   const findAll = async (page: any, params = {}) => {
     collection.value = await http.request<ApiPage<TopicModel>>({

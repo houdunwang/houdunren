@@ -12,18 +12,18 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <main class="rounded-lg overflow-hidden px-8 py-5 2xl:py-10 shadow-inner" :class="[item.text_color, item.bg_color]">
+  <main class="rounded-lg overflow-hidden px-8 py-5 2xl:py-10 shadow-inner" :style="item.style">
     <div class="flex flex-col items-center justify-center">
       <el-image :src="item.icon" fit="fill" :lazy="true" class="w-28 h-28"></el-image>
       <h2 class="font-bold text-2xl mb-2">{{ item.title }}</h2>
       <p class="opacity-80">{{ item.ad }}</p>
       <div class="price text-4xl font-bold mt-8">{{ +item.price }}元</div>
-      <div class="opacity-70 mt-2">
+      <!-- <div class="opacity-70 mt-2">
         原价: <span class="line-through">{{ +item.original_price }}</span>
-      </div>
+      </div> -->
       <PayButton :price="item.price" :package-item="item" />
     </div>
-    <div class="flex justify-center mt-3" v-if="showButton">
+    <div class="flex justify-center mt-5" v-if="showButton">
       <el-button
         type="success"
         plain

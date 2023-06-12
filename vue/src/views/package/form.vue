@@ -30,13 +30,9 @@ if (route.params.id) {
         <el-input v-model="model.original_price"></el-input>
         <HdError name="original_price" />
       </el-form-item>
-      <el-form-item label="文字颜色">
-        <el-input v-model="model.text_color"></el-input>
-        <HdError name="text_color" />
-      </el-form-item>
-      <el-form-item label="背景颜色">
-        <el-input v-model="model.bg_color"></el-input>
-        <HdError name="bg_color" />
+      <el-form-item label="CSS样式">
+        <el-input v-model="model.style"></el-input>
+        <HdError name="style" />
       </el-form-item>
       <el-form-item label="月数">
         <el-input v-model="model.months" placeholder="开通会员的月数"></el-input>

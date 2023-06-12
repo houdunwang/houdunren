@@ -26,6 +26,16 @@ interface UserModel {
   secret?: string
   isSubscribe: boolean
   subscribe?: SubscribeModel
+  soft_secret: SoftSecretModel
+}
+
+interface SoftSecretModel {
+  id: number
+  user_id: number
+  secret: string
+  end_time: string
+  created_at: string
+  updated_at: string
 }
 
 interface ConfigModel {
@@ -111,6 +121,7 @@ interface TopicModel {
   id: number
   user_id: number
   title: string
+  filename: string
   content: string
   html: string
   favour_count: number
@@ -275,8 +286,7 @@ interface PackageModel {
   original_price: string
   months: number
   icon: string
-  text_color: string
-  bg_color: string
+  style: string
   state: boolean
   created_at: string
   updated_at: string

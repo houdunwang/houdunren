@@ -19,7 +19,7 @@ class OrderService
      * @param array $data 额外数据
      * @param User|null $user 用户
      */
-    public function create(string $subject, Package $package, string $payType, array $data = [], User $user = null)
+    public function create(string $subject, Package $package, string $payType, string $trade_no = null, User $user = null)
     {
         $user = $user ?? Auth::user();
         $sn = "U" . $user->id . '-' . time();
@@ -29,7 +29,7 @@ class OrderService
             'price' => $package->price,
             "package_id" => $package->id,
             "pay_type" => $payType,
-            'data' => $data
+            'trade_no' => $trade_no
         ]);
 
         //删除无效订单

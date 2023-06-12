@@ -5,17 +5,14 @@ const tab = ref('subscribe')
 const { getSubscribeInfo } = useSubscribe()
 const subscribe = await getSubscribeInfo()
 const userStore = useUserStore()
-const { refreshSecret } = useUser()
+const { refreshSecret } = useSoftSecret()
 </script>
 
 <template>
   <main>
     <el-tabs v-model="tab" type="card" tab-position="top">
-      <el-tab-pane label="会员周期" name="subscribe" class="opacity-90">
-        <section class="text-gray-600 border p-5 rounded-md mb-3 bg-gray-100">
-          <div>
-            你的UID是: <span class="">{{ userStore.user?.id }}</span>
-          </div>
+      <el-tab-pane label="会员周期" name="subscribe" class="opacity-90 text-sm">
+        <section class="text-gray-600 border p-3 rounded-md mb-3 bg-gray-100">
           <div v-if="subscribe.end_time" class="flex items-center">
             <section v-if="dayjs(subscribe.end_time).diff(dayjs(), 'year') > 20">
               你是<span class="text-green-600 font-bold mx-2">永久钻石</span> 帐号，可以无限期观看网站所有视频
@@ -31,10 +28,6 @@ const { refreshSecret } = useUser()
               订阅会员 / 学习网站所有课程
             </el-button>
           </div>
-        </section>
-        <section class="text-gray-600 border p-5 rounded-md bg-slate-100 flex items-center">
-          软件密钥 : {{ userStore.user?.secret }}
-          <el-button type="primary" plain size="small" @click="refreshSecret" class="ml-3">刷新密钥</el-button>
         </section>
       </el-tab-pane>
     </el-tabs>

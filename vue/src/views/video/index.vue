@@ -15,7 +15,7 @@ findAll(route.query.page || 1)
       </template>
 
       <section v-if="collection" class="!-my-5">
-        <VideoItem v-for="video of collection.data" :key="video.id" :video="video">
+        <VideoItem v-for="video of collection.data" :key="video.id" :video="video" :showTime="true">
           <template #title="props">
             {{ props.video.title.replace(/\d+\s*/, '') }}
           </template>

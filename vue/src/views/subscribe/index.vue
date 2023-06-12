@@ -4,7 +4,7 @@ await getAll()
 </script>
 
 <template>
-  <main class="!-mt-0 !w-full !p-0">
+  <main class="!-mt-0 !w-full !p-0" v-if="collection.length">
     <main class="justify-center -mt-1">
       <div class="bg h-[400px] xl:h-[500px] lg:py-10 box-content shadow-2xl flex flex-col">
         <h1 class="text-center p-10 xl:mt-10 text-4xl md:text-6xl lg:text-8xl font-semibold text-white">
@@ -13,13 +13,13 @@ await getAll()
         <h2 class="text-center text-white opacity-80 font-light text-base md:text-xl lg:text-2xl">
           订阅后可以观看所有教程，并支持高清版下载学习 <br />
         </h2>
-        <div class="text-base font-thin text-center text-white opacity-70 mt-2 font-sans">
+        <!-- <div class="text-base font-thin text-center text-white opacity-70 mt-2 font-sans">
           提供一年
           <router-link :to="{ name: 'soft.index' }" class="text-white hover:text-yellow-300 font-normal">
             教程案例
           </router-link>
           的下载学习使用
-        </div>
+        </div> -->
       </div>
       <section class="flex flex-col md:flex-row justify-center gap-5 -mt-52 px-3">
         <PackageItem

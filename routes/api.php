@@ -10,8 +10,6 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FavourController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PackageController;
-use App\Http\Controllers\SecretController;
-use App\Http\Controllers\SoftTokenController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WechatBindController;
@@ -32,12 +30,6 @@ Route::controller(AuthController::class)->prefix('auth')->group(function () {
     Route::post('logout', 'logout');
     Route::post('forgot-password', 'forgotPassword');
 });
-
-//软件密钥验证
-Route::post('softToken/check/{softName}', [SoftTokenController::class, 'check']);
-Route::post('softToken/{softName}', [SoftTokenController::class, 'getSoftToken']);
-// Route::post('secret/get', [SecretController::class, 'get']);
-
 
 //发送验证码
 Route::controller(CodeController::class)->prefix('code')->group(function () {
@@ -120,3 +112,4 @@ Route::controller(WepayController::class)->prefix("wepay")->group(function () {
 
 include "edu.php";
 include "soft.php";
+include "hdcms.php";

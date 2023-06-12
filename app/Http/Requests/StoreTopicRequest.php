@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Tag;
+// use App\Models\Tag;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -17,12 +17,25 @@ class StoreTopicRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'between:5,100'],
-            'content' => ['required', 'min:10'],
-            'tags' => ['sometimes', 'array', function ($attribute, array $value, $fail) {
-                return collect($value)->every(fn ($id) => Tag::whereId($id)->exists())
-                    ? true : $fail('标签设置错误');
-            }]
+            'title' => ['required', 'between:4,100'],
+            // 'content' => ['required', 'min:10'],
+            'filename' => [function ($attribute, $value, $fail) {
+                $file = request()->input('filename');
+                if ($file && !is_file(base_path("markdown/{$file}"))) {
+                    $fail('文件不存在');
+                }
+            }],
+            'content' => [function ($attribute, $value, $fail) {
+                if (!request()->input('filename')) {
+                    if (mb_strlen($value, 'utf-8') < 20) {
+                        $fail('内容不能小于20个字');
+                    }
+                }
+            }],
+            // 'tags' => ['sometimes', 'array', function ($attribute, array $value, $fail) {
+            //     return collect($value)->every(fn ($id) => Tag::whereId($id)->exists())
+            //         ? true : $fail('标签设置错误');
+            // }]
         ];
     }
 

@@ -18,8 +18,6 @@ class UpdatePackageRequest extends FormRequest
             'ad' => ['required'],
             'price' => ['required'],
             'icon' => ['required'],
-            'text_color' => ['required'],
-            'bg_color' => ['required'],
             'original_price' => ['required'],
             'months' => ['required'],
         ];

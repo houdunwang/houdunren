@@ -16,6 +16,7 @@ use App\Http\Controllers\SystemController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\WechatMenuController;
+use Illuminate\Support\Facades\Route;
 
 
 //贴子

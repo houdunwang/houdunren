@@ -133,6 +133,12 @@ class User extends Authenticatable
     }
 
     //软件密钥
+    public function softSecret()
+    {
+        return $this->hasOne(SoftSecret::class);
+    }
+
+    //软件验证令牌
     public function softTokens()
     {
         return $this->hasMany(SoftToken::class);

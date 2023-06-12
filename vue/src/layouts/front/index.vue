@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-import { ElMessage, ElMessageBox } from 'element-plus'
-import TopMenu from './topMenu.vue'
 import router from '@/plugins/router'
+import { ElMessage } from 'element-plus'
+import TopMenu from './topMenu.vue'
 const { user } = useUserStore()
 const { isLogin } = useAuth()
-if (isLogin() && !user?.mobile) {
-  ElMessage.success('请绑定手机号')
+const isBind = user?.mobile || user?.email
+if (isLogin() && !isBind) {
+  ElMessage.success('请绑定邮箱或手机号')
   router.push({ name: 'member.bind' })
 }
 </script>

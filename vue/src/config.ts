@@ -33,6 +33,10 @@ export default {
         routeName: 'member.subscribe',
         title: '订阅信息',
       },
+      //   {
+      //     routeName: 'member.secret',
+      //     title: '软件密钥',
+      //   },
     ],
   },
   user: {

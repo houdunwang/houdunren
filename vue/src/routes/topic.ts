@@ -8,13 +8,13 @@ export default [
       {
         path: 'create',
         name: 'topic.create',
-        component: () => import('@/views/topic/create.vue'),
+        component: () => import('@/views/topic/form.vue'),
         meta: { auth: true, title: '发表贴子', mobile: true },
       },
       {
         path: 'edit/:id',
         name: 'topic.edit',
-        component: () => import('@/views/topic/edit.vue'),
+        component: () => import('@/views/topic/form.vue'),
         meta: { auth: true, title: '编辑贴子' },
       },
       {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSoftTokenRequest;
 use App\Http\Requests\UpdateSoftTokenRequest;
 use App\Models\Soft;
+use App\Models\SoftSecret;
 use App\Models\SoftToken;
 use App\Models\User;
 use Auth;
@@ -13,7 +14,7 @@ class SoftTokenController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except([]);
+        // $this->middleware('auth:sanctum')->except(['getSoftToken']);
     }
 
     //获取软件令牌TOKEN
@@ -21,11 +22,10 @@ class SoftTokenController extends Controller
     {
         $soft = Soft::whereName($softName)->first();
         if (!$soft) return $this->respondNotFound('软件已下架');
-
-        $user = User::whereSecret(request('secret', '@@@'))->first();
-        if (!$user) return $this->respondUnAuthenticated('帐号不存在');
-
-        if (!$user->isSubscribe) return $this->respondForbidden('你没有订阅');
+        $softSecret = SoftSecret::whereSecret(request('secret', '@@@'))->first();
+        if (!$softSecret) return $this->respondUnAuthenticated('密钥无效');
+        $user = $softSecret->user;
+        if (!$user->isSubscribe) return $this->respondForbidden('你不是订阅用户');
 
         //每次登录重置TOKEN，软件同时只能一个人使用
         $user->softTokens()->where('soft_id', $soft->id)->delete();
@@ -45,8 +45,8 @@ class SoftTokenController extends Controller
     {
         $soft = Soft::whereName($softName)->first();
         if (!$soft) return $this->respondNotFound('软件已下架');
-        $softToken  = SoftToken::where('soft_id', $soft->id)->whereToken(request('token'))->first();
-        if (!$softToken) return $this->respondForbidden("令牌无效或其他用户正在使用该软件");
+        $softToken  = SoftToken::whereSoftId($soft->id)->whereToken(request('token'))->first();
+        if (!$softToken) return $this->respondForbidden("令牌无效或软件被其他用户使用");
 
         if (!$softToken->user->isSubscribe) return $this->respondForbidden('订阅已经失效');
 

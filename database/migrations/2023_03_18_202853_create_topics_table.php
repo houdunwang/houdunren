@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId("user_id")->constrained('users')->onDelete('cascade');
             $table->string('title');
             $table->text('content');
+            $table->text('filename')->nullable()->comment('文件名，在项目根目录markdown目录');
             $table->unsignedInteger('favour_count')->default(0)->comment('点赞数');
             $table->unsignedInteger('favorite_count')->default(0)->comment('收藏数');
             $table->boolean('recommend')->default(false)->comment('推荐');
