@@ -8,12 +8,23 @@ use Illuminate\Auth\Access\Response;
 
 class SoftSecretPolicy
 {
+    public function before(User $user)
+    {
+        if (!$user->isSubscribe) return false;
+        if ($user->softSecret &&  $user->softSecret->end_time < now()) return false;
+    }
+
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function getSoftSecret(User $user): bool
     {
-        //
+        return true;
+    }
+
+    public function refresh(User $user): bool
+    {
+        return true;
     }
 
     /**

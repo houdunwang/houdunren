@@ -2,24 +2,28 @@
 
 namespace App\Services;
 
-use App\Models\Order;
 use App\Models\User;
 use App\Models\Subscribe;
 
 //订阅服务
 class SubscribeService
 {
-    public function addMonthsByOrder(Order $order): void
+    /**
+     * 设置订阅资料
+     *
+     * @param User $user
+     * @param integer $months
+     */
+    public function addSubscribe(User $user, int $months): Subscribe
     {
-        $subscribe = $order->user->subscribe;
-        $end_time = now()->addMonths($order->package->months);
-        if ($subscribe) {
-            $end_time = $subscribe->end_time->addMonths($order->package->months);
-        }
+        $end_time = $user->subscribe ?
+            $user->subscribe->end_time->addMonths($months) :
+            now()->addMonths($months);
 
         Subscribe::updateOrCreate(
-            ['user_id' => $order->user_id],
+            ['user_id' => $user->id],
             ['end_time' => $end_time]
         );
+        return $user->refresh()->subscribe;
     }
 }

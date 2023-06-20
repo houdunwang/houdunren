@@ -2,65 +2,22 @@
 
 namespace App\Policies;
 
-use App\Models\SoftToken;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
 class SoftTokenPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
+    public function before(User $user)
     {
-        //
+        // if (!$user->isSubscribe) return false;
+        // if ($user->softSecret &&  $user->softSecret->end_time < now()) return false;
     }
 
     /**
-     * Determine whether the user can view the model.
+     * 获取软件令牌
      */
-    public function view(User $user, SoftToken $softToken): bool
+    public function getSoftToken(User $user): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, SoftToken $softToken): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, SoftToken $softToken): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, SoftToken $softToken): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, SoftToken $softToken): bool
-    {
-        //
+        return true;
     }
 }

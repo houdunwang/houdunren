@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Package;
+use App\Models\SoftSecret;
 use App\Models\Topic;
 use App\Models\User;
 use Auth;
@@ -24,7 +25,10 @@ class DatabaseSeeder extends Seeder
         Topic::factory(300)->create();
         Package::factory(2)->create();
         $this->call([
-            // ConfigSeeder::class
+            SubscribeSeeder::class,
+            SoftSeeder::class,
+            SoftSecretSeeder::class,
+            SoftTokenSeeder::class
         ]);
     }
 }

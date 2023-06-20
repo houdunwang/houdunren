@@ -17,7 +17,11 @@ class SoftFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "title" => $this->faker->word(),
+            "name" => $this->faker->word(),
+            "description" => $this->faker->sentence(),
+            "preview" => $this->faker->imageUrl("300x300"),
+            "content" => $this->faker->paragraph()
         ];
     }
 }

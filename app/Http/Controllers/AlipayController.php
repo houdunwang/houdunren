@@ -55,7 +55,7 @@ class AlipayController extends Controller
         $order = app(OrderService::class)->completeOrder($result->out_trade_no, $result->trade_no);
 
         if ($order) {
-            app(SubscribeService::class)->addMonthsByOrder($order);
+            app(SubscribeService::class)->addSubscribe($order->user, $order->package->months);
         }
     }
 }

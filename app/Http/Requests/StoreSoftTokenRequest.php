@@ -11,7 +11,7 @@ class StoreSoftTokenRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreSoftTokenRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "app" => ["required", function ($attribute, $value, $fail) {
+            }],
+            "secret" => ["required"]
         ];
     }
 }

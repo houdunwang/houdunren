@@ -18,8 +18,6 @@ const { config } = useConfigStore()
       <icon-info theme="filled" size="15" />
       <div v-html="config.base.notice"></div>
     </div>
-    <!-- <el-alert :title="config?.base.notice" type="warning" show-icon :closable="false" class="!mb-3" /> -->
-
     <main class="lg:grid lg:grid-cols-12 grid-flow-row gap-3 items-start">
       <section class="lg:col-span-9">
         <HdCard>

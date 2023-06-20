@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSoftSecretRequest;
-use App\Http\Requests\UpdateSoftSecretRequest;
 use App\Models\SoftSecret;
-use App\Services\SoftService;
+use App\Services\SoftSecretService;
 use Auth;
+use Exception;
+use Illuminate\Http\Request;
 
 class SoftSecretController extends Controller
 {
@@ -15,10 +15,19 @@ class SoftSecretController extends Controller
         $this->middleware("auth:sanctum");
     }
 
+    //获取软件密钥
+    public function getSoftSecret(Request $request)
+    {
+        $this->authorize('getSoftSecret', SoftSecret::class);
+        $secret = app(SoftSecretService::class)->getSoftSecret(Auth::user());
+        return $this->respondWithSuccess($secret);
+    }
+
     //刷新软件密钥
     public function refresh()
     {
-        app(SoftService::class)->refreshSecret(Auth::user(), true);
-        return $this->respondOk('软件密钥刷新成功');
+        $this->authorize('refresh', SoftSecret::class);
+        $secret = app(SoftSecretService::class)->refreshSecret(Auth::user());
+        return $this->respondWithSuccess($secret);
     }
 }

@@ -59,7 +59,7 @@ class WepayController extends Controller
         if ($ciphertext['trade_state'] == 'SUCCESS') {
             $order = app(OrderService::class)->completeOrder($ciphertext['out_trade_no'], $ciphertext['transaction_id']);
             if ($order) {
-                app(SubscribeService::class)->addMonthsByOrder($order);
+                app(SubscribeService::class)->addSubscribe($order->user, $order->package->months);
             }
             return $pay->success();
         }

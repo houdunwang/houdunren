@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->comment('软件名称');
             $table->char('name', 30)->comment('软件别名');
+            $table->char('version', 10)->default('1.0.1')->comment('版本号');
             $table->string('description')->comment('软件简介');
             $table->string('preview')->comment('封面截图');
             $table->string('tags')->nullable()->comment('软件标签');

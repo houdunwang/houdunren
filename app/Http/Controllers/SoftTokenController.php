@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSoftTokenRequest;
-use App\Http\Requests\UpdateSoftTokenRequest;
 use App\Models\Soft;
 use App\Models\SoftSecret;
 use App\Models\SoftToken;
-use App\Models\User;
-use Auth;
+use App\Rules\checkSoftSecret;
+use App\Services\SoftTokenService;
+use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * 软件使用TOKEN
+ */
 class SoftTokenController extends Controller
 {
     public function __construct()
@@ -18,38 +22,25 @@ class SoftTokenController extends Controller
     }
 
     //获取软件令牌TOKEN
-    public function getSoftToken(string $softName)
+    public function getSoftToken(Request $request)
     {
-        $soft = Soft::whereName($softName)->first();
-        if (!$soft) return $this->respondNotFound('软件已下架');
-        $softSecret = SoftSecret::whereSecret(request('secret', '@@@'))->first();
-        if (!$softSecret) return $this->respondUnAuthenticated('密钥无效');
-        $user = $softSecret->user;
-        if (!$user->isSubscribe) return $this->respondForbidden('你不是订阅用户');
-
-        //每次登录重置TOKEN，软件同时只能一个人使用
-        $user->softTokens()->where('soft_id', $soft->id)->delete();
-
-        //生成软件授权令牌
-        $token = md5($user->id . now());
-        $user->softTokens()->create([
-            'token' => $token,
-            'soft_id' => $soft->id
+        $request->validate([
+            "secret" => ['required', "exists:soft_secrets,secret", new checkSoftSecret()],
+            'app' => ['required', 'exists:softs,name'],
         ]);
-
-        return $this->respondWithSuccess(["token" => $token]);
+        $token = app(SoftTokenService::class)->getSoftToken(request('secret'), request("app"));
+        return $this->respondWithSuccess($token);
     }
 
     //校对令牌
-    public function check(string $softName)
+    public function checkSoftToken(Request $request)
     {
-        $soft = Soft::whereName($softName)->first();
-        if (!$soft) return $this->respondNotFound('软件已下架');
-        $softToken  = SoftToken::whereSoftId($soft->id)->whereToken(request('token'))->first();
-        if (!$softToken) return $this->respondForbidden("令牌无效或软件被其他用户使用");
+        $request->validate([
+            "secret" => ['required', "exists:soft_secrets,secret", new checkSoftSecret()],
+            'token' => ['required', 'exists:soft_tokens,token'],
+            'app' => ['required', 'exists:softs,name'],
+        ]);
 
-        if (!$softToken->user->isSubscribe) return $this->respondForbidden('订阅已经失效');
-
-        return $this->respondOk('令牌TOKEN正确');
+        return $this->respondOk('令牌正确');
     }
 }

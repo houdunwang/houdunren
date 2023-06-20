@@ -2,19 +2,19 @@
 
 namespace Database\Seeders;
 
-use App\Models\Soft;
+use App\Models\SoftSecret;
+use App\Models\Subscribe;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class SoftSeeder extends Seeder
+class SubscribeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $softs = Soft::factory(4)->create();
-        $softs[0]->name = 'camera';
-        $softs[0]->save();
+        Subscribe::create(['user_id' => 1, 'end_time' => now()->addDay(3)]);
     }
 }

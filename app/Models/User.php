@@ -105,6 +105,7 @@ class User extends Authenticatable
         return $this->subscribe && $this->subscribe->end_time > now();
     }
 
+    //签到信息
     public function signs()
     {
         return $this->hasMany(Sign::class);

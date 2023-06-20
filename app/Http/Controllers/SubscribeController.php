@@ -45,7 +45,7 @@ class SubscribeController extends Controller
         // if ($user->isSubscribe) abort(403, '已是订阅用户');
         $package = Package::findOrFail($request->package_id);
         $order = app(OrderService::class)->create(config('app.name'), $package, 'douyin', $request->trade_no, $user);
-        app(SubscribeService::class)->addMonthsByOrder($order);
+        app(SubscribeService::class)->addSubscribe($order->user, $order->package->months);
 
         return $this->respondOk('添加成功');
     }

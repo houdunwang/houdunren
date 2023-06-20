@@ -4,6 +4,13 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
+if (!function_exists('user')) {
+    function user()
+    {
+        return Auth::user();
+    }
+}
+
 if (!function_exists('isAdministrator')) {
     function isAdministrator()
     {

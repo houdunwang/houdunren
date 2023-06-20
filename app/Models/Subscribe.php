@@ -15,9 +15,4 @@ class Subscribe extends Model
     protected $fillable = ['end_time', 'user_id'];
 
     protected $casts = ['end_time' => 'datetime', 'pay_state' => 'boolean'];
-
-    // protected function serializeDate(DateTimeInterface $date)
-    // {
-    //     return $date->format('Y-m-d h:i:s');
-    // }
 }

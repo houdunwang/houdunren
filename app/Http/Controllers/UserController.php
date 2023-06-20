@@ -18,9 +18,8 @@ use App\Models\User;
 use App\Models\VideoPlayHistory;
 use App\Rules\CodeRule;
 use App\Rules\PhoneRule;
-use App\Services\SoftService;
+use App\Services\SoftSecretService;
 use Auth;
-use DB;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -38,7 +37,7 @@ class UserController extends Controller
     {
         $user = Auth::user()->makeVisible(['address', 'mobile', 'real_name', 'openid', 'unionid', 'secret'])->load('subscribe');
         //软件密钥
-        app(SoftService::class)->refreshSecret($user);
+        app(SoftSecretService::class)->refreshSecret($user);
 
         $user->isSubscribe = $user->isSubscribe;
 

@@ -58,4 +58,3 @@ const url = computed(() => {
     </div>
   </main>
 </template>
-<style lang="scss" scoped></style>

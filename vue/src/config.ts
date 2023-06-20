@@ -33,10 +33,10 @@ export default {
         routeName: 'member.subscribe',
         title: '订阅信息',
       },
-      //   {
-      //     routeName: 'member.secret',
-      //     title: '软件密钥',
-      //   },
+      {
+        routeName: 'member.secret',
+        title: '软件密钥',
+      },
     ],
   },
   user: {
@@ -90,11 +90,12 @@ export default {
       title: '早起少年',
       route: { name: 'morning' },
     },
-    // {
-    //   title: '大叔作品',
-    //   route: { name: 'soft.index' },
-    //   icon: ApplicationOne,
-    // },
+    {
+      title: '大叔作品',
+      route: { name: 'soft.index' },
+      //   url: 'https://www.hdcms.com',
+      icon: ApplicationOne,
+    },
     {
       title: '感谢陪伴',
       route: { name: 'shot.comment' },

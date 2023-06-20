@@ -12,9 +12,9 @@ await getAll()
       <!-- <p class="text-gray-500 mt-5 text-xl xl:text-xl font-extralight">抖音与B站搜索【后盾人】晚八点直播</p> -->
       <p class="text-gray-500 mt-5 font-extralight flex justify-center flex-col items-center">
         <div class="font-extralight text-lg">
-            软件是视频教程的案例，
+            <!-- 软件是视频教程的案例， -->
         <router-link :to="{ name: 'subscribe' }" class="font-extrabold text-green-600">订阅用户(不限类型)</router-link>
-        <span class="font-bold">一年内</span>免费用于学习使用
+        <span class="font-bold">一年内</span>免费使用,用于编程学习使用
         </div>
         <div class="text-sm bg-slate-500 opacity-50 mt-2 text-white px-3 py-1 rounded-md">由于操作系统五花八门，所以不保证能够正常运行</div>
       </p>

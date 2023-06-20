@@ -13,7 +13,7 @@ const emit = defineEmits<{
 <template>
   <section
     class="border border-gray-200 bg-white group rounded-lg overflow-hidden duration-500 hover:border-indigo-200">
-    <router-link :to="{ name: 'system.show', params: { id: item.id } }">
+    <router-link :to="{ name: 'system.show', params: { id: item.id } }" class="block overflow-hidden aspect-video">
       <el-image
         :src="item.preview"
         fit="cover"
