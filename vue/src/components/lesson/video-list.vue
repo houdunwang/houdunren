@@ -28,7 +28,11 @@ if (isLogin()) {
       </template>
       <template #default>
         <section class="!-my-5">
-          <router-link :to="{ name: 'video.show', params: { id: v.id } }" v-for="v of videos" :key="v.id">
+          <router-link
+            :to="{ name: 'video.show', params: { id: v.id } }"
+            v-for="v of videos"
+            :key="v.id"
+            target="_blank">
             <div class="flex py-3 border-b text-base hover:text-[#3b907f] cursor-pointer items-baseline opacity-95">
               <div class="flex items-center mr-2">
                 <icon-play theme="outline" class="mr-2" />

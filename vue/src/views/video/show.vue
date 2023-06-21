@@ -17,8 +17,8 @@ await findOne(route.params.id)
   <main v-if="user?.isSubscribe && model" class="!w-full !p-0 !-mt-0">
     <div class="bg-[#313848] -mt-1 relative" v-if="model.path_cdn">
       <div class="2xl:w-page mx-auto xl:w-[1300px] relative group">
-        <HdVideoPlayer :url="model.path_cdn" />
-        <!-- <HdVideoPlayer url="/assets/houdunren.mp4" /> -->
+        <!-- <HdVideoPlayer :url="model.path_cdn" /> -->
+        <HdVideoPlayer url="/assets/houdunren.mp4" />
         <icon-arrow-circle-left
           theme="filled"
           size="50"

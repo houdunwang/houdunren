@@ -10,9 +10,9 @@ await getSoftSecret()
   <main>
     <el-tabs v-model="tab" type="card" tab-position="top">
       <el-tab-pane label="软件密钥" name="subscribe" class="opacity-90 text-sm">
-        <div class="bg-slate-400 px-2 py-1 mb-2 text-white rounded-sm text-sm">
-          订阅用户<span>(与订阅时长无关)</span> <span class="font-bold">免费赠送一年</span>用于编程学习使用
-          <div>由于操作系统五花八门，且软件是免费赠送，所以不保证能够正常运行</div>
+        <div class="bg-gray-200 px-2 py-2 mb-2 text-gray-700 rounded-md text-xs opacity-60">
+          订阅用户(与订阅时长无关)免费赠送一年用于编程学习使用 <br />
+          由于操作系统五花八门，且软件是免费赠送，所以不保证能够正常运行
         </div>
         <section class="text-gray-600 border p-3 rounded-md bg-slate-100 flex flex-col items-start">
           <div class="">

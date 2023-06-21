@@ -24,6 +24,7 @@ onMounted(() => {
     mini: false,
     airplay: true,
     playsinline: true,
+    volume: storage.get('video_volume'),
     defaultPlaybackRate: storage.get('playbackrateChange', 1),
   })
 
@@ -31,6 +32,11 @@ onMounted(() => {
   player.value.on(Events.RATE_CHANGE, function (v: any) {
     const rate = player.value?.playbackRate
     storage.set('playbackrateChange', rate)
+  })
+
+  //声音大小缓存
+  player.value.on(Events.VOLUME_CHANGE, function (v: any) {
+    storage.set('video_volume', v.volume)
   })
 })
 defineExpose({

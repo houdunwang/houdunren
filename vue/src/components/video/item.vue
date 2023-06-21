@@ -9,6 +9,7 @@ const { video, showTime = true } = defineProps<{ video: VideoModel; showTime?: b
     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
       <router-link
         :to="{ name: 'video.show', params: { id: video.id } }"
+        target="_blank"
         class="flex items-center text-base cursor-pointer hover:text-[#16a085]">
         <icon-play theme="outline" class="mr-2 text-[#16a085] hidden md:block" />
         <div class="opacity-90 flex justify-between items-center">
@@ -27,15 +28,6 @@ const { video, showTime = true } = defineProps<{ video: VideoModel; showTime?: b
           @click="open({ name: 'lesson.show', params: { id: video.lesson_id } }, '_blank')">
           {{ video.lesson.title }}
         </div>
-        <!-- <el-tag
-          type="info"
-          size="small"
-          round
-          effect="plain"
-          @click="$router.push({ name: 'lesson.show', params: { id: video.lesson_id } })"
-          class="cursor-pointer">
-          {{ video.lesson.title }}
-        </el-tag> -->
       </section>
     </div>
   </div>

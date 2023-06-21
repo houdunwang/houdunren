@@ -12,6 +12,7 @@ const { item } = defineProps<{
     <div class="flex flex-col overflow-hidden">
       <router-link
         :to="{ name: 'topic.show', params: { id: item.id } }"
+        target="_blank"
         class="font-bold flex items-top gap-2 mb-1 opacity-95">
         <el-tag type="danger" size="small" effect="plain" v-if="item.recommend">推荐</el-tag>
         <div class="truncate">
