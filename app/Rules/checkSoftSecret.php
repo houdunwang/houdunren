@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use App\Models\SoftSecret;
+use App\Services\SoftSecretService;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
@@ -15,8 +16,7 @@ class checkSoftSecret implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $softSecret = SoftSecret::whereSecret($value)->first();
-        if (!$softSecret || $softSecret->end_time < now()) {
+        if (!app(SoftSecretService::class)->checkSoftSecret($value)) {
             $fail('密钥已经过期');
         }
     }

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\softToken;
 
+use App\Services\SoftTokenService;
 use App\Services\SubscribeService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -20,18 +21,32 @@ class checkTokenTest extends TestCase
     }
 
     /**
+     * 令牌验证通过
+     * @test
+     */
+    public function tokenAuthentication()
+    {
+        $response = $this->postJson('/api/softToken/getToken', [
+            'secret' => user()->softSecret->secret,
+            "app" => 'camera'
+        ]);
+        $response = $this->postJson('/api/softToken/checkToken', [
+            "token" => $response['token']
+        ]);
+        $response->assertOk();
+    }
+
+    /**
      * 密钥过期时
      * @test
      */
     public function secretExpires()
     {
-        user()->softSecret()->update(['end_time' => now()->subYear(1)]);
+        user()->softSecret()->update(['end_time' => now()->subYears(10)]);
         $response = $this->postJson('/api/softToken/checkToken', [
-            "secret" => user()->softSecret->secret,
-            "app" => 'camera',
             "token" => 'abc'
         ]);
-        $response->assertInvalid(['secret']);
+        $response->assertInvalid(['token']);
     }
 
     /**
@@ -45,18 +60,5 @@ class checkTokenTest extends TestCase
             "token" => 'abc'
         ]);
         $response->assertInvalid(['token']);
-    }
-
-    /**
-     * 软件不存在时
-     * @test
-     */
-    public function softwareDoesntExist()
-    {
-        $response = $this->postJson('/api/softToken/checkToken', [
-            "app" => 'abc',
-            "token" => 'abc'
-        ]);
-        $response->assertInvalid(['app']);
     }
 }

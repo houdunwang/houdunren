@@ -92,18 +92,18 @@ export default class Axios {
             useErrorStore().setErrors(error.response.data.errors ?? error.response.data)
             break
           case HttpStatus.FORBIDDEN:
-            ElMessage({ type: 'error', message: message ?? '没有操作权限' })
+            ElMessage({ type: 'error', message: message ?? '没有操作权限', grouping: true })
             break
           case HttpStatus.NOT_FOUND:
             ElMessage.error('请求资源不存在')
             router.push({ name: RouteName.HOME })
             break
           case HttpStatus.TOO_MANY_REQUESTS:
-            ElMessage({ type: 'error', message: '请求过于频繁，请稍候再试' })
+            ElMessage({ type: 'error', message: '请求过于频繁，请稍候再试', grouping: true })
             break
           default:
             if (message) {
-              ElMessage({ type: 'error', message: message ?? '服务器错误' })
+              ElMessage({ type: 'error', message: message ?? '服务器错误', grouping: true })
             }
         }
         return Promise.reject(error)

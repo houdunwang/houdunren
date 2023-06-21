@@ -22,9 +22,8 @@ class OrderService
     public function create(string $subject, Package $package, string $payType, string $trade_no = null, User $user = null)
     {
         $user = $user ?? Auth::user();
-        $sn = "U" . $user->id . '-' . time();
         $order = $user->orders()->create([
-            'sn' => $sn,
+            'sn' => $this->sn($user),
             'subject' => $subject,
             'price' => $package->price,
             "package_id" => $package->id,
@@ -35,6 +34,12 @@ class OrderService
         //删除无效订单
         Order::where('created_at', '<', now()->subDays(1))->where('pay_state', 0)->delete();
         return $order;
+    }
+
+    //商家订单号
+    public function sn(User $user)
+    {
+        return "U" . $user->id . '-' . time();
     }
 
     /**
@@ -51,7 +56,6 @@ class OrderService
         $order->pay_state = true;
         $order->trade_no = $trade_no;
         $order->save();
-
         return $order;
     }
 }

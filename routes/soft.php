@@ -11,6 +11,6 @@ Route::apiResource('soft', SoftController::class);
 Route::get('softSecret', [SoftSecretController::class, 'getSoftSecret']);
 Route::get('softSecret/refresh', [SoftSecretController::class, 'refresh']);
 
-//软件密钥验证
+//软件令牌
 Route::post('softToken/checkToken', [SoftTokenController::class, 'checkSoftToken']);
 Route::post('softToken/getToken', [SoftTokenController::class, 'getSoftToken']);

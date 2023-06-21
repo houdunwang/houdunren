@@ -36,12 +36,10 @@ class UserController extends Controller
     public function current()
     {
         $user = Auth::user()->makeVisible(['address', 'mobile', 'real_name', 'openid', 'unionid', 'secret'])->load('subscribe');
-        //软件密钥
-        app(SoftSecretService::class)->refreshSecret($user);
 
         $user->isSubscribe = $user->isSubscribe;
 
-        return $this->respondWithSuccess(new UserResource($user->load('softSecret')));
+        return $this->respondWithSuccess(new UserResource($user));
     }
 
 

@@ -18,12 +18,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        Package::factory(2)->create();
+        User::factory(10)->hasOrders()->create();
         Auth::login(User::find(1));
         User::find(1)->update(['name' => 'admin', 'nickname' => '向军大叔', "mobile" => 19999999999]);
         User::find(2)->update(['name' => 'houdunren', 'nickname' => '后盾人', "mobile" => 18888888888]);
         Topic::factory(300)->create();
-        Package::factory(2)->create();
         $this->call([
             SubscribeSeeder::class,
             SoftSeeder::class,

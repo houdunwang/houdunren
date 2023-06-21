@@ -13,6 +13,7 @@ class Order extends Model
 
     protected $casts = [
         'data' => 'array',
+        'pay_state' => 'boolean'
     ];
 
     public function user()

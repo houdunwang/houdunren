@@ -33,7 +33,7 @@ class refreshSecretTest extends TestCase
     public function thereIsNoSubscriptionCannotRefreshKey()
     {
         user()->subscribe()->delete();
-        $response = $this->get('/api/softSecret/refresh');
+        $response = $this->getJson('/api/softSecret/refresh');
         $response->assertStatus(403);
     }
 
@@ -43,8 +43,8 @@ class refreshSecretTest extends TestCase
      */
     public function subscriptionExpiresCannotRefreshKey()
     {
-        user()->subscribe()->update(['end_time' => now()->subYear(1)]);
-        $response = $this->get('/api/softSecret/refresh');
+        user()->subscribe()->update(['end_time' => now()->subYears(10)]);
+        $response = $this->getJson('/api/softSecret/refresh');
         $response->assertStatus(403);
     }
 }

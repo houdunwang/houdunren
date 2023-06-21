@@ -4,39 +4,30 @@ namespace App\Services;
 
 use App\Models\SoftSecret;
 use App\Models\User;
-use Auth;
-use Houdunwang\Wechat\User as WechatUser;
-use Http;
-use Log;
 
 //软件服务
 class SoftSecretService
 {
-    //获取密钥
-    public function getSoftSecret(User $user)
+    //创建或更新软件密钥
+    public function createOrUpdateSoftSecret(User $user)
     {
-        $user->softSecret()->firstOrCreate(
+        if (!$user->isSubscribe) abort(403, "你不是订阅用户或订阅已经到期");
+
+        $user->softSecret()->delete();
+        $user->softSecret()->updateOrCreate(
             ["user_id" => $user->id],
             [
-                "secret" => $this->secretString($user),
-                "end_time" => now()->addYear()
+                "secret" => md5($user->id . now()) . mt_rand(1, 9999),
+                "end_time" => $user->subscribe->updated_at->addYear(1)
             ]
         );
         return $user->refresh()->softSecret;
     }
 
-    //刷新密钥
-    public function refreshSecret(User $user)
+    //验证密钥到期时间
+    public function checkSoftSecret(string $secret)
     {
-        $this->getSoftSecret($user);
-        $user->softSecret()->update([
-            "secret" => $this->secretString($user),
-        ]);
-        return $user->refresh()->softSecret;
-    }
-
-    protected function secretString(User $user)
-    {
-        return md5($user->id . now()) . mt_rand(1, 9999);
+        $softSecret = SoftSecret::whereSecret($secret)->with('user')->first();
+        return $softSecret &&  $softSecret->user->isSubscribe && $softSecret->end_time >= now();
     }
 }
