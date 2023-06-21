@@ -28,7 +28,6 @@ class DatabaseSeeder extends Seeder
             SubscribeSeeder::class,
             SoftSeeder::class,
             SoftSecretSeeder::class,
-            SoftTokenSeeder::class
         ]);
     }
 }

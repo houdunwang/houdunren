@@ -2,32 +2,51 @@
 
 namespace App\Services;
 
+use App\Models\Order;
 use App\Models\SoftSecret;
 use App\Models\User;
 
 //软件服务
 class SoftSecretService
 {
-    //创建或更新软件密钥
-    public function createOrUpdateSoftSecret(User $user)
+    /**
+     * 创建软件密钥
+     *
+     * @param Order $order
+     */
+    public function addSoftSecret(Order $order)
     {
-        if (!$user->isSubscribe) abort(403, "你不是订阅用户或订阅已经到期");
-
-        $user->softSecret()->delete();
-        $user->softSecret()->updateOrCreate(
-            ["user_id" => $user->id],
+        $order->user->softSecret()->updateOrCreate(
+            ["user_id" => $order->user->id],
             [
-                "secret" => md5($user->id . now()) . mt_rand(1, 9999),
-                "end_time" => $user->subscribe->updated_at->addYear(1)
+                "secret" => md5($order->user->id . now()) . mt_rand(1, 9999),
+                "end_time" => $order->created_at->addYear(1)
             ]
         );
+        return $order->user->refresh()->softSecret;
+    }
+
+    /**
+     * 刷新软件密钥
+     *
+     * @param User $user
+     */
+    public function refreshSoftSecret(User $user)
+    {
+        $user->softSecret->update([
+            "secret" => md5($user->id . now()) . mt_rand(1, 9999),
+        ]);
         return $user->refresh()->softSecret;
     }
 
-    //验证密钥到期时间
+    /**
+     * 验证软件密钥
+     *
+     * @param string $secret
+     */
     public function checkSoftSecret(string $secret)
     {
         $softSecret = SoftSecret::whereSecret($secret)->with('user')->first();
-        return $softSecret &&  $softSecret->user->isSubscribe && $softSecret->end_time >= now();
+        return $softSecret && $softSecret->user->isSubscribe && $softSecret->end_time >= now();
     }
 }

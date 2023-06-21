@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Services\OrderService;
+use App\Services\SoftSecretService;
 use App\Services\SubscribeService;
 use Illuminate\Http\Request;
 use Yansongda\Pay\Pay;
@@ -56,6 +57,7 @@ class AlipayController extends Controller
 
         if ($order) {
             app(SubscribeService::class)->addSubscribe($order->user, $order->package->months);
+            app(SoftSecretService::class)->addSoftSecret($order);
         }
     }
 }

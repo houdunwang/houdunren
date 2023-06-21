@@ -19,16 +19,31 @@ class SoftSecretController extends Controller
     //获取软件密钥
     public function getSoftSecret(Request $request)
     {
-        if (user()->softSecret)
-            return $this->respondWithSuccess(user()->softSecret);
-        else
-            return $this->respondError("密钥不存在");
+        $secret = user()->softSecret;
+        return $secret ?
+            $this->respondWithSuccess($secret) :
+            $this->respondError("密钥不存在");
     }
 
     //刷新软件密钥
     public function refresh()
     {
-        $secret = app(SoftSecretService::class)->createOrUpdateSoftSecret(Auth::user());
+        if (!user()->softSecret) return $this->respondNotFound("你没有软件密钥");
+        $secret = app(SoftSecretService::class)->refreshSoftSecret(Auth::user());
         return $this->respondWithSuccess($secret);
+    }
+
+    /**
+     * 验证软件密钥
+     * @param Request $request
+     */
+    public function checkSoftSecret(Request $request)
+    {
+        $request->validate([
+            "secret" => ['required', "exists:soft_secrets,secret"]
+        ]);
+
+        $state = app(SoftSecretService::class)->checkSoftSecret($request->secret);
+        return $state ? $this->respondOk("密钥验证通过") : $this->respondForbidden("密钥错误");
     }
 }

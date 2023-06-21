@@ -5,6 +5,7 @@ const { user } = defineProps<{ user: UserModel }>()
 <template>
   <router-link
     :to="{ name: 'sign.space', query: { uid: user.id } }"
+    target="_blank"
     class="flex items-center overflow-hidden group rounded-md">
     <el-image
       :src="user.avatar"

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TopMenu from '../front/topMenu.vue'
-import memberNavbar from './memberNavbar.vue'
 import config from '@/config'
 const { user } = useUserStore()
 const active = ref('')
