@@ -44,19 +44,25 @@ class AuthController extends Controller
                     $fail('密码输入错误');
                 }
             }],
-            'captcha' => [app()->isLocal() ? 'nullable' : 'required', 'captcha_api:' . request('captcha_key') . ',math']
+            'captcha' => [app()->isProduction() ?  'required' : 'nullable', 'captcha_api:' . request('captcha_key') . ',math']
         ], ['captcha.captcha_api' => '验证码输入错误'])->validate();
 
         // $user->tokens()->delete();
         return $this->respondWithSuccess(['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
     }
 
+    /**
+     * 用户名注册
+     *
+     * @param Request $request
+     * @param User $user
+     */
     public function register(Request $request, User $user)
     {
         Validator::make($request->input(), [
             'account' => ['required', Rule::unique('users', 'name'), 'regex:/^\w+$/i'],
             'password' => ['required', 'confirmed'],
-            'captcha' => ['required', 'captcha_api:' . request('captcha_key') . ',math']
+            'captcha' => [app()->isProduction() ? 'required' : 'nullable', 'captcha_api:' . request('captcha_key') . ',math']
         ], [
             'account.require' => '帐号不能为空',
             'account.regex' => '用户名由字母、数字、下划线组成',
