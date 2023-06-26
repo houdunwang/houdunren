@@ -12,7 +12,8 @@ await getSoftSecret()
       <el-tab-pane label="软件密钥" name="subscribe" class="opacity-90 text-sm">
         <div class="bg-gray-200 px-2 py-2 mb-2 text-gray-700 rounded-md text-xs opacity-60">
           订阅用户(与订阅时长无关)免费赠送一年用于编程学习使用 <br />
-          由于操作系统五花八门，且软件是免费赠送，所以不保证能够正常运行
+          由于操作系统五花八门，且软件是免费赠送，所以不保证能够正常运行 <br />
+          因为是免费赠送学习使用，网站保留调整或关闭软件的权力
         </div>
         <section class="text-gray-600 border p-3 rounded-md bg-slate-100 flex flex-col items-start">
           <div class="">

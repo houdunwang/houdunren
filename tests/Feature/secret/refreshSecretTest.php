@@ -3,6 +3,7 @@
 namespace Tests\Feature\secret;
 
 use App\Services\SubscribeService;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -16,13 +17,35 @@ class refreshSecretTest extends TestCase
     }
 
     /**
-     * 刷新生成新密钥
+     * 有密钥时刷新密钥值
      * @test
      */
-    public function generateNewKeyRefresh(): void
+    public function aKeyRefreshKeyValues(): void
     {
-        $initResponse = $this->get('/api/softSecret');
-        $refreshResponse = $this->get('/api/softSecret/refresh');
-        $this->assertFalse($initResponse->json('secret')  == $refreshResponse['secret']);
+        $response = $this->get('/api/softSecret/refresh');
+        $response->assertJson(['secret' => true]);
+    }
+
+    /**
+     * 没有密钥时刷新密钥
+     * @test
+     */
+    public function thereIsNoKeyRefreshKey()
+    {
+        user()->softSecret()->delete();
+        $response = $this->get('/api/softSecret/refresh');
+        $response->assertJson(['secret' => true]);
+        $this->assertTrue(Carbon::parse($response['created_at'])->year == now()->year);
+    }
+
+    /**
+     * 没有订阅不能刷新密钥、
+     * @test
+     */
+    public function noSubscriptionCannotRefreshKey()
+    {
+        user()->subscribe()->delete();
+        $response = $this->getJson('/api/softSecret/refresh');
+        $response->assertStatus(403);
     }
 }

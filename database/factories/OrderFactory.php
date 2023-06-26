@@ -30,7 +30,6 @@ class OrderFactory extends Factory
             'subject' => config('app.name'),
             'price' => 375,
             'pay_state' => true,
-            "user_id" => User::inRandomOrder()->value('id')
         ];
     }
 }

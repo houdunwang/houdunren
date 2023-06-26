@@ -28,15 +28,17 @@ class SoftSecretService
 
     /**
      * 刷新软件密钥
-     *
-     * @param User $user
      */
-    public function refreshSoftSecret(User $user)
+    public function refreshSoftSecret()
     {
-        $user->softSecret->update([
-            "secret" => md5($user->id . now()) . mt_rand(1, 9999),
+        if (!user()->softSecret) {
+            $order = user()->orders()->where('pay_state', true)->orderBy('id', 'desc')->first();
+            return $this->addSoftSecret($order);
+        }
+        user()->softSecret()->update([
+            "secret" => md5(user()->id . now()) . mt_rand(1, 9999),
         ]);
-        return $user->refresh()->softSecret;
+        return user()->refresh()->softSecret;
     }
 
     /**

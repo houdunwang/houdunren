@@ -10,11 +10,11 @@ class SoftSecretPolicy
 {
     public function before(User $user)
     {
-        if ($user->softSecret &&  $user->softSecret->end_time < now()) return false;
+        // if ($user->softSecret &&  $user->softSecret->end_time < now()) return false;
     }
 
     public function refresh(User $user): bool
     {
-        // if (!$user->isSubscribe) return false;
+        return $user->isSubscribe;
     }
 }

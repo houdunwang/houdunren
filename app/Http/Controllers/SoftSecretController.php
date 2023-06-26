@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SoftSecret;
+use App\Rules\CheckSoftSecret;
 use App\Services\SoftSecretService;
 use Auth;
 use Closure;
@@ -28,7 +29,7 @@ class SoftSecretController extends Controller
     //刷新软件密钥
     public function refresh()
     {
-        if (!user()->softSecret) return $this->respondNotFound("你没有软件密钥");
+        $this->authorize('refresh', SoftSecret::class);
         $secret = app(SoftSecretService::class)->refreshSoftSecret(Auth::user());
         return $this->respondWithSuccess($secret);
     }
@@ -40,10 +41,9 @@ class SoftSecretController extends Controller
     public function checkSoftSecret(Request $request)
     {
         $request->validate([
-            "secret" => ['required', "exists:soft_secrets,secret"]
-        ]);
+            "secret" => ['required', "exists:soft_secrets,secret", new CheckSoftSecret()]
+        ], ['secret.required' => '密钥不能为空', 'secret.exists' => '密钥错误']);
 
-        $state = app(SoftSecretService::class)->checkSoftSecret($request->secret);
-        return $state ? $this->respondOk("密钥验证通过") : $this->respondForbidden("密钥错误");
+        return $this->respondOk('密钥正确');
     }
 }
