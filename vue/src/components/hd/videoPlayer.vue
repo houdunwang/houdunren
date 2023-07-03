@@ -1,20 +1,25 @@
 <script setup lang="ts">
+import router from '@/plugins/router'
+import _ from 'lodash'
 import Player, { Events } from 'xgplayer'
 import 'xgplayer/dist/index.min.css'
 const storage = useStorage()
-const { url, urlList } = defineProps<{
-  url: string
-  urlList?: string[]
+const props = defineProps<{
+  video: VideoModel
+  videos: VideoModel[]
 }>()
 
 const player = ref<Player>()
-// const emit = defineEmits(['playNextVideo'])
 //视频列表，不包括当前视频
-// const urls = urlList ? urlList.splice(urlList.findIndex((u) => url == u) + 1) : undefined
-onMounted(() => {
+
+const initPlayer = () => {
+  const videoList = _.cloneDeep(props.videos).splice(props.videos.findIndex((v) => v.id == props.video.id) + 1)
   player.value = new Player({
     id: 'mse',
-    url,
+    url: props.video.path_cdn,
+    playNext: {
+      urlList: videoList.map((v) => v.path_cdn),
+    },
     autoplay: true,
     lang: 'zh-cn',
     fluid: true,
@@ -38,9 +43,17 @@ onMounted(() => {
   player.value.on(Events.VOLUME_CHANGE, function (v: any) {
     storage.set('video_volume', v.volume)
   })
+
+  player.value.on(Events.PLAYNEXT, function (index: any) {
+    router.push({ name: 'video.show', params: { id: videoList[index - 1].id } })
+  })
+}
+onMounted(() => {
+  initPlayer()
 })
-defineExpose({
-  player,
+
+onUnmounted(() => {
+  player.value?.destroy()
 })
 </script>
 

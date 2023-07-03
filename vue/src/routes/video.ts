@@ -21,7 +21,7 @@ export default [
         path: ':id',
         name: 'video.show',
         component: () => import('@/views/video/show.vue'),
-        meta: { auth: true },
+        meta: { auth: true, keeyAlive: false },
       },
     ],
   },

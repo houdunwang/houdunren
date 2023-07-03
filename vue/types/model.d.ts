@@ -224,6 +224,9 @@ interface SoftModel {
   id: number
   title: string
   name: string
+  free: boolean
+  lesson: string
+  version: string
   preview: string
   file: string
   content: string

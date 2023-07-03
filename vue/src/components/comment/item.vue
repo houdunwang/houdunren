@@ -50,8 +50,6 @@ const del = async (e: MouseEvent) => {
 
 <template>
   <section class="mb-3 overflow-hidden" :id="`comment${comment.id}`">
-    <!-- <ImagePreview /> -->
-
     <div class="flex items-center justify-between py-3 px-5 bg-white border border-gray-100 border-l border-r">
       <div class="flex gap-2">
         <UserAvatar :user="comment.user" class="w-9 h-9" />

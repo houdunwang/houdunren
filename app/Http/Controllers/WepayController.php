@@ -61,7 +61,7 @@ class WepayController extends Controller
             $order = app(OrderService::class)->completeOrder($ciphertext['out_trade_no'], $ciphertext['transaction_id']);
             if ($order) {
                 app(SubscribeService::class)->addSubscribe($order->user, $order->package->months);
-                app(SoftSecretService::class)->addSoftSecret($order);
+                // app(SoftSecretService::class)->addSoftSecret($order);
             }
             return $pay->success();
         }

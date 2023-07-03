@@ -2,7 +2,7 @@
 const route = useRoute()
 const { open } = useUtil()
 const { find, model } = useSoft()
-const { authorize } = useAuth()
+const { authorize, isAdministrator } = useAuth()
 await find(+route.params.id)
 const tabName = ref(route.query.commentId ? 'comment' : 'content')
 </script>
@@ -11,24 +11,51 @@ const tabName = ref(route.query.commentId ? 'comment' : 'content')
   <main v-if="model">
     <section class="bg-white p-5 mb-5 rounded-lg">
       <h1 class="flex justify-between items-center text-lg font-bold">
-        {{ model.title }}
+        <div class="flex items-center gap-2">
+          <span class="opacity-90 font-bold text-lg">{{ model.title }}</span>
+          <el-tag type="success" size="small" effect="plain">version: {{ model.version }}</el-tag>
+        </div>
+
         <div class="flex items-center">
           <el-button type="primary" size="small" @click="open(model.download, '_blank')" v-if="model.download">
             下载软件
           </el-button>
-          <el-button
-            type="success"
-            plain
-            size="small"
-            v-if="authorize()"
-            @click="open({ name: 'soft.edit', params: { id: model.id } }, '_blank')">
-            编辑
+          <el-button type="success" size="small" @click="open({ name: 'member.secret' }, '_blank')" v-if="!model.free">
+            查看密钥
           </el-button>
+          <el-button
+            type="primary"
+            color="#16a085"
+            size="small"
+            @click="open(model.lesson, '_blank')"
+            v-if="model.lesson">
+            开发教程
+          </el-button>
+          <el-button
+            type="danger"
+            size="small"
+            @click="
+              open(
+                'https://doc.houdunren.com/%E5%90%8E%E7%9B%BE%E4%BA%BA%E8%BD%AF%E4%BB%B6/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98.html',
+                '_blank',
+              )
+            "
+            >常见问题</el-button
+          >
+
           <el-button type="primary" plain size="small" @click="open(model.github, '_blank')" v-if="model.github">
             GitHub
           </el-button>
           <el-button type="warning" plain size="small" @click="open(model.gitee, '_blank')" v-if="model.gitee">
             码云
+          </el-button>
+          <el-button
+            type="success"
+            plain
+            size="small"
+            v-if="isAdministrator()"
+            @click="open({ name: 'soft.edit', params: { id: model.id } }, '_blank')">
+            编辑
           </el-button>
         </div>
       </h1>

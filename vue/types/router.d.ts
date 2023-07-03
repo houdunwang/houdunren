@@ -13,6 +13,7 @@ declare module 'vue-router' {
   interface RouteMeta {
     menu?: RouteMenu
     noPrefix?: boolean
+    keeyAlive?: boolean
     title?: string
     auth?: boolean
     admin?: boolean

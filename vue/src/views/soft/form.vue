@@ -18,6 +18,18 @@ if (route.params.id) {
         <el-input v-model="model.name"></el-input>
         <HdError name="name" />
       </el-form-item>
+      <el-form-item label="版本号">
+        <el-input v-model="model.version"></el-input>
+        <HdError name="version" />
+      </el-form-item>
+      <el-form-item label="开发教程">
+        <el-input v-model="model.lesson"></el-input>
+        <HdError name="version" />
+      </el-form-item>
+      <el-form-item label="免费">
+        <el-checkbox v-model="model.free" :label="true">是</el-checkbox>
+        <HdError name="free" />
+      </el-form-item>
       <el-form-item label="简短介绍">
         <el-input v-model="model.description" type="textarea"></el-input>
         <HdError name="description" />
@@ -33,7 +45,9 @@ if (route.params.id) {
         </div>
       </el-form-item>
       <el-form-item label="详细说明">
-        <HdMarkdownEditor v-model="model.content" :height="400" />
+        <div class="w-full">
+          <HdMarkdownEditor v-model="model.content" :height="400" />
+        </div>
         <HdError name="content" />
       </el-form-item>
       <el-form-item label="github">

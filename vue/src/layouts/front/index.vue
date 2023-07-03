@@ -18,7 +18,7 @@ if (isLogin() && !isBind) {
       <template v-if="Component">
         <KeepAlive>
           <Suspense>
-            <component :is="Component" :key="route.fullPath" class="w-full 2xl:w-page mx-auto px-3 mt-5 relative" />
+            <component :is="Component" class="w-full 2xl:w-page mx-auto px-3 mt-5 relative" />
           </Suspense>
         </KeepAlive>
       </template>

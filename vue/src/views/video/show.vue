@@ -2,8 +2,8 @@
 import useVideo from '@/composables/useVideo'
 import router from '@/plugins/router'
 import { ElMessage } from 'element-plus'
+import { RouteLocationNormalized } from 'vue-router'
 const { user } = useUserStore()
-const { open } = useUtil()
 const route = useRoute()
 const { findOne, model, nextVideo, preVideo } = useVideo()
 if (!user?.isSubscribe) {
@@ -11,20 +11,23 @@ if (!user?.isSubscribe) {
   router.push({ name: 'subscribe' })
 }
 await findOne(route.params.id)
+
+onActivated(() => findOne(route.params.id))
+onBeforeRouteUpdate((to: RouteLocationNormalized) => findOne(to.params.id))
 </script>
 
 <template>
-  <main v-if="user?.isSubscribe && model" class="!w-full !p-0 !-mt-0">
+  <main v-if="user?.isSubscribe && model" class="!w-full !p-0 !-mt-0" :key="model.id">
     <div class="bg-[#313848] -mt-1 relative" v-if="model.path_cdn">
       <div class="2xl:w-page mx-auto xl:w-[1300px] relative group">
-        <HdVideoPlayer :url="model.path_cdn" />
-        <!-- <HdVideoPlayer url="/assets/houdunren.mp4" /> -->
+        <HdVideoPlayer :video="model" :videos="model.lesson.videos" />
+        <!-- <HdVideoPlayer url="/assets/houdunren.mp4" :videos="model.lesson.videos" /> -->
         <icon-arrow-circle-left
           theme="filled"
           size="50"
           fill="#e17055"
           class="absolute left-5 top-1/2 -translate-y-1/2 hidden xl:group-hover:block"
-          @click="preVideo ? open({ name: 'video.show', params: { id: preVideo?.id } }) : null"
+          @click="preVideo ? findOne(preVideo?.id) : null"
           :class="
             preVideo
               ? 'cursor-pointer duration-200 hover:scale-125 opacity-70 hover:opacity-90'
@@ -35,7 +38,7 @@ await findOne(route.params.id)
           size="50"
           fill="#e17055"
           class="absolute right-5 top-1/2 -translate-y-1/2 hidden xl:group-hover:block"
-          @click="nextVideo ? open({ name: 'video.show', params: { id: nextVideo?.id } }) : null"
+          @click="nextVideo ? findOne(nextVideo?.id) : null"
           :class="
             nextVideo
               ? 'cursor-pointer duration-200 hover:scale-125 opacity-70 hover:opacity-90'
@@ -80,14 +83,14 @@ await findOne(route.params.id)
             <Favorite model="Video" :id="model.id" size="small" />
           </div>
 
-          <div class="flex gap-2">
+          <!-- <div class="flex gap-2">
             <div @click="open({ name: 'video.show', params: { id: preVideo?.id } })" v-if="preVideo">
               <el-button :type="preVideo ? 'success' : 'info'" size="small"> 上一集 </el-button>
             </div>
             <div @click="open({ name: 'video.show', params: { id: nextVideo?.id } })" v-if="nextVideo">
               <el-button :type="nextVideo ? 'success' : 'info'" size="small"> 下一集 </el-button>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

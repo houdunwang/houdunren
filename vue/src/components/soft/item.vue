@@ -17,13 +17,14 @@ const emit = defineEmits<{
   <main
     class="border cursor-pointer group hover:shadow-sm shadow-inner duration-300 flex flex-col bg-white rounded-xl overflow-hidden">
     <router-link :to="{ name: 'soft.show', params: { id: soft.id } }">
-      <div class="overflow-hidden">
+      <div class="overflow-hidden relative">
         <img
           :src="soft.preview"
           :alt="soft.title"
           class="hover:scale-110 duration-300 w-full aspect-video object-cover" />
+        <el-tag type="success" size="small" effect="dark" v-if="soft.free" class="absolute top-2 right-1">Free</el-tag>
       </div>
-      <h2 class="px-4 mt-5 mb-3 truncate font-bold opacity-80 group-hover:text-indigo-600">{{ soft.title }}</h2>
+      <h2 class="px-4 mt-5 mb-2 truncate font-bold opacity-80 group-hover:text-indigo-600">{{ soft.title }}</h2>
       <div class="px-2 line-clamp-2 text-sm text-gray-700 opacity-80 flex-grow mx-2 mb-2">
         {{ soft.description }}
       </div>

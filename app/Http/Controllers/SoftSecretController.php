@@ -44,6 +44,6 @@ class SoftSecretController extends Controller
             "secret" => ['required', "exists:soft_secrets,secret", new CheckSoftSecret()]
         ], ['secret.required' => '密钥不能为空', 'secret.exists' => '密钥错误']);
 
-        return $this->respondOk('密钥正确');
+        return $this->respondWithSuccess(SoftSecret::whereSecret(request('secret'))->first());
     }
 }

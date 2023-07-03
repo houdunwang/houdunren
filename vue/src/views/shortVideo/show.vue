@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const route = useRoute()
 const { find, model } = useShortVideo()
-console.log(route.params.id)
 await find(+route.params.id)
 </script>
 
@@ -9,7 +8,7 @@ await find(+route.params.id)
   <main v-if="model" class="!w-full !p-0 !-mt-0">
     <div class="bg-[#313848] -mt-1 relative">
       <div class="2xl:w-page mx-auto xl:w-[1300px] relative group">
-        <HdVideoPlayer :url="model.path" ref="videoPlayer" />
+        <HdVideoPlayer :video="model" :videos="[]" ref="videoPlayer" />
       </div>
     </div>
     <section class="2xl:w-page 2xl:mx-auto pt-3">

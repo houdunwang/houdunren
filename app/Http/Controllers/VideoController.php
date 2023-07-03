@@ -58,7 +58,10 @@ class VideoController extends Controller
             //权限判断
             $video = $video->load(['lesson.videos', 'lesson.system.lessons']);
             if (isSubscribe()) {
-                // $video->lesson->videos->each(fn ($video) => $video->makeVisible('path'));
+                $video->lesson->videos->each(function ($video) {
+                    $video->makeVisible('path');
+                    $video['path_cdn'] = app(AliyunService::class)->videoCdnUrl($video->path);
+                });
                 $video->makeVisible(['path']);
                 $video['path_cdn'] = app(AliyunService::class)->videoCdnUrl($video->path);
             }
