@@ -101,10 +101,11 @@ export default class Axios {
           case HttpStatus.TOO_MANY_REQUESTS:
             ElMessage({ type: 'error', message: '请求过于频繁，请稍候再试', grouping: true })
             break
+          case HttpStatus.PAYLOAD_TOO_LARGE:
+            ElMessage({ type: 'error', message: '文件过大', grouping: true })
+            break
           default:
-            if (message) {
-              ElMessage({ type: 'error', message: message ?? '服务器错误', grouping: true })
-            }
+            ElMessage({ type: 'error', message: message ?? '服务器错误', grouping: true })
         }
         return Promise.reject(error)
       },

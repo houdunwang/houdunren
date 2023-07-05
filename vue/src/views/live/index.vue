@@ -5,7 +5,7 @@
     <template #header>
       <h2 class="flex flex-col md:flex-row justify-between items-center">
         直播平台
-        <router-link to="/" class="text-gray-800 opacity-80 font-light"> 每晚八点直播，欢迎朋友们的到来 </router-link>
+        <router-link to="/" class="text-gray-800 opacity-80 font-light"> 晚上八点直播，欢迎朋友们的到来 </router-link>
       </h2>
     </template>
     <template #default>

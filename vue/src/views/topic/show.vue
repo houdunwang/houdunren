@@ -3,6 +3,7 @@ import { useTitle } from '@vueuse/core'
 import dayjs from 'dayjs'
 
 const { isAdministrator } = useUser()
+const { isLogin } = useAuth()
 const { user } = useUserStore()
 const { params } = useRoute()
 const router = useRouter()
@@ -59,7 +60,7 @@ useTitle(model.value?.title)
       </section>
 
       <section class="flex justify-center">
-        <Favour model="Topic" :id="model.id" size="large" />
+        <Favour model="Topic" :id="model.id" size="large" v-if="isLogin()" />
       </section>
     </section>
 

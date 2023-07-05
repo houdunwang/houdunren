@@ -9,6 +9,7 @@ export default [
         path: '',
         name: 'shortvideo.index',
         component: () => import('@/views/shortVideo/index.vue'),
+        meta: { keeyAlive: true },
       },
       {
         path: ':id',

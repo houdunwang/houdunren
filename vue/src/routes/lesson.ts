@@ -9,7 +9,7 @@ export default [
         path: '',
         name: 'lesson',
         component: () => import('@/views/lesson/index.vue'),
-        meta: { title: '课程列表' },
+        meta: { title: '课程列表', keeyAlive: true },
       },
       {
         path: ':id',

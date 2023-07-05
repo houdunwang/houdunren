@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import useQuestion from '@/composables/useQuestion'
 import useUtil from '@/composables/hd/useUtil'
-import QuestionAvatar from './components/question-avatar.vue'
+import useQuestion from '@/composables/useQuestion'
 import Layout from './layout.vue'
 
 const util = useUtil()

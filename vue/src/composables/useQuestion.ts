@@ -109,9 +109,9 @@ export default () => {
   }
 
   //所有考题
-  const getAllQuestion = async () => {
+  const getAllQuestion = async (page: any) => {
     collection.value = await http.request<ApiPage<QuestionModel>>({
-      url: `question?page=${util.routeQuery('page', 1)}`,
+      url: `question?page=${page}`,
     })
   }
 

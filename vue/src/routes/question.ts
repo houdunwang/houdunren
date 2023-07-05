@@ -32,11 +32,13 @@ export default [
         path: 'all_question',
         name: 'question.all_question',
         component: () => import('@/views/question/all_question.vue'),
+        meta: { keeyAlive: true },
       },
       {
         path: 'examine',
         name: 'question.examine',
         component: () => import('@/views/question/examine.vue'),
+        meta: { keeyAlive: true },
       },
       {
         path: 'helper',
@@ -47,7 +49,7 @@ export default [
         path: 'my',
         name: 'question.my',
         component: () => import('@/views/question/my-question.vue'),
-        meta: { auth: true },
+        meta: { auth: true, keeyAlive: true },
       },
       //答题
       {

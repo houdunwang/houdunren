@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onBeforeRouteLeave } from 'vue-router'
-const { request } = useUtil()
+const { request, scrollTo } = useUtil()
 const { isLogin } = useAuth()
 const { collection, findAll, add } = useComment()
 const { model, id } = defineProps<{
@@ -16,7 +16,8 @@ const onSubmit = request(async () => {
   const comment = await add(model, id, form)
   collection.value!.push(comment)
   nextTick(() => {
-    document.querySelector(`#comment${comment.id}`)?.scrollIntoView({ block: 'start', behavior: 'smooth' })
+    scrollTo(document.querySelector(`#comment${comment.id}`) as HTMLDivElement)
+
     form.content = ''
     form.key++
   })
@@ -24,7 +25,7 @@ const onSubmit = request(async () => {
 
 //滚动到评论框
 const scrollToEditor = () => {
-  ;(document.querySelector('#editor') as HTMLDivElement)?.scrollIntoView({ block: 'start', behavior: 'smooth' })
+  scrollTo(document.querySelector('#editor') as HTMLDivElement)
 }
 
 //离开时将评价图标隐藏

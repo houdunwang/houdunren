@@ -26,7 +26,7 @@ const url = computed(() => {
   <main class="py-5 border-b flex items-center gap-3" v-if="item.user">
     <UserAvatar :user="item.user" />
     <div class="flex flex-col gap-1 justify-between overflow-hidden">
-      <a :href="url" class="font-bold opacity-95 truncate">
+      <a :href="url" class="font-bold opacity-95 truncate" target="_blank">
         {{ item.description }}
       </a>
       <div class="text-sm flex items-center gap-2 font-light">

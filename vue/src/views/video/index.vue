@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const { findAll, collection } = useVideo()
-findAll(route.query.page || 1)
+await findAll(route.query.page || 1)
 </script>
 
 <template>

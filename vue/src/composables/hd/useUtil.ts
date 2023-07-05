@@ -77,6 +77,11 @@ export default () => {
     return new URL(url, import.meta.url).href
   }
 
+  //滚去到元素
+  const scrollTo = (el: HTMLElement) => {
+    document.documentElement.scrollTo({ top: el.offsetTop, behavior: 'smooth' })
+  }
+
   return {
     routeQuery,
     open,
@@ -85,5 +90,6 @@ export default () => {
     routeParams,
     routeLeaveConfirm,
     publicImage,
+    scrollTo,
   }
 }

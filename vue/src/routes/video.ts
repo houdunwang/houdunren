@@ -9,7 +9,7 @@ export default [
         path: '',
         name: 'video',
         component: () => import('@/views/video/index.vue'),
-        meta: { title: '最近更新' },
+        meta: { title: '最近更新', keeyAlive: true },
       },
       {
         path: 'search',

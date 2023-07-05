@@ -15,13 +15,14 @@ if (isLogin() && !isBind) {
     <TopMenu />
     <VideoLearnHistory />
     <RouterView v-slot="{ Component, route }">
-      <template v-if="Component">
-        <KeepAlive>
-          <Suspense>
-            <component :is="Component" class="w-full 2xl:w-page mx-auto px-3 mt-5 relative" />
-          </Suspense>
-        </KeepAlive>
-      </template>
+      <KeepAlive v-if="route.meta.keeyAlive">
+        <Suspense>
+          <component :is="Component" class="w-full 2xl:w-page mx-auto px-3 mt-5 relative" :key="route.fullPath" />
+        </Suspense>
+      </KeepAlive>
+      <Suspense v-else>
+        <component :is="Component" class="w-full 2xl:w-page mx-auto px-3 mt-5 relative" />
+      </Suspense>
     </RouterView>
     <Footer class="mt-32" />
     <FooterMenu />

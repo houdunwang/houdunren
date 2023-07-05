@@ -18,7 +18,7 @@ const initPlayer = () => {
     id: 'mse',
     url: props.video.path_cdn,
     playNext: {
-      urlList: videoList.map((v) => v.path_cdn),
+      urlList: videoList.map((v) => v.path),
     },
     autoplay: true,
     lang: 'zh-cn',

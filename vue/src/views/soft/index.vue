@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { getAll, collection } = useSoft()
-const {open} = useUtil()
+const { open } = useUtil()
 await getAll()
 </script>
 
@@ -9,18 +9,33 @@ await getAll()
     <div class="flex flex-col justify-center items-center mt-16 px-5">
       <img src="/images/xj.jpg" alt="hdcms" class="rounded-full object-cover w-48 h-48 shadow-inner" />
       <h1 class="text-5xl xl:text-8xl font-extrabold mt-6 text-transparent bg-clip-text">向军大叔作品</h1>
-      <!-- <p class="text-gray-500 mt-5 text-xl xl:text-xl font-extralight">抖音与B站搜索【后盾人】晚八点直播</p> -->
+      <!-- <p class="text-gray-500 mt-5 text-xl xl:text-xl font-extralight">抖音或B站搜索【后盾人】向军大叔晚八点直播</p> -->
       <p class="text-gray-500 mt-5 font-extralight flex justify-center flex-col items-center">
-        <div class="font-extralight text-lg">
-        <router-link :to="{ name: 'subscribe' }" class="font-extrabold text-green-600">订阅用户(与订阅时长无关)</router-link>
-        <span class="font-bold">免费赠送一年</span>用于编程学习使用
+        <div class="font-extralight text-lg flex flex-col items-center">
+          <div class="font-mono font-medium">
+              <router-link :to="{ name: 'subscribe' }" class=" text-green-600">订阅用户(与订阅时长无关)</router-link>
+              <span >免费赠送一年</span>用于编程学习使用
+          </div>
+          <span class="font-light text-base mt-1 text-gray-800 font-mono">其他用户也可以下载使用，除有些功能提供给订阅用户外</span>
         </div>
-        <!-- <div class="text-sm bg-slate-500 opacity-50 mt-2 text-white px-3 py-1 rounded-md">由于操作系统五花八门，且软件是免费赠送，所以不保证能够正常运行</div> -->
       </p>
       <div class="">
-      <el-button type="primary" size="default" class="mt-3" @click="open('https://doc.houdunren.com/%E5%90%8E%E7%9B%BE%E4%BA%BA%E8%BD%AF%E4%BB%B6/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98.html','_blank')">常见问题</el-button>
-      <el-button type="success" size="default" class="mt-3" @click="open({name:'member.secret'},'_blank')">查看密钥</el-button>
-    </div>
+        <el-button
+          type="primary"
+          size="default"
+          class="mt-3"
+          @click="
+            open(
+              'https://doc.houdunren.com/%E5%90%8E%E7%9B%BE%E4%BA%BA%E8%BD%AF%E4%BB%B6/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98.html',
+              '_blank',
+            )
+          "
+          >常见问题</el-button
+        >
+        <el-button type="success" size="default" class="mt-3" @click="open({ name: 'member.secret' }, '_blank')"
+          >查看密钥</el-button
+        >
+      </div>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-20">
       <SoftItem :soft="soft" v-for="soft of collection" :show-button="false" />

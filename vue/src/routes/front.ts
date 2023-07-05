@@ -10,7 +10,7 @@ export default [
         path: '',
         name: 'home',
         component: () => import('@/views/front/home.vue'),
-        meta: { title: '后盾人 人人做后盾' },
+        meta: { title: '后盾人 人人做后盾', keeyAlive: true },
       },
     ],
   },

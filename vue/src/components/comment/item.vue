@@ -3,8 +3,8 @@ import useUtil from '@/composables/hd/useUtil'
 import dayjs from 'dayjs'
 import { ElMessage, ElMessageBox } from 'element-plus'
 const route = useRoute()
-const { request } = useUtil()
-const { authorize } = useAuth()
+const { request, scrollTo } = useUtil()
+const { authorize, isLogin } = useAuth()
 const { add, remove } = useComment()
 const { collection, comment, model, mid } = defineProps<{
   model: string
@@ -27,7 +27,7 @@ const onSubmit = request(async () => {
   form.content = ''
   //滚动到新评论
   nextTick(() => {
-    document.querySelector(`#comment${comment.id}`)?.scrollIntoView({ block: 'start', behavior: 'smooth' })
+    scrollTo(document.querySelector(`#comment${comment.id}`) as HTMLDivElement)
   })
 })
 
@@ -35,8 +35,7 @@ const onSubmit = request(async () => {
 nextTick(() => {
   const id = +route.query.commentId!
   if (id == comment.id) {
-    const el = document.querySelector(`#comment${id}`) as HTMLDivElement
-    el.scrollIntoView({ block: 'start', behavior: 'smooth' })
+    scrollTo(document.querySelector(`#comment${id}`) as HTMLDivElement)
   }
 })
 
@@ -69,7 +68,11 @@ const del = async (e: MouseEvent) => {
             <div class="flex items-center gap-1">
               <icon-time theme="outline" /> {{ dayjs(comment.created_at).fromNow() }}
             </div>
-            <a href="javascript:void(0)" class="flex items-center gap-1 cursor-pointer" @click="showInput = !showInput">
+            <a
+              href="javascript:void(0)"
+              class="flex items-center gap-1 cursor-pointer"
+              @click="showInput = !showInput"
+              v-if="isLogin()">
               <icon-share-two theme="outline" /> 回复 #{{ comment.id }}
             </a>
           </div>

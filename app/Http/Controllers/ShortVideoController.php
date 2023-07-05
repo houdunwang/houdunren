@@ -31,7 +31,7 @@ class ShortVideoController extends Controller
     public function show(ShortVideo $shortVideo)
     {
         $shortVideo->makeVisible(['path']);
-        $shortVideo->path = app(AliyunService::class)->videoCdnUrl($shortVideo->path);
+        $shortVideo->path_cdn = app(AliyunService::class)->videoCdnUrl($shortVideo->path);
         return new ShortVideoResource($shortVideo);
     }
 

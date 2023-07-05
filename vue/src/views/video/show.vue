@@ -3,6 +3,7 @@ import useVideo from '@/composables/useVideo'
 import router from '@/plugins/router'
 import { ElMessage } from 'element-plus'
 import { RouteLocationNormalized } from 'vue-router'
+const { open } = useUtil()
 const { user } = useUserStore()
 const route = useRoute()
 const { findOne, model, nextVideo, preVideo } = useVideo()
@@ -83,20 +84,26 @@ onBeforeRouteUpdate((to: RouteLocationNormalized) => findOne(to.params.id))
             <Favorite model="Video" :id="model.id" size="small" />
           </div>
 
-          <!-- <div class="flex gap-2">
+          <div class="flex gap-2">
             <div @click="open({ name: 'video.show', params: { id: preVideo?.id } })" v-if="preVideo">
               <el-button :type="preVideo ? 'success' : 'info'" size="small"> 上一集 </el-button>
             </div>
             <div @click="open({ name: 'video.show', params: { id: nextVideo?.id } })" v-if="nextVideo">
               <el-button :type="nextVideo ? 'success' : 'info'" size="small"> 下一集 </el-button>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>
 
     <section class="2xl:w-page 2xl:mx-auto pt-3 lg:grid grid-flow-row items-start lg:grid-cols-12 gap-2 mx-2">
-      <LessonVideoList :lessonId="model.lesson_id" :videos="model.lesson.videos" class="lg:col-span-4 md:m-0" />
+      <LessonVideoList
+        :lessonId="model.lesson_id"
+        :videos="model.lesson.videos"
+        class="lg:col-span-4 md:m-0"
+        :showLastVideo="false"
+        target="_self"
+        :currentVideo="model" />
       <CommentList model="Video" :id="model.id" class="lg:col-span-8 rounded-xl lg:m-0 mt-3" />
     </section>
   </main>

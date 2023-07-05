@@ -2,8 +2,6 @@
 const route = useRoute()
 const { collection, findAll } = useTopic()
 await findAll(route.query.page || 1)
-
-onActivated(async () => await findAll(route.query.page || 1))
 </script>
 
 <template>

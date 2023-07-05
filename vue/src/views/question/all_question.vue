@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import useQuestion from '@/composables/useQuestion'
 import Layout from './layout.vue'
-
+const route = useRoute()
 const { collection, getAllQuestion } = useQuestion()
-await getAllQuestion()
+await getAllQuestion(route.query.page || 1)
 </script>
 
 <template>

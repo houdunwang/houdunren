@@ -1,13 +1,8 @@
 <script setup lang="ts">
-import lesson from '@/routes/lesson'
 const { findAll, collection } = useLesson()
 const storage = useStorage()
 const route = useRoute()
 await findAll(route.query.page)
-
-onActivated(async () => {
-  await findAll(route.query.page)
-})
 const lessonShowType = ref<'image' | 'color'>(storage.get('lesson_show_type', 'color'))
 watch(lessonShowType, (type) => {
   storage.set('lesson_show_type', type)
