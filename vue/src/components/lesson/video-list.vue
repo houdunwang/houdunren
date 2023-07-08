@@ -31,7 +31,7 @@ if (isLogin()) {
           <div class="flex items-baseline justify-between">
             <div class="">视频列表</div>
             <div class="text-xs" v-if="showLastVideo && lastVideo">
-              上次学到
+              最近学习了
               <router-link :to="{ name: 'video.show', params: { id: lastVideo.id } }" class="font-bold text-[#16a085]">
                 {{ lastVideo.title }}
               </router-link>
