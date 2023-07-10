@@ -93,7 +93,7 @@ export default {
     {
       title: '大叔作品',
       route: { name: 'soft.index' },
-      //url: 'https://www.hdcms.com',
+      // url: 'https://www.hdcms.com',
       icon: ApplicationOne,
     },
     {
