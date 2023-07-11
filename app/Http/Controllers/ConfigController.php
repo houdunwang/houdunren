@@ -27,7 +27,8 @@ class ConfigController extends Controller
             'copyright' => config('hd.copyright'),
             'name' => config('hd.name'),
             "subscribe" => config('hd.subscribe'),
-            'content' => config('hd.content')
+            'content' => config('hd.content'),
+            'soft' => config('hd.soft'),
         ];
     }
 

@@ -67,5 +67,8 @@ return  [
         //上传方式 local|oss
         "drive" => 'local',
         "image_size" => 1000
+    ],
+    "soft" => [
+        "download" => ""
     ]
 ];

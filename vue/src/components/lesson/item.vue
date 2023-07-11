@@ -1,13 +1,12 @@
 <script setup lang="ts">
-defineEmits(['del'])
 const { isAdministrator } = useUser()
 const { remove } = useLesson()
-const configStore = useConfigStore()
-
-const { item, showType = 'color' } = defineProps<{
+const { item, showType } = defineProps<{
   item: LessonModel
   showType?: 'image' | 'color'
 }>()
+
+defineEmits(['del'])
 
 const colors = [
   '#f69679',

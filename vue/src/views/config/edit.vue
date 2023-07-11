@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import baseVue from './config/base.vue'
+import SoftVue from './config/soft.vue'
 import aliyun from './config/aliyun.vue'
 import subscribe from './config/subscribe.vue'
 import sms from './config/sms.vue'
@@ -19,6 +20,9 @@ const tab = ref('base')
         <div class="border p-3 rounded-md">
           <el-tab-pane label="基本" name="base">
             <baseVue :config="config" />
+          </el-tab-pane>
+          <el-tab-pane label="软件" name="soft">
+            <SoftVue :config="config" />
           </el-tab-pane>
           <el-tab-pane label="内容" name="content">
             <content :config="config" />

@@ -22,6 +22,11 @@ export default [
         component: () => import('@/views/member/subscribe.vue'),
       },
       {
+        path: 'config',
+        name: 'member.config',
+        component: () => import('@/views/member/config.vue'),
+      },
+      {
         path: 'secret',
         name: 'member.secret',
         component: () => import('@/views/member/secret.vue'),

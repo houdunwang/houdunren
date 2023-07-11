@@ -29,7 +29,6 @@ return [
     */
 
     'disks' => [
-
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
@@ -78,6 +77,6 @@ return [
         public_path('storage') => storage_path('app/public'),
         public_path('dist') => base_path('dist'),
         public_path('markdown') => base_path('markdown'),
+        public_path('wallpaper') => base_path('wallpaper'),
     ],
-
 ];

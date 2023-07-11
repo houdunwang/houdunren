@@ -1,12 +1,8 @@
 <script setup lang="ts">
 const { findAll, collection } = useLesson()
-const storage = useStorage()
+const { lesson } = useConfigStore()
 const route = useRoute()
 await findAll(route.query.page)
-const lessonShowType = ref<'image' | 'color'>(storage.get('lesson_show_type', 'color'))
-watch(lessonShowType, (type) => {
-  storage.set('lesson_show_type', type)
-})
 </script>
 
 <template>
@@ -16,7 +12,7 @@ watch(lessonShowType, (type) => {
         <section class="flex flex-col md:flex-row md:items-center gap-2 justify-between 2xl:gap-5">
           <div class="hidden md:block">碎片课程</div>
           <div class="flex-1 md:justify-end flex flex-col md:flex-row gap-2">
-            <el-radio-group v-model="lessonShowType" size="large">
+            <el-radio-group v-model="lesson.lessonShowType" size="large">
               <el-radio label="image" border class="mx-0!">图片</el-radio>
               <el-radio label="color" border>随机颜色</el-radio>
             </el-radio-group>
@@ -27,7 +23,7 @@ watch(lessonShowType, (type) => {
       <section
         class="grid grid-flow-row md:grid-cols-3 lg:grid-cols-4 gap-5 bg-white rounded-md"
         v-if="collection.data.length">
-        <LessonItem v-for="item of collection.data" :key="item.id" :item="item" :show-type="lessonShowType" />
+        <LessonItem v-for="item of collection.data" :key="item.id" :item="item" :show-type="lesson.lessonShowType" />
       </section>
       <section v-else class="text-center text-gray-600">暂无课程</section>
     </HdCard>

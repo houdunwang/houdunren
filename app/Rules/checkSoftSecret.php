@@ -17,7 +17,7 @@ class CheckSoftSecret implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (!app(SoftSecretService::class)->checkSoftSecret($value)) {
-            $fail('密钥已经过期');
+            $fail('口令无效或已经过期');
         }
     }
 }

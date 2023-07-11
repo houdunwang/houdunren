@@ -1,10 +1,26 @@
 <script setup lang="ts">
+import router from '@/plugins/router'
+import { ElMessage, ElMessageBox } from 'element-plus'
+
 const route = useRoute()
 const { open } = useUtil()
 const { find, model } = useSoft()
-const { authorize, isAdministrator } = useAuth()
+const { isAdministrator, isLogin } = useAuth()
+const { user } = useUserStore()
+const { config } = useConfigStore()
 await find(+route.params.id)
 const tabName = ref(route.query.commentId ? 'comment' : 'content')
+
+const download = () => {
+  if (!isLogin()) {
+    return router.push({ name: RouteName.LOGIN })
+  }
+  if (user?.isSubscribe) {
+    ElMessageBox.alert(config!.soft.download)
+  } else {
+    router.push({ name: 'subscribe' })
+  }
+}
 </script>
 
 <template>
@@ -17,12 +33,10 @@ const tabName = ref(route.query.commentId ? 'comment' : 'content')
         </div>
 
         <div class="flex items-center">
-          <el-button type="primary" size="small" @click="open(model.download, '_blank')" v-if="model.download">
-            下载软件
-          </el-button>
-          <el-button type="success" size="small" @click="open({ name: 'member.secret' }, '_blank')" v-if="!model.free">
+          <el-button type="primary" size="small" @click="download()"> 下载软件 </el-button>
+          <!-- <el-button type="success" size="small" @click="open({ name: 'member.secret' }, '_blank')" v-if="!model.free">
             查看密钥
-          </el-button>
+          </el-button> -->
           <el-button
             type="primary"
             color="#16a085"
@@ -39,9 +53,9 @@ const tabName = ref(route.query.commentId ? 'comment' : 'content')
                 'https://doc.houdunren.com/%E5%90%8E%E7%9B%BE%E4%BA%BA%E8%BD%AF%E4%BB%B6/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98.html',
                 '_blank',
               )
-            "
-            >常见问题</el-button
-          >
+            ">
+            常见问题
+          </el-button>
 
           <el-button type="primary" plain size="small" @click="open(model.github, '_blank')" v-if="model.github">
             GitHub

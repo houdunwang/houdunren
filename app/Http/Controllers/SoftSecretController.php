@@ -29,7 +29,7 @@ class SoftSecretController extends Controller
     //刷新软件密钥
     public function refresh()
     {
-        $this->authorize('refresh', SoftSecret::class);
+        // $this->authorize('refresh', SoftSecret::class);
         $secret = app(SoftSecretService::class)->refreshSoftSecret(Auth::user());
         return $this->respondWithSuccess($secret);
     }
@@ -42,7 +42,7 @@ class SoftSecretController extends Controller
     {
         $request->validate([
             "secret" => ['required', "exists:soft_secrets,secret", new CheckSoftSecret()]
-        ], ['secret.required' => '密钥不能为空', 'secret.exists' => '密钥错误']);
+        ], ['secret.required' => '密钥不能为空', 'secret.exists' => '口令无效']);
 
         return $this->respondWithSuccess(SoftSecret::whereSecret(request('secret'))->first());
     }

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { lesson } = useConfigStore()
 const { isAdministrator } = useUser()
 const { isLogin } = useAuth()
 const { findOne, model } = useLesson()
@@ -38,7 +39,7 @@ findOne(+route.params.id)
     <section class="2xl:w-page mx-auto p-2 grid md:grid-cols-12 items-start gap-5">
       <LessonVideoList :lessonId="model.id" :videos="model.videos" class="mt-5 2xl:col-span-9 md:col-span-8" />
       <div class="-mt-[100px] hidden md:flex md:col-span-4 2xl:col-span-3">
-        <LessonItem :item="model" />
+        <LessonItem :item="model" :showType="lesson.lessonShowType" />
       </div>
     </section>
   </main>

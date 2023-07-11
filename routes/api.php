@@ -113,3 +113,4 @@ Route::controller(WepayController::class)->prefix("wepay")->group(function () {
 include "edu.php";
 include "soft.php";
 include "hdcms.php";
+include "wallpaper.php";

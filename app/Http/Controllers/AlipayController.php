@@ -57,7 +57,7 @@ class AlipayController extends Controller
 
         if ($order) {
             app(SubscribeService::class)->addSubscribe($order->user, $order->package->months);
-            // app(SoftSecretService::class)->addSoftSecret($order);
+            app(SoftSecretService::class)->addSoftSecret($order->user);
         }
     }
 }

@@ -34,9 +34,13 @@ export default {
         title: '订阅信息',
       },
       {
-        routeName: 'member.secret',
-        title: '软件密钥',
+        routeName: 'member.config',
+        title: '用户配置',
       },
+      // {
+      //   routeName: 'member.secret',
+      //   title: '大叔作品',
+      // },
     ],
   },
   user: {

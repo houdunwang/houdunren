@@ -22,9 +22,9 @@ const emit = defineEmits<{
       <router-link
         :to="{ name: 'shortvideo.show', params: { id: video.id } }"
         target="_blank"
-        class="font-bold text-gray-700 mb-3 text-lg px-5 truncate hover:text-green-700 flex justify-between items-baseline">
-        {{ video.title }}
-        <span class="text-xs font-normal">{{ dayjs(video.created_at).fromNow() }}</span>
+        class="font-normal text-gray-700 mb-3 text-base opacity-90 px-5 truncate hover:text-green-700 flex justify-between items-baseline flex gap-2">
+        <span class="truncate">{{ video.title }}</span>
+        <span class="text-xs font-normal flex-shrink-0">{{ dayjs(video.created_at).fromNow() }}</span>
       </router-link>
     </div>
 

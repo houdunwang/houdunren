@@ -5,6 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/wallpaper
 .env
 .env.backup
 .env.production

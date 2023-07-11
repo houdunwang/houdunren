@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { lesson } = useConfigStore()
 const { isAdministrator } = useUser()
 const { findOne, model } = useSystem()
 const route = useRoute()
@@ -26,7 +27,7 @@ await findOne(route.params.id)
     </section>
     <section
       class="2xl:w-page 2xl:mx-auto mt-10 p-2 grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 bg-white rounded-md shadow-lg">
-      <LessonItem v-for="item of model.lessons" :key="item.id" :item="item" />
+      <LessonItem v-for="item of model.lessons" :key="item.id" :item="item" :showType="lesson.lessonShowType" />
     </section>
   </main>
 </template>

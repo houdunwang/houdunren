@@ -27,7 +27,7 @@ await getAll(route.query.page || 1)
           </div>
         </div>
       </template>
-      <section class="grid grid-cols-3 gap-3">
+      <section class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
         <shortVideoItem v-for="video of collection.data" :key="video.id" :video="video" />
       </section>
     </HdCard>

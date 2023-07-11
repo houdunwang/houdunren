@@ -14,16 +14,16 @@ class SoftSecretService
      *
      * @param Order $order
      */
-    public function addSoftSecret(Order $order)
+    public function addSoftSecret(User $user)
     {
-        $order->user->softSecret()->updateOrCreate(
-            ["user_id" => $order->user->id],
+        $user->softSecret()->updateOrCreate(
+            ["user_id" => $user->id],
             [
-                "secret" => md5($order->user->id . now()) . mt_rand(1, 9999),
-                "end_time" => $order->created_at->addYear(1)
+                "secret" => md5($user->id . now()) . mt_rand(1, 9999),
+                "end_time" => $user->subscribe->updated_at->addYear(1)
             ]
         );
-        return $order->user->refresh()->softSecret;
+        return $user->refresh()->softSecret;
     }
 
     /**
@@ -32,8 +32,7 @@ class SoftSecretService
     public function refreshSoftSecret()
     {
         if (!user()->softSecret) {
-            $order = user()->orders()->where('pay_state', true)->orderBy('id', 'desc')->first();
-            return $this->addSoftSecret($order);
+            return $this->addSoftSecret(user());
         }
         user()->softSecret()->update([
             "secret" => md5(user()->id . now()) . mt_rand(1, 9999),
@@ -49,6 +48,6 @@ class SoftSecretService
     public function checkSoftSecret(string $secret)
     {
         $softSecret = SoftSecret::whereSecret($secret)->with('user')->first();
-        return $softSecret && $softSecret->user->isSubscribe && $softSecret->end_time >= now();
+        return $softSecret && $softSecret->end_time >= now();
     }
 }

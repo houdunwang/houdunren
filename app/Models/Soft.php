@@ -9,7 +9,7 @@ class Soft extends BaseModel
 {
     use HasFactory;
     protected $fillable = [
-        "title", 'description', 'content', 'preview', 'tags', 'github', 'gitee', 'download', 'version', 'free', 'lesson'
+        "title", 'description', 'content', 'preview', 'tags', 'github', 'gitee', 'download', 'version', 'free', 'lesson', 'name'
     ];
 
     protected $casts = [
