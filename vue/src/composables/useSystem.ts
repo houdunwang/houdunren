@@ -22,6 +22,15 @@ export default () => {
     title.value = model.value.title
   }
 
+  //获取课程详细资料，包括下载地址
+  const getSystemInfo = async (id: any) => {
+    model.value = await http.request<SystemModel>({
+      url: `system/info/${id}`,
+    })
+    const title = useTitle(null)
+    title.value = model.value.title
+  }
+
   const add = async () => {
     await http.request<SystemModel>({
       url: `system`,
@@ -65,5 +74,5 @@ export default () => {
     })
   }
 
-  return { findAll, collection, findOne, model, update, order, add, remove, getDownloadUrl }
+  return { findAll, collection, findOne, model, update, order, add, remove, getDownloadUrl, getSystemInfo }
 }

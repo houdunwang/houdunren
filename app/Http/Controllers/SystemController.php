@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Log;
 use App\Models\Lesson;
 use App\Models\System;
 use App\Models\Video;
@@ -46,6 +45,12 @@ class SystemController extends Controller
         if (isSubscribe()) {
             return $system->download_address;
         }
+    }
+
+    //后台获取资料
+    public function info(System $system)
+    {
+        return new SystemResource($system->makeVisible('download_address')->load('lessons'));
     }
 
     public function show(System $system)

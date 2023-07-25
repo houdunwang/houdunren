@@ -28,6 +28,7 @@ Route::apiResource('topic', TopicController::class);
 //系统课程
 Route::put('system/order', [SystemController::class, 'order']);
 Route::get('system/downloadUrl/{system}', [SystemController::class, 'downloadUrl']);
+Route::get('system/info/{system}', [SystemController::class, 'info']);
 Route::apiResource('system', SystemController::class);
 
 //课程

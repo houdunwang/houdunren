@@ -64,6 +64,7 @@ interface LessonModel {
   description: string
   preview: string
   video?: any
+  path_cdn?: string
   price?: any
   system_id: number
   video_num: number
@@ -264,6 +265,7 @@ interface ShortVideoModel {
   title: string
   preview: string
   path: string
+  path_cdn: string
   created_at: string
   updated_at: string
 }

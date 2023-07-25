@@ -5,7 +5,7 @@ const { isLogin } = useAuth()
 const { findOne, model } = useLesson()
 const { open } = useUtil()
 const route = useRoute()
-findOne(+route.params.id)
+await findOne(+route.params.id)
 </script>
 
 <template>
@@ -37,7 +37,13 @@ findOne(+route.params.id)
       <div class="top-bg"></div>
     </section>
     <section class="2xl:w-page mx-auto p-2 grid md:grid-cols-12 items-start gap-5">
-      <LessonVideoList :lessonId="model.id" :videos="model.videos" class="mt-5 2xl:col-span-9 md:col-span-8" />
+      <div class="mt-5 2xl:col-span-9 md:col-span-8 flex flex-col gap-3">
+        <HdCard v-if="model.path_cdn">
+          <template #header> 效果展示 </template>
+          <HdVideoPlayer :video="{ id: model.id, path: model.path_cdn }" :videos="[]" />
+        </HdCard>
+        <LessonVideoList :lessonId="model.id" :videos="model.videos" />
+      </div>
       <div class="-mt-[100px] hidden md:flex md:col-span-4 2xl:col-span-3">
         <LessonItem :item="model" :showType="lesson.lessonShowType" />
       </div>

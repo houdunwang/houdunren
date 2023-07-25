@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title')->comment('课程标题');
             $table->text('description')->nullable()->comment('课程介绍');
             $table->string('preview')->comment('缩略图');
-            $table->string('video')->nullable()->comment('视频介绍');
+            $table->string('video', 1000)->nullable()->comment('视频介绍');
             $table->decimal('price')->nullable()->comment('价格');
             $table->foreignId('system_id')->nullable()->constrained('systems')->onDelete('SET NULL');
             $table->string('download_address')->nullable()->comment('下载地址');

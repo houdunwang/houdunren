@@ -48,7 +48,6 @@ class LessonController extends Controller
         if (isSubscribe()) {
             return $lesson->download_address ?? $lesson->system->download_address;
         }
-        // return '';
     }
 
     public function show(Lesson $lesson)

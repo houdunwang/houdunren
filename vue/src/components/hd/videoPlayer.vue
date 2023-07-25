@@ -5,7 +5,7 @@ import Player, { Events } from 'xgplayer'
 import 'xgplayer/dist/index.min.css'
 const storage = useStorage()
 const props = defineProps<{
-  video: VideoModel
+  video: { path: string; id: number }
   videos: VideoModel[]
 }>()
 
@@ -16,7 +16,7 @@ const initPlayer = () => {
   const videoList = _.cloneDeep(props.videos).splice(props.videos.findIndex((v) => v.id == props.video.id) + 1)
   player.value = new Player({
     id: 'mse',
-    url: props.video.path_cdn,
+    url: props.video.path,
     playNext: {
       urlList: videoList.map((v) => v.path),
     },

@@ -16,7 +16,7 @@ const playVideo = (src: string) => {
 
 const player = ref()
 const stopPlay = () => {
-  player.value.player.pause()
+  videoSrc.value = ''
   videoDialog.value = false
 }
 </script>
@@ -26,7 +26,13 @@ const stopPlay = () => {
     <HdCard class="mt-5 hidden md:block">
       <template #header> 历史活动 </template>
       <el-dialog title="开箱视频" v-model="videoDialog" append-to-body :before-close="stopPlay">
-        <HdVideoPlayer :url="videoSrc" ref="player" class="mx-auto" :key="videoSrc" />
+        <HdVideoPlayer
+          :video="{ id: 1, path: videoSrc }"
+          :videos="[]"
+          ref="player"
+          class="mx-auto"
+          :key="videoSrc"
+          v-if="videoSrc" />
       </el-dialog>
       <section class="">
         <el-table :data="collection.data" border stripe width="100%">

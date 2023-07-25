@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { http } from '@/plugins/axios'
-import router from '@/plugins/router'
 
 const { collection, getAll, destroy } = useSoft()
 await getAll()
 const zipWallpaper = async () => {
   http.request({
-    url: 'http://47.99.182.153/api/wallpaper/zip',
-    baseURL: '/',
+    url: 'wallpaper/zip',
   })
 }
 </script>

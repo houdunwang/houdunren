@@ -21,7 +21,7 @@ onBeforeRouteUpdate((to: RouteLocationNormalized) => findOne(to.params.id))
   <main v-if="user?.isSubscribe && model" class="!w-full !p-0 !-mt-0" :key="model.id">
     <div class="bg-[#313848] -mt-1 relative" v-if="model.path_cdn">
       <div class="2xl:w-page mx-auto xl:w-[1300px] relative group">
-        <HdVideoPlayer :video="model" :videos="model.lesson.videos" />
+        <HdVideoPlayer :video="{ id: model.id, path: model.path_cdn }" :videos="model.lesson.videos" />
         <!-- <HdVideoPlayer url="/assets/houdunren.mp4" :videos="model.lesson.videos" /> -->
         <icon-arrow-circle-left
           theme="filled"

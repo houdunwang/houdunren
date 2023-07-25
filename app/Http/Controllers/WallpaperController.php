@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Services\ImageService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class WallpaperController extends Controller
 {
@@ -14,14 +13,14 @@ class WallpaperController extends Controller
         $files = collect(glob(base_path('wallpaper/*')));
         if (!is_dir(base_path('wallpaper/thumb'))) mkdir(base_path('wallpaper/thumb'));
         $files->each(function ($file) {
-            $info = pathinfo($file);
-            $toFile = $info['dirname'] . '/thumb/' . $info['basename'];
+            $toFile = dirname($file) . '/thumb/' . basename($file);
             if (is_file($toFile)) return;
+            $info = pathinfo($file);
             if (!isset($info['extension']) || $info['extension'] != 'jpg') return;
             copy($file, $toFile);
             app(ImageService::class)->zip($toFile, 500);
         });
-        return $files;
+        return $this->respondOk('压缩成功');
     }
 
     //获取随机图片

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Services\AliyunService;
 
 class LessonResource extends JsonResource
 {
@@ -11,9 +12,7 @@ class LessonResource extends JsonResource
         return [
             'videos' => VideoResource::collection($this->whenLoaded('videos')),
             'system' => new SystemResource($this->whenLoaded('system')),
-            // 'download_address' => $this->when(isSubscribe(), function () {
-            //     return $this->download_address;
-            // })
+            'path_cdn' =>  app(AliyunService::class)->videoCdnUrl($this->video)
         ] + parent::toArray($request);
     }
 }

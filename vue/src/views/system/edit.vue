@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import router from '@/plugins/router'
 
-const { findOne, update, model: form } = useSystem()
+const { getSystemInfo, update, model: form } = useSystem()
 const route = useRoute()
-await findOne(+route.params.id)
+await getSystemInfo(+route.params.id)
 
 const onSubmit = async () => {
   await update()
@@ -37,7 +37,7 @@ const onSubmit = async () => {
           <el-input type="textarea" v-model="form.description" placeholder="请输入课程的文字介绍"></el-input>
           <HdError name="description" />
         </el-form-item>
-        <el-form-item label="网盘地址" prop="download_address">
+        <el-form-item label="网盘地址" prop="form.download_address">
           <el-input v-model="form.download_address" placeholder="高清视频网盘下载地址"></el-input>
           <HdError name="download_address" />
         </el-form-item>
