@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Config;
-use Nwidart\Modules\Facades\Module;
 
 class ConfigController extends Controller
 {
@@ -22,13 +21,14 @@ class ConfigController extends Controller
 
     public function common()
     {
+        $soft = config('hd.soft');
         return [
             'base' => config('hd.base'),
             'copyright' => config('hd.copyright'),
             'name' => config('hd.name'),
             "subscribe" => config('hd.subscribe'),
             'content' => config('hd.content'),
-            'soft' => config('hd.soft'),
+            'soft' => isSubscribe()  ? $soft : null,
         ];
     }
 

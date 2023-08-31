@@ -23,7 +23,7 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nickname' => ['required', 'between:1,8'],
+            'nickname' => ['required', 'between:1,20'],
             'home' => ['nullable', 'url'],
             'weibo' => ['nullable', 'url'],
             'github' => ['nullable', 'url'],

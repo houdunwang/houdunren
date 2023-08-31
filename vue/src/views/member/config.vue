@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { lesson } = useConfigStore()
+const {
+  config: { lesson },
+} = useConfigStore()
 const tab = ref('base')
 </script>
 

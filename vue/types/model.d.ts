@@ -27,6 +27,7 @@ interface UserModel {
   isSubscribe: boolean
   subscribe?: SubscribeModel
   soft_secret: SoftSecretModel
+  wechat: { openid?: string }
 }
 
 interface SoftSecretModel {

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { lesson } = useConfigStore()
+const {
+  config: { lesson },
+} = useConfigStore()
 const { isAdministrator } = useUser()
 const { isLogin } = useAuth()
 const { findOne, model } = useLesson()
@@ -27,7 +29,7 @@ await findOne(+route.params.id)
             @click="open({ name: 'system.show', params: { id: model?.system.id } })">
             <icon-list-one theme="outline" class="mr-1" />所有章节
           </el-button>
-          <DownloadLesson :id="model.id" type="lesson" />
+          <DownloadLesson :lesson="model" />
           <Favorite model="Lesson" :id="model.id" v-if="isLogin()" />
           <router-link :to="{ name: 'lesson.edit', params: { id: model.id } }" target="_blank" v-if="isAdministrator()">
             <el-button type="info" size="default" plain> 编辑 </el-button>

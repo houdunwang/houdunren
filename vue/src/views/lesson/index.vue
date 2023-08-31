@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const { findAll, collection } = useLesson()
-const { lesson } = useConfigStore()
+const {
+  config: { lesson },
+} = useConfigStore()
 const route = useRoute()
 await findAll(route.query.page)
 </script>

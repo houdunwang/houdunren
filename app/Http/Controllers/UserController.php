@@ -18,9 +18,9 @@ use App\Models\User;
 use App\Models\VideoPlayHistory;
 use App\Rules\CodeRule;
 use App\Rules\PhoneRule;
-use App\Services\SoftSecretService;
 use Auth;
 use Hash;
+use Houdunwang\Wechat\User as WechatUser;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Validator;
@@ -29,20 +29,20 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum'])->except(['show', 'accountsIsExists']);
+        $this->middleware(['auth:sanctum'])->except(['show', 'current']);
     }
 
     //获取当前用户资料
     public function current()
     {
-        $user = Auth::user()->makeVisible(['address', 'mobile', 'real_name', 'openid', 'unionid', 'secret'])->load('subscribe');
-
-        $user->isSubscribe = $user->isSubscribe;
-
-        return $this->respondWithSuccess(new UserResource($user));
+        if (Auth::check()) {
+            $user = Auth::user()->makeVisible(['address', 'mobile', 'real_name', 'openid', 'unionid', 'secret'])->load('subscribe');
+            $user->isSubscribe = $user->isSubscribe;
+            //微信数据在微信app获取的
+            $user->wechat = session('wechat');
+            return $this->respondWithSuccess(new UserResource($user));
+        }
     }
-
-
 
     public function index()
     {

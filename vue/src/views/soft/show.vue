@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import router from '@/plugins/router'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessageBox } from 'element-plus'
 
 const route = useRoute()
 const { open } = useUtil()
 const { find, model } = useSoft()
 const { isAdministrator, isLogin } = useAuth()
 const { user } = useUserStore()
-const { config } = useConfigStore()
+const {
+  config: { site },
+} = useConfigStore()
 await find(+route.params.id)
 const tabName = ref(route.query.commentId ? 'comment' : 'content')
 
@@ -16,7 +18,7 @@ const download = () => {
     return router.push({ name: RouteName.LOGIN })
   }
   if (user?.isSubscribe) {
-    ElMessageBox.alert(config!.soft.download)
+    ElMessageBox.alert(site!.soft.download)
   } else {
     router.push({ name: 'subscribe' })
   }

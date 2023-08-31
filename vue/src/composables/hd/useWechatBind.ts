@@ -2,6 +2,9 @@ import { ElMessageBox } from 'element-plus'
 import { http } from '@/plugins/axios'
 
 export default () => {
+  const { isWechat } = useUtil()
+  const { isLogin } = useAuth()
+  const { user } = useUserStore()
   const storeUser = useUserStore()
   const qr = ref<{ ticket: string }>()
 
@@ -33,5 +36,10 @@ export default () => {
     })
   }
 
-  return { bind, unbind, getScanQr, qr }
+  const getWechatAppOpenid = () => {
+    if (isLogin() && isWechat() && !user?.wechat?.openid) {
+      location.href = `/wechat/openid?url=${encodeURIComponent(location.href)}`
+    }
+  }
+  return { bind, unbind, getScanQr, qr, getWechatAppOpenid }
 }

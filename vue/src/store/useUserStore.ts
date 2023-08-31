@@ -10,14 +10,15 @@ export default defineStore('user', {
   },
   getters: {
     wechatIsBind: (state) => state.user?.unionid || state.user?.openid,
+    isLogin: (state) => Boolean(state.user?.id),
   },
   actions: {
     async getCurrentUser() {
-      if (useAuth().isLogin()) {
-        this.user = await http.request<UserModel>({
-          url: ApiEnum.CURRENT_USER,
-        })
-      }
+      //   if (useAuth().isLogin()) {
+      this.user = await http.request<UserModel>({
+        url: ApiEnum.CURRENT_USER,
+      })
+      //   }
     },
   },
 })

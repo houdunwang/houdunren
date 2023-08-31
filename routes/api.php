@@ -18,6 +18,11 @@ use App\Http\Controllers\WechatLoginController;
 use App\Http\Controllers\WepayController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('b', function () {
+    // dd(\Auth::guard('web')->check());
+    return session()->all();
+});
+
 //配置
 Route::get('config/all', [ConfigController::class, 'all']);
 Route::get('config/common', [ConfigController::class, 'common']);
@@ -105,7 +110,6 @@ Route::controller(AlipayController::class)->prefix("alipay")->group(function () 
 //微信支付
 Route::controller(WepayController::class)->prefix("wepay")->group(function () {
     Route::post('pay/{order}', 'pay');
-    Route::get('app_pay', 'appPay');
     Route::post('app/{order}', 'app');
     Route::any('notify', 'notifyUrl');
 });

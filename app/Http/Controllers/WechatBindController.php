@@ -16,7 +16,7 @@ class WechatBindController extends Controller
         $this->middleware(['auth:sanctum']);
     }
 
-    //微信绑定
+    //PC扫码绑定微信
     public function bind(string $ticket)
     {
         if ($info = Cache::get($ticket)) {
@@ -31,7 +31,7 @@ class WechatBindController extends Controller
             }
 
             $user = Auth::user();
-            $user->name = $user->name ?? $info['nickname'];
+            $user->name = $user->name ?? ($info['nickname'] ?: null);
             $user->avatar = $user->avatar ?? $info['headimgurl'];
             $user->openid = $info['openid'];
             $user->unionid = $info['unionid'];
@@ -49,5 +49,28 @@ class WechatBindController extends Controller
         $user->unionid = null;
         $user->save();
         return $this->respondOk('解绑成功');
+    }
+
+    //微信客户端绑定微信
+    public function wechatAppBind()
+    {
+        $info = app(WechatUser::class)->config(config('hd.wechat'))->snsapiBase();
+        $isExists = User::where('unionid', $info['unionid'])->exists();
+
+        if ($isExists) return redirect('/member/bind?message=微信已经被其他用户绑定');
+
+        $user = Auth::user();
+        $user->openid = $info['openid'];
+        $user->unionid = $info['unionid'];
+        $user->save();
+        return redirect('/member/bind');
+    }
+
+    //获取登录用户的openid
+    public function openid()
+    {
+        $info = app(WechatUser::class)->config(config('hd.wechat'))->snsapiBase();
+        session(['wechat' => $info]);
+        return redirect('/');
     }
 }

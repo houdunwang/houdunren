@@ -47,8 +47,10 @@ class AuthController extends Controller
             'captcha' => [app()->isProduction() ?  'required' : 'nullable', 'captcha_api:' . request('captcha_key') . ',math']
         ], ['captcha.captcha_api' => '验证码输入错误'])->validate();
 
-        // $user->tokens()->delete();
-        return $this->respondWithSuccess(['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
+        Auth::guard('web')->login($user);
+        // return $this->respondWithSuccess(['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
+        // return $this->respondWithSuccess(['user' => $user]);
+        return $this->respondOk('登录成功');
     }
 
     /**
@@ -72,6 +74,8 @@ class AuthController extends Controller
         $user->password = Hash::make(request('password'));
         $user->save();
         $user->tokens()->delete();
+        Auth::guard('web')->login($user);
+
         return $this->respondWithSuccess(['token' => $user->createToken('auth')->plainTextToken, 'user' => $user]);
     }
 
@@ -99,8 +103,8 @@ class AuthController extends Controller
     //退出
     public function logout()
     {
-        Auth::logout();
         Auth::user()->tokens()->delete();
+        Auth::guard('web')->logout();
         return $this->respondOk('退出成功');
     }
 }

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { getAll, collection, destroy } = usePackage()
 await getAll()
+console.log(navigator.userAgent)
 </script>
 
 <template>
@@ -11,15 +12,18 @@ await getAll()
           投资学习是值得的
         </h1>
         <h2 class="text-center text-white opacity-80 font-light text-base md:text-xl lg:text-2xl">
-          订阅后可以观看所有教程，并支持高清版下载学习 <br />
+          订阅期内可以观看所有教程，提供高清版视频下载 <br />
         </h2>
-        <!-- <div class="text-base font-thin text-center text-white opacity-70 mt-2 font-sans">
-          提供一年
-          <router-link :to="{ name: 'soft.index' }" class="text-white hover:text-yellow-300 font-normal">
+        <div class="text-base font-thin text-center text-white opacity-80 mt-2 font-sans lg:text-2xl">
+          免费提供
+          <router-link
+            :to="{ name: 'soft.index' }"
+            class="text-yellow-100 hover:text-yellow-300 font-normal"
+            target="_blank">
             教程案例
           </router-link>
-          的下载学习使用
-        </div> -->
+          下载学习使用
+        </div>
       </div>
       <section class="flex flex-col md:flex-row justify-center gap-5 -mt-52 px-3">
         <PackageItem

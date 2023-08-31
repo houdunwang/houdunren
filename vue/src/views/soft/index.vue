@@ -9,14 +9,14 @@ await getAll()
     <div class="flex flex-col justify-center items-center mt-16 px-5">
       <img src="/images/xj.jpg" alt="hdcms" class="rounded-full object-cover w-48 h-48 shadow-inner" />
       <h1 class="text-5xl xl:text-8xl font-extrabold mt-6 text-transparent bg-clip-text">向军大叔作品</h1>
-      <div class="font-extralight text-lg items-center flex mt-3">
-        <!-- 软件免费赠送<router-link :to="{ name: 'subscribe' }" class="text-green-600">订阅用户</router-link>学习使用 -->
-      </div>
-      <!-- <p class="text-gray-500 mt-5 text-xl xl:text-xl font-extralight">
-        软件是视频教程的案例，免费提供给<router-link :to="{ name: 'subscribe' }" class="text-green-600" target="_blank">
+      <!-- <div class="font-extralight text-lg items-center flex mt-3">
+        软件免费赠送<router-link :to="{ name: 'subscribe' }" class="text-green-600">订阅用户</router-link>学习使用
+      </div> -->
+      <p class="text-gray-500 mt-5 text-xl xl:text-xl font-extralight">
+        软件免费提供给<router-link :to="{ name: 'subscribe' }" class="text-green-600" target="_blank">
           订阅用户 </router-link
         >学习使用，网站保留随时下架软件的权利
-      </p> -->
+      </p>
 
       <!-- <p class="text-gray-500 mt-5 text-xl xl:text-xl font-extralight">抖音或B站搜索【后盾人】向军大叔晚八点直播</p> -->
       <!-- <div class="text-gray-500 mt-5 font-extralight flex justify-center flex-col items-center">

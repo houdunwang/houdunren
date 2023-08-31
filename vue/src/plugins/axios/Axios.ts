@@ -40,8 +40,9 @@ export default class Axios {
           this.loading = ElLoading.service({ background: 'rgba(255,255,255,0.1)', fullscreen: true })
         }
         if (this.options.clearValidateError) useErrorStore().resetError()
-        config.headers.Accept = 'application/json'
-        config.headers.Authorization = `Bearer ${storage.get(CacheKey.TOKEN_NAME)}`
+        // config.withCredentials = true
+        // config.headers.Accept = 'application/json'
+        // config.headers.Authorization = `Bearer ${storage.get(CacheKey.TOKEN_NAME)}`
 
         return config
       },
@@ -85,7 +86,7 @@ export default class Axios {
           case HttpStatus.UNAUTHORIZED:
             storage.set(CacheKey.REDIRECT_ROUTE_NAME, router.currentRoute.value.fullPath)
             ElMessage.error('请登录后操作')
-            storage.remove(CacheKey.TOKEN_NAME)
+            // storage.remove(CacheKey.TOKEN_NAME)
             router.push({ name: 'login' })
             break
           case HttpStatus.UNPROCESSABLE_ENTITY:

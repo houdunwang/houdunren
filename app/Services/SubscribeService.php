@@ -16,9 +16,7 @@ class SubscribeService
      */
     public function addSubscribe(User $user, int $months): Subscribe
     {
-        $end_time = $user->subscribe ?
-            $user->subscribe->end_time->addMonths($months) :
-            now()->addMonths($months);
+        $end_time = now()->addMonths($months);
 
         Subscribe::updateOrCreate(
             ['user_id' => $user->id],

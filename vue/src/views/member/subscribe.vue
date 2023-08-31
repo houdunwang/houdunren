@@ -4,8 +4,6 @@ import dayjs from 'dayjs'
 const tab = ref('subscribe')
 const { getSubscribeInfo } = useSubscribe()
 const subscribe = await getSubscribeInfo()
-const userStore = useUserStore()
-const { refreshSecret } = useSoftSecret()
 </script>
 
 <template>

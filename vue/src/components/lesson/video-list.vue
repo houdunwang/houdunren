@@ -4,8 +4,8 @@ const { lessonId, videos, showLastVideo } = withDefaults(
   defineProps<{
     lessonId: string | number
     videos: VideoModel[]
-    showLastVideo: boolean
-    target: '_blank' | '_self'
+    showLastVideo?: boolean
+    target?: '_blank' | '_self'
   }>(),
   { showLastVideo: true, target: '_blank' },
 )

@@ -39,8 +39,10 @@ onBeforeRouteLeave(() => {
           <p>手机端请关注公众号【后盾云】，使用微信登录学习</p>
         </div>
       </el-dialog>
-      <div class="bg-green-700 rounded-full w-8 h-8 cursor-pointer flex justify-center items-center" @click="loadQr">
-        <wechat theme="outline" size="24" class="text-white" />
+      <div
+        class="bg-green-600 rounded-full w-10 h-10 cursor-pointer flex justify-center items-center hover:bg-green-700 duration-200 hover:scale-125 shadow-lg"
+        @click="loadQr">
+        <wechat theme="outline" size="26" class="text-white" />
       </div>
     </section>
   </main>

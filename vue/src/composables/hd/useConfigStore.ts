@@ -3,17 +3,21 @@ import { defineStore } from 'pinia'
 export default defineStore(
   'config',
   () => {
-    const config = ref<Record<string, any>>()
+    const config = ref({
+      site: {} as Record<string, any>,
+      lesson: { lessonShowType: 'color' as 'image' | 'color' },
+    })
+    // const lesson = ref({ lessonShowType: 'color' as 'image' | 'color' })
     const { common } = useConfig()
     const getConfig = async () => {
-      config.value = await common()
+      config.value.site = await common()
     }
-    const lesson = ref({
-      lessonShowType: 'color' as 'image' | 'color',
-    })
-    return { config, getConfig, lesson }
+
+    return { config, getConfig }
   },
   {
-    persist: true,
+    persist: {
+      paths: ['config.lesson'],
+    },
   },
 )

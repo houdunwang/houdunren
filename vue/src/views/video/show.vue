@@ -79,7 +79,7 @@ onBeforeRouteUpdate((to: RouteLocationNormalized) => findOne(to.params.id))
             <!-- 章节课程列表 -->
             <SystemLessonDropdown :lessons="model.lesson.system?.lessons" v-if="model.lesson.system?.lessons?.length" />
             <!-- 下载视频 -->
-            <DownloadLesson :id="model?.lesson.id" type="lesson" size="small" />
+            <DownloadLesson :lesson="model.lesson" size="small" />
             <!-- 收藏  -->
             <Favorite model="Video" :id="model.id" size="small" />
           </div>

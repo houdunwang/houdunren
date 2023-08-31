@@ -25,7 +25,7 @@ const store = request(() => {
         <el-input v-model="model.filename" placeholder="markdown文件" size="large" />
         <HdError name="filename" />
       </div>
-      <div class="mt-3" v-show="!model.filename">
+      <div class="mt-3" v-if="model.content">
         <HdMarkdownEditor v-model="model.content" :height="400" />
         <HdError name="content" />
       </div>

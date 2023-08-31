@@ -1,5 +1,11 @@
 <script setup lang="ts">
+import { ElMessage } from 'element-plus'
 import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+import qs from 'qs'
+const search = qs.parse(location.search.substring(1), { parameterLimit: 1 })
+if (search?.message) {
+  ElMessage.error({ message: search!.message as string })
+}
 </script>
 
 <template>

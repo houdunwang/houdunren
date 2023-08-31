@@ -8,5 +8,9 @@
         "axios": "^1.1.2",
         "laravel-vite-plugin": "^0.7.2",
         "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "@types/qs": "^6.9.7",
+        "qs": "^6.11.2"
     }
 }

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { clearError } = useErrorStore()
+
 defineProps<{
   captcha: string
   captcha_key: string
@@ -16,7 +18,10 @@ await getCaptcha()
 <template>
   <main>
     <section class="flex gap-1">
-      <HdFormInput @input="$emit('update:captcha', $event.target.value)" placeholder="验证码" />
+      <HdFormInput
+        @input="$emit('update:captcha', $event.target.value)"
+        placeholder="验证码"
+        @focus="clearError('captcha')" />
       <el-image :src="captchaValue?.img" class="rounded-md md:w-[180px] border cursor-pointer" @click="getCaptcha" />
     </section>
 

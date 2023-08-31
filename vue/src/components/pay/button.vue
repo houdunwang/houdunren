@@ -24,23 +24,21 @@ const wechatNative = async () => {
       </button>
     </div>
     <div v-else>
-      <div class="hidden md:block">
-        <button
-          type="button"
-          @click="alipay(packageItem)"
-          class="border border-green-500 bg-green-500 text-white rounded-md px-5 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline text-base">
-          支付宝付款
-        </button>
-        <button
-          type="button"
-          @click="wechatNative"
-          class="border border-yellow-500 bg-yellow-500 text-white rounded-md px-5 py-2 m-2 transition duration-500 ease select-none hover:bg-yellow-600 focus:outline-none focus:shadow-outline text-base">
-          微信支付
-        </button>
-      </div>
-      <span class="md:hidden text-lg font-light" v-bind="$attrs">
+      <button
+        type="button"
+        @click="alipay(packageItem)"
+        class="border border-green-500 bg-green-500 text-white rounded-md px-5 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline text-base">
+        支付宝付款
+      </button>
+      <button
+        type="button"
+        @click="wechatNative"
+        class="border border-yellow-500 bg-yellow-500 text-white rounded-md px-5 py-2 m-2 transition duration-500 ease select-none hover:bg-yellow-600 focus:outline-none focus:shadow-outline text-base hidden md:inline-block">
+        微信支付
+      </button>
+      <!-- <span class="md:hidden text-lg font-light" v-bind="$attrs">
         请在<span class="font-bold">电脑端</span>或<span class="font-bold">后盾云</span>公众号购买
-      </span>
+      </span> -->
     </div>
     <el-dialog title="" v-model="showWepayDialog" width="400px" :append-to-body="true">
       <div class="flex flex-col items-center justify-center rounded-lg">

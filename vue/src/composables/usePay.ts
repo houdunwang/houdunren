@@ -1,6 +1,10 @@
 import { http } from '@/plugins/axios'
+// import router from '@/plugins/router'
 import { ElMessage } from 'element-plus'
 const { createOrder } = useOrder()
+// const { isWechat } = useUtil()
+// const { user } = useUserStore()
+
 export default () => {
   const wepayQr = ref('')
 
@@ -20,10 +24,10 @@ export default () => {
   }
 
   //公众号支付
-  const wx = (window as any).wx as any
   const wechatMpPay = async (packageItem: PackageModel) => {
+    const wx = (window as any).wx as any
     const order = await createOrder('wechatApp', packageItem)
-
+    // location.href = `/api/wepay/app?order=${order.id}`
     const res = await http.request<any>({
       url: `wepay/app/${order.id}`,
       method: 'POST',

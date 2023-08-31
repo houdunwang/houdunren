@@ -22,7 +22,7 @@ class WechatService
         $user->unionid = $info['unionid'];
         $user->nickname = $user->nickname ?: $info['nickname'];
         $user->save();
-        Auth::login($user);
+        Auth::guard('web')->login($user);
         return $user;
     }
 

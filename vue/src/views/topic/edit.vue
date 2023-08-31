@@ -18,6 +18,7 @@ const onSubmit = request((data) => update(data))
       <el-input v-model="model.title" placeholder="请输入贴子标题" size="large"></el-input>
       <HdError name="title" />
       <div class="mt-5">
+        {{ model.content }}44
         <HdMarkdownEditor v-model="model.content" :height="400" />
         <HdError name="content" />
       </div>

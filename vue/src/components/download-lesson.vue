@@ -2,20 +2,26 @@
 const userStore = useUserStore()
 const { isLogin } = useAuth()
 const {
-  id,
-  type,
+  //   id,
+  //   type,
   size = 'default',
+  lesson,
+  system,
 } = defineProps<{
-  id: number
-  type: 'system' | 'lesson'
+  //   id: number
+  //   type: 'system' | 'lesson'
   size?: 'default' | 'small'
+  lesson?: LessonModel
+  system?: SystemModel
 }>()
 
 const dialog = ref(false)
 const downloadUrl = ref()
-if (isLogin()) {
-  downloadUrl.value = type == 'lesson' ? await useLesson().getDownloadUrl(id) : await useSystem().getDownloadUrl(id)
-}
+if (lesson) downloadUrl.value = lesson.download_address ?? lesson.system?.download_address
+if (system) downloadUrl.value = system.download_address
+// if (isLogin()) {
+//   downloadUrl.value = type == 'lesson' ? await useLesson().getDownloadUrl(id) : await useSystem().getDownloadUrl(id)
+// }
 </script>
 
 <template>

@@ -42,7 +42,10 @@ class VideoController extends Controller
     public function show(Video $video)
     {
         try {
-            VideoPlayHistory::updateOrCreate(['user_id' => Auth::id(), 'video_id' => $video->id], ['lesson_id' => $video->lesson_id])->touch();
+            VideoPlayHistory::updateOrCreate(
+                ['user_id' => Auth::id(), 'video_id' => $video->id],
+                ['lesson_id' => $video->lesson_id]
+            )->touch();
             //视频观看统计
             $video->view_num = VideoPlayHistory::where('video_id', $video->id)->count();
             $video->save();

@@ -52,7 +52,8 @@ class WechatLoginController extends Controller
     public function appLogin()
     {
         $info = app(WechatUser::class)->config(config('hd.wechat'))->snsapiUserInfo();
-        $user = app(WechatService::class)->registerByOpenid($info['openid']);
-        return view('wechat-login-by-token', ['token' => $user->createToken('auth')->plainTextToken]);
+        app(WechatService::class)->registerByOpenid($info['openid']);
+        return redirect('/');
+        // return view('wechat-login-by-token', ['token' => $user->createToken('auth')->plainTextToken]);
     }
 }

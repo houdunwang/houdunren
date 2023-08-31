@@ -11,6 +11,7 @@ const { login, form } = useAuth()
       <div class="p-5 flex flex-col justify-between box-border">
         <div>
           <h2 class="text-center text-gray-700 text-lg mt-3">登录</h2>
+
           <div class="mt-8">
             <HdFormInput v-model="form.account" placeholder="请输入用户名、邮箱或手机号" v-clearError="'account'" />
             <HdError name="account" />

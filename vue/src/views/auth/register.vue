@@ -35,8 +35,8 @@ const { form, register } = useAuth()
         </div>
         <!-- <div>
           <h2 class="text-center text-gray-700 text-lg mt-3">会员注册</h2>
-          <div class="text-gray-700 text-sm opacity-80 mt-3 py-6 leading-6">
-            新用户只提供微信注册，请点击下方微信图标 <br />
+          <div class="text-sm py-6 leading-6 text-center text-slate-800 font-light! opacity-70">
+            新用户只提供微信注册 <br />
             之后在会员中心绑定手机号或邮箱 <br />
             然后就可以用手机号或邮箱登录了
           </div>

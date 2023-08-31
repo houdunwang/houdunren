@@ -12,7 +12,10 @@ class LessonResource extends JsonResource
         return [
             'videos' => VideoResource::collection($this->whenLoaded('videos')),
             'system' => new SystemResource($this->whenLoaded('system')),
-            'path_cdn' =>  app(AliyunService::class)->videoCdnUrl($this->video)
+            'path_cdn' =>  app(AliyunService::class)->videoCdnUrl($this->video),
+            'download_address' => $this->when(isSubscribe() || isAdministrator(), function () {
+                return $this->download_address;
+            })
         ] + parent::toArray($request);
     }
 }

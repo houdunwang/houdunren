@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { resetError } = useErrorStore()
 const props = defineProps<{
   placeholder?: string
   code: string
@@ -26,6 +27,7 @@ const { exec, time } = useIntervalRequest(60, async () => {
       <el-input
         v-model="form.code"
         @input="$emit('update:code', form.code)"
+        @focus="resetError"
         placeholder="请输入收到的验证码"
         size="large" />
       <el-button disabled size="large" v-if="time">请{{ time }}后操作</el-button>

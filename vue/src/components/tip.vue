@@ -1,13 +1,15 @@
 <script setup lang="ts">
-const { config } = useConfigStore()
+const {
+  config: { site },
+} = useConfigStore()
 const { open } = useUtil()
 </script>
 
 <template>
-  <HdCard v-if="config">
+  <HdCard v-if="site">
     <template #header> 社区小贴 </template>
     <template #default>
-      <div class="font-normal text-center text-base opacity-90" v-html="config.base.tip"></div>
+      <div class="font-normal text-center text-base opacity-90" v-html="site.base.tip"></div>
     </template>
     <template #footer>
       <div class="flex items-center gap-2 justify-center">

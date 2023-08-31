@@ -45,16 +45,18 @@ class LessonController extends Controller
     //获取下载地址
     public function downloadUrl(Lesson $lesson)
     {
-        if (isSubscribe()) {
-            return $lesson->download_address ?? $lesson->system->download_address;
+        $downloadAddress = $lesson->download_address ?: $lesson->system->download_address;
+        if (isSubscribe() && $downloadAddress) {
+            return $downloadAddress;
         }
     }
 
     public function show(Lesson $lesson)
     {
-        return new LessonResource($lesson->load(['videos' => function ($query) {
+        $lesson = $lesson->load(['videos' => function ($query) {
             $query->orderBy('order')->orderBy('id');
-        }, 'system']));
+        }, 'system']);
+        return new LessonResource($lesson);
     }
 
     public function update(UpdateLessonRequest $request, Lesson $lesson)

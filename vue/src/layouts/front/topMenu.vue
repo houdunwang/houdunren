@@ -2,7 +2,9 @@
 import UserAvatarMenu from '@/components/hd/userAvatarMenu.vue'
 import MenuList from './menu-list.vue'
 const { isLogin } = useAuth()
-const { config } = useConfigStore()
+const {
+  config: { site },
+} = useConfigStore()
 const showMenu = ref(true)
 document.addEventListener('click', () => (showMenu.value = true))
 </script>
@@ -10,7 +12,7 @@ document.addEventListener('click', () => (showMenu.value = true))
 <template>
   <main
     class="flex items-center h-[65px] border-t-4 border-hd-origin border-b border-b-gray-200 bg-white sticky top-0 z-20 shadow-sm"
-    v-if="config">
+    v-if="site.base">
     <div class="flex justify-between items-center px-3 w-full 2xl:w-page 2xl:m-auto">
       <section class="flex flex-col items-center md:flex-row xl:items-center md:mr-6 text-gray-600">
         <!-- 网站 LOGO -->
@@ -19,7 +21,7 @@ document.addEventListener('click', () => (showMenu.value = true))
             :to="{ name: 'home' }"
             class="font-bold items-center justify-between text-xl flex mr-2 text-[#F33A2F]">
             <icon-youtobe theme="outline" size="28" class="mr-1 hover:scale-110 duration-300" />
-            <span class="font-bold font-sans">{{ config.base.name }} </span>
+            <span class="font-bold font-sans">{{ site.base.name }} </span>
           </router-link>
         </div>
         <!-- 网站 LOGO END-->
