@@ -50,6 +50,9 @@ class SystemController extends Controller
     //后台获取资料
     public function info(System $system)
     {
+        if (!isAdministrator() && !isSubscribe()) {
+            abort(403);
+        }
         return new SystemResource($system->makeVisible('download_address')->load('lessons'));
     }
 
